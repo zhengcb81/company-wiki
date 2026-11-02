@@ -1,0 +1,177 @@
+{
+  "schema_version": "t3-note-limit-repair/1",
+  "status": "FROZEN_FOR_INCREMENTAL_REVIEW_STOP",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6",
+  "head": "8782050bcee8a5d41f571306eef6fd166d0ff5ad",
+  "branch": "codex/architecture-t3-source-scope-20261102",
+  "source_note_scope_feature_version": "source-note-scope/2",
+  "owned_files_sha256": {
+    "src/company_wiki/document_understanding/structure/source_scopes.py": "fe373b7b725e691aa5ebeca80f8b6e90797018b8d4160c7e00986de94b8826de",
+    "src/company_wiki/document_understanding/structure/sections.py": "4326e5335c45a0cc6c136e0746e38ef06681a14938ddbcdb45d30fd2ea290a36",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "c7974938f8e49e03054db847e1c3393e984954ba54b026cbf63ed4736534997f",
+    "tests/unit/document_understanding_note_scope/test_scope_failure_tails.py": "2d97a8d19e9d43c20a06abf64ab1f94f0ddca8d1fa2881dd1affe907035b14d2"
+  },
+  "root_causes": [
+    {
+      "id": "TAIL",
+      "problem": "Computation/proof limits were treated as genuine scope ends, marking only the first over-limit unit and releasing following same-note material.",
+      "repair": "One charged source sequence traversal drains unknown suffix to actual source/role/turn/heading/marker boundaries. No positive members or proofs after failure/cap; diagnostics in batches <=24. Limit remains24."
+    },
+    {
+      "id": "ORDER",
+      "problem": "A contradictory column can reorder an unresolved original source target beyond a later layout heading; physical-order-only scanning silently released that original source candidate.",
+      "repair": "Borrow original parsed observation sequence only to conservatively identify unresolved local suffix; require adjacent non-furniture layout agreement plus existing original member/physical proof for every positive edge. No global layout sorting change or ordinal-only positive edge."
+    },
+    {
+      "id": "BLOCK_IDENTITY",
+      "problem": "Shared membership helper newly required block identity token to have length64, narrowing the pre-existing continuity contract and splitting actual same-block statements/prefix-tail accounting.",
+      "repair": "Restore original truthy equal opaque block identity contract; source identity/hash validation remains parser/source owner responsibility. Preserve real char ranges/order/source/role/block/proof constraints, no bbox requirement for exact memberships."
+    }
+  ],
+  "exit_audit": {
+    "unit_cap": "Unknown suffix continues to source-owned true boundary; no new positive members beyond24.",
+    "page_cap_or_missing_proof": "Unknown state persists and suppresses every affected subsequent original unit until true boundary.",
+    "furniture_at_cap": "Positively identified furniture is skipped but does not end unknown scope or reset cap.",
+    "shared_work_budget": "Charged before observation/diagnostic materialization; exhaustion raises existing WorkBudgetExceeded, no partial result claiming completion.",
+    "true_source_role_turn_heading_marker_boundary": "Ends this local range and allows healthy independent material; no global block."
+  },
+  "test_runs": [
+    {
+      "log": "red.log",
+      "result": "3 failed, 2 passed",
+      "seconds": 1.94,
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_note_scope/test_scope_failure_tails.py",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691\\p1"
+      ]
+    },
+    {
+      "log": "green.log",
+      "result": "5 passed",
+      "seconds": 1.56,
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_note_scope/test_scope_failure_tails.py",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691\\p2"
+      ]
+    },
+    {
+      "log": "continuity-red.log",
+      "result": "4 failed",
+      "seconds": 1.72,
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_same_actual_block_fragments_use_original_char_ranges_not_guessed_line_boxes",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_same_block_sentence_fragments_do_not_turn_four_native_blocks_into_five",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_long_native_run_can_split_only_at_an_actual_complete_statement_before_cap",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_complete_prefix_before_cap_does_not_hide_a_single_open_statement_tail",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691\\p3"
+      ]
+    },
+    {
+      "log": "nine-green.log",
+      "result": "9 passed",
+      "seconds": 1.76,
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_same_actual_block_fragments_use_original_char_ranges_not_guessed_line_boxes",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_same_block_sentence_fragments_do_not_turn_four_native_blocks_into_five",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_long_native_run_can_split_only_at_an_actual_complete_statement_before_cap",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_complete_prefix_before_cap_does_not_hide_a_single_open_statement_tail",
+        "tests/unit/document_understanding_note_scope/test_scope_failure_tails.py",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691\\p4"
+      ]
+    }
+  ],
+  "test_logs": {
+    "continuity-red.log": {
+      "sha256": "4a71661b513256fd62d3b8ac8df5271026f370ad0ee09045cd66eb7b16b07f1a",
+      "bytes": 3979,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3nr-a691\\\\p3\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 4 items\n\ntests\\unit\\document_understanding_selection\\test_reading_native_continuity.py F [ 25%]\nFFF                                                                      [100%]\n\n================================== FAILURES ===================================\n_ test_same_actual_block_fragments_use_original_char_ranges_not_guessed_line_boxes _\ntests\\unit\\document_understanding_selection\\test_reading_native_continuity.py:146: in test_same_actual_block_fragments_use_original_char_ranges_not_guessed_line_boxes\n    assert len(result[\"windows\"]) == 1 and result[\"complete\"]\nE   assert (0 == 1)\nE    +  where 0 = len([])\n_ test_same_block_sentence_fragments_do_not_turn_four_native_blocks_into_five _\ntests\\unit\\document_understanding_selection\\test_reading_native_continuity.py:346: in test_same_block_sentence_fragments_do_not_turn_four_native_blocks_into_five\n    assert result[\"windows\"][0][\"member_unit_ids\"] == [r[0][\"unit_id\"] for r in rows]\nE   AssertionError: assert ['source-a:0'... 'source-a:2'] == ['source-a:0'... 'source-a:4']\nE     \nE     Right contains 2 more items, first extra item: 'source-a:3'\nE     Use -v to get more diff\n_ test_long_native_run_can_split_only_at_an_actual_complete_statement_before_cap _\ntests\\unit\\document_understanding_selection\\test_reading_native_continuity.py:377: in test_long_native_run_can_split_only_at_an_actual_complete_statement_before_cap\n    assert [w[\"member_unit_ids\"] for w in result[\"windows\"]] == [\nE   AssertionError: assert [['source-a:0...'source-a:8']] == [['source-a:0...'source-a:8']]\nE     \nE     At index 0 diff: ['source-a:0', 'source-a:1'] != ['source-a:0', 'source-a:1', 'source-a:2', 'source-a:3']\nE     Left contains 2 more items, first extra item: ['source-a:4', 'source-a:5', 'source-a:6']\nE     Use -v to get more diff\n_ test_complete_prefix_before_cap_does_not_hide_a_single_open_statement_tail __\ntests\\unit\\document_understanding_selection\\test_reading_native_continuity.py:860: in test_complete_prefix_before_cap_does_not_hide_a_single_open_statement_tail\n    assert not result[\"complete\"]\nE   assert not True\n=========================== short test summary info ===========================\nFAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_same_actual_block_fragments_use_original_char_ranges_not_guessed_line_boxes\nFAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_same_block_sentence_fragments_do_not_turn_four_native_blocks_into_five\nFAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_long_native_run_can_split_only_at_an_actual_complete_statement_before_cap\nFAILED tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_complete_prefix_before_cap_does_not_hide_a_single_open_statement_tail\n============================== 4 failed in 1.72s ==============================\n"
+    },
+    "green.log": {
+      "sha256": "8a2615d01d9d6cc74510f7dd60cb25f4ed23bfd3b620568040563c07f0ca3279",
+      "bytes": 1301,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3nr-a691\\\\p2\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 5 items\n\ntests\\unit\\document_understanding_note_scope\\test_scope_failure_tails.py . [ 20%]\n....                                                                     [100%]\n\n============================== 5 passed in 1.56s ==============================\n"
+    },
+    "nine-green.log": {
+      "sha256": "c05bec65108f287cd8950500683d0b50fa31fa6f05abffc34f26925ed9e2d5c6",
+      "bytes": 1470,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3nr-a691\\\\p4\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 9 items\n\ntests\\unit\\document_understanding_selection\\test_reading_native_continuity.py . [ 11%]\n...                                                                      [ 44%]\ntests\\unit\\document_understanding_note_scope\\test_scope_failure_tails.py . [ 55%]\n....                                                                     [100%]\n\n============================== 9 passed in 1.76s ==============================\n"
+    },
+    "red.log": {
+      "sha256": "00882d15d9e79ada553b7b486e2a30e7fddc0b1ae5216ecebcbd6677fc67bb96",
+      "bytes": 4278,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3nr-a691\\\\p1\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 5 items\n\ntests\\unit\\document_understanding_note_scope\\test_scope_failure_tails.py F [ 20%]\nF.F.                                                                     [100%]\n\n================================== FAILURES ===================================\n_ test_note_limit_preserves_entire_unexamined_suffix_until_real_boundary[27-heading] _\ntests\\unit\\document_understanding_note_scope\\test_scope_failure_tails.py:31: in test_note_limit_preserves_entire_unexamined_suffix_until_real_boundary\n    assert suffix <= blocked\nE   AssertionError: assert {'urn:company...b48ca26545df'} <= {'urn:company...eb72bbb8cd2e'}\nE     \nE     Extra items in the left set:\nE     'urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df'\nE     'urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b'\nE     'urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7'\n_ test_note_limit_preserves_entire_unexamined_suffix_until_real_boundary[73-new_note] _\ntests\\unit\\document_understanding_note_scope\\test_scope_failure_tails.py:31: in test_note_limit_preserves_entire_unexamined_suffix_until_real_boundary\n    assert suffix <= blocked\nE   AssertionError: assert {'urn:company...90d14ea', ...} <= {'urn:company...331241928bbd'}\nE     \nE     Extra items in the left set:\nE     'urn:company-wiki:narrative-unit:sha256:4463be8484ba705973b3cae1e49bc82fad0c09c440c1f56735e77f04512e9591'\nE     'urn:company-wiki:narrative-unit:sha256:c2b6034b41f1ce85111ca46de35057d84edaa1d4dc08c99afb0df8afa3b66e4a'\nE     'urn:company-wiki:narrative-unit:sha256:9cc056e9c9e649705a0672591e376c50bb11693e36d02dcc938ff2890e8d8f83'\nE     'urn:company-wiki:narrative-unit:sha256:e27d8fe8101e6a411440c5eb19312181c52d1acf9ff1ee7e15c60357863af099'\nE     'urn:company-wiki:narrative-unit:sha256:7d4653a1780f69327c028e149b0326975f564bfc53f28aad4850120bbd704b11'...\nE     \nE     ...Full output truncated (44 lines hidden), use '-vv' to show\n_ test_unproven_relation_keeps_following_targets_unknown_until_heading[missing_proof] _\ntests\\unit\\document_understanding_note_scope\\test_scope_failure_tails.py:62: in test_unproven_relation_keeps_following_targets_unknown_until_heading\n    assert suffix <= blocked\nE   AssertionError: assert {'urn:company...a58a77b57862'} <= {'urn:company...aac54943b98c'}\nE     \nE     Extra items in the left set:\nE     'urn:company-wiki:narrative-unit:sha256:bdc21f2fbf57f5bae4f3bbb6ad0fba1da90f6ba945467b8a4ef6a58a77b57862'\n=========================== short test summary info ===========================\nFAILED tests/unit/document_understanding_note_scope/test_scope_failure_tails.py::test_note_limit_preserves_entire_unexamined_suffix_until_real_boundary[27-heading]\nFAILED tests/unit/document_understanding_note_scope/test_scope_failure_tails.py::test_note_limit_preserves_entire_unexamined_suffix_until_real_boundary[73-new_note]\nFAILED tests/unit/document_understanding_note_scope/test_scope_failure_tails.py::test_unproven_relation_keeps_following_targets_unknown_until_heading[missing_proof]\n========================= 3 failed, 2 passed in 1.94s =========================\n"
+    }
+  },
+  "static_checks": {
+    "ruff": "All checks passed: three changed source files plus new five-case test.",
+    "mypy": "Success: no issues found in3 source files."
+  },
+  "original_tests_changed": false,
+  "old_r1_and_ci_failure_records_modified": false,
+  "new_fixture_variants": [
+    "27-body same-block note plus independent healthy heading",
+    "73-body note plus same-label new note and independent healthy heading",
+    "page-gap retains suffix unknown",
+    "known column/layout-order conflict cannot release original target",
+    "budget reaches first over-cap observation then stops before unbounded suffix scan"
+  ],
+  "ci_scope": "Old8782050b CI41383874109 failed; receipt preserved by ROOT. It does not validate this uncommitted repair. No complete candidate CI or aggregate82 rerun by author.",
+  "original_access": false,
+  "model_calls": 0,
+  "production_configuration_modified": false,
+  "git_or_index_modified": false,
+  "cleanup": {
+    "scope": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691",
+    "initially_absent": true,
+    "absolute_parent_verified": true,
+    "non_reparse_verified": true,
+    "file_count_before": 5,
+    "bytes_before": 11139,
+    "requested_basetemps": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691\\p1",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691\\p2",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691\\p3",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3nr-a691\\p4"
+    ],
+    "all_within_budget_no_relocation": true,
+    "raw_logs_preserved_in_this_json": true,
+    "exists_after": false
+  },
+  "handoff": "STOP, final four actual file hashes bind this increment; ROOT/reviewer to re-audit and publish. Original candidate CI is not current acceptance."
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": "r7-root-independent/2",
+  "status": "PASS_ENGINEERING_SELECTED_SCOPE",
+  "reviewer": "/root/rectification_review_a",
+  "final_manifest_sha256": "aa75d7159c0f6ecf150394e962488172b2de46cb2cd6d35684e84230496fbe86",
+  "final_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\source_case_runner.py": "5f8e5f09d38bbb3d4565a1b9e60ca8bdee99b7ce1ec0bb16210968b8879c41c4",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\source_case_receipt.py": "041ee9e20c5c9c5926fe2a8e21f125d9b185244f7390472251bbcd3cd0bb6133",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_source_case_runner.py": "6e037d6504b4ed5973f1f3d4f1064c8bd43b98367fa226893cd1714973201b31",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_source_case_receipt.py": "94e1c756e731957bbc49d6529637e05e5e805162cb648ad02cf7f1990371cf7e",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_revenue_adapter.py": "95776ff7b4d10f377040507bb0b561872b4df36927fe70bee55aea6ef8b9c6d5",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_revenue_adapter_gate_simplification.py": "793fdc13f68ae15f877c55471ce5b6f0fe2607122ebbb8b2da19a438febba79d",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_fast_git_checks.py": "d467e80a09afd08cd57b023398d78b88dad906d920072cb772a3a73ddce8196b",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests_support\\revenue_fixtures.py": "119e58353ac3c7ea7983a603ee26b8d67595e898a3895017eddc43c05f97fef6",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\tests_support\\revenue_fixtures.py": "119e58353ac3c7ea7983a603ee26b8d67595e898a3895017eddc43c05f97fef6",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\\tests\\test_forged_cross_repo_chain.py": "5ba87f38381eae9fe724f9e5c5ce85b488b4ff7167f8a4be7902678bc6787c6d",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\references\\compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\tools\\pre_push_gate.py": "082296ddb682c7a09bd7823d8c2365697a8069d4c65c8abf27fe44615659644d",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\.githooks\\pre-commit": "c155d2d7a6c9dc587640ea9d2974f30fceb77e842bb102410210335cddb91472",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\.githooks\\pre-push": "6a9d8027bdc72ecebcba9f919dc151ac0d79f2a6db07736c70f3c133e79b0320",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\README.md": "c7d1bb902bb3e61b2112ff0a22962d8102257d6585d956b449f1e04f0a4e09ba"
+  },
+  "changed_from_r1": [
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_fast_git_checks.py",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\tools\\pre_push_gate.py"
+  ],
+  "r1_history": {
+    "path": "R7-ROOT-independent-r1.json",
+    "sha256": "6e7cb30c7c62cdeb574174ee9b551bd935244bb89adfa587891d20b42e8fbd97",
+    "status": "NEEDS_ROOT_FIX_STAGED_CONTENT",
+    "tests": "1F9P/1.26s",
+    "unchanged": true
+  },
+  "findings": [
+    {
+      "id": "R7-ROOT-A01",
+      "priority": "P2",
+      "status": "CLOSED_BY_ROOT_REPAIR",
+      "repair": "Actual index bytes via git show --no-textconv :0:relative are compiled; one owned staged tree feeds real Ruff with project configuration. Index and worktree are not changed.",
+      "independent_retest": "Original RED plus actual-Ruff staged-good/worktree-bad and staged-F821/worktree-good:3P/1.69s. Unicode/space path, exact staged/index bytes unchanged and temporary staged tree removed."
+    }
+  ],
+  "responsibility_merge": {
+    "former_id": "R7-ROOT-O01",
+    "status": "CLOSED_P3_DUPLICATE_REMOVED",
+    "evidence": "invest validate_revenue_forecast now calls only RF validate_published_forecast for embedded input. Current RF strong entry performs verify_input_binding then complete output validation. Legacy dispatcher still rejects current-schema output with no bound input.",
+    "retest": "Three-hop forged input, unsigned valid result not promoted, and mutated economic output rejected:3P/2.30s. No source/fact/currency/unit/period validation removed."
+  },
+  "r2_index_tests": {
+    "counts": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "junit_seconds": 1.611,
+    "junit_sha256": "7573189abb001db56d584b95891036c5039b796615d54fdbd06bac732db1662a",
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"3\" time=\"1.611\" timestamp=\"2026-11-02T08:55:49.825110+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.r7v-84d3dd.test_independent_root\" name=\"test_commit_checks_staged_content_not_a_different_worktree_version\" time=\"0.345\" /><testcase classname=\"tmp.r7v-84d3dd.test_staged_r2\" name=\"test_real_ruff_uses_index_and_preserves_index_worktree_and_config[valid_index = True\\n-def broken_worktree(:\\n-0]\" time=\"0.577\" /><testcase classname=\"tmp.r7v-84d3dd.test_staged_r2\" name=\"test_real_ruff_uses_index_and_preserves_index_worktree_and_config[answer = unresolved_symbol\\n-answer = 42\\n-1]\" time=\"0.564\" /></testsuite></testsuites>"
+  },
+  "r2_index_console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7v-84d3dd\\\\r2\", \"requested_basetemp_len\": 52, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ntimeout: 25.0s\ntimeout method: thread\ntimeout func_only: False\ncollected 3 items\n\ntmp\\r7v-84d3dd\\test_independent_root.py .                                [ 33%]\ntmp\\r7v-84d3dd\\test_staged_r2.py ..                                      [100%]\n\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7v-84d3dd\\r2.xml -\n============================== 3 passed in 1.69s ==============================\n",
+  "adjacent_consumer_controls": {
+    "returncode": 0,
+    "wall_seconds": 3.376,
+    "stdout": "...                                                                      [100%]\r\n3 passed in 2.30s\r\n",
+    "stderr": "",
+    "junit": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit_seconds": 2.208,
+      "junit_sha256": "36f8c019b77967cb2a705b6df2f1a06e74a7593aab55b65106092183ef69bea0",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"3\" time=\"2.208\" timestamp=\"2026-11-02T08:57:33.811111+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"invest-framework.tests.test_forged_cross_repo_chain.ForgedCrossRepoChainTests\" name=\"test_forged_artifact_rejected_at_all_three_hops\" time=\"0.373\" /><testcase classname=\"invest-core.tests.test_revenue_adapter_gate_simplification\" name=\"test_unattested_valid_result_is_not_promoted_to_signed_or_rejected\" time=\"1.225\" /><testcase classname=\"invest-core.tests.test_revenue_adapter_gate_simplification\" name=\"test_unattested_does_not_allow_mutated_economic_output\" time=\"0.009\" /></testsuite></testsuites>"
+    },
+    "all80_rf_runtime_unchanged": true,
+    "four_wips_unchanged": true,
+    "runtime_fingerprint": "71ae82598e0c364186872911ae0acefe1191ad4b91a30874e0bbe97af7637a29"
+  },
+  "prior_scope_retained": [
+    "R1 independent9 passing controls cover complete >1MB UTF8/source/optional evidence with False/None,173-level real tree/cycle separation,meaning/heading/physical references (including overlap),real fsync failure/encoding checkpoint,2 no-clobber races,large logs preserving actual0/23. ROOT observer files did not change in R2, so these were not repeated.",
+    "R1 actual fast gate exit0 in2.716s: Ruff plus21P1skip fixed smoke/1.82s, no implicit sync/E2E/full suite. Caller index sentinel unchanged, temporary smoke index removed, RF80 scripts and4WIPs stable in that execution. Full evidence is in R1, not duplicated here.",
+    "Attestation status remains observed; unattested is not signed/verified. Registry lookup is not required for self-contained validated output. Unknown source diagnostics remain data; observer completion is not source or economic acceptance."
+  ],
+  "probes": {
+    "test_independent_root.py": {
+      "sha256": "da27efd17283367250d7e730f4c50ddde25cd25886913354f3b355e52c145702",
+      "source": "from copy import deepcopy\nfrom hashlib import sha256\nfrom importlib.util import module_from_spec, spec_from_file_location\nimport json\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nimport pytest\n\nfrom tools import source_case_runner as runner\nfrom tools.source_case_receipt import encode_source_receipt\n\n\ndef fast_tool():\n    path = Path('C:/Users/郑曾波/Projects/invest-skills/tools/pre_push_gate.py')\n    spec = spec_from_file_location('independent_root_fast', path)\n    module = module_from_spec(spec)\n    spec.loader.exec_module(module)\n    return module\n\n\ndef test_complete_unseen_record_retains_all_large_evidence_and_unknowns():\n    record = {'status': 'SOURCE_RETURNED', 'source_processing_complete': False,\n              'runtime_unchanged': None, 'required_units': [{'unit_id': 'u-x', 'represented': False}],\n              'source_excerpt_units': [{'unit_id': 'u-x', 'raw_text': '精确原文🙂' * 130000}],\n              'optional_trace': [{'exact': str(i) + 'x'*5000} for i in range(100)]}\n    before = deepcopy(record)\n    data = runner.encode_receipt(record)\n    assert len(data) > 1000000 and json.loads(data) == before == record\n    assert json.loads(encode_source_receipt(record)) == before\n\n\ndef test_unseen_deep_tree_and_cycle_are_not_confused():\n    sections = [{'section_id':str(i), 'parent_id':str(i+1) if i < 172 else None,\n                 'heading_unit_ids':['h'+str(i)],'body_unit_ids':['target'] if i==0 else []} for i in range(173)]\n    source = {'sections':sections}\n    oracles = [{'oracle_id':'independent','original_support_unit_ids':['target']}]\n    originals = {uid:object() for uid in ['target',*['h'+str(i) for i in range(173)]]}\n    rows,_=runner.structure_context_checkpoints(oracles,source,originals)\n    assert rows[0]['support_units'][0]['section_paths'][0]['ancestry_path_complete'] is True\n    assert len(rows[0]['support_units'][0]['ancestor_heading_unit_ids']) == 173\n    sections[-1]['parent_id']='7'\n    rows,_=runner.structure_context_checkpoints(oracles,source,originals)\n    assert rows[0]['support_units'][0]['section_paths'][0]['ancestry_path_complete'] is False\n\n\ndef test_context_proof_overlap_keeps_roles_without_forging_actor_pass():\n    structure = {'sections':[{'section_id':'a','parent_id':None,'heading_unit_ids':['heading'],'body_unit_ids':['target']}],\n        'semantic_units':[{'required_context_by_unit_id':{'target':['both','qualifier']},\n            'required_source_unit_ids_by_unit_id':{'target':['both','proof-only']}}],\n        'diagnostics':[{'code':'SOURCE_SCOPE_UNPROVEN','unit_ids':['target']} ]}\n    before=deepcopy(structure)\n    oracle=[{'oracle_id':'roles','original_support_unit_ids':['target'],\n             'original_forbidden_context_unit_ids':['proof-only','both','heading']}]\n    rows,ids=runner.structure_context_checkpoints(oracle,structure,{'target':object()})\n    row=rows[0]['support_units'][0]\n    assert row['forbidden_context_ids_observed']==['both','heading']\n    assert row['semantic_context_unit_ids']==['both','qualifier']\n    assert row['physical_source_proof_unit_ids']==['both','proof-only']\n    assert row['unavailable_context_unit_ids']==sorted(ids)\n    assert rows[0]['status']=='STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE'\n    assert row['source_diagnostics'] and structure==before\n\n\ndef test_real_atomic_io_failure_keeps_previous_checkpoint(tmp_path,monkeypatch):\n    path=tmp_path/'current.json';owned={}\n    runner.atomic_owned_write(path,b'previous',owned,root_dir=tmp_path)\n    def unavailable(fd):raise OSError('synthetic fsync unavailable')\n    monkeypatch.setattr(runner.os,'fsync',unavailable)\n    with pytest.raises(OSError):runner.atomic_owned_write(path,b'new',owned,root_dir=tmp_path)\n    assert path.read_bytes()==b'previous' and owned[path.resolve()]==sha256(b'previous').hexdigest()\n    assert not list(tmp_path.glob('*.writing-*'))\n\n\ndef test_worker_encoding_failure_preserves_unknown_state_and_real_checkpoint(tmp_path,monkeypatch):\n    case=tmp_path/'cases.json';output=tmp_path/'result.json'\n    case.write_text(json.dumps({'cases':[{'case_id':'unique','request':{'source_ref':{'source_id':'synthetic'}}}]}),encoding='utf-8')\n    class Unknown:\n        def __repr__(self):raise AssertionError('no arbitrary repr')\n    record={'case_id':'unique','status':'SOURCE_RETURNED','required_units':[{'unit_id':'u','represented':False}],\n            'database_unchanged':None,'original_files_unchanged':False,'runtime_unchanged':True,'optional':Unknown()}\n    monkeypatch.setattr(runner,'execute',lambda *args,**kwargs:record)\n    monkeypatch.setattr(sys,'argv',['observer','--worker','--manifest',str(case),'--case','unique','--output',str(output)])\n    with pytest.raises(SystemExit) as caught:runner.main()\n    assert caught.value.code==2\n    saved=json.loads(output.read_bytes());checkpoint=json.loads(output.with_suffix('.json.checkpoint.json').read_bytes())\n    assert saved['status']=='OBSERVATION_INCOMPLETE' and saved['source_status']=='SOURCE_RETURNED'\n    assert checkpoint['database_unchanged'] is None and checkpoint['original_files_unchanged'] is False\n    assert checkpoint['required_checkpoints'][0]['represented'] is False\n\n\ndef test_commit_checks_staged_content_not_a_different_worktree_version(tmp_path,monkeypatch):\n    repo=tmp_path/'git';repo.mkdir()\n    subprocess.run(['git','init','-q',str(repo)],check=True,capture_output=True)\n    path=repo/'changed.py';path.write_text('def staged_invalid(:\\n',encoding='utf-8')\n    subprocess.run(['git','-C',str(repo),'add','changed.py'],check=True,capture_output=True)\n    path.write_text('valid_worktree = True\\n',encoding='utf-8')\n    staged=subprocess.run(['git','-C',str(repo),'show',':changed.py'],check=True,capture_output=True).stdout\n    assert staged==b'def staged_invalid(:\\n'\n    tool=fast_tool();monkeypatch.setattr(tool,'PROJECT_ROOT',repo)\n    calls=[]\n    monkeypatch.setattr(tool,'_run',lambda *args,**kwargs:calls.append(args) or 0)\n    code=tool.main(['--commit'])\n    assert code!=0, 'Invalid index bytes must not be certified from a valid worktree version'\n\n\n@pytest.mark.parametrize('exit_code',[0,23])\ndef test_actual_fast_runner_does_not_veto_large_logs_or_hide_real_exit(exit_code,capsys):\n    tool=fast_tool()\n    command=[sys.executable,'-B','-c',\"import sys;sys.stdout.write('x'*80000+'final-marker');sys.exit(\"+str(exit_code)+\")\"]\n    assert tool._run(command,'independent noisy child')==exit_code\n    printed=capsys.readouterr().out\n    assert 'final-marker' in printed and len(printed)<17000\n"
+    },
+    "test_staged_r2.py": {
+      "sha256": "809b86f2d51d7ace7d9fd7ae043d2fdd92ca16d45e1a00f1f3d38902d104fdf0",
+      "source": "from importlib.util import module_from_spec, spec_from_file_location\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nimport pytest\n\n\ndef load_tool():\n    path=Path('C:/Users/郑曾波/Projects/invest-skills/tools/pre_push_gate.py')\n    spec=spec_from_file_location('independent_index_r2',path)\n    module=module_from_spec(spec);spec.loader.exec_module(module)\n    return module\n\n\n@pytest.mark.parametrize('staged,worktree,expected',[\n    ('valid_index = True\\n','def broken_worktree(:\\n',0),\n    ('answer = unresolved_symbol\\n','answer = 42\\n',1),\n])\ndef test_real_ruff_uses_index_and_preserves_index_worktree_and_config(tmp_path,monkeypatch,staged,worktree,expected):\n    repo=tmp_path/'仓 库';repo.mkdir()\n    subprocess.run(['git','init','-q',str(repo)],check=True,capture_output=True)\n    path=repo/'folder'/'例.py';path.parent.mkdir();path.write_text(staged,encoding='utf-8')\n    (repo/'pyproject.toml').write_text('[tool.ruff.lint]\\nselect=[\"F821\"]\\n',encoding='utf-8')\n    subprocess.run(['git','-C',str(repo),'add','folder/例.py'],check=True,capture_output=True)\n    index=(repo/'.git/index').read_bytes();path.write_text(worktree,encoding='utf-8')\n    tool=load_tool();monkeypatch.setattr(tool,'PROJECT_ROOT',repo)\n    temp=Path(__file__).parent/'t';before=set(temp.glob('invest-staged-*'))\n    assert tool.main(['--commit'])==expected\n    assert path.read_text(encoding='utf-8')==worktree and (repo/'.git/index').read_bytes()==index\n    assert tool._staged_bytes(path)==staged.encode()\n    assert set(temp.glob('invest-staged-*'))==before\n"
+    }
+  },
+  "boundary": {
+    "own_tooling30_not_reviewed": true,
+    "root17_source_test_config_git_unchanged_by_reviewer": true,
+    "real_source_case_executions": 0,
+    "real_original_reads": 0,
+    "models": 0,
+    "paid_calls": 0,
+    "no_full_suite": true,
+    "rf_versions": "Each actual consumer run records its own stable runtime fingerprint; no claim that runtime stayed frozen between the separately released windows."
+  },
+  "publication_scope": "May proceed to ROOT engineering integration/publication for these17 bytes, subject to the other lanes and normal CI. This does not sign real H1,formal summaries,cache restoration,RF economic adoption or whole project completion.",
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7v-84d3dd",
+    "initially_absent": true,
+    "status": "RESTORED_INITIAL_ABSENT",
+    "all_receipts_and_reproducers_preserved": true,
+    "restored_absent": true,
+    "containment_checked": true,
+    "non_reparse_checked": true,
+    "files": 105,
+    "logical_bytes": 195693
+  },
+  "all17_hashes_match_after_cleanup": true
+}

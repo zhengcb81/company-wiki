@@ -48,3 +48,18 @@ R4四审73检查/6P2、ghost-formula与signed期间补集、独立需求/竞争/
 ## R5合同修复当前边界（2026-11-02T02:50:00.244132+00:00）
 
 原70例期待均恢复；一次最终1048例为1044P/4F/31.23s。余四处按原owner定点修：resource无条件重复purpose扫描/漏同WorkBudget、两条自身过严背景oracle、金融整句legacy broad description回退。不会删除原70期待或反复跑1048。独立32场景旧PASS和CI70F历史保持，R5冻版独审/完整CI仍OPEN。ROOT对齐task_plan/HANDOFF/机器registry残留R3/22F状态，W23与daily主线1bf完整CI41371690732成功，原件/生产配置/收费0不变。
+
+
+## T3独审P2：资源停止不能当来源范围结束（2026-11-02T03:42:17.519240+00:00）
+
+独立新7例1F/6P1.73s，显式note27body超24上限后仅b23 blocked，b24-26未证却成为无intro材料anchor；真实后续heading healthy仍可用。原82有界PASS与新RED均保留，不并线。NOTE/PHYS同owner直接修未证明后缀状态至真实新scope/source边界，并审计unit/page/budget/proof所有退出分支，既不提高上限/偷偷无界扫描，也不全局block健康范围。只新失败/变形定点和增量独审，原47断言不变；旧候选CI不代补丁。主线acb/c6仍工程已绿，0原件/模型操作。
+
+
+## R7全链过度门禁清理启动（2026-11-02）
+
+三个只读审计确认：多层表示大小、诊断形状、自动坏缓存和无关clean要求反向阻断。按R7-simplification-plan根修；先不重跑真实源或付费模型。T3 fa8ef38e已正常推master（167P，push78.141s）。观察器300KB/16KB/32祖先限制取消，不再按旧R2限额设计实施。
+
+
+## R7核心/工具阶段与下游联调（2026-11-02）
+
+G1/G2取消多层表示硬门、坏自动cache降诊断；额外HTTP后置128KB和extractive缺省56KB也确认非实际配置预算并去掉。核心14新P/HTTP2P、55控制54P1F后owned encoder1P修复，不拼325全绿；325受影响组sandbox停85%后290s主动停止、5fixture E后host精确3P，历史保留。工具新16F→16P，一次211域208P3F/144.67s，3个明确fixture/转义问题定点7P，不重复整组；真实payload预算仍保。ROOT下游24P1原skip/6.49s，fixture共享cache污染根修，RF四WIP和runtime SHA稳定、隔离目录恢复absent。均待最终大节点独审，G3/G4/G5尚在实施，真实C未重跑。

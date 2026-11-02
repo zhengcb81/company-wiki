@@ -1,0 +1,198 @@
+{
+  "status": "PASS_BOUNDED_INDEPENDENT_REVIEW",
+  "reviewer": "rectify_readability (not RF author)",
+  "timestamp_utc": "2026-11-02T09:27:16.926231+00:00",
+  "author_report_sha256": "246954d02a40f58471127fb933f65585cd80fe055c20873f5904dff932c9d4ab",
+  "author_report": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R7-RF-implementation.json",
+  "delivery_files_sha256": {
+    "SKILL.md": "42937b6db815d53482b2bd2dca26e5f3d2efde10e3c8855699b2522c8bc2e588",
+    "references/compliance-contract.md": "3a09020c66a1e75948e8e470d3f48e4f9c1846e766b2d980a3cbf5ce7dc9f06c",
+    "references/data-governance.md": "fd61dbfe597f54ac03816976fcad47f9d157c724d9fe4ca4aabd1df37706ef38",
+    "scripts/company_wiki_narrative_contracts.py": "194649f53fb0d288420f3d2d574fbd8b4ca74986a505f338f02336ebcacf3a53",
+    "scripts/company_wiki_narrative_posix.py": "64e36fcbe5c541e45e3b4ca8afd0f1484fc26d22db55d7e1a40d31a453877c1c",
+    "scripts/company_wiki_narrative_process.py": "2996426ec668b6e8be3a878f5cdcd3004a3cb526b4183ab0d81d84a71b62754b",
+    "scripts/company_wiki_narrative_reader.py": "3893be41d94713a966cb81f7a2a9edb15dafb7759780b5c64763d1d285863c34",
+    "scripts/company_wiki_source_reader_v2.py": "faad30176392975725a3c66f0ab972ae3aa0842b7a34fa092c758efc35f94528",
+    "scripts/company_wiki_source_v2.py": "68c14925f0bfe419dd86a12d3b69d2c73a8222d8a7760ce3ce15a366410ec3d1",
+    "scripts/contracts/company_wiki_original.py": "536389cd97c2f1a5471cb8efc529354e3ac59d1b14f72365638418ce86db47f2",
+    "scripts/contracts/document.py": "1804bba0294a38d6bc55034cdfaac42b6e1e3f87807a6242e9038ce65d7e7f54",
+    "scripts/contracts/source_diagnostics.py": "d21c7aa9e0f72ec77b9fc9d580d8bb4689b256380170c611fa69f6d0d00bda72",
+    "scripts/narrative_source_preparation.py": "d51965272faa99e5601186775f4b467c8caff734d52db3b8c5833fc758cbcafd",
+    "scripts/narrative_summary_observations.py": "614553685d7647e7e75426cfdb22a14668736a2c11f0c53698acb3d1a7961d55",
+    "scripts/narrative_summary_provenance.py": "0ad15963e7182cd0de0d97a5771d1bd3da9c4a42784d2046e9c51a2098fdbd13",
+    "scripts/narrative_summary_usage.py": "e46089e5dccb7ee1552983228018e788aeab2c22593fd1b7fc223c2386b66916",
+    "scripts/publication_registry.py": "30a3541cd3c3d79778c5b473b1b3b755d41ccf5208dafe8cd7996e651352b6a1",
+    "scripts/research/input_evidence.py": "3b90fb9201c5c90dc9de45f6f6feedddb0827fb40594218b0684723691370d11",
+    "scripts/revenue_core.py": "28614d4e670c204d24cd8f65f872a56a29694692dc6a2f180af2f2f779fb8109",
+    "scripts/revenue_forecast.py": "7ad3eb9d7f1aec8bda83f80c342332e0b7643c229c9620784258472163872abb",
+    "scripts/source_preparation.py": "3c4aa95987b3d90fc807e76d9eb564f9797eb2e97cfd3b881758e74043fa2e07",
+    "tests/test_assessed_narrative_consumer.py": "b24cff02b3f10af9a9fdc8fc7023f53c336b4f0dcf7a6823aeb9ea8fb2aef798",
+    "tests/test_narrative_summary_usage.py": "9d8bebaa0d40dd1d3678148dc38b47f2d0480161d26cd5e8f50cacd1d02d0e65",
+    "tests/test_publication_registry.py": "64a55735e59f473527f1559abf1a7b00d41453ea5eb58ac83d4223104c04e199",
+    "tests/test_r1_narrative_availability.py": "dde78f0ccb0b1449adca435853eed5adfb00b217a3d2a51f5845f990ce13d0de",
+    "tests/test_r7_representation_and_index.py": "9d856ceede8b699820449f58a7a3a90ff83f2272d222172a885d442ffec5eb16",
+    "tests/test_shared_reading_narrative_contract.py": "95783e0007905cf2ade8ad9ba34b8f50d7a57d074a344c47a63af88dcd6d351c",
+    "tests/test_source_readability_wire.py": "3b49260fef31263c4160f006afd0169e81fbf79aaa73ee973be68eb257dd4598",
+    "tests/test_summary_long_excerpt.py": "8c5d2dcc675681fc2c2c6a989bae284b4a9138fbda3fc6097188d787a56399cd"
+  },
+  "before_delivery_sha256_match": true,
+  "after_delivery_sha256": {
+    "SKILL.md": "42937b6db815d53482b2bd2dca26e5f3d2efde10e3c8855699b2522c8bc2e588",
+    "references/compliance-contract.md": "3a09020c66a1e75948e8e470d3f48e4f9c1846e766b2d980a3cbf5ce7dc9f06c",
+    "references/data-governance.md": "fd61dbfe597f54ac03816976fcad47f9d157c724d9fe4ca4aabd1df37706ef38",
+    "scripts/company_wiki_narrative_contracts.py": "194649f53fb0d288420f3d2d574fbd8b4ca74986a505f338f02336ebcacf3a53",
+    "scripts/company_wiki_narrative_posix.py": "64e36fcbe5c541e45e3b4ca8afd0f1484fc26d22db55d7e1a40d31a453877c1c",
+    "scripts/company_wiki_narrative_process.py": "2996426ec668b6e8be3a878f5cdcd3004a3cb526b4183ab0d81d84a71b62754b",
+    "scripts/company_wiki_narrative_reader.py": "3893be41d94713a966cb81f7a2a9edb15dafb7759780b5c64763d1d285863c34",
+    "scripts/company_wiki_source_reader_v2.py": "faad30176392975725a3c66f0ab972ae3aa0842b7a34fa092c758efc35f94528",
+    "scripts/company_wiki_source_v2.py": "68c14925f0bfe419dd86a12d3b69d2c73a8222d8a7760ce3ce15a366410ec3d1",
+    "scripts/contracts/company_wiki_original.py": "536389cd97c2f1a5471cb8efc529354e3ac59d1b14f72365638418ce86db47f2",
+    "scripts/contracts/document.py": "1804bba0294a38d6bc55034cdfaac42b6e1e3f87807a6242e9038ce65d7e7f54",
+    "scripts/contracts/source_diagnostics.py": "d21c7aa9e0f72ec77b9fc9d580d8bb4689b256380170c611fa69f6d0d00bda72",
+    "scripts/narrative_source_preparation.py": "d51965272faa99e5601186775f4b467c8caff734d52db3b8c5833fc758cbcafd",
+    "scripts/narrative_summary_observations.py": "614553685d7647e7e75426cfdb22a14668736a2c11f0c53698acb3d1a7961d55",
+    "scripts/narrative_summary_provenance.py": "0ad15963e7182cd0de0d97a5771d1bd3da9c4a42784d2046e9c51a2098fdbd13",
+    "scripts/narrative_summary_usage.py": "e46089e5dccb7ee1552983228018e788aeab2c22593fd1b7fc223c2386b66916",
+    "scripts/publication_registry.py": "30a3541cd3c3d79778c5b473b1b3b755d41ccf5208dafe8cd7996e651352b6a1",
+    "scripts/research/input_evidence.py": "3b90fb9201c5c90dc9de45f6f6feedddb0827fb40594218b0684723691370d11",
+    "scripts/revenue_core.py": "28614d4e670c204d24cd8f65f872a56a29694692dc6a2f180af2f2f779fb8109",
+    "scripts/revenue_forecast.py": "7ad3eb9d7f1aec8bda83f80c342332e0b7643c229c9620784258472163872abb",
+    "scripts/source_preparation.py": "3c4aa95987b3d90fc807e76d9eb564f9797eb2e97cfd3b881758e74043fa2e07",
+    "tests/test_assessed_narrative_consumer.py": "b24cff02b3f10af9a9fdc8fc7023f53c336b4f0dcf7a6823aeb9ea8fb2aef798",
+    "tests/test_narrative_summary_usage.py": "9d8bebaa0d40dd1d3678148dc38b47f2d0480161d26cd5e8f50cacd1d02d0e65",
+    "tests/test_publication_registry.py": "64a55735e59f473527f1559abf1a7b00d41453ea5eb58ac83d4223104c04e199",
+    "tests/test_r1_narrative_availability.py": "dde78f0ccb0b1449adca435853eed5adfb00b217a3d2a51f5845f990ce13d0de",
+    "tests/test_r7_representation_and_index.py": "9d856ceede8b699820449f58a7a3a90ff83f2272d222172a885d442ffec5eb16",
+    "tests/test_shared_reading_narrative_contract.py": "95783e0007905cf2ade8ad9ba34b8f50d7a57d074a344c47a63af88dcd6d351c",
+    "tests/test_source_readability_wire.py": "3b49260fef31263c4160f006afd0169e81fbf79aaa73ee973be68eb257dd4598",
+    "tests/test_summary_long_excerpt.py": "8c5d2dcc675681fc2c2c6a989bae284b4a9138fbda3fc6097188d787a56399cd"
+  },
+  "after_delivery_sha256_match": true,
+  "protected_wip_sha256": {
+    "assurance/runs/daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "assurance/runs/monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+    "assurance/runs/weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "assurance/runs/weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+  },
+  "after_protected_wip_sha256": {
+    "assurance/runs/daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "assurance/runs/monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+    "assurance/runs/weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "assurance/runs/weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+  },
+  "protected_wip_changed": false,
+  "independent_case_count": 12,
+  "additional_existing_case_count": 1,
+  "test_runs": [
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-rf-independent-a2.xml",
+      "xml_sha256": "7f653e68529bfbe58b273866602b2554b0433fbde0361562ea0e0c5929b57f55",
+      "tests": "11",
+      "failures": "1",
+      "errors": "0",
+      "seconds": "1.289",
+      "log": ".planning/architecture-quality-20261101/r7-rf-independent-a2.log",
+      "log_sha256": "e0266022179c5542d83fbba3d7ef994a79e5df0ef14944763eea1047670959f4"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-rf-independent-a2-fixture.xml",
+      "xml_sha256": "fb1bdb5c32ad71255e9af6379eedeb97f6617efeec4353e76e7a746b3b8ce9b6",
+      "tests": "1",
+      "failures": "1",
+      "errors": "0",
+      "seconds": "0.457",
+      "log": ".planning/architecture-quality-20261101/r7-rf-independent-a2-fixture.log",
+      "log_sha256": "144c5161e54be23e5c37d1e12cde05d9ade95e38fe9a9255d6c21b19bbd5d938"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-rf-independent-a2-snapshot.xml",
+      "xml_sha256": "b423a53bb2cb2e49c729fe0dc1b85c05874a3b417ddbcbf022d4860a82047a9a",
+      "tests": "1",
+      "failures": "1",
+      "errors": "0",
+      "seconds": "0.522",
+      "log": ".planning/architecture-quality-20261101/r7-rf-independent-a2-snapshot.log",
+      "log_sha256": "1ae522413adef5c6ee30e9af6738f38f71857daf03acdbfbbecf71cd730cf43f"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-rf-independent-a2-verified.xml",
+      "xml_sha256": "d990272aeaf549ba64e0d59bdde1d0ec5331247352b38ff9df53221524c36f95",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "seconds": "0.446",
+      "log": ".planning/architecture-quality-20261101/r7-rf-independent-a2-verified.log",
+      "log_sha256": "862c3a263e95e2b67ced9d6d39bcc66a3a8d2052eea4e572ad2d3a62f191361e"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-rf-independent-a2-signing-short.xml",
+      "xml_sha256": "caddc1b60fc0cd4f3a72dc7e20a584d8bc984720bdf453f455116f8611e96605",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "seconds": "0.574",
+      "log": ".planning/architecture-quality-20261101/r7-rf-independent-a2-signing-short.log",
+      "log_sha256": "4110954ea2c4249768f01bfb314076351844e7c12f71f65f8372ce9d1b046cf8"
+    }
+  ],
+  "effective_results": "10 initial PASS + 1 corrected-fixture PASS + 2 final PASS; no full all-green rerun claimed",
+  "initial_failures": [
+    {
+      "run": "a2",
+      "reason": "independent fixture aliased candidate.source_ref to mutated caller ref; real candidate mismatch correctly rejected"
+    },
+    {
+      "run": "a2-fixture",
+      "reason": "independent fixture incorrectly used source_type company_filing"
+    },
+    {
+      "run": "a2-snapshot",
+      "reason": "independent fixture incorrectly used source_type annual_report"
+    }
+  ],
+  "findings": [],
+  "platform": {
+    "actual_runtime": "Windows Python 3.13.9 normal host",
+    "posix": "static control-flow review only; no Linux execution claim",
+    "pytest_warning": "existing asyncio_mode unknown after plugin autoload disabled"
+  },
+  "limits": [
+    "no real company/source H1",
+    "no actual PDF/model/API/fee",
+    "no cache-recovery or RF full-loop verdict",
+    "no full repository tests repeated"
+  ],
+  "static_entries": [
+    "scripts/company_wiki_narrative_contracts.py:decode_object,_reading_context,_reading_extension,_bundle_contents",
+    "scripts/narrative_summary_observations.py:assessment_for_use,assessment_observation",
+    "scripts/narrative_summary_provenance.py:validate_summary_provenance",
+    "scripts/contracts/company_wiki_original.py:verify_original_read,VerifiedOriginalRead",
+    "scripts/source_preparation.py:_prepare_source_ref_v2",
+    "scripts/publication_registry.py:_append,rebuild_publications",
+    "scripts/revenue_core.py:run_forecast,request_publication_attestation",
+    "scripts/company_wiki_narrative_reader.py:read_narrative_context",
+    "scripts/company_wiki_narrative_process.py:run_bounded,_Capture.collect,_cleanup",
+    "scripts/company_wiki_narrative_posix.py:transfer_posix,_read",
+    "scripts/company_wiki_narrative_tree.py:ProcessTree,_WindowsJob"
+  ],
+  "codegraph_limit": "current query returned historical .planning source nodes; current exact located files inspected, no stale-graph verdict",
+  "independent_test_source_sha256": "4204e127d0398e33e7ddae16f02e10d8cf3a7758f178205f881ddd2b7083f85b",
+  "independent_test_source": "\"\"\"ROOT independent R7 RF controls, synthetic source-only fixtures.\"\"\"\nfrom copy import deepcopy\nfrom datetime import date\nimport hashlib\nimport json\nfrom pathlib import Path\nimport sys\nimport time\n\nimport pytest\n\nRF = Path('C:/Users/郑曾波/Projects/revenue-forecast')\nsys.path[:0] = [str(RF / 'scripts'), str(RF / 'tests')]\nfrom company_wiki_narrative_contracts import NarrativeTransportError, validate_narrative_response\nfrom company_wiki_narrative_process import run_bounded\nfrom contracts.company_wiki_original import verify_original_read\nfrom contracts.evidence import canonical_sha256\nfrom revenue_core import run_forecast, validate_document\nfrom revenue_report import validate_forecast_output\nfrom test_assessed_narrative_consumer import assessed_wire\nfrom test_company_wiki_narrative_reader import _resign\nfrom test_company_wiki_source_v2 import BODY, _candidate, _inputs\nfrom test_narrative_summary_usage import example, choose, consume\nfrom test_recognition_bridge import forecast_document\nfrom test_summary_long_excerpt import long_summary_input\n\n\n@pytest.fixture(autouse=True)\ndef own_isolation(monkeypatch, tmp_path):\n    monkeypatch.delenv('REVENUE_ATTESTATION_PROVIDER', raising=False)\n    monkeypatch.setenv('REVENUE_PUBLICATION_REGISTRY', str(tmp_path / 'index'))\n\n\ndef test_damage_multiple_optional_observations_preserves_all_original_claims():\n    request, bundle, receipt = assessed_wire()\n    expected = deepcopy(bundle['summary'])\n    expected_spans = deepcopy(bundle['evidence_spans'])\n    bundle['summary_assessment']['validator']['dependencies'] = ['unknown new diagnostic shape']\n    bundle['prompt_review'] = {'status': ['not a status'], 'source_sha256': 'f' * 64}\n    bundle['versions']['model'] = 'source-diagnostic-model-label-change'\n    body, raw = _resign(request, bundle, receipt)\n    context = validate_narrative_response(request, body, raw).to_dict()\n    assert context['summary'] == expected\n    assert context['evidence_spans'] == expected_spans\n    assert context['summary_assessment_observation']['status'] == 'unavailable'\n    assert context['prompt_review_observation']['status'] == 'unavailable'\n    assert context['model_observation']['status'] == 'unavailable'\n\n\ndef test_unicode_reason_retains_qualifiers_and_source_context():\n    request, context, data, binding, summary = example('raw')\n    reason = ('仅支持现有参数的解释，不能把计划改写为已兑现；保留原文问答限定。' * 1500)\n    updated, _ = consume(request, context, data, [choose(binding, summary, research_reason=reason)])\n    validate_document(updated)\n    claim = next(c for c in updated['evidence_claims'] if c['claim_id'] == binding['claim_id'])\n    proof = claim['narrative_summary_use']\n    assert proof['entry']['research_reason'] == reason\n    assert proof['entry']['context_evidence_ids'] == summary['context_evidence_ids']\n    assert len(proof['evidence_spans']) == 2\n    assert context.to_dict()['summary']['draft']['claims'][0] == summary\n\n\n@pytest.mark.parametrize('fault', ['drop_required_question', 'replace_parent'])\ndef test_diagnostic_relaxation_cannot_remove_required_context_or_parent(fault):\n    request, context, data, binding, summary = example('raw')\n    updated, _ = consume(request, context, data, [choose(binding, summary)])\n    claim = next(c for c in updated['evidence_claims'] if c['claim_id'] == binding['claim_id'])\n    proof = claim['narrative_summary_use']\n    if fault == 'drop_required_question':\n        support = proof['entry']['support_evidence_ids']\n        proof['evidence_spans'] = [s for s in proof['evidence_spans'] if s['span_id'] in support]\n    else:\n        proof['source_ref']['document_id'] += '-unrelated'\n    with pytest.raises(ValueError, match='summary_provenance_'):\n        validate_document(updated)\n\n\ndef test_unavailable_diagnostic_cannot_make_wrong_source_period_eligible():\n    request, bundle, receipt = assessed_wire()\n    bundle['summary_assessment'] = {'status': 'unavailable'}\n    receipt['manifest']['fiscal_year'] = request['expected_source']['fiscal_year'] - 1\n    body, raw = _resign(request, bundle, receipt)\n    with pytest.raises(NarrativeTransportError):\n        validate_narrative_response(request, body, raw)\n\n\ndef test_stream_limits_count_utf8_bytes_and_none_preserves_both_channels():\n    command = [sys.executable, '-B', '-c',\n        \"import sys;sys.stdin.buffer.read();sys.stdout.buffer.write(('界'*10000).encode());sys.stderr.buffer.write(('限'*5000).encode())\"]\n    out = run_bounded(command, b'input', stdout_limit=None, stderr_limit=None, timeout_seconds=5)\n    assert out.stdout == ('界' * 10000).encode()\n    assert out.stderr == ('限' * 5000).encode()\n    with pytest.raises(NarrativeTransportError, match='reader_output_limit'):\n        run_bounded(command, b'', stdout_limit=20000, stderr_limit=None, timeout_seconds=5)\n\n\ndef test_none_stream_budget_does_not_disable_timeout_or_leave_child():\n    started = time.monotonic()\n    with pytest.raises(NarrativeTransportError, match='reader_timeout'):\n        run_bounded([sys.executable, '-B', '-c', 'import time;time.sleep(8)'], b'',\n                    stdout_limit=None, stderr_limit=None, timeout_seconds=0.2)\n    assert time.monotonic() - started < 4\n\n\ndef test_unusable_index_still_returns_valid_unattested_self_contained_forecast(tmp_path, monkeypatch):\n    obstacle = tmp_path / 'not-a-directory'\n    obstacle.write_bytes(b'old index path obstacle')\n    before = obstacle.read_bytes()\n    monkeypatch.setenv('REVENUE_PUBLICATION_REGISTRY', str(obstacle / 'nested' / 'index'))\n    result = run_forecast(forecast_document())\n    validate_forecast_output(result)\n    assert result['publication_receipt']['formal_output_mode'] == 'formal'\n    assert result['publication_receipt']['attestation_status'] == 'unattested'\n    assert obstacle.read_bytes() == before\n\n\ndef test_rehashing_output_cannot_hide_magnitude_hallucination():\n    result = run_forecast(forecast_document())\n    changed = deepcopy(result)\n    changed['consolidated_forecast']['base']['annual_revenue']['2026'] *= 1000\n    changed.pop('result_sha256')\n    changed['result_sha256'] = canonical_sha256(changed)\n    with pytest.raises(ValueError):\n        validate_forecast_output(changed)\n\n\ndef test_verified_original_freezes_input_and_projection_does_not_rehash(monkeypatch):\n    from company_wiki_source_v2 import build_revenue_source_record_from_original\n    ref, receipt, manifest = _inputs()\n    candidate = deepcopy(_candidate(ref, manifest))\n    original_sha = hashlib.sha256\n    calls = []\n    def tracked(value=b'', *args, **kwargs):\n        if value is BODY:\n            calls.append(value)\n        return original_sha(value, *args, **kwargs)\n    monkeypatch.setattr(hashlib, 'sha256', tracked)\n    verified = verify_original_read(body=BODY, source_ref=ref, receipt=receipt,\n        manifest=manifest, as_of=date(2026, 9, 27), expected_fiscal_year=2025)\n    ref['content_sha256'] = 'f' * 64\n    receipt['document_id'] += '-changed'\n    manifest['fiscal_year'] = 2024\n    projected = verified.manifest\n    projected['fiscal_year'] = 1900\n    for _ in range(3):\n        record = build_revenue_source_record_from_original(original=verified, source_candidate=candidate,\n            source_type='regulatory_filing', publisher='Original public issuer', page_or_section='p1')\n        assert record['capture']['snapshot_sha256'] == verified.source_ref['content_sha256']\n    assert verified.manifest['fiscal_year'] == 2025\n    assert len(calls) == 1\n\n\ndef test_large_multibyte_adopted_anchor_and_final_plan_qualifier_are_complete():\n    updated, claim, text = long_summary_input(100001, '未认证的新业务尚属计划，原文保留条件。')\n    validate_document(updated)\n    assert claim['excerpt'] == text\n    assert claim['narrative_summary_use']['evidence_spans'][0]['raw_text'] == text\n    assert text.endswith(' Expansion remains a future plan.')\n\n\ndef test_invalid_optional_signing_response_does_not_block_or_claim_host_signature(monkeypatch):\n    monkeypatch.setattr('revenue_core._run_attestation_provider', lambda _request: {'signature': 'unproven'})\n    result = run_forecast(forecast_document())\n    validate_forecast_output(result)\n    assert result['publication_receipt']['formal_output_mode'] == 'formal'\n    assert result['publication_receipt']['attestation_status'] == 'unattested'\n",
+  "cleanup": {
+    "owned_scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rf-independent-a2",
+    "initially_absent": true,
+    "before_cleanup_files": {
+      "test_independent_rf.py": {
+        "sha256": "4204e127d0398e33e7ddae16f02e10d8cf3a7758f178205f881ddd2b7083f85b",
+        "bytes": 8352
+      }
+    },
+    "file_count": 1,
+    "bytes": 8352,
+    "removed": true,
+    "status": "RESTORED_INITIAL_ABSENT",
+    "pytest_relocated_basetemp": "all five run logs record removed=true",
+    "rf_mutations": false,
+    "raw_config_key_model_operations": false
+  }
+}

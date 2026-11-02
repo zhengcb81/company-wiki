@@ -1,0 +1,1116 @@
+{
+  "schema_version": "independent-t3-incremental-review/1",
+  "status": "PASS_T3_ENGINEERING_INCREMENTAL",
+  "reviewer": "/root/rectification_review_a",
+  "date": "2026-11-02",
+  "runtime_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "prior_failed_commit": "8782050bcee8a5d41f571306eef6fd166d0ff5ad",
+  "sealed_evidence": {
+    "head": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+    "repair_report_sha256": "36961e6294a76bb6b354c174d7ebe9a5ba12ce5aac0c2160f8da67dd39b1f3fa",
+    "freeze_files": {
+      "src/company_wiki/document_understanding/layout_hints/text_evidence.py": {
+        "sha256": "30be879e54ebc2132fbe41c5220237baf3fe9f8fc68dda568cf05aa32dad2b6f",
+        "expected": "30be879e54ebc2132fbe41c5220237baf3fe9f8fc68dda568cf05aa32dad2b6f",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/narrative_continuity.py": {
+        "sha256": "c7974938f8e49e03054db847e1c3393e984954ba54b026cbf63ed4736534997f",
+        "expected": "c7974938f8e49e03054db847e1c3393e984954ba54b026cbf63ed4736534997f",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/observation_adapter.py": {
+        "sha256": "2aa2d61fdf76ac5e928426ecf8c3be422f196e38a4597c39c810ed08a3ee9bd3",
+        "expected": "2aa2d61fdf76ac5e928426ecf8c3be422f196e38a4597c39c810ed08a3ee9bd3",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/operating_states/relations.py": {
+        "sha256": "0e7fc36be14c01b82769cc62df88aa6c639033b4ad62f60f2d9d3c605003754a",
+        "expected": "0e7fc36be14c01b82769cc62df88aa6c639033b4ad62f60f2d9d3c605003754a",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/pipeline.py": {
+        "sha256": "8a60babc8f4c86542bd5b4fd5c82e366cd2ad538929f195f9dd9e2a8a18a85ad",
+        "expected": "8a60babc8f4c86542bd5b4fd5c82e366cd2ad538929f195f9dd9e2a8a18a85ad",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/structure/__init__.py": {
+        "sha256": "80be6de8d106d800eef13b3e8e24ee35028ebb6e8f6f14ba7f061fb15286144a",
+        "expected": "80be6de8d106d800eef13b3e8e24ee35028ebb6e8f6f14ba7f061fb15286144a",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/structure/layout.py": {
+        "sha256": "2ac0d532dc7abab79f37d541d144bde1961b16904cc3fdfb46dd23e5f8ce1a41",
+        "expected": "2ac0d532dc7abab79f37d541d144bde1961b16904cc3fdfb46dd23e5f8ce1a41",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/structure/relations.py": {
+        "sha256": "279cb0515156534ed67c4a24784433fe25ad26cb3ffd084933355bf734b40c84",
+        "expected": "279cb0515156534ed67c4a24784433fe25ad26cb3ffd084933355bf734b40c84",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/structure/sections.py": {
+        "sha256": "4326e5335c45a0cc6c136e0746e38ef06681a14938ddbcdb45d30fd2ea290a36",
+        "expected": "4326e5335c45a0cc6c136e0746e38ef06681a14938ddbcdb45d30fd2ea290a36",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/structure/source_scopes.py": {
+        "sha256": "fe373b7b725e691aa5ebeca80f8b6e90797018b8d4160c7e00986de94b8826de",
+        "expected": "fe373b7b725e691aa5ebeca80f8b6e90797018b8d4160c7e00986de94b8826de",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/text_boundaries.py": {
+        "sha256": "3f38168174a44469a68778197931cdecbe3e8504324d7683f3596d1cdc34d65e",
+        "expected": "3f38168174a44469a68778197931cdecbe3e8504324d7683f3596d1cdc34d65e",
+        "match": true,
+        "git_lf_match": true
+      },
+      "src/company_wiki/source_catalog/narrative_native_materials.py": {
+        "sha256": "9754c16c5b5fa225eda016c266cabd2774ca0b15810cad7ebe74e9523575cb29",
+        "expected": "9754c16c5b5fa225eda016c266cabd2774ca0b15810cad7ebe74e9523575cb29",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/README.md": {
+        "sha256": "6329dd8089c8e85edb200e694e7a91868ebb0321851259308f031d3439f5effd",
+        "expected": "6329dd8089c8e85edb200e694e7a91868ebb0321851259308f031d3439f5effd",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/__init__.py": {
+        "sha256": "56027e62eb0cfed0fefdb75fdb2aa0936300c09ca4521e76a12dbec25a86598e",
+        "expected": "56027e62eb0cfed0fefdb75fdb2aa0936300c09ca4521e76a12dbec25a86598e",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/fixtures.py": {
+        "sha256": "6762dac9eba99a34d384844d865f5ef5f6bd2d76889e6d6f12567dbc4e5ec2bf",
+        "expected": "6762dac9eba99a34d384844d865f5ef5f6bd2d76889e6d6f12567dbc4e5ec2bf",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/test_local_scopes.py": {
+        "sha256": "4ec8718a11e7bf87adadc26341abf3fab3eee7744c9884729c70bcafe83331ae",
+        "expected": "4ec8718a11e7bf87adadc26341abf3fab3eee7744c9884729c70bcafe83331ae",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/test_physical_scope.py": {
+        "sha256": "e6dae64bf6830a0cfbdc2ce7440cc04d6f2b2a19392c6bbfae946841b4d6cf45",
+        "expected": "e6dae64bf6830a0cfbdc2ce7440cc04d6f2b2a19392c6bbfae946841b4d6cf45",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/test_source_scope_proofs.py": {
+        "sha256": "7bb96b939914918fd83d6b6fd66c18b7f96dcf3f1fe699d7dd1b1980aec208aa",
+        "expected": "7bb96b939914918fd83d6b6fd66c18b7f96dcf3f1fe699d7dd1b1980aec208aa",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/test_terminals.py": {
+        "sha256": "277982d57448a7b2998b216da7784aa55eb273252693477f49e64ded82bd829d",
+        "expected": "277982d57448a7b2998b216da7784aa55eb273252693477f49e64ded82bd829d",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/test_text_boundaries.py": {
+        "sha256": "a8291bcaca3f81dbaff82b49835690ac5820fb54946435fdcbdc65a38c0830d2",
+        "expected": "a8291bcaca3f81dbaff82b49835690ac5820fb54946435fdcbdc65a38c0830d2",
+        "match": true,
+        "git_lf_match": true
+      },
+      "tests/unit/document_understanding_note_scope/test_scope_failure_tails.py": {
+        "sha256": "2d97a8d19e9d43c20a06abf64ab1f94f0ddca8d1fa2881dd1affe907035b14d2",
+        "expected": "2d97a8d19e9d43c20a06abf64ab1f94f0ddca8d1fa2881dd1affe907035b14d2",
+        "match": true,
+        "git_lf_match": true
+      }
+    },
+    "author_logs": {
+      "continuity-red.log": {
+        "sha256": "4a71661b513256fd62d3b8ac8df5271026f370ad0ee09045cd66eb7b16b07f1a",
+        "match": true,
+        "serialization": "JSON text LF; original log CRLF reconstructed",
+        "original_bytes": 3979
+      },
+      "green.log": {
+        "sha256": "8a2615d01d9d6cc74510f7dd60cb25f4ed23bfd3b620568040563c07f0ca3279",
+        "match": true,
+        "serialization": "JSON text LF; original log CRLF reconstructed",
+        "original_bytes": 1301
+      },
+      "nine-green.log": {
+        "sha256": "c05bec65108f287cd8950500683d0b50fa31fa6f05abffc34f26925ed9e2d5c6",
+        "match": true,
+        "serialization": "JSON text LF; original log CRLF reconstructed",
+        "original_bytes": 1470
+      },
+      "red.log": {
+        "sha256": "00882d15d9e79ada553b7b486e2a30e7fddc0b1ae5216ecebcbd6677fc67bb96",
+        "match": true,
+        "serialization": "JSON text LF; original log CRLF reconstructed",
+        "original_bytes": 4278
+      }
+    },
+    "exact_r1_function_sha256": "ffb87759c5b3c21fb29a4ceeff65188ca1e2b72e8f207cdeb981ce87155412ea",
+    "exact_r1_function": "def test_note_limit_cannot_release_unexamined_suffix_as_complete_material():\n    box=(72.,80.,528.,700.)\n    rows=[Row('intro','備註三十一：丙方的设备交付及服务义务：',block=0,box=box)]\n    rows.extend(Row(f'b{i}',f'“{i+1}、公司已交付检测设备，丙方应保留原始验收记录。”',block=0,box=box) for i in range(27))\n    rows.extend([Row('healthy','一、另一项业务进展',block=1,box=(72.,710.,528.,730.)),\n                 Row('healthy_body','公司已交付独立的新设备。',block=2,box=(72.,740.,528.,760.))])\n    parsed,owned=source(tuple(rows))\n    result,contexts=run_pipeline(parsed)\n    packages,_facts,continuity,blocked=prepare_native_materials(parsed,result,\n        work_budget=WorkBudget(16_000_000),_native_contexts=contexts)\n    evidence={'diagnostics':result['structure']['diagnostics'],\n      'semantic_units':result['structure']['semantic_units'],\n      'blocked':sorted(blocked),'anchors':[p['anchor_unit_ids'] for p in packages],\n      'names':{key:unit.unit_id for key,unit in owned.items()},'continuity_complete':continuity['complete']}\n    (Path(__file__).parent/'limit-observation.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2),encoding='utf-8')\n    # The first over-limit target and following members are still within the\n    # same explicit note; a budget boundary is not a new source introduction.\n    assert {owned[f'b{i}'].unit_id for i in (23,24,25,26)} <= set(blocked)\n    assert all(not {owned[f'b{i}'].unit_id for i in (23,24,25,26)} & set(p['anchor_unit_ids']) for p in packages)\n    assert owned['healthy_body'].unit_id not in blocked\n    assert any(owned['healthy_body'].unit_id in p['anchor_unit_ids'] for p in packages)",
+    "status_before": " M .githooks/pre-push\n"
+  },
+  "independent_test_run": {
+    "tests": 11,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0,
+    "seconds": 1.79,
+    "python": "C:/Miniconda/python.exe3.13.9 normalhost",
+    "pytest": "9.1.1",
+    "exactcandidate_config_rootdir_confcutdir": true,
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"11\" time=\"1.735\" timestamp=\"2026-11-02T03:54:45.620597+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"\" name=\"test_note_limit_cannot_release_unexamined_suffix_as_complete_material\" time=\"0.076\" /><testcase classname=\"\" name=\"test_same_local_opaque_block_token_is_a_valid_source_edge[local:block/\\u4e59-03]\" time=\"0.001\" /><testcase classname=\"\" name=\"test_same_local_opaque_block_token_is_a_valid_source_edge[\\u5757\\u96f6]\" time=\"0.001\" /><testcase classname=\"\" name=\"test_opaque_identity_does_not_replace_real_member_proof[different_token]\" time=\"0.000\" /><testcase classname=\"\" name=\"test_opaque_identity_does_not_replace_real_member_proof[empty_token]\" time=\"0.000\" /><testcase classname=\"\" name=\"test_opaque_identity_does_not_replace_real_member_proof[overlap]\" time=\"0.000\" /><testcase classname=\"\" name=\"test_opaque_identity_does_not_replace_real_member_proof[different_source]\" time=\"0.000\" /><testcase classname=\"tests.unit.document_understanding_note_scope.test_scope_failure_tails\" name=\"test_note_limit_preserves_entire_unexamined_suffix_until_real_boundary[73-new_note]\" time=\"0.060\" /><testcase classname=\"tests.unit.document_understanding_note_scope.test_scope_failure_tails\" name=\"test_unproven_relation_keeps_following_targets_unknown_until_heading[page_gap]\" time=\"0.010\" /><testcase classname=\"tests.unit.document_understanding_note_scope.test_scope_failure_tails\" name=\"test_unproven_relation_keeps_following_targets_unknown_until_heading[missing_proof]\" time=\"0.009\" /><testcase classname=\"tests.unit.document_understanding_note_scope.test_scope_failure_tails\" name=\"test_failure_tail_scanning_is_charged_and_cannot_publish_after_budget_exhaustion\" time=\"0.021\" /></testsuite></testsuites>",
+    "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\u2\\\\b\", \"requested_basetemp_len\": 43, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 11 items\n\n. .......                                                                [ 63%]\ntests\\unit\\document_understanding_note_scope\\test_scope_failure_tails.py . [ 72%]\n...                                                                      [100%]\n\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\u2\\junit.xml ---\n============================= 11 passed in 1.79s ==============================\n"
+  },
+  "closed_findings": [
+    {
+      "id": "T3-A-01",
+      "old_status": "NEEDS_ROOT_FIX",
+      "new_status": "CLOSED_IN_ENGINEERING_SCOPE",
+      "exactold_function_unchanged": true,
+      "evidence": [
+        {
+          "name": "b22",
+          "blocked": false,
+          "anchor": true,
+          "semantic_completeness": [
+            "unknown"
+          ]
+        },
+        {
+          "name": "b23",
+          "blocked": true,
+          "anchor": false,
+          "semantic_completeness": [
+            "partial"
+          ]
+        },
+        {
+          "name": "b24",
+          "blocked": true,
+          "anchor": false,
+          "semantic_completeness": [
+            "partial"
+          ]
+        },
+        {
+          "name": "b25",
+          "blocked": true,
+          "anchor": false,
+          "semantic_completeness": [
+            "partial"
+          ]
+        },
+        {
+          "name": "b26",
+          "blocked": true,
+          "anchor": false,
+          "semantic_completeness": [
+            "partial"
+          ]
+        },
+        {
+          "name": "healthy_body",
+          "blocked": false,
+          "anchor": true,
+          "semantic_completeness": [
+            "unknown"
+          ]
+        }
+      ],
+      "reason": "Membercount/prooffailure stops positive expansion but no longer terminates sourceframe; entire unobserved suffix gets partial/contextblocked until realboundary. Healthy newheading still producesmaterial."
+    }
+  ],
+  "findings": [],
+  "static_review": [
+    "One charged sequential source-note traversal preserves unproven andlimit states until real marker/heading/source/role/turn/barrier; no pernote fulltree sort/rescan.",
+    "Original parsed order only conservatively identifies unobserved suffix. layout_next agreement rejects conflictingphysicalorder but cannot create a positive edge without existingmember/physical proof.",
+    "Unresolved andlimit exactID diagnostics are batched byexisting bound<=24, semantic/material consumers unchanged; budget shortage still raises beforepublishing a fakecomplete scope.",
+    "Only localopaque block-identity length/type restriction was removed from helper. Existingtruthy equalidentity/order/source/role/turn/nonoverlap ranges retained; canonicalrawSHA responsibility remains source/parser layer."
+  ],
+  "independent_controls": [
+    "ExactR1 minimalcounterexamplefunction recovered from boundhistoricalreport; b23-26 allblocked/notanchors, actualhealthyheading body unblocked/anchor.",
+    "73member/newnotecontrol proves exactsuffixset, <=24diagnosticbatches, positive nextnote ownintro and healthy newheading.",
+    "Pagegap andcontradictorycolumn/layoutorder keep both originalfailed target andlater source suffixunknown.",
+    "SharedWorkBudget reachesoldlimit butcannot scan/publish unchargedtail; raisesexisting WorkBudgetExceeded without allowanceincrease.",
+    "Independent shortlocal tokenandChineseopaque token validsourcecharacter edges; differenttoken/emptytoken/overlappingrange/foreignsource allreject. No metadata mutation."
+  ],
+  "reproducers": {
+    "test_r1_exact.py": {
+      "sha256": "d486b51e08ca171a1533ccac57293adc8fb4e0ad80cff5656ab5226d9a95dc5e",
+      "source": "\"\"\"Independent T3 source-frame and failure-tail probes, no original files.\"\"\"\nimport json\nfrom pathlib import Path\n\nimport pytest\n\nfrom company_wiki.document_understanding.text_boundaries import terminal_punctuation\nfrom company_wiki.resource_budget import WorkBudget\nfrom company_wiki.source_catalog.narrative_native_materials import prepare_native_materials\nfrom unit.document_understanding_note_scope.fixtures import (\n    Row, inherited_heading_ids, run_pipeline, source,\n)\n\n\ndef test_note_limit_cannot_release_unexamined_suffix_as_complete_material():\n    box=(72.,80.,528.,700.)\n    rows=[Row('intro','備註三十一：丙方的设备交付及服务义务：',block=0,box=box)]\n    rows.extend(Row(f'b{i}',f'“{i+1}、公司已交付检测设备，丙方应保留原始验收记录。”',block=0,box=box) for i in range(27))\n    rows.extend([Row('healthy','一、另一项业务进展',block=1,box=(72.,710.,528.,730.)),\n                 Row('healthy_body','公司已交付独立的新设备。',block=2,box=(72.,740.,528.,760.))])\n    parsed,owned=source(tuple(rows))\n    result,contexts=run_pipeline(parsed)\n    packages,_facts,continuity,blocked=prepare_native_materials(parsed,result,\n        work_budget=WorkBudget(16_000_000),_native_contexts=contexts)\n    evidence={'diagnostics':result['structure']['diagnostics'],\n      'semantic_units':result['structure']['semantic_units'],\n      'blocked':sorted(blocked),'anchors':[p['anchor_unit_ids'] for p in packages],\n      'names':{key:unit.unit_id for key,unit in owned.items()},'continuity_complete':continuity['complete']}\n    (Path(__file__).parent/'limit-observation.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2),encoding='utf-8')\n    # The first over-limit target and following members are still within the\n    # same explicit note; a budget boundary is not a new source introduction.\n    assert {owned[f'b{i}'].unit_id for i in (23,24,25,26)} <= set(blocked)\n    assert all(not {owned[f'b{i}'].unit_id for i in (23,24,25,26)} & set(p['anchor_unit_ids']) for p in packages)\n    assert owned['healthy_body'].unit_id not in blocked\n    assert any(owned['healthy_body'].unit_id in p['anchor_unit_ids'] for p in packages)\n"
+    },
+    "test_opaque_blocks.py": {
+      "sha256": "d4c27b17e2bbfb3a71d91aa97c98731e64ec9428bd59a15863c18b51244ceaa8",
+      "source": "\"\"\"Opaque block identity preserves caller contract without allowing donation.\"\"\"\nfrom copy import deepcopy\nfrom pathlib import Path\n\nimport pytest\n\nfrom company_wiki.document_understanding import narrative_continuity as owner\n\nassert Path(owner.__file__).resolve() == Path('C:/Users/郑曾波/Projects/company-wiki/tmp/w23-r6/src/company_wiki/document_understanding/narrative_continuity.py').resolve()\n\n\ndef pair(token):\n    left={'unit_id':'l','kind':'paragraph','role':'company_filing','ordinal':0,'page':1,\n          'text':'第一原始段','hints':{'source_id':'s'}}\n    right={'unit_id':'r','kind':'paragraph','role':'company_filing','ordinal':1,'page':1,\n           'text':'第二原始段','hints':{'source_id':'s'}}\n    a={'source_id':'s','pdf_block':3,'block_sha256':token,'block_char_start':0,'block_char_end':5}\n    b={'source_id':'s','pdf_block':3,'block_sha256':token,'block_char_start':6,'block_char_end':11}\n    return left,right,a,b\n\n\n@pytest.mark.parametrize('token',['local:block/乙-03','块零'])\ndef test_same_local_opaque_block_token_is_a_valid_source_edge(token):\n    l,r,a,b=pair(token);before=deepcopy((l,r,a,b))\n    proof=owner.source_member_neighbour(l,r,left_provenance=a,right_provenance=b)\n    assert proof=={'left':'l','right':'r','basis':'native_block_character_ranges'}\n    assert (l,r,a,b)==before\n\n\n@pytest.mark.parametrize('fault',['different_token','empty_token','overlap','different_source'])\ndef test_opaque_identity_does_not_replace_real_member_proof(fault):\n    l,r,a,b=pair('local:block/乙-03')\n    if fault=='different_token': b['block_sha256']='local:block/甲-03'\n    elif fault=='empty_token': a['block_sha256']=b['block_sha256']=''\n    elif fault=='overlap': b['block_char_start']=4\n    else: b['source_id']='other-source'\n    assert owner.source_member_neighbour(l,r,left_provenance=a,right_provenance=b) is None\n"
+    }
+  },
+  "raw_minimal_observation": {
+    "diagnostics": [
+      {
+        "code": "CONTINUATION_LIMIT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b"
+        ],
+        "detail": "bounded carry exhausted for an unheaded section"
+      },
+      {
+        "code": "CONTINUATION_LIMIT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7"
+        ],
+        "detail": "bounded carry exhausted for an unheaded section"
+      },
+      {
+        "code": "CONTINUATION_LIMIT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df"
+        ],
+        "detail": "bounded carry exhausted for an unheaded section"
+      },
+      {
+        "code": "NO_RECOGNIZED_DISCOURSE",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d",
+          "urn:company-wiki:narrative-unit:sha256:63087f30a55c366978183c59418c7733ec0d8617b9dd454f55f2b1f6ca0d62c1",
+          "urn:company-wiki:narrative-unit:sha256:2c3cb48aa4640cee21e8a2641ac8c42805adfd4e200161010d239e9e325a9e48",
+          "urn:company-wiki:narrative-unit:sha256:34c1ac40075b2c981852da9f1bacc66860e15fb44aaf7933eed70c0fbc2bdbc4",
+          "urn:company-wiki:narrative-unit:sha256:059bc242126f2cb7e7b59e8a4a14fc5bd4f724620d866cfc48fc03dfd24e6512",
+          "urn:company-wiki:narrative-unit:sha256:8e9779b5000d2c6edfc6819a454d91abd8c67cba7466ff4142fb70e897172eaa",
+          "urn:company-wiki:narrative-unit:sha256:dd613e57053526575d12613f3370365f0e6887f103481027dc8a397049a47224",
+          "urn:company-wiki:narrative-unit:sha256:6f6faadaab3b03a6bff8d91d1efbd5e71e654c001e715b1a4864341dff799ec5",
+          "urn:company-wiki:narrative-unit:sha256:61c110021afb0559988bb232e8142b3911a8b333f01649cf39f3c4e3fd9d433a",
+          "urn:company-wiki:narrative-unit:sha256:f7eb13f11dc8dcff73492747d1d79c61346e6a51fe11cacf5c7d904e4a071b00",
+          "urn:company-wiki:narrative-unit:sha256:ac8390df095e3402160b31312c5b3f757dea3acea24cb760bac4a676491f0e45",
+          "urn:company-wiki:narrative-unit:sha256:d0eb47bc9650f4d0de614e5f37d648c851c74d8fcbee6096eaaf832f940b4e0f",
+          "urn:company-wiki:narrative-unit:sha256:0ae92ab5381c049b3502199812bc2d6be6ca8538059a7935a7ba2759fb63cb67",
+          "urn:company-wiki:narrative-unit:sha256:32e2dae4fd65b0c8c2d3cd497c4dcff0704dbd107ae816905ddf83ff0429c02a",
+          "urn:company-wiki:narrative-unit:sha256:8974ba3589d99e2f4688d7b099815ab7c87164f0f57dfd6a7a2f0de9541c68a5",
+          "urn:company-wiki:narrative-unit:sha256:44718d9dad14a7b1440133b25c4e83087c972ede4b91e8e5ab098ebc55cf7e3d",
+          "urn:company-wiki:narrative-unit:sha256:af5b765b6ffd9620b76022ba36428741e96a72feaf766d9986c269e3de525c86",
+          "urn:company-wiki:narrative-unit:sha256:64347b5672c550693f3e0f0f5b2d9bc7b8d1b59ad1c60fb7aadc882c2c275ed5",
+          "urn:company-wiki:narrative-unit:sha256:a359a3171cfb4aacaf1b4725dde9959091d31e9dfaf115b16d5ba40331769918",
+          "urn:company-wiki:narrative-unit:sha256:67ae5f663c7bb969a9bc6b156321b144712e0d70c46176a95057599ba6e7d97d",
+          "urn:company-wiki:narrative-unit:sha256:6a925ac4e6351441dc1d8677f6541cac16ab317b80133515b40b823a045f18b8",
+          "urn:company-wiki:narrative-unit:sha256:0f51d84d628190fd97d8e7a839bd8044cebdb74652f3e182dafe70a46c011472",
+          "urn:company-wiki:narrative-unit:sha256:cdba28b93e5f4d75df8039d76219ee4fc2062ba25c82d11f9afff8bf04ffb03a",
+          "urn:company-wiki:narrative-unit:sha256:b9415b2e73c9e57b02f8c8fdb9d19558c02cc58ba9650713935cd39fe48248d3",
+          "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e",
+          "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df",
+          "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b",
+          "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7",
+          "urn:company-wiki:narrative-unit:sha256:6a1e1eb840e2607d84afbb5cd7bcd5fa8778bc44eb4636c32273e92116729d82"
+        ],
+        "detail": "no paragraph matched an event, risk, or background signal"
+      },
+      {
+        "code": "SOURCE_SCOPE_LIMIT_REACHED",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e",
+          "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df",
+          "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b",
+          "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7"
+        ],
+        "detail": "source-marked note member bound reached"
+      },
+      {
+        "code": "SOURCE_SCOPE_UNPROVEN",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e",
+          "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df",
+          "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b",
+          "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7"
+        ],
+        "detail": "source-marked local note relationship lacks original adjacency or complete introduction"
+      },
+      {
+        "code": "WORK_UNITS",
+        "unit_ids": [],
+        "detail": "2855"
+      }
+    ],
+    "semantic_units": [
+      {
+        "semantic_id": "m1",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+        ],
+        "completeness": "unknown",
+        "diagnostics": []
+      },
+      {
+        "semantic_id": "m2",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:63087f30a55c366978183c59418c7733ec0d8617b9dd454f55f2b1f6ca0d62c1"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:63087f30a55c366978183c59418c7733ec0d8617b9dd454f55f2b1f6ca0d62c1"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:63087f30a55c366978183c59418c7733ec0d8617b9dd454f55f2b1f6ca0d62c1"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:63087f30a55c366978183c59418c7733ec0d8617b9dd454f55f2b1f6ca0d62c1": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m3",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:2c3cb48aa4640cee21e8a2641ac8c42805adfd4e200161010d239e9e325a9e48"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:2c3cb48aa4640cee21e8a2641ac8c42805adfd4e200161010d239e9e325a9e48"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:2c3cb48aa4640cee21e8a2641ac8c42805adfd4e200161010d239e9e325a9e48"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:2c3cb48aa4640cee21e8a2641ac8c42805adfd4e200161010d239e9e325a9e48": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m4",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:34c1ac40075b2c981852da9f1bacc66860e15fb44aaf7933eed70c0fbc2bdbc4"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:34c1ac40075b2c981852da9f1bacc66860e15fb44aaf7933eed70c0fbc2bdbc4"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:34c1ac40075b2c981852da9f1bacc66860e15fb44aaf7933eed70c0fbc2bdbc4"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:34c1ac40075b2c981852da9f1bacc66860e15fb44aaf7933eed70c0fbc2bdbc4": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m5",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:059bc242126f2cb7e7b59e8a4a14fc5bd4f724620d866cfc48fc03dfd24e6512"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:059bc242126f2cb7e7b59e8a4a14fc5bd4f724620d866cfc48fc03dfd24e6512"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:059bc242126f2cb7e7b59e8a4a14fc5bd4f724620d866cfc48fc03dfd24e6512"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:059bc242126f2cb7e7b59e8a4a14fc5bd4f724620d866cfc48fc03dfd24e6512": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m6",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8e9779b5000d2c6edfc6819a454d91abd8c67cba7466ff4142fb70e897172eaa"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8e9779b5000d2c6edfc6819a454d91abd8c67cba7466ff4142fb70e897172eaa"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8e9779b5000d2c6edfc6819a454d91abd8c67cba7466ff4142fb70e897172eaa"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:8e9779b5000d2c6edfc6819a454d91abd8c67cba7466ff4142fb70e897172eaa": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m7",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:dd613e57053526575d12613f3370365f0e6887f103481027dc8a397049a47224"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:dd613e57053526575d12613f3370365f0e6887f103481027dc8a397049a47224"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:dd613e57053526575d12613f3370365f0e6887f103481027dc8a397049a47224"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:dd613e57053526575d12613f3370365f0e6887f103481027dc8a397049a47224": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m8",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6f6faadaab3b03a6bff8d91d1efbd5e71e654c001e715b1a4864341dff799ec5"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6f6faadaab3b03a6bff8d91d1efbd5e71e654c001e715b1a4864341dff799ec5"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6f6faadaab3b03a6bff8d91d1efbd5e71e654c001e715b1a4864341dff799ec5"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:6f6faadaab3b03a6bff8d91d1efbd5e71e654c001e715b1a4864341dff799ec5": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m9",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:61c110021afb0559988bb232e8142b3911a8b333f01649cf39f3c4e3fd9d433a"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:61c110021afb0559988bb232e8142b3911a8b333f01649cf39f3c4e3fd9d433a"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:61c110021afb0559988bb232e8142b3911a8b333f01649cf39f3c4e3fd9d433a"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:61c110021afb0559988bb232e8142b3911a8b333f01649cf39f3c4e3fd9d433a": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m10",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:f7eb13f11dc8dcff73492747d1d79c61346e6a51fe11cacf5c7d904e4a071b00"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:f7eb13f11dc8dcff73492747d1d79c61346e6a51fe11cacf5c7d904e4a071b00"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:f7eb13f11dc8dcff73492747d1d79c61346e6a51fe11cacf5c7d904e4a071b00"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:f7eb13f11dc8dcff73492747d1d79c61346e6a51fe11cacf5c7d904e4a071b00": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m11",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:ac8390df095e3402160b31312c5b3f757dea3acea24cb760bac4a676491f0e45"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:ac8390df095e3402160b31312c5b3f757dea3acea24cb760bac4a676491f0e45"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:ac8390df095e3402160b31312c5b3f757dea3acea24cb760bac4a676491f0e45"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:ac8390df095e3402160b31312c5b3f757dea3acea24cb760bac4a676491f0e45": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m12",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:d0eb47bc9650f4d0de614e5f37d648c851c74d8fcbee6096eaaf832f940b4e0f"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:d0eb47bc9650f4d0de614e5f37d648c851c74d8fcbee6096eaaf832f940b4e0f"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:d0eb47bc9650f4d0de614e5f37d648c851c74d8fcbee6096eaaf832f940b4e0f"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:d0eb47bc9650f4d0de614e5f37d648c851c74d8fcbee6096eaaf832f940b4e0f": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m13",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0ae92ab5381c049b3502199812bc2d6be6ca8538059a7935a7ba2759fb63cb67"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0ae92ab5381c049b3502199812bc2d6be6ca8538059a7935a7ba2759fb63cb67"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0ae92ab5381c049b3502199812bc2d6be6ca8538059a7935a7ba2759fb63cb67"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:0ae92ab5381c049b3502199812bc2d6be6ca8538059a7935a7ba2759fb63cb67": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m14",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:32e2dae4fd65b0c8c2d3cd497c4dcff0704dbd107ae816905ddf83ff0429c02a"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:32e2dae4fd65b0c8c2d3cd497c4dcff0704dbd107ae816905ddf83ff0429c02a"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:32e2dae4fd65b0c8c2d3cd497c4dcff0704dbd107ae816905ddf83ff0429c02a"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:32e2dae4fd65b0c8c2d3cd497c4dcff0704dbd107ae816905ddf83ff0429c02a": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m15",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8974ba3589d99e2f4688d7b099815ab7c87164f0f57dfd6a7a2f0de9541c68a5"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8974ba3589d99e2f4688d7b099815ab7c87164f0f57dfd6a7a2f0de9541c68a5"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:8974ba3589d99e2f4688d7b099815ab7c87164f0f57dfd6a7a2f0de9541c68a5"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:8974ba3589d99e2f4688d7b099815ab7c87164f0f57dfd6a7a2f0de9541c68a5": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m16",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:44718d9dad14a7b1440133b25c4e83087c972ede4b91e8e5ab098ebc55cf7e3d"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:44718d9dad14a7b1440133b25c4e83087c972ede4b91e8e5ab098ebc55cf7e3d"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:44718d9dad14a7b1440133b25c4e83087c972ede4b91e8e5ab098ebc55cf7e3d"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:44718d9dad14a7b1440133b25c4e83087c972ede4b91e8e5ab098ebc55cf7e3d": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m17",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:af5b765b6ffd9620b76022ba36428741e96a72feaf766d9986c269e3de525c86"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:af5b765b6ffd9620b76022ba36428741e96a72feaf766d9986c269e3de525c86"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:af5b765b6ffd9620b76022ba36428741e96a72feaf766d9986c269e3de525c86"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:af5b765b6ffd9620b76022ba36428741e96a72feaf766d9986c269e3de525c86": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m18",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:64347b5672c550693f3e0f0f5b2d9bc7b8d1b59ad1c60fb7aadc882c2c275ed5"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:64347b5672c550693f3e0f0f5b2d9bc7b8d1b59ad1c60fb7aadc882c2c275ed5"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:64347b5672c550693f3e0f0f5b2d9bc7b8d1b59ad1c60fb7aadc882c2c275ed5"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:64347b5672c550693f3e0f0f5b2d9bc7b8d1b59ad1c60fb7aadc882c2c275ed5": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m19",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:a359a3171cfb4aacaf1b4725dde9959091d31e9dfaf115b16d5ba40331769918"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:a359a3171cfb4aacaf1b4725dde9959091d31e9dfaf115b16d5ba40331769918"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:a359a3171cfb4aacaf1b4725dde9959091d31e9dfaf115b16d5ba40331769918"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:a359a3171cfb4aacaf1b4725dde9959091d31e9dfaf115b16d5ba40331769918": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m20",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:67ae5f663c7bb969a9bc6b156321b144712e0d70c46176a95057599ba6e7d97d"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:67ae5f663c7bb969a9bc6b156321b144712e0d70c46176a95057599ba6e7d97d"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:67ae5f663c7bb969a9bc6b156321b144712e0d70c46176a95057599ba6e7d97d"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:67ae5f663c7bb969a9bc6b156321b144712e0d70c46176a95057599ba6e7d97d": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m21",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6a925ac4e6351441dc1d8677f6541cac16ab317b80133515b40b823a045f18b8"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6a925ac4e6351441dc1d8677f6541cac16ab317b80133515b40b823a045f18b8"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6a925ac4e6351441dc1d8677f6541cac16ab317b80133515b40b823a045f18b8"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:6a925ac4e6351441dc1d8677f6541cac16ab317b80133515b40b823a045f18b8": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m22",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0f51d84d628190fd97d8e7a839bd8044cebdb74652f3e182dafe70a46c011472"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0f51d84d628190fd97d8e7a839bd8044cebdb74652f3e182dafe70a46c011472"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0f51d84d628190fd97d8e7a839bd8044cebdb74652f3e182dafe70a46c011472"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:0f51d84d628190fd97d8e7a839bd8044cebdb74652f3e182dafe70a46c011472": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m23",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:cdba28b93e5f4d75df8039d76219ee4fc2062ba25c82d11f9afff8bf04ffb03a"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:cdba28b93e5f4d75df8039d76219ee4fc2062ba25c82d11f9afff8bf04ffb03a"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:cdba28b93e5f4d75df8039d76219ee4fc2062ba25c82d11f9afff8bf04ffb03a"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:cdba28b93e5f4d75df8039d76219ee4fc2062ba25c82d11f9afff8bf04ffb03a": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m24",
+        "kind": "background",
+        "section_ids": [
+          "s1"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b9415b2e73c9e57b02f8c8fdb9d19558c02cc58ba9650713935cd39fe48248d3"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b9415b2e73c9e57b02f8c8fdb9d19558c02cc58ba9650713935cd39fe48248d3"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b9415b2e73c9e57b02f8c8fdb9d19558c02cc58ba9650713935cd39fe48248d3"
+        ],
+        "completeness": "unknown",
+        "diagnostics": [],
+        "required_context_by_unit_id": {
+          "urn:company-wiki:narrative-unit:sha256:b9415b2e73c9e57b02f8c8fdb9d19558c02cc58ba9650713935cd39fe48248d3": [
+            "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+          ]
+        }
+      },
+      {
+        "semantic_id": "m25",
+        "kind": "background",
+        "section_ids": [
+          "s2"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e"
+        ],
+        "completeness": "partial",
+        "diagnostics": [
+          {
+            "code": "SOURCE_SCOPE_UNPROVEN",
+            "unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e"
+            ],
+            "detail": "local source introduction or adjacency is unproven"
+          }
+        ]
+      },
+      {
+        "semantic_id": "m26",
+        "kind": "background",
+        "section_ids": [
+          "s2"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df"
+        ],
+        "completeness": "partial",
+        "diagnostics": [
+          {
+            "code": "SOURCE_SCOPE_UNPROVEN",
+            "unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df"
+            ],
+            "detail": "local source introduction or adjacency is unproven"
+          }
+        ]
+      },
+      {
+        "semantic_id": "m27",
+        "kind": "background",
+        "section_ids": [
+          "s2"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b"
+        ],
+        "completeness": "partial",
+        "diagnostics": [
+          {
+            "code": "SOURCE_SCOPE_UNPROVEN",
+            "unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b"
+            ],
+            "detail": "local source introduction or adjacency is unproven"
+          }
+        ]
+      },
+      {
+        "semantic_id": "m28",
+        "kind": "background",
+        "section_ids": [
+          "s2"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7"
+        ],
+        "completeness": "partial",
+        "diagnostics": [
+          {
+            "code": "SOURCE_SCOPE_UNPROVEN",
+            "unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7"
+            ],
+            "detail": "local source introduction or adjacency is unproven"
+          }
+        ]
+      },
+      {
+        "semantic_id": "m29",
+        "kind": "background",
+        "section_ids": [
+          "s3"
+        ],
+        "member_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6a1e1eb840e2607d84afbb5cd7bcd5fa8778bc44eb4636c32273e92116729d82"
+        ],
+        "anchor_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6a1e1eb840e2607d84afbb5cd7bcd5fa8778bc44eb4636c32273e92116729d82"
+        ],
+        "required_context_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:6a1e1eb840e2607d84afbb5cd7bcd5fa8778bc44eb4636c32273e92116729d82"
+        ],
+        "completeness": "unknown",
+        "diagnostics": []
+      }
+    ],
+    "blocked": [
+      "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b",
+      "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e",
+      "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7",
+      "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df"
+    ],
+    "anchors": [
+      [
+        "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d"
+      ],
+      [
+        "urn:company-wiki:narrative-unit:sha256:6a1e1eb840e2607d84afbb5cd7bcd5fa8778bc44eb4636c32273e92116729d82"
+      ],
+      [
+        "urn:company-wiki:narrative-unit:sha256:63087f30a55c366978183c59418c7733ec0d8617b9dd454f55f2b1f6ca0d62c1",
+        "urn:company-wiki:narrative-unit:sha256:2c3cb48aa4640cee21e8a2641ac8c42805adfd4e200161010d239e9e325a9e48",
+        "urn:company-wiki:narrative-unit:sha256:34c1ac40075b2c981852da9f1bacc66860e15fb44aaf7933eed70c0fbc2bdbc4",
+        "urn:company-wiki:narrative-unit:sha256:059bc242126f2cb7e7b59e8a4a14fc5bd4f724620d866cfc48fc03dfd24e6512",
+        "urn:company-wiki:narrative-unit:sha256:8e9779b5000d2c6edfc6819a454d91abd8c67cba7466ff4142fb70e897172eaa",
+        "urn:company-wiki:narrative-unit:sha256:dd613e57053526575d12613f3370365f0e6887f103481027dc8a397049a47224",
+        "urn:company-wiki:narrative-unit:sha256:6f6faadaab3b03a6bff8d91d1efbd5e71e654c001e715b1a4864341dff799ec5",
+        "urn:company-wiki:narrative-unit:sha256:61c110021afb0559988bb232e8142b3911a8b333f01649cf39f3c4e3fd9d433a"
+      ],
+      [
+        "urn:company-wiki:narrative-unit:sha256:f7eb13f11dc8dcff73492747d1d79c61346e6a51fe11cacf5c7d904e4a071b00",
+        "urn:company-wiki:narrative-unit:sha256:ac8390df095e3402160b31312c5b3f757dea3acea24cb760bac4a676491f0e45",
+        "urn:company-wiki:narrative-unit:sha256:d0eb47bc9650f4d0de614e5f37d648c851c74d8fcbee6096eaaf832f940b4e0f",
+        "urn:company-wiki:narrative-unit:sha256:0ae92ab5381c049b3502199812bc2d6be6ca8538059a7935a7ba2759fb63cb67",
+        "urn:company-wiki:narrative-unit:sha256:32e2dae4fd65b0c8c2d3cd497c4dcff0704dbd107ae816905ddf83ff0429c02a",
+        "urn:company-wiki:narrative-unit:sha256:8974ba3589d99e2f4688d7b099815ab7c87164f0f57dfd6a7a2f0de9541c68a5",
+        "urn:company-wiki:narrative-unit:sha256:44718d9dad14a7b1440133b25c4e83087c972ede4b91e8e5ab098ebc55cf7e3d",
+        "urn:company-wiki:narrative-unit:sha256:af5b765b6ffd9620b76022ba36428741e96a72feaf766d9986c269e3de525c86"
+      ],
+      [
+        "urn:company-wiki:narrative-unit:sha256:64347b5672c550693f3e0f0f5b2d9bc7b8d1b59ad1c60fb7aadc882c2c275ed5",
+        "urn:company-wiki:narrative-unit:sha256:a359a3171cfb4aacaf1b4725dde9959091d31e9dfaf115b16d5ba40331769918",
+        "urn:company-wiki:narrative-unit:sha256:67ae5f663c7bb969a9bc6b156321b144712e0d70c46176a95057599ba6e7d97d",
+        "urn:company-wiki:narrative-unit:sha256:6a925ac4e6351441dc1d8677f6541cac16ab317b80133515b40b823a045f18b8",
+        "urn:company-wiki:narrative-unit:sha256:0f51d84d628190fd97d8e7a839bd8044cebdb74652f3e182dafe70a46c011472",
+        "urn:company-wiki:narrative-unit:sha256:cdba28b93e5f4d75df8039d76219ee4fc2062ba25c82d11f9afff8bf04ffb03a",
+        "urn:company-wiki:narrative-unit:sha256:b9415b2e73c9e57b02f8c8fdb9d19558c02cc58ba9650713935cd39fe48248d3"
+      ]
+    ],
+    "names": {
+      "intro": "urn:company-wiki:narrative-unit:sha256:b96783c5095cb4080f2930282c0024f1aa71b21c4eeeb7b9dffd9f05aea2cd0d",
+      "b0": "urn:company-wiki:narrative-unit:sha256:63087f30a55c366978183c59418c7733ec0d8617b9dd454f55f2b1f6ca0d62c1",
+      "b1": "urn:company-wiki:narrative-unit:sha256:2c3cb48aa4640cee21e8a2641ac8c42805adfd4e200161010d239e9e325a9e48",
+      "b2": "urn:company-wiki:narrative-unit:sha256:34c1ac40075b2c981852da9f1bacc66860e15fb44aaf7933eed70c0fbc2bdbc4",
+      "b3": "urn:company-wiki:narrative-unit:sha256:059bc242126f2cb7e7b59e8a4a14fc5bd4f724620d866cfc48fc03dfd24e6512",
+      "b4": "urn:company-wiki:narrative-unit:sha256:8e9779b5000d2c6edfc6819a454d91abd8c67cba7466ff4142fb70e897172eaa",
+      "b5": "urn:company-wiki:narrative-unit:sha256:dd613e57053526575d12613f3370365f0e6887f103481027dc8a397049a47224",
+      "b6": "urn:company-wiki:narrative-unit:sha256:6f6faadaab3b03a6bff8d91d1efbd5e71e654c001e715b1a4864341dff799ec5",
+      "b7": "urn:company-wiki:narrative-unit:sha256:61c110021afb0559988bb232e8142b3911a8b333f01649cf39f3c4e3fd9d433a",
+      "b8": "urn:company-wiki:narrative-unit:sha256:f7eb13f11dc8dcff73492747d1d79c61346e6a51fe11cacf5c7d904e4a071b00",
+      "b9": "urn:company-wiki:narrative-unit:sha256:ac8390df095e3402160b31312c5b3f757dea3acea24cb760bac4a676491f0e45",
+      "b10": "urn:company-wiki:narrative-unit:sha256:d0eb47bc9650f4d0de614e5f37d648c851c74d8fcbee6096eaaf832f940b4e0f",
+      "b11": "urn:company-wiki:narrative-unit:sha256:0ae92ab5381c049b3502199812bc2d6be6ca8538059a7935a7ba2759fb63cb67",
+      "b12": "urn:company-wiki:narrative-unit:sha256:32e2dae4fd65b0c8c2d3cd497c4dcff0704dbd107ae816905ddf83ff0429c02a",
+      "b13": "urn:company-wiki:narrative-unit:sha256:8974ba3589d99e2f4688d7b099815ab7c87164f0f57dfd6a7a2f0de9541c68a5",
+      "b14": "urn:company-wiki:narrative-unit:sha256:44718d9dad14a7b1440133b25c4e83087c972ede4b91e8e5ab098ebc55cf7e3d",
+      "b15": "urn:company-wiki:narrative-unit:sha256:af5b765b6ffd9620b76022ba36428741e96a72feaf766d9986c269e3de525c86",
+      "b16": "urn:company-wiki:narrative-unit:sha256:64347b5672c550693f3e0f0f5b2d9bc7b8d1b59ad1c60fb7aadc882c2c275ed5",
+      "b17": "urn:company-wiki:narrative-unit:sha256:a359a3171cfb4aacaf1b4725dde9959091d31e9dfaf115b16d5ba40331769918",
+      "b18": "urn:company-wiki:narrative-unit:sha256:67ae5f663c7bb969a9bc6b156321b144712e0d70c46176a95057599ba6e7d97d",
+      "b19": "urn:company-wiki:narrative-unit:sha256:6a925ac4e6351441dc1d8677f6541cac16ab317b80133515b40b823a045f18b8",
+      "b20": "urn:company-wiki:narrative-unit:sha256:0f51d84d628190fd97d8e7a839bd8044cebdb74652f3e182dafe70a46c011472",
+      "b21": "urn:company-wiki:narrative-unit:sha256:cdba28b93e5f4d75df8039d76219ee4fc2062ba25c82d11f9afff8bf04ffb03a",
+      "b22": "urn:company-wiki:narrative-unit:sha256:b9415b2e73c9e57b02f8c8fdb9d19558c02cc58ba9650713935cd39fe48248d3",
+      "b23": "urn:company-wiki:narrative-unit:sha256:4b170e13e276f3fe59220ca8fac38d209cf3e8f568967c85a82deb72bbb8cd2e",
+      "b24": "urn:company-wiki:narrative-unit:sha256:e6d70c8eb0e770643dbf20ca622294b6130b2d59750e94121d6db48ca26545df",
+      "b25": "urn:company-wiki:narrative-unit:sha256:0b5d2ad024f248ce3897ef2d0863b222c2fe0d8c64fee8a55f026eaaa22fdc1b",
+      "b26": "urn:company-wiki:narrative-unit:sha256:5b588049e96bcc49ae80c9f44962ec9d5fd016ed683eb330a172d1b9717a34b7",
+      "healthy": "urn:company-wiki:narrative-unit:sha256:d90c057e1cc7ab40c62ea8ecb16178ddd35a6ccaac7239a576ffc0d2aff4d984",
+      "healthy_body": "urn:company-wiki:narrative-unit:sha256:6a1e1eb840e2607d84afbb5cd7bcd5fa8778bc44eb4636c32273e92116729d82"
+    },
+    "continuity_complete": false
+  },
+  "author_evidence": "FouroriginalWindowsCRLFlogs reconstructedfromJSONLFtext andboundrawSHA4/4; original4CIRED, new5RED3F2P, new5GREEN, final9GREEN retained. No broad82/84rerun orsumofcoverage claim.",
+  "original_six_tests": "Currentw23trackedfilesmatchoriginalmanifest; oldr2temporarycopiesnotreadorrequired. ROOTtransferofduplicatedtestsdoesnotaffectruntimeproof.",
+  "prior_report_preservation": "R6-T3-independent-r1.md/json leftunchanged as878 failurehistory; thisR2alone reviewsfa8repair.",
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\u2",
+    "initial_absent": true,
+    "containment_checked": true,
+    "reparse_checked": true,
+    "exists_after": false
+  },
+  "not_signed": [
+    "currentcompletecandidateCI",
+    "actualH1originals",
+    "realmodelsummary",
+    "cache restore",
+    "RF adoption",
+    "wholePWFcomplete"
+  ],
+  "decision": "PASS boundedincrementalT3engineering atfa8ef38e; ROOTmaycombinewith exactfullcandidateCI green fornormalintegration. No productP1/P2 remains inreviewedincrement.",
+  "agent_state": "STOP"
+}

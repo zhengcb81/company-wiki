@@ -1,0 +1,64 @@
+{
+  "status": "FROZEN_FOR_ROOT_INDEPENDENT_REVIEW",
+  "scope": "two new stdlib synthetic observation receipt files only",
+  "manifest": {
+    "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+    "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8"
+  },
+  "api": "encode_source_receipt(record: dict, *, max_bytes: int = 300000) -> bytes",
+  "cap_default": 300000,
+  "minimum_cap": 1024,
+  "record_mutated": false,
+  "producer_complete_not_upgraded": true,
+  "normal_shape": "producer top-level fields + receipt_representation",
+  "fallback_shape": {
+    "status": "OBSERVATION_INCOMPLETE",
+    "source_status": "producer status or explicitly unretained identity",
+    "encoding_error": "code/type only",
+    "integrity_checkpoints": "whole reliable fields that fit, final unchanged booleans prioritized",
+    "unretained_fields": "explicit list, or explicitly incomplete hashed enumeration at minimum cap"
+  },
+  "runs": [
+    {
+      "junit": ".planning/architecture-quality-20261101/real-acceptance/receipt-red.xml",
+      "sha256": "6c0f720a993efb625c00c0af5cd3ac11d15b1fc41311c0609351fb1949108432",
+      "log_sha256": "83c6f7e7531d86dddb38dbf83d10418197558716341d6059cb3b16e62b513793",
+      "tests": 16,
+      "failures": 16,
+      "errors": 0,
+      "seconds": 0.722
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/real-acceptance/receipt-green.xml",
+      "sha256": "e16b2467f9f73e0392839cbc736684100109c9ddddd75d1e4ce38ac9ed687bff",
+      "log_sha256": "901161a04451f20727720d6d8e8307fd49d02d068efec9d56a6385f494199e07",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.355
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/real-acceptance/receipt-final.xml",
+      "sha256": "bf86c19db2b1915125206cf9c453596450057d071b30cfd0567f0adeb21dc232",
+      "log_sha256": "e67f258f578ab5edbf68001bc01ea57250cbb643a9336a6762bc312686570180",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.925
+    }
+  ],
+  "static_checks": {
+    "ruff": "PASS two new files",
+    "mypy": "PASS tools/source_case_receipt.py"
+  },
+  "notes": [
+    "final source change after18P was a list type annotation only; mypy/Ruff rerun",
+    "canonical identity iterencode streams sha/count without assembling full record JSON",
+    "large single JSON string chunks can still be emitted by stdlib iterencode; no full-record blob retained",
+    "two original mandatory excerpt collections remain unchanged in successful output",
+    "incomplete envelope may omit mandatory material only with explicit incomplete status, never fake partial excerpts as complete",
+    "no real source reread/model/API/production DB/Git/index/PWF changes",
+    "ROOT owns ignored runner integration and final independent review"
+  ],
+  "cleanup": "synthetic in-memory test data only; no fixture directories or source documents created; small intentional evidence logs/XML retained"
+}

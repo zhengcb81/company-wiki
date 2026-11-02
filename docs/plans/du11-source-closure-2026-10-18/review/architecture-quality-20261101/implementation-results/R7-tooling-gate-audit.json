@@ -1,0 +1,383 @@
+{
+  "schema_version": "tooling-gate-audit/1",
+  "reviewer": "/root/rectification_review_a",
+  "created_at_utc": "2026-11-02T07:38:54.533051+00:00",
+  "status": "READ_ONLY_AUDIT_COMPLETE_ROOT_REMEDIATION_REQUIRED",
+  "repository": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "head_at_review": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "scope": [
+    "tools",
+    "scripts",
+    "config key names only",
+    "actual .githooks and .github/workflows"
+  ],
+  "boundary": "Core src and FF/RF assigned to other ROOT review lanes. Observer 300k/16k/ancestry32 and context/proof seam already owned by ROOT, not duplicated as a new finding here.",
+  "method": "CodeGraph status/file/context/callers first for structural questions, literal search for policy strings, actual current CLI/bootstrap reading. Index includes historical copies and misses recent tools, so no-callers alone is never a retirement proof. Followed actual entry -> check -> error propagation for findings.",
+  "inventory_counts_not_line_by_line_acceptance": {
+    "tools": 198,
+    "scripts": 112
+  },
+  "manual_permission_result": "No active manual approval/signature/private-public/LLM-material permission was found in the inspected tooling canonical entry chains. This is not a proof over unreviewed core src or sibling repositories.",
+  "findings": [
+    {
+      "id": "R7-T01",
+      "priority": "P2",
+      "title": "Observer/report/output volume becomes a failure veto",
+      "status": "OPEN",
+      "root_cause": "Fixed presentation/receipt/log ceilings are treated as execution correctness, and some observers raise after the real owner succeeded.",
+      "entries": [
+        {
+          "path": "tools/pre_push_gate.py:57,145-173",
+          "surface": "daily development push and explicit local validation",
+          "chain": [
+            ".githooks/pre-push",
+            "main(--push-checks)",
+            "_dispatch_gate",
+            "_run_pytest_gate",
+            "_run",
+            "run_bounded"
+          ],
+          "condition": "stdout > 4MiB or stderr > 512KiB",
+          "effect": "OutputLimitExceeded -> 125 -> push blocked even when only log volume caused failure",
+          "evidence": "Actual quiet child 0; synthetic stdout/stderr over-cap each 125; logs suppressed without printing body."
+        },
+        {
+          "path": "tools/document_understanding_benchmark/phase_c_observer.py:20-21,84-93,140-147,414",
+          "surface": "explicit Phase C test-side bootstrap, not normal production launch",
+          "chain": [
+            "phase_c_runner/phase_c_launcher or phase_c_bootstrap/sitecustomize",
+            "install",
+            "NarrativeArtifactStore.prepare wrapper",
+            "original_prepare succeeds",
+            "capture_prepared_checkpoint"
+          ],
+          "condition": "prepared payload > 2MiB, generation/capsule metadata > 512KiB",
+          "effect": "observation exception after owner prepare; valid work can be reported failed by the test-side observer",
+          "evidence": "Actual wrapper with a synthetic successful owner: owner_prepare_returned_successfully=true followed by OBSERVED_PREPARED_PAYLOAD_BOUND_EXCEEDED."
+        },
+        {
+          "path": "tools/identity_audit/core.py:737 + receipt.py:21 + cli.py:144",
+          "surface": "explicit identity audit CLI",
+          "condition": "canonical receipt > 16MiB",
+          "effect": "replaces actual audit results with TOP_BLOCKED/RECEIPT_TOO_LARGE; --out result not published",
+          "evidence": "Current code chain; no actual identity/original query executed."
+        },
+        {
+          "path": "tools/narrative_g2_replay/report.py:147-158; tools/source_root_portability/report.py:107-119",
+          "surface": "explicit synthetic engineering replay",
+          "condition": "report > 8MiB",
+          "effect": "raise RuntimeError before report.json is written",
+          "evidence": "Actual source-root-portability writer synthetic oversized report: RuntimeError and file_exists=false."
+        },
+        {
+          "path": "tools/storage_footprint/core.py:20,166-172; report.py:426-443; runner.py:80-86",
+          "surface": "explicit metadata-only footprint CLI",
+          "condition": "report cannot be shrunk under 256KiB",
+          "effect": "FAILED/report_too_large despite completed scan; full detailed evidence truncated first",
+          "evidence": "Current CLI -> runner -> enforce_report_budget -> write_report chain; no real tree scanned."
+        },
+        {
+          "path": "tools/raw_duplicate_audit/core.py:26; report.py:85-181; assessment.py",
+          "surface": "explicit read-only duplicate assessment CLI",
+          "condition": "report 1MiB ceiling",
+          "effect": "drops arrays; oversized header becomes refused/report_header_too_large",
+          "evidence": "Static current owner chain; real configured read-byte/time budgets are separate and remain valid."
+        },
+        {
+          "path": "tools/cross_market_suite/runtime_evidence.py:14,125-149; runner.py:414",
+          "surface": "explicit cross-market test runner, not source API",
+          "condition": "runtime evidence or JUnit property > 32KiB",
+          "effect": "drops jobs/reservations first, then raises; suite loses evidence because of observer size",
+          "evidence": "Static runner reading runtime_properties from actual child JUnit properties."
+        }
+      ],
+      "change": "Remove arbitrary output/receipt/report-size refusal. Preserve complete output to one ordinary owned artifact (stream when necessary), print a convenient summary separately, and report observer I/O/encoding failure distinctly from owner outcome. Preserve real source resource budgets and real child/test failures; do not increase thresholds or claim missing evidence passed.",
+      "bounded_tests": [
+        "successful noisy child remains successful, actual nonzero/timeout remains nonzero",
+        "large valid prepared payload returns the original owner result and captures evidence; injected observation I/O fault reports incomplete observation without reclassifying successful source work",
+        "large identity/replay/footprint reports persist all mandatory IDs/roles and full evidence; console summary may remain concise"
+      ]
+    },
+    {
+      "id": "R7-T02",
+      "priority": "P2",
+      "title": "Whole production-tree cleanliness used as a replay identity proxy",
+      "status": "OPEN",
+      "path": "tools/holdout_replay/producer.py:15,34-54; runner.py:107; __main__.py:46,65",
+      "surface": "explicit W18 holdout verify-freeze/run/bootstrap CLI, not canonical source read",
+      "chain": [
+        "python -m tools.holdout_replay verify-freeze/run/bootstrap-lake",
+        "verify_producer",
+        "git status --porcelain -- src/scripts/tools/config",
+        "ProducerError"
+      ],
+      "condition": "any tracked or untracked difference anywhere in four production trees, including unrelated scripts/tools",
+      "evidence": "Actual verify_producer function with a synthetic repo and a controlled _git response reports only ?? tools/unrelated_notes.py and refuses before source/replay work. No real repository mutation.",
+      "root_cause": "Unrelated worktree state is used as a replacement for identity of code that really ran.",
+      "change": "Record actual loaded dependency identities and source commit/worktree fingerprint. Treat unrelated dirty paths as diagnostic. If the experiment explicitly needs committed-only bytes, automatically materialize only that runtime closure in an owned isolated directory rather than forcing all four trees clean. Preserve wrong-runtime/import-root detection and source/gold integrity.",
+      "bounded_tests": [
+        "a real temporary Git repo with unrelated untracked tools file still runs/records actual identities",
+        "a change to a loaded producer dependency is detected in manifest/identity, never silently described as the requested frozen commit",
+        "wrong import tree remains an actual error; healthy concurrent work is not a permission veto"
+      ]
+    }
+  ],
+  "retained_measures": [
+    {
+      "measure": "immutable originals and path ownership/no-clobber",
+      "decision": "KEEP_SINGLE_OWNER",
+      "reason": "User original-document no-loss bottom line; prevents a cleanup/report/deploy write from overwriting raw or foreign content. Not a human approval."
+    },
+    {
+      "measure": "source bytes/identity/period/as-of and actual reference replay",
+      "decision": "KEEP_SINGLE_OWNER",
+      "reason": "Facts must still refer to the correct material at the correct date; downstream consumers consume verified owner results rather than repeat in-process checks."
+    },
+    {
+      "measure": "configured fee/token/deadline/storage plus process termination/settlement",
+      "decision": "KEEP",
+      "reason": "Actual requested resource ceilings, not arbitrary receipt-size presentation limits. Missing observation does not refund unknown actual usage or invent successful completion."
+    },
+    {
+      "measure": "precommit static checks, one fixed push smoke, existing full CI and major-node independent review",
+      "decision": "KEEP_REVIEW_SCOPE",
+      "reason": "Actual code/test failures remain visible; current commit does not run pytest and ordinary push no longer does AST-selected huge suites. No manual release-signature file."
+    },
+    {
+      "measure": "PDF deployment receipt/plan and actual hardlink/same-volume/ASCII/source-byte checks",
+      "decision": "KEEP_DEPLOY_OWNER_ONLY",
+      "reason": "Explicit recoverable projection tool validates target ownership and the runtime workaround. No caller in the inspected production loading path requires deployment.json or an operator review before reading a document; verification/deploy commands own these checks."
+    },
+    {
+      "measure": "legacy storage retirement --apply and exact selected derived manifest",
+      "decision": "KEEP_DESTRUCTIVE_OPERATION_SCOPE",
+      "reason": "The apply request expresses deletion intent and the manifest narrows actual derived handles; this is not separate manual signing. Raw paths, live/shared handles, byte changes and foreign report paths must not be deleted."
+    },
+    {
+      "measure": "independent semantic/gold review used by evaluation reports",
+      "decision": "KEEP_AS_QUALITY_MEASUREMENT",
+      "reason": "User explicitly requests independent major-node reviews. Missing review may mean semantic quality not measured; it is not supplier/source download authorization and does not gate canonical reading."
+    }
+  ],
+  "inactive_or_nonblocking": [
+    {
+      "paths": [
+        "scripts/architecture_gate.py",
+        "scripts/clean_env_gate.py",
+        "scripts/gold_gate.py",
+        "scripts/semantic_gate.py",
+        "scripts/test_framework.py",
+        "scripts/batch_process.py",
+        "control/README.md"
+      ],
+      "status": "RETIRED_STUBS_NOT_ACTIVE_GATE",
+      "evidence": "stdlib stubs return exit78; control architecture/acceptance files already removed; canonical pipeline does not invoke them."
+    },
+    {
+      "paths": [
+        "scripts/review_queue.py",
+        "scripts/scheduler.py",
+        "scripts/stage4_review.py",
+        "scripts/stage5_ingest.py",
+        "scripts/expire_tracker.py",
+        "scripts/full_pipeline.py"
+      ],
+      "status": "LEGACY_RESEARCH_WRITER_RETIRED",
+      "evidence": "writer_policy permanently retired list and explicit writer guards. Their human-review/expiry text is not current document-read permission. Do not restore legacy research writers as a way to remove gates."
+    },
+    {
+      "paths": [
+        "scripts/readonly_canary.py",
+        "scripts/legacy_observer.py",
+        "scripts/bridge_off_equivalence.py",
+        "tools/n4c_live_preflight.py"
+      ],
+      "status": "EXPLICIT_HISTORICAL_ENGINEERING_REPORTS_NOT_DEFAULT_PRECONDITION",
+      "evidence": "Canary words identify controlled read-only experiments; inspected canonical console entries/push/CI do not require their receipts."
+    },
+    {
+      "paths": [
+        "tools/verify_plan_claims.py"
+      ],
+      "status": "UNHOOKED_STANDALONE_HEURISTIC",
+      "evidence": "Has hard-coded 28-day observation text rule and waiver words, but is absent from current hooks/CI/canonical imports. Optional retire/move to historical diagnostic; do not report current 28-day business gate."
+    },
+    {
+      "paths": [
+        "scripts/secret_audit.py"
+      ],
+      "status": "EXPLICIT_SECRET_AUDIT_NOT_MATERIAL_AUTHORIZATION",
+      "evidence": "history_rewrite required_authorization_pending is an audit decision about rewriting published Git history, not source access. generate returns observation; verify checks audit integrity. No credential values read in this review."
+    }
+  ],
+  "optional_efficiency": [
+    {
+      "id": "R7-O01",
+      "priority": "P3",
+      "path": "tools/pdf_runtime_deployment/deployment.py:453-479",
+      "title": "same-inode deployment verification can hash identical bytes twice in one operation",
+      "evidence": "_reconcile hashes source, then destination, then samefile; an existing proper hardlink necessarily points to the same inode. New link also rehashes destination after source hash. No timing/model read measured.",
+      "recommendation": "If optimizing deployment, use one verified handle/stat identity and validate actual samefile link ownership without hashing the same immutable inode twice in the same operation. Keep verification across new processes/time boundaries. Not a source eligibility or present user-permission blocker."
+    }
+  ],
+  "probes": {
+    "probes": [
+      {
+        "probe": "quiet",
+        "returncode": 0,
+        "configured_stdout_cap": 4194304,
+        "configured_stderr_cap": 524288,
+        "child_requested_bytes": 0
+      },
+      {
+        "probe": "stdout_cap",
+        "returncode": 125,
+        "configured_stdout_cap": 4194304,
+        "configured_stderr_cap": 524288,
+        "child_requested_bytes": 4194305
+      },
+      {
+        "probe": "stderr_cap",
+        "returncode": 125,
+        "configured_stdout_cap": 4194304,
+        "configured_stderr_cap": 524288,
+        "child_requested_bytes": 524289
+      },
+      {
+        "probe": "unrelated_untracked_tool_refuses_holdout",
+        "exception": "ProducerError",
+        "reason": "producer tree has uncommitted changes in production paths: ?? tools/unrelated_notes.py",
+        "git_calls": [
+          [
+            "rev-parse",
+            "HEAD"
+          ],
+          [
+            "status",
+            "--porcelain",
+            "--",
+            "tools"
+          ]
+        ]
+      },
+      {
+        "probe": "observer_size_failure_after_successful_owner_prepare",
+        "exception": "ValueError",
+        "reason": "OBSERVED_PREPARED_PAYLOAD_BOUND_EXCEEDED",
+        "owner_prepare_returned_successfully": true,
+        "prepared_limit_bytes": 2097152
+      },
+      {
+        "probe": "oversize_final_report_not_written",
+        "exception": "RuntimeError",
+        "reason": "report exceeds 8388608 bytes (8388636); the persistent report must stay small",
+        "file_exists": false,
+        "report_limit_bytes": 8388608
+      }
+    ],
+    "gate_message_metadata": [
+      {
+        "characters": 24,
+        "sha256": "1f9e6dc7cb309e170e75cbbd2dce1ecc3e92d8521ed79ede146cd26f395c8bbf"
+      },
+      {
+        "characters": 2,
+        "sha256": "2689367b205c16ce32ed4200942b8b8b1e262dfc70d9bc9fbc77c49699a4f1df"
+      },
+      {
+        "characters": 29,
+        "sha256": "08b3798919c1677d8dbc8aa9d57df4644d387a03ac6cedffa4faa2b13adf5e38"
+      },
+      {
+        "characters": 4194305,
+        "sha256": "8d3d3c04baadfd31cbebf771836900097b5f36cc142b74e40747c7b372beab8b"
+      },
+      {
+        "characters": 122,
+        "sha256": "ef5cf70d903ce30a5adb9f3253eb1d320f02bb4cc4fe8e9719b49e6ccb3298e4"
+      },
+      {
+        "characters": 29,
+        "sha256": "242bfee39141a20c26da8ca60e71424c55a75560b1e3a0fe6cff46f65caa890d"
+      },
+      {
+        "characters": 524289,
+        "sha256": "84079794567a4362a19cbd5d771303b130580e18aa40f80e23c3c4432a6fa558"
+      },
+      {
+        "characters": 122,
+        "sha256": "57e3a88058e468e214685509087761c569b2b821ff3b017dee88e9e7075e5842"
+      }
+    ],
+    "real_source_access": false,
+    "model_calls": 0,
+    "external_network": false
+  },
+  "probe_source": {
+    "sha256": "704528d719735ecbf1c3f2b877a8d741c1eb664b7855773f4775bb81770e18fe",
+    "content": "\"\"\"Read-only R7 audit: synthetic control flow, not a source/model acceptance.\"\"\"\nfrom pathlib import Path\nfrom types import SimpleNamespace\nimport hashlib\nimport json\nimport sys\n\nROOT=Path('C:/Users/郑曾波/Projects/company-wiki')\nTMP=Path(__file__).parent\nsys.path[:0]=[str(ROOT),str(ROOT/'src')]\nfrom tools import pre_push_gate as gate\nfrom tools.holdout_replay import producer\nfrom tools.document_understanding_benchmark import phase_c_observer as observer\nfrom tools.source_root_portability import report\n\nout=[]\nmessages=[]\ngate._print_output=lambda text:messages.append({'characters':len(text),'sha256':hashlib.sha256(text.encode('utf-8')).hexdigest()})\nfor name,stream,size,expected in [('quiet','stdout',0,0),('stdout_cap','stdout',gate.STDOUT_CAP_BYTES+1,125),('stderr_cap','stderr',gate.STDERR_CAP_BYTES+1,125)]:\n    code='import sys;sys.'+stream+'.buffer.write(b\"x\"*'+str(size)+');sys.'+stream+'.flush()'\n    value=gate._run([sys.executable,'-B','-c',code],'synthetic-'+name,timeout=10)\n    assert value==expected,(name,value)\n    out.append({'probe':name,'returncode':value,'configured_stdout_cap':gate.STDOUT_CAP_BYTES,'configured_stderr_cap':gate.STDERR_CAP_BYTES,'child_requested_bytes':size})\n\nfake=TMP/'producer';(fake/'.git').mkdir(parents=True);(fake/'tools').mkdir()\nreal_git=producer._git;calls=[]\ndef fake_git(root,*args):\n    calls.append(args)\n    return '1'*40 if args==('rev-parse','HEAD') else '?? tools/unrelated_notes.py' if args[:2]==('status','--porcelain') else 'synthetic'\nproducer._git=fake_git\ntry:\n    try:producer.verify_producer(fake,'1'*40)\n    except producer.ProducerError as exc:out.append({'probe':'unrelated_untracked_tool_refuses_holdout','exception':type(exc).__name__,'reason':str(exc),'git_calls':calls})\n    else:raise AssertionError('Expected current broad clean-tree refusal')\nfinally:producer._git=real_git\n\nstate={'prepared':False}\ndef fake_prepare(store,draft,payload):state['prepared']=True;return object()\ntry:observer.prepared_artifact_observer(fake_prepare,{})(None,None,b'x'*(observer.PREPARED_PAYLOAD_MAX_BYTES+1))\nexcept ValueError as exc:out.append({'probe':'observer_size_failure_after_successful_owner_prepare','exception':type(exc).__name__,'reason':str(exc),'owner_prepare_returned_successfully':state['prepared'],'prepared_limit_bytes':observer.PREPARED_PAYLOAD_MAX_BYTES})\nelse:raise AssertionError('Expected observer-only size exception')\nassert state['prepared']\n\nattempt=TMP/'report';attempt.mkdir()\ntry:report.write_report(SimpleNamespace(path=attempt),{'synthetic_trace':'x'*(report.MAX_REPORT_BYTES+1)})\nexcept RuntimeError as exc:out.append({'probe':'oversize_final_report_not_written','exception':type(exc).__name__,'reason':str(exc),'file_exists':(attempt/'report.json').exists(),'report_limit_bytes':report.MAX_REPORT_BYTES})\nelse:raise AssertionError('Expected current report-only size refusal')\n\n(TMP/'results.json').write_text(json.dumps({'probes':out,'gate_message_metadata':messages,'real_source_access':False,'model_calls':0,'external_network':False},ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')\nprint(json.dumps({'probes':len(out),'returncodes':[r['returncode'] for r in out if 'returncode' in r],'post_prepare_observer_failure':state['prepared'],'all_expected_current_behaviors_observed':True}))\n"
+  },
+  "probe_execution": {
+    "normal_host": true,
+    "interpreter": "C:/Miniconda/python.exe",
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\a7\\probe.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 1.3276888,
+    "probes": 6,
+    "all_expected_current_behaviors_observed": true,
+    "pytest_run": false,
+    "real_source_access": false,
+    "models": 0,
+    "provider_calls": 0,
+    "network": false,
+    "config_writes": 0
+  },
+  "stable_evidence_files_before": {
+    "tools/pre_push_gate.py": "2604bae33ae3b79d523fadb11a11d555fc6c78d78ea98750db1293ecf0614f45",
+    "tools/holdout_replay/producer.py": "555cb078fb32c2f81d566127eca045c58a97944d451377a22b299cdf2faca831",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "f4d5242c198f2ce83175758303821234e7e43c97c20a2a45e6a22e07fff8b490",
+    "tools/source_root_portability/report.py": "604dd0c5b70a0fdcb152d4495708f38216e48f6e1218e4e9b2cfbd421e073f7d",
+    ".githooks/pre-push": "f2067d1a0a5b1be7de8690e06fe77aa9c523c19d6f6ff2eb625e9cd6de1fc7a7",
+    ".pre-commit-config.yaml": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+    ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453",
+    "scripts/writer_policy.py": "cf895b36d091bb446da00ddfdc9cea9a565fb3f28a1d762bcfd48a269b839e2c",
+    "scripts/config_doctor.py": "e49711d3a2631aa9dcd086289ef96680e2852247236d00d4a74a7332d546dcb3"
+  },
+  "stable_evidence_files_after": {
+    "tools/pre_push_gate.py": "2604bae33ae3b79d523fadb11a11d555fc6c78d78ea98750db1293ecf0614f45",
+    "tools/holdout_replay/producer.py": "555cb078fb32c2f81d566127eca045c58a97944d451377a22b299cdf2faca831",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "f4d5242c198f2ce83175758303821234e7e43c97c20a2a45e6a22e07fff8b490",
+    "tools/source_root_portability/report.py": "604dd0c5b70a0fdcb152d4495708f38216e48f6e1218e4e9b2cfbd421e073f7d",
+    ".githooks/pre-push": "f2067d1a0a5b1be7de8690e06fe77aa9c523c19d6f6ff2eb625e9cd6de1fc7a7",
+    ".pre-commit-config.yaml": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+    ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453",
+    "scripts/writer_policy.py": "cf895b36d091bb446da00ddfdc9cea9a565fb3f28a1d762bcfd48a269b839e2c",
+    "scripts/config_doctor.py": "e49711d3a2631aa9dcd086289ef96680e2852247236d00d4a74a7332d546dcb3"
+  },
+  "stable_evidence_hashes_unchanged": true,
+  "limits": [
+    "Read-only control-flow audit with six bounded synthetic probes, not comprehensive behavior testing or every-tool line-by-line review.",
+    "No current source processing, real PDF, source DB, provider, model, fee ledger or application outputs were opened or executed.",
+    "Config scan returned key names only; no API keys or secret environment values were loaded.",
+    "Historical plan/run paths and retired scripts are not mislabeled active canonical blockers.",
+    "No claim that removing output gates itself completes H1, actual summary/cache/RF economic acceptance."
+  ],
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\a7",
+    "initially_absent": true,
+    "restored_absent": true,
+    "status": "RESTORED_INITIAL_ABSENT",
+    "probe_and_observations_embedded": true,
+    "files": 3,
+    "logical_bytes": 6901,
+    "containment_checked": true,
+    "non_reparse_checked": true
+  },
+  "canonical_console_entry_count": 10
+}

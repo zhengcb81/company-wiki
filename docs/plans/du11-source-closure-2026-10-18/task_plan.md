@@ -1,12 +1,12 @@
-**2026-11-02：R6工程10767b86最终独审/候选CI绿，主线c6bb801b已正常推送且精确CI41381788839成功。T3结构实施中（TERM48P、NOTE/PHYS在途），真实C和公司循环仍OPEN。**
+**2026-11-02：R6/T3工程已独审、完整候选CI通过并正常推master fa8ef38e；R7工程已独审/提交/定点部署，当前收远端CI与新版真实C；全公司循环OPEN。**
 
 # 主线剩余实施计划
 
-**当前：来源整改10767b86已获最终独审与完整CI41380285347通过，已正常发布主线c6bb801b且精确CI41381788839成功；W23和daily已独立发布。结构T3/真实C/公司循环继续，不签总目标完成。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
+**当前：R6与T3工程均已独审/完整CI通过，fa8ef38e已正常推master且精确主线CI41408572602成功。R7已确认的过度门禁正在优先根修，真实C和全公司循环继续，不签总目标完成。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
 
 ## Next Step
 
-完成T3 NOTE/PHYS来源备注局部scope和原生成员/邻接proof及局部partial传播，与已修TERM合并跑冻结47+新增24一次并集中独审，再按计划做最终真实H1、新摘要/cache/RF。不扩外包、不重复整仓。
+RF499d5ca3与invest a7812888已正常push成功；CWP fee04ba4源码已正常commit，完成当前PWF/docs bundle并正常push，核三仓精确CI。R7核心/工具/ROOT/RF及6文件发布跟进均独审通过，全局定点部署/重复0写/三新进程已过。CI后单例H1（90s/16M/112）再真实摘要/cache/RF采用，不扩包、不在本地重690/325/211整组，原件/配置/四WIP保持。
 
 ## P0 — 已完成的CI根修
 

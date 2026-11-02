@@ -1,0 +1,52 @@
+{
+  "returncode": 0,
+  "wall_seconds": 4.298,
+  "counts": {
+    "tests": 82,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "command": [
+    "C:/Miniconda/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_note_scope",
+    "-q",
+    "--tb=short",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3x-b86d7da3",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r6-publication\\t3-combined.xml"
+  ],
+  "all_frozen_bytes_unchanged": true,
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3x-b86d7da3",
+    "initially_absent": true,
+    "files": 0,
+    "logical_bytes": 0,
+    "exists_after": false
+  },
+  "model_calls": 0,
+  "original_document_access": false,
+  "parent_after_ff": "acb8161f",
+  "freeze_manifest": "R6-T3-freeze-manifest.json",
+  "code_commit": {
+    "returncode": 0,
+    "elapsed_s": 24.675,
+    "head": "8782050bcee8a5d41f571306eef6fd166d0ff5ad",
+    "files": 20,
+    "all_frozen_bytes_unchanged": true
+  },
+  "status": "PASS_BOUNDED82_FINAL_INDEPENDENT_AND_FULL_CI_PENDING",
+  "scope": "Original47 assertions unchanged +24terminal/pipeline +11source-proof cases; one complete merged run. Synthetic original-ID cases only, not real H1."
+}

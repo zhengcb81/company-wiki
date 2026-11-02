@@ -1,0 +1,61 @@
+{
+  "status": "IMPLEMENTED_INTEGRATION_PASS_MAJOR_REVIEW_PENDING",
+  "canonical_repo": "C:\\Users\\郑曾波\\Projects\\invest-skills",
+  "initial_head": "0ee1713",
+  "initial_tracked_wip": [],
+  "removed": [
+    "global publication registration authority",
+    "default required host attestation",
+    "caller opt-out flags",
+    "precommit full suite and E2E",
+    "prepush duplicate full suite/E2E",
+    "implicit all-skill global synchronization",
+    "compileall incidental pyc outputs"
+  ],
+  "preserved": [
+    "RF full input/output independent recomputation",
+    "source identity,currency,unit,period,scenario and hash integrity",
+    "unsigned never promoted to signed",
+    "actual child nonzero/timeout and artifact write errors"
+  ],
+  "red": {
+    "adapter": "3F1P1.70s",
+    "fast_git": "3F0.68s;2 missing-helper feature tests,1 actual implicit-deploy trace",
+    "fixture_isolation": "1F3.28s"
+  },
+  "first_integration": {
+    "failed": 5,
+    "passed": 18,
+    "skipped": 1,
+    "seconds": 5.39,
+    "root_cause": "shared cached fixture mutation and invented host_signed labels failed before intended semantic boundaries"
+  },
+  "green": {
+    "passed": 24,
+    "skipped": 1,
+    "seconds": 6.49,
+    "wall_seconds": 8.385,
+    "rf_four_wips_unchanged": true,
+    "source_unchanged": true,
+    "test_dir_restored_absent": true
+  },
+  "last_git_wrapper_change": "temporary index owner and no external signer added after integrated run; independent review verifies final code",
+  "source_sha256": {
+    "invest-core/scripts/invest_contracts.py": "b059d0a1c9175faa8fda47aeae0227ef9baf6f27263a29cd267d7e629871f4d4",
+    "invest-core/tests/test_revenue_adapter.py": "95776ff7b4d10f377040507bb0b561872b4df36927fe70bee55aea6ef8b9c6d5",
+    "invest-core/tests/test_revenue_adapter_gate_simplification.py": "793fdc13f68ae15f877c55471ce5b6f0fe2607122ebbb8b2da19a438febba79d",
+    "invest-core/tests/test_fast_git_checks.py": "49d1107e0f5aef1b59736bda7dfc73680ba7fa58239ca13e498638b7a68579b4",
+    "invest-core/tests_support/revenue_fixtures.py": "119e58353ac3c7ea7983a603ee26b8d67595e898a3895017eddc43c05f97fef6",
+    "tests_support/revenue_fixtures.py": "119e58353ac3c7ea7983a603ee26b8d67595e898a3895017eddc43c05f97fef6",
+    "invest-framework/tests/test_forged_cross_repo_chain.py": "5ba87f38381eae9fe724f9e5c5ce85b488b4ff7167f8a4be7902678bc6787c6d",
+    "invest-core/references/compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+    "tools/pre_push_gate.py": "9bc14a0ce14b8790f09ac862c1eef4ced822176474f2453f1e7f5decf4de75f6",
+    ".githooks/pre-commit": "c155d2d7a6c9dc587640ea9d2974f30fceb77e842bb102410210335cddb91472",
+    ".githooks/pre-push": "6a9d8027bdc72ecebcba9f919dc151ac0d79f2a6db07736c70f3c133e79b0320",
+    "README.md": "c7d1bb902bb3e61b2112ff0a22962d8102257d6585d956b449f1e04f0a4e09ba"
+  },
+  "paid_posts": 0,
+  "originals_opened": 0,
+  "real_C": "OPEN",
+  "deployment": "not yet performed; must be targeted after review, never implicit Git action"
+}

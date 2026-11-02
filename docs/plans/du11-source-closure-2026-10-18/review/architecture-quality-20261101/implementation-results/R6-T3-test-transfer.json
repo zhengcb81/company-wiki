@@ -1,0 +1,51 @@
+{
+  "schema_version": "owned-test-copy-transfer/1",
+  "original_directory_initially_absent": true,
+  "scope": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tests\\unit\\document_understanding_note_scope",
+  "verified_copy_and_remote_tracked_equivalent": true,
+  "remote_code_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "containment_checked": true,
+  "all_paths_non_reparse": true,
+  "deleted_owned_files": [
+    {
+      "path": "tests/unit/document_understanding_note_scope/__init__.py",
+      "sha256": "56027e62eb0cfed0fefdb75fdb2aa0936300c09ca4521e76a12dbec25a86598e",
+      "bytes": 81,
+      "replacement": "origin/codex/architecture-t3-source-scope-20261102:tests/unit/document_understanding_note_scope/__init__.py"
+    },
+    {
+      "path": "tests/unit/document_understanding_note_scope/fixtures.py",
+      "sha256": "6762dac9eba99a34d384844d865f5ef5f6bd2d76889e6d6f12567dbc4e5ec2bf",
+      "bytes": 8163,
+      "replacement": "origin/codex/architecture-t3-source-scope-20261102:tests/unit/document_understanding_note_scope/fixtures.py"
+    },
+    {
+      "path": "tests/unit/document_understanding_note_scope/README.md",
+      "sha256": "6329dd8089c8e85edb200e694e7a91868ebb0321851259308f031d3439f5effd",
+      "bytes": 1408,
+      "replacement": "origin/codex/architecture-t3-source-scope-20261102:tests/unit/document_understanding_note_scope/README.md"
+    },
+    {
+      "path": "tests/unit/document_understanding_note_scope/test_local_scopes.py",
+      "sha256": "4ec8718a11e7bf87adadc26341abf3fab3eee7744c9884729c70bcafe83331ae",
+      "bytes": 4316,
+      "replacement": "origin/codex/architecture-t3-source-scope-20261102:tests/unit/document_understanding_note_scope/test_local_scopes.py"
+    },
+    {
+      "path": "tests/unit/document_understanding_note_scope/test_physical_scope.py",
+      "sha256": "e6dae64bf6830a0cfbdc2ce7440cc04d6f2b2a19392c6bbfae946841b4d6cf45",
+      "bytes": 4088,
+      "replacement": "origin/codex/architecture-t3-source-scope-20261102:tests/unit/document_understanding_note_scope/test_physical_scope.py"
+    },
+    {
+      "path": "tests/unit/document_understanding_note_scope/test_terminals.py",
+      "sha256": "277982d57448a7b2998b216da7784aa55eb273252693477f49e64ded82bd829d",
+      "bytes": 2833,
+      "replacement": "origin/codex/architecture-t3-source-scope-20261102:tests/unit/document_understanding_note_scope/test_terminals.py"
+    }
+  ],
+  "logical_bytes": 20889,
+  "exists_after": false,
+  "original_documents_deleted": 0,
+  "physical_space_reclaimed": "NOT_MEASURED"
+}

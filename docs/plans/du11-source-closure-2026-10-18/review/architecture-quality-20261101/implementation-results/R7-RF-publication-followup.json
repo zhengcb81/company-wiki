@@ -1,0 +1,320 @@
+{
+  "schema_version": "rf-r7-publication-followup/1",
+  "status": "FROZEN_AWAITING_INDEPENDENT_DELTA_REVIEW",
+  "generated_at_utc": "2026-11-02T09:52:59.153572+00:00",
+  "repo": "C:/Users/郑曾波/Projects/revenue-forecast",
+  "base_head": "a922305a87e6e5014edcceb4bc394c5b56a3d35a",
+  "delivery_files_sha256": {
+    "tools/pre_push_gate.py": "9364640c3c1cb7df9d5bc90a0672c23728d34c6dd46ac7283b3754f05f1689af",
+    "tools/README.md": "292b0a76a95b7c9ee88ed43f7b291fb86232577436d3f0db29f617539e459508",
+    "tests/test_ci_smoke_plan.py": "53aa7b2b4bfe140a46530b88842bc74f2798fe79641bddd627a676ee4cf020e7",
+    "tests/test_pre_push_gate_git_hook_env.py": "62aebfc2815ff9bb57a922043ed4b2bb7838989620d5fd1b10b226fb8215a8d8",
+    "tests/test_registry_confidence_generations.py": "8675b6b1b59373c480307f7dc671f261517b9988d015941da2d597f0c21ead2a",
+    ".github/workflows/quality.yml": "664b6ab5b9a9fbf510ab20fe5a3e4e0b12365ddcca557da41cea543ee66ece30"
+  },
+  "original_publication_failure": {
+    "record_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-publication\\rf-push.json",
+    "returncode": 1,
+    "elapsed_s": 84.924,
+    "case": "tests/test_registry_confidence_generations.py::test_reordering_otherwise_valid_rows_still_breaks_chain",
+    "pytest_counts": {
+      "failed": 1,
+      "passed": 689,
+      "skipped": 1,
+      "subtests_passed": 36
+    },
+    "pytest_seconds": 73.53,
+    "artifacts": {
+      "rf-push.json": {
+        "sha256": "3ea2991ea6399f7472336dc3265eae9ed9ba9cad4721e028d9450f76c9b71000",
+        "content": "{\n  \"repo\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\revenue-forecast\",\n  \"returncode\": 1,\n  \"elapsed_s\": 84.924\n}"
+      },
+      "rf-push.log": {
+        "sha256": "a60d8acdc2802938f6985191decbfc00e391fc564b0ee26125e815cb831f90c2",
+        "content": "\n=== ruff ===\nAll checks passed!\n\n=== public contract types ===\nSuccess: no issues found in 15 source files\n\n=== current source and forecast behavior ===\n........................................................................ [ 10%]\n.................................................... [ 17%]\n................................................................ [ 27%]\n........................................................................ [ 37%]\n........................................................................ [ 48%]\n................................................................ [ 57%]\n......................................F................................. [ 67%]\n........................................................................ [ 78%]\n.s...................................................................... [ 88%]\n........................................................................ [ 98%]\n.......                                                                  [100%]\n================================== FAILURES ===================================\n___________ test_reordering_otherwise_valid_rows_still_breaks_chain ___________\ntests\\test_registry_confidence_generations.py:127: in test_reordering_otherwise_valid_rows_still_breaks_chain\n    assert any(\"chain break\" in problem for problem in registry.audit())\nE   assert False\nE    +  where False = any(<generator object test_reordering_otherwise_valid_rows_still_breaks_chain.<locals>.<genexpr> at 0x0000023F243057D0>)\n=========================== short test summary info ===========================\nFAILED tests/test_registry_confidence_generations.py::test_reordering_otherwise_valid_rows_still_breaks_chain\n1 failed, 689 passed, 1 skipped, 36 subtests passed in 73.53s (0:01:13)\n\nFAILED: current source and forecast behavior\n\nPUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.\nerror: failed to push some refs to 'https://github.com/zhengcb81/revenue-forecast.git'\n"
+      }
+    }
+  },
+  "changes": [
+    {
+      "id": "REG-v2",
+      "behavior": "V2 independent row reordering remains auditable/queryable with both confidence generations and their full result bindings. No runtime registry change."
+    },
+    {
+      "id": "REG-v1",
+      "behavior": "Explicit synthetic historical v1 chained fixture validates before reorder and rejects the hash-valid order break. Actual v1/v2 row data tamper without hash recomputation remains rejected by audit and lookup."
+    },
+    {
+      "id": "GATE-local",
+      "behavior": "Default runs Ruff then one fixed12-node source/ref/full forecast/forged output pytest. No repeated mypy, dynamicAST selection, whole-tree clean check, skip-signoff, or added resource budget."
+    },
+    {
+      "id": "GATE-ci",
+      "behavior": "Explicit --ci retains original41-file complete behavior set byte-for-value as CI_TESTS, with Ruff+mypy+one pytest. SMOKE_TESTS stays historical alias. GitHub workflow now explicitly chooses --ci."
+    },
+    {
+      "id": "GATE-environment",
+      "behavior": "Actual child Git resolves its own cwd even when parent hook repository variables are set. Offline test children disable dotenv/host attestation provider; no production signer/config writes."
+    }
+  ],
+  "ci_table": {
+    "before": [
+      "tests/test_authoring_projection.py",
+      "tests/test_authoring_projection_basis.py",
+      "tests/test_architecture_dependency_uses.py",
+      "tests/test_architecture_numeric_errors.py",
+      "tests/test_shared_excerpt_claim_semantics.py",
+      "tests/test_m3_acquisition_usage_acceptance.py",
+      "tests/test_m3_period_flow_consumers.py",
+      "tests/test_m3_period_flow_annual_consumers.py",
+      "tests/test_m3_evidence_roles.py",
+      "tests/test_w05_dated_contribution_contract.py",
+      "tests/test_w05_dated_contribution_composition.py",
+      "tests/test_w05_dated_contribution_output.py",
+      "tests/test_w05_root_temporal_lineage.py",
+      "tests/test_mixed_aggregate_recognition.py",
+      "tests/test_ci_smoke_plan.py",
+      "tests/test_pre_push_gate_git_hook_env.py",
+      "tests/test_p5_source_default_v2.py",
+      "tests/test_p5_source_default_cli_e2e.py",
+      "tests/test_company_wiki_source_ref_v2.py",
+      "tests/test_company_wiki_source_v2.py",
+      "tests/test_source_preparation.py",
+      "tests/test_data_contract.py",
+      "tests/test_summary_publication_lineage.py",
+      "tests/test_summary_long_excerpt.py",
+      "tests/test_w04_financial_communication_window.py",
+      "tests/test_recognition_bridge.py",
+      "tests/test_confidence_determinism.py",
+      "tests/test_confidence_source_freshness.py",
+      "tests/test_registry_confidence_generations.py",
+      "tests/test_real_source_quote_confidence.py",
+      "tests/test_sensitivity_dependency_dag.py",
+      "tests/test_published_foundation_roundtrip.py",
+      "tests/test_growth_driver_tree.py",
+      "tests/test_revenue_constraints.py",
+      "tests/test_schema_compatibility.py",
+      "tests/test_research_support_diagnostics.py",
+      "tests/test_scoped_calibration_support.py",
+      "tests/test_r1_source_boundary.py",
+      "tests/test_r1_target_scope.py",
+      "tests/test_r1_narrative_availability.py",
+      "tests/test_r1_local_preparation_observation.py"
+    ],
+    "after": [
+      "tests/test_authoring_projection.py",
+      "tests/test_authoring_projection_basis.py",
+      "tests/test_architecture_dependency_uses.py",
+      "tests/test_architecture_numeric_errors.py",
+      "tests/test_shared_excerpt_claim_semantics.py",
+      "tests/test_m3_acquisition_usage_acceptance.py",
+      "tests/test_m3_period_flow_consumers.py",
+      "tests/test_m3_period_flow_annual_consumers.py",
+      "tests/test_m3_evidence_roles.py",
+      "tests/test_w05_dated_contribution_contract.py",
+      "tests/test_w05_dated_contribution_composition.py",
+      "tests/test_w05_dated_contribution_output.py",
+      "tests/test_w05_root_temporal_lineage.py",
+      "tests/test_mixed_aggregate_recognition.py",
+      "tests/test_ci_smoke_plan.py",
+      "tests/test_pre_push_gate_git_hook_env.py",
+      "tests/test_p5_source_default_v2.py",
+      "tests/test_p5_source_default_cli_e2e.py",
+      "tests/test_company_wiki_source_ref_v2.py",
+      "tests/test_company_wiki_source_v2.py",
+      "tests/test_source_preparation.py",
+      "tests/test_data_contract.py",
+      "tests/test_summary_publication_lineage.py",
+      "tests/test_summary_long_excerpt.py",
+      "tests/test_w04_financial_communication_window.py",
+      "tests/test_recognition_bridge.py",
+      "tests/test_confidence_determinism.py",
+      "tests/test_confidence_source_freshness.py",
+      "tests/test_registry_confidence_generations.py",
+      "tests/test_real_source_quote_confidence.py",
+      "tests/test_sensitivity_dependency_dag.py",
+      "tests/test_published_foundation_roundtrip.py",
+      "tests/test_growth_driver_tree.py",
+      "tests/test_revenue_constraints.py",
+      "tests/test_schema_compatibility.py",
+      "tests/test_research_support_diagnostics.py",
+      "tests/test_scoped_calibration_support.py",
+      "tests/test_r1_source_boundary.py",
+      "tests/test_r1_target_scope.py",
+      "tests/test_r1_narrative_availability.py",
+      "tests/test_r1_local_preparation_observation.py"
+    ],
+    "unchanged": true,
+    "files_count": 41,
+    "note": "No old test file removed. Case count may grow with the new regression controls; not claiming a fresh complete CI run."
+  },
+  "local_smoke_nodes": [
+    "tests/test_p5_source_default_v2.py::test_default_entry_uses_source_ref_v2_without_opt_in",
+    "tests/test_p5_source_default_v2.py::test_repeated_default_preparation_reuses_without_shadow_jobs",
+    "tests/test_company_wiki_source_ref_v2.py::test_producer_golden_is_pinned_and_accepted_by_reader",
+    "tests/test_company_wiki_source_ref_v2.py::test_malformed_source_ref_is_rejected_before_reader_io",
+    "tests/test_company_wiki_source_v2.py::test_verified_ref_builds_schema_compatible_record_without_physical_path",
+    "tests/test_data_contract.py::DataContractTests::test_valid_document",
+    "tests/test_data_contract.py::DataContractTests::test_claim_must_bind_to_captured_snapshot",
+    "tests/test_data_contract.py::DataContractTests::test_rejects_future_information",
+    "tests/test_data_contract.py::DataContractTests::test_reported_revenue_dimension_is_enforced",
+    "tests/test_recognition_bridge.py::RecognitionBridgeTests::test_company_aggregates_recognized_segments",
+    "tests/test_published_foundation_roundtrip.py::test_foundation_inventory_roundtrips_actual_base_total_and_stock_ids",
+    "tests/test_published_foundation_roundtrip.py::test_forged_opening_base_or_adjustment_is_rejected"
+  ],
+  "actual_tests": [
+    {
+      "phase": "RED",
+      "result": "7F2P/24.63s",
+      "log": "red.log",
+      "scope": "Original actual registry failing case plus new executable CI/local plan tests. Collection-only measured696 cases under the old growing table (not696 executed tests)."
+    },
+    {
+      "phase": "GREEN",
+      "result": "38P/10.10s",
+      "log": "green.log",
+      "scope": "Registry confidence generations, CI/local executable command plans, unsupported mode, actual small collection, isolated real child Git; no complete behavior suite."
+    },
+    {
+      "phase": "actual_default_gate",
+      "result": "exit0; Ruff pass;12P/2.23s; overall8.9313772s",
+      "log": "local-gate.log",
+      "scope": "Real default CLI on normal host. Own TEMP root had zero remaining entries; no --ci/full suite run."
+    }
+  ],
+  "commands": {
+    "red": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q tests/test_registry_confidence_generations.py::test_reordering_otherwise_valid_rows_still_breaks_chain tests/test_ci_smoke_plan.py --tb=short --basetemp <owned>/r",
+    "green": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q tests/test_ci_smoke_plan.py tests/test_pre_push_gate_git_hook_env.py tests/test_registry_confidence_generations.py --tb=short --basetemp <owned>/g",
+    "actual_local": "C:/Miniconda/python.exe -B -X utf8 tools/pre_push_gate.py (TEMP/TMP in <owned>/local-temp)",
+    "ci": "python tools/pre_push_gate.py --ci (plan verified only; not executed in this node)"
+  },
+  "static": {
+    "ruff": "Whole scripts/tests/tools/e2e passed via actual default CLI",
+    "ast_parse_changed_python_files": 4,
+    "unchanged_runtime_29": true
+  },
+  "protected_wip": {
+    "before": {
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+    },
+    "after": {
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+    },
+    "all_unchanged": true,
+    "reference": "rf-commit.json restored originalCRLF before this work; no restore/stage/write by this author"
+  },
+  "previous_delivery_29": {
+    "before": {
+      "SKILL.md": "42937b6db815d53482b2bd2dca26e5f3d2efde10e3c8855699b2522c8bc2e588",
+      "references/compliance-contract.md": "3a09020c66a1e75948e8e470d3f48e4f9c1846e766b2d980a3cbf5ce7dc9f06c",
+      "references/data-governance.md": "fd61dbfe597f54ac03816976fcad47f9d157c724d9fe4ca4aabd1df37706ef38",
+      "scripts/company_wiki_narrative_contracts.py": "194649f53fb0d288420f3d2d574fbd8b4ca74986a505f338f02336ebcacf3a53",
+      "scripts/company_wiki_narrative_posix.py": "64e36fcbe5c541e45e3b4ca8afd0f1484fc26d22db55d7e1a40d31a453877c1c",
+      "scripts/company_wiki_narrative_process.py": "2996426ec668b6e8be3a878f5cdcd3004a3cb526b4183ab0d81d84a71b62754b",
+      "scripts/company_wiki_narrative_reader.py": "3893be41d94713a966cb81f7a2a9edb15dafb7759780b5c64763d1d285863c34",
+      "scripts/company_wiki_source_reader_v2.py": "faad30176392975725a3c66f0ab972ae3aa0842b7a34fa092c758efc35f94528",
+      "scripts/company_wiki_source_v2.py": "68c14925f0bfe419dd86a12d3b69d2c73a8222d8a7760ce3ce15a366410ec3d1",
+      "scripts/contracts/company_wiki_original.py": "536389cd97c2f1a5471cb8efc529354e3ac59d1b14f72365638418ce86db47f2",
+      "scripts/contracts/document.py": "1804bba0294a38d6bc55034cdfaac42b6e1e3f87807a6242e9038ce65d7e7f54",
+      "scripts/contracts/source_diagnostics.py": "d21c7aa9e0f72ec77b9fc9d580d8bb4689b256380170c611fa69f6d0d00bda72",
+      "scripts/narrative_source_preparation.py": "d51965272faa99e5601186775f4b467c8caff734d52db3b8c5833fc758cbcafd",
+      "scripts/narrative_summary_observations.py": "614553685d7647e7e75426cfdb22a14668736a2c11f0c53698acb3d1a7961d55",
+      "scripts/narrative_summary_provenance.py": "0ad15963e7182cd0de0d97a5771d1bd3da9c4a42784d2046e9c51a2098fdbd13",
+      "scripts/narrative_summary_usage.py": "e46089e5dccb7ee1552983228018e788aeab2c22593fd1b7fc223c2386b66916",
+      "scripts/publication_registry.py": "30a3541cd3c3d79778c5b473b1b3b755d41ccf5208dafe8cd7996e651352b6a1",
+      "scripts/research/input_evidence.py": "3b90fb9201c5c90dc9de45f6f6feedddb0827fb40594218b0684723691370d11",
+      "scripts/revenue_core.py": "28614d4e670c204d24cd8f65f872a56a29694692dc6a2f180af2f2f779fb8109",
+      "scripts/revenue_forecast.py": "7ad3eb9d7f1aec8bda83f80c342332e0b7643c229c9620784258472163872abb",
+      "scripts/source_preparation.py": "3c4aa95987b3d90fc807e76d9eb564f9797eb2e97cfd3b881758e74043fa2e07",
+      "tests/test_assessed_narrative_consumer.py": "b24cff02b3f10af9a9fdc8fc7023f53c336b4f0dcf7a6823aeb9ea8fb2aef798",
+      "tests/test_narrative_summary_usage.py": "9d8bebaa0d40dd1d3678148dc38b47f2d0480161d26cd5e8f50cacd1d02d0e65",
+      "tests/test_publication_registry.py": "64a55735e59f473527f1559abf1a7b00d41453ea5eb58ac83d4223104c04e199",
+      "tests/test_r1_narrative_availability.py": "dde78f0ccb0b1449adca435853eed5adfb00b217a3d2a51f5845f990ce13d0de",
+      "tests/test_r7_representation_and_index.py": "9d856ceede8b699820449f58a7a3a90ff83f2272d222172a885d442ffec5eb16",
+      "tests/test_shared_reading_narrative_contract.py": "95783e0007905cf2ade8ad9ba34b8f50d7a57d074a344c47a63af88dcd6d351c",
+      "tests/test_source_readability_wire.py": "3b49260fef31263c4160f006afd0169e81fbf79aaa73ee973be68eb257dd4598",
+      "tests/test_summary_long_excerpt.py": "8c5d2dcc675681fc2c2c6a989bae284b4a9138fbda3fc6097188d787a56399cd"
+    },
+    "after": {
+      "SKILL.md": "42937b6db815d53482b2bd2dca26e5f3d2efde10e3c8855699b2522c8bc2e588",
+      "references/compliance-contract.md": "3a09020c66a1e75948e8e470d3f48e4f9c1846e766b2d980a3cbf5ce7dc9f06c",
+      "references/data-governance.md": "fd61dbfe597f54ac03816976fcad47f9d157c724d9fe4ca4aabd1df37706ef38",
+      "scripts/company_wiki_narrative_contracts.py": "194649f53fb0d288420f3d2d574fbd8b4ca74986a505f338f02336ebcacf3a53",
+      "scripts/company_wiki_narrative_posix.py": "64e36fcbe5c541e45e3b4ca8afd0f1484fc26d22db55d7e1a40d31a453877c1c",
+      "scripts/company_wiki_narrative_process.py": "2996426ec668b6e8be3a878f5cdcd3004a3cb526b4183ab0d81d84a71b62754b",
+      "scripts/company_wiki_narrative_reader.py": "3893be41d94713a966cb81f7a2a9edb15dafb7759780b5c64763d1d285863c34",
+      "scripts/company_wiki_source_reader_v2.py": "faad30176392975725a3c66f0ab972ae3aa0842b7a34fa092c758efc35f94528",
+      "scripts/company_wiki_source_v2.py": "68c14925f0bfe419dd86a12d3b69d2c73a8222d8a7760ce3ce15a366410ec3d1",
+      "scripts/contracts/company_wiki_original.py": "536389cd97c2f1a5471cb8efc529354e3ac59d1b14f72365638418ce86db47f2",
+      "scripts/contracts/document.py": "1804bba0294a38d6bc55034cdfaac42b6e1e3f87807a6242e9038ce65d7e7f54",
+      "scripts/contracts/source_diagnostics.py": "d21c7aa9e0f72ec77b9fc9d580d8bb4689b256380170c611fa69f6d0d00bda72",
+      "scripts/narrative_source_preparation.py": "d51965272faa99e5601186775f4b467c8caff734d52db3b8c5833fc758cbcafd",
+      "scripts/narrative_summary_observations.py": "614553685d7647e7e75426cfdb22a14668736a2c11f0c53698acb3d1a7961d55",
+      "scripts/narrative_summary_provenance.py": "0ad15963e7182cd0de0d97a5771d1bd3da9c4a42784d2046e9c51a2098fdbd13",
+      "scripts/narrative_summary_usage.py": "e46089e5dccb7ee1552983228018e788aeab2c22593fd1b7fc223c2386b66916",
+      "scripts/publication_registry.py": "30a3541cd3c3d79778c5b473b1b3b755d41ccf5208dafe8cd7996e651352b6a1",
+      "scripts/research/input_evidence.py": "3b90fb9201c5c90dc9de45f6f6feedddb0827fb40594218b0684723691370d11",
+      "scripts/revenue_core.py": "28614d4e670c204d24cd8f65f872a56a29694692dc6a2f180af2f2f779fb8109",
+      "scripts/revenue_forecast.py": "7ad3eb9d7f1aec8bda83f80c342332e0b7643c229c9620784258472163872abb",
+      "scripts/source_preparation.py": "3c4aa95987b3d90fc807e76d9eb564f9797eb2e97cfd3b881758e74043fa2e07",
+      "tests/test_assessed_narrative_consumer.py": "b24cff02b3f10af9a9fdc8fc7023f53c336b4f0dcf7a6823aeb9ea8fb2aef798",
+      "tests/test_narrative_summary_usage.py": "9d8bebaa0d40dd1d3678148dc38b47f2d0480161d26cd5e8f50cacd1d02d0e65",
+      "tests/test_publication_registry.py": "64a55735e59f473527f1559abf1a7b00d41453ea5eb58ac83d4223104c04e199",
+      "tests/test_r1_narrative_availability.py": "dde78f0ccb0b1449adca435853eed5adfb00b217a3d2a51f5845f990ce13d0de",
+      "tests/test_r7_representation_and_index.py": "9d856ceede8b699820449f58a7a3a90ff83f2272d222172a885d442ffec5eb16",
+      "tests/test_shared_reading_narrative_contract.py": "95783e0007905cf2ade8ad9ba34b8f50d7a57d074a344c47a63af88dcd6d351c",
+      "tests/test_source_readability_wire.py": "3b49260fef31263c4160f006afd0169e81fbf79aaa73ee973be68eb257dd4598",
+      "tests/test_summary_long_excerpt.py": "8c5d2dcc675681fc2c2c6a989bae284b4a9138fbda3fc6097188d787a56399cd"
+    },
+    "all_unchanged": true
+  },
+  "raw_evidence": {
+    "red.log": {
+      "sha256": "32f026491b4291c462f777443cab26642f73f1f05fc4dfef7c843e3fb49273b2",
+      "bytes": 4405,
+      "content": "FFFF.FFF.                                                                [100%]\n================================== FAILURES ===================================\n___________ test_reordering_otherwise_valid_rows_still_breaks_chain ___________\ntests\\test_registry_confidence_generations.py:127: in test_reordering_otherwise_valid_rows_still_breaks_chain\n    assert any(\"chain break\" in problem for problem in registry.audit())\nE   assert False\nE    +  where False = any(<generator object test_reordering_otherwise_valid_rows_still_breaks_chain.<locals>.<genexpr> at 0x0000027CD9B8B1D0>)\n____________ test_workflow_explicitly_selects_the_complete_ci_plan ____________\ntests\\test_ci_smoke_plan.py:38: in test_workflow_explicitly_selects_the_complete_ci_plan\n    assert gates == [[\"python\", \"tools/pre_push_gate.py\", \"--ci\"]]\nE   AssertionError: assert [['python', '...ush_gate.py']] == [['python', '....py', '--ci']]\nE     \nE     At index 0 diff: ['python', 'tools/pre_push_gate.py'] != ['python', 'tools/pre_push_gate.py', '--ci']\nE     Use -v to get more diff\n_____ test_default_local_plan_is_fixed_small_smoke_without_repeated_mypy ______\ntests\\test_ci_smoke_plan.py:43: in test_default_local_plan_is_fixed_small_smoke_without_repeated_mypy\n    assert not any(command[1:3] == [\"-m\", \"mypy\"] for command in commands)\nE   assert not True\nE    +  where True = any(<generator object test_default_local_plan_is_fixed_small_smoke_without_repeated_mypy.<locals>.<genexpr> at 0x0000027CD9DB9970>)\n---------------------------- Captured stdout call -----------------------------\n\npre-push/CI checks GREEN\n_________ test_ci_preserves_the_complete_behavior_set_and_types_once __________\ntests\\test_ci_smoke_plan.py:58: in test_ci_preserves_the_complete_behavior_set_and_types_once\n    gate, commands = _commands(monkeypatch, [\"--ci\"])\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\test_ci_smoke_plan.py:28: in _commands\n    assert gate.main(mode) == 0\n           ^^^^^^^^^^^^^^^\ntools\\pre_push_gate.py:120: in main\n    raise ValueError(\"The daily gate has no skip flags; run milestone commands explicitly.\")\nE   ValueError: The daily gate has no skip flags; run milestone commands explicitly.\n__________ test_child_failure_remains_blocking_in_either_plan[mode1] __________\ntests\\test_ci_smoke_plan.py:76: in test_child_failure_remains_blocking_in_either_plan\n    assert gate.main(mode) == 19\n           ^^^^^^^^^^^^^^^\ntools\\pre_push_gate.py:120: in main\n    raise ValueError(\"The daily gate has no skip flags; run milestone commands explicitly.\")\nE   ValueError: The daily gate has no skip flags; run milestone commands explicitly.\n___________ test_local_nodes_really_collect_fewer_than_fifty_cases ____________\ntests\\test_ci_smoke_plan.py:89: in test_local_nodes_really_collect_fewer_than_fifty_cases\n    assert 0 < int(count.group(1)) < 50\nE   AssertionError: assert 696 < 50\nE    +  where 696 = int('696')\nE    +    where '696' = <built-in method group of re.Match object at 0x0000027CD9F13910>(1)\nE    +      where <built-in method group of re.Match object at 0x0000027CD9F13910> = <re.Match object; span=(80007, 80026), match='696 tests collected'>.group\n________________ test_unsupported_flags_are_not_a_skip_channel ________________\ntests\\test_ci_smoke_plan.py:94: in test_unsupported_flags_are_not_a_skip_channel\n    _gate().main([\"--skip-tests\"])\ntools\\pre_push_gate.py:120: in main\n    raise ValueError(\"The daily gate has no skip flags; run milestone commands explicitly.\")\nE   ValueError: The daily gate has no skip flags; run milestone commands explicitly.\n=========================== short test summary info ===========================\nFAILED tests/test_registry_confidence_generations.py::test_reordering_otherwise_valid_rows_still_breaks_chain\nFAILED tests/test_ci_smoke_plan.py::test_workflow_explicitly_selects_the_complete_ci_plan\nFAILED tests/test_ci_smoke_plan.py::test_default_local_plan_is_fixed_small_smoke_without_repeated_mypy\nFAILED tests/test_ci_smoke_plan.py::test_ci_preserves_the_complete_behavior_set_and_types_once\nFAILED tests/test_ci_smoke_plan.py::test_child_failure_remains_blocking_in_either_plan[mode1]\nFAILED tests/test_ci_smoke_plan.py::test_local_nodes_really_collect_fewer_than_fifty_cases\nFAILED tests/test_ci_smoke_plan.py::test_unsupported_flags_are_not_a_skip_channel\n7 failed, 2 passed in 24.63s\n"
+    },
+    "green.log": {
+      "sha256": "130300cf70acf9ed45fb90c704882569c82341e96b02fef89b0ee03fe77e140c",
+      "bytes": 102,
+      "content": "......................................                                   [100%]\n38 passed in 10.10s\n"
+    },
+    "local-gate.log": {
+      "sha256": "3843836f32a31b26a706d551bcd5466dbaf355fde37862793d5e5a12967c7246",
+      "bytes": 224,
+      "content": "\n=== ruff ===\nAll checks passed!\n\n=== fixed local source/ref/forecast smoke ===\n............                                                             [100%]\n12 passed in 2.23s\n\nlocal_fast_pass: fixed smoke GREEN\n"
+    },
+    "local-gate.json": {
+      "sha256": "f60264613fd370f7ffdc0244d49bd786751526f164933020ace83010782b3070",
+      "bytes": 170,
+      "content": "{\n  \"exit_code\": 0,\n  \"elapsed_seconds\": 8.9313772,\n  \"temporary_root\": \"C:/Users/郑曾波/Projects/company-wiki/tmp/r7rff/local-temp\",\n  \"remaining_entries\": 0\n}\n"
+    }
+  },
+  "git_status": " M .github/workflows/quality.yml\n M assurance/runs/daily_alert.jsonl\n M assurance/runs/monthly_manifest.json\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n M tests/test_ci_smoke_plan.py\n M tests/test_pre_push_gate_git_hook_env.py\n M tests/test_registry_confidence_generations.py\n M tools/pre_push_gate.py\n?? .planning/m8-native-adoption-20261031/\n?? .planning/source-quote-adoption-20261030/\n?? delivery/dashboard-b34-wuxi-20261101/\n?? delivery/dashboard-b37-wuxi-20261102/\n?? output/\n?? tools/README.md\n",
+  "limits": [
+    "No complete690/700 behavior rerun or remote CI",
+    "No model/source fetch/real document/production config/global skill install",
+    "No commit/push/merge/index writes by this author; ROOT owns normal publication",
+    "8.931s is one actual host observation, not a hard timing guarantee or a repeated benchmark",
+    "local_fast_pass means only its fixed12 checks. Authors still run relevant behavior tests; CI retains the full existing table."
+  ],
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rff",
+    "initially_absent": true,
+    "containment_parent": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp",
+    "containment_verified": true,
+    "reparse_points": 0,
+    "files_before": 46,
+    "bytes_before": 67154.0,
+    "logs_preserved_in_report": true,
+    "deletion": "Remove-Item -LiteralPath exact_owned_root -Recurse -Force",
+    "status": "restored_absent",
+    "exists_after": false
+  }
+}

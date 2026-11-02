@@ -223,3 +223,43 @@ a684正常push1787例到98%因180s deadline失败，总234.764s（无已见asser
 ## 工程发布闭合与T3开始（2026-11-02T03:21:02.100896+00:00）
 
 c6bb801b正常主线push167P35.54s/总41.944s成功，精确CI41381788839于03:19:00Z success。R6工程发布收据R6-publication.json；源码runtime10767b86不再待并线。复用tmp/w23-r6新T3分支，初次switch因已知hook mode-only遇新header失败；核字节完全等于HEAD后单次core.filemode=false切换，物理mode保持，无全局设置/删文件。6冻结test校验复制、0原件副本。TERM32+纯helper16共48P4.79s，tmp仍初始absent；其后adapter identity9→10并静态检查绿，最终合并需绑定新身份。NOTE/PHYS作者实施中，原47断言不动；真实H1/摘要/cache/RF仍OPEN。
+
+
+## T3工程冻版并行验收（2026-11-02T03:38:06.983965+00:00）
+
+TERM实际pipeline再生标题根因已在layout_hints同terminal owner修复；NOTE/PHYS9源/test冻结，原47断言不改。一次合组原47+ROOT24+NOTE11=82P3.56s/总4.298s，所有20文件SHA保持，短tmp恢复absent；0原件/模型。正常commit8782050b Ruff/全src mypy绿，正常candidate push167P29.04s/总35.361s；最终独审与现有完整CI41383874109并行，未并主线/未签真实H1。此前84P2自建fixture错误、1P1F自增总coverage误oracle等真实记录保留，不能反过来改全局geometry状态来绿。
+
+
+## T3独审P2：资源停止不能当来源范围结束（2026-11-02T03:42:17.519240+00:00）
+
+独立新7例1F/6P1.73s，显式note27body超24上限后仅b23 blocked，b24-26未证却成为无intro材料anchor；真实后续heading healthy仍可用。原82有界PASS与新RED均保留，不并线。NOTE/PHYS同owner直接修未证明后缀状态至真实新scope/source边界，并审计unit/page/budget/proof所有退出分支，既不提高上限/偷偷无界扫描，也不全局block健康范围。只新失败/变形定点和增量独审，原47断言不变；旧候选CI不代补丁。主线acb/c6仍工程已绿，0原件/模型操作。
+
+
+## T3同根返修再次冻结（2026-11-02T03:59:27.911796+00:00）
+
+fa8ef38e正常commit4文件，Ruff/全src mypy过，正常candidate push167P28.78s/总34.998s。cap/page/proof/budget停止与真scope边界状态区分修复，顺序冲突只负向拒证；局部opaque block token不重复限定64字符SHA格式。作者原4CI+新5控制9P1.76s，独立增量11P1.79s＋21SHA稳定PASS，旧失败不改，新精确CI41385431656在途。旧r2自有6测试副本逐SHA/remote核后删除20,889逻辑B并恢复初始absent；不宣称磁盘释放，原始资料0删。
+
+
+## T3工程完成、C观察器暴露记录丢失（2026-11-02T07:10:38.615780+00:00）
+
+fa8ef38e完整CI41385431656 success＋独审11P，ROOT正常FF并本地主线，21源码/test canonical LF一致且8个PWF/hook WIP字节/mode保持。单次H1 v3在execute返回后编码>300KB直接ValueError，未存收据；12/9/DB/raw/runtime前后结果未知，0收费/下载，不宣称产品失败或通过。先修观察器共因，不重真实source：canonical工具/流式有限encoder/小checkpoint/原子写，合成最终29P；独审首次提交race1F7P，ROOTfirst/owned两反控2F0.79s后no-clobber+重核修复，R2定点11P1.24s并增加未selected target结构投影。旧v3/FAIL保留，R2独审待收，所有源/记录原限额不提高。
+
+
+## R7全链过度门禁清理启动（2026-11-02）
+
+三个只读审计确认：多层表示大小、诊断形状、自动坏缓存和无关clean要求反向阻断。按R7-simplification-plan根修；先不重跑真实源或付费模型。T3 fa8ef38e已正常推master（167P，push78.141s）。观察器300KB/16KB/32祖先限制取消，不再按旧R2限额设计实施。
+
+
+## R7核心/工具阶段与下游联调（2026-11-02）
+
+G1/G2取消多层表示硬门、坏自动cache降诊断；额外HTTP后置128KB和extractive缺省56KB也确认非实际配置预算并去掉。核心14新P/HTTP2P、55控制54P1F后owned encoder1P修复，不拼325全绿；325受影响组sandbox停85%后290s主动停止、5fixture E后host精确3P，历史保留。工具新16F→16P，一次211域208P3F/144.67s，3个明确fixture/转义问题定点7P，不重复整组；真实payload预算仍保。ROOT下游24P1原skip/6.49s，fixture共享cache污染根修，RF四WIP和runtime SHA稳定、隔离目录恢复absent。均待最终大节点独审，G3/G4/G5尚在实施，真实C未重跑。
+
+
+## R7大节点独审与正常发布（2026-11-02）
+
+CWP67、RF29、ROOT17最终独审PASS；canonical alias安装小缝1RED→3P闭合。RF a922305a正常commit28.155s，precommit原hook绿；它恢复unstaged patch时仅两JSON WIP CRLF→LF，已用整文件SHA证明后恢复初始精确CRLF（不猜内容），4WIP保持。invest a7812888正常commit2.649s，工区干净。RF首次正常push690组689P1F1skip/73.53s，总84.924s，失败为v2自含索引重排仍沿旧v1链oracle，未推远端。跟进修该测试并拆local小smoke/保留完整CI，旧失败保留。真实C/部署尚未签，0供应商调用/原件读改。
+
+
+## R7工程收口与定点部署（2026-11-02）
+
+CWP fee04ba4正常commit75自有文件，source SHA/外来hook保持；首次瞬时index.lock竞争读确认消失后正常retry，未删锁。RF a922305a+499d5ca3与invest a7812888已正常推远端；RF新local12P1.16s/push10.532s，invest push6.362s，完整CI行为41表保留。原84.924s失败/v2旧oracle与独审修复保留。全局canonical定点RF21+invest2、三根69逻辑target SHA相同、6公开config保持、重复0写；三独立进程合成RF→invest/数字篡改反控PASS1.387s，网络/模型/原件0，UUID目录恢复absent。真实H1/摘要/恢复/RF实际采用仍OPEN，接下来核精确CI与单份H1，不把工程签成公司分析完成。

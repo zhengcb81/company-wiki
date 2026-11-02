@@ -1,0 +1,22 @@
+{
+  "schema_version": "source-observer-failed-attempt/1",
+  "attempt": "h1-t3-r2-v3",
+  "source_runtime_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "invocation": "python -B -X utf8 .planning/architecture-quality-20261101/real-acceptance/run_source_case.py --case r4-cn-h1-real --output .planning/architecture-quality-20261101/real-acceptance/h1-t3-r2-v3.json",
+  "exit_code": 1,
+  "error_type": "ValueError",
+  "error": "compact receipt size exceeded",
+  "stage": "Worker execute returned to result encoding; encoded record exceeded300000, guard raised before output write.",
+  "intended_receipt_exists": false,
+  "original_observer_sha256": "NOT_CAPTURED; ignored script was subsequently replaced by compatibility shim",
+  "seconds": "NOT_CAPTURED",
+  "required_units": "NOT_PERSISTED; cannot sign",
+  "context_pairs": "NOT_PERSISTED; cannot sign",
+  "database_before_after_proof": "NOT_PERSISTED; cannot sign",
+  "runtime_before_after_proof": "NOT_PERSISTED; cannot sign",
+  "status": "UNVERIFIABLE_OBSERVER_RECORD_LOST_NOT_A_SOURCE_ACCEPTANCE",
+  "paid_calls": 0,
+  "downloads": 0,
+  "replays_before_observer_repair": 0,
+  "root_cause": "Observer bounded file size only after full computation and discarded all observations on overflow; arbitrary complete producer/debug fields copied into report."
+}

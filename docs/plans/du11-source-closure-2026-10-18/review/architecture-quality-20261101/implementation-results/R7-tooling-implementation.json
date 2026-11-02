@@ -1,0 +1,1727 @@
+{
+  "schema_version": "r7-tooling-implementation/1",
+  "status": "IMPLEMENTED_FROZEN_PENDING_INDEPENDENT_REVIEW_AND_CI",
+  "author": "/root/rectification_review_a",
+  "date_utc": "2026-11-02T08:35:17.016560+00:00",
+  "source_freeze_manifest_sha256": "1dc7488c5fb8a89b0c0da15ab94097f2b177167789972125d227f7d29ea52e91",
+  "files_sha256": {
+    "tools/pre_push_gate.py": "840721fcd6101fed570ec5a60866aef140cf9157217d9210a4158e04a56002e3",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "f1f26a65c479df95553242e8834a8a9301a96c5d19b4a82c403c6e8dc525a5c2",
+    "tools/identity_audit/core.py": "a7e082aec7b6b7ccc1bed773a1dca31f86630f8ff16b536838d129efa40219e9",
+    "tools/identity_audit/receipt.py": "9a5ab821e0625338c1e67b57473a21235fa02fafaf258126d9f62f47363451a1",
+    "tools/narrative_g2_replay/report.py": "048c386c2965cf8a43dc76a3f5c2aaa9844e4b7bfc6cfaa6e72be910ebbd4911",
+    "tools/source_root_portability/report.py": "db6989cb171105d753316f4be8f2f070b5e6bbf9570195357f61577ebc3d2ebc",
+    "tools/storage_footprint/core.py": "50d9b77b5ce09bffc614e98c51868fff6be657cd631ad4c05273c1d8fb8c9217",
+    "tools/storage_footprint/report.py": "44843b17883b9fd41b4e60790aa36e8b992304413c0b40d00d4e06181d6aef2d",
+    "tools/storage_footprint/runner.py": "494f34b73f2e1760b1365c7873f567260e71fc29cb526f55dfd549cd8aa52c60",
+    "tools/storage_footprint/scan.py": "68cc881693a668f3dcc14555317615d3855d9f6262bae1f56057daec5f5ca4f7",
+    "tools/storage_footprint/tests/test_storage_footprint_fixture_integration.py": "d97dee241ec1ddd4f1226455590312140656d2a5ed4e9d6f8791dd3426a51930",
+    "tools/storage_footprint/tests/test_storage_footprint_unit.py": "3a4283ffa00e04f0dee08602937fc2d5cd52b810d632ff82e6cb0e89e5831a83",
+    "tools/raw_duplicate_audit/assessment.py": "2f729d00878ae90356177c13510cc6d298619b3565be9728d658ee976491fc4f",
+    "tools/raw_duplicate_audit/cli.py": "ad27beb142ab6e3974b19e2a3929b8b5f3765591c7b07ff86de1516572a04d27",
+    "tools/raw_duplicate_audit/core.py": "df865c2ba3b49f0966eac329a3b0925eb42ab6f5af48f9dcd43106fa63b20ad6",
+    "tools/raw_duplicate_audit/report.py": "0f49e244ca14e8516da04be02bcb1db28d33130ff6ac665b148c408d1806d7c0",
+    "tools/raw_duplicate_audit/tests/test_main_acceptance.py": "5d9156d12d4847dddec1928c2302dbf7ba3e3f6a2dae8e8ff42026c4c298d1db",
+    "tools/raw_duplicate_audit/tests/test_raw_duplicate_audit_e2e.py": "86a3690d1769dd0f2cf5b1483ecbc03849593edd1c38a849ab12337de51c0086",
+    "tools/raw_duplicate_audit/tests/test_raw_duplicate_audit_fixture_set.py": "11330a7bfcd71745f65a0c7d5571d79fa7cc61b0042c7e14276093a6ecbefd19",
+    "tools/cross_market_suite/runtime_evidence.py": "6261163e71e20bbbb14b10a83011b48a0e7ee0392c6e49d8d37551c0d0f6b98a",
+    "tools/holdout_replay/producer.py": "c23fdd8334cd5e72529dd34b81f26a730fa37d14a7c25bd2803d8d83e3f40bd1",
+    "tools/holdout_replay/worker.py": "f7dcc5a85a45fa8ae3da6e1f1359dd6d8f1e8d837a113a6fc83fd966239c5f0e",
+    "src/company_wiki/_bounded_process.py": "25dc804ddcbb15428238862d2c6a1b46958f96e9add12c96a4b339305c6743d9",
+    "tests/unit/test_tooling_output_policy.py": "fe7a33d726c3bbf0435eb6827d3bb941dded66a46fe0c17179f35320da5849d3",
+    "tests/unit/test_phase_c_read_capture.py": "de3b405d716e893e848c9cad32609a7935af3c62a20a969bdd500a647c39551f",
+    "tests/unit/test_pre_push_process_cleanup.py": "2a42c509db515b63e6ef136dc4b12e3eb26edf8e4c3f9dfec12c5c0845de7df7",
+    "tests/holdout/w18/test_runner_boundaries.py": "785ed1ca4c7a5633bd12096827d153ed9360a4892e62db443c7cc5206e7c4c69",
+    "tools/identity_audit/README.md": "a39492fbd2067fe77c85cbd72c74582a0ab95df1527442dc56daf40785e34485",
+    "tools/raw_duplicate_audit/README.md": "a9bf34e9e360d0c3a84b4dbc85046ffd8926e340238461db4df59b18457ee33e",
+    "tools/storage_footprint/README.md": "a5413463284eae195f3dbf1117dc99951feeeae58e67489be32ed05c8f24a0d8"
+  },
+  "files_count": 30,
+  "freeze_stable_at_report": true,
+  "changes": [
+    {
+      "id": "T01-log",
+      "paths": [
+        "src/company_wiki/_bounded_process.py",
+        "tools/pre_push_gate.py"
+      ],
+      "behavior": "Only engineering push checks choose log_tail=True. Both streams are continuously drained; deque retains a diagnostic tail and actual total-byte counts. Output volume never kills the child or produces code125. Default JSON/payload byte caps, full lifetime deadline/cleanup, actual nonzero exit and protocol callers remain unchanged."
+    },
+    {
+      "id": "T01-phase-c",
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "behavior": "No prepared/generation/capsule representation ceilings. Exact data/SHA/path/no-clobber remain. Successful owner prepare is called exactly once. Any capture/event callback exception is recorded as observation incomplete with owner artifact/status, checkpoint stage and error type. If event I/O fails, event_saved=false remains in memory and stderr fallback; the original owner result is returned without a second call. Original owner failures still propagate unchanged."
+    },
+    {
+      "id": "T01-complete-reports",
+      "paths": [
+        "tools/identity_audit",
+        "tools/narrative_g2_replay/report.py",
+        "tools/source_root_portability/report.py",
+        "tools/storage_footprint",
+        "tools/raw_duplicate_audit",
+        "tools/cross_market_suite/runtime_evidence.py"
+      ],
+      "behavior": "No fixed receipt/report byte veto or row/text truncation of required evidence. Identity source checks and request/work bounds remain. Footprint retains full errors/skipped paths and complete report; RAW-DUP keeps all observed groups/locators/diagnostics and accepts obsolete detail-row option without enforcing it. Cross-market complete metadata preserves all jobs/reservations/documents while still excluding source bodies by field selection. JSON/nonfinite or real output I/O failures do not claim saved=true. Existing report schemas/compatibility entry names retained."
+    },
+    {
+      "id": "T02",
+      "paths": [
+        "tools/holdout_replay/producer.py",
+        "tools/holdout_replay/worker.py"
+      ],
+      "behavior": "Worktree edits are diagnostic, not whole-tree permission. Git status is one optional call; failed status/branch observation stays unknown. Worker records actual loaded module relative paths/SHA/bytes after execution and rejects wrong runtime roots. Frozen sample/gold is not modified."
+    }
+  ],
+  "explicit_commit_pin": {
+    "source": "tools/holdout_replay/__main__.py:40 required --producer-commit; cmd_run:125 directly passes args.producer_commit; runner:107 verifies it before loading the manifest.",
+    "retained": "Explicit requested HEAD must match actual producer HEAD.",
+    "baseline_independence": "manifest.base_code_commit is not used as a runtime permission or compared with current HEAD. A new engine can replay the same frozen sample/gold with the new explicit producer argument; no gold rewrite or human signature is required. Worktree differences and post-execution source-file identities are recorded separately rather than described as immutable committed bytes."
+  },
+  "actual_results": {
+    "red": {
+      "raw_junit_sha256": "79eebb3b0f112cafcedc61e26f7e64f5e83d28107a80fc36ae4cd287196d7061",
+      "counts": {
+        "tests": 16,
+        "failures": 16,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit_seconds": 2.544,
+      "cases": [
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_captures_volume_without_changing_success[stdout]",
+          "status": "failed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_captures_volume_without_changing_success[stderr]",
+          "status": "failed",
+          "time": "0.001"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_preserves_actual_nonzero_exit_and_timeout",
+          "status": "failed",
+          "time": "0.001"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_push_runner_chooses_log_capture_not_payload_rejection",
+          "status": "failed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_large_generation_checkpoint_is_complete_and_still_immutable",
+          "status": "failed",
+          "time": "0.040"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_large_prepared_bytes_follow_successful_owner_and_keep_actual_binding",
+          "status": "failed",
+          "time": "0.207"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_replay_report_survives_old_size_threshold[tools.narrative_g2_replay.report]",
+          "status": "failed",
+          "time": "0.029"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_replay_report_survives_old_size_threshold[tools.source_root_portability.report]",
+          "status": "failed",
+          "time": "0.038"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_invalid_report_is_not_published[tools.narrative_g2_replay.report]",
+          "status": "failed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_invalid_report_is_not_published[tools.source_root_portability.report]",
+          "status": "failed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_footprint_preserves_every_error_and_full_locator",
+          "status": "failed",
+          "time": "0.007"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_duplicate_report_retains_all_groups_and_diagnostics_without_row_or_byte_gate",
+          "status": "failed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_identity_receipt_retains_large_audit_results",
+          "status": "failed",
+          "time": "0.069"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_runtime_evidence_retains_all_documents_and_large_valid_property",
+          "status": "failed",
+          "time": "0.006"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_runtime_file_identity_records_actual_loaded_module_without_clean_tree",
+          "status": "failed",
+          "time": "0.005"
+        },
+        {
+          "classname": "tests.holdout.w18.test_runner_boundaries",
+          "name": "test_producer_verification_keeps_exact_commit_and_reports_unrelated_changes",
+          "status": "failed",
+          "time": "0.642"
+        }
+      ],
+      "raw_console_sha256": "149f06065f109eec9f261b77398a6a6c0465a3df73595108855bf3a81d9914ec",
+      "redaction": "Initial failed bool assertion retained a kwargs dict containing inherited environment in pytest repr. Raw failure text is deliberately not copied; test now records only the boolean, and exact case identities/counts/raw artifact SHA are preserved. No environment values are included in this report."
+    },
+    "new": {
+      "raw_junit_sha256": "c9f105b3bb1be832ce3d317008f06f961e25c1dae199930c97166d498fda86d6",
+      "counts": {
+        "tests": 16,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit_seconds": 4.142,
+      "cases": [
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_captures_volume_without_changing_success[stdout]",
+          "status": "passed",
+          "time": "0.309"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_captures_volume_without_changing_success[stderr]",
+          "status": "passed",
+          "time": "0.271"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_preserves_actual_nonzero_exit_and_timeout",
+          "status": "passed",
+          "time": "0.584"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_push_runner_chooses_log_capture_not_payload_rejection",
+          "status": "passed",
+          "time": "0.007"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_large_generation_checkpoint_is_complete_and_still_immutable",
+          "status": "passed",
+          "time": "0.131"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_large_prepared_bytes_follow_successful_owner_and_keep_actual_binding",
+          "status": "passed",
+          "time": "0.365"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_replay_report_survives_old_size_threshold[tools.narrative_g2_replay.report]",
+          "status": "passed",
+          "time": "0.120"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_replay_report_survives_old_size_threshold[tools.source_root_portability.report]",
+          "status": "passed",
+          "time": "0.112"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_invalid_report_is_not_published[tools.narrative_g2_replay.report]",
+          "status": "passed",
+          "time": "0.010"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_invalid_report_is_not_published[tools.source_root_portability.report]",
+          "status": "passed",
+          "time": "0.010"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_footprint_preserves_every_error_and_full_locator",
+          "status": "passed",
+          "time": "0.063"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_duplicate_report_retains_all_groups_and_diagnostics_without_row_or_byte_gate",
+          "status": "passed",
+          "time": "0.023"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_identity_receipt_retains_large_audit_results",
+          "status": "passed",
+          "time": "0.008"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_runtime_evidence_retains_all_documents_and_large_valid_property",
+          "status": "passed",
+          "time": "0.008"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_runtime_file_identity_records_actual_loaded_module_without_clean_tree",
+          "status": "passed",
+          "time": "0.042"
+        },
+        {
+          "classname": "tests.holdout.w18.test_runner_boundaries",
+          "name": "test_producer_verification_keeps_exact_commit_and_reports_unrelated_changes",
+          "status": "passed",
+          "time": "0.864"
+        }
+      ],
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"16\" time=\"4.142\" timestamp=\"2026-11-02T08:14:07.174802+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_log_tail_captures_volume_without_changing_success[stdout]\" time=\"0.309\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_log_tail_captures_volume_without_changing_success[stderr]\" time=\"0.271\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_log_tail_preserves_actual_nonzero_exit_and_timeout\" time=\"0.584\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_push_runner_chooses_log_capture_not_payload_rejection\" time=\"0.007\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_large_generation_checkpoint_is_complete_and_still_immutable\" time=\"0.131\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_large_prepared_bytes_follow_successful_owner_and_keep_actual_binding\" time=\"0.365\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_complete_replay_report_survives_old_size_threshold[tools.narrative_g2_replay.report]\" time=\"0.120\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_complete_replay_report_survives_old_size_threshold[tools.source_root_portability.report]\" time=\"0.112\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_invalid_report_is_not_published[tools.narrative_g2_replay.report]\" time=\"0.010\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_invalid_report_is_not_published[tools.source_root_portability.report]\" time=\"0.010\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_complete_footprint_preserves_every_error_and_full_locator\" time=\"0.063\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_duplicate_report_retains_all_groups_and_diagnostics_without_row_or_byte_gate\" time=\"0.023\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_identity_receipt_retains_large_audit_results\" time=\"0.008\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_runtime_evidence_retains_all_documents_and_large_valid_property\" time=\"0.008\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_runtime_file_identity_records_actual_loaded_module_without_clean_tree\" time=\"0.042\" /><testcase classname=\"tests.holdout.w18.test_runner_boundaries\" name=\"test_producer_verification_keeps_exact_commit_and_reports_unrelated_changes\" time=\"0.864\" /></testsuite></testsuites>",
+      "raw_console_sha256": "6fff72216b8f587acf2c9a62f5c95281abc007cdc8f51d4899aa99fed1f7c20f",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\g7\\\\new\", \"requested_basetemp_len\": 45, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 16 items\n\ntests\\unit\\test_tooling_output_policy.py ...............                 [ 93%]\ntests\\holdout\\w18\\test_runner_boundaries.py .                            [100%]\n\n---- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g7\\new.xml ----\n============================= 16 passed in 4.24s ==============================\n"
+    },
+    "io-red": {
+      "raw_junit_sha256": "ef7a78bfc120f2620549a0cabac164f17ee0c3653011bf7ebbcc3bf6429eb81e",
+      "counts": {
+        "tests": 3,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit_seconds": 3.071,
+      "cases": [
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_prepare_observation_failure_keeps_real_owner_result_once[failure0]",
+          "status": "failed",
+          "time": "0.328"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_prepare_observation_failure_keeps_real_owner_result_once[failure1]",
+          "status": "failed",
+          "time": "0.167"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_unwritable_observer_event_is_unknown_not_fake_saved_or_owner_retry",
+          "status": "failed",
+          "time": "0.010"
+        }
+      ],
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"3\" skipped=\"0\" tests=\"3\" time=\"3.071\" timestamp=\"2026-11-02T08:18:52.287407+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_prepare_observation_failure_keeps_real_owner_result_once[failure0]\" time=\"0.328\"><failure message=\"OSError: synthetic disk error\">tests\\unit\\test_tooling_output_policy.py:94: in test_prepare_observation_failure_keeps_real_owner_result_once\n    version = observer.prepared_artifact_observer(owner, config)(store, draft, b\"actual owner bytes\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\phase_c_observer.py:131: in prepare\n    pin = capture_prepared_checkpoint(draft, payload, version, config)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_tooling_output_policy.py:92: in broken\n    raise failure\nE   OSError: synthetic disk error</failure></testcase><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_prepare_observation_failure_keeps_real_owner_result_once[failure1]\" time=\"0.167\"><failure message=\"ValueError: synthetic encoding error\">tests\\unit\\test_tooling_output_policy.py:94: in test_prepare_observation_failure_keeps_real_owner_result_once\n    version = observer.prepared_artifact_observer(owner, config)(store, draft, b\"actual owner bytes\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\phase_c_observer.py:131: in prepare\n    pin = capture_prepared_checkpoint(draft, payload, version, config)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_tooling_output_policy.py:92: in broken\n    raise failure\nE   ValueError: synthetic encoding error</failure></testcase><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_unwritable_observer_event_is_unknown_not_fake_saved_or_owner_retry\" time=\"0.010\"><failure message=\"OSError: synthetic observer unavailable\">tests\\unit\\test_tooling_output_policy.py:114: in test_unwritable_observer_event_is_unknown_not_fake_saved_or_owner_retry\n    assert observer.prepared_artifact_observer(owner, config)(None, None, b\"payload\") is version\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\phase_c_observer.py:131: in prepare\n    pin = capture_prepared_checkpoint(draft, payload, version, config)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_tooling_output_policy.py:107: in broken\n    raise OSError(\"synthetic observer unavailable\")\nE   OSError: synthetic observer unavailable</failure></testcase></testsuite></testsuites>",
+      "raw_console_sha256": "e1dadcf9a78792c8b07999fd61b7f7537482f2d63371722fcfb36d8f2722d335",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\g7\\\\ior\", \"requested_basetemp_len\": 45, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 3 items\n\ntests\\unit\\test_tooling_output_policy.py FFF                             [100%]\n\n================================== FAILURES ===================================\n___ test_prepare_observation_failure_keeps_real_owner_result_once[failure0] ___\ntests\\unit\\test_tooling_output_policy.py:94: in test_prepare_observation_failure_keeps_real_owner_result_once\n    version = observer.prepared_artifact_observer(owner, config)(store, draft, b\"actual owner bytes\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\phase_c_observer.py:131: in prepare\n    pin = capture_prepared_checkpoint(draft, payload, version, config)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_tooling_output_policy.py:92: in broken\n    raise failure\nE   OSError: synthetic disk error\n___ test_prepare_observation_failure_keeps_real_owner_result_once[failure1] ___\ntests\\unit\\test_tooling_output_policy.py:94: in test_prepare_observation_failure_keeps_real_owner_result_once\n    version = observer.prepared_artifact_observer(owner, config)(store, draft, b\"actual owner bytes\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\phase_c_observer.py:131: in prepare\n    pin = capture_prepared_checkpoint(draft, payload, version, config)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_tooling_output_policy.py:92: in broken\n    raise failure\nE   ValueError: synthetic encoding error\n___ test_unwritable_observer_event_is_unknown_not_fake_saved_or_owner_retry ___\ntests\\unit\\test_tooling_output_policy.py:114: in test_unwritable_observer_event_is_unknown_not_fake_saved_or_owner_retry\n    assert observer.prepared_artifact_observer(owner, config)(None, None, b\"payload\") is version\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\phase_c_observer.py:131: in prepare\n    pin = capture_prepared_checkpoint(draft, payload, version, config)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_tooling_output_policy.py:107: in broken\n    raise OSError(\"synthetic observer unavailable\")\nE   OSError: synthetic observer unavailable\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g7\\io-red.xml ---\n=========================== short test summary info ===========================\nFAILED tests/unit/test_tooling_output_policy.py::test_prepare_observation_failure_keeps_real_owner_result_once[failure0]\nFAILED tests/unit/test_tooling_output_policy.py::test_prepare_observation_failure_keeps_real_owner_result_once[failure1]\nFAILED tests/unit/test_tooling_output_policy.py::test_unwritable_observer_event_is_unknown_not_fake_saved_or_owner_retry\n============================== 3 failed in 3.18s ==============================\n"
+    },
+    "domain": {
+      "raw_junit_sha256": "c870ec3d0008bd62299ac978f2e214c464b59bf3aa8f00d03b9041360732c288",
+      "counts": {
+        "tests": 211,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit_seconds": 144.496,
+      "cases": [
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_captures_volume_without_changing_success[stdout]",
+          "status": "passed",
+          "time": "0.516"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_captures_volume_without_changing_success[stderr]",
+          "status": "passed",
+          "time": "0.610"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_log_tail_preserves_actual_nonzero_exit_and_timeout",
+          "status": "passed",
+          "time": "0.949"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_push_runner_chooses_log_capture_not_payload_rejection",
+          "status": "passed",
+          "time": "0.007"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_large_generation_checkpoint_is_complete_and_still_immutable",
+          "status": "passed",
+          "time": "0.076"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_large_prepared_bytes_follow_successful_owner_and_keep_actual_binding",
+          "status": "passed",
+          "time": "0.335"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_prepare_observation_failure_keeps_real_owner_result_once[failure0]",
+          "status": "passed",
+          "time": "0.200"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_prepare_observation_failure_keeps_real_owner_result_once[failure1]",
+          "status": "passed",
+          "time": "0.187"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_unwritable_observer_event_is_unknown_not_fake_saved_or_owner_retry",
+          "status": "passed",
+          "time": "0.006"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_replay_report_survives_old_size_threshold[tools.narrative_g2_replay.report]",
+          "status": "passed",
+          "time": "0.126"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_replay_report_survives_old_size_threshold[tools.source_root_portability.report]",
+          "status": "passed",
+          "time": "0.125"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_invalid_report_is_not_published[tools.narrative_g2_replay.report]",
+          "status": "passed",
+          "time": "0.007"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_invalid_report_is_not_published[tools.source_root_portability.report]",
+          "status": "passed",
+          "time": "0.012"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_complete_footprint_preserves_every_error_and_full_locator",
+          "status": "passed",
+          "time": "0.088"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_duplicate_report_retains_all_groups_and_diagnostics_without_row_or_byte_gate",
+          "status": "passed",
+          "time": "0.024"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_identity_receipt_retains_large_audit_results",
+          "status": "passed",
+          "time": "0.014"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_runtime_evidence_retains_all_documents_and_large_valid_property",
+          "status": "passed",
+          "time": "0.008"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_runtime_file_identity_records_actual_loaded_module_without_clean_tree",
+          "status": "passed",
+          "time": "0.041"
+        },
+        {
+          "classname": "tests.unit.test_bounded_process",
+          "name": "test_child_output_is_stopped_during_read_at_cap[stdout]",
+          "status": "passed",
+          "time": "0.459"
+        },
+        {
+          "classname": "tests.unit.test_bounded_process",
+          "name": "test_child_output_is_stopped_during_read_at_cap[stderr]",
+          "status": "passed",
+          "time": "0.431"
+        },
+        {
+          "classname": "tests.unit.test_bounded_process",
+          "name": "test_nonreading_stdin_is_inside_whole_deadline",
+          "status": "passed",
+          "time": "0.323"
+        },
+        {
+          "classname": "tests.unit.test_bounded_process",
+          "name": "test_nested_process_ownership_succeeds_without_neighbor_import",
+          "status": "passed",
+          "time": "0.850"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_gate",
+          "name": "test_fast_inventory_keeps_the_four_reuse_receipt_regressions_without_a_whole_file",
+          "status": "passed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_gate",
+          "name": "test_daily_gate_has_one_total_deadline_and_last_node_diagnostics",
+          "status": "passed",
+          "time": "0.020"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_gate",
+          "name": "test_manual_full_gate_retains_its_original_deadline",
+          "status": "passed",
+          "time": "0.025"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_process_cleanup",
+          "name": "test_timeout_stops_the_owned_grandchild_before_return",
+          "status": "passed",
+          "time": "8.048"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_process_cleanup",
+          "name": "test_child_failure_keeps_actual_exit_code_and_diagnostic",
+          "status": "passed",
+          "time": "0.433"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_process_cleanup",
+          "name": "test_noisy_success_retains_tail_without_changing_actual_exit[stdout]",
+          "status": "failed",
+          "time": "0.417"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_process_cleanup",
+          "name": "test_noisy_success_retains_tail_without_changing_actual_exit[stderr]",
+          "status": "failed",
+          "time": "0.375"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_process_cleanup",
+          "name": "test_venv_timeout_releases_descendant_file_before_scratch_cleanup",
+          "status": "passed",
+          "time": "8.070"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_temp_scope",
+          "name": "test_deep_checkout_does_not_reject_checks_or_keep_scratch[0]",
+          "status": "passed",
+          "time": "0.440"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_temp_scope",
+          "name": "test_deep_checkout_does_not_reject_checks_or_keep_scratch[7]",
+          "status": "passed",
+          "time": "0.402"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_temp_scope",
+          "name": "test_owned_temp_is_removed_on_transport_exception",
+          "status": "passed",
+          "time": "0.020"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_temp_scope",
+          "name": "test_check_child_does_not_inherit_hook_repository_context",
+          "status": "passed",
+          "time": "0.394"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_temp_scope",
+          "name": "test_timed_out_check_preserves_progress_and_returns_red[False]",
+          "status": "passed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_temp_scope",
+          "name": "test_timed_out_check_preserves_progress_and_returns_red[True]",
+          "status": "passed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_temp_scope",
+          "name": "test_timeout_diagnostic_survives_a_legacy_console_encoding",
+          "status": "passed",
+          "time": "0.007"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_public_read_preserves_content_vs_qualified_request_semantics[None-True]",
+          "status": "passed",
+          "time": "0.015"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_public_read_preserves_content_vs_qualified_request_semantics[selection1-True]",
+          "status": "passed",
+          "time": "0.015"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_public_read_preserves_content_vs_qualified_request_semantics[selection2-False]",
+          "status": "passed",
+          "time": "0.010"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_unknown_or_contradictory_read_selection_cannot_disable_filters[selection0]",
+          "status": "passed",
+          "time": "0.005"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_unknown_or_contradictory_read_selection_cannot_disable_filters[selection1]",
+          "status": "passed",
+          "time": "0.008"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_exact_content_read_keeps_artifact_sha_and_full_source_ref_binding[None]",
+          "status": "passed",
+          "time": "1.776"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_exact_content_read_keeps_artifact_sha_and_full_source_ref_binding[artifact_sha]",
+          "status": "passed",
+          "time": "0.066"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_exact_content_read_keeps_artifact_sha_and_full_source_ref_binding[source_ref]",
+          "status": "passed",
+          "time": "0.073"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_formal_prepare_is_captured_before_activation_and_repeated_bytes_are_immutable",
+          "status": "passed",
+          "time": "0.325"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_failed_formal_prepare_does_not_create_a_prepared_checkpoint",
+          "status": "passed",
+          "time": "0.016"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_capture_rejects_changed_history_wrong_source_but_not_presentation_size",
+          "status": "passed",
+          "time": "0.275"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_actual_generation_checkpoint_is_complete_and_does_not_overwrite_a_changed_run",
+          "status": "passed",
+          "time": "0.048"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_prepared_capsule_binds_actual_generation_and_survives_owner_activation",
+          "status": "passed",
+          "time": "0.261"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_large_generation_and_capsule_keep_all_required_metadata",
+          "status": "passed",
+          "time": "0.271"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_read_capture",
+          "name": "test_prepared_capsule_cannot_borrow_another_generations_checkpoint",
+          "status": "passed",
+          "time": "0.188"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_pre_reservation_selection_checkpoint_retains_diagnostics_and_is_immutable",
+          "status": "passed",
+          "time": "0.068"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_live_source_oracle_cannot_pass_with_no_required_business_checks[facts0-REQUIRED_BUSINESS_EMPTY]",
+          "status": "passed",
+          "time": "0.027"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_live_source_oracle_cannot_pass_with_no_required_business_checks[facts1-REQUIRED_BUSINESS_EMPTY]",
+          "status": "passed",
+          "time": "0.018"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_live_source_oracle_cannot_pass_with_no_required_business_checks[facts2-target_kind]",
+          "status": "passed",
+          "time": "0.022"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_omitted_fact_kind_uses_the_canonical_business_default_instead_of_zero_checks",
+          "status": "passed",
+          "time": "0.023"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_a_valid_fact_does_not_hide_an_invalid_target_kind_from_the_source_oracle",
+          "status": "passed",
+          "time": "0.021"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_repair_subset_cannot_borrow_gold_from_an_unsent_task[reading-model-input/4]",
+          "status": "passed",
+          "time": "0.019"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_repair_subset_cannot_borrow_gold_from_an_unsent_task[reading-model-input/5]",
+          "status": "passed",
+          "time": "0.026"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_first_request_requires_gold_inside_actual_sent_tasks",
+          "status": "passed",
+          "time": "0.023"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_repair_reports_unsent_gold_without_requiring_completed_tasks_again",
+          "status": "passed",
+          "time": "0.025"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_task_shared_references_keep_actual_support_and_context_closure",
+          "status": "passed",
+          "time": "0.031"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_observer",
+          "name": "test_gold_anchors_in_different_tasks_cannot_form_one_task_support_set",
+          "status": "passed",
+          "time": "0.015"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_0_fixture_contract",
+          "name": "test_lane_fixtures_resolve_to_this_lane",
+          "status": "passed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_0_fixture_contract",
+          "name": "test_fixture_builds_a_readable_indexed_source",
+          "status": "passed",
+          "time": "0.495"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_ref_mismatch_is_reported_not_raised",
+          "status": "passed",
+          "time": "0.309"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_ref_mime_type_mismatch_is_reported",
+          "status": "passed",
+          "time": "0.242"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_ref_passes_when_the_request_matches_the_catalog",
+          "status": "passed",
+          "time": "0.252"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_replaced_bytes_of_the_same_length_fail_the_bytes_check",
+          "status": "passed",
+          "time": "0.287"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_bytes_pass_when_the_original_matches_the_requested_digest",
+          "status": "passed",
+          "time": "0.254"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_security_id_width_drift_fails_identity",
+          "status": "passed",
+          "time": "0.421"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_market_is_never_borrowed_across_markets",
+          "status": "passed",
+          "time": "0.360"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_expect_null_requires_an_actual_null_observation",
+          "status": "passed",
+          "time": "0.339"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_expect_null_passes_when_both_sides_are_unknown",
+          "status": "passed",
+          "time": "0.357"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_identity_is_not_applicable_when_the_manifest_has_no_identity",
+          "status": "passed",
+          "time": "0.463"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_expect_period_against_a_null_manifest_period_fails",
+          "status": "passed",
+          "time": "0.332"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_fabricated_date_without_evidence_conflicts_with_an_unknown_expectation",
+          "status": "passed",
+          "time": "0.323"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_unknown_publication_date_stays_unknown_and_is_marked_unverified",
+          "status": "passed",
+          "time": "0.365"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_a_non_iso_publication_date_fails_the_period_check",
+          "status": "passed",
+          "time": "0.286"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_period_passes_when_the_manifest_agrees_with_expect",
+          "status": "passed",
+          "time": "0.334"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_unknown_availability_is_never_reported_as_a_pass",
+          "status": "passed",
+          "time": "0.364"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_verified_capture_evidence_is_passed_through_verbatim",
+          "status": "passed",
+          "time": "0.336"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_span_text_off_by_one_character_fails_grounding",
+          "status": "passed",
+          "time": "0.361"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_span_with_a_page_coordinate_is_not_applicable",
+          "status": "passed",
+          "time": "0.326"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_grounded_span_passes_and_reports_its_offsets",
+          "status": "passed",
+          "time": "0.287"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_a_wire_invalid_span_is_blocked_not_crashed",
+          "status": "passed",
+          "time": "0.246"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_a_wire_invalid_span_exits_three_with_one_json_line",
+          "status": "passed",
+          "time": "3.240"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_a_span_beyond_eof_is_ungrounded_not_clamped",
+          "status": "passed",
+          "time": "0.254"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_a_unit_token_absent_from_the_original_fails_the_unit_check",
+          "status": "passed",
+          "time": "0.265"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_the_real_unit_marker_is_reported_with_its_offsets",
+          "status": "passed",
+          "time": "0.258"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_no_unit_token_is_not_applicable_with_an_explicit_reason",
+          "status": "passed",
+          "time": "0.265"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_an_empty_source_refs_array_is_blocked_not_passed",
+          "status": "passed",
+          "time": "0.223"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_a_wrong_request_schema_version_is_blocked",
+          "status": "passed",
+          "time": "0.212"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_ref_extra_field_is_rejected",
+          "status": "passed",
+          "time": "0.226"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_duplicate_json_keys_are_blocked",
+          "status": "passed",
+          "time": "2.318"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_too_many_source_refs_is_blocked_by_the_limit",
+          "status": "passed",
+          "time": "0.205"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_the_audit_never_writes_anything_but_the_out_file",
+          "status": "passed",
+          "time": "2.724"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_out_file_changes_nothing_but_the_out_file",
+          "status": "passed",
+          "time": "2.380"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_a_failing_check_exits_two_and_a_clean_audit_exits_zero",
+          "status": "passed",
+          "time": "15.547"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_invalid_arguments_are_blocked_and_never_print_usage_to_stdout",
+          "status": "passed",
+          "time": "9.508"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_out_is_refused_when_it_names_a_directory",
+          "status": "passed",
+          "time": "5.430"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_out_refuses_parent_traversal",
+          "status": "passed",
+          "time": "4.897"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_pretty_out_is_content_equivalent_to_the_single_line_receipt",
+          "status": "passed",
+          "time": "7.692"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_1_checks",
+          "name": "test_manifest_matches_the_export_v2_cli_field_by_field",
+          "status": "passed",
+          "time": "6.774"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_the_receipt_shell_has_exactly_the_frozen_fields",
+          "status": "passed",
+          "time": "0.699"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_generated_at_is_a_utc_second_precision_stamp",
+          "status": "passed",
+          "time": "0.474"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_inputs_bind_the_config_and_the_request_bytes",
+          "status": "passed",
+          "time": "0.395"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_limitations_are_declared",
+          "status": "passed",
+          "time": "0.628"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_every_check_uses_the_frozen_status_vocabulary",
+          "status": "passed",
+          "time": "0.413"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_counts_reconcile_with_the_per_source_checks",
+          "status": "passed",
+          "time": "0.311"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_a_source_with_a_failure_reports_fail_at_both_levels",
+          "status": "passed",
+          "time": "0.521"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_an_unreadable_catalog_is_unavailable_not_a_pass",
+          "status": "passed",
+          "time": "0.509"
+        },
+        {
+          "classname": "tests.unit.test_identity_audit.test_2_receipt_shell",
+          "name": "test_the_single_line_json_is_canonical",
+          "status": "passed",
+          "time": "3.950"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_sdk_command_uses_isolated_cwp_code_and_state_but_existing_external_interpreter",
+          "status": "passed",
+          "time": "0.046"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_incomplete_work_never_becomes_pass[FAIL]",
+          "status": "passed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_incomplete_work_never_becomes_pass[BLOCKED]",
+          "status": "passed",
+          "time": "0.015"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_incomplete_work_never_becomes_pass[NOT_RUN]",
+          "status": "passed",
+          "time": "0.005"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_format_capability_uses_named_causes_without_calling_incomplete_a_success[SOURCE_LANGUAGE_UNDETERMINED-SOURCE_LANGUAGE_UNDETERMINED]",
+          "status": "passed",
+          "time": "0.012"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_format_capability_uses_named_causes_without_calling_incomplete_a_success[SOURCE_LANGUAGE_PDF_UNAVAILABLE-SOURCE_LANGUAGE_PDF_UNAVAILABLE]",
+          "status": "passed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_format_capability_uses_named_causes_without_calling_incomplete_a_success[SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED-None]",
+          "status": "passed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_format_capability_uses_named_causes_without_calling_incomplete_a_success[NARRATIVE_BATCH_ValueError-None]",
+          "status": "passed",
+          "time": "0.013"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_format_capability_uses_named_causes_without_calling_incomplete_a_success[unsupported in arbitrary provider text-None]",
+          "status": "passed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_incomplete_parser_requires_actual_opaque_body_proof_and_no_other_failure",
+          "status": "passed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_partial_unpublished_opaque_parser_remains_blocked_not_pass",
+          "status": "passed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_opaque_body_does_not_hide_an_unrelated_top_level_failure[partial]",
+          "status": "passed",
+          "time": "0.008"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_opaque_body_does_not_hide_an_unrelated_top_level_failure[failed]",
+          "status": "passed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_invalid_document_errors_stay_unclassified[None]",
+          "status": "passed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_invalid_document_errors_stay_unclassified[PARSER_INCOMPLETE]",
+          "status": "passed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_invalid_document_errors_stay_unclassified[errors2]",
+          "status": "passed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_removed_failed_checkpoint_is_a_regression",
+          "status": "passed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_changed_experiment_cannot_claim_improvement[mode]",
+          "status": "passed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_changed_experiment_cannot_claim_improvement[spec_sha256]",
+          "status": "passed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_changed_experiment_cannot_claim_improvement[checkpoints_sha256]",
+          "status": "passed",
+          "time": "0.005"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_real_improvement_and_regression_are_separate",
+          "status": "passed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_faster_but_failed_run_is_not_called_a_quality_improvement",
+          "status": "passed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_corrupt_portable_raw_is_refused",
+          "status": "passed",
+          "time": "0.195"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_escape_is_refused",
+          "status": "passed",
+          "time": "0.020"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_failure_restores_owned_directory_and_preserves_sentinel",
+          "status": "passed",
+          "time": "0.043"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_genuine_wrong_percentage_point_is_caught",
+          "status": "passed",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_readonly_publication_registry_is_removed_from_owned_test_tree",
+          "status": "passed",
+          "time": "0.035"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_peer_risk_must_not_turn_into_positive_company_triangulation",
+          "status": "passed",
+          "time": "0.010"
+        },
+        {
+          "classname": "tests.unit.test_cross_market_suite",
+          "name": "test_undated_capacity_target_cannot_gain_an_invented_year",
+          "status": "passed",
+          "time": "0.002"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_non_chunk_aligned_read_cap_is_never_exceeded",
+          "status": "passed",
+          "time": "0.040"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_exact_eof_budget_can_complete_without_an_extra_read[0]",
+          "status": "passed",
+          "time": "0.017"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_exact_eof_budget_can_complete_without_an_extra_read[123]",
+          "status": "passed",
+          "time": "0.022"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_exact_eof_budget_can_complete_without_an_extra_read[1048576]",
+          "status": "passed",
+          "time": "0.035"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_local_output_never_writes_protected_inputs[raw]",
+          "status": "passed",
+          "time": "0.287"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_local_output_never_writes_protected_inputs[config]",
+          "status": "passed",
+          "time": "0.201"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_local_output_never_writes_protected_inputs[catalog]",
+          "status": "passed",
+          "time": "0.170"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_local_output_never_writes_protected_inputs[same_output]",
+          "status": "passed",
+          "time": "0.201"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_overwrite_does_not_destroy_unknown_old_files[False]",
+          "status": "passed",
+          "time": "0.220"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_overwrite_does_not_destroy_unknown_old_files[True]",
+          "status": "passed",
+          "time": "0.201"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_atomic_report_does_not_clobber_unknown_adjacent_tmp",
+          "status": "passed",
+          "time": "0.041"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_cloud_candidate_has_no_duplicate_upper_bound_or_allocation",
+          "status": "passed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_partial_file_read_is_accounted_in_group_and_file",
+          "status": "passed",
+          "time": "0.020"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_cloud_attribute_changed_after_scan_is_not_opened",
+          "status": "passed",
+          "time": "0.017"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_identity_changed_after_scan_is_not_verified",
+          "status": "passed",
+          "time": "0.021"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_windows_optional_allocation_is_unknown_instead_of_logical_size",
+          "status": "passed",
+          "time": "0.023"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_invalid_config_never_replaced_by_a_refusal_report",
+          "status": "passed",
+          "time": "0.046"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_actual_cli_readonly_and_budget_contract[321-partial]",
+          "status": "passed",
+          "time": "3.472"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_actual_cli_readonly_and_budget_contract[1048576-succeeded]",
+          "status": "passed",
+          "time": "3.290"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_io_diagnostic_does_not_put_machine_path_in_git_report",
+          "status": "passed",
+          "time": "0.024"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_full_report_preserves_non_group_diagnostics",
+          "status": "passed",
+          "time": "0.133"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_scan_mode_accounts_every_shape_without_reading_bytes",
+          "status": "passed",
+          "time": "1.205"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_hardlink_two_names_is_one_physical_copy",
+          "status": "passed",
+          "time": "1.083"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_verify_mode_confirms_only_real_duplicates",
+          "status": "passed",
+          "time": "1.009"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_no_candidates_is_a_legal_result",
+          "status": "passed",
+          "time": "0.230"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_changing_file_is_never_verified",
+          "status": "passed",
+          "time": "0.996"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_acl_denied_file_is_reported_separately",
+          "status": "passed",
+          "time": "1.114"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_read_budget_stops_the_run_and_keeps_a_partial_report",
+          "status": "passed",
+          "time": "1.280"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_deadline_stops_observation_and_keeps_a_partial_report",
+          "status": "passed",
+          "time": "0.877"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_unknown_previous_report_is_never_overwritten",
+          "status": "passed",
+          "time": "1.022"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_output_overlapping_a_data_root_is_refused_without_writing",
+          "status": "passed",
+          "time": "1.028"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_originals_catalog_and_config_are_unchanged",
+          "status": "passed",
+          "time": "1.154"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set",
+          "name": "test_report_retains_complete_group_accounting",
+          "status": "passed",
+          "time": "0.982"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_category_totals_never_double_count",
+          "status": "passed",
+          "time": "0.062"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_originals_final_summaries_and_tmp_stay_separate",
+          "status": "passed",
+          "time": "0.111"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_unmatched_path_is_unknown",
+          "status": "passed",
+          "time": "0.005"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_hardlink_paths_reported_as_metadata_candidate",
+          "status": "passed",
+          "time": "0.022"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_hardlink_identity_unknown_without_inode",
+          "status": "passed",
+          "time": "0.016"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_reparse_link_out_of_root_is_never_followed",
+          "status": "passed",
+          "time": "0.091"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_cloud_placeholder_entry_is_skipped_not_measured",
+          "status": "passed",
+          "time": "0.023"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_directory_permission_error_marks_partial",
+          "status": "passed",
+          "time": "0.060"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_file_budget_stops_exactly_at_limit",
+          "status": "passed",
+          "time": "0.047"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_deadline_budget_stops_scan",
+          "status": "passed",
+          "time": "0.018"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_partial_report_is_never_labeled_complete",
+          "status": "passed",
+          "time": "0.040"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_allocated_bytes_stay_null_with_reason",
+          "status": "passed",
+          "time": "0.025"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_package_contains_no_physical_size_fakery",
+          "status": "passed",
+          "time": "0.009"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_output_inside_root_is_refused",
+          "status": "passed",
+          "time": "0.029"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_unknown_existing_output_is_refused_unchanged",
+          "status": "passed",
+          "time": "0.053"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_own_report_can_be_rewritten",
+          "status": "passed",
+          "time": "0.088"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_full_report_is_not_truncated_by_legacy_size_option",
+          "status": "passed",
+          "time": "0.076"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_error_paths_remain_complete_in_persisted_reports",
+          "status": "passed",
+          "time": "0.003"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_failed_report_write_leaves_no_temp_output",
+          "status": "passed",
+          "time": "0.025"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_runner_publishes_complete_report_without_size_policy",
+          "status": "passed",
+          "time": "0.112"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_scan_never_opens_original_bodies",
+          "status": "passed",
+          "time": "0.085"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_databases_are_measured_but_never_opened",
+          "status": "passed",
+          "time": "0.032"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_auto_recovery_materials_are_never_deletable",
+          "status": "passed",
+          "time": "0.027"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_calls_counters_are_always_zero",
+          "status": "passed",
+          "time": "0.059"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_report_paths_are_root_relative",
+          "status": "passed",
+          "time": "0.062"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_invalid_root_is_refused",
+          "status": "passed",
+          "time": "0.033"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_invalid_limits_are_refused",
+          "status": "passed",
+          "time": "0.034"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_unit",
+          "name": "test_retention_buckets_cover_every_category",
+          "status": "passed",
+          "time": "0.056"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_fixture_integration",
+          "name": "test_static_fixture_scan_is_complete_exact_and_non_mutating",
+          "status": "failed",
+          "time": "0.074"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_fixture_integration",
+          "name": "test_runtime_fixture_all_categories_and_buckets",
+          "status": "passed",
+          "time": "0.164"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_fixture_integration",
+          "name": "test_runtime_fixture_budget_stop_is_partial",
+          "status": "passed",
+          "time": "0.082"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_fixture_integration",
+          "name": "test_directory_permission_failure_is_reported_not_hidden",
+          "status": "passed",
+          "time": "0.077"
+        },
+        {
+          "classname": "tests.holdout.w18.test_runner_boundaries",
+          "name": "test_producer_verification_keeps_exact_commit_and_reports_unrelated_changes",
+          "status": "passed",
+          "time": "1.403"
+        },
+        {
+          "classname": "tests.holdout.w18.test_runner_boundaries",
+          "name": "test_run_reports_unavailable_without_substitution",
+          "status": "passed",
+          "time": "1.152"
+        },
+        {
+          "classname": "tests.holdout.w18.test_runner_boundaries",
+          "name": "test_run_fails_on_sha_mismatched_original",
+          "status": "passed",
+          "time": "1.026"
+        }
+      ],
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"3\" skipped=\"0\" tests=\"211\" time=\"144.496\" timestamp=\"2026-11-02T08:21:41.396669+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_log_tail_captures_volume_without_changing_success[stdout]\" time=\"0.516\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_log_tail_captures_volume_without_changing_success[stderr]\" time=\"0.610\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_log_tail_preserves_actual_nonzero_exit_and_timeout\" time=\"0.949\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_push_runner_chooses_log_capture_not_payload_rejection\" time=\"0.007\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_large_generation_checkpoint_is_complete_and_still_immutable\" time=\"0.076\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_large_prepared_bytes_follow_successful_owner_and_keep_actual_binding\" time=\"0.335\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_prepare_observation_failure_keeps_real_owner_result_once[failure0]\" time=\"0.200\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_prepare_observation_failure_keeps_real_owner_result_once[failure1]\" time=\"0.187\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_unwritable_observer_event_is_unknown_not_fake_saved_or_owner_retry\" time=\"0.006\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_complete_replay_report_survives_old_size_threshold[tools.narrative_g2_replay.report]\" time=\"0.126\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_complete_replay_report_survives_old_size_threshold[tools.source_root_portability.report]\" time=\"0.125\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_invalid_report_is_not_published[tools.narrative_g2_replay.report]\" time=\"0.007\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_invalid_report_is_not_published[tools.source_root_portability.report]\" time=\"0.012\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_complete_footprint_preserves_every_error_and_full_locator\" time=\"0.088\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_duplicate_report_retains_all_groups_and_diagnostics_without_row_or_byte_gate\" time=\"0.024\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_identity_receipt_retains_large_audit_results\" time=\"0.014\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_runtime_evidence_retains_all_documents_and_large_valid_property\" time=\"0.008\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_runtime_file_identity_records_actual_loaded_module_without_clean_tree\" time=\"0.041\" /><testcase classname=\"tests.unit.test_bounded_process\" name=\"test_child_output_is_stopped_during_read_at_cap[stdout]\" time=\"0.459\" /><testcase classname=\"tests.unit.test_bounded_process\" name=\"test_child_output_is_stopped_during_read_at_cap[stderr]\" time=\"0.431\" /><testcase classname=\"tests.unit.test_bounded_process\" name=\"test_nonreading_stdin_is_inside_whole_deadline\" time=\"0.323\" /><testcase classname=\"tests.unit.test_bounded_process\" name=\"test_nested_process_ownership_succeeds_without_neighbor_import\" time=\"0.850\" /><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_fast_inventory_keeps_the_four_reuse_receipt_regressions_without_a_whole_file\" time=\"0.004\" /><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_daily_gate_has_one_total_deadline_and_last_node_diagnostics\" time=\"0.020\" /><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_manual_full_gate_retains_its_original_deadline\" time=\"0.025\" /><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_timeout_stops_the_owned_grandchild_before_return\" time=\"8.048\" /><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_child_failure_keeps_actual_exit_code_and_diagnostic\" time=\"0.433\" /><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_noisy_success_retains_tail_without_changing_actual_exit[stdout]\" time=\"0.417\"><failure message=\"assert 1 == 0&#10; +  where 1 = &lt;function _run at 0x0000022457AE4400&gt;(['C:\\\\Miniconda\\\\python.exe', '-c', &quot;import sys;stream=sys.stdout;stream.write('x'*8192);stream.write('final progress\\n');stream.flush()&quot;], 'noisy success', timeout=4)&#10; +    where &lt;function _run at 0x0000022457AE4400&gt; = gate._run\">tests\\unit\\test_pre_push_process_cleanup.py:70: in test_noisy_success_retains_tail_without_changing_actual_exit\n    assert gate._run([sys.executable, \"-c\", code], \"noisy success\", timeout=4) == 0\nE   assert 1 == 0\nE    +  where 1 = &lt;function _run at 0x0000022457AE4400&gt;(['C:\\\\Miniconda\\\\python.exe', '-c', \"import sys;stream=sys.stdout;stream.write('x'*8192);stream.write('final progress\\n');stream.flush()\"], 'noisy success', timeout=4)\nE    +    where &lt;function _run at 0x0000022457AE4400&gt; = gate._run</failure></testcase><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_noisy_success_retains_tail_without_changing_actual_exit[stderr]\" time=\"0.375\"><failure message=\"assert 1 == 0&#10; +  where 1 = &lt;function _run at 0x0000022457AE4400&gt;(['C:\\\\Miniconda\\\\python.exe', '-c', &quot;import sys;stream=sys.stderr;stream.write('x'*8192);stream.write('final progress\\n');stream.flush()&quot;], 'noisy success', timeout=4)&#10; +    where &lt;function _run at 0x0000022457AE4400&gt; = gate._run\">tests\\unit\\test_pre_push_process_cleanup.py:70: in test_noisy_success_retains_tail_without_changing_actual_exit\n    assert gate._run([sys.executable, \"-c\", code], \"noisy success\", timeout=4) == 0\nE   assert 1 == 0\nE    +  where 1 = &lt;function _run at 0x0000022457AE4400&gt;(['C:\\\\Miniconda\\\\python.exe', '-c', \"import sys;stream=sys.stderr;stream.write('x'*8192);stream.write('final progress\\n');stream.flush()\"], 'noisy success', timeout=4)\nE    +    where &lt;function _run at 0x0000022457AE4400&gt; = gate._run</failure></testcase><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_venv_timeout_releases_descendant_file_before_scratch_cleanup\" time=\"8.070\" /><testcase classname=\"tests.unit.test_pre_push_temp_scope\" name=\"test_deep_checkout_does_not_reject_checks_or_keep_scratch[0]\" time=\"0.440\" /><testcase classname=\"tests.unit.test_pre_push_temp_scope\" name=\"test_deep_checkout_does_not_reject_checks_or_keep_scratch[7]\" time=\"0.402\" /><testcase classname=\"tests.unit.test_pre_push_temp_scope\" name=\"test_owned_temp_is_removed_on_transport_exception\" time=\"0.020\" /><testcase classname=\"tests.unit.test_pre_push_temp_scope\" name=\"test_check_child_does_not_inherit_hook_repository_context\" time=\"0.394\" /><testcase classname=\"tests.unit.test_pre_push_temp_scope\" name=\"test_timed_out_check_preserves_progress_and_returns_red[False]\" time=\"0.002\" /><testcase classname=\"tests.unit.test_pre_push_temp_scope\" name=\"test_timed_out_check_preserves_progress_and_returns_red[True]\" time=\"0.004\" /><testcase classname=\"tests.unit.test_pre_push_temp_scope\" name=\"test_timeout_diagnostic_survives_a_legacy_console_encoding\" time=\"0.007\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_public_read_preserves_content_vs_qualified_request_semantics[None-True]\" time=\"0.015\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_public_read_preserves_content_vs_qualified_request_semantics[selection1-True]\" time=\"0.015\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_public_read_preserves_content_vs_qualified_request_semantics[selection2-False]\" time=\"0.010\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_unknown_or_contradictory_read_selection_cannot_disable_filters[selection0]\" time=\"0.005\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_unknown_or_contradictory_read_selection_cannot_disable_filters[selection1]\" time=\"0.008\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_exact_content_read_keeps_artifact_sha_and_full_source_ref_binding[None]\" time=\"1.776\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_exact_content_read_keeps_artifact_sha_and_full_source_ref_binding[artifact_sha]\" time=\"0.066\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_exact_content_read_keeps_artifact_sha_and_full_source_ref_binding[source_ref]\" time=\"0.073\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_formal_prepare_is_captured_before_activation_and_repeated_bytes_are_immutable\" time=\"0.325\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_failed_formal_prepare_does_not_create_a_prepared_checkpoint\" time=\"0.016\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_capture_rejects_changed_history_wrong_source_but_not_presentation_size\" time=\"0.275\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_actual_generation_checkpoint_is_complete_and_does_not_overwrite_a_changed_run\" time=\"0.048\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_prepared_capsule_binds_actual_generation_and_survives_owner_activation\" time=\"0.261\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_large_generation_and_capsule_keep_all_required_metadata\" time=\"0.271\" /><testcase classname=\"tests.unit.test_phase_c_read_capture\" name=\"test_prepared_capsule_cannot_borrow_another_generations_checkpoint\" time=\"0.188\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_pre_reservation_selection_checkpoint_retains_diagnostics_and_is_immutable\" time=\"0.068\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_live_source_oracle_cannot_pass_with_no_required_business_checks[facts0-REQUIRED_BUSINESS_EMPTY]\" time=\"0.027\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_live_source_oracle_cannot_pass_with_no_required_business_checks[facts1-REQUIRED_BUSINESS_EMPTY]\" time=\"0.018\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_live_source_oracle_cannot_pass_with_no_required_business_checks[facts2-target_kind]\" time=\"0.022\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_omitted_fact_kind_uses_the_canonical_business_default_instead_of_zero_checks\" time=\"0.023\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_a_valid_fact_does_not_hide_an_invalid_target_kind_from_the_source_oracle\" time=\"0.021\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_repair_subset_cannot_borrow_gold_from_an_unsent_task[reading-model-input/4]\" time=\"0.019\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_repair_subset_cannot_borrow_gold_from_an_unsent_task[reading-model-input/5]\" time=\"0.026\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_first_request_requires_gold_inside_actual_sent_tasks\" time=\"0.023\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_repair_reports_unsent_gold_without_requiring_completed_tasks_again\" time=\"0.025\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_task_shared_references_keep_actual_support_and_context_closure\" time=\"0.031\" /><testcase classname=\"tests.unit.test_phase_c_observer\" name=\"test_gold_anchors_in_different_tasks_cannot_form_one_task_support_set\" time=\"0.015\" /><testcase classname=\"tests.unit.test_identity_audit.test_0_fixture_contract\" name=\"test_lane_fixtures_resolve_to_this_lane\" time=\"0.003\" /><testcase classname=\"tests.unit.test_identity_audit.test_0_fixture_contract\" name=\"test_fixture_builds_a_readable_indexed_source\" time=\"0.495\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_ref_mismatch_is_reported_not_raised\" time=\"0.309\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_ref_mime_type_mismatch_is_reported\" time=\"0.242\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_ref_passes_when_the_request_matches_the_catalog\" time=\"0.252\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_replaced_bytes_of_the_same_length_fail_the_bytes_check\" time=\"0.287\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_bytes_pass_when_the_original_matches_the_requested_digest\" time=\"0.254\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_security_id_width_drift_fails_identity\" time=\"0.421\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_market_is_never_borrowed_across_markets\" time=\"0.360\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_expect_null_requires_an_actual_null_observation\" time=\"0.339\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_expect_null_passes_when_both_sides_are_unknown\" time=\"0.357\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_identity_is_not_applicable_when_the_manifest_has_no_identity\" time=\"0.463\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_expect_period_against_a_null_manifest_period_fails\" time=\"0.332\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_fabricated_date_without_evidence_conflicts_with_an_unknown_expectation\" time=\"0.323\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_unknown_publication_date_stays_unknown_and_is_marked_unverified\" time=\"0.365\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_a_non_iso_publication_date_fails_the_period_check\" time=\"0.286\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_period_passes_when_the_manifest_agrees_with_expect\" time=\"0.334\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_unknown_availability_is_never_reported_as_a_pass\" time=\"0.364\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_verified_capture_evidence_is_passed_through_verbatim\" time=\"0.336\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_span_text_off_by_one_character_fails_grounding\" time=\"0.361\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_span_with_a_page_coordinate_is_not_applicable\" time=\"0.326\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_grounded_span_passes_and_reports_its_offsets\" time=\"0.287\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_a_wire_invalid_span_is_blocked_not_crashed\" time=\"0.246\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_a_wire_invalid_span_exits_three_with_one_json_line\" time=\"3.240\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_a_span_beyond_eof_is_ungrounded_not_clamped\" time=\"0.254\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_a_unit_token_absent_from_the_original_fails_the_unit_check\" time=\"0.265\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_the_real_unit_marker_is_reported_with_its_offsets\" time=\"0.258\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_no_unit_token_is_not_applicable_with_an_explicit_reason\" time=\"0.265\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_an_empty_source_refs_array_is_blocked_not_passed\" time=\"0.223\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_a_wrong_request_schema_version_is_blocked\" time=\"0.212\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_ref_extra_field_is_rejected\" time=\"0.226\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_duplicate_json_keys_are_blocked\" time=\"2.318\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_too_many_source_refs_is_blocked_by_the_limit\" time=\"0.205\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_the_audit_never_writes_anything_but_the_out_file\" time=\"2.724\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_out_file_changes_nothing_but_the_out_file\" time=\"2.380\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_a_failing_check_exits_two_and_a_clean_audit_exits_zero\" time=\"15.547\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_invalid_arguments_are_blocked_and_never_print_usage_to_stdout\" time=\"9.508\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_out_is_refused_when_it_names_a_directory\" time=\"5.430\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_out_refuses_parent_traversal\" time=\"4.897\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_pretty_out_is_content_equivalent_to_the_single_line_receipt\" time=\"7.692\" /><testcase classname=\"tests.unit.test_identity_audit.test_1_checks\" name=\"test_manifest_matches_the_export_v2_cli_field_by_field\" time=\"6.774\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_the_receipt_shell_has_exactly_the_frozen_fields\" time=\"0.699\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_generated_at_is_a_utc_second_precision_stamp\" time=\"0.474\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_inputs_bind_the_config_and_the_request_bytes\" time=\"0.395\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_limitations_are_declared\" time=\"0.628\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_every_check_uses_the_frozen_status_vocabulary\" time=\"0.413\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_counts_reconcile_with_the_per_source_checks\" time=\"0.311\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_a_source_with_a_failure_reports_fail_at_both_levels\" time=\"0.521\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_an_unreadable_catalog_is_unavailable_not_a_pass\" time=\"0.509\" /><testcase classname=\"tests.unit.test_identity_audit.test_2_receipt_shell\" name=\"test_the_single_line_json_is_canonical\" time=\"3.950\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_sdk_command_uses_isolated_cwp_code_and_state_but_existing_external_interpreter\" time=\"0.046\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_incomplete_work_never_becomes_pass[FAIL]\" time=\"0.003\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_incomplete_work_never_becomes_pass[BLOCKED]\" time=\"0.015\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_incomplete_work_never_becomes_pass[NOT_RUN]\" time=\"0.005\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_format_capability_uses_named_causes_without_calling_incomplete_a_success[SOURCE_LANGUAGE_UNDETERMINED-SOURCE_LANGUAGE_UNDETERMINED]\" time=\"0.012\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_format_capability_uses_named_causes_without_calling_incomplete_a_success[SOURCE_LANGUAGE_PDF_UNAVAILABLE-SOURCE_LANGUAGE_PDF_UNAVAILABLE]\" time=\"0.003\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_format_capability_uses_named_causes_without_calling_incomplete_a_success[SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED-None]\" time=\"0.004\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_format_capability_uses_named_causes_without_calling_incomplete_a_success[NARRATIVE_BATCH_ValueError-None]\" time=\"0.013\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_format_capability_uses_named_causes_without_calling_incomplete_a_success[unsupported in arbitrary provider text-None]\" time=\"0.002\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_incomplete_parser_requires_actual_opaque_body_proof_and_no_other_failure\" time=\"0.002\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_partial_unpublished_opaque_parser_remains_blocked_not_pass\" time=\"0.004\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_opaque_body_does_not_hide_an_unrelated_top_level_failure[partial]\" time=\"0.008\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_opaque_body_does_not_hide_an_unrelated_top_level_failure[failed]\" time=\"0.002\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_invalid_document_errors_stay_unclassified[None]\" time=\"0.003\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_invalid_document_errors_stay_unclassified[PARSER_INCOMPLETE]\" time=\"0.004\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_invalid_document_errors_stay_unclassified[errors2]\" time=\"0.004\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_removed_failed_checkpoint_is_a_regression\" time=\"0.002\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_changed_experiment_cannot_claim_improvement[mode]\" time=\"0.003\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_changed_experiment_cannot_claim_improvement[spec_sha256]\" time=\"0.004\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_changed_experiment_cannot_claim_improvement[checkpoints_sha256]\" time=\"0.005\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_real_improvement_and_regression_are_separate\" time=\"0.003\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_faster_but_failed_run_is_not_called_a_quality_improvement\" time=\"0.002\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_corrupt_portable_raw_is_refused\" time=\"0.195\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_escape_is_refused\" time=\"0.020\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_failure_restores_owned_directory_and_preserves_sentinel\" time=\"0.043\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_genuine_wrong_percentage_point_is_caught\" time=\"0.004\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_readonly_publication_registry_is_removed_from_owned_test_tree\" time=\"0.035\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_peer_risk_must_not_turn_into_positive_company_triangulation\" time=\"0.010\" /><testcase classname=\"tests.unit.test_cross_market_suite\" name=\"test_undated_capacity_target_cannot_gain_an_invented_year\" time=\"0.002\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_non_chunk_aligned_read_cap_is_never_exceeded\" time=\"0.040\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_exact_eof_budget_can_complete_without_an_extra_read[0]\" time=\"0.017\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_exact_eof_budget_can_complete_without_an_extra_read[123]\" time=\"0.022\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_exact_eof_budget_can_complete_without_an_extra_read[1048576]\" time=\"0.035\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_local_output_never_writes_protected_inputs[raw]\" time=\"0.287\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_local_output_never_writes_protected_inputs[config]\" time=\"0.201\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_local_output_never_writes_protected_inputs[catalog]\" time=\"0.170\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_local_output_never_writes_protected_inputs[same_output]\" time=\"0.201\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_overwrite_does_not_destroy_unknown_old_files[False]\" time=\"0.220\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_overwrite_does_not_destroy_unknown_old_files[True]\" time=\"0.201\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_atomic_report_does_not_clobber_unknown_adjacent_tmp\" time=\"0.041\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_cloud_candidate_has_no_duplicate_upper_bound_or_allocation\" time=\"0.003\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_partial_file_read_is_accounted_in_group_and_file\" time=\"0.020\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_cloud_attribute_changed_after_scan_is_not_opened\" time=\"0.017\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_identity_changed_after_scan_is_not_verified\" time=\"0.021\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_windows_optional_allocation_is_unknown_instead_of_logical_size\" time=\"0.023\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_invalid_config_never_replaced_by_a_refusal_report\" time=\"0.046\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_actual_cli_readonly_and_budget_contract[321-partial]\" time=\"3.472\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_actual_cli_readonly_and_budget_contract[1048576-succeeded]\" time=\"3.290\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_io_diagnostic_does_not_put_machine_path_in_git_report\" time=\"0.024\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_full_report_preserves_non_group_diagnostics\" time=\"0.133\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_scan_mode_accounts_every_shape_without_reading_bytes\" time=\"1.205\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_hardlink_two_names_is_one_physical_copy\" time=\"1.083\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_verify_mode_confirms_only_real_duplicates\" time=\"1.009\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_no_candidates_is_a_legal_result\" time=\"0.230\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_changing_file_is_never_verified\" time=\"0.996\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_acl_denied_file_is_reported_separately\" time=\"1.114\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_read_budget_stops_the_run_and_keeps_a_partial_report\" time=\"1.280\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_deadline_stops_observation_and_keeps_a_partial_report\" time=\"0.877\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_unknown_previous_report_is_never_overwritten\" time=\"1.022\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_output_overlapping_a_data_root_is_refused_without_writing\" time=\"1.028\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_originals_catalog_and_config_are_unchanged\" time=\"1.154\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_raw_duplicate_audit_fixture_set\" name=\"test_report_retains_complete_group_accounting\" time=\"0.982\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_category_totals_never_double_count\" time=\"0.062\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_originals_final_summaries_and_tmp_stay_separate\" time=\"0.111\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_unmatched_path_is_unknown\" time=\"0.005\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_hardlink_paths_reported_as_metadata_candidate\" time=\"0.022\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_hardlink_identity_unknown_without_inode\" time=\"0.016\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_reparse_link_out_of_root_is_never_followed\" time=\"0.091\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_cloud_placeholder_entry_is_skipped_not_measured\" time=\"0.023\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_directory_permission_error_marks_partial\" time=\"0.060\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_file_budget_stops_exactly_at_limit\" time=\"0.047\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_deadline_budget_stops_scan\" time=\"0.018\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_partial_report_is_never_labeled_complete\" time=\"0.040\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_allocated_bytes_stay_null_with_reason\" time=\"0.025\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_package_contains_no_physical_size_fakery\" time=\"0.009\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_output_inside_root_is_refused\" time=\"0.029\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_unknown_existing_output_is_refused_unchanged\" time=\"0.053\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_own_report_can_be_rewritten\" time=\"0.088\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_full_report_is_not_truncated_by_legacy_size_option\" time=\"0.076\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_error_paths_remain_complete_in_persisted_reports\" time=\"0.003\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_failed_report_write_leaves_no_temp_output\" time=\"0.025\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_runner_publishes_complete_report_without_size_policy\" time=\"0.112\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_scan_never_opens_original_bodies\" time=\"0.085\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_databases_are_measured_but_never_opened\" time=\"0.032\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_auto_recovery_materials_are_never_deletable\" time=\"0.027\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_calls_counters_are_always_zero\" time=\"0.059\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_report_paths_are_root_relative\" time=\"0.062\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_invalid_root_is_refused\" time=\"0.033\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_invalid_limits_are_refused\" time=\"0.034\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_unit\" name=\"test_retention_buckets_cover_every_category\" time=\"0.056\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_fixture_integration\" name=\"test_static_fixture_scan_is_complete_exact_and_non_mutating\" time=\"0.074\"><failure message=\"AssertionError: {'category': 'tmp_test_cache', 'label': 'tmp/测试/缓存', 'files': 2, 'logical_path_bytes': 205, ...}&#10;assert 2 == 1\">tools\\storage_footprint\\tests\\test_storage_footprint_fixture_integration.py:95: in test_static_fixture_scan_is_complete_exact_and_non_mutating\n    assert item[\"files\"] == expected[item[\"category\"]][\"files\"], item\nE   AssertionError: {'category': 'tmp_test_cache', 'label': 'tmp/测试/缓存', 'files': 2, 'logical_path_bytes': 205, ...}\nE   assert 2 == 1</failure></testcase><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_fixture_integration\" name=\"test_runtime_fixture_all_categories_and_buckets\" time=\"0.164\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_fixture_integration\" name=\"test_runtime_fixture_budget_stop_is_partial\" time=\"0.082\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_fixture_integration\" name=\"test_directory_permission_failure_is_reported_not_hidden\" time=\"0.077\" /><testcase classname=\"tests.holdout.w18.test_runner_boundaries\" name=\"test_producer_verification_keeps_exact_commit_and_reports_unrelated_changes\" time=\"1.403\" /><testcase classname=\"tests.holdout.w18.test_runner_boundaries\" name=\"test_run_reports_unavailable_without_substitution\" time=\"1.152\" /><testcase classname=\"tests.holdout.w18.test_runner_boundaries\" name=\"test_run_fails_on_sha_mismatched_original\" time=\"1.026\" /></testsuite></testsuites>",
+      "raw_console_sha256": "e04b09cc8182ee43f301b3037e4d251431087d55ef9ed0bf178adc0140ef0553",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\g7\\\\domain\", \"requested_basetemp_len\": 48, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ntimeout: 45.0s\ntimeout method: thread\ntimeout func_only: False\ncollected 211 items\n\ntests\\unit\\test_tooling_output_policy.py ..................              [  8%]\ntests\\unit\\test_bounded_process.py ....                                  [ 10%]\ntests\\unit\\test_pre_push_gate.py ...                                     [ 11%]\ntests\\unit\\test_pre_push_process_cleanup.py ..FF.                        [ 14%]\ntests\\unit\\test_pre_push_temp_scope.py .......                           [ 17%]\ntests\\unit\\test_phase_c_read_capture.py ...............                  [ 24%]\ntests\\unit\\test_phase_c_observer.py ............                         [ 30%]\ntests\\unit\\test_identity_audit\\test_0_fixture_contract.py ..             [ 31%]\ntests\\unit\\test_identity_audit\\test_1_checks.py ........................ [ 42%]\n...............                                                          [ 49%]\ntests\\unit\\test_identity_audit\\test_2_receipt_shell.py .........         [ 54%]\ntests\\unit\\test_cross_market_suite.py .............................      [ 67%]\ntools\\raw_duplicate_audit\\tests\\test_main_acceptance.py ................ [ 75%]\n.....                                                                    [ 77%]\ntools\\raw_duplicate_audit\\tests\\test_raw_duplicate_audit_fixture_set.py . [ 78%]\n...........                                                              [ 83%]\ntools\\storage_footprint\\tests\\test_storage_footprint_unit.py ........... [ 88%]\n.................                                                        [ 96%]\ntools\\storage_footprint\\tests\\test_storage_footprint_fixture_integration.py F [ 97%]\n...                                                                      [ 98%]\ntests\\holdout\\w18\\test_runner_boundaries.py ...                          [100%]\n\n================================== FAILURES ===================================\n____ test_noisy_success_retains_tail_without_changing_actual_exit[stdout] _____\ntests\\unit\\test_pre_push_process_cleanup.py:70: in test_noisy_success_retains_tail_without_changing_actual_exit\n    assert gate._run([sys.executable, \"-c\", code], \"noisy success\", timeout=4) == 0\nE   assert 1 == 0\nE    +  where 1 = <function _run at 0x0000022457AE4400>(['C:\\\\Miniconda\\\\python.exe', '-c', \"import sys;stream=sys.stdout;stream.write('x'*8192);stream.write('final progress\\n');stream.flush()\"], 'noisy success', timeout=4)\nE    +    where <function _run at 0x0000022457AE4400> = gate._run\n---------------------------- Captured stdout call -----------------------------\n\n=== noisy success ===\n\n  File \"<string>\", line 1\n\n    import sys;stream=sys.stdout;stream.write('x'*8192);stream.write('final progress\n\n                                                                     ^\n\nSyntaxError: unterminated string literal (detected at line 1)\n\n\nFAILED: noisy success\n____ test_noisy_success_retains_tail_without_changing_actual_exit[stderr] _____\ntests\\unit\\test_pre_push_process_cleanup.py:70: in test_noisy_success_retains_tail_without_changing_actual_exit\n    assert gate._run([sys.executable, \"-c\", code], \"noisy success\", timeout=4) == 0\nE   assert 1 == 0\nE    +  where 1 = <function _run at 0x0000022457AE4400>(['C:\\\\Miniconda\\\\python.exe', '-c', \"import sys;stream=sys.stderr;stream.write('x'*8192);stream.write('final progress\\n');stream.flush()\"], 'noisy success', timeout=4)\nE    +    where <function _run at 0x0000022457AE4400> = gate._run\n---------------------------- Captured stdout call -----------------------------\n\n=== noisy success ===\n\n  File \"<string>\", line 1\n\n    import sys;stream=sys.stderr;stream.write('x'*8192);stream.write('final progress\n\n                                                                     ^\n\nSyntaxError: unterminated string literal (detected at line 1)\n\n\nFAILED: noisy success\n_________ test_static_fixture_scan_is_complete_exact_and_non_mutating _________\ntools\\storage_footprint\\tests\\test_storage_footprint_fixture_integration.py:95: in test_static_fixture_scan_is_complete_exact_and_non_mutating\n    assert item[\"files\"] == expected[item[\"category\"]][\"files\"], item\nE   AssertionError: {'category': 'tmp_test_cache', 'label': 'tmp/测试/缓存', 'files': 2, 'logical_path_bytes': 205, ...}\nE   assert 2 == 1\n============================== warnings summary ===============================\ntools/raw_duplicate_audit/tests/test_main_acceptance.py::test_actual_cli_readonly_and_budget_contract[321-partial]\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\threadexception.py:58: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-162 (_readerthread)\n  \n  Traceback (most recent call last):\n    File \"C:\\Miniconda\\Lib\\threading.py\", line 1043, in _bootstrap_inner\n      self.run()\n      ~~~~~~~~^^\n    File \"C:\\Miniconda\\Lib\\threading.py\", line 994, in run\n      self._target(*self._args, **self._kwargs)\n      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    File \"C:\\Miniconda\\Lib\\subprocess.py\", line 1615, in _readerthread\n      buffer.append(fh.read())\n                    ~~~~~~~^^\n    File \"<frozen codecs>\", line 325, in decode\n  UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd4 in position 158: invalid continuation byte\n  \n  Enable tracemalloc to get traceback where the object was allocated.\n  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.\n    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))\n\ntools/raw_duplicate_audit/tests/test_main_acceptance.py::test_actual_cli_readonly_and_budget_contract[1048576-succeeded]\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\threadexception.py:58: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-165 (_readerthread)\n  \n  Traceback (most recent call last):\n    File \"C:\\Miniconda\\Lib\\threading.py\", line 1043, in _bootstrap_inner\n      self.run()\n      ~~~~~~~~^^\n    File \"C:\\Miniconda\\Lib\\threading.py\", line 994, in run\n      self._target(*self._args, **self._kwargs)\n      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    File \"C:\\Miniconda\\Lib\\subprocess.py\", line 1615, in _readerthread\n      buffer.append(fh.read())\n                    ~~~~~~~^^\n    File \"<frozen codecs>\", line 325, in decode\n  UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd4 in position 160: invalid continuation byte\n  \n  Enable tracemalloc to get traceback where the object was allocated.\n  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.\n    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g7\\domain.xml ---\n=========================== short test summary info ===========================\nFAILED tests/unit/test_pre_push_process_cleanup.py::test_noisy_success_retains_tail_without_changing_actual_exit[stdout]\nFAILED tests/unit/test_pre_push_process_cleanup.py::test_noisy_success_retains_tail_without_changing_actual_exit[stderr]\nFAILED tools/storage_footprint/tests/test_storage_footprint_fixture_integration.py::test_static_fixture_scan_is_complete_exact_and_non_mutating\n============ 3 failed, 208 passed, 2 warnings in 144.67s (0:02:24) ============\n"
+    },
+    "fix": {
+      "raw_junit_sha256": "8f076edf6e398bfead9cb941adb4eeb056be4b54860da0c80c4667beb7767ce3",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit_seconds": 4.571,
+      "cases": [
+        {
+          "classname": "tests.unit.test_pre_push_process_cleanup",
+          "name": "test_noisy_success_retains_tail_without_changing_actual_exit[stdout]",
+          "status": "passed",
+          "time": "0.241"
+        },
+        {
+          "classname": "tests.unit.test_pre_push_process_cleanup",
+          "name": "test_noisy_success_retains_tail_without_changing_actual_exit[stderr]",
+          "status": "passed",
+          "time": "0.240"
+        },
+        {
+          "classname": "tools.storage_footprint.tests.test_storage_footprint_fixture_integration",
+          "name": "test_static_fixture_scan_is_complete_exact_and_non_mutating",
+          "status": "passed",
+          "time": "0.068"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_actual_cli_readonly_and_budget_contract[321-partial]",
+          "status": "passed",
+          "time": "1.228"
+        },
+        {
+          "classname": "tools.raw_duplicate_audit.tests.test_main_acceptance",
+          "name": "test_actual_cli_readonly_and_budget_contract[1048576-succeeded]",
+          "status": "passed",
+          "time": "1.446"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_duplicate_report_failure_does_not_claim_written[json]",
+          "status": "passed",
+          "time": "0.021"
+        },
+        {
+          "classname": "tests.unit.test_tooling_output_policy",
+          "name": "test_duplicate_report_failure_does_not_claim_written[io]",
+          "status": "passed",
+          "time": "0.008"
+        }
+      ],
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"7\" time=\"4.571\" timestamp=\"2026-11-02T08:29:07.612000+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_noisy_success_retains_tail_without_changing_actual_exit[stdout]\" time=\"0.241\" /><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_noisy_success_retains_tail_without_changing_actual_exit[stderr]\" time=\"0.240\" /><testcase classname=\"tools.storage_footprint.tests.test_storage_footprint_fixture_integration\" name=\"test_static_fixture_scan_is_complete_exact_and_non_mutating\" time=\"0.068\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_actual_cli_readonly_and_budget_contract[321-partial]\" time=\"1.228\" /><testcase classname=\"tools.raw_duplicate_audit.tests.test_main_acceptance\" name=\"test_actual_cli_readonly_and_budget_contract[1048576-succeeded]\" time=\"1.446\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_duplicate_report_failure_does_not_claim_written[json]\" time=\"0.021\" /><testcase classname=\"tests.unit.test_tooling_output_policy\" name=\"test_duplicate_report_failure_does_not_claim_written[io]\" time=\"0.008\" /></testsuite></testsuites>",
+      "raw_console_sha256": "c2ea9931e4e2bb16e686f808b416bbad73443d9b1819adca3ff79fd2576d9de6",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\g7\\\\fix\", \"requested_basetemp_len\": 45, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ntimeout: 45.0s\ntimeout method: thread\ntimeout func_only: False\ncollected 7 items\n\ntests\\unit\\test_pre_push_process_cleanup.py ..                           [ 28%]\ntools\\storage_footprint\\tests\\test_storage_footprint_fixture_integration.py . [ 42%]\n                                                                         [ 42%]\ntools\\raw_duplicate_audit\\tests\\test_main_acceptance.py ..               [ 71%]\ntests\\unit\\test_tooling_output_policy.py ..                              [100%]\n\n---- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g7\\fix.xml ----\n============================== 7 passed in 4.66s ==============================\n"
+    }
+  },
+  "result_summary": "16 new-policy RED -> 16 intermediate P; callback I/O/encoding isolation additional3RED -> passed in affected domain. One affected run211=208P/3F/2 warnings in144.67s. Three failures were two test-string escaping errors and a pre-existing ignored pycache in repository fixture; no product expectation was weakened. Targeted7P/4.66s closes those3, retests2 CLI encoding controls and adds2 JSON/I/O-written=false controls. No repeat211; not a fictitious single213P final run.",
+  "policy_test_migrations": [
+    "Old output-cap tests now require successful noisy child to retain success and real nonzero/timeout tests remain unchanged.",
+    "Old prepared/checkpoint size rejection assertions now require complete bytes/metadata; wrong source/hash, changed history, generation mismatch and unsafe path assertions remain.",
+    "Old footprint/RAW-DUP report-size/path/row truncation expectations now require full evidence; actual read/file/deadline resource limits and immutable original/foreign output controls remain.",
+    "Holdout dirty-tree rejection test now records unrelated untracked input but still rejects wrong explicit commit.",
+    "Static footprint fixture is copied from seven hand-declared files into owned tmp before scan. The ignored historical __pycache__ is not deleted, and original fixture before/after snapshot must match. Product scanner does not hide cache files.",
+    "CLI test subprocess explicitly aligns UTF-8 output and decoding; warning-free targeted rerun preserves actual byte/read-only accounting assertions."
+  ],
+  "static_checks": {
+    "ruff": "All27 changed Python files passed final check; no CI/hooks modified.",
+    "ruff_receipt": "All checks passed!\n",
+    "mypy": {
+      "command": "C:/Miniconda/python.exe -B -m mypy src/company_wiki/_bounded_process.py --cache-dir tmp/g7/mypy",
+      "observed_tool_returncode": 0,
+      "observed_tool_stdout": "Success: no issues found in 1 source file",
+      "source_sha256": "25dc804ddcbb15428238862d2c6a1b46958f96e9add12c96a4b339305c6743d9"
+    },
+    "full_src_mypy_or_full_ci_not_claimed": true
+  },
+  "boundaries": {
+    "real_originals": 0,
+    "model_calls": 0,
+    "provider_calls": 0,
+    "production_config_writes": 0,
+    "git_commit_or_push": false,
+    "ci_or_hook_edits": false,
+    "main_pwf_edits": false,
+    "new_report_framework": false,
+    "core_other_agent_paths_edited": false,
+    "scope_note": "The explicitly delegated shared _bounded_process.py is the only src edit. Reports/README and neutral fixture tests are within tooling lane."
+  },
+  "remaining": [
+    "Independent review of frozen30 files and ROOT major-node integration/CI",
+    "Real H1/summary/cache/RF economic acceptance remains ROOT mainline, not performed here",
+    "No measured attribution of144.67s affected domain; no timeout increased and whole domain not repeated"
+  ],
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g7",
+    "initially_absent": true,
+    "restored_absent": true,
+    "status": "RESTORED_INITIAL_ABSENT",
+    "all_required_receipts_embedded": true,
+    "historical_static_pycache_preserved": true,
+    "files": 1074,
+    "logical_bytes": 82965510,
+    "containment_checked": true,
+    "non_reparse_checked": true,
+    "junction_unlinked_without_recursion": true,
+    "junction_target_preserved_before_owned_cleanup": true,
+    "initial_attempt": "Guard aborted recursive cleanup upon finding one test-created junction. Both link and target were resolved inside owned g7; junction was separately unlinked without recursion, target metadata checked unchanged, then owned root cleanup completed."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "status": "IMPLEMENTED_TARGETED_PASS_MAJOR_REVIEW_PENDING",
+  "baseline": "fa8ef38e",
+  "red": {
+    "failed": 3,
+    "seconds": 1.07,
+    "cases": [
+      "large complete result silently reduced to incomplete",
+      "valid100-level tree falsely incomplete",
+      "physical proof falsely classified semantic context"
+    ]
+  },
+  "green": {
+    "passed": 27,
+    "seconds": 3.57,
+    "wall_seconds": 4.353
+  },
+  "removed_arbitrary_caps": [
+    300000,
+    16384,
+    32
+  ],
+  "full_evidence_retained": true,
+  "context_roles": [
+    "ancestor_heading",
+    "semantic_context",
+    "physical_source_proof"
+  ],
+  "test_cleanup": {
+    "initial": "absent",
+    "final": "absent",
+    "path": "tmp/r7o-115be88"
+  },
+  "originals_opened": 0,
+  "downloads": 0,
+  "model_posts": 0,
+  "sha256": {
+    "tools/source_case_runner.py": "5f8e5f09d38bbb3d4565a1b9e60ca8bdee99b7ce1ec0bb16210968b8879c41c4",
+    "tools/source_case_receipt.py": "717f4663a52ad509aa49b82c94fa72822c178eb74a556f93160ae7eeb86a77fd",
+    "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "tests/unit/test_source_case_runner.py": "6e037d6504b4ed5973f1f3d4f1064c8bd43b98367fa226893cd1714973201b31",
+    "tests/unit/test_source_case_receipt.py": "8f0f4a5c2206fd16edb191c545df8834e8565108719e67e5a8df9f19c11e6848"
+  },
+  "main_T3_CI": {
+    "id": 41408572602,
+    "head": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "real_C": "OPEN_NOT_RERUN",
+  "final_encoding": "Plain lossless canonical JSON; no self-hash envelope or duplicate successful encoding",
+  "incremental_pure_encoder_after_simplification": {
+    "passed": 7,
+    "seconds": 0.45,
+    "warning": "pytest_asyncio plugin deliberately absent for pure tests; no async case selected; no config changed"
+  }
+}

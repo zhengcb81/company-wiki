@@ -1,0 +1,162 @@
+{
+  "status": "READ_ONLY_AUDIT_COMPLETE_ROOT_IMPLEMENTATION_PENDING",
+  "baseline": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "trees_scanned": {
+    "source_catalog": 212,
+    "automation": 61,
+    "document_understanding": 77
+  },
+  "coverage": "350 Python files literal sweep; selected actual call/exception flows and consumers reviewed, not all350 line-by-line execution",
+  "codegraph": {
+    "files_indexed": 3531,
+    "used": [
+      "status",
+      "context NarrativeSelectHandler",
+      "context SourceVersionReader",
+      "context PolicyEngine",
+      "callers register_canary/evaluate_admission/evaluate_candidate/compute_risk/find_reuse_pin"
+    ],
+    "limits": "some newly refactored symbol callers unresolved; report actual opened entry/control flow, do not infer no production usage from one empty caller response"
+  },
+  "findings": [
+    {
+      "id": "R7-G1",
+      "priority": "P1",
+      "state": "CONFIRMED_STATIC_CONTROL_FLOW",
+      "title": "正常资料被多层固定wire/诊断体积门否决",
+      "locations": [
+        "automation/narrative_contracts.py:48-52,192-196,731-772,953-969,1175-1177,1189-1191,1338,1357,1472,1859,2146-2150",
+        "automation/narrative_select.py:243-247,312",
+        "automation/narrative_summarize.py:549-553",
+        "automation/narrative_verify.py:454-458",
+        "automation/narrative_transport_contracts.py:32-33,225",
+        "automation/narrative_transport.py:386-387,447-448,466-467",
+        "automation/narrative_evidence_view.py:132-133,158-159"
+      ],
+      "condition": "legitimate canonical selected material/summary or optional diagnostic tree crosses one independent fixed length/count/depth cap after source work succeeded",
+      "effect": "ContractSizeError/strict contract error -> RESULT_TOO_LARGE/INPUT_SCHEMA_INVALID or transport blocked; valid source bytes/results disappear from operation",
+      "root_cause": "representation and optional diagnostics treated as additional execution permission, independent from configured work/storage/model budget",
+      "change": "remove fixed successful result/receipt serialization vetoes; stream writes, de-duplicate optional metadata; separate optional diagnostics schema from material support; retain strict ID/ref/type/finite-number and actual configured resource limits",
+      "tests": "split test_select_handler_cap_and_path_leak_fail_with_zero_effect: oversized valid source now success unchanged; path/source-invalid still reject. Migrate reading_context oversized-only cases to full material preserved, optional trace compacted with counts/hash; hostile cyclic/nonfinite/malformed JSON remain explicit encoding diagnostics and do not invent support."
+    },
+    {
+      "id": "R7-G2",
+      "priority": "P1",
+      "state": "CONFIRMED_STATIC_CONTROL_FLOW",
+      "title": "自动缓存候选损坏成为新任务全局停止条件",
+      "locations": [
+        "automation/narrative_generation.py:535-579",
+        "automation/narrative_batch.py:1147-1195,1656-1684"
+      ],
+      "condition": "during fresh automatic reuse discovery, a matching derived artifact candidate has malformed metadata or invalid generated artifact; reader source remains independently valid",
+      "effect": "reading_candidate_manifest/read_reuse_pin exception -> BATCH_REUSE_ARTIFACT_INVALID and whole preflight fails before a replacement generation; refresh can still enter discovery when pointer.exists()",
+      "root_cause": "disposable cache observation has authority to deny source-owned regeneration; corrupt candidate and explicitly pinned immutable result share failure policy",
+      "change": "automatic candidate discovery records corrupt/stale candidate diagnostic and continues next candidate; if none, perform one current source verification/selection and regenerate under actual existing budget. Explicit requested pin/same-run frozen binding and original-source hash failure still reject; do not silently reuse corrupt output or replay an uncertain paid reservation",
+      "tests": "keep test_matching_artifact_metadata_corruption_is_an_error_not_spend_permission at strict candidate parser, but add discovery integration bad-first/good-next/no-good+valid-source fallback/explicit refresh; retain test_new_operation_rejects_changed_reused_original_before_new_fee, same-run pin/publication corruption and unknown-cost ledger controls"
+    },
+    {
+      "id": "R7-G3",
+      "priority": "P2",
+      "state": "STATIC_SCOPE_RISK_REQUIRES_TARGETED_RED",
+      "title": "同unit一个未知语法子句可否决另一个独立已证资料子句",
+      "locations": [
+        "source_catalog/narrative_source_passage.py:337-353,379-386,424-436,487-495",
+        "source_catalog/narrative_reading_admission.py:117-118",
+        "source_catalog/narrative_reading.py:1213-1237,1271"
+      ],
+      "condition": "one prepared statement scope contains known independent source material and another clause with unavailable/scope_limit grammar; uncertainty return precedes existing independent support reuse",
+      "effect": "entire native unit passage assessment_complete=False/relevant=False, then admission false; partial source annotation may withhold usable independent clause with it",
+      "root_cause": "processing completeness and supported material availability aggregated into one per-unit bool instead of preserving independent local support scope",
+      "change": "first add same-native-unit mixed control using existing prepared clause keys; retain independently supported subclause/context closure while deferring unknown clause and marking source partial; reuse prepared observations, no unknown -> fact promotion and no new state/permission system",
+      "tests": "existing test_one_deferred_scope_does_not_stop_an_independent_healthy_scope covers two different units only; add same-unit known typed clause+missing-resource generic clause, inverse order, positive/negative condition attachment and shared context. Not executed in this read-only audit; do not claim public-selector reproduction."
+    },
+    {
+      "id": "R7-G4",
+      "priority": "P2",
+      "state": "CONFIRMED_STATIC_DUPLICATE_WORK",
+      "title": "VerifiedContent上层再次整buffer SHA且再次查metadata",
+      "locations": [
+        "source_catalog/source_reader.py:585-608,680-724",
+        "source_catalog/resolver.py:363-464",
+        "automation/narrative_source_guard.py:45-86,89-110",
+        "automation/narrative_select.py:301-307",
+        "automation/narrative_verify.py:249-255"
+      ],
+      "condition": "public reader has just read/hashes actual bytes and returns same immutable VerifiedContent; handler guard recomputes sha256(opened.data), then describe_version queries same identity separately",
+      "effect": "source select and verify each pay redundant full-buffer digest plus duplicate metadata observation; old read-policy string is already diagnostic and is not needed as a second permission",
+      "root_cause": "consumer does not fully rely on lower verified-source port responsibility; defensive unit fakes encouraged repeated verification",
+      "change": "retain exact per-operation real reader byte SHA/current state/root/path resolution once; thin upper checks compare requested ref/returned identity only; use existing open_described_version where source and metadata both needed. No long-lived cross-request trust cache; changed originals must still fail actual reader",
+      "tests": "move wrong-byte/mtime/source-change tests to real reader boundary; handler tests retain wrong ref/ID/subject/metadata rejection and assert one reader hash/description per operation. Do not change as-of selection or event-number proof."
+    },
+    {
+      "id": "R7-G5",
+      "priority": "P2",
+      "state": "CONFIRMED_STATIC_ADVISORY_HARD_CEILING",
+      "title": "几何导航hint有多套任意固定天花板且整份丢弃",
+      "locations": [
+        "document_understanding/geometry_intent/reading.py:21-23,48-59,74-76,87-95,123,282-285",
+        "document_understanding/geometry_intent/contracts.py:49-52",
+        "document_understanding/geometry_intent/planner.py:876-881"
+      ],
+      "condition": "otherwise valid native outline >4096 rows / level>32 / title>4096, or explicit requested max_pages/max_requests>64 or >64 same-page window keys",
+      "effect": "valid hint set becomes empty/partial, caller limits silently clamped to64, page request rejected because key count not physical ambiguity; original shared WorkBudget already exists",
+      "root_cause": "optional navigation format bounds and local constants duplicate work/request allocation owner; these caps do not prevent native get_toc allocation (already occurred upstream)",
+      "change": "consolidate processing under same WorkBudget + explicit request/page allocation; stream iterative stack and preserve independently valid navigation; remove silent clamp/additive hard ceilings. Keep malformed hierarchy/page destinations and physical ambiguity negative controls; do not guess page/ancestor when evidence truly absent",
+      "tests": "migrate test_limits_cannot_raise_native_hard_ceiling/test_large_outline_bounded_before_iteration to explicit budget depletion and valid large/deep outline preserved; retain invalid parent jump/page order/shared-page conflicts. Do not simply delete all geometry validation."
+    }
+  ],
+  "retained": [
+    "raw actual byte SHA and source ID/mime/current-state checks in source owner",
+    "identity/period/as-of selection in owning layer, nonperiodic sources not forced into annual period",
+    "original locator/native member/context closure and no invented semantic proof",
+    "actual configured cumulative model dollars/tokens/document work/storage/download time and bytes",
+    "leases/generation CAS/outbox ownership for idempotence/recovery",
+    "typed versioned wire shape/ref/type/finite numbers and invalid cycles; optional diagnostics should not gain execution veto"
+  ],
+  "retired_or_not_active_new_gate": [
+    "default SourceResolver(runtime_policy=None) steady; schema1 cohort/epoch only explicit legacy injection",
+    "DownloadAuthorization/CloseGapBinding policy/plan hashes/expiry diagnostic target compatibility only",
+    "register_canary graph callers only historical tests; no ordinary source default activation prerequisite found",
+    "prompt review absent/error -> not_reviewed diagnostic; no per-material review receipt gate",
+    "registry human_errors empty; store historical BLOCKED_HUMAN converted to machine failure, not new manual authorization",
+    "batch/CLI already pass allow_llm=True allow_network=True; default low-level PolicyConfig deny is not current production pause",
+    "output language unavailable/uncertain -> needs_review metadata, no manual permit"
+  ],
+  "source_processing_complete_scope": "False is public partial annotation; independently usable other units survive and summary accepts partial selected spans. Only same-unit risk G3 merits new RED; do not remove source false/unknown reporting.",
+  "tests_run": false,
+  "raw_model_database_config_git_changes": false,
+  "reviewed_source_manifest": {
+    "src/company_wiki/source_catalog/authorization.py": "73e76c35edec6313374f9352fc517719407b7865ce28671f34381aa38ace9c98",
+    "src/company_wiki/source_catalog/close_gap.py": "66aa14a11d9c4bc371995032972459be728aedc9c830a80df4395c32bc004d6b",
+    "src/company_wiki/source_catalog/acquisition.py": "d4ff52aec2d007610936a5bdb10a545e3d55c8c5fba216d946acab9aeef6192b",
+    "src/company_wiki/source_catalog/acquisition_service.py": "4fcf81804b80d379391d34024714a1684565b7caca582d77b0c36c600372d3b3",
+    "src/company_wiki/source_catalog/admission.py": "d177821c1216d92d9f4a9a277b5ed682e7b05c7f38a863e4d3631b2f8e74f22c",
+    "src/company_wiki/source_catalog/source_reader.py": "9261cb6798be5688c96096c1b3c4c3492a649696942c02371f4d000eacabaa7c",
+    "src/company_wiki/source_catalog/resolver.py": "0d710a2b0b706a4eb98f3a2bd6ecd352030c932b107a5aad018194b42807f363",
+    "src/company_wiki/source_catalog/runtime_policy.py": "71971edfe180469ae431f129afec3789cd481404c5624a6f72b23da1d49ab7b7",
+    "src/company_wiki/source_catalog/narrative_reading.py": "a7a426af6a1982640bb0ca142506bd282edff0c0192949e8407c2f87e857a8d2",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "4856e677a49180f2dfc8d9dd7bf6f82bbba6344de8b312ec5ecee28a6af1821e",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "2645bf29985f10080653b9a6ff63074fe5a9f78e01002e187430050c14c2d7aa",
+    "src/company_wiki/automation/narrative_contracts.py": "2b8a2fd188a52cd866b2921bc4756fdf80339ee8e01cb01855f5478a6bb30387",
+    "src/company_wiki/automation/narrative_select.py": "0ccb063d5910ca0d415c81acaca937523c4cd2866daa8468a9e8b357ffc1fb10",
+    "src/company_wiki/automation/narrative_verify.py": "4fdcf7ddc26d78e85468baba4c6edf1949002279d500410d1170e3e241738965",
+    "src/company_wiki/automation/narrative_summarize.py": "cb68422bb0804836b4abc49971559071f82559ea07a27e1726cbd916dd03410b",
+    "src/company_wiki/automation/narrative_generation.py": "f74c9af32c239bebbf867cc1e41618a11ca24092d3c80b7a761965bf519578d3",
+    "src/company_wiki/automation/narrative_batch.py": "0359db177c959143feac54cd5ddd070d783627cdbae076366b4dc73c928093f3",
+    "src/company_wiki/automation/narrative_transport.py": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "6fca7f092e3f4441e9a92b2f6ddcefbb08fc0553fd70bf36409ea1b51ae456b5",
+    "src/company_wiki/automation/narrative_evidence_view.py": "840c6e22fc75297b0c28a8b82301add67d1796c0402d3511e45ee5f08162153d",
+    "src/company_wiki/automation/narrative_source_guard.py": "4d199c3732231c229694ab6801a9c109514efe7f8811d04bc386e407abc4c256",
+    "src/company_wiki/automation/narrative_projection.py": "fa23c5520f386310ec0b7a5b149c4157967cdcec2d9d0d1a91658e093698c1dd",
+    "src/company_wiki/automation/narrative_output_language.py": "91cc43343b2c191048136875973d0ad44e3b5b17c854991e237bab9489b671e4",
+    "src/company_wiki/automation/policy.py": "67584de1bf2eee8f21c565c4422df634f2414c5fb3f2e251e989a89bd69df41c",
+    "src/company_wiki/automation/planner.py": "dbbaefe6e4f09972abdc8126cf8f6c143a99ad7fe70d53642e120530f6757104",
+    "src/company_wiki/automation/registry.py": "b744c250a5be5e272bad43ac8c627ea84f7fd9bf02668841de1626af1eaf6286",
+    "src/company_wiki/automation/store.py": "fdc4a8f713116e5cfa2c63f0afdb530a364945b0e4927efd6d63e0b99e93b624",
+    "src/company_wiki/document_understanding/summary_input.py": "6570fd29be6467500d20e387a3d15b8b77b3044242c3fc31b7fcd9002f35a56a",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "6669f465d23f8f1d84a156bbc5d9f3cd4d33e8671af526d386df9c4707c8716a",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "dbc88ad3a075ddf2ea4a875a29564bf4be9ec450ac1cbb21aabb18d8a7c01ea2",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "be0e6762b5a13df40285bed03a88cb6b65be8f823fa09f5df14ef99826299aa4"
+  },
+  "encoder_ownership": "ROOT has taken over tools/source_case_receipt.py; this audit did not edit encoder or tests"
+}

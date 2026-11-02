@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "R6_ENGINEERING_PUBLISHED_MAIN_CI_GREEN_T3_IMPLEMENTATION_ACTIVE",
+  "project_status": "R7_ENGINEERING_COMMITTED_DEPLOYED_REMOTE_CI_PUBLICATION_ACTIVE_REAL_C_OPEN",
   "execution_mode": "manual_user_authorized_resumption",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
@@ -43,7 +43,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "完成T3 NOTE/PHYS来源备注局部scope和原生成员/邻接proof及局部partial传播，与已修TERM合并跑冻结47+新增24一次并集中独审，再按计划做最终真实H1、新摘要/cache/RF。不扩外包、不重复整仓。",
+  "next_action": "正常推RF499d5ca3、invest a7812888与CWP fee04ba4+PWF bundle，核精确远端CI；源和全局runtime已独审/定点部署/三新进程通过。之后单例H1再真实摘要/缓存/RF采用，不扩包不重690本地。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -52,7 +52,7 @@
     ".githooks/pre-push mode-only; not ours"
   ],
   "as_of_date": "2026-11-02",
-  "observed_at_utc": "2026-11-02T03:21:02.100896+00:00",
+  "observed_at_utc": "2026-11-02T08:04:41.690774+00:00",
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "get_goal during2026-11-02 continuation",
@@ -63,37 +63,19 @@
     "repo": "company-wiki",
     "branch": "master",
     "source_rectification_merged": true,
-    "exact_ci": {
-      "id": 41381788839,
-      "head_sha": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
-      "head_branch": "master",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41381788839",
-      "created_at": "2026-11-02T03:12:17Z",
-      "updated_at": "2026-11-02T03:19:00Z"
-    },
-    "local_head": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
-    "remote_head_last_observed": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
-    "note": "Daily tool and PWF master1bf3d388 normally pushed, exact main CI41371690732 success. Source R4 still isolated.",
-    "main_ci": {
-      "id": 41381788839,
-      "head_sha": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
-      "head_branch": "master",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41381788839",
-      "created_at": "2026-11-02T03:12:17Z",
-      "updated_at": "2026-11-02T03:19:00Z"
-    },
+    "exact_ci": null,
+    "local_head": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "remote_head_last_observed": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+    "note": "R7 source normally committed after final independent engineering acceptance; current exact remote CI not yet observed. Old successful runs are historical, not R7 CI.",
+    "main_ci": null,
     "historical_pre_push_848b4ee0": {
       "passed": 234,
       "seconds": 95.44
     },
     "normal_pre_push": {
       "passed": 167,
-      "seconds": 35.54,
-      "total_seconds": 41.944
+      "seconds": 61.65,
+      "total_seconds": 78.141
     },
     "historical_exact_ci_848b4ee0": {
       "id": 41365435657,
@@ -106,10 +88,24 @@
       "updated_at": "2026-11-02T00:13:29Z"
     },
     "previous_local_and_remote_head": "1bf3d388e31c0d40f0de2165acd8401bf8ecb85e",
-    "runtime_commit": "10767b86318e63094c2bb49451447c9aedffc32c",
-    "push_status": "SUCCESS",
+    "runtime_commit": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "push_status": "R7_DOC_BUNDLE_PENDING",
     "main_code_bundle_commit": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
-    "observation_note": "Exact engineering bundlec6bb801b; later docs-only receipt commits do not change runtime or retrigger CI."
+    "observation_note": "Exact engineering bundlec6bb801b; later docs-only receipt commits do not change runtime or retrigger CI.",
+    "local_source_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+    "source_runtime_commits": [
+      "10767b86",
+      "fa8ef38e"
+    ],
+    "T3_push_pending_current_observer_bundle": false,
+    "previous_main_ci": {
+      "id": 41408572602,
+      "head_sha": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+      "head_branch": "master",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41408572602"
+    }
   },
   "architecture_rectification": {
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
@@ -127,7 +123,7 @@
       "created_at": "2026-11-02T02:55:39Z",
       "updated_at": "2026-11-02T02:59:56Z"
     },
-    "current_work": "R6 engineering10767b86 final independent and complete candidateCI green, normal master bundlec6bb801b pushed and exact mainCI41381788839 success. T3 TERM48bounded PASS, NOTE/PHYS active in reusedw23-r6 worktree; final realC open.",
+    "current_work": "R6/T3 engineering accepted and published; R7 confirmed representation/cache/diagnostic/clean-tree/redundant-owner gates under active systematic cleanup.",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/R6-CI-r5.md",
     "consumer_evidence": "review/architecture-quality-20261101/implementation-results/R6-owner-boundaries-ci.md",
     "prior_original_candidate_failure": "review/architecture-quality-20261101/implementation-results/CWP-failed-CI.md",
@@ -200,24 +196,68 @@
     },
     {
       "id": "T3",
-      "status": "IN_PROGRESS_TERM_BOUNDED_PASS_NOTE_PHYS_ACTIVE",
+      "status": "ENGINEERING_ACCEPTED_PUBLISHED_REAL_C_OPEN",
       "work": "Fix quoted numbered prose false headings and source-marked long/wrapped note scope, retain current actor introduction. No raw rewriting/company filters/new universal geometry gate.",
       "investigation": "review/architecture-quality-20261101/implementation-results/R4-context-investigation.md",
       "plan": "review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md",
       "tests_first": "review/architecture-quality-20261101/implementation-results/R6-T3-tests-first.md",
       "actual_first_run": "47case28F19P;27behavior RED+1fixture error; fixture-only1P3.41s, no whole rerun",
-      "untracked_test_directory": "tmp/architecture-r2/tests/unit/document_understanding_note_scope",
-      "instruction": "Exclude these RED tests from R5 code stage; include with T3 implementation only.",
+      "instruction": "Original6 tests now tracked on active T3 branch; old r2 duplicate directory restored to original absent after exactSHA/remote verification. R6 engineering already merged; only final CI and trueC remain.",
       "implementation_worktree": "tmp/w23-r6",
       "branch": "codex/architecture-t3-source-scope-20261102",
       "term_report": "review/architecture-quality-20261101/implementation-results/R6-T3-term.md",
-      "test_copy": "Frozen6delivery files verified into initially absent new branch directory; no original copies."
+      "test_copy": "Frozen6delivery files verified into initially absent new branch directory; no original copies.",
+      "code_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+      "base": "acb8161f2694cf4653f06a808690e6c33ad36d4f",
+      "candidate_ci": {
+        "id": 41385431656,
+        "head_sha": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+        "head_branch": "codex/architecture-t3-source-scope-20261102",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41385431656",
+        "created_at": "2026-11-02T03:52:58Z",
+        "updated_at": "2026-11-02T03:59:39Z"
+      },
+      "combined": "review/architecture-quality-20261101/implementation-results/R6-T3-combined.md",
+      "freeze_manifest": "review/architecture-quality-20261101/implementation-results/R6-T3-r2-freeze-manifest.json",
+      "originals_and_configs_unchanged": true,
+      "independent_r1": "review/architecture-quality-20261101/implementation-results/R6-T3-independent-r1.md",
+      "finding": {
+        "priority": "P2",
+        "cause": "Only first cap-overrun member deferred; following same-note suffix released without intro as independent anchors.",
+        "observed": "7new cases1F6P/1.73s; b23 blocked, b24-26 unblocked; real next heading healthy.",
+        "repair": "Same owner audit all computational/proof stops versus true scope boundaries, carry unresolved suffix with same budget, keep healthy ranges available; no cap increase."
+      },
+      "full_ci_r1": "review/architecture-quality-20261101/implementation-results/R6-CI-T3-r1.md",
+      "patch_observation": "CI4F reproduced1.72s, caused overstrict opaque block identity64 format check; removed at same owner. Combined old4+new5=9P1.76s, finalfreeze/review/newCI pending.",
+      "old_r1_code_commit": "8782050bcee8a5d41f571306eef6fd166d0ff5ad",
+      "old_r1_candidate_ci": {
+        "id": 41383874109,
+        "head_sha": "8782050bcee8a5d41f571306eef6fd166d0ff5ad",
+        "head_branch": "codex/architecture-t3-source-scope-20261102",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41383874109",
+        "created_at": "2026-11-02T03:34:57Z",
+        "updated_at": "2026-11-02T03:41:20Z"
+      },
+      "independent_final": "review/architecture-quality-20261101/implementation-results/R6-T3-independent-r2.md",
+      "repair": "review/architecture-quality-20261101/implementation-results/R6-T3-note-limit-repair.md",
+      "historical_untracked_test_directory": "tmp/architecture-r2/tests/unit/document_understanding_note_scope",
+      "test_transfer": "review/architecture-quality-20261101/implementation-results/R6-T3-test-transfer.json",
+      "normal_main_merge": ".planning/architecture-quality-20261101/r6-publication/t3-main-merge.json"
     },
     {
       "id": "C-source",
-      "status": "OPEN",
+      "status": "H1_V3_RECEIPT_LOST_R7_OBSERVER_INDEPENDENT_PASS_REAL_RERUN_PENDING_CORE_CLOSURE",
       "work": "Final single H1 under90s/16M/112,12required units/native members plus9context pairs with positive intro checks; prior v1/v2 do not sign final.",
-      "local_runner": ".planning/architecture-quality-20261101/real-acceptance/README.md"
+      "local_runner": ".planning/architecture-quality-20261101/real-acceptance/README.md",
+      "v3": "review/architecture-quality-20261101/implementation-results/C-source-v3-observer-failure.md",
+      "observer": "review/architecture-quality-20261101/implementation-results/R6-source-observer-integration.md",
+      "canonical_runner": "tools/source_case_runner.py",
+      "observer_freeze": "review/architecture-quality-20261101/implementation-results/R6-source-observer-r2-freeze.json",
+      "observer_policy": "No arbitrary300KB/16KB/depth32 gate; full evidence and roles preserved; source limits still90s/16M/112."
     },
     {
       "id": "C-summary-cache-RF",
@@ -285,5 +325,88 @@
     "source_scope": "disclosure kind; not universal eligibility/value downgrade",
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
+  },
+  "R7": {
+    "status": "IMPLEMENTING",
+    "plan": "review/architecture-quality-20261101/implementation-results/R7-simplification-plan.md",
+    "audit_reports": [
+      "review/architecture-quality-20261101/implementation-results/R7-core-gate-audit.md",
+      "review/architecture-quality-20261101/implementation-results/R7-tooling-gate-audit.md",
+      "review/architecture-quality-20261101/implementation-results/R7-crossrepo-gate-audit.md"
+    ],
+    "observer": {
+      "status": "FINAL_INDEPENDENT_ENGINEERING_PASS",
+      "arbitrary_caps_removed": [
+        300000,
+        16384,
+        32
+      ],
+      "role_separation": "semantic_context and physical_source_proof separate",
+      "tests_seconds": 3.57,
+      "test_dir_restored_absent": true
+    },
+    "paid_calls": 0,
+    "downloads": 0,
+    "components": {
+      "ROOT_observer_and_invest_consumer": "FINAL_INDEPENDENT_ENGINEERING_PASS",
+      "CWP_core": "FINAL_37_FILES_INDEPENDENT_PASS",
+      "tooling": "FINAL_30_FILES_INDEPENDENT_PASS",
+      "RF": "FINAL_29_FILES_INDEPENDENT_PASS_INITIAL_COMMIT_PUSH_FOLLOWUP",
+      "invest_selective_deployment": "ROOT_REVIEW_PASS_SOURCE_ALIAS_REPAIR_COMPLETE"
+    },
+    "independent_root": "review/architecture-quality-20261101/implementation-results/R7-ROOT-independent-r2.md",
+    "actual_invest_push_smoke": {
+      "passed": 21,
+      "skipped": 1,
+      "seconds": 1.82,
+      "wall_seconds": 2.716,
+      "whole_suite": false,
+      "implicit_deployment": false,
+      "rf_80_runtime_files_unchanged": true,
+      "rf_four_wip_unchanged": true
+    },
+    "publication": {
+      "RF": {
+        "commit": "499d5ca38433983e8679c03d13a75dd2d3aab8c6",
+        "push": "SUCCESS",
+        "first_push_seconds": 84.924,
+        "first_push_tests": "689P1F1skip",
+        "followup": "PASS_INDEPENDENT_6FILE; default12cases8.931s; CI original41file behavior intact",
+        "runtime_commit": "a922305a87e6e5014edcceb4bc394c5b56a3d35a",
+        "normal_push_seconds": 10.532,
+        "normal_push_tests": "12P1.16s",
+        "remote_head": "499d5ca38433983e8679c03d13a75dd2d3aab8c6"
+      },
+      "invest_skills": {
+        "commit": "a781288893adcd5ef6cc86c739a985b4950e098d",
+        "push": "SUCCESS",
+        "normal_push_seconds": 6.362,
+        "remote_head": "a781288893adcd5ef6cc86c739a985b4950e098d"
+      },
+      "CWP": {
+        "source_commit": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "commit_seconds": 75.076,
+        "reviewed_source_unchanged": true,
+        "foreign_hook_bytes_mode_unchanged": true,
+        "push": "DOC_BUNDLE_PENDING"
+      }
+    },
+    "deployment": {
+      "status": "TARGETED_DEPLOYED_FRESH_PROCESS_PASS",
+      "rf_selected_runtime_and_docs": 21,
+      "invest_selected_runtime_and_docs": 2,
+      "logical_targets": 69,
+      "public_configs_unchanged": 6,
+      "repeat_writes": 0,
+      "fresh_process_roots": [
+        ".agents",
+        ".claude",
+        ".codex"
+      ],
+      "fresh_process_seconds": 1.387,
+      "network_calls": 0,
+      "originals": 0,
+      "real_company_acceptance": "OPEN"
+    }
   }
 }

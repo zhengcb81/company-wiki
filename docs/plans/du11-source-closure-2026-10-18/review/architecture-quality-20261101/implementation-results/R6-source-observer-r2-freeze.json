@@ -1,0 +1,85 @@
+{
+  "schema_version": "source-observer-freeze/2",
+  "frozen_at_utc": "2026-11-02T07:10:38.615780+00:00",
+  "source_runtime_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "files_sha256": {
+    "tools/source_case_runner.py": "633b326665e9a37a026da28ce472dfbd2aac085366e8f39f0c24f32b0662fc58",
+    "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+    "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "tests/unit/test_source_case_runner.py": "b126c7afe984df2c314feca91555a8dd271112c280fb507158d0000b0abba2f1",
+    "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+    ".pre-commit-config.yaml": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+    ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453"
+  },
+  "source_engine_changed": false,
+  "receipt_limit_bytes": 300000,
+  "checkpoint_limit_bytes": 16384,
+  "source_limits_unchanged": [
+    90,
+    16000000,
+    112
+  ],
+  "original_v3_case_replayed_after_repair": false,
+  "actual_checks": {
+    "r1_encoding": "18P/1.07s",
+    "r1_integration_final": "29P/4.54s",
+    "r2_race_red": "2F/0.79s; tool console, no fabricated junit",
+    "r2_targeted": "11P/1.24s; not a repeat ofall29"
+  },
+  "r2_test_receipt": {
+    "returncode": 0,
+    "wall_seconds": 2.504,
+    "counts": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "tests/unit/test_source_case_runner.py::test_late_foreign_writer_wins_without_observer_clobber",
+      "tests/unit/test_source_case_runner.py::test_unselected_target_keeps_actual_tree_intro_and_required_context",
+      "tests/unit/test_source_case_runner.py::test_structure_projection_reports_incomplete_ancestry_without_inventing_scope",
+      "tests/unit/test_source_case_runner.py::test_atomic_replace_failure_preserves_previous_checkpoint",
+      "tests/unit/test_source_case_runner.py::test_large_completed_result_is_durable_and_keeps_checkpoint_evidence",
+      "tests/unit/test_source_case_runner.py::test_parent_timeout_preserves_child_checkpoint_or_committed_result",
+      "-q",
+      "--tb=short",
+      "-p",
+      "pytest_asyncio.plugin",
+      "-p",
+      "pytest_timeout",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\or2-4811339f",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r6-publication\\source-observer-r2-tests.xml"
+    ],
+    "sha256": {
+      "tools/source_case_runner.py": "24e13f1cb3b432304945b30bc1ae6a7cd123eeda493742945a89d818596689e1",
+      "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+      "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+      "tests/unit/test_source_case_runner.py": "b126c7afe984df2c314feca91555a8dd271112c280fb507158d0000b0abba2f1",
+      "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8"
+    },
+    "cleanup": {
+      "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\or2-4811339f",
+      "initially_absent": true,
+      "files": 11,
+      "logical_bytes": 3757,
+      "containment_checked": true,
+      "non_reparse_checked": true,
+      "exists_after": false
+    },
+    "real_original_access": false,
+    "real_source_replays": 0,
+    "model_calls": 0
+  },
+  "known_temp_limit": "tmp/osred initial snapshot not captured for2RED run; retained, cleanup NOT_VERIFIED. Other owned uuid test roots restored absent."
+}

@@ -1,0 +1,223 @@
+{
+  "schema_version": "t3-note-physical-implementation/1",
+  "status": "FROZEN_FOR_ROOT_REVIEW_STOP",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6",
+  "branch": "codex/architecture-t3-source-scope-20261102",
+  "base": "c6bb801b",
+  "head_at_freeze": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+  "owned_files_sha256": {
+    "src/company_wiki/document_understanding/narrative_continuity.py": "7b3daffa6784eeaec88077aa7df0660c1f1f45f37597ad2e969b02d3d6acd7bb",
+    "src/company_wiki/document_understanding/structure/source_scopes.py": "f521454286044581294781046d308351bff191cb3f8ee715072a273ef568f525",
+    "src/company_wiki/document_understanding/structure/sections.py": "e31fb5b8344a81a152bbbe649da40255e05567e8d9daa8693b5d8bf61a33b8be",
+    "src/company_wiki/document_understanding/structure/__init__.py": "80be6de8d106d800eef13b3e8e24ee35028ebb6e8f6f14ba7f061fb15286144a",
+    "src/company_wiki/document_understanding/structure/relations.py": "279cb0515156534ed67c4a24784433fe25ad26cb3ffd084933355bf734b40c84",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "0e7fc36be14c01b82769cc62df88aa6c639033b4ad62f60f2d9d3c605003754a",
+    "src/company_wiki/document_understanding/pipeline.py": "8a60babc8f4c86542bd5b4fd5c82e366cd2ad538929f195f9dd9e2a8a18a85ad",
+    "src/company_wiki/source_catalog/narrative_native_materials.py": "9754c16c5b5fa225eda016c266cabd2774ca0b15810cad7ebe74e9523575cb29",
+    "tests/unit/document_understanding_note_scope/test_source_scope_proofs.py": "7bb96b939914918fd83d6b6fd66c18b7f96dcf3f1fe699d7dd1b1980aec208aa"
+  },
+  "changes": [
+    "Existing original paragraph membership and native block character proof extracted to one continuity owner helper; same-page physical fallback observes adjacency, not unfinished syntax or actor.",
+    "Source-marked note observer outputs bounded original intro/member/proof refs; sections remains sole tree owner, closes old note and resets outer frames on new marker.",
+    "Exact unproven targets propagate structure semantic partial, coverage incomplete and native material context_blocked; healthy independent material remains available.",
+    "Hard terminal consumers delegate the shared stdlib primitive without changing source grammar or actor/number semantics.",
+    "Continuity feature /12 and pipeline 1.16.0; source-note-scope/1 enters actual recipe through explicit imports."
+  ],
+  "test_runs": [
+    {
+      "log": "np-first.log",
+      "result": "12 passed, 3 failed",
+      "seconds": 1.9,
+      "cause": "Three real pipeline heading producer failures retained; ROOT fixed layout_hints/text_evidence terminal owner.",
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_note_scope/test_local_scopes.py",
+        "tests/unit/document_understanding_note_scope/test_physical_scope.py",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p1"
+      ]
+    },
+    {
+      "log": "proofs-first.log",
+      "result": "84 passed, 2 failed",
+      "seconds": 10.81,
+      "cause": "Two self-authored same-block fixture errors: fragments incorrectly used distinct default boxes. Existing physical observer56/shared-budget19 and nine new proof cases passed.",
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_note_scope/test_source_scope_proofs.py",
+        "tests/unit/document_understanding_selection/test_native_list_physical_observer.py",
+        "tests/unit/document_understanding_root/test_structure_shared_work_budget.py",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p2"
+      ]
+    },
+    {
+      "log": "proofs-two.log",
+      "result": "1 passed, 1 failed",
+      "seconds": 2.04,
+      "cause": "After correcting fixture boxes, overlap control passed; positive intro/member proof succeeded but a new total-coverage assertion incorrectly ignored existing optional geometry diagnostic.",
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_note_scope/test_source_scope_proofs.py::test_split_intro_uses_real_block_character_members_without_geometry",
+        "tests/unit/document_understanding_note_scope/test_source_scope_proofs.py::test_overlapping_original_character_members_cannot_create_a_complete_scope",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p3"
+      ]
+    },
+    {
+      "log": "note-three-green.log",
+      "result": "3 passed",
+      "seconds": 1.5,
+      "cause": "Only the three prior original failures rerun after ROOT producer fix.",
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_note_scope/test_local_scopes.py::test_each_new_note_owns_its_positive_introduction_even_for_same_actor",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p4"
+      ]
+    },
+    {
+      "log": "split-intro-green.log",
+      "result": "1 passed",
+      "seconds": 2.87,
+      "cause": "Only the positive case rerun; asserts source relationship/semantic completeness, preserving existing independent geometry coverage diagnostic.",
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/unit/document_understanding_note_scope/test_source_scope_proofs.py::test_split_intro_uses_real_block_character_members_without_geometry",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p5"
+      ]
+    }
+  ],
+  "static_checks": {
+    "ruff": "All checks passed, nine owned files",
+    "mypy": "Success: no issues found in eight source files",
+    "ruff_argv": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "ruff",
+      "check",
+      "src/company_wiki/document_understanding/narrative_continuity.py",
+      "src/company_wiki/document_understanding/structure/source_scopes.py",
+      "src/company_wiki/document_understanding/structure/sections.py",
+      "src/company_wiki/document_understanding/structure/__init__.py",
+      "src/company_wiki/document_understanding/structure/relations.py",
+      "src/company_wiki/document_understanding/operating_states/relations.py",
+      "src/company_wiki/document_understanding/pipeline.py",
+      "src/company_wiki/source_catalog/narrative_native_materials.py",
+      "tests/unit/document_understanding_note_scope/test_source_scope_proofs.py"
+    ],
+    "mypy_argv": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "mypy",
+      "src/company_wiki/document_understanding/narrative_continuity.py",
+      "src/company_wiki/document_understanding/structure/source_scopes.py",
+      "src/company_wiki/document_understanding/structure/sections.py",
+      "src/company_wiki/document_understanding/structure/__init__.py",
+      "src/company_wiki/document_understanding/structure/relations.py",
+      "src/company_wiki/document_understanding/operating_states/relations.py",
+      "src/company_wiki/document_understanding/pipeline.py",
+      "src/company_wiki/source_catalog/narrative_native_materials.py"
+    ]
+  },
+  "test_logs": {
+    "note-three-green.log": {
+      "sha256": "1b28851e115b115628b7d68a49af6230eb629cd862675551cd3002c73fd9fcb0",
+      "bytes": 1218,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3np-f91a\\\\p4\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 3 items\n\ntests\\unit\\document_understanding_note_scope\\test_local_scopes.py ...    [100%]\n\n============================== 3 passed in 1.50s ==============================\n"
+    },
+    "np-first.log": {
+      "sha256": "1c63e564c3d121b06699fac88b95b8befcb468393f548e2560049e2941031a72",
+      "bytes": 6511,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3np-f91a\\\\p1\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 15 items\n\ntests\\unit\\document_understanding_note_scope\\test_local_scopes.py FFF... [ 40%]\n...                                                                      [ 60%]\ntests\\unit\\document_understanding_note_scope\\test_physical_scope.py .... [ 86%]\n..                                                                       [100%]\n\n================================== FAILURES ===================================\n_ test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors0-numbers0] _\ntests\\unit\\document_understanding_note_scope\\test_local_scopes.py:30: in test_each_new_note_owns_its_positive_introduction_even_for_same_actor\n    assert not forbidden.intersection(context), {\"target\": index, \"wrong_ancestors\": context}\nE   AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd10714...de7a14ffc', 'urn:company-wiki:narrative-unit:sha256:6c35d270618b512f4637c6b735c03ba8e0a432805c31cb8312ebefcde2d3934e'}}\nE   assert not {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'}\nE    +  where {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'} = <built-in method intersection of set object at 0x000001D057E6EB20>({'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc', 'urn:company-wiki:narrative-unit:sha256:6c35d270618b512f4637c6b735c03ba8e0a432805c31cb8312ebefcde2d3934e'})\nE    +    where <built-in method intersection of set object at 0x000001D057E6EB20> = {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc', 'urn:compa...d7b13c895b', 'urn:company-wiki:narrative-unit:sha256:fe70ecf9c1e4ea56b88b1741ff14f27054ed30002f14d7ba633d5c7cee6ff352'}.intersection\n_ test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors1-numbers1] _\ntests\\unit\\document_understanding_note_scope\\test_local_scopes.py:30: in test_each_new_note_owns_its_positive_introduction_even_for_same_actor\n    assert not forbidden.intersection(context), {\"target\": index, \"wrong_ancestors\": context}\nE   AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce6...7a54dbd7d', 'urn:company-wiki:narrative-unit:sha256:ebbc62fc7fe7317ed54e723fc143eda0dcaa3813cd8ed150b98b351d409682e6'}}\nE   assert not {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'}\nE    +  where {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'} = <built-in method intersection of set object at 0x000001D057FEC4A0>({'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d', 'urn:company-wiki:narrative-unit:sha256:ebbc62fc7fe7317ed54e723fc143eda0dcaa3813cd8ed150b98b351d409682e6'})\nE    +    where <built-in method intersection of set object at 0x000001D057FEC4A0> = {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d', 'urn:compa...60a980a3db', 'urn:company-wiki:narrative-unit:sha256:f74a84dbc37aac15764641a9424bf8c69b9b7ca86c614260e701d4b1ebe1a53e'}.intersection\n_ test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors2-numbers2] _\ntests\\unit\\document_understanding_note_scope\\test_local_scopes.py:30: in test_each_new_note_owns_its_positive_introduction_even_for_same_actor\n    assert not forbidden.intersection(context), {\"target\": index, \"wrong_ancestors\": context}\nE   AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:57fd0db3a0d113c1e28d79d4beda422c7a4c25023c95...a14d37b22', 'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}}\nE   assert not {'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}\nE    +  where {'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'} = <built-in method intersection of set object at 0x000001D057EF9540>({'urn:company-wiki:narrative-unit:sha256:57fd0db3a0d113c1e28d79d4beda422c7a4c25023c954321e35b28aa14d37b22', 'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'})\nE    +    where <built-in method intersection of set object at 0x000001D057EF9540> = {'urn:company-wiki:narrative-unit:sha256:319773fad7ebd79da844398654937c02a4c7250dd5874737849cef00f0f92dfa', 'urn:compa...b85ccf458b', 'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}.intersection\n=========================== short test summary info ===========================\nFAILED tests/unit/document_understanding_note_scope/test_local_scopes.py::test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors0-numbers0]\nFAILED tests/unit/document_understanding_note_scope/test_local_scopes.py::test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors1-numbers1]\nFAILED tests/unit/document_understanding_note_scope/test_local_scopes.py::test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors2-numbers2]\n======================== 3 failed, 12 passed in 1.90s =========================\n"
+    },
+    "proofs-first.log": {
+      "sha256": "f7719d5d64a4bb42826bd78cd58345d0ff2f50db9bef4a45a2a6c37f7d157f0d",
+      "bytes": 4454,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3np-f91a\\\\p2\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 86 items\n\ntests\\unit\\document_understanding_note_scope\\test_source_scope_proofs.py . [  1%]\n.....FF...                                                               [ 12%]\ntests\\unit\\document_understanding_selection\\test_native_list_physical_observer.py . [ 13%]\n.......................................................                  [ 77%]\ntests\\unit\\document_understanding_root\\test_structure_shared_work_budget.py . [ 79%]\n..................                                                       [100%]\n\n================================== FAILURES ===================================\n_____ test_split_intro_uses_real_block_character_members_without_geometry _____\ntests\\unit\\document_understanding_note_scope\\test_source_scope_proofs.py:28: in test_split_intro_uses_real_block_character_members_without_geometry\n    parsed, owned = source((Row(\"marker\", \"备注18：\", block=0),\ntests\\unit\\document_understanding_note_scope\\fixtures.py:46: in source\n    assert blocks[key][0] == box, \"fragments of one block keep its observed box\"\n           ^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: fragments of one block keep its observed box\n_ test_overlapping_original_character_members_cannot_create_a_complete_scope __\ntests\\unit\\document_understanding_note_scope\\test_source_scope_proofs.py:41: in test_overlapping_original_character_members_cannot_create_a_complete_scope\n    parsed, owned = source((Row(\"intro\", \"备注18：乙方服务范围：\", block=0),\ntests\\unit\\document_understanding_note_scope\\fixtures.py:46: in source\n    assert blocks[key][0] == box, \"fragments of one block keep its observed box\"\n           ^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: fragments of one block keep its observed box\n============================== warnings summary ===============================\ntests/unit/document_understanding_selection/test_native_list_physical_observer.py::test_production_uses_one_call_local_physical_observation_per_original[cross_page]\n  C:\\Miniconda\\Lib\\site-packages\\jieba\\_compat.py:18: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n    import pkg_resources\n\ntests/unit/document_understanding_selection/test_native_list_physical_observer.py::test_production_uses_one_call_local_physical_observation_per_original[cross_page]\n  C:\\Miniconda\\Lib\\site-packages\\pkg_resources\\__init__.py:3148: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED tests/unit/document_understanding_note_scope/test_source_scope_proofs.py::test_split_intro_uses_real_block_character_members_without_geometry\nFAILED tests/unit/document_understanding_note_scope/test_source_scope_proofs.py::test_overlapping_original_character_members_cannot_create_a_complete_scope\n================== 2 failed, 84 passed, 2 warnings in 10.81s ==================\n"
+    },
+    "proofs-two.log": {
+      "sha256": "3cdfb74b8e93c81fc086847fafba0942b169cf298f9eceb442584d2a56fa06b0",
+      "bytes": 1933,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3np-f91a\\\\p3\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 2 items\n\ntests\\unit\\document_understanding_note_scope\\test_source_scope_proofs.py F [ 50%]\n.                                                                        [100%]\n\n================================== FAILURES ===================================\n_____ test_split_intro_uses_real_block_character_members_without_geometry _____\ntests\\unit\\document_understanding_note_scope\\test_source_scope_proofs.py:38: in test_split_intro_uses_real_block_character_members_without_geometry\n    assert result[\"structure\"][\"coverage\"][\"complete\"] is True\nE   assert False is True\n=========================== short test summary info ===========================\nFAILED tests/unit/document_understanding_note_scope/test_source_scope_proofs.py::test_split_intro_uses_real_block_character_members_without_geometry\n========================= 1 failed, 1 passed in 2.04s =========================\n"
+    },
+    "split-intro-green.log": {
+      "sha256": "9227b8fa99cbb73228ee50bcc1e3d96fca01b974ce5be85351c2f655edd25eef",
+      "bytes": 1219,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\t3np-f91a\\\\p5\", \"requested_basetemp_len\": 51, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 1 item\n\ntests\\unit\\document_understanding_note_scope\\test_source_scope_proofs.py . [100%]\n\n============================== 1 passed in 2.87s ==============================\n"
+    }
+  },
+  "cleanup": {
+    "scope": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a",
+    "initially_absent": true,
+    "absolute_parent_verified": true,
+    "all_paths_non_reparse": true,
+    "file_count_before": 6,
+    "bytes_before": 15547,
+    "requested_basetemps": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p1",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p2",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p3",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p4",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3np-f91a\\p5"
+    ],
+    "relocations_observed": false,
+    "raw_pytest_logs_preserved_in_this_json": true,
+    "exists_after": false
+  },
+  "original_access": false,
+  "models_or_paid_calls": 0,
+  "configuration_or_production_data_modified": false,
+  "git_or_index_modified": false,
+  "unchanged_frozen_tests_first": "Original six delivery files untouched by this author; added independent proof file only. ROOT owns final aggregate 47 plus its terminal additions and these 11 proof cases.",
+  "limitations": [
+    "No claim of a single combined all-green run; exact run outcomes preserved. ROOT will run final aggregate once after frozen source review.",
+    "No real H1, formal summary, cache recovery or RF usage acceptance in this author scope.",
+    "Existing layout coverage may be incomplete without geometry even where exact note source membership is proven; no new geometry requirement imposed by scope.",
+    "English Note headings and general ambiguous financial-note formats remain outside this source-marked simplified/traditional Chinese-note scope.",
+    "No recipe/cache mutation experiment run by this author; explicit new source import closure still needs ROOT consolidated acceptance."
+  ],
+  "handoff": "STOP; no commit/merge/push, shared worktree retained for ROOT. Only owned scratch removed after original absence and containment verification."
+}

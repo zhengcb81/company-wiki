@@ -1,0 +1,330 @@
+{
+  "status": "CORE_G1_G5_FROZEN_FOR_ROOT_INDEPENDENT_REVIEW",
+  "source_baseline": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "manifest": {
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/models.py": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/automation/narrative_projection.py": "5df3112779d4fadd7065e15e326bee0dbfda3e63a3112a1f5b9379e695966b0d",
+    "src/company_wiki/automation/narrative_transport.py": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16",
+    "src/company_wiki/automation/narrative_generation.py": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+    "src/company_wiki/automation/narrative_batch.py": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+    "src/company_wiki/automation/narrative_http_model.py": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "tests/unit/test_narrative_representation_no_gate.py": "b9317d2d5fa23356790eaaeccd4c2b111a3c2efbb65cdccc6e06e89d8f99bcab",
+    "tests/unit/test_narrative_job_contracts.py": "e7c438de8592331c4e0f449eceb769826643666a6910657571eeeb43ce6acca1",
+    "tests/unit/test_narrative_transport_contracts.py": "64e82e43f2c93ab0e1dbb2c588b561bfad7a05e9e88a964bd1443135cce6a87a",
+    "tests/unit/test_narrative_reading_transport.py": "e3ad7cf6027f8db7aa51f804e9de46b40de5681b093148f39276b0b04d95d095",
+    "tests/unit/test_narrative_select_handler.py": "06ba40a09ddf6758d850ee8caad331d12a89fea4fe29c6bf8b783c44160b701a",
+    "tests/unit/test_narrative_extractive_runtime.py": "2510e4be14146710f93d3ee391905652752b202c66db0c624b5101eb6c556d30"
+  },
+  "new_red": {
+    "g1_g2": "5F3P/7.42s; bytes case initial invalid forbidden-field fixture corrected transparently; other4 genuine behaviors RED",
+    "model_final_representation": "2F/8.57s; stop and length both wrongly gated after full HTTP body and usage read"
+  },
+  "green": {
+    "g1_g2": "14P/6.52s before model additions",
+    "model_final_representation": "2P/8.18s",
+    "post_migration": "54P1F/28.50s; only wrong machine-specific1500 recursion oracle remained",
+    "actual_json_runtime_injection": "1P/2.01s; one earlier broad JSON-global injection failure retained",
+    "normal_host_cache_fixture": "3P unchanged implementation, earlier sandbox E not product bug",
+    "static": "Ruff all21 files PASS; mypy15 source PASS"
+  },
+  "affected_integration": "one325case run reached85%, had legacy size-oracle F and5sandbox-only cache fixtureE; stopped at~290s while local HTTP contract group stalled, no XML, NOT PASS; no repeat325/full-suite",
+  "normal_host_followup": "18P1F/10.68s exact failed fixture/extractive target, the F was removed32k permission expectation",
+  "changes": [
+    "shared iterative JSON tree validation/copy/freeze/path walk, no fixed depth or count; actual cycles/nonfinite/types invalid",
+    "no select/summary/bundle/context/dependency/transport/ref/CLI/official capture receipt fixed byte denial; identity fields still strict",
+    "no execution report/summary assessment fixed bytes denial",
+    "extractive default draft quota no longer derived56k; explicit positive max_draft_bytes still a real honored caller budget, no hard56k ceiling",
+    "post-response128k content and DTO/failed-final count cap removed; actual HTTP read bytes/timeout/configured output tokens/accounting retained",
+    "automatic corrupt cache candidate logged/skipped; explicit pin and source/asof/unknown fee/IO failures remain strict"
+  ],
+  "remaining": [
+    "ROOT independent review, including added G3/G4/G5/last-consumer16 files",
+    "ROOT normal commit/push/currentCI",
+    "true cold H1 at original90s/16M/112",
+    "real summary/cache recovery/RF adoption"
+  ],
+  "test_expectation_changes": "only retired arbitrary-size failure expectations replaced by no-loss/actual-validation controls; fabricated oversized raw still fails PARSER_INCOMPLETE because not original; path leak still rejects; old real-budget lazy rejection now passes explicit quota",
+  "no_raw_provider_model_config_git_changes": true,
+  "delivery_files_sha256": {
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/models.py": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/automation/narrative_projection.py": "5df3112779d4fadd7065e15e326bee0dbfda3e63a3112a1f5b9379e695966b0d",
+    "src/company_wiki/automation/narrative_transport.py": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16",
+    "src/company_wiki/automation/narrative_generation.py": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+    "src/company_wiki/automation/narrative_batch.py": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+    "src/company_wiki/automation/narrative_http_model.py": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "tests/unit/test_narrative_representation_no_gate.py": "b9317d2d5fa23356790eaaeccd4c2b111a3c2efbb65cdccc6e06e89d8f99bcab",
+    "tests/unit/test_narrative_job_contracts.py": "e7c438de8592331c4e0f449eceb769826643666a6910657571eeeb43ce6acca1",
+    "tests/unit/test_narrative_transport_contracts.py": "64e82e43f2c93ab0e1dbb2c588b561bfad7a05e9e88a964bd1443135cce6a87a",
+    "tests/unit/test_narrative_reading_transport.py": "e3ad7cf6027f8db7aa51f804e9de46b40de5681b093148f39276b0b04d95d095",
+    "tests/unit/test_narrative_select_handler.py": "06ba40a09ddf6758d850ee8caad331d12a89fea4fe29c6bf8b783c44160b701a",
+    "tests/unit/test_narrative_extractive_runtime.py": "2510e4be14146710f93d3ee391905652752b202c66db0c624b5101eb6c556d30",
+    "src/company_wiki/automation/narrative_source_guard.py": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_verify.py": "e0500a149798b880bcdc883df70fba784da8b64172a39eca9404bcc2e44d6329",
+    "src/company_wiki/automation/narrative_summary_execution.py": "221917810327c20779de9e3120c2f75a28cf189d9f265c2dd3fcfb0fe0c9c0c6",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "81efe5a04da865a8fa67cc9b9786e5446fb5317c7973db74da9cf30cdf9c0754",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "277335f890a5a2a8384c7b79324a684da9b44da7da6dc24c0a95d4482c1ee245",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "97d52c3e22bbec6b0878525f06a3e5a10ea171033ac79aab5f23c425b6361734",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "bd2afb3cd54cbf91378b136b27ff81e9e421b3f4ec2e0f1ecb634544a5fcabc3",
+    "tests/unit/test_summary_receipt_representation.py": "99b72072e16f1629c2ec2f1429a8618bf5d1c4ec42e46478706a9af44f216905",
+    "tests/unit/test_verified_source_operation.py": "5acff4c4a1e147c6ae7e0fab5326d72cc91eabf09419e50b5b7e5a74ccd812cb",
+    "tests/unit/du11_production/test_same_unit_independent_material.py": "9a6ed6346ee4da89fe3dc312c64378d31ff195636152d356f0f14e3c797aad8c",
+    "tests/unit/du11_reading_plan/test_native_navigation_resource_limits.py": "b23297e868970761c3784d824ac06c935256ab5ac39713b33ceeeb2d76afd04b",
+    "tests/unit/du11_reading_plan/test_reading.py": "7883d5b4c456ad9944d6637e1f84407b7bf4efc3f1321852ca9198a29e951480",
+    "tests/unit/du9_geometry_planner/test_b_contract_counterexamples.py": "c31b891fc60999d3ca45cf096e570215281142a8a2a521d39ff10838fe37ca06"
+  },
+  "phase_G1_G2_manifest_21_still_exact": true,
+  "final_source_count": 25,
+  "final_test_file_count": 12,
+  "post_phase_changes": {
+    "G4": "reader combined observation once; upper guard no second SHA, cheap source/ref/metadata binding remains; old two-method readers retain compatibility",
+    "G3": "same-unit source material and processing completeness separated only when prior prepared independent support exists; unknown grammar remains partial, original qualifiers/actor/negation and binding unchanged",
+    "G5": "no32/4096/64 native hint permission; shared actual work prepayment for material validation/admission; source runtime passes same existing account and full key list; completed window prefix retained including budget stop during merge without mutating canonical keys",
+    "G1_last_consumer": "remaining _report32KiB denial removed;400-task real handler+public persisted reader passes; changed plan binding still rejects"
+  },
+  "final_static": {
+    "ruff": "PASS37 files",
+    "mypy": "PASS25 source files"
+  },
+  "startup_observation": {
+    "firstG3group": "temporary20s pytest timer stopped during nltk->sklearn cold library import, log retained, no XML, not product semantics PASS/FAIL",
+    "measured_warmup_seconds": 5.415,
+    "prewarmed_G3_group": "15P14.95s; not production cold performance proof",
+    "cold_start_system_performance_fixed": false
+  },
+  "run_receipts": [
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-core-red.xml",
+      "tests": 8,
+      "failures": 5,
+      "errors": 0,
+      "seconds": 7.226,
+      "junit_sha256": "87adc27802dbbdb93c2c857e0e6ce6943789f1dbb80f0708ef56adbb47d865ae",
+      "log_sha256": "10931ea730711a1a636b40a50ad12ab1f40bf98edaf91b6e96d472833ad69011"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-core-first-green.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 5.566,
+      "junit_sha256": "9724186a53d76a45d6e6285f7e8356da81c612bc3bd89528c479aaeb4f2e07ad",
+      "log_sha256": "3d32f2c07c97a1c381f0b77deca855da3ed668197e0e0eb20e8f2d0206924ce2"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g1-g2-target.xml",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 6.335,
+      "junit_sha256": "51cbf0bccf36d44722a9ac80be0ad75110b2f2ed02edb1a7fc2b7a066505e681",
+      "log_sha256": "be93b5e6e2c6908361edffb65373934552a6de5d82e480d4caf2df84a42223c9"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-model-content-red.xml",
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "seconds": 8.275,
+      "junit_sha256": "eb2772ae1976c8a7f4c5e9434637026ae947151aa003c00250ceec6eaeb8b177",
+      "log_sha256": "93dd41d5da1e97f839c698a181afa42d8813054a058fe40c505e27b007563bee"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-model-content-green.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 7.931,
+      "junit_sha256": "773e90929c3ea2d587a8fc427b13fc56a640cd2607417c7559493c78e2b6347b",
+      "log_sha256": "d30461cdc6d1a12927429f2d6100aa880c760d17aa44290d0694b8311a824efa"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-followup-one.xml",
+      "tests": 19,
+      "failures": 1,
+      "errors": 0,
+      "seconds": 10.508,
+      "junit_sha256": "a0ea4b3e0d135d7888ab44969e3f33b034a31e2b0c70bf96e94a43a7fc9347ea",
+      "log_sha256": "1255be1c349eff8f1bbe1064407b3ea593d887d566b865fa03f12e2cd51559af"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-recovery-controls.xml",
+      "tests": 55,
+      "failures": 1,
+      "errors": 0,
+      "seconds": 28.294,
+      "junit_sha256": "f8e72f6410e08265517e1587c58a33068114cb3b17a3d543fa7954e4de6681b6",
+      "log_sha256": "487fb556d7b3edf708667bf1d7ea17032b0511d804638b6cc6dffff337f94812"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-json-runtime-control.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "seconds": 3.653,
+      "junit_sha256": "7cda9a9482179fa8ca9177c4cbe25e264d445cbef8e568588c870eeb857108fd",
+      "log_sha256": "df6f6022993edd71e03a84784adf2bf2a66e6d87ea4060c25ff532c43a273db2"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-json-runtime-control-final.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 1.929,
+      "junit_sha256": "499413a9f0f66fd8338bc3ad5e88ab15de34fc5a585003e28a00d16111cc8136",
+      "log_sha256": "e71d2f505d48456fc4cde40e66c7a821485d2c4d13b2956f5cc658bbbeae782d"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g4-red.xml",
+      "tests": 6,
+      "failures": 2,
+      "errors": 0,
+      "seconds": 1.997,
+      "junit_sha256": "e7da285010f47aeba18054ca8e637837aad75a9be8b5ee5c143d929263151d55",
+      "log_sha256": "dd8547cfedeb78522b2bc9461c4fac662fa232f7a2465fa4639feacc18e969c6"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g4-green.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 2.202,
+      "junit_sha256": "216944f88899cff6ae91a0d5f493ef708962bb29aa107a614b07afbe896721d0",
+      "log_sha256": "081fca521fc8dfc042811c2f35c4d29c6ac7f20b4fabd6f553bd46e2e21c0fd8"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g3-observation.xml",
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "seconds": 6.063,
+      "junit_sha256": "6ffb5af50657d7717651694f4c51fff04170647f9327a1a41ccfa0cb588c5d5a",
+      "log_sha256": "ad10f4d368a64097132b13dcbefe6eddd55d61d952a74b7c917ae2ae2192315b"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g3-target.xml",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 14.921,
+      "junit_sha256": "93d5ea6ecf8dbcdfdbc6c3d433606d6e7eddb68d0b00f28126f08aabbbe90f1b",
+      "log_sha256": "650108b9dd3723a8ad90763ceea46ef24f48c547bedafc49fc0435fe5ec5bda2"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g3-qualifier-controls.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 7.631,
+      "junit_sha256": "78b66cf51db4ec870e18e20c0946c33b4db788db3bd3c8b92513d6d8b0944d87",
+      "log_sha256": "18fc41f878ea4da3c34ff1948b40de79461d1e520bc313da3d70be251162440a"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g5-red.xml",
+      "tests": 5,
+      "failures": 5,
+      "errors": 0,
+      "seconds": 2.114,
+      "junit_sha256": "52ccbd9f016f69b892aade322d3140e7c99dba6ec8eb5b7c3cb3a1b7fe119792",
+      "log_sha256": "44260453163325ef23b8a210f1c56b9c21d7049c76b7c83de277dbb1e48d87a9"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g5-admission-red.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "seconds": 2.202,
+      "junit_sha256": "6ef7b7ab65cff9e5b86628066dcc918bb1841073dbcc1a4c1a06bb9dfca0fecc",
+      "log_sha256": "252c7726833011cbf102b99d47b2b55ee54deeb83ecb508098b4f688a9549df8"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g5-first.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 1.909,
+      "junit_sha256": "1714446a9025b2488fc43fdf9f1cc8dd6942bb9c4c02a7380818555cb22f4e88",
+      "log_sha256": "f141ecd4a669e0595ae31724be2ba21a7030853527876bdd5e4add53ebefa390"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g5-integration.xml",
+      "tests": 94,
+      "failures": 3,
+      "errors": 0,
+      "seconds": 6.473,
+      "junit_sha256": "58f7f2a7d6763f2dc1df710302ead1ee687c5f8f575ce13fdde6a07cb8eb1826",
+      "log_sha256": "48efdfb5f8959095fb381a0c3a0c902a5028202cd46904e46eae3cd65530f44e"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g5-recovery.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 2.932,
+      "junit_sha256": "8d95a600cc1e20fd026f3a2b444d4e1f1a689049f07ecde579710f4895dc8450",
+      "log_sha256": "3076245f12bf9ab75729c40e6a19c8fc051a1edbd6e337e20d9c5a8162883d7e"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-g5-budget-controls.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 3.8,
+      "junit_sha256": "da7aa767fe51b4a39947b2f636193c4db3845c26ca2309e9c6f2883a743cf630",
+      "log_sha256": "1a9a6551c27d16905a65c83e0a2aa66e63d4e23133de7ec39253aedd43b94200"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-execution-consumer-red.xml",
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "seconds": 4.231,
+      "junit_sha256": "1925b718772bbfe345362ad61dc3aa6d63f9d8440462c76186933e203889f580",
+      "log_sha256": "5d80d883378e923495f9acf7a4863d9e2b21364de5801662a4811eab4ea9d782"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-execution-consumer-green.xml",
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "seconds": 5.636,
+      "junit_sha256": "2660802a4d8c0609608dcfe67856ee14b9a458cf202c5a95c5ecac3d4dacb244",
+      "log_sha256": "c52a2210a0f7536005ff4bdd1bf92c1d1980ed12fbe60ce0bca06e1be422a417"
+    },
+    {
+      "junit": ".planning/architecture-quality-20261101/r7-execution-consumer-final.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 8.484,
+      "junit_sha256": "a43b28955f9e8758d8dd547e2481aca7d0988853bc2af10a064509ed840eda42",
+      "log_sha256": "83b12e35556fd9eff717da8fe50b1770a291b369ed3d8702380d0052e42d5696"
+    }
+  ],
+  "remaining_static_risks": [
+    "source quotation starting with physical path token may be over-rejected by global path validation; not reproduced or fixed this node",
+    "actual cold startup variability not systemically remediated; original real H1deadline still required",
+    "legacy byte-size constants remain planning/compatibility estimates only; real configured storage/network/work budgets remain enforced",
+    "navigation exploratory work still uses original same-parent resource allocation (one eighth, max250k), not a permission or new budget; no quota raised"
+  ]
+}

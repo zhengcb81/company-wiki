@@ -161,6 +161,6 @@
     "entry": "../document-understanding-2026-10-13/README.md",
     "meaning": "Earlier DU/P1-P4 inputs closed/handed into current stream; read original reception receipts for exact card scope, do not re-dispatch from oldREADY text"
   },
-  "critical_path": "task_plan.md P0-P3",
+  "critical_path": "task_plan.md Next Step / R7 engineering accepted, remote CI and real C, then P3 full company loop",
   "warning": "Merged tooling and historical CI success do not imply current product CI or real company workflow passed."
 }

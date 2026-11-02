@@ -1,0 +1,496 @@
+{
+  "schema_version": "crossrepo-gate-audit/1",
+  "status": "READ_ONLY_AUDIT_COMPLETE_STOP",
+  "repositories": {
+    "FF": {
+      "root": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "branch": "main",
+      "head": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+      "status_short_at_close": "?? .planning/du11-empty-placeholder-original.py\n?? config/FMP_API_KEY.txt\n?? pytest-of-ff-root-failures-fixed/\n?? pytest-of-ff-root-failures/\n?? pytest-of-ff-s3-p5-full/\n",
+      "runtime_source_count": 18,
+      "runtime_sources_sha256_at_close": {
+        "scripts/et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+        "scripts/fetch_filing.py": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+        "scripts/fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+        "scripts/ff_configuration.py": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+        "scripts/ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+        "scripts/ff_local_preparation_observation.py": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+        "scripts/ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+        "scripts/ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+        "scripts/ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+        "scripts/ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+        "scripts/ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+        "scripts/ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+        "scripts/ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+        "scripts/ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+        "scripts/filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+        "scripts/transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+        "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+        "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+      }
+    },
+    "RF": {
+      "root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "branch": "main",
+      "head": "957c6283d3381d23c39515afd3a09147d8201c7b",
+      "status_short_at_close": " M assurance/runs/daily_alert.jsonl\n M assurance/runs/monthly_manifest.json\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? .planning/m8-native-adoption-20261031/\n?? .planning/source-quote-adoption-20261030/\n?? delivery/dashboard-b34-wuxi-20261101/\n?? delivery/dashboard-b37-wuxi-20261102/\n?? output/\n",
+      "runtime_source_count": 79,
+      "runtime_sources_sha256_at_close": {
+        "scripts/__init__.py": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+        "scripts/analysis/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scripts/analysis/confidence.py": "ba54a0c28a568a68aebb6cb8a1fde438c73fcfada4ffc3bfb16613d91f95b820",
+        "scripts/analysis/sensitivity.py": "e17c99b721002bcfd2697a0a167c40a35b717020156d51398fe92b7992994064",
+        "scripts/asset_ownership.py": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+        "scripts/commercial_terms.py": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+        "scripts/company_wiki_narrative_contracts.py": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7",
+        "scripts/company_wiki_narrative_posix.py": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+        "scripts/company_wiki_narrative_process.py": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+        "scripts/company_wiki_narrative_reader.py": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+        "scripts/company_wiki_narrative_tree.py": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+        "scripts/company_wiki_source.py": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111",
+        "scripts/company_wiki_source_reader_v2.py": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+        "scripts/company_wiki_source_v2.py": "f3c1cf617b856fb83d252e64c290d95e28c0be3fd472060ed17130548bbeda01",
+        "scripts/confidence_policy.py": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+        "scripts/contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scripts/contracts/annual_consumption.py": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a",
+        "scripts/contracts/company_wiki_original.py": "b79d05216f45582dee225413c9a1110c698378292a4d53d106c5ef9016d96a42",
+        "scripts/contracts/constants.py": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e",
+        "scripts/contracts/document.py": "575506fe0a4a3021a578c39c3a4c9faf9cd76e8336b4e1349b1b1330a4e40fb4",
+        "scripts/contracts/evidence.py": "13f54e95790763ebf75e795ee97e7fcd22ba377d0223cc70bd018d531aa22321",
+        "scripts/contracts/period_flow.py": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf",
+        "scripts/contracts/recognition.py": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375",
+        "scripts/contracts/source_clock.py": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a",
+        "scripts/contracts/source_provenance.py": "a15bde04c812bf54c84ba309535541875bfbb0513d2cbf4386040de1e76994df",
+        "scripts/filing_fetch_client.py": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc",
+        "scripts/filing_upstream_cause.py": "1cefb1e79ffc4b024619ca957013aeca4c117060630ae015a1ee6679654f5c08",
+        "scripts/fix_hashes.py": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+        "scripts/forecast/calc.py": "c5a86d843b0679a5292fa1e3ea27ebd2e628d9d19067047a228117e0e7b954a3",
+        "scripts/forecast/dependencies.py": "98bfda50e29b3a694f9e76c71ea49782c973afaea39586223915aa04399d6d14",
+        "scripts/forecast/segments.py": "4039d0923f4d34251d5466dfe56b6599cbc54786a55a349599acd10061694949",
+        "scripts/generate_input_template.py": "72ab8f53271718a1148b030888afd17efa8d85dd0cef52d51d359b7ab10846c0",
+        "scripts/installation_manifest.py": "923b40645ca9d5fe06c9e713e4542b2028b0adde448b83db75bcd8260a05a492",
+        "scripts/internal_flow.py": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+        "scripts/lint_input.py": "2814b157faad471dda24e363f03da38c84933f651f7c3f72b82206829e4f25f1",
+        "scripts/mine_year_operation.py": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+        "scripts/mixed_recognition.py": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+        "scripts/model_extensions.py": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+        "scripts/model_registry.py": "39da2c1201e8cfe66f8db6c4e378d44771763fd670ee2811c42136fddf427f38",
+        "scripts/narrative_citation_context.py": "cd8d01533f539a9a65beb0500300a76915156dda9b39a497c14f0d53add01ed0",
+        "scripts/narrative_source_preparation.py": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+        "scripts/narrative_summary_observations.py": "2b5ae57c923f14f6db6f64adbc47bd57a7c883fca9b20847aa01d1881c9ac94a",
+        "scripts/narrative_summary_provenance.py": "478b02d128bd1dfb3cfed491562b8b6c3bcf82e2b5e4d4f400993cbd6b9f5633",
+        "scripts/narrative_summary_usage.py": "3c2d6838e3985f2a43e17e20aba85ddbd72fc144cc652e7db54e71ea64a587b4",
+        "scripts/processed_artifact_canary.py": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+        "scripts/publication_registry.py": "abe227876730c720a14eaacc78ebe99b07d248492299fae0f4a94284b17850dd",
+        "scripts/reconciliation.py": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+        "scripts/research/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scripts/research/authoring_projection.py": "00f1afb61975d2a88b8d7021ea38756590fdfa961673472787c3e50b45668703",
+        "scripts/research/communication_scope.py": "96e4b63a3c90825241c395281ff5f3b4cf8496290a63757f150cb74244140a8e",
+        "scripts/research/coverage.py": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+        "scripts/research/drivers.py": "5ba825340431fc6ebf1f38e8facc1b23ae4ced9222312ccd63fbfe9199a9dd1f",
+        "scripts/research/evidence_roles.py": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+        "scripts/research/input_evidence.py": "c0a321f9ca905023846dafa4fe7c35b74e7d3cedc5e77bbd6882168579f338ed",
+        "scripts/research/input_quantities.py": "b4160bbd73d539b79f5edf00bedef6f1a3bd9071a3475bef06ee6342bb9406c1",
+        "scripts/research/input_targets.py": "fe3ec089a8f3827bde60d3f0b154f350251fc1ac36831b7430d441a682632098",
+        "scripts/research/native_dependencies.py": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+        "scripts/research/revenue_basis.py": "54d98be3813618a0cc40f57fbe1179c7c7f03a2531108ae8a36b72df2fb9c0d2",
+        "scripts/research/target_comparison.py": "a3389665e6656f0b2168fa740a25faaaf950a5f689302d10c99930f50f375b2c",
+        "scripts/research/target_measurement.py": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b",
+        "scripts/research/target_scope.py": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee",
+        "scripts/research/targets.py": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc",
+        "scripts/research/timing_bridge.py": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d",
+        "scripts/research_projection.py": "0b1754b93857aa0a7c3f2c703c14db7fb3f9b3aacb4b54b4d88b3367d83dc353",
+        "scripts/research_support_diagnostics.py": "397f40e59249e93e372d191e85a6ee2fbc68b266ff7b399972fbe000b955f085",
+        "scripts/revenue_backtest.py": "d3591fee013e50c21a00d9159892ec777fe0c61be0de045510690e4b6e70dbb2",
+        "scripts/revenue_constraints.py": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+        "scripts/revenue_core.py": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c",
+        "scripts/revenue_forecast.py": "1759dd25c094ed0c5be2d108b53de92ea22e6475b6fbad78573939713f455378",
+        "scripts/revenue_publication.py": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+        "scripts/revenue_report.py": "3f5c1324e2be453ffcb8c58945304fc4e5ca831a71266d5c6b80620874915b23",
+        "scripts/rolling_backtest.py": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+        "scripts/schema_compatibility.py": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5",
+        "scripts/schema_fields.py": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+        "scripts/schema_optin.py": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+        "scripts/source_narrative_context.py": "c71b53bf25ea67a1c1b5b83d5ecad6a63fe653786298f5b5ed3625e35a66a5fe",
+        "scripts/source_period_semantics.py": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff",
+        "scripts/source_preparation.py": "b5a50e9e3495aacdcdf9862fec1b836abe5d4f5a55ac5de49a15feaef4b494f7",
+        "scripts/trust_anchor.py": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c"
+      }
+    }
+  },
+  "protected_rf_wip_hashes": {
+    "daily_alert.jsonl": {
+      "sha256_at_first_hash": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "sha256_at_close": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "unchanged": true
+    },
+    "monthly_manifest.json": {
+      "sha256_at_first_hash": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+      "sha256_at_close": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+      "unchanged": true
+    },
+    "weekly_alert.jsonl": {
+      "sha256_at_first_hash": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "sha256_at_close": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "unchanged": true
+    },
+    "weekly_manifest.json": {
+      "sha256_at_first_hash": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+      "sha256_at_close": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+      "unchanged": true
+    }
+  },
+  "all_four_rf_wip_unchanged": true,
+  "method": {
+    "codegraph_first": true,
+    "codegraph_gap": "FF only2 scripts, RF32 and old symbol locations; actual current AST18/79 used. No index init/write.",
+    "runtime_ast_callers": [
+      {
+        "repository": "FF",
+        "file": "scripts/ff_configuration.py",
+        "line": 105,
+        "owner": "load_connection_root",
+        "calls": "read_json_object"
+      },
+      {
+        "repository": "FF",
+        "file": "scripts/transcript_tool_transport.py",
+        "line": 240,
+        "owner": "_selected_launch_config",
+        "calls": "read_json_object"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/company_wiki_narrative_contracts.py",
+        "line": 989,
+        "owner": "_summary_observation",
+        "calls": "validate_summary_observation"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/company_wiki_narrative_contracts.py",
+        "line": 1021,
+        "owner": "_bundle_contents",
+        "calls": "_reading_context"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/company_wiki_narrative_contracts.py",
+        "line": 1272,
+        "owner": "_projected_response",
+        "calls": "_reading_context"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/company_wiki_narrative_reader.py",
+        "line": 57,
+        "owner": "read_narrative_context",
+        "calls": "validate_narrative_response"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/company_wiki_source_reader_v2.py",
+        "line": 341,
+        "owner": "_validate_success_receipt",
+        "calls": "_validate_review"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/company_wiki_source_v2.py",
+        "line": 200,
+        "owner": "build_revenue_source_record_from_verified_read",
+        "calls": "validate_source_provenance"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/contracts/company_wiki_original.py",
+        "line": 183,
+        "owner": "validate_receipt",
+        "calls": "_validate_review"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/contracts/document.py",
+        "line": 302,
+        "owner": "validate_sources",
+        "calls": "validate_source_provenance"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/contracts/document.py",
+        "line": 648,
+        "owner": "validate_evidence_claims",
+        "calls": "validate_summary_excerpt_bound"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/contracts/document.py",
+        "line": 760,
+        "owner": "validate_evidence_claims",
+        "calls": "validate_summary_provenance"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/contracts/source_provenance.py",
+        "line": 53,
+        "owner": "_verified_original_binding",
+        "calls": "validate_receipt"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/processed_artifact_canary.py",
+        "line": 110,
+        "owner": "main",
+        "calls": "canary"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/research/input_evidence.py",
+        "line": 135,
+        "owner": "bind_parameter_evidence",
+        "calls": "_bind_narrative_span"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/revenue_backtest.py",
+        "line": 41,
+        "owner": "create_snapshot",
+        "calls": "validate_published_forecast"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/revenue_backtest.py",
+        "line": 126,
+        "owner": "validate_snapshot",
+        "calls": "validate_published_forecast"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/revenue_core.py",
+        "line": 451,
+        "owner": "run_forecast",
+        "calls": "validate_published_forecast"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/revenue_core.py",
+        "line": 480,
+        "owner": "run_forecast",
+        "calls": "register_publication"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/revenue_forecast.py",
+        "line": 51,
+        "owner": "prepare_forecast",
+        "calls": "validate_forecast_output"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/revenue_forecast.py",
+        "line": 75,
+        "owner": "main",
+        "calls": "manifest_sha256"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/revenue_report.py",
+        "line": 1501,
+        "owner": "validate_forecast_output",
+        "calls": "validate_published_forecast"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/revenue_report.py",
+        "line": 1621,
+        "owner": "render_markdown",
+        "calls": "validate_forecast_output"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/source_narrative_context.py",
+        "line": 235,
+        "owner": "consume_narrative_input",
+        "calls": "build_summary_provenance"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/source_preparation.py",
+        "line": 263,
+        "owner": "_prepare_source_ref_v2",
+        "calls": "open_source_version_v2"
+      },
+      {
+        "repository": "RF",
+        "file": "scripts/source_preparation.py",
+        "line": 272,
+        "owner": "_prepare_source_ref_v2",
+        "calls": "build_revenue_source_record_from_verified_read"
+      }
+    ],
+    "runtime_execution": false,
+    "tests_run": 0,
+    "paid_calls": 0,
+    "original_document_access": false,
+    "key_or_credential_files_read": false,
+    "environment_values_read": false,
+    "production_config_values_read": false,
+    "repo_git_or_index_writes": false,
+    "crossrepo_code_changes": false,
+    "source_hash_scope": "At close actual source file byte hashes; not a claim all modules frozen throughout audit.",
+    "initial_sandbox_read_denial": "Known sibling repo read denied under sandbox; same explicit authorized read completed through normal approved host escalation without ACL change or user reapproval."
+  },
+  "findings": [
+    {
+      "id": "RF-01",
+      "priority": "P1",
+      "category": "nested_size_and_diagnostic_gate",
+      "entry": "narrative_source_preparation -> read_narrative_context -> validate_narrative_response -> _bundle_contents/_projected_response",
+      "conditions": [
+        "BODY_LIMIT1310720B",
+        "reading context192KiB plus generic node/depth/string/array limits",
+        "assessment64KiB"
+      ],
+      "paths": [
+        "scripts/company_wiki_narrative_contracts.py:23,521,533-564,895-900,1021,1272",
+        "scripts/narrative_summary_observations.py:135-151"
+      ],
+      "root_cause": "Ancillary policy/trace/diagnostic volume is treated as permission to consume otherwise valid source citations.",
+      "minimal_action": "One actual configured transport resource owner; strict core citation/source schema; owner-bounded/sampled diagnostics with counts and artifact refs, no nested serialized-size veto.",
+      "tests": [
+        "Valid contexts above192KiB and assessment above64KiB within actual transport budget still read.",
+        "Tampered hash, source identity and support/context crossing remain refused.",
+        "Actual stdout/resource excess still stops within the declared resource owner budget."
+      ]
+    },
+    {
+      "id": "RF-02",
+      "priority": "P1",
+      "category": "adopted_proof_and_excerpt_size",
+      "entry": "consume_narrative_input -> build_summary_provenance; contracts.document.validate_evidence_claims; alternate public bind_parameter_evidence",
+      "conditions": [
+        "summary full local proof128KiB",
+        "summary full anchor128KiB",
+        "alternate raw span10-500characters; not the newer main summary-use path"
+      ],
+      "paths": [
+        "scripts/narrative_summary_provenance.py:30,103-129",
+        "scripts/contracts/document.py:645-653,760",
+        "scripts/research/input_evidence.py:289-313"
+      ],
+      "root_cause": "Source-owned complete anchor and linkage proof are forced into unrelated local presentation/storage size rules.",
+      "minimal_action": "Single exact-source local closure contract and actual input resource budget; full source anchor remains source-owned; short presentation uses real locator/range rather than truncating the full span.",
+      "tests": [
+        "Long valid source span and large valid local closure work through both supported public adapters.",
+        "Altered text, missing essential context and wrong currency/unit/period remain errors."
+      ]
+    },
+    {
+      "id": "RF-03",
+      "priority": "P1",
+      "category": "optional_diagnostic_fatal_and_duplicate_rules",
+      "entry": "reader2.1/2.2 success receipt, frozen original receipt, both narrative bundle response families",
+      "conditions": [
+        "Malformed/unknown prompt-review status, shape, review hash or reviewed_at causes source read or later forecast refusal.",
+        "Assessment old recipe/rule vocabulary tied to source processing algorithm can veto compatible diagnostic evolution."
+      ],
+      "paths": [
+        "scripts/company_wiki_source_reader_v2.py:194-209,341",
+        "scripts/contracts/company_wiki_original.py:183,218-229",
+        "scripts/company_wiki_narrative_contracts.py:507-513,1026,1277",
+        "scripts/narrative_summary_observations.py:_WIRE_RECIPES"
+      ],
+      "root_cause": "Optional review/diagnostic metadata is still handled as a trust prerequisite at several owners despite explicit no-review permission semantics.",
+      "minimal_action": "One diagnostic projection owner; unknown/malformed/foreign annotations remain honestly unusable diagnostics, never trusted reviewed labels; source bytes and citation authenticity validated independently. Preserve real incompatible public-core DTO rejection.",
+      "tests": [
+        "None/not_reviewed/storage-error/new diagnostic shape do not block verified raw source.",
+        "Unknown diagnostics cannot promote actual/accepted/reviewed.",
+        "Wrong source bytes, identity, period/as-of remain refused."
+      ]
+    },
+    {
+      "id": "RF-04",
+      "priority": "P1/P2",
+      "category": "global_registry_authority_and_read_only_toggle",
+      "entry": "Every formal run_forecast before returning result",
+      "conditions": [
+        "Global registry read/write error rejects current valid result.",
+        "Every append revalidates all historical chain rows/confidence revisions.",
+        "Repeated chmod read-only/writeable toggles."
+      ],
+      "paths": [
+        "scripts/revenue_core.py:473-486",
+        "scripts/publication_registry.py:74-143"
+      ],
+      "root_cause": "A rebuildable cross-artifact discovery index becomes normal-use publication authority/permission center.",
+      "minimal_action": "Self-contained input/result validation and real per-version atomic persistence define artifact; optional rebuildable index handled by publication owner after output, with honest diagnostics; retain original ledger bytes for explicit audit; remove chmod toggles.",
+      "tests": [
+        "Valid forecast remains calculable/exportable if unrelated registry unavailable or corrupt, while output write failure never claims saved.",
+        "Rebuild/index normal behavior and immutable prior version preservation.",
+        "Downstream invest default registered/signed requirement needs coordinated check outside this audit scope."
+      ]
+    },
+    {
+      "id": "RF-05",
+      "priority": "P2",
+      "category": "same_transaction_revalidation_and_owner_drift",
+      "entry": "prepare_source_result -> reader -> source builder -> provenance; CLI forecast -> prepare_forecast -> render",
+      "conditions": [
+        "Transport and builder hash the same immutable raw bytes twice.",
+        "Reader and pure frozen DTO have parallel receipt/manifest/review rules.",
+        "Same no-mutation CLI path repeats strong output checks."
+      ],
+      "paths": [
+        "scripts/source_preparation.py:263,272",
+        "scripts/company_wiki_source_reader_v2.py:350-385",
+        "scripts/company_wiki_source_v2.py:139-200",
+        "scripts/revenue_forecast.py:48-51",
+        "scripts/revenue_core.py:452"
+      ],
+      "root_cause": "Trust boundaries and internal composition are conflated, causing duplicated work and version drift.",
+      "minimal_action": "Single validated immutable read/result object internally; public raw-input adapters and later deserialization still validate; no caller-controlled skip_validation bool.",
+      "tests": [
+        "One actual same-transaction source open/hash, but malformed direct raw builder input and mutated frozen forecast still fail."
+      ]
+    }
+  ],
+  "ff_current_gate_conclusion": "No active manual receipt/approval/canary/expiry/license gate found in current v2 runtime. v2 has one filing_intent; legacy authorization is optional target/resource scope, not permit.",
+  "retained_or_not_current": [
+    {
+      "item": "FF acquisition limits and shared deadlines/process ownership",
+      "why": "Actual user-declared bytes/time/cost or resource work boundary, not per-material permission."
+    },
+    {
+      "item": "FF config64KiB",
+      "why": "Only two small connection/ET-launch config callers, not reading analysis/policy/documents; not demonstrated as current source gate."
+    },
+    {
+      "item": "FF local observation128KiB",
+      "why": "Malformed/large optional observation returnsNone, not source refusal; actual source status owned separately."
+    },
+    {
+      "item": "RF processed artifact canary",
+      "why": "AST shows only self CLI caller, not forecast/preparation gate."
+    },
+    {
+      "item": "RF owned installation digest",
+      "why": "Only --version diagnostic caller, not calculation/publishing permit."
+    },
+    {
+      "item": "RF optional host signature",
+      "why": "Unconfigured/unproven signer yields unattested in RF. Claimed signatures cannot be silently treated as valid; actual local config not read."
+    },
+    {
+      "item": "Source bytes/identity/period/as-of/citation partition/finance units and arithmetic",
+      "why": "Necessary factual checks owned once at the actual boundary; do not delete or substitute model guesses."
+    }
+  ],
+  "not_audited": [
+    "Invest downstream implementation of require_registered_input/host_signed defaults; only RF public SKILL mentions read.",
+    "Actual size of current user documents/artifacts or current registry availability.",
+    "Full engineering tool suite, historical planning cards or installation copies.",
+    "Dayu, IQS, Dashboard or any key/trust-store contents."
+  ],
+  "persistence": "Only ROOT assigned R7-crossrepo-gate-audit.md/json; no temporary test files created, so no test directory to restore.",
+  "handoff": "STOP; ROOT consolidates CWP own audit and implements within prior explicit user authorization. No new package/permission/signoff gate."
+}

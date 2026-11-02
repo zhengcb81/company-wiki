@@ -1,0 +1,127 @@
+{
+  "schema_version": "independent-source-observer-review/1",
+  "status": "NEEDS_ROOT_FIX_ATOMIC_FIRST_PUBLICATION",
+  "reviewer": "/root/rectification_review_a",
+  "date": "2026-11-02",
+  "frozen_files_before": {
+    "files": {
+      "tools/source_case_runner.py": {
+        "sha256": "ce0ca6a4835f9775bd05b2d97935dcc071f62652980813261a47bfc334f7324a",
+        "expected": "ce0ca6a4835f9775bd05b2d97935dcc071f62652980813261a47bfc334f7324a",
+        "match": true
+      },
+      "tools/source_case_checks.py": {
+        "sha256": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+        "expected": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+        "match": true
+      },
+      "tools/source_case_receipt.py": {
+        "sha256": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+        "expected": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+        "match": true
+      },
+      "tests/unit/test_source_case_runner.py": {
+        "sha256": "bd2b6ac71ff2fa972e730104d5594135e3d1a05b46f1d281d7f3b89ff718a691",
+        "expected": "bd2b6ac71ff2fa972e730104d5594135e3d1a05b46f1d281d7f3b89ff718a691",
+        "match": true
+      },
+      "tests/unit/test_source_case_receipt.py": {
+        "sha256": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+        "expected": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+        "match": true
+      },
+      ".github/workflows/ci.yml": {
+        "sha256": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453"
+      },
+      ".pre-commit-config.yaml": {
+        "sha256": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63"
+      }
+    },
+    "author_receipt_sha256": "a87bb7579b461984cd65629a98cb6edf013ec3827bd1d3d357d5e1b77d598633"
+  },
+  "files_after": {
+    "tools/source_case_runner.py": "ce0ca6a4835f9775bd05b2d97935dcc071f62652980813261a47bfc334f7324a",
+    "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+    "tests/unit/test_source_case_runner.py": "bd2b6ac71ff2fa972e730104d5594135e3d1a05b46f1d281d7f3b89ff718a691",
+    "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+    ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453",
+    ".pre-commit-config.yaml": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63"
+  },
+  "all_seven_freeze_hashes_unchanged": true,
+  "execution": {
+    "tests": 8,
+    "passed": 7,
+    "failed": 1,
+    "errors": 0,
+    "seconds": 2.23,
+    "normal_host_python": "C:/Miniconda/python.exe3.13.9",
+    "pytest": "9.1.1",
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"8\" time=\"2.133\" timestamp=\"2026-11-02T04:44:59.486381+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.o3.test_review\" name=\"test_unicode_duplicate_compaction_retains_checks_and_honest_source_states\" time=\"0.016\" /><testcase classname=\"tmp.o3.test_review\" name=\"test_mandatory_multibyte_evidence_overflow_never_becomes_complete_or_truncated\" time=\"0.011\" /><testcase classname=\"tmp.o3.test_review\" name=\"test_invalid_mandatory_field_never_renders_an_arbitrary_exception_body\" time=\"0.002\" /><testcase classname=\"tmp.o3.test_review\" name=\"test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight\" time=\"0.015\"><failure message=\"Failed: DID NOT RAISE FileExistsError\">tmp\\o3\\test_review.py:67: in test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight\n    with pytest.raises(FileExistsError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE FileExistsError</failure></testcase><testcase classname=\"tmp.o3.test_review\" name=\"test_fresh_child_uses_root_tool_identity_and_no_after_proof_on_preflight_failure\" time=\"1.730\" /><testcase classname=\"tests.unit.test_source_case_runner\" name=\"test_encoder_error_keeps_result_ready_checkpoint_and_incomplete_receipt\" time=\"0.050\" /><testcase classname=\"tests.unit.test_source_case_runner\" name=\"test_parent_timeout_preserves_child_checkpoint_or_committed_result[True]\" time=\"0.009\" /><testcase classname=\"tests.unit.test_source_case_runner\" name=\"test_atomic_replace_failure_preserves_previous_checkpoint\" time=\"0.018\" /></testsuite></testsuites>",
+    "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\o3\\\\b\", \"requested_basetemp_len\": 43, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 8 items\n\ntmp\\o3\\test_review.py ...F.                                              [ 62%]\ntests\\unit\\test_source_case_runner.py ...                                [100%]\n\n================================== FAILURES ===================================\n_ test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight _\ntmp\\o3\\test_review.py:67: in test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight\n    with pytest.raises(FileExistsError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE FileExistsError\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\o3\\junit.xml ---\n=========================== short test summary info ===========================\nFAILED tmp/o3/test_review.py::test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight\n========================= 1 failed, 7 passed in 2.23s =========================\n"
+  },
+  "findings": [
+    {
+      "id": "SOURCE-OBSERVER-A-01",
+      "priority": "P2",
+      "status": "NEEDS_ROOT_FIX",
+      "title": "First publication has check-then-replace race and can overwrite a foreign newly created receipt",
+      "owner": "tools/source_case_runner.py::atomic_owned_write",
+      "reproduction": "Absent target passes path.exists/hash preflight. Independent writer creates foreign-winner at pending-file fsync checkpoint. os.replace unconditionally overwrites it and owned map claims own-result.",
+      "expected": "First publication must atomically fail if destination already exists at commit, preserve foreign winner and clean pending file. Already-owned replacement retains prior result on error.",
+      "actual": {
+        "foreign_bytes_at_commit": "foreign-winner",
+        "final_bytes": "own-result",
+        "exception": "none",
+        "new_owner_claimed": "own-result"
+      },
+      "minimal_test": "test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight",
+      "root_cause": "Ownership preflight and publication are not one atomic no-clobber operation. Atomic replacement protects against torn writes but not destination ownership races.",
+      "repair_direction": "Use existing supported atomic absent-destination/no-clobber primitive for first commit; keep separate owned replacement handling. No manual approval, global ACL change or real source rerun needed.",
+      "impact_boundary": "Demonstrated observation-file race only. No production original/DB or actualH1 was read or modified; no final world/source-quality PASS fabricated by this test."
+    }
+  ],
+  "passed_probes": [
+    "Multibyte duplicate span compaction preserves required/context/view evidence andproducerFalse/partial states; raw body hash andUTF8budget/determinism/no inputmutation verified.",
+    "Mandatorymultibyte excerpt overflow returnsOBSERVATION_INCOMPLETE/source_status unchanged andexplicit unretainedfields, not partialexcerpt or fakecomplete.",
+    "Unserializablemandatoryobject whose __repr__/__str__ raise is notrendered; incompletekeepsintegrityFalse andsource_status.",
+    "Real fresh subprocess canonicalmodule loads actualROOT3toolSHA, onlymissing syntheticconfig; returnsFAILED withunknownafterproof, no original/model/API invoked.",
+    "Finalencoderfailure retainsdurableRESULT_READY andincomplete receipt; parenttimeout cannotoverwrite alreadycommittedresult; existingownedreplacefailure preservespreviouscheckpoint."
+  ],
+  "static_review": {
+    "source_scope": "CanonicalCLI is manifest-driven, singlefreshchild andsingle SourceVersionReader/handler call; no company/market literals. No sourceacquisition/model/AUTO writer.",
+    "checks": "Originalcontext mapper remainsOPEN when missinglineage or no wrongpair found; no inferrednewactorrepair. DB/WAL/originalstrict; SHMtimeonly allowedby bytes/existence.",
+    "mandatory_data": "Required/source/context checks, currentcontextoriginal excerpts, member/view/package indices retained or explicitincomplete. No capincrease from300000.",
+    "checkpoint": "RUN_START/SOURCE_READY/ORIGINAL_BEFORE_OPEN/RESULT_READY and observercodeidentity separate from sourcequality. Encodingcompletion not sourceacceptance.",
+    "atomic_defect": "Atomicrename alone is insufficient for first-publication ownership; currentforeignexists test onlycoversbeforepreflight, independentRED coverscommitwindow.",
+    "ci": "ExistingRuffscope adds3tools in sameworkflow/precommit matcher only; no newjob/teststage."
+  },
+  "reproducers": {
+    "test_review.py": {
+      "sha256": "62720e178a8fedf0ca768ec31daa17c72d51ec293a9d32dcbfc52a0934747e7d",
+      "source": "\"\"\"Independent observer durability/field-boundary probes; no source execution.\"\"\"\nfrom copy import deepcopy\nfrom hashlib import sha256\nimport json\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nimport pytest\n\nfrom tools import source_case_runner as runner\nfrom tools.source_case_receipt import encode_source_receipt\n\nassert Path(runner.__file__).resolve()==Path('C:/Users/郑曾波/Projects/company-wiki/tools/source_case_runner.py').resolve()\n\n\ndef small_record():\n    return {'case_id':'neutral', 'status':'OBSERVED_NOT_SIGNOFF',\n      'runtime_unchanged':True,'database_unchanged':False,'original_files_unchanged':True,\n      'required_units':[{'unit_id':'u1','represented':True}],\n      'context_original_member_checks':[{'oracle_id':'o1','previous_bad_context_observed':False}],\n      'source_excerpt_units':[{'unit_id':'u1','raw_text':'限定原话，未完成验收。'}],\n      'citation_view_index':[{'view_id':'v1','support_evidence_ids':['s1'],'context_evidence_ids':['c1']}],\n      'span_original_member_index':[{'span_id':'s1','raw_text':'原始业务🙂'*35000,'native_members':[{'unit_id':'u1','valid_slice':True}]}],\n      'reading_context_observations':{'source_processing_complete':False,'coverage_complete':True}}\n\n\ndef test_unicode_duplicate_compaction_retains_checks_and_honest_source_states():\n    r=small_record();before=deepcopy(r)\n    r['reading_context_observations']['selection_trace']={'complete':False,'withheld_count':3,'events':['trace'*9000]*8}\n    before=deepcopy(r)\n    b=encode_source_receipt(r);o=json.loads(b)\n    assert len(b)<=300000 and r==before and b==encode_source_receipt(r)\n    for key in ['required_units','context_original_member_checks','source_excerpt_units','citation_view_index']:\n        assert o[key]==r[key]\n    assert o['database_unchanged'] is False and o['reading_context_observations']['source_processing_complete'] is False\n    span=o['span_original_member_index'][0];assert span['native_members']==r['span_original_member_index'][0]['native_members']\n    assert span['raw_text_sha256']==sha256(r['span_original_member_index'][0]['raw_text'].encode()).hexdigest()\n\n\ndef test_mandatory_multibyte_evidence_overflow_never_becomes_complete_or_truncated():\n    r=small_record();r['source_excerpt_units'][0]['raw_text']='前提必须保留🙂'*50000\n    o=json.loads(encode_source_receipt(r,max_bytes=8192))\n    assert o['status']=='OBSERVATION_INCOMPLETE' and o['source_status']==r['status']\n    assert o['integrity_checkpoints']['database_unchanged'] is False\n    assert 'source_excerpt_units' in o['unretained_fields']\n    assert 'source_excerpt_units' not in o['integrity_checkpoints']\n\n\ndef test_invalid_mandatory_field_never_renders_an_arbitrary_exception_body():\n    class Body:\n        def __repr__(self): raise AssertionError('PRIVATE_MARKER_MUST_NOT_RENDER')\n        def __str__(self): raise AssertionError('PRIVATE_MARKER_MUST_NOT_RENDER')\n    r=small_record();r['source_excerpt_units']=[Body()]\n    b=encode_source_receipt(r);o=json.loads(b)\n    assert o['status']=='OBSERVATION_INCOMPLETE' and o['source_status']==r['status']\n    assert o['integrity_checkpoints']['database_unchanged'] is False\n    assert b'PRIVATE_MARKER' not in b\n\n\ndef test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight(tmp_path,monkeypatch):\n    output=tmp_path/'race.json';owned={};real_fsync=runner.os.fsync\n    def independent_writer_after_preflight(fd):\n        real_fsync(fd)\n        output.write_bytes(b'foreign-winner')\n    monkeypatch.setattr(runner.os,'fsync',independent_writer_after_preflight)\n    with pytest.raises(FileExistsError):\n        runner.atomic_owned_write(output,b'own-result',owned,root_dir=tmp_path)\n    assert output.read_bytes()==b'foreign-winner'\n    assert not list(tmp_path.glob('*.writing-*'))\n\n\ndef test_fresh_child_uses_root_tool_identity_and_no_after_proof_on_preflight_failure(tmp_path):\n    config=tmp_path/'does-not-exist.yaml';manifest=tmp_path/'manifest.json';output=tmp_path/'result.json'\n    manifest.write_text(json.dumps({'cases':[{'case_id':'new-neutral','max_seconds':20,\n        'catalog_config':str(config),'request':{'source_ref':{'source_id':'synthetic'}}}]}),encoding='utf-8')\n    p=subprocess.run([sys.executable,'-B','-X','utf8','-m','tools.source_case_runner',\n        '--manifest',str(manifest),'--case','new-neutral','--output',str(output)],\n        cwd=runner.ROOT,capture_output=True,timeout=30)\n    assert p.returncode==2\n    o=json.loads(output.read_bytes());assert o['status']=='FAILED'\n    assert o['database_unchanged'] is None and o['original_files_unchanged'] is None\n    for name in ['source_case_runner.py','source_case_checks.py','source_case_receipt.py']:\n        assert o['observer_before'][name]['sha256']==sha256((runner.ROOT/'tools'/name).read_bytes()).hexdigest()\n    assert not config.exists() and not output.with_suffix('.json.checkpoint.json').exists()\n"
+    }
+  },
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\o3",
+    "initial_absent": true,
+    "exists_after": false,
+    "reason": "ROOT read exactminimalRED andconfirmed complete source/hash/log inreport isreconstructable; exactownedroot removed aftercontainment/no reparseverification.",
+    "containment_checked": true,
+    "reparse_checked": true,
+    "root_read_ack": true
+  },
+  "not_signed": [
+    "observerengineeringpublish",
+    "realH1v3recovery",
+    "newrealH1",
+    "sourceprocessingcomplete",
+    "real summary/cache/RF",
+    "completeCI",
+    "wholegoal"
+  ],
+  "historical_failures": "Originalv3 result lost at old300000encodedraise remainsnotaccepted, not backfilled. Author29P remainssameSHA history, not rerun.",
+  "writes": "Assignedreport andself-ownedtmp only; source/Git/mainPWF read-only.",
+  "agent_state": "STOP",
+  "root_after_review_release": "ROOT confirmedP2 and releasedatomicrepair aftertestedfreeze; this7fileSHA onlybinds historicalR1 testwindow. ROOTalsoadds existingpipeline pertargetstructuralcontext projection for unselectedfixedoracles; not reviewedhere."
+}

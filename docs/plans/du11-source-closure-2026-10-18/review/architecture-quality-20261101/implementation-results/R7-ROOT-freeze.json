@@ -1,0 +1,30 @@
+{
+  "status": "FINAL_FROZEN_FOR_MAJOR_REVIEW",
+  "files": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\source_case_runner.py": "5f8e5f09d38bbb3d4565a1b9e60ca8bdee99b7ce1ec0bb16210968b8879c41c4",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\source_case_receipt.py": "041ee9e20c5c9c5926fe2a8e21f125d9b185244f7390472251bbcd3cd0bb6133",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_source_case_runner.py": "6e037d6504b4ed5973f1f3d4f1064c8bd43b98367fa226893cd1714973201b31",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_source_case_receipt.py": "94e1c756e731957bbc49d6529637e05e5e805162cb648ad02cf7f1990371cf7e",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_revenue_adapter.py": "95776ff7b4d10f377040507bb0b561872b4df36927fe70bee55aea6ef8b9c6d5",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_revenue_adapter_gate_simplification.py": "793fdc13f68ae15f877c55471ce5b6f0fe2607122ebbb8b2da19a438febba79d",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_fast_git_checks.py": "d467e80a09afd08cd57b023398d78b88dad906d920072cb772a3a73ddce8196b",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests_support\\revenue_fixtures.py": "119e58353ac3c7ea7983a603ee26b8d67595e898a3895017eddc43c05f97fef6",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\tests_support\\revenue_fixtures.py": "119e58353ac3c7ea7983a603ee26b8d67595e898a3895017eddc43c05f97fef6",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\\tests\\test_forged_cross_repo_chain.py": "5ba87f38381eae9fe724f9e5c5ce85b488b4ff7167f8a4be7902678bc6787c6d",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\references\\compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\tools\\pre_push_gate.py": "082296ddb682c7a09bd7823d8c2365697a8069d4c65c8abf27fe44615659644d",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\.githooks\\pre-commit": "c155d2d7a6c9dc587640ea9d2974f30fceb77e842bb102410210335cddb91472",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\.githooks\\pre-push": "6a9d8027bdc72ecebcba9f919dc151ac0d79f2a6db07736c70f3c133e79b0320",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\README.md": "c7d1bb902bb3e61b2112ff0a22962d8102257d6585d956b449f1e04f0a4e09ba"
+  },
+  "not_claiming_real_C": true,
+  "review_r1": "P2 staged names but worktree bytes;10independent cases1F9P",
+  "repair": "git show :0:relative raw index bytes; owned temporary staged tree for one Ruff; no stash/worktree modification",
+  "incremental_tests": {
+    "passed": 6,
+    "seconds": 1.28
+  },
+  "single_owner_binding": "Removed same-argument duplicate verify_input_binding before strong RF validator, independently confirmed no extra boundary semantics"
+}

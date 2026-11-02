@@ -1,3 +1,5 @@
+> R7更新（2026-11-02）：本页为R6历史过程记录。旧观察器保留300KB/16KB的设计已被用户明确取消，当前完整表示方案及最终独审见[R7-ROOT-observer](R7-ROOT-observer.md)与[R7-ROOT-independent-r2](R7-ROOT-independent-r2.md)。恢复实施只读主CURRENT_STATUS/HANDOFF，不照旧限额施工。
+
 # R6 全面整改续接（实施中）
 
 用户2026-11-01恢复全面整改并通知W23小米OCR返工完成。沿本PWF，不新发外包卡。稳定恢复dbfec3be精确CI41306232306已success；最新origin/master=bb645437，外来hook mode保留。候选6668bc97与63失败不改写为通过。
@@ -132,3 +134,23 @@ Daily工具与当前PWF已1bf3d388正常推master，固定smoke167P/38.31s，总
 ## 工程发布闭合与T3开始（2026-11-02T03:21:02.100896+00:00）
 
 c6bb801b正常主线push167P35.54s/总41.944s成功，精确CI41381788839于03:19:00Z success。R6工程发布收据R6-publication.json；源码runtime10767b86不再待并线。复用tmp/w23-r6新T3分支，初次switch因已知hook mode-only遇新header失败；核字节完全等于HEAD后单次core.filemode=false切换，物理mode保持，无全局设置/删文件。6冻结test校验复制、0原件副本。TERM32+纯helper16共48P4.79s，tmp仍初始absent；其后adapter identity9→10并静态检查绿，最终合并需绑定新身份。NOTE/PHYS作者实施中，原47断言不动；真实H1/摘要/cache/RF仍OPEN。
+
+
+## T3工程冻版并行验收（2026-11-02T03:38:06.983965+00:00）
+
+TERM实际pipeline再生标题根因已在layout_hints同terminal owner修复；NOTE/PHYS9源/test冻结，原47断言不改。一次合组原47+ROOT24+NOTE11=82P3.56s/总4.298s，所有20文件SHA保持，短tmp恢复absent；0原件/模型。正常commit8782050b Ruff/全src mypy绿，正常candidate push167P29.04s/总35.361s；最终独审与现有完整CI41383874109并行，未并主线/未签真实H1。此前84P2自建fixture错误、1P1F自增总coverage误oracle等真实记录保留，不能反过来改全局geometry状态来绿。
+
+
+## T3独审P2：资源停止不能当来源范围结束（2026-11-02T03:42:17.519240+00:00）
+
+独立新7例1F/6P1.73s，显式note27body超24上限后仅b23 blocked，b24-26未证却成为无intro材料anchor；真实后续heading healthy仍可用。原82有界PASS与新RED均保留，不并线。NOTE/PHYS同owner直接修未证明后缀状态至真实新scope/source边界，并审计unit/page/budget/proof所有退出分支，既不提高上限/偷偷无界扫描，也不全局block健康范围。只新失败/变形定点和增量独审，原47断言不变；旧候选CI不代补丁。主线acb/c6仍工程已绿，0原件/模型操作。
+
+
+## T3同根返修再次冻结（2026-11-02T03:59:27.911796+00:00）
+
+fa8ef38e正常commit4文件，Ruff/全src mypy过，正常candidate push167P28.78s/总34.998s。cap/page/proof/budget停止与真scope边界状态区分修复，顺序冲突只负向拒证；局部opaque block token不重复限定64字符SHA格式。作者原4CI+新5控制9P1.76s，独立增量11P1.79s＋21SHA稳定PASS，旧失败不改，新精确CI41385431656在途。旧r2自有6测试副本逐SHA/remote核后删除20,889逻辑B并恢复初始absent；不宣称磁盘释放，原始资料0删。
+
+
+## T3工程完成、C观察器暴露记录丢失（2026-11-02T07:10:38.615780+00:00）
+
+fa8ef38e完整CI41385431656 success＋独审11P，ROOT正常FF并本地主线，21源码/test canonical LF一致且8个PWF/hook WIP字节/mode保持。单次H1 v3在execute返回后编码>300KB直接ValueError，未存收据；12/9/DB/raw/runtime前后结果未知，0收费/下载，不宣称产品失败或通过。先修观察器共因，不重真实source：canonical工具/流式有限encoder/小checkpoint/原子写，合成最终29P；独审首次提交race1F7P，ROOTfirst/owned两反控2F0.79s后no-clobber+重核修复，R2定点11P1.24s并增加未selected target结构投影。旧v3/FAIL保留，R2独审待收，所有源/记录原限额不提高。

@@ -1,0 +1,464 @@
+{
+  "schema_version": "independent-source-observer-review/2",
+  "status": "NEEDS_ROOT_FIX_CONTEXT_PROOF_ROLE_ERASURE",
+  "reviewer": "/root/rectification_review_a",
+  "date": "2026-11-02",
+  "source_runtime_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "frozen_files_before": {
+    "files": {
+      "tools/source_case_runner.py": {
+        "sha256": "633b326665e9a37a026da28ce472dfbd2aac085366e8f39f0c24f32b0662fc58",
+        "expected": "633b326665e9a37a026da28ce472dfbd2aac085366e8f39f0c24f32b0662fc58",
+        "match": true
+      },
+      "tools/source_case_receipt.py": {
+        "sha256": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+        "expected": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+        "match": true
+      },
+      "tools/source_case_checks.py": {
+        "sha256": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+        "expected": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+        "match": true
+      },
+      "tests/unit/test_source_case_runner.py": {
+        "sha256": "b126c7afe984df2c314feca91555a8dd271112c280fb507158d0000b0abba2f1",
+        "expected": "b126c7afe984df2c314feca91555a8dd271112c280fb507158d0000b0abba2f1",
+        "match": true
+      },
+      "tests/unit/test_source_case_receipt.py": {
+        "sha256": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+        "expected": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+        "match": true
+      },
+      ".pre-commit-config.yaml": {
+        "sha256": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+        "expected": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+        "match": true
+      },
+      ".github/workflows/ci.yml": {
+        "sha256": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453",
+        "expected": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453",
+        "match": true
+      }
+    },
+    "freeze_receipt_sha256": "c6e0ae3189c3d0d57e3b69da5335cb113e041facc39071b26c9ec9d6970e9e69",
+    "freeze": {
+      "schema_version": "source-observer-freeze/2",
+      "frozen_at_utc": "2026-11-02T07:10:38.615780+00:00",
+      "source_runtime_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+      "files_sha256": {
+        "tools/source_case_runner.py": "633b326665e9a37a026da28ce472dfbd2aac085366e8f39f0c24f32b0662fc58",
+        "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+        "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+        "tests/unit/test_source_case_runner.py": "b126c7afe984df2c314feca91555a8dd271112c280fb507158d0000b0abba2f1",
+        "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+        ".pre-commit-config.yaml": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+        ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453"
+      },
+      "source_engine_changed": false,
+      "receipt_limit_bytes": 300000,
+      "checkpoint_limit_bytes": 16384,
+      "source_limits_unchanged": [
+        90,
+        16000000,
+        112
+      ],
+      "original_v3_case_replayed_after_repair": false,
+      "actual_checks": {
+        "r1_encoding": "18P/1.07s",
+        "r1_integration_final": "29P/4.54s",
+        "r2_race_red": "2F/0.79s; tool console, no fabricated junit",
+        "r2_targeted": "11P/1.24s; not a repeat ofall29"
+      },
+      "r2_test_receipt": {
+        "returncode": 0,
+        "wall_seconds": 2.504,
+        "counts": {
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "command": [
+          "C:/Miniconda/python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "-m",
+          "pytest",
+          "tests/unit/test_source_case_runner.py::test_late_foreign_writer_wins_without_observer_clobber",
+          "tests/unit/test_source_case_runner.py::test_unselected_target_keeps_actual_tree_intro_and_required_context",
+          "tests/unit/test_source_case_runner.py::test_structure_projection_reports_incomplete_ancestry_without_inventing_scope",
+          "tests/unit/test_source_case_runner.py::test_atomic_replace_failure_preserves_previous_checkpoint",
+          "tests/unit/test_source_case_runner.py::test_large_completed_result_is_durable_and_keeps_checkpoint_evidence",
+          "tests/unit/test_source_case_runner.py::test_parent_timeout_preserves_child_checkpoint_or_committed_result",
+          "-q",
+          "--tb=short",
+          "-p",
+          "pytest_asyncio.plugin",
+          "-p",
+          "pytest_timeout",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\or2-4811339f",
+          "--junitxml",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r6-publication\\source-observer-r2-tests.xml"
+        ],
+        "sha256": {
+          "tools/source_case_runner.py": "24e13f1cb3b432304945b30bc1ae6a7cd123eeda493742945a89d818596689e1",
+          "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+          "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+          "tests/unit/test_source_case_runner.py": "b126c7afe984df2c314feca91555a8dd271112c280fb507158d0000b0abba2f1",
+          "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8"
+        },
+        "cleanup": {
+          "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\or2-4811339f",
+          "initially_absent": true,
+          "files": 11,
+          "logical_bytes": 3757,
+          "containment_checked": true,
+          "non_reparse_checked": true,
+          "exists_after": false
+        },
+        "real_original_access": false,
+        "real_source_replays": 0,
+        "model_calls": 0
+      },
+      "known_temp_limit": "tmp/osred initial snapshot not captured for2RED run; retained, cleanup NOT_VERIFIED. Other owned uuid test roots restored absent."
+    },
+    "exact_r1_function_sha256": "9c0a989f524ba168f719fee10380bb513245e91bde65ca856f1db15544016635"
+  },
+  "files_after": {
+    "tools/source_case_runner.py": "633b326665e9a37a026da28ce472dfbd2aac085366e8f39f0c24f32b0662fc58",
+    "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+    "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "tests/unit/test_source_case_runner.py": "b126c7afe984df2c314feca91555a8dd271112c280fb507158d0000b0abba2f1",
+    "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+    ".pre-commit-config.yaml": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+    ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453"
+  },
+  "all_seven_freeze_hashes_unchanged": true,
+  "execution": {
+    "tests": 10,
+    "passed": 9,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_reported_seconds": 4.62,
+    "wall_seconds": 5.891,
+    "returncode": 1,
+    "interpreter": "C:/Miniconda/python.exe",
+    "normal_host": true,
+    "root_module_identity_asserted": true,
+    "fresh_child_config_failure_control_passed": true,
+    "cases": [
+      {
+        "classname": "tmp.v2.test_r1_race",
+        "name": "test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight",
+        "status": "passed",
+        "time": "0.029"
+      },
+      {
+        "classname": "tmp.v2.test_review",
+        "name": "test_owned_checkpoint_change_during_flush_is_not_overwritten",
+        "status": "passed",
+        "time": "0.039"
+      },
+      {
+        "classname": "tmp.v2.test_review",
+        "name": "test_ancestry_failure_stays_explicitly_incomplete[missing]",
+        "status": "passed",
+        "time": "0.001"
+      },
+      {
+        "classname": "tmp.v2.test_review",
+        "name": "test_ancestry_failure_stays_explicitly_incomplete[cycle]",
+        "status": "passed",
+        "time": "0.001"
+      },
+      {
+        "classname": "tmp.v2.test_review",
+        "name": "test_ancestry_failure_stays_explicitly_incomplete[duplicate]",
+        "status": "passed",
+        "time": "0.001"
+      },
+      {
+        "classname": "tmp.v2.test_review",
+        "name": "test_ancestry_failure_stays_explicitly_incomplete[depth]",
+        "status": "passed",
+        "time": "0.000"
+      },
+      {
+        "classname": "tmp.v2.test_review",
+        "name": "test_unselected_target_context_excerpts_are_whole_and_not_actor_signoff",
+        "status": "passed",
+        "time": "0.000"
+      },
+      {
+        "classname": "tmp.v2.test_review",
+        "name": "test_meaning_context_and_physical_proof_role_are_not_erased_in_receipt",
+        "status": "failed",
+        "time": "0.002"
+      },
+      {
+        "classname": "tmp.v2.test_review",
+        "name": "test_mandatory_structure_overflow_remains_incomplete_and_declares_loss",
+        "status": "passed",
+        "time": "0.024"
+      },
+      {
+        "classname": "tests.unit.test_source_case_runner",
+        "name": "test_fresh_process_entry_keeps_config_preflight_failure_without_source_access",
+        "status": "passed",
+        "time": "3.920"
+      }
+    ],
+    "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\v2\\\\b\", \"requested_basetemp_len\": 43, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 10 items\n\ntmp\\v2\\test_r1_race.py .                                                 [ 10%]\ntmp\\v2\\test_review.py ......F.                                           [ 90%]\ntests\\unit\\test_source_case_runner.py .                                  [100%]\n\n================================== FAILURES ===================================\n___ test_meaning_context_and_physical_proof_role_are_not_erased_in_receipt ____\ntmp\\v2\\test_review.py:73: in test_meaning_context_and_physical_proof_role_are_not_erased_in_receipt\n    assert a!=b, 'Distinct semantic-context and proof-only source roles must remain inspectable'\nE   AssertionError: Distinct semantic-context and proof-only source roles must remain inspectable\nE   assert [{'oracle_id': 'new-opaque-id', 'support_units': [{'unit_id': 'target', 'original_present': True, 'section_occurrences...[{'sections': [...], 'ancestry_path_complete': True}], ...}], 'status': 'STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW'}] != [{'oracle_id': 'new-opaque-id', 'support_units': [{'unit_id': 'target', 'original_present': True, 'section_occurrences...[{'sections': [...], 'ancestry_path_complete': True}], ...}], 'status': 'STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW'}]\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\v2\\junit.xml ---\n=========================== short test summary info ===========================\nFAILED tmp/v2/test_review.py::test_meaning_context_and_physical_proof_role_are_not_erased_in_receipt\n========================= 1 failed, 9 passed in 4.62s =========================\n",
+    "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"10\" time=\"4.557\" timestamp=\"2026-11-02T07:21:14.416927+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.v2.test_r1_race\" name=\"test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight\" time=\"0.029\" /><testcase classname=\"tmp.v2.test_review\" name=\"test_owned_checkpoint_change_during_flush_is_not_overwritten\" time=\"0.039\" /><testcase classname=\"tmp.v2.test_review\" name=\"test_ancestry_failure_stays_explicitly_incomplete[missing]\" time=\"0.001\" /><testcase classname=\"tmp.v2.test_review\" name=\"test_ancestry_failure_stays_explicitly_incomplete[cycle]\" time=\"0.001\" /><testcase classname=\"tmp.v2.test_review\" name=\"test_ancestry_failure_stays_explicitly_incomplete[duplicate]\" time=\"0.001\" /><testcase classname=\"tmp.v2.test_review\" name=\"test_ancestry_failure_stays_explicitly_incomplete[depth]\" time=\"0.000\" /><testcase classname=\"tmp.v2.test_review\" name=\"test_unselected_target_context_excerpts_are_whole_and_not_actor_signoff\" time=\"0.000\" /><testcase classname=\"tmp.v2.test_review\" name=\"test_meaning_context_and_physical_proof_role_are_not_erased_in_receipt\" time=\"0.002\"><failure message=\"AssertionError: Distinct semantic-context and proof-only source roles must remain inspectable&#10;assert [{'oracle_id': 'new-opaque-id', 'support_units': [{'unit_id': 'target', 'original_present': True, 'section_occurrences...[{'sections': [...], 'ancestry_path_complete': True}], ...}], 'status': 'STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW'}] != [{'oracle_id': 'new-opaque-id', 'support_units': [{'unit_id': 'target', 'original_present': True, 'section_occurrences...[{'sections': [...], 'ancestry_path_complete': True}], ...}], 'status': 'STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW'}]\">tmp\\v2\\test_review.py:73: in test_meaning_context_and_physical_proof_role_are_not_erased_in_receipt\n    assert a!=b, 'Distinct semantic-context and proof-only source roles must remain inspectable'\nE   AssertionError: Distinct semantic-context and proof-only source roles must remain inspectable\nE   assert [{'oracle_id': 'new-opaque-id', 'support_units': [{'unit_id': 'target', 'original_present': True, 'section_occurrences...[{'sections': [...], 'ancestry_path_complete': True}], ...}], 'status': 'STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW'}] != [{'oracle_id': 'new-opaque-id', 'support_units': [{'unit_id': 'target', 'original_present': True, 'section_occurrences...[{'sections': [...], 'ancestry_path_complete': True}], ...}], 'status': 'STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW'}]</failure></testcase><testcase classname=\"tmp.v2.test_review\" name=\"test_mandatory_structure_overflow_remains_incomplete_and_declares_loss\" time=\"0.024\" /><testcase classname=\"tests.unit.test_source_case_runner\" name=\"test_fresh_process_entry_keeps_config_preflight_failure_without_source_access\" time=\"3.920\" /></testsuite></testsuites>"
+  },
+  "findings": [
+    {
+      "id": "SOURCE-OBSERVER-A-02",
+      "priority": "P2",
+      "status": "OPEN",
+      "owner": "tools/source_case_runner.py::structure_context_checkpoints",
+      "lines": [
+        165,
+        203
+      ],
+      "root_cause": "Both required_context_by_unit_id (meaning) and required_source_unit_ids_by_unit_id (physical proof only) are unioned before emitting a single declared_context_unit_ids and forbidden_context_ids_observed. Different source roles become observationally identical.",
+      "contract": "src/company_wiki/document_understanding/structure/contract.py:33 NativeSourceDependencies: meaning references enter semantic citation envelope, ONLY list-edge endpoint/furniture is structural proof, not model material.",
+      "reproducer": "test_review.py::test_meaning_context_and_physical_proof_role_are_not_erased_in_receipt",
+      "actual": "Meaning-only and physical-only inputs produce identical complete ancestry rows; previous is marked forbidden context in both. Semantic-review status is honest but the necessary evidence distinction is lost.",
+      "impact": "A fixed original target may appear to inherit a forbidden former actor when that unit is only a physical adjacency witness; the receipt cannot distinguish a real context leak from proof-only references.",
+      "minimal_fix": "Retain per-target meaning dependencies and physical-proof references distinctly in the projection (also keep union for original excerpts if useful), and calculate forbidden meaning context from the appropriate roles. Keep REQUIRES_SEMANTIC_REVIEW, all omissions explicit, no new classifier or access gate."
+    }
+  ],
+  "role_observation": {
+    "meaning_input": {
+      "sections": [
+        {
+          "section_id": "outer",
+          "parent_id": null,
+          "heading_unit_ids": [
+            "outer-intro"
+          ]
+        },
+        {
+          "section_id": "current",
+          "parent_id": "outer",
+          "heading_unit_ids": [
+            "new-intro"
+          ],
+          "body_unit_ids": [
+            "target"
+          ]
+        }
+      ],
+      "semantic_units": [
+        {
+          "required_context_by_unit_id": {
+            "target": [
+              "previous"
+            ]
+          }
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "SOURCE_SCOPE_UNPROVEN",
+          "unit_ids": [
+            "target",
+            "elsewhere"
+          ]
+        }
+      ]
+    },
+    "physical_input": {
+      "sections": [
+        {
+          "section_id": "outer",
+          "parent_id": null,
+          "heading_unit_ids": [
+            "outer-intro"
+          ]
+        },
+        {
+          "section_id": "current",
+          "parent_id": "outer",
+          "heading_unit_ids": [
+            "new-intro"
+          ],
+          "body_unit_ids": [
+            "target"
+          ]
+        }
+      ],
+      "semantic_units": [
+        {
+          "required_source_unit_ids_by_unit_id": {
+            "target": [
+              "previous"
+            ]
+          }
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "SOURCE_SCOPE_UNPROVEN",
+          "unit_ids": [
+            "target",
+            "elsewhere"
+          ]
+        }
+      ]
+    },
+    "meaning_output": [
+      {
+        "oracle_id": "new-opaque-id",
+        "support_units": [
+          {
+            "unit_id": "target",
+            "original_present": true,
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "sections": [
+                  {
+                    "section_id": "current",
+                    "parent_id": "outer",
+                    "heading_unit_ids": [
+                      "new-intro"
+                    ],
+                    "basis": []
+                  },
+                  {
+                    "section_id": "outer",
+                    "parent_id": null,
+                    "heading_unit_ids": [
+                      "outer-intro"
+                    ],
+                    "basis": []
+                  }
+                ],
+                "ancestry_path_complete": true
+              }
+            ],
+            "declared_context_unit_ids": [
+              "new-intro",
+              "outer-intro",
+              "previous"
+            ],
+            "forbidden_context_ids_observed": [
+              "previous"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "SOURCE_SCOPE_UNPROVEN",
+                "unit_ids": [
+                  "target"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": []
+          }
+        ],
+        "status": "STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW"
+      }
+    ],
+    "physical_output": [
+      {
+        "oracle_id": "new-opaque-id",
+        "support_units": [
+          {
+            "unit_id": "target",
+            "original_present": true,
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "sections": [
+                  {
+                    "section_id": "current",
+                    "parent_id": "outer",
+                    "heading_unit_ids": [
+                      "new-intro"
+                    ],
+                    "basis": []
+                  },
+                  {
+                    "section_id": "outer",
+                    "parent_id": null,
+                    "heading_unit_ids": [
+                      "outer-intro"
+                    ],
+                    "basis": []
+                  }
+                ],
+                "ancestry_path_complete": true
+              }
+            ],
+            "declared_context_unit_ids": [
+              "new-intro",
+              "outer-intro",
+              "previous"
+            ],
+            "forbidden_context_ids_observed": [
+              "previous"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "SOURCE_SCOPE_UNPROVEN",
+                "unit_ids": [
+                  "target"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": []
+          }
+        ],
+        "status": "STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW"
+      }
+    ]
+  },
+  "reproducers": {
+    "test_r1_race.py": {
+      "sha256": "b454a4c8fc969057294ec27cd352bb01697be337fb42bd445c1dfef1b25bfb1e",
+      "content": "import pytest\nfrom tools import source_case_runner as runner\n\ndef test_atomic_first_publication_does_not_overwrite_a_foreign_file_created_after_preflight(tmp_path,monkeypatch):\n    output=tmp_path/'race.json';owned={};real_fsync=runner.os.fsync\n    def independent_writer_after_preflight(fd):\n        real_fsync(fd)\n        output.write_bytes(b'foreign-winner')\n    monkeypatch.setattr(runner.os,'fsync',independent_writer_after_preflight)\n    with pytest.raises(FileExistsError):\n        runner.atomic_owned_write(output,b'own-result',owned,root_dir=tmp_path)\n    assert output.read_bytes()==b'foreign-winner'\n    assert not list(tmp_path.glob('*.writing-*'))\n"
+    },
+    "test_review.py": {
+      "sha256": "7f84de960d34b684eb7e89cae0a078e9bdfdd9d6206e235ca6e6b6c576f8073f",
+      "content": "\"\"\"ObserverR2 bounded independent race/structural evidence controls.\"\"\"\nfrom copy import deepcopy\nfrom pathlib import Path\nimport json\nfrom types import SimpleNamespace\n\nimport pytest\n\nfrom tools import source_case_runner as runner\n\nassert Path(runner.__file__).resolve()==Path('C:/Users/郑曾波/Projects/company-wiki/tools/source_case_runner.py').resolve()\n\n\ndef oracle():\n    return [{'oracle_id':'new-opaque-id','original_support_unit_ids':['target'],\n             'original_forbidden_context_unit_ids':['previous']}]\n\n\ndef structure():\n    return {'sections':[{'section_id':'outer','parent_id':None,'heading_unit_ids':['outer-intro']},\n        {'section_id':'current','parent_id':'outer','heading_unit_ids':['new-intro'],'body_unit_ids':['target']}],\n        'semantic_units':[{'required_context_by_unit_id':{'target':['qualifier']}}],\n        'diagnostics':[{'code':'SOURCE_SCOPE_UNPROVEN','unit_ids':['target','elsewhere']}]}\n\n\ndef test_owned_checkpoint_change_during_flush_is_not_overwritten(tmp_path,monkeypatch):\n    p=tmp_path/'checkpoint.json';owned={};runner.atomic_owned_write(p,b'first',owned,root_dir=tmp_path)\n    real=runner.os.fsync\n    def replace_by_other_writer(fd):\n        real(fd);p.write_bytes(b'other-current-owner')\n    monkeypatch.setattr(runner.os,'fsync',replace_by_other_writer)\n    with pytest.raises(FileExistsError):\n        runner.atomic_owned_write(p,b'new',owned,root_dir=tmp_path)\n    assert p.read_bytes()==b'other-current-owner'\n    assert not list(tmp_path.glob('*.writing-*'))\n\n\n@pytest.mark.parametrize('fault',['missing','cycle','duplicate','depth'])\ndef test_ancestry_failure_stays_explicitly_incomplete(fault):\n    s=structure();max_depth=32\n    if fault=='missing':s['sections'][0]['parent_id']='absent-parent'\n    elif fault=='cycle':s['sections'][0]['parent_id']='current'\n    elif fault=='duplicate':s['sections'].append(deepcopy(s['sections'][1]))\n    else:max_depth=1\n    rows,_ids=runner.structure_context_checkpoints(oracle(),s,{'target':object()},max_ancestry=max_depth)\n    assert rows[0]['status']=='STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW'\n    target=rows[0]['support_units'][0]\n    assert target['section_paths'] and all(not p['ancestry_path_complete'] for p in target['section_paths'])\n    assert target['source_diagnostics']==[{'code':'SOURCE_SCOPE_UNPROVEN','unit_ids':['target']}]\n\n\ndef test_unselected_target_context_excerpts_are_whole_and_not_actor_signoff():\n    def unit(uid):return SimpleNamespace(unit_id=uid,source_id='synthetic',source_role='company_filing',raw_text=uid+'完整原文。',coordinates=SimpleNamespace(locator=lambda:'loc:'+uid))\n    originals={uid:unit(uid) for uid in ['target','new-intro','outer-intro','qualifier']}\n    s=structure();before=deepcopy(s)\n    rows,ids=runner.structure_context_checkpoints(oracle(),s,originals)\n    excerpt,coverage=runner.excerpt_units_for_checkpoints([],[],[],[],originals,additional_ids=ids)\n    assert s==before and ids=={'new-intro','outer-intro','qualifier'}\n    assert {row['unit_id'] for row in excerpt}==ids\n    assert all(row['raw_text']==originals[row['unit_id']].raw_text for row in excerpt)\n    assert coverage['unavailable_original_ids']==[]\n    assert rows[0]['status']=='STRUCTURE_OBSERVED_REQUIRES_SEMANTIC_REVIEW'\n\n\ndef test_meaning_context_and_physical_proof_role_are_not_erased_in_receipt():\n    meaning=structure();physical=structure()\n    meaning['semantic_units']=[{'required_context_by_unit_id':{'target':['previous']}}]\n    physical['semantic_units']=[{'required_source_unit_ids_by_unit_id':{'target':['previous']}}]\n    originals={uid:object() for uid in ['target','outer-intro','new-intro','previous']}\n    a,_=runner.structure_context_checkpoints(oracle(),meaning,originals)\n    b,_=runner.structure_context_checkpoints(oracle(),physical,originals)\n    (Path(__file__).parent/'role-observation.json').write_text(json.dumps({'meaning_input':meaning,'physical_input':physical,'meaning_output':a,'physical_output':b},ensure_ascii=False,indent=2),encoding='utf-8')\n    assert a!=b, 'Distinct semantic-context and proof-only source roles must remain inspectable'\n\n\ndef test_mandatory_structure_overflow_remains_incomplete_and_declares_loss():\n    r={'status':'SOURCE_RETURNED','runtime_unchanged':True,'database_unchanged':False,\n       'source_structure_context_checks':[{'oracle_id':'x','support_units':['must-keep-structure'*90000]}]}\n    o=json.loads(runner.encode_receipt(r,max_bytes=8192))\n    assert o['status']=='OBSERVATION_INCOMPLETE' and o['source_status']=='SOURCE_RETURNED'\n    assert 'source_structure_context_checks' in o['unretained_fields']\n    assert o['integrity_checkpoints']['database_unchanged'] is False\n"
+    }
+  },
+  "scope_notes": [
+    "Original R1 first-publication RED now passes unchanged. Existing-owned fsync mutation is detected and its foreign bytes preserved.",
+    "Missing/cycle/duplicate/depth ancestry remains explicitly incomplete; a healthy unselected target retains entire original headings and qualifier excerpts without actor PASS.",
+    "Mandatory structure overflow returns OBSERVATION_INCOMPLETE with source_status, integrity flags and explicit unretained field; no cap increase.",
+    "Current fresh child loaded ROOT canonical tool identities and failed only the synthetic missing configuration, never accessing a real source.",
+    "ROOT targeted 11P was on runner 24e13f1c; current freeze 633b3266 moves observation to candidate-capture time. This review tests current 633b3266 pure projection/atomic and actual fresh-process entry, and statically checks the capture placement; it does not claim all 11 were rerun on final bytes.",
+    "No production source/DB/original/config or model access; no full29/realH1 replay. R1 historical reports unchanged."
+  ],
+  "excluded_acceptance": [
+    "real H1 source replay",
+    "real summaries",
+    "cache recovery acceptance",
+    "RF economic adoption",
+    "whole project completion",
+    "full CI"
+  ],
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\v2",
+    "initially_absent": true,
+    "restored_absent": true,
+    "status": "RESTORED_INITIAL_ABSENT",
+    "all_reproducer_and_junit_content_embedded": true,
+    "files": 10,
+    "logical_bytes": 23816,
+    "containment_checked": true,
+    "non_reparse_checked": true,
+    "root_acknowledged_reproducer": true
+  },
+  "next_scope_change": "After this frozen R2 review ROOT received user instruction to remove arbitrary observer output/checkpoint/ancestry limits. Earlier cap-specific controls are historical evidence for R2 only; they do not define the next-version policy."
+}

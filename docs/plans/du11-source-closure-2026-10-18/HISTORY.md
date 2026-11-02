@@ -86,3 +86,8 @@
 CURRENT_STATUS.json只保留当前执行/发布/预算/责任，旧P0–R6详细观察已在Git `848b4ee0b31f438a45bb50691654a077c5ed9bee` 的同一路径保留，不复制历史对象成新文件。原63F、R6-R2的22F及独审失败原报告不改。旧对象不能当今天的下一步；当前读取CURRENT_STATUS→HANDOFF/task_plan。
 
 findings.md同期也收敛为当前有效共因/边界；848b4ee0同路径保留全部旧详细记录。progress是日期顺序日志，不能从旧日志恢复旧的下一步。
+
+
+## R7工程收口与定点部署（2026-11-02）
+
+CWP fee04ba4正常commit75自有文件，source SHA/外来hook保持；首次瞬时index.lock竞争读确认消失后正常retry，未删锁。RF a922305a+499d5ca3与invest a7812888已正常推远端；RF新local12P1.16s/push10.532s，invest push6.362s，完整CI行为41表保留。原84.924s失败/v2旧oracle与独审修复保留。全局canonical定点RF21+invest2、三根69逻辑target SHA相同、6公开config保持、重复0写；三独立进程合成RF→invest/数字篡改反控PASS1.387s，网络/模型/原件0，UUID目录恢复absent。真实H1/摘要/恢复/RF实际采用仍OPEN，接下来核精确CI与单份H1，不把工程签成公司分析完成。

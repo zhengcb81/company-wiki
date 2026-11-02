@@ -1,0 +1,76 @@
+{
+  "schema_version": "source-observer-freeze/1",
+  "source_runtime_commit": "fa8ef38ee0e6e0cd659ad602df5844cc9571ebb9",
+  "files_sha256": {
+    "tools/source_case_runner.py": "ce0ca6a4835f9775bd05b2d97935dcc071f62652980813261a47bfc334f7324a",
+    "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+    "tests/unit/test_source_case_runner.py": "bd2b6ac71ff2fa972e730104d5594135e3d1a05b46f1d281d7f3b89ff718a691",
+    "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8",
+    ".pre-commit-config.yaml": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+    ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453"
+  },
+  "canonical_command": "python -m tools.source_case_runner --manifest CASES --case ID --output RECEIPT",
+  "tests": {
+    "returncode": 0,
+    "wall_seconds": 5.178,
+    "counts": {
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "tests/unit/test_source_case_runner.py",
+      "tests/unit/test_source_case_receipt.py",
+      "-q",
+      "--tb=short",
+      "-p",
+      "pytest_asyncio.plugin",
+      "-p",
+      "pytest_timeout",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\sof-8a4c8726",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r6-publication\\source-observer-final-tests.xml"
+    ],
+    "sha256": {
+      "tools/source_case_runner.py": "ce0ca6a4835f9775bd05b2d97935dcc071f62652980813261a47bfc334f7324a",
+      "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+      "tools/source_case_receipt.py": "c260f64dd530315517a44aa940ffe73290f2e6d331981c56260ae0d98d50315a",
+      "tests/unit/test_source_case_runner.py": "bd2b6ac71ff2fa972e730104d5594135e3d1a05b46f1d281d7f3b89ff718a691",
+      "tests/unit/test_source_case_receipt.py": "c9b4f81eca3618d9d3b2160c72b51fb0c7288c69305f8eb2b7c9a27945cd81f8"
+    },
+    "cleanup": {
+      "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\sof-8a4c8726",
+      "initially_absent": true,
+      "files": 19,
+      "logical_bytes": 13593,
+      "containment_checked": true,
+      "non_reparse_checked": true,
+      "exists_after": false
+    },
+    "real_original_access": false,
+    "real_source_replays": 0,
+    "model_calls": 0
+  },
+  "default_receipt_bytes": 300000,
+  "checkpoint_bytes": 16384,
+  "source_limits_unchanged": {
+    "work": 16000000,
+    "spans": 112,
+    "seconds": 90
+  },
+  "real_replays_after_repair": 0,
+  "paid_calls": 0,
+  "independent": "PENDING",
+  "local_shim_sha256": "6038d7d18778e788208421cd1299bb46f5045a96e2a0ace19d210ca49510d7fa"
+}
