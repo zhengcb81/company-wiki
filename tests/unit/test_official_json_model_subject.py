@@ -459,6 +459,10 @@ _RAW_BEFORE = [
 
 @pytest.mark.parametrize("expected", _RAW_BEFORE)
 def test_original_raw_model_input_and_decoder_remain_byte_canonical(expected):
+    from support.summary_output_contract_upgrade import (
+        archived_compression_projection, assert_archived_request_upgrade,
+    )
+    from dataclasses import asdict
     from support.narrative_model_request_fixture import (
         selection as raw_selection,
         response_draft,
@@ -468,6 +472,8 @@ def test_original_raw_model_input_and_decoder_remain_byte_canonical(expected):
         expected["count"], role=expected["role"], flags=tuple(expected["flags"])
     )
     request = model.NarrativeModelRequest.from_selection(selected)
+    with archived_compression_projection():
+        archived = model.NarrativeModelRequest.from_selection(selected)
     raw = model.NarrativeModelResponse(
         "fixture",
         "fixture",
@@ -476,16 +482,17 @@ def test_original_raw_model_input_and_decoder_remain_byte_canonical(expected):
     )
     draft = model.decode_model_draft(raw, selected=selected)
     assert request.prompt_version == expected["prompt_version"]
-    assert request.input_sha256 == expected["input_sha256"]
+    assert archived.input_sha256 == expected["input_sha256"]
     assert (
-        hashlib.sha256(request.data_json.encode()).hexdigest()
+        hashlib.sha256(archived.data_json.encode()).hexdigest()
         == expected["data_sha256"]
     )
     assert (
-        hashlib.sha256(request.instruction.encode()).hexdigest()
+        hashlib.sha256(archived.instruction.encode()).hexdigest()
         == expected["instruction_sha256"]
     )
     assert (
         hashlib.sha256(canonical_json(draft).encode()).hexdigest()
         == expected["draft_sha256"]
     )
+    assert_archived_request_upgrade(request, asdict(archived), selected=selected)

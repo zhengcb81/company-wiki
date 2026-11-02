@@ -8,7 +8,7 @@ import pytest
 
 from company_wiki.automation.models import canonical_json
 from company_wiki.automation.narrative_contracts import NarrativeSelectResult
-from company_wiki.automation.narrative_model import NarrativeModelResponse
+from company_wiki.automation.narrative_model import ModelCitationError, NarrativeModelResponse
 from company_wiki.automation.narrative_model_runtime import build_model_request, decode_model_draft
 from support.narrative_model_request_fixture import selection
 from unit.test_narrative_reading_transport import reading_context
@@ -182,14 +182,22 @@ def test_capacity_defers_complete_cards_instead_of_cutting_them():
     assert all(row['text'] in {span.raw_text for span in source.evidence_spans} for row in plan.draft['claims'])
 
 
-def test_v4_rejects_a_draft_above_the_scoped_claim_budget():
+def test_v4_keeps_complete_source_clauses_above_advisory_budget_and_rejects_wrong_basis():
     source = selected(1)
     request = build_model_request(source, reading_projection_version='reading-model-input/4')
     response = NarrativeModelResponse('offline', 'configured', request.prompt_version,
         canonical_json({'drafts_by_task': {'t1': [
-            {'text': '旧协议条款', 'basis_parts': ['p1'], 'modality': 'uncertain'}] * 41}}).encode())
-    with pytest.raises(ValueError, match='forty'):
-        decode_model_draft(response, selected=source, reading_projection_version='reading-model-input/4')
+            {'text': source.evidence_spans[0].raw_text, 'basis_parts': ['p1'], 'modality': 'uncertain'}] * 41}}).encode())
+    draft = decode_model_draft(response, selected=source, reading_projection_version='reading-model-input/4')
+    assert len(draft['claims']) == 41
+    assert all(row['text'] == source.evidence_spans[0].raw_text for row in draft['claims'])
+    assert all(row['evidence_ids'] == [source.evidence_spans[0].span_id] for row in draft['claims'])
+    invalid = json.loads(response.response_bytes)
+    invalid['drafts_by_task']['t1'] = [{'text': source.evidence_spans[0].raw_text,
+                                     'basis_parts': ['missing'], 'modality': 'uncertain'}] * 41
+    with pytest.raises(ModelCitationError, match='cannot borrow another task or context-only facts'):
+        decode_model_draft(NarrativeModelResponse('offline', 'configured', request.prompt_version,
+            canonical_json(invalid).encode()), selected=source, reading_projection_version='reading-model-input/4')
 
 
 def test_native_support_and_context_are_preserved_without_promoting_question_to_answer():

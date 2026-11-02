@@ -228,6 +228,9 @@ def fingerprint(value):
 
 
 def test_pre_table_bridge_canonical_identity_and_all_legacy_model_wires_stay_exact():
+    from support.summary_output_contract_upgrade import (
+        archived_compression_projection, assert_archived_request_upgrade, upgraded_http_body,
+    )
     from company_wiki.automation.narrative_contracts import NarrativeSelectResult
     from company_wiki.automation.narrative_model import NarrativeModelRequest
     from support.narrative_model_request_fixture import selection
@@ -255,5 +258,10 @@ def test_pre_table_bridge_canonical_identity_and_all_legacy_model_wires_stay_exa
     }
     for version,(request_sha,http_sha) in frozen.items():
         request=NarrativeModelRequest.from_selection(selected,reading_projection_version=version)
-        assert fingerprint(asdict(request))==request_sha
-        assert sha256(http_port().request_bytes(request)).hexdigest()==http_sha
+        with archived_compression_projection():
+            archived=NarrativeModelRequest.from_selection(selected,reading_projection_version=version)
+            assert fingerprint(asdict(archived))==request_sha
+            archived_http=http_port().request_bytes(archived)
+            assert sha256(archived_http).hexdigest()==http_sha
+        assert_archived_request_upgrade(request,asdict(archived),selected=selected,reading_projection_version=version)
+        assert json.loads(http_port().request_bytes(request))==upgraded_http_body(archived_http)

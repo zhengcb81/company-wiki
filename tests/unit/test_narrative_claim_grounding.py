@@ -61,7 +61,8 @@ def check(quote, *, name="one", **kwargs):
 def test_real_paid_response_replays_through_the_actual_decoder(real_case):
     selected = NarrativeSelectResult.from_dict(real_case["selected"])
     request = NarrativeModelRequest.from_selection(selected, reading_projection_version="reading-model-input/3").with_output_budget(8192)
-    assert_archived_request_upgrade(request, real_case["request"])
+    assert_archived_request_upgrade(request, real_case["request"], selected=selected,
+                                    reading_projection_version="reading-model-input/3")
     response = NarrativeModelResponse("saved-paid-final", "mimo-v2.6-flash", request.prompt_version,
                                       real_case["response_utf8"].encode())
     draft = decode_model_draft(response, selected=selected, reading_projection_version="reading-model-input/3")

@@ -10,6 +10,7 @@ from company_wiki.automation.narrative_contracts import NarrativeSelectResult
 from company_wiki.automation.narrative_model import NarrativeModelResponse, ModelResponseError
 from company_wiki.automation.narrative_summary_protocols import summary_bundle_format
 from unit.test_narrative_extractive_runtime import selected
+from support.summary_output_contract_upgrade import assert_archived_request_upgrade
 
 VERSION = 'reading-model-input/7'
 
@@ -31,7 +32,11 @@ def test_versioned_selected_input_and_http_instruction_match_declared_capture(ve
         expected = current['request']
     request = runtime.build_model_request(NarrativeSelectResult.from_dict(selection),
                                           reading_projection_version=version)
-    assert {key: getattr(request, key) for key in expected} == expected
+    if version == 'reading-model-input/5':
+        assert {key: getattr(request, key) for key in expected} == expected
+    else:
+        assert_archived_request_upgrade(request, expected, selected=NarrativeSelectResult.from_dict(selection),
+                                        reading_projection_version=version)
 
 
 def test_explicit_atomic_recipe_identity_and_artifact_family():

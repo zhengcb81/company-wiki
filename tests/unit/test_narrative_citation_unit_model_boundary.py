@@ -71,7 +71,8 @@ def test_explicit_v2_material_and_http_contract_preserve_frozen_scope_without_re
     assert sha256(FROZEN.read_bytes()).hexdigest() == "010a09825ca73c3b0ffea5f7208be7dddee76917eba3fa5f74f52d73a8b5f8a4"
     selected = NarrativeSelectResult.from_dict(case["selected"])
     actual = model.NarrativeModelRequest.from_selection(selected, reading_projection_version="reading-model-input/2")
-    assert_archived_request_upgrade(actual, case["request"])
+    assert_archived_request_upgrade(actual, case["request"], selected=selected,
+                                    reading_projection_version="reading-model-input/2")
     assert json.loads(http_port().request_bytes(actual)) == upgraded_http_body(b64decode(case["http_bytes"]))
 
 

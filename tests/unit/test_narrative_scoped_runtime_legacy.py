@@ -245,7 +245,8 @@ def test_pre_v4_published_v3_material_http_and_capability_contracts_keep_nonquot
     # The pre-v4 archive froze the request after the real HTTP output-budget
     # owner had retargeted it, not the initial unbudgeted request object.
     actual=runtime.build_model_request(selected,reading_projection_version='reading-model-input/3').with_output_budget(8192)
-    assert_archived_request_upgrade(actual, case['request'])
+    assert_archived_request_upgrade(actual, case['request'], selected=selected,
+                                    reading_projection_version='reading-model-input/3')
     assert json.loads(http_port().request_bytes(actual)) == upgraded_http_body(b64decode(case['http_body_base64']))
     current_boundary = runtime.reading_model_boundary_identity(
         'reading-model-input/3', projected=selected.subject.kind == 'official_json'

@@ -68,7 +68,8 @@ def test_six_frozen_legacy_material_contracts_keep_scope_without_compression_per
     selected = NarrativeSelectResult.from_dict(case["selected"])
     actual = model.NarrativeModelRequest.from_selection(selected,
         reading_projection_version=case["reading_model_projection"])
-    assert_archived_request_upgrade(actual, case)
+    assert_archived_request_upgrade(actual, case, selected=selected,
+                                    reading_projection_version=case["reading_model_projection"])
     body = http_port().request_bytes(actual)
     old_body = b64decode(case["http_body_base64"])
     assert sha256(old_body).hexdigest() == case["http_body_sha256"]
