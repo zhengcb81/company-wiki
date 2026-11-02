@@ -21,7 +21,12 @@ def test_source_roles_survive_context_fact_filter_without_a_proof_upgrade(text, 
     assert raw.independent_payload is payload
     assert prepared.source_roles.independent_payload is payload
     assert prepared.passage.use == use and not prepared.passage.relevant
-    assert not prepared.fact.eligible
+    if payload is None:
+        assert not prepared.fact.eligible
+    else:
+        # R5 erratum: a complete generic description can remain recallable
+        # background. It is not qualified event/number or scarce material.
+        assert not {'operating_milestone', 'operating_current_state', 'operating_quantity'} & set(prepared.fact.reasons)
 
 
 def test_prepared_scope_has_separate_valid_source_and_fact_role_views():

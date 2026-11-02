@@ -204,7 +204,11 @@ def test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments(text
 def test_beneficiary_background_or_abstract_coordination_cannot_create_business_content(text):
     prepared = prepare_reading_business_assessment(text, {'relations': []})
     assert prepared.passage.use != 'support' and not prepared.passage.relevant
-    assert not prepared.fact.eligible and not prepared.fact.financial_exempt
+    # R5: generic source background may remain eligible for recall; these
+    # assertions must not become scarce material, events or actual numbers.
+    assert not prepared.fact.financial_exempt
+    assert not {'operating_milestone', 'operating_current_state', 'operating_quantity',
+                'operating_metric_change', 'business_revenue_measure'} & set(prepared.fact.reasons)
 
 
 @pytest.mark.parametrize('joiner', ('并', '或者', '而且'))
@@ -393,7 +397,8 @@ def _assert_unknown_goal(text, prepared):
     # argument. Keep the original claim, not an invented economic proof.
     from company_wiki.document_normalization.text_matching import matching_reading_text
     assert prepared.passage.use == 'unresolved' and not prepared.passage.relevant
-    assert not prepared.fact.eligible
+    assert not {'operating_milestone', 'operating_current_state', 'operating_quantity',
+                'operating_metric_change', 'business_revenue_measure'} & set(prepared.fact.reasons)
     assert prepared.source_roles.independent_payload is None
     assert not prepared.source_roles.bound_payload
     expected = matching_reading_text(text).strip(' .。!?;；')
@@ -411,4 +416,10 @@ def test_unknown_goals_remain_source_words_without_unproved_relevance(text):
 
 def test_unknown_catalogue_members_do_not_prove_each_others_semantics():
     text = 'Our services include orchard planting and coastal transport.'
-    _assert_unknown_goal(text, prepare_reading_business_assessment(text, {'relations': []}))
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    # R5 erratum: a closed source-declared range is material information,
+    # irrespective of whether this reader knows the industry's names.
+    assert prepared.source_roles.independent_payload is True and prepared.fact.eligible
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    assert prepared.source_roles.clauses[0].text == text
+    assert not {'operating_milestone', 'operating_current_state', 'operating_quantity'} & set(prepared.fact.reasons)

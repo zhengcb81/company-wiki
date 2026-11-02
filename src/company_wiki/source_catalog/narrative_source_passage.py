@@ -64,6 +64,7 @@ class SourceStatementScope:
     # Source observations and fact eligibility are different views. A known
     # generic or unresolved argument remains an observed grammatical role.
     fact_roles: SourceAssertionRoles | None = None
+    financial_context_keys: frozenset[str] = frozenset()
 
 
 _CN_QUESTION = re.compile(r'\s*(?:请问|請問|是否|会不会|會不會)')
@@ -141,7 +142,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         scope_description = bool(context.status == 'candidate' and not context.objective_operator
                                  and (clause.source_scope or scope_relation and scope_relation(clause.text)))
         if scope_description and not typed_business and clause.independent_payload is not True:
-            context = replace(context, source_scope=True, fact_candidate=False)
+            context = replace(context, source_scope=True)
         if (context.status == 'candidate' and not context.objective_operator and clause.operating
                 and clause.independent_payload is None and not typed_business and not scope_description):
             context = replace(context, status='unresolved', reason='source_payload_unresolved')
@@ -192,7 +193,6 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         start = stop
     if (not suppressed and CAUSAL_LINK.search(text) is None
             and all(context.status == 'candidate' for _, context in context_results)
-            and all(context.fact_candidate for _, context in context_results)
             and all(observation.status != 'unknown' for observation in prepared_grammar.values())):
         return SourceStatementScope(text, roles, grammar_results=tuple(grammar_results),
                                     context_results=context_results, fact_roles=roles)
@@ -229,12 +229,12 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
     source_clauses = []
     assertion_keys = set()
     causal_keys: set[str] = set()
+    financial_keys: set[str] = set()
     for (start, stop, allowed), segment, members in zip(segments, normalized, memberships):
         if source_allowed_segments[start]:
             source_clauses.extend(members)
         members = [clause for clause in members
                    if contexts[statement_assertion_key(clause.text)].status == 'candidate'
-                   and contexts[statement_assertion_key(clause.text)].fact_candidate
                    and (statement_assertion_key(clause.text) not in prepared_grammar
                         or prepared_grammar[statement_assertion_key(clause.text)].status != 'unknown')]
         if not members:
@@ -257,6 +257,8 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             # an amount is not evidence that the stated cause is true.
             allowed = independent or business_cause or bool(
                 measurement_relation and measurement_relation(segment))
+            if not allowed:
+                financial_keys.update(statement_assertion_key(clause.text) for clause in members)
             if business_cause:
                 causal_keys.update(clause.text.strip(' \t\r\n.。!?？！;；') for clause in members)
         suppressed |= not allowed
@@ -274,7 +276,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
                     replace(roles, clauses=source_view, bound_operating=False, bound_payload=False))
     return SourceStatementScope(''.join(masked), source_roles, suppressed,
                                 frozenset(assertion_keys), frozenset(causal_keys),
-                                tuple(grammar_results), context_results, fact_roles)
+                                tuple(grammar_results), context_results, fact_roles, frozenset(financial_keys))
 
 
 def _declarative(text: str, *, grammar_observations: list[StatementObservation] | None = None,
@@ -425,7 +427,7 @@ def prepare_source_passage(
     # resource/quantity owner rather than a single local clause witness.
     if ((prepared_use or not has_prefix) and existing_use[0] == 'support'
             and (any(clause.independent_payload is True for clause in clauses)
-                 or existing_fact_proof)):
+                 or roles.bound_payload or existing_fact_proof)):
         return SourcePassageCapability('support', existing_use[1], 'source_narrative', True)
     if clauses and all(abstract_source_argument(clause.text)
                              for clause in clauses):
@@ -438,6 +440,9 @@ def prepare_source_passage(
     semantic_results: dict[str, SourceClauseContext] = {}
     for clause in clauses:
         text = clause.text
+        if statement_assertion_key(text) in statement_scope.financial_context_keys:
+            finance_seen = True
+            continue
         if (clause.rule_purpose or clause.independent_payload is False
                 or _NON_ASSERTION.search(text)
                 or _REFERENCE_METADATA.search(text)):

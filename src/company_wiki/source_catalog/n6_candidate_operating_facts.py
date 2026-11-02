@@ -16,7 +16,12 @@ from .n6_scope_changes import SCOPE_CHANGE_JOIN, scope_change_reasons
 
 @dataclass(frozen=True)
 class OperatingFact:
-    """One conservative operating-fact assessment of a text span."""
+    """Source-material recall/admission, not verified world or event truth.
+
+    Eligible source claims include named scope, definitions and qualified
+    plans. Material band and source use are separate; issuer/event/numeric
+    qualification is supplied only by the corresponding binding owners.
+    """
 
     eligible: bool = False
     topics: tuple[str, ...] = ()

@@ -8,13 +8,17 @@ because they share a noun with a real customer-facing business.
 from __future__ import annotations
 
 import re
+from typing import TYPE_CHECKING
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
 from company_wiki.document_understanding.operating_states.assertion_roles import (
-    SourceAssertionRoles, prepare_source_assertions,
+    SourceAssertionRoles, prepare_source_assertions, SOURCE_DESCRIPTION_SCAN_PASSES,
     descriptive_operating_relation as descriptive_operating_relation,
     source_reporting_purpose,
 )
+
+if TYPE_CHECKING:
+    from company_wiki.resource_budget import WorkBudget
 
 from .narrative_business_disclosures import reporting_basis_relations
 from .narrative_business_meaning import concrete_operating_event, describes_business
@@ -226,7 +230,8 @@ def revenue_recognition_mechanism(text: str) -> bool:
                 and _CUSTOMER_CONTROL_TRANSFER.search(value))
 
 
-def source_purpose(text: str, *, prepared: SourceAssertionRoles | None = None) -> str:
+def source_purpose(text: str, *, prepared: SourceAssertionRoles | None = None,
+                   work_budget: WorkBudget | None = None) -> str:
     """Describe the purpose of bounded material; no whole-chapter blacklist.
 
     A separate complete operating clause keeps mixed acquisition/factory notes
@@ -239,7 +244,10 @@ def source_purpose(text: str, *, prepared: SourceAssertionRoles | None = None) -
     # No noun in another sentence may lend an operating object to a policy
     # verb. Conversely a genuine independent business sentence is retained
     # inside an acquisition/lease note rather than blacklisting that chapter.
-    prepared = prepared if prepared is not None else prepare_source_assertions(value)
+    if prepared is None:
+        if work_budget is not None:
+            work_budget.charge(SOURCE_DESCRIPTION_SCAN_PASSES * len(value))
+        prepared = prepare_source_assertions(value, work_budget=work_budget)
     purposes = tuple(clause.rule_purpose or _clause_purpose(clause.text,
         operating_proof=clause.operating) for clause in prepared.clauses)
     for purpose in ("operating_contract_stock", "operating", "operating_metric_basis",

@@ -140,7 +140,7 @@ _DEVELOPED_SCOPE = re.compile(
     r"\b(?:have|has)\s+developed\s+(?:(?:over|more than|approximately)\s+)?"
     r"\d+(?:\.\d+)?\s+(?P<en>[^,。;!?]{1,65}))", re.I)
 _DEVELOPED_POLICY_OBJECT = re.compile(r"会计政策|\baccounting polic(?:y|ies)\b", re.I)
-_NOMINAL_MEMBER_SEPARATOR = re.compile(r"[,，、]|及|和|\band\b|\bor\b", re.I)
+_NOMINAL_MEMBER_SEPARATOR = re.compile(r"[,，、]|以及|及|和|与|與|\band\b|\bor\b", re.I)
 _DEPENDENT_SUBJECT_PREFIX = re.compile(r"^(?:该|其|上述|这一|这些|有关|"
     r"this\b|that\b|these\b|those\b|their\b|its\b)", re.I)
 _SUBJECT_MODIFIERS_ONLY = re.compile(
@@ -312,6 +312,17 @@ def _nominal_member_identity(value: str) -> bool:
                     and source_grammar.SUBJECT_TAIL.fullmatch(subject) is None):
                 return False
     return True
+
+
+def source_nominal_members(value: str) -> tuple[str, ...]:
+    """Closed source-declared member names, without guessing their industry.
+
+    This observes the information carried by the declaration, not whether
+    the names identify verified products, issuers or achieved events.
+    Empty/dangling members and a fresh assertion cannot complete a roster.
+    """
+    members = tuple(part.strip() for part in _NOMINAL_MEMBER_SEPARATOR.split(value))
+    return members if len(members) >= 2 and all(map(_nominal_member_identity, members)) else ()
 
 
 def _argument_payload(value: str, *, concrete_action: bool = False,
@@ -584,9 +595,11 @@ def _clause_description_proofs(value: str, *, work_budget: WorkBudget | None = N
                 # The source explicitly declares a product/customer class.
                 # A closed enumeration supplies member identity, independently
                 # of capitalization or the argument's unknown entity type.
-                members = [part.strip() for part in _NOMINAL_MEMBER_SEPARATOR.split(target)]
-                if len(members) >= 2 and all(_nominal_member_identity(part) for part in members):
+                members = source_nominal_members(target)
+                if members:
                     member_identity = True
+                    if payload is None:
+                        payload = True
             prefix = value[max(0, relation.start('head')-45):relation.start('head')]
             # A customer class, sold range or explicit closed member list is a
             # business scope, not an expansion/manufacturing event. Membership
@@ -596,6 +609,8 @@ def _clause_description_proofs(value: str, *, work_budget: WorkBudget | None = N
             observed_scope = bool(closed and not _PROSPECTIVE_SCOPE.search(prefix)
                 and (member_identity or _CUSTOMER_HEAD.fullmatch(relation['head']) or _SOLD_SCOPE.search(prefix)))
             source_scope |= bool(observed_scope and _CUSTOMER_HEAD.fullmatch(relation['head']))
+            if observed_scope and payload is None and not abstract_source_argument(target):
+                payload = True
             yield _DescriptionProof(payload, value, descriptive_only=True,
                                     material_scope=observed_scope, source_scope=source_scope)
     # One clause-local index supplies both head-first descriptions and
@@ -774,6 +789,7 @@ class AssertionRole:
     text: str
     operating: bool
     rule_purpose: str = ""
+    # Self-contained source information, NOT verified world/event truth.
     independent_payload: bool | None = None
     # Normalized local witnesses, NOT original offsets or canonical EvidenceSpan.
     payload_witnesses: tuple[str, ...] = ()

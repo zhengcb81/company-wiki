@@ -817,20 +817,20 @@ _SOURCE_SCOPE_RELATIONS = frozenset({
     'reporting_metric_definition', 'reporting_definition_change', 'scope_unchanged',
     'reporting_outlook_recast', 'reporting_segment_scope', 'future_investment_disclosure',
 })
-_UNKNOWN_RELATION_REASONS = frozenset({'business_scope'})
 
 
 @dataclass(frozen=True)
 class _ReadingRelationObservation:
-    """Only the bound relationship owner supplies this payload observation.
+    """Self-contained source information and its kind, not world verification.
 
-    Financial exemption is a separate use of these reasons. Descriptive
-    operating syntax and labels added by consumers cannot become this proof.
+    Original bounded relation observers emit informative statements including
+    scope, qualitative intent and definitions. Scope kinds do not downgrade
+    their information. A generic role/consumer label cannot create payload;
+    event, issuer and actual-number qualification remain separate bindings.
     """
     reasons: tuple[str, ...]
     payload_reasons: tuple[str, ...] = ()
     scope_reasons: tuple[str, ...] = ()
-    unknown_reasons: tuple[str, ...] = ()
 
     @property
     def independent_payload(self) -> bool:
@@ -857,13 +857,11 @@ def _reading_relations(clauses: tuple[str, ...], *,
         observation = _ReadingRelationObservation(
             tuple(dict.fromkeys(reason for clause in clauses for reason in prepared[clause].reasons)),
             tuple(dict.fromkeys(reason for clause in clauses for reason in prepared[clause].payload_reasons)),
-            tuple(dict.fromkeys(reason for clause in clauses for reason in prepared[clause].scope_reasons)),
-            tuple(dict.fromkeys(reason for clause in clauses for reason in prepared[clause].unknown_reasons)))
+            tuple(dict.fromkeys(reason for clause in clauses for reason in prepared[clause].scope_reasons)))
         if observations is not None:
             observations.append(observation)
         return observation.reasons
     reasons: list[str] = []
-    measured_plan = False
     for clause in clauses:
         if _GENERIC_DEFINITION.search(clause) and not _COMPANY_ANCHOR.search(clause):
             continue
@@ -897,7 +895,6 @@ def _reading_relations(clauses: tuple[str, ...], *,
             reasons.append("business_revenue_measure")
         if any(kind in {"planned_quantity", "planned_direction"} for kind, _start, _end in measures):
             reasons.append("operating_plan")
-            measured_plan = True
         growth = _REVENUE_GROWTH.search(clause)
         link = _DRIVER_LINK.search(clause)
         if growth and link:
@@ -919,11 +916,7 @@ def _reading_relations(clauses: tuple[str, ...], *,
     observed = tuple(dict.fromkeys(reasons))
     if observations is not None:
         observations.append(_ReadingRelationObservation(observed,
-            tuple(reason for reason in observed if reason not in _SOURCE_SCOPE_RELATIONS
-                  or reason == 'operating_plan' and measured_plan),
-            tuple(reason for reason in observed if reason in _SOURCE_SCOPE_RELATIONS
-                  and reason not in _UNKNOWN_RELATION_REASONS),
-            tuple(reason for reason in observed if reason in _UNKNOWN_RELATION_REASONS)))
+            observed, tuple(reason for reason in observed if reason in _SOURCE_SCOPE_RELATIONS)))
     return observed
 
 
@@ -1028,27 +1021,14 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
 
 
 def detect_reading_business_fact(text: str, *, include_source_descriptions: bool = True) -> OperatingFact:
-    """Compatibility text recognizer; production supplies source relationships."""
+    """Text compatibility view of the shared preparation, not production state."""
+    if include_source_descriptions:
+        return prepare_reading_business_assessment(text, {"relations": []}).text_fact
     from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
     roles = prepare_source_assertions(text)
     causal_observations: dict[str, bool] = {}
     metric_observations: _MetricObservations = {}
     relation_observations: dict[str, _ReadingRelationObservation] = {}
-    if include_source_descriptions:
-        statement_scope = prepare_source_statement_scope(text, roles,
-            accounting_text=lambda value: bool(_SOURCE_ACCOUNTING.search(value)),
-            causal_relation=lambda value: _observed_causal_relation(
-                value, causal_observations, metric_observations=metric_observations),
-            measurement_relation=lambda value: _business_revenue_measure(
-                value, metric_observations=metric_observations),
-            quantified_argument=source_has_operating_measure,
-            business_relation=lambda value: _independent_reading_relation(value,
-                causal_observations=causal_observations, metric_observations=metric_observations,
-                prepared=relation_observations),
-            scope_relation=lambda value: _reading_source_scope(value,
-                causal_observations=causal_observations, metric_observations=metric_observations,
-                prepared=relation_observations))
-        text, roles = statement_scope.text, statement_scope.fact_roles or statement_scope.roles
     return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact, source_roles=roles,
                          causal_observations=causal_observations,
                          metric_observations=metric_observations,
@@ -1120,10 +1100,17 @@ def source_has_operating_object(text: str) -> bool:
 
 @dataclass(frozen=True)
 class ReadingBusinessAssessment:
+    """Prepared source views with explicit consumer capabilities.
+
+    ``text_fact`` is the text-only source-description compatibility projection.
+    ``fact`` additionally consumes production resource and relation observations.
+    They share preparation without extending the historical text API's scope.
+    """
     fact: OperatingFact
     financial_only: bool | None
     source_roles: SourceAssertionRoles
     passage: SourcePassageCapability
+    text_fact: OperatingFact
 
 
 def prepare_reading_business_assessment(text: str, source_relations: dict, *, ref_text=None,
@@ -1178,8 +1165,34 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
                                                             relation_observations=relation_observations,
                                                             payload_observations=observed),
                                 source_purpose(text, prepared=fact_roles))
+    background = any(clause.operating and clause.independent_payload is False and not clause.rule_purpose
+                     for clause in statement_scope.roles.clauses)
+    if (not background and not text.strip() and statement_scope.roles.clauses
+            and not statement_scope.financial_context_keys
+            and not any(clause.rule_purpose for clause in statement_scope.roles.clauses)):
+        # The compatibility source reader has always recalled a complete
+        # generic operating description. No clause recognizer ran on this
+        # empty material view; reuse the original broad source-recall owner
+        # once, then explicitly keep its value at background (not payload).
+        background = _business_fact(original_text).eligible
+    if not description.eligible and background:
+        # Complete generic source content remains recallable background. This
+        # is not independent material, business relevance or an event proof.
+        description = OperatingFact(True, ('core_business',), ('operating_description_unknown',),
+                                    1, False, 'operating')
     from .narrative_operating_resources import operating_resource_relations
-    resource_reasons = operating_resource_relations(_reading_text(text))
+    resource_purposes: dict[str, str] = {}
+    purpose_roles = {statement_assertion_key(clause.text): clause for clause in fact_roles.clauses}
+
+    def resource_purpose(value: str) -> str:
+        key = statement_assertion_key(value)
+        if key not in resource_purposes:
+            clause = purpose_roles.get(key)
+            prepared = replace(fact_roles, clauses=(clause,)) if clause is not None else None
+            resource_purposes[key] = source_purpose(value, prepared=prepared, work_budget=grammar_work_budget)
+        return resource_purposes[key]
+
+    resource_reasons = operating_resource_relations(_reading_text(text), purpose_for=resource_purpose)
     recognition_scope = named_recognition_scope(_reading_text(text))
     fact_roles = replace(fact_roles, bound_payload=bool(
         fact_roles.bound_payload or any(relation_bindings) or any(observed)
@@ -1207,7 +1220,7 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
     # financial axis rather than manufacturing a finance-only result.
     classified_financial = (None if not passage.assessment_complete else False if passage.relevant
                             else financial or passage.financial_only)
-    return ReadingBusinessAssessment(fact, classified_financial, source_roles, passage)
+    return ReadingBusinessAssessment(fact, classified_financial, source_roles, passage, description)
 
 
 def assess_reading_business_fact(text: str, source_relations: dict, *, ref_text=None, source_roles=None,
@@ -1299,9 +1312,8 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
     substantive = set(reasons) - UNRESOLVED_READING_REASONS
     if (source_roles is not None and source_roles.independent_payload is False
             and not any(relation_bindings) and not resource_reasons):
-        # A legacy reason or stage string cannot overrule observed generic
-        # arguments. The original remains indexed/readable as context.
-        return OperatingFact(purpose=fact.purpose)
+        return OperatingFact(fact.eligible, fact.topics, ('operating_description_unknown',),
+                             fact.score, False, fact.purpose)
     finance_proof = source_roles is None or source_roles.independent_payload is True
     return OperatingFact(bool(reasons), tuple(dict.fromkeys(topics)), tuple(dict.fromkeys(reasons)),
                          max(fact.score if independent else 0, 3 if reasons else 0),

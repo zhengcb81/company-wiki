@@ -9,6 +9,8 @@ from __future__ import annotations
 from typing import Literal
 import re
 
+from company_wiki.document_understanding.operating_states.assertion_roles import source_nominal_members
+
 from .n6_candidate_operating_facts import OperatingFact
 from .narrative_business_meaning import _component_structure, _STRUCTURE, _OBJECT
 from .narrative_predicate_state import predicate_scope
@@ -516,14 +518,13 @@ def disclosure_relations(clause: str) -> tuple[str, ...]:
         relations.append("business_financing_terms")
     for match in _CN_SCOPE.finditer(clause):
         parts = match.group("parts") or match.group("types")
-        if (_component_structure("业务包括" + parts)
+        if (source_nominal_members(parts) and _component_structure("业务包括" + parts)
                 or _CN_NAMED_LINE_DETAIL.search(parts)):
             relations.append("business_scope")
             break
     for match in _EN_SCOPE.finditer(clause):
-        parts = [part.strip(" .:") for part in _EN_MEMBERS.split(
-            match.group("parts") or match.group("businesses")) if part.strip(" .:")]
-        if len(parts) >= 2 and any(not _GENERIC_MEMBER.fullmatch(part) for part in parts):
+        parts = source_nominal_members(match.group("parts") or match.group("businesses"))
+        if parts and any(not _GENERIC_MEMBER.fullmatch(part.strip(" .:")) for part in parts):
             relations.append("business_scope")
             break
     if _EN_REVENUE_LINE_DETAIL.search(clause):

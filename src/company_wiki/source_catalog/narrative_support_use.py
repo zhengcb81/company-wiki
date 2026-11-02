@@ -34,7 +34,7 @@ def source_narrative_relevance(*, fact: OperatingFact,
         return table_qualified
     if source_roles is not None:
         return (table_qualified or source_roles.independent_payload is True or source_roles.source_scope
-                or source_roles.numeric_role == 'operating')
+                or source_roles.bound_operating or source_roles.numeric_role == 'operating')
     return table_qualified or bool(fact.eligible and set(fact.reasons) - UNRESOLVED_READING_REASONS)
 
 

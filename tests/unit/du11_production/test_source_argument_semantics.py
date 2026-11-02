@@ -5,6 +5,13 @@ from company_wiki.document_understanding.operating_states.assertion_roles import
 from company_wiki.source_catalog.narrative_business_policy import prepare_reading_business_assessment
 
 
+def _no_event_or_actual_measure(prepared):
+    # R5: material eligibility/self-contained source information is not world
+    # verification. These are the actual event/number boundary assertions.
+    assert not {'operating_milestone', 'operating_current_state', 'operating_quantity',
+                'operating_metric_change', 'business_revenue_measure'} & set(prepared.fact.reasons)
+
+
 @pytest.mark.parametrize('text', (
     'Our platform supports remarkable ambitions.',
     'Our platform supports promising possibilities.',
@@ -38,7 +45,7 @@ def test_explicit_qualitative_operating_scope_has_a_positive_source_argument(tex
     assert prepared.passage.use == 'support' and prepared.passage.relevant
     assert not {'operating_milestone', 'operating_current_state'} & set(prepared.fact.reasons)
     if original.independent_payload is None:
-        assert not prepared.fact.eligible and not prepared.source_roles.bound_payload
+        _no_event_or_actual_measure(prepared)
 
 
 @pytest.mark.parametrize('text', (
@@ -73,23 +80,22 @@ def test_actual_quotes_and_existing_positive_payloads_remain_distinct_from_unkno
     'IV therapy services are provided to hospitals.',
     '一体化生产服务覆盖多个下游客户工序。',
 ))
-def test_source_scope_is_readable_description_without_a_strong_fact_or_finance_exemption(text):
+def test_source_scope_preserves_source_information_without_an_event_or_actual_measure(text):
     from company_wiki.source_catalog.narrative_business_disclosures import reading_material_value
     from company_wiki.source_catalog.narrative_support_use import source_support_use
 
     prepared = prepare_reading_business_assessment(text, {'relations': []})
     assert prepared.source_roles.source_scope
     assert prepared.passage.use == 'support'
+    _no_event_or_actual_measure(prepared)
     if prepared.source_roles.independent_payload is None:
-        assert not prepared.source_roles.bound_payload and not prepared.fact.eligible
-        assert not prepared.fact.financial_exempt
         assert reading_material_value(prepared.fact, source_roles=prepared.source_roles) == 'description'
         assert source_support_use(text, fact=prepared.fact, financial_only=False,
                                   source_roles=prepared.source_roles)[0] == 'support'
 
 
 @pytest.mark.parametrize('text, payload, scope', (
-    ('We plan to develop new products.', False, True),
+    ('We plan to develop new products.', True, True),
     ('Our sales services cover 17 regional markets.', True, False),
     ('Our platform supports remarkable ambitions.', False, False),
 ))
@@ -108,18 +114,22 @@ def test_one_bound_relation_owner_exposes_its_actual_axes(text, payload, scope):
     'Our services include remarkable ambitions and promising possibilities.',
     'Our product range comprises luminous horizons and unfamiliar endeavours.',
 ))
-def test_multiple_unknown_members_cannot_upgrade_their_own_payload(text):
+def test_closed_declared_members_supply_source_information_without_world_verification(text):
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.source_roles.independent_payload is None
-    assert not prepared.source_roles.bound_payload and not prepared.fact.eligible
-    assert prepared.passage.use == 'unresolved' and not prepared.passage.relevant
+    # R5 erratum: declared member names are self-contained source data; no
+    # industry dictionary or inference that the names are true is required.
+    assert prepared.source_roles.independent_payload is True and prepared.fact.eligible
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    assert prepared.source_roles.clauses[0].text == text
+    _no_event_or_actual_measure(prepared)
 
 
-def test_typed_catalogue_preserves_members_without_a_count_based_fact_upgrade():
+def test_catalogue_preserves_material_members_without_an_event_or_actual_measure():
     text = 'Our product range includes recycling systems and control systems.'
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.source_roles.independent_payload is None and prepared.source_roles.source_scope
-    assert not prepared.fact.eligible and not prepared.fact.financial_exempt
+    assert prepared.source_roles.independent_payload is True and prepared.source_roles.source_scope
+    assert prepared.fact.eligible
+    _no_event_or_actual_measure(prepared)
     assert prepared.passage.use == 'support' and prepared.passage.relevant
     assert prepared.source_roles.clauses[0].text == text
 

@@ -39,7 +39,6 @@ class SourceClauseContext:
     complement_observed: bool = False
     relevant: bool = False
     source_scope: bool = False
-    fact_candidate: bool = True
 
 
 _PAGE_NAME = re.compile(r'^\s*\d{1,4}\s+[^。.!?;；\n]{1,80}'

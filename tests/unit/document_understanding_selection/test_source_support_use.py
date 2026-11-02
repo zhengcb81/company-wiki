@@ -450,9 +450,11 @@ def test_source_session_shares_one_role_assessment_without_repeated_scans(monkey
     session=SourceOperatingSession({uid:parsed.units[0]},work_budget=WorkBudget(100000))
     actual=assertion_roles.prepare_source_assertions
     calls=[]
-    def observed(value):
+    accounts=[]
+    def observed(value, *, work_budget=None):
         calls.append(value)
-        return actual(value)
+        accounts.append(work_budget)
+        return actual(value, work_budget=work_budget)
     monkeypatch.setattr(assertion_roles,"prepare_source_assertions",observed)
     for _ in range(4):
         fact=session.fact(uid)
@@ -460,6 +462,7 @@ def test_source_session_shares_one_role_assessment_without_repeated_scans(monkey
             source_relations=session.relations(uid),support_unit_ids=(uid,),
             source_roles=session.source_assertions(uid))[0]=="support"
     assert calls==[text] and session.complete
+    assert accounts==[session.work_budget]
 
 
 @pytest.mark.parametrize('text',('服务提供商。','设备供应商。','本集团的服务提供商使之提供服务。'))
@@ -683,17 +686,21 @@ def test_direct_admission_projects_use_and_relevance_from_one_preparation(monkey
     from company_wiki.document_understanding.operating_states import assertion_roles
     from company_wiki.source_catalog import narrative_support_use
     from company_wiki.source_catalog.n6_candidate_operating_facts import OperatingFact
+    from company_wiki.resource_budget import WorkBudget
     text='Our platform routes customer workloads through partner infrastructure.'
     parsed,_=_selection_support_case([text])
     actual=assertion_roles.prepare_source_assertions
     calls=[]
-    def observed(value):
+    accounts=[]
+    def observed(value, *, work_budget=None):
         calls.append(value)
-        return actual(value)
+        accounts.append(work_budget)
+        return actual(value, work_budget=work_budget)
     monkeypatch.setattr(assertion_roles,'prepare_source_assertions',observed)
     monkeypatch.setattr(narrative_support_use,'prepare_source_assertions',observed)
     assert reading._admitted(parsed.units[0],{},'background',fact=OperatingFact(),financial_only=False)[0]
     assert calls==[text]
+    assert len(accounts)==1 and isinstance(accounts[0], WorkBudget)
 
 
 @pytest.mark.parametrize('texts',(
