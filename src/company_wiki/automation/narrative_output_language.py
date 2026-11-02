@@ -38,10 +38,6 @@ _IDENTIFIERS = threading.local()
 _LANGUAGE_RESOURCE_DIGESTS: OrderedDict[tuple, tuple[str, int]] = OrderedDict()
 _LANGUAGE_RESOURCE_DIGEST_LOCK = threading.Lock()
 _LANGUAGE_RESOURCE_DIGEST_LIMIT = 16
-_MAX_CLAIMS = 20
-_MAX_SPANS = 96
-_MAX_CITED_CHARS = 48_000
-_MAX_CLAIM_CHARS = 5_600
 _WORDS = re.compile(r"[^\W\d_]+", re.UNICODE)
 _CLAUSE_END = re.compile(r"[.!?。！？;；]")
 # A semicolon/operating list is still part of its grammatical claim. Splitting
@@ -215,22 +211,17 @@ def observe_summary_language(
 ) -> LanguageObservation:
     """Observe only actual claim prose and unique raw spans it actually cites.
 
-    Bounds or unavailable classification return explicit abstention. No body,
+    Unavailable classification returns explicit abstention. Input/output
+    resources have already been charged by their source/transport owners;
+    completed legal prose is not subject to a second representation quota. No body,
     probability, source metadata, provider call, permission, or persistent state
     is emitted. Canonical citation and fact validation remain their owners' job.
     """
-    unavailable = LanguageObservation("unavailable", None, (), 0)
-    if len(claims) > _MAX_CLAIMS or len(evidence_spans) > _MAX_SPANS:
-        return unavailable
-    if sum(len(claim.text) for claim in claims) > _MAX_CLAIM_CHARS:
-        return unavailable
     known = {span.span_id: span for span in evidence_spans}
     cited_ids = tuple(dict.fromkeys(span_id for claim in claims for span_id in claim.evidence_ids))
     if any(span_id not in known for span_id in cited_ids):
         return LanguageObservation("uncertain", None, (), 0)
     cited = tuple(known[span_id].raw_text or "" for span_id in cited_ids)
-    if sum(map(len, cited)) > _MAX_CITED_CHARS:
-        return unavailable
     observations = []
     for claim in claims:
         originals = tuple(known[span_id].raw_text or "" for span_id in claim.evidence_ids)

@@ -193,7 +193,7 @@ def test_claim_labels_and_aggregate_must_agree(observer, monkeypatch):
 
 
 @pytest.mark.parametrize("kind", ["claims", "spans", "chars", "claim_chars"])
-def test_computation_bounds_abstain_before_identifier_calls(observer, monkeypatch, kind):
+def test_complete_legal_prose_is_observed_beyond_old_representation_caps(observer, monkeypatch, kind):
     spans = tuple(span(_PROSE["synthetic-en-1"], n) for n in range(1, (98 if kind == "spans" else 3)))
     if kind == "chars":
         spans = (span(_PROSE["synthetic-en-1"] * 260),)
@@ -201,8 +201,13 @@ def test_computation_bounds_abstain_before_identifier_calls(observer, monkeypatc
     if kind == "claim_chars":
         texts = [_PROSE["synthetic-es-1"] * 30]
     claims = tuple(claim(text, spans, i) for i, text in enumerate(texts, 1))
-    monkeypatch.setattr(observer, "_get_identifier", lambda: pytest.fail("over-bound input must not invoke classifier"))
-    assert observer.observe_summary_language(claims, evidence_spans=spans).state == "unavailable"
+    calls = []
+    def classify(text):
+        calls.append(text)
+        return "en", 1.0
+    monkeypatch.setattr(observer, "_get_identifier", lambda: SimpleNamespace(classify=classify))
+    assert observer.observe_summary_language(claims, evidence_spans=spans).state == "compatible"
+    assert calls
 
 
 @pytest.mark.parametrize("fault", [ModuleNotFoundError("missing optional library"), RuntimeError("classifier fault")])

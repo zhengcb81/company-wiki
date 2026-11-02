@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import time
@@ -22,18 +23,19 @@ class LocalPrepareLimits:
     max_discovery_entries: int = 4096
 
     def __post_init__(self):
-        if type(self.max_candidates) is not int or not 1 <= self.max_candidates <= 256:
+        if type(self.max_candidates) is not int or self.max_candidates <= 0:
             raise ValueError("invalid local candidate limit")
-        if type(self.max_discovery_groups) is not int or not 1 <= self.max_discovery_groups <= 4096:
+        if type(self.max_discovery_groups) is not int or self.max_discovery_groups <= 0:
             raise ValueError("invalid local discovery group limit")
-        if type(self.max_discovery_entries) is not int or not 1 <= self.max_discovery_entries <= 65536:
+        if type(self.max_discovery_entries) is not int or self.max_discovery_entries <= 0:
             raise ValueError("invalid local discovery entry limit")
-        if type(self.max_bytes) is not int or not 1 <= self.max_bytes <= 1073741824:
+        if type(self.max_bytes) is not int or self.max_bytes <= 0:
             raise ValueError("invalid local byte limit")
         if (
             isinstance(self.timeout_seconds, bool)
             or not isinstance(self.timeout_seconds, (int, float))
-            or not 0 < self.timeout_seconds <= 600
+            or not math.isfinite(self.timeout_seconds)
+            or self.timeout_seconds <= 0
         ):
             raise ValueError("invalid local deadline")
 
@@ -247,25 +249,47 @@ class LocalOriginal:
     failures: tuple[str, ...]
 
 
-def observe_document(catalog, document_id: str) -> dict[str, Any]:
+def _inventory_rows(catalog, sql, parameters, *, budget):
+    """Page indexed metadata under the existing discovery account.
+
+    Pages are IO granularity, not a maximum row count. SQL metadata is not an
+    original-file read; each observed row charges discovery work, not invented
+    serialized byte costs. No partial observation escapes a depleted account.
+    """
+    after = 0
+    while True:
+        budget.check()
+        size = min(128, max(1, budget.max_discovery_entries - budget.discovery_entries + 1))
+        rows = catalog.reader.fetchall(sql + " AND rowid>? ORDER BY rowid LIMIT ?", (*parameters, after, size))
+        budget.check()
+        for row in rows:
+            budget.observe_entry()
+            observed = dict(row)
+            after = observed.pop("_inventory_rowid")
+            yield observed
+        if len(rows) < size:
+            return
+
+
+def _location_rows(catalog, document_id, source_id, *, budget):
+    return _inventory_rows(catalog,
+        "SELECT rowid AS _inventory_rowid,location_id,document_id,source_id,root_id,relative_path,role,location_status,manifest_json "
+        "FROM locations WHERE document_id=? AND source_id=?",
+        (document_id, source_id), budget=budget)
+
+
+def observe_document(catalog, document_id: str, *, budget: LocalReadBudget | None = None) -> dict[str, Any]:
+    budget = budget if budget is not None else LocalReadBudget(LocalPrepareLimits())
+    budget.check()
     row = catalog.reader.exact_source_version(document_id)
     if row is None:
         raise SourceReadError("not_indexed", "document_not_indexed")
-    audits = [
-        dict(x)
-        for x in catalog.reader.fetchall(
-            "SELECT * FROM document_retire_audit WHERE document_id=? ORDER BY rowid LIMIT 65",
-            (document_id,),
-        )
-    ]
-    if len(audits) > 64:
-        raise SourceReadError("blocked", "retirement_history_limit")
-    locations = [
-        dict(x)
-        for x in catalog.reader.exact_source_locations(document_id, row["source_id"])
-    ]
-    if len(locations) > 256:
-        raise SourceReadError("unavailable", "local_location_limit")
+    budget.observe_entry()
+    audits = list(_inventory_rows(catalog,
+        "SELECT rowid AS _inventory_rowid,* FROM document_retire_audit WHERE document_id=?",
+        (document_id,), budget=budget))
+    locations = sorted(_location_rows(catalog, document_id, row["source_id"], budget=budget),
+                       key=lambda x: (x["root_id"], x["relative_path"], x["location_id"]))
     assertions = [
         dict(x)
         for x in catalog.reader.fetchall(
@@ -273,6 +297,9 @@ def observe_document(catalog, document_id: str) -> dict[str, Any]:
             (document_id,),
         )
     ]
+    for _ in assertions:
+        budget.observe_entry()
+    budget.check()
     return {
         "version": dict(row),
         "retire_audit": audits,
@@ -323,9 +350,8 @@ def verify_registered_original(
     ) != (ref.source_id, ref.content_sha256, ref.byte_size, ref.mime_type):
         raise SourceReadError("unavailable", "source_ref_changed")
     roots = {x.root_id: x for x in catalog.config.roots}
-    rows = catalog.reader.exact_source_locations(ref.document_id, ref.source_id)
-    if len(rows) > 256:
-        raise SourceReadError("unavailable", "local_location_limit")
+    budget.check()
+    rows = list(_location_rows(catalog, ref.document_id, ref.source_id, budget=budget))
     valid = []
     failures = []
     first = None

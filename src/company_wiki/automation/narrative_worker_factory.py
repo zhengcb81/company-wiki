@@ -158,7 +158,7 @@ def _reading_projection_identity(manifest: Mapping[str, Any]) -> str | None:
     version = manifest.get("reading_model_projection")
     if (("reading_model_projection" in manifest and version is None)
             or (version is not None and (not isinstance(version, str) or not version
-                or version != version.strip() or len(version) > 128))):
+                or version != version.strip()))):
         raise ModelResponseError("READING_MODEL_PROJECTION_UNAVAILABLE")
     return version
 

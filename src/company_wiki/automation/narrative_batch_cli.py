@@ -88,9 +88,7 @@ def main(
     args = parser.parse_args(argv)
     try:
         with args.request.open("rb") as stream:
-            content = stream.read(262145)
-        if len(content) > 262144:
-            raise ValueError("request exceeds byte limit")
+            content = stream.read()
         raw = json.loads(content.decode("utf-8", errors="strict"))
         if loaded_model_options is not None and isinstance(raw, dict):
             # Composition owns model settings. The finite run hash pins the

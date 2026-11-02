@@ -491,7 +491,7 @@ def restore_document_facts(catalog, *, ref, facts=None, evidence=None, retiremen
     budget = budget or LocalReadBudget(LocalPrepareLimits())
     with CatalogOperationLock(catalog.config.catalog_dir, operation="local_source_reconcile"):
         budget.check()
-        observed = observe_document(catalog, ref.document_id)
+        observed = observe_document(catalog, ref.document_id, budget=budget)
         if observed != retirement_observation:
             raise SourceReadError("unavailable", "local_observation_changed")
         status = observed["version"]["source_status"]
@@ -528,7 +528,7 @@ def restore_document_facts(catalog, *, ref, facts=None, evidence=None, retiremen
         assertion, projection, assertion_id = _prepare_source_fact_write(catalog,ref,current,facts,evidence)
         audit_id = f"restore-{uuid.uuid4().hex}" if status == "retired" else None
         with catalog.store.transaction() as connection:
-            if observe_document(catalog,ref.document_id) != observed:
+            if observe_document(catalog, ref.document_id, budget=budget) != observed:
                 raise SourceReadError("unavailable", "local_observation_changed")
             budget.check()
             if assertion is not None:

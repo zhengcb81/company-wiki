@@ -1,16 +1,16 @@
-"""Frozen manifest loading and consistency checks (no physical paths inside)."""
+"""Replay manifest content contracts and declared sample independence."""
 from __future__ import annotations
 
 import hashlib
 import json
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 MANIFEST_SCHEMA = "w18-holdout-manifest/1"
 
 _REQUIRED_SAMPLE_FIELDS = (
     "sample_id", "gold_file", "gold_sha256", "document_kind", "market", "language",
-    "carrier", "source_ref", "identity_evidence", "prior_use", "reading_scope",
+    "carrier", "source_ref", "identity_evidence", "reading_scope",
     "designated_trap",
 )
 _REQUIRED_SOURCE_REF_FIELDS = (
@@ -42,8 +42,6 @@ def load_manifest(path: Path) -> dict[str, Any]:
     record = json.loads(Path(path).read_text(encoding="utf-8"))
     if record.get("schema_version") != MANIFEST_SCHEMA:
         raise ManifestError(f"manifest schema_version must be {MANIFEST_SCHEMA}")
-    if not record.get("frozen_before_candidate_output"):
-        raise ManifestError("manifest is not marked frozen_before_candidate_output")
     samples = record.get("samples")
     if not isinstance(samples, list) or not samples:
         raise ManifestError("manifest.samples must be a non-empty list")
@@ -71,12 +69,41 @@ def load_manifest(path: Path) -> dict[str, Any]:
                 "(one material cannot impersonate two independent originals)"
             )
         seen_shas.add(sha)
-        prior = sample["prior_use"]
-        if not isinstance(prior, Mapping) or prior.get("status") not in {"fresh", "local-unseen", "development"}:
-            raise ManifestError(f"{where}.prior_use.status must be fresh/local-unseen/development")
         if not isinstance(sample["reading_scope"], Mapping):
             raise ManifestError(f"{where}.reading_scope must be a mapping")
     return record
+
+
+def declared_holdout_qualification(
+    manifest: Mapping[str, Any], samples: Sequence[Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Describe eligibility, never permission, quality PASS or loop-stop counts.
+
+    Development and nonfrozen data remain runnable. A declared clean holdout
+    requires both a true prior-freeze declaration and nondevelopment samples.
+    This is not a certificate of unseen data or a substitute for content review.
+    """
+    selected = manifest['samples'] if samples is None else samples
+    frozen = manifest.get('frozen_before_candidate_output') is True
+    rows: list[dict[str, Any]] = []
+    for sample in selected:
+        reasons = []
+        if not frozen:
+            reasons.append('prior_freeze_not_declared_true')
+        prior = sample.get('prior_use')
+        status = prior.get('status') if isinstance(prior, Mapping) else None
+        if status not in ('fresh', 'local-unseen'):
+            reasons.append('development_sample' if status == 'development'
+                           else 'prior_use_not_declared_fresh_or_unseen')
+        rows.append({'sample_id': sample['sample_id'], 'eligible_for_clean_holdout': not reasons,
+                     'reasons': reasons})
+    eligible = sum(1 for row in rows if row['eligible_for_clean_holdout'])
+    return {'schema_version': 'holdout-qualification/1',
+            'scope': 'declared_sample_independence_not_quality_or_loop_stopping',
+            'frozen_before_candidate_output': (manifest.get('frozen_before_candidate_output')
+                if type(manifest.get('frozen_before_candidate_output')) is bool else None),
+            'eligible_for_clean_holdout': bool(rows) and eligible == len(rows),
+            'eligible_sample_count': eligible, 'samples': rows}
 
 
 def gold_path_for(manifest_path: Path, sample: Mapping[str, Any]) -> Path:

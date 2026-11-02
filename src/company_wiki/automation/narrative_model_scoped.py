@@ -27,10 +27,7 @@ from .narrative_summary_protocols import LEGACY_SCOPED, ScopedSummaryProtocol, s
 
 SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
-# A long filing's selection turns into dozens of local task groups; a twenty
-# clause ceiling made a real provider drop required facts (CN covered 8 of 10,
-# and the 22-clause draft that covered them was rejected). Forty keeps the
-# summary bounded while leaving room for every selected business update.
+# Compatibility name for prompt planning only, never result validity.
 MAX_SUMMARY_CLAIMS = 40
 SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.1.0'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
@@ -45,12 +42,9 @@ SCOPED_INSTRUCTION = (
     'A source question is not a management statement. Do not infer a contract from an intention. '
     'Preserve original names and product codes. Do not copy task defaults as business facts. '
     'Source identity, language, claim IDs, claim types and quality belong to the program; '
-    'do not output them. Respect output_plan.max_claims_per_task per task and '
-    'output_plan.max_claims in total; the response schema arrays are bounded but the '
-    'program enforces the smaller per-task cap, so exceeding it rejects the whole response. '
-    'Each clause is at most 280 characters. Emit up to output_plan.target_claim_count '
-    'clauses (never more than output_plan.max_claims in total), at most '
-    'output_plan.max_claims_per_task per task. Review all supplied tasks before selecting '
+    'do not output them. Use output_plan as advisory compression targets, not '
+    'result validity quotas. Preserve each complete qualified fact within the '
+    'configured output token budget. Review all supplied tasks before selecting '
     'the most important distinct business updates, their causes and next actions. Reading '
     'hints are program-owned source priorities and value, not business facts; lower priority '
     'numbers take precedence and meaningful facts precede descriptions. Never pad with '
@@ -78,8 +72,8 @@ FIDELITY_INSTRUCTION = (
     'Use only directly supported complete facts, not headings, generic aspirations, unresolved table '
     'numbers or inferred company claims. Preserve original names and product codes. '
     'Program reading hints and task defaults are not business facts. '
-    'Respect output_plan.max_claims and max_claims_per_task and the configured output token limit. '
-    'Each clause is at most 280 characters. When the finite output budget cannot cover everything, '
+    'Use output_plan as advisory compression targets and respect the configured output token limit. '
+    'Do not shorten away qualifications to meet a clause or character quota. When the finite output budget cannot cover everything, '
     'prioritize distinct material facts and their causes; do not invent facts to fill a task. '
     'Do not output identities, quality flags, reasoning, Markdown, paths, investment conclusions or ratings. '
     'Correct citations do not prove that paraphrased prose is true.'
@@ -118,18 +112,16 @@ def scoped_model_material(view, protocol: ScopedSummaryProtocol) -> dict[str, An
 
 
 def scoped_response_schema(per_task_cap: int = 20) -> dict[str, Any]:
-    """One finite clause schema, not one copy per task.
+    """Validate clause shape; actual configured transport/token limits own size.
 
-    The array bound is the enforced share of the global cap, so a provider that
-    follows the schema cannot exceed the contract even when it ignores prose.
+    The legacy argument is a planning hint, not a result permission.
     """
-    cap = max(1, min(20, int(per_task_cap)))
     return {'type': 'object', 'required': ['drafts_by_task'], 'additionalProperties': False,
         'properties': {'drafts_by_task': {'type': 'object', 'additionalProperties': {
-            'type': 'array', 'maxItems': cap, 'items': {
+            'type': 'array', 'items': {
                 'type': 'object', 'required': ['text', 'basis_parts', 'modality'],
                 'additionalProperties': False, 'properties': {
-                    'text': {'type': 'string', 'minLength': 1, 'maxLength': 280},
+                    'text': {'type': 'string', 'minLength': 1},
                     'basis_parts': {'type': 'array', 'minItems': 1, 'uniqueItems': True,
                                     'items': {'type': 'string', 'minLength': 1}},
                     'modality': {'enum': ['actual', 'planned', 'forecast', 'question', 'negation', 'uncertain']},
@@ -182,8 +174,8 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None,
     from .narrative_model import ModelResponseError
     if max_output_tokens is not None and (type(max_output_tokens) is not int or max_output_tokens <= 0):
         raise ModelResponseError('model output budget must be a positive integer')
-    # Ask for fewer than the hard cap so a model that overshoots by a clause or
-    # two still lands inside the contract instead of dead-lettering the item.
+    # Ask for compact output. These targets never decide whether completed
+    # source-valid output may be consumed; actual resources are enforced below HTTP.
     target = (min(MAX_SUMMARY_CLAIMS,max(1,task_count*2)) if protocol.output_profile == 'coverage'
               else min(MAX_SUMMARY_CLAIMS - 4, max(1, task_count)))
     if target_override is not None:
@@ -191,12 +183,11 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None,
     if max_output_tokens is not None:
         target = min(target, max(1, (max_output_tokens - 256) // 320))
     return {'max_claims': MAX_SUMMARY_CLAIMS, 'target_claim_count': target, 'target_text_chars': 240,
-        # The response schema can only bound each task array; this is the hard
-        # per-task share of the global cap the decoder actually enforces.
+        # Retain historical plan field names as advisory allocation hints.
         'max_claims_per_task': (min(6,max(2,MAX_SUMMARY_CLAIMS//max(1,task_count)))
                                 if protocol.output_profile == 'coverage' else 2),
         'configured_output_tokens': max_output_tokens, 'coverage': 'selected_source_tasks_only',
-        'planning': 'soft_target_within_existing_caps'}
+        'planning': 'advisory_targets_not_result_limits'}
 
 
 from .narrative_model import NarrativeModelRequest as _LegacyModelRequest  # noqa: E402
@@ -228,9 +219,8 @@ def build_scoped_request(selected: NarrativeSelectResult, *, only_tasks=None,
     from . import narrative_model as legacy
     if selected.reading_context is None:
         raise legacy.ModelResponseError('READING_MODEL_CONTEXT_UNAVAILABLE')
-    # The task-plan binding keeps its original twenty-claim marker for wire
-    # compatibility; the effective summary budget is output_plan.max_claims
-    # (MAX_SUMMARY_CLAIMS) and the decoder enforces the same number.
+    # Task planning retains its protocol marker; completed result validity
+    # comes from source bindings and shape, never these compression targets.
     if not protocol.allows_subset and (only_tasks is not None or target_claims is not None):
         raise legacy.ModelResponseError('MODEL_REQUEST_INVALID')
     view = compile_scoped_model_view(selected, max_claims=protocol.plan_max_claims)
@@ -312,13 +302,7 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
     if any(not isinstance(rows, list) for rows in tasks.values()):
         raise NarrativeContractError('scoped task clauses must be arrays')
     count = sum(len(rows) for rows in tasks.values())
-    if count > MAX_SUMMARY_CLAIMS:
-        raise NarrativeContractError('summary claims exceed forty')
     view = compile_scoped_model_view(selected, max_claims=MAX_SUMMARY_CLAIMS)
-    per_task_cap = _scoped_output_plan(len(view.model_tasks) if protocol.assess_fidelity else len(tasks),
-                                      protocol=protocol)['max_claims_per_task']
-    if any(len(rows) > per_task_cap for rows in tasks.values()):
-        raise NarrativeContractError('scoped task clauses exceed per-task cap')
     if set(tasks) - {task.key for task in view.plan.tasks}:
         raise legacy.ModelCitationError('scoped draft references an unknown source task')
     known = {span.span_id: span for span in selected.evidence_spans}
@@ -345,8 +329,6 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
                 if binding.context_ids:
                     claim['context_evidence_ids'] = list(binding.context_ids)
                 typed = _claim_from_dict(claim)
-                if len(typed.text) > 280:
-                    raise NarrativeContractError('summary claim text exceeds 280 characters')
                 try:
                     validate_summary_claim(typed, known, 'draft')
                 except SummaryValidationError as exc:

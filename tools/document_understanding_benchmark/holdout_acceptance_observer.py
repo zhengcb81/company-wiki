@@ -4,12 +4,15 @@ No gold, provider headers, credential values, or production flag is involved.
 """
 from __future__ import annotations
 
+import atexit
 import hashlib
 import http.client
 import json
 import os
 from pathlib import Path
 import socket
+import sys
+import tempfile
 
 _INSTALLED = False
 
@@ -22,26 +25,65 @@ def install() -> None:
     config = json.loads(Path(config_path).read_text(encoding='utf-8'))
     root = Path(config['receipt_dir']).resolve()
     events = root / 'events.jsonl'
+    observation_errors = set()
+
+    def report_observation_errors():
+        if observation_errors:
+            # At process exit, after ordinary log noise. This never writes to
+            # stdout (the native JSON protocol) or retries a paid operation.
+            try:
+                sys.stderr.write('HOLDOUT_OBSERVATION_INCOMPLETE ' +
+                    ','.join(sorted(observation_errors)) + '\n')
+                sys.stderr.flush()
+            except (OSError, ValueError):
+                pass  # A closed diagnostic stream cannot change native state.
+
+    atexit.register(report_observation_errors)
 
     def event(kind, **fields):
-        body = json.dumps({'event': kind, 'stage': config['stage'], 'pid': os.getpid(), **fields},
-                          sort_keys=True, separators=(',', ':')).encode('utf-8') + b'\n'
-        if events.exists() and events.stat().st_size + len(body) > config['max_log_bytes']:
-            raise RuntimeError('HOLDOUT_EVENT_BYTES_EXCEEDED')
-        with events.open('ab') as stream:
-            stream.write(body)
-            stream.flush()
-            os.fsync(stream.fileno())
+        try:
+            body = json.dumps({'event': kind, 'stage': config['stage'], 'pid': os.getpid(), **fields},
+                              sort_keys=True, separators=(',', ':')).encode('utf-8') + b'\n'
+            # Complete event facts once. max_log_bytes controls display only,
+            # never whether a real native operation may succeed.
+            with events.open('ab') as stream:
+                stream.write(body)
+                stream.flush()
+                os.fsync(stream.fileno())
+        except (OSError, TypeError, ValueError) as exc:
+            observation_errors.add('event_write:' + type(exc).__name__)
+
+    def observe_model_input(body):
+        """A complete optional snapshot, not admission to the native caller.
+
+        Unknown I/O cannot prove a changed body. Atomic publication prevents a
+        failed partial snapshot from becoming the next caller's mismatch proof.
+        The durable native paid pin and POST latch remain separate owners.
+        """
+        body_path = root / 'model-input.json'
+        try:
+            return body_path.read_bytes()
+        except FileNotFoundError:
+            try:
+                with tempfile.TemporaryDirectory(prefix='.model-input-', dir=root) as scratch:
+                    staged = Path(scratch) / body_path.name
+                    staged.write_bytes(body)
+                    os.replace(staged, body_path)
+            except OSError as exc:
+                observation_errors.add('model_input_write:' + type(exc).__name__)
+        except OSError as exc:
+            observation_errors.add('model_input_read:' + type(exc).__name__)
+        return None
 
     original_request = http.client.HTTPConnection.request
 
     def observed_http(connection, method, url, body=None, headers=None, **kwargs):
         if method.upper() == 'POST':
-            body_path = root / 'model-input.json'
             if not isinstance(body, bytes):
                 raise RuntimeError('HOLDOUT_HTTP_BODY_NOT_BYTES')
-            if body_path.exists() and body_path.read_bytes() != body:
-                event('request_preflight_mismatch', expected_body_sha256=hashlib.sha256(body_path.read_bytes()).hexdigest(),
+            observed_body = observe_model_input(body)
+            if observed_body is not None and observed_body != body:
+                event('request_preflight_mismatch', expected_body_sha256=hashlib.sha256(observed_body).hexdigest(),
                       actual_body_sha256=hashlib.sha256(body).hexdigest(), actual_body_bytes=len(body))
                 raise RuntimeError('HOLDOUT_MODEL_INPUT_CHANGED')
             # The only resend guard is at the real transport boundary. Paid
@@ -64,9 +106,6 @@ def install() -> None:
                   body_bytes=len(body), request_schema=material['schema_version'],
                   model_id=envelope['model'], max_output_tokens=envelope.get('max_tokens',
                       envelope.get('max_completion_tokens')), task_count=len(material['material']['tasks']))
-            # Exact secret-free input is retained once, not as another raw lake.
-            if not body_path.exists():
-                body_path.write_bytes(body)
         return original_request(connection, method, url, body=body, headers=headers or {}, **kwargs)
 
     setattr(http.client.HTTPConnection, 'request', observed_http)
@@ -93,14 +132,12 @@ def install() -> None:
 
     def observed_generate(caller, context, request):
         body, facts = request_preflight(caller._model, request)
-        body_path = root / 'model-input.json'
-        if body_path.exists() and body_path.read_bytes() != body:
-            event('request_preflight_mismatch', expected_body_sha256=hashlib.sha256(body_path.read_bytes()).hexdigest(),
+        observed_body = observe_model_input(body)
+        if observed_body is not None and observed_body != body:
+            event('request_preflight_mismatch', expected_body_sha256=hashlib.sha256(observed_body).hexdigest(),
                   actual_body_sha256=facts['http_body_sha256'], actual_body_bytes=len(body),
-                  actual_max_output_tokens=facts['max_output_tokens'])
+                  actual_max_output_tokens=facts.get('max_output_tokens'))
             raise RuntimeError('HOLDOUT_MODEL_INPUT_CHANGED')
-        if not body_path.exists():
-            body_path.write_bytes(body)
         event('request_preflight', **facts, run_id=caller._run_id,
               worker_attempt_id=context.attempt.attempt_id)
         response, metrics = original_generate(caller, context, request)

@@ -9,7 +9,7 @@ import subprocess
 import sys
 import threading
 import time
-from typing import BinaryIO, cast, Any
+from typing import BinaryIO, Callable, cast, Any
 
 from ._process_tree import (
     WindowsJob,
@@ -57,6 +57,8 @@ class ChildFailed(TransportError):
     ) -> None:
         super().__init__(message)
         self.returncode, self.stdout, self.stderr = returncode, stdout, stderr
+        self.stdout_bytes_read, self.stderr_bytes_read = len(stdout), len(stderr)
+        self.stderr_observation_complete = True
 
 
 def _assign_windows_job(proc: subprocess.Popen) -> WindowsJob:
@@ -114,13 +116,17 @@ def _spawn(command, input_bytes, cwd, env):
 class _IOState:
     """Only reader threads own their streams; controller owns the lifecycle."""
 
-    def __init__(self, *, log_tail: bool = False) -> None:
+    def __init__(self, *, log_tail: bool = False, stderr_log_tail: bool = False,
+                 stderr_observer: Callable[[bytes], None] | None = None) -> None:
         self.wake = threading.Event()
         self.lock = threading.Lock()
         self.chunks: dict[str, deque[bytes]] = {"stdout": deque(), "stderr": deque()}
         self.counts = {"stdout": 0, "stderr": 0}
         self.retained = {"stdout": 0, "stderr": 0}
         self.log_tail = log_tail
+        self.stderr_log_tail = stderr_log_tail
+        self.stderr_observer = stderr_observer
+        self.stderr_observation_complete = True
         self.finished: set[str] = set()
         self.error: TransportError | None = None
         self.write_error = False
@@ -133,17 +139,26 @@ class _IOState:
                 self.error = error
         self.wake.set()
 
-    def read(self, stream: BinaryIO, kind: str, cap: int) -> None:
+    def read(self, stream: BinaryIO, kind: str, cap: int | None) -> None:
         error: TransportError | None = None
+        tail = self.log_tail or (kind == 'stderr' and self.stderr_log_tail)
         try:
             while True:
                 # At cap still read ONE probe byte: EOF is valid; cap+1 is not.
-                piece = stream.read(65536 if self.log_tail else min(65536, cap - self.counts[kind] + 1))
+                piece = stream.read(65536 if tail or cap is None
+                                    else min(65536, cap - self.counts[kind] + 1))
                 if not piece:
                     break
+                if kind == 'stderr' and self.stderr_observer is not None and self.stderr_observation_complete:
+                    try:
+                        self.stderr_observer(piece)
+                    except Exception:
+                        # An optional observer cannot alter the child lifetime
+                        # or turn its real outcome into a retry.
+                        self.stderr_observation_complete = False
                 self.chunks[kind].append(piece)
                 self.counts[kind] += len(piece)
-                if self.log_tail:
+                if tail and cap is not None:
                     self.retained[kind] += len(piece)
                     while self.retained[kind] > cap:
                         first = self.chunks[kind].popleft()
@@ -152,7 +167,7 @@ class _IOState:
                         if removed < len(first):
                             self.chunks[kind].appendleft(first[removed:])
                         self.retained[kind] -= removed
-                elif self.counts[kind] > cap:
+                elif cap is not None and self.counts[kind] > cap:
                     error = OutputLimitExceeded(f"{kind} exceeded its byte cap")
                     break
         except (OSError, ValueError):
@@ -176,7 +191,7 @@ class _IOState:
             self.finish("stdin")
 
     def start(
-        self, proc: subprocess.Popen, payload: bytes | None, stdout_cap: int, stderr_cap: int
+        self, proc: subprocess.Popen, payload: bytes | None, stdout_cap: int | None, stderr_cap: int
     ) -> None:
         for kind, stream, cap in (
             ("stdout", proc.stdout, stdout_cap),
@@ -225,7 +240,9 @@ def _validate_input(command, input_bytes) -> None:
 
 def _validate(timeout_seconds, stdout_cap, stderr_cap, command, input_bytes) -> None:
     _validate_timeout(timeout_seconds)
-    _validate_caps(stdout_cap, stderr_cap)
+    _validate_caps(stderr_cap)
+    if stdout_cap is not None:
+        _validate_caps(stdout_cap)
     _validate_input(command, input_bytes)
 
 
@@ -266,18 +283,23 @@ def _cleanup(proc, job, state: _IOState) -> None:
 def _result(proc, state: _IOState) -> dict[str, object]:
     stdout, stderr = b"".join(state.chunks["stdout"]), b"".join(state.chunks["stderr"])
     if proc.returncode != 0 or state.write_error:
-        raise ChildFailed(
+        error = ChildFailed(
             "child closed stdin early" if state.write_error else f"child exited {proc.returncode}",
             returncode=proc.returncode,
             stdout=stdout,
             stderr=stderr,
         )
+        error.stdout_bytes_read = state.counts['stdout']
+        error.stderr_bytes_read = state.counts['stderr']
+        error.stderr_observation_complete = state.stderr_observation_complete
+        raise error
     return dict(
         stdout=stdout,
         stderr=stderr,
         stdout_bytes_read=state.counts["stdout"],
         stderr_bytes_read=state.counts["stderr"],
         returncode=0,
+        stderr_observation_complete=state.stderr_observation_complete,
     )
 
 
@@ -288,9 +310,11 @@ def run_bounded(
     input_bytes: bytes | None = None,
     cwd: str | None = None,
     env: dict[str, str] | None = None,
-    stdout_cap_bytes: int = _DEFAULT_STDOUT_CAP,
+    stdout_cap_bytes: int | None = _DEFAULT_STDOUT_CAP,
     stderr_cap_bytes: int = _DEFAULT_STDERR_CAP,
     log_tail: bool = False,
+    stderr_log_tail: bool = False,
+    stderr_observer: Callable[[bytes], None] | None = None,
 ) -> dict[str, object]:
     """Bound stdin, both output pipes and process exit by one absolute deadline.
 
@@ -299,13 +323,23 @@ def run_bounded(
     ``log_tail`` is for diagnostic logs only: drain all bytes and retain the last
     cap bytes without changing the child's outcome. JSON/payload callers retain
     the default exact-cap failure behavior and must not use this mode.
+    ``stderr_log_tail`` drains only diagnostic stderr, preserving protocol stdout.
+    Explicit ``stdout_cap_bytes=None`` retains the complete protocol when its
+    payload is already governed by the caller's native resource owner. It adds
+    no second representation cap; the single deadline/tree lifetime still holds.
+    An optional stderr observer sees chunks before tail trimming. Its failure is
+    reported separately and never changes the child's native return code.
     """
     _validate(timeout_seconds, stdout_cap_bytes, stderr_cap_bytes, command, input_bytes)
     if type(log_tail) is not bool:
         raise ValueError("log_tail must be a boolean")
+    if type(stderr_log_tail) is not bool:
+        raise ValueError("stderr_log_tail must be a boolean")
+    if stderr_observer is not None and not callable(stderr_observer):
+        raise ValueError('stderr_observer must be callable')
     deadline = time.monotonic() + timeout_seconds
     proc, job = _spawn(command, input_bytes, cwd, env)
-    state = _IOState(log_tail=log_tail)
+    state = _IOState(log_tail=log_tail, stderr_log_tail=stderr_log_tail, stderr_observer=stderr_observer)
     failure = None
     try:
         if time.monotonic() >= deadline:
@@ -324,6 +358,9 @@ def run_bounded(
     if failure is not None:
         setattr(failure, "stdout", b"".join(state.chunks["stdout"]))
         setattr(failure, "stderr", b"".join(state.chunks["stderr"]))
+        setattr(failure, "stdout_bytes_read", state.counts['stdout'])
+        setattr(failure, "stderr_bytes_read", state.counts['stderr'])
+        setattr(failure, 'stderr_observation_complete', state.stderr_observation_complete)
         raise failure
     return _result(proc, state)
 

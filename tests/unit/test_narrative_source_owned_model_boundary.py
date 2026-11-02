@@ -15,6 +15,7 @@ from company_wiki.automation.narrative_contracts import NarrativeSelectResult, N
 from company_wiki.automation.narrative_http_model import NarrativeHTTPModel
 from company_wiki.source_contract import EvidenceSpan
 from support.narrative_model_request_fixture import selection
+from support.summary_output_contract_upgrade import assert_archived_request_upgrade, upgraded_http_body
 from unit.test_narrative_reading_transport import reading_context, with_reading
 from unit.test_official_json_model_subject import selection as official_selection
 
@@ -62,16 +63,16 @@ def http_port():
 
 
 @pytest.mark.parametrize("case", CASES, ids=lambda c: c["case"])
-def test_six_root_frozen_legacy_requests_and_actual_http_bytes_remain_exact(case):
+def test_six_frozen_legacy_material_contracts_keep_scope_without_compression_permissions(case):
     assert sha256(FROZEN.read_bytes()).hexdigest() == "b8403d5c8b3b3c75c4d70ed9c02e89dd0ea83ad3ab7aa4ef2b5898149da789dd"
     selected = NarrativeSelectResult.from_dict(case["selected"])
     actual = model.NarrativeModelRequest.from_selection(selected,
         reading_projection_version=case["reading_model_projection"])
-    for field in ("instruction", "prompt_version", "data_json", "input_sha256"):
-        assert getattr(actual, field) == case[field]
+    assert_archived_request_upgrade(actual, case)
     body = http_port().request_bytes(actual)
-    assert body == b64decode(case["http_body_base64"])
-    assert sha256(body).hexdigest() == case["http_body_sha256"]
+    old_body = b64decode(case["http_body_base64"])
+    assert sha256(old_body).hexdigest() == case["http_body_sha256"]
+    assert json.loads(body) == upgraded_http_body(old_body)
 
 
 @pytest.mark.parametrize("selected", [with_reading(), official_reading()], ids=["raw", "official"])

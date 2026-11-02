@@ -1,6 +1,5 @@
 """Exact archived pre-v4 raw/official v3 wire requests."""
 from base64 import b64decode
-from dataclasses import asdict
 import gzip
 from hashlib import sha256
 import json
@@ -9,6 +8,7 @@ import pytest
 
 from company_wiki.automation import narrative_model_runtime as runtime
 from company_wiki.automation.narrative_contracts import NarrativeSelectResult
+from support.summary_output_contract_upgrade import assert_archived_request_upgrade, upgraded_http_body
 from unit.test_narrative_source_owned_model_boundary import http_port
 
 # Frozen 2026-10-15 BEFORE this runtime implementation; archive code_head is
@@ -239,22 +239,22 @@ CASES=json.loads(gzip.decompress(ARCHIVE))['cases']
 
 
 @pytest.mark.parametrize('case',CASES,ids=lambda case:case['case'])
-def test_pre_v4_published_v3_requests_http_and_boundary_identity_are_exact(case):
+def test_pre_v4_published_v3_material_http_and_capability_contracts_keep_nonquota_fields(case):
     assert sha256(ARCHIVE).hexdigest()=='789c3e64d4d73656b85864b44c258cc1e9626bc36e0693a1e2ce2c999bc84a79'
     selected=NarrativeSelectResult.from_dict(case['selected'])
     # The pre-v4 archive froze the request after the real HTTP output-budget
     # owner had retargeted it, not the initial unbudgeted request object.
     actual=runtime.build_model_request(selected,reading_projection_version='reading-model-input/3').with_output_budget(8192)
-    assert asdict(actual)==case['request']
-    assert http_port().request_bytes(actual)==b64decode(case['http_body_base64'])
+    assert_archived_request_upgrade(actual, case['request'])
+    assert json.loads(http_port().request_bytes(actual)) == upgraded_http_body(b64decode(case['http_body_base64']))
     current_boundary = runtime.reading_model_boundary_identity(
         'reading-model-input/3', projected=selected.subject.kind == 'official_json'
     )
     archived_boundary = case['boundary_identity']
-    # The frozen archive retains the historically published decoder digest,
-    # while the live descriptor tracks the current decoder source bytes. Keep
-    # the exact v3 request/body and all stable boundary fields pinned here; a
-    # separate causal-descriptor test verifies the live source hash.
-    assert {key: value for key, value in current_boundary.items() if key != 'decoder_sha256'} == {
-        key: value for key, value in archived_boundary.items() if key != 'decoder_sha256'
+    # Decoder, instruction and schema identities intentionally change together;
+    # the immutable archive and all other source capability fields stay pinned.
+    changed = {'decoder_sha256', 'instruction_sha256', 'response_schema_sha256'}
+    assert {key: value for key, value in current_boundary.items() if key not in changed} == {
+        key: value for key, value in archived_boundary.items() if key not in changed
     }
+    assert all(current_boundary[key] != archived_boundary[key] for key in changed)

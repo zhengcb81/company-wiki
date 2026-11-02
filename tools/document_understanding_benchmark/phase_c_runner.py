@@ -40,6 +40,35 @@ def fingerprint(path: Path) -> dict:
     }
 
 
+def _same_content(before, after) -> bool:
+    """Byte identity excludes metadata; missing content proof is not equality."""
+    if not isinstance(before, dict) or not isinstance(after, dict):
+        return False
+    for value in (before, after):
+        if (not isinstance(value.get('sha256'), str) or len(value['sha256']) != 64
+                or type(value.get('bytes')) is not int or value['bytes'] < 0):
+            return False
+    return all(before[key] == after[key] for key in ('sha256', 'bytes'))
+
+
+def _observe_fingerprints(protected: dict) -> dict:
+    unchanged = True
+    metadata_changes = {}
+    for name, before in protected.items():
+        after = fingerprint(Path(name))
+        equal = _same_content(before, after)
+        unchanged = unchanged and equal
+        if equal and before != after:
+            metadata_changes[name] = {'before': before, 'after': after}
+    return {'unchanged': unchanged, 'metadata_changes': metadata_changes}
+
+
+def _optional_content_unchanged(path: Path, before: dict | None) -> bool:
+    if before is None:
+        return not path.exists()
+    return path.exists() and _same_content(before, fingerprint(path))
+
+
 def write_json(path: Path, value) -> None:
     path.write_text(
         json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf8"
@@ -256,6 +285,7 @@ def mother_budget_fits(totals: dict, *, tokens_bound: int, micro_usd_bound: int)
 
 def verify_preparation(meta: dict, *, mode: str) -> dict:
     before = {}
+    metadata_changes = {}
     for name, expected in meta["protected_fingerprints"].items():
         if mode == "loopback" and Path(name) not in {
             ROOT / "config.yaml",
@@ -265,8 +295,10 @@ def verify_preparation(meta: dict, *, mode: str) -> dict:
             # a newly revised real gold or charge the mother provider ledger.
             continue
         current = fingerprint(Path(name))
-        if current != expected:
+        if not _same_content(expected, current):
             raise ValueError("PREPARATION_FINGERPRINT_CHANGED: " + name)
+        if current != expected:
+            metadata_changes[name] = {'before': expected, 'after': current}
         before[name] = current
     ocr = ROOT / "config/local_ocr.json"
     if ocr.exists():
@@ -279,8 +311,10 @@ def verify_preparation(meta: dict, *, mode: str) -> dict:
         if not database.exists():
             raise ValueError("MOTHER_NATIVE_DATABASE_MISSING")
         actual = fingerprint(database)
-        if actual != prior["fingerprint"]:
+        if not _same_content(actual, prior['fingerprint']):
             raise ValueError("MOTHER_NATIVE_DATABASE_CHANGED")
+        if actual != prior['fingerprint']:
+            metadata_changes[str(database)] = {'before': prior['fingerprint'], 'after': actual}
         with sqlite3.connect(database.as_uri() + "?mode=ro", uri=True) as connection:
             ids = [
                 row[0]
@@ -294,10 +328,10 @@ def verify_preparation(meta: dict, *, mode: str) -> dict:
             {
                 "database": str(database),
                 "attempts": len(ids),
-                "unchanged": fingerprint(database) == actual,
+                "unchanged": _same_content(fingerprint(database), actual),
             }
         )
-    return {"protected": before, "native": native}
+    return {"protected": before, "native": native, 'metadata_changes': metadata_changes}
 
 
 def _cli(
@@ -619,7 +653,7 @@ def seed_identity(root: Path, mode: str, descriptor: dict, *, source_catalog_con
     target = destination.path_for(market)
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, target)
-    assert fingerprint(source) == fingerprint(target) == before
+    assert _same_content(fingerprint(source), before) and _same_content(fingerprint(target), before)
     load_identity_master(destination, market=market)
     return {
         "kind": "byte_exact_existing_official_security_snapshot_no_refresh",
@@ -1772,10 +1806,12 @@ def _run_pair_in_owned_root(
             outcome["model_post_attempts"] = sum(
                 row["event"] == "http_post_attempt" for row in read_rows(events)
             )
-            outcome["protected_unchanged"] = all(
-                fingerprint(Path(path)) == before for path, before in protected.items()
-            )
-            outcome["sentinel_unchanged"] = fingerprint(sentinel) == sentinel_before
+            protected_observation = _observe_fingerprints(protected)
+            outcome['protected_unchanged'] = protected_observation['unchanged']
+            outcome['protected_metadata_changes'] = protected_observation['metadata_changes']
+            sentinel_observation = _observe_fingerprints({str(sentinel): sentinel_before})
+            outcome['sentinel_unchanged'] = sentinel_observation['unchanged']
+            outcome['sentinel_metadata_changes'] = sentinel_observation['metadata_changes']
         except Exception as exc:
             outcome.update(status="FAIL", finalization_observation_error=type(exc).__name__)
     return outcome
@@ -2056,10 +2092,7 @@ def main() -> int:
                 "split_groups_denied": split_denied,
                 "loopback_POSTs": len(server.requests),
                 "external_POSTs": 0,
-                "mother_ledger_changed": (
-                    fingerprint(USAGE) if USAGE.exists() else None
-                )
-                != ledger_before,
+                "mother_ledger_changed": not _optional_content_unchanged(USAGE, ledger_before),
                 "fixture_not_model_quality": True,
             }
             if outcome["mother_ledger_changed"]:
@@ -2134,12 +2167,11 @@ def main() -> int:
                 'temporary_lake_removed':rejected['temporary_lake_removed'],
                 'external_POSTs':0,
             }
-            if not passed or (fingerprint(USAGE) if USAGE.exists() else None) != ledger_before:
+            if not passed or not _optional_content_unchanged(USAGE, ledger_before):
                 outcome['status'] = 'FAIL'
-    outcome["all_prepared_protected_unchanged"] = all(
-        fingerprint(Path(path)) == before
-        for path, before in preparation["protected"].items()
-    )
+    final_observation = _observe_fingerprints(preparation['protected'])
+    outcome['all_prepared_protected_unchanged'] = final_observation['unchanged']
+    outcome['prepared_metadata_changes'] = final_observation['metadata_changes']
     if not outcome["all_prepared_protected_unchanged"]:
         outcome["status"] = "FAIL"
     write_json(destination / "overall.json", outcome)

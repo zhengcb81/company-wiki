@@ -24,12 +24,10 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         if args.request == "-":
-            payload = sys.stdin.buffer.read(131073)
+            payload = sys.stdin.buffer.read()
         else:
             with Path(args.request).open("rb") as stream:
-                payload = stream.read(131073)
-        if len(payload) > 131072:
-            raise ValueError("local prepare request exceeds byte limit")
+                payload = stream.read()
         value = json.loads(payload)
         if (
             not isinstance(value, dict)

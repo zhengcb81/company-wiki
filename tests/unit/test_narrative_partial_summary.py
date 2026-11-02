@@ -148,8 +148,8 @@ def test_old_long_summary_policy_is_not_a_reader_rejection_threshold():
     selected = selection()
     claims = [{**_claim(str(i)), "text": "来源已说明新业务项目进展。" * 40} for i in range(25)]
     # This is a persisted reader-compatibility case, not a new model request.
-    # Preserve the historical long claims while the current model boundary
-    # enforces its declared twenty-claim / 280-character generation schema.
+    # Preserve historical long claims; the current boundary also validates
+    # source bindings rather than imposing a second compression permission.
     draft = _payload(selected, claims)["draft"]
     for claim in draft["claims"]:
         claim["evidence_ids"] = [selected.evidence_spans[0].span_id]

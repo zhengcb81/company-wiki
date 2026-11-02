@@ -62,7 +62,7 @@ class NarrativeBudgetCallError(Exception):
         if self.finish_reason not in {None, "length"}:
             raise ValueError("invalid response finish diagnostic")
         if self.content_bytes is not None and (type(self.content_bytes) is not int
-                or not 0 <= self.content_bytes <= 128 * 1024):
+                or self.content_bytes < 0):
             raise ValueError("invalid response content byte diagnostic")
         if self.http_status is not None and (
             type(self.http_status) is not int or not 100 <= self.http_status <= 599

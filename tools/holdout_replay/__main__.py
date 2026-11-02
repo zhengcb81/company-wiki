@@ -18,7 +18,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from .manifest import load_manifest, verify_manifest_gold
+from .manifest import declared_holdout_qualification, load_manifest, verify_manifest_gold
 from .producer import ProducerError, verify_producer
 from .runner import ReplayError, run_replay
 from .resolve import ResolveError, load_bindings, resolve_original
@@ -38,7 +38,7 @@ def _add_producer_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--producer-repo", type=Path, required=True,
                         help="git repo/worktree that must sit exactly at --producer-commit")
     parser.add_argument("--producer-commit", required=True,
-                        help="frozen full commit the replay is allowed to measure")
+                        help="expected actual producer revision; a different requested revision is a mismatch")
 
 
 def cmd_verify_freeze(args: argparse.Namespace) -> int:
@@ -49,7 +49,8 @@ def cmd_verify_freeze(args: argparse.Namespace) -> int:
         return 2
     manifest = load_manifest(args.manifest)
     rows = verify_manifest_gold(manifest, args.manifest)
-    print(json.dumps({"status": "verified", "producer": deploy, "gold_rows": rows},
+    print(json.dumps({"status": "verified", "producer": deploy, "gold_rows": rows,
+                      'holdout_qualification': declared_holdout_qualification(manifest)},
                      ensure_ascii=False, indent=1))
     return 0
 
@@ -105,6 +106,7 @@ def cmd_bootstrap_lake(args: argparse.Namespace) -> int:
                                encoding="utf-8", errors="replace", timeout=3600)
     receipt = {
         "status": "ok" if completed.returncode == 0 else "failed",
+        'holdout_qualification': declared_holdout_qualification(manifest),
         "producer_commit": deploy["producer_commit"],
         "lake_config": str(config_path),
         "source_root": str(source_root.resolve()),
@@ -139,6 +141,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     )
     summary = {
         "overall": receipt["overall"],
+        'holdout_qualification': receipt['holdout_qualification'],
         "attempt_dir": receipt["attempt_dir"],
         "samples": [{k: row.get(k) for k in ("sample_id", "status", "reason", "elapsed_seconds")}
                     for row in receipt["samples"]],

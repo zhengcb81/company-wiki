@@ -172,7 +172,7 @@ _READING_INSTRUCTION = (
     "period and condition must be supported by that claim's own evidence_ids; resolve "
     "'the series' with its identity context. Other input rows are not implicit citations. "
     "Use only the actual support; never attach all evidence IDs to hide a citation gap. "
-    "Respect the twenty-claim and configured output bounds, favor concise material "
+    "Respect configured output tokens, favor concise material "
     "single-stage propositions rather than row enumeration or mixed-state claims. "
     "Reading coverage limits are not proof of business absence. Layout-processing "
     "coverage and unassigned structure are distinct from unread original content."
@@ -218,8 +218,9 @@ _CITATION_UNIT_INSTRUCTION = (
     "source_id, source_sha256, subject_id, subject_sha256, language, status or needs_review. "
     "source_role company_filing/management supports company_statement; "
     "analyst/investor_question supports analyst_question with question modality; "
-    "other roles require uncertainty. Respect twenty claims, 280 characters per claim "
-    "and the configured output token budget. "
+    "other roles require uncertainty. Use the output plan as compression guidance, "
+    "not a clause or character quota. Preserve complete source qualifications "
+    "within the configured output token budget. "
     + _READING_INSTRUCTION.replace("evidence_ids", "citation_unit_ids")
       .replace("all evidence IDs", "all citation units")
 )
@@ -352,7 +353,7 @@ _CLAIM_SCHEMA: dict[str, Any] = {
     "additionalProperties": False,
     "properties": {
         "claim_id": {"type": "string", "minLength": 1},
-        "text": {"type": "string", "minLength": 1, "maxLength": 280},
+        "text": {"type": "string", "minLength": 1},
         "evidence_ids": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"type": "string", "minLength": 1}},
         "claim_type": {"enum": ["company_statement", "analyst_question", "editorial", "uncertain"]},
         "modality": {"enum": ["actual", "planned", "forecast", "question", "negation", "uncertain"]},
@@ -371,7 +372,7 @@ _RESPONSE_SCHEMA: dict[str, Any] = {
             "source_id": {"type": "string", "minLength": 1},
             "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
             "language": {"type": "string", "minLength": 1},
-            "claims": {"type": "array", "minItems": 1, "maxItems": 20, "items": _CLAIM_SCHEMA},
+            "claims": {"type": "array", "minItems": 1, "items": _CLAIM_SCHEMA},
             "status": {"enum": ["draft", "needs_review"]},
         },
     }},
@@ -397,7 +398,7 @@ _CITATION_UNIT_CLAIM_SCHEMA: dict[str, Any] = {
 }
 _CITATION_UNIT_RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object", "required": ["claims"], "additionalProperties": False,
-    "properties": {"claims": {"type": "array", "minItems": 1, "maxItems": 20,
+    "properties": {"claims": {"type": "array", "minItems": 1,
                               "items": _CITATION_UNIT_CLAIM_SCHEMA}},
 }
 
@@ -511,7 +512,7 @@ def _output_plan(evidence_count: int, max_output_tokens: int | None = None) -> d
         target = min(target, max(1, (max_output_tokens - 256) // 384))
     return {"max_claims": 20, "target_claim_count": target, "target_text_chars": 180,
             "configured_output_tokens": max_output_tokens,
-            "coverage": "selected_excerpts_only", "planning": "compact_target_not_token_estimate"}
+            "coverage": "selected_excerpts_only", "planning": "advisory_targets_not_result_limits"}
 
 
 def _response_schema(evidence_count: int, *, projected: bool = False,
@@ -798,8 +799,6 @@ def decode_model_draft(
     claims = draft.get("claims")
     if not isinstance(claims, list):
         raise NarrativeContractError("summary claims must be an array")
-    if len(claims) > 20:
-        raise NarrativeContractError("summary claims exceed twenty")
     header = (subject_draft_from_dict({**draft, "claims": []}) if projected_subject
               else _draft_from_dict({**draft, "claims": []}))
     if not boundary.source_owned:
@@ -851,8 +850,6 @@ def decode_model_draft(
                 canonical_ids = claim["evidence_ids"]
                 if len(canonical_ids) > len(mapping) or len(canonical_ids) != len(set(canonical_ids)):
                     raise NarrativeContractError("summary claim evidence IDs exceed the pinned unique set")
-            if isinstance(claim.get("text"), str) and len(claim["text"]) > 280:
-                raise NarrativeContractError("summary claim text exceeds 280 characters")
             declarations = claim.pop("evidence_group_ids", _GROUP_DECLARATION_ABSENT)
             _validate_group_declarations(declarations, groups, claim.get("evidence_ids"))
             typed = _claim_from_dict(claim)

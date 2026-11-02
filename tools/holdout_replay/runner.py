@@ -21,7 +21,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from .manifest import load_manifest, sha256_file, verify_manifest_gold
+from .manifest import declared_holdout_qualification, load_manifest, sha256_file, verify_manifest_gold
 from .producer import verify_producer
 from .resolve import ResolveError, build_source_root_index, load_bindings, resolve_original
 
@@ -29,7 +29,7 @@ ORCHESTRATOR_ROOT = Path(__file__).resolve().parents[2]
 
 
 class ReplayError(RuntimeError):
-    """The replay refused to run (bad inputs, dirty deploy, existing output)."""
+    """The replay refused invalid input or an overwritten observation path."""
 
 
 def _worker_env(producer_root: Path, extra_pythonpath: list[Path] | None = None) -> dict[str, str]:
@@ -117,6 +117,9 @@ def run_replay(
             raise ReplayError(f"unknown sample ids: {', '.join(missing)}")
         selected = [samples[sid] for sid in sample_ids]
 
+    qualification = declared_holdout_qualification(manifest, selected)
+    per_sample_qualification = {row['sample_id']: row for row in qualification['samples']}
+
     bindings = load_bindings(Path(bindings_path)) if bindings_path else None
     source_index = None
     if source_root is not None:
@@ -153,6 +156,7 @@ def run_replay(
 
     receipt: dict[str, Any] = {
         "schema_version": "w18-holdout-attempt/1",
+        'holdout_qualification': qualification,
         "producer": deploy,
         "manifest_path": str(manifest_path),
         "manifest_sha256": sha256_file(manifest_path),
@@ -179,7 +183,8 @@ def run_replay(
     overall_ok = True
     for sample in selected:
         sample_id = sample["sample_id"]
-        row: dict[str, Any] = {"sample_id": sample_id, "status": "pending"}
+        row: dict[str, Any] = {"sample_id": sample_id, "status": "pending",
+                               'holdout_qualification': per_sample_qualification[sample_id]}
         started = time.monotonic()
         try:
             path, actual_sha = resolve_original(sample, bindings=bindings, source_index=source_index)
@@ -199,6 +204,7 @@ def run_replay(
             "original_sha256": actual_sha,
             "compile_spec": compile_spec,
             "compile_selector_version": compile_selector_version,
+            'frozen_before_candidate_output': manifest.get('frozen_before_candidate_output'),
         }
         job_path = attempt_dir / f"{sample_id}.job.json"
         result_path = attempt_dir / f"{sample_id}.result.json"

@@ -50,7 +50,7 @@ class PaidResponsePin:
             raise PaidResponseError("paid response size is invalid")
         for name in ("model_id", "adapter_id", "prompt_version"):
             value = getattr(self, name)
-            if not isinstance(value, str) or not value or value != value.strip() or len(value) > 256:
+            if not isinstance(value, str) or not value or value != value.strip():
                 raise PaidResponseError("paid response identity is invalid")
         if type(self.http_status) is not int or not 200 <= self.http_status < 300:
             raise PaidResponseError("paid response status is invalid")

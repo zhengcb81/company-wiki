@@ -868,9 +868,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             from .source_reader import SourceRef
 
             with args.request.open("rb") as source_facts_stream:
-                payload = source_facts_stream.read(131073)
-            if len(payload) > 131072:
-                raise ValueError("source facts request exceeds byte limit")
+                payload = source_facts_stream.read()
             request_object = json.loads(payload.decode("utf-8"))
             if not isinstance(request_object, dict) or set(request_object) != {"source_ref", "facts", "evidence"}:
                 raise ValueError("source facts request fields differ")

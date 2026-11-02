@@ -13,6 +13,7 @@ import pytest
 
 from tools.holdout_replay.manifest import (
     ManifestError,
+    declared_holdout_qualification,
     load_manifest,
     verify_manifest_gold,
 )
@@ -31,13 +32,14 @@ def test_manifest_loads_and_gold_matches(manifest):
     assert all(row["facts"] >= 4 for row in rows)
 
 
-def test_manifest_not_marked_frozen_refuses(tmp_path):
+def test_manifest_not_marked_frozen_runs_without_clean_holdout_eligibility(tmp_path):
     record = json.loads(MANIFEST.read_text(encoding="utf-8"))
     record["frozen_before_candidate_output"] = False
     broken = tmp_path / "manifest.json"
     broken.write_text(json.dumps(record), encoding="utf-8")
-    with pytest.raises(ManifestError):
-        load_manifest(broken)
+    loaded = load_manifest(broken)
+    assert declared_holdout_qualification(loaded)['eligible_sample_count'] == 0
+    assert declared_holdout_qualification(loaded)['eligible_for_clean_holdout'] is False
 
 
 def test_duplicate_original_sha_refuses(tmp_path):

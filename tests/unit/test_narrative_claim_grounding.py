@@ -17,6 +17,7 @@ from company_wiki.automation.narrative_model import (
     NarrativeModelRequest, NarrativeModelResponse, decode_model_draft,
 )
 from tools.document_understanding_benchmark.closed_group_support import score_claim_facts
+from support.summary_output_contract_upgrade import assert_archived_request_upgrade
 from unit.document_understanding_selection.test_closed_group_support import (
     SOURCE, context, fact, span,
 )
@@ -60,8 +61,7 @@ def check(quote, *, name="one", **kwargs):
 def test_real_paid_response_replays_through_the_actual_decoder(real_case):
     selected = NarrativeSelectResult.from_dict(real_case["selected"])
     request = NarrativeModelRequest.from_selection(selected, reading_projection_version="reading-model-input/3").with_output_budget(8192)
-    assert request.data_json == real_case["request"]["data_json"]
-    assert request.instruction == real_case["request"]["instruction"]
+    assert_archived_request_upgrade(request, real_case["request"])
     response = NarrativeModelResponse("saved-paid-final", "mimo-v2.6-flash", request.prompt_version,
                                       real_case["response_utf8"].encode())
     draft = decode_model_draft(response, selected=selected, reading_projection_version="reading-model-input/3")

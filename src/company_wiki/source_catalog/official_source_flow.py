@@ -423,7 +423,7 @@ def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=Fals
         from company_wiki.source_contract import source_id_for_sha256
         from .source_reader import SourceRef, SourceReadError
         from .assertion_service import restore_document_facts
-        from .local_inventory import observe_document
+        from .local_inventory import LocalPrepareLimits, LocalReadBudget, observe_document
         source_id = source_id_for_sha256(sha)
         document_id = source_id.replace("urn:company-wiki:source:", "urn:company-wiki:document:")
         existing = (catalog.reader.exact_source_version(document_id)
@@ -436,8 +436,10 @@ def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=Fals
                     raise OfficialSourceError("source_identity_conflict")
             else:
                 try:
+                    read_budget = LocalReadBudget(LocalPrepareLimits())
                     restore_document_facts(catalog, ref=ref, facts=facts, evidence=evidence,
-                                           retirement_observation=observe_document(catalog, document_id))
+                                           retirement_observation=observe_document(catalog, document_id, budget=read_budget),
+                                           budget=read_budget)
                 except SourceReadError as exc:
                     raise OfficialSourceError(exc.reason) from exc
         intent = SourceRequest(entity=source["entity"], document_kind=source["document_kind"],

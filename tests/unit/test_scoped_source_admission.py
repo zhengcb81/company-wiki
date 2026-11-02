@@ -121,18 +121,16 @@ def test_summary_target_is_not_a_requirement_to_fill_with_weak_material():
     assert wire['output_plan']['max_claims_per_task'] == 2
     assert 'exactly output_plan.target_claim_count' not in request.instruction
     assert 'stop once the target is reached' not in request.instruction
-    assert 'up to output_plan.target_claim_count' in request.instruction
+    assert 'advisory compression targets' in request.instruction
     assert len(decode(selected(3), {'t1': [clause(selected(3), 0)]})['claims']) == 1
 
 
-def test_decoder_enforces_the_same_per_task_cap_as_the_actual_request():
-    from company_wiki.automation.narrative_contracts import NarrativeContractError
-
+def test_decoder_preserves_qualified_clauses_beyond_advisory_task_share():
     source = selected(2)
     cap = envelope(source)['output_plan']['max_claims_per_task']
     assert len(decode(source, {'t1': [clause(source, 0)] * cap})['claims']) == cap
-    with pytest.raises(NarrativeContractError, match='per-task cap'):
-        decode(source, {'t1': [clause(source, 0)] * (cap + 1), 't2': [clause(source, 1)]})
+    result = decode(source, {'t1': [clause(source, 0)] * (cap + 1), 't2': [clause(source, 1)]})
+    assert len(result['claims']) == cap + 2
 
 
 def test_filtered_full_request_is_not_mistaken_for_a_coverage_repair():

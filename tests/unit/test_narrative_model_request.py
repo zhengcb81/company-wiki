@@ -90,8 +90,8 @@ def test_large_selection_requests_short_merged_claims_without_removing_source_ev
     request = NarrativeModelRequest.from_selection(selected)
     envelope = json.loads(request.data_json)
     claims = envelope["response_schema"]["properties"]["draft"]["properties"]["claims"]
-    assert claims["maxItems"] == 20
-    assert claims["items"]["properties"]["text"]["maxLength"] == 280
+    assert "maxItems" not in claims
+    assert "maxLength" not in claims["items"]["properties"]["text"]
     # Closure may require more than eight original fragments; references remain
     # bounded by this pinned selection and existing HTTP/result byte caps.
     assert claims["items"]["properties"]["evidence_ids"]["maxItems"] == len(selected.evidence_spans)

@@ -1,6 +1,5 @@
 """One model citation namespace; pinned unit compilation never infers new facts."""
 from base64 import b64decode
-from dataclasses import asdict
 import gzip
 from hashlib import sha256
 import json
@@ -15,6 +14,7 @@ from company_wiki.automation.models import canonical_json
 from company_wiki.automation.narrative_contracts import NarrativeContractError, NarrativeSelectResult
 from company_wiki.source_contract import EvidenceSpan
 from support.narrative_model_request_fixture import selection
+from support.summary_output_contract_upgrade import assert_archived_request_upgrade, upgraded_http_body
 from unit.test_narrative_reading_transport import with_reading
 from unit.test_narrative_source_owned_model_boundary import official_reading, http_port
 from unit.test_narrative_output_language_binding import selected_english
@@ -67,12 +67,12 @@ def decode(selected, claims, *, payload=None):
 
 
 @pytest.mark.parametrize("case", FROZEN_CASES, ids=lambda case: case["case"])
-def test_explicit_v2_request_and_actual_http_bytes_remain_frozen(case):
+def test_explicit_v2_material_and_http_contract_preserve_frozen_scope_without_retired_quotas(case):
     assert sha256(FROZEN.read_bytes()).hexdigest() == "010a09825ca73c3b0ffea5f7208be7dddee76917eba3fa5f74f52d73a8b5f8a4"
     selected = NarrativeSelectResult.from_dict(case["selected"])
     actual = model.NarrativeModelRequest.from_selection(selected, reading_projection_version="reading-model-input/2")
-    assert asdict(actual) == case["request"]
-    assert http_port().request_bytes(actual) == b64decode(case["http_bytes"])
+    assert_archived_request_upgrade(actual, case["request"])
+    assert json.loads(http_port().request_bytes(actual)) == upgraded_http_body(b64decode(case["http_bytes"]))
 
 
 def test_v3_resolves_one_finite_source_owned_boundary_for_raw_and_official():
@@ -246,15 +246,15 @@ def test_english_cited_prose_language_cannot_be_overridden_by_policy_language():
 
 
 @pytest.mark.parametrize("condition", ["21_claims", "long_text", "translation", "old_draft", "extra_brace", "duplicate_key", "path"])
-def test_v3_preserves_actual_output_limits_strict_json_and_translation_guards(condition):
-    selected = with_reading()
+def test_v3_keeps_legal_completed_output_and_strict_json_translation_reference_guards(condition):
+    selected = with_reading(selection(3, text_suffix="原始业务限定说明。" * 40)) if condition == "long_text" else with_reading()
     unit = envelope(selected)["citation_units"][0][0]
     one = claim([unit])
     claims = [one]
     if condition == "21_claims":
         claims = [{**one, "claim_id": str(n)} for n in range(21)]
     if condition == "long_text":
-        claims = [{**one, "text": "x" * 281}]
+        claims = [{**one, "text": selected.evidence_spans[0].raw_text}]
     if condition == "path":
         # A logical identifier is metadata; quoted body text may contain URLs.
         claims = [{**one, "claim_id": "file:///C:/secret/material.pdf"}]
@@ -269,6 +269,11 @@ def test_v3_preserves_actual_output_limits_strict_json_and_translation_guards(co
     if condition == "duplicate_key":
         body = b'{"claims":[],"claims":[]}'
     response = model.NarrativeModelResponse("offline", "model", request(selected).prompt_version, body)
+    if condition in {"21_claims", "long_text"}:
+        result = model.decode_model_draft(response, selected=selected, reading_projection_version=V3)
+        assert [row["text"] for row in result["claims"]] == [row["text"] for row in claims]
+        assert len(result["claims"]) == len(claims)
+        return
     with pytest.raises((model.ModelResponseError, NarrativeContractError)):
         model.decode_model_draft(response, selected=selected, reading_projection_version=V3)
 
@@ -284,7 +289,7 @@ def test_v3_causal_identity_and_actual_http_body_keep_caps_without_legacy_namesp
     assert body["max_tokens"] == 8192 and body["temperature"] == 1.0
     assert body["thinking"] == {"type": "disabled"}
     assert data["output_plan"]["configured_output_tokens"] == 8192
-    assert data["response_schema"]["properties"]["claims"]["maxItems"] == 20
+    assert "maxItems" not in data["response_schema"]["properties"]["claims"]
     identity = model.reading_model_boundary_identity(V3)
     assert identity["instruction_sha256"] == sha256(actual.instruction.encode()).hexdigest()
     assert identity["decoder_sha256"] != model.reading_model_boundary_identity("reading-model-input/2")["decoder_sha256"]

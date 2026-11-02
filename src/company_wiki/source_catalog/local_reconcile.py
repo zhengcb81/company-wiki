@@ -546,7 +546,7 @@ def _discover_source_groups(catalog, identity, budget, request, *, historical=No
                 return _facts_with_availability(catalog, original, identity, request, budget,
                                                 match_scope=False)
             try:
-                operation = restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id),
+                operation = restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id, budget=budget),
                                                    budget=budget, fact_replay=prove)
                 if operation["status"] == "not_relevant":
                     excluded.add(ref.document_id)
@@ -736,7 +736,7 @@ def _prepare_local_source(
             row["mime_type"],
         )
         try:
-            observed = observe_document(catalog, ref.document_id)
+            observed = observe_document(catalog, ref.document_id, budget=budget)
             if row["source_status"] == "retired" and not metadata_retirement(observed):
                 raise SourceReadError("blocked", "retirement_not_metadata_only")
             observed_facts = []

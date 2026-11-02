@@ -52,6 +52,7 @@ def http(monkeypatch):
 
         def __init__(self):
             self.closed = False
+            self.offset = 0
 
         def getheader(self, name):
             return (
@@ -64,8 +65,10 @@ def http(monkeypatch):
             return self.closed
 
         def read1(self, n):
-            self.closed = True
-            return state.body[:n]
+            value = state.body[self.offset:self.offset + n]
+            self.offset += len(value)
+            self.closed = self.offset == len(state.body)
+            return value
 
     class Connection:
         sock = None
@@ -94,7 +97,7 @@ def http(monkeypatch):
     return state
 
 
-def seed_owned(tmp_path, http, *, dependent=False):
+def seed_owned(tmp_path, http, *, dependent=False, prompt_version=REQUEST.prompt_version):
     auto = AutomationStore(tmp_path / "auto.db")
     event = Event(
         "event",
@@ -150,8 +153,8 @@ def seed_owned(tmp_path, http, *, dependent=False):
         run_id="run",
         input_hash="c" * 64,
         job_ids=job_ids,
-        model_id="model",
-        prompt_version="prompt/1",
+        model_id=http.model.model_id,
+        prompt_version=prompt_version,
         pricing_version="price/1",
         input_micro_usd_per_million_tokens=300000,
         output_micro_usd_per_million_tokens=1200000,
@@ -614,16 +617,54 @@ def test_replay_needs_no_credentials_and_creates_no_new_response_copy(
 
 
 @pytest.mark.parametrize("field", ["model_id", "adapter_id", "prompt_version"])
-def test_receipt_identity_bound_is_checked_before_any_paid_post(owned, field):
+@pytest.mark.parametrize("invalid", ["", " untrimmed ", None])
+def test_receipt_identity_shape_is_checked_before_any_paid_post(owned, field, invalid):
     request = REQUEST
     if field == "prompt_version":
-        request = replace(REQUEST, prompt_version="x" * 257)
+        request = replace(REQUEST, prompt_version=invalid)
     else:
-        setattr(owned.http.model, field, "x" * 257)
+        setattr(owned.http.model, field, invalid)
     with pytest.raises(NarrativeBudgetCallError) as error:
         caller(owned).generate(owned.context(), request)
     assert error.value.code == "MODEL_PAID_RESPONSE_BINDING_INVALID"
     assert owned.http.calls == 0 and not owned.runs.reservations_for_run("run")
+
+
+@pytest.mark.parametrize("field", ["model_id", "adapter_id", "prompt_version"])
+def test_long_current_identity_replays_one_paid_response_without_another_post(tmp_path, http, field):
+    label = "configured-" + "x" * 300
+    request = replace(REQUEST, prompt_version=label) if field == "prompt_version" else REQUEST
+    if field != "prompt_version":
+        setattr(http.model, field, label)
+    body = json.loads(BODY)
+    body["model"] = http.model.model_id
+    http.body = json.dumps(body).encode()
+    owned = seed_owned(tmp_path, http, prompt_version=request.prompt_version)
+    first, _ = caller(owned).generate(owned.context(), request)
+    recovered, _ = caller(owned).generate(owned.context(), request)
+    assert first.response_bytes == recovered.response_bytes and http.calls == 1
+    reservations = owned.runs.reservations_for_run("run")
+    assert len(reservations) == 1 and reservations[0].input_tokens == 73 and reservations[0].output_tokens == 19
+    with pytest.raises(NarrativeBudgetCallError):
+        caller(owned).generate(owned.context(), replace(request, input_sha256="e" * 64))
+    assert http.calls == 1
+
+
+def test_large_complete_truncated_output_preserves_real_error_and_usage(tmp_path, http):
+    http.model.max_response_bytes = 400000
+    body = json.loads(BODY)
+    body["choices"][0]["message"]["content"] = "x" * 150000
+    body["choices"][0]["finish_reason"] = "length"
+    http.body = json.dumps(body).encode()
+    owned = seed_owned(tmp_path, http)
+    for _ in range(2):
+        with pytest.raises(NarrativeBudgetCallError) as failed:
+            caller(owned).generate(owned.context(), REQUEST)
+        assert failed.value.code == "MODEL_OUTPUT_TRUNCATED"
+        assert failed.value.content_bytes == 150000
+    record = owned.runs.reservations_for_run("run")[0]
+    assert record.usage_status == "known" and record.input_tokens == 73 and record.output_tokens == 19
+    assert http.calls == 1
 
 
 @pytest.mark.parametrize("body", [b"", b"not JSON"])

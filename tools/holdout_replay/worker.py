@@ -186,8 +186,13 @@ def run_job(job: dict[str, Any]) -> dict[str, Any]:
     sample = job["sample"]
     gold = job["gold"]
     path = Path(job["original_path"])
+    from tools.holdout_replay.manifest import declared_holdout_qualification
+
+    qualification = declared_holdout_qualification({
+        'frozen_before_candidate_output': job.get('frozen_before_candidate_output'), 'samples': [sample]})
     result: dict[str, Any] = {
         "schema_version": "w18-holdout-sample-result/1",
+        'holdout_qualification': qualification,
         "sample_id": sample["sample_id"],
         "producer_commit": job["producer_commit"],
         "import_roots": roots,

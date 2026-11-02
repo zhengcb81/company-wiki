@@ -13,9 +13,9 @@ import json
 import os
 from pathlib import Path
 import re
-import signal
-import subprocess
 import sys
+
+from company_wiki._bounded_process import ChildFailed, ChildTimeout, TransportError, run_bounded
 
 CODE_ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = 'holdout-acceptance-request/1'
@@ -23,6 +23,10 @@ SCHEMA = 'holdout-acceptance-request/1'
 
 class ControllerError(ValueError):
     pass
+
+
+class ObservationIncomplete(ControllerError):
+    """Native facts remain available; the test observer cannot sign its claim."""
 
 
 def _write(path, value):
@@ -35,7 +39,13 @@ def _digest(path):
 
 def _events(root):
     path = root / 'events.jsonl'
-    return [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()] if path.exists() else []
+    try:
+        rows = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()] if path.exists() else []
+        if any(not isinstance(row, dict) or not isinstance(row.get('event'), str) for row in rows):
+            raise ValueError('invalid event shape')
+        return rows
+    except (OSError, UnicodeError, ValueError):
+        return [{'event': 'observation_incomplete', 'kind': 'events_read'}]
 
 
 def _native(database, run_id):
@@ -90,35 +100,59 @@ def _validate(spec):
     if Path(spec['receipt_dir']).resolve() == Path(spec['work_root']).resolve():
         raise ControllerError('HOLDOUT_RECEIPT_WORK_OVERLAP')
     limits = spec['limits']
-    if type(limits.get('max_log_bytes')) is not int or not 4096 <= limits['max_log_bytes'] <= 1048576:
+    if type(limits.get('max_log_bytes')) is not int or limits['max_log_bytes'] <= 0:
         raise ControllerError('HOLDOUT_INVALID_LOG_BOUND')
 
 
 def _process(command, *, env, root, output, label, timeout, payload=None, log_limit=1048576):
-    process = subprocess.Popen(command, cwd=root, env=env,
-        stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == 'nt' else 0,
-        start_new_session=os.name != 'nt')
+    timeout_error = None
+    marker = b'HOLDOUT_OBSERVATION_INCOMPLETE '
+    marker_tail = b''
+    observation_incomplete = False
+
+    def observe_stderr(chunk):
+        nonlocal marker_tail, observation_incomplete
+        scanned = marker_tail + chunk
+        observation_incomplete |= marker in scanned
+        # Protocol observation is independent of diagnostic retention, even
+        # when the caller explicitly retains just one displayed log byte.
+        marker_tail = scanned[-(len(marker)-1):]
+
     try:
-        stdout, stderr = process.communicate(None if payload is None else json.dumps(payload).encode(),
-                                              timeout=timeout)
-    except subprocess.TimeoutExpired:
-        if os.name == 'nt':
-            subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'],
-                           capture_output=True, check=False)
-        elif sys.platform != 'win32':
-            # start_new_session makes this owned process the group leader.
-            os.killpg(process.pid, signal.SIGKILL)
-        stdout, stderr = process.communicate(timeout=15)
-        (output / (label + '.stderr.log')).write_bytes(stderr[:log_limit])
-        raise ControllerError('HOLDOUT_OWNED_CLI_TIMEOUT') from None
-    (output / (label + '.stderr.log')).write_bytes(stderr[:log_limit])
-    _write(output / (label + '.command.json'), {'command': command, 'exit': process.returncode,
+        captured = run_bounded(command, cwd=str(root), env=env,
+            input_bytes=None if payload is None else json.dumps(payload).encode(),
+            timeout_seconds=timeout, stdout_cap_bytes=None,
+            stderr_cap_bytes=log_limit, stderr_log_tail=True, stderr_observer=observe_stderr)
+        code = captured['returncode']
+        stdout, stderr = captured['stdout'], captured['stderr']
+        stderr_count = captured['stderr_bytes_read']
+        observation_incomplete |= not captured['stderr_observation_complete']
+    except (ChildFailed, ChildTimeout) as exc:
+        code = exc.returncode if isinstance(exc, ChildFailed) else None
+        stdout, stderr = exc.stdout, exc.stderr
+        stderr_count = getattr(exc, 'stderr_bytes_read', len(stderr))
+        observation_incomplete |= not getattr(exc, 'stderr_observation_complete', True)
+        timeout_error = exc if isinstance(exc, ChildTimeout) else None
+    except TransportError as exc:
+        raise ControllerError('HOLDOUT_OWNED_CLI_TRANSPORT_FAILED') from exc
+    errors = []
+    try:
+        (output / (label + '.stderr.log')).write_bytes(stderr)
+    except OSError as exc:
+        errors.append('stderr_write:' + type(exc).__name__)
+    receipt = {'command': command, 'exit': code,
         'stdout_bytes': len(stdout), 'stdout_sha256': hashlib.sha256(stdout).hexdigest(),
-        'stderr_bytes': len(stderr), 'stderr_truncated': len(stderr) > log_limit})
-    if len(stdout) > max(log_limit, 2097152) or len(stderr) > log_limit:
-        raise ControllerError('HOLDOUT_CLI_LOG_BOUND_EXCEEDED')
-    return process.returncode, stdout, stderr
+        'stderr_bytes': stderr_count, 'stderr_truncated': stderr_count > log_limit,
+        'observation_errors': errors, 'observation_incomplete': observation_incomplete}
+    try:
+        _write(output / (label + '.command.json'), receipt)
+    except OSError as exc:
+        errors.append('command_write:' + type(exc).__name__)
+    if timeout_error is not None:
+        raise ControllerError('HOLDOUT_OWNED_CLI_TIMEOUT') from timeout_error
+    if errors or observation_incomplete:
+        stderr += b'\nHOLDOUT_OBSERVATION_INCOMPLETE ' + ','.join(errors).encode()
+    return code, stdout, stderr
 
 
 def _request(spec, run_id):
@@ -162,7 +196,7 @@ def run_controller(spec, *, stop_after=None):
         'fingerprints': {'catalog_config': _digest(Path(spec['catalog_config'])),
                          'llm_config': _digest(Path(spec['llm_config']))},
         'stages': [], 'rf_consumption': {'status': 'not_consumed',
-            'reason': 'ROOT must bind this public read to an actually used RF parameter and segment formula'}}
+            'reason': 'Actual RF parameter and segment-formula use of this public read has not been observed'}}
     initial_fingerprints = dict(result['fingerprints'])
 
     def call(stage, selected_run=run_id):
@@ -184,18 +218,27 @@ def run_controller(spec, *, stop_after=None):
         number = len(list(root.glob('cli-*.command.json'))) + 1
         label = f'cli-{number:03}-{stage}'
         before = _native(database, selected_run)
-        code, stdout, _stderr = _process(command, env=env, root=Path(spec['project_root']), output=root, label=label,
+        code, stdout, stderr = _process(command, env=env, root=Path(spec['project_root']), output=root, label=label,
             timeout=spec['limits']['max_seconds'] + 30, log_limit=spec['limits']['max_log_bytes'])
         try:
             receipt = json.loads(stdout)
         except (UnicodeError, ValueError):
             raise ControllerError('HOLDOUT_NATIVE_STDOUT_NOT_JSON') from None
-        _write(root / (label + '.result.json'), receipt)
         after = _native(database, selected_run)
         observation = {'stage': stage, 'native_exit': code, 'receipt': receipt,
                        'before': before, 'after': after, 'request_sha256': _digest(request_path)}
-        _write(root / (label + '.native.json'), observation)
         result['stages'].append(observation)
+        observation_errors = []
+        for suffix, value in (('.result.json', receipt), ('.native.json', observation)):
+            try:
+                _write(root / (label + suffix), value)
+            except OSError as exc:
+                observation_errors.append(suffix + ':' + type(exc).__name__)
+        if observation_errors:
+            observation['observation_errors'] = observation_errors
+        if b'HOLDOUT_OBSERVATION_INCOMPLETE ' in stderr or any(
+                row.get('event') == 'observation_incomplete' for row in _events(root)) or observation_errors:
+            raise ObservationIncomplete('HOLDOUT_OBSERVATION_INCOMPLETE')
         return observation
 
     def require(condition, code):
@@ -219,6 +262,8 @@ def run_controller(spec, *, stop_after=None):
                 result.update(status='preflight_budget_exceeded', reason='HOLDOUT_PREFLIGHT_TOKEN_BOUND_EXCEEDED')
         else:
             seen = _events(root)
+            if any(row['event'] == 'observation_incomplete' for row in seen):
+                raise ObservationIncomplete('HOLDOUT_OBSERVATION_INCOMPLETE')
             if not any(row['event'] == 'after_paid_paused' for row in seen):
                 observed = call('after_paid')
                 seen = _events(root)
@@ -319,6 +364,8 @@ def run_controller(spec, *, stop_after=None):
                         'reading_context_sha256': hashlib.sha256(json.dumps(json.loads(body)['reading_context'],
                             sort_keys=True).encode()).hexdigest()}
                     result['status'] = 'passed'
+    except ObservationIncomplete as exc:
+        result.update(status='observation_incomplete', reason=str(exc))
     except (ControllerError, ValueError, KeyError) as exc:
         result.update(status='failed', reason=str(exc))
     result['native'] = _native(database, run_id)
@@ -342,7 +389,13 @@ def run_controller(spec, *, stop_after=None):
         'catalog_config': _digest(Path(spec['catalog_config'])), 'llm_config': _digest(Path(spec['llm_config']))}
     if not result['protected_configs_unchanged']:
         result.update(status='failed', reason='HOLDOUT_INPUT_CONFIG_CHANGED')
-    _write(root / 'controller-result.json', result)
+    try:
+        _write(root / 'controller-result.json', result)
+    except OSError as exc:
+        result['observation_errors'] = ['controller_result:' + type(exc).__name__]
+        result['observation_status'] = 'incomplete'
+        if result['status'] != 'failed':
+            result.update(status='observation_incomplete', reason='HOLDOUT_OBSERVATION_INCOMPLETE')
     return result
 
 
