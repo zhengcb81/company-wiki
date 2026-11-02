@@ -1,0 +1,997 @@
+{
+  "status": "CHECKLIST_VERIFICATION_COMPLETE_NO_SUBSTANTIVE_MISSING_REAL_ACCEPTANCE_OPEN",
+  "observed_date": "2026-11-02",
+  "reviewer": "/root/rectify_readability",
+  "scope": "RF原RF-01–05、FF当前入口、Invest消费者/安装/日常hook及最终跨仓SW八项。只读现canonical，不自审其它同轮三个handler/sourcefacts测试。",
+  "plan": {
+    "plan_id": "du11-source-closure-2026-10-18",
+    "pwf_root": "docs/plans",
+    "main_pwf_modified": false
+  },
+  "items": [
+    {
+      "id": "RF-01",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "删除完整叙述/reading_context/assessment重复固定size/count/depth许可，实际资源预算归transport。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/company_wiki_narrative_reader.py",
+        "scripts/company_wiki_narrative_process.py",
+        "scripts/company_wiki_narrative_posix.py",
+        "scripts/narrative_summary_observations.py"
+      ],
+      "current_symbols": [
+        "validate_narrative_response",
+        "_reading_context",
+        "read_narrative_context"
+      ],
+      "implementation_verified": "BODY_LIMIT/RECEIPT_LIMIT/REQUEST_LIMIT/READING_CONTEXT_LIMIT无默认表示帽；reader按已绑定narrative_ref.byte_size及显式调用预算限制实际读取，deadline/进程回收保留；core ref/source/support/context shape仍严格。",
+      "preserved_tests": [
+        "test_valid_reading_data_has_no_independent_representation_quota",
+        "test_assessment_new_algorithm_and_diagnostic_volume_do_not_gate_source",
+        "test_explicit_transport_budget_remains_real_without_default_representation_quota"
+      ],
+      "review_evidence": [
+        "R7-RF-independent.json",
+        "R7-RF-implementation.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "RF-02",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "去proof128KiB、摘录10–500及采用理由2048许可，保持完整局部closure和真实引用。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/narrative_summary_provenance.py",
+        "scripts/contracts/document.py",
+        "scripts/research/input_evidence.py",
+        "scripts/narrative_summary_usage.py"
+      ],
+      "current_symbols": [
+        "validate_summary_excerpt_bound",
+        "validate_evidence_claims",
+        "bind_parameter_evidence"
+      ],
+      "implementation_verified": "proof MAX_BYTES=None；摘录以非空、完整原文hash及closure/anchor/context绑定为准，不裁切；采用理由不再固定字符许可，formula/claim/参数依赖仍验。",
+      "preserved_tests": [
+        "test_complete_large_source_anchor_and_proof_are_not_length_permissions",
+        "test_complete_long_summary_anchor_validates_without_clipping",
+        "test_long_excerpt_cannot_bypass_complete_provenance_validation",
+        "test_complete_research_reason_is_not_a_summary_adoption_length_permission"
+      ],
+      "review_evidence": [
+        "R7-RF-independent.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "RF-03",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "坏/缺/未知review、assessment和producer recipe不得反向否决已实读来源，统一诊断owner。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/contracts/source_diagnostics.py",
+        "scripts/contracts/company_wiki_original.py",
+        "scripts/company_wiki_source_reader_v2.py",
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/narrative_summary_observations.py"
+      ],
+      "current_symbols": [
+        "review_observation",
+        "_reading_context"
+      ],
+      "implementation_verified": "共享review_observation产生absent/unavailable/not_reviewed；optional损坏不升级已审、不抹主状态；真实source身份、wire核心合同、支持/上下文分区和内容绑定不因诊断缺失而取消。",
+      "preserved_tests": [
+        "test_optional_review_damage_cannot_reject_verified_original",
+        "test_optional_review_non_scalar_status_does_not_gate_source",
+        "test_optional_selection_trace_wrong_type_does_not_gate_verified_wire",
+        "test_optional_reading_observation_absence_is_not_source_permission"
+      ],
+      "review_evidence": [
+        "R7-RF-independent.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "RF-04",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "全局publication registry可重建、不可成为有效artifact使用许可，不全历史预验/反复chmod。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/publication_registry.py",
+        "scripts/revenue_core.py"
+      ],
+      "current_symbols": [
+        "_append",
+        "register_publication",
+        "rebuild_publications",
+        "run_forecast"
+      ],
+      "implementation_verified": "_append只写自含publication-index/2行，不读全历史；OSError记录unavailable诊断而不否决有效结果；_clear_read_only为退休空兼容函数；显式audit/lookup可发现坏旧链；rebuild先验输入；真实声称签名仍验证。",
+      "preserved_tests": [
+        "test_formal_result_does_not_depend_on_global_index_health",
+        "test_index_can_be_rebuilt_from_validated_artifact_without_old_history",
+        "test_tampered_registry_line_is_detected",
+        "test_formal_publication_survives_unavailable_rebuildable_index"
+      ],
+      "review_evidence": [
+        "R7-RF-independent.json",
+        "R7-RF-publication-followup-independent.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "RF-05",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "同事务原文只验/哈希一次，内部复用immutable值，公开raw反序列化仍独立验。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/contracts/company_wiki_original.py",
+        "scripts/company_wiki_source_reader_v2.py",
+        "scripts/company_wiki_source_v2.py",
+        "scripts/source_preparation.py",
+        "scripts/revenue_forecast.py"
+      ],
+      "current_symbols": [
+        "VerifiedOriginalRead",
+        "verify_original_read",
+        "open_source_version_v2",
+        "build_revenue_source_record_from_original",
+        "prepare_forecast"
+      ],
+      "implementation_verified": "reader返回verify_original_read实际构造的immutable bytes/serialized metadata；preparation投给同owner composer，公开raw builder仍verify；历史tuple注入走raw分支；prepare_forecast不再相邻重验；NarrativeContext.to_dict副本隔离。",
+      "preserved_tests": [
+        "test_preparation_hashes_same_received_immutable_source_only_once",
+        "test_verified_context_is_immutable_and_raw_mutations_need_wire_validation"
+      ],
+      "review_evidence": [
+        "R7-RF-independent.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "FF-CURRENT",
+      "status": "KEPT_BY_REASON",
+      "original_requirement": "核FF仍否有manual/authorization/expiry/canary/clean许可；区别兼容字段与真实门禁。",
+      "repository": "filing-fetch",
+      "current_files": [
+        "scripts/fetch_filing.py",
+        "scripts/filing_contracts.py"
+      ],
+      "current_symbols": [
+        "_download_intent",
+        "validate_request"
+      ],
+      "implementation_verified": "当前v2下载意图由请求表达；legacy authorization仅可选provider/accession/资源scope，expiry/hash不签许可；矛盾显式意图仍报request_error以免同请求两种行为。未发现正常使用前强制Git clean/全套CI/人工签收。",
+      "preserved_tests": [
+        "test_legacy_scope_uses_one_ensure_and_cleans_scope_file",
+        "test_library_default_and_cli_agree_for_one_fetch_intent",
+        "test_conflicting_explicit_allow_download_is_a_named_request_error"
+      ],
+      "review_evidence": [
+        "R7-crossrepo-gate-audit.json",
+        "R7-final-sweep-crossrepo.json"
+      ],
+      "published_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
+      "deployment": "FF18 runtime三份副本全部匹配；未读配置值/凭证内容"
+    },
+    {
+      "id": "SW-INV-QUOTE",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "invest通用摘录10–500为多余许可：改非空，保hash/source/币种单位/期间。",
+      "repository": "invest-skills",
+      "current_files": [
+        "invest-core/scripts/invest_contracts.py"
+      ],
+      "current_symbols": [
+        "_validate_claims",
+        "validate_artifact",
+        "create_artifact"
+      ],
+      "implementation_verified": "移除唯一固定len范围；非空、excerpt SHA、capture/source/target/日期/币种单位仍独立验证；无截断。",
+      "preserved_tests": [
+        "test_supported_quote_has_no_arbitrary_minimum_or_maximum",
+        "test_length_simplification_preserves_actual_integrity",
+        "test_empty_quote_is_still_missing_evidence",
+        "test_public_read_rejects_quotation_mutation"
+      ],
+      "review_evidence": [
+        "R7-invest-E2E-independent.json"
+      ],
+      "published_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "SW-RF-QUOTES",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "RF target builder/backtest残余摘录10–500与主证据owner对齐。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/research/input_targets.py",
+        "scripts/revenue_backtest.py"
+      ],
+      "current_symbols": [
+        "build_management_target",
+        "_validate_actual_claims"
+      ],
+      "implementation_verified": "target明确非空excerpt；actual claim保非空及text SHA，不再按长度拒；measurement/currency/unit/control period及真实数值重算保留。",
+      "preserved_tests": [
+        "test_target_builder_preserves_complete_nonempty_excerpt",
+        "test_backtest_long_excerpt_keeps_real_hash_and_currency_checks"
+      ],
+      "review_evidence": [
+        "R7-ROOT-residual-independent.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "SW-RF-DRIVERS",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "总driver和每driver evidence10条帽不能拒完整DAG材料。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/research/drivers.py",
+        "scripts/contracts/document.py"
+      ],
+      "current_symbols": [
+        "validate_growth_driver_tree",
+        "_validate_growth_driver_evidence"
+      ],
+      "implementation_verified": "driver/evidence只要求非空，不再上限10；unique ID、已知source/claim、因果参数/segment归属、排名与sum/reconciliation照常验证。",
+      "preserved_tests": [
+        "test_complete_driver_tree_and_evidence_not_cut_to_ten"
+      ],
+      "review_evidence": [
+        "R7-ROOT-residual-independent.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "SW-FF-CONFIG",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "原审暂保64KiB后续证实为active配置表示门，必须去掉而非抬帽。",
+      "repository": "filing-fetch",
+      "current_files": [
+        "scripts/ff_configuration.py",
+        "scripts/fetch_filing.py",
+        "scripts/transcript_tool_transport.py"
+      ],
+      "current_symbols": [
+        "read_json_object",
+        "load_connection_root",
+        "load_company_wiki_root"
+      ],
+      "implementation_verified": "统一reader完整stream.read再严格UTF8/JSON对象及root路径解析；无64KiB许可；坏编码/实际不可读/物理root仍报config_error。原审先保、后扫查证实删除的演进明确，非遗漏。",
+      "preserved_tests": [
+        "test_explicit_local_configuration_is_read_complete",
+        "test_large_valid_config_is_read_completely_before_root_use",
+        "test_complete_config_tail_is_not_rejected_by_an_implicit_read_limit"
+      ],
+      "review_evidence": [
+        "R7-ROOT-residual-independent.json",
+        "R7-FF-daily-feedback-independent.json"
+      ],
+      "published_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "SW-LOCAL-DIAGNOSTICS",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "FF/RF附注128KiB/8层/32键/1024项及ET usage8192不得否决真实主因或改已知用量。",
+      "repository": "filing-fetch",
+      "current_files": [
+        "scripts/ff_local_preparation_observation.py",
+        "scripts/fetch_filing.py",
+        "scripts/transcript_tool_transport.py",
+        "../revenue-forecast/scripts/filing_upstream_cause.py"
+      ],
+      "current_symbols": [
+        "validated_local_preparation_observation",
+        "_machine",
+        "_provider_usage",
+        "_validated_operation"
+      ],
+      "implementation_verified": "FF/RF以迭代有限/无环/pathless JSON观察并复制，不按表示规模拒；坏optional附注剔除保blocked主因/计数；usage解析捕获RecursionError，request/schema/complete/counters真实绑定，坏值None/None/False，不补0或重发付费。",
+      "preserved_tests": [
+        "test_complete_optional_counters_can_exceed_old_shape_caps",
+        "test_bad_optional_budget_does_not_replace_primary_blocked_operation",
+        "test_padded_valid_supervisor_usage_does_not_become_unknown",
+        "test_undecodable_optional_usage_is_unknown_not_a_main_failure",
+        "test_local_failure_large_deep_diagnostics_are_complete_and_isolated"
+      ],
+      "review_evidence": [
+        "R7-ROOT-residual-independent.json"
+      ],
+      "published_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
+      "deployment": "FF/RF相关runtime三份副本均match；真实FF DTO→RF公开CLI3链已有独审证据"
+    },
+    {
+      "id": "SW-RF-AVAILABILITY-TEXT",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "availability evidence_ref/locator2048字符不能否决合法proof。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/contracts/source_clock.py"
+      ],
+      "current_symbols": [
+        "validate_availability_evidence",
+        "qualify_source_information"
+      ],
+      "implementation_verified": "移除字符上限，保非空trim/control字符、pathless证据ref、同源SHA、basis/date/as-of语义；不是取消source时点校验。",
+      "preserved_tests": [
+        "test_availability_proof_has_no_text_length_permission",
+        "test_long_availability_locator_preserves_complete_bound_proof"
+      ],
+      "review_evidence": [
+        "R7-ROOT-residual-independent.json",
+        "R7-RF-CI-oracle-followup.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "SW-E2E-FIXTURE-PERMIT",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "Biren冻结错pair/伪host_signed和强制registry不能换tag/吞golden；真实CLI分阶段必须执行。",
+      "repository": "invest-skills",
+      "current_files": [
+        "e2e/generate_biren_fixture.py",
+        "e2e/run_biren_invest_e2e.py",
+        "e2e/offline_cli.py",
+        "e2e/fixtures/biren_forecast.json"
+      ],
+      "current_symbols": [
+        "collect_step_1_forecast_valid",
+        "collect_steps_3_to_8",
+        "check_runs",
+        "main"
+      ],
+      "implementation_verified": "显式generator从原embedded input真实canonical生成合法3.7/4.3.0/unattested；355共享numeric/12经济golden未变；去index预登记，双CLI及公开中间产物3–8检查真实调用；update-golden拒经济漂移；新独立run不枚举历史目录。",
+      "preserved_tests": [
+        "test_real_cli_rejects_invalid_frozen_artifact",
+        "test_intermediate_financial_mutation_is_detected_at_its_public_read",
+        "test_live_harness_actually_invokes_phase_checks",
+        "test_even_explicit_metadata_refresh_cannot_absorb_economic_drift"
+      ],
+      "review_evidence": [
+        "R7-invest-E2E-independent.json",
+        "R7-final-closure.json"
+      ],
+      "published_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "deployment": "e2e harness/fixture为canonical测试资产，不安装到技能；其实际framework/RF installed runtime已有离线双跑记录，3runtime安装副本当前全match"
+    },
+    {
+      "id": "SW-INV-REPEAT",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "run_company/run_bundle/当前bundle read相邻同对象两次RF强验统一归reference owner。",
+      "repository": "invest-skills",
+      "current_files": [
+        "invest-framework/scripts/company_orchestrator.py",
+        "invest-framework/scripts/bundle_validator.py",
+        "invest-core/scripts/invest_contracts.py"
+      ],
+      "current_symbols": [
+        "run_company",
+        "run_bundle",
+        "validate_bundle_artifact",
+        "revenue_reference"
+      ],
+      "implementation_verified": "去三处立即重复validate_revenue_forecast；revenue_reference仍完整强验；legacy无reference分支保校验；独立公开validate_execution读取仍重算全state，不新skip flag。",
+      "preserved_tests": [
+        "test_company_reference_owns_the_single_immediate_validation",
+        "test_bundle_reference_owns_the_single_immediate_validation",
+        "test_current_bundle_public_read_validates_its_frozen_forecast_once"
+      ],
+      "review_evidence": [
+        "R7-invest-E2E-independent.json"
+      ],
+      "published_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "INV-CONSUMER",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "下游不得默认registered/host_signed作为使用许可，不能削弱真实RF输出重算。",
+      "repository": "invest-skills",
+      "current_files": [
+        "invest-core/scripts/invest_contracts.py"
+      ],
+      "current_symbols": [
+        "validate_revenue_forecast",
+        "revenue_reference",
+        "adapt_revenue"
+      ],
+      "implementation_verified": "注册/签名观测不作许可；current结果仍走validate_published_forecast完整embedded-input重算，legacy真实兼容读取；unattested不拒、不伪签；删除caller opt-out授权参数。",
+      "preserved_tests": [
+        "test_validated_result_is_independent_of_global_registry",
+        "test_unattested_valid_result_is_not_promoted_to_signed_or_rejected",
+        "test_unattested_does_not_allow_mutated_economic_output",
+        "test_forged_artifact_rejected_at_all_three_hops"
+      ],
+      "review_evidence": [
+        "R7-invest-consumer.json",
+        "R7-invest-CI-followup-independent.json",
+        "R7-invest-E2E-independent.json"
+      ],
+      "published_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "deployment": "3份安装副本与当前canonical字节一致"
+    },
+    {
+      "id": "INV-HOOK",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "commit/push不重十组件全suite/E2E或隐式全局同步；验真实staged bytes。",
+      "repository": "invest-skills",
+      "current_files": [
+        "tools/pre_push_gate.py",
+        ".githooks/pre-commit",
+        ".githooks/pre-push"
+      ],
+      "current_symbols": [
+        "_staged_bytes",
+        "_check_commit",
+        "main"
+      ],
+      "implementation_verified": "core.hooksPath当前.githooks；commit git show :0读取index真实bytes，syntax+Ruff自有临时树；push Ruff+固定adapter/三跳smoke，真实120s/非零；无自动部署/全套E2E。RF日常12+CI41、FF11+CI40同类分离也核对。",
+      "preserved_tests": [
+        "test_commit_syntax_uses_actual_index_bytes_without_changing_worktree",
+        "test_real_ruff_rejects_staged_name_error_hidden_by_good_worktree",
+        "test_push_has_no_implicit_deployment_or_whole_suite"
+      ],
+      "review_evidence": [
+        "R7-invest-consumer.json",
+        "R7-RF-publication-followup-independent.json",
+        "R7-FF-daily-feedback-independent.json"
+      ],
+      "published_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "deployment": "hook/工程tool属canonical Git工区，不按技能同步；实际三个repo均core.hooksPath=.githooks"
+    },
+    {
+      "id": "INV-INSTALL",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "同步只写明确文件，保配置/其他文件，不得每push整套覆盖。",
+      "repository": "invest-skills",
+      "current_files": [
+        "tools/sync_installations.py"
+      ],
+      "current_symbols": [
+        "_selected_sources",
+        "_selected_plan",
+        "_sync_selected",
+        "_replace_selected_file"
+      ],
+      "implementation_verified": "--file定点选择、物理alias去重、source alias拒回写旧snapshot、sameSHA零写、逐文件atomic/readback、partial如实返回；显式旧full/check兼容但不被hook隐式调用。",
+      "preserved_tests": [
+        "test_repeat_apply_has_zero_writes_and_no_staging",
+        "test_changed_canonical_alias_never_restores_stale_snapshot",
+        "test_selected_check_does_not_scan_unrequested_or_create_installations",
+        "test_fresh_cli_only_updates_requested_file"
+      ],
+      "review_evidence": [
+        "R7-invest-selective-install.json",
+        "R7-invest-selective-install-ROOT.md",
+        "R7-final-closure.json"
+      ],
+      "published_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "deployment": "工具当前605beabf…与审查版本一致；ROOT已有定点同步/重复零写收据，本轮只读复核150个部署byte匹配"
+    },
+    {
+      "id": "RETAINED-RESOURCES",
+      "status": "KEPT_BY_REASON",
+      "original_requirement": "不把真实下载/HTTP/子进程bytes、timeout、token/费用/空间/本地读工作预算混为表示许可。",
+      "repository": "filing-fetch",
+      "current_files": [
+        "scripts/ff_process_transport.py",
+        "scripts/fetch_filing.py",
+        "scripts/transcript_tool_transport.py",
+        "../revenue-forecast/scripts/company_wiki_narrative_reader.py"
+      ],
+      "current_symbols": [
+        "run_bounded",
+        "_download_intent",
+        "read_narrative_context"
+      ],
+      "implementation_verified": "保真实流式32MiB transport边界、共享deadline/own进程回收、用户请求资源及未知paid恢复；RF叙述reader以绑定byte_size/显式max参数计实际读取，不是嵌套JSON固定许可。",
+      "preserved_tests": [
+        "test_request_deadline_bounds_the_real_child_run",
+        "test_child_output_over_the_byte_cap_fails_closed",
+        "test_timeout_reclaims_the_child_but_never_an_unrelated_process",
+        "test_explicit_transport_budget_remains_real_without_default_representation_quota"
+      ],
+      "review_evidence": [
+        "R7-crossrepo-gate-audit.json",
+        "R7-final-sweep-crossrepo.json"
+      ],
+      "published_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
+      "deployment": "保持原真实资源owner；未提高资源额度"
+    },
+    {
+      "id": "RETAINED-CORRECTNESS",
+      "status": "KEPT_BY_REASON",
+      "original_requirement": "源字节/公司/期次/as-of、引用partition、币种单位/公式重算与真实signed声明仍需严格。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/contracts/company_wiki_original.py",
+        "scripts/contracts/source_clock.py",
+        "scripts/contracts/document.py",
+        "../invest-skills/invest-core/scripts/invest_contracts.py"
+      ],
+      "current_symbols": [
+        "verify_original_read",
+        "qualify_source_information",
+        "validate_evidence_claims",
+        "validate_revenue_forecast"
+      ],
+      "implementation_verified": "这些定义材料归属与数值事实，不是manual许可。未知语义/未完整处理不升级事实；声称host_signed须真验但未配置不要求签名；比较2对象/敏感度2不同值是领域维度，不是报告规模帽。",
+      "preserved_tests": [
+        "test_long_excerpt_cannot_bypass_complete_provenance_validation",
+        "test_forged_artifact_rejected_at_all_three_hops",
+        "test_unattested_does_not_allow_mutated_economic_output"
+      ],
+      "review_evidence": [
+        "R7-RF-independent.json",
+        "R7-invest-E2E-independent.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "现canonical及本轮新增受影响部署已匹配；不声称所有公司事实已经过真实审查"
+    },
+    {
+      "id": "RETAINED-FORMULA",
+      "status": "KEPT_BY_REASON",
+      "original_requirement": "500字符公式与自然语言摘录不同，属于受限递归算术工作保护。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/forecast/calc.py",
+        "../invest-skills/invest-core/scripts/invest_contracts.py"
+      ],
+      "current_symbols": [
+        "evaluate_derived_formula",
+        "_evaluate_formula_node",
+        "evaluate_formula"
+      ],
+      "implementation_verified": "当前仍500字符，另保AST节点白名单、已知变量、除0、指数安全范围、finite结果。若将来需长公式，改显式AST/work预算另行设计，不能无替代删实际计算边界；不是本轮quote cap漏删。",
+      "preserved_tests": [
+        "RF数学/公式既有golden与重算控制",
+        "Invest公式节点/数值验证控制"
+      ],
+      "review_evidence": [
+        "R7-final-sweep-crossrepo.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "非R7修改文件；未以本次150比对冒签其安装状态"
+    },
+    {
+      "id": "RETAINED-CREDENTIAL",
+      "status": "KEPT_BY_REASON",
+      "original_requirement": "FF credential scalar4096是凭证读取，不是财报/配置表示许可。",
+      "repository": "filing-fetch",
+      "current_files": [
+        "scripts/transcript_tool_transport.py"
+      ],
+      "current_symbols": [
+        "_credential_file",
+        "_et_environment"
+      ],
+      "implementation_verified": "读credential4097探测、4096上限及非空可打印ASCII检查为小secret scalar；仅审代码，未读FMP文件或环境secret值；密钥不得进提示/报告。",
+      "preserved_tests": [
+        "ET credential泄漏/未知usage反控保留"
+      ],
+      "review_evidence": [
+        "R7-final-sweep-crossrepo.json"
+      ],
+      "published_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
+      "deployment": "transport runtime三份副本同canonical；不读取凭证内容核验"
+    },
+    {
+      "id": "RETAINED-LEGACY-DIAGNOSTICS",
+      "status": "KEPT_BY_REASON",
+      "original_requirement": "明确退休/显式audit/version工具不应再当正常canary门禁重复删除。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "scripts/processed_artifact_canary.py",
+        "scripts/installation_manifest.py",
+        "scripts/revenue_forecast.py",
+        "scripts/publication_registry.py"
+      ],
+      "current_symbols": [
+        "main",
+        "manifest_sha256",
+        "audit"
+      ],
+      "implementation_verified": "正常forecast/preparation无processed_artifact_canary调用；owned manifest digest仅--version分支；旧registry历史audit显式可拒坏链但不影响正常新artifact。legacy authorization/expiry兼容已在FF-CURRENT逐项核。",
+      "preserved_tests": [
+        "registry显式audit坏行/坏hash负控保留",
+        "--version诊断分支静态核对"
+      ],
+      "review_evidence": [
+        "R7-crossrepo-gate-audit.json",
+        "R7-final-sweep-crossrepo.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "历史/显式只读工程入口，不是生产许可；未扩大部署范围"
+    },
+    {
+      "id": "CROSS-DEPLOYMENT",
+      "status": "ENGINEERING_COMPLETE",
+      "original_requirement": "canonical通过还需覆盖实际三个技能安装根，并防整目录覆盖/配置漂移。",
+      "repository": "invest-skills",
+      "current_files": [
+        "../revenue-forecast/scripts",
+        "../filing-fetch/scripts",
+        "invest-core/scripts",
+        "invest-framework/scripts"
+      ],
+      "current_symbols": [
+        "selective sync",
+        "installed runtime entry"
+      ],
+      "implementation_verified": "独立按原RF18runtime+3技能说明与后续RF5runtime+2说明的并集28、FF18 runtime、Invest3runtime+1合同说明计50文件；.agents/.claude/.codex三份各自SHA，共150/150和当前canonical一致；未读配置值。",
+      "preserved_tests": [
+        "ROOT定点安装重复零写收据",
+        "三根新进程无签名合法输出/经济篡改拒记录",
+        "installed offline Biren CLI双跑7.62s"
+      ],
+      "review_evidence": [
+        "R7-final-closure.json",
+        "R7-invest-selective-install-ROOT.md"
+      ],
+      "published_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "deployment": "本轮150次只读字节核验，不执行install；fresh .claude记录中的RF实际来自.agents，二者均当前SHA一致，不冒称选中了.claude RF入口"
+    },
+    {
+      "id": "REAL-C-AND-COMPANY-LOOP",
+      "status": "REAL_ACCEPTANCE_OPEN",
+      "original_requirement": "工程/合成/部署绿不等于真实摘要、缓存恢复、RF经济采用及全部公司循环完成。",
+      "repository": "revenue-forecast",
+      "current_files": [
+        "../company-wiki/docs/plans/du11-source-closure-2026-10-18/task_plan.md"
+      ],
+      "current_symbols": [
+        "T4 source note parent chain",
+        "real C",
+        "RF audit loop"
+      ],
+      "implementation_verified": "final-closure/CURRENT_STATUS明确T4 parent-chain P2、新runtime真实C、R4六问题与完整公司loop仍OPEN。先根修source父链，再按原90s/16M/112真实H1；之后真实摘要/paid恢复/同跨run零重复/同artifact RF实际采用。此审计不替代这些验收。",
+      "preserved_tests": [
+        "须后续真实C节点的新独审收据"
+      ],
+      "review_evidence": [
+        "R7-final-closure.json"
+      ],
+      "published_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "deployment": "150部署字节匹配和已存合成installed E2E不能将此项改为完成"
+    }
+  ],
+  "status_counts": {
+    "ENGINEERING_COMPLETE": 17,
+    "KEPT_BY_REASON": 6,
+    "REAL_ACCEPTANCE_OPEN": 1,
+    "MISSING": 0
+  },
+  "reports_and_review_version_binding": {
+    "R7-crossrepo-gate-audit": {
+      "sha256": "03d691a0cad950f00da8699e199ad60aa4e8cc9ebb3845990d34b7ca43746ec6",
+      "status": "READ_ONLY_AUDIT_COMPLETE_STOP"
+    },
+    "R7-final-sweep-crossrepo": {
+      "sha256": "bb7ea92e985c5bc299ad489511a71841511635ea25bbb66af29f2d6c58d252ca",
+      "status": "READ_ONLY_COMPLETE_NEW_REMAINDERS_REQUIRE_IMPLEMENTATION"
+    },
+    "R7-final-closure": {
+      "sha256": "161d1353576181f2f5cbce05216c66a1956e2d4a66a68861ac81879aeaff4893",
+      "status": "R7_ENGINEERING_PUBLISHED_ALL_EXACT_CI_GREEN_REAL_C_OPEN"
+    },
+    "R7-RF-implementation": {
+      "sha256": "246954d02a40f58471127fb933f65585cd80fe055c20873f5904dff932c9d4ab",
+      "status": "AUTHOR_FROZEN_AWAITING_INDEPENDENT_REVIEW"
+    },
+    "R7-RF-independent": {
+      "sha256": "90c8d98110302ed6fddc9d2e18c2576c664573e324c4e4f754e6df27216042a7",
+      "status": "PASS_BOUNDED_INDEPENDENT_REVIEW",
+      "version_binding": {
+        "matched": 28,
+        "total": 29,
+        "changed": [
+          {
+            "path": "tests/test_r1_narrative_availability.py",
+            "reviewed_sha256": "dde78f0ccb0b1449adca435853eed5adfb00b217a3d2a51f5845f990ce13d0de",
+            "current_sha256": "39c36fbe8bd93525d591fefca86389304653f9b49be653447adfc8b7b2e03f61"
+          }
+        ]
+      }
+    },
+    "R7-RF-publication-followup-independent": {
+      "sha256": "ae112b2c3f5170f9b2eca838482850658a2e8737ae4e9d5142e23a3db17c2bd7",
+      "status": "PASS_BOUNDED_DELTA_REVIEW"
+    },
+    "R7-ROOT-residual-implementation": {
+      "sha256": "ff49fb55ab25602a0a9389fdd4ec5d87ea395ce0574c63cec879e762f9968aab",
+      "status": "FROZEN_AWAITING_INDEPENDENT_REVIEW"
+    },
+    "R7-ROOT-residual-independent": {
+      "sha256": "bfaf97c109dcc12854762a327d0eb83172030ae2ca1039c2148f3a9dec752345",
+      "status": "PASS_ENGINEERING_SELECTED_SCOPE"
+    },
+    "R7-invest-consumer": {
+      "sha256": "75d79deac521d7e9bbc4b9791602ab389e1ee09c8700d0d15a371490ef61edec",
+      "status": "IMPLEMENTED_INTEGRATION_PASS_MAJOR_REVIEW_PENDING"
+    },
+    "R7-invest-selective-install": {
+      "sha256": "e335bc249eeac5270f5c77886df831853ce78748d7fb7166ac70ace45f85dbb2",
+      "status": "IMPLEMENTED_FROZEN_PENDING_ROOT_REVIEW"
+    },
+    "R7-invest-E2E-implementation": {
+      "sha256": "7adc7c897b211b2131e6e95b8cb4d9f8822302aed06b8766079e34d61abe9e1e",
+      "status": "IMPLEMENTED_FROZEN_AWAITING_INDEPENDENT_REVIEW"
+    },
+    "R7-invest-E2E-independent": {
+      "sha256": "6fd972aff4f2c2f8ee0c1b490abe284ac19d8b077ac1ad8f6587ba43deaa70ac",
+      "status": "PASS_WITH_ENVIRONMENT_OBSERVATION",
+      "version_binding": {
+        "matched": 11,
+        "total": 11,
+        "changed": []
+      }
+    },
+    "R7-invest-CI-followup-independent": {
+      "sha256": "3dc3240ecbfba4509fbb4b4b95c0e8cc64bb6aca92c747411a2f1ab30e950bcb",
+      "status": "PASS_BOUNDED_DELTA_REVIEW"
+    },
+    "R7-FF-daily-feedback-independent": {
+      "sha256": "5c6d572e6d0e9554c17eee1be80c34829324369c40706796a92dbec172645abc",
+      "status": "PASS",
+      "version_binding": {
+        "matched": 5,
+        "total": 5,
+        "changed": []
+      }
+    },
+    "R7-FF-CI-oracle-followup": {
+      "sha256": "a204a6f7a74ef95dba530fae5d6c9fd8847ed5ef15cb978791d4037f38041d65",
+      "status": "FIXED_OBSOLETE_TEST_ORACLE_PENDING_EXACT_REMOTE_CI"
+    }
+  },
+  "current_heads": {
+    "revenue-forecast": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+    "filing-fetch": "350cb39dad8a1116d76fd44824fe353ae210d384",
+    "invest-skills": "9b68cc9b9bac194ede4881453f7706528bc18add"
+  },
+  "current_source_files_sha256": {
+    "revenue-forecast": {
+      "SKILL.md": "42937b6db815d53482b2bd2dca26e5f3d2efde10e3c8855699b2522c8bc2e588",
+      "references/compliance-contract.md": "3a09020c66a1e75948e8e470d3f48e4f9c1846e766b2d980a3cbf5ce7dc9f06c",
+      "references/data-governance.md": "fd61dbfe597f54ac03816976fcad47f9d157c724d9fe4ca4aabd1df37706ef38",
+      "references/input-construction.md": "986dce5871a413dc84964d7226474df7385e9393ee326eb93b69598d18de5127",
+      "references/summary-adoption.md": "bc8501fea06cad56e3b0c6ef96f711921fb60724644539b0d98ff9226434bec8",
+      "scripts/company_wiki_narrative_contracts.py": "194649f53fb0d288420f3d2d574fbd8b4ca74986a505f338f02336ebcacf3a53",
+      "scripts/company_wiki_narrative_posix.py": "64e36fcbe5c541e45e3b4ca8afd0f1484fc26d22db55d7e1a40d31a453877c1c",
+      "scripts/company_wiki_narrative_process.py": "2996426ec668b6e8be3a878f5cdcd3004a3cb526b4183ab0d81d84a71b62754b",
+      "scripts/company_wiki_narrative_reader.py": "3893be41d94713a966cb81f7a2a9edb15dafb7759780b5c64763d1d285863c34",
+      "scripts/company_wiki_source_reader_v2.py": "faad30176392975725a3c66f0ab972ae3aa0842b7a34fa092c758efc35f94528",
+      "scripts/company_wiki_source_v2.py": "68c14925f0bfe419dd86a12d3b69d2c73a8222d8a7760ce3ce15a366410ec3d1",
+      "scripts/contracts/company_wiki_original.py": "536389cd97c2f1a5471cb8efc529354e3ac59d1b14f72365638418ce86db47f2",
+      "scripts/contracts/document.py": "1804bba0294a38d6bc55034cdfaac42b6e1e3f87807a6242e9038ce65d7e7f54",
+      "scripts/contracts/source_clock.py": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+      "scripts/contracts/source_diagnostics.py": "d21c7aa9e0f72ec77b9fc9d580d8bb4689b256380170c611fa69f6d0d00bda72",
+      "scripts/filing_upstream_cause.py": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+      "scripts/narrative_source_preparation.py": "d51965272faa99e5601186775f4b467c8caff734d52db3b8c5833fc758cbcafd",
+      "scripts/narrative_summary_observations.py": "614553685d7647e7e75426cfdb22a14668736a2c11f0c53698acb3d1a7961d55",
+      "scripts/narrative_summary_provenance.py": "0ad15963e7182cd0de0d97a5771d1bd3da9c4a42784d2046e9c51a2098fdbd13",
+      "scripts/narrative_summary_usage.py": "e46089e5dccb7ee1552983228018e788aeab2c22593fd1b7fc223c2386b66916",
+      "scripts/publication_registry.py": "30a3541cd3c3d79778c5b473b1b3b755d41ccf5208dafe8cd7996e651352b6a1",
+      "scripts/research/drivers.py": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+      "scripts/research/input_evidence.py": "3b90fb9201c5c90dc9de45f6f6feedddb0827fb40594218b0684723691370d11",
+      "scripts/research/input_targets.py": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+      "scripts/revenue_backtest.py": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+      "scripts/revenue_core.py": "28614d4e670c204d24cd8f65f872a56a29694692dc6a2f180af2f2f779fb8109",
+      "scripts/revenue_forecast.py": "7ad3eb9d7f1aec8bda83f80c342332e0b7643c229c9620784258472163872abb",
+      "scripts/source_preparation.py": "3c4aa95987b3d90fc807e76d9eb564f9797eb2e97cfd3b881758e74043fa2e07"
+    },
+    "filing-fetch": {
+      "scripts/et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+      "scripts/fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+      "scripts/fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+      "scripts/ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+      "scripts/ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+      "scripts/ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+      "scripts/ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+      "scripts/ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+      "scripts/ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+      "scripts/ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+      "scripts/ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+      "scripts/ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+      "scripts/ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+      "scripts/ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+      "scripts/filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+      "scripts/transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+      "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+      "scripts/transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855"
+    },
+    "invest-skills": {
+      "invest-core/references/compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+      "invest-core/scripts/invest_contracts.py": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+      "invest-framework/scripts/bundle_validator.py": "40e4bf8c78fb533aa3bffb2dd246adb85360b2885d6c615c1cdaa89ed3fc03ce",
+      "invest-framework/scripts/company_orchestrator.py": "133fc297751d60c2959b6aad4d9017f355ef72890df7304ed5c9d38498ba61a7"
+    }
+  },
+  "current_engineering_test_files_sha256": {
+    "revenue-forecast": {
+      "tools/pre_push_gate.py": "9364640c3c1cb7df9d5bc90a0672c23728d34c6dd46ac7283b3754f05f1689af",
+      ".githooks/pre-push": "723aa6c7bb7e8f226e74df235d338f97f9e69b3519184e83cebbaca26b8ffd1f",
+      ".github/workflows/quality.yml": "664b6ab5b9a9fbf510ab20fe5a3e4e0b12365ddcca557da41cea543ee66ece30",
+      "tests/test_r7_representation_and_index.py": "9d856ceede8b699820449f58a7a3a90ff83f2272d222172a885d442ffec5eb16",
+      "tests/test_residual_representation_limits.py": "c6a595ab9e7cc9f0dba431746be8dbe849f914fd160b3a120a6d864b3f87ad38",
+      "tests/test_r1_narrative_availability.py": "39c36fbe8bd93525d591fefca86389304653f9b49be653447adfc8b7b2e03f61",
+      "tests/test_summary_long_excerpt.py": "8c5d2dcc675681fc2c2c6a989bae284b4a9138fbda3fc6097188d787a56399cd",
+      "tests/test_publication_registry.py": "64a55735e59f473527f1559abf1a7b00d41453ea5eb58ac83d4223104c04e199"
+    },
+    "filing-fetch": {
+      "tools/pre_push_gate.py": "a5dfaafd6b87e03e22be6eb4efcc7edd3efeda2f16952c63a49859a109f88604",
+      "tools/ci_tests.py": "ffce41518a98332b9299adbd4e7eee2cc017b11de165491e1756e6d3cbb0cc89",
+      ".githooks/pre-push": "3469df137008b98b2f1f07ad2538c07e34d78ddee872da14daa1ce5b4dff2b30",
+      "tests/test_residual_representation_limits.py": "1ede4367cdccf978bc974a9ec9032d44ae706a0a50145a75c15f72dc4590f5d6",
+      "tests/test_local_preparation_observation.py": "160f01e234d93734df272141013195f57569fbf6ba4cf68f52d96cb057872298",
+      "tests/test_s3_single_request_limits.py": "8b1e49b8d215b1bf99bbc60682a81825a8cd8ba962a6eeb95b8adda7cae831a9",
+      "tests/test_single_intent_acquisition.py": "255a16c89f3763ff6008738e098f7d974ef69fcb974e549a65348cef728a4ed5"
+    },
+    "invest-skills": {
+      "tools/pre_push_gate.py": "082296ddb682c7a09bd7823d8c2365697a8069d4c65c8abf27fe44615659644d",
+      "tools/sync_installations.py": "605beabfef388aba0336384c67e394eaa6a18ea83ecf7ddb97f0eb2adf949e2e",
+      ".githooks/pre-commit": "c155d2d7a6c9dc587640ea9d2974f30fceb77e842bb102410210335cddb91472",
+      ".githooks/pre-push": "6a9d8027bdc72ecebcba9f919dc151ac0d79f2a6db07736c70f3c133e79b0320",
+      "invest-core/tests/test_fast_git_checks.py": "d467e80a09afd08cd57b023398d78b88dad906d920072cb772a3a73ddce8196b",
+      "invest-core/tests/test_targeted_install_sync.py": "77281bd82eb2c5642132d204bfe7fe1ac1f8b7932b6dcdf4a85005b66d07413a",
+      "invest-core/tests/test_revenue_adapter_gate_simplification.py": "793fdc13f68ae15f877c55471ce5b6f0fe2607122ebbb8b2da19a438febba79d",
+      "invest-framework/tests/test_e2e_contract_boundaries.py": "6c6525a2aaa3f839f2fd8a9665943f3e9f6ed15316007f603922a5c41ed0263c",
+      "invest-core/tests/test_claim_excerpt_integrity.py": "f4eac1eb6e9825d38e56b6e8ea3da25d04c27ed228af1af1f856411943ffe5a1",
+      "e2e/run_biren_invest_e2e.py": "eda2578c7d4eb2ec54c1af765b608af7cd029092b664307ea78105cd33fa2a7d",
+      "e2e/generate_biren_fixture.py": "8ed303a9312c2df3ee5168789f9dc2f1cc1ee12c285a202064d3ffd27446b15c"
+    }
+  },
+  "deployment_independent_byte_check": {
+    "source_files_sha256": {
+      "revenue-forecast": {
+        "SKILL.md": "42937b6db815d53482b2bd2dca26e5f3d2efde10e3c8855699b2522c8bc2e588",
+        "references/compliance-contract.md": "3a09020c66a1e75948e8e470d3f48e4f9c1846e766b2d980a3cbf5ce7dc9f06c",
+        "references/data-governance.md": "fd61dbfe597f54ac03816976fcad47f9d157c724d9fe4ca4aabd1df37706ef38",
+        "references/input-construction.md": "986dce5871a413dc84964d7226474df7385e9393ee326eb93b69598d18de5127",
+        "references/summary-adoption.md": "bc8501fea06cad56e3b0c6ef96f711921fb60724644539b0d98ff9226434bec8",
+        "scripts/company_wiki_narrative_contracts.py": "194649f53fb0d288420f3d2d574fbd8b4ca74986a505f338f02336ebcacf3a53",
+        "scripts/company_wiki_narrative_posix.py": "64e36fcbe5c541e45e3b4ca8afd0f1484fc26d22db55d7e1a40d31a453877c1c",
+        "scripts/company_wiki_narrative_process.py": "2996426ec668b6e8be3a878f5cdcd3004a3cb526b4183ab0d81d84a71b62754b",
+        "scripts/company_wiki_narrative_reader.py": "3893be41d94713a966cb81f7a2a9edb15dafb7759780b5c64763d1d285863c34",
+        "scripts/company_wiki_source_reader_v2.py": "faad30176392975725a3c66f0ab972ae3aa0842b7a34fa092c758efc35f94528",
+        "scripts/company_wiki_source_v2.py": "68c14925f0bfe419dd86a12d3b69d2c73a8222d8a7760ce3ce15a366410ec3d1",
+        "scripts/contracts/company_wiki_original.py": "536389cd97c2f1a5471cb8efc529354e3ac59d1b14f72365638418ce86db47f2",
+        "scripts/contracts/document.py": "1804bba0294a38d6bc55034cdfaac42b6e1e3f87807a6242e9038ce65d7e7f54",
+        "scripts/contracts/source_clock.py": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+        "scripts/contracts/source_diagnostics.py": "d21c7aa9e0f72ec77b9fc9d580d8bb4689b256380170c611fa69f6d0d00bda72",
+        "scripts/filing_upstream_cause.py": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+        "scripts/narrative_source_preparation.py": "d51965272faa99e5601186775f4b467c8caff734d52db3b8c5833fc758cbcafd",
+        "scripts/narrative_summary_observations.py": "614553685d7647e7e75426cfdb22a14668736a2c11f0c53698acb3d1a7961d55",
+        "scripts/narrative_summary_provenance.py": "0ad15963e7182cd0de0d97a5771d1bd3da9c4a42784d2046e9c51a2098fdbd13",
+        "scripts/narrative_summary_usage.py": "e46089e5dccb7ee1552983228018e788aeab2c22593fd1b7fc223c2386b66916",
+        "scripts/publication_registry.py": "30a3541cd3c3d79778c5b473b1b3b755d41ccf5208dafe8cd7996e651352b6a1",
+        "scripts/research/drivers.py": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+        "scripts/research/input_evidence.py": "3b90fb9201c5c90dc9de45f6f6feedddb0827fb40594218b0684723691370d11",
+        "scripts/research/input_targets.py": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+        "scripts/revenue_backtest.py": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+        "scripts/revenue_core.py": "28614d4e670c204d24cd8f65f872a56a29694692dc6a2f180af2f2f779fb8109",
+        "scripts/revenue_forecast.py": "7ad3eb9d7f1aec8bda83f80c342332e0b7643c229c9620784258472163872abb",
+        "scripts/source_preparation.py": "3c4aa95987b3d90fc807e76d9eb564f9797eb2e97cfd3b881758e74043fa2e07"
+      },
+      "filing-fetch": {
+        "scripts/et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+        "scripts/fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+        "scripts/fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+        "scripts/ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+        "scripts/ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+        "scripts/ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+        "scripts/ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+        "scripts/ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+        "scripts/ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+        "scripts/ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+        "scripts/ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+        "scripts/ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+        "scripts/ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+        "scripts/ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+        "scripts/filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+        "scripts/transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+        "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+        "scripts/transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855"
+      },
+      "invest-skills": {
+        "invest-core/references/compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+        "invest-core/scripts/invest_contracts.py": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+        "invest-framework/scripts/bundle_validator.py": "40e4bf8c78fb533aa3bffb2dd246adb85360b2885d6c615c1cdaa89ed3fc03ce",
+        "invest-framework/scripts/company_orchestrator.py": "133fc297751d60c2959b6aad4d9017f355ef72890df7304ed5c9d38498ba61a7"
+      }
+    },
+    "path_counts": {
+      "revenue-forecast": 28,
+      "filing-fetch": 18,
+      "invest-skills": 4
+    },
+    "checks": 150,
+    "mismatches": [],
+    "roots": [
+      "C:/Users/郑曾波/.agents/skills",
+      "C:/Users/郑曾波/.claude/skills",
+      "C:/Users/郑曾波/.codex/skills"
+    ],
+    "method": "read_bytes SHA only, no imports/install/config values"
+  },
+  "protected_rf_wip": {
+    "final_sha256": {
+      "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+      "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+    },
+    "expected_from_original_audit": {
+      "daily_alert.jsonl": {
+        "sha256_at_first_hash": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "sha256_at_close": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "unchanged": true
+      },
+      "monthly_manifest.json": {
+        "sha256_at_first_hash": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+        "sha256_at_close": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+        "unchanged": true
+      },
+      "weekly_alert.jsonl": {
+        "sha256_at_first_hash": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "sha256_at_close": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "unchanged": true
+      },
+      "weekly_manifest.json": {
+        "sha256_at_first_hash": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "sha256_at_close": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "unchanged": true
+      }
+    },
+    "all_match_original": true,
+    "note": "本轮仅对四个明确WIP作最终只读SHA核对，未改写，也不冒称另做了本轮前捕获。"
+  },
+  "evidence_qualification": [
+    "R7-RF-independent原29当前28一致：唯一变更test_r1_narrative_availability.py由R7-RF-CI-oracle-followup证实2048旧oracle迁移，5P与最终e44c7e97精确CI覆盖。初审收据不冒签后续字节。",
+    "Invest E2E独审11/11、FF daily独审5/5当前仍与其冻结SHA完全一致。",
+    "旧作者报告的pending状态是历史冻结窗口；当前状态由实际source/call chain＋后续独审/commit/精确CI/部署共同判断，不改历史。",
+    "已有final-closure记录四仓精确CI绿，本轮只核对RF/FF/Invest当前HEAD相同，不重新联网查询或执行CI。",
+    "此核对未重复已绿测试；新增报告是checklist核验，不是新的真实公司验收收据。"
+  ],
+  "findings": [],
+  "non_blocking_documentation_notes": [
+    "publication_registry.register_publication旧docstring仍写Raises RegistryError on failure，实际IO路径已返回unavailable诊断；不是当前有效材料许可。",
+    "RF .githooks/pre-push旧注释说CI/hook同一behavior set，实际daily12与显式CI41已分开；注释措辞可日后顺手整理，不据此恢复重型push。"
+  ],
+  "method": {
+    "codegraph": "按跨仓projectPath尝试查核心symbol无结果，未初始化/改索引；以原报告指向的当前顶层源码逐段核对，未使用历史.planning镜像作产品依据。",
+    "native_search": "已知源码内literal定位；三仓真实Git只读log/config；原report与current bytes独立核对。",
+    "test_execution": false,
+    "originals": false,
+    "keys_or_secret_environment_values": false,
+    "paid_calls": 0,
+    "downloads": 0,
+    "cross_repo_writes": 0,
+    "git_writes": 0,
+    "temporary_files_created": false
+  },
+  "cleanup": {
+    "status": "NO_SCRATCH_CREATED",
+    "writes": "仅本项指定crossrepo-independent.md/json；无临时执行树需要删除。"
+  },
+  "limitations": [
+    "已绿测试/精确CI和已存合成部署过程用其历史收据；本轮没有重新执行。",
+    "150安装校验覆盖已知R7改动运行/技能说明并集50文件，不声称整套所有仓库/所有配置都与canonical一致。",
+    "真实父链/摘要/缓存/RF采用/公司loop仍OPEN，不能用门禁整改工程完成替代。"
+  ]
+}

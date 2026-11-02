@@ -1,0 +1,621 @@
+{
+  "schema_version": "r7-checklist-tooling-independent/1",
+  "status": "CHECKED_NO_ENGINEERING_ITEM_MISSING_TWO_OPTIONAL_OPEN_REAL_C_OPEN",
+  "observed_at_utc": "2026-11-02T13:36:52.136000+00:00",
+  "reviewer": "ROOTdelegatedread-only tooling checklist; no code implementation inthisnode",
+  "repository": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "head": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+  "local_remote_tracking": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+  "git_fetch_performed": false,
+  "coverage": {
+    "R7_T01_subentry_count": 8,
+    "R7_T01_original_seven_rows": "replay/portability sharedoriginalrow splitinto2actualsubtools; all7originalrowscovered by8items",
+    "R7_T02": true,
+    "R7_SWEEP_T01_to_T04": true,
+    "original_R7_O01": true,
+    "consumer_spy200_suggestion": true,
+    "not_claimed": "Not anew310Pythonfilelinebylineaudit or wholeprojectcompletion."
+  },
+  "summary": {
+    "ENGINEERING_COMPLETE": 13,
+    "KEPT_BY_REASON": 2,
+    "REAL_ACCEPTANCE_OPEN": 1,
+    "OPTIONAL_OPEN": 2,
+    "MISSING": 0
+  },
+  "items": [
+    {
+      "id": "R7-T01.01",
+      "title": "pre-push stdout/stderr日志体积",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "_run selects log_tail=True; bothstreams drain completely while only diagnostic tails are retained. No output-volume125. Real child nonzero, timeout and tree cleanup remain. Current DAILY9 and CI22 are intentionally different.",
+      "source_paths": [
+        "tools/pre_push_gate.py",
+        "src/company_wiki/_bounded_process.py"
+      ],
+      "current_sha256": {
+        "tools/pre_push_gate.py": "e8801268ee4939f4dd987fa758c73aadec8d50e0b0a3e11ccc299051ab63d2cb",
+        "src/company_wiki/_bounded_process.py": "25dc804ddcbb15428238862d2c6a1b46958f96e9add12c96a4b339305c6743d9"
+      },
+      "tests": [
+        "test_tooling_output_policy::test_log_tail_captures_volume_without_changing_success[stdout/stderr]",
+        "test_log_tail_preserves_actual_nonzero_exit_and_timeout",
+        "test_push_runner_chooses_log_capture_not_payload_rejection",
+        "test_pre_push_process_cleanup unchanged"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json",
+        "R7-CWP-daily-feedback-independent.json",
+        "R7-final-engineering-tests-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/pre_push_gate.py": "0ae8ada0856d482e6728e484e4393a1f3eaafea5",
+        "src/company_wiki/_bounded_process.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication."
+    },
+    {
+      "id": "R7-T01.02",
+      "title": "PhaseC prepared／generation／capsule checkpoint",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "Allthreecapture paths use full immutable gzip checkpoints without2MiB/512KiB veto. original_prepare runs once outside observation callback; callback/IOfailure returns sameownerresult with explicit incomplete/event_saved=false whenneeded, never fakes activation or retriesowner.",
+      "source_paths": [
+        "tools/document_understanding_benchmark/phase_c_observer.py"
+      ],
+      "current_sha256": {
+        "tools/document_understanding_benchmark/phase_c_observer.py": "f1f26a65c479df95553242e8834a8a9301a96c5d19b4a82c403c6e8dc525a5c2"
+      },
+      "tests": [
+        "large generation >512KiB and large prepared >2MiB complete/hash controls",
+        "OSError/encoding/event write failure controls in test_tooling_output_policy",
+        "tests/unit/test_phase_c_read_capture.py"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/document_understanding_benchmark/phase_c_observer.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication.",
+      "subentries": [
+        "capture_generation_checkpoint",
+        "capture_prepared_checkpoint payload",
+        "capture_prepared_checkpoint capsule"
+      ],
+      "original_audit_entry": "R7-T01.entries[1]"
+    },
+    {
+      "id": "R7-T01.03",
+      "title": "identity-audit结果输出",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "audit returns complete source/check/count results with no16MiB outputreceipt veto. ActualCLI _emit canonicalizes fullreceipt and _publish writes wholeUTF8 through temp+replace. No receipt_too_large replacement remains. Actual write failure remains explicit; not claimed as a saved file.",
+      "source_paths": [
+        "tools/identity_audit/core.py",
+        "tools/identity_audit/receipt.py",
+        "tools/identity_audit/cli.py"
+      ],
+      "current_sha256": {
+        "tools/identity_audit/core.py": "a7e082aec7b6b7ccc1bed773a1dca31f86630f8ff16b536838d129efa40219e9",
+        "tools/identity_audit/receipt.py": "9a5ab821e0625338c1e67b57473a21235fa02fafaf258126d9f62f47363451a1",
+        "tools/identity_audit/cli.py": "d98b516702faad13ca56c34c919035b8db19aa2d66f9cba61cd58eaafb3e5ba1"
+      },
+      "tests": [
+        "test_identity_receipt_retains_large_audit_results (>16MiB, realaudit seam with synthetic_sourceowner)",
+        "existing identity CLI/source seven-check contracts bound in author211scope"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/identity_audit/core.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/identity_audit/receipt.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/identity_audit/cli.py": "20a43fab696a3dccb9e0886633f3daadae012b92"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication.",
+      "retained": "16MiB INPUT request/resource boundary and sevenactual sourcechecks are distinct from removed outputrepresentationgate."
+    },
+    {
+      "id": "R7-T01.04",
+      "title": "narrative_g2_replay完整报告",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "write_report encodes complete allow_nan=False JSON before opening output; no8MiB gate. Fresh attempt prevents overwriting anotherattempt. Encoding/IOfailure is not claimedwritten.",
+      "source_paths": [
+        "tools/narrative_g2_replay/report.py"
+      ],
+      "current_sha256": {
+        "tools/narrative_g2_replay/report.py": "048c386c2965cf8a43dc76a3f5c2aaa9844e4b7bfc6cfaa6e72be910ebbd4911"
+      },
+      "tests": [
+        "test_complete_replay_report_survives_old_size_threshold[g2]",
+        "test_w08_narrative_g2_replay::test_report_larger_than_eight_mib_is_written_completely",
+        "nestedInfinity/cycle and realIOfailure controls"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json",
+        "R7-tooling-CI-followup-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/narrative_g2_replay/report.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication.",
+      "original_audit_entry": "R7-T01.entries[3] first tool"
+    },
+    {
+      "id": "R7-T01.05",
+      "title": "source_root_portability完整报告",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "write_report likewise writes completeJSON with realencoding/IOfailure, no8MiB ceiling; report/sourceCode binding and attempt provenance remain.",
+      "source_paths": [
+        "tools/source_root_portability/report.py"
+      ],
+      "current_sha256": {
+        "tools/source_root_portability/report.py": "db6989cb171105d753316f4be8f2f070b5e6bbf9570195357f61577ebc3d2ebc"
+      },
+      "tests": [
+        "test_complete_replay_report_survives_old_size_threshold[portability]",
+        "test_invalid_report_is_not_published[portability]",
+        "existing attempt/binding controls"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/source_root_portability/report.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication.",
+      "original_audit_entry": "R7-T01.entries[3] second tool"
+    },
+    {
+      "id": "R7-T01.06",
+      "title": "storage_footprint输出规模",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "enforce_report_budget is compatibility validation only, returns fullpayload/no trimming; write_report acceptsoldmax_bytes butdoesnot rejectbyit. run_scan no longer emitsreport_too_large. Realfile/time/partial/unknownoutput and IOerrors remain.",
+      "source_paths": [
+        "tools/storage_footprint/core.py",
+        "tools/storage_footprint/report.py",
+        "tools/storage_footprint/runner.py"
+      ],
+      "current_sha256": {
+        "tools/storage_footprint/core.py": "50d9b77b5ce09bffc614e98c51868fff6be657cd631ad4c05273c1d8fb8c9217",
+        "tools/storage_footprint/report.py": "44843b17883b9fd41b4e60790aa36e8b992304413c0b40d00d4e06181d6aef2d",
+        "tools/storage_footprint/runner.py": "494f34b73f2e1760b1365c7873f567260e71fc29cb526f55dfd549cd8aa52c60"
+      },
+      "tests": [
+        "test_complete_footprint_preserves_every_error_and_full_locator with max_bytes=1",
+        "tool storage footprint unit/integration cases in author211record; fixtureinputs isolated ratherthan deletingcache"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/storage_footprint/core.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/storage_footprint/report.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/storage_footprint/runner.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication."
+    },
+    {
+      "id": "R7-T01.07",
+      "title": "RAW-DUP明细／头部／报告体积",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "apply_detail_row_cap returns allgroups and0dropped; apply_size_cap recomputes actualserializedsize with no limit and noheaderrefusal. _write_report flipswritten=false onrealJSON/IOexception. Legacydisplayflags no longer truncateevidence; actualscanread/time budgets remain.",
+      "source_paths": [
+        "tools/raw_duplicate_audit/report.py",
+        "tools/raw_duplicate_audit/assessment.py",
+        "tools/raw_duplicate_audit/cli.py"
+      ],
+      "current_sha256": {
+        "tools/raw_duplicate_audit/report.py": "0f49e244ca14e8516da04be02bcb1db28d33130ff6ac665b148c408d1806d7c0",
+        "tools/raw_duplicate_audit/assessment.py": "2f729d00878ae90356177c13510cc6d298619b3565be9728d658ee976491fc4f",
+        "tools/raw_duplicate_audit/cli.py": "ad27beb142ab6e3974b19e2a3929b8b5f3765591c7b07ff86de1516572a04d27"
+      },
+      "tests": [
+        "test_duplicate_report_retains_all_groups_and_diagnostics_without_row_or_byte_gate",
+        "test_duplicate_report_failure_does_not_claim_written[json/io]",
+        "existing rawduplicate readonly/hash/budget tests in author211"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/raw_duplicate_audit/report.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/raw_duplicate_audit/assessment.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/raw_duplicate_audit/cli.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication."
+    },
+    {
+      "id": "R7-T01.08",
+      "title": "cross_market_suite运行观察与JUnit property",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "Runtimeevidence retains allselected documents/errors/jobs/reservations/parsermetadata; runtime_properties parses fullobject, no32KiB/9entry truncation. Runner consumes this actualfunction. Databaseunavailable remainsunknown; reportmetadata not promoted to sourcesemantictruth.",
+      "source_paths": [
+        "tools/cross_market_suite/runtime_evidence.py",
+        "tools/cross_market_suite/runner.py"
+      ],
+      "current_sha256": {
+        "tools/cross_market_suite/runtime_evidence.py": "6261163e71e20bbbb14b10a83011b48a0e7ee0392c6e49d8d37551c0d0f6b98a",
+        "tools/cross_market_suite/runner.py": "f3623c7032c4a13be7459ff82bb7abe40531968b816b00d755f920aedb8b24ae"
+      },
+      "tests": [
+        "test_runtime_evidence_retains_all_documents_and_large_valid_property (>32KiB,15documents)",
+        "existing crossmarket/runtime observation contracts in author211"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/cross_market_suite/runtime_evidence.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/cross_market_suite/runner.py": "ff4307630f7985898341ea07360d030899957e43"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication."
+    },
+    {
+      "id": "R7-T02",
+      "title": "holdout全树clean许可",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "verify_producer records a single status diagnostic (unknownonfailure), doesnot rejectunrelateddirty. Worker validates actual importroot and recordsloadedfileSHA/bytes afterexecution. Requestedproducercommit remains explicitly supplied bythiscommand, not borrowed fromfrozengold.",
+      "source_paths": [
+        "tools/holdout_replay/producer.py",
+        "tools/holdout_replay/worker.py",
+        "tools/holdout_replay/runner.py",
+        "tools/holdout_replay/__main__.py"
+      ],
+      "current_sha256": {
+        "tools/holdout_replay/producer.py": "c23fdd8334cd5e72529dd34b81f26a730fa37d14a7c25bd2803d8d83e3f40bd1",
+        "tools/holdout_replay/worker.py": "f7dcc5a85a45fa8ae3da6e1f1359dd6d8f1e8d837a113a6fc83fd966239c5f0e",
+        "tools/holdout_replay/runner.py": "fc9430ed6924ae9603bee45e373e9263e5a944004d896ef5727af090294c6cdd",
+        "tools/holdout_replay/__main__.py": "2534b4a09ef722701b9ab2e56181ff5e60f579426e889459f852fa11ff6e3c14"
+      },
+      "tests": [
+        "holdout W18 runner boundaries",
+        "test_runtime_file_identity_records_actual_loaded_module_without_clean_tree",
+        "independent dirty/unknownGitdiagnostic and wrongHEAD/import controls"
+      ],
+      "independent_review": [
+        "R7-CWP-tools-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/holdout_replay/producer.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/holdout_replay/worker.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+        "tools/holdout_replay/runner.py": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+        "tools/holdout_replay/__main__.py": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication."
+    },
+    {
+      "id": "R7-SWEEP-T01",
+      "title": "PhaseC已持久成功结果的128KiB观察否决",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "Fullgzip is streamed64KiB atatime to completeSHA/bytecount and strictincrementalUTF8 includingfinaltail; everymatchingevent verified. record_successful_model_observation preservesdurablenative success/usage and recordsINCOMPLETEwithoutretry; aggregateOBSERVATION_INCOMPLETEneveracceptancePASS.",
+      "source_paths": [
+        "tools/document_understanding_benchmark/phase_c_runner.py"
+      ],
+      "current_sha256": {
+        "tools/document_understanding_benchmark/phase_c_runner.py": "3ff59fa819996698041f68e340bf1a7a73961fddba76af026c234ccf5862e589"
+      },
+      "tests": [
+        "author9purecontrols and11integration controls, actualtemporarynative loopback1POST/replay+same/crosscache0extraPOST",
+        "independent9syntheticcapture/state controls incl >300KBmultimembergzip, lateCRC/UTF8, badduplicateevent/prefixSHA"
+      ],
+      "independent_review": [
+        "R7-phase-c-observation-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/document_understanding_benchmark/phase_c_runner.py": "ef3d92a26fce661ab6d6c047f7a01c223d426344"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication.",
+      "real_acceptance": "Productiondocument/H1 andpaidprovider generalization notsignedbythissynthetic engineeringnode; seeR7-REAL-C."
+    },
+    {
+      "id": "R7-SWEEP-T02",
+      "title": "final_material默认表示帽",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "DEFAULT_LIMITS now only actualmax_work_units200000. No default512rows/groups,4096units,4MiBtext veto; explicitcallerallocationsacceptedandmayexceedoldlimits. Sourcealias/text/role/locator validation remains. Actualtools/scripts/src scanfindsdefinition/export only, no built-inproductioncaller.",
+      "source_paths": [
+        "tools/document_understanding_benchmark/final_material.py"
+      ],
+      "current_sha256": {
+        "tools/document_understanding_benchmark/final_material.py": "200627006abd999a0bca57222f39844f31c9e0527e3129b158c6a8ff75273972"
+      },
+      "tests": [
+        "Current test_final_material.py covers large rows/groups/units/text; authorrecords3realrepresentationRED and later targetedfixturecorrection, not an inventedfinalwholegroup count.",
+        "independentactualpublic observe619rows with explicit700, completeSHA; work1/fabricatedtext stillrefused"
+      ],
+      "independent_review": [
+        "R7-ROOT-residual-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/document_understanding_benchmark/final_material.py": "ef3d92a26fce661ab6d6c047f7a01c223d426344"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication.",
+      "test_count_note": "No newnumbers inferred: authorhistory26P1fixtureF then targetfix; independent619-row proof is precisely documented."
+    },
+    {
+      "id": "R7-SWEEP-T03",
+      "title": "完整CI重复Unit节点",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "FullUnit remains once inCI; --fast-contracts-only now selects22nonUnitremainder fromcuratedinventory, not13alreadycoveredUnitnodes. ExplicitfullLocal likewise doesnotappendUnitfiles. DAILY9remainsseparateonechild. Later40oldoraclefailures were fixedbytestownerconsolidation, notrestoringduplicationorremovingcontracts.",
+      "source_paths": [
+        "tools/pre_push_gate.py",
+        ".github/workflows/ci.yml"
+      ],
+      "current_sha256": {
+        "tools/pre_push_gate.py": "e8801268ee4939f4dd987fa758c73aadec8d50e0b0a3e11ccc299051ab63d2cb",
+        ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453"
+      },
+      "tests": [
+        "ROOTCIduplicateRED→GREEN",
+        "actualCI andmainmode scheduling spies",
+        "134→106engineeringtestconsolidation, originalcapabilitymap, realGit4E2Es andall6OCRresource nodes retained",
+        "independent7engineeringchecks plus finalexactCI41450377163"
+      ],
+      "independent_review": [
+        "R7-ROOT-residual-independent.json",
+        "R7-CWP-daily-feedback-independent.json",
+        "R7-final-engineering-tests-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/pre_push_gate.py": "0ae8ada0856d482e6728e484e4393a1f3eaafea5",
+        ".github/workflows/ci.yml": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication."
+    },
+    {
+      "id": "R7-SWEEP-T04",
+      "title": "PDF cold probe固定rev／禁止重跑",
+      "status": "ENGINEERING_COMPLETE",
+      "current_implementation": "Each explicitrequest creates freshcold-rev5-* attemptdir; rev5 isformat/provenance, no existingmarkerrefusal. Oldreceipts/markers unchanged. Realdeadline/CPU4/documenttimeout120/memory and protocolcapture budgets preserved. Diagnosticnotimplicitproduction/deploymentcaller.",
+      "source_paths": [
+        "tools/pdf_runtime_probe/run_cold_probe.py"
+      ],
+      "current_sha256": {
+        "tools/pdf_runtime_probe/run_cold_probe.py": "815b9fd1ca97e60e2618c62a897c63f3532a336247530352bbcb4d63f69e2a48"
+      },
+      "tests": [
+        "test_cold_probe_repeatability2RED→2P",
+        "independent timeoutthennewexplicitrequestsuccess, oldroot+priorattempt bytesretained, eachscratchremoved, actualprofileSHAused"
+      ],
+      "independent_review": [
+        "R7-final-engineering-tests-independent.json"
+      ],
+      "published_source_commits": {
+        "tools/pdf_runtime_probe/run_cold_probe.py": "389a10fb9a3321072ed863e5e55d761043218921"
+      },
+      "publication": "Shared exact CWP CI41450377163 success at389a10fb; currentbbbd3de is its descendant with no changes to these committed sources. No per-entry full log duplication.",
+      "real_acceptance": "No realSDKcoldstartuporOCRaccuracy wasrerunhere; engineeringrepeatabilityonly."
+    },
+    {
+      "id": "R7-O01",
+      "title": "PDF部署同inode重复SHA优化",
+      "status": "OPTIONAL_OPEN",
+      "source_paths": [
+        "tools/pdf_runtime_deployment/deployment.py"
+      ],
+      "current_sha256": {
+        "tools/pdf_runtime_deployment/deployment.py": "add2ed59e4c06ca426996ea5e44b42d3ae5cddaf42878b94b1f934748c398048"
+      },
+      "actual_current": "_reconcile452–481 stillhashessource first, hashesexistingdestination next, thenchecksos.path.samefile. Realhardlinks therefore stillmayreadsameinode twice inoneoperation. CurrentSHA exactlymatchesoriginalaudit.",
+      "implementation": "NOT_IMPLEMENTED",
+      "tests_or_review": "OriginalR7toolingaudit optional_efficiency andcurrentactualsourceconfirmunchanged; nofakedperformancebenefit ornewprobe. Existingcorrectness checks notinvalidated.",
+      "why_optional": "Explicit deploymentoptimization, not normal source-usepermission or aH1blocker. A future singleowner source/stat/handleidentity result canavoid sameoperationduplicatehash while independentlaterverifyremainsmeaningful.",
+      "publication": "Existingimplementation lastchanged946537d0; no claimthatoptimizationwaspublished."
+    },
+    {
+      "id": "R7-SPY-200-SAMPLE-MARKER",
+      "title": "consumer-spy 200条样本完整度标记",
+      "status": "OPTIONAL_OPEN",
+      "source_paths": [
+        "tools/source_root_portability/consumer_spy.py"
+      ],
+      "current_sha256": {
+        "tools/source_root_portability/consumer_spy.py": "347cd8fbb524a9c709779102e9adf908cb7193945df35059e8b377fc66d2fa1b"
+      },
+      "actual_current": "_MAX_LOG_ENTRIES=200; OpenRecorder increments raw_non_reader_opens beforeboundedappend. finalresultopen_log isfirst200samples; no sample_limited fieldexists.",
+      "implementation": "NOT_IMPLEMENTED",
+      "tests_or_review": "Currentcode31/100–110/196–197 andunchanged347cd8f SHA; no freshprobe neededtoseethiscounterorder.",
+      "why_optional": "Bounded diagnostic sampling never refusesbusinesswork; allraw_nonreadercountscontinue. Missing sample_limited limitsdiagnostictransparency only, not evidencequalification. Keepthisfutureimprovementvisible.",
+      "publication": "Currentspy lastsourcecommit5f10af0b; no newmarker featurepublished."
+    },
+    {
+      "id": "R7-KEPT-OWNER-RESOURCES",
+      "title": "真实资源／源真实性／不覆盖保护",
+      "status": "KEPT_BY_REASON",
+      "actual_current": "Default run_bounded payload mode stillenforces realtransport budgets; identityrequestinputsize/work, holdout/sourcebytes/hash/goldmembership, RAW-DUPreadbytes/deadline, footprintfiles/time, coldprobememory/threads/deadline/protocolstreamlimits, targetownership/IOerrors remain withactualowners.",
+      "why": "Theyboundactualwork ordefinetruefile/sourceidentity. Theyare notreceipt/log-sizepermissionsorhumanapproval. No newCLI/approvalchainadded.",
+      "review": "Currentsource read plus R7toolingaudit retained measures andeachboundedengineeringreceipt. A bytecapina protocoltransport isnotgloballydisabledbylog_tail."
+    },
+    {
+      "id": "R7-KEPT-EXPLICIT-PRODUCER",
+      "title": "holdout本次显式producer commit",
+      "status": "KEPT_BY_REASON",
+      "actual_current": "__main__ required --producer-commit reaches verify_producer; itmustmatchrequestedHEAD; frozen sample/gold doesnot dictateoldengineHEAD. Wrongimportroot isrejected byactualruntimeidentity.",
+      "why": "Prevents running a differentrequestedversion; unrelatedWIP isdiagnosticandactualloadedbytesarerecorded. No clean-treegrant ormanualfreeze-approvalreintroduced."
+    },
+    {
+      "id": "R7-REAL-C",
+      "title": "真实H1／新版摘要／缓存恢复／RF实际采用",
+      "status": "REAL_ACCEPTANCE_OPEN",
+      "actual_current": "R7-final-closure.json explicitlyleavesT4parentchainP2,newruntime realC,R4sixissuesandfullcompanyloopOPEN. Syntheticgates, normalpublish andexactCI are engineeringevidence, not realcompanysemantic/economicadoption.",
+      "dependency": "KeepinmainPWF. TwoOPTIONAL_OPEN optimizations aboveare not prerequisites.",
+      "tests_or_review": "ReadR7-final-closure.md/json andboundphaseC/holdout reports; didnotread/runoriginals orpaidproviders inthischecklist."
+    }
+  ],
+  "current_source_sha256": {
+    "tools/pre_push_gate.py": "e8801268ee4939f4dd987fa758c73aadec8d50e0b0a3e11ccc299051ab63d2cb",
+    "src/company_wiki/_bounded_process.py": "25dc804ddcbb15428238862d2c6a1b46958f96e9add12c96a4b339305c6743d9",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "f1f26a65c479df95553242e8834a8a9301a96c5d19b4a82c403c6e8dc525a5c2",
+    "tools/identity_audit/core.py": "a7e082aec7b6b7ccc1bed773a1dca31f86630f8ff16b536838d129efa40219e9",
+    "tools/identity_audit/receipt.py": "9a5ab821e0625338c1e67b57473a21235fa02fafaf258126d9f62f47363451a1",
+    "tools/identity_audit/cli.py": "d98b516702faad13ca56c34c919035b8db19aa2d66f9cba61cd58eaafb3e5ba1",
+    "tools/narrative_g2_replay/report.py": "048c386c2965cf8a43dc76a3f5c2aaa9844e4b7bfc6cfaa6e72be910ebbd4911",
+    "tools/source_root_portability/report.py": "db6989cb171105d753316f4be8f2f070b5e6bbf9570195357f61577ebc3d2ebc",
+    "tools/storage_footprint/core.py": "50d9b77b5ce09bffc614e98c51868fff6be657cd631ad4c05273c1d8fb8c9217",
+    "tools/storage_footprint/report.py": "44843b17883b9fd41b4e60790aa36e8b992304413c0b40d00d4e06181d6aef2d",
+    "tools/storage_footprint/runner.py": "494f34b73f2e1760b1365c7873f567260e71fc29cb526f55dfd549cd8aa52c60",
+    "tools/raw_duplicate_audit/assessment.py": "2f729d00878ae90356177c13510cc6d298619b3565be9728d658ee976491fc4f",
+    "tools/raw_duplicate_audit/report.py": "0f49e244ca14e8516da04be02bcb1db28d33130ff6ac665b148c408d1806d7c0",
+    "tools/raw_duplicate_audit/cli.py": "ad27beb142ab6e3974b19e2a3929b8b5f3765591c7b07ff86de1516572a04d27",
+    "tools/cross_market_suite/runtime_evidence.py": "6261163e71e20bbbb14b10a83011b48a0e7ee0392c6e49d8d37551c0d0f6b98a",
+    "tools/cross_market_suite/runner.py": "f3623c7032c4a13be7459ff82bb7abe40531968b816b00d755f920aedb8b24ae",
+    "tools/holdout_replay/producer.py": "c23fdd8334cd5e72529dd34b81f26a730fa37d14a7c25bd2803d8d83e3f40bd1",
+    "tools/holdout_replay/worker.py": "f7dcc5a85a45fa8ae3da6e1f1359dd6d8f1e8d837a113a6fc83fd966239c5f0e",
+    "tools/holdout_replay/runner.py": "fc9430ed6924ae9603bee45e373e9263e5a944004d896ef5727af090294c6cdd",
+    "tools/holdout_replay/__main__.py": "2534b4a09ef722701b9ab2e56181ff5e60f579426e889459f852fa11ff6e3c14",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "3ff59fa819996698041f68e340bf1a7a73961fddba76af026c234ccf5862e589",
+    "tools/document_understanding_benchmark/final_material.py": "200627006abd999a0bca57222f39844f31c9e0527e3129b158c6a8ff75273972",
+    "tools/pdf_runtime_probe/run_cold_probe.py": "815b9fd1ca97e60e2618c62a897c63f3532a336247530352bbcb4d63f69e2a48",
+    "tools/pdf_runtime_deployment/deployment.py": "add2ed59e4c06ca426996ea5e44b42d3ae5cddaf42878b94b1f934748c398048",
+    "tools/source_root_portability/consumer_spy.py": "347cd8fbb524a9c709779102e9adf908cb7193945df35059e8b377fc66d2fa1b",
+    ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453",
+    ".githooks/pre-push": "f2067d1a0a5b1be7de8690e06fe77aa9c523c19d6f6ff2eb625e9cd6de1fc7a7"
+  },
+  "current_last_source_commits": {
+    "tools/pre_push_gate.py": "0ae8ada0856d482e6728e484e4393a1f3eaafea5",
+    "src/company_wiki/_bounded_process.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/identity_audit/core.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/identity_audit/receipt.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/identity_audit/cli.py": "20a43fab696a3dccb9e0886633f3daadae012b92",
+    "tools/narrative_g2_replay/report.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/source_root_portability/report.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/storage_footprint/core.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/storage_footprint/report.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/storage_footprint/runner.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/raw_duplicate_audit/assessment.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/raw_duplicate_audit/report.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/raw_duplicate_audit/cli.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/cross_market_suite/runtime_evidence.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/cross_market_suite/runner.py": "ff4307630f7985898341ea07360d030899957e43",
+    "tools/holdout_replay/producer.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/holdout_replay/worker.py": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    "tools/holdout_replay/runner.py": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+    "tools/holdout_replay/__main__.py": "f23ba2b7c9551bf6b6b83f9f9d9d25fa9a27489a",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "ef3d92a26fce661ab6d6c047f7a01c223d426344",
+    "tools/document_understanding_benchmark/final_material.py": "ef3d92a26fce661ab6d6c047f7a01c223d426344",
+    "tools/pdf_runtime_probe/run_cold_probe.py": "389a10fb9a3321072ed863e5e55d761043218921",
+    "tools/pdf_runtime_deployment/deployment.py": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+    "tools/source_root_portability/consumer_spy.py": "5f10af0bafafb1c13d26d1afd9821e83dd8b7168",
+    ".github/workflows/ci.yml": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+    ".githooks/pre-push": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c"
+  },
+  "original30_binding": {
+    "same_current_files": 29,
+    "superseded_only": [
+      "tools/pre_push_gate.py"
+    ],
+    "reason": "Prepushlaterdaily9/CI22 policy verifiedagainstactual e8801268 andindependentfinalengineeringmanifest, notsignedbyold840721source."
+  },
+  "review_evidence_files": {
+    "R7-tooling-gate-audit.json": {
+      "sha256": "a26dfda1cf6e57fd9d4c645a8e7acdbccc0c896766fac97d8385dce33f3bb6d5",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-tooling-gate-audit.json"
+    },
+    "R7-tooling-implementation.json": {
+      "sha256": "d520c621f49a1d61e146a0d2ab400bdcbf65cee3c3787fca554a2fd1ad8f551e",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-tooling-implementation.json"
+    },
+    "R7-tooling-freeze-manifest.json": {
+      "sha256": "1dc7488c5fb8a89b0c0da15ab94097f2b177167789972125d227f7d29ea52e91",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-tooling-freeze-manifest.json"
+    },
+    "R7-CWP-tools-independent.json": {
+      "sha256": "dbdbb41100a737a1ecef8d3071e25863fce83b30e0fa546b80889158deb2539a",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-CWP-tools-independent.json"
+    },
+    "R7-tooling-CI-followup.json": {
+      "sha256": "7a13b9615937b332c13ea2c642d26717edb993d650749825ce7e65acd4e45078",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-tooling-CI-followup.json"
+    },
+    "R7-tooling-CI-followup-independent.json": {
+      "sha256": "c1a0dd44b3387db2e2e52e3da2f3db7cf115cf6c650efe5c32c354766c756eae",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-tooling-CI-followup-independent.json"
+    },
+    "R7-final-sweep-tooling.json": {
+      "sha256": "bc70126e39c65902b9d641dffef5e3a59e78451774d69e9f9771cb011e8eb0ec",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-final-sweep-tooling.json"
+    },
+    "R7-phase-c-observation-repair.json": {
+      "sha256": "ad33948f3f374d0ba9526037f7e22fccfa5eaba790b44036ec9a5ea6d08c39d7",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-phase-c-observation-repair.json"
+    },
+    "R7-phase-c-observation-independent.json": {
+      "sha256": "595eaf4eae8c669af5dd1dabd92c809ca298560d275511e62ce8c26274166477",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-phase-c-observation-independent.json"
+    },
+    "R7-ROOT-material-implementation.json": {
+      "sha256": "872e8705bacc9279cfc71b5354b0ffa64ccbe2a94d2a426d818dc0fa06e8975c",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-ROOT-material-implementation.json"
+    },
+    "R7-ROOT-residual-independent.json": {
+      "sha256": "bfaf97c109dcc12854762a327d0eb83172030ae2ca1039c2148f3a9dec752345",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-ROOT-residual-independent.json"
+    },
+    "R7-CWP-daily-feedback-repair.json": {
+      "sha256": "e0d6df1c0ff9fd78472ec0852738636e631059dd0d3ea117a5fac412787d498f",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-CWP-daily-feedback-repair.json"
+    },
+    "R7-CWP-daily-feedback-independent.json": {
+      "sha256": "20b5a0292396dd35e7dfec98cef3ddc31faa9133f76a65542c59db0d3d7768e0",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-CWP-daily-feedback-independent.json"
+    },
+    "R7-CWP-CI-policy-test-consolidation.json": {
+      "sha256": "a8669992138c4fbe523972ba03e9e29f6f406642b78cf69adb4adf78e7a805ef",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-CWP-CI-policy-test-consolidation.json"
+    },
+    "R7-final-engineering-tests-independent.json": {
+      "sha256": "3a2c6aec9bcf0a7b2459cdc0c61f57974464482c58c7de1889c9ca5f8a733e9c",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-final-engineering-tests-independent.json"
+    },
+    "R7-cold-probe-repeatability-repair.json": {
+      "sha256": "749fce4e600cad0922c27243c5ef35de78778f89b2ab1e54d9a71e4ff804dd5e",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-cold-probe-repeatability-repair.json"
+    },
+    "R7-final-closure.json": {
+      "sha256": "161d1353576181f2f5cbce05216c66a1956e2d4a66a68861ac81879aeaff4893",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-final-closure.json"
+    }
+  },
+  "published_ci": {
+    "observation_source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-publication\\final-ci-observation.json",
+    "observation_sha256": "9f2f9bd4bb08008f91fddc72eb0941b4e0ee3a72e6d93261f2b32ef329454452",
+    "observed_at_utc": "2026-11-02T13:20:05.862425+00:00",
+    "run": {
+      "id": 41450377163,
+      "name": "CI",
+      "head_sha": "389a10fb9a3321072ed863e5e55d761043218921",
+      "head_branch": "master",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41450377163",
+      "updated_at": "2026-11-02T13:15:36Z"
+    },
+    "source_head_is_ancestor_of_current": true,
+    "committed_reviewed_source_delta_since_tested_head": [],
+    "note": "HistoricalexactCIreceiptconfirmed; no newnetworkCIqueryclaimed. CurrentHEADisPWFdocdescendant."
+  },
+  "worktree_note": {
+    "reviewed_sources_changed": false,
+    "existing_hook_mode_only": "mode change 100755 => 100644 .githooks/pre-push",
+    "hook_bytes_match_published_and_reviewed": true,
+    "action": "Read-only; no chmod/cleanup/indexmutation. Not a whole-worktreecleanassertion."
+  },
+  "new_tests_executed": [],
+  "reason_no_new_tests": "Eachimplementeditemhascurrentcode/version-boundexistingtests+independentreview+publishedexactCI. OptionalO01/spyabsence isdirectcurrentcodefact. No gaprequiredanewprobe; no repeatsignedgreensuites.",
+  "writes": {
+    "only": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\checklist-verification-20261102\\tooling-independent.md",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\checklist-verification-20261102\\tooling-independent.json"
+    ],
+    "source_test_pwf_git_changed": false,
+    "temp_created": false,
+    "cleanup": "No test/scratch/artifactdirectorycreated; onlythetwoassignedreports written."
+  },
+  "limits": [
+    "No source/model/original/key/paid/API/download/deploy/fetch/checkout/indexchange",
+    "No fullsuite,48sPhaseC or106policy/211toolingrepetition",
+    "No selfissuednewacceptanceforownoldpolicytestimplementation: currentacceptanceusesR7-final-engineering-tests-independent byotherreviewer",
+    "ENGINEERING_COMPLETE means specifiedtechnicalchangeandpublishedcode, not allremainingrealacceptance"
+  ],
+  "root_next": "Retainall18stableitemsinmasterchecklist. KeepO01+spy asOPTIONAL_OPEN; continueexistingrealC/T4R4mainline withoutblockingonoptionaloptimizations."
+}

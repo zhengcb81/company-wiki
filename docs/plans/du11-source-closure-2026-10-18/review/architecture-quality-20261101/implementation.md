@@ -1,6 +1,8 @@
-# 代码质量共因整改细则（候选整合未通过，暂停）
+# 代码质量共因整改细则 — 原工程已发布，真实C继续
 
-入口：[原始审查](README.md) → 主计划`../../task_plan.md`。下方是原A/B/C施工细则；候选虽通过集中小域独审，完整CI63失败，已隔离并正常revert稳定master。最新状态以[台账](implementation-results/STATUS.json)/[收尾](implementation-results/pause-closeout.md)为准；原R4六issue与ghost/period责任不取消。
+入口：[原始审查](README.md) → [逐项核对](implementation-results/checklist-verification-20261102/checklist.md) → 主计划`../../task_plan.md`。原14项工程13项完成、Q11按边界保留；R7及本次新增漏项的当前独审/发布/CI见主CURRENT_STATUS。下方A/B/C保留原实施要求，不是要求重新施工。真实C未完成。
+
+早期候选63F、隔离/revert与之后重施的失败历史均保留在有日期的原报告；它们不再表示当前master暂停或仍待早期候选并线。
 
 ## 原则和接口责任
 
@@ -54,6 +56,6 @@
 
 ## 当前验收与后续状态
 
-候选A/B/R5集中小域独审通过，但完整CI63失败，整体工程验收重开。master正常revert恢复此前稳定实现，candidate已完整留在独立远端分支；Q11接收SHA保留与StockWiki Q09本地并线的独立结果不撤销。原历史失败/通过都按各自范围保留，不用任一小域签全域。
+逐项表覆盖原41正式项和后续补漏，每项都有源码、测试、独审及发布边界。已取消的任意表示许可不能恢复；真正源字节/身份/期间/as-of、引用/数值与实际资源保护按owner保留。StockWiki原Q09与本次wire补修仅签本地主线，未配置remote。
 
-用户恢复后优先按CWP-failed-CI.md在隔离重施分支修整合共因，PR全域CI绿后并线，再继续note结构与C真实H1/摘要/缓存/RF。现在暂停，不重跑收费或扩施工包，不把14项变新许可队列。
+当前下一步：按T4-source-note-parent-plan.md冻结去公司化父链正反例并在来源树owner根修，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。 R4六共因、ghost/period/经济范围、固定公司与泛化责任保持。两个可选非阻断优化单列未做，不用“全完成”吞掉，也不拖住主线。

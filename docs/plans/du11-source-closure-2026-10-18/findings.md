@@ -75,3 +75,15 @@ H1 v4正向intro/12重点已过，实际树父链仍继承前一备注的(4)标�
 ## 2026-11-02 — R7最终集中收口
 
 共用根因：实际资源预算与表示格式/可选诊断混用，且测试多次把旧实现清单视为同一许可。现由数据/预算owner负责正确性与资源、可选附注不反向否决、daily/CI分工、唯一policy测试owner；删除重复而保真正反控。H1正向intro/12重点不代表祖先链正确，T4仍OPEN。
+
+
+## 2026-11-02 — 整改清单逐项复核
+
+用户要求逐项核对 Q01–Q14、R7核心/工具/跨仓及交接增量。ROOT核当前实现与证据，两独立复核分开看原质量清单和跨仓清单；不重复全量/收费。已发现原 implementation.md 和 R7 主计划当前描述过期，将统一入口并保留历史失败。完整对照表归 review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/。
+
+
+## 2026-11-02 — 整改清单逐项收口
+
+正式41项全部映射：40工程完成、Q11按边界保留；T01逐个核8入口。独立核对发现两仓SourceExport16MiB后置门，ROOT继续查出paid response与run binding各256KiB隐藏顶帽，已同owner根修。CWP2F1P/Stock1F及binding1F历史保存；修后54P/13s、33P/5.21s、ledger23P/5.21s，loopback大body中断unknown→新lease/无凭证恢复1POST。独审=True；本次新源码精确CI成功。2可选优化保未做，T4/真实C/R4/公司loop保持。已更正原README/implementation暂停、R7在途与STATUS旧daily167的当前表述，历史报告保留。
+
+StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓/StockWiki授权、clean状态和精确2文件证据后原动作获准，没有换通道或再次问用户。只读定位时若干旧文件名已不存在，改用CodeGraph已定位文件和实际清单；未据缺文件推断功能未实现。

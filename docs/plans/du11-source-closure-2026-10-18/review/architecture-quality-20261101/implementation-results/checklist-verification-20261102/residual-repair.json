@@ -1,0 +1,98 @@
+{
+  "schema_version": "r7-checklist-residual-repair/1",
+  "status": "FROZEN_AWAITING_INDEPENDENT_REVIEW",
+  "observed_at_utc": "2026-11-02T13:40:03.672462+00:00",
+  "items": [
+    {
+      "id": "R7-RESIDUAL-V2-WIRE-CAP",
+      "behavior": "Remove post-load16MiB decoder gate in both public consumers; retain exact version/schema/hash/text/locator and actual transport budgets. StockWiki unused depth counter removed; true decoder errors still named."
+    },
+    {
+      "id": "R7-RESIDUAL-PAID-RESPONSE-CAP",
+      "behavior": "Use actual configured HTTP body budget for durable response artifacts. No extra262144 Pin/constructor cap or4096receipt permission; preserve real explicit put/read limits, byteSHA/request/pin binding, preflight, unknown fee/no-resend."
+    }
+  ],
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_contract\\source_export_v2.py": "0f22bbbb96507ab40c7afda85e28b815616a05fc912a0f00e4c1c05cb7ab8a8f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_paid_response.py": "ddae70c75780bec7e0eaee9ca7e5f5ca96eb928c649e806045e1c3fedf9f38d2",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\contract\\test_source_export_v2.py": "6005b44091f63f0016238d70bef3233677309fc535250eb9b85a5f74b5139905",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\du11_paid_response\\test_paid_response.py": "dfc734bb042b1fa12b918c30bf56ee12164fdaeb39fe280cf27fc8f15b24257d",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\integration\\test_du11_paid_response_recovery.py": "e42212c0a62960d3753181516ef5e6f5a8ac073778934da9245b237416ee2b40",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_wire.py": "725aa5506c7cef415083e08fea0c5fcc369f0aa7fc3e0772da0d0f75be4a482c",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\tests\\test_source_export_v2_reader.py": "c0537228e87e6dc5cba863e4e6cb8e35d0e29f28bf89f60f517dc09cbee9b2e6"
+  },
+  "source_inspection": {
+    "worker_factory": "narrative_worker_factory.py forwards model.max_response_bytes unchanged to both _BudgetedObjects and PaidResponseArtifacts, with same original scratch/persistent preflight.",
+    "transport": "StockWiki VerifiedOpenTransport still bounds actual channel reads and kills/reaps subprocess tree."
+  },
+  "test_receipts": {
+    "cwp-residual-checklist-red": {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "checklist-red",
+      "targets": [
+        "tests/contract/test_source_export_v2.py::test_v2_json_loader_does_not_add_a_post_read_size_permission",
+        "tests/integration/test_du11_paid_response_recovery.py"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-34137a",
+      "initially_absent": true,
+      "returncode": 1,
+      "elapsed_s": 8.122,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true
+    },
+    "sk-residual-checklist-red": {
+      "repo": "C:\\Users\\郑曾波\\Projects\\StockWiki",
+      "phase": "checklist-red",
+      "targets": [
+        "tests/test_source_export_v2_reader.py::test_loaded_json_has_no_second_representation_size_gate"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-ef623a",
+      "initially_absent": true,
+      "returncode": 1,
+      "elapsed_s": 0.744,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true
+    },
+    "cwp-residual-checklist-green": {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "checklist-green",
+      "targets": [
+        "tests/contract/test_source_export_v2.py",
+        "tests/unit/du11_paid_response/test_paid_response.py",
+        "tests/integration/test_du11_paid_response_recovery.py"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-918e89",
+      "initially_absent": true,
+      "returncode": 0,
+      "elapsed_s": 14.143,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true
+    },
+    "sk-residual-checklist-green": {
+      "repo": "C:\\Users\\郑曾波\\Projects\\StockWiki",
+      "phase": "checklist-green",
+      "targets": [
+        "tests/test_source_export_v2_reader.py",
+        "tests/test_source_export_v2_bounded_transport.py"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-13cfb3",
+      "initially_absent": true,
+      "returncode": 0,
+      "elapsed_s": 5.892,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true
+    }
+  },
+  "test_history": "CWP2F1P ->54P; StockWiki1F ->33P. Actual loopback1POST/crash/unknown/new lease/credentials absent/full replay; no actual provider or company facts acceptance.",
+  "logs": {
+    "cwp-residual-checklist-red": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7rt-34137a\\\\pytest\", \"requested_basetemp_len\": 57, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 3 items\n\ntests\\contract\\test_source_export_v2.py F                                [ 33%]\ntests\\integration\\test_du11_paid_response_recovery.py .F                 [100%]\n\n================================== FAILURES ===================================\n________ test_v2_json_loader_does_not_add_a_post_read_size_permission _________\ntests\\contract\\test_source_export_v2.py:400: in test_v2_json_loader_does_not_add_a_post_read_size_permission\n    loaded = _v2_module().SourceExportBundleV2.from_json(raw)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\source_contract\\source_export_v2.py:77: in from_json\n    raise SourceExportError(\"v2 bundle exceeds read limit\")\nE   company_wiki.source_contract.source_export.SourceExportError: v2 bundle exceeds read limit\n_ test_complete_paid_body_survives_decoder_crash_and_new_lease_without_resend[above-old-paid-artifact-cap] _\ntests\\integration\\test_du11_paid_response_recovery.py:89: in test_complete_paid_body_survives_decoder_crash_and_new_lease_without_resend\n    caller(env).generate(env.context(), REQUEST)\n    ^^^^^^^^^^^\ntests\\unit\\du11_paid_response\\test_paid_response.py:201: in caller\n    paid_responses=PaidResponseArtifacts(\nsrc\\company_wiki\\automation\\narrative_paid_response.py:81: in __init__\n    raise ValueError(\"response artifact bound must respect the HTTP body cap\")\nE   ValueError: response artifact bound must respect the HTTP body cap\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-34137a\\results.xml -\n=========================== short test summary info ===========================\nFAILED tests/contract/test_source_export_v2.py::test_v2_json_loader_does_not_add_a_post_read_size_permission\nFAILED tests/integration/test_du11_paid_response_recovery.py::test_complete_paid_body_survives_decoder_crash_and_new_lease_without_resend[above-old-paid-artifact-cap]\n========================= 2 failed, 1 passed in 6.33s =========================\n",
+    "sk-residual-checklist-red": "F                                                                        [100%]\n================================== FAILURES ===================================\n___________ test_loaded_json_has_no_second_representation_size_gate ___________\ntests\\test_source_export_v2_reader.py:475: in test_loaded_json_has_no_second_representation_size_gate\n    bundle = load_bundle(raw)\n             ^^^^^^^^^^^^^^^^\nstockwiki\\_source_reader_v2_bundle.py:97: in load_bundle\n    wire = _parse_strict_json(raw)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nstockwiki\\_source_reader_v2_wire.py:240: in _parse_strict_json\n    raise SourceExportV2Error(\"bundle_over_limit\")\nE   stockwiki._source_reader_v2_wire.SourceExportV2Error: bundle_over_limit\n=========================== short test summary info ===========================\nFAILED tests/test_source_export_v2_reader.py::test_loaded_json_has_no_second_representation_size_gate\n1 failed in 0.32s\n",
+    "cwp-residual-checklist-green": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7rt-918e89\\\\pytest\", \"requested_basetemp_len\": 57, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 54 items\n\ntests\\contract\\test_source_export_v2.py .........................        [ 46%]\ntests\\unit\\du11_paid_response\\test_paid_response.py .................... [ 83%]\n.......                                                                  [ 96%]\ntests\\integration\\test_du11_paid_response_recovery.py ..                 [100%]\n\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-918e89\\results.xml -\n============================= 54 passed in 13.00s =============================\n",
+    "sk-residual-checklist-green": ".................................                                        [100%]\n33 passed in 5.21s\n"
+  },
+  "originals_modified": 0,
+  "external_model_calls": 0,
+  "downloads": 0,
+  "approval_observation": "First StockWiki test write rejected on other-owner scope. Same action accepted after providing persistent explicit StockWiki/cross-repo authorization, tracked-clean worktree and exact2file scope. No alternate execution channel used.",
+  "remaining": "Independent review, normal targeted commits/push and applicable CI. Original Q14+R7 checklist comparison, optional2 and all realC/loop obligations remain separately tracked."
+}

@@ -1,0 +1,1481 @@
+{
+  "schema_version": "remediation-checklist-verification/1",
+  "observed_at_utc": "2026-11-02T14:05:35.948821+00:00",
+  "status": "COMPLETE_WITH_REPAIRED_RESIDUALS_TWO_OPTIONAL_AND_REAL_ACCEPTANCE_OPEN",
+  "coverage": {
+    "formal_source_documents": {
+      "../R7-core-gate-audit.json": [
+        "R7-G1",
+        "R7-G2",
+        "R7-G3",
+        "R7-G4",
+        "R7-G5"
+      ],
+      "../R7-tooling-gate-audit.json": [
+        "R7-T01",
+        "R7-T02"
+      ],
+      "../R7-crossrepo-gate-audit.json": [
+        "RF-01",
+        "RF-02",
+        "RF-03",
+        "RF-04",
+        "RF-05"
+      ],
+      "../R7-final-sweep-core.json": [
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "../R7-final-sweep-tooling.json": [
+        "R7-SWEEP-T01",
+        "R7-SWEEP-T02",
+        "R7-SWEEP-T03",
+        "R7-SWEEP-T04"
+      ],
+      "../R7-final-sweep-crossrepo.json": [
+        "SW-INV-QUOTE",
+        "SW-RF-QUOTES",
+        "SW-RF-DRIVERS",
+        "SW-FF-CONFIG",
+        "SW-LOCAL-DIAGNOSTICS",
+        "SW-RF-AVAILABILITY-TEXT",
+        "SW-E2E-FIXTURE-PERMIT",
+        "SW-INV-REPEAT"
+      ],
+      "../../README.md (original Q table)": [
+        "Q01",
+        "Q02",
+        "Q03",
+        "Q04",
+        "Q05",
+        "Q06",
+        "Q07",
+        "Q08",
+        "Q09",
+        "Q10",
+        "Q11",
+        "Q12",
+        "Q13",
+        "Q14"
+      ]
+    },
+    "formal_item_count": 41,
+    "formal_dispositions": {
+      "ENGINEERING_COMPLETE": 40,
+      "KEPT_BY_REASON": 1
+    },
+    "formal_missing": [],
+    "T01_child_count": 8,
+    "new_residual_count": 3,
+    "optional_open": [
+      "R7-O01",
+      "R7-SPY-200-SAMPLE-MARKER"
+    ],
+    "note": "Rows also include child entries, retained boundaries and integration followups. Their sum is not a count of independent bugs or a project completion percentage."
+  },
+  "dossiers": [
+    "q-items-independent.json",
+    "core-and-integration.json",
+    "tooling-independent.json",
+    "crossrepo-independent.json",
+    "residual-repair.json",
+    "residual-repair-independent.json",
+    "residual-binding-repair.json",
+    "residual-binding-independent.json"
+  ],
+  "dossier_sha256": {
+    "q-items-independent.json": "f940dbe3ef06c93a8eb573499adb2afbbbb7d15c626fc59241a9951cdd9c225d",
+    "core-and-integration.json": "0023811e83dba3f616b04e835e29840882e027be752135eef64bc1096858ef2e",
+    "tooling-independent.json": "f8f19ebe95a117fc78fbb8d0b488c17ff2e54e3dc477894d3c5b0c941af62b74",
+    "crossrepo-independent.json": "ac057541fa3d417092454632828bc263c9b88d7481c8c5df3a10da916cb53032",
+    "residual-repair.json": "443f9afa86b0d723eb052c362fcf1de43ad2539b44035d41b041ea8d989e3802"
+  },
+  "items": [
+    {
+      "id": "Q01",
+      "title": "陌生行业完整经营陈述不因有限动词/对象词表被丢弃；可读资格与事件/量值/发行人证明分轴。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE; REAL_ACCEPTANCE_OPEN",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q01",
+      "sources": [
+        "src/company_wiki/source_catalog/narrative_source_passage.py",
+        "src/company_wiki/source_catalog/narrative_business_policy.py",
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "src/company_wiki/document_understanding/statement_grammar/__init__.py"
+      ],
+      "tests": [
+        "tests/unit/du11_production/test_source_readability_generalization.py",
+        "tests/unit/du11_production/test_source_semantic_axes.py",
+        "tests/unit/du11_production/test_source_preparation_axes.py",
+        "tests/unit/du11_production/test_source_argument_semantics.py",
+        "tests/unit/test_narrative_select_handler.py"
+      ],
+      "remaining_boundary": "原70旧期待恢复；R5最终28唯一场景限定独审及精确完整CI通过，不借旧R3/R4局部PASS签全域。H1v4父链P2、新摘要/恢复/RF仍OPEN；POS不证明任意行业现实真伪。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q02",
+      "title": "实际阅读算法/数据/runtime依赖变化使真实缓存失效，不适用格式变化不误伤。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE; REAL_ACCEPTANCE_OPEN",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q02",
+      "sources": [
+        "src/company_wiki/source_catalog/reading_recipe.py",
+        "src/company_wiki/source_catalog/narrative_decision_inventory.py",
+        "src/company_wiki/automation/narrative_generation.py"
+      ],
+      "tests": [
+        "tests/unit/document_understanding_selection/test_reading_recipe_closure.py",
+        "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+        "tests/unit/du11_production/test_cache_identity.py",
+        "tests/unit/test_shared_reading_cache_precheck.py"
+      ],
+      "remaining_boundary": "真实cache函数的PDF/text/data/runtime反例通过；不是任意动态Python依赖证明，新增跨边界算法需owner声明。新版真实付费artifact缓存恢复仍待C。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q03",
+      "title": "精确公司查询不先受全库同文种20k计数拖累；保纠错/别名/冲突候选超集及最终语义。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q03",
+      "sources": [
+        "src/company_wiki/source_catalog/identity_candidates.py",
+        "src/company_wiki/source_catalog/source_reader.py",
+        "src/company_wiki/source_catalog/service.py"
+      ],
+      "tests": [
+        "tests/unit/test_source_identity_candidate_projection.py",
+        "tests/contract/test_source_version_reader.py",
+        "tests/unit/test_source_facts.py"
+      ],
+      "remaining_boundary": "15新候选例和最终owner反控已独审；旧库首次writer backfill/生产规模性能未测，不冒已迁移或全库零成本。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q04",
+      "title": "空间增量归实际run；轮询不反复扫共享CAS；并发/崩溃不能降账或放大额度。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q04",
+      "sources": [
+        "src/company_wiki/automation/narrative_run_store.py",
+        "src/company_wiki/automation/narrative_batch.py",
+        "src/company_wiki/automation/narrative_worker_factory.py"
+      ],
+      "tests": [
+        "tests/unit/test_narrative_storage_ownership.py",
+        "tests/unit/test_automation_migrations.py",
+        "tests/unit/test_automation_migrations_v2.py",
+        "tests/unit/test_automation_migrations_v3.py",
+        "tests/integration/test_narrative_runtime_e2e.py"
+      ],
+      "remaining_boundary": "首审两个真实并发P2保留；R2独立5例和作者raw-v1 loopback通过。共享WAL不伪精确归run；旧floor是保守历史量，不是物理FS精确计量或生产吞吐基准。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q05",
+      "title": "去除旧parser-name全范围DELETE，不让一次性legacy prune删除当前引用证据。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE_BY_RETIREMENT",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q05",
+      "sources": [
+        "tools/legacy_storage/spans.py",
+        "tools/legacy_storage_retirement.py"
+      ],
+      "tests": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_completed_span_prune_never_opens_current_catalog",
+        "tests/unit/test_maintenance_quality_remediation.py::test_completed_prune_cli_never_loads_config"
+      ],
+      "remaining_boundary": "没有重删生产span/原件或做完整恢复演练；保旧S5史料、现行只读inventory/vacuum，不承诺通用自动prune。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q06",
+      "title": "CAS put现存对象及FileExists竞争分支都按expected_size+1有界验证。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q06",
+      "sources": [
+        "src/company_wiki/source_catalog/narrative_artifact_store.py"
+      ],
+      "tests": [
+        "tests/unit/test_narrative_storage_ownership.py::test_cas_existing_object_validation_never_reads_beyond_input_bound",
+        "tests/unit/test_narrative_storage_ownership.py::test_cas_reused_object_is_not_rewritten"
+      ],
+      "remaining_boundary": "小损坏/竞争/重复例及host验证已过；不冒任意大小OOM压力测试。WinError5为sandbox hardlink限制，未修改ACL/原子语义换绿。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q07",
+      "title": "退役硬机器目录复制及默认真实公司/原地清水印脚本，不依赖sitecustomize。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE_BY_RETIREMENT",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q07",
+      "sources": [
+        "scripts/copy_docs.py",
+        "scripts/clean_watermarks.py"
+      ],
+      "tests": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_obsolete_copy_and_cleanup_cli_retired_before_arguments"
+      ],
+      "remaining_boundary": "无需另造复制owner或“解锁”脚本；新采集走来源catalog。退役旧writer不代表所有历史脚本逐行重写。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q08",
+      "title": "架构测试用AST覆盖relative/qualified/alias/__init__/常量动态import；注释不误报，owner豁免不能basename绕过。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE_DEFINED_STATIC_SCOPE",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q08",
+      "sources": [
+        "src/company_wiki/source_catalog/architecture_gate.py"
+      ],
+      "tests": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_dependency_check_catches_import_forms_in_package_initializer",
+        "tests/unit/test_maintenance_quality_remediation.py::test_dependency_check_ignores_quotes_and_comments",
+        "tests/unit/test_maintenance_quality_remediation.py::test_nested_config_basename_cannot_exempt_root_conditional",
+        "tests/unit/test_maintenance_quality_remediation.py::test_current_source_catalog_has_no_research_imports",
+        ".github/workflows/ci.yml::Unit tests"
+      ],
+      "remaining_boundary": "literal-import AST与已知root条件不是任意动态代码/全仓无硬编码证明；compat旧flag/bridge检查仍是有限历史规则，未夸成全部语义验证。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q09",
+      "title": "StockWiki在读取期流式限制stdout/stderr并回收超额/超时进程树，避免全量缓冲。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE_LOCAL_MAIN; NO_REMOTE_CONFIGURED",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q09",
+      "sources": [
+        "stockwiki/_source_reader_v2_transport.py",
+        "stockwiki/_narrative_process.py",
+        "stockwiki/_narrative_process_tree.py"
+      ],
+      "tests": [
+        "StockWiki/tests/test_source_export_v2_bounded_transport.py",
+        "StockWiki真实CWP TXT verified-open/CLI既有E2E"
+      ],
+      "remaining_boundary": "381811e5已在当前StockWiki master祖先；历史无remote，不能称远端push/CI。独立2超额+孙进程marker和作者真实TXT端口已过，非全仓研究语义验收。新post-load16MiB另列，不混同原流式风险。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q10",
+      "title": "纯SourceExport不强绑具体SourceVersionReader；writer不经高层reader构建身份。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q10",
+      "sources": [
+        "src/company_wiki/source_contract/source_version.py",
+        "src/company_wiki/source_contract/source_export_v2.py",
+        "src/company_wiki/source_catalog/source_references.py",
+        "src/company_wiki/source_catalog/canonical_writer.py"
+      ],
+      "tests": [
+        "tests/unit/test_source_contract_reader_port.py",
+        "tests/contract/test_source_export_v2.py",
+        "tests/contract/test_source_export_v2_cli.py"
+      ],
+      "remaining_boundary": "替身backend/root relocation/坏bytes反控已有证据；新from_json16MiB是独立表示门遗漏，不是反向实现依赖未去除。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q11",
+      "title": "评估同次bytes重复SHA，只合并真正同owner热点；不删公开接收/跨时间复核。",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q11",
+      "sources": [
+        "src/company_wiki/source_contract/source_export_v2.py",
+        "src/company_wiki/source_contract/source_version.py"
+      ],
+      "tests": [
+        "tests/unit/test_source_contract_reader_port.py::test_public_backend_cannot_attest_forged_bytes_using_correct_identity_fields",
+        "tests/unit/test_source_contract_reader_port.py::test_export_accepts_delegating_read_backend_without_concrete_inheritance"
+      ],
+      "remaining_boundary": "不是所有重复CPU已消除；微观察不冒全链性能结论。将来证明同owner热点再局部优化。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q12",
+      "title": "按原文材料、依赖闭合、准入与预算组合阶段拆责任，保单次准备和旧facade。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE_DEFINED_REFACTOR_SCOPE; REAL_ACCEPTANCE_OPEN",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q12",
+      "sources": [
+        "src/company_wiki/source_catalog/narrative_native_materials.py",
+        "src/company_wiki/source_catalog/narrative_reading_admission.py",
+        "src/company_wiki/source_catalog/narrative_reading.py"
+      ],
+      "tests": [
+        "tests/unit/document_understanding_selection/test_reading_native_material_mapping.py",
+        "tests/unit/document_understanding_selection/test_source_support_use.py",
+        "tests/unit/du11_production/test_source_preparation_axes.py",
+        "tests/unit/test_narrative_select_handler.py"
+      ],
+      "remaining_boundary": "_candidates仍679行、prepare_native_materials约410行，不夸成所有复杂性消失；独审按责任边界/行为而非行数签。真实来源父链T4仍OPEN。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q13",
+      "title": "reader CLI区分invalid_request与环境/存储unavailable，坏hash在catalog前验证且错误pathless。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q13",
+      "sources": [
+        "src/company_wiki/source_catalog/source_reader_cli.py"
+      ],
+      "tests": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_reader_bad_arguments_are_invalid_request",
+        "tests/unit/test_maintenance_quality_remediation.py::test_reader_bad_digest_is_invalid_before_database_access",
+        "tests/unit/test_maintenance_quality_remediation.py::test_reader_missing_configuration_remains_unavailable"
+      ],
+      "remaining_boundary": "改善诊断，不声称自动修复真实配置/存储；合法不可用拒绝没有改成功。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "Q14",
+      "title": "正常scan/preview不依赖旧snapshot/伪两轮零diff；旧运维CLI退役，历史回放兼容。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "q-items-independent.json",
+      "evidence_item_id": "Q14",
+      "sources": [
+        "src/company_wiki/source_catalog/service.py",
+        "src/company_wiki/source_catalog/scanner.py",
+        "src/company_wiki/source_catalog/compat_scan_rollout.py",
+        "src/company_wiki/source_catalog/cli.py"
+      ],
+      "tests": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_explicit_v2_preview_needs_no_rollout_rounds",
+        "tests/unit/test_maintenance_quality_remediation.py::test_current_scan_does_not_load_rollout_snapshot",
+        "tests/unit/test_maintenance_quality_remediation.py::test_historical_rollout_cli_retires_before_configuration"
+      ],
+      "remaining_boundary": "兼容library/格式存在不是当前许可；没有误删合法source/narrative原子activation和恢复，也没有删历史assertion。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-G1",
+      "title": "多层成功结果/可选诊断的固定尺寸和深度",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "R7-G1",
+      "sources": [
+        "src/company_wiki/automation/json_tree.py",
+        "src/company_wiki/automation/narrative_contracts.py",
+        "src/company_wiki/automation/narrative_transport_contracts.py",
+        "src/company_wiki/automation/narrative_transport.py",
+        "src/company_wiki/automation/narrative_evidence_view.py",
+        "src/company_wiki/source_catalog/narrative_transport_cli.py"
+      ],
+      "tests": [
+        "tests/unit/test_narrative_representation_no_gate.py",
+        "tests/unit/test_narrative_reading_transport.py",
+        "tests/unit/test_narrative_select_handler.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-G2",
+      "title": "自动坏缓存不应否决新任务",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "R7-G2",
+      "sources": [
+        "src/company_wiki/automation/narrative_generation.py",
+        "src/company_wiki/automation/narrative_batch.py"
+      ],
+      "tests": [
+        "tests/unit/test_narrative_representation_no_gate.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-G3",
+      "title": "同一个原生成员内未知子句连坐已证子句",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "R7-G3",
+      "sources": [
+        "src/company_wiki/source_catalog/narrative_source_passage.py",
+        "src/company_wiki/source_catalog/narrative_reading_admission.py"
+      ],
+      "tests": [
+        "tests/unit/du11_production/test_same_unit_independent_material.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-G4",
+      "title": "同次已验证源buffer和metadata重复验证",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "R7-G4",
+      "sources": [
+        "src/company_wiki/automation/narrative_source_guard.py",
+        "src/company_wiki/automation/narrative_select.py",
+        "src/company_wiki/automation/narrative_verify.py"
+      ],
+      "tests": [
+        "tests/unit/test_verified_source_operation.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-G5",
+      "title": "几何导航多个32/64/4096任意天花板",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "R7-G5",
+      "sources": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "src/company_wiki/document_understanding/geometry_intent/contracts.py",
+        "src/company_wiki/document_understanding/geometry_intent/planner.py"
+      ],
+      "tests": [
+        "tests/unit/du11_reading_plan/test_native_navigation_resource_limits.py",
+        "tests/unit/du9_geometry_planner/test_b_contract_counterexamples.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "F1",
+      "title": "batch100和输出2MiB隐藏顶帽",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "F1",
+      "sources": [
+        "src/company_wiki/automation/narrative_batch_request.py",
+        "src/company_wiki/automation/narrative_batch.py"
+      ],
+      "tests": [
+        "tests/unit/test_r7_final_core_simplification.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "F2",
+      "title": "provenance扩展16KiB许可",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "F2",
+      "sources": [
+        "src/company_wiki/source_catalog/canonical_writer.py"
+      ],
+      "tests": [
+        "tests/unit/test_r7_final_core_simplification.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "F3",
+      "title": "原文C:/file://被误判为物理存储路径",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "F3",
+      "sources": [
+        "src/company_wiki/automation/json_tree.py",
+        "src/company_wiki/automation/narrative_contracts.py",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_model_scoped.py"
+      ],
+      "tests": [
+        "tests/unit/test_r7_final_core_simplification.py",
+        "tests/unit/test_narrative_select_handler.py",
+        "tests/unit/test_narrative_summarize_handler.py",
+        "tests/unit/test_source_facts.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "ADD-AVAILABILITY",
+      "title": "availability metadata同一父预算和终态取消/deadline",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "ADD-AVAILABILITY",
+      "sources": [
+        "src/company_wiki/source_catalog/source_availability.py",
+        "src/company_wiki/source_catalog/local_inventory.py",
+        "src/company_wiki/source_catalog/local_reconcile.py",
+        "src/company_wiki/source_catalog/assertion_service.py",
+        "src/company_wiki/source_catalog/resolver.py"
+      ],
+      "tests": [
+        "tests/unit/test_r7_availability_budget_owner.py",
+        "tests/contract/test_source_availability.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "ADD-MODEL-FINAL",
+      "title": "模型真实读取成功后又按128KiB否决",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "ADD-MODEL-FINAL",
+      "sources": [
+        "src/company_wiki/automation/narrative_http_model.py",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/models.py"
+      ],
+      "tests": [
+        "tests/unit/test_narrative_representation_no_gate.py",
+        "tests/unit/test_narrative_post_model_failure_diagnostics.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "ADD-EXTRACTIVE",
+      "title": "extractive默认56KiB衍生顶帽",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "ADD-EXTRACTIVE",
+      "sources": [
+        "src/company_wiki/automation/narrative_model_extractive.py"
+      ],
+      "tests": [
+        "tests/unit/test_narrative_extractive_runtime.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "ADD-EXECUTION",
+      "title": "summary execution/result完整收据",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "ADD-EXECUTION",
+      "sources": [
+        "src/company_wiki/automation/narrative_summary_execution.py",
+        "src/company_wiki/automation/narrative_summary_assessment.py"
+      ],
+      "tests": [
+        "tests/unit/test_summary_receipt_representation.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "ROOT-OBSERVER",
+      "title": "原300KB/16KB/32祖先观察门",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "core-and-integration.json",
+      "evidence_item_id": "ROOT-OBSERVER",
+      "sources": [
+        "tools/source_case_runner.py",
+        "tools/source_case_receipt.py",
+        "tools/source_case_checks.py"
+      ],
+      "tests": [
+        "tests/unit/test_source_case_runner.py",
+        "tests/unit/test_source_case_receipt.py"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01.01",
+      "title": "pre-push stdout/stderr日志体积",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T01.01",
+      "sources": [
+        "tools/pre_push_gate.py",
+        "src/company_wiki/_bounded_process.py"
+      ],
+      "tests": [
+        "test_tooling_output_policy::test_log_tail_captures_volume_without_changing_success[stdout/stderr]",
+        "test_log_tail_preserves_actual_nonzero_exit_and_timeout",
+        "test_push_runner_chooses_log_capture_not_payload_rejection",
+        "test_pre_push_process_cleanup unchanged"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01.02",
+      "title": "PhaseC prepared／generation／capsule checkpoint",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T01.02",
+      "sources": [
+        "tools/document_understanding_benchmark/phase_c_observer.py"
+      ],
+      "tests": [
+        "large generation >512KiB and large prepared >2MiB complete/hash controls",
+        "OSError/encoding/event write failure controls in test_tooling_output_policy",
+        "tests/unit/test_phase_c_read_capture.py"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01.03",
+      "title": "identity-audit结果输出",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T01.03",
+      "sources": [
+        "tools/identity_audit/core.py",
+        "tools/identity_audit/receipt.py",
+        "tools/identity_audit/cli.py"
+      ],
+      "tests": [
+        "test_identity_receipt_retains_large_audit_results (>16MiB, realaudit seam with synthetic_sourceowner)",
+        "existing identity CLI/source seven-check contracts bound in author211scope"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01.04",
+      "title": "narrative_g2_replay完整报告",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T01.04",
+      "sources": [
+        "tools/narrative_g2_replay/report.py"
+      ],
+      "tests": [
+        "test_complete_replay_report_survives_old_size_threshold[g2]",
+        "test_w08_narrative_g2_replay::test_report_larger_than_eight_mib_is_written_completely",
+        "nestedInfinity/cycle and realIOfailure controls"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01.05",
+      "title": "source_root_portability完整报告",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T01.05",
+      "sources": [
+        "tools/source_root_portability/report.py"
+      ],
+      "tests": [
+        "test_complete_replay_report_survives_old_size_threshold[portability]",
+        "test_invalid_report_is_not_published[portability]",
+        "existing attempt/binding controls"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01.06",
+      "title": "storage_footprint输出规模",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T01.06",
+      "sources": [
+        "tools/storage_footprint/core.py",
+        "tools/storage_footprint/report.py",
+        "tools/storage_footprint/runner.py"
+      ],
+      "tests": [
+        "test_complete_footprint_preserves_every_error_and_full_locator with max_bytes=1",
+        "tool storage footprint unit/integration cases in author211record; fixtureinputs isolated ratherthan deletingcache"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01.07",
+      "title": "RAW-DUP明细／头部／报告体积",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T01.07",
+      "sources": [
+        "tools/raw_duplicate_audit/report.py",
+        "tools/raw_duplicate_audit/assessment.py",
+        "tools/raw_duplicate_audit/cli.py"
+      ],
+      "tests": [
+        "test_duplicate_report_retains_all_groups_and_diagnostics_without_row_or_byte_gate",
+        "test_duplicate_report_failure_does_not_claim_written[json/io]",
+        "existing rawduplicate readonly/hash/budget tests in author211"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01.08",
+      "title": "cross_market_suite运行观察与JUnit property",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T01.08",
+      "sources": [
+        "tools/cross_market_suite/runtime_evidence.py",
+        "tools/cross_market_suite/runner.py"
+      ],
+      "tests": [
+        "test_runtime_evidence_retains_all_documents_and_large_valid_property (>32KiB,15documents)",
+        "existing crossmarket/runtime observation contracts in author211"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T02",
+      "title": "holdout全树clean许可",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-T02",
+      "sources": [
+        "tools/holdout_replay/producer.py",
+        "tools/holdout_replay/worker.py",
+        "tools/holdout_replay/runner.py",
+        "tools/holdout_replay/__main__.py"
+      ],
+      "tests": [
+        "holdout W18 runner boundaries",
+        "test_runtime_file_identity_records_actual_loaded_module_without_clean_tree",
+        "independent dirty/unknownGitdiagnostic and wrongHEAD/import controls"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-SWEEP-T01",
+      "title": "PhaseC已持久成功结果的128KiB观察否决",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-SWEEP-T01",
+      "sources": [
+        "tools/document_understanding_benchmark/phase_c_runner.py"
+      ],
+      "tests": [
+        "author9purecontrols and11integration controls, actualtemporarynative loopback1POST/replay+same/crosscache0extraPOST",
+        "independent9syntheticcapture/state controls incl >300KBmultimembergzip, lateCRC/UTF8, badduplicateevent/prefixSHA"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-SWEEP-T02",
+      "title": "final_material默认表示帽",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-SWEEP-T02",
+      "sources": [
+        "tools/document_understanding_benchmark/final_material.py"
+      ],
+      "tests": [
+        "Current test_final_material.py covers large rows/groups/units/text; authorrecords3realrepresentationRED and later targetedfixturecorrection, not an inventedfinalwholegroup count.",
+        "independentactualpublic observe619rows with explicit700, completeSHA; work1/fabricatedtext stillrefused"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-SWEEP-T03",
+      "title": "完整CI重复Unit节点",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-SWEEP-T03",
+      "sources": [
+        "tools/pre_push_gate.py",
+        ".github/workflows/ci.yml"
+      ],
+      "tests": [
+        "ROOTCIduplicateRED→GREEN",
+        "actualCI andmainmode scheduling spies",
+        "134→106engineeringtestconsolidation, originalcapabilitymap, realGit4E2Es andall6OCRresource nodes retained",
+        "independent7engineeringchecks plus finalexactCI41450377163"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-SWEEP-T04",
+      "title": "PDF cold probe固定rev／禁止重跑",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-SWEEP-T04",
+      "sources": [
+        "tools/pdf_runtime_probe/run_cold_probe.py"
+      ],
+      "tests": [
+        "test_cold_probe_repeatability2RED→2P",
+        "independent timeoutthennewexplicitrequestsuccess, oldroot+priorattempt bytesretained, eachscratchremoved, actualprofileSHAused"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-O01",
+      "title": "PDF部署同inode重复SHA优化",
+      "status": "OPTIONAL_OPEN",
+      "exact_disposition": "OPTIONAL_OPEN",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-O01",
+      "sources": [
+        "tools/pdf_runtime_deployment/deployment.py"
+      ],
+      "tests": [],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-SPY-200-SAMPLE-MARKER",
+      "title": "consumer-spy 200条样本完整度标记",
+      "status": "OPTIONAL_OPEN",
+      "exact_disposition": "OPTIONAL_OPEN",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-SPY-200-SAMPLE-MARKER",
+      "sources": [
+        "tools/source_root_portability/consumer_spy.py"
+      ],
+      "tests": [],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-KEPT-OWNER-RESOURCES",
+      "title": "真实资源／源真实性／不覆盖保护",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-KEPT-OWNER-RESOURCES",
+      "sources": [],
+      "tests": [],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-KEPT-EXPLICIT-PRODUCER",
+      "title": "holdout本次显式producer commit",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-KEPT-EXPLICIT-PRODUCER",
+      "sources": [],
+      "tests": [],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-REAL-C",
+      "title": "真实H1／新版摘要／缓存恢复／RF实际采用",
+      "status": "REAL_ACCEPTANCE_OPEN",
+      "exact_disposition": "REAL_ACCEPTANCE_OPEN",
+      "evidence_file": "tooling-independent.json",
+      "evidence_item_id": "R7-REAL-C",
+      "sources": [],
+      "tests": [],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RF-01",
+      "title": "删除完整叙述/reading_context/assessment重复固定size/count/depth许可，实际资源预算归transport。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RF-01",
+      "sources": [
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/company_wiki_narrative_reader.py",
+        "scripts/company_wiki_narrative_process.py",
+        "scripts/company_wiki_narrative_posix.py",
+        "scripts/narrative_summary_observations.py"
+      ],
+      "tests": [
+        "test_valid_reading_data_has_no_independent_representation_quota",
+        "test_assessment_new_algorithm_and_diagnostic_volume_do_not_gate_source",
+        "test_explicit_transport_budget_remains_real_without_default_representation_quota"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RF-02",
+      "title": "去proof128KiB、摘录10–500及采用理由2048许可，保持完整局部closure和真实引用。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RF-02",
+      "sources": [
+        "scripts/narrative_summary_provenance.py",
+        "scripts/contracts/document.py",
+        "scripts/research/input_evidence.py",
+        "scripts/narrative_summary_usage.py"
+      ],
+      "tests": [
+        "test_complete_large_source_anchor_and_proof_are_not_length_permissions",
+        "test_complete_long_summary_anchor_validates_without_clipping",
+        "test_long_excerpt_cannot_bypass_complete_provenance_validation",
+        "test_complete_research_reason_is_not_a_summary_adoption_length_permission"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RF-03",
+      "title": "坏/缺/未知review、assessment和producer recipe不得反向否决已实读来源，统一诊断owner。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RF-03",
+      "sources": [
+        "scripts/contracts/source_diagnostics.py",
+        "scripts/contracts/company_wiki_original.py",
+        "scripts/company_wiki_source_reader_v2.py",
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/narrative_summary_observations.py"
+      ],
+      "tests": [
+        "test_optional_review_damage_cannot_reject_verified_original",
+        "test_optional_review_non_scalar_status_does_not_gate_source",
+        "test_optional_selection_trace_wrong_type_does_not_gate_verified_wire",
+        "test_optional_reading_observation_absence_is_not_source_permission"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RF-04",
+      "title": "全局publication registry可重建、不可成为有效artifact使用许可，不全历史预验/反复chmod。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RF-04",
+      "sources": [
+        "scripts/publication_registry.py",
+        "scripts/revenue_core.py"
+      ],
+      "tests": [
+        "test_formal_result_does_not_depend_on_global_index_health",
+        "test_index_can_be_rebuilt_from_validated_artifact_without_old_history",
+        "test_tampered_registry_line_is_detected",
+        "test_formal_publication_survives_unavailable_rebuildable_index"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RF-05",
+      "title": "同事务原文只验/哈希一次，内部复用immutable值，公开raw反序列化仍独立验。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RF-05",
+      "sources": [
+        "scripts/contracts/company_wiki_original.py",
+        "scripts/company_wiki_source_reader_v2.py",
+        "scripts/company_wiki_source_v2.py",
+        "scripts/source_preparation.py",
+        "scripts/revenue_forecast.py"
+      ],
+      "tests": [
+        "test_preparation_hashes_same_received_immutable_source_only_once",
+        "test_verified_context_is_immutable_and_raw_mutations_need_wire_validation"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "FF-CURRENT",
+      "title": "核FF仍否有manual/authorization/expiry/canary/clean许可；区别兼容字段与真实门禁。",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "FF-CURRENT",
+      "sources": [
+        "scripts/fetch_filing.py",
+        "scripts/filing_contracts.py"
+      ],
+      "tests": [
+        "test_legacy_scope_uses_one_ensure_and_cleans_scope_file",
+        "test_library_default_and_cli_agree_for_one_fetch_intent",
+        "test_conflicting_explicit_allow_download_is_a_named_request_error"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "SW-INV-QUOTE",
+      "title": "invest通用摘录10–500为多余许可：改非空，保hash/source/币种单位/期间。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "SW-INV-QUOTE",
+      "sources": [
+        "invest-core/scripts/invest_contracts.py"
+      ],
+      "tests": [
+        "test_supported_quote_has_no_arbitrary_minimum_or_maximum",
+        "test_length_simplification_preserves_actual_integrity",
+        "test_empty_quote_is_still_missing_evidence",
+        "test_public_read_rejects_quotation_mutation"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "SW-RF-QUOTES",
+      "title": "RF target builder/backtest残余摘录10–500与主证据owner对齐。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "SW-RF-QUOTES",
+      "sources": [
+        "scripts/research/input_targets.py",
+        "scripts/revenue_backtest.py"
+      ],
+      "tests": [
+        "test_target_builder_preserves_complete_nonempty_excerpt",
+        "test_backtest_long_excerpt_keeps_real_hash_and_currency_checks"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "SW-RF-DRIVERS",
+      "title": "总driver和每driver evidence10条帽不能拒完整DAG材料。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "SW-RF-DRIVERS",
+      "sources": [
+        "scripts/research/drivers.py",
+        "scripts/contracts/document.py"
+      ],
+      "tests": [
+        "test_complete_driver_tree_and_evidence_not_cut_to_ten"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "SW-FF-CONFIG",
+      "title": "原审暂保64KiB后续证实为active配置表示门，必须去掉而非抬帽。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "SW-FF-CONFIG",
+      "sources": [
+        "scripts/ff_configuration.py",
+        "scripts/fetch_filing.py",
+        "scripts/transcript_tool_transport.py"
+      ],
+      "tests": [
+        "test_explicit_local_configuration_is_read_complete",
+        "test_large_valid_config_is_read_completely_before_root_use",
+        "test_complete_config_tail_is_not_rejected_by_an_implicit_read_limit"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "SW-LOCAL-DIAGNOSTICS",
+      "title": "FF/RF附注128KiB/8层/32键/1024项及ET usage8192不得否决真实主因或改已知用量。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "SW-LOCAL-DIAGNOSTICS",
+      "sources": [
+        "scripts/ff_local_preparation_observation.py",
+        "scripts/fetch_filing.py",
+        "scripts/transcript_tool_transport.py",
+        "../revenue-forecast/scripts/filing_upstream_cause.py"
+      ],
+      "tests": [
+        "test_complete_optional_counters_can_exceed_old_shape_caps",
+        "test_bad_optional_budget_does_not_replace_primary_blocked_operation",
+        "test_padded_valid_supervisor_usage_does_not_become_unknown",
+        "test_undecodable_optional_usage_is_unknown_not_a_main_failure",
+        "test_local_failure_large_deep_diagnostics_are_complete_and_isolated"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "SW-RF-AVAILABILITY-TEXT",
+      "title": "availability evidence_ref/locator2048字符不能否决合法proof。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "SW-RF-AVAILABILITY-TEXT",
+      "sources": [
+        "scripts/contracts/source_clock.py"
+      ],
+      "tests": [
+        "test_availability_proof_has_no_text_length_permission",
+        "test_long_availability_locator_preserves_complete_bound_proof"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "SW-E2E-FIXTURE-PERMIT",
+      "title": "Biren冻结错pair/伪host_signed和强制registry不能换tag/吞golden；真实CLI分阶段必须执行。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "SW-E2E-FIXTURE-PERMIT",
+      "sources": [
+        "e2e/generate_biren_fixture.py",
+        "e2e/run_biren_invest_e2e.py",
+        "e2e/offline_cli.py",
+        "e2e/fixtures/biren_forecast.json"
+      ],
+      "tests": [
+        "test_real_cli_rejects_invalid_frozen_artifact",
+        "test_intermediate_financial_mutation_is_detected_at_its_public_read",
+        "test_live_harness_actually_invokes_phase_checks",
+        "test_even_explicit_metadata_refresh_cannot_absorb_economic_drift"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "SW-INV-REPEAT",
+      "title": "run_company/run_bundle/当前bundle read相邻同对象两次RF强验统一归reference owner。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "SW-INV-REPEAT",
+      "sources": [
+        "invest-framework/scripts/company_orchestrator.py",
+        "invest-framework/scripts/bundle_validator.py",
+        "invest-core/scripts/invest_contracts.py"
+      ],
+      "tests": [
+        "test_company_reference_owns_the_single_immediate_validation",
+        "test_bundle_reference_owns_the_single_immediate_validation",
+        "test_current_bundle_public_read_validates_its_frozen_forecast_once"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "INV-CONSUMER",
+      "title": "下游不得默认registered/host_signed作为使用许可，不能削弱真实RF输出重算。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "INV-CONSUMER",
+      "sources": [
+        "invest-core/scripts/invest_contracts.py"
+      ],
+      "tests": [
+        "test_validated_result_is_independent_of_global_registry",
+        "test_unattested_valid_result_is_not_promoted_to_signed_or_rejected",
+        "test_unattested_does_not_allow_mutated_economic_output",
+        "test_forged_artifact_rejected_at_all_three_hops"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "INV-HOOK",
+      "title": "commit/push不重十组件全suite/E2E或隐式全局同步；验真实staged bytes。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "INV-HOOK",
+      "sources": [
+        "tools/pre_push_gate.py",
+        ".githooks/pre-commit",
+        ".githooks/pre-push"
+      ],
+      "tests": [
+        "test_commit_syntax_uses_actual_index_bytes_without_changing_worktree",
+        "test_real_ruff_rejects_staged_name_error_hidden_by_good_worktree",
+        "test_push_has_no_implicit_deployment_or_whole_suite"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "INV-INSTALL",
+      "title": "同步只写明确文件，保配置/其他文件，不得每push整套覆盖。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "INV-INSTALL",
+      "sources": [
+        "tools/sync_installations.py"
+      ],
+      "tests": [
+        "test_repeat_apply_has_zero_writes_and_no_staging",
+        "test_changed_canonical_alias_never_restores_stale_snapshot",
+        "test_selected_check_does_not_scan_unrequested_or_create_installations",
+        "test_fresh_cli_only_updates_requested_file"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RETAINED-RESOURCES",
+      "title": "不把真实下载/HTTP/子进程bytes、timeout、token/费用/空间/本地读工作预算混为表示许可。",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RETAINED-RESOURCES",
+      "sources": [
+        "scripts/ff_process_transport.py",
+        "scripts/fetch_filing.py",
+        "scripts/transcript_tool_transport.py",
+        "../revenue-forecast/scripts/company_wiki_narrative_reader.py"
+      ],
+      "tests": [
+        "test_request_deadline_bounds_the_real_child_run",
+        "test_child_output_over_the_byte_cap_fails_closed",
+        "test_timeout_reclaims_the_child_but_never_an_unrelated_process",
+        "test_explicit_transport_budget_remains_real_without_default_representation_quota"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RETAINED-CORRECTNESS",
+      "title": "源字节/公司/期次/as-of、引用partition、币种单位/公式重算与真实signed声明仍需严格。",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RETAINED-CORRECTNESS",
+      "sources": [
+        "scripts/contracts/company_wiki_original.py",
+        "scripts/contracts/source_clock.py",
+        "scripts/contracts/document.py",
+        "../invest-skills/invest-core/scripts/invest_contracts.py"
+      ],
+      "tests": [
+        "test_long_excerpt_cannot_bypass_complete_provenance_validation",
+        "test_forged_artifact_rejected_at_all_three_hops",
+        "test_unattested_does_not_allow_mutated_economic_output"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RETAINED-FORMULA",
+      "title": "500字符公式与自然语言摘录不同，属于受限递归算术工作保护。",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RETAINED-FORMULA",
+      "sources": [
+        "scripts/forecast/calc.py",
+        "../invest-skills/invest-core/scripts/invest_contracts.py"
+      ],
+      "tests": [
+        "RF数学/公式既有golden与重算控制",
+        "Invest公式节点/数值验证控制"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RETAINED-CREDENTIAL",
+      "title": "FF credential scalar4096是凭证读取，不是财报/配置表示许可。",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RETAINED-CREDENTIAL",
+      "sources": [
+        "scripts/transcript_tool_transport.py"
+      ],
+      "tests": [
+        "ET credential泄漏/未知usage反控保留"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "RETAINED-LEGACY-DIAGNOSTICS",
+      "title": "明确退休/显式audit/version工具不应再当正常canary门禁重复删除。",
+      "status": "KEPT_BY_REASON",
+      "exact_disposition": "KEPT_BY_REASON",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "RETAINED-LEGACY-DIAGNOSTICS",
+      "sources": [
+        "scripts/processed_artifact_canary.py",
+        "scripts/installation_manifest.py",
+        "scripts/revenue_forecast.py",
+        "scripts/publication_registry.py"
+      ],
+      "tests": [
+        "registry显式audit坏行/坏hash负控保留",
+        "--version诊断分支静态核对"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "CROSS-DEPLOYMENT",
+      "title": "canonical通过还需覆盖实际三个技能安装根，并防整目录覆盖/配置漂移。",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "CROSS-DEPLOYMENT",
+      "sources": [
+        "../revenue-forecast/scripts",
+        "../filing-fetch/scripts",
+        "invest-core/scripts",
+        "invest-framework/scripts"
+      ],
+      "tests": [
+        "ROOT定点安装重复零写收据",
+        "三根新进程无签名合法输出/经济篡改拒记录",
+        "installed offline Biren CLI双跑7.62s"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "REAL-C-AND-COMPANY-LOOP",
+      "title": "工程/合成/部署绿不等于真实摘要、缓存恢复、RF经济采用及全部公司循环完成。",
+      "status": "REAL_ACCEPTANCE_OPEN",
+      "exact_disposition": "REAL_ACCEPTANCE_OPEN",
+      "evidence_file": "crossrepo-independent.json",
+      "evidence_item_id": "REAL-C-AND-COMPANY-LOOP",
+      "sources": [
+        "../company-wiki/docs/plans/du11-source-closure-2026-10-18/task_plan.md"
+      ],
+      "tests": [
+        "须后续真实C节点的新独审收据"
+      ],
+      "remaining_boundary": "",
+      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+    },
+    {
+      "id": "R7-T01",
+      "title": "工具日志/收据/报告表示门（全部8个入口）",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "ENGINEERING_COMPLETE_ALL_EIGHT_CHILDREN",
+      "evidence_file": "tooling-independent.json",
+      "children": [
+        "R7-T01.01",
+        "R7-T01.02",
+        "R7-T01.03",
+        "R7-T01.04",
+        "R7-T01.05",
+        "R7-T01.06",
+        "R7-T01.07",
+        "R7-T01.08"
+      ],
+      "remaining_boundary": "真实I/O/编码/退出/资源错误保留，不能把观察缺失当通过。"
+    },
+    {
+      "id": "R7-RESIDUAL-V2-WIRE-CAP",
+      "behavior": "Remove post-load16MiB decoder gate in both public consumers; retain exact version/schema/hash/text/locator and actual transport budgets. StockWiki unused depth counter removed; true decoder errors still named.",
+      "title": "本轮新发现：两仓公开JSON加载后16MiB表示门",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "54CWP+33StockWiki affected cases; independent/CI explicitly tracked below.",
+      "evidence_file": "residual-repair.json",
+      "independent_review": "residual-repair-independent.json",
+      "remaining_boundary": "StockWiki无remote，只签正常本地主线提交；实际费用/读取/身份/定位保护继续执行。"
+    },
+    {
+      "id": "R7-RESIDUAL-PAID-RESPONSE-CAP",
+      "behavior": "Use actual configured HTTP body budget for durable response artifacts. No extra262144 Pin/constructor cap or4096receipt permission; preserve real explicit put/read limits, byteSHA/request/pin binding, preflight, unknown fee/no-resend.",
+      "title": "本轮新发现：已配置HTTP响应仍被256KiB持久化顶帽拒绝",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "54CWP+33StockWiki affected cases; independent/CI explicitly tracked below.",
+      "evidence_file": "residual-repair.json",
+      "independent_review": "residual-repair-independent.json",
+      "remaining_boundary": "StockWiki无remote，只签正常本地主线提交；实际费用/读取/身份/定位保护继续执行。"
+    },
+    {
+      "id": "R7-RESIDUAL-RUN-BINDING-CAP",
+      "title": "本轮追加：运行冻结元数据256KiB表示门",
+      "status": "ENGINEERING_COMPLETE",
+      "exact_disposition": "1RED ->23P affected ledger tests; complete metadata/reopen/idempotence and changed binding refusal.",
+      "evidence_file": "residual-binding-repair.json",
+      "independent_review": "residual-binding-independent.json",
+      "remaining_boundary": "账本保完整canonical JSON及不可变run/scope；实际存储/费用/token/输出上限归原owner。"
+    }
+  ],
+  "new_residual_independent_pass": true,
+  "new_source_exact_ci": {
+    "observed_at_utc": "2026-11-02T14:04:38.536124+00:00",
+    "repositories": [
+      {
+        "repo": "company-wiki",
+        "expected_head": "cb2488e2924dedb37bc9c63f471334fb0022b942",
+        "runs": [
+          {
+            "id": 41457662863,
+            "name": "CI",
+            "head_sha": "cb2488e2924dedb37bc9c63f471334fb0022b942",
+            "head_branch": "master",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41457662863",
+            "updated_at": "2026-11-02T14:04:35Z"
+          }
+        ]
+      }
+    ],
+    "all_success": true,
+    "other_scope": "RF/FF/invest runtime unchanged since their previously verified exact green CI. StockWiki has no remote."
+  },
+  "originals_modified": 0,
+  "external_model_calls": 0,
+  "downloads": 0,
+  "mainline_remaining": [
+    "T4 H1 peer-note parent chain (3 selected views)",
+    "new configured real summary, interrupted paid response and same/cross-run cache recovery",
+    "same new artifact in actual RF parameters/formula/report/snapshot",
+    "R4 six root causes, research/detection evolution, fixed company obligations and three-clean generalization"
+  ],
+  "other_observations": [
+    "StockWiki still has no Git remote; local mainline is not a remote CI claim.",
+    "One prior Windows rename error remains unconfirmed; successful fresh temp/installed retry is not proof of its cause.",
+    "Large exact text17MB probe and loopback large body are synthetic engineering checks, not real company/source quality acceptance.",
+    "RF register_publication Raises docstring and pre-push same-CI-table comment still use historical wording; no corresponding runtime permission exists. These two editorial notes are not silently counted as fixed."
+  ],
+  "publication_evidence": "publication.json"
+}

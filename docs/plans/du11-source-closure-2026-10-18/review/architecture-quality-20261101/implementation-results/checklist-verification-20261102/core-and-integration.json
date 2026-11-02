@@ -1,0 +1,593 @@
+{
+  "schema_version": "r7-checklist-core/1",
+  "observed_at_utc": "2026-11-02T13:30:56.968594+00:00",
+  "head": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+  "scope": "Current code read + existing execution/review receipts; no new pytest, company/original/model/provider run.",
+  "items": [
+    {
+      "id": "R7-G1",
+      "title": "多层成功结果/可选诊断的固定尺寸和深度",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "完整typed结果；迭代JSON遍历无任意计数/深度许可。实际非JSON、非finite、循环与标准编码器不能表示的值仍明确失败；真实引用/原文绑定不放宽。",
+      "source_files": [
+        "src/company_wiki/automation/json_tree.py",
+        "src/company_wiki/automation/narrative_contracts.py",
+        "src/company_wiki/automation/narrative_transport_contracts.py",
+        "src/company_wiki/automation/narrative_transport.py",
+        "src/company_wiki/automation/narrative_evidence_view.py",
+        "src/company_wiki/source_catalog/narrative_transport_cli.py"
+      ],
+      "test_files": [
+        "tests/unit/test_narrative_representation_no_gate.py",
+        "tests/unit/test_narrative_reading_transport.py",
+        "tests/unit/test_narrative_select_handler.py"
+      ],
+      "evidence": [
+        "R7-core-implementation.json",
+        "R7-CWP-tools-independent.json",
+        "R7-final-sweep-core-independent-r3.json",
+        "R7-CWP-final-CI-oracles-independent.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/automation/json_tree.py",
+          "exists": true,
+          "sha256": "9c7b42973df798db7592f3ac7732cc99dd71e630bb1f3fbbf012c945329534b6"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_contracts.py",
+          "exists": true,
+          "sha256": "a70704e4450118f1e4afbc1a63b2bf8dac3e3a8de071164f07b09061f39a0044"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_transport_contracts.py",
+          "exists": true,
+          "sha256": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_transport.py",
+          "exists": true,
+          "sha256": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_evidence_view.py",
+          "exists": true,
+          "sha256": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/narrative_transport_cli.py",
+          "exists": true,
+          "sha256": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23"
+        },
+        {
+          "path": "tests/unit/test_narrative_representation_no_gate.py",
+          "exists": true,
+          "sha256": "b9317d2d5fa23356790eaaeccd4c2b111a3c2efbb65cdccc6e06e89d8f99bcab"
+        },
+        {
+          "path": "tests/unit/test_narrative_reading_transport.py",
+          "exists": true,
+          "sha256": "e3ad7cf6027f8db7aa51f804e9de46b40de5681b093148f39276b0b04d95d095"
+        },
+        {
+          "path": "tests/unit/test_narrative_select_handler.py",
+          "exists": true,
+          "sha256": "d3fd1f77068b921a70aaf85ec764b9e530f5aec7d087e961f305529245af7810"
+        }
+      ]
+    },
+    {
+      "id": "R7-G2",
+      "title": "自动坏缓存不应否决新任务",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "自动发现坏候选记诊断后继续；显式pin、同run冻结绑定、原件变化、未知付费和真实I/O仍准确停止。",
+      "source_files": [
+        "src/company_wiki/automation/narrative_generation.py",
+        "src/company_wiki/automation/narrative_batch.py"
+      ],
+      "test_files": [
+        "tests/unit/test_narrative_representation_no_gate.py"
+      ],
+      "evidence": [
+        "R7-core-implementation.json",
+        "R7-CWP-tools-independent.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/automation/narrative_generation.py",
+          "exists": true,
+          "sha256": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_batch.py",
+          "exists": true,
+          "sha256": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6"
+        },
+        {
+          "path": "tests/unit/test_narrative_representation_no_gate.py",
+          "exists": true,
+          "sha256": "b9317d2d5fa23356790eaaeccd4c2b111a3c2efbb65cdccc6e06e89d8f99bcab"
+        }
+      ]
+    },
+    {
+      "id": "R7-G3",
+      "title": "同一个原生成员内未知子句连坐已证子句",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "保留已独立绑定的完整原话及其主体/条件/否定，未知子句仍unknown、整体仍partial；双顺序和主体/条件反控覆盖。",
+      "source_files": [
+        "src/company_wiki/source_catalog/narrative_source_passage.py",
+        "src/company_wiki/source_catalog/narrative_reading_admission.py"
+      ],
+      "test_files": [
+        "tests/unit/du11_production/test_same_unit_independent_material.py"
+      ],
+      "evidence": [
+        "R7-core-implementation.json",
+        "R7-CWP-tools-independent.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/source_catalog/narrative_source_passage.py",
+          "exists": true,
+          "sha256": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/narrative_reading_admission.py",
+          "exists": true,
+          "sha256": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad"
+        },
+        {
+          "path": "tests/unit/du11_production/test_same_unit_independent_material.py",
+          "exists": true,
+          "sha256": "9a6ed6346ee4da89fe3dc312c64378d31ff195636152d356f0f14e3c797aad8c"
+        }
+      ]
+    },
+    {
+      "id": "R7-G4",
+      "title": "同次已验证源buffer和metadata重复验证",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "公开真实reader负责实读SHA，combined owner一次给出buffer和metadata；上层仅绑定所请求身份。旧port兼容不引入长期信任缓存，稍后重开/跨进程仍由该边界验字节。",
+      "source_files": [
+        "src/company_wiki/automation/narrative_source_guard.py",
+        "src/company_wiki/automation/narrative_select.py",
+        "src/company_wiki/automation/narrative_verify.py"
+      ],
+      "test_files": [
+        "tests/unit/test_verified_source_operation.py"
+      ],
+      "evidence": [
+        "R7-core-implementation.json",
+        "R7-CWP-tools-independent.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/automation/narrative_source_guard.py",
+          "exists": true,
+          "sha256": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_select.py",
+          "exists": true,
+          "sha256": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_verify.py",
+          "exists": true,
+          "sha256": "e0500a149798b880bcdc883df70fba784da8b64172a39eca9404bcc2e44d6329"
+        },
+        {
+          "path": "tests/unit/test_verified_source_operation.py",
+          "exists": true,
+          "sha256": "5acff4c4a1e147c6ae7e0fab5326d72cc91eabf09419e50b5b7e5a74ccd812cb"
+        }
+      ]
+    },
+    {
+      "id": "R7-G5",
+      "title": "几何导航多个32/64/4096任意天花板",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "大/深/长导航按同一WorkBudget和显式page/request额度处理，无隐式64夹断。物理页码、缺祖先、倒序与同页歧义仍保护真实定位。",
+      "source_files": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "src/company_wiki/document_understanding/geometry_intent/contracts.py",
+        "src/company_wiki/document_understanding/geometry_intent/planner.py"
+      ],
+      "test_files": [
+        "tests/unit/du11_reading_plan/test_native_navigation_resource_limits.py",
+        "tests/unit/du9_geometry_planner/test_b_contract_counterexamples.py"
+      ],
+      "evidence": [
+        "R7-core-implementation.json",
+        "R7-CWP-tools-independent.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+          "exists": true,
+          "sha256": "bd2afb3cd54cbf91378b136b27ff81e9e421b3f4ec2e0f1ecb634544a5fcabc3"
+        },
+        {
+          "path": "src/company_wiki/document_understanding/geometry_intent/contracts.py",
+          "exists": true,
+          "sha256": "277335f890a5a2a8384c7b79324a684da9b44da7da6dc24c0a95d4482c1ee245"
+        },
+        {
+          "path": "src/company_wiki/document_understanding/geometry_intent/planner.py",
+          "exists": true,
+          "sha256": "97d52c3e22bbec6b0878525f06a3e5a10ea171033ac79aab5f23c425b6361734"
+        },
+        {
+          "path": "tests/unit/du11_reading_plan/test_native_navigation_resource_limits.py",
+          "exists": true,
+          "sha256": "b23297e868970761c3784d824ac06c935256ab5ac39713b33ceeeb2d76afd04b"
+        },
+        {
+          "path": "tests/unit/du9_geometry_planner/test_b_contract_counterexamples.py",
+          "exists": true,
+          "sha256": "c31b891fc60999d3ca45cf096e570215281142a8a2a521d39ff10838fe37ca06"
+        }
+      ]
+    },
+    {
+      "id": "F1",
+      "title": "batch100和输出2MiB隐藏顶帽",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "101/250成员可解析；显式5MiB预算能真实写3MiB对象，超过该显式预算仍拒。2MiB仅缺省配置值，已不再是不可提高的上限。",
+      "source_files": [
+        "src/company_wiki/automation/narrative_batch_request.py",
+        "src/company_wiki/automation/narrative_batch.py"
+      ],
+      "test_files": [
+        "tests/unit/test_r7_final_core_simplification.py"
+      ],
+      "evidence": [
+        "R7-final-sweep-core.json",
+        "R7-final-sweep-core-implementation.json",
+        "R7-final-sweep-core-independent-r3.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/automation/narrative_batch_request.py",
+          "exists": true,
+          "sha256": "6f0a50bf78395cbe203895ae819cae7842d4600c65cd13804d116dec864e24a8"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_batch.py",
+          "exists": true,
+          "sha256": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6"
+        },
+        {
+          "path": "tests/unit/test_r7_final_core_simplification.py",
+          "exists": true,
+          "sha256": "c661511cb0de287b4cf32d6c29371f18154bdd1a0431d05bd3bbe141c655d91f"
+        }
+      ]
+    },
+    {
+      "id": "F2",
+      "title": "provenance扩展16KiB许可",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "完整JSON provenance进入同一immutable commit；真实staged原件和hash/类型/预算仍验。坏JSON或错误字节绑定不提交、不丢staged原文。",
+      "source_files": [
+        "src/company_wiki/source_catalog/canonical_writer.py"
+      ],
+      "test_files": [
+        "tests/unit/test_r7_final_core_simplification.py"
+      ],
+      "evidence": [
+        "R7-final-sweep-core.json",
+        "R7-final-sweep-core-implementation.json",
+        "R7-final-sweep-core-independent-r3.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/source_catalog/canonical_writer.py",
+          "exists": true,
+          "sha256": "621738f1c06ab3d6a898cdf69b5058f4fa0f72125ec674ca4654e0eda4145931"
+        },
+        {
+          "path": "tests/unit/test_r7_final_core_simplification.py",
+          "exists": true,
+          "sha256": "c661511cb0de287b4cf32d6c29371f18154bdd1a0431d05bd3bbe141c655d91f"
+        }
+      ]
+    },
+    {
+      "id": "F3",
+      "title": "原文C:/file://被误判为物理存储路径",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "只有已知typed正文槽按原文内容解释；实际存储metadata路径/未知schema/伪造引用仍拒。真实summary handler与两种decoder均覆盖，不给任意名为text的键例外。",
+      "source_files": [
+        "src/company_wiki/automation/json_tree.py",
+        "src/company_wiki/automation/narrative_contracts.py",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_model_scoped.py"
+      ],
+      "test_files": [
+        "tests/unit/test_r7_final_core_simplification.py",
+        "tests/unit/test_narrative_select_handler.py",
+        "tests/unit/test_narrative_summarize_handler.py",
+        "tests/unit/test_source_facts.py"
+      ],
+      "evidence": [
+        "R7-final-sweep-core.json",
+        "R7-final-sweep-core-independent-r3.json",
+        "R7-CWP-final-CI-oracles-independent.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/automation/json_tree.py",
+          "exists": true,
+          "sha256": "9c7b42973df798db7592f3ac7732cc99dd71e630bb1f3fbbf012c945329534b6"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_contracts.py",
+          "exists": true,
+          "sha256": "a70704e4450118f1e4afbc1a63b2bf8dac3e3a8de071164f07b09061f39a0044"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_model.py",
+          "exists": true,
+          "sha256": "0078293176c67b6ac63245c5ecff7bf6d1c197d33f2cba63cbb38c1c5f7bcc49"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_model_scoped.py",
+          "exists": true,
+          "sha256": "b2f174f0c5c108e79120be6e56d566eefa144079263d063e9a679b2ca4134f7b"
+        },
+        {
+          "path": "tests/unit/test_r7_final_core_simplification.py",
+          "exists": true,
+          "sha256": "c661511cb0de287b4cf32d6c29371f18154bdd1a0431d05bd3bbe141c655d91f"
+        },
+        {
+          "path": "tests/unit/test_narrative_select_handler.py",
+          "exists": true,
+          "sha256": "d3fd1f77068b921a70aaf85ec764b9e530f5aec7d087e961f305529245af7810"
+        },
+        {
+          "path": "tests/unit/test_narrative_summarize_handler.py",
+          "exists": true,
+          "sha256": "b15ba5751fb0976818b498a9e1ea2f381d733b73dfae6b3664eb57a58e65882a"
+        },
+        {
+          "path": "tests/unit/test_source_facts.py",
+          "exists": true,
+          "sha256": "8271c70460ef9d7d48bf4eb31ccf5c32c0193f4ec7714d18fc6383c613be6eec"
+        }
+      ]
+    },
+    {
+      "id": "ADD-AVAILABILITY",
+      "title": "availability metadata同一父预算和终态取消/deadline",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "删除64/128KiB与64location表示帽，实际metadata分块读取记同一parent。独审r1/r2实质P2均已根修：末读后取消/deadline仍生效，默认resolver的_ReadBudget.check兼容，已用额度不重置。",
+      "source_files": [
+        "src/company_wiki/source_catalog/source_availability.py",
+        "src/company_wiki/source_catalog/local_inventory.py",
+        "src/company_wiki/source_catalog/local_reconcile.py",
+        "src/company_wiki/source_catalog/assertion_service.py",
+        "src/company_wiki/source_catalog/resolver.py"
+      ],
+      "test_files": [
+        "tests/unit/test_r7_availability_budget_owner.py",
+        "tests/contract/test_source_availability.py"
+      ],
+      "evidence": [
+        "R7-final-sweep-core-implementation.json",
+        "R7-core-terminal-stop-fix.json",
+        "R7-final-sweep-core-independent.json",
+        "R7-final-sweep-core-independent-r2.json",
+        "R7-final-sweep-core-independent-r3.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/source_catalog/source_availability.py",
+          "exists": true,
+          "sha256": "56789a1b2b2f61e28c13880a28f77abb91609cea5dbf93f417c10f94c69e6a42"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/local_inventory.py",
+          "exists": true,
+          "sha256": "4310beb14a41f6fc8de3165e3e550e25550a2c8502a31475773072edc74fb60c"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/local_reconcile.py",
+          "exists": true,
+          "sha256": "deef283e06665be6925d9be94e0c3e90c49fce35ff7df9ddfff0e63fb874f222"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/assertion_service.py",
+          "exists": true,
+          "sha256": "d795953855d0197f40b4f288bbb5c7460407042289e86e6884e26ad4f43b3480"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/resolver.py",
+          "exists": true,
+          "sha256": "0195f1524516640c10ebb99727f5f9281cb075a42a011537cb24631eca4d6502"
+        },
+        {
+          "path": "tests/unit/test_r7_availability_budget_owner.py",
+          "exists": true,
+          "sha256": "51d88a0441222d3bcdaff54e03f6c35f3c51dca937792ddea818583984eb1441"
+        },
+        {
+          "path": "tests/contract/test_source_availability.py",
+          "exists": true,
+          "sha256": "a423213580a1ba877e2f2e2ed6967b7771e0fb73fc4dad490a83c83b52a68e19"
+        }
+      ]
+    },
+    {
+      "id": "ADD-MODEL-FINAL",
+      "title": "模型真实读取成功后又按128KiB否决",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "取消完整响应之后的固定表示帽和失败final条数限制；HTTP实际字节/timeout、真实输出token和费用记账仍归各owner。",
+      "source_files": [
+        "src/company_wiki/automation/narrative_http_model.py",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/models.py"
+      ],
+      "test_files": [
+        "tests/unit/test_narrative_representation_no_gate.py",
+        "tests/unit/test_narrative_post_model_failure_diagnostics.py"
+      ],
+      "evidence": [
+        "R7-core-implementation.json",
+        "R7-CWP-tools-independent.json",
+        "R7-final-sweep-core-independent-r3.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/automation/narrative_http_model.py",
+          "exists": true,
+          "sha256": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_model.py",
+          "exists": true,
+          "sha256": "0078293176c67b6ac63245c5ecff7bf6d1c197d33f2cba63cbb38c1c5f7bcc49"
+        },
+        {
+          "path": "src/company_wiki/automation/models.py",
+          "exists": true,
+          "sha256": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d"
+        },
+        {
+          "path": "tests/unit/test_narrative_representation_no_gate.py",
+          "exists": true,
+          "sha256": "b9317d2d5fa23356790eaaeccd4c2b111a3c2efbb65cdccc6e06e89d8f99bcab"
+        },
+        {
+          "path": "tests/unit/test_narrative_post_model_failure_diagnostics.py",
+          "exists": true,
+          "sha256": "4c038ddeb1405c9296cf2705932213f174c35074b16006a56559700321dae54e"
+        }
+      ]
+    },
+    {
+      "id": "ADD-EXTRACTIVE",
+      "title": "extractive默认56KiB衍生顶帽",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "不从旧表示常量派生56KiB缺省否决；显式max_draft_bytes与实际预算仍按请求执行，不静默剪正文。",
+      "source_files": [
+        "src/company_wiki/automation/narrative_model_extractive.py"
+      ],
+      "test_files": [
+        "tests/unit/test_narrative_extractive_runtime.py"
+      ],
+      "evidence": [
+        "R7-core-implementation.json",
+        "R7-CWP-tools-independent.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/automation/narrative_model_extractive.py",
+          "exists": true,
+          "sha256": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7"
+        },
+        {
+          "path": "tests/unit/test_narrative_extractive_runtime.py",
+          "exists": true,
+          "sha256": "2510e4be14146710f93d3ee391905652752b202c66db0c624b5101eb6c556d30"
+        }
+      ]
+    },
+    {
+      "id": "ADD-EXECUTION",
+      "title": "summary execution/result完整收据",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "430任务经真实summary handler和公开persisted parser，>32KiB execution完整；真实task绑定篡改仍拒。测试model是local stub，不声称付费或公司内容质量通过。",
+      "source_files": [
+        "src/company_wiki/automation/narrative_summary_execution.py",
+        "src/company_wiki/automation/narrative_summary_assessment.py"
+      ],
+      "test_files": [
+        "tests/unit/test_summary_receipt_representation.py"
+      ],
+      "evidence": [
+        "R7-core-implementation.json",
+        "R7-CWP-tools-independent.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "src/company_wiki/automation/narrative_summary_execution.py",
+          "exists": true,
+          "sha256": "221917810327c20779de9e3120c2f75a28cf189d9f265c2dd3fcfb0fe0c9c0c6"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_summary_assessment.py",
+          "exists": true,
+          "sha256": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16"
+        },
+        {
+          "path": "tests/unit/test_summary_receipt_representation.py",
+          "exists": true,
+          "sha256": "99b72072e16f1629c2ec2f1429a8618bf5d1c4ec42e46478706a9af44f216905"
+        }
+      ]
+    },
+    {
+      "id": "ROOT-OBSERVER",
+      "title": "原300KB/16KB/32祖先观察门",
+      "status": "ENGINEERING_COMPLETE",
+      "current_behavior": "完整JSON收据及完整祖先树，heading/semantic context/physical proof分角色；真正循环、缺parent、编码/I/O仍诚实incomplete，不把unknown scope签actor正确。原子no-clobber和真实parent deadline保留。",
+      "source_files": [
+        "tools/source_case_runner.py",
+        "tools/source_case_receipt.py",
+        "tools/source_case_checks.py"
+      ],
+      "test_files": [
+        "tests/unit/test_source_case_runner.py",
+        "tests/unit/test_source_case_receipt.py"
+      ],
+      "evidence": [
+        "R7-ROOT-observer.json",
+        "R7-ROOT-independent-r2.json"
+      ],
+      "remaining_boundary": "新版真实来源/摘要/缓存/RF采用按C节点另验，不以合成工程测试代公司验收。",
+      "current_files": [
+        {
+          "path": "tools/source_case_runner.py",
+          "exists": true,
+          "sha256": "5f8e5f09d38bbb3d4565a1b9e60ca8bdee99b7ce1ec0bb16210968b8879c41c4"
+        },
+        {
+          "path": "tools/source_case_receipt.py",
+          "exists": true,
+          "sha256": "041ee9e20c5c9c5926fe2a8e21f125d9b185244f7390472251bbcd3cd0bb6133"
+        },
+        {
+          "path": "tools/source_case_checks.py",
+          "exists": true,
+          "sha256": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0"
+        },
+        {
+          "path": "tests/unit/test_source_case_runner.py",
+          "exists": true,
+          "sha256": "6e037d6504b4ed5973f1f3d4f1064c8bd43b98367fa226893cd1714973201b31"
+        },
+        {
+          "path": "tests/unit/test_source_case_receipt.py",
+          "exists": true,
+          "sha256": "94e1c756e731957bbc49d6529637e05e5e805162cb648ad02cf7f1990371cf7e"
+        }
+      ]
+    }
+  ],
+  "missing_files": []
+}

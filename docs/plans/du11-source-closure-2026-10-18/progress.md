@@ -277,3 +277,15 @@ CWP fee04/bd911已推；原精确CI8旧oracle失败保留。6测试迁移独审�
 R7最终遗漏、测试分层/重复清理和定点部署已集中独审并正常发布。四仓最终精确CI全部成功。42逻辑目标/9config/重复0写、3新进程与安装版离线真CLI双跑通过。原43CI失效期望和933P2F历史保留；全Unit不在本地反复跑。下一步按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。
 
 文档发布助手首轮把 Git 的 CRLF 警告与路径输出混读，在暂存前停止；已分开 stdout/stderr 后继续正常提交，不改换行策略或绕过 hook。
+
+
+## 2026-11-02 — 整改清单逐项复核
+
+用户要求逐项核对 Q01–Q14、R7核心/工具/跨仓及交接增量。ROOT核当前实现与证据，两独立复核分开看原质量清单和跨仓清单；不重复全量/收费。已发现原 implementation.md 和 R7 主计划当前描述过期，将统一入口并保留历史失败。完整对照表归 review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/。
+
+
+## 2026-11-02 — 整改清单逐项收口
+
+正式41项全部映射：40工程完成、Q11按边界保留；T01逐个核8入口。独立核对发现两仓SourceExport16MiB后置门，ROOT继续查出paid response与run binding各256KiB隐藏顶帽，已同owner根修。CWP2F1P/Stock1F及binding1F历史保存；修后54P/13s、33P/5.21s、ledger23P/5.21s，loopback大body中断unknown→新lease/无凭证恢复1POST。独审=True；本次新源码精确CI成功。2可选优化保未做，T4/真实C/R4/公司loop保持。已更正原README/implementation暂停、R7在途与STATUS旧daily167的当前表述，历史报告保留。
+
+StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓/StockWiki授权、clean状态和精确2文件证据后原动作获准，没有换通道或再次问用户。只读定位时若干旧文件名已不存在，改用CodeGraph已定位文件和实际清单；未据缺文件推断功能未实现。

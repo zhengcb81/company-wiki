@@ -1,12 +1,12 @@
-**2026-11-02：R7全部已知过度门禁与重复工程测试整改已独审/提交推送；精确CI见CURRENT_STATUS。下一步T4来源父链，新真实C/公司循环仍OPEN。**
+**2026-11-02：整改清单41项逐项核完，3新增表示/预算漏项已补修；独审和精确CI见CURRENT_STATUS。2可选优化及真实C/循环仍OPEN。**
 
 # 主线剩余实施计划
 
-**当前：R7工程集中收口已正常发布；不恢复旧表示许可或单一daily/CI inventory。当前唯一入口CURRENT_STATUS，下一步T4及新真实C，不签总目标完成。**
+**当前：逐项表为整改证据入口，已完成工程不重复施工；本次补漏收口后继续T4与真实C，不签总目标完成。**
 
 ## Next Step
 
-按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。
+按T4-source-note-parent-plan.md冻结去公司化父链正反例并在来源树owner根修，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。
 
 ## P0 — 已完成的CI根修
 
@@ -51,3 +51,7 @@ R4主/五压力/报告/snapshot和四审已封存。73检查、6P2，无新增�
 ## 边界与发布
 
 ROOT唯一维护主PWF/集成，责任层各自负责；不新增施工包、逐小节点签收、私有根分类、人工许可或第二身份/任务库。预算/模型按当前配置，原件不翻译，未知保留。Dayu/IQS/Dashboard与其他owner WIP不动；CWP不保存投资研究结论。测试只跑必要快速域/受影响集成与大节点E2E，不无故重复全量。
+
+## 2026-11-02 — 整改清单逐项验收结果
+
+原41正式项：40工程完成、Q11边界论证保留；8个T01实际入口全部对应。三新增漏项直接同owner修复，54CWP/33StockWiki/23ledger受影响测试通过，独审/精确CI以CURRENT_STATUS为准。2可选优化与真实公司验收不作已完成、不增微节点许可。详细表：review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md。

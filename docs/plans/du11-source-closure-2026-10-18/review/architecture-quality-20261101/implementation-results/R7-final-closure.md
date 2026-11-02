@@ -23,3 +23,7 @@
 审查入口：final-sweep core/crossrepo/tooling；core independent-r3；ROOT residual independent；PhaseC observation independent；invest E2E independent；FF/CWP daily feedback independent；CWP final CI oracles independent；final engineering tests independent。原r1/r2 FAIL是历史，当前签收按最终版本。
 
 仍待主线：真实H1父链P2、新摘要/缓存恢复/RF实际采用、R4六共因与完整公司循环。一次未确认原因的Windows临时rename观察保留；新独立目录及安装版复验通过，不宣称已修I/O根因，不因此加许可门。
+
+## 逐项复核后的补充
+
+前述为原R7发布节点。当前[完整逐项表](checklist-verification-20261102/checklist.md)覆盖原41项、3个新发现已补修项和2个明确未做的可选优化。新补修独审/CI以主CURRENT_STATUS为准，不以旧成功代新版本；真实公司主线未完成。

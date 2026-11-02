@@ -53,7 +53,7 @@
       "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     }
   },
-  "next": "按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。",
+  "next": "按T4-source-note-parent-plan.md冻结去公司化父链正反例并在来源树owner根修，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。",
   "historical_publication_snapshots": {
     "publication_head": "6668bc978d3ea2217a9aff30be69bde456894c04",
     "cwp_exact_ci": {
@@ -87,20 +87,20 @@
     "project_state": "R6_R4_SOURCE_SEMANTIC_ROOT_REPAIR_AND_DAILY_GATE_SIMPLIFICATION"
   },
   "canonical_entry": "../../../CURRENT_STATUS.md",
-  "project_state": "R7_ENGINEERING_PUBLISHED_ALL_EXACT_CI_GREEN_REAL_C_OPEN",
+  "project_state": "R7_CHECKLIST_VERIFIED_RESIDUALS_REPAIRED_EXACT_CI_GREEN_REAL_C_OPEN",
   "publication": {
     "company-wiki": {
-      "source_head": "389a10fb9a3321072ed863e5e55d761043218921",
+      "source_head": "cb2488e2924dedb37bc9c63f471334fb0022b942",
       "exact_ci": [
         {
-          "id": 41450377163,
+          "id": 41457662863,
           "name": "CI",
-          "head_sha": "389a10fb9a3321072ed863e5e55d761043218921",
+          "head_sha": "cb2488e2924dedb37bc9c63f471334fb0022b942",
           "head_branch": "master",
           "status": "completed",
           "conclusion": "success",
-          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41450377163",
-          "updated_at": "2026-11-02T13:15:36Z"
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41457662863",
+          "updated_at": "2026-11-02T14:04:35Z"
         }
       ]
     },
@@ -151,8 +151,13 @@
     }
   },
   "W23": "Tooling merged/pushed/exact CI pass; empirical partial, not production OCR switch.",
-  "daily_feedback": "Fixed original167case smoke, no impact-AST expansion; main push45.097s and complete CI pass.",
-  "observed_at_utc": "2026-11-02T13:20:05.862425+00:00",
+  "daily_feedback": {
+    "CWP": "daily9existing nodes/17cases; actual standalone18.444s, normal source push14.916s; Unit+CI22 intact",
+    "FF": "daily11existing nodes; actual CLI1.019s, normal push3.772s; CI original40files intact",
+    "RF": "daily12existing nodes; last normal push6.414s; full CI original41file behavior intact",
+    "invest": "21P1skip push4.017s; no implicit deployment or full suite duplication"
+  },
+  "observed_at_utc": "2026-11-02T14:05:36.181826+00:00",
   "historical_pre_r6_metadata": {
     "independent_final": "independent-wire-r5.md",
     "engineering_commit": "c97d4fbd",
@@ -209,7 +214,8 @@
       "passed": 18,
       "failed": 5,
       "evidence": "R6-independent-ci-r3.json"
-    }
+    },
+    "pre_checklist_daily_feedback": "Fixed original167case smoke, no impact-AST expansion; main push45.097s and complete CI pass."
   },
   "current_source_observation": {
     "case": "H1v4",
@@ -223,5 +229,31 @@
     ],
     "evidence": "C-source-v4-independent.json",
     "next": "T4-source-note-parent-plan.md"
+  },
+  "checklist_verification": {
+    "status": "COMPLETE_WITH_REPAIRED_RESIDUALS_TWO_OPTIONAL_AND_REAL_ACCEPTANCE_OPEN",
+    "formal_items": 41,
+    "formal_missing": [],
+    "original_engineering_complete": 40,
+    "original_kept_by_reason": [
+      "Q11"
+    ],
+    "new_residuals": [
+      "R7-RESIDUAL-V2-WIRE-CAP",
+      "R7-RESIDUAL-PAID-RESPONSE-CAP",
+      "R7-RESIDUAL-RUN-BINDING-CAP"
+    ],
+    "new_residual_independent_pass": true,
+    "new_source_exact_ci_success": true,
+    "optional_open": [
+      "R7-O01",
+      "R7-SPY-200-SAMPLE-MARKER"
+    ],
+    "matrix": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md",
+    "StockWiki": {
+      "mainline_head": "9e8e308b37b668620a94376494fef4fdc3b55bed",
+      "publication": "LOCAL_MAIN_NO_REMOTE_CONFIGURED",
+      "note": "No remote URL configured; no remote push or CI is claimed."
+    }
   }
 }

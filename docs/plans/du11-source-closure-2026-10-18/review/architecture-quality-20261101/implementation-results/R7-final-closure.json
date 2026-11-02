@@ -471,5 +471,31 @@
   "external_model_calls": 0,
   "downloads": 0,
   "originals_modified": 0,
-  "remaining": "T4 parent-chain P2, new runtime realC, R4 six issues and full company loop remain OPEN."
+  "remaining": "T4 parent-chain P2, new runtime realC, R4 six issues and full company loop remain OPEN.",
+  "checklist_verification": {
+    "status": "COMPLETE_WITH_REPAIRED_RESIDUALS_TWO_OPTIONAL_AND_REAL_ACCEPTANCE_OPEN",
+    "formal_items": 41,
+    "formal_missing": [],
+    "original_engineering_complete": 40,
+    "original_kept_by_reason": [
+      "Q11"
+    ],
+    "new_residuals": [
+      "R7-RESIDUAL-V2-WIRE-CAP",
+      "R7-RESIDUAL-PAID-RESPONSE-CAP",
+      "R7-RESIDUAL-RUN-BINDING-CAP"
+    ],
+    "new_residual_independent_pass": true,
+    "new_source_exact_ci_success": true,
+    "optional_open": [
+      "R7-O01",
+      "R7-SPY-200-SAMPLE-MARKER"
+    ],
+    "matrix": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md",
+    "StockWiki": {
+      "mainline_head": "9e8e308b37b668620a94376494fef4fdc3b55bed",
+      "publication": "LOCAL_MAIN_NO_REMOTE_CONFIGURED",
+      "note": "No remote URL configured; no remote push or CI is claimed."
+    }
+  }
 }

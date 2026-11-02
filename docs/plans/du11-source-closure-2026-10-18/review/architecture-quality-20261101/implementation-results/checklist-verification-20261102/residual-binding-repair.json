@@ -1,0 +1,45 @@
+{
+  "id": "R7-RESIDUAL-RUN-BINDING-CAP",
+  "status": "FROZEN_AWAITING_INDEPENDENT_REVIEW",
+  "requirement": "Opaque canonical source/recovery metadata must not be denied by an independent262144B ledger representation cap. Preserve complete freeze/reopen/idempotence and real scope/fees/storage owners.",
+  "caller": "narrative_batch._frozen_binding -> NarrativeRunStore.create_run(binding_json=...)",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_run_store.py": "4c3963f277b80ac642422b6d78b66787054ac1c1f4d174504ed8d4412e5ecd71",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_batch.py": "3616433ddbe197c194b1d3655167997b873b005e8420d1040d3cf6d06032222f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_run_store.py": "61eee070f7f3d258a3a6d76235ea77783a5e50ca52288c8423d692d44080d740"
+  },
+  "TDD": "1 genuine RED ->23P affected ledger tests/5.21s; Ruff3green",
+  "receipts": {
+    "cwp-residual-checklist-binding-red": {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "checklist-binding-red",
+      "targets": [
+        "tests/unit/test_narrative_run_store.py::test_complete_frozen_binding_has_no_independent_representation_quota"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-1f0f47",
+      "initially_absent": true,
+      "returncode": 1,
+      "elapsed_s": 2.218,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true
+    },
+    "cwp-residual-checklist-binding-green": {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "checklist-binding-green",
+      "targets": [
+        "tests/unit/test_narrative_run_store.py"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-e91610",
+      "initially_absent": true,
+      "returncode": 0,
+      "elapsed_s": 6.063,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true
+    }
+  },
+  "logs": {
+    "cwp-residual-checklist-binding-red": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7rt-1f0f47\\\\pytest\", \"requested_basetemp_len\": 57, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 1 item\n\ntests\\unit\\test_narrative_run_store.py F                                 [100%]\n\n================================== FAILURES ===================================\n____ test_complete_frozen_binding_has_no_independent_representation_quota _____\ntests\\unit\\test_narrative_run_store.py:131: in test_complete_frozen_binding_has_no_independent_representation_quota\n    record = create_run(budget, (job,), binding_json=binding)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_narrative_run_store.py:117: in create_run\n    return budget.create_run(**options)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_run_store.py:982: in create_run\n    raise ValueError(\"narrative run binding exceeds its byte limit\")\nE   ValueError: narrative run binding exceeds its byte limit\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-1f0f47\\results.xml -\n=========================== short test summary info ===========================\nFAILED tests/unit/test_narrative_run_store.py::test_complete_frozen_binding_has_no_independent_representation_quota\n============================== 1 failed in 1.18s ==============================\n",
+    "cwp-residual-checklist-binding-green": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7rt-e91610\\\\pytest\", \"requested_basetemp_len\": 57, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 23 items\n\ntests\\unit\\test_narrative_run_store.py .......................           [100%]\n\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-e91610\\results.xml -\n============================= 23 passed in 5.21s ==============================\n"
+  },
+  "retained": "CLI actual bounded request-file read, actual HTTP/socket input/output, explicit model request claim shares and identity labels are not removed by this metadata fix. Projection old size-error strings now guard only missing/invalid bytes, not actual length."
+}

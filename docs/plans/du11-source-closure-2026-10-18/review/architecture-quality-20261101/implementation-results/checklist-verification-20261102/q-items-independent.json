@@ -1,0 +1,1439 @@
+{
+  "schema_version": "architecture-quality-q-checklist-independent/1",
+  "status": "ORIGINAL_14_ENGINEERING_DISPOSITIONS_VERIFIED_REAL_C_OPEN_NEW_RESIDUAL_OPEN",
+  "observed_at_utc": "2026-11-02T13:40:29.295473+00:00",
+  "plan_id": "du11-source-closure-2026-10-18",
+  "classification": {
+    "engineering_complete_in_defined_scope": 13,
+    "kept_by_reason": 1,
+    "original_q_items_missing": 0,
+    "real_acceptance_open": [
+      "Q01/Q02/Q12 and combined original C",
+      "T4 H1 parent-chain",
+      "new summary/paid interruption/same-cross cache/actual RF adoption"
+    ],
+    "new_residual_open": [
+      "R7-RESIDUAL-V2-WIRE-CAP"
+    ],
+    "not_whole_goal_complete": true
+  },
+  "current_git": {
+    "CWP": {
+      "head": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+      "branch": "master",
+      "origin_master_tracking": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+      "published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+      "ancestor_checks": {
+        "10767b86318e63094c2bb49451447c9aedffc32c": true,
+        "ef3d92a26fce661ab6d6c047f7a01c223d426344": true,
+        "389a10fb9a3321072ed863e5e55d761043218921": true
+      },
+      "published_to_current_head_engineering_diff": "",
+      "runtime_wip_at_end_of_read": "src/company_wiki/automation/narrative_paid_response.py\nsrc/company_wiki/source_contract/source_export_v2.py\ntests/contract/test_source_export_v2.py\ntests/integration/test_du11_paid_response_recovery.py\ntests/unit/du11_paid_response/test_paid_response.py"
+    },
+    "StockWiki": {
+      "head": "e5a1be6523499ac1791805457f12229c98fbf10d",
+      "branch": "master",
+      "Q09_commit": "381811e53875a589618e726122267c3812983607",
+      "Q09_is_ancestor": true,
+      "remote_tracking_refs": "",
+      "publication": "LOCAL_MASTER_ONLY_NOT_CONFIGURED_HISTORICAL"
+    }
+  },
+  "items": [
+    {
+      "id": "Q01",
+      "original_requirement": "陌生行业完整经营陈述不因有限动词/对象词表被丢弃；可读资格与事件/量值/发行人证明分轴。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/narrative_source_passage.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_source_passage.py",
+          "sha256": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041",
+          "symbols": [
+            {
+              "name": "prepare_source_statement_scope",
+              "line": 108
+            },
+            {
+              "name": "prepare_source_passage",
+              "line": 356
+            },
+            {
+              "name": "_grammar_uncertainty",
+              "line": 337
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/narrative_business_policy.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+          "sha256": "78897fff05fa6d2e0195a0adafdbd9f1b5d48c8499dd605dd3cd84a75e8df593",
+          "symbols": [
+            {
+              "name": "prepare_reading_business_assessment",
+              "line": 1116
+            },
+            {
+              "name": "detect_reading_business_fact",
+              "line": 1023
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_operating_relations.py",
+          "sha256": "865a6eaa12a880c54b85b134de5e92f1b0ab9e9c2215381e4f67bcdd1c33e230",
+          "symbols": [
+            {
+              "name": "SourceOperatingSession",
+              "line": 138
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/document_understanding/statement_grammar/__init__.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\statement_grammar\\__init__.py",
+          "sha256": "23369e92e6f1f9d330a09fcdb3ff7d470ce4c1176c4cc7e7a984022141dfb9e8",
+          "symbols": [
+            {
+              "name": "observe_statement",
+              "line": 291
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "同prepared scope统一语法/上下文和text_fact/production fact；保原roles False/None；陌生具名范围/计划/定义可作为资料，weak目标/问句/完整金融句不借句法升级；资源缺失沿公开handler保持partial。",
+      "tests_responsibility": [
+        "tests/unit/du11_production/test_source_readability_generalization.py",
+        "tests/unit/du11_production/test_source_semantic_axes.py",
+        "tests/unit/du11_production/test_source_preparation_axes.py",
+        "tests/unit/du11_production/test_source_argument_semantics.py",
+        "tests/unit/test_narrative_select_handler.py"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-source-contract-r5.md",
+          "sha256": "78944998b8fc57807b8a2b5d34c6a99c3bd793a662522c41f59cc2ec06e95fd1"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-independent-ci-r5.json",
+          "sha256": "75e37603af4cea811f813aae8025570f27deec7e70ed051a80ef97b5805c66ae"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-publication.json",
+          "sha256": "346473022e17ce166bb32353ee909f1830a2c2a5f6a5aa84994412fbed319ab2"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q01-rework-r4.md",
+          "sha256": "700270bfed5d1e6225712d2deda07ac8f56713267dd11af698d8bb656c4cd045"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q01-rework-r5-integration.md",
+          "sha256": "e8a055bd7153659d3b27c04d8224d6e271ebaccd17d345324a400e5027897d7c"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE; REAL_ACCEPTANCE_OPEN",
+      "remaining_boundary": "原70旧期待恢复；R5最终28唯一场景限定独审及精确完整CI通过，不借旧R3/R4局部PASS签全域。H1v4父链P2、新摘要/恢复/RF仍OPEN；POS不证明任意行业现实真伪。",
+      "kept_by_reason": "同Session/WorkBudget/memo保留；grammar unavailable/scope_limit不能伪报无业务或complete，unknown事实不升级。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q02",
+      "original_requirement": "实际阅读算法/数据/runtime依赖变化使真实缓存失效，不适用格式变化不误伤。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/reading_recipe.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\reading_recipe.py",
+          "sha256": "6f123d3b6479ea0ad07b5676f7c712dc71327a10bd9865e0dc405aa103f1e5eb",
+          "symbols": [
+            {
+              "name": "algorithm_hashes",
+              "line": 84
+            },
+            {
+              "name": "business_algorithm_hashes",
+              "line": 115
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/narrative_decision_inventory.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_decision_inventory.py",
+          "sha256": "25b5826cdc5f482aaa621c6c2d68b7c3a6fd2013a57eea667a1836c2a9511b28",
+          "symbols": [
+            {
+              "name": "current_decision_trace",
+              "line": 362
+            },
+            {
+              "name": "_versions",
+              "line": 72
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/automation/narrative_generation.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_generation.py",
+          "sha256": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+          "symbols": [
+            {
+              "name": "current_reading_decision_matches",
+              "line": 632
+            },
+            {
+              "name": "ReadingReuseVerifier",
+              "line": 513
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "来源组合owner声明入口；literal-import闭包按实际bytes哈希并缓存AST，PDF table observations及grammar资源/runtime身份纳入；DU旧模块薄兼容，纯decision_dependencies不认识source实现。",
+      "tests_responsibility": [
+        "tests/unit/document_understanding_selection/test_reading_recipe_closure.py",
+        "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+        "tests/unit/du11_production/test_cache_identity.py",
+        "tests/unit/test_shared_reading_cache_precheck.py"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q02.md",
+          "sha256": "5ef8f0b13bb05d89dfce1e84c7056473ea2107d61fde0568254b4f23f3fc5bec"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-A-r2.md",
+          "sha256": "fd8c5c6b39e6231de938cb19b8a3a59d4f010d9a4b28059df778f6dde51936da"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-owner-boundaries-ci.md",
+          "sha256": "b9ad4e654690fdfd9e1faf267a27dc8348c965973a52d59624434c42deb61fa8"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-independent-ci-r5.json",
+          "sha256": "75e37603af4cea811f813aae8025570f27deec7e70ed051a80ef97b5805c66ae"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-RF-independent.json",
+          "sha256": "90c8d98110302ed6fddc9d2e18c2576c664573e324c4e4f754e6df27216042a7"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE; REAL_ACCEPTANCE_OPEN",
+      "remaining_boundary": "真实cache函数的PDF/text/data/runtime反例通过；不是任意动态Python依赖证明，新增跨边界算法需owner声明。新版真实付费artifact缓存恢复仍待C。",
+      "kept_by_reason": "partial inventory不判same，也不授权再买一次；可通过一次当前source重选与完整material比较证明等价。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q03",
+      "original_requirement": "精确公司查询不先受全库同文种20k计数拖累；保纠错/别名/冲突候选超集及最终语义。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/identity_candidates.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\identity_candidates.py",
+          "sha256": "d043cb3a558d4fee3dc7767270ed91d5b1e2a07bc8811c93aecb85ba3b488f5f",
+          "symbols": [
+            {
+              "name": "identity_candidate_clause",
+              "line": 187
+            },
+            {
+              "name": "request_identity_tokens",
+              "line": 59
+            },
+            {
+              "name": "ensure_identity_projection",
+              "line": 67
+            },
+            {
+              "name": "refresh_identity_projection",
+              "line": 127
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/source_reader.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py",
+          "sha256": "9261cb6798be5688c96096c1b3c4c3492a649696942c02371f4d000eacabaa7c",
+          "symbols": [
+            {
+              "name": "_candidate_pages",
+              "line": 151
+            },
+            {
+              "name": "_query_local",
+              "line": 214
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/service.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\service.py",
+          "sha256": "bf13e0b5e97c317ef793964c62c8bb33d6294922bac79cc7b0b1dae923891707",
+          "symbols": [
+            {
+              "name": "query_filing_candidates",
+              "line": 232
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "派生token索引+native SQL dirty triggers；writer同事务刷新；readonly含dirty/旧库SQL兼容不迁移；document_id稳定keyset+1 lookahead区分20k正好EOF。",
+      "tests_responsibility": [
+        "tests/unit/test_source_identity_candidate_projection.py",
+        "tests/contract/test_source_version_reader.py",
+        "tests/unit/test_source_facts.py"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q03.md",
+          "sha256": "8dffbe0b174df71d77e8263131d29bdfc614b760929065d4d584fef48f838926"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-consumer-migration.md",
+          "sha256": "2b63ac0727872c4a24ec03f4bd66b2f1beefda74aa9000712b27de12f82f6308"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE",
+      "remaining_boundary": "15新候选例和最终owner反控已独审；旧库首次writer backfill/生产规模性能未测，不冒已迁移或全库零成本。",
+      "kept_by_reason": "实际相关候选20k预算和最终身份/期间/as-of保留；候选token不是事实有效或可用证明。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q04",
+      "original_requirement": "空间增量归实际run；轮询不反复扫共享CAS；并发/崩溃不能降账或放大额度。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/automation/narrative_run_store.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_run_store.py",
+          "sha256": "113dd88839c1531fc15f39d962c7089b20ed4890622609649eefccc9cee9224a",
+          "symbols": [
+            {
+              "name": "account_storage_write",
+              "line": 609
+            },
+            {
+              "name": "_admit_storage_object",
+              "line": 637
+            },
+            {
+              "name": "_settle_storage_object",
+              "line": 672
+            },
+            {
+              "name": "storage_bytes",
+              "line": 582
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/automation/narrative_batch.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_batch.py",
+          "sha256": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+          "symbols": [
+            {
+              "name": "BatchStorageBudget",
+              "line": 1234
+            },
+            {
+              "name": "_storage_guard",
+              "line": 1321
+            },
+            {
+              "name": "_BudgetedObjects",
+              "line": 1368
+            },
+            {
+              "name": "_write_generation_owner",
+              "line": 2136
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/automation/narrative_worker_factory.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_worker_factory.py",
+          "sha256": "52365927ef03ea107426fd5bcfe5738c0812139a2132a661a3147a20c6a4cec6",
+          "symbols": [
+            {
+              "name": "create_runtime",
+              "line": 303
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "原AUTO新增空间allocation账；实际put新增/复用量结算；短OS mutex覆盖admit/write/settle，已知量max单调；local-only snapshot避免双快照加回；poll force=False，私有目录至多5s采样，共享DB诊断。",
+      "tests_responsibility": [
+        "tests/unit/test_narrative_storage_ownership.py",
+        "tests/unit/test_automation_migrations.py",
+        "tests/unit/test_automation_migrations_v2.py",
+        "tests/unit/test_automation_migrations_v3.py",
+        "tests/integration/test_narrative_runtime_e2e.py"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q04-Q06.md",
+          "sha256": "adfbbd1de4b0396f17cee7837bbc7aaa8718cece2020f82ad27f4982bff9e339"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q04-Q06-seal.json",
+          "sha256": "4976a827754803c4e75259cbfe48aa40b2d763e6eaba9918104a93cca1ccec11"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-consumer-migration.md",
+          "sha256": "2b63ac0727872c4a24ec03f4bd66b2f1beefda74aa9000712b27de12f82f6308"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE",
+      "remaining_boundary": "首审两个真实并发P2保留；R2独立5例和作者raw-v1 loopback通过。共享WAL不伪精确归run；旧floor是保守历史量，不是物理FS精确计量或生产吞吐基准。",
+      "kept_by_reason": "HTTP/解析锁外、pending未知占用不退款、原lease/outbox/AUTO账保留，未建任务/许可库。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q05",
+      "original_requirement": "去除旧parser-name全范围DELETE，不让一次性legacy prune删除当前引用证据。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "tools/legacy_storage/spans.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\legacy_storage\\spans.py",
+          "sha256": "0cc205a9735fe3f04c124ae25bedaa5a0310dbe1cde59bb76b7fbfabdfeb6648",
+          "symbols": [
+            {
+              "name": "run_prune_spans",
+              "line": 10
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "tools/legacy_storage_retirement.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\legacy_storage_retirement.py",
+          "sha256": "aab15afb97100e6143e1f4a800d11e91d2279cdfe2607c5a2c14c2bcd671b5ef",
+          "symbols": [
+            {
+              "name": "main",
+              "line": 35
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "S5一次性清理已于Oct6完成，旧DELETE实现删除；API无I/O退休结果，CLI在config/selection/receipt I/O前退休，不新增许可文件。",
+      "tests_responsibility": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_completed_span_prune_never_opens_current_catalog",
+        "tests/unit/test_maintenance_quality_remediation.py::test_completed_prune_cli_never_loads_config"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q05-Q07-Q08-Q13-Q14.md",
+          "sha256": "ea3259ea16e1a539b9375ed0bf29e82d9fd44822a459ed0873ccf245b55854b1"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE_BY_RETIREMENT",
+      "remaining_boundary": "没有重删生产span/原件或做完整恢复演练；保旧S5史料、现行只读inventory/vacuum，不承诺通用自动prune。",
+      "kept_by_reason": "退休不靠keep_refs签收，人为授权不取代当前生命周期/事务范围。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q06",
+      "original_requirement": "CAS put现存对象及FileExists竞争分支都按expected_size+1有界验证。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/narrative_artifact_store.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_artifact_store.py",
+          "sha256": "84baf345ccba31e34857c0be31a4354f8eab714a1e0f987e9663ef9353b8f03d",
+          "symbols": [
+            {
+              "name": "LocalNarrativeObjectStore",
+              "line": 153
+            },
+            {
+              "name": "put_with_usage",
+              "line": 164
+            },
+            {
+              "name": "read",
+              "line": 204
+            },
+            {
+              "name": "NarrativeObjectPut",
+              "line": 148
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "两分支统一read，不再read_bytes全盘读取损坏对象；复用新增0，创建返回实际bytes。",
+      "tests_responsibility": [
+        "tests/unit/test_narrative_storage_ownership.py::test_cas_existing_object_validation_never_reads_beyond_input_bound",
+        "tests/unit/test_narrative_storage_ownership.py::test_cas_reused_object_is_not_rewritten"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q04-Q06.md",
+          "sha256": "adfbbd1de4b0396f17cee7837bbc7aaa8718cece2020f82ad27f4982bff9e339"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE",
+      "remaining_boundary": "小损坏/竞争/重复例及host验证已过；不冒任意大小OOM压力测试。WinError5为sandbox hardlink限制，未修改ACL/原子语义换绿。",
+      "kept_by_reason": "实际size/SHA、atomic create-if-absent、fsync和失败临时清理保留。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q07",
+      "original_requirement": "退役硬机器目录复制及默认真实公司/原地清水印脚本，不依赖sitecustomize。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "scripts/copy_docs.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\copy_docs.py",
+          "sha256": "6e7b52b989312683e54118bbae3e32c7d6933cb93036f2abe8d3e6cd07b371dd",
+          "symbols": [
+            {
+              "name": "main",
+              "line": 8
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "scripts/clean_watermarks.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\clean_watermarks.py",
+          "sha256": "6e7b52b989312683e54118bbae3e32c7d6933cb93036f2abe8d3e6cd07b371dd",
+          "symbols": [
+            {
+              "name": "main",
+              "line": 8
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "两脚本只打印退休并exit78；默认公司、物理路径、copy2/原地write实现均删除。",
+      "tests_responsibility": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_obsolete_copy_and_cleanup_cli_retired_before_arguments"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q05-Q07-Q08-Q13-Q14.md",
+          "sha256": "ea3259ea16e1a539b9375ed0bf29e82d9fd44822a459ed0873ccf245b55854b1"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE_BY_RETIREMENT",
+      "remaining_boundary": "无需另造复制owner或“解锁”脚本；新采集走来源catalog。退役旧writer不代表所有历史脚本逐行重写。",
+      "kept_by_reason": "明确退休是去除无用功能，不是人工许可或环境变量审批。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q08",
+      "original_requirement": "架构测试用AST覆盖relative/qualified/alias/__init__/常量动态import；注释不误报，owner豁免不能basename绕过。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/architecture_gate.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\architecture_gate.py",
+          "sha256": "4bbe21bcfc149979d41169b4dd764759b9665b56e6327e89ff88ee3674a1b135",
+          "symbols": [
+            {
+              "name": "import_names",
+              "line": 34
+            },
+            {
+              "name": "source_catalog_does_not_import_prohibited_modules",
+              "line": 63
+            },
+            {
+              "name": "no_root_specific_hardcode",
+              "line": 120
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "解析真实import和可执行root比较；精确相对owner路径；删除未用恒真/旧snapshot约束，真实当前树检查进现有Unit。",
+      "tests_responsibility": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_dependency_check_catches_import_forms_in_package_initializer",
+        "tests/unit/test_maintenance_quality_remediation.py::test_dependency_check_ignores_quotes_and_comments",
+        "tests/unit/test_maintenance_quality_remediation.py::test_nested_config_basename_cannot_exempt_root_conditional",
+        "tests/unit/test_maintenance_quality_remediation.py::test_current_source_catalog_has_no_research_imports",
+        ".github/workflows/ci.yml::Unit tests"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q05-Q07-Q08-Q13-Q14.md",
+          "sha256": "ea3259ea16e1a539b9375ed0bf29e82d9fd44822a459ed0873ccf245b55854b1"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-final-engineering-tests-independent.json",
+          "sha256": "3a2c6aec9bcf0a7b2459cdc0c61f57974464482c58c7de1889c9ca5f8a733e9c"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-final-closure.json",
+          "sha256": "161d1353576181f2f5cbce05216c66a1956e2d4a66a68861ac81879aeaff4893"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE_DEFINED_STATIC_SCOPE",
+      "remaining_boundary": "literal-import AST与已知root条件不是任意动态代码/全仓无硬编码证明；compat旧flag/bridge检查仍是有限历史规则，未夸成全部语义验证。",
+      "kept_by_reason": "轻量Unit不膨胀为每commit全旧gate/E2E；诊断分数不拦正常业务。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q09",
+      "original_requirement": "StockWiki在读取期流式限制stdout/stderr并回收超额/超时进程树，避免全量缓冲。",
+      "implementation": [
+        {
+          "repo": "StockWiki",
+          "file": "stockwiki/_source_reader_v2_transport.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_transport.py",
+          "sha256": "a3888360bc064ca2b1312a652e4084ed5c1f421948603117c990d4880263514c",
+          "symbols": [
+            {
+              "name": "VerifiedOpenTransport",
+              "line": 55
+            },
+            {
+              "name": "open_verified",
+              "line": 114
+            }
+          ]
+        },
+        {
+          "repo": "StockWiki",
+          "file": "stockwiki/_narrative_process.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_process.py",
+          "sha256": "7c61fbf909bd95126280dc0fa602e27b14eb0b721e49af668436fc24b3a7d203",
+          "symbols": [
+            {
+              "name": "run_bounded",
+              "line": 18
+            }
+          ]
+        },
+        {
+          "repo": "StockWiki",
+          "file": "stockwiki/_narrative_process_tree.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_process_tree.py",
+          "sha256": "fc89499c530d93203104033c34cd15b13d201b96fb702ac6cfe59627ebc30c3e",
+          "symbols": [
+            {
+              "name": "ProcessTree",
+              "line": 11
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "复用StockWiki自己已有bounded runner/进程树，limit+1即中止，保receipt/hash和deadline。CWP不反向提供私有进程helper。",
+      "tests_responsibility": [
+        "StockWiki/tests/test_source_export_v2_bounded_transport.py",
+        "StockWiki真实CWP TXT verified-open/CLI既有E2E"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q09.md",
+          "sha256": "dfa8e00379c5c24b6ac8df506524611946806773c4ed579831329747a0522826"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q09-publication.json",
+          "sha256": "4c4b3702b99c0344bf4e9c273fd41c4fa661ab5b8bb462657c4ce8171f3fca2a"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE_LOCAL_MAIN; NO_REMOTE_CONFIGURED",
+      "remaining_boundary": "381811e5已在当前StockWiki master祖先；历史无remote，不能称远端push/CI。独立2超额+孙进程marker和作者真实TXT端口已过，非全仓研究语义验收。新post-load16MiB另列，不混同原流式风险。",
+      "kept_by_reason": "stdout来自显式reader-config，是实际读取预算；stderr256KiB也处在实际读取owner，不因常量单独判许可。depth64未证明有效拒绝。",
+      "commit_and_publication": {
+        "feature": "9dc530ea9e8edd086ece75aa27ba2c8674c9e29d",
+        "merged_main": "381811e53875a589618e726122267c3812983607",
+        "current_main": "e5a1be6523499ac1791805457f12229c98fbf10d",
+        "ancestor_verified": true,
+        "remote": "NOT_CONFIGURED_HISTORICAL",
+        "source": "Q09-publication.json + actual read-only Git ancestry"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q10",
+      "original_requirement": "纯SourceExport不强绑具体SourceVersionReader；writer不经高层reader构建身份。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_contract/source_version.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_contract\\source_version.py",
+          "sha256": "2bbdb09579cb68bae4e4a7de94998e6317137f463e9e4f6868b66d247fbf488c",
+          "symbols": [
+            {
+              "name": "SourceRef",
+              "line": 23
+            },
+            {
+              "name": "VerifiedContent",
+              "line": 44
+            },
+            {
+              "name": "SourceVersionPort",
+              "line": 73
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_contract/source_export_v2.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_contract\\source_export_v2.py",
+          "sha256": "0f22bbbb96507ab40c7afda85e28b815616a05fc912a0f00e4c1c05cb7ab8a8f",
+          "symbols": [
+            {
+              "name": "SourceExportBundleV2",
+              "line": 65
+            },
+            {
+              "name": "build",
+              "line": 99
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/source_references.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_references.py",
+          "sha256": "17c2c5596d52d12905d8bbd936817727645f6227fa9a44faaaca82e84c6ce6c7",
+          "symbols": [
+            {
+              "name": "query_source_reference",
+              "line": 16
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/canonical_writer.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\canonical_writer.py",
+          "sha256": "621738f1c06ab3d6a898cdf69b5058f4fa0f72125ec674ca4654e0eda4145931",
+          "symbols": [
+            {
+              "name": "CanonicalSourceWriter",
+              "line": 257
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "纯DTO/窄runtime-checkable Protocol；旧reader别名兼容；登记owner直接调用source_references。新进程-I/-S显式当前src并用catalog import firewall避免借editable旧树假绿。",
+      "tests_responsibility": [
+        "tests/unit/test_source_contract_reader_port.py",
+        "tests/contract/test_source_export_v2.py",
+        "tests/contract/test_source_export_v2_cli.py"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\ROOT.md",
+          "sha256": "7815de31b3024a1dbac91c72c17f453cd54ac34cdd9eaece263af9d40e7f3c45"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-A.md",
+          "sha256": "7d984fc8446b6d8df71870cc5343043684edbc9f17d259b72b298f9486e100d3"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-owner-boundaries-ci.md",
+          "sha256": "b9ad4e654690fdfd9e1faf267a27dc8348c965973a52d59624434c42deb61fa8"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-independent-consumers.json",
+          "sha256": "2f5afb92aace6d787390e7bd1bd52e64581fdee01400fd2c5f12f8fab4a89583"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE",
+      "remaining_boundary": "替身backend/root relocation/坏bytes反控已有证据；新from_json16MiB是独立表示门遗漏，不是反向实现依赖未去除。",
+      "kept_by_reason": "接收实际bytes SHA保留，不用trusted标志或具体reader绑定省验证。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q11",
+      "original_requirement": "评估同次bytes重复SHA，只合并真正同owner热点；不删公开接收/跨时间复核。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_contract/source_export_v2.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_contract\\source_export_v2.py",
+          "sha256": "0f22bbbb96507ab40c7afda85e28b815616a05fc912a0f00e4c1c05cb7ab8a8f",
+          "symbols": [
+            {
+              "name": "SourceExportBundleV2",
+              "line": 65
+            },
+            {
+              "name": "build",
+              "line": 99
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_contract/source_version.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_contract\\source_version.py",
+          "sha256": "2bbdb09579cb68bae4e4a7de94998e6317137f463e9e4f6868b66d247fbf488c",
+          "symbols": [
+            {
+              "name": "VerifiedContent",
+              "line": 44
+            },
+            {
+              "name": "SourceVersionPort",
+              "line": 73
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "公开Protocol backend可字段正确但携等长错bytes，独立接收SHA才能拒绝；小收益不引入可伪造trusted状态。",
+      "tests_responsibility": [
+        "tests/unit/test_source_contract_reader_port.py::test_public_backend_cannot_attest_forged_bytes_using_correct_identity_fields",
+        "tests/unit/test_source_contract_reader_port.py::test_export_accepts_delegating_read_backend_without_concrete_inheritance"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q11-disposition.md",
+          "sha256": "de539302c466e9073bca582c67eb6d32eabd8e71fdd557987f527cfc6a501aa7"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        }
+      ],
+      "conclusion": "KEPT_BY_REASON",
+      "remaining_boundary": "不是所有重复CPU已消除；微观察不冒全链性能结论。将来证明同owner热点再局部优化。",
+      "kept_by_reason": "磁盘读、公开port接收、跨时间重开是不同信任事件；保必要实算，不制造信任注册/许可链。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q12",
+      "original_requirement": "按原文材料、依赖闭合、准入与预算组合阶段拆责任，保单次准备和旧facade。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/narrative_native_materials.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_native_materials.py",
+          "sha256": "9754c16c5b5fa225eda016c266cabd2774ca0b15810cad7ebe74e9523575cb29",
+          "symbols": [
+            {
+              "name": "prepare_native_materials",
+              "line": 23
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/narrative_reading_admission.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading_admission.py",
+          "sha256": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad",
+          "symbols": [
+            {
+              "name": "_admitted",
+              "line": 20
+            },
+            {
+              "name": "_financial_only",
+              "line": 12
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/narrative_reading.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py",
+          "sha256": "a7a426af6a1982640bb0ca142506bd282edff0c0192949e8407c2f87e857a8d2",
+          "symbols": [
+            {
+              "name": "_prose_reading_packages",
+              "line": 92
+            },
+            {
+              "name": "_candidates",
+              "line": 101
+            },
+            {
+              "name": "select_reading_evidence",
+              "line": 1152
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "native_materials独占来源容器/闭合，不选budget winner/不IO；admission独立纯模块；facade注入continuity backend，selection继续唯一finalize/WorkBudget/Session。",
+      "tests_responsibility": [
+        "tests/unit/document_understanding_selection/test_reading_native_material_mapping.py",
+        "tests/unit/document_understanding_selection/test_source_support_use.py",
+        "tests/unit/du11_production/test_source_preparation_axes.py",
+        "tests/unit/test_narrative_select_handler.py"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\ROOT.md",
+          "sha256": "7815de31b3024a1dbac91c72c17f453cd54ac34cdd9eaece263af9d40e7f3c45"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-A.md",
+          "sha256": "7d984fc8446b6d8df71870cc5343043684edbc9f17d259b72b298f9486e100d3"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-independent-ci-r5.json",
+          "sha256": "75e37603af4cea811f813aae8025570f27deec7e70ed051a80ef97b5805c66ae"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-T3-independent-r2.json",
+          "sha256": "5cc883c30231aaa418cb31c735e6eba11769f75a79b932cb14f6cddb91b59199"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE_DEFINED_REFACTOR_SCOPE; REAL_ACCEPTANCE_OPEN",
+      "remaining_boundary": "_candidates仍679行、prepare_native_materials约410行，不夸成所有复杂性消失；独审按责任边界/行为而非行数签。真实来源父链T4仍OPEN。",
+      "kept_by_reason": "同scope预算/缓存/原始ID和既有回放保留，不为拆文件复制classifier或新增registry。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q13",
+      "original_requirement": "reader CLI区分invalid_request与环境/存储unavailable，坏hash在catalog前验证且错误pathless。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/source_reader_cli.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "sha256": "856788a6c67e31b663e87682674839b7d64a709f91be676cd9c1c0b6cbd92c24",
+          "symbols": [
+            {
+              "name": "_digest_argument",
+              "line": 39
+            },
+            {
+              "name": "_JsonArgumentParser",
+              "line": 34
+            },
+            {
+              "name": "main",
+              "line": 52
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "缺参数/非法digest归blocked invalid_request；真实配置/IO/DB故障仍reader_unavailable，失败stdout不出原文。",
+      "tests_responsibility": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_reader_bad_arguments_are_invalid_request",
+        "tests/unit/test_maintenance_quality_remediation.py::test_reader_bad_digest_is_invalid_before_database_access",
+        "tests/unit/test_maintenance_quality_remediation.py::test_reader_missing_configuration_remains_unavailable"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q05-Q07-Q08-Q13-Q14.md",
+          "sha256": "ea3259ea16e1a539b9375ed0bf29e82d9fd44822a459ed0873ccf245b55854b1"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE",
+      "remaining_boundary": "改善诊断，不声称自动修复真实配置/存储；合法不可用拒绝没有改成功。",
+      "kept_by_reason": "必要参数/身份/真实I/O错误明确保留，无源字节泄露或新审批。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    },
+    {
+      "id": "Q14",
+      "original_requirement": "正常scan/preview不依赖旧snapshot/伪两轮零diff；旧运维CLI退役，历史回放兼容。",
+      "implementation": [
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/service.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\service.py",
+          "sha256": "bf13e0b5e97c317ef793964c62c8bb33d6294922bac79cc7b0b1dae923891707",
+          "symbols": [
+            {
+              "name": "scan",
+              "line": 152
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/scanner.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\scanner.py",
+          "sha256": "5e66df437d65310483f638fc4c958ad2ce0fe432b8662d81f576c77fb94de46b",
+          "symbols": [
+            {
+              "name": "scan_catalog",
+              "line": 2045
+            }
+          ]
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/compat_scan_rollout.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\compat_scan_rollout.py",
+          "sha256": "0b33928d4d4c0daf1cde5e67ce03603ddf24d7f862ed6a0caa253d6afffd806e",
+          "symbols": []
+        },
+        {
+          "repo": "CWP",
+          "file": "src/company_wiki/source_catalog/cli.py",
+          "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\cli.py",
+          "sha256": "db547958b8d1f60f95eef7f40ee2be5aa187ac4ac7e4a185ab5738732e038650",
+          "symbols": [
+            {
+              "name": "main",
+              "line": 747
+            }
+          ]
+        }
+      ],
+      "current_behavior_verified": "scan按RootSpec.adapter_id；zero_diff_rounds丢弃仅留兼容参数；旧解码在compat；activation/runtime-policy等在config I/O前退休且隐藏。",
+      "tests_responsibility": [
+        "tests/unit/test_maintenance_quality_remediation.py::test_explicit_v2_preview_needs_no_rollout_rounds",
+        "tests/unit/test_maintenance_quality_remediation.py::test_current_scan_does_not_load_rollout_snapshot",
+        "tests/unit/test_maintenance_quality_remediation.py::test_historical_rollout_cli_retires_before_configuration"
+      ],
+      "independent_test_publication_evidence": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q05-Q07-Q08-Q13-Q14.md",
+          "sha256": "ea3259ea16e1a539b9375ed0bf29e82d9fd44822a459ed0873ccf245b55854b1"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B.md",
+          "sha256": "02919610348c9f09b5aa40efb78cefd7084464039d5880e71b67725fb90b894d"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\independent-B-r2.md",
+          "sha256": "d6b7bb2b9bd56846547ed67211ec0d3a1eba69c73ad158f2d2aed4d49ab7e607"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-core-implementation.md",
+          "sha256": "e26bd389e48b5ad814fb89edf58602d314b2e74b73db7475a2784bf7e6c1a528"
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-final-closure.json",
+          "sha256": "161d1353576181f2f5cbce05216c66a1956e2d4a66a68861ac81879aeaff4893"
+        }
+      ],
+      "conclusion": "ENGINEERING_COMPLETE",
+      "remaining_boundary": "兼容library/格式存在不是当前许可；没有误删合法source/narrative原子activation和恢复，也没有删历史assertion。",
+      "kept_by_reason": "dry-run零写、根配置有效性、CAS/事务/恢复保留，无epoch/reviewer/cohort日常人工签收。",
+      "commit_and_publication": {
+        "engineering_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+        "first_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+        "latest_published_runtime": "389a10fb9a3321072ed863e5e55d761043218921",
+        "current_master": "bbbd3de46b6fc0c5995f78e28827c7215a298dab",
+        "ancestors_verified": true,
+        "latest_precise_ci": 41450377163,
+        "latest_precise_ci_result": "success",
+        "source": "R6-publication.json + R7-final-closure.json + actual Git ancestors; not STATUS alone"
+      },
+      "test_observation": "Responsibility tests exist and final cited independent/CI receipts were read; not rerun by this checklist."
+    }
+  ],
+  "publication_evidence": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R6-publication.json",
+      "sha256": "346473022e17ce166bb32353ee909f1830a2c2a5f6a5aa84994412fbed319ab2"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\R7-final-closure.json",
+      "sha256": "161d1353576181f2f5cbce05216c66a1956e2d4a66a68861ac81879aeaff4893"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\Q09-publication.json",
+      "sha256": "4c4b3702b99c0344bf4e9c273fd41c4fa661ab5b8bb462657c4ce8171f3fca2a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\C-source-v4-independent.json",
+      "sha256": "96ccef3a3803e162fa1ec9a8fc5c629a8b29a0b878fedea4d1d4b52aae9587cd"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\T4-source-note-parent-plan.md",
+      "sha256": "9536bc03e15c7327a89e472340c3f1b8b83f7235c4a0e333752bfdc06ad59e15"
+    }
+  ],
+  "exact_ci_from_specific_publication_receipt": {
+    "company-wiki": {
+      "source_head": "389a10fb9a3321072ed863e5e55d761043218921",
+      "exact_ci": [
+        {
+          "id": 41450377163,
+          "name": "CI",
+          "head_sha": "389a10fb9a3321072ed863e5e55d761043218921",
+          "head_branch": "master",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41450377163",
+          "updated_at": "2026-11-02T13:15:36Z"
+        }
+      ]
+    },
+    "filing-fetch": {
+      "source_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
+      "exact_ci": [
+        {
+          "id": 41450346468,
+          "name": "quality",
+          "head_sha": "350cb39dad8a1116d76fd44824fe353ae210d384",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41450346468",
+          "updated_at": "2026-11-02T13:10:05Z"
+        }
+      ]
+    },
+    "revenue-forecast": {
+      "source_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "exact_ci": [
+        {
+          "id": 41444705227,
+          "name": "quality",
+          "head_sha": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41444705227",
+          "updated_at": "2026-11-02T12:27:34Z"
+        }
+      ]
+    },
+    "invest-skills": {
+      "source_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "exact_ci": [
+        {
+          "id": 41442479736,
+          "name": "quality",
+          "head_sha": "9b68cc9b9bac194ede4881453f7706528bc18add",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/invest-skills/actions/runs/41442479736",
+          "updated_at": "2026-11-02T12:10:54Z"
+        }
+      ]
+    }
+  },
+  "publication_caveat": "Current code+test/independent reports+Git ancestors+saved precise CI, not STATUS alone. This task did not query GitHub again; docs-only descendant does not acquire a new runtime CI. ROOT repair of new finding is separately unreviewed.",
+  "historical_state_conflicts": [
+    {
+      "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\README.md",
+      "stale": "Opening says rectification not implemented/company loop paused",
+      "treatment": "Dated original audit; ROOT should label historical or redirect current reader to CURRENT_STATUS."
+    },
+    {
+      "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation.md",
+      "stale": "Opening/end says first candidate CI failed/reverted/paused",
+      "treatment": "Keep first integration failure as history, not latest command; later R6/R7 publication supersedes operational status."
+    },
+    {
+      "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\STATUS.json",
+      "stale": "daily_feedback mentions fixed167case/45.097s",
+      "treatment": "Latest9explicit node/17case daily and approximately15s CWP push documented in R7-final-closure; one stale descriptive field, not source failure."
+    },
+    {
+      "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\findings.md",
+      "stale": "T3 heading in progress/real H1 not yet run",
+      "treatment": "T3fa8 merged; H1v4 ran and found parent-chainP2. ROOT should label history; CURRENT_STATUS/task_plan holds new next step."
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "R7-RESIDUAL-V2-WIRE-CAP",
+      "severity": "P2",
+      "status": "CONFIRMED_BEFORE_ROOT_REPAIR",
+      "scope": "separate residual discovered during checklist verification; does not negate original Q09 streaming repair or Q10 decoupling",
+      "signatures": {
+        "CWP": "SourceExportBundleV2.from_json(cls, raw: bytes) -> SourceExportBundleV2",
+        "StockWiki": "load_bundle(raw: bytes) -> SourceExportBundleView",
+        "private_wire": "_parse_strict_json(raw: bytes) -> Any"
+      },
+      "limit_source": "CWP direct literal16*1024*1024; StockWiki _MAX_BUNDLE_BYTES=16*1024*1024. No caller max_bytes argument exists in either public JSON signature. Thus immutable top cap, not an optional default and not adjustable by reader-config.",
+      "caller": "StockWiki stockwiki/services/source_reader_v2.py::run_source_read_v2 lines55-58 reads the whole bundle using Path.read_bytes then calls load_bundle before constructing VerifiedOpenTransport. CWP public from_json is exercised by contract/test_source_export_v2.py and test_source_export_v2_cli.py; no current CWP production caller found, so this is not claimed as all CWP downloads being blocked.",
+      "transport_boundary": "VerifiedOpenTransport.from_config reads explicit timeout_s/max_stdout_bytes; run_bounded applies stdout to actual original bytes and256KiB to actual second receipt channel while reading. Neither argument controls the already-loaded bundle JSON cap, which is evaluated before transport creation. Keep actual configured I/O/deadline enforcement in its owner.",
+      "actual_result": {
+        "test": "valid flat v2 exact-text bundle public dict vs public JSON consumers",
+        "wire_bytes": 16779115,
+        "source_bytes": 16777233,
+        "source_sha256": "54f97c60286684be38774f7e4cab6cc90753c5cf390bb8f54b6caacc96195c00",
+        "producer_from_dict": "ACCEPTED",
+        "transport_not_executed": true,
+        "calls": [
+          {
+            "entry": "CWP SourceExportBundleV2.from_json",
+            "result": "REJECTED",
+            "type": "SourceExportError",
+            "code": null,
+            "detail": "v2 bundle exceeds read limit"
+          },
+          {
+            "entry": "StockWiki load_bundle",
+            "result": "REJECTED",
+            "type": "SourceExportV2Error",
+            "code": "bundle_over_limit",
+            "detail": "bundle_over_limit"
+          }
+        ],
+        "elapsed_s": 0.2588,
+        "fixture_erratum": "Prior setup used parser_version1 and failed semantic-version validation before parser test; corrected to1.0.0 without product change."
+      },
+      "source_sha256": {
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_contract\\source_export_v2.py": "8bf6c66ff9570bde68f9d024738b10bf56f199280fb8ac2e749feb30e047ec31",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_wire.py": "c4fb649df481acb1ac6bf93210da0bd6efe955ca3840b459b9b7c037dc1bdc0f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_bundle.py": "c2d53ed9c9f129d5db63bff75c82a6ad5132c55caa049c9484bec91a8ef72615",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_transport.py": "a3888360bc064ca2b1312a652e4084ed5c1f421948603117c990d4880263514c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\source_reader_v2.py": "758d5c7107226e5306a39e31b4af9d8dac2e53dce90a5131bf107ea095070762"
+      },
+      "reproducer_source": "from pathlib import Path\nimport hashlib,json\nfrom company_wiki.source_contract import SourceExportBundleV2,source_id_for_sha256,EvidenceSpan,EvidenceCoordinates,ParseStatus\nfrom stockwiki.source_reader_v2 import load_bundle,SOURCE_EXPORT_ID_PREFIX\nwire=json.loads(Path(STOCKWIKI_ROOT,'tests/fixtures/source_v2/source_export_bundle.json').read_text(encoding='utf-8'))\ntext='source quotation '+('x'*(16*1024*1024)); original=text.encode('utf-8')\ndigest=hashlib.sha256(original).hexdigest(); sid=source_id_for_sha256(digest)\nmanifest=wire['manifests'][0];manifest.update(source_id=sid,content_sha256=digest,byte_size=len(original),mime_type='text/plain')\nspan=EvidenceSpan.create(source_id=sid,coordinates=EvidenceCoordinates(char_start=0,char_end=len(text)),raw_text=text,structured_value=None,parser_name='synthetic-exact-text',parser_version='1.0.0',parse_status=ParseStatus.PARSED,quality_flags=())\nwire.update(manifests=[manifest],evidence_spans=[span.to_dict()],counts={'source_manifests':1,'evidence_spans':1})\ncanonical=lambda v:json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False)\npayload={k:v for k,v in wire.items() if k not in {'bundle_sha256','export_id'}};bundle_digest=hashlib.sha256(canonical(payload).encode('utf-8')).hexdigest()\nwire.update(bundle_sha256=bundle_digest,export_id=SOURCE_EXPORT_ID_PREFIX+bundle_digest)\nassert SourceExportBundleV2.from_dict(wire).bundle_sha256==bundle_digest\nraw=canonical(wire).encode('utf-8')\nfor entry in (SourceExportBundleV2.from_json,load_bundle):\n try:entry(raw);print('ACCEPTED')\n except Exception as e:print(type(e).__name__,getattr(e,'error_code',None),str(e))\n",
+      "reproducer_sha256": "15e706ff1a2fdc91e027f16abc57e207200205a1673ed49bcbd977be57e96df7",
+      "remediation_owner": "ROOT coordinating CWP pure contract + StockWiki public wire; remove post-load representation cap, preserve schema/hash/exact text/true transport I/O and timeout; freeze then independent targeted review.",
+      "not_proved": "No actual oversized supplier source or real transfer was run; no claim receipt256KiB is itself an unnecessary permission or depth64 rejects legitimate input.",
+      "subsequent_root_update": {
+        "status": "ROOT_REPORTS_REPAIR_IMPLEMENTED_AWAITING_OTHER_INDEPENDENT_REVIEW",
+        "received_at_utc": "2026-11-02T13:41:28.998230+00:00",
+        "reported_by_root": "ROOT removed CWP/StockWiki JSON-only16MiB and additionally removed hidden PaidResponseArtifacts/Pin262144 cap; cited TDD CWP2F1P/Stock1F thenCWP54P13s/Stock33P5.21s including free loopback paid recovery1POST.",
+        "not_independently_signed_by_this_report": true,
+        "historical_before_root_repair_probe_preserved": true,
+        "scope_owner": "ROOT and separate independent reviewer final7files; this checklist neither alters those sources nor reruns54/33."
+      }
+    }
+  ],
+  "q09_limit_distinction": {
+    "stdout": "KEEP_CONFIGURED_READ_TIME_RESOURCE_BUDGET",
+    "stderr_receipt": "KEEP_OR_POLICY_REVIEW; active read-time bound in existing runner, not reported as proven P2 by its constant alone.",
+    "depth64": "NO_PROVEN_ACTIVE_VETO; _StrictParser.depth remains0; nested structured-value probe is ungroundable under the accepted exact-TXT wire and cannot prove rejection of valid data by depth."
+  },
+  "bounded_independent_probes": [
+    {
+      "test": "public StockWiki load_bundle nested structured value70",
+      "wire_bytes": 2684,
+      "result": "SourceExportV2Error",
+      "code": "ungroundable_span_shape",
+      "interpretation": "Not evidence of depth veto: structured_value violates the accepted exact-original-TXT span shape, so this is not a legitimate deep-input rejection."
+    },
+    {
+      "test": "valid flat v2 exact-text bundle public dict vs public JSON consumers",
+      "wire_bytes": 16779115,
+      "source_bytes": 16777233,
+      "source_sha256": "54f97c60286684be38774f7e4cab6cc90753c5cf390bb8f54b6caacc96195c00",
+      "producer_from_dict": "ACCEPTED",
+      "transport_not_executed": true,
+      "calls": [
+        {
+          "entry": "CWP SourceExportBundleV2.from_json",
+          "result": "REJECTED",
+          "type": "SourceExportError",
+          "code": null,
+          "detail": "v2 bundle exceeds read limit"
+        },
+        {
+          "entry": "StockWiki load_bundle",
+          "result": "REJECTED",
+          "type": "SourceExportV2Error",
+          "code": "bundle_over_limit",
+          "detail": "bundle_over_limit"
+        }
+      ],
+      "elapsed_s": 0.2588,
+      "fixture_erratum": "Prior setup used parser_version1 and failed semantic-version validation before parser test; corrected to1.0.0 without product change."
+    }
+  ],
+  "verification_methods": [
+    "Read original14 requirements and current owner implementations",
+    "Read final dated independent B-r2/R6-R5/T3/R7 reports rather than reinterpret historical FAIL as latest",
+    "Check actual source and tests/CI responsibility; no green full-suite repeat",
+    "Read current Git ancestry/master and exact saved publication CI versions",
+    "One invalid-depth mutation explicitly not counted as finding; one valid flat large bundle confirms JSON-only cap"
+  ],
+  "cleanup": {
+    "new_temp_files": 0,
+    "new_temp_directories": 0,
+    "production_originals_or_models_used": 0,
+    "runtime_writes": 0,
+    "written_files": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\checklist-verification-20261102\\q-items-independent.md",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\checklist-verification-20261102\\q-items-independent.json"
+    ]
+  },
+  "recommendation": "Keep original14 engineering dispositions; retain necessary SHA/transport budgets; close new fixed JSON-only16MiB residual with TDD and one independent delta; correct stale descriptions; continue T4 and realC, never sign whole PWF/company loop from this checklist.",
+  "current_code_snapshot_caveat": "ROOT began authorized new residual repair during this read-only audit. runtime_wip_at_end_of_read explicitly lists changed SourceExport/PaidResponse source/tests. Q01–Q14 engineering disposition refers to the published ancestors and their independent scopes; implementation SHA records observation only, not a new signoff of in-flight7file repair.",
+  "verification_errors_preserved": [
+    "Initial report generation guessed tests/unit/test_source_version_reader.py; validation stopped before any final report write. Correct existing tests/contract/test_source_version_reader.py used. No product/test changed.",
+    "First large-bundle setup had parser_version1 instead of semantic1.0.0 and stopped before target parser; corrected fixture then actual result recorded."
+  ]
+}
