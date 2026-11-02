@@ -362,7 +362,7 @@ _GENERATION_SOURCE_FIELDS = frozenset({"source_ref", "source_metadata", "parser_
 
 
 def _freeze_generations(manifests):
-    """Deduplicate settings so 100-source bindings retain the existing byte cap."""
+    """Store common settings once; preserve every source-specific binding."""
     settings, records = {}, {}
     for document, manifest in manifests.items():
         common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}

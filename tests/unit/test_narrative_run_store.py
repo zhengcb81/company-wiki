@@ -117,6 +117,27 @@ def create_run(budget, jobs, **overrides):
     return budget.create_run(**options)
 
 
+def test_complete_frozen_binding_has_no_independent_representation_quota(tmp_path):
+    from company_wiki.automation.models import canonical_json
+
+    auto = AutomationStore(tmp_path / 'auto.db')
+    job = seed_job(auto, 'large-binding')
+    budget = _module().NarrativeRunStore(auto.db_path)
+    binding = canonical_json({'source_facts': [
+        {'document_id': 'source-' + str(i), 'title': 'complete source metadata ' + 'x' * 600}
+        for i in range(500)
+    ]})
+    assert len(binding.encode('utf-8')) > 262144
+    record = create_run(budget, (job,), binding_json=binding)
+    reopened = _module().NarrativeRunStore(auto.db_path)
+    assert reopened.get_run(record.run_id).binding_json == binding
+    assert create_run(reopened, (job,), binding_json=binding) == record
+    with pytest.raises(_module().RunConflictError):
+        create_run(reopened, (job,), binding_json=canonical_json({'source_facts': []}))
+    assert reopened.get_run(record.run_id).max_tokens == 300
+    assert not reopened.reservations_for_run(record.run_id)
+
+
 def reserve(budget, claimed, **overrides):
     options = dict(
         run_id="run-one",

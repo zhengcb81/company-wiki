@@ -978,8 +978,6 @@ class NarrativeRunStore:
         require_utc_timestamp(created_at)
         if binding_json is not None:
             require_canonical_json(binding_json)
-            if len(binding_json.encode("utf-8")) > 262144:
-                raise ValueError("narrative run binding exceeds its byte limit")
         scope = normalize_id_scope(job_ids, name="job_ids")
         if scope is None:
             raise TypeError("job_ids must be a tuple")
