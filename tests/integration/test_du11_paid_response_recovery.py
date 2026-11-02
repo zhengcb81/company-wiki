@@ -1,6 +1,7 @@
 """One real loopback POST survives decoder death and a new AUTO lease."""
 
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import json
 import socket
 import threading
 from types import SimpleNamespace
@@ -26,10 +27,15 @@ from unit.du11_paid_response.test_paid_response import (
 )
 
 
+@pytest.mark.parametrize('content', [b'not valid summary JSON', b'complete source quotation ' + b'x' * 300_000],
+                         ids=['normal', 'above-old-paid-artifact-cap'])
 def test_complete_paid_body_survives_decoder_crash_and_new_lease_without_resend(
-    tmp_path, monkeypatch
+    tmp_path, monkeypatch, content
 ):
     state = SimpleNamespace(calls=0, forbid=False)
+    envelope = json.loads(BODY)
+    envelope['choices'][0]['message']['content'] = content.decode('utf-8')
+    body = json.dumps(envelope).encode('utf-8')
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
@@ -40,9 +46,9 @@ def test_complete_paid_body_survives_decoder_crash_and_new_lease_without_resend(
             state.calls += 1
             assert not state.forbid, "recovery attempted a second paid POST"
             self.send_response(200)
-            self.send_header("Content-Length", str(len(BODY)))
+            self.send_header("Content-Length", str(len(body)))
             self.end_headers()
-            self.wfile.write(BODY)
+            self.wfile.write(body)
 
     server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
     server.daemon_threads = False
@@ -65,6 +71,7 @@ def test_complete_paid_body_survives_decoder_crash_and_new_lease_without_resend(
         model_id="model",
         api_key_env="DU11_SYNTHETIC_KEY",
         max_output_tokens=256,
+        max_response_bytes=max(262144, len(body) + 1),
     )
     env = seed_owned(tmp_path, SimpleNamespace(model=model))
     source_decode = model._response
@@ -122,7 +129,7 @@ def test_complete_paid_body_survives_decoder_crash_and_new_lease_without_resend(
         state.forbid = True
         response, metrics = caller(env).generate(env.context(replay), REQUEST)
         assert (
-            response.response_bytes == b"not valid summary JSON"
+            response.response_bytes == content
             and metrics.tokens == 92
         )
         assert state.calls == 1

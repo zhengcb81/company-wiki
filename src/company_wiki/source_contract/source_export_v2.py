@@ -70,11 +70,9 @@ class SourceExportBundleV2:
 
     @classmethod
     def from_json(cls, raw: bytes) -> SourceExportBundleV2:
-        """Parse bounded UTF-8 JSON without duplicate keys or nonfinite numbers."""
+        """Decode complete UTF-8 JSON; transport owns actual read budgets."""
         if not isinstance(raw, bytes):
             raise TypeError("v2 bundle must be UTF-8 bytes")
-        if len(raw) > 16 * 1024 * 1024:
-            raise SourceExportError("v2 bundle exceeds read limit")
 
         def unique_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
             result: dict[str, Any] = {}
@@ -93,7 +91,7 @@ class SourceExportBundleV2:
                 object_pairs_hook=unique_pairs,
                 parse_constant=no_constant,
             )
-        except (UnicodeDecodeError, json.JSONDecodeError):
+        except (UnicodeDecodeError, json.JSONDecodeError, RecursionError):
             raise SourceExportError("invalid UTF-8 JSON v2 bundle") from None
         return cls.from_dict(parsed)
 

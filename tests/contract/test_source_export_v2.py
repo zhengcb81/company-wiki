@@ -391,6 +391,19 @@ def test_v2_consumer_round_trips_a_verified_bundle(tmp_path):
     assert from_json.to_dict() == wire
 
 
+def test_v2_json_loader_does_not_add_a_post_read_size_permission(tmp_path):
+    catalog, _, _, ref, span = _fixture(tmp_path, text_mode=True)
+    wire = _build(SourceVersionReader(catalog), ref, span).to_dict()
+    # Whitespace is valid JSON and has no bearing on source/hash qualification.
+    # The transport has already delivered these bytes; its budget is separate.
+    raw = b' ' * (16 * 1024 * 1024 + 1) + json.dumps(wire).encode('utf-8')
+    loaded = _v2_module().SourceExportBundleV2.from_json(raw)
+    assert loaded.to_dict() == wire
+    wire['bundle_sha256'] = '0' * 64
+    with pytest.raises(SourceExportError):
+        _v2_module().SourceExportBundleV2.from_json(json.dumps(wire).encode('utf-8'))
+
+
 def test_v2_json_loader_rejects_duplicate_keys_before_hash_validation(tmp_path):
     catalog, _, _, ref, span = _fixture(tmp_path, text_mode=True)
     wire = _build(SourceVersionReader(catalog), ref, span).to_dict()

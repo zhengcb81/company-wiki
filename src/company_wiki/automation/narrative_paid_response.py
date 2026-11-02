@@ -1,4 +1,4 @@
-"""Bounded private paid-response artifacts, referenced by the existing AUTO row.
+"""Durable paid-response artifacts, referenced by the existing AUTO row.
 
 This is a byte port, not a task store or a public narrative bundle. The AUTO
 reservation remains the only authority associating bytes with a paid request.
@@ -46,7 +46,7 @@ class PaidResponsePin:
             raise PaidResponseError("paid response digest is invalid")
         if self.object_key != f"objects/sha256/{self.body_sha256[:2]}/{self.body_sha256}.json":
             raise PaidResponseError("paid response object key is invalid")
-        if type(self.byte_size) is not int or not 0 <= self.byte_size <= 262144:
+        if type(self.byte_size) is not int or self.byte_size < 0:
             raise PaidResponseError("paid response size is invalid")
         for name in ("model_id", "adapter_id", "prompt_version"):
             value = getattr(self, name)
@@ -62,8 +62,8 @@ class PaidResponsePin:
 
     @classmethod
     def from_json(cls, value: str) -> PaidResponsePin:
-        if not isinstance(value, str) or len(value.encode("utf-8")) > 4096:
-            raise PaidResponseError("paid response receipt is oversized")
+        if not isinstance(value, str):
+            raise PaidResponseError("paid response receipt must be JSON text")
         try:
             data = json.loads(value)
             pin = cls(**data)
@@ -77,8 +77,8 @@ class PaidResponsePin:
 class PaidResponseArtifacts:
     def __init__(self, objects: ResponseObjects, *, max_response_bytes: int,
                  preflight: Callable[[int], None] | None = None) -> None:
-        if type(max_response_bytes) is not int or not 0 < max_response_bytes <= 262144:
-            raise ValueError("response artifact bound must respect the HTTP body cap")
+        if type(max_response_bytes) is not int or max_response_bytes <= 0:
+            raise ValueError("response artifact bound must be a positive integer")
         self.objects = objects
         self.max_response_bytes = max_response_bytes
         self._preflight = preflight

@@ -198,7 +198,9 @@ def caller(owned, **kwargs):
         store=owned.runs,
         run_id="run",
         model=owned.http.model,
-        paid_responses=PaidResponseArtifacts(owned.objects, max_response_bytes=262144),
+        paid_responses=PaidResponseArtifacts(
+            owned.objects, max_response_bytes=owned.http.model.max_response_bytes
+        ),
         clock=lambda: T1,
         **kwargs,
     )
