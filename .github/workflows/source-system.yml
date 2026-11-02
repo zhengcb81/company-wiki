@@ -24,21 +24,36 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/checkout@v4
         with:
           repository: zhengcb81/revenue-forecast
           ref: main
           path: modules/revenue-forecast
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            tests
+            tools
+            e2e
+            compatibility
+            references
+            config
+            examples
+            .github
       - uses: actions/checkout@v4
         with:
           repository: zhengcb81/filing-fetch
           ref: main
           path: modules/filing-fetch
+          persist-credentials: false
       - uses: actions/checkout@v4
         with:
           repository: zhengcb81/earnings-transcripts
           ref: main
           path: modules/earnings-transcripts
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
