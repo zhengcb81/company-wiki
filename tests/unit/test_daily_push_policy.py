@@ -1,19 +1,17 @@
-"""Daily pushes stay bounded; full validation remains an explicit local mode.
+"""Real isolated Git hook E2Es; scheduling policy has one owner in test_pre_push_gate.
 
-The daily policy runs only its fixed smoke inventory; authors run their own
-change-specific tests and CI retains the complete suites. Real Git repositories
-drive the hook end to end: a genuine failure inside the ran scope must block
-the push, a green fast pass must stay honest about what it did not run, and a
-missing gate runner must block instead of silently passing.
+These are actual local pushes into temporary bare repositories. They preserve
+failure blocking, full-range changes, documentation skips, missing-runner
+failure and the explicit gap between daily feedback and full validation.
 """
 from __future__ import annotations
 
 from pathlib import Path
+import os
 import shutil
 import subprocess
 import sys
 
-import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from tools import pre_push_gate as gate  # noqa: E402
@@ -23,152 +21,6 @@ HOOK_AND_GATE_FILES = (".githooks/pre-push", "tools/pre_push_gate.py",
                        "tools/changed_unit_tests.py",
                        "src/company_wiki/_bounded_process.py",
                        "src/company_wiki/_process_tree.py")
-
-
-def _push_gate(monkeypatch, changes, push_input="fixture push range"):
-    monkeypatch.setattr(gate, "PROJECT_ROOT", Path.cwd())
-    monkeypatch.setattr(gate.sys, "stdin", type("Input", (), {"read": lambda self: push_input})())
-    monkeypatch.setattr(gate, "changed_paths", lambda root, data: changes)
-
-
-def _capture_gates(monkeypatch):
-    observed = []
-    monkeypatch.setattr(
-        gate, "_run_pytest_gate",
-        lambda cmd, label: observed.append((cmd, label)) or 0)
-    return observed
-
-
-def _targets(command):
-    return command[command.index("--timeout=180") + 1:]
-
-
-@pytest.mark.parametrize("changes", [{"docs/usage.md"}, {"docs/plans/run/probe.py", ".planning/run/receipt.json"}])
-def test_non_runtime_push_never_dispatches_a_test_runner(monkeypatch, capsys, changes):
-    _push_gate(monkeypatch, changes)
-    observed = _capture_gates(monkeypatch)
-    assert gate.main(["--push-checks"]) == 0
-    assert observed == []
-    output = capsys.readouterr().out
-    assert "tests_not_run" in output
-    assert "local_fast_pass" not in output and "GREEN" not in output
-
-
-def test_runtime_range_runs_fixed_smoke_and_reports_narrow_scope(monkeypatch, capsys):
-    _push_gate(monkeypatch, {"src/pkg/core.py"})
-    observed = _capture_gates(monkeypatch)
-    assert gate.main(["--push-checks"]) == 0
-    assert len(observed) == 1
-    assert _targets(observed[0][0]) == list(gate.FAST_CONTRACT_CASES)
-    output = capsys.readouterr().out
-    assert "local_fast_pass for fixed smoke only" in output
-    assert "change-specific tests are the author's responsibility" in output
-    assert "full_validation_pending" in output
-
-
-def test_empty_stdin_is_an_unknown_range_that_defers(monkeypatch, capsys):
-    monkeypatch.setattr(gate, "PROJECT_ROOT", Path.cwd())
-    monkeypatch.setattr(gate.sys, "stdin", type("Input", (), {"read": lambda self: ""})())
-    observed = _capture_gates(monkeypatch)
-    assert gate.main(["--push-checks"]) == 0
-    assert len(observed) == 1
-    targets = _targets(observed[0][0])
-    assert targets == list(gate.FAST_CONTRACT_CASES)
-    output = capsys.readouterr().out
-    assert "unknown push range" in output
-    assert "full_validation_pending" in output
-
-
-def test_smoke_only_push_label_does_not_claim_affected_tests_ran(monkeypatch, capsys):
-    _push_gate(monkeypatch, None)
-    observed = _capture_gates(monkeypatch)
-
-    assert gate.main(["--push-checks"]) == 0
-
-    assert "fixed CI contract smoke" in observed[0][1]
-
-
-def test_a_real_failure_in_the_ran_scope_blocks_the_push(monkeypatch, capsys):
-    _push_gate(monkeypatch, {"tests/unit/test_reader.py"})
-    observed = []
-    monkeypatch.setattr(gate, "_run_pytest_gate",
-                        lambda cmd, label: observed.append(cmd) or 3)
-    assert gate.main(["--push-checks"]) == 3
-    assert len(observed) == 1
-    assert "PUSH CHECKS RED" in capsys.readouterr().out
-
-
-def test_runner_start_failure_returns_nonzero(monkeypatch, capsys):
-    _push_gate(monkeypatch, {"tests/unit/test_reader.py"})
-
-    def broken(cmd, label):
-        raise OSError("spawn failed")
-
-    monkeypatch.setattr(gate, "_run_pytest_gate", broken)
-    assert gate.main(["--push-checks"]) == 1
-    assert "spawn failed" in capsys.readouterr().out
-
-
-def test_green_full_local_mode_keeps_its_own_wording(monkeypatch, capsys):
-    codes = iter([0] * 7)
-    monkeypatch.setattr(gate, "_run", lambda *args, **kwargs: next(codes))
-    monkeypatch.setattr(gate, "_run_pytest_gate", lambda *args, **kwargs: next(codes))
-    assert gate.main([]) == 0
-    output = capsys.readouterr().out
-    assert "full local gate GREEN" in output
-    assert "local_fast_pass" not in output
-    assert "safe to push" not in output
-
-
-def test_green_push_mode_never_claims_full_or_safe(monkeypatch, capsys):
-    _push_gate(monkeypatch, {"tests/unit/test_reader.py"})
-    _capture_gates(monkeypatch)
-    assert gate.main(["--push-checks"]) == 0
-    output = capsys.readouterr().out
-    assert "local_fast_pass" in output
-    assert "safe to push" not in output
-    assert "full local gate GREEN" not in output
-
-
-@pytest.mark.parametrize("entrypoint,extra", [
-    ("--push-checks", []),
-    ("--fast-contracts-only", []),
-    ("--fast-contracts-only", ["--junitxml", "w13-fixture.xml"]),
-])
-def test_remote_and_full_mode_sets_are_unchanged_by_the_push_policy(
-        monkeypatch, entrypoint, extra):
-    _push_gate(monkeypatch, None)
-    observed = _capture_gates(monkeypatch)
-    assert gate.main([entrypoint, *extra]) == 0
-    assert len(observed) == 1
-    command = observed[0][0]
-    expected = list(gate.FAST_CONTRACT_CASES)
-    if extra:
-        expected.append(f"--junitxml={extra[-1]}")
-    assert command[command.index("--timeout=180") + 1:] == expected
-
-
-def test_full_local_mode_runs_every_existing_stage_in_order(monkeypatch):
-    order = []
-    monkeypatch.setattr(gate, "_run",
-                        lambda cmd, label, **kwargs: order.append(label) or 0)
-    monkeypatch.setattr(gate, "_run_pytest_gate",
-                        lambda cmd, label: order.append(label) or 0)
-    assert gate.main([]) == 0
-    assert order == [
-        "ruff (CI WU-1.2 full scope)", "compileall",
-        "config_doctor (CI WU-7.1)",
-        "host assumption guard (FC-1307-a; the class that broke CI in F-B01-9)",
-        "unit tests (CI Unit tests)",
-        "focused contracts, recent CI regressions, and gate regression tests",
-    ]
-
-
-def test_hook_keeps_the_push_entrypoint_and_adds_no_bypass():
-    hook = (REPOSITORY_ROOT / ".githooks/pre-push").read_text(encoding="utf-8")
-    assert "--push-checks" in hook
-    assert "--fast-contracts-only" not in hook
-    assert "SKIP" not in hook.upper().replace("SKIPPING", "")
 
 
 def test_hook_blocks_and_reports_a_missing_gate_runner(tmp_path):
@@ -181,9 +33,22 @@ def test_hook_blocks_and_reports_a_missing_gate_runner(tmp_path):
     assert "missing" in (proc.stdout + proc.stderr).lower()
 
 
+def _fixture_environment():
+    # A hook exports its parent repository, and the outer test may disable
+    # plugin autoload. Neither may silently redefine this isolated Git E2E.
+    env = dict(os.environ)
+    for name in gate.GIT_REPOSITORY_CONTEXT:
+        env.pop(name, None)
+    env.pop("PYTEST_ADDOPTS", None)
+    env.update(PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", PYTEST_PLUGINS="pytest_timeout",
+               PYTHONUTF8="1", PYTHONIOENCODING="utf-8", PYTHONDONTWRITEBYTECODE="1")
+    return env
+
+
 def _git(cwd, *command):
     proc = subprocess.run(("git", *command), cwd=str(cwd), capture_output=True,
-                          text=True, encoding="utf-8", errors="replace", timeout=120)
+                          text=True, encoding="utf-8", errors="replace", timeout=120,
+                          env=_fixture_environment())
     assert proc.returncode == 0, proc.stderr
     return proc
 
@@ -194,9 +59,9 @@ def test_pre_push_hook_is_tracked_as_executable_for_linux_worktrees():
 
 
 def _write_smoke_stubs(root: Path) -> None:
-    """Materialise every fast-contract node so the fixture repo can run them."""
+    """Materialise each actual daily node so the fixture repo can run them."""
     cases: dict[str, list[str]] = {}
-    for case in gate.FAST_CONTRACT_CASES:
+    for case in gate.DAILY_PUSH_CASES:
         path, _, node = case.partition("::")
         cases.setdefault(path, []).append(node)
     for path, nodes in cases.items():
@@ -226,12 +91,15 @@ def _fixture_repository(tmp_path: Path):
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPOSITORY_ROOT / relative, target)
     _write_smoke_stubs(work)
-    probe = work / gate.FAST_CONTRACT_CASES[0].split("::", 1)[0]
+    probe = work / gate.DAILY_PUSH_CASES[0].split("::", 1)[0]
     probe.parent.mkdir(parents=True, exist_ok=True)
-    probe.write_text(f"def {gate.FAST_CONTRACT_CASES[0].split('::', 1)[1]}(): pass\n", encoding="utf-8", newline="\n")
+    probe.write_text(f"def {gate.DAILY_PUSH_CASES[0].split('::', 1)[1]}(): pass\n", encoding="utf-8", newline="\n")
     # The gate process byte-compiles its own imported tools; keep that noise
     # out of the pushed ranges so the diff reflects the intended change only.
     (work / ".gitignore").write_text("__pycache__/\n", encoding="utf-8", newline="\n")
+    # Stop pytest discovery at this synthetic repo, including when its owned
+    # basetemp sits inside the real checkout. Never inherit production config.
+    (work / "pytest.ini").write_text("[pytest]\n", encoding="utf-8", newline="\n")
     _git(work, "init", "-q", "-b", "master")
     _git(work, "config", "user.email", "w13-e2e@example.invalid")
     _git(work, "config", "user.name", "w13-e2e")
@@ -247,7 +115,7 @@ def _fixture_repository(tmp_path: Path):
 def _push(work: Path):
     return subprocess.run(["git", "push", "origin", "master"], cwd=str(work),
                           capture_output=True, text=True, encoding="utf-8",
-                          errors="replace", timeout=600)
+                          errors="replace", timeout=600, env=_fixture_environment())
 
 
 def _remote_head(work: Path) -> str:
@@ -255,24 +123,29 @@ def _remote_head(work: Path) -> str:
     return listing[0] if listing else ""
 
 
-def test_real_push_green_fast_pass_then_blocked_by_a_ran_failure(tmp_path):
+def test_real_push_green_fast_pass_then_blocked_by_a_ran_failure(tmp_path, monkeypatch):
+    foreign_index = tmp_path / "foreign-index-must-not-be-written"
+    monkeypatch.setenv("GIT_DIR", str(tmp_path / "foreign-repository"))
+    monkeypatch.setenv("GIT_WORK_TREE", str(tmp_path / "foreign-work-tree"))
+    monkeypatch.setenv("GIT_INDEX_FILE", str(foreign_index))
     work, _remote, probe = _fixture_repository(tmp_path)
     green = _push(work)
     assert green.returncode == 0, green.stdout + green.stderr
     output = green.stdout + green.stderr
     assert "local_fast_pass" in output
     assert "full_validation_pending" in output
-    probe.write_text(f"def {gate.FAST_CONTRACT_CASES[0].split('::', 1)[1]}(): assert False, 'probe failure'\n",
+    probe.write_text(f"def {gate.DAILY_PUSH_CASES[0].split('::', 1)[1]}(): assert False, 'probe failure'\n",
                      encoding="utf-8", newline="\n")
-    _git(work, "add", gate.FAST_CONTRACT_CASES[0].split("::", 1)[0])
+    _git(work, "add", gate.DAILY_PUSH_CASES[0].split("::", 1)[0])
     _git(work, "commit", "-qm", "red probe")
     local_head = _git(work, "rev-parse", "HEAD").stdout.strip()
     blocked = _push(work)
     assert blocked.returncode != 0
     combined = blocked.stdout + blocked.stderr
     assert "PUSH CHECKS RED" in combined
-    assert gate.FAST_CONTRACT_CASES[0].split("::", 1)[1] in combined
+    assert gate.DAILY_PUSH_CASES[0].split("::", 1)[1] in combined
     assert _remote_head(work) != local_head
+    assert not foreign_index.exists()
 
 
 def test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code(tmp_path):
@@ -292,9 +165,9 @@ def test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code(tmp_path):
     assert "passed" not in output
     assert _remote_head(work) == _git(work, "rev-parse", "HEAD").stdout.strip()
 
-    probe.write_text(f"def {gate.FAST_CONTRACT_CASES[0].split('::', 1)[1]}(): assert False, 'earlier code failure'\n",
+    probe.write_text(f"def {gate.DAILY_PUSH_CASES[0].split('::', 1)[1]}(): assert False, 'earlier code failure'\n",
                      encoding="utf-8", newline="\n")
-    _git(work, "add", gate.FAST_CONTRACT_CASES[0].split("::", 1)[0])
+    _git(work, "add", gate.DAILY_PUSH_CASES[0].split("::", 1)[0])
     _git(work, "commit", "-qm", "unpublished failing code")
     evidence.write_text("# latest commit is still only evidence\n", encoding="utf-8")
     _git(work, "add", "docs/plans/fixture/probe.py")
@@ -349,6 +222,7 @@ def test_real_push_defers_unknown_config_scope_and_full_run_still_finds_the_fail
     assert "test_hidden_failure" not in combined
     full = subprocess.run([sys.executable, "-m", "pytest", "-q", "tests/unit"],
                           cwd=str(work), capture_output=True, text=True,
-                          encoding="utf-8", errors="replace", timeout=600)
+                          encoding="utf-8", errors="replace", timeout=600,
+                          env=_fixture_environment())
     assert full.returncode != 0
     assert "test_hidden" in full.stdout

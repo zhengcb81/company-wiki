@@ -543,10 +543,10 @@ def test_summarize_handler_rejects_model_path_leak_and_keeps_only_hash() -> None
         draft_overrides={
             "claims": [
                 {
-                    "claim_id": "claim-path",
-                    "text": (
+                    "claim_id": (
                         chr(67) + ":" + chr(92) + "private" + chr(92) + "source.pdf"
                     ),
+                    "text": selected.evidence_spans[0].raw_text,
                     "evidence_ids": [selected.evidence_spans[0].span_id],
                     "claim_type": "company_statement",
                     "modality": "actual",
@@ -562,6 +562,29 @@ def test_summarize_handler_rejects_model_path_leak_and_keeps_only_hash() -> None
     assert raw.error is not None and raw.error.code == "MODEL_RESPONSE_INVALID"
     assert len(model.calls) == 1
     assert "response_bytes" not in raw.result
+    assert raw.effects == ()
+
+
+@pytest.mark.parametrize("text", [r"C:\public\manual.txt", "file://manuals/customer.txt"])
+def test_summarize_handler_preserves_path_text_from_selected_evidence(text: str) -> None:
+    selected = _selection(language="en")
+    before = selected.evidence_spans[0]
+    span = EvidenceSpan.create(
+        source_id=before.source_id, coordinates=before.coordinates,
+        raw_text=text, structured_value=before.structured_value,
+        parser_name=before.parser_name, parser_version=before.parser_version,
+        parse_status=before.parse_status, quality_flags=before.quality_flags,
+    )
+    selected = replace(selected, evidence_spans=(span,))
+    model = ReplayModel()
+    raw, _, _ = _run(selected, model=model)
+
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert raw.error is None
+    summary = NarrativeSummaryResult.from_dict(raw.result)
+    summary.validate_against(selected)
+    assert summary.draft is not None and summary.draft.claims[0].text == text
+    assert len(model.calls) == 1
     assert raw.effects == ()
 
 

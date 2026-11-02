@@ -1,12 +1,9 @@
-"""Pushes include changed behavior across the whole range, with conservative fallbacks."""
-from pathlib import Path
+"""Optional AST dependency analysis and Git-range parsing, independent of daily policy."""
 import subprocess
-import sys
 
 import pytest
 
 from tools.changed_unit_tests import changed_paths, select_unit_tests
-from tools import pre_push_gate as gate
 
 
 def _file(root, name, text):
@@ -120,19 +117,11 @@ def test_document_only_push_does_not_run_full_units(project):
     "docs/receipt.json", "runtime.toml", "prompts/default.txt", "README.js",
     "src/pkg/prompt.md", "tests/fixture.md"])
 @pytest.mark.parametrize("mixed_docs", [False, True])
-def test_unknown_or_runtime_nonpython_paths_cannot_become_a_test_free_push(
-        project, monkeypatch, name, mixed_docs):
+def test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback(
+        project, name, mixed_docs):
     paths = {name} | ({"docs/plans/run/receipt.json"} if mixed_docs else set())
     selected, _reason = select_unit_tests(project, paths)
     assert selected == ["tests/unit"]
-    seen = []
-    monkeypatch.setattr(gate, "PROJECT_ROOT", project)
-    monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
-    monkeypatch.setattr(gate, "changed_paths", lambda root, data: paths)
-    monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
-    assert gate.main(["--push-checks"]) == 0
-    assert len(seen) == 1
-    assert seen[0][seen[0].index("--timeout=180") + 1:] == list(gate.FAST_CONTRACT_CASES)
 
 
 @pytest.mark.parametrize("name", ["README.md", "CONTRIBUTING.md", "CHANGELOG.md",
@@ -170,68 +159,6 @@ def test_git_failure_falls_back(project, monkeypatch):
     monkeypatch.setattr(subprocess, "run", lambda cmd, **kw: subprocess.CompletedProcess(cmd, 128, "", "missing object"))
     assert changed_paths(project, f"a {'b' * 40} b {'a' * 40}") is None
 
-
-def test_hook_and_ci_keep_fast_commit_and_use_correct_entrypoints():
-    root = Path(__file__).resolve().parents[2]
-    hook = (root / ".githooks/pre-push").read_text(encoding="utf-8")
-    assert "--push-checks" in hook
-    assert "--fast-contracts-only" not in hook
-    workflow = (root / ".github/workflows/ci.yml").read_text(encoding="utf-8")
-    assert "pytest tests/unit" in workflow
-    assert "--fast-contracts-only" in workflow
-
-
-def test_push_failure_is_propagated_and_suites_are_not_duplicated(monkeypatch):
-    seen = []
-    monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
-    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"test"})
-    monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 7)
-    assert gate.main(["--push-checks"]) == 7
-    assert len(seen) == 1
-    targets = seen[0][seen[0].index("--timeout=180") + 1:]
-    expected_smoke = list(gate.FAST_CONTRACT_CASES)
-    assert targets == expected_smoke
-    assert len(targets) == len(set(targets))
-
-
-@pytest.mark.parametrize("entrypoint", ["--push-checks", "--fast-contracts-only"])
-def test_published_summary_contracts_run_in_both_ci_and_push(entrypoint, monkeypatch):
-    seen = []
-    monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
-    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"config/fixture.yaml"})
-    monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
-
-    assert gate.main([entrypoint]) == 0
-    assert len(seen) == 1
-    assert "tests/contract/test_narrative_output_plan.py" in seen[0]
-    assert "tests/contract/test_summary_group_coverage.py" in seen[0]
-    assert "tests/contract/test_official_transcript_layouts.py" in seen[0]
-
-
-@pytest.mark.parametrize("entrypoint", ["--push-checks", "--fast-contracts-only"])
-def test_source_scope_guard_is_shared_but_full_cache_matrix_is_major_node_only(entrypoint, monkeypatch):
-    seen = []
-    monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
-    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"config/fixture.yaml"})
-    monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
-
-    assert gate.main([entrypoint]) == 0
-    assert len(seen) == 1
-    assert "tests/contract/test_source_scope_qualification.py" in seen[0]
-    assert "tests/contract/test_fresh_cache_behavior_receipts.py" not in seen[0]
-
-
-def test_planning_evidence_only_changes_do_not_schedule_full_ci():
-    import yaml
-    root = Path(__file__).resolve().parents[2]
-    workflow = yaml.load((root / ".github/workflows/ci.yml").read_text(encoding="utf-8"),
-                         Loader=yaml.BaseLoader)
-    for event in ("push", "pull_request"):
-        assert "docs/plans/**" in workflow["on"][event]["paths-ignore"]
-        assert ".planning/**" in workflow["on"][event]["paths-ignore"]
-        assert "src/**" not in workflow["on"][event]["paths-ignore"]
-        assert "tests/**" not in workflow["on"][event]["paths-ignore"]
-    assert "pytest tests/unit" in (root / ".github/workflows/ci.yml").read_text(encoding="utf-8")
 
 @pytest.mark.parametrize("archive", [
     "docs/plans/run/evidence/probe.py", "docs/plans/run/conftest.py",
@@ -272,8 +199,3 @@ def test_unit_only_change_keeps_known_transitive_test_helper_consumers(project):
     _file(project, "tests/unit/test_runtime.py", "import subprocess\nsubprocess.run(argv)\n")
     assert select_unit_tests(project, {"tests/unit/test_helper.py"}) == (
         ["tests/unit/test_helper.py", "tests/unit/test_reader.py"], "affected unit tests")
-
-
-@pytest.mark.parametrize("node", ('tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer', 'tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget', 'tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it', 'tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]', 'tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]', 'tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native'))
-def test_ocr_resource_regressions_share_ci_and_local_smoke(node):
-    assert node in gate.FAST_CONTRACT_CASES

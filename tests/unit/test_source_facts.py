@@ -103,7 +103,9 @@ def test_only_reobservation_time_does_not_duplicate_source_facts(lake):
     assert len(_assertions(lake[0])) == 1
 
 
-def test_cumulative_provenance_is_bounded(lake):
+def test_cumulative_provenance_preserves_complete_valid_evidence(lake):
+    catalog, reader, ref, original = lake
+    original_before = original.read_bytes()
     facts = {"security_id": "002643"}
     proof = _evidence(facts)
     proof["security_id"]["detail"] = "x" * 40000
@@ -111,9 +113,26 @@ def test_cumulative_provenance_is_bounded(lake):
     other = {"market": "CN"}
     more = _evidence(other)
     more["market"]["detail"] = "y" * 40000
-    with pytest.raises(ValueError, match="byte limit"):
-        _apply(lake, other, more)
-    assert len(_assertions(lake[0])) == 1
+    second = _apply(lake, other, more)
+    assert second["status"] == "recorded"
+    assertions = _assertions(catalog)
+    assert len(assertions) == 2
+    latest = next(row for row in assertions if row["assertion_id"] == second["assertion_id"])
+    assert len(latest["evidence_json"].encode("utf-8")) > 64 * 1024
+    persisted = json.loads(latest["evidence_json"])
+    assert persisted["source_fact_evidence"] == {**proof, **more}
+    assert persisted["source_fact_patch"] == {**facts, **other}
+    assert reader.describe_version(ref)["security_id"] == "002643"
+    assert reader.describe_version(ref)["market"] == "CN"
+    assert _apply(lake, other, more)["status"] == "unchanged"
+    assert _assertions(catalog) == assertions
+    assert original.read_bytes() == original_before
+
+    malformed = _evidence({"language": "en"})
+    malformed["language"]["detail"] = object()
+    with pytest.raises((TypeError, ValueError)):
+        _apply(lake, {"language": "en"}, malformed)
+    assert _assertions(catalog) == assertions
 
 
 def test_finite_registration_keeps_verified_projection_and_unknown_date(lake):

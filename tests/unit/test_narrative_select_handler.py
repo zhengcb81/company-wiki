@@ -537,21 +537,21 @@ def test_select_handler_checks_bytes_without_requiring_old_observations(drift: s
     assert raw.effects == ()
 
 
-def _oversized_package(parsed, *, path_leak: bool) -> NarrativeEvidencePackage:
-    text = (
-        "Z:" + chr(92) + "private" + chr(92) + "source.pdf"
-        if path_leak
-        else "海" * (SELECT_RESULT_MAX_BYTES // 2)
-    )
+def _fixture_package(
+    parsed, *, text: str, metadata_path: str | None = None
+) -> NarrativeEvidencePackage:
+    metadata = {
+        "language": parsed.language,
+        "source_role": "company_filing",
+        "selection_reasons": ["business_progress"],
+    }
+    if metadata_path is not None:
+        metadata["source_path"] = metadata_path
     span = EvidenceSpan.create(
         source_id=parsed.source_id,
         coordinates=EvidenceCoordinates(page_number=1, paragraph_index=0),
         raw_text=text,
-        structured_value={
-            "language": parsed.language,
-            "source_role": "company_filing",
-            "selection_reasons": ["business_progress"],
-        },
+        structured_value=metadata,
         parser_name="select-test",
         parser_version="1.0.0",
         parse_status=ParseStatus.PARSED,
@@ -573,11 +573,13 @@ def _oversized_package(parsed, *, path_leak: bool) -> NarrativeEvidencePackage:
 
 
 @pytest.mark.parametrize(
-    ("path_leak", "error_code"),
-    [(False, "PARSER_INCOMPLETE"), (True, "INPUT_SCHEMA_INVALID")],
+    ("case", "error_code"),
+    [("fabricated_large", "PARSER_INCOMPLETE"),
+     ("fabricated_path", "PARSER_INCOMPLETE"),
+     ("metadata_path", "INPUT_SCHEMA_INVALID")],
 )
 def test_select_handler_rejects_fabricated_material_and_path_leak_with_zero_effect(
-    path_leak: bool, error_code: str
+    case: str, error_code: str
 ) -> None:
     data = _pdf_bytes("Company launched a new product.")
     payload = _payload(
@@ -589,9 +591,37 @@ def test_select_handler_rejects_fabricated_material_and_path_leak_with_zero_effe
     )
 
     def selector(parsed, **_kwargs):
-        return _oversized_package(parsed, path_leak=path_leak)
+        text = {
+            "fabricated_large": "海" * (SELECT_RESULT_MAX_BYTES // 2),
+            "fabricated_path": "Z:" + chr(92) + "private" + chr(92) + "source.pdf",
+            "metadata_path": "Company launched a new product.",
+        }[case]
+        return _fixture_package(
+            parsed, text=text,
+            metadata_path="file://private/source.pdf" if case == "metadata_path" else None,
+        )
 
     raw, _ = _run(payload, data, selector=selector)
     assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None and raw.error.code == error_code
+    assert raw.effects == ()
+
+
+@pytest.mark.parametrize("text", [r"C:\public\manual.txt", "file://manuals/customer.txt"])
+def test_select_handler_preserves_verified_path_text_as_source_content(text: str) -> None:
+    data = _pdf_bytes(text)
+    payload = _payload(data, title="Technical manual", document_kind="annual_report",
+                       language="en", mime_type="application/pdf")
+
+    def selector(parsed, **_kwargs):
+        unit = next(unit for unit in parsed.units if unit.raw_text == text)
+        span = unit.to_evidence_span(topics=(), selection_reasons=("business_progress",))
+        return replace(_fixture_package(parsed, text=text), evidence_spans=(span,))
+
+    raw, _ = _run(payload, data, selector=selector)
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert raw.error is None
+    selected = NarrativeSelectResult.from_dict(raw.result)
+    assert selected.evidence_spans[0].raw_text == text
+    assert selected.source_ref.content_sha256 == _sha(data)
     assert raw.effects == ()

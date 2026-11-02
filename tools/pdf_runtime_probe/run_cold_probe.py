@@ -1,11 +1,10 @@
-"""Single-attempt bounded no-document cold observation (W21 revision).
+"""Bounded no-document cold observation with a fresh directory per invocation.
 
 Launches the probe child with the production launch owner's flags and
 sanitized environment against the already-deployed isolated interpreter.
-Receipts land in the card-owned plan receipts directory; the ROOT c3-20261028
-receipts and its single-cold-attempt marker stay untouched. One attempt per
-revision: a rerun requires a new revision after diagnosing a failure, never a
-raised limit.
+Receipts land in separate attempt directories under the selected receipt root.
+Earlier receipts and markers remain untouched. Revision identifies the probe
+format; rerunning an explicit request never needs a revision or approval change.
 """
 from __future__ import annotations
 
@@ -26,7 +25,6 @@ from company_wiki.source_catalog.narrative_pdf_enhancement import (  # noqa: E40
     child_environment, child_launch_command)
 
 REVISION = "rev5"
-PROFILE_RELATIVE = "ROOT/.planning/c3-20261028/pdf-sdk-isolated/runtime-isolated.json"
 CPU_THREADS = 4
 DOCUMENT_TIMEOUT_SECONDS = 120
 
@@ -46,17 +44,15 @@ def main() -> None:
     for key in ("python", "artifacts", "max_memory_bytes", "environment_sha256", "docling_version"):
         if key not in profile:
             raise SystemExit(f"profile is missing {key!r}")
-    receipts = arguments.receipts_dir
-    receipts.mkdir(parents=True, exist_ok=True)
+    arguments.receipts_dir.mkdir(parents=True, exist_ok=True)
+    receipts = Path(tempfile.mkdtemp(prefix=f"cold-{REVISION}-", dir=arguments.receipts_dir))
     probe = Path(__file__).with_name("cold_runtime_probe.py")
     controller = Path(__file__)
     receipt_path = receipts / f"cold-{REVISION}.json"
     marker_path = receipts / f"cold-{REVISION}.marker.json"
-    if receipt_path.exists() or marker_path.exists():
-        raise SystemExit(f"revision {REVISION} already attempted; a rerun needs a diagnosed new revision")
-
     fingerprint = {"revision": REVISION, "attempts": 1, "deadline_seconds": arguments.deadline,
-        "profile_relative": PROFILE_RELATIVE,
+        "profile_relative": ("ROOT/" + profile_path.relative_to(WORKTREE).as_posix()
+                             if profile_path.is_relative_to(WORKTREE) else profile_path.name),
         "profile_sha256": sha256(profile_path.read_bytes()).hexdigest(),
         "probe_sha256": sha256(probe.read_bytes()).hexdigest(),
         "controller_sha256": sha256(controller.read_bytes()).hexdigest()}
