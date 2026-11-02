@@ -57,7 +57,7 @@ Store 日常打开只验证当前版本、必要表/列/键及 AUTO singleton，
 显式AUTO数据库体检使用`company_wiki.automation.migrations.validate_database(path)`或`AutomationStore.schema_report()`；只查版本/结构使用`inspect_schema(path)`，返回值没有integrity_ok字段。体检放在相关大节点或确实怀疑损坏时，不放进每个Worker构造、预算查询或终态恢复。
 
 - commit：相关 Ruff、类型/配置和路径静态检查，不跑 pytest。
-- push：`python tools/pre_push_gate.py --fast-contracts-only`，与 CI 同一快速集合。
+- push：hook 调用 `python tools/pre_push_gate.py --push-checks`，已确认仅文档的范围不启动pytest，其余范围只跑与CI相同的固定快速集合一次；不建AST依赖图、不追加受影响测试文件。`local_fast_pass`只证明该固定smoke，作者在实施时自行运行变更相关测试，完整Unit与合同检查由CI大节点承担。手动单跑同一smoke可用 `--fast-contracts-only`。
 - CI：全 Unit、同组 smoke 和静态检查，单 Python 环境。
 - 大节点：一次有关集成/真实资料 E2E；临时根结束恢复原样，真实 LLM/API 使用配置及已有预算。
 

@@ -185,12 +185,11 @@ def test_push_failure_is_propagated_and_suites_are_not_duplicated(monkeypatch):
     seen = []
     monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
     monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"test"})
-    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files, **options: (["tests/unit/test_reader.py"], "affected unit tests"))
     monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 7)
     assert gate.main(["--push-checks"]) == 7
     assert len(seen) == 1
     targets = seen[0][seen[0].index("--timeout=180") + 1:]
-    expected_smoke = ["tests/unit/test_reader.py", *gate.FAST_CONTRACT_CASES]
+    expected_smoke = list(gate.FAST_CONTRACT_CASES)
     assert targets == expected_smoke
     assert len(targets) == len(set(targets))
 
@@ -200,7 +199,6 @@ def test_published_summary_contracts_run_in_both_ci_and_push(entrypoint, monkeyp
     seen = []
     monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
     monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"config/fixture.yaml"})
-    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files, **options: (["tests/unit"], "configuration changed"))
     monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
 
     assert gate.main([entrypoint]) == 0
@@ -215,7 +213,6 @@ def test_source_scope_guard_is_shared_but_full_cache_matrix_is_major_node_only(e
     seen = []
     monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
     monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"config/fixture.yaml"})
-    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files, **options: (["tests/unit"], "configuration changed"))
     monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
 
     assert gate.main([entrypoint]) == 0

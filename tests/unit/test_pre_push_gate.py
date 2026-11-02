@@ -21,28 +21,6 @@ def test_fast_inventory_keeps_the_four_reuse_receipt_regressions_without_a_whole
     assert gate.DAILY_PUSH_TIMEOUT_SECONDS == 180
 
 
-def test_mixed_selection_defers_nonunit_files_but_keeps_affected_units():
-    selected = ["tests/unit/test_reader.py", "tests/integration/test_slow.py",
-                "tests/test_phase_c_sample_metadata.py"]
-    targets, reason = gate._push_targets(selected)
-    assert targets == [selected[0], *gate.FAST_CONTRACT_CASES]
-    assert "non-unit" in reason and "deferred" in reason
-
-
-def test_nonunit_selection_cannot_expand_curated_whole_files():
-    selected = ["tests/contract/test_source_catalog_temp_worker_governance.py",
-                "tests/document_normalization/test_isolated_ocr.py"]
-    targets, reason = gate._push_targets(selected)
-    assert targets == list(gate.FAST_CONTRACT_CASES)
-    assert "non-unit" in reason and "deferred" in reason
-
-
-def test_parent_traversal_is_an_unknown_scope_not_an_affected_unit():
-    targets, reason = gate._push_targets(["tests/unit/../integration/test_slow.py"])
-    assert targets == list(gate.FAST_CONTRACT_CASES)
-    assert "deferred" in reason
-
-
 def test_daily_gate_has_one_total_deadline_and_last_node_diagnostics(tmp_path, monkeypatch):
     monkeypatch.setattr(gate, "PROJECT_ROOT", tmp_path)
     observed = []

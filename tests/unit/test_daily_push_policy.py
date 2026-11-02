@@ -1,8 +1,7 @@
 """Daily pushes stay bounded; full validation remains an explicit local mode.
 
-The selection functions may still recommend the full suite; this policy layer
-decides what a push actually runs, defers the rest to CI, and reports that
-deferral instead of silently starting every unit test. Real Git repositories
+The daily policy runs only its fixed smoke inventory; authors run their own
+change-specific tests and CI retains the complete suites. Real Git repositories
 drive the hook end to end: a genuine failure inside the ran scope must block
 the push, a green fast pass must stay honest about what it did not run, and a
 missing gate runner must block instead of silently passing.
@@ -26,11 +25,10 @@ HOOK_AND_GATE_FILES = (".githooks/pre-push", "tools/pre_push_gate.py",
                        "src/company_wiki/_process_tree.py")
 
 
-def _push_gate(monkeypatch, selected, reason, push_input="fixture push range"):
+def _push_gate(monkeypatch, changes, push_input="fixture push range"):
     monkeypatch.setattr(gate, "PROJECT_ROOT", Path.cwd())
     monkeypatch.setattr(gate.sys, "stdin", type("Input", (), {"read": lambda self: push_input})())
-    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"fixture"})
-    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files, **options: (selected, reason))
+    monkeypatch.setattr(gate, "changed_paths", lambda root, data: changes)
 
 
 def _capture_gates(monkeypatch):
@@ -45,37 +43,27 @@ def _targets(command):
     return command[command.index("--timeout=180") + 1:]
 
 
-@pytest.mark.parametrize("reason", ["no behavior changes", "fixture reason"])
-def test_non_runtime_push_never_dispatches_a_test_runner(monkeypatch, capsys, reason):
-    _push_gate(monkeypatch, [], reason)
+@pytest.mark.parametrize("changes", [{"docs/usage.md"}, {"docs/plans/run/probe.py", ".planning/run/receipt.json"}])
+def test_non_runtime_push_never_dispatches_a_test_runner(monkeypatch, capsys, changes):
+    _push_gate(monkeypatch, changes)
     observed = _capture_gates(monkeypatch)
     assert gate.main(["--push-checks"]) == 0
     assert observed == []
     output = capsys.readouterr().out
     assert "tests_not_run" in output
-    assert "local_fast_pass" not in output
-    assert "GREEN" not in output
+    assert "local_fast_pass" not in output and "GREEN" not in output
 
 
-@pytest.mark.parametrize("selected,reason", [
-    (["tests/unit"], "unknown push range"),
-    (["tests/unit"], "configuration or test entrypoint changed"),
-    (["tests/unit"], "shared or unknown tooling changed"),
-    (["tests/unit"], "resource dependency scope unknown"),
-    (["tests/unit"], "dynamic execution changed"),
-])
-def test_a_full_recommendation_defers_to_ci_instead_of_running_it(
-        monkeypatch, capsys, selected, reason):
-    _push_gate(monkeypatch, selected, reason)
+def test_runtime_range_runs_fixed_smoke_and_reports_narrow_scope(monkeypatch, capsys):
+    _push_gate(monkeypatch, {"src/pkg/core.py"})
     observed = _capture_gates(monkeypatch)
     assert gate.main(["--push-checks"]) == 0
     assert len(observed) == 1
-    targets = _targets(observed[0][0])
-    assert "tests/unit" not in targets
-    assert targets == list(gate.FAST_CONTRACT_CASES)
+    assert _targets(observed[0][0]) == list(gate.FAST_CONTRACT_CASES)
     output = capsys.readouterr().out
+    assert "local_fast_pass for fixed smoke only" in output
+    assert "change-specific tests are the author's responsibility" in output
     assert "full_validation_pending" in output
-    assert "local_fast_pass" in output
 
 
 def test_empty_stdin_is_an_unknown_range_that_defers(monkeypatch, capsys):
@@ -91,99 +79,17 @@ def test_empty_stdin_is_an_unknown_range_that_defers(monkeypatch, capsys):
     assert "full_validation_pending" in output
 
 
-@pytest.mark.parametrize("selected,reason", [
-    (["tests/unit/test_reader.py"], "affected unit tests"),
-    (["tests/unit/test_a.py", "tests/contract/test_shared.py"],
-     "affected test modules"),
-])
-def test_a_small_explainable_set_runs_those_files_and_reports_the_ran_scope(
-        monkeypatch, capsys, selected, reason):
-    _push_gate(monkeypatch, selected, reason)
-    observed = _capture_gates(monkeypatch)
-    assert gate.main(["--push-checks"]) == 0
-    assert len(observed) == 1
-    targets = _targets(observed[0][0])
-    units = [path for path in selected if path.startswith("tests/unit/")]
-    assert targets[:len(units)] == units
-    smoke = [case for case in gate.FAST_CONTRACT_CASES
-             if not any(case.split("::")[0] == path for path in units)]
-    assert targets[len(units):] == smoke
-    assert len(targets) == len(set(targets))
-    output = capsys.readouterr().out
-    if len(units) != len(selected):
-        assert "non-unit" in output and "deferred" in output
-        assert all(path not in targets for path in selected if path not in units)
-    assert "ran" in output and str(len(targets)) in output
-    assert "full_validation_pending" in output
-    assert "local_fast_pass" in output
-
-
-def test_push_targets_never_expand_to_the_whole_unit_directory(monkeypatch):
-    for selected in (["tests/unit"], ["tests/unit/test_a.py", "tests/unit"],
-                     ["tests/unit/du/test_x.py"]):
-        _push_gate(monkeypatch, selected, "fixture reason")
-        observed = _capture_gates(monkeypatch)
-        assert gate.main(["--push-checks"]) == 0
-        targets = _targets(observed[0][0])
-        assert "tests/unit" not in targets
-        assert all(item in gate.FAST_CONTRACT_CASES or item in selected
-                   for item in targets)
-
-
-def test_fast_contract_members_stay_shared_and_deduplicated(monkeypatch):
-    selected = ["tests/unit/test_narrative_evidence.py"]
-    _push_gate(monkeypatch, selected, "affected unit tests")
-    observed = _capture_gates(monkeypatch)
-    assert gate.main(["--push-checks"]) == 0
-    targets = _targets(observed[0][0])
-    assert targets[0] == selected[0]
-    for case in gate.FAST_CONTRACT_CASES:
-        if case.startswith("tests/unit/test_narrative_evidence.py"):
-            assert case not in targets  # the whole file run covers the node
-        else:
-            assert case in targets
-    assert len(targets) == len(set(targets))
-
-
-def test_wide_explainable_scope_keeps_bounded_known_subset_and_defers_remainder():
-    selected = [f"tests/unit/test_changed_{index}.py" for index in range(
-        gate.DAILY_PUSH_MAX_AFFECTED_TARGETS + 1
-    )]
-
-    targets, reason = gate._push_targets(selected)
-
-    assert targets == [*selected[:32], *gate.FAST_CONTRACT_CASES]
-    assert 'bounded partial selection' in reason and '1 known files deferred' in reason
-    assert selected[-1] not in targets
-
-
-def test_node_id_selection_deduplicates_exact_smoke_member_and_keeps_siblings():
-    files = {case.split("::", 1)[0] for case in gate.FAST_CONTRACT_CASES}
-    selected_file = next(path for path in files if sum(
-        case.split("::", 1)[0] == path for case in gate.FAST_CONTRACT_CASES
-    ) > 1)
-    selected = next(case for case in gate.FAST_CONTRACT_CASES
-                    if case.startswith(selected_file + "::"))
-    targets, _reason = gate._push_targets([selected])
-
-    assert targets.count(selected) == 1
-    siblings = [case for case in gate.FAST_CONTRACT_CASES
-                if case.startswith(selected_file + "::") and case != selected]
-    assert siblings
-    assert all(case in targets for case in siblings)
-
-
 def test_smoke_only_push_label_does_not_claim_affected_tests_ran(monkeypatch, capsys):
-    _push_gate(monkeypatch, ["tests/unit"], "unknown push range")
+    _push_gate(monkeypatch, None)
     observed = _capture_gates(monkeypatch)
 
     assert gate.main(["--push-checks"]) == 0
 
-    assert "CI contract smoke (no affected unit files)" in observed[0][1]
+    assert "fixed CI contract smoke" in observed[0][1]
 
 
 def test_a_real_failure_in_the_ran_scope_blocks_the_push(monkeypatch, capsys):
-    _push_gate(monkeypatch, ["tests/unit/test_reader.py"], "affected unit tests")
+    _push_gate(monkeypatch, {"tests/unit/test_reader.py"})
     observed = []
     monkeypatch.setattr(gate, "_run_pytest_gate",
                         lambda cmd, label: observed.append(cmd) or 3)
@@ -193,7 +99,7 @@ def test_a_real_failure_in_the_ran_scope_blocks_the_push(monkeypatch, capsys):
 
 
 def test_runner_start_failure_returns_nonzero(monkeypatch, capsys):
-    _push_gate(monkeypatch, ["tests/unit/test_reader.py"], "affected unit tests")
+    _push_gate(monkeypatch, {"tests/unit/test_reader.py"})
 
     def broken(cmd, label):
         raise OSError("spawn failed")
@@ -215,7 +121,7 @@ def test_green_full_local_mode_keeps_its_own_wording(monkeypatch, capsys):
 
 
 def test_green_push_mode_never_claims_full_or_safe(monkeypatch, capsys):
-    _push_gate(monkeypatch, ["tests/unit/test_reader.py"], "affected unit tests")
+    _push_gate(monkeypatch, {"tests/unit/test_reader.py"})
     _capture_gates(monkeypatch)
     assert gate.main(["--push-checks"]) == 0
     output = capsys.readouterr().out
@@ -231,7 +137,7 @@ def test_green_push_mode_never_claims_full_or_safe(monkeypatch, capsys):
 ])
 def test_remote_and_full_mode_sets_are_unchanged_by_the_push_policy(
         monkeypatch, entrypoint, extra):
-    _push_gate(monkeypatch, ["tests/unit"], "unknown push range")
+    _push_gate(monkeypatch, None)
     observed = _capture_gates(monkeypatch)
     assert gate.main([entrypoint, *extra]) == 0
     assert len(observed) == 1
@@ -320,9 +226,9 @@ def _fixture_repository(tmp_path: Path):
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPOSITORY_ROOT / relative, target)
     _write_smoke_stubs(work)
-    probe = work / "tests/unit/test_gate_probe.py"
+    probe = work / gate.FAST_CONTRACT_CASES[0].split("::", 1)[0]
     probe.parent.mkdir(parents=True, exist_ok=True)
-    probe.write_text("def test_probe(): pass\n", encoding="utf-8", newline="\n")
+    probe.write_text(f"def {gate.FAST_CONTRACT_CASES[0].split('::', 1)[1]}(): pass\n", encoding="utf-8", newline="\n")
     # The gate process byte-compiles its own imported tools; keep that noise
     # out of the pushed ranges so the diff reflects the intended change only.
     (work / ".gitignore").write_text("__pycache__/\n", encoding="utf-8", newline="\n")
@@ -356,16 +262,16 @@ def test_real_push_green_fast_pass_then_blocked_by_a_ran_failure(tmp_path):
     output = green.stdout + green.stderr
     assert "local_fast_pass" in output
     assert "full_validation_pending" in output
-    probe.write_text("def test_probe(): assert False, 'probe failure'\n",
+    probe.write_text(f"def {gate.FAST_CONTRACT_CASES[0].split('::', 1)[1]}(): assert False, 'probe failure'\n",
                      encoding="utf-8", newline="\n")
-    _git(work, "add", "tests/unit/test_gate_probe.py")
+    _git(work, "add", gate.FAST_CONTRACT_CASES[0].split("::", 1)[0])
     _git(work, "commit", "-qm", "red probe")
     local_head = _git(work, "rev-parse", "HEAD").stdout.strip()
     blocked = _push(work)
     assert blocked.returncode != 0
     combined = blocked.stdout + blocked.stderr
     assert "PUSH CHECKS RED" in combined
-    assert "test_gate_probe" in combined
+    assert gate.FAST_CONTRACT_CASES[0].split("::", 1)[1] in combined
     assert _remote_head(work) != local_head
 
 
@@ -386,9 +292,9 @@ def test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code(tmp_path):
     assert "passed" not in output
     assert _remote_head(work) == _git(work, "rev-parse", "HEAD").stdout.strip()
 
-    probe.write_text("def test_probe(): assert False, 'earlier code failure'\n",
+    probe.write_text(f"def {gate.FAST_CONTRACT_CASES[0].split('::', 1)[1]}(): assert False, 'earlier code failure'\n",
                      encoding="utf-8", newline="\n")
-    _git(work, "add", "tests/unit/test_gate_probe.py")
+    _git(work, "add", gate.FAST_CONTRACT_CASES[0].split("::", 1)[0])
     _git(work, "commit", "-qm", "unpublished failing code")
     evidence.write_text("# latest commit is still only evidence\n", encoding="utf-8")
     _git(work, "add", "docs/plans/fixture/probe.py")
@@ -430,8 +336,8 @@ def test_real_push_defers_unknown_config_scope_and_full_run_still_finds_the_fail
     baseline = _push(work)
     assert baseline.returncode == 0, baseline.stdout + baseline.stderr
     # Only configuration changes now. No changed Python/import edge proves
-    # this dependency; unlike an explicitly changed failing unit, it belongs
-    # to the declared unknown remainder which CI/full validation still checks.
+    # this dependency. Everything outside fixed smoke belongs to author tests
+    # and CI/full validation, whether or not an import consumer is known.
     config.write_text("[project]\nname = 'w13-fixture'\n[tool.fixture]\nready = false\n",
                       encoding="utf-8", newline="\n")
     _git(work, 'add', 'pyproject.toml')
