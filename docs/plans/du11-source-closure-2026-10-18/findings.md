@@ -8,13 +8,13 @@
 
 R5先以旧OperatingFact的no semantic truth claims及真实消费链冻结原合同。共用来源prepared观察与闭合成员关系；source_scope是披露类型，材料自足性与事件/主体/数值绑定分轴。weak未知goal/function不凭POS/default-specific升级；完整金融句的子句不能被孤立重判而重新占业务材料。resource purpose复用同roles/WorkBudget；同prepared的text_fact与生产fact能力投影保旧入口不扩资源。
 
-原70期待全部恢复；最后1048为1044P4F，四处定点17P修复；resource兼容98P1F后16P修复，未重复整组。13文件正常commit10767b86，Ruff/全src mypy和固定167smoke通过，精确现有完整CI41380285347成功。最终28场景独立代码审查PASS，正常FF本地master10767b86；正常发布中，未签真实H1/摘要/RF。仅本轮自增错误oracle公开纠正；原70断言保持。原三路合同/consumer调查、freeze清单及日志见R6-source-contract-r5与R6-CI-r5。
+原70期待全部恢复；最后1048为1044P4F，四处定点17P修复；resource兼容98P1F后16P修复，未重复整组。13文件正常commit10767b86，Ruff/全src mypy和固定167smoke通过，精确现有完整CI41380285347成功。最终28场景独立代码审查PASS，正常FF本地master10767b86；主线c6bb801b已正常推送且精确CI41381788839成功，未签真实H1/摘要/RF。仅本轮自增错误oracle公开纠正；原70断言保持。原三路合同/consumer调查、freeze清单及日志见R6-source-contract-r5与R6-CI-r5。
 
 剩余两consumer迁移只改测试绑真实owner和-I/-S子进程显式当前src，不加生产代理；partial严格反控/完整正控均保留。R6还修四种frozen Exception遮蔽原code/cause/traceback；CI分组注释修复平台4096字节截断，完整失败可见，不再为缺清单提取凭证。
 
 ## 已有架构与权限处置
 
-存储虚拟化、source refs/export、immutable raw与来源定位职责已实现，不重建底层数据湖。Q01–Q14全部处置详见implementation-results/STATUS；Q09在StockWiki本地主线，Q11接收字节SHA经边界论证保留；其他整改10767b86经最终独审/完整CI绿已并CWP本地主线、正在正常发布。实读字节/身份期间/as-of、资源与恢复是责任层质量校验；private/public、逐材料许可、人工签收、旧双轮dry-shadow日常门禁不应复活。
+存储虚拟化、source refs/export、immutable raw与来源定位职责已实现，不重建底层数据湖。Q01–Q14全部处置详见implementation-results/STATUS；Q09在StockWiki本地主线，Q11接收字节SHA经边界论证保留；其他整改10767b86经最终独审/完整CI绿已并CWP本地主线、已正常推送c6bb801b且精确主线CI成功。实读字节/身份期间/as-of、资源与恢复是责任层质量校验；private/public、逐材料许可、人工签收、旧双轮dry-shadow日常门禁不应复活。
 
 R6还修了四种frozen Exception遮蔽原code/cause/traceback的问题。sandbox原子os.link WinError5曾造成15个假产品失败，同72域正常host全绿证实；没有为sandbox改CAS。旧消费者5测试只迁移到真正owner并增强真实cache/exact查询，未删原断言或恢复跨层reader耦合。
 
@@ -22,7 +22,7 @@ R6还修了四种frozen Exception遮蔽原code/cause/traceback的问题。sandbo
 
 真实X1漏读缓存、推理前无持久占用、零余额仍启动、NaN计量4类问题已根修并真正独审，候选6b70394b和已推master848b4ee0均完整CI成功。旧8页R0/N0和X1两次真实失败保留；真实累计耗时unknown，1800秒合规/峰值限制/小米精度优势与生产适用性未证。没有切换生产OCR、重新加载模型或补跑伪造旧费用。精确生成PNG清理、原件/模型不变及独审绑定在R6-W23报告和publication收据。
 
-## T3：跨备注context的结构根因仍未实施
+## T3：结构实施中，TERM有界通过，NOTE/PHYS在途
 
 编号正文以句号加闭引号结尾被误当标题，真正备注N的长/换行主体引介未成局部边界，导致后备注继承前备注赔偿尾句。来源字节/SHA/locator正确不能证明引用关系和主体归属正确，不能靠RF改主体或公司名单过滤。R4-context-investigation冻结9对原始成员；R6-T3-implementation-plan已写具体接口/TDD/失败语义。
 

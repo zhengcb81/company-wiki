@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "R6_ENGINEERING_MAINLINE_MERGED_PUBLICATION_IN_PROGRESS_T3_NEXT",
+  "project_status": "R6_ENGINEERING_PUBLISHED_MAIN_CI_GREEN_T3_IMPLEMENTATION_ACTIVE",
   "execution_mode": "manual_user_authorized_resumption",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
@@ -43,7 +43,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "正常提交推送本次来源整改与PWF，核精确主线CI；随后T3按已冻结47case RED实施统一终结符/局部备注scope，不扩外包；最终H1、新摘要/cache/RF仍OPEN。",
+  "next_action": "完成T3 NOTE/PHYS来源备注局部scope和原生成员/邻接proof及局部partial传播，与已修TERM合并跑冻结47+新增24一次并集中独审，再按计划做最终真实H1、新摘要/cache/RF。不扩外包、不重复整仓。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -52,7 +52,7 @@
     ".githooks/pre-push mode-only; not ours"
   ],
   "as_of_date": "2026-11-02",
-  "observed_at_utc": "2026-11-02T03:09:57.946734+00:00",
+  "observed_at_utc": "2026-11-02T03:21:02.100896+00:00",
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "get_goal during2026-11-02 continuation",
@@ -64,25 +64,27 @@
     "branch": "master",
     "source_rectification_merged": true,
     "exact_ci": {
-      "id": 41371690732,
-      "head_sha": "1bf3d388e31c0d40f0de2165acd8401bf8ecb85e",
+      "id": 41381788839,
+      "head_sha": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+      "head_branch": "master",
       "status": "completed",
       "conclusion": "success",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41371690732",
-      "created_at": "2026-11-02T01:17:16Z",
-      "updated_at": "2026-11-02T01:23:40Z"
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41381788839",
+      "created_at": "2026-11-02T03:12:17Z",
+      "updated_at": "2026-11-02T03:19:00Z"
     },
-    "local_head": "10767b86318e63094c2bb49451447c9aedffc32c",
-    "remote_head_last_observed": "1bf3d388e31c0d40f0de2165acd8401bf8ecb85e",
+    "local_head": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+    "remote_head_last_observed": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
     "note": "Daily tool and PWF master1bf3d388 normally pushed, exact main CI41371690732 success. Source R4 still isolated.",
     "main_ci": {
-      "id": 41371690732,
-      "head_sha": "1bf3d388e31c0d40f0de2165acd8401bf8ecb85e",
+      "id": 41381788839,
+      "head_sha": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+      "head_branch": "master",
       "status": "completed",
       "conclusion": "success",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41371690732",
-      "created_at": "2026-11-02T01:17:16Z",
-      "updated_at": "2026-11-02T01:23:40Z"
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41381788839",
+      "created_at": "2026-11-02T03:12:17Z",
+      "updated_at": "2026-11-02T03:19:00Z"
     },
     "historical_pre_push_848b4ee0": {
       "passed": 234,
@@ -90,8 +92,8 @@
     },
     "normal_pre_push": {
       "passed": 167,
-      "seconds": 38.31,
-      "total_seconds": 45.097
+      "seconds": 35.54,
+      "total_seconds": 41.944
     },
     "historical_exact_ci_848b4ee0": {
       "id": 41365435657,
@@ -105,7 +107,9 @@
     },
     "previous_local_and_remote_head": "1bf3d388e31c0d40f0de2165acd8401bf8ecb85e",
     "runtime_commit": "10767b86318e63094c2bb49451447c9aedffc32c",
-    "push_status": "PENDING_CURRENT_DOCUMENT_BUNDLE"
+    "push_status": "SUCCESS",
+    "main_code_bundle_commit": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+    "observation_note": "Exact engineering bundlec6bb801b; later docs-only receipt commits do not change runtime or retrigger CI."
   },
   "architecture_rectification": {
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
@@ -123,7 +127,7 @@
       "created_at": "2026-11-02T02:55:39Z",
       "updated_at": "2026-11-02T02:59:56Z"
     },
-    "current_work": "R5 exact fullCI41380285347 success plus final independent28bounded scenarios PASS; normal ff merged10767b86,13existing ROOT WIP hashes/modes retained. Normal publication in progress; T3 and realC remain OPEN.",
+    "current_work": "R6 engineering10767b86 final independent and complete candidateCI green, normal master bundlec6bb801b pushed and exact mainCI41381788839 success. T3 TERM48bounded PASS, NOTE/PHYS active in reusedw23-r6 worktree; final realC open.",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/R6-CI-r5.md",
     "consumer_evidence": "review/architecture-quality-20261101/implementation-results/R6-owner-boundaries-ci.md",
     "prior_original_candidate_failure": "review/architecture-quality-20261101/implementation-results/CWP-failed-CI.md",
@@ -169,7 +173,8 @@
     },
     "engineering_merged": true,
     "independent_cases": 28,
-    "final_acceptance": "ENGINEERING_ONLY_REAL_C_OPEN"
+    "final_acceptance": "ENGINEERING_ONLY_REAL_C_OPEN",
+    "publication": "review/architecture-quality-20261101/implementation-results/R6-publication.json"
   },
   "W23": {
     "engineering": "MERGED_PUSHED_EXACT_MASTER_CI_SUCCESS",
@@ -190,19 +195,23 @@
   "next_stages": [
     {
       "id": "R6",
-      "status": "ENGINEERING_MERGED_PUBLICATION_IN_PROGRESS_REAL_C_OPEN",
-      "work": "正常提交推送本次来源整改与PWF，核精确主线CI；随后T3按已冻结47case RED实施统一终结符/局部备注scope，不扩外包；最终H1、新摘要/cache/RF仍OPEN。"
+      "status": "ENGINEERING_PUBLISHED_MAIN_CI_GREEN_REAL_C_OPEN",
+      "work": "R6工程发布闭合，相关真实C归后续阶段；不重复已关闭源码整改。"
     },
     {
       "id": "T3",
-      "status": "TESTS_FIRST_READY_PRODUCTION_NOT_IMPLEMENTED",
+      "status": "IN_PROGRESS_TERM_BOUNDED_PASS_NOTE_PHYS_ACTIVE",
       "work": "Fix quoted numbered prose false headings and source-marked long/wrapped note scope, retain current actor introduction. No raw rewriting/company filters/new universal geometry gate.",
       "investigation": "review/architecture-quality-20261101/implementation-results/R4-context-investigation.md",
       "plan": "review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md",
       "tests_first": "review/architecture-quality-20261101/implementation-results/R6-T3-tests-first.md",
       "actual_first_run": "47case28F19P;27behavior RED+1fixture error; fixture-only1P3.41s, no whole rerun",
       "untracked_test_directory": "tmp/architecture-r2/tests/unit/document_understanding_note_scope",
-      "instruction": "Exclude these RED tests from R5 code stage; include with T3 implementation only."
+      "instruction": "Exclude these RED tests from R5 code stage; include with T3 implementation only.",
+      "implementation_worktree": "tmp/w23-r6",
+      "branch": "codex/architecture-t3-source-scope-20261102",
+      "term_report": "review/architecture-quality-20261101/implementation-results/R6-T3-term.md",
+      "test_copy": "Frozen6delivery files verified into initially absent new branch directory; no original copies."
     },
     {
       "id": "C-source",

@@ -1,0 +1,52 @@
+{
+  "schema_version": "architecture-r6-publication/1",
+  "observed_at_utc": "2026-11-02T03:21:02.100896+00:00",
+  "runtime_commit": "10767b86318e63094c2bb49451447c9aedffc32c",
+  "published_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+  "candidate_ci": {
+    "id": 41380285347,
+    "head_sha": "10767b86318e63094c2bb49451447c9aedffc32c",
+    "head_branch": "codex/architecture-rectification-r2-20261101",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41380285347",
+    "created_at": "2026-11-02T02:55:39Z",
+    "updated_at": "2026-11-02T02:59:56Z"
+  },
+  "main_ci": {
+    "id": 41381788839,
+    "head_sha": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+    "head_branch": "master",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41381788839",
+    "created_at": "2026-11-02T03:12:17Z",
+    "updated_at": "2026-11-02T03:19:00Z"
+  },
+  "independent": "R6-independent-ci-r5.json",
+  "independent_status": "PASS_R5_SOURCE_ENGINEERING_ONLY",
+  "merge": {
+    "head": "10767b86318e63094c2bb49451447c9aedffc32c",
+    "merge": "ff-only",
+    "existing_tracked_wip_preserved": true,
+    "protected_paths": 13,
+    "candidate_full_ci": 41380285347,
+    "independent": "R6-independent-ci-r5.json",
+    "normal_merge": true
+  },
+  "main_push": {
+    "head": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+    "returncode": 0,
+    "elapsed_s": 41.944
+  },
+  "main_fixed_smoke": "167P/35.54s",
+  "engineering": "MERGED_PUSHED_EXACT_MAIN_CI_SUCCESS",
+  "not_signed": [
+    "T3 NOTE/PHYS",
+    "final realH1",
+    "fresh summary/cache/RF",
+    "company research loop"
+  ],
+  "originals_and_production_config_unchanged": true,
+  "new_paid_calls": 0
+}

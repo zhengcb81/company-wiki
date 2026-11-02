@@ -1,12 +1,12 @@
-**2026-11-02：R6工程10767b86最终独审/完整CI绿，已正常并本地master，正在正常发布PWF；W23和daily已此前独立发布。T3结构及真实C仍OPEN。**
+**2026-11-02：R6工程10767b86最终独审/候选CI绿，主线c6bb801b已正常推送且精确CI41381788839成功。T3结构实施中（TERM48P、NOTE/PHYS在途），真实C和公司循环仍OPEN。**
 
 # 主线剩余实施计划
 
-**当前：来源整改10767b86已获最终独审与完整CI41380285347通过，正常FF本地master，正在提交推送PWF；W23和daily已独立发布。结构T3/真实C/公司循环继续，不签总目标完成。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
+**当前：来源整改10767b86已获最终独审与完整CI41380285347通过，已正常发布主线c6bb801b且精确CI41381788839成功；W23和daily已独立发布。结构T3/真实C/公司循环继续，不签总目标完成。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
 
 ## Next Step
 
-正常提交推送本次来源整改与PWF，核精确主线CI；随后T3按已冻结47case RED实施统一终结符/局部备注scope，不扩外包；最终H1、新摘要/cache/RF仍OPEN。
+完成T3 NOTE/PHYS来源备注局部scope和原生成员/邻接proof及局部partial传播，与已修TERM合并跑冻结47+新增24一次并集中独审，再按计划做最终真实H1、新摘要/cache/RF。不扩外包、不重复整仓。
 
 ## P0 — 已完成的CI根修
 

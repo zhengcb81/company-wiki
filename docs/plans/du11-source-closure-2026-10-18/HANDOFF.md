@@ -1,4 +1,4 @@
-# 当前交接 — R6工程已并本地主线，正常发布与T3下一步
+# 当前交接 — R6工程已发布且主线CI绿，T3实施中
 
 唯一入口：[CURRENT_STATUS](CURRENT_STATUS.md)/[json](CURRENT_STATUS.json)。`PLAN_ID=du11-source-closure-2026-10-18`，`PWF_PLAN_ROOT=docs/plans`。用户已恢复实施，不执行历史暂停或再revert候选；ROOT唯一维护主PWF和集成。
 
@@ -6,9 +6,9 @@
 
 | 位置 | 版本 / 实际状态 |
 |---|---|
-| ROOT `master` / `origin/master` | 本地`10767b86`已FF来源整改；远端暂`1bf3d388`、正在正常提交推送本PWF；候选完整CI41380285347绿及最终独审PASS。 |
+| ROOT `master` / `origin/master` | 工程runtime10767b86，主线bundle`c6bb801b`已正常推送；精确主线CI41381788839成功，候选CI/最终独审均过。 |
 | ROOT独占 `tmp/architecture-r2` | `codex/architecture-rectification-r2-20261101`，`10767b86`已正常commit/push；精确完整CI41380285347成功，最终28场景独审PASS；已正常并本地master。 |
-| W23/daily自有 `tmp/w23-r6` | 当前daily分支`codex/architecture-fast-feedback-20261102`、819cef31，已并主线。没有待部署的生产OCR。 |
+| W23/daily自有 `tmp/w23-r6` | 已复用为T3分支`codex/architecture-t3-source-scope-20261102`，base c6bb801b；ROOT做TERM（48P），recipe agent做NOTE/PHYS在途。旧daily/W23均已发布，不重做。 |
 | RF | main/origin957c6283，精确CI41304681319成功，选定runtime已定点安装；本轮无新RF改动。 |
 | StockWiki | Q09本地master381811e5已并；历史无remote，未声称推送。 |
 
@@ -16,13 +16,13 @@ R4候选2b0787dc完整CI70F保留。R5已按原合同修复：材料eligible/自
 
 - 冻版：[R6-source-contract-r5](review/architecture-quality-20261101/implementation-results/R6-source-contract-r5.md)，9源码/3自增测试manifest为`R6-r5-freeze-manifest.json`、SHA `d45fc6875e411b2e2911e78e838b84a47af98fdf27c35c50438e5bc03b863650`；另ROOT预算spy同次提交。
 - 合同独审调查：`R6-independent-source-contract-r5.md`，消费链调查：`R6-source-material-consumers-r5.md`；它们是合同调查；最终代码独审`R6-independent-ci-r5.md/json`已PASS，28场景及13SHA绑定10767b86，自有tmp/k5恢复absent。
-- T3六个新测试在候选工区`tests/unit/document_understanding_note_scope/`，**untracked且行为RED，必须排除R5暂存**；只随T3产品实现提交。源码作者已STOP，最终独审已通过；后续改动必须有新节点证据，不能挪用本次冻版签收。
+- T3六个新测试在候选工区`tests/unit/document_understanding_note_scope/`，**untracked且行为RED，必须排除R5暂存**；只随T3产品实现提交。R5源码作者已STOP，最终独审已通过；T3 NOTE/PHYS作者现在施工，不要在其运行测试时改索引/提交工区；后续改动必须有新节点证据，不能挪用本次冻版签收。
 
 ## 2. 单一下一步与后续顺序
 
-1. `10767b86`最终独审和完整CI已通过，已正常FF本地主线；不要重复旧整改/1048/整仓。正在正常发布当前文档bundle。
-2. FF已逐13SHA/物理mode证明ROOT在途内容不变；正常提交推送并核精确主线CI。保持Git hook索引100755，不把外来Windows物理644变化提交。原件/生产配置不变，不取Git缓存凭证、不绕hooks。
-3. T3按[R6-T3-implementation-plan](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)实施。已冻47例首跑28F19P，其中27真行为RED＋1夹具错误；夹具单修1P、未再跑47。统一编号完整句/闭引号原语，source-marked长/换行备注局部frame，保留本scope主体引介；仅缺推断证据时局部partial，不把bbox变普遍许可。只设工程冻版独审与真实大节点，不新增小签收。
+1. `10767b86`最终独审和完整CI已通过，已正常FF本地主线；不要重复旧整改/1048/整仓。主线c6bb801b已正常发布且精确CI绿，不重做。
+2. FF已逐13SHA/物理mode证明ROOT在途内容不变；正常发布已完成；后续保持Git hook索引100755，不把外来Windows物理644变化提交。原件/生产配置不变，不取Git缓存凭证、不绕hooks。
+3. T3实施中：ROOT仅text_boundaries/adapter/layout与纯helper测试，NOTE/PHYS作者负责sections/scopes/native proof/partial传播，不重叠。TERM48P，adapter identity随后9→10，最终合并测试需绑定最终身份。按[R6-T3-implementation-plan](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)实施。已冻47例首跑28F19P，其中27真行为RED＋1夹具错误；夹具单修1P、未再跑47。统一编号完整句/闭引号原语，source-marked长/换行备注局部frame，保留本scope主体引介；仅缺推断证据时局部partial，不把bbox变普遍许可。只设工程冻版独审与真实大节点，不新增小签收。
 4. 单次最终H1使用`.planning/architecture-quality-20261101/real-acceptance/README.md`的runner/cases/oracle：90s/16M/112不变，核12业务unit/111原生成员、9对context/member和正向主体引介。runner硬绑定ROOT/src，不能只改PYTHONPATH假称跑候选。旧v1数量通过与v2公开合同失败不代最终。
 5. 来源通过后，在新隔离catalog/AUTO仅引用既有原件，按`C-preparation.md`做配置真实摘要、paid prepared中断/same/cross-run零重复、**同一新artifact**实际RF参数/公式/报告/snapshot采用，再集中独审。两旧P1配置已absent；不得复制原PDF/旧DB，不改R3/R4封存。
 
@@ -30,7 +30,7 @@ R4候选2b0787dc完整CI70F保留。R5已按原合同修复：材料eligible/自
 
 - W23工具runtime ae438a32、候选6b70394b和主线848b4ee0完整CI绿。真实X1漏cache/无inflight/零余额/NaN已根修并独审；旧8页实验仍PARTIAL，实际总elapsed=null、1800合规/峰值/小米精度/生产适用性未证，两次真实失败保留。没切生产OCR、没新模型推理/下载。见`R6-W23-publication.json`与独审/精确PNG清理收据。
 - daily快检819cef31已独审、候选和主线完整CI绿。代码范围只跑固定原167smoke，已确认文档范围0pytest；不再AST影响图扩选千例。precommit仍静态，完整CI/作者定点测试/重大E2E保留；超时/输出/子进程错误仍真实失败。不是削弱用例来掩盖产品回归。
-- 消费者50P、独立7P＋稳定窗口CF3 1P；AUTO/离线关联72P正常host；四种frozen Exception传播根修、CI4096 annotation分组修复已随10767b86完整整合CI绿并本地主线，正常发布中。
+- 消费者50P、独立7P＋稳定窗口CF3 1P；AUTO/离线关联72P正常host；四种frozen Exception传播根修、CI4096 annotation分组修复已随10767b86发布，主线c6bb801b完整CI绿。
 - 早期华利15卡/12原子、Berkshire73卡/10原子、恢复/RF v6 45项是历史有界成果；15个BRK未处理与全文partial保持，不能代当前runtime正式验收。
 
 ## 4. 数据、环境与所有权

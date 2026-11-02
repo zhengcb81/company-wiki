@@ -1,6 +1,6 @@
 # T3 实施细则：来源局部 scope 与编号完整句
 
-状态：**只读实施细则已完成，尚未实施或验收**。本文件续接原 T3，不是新外包卡；ROOT 仍唯一维护主 PWF。调查基于 `tmp/architecture-r2` 的实际共享引擎及 `R4-context-investigation.md`、`R6-T3-design.md`，本轮没有修改 src/tests/Git/index，没有运行原件、解析器或模型。下面的新增接口、测试名、版本及命令均是待实施方案，不能当成现有能力或测试收据。
+状态：**实施中，尚未最终验收**。TERM已48有界通过，实际pipeline另暴露layout-hints第三producer并根修8P；NOTE/PHYS作者在途。原47断言保持，最终合并原47+新增24一次并集中独审，真实H1/摘要/cache/RF仍OPEN。下文是原冻结调查与实施细则，当前状态以CURRENT_STATUS为准。本文件续接原 T3，不是新外包卡；ROOT 仍唯一维护主 PWF。调查基于 `tmp/architecture-r2` 的实际共享引擎及 `R4-context-investigation.md`、`R6-T3-design.md`，本轮没有修改 src/tests/Git/index，没有运行原件、解析器或模型。下面的新增接口、测试名、版本及命令均是待实施方案，不能当成现有能力或测试收据。
 
 ## 已冻结的设计约束
 

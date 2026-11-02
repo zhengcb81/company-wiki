@@ -1,16 +1,16 @@
 # 当前项目状态 — 2026-11-02，R6工程已并线，T3结构根修下一步
 
-**用户已恢复实施。R5来源工程已获最终独审及完整CI通过，本地正常FF到master10767b86，正在正常提交推送PWF。真实H1/新版摘要/缓存恢复/RF采用和全公司循环仍OPEN。** 唯一入口为本页/[机器状态](CURRENT_STATUS.json)，具体接手看[HANDOFF](HANDOFF.md)。历次暂停/失败是历史，不作为当前施工指令。
+**用户已恢复实施。R6来源工程10767b86已获最终独审及完整CI通过，主线/PWF c6bb801b已正常推送，精确主线CI41381788839成功。真实H1/新版摘要/缓存恢复/RF采用和全公司循环仍OPEN。** 唯一入口为本页/[机器状态](CURRENT_STATUS.json)，具体接手看[HANDOFF](HANDOFF.md)。历次暂停/失败是历史，不作为当前施工指令。
 
 ## 当前在哪里
 
 | 责任 | 实际完成 | 剩余 |
 |---|---|---|
-| 全模块工程整改Q01–Q14 | 来源合同/recipe/cache、索引查询、单AUTO存储预算、CAS、跨层DTO、旧工具/门禁退役等已处置；候选10767b86精确完整CI41380285347成功，最终28场景独审PASS；正常并本地master | 正常推送及精确主线CI；相关真实C验收未签 |
+| 全模块工程整改Q01–Q14 | 来源合同/recipe/cache、索引查询、单AUTO存储预算、CAS、跨层DTO、旧工具/门禁退役等已处置；候选10767b86精确完整CI41380285347成功，最终28场景独审PASS；正常并本地master | 主线c6bb801b已推、CI41381788839成功；相关真实C验收未签 |
 | 来源语义 | 单prepared保留来源范围/计划/定义资料价值；事件/数值/主体资格独立。原70期待恢复，同预算与text/production投影根修 | T3 context结构和真实新来源验收 |
 | daily快检简化 | 819cef31已推主线、完整CI绿；代码只原167smoke，文档0pytest；不构建AST图扩选千例 | 本地快检从不代完整CI/作者定点/关键E2E |
 | W23小米OCR返工 | cache/inflight/零余额/NaN工具根修已独审、并线推送和精确CI绿 | 原8页实验仍PARTIAL，实际elapsed/1800合规/峰值/精度/生产适用性未证；未切生产OCR |
-| T3局部结构 | 实施细则与6个tests-first文件已冻，27真实行为RED；编号完整句误标题、长备注未成scope均已定位 | 按既有计划根修，保留新scope正向主体引介；不能只删错边 |
+| T3局部结构 | 实施中：终结符TERM已48P，6个原冻结测试已校验移入复用T3分支；NOTE/PHYS在途 | 按既有计划根修，保留新scope正向主体引介；不能只删错边 |
 | RF/StockWiki | RF957c6283 main/origin绿且定点部署；StockWiki Q09本地master381811e5已并 | StockWiki历史无remote不冒推；RF公司真实采用/研究责任仍OPEN |
 
 ## 本次修复为何不是改测试换绿
@@ -21,7 +21,7 @@
 
 ## 下一步
 
-正常发布当前工程/PWF并核主线CI，然后按[R6-T3-implementation-plan](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)修统一末尾标点与来源备注scope。T3六个RED测试只随T3实现提交；无需新外包、逐小节点签收或普遍bbox要求。
+工程/PWF已正常发布且主线CI绿，正在按[R6-T3-implementation-plan](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)修统一末尾标点与来源备注scope。T3六个冻结tests-first文件只随T3完整实现提交；无需新外包、逐小节点签收或普遍bbox要求。
 
 结构通过后，单次最终H1仍用90s/16M/112：12业务unit/111原生成员、9对context及正向主体引介；旧v1数量与v2失败不能代签。再做隔离新catalog/AUTO引用既有原件、新配置真实摘要、paid prepared中断/same/cross零重复及同artifact实际RF参数/公式/报告/snapshot采用，集中独审。
 

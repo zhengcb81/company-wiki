@@ -127,3 +127,8 @@ Daily工具与当前PWF已1bf3d388正常推master，固定smoke167P/38.31s，总
 ## R6工程独审/完整CI通过并线（2026-11-02T03:09:57.946734+00:00）
 
 10767b86现有完整CI41380285347 completed success（Unit199s/contract7s），最终28场景独审PASS/13SHA稳定/tmp/k5恢复absent。ROOT正常ff-only并本地主线，逐13项WIP字节/物理mode不变；原63/22/70F历史保留，本次未缩CI范围。PWF当前入口/交接/子registry统一为工程已并线、正常发布中，T3结构与真实H1/新摘要/cache/RF/公司循环未签。W23两个别名归单一registry条目，不重复施工。
+
+
+## 工程发布闭合与T3开始（2026-11-02T03:21:02.100896+00:00）
+
+c6bb801b正常主线push167P35.54s/总41.944s成功，精确CI41381788839于03:19:00Z success。R6工程发布收据R6-publication.json；源码runtime10767b86不再待并线。复用tmp/w23-r6新T3分支，初次switch因已知hook mode-only遇新header失败；核字节完全等于HEAD后单次core.filemode=false切换，物理mode保持，无全局设置/删文件。6冻结test校验复制、0原件副本。TERM32+纯helper16共48P4.79s，tmp仍初始absent；其后adapter identity9→10并静态检查绿，最终合并需绑定新身份。NOTE/PHYS作者实施中，原47断言不动；真实H1/摘要/cache/RF仍OPEN。

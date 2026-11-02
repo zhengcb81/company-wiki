@@ -1,0 +1,83 @@
+{
+  "schema_version": "t3-terminal-owner/1",
+  "status": "TERMINAL_BEHAVIOR_BOUNDED_PASS_NOTE_PHYS_AND_FINAL_INTEGRATION_OPEN",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6",
+  "branch": "codex/architecture-t3-source-scope-20261102",
+  "base": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+  "tests": {
+    "returncode": 0,
+    "elapsed_s": 5.546,
+    "counts": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "tests/unit/document_understanding_note_scope/test_terminals.py",
+      "tests/unit/document_understanding_note_scope/test_text_boundaries.py",
+      "-q",
+      "--tb=short",
+      "-p",
+      "pytest_asyncio.plugin",
+      "-p",
+      "pytest_timeout",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3-term-cbd845f8",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r6-publication\\t3-term.xml"
+    ],
+    "test_temp_initially_absent": true,
+    "test_temp_exists_after": false,
+    "models": 0,
+    "downloads": 0,
+    "frozen_T3_existing_assertions_changed": false
+  },
+  "current_delivery_sha256": {
+    "src/company_wiki/document_understanding/text_boundaries.py": "3f38168174a44469a68778197931cdecbe3e8504324d7683f3596d1cdc34d65e",
+    "src/company_wiki/document_understanding/observation_adapter.py": "2aa2d61fdf76ac5e928426ecf8c3be422f196e38a4597c39c810ed08a3ee9bd3",
+    "src/company_wiki/document_understanding/structure/layout.py": "2ac0d532dc7abab79f37d541d144bde1961b16904cc3fdfb46dd23e5f8ce1a41",
+    "tests/unit/document_understanding_note_scope/test_text_boundaries.py": "a8291bcaca3f81dbaff82b49835690ac5820fb54946435fdcbdc65a38c0830d2",
+    "src/company_wiki/document_understanding/layout_hints/text_evidence.py": "30be879e54ebc2132fbe41c5220237baf3fe9f8fc68dda568cf05aa32dad2b6f"
+  },
+  "test_binding_note": "48P before adapter identity bump9->10; this metadata-only delta was Ruff/mypy checked, final combined T3 run must bind final version. No final aggregate PASS claimed.",
+  "new_source_api": [
+    "terminal_punctuation(text)->str|None",
+    "ends_complete_sentence(text)->bool"
+  ],
+  "invariants": [
+    "Only implicit numbered heading paths veto complete prose; explicit native/HTML heading retained.",
+    "Shared observer is stdlib-only and does not rewrite source strings.",
+    "Existing adapter colon stop remains separate; general colon not a hard terminal.",
+    "Original47 frozen assertions unchanged;16extra direct source boundary checks added."
+  ],
+  "not_signed": [
+    "NOTE/PHYS final integration",
+    "final original47+new24 combined suite",
+    "independent code review",
+    "real H1",
+    "summary/cache/RF"
+  ],
+  "paid_calls": 0,
+  "original_reads": 0,
+  "new_original_copies": 0,
+  "third_producer_root_cause": "Full pipeline layout_hints.heading_evidence could refill numbered heading after adapter/layout veto; text_evidence now delegates same terminal observer, retaining broader legacy bare-layout markers.",
+  "third_producer_validation": {
+    "source_red": "NOTE author15case12P3F, actual pipeline regenerated heading after wrapper",
+    "new_actual_pipeline_cases": 8,
+    "passed": 8,
+    "pytest_seconds": 1.98,
+    "junit_created": false,
+    "evidence": "Host exec console; final combined suite must bind exact frozen runtime.",
+    "static": "Ruff+mypy touched layout owner passed",
+    "no_original_or_models": true
+  }
+}

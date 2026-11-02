@@ -4,32 +4,32 @@
   "implementation_active": true,
   "items": {
     "Q01": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN",
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN",
       "reason": "R5 source material contract fullCI41380285347 green, final independent28bounded cases PASS; original70 restored; T3 structure and actual new summary/RF still OPEN."
     },
     "Q02": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN",
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN",
       "reason": "PDF table observation package now included; actual cache RED->2 focused GREEN"
     },
     "Q03": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN",
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN",
       "reason": "derived indexed candidate superset with dirty fallback and exact EOF"
     },
     "Q04": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN",
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN",
       "reason": "R1 two independent race failures retained; R2 short shared storage mutex and single atomic cap snapshot; no inflight table"
     },
     "Q05": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     },
     "Q06": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     },
     "Q07": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     },
     "Q08": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     },
     "Q09": {
       "status": "INDEPENDENT_PASS_STOCKWIKI_MASTER_MERGED",
@@ -37,23 +37,23 @@
       "remote": "NOT_CONFIGURED_HISTORICAL"
     },
     "Q10": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     },
     "Q11": {
       "status": "RESOLVED_BY_BOUNDARY_JUSTIFICATION",
       "reason": "B independent reviewer agrees received-byte SHA required for public Protocol; no forgeable trusted flag"
     },
     "Q12": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     },
     "Q13": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     },
     "Q14": {
-      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
+      "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     }
   },
-  "next": "正常提交推送本次来源整改与PWF，核精确主线CI；随后T3按已冻结47case RED实施统一终结符/局部备注scope，不扩外包；最终H1、新摘要/cache/RF仍OPEN。",
+  "next": "完成T3 NOTE/PHYS来源备注局部scope和原生成员/邻接proof及局部partial传播，与已修TERM合并跑冻结47+新增16一次并集中独审，再按计划做最终真实H1、新摘要/cache/RF。不扩外包、不重复整仓。",
   "real_source_observation": {
     "case": "H1 current-v1",
     "elapsed_s": 37.394,
@@ -68,8 +68,6 @@
     "boundary": "partial; 9 old actor/context pairs not yet judged; DB/WAL/SHM content same, SHM mtime-only checker false failure preserved",
     "source_version": "e4c08e42...689b before/after stable; not final R4 revision"
   },
-  "independent_final": "independent-wire-r5.md",
-  "engineering_commit": "c97d4fbd",
   "real_source_observation_v2": {
     "elapsed_s": 23.170454,
     "result": "FAILED unknown source_processing_complete at public handler",
@@ -80,13 +78,6 @@
   "rf_publication_head": "957c6283d3381d23c39515afd3a09147d8201c7b",
   "rf_exact_ci": "41304681319 success",
   "selected_RF_installation": "2 physical writes; repeat0;3 logical fresh PASS",
-  "full_CI_failed": 63,
-  "safe_isolation_commit": "dbfec3beb0948006475701e2131c4d95e0586556",
-  "normal_push": "success",
-  "stable_pre_push": {
-    "passed": 1091,
-    "seconds": 84.93
-  },
   "r6_independent": {
     "consumer": "R6-independent-consumers.md",
     "source_r2": "R6-independent-final-r2.md",
@@ -132,22 +123,28 @@
     "project_state": "R6_R4_SOURCE_SEMANTIC_ROOT_REPAIR_AND_DAILY_GATE_SIMPLIFICATION"
   },
   "canonical_entry": "../../../CURRENT_STATUS.md",
-  "project_state": "R6_ENGINEERING_MAINLINE_MERGED_PUBLICATION_IN_PROGRESS_T3_NEXT",
+  "project_state": "R6_ENGINEERING_PUBLISHED_MAIN_CI_GREEN_T3_IMPLEMENTATION_ACTIVE",
   "publication": {
-    "master_and_origin": "NO_LONGER_EQUAL_UNTIL_NORMAL_PUBLICATION",
-    "main_ci": 41371690732,
+    "published_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+    "source_runtime_commit": "10767b86318e63094c2bb49451447c9aedffc32c",
+    "main_ci": 41381788839,
     "main_ci_conclusion": "success",
-    "source_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
-    "candidate_ci": 41380285347,
-    "candidate_ci_conclusion": "success",
-    "new_R5_source_uncommitted": false,
-    "prior_r4_candidate_failed_cases": 70,
-    "master_local": "10767b86318e63094c2bb49451447c9aedffc32c",
-    "source_rectification_merged": true,
-    "normal_main_push": "PENDING_DOCUMENT_BUNDLE",
-    "final_independent": "R6-independent-ci-r5.json"
+    "independent": "R6-independent-ci-r5.json",
+    "receipt": "R6-publication.json"
   },
   "W23": "Tooling merged/pushed/exact CI pass; empirical partial, not production OCR switch.",
   "daily_feedback": "Fixed original167case smoke, no impact-AST expansion; main push45.097s and complete CI pass.",
-  "observed_at_utc": "2026-11-02T03:09:57.946734+00:00"
+  "observed_at_utc": "2026-11-02T03:21:02.100896+00:00",
+  "historical_pre_r6_metadata": {
+    "independent_final": "independent-wire-r5.md",
+    "engineering_commit": "c97d4fbd",
+    "normal_push": "success",
+    "stable_pre_push": {
+      "passed": 1091,
+      "seconds": 84.93
+    },
+    "full_CI_failed": 63,
+    "safe_isolation_commit": "dbfec3beb0948006475701e2131c4d95e0586556"
+  },
+  "engineering_commit": "10767b86318e63094c2bb49451447c9aedffc32c"
 }
