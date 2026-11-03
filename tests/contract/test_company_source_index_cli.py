@@ -295,6 +295,9 @@ def test_company_index_enumerates_every_kind_across_two_roots(tmp_path: Path):
         for entry in result["sources"]:
             assert set(entry) == set(frozen["source_fields"])
             assert set(entry["source_ref"]) == set(frozen["source_ref_fields"])
+        # Diagnostics never become company source facts: the response has no
+        # extension channel, so adding one breaks this assertion on purpose.
+        assert not {"extensions", "diagnostics", "warnings", "notes"} & set(result)
         _no_physical_leak(result, root_a, root_b, tmp_path)
 
         kinds = sorted(entry["document_kind"] for entry in result["sources"])
