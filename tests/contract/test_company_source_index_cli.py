@@ -691,3 +691,43 @@ def test_unavailable_catalog_is_named_not_empty(tmp_path: Path):
     diagnostic = json.loads(proc.stderr.decode("utf-8"))
     assert diagnostic["status"] == "unavailable"
     assert diagnostic["reason"] == "catalog_unavailable"
+
+
+def test_every_listed_ref_is_readable_through_the_public_read_port(tmp_path: Path):
+    """The index hands out SourceRefs; the existing reader must open them."""
+    config_path, catalog = _fixture(tmp_path)
+    try:
+        listed = _ok(config_path, _request(), tmp_path)
+        entries = [
+            entry for entry in listed["sources"]
+            if entry["availability"] == "available"
+        ]
+        assert entries, "the fixture has readable versions"
+    finally:
+        catalog.close()
+
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(ROOT / "src") + os.pathsep + env.get("PYTHONPATH", "")
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    for entry in entries:
+        ref = entry["source_ref"]
+        proc = subprocess.run(
+            [
+                sys.executable, "-m", "company_wiki.source_catalog.source_reader_cli",
+                "--config", str(config_path),
+                "--document-id", ref["document_id"],
+                "--source-id", ref["source_id"],
+                "--content-sha256", ref["content_sha256"],
+                "--purpose", "source_export",
+            ],
+            cwd=tmp_path, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            check=False, timeout=60,
+        )
+        assert proc.returncode == 0, proc.stderr.decode("utf-8", "replace")
+        assert len(proc.stdout) == ref["byte_size"]
+        assert hashlib.sha256(proc.stdout).hexdigest() == ref["content_sha256"]
+        receipt = json.loads(proc.stderr.decode("utf-8").splitlines()[-1])
+        assert receipt["status"] == "ok"
+        assert receipt["document_id"] == ref["document_id"]
+        assert receipt["source_id"] == ref["source_id"]
+        assert str(tmp_path) not in proc.stderr.decode("utf-8")
