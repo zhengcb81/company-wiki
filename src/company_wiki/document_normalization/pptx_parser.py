@@ -734,7 +734,7 @@ def _result(
     page_count: int,
     format_mime: str,
 ) -> NormalizedDocument:
-    from company_wiki.source_catalog.narrative_document import DocumentStructure
+    from company_wiki.document_model.narrative import DocumentStructure
 
     structure = DocumentStructure(
         source_id=state.source_id,

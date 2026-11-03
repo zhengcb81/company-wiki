@@ -14,7 +14,7 @@ import json
 from types import MappingProxyType
 from typing import Any
 
-from company_wiki.source_catalog.narrative_document import NarrativeUnit
+from company_wiki.document_model.narrative import NarrativeUnit
 from company_wiki.source_contract.evidence_span import EvidenceCoordinates
 
 from .text import normalize_text

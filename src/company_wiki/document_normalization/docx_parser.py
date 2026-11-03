@@ -14,8 +14,8 @@ import zipfile
 from typing import Any
 from lxml import etree
 from company_wiki.source_contract.evidence_span import EvidenceCoordinates
-from company_wiki.source_catalog.narrative_document import DocumentStructure
-from company_wiki.source_catalog.transcript_layout import AnonymousTurnObserver
+from company_wiki.document_model.narrative import DocumentStructure
+from company_wiki.document_model.turns import AnonymousTurnObserver
 from .document import NormalizedDocument
 from .errors import NormalizationLimitError, UnsupportedFormatError
 from .limits import MAX_ZIP_MEMBERS

@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any
 
-from company_wiki.source_catalog.narrative_document import (
+from company_wiki.document_model.narrative import (
     DocumentStructure,
     NarrativeUnit,
 )
