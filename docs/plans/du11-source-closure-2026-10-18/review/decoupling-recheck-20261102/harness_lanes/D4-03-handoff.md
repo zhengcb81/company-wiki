@@ -92,6 +92,8 @@ AssertionError: document layer imported runtime owner: company_wiki.source_catal
 | `python -m pytest tests/unit/document_understanding_{root,profiles,structure,layout_hints,decision_dependencies,note_scope,selection} -q` | **3311 passed, 17 skipped, 18 failed（全部为 HEAD 既有失败，见下）** |
 | `ruff check <改动文件>` | All checks passed |
 
+上表在内容与交付 commit 一致的主工作树测得（交付前已逐文件 `cmp` 确认与分支内容相同）。交付 worktree 内复跑新测试 21 passed；同批 3 个 DU root 用例在 worktree 内因本机 sandbox safe-delete 钩子报 `SAFE_DELETE_BULK_GUARD_ERROR`（`SystemExit: 1`，setup 阶段），属环境噪声，同一内容在主工作树为 passed。
+
 **既有失败证明**：`document_understanding_selection` 的 18 个失败（`source_grammar_unavailable` 等）在 HEAD 基线 worktree（`git worktree` @ `503f6510`，`PYTHONPATH` 指向基线 src）中逐条重现，失败 node id 集合与本轮工作树**完全相同**（15 例逐条 diff 一致 + 另 3 例 `test_reading_named_segment_scope.py` 基线同样失败）。不是本次回归。
 
 **环境说明**：本机沙箱的 safe-delete 钩子会在 pytest 会话收尾/部分 OCR 夹具 rmtree 时抛 `SAFE_DELETE_BULK_GUARD_ERROR`；用默认 basetemp 或把 basetemp 放在仓内即可正常收尾，与本次改动无关。
