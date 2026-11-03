@@ -3,7 +3,7 @@
 状态：**已实现、测试通过、独立审查通过、独立审计补齐后交付。**
 基线 HEAD `503f6510c6aa8c18bbbc6ad53b44f14fce6882ce`。
 施工位置：独立 worktree `C:/Users/郑曾波/Projects/_harness_worktrees/d4-03-20261102/cwp`，分支 `codex/d4-03-document-model`（基于上述 HEAD）。主工作树中不再保留本卡改动。
-交付 commit：实现 `113490729`（`refactor: own the document model outside the source catalog`，pre-commit 的 ruff/mypy 均 Passed）；本说明与 `D4-03-independent-review.md` 在同一分支的后续文档提交（`git log --oneline -2 codex/d4-03-document-model` 可查）。未推送、未部署。
+交付 commit：实现 `113490729`（`refactor: own the document model outside the source catalog`，pre-commit 的 ruff/mypy 均 Passed）；独立审查记录随实现提交 `113490729`；本说明在后续文档提交 `636a31db9`，`01b649639` 补充测试测量位置。未推送、未部署。
 
 ## 1. 新模型 owner 与旧别名映射
 
@@ -124,10 +124,10 @@ AssertionError: document layer imported runtime owner: company_wiki.source_catal
 
 ## 8. 未完成/外限
 
-- 未提交、未推送、未部署（按本卡与既有 lane 约定）。
+- 已提交到 `codex/d4-03-document-model`（实现 `113490729`、handoff `636a31db9`、说明补充 `01b649639`），未推送、未部署；主工作树已恢复干净。
 - 未跑 CWP 全仓；未跑跨仓（StockWiki/RF/FF/ET）消费；未构建 sdist/wheel 实物验证打包（`pyproject.toml:79-81` 的 `packages.find include=["company_wiki*"]` 会自动包含新包）。
 - 未跑真实原件/生产库/生产配置；所有样例均为内存合成字节。
-- 临时资料：主工作树 `.tmp403/`（探针、失败清单、basetemp 残留）、基线 worktree `%TEMP%/cw-baseline-wt`、审查者 `.tmp403/reviewer/`、审计者 `.audit403/` 均已清理；本 worktree 内 `.tmp403/`（basetemp）在提交前清理。仓库只保留 §2 与两份说明文档。
+- 临时资料：主工作树 `.tmp403/`（探针、失败清单、basetemp 残留）、基线 worktree `%TEMP%/cw-baseline-wt`、审查者 `.tmp403/reviewer/`、审计者 `.audit403/` 在交付收尾时清理；本 worktree 内 `.tmp403/`（basetemp）在提交前清理。仓库只保留 §2 与两份说明文档。
 
 ## 9. 独立完成度审计（2026-11-02）
 

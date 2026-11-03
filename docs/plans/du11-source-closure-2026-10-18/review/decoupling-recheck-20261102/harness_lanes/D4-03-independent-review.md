@@ -25,7 +25,7 @@
 | 动态 import / star-import / pickle | 通过（仓内无 star-import；旧路径实体文件仍在，字符串 import 可用；pickle 在 HEAD 同样不可用，非回归） |
 | 写域合规 | 通过（仅 8 个跟踪文件，其中 `.githooks/pre-push` 为既有模式位差异） |
 | 测试有效性 | 通过（变异必红） |
-| 测试实跑 | 21 passed（新测试）；105 passed（normalization，排除 3 个 OCR 文件）；533 passed/11 skipped（电话会契约 + DU root）；ruff 全绿 |
+| 测试实跑 | 21 passed（新测试）；138 passed（normalization，排除 3 个 OCR 文件）；554 passed/11 skipped（新测试 + 电话会契约 + DU root）；ruff 全绿 |
 
 ## 审查发现与处理
 
