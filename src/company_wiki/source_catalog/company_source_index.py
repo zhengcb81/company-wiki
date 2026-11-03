@@ -195,15 +195,15 @@ def _cursor(value: object) -> str | None:
     return value
 
 
-def encode_cursor(published_date: str, document_id: str) -> str:
+def encode_cursor(published_date: str, document_id: str, source_id: str) -> str:
     raw = json.dumps(
-        {"d": document_id, "p": published_date},
+        {"d": document_id, "p": published_date, "s": source_id},
         sort_keys=True, separators=(",", ":"),
     ).encode("utf-8")
     return base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
 
 
-def _decode_cursor(value: str) -> tuple[str, str]:
+def _decode_cursor(value: str) -> tuple[str, str, str]:
     padding = "=" * (-len(value) % 4)
     try:
         raw = base64.urlsafe_b64decode(value + padding)
@@ -212,13 +212,15 @@ def _decode_cursor(value: str) -> tuple[str, str]:
         raise CompanySourceIndexError("blocked", "invalid_request") from None
     if (
         not isinstance(payload, dict)
-        or set(payload) != {"p", "d"}
+        or set(payload) != {"p", "d", "s"}
         or not isinstance(payload["p"], str)
         or not isinstance(payload["d"], str)
         or not payload["d"]
+        or not isinstance(payload["s"], str)
+        or not payload["s"]
     ):
         raise CompanySourceIndexError("blocked", "invalid_request")
-    return payload["p"], payload["d"]
+    return payload["p"], payload["d"], payload["s"]
 
 
 @dataclass
@@ -276,7 +278,15 @@ class CompanySourceIndex:
         offset = 0
         has_more = False
         if status == "ok":
-            offset = self._offset(entries, request.cursor)
+            offset, cursor_source = self._offset(entries, request.cursor)
+            if cursor_source:
+                # The cursor version itself was already delivered: skip every
+                # copy of it even if the canonical document moved on rescan.
+                while (
+                    offset < len(entries)
+                    and entries[offset].source_id == cursor_source
+                ):
+                    offset += 1
             window = entries[offset:offset + request.page_size]
             has_more = offset + request.page_size < len(entries)
         return {
@@ -288,7 +298,12 @@ class CompanySourceIndex:
             "page": {
                 "cursor": request.cursor,
                 "next_cursor": (
-                    encode_cursor(*window[-1].sort_key()) if has_more else None
+                    encode_cursor(
+                        window[-1].published_date,
+                        window[-1].document_id,
+                        window[-1].source_id,
+                    )
+                    if has_more else None
                 ),
                 "has_more": has_more,
                 "count": len(window),
@@ -497,7 +512,7 @@ class CompanySourceIndex:
     # -- paging -------------------------------------------------------------
 
     @staticmethod
-    def _offset(entries: list[_Entry], cursor: str | None) -> int:
+    def _offset(entries: list[_Entry], cursor: str | None) -> tuple[int, str]:
         """Resume strictly after the cursor entry.
 
         A rescan between pages can change which physical copy is canonical for
@@ -507,16 +522,16 @@ class CompanySourceIndex:
         whole listing: a page boundary is not a correctness boundary here.
         """
         if cursor is None:
-            return 0
-        published, document_id = _decode_cursor(cursor)
+            return 0, ""
+        published, document_id, source_id = _decode_cursor(cursor)
         for index, entry in enumerate(entries):
             if entry.sort_key() == (published, document_id):
-                return index + 1
+                return index + 1, source_id
         cursor_key = (published, document_id)
         for index, entry in enumerate(entries):
             if _after(entry.sort_key(), cursor_key):
-                return index
-        return len(entries)
+                return index, source_id
+        return len(entries), source_id
 
     # -- payload ------------------------------------------------------------
 

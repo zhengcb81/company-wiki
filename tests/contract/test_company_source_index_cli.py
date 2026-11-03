@@ -500,28 +500,53 @@ def test_undated_version_is_listed_last_instead_of_dropped(tmp_path: Path):
         catalog.close()
 
 
-def test_cursor_from_a_moved_copy_resumes_instead_of_failing(tmp_path: Path):
-    """A rescan can move which copy is canonical; the page boundary survives."""
-    config_path, catalog = _fixture(tmp_path)
+def test_cursor_survives_the_canonical_copy_moving(tmp_path: Path):
+    """Retiring one copy moves the canonical ref; the page must not repeat it."""
+    root_a = tmp_path / "lake_a"
+    root_b = tmp_path / "lake_b"
+    root_a.mkdir()
+    root_b.mkdir()
+    duplicate = _body("amec duplicated notice")
+    for root, name in ((root_a, "2026-05-10_notice.md"),
+                       (root_b, "copy_2026-05-10_notice.md")):
+        _write(root, name, duplicate, _sidecar(
+            entity=AMEC_ENTITY, display=AMEC_NAME, market=AMEC_MARKET,
+            security_id=AMEC_SECURITY, kind="regulatory_filing", fiscal_year=2026,
+            fiscal_period="", period_end="2026-05-10", published="2026-05-10",
+            body=duplicate, provider_doc="amec-notice",
+        ))
+    older = _body("amec older notice")
+    _write(root_a, "2026-04-01_notice.md", older, _sidecar(
+        entity=AMEC_ENTITY, display=AMEC_NAME, market=AMEC_MARKET,
+        security_id=AMEC_SECURITY, kind="regulatory_filing", fiscal_year=2026,
+        fiscal_period="", period_end="2026-04-01", published="2026-04-01",
+        body=older, provider_doc="amec-notice-older",
+    ))
+    catalog = _scan(tmp_path, root_a, root_b)
+    config_path = _config(tmp_path, root_a, root_b)
     try:
-        first = _ok(config_path, _request(page_size=2), tmp_path)
+        first = _ok(config_path, _request(page_size=1), tmp_path)
+        assert first["page"]["has_more"] is True
         cursor = first["page"]["next_cursor"]
-        assert cursor
-        catalog.close()
-        # Rescan: identical bytes, so the version list is unchanged.
-        catalog2 = _scan(
-            tmp_path, tmp_path / "lake_a" / "amec", tmp_path / "lake_b" / "mirror",
+        delivered = first["sources"][0]
+        assert delivered["copies"] == 2
+        canonical = delivered["source_ref"]["document_id"]
+        # Drop the copy that was chosen as canonical: the other copy of the
+        # same bytes becomes canonical, so the cursor's document_id disappears.
+        retire_document(
+            catalog.store, document_id=canonical,
+            reason="fixture copy withdrawn", created_by="contract-test",
         )
-        second = _ok(config_path, _request(page_size=2, cursor=cursor), tmp_path)
+        catalog.close()
+
+        second = _ok(config_path, _request(page_size=1, cursor=cursor), tmp_path)
         assert second["status"] == "ok"
-        assert second["sources"], "a stale cursor must not empty the listing"
-        overlap = {
-            entry["source_ref"]["source_id"] for entry in first["sources"]
-        } & {
-            entry["source_ref"]["source_id"] for entry in second["sources"]
-        }
-        assert not overlap, "a page must not repeat an already delivered version"
-        catalog2.close()
+        assert second["sources"], "a moved canonical copy must not empty the page"
+        assert (
+            second["sources"][0]["source_ref"]["source_id"]
+            != delivered["source_ref"]["source_id"]
+        ), "an already delivered version must not repeat"
+        assert second["page"]["has_more"] is False
     finally:
         pass
 
