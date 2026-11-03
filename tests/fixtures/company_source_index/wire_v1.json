@@ -1,0 +1,86 @@
+{
+  "schema_version": "company-wiki-company-source-index/1",
+  "request_schema_version": "company-wiki-company-source-index-request/1",
+  "ordering": [
+    "published_date:desc",
+    "document_id:asc"
+  ],
+  "statuses": [
+    "ok",
+    "not_found",
+    "ambiguous",
+    "unavailable",
+    "blocked"
+  ],
+  "availability_values": [
+    "available",
+    "unreadable",
+    "retired"
+  ],
+  "response_fields": [
+    "schema_version",
+    "status",
+    "reason",
+    "company",
+    "as_of_date",
+    "page",
+    "sources",
+    "source_read_policy_sha256"
+  ],
+  "company_fields": [
+    "entity",
+    "market",
+    "security_id"
+  ],
+  "page_fields": [
+    "cursor",
+    "next_cursor",
+    "has_more",
+    "count"
+  ],
+  "source_fields": [
+    "source_ref",
+    "document_kind",
+    "market",
+    "security_id",
+    "published_date",
+    "fiscal_year",
+    "fiscal_period",
+    "period_end",
+    "language",
+    "title",
+    "form_type",
+    "availability",
+    "copies"
+  ],
+  "source_ref_fields": [
+    "document_id",
+    "source_id",
+    "content_sha256",
+    "byte_size",
+    "mime_type",
+    "schema_version"
+  ],
+  "request_example": {
+    "schema_version": "company-wiki-company-source-index-request/1",
+    "company": {
+      "entity": "AMEC",
+      "market": "SSE",
+      "security_id": "688012.SH"
+    },
+    "as_of_date": "2026-11-02",
+    "document_kinds": [],
+    "page_size": 25,
+    "cursor": null
+  },
+  "notes": {
+    "company_identity": "entity is required; market/security_id are optional narrowing. Omitting both on a name that resolves to more than one security yields status=ambiguous.",
+    "document_kinds": "empty list means every indexed document kind; duplicates and unknown kinds are refused as invalid_request.",
+    "as_of_date": "inclusive publication bound. A version whose publication date is unknown is listed with published_date=null at the end of the order, because an unknown date is missing information rather than a future publication.",
+    "pagination": "cursor is an opaque base64url token over (published_date, document_id). A page resumes strictly after the cursor entry; if a rescan moved the canonical copy of that version, the listing resumes after the last entry that still sorts at or before the cursor instead of failing.",
+    "duplicates": "identical bytes are one source version with copies counting the owner's indexed physical copies.",
+    "availability": "available = at least one reusable original location whose file is present; unreadable = indexed but no reusable location or the file is gone; retired = the owner retired the version.",
+    "paths": "no absolute path, root id, location id, SQLite table shape or consumer-private field is emitted.",
+    "ordering": "published_date descending with unknown dates last, then document_id ascending; the concatenation of pages equals the unpaged listing."
+  }
+}
