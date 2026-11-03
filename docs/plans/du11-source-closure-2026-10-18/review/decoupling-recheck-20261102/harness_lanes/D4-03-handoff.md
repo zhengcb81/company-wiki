@@ -3,7 +3,7 @@
 状态：**已实现、测试通过、独立审查通过、独立审计补齐后交付。**
 基线 HEAD `503f6510c6aa8c18bbbc6ad53b44f14fce6882ce`。
 施工位置：独立 worktree `C:/Users/郑曾波/Projects/_harness_worktrees/d4-03-20261102/cwp`，分支 `codex/d4-03-document-model`（基于上述 HEAD）。主工作树中不再保留本卡改动。
-交付 commit：实现 `113490729`（`refactor: own the document model outside the source catalog`，pre-commit 的 ruff/mypy 均 Passed）；独立审查记录随实现提交 `113490729`；本说明在后续文档提交 `636a31db9`，`01b649639` 补充测试测量位置。未推送、未部署。
+交付 commit：实现 `113490729`（`refactor: own the document model outside the source catalog`，pre-commit 的 ruff/mypy 均 Passed）；独立审查记录随实现提交 `113490729`；本说明及其后续修订在该分支的文档提交中（`git log --oneline 113490729..codex/d4-03-document-model`）。未推送、未部署。
 
 ## 1. 新模型 owner 与旧别名映射
 
