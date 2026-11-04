@@ -7,10 +7,10 @@
 | 项 | 值 |
 |---|---|
 | 基线 HEAD | `503f6510`（母仓 master 同点） |
-| 交付 commit | `5daf7e1e7` 实现、`84764733c` 本文档初版、`90e9c7e26` 审查加固，其后另有「错误类型用例 + 断言收紧」小提交；**接收以分支 `codex/d4-04-transcript-wire` 的 HEAD 为准**（`git log --oneline` 可见全部，本文档不自我引用哈希） |
+| 交付 commit | `5daf7e1e7` 实现、`84764733c` 本文档初版、`90e9c7e26` 审查加固，其后另有「错误类型用例 + 断言收紧」「响应 source_ref 显式投影 + 复核收口」小提交；**接收以分支 `codex/d4-04-transcript-wire` 的 HEAD 为准**（`git log --oneline` 可见全部，本文档不自我引用哈希） |
 | 施工位置 | 独立 worktree `C:/Users/郑曾波/Projects/company-wiki-d4-04-wire` |
-| 改动路径 | `src/company_wiki/source_catalog/transcript_import_cli.py`、`tests/contract/test_transcript_import_cli_e2e.py`、新增 `tests/fixtures/transcript_import/{ff_import_request_v2.json,generic_html_import_request_v2.json,README.md}` |
-| 写域外改动 | 无。`.githooks/pre-push` 仅文件模式差异，属母仓既有状态，未 stage。`tests/fixtures/transcript_import/README.md` 是这两个 fixture 的来源说明，随 fixture 一起交付；它不含代码、不被测试加载，若 ROOT 严格按「只允许 fixture」判读可单独剔除 |
+| 改动路径 | `src/company_wiki/source_catalog/transcript_import_cli.py`、`tests/contract/test_transcript_import_cli_e2e.py`、新增 `tests/fixtures/transcript_import/{ff_import_request_v2.json,generic_html_import_request_v2.json}`、本文档与同目录 `D4-04-fixtures-readme.md`（fixture 来源说明，自 fixtures 目录迁入） |
+| 写域外改动 | 无。`.githooks/pre-push` 仅文件模式差异，属母仓既有状态，未 stage。`tests/fixtures/transcript_import/` 现只含两个 JSON fixture；原随附的 `README.md` 已按「只允许 fixture」的严格判读迁出至本 lane 目录（`D4-04-fixtures-readme.md`），内容不变仅加迁移说明，不被测试加载 |
 
 ## 公开协议（唯一合同）
 
@@ -21,6 +21,7 @@
 - 解码改为显式表 `_SOURCE_REQUEST_WIRE` / `_CANDIDATE_WIRE`（`(wire 字段, owner 属性)` 对），并导出只读 `SOURCE_REQUEST_WIRE_FIELDS` / `CANDIDATE_WIRE_FIELDS`。**不再调用 `dataclasses.fields(SourceRequest/DownloadCandidate)`**。
 - 字段集必须精确相等：缺字段与多余字段分别报 `source_request fields differ from schema` / `candidate fields differ from schema`；owner 构造失败（含错误 `schema_version`）报 `source_request is invalid` / `candidate is invalid`；错误类型仍是 `TranscriptImportCliError(ValueError)`，CLI 仍输出 `status:"rejected"` + 退出码 2。
 - 内部演进规则：owner 新增**带默认值**字段不进表 → 该字段取 owner 自己的默认值，wire 不变；要把它放上 wire，必须同时改表并升 `REQUEST_SCHEMA`。owner 新增**无默认值**字段会在解码处以 `... is invalid` 显式失败，而不是由 decoder 凭空补值。
+- 响应侧同规则收敛（复核收口）：`/3` 响应中的 `source_ref` 对象不再经 `asdict(SourceRef)` 整体序列化，改为显式表 `_SOURCE_REF_RESPONSE_WIRE`（并导出只读 `SOURCE_REF_RESPONSE_FIELDS`）。owner 侧 `SourceRef` 演进不再静默改变已发布响应；发布新字段 = 改表 + 升 `RESPONSE_SCHEMA`。改动以字节级前后对比验证等价（同 fixture 同 scratch 流程，改前/改后 CLI 响应各 984 字节完全一致）。
 
 ## 字面 fixture
 
@@ -43,6 +44,7 @@
 3. **内部默认字段演进**：`_EvolvedSourceRequest` / `_EvolvedDownloadCandidate` 各加一个带默认值字段（并断言字段数确实 +1，防止测试空转），monkeypatch 到 decoder 后同一 fixture 仍 `imported`，落盘原始字节一致；测试还用构造记录断言 decoder 真的构造了这两个派生类型（若将来把 import 挪进函数体使 monkeypatch 失效，测试会立刻失败而不是空转）。把同名字段写进 wire 仍被 `fields differ from schema` 拒绝。
 4. **错误类型与缺必需字段**：`fiscal_year="2026"`、`fiscal_year=true`、`allow_download="true"`、`entity=123`、`candidate.remote_size="1024"`、`candidate.amended="no"`、`candidate.fiscal_year=2026.0` 各一例 → `source_request is invalid` / `candidate is invalid`；`source_request` 传非对象 → `fields differ from schema`；缺 `mode`、缺 `remote_size` → 各自的 `fields differ from schema`。全部无落盘、无 staging。
 5. **保留的硬检查**：重复 JSON key、`NaN` 常量、非 UTF-8、超 `--max-envelope-bytes` 全部按原样拒绝；`--max-original-bytes 256` 对 862B 原件仍拒绝且不落盘。拒绝路径断言 staging 目录**不存在**（不是「存在但为空」），与原用例同级。
+6. **响应投影收口（独立复核新增）**：`/3` 响应 `source_ref` 改显式表后，以同 fixture、同 scratch 流程捕获改前/改后 CLI 响应字节，984 字节完全一致（行为保持得证）；新增 `test_response_source_ref_projection_is_pinned_to_the_response_schema` 钉死表与 `/3` 字面形状，owner 侧 `SourceRef` 改名在此响亮失败、新增内部字段仍不改变响应字节。
 
 ## 未放松的 owner 校验（实测逐项拒绝）
 
@@ -66,12 +68,14 @@ PYTHONPATH="C:/Users/郑曾波/Projects/company-wiki-d4-04-wire/src" \
            -p no:cacheprovider -q
 ```
 
-结果：**76 passed in 56.64s**（其中本卡文件 28 passed）。RED 复现：
+结果：**77 passed**（其中本卡文件 29 passed；收口后终态复跑）。RED 复现：
 
 ```
+git stash push -- src/company_wiki/source_catalog/transcript_import_cli.py   # 或先备份未提交改动
 git checkout 503f6510 -- src/company_wiki/source_catalog/transcript_import_cli.py
-# 同上命令 + -k internal_defaulted_field  →  1 failed, 27 deselected
+# 同上命令 + -k internal_defaulted_field  →  1 failed, 28 deselected
 git checkout HEAD -- src/company_wiki/source_catalog/transcript_import_cli.py
+git stash pop
 ```
 
 静态检查：`ruff check` 通过；`python -m mypy src` → `Success: no issues found in 422 source files`；pre-commit 范围内 hook（ruff + mypy）Passed。未跑全仓测试，只跑新增与受影响域。
@@ -92,7 +96,9 @@ git checkout HEAD -- src/company_wiki/source_catalog/transcript_import_cli.py
 3. import 主响应未做路径泄漏断言 → 新增 `_assert_no_local_path`，并对 lookup 响应同做（原 `str(root) not in stdout` 因 JSON 转义实际无效，已替换）。
 4. 缺 handoff/commit → 本文与 `5daf7e1e7`。
 
-随后一轮**逐条完成度审计**（对照卡片每个分句）指出 3 处并已修复：卡片「错误类型」一项在当时的 HEAD 上没有用例（现补 7 例类型错误 + 1 例非对象）；拒绝路径的 staging 断言被放宽成「存在但为空」（现恢复为「不存在」）；handoff 的测试数字与工作树不一致（现按最终状态回填 76/28）。审计同时确认旧用例被替换后**没有**断言丢失。
+随后一轮**逐条完成度审计**（对照卡片每个分句）指出 3 处并已修复：卡片「错误类型」一项在当时的 HEAD 上没有用例（现补 7 例类型错误 + 1 例非对象）；拒绝路径的 staging 断言被放宽成「存在但为空」（现恢复为「不存在」）；handoff 的测试数字与工作树不一致（现按最终状态回填）。审计同时确认旧用例被替换后**没有**断言丢失。
+
+第三轮**独立复核**（2026-11-04，会话外审查者，逐项重做而非采信自述）确认前两轮全部可验证声明为真，并收口三处遗留偏差：① fixture 三来源逐字段实证——FF `508aba30` `_source_request`/`_candidate` 逐字段吻合、ET golden 与 CWP 副本及全部 7 个本地 ET 快照 JSON 全等、字面 `request_id` 经 owner `_validate_result_binding` 每次导入实证；② fixture 目录旁的 `README.md` 迁出至本 lane 目录，使 `tests/fixtures/transcript_import/` 只含两个 JSON fixture；③ 响应侧 `source_ref` 的 `asdict` 隐式序列化改为显式投影表（字节级等价，见逐项闭合 6）。复核期间 RED、全套 77 例、ruff、mypy 均在终态 HEAD 重跑通过。
 
 ## 需 ROOT 做的 FF→ET→CWP 组合
 
@@ -105,6 +111,7 @@ git checkout HEAD -- src/company_wiki/source_catalog/transcript_import_cli.py
 
 ## 边界与未做
 
+- ET golden 溯源的验证边界：本地所有 ET 检出（`.du10-deps/et` 及 7 个 `earnings-transcripts-*` worktree）均为无 git 的文件快照，提交 `4924d57` 无法在本地做哈希级核验；已验证的是内容等价——CWP 副本与全部 7 个本地 ET 快照的 `tests/golden/fmp_v2.fetched.json` JSON 全等（仅排版字节不同）。哈希级确认随 ROOT 组合步骤一并完成。
 - 未给 `tests/fixtures/transcript_import/*.json` 加 `.gitattributes` 的 `text eol=lf`（该文件不在本卡写域）。仓库 `core.autocrlf=true`，Windows 检出会转 CRLF；测试已按 CRLF 复跑通过，若 ROOT 要求 blob 级字节稳定，可在 ROOT 层加一条属性。
 - 非 FMP 的 HTML 分支仍由本文件覆盖（`generic_html_import_request_v2.json`），但 FF 生产当前只发 FMP 形状；该 fixture 不代表新的 producer 合同。
 - 未改 `transcript_tool_contract.py` 的 `_RESULT_FIELDS`（它本就是字面集合，且不在本卡写域）。

@@ -1,5 +1,12 @@
 # Transcript import wire fixtures
 
+Record-keeping note (moved here on 2026-11-04 after the independent recheck):
+this document originally sat next to the two fixtures as
+`tests/fixtures/transcript_import/README.md`. It was relocated into the lane
+documentation so that `tests/fixtures/transcript_import/` contains exactly the
+two JSON wire fixtures and nothing else, matching a strict reading of the
+D4-04 write domain. The fixture files themselves did not change.
+
 These files are literal, static request envelopes for
 `company-wiki-transcript-import-request/2`. Their values and field order are
 copied from the producing side, not generated from company-wiki's owner models:
