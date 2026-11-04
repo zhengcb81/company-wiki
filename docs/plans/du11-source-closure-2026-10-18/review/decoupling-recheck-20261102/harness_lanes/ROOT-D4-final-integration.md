@@ -1,6 +1,9 @@
-# ROOT 自持任务 — D4 两仓测试归位与最终组合
+# ROOT 自持任务 — D4 两仓测试归位与最终组合（已完成）
 
 **这是总控收尾步骤，不是外包施工包。** 实现卡 D4-01 到 D4-05 都接收/独审通过后再做。AUDIT 没有远端；本地 ROOT 组合必须明确包含 AUDIT，不得把缺仓 skip 算通过。`company-wiki/integration/` 和 `tools/run_source_system_tests.py` 完全归 ROOT，施工卡不得改这些路径。
+
+
+> **状态：COMPLETE — 2026-11-04。** D4-06 已由 ROOT 实施；D4-01～05 的提交均已接收。强制离线组合 27/27 通过，0 skip，五个消费者均有实际通过用例，AUDIT 两个必需 node id 覆盖，scratch 清理、源码版本前后稳定。独立审查 PASS。结果见 [D4 closeout receipt](../../../review/d4-closeout-20261104/README.md)；以下为已满足的原始验收契约。
 
 ## 第一段：AUDIT 两项用例归位
 

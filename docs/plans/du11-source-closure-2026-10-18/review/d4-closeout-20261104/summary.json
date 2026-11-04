@@ -1,0 +1,75 @@
+{
+  "schema_version": "d4-closeout/1",
+  "status": "COMPLETE_ACCEPTED",
+  "date": "2026-11-04",
+  "review": "independent PASS",
+  "receipt": "review/d4-closeout-20261104/run-1/report.json",
+  "test_counts": {
+    "passed": 27,
+    "skipped": 0,
+    "failed": 0,
+    "errors": 0,
+    "seconds": 46.623
+  },
+  "scratch_restored": true,
+  "source_stable_during_run": true,
+  "d4_cards": {
+    "D4-01": {
+      "status": "MERGED_LOCAL_NO_REMOTE",
+      "repository": "StockWiki",
+      "head": "23d84586dc2425961e953f5ab28aef867de6cb87",
+      "note": "StockWiki has no configured remote; merge is local."
+    },
+    "D4-02": {
+      "status": "MAIN_PUSHED",
+      "repository": "revenue-forecast",
+      "head": "96713029df63d384b9e97d2217dff4513e5d37e7",
+      "note": "Already on main and equal to origin/main."
+    },
+    "D4-03": {
+      "status": "MERGED_PUSHED",
+      "repository": "company-wiki",
+      "head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "note": "Merged into company-wiki master and pushed."
+    },
+    "D4-04": {
+      "status": "MERGED_PUSHED",
+      "repository": "company-wiki",
+      "head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "note": "Merged into company-wiki master and pushed."
+    },
+    "D4-05": {
+      "status": "MAIN_PUSHED",
+      "repository": "filing-fetch",
+      "head": "bf7e1dab4aebcfe671554a4fda59705eb7fe1765",
+      "note": "Pushed to filing-fetch main."
+    },
+    "D4-06": {
+      "status": "ROOT_INTEGRATED_ACCEPTED",
+      "repository": "company-wiki + revenue-forecast-audit",
+      "head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "note": "AUDIT test migration commit 2449df4a is local only; no AUDIT remote."
+    }
+  },
+  "next_action": "T4 source-note-parent + SEM-QUAL-01, then single real H1 replay",
+  "remote_ci": [
+    {
+      "name": "CI",
+      "id": 41919818618,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41919818618",
+      "updated_at": "2026-11-04T21:56:34Z"
+    },
+    {
+      "name": "Source system integration",
+      "id": 41919818624,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41919818624",
+      "updated_at": "2026-11-04T21:52:42Z"
+    }
+  ]
+}

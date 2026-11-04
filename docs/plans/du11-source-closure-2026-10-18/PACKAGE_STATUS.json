@@ -1,6 +1,6 @@
 {
   "schema_version": "current-package-status/1",
-  "as_of_date": "2026-11-02",
+  "as_of_date": "2026-11-04",
   "canonical_entry": "CURRENT_STATUS.md",
   "scope": "Recent auditable cards, not a census of every historical package or all branches in all repos",
   "status_owner": "This registry only; original cards/setup/handoff/receipts are dated inputs/evidence",
@@ -155,12 +155,72 @@
       "evidence": "review/older-packages-merge-20261031/receipt.json",
       "requires_author_delivery_before_mainline": false,
       "whole_company_acceptance": false
+    },
+    {
+      "id": "D4-01",
+      "engineering_status": "MERGED_LOCAL_NO_REMOTE",
+      "repository": "StockWiki",
+      "source_head": "23d84586dc2425961e953f5ab28aef867de6cb87",
+      "evidence": "review/d4-closeout-20261104/README.md",
+      "requires_author_delivery_before_mainline": false,
+      "whole_company_acceptance": false,
+      "note": "StockWiki has no configured remote; merge is local."
+    },
+    {
+      "id": "D4-02",
+      "engineering_status": "MAIN_PUSHED",
+      "repository": "revenue-forecast",
+      "source_head": "96713029df63d384b9e97d2217dff4513e5d37e7",
+      "evidence": "review/d4-closeout-20261104/README.md",
+      "requires_author_delivery_before_mainline": false,
+      "whole_company_acceptance": false,
+      "note": "D4-tested code head 96713029; PWF-only closeout commit 90c562ac is now pushed to origin/main."
+    },
+    {
+      "id": "D4-03",
+      "engineering_status": "MERGED_PUSHED",
+      "repository": "company-wiki",
+      "source_head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "evidence": "review/d4-closeout-20261104/README.md",
+      "requires_author_delivery_before_mainline": false,
+      "whole_company_acceptance": false,
+      "note": "Merged into company-wiki master and pushed."
+    },
+    {
+      "id": "D4-04",
+      "engineering_status": "MERGED_PUSHED",
+      "repository": "company-wiki",
+      "source_head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "evidence": "review/d4-closeout-20261104/README.md",
+      "requires_author_delivery_before_mainline": false,
+      "whole_company_acceptance": false,
+      "note": "Merged into company-wiki master and pushed."
+    },
+    {
+      "id": "D4-05",
+      "engineering_status": "MAIN_PUSHED",
+      "repository": "filing-fetch",
+      "source_head": "bf7e1dab4aebcfe671554a4fda59705eb7fe1765",
+      "evidence": "review/d4-closeout-20261104/README.md",
+      "requires_author_delivery_before_mainline": false,
+      "whole_company_acceptance": false,
+      "note": "Pushed to filing-fetch main."
+    },
+    {
+      "id": "D4-06",
+      "engineering_status": "ROOT_INTEGRATED_ACCEPTED",
+      "repository": "company-wiki + revenue-forecast-audit",
+      "source_head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "evidence": "review/d4-closeout-20261104/README.md",
+      "requires_author_delivery_before_mainline": false,
+      "whole_company_acceptance": false,
+      "note": "AUDIT test migration 2449df4a and PWF-only closeout 3589b69 are local; no AUDIT remote."
     }
   ],
   "older_parent_groups": {
     "entry": "../document-understanding-2026-10-13/README.md",
     "meaning": "Earlier DU/P1-P4 inputs closed/handed into current stream; read original reception receipts for exact card scope, do not re-dispatch from oldREADY text"
   },
-  "critical_path": "按T4-source-note-parent-plan.md冻结去公司化父链正反例并在来源树owner根修，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。",
-  "warning": "Merged tooling and historical CI success do not imply current product CI or real company workflow passed."
+  "critical_path": "立即执行T4 source-note-parent与SEM-QUAL-01根因修复；单H1真实复验；然后新版真实摘要、paid中断/同跨run缓存恢复与RF实际采用。",
+  "warning": "D4 ROOT离线组合27/27零skip通过，仅验收六项解耦缺口；不代表真实摘要/cache/RF业务链或固定公司循环已完成。"
 }

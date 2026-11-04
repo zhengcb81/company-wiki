@@ -345,3 +345,14 @@ D3已完成，CWP `a03d0c02`、RF `ad178dbc`、FF `508aba30`正常推主线，�
 ## 2026-11-02 — D4施工包准备完成，未派发
 
 经重新评估“只拆安全独立任务”，已写5张 implementation cards。Stock/CWP接口和Stock消费者合成一张跨仓卡，避免接口分叉；RF、CWP model、CWP transcript wire、FF diagnostic四域单仓分开。AUDIT test relocation/final multi-repo integration始终由ROOT拥有，依赖各实现交付不能安全预发给外包。每张卡规定互斥路径、先RED、相关层单元/接口集成/真实隔离端到端、一个交付前独审agent修复闭环、handoff格式；没有添加每helper门禁。没有产品代码修改或实际派发。唯一入口与卡状态见CURRENT_STATUS/HANDOFF和review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md。
+
+
+## 2026-11-04 — D4 六项解耦遗漏收口并通过 ROOT 组合
+
+接收 D4-01..05 后，ROOT 完成 D4-06：把 AUDIT 两项真实 CWP producer/importer 测试迁到 CWP 自有 integration suite，AUDIT 仅保留 portable tests。独立审查先发现强制测试集可被 `--tests` 替换、consumer 报告会误报、路径 `..` 可串线、测试运行前后源码未绑定、电话会 fixture 依赖 ET/tests 且未直接断言 source SHA；ROOT逐项修复并补回归。最终审查 PASS。
+
+CWP HEAD `e7469d68` 的 `--d4-final`：27 passed、0 skipped、0 failed，46.623s；RF/FF/ET/StockWiki/AUDIT 均有通过测试，AUDIT 两个必需 node id 均在 JUnit；scratch 删除、源码前后快照稳定。Ruff 与 runner scope 单测 8 项通过；pre-commit Ruff 通过；CWP push hook固定smoke 17项通过/11.80s。精确报告/JUnit/pytest.log：`review/d4-closeout-20261104/run-1/`。
+
+CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试代码提交 `2449df4a`（无 remote），剩余 portable tests 42 passed；StockWiki `23d84586` 本地主线（无 remote）。RF D4 代码提交 `96713029`，收口后 PWF-only 提交 `90c562ac` 已推送；AUDIT PWF-only 提交 `3589b69` 已本地提交（无 remote）。FF `bf7e1dab` 已推送。未改生产原件、API key、provider 配置或既有 WIP。GitHub exact-head CI #41919818618 与 Source system integration #41919818624 均成功（head `e7469d68`）。
+
+下一步恢复 T4 source-note-parent + SEM-QUAL-01 根修，再用单份真实 H1 检查；真实摘要、缓存恢复和 RF 实际采用及固定公司循环仍 OPEN。

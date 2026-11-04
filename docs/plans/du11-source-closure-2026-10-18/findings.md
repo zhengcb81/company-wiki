@@ -140,3 +140,12 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 ## 2026-11-02 — D4写域拆卡（准备态）
 
 按用户要求只拆安全独立的范围：D4-01 CWP公司来源列表+StockWiki默认消费同卡；D4-02 RF实际摘要采用；D4-03 CWP解析纯层；D4-04 CWP电话会wire；D4-05 FF诊断与native结果。AUDIT两项测试归位和最终跨仓组合留ROOT，不算外包卡。五卡均是PREPARED_NOT_DISPATCHED；每卡有不重叠写域/TDD/完整端到端验收/交付前独审和问题修复要求，且不改Dayu/IQS/业务主线。具体入口 review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md。实现通过前 RF/AUDIT 继续DEFERRED。
+
+
+## 2026-11-04 — D4 验收修复项与边界
+
+- **强制 suite 假阳性根因：** `--d4-final` 允许 `--tests` 覆盖必需清单，却仍把 AUDIT 标成参与者。现在 D4 禁止覆盖与 collect-only；JUnit 统计必须无 skip，并要求每个必需文件达到已冻结的最低用例数、AUDIT 两个指定 node id 均出现。
+- **consumer 假阳性根因：** 之前按仓路径存在/字符串前缀推断参与，未按规范化路径和实际通过用例核实。现在规范化到 CWP ROOT，排除越界/`..`误标；consumer 的每个选中测试文件都必须至少有实际 passing case，未执行者列为 excluded。
+- **版本未绑定根因：** ET 正常入口模块在仓库根级，不在原 `code_version` pathspec。现在枚举 Git 根级 Python 文件并作精确哈希；运行前/后快照不一致会失败。
+- **跨仓测试夹具耦合：** FF→ET→CWP测试从 ET/tests 导入 fixture；现改由 CWP integration 临时目录生成 fake provider，保留真实 ET main/supervisor/CWP import/cache路径，增加 source_ref SHA/source_id 与原始响应字节一致断言。该测试仍使用 ET 私有 worker注入替换 provider session，不能宣称验证 ET 的正常 provider 配置加载流程。
+- ROOT/独立审查认为以上修复已封闭 D4 false-pass 风险；最终强制组合有27项通过和零skip。

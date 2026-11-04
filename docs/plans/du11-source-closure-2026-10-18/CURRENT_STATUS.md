@@ -1,28 +1,28 @@
-# 当前状态 — 解耦复核发现六项遗漏，先收口D4
+# 当前状态 — D4 六项解耦补漏已关闭，恢复 T4/SEM 主线
 
-唯一入口本页/[机器状态](CURRENT_STATUS.json)，交接[HANDOFF](HANDOFF.md)，主计划[task_plan](task_plan.md)。
+唯一入口：[当前状态](CURRENT_STATUS.md) / [机器状态](CURRENT_STATUS.json)；交接：[HANDOFF](HANDOFF.md)；完整计划：[task_plan](task_plan.md)。
 
-**不能再称全面解耦已完成。** 2026-11-02全面复核确认1项P1、5项P2：[报告与实施顺序](review/decoupling-recheck-20261102/README.md)。原D3已发布的接口/测试成果继续有效，但选定组件通过没有覆盖所有业务入口。本轮完成核查和计划校正，产品修复尚未实施。
+**截至 2026-11-04：D4-01～D4-06 已完成并通过总体验收。** 这关闭的是 2026-11-02 复核列出的六项解耦缺口；不代表真实公司摘要、缓存恢复、RF 实际采用或固定公司审查循环已完成。
 
-## 已完成且继续有效
+## D4 已完成
 
-- RF原文/准备端口、StockWiki可选raw/narrative reader可替换；FF六操作统一连接；ET获取和CWP原件存储边界正确。
-- D3实际39项组合、安装入口和真实原件只读通过；正常推送及CI版本见[历史发布记录](review/decoupling-20261102/release.md)。不据此宣称全部仓库/业务路径独立。
-- 原件SHA、身份/期次/as-of和实际资源约束保留；旧JSON排版阻断和重复原文预算帽已修。
+- **D4-01 StockWiki 来源虚拟化：** CWP company source index 与 StockWiki 默认公司工作流接线已合入 StockWiki 本地主线；StockWiki 当前 HEAD `23d84586`，仓库没有 remote，按本地交付记录。
+- **D4-02 RF 摘要实际消费：** 摘要进入 claim、used parameter、formula 和 report 的消费链已在 RF main；D4 测试代码提交 `96713029`，D4 收口后最新 PWF-only 提交 `90c562ac` 已推到 origin/main。
+- **D4-03 CWP 纯文档层：** 文档模型不再反向载入 catalog runtime，已合入 CWP master。
+- **D4-04 CWP 电话会 wire：** 导入 wire 使用明确的 v2 projection，不再依赖内部 dataclass 字段反射，已合入 CWP master。
+- **D4-05 FF native 结果：** 大 stderr 诊断不再把已 flush 的合法 native 成功结果改判为失败，已推到 FF main，HEAD `bf7e1dab`。
+- **D4-06 ROOT/AUDIT 归位与组合：** 两项 AUDIT producer→importer 测试归入 CWP ROOT integration；AUDIT 仓只删除这两项跨仓测试，仍保留本仓 portable tests。AUDIT 的 D4 测试迁移提交 `2449df4a`、PWF-only 更新提交 `3589b69` 均在本地；无 remote。
 
-## 当前未完：D4集中补齐
+## 统一验收证据
 
-1. StockWiki正常公司流程仍扫描/解析物理doc_root，新reader未成为默认业务来源。
-2. RF实际采用摘要的consume和两工具未继承可替换端点。
-3. CWP纯解析/共享引擎经DTO及包初始化反向加载catalog运行时。
-4. CWP电话会import公共wire仍由内部dataclass字段反射决定。
-5. FF固定stderr大小仍能把已有合法成功结果翻成upstream_error。
-6. AUDIT两项真实CWP测试未归ROOT组合；本次2P证明当前功能可用，不代表覆盖已归位。
+[最终验收说明](review/d4-closeout-20261104/README.md)及 [完整运行收据](review/d4-closeout-20261104/run-1/report.json)：提交后 CWP HEAD `e7469d68`；六个消费仓源码快照开始/结束一致；`--d4-final` **27 passed、0 skipped、0 failed，46.623 秒**；RF、FF、ET、StockWiki、AUDIT 五个消费者均有实际通过用例，AUDIT 两个必需 node id 均执行；隔离 scratch 已清理；仅使用合成数据/离线 fixture，没有真实供应商调用。仅有一个非阻塞 `asyncio_mode` 未知 pytest 配置提示。
 
-实施已按互斥写域拆成[五张外包实现卡](review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md)，目前仅是准备状态、尚未派发。StockWiki来源端与消费端留在同一卡；ROOT/AUDIT最终组合由[ROOT任务说明](review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md)自持，不作为外包包。
+独立审查结论 PASS，报告已记录于验收说明。审查指出的测试集覆盖假阳性、路径穿越误标、未绑定 ET 根级 Python 模块、跨仓导入 ET 私测 fixture 和缺少 source SHA 直接断言均已修复并由针对性测试覆盖。ET 集成仍通过 ET 的私有 worker 注入缝替换 provider session；它验证真实处理/入库/复用链，但不声称覆盖 ET 正常 provider 配置路径。
 
-## 唯一下一步
+CWP D4 合并和 ROOT 测试提交 `e7469d68` 已推到 `origin/master`；push hook 的固定 smoke 为 17 passed / 11.80 秒。GitHub exact-head CI #41919818618 与 Source system integration #41919818624 均成功（head `e7469d68`）；本地 push smoke 不代替此远端证据。
 
-五张实现卡目前已备妥、尚未派发；各卡负责人先冻结本线RED测试，再按责任层修复并交独立审查。ROOT保留D4-06的AUDIT测试归位与收齐后的一次组合验收。**RF/AUDIT业务计划仍为DEFERRED_UNTIL_D4_CLOSURE。** D4关闭后恢复T4父链、SEM-QUAL-01、新版真实摘要、缓存恢复、RF实际采用与既有公司循环。
+## 当前唯一下一步
+
+恢复既有 **T4 source-note-parent + SEM-QUAL-01** 根因修复：先冻结去公司化父链及计划/条件不被改写为 actual 的正反例，在所属 source owner 根修，再做单份真实 H1 定点复验。通过后才继续新版真实摘要、付费中断/同跨 run 缓存恢复与同一 artifact 的 RF 实际采用；不重跑超时整批。RF/AUDIT 业务 PWF 已统一为 **READY_NOT_STARTED**，不自动派发、不启动公司循环。
 
 三表输出容量、local_prepare扩展兼容、Sina provider泛化和组合CI触发范围另列能力限制，不冒真实生产故障，也不扩成额外阻塞。原件/生产配置/DB/封存与已有WIP保留；Dayu/IQS/Dashboard不动。只在大节点独审，不重复超时全量测试。

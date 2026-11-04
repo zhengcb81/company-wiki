@@ -1,0 +1,268 @@
+{
+  "schema_version": "source-system-check/1",
+  "started_at": "2026-11-04T21:46:17.125055+00:00",
+  "versions": {
+    "company-wiki": {
+      "head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {
+        "tools/document_understanding_benchmark/gold/us-10k.du11-v2-20261024.json": "4dd0875a81b82508cf02f874e80df6d712da2ee756a26f44feee5f5f7e28a2a8"
+      }
+    },
+    "revenue-forecast": {
+      "head": "96713029df63d384b9e97d2217dff4513e5d37e7",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    },
+    "filing-fetch": {
+      "head": "bf7e1dab4aebcfe671554a4fda59705eb7fe1765",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    },
+    "earnings-transcripts": {
+      "head": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    },
+    "StockWiki": {
+      "head": "23d84586dc2425961e953f5ab28aef867de6cb87",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    },
+    "revenue-forecast-audit": {
+      "head": "2449df4a57636d3d8fb5beca2cfc5a8872835f4a",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    }
+  },
+  "tests": [
+    "tests/unit/test_document_layer_isolation.py",
+    "tests/unit/test_document_model_identity.py",
+    "integration/stockwiki/test_d4_company_source_index.py",
+    "integration/revenue_forecast/test_d4_rf_consumption.py",
+    "integration/revenue_forecast/test_source_ref_v2_three_repo_e2e.py",
+    "integration/filing_fetch/test_transcript_original_roundtrip.py",
+    "integration/revenue_forecast_audit/test_current_public_bundle_import.py"
+  ],
+  "selected_consumers": [
+    "rf",
+    "filing-fetch",
+    "earnings-transcripts",
+    "stockwiki",
+    "audit"
+  ],
+  "selected_consumer_test_files": {
+    "rf": [
+      "integration/revenue_forecast/test_d4_rf_consumption.py",
+      "integration/revenue_forecast/test_source_ref_v2_three_repo_e2e.py"
+    ],
+    "filing-fetch": [
+      "integration/filing_fetch/test_transcript_original_roundtrip.py"
+    ],
+    "earnings-transcripts": [
+      "integration/filing_fetch/test_transcript_original_roundtrip.py"
+    ],
+    "stockwiki": [
+      "integration/stockwiki/test_d4_company_source_index.py"
+    ],
+    "audit": [
+      "integration/revenue_forecast_audit/test_current_public_bundle_import.py"
+    ]
+  },
+  "consumers": [
+    "rf",
+    "filing-fetch",
+    "earnings-transcripts",
+    "stockwiki",
+    "audit"
+  ],
+  "consumer_test_coverage": {
+    "rf": [
+      "integration/revenue_forecast/test_d4_rf_consumption.py",
+      "integration/revenue_forecast/test_source_ref_v2_three_repo_e2e.py"
+    ],
+    "filing-fetch": [
+      "integration/filing_fetch/test_transcript_original_roundtrip.py"
+    ],
+    "earnings-transcripts": [
+      "integration/filing_fetch/test_transcript_original_roundtrip.py"
+    ],
+    "stockwiki": [
+      "integration/stockwiki/test_d4_company_source_index.py"
+    ],
+    "audit": [
+      "integration/revenue_forecast_audit/test_current_public_bundle_import.py"
+    ]
+  },
+  "excluded_consumers": [],
+  "provider_mode": "offline fixtures and loopback only",
+  "collect_only": false,
+  "returncode": 0,
+  "seconds": 46.623,
+  "scratch_restored": true,
+  "test_counts": {
+    "total": 27,
+    "skipped": 0,
+    "failed": 0,
+    "errors": 0,
+    "by_module": {
+      "tests.unit.test_document_layer_isolation": {
+        "total": 3,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      },
+      "tests.unit.test_document_model_identity": {
+        "total": 18,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      },
+      "integration.stockwiki.test_d4_company_source_index": {
+        "total": 1,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      },
+      "integration.revenue_forecast.test_d4_rf_consumption": {
+        "total": 1,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      },
+      "integration.revenue_forecast.test_source_ref_v2_three_repo_e2e": {
+        "total": 1,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      },
+      "integration.filing_fetch.test_transcript_original_roundtrip": {
+        "total": 1,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      },
+      "integration.revenue_forecast_audit.test_current_public_bundle_import": {
+        "total": 2,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      }
+    },
+    "nodeids": [
+      "integration.filing_fetch.test_transcript_original_roundtrip::test_real_cwp_cli_import_and_unknown_publication_replay",
+      "integration.revenue_forecast.test_d4_rf_consumption::test_prepared_narrative_reaches_claim_parameter_formula_and_report",
+      "integration.revenue_forecast.test_source_ref_v2_three_repo_e2e::test_verified_source_reuses_without_review_through_all_three_repositories",
+      "integration.revenue_forecast_audit.test_current_public_bundle_import::test_cwp_projected_public_read_v3_reaches_audit_cli_and_cleans_scratch",
+      "integration.revenue_forecast_audit.test_current_public_bundle_import::test_frozen_public_bundle_v2_contract_reaches_audit_cli",
+      "integration.stockwiki.test_d4_company_source_index::test_company_sources_run_company_enrich_and_signals_use_the_virtual_lake",
+      "tests.unit.test_document_layer_isolation::test_blocking_guard_actually_stops_a_catalog_import",
+      "tests.unit.test_document_layer_isolation::test_document_layer_normalizes_and_understands_without_catalog_runtime",
+      "tests.unit.test_document_layer_isolation::test_isolated_observation_matches_unblocked_runtime",
+      "tests.unit.test_document_model_identity::test_anonymous_turn_observer_keeps_saved_txt_and_native_turn_semantics",
+      "tests.unit.test_document_model_identity::test_construction_and_isinstance_do_not_split_across_paths",
+      "tests.unit.test_document_model_identity::test_legacy_document_names_are_the_neutral_objects[DocumentStructure]",
+      "tests.unit.test_document_model_identity::test_legacy_document_names_are_the_neutral_objects[NarrativeEvidencePackage]",
+      "tests.unit.test_document_model_identity::test_legacy_document_names_are_the_neutral_objects[NarrativeParseResult]",
+      "tests.unit.test_document_model_identity::test_legacy_document_names_are_the_neutral_objects[NarrativeUnit]",
+      "tests.unit.test_document_model_identity::test_legacy_document_names_are_the_neutral_objects[selected_summary_input]",
+      "tests.unit.test_document_model_identity::test_legacy_grammar_still_parses_saved_label_forms",
+      "tests.unit.test_document_model_identity::test_legacy_path_keeps_frozen_and_serialized_identity",
+      "tests.unit.test_document_model_identity::test_legacy_turn_names_are_the_neutral_objects[AnonymousTurnObserver]",
+      "tests.unit.test_document_model_identity::test_legacy_turn_names_are_the_neutral_objects[END]",
+      "tests.unit.test_document_model_identity::test_legacy_turn_names_are_the_neutral_objects[NATURAL_START]",
+      "tests.unit.test_document_model_identity::test_legacy_turn_names_are_the_neutral_objects[QA_HEADING]",
+      "tests.unit.test_document_model_identity::test_legacy_turn_names_are_the_neutral_objects[body_start]",
+      "tests.unit.test_document_model_identity::test_legacy_turn_names_are_the_neutral_objects[legacy_speaker_fields]",
+      "tests.unit.test_document_model_identity::test_legacy_turn_names_are_the_neutral_objects[speaker_fields]",
+      "tests.unit.test_document_model_identity::test_legacy_turn_names_are_the_neutral_objects[valid_speaker]",
+      "tests.unit.test_document_model_identity::test_neutral_owner_defines_the_classes"
+    ]
+  },
+  "d4_file_counts": {
+    "tests/unit/test_document_layer_isolation.py": {
+      "total": 3,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0,
+      "passed": 3
+    },
+    "tests/unit/test_document_model_identity.py": {
+      "total": 18,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0,
+      "passed": 18
+    },
+    "integration/stockwiki/test_d4_company_source_index.py": {
+      "total": 1,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0,
+      "passed": 1
+    },
+    "integration/revenue_forecast/test_d4_rf_consumption.py": {
+      "total": 1,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0,
+      "passed": 1
+    },
+    "integration/revenue_forecast/test_source_ref_v2_three_repo_e2e.py": {
+      "total": 1,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0,
+      "passed": 1
+    },
+    "integration/filing_fetch/test_transcript_original_roundtrip.py": {
+      "total": 1,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0,
+      "passed": 1
+    },
+    "integration/revenue_forecast_audit/test_current_public_bundle_import.py": {
+      "total": 2,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0,
+      "passed": 2
+    }
+  },
+  "versions_after": {
+    "company-wiki": {
+      "head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {
+        "tools/document_understanding_benchmark/gold/us-10k.du11-v2-20261024.json": "4dd0875a81b82508cf02f874e80df6d712da2ee756a26f44feee5f5f7e28a2a8"
+      }
+    },
+    "revenue-forecast": {
+      "head": "96713029df63d384b9e97d2217dff4513e5d37e7",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    },
+    "filing-fetch": {
+      "head": "bf7e1dab4aebcfe671554a4fda59705eb7fe1765",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    },
+    "earnings-transcripts": {
+      "head": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    },
+    "StockWiki": {
+      "head": "23d84586dc2425961e953f5ab28aef867de6cb87",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    },
+    "revenue-forecast-audit": {
+      "head": "2449df4a57636d3d8fb5beca2cfc5a8872835f4a",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_files": {}
+    }
+  },
+  "source_stable_during_run": true
+}

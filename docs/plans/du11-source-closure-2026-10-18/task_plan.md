@@ -6,13 +6,20 @@
 
 ## Next Step
 
-最新全面复核确认六项解耦遗漏。五张互斥实现卡已备妥、尚未派发；各卡负责人先冻结本线RED行为测试，再实现、独审并交接。ROOT保留D4-06的AUDIT测试归位和一次最终组合，不重复接管各卡测试。RF/AUDIT业务计划仍DEFERRED；D4完成前不启动T4/SEM或真实业务链。
+D4-01～D4-06 已按定义范围实施、独立审查并由 ROOT 的强制离线组合收口；当前转入 **T4 source-note-parent + SEM-QUAL-01**。先冻结通用父链/限定语反例，再由 source owner 从根因修复，随后只做相关测试和单份真实 H1 复验。RF/AUDIT 业务计划可恢复为 READY，但尚未启动；不派发新包、不提前跑公司循环。
 
-## P0-D — 解耦优先
+## P0-D — 六项解耦遗漏（D4 CLOSED）
 
-**当前D4 OPEN：1P1/5P2，不能签全面解耦完成。** [新复核/实施细则](review/decoupling-recheck-20261102/README.md)取代原READY状态；原D3只保其已执行范围。五张互斥实现卡已备好但未派发；[最终AUDIT归位与跨仓组合](review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md)留ROOT收尾。
+**D4-01～D4-06 均 CLOSED。** 2026-11-02 的六项发现和原卡保持为历史输入，当前交接/结果由 [D4 closeout receipt](review/d4-closeout-20261104/README.md) 与 [机器状态](CURRENT_STATUS.json) 为准。D4-01～05 的包实现已分别合入对应主线；D4-06 由 ROOT 将两项 AUDIT 真实 producer/importer 测试归位，并运行一次明确包含 RF、FF、ET、StockWiki、AUDIT 的强制组合。
 
-实施与完成标准见[DECOUPLING_FIRST](review/architecture-reassessment-20261102/DECOUPLING_FIRST.md)。D0–D3工程完成并[独审通过](review/decoupling-20261102/independent/review.md)：公开端口/DTO、实际资源预算、隔离测试与ROOT组合39项零跳过；正常部署与真实原文只读验证完成。[发布记录](review/decoupling-20261102/release.md)列远端证据。P1–P3业务目标保留，不用架构通过替代新真实验收。
+- 完整 CWP `--d4-final`：27 passed、0 skipped、0 failed，46.623 秒；五类消费者均有实际通过用例；AUDIT 两个必需测试 node id 均执行；scratch 恢复；六仓源码快照前后稳定。独立审查 PASS。
+- ROOT runner 现在拒绝用 `--tests` 替换 D4 强制套件或只做 collect-only；路径按 ROOT 规范化；消费者覆盖从 JUnit 实际用例统计；每个必需文件都有通过用例；版本快照涵盖 Git 根级 Python 模块并比较运行前后。
+- CWP D4 merge/root 测试 commit `e7469d68` 已推送，FF `bf7e1dab` 已推送。RF `96713029` 已与 origin 同步。StockWiki `23d84586` 和 AUDIT `2449df4a` 本地提交记录已核对；两个仓库无 remote。具体状态见 [PACKAGE_STATUS](PACKAGE_STATUS.md)。
+- D4 关闭只说明本轮架构缺口的覆盖范围闭合；不把局部组合通过外推成全文档业务链、真实摘要或整家公司审查循环完成。P1–P3 真实产品责任继续 OPEN。
+
+实施前置见 [原 D4 复核报告](review/decoupling-recheck-20261102/README.md) 和 [ROOT 最终组合契约](review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md)；这些内容保留历史原要求，执行状态以 closeout receipt 为准。
+
+**紧接着执行：** T4 source-note-parent 与 SEM-QUAL-01 同属来源正确性主线；先统一正反例/检查点、再沿 source owner 根修、定点真实复验和集中独审。之后按既有顺序继续真实摘要、paid 中断/同跨 run 缓存恢复与 RF 实际采用；详见本计划 P3/T4 与下文分阶段标准。
 
 ## P0 — 已完成的CI根修
 
