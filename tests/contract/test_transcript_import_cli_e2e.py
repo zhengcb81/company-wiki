@@ -27,6 +27,7 @@ import pytest
 from company_wiki.source_catalog import transcript_import_cli
 from company_wiki.source_catalog.acquisition import DownloadCandidate
 from company_wiki.source_catalog.resolver import SourceRequest
+from company_wiki.source_contract.source_version import SourceRef
 from company_wiki.source_catalog.transcript_import_cli import TranscriptImportCliError
 from company_wiki.source_catalog.transcript_material import extract_transcript_material
 
@@ -257,6 +258,28 @@ def test_literal_ff_fixture_tracks_the_producer_golden() -> None:
     assert set(result) == set(golden)
     changed = {key for key in golden if result[key] != golden[key]}
     assert changed == {"request_id"}
+
+
+def test_response_source_ref_projection_is_pinned_to_the_response_schema() -> None:
+    """The /3 response object is projected, not re-serialized from the owner.
+
+    The pinned table is exactly the released ``source_ref`` shape, so editing
+    it is a RESPONSE_SCHEMA change rather than silent drift.  Every published
+    field must still exist on the owner model: a rename fails here instead of
+    at import time.  Owner-side growth stays invisible - a new SourceRef field
+    is not published and does not change the /3 bytes.
+    """
+    assert transcript_import_cli.SOURCE_REF_RESPONSE_FIELDS == {
+        "document_id",
+        "source_id",
+        "content_sha256",
+        "byte_size",
+        "mime_type",
+        "schema_version",
+    }
+    assert transcript_import_cli.SOURCE_REF_RESPONSE_FIELDS <= {
+        item.name for item in fields(SourceRef)
+    }
 
 
 def test_literal_ff_wire_imports_through_real_catalog_and_verified_read(

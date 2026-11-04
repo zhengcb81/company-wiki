@@ -6,16 +6,17 @@ the whole contract: the accepted field set is listed here and is deliberately
 independent of ``dataclasses.fields(SourceRequest)`` /
 ``dataclasses.fields(DownloadCandidate)``.  Owner-side refactoring may add
 internal fields (with defaults) without silently making them required wire
-fields for an already released producer.  Every owner check that matters -
-source identity, period/as-of, original bytes and SHA, byte budget - still runs
-after decoding, on the owner types.
+fields for an already released producer.  The ``/3`` response is versioned
+public wire too, so its ``source_ref`` object is emitted through an explicit
+projection as well instead of re-serializing the owner dataclass.  Every owner
+check that matters - source identity, period/as-of, original bytes and SHA,
+byte budget - still runs after decoding, on the owner types.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
@@ -86,6 +87,20 @@ _CANDIDATE_WIRE: tuple[tuple[str, str], ...] = (
 
 SOURCE_REQUEST_WIRE_FIELDS = frozenset(name for name, _ in _SOURCE_REQUEST_WIRE)
 CANDIDATE_WIRE_FIELDS = frozenset(name for name, _ in _CANDIDATE_WIRE)
+
+# The /3 response is public wire too, so its ``source_ref`` object is emitted
+# through this explicit projection instead of re-serializing the owner
+# dataclass.  A ``SourceRef`` refactor therefore cannot silently move a
+# published field; adding one to this table is a ``RESPONSE_SCHEMA`` change.
+_SOURCE_REF_RESPONSE_WIRE: tuple[tuple[str, str], ...] = (
+    ("document_id", "document_id"),
+    ("source_id", "source_id"),
+    ("content_sha256", "content_sha256"),
+    ("byte_size", "byte_size"),
+    ("mime_type", "mime_type"),
+    ("schema_version", "schema_version"),
+)
+SOURCE_REF_RESPONSE_FIELDS = frozenset(name for name, _ in _SOURCE_REF_RESPONSE_WIRE)
 
 
 class TranscriptImportCliError(ValueError):
@@ -193,7 +208,10 @@ def run_import(wiki_root: Path, stream: BinaryIO, *,
         "request_id": request.request_id,
         "source_id": imported.canonical_import.source_id,
         "content_sha256": imported.canonical_import.content_sha256,
-        "source_ref": asdict(source_ref),
+        "source_ref": {
+            field: getattr(source_ref, attribute)
+            for field, attribute in _SOURCE_REF_RESPONSE_WIRE
+        },
         "provider_payload_sha256": imported.provider_payload_sha256,
         "line_count": len(imported.material.lines),
         "extractor_version": imported.material.extractor_version,
