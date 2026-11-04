@@ -2,7 +2,7 @@
 
 G4 已删除旧 `scripts/gate_system/`、`config/pipeline_rules.yaml` 和专属框架测试。`scripts/full_pipeline.py` 只保留退休说明：直接运行、帮助或旧参数均返回 78；导入不会初始化配置、模型、网络或处理目录。没有恢复旧流水线的授权或审核步骤。
 
-当前来源入口是 `company-wiki-source-catalog`、`company-wiki-source-read`、`company-wiki-source-query` 和 `company-wiki-source-export-v2`。文档登记、解析、证据定位和有限叙述处理按当前配置执行；来源 SHA、身份、期间、定位和实际资源上限属于相应层的责任。
+当前来源入口是 `company-wiki-source-catalog`、`company-wiki-source-read`、`company-wiki-source-query`、`company-wiki-company-sources` 和 `company-wiki-source-export-v2`。文档登记、解析、证据定位和有限叙述处理按当前配置执行；来源 SHA、身份、期间、定位和实际资源上限属于相应层的责任。
 
 - [来源目录与当前命令](source-catalog.md)
 - [运维说明](OPERATIONS.md)
