@@ -92,7 +92,7 @@
   },
   "project_status": "D5_GLOBAL_DECOUPLING_OPEN_MAINLINE_PAUSED",
   "as_of_date": "2026-11-04",
-  "observed_at_utc": "2026-11-04T23:49:12Z",
+  "observed_at_utc": "2026-11-04T23:53:27Z",
   "next_action": "完成D5卡中的CWP规范化文档port和StockWiki三入口消费；ROOT的FF V1/V2调用方盘点与3例边界子测试已通过。交付后完成按真实公开入口的跨仓组合E2E、真实只读样本、恢复核对和最终独审。全局D5全部验收后才恢复T4/SEM和其它主线。",
   "publication": {
     "repositories": {
@@ -503,7 +503,10 @@
     "test_harness_changes_this_update": 3,
     "product_tests_run": 3,
     "product_tests_skipped": 0,
-    "root_ff_route_receipt": "review/decoupling-recheck-20261104/root-d5-ff-route/receipt.json"
+    "root_ff_route_receipt": "review/decoupling-recheck-20261104/root-d5-ff-route/receipt.json",
+    "root_ff_route_commit": "56410a738ebed40b0cae8fd9e333517f3a26728e",
+    "root_ff_route_pushed_to": "origin/master",
+    "root_ff_route_push_smoke": "17 passed / 12.30s; full GitHub CI pending"
   },
   "d4_closeout": {
     "status": "COMPLETE_ACCEPTED",

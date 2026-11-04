@@ -377,3 +377,4 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - ROOT runner 实测 3 passed、0 skipped、0 failed，用时 32.911 秒；runner scope 单测 9 passed；RF/FF/ET/CWP 版本快照一致，`scratch_restored=true`；外层报告目录已删除。独立临时 source catalog 使用合成 PDF，不触及生产原件、provider、密钥或邻仓工作区。
 - 默认沙箱首次无法访问邻仓 Git 元数据，失败发生在 pytest 启动之前；同一命令在获准宿主环境完成验收。没有修改 runner 去绕过沙箱，也没有改邻仓。
 - D5 FF route 子节点已完成；CWP normalized-document producer port、StockWiki 三入口消费者、完整真实样本跨仓组合和全局独审尚未完成。整体状态仍 D5 OPEN，禁止恢复其它主线。
+- ROOT 代码/测试与收据已提交并推送：company-wiki `56410a738ebed40b0cae8fd9e333517f3a26728e` → `origin/master`。push 固定 smoke 17 passed / 12.30s；完整 GitHub CI 尚待其运行结果。
