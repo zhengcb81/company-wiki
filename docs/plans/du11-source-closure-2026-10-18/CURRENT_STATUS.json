@@ -34,7 +34,7 @@
     {
       "id": "P0-E",
       "status": "OPEN_D5_GLOBAL_DECOUPLING",
-      "task": "CWP owns normalized document parsing; StockWiki consumes the pathless document port; ROOT closes FF legacy path and accepts the cross-repository boundary before other mainline resumes"
+      "task": "CWP owns normalized document parsing; StockWiki consumes the pathless document port; ROOT proves FF schema 2.0 V2 remains pathless, isolates/tests explicit V1 compatibility, and accepts the cross-repository boundary before other mainline resumes"
     },
     {
       "id": "P1",
@@ -77,7 +77,7 @@
     }
   },
   "current_limits_to_close": [
-    "D5 global decoupling: CWP parser-owned normalized-document port, StockWiki three default consumer entries, FF legacy path route, isolated module tests and ROOT combination acceptance",
+    "D5 global decoupling: CWP parser-owned normalized-document port, StockWiki three default consumer entries, FF V2 pathless/V1 compatibility boundary, isolated module tests and ROOT combination acceptance",
     "SEM-QUAL-01: current v7 and legacy may accept planned/conditional source rewritten as actual; source/claim/locators frozen, generic qualifier binding required before real summary.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
     "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
@@ -92,8 +92,8 @@
   },
   "project_status": "D5_GLOBAL_DECOUPLING_OPEN_MAINLINE_PAUSED",
   "as_of_date": "2026-11-04",
-  "observed_at_utc": "2026-11-04T23:16:54Z",
-  "next_action": "先完成D5：外部单一harness实施CWP规范化文档port和StockWiki三入口消费；ROOT收敛FF默认provider旧canonical_path路由并完成跨仓组合E2E与最终独审。全部验收后才恢复T4/SEM和其它主线。",
+  "observed_at_utc": "2026-11-04T23:26:13Z",
+  "next_action": "先完成D5：外部单一harness实施CWP规范化文档port和StockWiki三入口消费；ROOT已只读盘点FF V1/V2调用方，当前已知生产主路径走V2/pathless，V1 canonical_path是显式兼容合同。继续用组合测试证明V2永不回退、V1隔离，再完成跨仓E2E与最终独审。全部验收后才恢复T4/SEM和其它主线。",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -204,7 +204,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "全局D5解耦优先：CWP pathless规范化文档port + StockWiki三入口消费由一个外部harness负责；ROOT负责FF legacy canonical_path闭合、跨仓组合E2E和最终独立审查。T4/SEM及其他主线在D5全验收前暂停。",
+    "current_work": "全局D5解耦优先：CWP pathless规范化文档port + StockWiki三入口消费由一个外部harness负责；ROOT已完成FF V1/V2只读调用方盘点，当前已知RF生产准备走V2/pathless、V1 canonical_path仅是显式兼容合同；ROOT继续用组合测试证明V2/V1边界、完成跨仓E2E和最终独立审查。T4/SEM及其他主线在D5全验收前暂停。",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -423,7 +423,7 @@
       "final_import_budget"
     ],
     "active_writers": {
-      "ROOT": "D5 owns FF legacy-route closure, cross-repo integration and final review; T4/SEM and all other mainline paused"
+      "ROOT": "D5 owns FF V1/V2 boundary proof, cross-repo integration and final review; read-only caller inventory is complete; T4/SEM and all other mainline paused"
     },
     "prepared_not_dispatched": [
       "revenue-forecast",
@@ -431,7 +431,7 @@
     ],
     "code_changes": true,
     "real_provider_calls": 0,
-    "decoupling": "D3 and D4 scoped results remain accepted; global decoupling is OPEN because CWP normalized-document output is not yet the sole parser boundary for StockWiki and FF retains a legacy canonical_path route",
+    "decoupling": "D3 and D4 scoped results remain accepted; global decoupling is OPEN because CWP normalized-document output is not yet the sole parser boundary for StockWiki. FF caller audit found the current RF production preparation uses V2/pathless; canonical_path remains an explicit V1 compatibility contract whose isolation must be proved in ROOT combination tests, not blindly deleted",
     "dispatch_status": "D5_CARD_READY; FF_LEGACY_ROOT_OWNED; ALL_OTHER_MAINLINE_PAUSED",
     "recheck": "review/decoupling-recheck-20261102/README.md"
   },
@@ -447,7 +447,7 @@
     ],
     "open": [
       "D5 CWP pathless normalized-document port and StockWiki three-entry consumption",
-      "ROOT FF legacy canonical_path caller audit and default-route closure",
+      "ROOT FF V1/V2 caller inventory completed read-only; prove schema 2.0 V2 pathlessness and keep explicit V1 compatibility isolated/tested",
       "ROOT cross-repository integration and final independent review"
     ],
     "module_dispatch": "ALL_MAINLINE_DEFERRED_UNTIL_D5_GLOBAL_ACCEPTANCE",
@@ -468,7 +468,7 @@
     "open": [
       "CWP owns normalized document structure and exposes a pathless versioned reader",
       "StockWiki provider business entries stop reparsing CWP PDF/Office originals",
-      "FF default provider flow no longer reaches the legacy canonical_path handle",
+      "FF schema 2.0 production route is proven pathless and cannot reach the explicit V1 canonical_path compatibility handle; V1 compatibility is separately isolated/tested",
       "Module-isolated tests and ROOT composition prove the public boundary"
     ],
     "product_changes_this_review": 0,
@@ -492,8 +492,8 @@
     "status": "PLAN_AND_CARD_READY_NOT_IMPLEMENTED",
     "priority": "P0_BEFORE_ALL_OTHER_MAINLINE",
     "external_owner": "one harness owns CWP producer port and StockWiki three-entry consumer in separate worktrees",
-    "root_owner": "FF legacy canonical_path route audit/closure, CWP root integration, cross-repo E2E and final independent review",
-    "acceptance": "CWP/StockWiki/FF boundaries, standalone tests, public-contract composition, real read-only sample, scratch restoration and final review all pass",
+    "root_owner": "FF V1/V2 caller-boundary verification (read-only inventory done), CWP root integration, cross-repo E2E and final independent review",
+    "acceptance": "Each module owns its implementation and standalone contract tests; CWP/StockWiki/FF public-contract composition passes; FF V2 is pathless and explicit V1 compatibility isolated/tested; real read-only sample, scratch restoration and final review all pass",
     "resume_mainline_only_after_acceptance": true,
     "card": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md",
     "code_changes_this_update": 0,

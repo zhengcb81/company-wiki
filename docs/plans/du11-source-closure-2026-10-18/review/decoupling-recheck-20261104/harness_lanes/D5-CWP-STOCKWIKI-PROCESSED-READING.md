@@ -112,10 +112,10 @@ producer-owned envelope 版本为 `company-wiki-processed-document/1`。该版�
 
 外包负责人不改以下内容；ROOT 在不与该卡共享写域的 FF 仓执行：
 
-1. 追踪 `filing-fetch/scripts/fetch_filing.py` 的 `source_ref_v2=False` 到 `validate_handle(canonical_path=...)` 的所有生产/测试调用方；验证 RF 当前生产入口固定 v2、旧路径回放用途及所有外部消费者。
-2. 对仍支持的导入调用，保留明确的本地导入 adapter；对 provider 来源统一改走 CWP SourceRef v2。只有确认旧路径非默认且确为历史回放后，才隔离而不是冒然删除兼容路径；默认 provider 主链不得将物理路径交给下游。
-3. 在 CWP ROOT integration 加一组 D5 强制组合测试/验收入口，覆盖 CWP port → StockWiki 三个业务入口，以及 FF 默认 provider 路径不进入 canonical-path 旧分支；不把临时外包测试替代 ROOT 的组合验证。
+1. ROOT 已只读追踪 FF 的 V1/V2 请求、CLI 和 Python API 当前调用方；代码证据与范围记录在本计划 [findings.md](../../../findings.md) 的 2026-11-04 复核项中：schema 2.0 CLI 选择 SourceRef v2，RF source preparation 显式带 --source-ref-v2，V1.2 是技能文档显式 legacy 示例。最终验收时按实际参与 HEAD 重核调用方清单，不把 V1 兼容分支误写成 V2 的默认生产路由。
+2. canonical provider 主路径必须使用 CWP SourceRef v2，绝不把 canonical_path 交给 RF/StockWiki。V1 schema 若没有当前生产消费者，可作为隔离的版本化兼容入口保留并由现有测试覆盖；不要为追求“零旧代码”盲删。若找到真实内部生产消费者使用 V1，ROOT 应先将它迁到 V2，再考虑退役旧输出；V1 已有外部消费者时保留其显式兼容承诺并标注边界。
+3. 在 CWP ROOT integration 加一组 D5 强制组合测试/验收入口，覆盖 CWP port → StockWiki 三个业务入口、FF schema 2.0 默认 CLI 的 pathless 输出，以及 V2 无法进入 canonical-path legacy 分支；V1 compatibility 单独保留测试，不把它当成默认路径。不得用临时外包测试替代 ROOT 组合验证。
 4. 汇总 D5 两仓最终 HEAD、FF 结果与参与版本，运行相关快速域和一次组合 E2E；做一次大节点独立总审并在结果上修复问题。
 5. 更新唯一 PWF 状态、正常提交/推送各自有 remote 的改动。无 remote 仓只记录本地 commit，不擅自创建 remote。
 
-**D5 的外包交付 + ROOT 的 FF 收敛 + ROOT 组合测试和最终独审全部通过，才叫“解耦完成”。在这之前，T4/SEM、真实摘要、缓存恢复、RF 实际采用和公司循环均不得恢复。** 通过后才从本计划记录的下一步重新启动原主线；D5 本身不顺带实现任何这些业务任务。
+**D5 的外包交付 + ROOT 的 FF 调用方定界 + ROOT 组合测试和最终独审全部通过，才叫“解耦完成”。** 这要求现行 V2 主路径不泄露/消费物理路径，V1 若保留也只能作为明确版本的隔离兼容合同。若某个 V1 消费者仍属于活跃内部生产链，必须先迁移，不能把兼容豁免当完成。在这之前，T4/SEM、真实摘要、缓存恢复、RF 实际采用和公司循环均不得恢复。通过后才从本计划记录的下一步重新启动原主线；D5 本身不顺带实现任何这些业务任务。

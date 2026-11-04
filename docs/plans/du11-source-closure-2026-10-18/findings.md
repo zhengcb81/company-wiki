@@ -160,3 +160,11 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 - FF 仍支持 `source_ref_v2=False` 的旧本地文件 handle；兼容请求可进入 `validate_handle(canonical_path=...)`。RF 当前 `prepare_source` 路由固定为 SourceRef v2，`_prepare_legacy_source` 只留历史离线回放；不要把它们写成等价的生产路径。
 - 决定：新增 D5 P1 `CWP processed-document port + StockWiki consumption`，由一个 harness 在互斥 CWP/StockWiki worktree 实施；ROOT 冻结接口、单独收敛 FF 旧路径、负责跨仓组合和最终独审。D5 全部验收完成前，T4/SEM、真实摘要、缓存恢复、RF采用和固定公司循环继续暂停。
 - 不在此发现中预判 D5 已实现；下一份计划固定 wire、parser owner、三条 StockWiki入口、离线/真实隔离E2E和独立交付审查。测试只在实施/总控验收阶段运行，本轮没有改产品代码或跑产品测试。
+
+## 2026-11-04 — ROOT 复核 FF canonical_path 的真实可达范围
+
+- FF 当前默认公开脚本对 schema 2.0 会设置 v2_response，并把它合并进 source_ref_v2；该路径返回 pathless SourceCandidate，并调用 validate_handle_metadata，不经过 validate_handle(canonical_path=...)。证据：filing-fetch/scripts/fetch_filing.py 的 resolve_filing、_handle_from_resolution 和 CLI main 路由。
+- RF 当前生产 source preparation 通过 CLI 传 --source-ref-v2；仓内 filing_fetch_client.resolve_filing* 的旧默认参数没有被生产脚本直接调用。只读文本调用搜索找到的直接 Python 入口用法是测试；company_wiki_source.py 的相关命中是文档注释。FF 技能把 schema 2.0 作为推荐合同，schema 1.2 是显式 legacy 示例。
+- 因此先前“FF 默认生产路径仍可泄漏 canonical_path”的推断过宽。真实残余是 FF 明确保留的 schema 1.x legacy handle 合同；D5 不应盲删或把它描述为当前生产故障。ROOT 要确认所有当前仓消费者均走 v2，组合验收断言 schema 2.0 绝不进入 canonical-path 分支；旧 v1 可作为隔离、版本显式的兼容入口并由现有测试覆盖。若再发现活跃生产消费者走 v1，ROOT 才迁移调用方或制定兼容退出方案。
+- FF 仓只读基线：分支 d4-05-ff-process-diagnostics、HEAD bf7e1da，与 origin/main 指向同一 commit。工作区存在未跟踪运行产物和敏感配置文件；本轮未读取内容、未改动、未清理。
+- ROOT 只读审计已完成，未改 FF/RF 产品代码或运行产品测试；D5 最终 ROOT 组合验收仍 OPEN。

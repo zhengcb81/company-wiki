@@ -364,3 +364,9 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - PWF 已把 D5 写成当前唯一实施节点：一个外部 harness 负责 CWP parser-owned pathless port + StockWiki 三入口消费者，ROOT 负责 FF 旧路径调用方审计/收敛、跨仓组合 E2E 和最终大节点独审。
 - 新外包卡：[D5-CWP-STOCKWIKI-PROCESSED-READING.md](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)。卡明确模块写域、公开合同要素、单仓隔离测试、临时环境端到端、真实只读样本/原件 SHA、scratch 恢复、交付前独立审查和 ROOT 接收接口。
 - 本轮只更新 PWF/交接/卡，无产品代码修改，未运行产品测试。计划与卡已由 company-wiki commit 212a4e0e8 推送到 origin/master；pre-commit 与 push hook 均按文档范围跳过 pytest。
+
+## 2026-11-04 — FF 调用边界只读复核校正
+
+- ROOT 实际核对 FF CLI/API 与当前 RF production preparation：schema 2.0 CLI 会选 V2/pathless；RF 显式传 `--source-ref-v2`；`canonical_path` 只在显式 V1 兼容合同中出现。没有证据表明当前 RF 生产调用走 V1。此前 D5 文案将其称为“FF 默认 provider 旧路径”过宽，已改为“验证 V2/V1 边界”，不盲删兼容实现。
+- D5 根因仍是 CWP 通用规范化解析结果未成为 StockWiki 唯一解析边界。验收定义进一步强调模块独立负责、独立契约测试，跨模块只依赖版本化公开合同，并通过强制组合测试证明实际边界；门禁不扩到每个小节点。
+- 审计为只读；没有改 FF/RF 产品代码、没有运行产品测试、未读取/触碰 FF 敏感配置及工作区产物。D5 外包实现与最终组合验收仍 OPEN。
