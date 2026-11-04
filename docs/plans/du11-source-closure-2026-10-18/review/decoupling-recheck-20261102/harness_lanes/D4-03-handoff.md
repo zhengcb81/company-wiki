@@ -141,3 +141,31 @@ AssertionError: document layer imported runtime owner: company_wiki.source_catal
 6. **独审无可核工件**（次要）：新增同目录 `D4-03-independent-review.md`。
 
 审计同时复核并确认：六组测试数字与 handoff 逐字吻合；`.tmp403/` 与基线 worktree 确已清理；`document_normalization` 无 `source_catalog` 文本引用；`source_catalog/__init__.py` 确未导出 DTO 且未改；ruff 全绿；18 个 `document_understanding_selection` 失败在 `git archive HEAD` 只读副本上同样失败（抽查 8 节点）。
+
+## 10. 2026-11-04 独立复核补充
+
+复核者：未参与实现/独审/审计的独立 ZCode 会话，应第三方复查要求对本卡做独立验证，并处置两项偏差。原始记录一律保留不改，以本节为准。
+
+### 10.1 §4 的「18 个既有失败」为环境相关，2026-11-04 已不可复现
+
+以逐字相同命令（`python -m pytest tests/unit/document_understanding_{root,profiles,structure,layout_hints,decision_dependencies,note_scope,selection} -q`）复跑：
+
+| 对象 | 结果 |
+|---|---|
+| 交付 worktree（`092b299e0`） | 3329 passed, 17 skipped, **0 failed** |
+| base 只读快照（`git archive 503f6510c` 解开到临时目录后同命令） | 3329 passed, 17 skipped, **0 failed** |
+
+总例数 3346 与当时记录（3311+17+18）吻合；当时失败签名为 `source_grammar_unavailable` 等，依赖当时环境数据。因此「非本次回归」以更强形式成立：交付与基线今日逐例一致且全绿。
+
+### 10.2 隔离探针增加默认拒绝的模块白名单（护栏补强）
+
+原探针只拒绝 8 个已知前缀 + `sqlite3`，对未来以新名字加入 import 图的 runtime 模块没有前向防护。`tests/unit/test_document_layer_isolation.py` 现同时断言 `unexpected_modules == []`：文档层 import 图只允许 `company_wiki.document_model*`、`company_wiki.document_normalization*`、`company_wiki.document_understanding*`、`company_wiki.resource_budget`、`company_wiki.source_contract*` 五个子树（根包 `company_wiki` 本身除外），隔离/不隔离两模式断言一致且模块集合相等。21 例全部通过；把 docx/pptx 的 import 目标改回 catalog 路径的变异在增强后的探针下同样必红（拒绝列表与白名单同时命中）。
+
+### 10.3 其余独立复核证据（与 handoff 自述一致）
+
+- ROOT A3 探针（`.planning/decoupling-recheck-20261103/probe_normalization_boundary.py` 语义）base vs 交付：ordinary 54→0 个 catalog 模块；isolated/engine/du 由 `ModuleNotFoundError` 转为 imported。
+- 白名单探针实际执行 HTML `normalize_document` + 逐 unit `replay_unit` + `understand_units` 通过；加载的全部 `company_wiki` 模块均落在 10.2 的五子树内，无 `source_catalog`、无 `sqlite3`。
+- base vs 交付：两份迁移文件 AST（剥离 docstring/import/`__all__`）逐节点一致；同一小 HTML 语料的 understanding 摘要与 unit/locator/replay/span observation 哈希逐字节相同（独立探针语料，与 §5 的 `c72aaeb8…` 非同一指标，不可直接比较）。
+- 16 个直接走旧 shim 路径的消费者测试文件 409 passed；改动文件 ruff/mypy 全绿；`setuptools.find_packages(include=["company_wiki*"])` 会包含新包。
+- 跨仓扫描：StockWiki/FF/AUDIT 源码零引用本卡符号；RF 的命中均为其内部无关模块。
+- 旧路径（`source_catalog.narrative_document`）仍经包门面加载完整 catalog + sqlite3、`document_understanding/decision_inventory.py` 的组合 owner 依赖、以及 A3 建议的 catalog 门面 lazy 化：均属 SourceCatalog 业务/门面内部事项，超出本卡写域（§7 已如实申报），维持原范围判定，不由本卡补做；如需推进应由 ROOT 另立事项。
