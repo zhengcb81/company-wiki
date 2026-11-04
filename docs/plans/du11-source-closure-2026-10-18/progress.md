@@ -370,3 +370,10 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - ROOT 实际核对 FF CLI/API 与当前 RF production preparation：schema 2.0 CLI 会选 V2/pathless；RF 显式传 `--source-ref-v2`；`canonical_path` 只在显式 V1 兼容合同中出现。没有证据表明当前 RF 生产调用走 V1。此前 D5 文案将其称为“FF 默认 provider 旧路径”过宽，已改为“验证 V2/V1 边界”，不盲删兼容实现。
 - D5 根因仍是 CWP 通用规范化解析结果未成为 StockWiki 唯一解析边界。验收定义进一步强调模块独立负责、独立契约测试，跨模块只依赖版本化公开合同，并通过强制组合测试证明实际边界；门禁不扩到每个小节点。
 - 审计为只读；没有改 FF/RF 产品代码、没有运行产品测试、未读取/触碰 FF 敏感配置及工作区产物。D5 外包实现与最终组合验收仍 OPEN。
+
+## 2026-11-04 — D5 ROOT FF 路由子节点
+
+- 按 TDD 加入两项必需回归：schema 2.0 CLI 默认 pathless V2 且直接 API 路由不得触发 V1 文件校验；schema 1.1 显式兼容路径仍 confined to temp wiki root。新增 ROOT runner `--d5-ff-route` 固定小套件选择及防覆盖/防 collect-only 检查；不改 D4 固定套件或 CI。
+- ROOT runner 实测 3 passed、0 skipped、0 failed，用时 32.911 秒；runner scope 单测 9 passed；RF/FF/ET/CWP 版本快照一致，`scratch_restored=true`；外层报告目录已删除。独立临时 source catalog 使用合成 PDF，不触及生产原件、provider、密钥或邻仓工作区。
+- 默认沙箱首次无法访问邻仓 Git 元数据，失败发生在 pytest 启动之前；同一命令在获准宿主环境完成验收。没有修改 runner 去绕过沙箱，也没有改邻仓。
+- D5 FF route 子节点已完成；CWP normalized-document producer port、StockWiki 三入口消费者、完整真实样本跨仓组合和全局独审尚未完成。整体状态仍 D5 OPEN，禁止恢复其它主线。

@@ -1,0 +1,44 @@
+{
+  "schema_version": "company-wiki-d5-root-ff-route-receipt/1",
+  "observed_at_utc": "2026-11-04T23:43:10.184999+00:00",
+  "status": "PASS_SUBNODE_ONLY",
+  "scope": "FF schema 2.0 V2 pathless default and V1 explicit canonical_path compatibility; not global D5 acceptance",
+  "command": "python tools/run_source_system_tests.py --rf-root ../revenue-forecast --ff-root ../filing-fetch --et-root ../earnings-transcripts/earnings-transcripts --output-dir <unique TEMP directory> --timeout-seconds 180 --d5-ff-route",
+  "versions": {
+    "company-wiki_head_before_test": "bbd103528e117e246b0878d35286495da01e13db",
+    "company-wiki_tracked_diff_sha256": "a5d24c0517cb095d5a53957a6a097733517042a2cf06353478228ff8e374729d",
+    "revenue-forecast_head": "90c562ac6e305c4c5f6fba5a439851b20e0490a9",
+    "filing-fetch_head": "bf7e1dab4aebcfe671554a4fda59705eb7fe1765",
+    "earnings-transcripts_head": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e"
+  },
+  "tests": {
+    "file": "integration/filing_fetch/test_source_ref_v2_cli.py",
+    "passed": 3,
+    "skipped": 0,
+    "failed": 0,
+    "seconds": 32.911,
+    "required_cases": [
+      "test_schema_2_0_defaults_to_v2_and_never_uses_legacy_handle_validation",
+      "test_schema_1_1_keeps_legacy_path_handle_in_its_explicit_route"
+    ]
+  },
+  "runner_scope_unit_tests": {
+    "file": "tests/unit/test_source_system_runner_scope.py",
+    "passed": 9,
+    "skipped": 0,
+    "failed": 0,
+    "seconds": 2.33
+  },
+  "isolation": {
+    "provider_mode": "offline synthetic fixture",
+    "production_originals_modified": false,
+    "paid_calls": 0,
+    "source_stable_during_run": true,
+    "pytest_scratch_restored": true,
+    "runner_output_directory_removed": true,
+    "temporary_prefix_residue_count": 0
+  },
+  "warning": "One non-blocking pytest warning: unknown asyncio_mode config option.",
+  "environment_note": "Default sandbox could not read the sibling RF Git metadata before pytest startup; the same test command passed in the authorized host environment. No test code or runner bypass was added.",
+  "global_d5_complete": false
+}

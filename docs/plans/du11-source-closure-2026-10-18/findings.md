@@ -168,3 +168,10 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 - 因此先前“FF 默认生产路径仍可泄漏 canonical_path”的推断过宽。真实残余是 FF 明确保留的 schema 1.x legacy handle 合同；D5 不应盲删或把它描述为当前生产故障。ROOT 要确认所有当前仓消费者均走 v2，组合验收断言 schema 2.0 绝不进入 canonical-path 分支；旧 v1 可作为隔离、版本显式的兼容入口并由现有测试覆盖。若再发现活跃生产消费者走 v1，ROOT 才迁移调用方或制定兼容退出方案。
 - FF 仓只读基线：分支 d4-05-ff-process-diagnostics、HEAD bf7e1da，与 origin/main 指向同一 commit。工作区存在未跟踪运行产物和敏感配置文件；本轮未读取内容、未改动、未清理。
 - ROOT 只读审计已完成，未改 FF/RF 产品代码或运行产品测试；D5 最终 ROOT 组合验收仍 OPEN。
+
+## 2026-11-04 — D5 ROOT 的 FF V2/V1 路由边界测试通过
+
+- 在 CWP ROOT integration 中补充 schema 2.0 默认 V2/pathless 测试，并在同一进程把 FF 的 V1 `validate_handle` 替换为触发即失败；再通过真实 FF CLI 子进程确认 schema 2.0 不传 `--source-ref-v2` 也返回 pathless `source_candidate`。另一独立用例确认显式 V1 schema 1.1 仍能返回仅位于临时公司根内的 canonical path；原有 schema 1.1 + V2 显式 flag 用例保留。
+- 为该 ROOT 子节点增加专用 `--d5-ff-route` 强制测试选择，拒绝 `--tests` 覆盖或 collect-only，并要求 V2/V1 两个必需案例实际执行且零 skip；D4 原套件未改。
+- ROOT runner：3 passed、0 skipped、0 failed，32.911 秒；RF `90c562ac`、FF `bf7e1dab`、ET `003c1c06`，CWP HEAD `bbd10352` 且源码快照测试前后稳定。provider 只用隔离合成 PDF/临时 catalog，无网络、无下载；scratch 与 runner 输出目录均清理。完整收据：[root-d5-ff-route](review/decoupling-recheck-20261104/root-d5-ff-route/README.md)。
+- 该节点只关闭 FF 调用边界验证，不是 CWP→StockWiki 产品解耦或全局 D5 完成；后者保持 OPEN，主线其它任务继续暂停。

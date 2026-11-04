@@ -2,7 +2,7 @@
 
 本表只汇总已审计的近期卡，**不是项目总完成率、所有历史卡总数或所有仓全部分支盘点**。机器表为[PACKAGE_STATUS.json](PACKAGE_STATUS.json)，主线只看[CURRENT_STATUS](CURRENT_STATUS.md)。工程接收、真实产品验收和整家公司研究是三种不同结果。
 
-当前主线闸位：D4 仅按原范围验收；全局解耦 D5 尚未实施。现在唯一可交给 harness 的卡是 [D5-CWP-STOCKWIKI](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)，ROOT 负责 FF V2 pathless/V1 显式兼容边界测试和组合验收。只读调用方盘点显示当前 RF 生产准备使用 V2；不得把 V1 兼容入口误写成默认生产故障。其它主线保持暂停，详见 CURRENT_STATUS。
+当前主线闸位：D4 仅按原范围验收；全局解耦 D5 仍 OPEN。外部实现卡为 [D5-CWP-STOCKWIKI](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)；ROOT 的 FF V2 pathless/V1 显式兼容子节点已 3/3 通过，整体 CWP→StockWiki 产品边界和跨仓验收仍待完成。只读调用方盘点显示当前 RF 生产准备使用 V2；不得把 V1 兼容入口误写成默认生产故障。其它主线保持暂停，详见 CURRENT_STATUS。
 
 | 任务卡 | 已核状态（卡内范围） | 依据 |
 |---|---|---|

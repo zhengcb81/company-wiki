@@ -5,6 +5,7 @@ import pytest
 
 from tools.run_source_system_tests import (
     D4_FINAL_TESTS,
+    D5_FF_ROUTE_TESTS,
     code_version,
     consumer_scope,
     executed_consumer_scope,
@@ -17,6 +18,14 @@ def test_d4_final_keeps_its_mandatory_suite() -> None:
     assert select_tests(None, d4_final=True) == list(D4_FINAL_TESTS)
     with pytest.raises(ValueError, match="cannot replace the mandatory"):
         select_tests(["tests/unit/test_document_layer_isolation.py"], d4_final=True)
+
+
+def test_d5_ff_route_keeps_its_mandatory_boundary_suite() -> None:
+    assert select_tests(None, d5_ff_route=True) == list(D5_FF_ROUTE_TESTS)
+    with pytest.raises(ValueError, match="cannot replace the mandatory"):
+        select_tests(["integration/filing_fetch/test_source_ref_v2_cli.py"], d5_ff_route=True)
+    with pytest.raises(ValueError, match="cannot combine"):
+        select_tests(None, d4_final=True, d5_ff_route=True)
 
 
 def test_audit_root_alone_does_not_claim_audit_coverage() -> None:

@@ -21,8 +21,8 @@ D4-01～D4-05 已接收、独审并合入各自主线；ROOT 完成 D4-06 AUDIT 
 ## 唯一下一步
 
 1. 启动 D5 外包卡；实施者按卡完成 CWP→StockWiki 解析产物合同、三个消费入口、隔离真实样本 E2E 和交付前独立审查，问题全部修好后再交接。
-2. ROOT 已完成 FF V1/V2 只读调用方盘点；下一步用测试确保默认 schema 2.0 provider 流程只经 SourceRef v2/pathless，V1 兼容入口独立隔离并受测；保留必要的明确本地导入 adapter，不做无证据的兼容删除。
-3. ROOT 用公开入口完成 D5 跨仓组合 E2E 与一次独立总审，核对 CWP/StockWiki/FF 实际 HEAD、测试、原件 SHA 与测试目录恢复；问题按 owner 根修并复验。
-4. 只有 D5 外包交付、FF 收敛、组合验收、最终独审全部通过，才更新为全局解耦 ACCEPTED，随后恢复 T4/SEM。D5 期间不做真实摘要、缓存恢复、RF 采用或公司循环。
+2. ROOT 已完成 FF V1/V2 只读调用方盘点和路由子验收（3 passed、0 skipped）；收据见 [root-d5-ff-route](review/decoupling-recheck-20261104/root-d5-ff-route/README.md)。
+3. CWP/StockWiki 实现交付后，ROOT 用公开入口完成 D5 跨仓组合 E2E 与一次独立总审，核对 CWP/StockWiki/FF 实际 HEAD、测试、原件 SHA 与测试目录恢复；问题按 owner 根修并复验。
+4. 只有 D5 外包交付、FF V2/V1 边界按最终版本复验、全局组合验收和最终独审全部通过，才更新为全局解耦 ACCEPTED，随后恢复 T4/SEM。D5 期间不做真实摘要、缓存恢复、RF 采用或公司循环。
 
 RF/AUDIT 业务计划仍保留为 READY_NOT_STARTED 的工作清单，但全局调度状态是 DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING；不会提前开工。RF PWF commit `90c562ac` 已推送，AUDIT PWF commit `3589b69` 已本地提交（无 remote）。保持原件和其他仓现有 WIP，不改 Dayu/IQS/Dashboard。

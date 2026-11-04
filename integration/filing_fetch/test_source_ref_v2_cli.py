@@ -216,8 +216,14 @@ def _activate_policy(wiki: Path, policy_hash: str) -> None:
     )
 
 
-def _fetch(launcher: Path, environment: dict[str, str]) -> dict:
-    request = {
+def _fetch(
+    launcher: Path,
+    environment: dict[str, str],
+    *,
+    request: dict | None = None,
+    source_ref_v2: bool = True,
+) -> dict:
+    request = request or {
         "schema_version": "1.1",
         "company_query": "AAPL",
         "market": "US",
@@ -225,12 +231,14 @@ def _fetch(launcher: Path, environment: dict[str, str]) -> dict:
         "fiscal_year": 2025,
         "as_of_date": "2026-09-27",
     }
+    command = [
+        sys.executable, "-B", str(REPO / "scripts" / "fetch_filing.py"),
+        "--config", str(launcher), "--timeout-seconds", "60",
+    ]
+    if source_ref_v2:
+        command.append("--source-ref-v2")
     proc = subprocess.run(
-        [
-            sys.executable, "-B", str(REPO / "scripts" / "fetch_filing.py"),
-            "--config", str(launcher), "--source-ref-v2",
-            "--timeout-seconds", "60",
-        ],
+        command,
         cwd=REPO, env=environment,
         input=json.dumps(request), capture_output=True, text=True,
         encoding="utf-8", timeout=75, check=False,
@@ -291,3 +299,69 @@ def test_same_sha_duplicate_returns_pathless_candidate_without_reading_pdf(tmp_p
     assert duplicate.read_bytes() == BODY
     assert duplicate.stat().st_mtime_ns == original_mtimes[1]
     assert (journal.read_bytes() if journal.exists() else b"") == journal_before
+
+
+def test_schema_2_0_defaults_to_v2_and_never_uses_legacy_handle_validation(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
+) -> None:
+    environment = _environment()
+    wiki, config, launcher, primary = _setup_wiki(tmp_path)
+    _wiki_cli(wiki, config, environment, "scan")
+    policy = _wiki_cli(wiki, config, environment, "policy-export")
+    _activate_policy(wiki, policy["policy_hash"])
+    _record_clean_review(config, environment)
+    request = {
+        "schema_version": "2.0",
+        "company_query": "AAPL",
+        "market": "US",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "as_of_date": "2026-09-27",
+        "filing_intent": "reuse_only",
+    }
+
+    def reject_legacy_path_validation(*args, **kwargs):
+        pytest.fail("schema 2.0 entered the V1 canonical_path validator")
+
+    monkeypatch.setattr(fetch_filing, "validate_handle", reject_legacy_path_validation)
+    direct = fetch_filing.resolve_filing(
+        request=request, config_path=launcher, timeout_seconds=60,
+        source_ref_v2=True,
+    )
+    assert direct["source_ref"]["content_sha256"] == SHA
+    _assert_pathless(direct)
+
+    # The real public CLI must select V2 from the request schema alone.
+    response = _fetch(
+        launcher, environment, request=request, source_ref_v2=False,
+    )
+    assert response["schema_version"] == "2.0"
+    assert response["status"] == "source_candidate"
+    assert response["downloads"] == 0
+    assert response["filing"]["source_ref"]["content_sha256"] == SHA
+    _assert_pathless(response)
+    assert primary.read_bytes() == BODY
+
+
+def test_schema_1_1_keeps_legacy_path_handle_in_its_explicit_route(
+    tmp_path: Path,
+) -> None:
+    environment = _environment()
+    wiki, config, launcher, primary = _setup_wiki(tmp_path)
+    _wiki_cli(wiki, config, environment, "scan")
+    policy = _wiki_cli(wiki, config, environment, "policy-export")
+    _activate_policy(wiki, policy["policy_hash"])
+    _record_clean_review(config, environment)
+
+    response = _fetch(
+        launcher, environment, source_ref_v2=False,
+    )
+    assert response["status"] == "capture_ready"
+    assert response["downloads"] == 0
+    handle = response["handle"]
+    assert isinstance(handle.get("canonical_path"), str)
+    resolved = Path(handle["canonical_path"])
+    if not resolved.is_absolute():
+        resolved = wiki / resolved
+    assert resolved.resolve().is_relative_to(wiki.resolve())
+    assert resolved.read_bytes() == primary.read_bytes() == BODY

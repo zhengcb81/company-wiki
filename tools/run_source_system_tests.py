@@ -62,6 +62,13 @@ D4_REQUIRED_CASES = (
     "integration.revenue_forecast_audit.test_current_public_bundle_import::test_frozen_public_bundle_v2_contract_reaches_audit_cli",
     "integration.revenue_forecast_audit.test_current_public_bundle_import::test_cwp_projected_public_read_v3_reaches_audit_cli_and_cleans_scratch",
 )
+D5_FF_ROUTE_TESTS = (
+    "integration/filing_fetch/test_source_ref_v2_cli.py",
+)
+D5_FF_ROUTE_REQUIRED_CASES = (
+    "test_schema_2_0_defaults_to_v2_and_never_uses_legacy_handle_validation",
+    "test_schema_1_1_keeps_legacy_path_handle_in_its_explicit_route",
+)
 
 CONSUMER_TEST_PREFIXES = {
     "rf": (
@@ -88,11 +95,19 @@ CONSUMER_ROOTS = {
 }
 
 
-def select_tests(requested: list[str] | None, *, d4_final: bool) -> list[str]:
-    """Do not let a targeted override masquerade as the mandatory D4 suite."""
-    if d4_final and requested:
-        raise ValueError("--tests cannot replace the mandatory --d4-final suite")
-    return list(requested or (D4_FINAL_TESTS if d4_final else CURRENT_TESTS))
+def select_tests(
+    requested: list[str] | None,
+    *,
+    d4_final: bool = False,
+    d5_ff_route: bool = False,
+) -> list[str]:
+    """Keep named ROOT acceptance suites mandatory and independently selectable."""
+    if d4_final and d5_ff_route:
+        raise ValueError("--d4-final and --d5-ff-route cannot combine")
+    mandatory_suite = D4_FINAL_TESTS if d4_final else D5_FF_ROUTE_TESTS if d5_ff_route else None
+    if mandatory_suite is not None and requested:
+        raise ValueError("--tests cannot replace the mandatory ROOT acceptance suite")
+    return list(requested or mandatory_suite or CURRENT_TESTS)
 
 
 def _selected_test_files(tests: list[str]) -> set[str]:
@@ -271,16 +286,22 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--tests", nargs="+", help="Targeted follow-up; default is the current public chain")
     parser.add_argument("--d4-final", action="store_true",
         help="Run the one-time D4 closeout set; requires explicit --stockwiki-root and --audit-root")
+    parser.add_argument("--d5-ff-route", action="store_true",
+        help="Run the focused mandatory D5 FF V2/V1 boundary suite")
     parser.add_argument("--collect-only", action="store_true")
     args = parser.parse_args(argv)
     try:
-        tests = select_tests(args.tests, d4_final=args.d4_final)
+        tests = select_tests(
+            args.tests, d4_final=args.d4_final, d5_ff_route=args.d5_ff_route,
+        )
     except ValueError as exc:
         parser.error(str(exc))
     if args.d4_final and (args.stockwiki_root is None or args.audit_root is None):
         parser.error("--d4-final requires explicit --stockwiki-root and --audit-root; absent consumers are not counted as passes")
     if args.d4_final and args.collect_only:
         parser.error("--collect-only cannot be used for the mandatory --d4-final acceptance run")
+    if args.d5_ff_route and args.collect_only:
+        parser.error("--collect-only cannot be used for the mandatory --d5-ff-route acceptance run")
     roots = {"company-wiki": ROOT, "revenue-forecast": args.rf_root.resolve(strict=True),
         "filing-fetch": args.ff_root.resolve(strict=True), "earnings-transcripts": args.et_root.resolve(strict=True)}
     if args.stockwiki_root is not None:
@@ -349,12 +370,35 @@ def main(argv: list[str] | None = None) -> int:
             "undercovered_files": undercovered_d4_files,
             "missing_cases": missing_d4_cases,
         }
+    d5_ff_file_counts = {
+        file_path: _counts_for_file(file_path, test_counts["by_module"])
+        for file_path in D5_FF_ROUTE_TESTS
+    } if args.d5_ff_route else {}
+    d5_ff_required_cases = [
+        case for case in D5_FF_ROUTE_REQUIRED_CASES
+        if any(node_id.endswith("::" + case) for node_id in test_counts.get("nodeids", []))
+    ] if args.d5_ff_route else []
+    if args.d5_ff_route and (
+        test_counts["total"] == 0
+        or test_counts["skipped"] > 0
+        or "filing-fetch" not in executed_consumers
+        or any(counts["passed"] == 0 for counts in d5_ff_file_counts.values())
+        or len(d5_ff_required_cases) != len(D5_FF_ROUTE_REQUIRED_CASES)
+    ):
+        rc = 1
+        record["failure"] = {
+            "kind": "IncompleteD5FFRouteSuite",
+            "message": "mandatory D5 FF route acceptance requires the V2 pathless and V1 compatibility cases to pass with zero skips",
+            "missing_cases": sorted(set(D5_FF_ROUTE_REQUIRED_CASES) - set(d5_ff_required_cases)),
+        }
     final_versions = {name: code_version(root) for name, root in roots.items()}
     stable_during_run = initial_versions == final_versions
     record.update(returncode=rc if stable_during_run else 1,
         seconds=round(time.monotonic()-started, 3), scratch_restored=not Path(temporary).exists(),
         test_counts=test_counts,
         d4_file_counts=d4_file_counts,
+        d5_ff_file_counts=d5_ff_file_counts,
+        d5_ff_required_cases=d5_ff_required_cases,
         versions_after=final_versions, source_stable_during_run=stable_during_run)
     if not stable_during_run:
         record["failure"] = {"kind": "SourceChangedDuringRun", "message": "one or more code snapshots changed while the suite was running"}

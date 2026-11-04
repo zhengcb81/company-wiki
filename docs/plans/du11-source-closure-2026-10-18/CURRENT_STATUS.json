@@ -92,8 +92,8 @@
   },
   "project_status": "D5_GLOBAL_DECOUPLING_OPEN_MAINLINE_PAUSED",
   "as_of_date": "2026-11-04",
-  "observed_at_utc": "2026-11-04T23:26:13Z",
-  "next_action": "先完成D5：外部单一harness实施CWP规范化文档port和StockWiki三入口消费；ROOT已只读盘点FF V1/V2调用方，当前已知生产主路径走V2/pathless，V1 canonical_path是显式兼容合同。继续用组合测试证明V2永不回退、V1隔离，再完成跨仓E2E与最终独审。全部验收后才恢复T4/SEM和其它主线。",
+  "observed_at_utc": "2026-11-04T23:49:12Z",
+  "next_action": "完成D5卡中的CWP规范化文档port和StockWiki三入口消费；ROOT的FF V1/V2调用方盘点与3例边界子测试已通过。交付后完成按真实公开入口的跨仓组合E2E、真实只读样本、恢复核对和最终独审。全局D5全部验收后才恢复T4/SEM和其它主线。",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -204,7 +204,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "全局D5解耦优先：CWP pathless规范化文档port + StockWiki三入口消费由一个外部harness负责；ROOT已完成FF V1/V2只读调用方盘点，当前已知RF生产准备走V2/pathless、V1 canonical_path仅是显式兼容合同；ROOT继续用组合测试证明V2/V1边界、完成跨仓E2E和最终独立审查。T4/SEM及其他主线在D5全验收前暂停。",
+    "current_work": "全局D5解耦优先：CWP pathless规范化文档port + StockWiki三入口消费由一个外部harness负责；ROOT已完成FF V1/V2只读调用方盘点和3例V2/V1路由子测试（0 skip），当前RF生产准备走V2/pathless、V1 canonical_path仅是显式兼容合同；ROOT待外部实现交付后完成三入口组合E2E和最终独立审查。T4/SEM及其他主线在D5全验收前暂停。",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -431,7 +431,7 @@
     ],
     "code_changes": true,
     "real_provider_calls": 0,
-    "decoupling": "D3 and D4 scoped results remain accepted; global decoupling is OPEN because CWP normalized-document output is not yet the sole parser boundary for StockWiki. FF caller audit found the current RF production preparation uses V2/pathless; canonical_path remains an explicit V1 compatibility contract whose isolation must be proved in ROOT combination tests, not blindly deleted",
+    "decoupling": "D3 and D4 scoped results remain accepted; global decoupling is OPEN because CWP normalized-document output is not yet the sole parser boundary for StockWiki. FF caller audit found no active internal production V1 caller and current RF preparation uses V2/pathless; the isolated V2/V1 route sub-suite passes, and the final version-bound composition still remains",
     "dispatch_status": "D5_CARD_READY; FF_LEGACY_ROOT_OWNED; ALL_OTHER_MAINLINE_PAUSED",
     "recheck": "review/decoupling-recheck-20261102/README.md"
   },
@@ -447,7 +447,7 @@
     ],
     "open": [
       "D5 CWP pathless normalized-document port and StockWiki three-entry consumption",
-      "ROOT FF V1/V2 caller inventory completed read-only; prove schema 2.0 V2 pathlessness and keep explicit V1 compatibility isolated/tested",
+      "ROOT FF V1/V2 caller inventory and 3-case route suite PASS; final version-bound cross-repository boundary proof remains open",
       "ROOT cross-repository integration and final independent review"
     ],
     "module_dispatch": "ALL_MAINLINE_DEFERRED_UNTIL_D5_GLOBAL_ACCEPTANCE",
@@ -464,14 +464,17 @@
   "decoupling_recheck": {
     "report": "review/decoupling-recheck-20261102/README.md",
     "evidence": "review/decoupling-recheck-20261102/evidence.json",
-    "status": "D5_ROOT_CAUSE_REMEDIATION_PLANNED",
+    "status": "D5_ROOT_FF_ROUTE_SUBNODE_PASS_GLOBAL_OPEN",
     "open": [
       "CWP owns normalized document structure and exposes a pathless versioned reader",
       "StockWiki provider business entries stop reparsing CWP PDF/Office originals",
-      "FF schema 2.0 production route is proven pathless and cannot reach the explicit V1 canonical_path compatibility handle; V1 compatibility is separately isolated/tested",
+      "ROOT FF V2/V1 route subnode passes 3 cases with zero skips; final version-bound cross-repository route proof remains part of D5 combination acceptance",
       "Module-isolated tests and ROOT composition prove the public boundary"
     ],
     "product_changes_this_review": 0,
+    "root_route_test_cases_passed": 3,
+    "root_route_test_cases_skipped": 0,
+    "receipt": "review/decoupling-recheck-20261104/root-d5-ff-route/receipt.json",
     "paid_calls": 0
   },
   "implementation_packages": {
@@ -489,15 +492,18 @@
     "current_package": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md"
   },
   "d5_decoupling": {
-    "status": "PLAN_AND_CARD_READY_NOT_IMPLEMENTED",
+    "status": "ROOT_FF_ROUTE_TESTS_PASS_EXTERNAL_CWP_STOCKWIKI_PENDING",
     "priority": "P0_BEFORE_ALL_OTHER_MAINLINE",
     "external_owner": "one harness owns CWP producer port and StockWiki three-entry consumer in separate worktrees",
-    "root_owner": "FF V1/V2 caller-boundary verification (read-only inventory done), CWP root integration, cross-repo E2E and final independent review",
+    "root_owner": "FF V1/V2 read-only caller inventory and focused route tests PASS (3/0 skip); CWP root integration, cross-repo E2E and final independent review pending external implementation",
     "acceptance": "Each module owns its implementation and standalone contract tests; CWP/StockWiki/FF public-contract composition passes; FF V2 is pathless and explicit V1 compatibility isolated/tested; real read-only sample, scratch restoration and final review all pass",
     "resume_mainline_only_after_acceptance": true,
     "card": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md",
     "code_changes_this_update": 0,
-    "product_tests_run": 0
+    "test_harness_changes_this_update": 3,
+    "product_tests_run": 3,
+    "product_tests_skipped": 0,
+    "root_ff_route_receipt": "review/decoupling-recheck-20261104/root-d5-ff-route/receipt.json"
   },
   "d4_closeout": {
     "status": "COMPLETE_ACCEPTED",
