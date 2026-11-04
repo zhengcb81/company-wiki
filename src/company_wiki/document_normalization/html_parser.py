@@ -842,7 +842,7 @@ def parse_html(
         sys.setrecursionlimit(old_limit)
     if not state.units:
         state.errors.append("no_visible_text_blocks")
-    from company_wiki.source_catalog.narrative_document import DocumentStructure
+    from company_wiki.document_model.narrative import DocumentStructure
 
     structure = DocumentStructure(
         source_id=state.source_id,
