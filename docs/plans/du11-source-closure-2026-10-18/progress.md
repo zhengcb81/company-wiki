@@ -363,4 +363,4 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - 复核结论：D4-01～06 按原范围仍 CLOSED；不能把此前限定范围的通过外推成全局解耦完成。新确认 CWP 通用解析产物尚未作为完整的 pathless 公共合同供 StockWiki 消费，StockWiki 三个 provider 入口可能本地重解析 PDF/Office；FF 还保留 legacy canonical_path 路由。
 - PWF 已把 D5 写成当前唯一实施节点：一个外部 harness 负责 CWP parser-owned pathless port + StockWiki 三入口消费者，ROOT 负责 FF 旧路径调用方审计/收敛、跨仓组合 E2E 和最终大节点独审。
 - 新外包卡：[D5-CWP-STOCKWIKI-PROCESSED-READING.md](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)。卡明确模块写域、公开合同要素、单仓隔离测试、临时环境端到端、真实只读样本/原件 SHA、scratch 恢复、交付前独立审查和 ROOT 接收接口。
-- 本轮只更新 PWF/交接/卡，无产品代码修改，未运行产品测试，未提交/推送。
+- 本轮只更新 PWF/交接/卡，无产品代码修改，未运行产品测试。计划与卡已由 company-wiki commit 212a4e0e8 推送到 origin/master；pre-commit 与 push hook 均按文档范围跳过 pytest。

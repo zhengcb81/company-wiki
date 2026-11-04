@@ -92,7 +92,7 @@
   },
   "project_status": "D5_GLOBAL_DECOUPLING_OPEN_MAINLINE_PAUSED",
   "as_of_date": "2026-11-04",
-  "observed_at_utc": "2026-11-04T23:14:26Z",
+  "observed_at_utc": "2026-11-04T23:16:54Z",
   "next_action": "先完成D5：外部单一harness实施CWP规范化文档port和StockWiki三入口消费；ROOT收敛FF默认provider旧canonical_path路由并完成跨仓组合E2E与最终独审。全部验收后才恢复T4/SEM和其它主线。",
   "publication": {
     "repositories": {
