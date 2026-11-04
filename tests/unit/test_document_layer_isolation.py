@@ -5,7 +5,10 @@ isolated run refuses every SourceCatalog / store / acquisition / automation
 module and then actually normalizes small HTML, DOCX and PPTX bytes, replays
 their locators, and runs the shared document-understanding chain.  The same
 probe runs unblocked: it must produce the identical observation *and* must not
-load those runtime modules on its own.
+load those runtime modules on its own.  A default-deny allowlist additionally
+fails any *other* ``company_wiki`` module that ever joins the import graph, so
+a runtime owner under a name the denylist does not know yet cannot slip
+through.
 """
 
 from __future__ import annotations
@@ -37,6 +40,16 @@ RUNTIME_PREFIXES = (
     "company_wiki.source_registry",
 )
 RUNTIME_EXACT = ("sqlite3",)
+# Default-deny counterpart: whatever else happens, only these company_wiki
+# subtrees may load.  A future runtime module under a name no denylist prefix
+# knows about still fails the probe.
+MODEL_PREFIXES = (
+    "company_wiki.document_model",
+    "company_wiki.document_normalization",
+    "company_wiki.document_understanding",
+    "company_wiki.resource_budget",
+    "company_wiki.source_contract",
+)
 
 
 class RefuseRuntime(importlib.abc.MetaPathFinder):
@@ -221,8 +234,16 @@ leaked = sorted(
     if any(name == prefix or name.startswith(prefix + ".") for prefix in RUNTIME_PREFIXES)
     or name in RUNTIME_EXACT
 )
+unexpected = sorted(
+    name
+    for name in sys.modules
+    if name.startswith("company_wiki.")
+    and not any(
+        name == prefix or name.startswith(prefix + ".") for prefix in MODEL_PREFIXES
+    )
+)
 print("PROBE_JSON:" + json.dumps(
-    {"observation": observation, "leaked": leaked},
+    {"observation": observation, "leaked": leaked, "unexpected_modules": unexpected},
     sort_keys=True,
     ensure_ascii=True,
 ))
@@ -293,6 +314,10 @@ def test_document_layer_normalizes_and_understands_without_catalog_runtime():
     assert observation["understanding"]["route_profile"]
     assert observation["understanding"]["package_count"] >= 1
     assert result["leaked"] == []
+    # Belt-and-braces: nothing outside the document layer's own subtrees (plus
+    # resource_budget and source_contract) may join the import graph, even
+    # under a name the denylist above does not know yet.
+    assert result["unexpected_modules"] == []
 
 
 def test_isolated_observation_matches_unblocked_runtime():
@@ -301,6 +326,9 @@ def test_isolated_observation_matches_unblocked_runtime():
 
     # Nothing may load catalog/store/acquisition/automation even when it could.
     assert normal["leaked"] == []
+    # The allowlist holds in both modes, and the loaded module set is identical.
+    assert normal["unexpected_modules"] == []
+    assert isolated["unexpected_modules"] == normal["unexpected_modules"]
     # Same bytes, same units, same locators, same reading plan either way.
     assert isolated["observation"] == normal["observation"]
 
