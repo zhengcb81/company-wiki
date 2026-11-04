@@ -1,4 +1,4 @@
-> **历史复核快照（2026-11-02）。** 当时列出的六项 OPEN 已在 2026-11-04 按 D4 收口；当前状态与逐项结果见 [D4 closeout](../d4-closeout-20261104/README.md)。下方保留当时只读发现、原因和原始卡输入，不代表当前仍未实施。
+> **历史复核快照（2026-11-02）。** 当时列出的六项 OPEN 已在 2026-11-04 按 D4 范围收口，见 [D4 closeout](../d4-closeout-20261104/README.md)。随后同日的全局复核又发现 D5 解析职责边界缺口；因此 D4 通过不等于全局解耦完成。当前状态以根计划 [CURRENT_STATUS](../../CURRENT_STATUS.md) 和 [D5 卡](../decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md) 为准。下方只保留 D4 前的历史只读发现，不代表当前仍未实施。
 
 # 解耦全面复核（2026-11-02）
 

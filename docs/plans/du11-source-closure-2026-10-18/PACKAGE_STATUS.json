@@ -221,6 +221,6 @@
     "entry": "../document-understanding-2026-10-13/README.md",
     "meaning": "Earlier DU/P1-P4 inputs closed/handed into current stream; read original reception receipts for exact card scope, do not re-dispatch from oldREADY text"
   },
-  "critical_path": "立即执行T4 source-note-parent与SEM-QUAL-01根因修复；单H1真实复验；然后新版真实摘要、paid中断/同跨run缓存恢复与RF实际采用。",
-  "warning": "D4 ROOT离线组合27/27零skip通过，仅验收六项解耦缺口；不代表真实摘要/cache/RF业务链或固定公司循环已完成。"
+  "critical_path": "先完成D5全局解耦：外部harness实施CWP pathless规范化文档port和StockWiki三入口消费；ROOT收敛FF默认provider旧canonical_path路由，完成跨仓组合E2E和最终独立审查。全部通过后才恢复T4/SEM及其它主线。",
+  "warning": "D4 ROOT离线组合27/27零skip通过，仅验收D4冻结范围；D5全局解耦仍OPEN，真实摘要/cache/RF业务链或固定公司循环也尚未完成。"
 }

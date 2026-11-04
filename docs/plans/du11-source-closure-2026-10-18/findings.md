@@ -149,3 +149,14 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 - **版本未绑定根因：** ET 正常入口模块在仓库根级，不在原 `code_version` pathspec。现在枚举 Git 根级 Python 文件并作精确哈希；运行前/后快照不一致会失败。
 - **跨仓测试夹具耦合：** FF→ET→CWP测试从 ET/tests 导入 fixture；现改由 CWP integration 临时目录生成 fake provider，保留真实 ET main/supervisor/CWP import/cache路径，增加 source_ref SHA/source_id 与原始响应字节一致断言。该测试仍使用 ET 私有 worker注入替换 provider session，不能宣称验证 ET 的正常 provider 配置加载流程。
 - ROOT/独立审查认为以上修复已封闭 D4 false-pass 风险；最终强制组合有27项通过和零skip。
+
+
+## 2026-11-04 — D4后全局解耦复核发现解析职责遗漏
+
+- D4 六项仍按其冻结范围 CLOSED；这次不是推翻 D4 交付。新的范围复核发现“路径虚拟化”未覆盖“规范化解析产物由谁提供”。
+- StockWiki 默认 provider 路径已取 CWP 路径无关的 source ref/字节，但 `ProviderSourceContext.parse_excerpt` 和 `localize` 后续把 PDF/DOCX/XLSX 交给 StockWiki `documents.py`；`enrich-evidence` 与 `extract-document-signals` 同样本地解析。此事实与 CWP 已拥有的文档规范化/阅读能力重叠；其影响是解析策略、定位和结果版本可能在两层分叉。
+- CWP `SourceExportBundleV2` 当前为 manifest + EvidenceSpan；可独立 grounding 的原文跨度限定 `text/plain`。StockWiki 默认流程没有消费 CWP parser-owned 的规范化表示，现有 raw SourceRef reader 不足以证明解析职责已集中。
+- StockWiki 的常规公司配置仍保存 CWP 的绝对 `doc_root`，`sources.source_context` 也保留 direct-library legacy fallback；三个常规 CLI 已要求 provider 或显式导入适配器。属于明确兼容路径/配置残留，不应冒充默认日常故障，但尚未达到“上层不关心物理目录”的全局目标。
+- FF 仍支持 `source_ref_v2=False` 的旧本地文件 handle；兼容请求可进入 `validate_handle(canonical_path=...)`。RF 当前 `prepare_source` 路由固定为 SourceRef v2，`_prepare_legacy_source` 只留历史离线回放；不要把它们写成等价的生产路径。
+- 决定：新增 D5 P1 `CWP processed-document port + StockWiki consumption`，由一个 harness 在互斥 CWP/StockWiki worktree 实施；ROOT 冻结接口、单独收敛 FF 旧路径、负责跨仓组合和最终独审。D5 全部验收完成前，T4/SEM、真实摘要、缓存恢复、RF采用和固定公司循环继续暂停。
+- 不在此发现中预判 D5 已实现；下一份计划固定 wire、parser owner、三条 StockWiki入口、离线/真实隔离E2E和独立交付审查。测试只在实施/总控验收阶段运行，本轮没有改产品代码或跑产品测试。

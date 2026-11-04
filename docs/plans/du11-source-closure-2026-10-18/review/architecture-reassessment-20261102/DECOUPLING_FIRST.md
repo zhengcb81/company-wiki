@@ -1,10 +1,10 @@
 # 先完成解耦，再按模块派发（2026-11-02）
 
-> 2026-11-02后续全面复核：已发布成果与测试事实保留，但六项真实入口/边界遗漏使全面完成声明不成立。当前以[复核和D4细则](../decoupling-recheck-20261102/README.md)及CURRENT_STATUS为准；业务模块暂不派发。
+> 2026-11-04继续复核：D4 六项成果与测试仍按其冻结范围有效，但后续确认通用解析职责仍存在 CWP→StockWiki 分叉、FF 仍有旧 path-handle 兼容入口。**全局解耦未验收；任何其他主线继续暂停。** 当前以 [D5 卡](../decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md) 和 CURRENT_STATUS 为准。
 
 用户最新决定：不在半解耦状态下推进外包。**本文件取代上一轮“RF/AUDIT可立即离线开工”的调度建议。** 两仓PWF保留为待激活的业务清单，暂不派发、不实施其中业务整改。ROOT集中负责跨仓解耦，内部只读调查与独立质量审查可以并行，不等于提前启动模块施工。
 
-状态：D0–D3工程已完成。39项当前组合零跳过、三技能入口部署实测、真实原文只读与[最终独审](../decoupling-20261102/independent/review.md)通过。发布与CI以[实际记录](../decoupling-20261102/release.md)为准。下列D0–D3是原验收定义，当前唯一状态仍在 ../../CURRENT_STATUS.md/json；没有提前派发或另建目标。
+状态：D0–D3 工程与 D4 补漏均按各自定义验收完成；这些结果证明当时所覆盖的边界，不证明所有模块边界都完整。下列 D0–D3 保留为已完成的历史验收定义。当前全局状态为 D5 OPEN；唯一执行入口仍在 ../../CURRENT_STATUS.md/json。
 
 ## 完成的含义
 
@@ -75,7 +75,36 @@
 
 ROOT先完成有界组合测试并记录参与版本，再由未实施代码的独立agent一次集中审查代码边界、本仓隔离测试和实际组合结果；发现问题同owner修复、只补受影响增量复验，随后正常提交/推送/必要定点部署。不另加测试设计预签收，不让最终组合结果落在独审之外。记录一次参与的commit、各仓测试、集成结果和残余风险即可，不再复制多份巨型收据。
 
-**D3通过之前，RF/AUDIT业务计划状态始终为DEFERRED_UNTIL_DECOUPLING，不能因为本仓任务看似独立就提前派发。** D3通过后才按真实接口重新校准各仓PWF并标READY；这由工程事实驱动，不另等用户逐项授权。
+原规则为 D3 通过前 RF/AUDIT 始终 DEFERRED；D3/D4 通过后仍发现了 D5 全局边界缺口。当前执行规则是：**D5 全局验收通过之前，RF/AUDIT 和所有其它主线继续 DEFERRED**，不能由早期 D3/D4 结果提前派发。
+
+## D5：解析责任归一和模块独立性的根因验收（当前 OPEN）
+
+本轮问题不是再加一个薄 facade 就算完成。根因是：生产者拥有通用解析实现，却没有把足够完整、可定位、可版本化的规范化产物作为消费者正式合同；消费者为了完成自己的业务流程，重新读/解析生产者的原文件。因此物理路径隐藏后仍然可能跨层重复实现。D5 要同时验证 producer ownership、consumer isolation 与真实组合调用。
+
+### 责任边界
+
+- CWP 独占：原件路径/verified-open、文档格式处理、PDF/OCR/Office 通用解析、规范化页段表格/工作表结构、locator、解析版本与 extraction quality。
+- StockWiki 独占：在 CWP 单元上提取业务意义、公司经营信号和投资研究语义；它不得为 provider 原件另跑通用 PDF/Office parser，也不得把来源资料质量说成现实事实验证。
+- FF 独占：下载/provider 流程与 CWP SourceRef v2 acquisition port 的适配。默认 provider 路径不应给消费层 canonical_path；历史本地导入只可保持为明确、隔离的导入适配。
+- RF、ET、AUDIT 分别只消费其公开契约；不把 CWP 内部 parser/cache/数据库复制给下游。
+
+### 模块独立测试合同
+
+1. CWP 本仓测试不需要 StockWiki/FF 源码或数据库；它覆盖 parser、规范化、locators、artifact cache 和 producer wire。
+2. StockWiki 本仓测试不需要 CWP checkout、CWP PYTHONPATH、真实 catalog 或本地原件；fake processed-document port/便携 fixture 覆盖业务语义与来源绑定。
+3. FF 本仓测试不需要 CWP 私有模块或默认邻仓路径；只验证公开请求、adapter、native 响应和实际 budget。历史 local import 单独测，不能通过默认路径隐式触发。
+4. 每个模块的 API/CLI adapter 只将本仓领域请求翻译为公开 DTO；调用方不导入对方内部 class/function，也不解释对方数据库或 cache schema。
+5. 跨仓行为只在显式组合测试中验证：同一便携合同 fixture 兼容性、临时 catalog 的公开 CLI E2E、store root/cwd 可替换、错误/partial/unsupported 传播。该组合测试在大节点运行，不复制进每个模块的日常全量测试。
+6. 核心合同字段与 optional diagnostic 分开；核心 source/hash/version/locator/status 错误必须准确处理，可选观测故障不能推翻独立验证的正常结果。不得复加固定文件字节/收据大小/任意层人工许可门。
+
+### D5 次序和验收
+
+1. 外部单一 harness 按 [D5 实施卡](../decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)在独立 worktree 实现 CWP pathless normalized-document port 与 StockWiki 三入口消费，并在交付前完成一次独立整体审查。
+2. ROOT 在 FF 仓完成旧 path handle 全调用方审计/默认路由收敛；ROOT 不让此项与外包同目录或同文件域。
+3. ROOT 一次组合验收：CWP/StockWiki/FF 独立套件、当前合同 fixture、真实临时 producer→consumer 端到端、原件 SHA/隔离恢复。验证改变 CWP 实现时 StockWiki 单仓测试仍可独立跑，反向同理；只有实际合同才在组合测试耦合。
+4. ROOT 做一次最终大节点独审并修复问题。只有跨仓公开合同边界、默认入口、独立测试、组合 E2E、最终独审与发布证据全部通过，全局解耦才为 ACCEPTED。之前状态持续 OPEN，T4/SEM 和其他主线不启动。
+
+ROOT 再次审视所有跨仓依赖时，若发现与 D5 不同的真实生产耦合，记录实际入口和归属并纳入 D5 验收或新增一个有界补漏；不得因为“看起来不够完美”扩成无限重构，也不得把未覆盖入口标成已通过。
 
 ## 解耦后恢复的原任务
 

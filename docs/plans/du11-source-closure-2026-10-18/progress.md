@@ -356,3 +356,11 @@ CWP HEAD `e7469d68` 的 `--d4-final`：27 passed、0 skipped、0 failed，46.623
 CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试代码提交 `2449df4a`（无 remote），剩余 portable tests 42 passed；StockWiki `23d84586` 本地主线（无 remote）。RF D4 代码提交 `96713029`，收口后 PWF-only 提交 `90c562ac` 已推送；AUDIT PWF-only 提交 `3589b69` 已本地提交（无 remote）。FF `bf7e1dab` 已推送。未改生产原件、API key、provider 配置或既有 WIP。GitHub exact-head CI #41919818618 与 Source system integration #41919818624 均成功（head `e7469d68`）。
 
 下一步恢复 T4 source-note-parent + SEM-QUAL-01 根修，再用单份真实 H1 检查；真实摘要、缓存恢复和 RF 实际采用及固定公司循环仍 OPEN。
+## 2026-11-04 — D5 全局解耦优先级与施工卡
+
+- 本记录覆盖在同日 D4 收口记录之后；它取代该记录中的“T4 为下一步”计划状态。
+- 用户明确要求先把解耦从根因做完并验收，再继续其它主线。当前主线 T4/SEM、真实摘要、缓存恢复、RF 采用与公司循环一律暂停。
+- 复核结论：D4-01～06 按原范围仍 CLOSED；不能把此前限定范围的通过外推成全局解耦完成。新确认 CWP 通用解析产物尚未作为完整的 pathless 公共合同供 StockWiki 消费，StockWiki 三个 provider 入口可能本地重解析 PDF/Office；FF 还保留 legacy canonical_path 路由。
+- PWF 已把 D5 写成当前唯一实施节点：一个外部 harness 负责 CWP parser-owned pathless port + StockWiki 三入口消费者，ROOT 负责 FF 旧路径调用方审计/收敛、跨仓组合 E2E 和最终大节点独审。
+- 新外包卡：[D5-CWP-STOCKWIKI-PROCESSED-READING.md](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)。卡明确模块写域、公开合同要素、单仓隔离测试、临时环境端到端、真实只读样本/原件 SHA、scratch 恢复、交付前独立审查和 ROOT 接收接口。
+- 本轮只更新 PWF/交接/卡，无产品代码修改，未运行产品测试，未提交/推送。

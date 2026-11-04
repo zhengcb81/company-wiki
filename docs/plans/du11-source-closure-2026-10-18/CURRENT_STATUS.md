@@ -1,8 +1,10 @@
-# 当前状态 — D4 六项解耦补漏已关闭，恢复 T4/SEM 主线
+# 当前状态 — D4 范围验收通过；D5 全局解耦仍 OPEN，主线暂停
 
 唯一入口：[当前状态](CURRENT_STATUS.md) / [机器状态](CURRENT_STATUS.json)；交接：[HANDOFF](HANDOFF.md)；完整计划：[task_plan](task_plan.md)。
 
-**截至 2026-11-04：D4-01～D4-06 已完成并通过总体验收。** 这关闭的是 2026-11-02 复核列出的六项解耦缺口；不代表真实公司摘要、缓存恢复、RF 实际采用或固定公司审查循环已完成。
+**截至 2026-11-04：D4-01～D4-06 按原范围完成并通过总体验收，但全局解耦尚未完成。** 后续复核确认 CWP→StockWiki 的通用 PDF/Office 解析职责仍可能分叉，FF 仍保留旧 `canonical_path` 兼容分支。用户已明确要求：先把解耦工作完整实施并验收，再继续其他主线。因此 T4/SEM、真实摘要、缓存恢复、RF 实际采用和公司循环当前全部暂停。
+
+当前唯一工作是 [D5 全局解耦](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)：外部单一 harness 负责 CWP pathless 规范化文档 port 与 StockWiki 三入口消费；ROOT 负责 FF 旧路径收敛、跨仓强制组合 E2E 和最终独审。**D5 尚未开始实施，施工卡已就绪。**
 
 ## D4 已完成
 
@@ -23,6 +25,6 @@ CWP D4 合并和 ROOT 测试提交 `e7469d68` 已推到 `origin/master`；push h
 
 ## 当前唯一下一步
 
-恢复既有 **T4 source-note-parent + SEM-QUAL-01** 根因修复：先冻结去公司化父链及计划/条件不被改写为 actual 的正反例，在所属 source owner 根修，再做单份真实 H1 定点复验。通过后才继续新版真实摘要、付费中断/同跨 run 缓存恢复与同一 artifact 的 RF 实际采用；不重跑超时整批。RF/AUDIT 业务 PWF 已统一为 **READY_NOT_STARTED**，不自动派发、不启动公司循环。
+启动 D5 卡并按卡交付；ROOT 只处理独立的 FF 旧路径责任，不恢复其他主线。D5 两仓实现、FF 默认路径验证、跨仓组合测试、原件/测试目录恢复与最终独立审查全部通过后，才恢复既有 **T4 source-note-parent + SEM-QUAL-01**；后续再按 task_plan 顺序推进真实摘要、缓存恢复及 RF 实际采用。RF/AUDIT 业务 PWF 仍为 **READY_NOT_STARTED**，不得提前派发或启动公司循环。
 
 三表输出容量、local_prepare扩展兼容、Sina provider泛化和组合CI触发范围另列能力限制，不冒真实生产故障，也不扩成额外阻塞。原件/生产配置/DB/封存与已有WIP保留；Dayu/IQS/Dashboard不动。只在大节点独审，不重复超时全量测试。

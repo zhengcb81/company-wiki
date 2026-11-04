@@ -1,6 +1,12 @@
-# 当前交接 — D4 已收口，接续 T4/SEM
+# 当前交接 — D4 范围已收口；先完成 D5 全局解耦
 
 PLAN_ID=`du11-source-closure-2026-10-18`；唯一状态入口 [CURRENT_STATUS](CURRENT_STATUS.md) / [机器状态](CURRENT_STATUS.json)，主线细节见 [task_plan](task_plan.md)。
+
+## 当前交接给谁、做什么
+
+当前唯一开放节点是 [D5-CWP-STOCKWIKI 外包卡](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)。可交给一个 harness，在各自独立 worktree 中完成 CWP 的 pathless 规范化文档 port 与 StockWiki 的三个 provider 默认入口消费。D4 验收仍有效，但只覆盖原定义范围；尚不能据此恢复 T4/SEM 或任何其它业务主线。
+
+ROOT（本线程）独占 FF 旧 `canonical_path` 分支排查/收敛、CWP ROOT 组合测试、跨仓最终验收与独立总审。外包实施和 ROOT 工作都完成、交付版本一致、隔离测试恢复后，才把全局解耦标为完成。不得改写 RF/FF/ET/AUDIT/StockWiki 其他未提交 WIP。
 
 ## 已完成节点
 
@@ -12,11 +18,11 @@ D4-01～D4-05 已接收、独审并合入各自主线；ROOT 完成 D4-06 AUDIT 
 - StockWiki D4-01 本地主线 `23d84586`；无 remote。AUDIT D4 测试迁移 commit `2449df4a`、PWF-only commit `3589b69`；均本地，无 remote。保留这些仓现有未跟踪文件。
 - ET 没有 D4 产品代码改动；保留其现有未跟踪产物。
 
-## 下一步执行
+## 唯一下一步
 
-1. 先读 [task_plan P3/T4](task_plan.md) 与 [T4 source-note-parent 细则](review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md)，确认旧 D3 和已通过 D4 证据不重跑。
-2. 冻结父链和 qualifier 正反例；在 source owner 修复 parent attribution 与计划/条件限定语丢失根因，不加公司特定规则或新授权门。
-3. 只跑影响面相关测试 + 一次单真实 H1 复验，保存原文 SHA、命中/遗漏证据、cache/费用状态；关键节点做集中独审。
-4. 通过后更新唯一 PWF；继续新真实摘要、缓存中断/恢复、同摘要进入 RF 原生参数与报告。主线未完成前不标全项目目标完成。
+1. 启动 D5 外包卡；实施者按卡完成 CWP→StockWiki 解析产物合同、三个消费入口、隔离真实样本 E2E 和交付前独立审查，问题全部修好后再交接。
+2. ROOT 独立审计 FF 旧 path handle 调用方，确保默认 provider 流程只经 SourceRef v2；保留必要的明确本地导入 adapter，不做无证据的兼容删除。
+3. ROOT 用公开入口完成 D5 跨仓组合 E2E 与一次独立总审，核对 CWP/StockWiki/FF 实际 HEAD、测试、原件 SHA 与测试目录恢复；问题按 owner 根修并复验。
+4. 只有 D5 外包交付、FF 收敛、组合验收、最终独审全部通过，才更新为全局解耦 ACCEPTED，随后恢复 T4/SEM。D5 期间不做真实摘要、缓存恢复、RF 采用或公司循环。
 
-RF/AUDIT 业务计划现为 READY_NOT_STARTED：RF PWF commit `90c562ac` 已推送，AUDIT PWF commit `3589b69` 已本地提交（无 remote）。D4 关闭仅解除延期条件，不等于自动开工。保持原件和其他仓现有 WIP，不改 Dayu/IQS/Dashboard。
+RF/AUDIT 业务计划仍保留为 READY_NOT_STARTED 的工作清单，但全局调度状态是 DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING；不会提前开工。RF PWF commit `90c562ac` 已推送，AUDIT PWF commit `3589b69` 已本地提交（无 remote）。保持原件和其他仓现有 WIP，不改 Dayu/IQS/Dashboard。

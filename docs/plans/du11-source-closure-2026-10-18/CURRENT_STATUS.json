@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "d4_closed_t4_sem_next",
+  "execution_mode": "d5_global_decoupling_before_any_other_mainline",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -32,18 +32,23 @@
       "task": "D4-01..06 six decoupling findings closed; ROOT 27-case five-consumer combination passed with zero skips"
     },
     {
+      "id": "P0-E",
+      "status": "OPEN_D5_GLOBAL_DECOUPLING",
+      "task": "CWP owns normalized document parsing; StockWiki consumes the pathless document port; ROOT closes FF legacy path and accepts the cross-repository boundary before other mainline resumes"
+    },
+    {
       "id": "P1",
-      "status": "HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
+      "status": "PAUSED_UNTIL_D5_GLOBAL_DECOUPLING; HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
       "task": "Current Huali15/12atoms and Berkshire73/10atoms; actual activation/same/cross cache PASS;15Berkshire unprocessed and full-source partial remain explicit"
     },
     {
       "id": "P2",
-      "status": "HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
+      "status": "PAUSED_UNTIL_D5_GLOBAL_DECOUPLING; HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
       "task": "Same new artifact actually consumed by RF native parameters/formula"
     },
     {
       "id": "P3",
-      "status": "R4_FOUR_REVIEWS_ENGINEERING_REMEDIATION_ACTIVE_REAL_COMPANY_OPEN",
+      "status": "PAUSED_UNTIL_D5_GLOBAL_DECOUPLING; R4_FOUR_REVIEWS_ENGINEERING_REMEDIATION_ACTIVE_REAL_COMPANY_OPEN",
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
@@ -72,6 +77,7 @@
     }
   },
   "current_limits_to_close": [
+    "D5 global decoupling: CWP parser-owned normalized-document port, StockWiki three default consumer entries, FF legacy path route, isolated module tests and ROOT combination acceptance",
     "SEM-QUAL-01: current v7 and legacy may accept planned/conditional source rewritten as actual; source/claim/locators frozen, generic qualifier binding required before real summary.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
     "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
@@ -84,10 +90,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "D4_CLOSED_T4_SEM_QUAL_NEXT",
+  "project_status": "D5_GLOBAL_DECOUPLING_OPEN_MAINLINE_PAUSED",
   "as_of_date": "2026-11-04",
-  "observed_at_utc": "2026-11-04T22:07:01Z",
-  "next_action": "修复T4 source-note-parent与SEM-QUAL-01来源限定根因，冻结通用反例后做单份真实H1定点复验；随后新版真实摘要、缓存恢复、RF实际采用和固定公司循环仍待完成。",
+  "observed_at_utc": "2026-11-04T23:14:26Z",
+  "next_action": "先完成D5：外部单一harness实施CWP规范化文档port和StockWiki三入口消费；ROOT收敛FF默认provider旧canonical_path路由并完成跨仓组合E2E与最终独审。全部验收后才恢复T4/SEM和其它主线。",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -198,7 +204,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "ROOT恢复T4来源父链和SEM-QUAL-01限定语义：先按冻结正反例与单个真实半年报修根因，再做新版真实摘要、缓存恢复与实际RF采用；RF/AUDIT仓内计划已就绪，仍未派发。",
+    "current_work": "全局D5解耦优先：CWP pathless规范化文档port + StockWiki三入口消费由一个外部harness负责；ROOT负责FF legacy canonical_path闭合、跨仓组合E2E和最终独立审查。T4/SEM及其他主线在D5全验收前暂停。",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -210,14 +216,14 @@
   "next_stages": [
     {
       "id": "decoupling-first",
-      "status": "D4_CLOSED_ACCEPTED",
+      "status": "D5_GLOBAL_DECOUPLING_OPEN",
       "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
       "evidence": "review/decoupling-20261102/independent/review.md",
       "recheck": "review/decoupling-recheck-20261102/README.md"
     },
     {
       "id": "residual-gate-families",
-      "status": "D3_ORIGINAL_BUDGET_FIXED_D4_FF_DIAGNOSTIC_VETO_OPEN",
+      "status": "D4_DIAGNOSTIC_VETO_ACCEPTED; D5_BOUNDARY_ACCEPTANCE_OPEN",
       "plan": "review/architecture-reassessment-20261102/README.md",
       "sequencing": "Included in decoupling resource/codec ownership, not a separate parallel lane.",
       "evidence": "review/decoupling-20261102/independent/review.md",
@@ -225,28 +231,28 @@
     },
     {
       "id": "T4-source-parent",
-      "status": "OPEN",
+      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING",
       "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md"
     },
     {
       "id": "SEM-QUAL-01",
-      "status": "OPEN_REAL_SEMANTIC_DEFECT_BEFORE_REAL_SUMMARY",
+      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; SEMANTIC_DEFECT_STILL_OPEN",
       "evidence": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/cwp-contract-followup.json",
       "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md"
     },
     {
       "id": "C-source",
-      "status": "H1_V4_12_REQUIRED_RECALLED_INDEPENDENT_PARENT_CONTEXT_P2_OPEN",
+      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; H1_V4_12_REQUIRED_RECALLED_INDEPENDENT_PARENT_CONTEXT_P2_OPEN",
       "evidence": "review/architecture-quality-20261101/implementation-results/C-source-v4-independent.md"
     },
     {
       "id": "C-summary-cache-RF",
-      "status": "OPEN",
+      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; OPEN",
       "preparation": "review/architecture-quality-20261101/implementation-results/C-preparation.md"
     },
     {
       "id": "R4-company-and-generalization",
-      "status": "OPEN",
+      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; OPEN",
       "scope": "All6R4 issues, original/new companies, research quality/detection evolution, fixed8 and3clean obligations"
     },
     {
@@ -404,12 +410,12 @@
   },
   "gate_rejection_followup": {
     "status": "ENGINEERING_COMPLETE_EXACT_CI_GREEN_REAL_C_OPEN",
-    "priority": "P0_BEFORE_T4_CLOSED_ENGINEERING",
+    "priority": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING",
     "plan": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/plan.md",
     "closure": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md"
   },
   "architecture_reassessment": {
-    "status": "D4_OWNER_FIXES_ACCEPTED_T4_SEM_NEXT",
+    "status": "D5_GLOBAL_DECOUPLING_OPEN",
     "evidence": "review/architecture-reassessment-20261102/README.md",
     "coordination": "review/architecture-reassessment-20261102/COORDINATION.md",
     "new_confirmed_families": [
@@ -417,7 +423,7 @@
       "final_import_budget"
     ],
     "active_writers": {
-      "ROOT": "D4 closed; T4/SEM next; no module harness active"
+      "ROOT": "D5 owns FF legacy-route closure, cross-repo integration and final review; T4/SEM and all other mainline paused"
     },
     "prepared_not_dispatched": [
       "revenue-forecast",
@@ -425,12 +431,12 @@
     ],
     "code_changes": true,
     "real_provider_calls": 0,
-    "decoupling": "D3 selected ports passed; D4-01..06 root causes are fixed and accepted in the 27-case zero-skip combination",
-    "dispatch_status": "D4_CLOSED; RF_AUDIT_READY_NOT_STARTED; T4_SEM_ROOT_OWNED",
+    "decoupling": "D3 and D4 scoped results remain accepted; global decoupling is OPEN because CWP normalized-document output is not yet the sole parser boundary for StockWiki and FF retains a legacy canonical_path route",
+    "dispatch_status": "D5_CARD_READY; FF_LEGACY_ROOT_OWNED; ALL_OTHER_MAINLINE_PAUSED",
     "recheck": "review/decoupling-recheck-20261102/README.md"
   },
   "decoupling_first": {
-    "status": "D4_CLOSED_ACCEPTED",
+    "status": "D5_GLOBAL_DECOUPLING_OPEN",
     "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
     "completed": [
       "D0 dependency ownership",
@@ -439,8 +445,12 @@
       "D3 39 current integration tests, installed runtime, real readonly and independent review",
       "Normal mainline commits/pushes, exact remote CI and three skill entry points"
     ],
-    "open": [],
-    "module_dispatch": "RF_AUDIT_READY_NOT_STARTED; T4_SEM_ROOT_OWNED; no automatic business dispatch",
+    "open": [
+      "D5 CWP pathless normalized-document port and StockWiki three-entry consumption",
+      "ROOT FF legacy canonical_path caller audit and default-route closure",
+      "ROOT cross-repository integration and final independent review"
+    ],
+    "module_dispatch": "ALL_MAINLINE_DEFERRED_UNTIL_D5_GLOBAL_ACCEPTANCE",
     "requires_user_reapproval": false,
     "business_tasks_retained": true,
     "independent_review": "review/decoupling-20261102/independent/review.md",
@@ -454,13 +464,18 @@
   "decoupling_recheck": {
     "report": "review/decoupling-recheck-20261102/README.md",
     "evidence": "review/decoupling-recheck-20261102/evidence.json",
-    "status": "AUDIT_FINDINGS_IMPLEMENTED_AND_ACCEPTED_BY_D4",
-    "open": [],
+    "status": "D5_ROOT_CAUSE_REMEDIATION_PLANNED",
+    "open": [
+      "CWP owns normalized document structure and exposes a pathless versioned reader",
+      "StockWiki provider business entries stop reparsing CWP PDF/Office originals",
+      "FF default provider flow no longer reaches the legacy canonical_path handle",
+      "Module-isolated tests and ROOT composition prove the public boundary"
+    ],
     "product_changes_this_review": 0,
     "paid_calls": 0
   },
   "implementation_packages": {
-    "status": "DELIVERED_AND_ROOT_INTEGRATED_ACCEPTED",
+    "status": "D4_ACCEPTED; D5_CARD_READY_FOR_EXTERNAL_HARNESS",
     "overview": "review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md",
     "implementation_cards": [
       "D4-01-stockwiki-source-virtualization.md",
@@ -470,7 +485,19 @@
       "D4-05-ff-process-diagnostics.md"
     ],
     "root_owned_final_integration": "review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md",
-    "reason_root_owns_integration": "ROOT integrated the five delivered implementation cards and consolidated AUDIT producer tests; accepted evidence is in d4_closeout."
+    "reason_root_owns_integration": "ROOT integrated the five delivered implementation cards and consolidated AUDIT producer tests; accepted evidence is in d4_closeout.",
+    "current_package": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md"
+  },
+  "d5_decoupling": {
+    "status": "PLAN_AND_CARD_READY_NOT_IMPLEMENTED",
+    "priority": "P0_BEFORE_ALL_OTHER_MAINLINE",
+    "external_owner": "one harness owns CWP producer port and StockWiki three-entry consumer in separate worktrees",
+    "root_owner": "FF legacy canonical_path route audit/closure, CWP root integration, cross-repo E2E and final independent review",
+    "acceptance": "CWP/StockWiki/FF boundaries, standalone tests, public-contract composition, real read-only sample, scratch restoration and final review all pass",
+    "resume_mainline_only_after_acceptance": true,
+    "card": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md",
+    "code_changes_this_update": 0,
+    "product_tests_run": 0
   },
   "d4_closeout": {
     "status": "COMPLETE_ACCEPTED",
@@ -516,9 +543,9 @@
     }
   },
   "business_plan_status": {
-    "revenue_forecast": "READY_NOT_STARTED",
-    "revenue_forecast_audit": "READY_NOT_STARTED",
-    "note": "D4 closure removes the deferral only; do not auto-dispatch these business plans."
+    "revenue_forecast": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING",
+    "revenue_forecast_audit": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING",
+    "note": "D4 scoped closure does not complete global decoupling; these business plans remain deferred until D5 global acceptance."
   },
   "historical_publication": {
     "company-wiki-2026-11-02": {

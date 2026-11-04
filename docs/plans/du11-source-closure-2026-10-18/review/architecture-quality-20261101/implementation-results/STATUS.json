@@ -237,7 +237,7 @@
       65
     ],
     "evidence": "C-source-v4-independent.json",
-    "next": "T4-source-note-parent-plan.md"
+    "next": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; then T4-source-note-parent-plan.md"
   },
   "checklist_verification": {
     "status": "COMPLETE_WITH_REPAIRED_RESIDUALS_TWO_OPTIONAL_AND_REAL_ACCEPTANCE_OPEN",
@@ -284,9 +284,9 @@
     "next_owner": "Existing T4/R4 source/qualification owner; no company-specific keyword patch and no raised quota."
   },
   "latest_reassessment": {
-    "status": "NEW_RESIDUALS_OPEN",
+    "status": "D5_GLOBAL_DECOUPLING_OPEN",
     "report": "review/architecture-reassessment-20261102/README.md",
-    "next_action": "先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。",
+    "next_action": "D3/D4此前按范围完成，但2026-11-04复核发现D5全局解耦缺口。先完成CWP pathless规范化文档port、StockWiki三入口消费、ROOT FF旧路径收敛、跨仓组合E2E和最终独审；之前T4/SEM及其它业务工作全部暂停。详见根计划CURRENT_STATUS与D5施工卡。",
     "note": "Prior item dispositions remain historical scoped evidence, not a global absence proof.",
     "dispatch_status": "DEFERRED_UNTIL_DECOUPLING"
   }

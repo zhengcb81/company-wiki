@@ -2,6 +2,8 @@
 
 本表只汇总已审计的近期卡，**不是项目总完成率、所有历史卡总数或所有仓全部分支盘点**。机器表为[PACKAGE_STATUS.json](PACKAGE_STATUS.json)，主线只看[CURRENT_STATUS](CURRENT_STATUS.md)。工程接收、真实产品验收和整家公司研究是三种不同结果。
 
+当前主线闸位：D4 仅按原范围验收；全局解耦 D5 尚未实施。现在唯一可交给 harness 的卡是 [D5-CWP-STOCKWIKI](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)，ROOT 另负责 FF 路由和组合验收。其它主线保持暂停，详见 CURRENT_STATUS。
+
 | 任务卡 | 已核状态（卡内范围） | 依据 |
 |---|---|---|
 | W09-RF-RESEARCH | MERGED_PUSHED_INSTALLED | [证据](review/r1-w09-reception-20261023/publication/publication-final.json) |
