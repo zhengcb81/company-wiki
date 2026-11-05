@@ -36,7 +36,6 @@ from typing import Any
 from company_wiki.automation.narrative_contracts import SourceRefValue
 from company_wiki.document_normalization import (
     PARSER_NAME as DN_PARSER_NAME,
-    PARSER_VERSION as DN_PARSER_VERSION,
     NormalizationError,
     NormalizationLimits,
     UnsupportedFormatError,
@@ -236,8 +235,12 @@ def _direct_lane_mime(suffix: str, mime_type: str) -> str:
     return sorted(supported)[0]
 
 
-def _parse_direct_lane(data: bytes, *, ref: SourceRef, mime_type: str) -> _Outcome:
+def _parse_direct_lane(
+    data: bytes, *, ref: SourceRef, mime_type: str, format_name: str,
+) -> _Outcome:
     """Parse DOCX/HTML/PPTX with the pure document_normalization owner."""
+    from company_wiki.document_normalization.units import parser_version_for_format
+
     try:
         document = normalize_document(
             data,
@@ -263,7 +266,7 @@ def _parse_direct_lane(data: bytes, *, ref: SourceRef, mime_type: str) -> _Outco
     structure = document.structure
     units: list[dict[str, Any]] = []
     quality_flags: set[str] = set()
-    parser_version = DN_PARSER_VERSION
+    parser_version = parser_version_for_format(format_name)
     for unit in structure.units:
         locator = unit.metadata.get("source_locator") or unit.coordinates.locator()
         if not isinstance(locator, str) or not locator:
@@ -500,6 +503,7 @@ def read_processed_document(
             content.data,
             ref=ref,
             mime_type=_direct_lane_mime(suffix, ref.mime_type),
+            format_name=suffix.lstrip("."),
         )
     else:
         try:
