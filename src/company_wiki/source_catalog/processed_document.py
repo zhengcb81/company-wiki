@@ -19,7 +19,7 @@ machinery (``normalizer._run_parser_isolated`` defaults).
 The response never contains a physical path, storage root, SQLite detail or
 neighbour-repo location.  Legacy ``SourceManifest.to_dict()`` (which carries
 ``original_path``) is never emitted; the ``manifest`` field is the same
-pathless 22-field projection the SourceExport v2 bundle publishes.
+pathless 23-field projection the SourceExport v2 bundle publishes.
 """
 
 from __future__ import annotations
@@ -364,6 +364,20 @@ def _xlsx_structured(path: Path, source_id: str) -> _Normalized:
     )
 
 
+def _sanitize_temp_path(text: str, data_path: Path) -> str:
+    """Keep the diagnostic honest without leaking the parser_tmp location.
+
+    Child-parser exception text can embed the temporary file's absolute path
+    (e.g. a packaging library naming the file it failed to open); the response
+    contract forbids any storage-path detail.
+    """
+    cleaned = text.replace(str(data_path), "<parser_tmp>")
+    posix = data_path.as_posix()
+    if posix in cleaned:
+        cleaned = cleaned.replace(posix, "<parser_tmp>")
+    return cleaned
+
+
 def _parse_isolated_lane(
     config: Any, *, content: Any, manifest: SourceManifest
 ) -> _Outcome:
@@ -389,7 +403,9 @@ def _parse_isolated_lane(
             # The parser proved these bytes unparseable for their format: say
             # so honestly instead of inventing a parse or a fake failure.
             return _outcome_from_normalized(
-                _unsupported(data_path, str(exc)),
+                _unsupported(
+                    data_path, _sanitize_temp_path(str(exc), data_path)
+                ),
                 content_sha256=manifest.content_sha256,
             )
         except NormalizationTimeoutError as exc:
@@ -522,6 +538,9 @@ def read_processed_document(
             ),
             "has_more": True,
         }
+    # Frozen contract: a non-final page never claims complete — a paginated
+    # response that hides later units would be a fake-complete.
+    status = "partial" if continuation is not None else outcome.status
     return {
         "schema_version": PROCESSED_DOCUMENT_SCHEMA_VERSION,
         "source_ref": ref_value.to_dict(),
@@ -531,7 +550,7 @@ def read_processed_document(
             "version": outcome.parser_version,
             "profile": None,
         },
-        "status": outcome.status,
+        "status": status,
         "units": page,
         "continuation": continuation,
         "quality": {

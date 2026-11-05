@@ -440,6 +440,29 @@ def test_identity_mismatch_is_a_named_refusal(tmp_path: Path):
     assert completed.stdout == b""
 
 
+def test_registered_identity_with_wrong_hash_is_refused(tmp_path: Path):
+    """The listed document/source with a foreign hash is a named refusal."""
+    refs = _fixture(tmp_path)
+    config_path = Path(refs["2025.txt"]["tmp_project"]) / "config/source_catalog.yaml"
+    ref = dict(refs["2025.txt"]["ref"])
+    foreign = hashlib.sha256(b"different bytes entirely").hexdigest()
+    ref["content_sha256"] = foreign
+    # source_id stays the registered one, so the ref is no longer
+    # self-consistent: the identity validator refuses before any read.
+    caller = tmp_path / "caller"
+    caller.mkdir()
+    completed = _run_cli(
+        Path(config_path), _guard_dir(tmp_path), _request(ref), caller,
+    )
+    assert completed.returncode == 2
+    lines = completed.stderr.decode("utf-8").strip().splitlines()
+    assert len(lines) == 1
+    error = json.loads(lines[0])
+    assert error["status"] == "blocked"
+    assert error["reason"] == "invalid_request"
+    assert completed.stdout == b""
+
+
 def test_unknown_request_core_version_is_refused(tmp_path: Path):
     refs = _fixture(tmp_path)
     config_path = Path(refs["2025.txt"]["tmp_project"]) / "config/source_catalog.yaml"
@@ -494,6 +517,9 @@ def test_pagination_replays_without_dup_or_gap(tmp_path: Path):
     assert [unit["unit_id"] for unit in first["units"]] == all_ids[:1]
     assert first["continuation"] is not None
     assert first["continuation"]["has_more"] is True
+    assert first["status"] != "complete", (
+        "a non-final page must not claim complete (frozen contract)"
+    )
 
     second = _parse_envelope(
         _run_cli(

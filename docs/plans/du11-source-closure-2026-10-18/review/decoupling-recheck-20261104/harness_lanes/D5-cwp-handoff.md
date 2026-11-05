@@ -23,7 +23,7 @@
 
 - envelope：`company-wiki-processed-document/1`（卡面冻结合同，逐字段实现）。
 - 请求：`{"schema_version": "company-wiki-processed-document/1", "source_ref": <SourceRef v2 6 字段>, "options"?}`；`options` 仅 `{max_units?, continuation?}`。
-- 响应：`{schema_version, source_ref（SourceRefValue.to_dict() 形状逐字段回显）, manifest（SourceVersionReader.describe_version 的 22 字段 pathless 投影）, parser{name,version,profile=null}, status(complete|partial|unsupported), units[{unit_id,kind,locator,content}], continuation, quality{quality_flags,coverage_complete,page_count,errors,reason}}`。
+- 响应：`{schema_version, source_ref（SourceRefValue.to_dict() 形状逐字段回显）, manifest（SourceVersionReader.describe_version 的 23 字段 pathless 投影）, parser{name,version,profile=null}, status(complete|partial|unsupported), units[{unit_id,kind,locator,content}], continuation, quality{quality_flags,coverage_complete,page_count,errors,reason}}`。
 - 身份校验复用 `automation/narrative_contracts.SourceRefValue.from_dict`（schema 2.0、source_id 与 content_sha256 派生一致）；读取走 `SourceVersionReader.open_described_version(purpose="source_export")`（与 SourceExport v2 同一 verified-open 链，含 read policy/root admission/预算）。
 - 解析复用：
   - docx/html/pptx → `document_normalization.normalize_document`（R6-FORMAT 纯 normalizer；unit_id 直接沿用 narrative-unit URN，locator 沿用 cwp-docx-body/cwp-html-dom/cwp-pptx-shape）；
