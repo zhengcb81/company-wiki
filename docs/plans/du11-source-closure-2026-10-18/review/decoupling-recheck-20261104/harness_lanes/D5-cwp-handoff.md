@@ -107,3 +107,5 @@ tests/contract 全量回归：见第 6 节收据。
 - 六个审查维度（合同符合性、三入口迁移、复用而非重建、测试真实性、边界写域、可移植性）全部通过。
 
 修复后复验：CWP 契约 13 passed（含新负例与非终页断言）、ruff clean。审查绑定版本：初审 CWP `a3082f858`，修复 commit `f5bcb4cc5`（StockWiki 侧 P2-3 守卫强化随其首 commit 交付，由独审在最终 commit 上绑定确认）。
+
+**全面复查与最终绑定（2026-11-05）**：实现者全面复查发现一处精度问题——direct lane 空 units 时 envelope 的 parser.version 回落到通用组合版本 1.0.0，与有 units 时的报告值及 owner 版本 pin 不一致；修正为 `parser_version_for_format()`（commit `895dd611e`，7 行，不改 units/locator/status/游标语义）。独立审查者对最终状态做增量核实（895dd611e diff 范围、前轮全部修复在最终 commit 中保留、三组测试复跑：CWP 契约 13 passed / StockWiki wiring 20 + wire 12 passed / 跨仓 E2E 1 passed、两仓工作区干净）并给出最终绑定结论：**绑定 CWP `895dd611e` + StockWiki `6d1e40bc` 的 D5 交付——通过**。本文件为其后的 docs 收尾 commit，不含代码改动。
