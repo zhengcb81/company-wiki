@@ -2,9 +2,9 @@
 
 唯一入口：[当前状态](CURRENT_STATUS.md) / [机器状态](CURRENT_STATUS.json)；交接：[HANDOFF](HANDOFF.md)；完整计划：[task_plan](task_plan.md)。
 
-**截至 2026-11-04：D4-01～D4-06 按原范围完成并通过总体验收，但全局解耦尚未完成。** 后续复核确认 CWP→StockWiki 的通用 PDF/Office 解析职责仍可能分叉。ROOT 的调用方盘点显示当前 RF production preparation 走 SourceRef v2/pathless，没有发现活跃内部生产 V1 caller；FF 的 `canonical_path` 是显式 V1 兼容合同。ROOT 的 V2/V1 路由测试现已通过：3 passed、0 skipped；测试证明 schema 2.0 自动走 pathless V2、V2 不触发 V1 文件校验器，V1 仍独立回归。最终按外部交付版本重核 caller 和全局组合。D5 尚须完成 CWP→StockWiki 生产者/消费者实现及跨仓组合验收。用户已明确要求：先把解耦工作完整实施并验收，再继续其他主线。因此 T4/SEM、真实摘要、缓存恢复、RF 实际采用和公司循环当前全部暂停。
+**截至 2026-11-05：D4-01～D4-06 按原范围完成并通过总体验收，但全局解耦尚未完成。** 后续复核确认 CWP→StockWiki 的通用 PDF/Office 解析职责仍可能分叉。ROOT 的调用方盘点显示当前 RF production preparation 走 SourceRef v2/pathless，没有发现活跃内部生产 V1 caller；FF 的 `canonical_path` 是显式 V1 兼容合同。ROOT 的 V2/V1 路由测试现已通过：3 passed、0 skipped；测试证明 schema 2.0 自动走 pathless V2、V2 不触发 V1 文件校验器，V1 仍独立回归。最终按外部交付版本重核 caller 和全局组合。D5 尚须完成 CWP→StockWiki 生产者/消费者实现及跨仓组合验收。用户已明确要求：先把解耦工作完整实施并验收，再继续其他主线。因此 T4/SEM、真实摘要、缓存恢复、RF 实际采用和公司循环当前全部暂停。
 
-当前唯一工作是 [D5 全局解耦](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)：外部单一 harness 负责 CWP pathless 规范化文档 port 与 StockWiki 三入口消费；ROOT 已完成 FF V1/V2 只读调用方盘点和路由测试。**CWP/StockWiki 产品实现尚未开始；ROOT 的 FF 边界测试已完成，整体 D5 仍 OPEN。**
+当前唯一工作是 [D5 全局解耦](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)：外部单一 harness 负责 CWP pathless 规范化文档 port 与 StockWiki 三入口消费；ROOT 已完成 FF V1/V2 只读调用方盘点和路由测试。**截至本次复核，主线尚未收到 D5 正式交付；ROOT 的 FF 边界测试已完成，整体 D5 仍 OPEN。** 单独的 `StockWiki-v2-reader` 目录包含 opt-in SourceExport v2 reader，但其默认来源模块仍调用本地 `documents.read_document_excerpt`，没有覆盖 D5 约定的 CWP 规范化文档合同和三入口迁移，不作为完成证据。
 
 ## D4 已完成
 

@@ -378,3 +378,10 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - 默认沙箱首次无法访问邻仓 Git 元数据，失败发生在 pytest 启动之前；同一命令在获准宿主环境完成验收。没有修改 runner 去绕过沙箱，也没有改邻仓。
 - D5 FF route 子节点已完成；CWP normalized-document producer port、StockWiki 三入口消费者、完整真实样本跨仓组合和全局独审尚未完成。整体状态仍 D5 OPEN，禁止恢复其它主线。
 - ROOT 代码/测试与收据已提交并推送：company-wiki `56410a738ebed40b0cae8fd9e333517f3a26728e` → `origin/master`。push 固定 smoke 17 passed / 12.30s；完整 GitHub CI 尚待其运行结果。
+
+## 2026-11-05 — 复核 D5 外包候选与交接边界
+
+- 只读核对 CWP HEAD 与远端 `origin/master` 均为 `8bae209bc885dfec6809de2b633834e5be17ab1d`；当前 StockWiki 主仓 HEAD 为 `23d84586dc2425961e953f5ab28aef867de6cb87`，两者已跟踪工作区无改动。CWP 注册 worktree 列表未见 D5 专用 worktree，未观察到正式 D5 交接。
+- 对照独立 StockWiki-v2-reader 候选（`0b406832`）：这是 opt-in SourceExport v2 reader/CLI；其 `stockwiki/sources.py` 仍保留 `documents.read_document_excerpt`，没有覆盖 D5 新合同及三个默认业务入口。已把此区别写入当前 D5 卡，避免把旧 raw-source reader 误签成 parser-owner port。
+- D5-CWP-STOCKWIKI 是唯一可安全外包的实现包，已准备好交付；不再拆分 CWP producer 和 StockWiki consumer。ROOT 的 FF 路由子节点已完成，剩下的 FF 最终版本复验、CWP root 组合 E2E、真实只读样本/恢复核对和最终总审必须在该卡交付后执行。
+- 受限沙箱的 `gh` 不存在，GitHub check API/页面读取也不可用；没有取得 exact-head CI 新状态。本记录不把旧 pending 状态改写为 green。没有改产品代码、没有运行测试、没有改动外部仓或清理未跟踪产物。

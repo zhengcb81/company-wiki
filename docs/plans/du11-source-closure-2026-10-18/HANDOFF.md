@@ -6,6 +6,8 @@ PLAN_ID=`du11-source-closure-2026-10-18`；唯一状态入口 [CURRENT_STATUS](C
 
 当前唯一开放节点是 [D5-CWP-STOCKWIKI 外包卡](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)。可交给一个 harness，在各自独立 worktree 中完成 CWP 的 pathless 规范化文档 port 与 StockWiki 的三个 provider 默认入口消费。D4 验收仍有效，但只覆盖原定义范围；尚不能据此恢复 T4/SEM 或任何其它业务主线。
 
+2026-11-05 ROOT 只读状态核对：CWP 主线与 `origin/master` 同为 `8bae209b`，StockWiki 主仓 HEAD 为 `23d84586`，均未发现 D5 主线交付。独立 `StockWiki-v2-reader` HEAD `0b406832` 是 opt-in SourceExport v2 reader；其 `sources.py` 仍调本地文档解析，不能替代本卡。该卡是当前唯一安全可交给外部 harness 的实施包；CWP producer 与 StockWiki consumer 必须由同一负责人按冻结合同一起交付，拆开会造成接口分叉。ROOT 继续拥有 FF 边界复验、组合 E2E 和最终独立总审。
+
 ROOT（本线程）独占 FF V1/V2 边界组合测试、CWP ROOT 组合测试、跨仓最终验收与独立总审。只读调用方盘点已确认当前 RF production preparation 走 V2/pathless；V1 `canonical_path` 是显式兼容合同。验收要证明 V2 无法回退到该分支，并单独覆盖 V1 兼容，不盲删仍承诺的接口。外包实施和 ROOT 工作都完成、交付版本一致、独立测试及组合测试通过、测试隔离恢复后，才把全局解耦标为完成。不得改写 RF/FF/ET/AUDIT/StockWiki 其他未提交 WIP。
 
 ## 已完成节点

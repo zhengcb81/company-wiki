@@ -175,3 +175,10 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 - 为该 ROOT 子节点增加专用 `--d5-ff-route` 强制测试选择，拒绝 `--tests` 覆盖或 collect-only，并要求 V2/V1 两个必需案例实际执行且零 skip；D4 原套件未改。
 - ROOT runner：3 passed、0 skipped、0 failed，32.911 秒；RF `90c562ac`、FF `bf7e1dab`、ET `003c1c06`，CWP HEAD `bbd10352` 且源码快照测试前后稳定。provider 只用隔离合成 PDF/临时 catalog，无网络、无下载；scratch 与 runner 输出目录均清理。完整收据：[root-d5-ff-route](review/decoupling-recheck-20261104/root-d5-ff-route/README.md)。
 - 该节点只关闭 FF 调用边界验证，不是 CWP→StockWiki 产品解耦或全局 D5 完成；后者保持 OPEN，主线其它任务继续暂停。
+
+## 2026-11-05 — D5 交付状态与旧 reader 候选核对
+
+- CWP `HEAD=8bae209bc885dfec6809de2b633834e5be17ab1d` 与宿主只读 `git ls-remote origin refs/heads/master` 返回一致；CWP 已跟踪工作区干净。StockWiki 主仓 `HEAD=23d84586dc2425961e953f5ab28aef867de6cb87`，已跟踪工作区无变化；CWP worktree 列表未见 D5 专用 worktree。当前未观察到 D5 的正式实现交接。
+- 单独目录 `StockWiki-v2-reader` 位于分支 `codex/source-export-v2-reader`、HEAD `0b406832b744892df7b592ca5d5c0d9fe2a0e3da`，改动是 opt-in SourceExport v2 reader、独立 CLI 与其契约/E2E 测试。代码搜索确认该 reader 未替换 `stockwiki/sources.py` 的 `documents.read_document_excerpt` 调用；没有找到它已接入本卡三个默认业务入口的证据。它也不提供本卡冻结的 `company-wiki-processed-document/1` CWP normalized-document port，因此不作 D5 交付或验收依据。
+- 该卡的 CWP producer 与 StockWiki 三入口 consumer 共享同一个 wire contract，适合作为一个跨仓包，不适合再拆成相互独立的实现包。ROOT FF 路由子节点已通过；全局可继续的 ROOT 工作依赖正式 D5 输出，之后才做实际组合验收。本次未修改外部仓、未运行测试、未读取或处理原件/密钥。
+- `git ls-remote` 默认沙箱调用未能启动 DNS worker，改用授权宿主的只读命令成功；没有执行 fetch 或写 Git 状态。精确 GitHub CI 状态本轮未查询成功，保留“尚未确认”而不记作通过。

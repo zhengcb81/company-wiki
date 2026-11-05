@@ -14,6 +14,8 @@
 
 这并不表示 D4 失败。D4 的来源路径虚拟化验收范围成立，但“原件路径被隐藏”还没有证明“通用文档解析只由一个 owner 执行”。
 
+2026-11-05 ROOT 只读复核：company-wiki 主线为 `8bae209b`，与远端 `origin/master` 一致；StockWiki 主仓为 `23d84586`，未见已跟踪改动。另有独立目录 `StockWiki-v2-reader`（branch `codex/source-export-v2-reader`，HEAD `0b406832`），其中是 opt-in SourceExport v2 reader/独立 CLI；该提交没有落实本卡的 `company-wiki-processed-document/1`，而其 `stockwiki/sources.py` 仍调用本地 `documents.read_document_excerpt`。因此它可供实现者了解既有 wire reader，但不算本卡三入口迁移或 CWP normalized-document port 的完成证据；不得从该目录覆盖主仓或假定默认路径已经切换。实施前仍须在目标主仓重新记录 HEAD、分支和既有 WIP。
+
 ## 2. 唯一写域和明确排除项
 
 本卡由**同一个实现负责人**在 CWP 与 StockWiki 两个独立 worktree/分支完成，避免生产者与消费者合同分叉。

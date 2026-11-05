@@ -506,7 +506,20 @@
     "root_ff_route_receipt": "review/decoupling-recheck-20261104/root-d5-ff-route/receipt.json",
     "root_ff_route_commit": "56410a738ebed40b0cae8fd9e333517f3a26728e",
     "root_ff_route_pushed_to": "origin/master",
-    "root_ff_route_push_smoke": "17 passed / 12.30s; full GitHub CI pending"
+    "root_ff_route_push_smoke": "17 passed / 12.30s; exact-head GitHub CI status was pending in the prior record and was not verified on 2026-11-05",
+    "delivery_check_2026_11_05": {
+      "company_wiki_head": "8bae209bc885dfec6809de2b633834e5be17ab1d",
+      "company_wiki_origin_master": "8bae209bc885dfec6809de2b633834e5be17ab1d",
+      "stockwiki_main_head": "23d84586dc2425961e953f5ab28aef867de6cb87",
+      "stockwiki_v2_reader_candidate": {
+        "branch": "codex/source-export-v2-reader",
+        "head": "0b406832b744892df7b592ca5d5c0d9fe2a0e3da",
+        "assessment": "OPT_IN_SOURCE_EXPORT_V2_READER_NOT_D5_DELIVERY",
+        "reason": "Separate CLI reader; stockwiki/sources.py still calls local documents.read_document_excerpt; no evidence of D5 processed-document/1 contract or three default-entry migration"
+      },
+      "status": "NO_FORMAL_D5_HANDOFF_OBSERVED",
+      "next": "Provide existing D5-CWP-STOCKWIKI card to one harness; ROOT owns final FF version recheck, composition E2E and global review"
+    }
   },
   "d4_closeout": {
     "status": "COMPLETE_ACCEPTED",
