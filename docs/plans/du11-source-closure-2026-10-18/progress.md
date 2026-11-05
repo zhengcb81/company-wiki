@@ -385,3 +385,8 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - 对照独立 StockWiki-v2-reader 候选（`0b406832`）：这是 opt-in SourceExport v2 reader/CLI；其 `stockwiki/sources.py` 仍保留 `documents.read_document_excerpt`，没有覆盖 D5 新合同及三个默认业务入口。已把此区别写入当前 D5 卡，避免把旧 raw-source reader 误签成 parser-owner port。
 - D5-CWP-STOCKWIKI 是唯一可安全外包的实现包，已准备好交付；不再拆分 CWP producer 和 StockWiki consumer。ROOT 的 FF 路由子节点已完成，剩下的 FF 最终版本复验、CWP root 组合 E2E、真实只读样本/恢复核对和最终总审必须在该卡交付后执行。
 - 受限沙箱的 `gh` 不存在，GitHub check API/页面读取也不可用；没有取得 exact-head CI 新状态。本记录不把旧 pending 状态改写为 green。没有改产品代码、没有运行测试、没有改动外部仓或清理未跟踪产物。
+
+## 2026-11-05 — D5 卡补充单次派发说明
+
+- 根据用户对“一个 harness 两个仓”的操作疑问，在卡头部明确：同一张卡只派发一次、一个 harness/任务上下文同时访问 CWP 与 StockWiki 两个独立 worktree；同一负责人维持合同决策、分别提交两个仓，并一次性交付两边证据。
+- 不能访问第二仓的 harness 先报告限制并暂停，不允许只交 producer 或 consumer 半边。未改变写域、接口合同、验收标准或 D5 状态。

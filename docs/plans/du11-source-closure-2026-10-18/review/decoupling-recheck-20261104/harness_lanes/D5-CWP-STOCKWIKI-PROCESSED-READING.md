@@ -2,6 +2,14 @@
 
 状态：**可交给一个独立 harness 实施**。这是 `du11-source-closure-2026-10-18` 的 D5 唯一外包实现包。D4 已按原定范围验收；本卡修复的是后续发现的全局边界遗漏，不重开 D4。
 
+## 派发说明（只交一次）
+
+- 将本卡完整交给**一个 harness、一个任务上下文**。不是把卡重复提交两次，也不要拆成两个 harness 分别实现 producer 和 consumer。
+- 这个 harness 需要同时访问两个仓库，但分别在各自独立 worktree/分支工作：`C:\Users\郑曾波\Projects\company-wiki` 与 `C:\Users\郑曾波\Projects\StockWiki`。一个仓负责 CWP producer port，另一个仓负责 StockWiki consumers；接口决策由同一负责人维护，最终各仓单独 commit。
+- 如果 harness 支持多根工作区，就在同一任务中加入这两个仓库；如果界面一次只能选一个目录，保持同一个任务/会话，再把第二个 worktree 加为可访问目录或在同一会话中切换目录。不要新开第二个 harness 或重复派卡。
+- 若该 harness 确实无法访问第二个仓库，应先报告运行环境限制并暂停实施；不要只做一半，因为单边实现无法验收跨层边界。
+- 最后一次交接需同时列出两个仓的 worktree、分支、commit SHA、测试、独立审查和清理收据，按本卡第 5 节格式交付。
+
 ## 1. 目标与当前判断
 
 把文档物理定位、原件读取、格式识别、PDF/OCR/Office 解析、规范化结构、解析质量与定位统一留在 company-wiki（下称 CWP）。StockWiki 对 CWP 文档只消费**无物理路径、带原来源身份及 SHA 的规范化文档表示**，再在自己的层做业务语义、投资研究和证据判断。
