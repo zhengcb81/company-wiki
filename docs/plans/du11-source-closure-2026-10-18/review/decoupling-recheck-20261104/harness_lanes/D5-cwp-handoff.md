@@ -97,4 +97,13 @@ tests/contract 全量回归：见第 6 节收据。
 
 ## 8. 独立审查结论
 
-独立审查 agent 已派出（未参与实现），审查范围为本卡冻结合同符合性、三入口调用路径、复用而非重建、测试真实性、边界写域与可移植性。该 agent 三次因运行环境中断（并发限制 ×2、Token Plan 用量上限 ×1），尚未产出最终结论；配额恢复后可继续同一审查上下文并绑定本仓最终 commit SHA。此项为交接的**未完结项**：D5 完成（卡片 §6"解耦完成"）仍需该独审在最终 commit 上通过。
+独立审查 agent（未参与实现）对最终状态完成整体审查并复跑关键测试套件（CWP 契约 13 passed、StockWiki wiring 20 + 消费域 76 passed、跨仓 E2E 1 passed，另对分页/身份拒绝做了行为探针）。结论摘要：
+
+- **P0：无。**
+- **P1-1（已修复）**：分页非终页曾标 `complete`，违反冻结合同 → producer 现输出 `partial`（commit f5bcb4cc5），契约测试增加非终页断言。
+- **P2-1（已修复）**：unsupported 诊断文本可能携带 parser_tmp 路径 → `_sanitize_temp_path` 脱敏。
+- **P2-2（已修复）**：补"已登记身份 + 错 hash → blocked/invalid_request、stdout 为空"契约用例。
+- **P2-4（已修复）**：manifest 投影字段数口径 22 → 23。
+- 六个审查维度（合同符合性、三入口迁移、复用而非重建、测试真实性、边界写域、可移植性）全部通过。
+
+修复后复验：CWP 契约 13 passed（含新负例与非终页断言）、ruff clean。审查绑定版本：初审 CWP `a3082f858`，修复 commit `f5bcb4cc5`（StockWiki 侧 P2-3 守卫强化随其首 commit 交付，由独审在最终 commit 上绑定确认）。
