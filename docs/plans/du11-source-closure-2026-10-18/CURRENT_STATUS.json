@@ -91,7 +91,7 @@
   },
   "project_status": "D4_D5_DECOUPLING_ACCEPTED_T4_SEM_LOCAL_IMPLEMENTATION_H1_REVIEW_OPEN",
   "as_of_date": "2026-11-06",
-  "observed_at_utc": "2026-11-06T20:38:29Z",
+  "observed_at_utc": "2026-11-06T20:42:53Z",
   "next_action": "Finish T4 source-note-parent + SEM-QUAL-01 acceptance: explain the 101-to-102 native-member delta against the prior H1, verify all 12 exact required locators and the 9 structure/context observations, complete final Ruff and one independent milestone review, write durable receipts, and restore the two ROOT-created scratch directories. Do not mark H1 as company/economic acceptance. After acceptance, proceed to new real-summary quality, cache recovery, RF adoption, and the fixed-company loop.",
   "publication": {
     "repositories": {
@@ -166,17 +166,20 @@
         "d5_candidate_merge": {
           "status": "fast_forwarded_locally",
           "head": "a28692a6c49125143d2240b4a6d6df2ba29a28a1",
-          "push_and_exact_ci": "Local HEAD and local origin/master tracking ref match ROOT acceptance commit c28b122075748d99547fb0a7e2fd4adcd7490269; live ls-remote and exact-head CI were not freshly verified in this reconciliation."
+          "push_and_exact_ci": "D5 acceptance c28b122075748d99547fb0a7e2fd4adcd7490269 is included; PWF-only reconciliation commit bd2c9ee328831f80626a216a99a7d503cebcfdd5 was pushed and post-push local HEAD/origin-master tracking ref matched. Exact-head CI for c28 and bd2 was not freshly verified."
         },
         "d5_root_closeout": {
           "commit": "c28b122075748d99547fb0a7e2fd4adcd7490269",
-          "local_head": "c28b122075748d99547fb0a7e2fd4adcd7490269",
-          "local_origin_master_tracking_ref": "c28b122075748d99547fb0a7e2fd4adcd7490269",
-          "tracking_refs_match": true,
-          "direct_remote_ls_remote": "NOT_VERIFIED_DNS_WORKER_FAILED_TO_START",
-          "exact_head_ci": "NOT_FRESHLY_VERIFIED"
+          "direct_remote_ls_remote": "NOT_VERIFIED_DNS_WORKER_FAILED_TO_START_DURING_INITIAL_RECONCILIATION",
+          "exact_head_ci": "NOT_FRESHLY_VERIFIED_FOR_C28_OR_BD2",
+          "tracking_refs_matched_at_initial_reconciliation": true,
+          "latest_pwf_reconciliation_commit": "bd2c9ee328831f80626a216a99a7d503cebcfdd5",
+          "latest_pwf_reconciliation_pushed": true,
+          "post_push_local_head": "bd2c9ee328831f80626a216a99a7d503cebcfdd5",
+          "post_push_local_origin_master_tracking_ref": "bd2c9ee328831f80626a216a99a7d503cebcfdd5",
+          "post_push_tracking_refs_match": true
         },
-        "exact_ci_scope": "Existing run IDs in this object are the D4 closeout CI for head e7469d684b10a4cd37772e045eb3e588254c5ab8; they do not establish exact-head CI for D5 ROOT closeout c28b122075748d99547fb0a7e2fd4adcd7490269."
+        "exact_ci_scope": "Existing run IDs in this object are the D4 closeout CI for head e7469d684b10a4cd37772e045eb3e588254c5ab8; they do not establish exact-head CI for D5 ROOT closeout c28b122075748d99547fb0a7e2fd4adcd7490269. The PWF-only follow-up bd2c9ee328831f80626a216a99a7d503cebcfdd5 is pushed, but its exact-head CI is also not freshly verified."
       },
       "filing-fetch": {
         "source_head": "508aba308cf5206c486119c446b66172debdc09a",
@@ -581,13 +584,16 @@
     "scratch_restored": true,
     "cache_scope": "No second cache added; a reusable generic persistent CWP normalized-unit cache was not established by this acceptance. Cache recovery remains a later mainline task.",
     "publication": {
-      "company_wiki": "ROOT acceptance commit c28b122075748d99547fb0a7e2fd4adcd7490269 is local HEAD and matches the local origin/master tracking ref; direct ls-remote and exact-head CI were not freshly verified in this reconciliation (DNS worker failed to start).",
+      "company_wiki": "D5 acceptance commit c28b122075748d99547fb0a7e2fd4adcd7490269 is included in pushed PWF reconciliation commit bd2c9ee328831f80626a216a99a7d503cebcfdd5; post-push local HEAD and origin/master tracking ref matched bd2. Exact-head CI for c28/bd2 was not freshly verified.",
       "StockWiki": "fast-forwarded locally; no remote configured"
     },
     "accepted_at_utc": "2026-11-06T19:08:51Z",
     "root_acceptance_commit": "c28b122075748d99547fb0a7e2fd4adcd7490269",
-    "root_acceptance_head_matches_local_origin_master_tracking_ref": true,
-    "latest_exact_head_ci": "NOT_FRESHLY_VERIFIED"
+    "latest_exact_head_ci": "NOT_FRESHLY_VERIFIED_FOR_C28_OR_BD2",
+    "root_acceptance_head_matches_local_origin_master_tracking_ref_at_initial_reconciliation": true,
+    "latest_pwf_reconciliation_commit": "bd2c9ee328831f80626a216a99a7d503cebcfdd5",
+    "latest_pwf_reconciliation_pushed": true,
+    "post_push_local_head_and_tracking_ref_match": true
   },
   "d4_closeout": {
     "status": "COMPLETE_ACCEPTED",

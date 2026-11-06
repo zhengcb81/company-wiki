@@ -404,7 +404,7 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 
 ## 2026-11-06 — PWF 对账；T4/SEM 实施与 H1 观察进度
 
-- 上一条 D5 进度中的“push/CI 尚待完成”是 D5 closeout 写入后、ROOT 接收提交前的历史观察，不再作为当前状态。CWP 当前 `HEAD=c28b122075748d99547fb0a7e2fd4adcd7490269`，本地 `origin/master` tracking ref 同为该 SHA；本次 `git ls-remote` 因 DNS worker 启动失败，故没有声称刚刚验证远端实时 ref 或该 SHA 的 exact-head CI。已将此边界写入机器状态及 D5 closeout addendum；历史 D4 CI `e7469d68` 不冒作 c28 的 exact CI。
+- 上一条 D5 进度中的“push/CI 尚待完成”是 D5 closeout 写入后、ROOT 接收提交前的历史观察，不再作为当前状态。对账开始时 CWP `HEAD=c28b122075748d99547fb0a7e2fd4adcd7490269`，本地 `origin/master` tracking ref 同为该 SHA；`git ls-remote` 因 DNS worker 启动失败未取得实时远端 ref。随后 PWF-only 对账 commit `bd2c9ee328831f80626a216a99a7d503cebcfdd5` 成功推送，推送后 HEAD 与本地 tracking ref 同步。c28/bd2 的 exact-head CI 均未新鲜核实；历史 D4 CI `e7469d68` 不冒作两者的 exact CI。
 - 对齐 `CURRENT_STATUS.md/json`、`task_plan.md`、`HANDOFF.md`、`PACKAGE_STATUS.md` 与本日志：D4/D5 已 ACCEPTED，不再列为待办或重新派发；唯一当前节点是 T4/SEM 大节点收口。旧 11-02/11-04 开放状态保留为历史快照并注明已被 D5 接收状态取代。
 - T4/SEM 已在本地 owner 层实施；RED→GREEN 与聚焦测试记录：note-scope 91 passed、runner 20 passed、decoder/source-frame/summary/T4 组合 271 passed、qualifier 专项 17 passed。最终 Ruff 和独立审查未完成，代码尚未提交。
 - 单例真实 H1 第二次运行 28.4237 秒，112 spans，12/12 必需原文成员精确覆盖；102 native members，较旧基线 101 多 1，差异仍待核；9 个结构/context 检查输出。model posts/downloads/raw copies 为 0，数据库、原件、runtime、observer 均未变。结果是 observer-only，不是公司或经济质量验收。
