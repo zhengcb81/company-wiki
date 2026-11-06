@@ -582,6 +582,54 @@ class SourceVersionReader:
         assert isinstance(result, VerifiedVersionReceipt)
         return result
 
+    def _admitted_candidates(
+        self, ref: SourceRef, version_row: sqlite3.Row, *, roots: dict[str, Any],
+    ) -> list[dict[str, Any]]:
+        """The readable locations for one ref, after the catalog annotator
+        and root policy.
+
+        This is the single admission gate shared by every byte path, so the
+        whole-buffer reader and any transport elect the same candidate by
+        construction.  The existing catalog annotator owns role/status/
+        rejections filtering and the stable preference order.  Policy decides
+        action eligibility.
+        """
+        locations = []
+        try:
+            indexed_locations = self.catalog.reader.exact_source_locations(
+                ref.document_id, ref.source_id
+            )
+        except (CatalogReaderUnavailable, sqlite3.Error):
+            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        for row in indexed_locations:
+            location = dict(row)
+            root = roots.get(location["root_id"])
+            if root is None:
+                continue
+            location["root_priority"] = root.priority
+            locations.append(location)
+        if not locations:
+            raise SourceReadError("unavailable", "no_indexed_location")
+        annotated = self.catalog._annotate_locations(ref.document_id, locations)
+        admitted = []
+        for location in annotated:
+            root = roots[location["root_id"]]
+            if location["candidate_rank"] <= 0:
+                continue
+            kinds = root.allowed_document_kinds
+            if kinds and version_row["document_kind"] not in kinds:
+                continue
+            limit = root.max_file_size
+            if limit is not None and ref.byte_size > limit:
+                continue
+            statuses = root.allowed_statuses
+            if statuses and version_row["source_status"] not in statuses:
+                continue
+            admitted.append(location)
+        if not admitted:
+            raise SourceReadError("blocked", "root_admission_denied")
+        return admitted
+
     def _verified_version(
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
@@ -626,44 +674,7 @@ class SourceVersionReader:
             scope_qualification = None
         config = self.catalog.config
         roots = {root.root_id: root for root in config.roots}
-        locations = []
-        try:
-            indexed_locations = self.catalog.reader.exact_source_locations(
-                ref.document_id, ref.source_id
-            )
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
-        for row in indexed_locations:
-            location = dict(row)
-            root = roots.get(location["root_id"])
-            if root is None:
-                continue
-            location["root_priority"] = root.priority
-            locations.append(location)
-        if not locations:
-            raise SourceReadError("unavailable", "no_indexed_location")
-
-        # The existing catalog annotator owns role/status/rejections filtering
-        # and the stable preference order.  Policy decides action eligibility.
-        annotated = self.catalog._annotate_locations(ref.document_id, locations)
-        admitted = []
-        for location in annotated:
-            root = roots[location["root_id"]]
-            if location["candidate_rank"] <= 0:
-                continue
-            kinds = root.allowed_document_kinds
-            if kinds and version_row["document_kind"] not in kinds:
-                continue
-            limit = root.max_file_size
-            if limit is not None and ref.byte_size > limit:
-                continue
-            statuses = root.allowed_statuses
-            if statuses and version_row["source_status"] not in statuses:
-                continue
-            admitted.append(location)
-        if not admitted:
-            raise SourceReadError("blocked", "root_admission_denied")
-        candidates = admitted
+        candidates = self._admitted_candidates(ref, version_row, roots=roots)
 
         supplied_budget = budget is not None
         if budget is None:
