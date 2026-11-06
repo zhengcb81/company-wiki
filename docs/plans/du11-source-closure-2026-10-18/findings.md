@@ -182,3 +182,11 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 - 单独目录 `StockWiki-v2-reader` 位于分支 `codex/source-export-v2-reader`、HEAD `0b406832b744892df7b592ca5d5c0d9fe2a0e3da`，改动是 opt-in SourceExport v2 reader、独立 CLI 与其契约/E2E 测试。代码搜索确认该 reader 未替换 `stockwiki/sources.py` 的 `documents.read_document_excerpt` 调用；没有找到它已接入本卡三个默认业务入口的证据。它也不提供本卡冻结的 `company-wiki-processed-document/1` CWP normalized-document port，因此不作 D5 交付或验收依据。
 - 该卡的 CWP producer 与 StockWiki 三入口 consumer 共享同一个 wire contract，适合作为一个跨仓包，不适合再拆成相互独立的实现包。ROOT FF 路由子节点已通过；全局可继续的 ROOT 工作依赖正式 D5 输出，之后才做实际组合验收。本次未修改外部仓、未运行测试、未读取或处理原件/密钥。
 - `git ls-remote` 默认沙箱调用未能启动 DNS worker，改用授权宿主的只读命令成功；没有执行 fetch 或写 Git 状态。精确 GitHub CI 状态本轮未查询成功，保留“尚未确认”而不记作通过。
+
+## 2026-11-06 — D5 最终验收发现与边界
+
+- **配置版本误报的根因：** 以工作区原始文件 bytes 和 `git show` 的 repository blob 直接比较；StockWiki Windows checkout 将 JSON 置为 CRLF，而提交对象为 LF，导致实际干净配置被误判为不同。修复为使用 `git hash-object --path=<file> --stdin` 经 Git clean filters 计算工作区 blob，再与 reviewed commit 的 `rev-parse <commit>:<path>` 比较。该比较只归一化 Git 配置的行尾/clean filters；独立回归证明实质值变化无法通过。
+- **版本完整性：** 只检查配置测试前后 SHA 不足以证明它起始时就是被审查版本；D5 gate 现在把两个候选 HEAD、工作树干净状态和配置 Git blob 与 reviewed HEAD 绑定，并在运行后复查工作树/配置稳定。run-6 独审确认收据与这三项一致。
+- **测试报告完整性：** 独立仓的绝对 pytest 路径在 JUnit 中可能没有 classname，按模块推导会假报 consumer/必需用例缺失；root runner 改为用冻结的唯一 case name 计数，并给消费者归属固定必需用例。早期实现还出现过 consumer 名称映射 KeyError；均通过定向回归和最终 18-case run 关闭。
+- **缓存边界：** 已交付 port 在请求时使用 CWP 规范化 owner，但此验收没有建立通用跨请求/持久 normalized-unit parser cache 的存在证据。D5 不再引入第二 cache；缓存恢复照 task_plan 在摘要流程之后做独立验收，不能将本次接口解耦 PASS 等同于 cache hit/recovery PASS。
+- **验收范围：** run-6 证明三入口实际消费同一 pathless port、FF V2/V1 路由边界、真实本地单样本完整性和临时目录恢复；不代签财报摘要的业务召回质量、多市场文种泛化、RF adoption 或固定公司审计循环。

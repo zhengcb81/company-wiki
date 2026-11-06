@@ -1,14 +1,14 @@
-**2026-11-04最新执行顺序：先完成并验收全局解耦，再继续原主线。** D4-01～06 的已验收范围保留；新复核发现 CWP→StockWiki 通用文档解析职责未完全收敛。FF 调用方只读盘点未发现活跃内部生产 V1 caller；当前 RF 生产准备使用 V2/pathless，`canonical_path` 是显式 V1 兼容合同。ROOT 的 V2/V1 路由子套件已 3/3 通过，最终按 D5 交付版本复验整体合同；不能把兼容入口误报成默认生产缺陷或盲删。D5 未通过前，T4/SEM、真实摘要、缓存恢复、RF 采用和公司循环全部暂停。
+**2026-11-06 状态：D5 全局解耦已验收并入主线；恢复既有顺序，当前下一步为 T4 source-note-parent + SEM-QUAL-01。** D4-01～06 继续 CLOSED。CWP 已成为通用规范化文档解析唯一 owner；StockWiki 三个 provider 默认入口统一消费 pathless port；FF schema 2.0 的 V2 主路径保持无物理路径，V1 兼容路径独立保留并测试。D5 依据 run-6 的跨仓真实样本组合、零 skip、独立最终审查通过后 ACCEPTED。完整收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
 
 # 主线剩余实施计划
 
 **当前：上一轮逐项表只证明其定义范围；新确认残留见本轮架构复核，已完成工程不重复施工。**
 
-## Next Step — D5 全局解耦（当前唯一实施节点）
+## Next Step — T4 source-note-parent + SEM-QUAL-01
 
-D4-01～D4-06 已按其冻结范围实施、独立审查并由 ROOT 强制离线组合收口；**D4 仍然 CLOSED，但不能代表全局解耦完成**。当前只实施 D5：一个外部 harness 完成 CWP 规范化文档 port + StockWiki 三入口消费；ROOT 独立收敛 FF 旧 canonical-path 生产兼容路线，之后做一次跨仓组合 E2E 和最终大节点独审。施工卡：[D5-CWP-STOCKWIKI](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)。
+D5 代码已按快进方式进入 CWP master 与 StockWiki master；ROOT 的 FF V2/V1 边界和 CWP→StockWiki→FF 组合验收均绑定到已审查版本。没有发现需要回滚或修复的验收问题。下一步恢复原先排定的 T4 source-note-parent + SEM-QUAL-01：先补限定词/来源父链的 RED 测试，再在所属 owner 层根修，用一份隔离真实 H1 复验；不要跳过 T4/SEM 直接进入批量真实摘要。
 
-**停止线：** D5 两仓交付、ROOT 的 FF 路由收敛、强制组合测试和最终独审全部通过以前，不恢复 T4/SEM 或任何其他主线。测试只在 D5 的关键节点集中做；不为每个小 helper 增加签收。
+**阶段边界：** D5 通过只关闭全局解耦，不等于新摘要、跨运行缓存恢复、RF 实际采用或八家公司循环完成。关键节点集中测试与独审，不为每个小 helper 增加签收；测试环境必须隔离并恢复。
 
 ## P0-D — 六项解耦遗漏（D4 CLOSED）
 
@@ -21,20 +21,22 @@ D4-01～D4-06 已按其冻结范围实施、独立审查并由 ROOT 强制离线
 
 实施前置见 [原 D4 复核报告](review/decoupling-recheck-20261102/README.md) 和 [ROOT 最终组合契约](review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md)；这些内容保留历史原要求，执行状态以 closeout receipt 为准。
 
-## P0-E — 全局解耦缺口（D5 OPEN；先于所有其它主线）
+## P0-E — 全局解耦缺口（D5 ACCEPTED）
 
-**已核实的根因：** CWP 的通用解析/规范化产物没有以足够结构化、pathless 的公共接口交给 StockWiki；StockWiki 默认 provider 流程仍会把 PDF/Office 原件交给自身 parser。ROOT 已只读盘点 FF V1/V2 调用方，未发现活跃内部生产 V1 caller；schema 2.0 CLI 和当前 RF production preparation 走 V2/pathless。FF V2 不进入 V1 文件校验器、V1 兼容入口独立受测的 ROOT 子套件已通过；剩余问题是按外部交付版本重核并完成全局组合证明。详细证据见 [2026-11-04 findings](findings.md) 与 [D5 外包施工卡](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)。
+**已修复的根因：** CWP 的通用解析/规范化结果此前没有作为结构化 pathless 公共接口提供给 StockWiki，StockWiki 三个默认业务入口因而会把 PDF/Office 原件交给自己的 parser。D5 将解析归属收敛到 CWP，并以固定跨仓套件验明 StockWiki 三入口消费 port；FF schema 2.0 继续走 V2/pathless，V1 只作为显式版本兼容入口。最终证据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md) 和 [D5 外包卡](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)。
 
 | 顺序 | Owner | 工作 | 大节点验收 |
 |---|---|---|---|
-| D5-A | ROOT（已完成设计/冻结） | 复核公共 SourceRef v2、CWP 现有 canonical parser/artifact 和 StockWiki 三入口；冻结一份 producer-owned、pathless、带 parser/version/locator/partial 状态的合同。只允许复用现有 parser/cache，不造第二套。 | 施工卡里的 RED 合同测试由实现 harness落实；ROOT 不做逐字段预签收。 |
-| D5-B | 外部单一 harness | 在独立 CWP、StockWiki worktree 同步实现 producer port 与三个 provider 默认 consumer；StockWiki 投资语义留在 StockWiki，通用结构解析归 CWP。一次性完成本仓测试及关键 E2E，交付前独立审查并修复。 | 一个整体独审，最终版本绑定两仓 commit。 |
-| D5-C | ROOT（FF V1/V2 调用方盘点及聚焦路由测试 PASS；完整组合待做） | 当前盘点显示 RF production preparation 用 V2/pathless，V1 是显式版本化兼容入口。已通过的 ROOT 子测试证明 schema 2.0 CLI 默认 V2、V2 不调用 `validate_handle(canonical_path)`、V1 兼容仍在临时根内工作。外部交付到达后，再由 CWP ROOT 强制测试证明三入口、FF V2/V1 边界和组合合同；若发现活跃内部 V1 caller，先迁到 V2。无证据不删兼容实现。 | [FF 子节点收据](review/decoupling-recheck-20261104/root-d5-ff-route/README.md)；最终仍须一次完整跨仓集成 E2E；不跑超时全量套件，不以 skip 通过。 |
-| D5-D | ROOT + 独立审查 | 汇总 CWP/StockWiki/FF HEAD、测试与清理证据；按实际公开 CLI/port 做最终组合验收，检查路径泄漏、双 parser、旧 fallback、partial 假完整。发现问题直接按归属层修复，再做受影响复验。 | 一个大节点独立总审 PASS；更新状态、提交/推送有 remote 的仓。 |
+| D5-A | ROOT（COMPLETE） | 冻结 producer-owned、pathless、带 parser/version/locator/partial 状态的合同；不另建缓存。 | 合同固化在施工卡与跨仓契约测试。 |
+| D5-B | 外部单一 harness（COMPLETE） | CWP port 与 StockWiki 三个 provider 默认 consumer 在独立 worktree 同步实现；交付独审绑定 CWP `a28692a6`、StockWiki `6d1e40bc`。 | 两仓按快进进入主线；StockWiki 无 remote。 |
+| D5-C | ROOT（COMPLETE） | FF schema 2.0 V2/pathless、V2 不进 V1 文件校验，显式 V1 隔离兼容的必需路由用例均通过。 | 3/3 通过；见 [FF 子节点收据](review/decoupling-recheck-20261104/root-d5-ff-route/README.md)。 |
+| D5-D | ROOT + 独立审查（ACCEPTED） | CWP/StockWiki/FF 固定组合、真实本地样本原件稳定、生产 transport 配置绑定审查提交、测试 scratch 恢复。 | run-6 为 18 passed、0 skipped/failed/errors；独审 PASS。 |
 
 **D5 完成定义：** 每个模块只负责自己的实现、状态和错误语义，并通过自己的独立契约测试；跨模块只经版本化公开合同组合，不依赖邻仓私有模块、物理路径或内部数据库。CWP 是通用文档解析唯一 owner；StockWiki 三个 provider 入口消费同一 pathless 规范化 reader，业务层可引用 locator 且不再解析 CWP PDF/Office 原件；FF schema 2.0 provider 主路径不暴露/消费 canonical_path，当前内部生产消费者使用 V2，旧 V1 若保留则作为版本显式、隔离且有测试的兼容接口。三仓独立测试与一个临时环境的 producer→consumer 实际 E2E 通过；原件 SHA 稳定、测试目录初始状态复原；最终独审绑定交付版本。只有这些条件全部满足，才把全局 decoupling 设为 ACCEPTED。
 
 **D5 之后才恢复主线：** 先回到原定 T4 source-note-parent + SEM-QUAL-01，之后依既有顺序完成新版真实摘要、付费中断/同跨 run 缓存恢复、RF 实际采用和固定公司循环。D5 卡及其交接不得提前夹带这些任务。
+
+**缓存范围说明：** D5 把通用解析 owner 收敛到 CWP，没有建立第二套缓存。验收没有证明 CWP 有可复用的通用持久化 normalized-unit cache；当前 port 按请求读取/解析。跨运行缓存恢复仍属于后续主线任务，不能据本次解耦验收标为通过。
 
 ## P0 — 已完成的CI根修
 
@@ -47,7 +49,7 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 - 先在原P3来源修复中合并Q01陌生业务准入、Q02阅读recipe/缓存指纹，沿原R4 source owner根修，不加公司词库/额度。
 - 存储查询、预算归属、CAS/legacy工具、跨层合同和边界测试按细则B；StockWiki输出流限额归其transport，CWP不跨层接管实现。
 - 旧显式dry-shadow两轮/迁移CLI和无效helper清理，检查聚合到事实owner；必要身份/原文字节/as-of/预算/恢复仍保留。
-- 仅大节点集中工程独审、受影响测试及真实E2E；不新增逐项许可。Q01–Q14工程10767b86已独审/完整CI通过并本地主线，Q09在StockWiki本地主线、Q11接收实读SHA经边界论证保留；完整CI63F/22F/70F历史不改。原70期待保留，R5纠正资料可用与现实核实混用；旧结构T3已并线。T4真实来源父链与新版真实C仍 OPEN，但现在暂停到D5全局解耦验收后，不在当前节点施工。原件/生产配置未改。
+- 仅大节点集中工程独审、受影响测试及真实E2E；不新增逐项许可。Q01–Q14工程10767b86已独审/完整CI通过并本地主线，Q09在StockWiki本地主线、Q11接收实读SHA经边界论证保留；完整CI63F/22F/70F历史不改。原70期待保留，R5纠正资料可用与现实核实混用；旧结构T3已并线。T4真实来源父链与新版真实C仍 OPEN；D5 已 ACCEPTED，按当前 Next Step 恢复 T4/SEM 根修，原件/生产配置不改。
 
 ## P1/P2 — 历史有界摘要与采用已过，新runtime真实C仍OPEN
 

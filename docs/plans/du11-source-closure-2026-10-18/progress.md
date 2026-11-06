@@ -390,3 +390,14 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 
 - 根据用户对“一个 harness 两个仓”的操作疑问，在卡头部明确：同一张卡只派发一次、一个 harness/任务上下文同时访问 CWP 与 StockWiki 两个独立 worktree；同一负责人维持合同决策、分别提交两个仓，并一次性交付两边证据。
 - 不能访问第二仓的 harness 先报告限制并暂停，不允许只交 producer 或 consumer 半边。未改变写域、接口合同、验收标准或 D5 状态。
+
+## 2026-11-06 — D5 最终验收、并线与主线恢复
+
+- 核对外包版本：CWP `a28692a6c49125143d2240b4a6d6df2ba29a28a1`，StockWiki `6d1e40bcdcde5e99488e2bc38d57bd8e1b33c27e`。StockWiki 的主线为 `23d84586`，已跟踪文件无本地修改、6 个无关未跟踪路径与交付文件不冲突、没有 remote；CWP candidate 相对主线只前进，交付 4 个文件与 root 本地 tracked/untracked 改动均无路径冲突。
+- D5 runner 新增“工作区配置必须等于 reviewed commit”的验证后，第一次重跑发现 Windows checkout 的 StockWiki 配置是 CRLF、Git commit blob 是 LF。根因是比较工作区原始 bytes 与 Git 原始 blob，不是配置内容分叉；按 Git clean-filter blob ID 比较后兼容行尾转换，同时以回归证明实质配置变化仍拒绝。
+- D5 最终跨仓 run-6：18 passed、0 skipped、0 failed/errors、115.612 秒；receipt 位于 `review/decoupling-recheck-20261104/root-d5-final/run-6/report.json`。13 项 CWP contract、StockWiki 三入口及真实本地 PDF E2E、FF V2/V1 路由都被实际执行。PDF 113,954 bytes，SHA-256 前后相同；mtime 相同；scratch 已恢复；候选工作树前后 clean。StockWiki transport 原始 SHA 稳定且 Git blob 与 reviewed commit 一致。
+- ROOT runner scope 单测 15 passed，Ruff 通过；CWP 快进并入主线后，13 项 CWP processed-document contract suite 再次 13 passed。独立最终审查绑定准确 candidate heads 与 run-6，结论 PASS；审查静态检查 runner/report，runner 单测另由 ROOT 实际运行。
+- 前几次 ROOT run 曾暴露验收脚本自身问题：绝对路径 JUnit 空 classname 导致用例误报缺失、consumer 归属映射 KeyError、真实样本 E2E 最初没有加载 checked-in production transport config、配置只做前后稳定性比较而未绑定 reviewed HEAD。均在 run-6 前修复并增加相应验证；不把早期误报或失败隐藏成 PASS。
+- CWP 从 `f8eccf0a` 快进到 `a28692a6`；StockWiki 从 `23d84586` 快进到 `6d1e40bc`。两次均无冲突、未清理既有未跟踪数据。StockWiki 没有 remote，因此只记录本地并线。
+- D5 接受不表示通用持久化解析缓存存在或已修复。本次没有新建第二套缓存；CWP port 按请求读取/解析，缓存恢复仍按主线后续阶段验收。
+- 更新 task_plan、CURRENT_STATUS、HANDOFF、PACKAGE_STATUS、findings 与本进度记录。company-wiki 当前尚有明确的 ROOT runner/test/PWF 改动待提交和推送；只提交精确选定文件，不触碰其它历史未跟踪产物。CWP 当前精确 HEAD 的 push/CI 在本记录生成时尚待完成/核验。

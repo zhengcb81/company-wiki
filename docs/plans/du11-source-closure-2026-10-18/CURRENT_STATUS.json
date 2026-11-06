@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "d5_global_decoupling_before_any_other_mainline",
+  "execution_mode": "mainline_after_d5_global_decoupling",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -33,22 +33,22 @@
     },
     {
       "id": "P0-E",
-      "status": "OPEN_D5_GLOBAL_DECOUPLING",
-      "task": "CWP owns normalized document parsing; StockWiki consumes the pathless document port; ROOT proves FF schema 2.0 V2 remains pathless, isolates/tests explicit V1 compatibility, and accepts the cross-repository boundary before other mainline resumes"
+      "status": "COMPLETE_ACCEPTED",
+      "task": "D5 global decoupling accepted: CWP pathless normalized-document port, StockWiki three default consumers, FF V2/V1 boundary, and ROOT real-sample cross-repository acceptance"
     },
     {
       "id": "P1",
-      "status": "PAUSED_UNTIL_D5_GLOBAL_DECOUPLING; HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
+      "status": "OPEN_AFTER_T4_SEM_QUAL_01; HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
       "task": "Current Huali15/12atoms and Berkshire73/10atoms; actual activation/same/cross cache PASS;15Berkshire unprocessed and full-source partial remain explicit"
     },
     {
       "id": "P2",
-      "status": "PAUSED_UNTIL_D5_GLOBAL_DECOUPLING; HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
+      "status": "OPEN_AFTER_P1; NEW_RUNTIME_C_ACCEPTANCE_OPEN",
       "task": "Same new artifact actually consumed by RF native parameters/formula"
     },
     {
       "id": "P3",
-      "status": "PAUSED_UNTIL_D5_GLOBAL_DECOUPLING; R4_FOUR_REVIEWS_ENGINEERING_REMEDIATION_ACTIVE_REAL_COMPANY_OPEN",
+      "status": "OPEN_AFTER_P1_P2; R4_FOUR_REVIEWS_ENGINEERING_REMEDIATION_ACTIVE_REAL_COMPANY_OPEN",
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
@@ -58,8 +58,8 @@
   "history_index": "HISTORY.md",
   "native_goal": {
     "observed_status": "paused",
-    "observed_via": "get_goal during2026-11-02 continuation",
-    "execution": "Latest user authorized manual continuation; native tool has no active-resume operation. Whole objective incomplete.",
+    "observed_via": "get_goal during 2026-11-06 D5 closeout",
+    "execution": "The native goal registry still reports paused. The user has since instructed continuation; manual execution follows this CURRENT_STATUS/task_plan. The objective remains incomplete.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -90,10 +90,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "D5_GLOBAL_DECOUPLING_OPEN_MAINLINE_PAUSED",
-  "as_of_date": "2026-11-04",
-  "observed_at_utc": "2026-11-04T23:53:27Z",
-  "next_action": "完成D5卡中的CWP规范化文档port和StockWiki三入口消费；ROOT的FF V1/V2调用方盘点与3例边界子测试已通过。交付后完成按真实公开入口的跨仓组合E2E、真实只读样本、恢复核对和最终独审。全局D5全部验收后才恢复T4/SEM和其它主线。",
+  "project_status": "D5_GLOBAL_DECOUPLING_ACCEPTED_T4_SEM_QUAL_NEXT",
+  "as_of_date": "2026-11-06",
+  "observed_at_utc": "2026-11-06T19:08:51Z",
+  "next_action": "Resume T4 source-note-parent + SEM-QUAL-01: write root-cause regression tests first, repair in the owning layer, then validate on one isolated real H1. Only then proceed to real-summary acceptance, cache recovery, RF adoption, and the fixed-company loop.",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -127,7 +127,7 @@
         ]
       },
       "company-wiki": {
-        "source_head": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
+        "source_head": "a28692a6c49125143d2240b4a6d6df2ba29a28a1",
         "remote": "origin/master",
         "published": true,
         "push_hook": {
@@ -163,7 +163,12 @@
             "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41919818624",
             "updated_at": "2026-11-04T21:52:42Z"
           }
-        ]
+        ],
+        "d5_candidate_merge": {
+          "status": "fast_forwarded_locally",
+          "head": "a28692a6c49125143d2240b4a6d6df2ba29a28a1",
+          "push_and_exact_ci": "pending"
+        }
       },
       "filing-fetch": {
         "source_head": "508aba308cf5206c486119c446b66172debdc09a",
@@ -186,7 +191,7 @@
         "status": "MAIN_PUSHED_NO_TRACKED_ACTIONS_WORKFLOW"
       },
       "StockWiki": {
-        "source_head": "d8d3303",
+        "source_head": "6d1e40bcdcde5e99488e22c38d57bd8e1b33c27e",
         "publication": "local master; no remote",
         "exact_ci": []
       },
@@ -198,8 +203,8 @@
       }
     },
     "code_and_tests_pushed": true,
-    "all_exact_ci_success": true,
-    "note": "Four configured CI repositories green; ET no workflow, StockWiki no remote. Later PWF-only commit does not change runtime."
+    "all_exact_ci_success": false,
+    "note": "Prior exact-head CI records remain historical. D5 local validation is accepted; current ROOT integration commit must be pushed and its exact-head CI checked before marking current publication green."
   },
   "architecture_rectification": {
     "issues": 14,
@@ -492,34 +497,59 @@
     "current_package": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md"
   },
   "d5_decoupling": {
-    "status": "ROOT_FF_ROUTE_TESTS_PASS_EXTERNAL_CWP_STOCKWIKI_PENDING",
-    "priority": "P0_BEFORE_ALL_OTHER_MAINLINE",
-    "external_owner": "one harness owns CWP producer port and StockWiki three-entry consumer in separate worktrees",
-    "root_owner": "FF V1/V2 read-only caller inventory and focused route tests PASS (3/0 skip); CWP root integration, cross-repo E2E and final independent review pending external implementation",
-    "acceptance": "Each module owns its implementation and standalone contract tests; CWP/StockWiki/FF public-contract composition passes; FF V2 is pathless and explicit V1 compatibility isolated/tested; real read-only sample, scratch restoration and final review all pass",
-    "resume_mainline_only_after_acceptance": true,
-    "card": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md",
-    "code_changes_this_update": 0,
-    "test_harness_changes_this_update": 3,
-    "product_tests_run": 3,
-    "product_tests_skipped": 0,
-    "root_ff_route_receipt": "review/decoupling-recheck-20261104/root-d5-ff-route/receipt.json",
-    "root_ff_route_commit": "56410a738ebed40b0cae8fd9e333517f3a26728e",
-    "root_ff_route_pushed_to": "origin/master",
-    "root_ff_route_push_smoke": "17 passed / 12.30s; exact-head GitHub CI status was pending in the prior record and was not verified on 2026-11-05",
-    "delivery_check_2026_11_05": {
-      "company_wiki_head": "8bae209bc885dfec6809de2b633834e5be17ab1d",
-      "company_wiki_origin_master": "8bae209bc885dfec6809de2b633834e5be17ab1d",
-      "stockwiki_main_head": "23d84586dc2425961e953f5ab28aef867de6cb87",
-      "stockwiki_v2_reader_candidate": {
-        "branch": "codex/source-export-v2-reader",
-        "head": "0b406832b744892df7b592ca5d5c0d9fe2a0e3da",
-        "assessment": "OPT_IN_SOURCE_EXPORT_V2_READER_NOT_D5_DELIVERY",
-        "reason": "Separate CLI reader; stockwiki/sources.py still calls local documents.read_document_excerpt; no evidence of D5 processed-document/1 contract or three default-entry migration"
+    "status": "ACCEPTED",
+    "candidate_heads": {
+      "company-wiki": "a28692a6c49125143d2240b4a6d6df2ba29a28a1",
+      "StockWiki": "6d1e40bcdcde5e99488e22c38d57bd8e1b33c27e"
+    },
+    "root_mainline_heads_after_fast_forward": {
+      "company-wiki": "a28692a6c49125143d2240b4a6d6df2ba29a28a1",
+      "StockWiki": "6d1e40bcdcde5e99488e22c38d57bd8e1b33c27e"
+    },
+    "root_combination_receipt": "review/decoupling-recheck-20261104/root-d5-final/run-6/report.json",
+    "independent_review": {
+      "status": "PASS",
+      "receipt": "review/decoupling-recheck-20261104/root-d5-final/independent-review.md"
+    },
+    "tests": {
+      "cross_repository": {
+        "passed": 18,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
       },
-      "status": "NO_FORMAL_D5_HANDOFF_OBSERVED",
-      "next": "Provide existing D5-CWP-STOCKWIKI card to one harness; ROOT owns final FF version recheck, composition E2E and global review"
-    }
+      "runner_scope_unit": {
+        "passed": 15,
+        "skipped": 0,
+        "failed": 0
+      },
+      "merged_cwp_contract": {
+        "passed": 13,
+        "skipped": 0,
+        "failed": 0
+      },
+      "ruff": "passed"
+    },
+    "real_source": {
+      "description": "Zhongda Leader 2025 annual investor-relations activity record PDF",
+      "bytes": 113954,
+      "sha256_before_after": "ef78655e0980ce0ae50a5c9ab77457a024a9a5999ab4c0dff0556dc144efa4ef",
+      "mtime_stable": true
+    },
+    "stockwiki_transport_config": {
+      "path": "config/cwp_source_index.transport.json",
+      "raw_sha256_before_after": "c86002999529067af223e12503f6cdfaa83dd65b15edb1d878175658bd86c2cf",
+      "reviewed_git_blob": "f4406252702b5c2c83e8e2bc5ea16a8eabe717f8",
+      "matches_reviewed_commit": true
+    },
+    "candidate_worktrees_clean_before_after": true,
+    "scratch_restored": true,
+    "cache_scope": "No second cache added; a reusable generic persistent CWP normalized-unit cache was not established by this acceptance. Cache recovery remains a later mainline task.",
+    "publication": {
+      "company_wiki": "fast-forwarded locally; push and exact-head CI observation pending",
+      "StockWiki": "fast-forwarded locally; no remote configured"
+    },
+    "accepted_at_utc": "2026-11-06T19:08:51Z"
   },
   "d4_closeout": {
     "status": "COMPLETE_ACCEPTED",

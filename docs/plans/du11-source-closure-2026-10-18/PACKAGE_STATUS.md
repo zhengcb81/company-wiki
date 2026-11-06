@@ -1,8 +1,8 @@
-# 外包当前状态总表 — 2026-11-04
+# 外包当前状态总表 — 2026-11-06
 
 本表只汇总已审计的近期卡，**不是项目总完成率、所有历史卡总数或所有仓全部分支盘点**。机器表为[PACKAGE_STATUS.json](PACKAGE_STATUS.json)，主线只看[CURRENT_STATUS](CURRENT_STATUS.md)。工程接收、真实产品验收和整家公司研究是三种不同结果。
 
-当前主线闸位：D4 仅按原范围验收；全局解耦 D5 仍 OPEN。外部实现卡为 [D5-CWP-STOCKWIKI](review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md)；ROOT 的 FF V2 pathless/V1 显式兼容子节点已 3/3 通过，整体 CWP→StockWiki 产品边界和跨仓验收仍待完成。只读调用方盘点显示当前 RF 生产准备使用 V2；不得把 V1 兼容入口误写成默认生产故障。其它主线保持暂停，详见 CURRENT_STATUS。
+当前主线闸位：D4 按原范围 CLOSED，D5 全局解耦 ACCEPTED。CWP pathless 规范化文档 port、StockWiki 三入口、FF V2/V1 路由和真实本地样本的固定跨仓测试 18/18 通过，0 skip；最终独审 PASS。收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。主线下一步恢复 T4/SEM-QUAL-01；新版摘要、缓存恢复、RF 实际采用和公司循环仍 OPEN，详见 CURRENT_STATUS。
 
 | 任务卡 | 已核状态（卡内范围） | 依据 |
 |---|---|---|
@@ -33,6 +33,7 @@
 | D4-04 | MERGED_PUSHED | CWP master; included in `e7469d68` | [D4 closeout](review/d4-closeout-20261104/README.md) |
 | D4-05 | MAIN_PUSHED | FF `bf7e1dab` | [D4 closeout](review/d4-closeout-20261104/README.md) |
 | D4-06 | ROOT_INTEGRATED_ACCEPTED | CWP `e7469d68`; AUDIT code `2449df4a` + PWF `3589b69`, local only/no remote | [D4 closeout](review/d4-closeout-20261104/README.md) |
+| D5-CWP-STOCKWIKI | ACCEPTED_LOCAL_MERGED | CWP `a28692a6`; StockWiki `6d1e40bc` (local master; no remote); ROOT run-6 `18 passed / 0 skipped`; independent final review PASS | [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md) |
 
 
 W15等Audit仓无remote是已记录的发布边界，不是等作者未交付。W18交的是冻结/评分工具，不代签内容通过；W20-RF交的是采用观察工具；其后ROOT华利M8当前v6新版artifact有界实际采用及45独立检查已通过[新证据](review/mainline-closeout-20261031/p1-current/README.md)（先前v5原签收保留），不能由旧卡或此局部通过代签整家公司研究；W21/W22环境/部署/IO工程不代签canonicalC2。IR/QA/MC三包已并各自主线，属于非阻塞旁线。
