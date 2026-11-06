@@ -190,3 +190,10 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 - **测试报告完整性：** 独立仓的绝对 pytest 路径在 JUnit 中可能没有 classname，按模块推导会假报 consumer/必需用例缺失；root runner 改为用冻结的唯一 case name 计数，并给消费者归属固定必需用例。早期实现还出现过 consumer 名称映射 KeyError；均通过定向回归和最终 18-case run 关闭。
 - **缓存边界：** 已交付 port 在请求时使用 CWP 规范化 owner，但此验收没有建立通用跨请求/持久 normalized-unit parser cache 的存在证据。D5 不再引入第二 cache；缓存恢复照 task_plan 在摘要流程之后做独立验收，不能将本次接口解耦 PASS 等同于 cache hit/recovery PASS。
 - **验收范围：** run-6 证明三入口实际消费同一 pathless port、FF V2/V1 路由边界、真实本地单样本完整性和临时目录恢复；不代签财报摘要的业务召回质量、多市场文种泛化、RF adoption 或固定公司审计循环。
+## 2026-11-06 — T4/SEM-QUAL-01 本地实施与 H1 观察（最终接受仍 OPEN）
+
+- TDD 先复现两类根因：source note 子标题不能成为后续同层 note 的父级；当前 v7/legacy 摘要评估可能丢失跨 span 的计划/条件限定。owner 层已有本地修复与泛化回归，未提交。
+- 聚焦结果：`tests/unit/document_understanding_note_scope` 91 passed；`tests/unit/test_source_case_runner.py` 20 passed；decoder/source-frame/summary 组合 271 passed；qualifier 专项 17 passed。最终 Ruff 与独立审查尚未完成。
+- 真实 H1 observer 首次在读取来源前因 Windows `os.link` WinError 5 失败；写入路径改为 Windows 同目录 `os.rename` 原子首次发布，POSIX 仍保留 hardlink；20 项 runner 用例通过。失败尝试没有读取原件、网络、模型或下载。
+- 第二次单例观察耗时 28.4237 秒，112 spans，12/12 必需单元 parsed-exact/represented，102 native members；9 个结构/context 检查均有输出；model posts/downloads/raw copies 均为 0，database/original/runtime/observer 比较均不变。状态仅为 `OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE`。
+- 未关闭项：相对先前 H1 的 101 native members 增至 102，尚未解释；需逐项核对原文成员和 locator，完成大节点独立审查、耐久化收据、scratch 恢复后才能 ACCEPT。真实业务召回、摘要、缓存/RF 不由此观察代签。

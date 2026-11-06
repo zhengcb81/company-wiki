@@ -38,18 +38,18 @@
     },
     {
       "id": "P1",
-      "status": "OPEN_AFTER_T4_SEM_QUAL_01; HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
-      "task": "Current Huali15/12atoms and Berkshire73/10atoms; actual activation/same/cross cache PASS;15Berkshire unprocessed and full-source partial remain explicit"
+      "status": "T4_SEM_LOCAL_IMPLEMENTATION_AND_H1_OBSERVED; FINAL_ACCEPTANCE_OPEN; NEW_RUNTIME_C_ACCEPTANCE_OPEN",
+      "task": "Close T4/SEM milestone first; then accept new real summaries/content coverage. Historical Huali15/12atoms and Berkshire73/10atoms recovery remain bounded evidence; 15 Berkshire units and full-source partial remain explicit."
     },
     {
       "id": "P2",
-      "status": "OPEN_AFTER_P1; NEW_RUNTIME_C_ACCEPTANCE_OPEN",
-      "task": "Same new artifact actually consumed by RF native parameters/formula"
+      "status": "OPEN_AFTER_P1",
+      "task": "Prove the same accepted new artifact is consumed by RF native parameters/formula"
     },
     {
       "id": "P3",
-      "status": "OPEN_AFTER_P1_P2; R4_FOUR_REVIEWS_ENGINEERING_REMEDIATION_ACTIVE_REAL_COMPANY_OPEN",
-      "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
+      "status": "OPEN_AFTER_P1_P2",
+      "task": "W12 company rerun, new-company generalization, fixed 8-company full audit/skill improvement and final clean streak"
     }
   ],
   "package_status_registry": "PACKAGE_STATUS.json",
@@ -77,11 +77,10 @@
     }
   },
   "current_limits_to_close": [
-    "D5 global decoupling: CWP parser-owned normalized-document port, StockWiki three default consumer entries, FF V2 pathless/V1 compatibility boundary, isolated module tests and ROOT combination acceptance",
-    "SEM-QUAL-01: current v7 and legacy may accept planned/conditional source rewritten as actual; source/claim/locators frozen, generic qualifier binding required before real summary.",
+    "T4/SEM-QUAL-01 final acceptance: inspect the H1 native-member delta (102 versus prior 101), all 12 exact required locators and structure/context evidence; independent review and scratch restoration remain open.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
-    "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
-    "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatoryPDF/HK/US_RPO and genuinely unexposed holdouts"
+    "Berkshire 15 unprocessed explicitly retained; full-source/long-frontier generalization remains partial; 10 required DEV business atoms now present",
+    "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatory PDF/HK/US RPO and genuinely unexposed holdouts"
   ],
   "source_material_contract": {
     "eligible": "source material suitable for reading; not world truth verification",
@@ -90,10 +89,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "D5_GLOBAL_DECOUPLING_ACCEPTED_T4_SEM_QUAL_NEXT",
+  "project_status": "D4_D5_DECOUPLING_ACCEPTED_T4_SEM_LOCAL_IMPLEMENTATION_H1_REVIEW_OPEN",
   "as_of_date": "2026-11-06",
-  "observed_at_utc": "2026-11-06T19:08:51Z",
-  "next_action": "Resume T4 source-note-parent + SEM-QUAL-01: write root-cause regression tests first, repair in the owning layer, then validate on one isolated real H1. Only then proceed to real-summary acceptance, cache recovery, RF adoption, and the fixed-company loop.",
+  "observed_at_utc": "2026-11-06T20:38:29Z",
+  "next_action": "Finish T4 source-note-parent + SEM-QUAL-01 acceptance: explain the 101-to-102 native-member delta against the prior H1, verify all 12 exact required locators and the 9 structure/context observations, complete final Ruff and one independent milestone review, write durable receipts, and restore the two ROOT-created scratch directories. Do not mark H1 as company/economic acceptance. After acceptance, proceed to new real-summary quality, cache recovery, RF adoption, and the fixed-company loop.",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -167,8 +166,17 @@
         "d5_candidate_merge": {
           "status": "fast_forwarded_locally",
           "head": "a28692a6c49125143d2240b4a6d6df2ba29a28a1",
-          "push_and_exact_ci": "pending"
-        }
+          "push_and_exact_ci": "Local HEAD and local origin/master tracking ref match ROOT acceptance commit c28b122075748d99547fb0a7e2fd4adcd7490269; live ls-remote and exact-head CI were not freshly verified in this reconciliation."
+        },
+        "d5_root_closeout": {
+          "commit": "c28b122075748d99547fb0a7e2fd4adcd7490269",
+          "local_head": "c28b122075748d99547fb0a7e2fd4adcd7490269",
+          "local_origin_master_tracking_ref": "c28b122075748d99547fb0a7e2fd4adcd7490269",
+          "tracking_refs_match": true,
+          "direct_remote_ls_remote": "NOT_VERIFIED_DNS_WORKER_FAILED_TO_START",
+          "exact_head_ci": "NOT_FRESHLY_VERIFIED"
+        },
+        "exact_ci_scope": "Existing run IDs in this object are the D4 closeout CI for head e7469d684b10a4cd37772e045eb3e588254c5ab8; they do not establish exact-head CI for D5 ROOT closeout c28b122075748d99547fb0a7e2fd4adcd7490269."
       },
       "filing-fetch": {
         "source_head": "508aba308cf5206c486119c446b66172debdc09a",
@@ -209,7 +217,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "全局D5解耦优先：CWP pathless规范化文档port + StockWiki三入口消费由一个外部harness负责；ROOT已完成FF V1/V2只读调用方盘点和3例V2/V1路由子测试（0 skip），当前RF生产准备走V2/pathless、V1 canonical_path仅是显式兼容合同；ROOT待外部实现交付后完成三入口组合E2E和最终独立审查。T4/SEM及其他主线在D5全验收前暂停。",
+    "current_work": "D4/D5 global decoupling is accepted (D4 27-case suite; D5 18-case cross-repository suite, 0 skips, independent review PASS). Current ROOT work is T4/SEM local implementation and one-H1 acceptance; the final H1 review/receipt is open. Do not restart or redispatch D5.",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -221,14 +229,14 @@
   "next_stages": [
     {
       "id": "decoupling-first",
-      "status": "D5_GLOBAL_DECOUPLING_OPEN",
+      "status": "COMPLETE_ACCEPTED_D5",
       "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
       "evidence": "review/decoupling-20261102/independent/review.md",
       "recheck": "review/decoupling-recheck-20261102/README.md"
     },
     {
       "id": "residual-gate-families",
-      "status": "D4_DIAGNOSTIC_VETO_ACCEPTED; D5_BOUNDARY_ACCEPTANCE_OPEN",
+      "status": "D4_DIAGNOSTIC_VETO_AND_D5_BOUNDARY_ACCEPTED",
       "plan": "review/architecture-reassessment-20261102/README.md",
       "sequencing": "Included in decoupling resource/codec ownership, not a separate parallel lane.",
       "evidence": "review/decoupling-20261102/independent/review.md",
@@ -236,29 +244,34 @@
     },
     {
       "id": "T4-source-parent",
-      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING",
-      "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md"
+      "status": "IMPLEMENTED_LOCAL; H1_OBSERVED; FINAL_REVIEW_OPEN",
+      "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md",
+      "blocked_by_d5": false,
+      "next": "Complete H1 differential review, independent milestone review, durable evidence and scratch restoration."
     },
     {
       "id": "SEM-QUAL-01",
-      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; SEMANTIC_DEFECT_STILL_OPEN",
+      "status": "IMPLEMENTED_LOCAL; FOCUSED_TESTS_PASS; FINAL_ACCEPTANCE_OPEN",
       "evidence": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/cwp-contract-followup.json",
-      "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md"
+      "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md",
+      "current_evidence": ".planning/t4-sem-h1-20261106-attempt2/h1.json (local scratch; not yet archived)",
+      "blocked_by_d5": false,
+      "next": "Complete H1 differential review, independent milestone review, durable evidence and scratch restoration."
     },
     {
       "id": "C-source",
-      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; H1_V4_12_REQUIRED_RECALLED_INDEPENDENT_PARENT_CONTEXT_P2_OPEN",
+      "status": "H1_OBSERVED; FINAL_REVIEW_OPEN; BUSINESS_ACCEPTANCE_NOT_CLAIMED",
       "evidence": "review/architecture-quality-20261101/implementation-results/C-source-v4-independent.md"
     },
     {
       "id": "C-summary-cache-RF",
-      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; OPEN",
+      "status": "OPEN_AFTER_T4_SEM_ACCEPTANCE",
       "preparation": "review/architecture-quality-20261101/implementation-results/C-preparation.md"
     },
     {
       "id": "R4-company-and-generalization",
-      "status": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING; OPEN",
-      "scope": "All6R4 issues, original/new companies, research quality/detection evolution, fixed8 and3clean obligations"
+      "status": "OPEN_AFTER_P1_P2",
+      "scope": "All 6 R4 issues, original/new companies, research quality/detection evolution, fixed 8 and 3-clean obligations"
     },
     {
       "id": "source-coverage",
@@ -415,12 +428,12 @@
   },
   "gate_rejection_followup": {
     "status": "ENGINEERING_COMPLETE_EXACT_CI_GREEN_REAL_C_OPEN",
-    "priority": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING",
+    "priority": "T4_SEM_QUAL_01_BEFORE_NEW_REAL_SUMMARY",
     "plan": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/plan.md",
     "closure": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md"
   },
   "architecture_reassessment": {
-    "status": "D5_GLOBAL_DECOUPLING_OPEN",
+    "status": "HISTORICAL_SNAPSHOT_SUPERSEDED_BY_D5_ACCEPTED",
     "evidence": "review/architecture-reassessment-20261102/README.md",
     "coordination": "review/architecture-reassessment-20261102/COORDINATION.md",
     "new_confirmed_families": [
@@ -428,7 +441,7 @@
       "final_import_budget"
     ],
     "active_writers": {
-      "ROOT": "D5 owns FF V1/V2 boundary proof, cross-repo integration and final review; read-only caller inventory is complete; T4/SEM and all other mainline paused"
+      "ROOT": "T4/SEM implementation is local; final H1 member-delta review, independent milestone review, durable evidence and scratch restoration remain."
     },
     "prepared_not_dispatched": [
       "revenue-forecast",
@@ -436,12 +449,21 @@
     ],
     "code_changes": true,
     "real_provider_calls": 0,
-    "decoupling": "D3 and D4 scoped results remain accepted; global decoupling is OPEN because CWP normalized-document output is not yet the sole parser boundary for StockWiki. FF caller audit found no active internal production V1 caller and current RF preparation uses V2/pathless; the isolated V2/V1 route sub-suite passes, and the final version-bound composition still remains",
-    "dispatch_status": "D5_CARD_READY; FF_LEGACY_ROOT_OWNED; ALL_OTHER_MAINLINE_PAUSED",
-    "recheck": "review/decoupling-recheck-20261102/README.md"
+    "decoupling": "D5 global decoupling ACCEPTED on 2026-11-06; current scope and receipt are recorded under d5_decoupling.",
+    "dispatch_status": "D5_ACCEPTED; NO_ACTIVE_DECOUPLING_DISPATCH",
+    "recheck": "review/decoupling-recheck-20261102/README.md",
+    "status_at_snapshot": "D5_GLOBAL_DECOUPLING_OPEN",
+    "snapshot_date": "2026-11-02",
+    "superseded_by": "d5_decoupling (ACCEPTED 2026-11-06)",
+    "current_status_note": "T4/SEM implementation is local; final H1 milestone review is open.",
+    "decoupling_at_snapshot": "D3 and D4 scoped results remain accepted; global decoupling is OPEN because CWP normalized-document output is not yet the sole parser boundary for StockWiki. FF caller audit found no active internal production V1 caller and current RF preparation uses V2/pathless; the isolated V2/V1 route sub-suite passes, and the final version-bound composition still remains",
+    "active_writers_at_snapshot": {
+      "ROOT": "D5 owns FF V1/V2 boundary proof, cross-repo integration and final review; read-only caller inventory is complete; T4/SEM and all other mainline paused"
+    },
+    "dispatch_status_at_snapshot": "D5_CARD_READY; FF_LEGACY_ROOT_OWNED; ALL_OTHER_MAINLINE_PAUSED"
   },
   "decoupling_first": {
-    "status": "D5_GLOBAL_DECOUPLING_OPEN",
+    "status": "HISTORICAL_SNAPSHOT_SUPERSEDED_BY_D5_ACCEPTED",
     "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
     "completed": [
       "D0 dependency ownership",
@@ -450,12 +472,7 @@
       "D3 39 current integration tests, installed runtime, real readonly and independent review",
       "Normal mainline commits/pushes, exact remote CI and three skill entry points"
     ],
-    "open": [
-      "D5 CWP pathless normalized-document port and StockWiki three-entry consumption",
-      "ROOT FF V1/V2 caller inventory and 3-case route suite PASS; final version-bound cross-repository boundary proof remains open",
-      "ROOT cross-repository integration and final independent review"
-    ],
-    "module_dispatch": "ALL_MAINLINE_DEFERRED_UNTIL_D5_GLOBAL_ACCEPTANCE",
+    "module_dispatch": "NO_ACTIVE_DECOUPLING_PACKAGE",
     "requires_user_reapproval": false,
     "business_tasks_retained": true,
     "independent_review": "review/decoupling-20261102/independent/review.md",
@@ -464,26 +481,42 @@
     "accepted_source_version": "3d822c41e24b3d14f926351567c37bb572b5a947",
     "current_test_routing_version": "a03d0c0296496eeb8aac23fa0ed3774f2b31abcf",
     "recheck": "review/decoupling-recheck-20261102/README.md",
-    "previous_D3_selected_acceptance_preserved": true
+    "previous_D3_selected_acceptance_preserved": true,
+    "status_at_snapshot": "D5_GLOBAL_DECOUPLING_OPEN",
+    "snapshot_date": "2026-11-02",
+    "superseded_by": "d5_decoupling (ACCEPTED 2026-11-06)",
+    "current_status_note": "D5 accepted on 2026-11-06; no decoupling package remains active.",
+    "open_at_snapshot": [
+      "D5 CWP pathless normalized-document port and StockWiki three-entry consumption",
+      "ROOT FF V1/V2 caller inventory and 3-case route suite PASS; final version-bound cross-repository boundary proof remains open",
+      "ROOT cross-repository integration and final independent review"
+    ],
+    "open": [],
+    "module_dispatch_at_snapshot": "ALL_MAINLINE_DEFERRED_UNTIL_D5_GLOBAL_ACCEPTANCE"
   },
   "decoupling_recheck": {
     "report": "review/decoupling-recheck-20261102/README.md",
     "evidence": "review/decoupling-recheck-20261102/evidence.json",
-    "status": "D5_ROOT_FF_ROUTE_SUBNODE_PASS_GLOBAL_OPEN",
-    "open": [
+    "status": "HISTORICAL_SNAPSHOT_SUPERSEDED_BY_D5_ACCEPTED",
+    "product_changes_this_review": 0,
+    "root_route_test_cases_passed": 3,
+    "root_route_test_cases_skipped": 0,
+    "receipt": "review/decoupling-recheck-20261104/root-d5-ff-route/receipt.json",
+    "paid_calls": 0,
+    "status_at_snapshot": "D5_ROOT_FF_ROUTE_SUBNODE_PASS_GLOBAL_OPEN",
+    "snapshot_date": "2026-11-04",
+    "superseded_by": "d5_decoupling (ACCEPTED 2026-11-06)",
+    "current_status_note": "D5 accepted on 2026-11-06; this record remains the historical pre-acceptance recheck.",
+    "open_at_snapshot": [
       "CWP owns normalized document structure and exposes a pathless versioned reader",
       "StockWiki provider business entries stop reparsing CWP PDF/Office originals",
       "ROOT FF V2/V1 route subnode passes 3 cases with zero skips; final version-bound cross-repository route proof remains part of D5 combination acceptance",
       "Module-isolated tests and ROOT composition prove the public boundary"
     ],
-    "product_changes_this_review": 0,
-    "root_route_test_cases_passed": 3,
-    "root_route_test_cases_skipped": 0,
-    "receipt": "review/decoupling-recheck-20261104/root-d5-ff-route/receipt.json",
-    "paid_calls": 0
+    "open": []
   },
   "implementation_packages": {
-    "status": "D4_ACCEPTED; D5_CARD_READY_FOR_EXTERNAL_HARNESS",
+    "status": "D4_D5_ACCEPTED_NO_ACTIVE_DECOUPLING_PACKAGE",
     "overview": "review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md",
     "implementation_cards": [
       "D4-01-stockwiki-source-virtualization.md",
@@ -494,7 +527,9 @@
     ],
     "root_owned_final_integration": "review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md",
     "reason_root_owns_integration": "ROOT integrated the five delivered implementation cards and consolidated AUDIT producer tests; accepted evidence is in d4_closeout.",
-    "current_package": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md"
+    "current_package": null,
+    "status_at_snapshot": "D4_ACCEPTED; D5_CARD_READY_FOR_EXTERNAL_HARNESS",
+    "last_completed_package": "review/decoupling-recheck-20261104/harness_lanes/D5-CWP-STOCKWIKI-PROCESSED-READING.md"
   },
   "d5_decoupling": {
     "status": "ACCEPTED",
@@ -546,10 +581,13 @@
     "scratch_restored": true,
     "cache_scope": "No second cache added; a reusable generic persistent CWP normalized-unit cache was not established by this acceptance. Cache recovery remains a later mainline task.",
     "publication": {
-      "company_wiki": "fast-forwarded locally; push and exact-head CI observation pending",
+      "company_wiki": "ROOT acceptance commit c28b122075748d99547fb0a7e2fd4adcd7490269 is local HEAD and matches the local origin/master tracking ref; direct ls-remote and exact-head CI were not freshly verified in this reconciliation (DNS worker failed to start).",
       "StockWiki": "fast-forwarded locally; no remote configured"
     },
-    "accepted_at_utc": "2026-11-06T19:08:51Z"
+    "accepted_at_utc": "2026-11-06T19:08:51Z",
+    "root_acceptance_commit": "c28b122075748d99547fb0a7e2fd4adcd7490269",
+    "root_acceptance_head_matches_local_origin_master_tracking_ref": true,
+    "latest_exact_head_ci": "NOT_FRESHLY_VERIFIED"
   },
   "d4_closeout": {
     "status": "COMPLETE_ACCEPTED",
@@ -595,9 +633,9 @@
     }
   },
   "business_plan_status": {
-    "revenue_forecast": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING",
-    "revenue_forecast_audit": "DEFERRED_UNTIL_D5_GLOBAL_DECOUPLING",
-    "note": "D4 scoped closure does not complete global decoupling; these business plans remain deferred until D5 global acceptance."
+    "revenue_forecast": "OPEN_AFTER_T4_SEM_ACCEPTANCE; NEW_RUNTIME_REAL_SUMMARY_AND_CACHE_WORK_REMAINS",
+    "revenue_forecast_audit": "RETAINED_FOR_P3_FIXED_COMPANY_AUDIT_LOOP",
+    "note": "These tasks are no longer deferred on D5; T4/SEM acceptance gates new-summary work, and RF adoption/fixed-company audit follow in the existing P1-P3 order."
   },
   "historical_publication": {
     "company-wiki-2026-11-02": {
@@ -651,5 +689,53 @@
         ]
       }
     }
+  },
+  "t4_sem_qual": {
+    "status": "LOCAL_IMPLEMENTATION_AND_FOCUSED_TESTS_PASS; H1_OBSERVED; FINAL_ACCEPTANCE_OPEN",
+    "source_changes_uncommitted": true,
+    "tests": [
+      {
+        "scope": "tests/unit/document_understanding_note_scope",
+        "passed": 91
+      },
+      {
+        "scope": "tests/unit/test_source_case_runner.py",
+        "passed": 20
+      },
+      {
+        "scope": "affected decoder/source-frame/summary/T4 suite",
+        "passed": 271
+      },
+      {
+        "scope": "tests/unit/test_narrative_qualifier_binding.py",
+        "passed": 17
+      }
+    ],
+    "ruff": "NOT_FINAL_VERIFICATION",
+    "real_h1": {
+      "receipt_local_scratch": ".planning/t4-sem-h1-20261106-attempt2/h1.json",
+      "status": "OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE",
+      "seconds": 28.423656700004358,
+      "selected_spans": 112,
+      "required_units": 12,
+      "represented_and_parsed_exact": 12,
+      "native_members": 102,
+      "prior_baseline_native_members": 101,
+      "structure_context_observations": 9,
+      "model_posts": 0,
+      "downloads": 0,
+      "raw_copies": 0,
+      "database_unchanged": true,
+      "original_files_unchanged": true,
+      "runtime_unchanged": true,
+      "observer_unchanged": true
+    },
+    "open_items": [
+      "Explain 101-to-102 native-member delta and verify exact locator/member mapping.",
+      "Complete final Ruff and one independent milestone review.",
+      "Archive durable evidence and restore ROOT-created scratch directories."
+    ],
+    "windows_observer_retry": "First attempt failed before source access because os.link raised WinError 5; Windows initial publication now uses same-directory os.rename, with POSIX hardlink behavior retained.",
+    "test_counts_non_additive": true
   }
 }

@@ -2,7 +2,7 @@
 
 本表只汇总已审计的近期卡，**不是项目总完成率、所有历史卡总数或所有仓全部分支盘点**。机器表为[PACKAGE_STATUS.json](PACKAGE_STATUS.json)，主线只看[CURRENT_STATUS](CURRENT_STATUS.md)。工程接收、真实产品验收和整家公司研究是三种不同结果。
 
-当前主线闸位：D4 按原范围 CLOSED，D5 全局解耦 ACCEPTED。CWP pathless 规范化文档 port、StockWiki 三入口、FF V2/V1 路由和真实本地样本的固定跨仓测试 18/18 通过，0 skip；最终独审 PASS。收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。主线下一步恢复 T4/SEM-QUAL-01；新版摘要、缓存恢复、RF 实际采用和公司循环仍 OPEN，详见 CURRENT_STATUS。
+当前主线闸位：D4 按原范围 CLOSED，D5 全局解耦 ACCEPTED。CWP pathless 规范化文档 port、StockWiki 三入口、FF V2/V1 路由和真实本地样本的固定跨仓测试 18/18 通过，0 skip；最终独审 PASS。收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。T4/SEM-QUAL-01 的本地实现、聚焦测试和一份真实 H1 观察已完成；最终审查、native-member 差异解释与收据整理仍 OPEN。新版摘要、缓存恢复、RF 实际采用和公司循环仍 OPEN，详见 CURRENT_STATUS。
 
 | 任务卡 | 已核状态（卡内范围） | 依据 |
 |---|---|---|

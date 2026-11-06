@@ -1,14 +1,14 @@
-**2026-11-06 状态：D5 全局解耦已验收并入主线；恢复既有顺序，当前下一步为 T4 source-note-parent + SEM-QUAL-01。** D4-01～06 继续 CLOSED。CWP 已成为通用规范化文档解析唯一 owner；StockWiki 三个 provider 默认入口统一消费 pathless port；FF schema 2.0 的 V2 主路径保持无物理路径，V1 兼容路径独立保留并测试。D5 依据 run-6 的跨仓真实样本组合、零 skip、独立最终审查通过后 ACCEPTED。完整收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
+**2026-11-06 状态：D4/D5 解耦已 ACCEPTED；T4 source-note-parent + SEM-QUAL-01 已本地实施并完成聚焦测试和单份真实 H1 观察，最终大节点审查尚 OPEN。** D4-01～06 继续 CLOSED。CWP 已成为通用规范化文档解析唯一 owner；StockWiki 三个 provider 默认入口统一消费 pathless port；FF schema 2.0 的 V2 主路径保持无物理路径，V1 兼容路径独立保留并测试。D5 依据 run-6 的跨仓真实样本组合、零 skip、独立最终审查通过后 ACCEPTED。完整收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
 
 # 主线剩余实施计划
 
 **当前：上一轮逐项表只证明其定义范围；新确认残留见本轮架构复核，已完成工程不重复施工。**
 
-## Next Step — T4 source-note-parent + SEM-QUAL-01
+## Next Step — 收口 T4 source-note-parent + SEM-QUAL-01 大节点
 
-D5 代码已按快进方式进入 CWP master 与 StockWiki master；ROOT 的 FF V2/V1 边界和 CWP→StockWiki→FF 组合验收均绑定到已审查版本。没有发现需要回滚或修复的验收问题。下一步恢复原先排定的 T4 source-note-parent + SEM-QUAL-01：先补限定词/来源父链的 RED 测试，再在所属 owner 层根修，用一份隔离真实 H1 复验；不要跳过 T4/SEM 直接进入批量真实摘要。
+D5 代码已按快进方式进入 CWP master 与 StockWiki master；ROOT 的 FF V2/V1 边界和 CWP→StockWiki→FF 组合验收绑定到已审查版本。T4/SEM 的 RED 测试、owner 层本地根修、聚焦测试和一份隔离真实 H1 观察已经完成。H1 覆盖 12/12 必需原文单元、112 spans、102 native members，28.42 秒；原件、数据库、runtime、observer 均未变化，0 模型 POST、0 下载、0 raw copy。不可将观察态提升为正式产品验收：102 对前次 101 的 native-member 差异尚待解释，需核对 12 个 locator/成员、完成一次独立大节点审查、将收据写入 review 并恢复测试 scratch。完成这些才 ACCEPT T4/SEM；不要提前进入批量真实摘要。
 
-**阶段边界：** D5 通过只关闭全局解耦，不等于新摘要、跨运行缓存恢复、RF 实际采用或八家公司循环完成。关键节点集中测试与独审，不为每个小 helper 增加签收；测试环境必须隔离并恢复。
+**阶段边界：** D4/D5 通过只关闭本计划冻结范围内的解耦，不等于新摘要、跨运行缓存恢复、RF 实际采用或八家公司循环完成。模块通过版本化公开合同协作是预期设计，不要求零依赖。关键节点集中测试与独审，不为每个小 helper 增加签收；测试环境必须隔离并恢复。
 
 ## P0-D — 六项解耦遗漏（D4 CLOSED）
 
@@ -49,7 +49,7 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 - 先在原P3来源修复中合并Q01陌生业务准入、Q02阅读recipe/缓存指纹，沿原R4 source owner根修，不加公司词库/额度。
 - 存储查询、预算归属、CAS/legacy工具、跨层合同和边界测试按细则B；StockWiki输出流限额归其transport，CWP不跨层接管实现。
 - 旧显式dry-shadow两轮/迁移CLI和无效helper清理，检查聚合到事实owner；必要身份/原文字节/as-of/预算/恢复仍保留。
-- 仅大节点集中工程独审、受影响测试及真实E2E；不新增逐项许可。Q01–Q14工程10767b86已独审/完整CI通过并本地主线，Q09在StockWiki本地主线、Q11接收实读SHA经边界论证保留；完整CI63F/22F/70F历史不改。原70期待保留，R5纠正资料可用与现实核实混用；旧结构T3已并线。T4真实来源父链与新版真实C仍 OPEN；D5 已 ACCEPTED，按当前 Next Step 恢复 T4/SEM 根修，原件/生产配置不改。
+- 仅大节点集中工程独审、受影响测试及真实E2E；不新增逐项许可。Q01–Q14工程10767b86已独审/完整CI通过并本地主线，Q09在StockWiki本地主线、Q11接收实读SHA经边界论证保留；完整CI63F/22F/70F历史不改。原70期待保留，R5纠正资料可用与现实核实混用；旧结构T3已并线。T4/SEM 实现和 H1 观察已在本地，正式接受仍待 member 差异解释与独审；新版真实摘要/C 仍 OPEN；D4/D5 已 ACCEPTED，原件/生产配置不改。
 
 ## P1/P2 — 历史有界摘要与采用已过，新runtime真实C仍OPEN
 

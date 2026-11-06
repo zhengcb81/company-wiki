@@ -30,6 +30,13 @@
 
 D5 没有新造另一套缓存。当前没有证据表明 CWP 有可复用的通用持久化 normalized-unit cache；port 当前按请求读取/解析。缓存复用/恢复仍按主线后续阶段单独验证，不属于本次 D5 通过声明。真实样本是一次职责/接口组合验证，不代表多市场、多文种阅读策略或完整公司审计循环完成。
 
-## 下一步
+## D5 接收时的下一步（2026-11-06，后续状态见下方对账）
 
 按 [task_plan.md](../../../task_plan.md) 恢复 T4 source-note-parent + SEM-QUAL-01；先写根因回归测试，再实施所属层修复，并以一份隔离真实 H1 做大节点验收。
+
+## 发布与当前进度对账（2026-11-06）
+
+- ROOT 接收/PWF 提交为 CWP `c28b122075748d99547fb0a7e2fd4adcd7490269`。本机 `master` HEAD 与本地 `origin/master` tracking ref 相同；本次直接 `git ls-remote` 因 DNS worker 无法启动而未取得实时远端确认。
+- 已知 exact-head CI 记录 `41919818618` / `41919818624` 绑定 D4 ROOT head `e7469d684b10a4cd37772e045eb3e588254c5ab8`，**不**绑定 D5 接收 commit `c28b122075748d99547fb0a7e2fd4adcd7490269`。本次未重新确认 c28 的 GitHub CI，机器状态按“未新鲜核实”记录，不沿用旧运行标绿。
+- D5 技术状态仍为 **ACCEPTED**；CWP commit 的远端实时存在性/exact CI 观察是单独的发布证据状态，不改变已通过的冻结范围内解耦验收结论。
+- T4/SEM-QUAL-01 已在 ROOT 本地完成 RED→GREEN 根修与聚焦测试，并成功观察一份真实 H1；但 102 对基线 101 的 native-member 差异、独立审查、最终 Ruff、持久化证据和 scratch 恢复仍 OPEN。当前唯一下一步见 [CURRENT_STATUS](../../../CURRENT_STATUS.md) 与 [HANDOFF](../../../HANDOFF.md)，不再从本节的历史指令重新执行 RED/实施。

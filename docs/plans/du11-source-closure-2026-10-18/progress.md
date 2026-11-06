@@ -401,3 +401,12 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - CWP 从 `f8eccf0a` 快进到 `a28692a6`；StockWiki 从 `23d84586` 快进到 `6d1e40bc`。两次均无冲突、未清理既有未跟踪数据。StockWiki 没有 remote，因此只记录本地并线。
 - D5 接受不表示通用持久化解析缓存存在或已修复。本次没有新建第二套缓存；CWP port 按请求读取/解析，缓存恢复仍按主线后续阶段验收。
 - 更新 task_plan、CURRENT_STATUS、HANDOFF、PACKAGE_STATUS、findings 与本进度记录。company-wiki 当前尚有明确的 ROOT runner/test/PWF 改动待提交和推送；只提交精确选定文件，不触碰其它历史未跟踪产物。CWP 当前精确 HEAD 的 push/CI 在本记录生成时尚待完成/核验。
+
+## 2026-11-06 — PWF 对账；T4/SEM 实施与 H1 观察进度
+
+- 上一条 D5 进度中的“push/CI 尚待完成”是 D5 closeout 写入后、ROOT 接收提交前的历史观察，不再作为当前状态。CWP 当前 `HEAD=c28b122075748d99547fb0a7e2fd4adcd7490269`，本地 `origin/master` tracking ref 同为该 SHA；本次 `git ls-remote` 因 DNS worker 启动失败，故没有声称刚刚验证远端实时 ref 或该 SHA 的 exact-head CI。已将此边界写入机器状态及 D5 closeout addendum；历史 D4 CI `e7469d68` 不冒作 c28 的 exact CI。
+- 对齐 `CURRENT_STATUS.md/json`、`task_plan.md`、`HANDOFF.md`、`PACKAGE_STATUS.md` 与本日志：D4/D5 已 ACCEPTED，不再列为待办或重新派发；唯一当前节点是 T4/SEM 大节点收口。旧 11-02/11-04 开放状态保留为历史快照并注明已被 D5 接收状态取代。
+- T4/SEM 已在本地 owner 层实施；RED→GREEN 与聚焦测试记录：note-scope 91 passed、runner 20 passed、decoder/source-frame/summary/T4 组合 271 passed、qualifier 专项 17 passed。最终 Ruff 和独立审查未完成，代码尚未提交。
+- 单例真实 H1 第二次运行 28.4237 秒，112 spans，12/12 必需原文成员精确覆盖；102 native members，较旧基线 101 多 1，差异仍待核；9 个结构/context 检查输出。model posts/downloads/raw copies 为 0，数据库、原件、runtime、observer 均未变。结果是 observer-only，不是公司或经济质量验收。
+- 首次 H1 observer 在读取来源前因 Windows `os.link` WinError 5 失败；根修后第二次运行成功。两个 ROOT 建立的 scratch 目录目前仍在本机，待耐久化收据后精确恢复到初始不存在状态；不能将此记录误读为 scratch 已清理。
+- 下一步：查清 101→102 映射并核 12 个 locator/context，完成最终 Ruff 和一次独立大节点审查；将收据归档并恢复 scratch，再将 T4/SEM 标为 ACCEPTED。随后才进入新版真实摘要。

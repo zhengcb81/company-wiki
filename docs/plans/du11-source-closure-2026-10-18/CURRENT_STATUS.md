@@ -1,14 +1,23 @@
-# 当前状态 — D5 全局解耦已验收；恢复 T4/SEM 主线
+# 当前状态 — D4/D5 解耦已验收；T4/SEM-QUAL-01 大节点收口中
 
 唯一入口：[当前状态](CURRENT_STATUS.md) / [机器状态](CURRENT_STATUS.json)；详细顺序见 [task_plan](task_plan.md)，交接见 [HANDOFF](HANDOFF.md)，固定长期目标见 [MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。
 
 **截至 2026-11-06：D5 全局解耦 ACCEPTED，当前主线不再等待外包卡。** CWP 的 pathless 规范化文档 port 与 StockWiki 三个默认消费入口已进入各自主线；FF schema 2.0 走 V2/pathless，显式 V1 兼容仍保留并有独立边界测试。最终跨仓套件 18 passed、0 skipped、0 failed/errors，独立审查 PASS。完整证据：[ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
 
-**当前唯一下一步：**恢复既有 T4 source-note-parent + SEM-QUAL-01，先写限定词与来源父链回归测试，再在所属责任层根修，并用一份隔离真实 H1 验收。完成后才恢复新版真实摘要、缓存恢复、RF 实际采用以及固定公司循环。D5 通过不代签这些产品任务。
+**当前唯一下一步：**完成 T4 source-note-parent + SEM-QUAL-01 的大节点收口。责任层实现和聚焦回归已在本地工作区完成；真实 H1 观察为 12/12 必需原文单元精确覆盖、112 个 spans、28.42 秒，未调用模型、未下载或复制原件，数据库/原件/runtime/observer 均未变化。最终独立审查、102 对此前 101 个 native members 的差异解释、证据归档与测试 scratch 恢复仍 OPEN，所以此节点尚未 ACCEPTED。通过后才恢复新版真实摘要、缓存恢复、RF 实际采用以及固定公司循环。
+
+## T4/SEM-QUAL-01 当前观察
+
+- TDD 反例已先红后绿；本地实现覆盖来源 note 的父链重置，以及中英文跨 span 的计划/条件限定词绑定。当前变更尚未提交。
+- 最近一次相关测试记录：note-scope 91 passed；source-case-runner 20 passed；decoder/source-frame/summary 组合 271 passed；qualifier 专项 17 passed。这些来自不同测试命令，可能有覆盖重叠，不能相加成总数。最终 Ruff 与大节点独审还未完成。
+- H1 收据暂存于本机 `.planning/t4-sem-h1-20261106-attempt2/h1.json`，不是持久交接证据；准确覆盖 12/12，9 个结构/context 观察均有记录。该收据状态是 `OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE`，不能当成公司或财报质量验收。
+- 与先前基线相比 native-member 数为 102 对 101；这不自动判失败，也不能忽略，需在收口时解释映射差异并检查 12 个成员/locator。
+- 第一次 observer 尝试在读取原件前因 Windows `os.link` WinError 5 失败；改为 Windows 同目录原子 `os.rename` 首次发布后重跑成功。该失败不涉及来源、网络或模型调用。
 
 ## D5 接收结果
 
 - 候选实现版本：CWP `a28692a6c49125143d2240b4a6d6df2ba29a28a1`；StockWiki `6d1e40bcdcde5e99488e22c38d57bd8e1b33c27e`。两者均通过快进并入本地主线；StockWiki 当前无 Git remote，无法推送远端。
+- ROOT D5 接收/PWF commit 为 CWP `c28b122075748d99547fb0a7e2fd4adcd7490269`；本机 `master` 与 `origin/master` tracking ref 当前相同。实时 `ls-remote` 与 c28 exact-head CI 在本次对账中未能核实；已知 D4 CI head `e7469d68` 不代替 c28 的 CI 记录。
 - run-6 固定跨仓套件：CWP 13 个处理 port 合同用例、StockWiki 三入口消费与真实样本 E2E 2 例、FF V2/V1 路由 3 例；合计 **18 passed**，无跳过、失败或错误。ROOT runner 定向单测 **15 passed**，Ruff 通过；合并后 CWP 合同测试再跑 **13 passed**。
 - 真实只读原件：中大力德投资者关系记录 PDF，113,954 bytes，SHA-256 `ef78655e0980ce0ae50a5c9ab77457a024a9a5999ab4c0dff0556dc144efa4ef`，测试前后 SHA/大小/mtime 一致。隔离 scratch 已恢复。
 - StockWiki transport 配置 `config/cwp_source_index.transport.json` 在测试期间 SHA 稳定，并以 Git clean-filter blob 比较确认内容与审查 HEAD 一致；Windows CRLF/LF 转换不误报，真实内容修改仍被回归测试拒绝。候选工作树运行前后均干净。
@@ -24,10 +33,11 @@
 
 | 阶段 | 状态 | 顺序与边界 |
 |---|---|---|
-| T4 + SEM-QUAL-01 | **NEXT / OPEN** | 来源父链与限定条件绑定根修，先 RED 测试，再一份真实隔离 H1 |
-| 新版真实摘要与质量验收 | OPEN / 等 T4 | 用真实材料核查召回、归属限定、财务碎片/套话占位、业务信息遗漏 |
+| D4 + D5 解耦 | **COMPLETE / ACCEPTED** | 只在冻结接口范围内声明通过；版本化接口是预期协作合同，不代表模块零依赖 |
+| T4 + SEM-QUAL-01 | **IMPLEMENTED LOCALLY / H1 OBSERVED / FINAL REVIEW OPEN** | 先解释 member 差异、核对 H1 证据，完成一次大节点独审与 scratch 恢复 |
+| 新版真实摘要与质量验收 | OPEN / 等 T4 接受 | 用真实材料核查召回、归属限定、财务碎片/套话占位、业务信息遗漏 |
 | 缓存恢复 | OPEN / 等新摘要基线 | 付费中断、同 run 与跨 run 恢复；按实际配置记账，不声称 D5 已验证 |
 | RF 实际采用 | OPEN / 等新摘要和恢复 | 证明同一摘要 artifact 进入 RF 参数、公式与报告 |
 | 固定公司审查循环 | OPEN / 最后 | 依长期目标完成固定名单与新公司泛化，不以局部工程测试替代完整审查 |
 
-继续保留原始文件、历史失败和未跟踪 WIP；本轮只合并 D5 明确交付，不清理其它产物，不修改 Dayu/IQS。后续仍只在大节点做独审和组合测试，避免逐小节点增加审查。
+继续保留原始文件、历史失败和未跟踪 WIP；D5 的已跟踪代码已在 CWP 主线，StockWiki 已本地并线但无 remote。当前 T4/SEM 改动仍在工作区，不清理其它历史产物，不修改 Dayu/IQS。后续仍只在大节点做独审和组合测试，避免逐小节点增加审查。

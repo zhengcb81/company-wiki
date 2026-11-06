@@ -1,4 +1,4 @@
-# 当前交接 — D5 已接收；ROOT 恢复 T4/SEM
+# 当前交接 — D4/D5 已接收；ROOT 收口 T4/SEM
 
 **唯一入口**：先读 [CURRENT_STATUS.md](CURRENT_STATUS.md) 和 [CURRENT_STATUS.json](CURRENT_STATUS.json)，再按 [task_plan.md](task_plan.md) 执行。长期目标只看 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。截至 2026-11-06，D5 已验收并入主线；不要重新派发 D5 卡或把旧 handoff 中的 OPEN/PENDING 当现状。
 
@@ -10,14 +10,15 @@
 - ROOT runner 范围单测 15 passed，Ruff 通过；主线 CWP 合并后 contract suite 13 passed。最终独立审查 PASS。
 - 证据入口：[ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)；机器测试收据 [run-6/report.json](review/decoupling-recheck-20261104/root-d5-final/run-6/report.json)。
 - StockWiki 仓库没有 Git remote，记录为本地并线；不得把本地并线说成已推送。CWP push/精确 CI 状态以 closeout 的发布字段为准，没核实就不要填绿。
+- CWP ROOT 接收 commit `c28b122075748d99547fb0a7e2fd4adcd7490269` 与本机 `origin/master` tracking ref 相同；本次未能直接查询实时远端或该 head 的 exact CI。`e7469d68` 的已知 CI 只绑定 D4 head，不能冒作 c28 的 CI。
 
-## 当前 ROOT 唯一下一步：T4 source-note-parent + SEM-QUAL-01
+## 当前 ROOT 唯一下一步：完成 T4/SEM 大节点收口
 
-1. 先重读 task_plan 中 T4/SEM 原问题和 `findings.md` 里的源头证据，不再重新调查已接受的 D5。
-2. 在真实改动前先写最小 RED 回归，覆盖来源父链丢失及计划/条件句被改写成已发生事实的根因；避免把两个问题用关键词补丁混成单一规则。
-3. 在拥有该字段/语义的责任层实施通用修复，保留 issuer、期间、as-of、否定、计划条件限定和 locator；不增加公司名特判、材料许可门或重复 SHA 检验。
-4. 跑所属模块聚焦单测/集成测试，再对一份隔离真实 H1 跑端到端；验证原件 SHA 不变、测试目录恢复。仅在该大节点请求一次独立审查。
-5. 通过后提交、按仓库 remote 状态推送并更新 CURRENT_STATUS、task_plan、findings、progress、handoff。此节点不并入新版摘要、缓存恢复或 RF 采用工作。
+1. 现有本地实现覆盖 note 父链重置与中英文跨 span 条件限定词绑定；RED→GREEN 与聚焦测试结果记于 `progress.md`，当前变更尚未提交。
+2. 审阅 `.planning/t4-sem-h1-20261106-attempt2/h1.json`：12/12 必需原文单元精确覆盖，112 spans、102 native members；解释与旧基线 101 的成员数差异，并核对 12 个 locator 和 9 个结构/context 观察。不得把 `OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE` 写成业务验收通过。
+3. 由独立审查者对当前源码差异、回归用例和真实 H1 证据做一次大节点审查；先修复发现的问题再收口。最终 Ruff 状态尚未确认。
+4. 将审查报告、摘要收据和测试清理结果写入 `review/T4-SEM-closeout-20261106/`；确认原件未变并只清理由本次建立的测试 scratch，恢复其初始不存在状态。
+5. 通过后再提交、推送并更新 CURRENT_STATUS、task_plan、findings、progress、handoff。此节点不并入新版摘要、缓存恢复或 RF 采用工作。
 
 ## 接下来仍未完成的工作
 
