@@ -27,6 +27,7 @@ Covered here:
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import os
@@ -578,6 +579,13 @@ def cmd_read(root):
         envelope["schema_version"] = "stockwiki.dashboard_issuer_proof/2"
     if os.environ.get("CWP_FIXTURE_AS_OF_SHIFT"):
         envelope["query"]["as_of"] = "2020-01-01T00:00:00Z"
+    if os.environ.get("CWP_FIXTURE_SELECTED_LISTING"):
+        envelope["selected_listing_id"] = os.environ[
+            "CWP_FIXTURE_SELECTED_LISTING"]
+    if os.environ.get("CWP_FIXTURE_RECEIPT_REF_MISMATCH") \
+            and envelope["owner_package"]:
+        envelope["owner_package"]["payload"][
+            "verified_issuer_receipt_id"] = "IVR_fixture_missing"
     if os.environ.get("CWP_FIXTURE_NAMESPACE") and envelope["owner_package"]:
         for binding in envelope["owner_package"]["trusted_context"][
                 "source_bindings"].values():
@@ -588,6 +596,21 @@ def cmd_read(root):
     out = (_canon(envelope) + "\n").encode("utf-8")
     if len(out) > MAX_STDOUT:
         sys.stderr.write("envelope too large\n")
+        return 2
+    if os.environ.get("CWP_FIXTURE_OVERSIZED_STDOUT"):
+        stream = getattr(sys.stdout, "buffer", sys.stdout)
+        stream.write(b"x" * (MAX_STDOUT + 1))
+        stream.flush()
+        return 0
+    if os.environ.get("CWP_FIXTURE_OVERSIZED_STDERR"):
+        stream = getattr(sys.stderr, "buffer", sys.stderr)
+        stream.write(b"x" * (MAX_STDOUT + 1))
+        stream.flush()
+        return 2
+    if os.environ.get("CWP_FIXTURE_NONZERO_AVAILABLE"):
+        stream = getattr(sys.stderr, "buffer", sys.stderr)
+        stream.write(out)
+        stream.flush()
         return 2
     stream = getattr(sys.stdout, "buffer", sys.stdout)
     stream.write(out)
@@ -1079,6 +1102,161 @@ def test_query_echo_mismatch_is_refused(workspace):
     assert result["items"] == []
 
 
+def test_owner_package_must_name_the_receipt_it_supplies(workspace):
+    tmp_path, catalog, config_path = workspace
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    result = _stdout_json(_run_cli(
+        tmp_path, config_path, sw_root, _request(),
+        env={"CWP_FIXTURE_RECEIPT_REF_MISMATCH": "1"},
+    ))
+    assert result["binding"]["status"] == "incompatible"
+    assert "verified_issuer_receipt_mismatch" \
+        in result["binding"]["reason_codes"]
+    assert result["items"] == []
+    assert result["page"]["total_status"] == "unknown"
+
+
+def test_explicit_listing_cannot_be_replaced_by_another_proven_listing(workspace):
+    tmp_path, catalog, config_path = workspace
+    sw_root = _build_sw_workspace(tmp_path, [_dual_scenario(ACME_URN)])
+    receipt_path = (sw_root / "data" / "quick_scan" /
+                    "identity_receipts.sqlite")
+    import sqlite3
+    con = sqlite3.connect(str(receipt_path))
+    receipt = json.loads(con.execute(
+        "SELECT receipt_json FROM identity_receipt").fetchone()[0])
+    con.close()
+    requested, returned = receipt["listing_ids"]
+    assert requested != returned
+
+    result = _stdout_json(_run_cli(
+        tmp_path, config_path, sw_root,
+        _request(listing_id=requested),
+        env={"CWP_FIXTURE_SELECTED_LISTING": returned},
+    ))
+    assert result["binding"]["status"] == "unavailable"
+    assert "stockwiki_proof_selected_listing_mismatch" \
+        in result["binding"]["reason_codes"]
+    assert result["items"] == []
+    assert result["page"]["total_status"] == "unknown"
+
+
+def test_public_candidate_helpers_are_query_bounded(workspace):
+    from company_wiki.source_catalog.public_document_browser import (
+        PublicDocumentBrowser,
+    )
+
+    _, catalog, _ = workspace
+    browser = PublicDocumentBrowser(catalog)
+    documents, truncated, rows_read = browser._entity_documents_with_limit(
+        ENT_ACME, limit=1)
+    assert len(documents) == 1
+    assert truncated and rows_read == 2
+    versions, version_truncated, version_rows_read = \
+        browser._document_versions_with_limit(documents[0], limit=1)
+    assert len(versions) <= 1
+    assert version_rows_read <= 4
+    assert isinstance(version_truncated, bool)
+
+
+def test_assertion_scan_is_sql_limited_before_rows_are_materialized():
+    from types import SimpleNamespace
+    from company_wiki.source_catalog.public_canonical_browser import (
+        _MAX_ASSERTION_SCAN, PublicCanonicalBrowser,
+    )
+    from company_wiki.source_catalog.source_reader import SourceReadError
+
+    class Reader:
+        def fetchall(self, sql, params):
+            assert "LIMIT ?" in sql
+            assert "evidence_json" not in sql
+            assert params == (_MAX_ASSERTION_SCAN + 1,)
+            return [{"assertion_id": str(index)}
+                    for index in range(_MAX_ASSERTION_SCAN + 1)]
+
+    browser = PublicCanonicalBrowser.__new__(PublicCanonicalBrowser)
+    browser.catalog = SimpleNamespace(reader=Reader())
+    with pytest.raises(SourceReadError, match="issuer_scan_budget_exceeded"):
+        browser._verified_assertions()
+
+
+def test_proven_versions_require_an_exact_proof_for_each_source_ref():
+    from types import SimpleNamespace
+    from company_wiki.source_catalog.public_canonical_browser import (
+        Binding, IssuerKey, PublicCanonicalBrowser, ResolvedIssuer,
+    )
+
+    document_id = "controlled-document"
+    wanted = ResolvedIssuer(
+        IssuerKey("sec.cik", CIK_ACME), "sec-primary-dei/1",
+        "assertion-good", "source-good", "a" * 64,
+    )
+    foreign = ResolvedIssuer(
+        IssuerKey("sec.cik", CIK_BETA), "sec-primary-dei/1",
+        "assertion-foreign", "source-foreign", "b" * 64,
+    )
+    rows = [
+        SimpleNamespace(document_id=document_id, source_id="source-good",
+                        sort_key=lambda: (1, "source-good")),
+        SimpleNamespace(document_id=document_id, source_id="source-foreign",
+                        sort_key=lambda: (2, "source-foreign")),
+        SimpleNamespace(document_id=document_id, source_id="source-unproven",
+                        sort_key=lambda: (3, "source-unproven")),
+    ]
+    browser = PublicCanonicalBrowser.__new__(PublicCanonicalBrowser)
+    browser._verified_assertions = lambda: [{
+        "source_id": "source-good", "document_id": document_id,
+    }]
+    issuer_by_source = {
+        "source-good": wanted,
+        "source-foreign": foreign,
+        "source-unproven": None,
+    }
+    browser._issuer_for_source = lambda source_id, memo: issuer_by_source[
+        source_id]
+    document = object()
+    fallback = SimpleNamespace(
+        _document=lambda requested: document if requested == document_id else None,
+        _document_versions_with_limit=lambda _, limit: (
+            rows[:limit], False, min(len(rows), limit)),
+    )
+    browser._fallback_browser = lambda: fallback
+
+    versions = browser._proven_versions(Binding(
+        status="verified", reason_codes=[], issuer_pin=wanted.pin(),
+    ))
+    assert [row.source_id for row in versions] == ["source-good"]
+
+
+@pytest.mark.parametrize("output_stream", ["stdout", "stderr"])
+def test_stockwiki_proof_output_is_bounded(workspace, output_stream):
+    tmp_path, catalog, config_path = workspace
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    result = _stdout_json(_run_cli(
+        tmp_path, config_path, sw_root, _request(),
+        env={f"CWP_FIXTURE_OVERSIZED_{output_stream.upper()}": "1"},
+    ))
+    assert result["binding"]["status"] == "unavailable"
+    assert "stockwiki_proof_output_limit" \
+        in result["binding"]["reason_codes"]
+    assert result["items"] == []
+    assert result["page"]["total_status"] == "unknown"
+
+
+def test_nonzero_proof_exit_cannot_authorize_available_state(workspace):
+    tmp_path, catalog, config_path = workspace
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    result = _stdout_json(_run_cli(
+        tmp_path, config_path, sw_root, _request(),
+        env={"CWP_FIXTURE_NONZERO_AVAILABLE": "1"},
+    ))
+    assert result["binding"]["status"] == "unavailable"
+    assert "stockwiki_proof_cli_failed" \
+        in result["binding"]["reason_codes"]
+    assert result["items"] == []
+    assert result["page"]["total_status"] == "unknown"
+
+
 def test_future_envelope_schema_is_incompatible(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1141,6 +1319,36 @@ def _browse_one_page(tmp_path, config_path, sw_root, *, limit=1, cursor=None,
         _request(limit=limit, cursor=cursor, proof_snapshot_id=snapshot))
     assert completed.returncode == 0, completed.stderr.decode("utf-8")
     return _stdout_json(completed)
+
+
+def test_proof_assertion_replacement_stales_existing_snapshot(workspace):
+    tmp_path, catalog, config_path = workspace
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    new_body = ACME_BODY.replace(b"annual report", b"annual report rev2")
+    _write_doc(tmp_path / "companies" / "ACME" / "raw" / "annual",
+               "acme_10k_2025_rev2.html", new_body,
+               _us_sidecar(ENT_ACME, "ACME CORP", "ACME", "acme-10k-25-r2",
+                           TEN_K_TITLE))
+    catalog.scan()
+    facts, evidence = _dei_facts_evidence(
+        _sha(new_body), "ACME CORP", "US", "ACME", CIK_ACME, TEN_K_TITLE)
+    _record_facts(catalog, new_body, "text/html", facts, evidence)
+    first = _browse_one_page(tmp_path, config_path, sw_root, limit=None)
+    assert first["page"]["total"] == 2
+    snapshot = first["page"]["proof_snapshot_id"]
+
+    corrected_facts, corrected_evidence = _dei_facts_evidence(
+        _sha(new_body), "ACME CORPORATION", "US", "ACME", CIK_ACME,
+        TEN_K_TITLE)
+    corrected_evidence["entity"]["value"] = "ACME CORPORATION"
+    _record_facts(catalog, new_body, "text/html", corrected_facts,
+                  corrected_evidence)
+    changed = _browse_one_page(
+        tmp_path, config_path, sw_root, limit=None, snapshot=snapshot)
+    assert changed["state"] == "stale"
+    assert changed["items"] == []
+    assert changed["page"]["total_status"] == "unknown"
+    assert changed["page"]["proof_snapshot_id"] != snapshot
 
 
 def test_pagination_is_pinned_and_stale_on_revision_change(workspace):
@@ -1222,6 +1430,38 @@ def test_malformed_requests_are_blocked(workspace, payload, reason):
     assert error["schema_version"] == RESPONSE_SCHEMA
 
 
+@pytest.mark.parametrize("field", ["cursor", "proof_snapshot_id"])
+def test_deep_page_tokens_are_blocked_without_traceback(workspace, field):
+    tmp_path, catalog, config_path = workspace
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    raw = b"[" * 3_000 + b"0" + b"]" * 3_000
+    token = base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
+    assert len(token) <= 8192
+    completed = _run_cli(
+        tmp_path, config_path, sw_root, _request(**{field: token}),
+    )
+    assert completed.returncode == 2
+    error = _stderr_json(completed)
+    assert error["state"] == "blocked"
+    assert error["reason"] in {f"invalid_{field}", f"unsupported_{field}"}
+    assert str(tmp_path) not in completed.stderr.decode("utf-8")
+
+
+
+def test_token_decoder_converts_parser_recursion_to_named_refusal(monkeypatch):
+    import company_wiki.source_catalog.public_canonical_browser as browser
+    from company_wiki.source_catalog.public_canonical_browser import (
+        CanonicalBrowseError, _decode_token,
+    )
+
+    def raise_recursion_error(*args, **kwargs):
+        raise RecursionError("nested JSON")
+
+    monkeypatch.setattr(browser.json, "loads", raise_recursion_error)
+    token = base64.urlsafe_b64encode(b'{"v":1}').decode("ascii").rstrip("=")
+    with pytest.raises(CanonicalBrowseError, match="^invalid_cursor$"):
+        _decode_token(token, "cursor")
+
 def test_duplicate_and_oversized_requests_are_blocked(workspace):
     tmp_path, catalog, config_path = workspace
     good = json.dumps(_request())
@@ -1232,6 +1472,35 @@ def test_duplicate_and_oversized_requests_are_blocked(workspace):
     completed = _run_cli(tmp_path, config_path, None, "x" * 70_000)
     assert completed.returncode == 2
     assert _stderr_json(completed)["state"] == "blocked"
+
+
+def test_source_read_budget_refusal_is_named_and_pathless(
+        workspace, monkeypatch, capsys):
+    import io
+    from types import SimpleNamespace
+    import company_wiki.source_catalog.public_canonical_browser_cli as cli
+    from company_wiki.source_catalog.public_canonical_browser import (
+        PublicCanonicalBrowser,
+    )
+    from company_wiki.source_catalog.source_reader import SourceReadError
+
+    tmp_path, catalog, config_path = workspace
+    payload = json.dumps(_request()).encode("utf-8")
+    monkeypatch.setattr(cli.sys, "stdin", SimpleNamespace(
+        buffer=io.BytesIO(payload)))
+
+    def over_budget(self, request):
+        raise SourceReadError("unavailable", "issuer_scan_budget_exceeded")
+
+    monkeypatch.setattr(PublicCanonicalBrowser, "browse", over_budget)
+    code = cli.main(["--config", str(config_path)])
+    captured = capsys.readouterr()
+    error = json.loads(captured.err)
+    assert code == 2
+    assert error["state"] == "unavailable"
+    assert error["reason"] == "issuer_scan_budget_exceeded"
+    assert str(tmp_path) not in captured.err
+    assert "Traceback" not in captured.err
 
 
 def test_incomplete_proof_configuration_is_blocked(workspace):

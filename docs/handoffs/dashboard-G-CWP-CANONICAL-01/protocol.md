@@ -3,6 +3,8 @@
 版本：`company-wiki-canonical-document-browse/1`（本包冻结；变更需新版本号）。
 上游 seam：`stockwiki.dashboard_issuer_proof/1`（冻结合同，未修改）。
 
+> 当前 D00 E13 集成对原 owner handoff 的额外支持范围见[集成补记](d00-e13-integration.md)：仅扩展 CWP issuer namespace 的 CN `cn.uscc` exact-SourceRef verifier；不修改上游 SW envelope/schema。以下协议正文保留原始 frozen-contract 记录。
+
 ## 1. 请求（stdin，≤64KiB，严格解析）
 
 `company-wiki-canonical-document-browse-request/1`，exact 11 字段：
@@ -42,6 +44,8 @@ binding: {
   association_scope: "issuer_only"
   issuer: null | {namespace:"sec.cik", value:<CIK digits>, verifier:"sec-primary-dei/1",
                   assertion_id, source_id, content_sha256}
+           | {namespace:"cn.uscc", value:<checksum-valid USCC>, verifier:"cn-primary-uscc/1",
+                  assertion_id, source_id, content_sha256} (CN exact-source route; see D00 E13 addendum)
   stockwiki: null | {entity_id, selected_listing_id, identity_revision,
                      receipt_sha256, envelope_state, library_revision,
                      selected_security_id?, selected_market?}
@@ -67,9 +71,10 @@ catalog_revision: <证明集内容寻址 hex> | null
 |---|---|---|---|---|---|
 | `cwp_source_export_v2` | `urn:company-wiki:source:sha256:<64hex>` | 源存在 + `get_verified_assertion`（hash 绑定）+ 既有 `source_scope_qualification`（`_proved_sec_issuer`/`_reusable_sec_scope` 完整原始 DEI 证据，零原件读） | `sec.cik`（int 归一 CIK） | `sec-primary-dei/1` | verified（issuer 相等才成 items） |
 | `cwp_source_export_v2` | 其他/非 URN | — | — | — | `unknown: unsupported_source_record_urn` |
+| `cwp_source_export_v2` | `urn:company-wiki:source:sha256:<64hex>`（精确 CN PDF；CN 年/半年/季报） | active hash-bound facts + exact `SourceVersionReader` + bounded native PDF text + cache-only exact active CNINFO security record | `cn.uscc` | `cn-primary-uscc/1` | verified only after own legal name/security table/registration USCC checksum and exact security identity agree; otherwise named unknown/unavailable |
 | 其他任何 namespace | * | 不解析、不转换 | — | — | `unknown: unsupported_source_namespace`（保留 SW 已验证半证据） |
 
-不支持即 named 拒绝；扩 namespace 需 D00/D01 跨 owner 合同决策后在本矩阵增量声明。
+仅表中 SEC CIK 与本 addendum 授权的精确 CN `cn.uscc` 路由可产出 verified issuer。其他 namespace/转换继续 named 拒绝；本扩展不改变 SW schema。
 
 ## 5. binding 状态映射
 
@@ -87,7 +92,7 @@ catalog_revision: <证明集内容寻址 hex> | null
 | URN 源不在 catalog | unknown | resolved_source_not_indexed |
 | 源无 verified facts | unknown | resolved_source_unverified_facts |
 | issuer 证据需读原件（不完整 DEI） | unknown | issuer_proof_requires_original_read |
-| 非 US 文档（无该 namespace 通道） | unknown | issuer_namespace_unsupported_for_document |
+| 非 US 文档（CN 以外无本协议支持通道） | unknown | issuer_namespace_unsupported_for_document |
 | CWP facts 与 SW 主张冲突（primary_issuer_conflict） | conflict | source_facts_blocked primary_issuer_conflict |
 | 文档多 source 证明冲突 issuer | verified* | + document_issuer_conflict（该文档排除出 items） |
 | snapshot 任一 pin 变化 | stale（response state） | proof_snapshot_stale |

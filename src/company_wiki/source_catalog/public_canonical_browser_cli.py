@@ -3,8 +3,11 @@
 Reads one JSON request from stdin, writes one compact JSON response line to
 stdout.  The StockWiki proof CLI deployment (interpreter, code root, trusted
 workspace root) comes only from fixed operator arguments — never from the
-business JSON.  Read-only: no download, refresh, OCR, parsing, registration
-or backfill is triggered, and no physical path is emitted.  Transport
+business JSON. Read-only: no download, refresh, OCR, model call, registration
+or backfill is triggered. The D00 E13 integration addendum permits the narrow
+CN path to read the exact indexed PDF SourceRef under its byte/page/text
+limits for ``cn-primary-uscc/1`` issuer proof. No physical path is emitted.
+Transport
 failures emit a single JSON error line on stderr (``unavailable``) and exit
 2; malformed requests are ``blocked``.  In-band states (``available`` /
 ``empty`` / ``partial`` / ``stale`` / ``unsupported``) are successful
@@ -15,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -31,6 +35,7 @@ from .public_canonical_browser import (
 )
 from .reader import CatalogReaderUnavailable
 from .service import SourceCatalog
+from .source_reader import SourceReadError
 
 
 _MAX_REQUEST_BYTES = 65_536
@@ -136,6 +141,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     except CanonicalBrowseError as exc:
         _emit_error("blocked", exc.reason)
+        return 2
+    except SourceReadError as exc:
+        state = exc.status if exc.status in {"blocked", "unavailable"} \
+            else "unavailable"
+        reason = exc.reason if isinstance(exc.reason, str) \
+            and re.fullmatch(r"[a-z0-9_]{1,128}", exc.reason) \
+            else "canonical_browse_unavailable"
+        _emit_error(state, reason)
         return 2
     except (CatalogConfigError, CatalogReaderUnavailable, OSError,
             sqlite3.Error):

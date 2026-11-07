@@ -532,13 +532,21 @@ class PublicDocumentBrowser:
         return _Snapshot(entity, pinned_filters, revision)
 
     def _entity_documents(self, entity: str) -> list[dict[str, Any]]:
-        """Documents linked to the entity key, with projected capture facts.
+        """Documents linked to the entity key, with projected capture facts."""
+        rows, _, _ = self._entity_documents_with_limit(entity, limit=None)
+        return rows
 
-        Matching mirrors the two canonical channels the writer maintains:
-        the ``document_entities`` link and the declared
-        ``canonical_entity_id`` capture field (both containers).  json_valid
-        guards json_extract the same way the filing-candidate pushdown does.
+    def _entity_documents_with_limit(
+            self, entity: str, *, limit: int | None
+    ) -> tuple[list[dict[str, Any]], bool, int]:
+        """Bound entity enumeration for diagnostic-only callers.
+
+        The default public browse remains complete. Bounded callers receive a
+        deterministic prefix, a truncation flag, and the number of rows read.
         """
+        if limit is not None and (isinstance(limit, bool)
+                                  or not isinstance(limit, int) or limit < 1):
+            raise ValueError("entity document limit must be positive")
         sql = self._projection_sql(
             " WHERE d.document_id IN ("
             "     SELECT document_id FROM document_entities WHERE entity_id = ?)"
@@ -547,8 +555,16 @@ class PublicDocumentBrowser:
             "                       '$.acquisition.canonical_entity_id') = ?"
             "          OR json_extract(d.metadata_json,"
             "                          '$.dayu_meta.canonical_entity_id') = ?))")
-        return [self._project_row(row) for row
-                in self.catalog.reader.fetchall(sql, (entity, entity, entity))]
+        params: tuple[Any, ...] = (entity, entity, entity)
+        if limit is not None:
+            sql += " ORDER BY d.document_id LIMIT ?"
+            params += (limit + 1,)
+        raw_rows = self.catalog.reader.fetchall(sql, params)
+        scanned = len(raw_rows)
+        truncated = limit is not None and scanned > limit
+        if limit is not None:
+            raw_rows = raw_rows[:limit]
+        return ([self._project_row(row) for row in raw_rows], truncated, scanned)
 
     def _document(self, document_id: str) -> dict[str, Any] | None:
         sql = self._projection_sql(" WHERE d.document_id = ?")
@@ -595,28 +611,57 @@ class PublicDocumentBrowser:
 
     def _document_versions(self, document: dict[str, Any]) -> list[_VersionRow]:
         """Every frozen byte version of one document (originals only)."""
+        versions, _, _ = self._document_versions_with_limit(
+            document, limit=None)
+        return versions
+
+    def _document_versions_with_limit(
+            self, document: dict[str, Any], *, limit: int | None
+    ) -> tuple[list[_VersionRow], bool, int]:
+        """Enumerate a deterministic bounded prefix of exact source versions."""
+        if limit is not None and (isinstance(limit, bool)
+                                  or not isinstance(limit, int) or limit < 1):
+            raise ValueError("document version limit must be positive")
         document_id = document["document_id"]
         role_placeholders = ", ".join("?" for _ in _VERSION_LOCATION_ROLES)
-        location_rows = self.catalog.reader.fetchall(
-            f"""SELECT source_id, root_id, role, location_status
+        location_sql = f"""SELECT source_id, root_id, role, location_status
                FROM locations
                WHERE document_id = ? AND source_id IS NOT NULL
-                 AND role IN ({role_placeholders})""",
-            (document_id, *_VERSION_LOCATION_ROLES),
-        )
+                 AND role IN ({role_placeholders})"""
+        location_params: tuple[Any, ...] = (
+            document_id, *_VERSION_LOCATION_ROLES)
+        if limit is not None:
+            location_sql += " ORDER BY source_id, root_id, role LIMIT ?"
+            location_params += (limit + 1,)
+        location_rows = self.catalog.reader.fetchall(
+            location_sql, location_params)
+        scanned = len(location_rows)
+        truncated = limit is not None and scanned > limit
+        if limit is not None:
+            location_rows = location_rows[:limit]
         source_ids = {str(item["source_id"]) for item in location_rows}
         if document["primary_source_id"]:
             source_ids.add(document["primary_source_id"])
         if not source_ids:
-            return []
-        placeholders = ", ".join("?" for _ in source_ids)
-        source_rows = self.catalog.reader.fetchall(
-            f"""SELECT source_id, content_sha256, byte_size, mime_type,
+            return [], truncated, scanned
+        sorted_source_ids = sorted(source_ids)
+        if limit is not None and len(sorted_source_ids) > limit + 1:
+            truncated = True
+            sorted_source_ids = sorted_source_ids[:limit + 1]
+        placeholders = ", ".join("?" for _ in sorted_source_ids)
+        source_sql = f"""SELECT source_id, content_sha256, byte_size, mime_type,
                        first_seen_at FROM sources
                 WHERE source_id IN ({placeholders})
-                ORDER BY first_seen_at, source_id""",
-            tuple(sorted(source_ids)),
-        )
+                ORDER BY first_seen_at, source_id"""
+        source_params: tuple[Any, ...] = tuple(sorted_source_ids)
+        if limit is not None:
+            source_sql += " LIMIT ?"
+            source_params += (limit + 1,)
+        source_rows = self.catalog.reader.fetchall(source_sql, source_params)
+        scanned += len(source_rows)
+        if limit is not None and len(source_rows) > limit:
+            truncated = True
+            source_rows = source_rows[:limit]
         config_root_ids = {root.root_id for root in self.catalog.config.roots}
         locations_by_source: dict[str, list[Any]] = {}
         for item in location_rows:
@@ -655,7 +700,7 @@ class PublicDocumentBrowser:
                 roles=tuple(roles),
                 resolvable=resolvable,
             ))
-        return versions
+        return versions, truncated, scanned
 
     def _entity_versions(self, entity: str) -> list[_VersionRow]:
         versions: list[_VersionRow] = []

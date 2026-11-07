@@ -1,5 +1,7 @@
 # G-CWP-CANONICAL-01 验证记录
 
+> 以下原始 GREEN 与 NOT_RUN 保留其 2026-10-30 候选时点。当前真实 public CLI、CN issuer proof 和 Dashboard adapter→HTTP 组合结果见[D00 E13 集成补记](d00-e13-integration.md)；该补记区分控制 fixture、真实 owner 样本和真实 HTTP 数据流，不将旧 fixture 测试冒充当前组合验收。
+
 环境：Windows 10.0.26300 / Python 3.13.9（Miniconda, pytest 9.1.1）/ worktree
 `C:\Users\郑曾波\Projects\dashboard-owner-cwp-canonical` @ `codex/dashboard-cwp-canonical`。
 SW 依赖（只读）：`C:\Users\郑曾波\Projects\StockWiki` @ `8a5ac1cad831a7f0ea1acae4dc2e107d8ff6b917`。

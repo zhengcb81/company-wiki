@@ -14,18 +14,19 @@ zero-write read model:
   verified owner package, identity revision, ``receipt_sha256`` recomputed
   over the canonical envelope body); a caller-supplied hash is never
   authority;
-- CWP-side issuer attribution reuses the existing verified source-facts read
-  faces only (``get_verified_assertion`` plus the existing
-  ``source_scope_qualification`` DEI verifier with a cache-only security
-  master).  Only documents whose verified issuer key equals the
-  StockWiki-proven issuer key are returned as ``items``, each with its
-  complete SourceRef v2 and the same opaque ``document_version_id`` the
-  plain browse and the owner reader use;
-- supported namespace matrix (see docs/handoffs): StockWiki source bindings
-  in the ``cwp_source_export_v2`` namespace resolve natively inside CWP by
-  exact source URN; the proven CWP issuer namespace is ``sec.cik`` verified
-  by the existing ``sec-primary-dei/1`` original-DEI evidence.  Any other
-  StockWiki namespace is reported ``unknown`` — never converted by guess;
+- CWP issuer attribution uses hash-bound verified source facts. US sources
+  use the existing ``sec-primary-dei/1`` verifier and cache-only security
+  master. The D00 E13 integration addendum also authorizes one narrow CN
+  route: an exact, already-indexed PDF SourceRef may be read locally and
+  parsed by ``cn-primary-uscc/1`` after source facts and official cache checks
+  (≤16MB, ≤1,000 pages, ≤8M extracted text characters). This route does not
+  download, OCR, call a model, or write catalog state. Every returned item
+  still requires its own exact issuer proof;
+- supported namespace matrix (see the D00 integration addendum): StockWiki
+  source bindings in ``cwp_source_export_v2`` resolve natively inside CWP by
+  exact source URN; proven CWP issuer namespaces are ``sec.cik`` via
+  ``sec-primary-dei/1`` and ``cn.uscc`` via ``cn-primary-uscc/1``. Any other
+  namespace is ``unknown`` — never converted by guess;
 - binding states are honest: ``verified`` / ``ambiguous`` / ``unknown`` /
   ``conflict`` / ``stale`` / ``unavailable`` / ``incompatible``.  Without a
   verified binding no item is returned, ``total`` is ``unknown`` (never a
@@ -39,8 +40,10 @@ zero-write read model:
   security belongs to the proven issuer; documents are never claimed to be
   partitioned by listing, and analysis subjects are unsupported unless a
   separate owner proof exists;
-- read-only throughout: no download, refresh, OCR, parsing, registration or
-  backfill, and no physical path, root or catalog layout detail is emitted.
+- read-only throughout: no download, refresh, OCR, model call, registration
+  or backfill. The explicitly scoped CN path reads only the exact local
+  SourceRef under its byte/page/text limits. No physical path, root or catalog
+  layout detail is emitted.
 """
 
 from __future__ import annotations
@@ -51,6 +54,8 @@ import hashlib
 import json
 import re
 import subprocess
+import threading
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
@@ -81,6 +86,9 @@ SUPPORTED_SOURCE_NAMESPACES = ("cwp_source_export_v2",)
 #: CWP issuer namespace proven by the existing original-DEI verifier.
 ISSUER_NAMESPACE_SEC_CIK = "sec.cik"
 ISSUER_VERIFIER_SEC_DEI = "sec-primary-dei/1"
+ISSUER_NAMESPACE_CN_USCC = "cn.uscc"
+ISSUER_VERIFIER_CN_PRIMARY = "cn-primary-uscc/1"
+_MAX_CN_PROOF_BYTES = 64_000_000
 
 _SOURCE_URN_RE = re.compile(
     r"urn:company-wiki:source:sha256:[0-9a-f]{64}\Z")
@@ -102,7 +110,9 @@ _PROOF_DEADLINE_SECONDS = 60.0
 #: Bounded verified-fact scan per query.  Beyond this the bridge refuses by
 #: name instead of silently truncating the proven set.
 _MAX_ASSERTION_SCAN = 20_000
+_MAX_DOCUMENT_VERSION_SCAN = 20_000
 _MAX_UNVERIFIED_CANDIDATES = 32
+_MAX_UNVERIFIED_CANDIDATE_SCAN = 2_048
 
 _REQUEST_FIELDS = frozenset({
     "schema_version", "canonical_entity_id", "listing_id",
@@ -167,8 +177,11 @@ def _decode_token(token: Any, field: str) -> dict[str, Any]:
         raise CanonicalBrowseError(f"invalid_{field}")
     try:
         padded = token + "=" * (-len(token) % 4)
-        payload = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")))
-    except (binascii.Error, UnicodeError, json.JSONDecodeError):
+        payload = json.loads(
+            base64.urlsafe_b64decode(padded.encode("ascii")),
+            object_pairs_hook=_unique_pairs, parse_constant=_reject_constant,
+        )
+    except (binascii.Error, UnicodeError, ValueError, RecursionError):
         raise CanonicalBrowseError(f"invalid_{field}") from None
     if not isinstance(payload, dict) or payload.get("v") != _SNAPSHOT_VERSION:
         raise CanonicalBrowseError(f"unsupported_{field}")
@@ -299,6 +312,12 @@ def validate_proof_envelope(raw: Any, *, entity_id: str, listing_id: str | None,
     if raw["state"] == "available":
         if not isinstance(selected, str) or not isinstance(revision, int):
             raise ProofTransportError("stockwiki_proof_envelope_invalid")
+        # An omitted listing is valid only when the owner resolves the unique
+        # active listing. When the caller names one, the proof must bind that
+        # exact listing rather than another active class of the same entity.
+        if listing_id is not None and selected != listing_id:
+            raise ProofTransportError(
+                "stockwiki_proof_selected_listing_mismatch")
         if not isinstance(package, dict) \
                 or set(package) != _OWNER_PACKAGE_FIELDS \
                 or package["schema_version"] != "2.2.0" \
@@ -349,28 +368,116 @@ class StockWikiProofClient:
             {"entity_id": entity_id, "listing_id": listing_id, "as_of": as_of},
             ensure_ascii=False, sort_keys=True, separators=(",", ":"),
         ).encode("utf-8")
+        deadline = time.monotonic() + self.deadline_seconds
+        chunks: dict[str, list[bytes]] = {"stdout": [], "stderr": []}
+        output_limit = threading.Event()
         try:
-            completed = subprocess.run(
-                self.command, input=request, capture_output=True,
-                timeout=self.deadline_seconds,
+            process = subprocess.Popen(
+                self.command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
             )
-        except subprocess.TimeoutExpired:
-            raise ProofTransportError("stockwiki_proof_deadline") from None
         except OSError:
             raise ProofTransportError("stockwiki_proof_cli_unavailable") from None
+        stdin_pipe = process.stdin
+        stdout_pipe = process.stdout
+        stderr_pipe = process.stderr
+        assert stdin_pipe is not None
+        assert stdout_pipe is not None
+        assert stderr_pipe is not None
+
+        def drain(name: str, stream: Any) -> None:
+            total = 0
+            try:
+                while True:
+                    block = stream.read(8192)
+                    if not block:
+                        break
+                    total += len(block)
+                    if total > _MAX_ENVELOPE_BYTES:
+                        output_limit.set()
+                        try:
+                            process.kill()
+                        except OSError:
+                            pass
+                        break
+                    chunks[name].append(block)
+            except (OSError, ValueError):
+                pass
+            finally:
+                try:
+                    stream.close()
+                except OSError:
+                    pass
+
+        def send_request() -> None:
+            try:
+                stdin_pipe.write(request)
+            except (BrokenPipeError, OSError, ValueError):
+                pass
+            finally:
+                try:
+                    stdin_pipe.close()
+                except OSError:
+                    pass
+
+        readers = [
+            threading.Thread(target=drain, args=("stdout", stdout_pipe),
+                             daemon=True),
+            threading.Thread(target=drain, args=("stderr", stderr_pipe),
+                             daemon=True),
+        ]
+        writer = threading.Thread(target=send_request, daemon=True)
+        for worker in (*readers, writer):
+            worker.start()
+        timed_out = False
+        try:
+            process.wait(timeout=max(0.01, deadline - time.monotonic()))
+        except subprocess.TimeoutExpired:
+            timed_out = True
+            try:
+                process.kill()
+            except OSError:
+                pass
+            try:
+                process.wait(timeout=1.0)
+            except subprocess.TimeoutExpired:
+                pass
+        workers = (*readers, writer)
+        for worker in workers:
+            worker.join(max(0.0, deadline - time.monotonic()))
+        if any(worker.is_alive() for worker in workers):
+            try:
+                process.kill()
+            except OSError:
+                pass
+            for worker in workers:
+                worker.join(0.5)
+        if timed_out:
+            raise ProofTransportError("stockwiki_proof_deadline")
+        if output_limit.is_set():
+            raise ProofTransportError("stockwiki_proof_output_limit")
+        if any(worker.is_alive() for worker in workers):
+            raise ProofTransportError("stockwiki_proof_output_incomplete")
+        completed = subprocess.CompletedProcess(
+            self.command, process.returncode,
+            b"".join(chunks["stdout"]), b"".join(chunks["stderr"]),
+        )
         if completed.returncode != 0:
             stderr = completed.stderr.strip()
             if stderr.startswith(b"{"):
                 try:
                     envelope = parse_bounded_json(
                         stderr, max_bytes=_MAX_ENVELOPE_BYTES)
+                    envelope = validate_proof_envelope(
+                        envelope, entity_id=entity_id, listing_id=listing_id,
+                        as_of=as_of,
+                    )
                 except ProofTransportError:
                     raise ProofTransportError(
                         "stockwiki_proof_cli_failed") from None
-                return validate_proof_envelope(
-                    envelope, entity_id=entity_id, listing_id=listing_id,
-                    as_of=as_of,
-                )
+                if envelope["state"] == "available":
+                    raise ProofTransportError("stockwiki_proof_cli_failed")
+                return envelope
             raise ProofTransportError("stockwiki_proof_cli_failed")
         envelope = parse_bounded_json(completed.stdout,
                                       max_bytes=_MAX_ENVELOPE_BYTES)
@@ -491,6 +598,12 @@ class PublicCanonicalBrowser:
             raise CanonicalBrowseError("request_fields_not_exact")
         if request["schema_version"] != REQUEST_SCHEMA:
             raise CanonicalBrowseError("unsupported_request_version")
+        # Native CN original observations are scoped to this one browse. They
+        # are never a persistent health/content cache across requests.
+        self._cn_verified: dict[str, tuple[ResolvedIssuer, dict[str, Any]]] = {}
+        self._cn_target_security = None
+        self._cn_read_bytes = 0
+        self._cn_budget_exhausted = False
         entity = _required_text(request["canonical_entity_id"],
                                 "canonical_entity_id")
         if not _ENT_ID_RE.fullmatch(entity):
@@ -540,7 +653,10 @@ class PublicCanonicalBrowser:
         versions = self._proven_versions(binding)
         if self._conflicted_documents:
             binding = binding.with_reasons("document_issuer_conflict")
-        revision = self._revision(versions, binding)
+        revision = self._revision(
+            versions, binding,
+            getattr(self, "_version_issuer_pins", {}),
+        )
         snapshot = _Snapshot(entity, listing, as_of, filters,
                              binding.stockwiki, binding.issuer_pin, revision)
 
@@ -630,12 +746,14 @@ class PublicCanonicalBrowser:
                            reason_codes=_reasons("envelope_revision_mismatch"),
                            stockwiki=sw_view)
         receipts = context["identity_receipts"]
-        if not receipts or not any(
-                isinstance(receipt, dict)
-                and receipt.get("kind") == "verified_issuer"
-                for receipt in receipts.values()):
+        verified_receipt_id = payload.get("verified_issuer_receipt_id")
+        verified_receipt = receipts.get(verified_receipt_id) \
+            if isinstance(verified_receipt_id, str) else None
+        if not isinstance(verified_receipt, dict) \
+                or verified_receipt.get("kind") != "verified_issuer":
             return Binding(status="incompatible",
-                           reason_codes=_reasons("verified_receipt_missing"),
+                           reason_codes=_reasons(
+                               "verified_issuer_receipt_mismatch"),
                            stockwiki=sw_view)
         for receipt_id, receipt in receipts.items():
             if not isinstance(receipt, dict) \
@@ -716,10 +834,11 @@ class PublicCanonicalBrowser:
             | Binding:
         """Resolve one CWP source URN to its proven issuer key.
 
-        Only the existing verified-facts read faces are used: the active
-        verified assertion (hash bound) and the existing original-DEI scope
-        verifier with a cache-only security master.  No original bytes are
-        read; incomplete proofs stay unknown by name.
+        The active verified assertion is hash-bound. US primary-DEI
+        verification uses the cache-only security master; the explicitly
+        enabled CN primary-USCC verifier reads only the exact bounded PDF
+        SourceRef under its byte/page/text limits. It never downloads, OCRs,
+        or uses a model. Incomplete proofs stay unknown by name.
         """
         from .source_reader import SourceReadError, SourceVersionReader
 
@@ -756,6 +875,52 @@ class PublicCanonicalBrowser:
         )
         try:
             manifest = SourceVersionReader(self.catalog).describe_version(ref)
+            if ref.mime_type == "application/pdf" and manifest.get("market") == "CN":
+                from .cn_primary_issuer import (
+                    MAX_BYTES as CN_MAX_BYTES, PrimaryIssuerUnavailable,
+                    SUPPORTED_CN_FILING_KINDS, extract_cn_issuer,
+                    pdf_text_pages)
+                if ref.byte_size > CN_MAX_BYTES:
+                    return Binding(
+                        status="unavailable",
+                        reason_codes=_reasons("cn_primary_pdf_byte_limit"),
+                        resolved_source=cwp_pin,
+                    )
+                if manifest.get("document_kind") not in SUPPORTED_CN_FILING_KINDS:
+                    return Binding(
+                        status="unknown",
+                        reason_codes=_reasons("cn_primary_filing_scope_missing"),
+                        resolved_source=cwp_pin,
+                    )
+                target = getattr(self, "_cn_target_security", None)
+                # The hint only excludes unrelated candidates. Inclusion still
+                # requires exact original proof of the full legal-issuer key.
+                if target is not None and manifest.get("security_id") != target:
+                    return Binding(status="unknown", reason_codes=_reasons("cn_unrelated_security_hint"),
+                                   resolved_source=cwp_pin)
+                cached = getattr(self, "_cn_verified", {}).get(source_id)
+                if cached is not None:
+                    return cached
+                total = getattr(self, "_cn_read_bytes", 0) + ref.byte_size
+                if total > _MAX_CN_PROOF_BYTES:
+                    self._cn_budget_exhausted = True
+                    return Binding(status="unavailable", reason_codes=_reasons("cn_primary_proof_budget_exceeded"),
+                                   resolved_source=cwp_pin)
+                self._cn_read_bytes = total
+                try:
+                    opened, metadata = SourceVersionReader(self.catalog).open_described_version(ref, purpose="source_export")
+                    proof = extract_cn_issuer(self.catalog, ref, pages=pdf_text_pages(opened.data), metadata=metadata)
+                except PrimaryIssuerUnavailable as exc:
+                    return Binding(status="unknown", reason_codes=_reasons(exc.reason), resolved_source=cwp_pin)
+                issuer = ResolvedIssuer(key=IssuerKey(ISSUER_NAMESPACE_CN_USCC, proof["key"]["value"]),
+                                        verifier=ISSUER_VERIFIER_CN_PRIMARY,
+                                        assertion_id=str(assertion["assertion_id"]),
+                                        source_id=source_id, content_sha256=content_sha256)
+                if not hasattr(self, "_cn_verified"):
+                    self._cn_verified = {}
+                self._cn_verified[source_id] = (issuer, cwp_pin)
+                self._cn_target_security = proof["security"]["security_id"]
+                return issuer, cwp_pin
             qualification = source_scope_qualification(
                 self.catalog, ref, metadata=manifest,
                 identity_cache_dir=self.catalog.config.catalog_dir
@@ -798,14 +963,14 @@ class PublicCanonicalBrowser:
     def _verified_assertions(self) -> list[dict[str, Any]]:
         """Active verified source-facts assertions, bounded, newest per source."""
         rows = self.catalog.reader.fetchall(
-            """SELECT assertion_id, source_id, document_id, content_sha256,
-                      evidence_basis, evidence_json, created_at,
-                      supersedes_assertion_id
+            """SELECT assertion_id, source_id, document_id,
+                      evidence_basis, created_at, supersedes_assertion_id
                FROM source_metadata_assertions
                WHERE decision='verified'
                  AND visibility_state IN ('legacy','active')
-               ORDER BY created_at, assertion_id""",
-            (),
+               ORDER BY created_at, assertion_id
+               LIMIT ?""",
+            (_MAX_ASSERTION_SCAN + 1,),
         )
         if len(rows) > _MAX_ASSERTION_SCAN:
             from .source_reader import SourceReadError
@@ -837,10 +1002,12 @@ class PublicCanonicalBrowser:
         return issuer
 
     def _proven_versions(self, binding: Binding) -> list[Any]:
-        """All document versions of documents proven to the bound issuer."""
+        """Return only exact versions independently proven to the issuer."""
         assert binding.issuer_pin is not None  # verified binding precondition
         self._conflicted_documents = []
-        wanted = IssuerKey(ISSUER_NAMESPACE_SEC_CIK,
+        if binding.issuer_pin["namespace"] != ISSUER_NAMESPACE_CN_USCC:
+            self._cn_target_security = "cn_not_requested"
+        wanted = IssuerKey(str(binding.issuer_pin["namespace"]),
                            str(binding.issuer_pin["value"])).qualified()
         memo: dict[str, Any] = {}
         by_document: dict[str, set[str]] = {}
@@ -850,7 +1017,13 @@ class PublicCanonicalBrowser:
                 continue
             by_document.setdefault(str(assertion["document_id"]),
                                    set()).add(issuer.key.qualified())
+        if getattr(self, "_cn_budget_exhausted", False):
+            from .source_reader import SourceReadError
+            raise SourceReadError("unavailable", "cn_primary_proof_budget_exceeded")
         versions: list[Any] = []
+        self._version_issuer_pins: dict[str, dict[str, Any]] = {}
+        scanned_rows = 0
+        browser = self._fallback_browser()
         for document_id, keys in sorted(by_document.items()):
             if wanted not in keys:
                 continue
@@ -859,10 +1032,30 @@ class PublicCanonicalBrowser:
                 # never served; it stays out of items and is named in reasons.
                 self._conflicted_documents.append(document_id)
                 continue
-            document = self._fallback_browser()._document(document_id)
+            document = browser._document(document_id)
             if document is None:
                 continue
-            versions.extend(self._fallback_browser()._document_versions(document))
+            remaining = _MAX_DOCUMENT_VERSION_SCAN - scanned_rows
+            if remaining <= 0:
+                from .source_reader import SourceReadError
+                raise SourceReadError(
+                    "unavailable", "issuer_version_scan_budget_exceeded")
+            document_versions, truncated, rows_read = \
+                browser._document_versions_with_limit(
+                    document, limit=remaining)
+            scanned_rows += rows_read
+            if truncated or scanned_rows > _MAX_DOCUMENT_VERSION_SCAN:
+                from .source_reader import SourceReadError
+                raise SourceReadError(
+                    "unavailable", "issuer_version_scan_budget_exceeded")
+            for version in document_versions:
+                version_issuer = self._issuer_for_source(
+                    str(version.source_id), memo)
+                if version_issuer is not None \
+                        and version_issuer.key.qualified() == wanted:
+                    versions.append(version)
+                    self._version_issuer_pins[str(version.source_id)] = \
+                        version_issuer.pin()
         versions.sort(key=lambda row: row.sort_key())
         return versions
 
@@ -880,28 +1073,63 @@ class PublicCanonicalBrowser:
             return []
         browser = self._fallback_browser()
         item_documents = {version.document_id for version in versions}
-        entity_keys: set[str] = set()
+        entity_keys: set[str] = {
+            str(version.canonical_entity_id) for version in versions
+            if version.canonical_entity_id
+        }
+        remaining = _MAX_UNVERIFIED_CANDIDATE_SCAN
+        self._candidate_scan_limited = False
         for document_id in sorted(item_documents):
-            for row in self.catalog.reader.fetchall(
-                    "SELECT entity_id FROM document_entities "
-                    "WHERE document_id = ?", (document_id,)):
+            if remaining <= 0:
+                self._candidate_scan_limited = True
+                break
+            budget_before_query = remaining
+            rows = self.catalog.reader.fetchall(
+                "SELECT entity_id FROM document_entities "
+                "WHERE document_id = ? ORDER BY entity_id LIMIT ?",
+                (document_id, budget_before_query + 1),
+            )
+            if len(rows) > budget_before_query:
+                self._candidate_scan_limited = True
+            remaining = max(0, budget_before_query - len(rows))
+            for row in rows[:budget_before_query]:
                 entity_keys.add(str(row["entity_id"]))
-            document = browser._document(document_id)
-            if document is not None and document["canonical_entity_id"]:
-                entity_keys.add(document["canonical_entity_id"])
-        wanted = IssuerKey(ISSUER_NAMESPACE_SEC_CIK,
+        wanted = IssuerKey(str(binding.issuer_pin["namespace"]),
                            str(binding.issuer_pin["value"])).qualified()
         memo: dict[str, Any] = {}
         candidates: list[dict[str, Any]] = []
         seen: set[str] = set()
+        stop = False
         for entity in sorted(entity_keys):
-            for document in browser._entity_documents(entity):
-                if document["document_id"] in item_documents \
-                        or document["document_id"] in seen:
+            if remaining <= 0:
+                self._candidate_scan_limited = True
+                break
+            budget_before_query = remaining
+            documents, truncated, rows_read = \
+                browser._entity_documents_with_limit(
+                    entity, limit=budget_before_query)
+            remaining = max(0, budget_before_query - rows_read)
+            if truncated or rows_read > budget_before_query:
+                self._candidate_scan_limited = True
+            for document in documents:
+                document_id = document["document_id"]
+                if document_id in item_documents or document_id in seen:
                     continue
-                seen.add(document["document_id"])
-                for version in browser._document_versions(document):
-                    issuer = self._issuer_for_source(version.source_id, memo)
+                seen.add(document_id)
+                if remaining <= 0:
+                    self._candidate_scan_limited = True
+                    stop = True
+                    break
+                budget_before_versions = remaining
+                document_versions, truncated, rows_read = \
+                    browser._document_versions_with_limit(
+                        document, limit=budget_before_versions)
+                remaining = max(0, budget_before_versions - rows_read)
+                if truncated or rows_read > budget_before_versions:
+                    self._candidate_scan_limited = True
+                for version in document_versions:
+                    issuer = self._issuer_for_source(
+                        str(version.source_id), memo)
                     if issuer is None:
                         reason = "issuer_proof_missing"
                     elif issuer.key.qualified() == wanted:
@@ -917,19 +1145,36 @@ class PublicCanonicalBrowser:
                         "document_kind": version.document_kind,
                         "reason_code": reason,
                     })
+                    if len(candidates) >= _MAX_UNVERIFIED_CANDIDATES:
+                        self._candidate_scan_limited = True
+                        stop = True
+                        break
+                if stop:
+                    break
+            if stop:
+                break
         candidates.sort(key=lambda item: (
             item["reason_code"], item["document_id"],
             item["document_version_id"]))
-        return candidates[:_MAX_UNVERIFIED_CANDIDATES]
+        return candidates
 
     # -- snapshot / paging --------------------------------------------------------
 
     @staticmethod
-    def _revision(versions: list[Any], binding: Binding) -> str:
+    def _revision(versions: list[Any], binding: Binding,
+                  version_issuer_pins: dict[str, dict[str, Any]] | None = None
+                  ) -> str:
+        proofs = version_issuer_pins or {}
         payload = json.dumps(
             {
                 "issuer": binding.issuer_pin,
-                "rows": [version.revision_member() for version in versions],
+                "rows": [
+                    {
+                        "version": version.revision_member(),
+                        "issuer_proof": proofs.get(str(version.source_id)),
+                    }
+                    for version in versions
+                ],
             },
             ensure_ascii=True, sort_keys=True, separators=(",", ":"),
         )
@@ -1010,12 +1255,14 @@ class PublicCanonicalBrowser:
         if any(not version.resolvable for version in page_items):
             state = "partial"
             reason_codes.append("some_versions_not_resolvable")
+        candidates = self._unverified_candidates(versions, binding)
+        if getattr(self, "_candidate_scan_limited", False):
+            reason_codes.append("unverified_candidate_scan_truncated")
         return self._envelope(
             state=state, reason_codes=reason_codes, entity=entity,
             listing=snapshot.listing, as_of=snapshot.as_of, binding=binding,
             items=page_items, snapshot=snapshot, next_cursor=next_cursor,
-            total=total,
-            candidates=self._unverified_candidates(versions, binding),
+            total=total, candidates=candidates,
             catalog_revision=snapshot.revision,
         )
 

@@ -3,6 +3,8 @@
 状态：**CODE_PROTOCOL_COMPLETE_WITH_NAMED_PREREQUISITE / PARTIAL（生产 PRODUCTION_NOT_AVAILABLE）**，2026-10-30。
 独立 reviewer 未派（按卡"独立reviewer另派（未实现）"，由 D00/总控另行派出）。
 
+> 本页后续章节保留原始 G-CWP-CANONICAL-01 候选时点证据。当前 D00 E13 组合状态、CN 原件证明窄范围、真实 CLI/HTTP 证据及当前修订验收，以[集成补记](d00-e13-integration.md)为准；该补记对原 handoff 中“无真实 public CLI”“CN 永不进入 items”“不读/不解析原件”的历史前提作限定更新，不改原冻结 SW seam 版本。
+
 ## 1. 固定树与边界
 
 | 项 | 值 |
@@ -44,34 +46,34 @@ python -B -m company_wiki.source_catalog.public_canonical_browser_cli \
 
 1. SW 信封严格结构校验 + query 回显 + `receipt_sha256` 重算（canonical：ensure_ascii=False/sort_keys/compact/allow_nan=False UTF-8）；caller 提供的 hash 不是 authority。
 2. state=available 时核 owner_package：entity/revision 一致、verified_issuer receipt active、selected listing 合法且 active、binding 与 listing/security/market 一致。
-3. namespace 矩阵：SW `cwp_source_export_v2`（→ CWP 原生 source URN 解析）+ CWP `sec.cik`（verifier=既有 `sec-primary-dei/1` 原始 DEI 完整证据，hash 绑定、零原件读）。其他 namespace 一律 `unknown: unsupported_source_namespace`，不做未证转换。
+3. namespace 矩阵：SW `cwp_source_export_v2`（→ CWP 原生 source URN 解析）+ CWP `sec.cik`（既有 `sec-primary-dei/1`，hash 绑定、零原件读）+ 仅按 D00 E13 补记授权的 CN `cn.uscc`（`cn-primary-uscc/1`，精确注册 PDF、限额 native text 与缓存 official identity；具体边界见补记）。其他 namespace 一律 `unknown: unsupported_source_namespace`，不做未证转换。
 4. items 只含逐条同 issuer 证明的文档版本（完整 6 字段 SourceRef v2 + 既有 opaque `document_version_id`，与既有 browse/reader 完全同一 token 语义）；证明不足→items 空、`total=null/unknown`，绝不伪 exact 0。pathless 未验证候选单列 `unverified_candidates`（封顶 32，reason_code：issuer_proof_missing / superseded_version / issuer_differs），不混入 items。
 5. `proof_snapshot_id` 绑定 exact query + SW identity_revision + SW receipt + issuer pin（assertion/source/sha）+ 证明集内容寻址 revision；任一变化→stale，旧页不混。分页 cursor 内嵌 snapshot token，错配即拒。
 6. `association_scope=issuer_only`；selected listing 仅核证券属同一发行人。analysis_subject 非 null→`state=unsupported`（reason `analysis_subject_unsupported`），不查 SW、不从 ENT/LST 造 ASJ。
 
 ## 3. 状态与前置（必须先读）
 
-**生产 PRODUCTION_NOT_AVAILABLE。** 缺口前置只有一个：
+**原始候选时点状态（2026-10-30）：生产 PRODUCTION_NOT_AVAILABLE；其当时的单一前置现已满足。当前 E13 状态与本轮真实数据范围以 [D00 集成补记](d00-e13-integration.md) 为准。**
 
-- **G-SW-ISSUER-PROOF-READ-01 的真实 `dashboard_issuer_proof_cli.py` 未交付**（`C:\Users\郑曾波\Projects\dashboard-owner-stockwiki-proof-read` 不存在）。因此没有任何真实公共 SW proof CLI 可用于生产组合，也不存在真实 shared-key 生产 positive。
+- 以上是原候选时点记录。当前真实 StockWiki proof CLI 已可用；CWP 公共 CLI 的真实 CN 正例和 Dashboard HTTP 数据流验收状态见集成补记。
 
 因此本包不声称真实 B/E04。已完成的范围：完整 CWP 侧实现 + 冻结 seam 消费/校验 + 真实双引擎受控组合验证（见 `verification.md`）：
 
 - 受控正例与全部负例通过 **真实 StockWiki 引擎**（build_identity_request / IdentityReceiptStore / QuickScanStore / MarketRegistryStore @8a5ac1c）产出真实 G2b 2.2.0 owner_package，经冻结 seam 的 subprocess transport 消费；SW 侧 stand-in 只实现冻结信封装配/负态映射/选择规则，**不是 trust callback**，全部身份语义来自真实引擎。
 - CWP 侧用真实引擎（scan + record_source_facts + 既有 source_scope_qualification/get_verified_assertion）在隔离根上生产 verified source-facts 与 sec-primary-dei 完整证据。
-- 真实生产数据（Alphabet ENT `ENT_97bf6a65-…`、中微 83 active 版本）：**NOT_RUN**。等真实 SW proof CLI 交付后，由 operator 用其固定三参数对既有可信配置限量复跑（≤3 公司、page≤10）。
+- **原始候选时点 NOT_RUN（2026-10-30）**：Alphabet ENT 与中微真实目录尚未连接当时缺失的 SW proof CLI。该前提已被 E13 满足：2026-11-07 实际 CWP CLI 以固定 B31 proof CLI 查询中微真实 ENT/LST，返回 `binding=verified`、`cn.uscc`/`cn-primary-uscc/1` 与 4 个 exact PDFs；真实 Dashboard HTTP/取消复核见集成补记。
 
-## 4. 组合与独审路径（给 reviewer/D00）
+## 4. 原始候选时点的组合路径（截至 2026-10-30；当前接收见集成补记）
 
-1. 取 G-SW-ISSUER-PROOF-READ-01 固定 candidate（其 handoff 给出 worktree/base/head 与 CLI）。
+1. 原候选时点需取 G-SW-ISSUER-PROOF-READ-01 固定 candidate；当前真实 proof CLI 已可用，E13 组合进度见集成补记。
 2. 用真实 CLI 替换本包测试中的 stand-in（tests/contract/test_public_canonical_browser.py 中 `DRIVER_SOURCE`/`_write_driver` 是唯一 SW 侧替身，生产代码零引用）。
 3. 组合独审正反例：正例 same-issuer（真实 ENT+LST+隔离引擎 fixture），负例沿用本包矩阵（wrong issuer / wrong market / same bare ticker / foreign listing / subject / 缺证据 / 旧 revision / 撤销 / 多挂牌 / 旧 source 版本 / 伪 hash / 离线 / 非法 JSON / namespace 转换 / 回显错配）。
-4. 独审通过后才可升 CODE_PROTOCOL_COMPLETE；生产 positive 需真实 shared-key 数据，否则保持 PRODUCTION_NOT_AVAILABLE。
+4. 原候选时点的升级条件记录；当前 E13 核验、独审和部署边界以集成补记为准，未通过前不将 E13 或 B/E04 标为完成。
 
-## 5. 已知界限（诚实声明）
+## 5. 原始候选界限（截至 2026-10-30；当前 CN 范围见集成补记）
 
-- CN/HK 文档（如中微 A股年报）：CWP 在此 base 上无原始发行人证据通道（sec-primary-dei 仅 US SEC 原件），这些版本只进 `unverified_candidates`（issuer_proof_missing），永不进 items；不猜测、不转换 namespace。
-- SW binding URN 不在 CWP catalog / 无 verified facts / DEI 证据不完整（需读原件才能判定）→ binding `unknown`（named reason），不发起任何原件读/OCR/refresh。
+- 原候选时点的 CN/HK 文档（如中微 A 股年报）没有原始发行人证明通道，因此当时仅进 `unverified_candidates`。B-01 授权后的窄 `cn-primary-uscc/1` 精确原件证明例外见集成补记；不扩展为通用 CN/HK namespace 转换。
+- SEC CIK 路由对缺少 hash-bound verified facts 或不完整 DEI 证据仍返回 named `unknown`，不读原件/OCR/refresh。CN 路由仅按集成补记的精确 SourceRef、有界 native PDF 规则运行。
 - 认证扫描上限 20000 条 verified assertions，超限 named `issuer_scan_budget_exceeded`（unavailable），不静默截断。
 - document 的多个 source 证明出冲突 issuer → 该文档整体排除出 items，binding reason 附 `document_issuer_conflict`。
 - 零写语义：query 前后文件集合 SHA/size 全等（`*-shm` 为 SQLite 每次只读打开都变化的共享内存索引，无业务态，排除并已在测试注明）；DB 本体、WAL、源文件、SW 工作区全部字节级不变。
@@ -94,7 +96,7 @@ python -B -m company_wiki.source_catalog.public_canonical_browser_cli \
   c. 卡规则 5"旧 document_version reopen 走既有 reader"此前只有文档声明 → 补互通测试：canonical item 的 `cwpdv1-` token 经**既有** `public_document_browser_cli` reopen 精确还原同一 SourceRef（storage_state=resolvable）→ GREEN；
   d. "缺证据"负例缺 US 通道（证据不完整需读原件）分支 → 补测试：amended US 文档记 plain sidecar facts（无 DEI 观察证据）→ 既有 verifier 要求原件读（browse 不做）+ security master 缓存缺失 → named missing-evidence，binding 仍以完整 DEI 源为 pin，候选 issuer_proof_missing → GREEN。
 
-## 7. 成本 / 清理 / NOT_RUN
+## 7. 原始候选成本 / 清理 / NOT_RUN（截至 2026-10-30；当前证据见集成补记）
 
 - 成本：全部本地 fixture，零网络、零模型调用、零下载；两 worktree（本包 + bump 临时）均在 pytest tmp 内自动清理。
 - 清理核验：仓库内只新增 §1 四路径；生产 config/、StockWiki、Dashboard、总 PWF 零写入；主仓与本 worktree 的未提交变更只有既有 `.githooks/pre-push` mode 伪差。
