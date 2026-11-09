@@ -42,6 +42,14 @@ FF 与 RF 的旧作业层都曾根据过时的 PID 文件删除锁。两个独�
 
 下载事件为零只说明没有观察到已提交事件。请求已派发而回执丢失时，开销及外部副作用保持未知。FF 财报和伴随电话会都要进入同一个作业的获取意图和真实证据统计。RF 有获取潜力的来源阶段在缺证据时也保留未知。保留只读核对和已证明无新增开销的安全恢复。两个 owner 分别以通用临时公司及实际进程竞态复验。
 
+## P2 官方标识来源核对补充（2026-11-09）
+
+- CWP 的 `OfficialSecurityMasterRefresher` 当前分别读取 CNINFO、HKEX active/inactive/security code lists、SEC ticker 与 Nasdaq listed files；代码未读取 HKEX 的 ISIN 专项清单，也未读取跨标识关系源。生产快照因而只有各市场原有的本地身份键，没有足以普遍跨市场 join 的共同键。该判断来自 owner 刷新器当前实现和实际快照，不来自测试夹具。
+- HKEX 官方 [Securities Lists](https://www.hkex.com.hk/services/trading/securities/securities-lists?sc_lang=en) 列出两类可下载目录：“ISINs Assigned by HKEX”与“ISINs Assigned by Other Numbering Agencies”。这是按挂牌/证券补充 ISIN 的直接候选源。它本身不证明不同市场证券属于同一发行人，且只加入该字段不能解决现有 US CIK 到其他市场挂牌的通用关联。
+- GLEIF 官方 [API 说明](https://www.gleif.org/en/lei-data/gleif-api/) 提供 LEI 数据、映射标识和按字段/名称检索；其 [ISIN-to-LEI 文件说明](https://www.gleif.org/en/lei-data/lei-mapping/download-isin-to-lei-relationship-files) 则明确每日映射目前包括参与早期 NNA 新发行的 ISIN，并把 legacy ISIN 覆盖列为长期计划。GLEIF 官方 [映射概览](https://www.gleif.org/en/lei-data/lei-mapping/) 列举 ISIN、BIC、MIC、S&P CIQ、OpenCorporates、QCC、GEM 等映射伙伴/文件，没有列出 CIK-to-LEI 文件。因此 ISIN/LEI 是通用、可审计的部分桥接，不能作为所有历史上市证券的完整覆盖承诺。
+- 实施判断：不应只下载 HKEX ISIN 表、再按名称或 ticker 自动并 issuer。CWP 需要拥有一个 owner 级、可版本化的 issuer/listing 关系来源合同：自动关系只由精确类型化标识匹配生成；其他关系须绑定发行人或监管文件的 HTTPS 来源、原件 SHA、locator、证券类型/挂牌、有效期及 as-of，并保留未证实/冲突状态。关系数据可以因公司而不同，但实现逻辑必须统一，不得加公司代码/别名特判，也不得用模糊名称把母子公司或 ADR/普通股混并。FF 只消费 CWP 的公开合同及保留来源市场、期间、表单和 as-of 的结果。StockWiki 是下游 owner，只有先证明身份调用不会产生依赖环，才可考虑其公开 DTO 作为独立来源；当前不把它作为 CWP 的隐式回调。
+- 下一验证节点：用官方 HKEX ISIN 文件和 GLEIF 当前映射文件只读检查阿里、B 站两组证券的实际覆盖；同时核对发行人/监管文件可否提供 CIK 与具体 HK listing 的直接关系证据。覆盖不足时明确标记 `identity_link_unavailable` 并保持 P2 开放，而不是对生产快照手写样本。随后由 CWP 写通用来源 owner 与刷新/撤销规则，FF 对公开 DTO 做合同测试，最后以实际部署 cache-only 查询验收两家公司和一个冲突负例。
+
 ## P2 收口复审补充（2026-11-09）
 
 - CWP 与 FF 的 P2 实现及独立审查已通过。阿里与 B 站离线 E2E 使用各自真实 HKEX 年报原件、GLEIF LEI/ISIN 与 ADR 发行人证据；US 挂牌可以匹配 HK 来源原件，同时严格保留来源市场、证券代码、报告期、表单类型与 as-of。负例覆盖错误财年、表单、期次、来源证券、来源市场和发布日期。测试用的临时快照未改生产安全证券主数据；当前生产快照缺 LEI/ISIN，因此生产自动跨市场联结覆盖率仍未解决，不能宣称已全面生效。
