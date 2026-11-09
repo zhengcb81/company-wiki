@@ -26,6 +26,7 @@
 - `list-reports` 返回恰好 1 条；`get-report`、`get-run`、`get-attempt` 的报告 ID、实体 `ENT_41250504-734e-4460-9843-86c4e1f3851d`、挂牌 `LST_2d86780f-c98e-49cc-a214-34885c8820fa`、来源 SHA `b37880685db65034ed1dd023d943352399c4c88179df2b52a9572bff687b88b8`、input SHA `6169ea8aca81638d83026153474d584ca19be38c166bb71ab0ae4e76924cde59`、result SHA `04768c2742d663e3e7ac748c9fde8c7648cc1cd0e424e4d931e150379c038816` 一致。回读证据见总计划 `validation/mdb-rf-job-readback.json`。
 - importer 按实际 `source-preparation-result/1` 合同核验顶层 schema，并读取嵌套 `filing_fetch.status`；第一次真实 CLI 拒绝后查明此前实现和 fixture 都错误虚构了顶层状态。修复 retained-attempt 路径后 RF 定向测试 45 项通过，独审签收。
 - 目录登记正确保留报告自身质量状态：1 条 citation 为 `partial` 且 locator 缺失，另有 10 条 `quality_gaps`。这不破坏本次来源、期次、issuer 和 artifact hash 入册合同，但报告不能被描述成逐项引文齐全；这些质量缺口继续显示给下游。
+- importer 已提交并推送 `b005a179280ee19695578bdba9427b4dd44cdd73` 至 `origin/codex/dashboard-p2-rf-mdb-20261109`。push fast-gate 12 项通过；push hook 标记 full validation pending，未在本轮取得远端全量 CI 结果。
 
 ## RF-3 · v2 兼容演进
 

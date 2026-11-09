@@ -60,5 +60,6 @@
 - 修复后的 RF importer 定向回归 **45 passed**，Ruff、`git diff --check` 通过；独立审查确认实际 DTO 修正、per-job 并发锁和失败清理没有 stop-ship。随后通过 RF 公共 `import-rf-job` 首次登记 MDB 成功报告，并用公开目录命令重放为 `already_registered`，两次均 `forecast_executions=0`。
 - RF 公开只读回读确认 MDB listing 总数 1，报告 `validated`、作业 `complete`、attempt `succeeded`，entity/listing、源/input/result SHA 一致。回读收据为 `validation/mdb-rf-job-readback.json`。报告仍明确显示 1 条 partial 且无 locator 的 citation 和 10 条 quality gaps，因此只签收入册/可回读/哈希一致，不签“证据毫无缺口”。
 - CWP/FF P2 owner 改动分别完成独立审查、定向测试及阿里/B 站真实 HKEX 原件 E2E。E2E 正例复用原件且零下载，错误市场、期次、表单、来源证券及 as-of 均拒绝；详细原件 SHA、issuer-link 证据、命令结果见 `validation/p2_cross_market_e2e_receipt.json` 和 `validation/evidence/`。生产 CWP snapshot 缺 LEI/ISIN，故通用算法完成但真实部署的跨市场自动联结覆盖仍开放。
-- 清理本轮 RF pytest 临时目录及两份临时部署配置、调试日志和 `__pycache__`；保留必要的无路径回执和公开证据样本。代码仍在三个 owner 隔离 worktree 的候选分支，待提交/推送并记录确切 release SHA。
+- 清理本轮 RF pytest 临时目录及两份临时部署配置、调试日志和 `__pycache__`；保留必要的无路径回执和公开证据样本。提交前代码只在三个 owner 隔离 worktree 候选分支。
 - 最终跨 owner 定向复跑：CWP 70、FF 36、RF 45 项通过。测试启动时两次临时路径设置暴露环境问题：第一轮 `--basetemp` 的父目录未创建，`tmp_path` 初始化失败；显式载入 `pytest-asyncio` 后，稍长的 basetemp 被 Windows 路径防护搬到更长的沙箱目录，CWP 文件锁相关用例因此失败。改用 41 字符短路径后同一 CWP 套件 70/70 通过；不是产品代码回归。相关临时目录已清理，项目测试目录恢复。
+- owner 候选已分别提交并推送：CWP `17b960a4657b93820d4f6cf99b1fdd6f25a8d2c1`、FF `58627a66e6c9603f836aaea20b6924a7dd8aa14d`、RF `b005a179280ee19695578bdba9427b4dd44cdd73`，远端分支 SHA 与本地一致。push fast-gate 分别 18/18、11/11、12/12 通过；各 hook 标记完整远端 CI pending。本轮尚未将它们描述为完整 CI 通过或生产已切换。

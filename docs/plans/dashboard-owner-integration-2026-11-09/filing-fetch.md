@@ -33,4 +33,4 @@ E12 已证实 CLI 等价链的复用与具名拒绝。用独立临时 CWP 根、
 - FF 现在把用户选定的挂牌市场、issuer-link、期次、文种及 `as-of` 分别传给 CWP；CWP 返回的原件来源市场仍以已验 `SourceRef` 为准，不能被请求挂牌市场覆盖。绑定不完整或有冲突时使用具名拒绝，正确跨市场发行人可复用。
 - 36 项定向测试、Ruff、`git diff --check` 和独立审查通过。真实 HKEX 阿里 FY2025、B 站 FY2022 年报在隔离 CWP 快照中从 US 挂牌查询命中同一来源 SHA，且没有启动 provider 或下载。错误市场、security、period、form 和 as-of 负例均拒绝；细节见总计划 `validation/p2_cross_market_e2e_receipt.json`。
 - FF 候选遵守 owner 写域，没有改 CWP 身份/来源数据。CWP 生产快照缺 LEI/ISIN 的上游事实问题仍开放，需等通用标识 feed 接通后在实际部署复验；FF 不得用 ticker/name 猜发行人或伪造 source market。
-- 当前候选尚未提交；提交后在此记录确切 release SHA、远端分支及 CI 状态。
+- 已提交并推送候选 `58627a66e6c9603f836aaea20b6924a7dd8aa14d` 至 `origin/codex/dashboard-p2-ff-market-20261109`。本机 push fast-gate 11 项通过；push hook 标记 full validation pending，未在本轮取得远端全量 CI 结果。候选尚未与 CWP 生产标识数据源一起切换。
