@@ -16,9 +16,14 @@ from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.automation.narrative_verify import NarrativeVerifyHandler
 from company_wiki.automation import narrative_worker_factory as factory
 from company_wiki.automation.narrative_batch import _freeze_generations
-from company_wiki.automation.narrative_model import ModelResponseError
+from company_wiki.automation.narrative_model import (
+    NARRATIVE_PROMPT_VERSION, PROJECTION_MODEL_REQUEST_SCHEMA,
+    PROJECTION_NARRATIVE_PROMPT_VERSION, ModelResponseError,
+)
 from company_wiki.automation.worker_process import WorkerProcessSpec
+from company_wiki.narrative_subject import NarrativeSubject
 from company_wiki.source_catalog import narrative_evidence as policy
+from company_wiki.source_catalog.narrative_official_json import NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
 from company_wiki.source_catalog.narrative_retrieval import NarrativeEvidenceResolver, NarrativeEvidenceResolveError
 from company_wiki.source_contract import source_id_for_sha256
 from company_wiki.source_catalog.transcript_text_extract import extract_transcript_material
@@ -161,10 +166,10 @@ def test_factory_decodes_frozen_binding_once_and_pins_before_model(tmp_path, mon
     with official.owned_catalog(tmp_path) as (catalog, root):
         ref, _ = official.import_page(catalog, official.flat_page(1))
         projection = official.persist(catalog, [ref])
-        subject = official.NarrativeSubject.from_projection(projection)
-        versions = {"projection_prompt": official.PROJECTION_NARRATIVE_PROMPT_VERSION,
-            "projection_model_request_schema": official.PROJECTION_MODEL_REQUEST_SCHEMA,
-            "official_json_adapter": official.NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION}
+        subject = NarrativeSubject.from_projection(projection)
+        versions = {"projection_prompt": PROJECTION_NARRATIVE_PROMPT_VERSION,
+            "projection_model_request_schema": PROJECTION_MODEL_REQUEST_SCHEMA,
+            "official_json_adapter": NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION}
         if version is not None:
             versions["selector"] = version
         binding = {"schema_version": "narrative-run-binding/4", "execution_versions": versions,
@@ -172,7 +177,7 @@ def test_factory_decodes_frozen_binding_once_and_pins_before_model(tmp_path, mon
                 "source_inputs": {"subject_binding": subject.to_dict()}}}}
         frozen_json = canonical_json(binding)
         run = SimpleNamespace(job_ids=("owned-job",), input_hash="2"*64, model_id="fixture-model",
-            prompt_version=official.NARRATIVE_PROMPT_VERSION, blocked=False, binding_json=frozen_json)
+            prompt_version=NARRATIVE_PROMPT_VERSION, blocked=False, binding_json=frozen_json)
         monkeypatch.setattr(factory, "NarrativeRunStore", lambda _path: SimpleNamespace(get_run=lambda _id: run))
         config = root / "factory.json"
         config.write_text(json.dumps({"schema_version": "1.0", "catalog_dir": "catalog", "roots": [{
@@ -236,7 +241,7 @@ def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejectio
         original.write_bytes(b"keep original fixture")
         ref, _ = official.import_page(catalog, official.flat_page(1))
         projected = official.persist(catalog, [ref])
-        subject = official.NarrativeSubject.from_projection(projected)
+        subject = NarrativeSubject.from_projection(projected)
         model_options = {"model_id": "fixture-model", "endpoint": "https://fixture.invalid/v1/chat/completions",
                          "api_key_env": "UNREAD_KEY", "max_output_tokens": 1024}
         manifest = {"schema_version": "narrative-generation/2", "subject_binding": subject.to_dict(),
@@ -246,13 +251,13 @@ def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejectio
         if projection != "missing":
             manifest["reading_model_projection"] = projection
         frozen = {"schema_version": "narrative-run-binding/4", "execution_versions": {
-            "selector": "0.9.0", "projection_prompt": official.PROJECTION_NARRATIVE_PROMPT_VERSION,
-            "projection_model_request_schema": official.PROJECTION_MODEL_REQUEST_SCHEMA,
-            "official_json_adapter": official.NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION},
+            "selector": "0.9.0", "projection_prompt": PROJECTION_NARRATIVE_PROMPT_VERSION,
+            "projection_model_request_schema": PROJECTION_MODEL_REQUEST_SCHEMA,
+            "official_json_adapter": NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION},
             **_freeze_generations({subject.item_key: manifest})}
         frozen_json = canonical_json(frozen)
         run = SimpleNamespace(job_ids=("owned-job",), input_hash="2" * 64, model_id="fixture-model",
-                              prompt_version=official.NARRATIVE_PROMPT_VERSION, blocked=False, binding_json=frozen_json)
+                              prompt_version=NARRATIVE_PROMPT_VERSION, blocked=False, binding_json=frozen_json)
         monkeypatch.setattr(factory, "NarrativeRunStore", lambda _path: SimpleNamespace(
             get_run=lambda _id: run, final_generations=lambda _id: {subject.item_key: manifest}))
         config = root / "factory.json"

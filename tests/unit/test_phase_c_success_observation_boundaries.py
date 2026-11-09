@@ -94,7 +94,9 @@ def test_observation_io_or_event_failure_preserves_native_receipt_and_usage(tmp_
 
 
 @pytest.mark.timeout(120)
-def test_real_owned_run_keeps_native_success_and_cache_after_observer_failure(tmp_path, monkeypatch):
+def test_real_owned_run_keeps_native_success_and_cache_after_observer_failure(tmp_path_factory, monkeypatch):
+    # The child batch creates nested worker paths. Use a short pytest-owned root.
+    tmp_path = tmp_path_factory.mktemp('pc')
     monkeypatch.setattr(runner.tempfile, 'gettempdir', lambda: str(tmp_path))
     monkeypatch.setattr(runner, 'seed_identity', lambda *args, **kwargs: {})
     observed = []
@@ -113,7 +115,9 @@ def test_real_owned_run_keeps_native_success_and_cache_after_observer_failure(tm
         result = runner.run_pair({'sample_id': 'loopback-fixture'}, provider, metadata,
             mode='loopback', output=output, fixture_endpoint=server.endpoint,
             selected_versions='0.9.0', reading_model_projection='reading-model-input/5')
-        assert len(server.requests) == 1
+        assert len(server.requests) == 1, (
+            result.get('error'), [state['receipt'] for state in result['states']],
+        )
     assert len(observed) == 1
     assert result['status'] == 'OBSERVATION_INCOMPLETE', result
     state = result['states'][0]

@@ -1,8 +1,14 @@
 """All filing read/reuse paths consume the one source-owner scope qualification."""
 
+from dataclasses import replace
+
 import pytest
 from helpers.source_fact_fixture import lake, html, imported, evidence, close
 from test_local_request_relevance import request
+from company_wiki.source_catalog.acquisition import AcquisitionCoordinator, AdapterRegistry
+from company_wiki.source_catalog.acquisition_journal import AcquisitionJournal
+from company_wiki.source_catalog.acquisition_service import SourceAcquisitionService, SourceEnsureStatus
+from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter
 from company_wiki.source_catalog.source_reader import SourceVersionReader, SourceReadError
 from company_wiki.source_catalog.resolver import SourceResolver
 from company_wiki.source_catalog.local_inventory import LocalReadBudget, LocalPrepareLimits
@@ -19,8 +25,39 @@ def cached(cat, actual):
     return ref, path, data
 
 
-@pytest.mark.parametrize("actual", ["wrong_cik", "wrong_year", "wrong_company_binding"])
-@pytest.mark.parametrize("entry", ["open", "verify", "resolver", "ensure", "stage"])
+def offline_service(cat):
+    class NoSupplier:
+        name = "offline"
+        version = "1"
+
+        def discover(self, *_):
+            raise AssertionError("local-only request cannot initiate discovery")
+
+        def fetch(self, *_):
+            raise AssertionError("local-only request cannot initiate a download")
+
+    supplier = NoSupplier()
+    coordinator = AcquisitionCoordinator(
+        catalog=cat,
+        adapters=AdapterRegistry(supplier, supplier, supplier),
+        staging_root=cat.config.catalog_dir / "staging",
+    )
+    return SourceAcquisitionService(
+        coordinator=coordinator,
+        writer=CanonicalSourceWriter(cat),
+        journal=AcquisitionJournal(cat.config.catalog_dir),
+    )
+
+
+@pytest.mark.parametrize(
+    "actual,entry",
+    [
+        (actual, entry)
+        for actual in ("wrong_cik", "wrong_year", "wrong_company_binding")
+        for entry in ("open", "verify", "resolver", "ensure", "stage")
+        if (actual, entry) != ("wrong_year", "ensure")
+    ],
+)
 def test_false_cached_scope_is_rejected_at_every_filing_reuse_entry(tmp_path, actual, entry):
     cat = lake(tmp_path)
     try:
@@ -37,23 +74,10 @@ def test_false_cached_scope_is_rejected_at_every_filing_reuse_entry(tmp_path, ac
             elif entry == "resolver":
                 SourceResolver(cat).resolve(request())
             else:
-                from company_wiki.source_catalog.acquisition import AcquisitionCoordinator, AdapterRegistry
-                from company_wiki.source_catalog.acquisition_service import SourceAcquisitionService
-                from company_wiki.source_catalog.acquisition_journal import AcquisitionJournal
-                from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter
-                class NoSupplier:
-                    name = "offline"
-                    version = "1"
-                    def discover(self, *_):
-                        raise AssertionError("invalid cache cannot initiate supplier")
-                    def fetch(self, *_):
-                        raise AssertionError("invalid cache cannot initiate supplier")
-                supplier = NoSupplier()
-                service = SourceAcquisitionService(coordinator=AcquisitionCoordinator(catalog=cat, adapters=AdapterRegistry(supplier, supplier, supplier), staging_root=cat.config.catalog_dir / "staging"), writer=CanonicalSourceWriter(cat), journal=AcquisitionJournal(cat.config.catalog_dir))
+                service = offline_service(cat)
                 if entry == "ensure":
                     service.ensure(request())
                 else:
-                    from dataclasses import replace
                     from company_wiki.source_catalog.acquisition import AcquisitionResult, AcquisitionStatus, DownloadCandidate
                     candidate = DownloadCandidate("c-1", "official", "p-1", "US", "Acme", "annual", "https://www.sec.gov/Archives/edgar/data/12345/original.htm", "annual_report", "2026-07-30", 2026, form_type="10-K", fiscal_period="FY")
                     selection = AcquisitionResult("1.0", AcquisitionStatus.SELECTED, empty, candidate=candidate)
@@ -62,6 +86,27 @@ def test_false_cached_scope_is_rejected_at_every_filing_reuse_entry(tmp_path, ac
         assert error.value.reason == ("primary_scope_conflict" if actual == "wrong_year" else "primary_issuer_conflict")
         assert path.read_bytes() == data
         assert cat.reader.fetchone("SELECT COUNT(*) FROM source_metadata_assertions")[0] == before
+    finally:
+        close(cat)
+
+
+def test_ensure_corrects_same_issuer_period_without_reusing_it_for_wrong_year(tmp_path):
+    cat = lake(tmp_path)
+    try:
+        ref, path, data = cached(cat, "wrong_year")
+        reader = SourceVersionReader(cat)
+        assert reader.describe_version(ref)["fiscal_year"] == 2026
+        service = offline_service(cat)
+
+        wrong_year = service.ensure(request())
+        assert wrong_year.status == SourceEnsureStatus.MISSING
+        assert not wrong_year.resolution.matches
+        assert reader.describe_version(ref)["fiscal_year"] == 2022
+
+        actual_year = service.ensure(replace(request(), fiscal_year=2022))
+        assert actual_year.status == SourceEnsureStatus.REUSED
+        assert [match.source_id for match in actual_year.resolution.matches] == [ref.source_id]
+        assert path.read_bytes() == data
     finally:
         close(cat)
 

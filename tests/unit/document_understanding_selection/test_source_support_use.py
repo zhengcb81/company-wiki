@@ -399,21 +399,35 @@ _NATIVE_V3_SCOPES = (
 def saved_native_source_assessments():
     from pathlib import Path
     from hashlib import sha256
-    from types import SimpleNamespace
     import gzip
     import json
+    from company_wiki.document_model import NarrativeUnit
     from company_wiki.resource_budget import WorkBudget
     from company_wiki.source_contract import EvidenceCoordinates
     from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
     from company_wiki.source_catalog.narrative_support_use import source_support_use
     path=Path(__file__).resolve().parents[3] / 'docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/source-use-20261028/v3__native-support-v3__selection.json.gz'
-    assert sha256(path.read_bytes()).hexdigest() == 'e22a10df47b0890a2b62794f7134fc5670e00ceeff9707e3c4b9f9a51a9079f6'
-    selected=json.loads(gzip.decompress(path.read_bytes()))
-    spans={span["span_id"]:span for span in selected["evidence_spans"]}
-    units={sid:SimpleNamespace(raw_text=span["raw_text"],source_id=span["source_id"],
-        source_role=span["structured_value"].get("source_role","unknown"),
-        unit_kind=span["structured_value"].get("unit_kind","unknown"),
-        coordinates=EvidenceCoordinates(**span["coordinates"])) for sid,span in spans.items()}
+    snapshot = path.read_bytes()
+    assert sha256(snapshot).hexdigest() == 'e22a10df47b0890a2b62794f7134fc5670e00ceeff9707e3c4b9f9a51a9079f6'
+    selected = json.loads(gzip.decompress(snapshot))
+    units = {}
+    for span in selected["evidence_spans"]:
+        span_id = span["span_id"]
+        source_fields = span["structured_value"]
+        # The reviewed scopes refer to span IDs. Rehydrate transient units
+        # without copying earlier reading scores, topics or selection metadata.
+        units[span_id] = NarrativeUnit(
+            unit_id="urn:company-wiki:narrative-unit:sha256:" + sha256(span_id.encode()).hexdigest(),
+            source_id=span["source_id"],
+            parser_name=span["parser_name"],
+            parser_version=span["parser_version"],
+            coordinates=EvidenceCoordinates(**span["coordinates"]),
+            raw_text=span["raw_text"],
+            unit_kind=source_fields["unit_kind"],
+            source_role=source_fields["source_role"],
+            language=source_fields["language"],
+            quality_flags=tuple(span["quality_flags"]),
+        )
     groups={f"scope-{number}":ids for number,ids,_expected in _NATIVE_V3_SCOPES}
     session=SourceOperatingSession(units,groups=groups,work_budget=WorkBudget(2_000_000))
     observed={}

@@ -24,6 +24,7 @@ from company_wiki.source_catalog.narrative_evidence import (
     parse_pdf_bytes, select_narrative_evidence,
 )
 from company_wiki.source_contract import EvidenceSpan, source_id_for_sha256
+from company_wiki.source_contract.source_version import SourceByteVerifier, SourceRef, VerifiedContent
 from support.narrative_model_request_fixture import selection
 
 
@@ -157,9 +158,11 @@ def test_review_diagnostic_never_bypasses_actual_pdf_replay(bad_locator):
         "source_metadata": selected.source_metadata.to_dict(),
     })
     metadata = {**selected.source_metadata.to_dict(), **selected.source_ref.to_dict()}
-    opened = SimpleNamespace(
-        document_id=selected.source_ref.document_id, source_id=selected.source_ref.source_id,
-        content_sha256=selected.source_ref.content_sha256, byte_size=len(data), data=data,
+    verifier = SourceByteVerifier(retain_bytes=True)
+    verifier.update(data)
+    opened = VerifiedContent.from_observation(
+        SourceRef(**selected.source_ref.to_dict()), verifier.observe(),
+        read_at="2026-10-07T00:00:00Z", policy_sha256=selected.expected_read_policy_sha256,
         source_read_policy_sha256=selected.expected_read_policy_sha256,
     )
     reader = SimpleNamespace(open_version=lambda *args, **kwargs: opened,

@@ -35,9 +35,10 @@ def test_verify_consumes_bound_inner_summary_only(materials):
             "source.narrative_summarize": result(wrap_summary(summary, execution)),
         }
     )
-    actual_selected, actual_summary = _dependencies(context)
+    actual_selected, actual_summary, assessment = _dependencies(context)
     assert actual_selected == selected
     assert actual_summary.to_dict() == summary.to_dict()
+    assert assessment is None
     bad = wrap_summary(summary, execution)
     bad["execution"]["plan_sha256"] = "f" * 64
     context.dependency_results["source.narrative_summarize"] = result(bad)

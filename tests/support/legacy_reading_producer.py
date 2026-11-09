@@ -40,10 +40,15 @@ import os
 from pathlib import Path
 import sys
 import company_wiki.source_catalog as catalog
+from company_wiki.document_understanding import summary_input
 deployed = Path(DEPLOYED)
 expected = EXPECTED
 if 'company_wiki.source_catalog.narrative_reading' in sys.modules:
     raise SystemExit('historical producer must load before the current module')
+# Expose the old import spellings only inside this historical subprocess.
+summary_input._sent_policies = summary_input.sent_policies
+summary_input._unread = summary_input.unread_units
+summary_input._SHARED_CONSTRAINTS = summary_input.SHARED_CONSTRAINTS
 catalog.__path__.insert(0, str(deployed))
 from company_wiki.source_catalog import narrative_reading as reading
 physical = Path(reading.__file__).resolve()

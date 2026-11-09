@@ -1150,7 +1150,7 @@ def _run_pair_in_owned_root(
     source_catalog_config=None,
     activation_recovery=False,
 ):
-    from company_wiki.source_catalog.official_source_flow import (
+    from company_wiki.automation.source_request import (
         prepare_official_narrative_request,
     )
     from company_wiki.automation.narrative_run_store import NarrativeRunStore

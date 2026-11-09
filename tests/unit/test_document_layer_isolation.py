@@ -51,6 +51,8 @@ MODEL_PREFIXES = (
     "company_wiki.resource_budget",
     "company_wiki.source_contract",
 )
+# The source contract uses this leaf for JSON wire decoding.
+MODEL_EXACT = ("company_wiki.wire_json",)
 
 
 class RefuseRuntime(importlib.abc.MetaPathFinder):
@@ -247,6 +249,7 @@ unexpected = sorted(
     name
     for name in sys.modules
     if name.startswith("company_wiki.")
+    and name not in MODEL_EXACT
     and not any(
         name == prefix or name.startswith(prefix + ".") for prefix in MODEL_PREFIXES
     )

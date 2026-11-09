@@ -205,19 +205,36 @@ def test_external_sqlite_correction_is_dirty_and_readable_without_projection_wri
         catalog.close()
 
 
-def test_alias_expansion_uses_existing_resolver_authority(tmp_path, monkeypatch):
-    from company_wiki.source_catalog.resolver import SourceResolver
+def test_alias_expansion_uses_existing_resolver_authority(tmp_path):
+    from company_wiki.source_catalog.security_identity import SecurityMasterStore, SecurityRecord
 
-    catalog, _, _, _ = _fixture(tmp_path)
-    monkeypatch.setattr(
-        SourceResolver,
-        "_issuer_index",
-        lambda self: ({"alias": "issuer"}, {"issuer": frozenset({"alias", "acme"})}),
-    )
+    catalog, _, _, ids = _fixture(tmp_path)
     try:
-        assert (
-            SourceVersionReader(catalog).query_local(request("Alias")).status == "found"
+        reader = SourceVersionReader(catalog)
+        alias_request = request("Alias")
+        assert reader.query_local(alias_request).status == "not_found"
+
+        master = SecurityMasterStore(catalog.config.catalog_dir / "security_master")
+        record = SecurityRecord(
+            canonical_name="Acme",
+            market="US",
+            exchange="NASDAQ",
+            ticker="ACME",
+            security_id="ACME",
+            aliases=("Alias",),
+            active=True,
+            source_name="sec",
+            source_url="https://www.sec.gov/files/company_tickers.json",
+            source_record_id="fixture-issuer",
+            identifiers={},
         )
+        master.write_market(
+            "US", (record,), retrieved_at="2026-10-20T00:00:00Z", sources=("sec",),
+        )
+
+        result = reader.query_local(alias_request)
+        assert result.status == "found"
+        assert [match.document_id for match in result.matches] == [ids["document_id"]]
     finally:
         catalog.close()
 

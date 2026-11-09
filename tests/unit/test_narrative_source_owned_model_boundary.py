@@ -13,6 +13,8 @@ from company_wiki.automation import narrative_model as model
 from company_wiki.automation.models import canonical_json
 from company_wiki.automation.narrative_contracts import NarrativeSelectResult, NarrativeContractError
 from company_wiki.automation.narrative_http_model import NarrativeHTTPModel
+from company_wiki.document_understanding import assertion_frames
+from company_wiki.source_catalog import narrative_summary_assessment
 from company_wiki.source_contract import EvidenceSpan
 from support.narrative_model_request_fixture import selection
 from support.summary_output_contract_upgrade import assert_archived_request_upgrade, upgraded_http_body
@@ -232,8 +234,12 @@ def test_boundary_identity_is_exact_pathless_actual_instruction_schema_and_decod
     assert actual == model.reading_model_boundary_identity(V2, projected=True)
     instruction = request(with_reading()).instruction
     assert actual["instruction_sha256"] == sha256(instruction.encode()).hexdigest()
-    source = Path(model.__file__).read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
-    assert actual["decoder_sha256"] == sha256(source).hexdigest()
+    decoder = Path(model.__file__).read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    assessment = Path(narrative_summary_assessment.__file__).read_bytes().replace(b"\r\n", b"\n")
+    frames = Path(assertion_frames.__file__).read_bytes().replace(b"\r\n", b"\n")
+    components = {"decoder": sha256(decoder).hexdigest(), "assessment": sha256(assessment).hexdigest(),
+                  "assertion_frames": sha256(frames).hexdigest()}
+    assert actual["decoder_sha256"] == sha256(canonical_json(components).encode()).hexdigest()
     assert all(len(actual[key]) == 64 for key in ("instruction_sha256", "response_schema_sha256", "decoder_sha256"))
     assert str(Path(model.__file__).parent) not in canonical_json(actual)
 

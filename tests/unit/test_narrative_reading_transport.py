@@ -920,19 +920,24 @@ def test_select_result_reader_keeps_previous_minor_schema_compatible():
 
 
 def test_actual_stdlib_json_recursion_failure_is_encoding_not_material_quota(monkeypatch):
-    from company_wiki.automation import narrative_contracts as contracts
+    from sys import getrecursionlimit
+
+    from company_wiki.source_catalog import narrative_contracts
+
     selected = selection(3)
     wire = selected.to_dict()
     wire["reading_context"] = reading_context(selected)
     nested = "untrusted"
-    for _ in range(1500):
+    for _ in range(getrecursionlimit()):
         nested = {"child": nested}
     wire["reading_context"]["layout_coverage"] = nested
-    def unavailable_encoder(*args, **kwargs):
-        raise RecursionError('underlying JSON runtime unavailable')
-    monkeypatch.setattr(contracts, 'canonical_json', unavailable_encoder)
-    with pytest.raises(NarrativeContractError, match="JSON encoding"):
+    # The streaming stdlib encoder has a deterministic Python recursion limit.
+    # The accelerated encoder's native stack limit differs by interpreter.
+    encoder = json.JSONEncoder()
+    monkeypatch.setattr(narrative_contracts, "canonical_json", lambda value: "".join(encoder.iterencode(value)))
+    with pytest.raises(NarrativeContractError, match="JSON encoding") as failure:
         NarrativeSelectResult.from_dict(wire)
+    assert isinstance(failure.value.__cause__, RecursionError)
 
 
 def test_model_boundary_cannot_send_synthetic_examples_from_direct_dataclass_replacement():

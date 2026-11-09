@@ -12,8 +12,7 @@ import pytest
 from company_wiki.automation.models import HandlerOutcome
 from company_wiki.automation.narrative_contracts import NarrativeBundle, NarrativeSelectResult
 from company_wiki.automation.narrative_replay import NarrativeReplayError, replay_narrative_evidence
-from company_wiki.document_normalization import PARSER_NAME, PARSER_VERSION
-from company_wiki import document_normalization as dn
+from company_wiki.document_normalization import PARSER_NAME, PARSER_VERSION, html_parser
 from company_wiki.source_contract import EvidenceSpan
 
 
@@ -109,14 +108,14 @@ def test_all_html_spans_replay_with_one_parse_and_reject_forged_locator(monkeypa
             "customers and expanded our production line.</p></body></html>").encode()
     selected = _selected(data, "text/html")
     assert len(selected.evidence_spans) >= 2
-    normalizer = dn.normalize_document
+    parse_dom = html_parser.BeautifulSoup
     calls = []
 
     def counted(*args, **kwargs):
         calls.append(1)
-        return normalizer(*args, **kwargs)
+        return parse_dom(*args, **kwargs)
 
-    monkeypatch.setattr(dn, "normalize_document", counted)
+    monkeypatch.setattr(html_parser, "BeautifulSoup", counted)
     assert replay_narrative_evidence(data, selected) == len(selected.evidence_spans)
     assert len(calls) == 1
     span = selected.evidence_spans[0]
