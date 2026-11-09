@@ -15,6 +15,8 @@ Focused coverage required by the owner extension card:
 
 from __future__ import annotations
 
+import base64
+from contextlib import closing
 import hashlib
 import json
 import os
@@ -676,6 +678,59 @@ def test_cli_browse_and_reopen_roundtrip(tmp_path):
     assert json.loads(proc.stderr.decode("utf-8").splitlines()[-1])["state"] \
         == "blocked"
     _assert_no_path_leak(json.dumps(result) + json.dumps(reopened), tmp_path)
+
+
+@pytest.mark.parametrize(
+    ("entry", "reason"),
+    [("request", "invalid_request"), ("snapshot", "invalid_snapshot_id")],
+)
+def test_cli_reports_json_decoder_stack_failure_without_traceback(tmp_path, entry, reason):
+    catalog = _build(tmp_path)
+    catalog.close()
+    config_path = _write_cli_config(tmp_path)
+    nested = "[" * 3_000 + "0" + "]" * 3_000
+    if entry == "request":
+        request = '{"schema_version":"' + BROWSE_REQUEST_SCHEMA + '","nested":' + nested + "}"
+    else:
+        token = base64.urlsafe_b64encode(('{"v":1,"nested":' + nested + "}").encode())
+        request = {
+            "schema_version": BROWSE_REQUEST_SCHEMA,
+            "canonical_entity_id": ENT,
+            "market": None, "document_kinds": None, "fiscal_years": None,
+            "language": None, "source_statuses": None, "limit": None, "cursor": None,
+            "snapshot_id": token.decode().rstrip("="),
+        }
+
+    proc = _run_cli(config_path, request, tmp_path)
+    assert proc.returncode == 2, proc.stderr
+    assert proc.stdout == b""
+    assert json.loads(proc.stderr) == {
+        "schema_version": "company-wiki-public-document-browse/1",
+        "state": "blocked",
+        "reason": reason,
+    }
+    _assert_no_path_leak(proc.stderr.decode(), tmp_path)
+
+
+def test_invalid_catalog_locator_does_not_advertise_resolvable_original(tmp_path):
+    with closing(_build(tmp_path)) as catalog:
+        browser = PublicDocumentBrowser(catalog)
+        original_sha = _sha(ANNUAL)
+        before = next(item for item in _browse(browser)["items"]
+                      if item["source_ref"]["content_sha256"] == original_sha)
+        assert before["storage_state"] == "resolvable"
+        ref = before["source_ref"]
+        with catalog.store.transaction() as connection:
+            connection.execute(
+                "UPDATE locations SET relative_path=? WHERE document_id=? AND source_id=?",
+                ("../escape.pdf", ref["document_id"], ref["source_id"]),
+            )
+        result = _browse(browser)
+        after = next(item for item in result["items"] if item["source_ref"] == ref)
+        assert result["state"] == "partial"
+        assert after["storage_state"] == "not_resolvable"
+        assert browser.reopen_document_version(before["document_version_id"])["document"] == after
+        _assert_no_path_leak(json.dumps(after), tmp_path)
 
 
 def _assert_no_path_leak(payload: str, tmp_path: Path) -> None:

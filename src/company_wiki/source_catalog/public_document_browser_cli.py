@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 from typing import Any, NoReturn, Sequence
 
+from ..wire_json import parse_json
 from .config import CatalogConfigError, load_catalog_config
 from .public_document_browser import (
     BROWSE_REQUEST_SCHEMA,
@@ -37,20 +38,11 @@ class _JsonArgumentParser(argparse.ArgumentParser):
         raise ValueError(message)
 
 
-def _unique_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise ValueError("duplicate JSON key")
-        result[key] = value
-    return result
-
-
 def _read_request() -> dict[str, Any]:
     raw = sys.stdin.buffer.read(_MAX_REQUEST_BYTES + 1)
     if len(raw) > _MAX_REQUEST_BYTES:
         raise ValueError("request exceeds limit")
-    request = json.loads(raw.decode("utf-8"), object_pairs_hook=_unique_pairs)
+    request = parse_json(raw.decode("utf-8"))
     if not isinstance(request, dict):
         raise ValueError("request must be an object")
     if request.get("schema_version") not in {

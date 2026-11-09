@@ -30,9 +30,9 @@ of the v2 read slice:
   (transport failures surface as ``unavailable`` from the CLI envelope);
 - read-only: no download, OCR, parsing or summary is triggered, and no
   physical path, root path or catalog layout detail is ever emitted.
-  ``storage_state`` only says whether an active original location for the
-  version resolves inside the CURRENT configured roots, so a migrated
-  storage root keeps every SourceRef openable by the owner reader.
+  ``storage_state`` reports whether an active original location has a
+  configured root and a valid relative locator. On open, the source reader
+  checks the current filesystem location, eligibility and original bytes.
 
 Field provenance: fiscal_year / period_start / period_end / market /
 language / canonical_entity_id / display_name live inside
@@ -46,14 +46,15 @@ mapping.
 from __future__ import annotations
 
 import base64
-import binascii
 import hashlib
 import json
 import re
 from dataclasses import dataclass
 from typing import Any
 
+from ..wire_json import parse_json
 from .service import SourceCatalog
+from .source_location import relative_segments
 from .source_reader import SOURCE_REF_SCHEMA_VERSION
 
 
@@ -146,8 +147,8 @@ def _decode_token(token: Any, field: str) -> dict[str, Any]:
         raise PublicBrowseError(f"invalid_{field}")
     try:
         padded = token + "=" * (-len(token) % 4)
-        payload = json.loads(base64.urlsafe_b64decode(padded.encode("ascii")))
-    except (binascii.Error, UnicodeError, json.JSONDecodeError):
+        payload = parse_json(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
+    except ValueError:
         raise PublicBrowseError(f"invalid_{field}") from None
     if not isinstance(payload, dict) or payload.get("v") != _SNAPSHOT_VERSION:
         raise PublicBrowseError(f"unsupported_{field}")
@@ -598,7 +599,7 @@ class PublicDocumentBrowser:
         document_id = document["document_id"]
         role_placeholders = ", ".join("?" for _ in _VERSION_LOCATION_ROLES)
         location_rows = self.catalog.reader.fetchall(
-            f"""SELECT source_id, root_id, role, location_status
+            f"""SELECT source_id, root_id, role, location_status, relative_path
                FROM locations
                WHERE document_id = ? AND source_id IS NOT NULL
                  AND role IN ({role_placeholders})""",
@@ -627,9 +628,13 @@ class PublicDocumentBrowser:
             source_id = str(source["source_id"])
             locations = locations_by_source.get(source_id, [])
             roles = sorted({str(item["role"]) for item in locations})
+            # This is a catalog projection. The Reader verifies the actual
+            # location and original bytes when a caller opens the SourceRef.
             resolvable = any(
                 str(item["location_status"]) == "active"
                 and str(item["root_id"]) in config_root_ids
+                and isinstance(item["relative_path"], str)
+                and relative_segments(item["relative_path"]) is not None
                 for item in locations
             )
             versions.append(_VersionRow(
