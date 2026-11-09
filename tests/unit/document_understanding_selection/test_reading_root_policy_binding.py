@@ -95,7 +95,7 @@ def test_pipeline_binds_actual_sec_policy_to_original_units(form, policy, family
 
 @pytest.mark.parametrize("form,policy,family,cover,body", CASES)
 def test_actual_sec_form_reaches_reading_scope_and_dependency_eligibility(form, policy, family, cover, body):
-    from company_wiki.document_understanding.decision_inventory import build_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import build_decision_trace
 
     pipeline = _pipeline(cover, body)
     assert pipeline["profile"].get("form_type") == form
@@ -120,7 +120,7 @@ def test_old_route_without_form_field_retains_metadata_compatibility():
 
 @pytest.mark.parametrize("change,invalidates", [("instructions", False), ("eligibility", True)])
 def test_actual_form_bounds_cache_dependencies_but_retains_losing_policy_matcher(monkeypatch, change, invalidates):
-    from company_wiki.document_understanding.decision_inventory import build_decision_trace, current_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import build_decision_trace, current_decision_trace
     from company_wiki.document_understanding.profiles import registry
 
     frozen = build_decision_trace(_pipeline(SEC_10K_COVER, SEC_10K_BODY))

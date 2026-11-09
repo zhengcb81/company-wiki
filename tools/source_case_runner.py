@@ -107,7 +107,15 @@ def atomic_owned_write(path, encoded, owned, *, root_dir):
         else:
             # First publication must be an atomic no-clobber operation. A
             # preflight existence check cannot close the create/commit race.
-            os.link(pending, path)
+            if os.name == "nt":
+                # Same-directory rename is atomic on Windows and refuses an
+                # existing destination. Hard-link creation is not consistently
+                # available to ordinary Windows workspaces/sandboxes.
+                os.rename(pending, path)
+            else:
+                # POSIX rename replaces an existing destination, so use the
+                # atomic no-clobber hard-link operation there.
+                os.link(pending, path)
         owned[path] = sha256(encoded).hexdigest()
     finally:
         if pending.exists():

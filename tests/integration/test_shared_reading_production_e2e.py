@@ -16,8 +16,16 @@ import pytest
 from company_wiki.automation.models import canonical_json_hash, require_sha256
 from company_wiki.automation.narrative_contracts import NarrativeBundle
 from company_wiki.automation.narrative_model_runtime import resolve_model_boundary
+from company_wiki.automation.narrative_model_extractive import (
+    EXTRACTIVE_MODEL_PROJECTION_VERSION,
+    EXTRACTIVE_REQUEST_SCHEMA,
+    RANK_MATERIAL_SCHEMA,
+)
+from company_wiki.automation.narrative_rank_material import RANK_STRATEGY_SCHEMA
+from company_wiki.document_understanding.reading_context_contract import CURRENT_READING_CONTEXT_SCHEMA
 from company_wiki.automation.narrative_selection_generation import reading_material_sha256
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
+from company_wiki.automation.store import AutomationStore
 from integration import test_narrative_generation_reuse as reuse
 from support import official_json_batch_fixture as official_json_fixtures
 
@@ -112,47 +120,47 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     assert metadata["generation_manifest"] == final, "publication retained an obsolete base generation"
     assert metadata["generation_sha256"] == canonical_json_hash(final)
     strategy = data["reading_strategy"]
-    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/4"
-    assert data["schema_version"] == "narrative-model-request/5"
-    assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/4").prompt_version
+    assert final["reading_model_projection"] == EXTRACTIVE_MODEL_PROJECTION_VERSION
+    assert strategy["schema_version"] == RANK_STRATEGY_SCHEMA
+    assert data["schema_version"] == EXTRACTIVE_REQUEST_SCHEMA
+    assert final["execution_versions"]["prompt"] == resolve_model_boundary(
+        EXTRACTIVE_MODEL_PROJECTION_VERSION
+    ).prompt_version
     assert final["reading_model_boundary"]["prompt_version"] == final["execution_versions"]["prompt"]
     assert final["summary_validation"]["language_observer"]["py3langid"]["model"]["status"] == "available"
-    assert context["schema_version"] == "du-production-reading/3"
-    # Public context is the full source audit view, bound by material_sha256
-    # above; the model retains every actual semantic instruction independently.
+    assert context["schema_version"] == CURRENT_READING_CONTEXT_SCHEMA
+    # Public context retains the full source audit view; the model request uses
+    # a compact ranking protocol and only carries source-card hints in material.
     assert all("profile_version" in row and "policy_components" in row
                for row in context["reading_policies"])
-    for policy in context["reading_policies"]:
-        assert any(all(row.get(key) == policy.get(key) for key in (
-            "family", "summary_focus", "reading_questions", "context_requirements", "negative_hints",
-        )) for row in strategy["reading_policies"])
-    for facet in context["business_facets"]:
-        assert any(all(row.get(key) == facet.get(key) for key in (
-            "id", "summary_focus", "business_questions", "required_context", "absence_rules",
-            "confusion_checks", "applicable_mechanisms",
-        )) for row in strategy["business_facets"])
-    assert strategy["constraints"] == context["constraints"]
-    assert all("selection_basis" not in row for row in strategy["business_facets"])
-    assert all("family_policy" not in row for row in strategy["reading_policies"])
+    assert strategy == {
+        "schema_version": RANK_STRATEGY_SCHEMA,
+        "operation": "advisory_ranking_only",
+        "source_policy": "retained in reading_hints; operational coverage stays in the program",
+    }
+    assert '"selection_basis":' not in json.dumps(data)
     material = data['material']
-    rows = material['shared_fragments'] + [part for task in material['tasks']
-                                         for part in task['parts'] if 'text' in part]
-    rows.sort(key=lambda row: int(row['source_key'][1:]))
-    aliases = [row['source_key'] for row in rows]
-    assert len(aliases) == len(set(aliases)) == len(bundle["evidence_spans"])
-    assert [row['text'] for row in rows] == [span["raw_text"] for span in bundle["evidence_spans"]]
+    assert material["schema_version"] == RANK_MATERIAL_SCHEMA
+    assert material["fragment_columns"] == ["source_key", "text", "source_role", "quality_flags"]
+    fragments = material["fragments"]
+    source_texts = {span["raw_text"] for span in bundle["evidence_spans"]}
+    assert all(type(row) is list and len(row) == 4 for row in fragments)
+    aliases = [row[0] for row in fragments]
+    assert len(aliases) == len(set(aliases))
+    assert all(row[1] in source_texts for row in fragments)
+    assert all(isinstance(row[2], str) and isinstance(row[3], list) for row in fragments)
     assert "evidence_groups" not in data and "evidence_group_columns" not in data
-    units = {task['key']: [part.get('shared_ref', part.get('source_key')) for part in task['parts']]
-             for task in material['tasks']}
-    assert len(units) == len(material['tasks'])
-    assert all(members and len(members) == len(set(members)) and set(members) <= set(aliases)
-               for members in units.values())
-    assert set().union(*(set(members) for members in units.values())) == set(aliases)
-    alias_by_span = {span["span_id"]: alias for span, alias in zip(bundle["evidence_spans"], aliases, strict=True)}
-    native_groups = {tuple(alias_by_span[sid] for sid in group["evidence_ids"])
-                     for group in context["groups"]}
-    assert native_groups <= {tuple(members) for members in units.values()}
-    assert 'groups' not in strategy  # Native scopes are carried once by material.tasks.
+    assert material["task_columns"] == ["key", "support", "context", "reading_hint_index"]
+    tasks = material["tasks"]
+    assert all(type(row) is list and len(row) == 4 for row in tasks)
+    assert len({row[0] for row in tasks}) == len(tasks)
+    for _, support, task_context, hint_index in tasks:
+        assert support and len(support) == len(set(support))
+        assert len(task_context) == len(set(task_context))
+        assert all(type(index) is int and 0 <= index < len(fragments)
+                   for index in [*support, *task_context])
+        assert type(hint_index) is int and 0 <= hint_index < len(material["reading_hints"])
+    assert "groups" not in strategy
     by_span = {span['span_id']: span['raw_text'] for span in bundle['evidence_spans']}
     for claim in bundle['summary']['draft']['claims']:
         assert claim['text'] == '\n'.join(by_span[sid] for sid in claim['evidence_ids'])
@@ -178,7 +186,13 @@ def test_configured_shared_reading_reaches_summary_public_transport_and_same_run
             launcher = _launcher(root)
             request = reuse.request_path(root, imported, loopback_model_server.endpoint, "reading-a", selector_version="0.9.0")
             process, first = reuse.invoke(root, config, request, llm, "reading-a", launcher=launcher)
-            assert process.returncode == 0 and first["status"] == "completed", first
+            if process.returncode != 0 or first["status"] != "completed":
+                database = root / "AUTO.sqlite"
+                errors = [
+                    (job.job_type, job.last_error_code, job.last_error_detail)
+                    for job in AutomationStore(database).list_jobs() if job.last_error_code
+                ] if database.is_file() else []
+                pytest.fail(f"reading batch failed with exit {process.returncode}: {errors!r}")
             assert len(loopback_model_server.requests) == 1 and not loopback_model_server.errors
             reference, bundle, receipt = reuse.public_read(root, config, imported, kind)
             assert receipt["replay_status"] == "verified"
@@ -201,7 +215,7 @@ def test_configured_shared_reading_reaches_summary_public_transport_and_same_run
             dependencies = final.get("reading_dependencies")
             assert dependencies and dependencies["status"] == "complete", dependencies
             if len(loopback_model_server.requests) != 1:
-                from company_wiki.document_understanding.decision_inventory import current_decision_trace
+                from company_wiki.source_catalog.narrative_decision_inventory import current_decision_trace
                 from company_wiki.document_understanding.decision_dependencies import compare_decision_dependencies
                 next_final = runs.final_generations("reading-b")[imported["source_ref"]["document_id"]]
                 diagnostic = {
@@ -297,7 +311,7 @@ def test_completed_raw_resume_freshly_checks_original_once_and_refuses_changed_b
 
 
 def test_real_legacy_v5_auto_run_resumes_through_additive_upgrade_without_new_post(
-    loopback_model_server, monkeypatch,
+    loopback_model_server, monkeypatch, record_property,
 ):
     """A real old run reaches the coordinator before new Store construction."""
     from company_wiki.automation import migrations
@@ -321,10 +335,24 @@ def test_real_legacy_v5_auto_run_resumes_through_additive_upgrade_without_new_po
             connection = sqlite3.connect(db)
             try:
                 assert connection.execute("SELECT 1 FROM narrative_run_jobs WHERE final_generation_json IS NOT NULL LIMIT 1").fetchone() is None
-                # Construct a truthful historical v5 shape from its frozen DDL.
-                # New additive nullable columns must not remain under an old
-                # PRAGMA label, and no nonempty future field may be discarded.
+                # Reconstruct v5 from the real terminal run. Its artifacts and
+                # accounting facts predate the separate v8 storage ledger.
                 expected = migrations._expected_structure(5)
+                actual_tables = {
+                    name for name, in connection.execute(
+                        "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+                    )
+                }
+                assert actual_tables - expected.keys() == {"narrative_storage_allocations"}
+                allocations = connection.execute(
+                    "SELECT run_id, created_bytes FROM narrative_storage_allocations"
+                ).fetchall()
+                assert all(run_id == "reading-legacy-v5" and created_bytes is not None
+                           for run_id, created_bytes in allocations)
+                record_property("v8_allocation_rows_omitted", len(allocations))
+                connection.execute("DROP TABLE narrative_storage_allocations")
+                # A later nullable field can be projected away only when the
+                # original run did not use it.
                 for table, definition in expected.items():
                     names = {column[1] for column in definition['columns']}
                     actual = [row[1] for row in connection.execute(f'PRAGMA table_info("{table}")')]
@@ -345,6 +373,7 @@ def test_real_legacy_v5_auto_run_resumes_through_additive_upgrade_without_new_po
             runs = NarrativeRunStore(db)
             assert asdict(runs.get_run("reading-legacy-v5")) == old_run
             assert tuple(asdict(record) for record in runs.reservations_for_run("reading-legacy-v5")) == old_usage
+            assert runs.storage_bytes("reading-legacy-v5") == 0
             current_reference, current_bundle, _ = reuse.public_read(root, config, imported, kind)
             assert current_reference == old_reference and current_bundle == old_bundle
             assert len(loopback_model_server.requests) == 1 and not loopback_model_server.errors

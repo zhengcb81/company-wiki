@@ -1276,9 +1276,6 @@ def replay_office_tables(
     claimed_sha = structure.get("source_sha256")
     if not isinstance(claimed_sha, str) or not claimed_sha:
         raise ValueError("structure lacks source_sha256")
-    if hashlib.sha256(original).hexdigest() != claimed_sha:
-        raise ValueError("source_sha256 mismatch")
-
     recomputed = parse_office_tables(original, source_sha256=claimed_sha)
 
     claimed_tables = structure.get("tables")
@@ -1349,11 +1346,12 @@ def replay_office_tables(
     # version does not know about (a future key, a dropped key).  It never
     # replaces the precise message.
     claimed_hash = structure.get("structure_sha256")
-    if claimed_hash != _sha256(canonical_json(claimed_tables).encode("utf-8")):
+    supplied_hash = _sha256(canonical_json(claimed_tables).encode("utf-8"))
+    if claimed_hash != supplied_hash:
         raise ValueError(
             "replay mismatch: structure_sha256 does not match the supplied tables "
             f"expected {canonical_json(claimed_hash)} "
-            f"observed {canonical_json(_sha256(canonical_json(claimed_tables).encode('utf-8')))}"
+            f"observed {canonical_json(supplied_hash)}"
         )
     observed_hash = recomputed["structure_sha256"]
     if claimed_hash != observed_hash:

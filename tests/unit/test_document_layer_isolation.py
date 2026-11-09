@@ -47,6 +47,7 @@ MODEL_PREFIXES = (
     "company_wiki.document_model",
     "company_wiki.document_normalization",
     "company_wiki.document_understanding",
+    "company_wiki.implementation_identity",
     "company_wiki.resource_budget",
     "company_wiki.source_contract",
 )
@@ -75,6 +76,8 @@ from company_wiki.document_normalization import (
     replay_unit,
 )
 from company_wiki.document_understanding import understand_units
+from company_wiki.document_understanding.reading_identity import reading_algorithm_hashes
+from company_wiki.document_normalization.reading_identity import reading_algorithm_hashes as normalization_hashes
 
 HTML = (
     "<html><body><h1>Acme 2025 annual report</h1>"
@@ -216,10 +219,16 @@ understanding = understand_units(
     mime_type="text/html",
 )
 canonical = json.dumps(understanding, sort_keys=True, default=str, ensure_ascii=False)
+engine_identity = reading_algorithm_hashes(pdf_frontend=False)
+normalization_identity = normalization_hashes(pdf_frontend=False)
 observation = {
     "html": doc_record(html_doc, HTML),
     "docx": doc_record(docx_doc, docx),
     "pptx": doc_record(pptx_doc, pptx),
+    "algorithm_identities": {
+        "understanding": engine_identity["company_wiki.document_understanding"],
+        "normalization": normalization_identity["company_wiki.document_normalization.table_shapes"],
+    },
     "understanding": {
         "sha256": hashlib.sha256(canonical.encode("utf-8")).hexdigest(),
         "schema_version": understanding["schema_version"],
@@ -313,9 +322,10 @@ def test_document_layer_normalizes_and_understands_without_catalog_runtime():
     assert observation["understanding"]["schema_version"] == "du-pipeline/1"
     assert observation["understanding"]["route_profile"]
     assert observation["understanding"]["package_count"] >= 1
+    assert all(len(digest) == 64 for digest in observation["algorithm_identities"].values())
     assert result["leaked"] == []
     # Belt-and-braces: nothing outside the document layer's own subtrees (plus
-    # resource_budget and source_contract) may join the import graph, even
+    # shared infrastructure and source_contract) may join the import graph, even
     # under a name the denylist above does not know yet.
     assert result["unexpected_modules"] == []
 

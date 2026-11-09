@@ -133,17 +133,17 @@ def _freeze_json(value: Any, field_name: str = "structured_value") -> Any:
     raise TypeError(f"{field_name} must contain only JSON values")
 
 
-def _plain_json(value: Any) -> Any:
+def plain_json_value(value: Any) -> Any:
     if isinstance(value, Mapping):
-        return {key: _plain_json(item) for key, item in value.items()}
+        return {key: plain_json_value(item) for key, item in value.items()}
     if isinstance(value, tuple):
-        return [_plain_json(item) for item in value]
+        return [plain_json_value(item) for item in value]
     return value
 
 
 def _canonical_json(value: Any) -> str:
     return json.dumps(
-        _plain_json(value),
+        plain_json_value(value),
         ensure_ascii=False,
         sort_keys=True,
         separators=(",", ":"),
@@ -436,7 +436,7 @@ class EvidenceSpan:
             "locator": self.locator,
             "coordinates": self.coordinates.to_dict(),
             "raw_text": self.raw_text,
-            "structured_value": _plain_json(self.structured_value),
+            "structured_value": plain_json_value(self.structured_value),
             "parser_name": self.parser_name,
             "parser_version": self.parser_version,
             "output_sha256": self.output_sha256,
@@ -447,3 +447,9 @@ class EvidenceSpan:
     def canonical_json(self) -> str:
         return _canonical_json(self.to_dict())
 
+
+__all__ = [
+    'EvidenceCoordinates',
+    'EvidenceSpan',
+    'ParseStatus',
+]

@@ -12,8 +12,8 @@ from collections.abc import Iterator
 from typing import TYPE_CHECKING
 import re
 
-from company_wiki.document_normalization.text_matching import matching_reading_text
-from company_wiki.document_normalization.table_shapes import observe_value_cells
+from company_wiki.document_model.table_shapes import observe_value_cells
+from company_wiki.document_model.text_matching import matching_reading_text
 from company_wiki.document_understanding.structure.table_purpose import accounting_field, unbound_numeric_row_role
 from .product_reference import product_head_spans
 from . import patterns as source_grammar
@@ -43,7 +43,7 @@ _ARGUMENT_PURPOSE = re.compile(r"\b(?:to|in order to|so as to)\s+[a-z]+\b|"
                                r"(?:以便|从而|来)(?:降低|减少|提高|提升)", re.I)
 _DESCRIPTION_SENTENCES = re.compile(r"[。！？；;]|(?<=[.!?])\s+")
 _DESCRIPTION_PARTS = re.compile(r"(?<!\d)[,，]|[,，](?!\d)|\b(?:and|but|while|whereas)\s+(?=we\b|the company\b)", re.I)
-_STATE_HEAD = re.compile(r"\b(?:projects?|plants?|factor(?:y|ies)|facilit(?:y|ies)|qualification|validation|certification)\b|项目|工厂|基地|生产设施|制造设施|厂房|生产线", re.I)
+STATE_HEAD_PATTERN = re.compile(r"\b(?:projects?|plants?|factor(?:y|ies)|facilit(?:y|ies)|qualification|validation|certification)\b|项目|工厂|基地|生产设施|制造设施|厂房|生产线", re.I)
 _EN_HEAD_TAIL = r"(?:\s+(?:coverage|scope|portfolio|range|lineup|suite|family|editions?|versions?|configurations?|launch|rollout|delivery|deployment|release)){0,3}\s*(?:,\s*)?\s+"
 _EN_AUX = r"(?P<aux>(?:(?:is|are|was|were|can|may|will|would|could|has|have|had|been|be|not|also|currently|already|still|widely|further|now)\s+){0,8})"
 _EN_FUNCTION = re.compile(_EN_HEAD_TAIL + _EN_AUX +
@@ -352,7 +352,7 @@ def source_argument_payload(value: str) -> bool | None:
     observed = _argument_payload(value)
     if observed is None:
         value = value.strip(' \t\r\n.。!?;；')
-        if any(match.end() == len(value) for match in _STATE_HEAD.finditer(value)):
+        if any(match.end() == len(value) for match in STATE_HEAD_PATTERN.finditer(value)):
             return True
     return observed
 
@@ -617,7 +617,7 @@ def _clause_description_proofs(value: str, *, work_budget: WorkBudget | None = N
     # actor/action-first objects. Resource heads remain object-only here.
     heads = {(match.start(), match.end()): True for match in _DESCRIPTION_OBJECT.finditer(value)}
     heads.update({(start, end): True for start, end, _ in product_head_spans(value)})
-    heads.update({(match.start(), match.end()): True for match in _STATE_HEAD.finditer(value)})
+    heads.update({(match.start(), match.end()): True for match in STATE_HEAD_PATTERN.finditer(value)})
     for resource_head in _RESOURCE_OBJECT.finditer(value):
         heads.setdefault((resource_head.start(),resource_head.end()),False)
     ordered_heads=sorted(heads)
@@ -684,7 +684,7 @@ def _clause_description_proofs(value: str, *, work_budget: WorkBudget | None = N
     if _ACTOR_PHASE.search(value):
         yield _DescriptionProof(True, value)
     scope=_ACTOR_SCOPE.match(value)
-    if scope is not None and (product_head_spans(scope['target']) or _STATE_HEAD.search(scope['target'])
+    if scope is not None and (product_head_spans(scope['target']) or STATE_HEAD_PATTERN.search(scope['target'])
                               or _DESCRIPTION_OBJECT.search(scope['target'])):
         yield _DescriptionProof(_argument_payload(scope['target'],
             complete=_argument_closed(value, scope.end('target'))), value)
@@ -883,3 +883,19 @@ def prepare_source_assertions(text: str, *, work_budget: WorkBudget | None = Non
         unbound_numeric_row_role(text) if shape.has_numeric_cell else "unknown",
         raw_structure_complete=shape.complete_value_row,
         numeric_cells_observed=shape.has_numeric_cell)
+
+
+__all__ = [
+    "AssertionRole",
+    "SOURCE_DESCRIPTION_SCAN_PASSES",
+    "SourceAssertionRoles",
+    "STATE_HEAD_PATTERN",
+    "abstract_source_argument",
+    "descriptive_operating_relation",
+    "explicit_description_subject",
+    "generic_source_predicate",
+    "prepare_source_assertions",
+    "source_argument_payload",
+    "source_nominal_members",
+    "source_reporting_purpose",
+]

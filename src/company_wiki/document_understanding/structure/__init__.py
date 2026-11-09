@@ -42,7 +42,10 @@ from .tables import build_operating_tables
 
 # The lane exposes exactly one public function.  Everything else in this module
 # is an implementation detail that ROOT must not depend on.
-__all__ = ["build_structure"]
+__all__ = [
+    'build_structure',
+    'table_purpose',
+]
 
 _LANGUAGE_FAMILY_MAP = {"zh": "zh", "en": "en"}
 
@@ -627,4 +630,7 @@ def _empty_result(envelope: Mapping[str, Any]) -> dict:
     }
 
 
-__all__ = ["build_structure"]
+__all__ = [
+    'build_structure',
+    'table_purpose',
+]

@@ -157,7 +157,7 @@ def test_deep_business_task_keeps_source_priority_and_complete_original_support(
 
 
 def test_only_declared_reading_annotations_are_excluded_from_original_field_identity():
-    from company_wiki.automation.narrative_replay import _projection_span_identity
+    from company_wiki.source_catalog.narrative_material_replay import _projection_span_identity
     from company_wiki.source_contract.selection_annotations import reading_annotations
 
     base = source_with_metadata({'unit_kind': 'official_json_field', 'field_value': 47}).evidence_spans[0]

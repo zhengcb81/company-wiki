@@ -1,7 +1,7 @@
 """Independent scope/value/budget controls for ROOT's PDF table projection repair."""
 from copy import deepcopy
 import pytest
-from company_wiki.document_normalization.pdf_table_observations import adapter
+from company_wiki.document_understanding import pdf_table_observations as adapter
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget
 from company_wiki.document_understanding.table_measurements import bind_operating_table
 

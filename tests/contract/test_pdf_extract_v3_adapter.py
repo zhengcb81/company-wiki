@@ -293,6 +293,7 @@ def test_adapter_rejects_missing_or_unknown_legacy_fields(tmp_path, mutator):
         ({"total_chars": 999}, "total_chars"),
         ({"quality_score": math.nan}, "quality_score"),
         ({"quality_score": 1.1}, "quality_score"),
+        ({"quality_score": 10**400}, "quality_score"),
         ({"is_scanned": 0}, "is_scanned"),
         ({"scan_confidence": -0.1}, "scan_confidence"),
         ({"scan_confidence": 0.2}, "scan_confidence"),
@@ -438,6 +439,7 @@ def test_adapter_contract_document_is_published_and_linked():
     assert "page_number" in content
     assert "table_index" in content
     assert "fail closed" in content
-    assert "pdf-extract-v3-adapter-v1.md" in (root / "README.md").read_text(
-        encoding="utf-8"
-    )
+    assert "](docs/source-catalog.md)" in (root / "README.md").read_text(encoding="utf-8")
+    assert "](contracts/pdf-extract-v3-adapter-v1.md)" in (
+        root / "docs" / "source-catalog.md"
+    ).read_text(encoding="utf-8")

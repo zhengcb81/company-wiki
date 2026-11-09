@@ -106,6 +106,44 @@ def test_du_table_draft_only_contains_operating_rows_and_native_qualifiers(heade
     assert not rejected.intersection(candidate.unit.unit_id for candidate in candidates[0])
 
 
+@pytest.mark.parametrize("body_count", [62, 63, 80])
+def test_large_table_keeps_eligible_rows_with_their_original_context(body_count):
+    rows = [f"Production capacity line {index} | {120 + index} units"
+            for index in range(body_count)]
+    accounting_index = body_count // 2
+    rows[accounting_index] = "Retained earnings | 250"
+    parsed, _ = fixture("Production capacity | 2026", rows)
+    pipeline = understand_units(parsed.units, source_id=SOURCE, source_sha256=SHA,
+                                declared_kind="annual_report", mime_type="application/pdf", language="mixed")
+    assert pipeline["analysis_status"] == "complete"
+    assert not pipeline["work"]["exhausted"]
+    result = reading._candidates(parsed, pipeline)
+    candidates, groups = result[0], result[2]
+    assert len(groups) == 1
+    assert not groups[0]["truncated"]
+    assert set(groups[0]["required_context_unit_ids"]) == {parsed.units[0].unit_id, parsed.units[-1].unit_id}
+    assert {candidate.unit.unit_id for candidate in candidates} == {
+        unit.unit_id for index, unit in enumerate(parsed.units) if index != accounting_index + 1
+    }
+
+
+@pytest.mark.parametrize("anchors, expected_members, truncated", [
+    (["a"], ["header", "a"], True),
+    (["a", "b"], ["header", "a", "b"], False),
+])
+def test_explicit_package_limit_reports_only_actual_member_loss(anchors, expected_members, truncated):
+    from company_wiki.document_understanding.orchestration import build_dependency_packages
+
+    structure = {"semantic_units": [{
+        "semantic_id": "table", "kind": "operating_table",
+        "member_unit_ids": ["header", "a", "b"],
+        "required_context_unit_ids": ["header"], "anchor_unit_ids": anchors,
+    }]}
+    package = build_dependency_packages(structure, max_members=2)["packages"][0]
+    assert package["member_unit_ids"] == expected_members
+    assert package["truncated"] is truncated
+
+
 @pytest.mark.parametrize("header,rows", [
     ("Retained earnings | 2026", ["Retention transfers | 30"]),
     ("Clients | Accounts receivable | USD million", ["Customer A | 20"]),

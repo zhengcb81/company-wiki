@@ -178,4 +178,9 @@ def detect_narrative_text_language(text: str) -> str:
     return "zh" if chinese > english else "en"
 
 
-__all__ = ["NarrativeLanguageError", "detect_narrative_language", "narrative_language_family"]
+__all__ = [
+    'NarrativeLanguageError',
+    'detect_narrative_language',
+    'narrative_language_family',
+    'detect_narrative_text_language',
+]

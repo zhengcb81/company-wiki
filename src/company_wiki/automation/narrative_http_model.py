@@ -293,6 +293,23 @@ class NarrativeHTTPModel:
         self._port = parsed.port
         self._path = parsed.path or "/"
 
+    def effective_request_options(self) -> dict[str, Any]:
+        """Describe the actual request behavior for comparison with a frozen run."""
+        authority = f"[{self._host}]" if ":" in self._host else self._host
+        if self._port is not None:
+            authority += f":{self._port}"
+        effective = {
+            "model_id": self.model_id,
+            "endpoint": f"{self._scheme}://{authority}{self._path}",
+            "max_output_tokens": self.max_output_tokens,
+            "output_token_field": self.output_token_field,
+        }
+        for key in ("thinking", "reasoning_effort", "temperature", "reasoning_split"):
+            value = getattr(self, key)
+            if value is not None:
+                effective[key] = value
+        return effective
+
     def request_bytes(self, request: NarrativeModelRequest) -> bytes:
         """The exact, secret-free body, also usable for pre-request reservation."""
         if not isinstance(request, NarrativeModelRequest):

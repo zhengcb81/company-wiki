@@ -29,9 +29,8 @@ Core rules (fixed by the construction card):
 
 from __future__ import annotations
 
-import hashlib
 import re
-import sys
+from collections.abc import Iterator
 from dataclasses import replace
 from typing import Any
 
@@ -40,6 +39,7 @@ from bs4.element import Comment, NavigableString, Tag
 
 from company_wiki.source_contract.evidence_span import EvidenceCoordinates
 
+from ._source_input import _NormalizationSource
 from .assets import GAP_SVG_NOT_TRANSCRIBED, OpaqueAsset
 from .document import NormalizedDocument
 from .errors import (
@@ -72,17 +72,6 @@ OWNER_TAGS = frozenset(
         "p", "div", "li", "dt", "dd", "blockquote", "pre", "figcaption",
         "caption", "td", "th", "section", "article", "main", "body", "html",
         "h1", "h2", "h3", "h4", "h5", "h6", "address",
-    }
-)
-
-# Block containers that never own text themselves: scan() descends them to
-# find owners, and their loose strings fall back to the nearest outer owner.
-BLOCK_NON_OWNER_TAGS = frozenset(
-    {
-        "table", "thead", "tbody", "tfoot", "tr", "colgroup", "col",
-        "ul", "ol", "dl", "form", "fieldset", "details", "summary",
-        "figure", "center", "optgroup", "video", "audio", "canvas",
-        "object", "embed", "map", "picture", "source", "button",
     }
 )
 
@@ -119,9 +108,6 @@ _UNIT_KINDS = {
     "table_cell": "html_table_cell",
     "footnote": "html_footnote",
 }
-
-_MAX_RECURSION = 30_000
-
 
 def decode_html_bytes(data: bytes) -> tuple[str, str, str, bool]:
     """Decode HTML bytes with a deterministic, fully offline strategy.
@@ -160,8 +146,8 @@ def decode_html_bytes(data: bytes) -> tuple[str, str, str, bool]:
         )
 
 
-def _element_children(tag: Any) -> list[Tag]:
-    return [child for child in tag.children if isinstance(child, Tag)]
+def _element_children(tag: Tag) -> Iterator[Tag]:
+    return (child for child in tag.children if isinstance(child, Tag))
 
 
 def _is_hidden(tag: Tag) -> bool:
@@ -344,11 +330,19 @@ def _attach_document_type_facts(state: _HtmlScanState) -> None:
         _attach_carriers(state, index, carriers)
 
 
-def _collect_visible(tag: Tag, state: _HtmlScanState, path: tuple[int, ...]) -> None:
+def _collect_visible(tag: Tag, state: _HtmlScanState, root_path: tuple[int, ...]) -> None:
     """Pre-pass: number visible tables and locate inline SVG gaps."""
-    for index, child in enumerate(_element_children(tag)):
+    path = list(root_path)
+    stack = [enumerate(_element_children(tag))]
+    while stack:
+        item = next(stack[-1], None)
+        if item is None:
+            stack.pop()
+            if stack:
+                path.pop()
+            continue
+        index, child = item
         state.check_deadline("prepass")
-        child_path = path + (index,)
         if child.name in EXCLUDE_TAGS or _is_hidden(child):
             continue
         if child.name == "svg":
@@ -356,7 +350,7 @@ def _collect_visible(tag: Tag, state: _HtmlScanState, path: tuple[int, ...]) -> 
                 OpaqueAsset(
                     asset_kind="svg",
                     slide_number=None,
-                    shape_path=".".join(str(p) for p in child_path),
+                    shape_path=".".join(map(str, (*path, index))),
                     gap_reason=GAP_SVG_NOT_TRANSCRIBED,
                 )
             )
@@ -365,52 +359,8 @@ def _collect_visible(tag: Tag, state: _HtmlScanState, path: tuple[int, ...]) -> 
             state.table_index_by_id[id(child)] = len(state.visible_tables)
             state.visible_tables.append(child)
         state.element_count += 1
-        _collect_visible(child, state, child_path)
-
-
-def _inline_text(tag: Tag) -> str:
-    """Text of a transparent inline subtree, stopping at owners and blocks."""
-    parts: list[str] = []
-    for child in tag.children:
-        if isinstance(child, NavigableString):
-            normalized = normalize_text(str(child))
-            if normalized:
-                parts.append(normalized)
-        elif isinstance(child, Tag):
-            if (
-                child.name in OWNER_TAGS
-                or child.name in BLOCK_NON_OWNER_TAGS
-                or child.name in EXCLUDE_TAGS
-                or _is_hidden(child)
-            ):
-                continue
-            inner = _inline_text(child)
-            if inner:
-                parts.append(inner)
-    return normalize_text(" ".join(parts))
-
-
-def _direct_strings(owner: Tag) -> list[str]:
-    """Strings the owner holds outside any deeper owner or block container."""
-    collected: list[str] = []
-    for child in owner.children:
-        if isinstance(child, NavigableString):
-            normalized = normalize_text(str(child))
-            if normalized:
-                collected.append(normalized)
-        elif isinstance(child, Tag):
-            if (
-                child.name in OWNER_TAGS
-                or child.name in BLOCK_NON_OWNER_TAGS
-                or child.name in EXCLUDE_TAGS
-                or _is_hidden(child)
-                or child.name == "svg"
-            ):
-                continue
-            inner = _inline_text(child)
-            if inner:
-                collected.append(inner)
-    return collected
+        path.append(index)
+        stack.append(enumerate(_element_children(child)))
 
 
 def _table_rows(table: Tag, state: _HtmlScanState) -> list[Tag]:
@@ -651,134 +601,85 @@ def _emit(
         )
 
 
-def _scan_children(
-    node: Any, state: _HtmlScanState, node_path: tuple[int, ...], own_parts: _OwnedText,
-    native_fact: int | None = None,
-    linked: bool = False,
-) -> None:
-    """Collect this owner's strings in document order; emit deeper owners.
+class _TextFrame:
+    def __init__(
+        self, node: Tag, state: _HtmlScanState, *, owns_text: bool, in_cell: bool,
+        parent: _TextFrame | None = None,
+    ) -> None:
+        state.check_deadline("cell" if in_cell else "walk")
+        self.node = node
+        self.children = iter(node.children)
+        self.element_index = 0
+        self.owns_text = owns_text
+        self.in_cell = in_cell
+        self.parts: _OwnedText = _OwnedText() if owns_text or parent is None else parent.parts
+        self.native_fact: int | None = state.document_type_fact(
+            node, None if parent is None else parent.native_fact,
+        )
+        self.linked: bool = (parent is not None and parent.linked) or (
+            node.name == "a" and bool(node.get("href"))
+        )
+        self.parts.has_link |= self.linked
 
-    Transparent inline elements and block containers both recurse: every
-    string lands on its nearest block owner exactly once, and each owner
-    descendant emits its own separate unit through ``_walk_owner``.  Table
-    cells are special: their whole body belongs to the cell unit, so they
-    dispatch to ``_walk_cell`` instead.
-    """
-    state.check_deadline("walk")
-    native_fact = state.document_type_fact(node, native_fact)
-    linked = linked or bool(isinstance(node, Tag) and node.name == "a" and node.get("href"))
-    own_parts.has_link |= linked
-    index = 0
-    for child in node.children:
+    def emit(self, state: _HtmlScanState, path: tuple[int, ...]) -> None:
+        if self.node.name == "html":
+            return
+        text = normalize_text(" ".join(self.parts))
+        if text:
+            _emit(
+                state, owner=self.node, path=path, text=text,
+                unit_kind=_unit_kind_for(self.node), observed=self.parts,
+            )
+        elif id(self.node) in state.native_cells:
+            state.native_cells[id(self.node)]["presence"] = "empty"
+
+
+def _walk_visible_text(root: Tag, state: _HtmlScanState, root_path: tuple[int, ...]) -> None:
+    """Walk visible owners in post-order without changing the process stack."""
+    if root.name in EXCLUDE_TAGS or _is_hidden(root):
+        return
+    path = list(root_path)
+    stack = [_TextFrame(root, state, owns_text=True, in_cell=False)]
+    while stack:
+        frame = stack[-1]
+        child = next(frame.children, None)
+        if child is None:
+            if frame.owns_text:
+                frame.emit(state, tuple(path))
+            stack.pop()
+            if stack:
+                path.pop()
+            continue
         if isinstance(child, Comment):
             continue
         if isinstance(child, NavigableString):
-            normalized = normalize_text(str(child))
-            if normalized:
-                own_parts.observe(normalized, native_fact)
+            text = normalize_text(str(child))
+            if text:
+                frame.parts.observe(text, frame.native_fact)
             continue
         if not isinstance(child, Tag):
             continue
-        child_path = node_path + (index,)
-        index += 1
+        index = frame.element_index
+        frame.element_index += 1
         if child.name in EXCLUDE_TAGS:
             continue
         if _is_hidden(child):
             state.skipped_hidden += 1
             continue
         if child.name == "svg":
-            continue  # registered as an opaque gap in the prepass
-        if child.name in {"td", "th"}:
-            _walk_cell(child, state, child_path, native_fact, linked)
-        elif child.name in OWNER_TAGS:
-            _walk_owner(child, state, child_path, native_fact, linked)
-        else:
-            _scan_children(child, state, child_path, own_parts, native_fact, linked)
-
-
-def _scan_cell_body(
-    cell: Any, state: _HtmlScanState, node_path: tuple[int, ...], own_parts: _OwnedText,
-    native_fact: int | None = None,
-    linked: bool = False,
-) -> None:
-    """Collect a cell's whole visible body; nested tables keep their cells."""
-    state.check_deadline("cell")
-    native_fact = state.document_type_fact(cell, native_fact)
-    linked = linked or bool(isinstance(cell, Tag) and cell.name == "a" and cell.get("href"))
-    own_parts.has_link |= linked
-    index = 0
-    for child in cell.children:
-        if isinstance(child, Comment):
-            continue
-        if isinstance(child, NavigableString):
-            normalized = normalize_text(str(child))
-            if normalized:
-                own_parts.observe(normalized, native_fact)
-            continue
-        if not isinstance(child, Tag):
-            continue
-        child_path = node_path + (index,)
-        index += 1
-        if child.name in EXCLUDE_TAGS:
-            continue
-        if _is_hidden(child):
-            state.skipped_hidden += 1
-            continue
-        if child.name == "svg":
-            continue
-        if child.name == "table":
-            # Loose text in the nested table still belongs to this cell;
-            # its own td/th dispatch to their own cell units.
-            _scan_children(child, state, child_path, own_parts, native_fact, linked)
-        else:
-            # Paragraphs, divs, lists inside a cell are formatting wrappers:
-            # their text belongs to the cell, not to separate paragraph units.
-            _scan_cell_body(child, state, child_path, own_parts, native_fact, linked)
-
-
-def _walk_cell(
-    cell: Any, state: _HtmlScanState, path: tuple[int, ...], native_fact: int | None = None,
-    linked: bool = False,
-) -> str:
-    """Emit the table-cell unit owning every string in the cell body."""
-    own_parts = _OwnedText()
-    _scan_cell_body(cell, state, path, own_parts, native_fact, linked)
-    text = normalize_text(" ".join(own_parts))
-    if not text:
-        native = state.native_cells.get(id(cell))
-        if native is not None:
-            native['presence'] = 'empty'
-        return ""
-    _emit(
-        state, owner=cell, path=path, text=text, unit_kind=_UNIT_KINDS["table_cell"], observed=own_parts
-    )
-    return text
-
-
-def _walk_owner(
-    owner: Any, state: _HtmlScanState, path: tuple[int, ...], native_fact: int | None = None,
-    linked: bool = False,
-) -> str:
-    """Emit the unit owned by ``owner``; return its own visible text.
-
-    The unit text contains only strings whose nearest block owner is this
-    element — never the text of deeper owners, which emit their own units —
-    so nested nodes are never double-counted.  ``html`` aggregates only and
-    never becomes a unit itself.
-    """
-    if owner.name in EXCLUDE_TAGS or _is_hidden(owner):
-        return ""
-    own_parts = _OwnedText()
-    _scan_children(owner, state, path, own_parts, native_fact, linked)
-    text = normalize_text(" ".join(own_parts))
-    if not text:
-        return ""
-    if owner.name == "html":
-        return text
-    _emit(
-        state, owner=owner, path=path, text=text, unit_kind=_unit_kind_for(owner), observed=own_parts
-    )
-    return text
+            continue  # The pre-pass records the opaque asset.
+        # Wrappers inside a cell share that cell's text. A nested table
+        # starts a fresh table scope, so its cells own their own text again.
+        cell_wrapper = frame.in_cell and child.name != "table"
+        path.append(index)
+        stack.append(
+            _TextFrame(
+                child, state,
+                owns_text=not cell_wrapper and child.name in OWNER_TAGS,
+                in_cell=cell_wrapper or child.name in {"td", "th"},
+                parent=frame,
+            )
+        )
 
 
 def parse_html(
@@ -789,26 +690,25 @@ def parse_html(
     mime_type: str,
     limits: NormalizationLimits,
 ) -> NormalizedDocument:
-    """Normalize one verified HTML document into narrative units."""
-    if not isinstance(data, bytes):
-        raise TypeError("HTML data must be bytes")
+    """Verify raw HTML bytes and normalize them into narrative units."""
     mime_main = mime_type.split(";")[0].strip().lower()
     if mime_main not in SUPPORTED_MIME_TYPES:
         raise UnsupportedFormatError(
             f"mime_type {mime_type!r} is not an HTML document type"
         )
-    if len(data) > limits.max_source_bytes:
-        raise NormalizationLimitError(
-            "max_source_bytes", limits.max_source_bytes, f"got {len(data)}"
-        )
-    if hashlib.sha256(data).hexdigest() != source_sha256:
-        raise ValueError("HTML bytes do not match source_sha256")
+    source = _NormalizationSource.from_bytes(
+        data, source_id=source_id, source_sha256=source_sha256, limits=limits,
+    )
+    return _parse_html(source, limits=limits)
+
+
+def _parse_html(source: _NormalizationSource, *, limits: NormalizationLimits) -> NormalizedDocument:
     text, encoding_used, encoding_strategy, encoding_repaired = decode_html_bytes(
-        data
+        source.data
     )
     state = _HtmlScanState(
-        source_id=source_id,
-        source_sha256=source_sha256,
+        source_id=source.source_id,
+        source_sha256=source.source_sha256,
         limits=limits,
         encoding_used=encoding_used,
         encoding_strategy=encoding_strategy,
@@ -816,30 +716,22 @@ def parse_html(
     )
     document = BeautifulSoup(text, BACKEND)
     state.check_deadline("parse")
-    old_limit = sys.getrecursionlimit()
-    sys.setrecursionlimit(max(old_limit, _MAX_RECURSION))
-    try:
-        root_path: tuple[int, ...]
-        if document.html is not None:
-            root = document.html
-            root_path = (0,)
-        else:
-            root = document
-            root_path = ()
-            # Fragment or non-HTML bytes declared as HTML: parse anyway,
-            # flag the missing root so the result is not an empty success.
-            state.errors.append("no_html_root")
-        _collect_visible(root, state, root_path)
-        for table in state.visible_tables:
-            state.table_classes[
-                state.table_index_by_id[id(table)]
-            ] = _classify_table(table)
-            _native_table_grid(table, state)
-        _walk_owner(root, state, root_path)
-        _attach_document_type_facts(state)
-        _attach_native_tables(state)
-    finally:
-        sys.setrecursionlimit(old_limit)
+    root_path: tuple[int, ...]
+    if document.html is not None:
+        root = document.html
+        root_path = (0,)
+    else:
+        root = document
+        root_path = ()
+        # A fragment can have readable text while lacking the complete root.
+        state.errors.append("no_html_root")
+    _collect_visible(root, state, root_path)
+    for table in state.visible_tables:
+        state.table_classes[state.table_index_by_id[id(table)]] = _classify_table(table)
+        _native_table_grid(table, state)
+    _walk_visible_text(root, state, root_path)
+    _attach_document_type_facts(state)
+    _attach_native_tables(state)
     if not state.units:
         state.errors.append("no_visible_text_blocks")
     from company_wiki.document_model.narrative import DocumentStructure

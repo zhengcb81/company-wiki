@@ -280,6 +280,24 @@ def test_empty_table_cells_remain_structured_output_not_empty_pages(tmp_path):
     assert blank.parse_status is contracts.ParseStatus.PARSED
 
 
+@pytest.mark.parametrize("display_fields", [{}, {"markdown": "e\u0301\r\n"}])
+def test_table_evidence_is_independent_of_markdown_display(tmp_path, display_fields):
+    module = _adapter()
+    manifest, _ = _manifest(_root(tmp_path))
+    canonical = _table([["产品", 42]])
+    structural_table = {key: canonical[key] for key in ("rows", "cols", "data")}
+
+    def adapt(table):
+        result = module.adapt_pdf_pages(
+            manifest=manifest,
+            pages=(_page(1, text="", tables=[table]),),
+            parser_version="1.0.0",
+        )
+        return tuple(item.to_evidence_span() for item in result.parser_results)
+
+    assert adapt({**structural_table, **display_fields}) == adapt(canonical)
+
+
 def test_ocr_layout_encoding_and_quality_metadata_map_to_stable_flags(tmp_path):
     module = _adapter()
     contracts = _contracts()
@@ -346,6 +364,7 @@ def test_page_error_preserves_page_identity_without_publishing_error_text(tmp_pa
         ((_page(1, text="line one\r\nline two"),), "LF"),
         ((_page(1, text="e\u0301"),), "NFC"),
         ((_page(1, quality_score=1.1),), "quality_score"),
+        ((_page(1, quality_score=10**400),), "quality_score"),
         ((_page(1, ocr_used=True, ocr_confidence=None),), "ocr_confidence"),
         ((_page(1, ocr_used=False, ocr_confidence=0.5),), "ocr_confidence"),
         (
@@ -479,7 +498,7 @@ def test_invalid_parser_version_is_rejected_by_evidence_contract(tmp_path):
         )
 
 
-def test_page_aware_contract_is_published_but_not_wired_to_production():
+def test_page_aware_contract_is_published_in_source_catalog_index():
     root = Path(__file__).resolve().parents[2]
     document = root / "docs" / "contracts" / "pdf-page-aware-parser-v1.md"
 
@@ -491,13 +510,10 @@ def test_page_aware_contract_is_published_but_not_wired_to_production():
         "empty page",
         "table cell",
         "fail closed",
-        "not production-wired",
+        "legacy PyMuPDF fallback",
     ):
         assert phrase in content
-    assert "pdf-page-aware-parser-v1.md" in (root / "README.md").read_text(
-        encoding="utf-8"
-    )
-    normalizer = (
-        root / "src" / "company_wiki" / "source_catalog" / "normalizer.py"
+    assert "](docs/source-catalog.md)" in (root / "README.md").read_text(encoding="utf-8")
+    assert "](contracts/pdf-page-aware-parser-v1.md)" in (
+        root / "docs" / "source-catalog.md"
     ).read_text(encoding="utf-8")
-    assert "pdf_page_aware" not in normalizer

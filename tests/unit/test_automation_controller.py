@@ -9,6 +9,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 
 
@@ -100,17 +101,20 @@ def run_cli(*args):
 # --------------------------------------------------------------------------- #
 # Event sources tests.
 # --------------------------------------------------------------------------- #
-def test_event_source_reads_all_events(tmp_path):
+def test_event_source_reads_all_events_in_order_without_writer(tmp_path, monkeypatch):
     es = _event_sources_mod()
     s = _store_mod()
     m = _models()
-    store = _setup_store_with_events(s, m, tmp_path, [
-        _make_event(m=m),
-        _make_event(m=m, event_id="evt-2", subject_id="rev-2"),
-    ])
+    first = _make_event(m=m, event_id="evt-1")
+    second = _make_event(m=m, event_id="evt-2", subject_id="rev-2")
+    store = _setup_store_with_events(s, m, tmp_path, [second, first])
+
+    def forbidden_writer():
+        raise AssertionError("event reads must not initialize a writable connection")
+
+    monkeypatch.setattr(store, "_connect", forbidden_writer)
     source = es.EventSource(store)
-    events = source.get_all_events()
-    assert len(events) == 2
+    assert source.get_all_events() == (first, second)
 
 
 def test_event_source_filters_by_type(tmp_path):
@@ -126,6 +130,20 @@ def test_event_source_filters_by_type(tmp_path):
     source_events = source.get_events_by_type("source.revision_registered")
     assert len(source_events) == 1
     assert source_events[0].event_type == "source.revision_registered"
+
+
+def test_event_source_needs_only_the_public_read_operation():
+    event = _make_event(m=_models())
+    calls = []
+
+    def list_events(*, event_type=None):
+        calls.append(event_type)
+        return (event,)
+
+    source = _event_sources_mod().EventSource(SimpleNamespace(list_events=list_events))
+    assert source.get_all_events() == (event,)
+    assert source.get_events_by_type(event.event_type) == (event,)
+    assert calls == [None, event.event_type]
 
 
 # --------------------------------------------------------------------------- #

@@ -20,6 +20,7 @@ from company_wiki._bounded_process import ChildFailed, run_bounded
 from company_wiki.automation import narrative_batch as batch
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from company_wiki.automation.store import AutomationStore
+from company_wiki.source_catalog.narrative_summary_protocols import LEGACY_SCOPED
 from support import narrative_batch_fixtures as fixtures
 from integration.test_narrative_legacy_effort_history import _database_dump, _request
 
@@ -68,7 +69,7 @@ def protected_sources(rf_checkout):
 
 
 def _source_fragment_reply(data):
-    assert data['schema_version']=='narrative-model-request/5'
+    assert data['schema_version']==LEGACY_SCOPED.request_schema
     material = data['material']
     task = material['tasks'][0]
     support = task.get('support_parts', material['task_defaults']['support_parts'])
@@ -113,7 +114,7 @@ def test_explicit_scoped_worker_public_locator_and_actual_rf_consumer_recover_wi
                 original = batch.generation_manifest
 
                 def explicit_v4(*args, **kwargs):
-                    return original(*args, **{**kwargs, 'reading_model_projection':'reading-model-input/4'})
+                    return original(*args, **{**kwargs, 'reading_model_projection':LEGACY_SCOPED.projection})
 
                 with monkeypatch.context() as patch:
                     patch.setattr(batch, 'generation_manifest', explicit_v4)
@@ -127,15 +128,15 @@ def test_explicit_scoped_worker_public_locator_and_actual_rf_consumer_recover_wi
                 runs = NarrativeRunStore(root/'automation.db')
                 run = runs.get_run(request.run_id)
                 manifests = batch._thaw_generations(json.loads(run.binding_json))
-                assert all(m['reading_model_projection']=='reading-model-input/4' for m in manifests.values())
-                assert all(m['execution_versions']['prompt']=='reading-source-scoped/4.0.6'
+                assert all(m['reading_model_projection']==LEGACY_SCOPED.projection for m in manifests.values())
+                assert all(m['execution_versions']['prompt']==LEGACY_SCOPED.prompt
                            for m in manifests.values())
 
                 isolated_registry = root/'rf-isolation/publications.jsonl'
                 env = dict(os.environ, PYTHONPATH=str(REPO/'src'), PYTHONDONTWRITEBYTECODE='1',
                     PYTHONUTF8='1', PYTHON_DOTENV_DISABLED='1',
                     REVENUE_PUBLICATION_REGISTRY=str(isolated_registry))
-                producer = [sys.executable, '-B', '-m', 'company_wiki.source_catalog.narrative_transport_cli',
+                producer = [sys.executable, '-B', '-m', 'company_wiki.automation.narrative_transport_cli',
                             '--config', str(config)]
                 consumer = [sys.executable, '-B', str(rf_checkout/'scripts/narrative_source_preparation.py'),
                             '--company-wiki-catalog-config', str(config)]
@@ -163,7 +164,7 @@ def test_explicit_scoped_worker_public_locator_and_actual_rf_consumer_recover_wi
                 assert sha256(body).hexdigest()==reference['artifact_sha256']
                 assert receipt['narrative_ref']==reference and receipt['replay_status']=='verified'
                 assert bundle['source_ref']==source_ref
-                assert bundle['summary']['model']['prompt_version']=='reading-source-scoped/4.0.6'
+                assert bundle['summary']['model']['prompt_version']==LEGACY_SCOPED.prompt
                 assert bundle['reading_context']['groups'] and bundle['evidence_spans']
                 spans = {span['span_id']: span for span in bundle['evidence_spans']}
                 for span in spans.values():

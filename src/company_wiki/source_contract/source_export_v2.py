@@ -12,10 +12,14 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
 
+from company_wiki.wire_json import parse_json
+
 from .evidence_span import EVIDENCE_SPAN_SCHEMA_VERSION, EvidenceSpan
 from .source_export import SOURCE_EXPORT_ID_PREFIX, SourceExportError
-
-from .source_version import SourceRef, SourceVersionPort
+from .source_version import (
+    SOURCE_REF_SCHEMA_VERSION, SourceRef, SourceRefError, SourceVersionPort,
+    SourceRefMismatchError, VerifiedContent, VerifiedVersionReceipt,
+)
 
 
 SOURCE_EXPORT_V2_SCHEMA_VERSION = "2.0.0"
@@ -25,14 +29,37 @@ _BUNDLE_FIELDS = frozenset({
     "evidence_span_schema_version", "counts", "manifests",
     "evidence_spans", "bundle_sha256", "export_id",
 })
-_MANIFEST_FIELDS = frozenset({
+_REF_FIELDS = frozenset({
     "document_id", "source_id", "content_sha256", "byte_size", "mime_type",
+})
+_MANIFEST_TEXT_FIELDS = frozenset({
     "title", "document_kind", "published_date", "source_url",
     "retrieved_at", "collector_name", "collector_version",
     "canonical_entity_id", "display_name", "market", "security_id",
-    "fiscal_year", "fiscal_period", "period_end", "form_type", "provider",
+    "fiscal_period", "period_end", "form_type", "provider",
     "provider_document_id", "language",
 })
+_MANIFEST_FIELDS = _REF_FIELDS | _MANIFEST_TEXT_FIELDS | {"fiscal_year"}
+
+
+def _manifest_ref(manifest: object) -> SourceRef:
+    """Read the exact source reference from a pathless wire manifest."""
+    if not isinstance(manifest, dict) or set(manifest) != _MANIFEST_FIELDS:
+        raise SourceExportError("v2 manifest fields are not exact")
+    try:
+        ref = SourceRef.from_dict({
+            "schema_version": SOURCE_REF_SCHEMA_VERSION,
+            **{field: manifest[field] for field in _REF_FIELDS},
+        })
+    except SourceRefError as exc:
+        raise SourceExportError(f"invalid v2 manifest identity: {exc}") from exc
+    for field in _MANIFEST_TEXT_FIELDS:
+        if manifest[field] is not None and not isinstance(manifest[field], str):
+            raise SourceExportError(f"invalid v2 manifest {field}")
+    year = manifest["fiscal_year"]
+    if year is not None and type(year) is not int:
+        raise SourceExportError("invalid v2 manifest fiscal_year")
+    return ref
 
 
 def _canonical_json(value: Any) -> str:
@@ -51,6 +78,7 @@ def _is_groundable_text_shape(span: EvidenceSpan, mime_type: str) -> bool:
         and span.structured_value is None
         and coords.char_start is not None
         and coords.char_end is not None
+        and coords.char_end - coords.char_start == len(span.raw_text)
         and all(
             value is None
             for value in (
@@ -74,25 +102,10 @@ class SourceExportBundleV2:
         if not isinstance(raw, bytes):
             raise TypeError("v2 bundle must be UTF-8 bytes")
 
-        def unique_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-            result: dict[str, Any] = {}
-            for key, value in pairs:
-                if key in result:
-                    raise SourceExportError("duplicate JSON key in v2 bundle")
-                result[key] = value
-            return result
-
-        def no_constant(_value: str) -> None:
-            raise SourceExportError("nonfinite JSON number in v2 bundle")
-
         try:
-            parsed = json.loads(
-                raw.decode("utf-8"),
-                object_pairs_hook=unique_pairs,
-                parse_constant=no_constant,
-            )
-        except (UnicodeDecodeError, json.JSONDecodeError, RecursionError):
-            raise SourceExportError("invalid UTF-8 JSON v2 bundle") from None
+            parsed = parse_json(raw.decode("utf-8"))
+        except (ValueError, RecursionError) as exc:
+            raise SourceExportError(f"invalid UTF-8 JSON v2 bundle: {exc}") from exc
         return cls.from_dict(parsed)
 
     @classmethod
@@ -116,75 +129,69 @@ class SourceExportBundleV2:
         if not all(isinstance(span, EvidenceSpan) for span in evidence_spans):
             raise TypeError("evidence_spans must contain EvidenceSpan values")
 
-        manifests: dict[str, dict[str, str | int | None]] = {}
-        verified_data: dict[str, bytes] = {}
-        span_source_ids = {span.source_id for span in evidence_spans}
+        refs_by_source: dict[str, SourceRef] = {}
         for ref in refs:
-            if ref.source_id in manifests:
+            if ref.source_id in refs_by_source:
                 raise SourceExportError("duplicate source_id in v2 export")
-            # A manifest needs an exact-version verification, but no original
-            # bytes.  Keep bytes only where original UTF-8 text spans require
-            # independent grounding at this boundary.
-            content = None
-            verified: Any
-            if ref.source_id in span_source_ids:
-                content = source_reader.open_version(ref, purpose="source_export")
-                verified = content
-            else:
-                verification = source_reader.verify_version(
-                    ref, purpose="source_export"
-                )
-                verified = verification
-            if (
-                verified.document_id != ref.document_id
-                or verified.source_id != ref.source_id
-                or verified.content_sha256 != ref.content_sha256
-                or verified.byte_size != ref.byte_size
-            ):
-                raise SourceExportError("source bytes do not match source ref")
-            if content is not None:
-                if hashlib.sha256(content.data).hexdigest() != ref.content_sha256:
-                    raise SourceExportError("source bytes do not match source ref")
-                verified_data[ref.source_id] = content.data
-            manifests[ref.source_id] = source_reader.describe_version(ref)
+            refs_by_source[ref.source_id] = ref
 
         spans: dict[str, EvidenceSpan] = {}
+        spans_by_source: dict[str, list[EvidenceSpan]] = {}
         locators: dict[tuple[str, str], str] = {}
-        decoded_text: dict[str, str] = {}
         for span in evidence_spans:
-            if span.source_id not in manifests:
+            span_ref = refs_by_source.get(span.source_id)
+            if span_ref is None:
                 raise SourceExportError("orphan evidence span in v2 export")
-            # A caller can construct a perfectly valid EvidenceSpan for text
-            # that was never in the source.  Until normalized parser artifacts
-            # have an owned, immutable registry, only exact UTF-8 original-text
-            # offsets can be independently grounded at this boundary.
-            if not _is_groundable_text_shape(
-                span, str(manifests[span.source_id]["mime_type"])
-            ):
+            if not _is_groundable_text_shape(span, span_ref.mime_type):
                 raise SourceExportError("unverified evidence span in v2 export")
-            coords = span.coordinates
-            if span.source_id not in decoded_text:
-                try:
-                    decoded_text[span.source_id] = verified_data[
-                        span.source_id
-                    ].decode("utf-8")
-                except UnicodeDecodeError:
-                    raise SourceExportError(
-                        "unverified evidence span in v2 export"
-                    ) from None
-            if (
-                decoded_text[span.source_id][coords.char_start:coords.char_end]
-                != span.raw_text
-            ):
-                raise SourceExportError("unverified evidence span in v2 export")
-            if span.span_id in spans and spans[span.span_id] != span:
-                raise SourceExportError("conflicting evidence span id")
+            if span.span_id in spans:
+                if spans[span.span_id] != span:
+                    raise SourceExportError("conflicting evidence span id")
+                continue
             locator_key = (span.source_id, span.locator)
             existing = locators.get(locator_key)
             if existing is not None and existing != span.span_id:
                 raise SourceExportError("conflicting evidence locator")
             spans[span.span_id] = span
             locators[locator_key] = span.span_id
+            spans_by_source.setdefault(span.source_id, []).append(span)
+
+        manifests: dict[str, dict[str, str | int | None]] = {}
+        for ref in refs_by_source.values():
+            # The source owner verifies the actual bytes. Ground text one source
+            # at a time. Manifest-only sources need no original buffer here.
+            source_spans = spans_by_source.get(ref.source_id)
+            verified: VerifiedContent | VerifiedVersionReceipt
+            if source_spans:
+                content = source_reader.open_version(ref, purpose="source_export")
+                if not isinstance(content, VerifiedContent):
+                    raise SourceExportError("source bytes do not match source ref")
+                try:
+                    verified = VerifiedContent.verified_observation(content)
+                except SourceRefMismatchError as exc:
+                    raise SourceExportError("source bytes do not match source ref") from exc
+                try:
+                    text = verified.data.decode("utf-8")
+                except UnicodeDecodeError as exc:
+                    raise SourceExportError("unverified evidence span in v2 export") from exc
+                for span in source_spans:
+                    coords = span.coordinates
+                    if text[coords.char_start:coords.char_end] != span.raw_text:
+                        raise SourceExportError("unverified evidence span in v2 export")
+            else:
+                verified = source_reader.verify_version(ref, purpose="source_export")
+            if (
+                verified.document_id != ref.document_id
+                or verified.source_id != ref.source_id
+                or verified.content_sha256 != ref.content_sha256
+                or verified.byte_size != ref.byte_size
+                or verified.schema_version != ref.schema_version
+            ):
+                raise SourceExportError("source bytes do not match source ref")
+            manifest = source_reader.describe_version(ref)
+            if _manifest_ref(manifest) != ref:
+                raise SourceExportError("v2 manifest does not match verified source ref")
+            manifests[ref.source_id] = manifest
 
         payload = {
             "schema_version": SOURCE_EXPORT_V2_SCHEMA_VERSION,
@@ -220,43 +227,18 @@ class SourceExportBundleV2:
         spans_raw = wire["evidence_spans"]
         if not isinstance(manifests, list) or not isinstance(spans_raw, list):
             raise TypeError("manifests and evidence_spans must be arrays")
-        source_ids: list[str] = []
         source_mimes: dict[str, str] = {}
         for manifest in manifests:
-            if not isinstance(manifest, dict) or set(manifest) != _MANIFEST_FIELDS:
-                raise SourceExportError("v2 manifest fields are not exact")
-            for field in ("document_id", "source_id", "content_sha256", "mime_type"):
-                if not isinstance(manifest[field], str) or not manifest[field]:
-                    raise SourceExportError(f"invalid v2 manifest {field}")
-            digest = manifest["content_sha256"]
-            if len(digest) != 64 or any(char not in "0123456789abcdef" for char in digest):
-                raise SourceExportError("invalid v2 source digest")
-            size = manifest["byte_size"]
-            if isinstance(size, bool) or not isinstance(size, int) or size < 0:
-                raise SourceExportError("invalid v2 source byte_size")
-            year = manifest["fiscal_year"]
-            if year is not None and (
-                isinstance(year, bool) or not isinstance(year, int)
-                or year < 1900 or year > 2200
-            ):
-                raise SourceExportError("invalid v2 fiscal_year")
-            for key in _MANIFEST_FIELDS - {
-                "document_id", "source_id", "content_sha256", "mime_type",
-                "byte_size", "fiscal_year",
-            }:
-                value = manifest[key]
-                if value is not None and not isinstance(value, str):
-                    raise SourceExportError(f"invalid v2 manifest {key}")
-            source_ids.append(manifest["source_id"])
-            source_mimes[manifest["source_id"]] = manifest["mime_type"]
-        if source_ids != sorted(set(source_ids)):
+            ref = _manifest_ref(manifest)
+            source_mimes[ref.source_id] = ref.mime_type
+        if len(manifests) != len(source_mimes) or list(source_mimes) != sorted(source_mimes):
             raise SourceExportError("v2 manifests must be sorted and unique")
 
         spans = tuple(EvidenceSpan.from_dict(item) for item in spans_raw)
         span_ids = [span.span_id for span in spans]
         if span_ids != sorted(set(span_ids)):
             raise SourceExportError("v2 spans must be sorted and unique")
-        if any(span.source_id not in source_ids for span in spans):
+        if any(span.source_id not in source_mimes for span in spans):
             raise SourceExportError("orphan evidence span in v2 export")
         if any(
             not _is_groundable_text_shape(span, source_mimes[span.source_id])

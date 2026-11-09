@@ -38,6 +38,20 @@ class TestTextShapes:
             assert locator.startswith("cwp-pptx-shape/2|s=")
             assert "|p=0|" in locator
             assert isinstance(unit.metadata["slide_number"], int)
+        assert doc.structure.coverage_complete
+        assert doc.structure.native_text_coverage["page_statuses"] == ("observed",)
+
+    def test_blank_slide_was_read_and_does_not_create_an_opaque_asset(self):
+        from pptx import Presentation
+
+        presentation = Presentation()
+        presentation.slides.add_slide(presentation.slide_layouts[6])
+        output = io.BytesIO()
+        presentation.save(output)
+        doc = normalize_pptx(output.getvalue())
+        assert doc.units == doc.opaque_assets == ()
+        assert doc.structure.coverage_complete
+        assert doc.structure.native_text_coverage["page_statuses"] == ("empty",)
 
     def test_notes_separate_from_slide_body(self):
         doc = normalize_pptx(
@@ -91,9 +105,63 @@ class TestMediaAndGaps:
         doc = normalize_pptx(build_pptx(with_mixed_slide=True))
         assert "Mixed slide headline" in texts(doc)
         assert any(a.asset_kind == "image" for a in doc.opaque_assets)
-        # Both slides produced text, so no slide is opaque.
-        assert doc.structure.opaque_pages == ()
-        assert doc.structure.coverage_complete is True
+        assert doc.structure.native_text_coverage["page_statuses"] == ("observed", "observed")
+        assert doc.structure.opaque_pages == (2,)
+        assert doc.structure.coverage_complete is False
+
+    def test_mixed_slide_preserves_positive_replay_but_cannot_prove_empty_selection(self):
+        from dataclasses import replace
+        from company_wiki.document_normalization import ReplayError
+        from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
+
+        data = build_pptx(with_mixed_slide=True)
+        doc = normalize_pptx(data)
+        unit = next(unit for unit in doc.units if unit.raw_text == "Mixed slide headline")
+        port = NarrativeNormalization()
+        kwargs = dict(
+            source_id=doc.source_id, source_sha256=doc.source_sha256,
+            mime_type=PPTX_MIME, parser_version=doc.parser_version,
+        )
+        historical = replace(unit, metadata={
+            **unit.metadata,
+            "normalization_quality": {"coverage_complete": True, "opaque_pages": [], "errors": []},
+        })
+        assert port.replay(
+            data, evidence_spans=(historical.to_evidence_span(topics=[], selection_reasons=[]),), **kwargs,
+        ) == 1
+        with pytest.raises(ReplayError, match="empty selection requires complete source coverage"):
+            port.replay(data, evidence_spans=(), **kwargs)
+
+    def test_production_selector_keeps_native_business_evidence_from_an_incomplete_slide(self):
+        from dataclasses import replace
+        from pptx import Presentation
+        from pptx.util import Inches
+        from company_wiki.source_catalog.narrative_evidence import select_narrative_evidence
+        from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
+
+        text = "We launched a new product and expanded overseas production capacity for customers."
+        presentation = Presentation()
+        slide = presentation.slides.add_slide(presentation.slide_layouts[6])
+        slide.shapes.add_textbox(Inches(1), Inches(1), Inches(4), Inches(1)).text = text
+        slide.shapes.add_picture(io.BytesIO(tiny_png()), Inches(1), Inches(2))
+        output = io.BytesIO()
+        presentation.save(output)
+        data = output.getvalue()
+        port = NarrativeNormalization()
+        doc = normalize_pptx(data)
+        structure = replace(port.language_structure(doc, "en"), mime_type=PPTX_MIME)
+        selected = select_narrative_evidence(
+            structure, title="Operating update", existing_kind="investor_relations",
+            selector_version="0.9.0",
+        )
+        assert selected.status == "partial"
+        assert not selected.coverage_complete
+        assert selected.reading_context["unread"]["opaque_pages"] == [1]
+        assert [span.raw_text for span in selected.evidence_spans] == [text]
+        assert port.replay(
+            data, source_id=doc.source_id, source_sha256=doc.source_sha256,
+            mime_type=PPTX_MIME, evidence_spans=selected.evidence_spans, language="en",
+        ) == 1
 
     def test_duplicate_media_one_part_two_assets(self):
         doc = normalize_pptx(build_pptx(with_duplicate_picture=True))
@@ -179,9 +247,39 @@ class TestMediaAndGaps:
         ]
         assert len(orphans) == 1
         assert orphans[0].media_sha256 == sha256_hex(tiny_png())
+        assert doc.structure.opaque_pages == ()
+        assert doc.structure.coverage_complete
 
 
 class TestPackageBounds:
+    def test_inventory_does_not_inflate_parts_the_presentation_parser_will_read(self, monkeypatch):
+        data = build_pptx(with_table=True, with_notes="Prepared remarks")
+        member_reads = []
+        zip_open = zipfile.ZipFile.open
+
+        def record_read(package, name, *args, **kwargs):
+            member_reads.append(name.filename if isinstance(name, zipfile.ZipInfo) else name)
+            return zip_open(package, name, *args, **kwargs)
+
+        monkeypatch.setattr(zipfile.ZipFile, "open", record_read)
+        doc = normalize_pptx(data)
+        assert "$105 billion" in texts(doc)
+        assert "Prepared remarks" in texts(doc)
+        assert member_reads.count("ppt/slides/slide1.xml") == 1
+        assert member_reads.count("ppt/notesSlides/notesSlide1.xml") == 1
+
+    def test_duplicate_member_cannot_multiply_inflation_after_inventory(self):
+        data = build_pptx()
+        output = io.BytesIO()
+        name = "ppt/slides/slide1.xml"
+        with zipfile.ZipFile(io.BytesIO(data)) as source, zipfile.ZipFile(output, "w") as target:
+            for member in source.infolist():
+                target.writestr(member, source.read(member))
+            with pytest.warns(UserWarning, match="Duplicate name"):
+                target.writestr(name, source.read(name))
+        with pytest.raises(UnsupportedFormatError, match="duplicate PPTX archive member"):
+            normalize_pptx(output.getvalue())
+
     def test_non_zip_bytes_rejected(self):
         data = b"clearly not a zip package"
         with pytest.raises(UnsupportedFormatError):

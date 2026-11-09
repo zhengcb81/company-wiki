@@ -12,6 +12,7 @@ import sqlite3
 import subprocess
 import sys
 import time
+from types import SimpleNamespace
 
 import pytest
 
@@ -21,9 +22,6 @@ from company_wiki.automation.narrative_batch_request import NarrativeBatchReques
 from company_wiki.automation.narrative_generation import generation_sha256, find_reuse_pin
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from company_wiki.automation.store import AutomationStore
-from company_wiki.source_catalog.narrative_artifact_store import (
-    LocalNarrativeObjectStore, NarrativeArtifactReader,
-)
 from support.narrative_batch_fixtures import (
     KEY_ENV, isolated_batch_directory, prepare_source_catalog,
     loopback_model_server as _loopback_model_server,
@@ -69,6 +67,7 @@ def _resume(state, request):
     run = runs.get_run(request.run_id)
     return batch._resume_binding(
         request, state.reader, store, runs, run, deadline=time.monotonic() + 10,
+        open_artifacts=state.catalog.open_narrative_artifact_reader,
         prepared_sources=batch._current_sources(request, state.reader),
     )
 
@@ -88,6 +87,24 @@ def _invoke(state, request, wire):
     return process, json.loads(process.stdout)
 
 
+def _legacy_seed_runtime(spec):
+    """Reproduce the old comparison only inside the fixture's spawned workers."""
+    from company_wiki.automation import narrative_worker_factory as worker
+
+    verify_effective_model = worker._verify_effective_model
+
+    def previous_comparison(model, frozen_models):
+        assert frozen_models and all("reasoning_effort" not in entry for entry in frozen_models)
+        options = dict(model.effective_request_options())
+        assert options.pop("reasoning_effort") == "low"
+        # The old producer sent low in HTTP but omitted it from generation identity.
+        verify_effective_model(SimpleNamespace(effective_request_options=lambda: options), frozen_models)
+
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(worker, "_verify_effective_model", previous_comparison)
+        return worker.create_runtime(spec)
+
+
 @pytest.mark.parametrize("schema", ["1", "2"])
 def test_completed_real_legacy_binding_reads_without_resigning_or_model(
     tmp_path_factory, loopback_model_server, monkeypatch, schema,
@@ -97,16 +114,24 @@ def test_completed_real_legacy_binding_reads_without_resigning_or_model(
         try:
             request, wire = _request(state, loopback_model_server.endpoint, schema)
             original_generation = batch.generation_manifest
+            supervisor_config = batch.SupervisorConfig
 
             def previous_generation(*args, **kwargs):
                 manifest = original_generation(*args, **kwargs)
                 manifest["model"].pop("reasoning_effort", None)
                 return manifest
 
-            # Reproduce the previous producer's actual omission. All other
-            # source/worker/publish/run paths are real and model HTTP is loopback.
+            def previous_supervisor(**options):
+                options["runtime_factory_path"] = (
+                    "integration.test_narrative_legacy_effort_history:_legacy_seed_runtime"
+                )
+                return supervisor_config(**options)
+
+            # The old identity and worker only seed completed history. Resume
+            # below uses the current runtime and the exact persisted binding.
             with monkeypatch.context() as patch:
                 patch.setattr(batch, "generation_manifest", previous_generation)
+                patch.setattr(batch, "SupervisorConfig", previous_supervisor)
                 first = batch.run_batch(
                     request, project_root=root, catalog_config_path=state.config_path,
                     db_path=root / "automation.db", work_dir=root / "work",
@@ -140,10 +165,7 @@ def test_completed_real_legacy_binding_reads_without_resigning_or_model(
 
             # Unknown old effort is not a cache hit for either explicit effort.
             payload = batch._current_sources(request, state.reader)[0][0]
-            artifacts = NarrativeArtifactReader(
-                state.catalog.config.database_path,
-                LocalNarrativeObjectStore(state.catalog.config.catalog_dir),
-            )
+            artifacts = state.catalog.open_narrative_artifact_reader()
             try:
                 new_manifests = []
                 for effort in ("low", "max"):

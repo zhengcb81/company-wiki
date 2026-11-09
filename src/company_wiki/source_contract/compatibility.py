@@ -9,6 +9,8 @@ import re
 from typing import Any
 import unicodedata
 
+from company_wiki.wire_json import parse_json
+
 from .evidence_span import EVIDENCE_SPAN_SCHEMA_VERSION
 from .source_export import SOURCE_EXPORT_SCHEMA_VERSION
 from .source_manifest import SOURCE_MANIFEST_SCHEMA_VERSION
@@ -172,9 +174,6 @@ def validate_compatibility_policy(policy: Mapping[str, Any]) -> dict[str, Any]:
             f"contracts.{contract_name}",
         )
         current_version = entry["current_version"]
-        current_key = _stable_semver_key(
-            current_version, f"contracts.{contract_name}.current_version"
-        )
         if current_version != _CURRENT_VERSIONS[contract_name]:
             raise SourceContractCompatibilityError(
                 f"contracts.{contract_name}.current_version does not match runtime"
@@ -207,10 +206,6 @@ def validate_compatibility_policy(policy: Mapping[str, Any]) -> dict[str, Any]:
             raise SourceContractCompatibilityError(
                 f"contracts.{contract_name}.current_version must be the newest supported version"
             )
-        if keys[current_version] != current_key:
-            raise SourceContractCompatibilityError(
-                f"contracts.{contract_name}.current_version is inconsistent"
-            )
         normalized_contracts[contract_name] = {
             "current_version": current_version,
             "supported_versions": list(supported),
@@ -225,7 +220,7 @@ def validate_compatibility_policy(policy: Mapping[str, Any]) -> dict[str, Any]:
             "compatible_version_sets must not be empty"
         )
     normalized_version_sets: list[dict[str, str]] = []
-    covered_versions: dict[str, set[tuple[int, int, int]]] = {
+    covered_versions: dict[str, set[str]] = {
         name: set() for name in SOURCE_CONTRACT_NAMES}
     seen_version_sets: set[tuple[str, ...]] = set()
     previous_version_set_key: tuple[tuple[int, int, int], ...] | None = None
@@ -422,7 +417,10 @@ def load_compatibility_policy() -> dict[str, Any]:
     resource = files("company_wiki.source_contract.schemas").joinpath(
         "source_contract_compatibility.v1.json"
     )
-    value = json.loads(resource.read_text(encoding="utf-8"))
+    try:
+        value = parse_json(resource.read_text(encoding="utf-8"))
+    except (ValueError, RecursionError) as exc:
+        raise SourceContractCompatibilityError(f"invalid compatibility policy JSON: {exc}") from exc
     return validate_compatibility_policy(value)
 
 

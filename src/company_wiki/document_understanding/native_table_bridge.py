@@ -7,7 +7,9 @@ not instructions to distribute values across a merged cell's columns.
 from collections.abc import Mapping
 from typing import Any
 
+from . import pdf_table_observations
 from .layout_hints.contract import WorkBudget, WorkBudgetExceeded
+from .observation_adapter import observes_pdf_table_row
 from .table_measurements import bind_operating_table
 
 NATIVE_TABLE_BRIDGE_VERSION = '2.1.1'
@@ -118,8 +120,10 @@ def bind_native_tables(observation: Mapping[str, Any], *, work_budget: WorkBudge
         work_budget.charge()  # Before reading any input, including a zero cap.
         units = {}
         seen = set()
+        has_pdf_rows = False
         for unit in _each(observation.get('units', ()), work_budget):
             hints = unit.get('hints') or {}
+            has_pdf_rows = has_pdf_rows or observes_pdf_table_row(unit)
             units[unit['unit_id']] = {'text':unit['text'],
                 'parent_id':hints.get('source_id') or observation.get('source_ref',{}).get('source_id'),
                 'role':unit.get('role'),'kind':unit['kind'],'locator':unit.get('locator')}
@@ -143,25 +147,23 @@ def bind_native_tables(observation: Mapping[str, Any], *, work_budget: WorkBudge
             results.append(result)
             if work_budget.exhausted:
                 raise WorkBudgetExceeded('native table binding exhausted caller work')
-        # The format owner projects observed fine slots; both formats use the
-        # same measurement binder and caller budget. No second PDF parse.
-        from company_wiki.document_normalization.pdf_table_observations import build_pdf_table_observations
-
-        pdf = (build_pdf_table_observations(observation, layout_hints, work_budget=work_budget)
-               if eligible_unit_ids is None or eligible_unit_ids else
-               {'tables': [], 'diagnostics': [], 'status': 'unavailable'})
-        diagnostics.extend(pdf['diagnostics'])
-        for table in _each(pdf['tables'], work_budget):
-            if eligible_unit_ids is not None:
-                work_budget.charge(len(table['units']))
-                if not eligible_unit_ids.intersection(table['units']):
-                    continue
-            results.append(bind_operating_table(_eligible_cells(table, eligible_unit_ids, work_budget),
-                                               work_budget=work_budget))
-            if work_budget.exhausted:
-                raise WorkBudgetExceeded('PDF table binding exhausted caller work')
-        if pdf['status'] == 'partial' and (pdf['tables'] or work_budget.exhausted):
-            status = 'partial'
+        # The outer document MIME may describe a different carrier. Only an
+        # observed PDF row requires layout projection into the shared binder.
+        if has_pdf_rows and (eligible_unit_ids is None or eligible_unit_ids):
+            pdf = pdf_table_observations.build_pdf_table_observations(
+                observation, layout_hints, work_budget=work_budget)
+            diagnostics.extend(pdf['diagnostics'])
+            for table in _each(pdf['tables'], work_budget):
+                if eligible_unit_ids is not None:
+                    work_budget.charge(len(table['units']))
+                    if not eligible_unit_ids.intersection(table['units']):
+                        continue
+                results.append(bind_operating_table(_eligible_cells(table, eligible_unit_ids, work_budget),
+                                                   work_budget=work_budget))
+                if work_budget.exhausted:
+                    raise WorkBudgetExceeded('PDF table binding exhausted caller work')
+            if pdf['status'] == 'partial' and (pdf['tables'] or work_budget.exhausted):
+                status = 'partial'
         if status != 'partial' and results:
             states = {row['status'] for row in results}
             status = next(iter(states)) if states in ({'complete'}, {'unavailable'}) else 'partial'
@@ -224,3 +226,7 @@ def close_native_table_dependencies(packages: Mapping[str, Any], bindings: Mappi
                      'table_binding_status': ('complete' if statuses == {'bound'} else
                                               'partial' if matched else 'unavailable')})
     return {**packages, 'packages': rows}
+
+__all__ = [
+    'NATIVE_TABLE_BRIDGE_VERSION',
+]

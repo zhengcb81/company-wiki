@@ -17,15 +17,16 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import Any, Protocol
 
-from company_wiki.resource_budget import WorkBudget
+from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 from company_wiki.source_contract import EvidenceSpan
+from company_wiki.source_contract.source_version import VerifiedContent
 
 from . import narrative_evidence as native
 from .narrative_document import NarrativeEvidencePackage, NarrativeParseResult
 
 
 class PdfReadingError(RuntimeError):
-    """A concrete reading resource/deployment failure, not corrupt source bytes."""
+    """A failure reported by the PDF reading implementation."""
 
 
 @dataclass(frozen=True)
@@ -133,6 +134,15 @@ class NativePdfBackend:
         return replayer(data, source_id=source_id, source_sha256=source_sha256,
                         evidence_spans=evidence_spans, language=language)
 
+    def replay_verified(self, content: VerifiedContent, *, evidence_spans: Sequence[EvidenceSpan],
+                        language: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
+        if self._replayer is not None:
+            return self.replay(content.data, source_id=content.source_id,
+                source_sha256=content.content_sha256, evidence_spans=evidence_spans, language=language)
+        return native.verify_pdf_evidence_spans_verified(
+            content, evidence_spans=evidence_spans, language=language,
+        )
+
 
 class PdfReading:
     """One implementation set shared by reading, publication and cache identity."""
@@ -142,10 +152,12 @@ class PdfReading:
                  deadline: float | None = None) -> None:
         if backend is not None and (parser is not None or replayer is not None):
             raise ValueError("provide a complete backend or native-compatible callbacks")
+        self._native_backend: NativePdfBackend | None = None
         if backend is None:
             from .narrative_pdf_enhancement import configured_paragraph_runtime
-            backend = NativePdfBackend(parser=parser, replayer=replayer,
+            self._native_backend = NativePdfBackend(parser=parser, replayer=replayer,
                 paragraph_enhancement=configured_paragraph_runtime())
+            backend = self._native_backend
         self._backend = backend
         self._deadline = _valid_deadline(deadline)
         self._recipe: dict[str, Any] | None = None
@@ -153,8 +165,6 @@ class PdfReading:
     def _descriptor(self) -> dict[str, Any]:
         descriptor = json.loads(json.dumps(dict(self._backend.describe_recipe()), allow_nan=False))
         _validate_descriptor(descriptor)
-        if len(json.dumps(descriptor).encode("utf-8")) > 8192:
-            raise ValueError("PDF reading recipe exceeds compact descriptor bound")
         if any(not isinstance(descriptor.get(key), str) or not descriptor[key].strip()
                for key in ("parser_name", "parser_version")):
             raise ValueError("PDF reading producer descriptor is invalid")
@@ -200,7 +210,6 @@ class PdfReading:
         parsed = self._backend.read(data, request, selector_version=selector_version,
             work_budget=work_budget, full_table_scan=full_table_scan, deadline=deadline)
         _remaining_seconds(deadline)
-        self._check_recipe()
         identity = self.parser_identity()
         if work_budget is not None:
             work_budget.charge(len(parsed.units))
@@ -217,19 +226,34 @@ class PdfReading:
                deadline: float | None = None
                ) -> tuple[NarrativeParseResult, NarrativeEvidencePackage]:
         checkpoint()
-        parsed = self.read(data, request, selector_version=selector.selector_version,
-                           work_budget=work_budget, deadline=deadline)
+        parsed = self._parse_for_selection(data, request, selector_version=selector.selector_version,
+                                           work_budget=work_budget, deadline=deadline)
         checkpoint()
         package = selector(parsed, title=request.title or "untitled",
             existing_kind=request.document_kind, work_budget=work_budget)
         if (selector.selector_version != "0.9.0" and not package.evidence_spans
                 and parsed.deferred_table_pages):
-            parsed = self._read(data, request, selector_version=selector.selector_version,
+            parsed = self._parse_for_selection(data, request, selector_version=selector.selector_version,
                 work_budget=work_budget, full_table_scan=True, deadline=deadline)
             checkpoint()
             package = selector(parsed, title=request.title or "untitled",
                 existing_kind=request.document_kind, work_budget=work_budget)
         return parsed, package
+
+    def _parse_for_selection(
+        self, data: bytes, request: PdfReadingRequest, *, selector_version: str,
+        work_budget: WorkBudget | None, deadline: float | None, full_table_scan: bool = False,
+    ) -> NarrativeParseResult:
+        try:
+            if full_table_scan:
+                return self._read(data, request, selector_version=selector_version,
+                    work_budget=work_budget, full_table_scan=True, deadline=deadline)
+            return self.read(data, request, selector_version=selector_version,
+                work_budget=work_budget, deadline=deadline)
+        except (WorkBudgetExceeded, PdfReadingError):
+            raise
+        except (RuntimeError, ValueError) as exc:
+            raise PdfReadingError("verified PDF cannot be parsed completely") from exc
 
     def verify_material(self, parsed: NarrativeParseResult,
                         evidence_spans: Sequence[EvidenceSpan]) -> None:
@@ -243,6 +267,16 @@ class PdfReading:
         self._check_recipe()
         return self._backend.replay(data, source_id=source_id, source_sha256=source_sha256,
                                    evidence_spans=evidence_spans, language=language)
+
+    def replay_verified(self, content: VerifiedContent, *, evidence_spans: Sequence[EvidenceSpan],
+                        language: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
+        """Replay a catalog observation through the configured PDF implementation."""
+        self._check_recipe()
+        if self._native_backend is not None:
+            return self._native_backend.replay_verified(content, evidence_spans=evidence_spans, language=language)
+        # An injected backend retains its public raw-byte replay contract.
+        return self._backend.replay(content.data, source_id=content.source_id,
+            source_sha256=content.content_sha256, evidence_spans=evidence_spans, language=language)
 
 
 # Recipe metadata is not a source-content or arbitrary deployment-config dump.
@@ -283,3 +317,10 @@ def _remaining_seconds(deadline: float | None) -> float:
     if remaining <= 0:
         raise PdfReadingError("PDF_READING_DEADLINE: absolute task deadline exceeded")
     return remaining
+
+__all__ = [
+    'PdfBytesParser',
+    'PdfReading',
+    'PdfReadingError',
+    'PdfReadingRequest',
+]

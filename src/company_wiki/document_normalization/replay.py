@@ -3,11 +3,17 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-import hashlib
 import re
+
+from company_wiki.source_contract.source_version import VerifiedContent
+
+from ._source_input import _NormalizationSource, _SourceDigestMismatch
 from .errors import ReplayError
 from .limits import NormalizationLimits
-from .units import FORMAT_DOCX, FORMAT_HTML, PARSER_NAME, verify_unit_identity
+from .units import (
+    FORMAT_DOCX, FORMAT_HTML, PARSER_NAME, PPTX_LOCATOR_SCHEMA,
+    PPTX_OCR_PARSER_VERSION, PPTX_PARSER_VERSION, verify_unit_identity,
+)
 
 
 def _plain(value):
@@ -19,10 +25,8 @@ def _plain(value):
 
 
 def _parse(
-    original,
+    source: _NormalizationSource,
     *,
-    source_id,
-    source_sha256,
     mime_type,
     version,
     limits,
@@ -30,26 +34,19 @@ def _parse(
     ocr_limits,
     locators,
 ):
-    from . import normalize_document
+    from . import _normalize_source
 
-    if (
-        not isinstance(original, bytes)
-        or hashlib.sha256(original).hexdigest() != source_sha256
-    ):
-        raise ReplayError("source bytes do not match source_sha256")
-    if version == "2.0.0":
+    if version == PPTX_OCR_PARSER_VERSION:
         from .local_ocr import LocalOCRError
-        from .ocr_composition import adapter_identity, enrich_pptx
+        from .ocr_composition import OCR_LOCATOR_SCHEMA, adapter_identity, enrich_pptx
 
         if ocr is None:
             raise LocalOCRError("OCR_ADAPTER_REQUIRED")
-        # Verify the entire source package once, then infer only selected media.
-        pure = normalize_document(
-            original,
-            source_id=source_id,
-            source_sha256=source_sha256,
+        # Parse the already verified package once, then infer only selected media.
+        pure = _normalize_source(
+            source,
             mime_type=mime_type,
-            parser_version="1.1.0",
+            parser_version=PPTX_PARSER_VERSION,
             limits=limits,
         )
         _, fingerprint = adapter_identity(ocr)
@@ -62,9 +59,10 @@ def _parse(
         for locator in locators:
             if not isinstance(locator, str):
                 raise ReplayError("selected source locator must be text")
-            if locator.startswith("cwp-pptx-image-ocr/1|"):
+            if locator.startswith(OCR_LOCATOR_SCHEMA + "|"):
                 match = re.fullmatch(
-                    r"cwp-pptx-image-ocr/1\|s=([1-9][0-9]*)\|p=([0-9]+(?:\.[0-9]+)*)\|m=([0-9a-f]{64})\|ocr=([0-9a-f]{64})\|l=([0-9]+)\|b=(.+)",
+                    re.escape(OCR_LOCATOR_SCHEMA)
+                    + r"\|s=([1-9][0-9]*)\|p=([0-9]+(?:\.[0-9]+)*)\|m=([0-9a-f]{64})\|ocr=([0-9a-f]{64})\|l=([0-9]+)\|b=(.+)",
                     locator,
                 )
                 if match is None or match.group(4) != fingerprint:
@@ -74,8 +72,8 @@ def _parse(
                     raise ReplayError(
                         "selected OCR media/shape differs from verified package"
                     )
-                selected.add(match.group(3))
-            elif not locator.startswith("cwp-pptx-shape/2|") or not locator.endswith(
+                selected.add(key)
+            elif not locator.startswith(PPTX_LOCATOR_SCHEMA + "|") or not locator.endswith(
                 "|ocr=" + fingerprint
             ):
                 raise ReplayError("selected OCR parser locator/config is invalid")
@@ -84,18 +82,27 @@ def _parse(
             ocr=ocr,
             limits=limits,
             ocr_limits=ocr_limits,
-            selected_media_sha256s=frozenset(selected),
+            selected_images=frozenset(selected),
         )
-    return normalize_document(
-        original,
-        source_id=source_id,
-        source_sha256=source_sha256,
+    return _normalize_source(
+        source,
         mime_type=mime_type,
         parser_version=version,
         limits=limits,
-        ocr=None,
-        ocr_limits=None,
     )
+
+
+def _verify_original_for_replay(
+    original: bytes, *, source_id: str, source_sha256: str, limits: NormalizationLimits,
+) -> _NormalizationSource:
+    if not isinstance(original, bytes):
+        raise ReplayError("source bytes do not match source_sha256")
+    try:
+        return _NormalizationSource.from_bytes(
+            original, source_id=source_id, source_sha256=source_sha256, limits=limits,
+        )
+    except _SourceDigestMismatch as exc:
+        raise ReplayError(str(exc)) from exc
 
 
 def _by_locator(document):
@@ -144,10 +151,14 @@ def replay_units(
         if format_name == FORMAT_DOCX
         else "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     )
-    doc = _parse(
+    source = _verify_original_for_replay(
         original,
         source_id=first.source_id,
         source_sha256=source_sha256,
+        limits=limits,
+    )
+    doc = _parse(
+        source,
         mime_type=mime,
         version=first.parser_version,
         limits=limits,
@@ -213,11 +224,37 @@ def replay_evidence_spans(
     ocr=None,
     ocr_limits=None,
 ) -> int:
-    """Re-derive all selected span locators once, including OCR image/config bindings.
+    """Verify raw bytes and re-derive the selected spans and their locators."""
+    spans = _checked_spans(evidence_spans, source_id)
+    source = _verify_original_for_replay(
+        original, source_id=source_id, source_sha256=source_sha256, limits=limits,
+    )
+    return _replay_spans(
+        source, mime_type=mime_type, spans=spans, limits=limits, ocr=ocr, ocr_limits=ocr_limits,
+    )
 
-    This proves the selected spans, not exhaustive OCR recall. The caller must
-    report the retained document extraction quality separately.
+
+def replay_verified_evidence_spans(
+    content: VerifiedContent,
+    *,
+    mime_type: str,
+    evidence_spans,
+    limits: NormalizationLimits,
+    ocr=None,
+    ocr_limits=None,
+) -> int:
+    """Replay selected spans against the source owner's already verified bytes.
+
+    This proves the selected spans, not exhaustive OCR recall.
     """
+    source = _NormalizationSource.from_verified(content, limits=limits)
+    spans = _checked_spans(evidence_spans, source.source_id)
+    return _replay_spans(
+        source, mime_type=mime_type, spans=spans, limits=limits, ocr=ocr, ocr_limits=ocr_limits,
+    )
+
+
+def _checked_spans(evidence_spans, source_id):
     spans = tuple(evidence_spans)
     if not spans:
         raise ReplayError("replay requires at least one evidence span")
@@ -231,19 +268,21 @@ def replay_evidence_spans(
             version,
         ):
             raise ReplayError("mixed span source/parser identity")
+    return spans
+
+
+def _replay_spans(source, *, mime_type, spans, limits, ocr, ocr_limits):
     document = _parse(
-        original,
-        source_id=source_id,
-        source_sha256=source_sha256,
+        source,
         mime_type=mime_type,
-        version=version,
+        version=spans[0].parser_version,
         limits=limits,
         ocr=ocr,
         ocr_limits=ocr_limits,
         locators=[s.structured_value.get("source_locator") for s in spans],
     )
     return verify_parsed_evidence_spans(
-        document.units, source_id=source_id, evidence_spans=spans
+        document.units, source_id=source.source_id, evidence_spans=spans
     )
 
 
@@ -280,7 +319,10 @@ def verify_parsed_evidence_spans(units, *, source_id, evidence_spans) -> int:
             raise ReplayError(
                 "selected span text/coordinates/quality differs from source"
             )
-        if any(metadata.get(k) != _plain(v) for k, v in candidate.metadata.items()):
+        if any(
+            metadata.get(k) != _plain(v)
+            for k, v in candidate.evidence_metadata().items()
+        ):
             raise ReplayError("selected span source metadata differs")
         if (
             metadata.get("unit_kind") != candidate.unit_kind
@@ -291,4 +333,7 @@ def verify_parsed_evidence_spans(units, *, source_id, evidence_spans) -> int:
     return len(spans)
 
 
-__all__ = ["replay_unit", "replay_units", "replay_evidence_spans", "verify_parsed_evidence_spans"]
+__all__ = [
+    "replay_unit", "replay_units", "replay_evidence_spans",
+    "replay_verified_evidence_spans", "verify_parsed_evidence_spans",
+]

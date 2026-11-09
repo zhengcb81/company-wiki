@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Protocol, cast
 
-from company_wiki._id_scope import normalize_id_scope
+from company_wiki.id_scope import normalize_id_scope
 
 from .models import ClaimedWork
 from .registry import HandlerRegistry

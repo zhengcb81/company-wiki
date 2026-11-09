@@ -11,6 +11,7 @@ from company_wiki.source_contract import EvidenceSpan
 
 from .narrative_document import NarrativeUnit
 from .narrative_pdf_qa import QA_FRAGMENT_VERSIONS
+from .narrative_pdf_turns import printed_pdf_turns
 from .narrative_native_ranges import (
     NATIVE_RANGE_BASE_VERSIONS, NATIVE_RANGE_PARSER_NAME, verify_native_range_span,
 )
@@ -32,32 +33,6 @@ def _file_sha256(path: Path) -> str:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
-
-
-def _validate_source_binding(
-    path: Path,
-    source_id: str,
-    source_sha256: str,
-    evidence_spans: Sequence[EvidenceSpan],
-) -> None:
-    if _file_sha256(path) != source_sha256:
-        raise ValueError("PDF changed before evidence locator round-trip")
-    if any(span.source_id != source_id for span in evidence_spans):
-        raise ValueError("evidence source_id does not match the requested PDF")
-
-
-def _validate_source_bytes_binding(
-    data: bytes,
-    source_id: str,
-    source_sha256: str,
-    evidence_spans: Sequence[EvidenceSpan],
-) -> None:
-    if not isinstance(data, bytes):
-        raise TypeError("PDF data must be bytes")
-    if hashlib.sha256(data).hexdigest() != source_sha256:
-        raise ValueError("PDF changed before evidence locator round-trip")
-    if any(span.source_id != source_id for span in evidence_spans):
-        raise ValueError("evidence source_id does not match the requested PDF")
 
 
 def _narrative_metadata(span: EvidenceSpan) -> Mapping:
@@ -113,12 +88,9 @@ def prepare_pdf_replay(
     default_parser_version: str,
 ) -> PdfReplayPlan:
     """Validate immutable inputs and derive the minimal deterministic replay plan."""
-    _validate_source_binding(path, source_id, source_sha256, evidence_spans)
-    return PdfReplayPlan(
-        parser_version=_parser_version(evidence_spans, default_parser_version),
-        table_pages=_table_pages(evidence_spans),
-        native_ranges=any(_has_native_range(span) for span in evidence_spans),
-    )
+    if _file_sha256(path) != source_sha256:
+        raise ValueError("PDF changed before evidence locator round-trip")
+    return plan_pdf_replay(source_id, evidence_spans, default_parser_version=default_parser_version)
 
 
 def prepare_pdf_replay_bytes(
@@ -130,7 +102,22 @@ def prepare_pdf_replay_bytes(
     default_parser_version: str,
 ) -> PdfReplayPlan:
     """Validate immutable in-memory bytes and derive their replay plan."""
-    _validate_source_bytes_binding(data, source_id, source_sha256, evidence_spans)
+    if not isinstance(data, bytes):
+        raise TypeError("PDF data must be bytes")
+    if hashlib.sha256(data).hexdigest() != source_sha256:
+        raise ValueError("PDF changed before evidence locator round-trip")
+    return plan_pdf_replay(source_id, evidence_spans, default_parser_version=default_parser_version)
+
+
+def plan_pdf_replay(
+    source_id: str,
+    evidence_spans: Sequence[EvidenceSpan],
+    *,
+    default_parser_version: str,
+) -> PdfReplayPlan:
+    """Derive parser/table work from locators already bound to a source identity."""
+    if any(span.source_id != source_id for span in evidence_spans):
+        raise ValueError("evidence source_id does not match the requested PDF")
     return PdfReplayPlan(
         parser_version=_parser_version(evidence_spans, default_parser_version),
         table_pages=_table_pages(evidence_spans),
@@ -195,7 +182,8 @@ def _qa_fragment_matches(unit: NarrativeUnit, span: EvidenceSpan) -> bool:
     )
 
 
-def _span_matches(span: EvidenceSpan, matches: Sequence[NarrativeUnit]) -> bool:
+def _span_matches(span: EvidenceSpan, matches: Sequence[NarrativeUnit],
+                  observed_turns: Mapping[str, Mapping[str, object]]) -> bool:
     matches = tuple(unit for unit in matches
                     if (unit.source_id, unit.parser_name, unit.parser_version)
                     == (span.source_id, span.parser_name, span.parser_version)
@@ -204,6 +192,10 @@ def _span_matches(span: EvidenceSpan, matches: Sequence[NarrativeUnit]) -> bool:
                     and set(unit.quality_flags).issubset(span.quality_flags))
     if not matches:
         return False
+    if "printed_turn" in span.structured_value:
+        turn = span.structured_value["printed_turn"]
+        if not isinstance(turn, Mapping) or not any(observed_turns.get(unit.unit_id) == turn for unit in matches):
+            return False
     if span.structured_value.get("unit_kind") != "pdf_table_qa_fragment":
         return True
     return any(_qa_fragment_matches(unit, span) for unit in matches)
@@ -214,6 +206,10 @@ def verify_replayed_pdf_spans(
 ) -> tuple[tuple[str, ...], tuple[str, ...]]:
     """Match selected spans against units reconstructed by the pinned parser."""
     available = _available_units(replay_units)
+    observed_turns = (printed_pdf_turns(replay_units) if any(
+        isinstance(span.structured_value, Mapping) and "printed_turn" in span.structured_value
+        for span in evidence_spans
+    ) else {})
     native_available = ({unit.unit_id: unit for unit in replay_units}
                         if any(_has_native_range(span) for span in evidence_spans) else {})
     verified: list[str] = []
@@ -227,12 +223,13 @@ def verify_replayed_pdf_spans(
             target.append(span.span_id)
             continue
         matches = available.get(span_roundtrip_key(span), ())
-        target = verified if _span_matches(span, matches) else failed
+        target = verified if _span_matches(span, matches, observed_turns) else failed
         target.append(span.span_id)
     return tuple(verified), tuple(failed)
 
 
 __all__ = [
+    "plan_pdf_replay",
     "PdfReplayPlan",
     "prepare_pdf_replay",
     "prepare_pdf_replay_bytes",

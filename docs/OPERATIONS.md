@@ -30,7 +30,7 @@ CNINFO 使用 StockInfoDLSimple。电话会经 earnings-transcripts，原始 TXT
 ```powershell
 python -m company_wiki.source_catalog.source_export_v2_cli --help
 python -m company_wiki.source_catalog.source_reader_cli --help
-python -m company_wiki.source_catalog.narrative_transport_cli --help
+python -m company_wiki.automation.narrative_transport_cli --help
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml extraction-quality --help
 ```
 

@@ -689,7 +689,7 @@ def public_bundle(root, output, env, config, imported, descriptor, label, *, sou
         "-X",
         "utf8",
         "-m",
-        "company_wiki.source_catalog.narrative_transport_cli",
+        "company_wiki.automation.narrative_transport_cli",
         "--config",
         str(config),
     ]
@@ -1695,7 +1695,7 @@ def _run_pair_in_owned_root(
                 "-X",
                 "utf8",
                 "-m",
-                "company_wiki.source_catalog.narrative_transport_cli",
+                "company_wiki.automation.narrative_transport_cli",
                 "--config",
                 str(config),
             ]

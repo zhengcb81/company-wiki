@@ -9,10 +9,12 @@ from dataclasses import MISSING, dataclass, fields
 from datetime import datetime
 from enum import Enum
 import hashlib
-import json
 import math
 import re
 from typing import Any, ClassVar, Mapping
+
+from company_wiki.wire_json import canonical_json, require_canonical_json
+from company_wiki.wire_json import canonical_json_hash as canonical_json_hash
 
 
 UTC_TIMESTAMP_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
@@ -82,50 +84,6 @@ JOB_STATUS_TRANSITIONS: dict[JobStatus, set[JobStatus]] = {
     JobStatus.DEAD_LETTER: set(),
     JobStatus.CANCELLED: set(),
 }
-
-
-def _validate_json_value(value: Any, path: str = "$") -> None:
-    from .json_tree import walk_json
-    for item in walk_json(value):
-        if isinstance(item, tuple) or (isinstance(item, Mapping) and not isinstance(item, dict)):
-            raise TypeError(f"{path} contains a non-JSON container")
-
-
-def canonical_json(value: Any) -> str:
-    """Serialize a JSON value deterministically without ASCII escaping."""
-    _validate_json_value(value)
-    return json.dumps(
-        value,
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(",", ":"),
-        allow_nan=False,
-    )
-
-
-def canonical_json_hash(value: Any) -> str:
-    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
-
-
-def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise ValueError(f"duplicate JSON key: {key}")
-        result[key] = value
-    return result
-
-
-def require_canonical_json(value: str) -> str:
-    if not isinstance(value, str):
-        raise TypeError("canonical JSON must be text")
-    try:
-        decoded = json.loads(value, object_pairs_hook=_reject_duplicate_keys)
-    except (json.JSONDecodeError, ValueError) as exc:
-        raise ValueError(f"invalid canonical JSON: {exc}") from exc
-    if canonical_json(decoded) != value:
-        raise ValueError("JSON text is not canonical")
-    return value
 
 
 def require_utc_timestamp(value: str) -> str:
@@ -608,3 +566,8 @@ class HandlerResult(StrictModel):
             raise ValueError("succeeded HandlerResult must not contain error")
         if self.outcome is not HandlerOutcome.SUCCEEDED and self.error is None:
             raise ValueError("non-succeeded HandlerResult requires error")
+
+__all__ = [
+    'canonical_json',
+    'canonical_json_hash',
+]

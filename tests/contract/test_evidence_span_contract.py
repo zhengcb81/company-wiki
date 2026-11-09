@@ -173,6 +173,13 @@ def test_structured_json_key_order_does_not_change_output_or_span_identity():
     assert first.canonical_json() == second.canonical_json()
 
 
+def test_published_schema_accepts_all_runtime_extraction_flags():
+    module = _contract()
+    flags = module.load_evidence_span_schema()["properties"]["quality_flags"]["items"]["enum"]
+
+    assert set(flags) == {flag.value for flag in module.QualityFlag}
+
+
 def test_structured_value_is_recursively_immutable():
     module = _contract()
     span = _span(module, structured_value={"items": [{"value": 1}]})

@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from enum import Enum
-from functools import lru_cache, partial
+from functools import partial
 import hashlib
 import json
 import os
@@ -13,8 +14,14 @@ from pathlib import Path
 import re
 import sqlite3
 import stat
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
+from company_wiki.source_contract.source_version import (
+    SourceByteObservation, SourceByteVerifier, SourceReadError, SourceRef,
+)
+
+from .models import RootSpec
+from .source_location import SourceLocationError, resolve_source_location
 from .source_location import inside_configured_roots as _inside_configured_roots
 from .policy import _effective_reusable
 from .qualification import SourceQualification, qualify_source
@@ -22,6 +29,9 @@ from .runtime_policy import resolver_visibility_projection
 from .service import SourceCatalog
 from .store import metadata_state
 from .security_code import security_codes_equivalent
+
+if TYPE_CHECKING:
+    from .source_reader import FilingReuseObservation
 
 
 # B07 - the read contract's version policy, stated where the contract lives.
@@ -237,14 +247,15 @@ def _verify_candidate(
     if scope_qualification is not None:
         from .source_reader import SourceReadError
 
-        data, status, reason, detail = _read_verified_bytes(
+        observation, status, reason, detail = _read_verified_bytes(
             Path(str(location["absolute_path"])), expected_sha256=expected_sha256,
             expected_byte_size=size, budget=budget,
             retain_bytes=scope_qualification.needs_original,
         )
         if status:
             raise SourceReadError(status, reason or "source_read_failed", detail)
-        scope_qualification.verify(data, budget=budget)
+        assert observation is not None
+        scope_qualification.verify(observation.data, budget=budget)
         location["verified_sha256"] = expected_sha256
         return "", expected_sha256
     stop = budget.take_candidate()
@@ -377,13 +388,13 @@ def _read_verified_bytes(
     budget: _ReadBudget | None,
     retain_bytes: bool = True,
     expected_byte_size: int | None = None,
-) -> tuple[bytes | None, str, str, str]:
+) -> tuple[SourceByteObservation | None, str, str, str]:
     """B03 rules R1-R4/R6: read once and verify the exact source version.
 
-    A streaming caller sets ``retain_bytes=False`` and receives ``None`` for
-    data on success; the empty status still distinguishes it from refusal.
+    A streaming caller sets ``retain_bytes=False`` and observes only digest
+    and size. The empty status distinguishes success from refusal.
     The same size, mtime, hydration, budget and digest checks serve both modes.
-    Returns ``(data, "", "", digest)`` on success, else
+    Returns ``(observation, "", "", digest)`` on success, else
     ``(None, status, reason, detail)``.  Every refusal happens BEFORE any byte
     is handed out, and none of them is a status value of its own (see the error
     model note above).
@@ -409,8 +420,7 @@ def _read_verified_bytes(
         stop = budget.take_candidate() or budget.charge(size)
         if stop:
             return None, B03_ERROR_UNAVAILABLE, stop, str(size)
-    digest = hashlib.sha256()
-    chunks: list[bytes] | None = [] if retain_bytes else None
+    verifier = SourceByteVerifier(retain_bytes=retain_bytes)
     read = 0
     try:
         with path.open("rb") as handle:
@@ -428,9 +438,7 @@ def _read_verified_bytes(
                 chunk = handle.read(min(_BYTE_READ_CHUNK, remaining + 1))
                 if not chunk:
                     break
-                digest.update(chunk)
-                if chunks is not None:
-                    chunks.append(chunk)
+                verifier.update(chunk)
                 previous_read = read
                 read += len(chunk)
                 if budget is not None:
@@ -469,11 +477,11 @@ def _read_verified_bytes(
         # of reporting a generic mismatch.  Integrity rests on the digest of the
         # buffer that is returned (B-VR03-06).
         return None, B03_ERROR_UNAVAILABLE, "changed_during_read", str(read)
-    computed = digest.hexdigest()
+    computed = verifier.hexdigest()
     if not expected_sha256 or computed != expected_sha256:
         # "Another revision" is not this version: no handle, no bytes.
         return None, B03_ERROR_UNAVAILABLE, "content_sha256_mismatch", computed[:12]
-    return (b"".join(chunks) if chunks is not None else None), "", "", computed
+    return verifier.observe(), "", "", computed
 
 
 def _is_rejections_path(relative_path: Any) -> bool:
@@ -483,7 +491,7 @@ def _is_rejections_path(relative_path: Any) -> bool:
     return ".rejections" in str(relative_path).replace("\\", "/").split("/")
 
 
-def _candidate_reason(location: dict[str, Any]) -> str:
+def _candidate_reason(location: Mapping[str, Any]) -> str:
     """Name the copy AND its source group: a bare rank is ambiguous when a
     document carries more than one source entry (B-VR02-05)."""
     source = str(location.get("source_id") or "")
@@ -1183,65 +1191,6 @@ def _provider_identity(
     return provider, preferred, identities
 
 
-# Sentinel issuer: a token shared by more than one issuer never anchors.
-_AMBIGUOUS_ISSUER = ""
-
-
-@lru_cache(maxsize=8)
-def _load_issuer_index(
-    catalog_dir: str,
-) -> tuple[dict[str, str], dict[str, frozenset[str]]]:
-    """Build a ticker/alias -> issuer (canonical-name) index from security_master.
-
-    Phase 18.1: dual-class tickers (GOOGL/GOOG) and same-issuer names share the
-    same canonical issuer, so a request by any one ticker can reuse documents
-    filed under the issuer name.  Returns ``(token_to_issuer, issuer_tokens)``:
-    every token of every record maps to its canonical issuer, and every issuer
-    maps to the full set of its tokens (all classes, aliases, tickers).  A
-    token shared by two different issuers maps to ``_AMBIGUOUS_ISSUER`` and
-    never anchors (fail-closed).
-    """
-    from .security_identity import _normalize_text
-
-    token_to_issuer: dict[str, str] = {}
-    issuer_tokens: dict[str, set[str]] = {}
-    root = Path(catalog_dir) / "security_master"
-    for market_file in ("cn", "hk", "us"):
-        path = root / f"{market_file}.json"
-        if not path.is_file():
-            continue
-        try:
-            payload = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
-            continue
-        for record in payload.get("records") or []:
-            canonical = str(record.get("canonical_name") or "").strip()
-            if not canonical:
-                continue
-            issuer = _normalize_text(
-                canonical
-            )  # Phase 14 R8: same normalization as the entity gate
-            tokens = {issuer}
-            for alias in record.get("aliases") or []:
-                alias_text = str(alias).strip()
-                if alias_text:
-                    tokens.add(_normalize_text(alias_text))
-            for key in ("ticker", "security_id", "canonical_name"):
-                value = str(record.get(key) or "").strip()
-                if value:
-                    tokens.add(_normalize_text(value))
-            issuer_tokens.setdefault(issuer, set()).update(tokens)
-            for token in tokens:
-                existing = token_to_issuer.get(token)
-                if existing is None:
-                    token_to_issuer[token] = issuer
-                elif existing != issuer:
-                    token_to_issuer[token] = _AMBIGUOUS_ISSUER
-    return token_to_issuer, {
-        issuer: frozenset(values) for issuer, values in issuer_tokens.items()
-    }
-
-
 def _has_source_entity_authority(metadata: dict[str, Any]) -> bool:
     """Known source identity or its explicit unknown supersedes directory hints."""
     evidence = metadata.get("evidence")
@@ -1288,6 +1237,23 @@ class SourceResolver:
             ) = resolver_visibility(runtime_policy)
 
     def resolve(self, request: SourceRequest) -> ResolutionResult:
+        """Compatibility resolution, including diagnostic claim fallback."""
+        return self._resolve(request)
+
+    def resolve_for_acquisition(
+        self, request: SourceRequest, *, reconcile_scope: bool = False,
+    ) -> tuple[ResolutionResult, FilingReuseObservation | None]:
+        """Select with strict source-owner verification in the same request."""
+        observations: dict[str, FilingReuseObservation] = {}
+        result = self._resolve(request, observations=observations, reconcile_scope=reconcile_scope)
+        if result.status in {ResolutionStatus.REUSED_EXACT, ResolutionStatus.REUSED_EQUIVALENT}:
+            return result, observations[result.matches[0].document_id]
+        return result, None
+
+    def _resolve(
+        self, request: SourceRequest, *, observations: dict[str, FilingReuseObservation] | None = None,
+        reconcile_scope: bool = False,
+    ) -> ResolutionResult:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
         semantic: list[SourceHandle] = []
@@ -1308,22 +1274,17 @@ class SourceResolver:
         # exported containment policy.  `None` keeps following the kind-level
         # `reusable_root_kinds` allowance.
         config = self.catalog.config
-        reusable_root_ids = frozenset(
-            root.root_id for root in config.roots if _effective_reusable(root, config)
-        )
-        # WU-3.2 (F-021/F-026): SQL-pushdown candidate lookup — the full-table
-        # Python scan is replaced by a kind/status-filtered, capped query.
-        # root_ids/entity/fiscal_year are deliberately NOT pushed to SQL: the
-        # per-document gates below (entity anchoring, identity conflict before
-        # the reusable-root check, the authoritative _fiscal_year which also
-        # derives years from titles for old sidecars, form/date) are the
-        # source of truth. A generous cap keeps an older-period request
-        # visible (production active annuals are ~38; 1000 covers title-derived
-        # mixed catalogs without materializing the full table).
-        candidates = self.catalog.query_filing_candidates(
-            document_kind=request.document_kind,
-            source_statuses=("active",),
-            limit=1000,
+        reusable_roots = {
+            root.root_id: root for root in config.roots if _effective_reusable(root, config)
+        }
+        # The identity projection supplies a candidate superset. Current
+        # metadata, period, publication and byte qualification remain here.
+        from .identity_candidates import iter_identity_filing_candidates
+
+        identity_tokens = self.issuer_identity_tokens(request.entity)
+        candidates = iter_identity_filing_candidates(
+            self.catalog, document_kind=request.document_kind,
+            identity_tokens=identity_tokens,
         )
         # B02 段 3 预算（v0.1.3）：有限资源 + 可取消，且计数留在证据里。
         # The ceilings are per request: begin_request() restarts the counters so
@@ -1334,6 +1295,9 @@ class SourceResolver:
         if not isinstance(budget, LocalReadBudget):
             budget.begin_request()
         from .metadata_observation import observe_metadata
+        from .source_reader import SourceVersionReader
+
+        verifier = SourceVersionReader(self.catalog) if observations is not None else None
 
         for document in candidates:
             document = observe_metadata(document.get("metadata")).project_document(document)
@@ -1346,7 +1310,8 @@ class SourceResolver:
                 active_cohorts=self.active_cohorts,
                 legacy_bridge_allowed=self.legacy_bridge_allowed,
             )
-            if not self._entity_matches(request.entity, document, metadata=metadata):
+            if not self._entity_matches(request.entity, document, metadata=metadata,
+                                        identity_tokens=identity_tokens):
                 entity_gate_rejected += 1
                 continue
             from .document_kinds import document_kind_matches
@@ -1429,24 +1394,51 @@ class SourceResolver:
                     trace.append(f"{document['title']}: no_canonical_active_location")
                 continue
             if not any(
-                item.get("root_id") in reusable_root_ids for item in canonical_locations
+                item.get("root_id") in reusable_roots for item in canonical_locations
             ):
                 # No canonical location under a reusable root kind: not a
                 # reusable source (add the root kind to
                 # `reusable_root_kinds` in source_catalog.yaml to reuse it).
                 trace.append(f"{document['title']}: no_reusable_root_location")
                 continue
-            from .assertion_service import source_scope_qualification
-            from .source_reader import SourceRef
-
             version = self.catalog.reader.exact_source_version(document["document_id"])
             if version is None:
                 trace.append(f"{document['title']}: no_source_version")
                 continue
             source_ref = SourceRef(version["document_id"], version["source_id"],
                 version["content_sha256"], version["byte_size"], version["mime_type"])
-            scope_qualification = source_scope_qualification(self.catalog, source_ref,
-                metadata={**metadata, "document_kind": document["document_kind"]}, request=request)
+            scoped_metadata = {**metadata, "document_kind": document["document_kind"]}
+            selected_copy: tuple[Mapping[str, Any] | None, str, tuple[str, ...]]
+            if verifier is None:
+                from .assertion_service import source_scope_qualification
+
+                scope_qualification = source_scope_qualification(
+                    self.catalog, source_ref, metadata=scoped_metadata, request=request,
+                )
+                selected_copy = self._select_candidate(
+                    document, budget=budget, reusable_roots=reusable_roots,
+                    scope_qualification=scope_qualification,
+                )
+            else:
+                if (source_ref.source_id, source_ref.content_sha256, source_ref.byte_size) != (
+                    document["source_id"], document["content_sha256"], document["byte_size"],
+                ):
+                    raise SourceReadError("unavailable", "source_ref_changed")
+                try:
+                    verified = verifier.verify_reusable_version(
+                        source_ref, request=request, metadata=scoped_metadata, budget=budget,
+                    )
+                except SourceReadError as exc:
+                    if exc.reason != "local_original_missing" and not (
+                        reconcile_scope and exc.reason == "primary_scope_conflict"
+                    ):
+                        raise
+                    selected_copy = (None, exc.reason, ())
+                else:
+                    location = verified.admitted_copy
+                    selected_copy = (location, _candidate_reason(location), ())
+                    assert observations is not None
+                    observations[source_ref.document_id] = verified
             selection = self._handle(
                 document,
                 metadata=metadata,
@@ -1456,9 +1448,8 @@ class SourceResolver:
                 language=language,
                 provider=provider,
                 provider_document_id=provider_document_id,
-                budget=budget,
-                reusable_root_ids=reusable_root_ids,
-                scope_qualification=scope_qualification,
+                selected_copy=selected_copy,
+                verified_ref=source_ref if verifier is not None else None,
             )
             handle = selection.handle
             availability = "verified" if selection.reason.startswith("verified_candidate_rank_") else (
@@ -1617,14 +1608,19 @@ class SourceResolver:
             return "conflict"
         return "match"
 
-    def _issuer_index(self) -> tuple[dict[str, str], dict[str, frozenset[str]]]:
+    def issuer_identity_tokens(self, entity: str) -> tuple[str, ...]:
+        """Observe one alias scope for both candidate discovery and qualification."""
+        from .security_identity import SecurityMasterStore, _normalize_text
+
         catalog_dir = getattr(self.catalog.config, "catalog_dir", None)
         if catalog_dir is None:
-            return {}, {}
-        return _load_issuer_index(str(catalog_dir))
+            wanted = _normalize_text(entity)
+            return (wanted,) if wanted else ()
+        return SecurityMasterStore(Path(catalog_dir) / "security_master").issuer_identity_tokens(entity)
 
     def _entity_matches(
         self, entity: str, document: dict[str, Any], *, metadata: dict[str, Any] | None = None,
+        identity_tokens: tuple[str, ...] | None = None,
     ) -> bool:
         # Phase 14 R8 fix: the entity gate must use the SAME canonical
         # normalization as the identity layer (NFKC + casefold + alnum-only —
@@ -1647,7 +1643,6 @@ class SourceResolver:
             identity_fields.add("company_name")
         if set(metadata.get("_conflicted_fields", ())) & identity_fields:
             return False
-        wanted = _normalize_text(entity)
         # Directory entities locate legacy originals. Once source facts identify
         # their issuer (including an explicit unknown), those hints cannot become
         # aliases for a different issuer. Both query and resolve pass this same
@@ -1672,25 +1667,16 @@ class SourceResolver:
             if value
         )
         doc_values.discard("")
-        if wanted in doc_values:
-            return True
-        # Phase 18.1: anchor a ticker request to its issuer (security_master
-        # canonical name) so dual-class tickers (GOOGL/GOOG) and issuer aliases
-        # match documents filed under the issuer name.  Market filtering stays
-        # strict in _identity_matches (18.0 decision 2); tokens shared by
-        # multiple issuers never anchor (fail-closed).
-        token_to_issuer, issuer_tokens = self._issuer_index()
-        issuer = token_to_issuer.get(wanted)
-        if not issuer:
-            return False
-        return bool(issuer_tokens.get(issuer, frozenset()) & doc_values)
+        if identity_tokens is None:
+            identity_tokens = self.issuer_identity_tokens(entity)
+        return not doc_values.isdisjoint(identity_tokens)
 
     @staticmethod
     def _select_candidate(
         document: dict[str, Any],
         *,
         budget: _ReadBudget,
-        reusable_root_ids: frozenset[str] = frozenset(),
+        reusable_roots: Mapping[str, RootSpec],
         scope_qualification=None,
     ) -> tuple[dict[str, Any] | None, str, tuple[str, ...]]:
         """B02 段 3/4 — walk the ordered qualified candidates of the REQUESTED
@@ -1739,7 +1725,7 @@ class SourceResolver:
             # filtering", or a future direct caller would silently get the
             # fail-open behaviour back.  `resolve` guarantees a non-empty set
             # here — its document gate rejects every candidate otherwise.
-            and str(item.get("root_id") or "") in reusable_root_ids
+            and str(item.get("root_id") or "") in reusable_roots
             and (
                 not own_source_id
                 or str(item.get("source_id") or "") == own_source_id
@@ -1773,7 +1759,14 @@ class SourceResolver:
         stop_status = ""
         claimed_fallback: dict[str, Any] | None = None
         claimed_fallback_status = ""
-        for location in ordered:
+        for registered in ordered:
+            root = reusable_roots[registered["root_id"]]
+            try:
+                resolved = resolve_source_location(root, registered["relative_path"])
+            except SourceLocationError as exc:
+                tried.append(f"{registered['location_id']}:{exc.reason}")
+                continue
+            location = {**registered, "absolute_path": str(resolved)}
             probe_status, _probe_detail, size = _local_copy_probe(location)
             if probe_status:
                 tried.append(f"{location['location_id']}:{probe_status}")
@@ -1795,7 +1788,7 @@ class SourceResolver:
             tried.append(
                 f"{location['location_id']}:{status}" + (f":{detail}" if detail else "")
             )
-            if location is pre_b02_canonical:
+            if registered is pre_b02_canonical:
                 # Remember it; a later VERIFIED copy still wins (rule 1).  The
                 # reason reports why THIS row failed, not why the walk stopped
                 # (B-VR02R3-06).
@@ -1829,18 +1822,10 @@ class SourceResolver:
         language: str | None,
         provider: str | None,
         provider_document_id: str | None,
-        budget: _ReadBudget,
-        reusable_root_ids: frozenset[str] = frozenset(),
-        scope_qualification=None,
+        selected_copy: tuple[Mapping[str, Any] | None, str, tuple[str, ...]],
+        verified_ref: SourceRef | None = None,
     ) -> _Selection:
-        # B02: qualification (segments 1-3) is decided on the ordered
-        # candidate list; the pre-B02 code took the elected canonical and
-        # returned None when that single path was unreadable, so an
-        # equivalent copy could not take over.
-        canonical, selection_reason, tried = SourceResolver._select_candidate(
-            document, budget=budget, reusable_root_ids=reusable_root_ids,
-            scope_qualification=scope_qualification,
-        )
+        canonical, selection_reason, tried = selected_copy
         if canonical is None:
             return _Selection(None, selection_reason, tried)
         # B.VR-ba1 F-BA1-06: this guard caught only JSONDecodeError, so a DEEPLY NESTED value
@@ -1904,8 +1889,10 @@ class SourceResolver:
             canonical_path=canonical["absolute_path"],
             content_sha256=content_sha256,
             snapshot_sha256=content_sha256,
-            mime_type=str(manifest.get("mime_type") or "application/octet-stream"),
-            byte_size=int(manifest.get("byte_size") or canonical["observed_size"] or 0),
+            mime_type=(verified_ref.mime_type if verified_ref is not None
+                       else str(manifest.get("mime_type") or "application/octet-stream")),
+            byte_size=(verified_ref.byte_size if verified_ref is not None
+                       else int(manifest.get("byte_size") or canonical["observed_size"] or 0)),
             retrieved_at=retrieved_at,
             collector_name=collector_name,
             collector_version=collector_version,
@@ -2093,9 +2080,10 @@ class SourceResolver:
                 bytes_source=B03_BYTES_SOURCE_NONE,
                 read_at=read_at,
             )
-        data, status, reason, detail = _read_verified_bytes(
+        observation, status, reason, detail = _read_verified_bytes(
             resolved, expected_sha256=expected, budget=budget
         )
+        data = observation.data if observation is not None else None
         return ByteReadResult(
             document_id=handle.document_id,
             content_sha256=expected,

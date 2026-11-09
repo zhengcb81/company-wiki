@@ -18,6 +18,22 @@ import yaml
 DEFAULT_DOCUMENT_WORK_LIMIT = 16_000_000
 BUDGET_POLICY_SCHEMA = "company-wiki-budget-policy/1"
 
+__all__ = [
+    "BudgetPolicy",
+    "WorkBudget",
+    "WorkBudgetExceeded",
+    "budget_algorithm_sha256",
+    "budget_policy_path",
+    "load_budget_policy",
+    "new_document_work_budget",
+]
+
+
+def budget_algorithm_sha256() -> str:
+    from company_wiki.implementation_identity import code_sha256
+
+    return code_sha256(__file__)
+
 
 @dataclass(frozen=True)
 class BudgetPolicy:

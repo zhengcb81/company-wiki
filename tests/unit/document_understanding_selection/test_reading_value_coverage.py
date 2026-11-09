@@ -240,16 +240,16 @@ def test_qualified_operating_table_preserves_numeric_cells_and_their_context():
 
 
 def test_current_budget_version_is_an_actual_inventory_dependency(monkeypatch):
-    from company_wiki.document_understanding.decision_inventory import _versions
+    from company_wiki.source_catalog.narrative_decision_inventory import decision_versions
 
-    assert _versions()["budget"] == budget.READING_BUDGET_POLICY == "reading_plan/3"
+    assert decision_versions()["budget"] == budget.READING_BUDGET_POLICY == "reading_plan/3"
     monkeypatch.setattr(budget, "READING_BUDGET_POLICY", "reading_plan/future")
-    assert _versions()["budget"] == "reading_plan/future"
+    assert decision_versions()["budget"] == "reading_plan/future"
 
 
 def carrier_trace(mime, *, actual_frontend=True):
     from company_wiki.document_understanding import understand_units
-    from company_wiki.document_understanding.decision_inventory import build_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import build_decision_trace
 
     source = source_id_for_sha256("d" * 64)
     unit = _make_unit(source_id=source, parser_version="1.0.0", metadata={},
@@ -266,7 +266,7 @@ def carrier_trace(mime, *, actual_frontend=True):
 
 
 def test_pdf_frontend_version_only_invalidates_actual_pdf_carriers(monkeypatch):
-    from company_wiki.document_understanding.decision_inventory import current_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import current_decision_trace
     from company_wiki.source_catalog import narrative_pdf_layout as frontend
 
     pdf = carrier_trace("application/pdf")
@@ -280,7 +280,7 @@ def test_pdf_frontend_version_only_invalidates_actual_pdf_carriers(monkeypatch):
 
 
 def test_missing_actual_carrier_proof_cannot_recover_a_complete_pdf_dependency():
-    from company_wiki.document_understanding.decision_inventory import current_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import current_decision_trace
 
     frozen = carrier_trace("application/pdf")
     frozen["components"] = [item for item in frozen["components"] if not item["component_id"].startswith("carrier|")]
@@ -288,7 +288,7 @@ def test_missing_actual_carrier_proof_cannot_recover_a_complete_pdf_dependency()
 
 
 def test_conflicting_carrier_proofs_are_partial_instead_of_guessing_from_source_name():
-    from company_wiki.document_understanding.decision_inventory import current_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import current_decision_trace
 
     pdf = carrier_trace("application/pdf")
     html = carrier_trace("text/html")
@@ -297,7 +297,7 @@ def test_conflicting_carrier_proofs_are_partial_instead_of_guessing_from_source_
 
 
 def test_actual_pdf_projection_version_only_invalidates_its_used_pdf_scope(monkeypatch):
-    from company_wiki.document_understanding.decision_inventory import current_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import current_decision_trace
     from company_wiki.document_normalization import layout_snapshots
 
     pdf = carrier_trace("application/pdf")
@@ -316,7 +316,7 @@ def test_pdf_mime_alone_does_not_prove_the_native_frontend_was_used():
 
 
 def test_missing_frozen_actual_frontend_proof_is_partial():
-    from company_wiki.document_understanding.decision_inventory import current_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import current_decision_trace
 
     frozen = carrier_trace("application/pdf")
     frozen["components"] = [item for item in frozen["components"] if not item["component_id"].startswith("pdf-frontend-used|")]
@@ -325,20 +325,17 @@ def test_missing_frozen_actual_frontend_proof_is_partial():
 
 @pytest.mark.parametrize("missing", ["module", "version"])
 def test_missing_pure_projection_component_cannot_claim_complete_pdf(monkeypatch, missing):
-    from importlib import import_module
+    import sys
+    from company_wiki.document_normalization import layout_snapshots
     from company_wiki.source_catalog import narrative_decision_inventory as inventory_owner
 
     pdf = carrier_trace("application/pdf")
     html = carrier_trace("text/html")
 
-    def actual_import(name):
-        if name == "company_wiki.document_normalization.layout_snapshots":
-            if missing == "module":
-                raise ModuleNotFoundError("Missing geometry component", name=name)
-            return SimpleNamespace()
-        return import_module(name)
-
-    monkeypatch.setattr(inventory_owner, "import_module", actual_import)
+    if missing == "module":
+        monkeypatch.setitem(sys.modules, layout_snapshots.__name__, None)
+    else:
+        monkeypatch.delattr(layout_snapshots, "FEATURE_VERSION")
     assert inventory_owner.current_decision_trace(pdf)["inventory_complete"] is False
     assert inventory_owner.current_decision_trace(html) == html
 

@@ -6,9 +6,8 @@ from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import hashlib
-import json
 import sqlite3
-from typing import Any
+from typing import Any, Protocol
 
 from company_wiki.narrative_subject import NarrativeSubject, NarrativeSubjectRef
 from company_wiki.source_catalog.official_json_projection import ProjectionError
@@ -22,10 +21,13 @@ from company_wiki.source_catalog.narrative_artifact_store import (
     NarrativeObjectIntegrityError,
     NarrativeSourceNotCurrentError,
 )
+from company_wiki.source_catalog.narrative_bundle_reader import (
+    NarrativeProjectionError, decode_stored_narrative_bundle,
+)
 from company_wiki.source_catalog.source_reader import (
     SourceReadError,
     SourceRef,
-    SourceVersionReader,
+    VerifiedContent,
 )
 from company_wiki.source_catalog.reader import CatalogReaderUnavailable
 from company_wiki.source_catalog.narrative_normalization import (
@@ -33,22 +35,21 @@ from company_wiki.source_catalog.narrative_normalization import (
     PPTX_MIME,
 )
 from company_wiki.source_catalog.qualification import qualify_source
-from company_wiki.source_catalog.source_availability import verified_availability_evidence
 
-from .models import canonical_json, require_canonical_json
+from .models import canonical_json
 from .narrative_contracts import (
     NarrativeBundle,
     NarrativeContractError,
     SourceRefValue,
     assert_no_physical_paths,
 )
-from .narrative_official_json import (
+from company_wiki.source_catalog.narrative_official_json import (
     OfficialProjectionAdapterError,
     VerifiedProjectionView,
 )
-from .narrative_replay import (
+from company_wiki.source_catalog.narrative_material_replay import (
     NarrativeReplayError,
-    replay_narrative_evidence,
+    replay_verified_narrative_evidence,
     replay_verified_projection,
 )
 from .narrative_transport_contracts import (
@@ -70,6 +71,16 @@ from .narrative_transport_contracts import (
 class NarrativeTransportRead:
     data: bytes
     receipt: dict[str, Any]
+
+
+class NarrativeTransportSource(Protocol):
+    def query_ref(self, document_id: str, source_id: str, expected_sha256: str) -> SourceRef: ...
+
+    def open_described_version(self, ref: SourceRef, *, purpose: str) -> tuple[
+        VerifiedContent, dict[str, str | int | None],
+    ]: ...
+
+    def availability_evidence(self, ref: SourceRef) -> dict[str, str] | None: ...
 
 
 def _artifact_error(error: NarrativeArtifactError) -> NarrativeTransportError:
@@ -135,18 +146,10 @@ def _bound_bundle(
     reference: NarrativeRef,
     *, subject: NarrativeSubject | None = None,
 ) -> NarrativeBundle:
-    if (
-        version.content_sha256 != reference.artifact_sha256
-        or version.byte_size != reference.byte_size
-        or len(data) != reference.byte_size
-        or hashlib.sha256(data).hexdigest() != reference.artifact_sha256
-    ):
-        raise NarrativeTransportError("unavailable", "artifact_reference_mismatch")
+    # The artifact port has checked the pinned version, size and actual bytes.
     try:
-        text = data.decode("utf-8", errors="strict")
-        require_canonical_json(text)
-        bundle = NarrativeBundle.from_dict(json.loads(text))
-    except (UnicodeDecodeError, TypeError, ValueError) as exc:
+        bundle = decode_stored_narrative_bundle(data)
+    except NarrativeProjectionError as exc:
         raise NarrativeTransportError(
             "unavailable", "narrative_bundle_invalid"
         ) from exc
@@ -165,7 +168,7 @@ class NarrativeTransportReader:
     def __init__(
         self,
         artifacts: NarrativeArtifactStore | NarrativeArtifactReader,
-        reader: SourceVersionReader,
+        reader: NarrativeTransportSource,
         *,
         normalization: NarrativeNormalization | None = None,
         projection_loader: Callable[[NarrativeSubject], VerifiedProjectionView]
@@ -357,14 +360,14 @@ class NarrativeTransportReader:
         )
         # This owner inspects bounded provenance for the already verified ref;
         # it neither reopens raw bytes nor creates a new availability observation.
-        availability = verified_availability_evidence(self._reader.catalog, current)
+        availability = self._reader.availability_evidence(current)
         _require_manifest(manifest, request, bundle, availability_evidence=availability)
         normalization = self._normalization or NarrativeNormalization.from_reader(
             self._reader,
             enabled=source.mime_type == PPTX_MIME and bundle.versions.parser == "2.0.0",
         )
-        locator_count = replay_narrative_evidence(
-            opened.data, bundle, normalization=normalization
+        locator_count = replay_verified_narrative_evidence(
+            opened, bundle, normalization=normalization
         )
         receipt = {
             "schema_version": NARRATIVE_READ_RECEIPT_SCHEMA,
@@ -459,3 +462,8 @@ class NarrativeTransportReader:
         }
         assert_no_physical_paths(receipt)
         return NarrativeTransportRead(data=data, receipt=receipt)
+
+__all__ = [
+    'NarrativeTransportSource',
+    'NarrativeTransportReader',
+]

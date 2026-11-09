@@ -138,7 +138,10 @@ def test_actual_finished_06_history_readonly_and_new07_cannot_reuse_old_generati
                 assert find_reuse_pin(artifacts, state.reader, payload[0], new_manifest, facts[0]) is None
             finally:
                 artifacts.close()
-            # A nonterminal old run must still fail typed instead of silently restarting.
+            # A changed default leaves an installed old selector usable. To
+            # test an unavailable unfinished run, simulate an actual retirement.
+            monkeypatch.setattr(policy, "SUPPORTED_NARRATIVE_SELECTOR_VERSIONS",
+                                policy.SUPPORTED_NARRATIVE_SELECTOR_VERSIONS - {"0.6.0"})
             from contextlib import closing
             import sqlite3
             with closing(sqlite3.connect(root/"automation.db")) as conn, conn:

@@ -445,3 +445,7 @@ def bind_reading_plan(
     return {"schema_version": "du-reading-plan/1", "structure": bound,
             "unit_profiles": unit_profiles, "diagnostics": diagnostics,
             "used_profiles": used_profiles, "policy_components": _unique(components)}
+
+__all__ = [
+    'STRATEGY_BINDING_VERSION',
+]

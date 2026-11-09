@@ -299,4 +299,8 @@ def prepare_geometry_reading(units, *, context: PdfReadingContext, source_id: st
             "request_digest": digest, "route": route, "partial": partial or plan["summary"]["partial"]}
 
 
-__all__ = ["PdfReadingContext", "prepare_geometry_reading"]
+__all__ = [
+    'PdfReadingContext',
+    'prepare_geometry_reading',
+    'BRIDGE_VERSION',
+]

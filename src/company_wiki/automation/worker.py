@@ -11,7 +11,7 @@ import hashlib
 from datetime import datetime, timedelta, timezone
 from typing import Callable, Protocol
 
-from company_wiki._id_scope import normalize_id_scope
+from company_wiki.id_scope import normalize_id_scope
 
 from ._clock import Clock, IDGenerator
 from .heartbeat import AttemptHeartbeat

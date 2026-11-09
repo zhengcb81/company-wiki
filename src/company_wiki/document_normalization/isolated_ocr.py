@@ -21,8 +21,8 @@ import tempfile
 import time
 from typing import Any, cast
 
-from company_wiki._bounded_process import _WINDOWS_BOOTSTRAP
-from company_wiki._process_tree import (
+from company_wiki.bounded_process import WINDOWS_WAIT_BOOTSTRAP
+from company_wiki.process_tree import (
     WindowsJob,
     assign_windows_job,
     kill_owned_group,
@@ -360,7 +360,7 @@ class IsolatedOCRAdapter:
             env["PYTHONUTF8"] = "1"
             windows = os.name == "nt"
             argv = (
-                [sys.executable, "-B", "-S", "-c", _WINDOWS_BOOTSTRAP, *command]
+                [sys.executable, "-B", "-S", "-c", WINDOWS_WAIT_BOOTSTRAP, *command]
                 if windows
                 else [sys.executable, "-B", "-S", "-c", _POSIX_BOOTSTRAP, *command]
             )
@@ -514,3 +514,7 @@ class IsolatedOCRAdapter:
             self.close()
         except Exception:
             pass  # OS job / separate guardian, not destructor, owns crash cleanup
+
+__all__ = [
+    'IsolatedOCRAdapter',
+]

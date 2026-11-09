@@ -39,7 +39,7 @@ def test_current_consumer_uses_publication_date_not_local_download_date(
     }}) as fixture:
         env = {**os.environ, 'PYTHONPATH':os.pathsep.join([str(REPO/'src'), sw]),
                'PYTHONUTF8':'1', 'PYTHONDONTWRITEBYTECODE':'1', 'PYTHON_DOTENV_DISABLED':'1'}
-        command = [sys.executable, '-B', '-m', 'company_wiki.source_catalog.narrative_transport_cli',
+        command = [sys.executable, '-B', '-m', 'company_wiki.automation.narrative_transport_cli',
                    '--config', str(fixture.config_path)]
 
         def invoke(argv, request):

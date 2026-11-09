@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from dataclasses import replace
-from company_wiki.document_normalization.text_matching import matching_script_text
+from company_wiki.document_model.text_matching import matching_script_text
 
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeUnit

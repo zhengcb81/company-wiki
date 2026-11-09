@@ -27,3 +27,7 @@ def terminal_punctuation(text: str) -> str | None:
 def ends_complete_sentence(text: str) -> bool:
     """Whether the supplied text ends at an observed hard sentence boundary."""
     return terminal_punctuation(text) is not None
+
+__all__ = [
+    'ends_complete_sentence',
+]

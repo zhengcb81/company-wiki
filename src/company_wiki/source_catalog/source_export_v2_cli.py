@@ -6,11 +6,12 @@ import argparse
 import json
 import sqlite3
 import sys
-from dataclasses import fields
 from pathlib import Path
 from typing import Any, NoReturn, Sequence
 
 from company_wiki.source_contract import EvidenceSpan, SourceExportBundleV2
+from company_wiki.source_contract.source_version import SourceRefMismatchError
+from company_wiki.wire_json import parse_json
 
 from .config import CatalogConfigError, load_catalog_config
 from .reader import CatalogReaderUnavailable
@@ -23,9 +24,7 @@ from .source_reader import (
 )
 
 
-_MAX_REQUEST_BYTES = 16 * 1024 * 1024
 _REQUEST_FIELDS = frozenset({"schema_version", "source_refs", "evidence_spans"})
-_REF_FIELDS = frozenset(field.name for field in fields(SourceRef))
 
 
 class _JsonArgumentParser(argparse.ArgumentParser):
@@ -33,18 +32,9 @@ class _JsonArgumentParser(argparse.ArgumentParser):
         raise ValueError(message)
 
 
-def _unique_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise ValueError("duplicate JSON key")
-        result[key] = value
-    return result
-
-
 def _read_request() -> tuple[tuple[SourceRef, ...], tuple[EvidenceSpan, ...]]:
     raw = sys.stdin.buffer.read()
-    request = json.loads(raw.decode("utf-8"), object_pairs_hook=_unique_pairs)
+    request = parse_json(raw.decode("utf-8"))
     if not isinstance(request, dict) or set(request) != _REQUEST_FIELDS:
         raise ValueError("request fields are not exact")
     if request["schema_version"] != SOURCE_REF_SCHEMA_VERSION:
@@ -53,10 +43,7 @@ def _read_request() -> tuple[tuple[SourceRef, ...], tuple[EvidenceSpan, ...]]:
     raw_spans = request["evidence_spans"]
     if not isinstance(raw_refs, list) or not isinstance(raw_spans, list):
         raise ValueError("source_refs and evidence_spans must be arrays")
-    if any(not isinstance(item, dict) or set(item) != _REF_FIELDS
-           for item in raw_refs):
-        raise ValueError("source ref fields are not exact")
-    refs = tuple(SourceRef(**item) for item in raw_refs)
+    refs = tuple(SourceRef.from_dict(item) for item in raw_refs)
     spans = tuple(EvidenceSpan.from_dict(item) for item in raw_spans)
     return refs, spans
 
@@ -103,6 +90,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     except SourceReadError as exc:
         _emit_error(exc.status, exc.reason)
+        return 2
+    except SourceRefMismatchError:
+        _emit_error("unavailable", "expected_version_mismatch")
         return 2
     except (CatalogConfigError, CatalogReaderUnavailable, OSError, sqlite3.Error):
         _emit_error("unavailable", "export_unavailable")

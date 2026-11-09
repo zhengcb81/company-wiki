@@ -132,7 +132,7 @@ def test_partial_model_summary_configured_cli_public_views_and_committed_rf(
             source_ref = {"schema_version": ref.schema_version, "document_id": ref.document_id,
                           "source_id": ref.source_id, "content_sha256": ref.content_sha256,
                           "byte_size": ref.byte_size, "mime_type": ref.mime_type}
-            transport = [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli",
+            transport = [sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli",
                          "--config", str(state.config_path)]
             direct_reference = json.loads(invoke(transport + ["--operation", "reference"],
                                                 {"schema_version": "narrative-reference-request/1",
@@ -566,6 +566,8 @@ def test_cli_refuses_model_work_without_http_or_overwriting_originals(tmp_path_f
             elif failure == "tiny-storage-cap":
                 request = json.loads(state.request_path.read_text(encoding="utf-8"))
                 request["max_persistent_bytes"] = 4096
+                request["selector_version"] = "0.9.0"
+                request["reading_model_projection"] = "reading-model-input/6"
                 state.request_path.write_text(json.dumps(request), encoding="utf-8")
             originals = _originals(state)
             process, result = _invoke(state)
@@ -582,7 +584,9 @@ def test_cli_refuses_model_work_without_http_or_overwriting_originals(tmp_path_f
             if run_store.get_run("cli-e2e") is not None:
                 assert run_store.reservations_for_run("cli-e2e") == ()
             if failure == "tiny-storage-cap":
-                assert {job.job_id for job in state.store.list_jobs()} == {job.job_id for job in state.outside}
+                assert result["storage"]["persistent_added_bytes"] <= 4096
+                assert any(job.last_error_code == "PERSISTENT_BYTES_EXCEEDED"
+                           for job in state.store.list_jobs())
             assert state.store.list_outbox_entries(status="pending") == ()
             assert_originals_and_foreign_jobs_untouched(state, originals, output=process.stdout + process.stderr)
         finally:

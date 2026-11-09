@@ -130,6 +130,19 @@ def test_hyperlink_label_retained_external_relationship_never_executed(monkeypat
     assert "https://" not in repr(doc.metadata)
 
 
+def test_unreadable_relationship_diagnostics_do_not_refuse_verified_body():
+    malformed_part = "word/_rels/document.xml.rels"
+    data = package(para("海外新产品认证已完成"), {malformed_part: b"<broken"})
+    doc = norm(data)
+    assert [unit.raw_text for unit in doc.units] == ["海外新产品认证已完成"]
+    assert doc.structure.coverage_complete
+    assert doc.metadata["external_relationship_count"] is None
+    assert doc.metadata["unreadable_relationship_parts"] == (malformed_part,)
+    assert replay_units(
+        data, source_sha256=doc.source_sha256, units=doc.units, limits=NormalizationLimits()
+    ) == ("海外新产品认证已完成",)
+
+
 def test_tracked_deleted_text_excluded_and_current_insertions_diagnosed():
     data = package(
         "<w:p><w:r><w:t>新产品</w:t></w:r><w:del><w:r><w:delText>已经投产</w:delText></w:r></w:del><w:ins><w:r><w:t>仍在客户认证中</w:t></w:r></w:ins></w:p>"
@@ -213,7 +226,7 @@ def test_replay_rejects_changed_source_and_forged_coordinates():
 
 def test_native_language_sampling_and_generation_dispatch():
     from company_wiki.source_catalog.narrative_language import detect_narrative_language
-    from company_wiki.automation.narrative_formats import (
+    from company_wiki.source_catalog.narrative_formats import (
         parser_component,
         source_class_for,
     )

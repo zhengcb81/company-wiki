@@ -9,6 +9,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tomllib
+import unicodedata
 
 import pytest
 
@@ -139,6 +140,113 @@ def test_bundle_builds_content_addressed_canonical_identity(tmp_path):
         "urn:company-wiki:source-export:sha256:" + bundle.bundle_sha256
     )
     assert json.loads(bundle.canonical_json()) == bundle.to_dict()
+
+
+def test_cli_preserves_unicode_line_separator_inside_jsonl_record(tmp_path):
+    module = _contract()
+    root = tmp_path / "repo"
+    quote = "业务开始\u2028订单增长"
+    _, manifest, span = _record_pair(module, root, "report", quote, "SSE:688012")
+    manifests, spans = tmp_path / "manifests.jsonl", tmp_path / "spans.jsonl"
+    _write_jsonl(manifests, [manifest.to_dict()])
+    _write_jsonl(spans, [span.to_dict()])
+    assert "\u2028" in spans.read_text(encoding="utf-8")
+
+    result = _run_cli(tmp_path / "caller", "export", "--root", str(root),
+                      "--manifests", str(manifests), "--spans", str(spans))
+
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout)["evidence_spans"][0]["raw_text"] == quote
+
+
+@pytest.mark.parametrize("legacy", (False, True), ids=("new-exact", "old-nfc"))
+def test_v1_cli_replays_nested_unicode_path_and_round_trips_the_same_wire(tmp_path, legacy):
+    module = _contract()
+    root = tmp_path / "repo"
+    source, observed, span = _record_pair(
+        module, root, "Cafe\u0301/Re\u0301sume\u0301", "订单增长", "SSE:688012",
+    )
+    raw_path = source.relative_to(root).as_posix()
+    stored_path = unicodedata.normalize("NFC", raw_path) if legacy else raw_path
+    manifest = {**observed.to_dict(), "original_path": stored_path}
+    payload = {
+        "schema_version": "1.0.0",
+        "source_manifest_schema_version": "1.0.0",
+        "evidence_span_schema_version": "1.0.0",
+        "counts": {"source_manifests": 1, "evidence_spans": 1},
+        "manifests": [manifest],
+        "evidence_spans": [span.to_dict()],
+    }
+    digest = _canonical_hash(payload)
+    wire = {
+        **payload, "bundle_sha256": digest,
+        "export_id": "urn:company-wiki:source-export:sha256:" + digest,
+    }
+    if legacy:
+        option, fixture = "--base", tmp_path / "frozen-v1.json"
+        expected = json.dumps(wire, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        fixture.write_text(expected + "\n", encoding="utf-8")
+        args = (option, str(fixture))
+    else:
+        manifests, spans = tmp_path / "manifests.jsonl", tmp_path / "spans.jsonl"
+        assert observed.original_path == raw_path
+        _write_jsonl(manifests, [observed.to_dict()])
+        _write_jsonl(spans, [span.to_dict()])
+        args = ("--manifests", str(manifests), "--spans", str(spans))
+
+    before = _tree_snapshot(root)
+    result = _run_cli(tmp_path / "caller", "export", "--root", str(root), *args)
+
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout) == wire
+    if legacy:
+        assert result.stdout == expected + "\n"
+    consumer = module.SourceExportBundle.from_dict(json.loads(result.stdout))
+    consumer.verify_sources(root=root)
+    consumer.manifests[0].verify_file(root=root, file_path=source)
+    assert consumer.bundle_sha256 == digest
+    assert consumer.manifests[0].source_id == observed.source_id
+    assert _tree_snapshot(root) == before
+    if legacy:
+        _, added_manifest, added_span = _record_pair(
+            module, root, "Cafe\u0301/new-document", "新业务", "SSE:688012",
+        )
+        incremental = module.SourceExportBundle.build(
+            root=root, base=consumer, manifests=(added_manifest,), evidence_spans=(added_span,),
+        )
+        assert {item.source_id: item.original_path for item in incremental.manifests} == {
+            observed.source_id: stored_path,
+            added_manifest.source_id: added_manifest.original_path,
+        }
+        source.write_bytes(b"X" * observed.byte_size)
+        with pytest.raises(module.SourceManifestMismatchError, match="SHA-256"):
+            consumer.verify_sources(root=root)
+        rejected = _run_cli(tmp_path / "caller", "export", "--root", str(root), *args)
+        assert rejected.returncode == 2
+        assert "SHA-256" in rejected.stderr
+        assert rejected.stdout == ""
+
+
+@pytest.mark.parametrize("input_kind", ("manifest", "base"))
+def test_cli_rejects_duplicate_json_keys_even_when_last_value_is_valid(tmp_path, input_kind):
+    module = _contract()
+    root = tmp_path / "repo"
+    _, manifest, span = _record_pair(module, root, "report", "订单增长", "SSE:688012")
+    fixture = tmp_path / "input.json"
+    if input_kind == "manifest":
+        text = manifest.canonical_json()
+        option = "--manifests"
+    else:
+        text = module.SourceExportBundle.build(
+            root=root, manifests=(manifest,), evidence_spans=(span,),
+        ).canonical_json()
+        option = "--base"
+    fixture.write_text('{"schema_version":"wrong",' + text[1:] + "\n", encoding="utf-8")
+
+    result = _run_cli(tmp_path / "caller", "export", "--root", str(root), option, str(fixture))
+
+    assert result.returncode == 2, result.stdout
+    assert "duplicate JSON key" in result.stderr
 
 
 def test_record_order_and_json_whitespace_do_not_change_export(tmp_path):

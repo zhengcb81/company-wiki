@@ -197,7 +197,7 @@ def test_transient_pdf_layout_reaches_the_existing_shared_engine_without_changin
 
 
 def test_outline_interpreter_version_is_an_actual_decision_dependency(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory, strategy_binding
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory, strategy_binding
 
     _, pipeline = _pipeline(["FORM 10-K", "PART I", "Item 1", "Our service charges depend on resources consumed."])
     frozen = decision_inventory.build_decision_trace(pipeline)

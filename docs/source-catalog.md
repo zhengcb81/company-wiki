@@ -23,6 +23,22 @@ company-wiki 保存来源身份、不可变原件 SHA-256、来源版本与位�
 | NarrativeRef / final 包 | 有限任务生成的精选片段和原语言来源摘要 |
 | legacy artifacts / spans | 旧生成记录已退休，全量span已清除；不重建整篇派生 |
 
+## 模块边界
+
+| 模块 | 负责的事 | 上层如何调用 |
+|---|---|---|
+| `source_contract` 与 `document_model` | 来源身份、定位、文本和表格结构值 | 导入公开类型和纯函数 |
+| `document_normalization` | 各载体的原文提取和定位回放 | 输入字节和来源身份，返回带定位的规范化单元 |
+| `document_understanding` | 根据观测到的结构执行阅读策略 | 输入规范化单元，返回阅读计划、候选证据和来源限定 |
+| `source_catalog` | 原件、发布包、存储实现、载体路由、引用复验和摘要质量 | 按来源 ID 使用读写能力，接收已验真的字节或版本化值 |
+| `automation` | 调度、并发、预算、模型调用和恢复 | 组合来源能力，按任务处理结果和重试 |
+
+规范化与理解通过共同的文档模型交换数据。理解层可以单独运行，来源目录也能独立读取和复验已发布的证据。存储层拥有数据库、对象布局和写入锁。读取端通过公开能力获取验真的包和来源信息。
+
+RF 等下游用版本化请求、引用和收据访问来源。既有命令和导入路径通过兼容入口转发到当前实现。摘要评估按记录的版本复验，旧的有效产物和待验证任务沿用各自的评估报告。
+
+边界测试检查依赖方向、私有成员访问和兼容入口，并在独立进程中屏蔽上层模块来执行真实读取。组合测试覆盖更换读取器、原文篡改、来源定位及缓存恢复。
+
 ## 常用来源命令
 
 以下命令使用同一配置入口。`scan --dry-run`、query、resolve 和原文读取可用于调查；明确下载请求还应提供公司、期间、as-of 及现有资源限制，详细参数以各命令 `--help` 为准。
@@ -65,13 +81,15 @@ python scripts/narrative_batch_configured.py --llm-provider mimo `
 ## 精确证据与质量读取
 
 ```powershell
-python -m company_wiki.source_catalog.narrative_transport_cli --config config/source_catalog.yaml --help
+python -m company_wiki.automation.narrative_transport_cli --config config/source_catalog.yaml --help
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml extraction-quality --help
 ```
 
 正式 `narrative_transport_cli` 使用已有NarrativeReadRequest从stdin读取，提供 `--operation evidence-list`、`evidence-lookup`、`evidence-search --query "海外"`。先验原件SHA并回放全部引用，再对固定NarrativeRef版本列片段、精确定位或用BM25搜索精选原文。lookup不做模糊匹配，list/search默认100、最多500，使用`--offset`分页；不建立磁盘全文索引。stdout是来源view，stderr小收据含该view SHA/size，消费者须验证。具体输入、输出、失败与示例边界见[精选检索v1](contracts/narrative-evidence-view-v1.md)。
 
 `extraction-quality` 是只读来源/解析质量接口（v2）：优先校验有界精选叙述包，迁移期间兼容未退休的旧提取记录；未请求或已退役为 `metadata_only`，策略跳过为 `skipped_no_narrative`。不返回正文、摘要、路径或投资判断，不打开旧 normalized 文件，不触发全文转换。`review_required` 只是技术诊断；实际消费仍通过正式 reader/transport 验原件SHA并回放引用。详细边界见[Extraction Quality v2](contracts/extraction-quality-v2.md)。
+
+解析后端的历史格式和逐页证据接口分别见[历史聚合 PDF 适配](contracts/pdf-extract-v3-adapter-v1.md)和[逐页 PDF 适配](contracts/pdf-page-aware-parser-v1.md)。
 
 ## 重复、指纹与维护
 

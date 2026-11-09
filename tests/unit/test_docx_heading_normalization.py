@@ -216,7 +216,7 @@ def test_explicit_legacy_is_exact_field_metadata_identity_and_replay_freeze():
 
 
 def test_default_and_saved_old_pins_have_separate_generation_and_replay_identity():
-    from company_wiki.automation.narrative_formats import parser_component
+    from company_wiki.source_catalog.narrative_formats import parser_component
     data = legacy_original()
     sha = hashlib.sha256(data).hexdigest()
     source_id = source_id_for_sha256(sha)

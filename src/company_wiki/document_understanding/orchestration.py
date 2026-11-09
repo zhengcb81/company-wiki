@@ -50,7 +50,7 @@ def build_dependency_packages(
     route: Mapping[str, Any] | None = None,
     profile: Mapping[str, Any] | None = None,
     max_packages: int | None = None,
-    max_members: int = 64,
+    max_members: int | None = None,
     unit_order: Mapping[str, int] | None = None,
     non_selectable_unit_ids: Sequence[str] = (),
     unit_reading_plan: Mapping[str, Mapping[str, Any]] | None = None,
@@ -69,6 +69,9 @@ def build_dependency_packages(
     document and drops the back. That is the same fixed-prefix failure this whole layer
     exists to remove, so a cap is only applied when a caller explicitly asks for one and
     it is always reported through ``PACKAGE_LIMIT_REACHED``.
+
+    ``max_members`` optionally limits extra members. Required context and
+    anchors stay together. A package is truncated only if a member is omitted.
 
     Ranking within a chapter prefers dependency-bearing kinds (a project, an operating
     table, a QA exchange) over free prose, because those are the units that carry the
@@ -96,11 +99,9 @@ def build_dependency_packages(
             # prose and no consumer would know it is dependency-bearing. Report
             # it rather than degrade in silence.
             unknown_kinds.append(kind)
-        required = [
-            unit_id
-            for unit_id in semantic.get("required_context_unit_ids", ())
-        ]
-        anchors = [unit_id for unit_id in semantic.get("anchor_unit_ids", ()) if unit_id in members]
+        required = list(semantic.get("required_context_unit_ids", ()))
+        member_ids = set(members)
+        anchors = [unit_id for unit_id in semantic.get("anchor_unit_ids", ()) if unit_id in member_ids]
         section_ids = [
             section_id
             for section_id in semantic.get("section_ids", ())
@@ -111,17 +112,16 @@ def build_dependency_packages(
         anchor_plan = next((reading[uid] for uid in anchors + members if uid in reading), {})
         if anchor_plan:
             role = str(anchor_plan.get("section_role") or role)
-        truncated = len(members) > max_members
-        if truncated:
-            # Never truncate below the required context; drop the tail instead
-            # and say so, so a package is never silently incomplete.
-            keep = list(dict.fromkeys(required + anchors))
+        truncated = False
+        if max_members is not None and len(members) > max_members:
+            keep = set(required) | set(anchors)
             for unit_id in members:
                 if len(keep) >= max_members:
                     break
-                if unit_id not in keep:
-                    keep.append(unit_id)
-            members = keep
+                keep.add(unit_id)
+            bounded_members = [unit_id for unit_id in members if unit_id in keep]
+            truncated = len(bounded_members) < len(members)
+            members = bounded_members
 
         order = unit_order or {}
         first_ordinal = min(

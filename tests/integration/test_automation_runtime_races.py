@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from functools import partial
 import hashlib
 import multiprocessing
 import os
@@ -10,6 +11,8 @@ import sys
 from threading import Barrier, Thread
 
 import pytest
+
+from company_wiki.source_catalog.lock import CatalogOperationLock
 
 
 NOW = "2026-09-28T12:00:00Z"
@@ -121,7 +124,7 @@ def test_pause_and_finish_have_one_linearized_outcome(tmp_path: Path) -> None:
     legacy = _Legacy()
     controller = AutomationWorkerController(
         store=store,
-        catalog_dir=tmp_path / "catalog",
+        operation_lock=partial(CatalogOperationLock, tmp_path / "catalog"),
         legacy_controller=legacy,
         timestamp=lambda: NOW,
     )
@@ -239,7 +242,7 @@ def test_pause_and_finish_linearize_across_spawned_processes(
     legacy = _Legacy()
     controller = AutomationWorkerController(
         store=store,
-        catalog_dir=tmp_path / f"catalog-r05-{run_number}",
+        operation_lock=partial(CatalogOperationLock, tmp_path / f"catalog-r05-{run_number}"),
         legacy_controller=legacy,
         timestamp=lambda: NOW,
     )
@@ -379,7 +382,7 @@ def test_automation_gate_can_pause_without_legacy_session_launcher(
     store = AutomationStore(tmp_path / "automation.db")
     controller = AutomationWorkerController(
         store=store,
-        catalog_dir=catalog_dir,
+        operation_lock=partial(CatalogOperationLock, catalog_dir),
         legacy_controller=legacy,
         timestamp=lambda: NOW,
     )

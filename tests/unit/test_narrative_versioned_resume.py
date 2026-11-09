@@ -146,7 +146,8 @@ def test_resume_observes_current_facts_without_rebinding_frozen_content(frozen_r
     before_jobs = store.list_jobs()
     before_budget = runs.budget_snapshot(run.run_id)
     binding, _versions, jobs = batch._resume_binding(
-        request, state.reader, store, runs, run, deadline=None)
+        request, state.reader, store, runs, run, deadline=None,
+        open_artifacts=state.catalog.open_narrative_artifact_reader)
     assert binding.input_hash == run.input_hash
     assert jobs == store.list_jobs(job_ids=run.job_ids)
     assert store.list_jobs() == before_jobs
@@ -179,7 +180,8 @@ def test_resume_rejects_changed_frozen_execution_membership(frozen_run, mutation
     finally:
         connection.close()
     with pytest.raises(batch.BatchResumeError, match="BATCH_FROZEN_MEMBERSHIP_INVALID"):
-        batch._resume_binding(request, state.reader, store, runs, run, deadline=None)
+        batch._resume_binding(request, state.reader, store, runs, run, deadline=None,
+                              open_artifacts=state.catalog.open_narrative_artifact_reader)
     assert all(store.list_attempts(job_id) == () for job_id in run.job_ids)
 
 
@@ -190,7 +192,8 @@ def test_resume_preserves_original_events_and_usage_for_both_binding_versions(fr
     original_events = {j.created_from_event_id: store.get_event(j.created_from_event_id)
                        for j in before_jobs}
     binding, _versions, jobs = batch._resume_binding(
-        request, state.reader, store, runs, run, deadline=None)
+        request, state.reader, store, runs, run, deadline=None,
+        open_artifacts=state.catalog.open_narrative_artifact_reader)
     assert binding.input_hash == run.input_hash
     assert jobs == store.list_jobs(job_ids=run.job_ids)
     assert all(event == original_events[event.event_id] for event in binding.events)
@@ -205,7 +208,8 @@ def test_unrelated_root_does_not_gate_either_frozen_binding_version(frozen_run):
     state.catalog.config = replace(state.catalog.config, roots=state.catalog.config.roots + (
         RootSpec("unrelated", state.root / "unrelated", "directory"),))
     binding, _versions, _jobs = batch._resume_binding(
-        request, state.reader, store, runs, run, deadline=None)
+        request, state.reader, store, runs, run, deadline=None,
+        open_artifacts=state.catalog.open_narrative_artifact_reader)
     assert binding.input_hash == run.input_hash
     assert runs.get_run(run.run_id) == run
     assert all(store.list_attempts(job_id) == () for job_id in run.job_ids)

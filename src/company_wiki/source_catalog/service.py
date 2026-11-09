@@ -2,16 +2,25 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 import csv
 import hashlib
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, Iterator
 
-from company_wiki._atomic_file import atomic_output
+from company_wiki.atomic_file import atomic_output
+from company_wiki.file_usage import database_file_sizes, file_tree_bytes
 
 from .models import CatalogConfig, ProcessingReport, ScanReport
 from .acquisition_journal import AcquisitionJournal
 from .lock import CatalogOperationLock
+from .narrative_artifact_store import (
+    LocalNarrativeObjectStore,
+    NarrativeArtifactReader,
+    NarrativeArtifactStore,
+    NarrativeObjectAccess,
+    NarrativeObjectWritePolicy,
+)
 from .normalizer import backfill_text_fingerprints
 from .scanner import R4_PROVENANCE_KEY, scan_catalog
 from .store import CatalogStore, metadata_object, metadata_state
@@ -141,6 +150,56 @@ class SourceCatalog:
             self._reader = ReadOnlyCatalogReader(self.config.database_path)
         return self._reader
 
+    def open_narrative_artifact_reader(self) -> NarrativeArtifactReader:
+        """Open a caller-owned read-only artifact session without initializing storage."""
+        return NarrativeArtifactStore.for_reading(
+            self.config.database_path, self._narrative_objects(),
+        )
+
+    def open_narrative_artifact_store(
+        self, *, write_policy: NarrativeObjectWritePolicy | None = None,
+    ) -> NarrativeArtifactStore:
+        """Open the artifact writer, optionally with caller-owned write accounting."""
+        return NarrativeArtifactStore(
+            self.store, self._narrative_objects(write_policy=write_policy),
+        )
+
+    def open_narrative_object_access(
+        self, *, write_policy: NarrativeObjectWritePolicy,
+    ) -> NarrativeObjectAccess:
+        """Open the paid-response byte port without initializing the catalog database."""
+        return NarrativeObjectAccess(self._narrative_objects(write_policy=write_policy))
+
+    def _narrative_objects(
+        self, *, write_policy: NarrativeObjectWritePolicy | None = None,
+    ) -> LocalNarrativeObjectStore:
+        return LocalNarrativeObjectStore(self.config.catalog_dir, write_policy=write_policy)
+
+    @contextmanager
+    def operation_lock(self, *, operation: str) -> Iterator[None]:
+        """Use the same catalog lock as source registration and publication."""
+        with CatalogOperationLock(self.config.catalog_dir, operation=operation):
+            yield
+
+    def narrative_database_sizes(self) -> tuple[int, int, int]:
+        """Read catalog SQLite/WAL/SHM sizes for legacy budget and diagnostics."""
+        return database_file_sizes(self.config.database_path)
+
+    def narrative_object_bytes(self) -> int:
+        """Read CAS bytes for frozen pre-ledger storage baselines."""
+        return file_tree_bytes(self.config.catalog_dir / "objects")
+
+    def legacy_narrative_generation_directory(self) -> Path:
+        """Keep the existing AUTO-owned recovery locator across upgrades."""
+        return self.config.catalog_dir / "narrative-generations"
+
+    def storage_is_within(self, directory: Path) -> bool:
+        """Check a work-directory ancestor without disclosing catalog or raw paths."""
+        directory = directory.resolve()
+        return any(path.resolve().is_relative_to(directory) for path in (
+            self.config.catalog_dir, *(root.path for root in self.config.roots),
+        ))
+
     def close(self) -> None:
         """Release the cached reader connection (ZR-203).  Callers that keep
         a SourceCatalog alive across temp-directory teardown (tests, runners)
@@ -245,16 +304,11 @@ class SourceCatalog:
     ) -> list[dict[str, Any]]:
         """WU-3.2: SQL-pushdown filing-candidate lookup (F-021/F-026).
 
-        Filters in SQL: document_kind, source_status allowlist, and (when
-        given) reusable root_ids via locations. ``entity`` is OPTIONAL and,
-        when given, narrows via exact document_entities/entities name match.
-        The resolver deliberately passes neither entity nor root_ids: its
-        per-document gates (entity anchoring, identity conflict before the
-        reusable-root check) are the authority, and a contradictory-identity
-        document must surface as IDENTITY_CONFLICT even when its root is not
-        reusable (fail-closed, Phase 15.3). This narrows the candidate set
-        from a full-table materialization to the kind/status slice while
-        keeping resolver semantics unchanged.
+        ``identity_tokens`` uses the source identity projection and supports
+        paging by document ID. It narrows to a superset, including dirty and
+        historical declarations. The resolver qualifies current identity,
+        period and location after lookup. The legacy ``entity`` filter uses
+        exact document-entity names and is useful for inventory queries.
         """
         if limit <= 0:
             raise ValueError("limit must be positive")

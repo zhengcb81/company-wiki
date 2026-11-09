@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-import math
 import re
 from typing import Any
 import unicodedata
@@ -16,6 +15,7 @@ from ..source_contract import (
     QualityFlag,
     SourceManifest,
 )
+from ._pdf_values import LOW_PAGE_QUALITY_THRESHOLD, paragraph_ranges, require_ratio
 
 
 PDF_EXTRACT_V3_PARSER_NAME = "legacy_pdf_extract_v3"
@@ -32,9 +32,7 @@ _EXPECTED_FIELDS = frozenset(
         "error",
     }
 )
-_BLANK_LINE_RE = re.compile(r"\n[ \t]*\n+")
 _TABLE_MARKER_RE = re.compile(r"\[TABLE [1-9]\d*\]")
-_LOW_QUALITY_THRESHOLD = 0.30
 
 
 class PDFExtractV3AdapterError(ValueError):
@@ -47,35 +45,6 @@ def _require_integer(value: Any, field_name: str, *, minimum: int) -> int:
     if value < minimum:
         raise PDFExtractV3AdapterError(f"{field_name} must be >= {minimum}")
     return value
-
-
-def _require_ratio(value: Any, field_name: str) -> float | int:
-    if isinstance(value, bool) or not isinstance(value, (float, int)):
-        raise PDFExtractV3AdapterError(f"{field_name} must be numeric")
-    if not math.isfinite(value) or not 0.0 <= value <= 1.0:
-        raise PDFExtractV3AdapterError(f"{field_name} must be finite in [0, 1]")
-    return value
-
-
-def _paragraph_ranges(text: str) -> tuple[tuple[int, int, str], ...]:
-    ranges: list[tuple[int, int, str]] = []
-    cursor = 0
-    segments: list[tuple[int, int]] = []
-    for separator in _BLANK_LINE_RE.finditer(text):
-        segments.append((cursor, separator.start()))
-        cursor = separator.end()
-    segments.append((cursor, len(text)))
-
-    for start, end in segments:
-        segment = text[start:end]
-        left_trimmed = segment.lstrip(" \t\n")
-        if not left_trimmed:
-            continue
-        adjusted_start = start + len(segment) - len(left_trimmed)
-        value = left_trimmed.rstrip(" \t\n")
-        adjusted_end = adjusted_start + len(value)
-        ranges.append((adjusted_start, adjusted_end, value))
-    return tuple(ranges)
 
 
 def _validate_input(
@@ -107,9 +76,8 @@ def _validate_input(
     is_scanned = extraction["is_scanned"]
     if not isinstance(is_scanned, bool):
         raise PDFExtractV3AdapterError("is_scanned must be boolean")
-    scan_confidence = _require_ratio(
-        extraction["scan_confidence"],
-        "scan_confidence",
+    scan_confidence = require_ratio(
+        extraction["scan_confidence"], "scan_confidence", error=PDFExtractV3AdapterError,
     )
     if not is_scanned and scan_confidence != 0.0:
         raise PDFExtractV3AdapterError(
@@ -145,9 +113,8 @@ def _validate_input(
     )
     if total_chars != len(text):
         raise PDFExtractV3AdapterError("total_chars must exactly match text length")
-    quality_score = _require_ratio(
-        extraction["quality_score"],
-        "quality_score",
+    quality_score = require_ratio(
+        extraction["quality_score"], "quality_score", error=PDFExtractV3AdapterError,
     )
     return text, pages_read, total_pages, quality_score, scan_confidence
 
@@ -164,7 +131,7 @@ def adapt_pdf_extract_v3(
         manifest=manifest,
         extraction=extraction,
     )
-    paragraphs = _paragraph_ranges(text)
+    paragraphs = paragraph_ranges(text)
     if not paragraphs:
         raise PDFExtractV3AdapterError("legacy extraction text is empty")
 
@@ -179,7 +146,7 @@ def adapt_pdf_extract_v3(
     base_flags: list[QualityFlag] = []
     if pages_read < total_pages:
         base_flags.append(QualityFlag.TRUNCATED)
-    if quality_score < _LOW_QUALITY_THRESHOLD:
+    if quality_score < LOW_PAGE_QUALITY_THRESHOLD:
         base_flags.append(QualityFlag.PARSER_WARNING)
 
     results: list[ParserResult] = []

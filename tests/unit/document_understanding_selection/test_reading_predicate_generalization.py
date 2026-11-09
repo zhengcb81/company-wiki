@@ -60,7 +60,7 @@ def test_an_independent_future_action_or_project_noun_does_not_erase_actual_quan
 
 
 def test_shared_predicate_source_bytes_are_in_the_actual_complete_cache(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory as inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as inventory
     from company_wiki.document_understanding.decision_dependencies import freeze_decision_dependencies
     from unit.document_understanding_selection.test_reading_decision_inventory import _real_interim_pipeline
 

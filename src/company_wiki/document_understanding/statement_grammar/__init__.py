@@ -329,3 +329,10 @@ def observe_statement(text: str, *, work_budget: WorkBudget | None = None,
     return StatementObservation('independent' if independent else 'fragment',
                                 'subject_predicate' if independent else 'no_matrix_predicate',
                                 tuple(word for scope in scopes for word in scope.argument_nominals), weak, scopes)
+
+__all__ = [
+    'StatementObservation',
+    'observe_english_statement_boundary',
+    'observe_statement',
+    'resource_identity',
+]

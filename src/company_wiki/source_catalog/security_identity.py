@@ -302,6 +302,38 @@ def _record_sort_key(record: SecurityRecord) -> tuple[Any, ...]:
     )
 
 
+@lru_cache(maxsize=8)
+def _issuer_aliases(
+    path: Path, _generation: tuple[int, int, int, int, int],
+) -> tuple[dict[str, str], dict[str, frozenset[str]]]:
+    """Read the alias projection, including from older partial snapshots."""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (ValueError, RecursionError):
+        return {}, {}
+    records = payload.get("records") if isinstance(payload, dict) else None
+    if not isinstance(records, list):
+        return {}, {}
+    issuers: dict[str, str] = {}
+    tokens_by_issuer: dict[str, set[str]] = {}
+    for record in records:
+        if not isinstance(record, dict):
+            continue
+        issuer = _normalize_text(str(record.get("canonical_name") or ""))
+        if not issuer:
+            continue
+        values = [record.get("ticker"), record.get("security_id")]
+        aliases = record.get("aliases")
+        if isinstance(aliases, list):
+            values.extend(aliases)
+        tokens = {issuer, *(_normalize_text(str(value)) for value in values if value)} - {""}
+        tokens_by_issuer.setdefault(issuer, set()).update(tokens)
+        for token in tokens:
+            if issuers.setdefault(token, issuer) != issuer:
+                issuers[token] = ""  # A shared token cannot anchor an issuer.
+    return issuers, {issuer: frozenset(tokens) for issuer, tokens in tokens_by_issuer.items()}
+
+
 class SecurityMasterStore:
     """Versioned per-market JSON snapshots with atomic replacement."""
 
@@ -315,6 +347,33 @@ class SecurityMasterStore:
 
     def has_market(self, market: str) -> bool:
         return self.path_for(market).is_file()
+
+    def issuer_identity_tokens(self, entity: str) -> tuple[str, ...]:
+        """Project one issuer scope from the currently installed snapshots."""
+        wanted = _normalize_text(entity)
+        if not wanted:
+            return ()
+        matches: set[str] = set()
+        indexes = []
+        for market in SECURITY_MARKETS:
+            path = self.path_for(market)
+            try:
+                stat = path.stat()
+                generation = stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
+                token_issuers, issuer_tokens = _issuer_aliases(path, generation)
+            except OSError:
+                continue
+            if wanted in token_issuers:
+                matches.add(token_issuers[wanted])
+            indexes.append((token_issuers, issuer_tokens))
+        tokens = {wanted}
+        if len(matches) == 1 and (issuer := next(iter(matches))):
+            for _, index in indexes:
+                tokens.update(
+                    token for token in index.get(issuer, ())
+                    if all(owners.get(token, issuer) == issuer for owners, _ in indexes)
+                )
+        return tuple(sorted(tokens))
 
     def write_market(
         self,

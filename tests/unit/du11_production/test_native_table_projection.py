@@ -3,7 +3,7 @@ from copy import deepcopy
 import pytest
 
 from company_wiki.document_understanding import native_table_bridge as bridge
-from company_wiki.document_normalization import pdf_table_observations as pdf
+from company_wiki.document_understanding import pdf_table_observations as pdf
 from company_wiki.resource_budget import WorkBudget
 from unit.du4_table_measurements.builders import cell, observation, text_ref, unit
 
@@ -24,7 +24,8 @@ def test_pdf_eligible_rows_keep_only_their_original_cell_provenance(monkeypatch,
     monkeypatch.setattr(pdf, 'build_pdf_table_observations', lambda *a, **kw:
         {'tables':[table], 'diagnostics':[], 'status':'complete'})
     source = {'source_ref':{'source_id':'parent-1'}, 'units':[
-        {'unit_id':uid, 'text':text, 'kind':'pdf_table_row', 'hints':{}} for uid,text in texts.items()]}
+        {'unit_id':uid, 'text':text, 'kind':'table_row', 'hints':{'pdf_table_row': True}}
+        for uid,text in texts.items()]}
     if invalid is not None:
         with pytest.raises(ValueError, match='provenance points at unknown cell'):
             bridge.bind_native_tables(source, work_budget=WorkBudget(100_000), eligible_unit_ids={'a'})

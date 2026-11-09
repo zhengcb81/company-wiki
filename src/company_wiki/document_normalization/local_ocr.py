@@ -656,3 +656,7 @@ class LocalOCRAdapter:
             dropped=tuple(dropped),
         )
         return ImageOCRResult(width, height, tuple(lines), diagnostics)
+
+__all__ = [
+    'image_dimensions',
+]

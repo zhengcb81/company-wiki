@@ -57,7 +57,8 @@ def test_expired_preparation_never_starts_next_source_or_materializes_jobs(tmp_p
         observed.created = True
         if spent_in == 'catalog':
             clock.now = 100.0
-        return SimpleNamespace(config=config, close=lambda: setattr(observed, 'closed', True))
+        return SimpleNamespace(storage_is_within=lambda _: False,
+                               close=lambda: setattr(observed, 'closed', True))
 
     def materialize(_path):
         pytest.fail('expired preparation reached AUTO initialization')

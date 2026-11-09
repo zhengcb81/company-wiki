@@ -109,7 +109,7 @@ def test_natural_heading_incomplete_call_retains_named_coverage_failure():
 
 
 def test_legacy_version_replays_original_heading_layout_and_new_identity_is_separate():
-    from company_wiki.automation.narrative_formats import parser_component
+    from company_wiki.source_catalog.narrative_formats import parser_component
 
     original, m, _ = parse(
         "<h1>Full Conference Call Transcript</h1><p>CEO: We launched a new product and expanded overseas capacity.</p>"

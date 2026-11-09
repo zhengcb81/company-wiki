@@ -182,6 +182,45 @@ def test_source_catalog_persists_table_cells_without_duplicate_narrative(tmp_pat
     assert "loc:v1/page:1/table:0/row:0/column:0" in normalized
 
 
+def test_pdf_parser_keeps_table_cells_if_optional_markdown_fails(tmp_path, monkeypatch):
+    from company_wiki.source_contract import SourceManifest, SourceType
+
+    fitz = pytest.importorskip("pymupdf")
+    table_type = pytest.importorskip("pymupdf.table").Table
+    path = tmp_path / "table.pdf"
+    with fitz.open() as document:
+        _draw_table_page(document.new_page(width=300, height=300))
+        document.save(path)
+    manifest = SourceManifest.from_file(
+        root=tmp_path,
+        file_path=path,
+        entity_ids=("TEST:000001",),
+        source_type=SourceType.COMPANY_ANNOUNCEMENT,
+        published_date="2026-03-25",
+        retrieved_at="2026-07-19T12:00:00Z",
+        collector_name="fixture_collector",
+        collector_version="1.0.0",
+        mime_type="application/pdf",
+    )
+    before = _file_identity(path)
+
+    def refuse_markdown(self, *args, **kwargs):
+        raise RuntimeError("optional Markdown renderer failed")
+
+    monkeypatch.setattr(table_type, "to_markdown", refuse_markdown)
+    result = _normalizer_module()._pdf_markdown(path, manifest)
+
+    assert result.status == "completed"
+    assert _file_identity(path) == before
+    assert [
+        item.raw_text for item in result.parser_results if item.coordinates.table_index is not None
+    ] == ["A", "B", "1", "2"]
+    assert [
+        item.raw_text for item in result.parser_results if item.coordinates.paragraph_index is not None
+    ] == ["Narrative before table", "Narrative after table"]
+    assert "loc:v1/page:1/table:0/row:0/column:0" in result.body
+
+
 class _PageWithoutTableAPI:
     def get_text(self, mode: str, *, sort: bool):
         assert mode == "blocks"
@@ -272,9 +311,6 @@ def test_snapshot_builder_normalizes_non_nfc_table_cells():
         def extract(self):
             return [("\u2126",)]  # OHM SIGN, non-NFC; NFC form is U+03A9
 
-        def to_markdown(self):
-            return "| \u2126 |"
-
     class _Finder:
         tables = (_Table(),)
 
@@ -294,5 +330,3 @@ def test_snapshot_builder_normalizes_non_nfc_table_cells():
     (cell,) = tables[0]["data"][0]
     assert cell == "\u03a9"
     assert unicodedata.normalize("NFC", cell) == cell
-    # markdown normalized too
-    assert tables[0]["markdown"] == "| \u03a9 |"

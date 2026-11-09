@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 
 import pytest
@@ -16,7 +17,7 @@ from unit.test_terminal_narrative_receipts import T3, snapshot, terminal_fixture
     "kind,unknown", [("txt", False), ("txt", True), ("skip", False)]
 )
 def test_published_dag_compacts_then_resumes_without_model_replay_and_keeps_final(
-    tmp_path, kind, unknown
+    tmp_path, monkeypatch, kind, unknown
 ):
     with terminal_fixture(tmp_path, kind=kind, unknown=unknown) as state:
         raw = {
@@ -63,13 +64,26 @@ def test_published_dag_compacts_then_resumes_without_model_replay_and_keeps_fina
             }
         )
         final_before = transport.read(request)
-        receipt = compact_terminal_narrative_jobs(
-            state.auto,
-            state.artifacts,
-            job_ids=state.job_ids,
-            final_artifact=state.pin,
-            compacted_at=T3,
-        )
+        real_sha256 = hashlib.sha256
+        checks = []
+
+        def counted_sha256(data=b"", **options):
+            if data == state.payload:
+                checks.append(data)
+            return real_sha256(data, **options)
+
+        with monkeypatch.context() as patch:
+            patch.setattr(hashlib, "sha256", counted_sha256)
+            receipt = compact_terminal_narrative_jobs(
+                state.auto,
+                state.artifacts,
+                job_ids=state.job_ids,
+                final_artifact=state.pin,
+                compacted_at=T3,
+            )
+        # The catalog checks the object once and AUTO checks its separate
+        # persisted verify attempt before replacing that attempt's body.
+        assert checks == [state.payload, state.payload]
         assert receipt.attempts_compacted == 3
         assert receipt.logical_bytes_before > receipt.logical_bytes_after
         state.scheduler.materialize_event(state.event)

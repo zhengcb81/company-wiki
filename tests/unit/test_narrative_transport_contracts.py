@@ -108,7 +108,7 @@ def test_identity_null_is_explicitly_unconstrained() -> None:
     assert NarrativeReadRequest.from_dict(payload).to_dict() == payload
 
 
-@pytest.mark.parametrize("snapshot", ["", "current-v2"])
+@pytest.mark.parametrize("snapshot", ["", "current-v2", "current-v3"])
 def test_frozen_producer_golden_contract_and_hash_bindings(snapshot) -> None:
     directory = Path(__file__).resolve().parents[1] / "fixtures" / "narrative_transport_v1"
     directory = directory / snapshot
@@ -132,6 +132,59 @@ def test_frozen_producer_golden_contract_and_hash_bindings(snapshot) -> None:
     assert receipt["quality_status"] == bundle.quality_status
     with pytest.raises(ValueError):
         NarrativeReadRequest.from_dict(json.loads((directory / "invalid_request.json").read_bytes()))
+
+
+@pytest.mark.parametrize("snapshot", ["", "current-v2", "current-v3"])
+def test_source_bundle_reader_decodes_each_verified_wire_only_once(snapshot, monkeypatch):
+    from company_wiki.source_catalog.narrative_bundle_reader import decode_stored_narrative_bundle
+
+    directory = Path(__file__).resolve().parents[1] / "fixtures" / "narrative_transport_v1"
+    payload = (directory / snapshot / "bundle.json").read_bytes()
+    text = payload.decode("utf-8")
+    expected = json.loads(text)
+    decode = json.loads
+    reads = []
+
+    def count_wire(value, *args, **kwargs):
+        if value == text:
+            reads.append(value)
+        return decode(value, *args, **kwargs)
+
+    monkeypatch.setattr(json, "loads", count_wire)
+    assert decode_stored_narrative_bundle(payload).to_dict() == expected
+    assert len(reads) == 1
+
+
+@pytest.mark.parametrize("wire,error", [
+    ('{"amount":1,"amount":2}', "duplicate JSON key"),
+    ('{"amount":NaN}', "non-finite"),
+    ('{ "amount":1}', "not canonical"),
+])
+def test_canonical_decoder_preserves_strict_wire_errors(wire, error):
+    from company_wiki.wire_json import parse_canonical_json
+
+    with pytest.raises(ValueError, match=error):
+        parse_canonical_json(wire)
+
+
+def test_source_wire_decoder_accepts_normal_json_formatting():
+    from company_wiki.wire_json import parse_json
+
+    wire = '{\n  "title": "报告", "amount": 1e2\n}\n'
+    assert parse_json(wire) == {"title": "报告", "amount": 100.0}
+
+
+@pytest.mark.parametrize("wire,error", [
+    ('{"report":{"amount":1,"amount":2}}', "duplicate JSON key"),
+    ('{"amount":NaN}', "non-finite"),
+    ('{"amount":Infinity}', "non-finite"),
+    ('{"amount":1e400}', "non-finite"),
+])
+def test_source_wire_decoder_rejects_ambiguous_values(wire, error):
+    from company_wiki.wire_json import parse_json
+
+    with pytest.raises(ValueError, match=error):
+        parse_json(wire)
 
 
 @pytest.mark.parametrize("change", ["source", "language", "citation", "status"])

@@ -186,6 +186,40 @@ def test_model_roles_wire_one_child_local_http_model_and_budget_caller(run_state
     assert KEY not in spec.runtime_options_json and KEY not in repr(runtime.model_client)
 
 
+def test_durable_model_worker_opens_only_the_paid_object_port(run_state, monkeypatch):
+    factory = _factory()
+    options = dict(run_state.options, response_storage={
+        "work_dir": str(run_state.root / "work"),
+        "baseline": [0], "max_persistent_bytes": 500_000, "max_scratch_bytes": 500_000,
+    })
+    policy = []
+
+    def open_objects(*, write_policy):
+        policy.append(write_policy)
+        return SimpleNamespace(put=lambda _: pytest.fail("runtime construction wrote paid bytes"))
+
+    monkeypatch.setenv(KEY_ENV, KEY)
+    monkeypatch.setattr(factory, "SourceCatalog", lambda _: SimpleNamespace(open_narrative_object_access=open_objects))
+    monkeypatch.setattr(factory, "SourceVersionReader", lambda _: object())
+    monkeypatch.setattr(factory, "_worker_binding_snapshot", lambda _: SimpleNamespace(
+        generation_values={}, selector_version="0.8.0",
+        reading_projections={"source": "reading-model-input/5"},
+        frozen_models=(), frozen_generations={},
+    ))
+    monkeypatch.setitem(sys.modules, "company_wiki.automation.narrative_batch", None)
+    runtime = factory.create_runtime(_spec(run_state, role="model", options=options))
+    assert runtime.model_client is not None
+    assert len(policy) == 1 and callable(policy[0])
+    assert not (run_state.root / "work").exists()
+
+
+def test_worker_runtime_preserves_explicit_final_size_above_old_cap(run_state):
+    factory = _factory()
+    options = dict(run_state.options, max_final_bytes=5 * 1024**2)
+    parsed, _model = factory._options(_spec(run_state, role="model", options=options))
+    assert parsed["max_final_bytes"] == options["max_final_bytes"]
+
+
 @pytest.mark.parametrize("field,value", [
     ("expected_run_input_hash", "0" * 64), ("run_id", "missing-run"),
 ])

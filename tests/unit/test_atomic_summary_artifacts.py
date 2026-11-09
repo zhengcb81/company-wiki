@@ -18,15 +18,15 @@ from company_wiki.automation.narrative_verify import NarrativeVerifyHandler
 from unit.test_narrative_extractive_runtime import selected
 
 VERSION = 'reading-model-input/7'
-ASSESSOR = 'source-summary-assessment/1.1.0'
+ASSESSOR = 'source-summary-assessment/1.2.0'
 
 
-def materials(source=None, version=VERSION):
+def materials(source=None, version=VERSION, *, claim_text='甲方正在完善海外服务网络。', modality='planned'):
     source = source or selected(1, text_suffix='甲方正在完善海外服务网络。')
     request = build_model_request(source, reading_projection_version=version)
     response = NarrativeModelResponse('offline', 'synthetic', request.prompt_version, json.dumps({
-        'drafts_by_task': {'t1': [{'text': '甲方正在完善海外服务网络。',
-                                 'basis_parts': ['p1'], 'modality': 'planned'}]}
+        'drafts_by_task': {'t1': [{'text': claim_text,
+                                 'basis_parts': ['p1'], 'modality': modality}]}
     }, ensure_ascii=False).encode())
     report = {}
     summary = NarrativeSummarizeHandler._completed_result(source, source.prompt_review, response,

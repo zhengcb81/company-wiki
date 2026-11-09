@@ -15,12 +15,12 @@ from company_wiki.document_understanding.operating_states.relations import (
     closed_source_statement, independent_statement_start,
     source_courtesy_statement, DEPENDENT_STATEMENT,
 )
+from company_wiki.document_understanding.operating_states import classify_qualifiers
 from .narrative_antecedent import MAX_WINDOW_UNITS, MAX_ENVELOPE_CHARS
 from .narrative_operating_relations import SOURCE_SUPPORT_MAX_MEMBERS
 from .narrative_source_purpose import NON_OPERATING_PURPOSES
 from company_wiki.document_understanding.operating_states.assertion_roles import explicit_description_subject
 
-from company_wiki.document_understanding.operating_states import patterns as p
 from company_wiki.document_understanding.operating_states.product_reference import product_head_spans
 
 QA_SCOPE_FEATURE_VERSION = 'source-qa-scopes/2'
@@ -109,10 +109,11 @@ def _dependency_observations(answers, units, session):
         if not heads:
             heads = {head for _, _, head in product_head_spans(text)}
         fact = session.fact(uid)
-        planned = bool('operating_plan' in fact.reasons or p.PLANNED_QUAL.search(text) or any(
+        qualifiers = classify_qualifiers(text)
+        planned = bool('operating_plan' in fact.reasons or qualifiers.planned or any(
             relation['modality'] == 'planned' for relation in roles['relations']))
         directive = _REQUIRED_QUALIFIER.search(text)
-        restricted = bool(p.NEGATION_TOKENS.search(text) or p.CONDITIONAL.search(text) or directive)
+        restricted = bool(qualifiers.negated or qualifiers.conditional or directive)
         backward = bool(restricted and (DEPENDENT_STATEMENT.match(text.lstrip()) or directive)
                         and not independent_statement_start(text))
         if (fact.purpose in NON_OPERATING_PURPOSES or session.financial_only(uid)

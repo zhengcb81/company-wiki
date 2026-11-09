@@ -19,7 +19,7 @@ _ANSWER_MARK = re.compile(r'^\s*(?:答复|答覆|回答|答|回复|回覆|A|Answ
 
 def observed_source_turn(hints: Mapping[str, Any]) -> tuple[str | None, str | None]:
     """Use source speaker/turn evidence in either native or projected form."""
-    native = hints.get('native_speaker_turn')
+    native = hints.get('native_speaker_turn', hints.get('printed_turn'))
     native = native if isinstance(native, Mapping) else {}
     speaker = native.get('speaker', hints.get('speaker'))
     turn = native.get('turn_id', hints.get('turn_id'))
@@ -36,3 +36,10 @@ def explicit_qa_marker(text: str) -> str | None:
     if _ANSWER_MARK.match(prefix):
         return ROLE_MANAGEMENT
     return None
+
+__all__ = [
+    'ROLE_INVESTOR',
+    'SOURCE_TURN_MARKER_PREFIX_CHARS',
+    'explicit_qa_marker',
+    'observed_source_turn',
+]

@@ -17,7 +17,7 @@ from company_wiki.source_catalog.narrative_language import NarrativeLanguageErro
 from .models import canonical_json
 from .narrative_batch import BatchPreparationDeadlineExceeded, BatchResumeError, run_batch
 from .narrative_batch_request import NarrativeBatchRequest
-from .narrative_run_store import NarrativeRunStore
+from .narrative_run_store import NarrativeRunStore, StorageBudgetExceeded
 
 
 @contextmanager
@@ -123,10 +123,11 @@ def main(
         except BatchResumeError as exc:
             receipt = _failure_receipt(request, args.automation_db, "failed", exc.code)
             exit_code = 2
+        except StorageBudgetExceeded as exc:
+            receipt = _failure_receipt(request, args.automation_db, "storage_exhausted", str(exc))
+            exit_code = 2
         except ValueError as exc:
-            status = "storage_exhausted" if str(exc) in {
-                "PERSISTENT_BYTES_EXCEEDED", "SCRATCH_BYTES_EXCEEDED", "FINAL_BYTES_EXCEEDED",
-            } else "failed"
+            status = "storage_exhausted" if str(exc) in StorageBudgetExceeded.CODES else "failed"
             receipt = _failure_receipt(request, args.automation_db, status, "NARRATIVE_BATCH_" + type(exc).__name__)
             exit_code = 2
         except Exception as exc:

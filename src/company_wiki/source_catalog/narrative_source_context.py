@@ -13,8 +13,8 @@ import re
 from company_wiki.document_understanding.operating_states.assertion_roles import (
     AssertionRole, abstract_source_argument, generic_source_predicate, source_argument_payload,
 )
+from company_wiki.document_understanding import observe_source_discourse
 from company_wiki.resource_budget import WorkBudget
-from company_wiki.document_understanding.operating_states.patterns import COURTESY, ISSUER_WORD
 from company_wiki.document_understanding.statement_grammar import StatementObservation
 
 from .narrative_reporting_rules import arithmetic_presentation
@@ -72,11 +72,9 @@ def source_clause_context(value: str, role: AssertionRole) -> SourceClauseContex
     if subject and (predicate := _METATEXT_PREDICATE.search(value, subject.end())):
         if _METATEXT_OBJECT.search(value, predicate.end()):
             return SourceClauseContext('context', 'source_metatext')
-    courtesy = COURTESY.search(value)
-    if courtesy:
-        prefix = value[:courtesy.start()].strip()
-        if (not prefix or ISSUER_WORD.fullmatch(prefix)) and not value[courtesy.end():].strip(' .。!?！?;；'):
-            return SourceClauseContext('context', 'source_courtesy')
+    discourse = observe_source_discourse(value)
+    if discourse.courtesy_only:
+        return SourceClauseContext('context', 'source_courtesy')
     if objective:
         target = value[objective.end():].strip(' .。!?！?;；')
         principle = _PRINCIPLE.fullmatch(target)
@@ -85,7 +83,8 @@ def source_clause_context(value: str, role: AssertionRole) -> SourceClauseContex
                               for part in re.split('[、,，]', principle['content']))
             if abstract_source_argument(content):
                 return SourceClauseContext('context', 'source_generic_principle')
-        if courtesy and courtesy.start() < objective.start():
+        if (discourse.courtesy_start is not None
+                and discourse.courtesy_start < objective.start()):
             # A concrete independently observed operation was handled above;
             # a courtesy followed only by an unproved effort is not its proof.
             return SourceClauseContext('unresolved', 'source_courtesy_objective_unproved')

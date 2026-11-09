@@ -219,7 +219,7 @@ def test_actual_hk_business_heading_binds_at_its_real_single_level(cover, family
 
 
 def test_table_scan_mutation_invalidates_unused_facet_matcher_dependencies(monkeypatch):
-    from company_wiki.document_understanding.decision_inventory import build_decision_trace, current_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import build_decision_trace, current_decision_trace
 
     units = (unit("ANNUAL REPORT 2026", 0, heading=1), unit("Our network serves consumers.", 1))
     pipeline = understand_units(units, source_id=units[0].source_id, source_sha256="e" * 64,

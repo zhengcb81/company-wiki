@@ -12,13 +12,13 @@ from dataclasses import dataclass, replace
 import re
 
 from company_wiki.document_understanding.operating_states.assertion_roles import (
-    AssertionRole, SourceAssertionRoles, abstract_source_argument, _STATE_HEAD,
+    AssertionRole, SourceAssertionRoles, abstract_source_argument, STATE_HEAD_PATTERN,
 )
 from company_wiki.document_understanding.structure.table_purpose import accounting_field
 from company_wiki.document_understanding.source_turn_markers import (
     explicit_qa_marker, ROLE_INVESTOR, SOURCE_TURN_MARKER_PREFIX_CHARS,
 )
-from company_wiki.document_normalization.text_matching import matching_reading_text
+from company_wiki.document_model.text_matching import matching_reading_text
 from company_wiki.document_understanding.statement_grammar import (
     StatementObservation, observe_english_statement_boundary, observe_statement,
 )
@@ -249,7 +249,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             business_cause = source_cause or bool(tail and not accounting_text(tail)
                 and not _FINANCIAL_CAUSAL_ARGUMENT.search(tail)
                 and not abstract_source_argument(tail)
-                and (_OBJECT.search(tail) or _STATE_HEAD.search(tail))
+                and (_OBJECT.search(tail) or STATE_HEAD_PATTERN.search(tail))
                 and _CAUSAL_PROCESS.search(tail))
             independent = any(clause.independent_payload is True for clause in members)
             # A separately observed business measurement remains readable even

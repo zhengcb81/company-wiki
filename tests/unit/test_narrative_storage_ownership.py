@@ -13,6 +13,13 @@ from types import SimpleNamespace
 import pytest
 
 from company_wiki.source_catalog import narrative_artifact_store as artifacts
+from company_wiki.source_catalog.models import CatalogConfig, RootSpec
+from company_wiki.source_catalog.service import SourceCatalog
+
+
+def _source_catalog(tmp_path, catalog_dir):
+    roots = (RootSpec("raw", tmp_path / "raw", "company_raw"),)
+    return SourceCatalog(CatalogConfig(tmp_path, catalog_dir, roots))
 
 
 @pytest.mark.parametrize("race", [False, True])
@@ -71,15 +78,14 @@ def test_batch_storage_does_not_attribute_other_catalog_writers(tmp_path):
     catalog_dir.mkdir()
     work = tmp_path / "work"
     work.mkdir()
-    catalog = SimpleNamespace(config=SimpleNamespace(catalog_dir=catalog_dir,
-                                                     database_path=catalog_dir / "catalog.db"))
+    catalog = _source_catalog(tmp_path, catalog_dir)
     request = SimpleNamespace(run_id="run-a", max_persistent_bytes=100_000,
                               max_scratch_bytes=100_000)
     guard = _storage_guard(request, catalog, db, work, "a" * 64)
     before = guard.snapshot().persistent_added_bytes
     foreign = artifacts.LocalNarrativeObjectStore(catalog_dir)
     foreign.put(b"another writer's source output")
-    (catalog_dir / "catalog.db").write_bytes(b"another writer's SQLite growth")
+    catalog.config.database_path.write_bytes(b"another writer's SQLite growth")
     assert guard.snapshot().persistent_added_bytes == before
 
 
@@ -116,11 +122,14 @@ def _run_guard(tmp_path, *, run_id="run-a", limit=100_000):
                               owned_accounting=(db, run_id))
 
 
+def _budgeted_objects(root, guard, max_final_bytes):
+    return artifacts.LocalNarrativeObjectStore(root, write_policy=guard.object_write_policy(max_final_bytes))
+
+
 def test_only_cas_writer_creation_is_charged_and_restored(tmp_path):
-    from company_wiki.automation.narrative_batch import _BudgetedObjects
     guard = _run_guard(tmp_path)
     shared = tmp_path / "catalog"
-    objects = _BudgetedObjects(shared, guard, 100_000)
+    objects = _budgeted_objects(shared, guard, 100_000)
     key = objects.put(b"owned")
     assert objects.put(b"owned") == key
     assert guard.snapshot().persistent_added_bytes == 5
@@ -128,25 +137,37 @@ def test_only_cas_writer_creation_is_charged_and_restored(tmp_path):
     assert guard.snapshot().persistent_added_bytes == 5
     assert _run_guard(tmp_path).snapshot().persistent_added_bytes == 5
     other = _run_guard(tmp_path, run_id="run-b", limit=0)
-    assert _BudgetedObjects(shared, other, 100_000).put(b"owned") == key
+    assert _budgeted_objects(shared, other, 100_000).put(b"owned") == key
     assert other.snapshot().persistent_added_bytes == 0
 
 
 def test_owned_storage_limit_is_enforced_before_filesystem_creation(tmp_path):
-    from company_wiki.automation.narrative_batch import _BudgetedObjects
     guard = _run_guard(tmp_path, limit=2)
-    objects = _BudgetedObjects(tmp_path / "catalog", guard, 100_000)
+    objects = _budgeted_objects(tmp_path / "catalog", guard, 100_000)
     with pytest.raises(ValueError, match="PERSISTENT_BYTES_EXCEEDED"):
         objects.put(b"too big")
     assert guard.snapshot().persistent_added_bytes == 0
     assert not list((tmp_path / "catalog").rglob("*.json"))
 
 
+def test_existing_cas_object_needs_no_scratch_allocation(tmp_path):
+    guard = _run_guard(tmp_path)
+    guard.max_scratch_bytes = 2
+    root = tmp_path / "catalog"
+    original = artifacts.LocalNarrativeObjectStore(root).put(b"shared")
+    objects = _budgeted_objects(root, guard, 1000)
+    assert objects.put(b"shared") == original
+    assert guard.snapshot().scratch_peak_bytes == 0
+    with pytest.raises(ValueError, match="SCRATCH_BYTES_EXCEEDED"):
+        objects.put(b"new")
+    assert guard.snapshot().persistent_added_bytes == 0
+    assert len(list((root / "objects").rglob("*.json"))) == 1
+
+
 def test_crash_after_cas_write_retains_conservative_allocation(tmp_path, monkeypatch):
-    from company_wiki.automation.narrative_batch import _BudgetedObjects
     from company_wiki.automation.narrative_run_store import NarrativeRunStore
     guard = _run_guard(tmp_path)
-    objects = _BudgetedObjects(tmp_path / "catalog", guard, 100_000)
+    objects = _budgeted_objects(tmp_path / "catalog", guard, 100_000)
     original = NarrativeRunStore._settle_storage_object
     def interrupted(*args, **kwargs):
         raise RuntimeError("simulated process interruption before settlement")
@@ -156,19 +177,18 @@ def test_crash_after_cas_write_retains_conservative_allocation(tmp_path, monkeyp
     monkeypatch.setattr(NarrativeRunStore, "_settle_storage_object", original)
     resumed = _run_guard(tmp_path)
     assert resumed.snapshot().persistent_added_bytes == len(b"paid body")
-    _BudgetedObjects(tmp_path / "catalog", resumed, 100_000).put(b"paid body")
+    _budgeted_objects(tmp_path / "catalog", resumed, 100_000).put(b"paid body")
     assert resumed.snapshot().persistent_added_bytes == len(b"paid body")
 
 
 def test_concurrent_cas_winner_is_not_charged_to_loser(tmp_path, monkeypatch):
-    from company_wiki.automation.narrative_batch import _BudgetedObjects
     guard = _run_guard(tmp_path)
     data = b"same body"
     def another_writer_wins(_source, destination):
         Path(destination).write_bytes(data)
         raise FileExistsError("another writer")
     monkeypatch.setattr(artifacts.os, "link", another_writer_wins)
-    _BudgetedObjects(tmp_path / "catalog", guard, 100_000).put(data)
+    _budgeted_objects(tmp_path / "catalog", guard, 100_000).put(data)
     assert guard.snapshot().persistent_added_bytes == 0
 
 
@@ -183,8 +203,7 @@ def test_old_active_baseline_is_frozen_once_then_uses_owner_accounting(tmp_path)
     baseline = work / "storage-baseline.json"
     baseline.write_text(json.dumps({"input_hash": "a" * 64, "sizes": [0] * 8}), encoding="utf-8")
     original = baseline.read_bytes()
-    catalog = SimpleNamespace(config=SimpleNamespace(catalog_dir=catalog_dir,
-                                                     database_path=catalog_dir / "catalog.db"))
+    catalog = _source_catalog(tmp_path, catalog_dir)
     request = SimpleNamespace(run_id="run-a", max_persistent_bytes=10_000_000,
                               max_scratch_bytes=100_000)
     guard = _storage_guard(request, catalog, tmp_path / "auto.db", work, "a" * 64, read_only=True)
@@ -192,7 +211,7 @@ def test_old_active_baseline_is_frozen_once_then_uses_owner_accounting(tmp_path)
     guard.adopt_owned_accounting(tmp_path / "auto.db", "run-a", work, create_floor=True)
     before = guard.snapshot().persistent_added_bytes
     artifacts.LocalNarrativeObjectStore(catalog_dir).put(b"foreign after resume")
-    (catalog_dir / "catalog.db").write_bytes(b"foreign database after resume")
+    catalog.config.database_path.write_bytes(b"foreign database after resume")
     assert guard.snapshot().persistent_added_bytes == before
     restored = _storage_guard(request, catalog, tmp_path / "auto.db", work, "a" * 64, read_only=True)
     assert restored.snapshot().persistent_added_bytes == before
@@ -246,16 +265,15 @@ def test_late_cas_loser_cannot_erase_another_writer_actual_bytes(tmp_path):
 
 
 def test_cas_admission_does_not_mix_two_owner_usage_snapshots(tmp_path, monkeypatch):
-    from company_wiki.automation.narrative_batch import _BudgetedObjects
     guard = _run_guard(tmp_path, limit=100)
     original = guard.snapshot
     count = 0
-    objects = _BudgetedObjects(tmp_path / "catalog", guard, 1000)
+    objects = _budgeted_objects(tmp_path / "catalog", guard, 1000)
     def interleaved_snapshot(*args, **kwargs):
         nonlocal count
         count += 1
         observed = original(*args, **kwargs)
-        if count == 2:
+        if count == 1:
             monkeypatch.setattr(guard, "snapshot", original)
             objects.put(b"B" * 60)
             monkeypatch.setattr(guard, "snapshot", interleaved_snapshot)
@@ -263,6 +281,7 @@ def test_cas_admission_does_not_mix_two_owner_usage_snapshots(tmp_path, monkeypa
     monkeypatch.setattr(guard, "snapshot", interleaved_snapshot)
     with pytest.raises(ValueError, match="PERSISTENT_BYTES_EXCEEDED"):
         objects.put(b"A" * 60)
+    assert count == 1
     assert guard.snapshot().persistent_added_bytes == 60
     assert sum(file.stat().st_size for file in (tmp_path / "catalog/objects").rglob("*.json")) == 60
 
@@ -270,7 +289,6 @@ def test_cas_admission_does_not_mix_two_owner_usage_snapshots(tmp_path, monkeypa
 def test_same_object_has_one_short_writer_scope_and_holds_pending_capacity(tmp_path, monkeypatch):
     from concurrent.futures import ThreadPoolExecutor
     from threading import Event, current_thread
-    from company_wiki.automation.narrative_batch import _BudgetedObjects
     guard = _run_guard(tmp_path, limit=100)
     first_inside, release_first, second_started, second_inside = (Event() for _ in range(4))
     original = artifacts.LocalNarrativeObjectStore.put_with_usage
@@ -288,10 +306,10 @@ def test_same_object_has_one_short_writer_scope_and_holds_pending_capacity(tmp_p
     monkeypatch.setattr(artifacts.os, "link", held_link)
     def second_write():
         second_started.set()
-        return _BudgetedObjects(tmp_path / "catalog", guard, 1000).put(b"X" * 60)
+        return _budgeted_objects(tmp_path / "catalog", guard, 1000).put(b"X" * 60)
     with ThreadPoolExecutor(max_workers=1, thread_name_prefix="first") as first_pool, \
             ThreadPoolExecutor(max_workers=1, thread_name_prefix="second") as second_pool:
-        first = first_pool.submit(_BudgetedObjects(tmp_path / "catalog", guard, 1000).put, b"X" * 60)
+        first = first_pool.submit(_budgeted_objects(tmp_path / "catalog", guard, 1000).put, b"X" * 60)
         try:
             assert first_inside.wait(5)
             second = second_pool.submit(second_write)
@@ -303,11 +321,10 @@ def test_same_object_has_one_short_writer_scope_and_holds_pending_capacity(tmp_p
         assert first.result(timeout=5) == second.result(timeout=5)
     assert guard.accounting_store().storage_bytes("run-a") == 60
     with pytest.raises(ValueError, match="PERSISTENT_BYTES_EXCEEDED"):
-        _BudgetedObjects(tmp_path / "catalog", guard, 1000).put(b"Y" * 60)
+        _budgeted_objects(tmp_path / "catalog", guard, 1000).put(b"Y" * 60)
 
 
 def test_killed_writer_releases_os_mutex_without_refunding_pending_space(tmp_path):
-    from company_wiki.automation.narrative_batch import _BudgetedObjects
     guard = _run_guard(tmp_path, limit=100)
     body = b"X" * 60
     digest = hashlib.sha256(body).hexdigest()
@@ -329,13 +346,13 @@ ledger.account_storage_write(run_id='run-a',store_id=sys.argv[2],max_bytes=100,w
                              env=env, capture_output=True, timeout=10)
     assert process.returncode == 23, process.stderr.decode(errors="replace")
     assert guard.accounting_store().storage_bytes("run-a") == 60
-    _BudgetedObjects(objects_root, guard, 1000).put(body)
+    _budgeted_objects(objects_root, guard, 1000).put(body)
     assert guard.accounting_store().storage_bytes("run-a") == 60
     assert len(list((objects_root / "objects").rglob("*.json"))) == 1
 
 
 def test_control_locator_uses_local_only_snapshot_for_atomic_admission(tmp_path, monkeypatch):
-    from company_wiki.automation.narrative_batch import _BudgetedObjects, _write_generation_owner
+    from company_wiki.automation.narrative_batch import _write_generation_owner
     db = tmp_path / "auto.db"
     control = tmp_path / "control"
     control.mkdir()
@@ -352,7 +369,7 @@ def test_control_locator_uses_local_only_snapshot_for_atomic_admission(tmp_path,
         if first:
             first = False
             monkeypatch.setattr(guard, "snapshot", original)
-            _BudgetedObjects(tmp_path / "catalog", guard, 1000).put(b"B" * 60)
+            _budgeted_objects(tmp_path / "catalog", guard, 1000).put(b"B" * 60)
             monkeypatch.setattr(guard, "snapshot", interleaved)
         return observed
     monkeypatch.setattr(guard, "snapshot", interleaved)

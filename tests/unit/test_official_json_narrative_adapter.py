@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from company_wiki.automation import narrative_official_json as adapter
+from company_wiki.source_catalog import narrative_official_json as adapter
 from company_wiki.narrative_subject import NarrativeSubject
 from company_wiki.source_catalog.official_json_projection import (
     ProjectionError, build_source_projection, evidence_span_for_field,

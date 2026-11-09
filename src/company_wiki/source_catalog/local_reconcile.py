@@ -18,6 +18,7 @@ from .assertion_service import (
     SOURCE_SCOPE_METHOD as SEC_SCOPE_METHOD,
 )
 from .dayu_fiscal_metadata import extract_sec_scope, complete_sec_primary, FiscalMetadataError
+from .identity_candidates import iter_identity_filing_candidates
 from .local_inventory import (
     LocalPrepareLimits,
     LocalReadBudget,
@@ -29,8 +30,9 @@ from .resolver import (
     SourceResolver,
     _needs_hydration,
     _inside_configured_roots,
+    _source_metadata,
 )
-from .source_reader import SourceReadError, SourceRef, SourceVersionReader
+from .source_reader import FilingReuseObservation, SourceReadError, SourceRef, SourceVersionReader
 from .source_group_scope import SourceRegistrationScope
 from .lock import CatalogOperationLockedError
 from .canonical_scope import HistoricalCaptureScopes, ScopeRelation, qualified_source_scope, scope_relatedness
@@ -43,6 +45,7 @@ class _PreparationProgress:
     """Per-call history across discovery recursion; never persisted as state."""
     operations: list[dict[str, Any]] = field(default_factory=list)
     diagnostics: list[dict[str, Any]] = field(default_factory=list)
+    verified_reuse: FilingReuseObservation | None = None
     # Only actual owner proof in this call may establish non-relevance.
     not_relevant_documents: set[str] = field(default_factory=set)
 
@@ -316,10 +319,11 @@ def _cn_cover_scope(original, identity, budget, *, allow_other_kinds=False):
 def _proven_facts(catalog, original, identity, request, budget, *, claimed_match=False, match_scope=True):
     ref = original.ref
     prior_patch, prior_proof = _prior_source_facts(catalog, ref)
-    if _sec_original(ref, identity.market, request.document_kind):
-        qualification = source_scope_qualification(catalog, ref,
-            metadata={"market": identity.market, "document_kind": request.document_kind},
-            request=request, identity=identity)
+    qualification = source_scope_qualification(catalog, ref,
+        metadata={"market": identity.market, "document_kind": request.document_kind,
+                  "form_type": prior_patch.get("form_type")},
+        request=request, identity=identity)
+    if qualification is not None:
         reused_scope = not qualification.needs_original
         primary = qualification.scope(original.data, budget=budget, extractor=extract_sec_scope)
         matches = _scope_matches(primary, request)
@@ -609,35 +613,36 @@ def _prepare_local_source(
                                 historical=historical, _progress=progress)
         return _prepare_local_source(catalog, request, identity_cache_dir=identity_cache_dir,
             limits=limits, _discovery_done=True, _budget=budget, _progress=progress)
-    if query.status == "found" and _discovery_done:
-        ref = query.matches[0]
-        try:
-            reader.verify_version(ref, purpose="filing_reuse", budget=budget)
-        except SourceReadError as exc:
-            return _result(exc.status, exc.reason, blocks=True,
-                operations=progress.operations, diagnostics=progress.diagnostics)
-        return _result("ready", "local_source_reconciled", ref=ref)
     claimed_matches = {ref.document_id for ref in query.matches} if query.status == "found" else set()
-    if query.status == "found" and not _discovery_done:
+    if query.status == "found":
         ref = query.matches[0]
-        market = request.market or reader.describe_version(ref).get("market")
-        if not _sec_original(ref, market, request.document_kind):
-            reader.verify_version(ref, purpose="filing_reuse", budget=budget)
-            return _result("ready", "existing_active_source", ref=ref)
+        ready_reason = "local_source_reconciled" if _discovery_done else "existing_active_source"
+        observed = progress.verified_reuse
+        if (observed is not None and not progress.operations and observed.request_id == request.request_id
+                and observed.source_ref == ref
+                and observed.receipt.source_read_policy_sha256 == reader.read_policy_sha256()):
+            budget.check()
+            return _result("ready", ready_reason, ref=ref)
         try:
+            metadata = reader.describe_version(ref) if request.market is None else None
+            market = request.market if metadata is None else metadata.get("market")
+            if not _sec_original(ref, market, request.document_kind):
+                reader.verify_version(ref, purpose="filing_reuse", budget=budget)
+                return _result("ready", ready_reason, ref=ref)
             qualification = source_scope_qualification(catalog, ref,
-                metadata=reader.describe_version(ref), request=request, identity_cache_dir=identity_cache_dir)
+                metadata=metadata if metadata is not None else reader.describe_version(ref),
+                request=request, identity_cache_dir=identity_cache_dir)
+            if qualification is None or qualification.primary is not None:
+                reader._verified_version(ref, purpose="filing_reuse",
+                    expected_read_policy_sha256=None, retain_bytes=False, budget=budget,
+                    scope_qualification=qualification)
+                return _result("ready", ready_reason, ref=ref)
         except (ValueError, SourceReadError) as exc:
             return _result(getattr(exc, "status", "blocked"),
-                           getattr(exc, "reason", "local_fact_validation_failed"), blocks=True)
-        primary = qualification.primary
-        if primary is not None:
-            reader._verified_version(ref, purpose="filing_reuse",
-                expected_read_policy_sha256=None, retain_bytes=False, budget=budget,
-                scope_qualification=qualification)
-            return _result("ready", "existing_active_source", ref=ref)
-        # The same registered identity observation can drive the existing writer
-        # when proof is missing; it must not resolve another master for this hit.
+                           getattr(exc, "reason", "local_fact_validation_failed"), blocks=True,
+                           operations=progress.operations, diagnostics=progress.diagnostics)
+        # Layout discovery may leave a registered version untouched. Its
+        # cached declaration still needs intrinsic original scope proof.
         identity = qualification.identity
     if query.status == "ambiguous":
         return _result("ambiguous", query.reason, blocks=True)
@@ -651,17 +656,45 @@ def _prepare_local_source(
         _register_local_sources(catalog,
             root_id=scope.root_id, relative_paths=set(scope.relative_paths), budget=budget
         )
-    try:
-        candidates = catalog.query_filing_candidates(
-            document_kind=request.document_kind,
-            source_statuses=("active", "retired"),
-            limit=1000,
-        )
-    except Exception:
-        raise
     resolver = SourceResolver(catalog)
-    candidates = [x for x in candidates if resolver._entity_matches(request.entity, x)]
-    if not candidates:
+    identity_tokens = resolver.issuer_identity_tokens(request.entity)
+    indexed_candidates = iter_identity_filing_candidates(
+        catalog, document_kind=request.document_kind, source_statuses=("active", "retired"),
+        identity_tokens=identity_tokens,
+    )
+    diagnostics = progress.diagnostics
+    operations = progress.operations
+    qualified_documents = set()
+    targeted = False
+    eligible = []
+    known_identity = None
+    registered_issuer = False
+    for candidate in indexed_candidates:
+        budget.check()
+        metadata = _source_metadata(candidate, store=catalog.reader, reader="steady")
+        if not resolver._entity_matches(request.entity, candidate, metadata=metadata,
+                                        identity_tokens=identity_tokens):
+            continue
+        registered_issuer = True
+        if candidate["document_id"] in progress.not_relevant_documents:
+            continue
+        row = catalog.reader.exact_source_version(candidate["document_id"])
+        ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
+        body_owner = (_sec_original(ref, request.market, request.document_kind)
+                      or request.market == "CN" and ref.mime_type == "application/pdf")
+        if resolver._identity_matches(request, metadata) == "conflict" and not body_owner:
+            diagnostics.append({"document_id": candidate["document_id"], "reason": "registered_identity_conflict"})
+            continue
+        qualified = qualified_source_scope(catalog,ref,candidate,historical=historical)
+        relation = scope_relatedness(qualified,request)
+        if relation is ScopeRelation.NOT_RELEVANT:
+            known_identity = known_identity or qualified.identity()
+            diagnostics.append({"document_id":ref.document_id,"reason":"trusted_scope_not_relevant"})
+            continue
+        eligible.append(candidate)
+        if relation is ScopeRelation.MATCH and qualified.authority == "source-facts":
+            known_identity = known_identity or qualified.identity()
+    if not registered_issuer:
         if not _discovery_done:
             try:
                 identity = _identity(catalog, request, identity_cache_dir)
@@ -679,34 +712,6 @@ def _prepare_local_source(
                     _progress=progress,
                 )
         return _result("not_found", "no_registered_local_source")
-    diagnostics = progress.diagnostics
-    operations = progress.operations
-    qualified_documents = set()
-    targeted = False
-    eligible = []
-    known_identity = None
-    for candidate in candidates:
-        if candidate["document_id"] in progress.not_relevant_documents:
-            continue
-        budget.check()
-        from .resolver import _source_metadata
-        metadata = _source_metadata(candidate, store=catalog.reader, reader="steady")
-        row = catalog.reader.exact_source_version(candidate["document_id"])
-        ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
-        body_owner = (_sec_original(ref, request.market, request.document_kind)
-                      or request.market == "CN" and ref.mime_type == "application/pdf")
-        if resolver._identity_matches(request, metadata) == "conflict" and not body_owner:
-            diagnostics.append({"document_id": candidate["document_id"], "reason": "registered_identity_conflict"})
-            continue
-        qualified = qualified_source_scope(catalog,ref,candidate,historical=historical)
-        relation = scope_relatedness(qualified,request)
-        if relation is ScopeRelation.NOT_RELEVANT:
-            known_identity = known_identity or qualified.identity()
-            diagnostics.append({"document_id":ref.document_id,"reason":"trusted_scope_not_relevant"})
-            continue
-        eligible.append(candidate)
-        if relation is ScopeRelation.MATCH and qualified.authority == "source-facts":
-            known_identity = known_identity or qualified.identity()
     candidates = eligible
     if not candidates:
         if not _discovery_done and known_identity and _discover_source_groups(
@@ -879,8 +884,22 @@ def prepare_local_source(
     registrations: tuple[SourceRegistrationScope, ...] = (),
 ) -> dict[str, Any]:
     """Return named local outcomes; a failed proof never means permission to fetch."""
+    return _prepare_local_source_operation(
+        catalog, request, identity_cache_dir=identity_cache_dir,
+        limits=limits, registrations=registrations,
+    )
+
+
+def _prepare_local_source_operation(
+    catalog, request: SourceRequest, *,
+    identity_cache_dir: Path | None = None,
+    limits: LocalPrepareLimits | None = None,
+    registrations: tuple[SourceRegistrationScope, ...] = (),
+    verified_reuse: FilingReuseObservation | None = None,
+) -> dict[str, Any]:
+    """Internal composition may consume only this operation's owner proof."""
     budget = LocalReadBudget(limits or LocalPrepareLimits())
-    progress = _PreparationProgress()
+    progress = _PreparationProgress(verified_reuse=verified_reuse)
     try:
         result = _prepare_local_source(
             catalog,

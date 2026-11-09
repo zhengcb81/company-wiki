@@ -325,7 +325,7 @@ def _public_true_txt_new_anchor(tmp_path, raw):
 
         def cli(operation, *options):
             process = subprocess.run([
-                sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli",
+                sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli",
                 "--config", str(fixture.config_path), "--operation", operation, *options,
             ], cwd=fixture.root, env=fixtures.subprocess_env(), input=fixtures.encoded(request),
                 capture_output=True, timeout=40)

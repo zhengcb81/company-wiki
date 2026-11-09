@@ -3,10 +3,11 @@
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 import hashlib
+from itertools import chain
 import json
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import re
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar
 
 from .evidence_span import EVIDENCE_SPAN_SCHEMA_VERSION, EvidenceSpan
 from .source_manifest import SOURCE_MANIFEST_SCHEMA_VERSION, SourceManifest
@@ -86,18 +87,19 @@ def _merge_by_identity(
     identity_name: str,
     label: str,
 ) -> tuple[T, ...]:
-    merged: dict[str, Any] = {}
-    canonical: dict[str, str] = {}
-    for item in (*existing, *incoming):
+    merged: dict[str, T] = {}
+    for item in chain(existing, incoming):
         identity = getattr(item, identity_name)
-        text = item.canonical_json()
-        if identity in merged and canonical[identity] != text:
+        prior = merged.get(identity)
+        if (
+            prior is not None and prior is not item
+            and prior.canonical_json() != item.canonical_json()
+        ):
             raise SourceExportConflictError(
                 f"{label} conflict for existing identity {identity}"
             )
         merged[identity] = item
-        canonical[identity] = text
-    return cast(tuple[T, ...], tuple(merged[key] for key in sorted(merged)))
+    return tuple(merged[key] for key in sorted(merged))
 
 
 def _validate_relationships(
@@ -230,10 +232,7 @@ class SourceExportBundle:
         _validate_relationships(merged_manifests, merged_spans)
 
         for manifest in merged_manifests:
-            source_path = root_resolved.joinpath(
-                *PurePosixPath(manifest.original_path).parts
-            )
-            manifest.verify_file(root=root_resolved, file_path=source_path)
+            manifest.verify_file(root=root_resolved)
 
         payload = _payload_dict(merged_manifests, merged_spans)
         bundle_sha256 = _canonical_sha256(payload)
@@ -296,10 +295,7 @@ class SourceExportBundle:
     def verify_sources(self, *, root: Path) -> None:
         root_resolved = _resolve_root(root)
         for manifest in self.manifests:
-            source_path = root_resolved.joinpath(
-                *PurePosixPath(manifest.original_path).parts
-            )
-            manifest.verify_file(root=root_resolved, file_path=source_path)
+            manifest.verify_file(root=root_resolved)
 
     def to_dict(self) -> dict[str, Any]:
         payload = _payload_dict(self.manifests, self.evidence_spans)

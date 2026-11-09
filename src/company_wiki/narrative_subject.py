@@ -208,3 +208,18 @@ def publication_target(subject: NarrativeSubject, generation_sha256: str | None 
         raise SubjectBindingError("projection publication requires its exact generation hash")
     return ("urn:company-wiki:narrative-projection-bundle:" + subject.subject_sha256
             + ":" + str(generation_sha256))
+
+
+def subject_contract_sha256(*, universal_newlines: bool = False) -> str:
+    from .implementation_identity import code_sha256
+
+    return code_sha256(__file__, universal_newlines=universal_newlines)
+
+
+__all__ = [
+    'NarrativeSubject',
+    'NarrativeSubjectRef',
+    'SubjectBindingError',
+    'publication_target',
+    'subject_contract_sha256',
+]

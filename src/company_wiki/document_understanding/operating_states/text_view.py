@@ -13,7 +13,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from company_wiki.document_normalization.text_matching import matching_script_text
+from company_wiki.document_model.text_matching import matching_script_text
 
 CJK = r"[㐀-鿿]"
 _CJK_RE = re.compile(CJK)
@@ -139,3 +139,7 @@ def strip_connector(text: str) -> tuple[str, int]:
     match = CONNECTOR_PREFIX.match(text[start:])
     end = start + (match.end() if match is not None else 0)
     return text[end:], end
+
+__all__ = [
+    'strip_connector',
+]

@@ -52,3 +52,8 @@ def source_allocation_order(cards):
     for (slot, _, _), card in zip(ranked, ordered):
         result[slot] = card
     return result
+
+__all__ = [
+    'SOURCE_CARD_ALLOCATION_VERSION',
+    'source_allocation_order',
+]

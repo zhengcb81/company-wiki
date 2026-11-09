@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 import pytest
 
 from company_wiki.automation import narrative_batch as batch
+from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from company_wiki.automation.store import AutomationStore
 from support import narrative_batch_fixtures as batch_fixtures
@@ -25,7 +26,7 @@ loopback_model_server = _loopback_model_server
 
 @pytest.mark.parametrize('projection,request_schema,assessor', [
     ('reading-model-input/6', 'narrative-model-request/7', 'source-summary-assessment/1.0.0'),
-    ('reading-model-input/7', 'narrative-model-request/8', 'source-summary-assessment/1.1.0'),
+    ('reading-model-input/7', 'narrative-model-request/8', 'source-summary-assessment/1.2.0'),
 ])
 def test_explicit_fidelity_actual_http_and_same_cross_run_cache(tmp_path_factory,loopback_model_server,monkeypatch,
                                                                projection,request_schema,assessor):
@@ -49,7 +50,10 @@ def test_explicit_fidelity_actual_http_and_same_cross_run_cache(tmp_path_factory
     with isolated_batch_directory(tmp_path_factory) as root:
         state=prepare_source_catalog(root,one_source=True,include_policy=False)
         try:
-            request,_=_request(state,loopback_model_server.endpoint,'1')
+            _,wire=_request(state,loopback_model_server.endpoint,'1')
+            wire["model"]["max_response_bytes"] = 8192
+            wire.update(max_final_bytes=65536, max_persistent_bytes=32768, max_scratch_bytes=16384)
+            request=NarrativeBatchRequest.from_dict(wire)
             request=replace(request,selector_version='0.9.0',reading_model_projection=projection,max_seconds=90)
             options={'project_root':root,'catalog_config_path':state.config_path,
                      'db_path':root/'automation.db','work_dir':root/'work'}
@@ -57,6 +61,8 @@ def test_explicit_fidelity_actual_http_and_same_cross_run_cache(tmp_path_factory
             assert first['status']=='completed',first
             assert len(loopback_model_server.requests)==1 and not loopback_model_server.errors
             assert first['documents'][0]['artifact_ref']
+            assert first['storage']['persistent_added_bytes'] <= request.max_persistent_bytes
+            assert first['storage']['scratch_peak_bytes'] <= request.max_scratch_bytes
             store=AutomationStore(root/'automation.db')
             # Completed attempts are compact terminal receipts by design. Read
             # the actual published body through its public logical reference.
@@ -72,7 +78,7 @@ def test_explicit_fidelity_actual_http_and_same_cross_run_cache(tmp_path_factory
             read_request={'schema_version':'narrative-read-request/1','narrative_ref':ref,
                 'as_of_date':datetime.now(UTC).date().isoformat(),
                 'expected_source':dict.fromkeys(('canonical_entity_id','market','security_id','document_kind','fiscal_year','fiscal_period'))}
-            proc=subprocess.run([sys.executable,'-B','-m','company_wiki.source_catalog.narrative_transport_cli',
+            proc=subprocess.run([sys.executable,'-B','-m','company_wiki.automation.narrative_transport_cli',
                 '--config',str(public_config),'--operation','read'],input=json.dumps(read_request).encode(),
                 capture_output=True,cwd=root,timeout=30,
                 env=dict(os.environ,PYTHONPATH=str(Path(__file__).resolve().parents[2]/'src')))

@@ -2,10 +2,12 @@
 
 import argparse
 from collections.abc import Sequence
-import json
+from io import StringIO
 from pathlib import Path
 import sys
 from typing import Any
+
+from company_wiki.wire_json import parse_json
 
 from .evidence_span import EvidenceSpan
 from .source_export import SourceExportBundle
@@ -37,14 +39,14 @@ def _read_stable_text(path: Path) -> str:
 def _read_jsonl(path: Path, *, kind: str) -> list[Any]:
     text = _read_stable_text(path)
     records: list[Any] = []
-    for line_number, line in enumerate(text.splitlines(), start=1):
+    for line_number, line in enumerate(StringIO(text, newline=None), start=1):
         if not line.strip():
             raise ValueError(f"{kind} JSONL contains blank line {line_number}: {path}")
         try:
-            records.append(json.loads(line))
-        except json.JSONDecodeError as exc:
+            records.append(parse_json(line))
+        except (ValueError, RecursionError) as exc:
             raise ValueError(
-                f"invalid {kind} JSONL at {path}:{line_number}: {exc.msg}"
+                f"invalid {kind} JSONL at {path}:{line_number}: {exc}"
             ) from exc
     return records
 
@@ -69,9 +71,9 @@ def _load_base(path: Path | None) -> SourceExportBundle | None:
     if path is None:
         return None
     try:
-        data = json.loads(_read_stable_text(path))
-    except json.JSONDecodeError as exc:
-        raise ValueError(f"invalid base export JSON: {path}: {exc.msg}") from exc
+        data = parse_json(_read_stable_text(path))
+    except (ValueError, RecursionError) as exc:
+        raise ValueError(f"invalid base export JSON: {path}: {exc}") from exc
     return SourceExportBundle.from_dict(data)
 
 

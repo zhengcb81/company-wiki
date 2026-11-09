@@ -1,52 +1,9 @@
-"""Bind actual selector capability once for raw and official runtime paths.
+"""Compatibility imports for the source-owned selector binding."""
 
-Custom callers declare a policy they have explicitly pinned. No callable
-signature probing or retry is needed; the established call shape stays intact.
-"""
-from __future__ import annotations
-
-from dataclasses import dataclass
-from functools import partial
-from typing import Protocol
-from company_wiki.resource_budget import WorkBudget
-
-from company_wiki.source_catalog.narrative_document import DocumentStructure, NarrativeEvidencePackage
-from company_wiki.source_catalog.narrative_evidence import (
-    NarrativeSelectorVersionError, resolve_narrative_selector_version, select_narrative_evidence,
+from company_wiki.source_catalog.narrative_selector_binding import (
+    BoundNarrativeSelector,
+    NarrativeSelector,
+    bind_narrative_selector,
 )
 
-
-class NarrativeSelector(Protocol):
-    def __call__(self, parsed: DocumentStructure, *, title: str,
-                 existing_kind: str = "unknown") -> NarrativeEvidencePackage: ...
-
-
-@dataclass(frozen=True)
-class BoundNarrativeSelector:
-    selector: NarrativeSelector
-    selector_version: str
-    builtin: bool = False
-
-    def __call__(self, parsed: DocumentStructure, *, title: str,
-                 existing_kind: str = "unknown",
-                 work_budget: WorkBudget | None = None) -> NarrativeEvidencePackage:
-        if self.builtin and work_budget is not None:
-            return select_narrative_evidence(parsed, title=title, existing_kind=existing_kind,
-                selector_version=self.selector_version, work_budget=work_budget)
-        return self.selector(parsed, title=title, existing_kind=existing_kind)
-
-
-def bind_narrative_selector(selector: NarrativeSelector | None = None, *,
-                            selector_version: str | None = None) -> BoundNarrativeSelector:
-    """Resolve a supported policy and preserve an explicitly declared custom pin."""
-    if isinstance(selector, BoundNarrativeSelector):
-        effective = resolve_narrative_selector_version(selector.selector_version)
-        if selector_version is not None and resolve_narrative_selector_version(selector_version) != effective:
-            raise NarrativeSelectorVersionError("NARRATIVE_SELECTOR_VERSION_CONFLICT")
-        return selector
-    if selector is None or selector is select_narrative_evidence:
-        effective = resolve_narrative_selector_version(selector_version)
-        return BoundNarrativeSelector(partial(select_narrative_evidence, selector_version=effective), effective, True)
-    if selector_version is None:
-        raise NarrativeSelectorVersionError("CUSTOM_SELECTOR_VERSION_REQUIRED")
-    return BoundNarrativeSelector(selector, resolve_narrative_selector_version(selector_version))
+__all__ = ["BoundNarrativeSelector", "NarrativeSelector", "bind_narrative_selector"]

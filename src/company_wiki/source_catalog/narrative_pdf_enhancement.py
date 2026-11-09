@@ -19,7 +19,7 @@ import time
 from types import MappingProxyType
 from typing import Any
 
-from company_wiki._bounded_process import run_bounded, TransportError, ChildTimeout, ChildFailed
+from company_wiki.bounded_process import run_bounded, TransportError, ChildTimeout, ChildFailed
 from company_wiki.resource_budget import WorkBudget
 from .narrative_document import DocumentStructure
 from .narrative_pdf_environment import ENVIRONMENT_ALGORITHM, LEGACY_ENVIRONMENT_ALGORITHM

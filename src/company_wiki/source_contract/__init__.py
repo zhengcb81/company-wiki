@@ -1,6 +1,8 @@
 """Versioned, side-effect-free contracts for immutable upstream sources."""
 
-from .announcement_collector import (
+from typing import TYPE_CHECKING, Any
+
+from .announcement_receipt import (
     ANNOUNCEMENT_COLLECTION_ID_PREFIX,
     ANNOUNCEMENT_COLLECTION_SCHEMA_VERSION,
     ANNOUNCEMENT_COLLECTOR_NAME,
@@ -14,8 +16,6 @@ from .announcement_collector import (
     AnnouncementDownloadError,
     AnnouncementURLPolicyError,
     DownloadedAnnouncement,
-    collect_announcement,
-    download_announcement,
     validate_official_announcement_url,
 )
 
@@ -41,6 +41,7 @@ from .evidence_span import (
     EvidenceSpanError,
     ParseStatus,
     QualityFlag,
+    plain_json_value,
     evidence_span_id_for,
     output_sha256_for,
 )
@@ -66,6 +67,22 @@ from .source_manifest import (
     SourceType,
     source_id_for_sha256,
 )
+from .source_version import SourceReadError, SourceRef, SourceRefError, SourceVersionPort
+
+if TYPE_CHECKING:
+    from .announcement_collector import (
+        collect_announcement as collect_announcement,
+        download_announcement as download_announcement,
+    )
+
+
+def __getattr__(name: str) -> Any:
+    if name in {"collect_announcement", "download_announcement"}:
+        from . import announcement_collector
+
+        return getattr(announcement_collector, name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 __all__ = [
     "ANNOUNCEMENT_COLLECTION_ID_PREFIX",
@@ -99,9 +116,14 @@ __all__ = [
     "ImmutableStatus",
     "ParseStatus",
     "QualityFlag",
+    "plain_json_value",
     "SourceManifest",
     "SourceManifestError",
     "SourceManifestMismatchError",
+    "SourceReadError",
+    "SourceRef",
+    "SourceRefError",
+    "SourceVersionPort",
     "SourceType",
     "SourceExportBundle",
     "SourceExportBundleV2",

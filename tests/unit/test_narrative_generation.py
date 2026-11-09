@@ -104,7 +104,7 @@ def test_generation_binds_source_processing_metadata_profile_and_all_versions():
 
 def test_each_carrier_uses_actual_parser_and_pathless_component_fingerprint():
     from company_wiki.automation.narrative_generation import generation_manifest
-    from company_wiki.automation.narrative_formats import parser_component
+    from company_wiki.source_catalog.narrative_formats import parser_component
 
     request = _request()
     payload = SourceRevisionEventPayload.from_dict(
@@ -220,17 +220,17 @@ def test_unrelated_control_locators_are_not_run_usage_and_legacy_baseline_is_pre
     work = tmp_path / "work"
     catalog_dir.mkdir()
     work.mkdir()
+    control = catalog_dir / "narrative-generations"
     catalog = SimpleNamespace(
-        config=SimpleNamespace(
-            catalog_dir=catalog_dir, database_path=catalog_dir / "catalog.sqlite"
-        )
+        narrative_database_sizes=lambda: (0, 0, 0),
+        narrative_object_bytes=lambda: 0,
+        legacy_narrative_generation_directory=lambda: control,
     )
     digest = "a" * 64
     guard = module._storage_guard(
         _request(), catalog, tmp_path / "auto.sqlite", work, digest
     )
     before = guard.snapshot().persistent_added_bytes
-    control = catalog_dir / "narrative-generations"
     control.mkdir()
     (control / "pointer.json").write_bytes(b"actual owned locator")
     assert guard.snapshot().persistent_added_bytes == before
@@ -243,7 +243,7 @@ def test_unrelated_control_locators_are_not_run_usage_and_legacy_baseline_is_pre
     old_guard = module._storage_guard(
         _request(), catalog, tmp_path / "auto.sqlite", work, digest, read_only=True
     )
-    assert len(old_guard.paths) == 8 and legacy.read_bytes() == original
+    assert len(old_guard.baseline) == 8 and legacy.read_bytes() == original
 
 
 def test_raw_reasoning_effort_is_causal_without_resigning_legacy_omissions():

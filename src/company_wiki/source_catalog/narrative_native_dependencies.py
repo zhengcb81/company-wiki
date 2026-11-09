@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from company_wiki.resource_budget import WorkBudget
-from company_wiki.document_understanding.observation_adapter import _wire_kind
+from company_wiki.document_understanding.observation_adapter import wire_kind
 
 
 @dataclass(frozen=True)
@@ -144,9 +144,9 @@ def collect_native_dependencies(
                     reject((target,), "native_dependency_proof_shape")
                     continue
                 if (any(uid not in furniture_ids
-                        or _wire_kind(originals[uid], originals[uid].coordinates) not in {"paragraph", "heading"}
+                        or wire_kind(originals[uid], originals[uid].coordinates) not in {"paragraph", "heading"}
                         for uid in furniture)
-                        or any(_wire_kind(originals[uid], originals[uid].coordinates) != "paragraph"
+                        or any(wire_kind(originals[uid], originals[uid].coordinates) != "paragraph"
                                for uid in (left, right))):
                     reject((target,), "native_dependency_role")
                     continue

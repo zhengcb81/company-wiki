@@ -16,3 +16,16 @@ def reading_annotations(reading: Mapping[str, Any], score: int) -> dict[str, Any
     values = (reading['priority'], reading.get('value_band', 'description'),
               reading.get('fact_purpose', 'unknown'), score)
     return dict(zip(READING_ANNOTATION_FIELDS, values, strict=True))
+
+
+def selection_annotations_sha256() -> str:
+    from company_wiki.implementation_identity import code_sha256
+
+    return code_sha256(__file__)
+
+
+__all__ = [
+    'READING_ANNOTATION_FIELDS',
+    'reading_annotations',
+    'selection_annotations_sha256',
+]

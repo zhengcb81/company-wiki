@@ -4,7 +4,7 @@ from importlib import import_module
 
 import pytest
 
-from company_wiki.document_understanding import decision_inventory
+from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
 
 
 @pytest.mark.parametrize("name", [
@@ -12,7 +12,7 @@ from company_wiki.document_understanding import decision_inventory
     "company_wiki.document_understanding.operating_states.patterns",
     "company_wiki.document_understanding.operating_states.assertion_roles",
     "company_wiki.document_understanding.operating_states.text_view",
-    "company_wiki.document_normalization.text_matching",
+    "company_wiki.document_model.text_matching",
     "company_wiki.source_catalog.n6_candidate_operating_facts",
     "company_wiki.source_catalog.narrative_source_passage",
     "company_wiki.source_catalog.narrative_causal_links",
@@ -21,11 +21,11 @@ from company_wiki.document_understanding import decision_inventory
 ])
 def test_actual_source_grammar_bytes_invalidate_decision_without_a_version_bump(name, tmp_path, monkeypatch):
     module = import_module(name)
-    before = decision_inventory._versions()
+    before = decision_inventory.decision_versions()
     changed = tmp_path / "changed_owner.py"
     changed.write_text("# genuinely changed matching owner\n", encoding="utf-8")
     monkeypatch.setattr(module, "__file__", str(changed))
-    after = decision_inventory._versions()
+    after = decision_inventory.decision_versions()
     assert before["business_algorithms"] != after["business_algorithms"]
 
 

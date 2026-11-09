@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 from integration import test_official_source_flow as official
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
-from company_wiki.source_catalog.official_source_flow import (
+from company_wiki.automation.source_request import (
     prepare_official_narrative_request,
 )
 

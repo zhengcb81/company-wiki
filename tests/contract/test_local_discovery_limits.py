@@ -63,10 +63,14 @@ def test_metadata_discovery_limit_is_finite_and_distinct(tmp_path):
         close(cat)
 
 
-@pytest.mark.parametrize("value", [0, True, 100001])
+@pytest.mark.parametrize("value", [0, True, -1])
 def test_invalid_discovery_ceiling_is_rejected(value):
     with pytest.raises(ValueError):
         LocalPrepareLimits(max_discovery_groups=value)
+
+
+def test_explicit_discovery_ceiling_can_exceed_the_old_hard_limit():
+    assert LocalPrepareLimits(max_discovery_groups=100001).max_discovery_groups == 100001
 
 
 def test_discovery_entry_cap_is_not_false_absence(tmp_path):

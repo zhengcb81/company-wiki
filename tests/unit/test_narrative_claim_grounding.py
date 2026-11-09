@@ -59,6 +59,7 @@ def check(quote, *, name="one", **kwargs):
 
 
 def test_real_paid_response_replays_through_the_actual_decoder(real_case):
+    frozen_projection = deepcopy(real_case["expected_public_draft"])
     selected = NarrativeSelectResult.from_dict(real_case["selected"])
     request = NarrativeModelRequest.from_selection(selected, reading_projection_version="reading-model-input/3").with_output_budget(8192)
     assert_archived_request_upgrade(request, real_case["request"], selected=selected,
@@ -66,11 +67,23 @@ def test_real_paid_response_replays_through_the_actual_decoder(real_case):
     response = NarrativeModelResponse("saved-paid-final", "mimo-v2.6-flash", request.prompt_version,
                                       real_case["response_utf8"].encode())
     draft = decode_model_draft(response, selected=selected, reading_projection_version="reading-model-input/3")
-    assert draft == real_case["expected_public_draft"]
+    # The archived public projection remains byte-for-byte historical. Replaying
+    # its saved response under the current decoder can add only current source
+    # qualifier diagnostics; the saved response and archived expectation stay fixed.
+    expected = frozen_projection
+    assert {key: value for key, value in draft.items() if key != "status"} | {
+        "claims": [{key: value for key, value in row.items() if key != "needs_review"}
+                   for row in draft["claims"]]
+    } == {key: value for key, value in expected.items() if key != "status"} | {
+        "claims": [{key: value for key, value in row.items() if key != "needs_review"}
+                   for row in expected["claims"]]
+    }
+    assert real_case["expected_public_draft"] == frozen_projection
     assert len(draft["claims"]) == 20
-    # The old mechanical boundary accepts these: the new observation must not
-    # rewrite this historical receipt or invent a passing semantic judgment.
-    assert all(not row["needs_review"] for row in draft["claims"])
+    # The saved old result is not rewritten, while the new replay points out
+    # source modalities that the archived output upgraded to completed facts.
+    assert [row["claim_id"] for row in draft["claims"] if row["needs_review"]] == ["c15", "c18", "c19"]
+    assert draft["status"] == "needs_review"
     observations = score_claim_facts(real_case["reviewed_fact_checks"], claims=draft["claims"],
         evidence_spans=selected.evidence_spans, reading_context=selected.reading_context,
         source_id=selected.source_ref.source_id)

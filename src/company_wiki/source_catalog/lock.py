@@ -14,7 +14,7 @@ import time
 from typing import Iterator, Any, cast
 import uuid
 
-from company_wiki._file_mutex import FileMutexLockedError, os_file_mutex
+from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
 from .download_budget import AcquisitionBudget
 
 

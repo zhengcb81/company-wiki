@@ -388,3 +388,9 @@ def _prepare_pages(doc: Doc, pages_raw: list, *, charge_preparation: bool) -> Do
         else:
             doc.processed_ids.append(unit.unit_id)
     return doc
+
+__all__ = [
+    'DEFAULT_LIMITS',
+    'WorkBudget',
+    'WorkBudgetExceeded',
+]

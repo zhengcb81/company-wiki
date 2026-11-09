@@ -5,7 +5,6 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 import math
-import re
 from typing import Any
 import unicodedata
 
@@ -17,6 +16,7 @@ from ..source_contract import (
     QualityFlag,
     SourceManifest,
 )
+from ._pdf_values import LOW_PAGE_QUALITY_THRESHOLD, paragraph_ranges, require_ratio
 
 
 PAGE_AWARE_PDF_PARSER_NAME = "pdf_page_aware_core"
@@ -34,9 +34,7 @@ _PAGE_FIELDS = frozenset(
         "error",
     }
 )
-_TABLE_FIELDS = frozenset({"markdown", "rows", "cols", "data"})
-_PARAGRAPH_BREAK_RE = re.compile(r"\n[ \t]*\n+")
-_LOW_QUALITY_THRESHOLD = 0.30
+_TABLE_FIELDS = frozenset({"rows", "cols", "data"})
 _LOW_OCR_CONFIDENCE_THRESHOLD = 0.80
 
 
@@ -92,14 +90,6 @@ def _require_integer(value: Any, field_name: str, *, minimum: int) -> int:
     return value
 
 
-def _require_ratio(value: Any, field_name: str) -> float | int:
-    if isinstance(value, bool) or not isinstance(value, (float, int)):
-        raise PageAwarePDFAdapterError(f"{field_name} must be numeric")
-    if not math.isfinite(value) or not 0.0 <= value <= 1.0:
-        raise PageAwarePDFAdapterError(f"{field_name} must be finite in [0, 1]")
-    return value
-
-
 def _require_nfc_lf(value: Any, field_name: str) -> str:
     if not isinstance(value, str):
         raise TypeError(f"{field_name} must be text")
@@ -133,7 +123,7 @@ def _validate_page(value: Any, *, expected_page_number: int) -> _Page:
         )
     text = _require_nfc_lf(value["text"], "text").strip(" \t\n")
     tables = tuple(_require_sequence(value["tables"], "tables"))
-    quality_score = _require_ratio(value["quality_score"], "quality_score")
+    quality_score = require_ratio(value["quality_score"], "quality_score", error=PageAwarePDFAdapterError)
     ocr_used = value["ocr_used"]
     if not isinstance(ocr_used, bool):
         raise TypeError("ocr_used must be boolean")
@@ -143,7 +133,7 @@ def _validate_page(value: Any, *, expected_page_number: int) -> _Page:
             raise PageAwarePDFAdapterError(
                 "ocr_confidence is required when ocr_used is true"
             )
-        ocr_confidence = _require_ratio(ocr_confidence, "ocr_confidence")
+        ocr_confidence = require_ratio(ocr_confidence, "ocr_confidence", error=PageAwarePDFAdapterError)
     elif ocr_confidence is not None:
         raise PageAwarePDFAdapterError(
             "ocr_confidence must be null when ocr_used is false"
@@ -175,25 +165,6 @@ def _validate_page(value: Any, *, expected_page_number: int) -> _Page:
     )
 
 
-def _paragraph_ranges(text: str) -> tuple[tuple[int, int, str], ...]:
-    segments: list[tuple[int, int]] = []
-    cursor = 0
-    for separator in _PARAGRAPH_BREAK_RE.finditer(text):
-        segments.append((cursor, separator.start()))
-        cursor = separator.end()
-    segments.append((cursor, len(text)))
-    ranges: list[tuple[int, int, str]] = []
-    for start, end in segments:
-        segment = text[start:end]
-        left = segment.lstrip(" \t\n")
-        if not left:
-            continue
-        adjusted_start = start + len(segment) - len(left)
-        raw_text = left.rstrip(" \t\n")
-        ranges.append((adjusted_start, adjusted_start + len(raw_text), raw_text))
-    return tuple(ranges)
-
-
 def _page_flags(page: _Page) -> tuple[QualityFlag, ...]:
     flags: list[QualityFlag] = []
     if page.ocr_used:
@@ -206,7 +177,7 @@ def _page_flags(page: _Page) -> tuple[QualityFlag, ...]:
         flags.append(QualityFlag.LAYOUT_AMBIGUOUS)
     if page.encoding_repaired:
         flags.append(QualityFlag.ENCODING_REPAIRED)
-    if page.quality_score < _LOW_QUALITY_THRESHOLD:
+    if page.quality_score < LOW_PAGE_QUALITY_THRESHOLD:
         flags.append(QualityFlag.PARSER_WARNING)
     return tuple(flags)
 
@@ -256,11 +227,10 @@ def _table_results(
     for table_index, table in enumerate(page.tables):
         if not isinstance(table, Mapping):
             raise TypeError("each table must be a mapping")
-        if set(table) != _TABLE_FIELDS:
+        if set(table) - {"markdown"} != _TABLE_FIELDS:
             raise PageAwarePDFAdapterError(
-                "table fields must exactly match pdf_extract_v3 table output"
+                "table fields must include rows, cols and data, with optional markdown"
             )
-        _require_nfc_lf(table["markdown"], "table markdown")
         rows = _require_integer(table["rows"], "rows", minimum=1)
         cols = _require_integer(table["cols"], "cols", minimum=1)
         data = _require_sequence(table["data"], "table data")
@@ -345,7 +315,7 @@ def adapt_pdf_pages(
             normalized_parts.append(page.text)
             normalized_cursor += len(page.text)
             for paragraph_index, (start, end, raw_text) in enumerate(
-                _paragraph_ranges(page.text)
+                paragraph_ranges(page.text)
             ):
                 results.append(
                     ParserResult(

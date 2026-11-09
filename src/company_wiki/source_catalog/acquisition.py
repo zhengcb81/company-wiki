@@ -11,7 +11,9 @@ import json
 from pathlib import Path
 import re
 import shutil
-from typing import Any, Protocol, cast, runtime_checkable
+from typing import Any, Protocol, TYPE_CHECKING, cast, runtime_checkable
+
+from company_wiki.source_contract.source_version import SourceReadError
 
 from .authorization import DownloadAuthorization
 from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
@@ -23,6 +25,9 @@ from .resolver import (
     SourceResolver,
 )
 from .service import SourceCatalog
+
+if TYPE_CHECKING:
+    from .source_reader import FilingReuseObservation
 
 
 ACQUISITION_SCHEMA_VERSION = "1.0"
@@ -300,6 +305,14 @@ class AcquisitionResult:
         return result
 
 
+@dataclass(frozen=True)
+class _AcquisitionDecision:
+    """One transaction's public result and its private reuse proof."""
+
+    result: AcquisitionResult
+    verified_reuse: FilingReuseObservation | None = None
+
+
 def acquisition_target_sha256(request: SourceRequest, candidate: DownloadCandidate) -> str:
     """Stable target/staging lock identity, excluding modes, limits and TTLs."""
     target = {"market": candidate.market, "security": (request.security_id or request.entity).upper(),
@@ -376,6 +389,12 @@ class AcquisitionCoordinator:
         self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
         candidate_scope: Callable[[DownloadCandidate], bool] | None = None,
     ) -> AcquisitionResult:
+        return self._select_for_ensure(request, budget=budget, candidate_scope=candidate_scope).result
+
+    def _select_for_ensure(
+        self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
+        candidate_scope: Callable[[DownloadCandidate], bool] | None = None,
+    ) -> _AcquisitionDecision:
         """Resolve or discover one target without fetching any original bytes."""
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
@@ -383,7 +402,7 @@ class AcquisitionCoordinator:
             raise TypeError("budget must be AcquisitionBudget")
         if budget is not None:
             budget.ensure_open()
-        resolution = SourceResolver(self.catalog).resolve(request)
+        resolution, verified = SourceResolver(self.catalog).resolve_for_acquisition(request, reconcile_scope=True)
         if resolution.status in {
             ResolutionStatus.REUSED_EXACT,
             ResolutionStatus.REUSED_EQUIVALENT,
@@ -394,33 +413,39 @@ class AcquisitionCoordinator:
                 # reuse vs gap. Fall through to the gap-plan path.
                 pass
             elif candidate_scope is None:
-                return AcquisitionResult(
+                return _AcquisitionDecision(AcquisitionResult(
                     schema_version=ACQUISITION_SCHEMA_VERSION,
                     status=AcquisitionStatus.REUSED,
                     resolution=resolution,
                     reason="existing_catalog_source_reused_before_adapter",
-                )
+                ), verified)
         if resolution.status is ResolutionStatus.AMBIGUOUS:
-            return AcquisitionResult(
+            return _AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS,
                 resolution=resolution,
                 reason=resolution.reason,
-            )
+            ))
         # Explicit intake may reconcile existing local declarations. A proven
         # local gap is not byte absence and must not trigger another fetch.
-        from .local_reconcile import prepare_local_source
+        from .local_reconcile import _prepare_local_source_operation
         from .local_inventory import LocalPrepareLimits
         limits = LocalPrepareLimits(timeout_seconds=min(30.0, budget.remaining_seconds)) if budget is not None else None
-        local = prepare_local_source(self.catalog, request, limits=limits)
+        local = _prepare_local_source_operation(self.catalog, request, limits=limits, verified_reuse=verified)
         if budget is not None:
             budget.ensure_open()
         if local["status"] == "ready":
-            resolution = SourceResolver(self.catalog).resolve(request)
+            if verified is None or local["operations"] or local["source_ref"] != verified.source_ref.to_dict():
+                resolution, verified = SourceResolver(self.catalog).resolve_for_acquisition(request)
             if request.mode != "latest_as_of" and candidate_scope is None:
-                return AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+                if resolution.status is ResolutionStatus.AMBIGUOUS:
+                    return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+                        status=AcquisitionStatus.AMBIGUOUS, resolution=resolution, reason=resolution.reason))
+                if verified is None:
+                    raise SourceReadError("unavailable", "source_ref_changed", resolution.reason)
+                return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
                     status=AcquisitionStatus.REUSED, resolution=resolution,
-                    reason="existing_local_source_reconciled_before_adapter")
+                    reason="existing_local_source_reconciled_before_adapter"), verified)
         elif local["blocks_download"]:
             local_read_budgets = [
                 item for item in local.get("operations", ())
@@ -435,19 +460,19 @@ class AcquisitionCoordinator:
             }
             if local_read_budgets:
                 local_preparation["local_read_budget"] = local_read_budgets[0]
-            return AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+            return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS if local["status"] == "ambiguous" else AcquisitionStatus.MISSING,
-                resolution=resolution, reason=local["reason"], local_preparation=local_preparation)
+                resolution=resolution, reason=local["reason"], local_preparation=local_preparation))
         if request.mode == "latest_as_of":
             return self._gap_plan_result(request, resolution, budget=budget,
                                          candidate_scope=candidate_scope)
         if not request.allow_download:
-            return AcquisitionResult(
+            return _AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.MISSING,
                 resolution=resolution,
                 reason="download_required_but_not_allowed",
-            )
+            ))
         if request.market is None:
             raise MarketRoutingError("market is required before adapter discovery")
         adapter = self.adapters.for_market(request.market)
@@ -462,20 +487,20 @@ class AcquisitionCoordinator:
                            if (candidate_scope is None or candidate_scope(c))
                            and (c.filing_date is None or c.filing_date <= request.as_of_date))
         if not candidates:
-            return AcquisitionResult(
+            return _AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.MISSING, resolution=resolution,
                 adapter_name=adapter.name, reason="adapter_discovery_returned_no_candidate",
-            )
+            ))
         if len(candidates) != 1:
-            return AcquisitionResult(
+            return _AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS, resolution=resolution,
                 adapter_name=adapter.name, reason="adapter_discovery_returned_multiple_candidates",
-            )
-        return AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+            ))
+        return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
             status=AcquisitionStatus.SELECTED, resolution=resolution,
-            adapter_name=adapter.name, candidate=candidates[0], reason="candidate_selected")
+            adapter_name=adapter.name, candidate=candidates[0], reason="candidate_selected"))
 
     @staticmethod
     def _validate_candidates(request: SourceRequest, candidates: tuple[DownloadCandidate, ...]) -> None:
@@ -492,6 +517,12 @@ class AcquisitionCoordinator:
         self, request: SourceRequest, selection: AcquisitionResult, *,
         budget: AcquisitionBudget | None = None,
     ) -> AcquisitionResult:
+        return self._stage_for_ensure(request, selection, budget=budget).result
+
+    def _stage_for_ensure(
+        self, request: SourceRequest, selection: AcquisitionResult, *,
+        budget: AcquisitionBudget | None = None,
+    ) -> _AcquisitionDecision:
         """Recheck local identity, then stage the chosen target without rediscovery.
 
         The transaction service holds the target lock across this and import.
@@ -506,12 +537,12 @@ class AcquisitionCoordinator:
             raise AcquisitionError("candidate publication exceeds as-of")
         adapter = self.adapters.for_market(candidate.market)
         discovered_request = self.target_request(request, candidate)
-        discovered_resolution = SourceResolver(self.catalog).resolve(discovered_request)
+        discovered_resolution, verified = SourceResolver(self.catalog).resolve_for_acquisition(discovered_request)
         if discovered_resolution.status in {
             ResolutionStatus.REUSED_EXACT,
             ResolutionStatus.REUSED_EQUIVALENT,
         }:
-            return AcquisitionResult(
+            return _AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.REUSED,
                 resolution=replace(discovered_resolution, request_id=request.request_id),
@@ -519,16 +550,16 @@ class AcquisitionCoordinator:
                 candidate=candidate,
                 reason="existing_catalog_source_reused_after_discovery",
                 gap_plan=selection.gap_plan,
-            )
+            ), verified)
         if discovered_resolution.status is ResolutionStatus.AMBIGUOUS:
-            return AcquisitionResult(
+            return _AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS,
                 resolution=replace(discovered_resolution, request_id=request.request_id),
                 adapter_name=adapter.name, candidate=candidate,
                 reason=discovered_resolution.reason,
                 gap_plan=selection.gap_plan,
-            )
+            ))
         request_directory = self.staging_root / acquisition_target_sha256(request, candidate)
         request_directory.mkdir(parents=True, exist_ok=True)
         if budget is None:
@@ -551,7 +582,7 @@ class AcquisitionCoordinator:
                     "staged response exceeds remaining acquisition byte budget"
                 )
         self._validate_receipt(candidate, receipt, request_directory)
-        return AcquisitionResult(
+        return _AcquisitionDecision(AcquisitionResult(
             schema_version=ACQUISITION_SCHEMA_VERSION,
             status=AcquisitionStatus.STAGED,
             resolution=selection.resolution,
@@ -560,7 +591,7 @@ class AcquisitionCoordinator:
             receipt=receipt,
             reason="missing_source_downloaded_to_staging_pending_canonical_import",
             gap_plan=selection.gap_plan,
-        )
+        ))
 
     @staticmethod
     def target_request(request: SourceRequest, candidate: DownloadCandidate) -> SourceRequest:
@@ -596,7 +627,7 @@ class AcquisitionCoordinator:
         *,
         budget: AcquisitionBudget | None = None,
         candidate_scope: Callable[[DownloadCandidate], bool] | None = None,
-    ) -> AcquisitionResult:
+    ) -> _AcquisitionDecision:
         """Discover once and align periods; an explicit intent can select a target."""
         if request.market is None:
             raise MarketRoutingError("market is required before adapter discovery")
@@ -633,17 +664,8 @@ class AcquisitionCoordinator:
             discovered = ()
         self._validate_candidates(request, discovered)
         discovered = tuple(c for c in discovered if candidate_scope is None or candidate_scope(c))
-        plan = build_gap_plan(
-            request_id=request.request_id,
-            as_of_date=request.as_of_date,
-            document_kind=request.document_kind,
-            entity=request.entity,
-            market=request.market,
-            local_handles=list(resolution.matches),
-            remote_candidates=list(discovered),
-            provider_error=provider_error,
-        )
         candidate = None
+        verified = None
         status = AcquisitionStatus.GAP
         reason = "metadata_only_gap_plan" if provider_error is None else "metadata_only_gap_plan_provider_unavailable"
         if request.allow_download and provider_error is None:
@@ -660,8 +682,24 @@ class AcquisitionCoordinator:
             elif candidate_scope is None and resolution.status in {
                 ResolutionStatus.REUSED_EXACT, ResolutionStatus.REUSED_EQUIVALENT,
             }:
-                status, reason = AcquisitionStatus.REUSED, "local_source_latest_as_of_provider_metadata"
-        return AcquisitionResult(
+                # Provider discovery may have run long enough for the local
+                # version to change. Observe current bytes at this boundary.
+                resolution, verified = SourceResolver(self.catalog).resolve_for_acquisition(request)
+                if verified is not None:
+                    status, reason = AcquisitionStatus.REUSED, "local_source_latest_as_of_provider_metadata"
+                elif resolution.status is ResolutionStatus.AMBIGUOUS:
+                    status, reason = AcquisitionStatus.AMBIGUOUS, resolution.reason
+        plan = build_gap_plan(
+            request_id=request.request_id,
+            as_of_date=request.as_of_date,
+            document_kind=request.document_kind,
+            entity=request.entity,
+            market=request.market,
+            local_handles=list(resolution.matches),
+            remote_candidates=list(discovered),
+            provider_error=provider_error,
+        )
+        return _AcquisitionDecision(AcquisitionResult(
             schema_version=ACQUISITION_SCHEMA_VERSION,
             status=status,
             resolution=resolution,
@@ -670,7 +708,7 @@ class AcquisitionCoordinator:
             candidate=candidate,
             reason=reason,
             acquisition_failure=acquisition_failure,
-        )
+        ), verified)
 
     @staticmethod
     def _require_bounded_adapter(adapter: Any) -> None:

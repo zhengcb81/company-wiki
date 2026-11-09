@@ -186,10 +186,11 @@ def _dedupe(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 __all__ = [
-    "CODE_CONTEXT_RESTORED",
-    "CODE_NEGATION_PROTECTED",
-    "CODE_NOT_SELECTABLE_WITHHELD",
-    "CODE_UNKNOWN_PACKAGE",
-    "dependency_closure",
-    "package_for_unit",
+    'CODE_CONTEXT_RESTORED',
+    'CODE_NEGATION_PROTECTED',
+    'CODE_NOT_SELECTABLE_WITHHELD',
+    'CODE_UNKNOWN_PACKAGE',
+    'dependency_closure',
+    'package_for_unit',
+    'build_context_graph',
 ]

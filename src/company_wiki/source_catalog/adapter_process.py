@@ -11,7 +11,7 @@ import subprocess
 from tempfile import TemporaryDirectory
 from typing import Any, Sequence
 
-from company_wiki._bounded_process import TransportError, run_json_process
+from company_wiki.bounded_process import TransportError, run_json_process
 
 from .acquisition import DownloadCandidate, DownloadReceipt
 from .download_budget import AcquisitionBudget

@@ -40,6 +40,22 @@ def test_replay_of_unchanged_structure_passes_with_same_sha():
     assert replayed["tables"] == structure["tables"]
 
 
+def test_replay_hashes_original_package_once(monkeypatch):
+    payload = _payload()
+    structure = _parse(payload)
+    sha256 = hashlib.sha256
+    package_checks = []
+
+    def count_source_hash(data=b"", **kwargs):
+        if data is payload:
+            package_checks.append(data)
+        return sha256(data, **kwargs)
+
+    monkeypatch.setattr(hashlib, "sha256", count_source_hash)
+    assert replay_office_tables(payload, structure) == structure
+    assert len(package_checks) == 1
+
+
 def test_replay_detects_a_changed_column_span():
     payload = _payload()
     structure = _parse(payload)

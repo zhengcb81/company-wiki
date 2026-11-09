@@ -5,7 +5,7 @@ import json
 import pytest
 
 from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
-from company_wiki.source_catalog.official_source_flow import prepare_official_narrative_request
+from company_wiki.automation.source_request import prepare_official_narrative_request
 from unit.test_narrative_batch_request import _request
 from unit.test_narrative_versioned_resume import frozen_run as _existing_frozen_run
 
@@ -131,7 +131,10 @@ def test_actual_frozen_resume_keeps_request_and_persisted_jobs_budget(frozen_run
     state, request, store, runs, run = frozen_run
     restored = NarrativeBatchRequest.from_dict(json.loads(json.dumps(request.to_dict())))
     original = (request.request_sha256, run, store.list_jobs(), runs.budget_snapshot(run.run_id))
-    binding, _versions, jobs = batch._resume_binding(restored, state.reader, store, runs, run, deadline=None)
+    binding, _versions, jobs = batch._resume_binding(
+        restored, state.reader, store, runs, run, deadline=None,
+        open_artifacts=state.catalog.open_narrative_artifact_reader,
+    )
     assert restored.reading_model_projection is None
     assert restored.request_sha256 == original[0]
     assert binding.input_hash == run.input_hash

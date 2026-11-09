@@ -24,7 +24,7 @@ from urllib.parse import urlsplit
 
 import httpx
 
-from company_wiki._file_mutex import os_file_mutex
+from company_wiki.file_mutex import os_file_mutex
 from .acquisition import DownloadCandidate
 from .bounded_http import (
     BudgetedAsyncHTTPTransport, BudgetedHTTPTransport, ProviderBudgetStop,

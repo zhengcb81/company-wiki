@@ -19,9 +19,12 @@ from .relations import (
     RELATIONS_SCHEMA,
     detect_operating_relations,
 )
+from .qualifiers import OperatingQualifiers, classify_qualifiers
 
 __all__ = [
-    "OBSERVATION_SCHEMA",
-    "RELATIONS_SCHEMA",
-    "detect_operating_relations",
+    'OBSERVATION_SCHEMA',
+    'RELATIONS_SCHEMA',
+    'detect_operating_relations',
+    'OperatingQualifiers',
+    'classify_qualifiers',
 ]

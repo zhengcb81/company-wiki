@@ -522,7 +522,7 @@ def test_generation_manifest_must_bind_complete_subject_before_any_object_write(
         assert state.artifacts.prepared_effects() == () and state.loads == []
 
 
-def test_two_issuers_sharing_exact_parents_publish_and_compact_independently(tmp_path):
+def test_two_issuers_sharing_exact_parents_publish_and_compact_independently(tmp_path, monkeypatch):
     with publication_state(tmp_path, subject_two=True) as state:
         assert state.item.subject.anchor_ref == state.other.subject.anchor_ref
         assert dispatch(state).status == "visible"
@@ -533,14 +533,30 @@ def test_two_issuers_sharing_exact_parents_publish_and_compact_independently(tmp
             for job in state.other.job_ids
         }
         pin = pin_for(state)
-        compact = compact_terminal_narrative_jobs(
-            state.auto,
-            state.artifacts,
-            job_ids=state.item.job_ids,
-            final_artifact=pin,
-            compacted_at=T3,
-            projection_loader=state.loader,
+        _, payload = state.artifacts.read_current_subject(
+            artifact_version_id=pin.artifact_version_id, subject=state.item.subject,
+            generation_sha256=state.item.generation,
         )
+        real_sha256 = hashlib.sha256
+        checks = []
+
+        def counted_sha256(data=b"", **options):
+            if data == payload:
+                checks.append(data)
+            return real_sha256(data, **options)
+
+        with monkeypatch.context() as patch:
+            patch.setattr(hashlib, "sha256", counted_sha256)
+            compact = compact_terminal_narrative_jobs(
+                state.auto,
+                state.artifacts,
+                job_ids=state.item.job_ids,
+                final_artifact=pin,
+                compacted_at=T3,
+                projection_loader=state.loader,
+            )
+        # The catalog object and the persisted AUTO verify result are distinct.
+        assert checks == [payload, payload]
         assert (
             compact.attempts_compacted == 3
             and compact.logical_bytes_after < compact.logical_bytes_before

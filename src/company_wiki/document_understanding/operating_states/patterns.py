@@ -507,3 +507,6 @@ EVENT_PATTERNS = (
     ("relation_plan", RELATION_PLAN),
     ("relation_plan_en", RELATION_PLAN_EN),
 )
+
+__all__ = [
+]

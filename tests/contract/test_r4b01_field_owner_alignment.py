@@ -443,12 +443,14 @@ def test_r4b01_empty_reusable_set_serves_nothing(tmp_path):
         ],
     }
     refused = SourceResolver._select_candidate(
-        document, budget=_ReadBudget(), reusable_root_ids=frozenset()
+        document, budget=_ReadBudget(), reusable_roots={}
     )
     assert refused[0] is None, refused
     assert refused[1] == "placeholder_no_handle", refused
     served = SourceResolver._select_candidate(
-        document, budget=_ReadBudget(), reusable_root_ids=frozenset({"company_raw"})
+        document, budget=_ReadBudget(), reusable_roots={
+            "company_raw": RootSpec("company_raw", path.parent, "company_raw"),
+        },
     )
     assert served[0] is not None and served[0]["root_id"] == "company_raw", served
 

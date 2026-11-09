@@ -112,7 +112,7 @@ def assert_public_empty_read(state, subject, reference):
     request = {"schema_version": "narrative-read-request/2", "narrative_ref": reference,
                "as_of_date": "2026-10-08", "expected_issuer": {"provider_company_id": 47}}
     listed = subprocess.run(
-        [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli",
+        [sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli",
          "--config", str(state.config_path), "--operation", "evidence-list"],
         input=encoded(request), cwd=state.root, env=subprocess_env(),
         capture_output=True, timeout=30)

@@ -2,23 +2,23 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from contextlib import ExitStack
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 import re
-import stat
 import time
 from typing import Any
 
-from company_wiki._file_mutex import FileMutexLockedError, os_file_mutex
+from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
+from company_wiki.file_usage import database_file_sizes
 
 from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
-from company_wiki.source_catalog.lock import CatalogOperationLock
 from company_wiki.source_catalog.narrative_artifact_store import (
-    LocalNarrativeObjectStore, NarrativeArtifactNotVisibleError, NarrativeArtifactReader, NarrativeArtifactStore,
+    NarrativeArtifactNotVisibleError, NarrativeArtifactReader,
 )
 from company_wiki.source_catalog.narrative_language import detect_narrative_language, narrative_language_family
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
@@ -29,17 +29,22 @@ from company_wiki.source_catalog.source_read_policy import (
 
 from .models import EffectStatus, Event, HandlerResult, Job, JobStatus, RuntimeGate, RuntimeState, canonical_json, canonical_json_hash
 from .narrative_batch_request import NarrativeBatchRequest
-from .narrative_contracts import (
-    BUNDLE_MAX_BYTES, SELECT_RESULT_MAX_BYTES, SUMMARY_RESULT_MAX_BYTES,
-    SourceRevisionEventPayload,
-)
+from .narrative_contracts import SourceRevisionEventPayload
 from .narrative_model import FailedFinalDiagnostic, NARRATIVE_PROMPT_VERSION
 from .narrative_generation import generation_manifest, projection_generation_manifest, generation_sha256, find_reuse_pin, read_reuse_pin, READING_PROJECTION_UNSET, with_frozen_model_identity
-from .narrative_official_json import open_verified_projection
+from .narrative_generation_binding import (
+    FrozenGenerationBindingError,
+    freeze_generation_manifests as _freeze_generations,
+    thaw_generation_manifests,
+)
+from company_wiki.source_catalog.narrative_official_json import open_verified_projection
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
-from .narrative_formats import source_class_for
+from company_wiki.source_catalog.narrative_formats import source_class_for
 from .narrative_projection import NarrativeEffectDispatcher
-from .narrative_run_store import NarrativeRunError, NarrativeRunStore, RunConflictError
+from .narrative_run_store import (
+    NarrativeRunError, NarrativeRunStore, RunConflictError, StorageBudgetExceeded,
+)
+from .narrative_storage_budget import BatchStorageBudget, LegacyStorageFootprint, StorageSnapshot
 from .narrative_source_guard import (
     NarrativeSourceGuardError,
     source_ref,
@@ -50,7 +55,7 @@ from .policy import PolicyConfig
 from .registry import create_default_registry
 from .scheduler import AutomationScheduler
 from .store import AutomationStore, RuntimeGateClosedError
-from .supervisor import AutomationSupervisor, SupervisorConfig, profile_slots
+from .supervisor import AutomationSupervisor, SupervisorConfig
 from .terminal_receipt_contracts import FinalArtifactPin
 from .narrative_run_store import FinalOutputOwnerUnresolved
 from .terminal_receipts import compact_terminal_narrative_jobs
@@ -71,6 +76,7 @@ class BatchEvents:
 
 _NARRATIVE_JOB_TYPES = ("source.narrative_select", "source.narrative_summarize", "source.narrative_verify")
 _TERMINAL = {JobStatus.SUCCEEDED, JobStatus.DEAD_LETTER, JobStatus.BLOCKED_HUMAN, JobStatus.CANCELLED}
+_MODEL_OUTPUT_BUDGET_BASIS = "per-item-final-limit/1"
 _SOURCE_FACT_FIELDS = ("canonical_entity_id", "market", "security_id", "fiscal_year", "fiscal_period",
                        "period_end", "published_date", "form_type")
 
@@ -332,6 +338,7 @@ def _frozen_binding(request, binding, *, jobs=()):
         if request.schema_version == "narrative-batch-request/2"
         else ("narrative-run-binding/3" if reusable else "narrative-run-binding/2"),
         "request_sha256": request.request_sha256,
+        "model_output_budget_basis": _MODEL_OUTPUT_BUDGET_BASIS,
         "execution_versions": _execution_versions(request),
         "read_policy_schema_version": EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
         "read_policy_sha256": canonical_json_hash(policies),
@@ -356,57 +363,23 @@ def _frozen_binding(request, binding, *, jobs=()):
     return canonical_json(frozen)
 
 
-_GENERATION_SOURCE_FIELDS = frozenset({"source_ref", "source_metadata", "parser_component",
-                                     "parser_components", "material_extractor", "subject_binding", "source_adapter", "language",
-                                     "selection_generation", "reading_dependencies"})
-
-
-def _freeze_generations(manifests):
-    """Store common settings once; preserve every source-specific binding."""
-    settings, records = {}, {}
-    for document, manifest in manifests.items():
-        common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
-        digest = canonical_json_hash(common)
-        settings[digest] = common
-        records[document] = {"settings_sha256": digest, "generation_sha256": generation_sha256(manifest),
-            "source_inputs": {key: value for key, value in manifest.items() if key in _GENERATION_SOURCE_FIELDS}}
-    return {"generation_settings": settings, "generation_manifests": records}
+def _model_output_budget(request, frozen=None) -> int:
+    """Bound model result sizes independently of physical storage writes."""
+    limit = len(request.work_items) * request.max_final_bytes
+    if frozen is None or frozen.get("model_output_budget_basis") == _MODEL_OUTPUT_BUDGET_BASIS:
+        return limit
+    if "model_output_budget_basis" not in frozen:
+        # Existing runs keep the limits they froze before physical accounting
+        # and model result budgets were separated at admission.
+        return min(limit, request.max_persistent_bytes)
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
 
 
 def _thaw_generations(frozen):
-    settings, records = frozen["generation_settings"], frozen["generation_manifests"]
-    if not isinstance(settings, dict) or not isinstance(records, dict):
-        raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
-    manifests = {}
-    for document, record in records.items():
-        if not isinstance(record, dict) or set(record) != {
-            "settings_sha256",
-            "generation_sha256",
-            "source_inputs",
-        }:
-            raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
-        common = settings[record["settings_sha256"]]
-        source = record["source_inputs"]
-        if (
-            not isinstance(common, dict)
-            or canonical_json_hash(common) != record["settings_sha256"]
-            or not isinstance(source, dict)
-            or not (
-                {"subject_binding", "source_adapter", "language", "parser_component"}
-                <= source.keys()
-                if common.get("schema_version") == "narrative-generation/2"
-                else {"source_ref", "source_metadata", "parser_component"}
-                <= source.keys()
-            )
-            or not source.keys() <= _GENERATION_SOURCE_FIELDS
-            or source.keys() & common.keys()
-        ):
-            raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
-        manifest = {**common, **source}
-        if generation_sha256(manifest) != record["generation_sha256"]:
-            raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
-        manifests[document] = manifest
-    return manifests
+    try:
+        return thaw_generation_manifests(frozen)
+    except FrozenGenerationBindingError as exc:
+        raise BatchResumeError(str(exc)) from exc
 
 
 def _validate_normalization_binding(manifests, snapshot):
@@ -416,7 +389,7 @@ def _validate_normalization_binding(manifests, snapshot):
     Completed reads prove the recorded generation against its publication and
     let the public reading owner verify current source bytes and locators.
     """
-    from .narrative_formats import NORMALIZED_MIME_TYPES
+    from company_wiki.source_catalog.narrative_formats import NORMALIZED_MIME_TYPES
 
     try:
         for manifest in manifests.values():
@@ -511,38 +484,25 @@ def _completed_history_generation_matches(expected, manifest, *, completed_histo
     return {**expected, "model": model} == manifest
 
 
-def _completed_read_history(reader, store, jobs):
+def _completed_read_history(open_artifacts: Callable[[], NarrativeArtifactReader], store, jobs):
     """Require terminal AUTO work, delivered effects and visible publications.
 
     A delivered outbox alone can precede catalog activation. Both observations
     are necessary to keep the completed-history branch away from workers.
     """
-    from . import migrations
-
     if any(job.status not in _TERMINAL for job in jobs):
         return False
     if not jobs:
         return True  # Frozen reuse pins are replayed by the existing final read.
-    scope = tuple(job.job_id for job in jobs)
-    placeholders = ",".join("?" for _ in scope)
-    connection = migrations._open_readonly_connection(store.db_path)
-    try:
-        effects = connection.execute(
-            "SELECT e.effect_id,e.job_id,e.effect_type,e.status,o.status AS outbox_status "
-            "FROM effects e LEFT JOIN outbox o ON o.effect_id=e.effect_id "
-            f"WHERE e.job_id IN ({placeholders})",
-            scope,
-        ).fetchall()
-    finally:
-        connection.close()
+    effects = store.effect_deliveries_for_jobs(tuple(job.job_id for job in jobs))
     if any(
-        effect["outbox_status"] != "delivered"
-        or effect["status"] not in {"verified", "applied"}
+        effect.outbox_status != "delivered"
+        or effect.effect_status not in {"verified", "applied"}
         for effect in effects
     ):
         return False
     published_jobs = {
-        effect["job_id"] for effect in effects if effect["effect_type"] == EFFECT_TYPE
+        effect.job_id for effect in effects if effect.effect_type == EFFECT_TYPE
     }
     if any(
         job.job_type == "source.narrative_verify"
@@ -551,14 +511,11 @@ def _completed_read_history(reader, store, jobs):
         for job in jobs
     ):
         return False
-    artifacts = NarrativeArtifactReader(
-        reader.catalog.config.database_path,
-        LocalNarrativeObjectStore(reader.catalog.config.catalog_dir),
-    )
+    artifacts = open_artifacts()
     try:
         for effect in effects:
-            if effect["effect_type"] == EFFECT_TYPE:
-                artifacts.visible_version_for_effect(effect["effect_id"])
+            if effect.effect_type == EFFECT_TYPE:
+                artifacts.visible_version_for_effect(effect.effect_id)
     except NarrativeArtifactNotVisibleError:
         return False
     finally:
@@ -567,7 +524,8 @@ def _completed_read_history(reader, store, jobs):
 
 
 def _resume_binding(
-    request, reader, store, runs, run, *, deadline, prepared_sources=None
+    request, reader, store, runs, run, *, deadline,
+    open_artifacts: Callable[[], NarrativeArtifactReader], prepared_sources=None,
 ):
     """Verify the frozen membership against current source facts, never re-sign it."""
     if request.schema_version == "narrative-batch-request/2":
@@ -578,6 +536,7 @@ def _resume_binding(
             runs,
             run,
             deadline=deadline,
+            open_artifacts=open_artifacts,
             prepared_sources=prepared_sources,
         )
     if run.binding_json is None:
@@ -638,10 +597,7 @@ def _resume_binding(
                 request.output_micro_usd_per_million_tokens,
                 request.max_tokens,
                 request.max_micro_usd,
-                min(
-                    len(request.work_items) * request.max_final_bytes,
-                    request.max_persistent_bytes,
-                ),
+                _model_output_budget(request, frozen),
             )
         ):
             raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
@@ -779,7 +735,7 @@ def _resume_binding(
                     _completed_history_generation_matches(
                         expected, manifest, completed_history=True
                     )
-                    and _completed_read_history(reader, store, jobs)
+                    and _completed_read_history(open_artifacts, store, jobs)
                 ):
                     raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
             by_document[payload.source_ref.document_id] = (event, payload)
@@ -900,7 +856,8 @@ def _manifest_payload(manifest, policies, key):
 
 
 def _resume_item_binding(
-    request, reader, store, runs, run, *, deadline, prepared_sources
+    request, reader, store, runs, run, *, deadline,
+    open_artifacts: Callable[[], NarrativeArtifactReader], prepared_sources,
 ):
     """Decode the versioned item binding while retaining the same AUTO jobs/ledger."""
     if run.binding_json is None or prepared_sources is None:
@@ -944,10 +901,7 @@ def _resume_item_binding(
                 request.output_micro_usd_per_million_tokens,
                 request.max_tokens,
                 request.max_micro_usd,
-                min(
-                    len(request.work_items) * request.max_final_bytes,
-                    request.max_persistent_bytes,
-                ),
+                _model_output_budget(request, frozen),
             )
         ):
             raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
@@ -1014,7 +968,7 @@ def _resume_item_binding(
                 _completed_history_generation_matches(
                     expected, manifest, completed_history=True
                 )
-                and _completed_read_history(reader, store, jobs)
+                and _completed_read_history(open_artifacts, store, jobs)
             ):
                 raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
             event = _events_from_sources(
@@ -1203,125 +1157,14 @@ def _find_item_reuse_pin(
     return None
 
 
-@dataclass(frozen=True)
-class StorageSnapshot:
-    persistent_added_bytes: int
-    scratch_bytes: int
-    scratch_peak_bytes: int
-    run_file_bytes: int = 0
-
-
-def _tree_bytes(path: Path) -> int:
-    try:
-        info = path.stat()
-    except FileNotFoundError:
-        return 0
-    if stat.S_ISREG(info.st_mode):
-        return info.st_size
-    total = 0
-    for item in path.rglob("*"):
-        try:
-            info = item.stat()
-        except FileNotFoundError:
-            # SQLite sidecars and atomic object files may be reclaimed while
-            # sampling. Their disappearance releases storage, not a run error.
-            continue
-        if stat.S_ISREG(info.st_mode):
-            total += info.st_size
-    return total
-
-
-class BatchStorageBudget:
-    """Measure only application-owned storage, never a raw document tree."""
-
-    def __init__(self, *, files: tuple[Path, ...], persistent_dirs: tuple[Path, ...],
-                 scratch_dirs: tuple[Path, ...], max_persistent_bytes: int, max_scratch_bytes: int,
-                 baseline: tuple[int, ...] | None = None,
-                 owned_accounting: tuple[Path, str] | None = None,
-                 shared_files: tuple[Path, ...] = ()):
-        self.paths = files + persistent_dirs
-        self.baseline = baseline if baseline is not None else tuple(_tree_bytes(path) for path in self.paths)
-        if len(self.baseline) != len(self.paths) or any(type(size) is not int or size < 0 for size in self.baseline):
-            raise ValueError("BATCH_STORAGE_BASELINE_INVALID")
-        self.scratch_dirs = scratch_dirs
-        self.max_persistent_bytes = max_persistent_bytes
-        self.max_scratch_bytes = max_scratch_bytes
-        self.peak = 0
-        self.owned_accounting = owned_accounting
-        self._last_sample_at = float('-inf')
-        self._local_added = 0
-        self._scratch = 0
-        self._accounting_store: NarrativeRunStore | None = None
-        self.shared_files = shared_files
-        self.shared_database_bytes = 0
-
-    def adopt_owned_accounting(self, db_path, run_id, work_dir, *, create_floor):
-        """Resume old work without rewriting its frozen physical baseline.
-
-        The historical shared delta is conservative and frozen once. All later
-        writes use owner accounting, so another writer cannot grow this run.
-        """
-        if self.owned_accounting is not None:
-            return
-        accounting = NarrativeRunStore(db_path)
-        floor = accounting.legacy_storage_floor(run_id)
-        if floor is None and not create_floor:
-            return
-        index = self.paths.index(work_dir)
-        work_baseline = self.baseline[index]
-        if floor is None:
-            local = max(0, _tree_bytes(work_dir) - work_baseline)
-            floor = max(0, self.snapshot().persistent_added_bytes - local)
-            accounting.adopt_legacy_storage_floor(run_id, floor)
-        self.shared_files = self.paths[:6]
-        self.paths = (work_dir,)
-        self.baseline = (work_baseline,)
-        self.owned_accounting = (db_path, run_id)
-        self._accounting_store = accounting
-        self._last_sample_at = float('-inf')
-
-    def accounting_store(self):
-        if self.owned_accounting is None:
-            return None
-        db_path, _run_id = self.owned_accounting
-        if self._accounting_store is None and db_path.is_file():
-            self._accounting_store = NarrativeRunStore(db_path)
-        return self._accounting_store
-
-    def snapshot(self, *, force: bool = True) -> StorageSnapshot:
-        now = time.monotonic()
-        if force or now - self._last_sample_at >= 5:
-            self._local_added = sum(max(0, _tree_bytes(path) - size)
-                                    for path, size in zip(self.paths, self.baseline))
-            self._scratch = sum(_tree_bytes(path) for path in self.scratch_dirs)
-            self.shared_database_bytes = sum(_tree_bytes(path) for path in self.shared_files)
-            self._last_sample_at = now
-        self.peak = max(self.peak, self._scratch)
-        objects = 0
-        if self.owned_accounting is not None:
-            _, run_id = self.owned_accounting
-            accounting = self.accounting_store()
-            objects = accounting.storage_bytes(run_id) if accounting is not None else 0
-        return StorageSnapshot(self._local_added + objects, self._scratch, self.peak,
-                               run_file_bytes=self._local_added)
-
-    def check(self, *, force: bool = True) -> StorageSnapshot:
-        result = self.snapshot(force=force)
-        if result.persistent_added_bytes > self.max_persistent_bytes:
-            raise ValueError("PERSISTENT_BYTES_EXCEEDED")
-        if result.scratch_bytes > self.max_scratch_bytes:
-            raise ValueError("SCRATCH_BYTES_EXCEEDED")
-        return result
-
-
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _storage_guard(request, catalog, db_path, work_dir, input_hash, *, read_only=False):
-    database_paths = (db_path, catalog.config.database_path)
-    files = tuple(path for database in database_paths for path in (
-        database, Path(str(database) + "-wal"), Path(str(database) + "-shm")))
+    def shared_database_sizes() -> tuple[int, ...]:
+        return database_file_sizes(db_path) + catalog.narrative_database_sizes()
+
     baseline_path = work_dir / "storage-baseline.json"
     baseline = None
     owned_accounting = None
@@ -1343,101 +1186,28 @@ def _storage_guard(request, catalog, db_path, work_dir, input_hash, *, read_only
         guard = BatchStorageBudget(files=(), persistent_dirs=(work_dir,), scratch_dirs=(),
             max_persistent_bytes=request.max_persistent_bytes,
             max_scratch_bytes=request.max_scratch_bytes, baseline=baseline,
-            owned_accounting=owned_accounting, shared_files=files)
+            owned_accounting=owned_accounting, database_sizes=shared_database_sizes)
         if baseline is None:
-            baseline_path.write_text(canonical_json({
+            baseline_bytes = canonical_json({
                 "schema_version": "narrative-storage-baseline/2", "input_hash": input_hash,
                 "sizes": list(guard.baseline),
-            }), encoding="utf-8")
+            }).encode("utf-8")
+            if len(baseline_bytes) > request.max_persistent_bytes:
+                raise StorageBudgetExceeded("PERSISTENT_BYTES_EXCEEDED")
+            baseline_path.write_bytes(baseline_bytes)
         return guard
-    persistent_dirs: tuple[Path, ...] = (catalog.config.catalog_dir / "objects", work_dir)
-    # Legacy baseline vectors keep their original interpretation and bytes.
-    # New vectors also measure this application's small recovery locators.
-    if baseline is None or len(baseline) == len(files) + len(persistent_dirs) + 1:
-        persistent_dirs += (catalog.config.catalog_dir / "narrative-generations",)
-    guard = BatchStorageBudget(files=files, persistent_dirs=persistent_dirs,
+    # Some pre-ledger baselines have a ninth slot for AUTO recovery locators.
+    control_dir = (catalog.legacy_narrative_generation_directory()
+                   if len(baseline or ()) == LegacyStorageFootprint.WORK_INDEX + 2 else None)
+    legacy_footprint = LegacyStorageFootprint(
+        shared_database_sizes, catalog.narrative_object_bytes, work_dir, control_dir,
+    )
+    guard = BatchStorageBudget(files=(), persistent_dirs=(work_dir,),
         scratch_dirs=(), max_persistent_bytes=request.max_persistent_bytes,
-        max_scratch_bytes=request.max_scratch_bytes, baseline=baseline)
-    if baseline is None and not read_only:
-        baseline_path.write_text(canonical_json({"input_hash": input_hash, "sizes": list(guard.baseline)}), encoding="utf-8")
+        max_scratch_bytes=request.max_scratch_bytes, baseline=baseline, legacy_footprint=legacy_footprint)
     if db_path.is_file():
         guard.adopt_owned_accounting(db_path, request.run_id, work_dir, create_floor=False)
     return guard
-
-
-class _BudgetedObjects(LocalNarrativeObjectStore):
-    def __init__(self, root, guard, max_final_bytes):
-        super().__init__(root)
-        self.guard = guard
-        self.max_final_bytes = max_final_bytes
-
-    def put(self, data):
-        if len(data) > self.max_final_bytes:
-            raise ValueError("FINAL_BYTES_EXCEEDED")
-        if len(data) > self.guard.max_scratch_bytes:
-            raise ValueError("SCRATCH_BYTES_EXCEEDED")
-        self.guard.check()
-        # The object writer creates one temporary file containing exactly these
-        # bytes and removes it in finally. PDF/text parsing uses memory only.
-        self.guard.peak = max(self.guard.peak, len(data))
-        if self.guard.owned_accounting is None:
-            return super().put(data)
-        _, run_id = self.guard.owned_accounting
-        accounting = self.guard.accounting_store()
-        if accounting is None:
-            raise ValueError("BATCH_STORAGE_ACCOUNTING_UNAVAILABLE")
-        store_id = str(self.root.resolve())
-        current = self.guard.snapshot()
-        put_object = super().put_with_usage
-        def write(admit):
-            result = put_object(data, before_create=admit)
-            return result.object_key, result.created_bytes
-        return accounting.account_storage_write(run_id=run_id, store_id=store_id,
-            max_bytes=max(0, self.guard.max_persistent_bytes - current.run_file_bytes),
-            write=write)
-
-
-def _preflight_storage(request, *, source_count=None):
-    # All contracts are byte-bounded. Admit their worst case plus SQLite/WAL/log
-    # overhead before any worker or HTTP starts; measured growth is checked too.
-    per_source = (
-        SELECT_RESULT_MAX_BYTES
-        + SUMMARY_RESULT_MAX_BYTES
-        + 2 * BUNDLE_MAX_BYTES
-        + 1024**2
-    )
-    from .narrative_model_extractive import (
-        EXECUTION_MAX_BYTES, EXTRACTIVE_MODEL_PROJECTION_VERSION,
-    )
-    from .narrative_model_runtime import supports_durable_paid_response
-    requested_projection = request.reading_model_projection
-    # An omitted projection resolves to the selector's current scoped-summary
-    # default during generation binding. Reserve the paid pin before workers start.
-    durable_response = (request.execution_versions.get('selector') == '0.9.0'
-                        and (requested_projection is None
-                             or supports_durable_paid_response(requested_projection)))
-    if durable_response:
-        # All current summary protocols retain the paid body and bounded pin.
-        # Only the explicit v5 extractive compatibility protocol stores its
-        # additional execution report; omitted requests resolve to v4.
-        execution_reserve = (
-            EXECUTION_MAX_BYTES
-            if requested_projection == EXTRACTIVE_MODEL_PROJECTION_VERSION
-            else 0
-        )
-        per_source += request.model_options['max_response_bytes'] + 4096 + execution_reserve
-    reserve = (
-        (len(request.work_items) if source_count is None else source_count) * per_source
-        + len(profile_slots(request.profile)) * 262144
-        + 8 * 1024**2
-    )
-    if reserve > request.max_persistent_bytes:
-        raise ValueError("PERSISTENT_BYTES_EXCEEDED")
-    # One model writer and the coordinator's final object writer may overlap.
-    scratch_bound = request.max_final_bytes + (request.model_options['max_response_bytes']
-                                               if durable_response else 0)
-    if scratch_bound > request.max_scratch_bytes:
-        raise ValueError("SCRATCH_BYTES_EXCEEDED")
 
 
 def run_batch(request: NarrativeBatchRequest, *, project_root: Path, catalog_config_path: Path,
@@ -1468,15 +1238,8 @@ def _run_owned(
     reader = SourceVersionReader(catalog)
     # This directory is dedicated to batch records/logs. It must not contain or
     # be an ancestor of raw/config/catalog/database paths being measured.
-    protected = (
-        project_root,
-        catalog.config.catalog_dir,
-        db_path,
-        config_path,
-    ) + tuple(root.path for root in catalog.config.roots)
-    if any(
-        path.resolve() == work_dir or work_dir in path.resolve().parents
-        for path in protected
+    if catalog.storage_is_within(work_dir) or any(
+        path.is_relative_to(work_dir) for path in (project_root, db_path, config_path)
     ):
         raise ValueError("BATCH_WORK_DIRECTORY_OVERLAPS_STORAGE")
     if (
@@ -1544,7 +1307,7 @@ def _run_owned(
         )
         for payload in prepared_sources[0]
     }
-    lock_dir = catalog.config.catalog_dir / "narrative-generations"
+    lock_dir = catalog.legacy_narrative_generation_directory()
     lock_dir.mkdir(parents=True, exist_ok=True)
     with ExitStack() as locks:
         for digest in sorted(
@@ -1645,6 +1408,7 @@ def _run_prepared(
             runs,
             previous,
             deadline=deadline,
+            open_artifacts=catalog.open_narrative_artifact_reader,
             prepared_sources=prepared_sources,
         )
         guard = _storage_guard(
@@ -1653,10 +1417,7 @@ def _run_prepared(
     else:
         binding = _events_from_sources(request, *prepared_sources, now=_now())
         pins = {}
-        readonly_artifacts = NarrativeArtifactReader(
-            catalog.config.database_path,
-            LocalNarrativeObjectStore(catalog.config.catalog_dir),
-        )
+        readonly_artifacts = catalog.open_narrative_artifact_reader()
         try:
             facts = {
                 item.get("item_key", item.get("document_id")): item
@@ -1709,9 +1470,6 @@ def _run_prepared(
             frozenset(key for key in pins
                       if manifests[key].get("execution_versions", {}).get("selector") == "0.9.0"),
         )
-        misses = len(request.work_items) - len(pins)
-        if misses:
-            _preflight_storage(request, source_count=misses)
         _check_preparation_deadline(deadline)
         work_dir.mkdir(parents=True, exist_ok=True)
         # Save the baseline before new AUTO initialization/materialization grows files.
@@ -1731,10 +1489,7 @@ def _run_prepared(
     ):
         # Completed or blocked idle history is a read, not a new execution.
         # Blocked pending jobs and the original usage remain untouched.
-        readonly_artifacts = NarrativeArtifactReader(
-            catalog.config.database_path,
-            LocalNarrativeObjectStore(catalog.config.catalog_dir),
-        )
+        readonly_artifacts = catalog.open_narrative_artifact_reader()
         try:
             documents = _final_documents(
                 request,
@@ -1754,15 +1509,9 @@ def _run_prepared(
             document["status"] not in {"activation_pending", "succeeded"}
             for document in documents
         ):
-            status = (
-                "completed"
-                if all(document["status"] == "completed" for document in documents)
-                else "failed"
-            )
-            if any(
-                job.last_error_code == "MODEL_BUDGET_DENIED" for job in current_jobs
-            ):
-                status = "budget_exhausted"
+            status = _finished_status(current_jobs, completed=all(
+                document["status"] == "completed" for document in documents
+            ))
             if previous.blocked:
                 status = _blocked_status(previous)
             return _receipt(previous.run_id, status, documents, runs, guard)
@@ -1786,9 +1535,7 @@ def _run_prepared(
             # A surviving enabled gate can only be recovered by the run
             # durably recorded as its owner. Bind and fence it before AUTO
             # events/jobs can be written.
-            with CatalogOperationLock(
-                catalog.config.catalog_dir, operation="narrative-batch-start"
-            ):
+            with catalog.operation_lock(operation="narrative-batch-start"):
                 generation = runs.activate_run(
                     request.run_id,
                     expected_generation=gate.control_generation,
@@ -1838,20 +1585,14 @@ def _run_prepared(
                 output_micro_usd_per_million_tokens=request.output_micro_usd_per_million_tokens,
                 max_tokens=request.max_tokens,
                 max_micro_usd=request.max_micro_usd,
-                max_output_bytes=min(
-                    len(request.work_items) * request.max_final_bytes,
-                    request.max_persistent_bytes,
-                ),
+                max_output_bytes=_model_output_budget(request),
                 created_at=_now(),
                 binding_json=_frozen_binding(request, binding, jobs=scoped_jobs),
             )
         else:
             run = previous
         if not run.job_ids:
-            readonly_artifacts = NarrativeArtifactReader(
-                catalog.config.database_path,
-                LocalNarrativeObjectStore(catalog.config.catalog_dir),
-            )
+            readonly_artifacts = catalog.open_narrative_artifact_reader()
             try:
                 documents = _final_documents(
                     request,
@@ -1867,12 +1608,7 @@ def _run_prepared(
                 )
                 try:
                     guard.check()
-                except ValueError as exc:
-                    if str(exc) not in {
-                        "PERSISTENT_BYTES_EXCEEDED",
-                        "SCRATCH_BYTES_EXCEEDED",
-                    }:
-                        raise
+                except StorageBudgetExceeded as exc:
                     runs.block_run(run.run_id, error_code=str(exc), updated_at=_now())
                     return _receipt(
                         run.run_id, "storage_exhausted", documents, runs, guard
@@ -1880,11 +1616,8 @@ def _run_prepared(
                 return _receipt(run.run_id, "completed", documents, runs, guard)
             finally:
                 readonly_artifacts.close()
-        artifacts = NarrativeArtifactStore(
-            catalog.store,
-            _BudgetedObjects(
-                catalog.config.catalog_dir, guard, request.max_final_bytes
-            ),
+        artifacts = catalog.open_narrative_artifact_store(
+            write_policy=guard.object_write_policy(request.max_final_bytes),
         )
         for document, manifest in binding.generation_manifests.items():
             if document not in binding.reused_artifact_pins:
@@ -1919,15 +1652,10 @@ def _run_prepared(
                         ),
                         "normalization_deadline": deadline,
                         "response_storage": {
-                            "paths": [str(path) for path in guard.paths],
+                            "work_dir": str(work_dir),
                             "baseline": list(guard.baseline),
                             "max_persistent_bytes": guard.max_persistent_bytes,
                             "max_scratch_bytes": guard.max_scratch_bytes,
-                            "owned_accounting": (
-                                {"db_path": str(guard.owned_accounting[0]),
-                                 "run_id": guard.owned_accounting[1]}
-                                if guard.owned_accounting is not None else None),
-                            "shared_files": [str(path) for path in guard.shared_files],
                         },
                     }
                 ),
@@ -1946,9 +1674,7 @@ def _run_prepared(
             )
         )
         if generation is None:
-            with CatalogOperationLock(
-                catalog.config.catalog_dir, operation="narrative-batch-start"
-            ):
+            with catalog.operation_lock(operation="narrative-batch-start"):
                 current = store.read_runtime_gate()
                 generation = runs.activate_run(
                     request.run_id,
@@ -1964,6 +1690,7 @@ def _run_prepared(
             raise RunConflictError("batch run job disappeared")
         needs_workers = any(job.status not in terminal for job in current_jobs)
         if not run.blocked and needs_workers and time.monotonic() < deadline:
+            guard.check()
             supervisor.start()
         while time.monotonic() < deadline:
             current_gate = store.read_runtime_gate()
@@ -1982,23 +1709,6 @@ def _run_prepared(
                 runs.settle_finished_attempt_reservations(
                     run_id=run.run_id, settled_at=_now()
                 )
-            # Do not prepare a file larger than the requested final byte cap.
-            for effect_id in store.effect_ids_for_jobs(
-                run.job_ids, effect_type=EFFECT_TYPE
-            ):
-                effect = store.get_effect(effect_id)
-                if effect is None:
-                    raise RunConflictError("batch effect disappeared")
-                if effect.status.value in {"planned", "pending"}:
-                    if (
-                        len(
-                            canonical_json(
-                                store.result_for_effect(effect_id).to_dict()["result"]
-                            ).encode("utf-8")
-                        )
-                        > request.max_final_bytes
-                    ):
-                        raise ValueError("FINAL_BYTES_EXCEEDED")
             now = _now()
             dispatcher.dispatch_next(
                 worker_id="narrative-batch-projector",
@@ -2021,13 +1731,7 @@ def _run_prepared(
                 status = _blocked_status(current_run)
                 break
             if all(job.status in terminal for job in jobs):
-                status = (
-                    "completed"
-                    if all(job.status is JobStatus.SUCCEEDED for job in jobs)
-                    else "failed"
-                )
-                if any(job.last_error_code == "MODEL_BUDGET_DENIED" for job in jobs):
-                    status = "budget_exhausted"
+                status = _finished_status(jobs, completed=all(job.status is JobStatus.SUCCEEDED for job in jobs))
                 break
             time.sleep(0.05)
     except (KeyboardInterrupt, RuntimeGateClosedError):
@@ -2035,22 +1739,14 @@ def _run_prepared(
         # dispatcher write. It is normal control flow; keep pending work and
         # accounting, stop children in finally, and resume the frozen run.
         status = "paused"
-    except ValueError as exc:
-        if str(exc) not in {
-            "PERSISTENT_BYTES_EXCEEDED",
-            "SCRATCH_BYTES_EXCEEDED",
-            "FINAL_BYTES_EXCEEDED",
-        }:
-            raise
+    except StorageBudgetExceeded as exc:
         runs.block_run(run.run_id, error_code=str(exc), updated_at=_now())
         status = "storage_exhausted"
     finally:
         if supervisor is not None:
             supervisor.stop()
         if generation is not None:
-            with CatalogOperationLock(
-                catalog.config.catalog_dir, operation="narrative-batch-stop"
-            ):
+            with catalog.operation_lock(operation="narrative-batch-stop"):
                 current = store.read_runtime_gate()
                 if current.control_generation == generation:
                     store.set_runtime_gate(
@@ -2088,7 +1784,7 @@ def _run_prepared(
 
 def _normalization_parsers(binding, versions):
     """Pass every native format's recorded parser to its owning Worker."""
-    from .narrative_formats import NORMALIZED_MIME_TYPES
+    from company_wiki.source_catalog.narrative_formats import NORMALIZED_MIME_TYPES
 
     parsers = {}
     for event in binding.events:
@@ -2105,7 +1801,7 @@ def _normalization_parsers(binding, versions):
 
 
 def _generation_pointer(catalog, manifest):
-    return catalog.config.catalog_dir / "narrative-generations" / (generation_sha256(manifest) + ".json")
+    return catalog.legacy_narrative_generation_directory() / (generation_sha256(manifest) + ".json")
 
 
 def _generation_owner_finished(db_path, run_id):
@@ -2138,6 +1834,8 @@ def _write_generation_owner(pointer, db_path, run_id, *, storage_guard=None):
     content = canonical_json({"schema_version": "narrative-generation-recovery/1",
                               "automation_db": str(db_path), "run_id": run_id})
     size = len(content.encode("utf-8"))
+    if storage_guard is not None and size > storage_guard.max_scratch_bytes:
+        raise StorageBudgetExceeded("SCRATCH_BYTES_EXCEEDED")
     def write(admit):
         created = not pointer.exists()
         if created:
@@ -2165,13 +1863,16 @@ def _write_generation_owner(pointer, db_path, run_id, *, storage_guard=None):
 
 
 def _blocked_status(run) -> str:
-    return (
-        "storage_exhausted"
-        if run.block_reason in {
-            "PERSISTENT_BYTES_EXCEEDED", "SCRATCH_BYTES_EXCEEDED", "FINAL_BYTES_EXCEEDED",
-        }
-        else "budget_exhausted"
-    )
+    return "storage_exhausted" if run.block_reason in StorageBudgetExceeded.CODES else "budget_exhausted"
+
+
+def _finished_status(jobs: tuple[Job, ...], *, completed: bool) -> str:
+    errors = {job.last_error_code for job in jobs}
+    if errors & StorageBudgetExceeded.CODES:
+        return "storage_exhausted"
+    if "MODEL_BUDGET_DENIED" in errors:
+        return "budget_exhausted"
+    return "completed" if completed else "failed"
 
 
 def _blocked_history_is_idle(

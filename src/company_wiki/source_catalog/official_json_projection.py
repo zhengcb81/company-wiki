@@ -19,7 +19,7 @@ import re
 import unicodedata
 from typing import Any
 
-from company_wiki._atomic_file import atomic_output
+from company_wiki.atomic_file import atomic_output
 
 from .official_json_layout import (
     FieldObservation,
@@ -1039,3 +1039,9 @@ def _iter_string_nodes(node):
     elif node.kind == "array":
         for child in node.items():
             yield from _iter_string_nodes(child)
+
+__all__ = [
+    'ProjectionError',
+    'build_projection_export',
+    'load_projection',
+]

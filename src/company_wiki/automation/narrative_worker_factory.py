@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import re
 from types import MappingProxyType
-from typing import Any
+from typing import Any, Protocol
 from urllib.parse import urlsplit
 
 from company_wiki.source_catalog import SourceCatalog
@@ -20,13 +20,15 @@ from company_wiki.source_catalog.narrative_evidence import (
 )
 
 from .migrations import InvalidDatabasePathError
+from .narrative_generation_binding import thaw_generation_manifests
 from .narrative_http_model import NarrativeHTTPModel
 from .narrative_model import (
     NARRATIVE_PROMPT_VERSION, PROJECTION_NARRATIVE_PROMPT_VERSION, PROJECTION_MODEL_REQUEST_SCHEMA,
 )
-from .narrative_official_json import NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
+from company_wiki.source_catalog.narrative_official_json import NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
 from .narrative_model_caller import BudgetedNarrativeCaller
 from .narrative_run_store import NarrativeRunError, NarrativeRunStore
+from .narrative_storage_budget import BatchStorageBudget
 from .narrative_runtime import NarrativeRuntimeDependencies, register_narrative_handlers
 from .registry import create_default_registry
 from .store import AutomationStoreError
@@ -59,7 +61,7 @@ def _options(spec: WorkerProcessSpec) -> tuple[dict[str, Any], dict[str, Any]]:
     if not isinstance(options, dict) or not _OPTION_FIELDS <= options.keys() or not options.keys() <= (_OPTION_FIELDS | {"max_final_bytes", "normalization_config", "normalization_parsers", "normalization_deadline", "response_storage"}):
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
     final_bytes = options.get("max_final_bytes", 2 * 1024 * 1024)
-    if type(final_bytes) is not int or not 0 < final_bytes <= 2 * 1024 * 1024:
+    if type(final_bytes) is not int or final_bytes <= 0:
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
     for field in _OPTION_FIELDS - {"model"}:
         _text(options[field])
@@ -192,9 +194,7 @@ def _reading_projection_values(binding: dict[str, Any] | None) -> dict[str, str 
     """Compatibility inspection explicitly requests every model capability."""
     if binding is None or "generation_settings" not in binding:
         return {}
-    from .narrative_batch import _thaw_generations
-
-    return {key: _validate_model_software(manifest) for key, manifest in _thaw_generations(binding).items()}
+    return {key: _validate_model_software(manifest) for key, manifest in thaw_generation_manifests(binding).items()}
 
 
 def _reading_projection_versions(binding_json: str | None) -> dict[str, str | None]:
@@ -239,9 +239,7 @@ def _worker_binding_snapshot(binding_json: str | None) -> _WorkerBindingSnapshot
     """All worker parameters derive from one decoded, immutable run snapshot."""
     binding = _decode_binding(binding_json)
     generations, selector = _runtime_values(binding)
-    from .narrative_batch import _thaw_generations
-
-    manifests = _thaw_generations(binding) if binding is not None and "generation_settings" in binding else {}
+    manifests = thaw_generation_manifests(binding) if binding is not None and "generation_settings" in binding else {}
     readings = {key: _reading_projection_identity(manifest) for key, manifest in manifests.items()}
     models = _frozen_model_values(binding)
     return _WorkerBindingSnapshot(
@@ -251,24 +249,13 @@ def _worker_binding_snapshot(binding_json: str | None) -> _WorkerBindingSnapshot
     )
 
 
-def _verify_effective_model(model: NarrativeHTTPModel, frozen_models: Sequence[Mapping[str, Any]]) -> None:
+class _ConfiguredModel(Protocol):
+    def effective_request_options(self) -> Mapping[str, Any]: ...
+
+
+def _verify_effective_model(model: _ConfiguredModel, frozen_models: Sequence[Mapping[str, Any]]) -> None:
     """Compare constructed HTTP behavior with frozen semantic configuration."""
-    port = model._port
-    authority = model._host
-    if ":" in authority:
-        authority = "[" + authority + "]"
-    if port is not None:
-        authority += ":" + str(port)
-    effective = {
-        "model_id": model.model_id,
-        "endpoint": model._scheme + "://" + authority + model._path,
-        "max_output_tokens": model.max_output_tokens,
-        "output_token_field": model.output_token_field,
-    }
-    for key in ("thinking", "reasoning_effort", "temperature", "reasoning_split"):
-        value = getattr(model, key)
-        if value is not None:
-            effective[key] = value
+    effective = model.effective_request_options()
     for frozen in frozen_models:
         # A historical omitted HTTP option stays omitted rather than gaining a
         # provider default. Non-content settings and credentials never appear.
@@ -354,37 +341,23 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
         from .narrative_model_runtime import supports_durable_paid_response
         if any(supports_durable_paid_response(version)
                for version in reading_projections.values()):
-            from .narrative_batch import BatchStorageBudget, _BudgetedObjects
             from .narrative_paid_response import PaidResponseArtifacts
             storage = options.get('response_storage')
-            storage_fields = {'paths', 'baseline', 'max_persistent_bytes', 'max_scratch_bytes'}
-            if (not isinstance(storage, dict) or not storage_fields <= set(storage)
-                    or set(storage) - storage_fields - {'owned_accounting', 'shared_files'}):
+            storage_fields = {'work_dir', 'baseline', 'max_persistent_bytes', 'max_scratch_bytes'}
+            if not isinstance(storage, dict) or set(storage) != storage_fields:
                 raise ValueError('NARRATIVE_RESPONSE_STORAGE_UNAVAILABLE')
-            # This is the coordinator's same finite budget view and original
-            # baseline, never a child-local fresh budget or a raw-root scan.
-            owned = storage.get('owned_accounting')
-            if owned is not None and (not isinstance(owned, dict)
-                    or set(owned) != {'db_path', 'run_id'}
-                    or Path(owned['db_path']).resolve() != Path(spec.db_path).resolve()
-                    or owned['run_id'] != options['run_id']):
-                raise ValueError('NARRATIVE_RESPONSE_STORAGE_UNAVAILABLE')
-            guard = BatchStorageBudget(files=tuple(Path(path) for path in storage['paths']),
-                persistent_dirs=(), scratch_dirs=(), baseline=tuple(storage['baseline']),
+            # The coordinator adopts run ownership before spawning. The child
+            # needs only run work bytes and the same AUTO ledger and baseline.
+            guard = BatchStorageBudget(files=(), persistent_dirs=(Path(storage['work_dir']),),
+                scratch_dirs=(), baseline=tuple(storage['baseline']),
                 max_persistent_bytes=storage['max_persistent_bytes'],
                 max_scratch_bytes=storage['max_scratch_bytes'],
-                owned_accounting=(Path(spec.db_path), options['run_id']) if owned is not None else None,
-                shared_files=tuple(Path(path) for path in storage.get('shared_files', ())))
-            def admit_response(max_body):
-                current = guard.check()
-                # Body's temporary writer plus bounded receipt/SQLite overhead.
-                if current.persistent_added_bytes + 2 * max_body + 65536 > guard.max_persistent_bytes:
-                    raise ValueError('PERSISTENT_BYTES_EXCEEDED')
-                if max_body > guard.max_scratch_bytes:
-                    raise ValueError('SCRATCH_BYTES_EXCEEDED')
-            objects = _BudgetedObjects(catalog.config.catalog_dir, guard, model.max_response_bytes)
+                owned_accounting=(Path(spec.db_path), options['run_id']))
+            objects = catalog.open_narrative_object_access(
+                write_policy=guard.object_write_policy(model.max_response_bytes),
+            )
             paid_responses = PaidResponseArtifacts(objects, max_response_bytes=model.max_response_bytes,
-                                                   preflight=admit_response)
+                                                   preflight=guard.require_response_capacity)
         caller = BudgetedNarrativeCaller(
             store=run_store, run_id=options["run_id"], model=model,
             final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024),

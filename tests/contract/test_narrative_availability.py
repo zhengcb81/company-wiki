@@ -14,12 +14,12 @@ from types import SimpleNamespace
 
 import pytest
 
-from company_wiki.automation import narrative_transport as transport_module
 from company_wiki.automation.narrative_transport import NarrativeTransportReader
 from company_wiki.automation.narrative_transport_contracts import (
     MAX_RECEIPT_BYTES, NarrativeReadRequest,
 )
 from company_wiki.narrative_subject import NarrativeSubjectRef
+from company_wiki.source_catalog import source_availability as availability_module
 from company_wiki.source_catalog import source_reader as reader_module
 from company_wiki.source_catalog.source_availability import (
     verified_availability_evidence, verified_open_observation,
@@ -251,12 +251,47 @@ def test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer(tmp_pa
             pytest.fail("narrative reads must not create observations or source facts")
 
         monkeypatch.setattr(reader_module, "_read_verified_bytes", counted_read)
-        monkeypatch.setattr(transport_module, "verified_availability_evidence", lookup, raising=False)
+        monkeypatch.setattr(availability_module, "verified_availability_evidence", lookup)
         monkeypatch.setattr(fixture.catalog, "record_source_facts", forbidden)
         result = transport.read(NarrativeReadRequest.from_dict(
             request(fixture, reference.to_dict(), proof["available_by"])))
         assert result.receipt["availability_evidence"] == proof
         assert observations == ["original", "proof"] and result.data == fixture.payload
+
+
+def test_narrative_transport_accepts_a_source_reader_without_storage_access(tmp_path):
+    with published_fixture(tmp_path) as fixture:
+        proof = owner_proof(fixture, "prior_verified_capture")
+
+        class ReadPort:
+            query_ref = fixture.reader.query_ref
+            open_described_version = fixture.reader.open_described_version
+            availability_evidence = fixture.reader.availability_evidence
+
+        transport = NarrativeTransportReader(fixture.artifacts, ReadPort())
+        reference = transport.reference(fixture.source_ref)
+        result = transport.read(NarrativeReadRequest.from_dict(
+            request(fixture, reference.to_dict(), proof["available_by"])))
+        assert result.receipt["availability_evidence"] == proof
+        assert result.data == fixture.payload
+
+
+def test_narrative_artifact_bytes_are_hashed_by_the_storage_owner_once(tmp_path, monkeypatch):
+    with published_fixture(tmp_path) as fixture:
+        transport = NarrativeTransportReader(fixture.artifacts, fixture.reader)
+        reference = transport.reference(fixture.source_ref)
+        real_sha256 = hashlib.sha256
+        checked = []
+
+        def count_artifact_hash(data=b"", **kwargs):
+            if data == fixture.payload:
+                checked.append(data)
+            return real_sha256(data, **kwargs)
+
+        monkeypatch.setattr(hashlib, "sha256", count_artifact_hash)
+        result = transport.read(NarrativeReadRequest.from_dict(request(fixture, reference.to_dict())))
+        assert result.data == fixture.payload
+        assert checked == [fixture.payload]
 
 
 def test_new_owner_metadata_changes_only_the_receipt_not_frozen_artifact(tmp_path):
@@ -296,7 +331,7 @@ def test_projected_two_parents_cannot_borrow_one_raw_proof(tmp_path, monkeypatch
         def forbidden(*args, **kwargs):
             pytest.fail("projected receipts do not accept a root raw availability proof")
 
-        monkeypatch.setattr(transport_module, "verified_availability_evidence", forbidden, raising=False)
+        monkeypatch.setattr(availability_module, "verified_availability_evidence", forbidden)
         transport = NarrativeTransportReader(state.artifacts, reader, projection_ref_resolver=load)
         compact = NarrativeSubjectRef.from_subject(subject)
         reference = transport.reference_subject_ref(compact, generation_sha256=generation)

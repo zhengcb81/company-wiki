@@ -16,7 +16,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Generic, Protocol, TypeVar
 
-from company_wiki._id_scope import normalize_id_scope
+from company_wiki.id_scope import normalize_id_scope
 
 from .dag_persistence import (
     DAGConflictError,
@@ -28,6 +28,7 @@ from .dag_persistence import (
 from .migrations import (
     BackupHook,
     SchemaReport,
+    _open_readonly_connection,
     migrate_database,
     validate_database,
 )
@@ -123,6 +124,15 @@ class LeaseLostError(AutomationStoreError):
 class PutResult(Generic[T]):
     value: T
     created: bool
+
+
+@dataclass(frozen=True)
+class EffectDelivery:
+    effect_id: str
+    job_id: str
+    effect_type: str
+    effect_status: str
+    outbox_status: str | None
 
 
 # --------------------------------------------------------------------------- #
@@ -989,6 +999,20 @@ class AutomationStore:
         finally:
             conn.close()
 
+    def list_events(self, *, event_type: str | None = None) -> tuple[Event, ...]:
+        """Read events in occurrence order, breaking ties by event ID."""
+        sql = f"SELECT {_EVENT_COLS} FROM events"
+        parameters: tuple[str, ...] = ()
+        if event_type is not None:
+            sql += " WHERE event_type = ?"
+            parameters = (event_type,)
+        conn = _open_readonly_connection(self._db_path)
+        try:
+            rows = conn.execute(sql + " ORDER BY occurred_at, event_id", parameters)
+            return tuple(_event_from_row(row) for row in rows)
+        finally:
+            conn.close()
+
     def get_event_by_identity(
         self, event_type: str, subject_type: str, subject_id: str,
         input_hash: str, policy_version: str,
@@ -1747,6 +1771,22 @@ class AutomationStore:
         finally:
             conn.close()
 
+    def effect_deliveries_for_jobs(self, job_ids: tuple[str, ...]) -> tuple[EffectDelivery, ...]:
+        """Observe the given jobs' effect and outbox states in one read-only snapshot."""
+        if not job_ids:
+            return ()
+        conn = _open_readonly_connection(self._db_path)
+        try:
+            rows = conn.execute(
+                "SELECT e.effect_id, e.job_id, e.effect_type, e.status, o.status "
+                "FROM effects e LEFT JOIN outbox o ON o.effect_id=e.effect_id "
+                "WHERE e.job_id IN (SELECT value FROM json_each(?))",
+                (json.dumps(job_ids),),
+            ).fetchall()
+            return tuple(EffectDelivery(*row) for row in rows)
+        finally:
+            conn.close()
+
     # -- Job CAS transition (batch 3 skeleton) ----------------------------- #
 
     def transition_job(
@@ -2064,6 +2104,7 @@ class AutomationStore:
 
 __all__ = [
     "AutomationStore",
+    "EffectDelivery",
     "PutResult",
     "DAGPutResult",
     "AutomationStoreError",

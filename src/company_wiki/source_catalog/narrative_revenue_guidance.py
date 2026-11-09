@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import re
 
-from company_wiki.document_normalization.text_matching import matching_reading_text
+from company_wiki.document_model.text_matching import matching_reading_text
 
 from .narrative_predicate_state import observe_metric_predicate
 

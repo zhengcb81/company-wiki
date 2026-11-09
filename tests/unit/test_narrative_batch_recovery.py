@@ -120,7 +120,8 @@ def test_same_run_changed_request_is_refused_before_recipe_or_job_access(changed
     changed_request = NarrativeBatchRequest.from_dict(wire)
     with pytest.raises(batch.BatchResumeError, match="BATCH_REQUEST_CHANGED"):
         batch._resume_binding(changed_request, None, None, None,
-            SimpleNamespace(binding_json=frozen), deadline=None)
+            SimpleNamespace(binding_json=frozen), deadline=None,
+            open_artifacts=lambda: pytest.fail("invalid request opened the artifact store"))
 
 
 @pytest.mark.parametrize("schema", ["narrative-batch-request/1", "narrative-batch-request/2"])
@@ -172,7 +173,8 @@ def test_binding_decoder_retains_published_recipe_without_instantiating_current_
         raise AssertionError("binding decode must not instantiate current PDF software")
     monkeypatch.setattr(PdfReading, "describe_recipe", forbidden_reader)
     restored, restored_versions, restored_jobs = batch._resume_binding(
-        request, reader, store, runs, run, deadline=None, prepared_sources=prepared)
+        request, reader, store, runs, run, deadline=None, prepared_sources=prepared,
+        open_artifacts=lambda: pytest.fail("matching binding opened the artifact store"))
     assert restored.generation_manifests == binding.generation_manifests
     assert restored_versions == versions and restored_jobs == jobs
     assert run.binding_json == frozen
@@ -199,13 +201,11 @@ def _resume_harness(tmp_path, monkeypatch, *, status, completed):
     monkeypatch.setattr(batch, "_storage_guard", lambda *args, **kwargs: object())
     monkeypatch.setattr(batch, "_paid_summary_recovery_candidates", lambda *args: ())
     artifacts = SimpleNamespace(close=lambda: None)
-    monkeypatch.setattr(batch, "NarrativeArtifactReader", lambda *args: artifacts)
-    monkeypatch.setattr(batch, "LocalNarrativeObjectStore", lambda path: object())
     monkeypatch.setattr(batch, "_final_documents", lambda *args, **kwargs: [
         {"status": "completed" if completed else "activation_pending"},
     ])
     monkeypatch.setattr(batch, "_receipt", lambda *args: "read-only receipt")
-    catalog = SimpleNamespace(config=SimpleNamespace(database_path=tmp_path / "catalog.db", catalog_dir=tmp_path))
+    catalog = SimpleNamespace(open_narrative_artifact_reader=lambda: artifacts)
     return lambda: batch._run_prepared(request, catalog, tmp_path, tmp_path / "config.json", db, tmp_path / "work",
         deadline=None, prepared_sources=((), ()), manifests={}, normalization=None,
         effective_versions=batch._execution_versions(request))

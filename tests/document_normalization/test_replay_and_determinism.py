@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
@@ -9,11 +10,13 @@ import sys
 
 import pytest
 
+from company_wiki import document_normalization as dn
 from company_wiki.document_normalization import (
     NormalizationLimits,
     replay_unit,
 )
 from company_wiki.source_contract.evidence_span import EvidenceSpan, ParseStatus
+from company_wiki.source_contract.source_version import VerifiedContent
 
 from conftest import (
     build_pptx,
@@ -34,6 +37,95 @@ def _html_bytes() -> bytes:
         "<tr><td>FY2025</td><td>$245 billion</td></tr></table>"
         '<p class="footnote">1. Revenue includes cloud services</p>'
     ).encode("utf-8")
+
+
+@pytest.mark.parametrize("as_spans", [False, True])
+def test_raw_replay_checks_whole_source_once_and_rejects_changed_bytes(monkeypatch, as_spans):
+    data = _html_bytes()
+    doc = normalize_html(data.decode("utf-8"))
+    source_sha = sha256_hex(data)
+    selected = doc.units[:2]
+    full_source_checks = []
+    sha256 = hashlib.sha256
+
+    def count_source_hash(payload=b"", **kwargs):
+        if payload is data:
+            full_source_checks.append(payload)
+        return sha256(payload, **kwargs)
+
+    def replay(original):
+        if as_spans:
+            return dn.replay_evidence_spans(
+                original, source_id=doc.source_id, source_sha256=source_sha,
+                mime_type="text/html",
+                evidence_spans=tuple(
+                    unit.to_evidence_span(topics=["business"], selection_reasons=["body"])
+                    for unit in selected
+                ),
+                limits=NormalizationLimits(),
+            )
+        return dn.replay_units(
+            original, source_sha256=source_sha, units=selected,
+            limits=NormalizationLimits(),
+        )
+
+    monkeypatch.setattr(hashlib, "sha256", count_source_hash)
+    assert replay(data) == (len(selected) if as_spans else tuple(u.raw_text for u in selected))
+    assert len(full_source_checks) == 1
+    with pytest.raises(dn.ReplayError, match="source bytes do not match source_sha256"):
+        replay(data.replace(b"245", b"999"))
+
+
+def test_verified_content_reuses_owner_hash_and_keeps_local_budget_and_bindings(monkeypatch):
+    data = _html_bytes()
+    doc = normalize_html(data.decode("utf-8"))
+    selected = (doc.units[0].to_evidence_span(topics=["overview"], selection_reasons=["body"]),)
+    content = VerifiedContent(
+        document_id="filing-test",
+        source_id=doc.source_id,
+        content_sha256=doc.source_sha256,
+        data=data,
+        byte_size=len(data),
+        read_at="2026-11-09T00:00:00Z",
+        policy_sha256="a" * 64,
+        source_read_policy_sha256="b" * 64,
+    ).verified_observation()
+    sha256 = hashlib.sha256
+
+    def reject_second_source_hash(payload=b"", **kwargs):
+        assert payload is not data
+        return sha256(payload, **kwargs)
+
+    monkeypatch.setattr(hashlib, "sha256", reject_second_source_hash)
+    assert dn.normalize_verified_document(content, mime_type="text/html") == doc
+    assert dn.replay_verified_evidence_spans(
+        content, mime_type="text/html", evidence_spans=selected,
+        limits=NormalizationLimits(),
+    ) == 1
+    with pytest.raises(dn.NormalizationLimitError, match="max_source_bytes"):
+        dn.normalize_verified_document(
+            content, mime_type="text/html",
+            limits=NormalizationLimits(max_source_bytes=len(data) - 1),
+        )
+    unrelated = normalize_html(html_page("<h1>Unrelated filing</h1>")).units[0]
+    with pytest.raises(dn.ReplayError, match="mixed span source/parser identity"):
+        dn.replay_verified_evidence_spans(
+            content, mime_type="text/html",
+            evidence_spans=(unrelated.to_evidence_span(topics=["overview"], selection_reasons=["body"]),),
+            limits=NormalizationLimits(),
+        )
+
+
+def test_parser_fingerprint_is_scoped_to_the_actual_carrier():
+    from company_wiki.document_normalization import docx_parser, html_parser, pptx_parser
+    from company_wiki.document_normalization.reading_identity import normalized_parser_sha256
+    from company_wiki.implementation_identity import code_sha256
+
+    for parser in (html_parser, docx_parser, pptx_parser):
+        for mime in parser.SUPPORTED_MIME_TYPES:
+            assert normalized_parser_sha256(mime.upper() + "; charset=utf-8") == code_sha256(parser.__file__)
+    with pytest.raises(dn.UnsupportedFormatError):
+        normalized_parser_sha256("application/pdf")
 
 
 class TestReplayVerificationHtml:

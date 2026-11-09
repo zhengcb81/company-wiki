@@ -155,47 +155,25 @@ def test_failed_batch_recovery_candidates_require_exact_frozen_paid_protocol(pro
     assert _paid_summary_recovery_candidates(binding, run, (job,), runs) == ()
 
 
-@pytest.mark.parametrize('projection', [None, 'reading-model-input/4', 'reading-model-input/5'])
-def test_preflight_reserves_paid_response_capacity_for_each_current_summary_protocol(projection):
-    from company_wiki.automation.narrative_batch import _preflight_storage
-    from company_wiki.automation.narrative_contracts import (
-        BUNDLE_MAX_BYTES, SELECT_RESULT_MAX_BYTES, SUMMARY_RESULT_MAX_BYTES,
-    )
-    from company_wiki.automation.narrative_model_extractive import EXECUTION_MAX_BYTES
-    from company_wiki.automation.supervisor import profile_slots
+@pytest.mark.parametrize('dimension', ['persistent', 'scratch'])
+def test_paid_response_capacity_checks_the_configured_body_once(tmp_path, dimension):
+    from company_wiki.automation.narrative_run_store import StorageBudgetExceeded
+    from company_wiki.automation.narrative_storage_budget import BatchStorageBudget
 
     response_bytes = 4096
-    final_bytes = 1024
-    base_reserve = (SELECT_RESULT_MAX_BYTES + SUMMARY_RESULT_MAX_BYTES
-        + 2 * BUNDLE_MAX_BYTES + 1024**2 + 8 * 1024**2
-        + len(profile_slots('P1')) * 262144)
-    response_reserve = base_reserve + response_bytes + 4096
-    request = SimpleNamespace(
-        execution_versions={'selector': '0.9.0'},
-        reading_model_projection=projection,
-        model_options={'max_response_bytes': response_bytes},
-        profile='P1', work_items=(object(),), max_final_bytes=final_bytes,
-        max_persistent_bytes=response_reserve,
-        max_scratch_bytes=final_bytes + response_bytes,
-    )
-    if projection == 'reading-model-input/5':
-        with pytest.raises(ValueError, match='PERSISTENT_BYTES_EXCEEDED'):
-            _preflight_storage(request)
-        request.max_persistent_bytes = response_reserve + EXECUTION_MAX_BYTES
-        _preflight_storage(request)
-        request.max_persistent_bytes -= 1
-        with pytest.raises(ValueError, match='PERSISTENT_BYTES_EXCEEDED'):
-            _preflight_storage(request)
-    else:
-        _preflight_storage(request)
-        request.max_persistent_bytes = response_reserve - 1
-        with pytest.raises(ValueError, match='PERSISTENT_BYTES_EXCEEDED'):
-            _preflight_storage(request)
+    run_file_bytes = 7
+    limits = {'max_persistent_bytes': run_file_bytes + response_bytes,
+              'max_scratch_bytes': response_bytes}
+    guard = BatchStorageBudget(files=(), persistent_dirs=(tmp_path,), scratch_dirs=(), **limits)
+    (tmp_path / 'run.json').write_bytes(b'x' * run_file_bytes)
+    guard.require_response_capacity(response_bytes)
 
-    # The legacy 0.8 path has no new response pin and stays outside this reserve.
-    request.execution_versions = {'selector': '0.8.0'}
-    request.max_persistent_bytes = base_reserve + 1
-    _preflight_storage(request)
+    limits[f'max_{dimension}_bytes'] -= 1
+    guard = BatchStorageBudget(files=(), persistent_dirs=(tmp_path,), scratch_dirs=(),
+                               baseline=(0,), **limits)
+    with pytest.raises(StorageBudgetExceeded, match=f'{dimension.upper()}_BYTES_EXCEEDED'):
+        guard.require_response_capacity(response_bytes)
+    assert (tmp_path / 'run.json').read_bytes() == b'x' * run_file_bytes
 
 
 def test_coordinator_merges_committed_response_writer_observation_into_scratch_lower_bound():

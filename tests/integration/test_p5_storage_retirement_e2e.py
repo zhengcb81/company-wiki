@@ -303,7 +303,7 @@ def _narrative_reference(fixture) -> tuple[int, dict]:
         [
             sys.executable,
             "-m",
-            "company_wiki.source_catalog.narrative_transport_cli",
+            "company_wiki.automation.narrative_transport_cli",
             "--config",
             fixture["config_path"],
             "--operation",
@@ -330,7 +330,7 @@ def _narrative_read(fixture) -> tuple[int, bytes]:
         [
             sys.executable,
             "-m",
-            "company_wiki.source_catalog.narrative_transport_cli",
+            "company_wiki.automation.narrative_transport_cli",
             "--config",
             fixture["config_path"],
             "--operation",

@@ -18,13 +18,34 @@ paths or the clock.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from functools import partial
 from typing import Sequence
 
 from . import vocabulary as v
 from .observation import Observation
-from .signals import (SignalBag, normalize, _cover_units, self_identification_units,
+from .signals import (COVER_WINDOW_UNITS, RoutingFact, SignalBag, normalize, _cover_units, self_identification_units,
                       matches_any, HK_ANNUAL_WORDS, HK_INTERIM_WORDS,
                       CN_PERIODIC_WORDS)
+
+
+_ADMINISTRATIVE_SUBTYPES = {
+    RoutingFact.ADMIN_CONFIRMATION: "administrative_confirmation",
+    RoutingFact.ADMIN_DIRECTOR_REPORT: "administrative_director_report",
+    RoutingFact.ADMIN_FORMAL_POLICY: "administrative_policy",
+    RoutingFact.ADMIN_OTHER_POLICY: "administrative_policy",
+    RoutingFact.ADMIN_MEETING: "administrative_meeting_notice",
+    RoutingFact.ADMIN_MATERIAL: "administrative_material",
+}
+_CN_OFFERING_FACTS = (RoutingFact.CN_CONVERTIBLE, RoutingFact.CN_REFINANCING, RoutingFact.CN_IPO)
+_CN_PERIODIC_FACTS = (RoutingFact.CN_QUARTERLY, RoutingFact.CN_INTERIM, RoutingFact.CN_ANNUAL)
+_HK_OFFERING_FACTS = (RoutingFact.HK_GLOBAL_OFFERING, RoutingFact.HK_PROSPECTUS)
+_HK_PERIODIC_FACTS = (RoutingFact.HK_ANNUAL, RoutingFact.HK_INTERIM)
+_SEC_STRUCTURE_FORMS = {
+    RoutingFact.SEC_20F_ITEMS: "20-f",
+    RoutingFact.SEC_10Q_ITEMS: "10-q",
+    RoutingFact.SEC_10K_ITEMS: "10-k",
+    RoutingFact.SEC_INTERIM_PERIOD: "10-q",
+}
 
 
 @dataclass
@@ -82,25 +103,14 @@ def _administrative_candidate(observation: Observation, bag: SignalBag) -> Candi
     document and outranks a policy-shaped title, so the Q&A family wins and the disagreement
     is still reported as a conflict.
     """
-    if not _has(bag, v.REASON_ADMINISTRATIVE_PURPOSE):
+    signal = next((item for item in bag.all if item.code == v.REASON_ADMINISTRATIVE_PURPOSE), None)
+    if signal is None:
         return None
-    detail = _detail_of(bag, v.REASON_ADMINISTRATIVE_PURPOSE)
-    lowered = detail.casefold()
-    is_policy_shaped = "管理制度" in lowered or "管理办法" in lowered
-    observed_qa = _has(bag, v.REASON_QA_STRUCTURE)
-    if is_policy_shaped and observed_qa:
+    if signal.fact is RoutingFact.ADMIN_FORMAL_POLICY and _has(bag, v.REASON_QA_STRUCTURE):
         return None
 
     unit_ids = _units(bag, v.REASON_ADMINISTRATIVE_PURPOSE) or _any_unit(bag)
-    subtype = "administrative_material"
-    if "确认意见" in lowered:
-        subtype = "administrative_confirmation"
-    elif "述职" in lowered:
-        subtype = "administrative_director_report"
-    elif is_policy_shaped or "制度" in lowered:
-        subtype = "administrative_policy"
-    elif "会议通知" in lowered or "关于召开" in lowered:
-        subtype = "administrative_meeting_notice"
+    subtype = _ADMINISTRATIVE_SUBTYPES.get(signal.fact or RoutingFact.ADMIN_MATERIAL, "administrative_material")
     return Candidate(
         profile_id="administrative",
         family="administrative",
@@ -108,7 +118,7 @@ def _administrative_candidate(observation: Observation, bag: SignalBag) -> Candi
         subtype=subtype,
         score=100,
         reasons=[
-            (v.REASON_ADMINISTRATIVE_PURPOSE, unit_ids, detail),
+            (v.REASON_ADMINISTRATIVE_PURPOSE, unit_ids, signal.detail),
         ],
     )
 
@@ -126,44 +136,28 @@ def _regime_of(observation: Observation, bag: SignalBag) -> tuple[str, list[tupl
     hk_signal = False
     cn_signal = False
 
-    details = " ".join(signal.detail for signal in bag.all)
-    hk_structure = any(
-        "港股" in signal.detail for signal in bag.toc_signals
-    ) or _has_hk_structure(details)
-
     for signal in bag.cover_signals:
-        detail = signal.detail
         if signal.form_type is not None:
             sec_form = signal.form_type
-            reasons.append((v.REASON_COVER_HEADING, signal.unit_ids, detail))
-        elif "港股" in detail or "全球发售" in detail:
+            reasons.append((v.REASON_COVER_HEADING, signal.unit_ids, signal.detail))
+        elif signal.fact in (*_HK_OFFERING_FACTS, *_HK_PERIODIC_FACTS):
             hk_signal = True
-            reasons.append((v.REASON_COVER_HEADING, signal.unit_ids, detail))
-        elif "A股" in detail or "再融资" in detail or "首次公开发行" in detail or "可转换" in detail:
+            reasons.append((v.REASON_COVER_HEADING, signal.unit_ids, signal.detail))
+        elif signal.fact in _CN_OFFERING_FACTS:
             cn_signal = True
-            reasons.append((v.REASON_COVER_HEADING, signal.unit_ids, detail))
+            reasons.append((v.REASON_COVER_HEADING, signal.unit_ids, signal.detail))
 
-    for signal in bag.toc_signals:
-        if "10-K Item" in signal.detail or "10-Q Part I" in signal.detail or "20-F Item" in signal.detail:
-            reasons.append((v.REASON_TOC_STRUCTURE, signal.unit_ids, signal.detail))
-            sec_form = sec_form or signal.detail.split()[0]
-
-    # Interim-period reporting language is SEC evidence even when the item header sits
-    # outside the probed window.
-    if sec_form is None and any(
-        "SEC 中期期间报告措辞" in signal.detail for signal in bag.body_signals
-    ):
-        sec_form = "10-Q"
-        reasons.append(
-            (
-                v.REASON_SECTION_VOCABULARY,
-                _units(bag, v.REASON_SECTION_VOCABULARY),
-                "SEC 中期期间报告措辞",
-            )
-        )
+    sec_structure = bag.has_fact(RoutingFact.SEC_FORM_LABEL)
+    for signal in (*bag.toc_signals, *bag.body_signals):
+        if signal.fact is None or signal.fact not in _SEC_STRUCTURE_FORMS:
+            continue
+        if signal.fact is not RoutingFact.SEC_INTERIM_PERIOD:
+            sec_structure = True
+        reasons.append((signal.code, signal.unit_ids, signal.detail))
+        sec_form = sec_form or _SEC_STRUCTURE_FORMS[signal.fact]
 
     # Structural evidence beats a metadata-only form claim.
-    if hk_structure and not _has_sec_structure(details):
+    if bag.has_fact(RoutingFact.HK_STRUCTURE, RoutingFact.HK_PROSPECTUS_STRUCTURE) and not sec_structure:
         return "hkex", reasons
     if sec_form:
         return "sec", reasons
@@ -176,40 +170,6 @@ def _regime_of(observation: Observation, bag: SignalBag) -> tuple[str, list[tupl
     if declared in v.REGIMES and declared != "unknown":
         return declared, reasons
     return "unknown", reasons
-
-
-#: Section vocabulary that identifies an HK periodic report or offering.
-_HK_STRUCTURE_VOCAB = (
-    "業務回顧及展望",
-    "管理層討論與分析",
-    "財務表現摘要",
-    "董事會報告",
-    "企業管治報告",
-    "獨立核數師報告",
-    "全球發售",
-    "行業概覽",
-    "歷史及公司架構",
-    "所得款項用途",
-)
-
-#: Section vocabulary that identifies an SEC filing's item structure.
-_SEC_STRUCTURE_VOCAB = (
-    "10-K Item",
-    "10-Q Part I",
-    "20-F Item",
-    "item 1. business",
-    "item 4. information on the company",
-)
-
-
-def _has_hk_structure(details: str) -> bool:
-    folded = normalize(details)
-    return any(normalize(token) in folded for token in _HK_STRUCTURE_VOCAB)
-
-
-def _has_sec_structure(details: str) -> bool:
-    folded = normalize(details)
-    return any(normalize(token) in folded for token in _SEC_STRUCTURE_VOCAB)
 
 
 def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
@@ -225,16 +185,8 @@ def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
         if signal.form_type is not None:
             form = signal.form_type.casefold()
             break
-    structural = " ".join(signal.detail for signal in bag.all)
     if form is None:
-        if "20-F Item" in structural:
-            form = "20-f"
-        elif "10-Q Part I" in structural:
-            form = "10-q"
-        elif "10-K Item" in structural:
-            form = "10-k"
-        elif "SEC 中期期间报告措辞" in structural:
-            form = "10-q"
+        form = next((name for fact, name in _SEC_STRUCTURE_FORMS.items() if bag.has_fact(fact)), None)
     if form in {"s-1", "f-1"}:
         return Candidate(
             profile_id="prospectus", family="prospectus", regime="sec",
@@ -276,10 +228,9 @@ def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
 
 
 def _observed_periodic_cover(observation: Observation, aliases: Sequence[str]) -> bool:
-    """The actual front-page self-name, independent of filename/metadata claims."""
-    actual = normalize(" ".join(unit.text for unit in
-                                self_identification_units(_cover_units(observation))))
-    return bool(matches_any(actual, aliases))
+    """An observed front-page title or standalone opening heading in pageless text."""
+    opening_units = _cover_units(observation) or observation.probes[:COVER_WINDOW_UNITS]
+    return any(matches_any(normalize(unit.text), aliases) for unit in self_identification_units(opening_units))
 
 
 def _hk_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
@@ -289,7 +240,7 @@ def _hk_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
     interim report names itself ``2025中期報告``/``Interim Report`` on the cover OR in the
     TOC/first heading, and a reconstruction may only carry the latter.
     """
-    offering = _offering_evidence(bag, hk=True)
+    offering = _hk_offering_evidence(bag)
     periodic_cover = _observed_periodic_cover(observation, (*HK_ANNUAL_WORDS, *HK_INTERIM_WORDS))
     if offering and not periodic_cover:
         return Candidate(
@@ -306,17 +257,11 @@ def _hk_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
     ]
     periodic = [reason for reason in periodic if reason[1]]
 
-    evidence = normalize(
-        " ".join(
-            [observation.title or ""]
-            + [signal.detail for signal in bag.all]
-            + [unit.text for unit in observation.probes]
-        )
-    )
+    evidence = normalize(" ".join([observation.title or "", *(unit.text for unit in observation.probes)]))
     interim_markers = ("interim report", "中期報告", "中期报告", "半年報", "半年报", "中期業績")
     annual_markers = ("annual report", "年報", "年报", "年度報告", "年度报告")
 
-    if any(normalize(marker) in evidence for marker in interim_markers):
+    if bag.has_fact(RoutingFact.HK_INTERIM) or matches_any(evidence, interim_markers):
         return Candidate(
             profile_id="hk_periodic",
             family="interim",
@@ -325,7 +270,7 @@ def _hk_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
             score=70,
             reasons=periodic,
         )
-    if any(normalize(marker) in evidence for marker in annual_markers):
+    if bag.has_fact(RoutingFact.HK_ANNUAL) or matches_any(evidence, annual_markers):
         return Candidate(
             profile_id="hk_periodic",
             family="annual",
@@ -337,22 +282,12 @@ def _hk_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
     return None
 
 
-def _offering_evidence(bag: SignalBag, *, hk: bool) -> list[tuple[str, Sequence[str], str]]:
+def _hk_offering_evidence(bag: SignalBag) -> list[tuple[str, Sequence[str], str]]:
     evidence: list[tuple[str, Sequence[str], str]] = []
-    offering_units: list[str] = []
     for signal in bag.all:
-        detail = signal.detail
-        is_hk = "全球发售" in detail or "招股章程" in detail
-        is_cn = "再融资" in detail or "可转换" in detail or "首次公开发行" in detail
-        if hk and is_hk:
-            offering_units.extend(signal.unit_ids)
-            evidence.append((v.REASON_COVER_HEADING, signal.unit_ids, detail))
-        elif not hk and is_cn:
-            offering_units.extend(signal.unit_ids)
-            evidence.append((v.REASON_COVER_HEADING, signal.unit_ids, detail))
-    for signal in bag.all:
-        if signal.code == v.REASON_SECTION_VOCABULARY and "募投" in signal.detail:
-            offering_units.extend(signal.unit_ids)
+        if signal.fact in _HK_OFFERING_FACTS:
+            evidence.append((v.REASON_COVER_HEADING, signal.unit_ids, signal.detail))
+        elif signal.fact is RoutingFact.FUNDRAISING:
             evidence.append((v.REASON_SECTION_VOCABULARY, signal.unit_ids, signal.detail))
     return evidence
 
@@ -367,12 +302,11 @@ def _cn_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
     """
     if _observed_periodic_cover(observation, CN_PERIODIC_WORDS):
         return None
-    details = " ".join(signal.detail for signal in bag.all)
     cover_units = _units(bag, "COVER_HEADING")
     fundraising_units = tuple(
         unit_id
         for signal in bag.all
-        if signal.code == v.REASON_SECTION_VOCABULARY and "募投" in signal.detail
+        if signal.fact is RoutingFact.FUNDRAISING
         for unit_id in signal.unit_ids
     )
     offering_reasons: list[tuple[str, Sequence[str], str]] = []
@@ -381,7 +315,7 @@ def _cn_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
             (v.REASON_SECTION_VOCABULARY, fundraising_units, "募投/所得款项章节")
         )
 
-    if "可转换" in details:
+    if bag.has_fact(RoutingFact.CN_CONVERTIBLE):
         return Candidate(
             profile_id="offering",
             family="offering",
@@ -393,7 +327,7 @@ def _cn_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
                 *offering_reasons,
             ],
         )
-    if "再融资" in details:
+    if bag.has_fact(RoutingFact.CN_REFINANCING):
         return Candidate(
             profile_id="offering",
             family="offering",
@@ -405,7 +339,7 @@ def _cn_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
                 *offering_reasons,
             ],
         )
-    if "首次公开发行" in details or "招股" in details:
+    if bag.has_fact(RoutingFact.CN_IPO, RoutingFact.CN_PROSPECTUS_STRUCTURE):
         return Candidate(
             profile_id="prospectus",
             family="prospectus",
@@ -442,25 +376,26 @@ def _cn_periodic_candidate(observation: Observation, bag: SignalBag) -> Candidat
     because a real report may carry either without the other: the sampled 2025 annual
     report names itself on the cover, while a body-only excerpt may show only ``第三节``.
     """
-    if _has(bag, "TXT_CARRIER") or _has(bag, "HTML_CARRIER"):
+    if (_has(bag, "TXT_CARRIER") or _has(bag, "HTML_CARRIER")) and not _observed_periodic_cover(
+        observation, CN_PERIODIC_WORDS
+    ):
         return None
     # Fundraising structure (募集资金运用/募投项目/所得款项用途) marks an offering document,
     # not a periodic report. A real offering whose front matter is ``发行人声明``/``目录`` and
     # whose only offering evidence is a fundraising section must not fall into the periodic
     # family by default.
-    if any(
-        signal.code == v.REASON_SECTION_VOCABULARY and "募投" in signal.detail
-        for signal in bag.all
-    ) and not _has_periodic_self_identification(bag):
+    if bag.has_fact(RoutingFact.FUNDRAISING) and not bag.has_fact(*_CN_PERIODIC_FACTS):
         return None
     structure: list[tuple[str, Sequence[str], str]] = [
         (v.REASON_COVER_HEADING, _units(bag, "COVER_HEADING"), _cover_detail(bag, "定期报告")),
         (v.REASON_TOC_STRUCTURE, _units(bag, "TOC_STRUCTURE"), "A股第N节章节编号"),
     ]
-    cover_details = " ".join(signal.detail for signal in bag.cover_signals)
-    body_details = " ".join(signal.detail for signal in bag.body_signals)
-    combined = cover_details + " " + body_details
-    section_units = _units(bag, v.REASON_SECTION_VOCABULARY)
+    section_units = tuple(
+        unit_id
+        for signal in bag.body_signals
+        if signal.fact is RoutingFact.CN_BUSINESS_SECTIONS
+        for unit_id in signal.unit_ids
+    )
 
     def reasons_for(detail: str) -> list[tuple[str, Sequence[str], str]]:
         listed: list[tuple[str, Sequence[str], str]] = [(code, ids, text) for code, ids, text in structure if ids]
@@ -472,7 +407,7 @@ def _cn_periodic_candidate(observation: Observation, bag: SignalBag) -> Candidat
             (v.REASON_DECLARED_KIND_MATCH, _any_unit(bag), detail),
         ]
 
-    if "季度报告" in combined:
+    if bag.has_fact(RoutingFact.CN_QUARTERLY):
         return Candidate(
             profile_id="cn_quarterly",
             family="quarterly",
@@ -481,7 +416,7 @@ def _cn_periodic_candidate(observation: Observation, bag: SignalBag) -> Candidat
             score=72,
             reasons=reasons_for("季度报告封面/标题"),
         )
-    if "半年度报告" in combined:
+    if bag.has_fact(RoutingFact.CN_INTERIM):
         return Candidate(
             profile_id="cn_interim",
             family="interim",
@@ -490,7 +425,7 @@ def _cn_periodic_candidate(observation: Observation, bag: SignalBag) -> Candidat
             score=72,
             reasons=reasons_for("半年度报告封面/标题"),
         )
-    if "年度报告" in combined:
+    if bag.has_fact(RoutingFact.CN_ANNUAL):
         return Candidate(
             profile_id="cn_annual",
             family="annual",
@@ -513,37 +448,21 @@ def _cn_periodic_candidate(observation: Observation, bag: SignalBag) -> Candidat
     return None
 
 
-def _has_periodic_self_identification(bag: SignalBag) -> bool:
-    """True when the document names itself a periodic report.
-
-    Used to protect a real A-share annual/interim/quarterly report that happens to include a
-    fundraising section from being reclassified as an offering.
-    """
-    for signal in bag.cover_signals:
-        if signal.code != "COVER_HEADING":
-            continue
-        if "定期报告" in signal.detail or "年度报告" in signal.detail or "半年度报告" in signal.detail or "季度报告" in signal.detail:
-            return True
-    return False
-
-
 def _cover_detail(bag: SignalBag, fallback: str) -> str:
     for signal in bag.cover_signals:
-        if signal.code == "COVER_HEADING" and "定期报告" not in signal.detail:
+        if signal.fact in _CN_PERIODIC_FACTS:
             return signal.detail
     return fallback
 
 
-def _qa_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
+def _qa_candidate(_observation: Observation, bag: SignalBag, *, regime: str) -> Candidate | None:
     if not _has(bag, v.REASON_QA_STRUCTURE):
         return None
     ids = _units(bag, v.REASON_QA_STRUCTURE) or _any_unit(bag)
     return Candidate(
         profile_id="investor_qa",
         family="investor_qa",
-        regime="cn_exchange" if any("\u4e00" <= ch <= "\u9fff" for ch in " ".join(
-            unit.text for unit in observation.probes[:5]
-        )) else "unknown",
+        regime=regime,
         subtype="ir_activity_record",
         score=76,
         reasons=[(v.REASON_QA_STRUCTURE, ids, _detail_of(bag, v.REASON_QA_STRUCTURE))],
@@ -580,9 +499,8 @@ def _deck_candidate(observation: Observation, bag: SignalBag) -> Candidate | Non
 
 
 def _release_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
-    details = " ".join(signal.detail for signal in bag.all)
     ids = _units(bag, v.REASON_SECTION_VOCABULARY) or _units(bag, "COVER_HEADING")
-    if "业绩发布措辞" in details or "Business Highlights" in details:
+    if bag.has_fact(RoutingFact.RESULTS_RELEASE):
         return Candidate(
             profile_id="results_release",
             family="results_release",
@@ -623,6 +541,8 @@ def decide(observation: Observation, bag: SignalBag) -> Candidate:
         return administrative
 
     regime, regime_reasons = _regime_of(observation, bag)
+    # Q&A structure identifies the document's purpose. Its market is resolved separately.
+    qa_candidate = partial(_qa_candidate, regime=regime)
 
     ordered: list[Candidate] = []
     if regime == "sec":
@@ -634,7 +554,7 @@ def decide(observation: Observation, bag: SignalBag) -> Candidate:
         if hk is not None:
             ordered.append(hk)
     elif regime == "cn_exchange":
-        for factory in (_cn_candidate, _cn_periodic_candidate, _qa_candidate, _call_candidate):
+        for factory in (_cn_candidate, _cn_periodic_candidate, qa_candidate, _call_candidate):
             candidate = factory(observation, bag)
             if candidate is not None:
                 ordered.append(candidate)
@@ -643,7 +563,7 @@ def decide(observation: Observation, bag: SignalBag) -> Candidate:
             _call_candidate,
             _deck_candidate,
             _release_candidate,
-            _qa_candidate,
+            qa_candidate,
             _sec_profile,
             _cn_candidate,
             _cn_periodic_candidate,
@@ -660,7 +580,7 @@ def decide(observation: Observation, bag: SignalBag) -> Candidate:
     # carries 33 statement-footnote `Notes:` labels, and letting the transcript candidate
     # compete across regimes routed that annual report to `earnings_call`.
     if not _regime_is_structural(observation, bag):
-        for factory in (_call_candidate, _qa_candidate, _deck_candidate, _release_candidate):
+        for factory in (_call_candidate, qa_candidate, _deck_candidate, _release_candidate):
             candidate = factory(observation, bag)
             if candidate is not None and all(
                 item.profile_id != candidate.profile_id for item in ordered
@@ -695,32 +615,17 @@ def _regime_is_structural(observation: Observation, bag: SignalBag) -> bool:
     alone cannot decide. Only units that pass ``is_title_evidence`` -- heading-like or short
     standalone lines that are not cross-references -- count as structural proof.
     """
-    structural_details = " ".join(
-        signal.detail for signal in (bag.cover_signals + bag.toc_signals)
-    )
-    if not structural_details:
-        return False
-    named_form = (
-        any(
-            token in structural_details
-            for token in ("港股", "全球发售", "A股", "再融资", "首次公开发行", "可转换")
-        )
-        or any(signal.form_type is not None for signal in (bag.cover_signals + bag.toc_signals))
-        or "10-K Item" in structural_details
-        or "10-Q Part I" in structural_details
-        or "20-F Item" in structural_details
-    )
-    if not named_form:
-        return False
-    return _cites_title_evidence(observation, bag)
-
-
-def _cites_title_evidence(observation: Observation, bag: SignalBag) -> bool:
-    """True when a cover/TOC signal cites a unit that really is a cover/heading line."""
     from .signals import is_title_evidence
 
+    structural_facts = {
+        *_CN_OFFERING_FACTS, *_HK_OFFERING_FACTS, *_HK_PERIODIC_FACTS,
+        RoutingFact.CN_NUMBERED_SECTIONS, RoutingFact.HK_STRUCTURE, RoutingFact.HK_PROSPECTUS_STRUCTURE,
+        RoutingFact.SEC_FORM_LABEL, RoutingFact.SEC_10K_ITEMS, RoutingFact.SEC_10Q_ITEMS, RoutingFact.SEC_20F_ITEMS,
+    }
     by_id = {unit.unit_id: unit for unit in observation.units}
     for signal in bag.cover_signals + bag.toc_signals:
+        if signal.fact not in structural_facts:
+            continue
         for unit_id in signal.unit_ids:
             unit = by_id.get(unit_id)
             if unit is not None and is_title_evidence(unit):

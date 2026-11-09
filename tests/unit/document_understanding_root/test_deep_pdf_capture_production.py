@@ -227,7 +227,7 @@ def test_same_deadline_is_not_restarted_when_a_deep_target_is_reached(monkeypatc
 def test_actual_capture_survives_production_summary_and_causal_inventory():
     from copy import deepcopy
     from company_wiki.source_catalog.narrative_reading import _native_layout_summary, _understand
-    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
     from company_wiki.document_understanding.layout_hints.contract import WorkBudget
 
     parsed = _parse(_bytes(pages=3, table_pages=(3,)), table_pages=(3,))

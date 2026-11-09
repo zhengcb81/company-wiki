@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from company_wiki.automation.narrative_formats import parser_component
+from company_wiki.source_catalog.narrative_formats import parser_component
 from company_wiki.source_catalog.narrative_evidence import (
     parse_transcript_text,
     select_narrative_evidence,

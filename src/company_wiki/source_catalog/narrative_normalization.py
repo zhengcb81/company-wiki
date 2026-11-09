@@ -1,19 +1,29 @@
 """Explicit local normalization composition; parsers remain deployment independent."""
 
 from __future__ import annotations
+from collections.abc import Sequence
 from dataclasses import replace
 import hashlib
 import json
 import math
 from pathlib import Path
+from typing import Any, TypedDict
 from company_wiki import document_normalization as dn
 from company_wiki.document_normalization.units import (
     require_parser_version,
     supported_parser_versions,
 )
 from company_wiki.document_normalization.isolated_ocr import IsolatedOCRAdapter
+from company_wiki.source_contract import EvidenceSpan
+from company_wiki.source_contract.source_version import VerifiedContent
 
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+
+
+class _ParseOptions(TypedDict):
+    limits: dn.NormalizationLimits
+    ocr: Any
+    ocr_limits: dn.OCRLimits | None
 
 
 class NarrativeNormalization:
@@ -152,17 +162,40 @@ class NarrativeNormalization:
         identity = self.identity(
             mime_type, document_id=document_id, parser_version=parser_version
         )
-        adapter = self._prepare_ocr() if identity["parser_version"] == "2.0.0" else None
         return dn.normalize_document(
             data,
             source_id=source_id,
             source_sha256=source_sha256,
             mime_type=mime_type,
             parser_version=identity["parser_version"],
-            limits=dn.NormalizationLimits(deadline=self.deadline),
-            ocr=adapter,
-            ocr_limits=dn.OCRLimits(deadline=self.deadline) if adapter else None,
+            **self._parse_options(identity["parser_version"]),
         )
+
+    def normalize_verified(
+        self, content: VerifiedContent, *, mime_type: str, parser_version: str | None = None,
+    ) -> dn.NormalizedDocument:
+        """Normalize a source-owner buffer using the configured parser generation."""
+        if type(self).normalize is not NarrativeNormalization.normalize:
+            options = {"parser_version": parser_version} if parser_version is not None else {}
+            return self.normalize(
+                content.data, source_id=content.source_id, source_sha256=content.content_sha256,
+                mime_type=mime_type, document_id=content.document_id, **options,
+            )
+        identity = self.identity(
+            mime_type, document_id=content.document_id, parser_version=parser_version,
+        )
+        return dn.normalize_verified_document(
+            content, mime_type=mime_type, parser_version=identity["parser_version"],
+            **self._parse_options(identity["parser_version"]),
+        )
+
+    def _parse_options(self, version: str) -> _ParseOptions:
+        adapter = self._prepare_ocr() if version == "2.0.0" else None
+        return {
+            "limits": dn.NormalizationLimits(deadline=self.deadline),
+            "ocr": adapter,
+            "ocr_limits": dn.OCRLimits(deadline=self.deadline) if adapter else None,
+        }
 
     def replay(
         self,
@@ -175,6 +208,33 @@ class NarrativeNormalization:
         language=None,
         parser_version=None,
     ):
+        return self._replay(
+            data, source_id=source_id, source_sha256=source_sha256, mime_type=mime_type,
+            evidence_spans=evidence_spans, language=language, parser_version=parser_version,
+        )
+
+    def replay_verified(
+        self, content: VerifiedContent, *, mime_type: str, evidence_spans: Sequence[EvidenceSpan],
+        language: str | None = None, parser_version: str | None = None,
+    ) -> int:
+        """Replay the immutable source-owner observation without rechecking its SHA."""
+        if type(self).replay is not NarrativeNormalization.replay:
+            return self.replay(
+                content.data, source_id=content.source_id, source_sha256=content.content_sha256,
+                mime_type=mime_type, evidence_spans=evidence_spans, language=language,
+                parser_version=parser_version,
+            )
+        return self._replay(
+            content, source_id=content.source_id, source_sha256=content.content_sha256,
+            mime_type=mime_type, evidence_spans=evidence_spans, language=language,
+            parser_version=parser_version,
+        )
+
+    def _replay(
+        self, original: bytes | VerifiedContent, *, source_id: str, source_sha256: str,
+        mime_type: str, evidence_spans: Sequence[EvidenceSpan], language: str | None,
+        parser_version: str | None,
+    ) -> int:
         spans = tuple(evidence_spans)
         version = spans[0].parser_version if spans else parser_version
         identity = self.identity(mime_type, parser_version=version)
@@ -189,28 +249,32 @@ class NarrativeNormalization:
         ):
             raise dn.ReplayError("selected parser/language/quality is not reliable")
         if not spans:
-            document = self.normalize(
-                data,
-                source_id=source_id,
-                source_sha256=source_sha256,
-                mime_type=mime_type,
-                parser_version=version,
-            )
+            if isinstance(original, VerifiedContent):
+                document = self.normalize_verified(
+                    original, mime_type=mime_type, parser_version=version,
+                )
+            else:
+                document = self.normalize(
+                    original, source_id=source_id, source_sha256=source_sha256,
+                    mime_type=mime_type, parser_version=version,
+                )
             if not document.structure.coverage_complete:
                 raise dn.ReplayError(
                     "empty selection requires complete source coverage"
                 )
             return 0
-        adapter = self._prepare_ocr() if version == "2.0.0" else None
+        options = self._parse_options(identity["parser_version"])
+        if isinstance(original, VerifiedContent):
+            return dn.replay_verified_evidence_spans(
+                original, mime_type=mime_type, evidence_spans=spans, **options,
+            )
         return dn.replay_evidence_spans(
-            data,
+            original,
             source_id=source_id,
             source_sha256=source_sha256,
             mime_type=mime_type,
             evidence_spans=spans,
-            limits=dn.NormalizationLimits(deadline=self.deadline),
-            ocr=adapter,
-            ocr_limits=dn.OCRLimits(deadline=self.deadline) if adapter else None,
+            **options,
         )
 
     def sample_text(self, data, mime_type, *, max_images=3):
@@ -238,7 +302,6 @@ class NarrativeNormalization:
                 raise
         if self.config is None:
             return text
-        adapter = self._prepare_ocr()
         seen: set[str] = set()
         total_pixels = 0
         limits = dn.OCRLimits(max_images=max_images, deadline=self.deadline)
@@ -248,6 +311,7 @@ class NarrativeNormalization:
             media_sha256 = asset.media_sha256
             if (
                 asset.asset_kind != "image"
+                or not asset.rendered
                 or asset.original_bytes is None
                 or media_sha256 is None
                 or media_sha256 in seen
@@ -261,6 +325,7 @@ class NarrativeNormalization:
             width, height = image_dimensions(asset.original_bytes, limits)
             total_pixels += width * height
             limits.require_within("max_total_pixels", total_pixels)
+            adapter = self._prepare_ocr()
             try:
                 result = adapter.transcribe(asset.original_bytes, limits=limits)
             except dn.LocalOCRError:
@@ -304,3 +369,8 @@ class NarrativeNormalization:
             )
         )
         return replace(document.structure, language=language, units=units)
+
+__all__ = [
+    'NarrativeNormalization',
+    'PPTX_MIME',
+]

@@ -94,12 +94,12 @@ def test_real_company_finite_worker_and_narrative_rf_view(case, loopback_model_s
     catalog = SourceCatalog(load_catalog_config(Path(item["config"]), project_root=Path(context["wiki"])))
     try:
         source_ref = request["sources"][0]
-        producer = [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli", "--config", item["config"]]
+        producer = [sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli", "--config", item["config"]]
 
         def invoke(command, payload):
             called = subprocess.run(command, input=json.dumps(payload).encode(), cwd=context["wiki"], env=env, capture_output=True, timeout=40)
             assert called.returncode == 0, called.stderr
-            if payload.get("narrative_ref") and "company_wiki.source_catalog.narrative_transport_cli" in command:
+            if payload.get("narrative_ref") and "company_wiki.automation.narrative_transport_cli" in command:
                 receipt = json.loads(called.stderr)
                 assert receipt["replay_status"] == "verified"
             return json.loads(called.stdout)
@@ -211,7 +211,7 @@ def test_real_microsoft_format_capability(kind, loopback_model_server, record_pr
                     + "; document_errors=" + str([row.get("errors") for row in result["documents"]]))
     assert call.returncode == 0 and result["status"] == "completed", (call.stderr, result)
     assert any(row.get("artifact_ref") for row in result["documents"]), result
-    command = [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli", "--config", item["config"]]
+    command = [sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli", "--config", item["config"]]
     reference = subprocess.run(command + ["--operation", "reference"], input=json.dumps({
         "schema_version": "narrative-reference-request/1", "source_ref": ref}).encode(),
         cwd=context["wiki"], env=env, capture_output=True, timeout=20)

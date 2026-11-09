@@ -18,7 +18,7 @@ dependencies = [
 
 [project.scripts]
 company-wiki-source-export = "company_wiki.source_contract.cli:main"
-company-wiki-collect-announcement = "company_wiki.source_contract.announcement_cli:main"
+company-wiki-collect-announcement = "company_wiki.source_catalog.announcement_cli:main"
 company-wiki-source-catalog = "company_wiki.source_catalog.cli:main"
 company-wiki-source-read = "company_wiki.source_catalog.source_reader_cli:main"
 company-wiki-source-query = "company_wiki.source_catalog.source_query_cli:main"
@@ -26,7 +26,7 @@ company-wiki-company-sources = "company_wiki.source_catalog.company_source_index
 company-wiki-source-export-v2 = "company_wiki.source_catalog.source_export_v2_cli:main"
 company-wiki-identify = "company_wiki.source_catalog.identity_cli:main"
 company-wiki-transcript-import = "company_wiki.source_catalog.transcript_import_cli:main"
-company-wiki-narrative-read = "company_wiki.source_catalog.narrative_transport_cli:main"
+company-wiki-narrative-read = "company_wiki.automation.narrative_transport_cli:main"
 company-wiki-narrative-batch = "company_wiki.automation.narrative_batch_cli:main"
 
 [project.optional-dependencies]

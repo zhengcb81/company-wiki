@@ -8,18 +8,17 @@ from collections.abc import Mapping
 import hashlib
 import json
 import logging
-from pathlib import Path
 from typing import Any, NoReturn, Protocol
 
 from .models import canonical_json, canonical_json_hash, require_sha256, _to_plain
 from .narrative_model_citations import (
     CitationUnitError, CitationUnits, citation_units_implementation_sha256, compile_citation_units,
 )
-from company_wiki.source_catalog.narrative_evidence import (
+from company_wiki.source_catalog.narrative_claims import (
     SummaryValidationError, project_summary_claim_quality, validate_summary_claim,
     validate_summary_identity,
 )
-from company_wiki.source_catalog.narrative_document import selected_summary_input
+from company_wiki.document_model.narrative import selected_summary_input
 
 from .narrative_contracts import (
     NarrativeContractError, NarrativeSelectResult, _claim_from_dict, _draft_from_dict,
@@ -419,11 +418,18 @@ def reading_model_boundary_identity(version: str | None, *, projected: bool = Fa
         draft["required"] = ["subject_id", "subject_sha256", "language", "claims"]
         draft["properties"]["subject_id"] = draft["properties"].pop("source_id")
         draft["properties"]["subject_sha256"] = draft["properties"].pop("source_sha256")
-    decoder_bytes = Path(__file__).read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
-    decoder_sha256 = hashlib.sha256(decoder_bytes).hexdigest()
+    from company_wiki.document_understanding.reading_identity import assertion_frames_sha256
+    from company_wiki.implementation_identity import code_sha256
+    from company_wiki.source_catalog.narrative_summary_assessment import assessment_sha256
+
+    source_quality_identity = {
+        "decoder": code_sha256(__file__, universal_newlines=True),
+        "assessment": assessment_sha256(),
+        "assertion_frames": assertion_frames_sha256(),
+    }
     if boundary.uses_citation_units:
-        decoder_sha256 = canonical_json_hash({"decoder": decoder_sha256,
-                                              "citations": citation_units_implementation_sha256()})
+        source_quality_identity["citations"] = citation_units_implementation_sha256()
+    decoder_sha256 = canonical_json_hash(source_quality_identity)
     return {"schema_version": "reading-model-boundary/1",
         "reading_projection_version": boundary.reading_projection_version,
         "prompt_version": boundary.prompt_version, "request_schema": boundary.request_schema,
@@ -879,10 +885,22 @@ def decode_model_draft(
         typed_draft.claims, evidence_spans=selected.evidence_spans,
         discarded_claims=len(retained) != len(claims),
     )
-    quality_claims = tuple(replace(claim, needs_review=claim.needs_review or claim.claim_id in partial_context_ids)
+    from .narrative_summary_assessment import claim_qualifier_diagnostics
+    qualifier_risk_ids = {
+        claim.claim_id for claim in quality_claims
+        if claim_qualifier_diagnostics(
+            selected.evidence_spans, claim.evidence_ids, claim.context_evidence_ids,
+            claim.text, claim.modality, include_existing_atomic=False,
+        )
+    }
+    quality_claims = tuple(replace(
+        claim,
+        needs_review=(claim.needs_review or claim.claim_id in partial_context_ids
+                      or claim.claim_id in qualifier_risk_ids),
+    )
                            for claim in quality_claims)
     projected = replace(typed_draft, claims=quality_claims,
-                        status="needs_review" if partial_context_ids else quality_status)
+                        status="needs_review" if partial_context_ids or qualifier_risk_ids else quality_status)
     return subject_draft_to_dict(projected) if isinstance(projected, SubjectSummaryDraft) else _draft_to_dict(projected)
 
 

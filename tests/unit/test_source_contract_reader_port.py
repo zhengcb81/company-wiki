@@ -2,6 +2,7 @@
 import subprocess
 import sys
 from dataclasses import replace
+from hashlib import sha256
 from pathlib import Path
 
 import pytest
@@ -88,10 +89,36 @@ def test_public_backend_cannot_attest_forged_bytes_using_correct_identity_fields
 
         def open_version(self, ref, *, purpose):
             original = reader.open_version(ref, purpose=purpose)
-            return replace(original, data=b'x' * len(original.data))
+            # The actual selected quote stays untouched. The altered prefix
+            # must still invalidate the whole original.
+            assert span.coordinates.char_start > 0 and original.data[0] != 0
+            return replace(original, data=b"\x00" + original.data[1:])
 
     try:
         with pytest.raises(SourceExportError, match='source bytes do not match'):
             SourceExportBundleV2.build(source_reader=Backend(), refs=(ref,), evidence_spans=(span,))
     finally:
         catalog.close()
+
+
+def test_stream_observation_uses_its_digest_even_if_a_subclass_overrides_reporting():
+    from company_wiki.source_contract.source_version import (
+        SourceByteVerifier, SourceRef, SourceRefMismatchError, VerifiedContent,
+    )
+
+    original = b"real source"
+    digest = sha256(original).hexdigest()
+    ref = SourceRef("fixture-document", "urn:company-wiki:source:sha256:" + digest,
+                    digest, len(original), "text/plain")
+
+    class ReportingOverride(SourceByteVerifier):
+        def hexdigest(self):
+            return digest
+
+    verifier = ReportingOverride(retain_bytes=True)
+    verifier.update(b"fake source")
+    with pytest.raises(SourceRefMismatchError, match="source bytes do not match"):
+        VerifiedContent.from_observation(
+            ref, verifier.observe(), read_at="2026-11-09T00:00:00Z",
+            policy_sha256="a" * 64, source_read_policy_sha256="b" * 64,
+        )

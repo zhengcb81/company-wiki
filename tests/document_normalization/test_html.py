@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import sys
+
 import pytest
 
 from company_wiki.document_normalization import NormalizationLimits
@@ -73,6 +75,20 @@ class TestExclusionAndVisibility:
 
 
 class TestOwnershipNoDoubleCount:
+    def test_deep_dom_uses_local_walk_without_mutating_the_process_stack_limit(self, monkeypatch):
+        original_limit = sys.getrecursionlimit()
+        depth = original_limit + 25
+        html = html_page("<span>" * depth + "<p>New product launched</p>" + "</span>" * depth)
+
+        def reject_global_change(_limit):
+            pytest.fail("document parsing changed process-wide recursion")
+
+        monkeypatch.setattr(sys, "setrecursionlimit", reject_global_change)
+        document = normalize_html(html)
+        assert texts(document) == ["New product launched"]
+        assert len(document.units[0].metadata["dom_path"].split(".")) == depth + 3
+        assert sys.getrecursionlimit() == original_limit
+
     def test_nested_owners_counted_once(self):
         doc = normalize_html(
             html_page(

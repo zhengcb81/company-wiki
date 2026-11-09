@@ -391,7 +391,7 @@ def verify_registered_original(
         if not _inside_configured_roots(resolved, (root,)):
             failures.append("artifact_path_outside_allowed_root")
             continue
-        data, status, reason, detail = _read_verified_bytes(
+        observation, status, reason, detail = _read_verified_bytes(
             resolved,
             expected_sha256=ref.content_sha256,
             expected_byte_size=ref.byte_size,
@@ -404,7 +404,8 @@ def verify_registered_original(
                 raise SourceReadError(status, reason, detail)
             continue
         if first is None:
-            first = data
+            assert observation is not None
+            first = observation.data
         valid.append((loc["location_id"], resolved, root))
     if first is None:
         if failures and set(failures) == {"local_original_missing"}:

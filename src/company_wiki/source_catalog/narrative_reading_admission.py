@@ -5,6 +5,7 @@ import re
 from typing import Any
 from .n6_candidate_operating_facts import OperatingFact
 from .narrative_business_policy import detect_reading_business_fact, reading_financial_only
+from .narrative_pdf_turns import printed_turn_is_context
 from .narrative_source_purpose import NON_OPERATING_PURPOSES
 from .narrative_support_use import source_support_use, source_narrative_relevance
 
@@ -101,7 +102,7 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
                         else "unassessed_purpose")
     if kind == "operating_table" and not table_qualified:
         return decision(False, "table_not_qualified")
-    if unit.source_role in CONTEXT_ROLES:
+    if unit.source_role in CONTEXT_ROLES or printed_turn_is_context(unit):
         return decision(False, "source_context_role")
     if not closed_assessment and not table_qualified and (
         financial_only if financial_only is not None else _financial_only(unit.raw_text, fact)

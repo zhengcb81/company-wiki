@@ -75,7 +75,9 @@
           "parser_error",
           "unsupported_format",
           "password_protected",
-          "empty_output"
+          "empty_output",
+          "homepage_identity_contradiction",
+          "multi_entity_attribution_needed"
         ]
       }
     }

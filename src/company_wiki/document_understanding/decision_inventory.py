@@ -1,13 +1,13 @@
-"""Historical import compatibility for the source-owner inventory adapter.
+"""Historical import compatibility for the source-owned decision inventory.
 
-Current selection/cache entry points import source_catalog's composition owner.
-The pure decision_dependencies package remains independent of source/automation.
+New consumers import :mod:`company_wiki.source_catalog.narrative_decision_inventory`.
+This module is deliberately only a public re-export for older installed readers.
 """
+
 from company_wiki.source_catalog.narrative_decision_inventory import (
     build_decision_trace as build_decision_trace,
     current_decision_trace as current_decision_trace,
-    _inventory as _inventory,
-    _versions as _versions,
+    decision_versions as decision_versions,
 )
 
-__all__ = ["build_decision_trace", "current_decision_trace"]
+__all__ = ["build_decision_trace", "current_decision_trace", "decision_versions"]

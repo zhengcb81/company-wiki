@@ -2,43 +2,30 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
-from dataclasses import dataclass, replace
-from typing import Any, Protocol
-from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
+from collections.abc import Callable
+from dataclasses import dataclass
+from typing import Any
 
-from company_wiki.source_catalog.narrative_document import (
-    NarrativeEvidencePackage,
-    NarrativeParseResult,
-)
-from company_wiki.source_catalog.narrative_evidence import (
-    NARRATIVE_SELECTOR_NAME,
-    parse_transcript_text,
-)
-from company_wiki.source_catalog.narrative_pdf_reading import (
-    PdfBytesParser, PdfReading, PdfReadingError, PdfReadingRequest,
-)
+from company_wiki.document_model.narrative import NarrativeEvidencePackage, NarrativeParseResult
+from company_wiki.source_catalog.narrative_evidence import NARRATIVE_SELECTOR_NAME
+from company_wiki.source_catalog.narrative_formats import parser_component
 from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
-from company_wiki.source_catalog.official_json_projection import ProjectionError
-from company_wiki.source_catalog.source_reader import (
-    SourceReadError,
-)
-from company_wiki.source_catalog.transcript_text_extract import (
-    TRANSCRIPT_MIME_TYPES,
-    TranscriptMaterial,
-    TranscriptMaterialError,
-    extract_transcript_material,
-)
-from company_wiki.source_contract import EvidenceSpan, ParseStatus
-from company_wiki.document_normalization.units import PARSER_NAME as NORMALIZATION_PARSER_NAME
-from company_wiki.document_normalization.replay import verify_parsed_evidence_spans
-from company_wiki.source_catalog.narrative_replay import verify_replayed_pdf_spans
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
+from company_wiki.source_catalog.narrative_pdf_reading import PdfBytesParser, PdfReading
+from company_wiki.source_catalog.narrative_selection import (
+    NarrativeMaterialError, RawNarrativeSelection, RawNarrativeSelector,
+    transcript_byte_bindings, verify_selected_material,
+)
+from company_wiki.source_catalog.narrative_selection import (
+    selection_algorithm_sha256 as narrative_select_algorithm_identity,
+)
+from company_wiki.source_catalog.narrative_selector_binding import NarrativeSelector, bind_narrative_selector
+from company_wiki.source_catalog.official_json_projection import ProjectionError
+from company_wiki.source_catalog.source_reader import SourceReadError
+from company_wiki.source_catalog.transcript_text_extract import TranscriptMaterialError
 
 from .execution_context import JobExecutionContext
-from .narrative_selector_binding import bind_narrative_selector
-from .narrative_formats import NORMALIZED_MIME_TYPES, parser_component
-from .narrative_official_json import (
+from company_wiki.source_catalog.narrative_official_json import (
     OfficialProjectionAdapterError,
     VerifiedProjectionView,
     open_verified_projection,
@@ -60,7 +47,6 @@ from .narrative_contracts import (
     SELECT_RESULT_SCHEMA,
     SelectionValue,
     SourceRevisionEventPayload,
-    TranscriptByteBinding,
     TranscriptLineageValue,
 )
 from .narrative_source_guard import (
@@ -71,38 +57,11 @@ from .narrative_source_guard import (
 )
 
 
-class NarrativeSelector(Protocol):
-    def __call__(
-        self,
-        parsed: NarrativeParseResult,
-        *,
-        title: str,
-        existing_kind: str = "unknown",
-    ) -> NarrativeEvidencePackage: ...
-
-
-class SelectionCheckpoint(Protocol):
-    def checkpoint(self) -> None: ...
-
-
-@dataclass(frozen=True)
-class _SelectionReadContext:
-    checkpoint: Callable[[], None]
-
-
 @dataclass
 class _SelectFailure(Exception):
     code: str
     outcome: HandlerOutcome
     detail: str
-
-
-@dataclass(frozen=True)
-class _SelectionWork:
-    parsed: NarrativeParseResult
-    package: NarrativeEvidencePackage
-    material: TranscriptMaterial | None
-    parser_identity: tuple[str, str] | None = None
 
 
 def _failure(code: str, outcome: HandlerOutcome, detail: str) -> HandlerResult:
@@ -162,41 +121,6 @@ def _selection_value(
     )
 
 
-def _transcript_bindings(
-    material: TranscriptMaterial, evidence_spans: Sequence[EvidenceSpan]
-) -> tuple[TranscriptByteBinding, ...]:
-    bindings: list[TranscriptByteBinding] = []
-    for span in evidence_spans:
-        start = span.structured_value.get("line_start")
-        end = span.structured_value.get("line_end")
-        if type(start) is not int or type(end) is not int or end < start:
-            raise _SelectFailure(
-                "PARSER_INCOMPLETE",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "selected transcript evidence has no stable line range",
-            )
-        lines = tuple(
-            line for line in material.lines if start <= line.line_number <= end
-        )
-        if len(lines) != end - start + 1:
-            raise _SelectFailure(
-                "PARSER_INCOMPLETE",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "selected transcript line range cannot be replayed",
-            )
-        bindings.append(
-            TranscriptByteBinding(
-                evidence_id=span.span_id,
-                material_line_start=start,
-                material_line_end=end,
-                source_byte_ranges=tuple(
-                    (line.source_byte_start, line.source_byte_end) for line in lines
-                ),
-            )
-        )
-    return tuple(bindings)
-
-
 class NarrativeSelectHandler:
     """Read one pinned source and persist only selected narrative evidence."""
 
@@ -216,7 +140,9 @@ class NarrativeSelectHandler:
             raise ValueError("provide one complete PDF reading implementation")
         self._pdf_reading = pdf_reading or PdfReading(parser=pdf_parser)
         self._selector = bind_narrative_selector(selector, selector_version=selector_version)
-        self._normalization = normalization or NarrativeNormalization()
+        self._selection = RawNarrativeSelector(
+            pdf_reading=self._pdf_reading, selector=self._selector, normalization=normalization,
+        )
         self._projection_catalog = projection_catalog
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
@@ -250,6 +176,8 @@ class NarrativeSelectHandler:
                 HandlerOutcome.TERMINAL_FAILURE,
                 "select result contains a forbidden physical path",
             )
+        except NarrativeMaterialError as exc:
+            return _failure(exc.code, HandlerOutcome.TERMINAL_FAILURE, exc.detail)
         except _SelectFailure as exc:
             return _failure(exc.code, exc.outcome, exc.detail)
         except NarrativeSourceGuardError as exc:
@@ -287,27 +215,25 @@ class NarrativeSelectHandler:
         parsing, source validation and selection path. The caller supplies its
         existing lease or preparation-deadline checkpoint.
         """
-        return self._select_source(payload, _SelectionReadContext(checkpoint))
-
-    def _select_source(
-        self, payload: SourceRevisionEventPayload, context: SelectionCheckpoint,
-    ) -> NarrativeSelectResult:
-        context.checkpoint()
+        checkpoint()
         if payload.subject.kind == "official_json":
-            return self._execute_projection(payload, context)
+            return self._execute_projection(payload, checkpoint)
         opened = open_verified_source(self._reader, payload)
         review = prompt_review_value(opened)
-        context.checkpoint()
-        work = self._select(payload, opened.data, context)
+        checkpoint()
+        work = self._selection.select(
+            opened, source_ref=payload.source_ref, source_metadata=payload.source_metadata,
+            checkpoint=checkpoint,
+        )
         raw = self._result_dict(payload, review, work, selector_version=self._selector.selector_version)
         result = NarrativeSelectResult.from_dict(raw)
-        self._verify_selected_material(work.parsed, work.package,
+        verify_selected_material(work.parsed, work.package,
             mime_type=payload.source_ref.mime_type, pdf_reading=self._pdf_reading)
-        context.checkpoint()
+        checkpoint()
         return result
 
     def _execute_projection(
-        self, payload: SourceRevisionEventPayload, context: SelectionCheckpoint
+        self, payload: SourceRevisionEventPayload, checkpoint: Callable[[], None]
     ) -> NarrativeSelectResult:
         if self._projection_catalog is None:
             raise _SelectFailure(
@@ -325,7 +251,7 @@ class NarrativeSelectHandler:
                 "SOURCE_HASH_MISMATCH", HandlerOutcome.TERMINAL_FAILURE,
                 "event subject differs from the verified projection",
             )
-        context.checkpoint()
+        checkpoint()
         package = select_verified_projection(
             view, title=payload.source_metadata.title or "untitled", selector=self._selector,
         )
@@ -376,7 +302,7 @@ class NarrativeSelectHandler:
         if package.reading_dependencies is not None:
             raw["reading_dependencies"] = package.reading_dependencies
         result = NarrativeSelectResult.from_dict(raw)
-        context.checkpoint()
+        checkpoint()
         return result
 
     @staticmethod
@@ -408,204 +334,16 @@ class NarrativeSelectHandler:
             )
         return context.source_revision
 
-    def _select(
-        self,
-        payload: SourceRevisionEventPayload,
-        data: bytes,
-        context: SelectionCheckpoint,
-    ) -> _SelectionWork:
-        if payload.source_metadata.source_class == "filing":
-            if payload.source_ref.mime_type in NORMALIZED_MIME_TYPES:
-                return self._select_normalized(payload, data, context)
-            return self._select_pdf(payload, data, context)
-        return self._select_transcript(payload, data, context)
-
-    def _select_normalized(
-        self, payload: SourceRevisionEventPayload, data: bytes,
-        context: SelectionCheckpoint,
-    ) -> _SelectionWork:
-        try:
-            document = self._normalization.normalize(
-                data, source_id=payload.source_ref.source_id,
-                source_sha256=payload.source_ref.content_sha256,
-                mime_type=payload.source_ref.mime_type,
-                document_id=payload.source_ref.document_id,
-            )
-        except (RuntimeError, ValueError) as exc:
-            raise _SelectFailure(
-                "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
-                "verified filing format cannot be parsed completely",
-            ) from exc
-        language = payload.source_metadata.language
-        parsed = self._normalization.language_structure(document, language)
-        context.checkpoint()
-        package = self._run_selector(payload, parsed)
-        package = self._require_usable_selection(parsed, package)
-        return _SelectionWork(parsed, package, None, (document.parser_name, document.parser_version))
-
-    def _select_pdf(
-        self,
-        payload: SourceRevisionEventPayload,
-        data: bytes,
-        context: SelectionCheckpoint,
-    ) -> _SelectionWork:
-        if payload.source_ref.mime_type != "application/pdf":
-            raise _SelectFailure(
-                "UNSUPPORTED_SOURCE_TYPE",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "filing source is not a PDF",
-            )
-        from company_wiki.resource_budget import new_document_work_budget
-        work_budget = new_document_work_budget()
-        try:
-            parsed, package = self._pdf_reading.select(
-                data, self._pdf_request(payload), selector=self._selector,
-                work_budget=work_budget, checkpoint=context.checkpoint,
-            )
-        except (WorkBudgetExceeded, PdfReadingError) as exc:
-            raise _SelectFailure(
-                "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE, str(exc)
-            ) from exc
-        except (RuntimeError, ValueError) as exc:
-            raise _SelectFailure(
-                "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
-                "verified PDF cannot be parsed completely",
-            ) from exc
-        package = self._require_usable_selection(parsed, package)
-        return _SelectionWork(parsed, package, None, self._pdf_reading.parser_identity())
-
-    @staticmethod
-    def _pdf_request(payload: SourceRevisionEventPayload) -> PdfReadingRequest:
-        return PdfReadingRequest(
-            source_id=payload.source_ref.source_id,
-            source_sha256=payload.source_ref.content_sha256,
-            language=payload.source_metadata.language,
-            title=payload.source_metadata.title or "",
-            document_kind=payload.source_metadata.document_kind,
-        )
-
-    def _parse_pdf(self, payload: SourceRevisionEventPayload, data: bytes, *,
-                   work_budget: WorkBudget | None = None) -> NarrativeParseResult:
-        """Compatibility read port; all PDF policy remains in the reading owner."""
-        return self._pdf_reading.read(data, self._pdf_request(payload),
-            selector_version=self._selector.selector_version, work_budget=work_budget)
-
-    def _select_transcript(
-        self,
-        payload: SourceRevisionEventPayload,
-        data: bytes,
-        context: SelectionCheckpoint,
-    ) -> _SelectionWork:
-        if payload.source_ref.mime_type not in TRANSCRIPT_MIME_TYPES:
-            raise _SelectFailure(
-                "UNSUPPORTED_SOURCE_TYPE",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript MIME type is unsupported",
-            )
-        material = extract_transcript_material(
-            data, mime_type=payload.source_ref.mime_type
-        )
-        material.verify(data)
-        parsed = parse_transcript_text(
-            material.text_utf8,
-            source_id=payload.source_ref.source_id,
-            source_sha256=payload.source_ref.content_sha256,
-            language=payload.source_metadata.language,
-        )
-        context.checkpoint()
-        package = self._run_selector(payload, parsed)
-        package = self._require_usable_selection(parsed, package)
-        return _SelectionWork(parsed, package, material)
-
-    def _run_selector(
-        self,
-        payload: SourceRevisionEventPayload,
-        parsed: NarrativeParseResult,
-        *, work_budget: WorkBudget | None = None,
-    ) -> NarrativeEvidencePackage:
-        return self._selector(
-            replace(parsed, mime_type=payload.source_ref.mime_type),
-            title=payload.source_metadata.title or "untitled",
-            existing_kind=payload.source_metadata.document_kind,
-            work_budget=work_budget,
-        )
-
-    @staticmethod
-    def _require_usable_selection(
-        parsed: NarrativeParseResult, package: NarrativeEvidencePackage
-    ) -> NarrativeEvidencePackage:
-        """Admit source-proven excerpts, independently of carrier completeness.
-
-        Opaque/unread material stays visible in coverage. It does not invalidate
-        independent closed source excerpts; no selected text is repaired or
-        assigned a new source here. Media/open failures remain the parser's
-        responsibility before this boundary.
-        """
-        if package.status == "blocked":
-            raise _SelectFailure(
-                "PARSER_INCOMPLETE",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "source parsing is incomplete",
-            )
-        if not parsed.coverage_complete and package.coverage_complete:
-            package = replace(package, coverage_complete=False)
-        if package.evidence_spans and not package.coverage_complete and package.status == "selected":
-            package = replace(package, status="partial")
-        if not package.evidence_spans and not package.coverage_complete:
-            raise _SelectFailure(
-                "PARSER_INCOMPLETE",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "empty selection does not have complete coverage",
-            )
-        if not package.evidence_spans and package.status != "skipped_no_narrative":
-            raise _SelectFailure(
-                "PARSER_INCOMPLETE",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "valuable source has no replayable selected evidence",
-            )
-        return package
-
-    @staticmethod
-    def _verify_selected_material(parsed: NarrativeParseResult, package: NarrativeEvidencePackage,
-                                  *, mime_type: str | None = None,
-                                  pdf_reading: PdfReading | None = None) -> None:
-        """Match bounded canonical evidence to this parse before any model call.
-
-        Canonical shape/path/size checks run once in the result constructor
-        first. Material proof must not mask those existing precise diagnostics.
-        """
-        spans = package.evidence_spans
-        if spans:
-            if (package.source_id != parsed.source_id
-                or package.source_sha256 != parsed.source_sha256
-                or any(span.source_id != parsed.source_id or span.parse_status != ParseStatus.PARSED
-                       or {"low_ocr_confidence", "locator_unstable"}.intersection(span.quality_flags)
-                       for span in spans)):
-                raise _SelectFailure("PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
-                                     "selected material is not reliable parsed source evidence")
-            try:
-                if (mime_type or parsed.mime_type) == "application/pdf":
-                    (pdf_reading or PdfReading()).verify_material(parsed, spans)
-                elif parsed.units and all(unit.parser_name == NORMALIZATION_PARSER_NAME for unit in parsed.units):
-                    verify_parsed_evidence_spans(parsed.units, source_id=parsed.source_id, evidence_spans=spans)
-                else:
-                    verified, failed = verify_replayed_pdf_spans(spans, parsed.units)
-                    if failed or len(verified) != len(spans):
-                        raise ValueError("selected evidence differs from parsed material")
-            except (RuntimeError, ValueError, KeyError, TypeError) as exc:
-                raise _SelectFailure("PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
-                                     "selected evidence cannot be matched to the parsed original") from exc
-
     @staticmethod
     def _result_dict(
         payload: SourceRevisionEventPayload,
         review: PromptReviewValue,
-        work: _SelectionWork,
+        work: RawNarrativeSelection,
         *, selector_version: str,
     ) -> dict[str, Any]:
         material = work.material
         bindings = (
-            _transcript_bindings(material, work.package.evidence_spans)
+            transcript_byte_bindings(material, work.package.evidence_spans)
             if material is not None
             else ()
         )
@@ -650,4 +388,8 @@ class NarrativeSelectHandler:
         return raw
 
 
-__all__ = ["NarrativeSelectHandler", "NarrativeSourceReader"]
+__all__ = [
+    "NarrativeSelectHandler",
+    "NarrativeSourceReader",
+    "narrative_select_algorithm_identity",
+]

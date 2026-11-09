@@ -4,10 +4,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 import hashlib
-import json
 from types import SimpleNamespace
 from typing import Any
 
+from company_wiki.source_contract.source_version import SourceReadError
+
+from .acquisition_journal import AcquisitionAttempt, AcquisitionJournal, verified_download_attempt
 from .assertion_service import (
     _evidence_payload, _sec_original, _validate_source_facts, get_verified_assertion,
 )
@@ -71,47 +73,52 @@ def scope_relatedness(scope: SourceScope, request: SourceRequest) -> ScopeRelati
     return ScopeRelation.MATCH
 
 
+def _budgeted_journal_lines(stream, budget):
+    """Yield physical lines under the caller's real byte and time limits."""
+    line = bytearray()
+    while True:
+        budget.check()
+        chunk = stream.read(min(65536, budget.max_bytes - budget.bytes_read + 1))
+        if not chunk:
+            break
+        stop = budget.charge(len(chunk))
+        if stop:
+            raise SourceReadError("unavailable", stop)
+        parts = chunk.split(b"\n")
+        for part in parts[:-1]:
+            budget.check()
+            line.extend(part)
+            yield line
+            line = bytearray()
+        line.extend(parts[-1])
+    if line:
+        yield line
+
+
 class HistoricalCaptureScopes:
-    """One bounded journal observation per local operation, no persistent second store."""
+    """Read historical proof once within the active local resource budget."""
     def __init__(self, catalog, budget):
         self.catalog, self.budget = catalog, budget
-        self._attempts = None
+        self._attempts: dict[str, list[AcquisitionAttempt]] | None = None
 
     def _read(self):
         if self._attempts is not None:
             return self._attempts
-        from .source_reader import SourceReadError
-        path = self.catalog.config.catalog_dir / "acquisition_attempts.jsonl"
-        self._attempts = {}
+        path = AcquisitionJournal(self.catalog.config.catalog_dir).path
+        attempts: dict[str, list[AcquisitionAttempt]] = {}
         self.budget.check()
         try:
-            size = path.stat().st_size
+            with path.open("rb", buffering=0) as stream:
+                for raw in _budgeted_journal_lines(stream, self.budget):
+                    attempt = verified_download_attempt(raw)
+                    if attempt is not None and attempt.content_sha256 is not None:
+                        attempts.setdefault(attempt.content_sha256, []).append(attempt)
         except FileNotFoundError:
-            return self._attempts
-        if size > min(4194304, self.budget.max_bytes - self.budget.bytes_read):
-            raise SourceReadError("unavailable", "local_journal_byte_limit")
-        with path.open("rb") as stream:
-            data = stream.read(size + 1)
-        stop = self.budget.charge(len(data))
-        if stop:
-            raise SourceReadError("unavailable", stop)
-        if len(data) != size:
-            raise SourceReadError("unavailable", "local_journal_changed")
-        try:
-            for raw in data.splitlines():
-                self.budget.check()
-                item = json.loads(raw)
-                if not isinstance(item, dict):
-                    continue
-                values = {k:v for k,v in item.items() if k not in {"schema_version","attempt_id","recorded_at"}}
-                digest = hashlib.sha256(canonical_json(values).encode()).hexdigest()
-                if (item.get("schema_version") == "1.0"
-                    and item.get("outcome") in {"downloaded_new", "deduplicated_after_download"}
-                    and item.get("attempt_id") == "urn:company-wiki:acquisition-attempt:sha256:" + digest):
-                    self._attempts.setdefault(item.get("content_sha256"), []).append(item)
-        except (ValueError, TypeError, RecursionError):
-            raise SourceReadError("blocked", "local_journal_unreadable") from None
-        return self._attempts
+            pass
+        except OSError:
+            raise SourceReadError("unavailable", "local_journal_unreadable") from None
+        self._attempts = attempts
+        return attempts
 
     def scope(self, ref, document):
         metadata = document.get("metadata") or {}
@@ -133,10 +140,11 @@ class HistoricalCaptureScopes:
             or receipt.get("mime_type") != ref.mime_type):
             return None
         for item in self._read().get(ref.content_sha256, ()):
-            if item.get("request_id") != request.request_id:
+            if item.request_id != request.request_id:
                 continue
             keys = ("candidate_id", "provider", "provider_document_id", "source_url")
-            if not all(item.get(k) and item[k] == candidate.get(k) == receipt.get(k) for k in keys):
+            observed = {key: getattr(item, key) for key in keys}
+            if not all(value and value == candidate.get(key) == receipt.get(key) for key, value in observed.items()):
                 continue
             facts = {key:value for key,value in request.identity_dict().items()
                      if key in {"entity","market","security_id","document_kind","form_type",
@@ -168,7 +176,6 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
             facts={**facts,'document_kind':sec_primary_document_kind(facts['form_type'])}
         commit = payload.get("canonical_commit")
         if commit is not None:
-            from .source_reader import SourceReadError
             valid = isinstance(commit,dict)
             if valid:
                 digest = hashlib.sha256(canonical_json(

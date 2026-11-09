@@ -12,7 +12,7 @@ import hashlib
 import json
 from typing import Any
 
-from company_wiki.source_catalog.narrative_document import selected_summary_input
+from company_wiki.document_model.narrative import selected_summary_input
 from company_wiki.source_catalog.narrative_retrieval import (
     NARRATIVE_EVIDENCE_BUNDLE_SCHEMA_VERSION, NarrativeEvidenceSearch,
 )
@@ -214,3 +214,9 @@ class NarrativeEvidenceViewReader:
                 limit=max(1, search.indexed_group_count),
             )
         ]
+
+__all__ = [
+    'EVIDENCE_VIEW_OPERATIONS',
+    'NarrativeEvidenceViewQuery',
+    'NarrativeEvidenceViewReader',
+]

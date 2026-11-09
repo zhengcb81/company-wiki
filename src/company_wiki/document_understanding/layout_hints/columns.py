@@ -15,7 +15,7 @@ import json
 from typing import Any
 
 from .contract import Page, Unit, require_bbox
-from company_wiki.document_normalization.table_shapes import has_unbound_numeric_cells
+from company_wiki.document_model.table_shapes import has_unbound_numeric_cells
 
 
 @dataclass

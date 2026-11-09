@@ -199,16 +199,16 @@ def test_work_exhausted_projection_does_not_restart_resource_scanning(monkeypatc
 
 
 def test_new_resource_dependency_is_bound_to_current_decision_inventory(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
     from company_wiki.source_catalog import narrative_operating_resources as resources
-    before = decision_inventory._versions()
+    before = decision_inventory.decision_versions()
     original = Path.read_bytes
     resource_path = Path(resources.__file__).resolve()
     def changed(path):
         data = original(path)
         return data + b"\n# independent semantic rule change\n" if path.resolve() == resource_path else data
     monkeypatch.setattr(Path, "read_bytes", changed)
-    assert decision_inventory._versions() != before
+    assert decision_inventory.decision_versions() != before
 
 
 @pytest.mark.parametrize("text", (

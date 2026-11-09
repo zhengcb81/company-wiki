@@ -505,6 +505,9 @@ def _build_diagnostics(
 
 __all__ = [
     "DEFER_REASONS",
+    "DEFER_AMBIGUOUS_ORDER",
+    "DEFER_LIMIT",
+    "DEFER_LOW_CONFIDENCE",
     "P1_PAGE_TEXT_SCHEMA",
     "P1_PAGE_TEXT_VERSION",
     "PageOrderLimits",

@@ -52,6 +52,14 @@ def test_daily_and_ci_inventories_have_distinct_responsibilities():
         node for node in gate.FAST_CONTRACT_CASES if not node.startswith("tests/unit/")}
     assert not any(node.startswith("tests/unit/") for node in gate.CI_CONTRACT_CASES)
     for path in (
+        "tests/contract/test_layer_public_boundaries.py",
+        "tests/contract/test_source_catalog_independent.py",
+        "tests/contract/test_announcement_collector.py",
+        "tests/contract/test_narrative_pdf_replay_once.py::test_native_pdf_entry_hashes_the_original_once",
+        "tests/contract/test_narrative_pdf_replay_once.py::test_native_html_entry_hashes_the_original_once",
+        "tests/contract/test_source_acquisition_verified_reuse.py::test_exact_local_reuse_streams_once_per_request",
+        "tests/contract/test_source_export_cli.py::test_v1_cli_replays_nested_unicode_path_and_round_trips_the_same_wire",
+        "tests/document_normalization/test_pptx.py::TestMediaAndGaps::test_mixed_slide_preserves_positive_replay_but_cannot_prove_empty_selection",
         "tests/contract/test_narrative_output_plan.py",
         "tests/contract/test_summary_group_coverage.py",
         "tests/contract/test_official_transcript_layouts.py",

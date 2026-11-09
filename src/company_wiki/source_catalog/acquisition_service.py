@@ -13,7 +13,7 @@ from .acquisition import (
     acquisition_target_sha256,
 )
 from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
-from .acquisition_journal import AcquisitionAttempt, AcquisitionJournal
+from .acquisition_journal import AcquisitionAttempt, AcquisitionJournal, record_acquisition_observation
 from .canonical_writer import (
     CanonicalImportResult,
     CanonicalImportStatus,
@@ -129,7 +129,8 @@ class SourceAcquisitionService:
         acquisition = None
         failure_reason = "adapter_or_staging_failed"
         try:
-            acquisition = self.coordinator.select(request, budget=budget, candidate_scope=candidate_scope)
+            decision = self.coordinator._select_for_ensure(request, budget=budget, candidate_scope=candidate_scope)
+            acquisition = decision.result
             if acquisition.status is AcquisitionStatus.SELECTED:
                 assert acquisition.candidate is not None
                 lock_dir = self.coordinator.catalog.config.catalog_dir / "ensure_locks"
@@ -144,10 +145,10 @@ class SourceAcquisitionService:
                     try:
                         self.coordinator.cleanup_target(request, acquisition.candidate)
                         staged = self._stage_with_retry(request, acquisition, budget=budget)
-                        acquisition = staged
+                        acquisition = staged.result
                         failure_reason = "canonical_import_failed"
                         result = self._finish(request, staged, budget=budget,
-                            cleanup=lambda: self.coordinator.cleanup_target(request, staged.candidate))
+                            cleanup=lambda: self.coordinator.cleanup_target(request, acquisition.candidate))
                     except Exception as exc:
                         candidate = acquisition.candidate if acquisition is not None else None
                         try:
@@ -159,7 +160,7 @@ class SourceAcquisitionService:
                                 add_note(f"staging cleanup failed: {cleanup_error}")
                         raise
                     return result
-            return self._finish(request, acquisition, budget=budget)
+            return self._finish(request, decision, budget=budget)
         except Exception as exc:
             from .acquisition_failure import attach_acquisition_failure
             attach_acquisition_failure(exc, budget=budget, code="acquisition_validation_failed")
@@ -182,7 +183,7 @@ class SourceAcquisitionService:
 
         for attempt in range(3):
             try:
-                return self.coordinator.stage_selected(request, selected, budget=budget)
+                return self.coordinator._stage_for_ensure(request, selected, budget=budget)
             except AdapterProcessError as exc:
                 if not exc.retryable or attempt == 2:
                     raise
@@ -195,8 +196,9 @@ class SourceAcquisitionService:
                     budget.ensure_open()
         raise AssertionError("bounded staging loop did not return or raise")
 
-    def _finish(self, request, acquisition, *, budget=None,
+    def _finish(self, request, decision, *, budget=None,
                 cleanup: Callable[[], None] | None = None) -> SourceEnsureResult:
+        acquisition = decision.result
         candidate = acquisition.candidate
         common = {
             "request_id": request.request_id,
@@ -213,17 +215,22 @@ class SourceAcquisitionService:
         def record_attempt(outcome, **values):
             if cleanup is not None:
                 cleanup()
-            return self.journal.record(outcome=outcome, **common, **values)
+            return record_acquisition_observation(
+                lambda: self.journal.record(outcome=outcome, **common, **values),
+                request_id=request.request_id,
+            )
 
         if acquisition.status is AcquisitionStatus.REUSED:
-            from .source_reader import SourceVersionReader
-            reader = SourceVersionReader(self.coordinator.catalog)
-            if len(acquisition.resolution.matches) != 1:
-                raise RuntimeError("reuse requires one exact source version")
+            verified = decision.verified_reuse
+            if verified is None or len(acquisition.resolution.matches) != 1:
+                raise RuntimeError("reuse requires one owner-verified source version")
             match = acquisition.resolution.matches[0]
-            ref = reader.query_ref(match.document_id,match.source_id,match.content_sha256)
-            # Verify the pinned source in its owner layer before recording successful reuse.
-            reader.verify_version(ref,purpose="filing_reuse")
+            ref = verified.source_ref
+            if (ref.document_id, ref.source_id, ref.content_sha256, ref.byte_size, ref.mime_type, verified.location_id) != (
+                match.document_id, match.source_id, match.content_sha256, match.byte_size, match.mime_type,
+                match.canonical_location_id,
+            ):
+                raise RuntimeError("reuse observation does not match the selected source version")
             if budget is not None:
                 budget.ensure_open()
             outcome = (
@@ -297,7 +304,7 @@ class SourceAcquisitionService:
             raise
         if budget is not None:
             budget.ensure_open()
-        final = SourceResolver(self.coordinator.catalog).resolve(
+        final, _ = SourceResolver(self.coordinator.catalog).resolve_for_acquisition(
             self.coordinator.target_request(request, candidate))
         final = replace(final, request_id=request.request_id)
         # The writer has returned the registered exact version. This query

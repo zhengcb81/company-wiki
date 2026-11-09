@@ -36,10 +36,18 @@ def _text(parsed, ref):
         ref['char_start']:ref['char_end']]
 
 
-def test_actual_html_pipeline_exposes_same_native_value_period_and_row_label():
+def test_actual_html_pipeline_exposes_same_native_value_period_and_row_label(monkeypatch):
+    from company_wiki.document_understanding import pdf_table_observations
+
+    def reject_pdf_projection(*args, **kwargs):
+        pytest.fail('native HTML tables do not require the PDF layout adapter')
+
+    monkeypatch.setattr(pdf_table_observations, 'build_pdf_table_observations', reject_pdf_projection)
     parsed = _html()
     result = _read(parsed)
     table, = result['table_bindings']['tables']
+    pdf_gap_codes = {'TABLE_ROW_SLOTS_UNAVAILABLE', 'TABLE_CELLS_UNAVAILABLE'}
+    assert not pdf_gap_codes.intersection(item['code'] for item in result['table_bindings']['diagnostics'])
     value = next(item for item in table['measurements'] if _text(parsed, item['value_ref']) == '18')
     assert value['binding_status'] == 'bound'
     assert value['period']['end'] == '2025-12-31'
@@ -51,6 +59,48 @@ def test_actual_html_pipeline_exposes_same_native_value_period_and_row_label():
     required = set(package['required_context_unit_ids']) | set(package['member_unit_ids'])
     refs = value['row_label_refs'] + value['unit_refs'] + value['period']['raw_label_refs']
     assert {ref['unit_id'] for ref in refs} <= required
+
+
+@pytest.mark.parametrize('legacy', [False, True])
+def test_mixed_native_tables_keep_pdf_values_and_report_only_real_pdf_slot_gaps(legacy):
+    from company_wiki.document_model import NarrativeUnit
+    from company_wiki.document_understanding import build_observation
+    from company_wiki.document_understanding.native_table_bridge import bind_native_tables
+    from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
+    from unit.pdf_table_observations.builders import row_unit
+
+    html = _html()
+    pdf_id = source_id_for_sha256('a' * 64)
+    missing_slots = NarrativeUnit(
+        unit_id='urn:company-wiki:narrative-unit:sha256:' + 'b' * 64,
+        source_id=pdf_id,
+        parser_name='test-pdf',
+        parser_version='1.0.0',
+        coordinates=EvidenceCoordinates(page_number=1, table_index=0, row_index=2),
+        raw_text='Other plants | 99',
+        unit_kind='pdf_table_row',
+        source_role='company_filing',
+        language='en',
+    )
+    observation = build_observation(
+        (*html.units, missing_slots), source_id=html.source_id,
+        source_sha256=html.source_sha256, mime_type='text/html',
+    )
+    if legacy:
+        del observation['units'][-1]['hints']['pdf_table_row']
+    observation['units'].append(row_unit(
+        'pdf-data', [(0, 'Overseas warehouses'), (1, '27')],
+        row=1, table_id='p1:t0', parent=pdf_id,
+    ))
+    result = bind_native_tables(observation, work_budget=WorkBudget(2_000_000))
+    source_units = {unit['unit_id']: unit['text'] for unit in observation['units']}
+    refs = [item['value_ref'] for table in result['tables'] for item in table['measurements']]
+    values = {source_units[ref['unit_id']][ref['char_start']:ref['char_end']] for ref in refs}
+    assert {'18', '27'} <= values
+    assert '99' not in values
+    assert [item['rows'] for item in result['diagnostics']
+            if item['code'] == 'TABLE_ROW_SLOTS_UNAVAILABLE'] == [[2]]
+    assert 'TABLE_CELLS_UNAVAILABLE' not in {item['code'] for item in result['diagnostics']}
 
 
 def test_actual_multi_parent_pipeline_retains_independent_table_bindings():
@@ -134,7 +184,8 @@ def test_complete_table_mapping_is_not_marked_ambiguous_and_native_identity_stay
 
 
 def test_native_binder_algorithm_is_a_real_decision_dependency(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory, native_table_bridge
+    from company_wiki.document_understanding import native_table_bridge
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
 
     pipeline = _read(_html())
     before = decision_inventory.build_decision_trace(pipeline)

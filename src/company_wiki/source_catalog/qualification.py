@@ -110,3 +110,7 @@ def latest_source_index(versions: list[dict]) -> int | None:
     return max(choices, key=lambda i: (versions[i].get("published_date") or "",
                                       versions[i].get("provider_document_id") or "",
                                       versions[i].get("source_id") or ""))
+
+__all__ = [
+    'qualify_source',
+]

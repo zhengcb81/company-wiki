@@ -12,7 +12,7 @@ from pathlib import Path
 from types import TracebackType
 from typing import Protocol
 
-from company_wiki._id_scope import normalize_id_scope
+from company_wiki.id_scope import normalize_id_scope
 
 from .models import JobStatus
 from .store import AutomationStore

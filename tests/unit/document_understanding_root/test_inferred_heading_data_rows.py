@@ -124,7 +124,7 @@ def test_literal_words_are_not_interpreted_as_currency_codes(word):
 
 @pytest.mark.parametrize("pdf", [False, True])
 @pytest.mark.parametrize("module_name", [
-    "company_wiki.document_normalization.table_shapes",
+    "company_wiki.document_model.table_shapes",
     "company_wiki.document_understanding.observation_adapter",
     "company_wiki.document_understanding.layout_hints.headings",
     "company_wiki.document_understanding.structure.layout",
@@ -133,17 +133,17 @@ def test_literal_words_are_not_interpreted_as_currency_codes(word):
 ])
 def test_actual_owner_byte_change_invalidates_decision(monkeypatch, pdf, module_name):
     from importlib import import_module
-    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
     target = Path(import_module(module_name).__file__).resolve()
     assert target.is_relative_to(Path(__file__).resolve().parents[3] / "src")
     read_bytes = Path.read_bytes
-    before = decision_inventory._versions(pdf_frontend=pdf)
+    before = decision_inventory.decision_versions(pdf_frontend=pdf)
     with monkeypatch.context() as patch:
         def observed_bytes(path):
             original = read_bytes(path)
             return original + b"\n# independent byte-only rule regression\n" if path.resolve() == target else original
         patch.setattr(Path, "read_bytes", observed_bytes)
-        changed = decision_inventory._versions(pdf_frontend=pdf)
+        changed = decision_inventory.decision_versions(pdf_frontend=pdf)
         assert changed["business_algorithms"] != before["business_algorithms"]
         assert changed["budget"] == before["budget"]
-    assert decision_inventory._versions(pdf_frontend=pdf) == before
+    assert decision_inventory.decision_versions(pdf_frontend=pdf) == before

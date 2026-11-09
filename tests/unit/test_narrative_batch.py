@@ -10,6 +10,7 @@ import pytest
 
 from company_wiki.automation.models import canonical_json
 from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
+from company_wiki.file_usage import file_tree_bytes
 from company_wiki.source_catalog.source_reader import SourceRef
 from company_wiki.source_contract.source_manifest import source_id_for_sha256
 
@@ -94,7 +95,7 @@ def test_owned_storage_sample_tolerates_file_removal_between_stats(tmp_path, mon
     monkeypatch.setattr(Path, "stat", stat_then_remove)
     # The file existed for one instant during the sample. Either observation
     # is valid; aborting a whole batch because it was reclaimed is not.
-    assert _module()._tree_bytes(tmp_path) in {0, len(b"transient")}
+    assert file_tree_bytes(tmp_path) in {0, len(b"transient")}
     assert seen and not transient.exists()
 
 
@@ -110,7 +111,7 @@ def test_owned_storage_sample_preserves_access_errors(tmp_path, monkeypatch):
 
     monkeypatch.setattr(Path, "stat", reject_stat)
     with pytest.raises(PermissionError):
-        _module()._tree_bytes(tmp_path)
+        file_tree_bytes(tmp_path)
 
 
 def test_batch_identity_binds_execution_configuration_and_preserves_source_metadata():

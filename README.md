@@ -42,7 +42,7 @@ python -m company_wiki.source_catalog.source_reader_cli --help
 
 ```powershell
 python scripts/narrative_batch_configured.py --llm-provider mimo --project-root . --catalog-config config/source_catalog.yaml --automation-db .source_catalog/automation.sqlite3 --work-dir .source_catalog/narrative-work --request request.json
-python -m company_wiki.source_catalog.narrative_transport_cli --help
+python -m company_wiki.automation.narrative_transport_cli --help
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml extraction-quality --help
 ```
 

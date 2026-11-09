@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
+from functools import partial
 import hashlib
 import sqlite3
 from pathlib import Path
@@ -61,13 +63,33 @@ def _store(tmp_path: Path):
 
 def _controller(store, tmp_path: Path, legacy: _FakeLegacyController):
     from company_wiki.automation.runtime_control import AutomationWorkerController
+    from company_wiki.source_catalog.lock import CatalogOperationLock
 
     return AutomationWorkerController(
         store=store,
-        catalog_dir=tmp_path / "catalog",
+        operation_lock=partial(CatalogOperationLock, tmp_path / "catalog"),
         legacy_controller=legacy,
         timestamp=lambda: NOW,
     )
+
+
+def test_runtime_controller_uses_opaque_operation_lock(tmp_path):
+    from company_wiki.automation.runtime_control import AutomationWorkerController
+
+    store = _store(tmp_path)
+    legacy = _FakeLegacyController()
+    calls = []
+
+    @contextmanager
+    def operation_lock(*, operation):
+        calls.append(operation)
+        yield
+
+    controller = AutomationWorkerController(store=store, operation_lock=operation_lock,
+                                            legacy_controller=legacy, timestamp=lambda: NOW)
+    controller.enable()
+    controller.pause()
+    assert calls == ["automation-worker-enable", "automation-worker-pause"]
 
 
 def _ready_job(store) -> None:

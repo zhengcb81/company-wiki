@@ -5,12 +5,13 @@ from __future__ import annotations
 import io
 import json
 from pathlib import Path
+import subprocess
 import sys
 from types import SimpleNamespace
 
 import pytest
 
-from company_wiki.source_catalog import narrative_transport_cli as cli
+from company_wiki.automation import narrative_transport_cli as cli
 
 
 def test_parser_console_output_does_not_corrupt_bundle_or_json_receipt(
@@ -26,13 +27,13 @@ def test_parser_console_output_does_not_corrupt_bundle_or_json_receipt(
     monkeypatch.setattr(sys, "stdout", output_stream)
     monkeypatch.setattr(sys, "stderr", receipt_stream)
     closed: list[str] = []
-    config = SimpleNamespace(database_path=Path("unused.sqlite3"), catalog_dir=Path("unused"))
-    catalog = SimpleNamespace(config=config, close=lambda: closed.append("catalog"))
+    config = object()
     artifacts = SimpleNamespace(close=lambda: closed.append("artifacts"))
+    catalog = SimpleNamespace(open_narrative_artifact_reader=lambda: artifacts,
+                              close=lambda: closed.append("catalog"))
     monkeypatch.setattr(cli, "load_catalog_config", lambda _: config)
     monkeypatch.setattr(cli, "SourceCatalog", lambda _: catalog)
     monkeypatch.setattr(cli, "SourceVersionReader", lambda _: object())
-    monkeypatch.setattr(cli.NarrativeArtifactStore, "for_reading", lambda *_: artifacts)
 
     class NoisyReader:
         def __init__(self, *_):
@@ -51,3 +52,45 @@ def test_parser_console_output_does_not_corrupt_bundle_or_json_receipt(
     assert receipt_bytes.getvalue().count(b"\n") == 1
     assert json.loads(receipt_bytes.getvalue()) == {"status": "ok"}
     assert closed == ["artifacts", "catalog"]
+
+
+@pytest.mark.parametrize("failure", [False, True])
+def test_native_descriptor_writes_do_not_contaminate_the_cli_wire(failure):
+    root = Path(__file__).resolve().parents[2]
+    probe = r"""
+import os
+import sys
+from types import SimpleNamespace
+
+sys.path.insert(0, sys.argv[1])
+from company_wiki.automation import narrative_transport_cli as cli
+from company_wiki.automation.narrative_transport_contracts import NarrativeTransportError
+
+cli.load_catalog_config = lambda path: None
+cli.SourceVersionReader = lambda catalog: None
+cli.SourceCatalog = lambda config: SimpleNamespace(
+    open_narrative_artifact_reader=lambda: SimpleNamespace(close=lambda: None), close=lambda: None,
+)
+
+def dispatch(*args, **kwargs):
+    os.write(1, b'native standard output\n')
+    os.write(2, b'native standard error\n')
+    if sys.argv[2] == 'fail':
+        raise NarrativeTransportError('blocked', 'fixture_refusal')
+    return b'{"bundle":"exact bytes"}', {"status": "ok"}
+
+cli.dispatch_transport_request = dispatch
+raise SystemExit(cli.main(['--config', 'unused.yaml']))
+"""
+    result = subprocess.run(
+        [sys.executable, "-I", "-B", "-c", probe, str(root / "src"), "fail" if failure else "ok"],
+        input=b"{}", capture_output=True, timeout=20, check=False,
+    )
+    assert result.returncode == (2 if failure else 0)
+    assert result.stdout == (b"" if failure else b'{"bundle":"exact bytes"}')
+    assert len(result.stderr.splitlines()) == 1
+    receipt = json.loads(result.stderr)
+    if failure:
+        assert (receipt["status"], receipt["reason"]) == ("blocked", "fixture_refusal")
+    else:
+        assert receipt == {"status": "ok"}

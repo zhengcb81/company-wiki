@@ -33,7 +33,7 @@ def test_current_fragments_have_exact_distinct_cell_character_locators():
 
 
 def test_current_proven_fragments_pass_unchanged_production_material_boundary():
-    from company_wiki.automation.narrative_select import NarrativeSelectHandler
+    from company_wiki.source_catalog.narrative_selection import verify_selected_material
 
     units = emitted()
     spans = tuple(u.to_evidence_span(topics=(), selection_reasons=()) for u in units)
@@ -42,7 +42,7 @@ def test_current_proven_fragments_pass_unchanged_production_material_boundary():
                                page_count=1, pages_read=1, mime_type='application/pdf')
     package = NarrativeEvidencePackage(parsed.source_id, digest, 'investor_relations',
                                        'selected', spans, 96, len(spans), 0, len(units), 0, True)
-    NarrativeSelectHandler._verify_selected_material(parsed, package)
+    verify_selected_material(parsed, package)
 
 
 @pytest.mark.parametrize('text', ['问：新产品怎样？答：Cafe\u0301客户验证。',
@@ -82,7 +82,7 @@ def test_current_replay_rejects_character_locator_tampering():
 
 @pytest.mark.parametrize('flag', ['locator_unstable', 'low_ocr_confidence'])
 def test_replay_cannot_remove_the_native_producers_quality_flags(flag):
-    from company_wiki.automation.narrative_select import NarrativeSelectHandler, _SelectFailure
+    from company_wiki.source_catalog.narrative_selection import NarrativeMaterialError, verify_selected_material
 
     unit = replace(emitted()[1], quality_flags=(flag,))
     span = unit.to_evidence_span(topics=(), selection_reasons=())
@@ -95,8 +95,8 @@ def test_replay_cannot_remove_the_native_producers_quality_flags(flag):
     parsed = DocumentStructure(unit.source_id, digest, 'zh', (unit,),page_count=1,pages_read=1)
     package = NarrativeEvidencePackage(unit.source_id, digest, 'investor_relations',
                                        'selected', (changed,), 96, 1, 0, 1, 0, True)
-    with pytest.raises(_SelectFailure):
-        NarrativeSelectHandler._verify_selected_material(parsed,package,mime_type='application/pdf')
+    with pytest.raises(NarrativeMaterialError):
+        verify_selected_material(parsed,package,mime_type='application/pdf')
 
 
 def test_replay_allows_additional_conservative_quality_diagnostics():

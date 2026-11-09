@@ -16,10 +16,9 @@ from company_wiki.automation.narrative_contracts import (
     NarrativeBundle, NarrativeSelectResult, NarrativeSummaryResult, SourceRevisionEventPayload,
 )
 from company_wiki.automation.narrative_model import (
-    NARRATIVE_PROMPT_VERSION, PROJECTION_NARRATIVE_PROMPT_VERSION, PROJECTION_MODEL_REQUEST_SCHEMA,
+    NARRATIVE_PROMPT_VERSION, PROJECTION_NARRATIVE_PROMPT_VERSION,
     NarrativeModelResponse,
 )
-from company_wiki.automation.narrative_official_json import NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
 from company_wiki.automation.narrative_runtime import NarrativeRuntimeDependencies, register_narrative_handlers
 from company_wiki.automation.narrative_summarize import NarrativeSummarizeHandler
 from company_wiki.automation.narrative_verify import NarrativeVerifyHandler
@@ -339,22 +338,42 @@ def test_runtime_registers_shared_catalog_and_generation_resolver_for_real_handl
         assert result.effects[0].target.endswith(":" + GENERATION)
 
 
-@pytest.mark.parametrize("invalid_component", [None, "projection_prompt", "projection_model_request_schema", "official_json_adapter"])
+@pytest.mark.parametrize("invalid_component", [None, "projection_prompt", "projection_model_request_schema",
+                                               "official_json_adapter", "generation_settings"])
 def test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions(tmp_path, monkeypatch, invalid_component):
     # Explicit composition seam: fake only RunStore retrieval, keep real source config/catalog/handlers.
     from company_wiki.automation import narrative_worker_factory as factory
+    from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
+    from company_wiki.automation.narrative_generation import projection_generation_manifest
+    from company_wiki.automation.narrative_generation_binding import freeze_generation_manifests
+    from company_wiki.automation.narrative_verify import BUNDLE_PRODUCER_VERSION
+    from unit.test_narrative_batch_request import _request
+
     with owned_catalog(tmp_path) as (catalog, root):
         ref, _ = import_page(catalog, flat_page(1))
         projection = persist(catalog, [ref])
         subject = NarrativeSubject.from_projection(projection)
-        binding = {"schema_version": "narrative-run-binding/4", "execution_versions": {
-            "selector": "0.6.0",
-            "projection_prompt": PROJECTION_NARRATIVE_PROMPT_VERSION,
-            "projection_model_request_schema": PROJECTION_MODEL_REQUEST_SCHEMA,
-            "official_json_adapter": NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION},
-            "generation_manifests": {subject.item_key: {"settings_sha256": "1" * 64,
-                "generation_sha256": GENERATION, "source_inputs": {"subject_binding": subject.to_dict()}}}}
-        if invalid_component is not None:
+        request_wire = _request()
+        request_wire.pop("sources")
+        request_wire.update(schema_version="narrative-batch-request/2", selector_version="0.6.0", items=[{
+            "kind": "official_json", "projection_id": subject.item_key,
+            "projection_sha256": subject.subject_sha256,
+        }])
+        request = NarrativeBatchRequest.from_dict(request_wire)
+        versions = request.execution_versions
+        manifest = projection_generation_manifest(
+            request, subject, language="en",
+            execution_versions={**versions, "prompt": versions["projection_prompt"],
+                                "model_request_schema": versions["projection_model_request_schema"]},
+            bundle_producer=BUNDLE_PRODUCER_VERSION,
+            narrative_adapter_version=versions["official_json_adapter"],
+        )
+        expected_generation = hashlib.sha256(canonical_json(manifest).encode("utf-8")).hexdigest()
+        binding = {"schema_version": "narrative-run-binding/4", "execution_versions": versions,
+                   **freeze_generation_manifests({subject.item_key: manifest})}
+        if invalid_component == "generation_settings":
+            del binding["generation_settings"]
+        elif invalid_component is not None:
             binding["execution_versions"][invalid_component] = "old-version"
         run = SimpleNamespace(job_ids=("owned-factory-job",), input_hash="2" * 64,
             model_id="fixture-model", prompt_version=NARRATIVE_PROMPT_VERSION, blocked=False,
@@ -383,7 +402,9 @@ def test_factory_reads_frozen_generation_binding_and_checks_actual_execution_ver
         monkeypatch.setattr(factory, "NarrativeHTTPModel", forbidden)
         monkeypatch.setattr(factory, "BudgetedNarrativeCaller", forbidden)
         if invalid_component is not None:
-            with pytest.raises(ValueError, match="NARRATIVE_RUN_EXECUTION_MISMATCH"):
+            error = ("NARRATIVE_RUN_GENERATION_INVALID" if invalid_component == "generation_settings"
+                     else "NARRATIVE_RUN_EXECUTION_MISMATCH")
+            with pytest.raises(ValueError, match=error):
                 factory.create_runtime(spec)
             assert captured == []
         else:
@@ -391,7 +412,7 @@ def test_factory_reads_frozen_generation_binding_and_checks_actual_execution_ver
             assert runtime.model_client is None
             assert len(captured) == 1
             try:
-                assert captured[0].generation_sha256(subject) == GENERATION
+                assert captured[0].generation_sha256(subject) == expected_generation
                 view = open_verified_projection(captured[0].projection_catalog,
                     projection_id=subject.item_key, expected_projection_sha256=subject.subject_sha256)
                 assert view.subject == subject

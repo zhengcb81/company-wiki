@@ -18,7 +18,7 @@ import re
 from typing import Any, Iterator
 import unicodedata
 
-from company_wiki.document_normalization.text_matching import matching_script_text
+from company_wiki.document_model.text_matching import matching_script_text
 
 from . import vocabulary as v
 from .geometry_policy import normalize_geometry_intent
@@ -167,6 +167,24 @@ def _component(record: Mapping, kind: str) -> dict:
 def _base_form(value: Any) -> str:
     form = _fold(value or "").removesuffix("/a")
     return "" if form == "unknown" else form
+
+
+def normalize_form_type(value: Any) -> str:
+    """Normalize a form label for consumers that compare policy scopes."""
+    return _base_form(value)
+
+
+def context_policy_config() -> dict:
+    """Return an isolated snapshot of the installed context policy."""
+    return deepcopy(_CATALOG.get("context_policy", {}))
+
+
+def decision_inventory_inputs() -> dict:
+    """Return fresh policy data needed to explain decision eligibility."""
+    return deepcopy({
+        key: _CATALOG[key]
+        for key in ("legacy_bindings", "families", "fallback", "facets")
+    })
 
 
 def _signal_matches(phrase: str, text: str) -> bool:
@@ -419,5 +437,16 @@ def select_business_facets(material: Sequence[Mapping], *, max_facets: int = 4, 
     return output
 
 
-__all__ = ["iter_profiles", "listed_profiles", "profile_by_id", "profile_wire", "resolve_reading_profile", "select_business_facets",
-           "configured_table_signal"]
+__all__ = [
+    'iter_profiles',
+    'listed_profiles',
+    'profile_by_id',
+    'profile_wire',
+    'resolve_reading_profile',
+    'select_business_facets',
+    'configured_table_signal',
+    'is_generic_navigation_heading',
+    'normalize_form_type',
+    'context_policy_config',
+    'decision_inventory_inputs',
+]

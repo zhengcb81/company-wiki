@@ -6,26 +6,28 @@ neither a legal task nor a legal basis proves a paraphrase semantically true.
 """
 from __future__ import annotations
 
-from collections import Counter
-from collections.abc import Mapping
 from dataclasses import dataclass, replace
 import hashlib
 import json
 import logging
-from pathlib import Path
-from types import MappingProxyType
 from typing import Any
 
-from company_wiki.document_understanding.summary_tasks import SourceSummaryTask, SummaryTaskPlan, build_summary_task_plan
-from company_wiki.document_understanding.source_cards import SourceCard, source_cards, source_task_admission
-from company_wiki.source_contract import EvidenceSpan
+from company_wiki.implementation_identity import code_sha256
+from company_wiki.source_catalog.narrative_contracts import narrative_wire_sha256
+from company_wiki.source_catalog.narrative_summary_material import (
+    SCOPED_VIEW_SCHEMA as SCOPED_VIEW_SCHEMA,
+    ScopedClaimBinding as ScopedClaimBinding,
+    ScopedModelView as ScopedModelView,
+    compile_scoped_material_view as compile_scoped_material_view,
+    scoped_material_sha256,
+)
+from company_wiki.wire_json import encoding_sha256
 
 from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import NarrativeSelectResult
 from .narrative_summary_protocols import LEGACY_SCOPED, ScopedSummaryProtocol, scoped_protocol_for_prompt
 
 
-SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
 # Compatibility name for prompt planning only, never result validity.
 MAX_SUMMARY_CLAIMS = 40
@@ -104,10 +106,7 @@ def scoped_model_material(view, protocol: ScopedSummaryProtocol) -> dict[str, An
     material = view.to_model_dict()
     if protocol.material_profile == 'source_frames/1':
         from .narrative_frame_hints import compact_frame_hints
-        supported = {sid for task in view.model_tasks for sid in task.support_ids}
-        material['source_frame_hints'] = compact_frame_hints(
-            (view._source_keys[sid], view._spans[sid].raw_text or '')
-            for sid in view.plan.evidence_order if sid in supported)
+        material['source_frame_hints'] = compact_frame_hints(view.source_hint_inputs())
     return material
 
 
@@ -129,35 +128,43 @@ def scoped_response_schema(per_task_cap: int = 20) -> dict[str, Any]:
 
 
 def scoped_boundary_identity(boundary, *, protocol: ScopedSummaryProtocol = LEGACY_SCOPED) -> dict[str, Any]:
-    from company_wiki.document_understanding import (
-        summary_tasks, source_cards as source_card_module, reading_context_contract,
+    from company_wiki.document_understanding.reading_identity import (
+        reading_context_sha256, source_cards_sha256, summary_tasks_sha256,
     )
-    from company_wiki.source_catalog import narrative_evidence
-    from company_wiki import narrative_subject
-    from . import models, narrative_contracts, narrative_model, narrative_model_runtime, narrative_summary_protocols
+    from company_wiki.narrative_subject import subject_contract_sha256
+    from company_wiki.source_catalog.narrative_claims import summary_claims_sha256
+    from . import narrative_model, narrative_model_runtime
+    from company_wiki.source_catalog.narrative_summary_protocols import summary_protocols_sha256
 
-    dependencies = {}
-    for name, module in {
-            'runtime': narrative_model_runtime, 'scoped_protocol': __import__(__name__, fromlist=['']),
-            'source_task_plan': summary_tasks, 'role_quality_owner': narrative_evidence,
-            'source_task_availability': source_card_module,
-            'source_use_contract': reading_context_contract,
-            'legacy_utilities': narrative_model, 'canonical_contracts': narrative_contracts,
-            'canonical_encoding': models, 'subject_contracts': narrative_subject,
-            'summary_protocol_recipes': narrative_summary_protocols,
-        }.items():
-        filename = module.__file__
-        if filename is None:
-            raise narrative_model.ModelResponseError('READING_MODEL_IMPLEMENTATION_UNAVAILABLE')
-        dependencies[name] = hashlib.sha256(Path(filename).read_bytes()
-            .replace(b'\r\n', b'\n').replace(b'\r', b'\n')).hexdigest()
+    modules = {
+        'runtime': narrative_model_runtime,
+        'legacy_utilities': narrative_model,
+    }
+    try:
+        dependencies = {
+            name: code_sha256(module.__file__, universal_newlines=True)
+            for name, module in modules.items()
+        }
+        dependencies.update({
+            'scoped_protocol': code_sha256(__file__, universal_newlines=True),
+            'source_material_compiler': scoped_material_sha256(universal_newlines=True),
+            'canonical_contracts': narrative_wire_sha256(universal_newlines=True),
+            'canonical_encoding': encoding_sha256(universal_newlines=True),
+            'summary_protocol_recipes': summary_protocols_sha256(universal_newlines=True),
+            'source_task_plan': summary_tasks_sha256(universal_newlines=True),
+            'role_quality_owner': summary_claims_sha256(universal_newlines=True),
+            'source_task_availability': source_cards_sha256(universal_newlines=True),
+            'source_use_contract': reading_context_sha256(universal_newlines=True),
+            'subject_contracts': subject_contract_sha256(universal_newlines=True),
+        })
+    except ValueError as exc:
+        raise narrative_model.ModelResponseError('READING_MODEL_IMPLEMENTATION_UNAVAILABLE') from exc
     if protocol.assess_fidelity:
         from .narrative_summary_assessment import assessment_identity
         dependencies['summary_assessment'] = canonical_json_hash(assessment_identity(protocol.assessor_version))
     if protocol.material_profile == 'source_frames/1':
         from . import narrative_frame_hints
-        dependencies['source_frame_hints'] = hashlib.sha256(
-            Path(narrative_frame_hints.__file__).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
+        dependencies['source_frame_hints'] = code_sha256(narrative_frame_hints.__file__)
     instruction = scoped_instruction(protocol)
     return {'schema_version': 'reading-model-boundary/1',
         'reading_projection_version': boundary.reading_projection_version,
@@ -273,7 +280,7 @@ def _clause_object(raw: Any) -> dict[str, Any] | None:
 def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
                         protocol: ScopedSummaryProtocol = LEGACY_SCOPED) -> dict[str, Any]:
     """Recover whole local clauses, never repair IDs or authorize their prose."""
-    from company_wiki.source_catalog.narrative_evidence import (
+    from company_wiki.source_catalog.narrative_claims import (
         SummaryValidationError, project_summary_claim_quality, summary_claim_type_for_roles,
         validate_summary_claim,
     )
@@ -361,138 +368,6 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
             'claims': wire_claims, 'status': status}
 
 
-@dataclass(frozen=True)
-class ScopedClaimBinding:
-    task_key: str
-    basis_ids: tuple[str, ...]
-    support_ids: tuple[str, ...]
-    context_ids: tuple[str, ...]
-    semantic_status: str = "not_evaluated"
-
-
-@dataclass(frozen=True)
-class ScopedModelView:
-    plan: SummaryTaskPlan
-    _spans: Mapping[str, EvidenceSpan]
-    _source_keys: Mapping[str, str]
-    _parts: Mapping[str, Mapping[str, str]]
-    # A repair may display only a subset of source-admitted tasks. The complete
-    # source plan remains available, including unsupported and duplicate scopes.
-    visible_keys: frozenset[str] | None = None
-    _admission: Mapping[str, Mapping[str, str]] | None = None
-    _cards: Mapping[str, SourceCard] | None = None
-
-    @property
-    def admitted_task_keys(self) -> frozenset[str]:
-        return frozenset(task.key for task in self.plan.tasks if self._admission is None
-                         or self._admission[task.key]['status'] == 'admitted')
-
-    @property
-    def model_tasks(self) -> tuple[SourceSummaryTask, ...]:
-        allowed = self.admitted_task_keys
-        return tuple(task for task in self.plan.tasks if task.key in allowed
-                     and (self.visible_keys is None or task.key in self.visible_keys))
-
-    def to_binding(self) -> dict[str, Any]:
-        """Program-owned exact identity; local keys never replace source IDs."""
-        return {"schema_version": SCOPED_VIEW_SCHEMA, "source_plan": self.plan.to_binding(),
-                "source_keys": dict(self._source_keys),
-                "task_parts": {key: dict(parts) for key, parts in self._parts.items()},
-                "source_admission": {key: dict(value) for key, value in (self._admission or {}).items()}}
-
-    @property
-    def binding_sha256(self) -> str:
-        return canonical_json_hash(self.to_binding())
-
-    def to_model_dict(self) -> dict[str, Any]:
-        visible = self.model_tasks
-        counts = Counter(sid for task in visible for sid in task.member_ids)
-
-        def source_role(span):
-            role = span.structured_value.get("source_role", "unknown")
-            return role if isinstance(role, str) else "unknown"
-
-        def frequent(values, fallback):
-            return Counter(values).most_common(1)[0][0] if values else fallback
-
-        visible_ids = [sid for sid in self.plan.evidence_order if counts[sid] > 0]
-        fragment_defaults = {
-            "source_role": frequent([source_role(self._spans[sid]) for sid in visible_ids], "unknown"),
-            "quality_flags": list(frequent([self._spans[sid].quality_flags for sid in visible_ids], ())),
-        }
-        task_defaults = {
-            "kind": frequent([task.kind for task in visible], "standalone"),
-            "section_role": frequent([task.section_role for task in visible], "unknown"),
-            "topics": list(frequent([task.topics for task in visible], ())),
-            "support_parts": "all_parts", "context_parts": [],
-        }
-
-        def without_defaults(value, defaults):
-            return {key: item for key, item in value.items() if key not in defaults or item != defaults[key]}
-
-        def body(sid):
-            span = self._spans[sid]
-            return without_defaults({"source_key": self._source_keys[sid], "text": span.raw_text,
-                    "source_role": source_role(span), "quality_flags": list(span.quality_flags)}, fragment_defaults)
-
-        shared = [body(sid) for sid in self.plan.evidence_order if counts[sid] > 1]
-        tasks = []
-        for task in visible:
-            parts = self._parts[task.key]
-            support = [key for key, sid in parts.items() if sid in task.support_ids]
-            tasks.append(without_defaults({
-                "key": task.key, "kind": task.kind, "section_role": task.section_role,
-                # Machine selection reason codes stay in the causal binding;
-                # the model receives observed business topics, not diagnostics.
-                "topics": list(task.topics),
-                "support_parts": "all_parts" if support == list(parts) else support,
-                "context_parts": [key for key, sid in parts.items() if sid in task.context_ids],
-                "parts": [{"key": key, **({"shared_ref": self._source_keys[sid]}
-                            if counts[sid] > 1 else body(sid))} for key, sid in parts.items()],
-            }, task_defaults))
-            hint = self._cards[task.key].reading_hint() if self._cards is not None else {}
-            if hint:
-                tasks[-1]['reading'] = hint
-        return {"schema_version": SCOPED_VIEW_SCHEMA, "scope": "selected_source_tasks_only",
-                "max_claims": self.plan.max_claims, "available_task_count": len(tasks),
-                "fragment_defaults": fragment_defaults, "task_defaults": task_defaults,
-                "shared_fragments": shared, "tasks": tasks}
-
-    def resolve_basis(self, task_key: object, part_keys: object) -> ScopedClaimBinding:
-        if not isinstance(task_key, str) or task_key not in self._parts:
-            raise ValueError("scoped draft references an unknown source task")
-        if task_key not in self.admitted_task_keys:
-            raise ValueError("scoped draft references unavailable or duplicate source support")
-        if (not isinstance(part_keys, list) or not part_keys
-                or any(not isinstance(key, str) for key in part_keys)
-                or len(part_keys) != len(set(part_keys))):
-            raise ValueError("scoped draft requires unique task-local factual basis parts")
-        parts = self._parts[task_key]
-        task = next(task for task in self.plan.tasks if task.key == task_key)
-        if any(key not in parts or parts[key] not in task.support_ids for key in part_keys):
-            raise ValueError("scoped basis cannot borrow another task or context-only facts")
-        selected = {parts[key] for key in part_keys}
-        # Preserve the existing native scope closure; selecting a local basis
-        # does not silently remove its source-owned qualifiers or QA context.
-        return ScopedClaimBinding(task_key, tuple(sid for sid in task.support_ids if sid in selected),
-                                  task.support_ids, task.context_ids)
-
-
 def compile_scoped_model_view(selected: NarrativeSelectResult, *, max_claims: int) -> ScopedModelView:
     """Compile a transient view of this pinned selection, with no extra IO."""
     return compile_scoped_material_view(selected.evidence_spans,selected.reading_context,max_claims=max_claims)
-
-
-def compile_scoped_material_view(evidence_spans, reading_context, *, max_claims: int) -> ScopedModelView:
-    """The same compiler for an already validated selection or public bundle."""
-    plan = build_summary_task_plan(evidence_spans,reading_context=reading_context,max_claims=max_claims)
-    known = {span.span_id: span for span in evidence_spans}
-    cards = tuple(source_cards(plan, known))
-    admission = source_task_admission(cards)
-    return ScopedModelView(plan,
-        MappingProxyType(known),
-        MappingProxyType({sid: "s" + str(i) for i, sid in enumerate(plan.evidence_order, 1)}),
-        MappingProxyType({task.key: MappingProxyType({"p" + str(i): sid
-            for i, sid in enumerate(task.member_ids, 1)}) for task in plan.tasks}),
-        _admission=MappingProxyType({key: MappingProxyType(value) for key, value in admission.items()}),
-        _cards=MappingProxyType({card.task.key: card for card in cards}))

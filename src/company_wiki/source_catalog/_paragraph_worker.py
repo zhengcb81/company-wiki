@@ -112,7 +112,7 @@ def main():
     if os.name == "nt":
         sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
         import ctypes
-        from company_wiki._process_tree import WindowsJob
+        from company_wiki.process_tree import WindowsJob
         kernel = cast(Any, ctypes).WinDLL("kernel32", use_last_error=True)
         kernel.GetCurrentProcess.restype = ctypes.c_void_p
         memory_job = WindowsJob(kernel.GetCurrentProcess(), memory_limit_bytes=request["max_memory_bytes"])

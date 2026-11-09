@@ -15,6 +15,7 @@ import json
 from pathlib import Path
 import sys
 import tracemalloc
+from types import SimpleNamespace
 
 import pytest
 
@@ -185,6 +186,88 @@ def test_v2_grounds_utf8_text_span_at_unicode_character_offsets(tmp_path):
     assert wire["manifests"][0]["mime_type"] == "text/plain"
     assert wire["evidence_spans"] == [span.to_dict()]
     assert span.coordinates.char_start != len(TXT_PREFIX.encode("utf-8"))
+
+
+def test_v2_exporter_hashes_the_bundle_but_leaves_raw_hashing_to_the_owner(tmp_path, monkeypatch):
+    catalog, _, _, ref, span = _fixture(tmp_path, text_mode=True)
+    hashed_values = []
+
+    def sha256(value):
+        hashed_values.append(value)
+        return hashlib.sha256(value)
+
+    monkeypatch.setattr(_v2_module(), "hashlib", SimpleNamespace(sha256=sha256))
+
+    bundle = _build(SourceVersionReader(catalog), ref, span).to_dict()
+
+    assert bundle["evidence_spans"] == [span.to_dict()]
+    assert len(hashed_values) == 1
+    assert hashed_values[0].startswith(b'{"counts":')
+
+
+def test_v2_rejects_end_past_original_even_if_slicing_returns_the_quote(tmp_path):
+    catalog, _, _, ref, span = _fixture(tmp_path, text_mode=True)
+    quote = TXT_TEXT[len(TXT_PREFIX):]
+    span = EvidenceSpan.create(
+        source_id=ref.source_id,
+        coordinates=EvidenceCoordinates(
+            char_start=len(TXT_PREFIX), char_end=len(TXT_TEXT) + 2,
+        ),
+        raw_text=quote,
+        structured_value=None,
+        parser_name=span.parser_name,
+        parser_version=span.parser_version,
+        parse_status=span.parse_status,
+        quality_flags=(),
+    )
+    with pytest.raises(SourceExportError, match="unverified evidence span"):
+        _build(SourceVersionReader(catalog), ref, span)
+
+
+@pytest.mark.parametrize("change", (
+    {"document_id": "another-document"},
+    {"mime_type": "application/octet-stream"},
+    {"original_path": "private/should-not-leave.pdf"},
+))
+def test_v2_builder_binds_manifest_to_the_verified_ref(tmp_path, monkeypatch, change):
+    catalog, _, _, ref, _ = _fixture(tmp_path)
+    reader = SourceVersionReader(catalog)
+    manifest = reader.describe_version(ref)
+    monkeypatch.setattr(reader, "describe_version", lambda _: {**manifest, **change})
+
+    with pytest.raises(SourceExportError, match="v2 manifest"):
+        _v2_module().SourceExportBundleV2.build(
+            source_reader=reader, refs=(ref,), evidence_spans=(),
+        )
+
+
+@pytest.mark.parametrize("change", (
+    {"source_id": source_id_for_sha256("0" * 64)},
+    {"byte_size": 0},
+))
+def test_v2_loader_requires_manifest_identity_usable_as_a_ref(tmp_path, change):
+    catalog, _, _, ref, _ = _fixture(tmp_path)
+    bundle_type = _v2_module().SourceExportBundleV2
+    wire = bundle_type.build(
+        source_reader=SourceVersionReader(catalog), refs=(ref,), evidence_spans=(),
+    ).to_dict()
+    wire["manifests"][0].update(change)
+    _rehash_wire(wire)
+
+    with pytest.raises(SourceExportError, match="v2 manifest"):
+        bundle_type.from_dict(wire)
+
+
+def test_v2_passes_through_observed_historical_fiscal_year(tmp_path, monkeypatch):
+    catalog, _, _, ref, _ = _fixture(tmp_path)
+    reader = SourceVersionReader(catalog)
+    manifest = reader.describe_version(ref)
+    monkeypatch.setattr(reader, "describe_version", lambda _: {**manifest, "fiscal_year": 1890})
+    bundle_type = _v2_module().SourceExportBundleV2
+
+    wire = bundle_type.build(source_reader=reader, refs=(ref,), evidence_spans=()).to_dict()
+
+    assert bundle_type.from_dict(wire).to_dict()["manifests"][0]["fiscal_year"] == 1890
 
 
 def test_v2_rejects_text_span_when_original_is_not_utf8(tmp_path):
@@ -358,7 +441,7 @@ def test_v2_bundle_identity_survives_configured_root_move(tmp_path):
 
 
 def test_v2_bundle_rejects_orphan_span_and_same_size_corrupted_bytes(tmp_path):
-    catalog, _, raw_path, ref, span = _fixture(tmp_path)
+    catalog, _, raw_path, ref, span = _fixture(tmp_path, text_mode=True)
     reader = SourceVersionReader(catalog)
     alien_span = EvidenceSpan.create(
         source_id=source_id_for_sha256("0" * 64),
@@ -373,9 +456,9 @@ def test_v2_bundle_rejects_orphan_span_and_same_size_corrupted_bytes(tmp_path):
     with pytest.raises((SourceReadError, ValueError)):
         _build(reader, ref, alien_span)
 
-    raw_path.write_bytes(BODY[:-1] + b"X")
-    assert raw_path.stat().st_size == len(BODY)
-    with pytest.raises((SourceReadError, ValueError)):
+    raw_path.write_bytes(TXT_BODY[:-1] + b"X")  # Preserve the quoted range.
+    assert raw_path.stat().st_size == len(TXT_BODY)
+    with pytest.raises(SourceReadError):
         _build(reader, ref, span)
 
 

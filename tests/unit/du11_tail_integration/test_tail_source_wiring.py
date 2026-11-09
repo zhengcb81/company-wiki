@@ -119,13 +119,14 @@ def test_unknown_columns_require_an_immediately_adjacent_actual_body_band(bounda
 
 
 def test_tail_algorithm_bytes_are_causal_not_just_a_constant(tmp_path, monkeypatch):
-    from company_wiki.document_understanding import decision_inventory, indented_tail_geometry
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
+    from company_wiki.document_understanding import indented_tail_geometry
 
-    before = decision_inventory._versions(pdf_frontend=True, mime_type="application/pdf")
+    before = decision_inventory.decision_versions(pdf_frontend=True, mime_type="application/pdf")
     alternate = tmp_path / "tail.py"
     alternate.write_text("# another physical tail algorithm\n", encoding="utf-8")
     monkeypatch.setattr(indented_tail_geometry, "__file__", str(alternate))
-    after = decision_inventory._versions(pdf_frontend=True, mime_type="application/pdf")
+    after = decision_inventory.decision_versions(pdf_frontend=True, mime_type="application/pdf")
     assert after != before
     assert after["continuity_algorithms"] != before["continuity_algorithms"]
 

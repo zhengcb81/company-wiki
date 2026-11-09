@@ -473,6 +473,7 @@ def build_sections(
             note_parent_stack = None
             note_members = frozenset()
         if note_scope is not None:
+            stack[:] = _source_note_parent_stack(stack, active_item=active_item)
             note_parent_stack = list(stack)
             note_members = note_scope.member_ids
             for destination, mapping in ((required_context_by_unit, note_scope.context_by_unit),
@@ -717,6 +718,38 @@ def _inherit_parent_role(sections: Sequence[SectionDraft]) -> None:
         section.section_role = parent.section_role
         if "role_inherited" not in section.basis:
             section.basis.append("role_inherited")
+
+
+def _source_note_parent_stack(
+    stack: Sequence[SectionDraft], *, active_item: SectionDraft | None
+) -> list[SectionDraft]:
+    """Anchor a new explicit note at the stable structural section around it.
+
+    The current leaf may be a locally numbered heading from the preceding
+    unmarked note. A newly observed source-note marker is an independent scope,
+    so it must not inherit that leaf by accident. Keep the nearest section with
+    its own recognized structural role; for document formats without those
+    role labels, retain the outermost observed heading (or the active SEC item).
+    With no heading evidence, preserve the existing stack rather than inventing
+    a parent or elevating every note to document root.
+    """
+    frames = list(stack)
+    if not frames:
+        return frames
+
+    for index in range(len(frames) - 1, -1, -1):
+        if frames[index].section_role != "unknown":
+            return frames[:index + 1]
+
+    if active_item is not None:
+        for index, frame in enumerate(frames):
+            if frame is active_item:
+                return frames[:index + 1]
+
+    for index, frame in enumerate(frames):
+        if frame.heading_ids:
+            return frames[:index + 1]
+    return frames
 
 
 def _layout_inconsistency(

@@ -11,6 +11,7 @@ from urllib.parse import urlsplit
 
 from company_wiki.narrative_subject import NarrativeSubject
 from .models import canonical_json_hash
+from .narrative_generation_binding import generation_sha256
 from .narrative_contracts import (
     NarrativeBundle,
     NarrativeContractError,
@@ -20,7 +21,7 @@ from .narrative_contracts import (
     SELECT_RESULT_SCHEMA,
     SUMMARY_RESULT_SCHEMA,
 )
-from .narrative_formats import NORMALIZED_MIME_TYPES, parser_component
+from company_wiki.source_catalog.narrative_formats import NORMALIZED_MIME_TYPES, parser_component
 from company_wiki.source_catalog.transcript_text_extract import (
     TRANSCRIPT_MATERIAL_EXTRACTOR,
     TRANSCRIPT_JSON_EXTRACTOR,
@@ -414,10 +415,6 @@ def projection_generation_manifest(
     _bind_reading_projection(result, versions, reading_model_projection)
     _bind_summary_bundle_format(result)
     return _projection_identity_json(result)
-
-
-def generation_sha256(manifest):
-    return canonical_json_hash(manifest)
 
 
 def artifact_pin(version):

@@ -14,6 +14,7 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 from company_wiki.document_understanding.source_turn_markers import (
     ROLE_INVESTOR, explicit_qa_marker, observed_source_turn,
 )
+from .narrative_pdf_turns import printed_turn_is_context
 
 ACTOR_CONTEXT_FEATURE_VERSION = "source-actor-context/1"
 ACTOR_CONTEXT_SCAN_PASSES = 5
@@ -78,6 +79,7 @@ def _body(unit: Any, text: str) -> bool:
     kind = _field(unit, "kind", _field(unit, "unit_kind"))
     coordinates = _field(unit, "coordinates", _field(unit, "locator"))
     return bool(text and role not in _NON_BODY_ROLES and kind not in _NON_BODY_KINDS
+        and not printed_turn_is_context(unit)
         and _field(coordinates, "table_index") is None
         and explicit_qa_marker(text) != ROLE_INVESTOR
         and not _QUESTION.search(text) and not text.rstrip().endswith(("?", "？")))

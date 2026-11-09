@@ -33,7 +33,7 @@ from .observation import Limits, Observation, ObservationError, UnitRef, parse_o
 from .registry import (
     profile_by_id, profile_wire, resolve_reading_profile, select_business_facets,
 )
-from .signals import Signal, SignalBag, detect_signals
+from .signals import RoutingFact, Signal, SignalBag, detect_signals
 
 SCHEMA_VERSION = v.SCHEMA_VERSION_ROUTE
 INPUT_SCHEMA_VERSION = v.SCHEMA_VERSION_INPUT
@@ -300,18 +300,20 @@ def _alternatives(parsed: Observation, bag: SignalBag, winner) -> list[dict]:
         seen.add(profile_id)
         alternatives.append({"profile_id": profile_id, "reason": reason[: v.MAX_REASON_DETAIL_CHARS]})
 
-    details = " ".join(signal.detail for signal in bag.all)
-    if winner.profile_id == "prospectus" and "再融资" in details:
+    prospectus = bag.has_fact(RoutingFact.CN_IPO, RoutingFact.CN_PROSPECTUS_STRUCTURE,
+                              RoutingFact.HK_GLOBAL_OFFERING, RoutingFact.HK_PROSPECTUS,
+                              RoutingFact.HK_PROSPECTUS_STRUCTURE)
+    if winner.profile_id == "prospectus" and bag.has_fact(RoutingFact.CN_REFINANCING):
         add("offering", "存在募集资金用途措辞，可能是再融资募集说明书")
-    if winner.profile_id == "offering" and "招股" in details:
+    if winner.profile_id == "offering" and prospectus:
         add("prospectus", "存在招股措辞")
-    if winner.profile_id == "cn_annual" and "半年度报告" in details:
+    if winner.profile_id == "cn_annual" and bag.has_fact(RoutingFact.CN_INTERIM):
         add("cn_interim", "同时出现半年度措辞")
-    if winner.profile_id == "cn_interim" and "年度报告" in details:
+    if winner.profile_id == "cn_interim" and bag.has_fact(RoutingFact.CN_ANNUAL):
         add("cn_annual", "同时出现年度报告措辞")
-    if winner.profile_id == "results_release" and "presentation" in details.casefold():
+    if winner.profile_id == "results_release" and v.REASON_SLIDE_STRUCTURE in bag.codes():
         add("presentation", "同时出现演示稿特征")
-    if winner.profile_id == "administrative" and _has_prospectus_evidence(details):
+    if winner.profile_id == "administrative" and prospectus:
         add("prospectus", "标题含招股措辞但正文为行政用途")
 
     declared_family = _family_for_declared_kind((parsed.declared_kind or "").casefold())
@@ -319,10 +321,6 @@ def _alternatives(parsed: Observation, bag: SignalBag, winner) -> list[dict]:
         for profile in _profiles_for_family(declared_family):
             add(profile, f"declared_kind={parsed.declared_kind} 指向 {declared_family}")
     return alternatives
-
-
-def _has_prospectus_evidence(details: str) -> bool:
-    return "招股" in details or "首次公开发行" in details or "global offering" in details.casefold()
 
 
 def _profiles_for_family(family: str) -> tuple[str, ...]:
@@ -468,16 +466,17 @@ def _confidence(
 
 
 __all__ = [
-    "INPUT_SCHEMA_VERSION",
-    "SCHEMA_VERSION",
-    "Observation",
-    "ObservationError",
-    "Signal",
-    "SignalBag",
-    "UnitRef",
-    "get_profile",
-    "list_profiles",
-    "route_document",
-    "resolve_reading_profile",
-    "select_business_facets",
+    'INPUT_SCHEMA_VERSION',
+    'SCHEMA_VERSION',
+    'Observation',
+    'ObservationError',
+    'Signal',
+    'SignalBag',
+    'UnitRef',
+    'get_profile',
+    'list_profiles',
+    'route_document',
+    'resolve_reading_profile',
+    'select_business_facets',
+    'registry',
 ]

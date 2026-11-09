@@ -166,3 +166,9 @@ def build_summary_task_plan(
             register((sid,), (sid,), (), None, "standalone", "unknown",
                      'unresolved' if current else None, 'source_use_unassessed' if current else None)
     return SummaryTaskPlan(tuple(tasks), order, max_claims)
+
+__all__ = [
+    'SourceSummaryTask',
+    'SummaryTaskPlan',
+    'build_summary_task_plan',
+]

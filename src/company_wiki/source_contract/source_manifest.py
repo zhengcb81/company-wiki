@@ -6,7 +6,7 @@ from datetime import date, datetime
 from enum import Enum
 import hashlib
 import json
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import re
 import unicodedata
 from typing import Any
@@ -25,6 +25,7 @@ _SEMVER_RE = re.compile(
 )
 _MIME_RE = re.compile(r"^[a-z0-9][a-z0-9!#$&^_.+-]*/[a-z0-9][a-z0-9!#$&^_.+-]*$")
 _SOURCE_ID_RE = re.compile(rf"^{re.escape(SOURCE_ID_PREFIX)}[0-9a-f]{{64}}$")
+_WINDOWS_DRIVE_RE = re.compile(r"^[A-Za-z]:")
 
 
 class SourceManifestError(ValueError):
@@ -58,12 +59,12 @@ def source_id_for_sha256(content_sha256: str) -> str:
     return SOURCE_ID_PREFIX + content_sha256
 
 
-def _require_text(value: Any, field_name: str) -> str:
+def _require_text(value: Any, field_name: str, *, require_nfc: bool = True) -> str:
     if not isinstance(value, str):
         raise TypeError(f"{field_name} must be text")
     if not value or value != value.strip():
         raise SourceManifestError(f"{field_name} must be non-empty trimmed text")
-    if unicodedata.normalize("NFC", value) != value:
+    if require_nfc and not unicodedata.is_normalized("NFC", value):
         raise SourceManifestError(f"{field_name} must use Unicode NFC")
     if any(ord(char) < 32 for char in value):
         raise SourceManifestError(f"{field_name} must not contain control characters")
@@ -79,16 +80,14 @@ def _require_sha256(value: Any, field_name: str) -> str:
 
 
 def _require_original_path(value: Any) -> str:
-    value = _require_text(value, "original_path")
+    value = _require_text(value, "original_path", require_nfc=False)
     if "\\" in value:
         raise SourceManifestError("original_path must use forward slashes")
-    if value.startswith("/") or re.match(r"^[A-Za-z]:", value):
+    if value.startswith("/") or _WINDOWS_DRIVE_RE.match(value):
         raise SourceManifestError("original_path must be repository-relative")
     segments = value.split("/")
     if any(segment in {"", ".", ".."} for segment in segments):
         raise SourceManifestError("original_path must not contain empty or dot segments")
-    if PurePosixPath(value).as_posix() != value:
-        raise SourceManifestError("original_path is not canonical POSIX text")
     return value
 
 
@@ -147,21 +146,86 @@ def _hash_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _resolve_source(root: Path, file_path: Path) -> tuple[Path, str]:
-    if not isinstance(root, Path) or not isinstance(file_path, Path):
-        raise TypeError("root and file_path must be pathlib.Path values")
-    root_resolved = root.resolve(strict=True)
-    if not root_resolved.is_dir():
+def _file_observation(path: Path) -> tuple[int, int, int, int, int]:
+    stat = path.stat()
+    return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
+
+
+def _stable_file_identity(
+    path: Path, *, expected_byte_size: int | None = None,
+) -> tuple[str, int]:
+    before = _file_observation(path)
+    byte_size = before[2]
+    if expected_byte_size is not None and byte_size != expected_byte_size:
+        raise SourceManifestMismatchError("source byte_size no longer matches manifest")
+    if byte_size <= 0:
+        raise SourceManifestError("source file is empty")
+    content_sha256 = _hash_file(path)
+    if before != _file_observation(path):
+        raise SourceManifestMismatchError("source changed while hashing")
+    return content_sha256, byte_size
+
+
+def _resolve_root(root: Path) -> Path:
+    if not isinstance(root, Path):
+        raise TypeError("root must be pathlib.Path")
+    resolved = root.resolve(strict=True)
+    if not resolved.is_dir():
         raise SourceManifestError("root must be an existing directory")
+    return resolved
+
+
+def _resolve_file(root: Path, file_path: Path) -> tuple[Path, str]:
     file_resolved = file_path.resolve(strict=True)
-    if not file_resolved.is_file():
-        raise SourceManifestError("file_path must identify a regular file")
     try:
-        relative = file_resolved.relative_to(root_resolved)
+        relative = file_resolved.relative_to(root)
     except ValueError as exc:
         raise SourceManifestError("file_path must remain inside root") from exc
-    original_path = unicodedata.normalize("NFC", relative.as_posix())
-    return file_resolved, _require_original_path(original_path)
+    if not file_resolved.is_file():
+        raise SourceManifestError("file_path must identify a regular file")
+    return file_resolved, _require_original_path(relative.as_posix())
+
+
+def _legacy_nfc_path(root: Path, original_path: str) -> Path:
+    """Recover a uniquely spelled old v1 location without leaving the root."""
+    parent = root
+    for segment in original_path.split("/"):
+        matches = (
+            entry for entry in parent.iterdir()
+            if unicodedata.normalize("NFC", entry.name) == segment
+        )
+        match = next(matches, None)
+        if match is None:
+            raise SourceManifestMismatchError("legacy NFC source location was not found")
+        if next(matches, None) is not None:
+            raise SourceManifestMismatchError("legacy NFC source location is ambiguous")
+        current = match.resolve(strict=True)
+        if not current.is_relative_to(root):
+            raise SourceManifestMismatchError("file_path must remain inside root")
+        if (current.parent.as_posix() != parent.as_posix()
+                or unicodedata.normalize("NFC", current.name) != segment):
+            raise SourceManifestMismatchError("source location no longer matches manifest")
+        parent = current
+    return parent
+
+
+def _manifest_file(root: Path, original_path: str) -> Path:
+    try:
+        resolved, observed = _resolve_file(root, root / original_path)
+    except FileNotFoundError:
+        if not unicodedata.is_normalized("NFC", original_path):
+            raise
+    else:
+        if observed == original_path:
+            return resolved
+        if unicodedata.normalize("NFC", observed) != original_path:
+            raise SourceManifestMismatchError("source location no longer matches manifest")
+    # Some filesystems resolve canonically equivalent names implicitly. Confirm
+    # that the physical spelling is unique before using that compatibility path.
+    resolved, observed = _resolve_file(root, _legacy_nfc_path(root, original_path))
+    if unicodedata.normalize("NFC", observed) != original_path:
+        raise SourceManifestMismatchError("source location no longer matches manifest")
+    return resolved
 
 
 @dataclass(frozen=True)
@@ -234,17 +298,10 @@ class SourceManifest:
         collector_version: str,
         mime_type: str,
     ) -> "SourceManifest":
-        resolved, original_path = _resolve_source(root, file_path)
-        before = resolved.stat()
-        if before.st_size <= 0:
-            raise SourceManifestError("source file is empty")
-        content_sha256 = _hash_file(resolved)
-        after = resolved.stat()
-        if (
-            before.st_size != after.st_size
-            or before.st_mtime_ns != after.st_mtime_ns
-        ):
-            raise SourceManifestMismatchError("source changed while hashing")
+        if not isinstance(file_path, Path):
+            raise TypeError("file_path must be pathlib.Path")
+        resolved, original_path = _resolve_file(_resolve_root(root), file_path)
+        content_sha256, byte_size = _stable_file_identity(resolved)
         return cls(
             schema_version=SOURCE_MANIFEST_SCHEMA_VERSION,
             source_id=source_id_for_sha256(content_sha256),
@@ -257,7 +314,7 @@ class SourceManifest:
             collector_name=collector_name,
             collector_version=collector_version,
             mime_type=mime_type,
-            byte_size=after.st_size,
+            byte_size=byte_size,
             immutable_status=ImmutableStatus.VERIFIED,
         )
 
@@ -273,19 +330,7 @@ class SourceManifest:
         missing = known - supplied
         if missing:
             raise SourceManifestError(f"source manifest missing fields: {sorted(missing)}")
-        prepared = dict(data)
-        try:
-            prepared["source_type"] = SourceType(prepared["source_type"])
-        except (TypeError, ValueError) as exc:
-            raise SourceManifestError("source_type is not an upstream source type") from exc
-        try:
-            prepared["immutable_status"] = ImmutableStatus(
-                prepared["immutable_status"]
-            )
-        except (TypeError, ValueError) as exc:
-            raise SourceManifestError("immutable_status is invalid") from exc
-        prepared["entity_ids"] = _normalize_entity_ids(prepared["entity_ids"])
-        return cls(**prepared)
+        return cls(**dict(data))
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -313,17 +358,33 @@ class SourceManifest:
             allow_nan=False,
         )
 
-    def verify_file(self, *, root: Path, file_path: Path) -> None:
+    def verify_file(self, *, root: Path, file_path: Path | None = None) -> None:
+        """Check the pinned locator and bytes, optionally matching a caller's file."""
+        if file_path is not None and not isinstance(file_path, Path):
+            raise TypeError("file_path must be pathlib.Path")
         try:
-            resolved, original_path = _resolve_source(root, file_path)
-        except (FileNotFoundError, SourceManifestError) as exc:
+            root_resolved = _resolve_root(root)
+            requested = root_resolved / self.original_path
+            if file_path is None or file_path.absolute().as_posix() == requested.as_posix():
+                resolved = _manifest_file(root_resolved, self.original_path)
+            else:
+                resolved, observed = _resolve_file(root_resolved, file_path)
+                if observed != self.original_path and (
+                    unicodedata.normalize("NFC", observed) != self.original_path
+                    or _manifest_file(root_resolved, self.original_path).as_posix() != resolved.as_posix()
+                ):
+                    raise SourceManifestMismatchError("source location no longer matches manifest")
+        except SourceManifestMismatchError:
+            raise
+        except (FileNotFoundError, NotADirectoryError, SourceManifestError) as exc:
             raise SourceManifestMismatchError(str(exc)) from exc
-        if original_path != self.original_path:
-            raise SourceManifestMismatchError("source location no longer matches manifest")
-        stat = resolved.stat()
-        if stat.st_size != self.byte_size:
-            raise SourceManifestMismatchError("source byte_size no longer matches manifest")
-        if _hash_file(resolved) != self.content_sha256:
+        try:
+            content_sha256, _ = _stable_file_identity(
+                resolved, expected_byte_size=self.byte_size,
+            )
+        except FileNotFoundError as exc:
+            raise SourceManifestMismatchError("source disappeared while hashing") from exc
+        if content_sha256 != self.content_sha256:
             raise SourceManifestMismatchError("source SHA-256 no longer matches manifest")
 
 
@@ -474,3 +535,12 @@ class SourceSubjectManifest:
             separators=(",", ":"),
             allow_nan=False,
         )
+
+__all__ = [
+    'ImmutableStatus',
+    'SOURCE_ID_PREFIX',
+    'SOURCE_MANIFEST_SCHEMA_VERSION',
+    'SourceManifest',
+    'SourceManifestMismatchError',
+    'source_id_for_sha256',
+]

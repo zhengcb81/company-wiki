@@ -54,6 +54,14 @@ class NarrativeUnit:
     def text_sha256(self) -> str:
         return hashlib.sha256(self.raw_text.encode("utf-8")).hexdigest()
 
+    def evidence_metadata(self) -> dict[str, Any]:
+        """Project the source metadata that survives evidence serialization."""
+        structured = dict(self.metadata)
+        # Native layout varies with the backend and is only used while reading.
+        structured.pop("reading_layout", None)
+        structured.pop("native_source_view", None)
+        return structured
+
     def to_evidence_span(
         self,
         *,
@@ -61,11 +69,7 @@ class NarrativeUnit:
         selection_reasons: Sequence[str],
         selection_group_id: str | None = None,
     ) -> EvidenceSpan:
-        structured = dict(self.metadata)
-        # Rich native layout is transient reading input, not durable evidence.
-        # Keeping it out also preserves existing span identities when boxes vary.
-        structured.pop("reading_layout", None)
-        structured.pop("native_source_view", None)
+        structured = self.evidence_metadata()
         structured.update(
             {
                 "language": self.language,
@@ -195,7 +199,7 @@ def _group_spans(
     return grouped
 
 
-def _span_order(span: EvidenceSpan) -> tuple[int, int, int, int, int]:
+def _span_order(span: EvidenceSpan) -> tuple[int, ...]:
     coordinates = span.coordinates
     return (
         _zero(coordinates.page_number),
@@ -203,6 +207,8 @@ def _span_order(span: EvidenceSpan) -> tuple[int, int, int, int, int]:
         _zero(coordinates.table_index),
         _zero(coordinates.row_index),
         _zero(coordinates.column_index),
+        _zero(coordinates.char_start),
+        _zero(coordinates.char_end),
     )
 
 

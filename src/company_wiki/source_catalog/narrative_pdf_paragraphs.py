@@ -9,13 +9,13 @@ from collections.abc import Sequence
 from dataclasses import dataclass, replace
 from hashlib import sha256
 import math
-from pathlib import Path
 import re
 import unicodedata
 from typing import Any
 
 from company_wiki.resource_budget import WorkBudget
-from company_wiki.document_normalization import table_shapes
+from company_wiki.document_model import table_shapes
+from company_wiki.document_model.reading_identity import table_shapes_sha256
 from .narrative_document import DocumentStructure, NarrativeUnit
 
 PARAGRAPH_ALIGNMENT_VERSION = "pdf-paragraph-membership/1"
@@ -53,9 +53,7 @@ class ParagraphAlignment:
 
 def paragraph_triage_dependencies() -> dict[str, str]:
     """Bind the shared shape implementation actually consumed by this owner."""
-    return {"company_wiki.document_normalization.table_shapes": sha256(
-        Path(table_shapes.__file__).read_bytes().replace(b"\r\n", b"\n")
-    ).hexdigest()}
+    return {"company_wiki.document_normalization.table_shapes": table_shapes_sha256()}
 
 
 @dataclass(frozen=True)

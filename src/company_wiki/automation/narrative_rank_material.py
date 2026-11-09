@@ -46,3 +46,6 @@ def ranking_strategy():
     return {"schema_version": RANK_STRATEGY_SCHEMA,
             "operation": "advisory_ranking_only",
             "source_policy": "retained in reading_hints; operational coverage stays in the program"}
+
+
+__all__ = ["RANK_MATERIAL_SCHEMA", "RANK_STRATEGY_SCHEMA", "ranking_material", "ranking_strategy"]

@@ -1,4 +1,4 @@
-"""Reviewed source/identity changes from historical TXT v1 to current v2."""
+"""Reviewed source/identity changes across synthetic TXT transport snapshots."""
 from copy import deepcopy
 
 from company_wiki.automation.narrative_contracts import NarrativeBundle
@@ -42,6 +42,50 @@ def assert_reviewed_transcript_evolution(old, current):
     assert "core_business" in detect_business_fact(span.raw_text).topics
     # The new tag classifies the exact same launched-product/expanded-capacity
     # sentence. It neither adds an operating claim nor supplies a new number.
+    _assert_transcript_replays(old, current, prior["raw_text"])
+
+
+def assert_reviewed_transcript_evolution_v2_to_v3(old, current):
+    """Allow only the reviewed parser and operating-tag update from v2 to v3."""
+    assert len(old["evidence_spans"]) == len(current["evidence_spans"]) == 1
+    prior = old["evidence_spans"][0]
+    assert old["versions"]["parser"] == "0.3.1"
+    assert old["versions"]["selector"] == "0.8.0"
+    assert old["versions"]["prompt"] == "1.7.0"
+    assert prior["parser_version"] == "0.3.1"
+    assert prior["structured_value"]["topics"] == [
+        "new_business", "overseas", "capacity_projects", "products_rd", "core_business",
+    ]
+    assert prior["structured_value"]["selection_reasons"] == [
+        "business_narrative_signal", "specific_business_event",
+        "progress_or_change_language", "management_statement",
+    ]
+
+    expected = deepcopy(old)
+    structured = deepcopy(prior["structured_value"])
+    structured["topics"] = [
+        *structured["topics"], "operating_mechanism", "business_progress",
+    ]
+    structured["selection_reasons"] = [
+        "business_narrative_signal", "specific_business_event", "operating_mechanism",
+        "operating_activity", "progress_or_change_language", "management_statement",
+    ]
+    span = EvidenceSpan.create(
+        source_id=prior["source_id"], coordinates=EvidenceCoordinates.from_dict(prior["coordinates"]),
+        raw_text=prior["raw_text"], structured_value=structured,
+        parser_name=prior["parser_name"], parser_version="0.4.0",
+        parse_status=prior["parse_status"], quality_flags=prior["quality_flags"],
+    )
+    expected["evidence_spans"] = [span.to_dict()]
+    expected["versions"]["parser"] = "0.4.0"
+    expected["summary"]["draft"]["claims"][0]["evidence_ids"] = [span.span_id]
+    expected["transcript_byte_bindings"][0]["evidence_id"] = span.span_id
+    assert current == expected, "unreviewed source, fact, unit, citation, or metadata change"
+    assert span.span_id != prior["span_id"]
+    _assert_transcript_replays(old, current, prior["raw_text"])
+
+
+def _assert_transcript_replays(old, current, raw_text):
     for value in (old, current):
         bundle = NarrativeBundle.from_dict(value)
         verified, failed = verify_transcript_evidence_spans(
@@ -50,8 +94,8 @@ def assert_reviewed_transcript_evolution(old, current):
         )
         assert not failed and verified == (bundle.evidence_spans[0].span_id,)
         claim = value["summary"]["draft"]["claims"][0]
-        assert claim["text"] == prior["raw_text"]
+        assert claim["text"] == raw_text
         assert claim["evidence_ids"] == [bundle.evidence_spans[0].span_id]
         binding = value["transcript_byte_bindings"][0]
         bound = b"".join(TXT[item["start"]:item["end"]] for item in binding["source_byte_ranges"])
-        assert prior["raw_text"].encode("utf-8") in bound
+        assert raw_text.encode("utf-8") in bound

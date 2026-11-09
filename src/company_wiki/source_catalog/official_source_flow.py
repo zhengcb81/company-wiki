@@ -18,7 +18,7 @@ from typing import Any
 
 from .assertion_service import SOURCE_FACT_FIELDS
 from .canonical_writer import CanonicalSourceWriter, CanonicalImportError
-from .acquisition_journal import AcquisitionJournal
+from .acquisition_journal import AcquisitionJournal, record_acquisition_observation
 from .lock import _acquisition_mutex
 from .store import canonical_json
 from .document_kinds import SOURCE_FACT_KINDS
@@ -470,8 +470,7 @@ def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=Fals
         outcome = (("downloaded_new" if captured_http else "imported_original")
                    if result.status.value == "imported_new" else
                    ("deduplicated_after_download" if captured_http else "deduplicated_original"))
-        attempt = _journal(catalog, state, outcome=outcome, canonical_path=result.canonical_path)
-        _persist_completed(catalog, state, out, journal_attempt_id=attempt.attempt_id)
+        _persist_completed(catalog, state, out, outcome=outcome, canonical_path=result.canonical_path)
         # A durable result must survive a lost response before raw cleanup.
         writer._remove_staged(staged)
         descriptor.unlink()
@@ -562,16 +561,20 @@ def _load_retained(catalog, capture_id, *, require_original=True):
     return staged, descriptor, state
 
 
-def _persist_completed(catalog, state, out, *, journal_attempt_id):
-    """Bounded capture-output projection, linked to the existing success journal.
+def _persist_completed(catalog, state, out, *, outcome, canonical_path):
+    """Durable capture-output projection with an optional journal observation.
 
     No body, paths, queue or permission is copied here. Persistence occurs
     before deleting recoverable raw; a failed result write retains the input.
     Same-ID recovery uses the existing OS file mutex around result lookup/import.
     """
+    attempt = record_acquisition_observation(
+        lambda: _journal(catalog, state, outcome=outcome, canonical_path=canonical_path),
+        request_id=state["request"]["request_id"],
+    )
     root = _staging_root(catalog)
     record = {"schema_version": "official-source-completed-capture/1",
-              "capture_id": state["capture_id"], "journal_attempt_id": journal_attempt_id,
+              "capture_id": state["capture_id"], "journal_attempt_id": attempt.attempt_id if attempt else None,
               "source_ref": out["source_ref"], "status": out["status"],
               "max_bytes": state["request"]["max_bytes"],
               "capture_receipt": out["capture_receipt"]}
@@ -612,8 +615,6 @@ def _replay_completed(catalog, capture_id, *, max_bytes=None):
                 or record.get("capture_id") != capture_id
                 or not isinstance(record.get("status"), str)
                 or record["status"] not in {"imported_new", "deduplicated"}
-                or not isinstance(record.get("journal_attempt_id"), str)
-                or not re.fullmatch(r"urn:company-wiki:acquisition-attempt:sha256:[0-9a-f]{64}", record["journal_attempt_id"])
                 or not isinstance(value, dict)
                 or set(value) != {"schema_version", "document_id", "source_id", "content_sha256", "byte_size", "mime_type"}):
             raise OfficialSourceError("invalid_completed_capture")
@@ -922,25 +923,3 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
     out["download_events"] = 1
     out["acquisition_usage"] = http_capture["acquisition_usage"]
     return out
-
-
-def prepare_official_narrative_request(imports, *, batch_template):
-    """Compose a new raw-source request; AUTO still owns validation and runs.
-
-    A membership-free template explicitly selecting the shared engine gets the
-    existing quote-primary recipe unless the caller specifies a projection.
-    Complete serialized requests (sources/items present) preserve their prior
-    intent, including an omitted projection. Resume parses saved requests via
-    NarrativeBatchRequest directly; it must not reconstruct them as templates.
-    """
-    from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
-
-    value = dict(batch_template)
-    if (value.get("selector_version") == "0.9.0"
-            and "reading_model_projection" not in value
-            and not {"sources", "items"}.intersection(value)):
-        from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
-
-        value["reading_model_projection"] = EXTRACTIVE_MODEL_PROJECTION_VERSION
-    value["sources"] = [item["source_ref"] for item in imports]
-    return NarrativeBatchRequest.from_dict(value)

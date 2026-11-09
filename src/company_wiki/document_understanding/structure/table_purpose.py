@@ -13,7 +13,7 @@ import re
 from typing import Any, Literal
 from bisect import bisect_left
 
-from company_wiki.document_normalization.text_matching import matching_reading_text
+from company_wiki.document_model.text_matching import matching_reading_text
 
 from ..profiles.registry import configured_table_signal
 
@@ -402,5 +402,12 @@ def qualify_package_table(package: Mapping, units: Mapping) -> TablePurpose:
         caption_texts=[unit['text'] for unit in context if unit['kind'] == 'table_caption'])
 
 
-__all__ = ["FEATURE_VERSION", "TablePurpose", "operating_header", "qualify_table",
-           "qualify_native_rows", "qualify_package_table"]
+__all__ = [
+    'FEATURE_VERSION',
+    'TablePurpose',
+    'operating_header',
+    'qualify_table',
+    'qualify_native_rows',
+    'qualify_package_table',
+    'accounting_field',
+]

@@ -298,11 +298,36 @@ def test_v3_causal_identity_and_actual_http_body_keep_caps_without_legacy_namesp
 
 def test_actual_causal_descriptor_binds_both_decoder_and_unit_compiler_bytes():
     from company_wiki.automation import narrative_model_citations as citations
+    from company_wiki.source_catalog import narrative_summary_assessment as assessment
+    from company_wiki.document_understanding import assertion_frames
     def actual_lf_sha(module):
         data = Path(module.__file__).read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
         return sha256(data).hexdigest()
-    expected = sha256(canonical_json({"decoder": actual_lf_sha(model), "citations": actual_lf_sha(citations)}).encode()).hexdigest()
+    expected = sha256(canonical_json({
+        "decoder": actual_lf_sha(model),
+        "assessment": actual_lf_sha(assessment),
+        "assertion_frames": actual_lf_sha(assertion_frames),
+        "citations": actual_lf_sha(citations),
+    }).encode()).hexdigest()
     assert model.reading_model_boundary_identity(V3)["decoder_sha256"] == expected
+
+
+def test_legacy_decoder_identity_follows_the_actual_assertion_frame_install(tmp_path, monkeypatch):
+    from company_wiki.document_understanding import assertion_frames
+
+    before = model.reading_model_boundary_identity(V3)
+    relocated = tmp_path / "deployed_assertion_frames.py"
+    source = Path(assertion_frames.__file__).read_bytes().replace(b"\r\n", b"\n")
+    relocated.write_bytes(source.replace(b"\n", b"\r\n"))
+    monkeypatch.setattr(assertion_frames, "__file__", str(relocated))
+    assert model.reading_model_boundary_identity(V3) == before
+
+    relocated.write_bytes(source + b"\n# changed deployed grammar\n")
+    after = model.reading_model_boundary_identity(V3)
+    assert after["decoder_sha256"] != before["decoder_sha256"]
+    assert {k: v for k, v in after.items() if k != "decoder_sha256"} == {
+        k: v for k, v in before.items() if k != "decoder_sha256"
+    }
 
 
 def test_all_claims_use_one_immutable_unit_compilation(monkeypatch):

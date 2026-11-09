@@ -113,6 +113,130 @@ def test_image_body_is_explicit_optional_and_deduplicated_with_separate_location
     assert not doc.structure.coverage_complete
 
 
+@pytest.mark.parametrize("folder", ["media", "appendix"])
+def test_ocr_follows_relationship_and_content_type_after_picture_part_rename(folder):
+    original = build_pptx(with_picture_only_slide=True, with_duplicate_picture=True)
+    old_part = "ppt/media/image1.png"
+    new_part = f"ppt/{folder}/operations-appendix.part"
+    rewritten = io.BytesIO()
+    with zipfile.ZipFile(io.BytesIO(original)) as source, zipfile.ZipFile(rewritten, "w") as target:
+        for name in source.namelist():
+            payload = source.read(name)
+            if name.endswith(".rels"):
+                payload = payload.replace(b"media/image1.png", new_part.removeprefix("ppt/").encode())
+            elif name == "[Content_Types].xml":
+                root = ET.fromstring(payload)
+                ET.SubElement(root, root.tag.replace("}Types", "}Override"), {
+                    "PartName": "/" + new_part, "ContentType": "image/png",
+                })
+                payload = ET.tostring(root)
+            target.writestr(new_part if name == old_part else name, payload)
+
+    control = normalize(original, ocr=FakeOCR())
+    original_line = next(unit for unit in control.units if unit.unit_kind == "pptx_image_ocr_line")
+    data = rewritten.getvalue()
+    adapter = FakeOCR()
+    media_size = control.opaque_assets[0].byte_size
+    parsed = normalize(data, ocr=adapter, limits=dn.NormalizationLimits(max_media_bytes=media_size))
+    assert adapter.calls == 1
+    asset = next(asset for asset in parsed.opaque_assets if asset.asset_kind == "image")
+    line = next(unit for unit in parsed.units if unit.unit_kind == "pptx_image_ocr_line")
+    assert asset.mime_type == "image/png" and asset.original_bytes is not None
+    assert asset.media_sha256 == sha256_hex(asset.original_bytes) == original_line.metadata["media_sha256"]
+    assert line.coordinates == original_line.coordinates
+    assert line.metadata["source_locator"] == original_line.metadata["source_locator"]
+    assert line.unit_id != original_line.unit_id  # The original package changed.
+    replayer = FakeOCR()
+    assert dn.replay_unit(
+        data, source_sha256=sha256_hex(data), unit=line,
+        limits=dn.NormalizationLimits(), ocr=replayer, ocr_limits=dn.OCRLimits(max_images=1),
+    ) == original_line.raw_text
+    assert replayer.calls == 1
+
+    native = next(unit for unit in parsed.units if unit.unit_kind == "pptx_paragraph")
+    native_only = FakeOCR()
+    assert dn.replay_unit(
+        data, source_sha256=sha256_hex(data), unit=native,
+        limits=dn.NormalizationLimits(), ocr=native_only,
+    ) == native.raw_text
+    assert native_only.calls == 0
+    with pytest.raises(dn.NormalizationLimitError, match="max_media_bytes"):
+        normalize(data, ocr=FakeOCR(), limits=dn.NormalizationLimits(max_media_bytes=media_size - 1))
+
+
+@pytest.mark.parametrize("visibility", ["hidden", "transparent", "zero_width"])
+def test_nonrendered_picture_is_not_an_unread_slide_material(visibility):
+    from pptx import Presentation
+    from pptx.oxml.xmlchemy import OxmlElement
+    from pptx.util import Inches
+    from conftest import tiny_png
+    from company_wiki.document_normalization.ocr_composition import enrich_pptx
+
+    presentation = Presentation()
+    slide = presentation.slides.add_slide(presentation.slide_layouts[6])
+    slide.shapes.add_textbox(Inches(1), Inches(1), Inches(4), Inches(1)).text = "Operations"
+    picture = slide.shapes.add_picture(io.BytesIO(tiny_png()), Inches(1), Inches(2))
+    if visibility == "hidden":
+        picture._element.nvPicPr.cNvPr.set("hidden", "true")
+    elif visibility == "transparent":
+        opacity = OxmlElement("a:alphaModFix")
+        opacity.set("amt", "0")
+        picture._element.blipFill.blip.append(opacity)
+    else:
+        picture.width = 0
+    output = io.BytesIO()
+    presentation.save(output)
+    data = output.getvalue()
+    pure = normalize(data)
+    adapter = FakeOCR()
+    current = normalize(data, ocr=adapter)
+    assert current.structure.coverage_complete
+    assert current.structure.opaque_pages == ()
+    assert current.structure.native_text_coverage["page_statuses"] == ("observed",)
+    assert current.metadata["ocr"]["unattempted_image_pages"] == []
+    assert adapter.calls == 0
+    assert not pure.opaque_assets[0].rendered
+
+    # Older OCR treated all picture bytes as renderable. Existing explicitly
+    # selected evidence still has the same exact source, shape and text.
+    previous_input = replace(
+        pure, opaque_assets=(replace(pure.opaque_assets[0], rendered=True),),
+    )
+    historical = enrich_pptx(previous_input, ocr=FakeOCR(), limits=dn.NormalizationLimits())
+    selected = next(unit for unit in historical.units if unit.unit_kind == "pptx_image_ocr_line")
+    assert dn.replay_unit(
+        data, source_sha256=sha256_hex(data), unit=selected,
+        limits=dn.NormalizationLimits(), ocr=FakeOCR(),
+    ) == selected.raw_text
+
+
+def test_selective_ocr_keeps_an_unattempted_occurrence_visible_on_an_attempted_page():
+    from pptx import Presentation
+    from pptx.util import Inches
+    from conftest import tiny_png
+    from company_wiki.document_normalization.ocr_composition import enrich_pptx
+
+    presentation = Presentation()
+    slide = presentation.slides.add_slide(presentation.slide_layouts[6])
+    slide.shapes.add_textbox(Inches(1), Inches(1), Inches(4), Inches(1)).text = "Operations"
+    for top in (2, 4):
+        slide.shapes.add_picture(io.BytesIO(tiny_png()), Inches(1), Inches(top))
+    output = io.BytesIO()
+    presentation.save(output)
+    pure = normalize(output.getvalue())
+    first = pure.opaque_assets[0]
+    adapter = FakeOCR()
+    selected = enrich_pptx(
+        pure, ocr=adapter, limits=dn.NormalizationLimits(),
+        selected_images=frozenset({(first.slide_number, first.shape_path, first.media_sha256)}),
+    )
+    assert adapter.calls == 1
+    assert selected.metadata["ocr"]["attempted_pages"] == [1]
+    assert selected.metadata["ocr"]["unattempted_image_pages"] == [1]
+    assert selected.structure.native_text_coverage["page_statuses"] == ("observed",)
+    assert not selected.structure.coverage_complete
+
+
 def test_legacy_pptx_replays_old_id_while_html_identity_is_unchanged():
     data = ordered_deck()
     legacy = normalize(data, parser_version="1.0.0")

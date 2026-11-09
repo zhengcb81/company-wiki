@@ -58,9 +58,9 @@ def test_source_disclosed_foreign_actor_is_preserved_without_issuer_or_consolida
 
 
 def test_real_decision_inventory_reads_current_business_policy_version(monkeypatch):
-    from company_wiki.document_understanding.decision_inventory import _versions
+    from company_wiki.source_catalog.narrative_decision_inventory import decision_versions
     from company_wiki.source_catalog import narrative_business_policy
 
-    assert _versions()["business_policy"] == narrative_business_policy.READING_BUSINESS_POLICY_VERSION
+    assert decision_versions()["business_policy"] == narrative_business_policy.READING_BUSINESS_POLICY_VERSION
     monkeypatch.setattr(narrative_business_policy, "READING_BUSINESS_POLICY_VERSION", "reading-business-policy/test-next")
-    assert _versions()["business_policy"] == "reading-business-policy/test-next"
+    assert decision_versions()["business_policy"] == "reading-business-policy/test-next"

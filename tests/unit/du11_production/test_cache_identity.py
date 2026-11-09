@@ -1,18 +1,18 @@
 """Current algorithms and actual source pre-reading policy remain causal."""
 from copy import deepcopy
 
-from company_wiki.document_understanding import decision_inventory as inventory
+from company_wiki.source_catalog import narrative_decision_inventory as inventory
 from company_wiki.document_understanding.geometry_intent import reading
 from company_wiki.source_catalog.narrative_document import DocumentStructure
 from company_wiki.source_catalog.narrative_reading import _native_layout_summary
 
 
 def test_current_bridge_version_invalidates_pdf_but_not_other_carriers(monkeypatch):
-    before_pdf = inventory._versions(pdf_frontend=True, mime_type='application/pdf')
-    before_html = inventory._versions(pdf_frontend=False, mime_type='text/html')
+    before_pdf = inventory.decision_versions(pdf_frontend=True, mime_type='application/pdf')
+    before_html = inventory.decision_versions(pdf_frontend=False, mime_type='text/html')
     monkeypatch.setattr(reading, 'BRIDGE_VERSION', 'pdf-geometry-reading/test-changed')
-    assert inventory._versions(pdf_frontend=True, mime_type='application/pdf') != before_pdf
-    assert inventory._versions(pdf_frontend=False, mime_type='text/html') == before_html
+    assert inventory.decision_versions(pdf_frontend=True, mime_type='application/pdf') != before_pdf
+    assert inventory.decision_versions(pdf_frontend=False, mime_type='text/html') == before_html
 
 
 def test_source_planning_is_bounded_and_survives_real_summary_projection():

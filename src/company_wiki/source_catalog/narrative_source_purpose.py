@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING
 
-from company_wiki.document_normalization.text_matching import matching_reading_text
+from company_wiki.document_model.text_matching import matching_reading_text
 from company_wiki.document_understanding.operating_states.assertion_roles import (
     SourceAssertionRoles, prepare_source_assertions, SOURCE_DESCRIPTION_SCAN_PASSES,
     descriptive_operating_relation as descriptive_operating_relation,

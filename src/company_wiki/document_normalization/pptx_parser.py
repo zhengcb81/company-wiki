@@ -27,6 +27,7 @@ from typing import Any
 
 from company_wiki.source_contract.evidence_span import EvidenceCoordinates
 
+from ._source_input import _NormalizationSource
 from .assets import (
     GAP_BROKEN_PART,
     GAP_CHART_NOT_RENDERABLE,
@@ -65,7 +66,6 @@ _OOXML_CONTENT_TYPES = (
 )
 _PPTX_MAGIC = b"PK\x03\x04"
 _MEDIA_RE = re.compile(r"^ppt/media/(.+)$")
-_IMAGE_PART_RE = re.compile(r"^ppt/media/(image\d+)\.(.+)$", re.IGNORECASE)
 _EMBED_ATTRS = (
     "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}embed",
     "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}link",
@@ -81,7 +81,7 @@ def _sha256_hex(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def _mime_for_image_part(name: str) -> str:
+def _unattached_media_mime_hint(name: str) -> str:
     extension = posixpath.splitext(name)[1].lstrip(".").lower()
     return {
         "png": "image/png",
@@ -99,68 +99,68 @@ def _mime_for_image_part(name: str) -> str:
 
 
 class _ZipPreflight:
-    """Bounded, order-independent ZIP inventory computed before parsing."""
+    """Bound expansion before parsing and read exact member bytes on demand."""
 
-    def __init__(self, data: bytes, limits: NormalizationLimits) -> None:
-        if not isinstance(data, bytes):
-            raise TypeError("PPTX data must be bytes")
-        if not data.startswith(_PPTX_MAGIC):
-            raise UnsupportedFormatError("bytes are not an OOXML ZIP package")
-        if len(data) > limits.max_source_bytes:
-            raise NormalizationLimitError(
-                "max_source_bytes", limits.max_source_bytes, f"got {len(data)}"
-            )
-        self.member_count = 0
+    def __init__(self, archive: zipfile.ZipFile, limits: NormalizationLimits) -> None:
+        self._archive = archive
+        self._limits = limits
+        infos = archive.infolist()
+        self.member_count = len(infos)
         self.uncompressed_total = 0
-        self.parts: dict[str, tuple[int, bytes]] = {}
+        self.parts: dict[str, zipfile.ZipInfo] = {}
+        self._payloads: dict[str, bytes] = {}
+        self._media_members: set[str] = set()
+        self._media_bytes = 0
         self.traversal_names: list[str] = []
-        with zipfile.ZipFile(io.BytesIO(data)) as package:
-            infos = package.infolist()
-            self.member_count = len(infos)
-            if self.member_count > MAX_ZIP_MEMBERS:
+        if self.member_count > MAX_ZIP_MEMBERS:
+            raise NormalizationLimitError(
+                "max_zip_members", MAX_ZIP_MEMBERS, f"{self.member_count}"
+            )
+        for info in infos:
+            limits.check_deadline("zip_preflight")
+            name = info.filename
+            normalized = posixpath.normpath(name.replace("\\", "/"))
+            if normalized.startswith("..") or normalized.startswith("/"):
+                self.traversal_names.append(name)
+                continue
+            if info.is_dir():
+                continue
+            if normalized in self.parts:
+                raise UnsupportedFormatError(f"duplicate PPTX archive member {normalized!r}")
+            declared = info.file_size
+            self.uncompressed_total += declared
+            if self.uncompressed_total > limits.max_total_uncompressed_bytes:
                 raise NormalizationLimitError(
-                    "max_zip_members", MAX_ZIP_MEMBERS, f"{self.member_count}"
+                    "max_total_uncompressed_bytes",
+                    limits.max_total_uncompressed_bytes,
+                    f"declared sizes at {name}",
                 )
-            media_total = 0
-            for info in infos:
-                limits.check_deadline("zip_preflight")
-                name = info.filename
-                normalized = posixpath.normpath(name.replace("\\", "/"))
-                if normalized.startswith("..") or normalized.startswith("/"):
-                    self.traversal_names.append(name)
-                    continue
-                if info.is_dir():
-                    continue
-                declared = info.file_size
-                self.uncompressed_total += declared
-                if self.uncompressed_total > limits.max_total_uncompressed_bytes:
-                    raise NormalizationLimitError(
-                        "max_total_uncompressed_bytes",
-                        limits.max_total_uncompressed_bytes,
-                        f"declared sizes at {name}",
-                    )
-                is_media = bool(_MEDIA_RE.match(normalized))
-                if is_media:
-                    media_total += declared
-                    if media_total > limits.max_media_bytes:
-                        raise NormalizationLimitError(
-                            "max_media_bytes", limits.max_media_bytes, name
-                        )
-                if declared > 64 * 1024 * 1024 or "ppt/" not in normalized:
-                    # Store a few large or non-ppt parts lazily via a second
-                    # read below; the archive itself is already in memory.
-                    pass
-                with package.open(info, "r") as stream:
-                    payload = stream.read(declared + 1 if declared else 1)
-                if len(payload) != declared:  # pragma: no cover - zip invariant
-                    self.traversal_names.append(name)
-                    continue
-                self.parts[normalized] = (declared, payload)
+            if _MEDIA_RE.match(normalized):
+                self._count_media(normalized, info)
+            self.parts[normalized] = info
 
-    def read_part(self, name: str) -> bytes | None:
+    def _count_media(self, name: str, info: zipfile.ZipInfo) -> None:
+        if name not in self._media_members:
+            total = self._media_bytes + info.file_size
+            self._limits.require_within("max_media_bytes", total)
+            self._media_members.add(name)
+            self._media_bytes = total
+
+    def read_part(self, name: str, *, image: bool = False) -> bytes | None:
         normalized = posixpath.normpath(name.replace("\\", "/")).lstrip("/")
-        entry = self.parts.get(normalized)
-        return None if entry is None else entry[1]
+        info = self.parts.get(normalized)
+        if info is None:
+            return None
+        if image:
+            self._count_media(normalized, info)
+        if normalized not in self._payloads:
+            self._limits.check_deadline("zip_part")
+            with self._archive.open(info) as stream:
+                payload = stream.read(info.file_size + 1)
+            if len(payload) != info.file_size:
+                raise UnsupportedFormatError("PPTX archive member size does not match its directory")
+            self._payloads[normalized] = payload
+        return self._payloads[normalized]
 
 
 class _PptxState:
@@ -186,7 +186,7 @@ class _PptxState:
         self.assets: list[OpaqueAsset] = []
         self.errors: list[str] = []
         self.pages_read = 0
-        self.opaque_pages: list[int] = []
+        self.native_text_statuses: list[str] = []
         self.text_bytes = 0
         self.media_index: dict[str, tuple[str, int]] = {}
         # Media parts present in ppt/media/ but never referenced by any
@@ -275,35 +275,40 @@ def _iter_embedded_rIds(element: Any) -> list[str]:
     return found
 
 
-def _resolve_media_by_rIds(
+def _register_shape_media(
     slide_part: Any,
     r_ids: list[str],
     state: _PptxState,
     slide_number: int,
     shape_path: tuple[int, ...],
-) -> list[tuple[str, str, int]]:
-    """Resolve r:Ids to (part_name, sha256, size); verify actual bytes.
+    *,
+    rendered: bool,
+) -> None:
+    """Resolve package relations to typed assets bound to their actual bytes.
 
     External links and missing targets become named gap assets; they are
     never silently dropped or fetched.
     """
-    resolved: list[tuple[str, str, int]] = []
+    from pptx.opc.constants import RELATIONSHIP_TYPE
+
     rels = getattr(slide_part, "rels", None)
     preflight: _ZipPreflight | None = getattr(state, "preflight", None)
     where = f"slide{slide_number}:{_shape_path_string(shape_path)}"
     for r_id in r_ids:
         if rels is None:
-            state.errors.append(f"{where}:no_rels:{r_id}")
+            if rendered:
+                state.errors.append(f"{where}:no_rels:{r_id}")
             _register_media_asset(
-                state, slide_number, shape_path, r_id, "", 0, None, missing=True
+                state, slide_number, shape_path, r_id, "", 0, None, missing=True, rendered=rendered,
             )
             continue
         try:
             rel = rels[r_id]
         except KeyError:
-            state.errors.append(f"{where}:missing_rel:{r_id}")
+            if rendered:
+                state.errors.append(f"{where}:missing_rel:{r_id}")
             _register_media_asset(
-                state, slide_number, shape_path, r_id, "", 0, None, missing=True
+                state, slide_number, shape_path, r_id, "", 0, None, missing=True, rendered=rendered,
             )
             continue
         target = None
@@ -313,7 +318,7 @@ def _resolve_media_by_rIds(
             is_external = True
         if not is_external:
             try:
-                target = rel.target_partname
+                target = rel.target_part
             except Exception:
                 target = None
         try:
@@ -321,7 +326,8 @@ def _resolve_media_by_rIds(
         except Exception:
             target_ref = None
         if is_external or target is None:
-            state.errors.append(f"{where}:external_media:{target_ref or r_id}")
+            if rendered:
+                state.errors.append(f"{where}:external_media:{target_ref or r_id}")
             _register_media_asset(
                 state,
                 slide_number,
@@ -331,19 +337,25 @@ def _resolve_media_by_rIds(
                 0,
                 None,
                 external=True,
+                rendered=rendered,
             )
             continue
-        part_name = str(target)
-        data = preflight.read_part(part_name) if preflight is not None else None
+        part_name = str(target.partname)
+        mime_type = target.content_type
+        is_image = rel.reltype == RELATIONSHIP_TYPE.IMAGE or mime_type.casefold().startswith("image/")
+        data = preflight.read_part(part_name, image=is_image) if preflight is not None else None
         if data is None:
-            state.errors.append(f"{where}:part_not_read:{part_name}")
+            if rendered:
+                state.errors.append(f"{where}:part_not_read:{part_name}")
             _register_media_asset(
-                state, slide_number, shape_path, part_name, "", 0, None, missing=True
+                state, slide_number, shape_path, part_name, "", 0, None, missing=True, rendered=rendered,
             )
             continue
         digest, size = state.register_media(part_name, data)
-        resolved.append((part_name, digest, size))
-    return resolved
+        _register_media_asset(
+            state, slide_number, shape_path, part_name, digest, size, data,
+            is_image=is_image, mime_type=mime_type, rendered=rendered,
+        )
 
 
 def _register_media_asset(
@@ -356,10 +368,12 @@ def _register_media_asset(
     data: bytes | None,
     external: bool = False,
     missing: bool = False,
+    is_image: bool = False,
+    mime_type: str | None = None,
+    rendered: bool = True,
 ) -> None:
     normalized = posixpath.normpath(part_name.replace("\\", "/")).lstrip("/")
     media_match = _MEDIA_RE.match(normalized)
-    is_image = bool(_IMAGE_PART_RE.match(normalized))
     if external or missing:
         asset = OpaqueAsset(
             asset_kind="image" if media_match else "media",
@@ -370,6 +384,7 @@ def _register_media_asset(
             byte_size=None,
             original_bytes=None,
             gap_reason=GAP_EXTERNAL_MEDIA if external else GAP_MISSING_RELATIONSHIP,
+            rendered=rendered,
         )
         state.assets.append(asset)
         return
@@ -380,13 +395,35 @@ def _register_media_asset(
         slide_number=slide_number,
         shape_path=_shape_path_string(shape_path),
         media_sha256=digest,
-        mime_type=_mime_for_image_part(normalized),
+        mime_type=mime_type,
         byte_size=size,
         original_bytes=data if not external else None,
         gap_reason=gap,
+        rendered=rendered,
     )
     state.assets.append(asset)
     state.package_media.pop(normalized, None)
+
+
+def _shape_is_rendered(shape: Any) -> bool:
+    """Use only explicit non-display facts from the slide package."""
+    from pptx.oxml.ns import qn
+
+    element = shape._element
+    if any(props.get("hidden") in {"1", "true"} for props in element.xpath("./*/p:cNvPr")):
+        return False
+    if element.tag != qn("p:pic"):
+        return True
+    if shape.width == 0 or shape.height == 0:
+        return False
+    effects = element.xpath("./p:blipFill/a:blip/*")
+    # A later effect can change opacity again. Only assert transparency
+    # when the final declared image effect multiplies opacity by zero.
+    return not (
+        effects
+        and effects[-1].tag == qn("a:alphaModFix")
+        and effects[-1].get("amt") in {"0", "0%"}
+    )
 
 
 def _walk_shape(
@@ -396,10 +433,13 @@ def _walk_shape(
     slide_part: Any,
     path: tuple[int, ...],
     preflight: "_ZipPreflight | None" = None,
+    *,
+    rendered: bool = True,
 ) -> None:
     state.check_deadline("shape")
     shape_type = str(getattr(getattr(shape, "shape_type", None), "name", "") or "")
     limits = state.limits
+    rendered = rendered and _shape_is_rendered(shape)
 
     # Chart / SmartArt / OLE: named gaps, never silently lost.
     if "CHART" in shape_type.upper() or getattr(shape, "has_chart", False):
@@ -409,6 +449,7 @@ def _walk_shape(
                 slide_number=slide_number,
                 shape_path=_shape_path_string(path),
                 gap_reason=GAP_CHART_NOT_RENDERABLE,
+                rendered=rendered,
             )
         )
     if getattr(shape, "has_smart_art", False):
@@ -418,6 +459,7 @@ def _walk_shape(
                 slide_number=slide_number,
                 shape_path=_shape_path_string(path),
                 gap_reason=GAP_SMARTART_NOT_TRANSCRIBED,
+                rendered=rendered,
             )
         )
     ole = None
@@ -432,13 +474,15 @@ def _walk_shape(
                 slide_number=slide_number,
                 shape_path=_shape_path_string(path),
                 gap_reason=GAP_OLE_NOT_TRANSCRIBED,
+                rendered=rendered,
             )
         )
 
     if shape.shape_type is not None and "GROUP" in shape_type.upper():
         for index, member in enumerate(shape.shapes):
             _walk_shape(
-                member, state, slide_number, slide_part, path + (index,), preflight
+                member, state, slide_number, slide_part, path + (index,), preflight,
+                rendered=rendered,
             )
         return
 
@@ -500,15 +544,10 @@ def _walk_shape(
     if element is not None:
         r_ids = _iter_embedded_rIds(element)
     if is_picture or r_ids:
-        resolved = _resolve_media_by_rIds(slide_part, r_ids, state, slide_number, path)
-        for part_name, digest, size in resolved:
-            data = preflight.read_part(part_name) if preflight is not None else None
-            _register_media_asset(
-                state, slide_number, path, part_name, digest, size, data
-            )
+        _register_shape_media(slide_part, r_ids, state, slide_number, path, rendered=rendered)
         if not r_ids and is_picture:
-            state.errors.append(
-                f"slide{slide_number}:picture_without_relationship:{_shape_path_string(path)}"
+            _register_media_asset(
+                state, slide_number, path, "", "", 0, None, missing=True, rendered=rendered,
             )
         return
 
@@ -617,13 +656,34 @@ def parse_pptx(
     limits: NormalizationLimits,
     parser_version: str = PPTX_PARSER_VERSION,
 ) -> NormalizedDocument:
-    """Normalize one verified PPTX package into narrative units."""
+    """Verify raw PPTX bytes and normalize their narrative units."""
+    source = _NormalizationSource.from_bytes(
+        data, source_id=source_id, source_sha256=source_sha256, limits=limits,
+    )
+    return _parse_pptx(source, mime_type=mime_type, limits=limits, parser_version=parser_version)
+
+
+def _parse_pptx(
+    source: _NormalizationSource, *, mime_type: str, limits: NormalizationLimits,
+    parser_version: str,
+) -> NormalizedDocument:
     if parser_version not in {"1.0.0", PPTX_PARSER_VERSION}:
         raise ValueError("unsupported pure PPTX parser_version")
-    if hashlib.sha256(data).hexdigest() != source_sha256:
-        raise ValueError("PPTX bytes do not match source_sha256")
+    if not source.data.startswith(_PPTX_MAGIC):
+        raise UnsupportedFormatError("bytes are not an OOXML ZIP package")
+    with zipfile.ZipFile(io.BytesIO(source.data)) as archive:
+        return _parse_preflighted_pptx(
+            source, mime_type=mime_type, limits=limits, parser_version=parser_version,
+            preflight=_ZipPreflight(archive, limits),
+        )
+
+
+def _parse_preflighted_pptx(
+    source: _NormalizationSource, *, mime_type: str, limits: NormalizationLimits,
+    parser_version: str, preflight: _ZipPreflight,
+) -> NormalizedDocument:
+    data, source_id, source_sha256 = source.data, source.source_id, source.source_sha256
     mime_main = mime_type.split(";")[0].strip().lower()
-    preflight = _ZipPreflight(data, limits)
     if mime_main not in SUPPORTED_MIME_TYPES:
         content_types = preflight.read_part("[Content_Types].xml") or b""
         if not any(marker.encode("utf-8") in content_types for marker in _OOXML_CONTENT_TYPES):
@@ -667,7 +727,7 @@ def parse_pptx(
     # relationships below remove their targets so unreferenced media remains.
     for part_name in preflight.parts:
         if _MEDIA_RE.match(part_name):
-            payload = preflight.parts[part_name][1]
+            payload = preflight.read_part(part_name) or b""
             state.package_media[part_name] = _sha256_hex(payload)
             state.media_index.setdefault(
                 part_name, (state.package_media[part_name], len(payload))
@@ -677,13 +737,11 @@ def parse_pptx(
         raise NormalizationLimitError(
             "max_pages", limits.max_pages, f"{page_count} slides"
         )
-    slide_numbers_seen: set[int] = set()
     for ordinal, slide in enumerate(slides, start=1):
         limits.check_deadline("slide")
         slide_number = slide.slide_id if parser_version == "1.0.0" else ordinal
         state.slide_ids[slide_number] = slide.slide_id
         state.pages_read += 1
-        slide_numbers_seen.add(slide_number)
         units_before = len(state.units)
         try:
             _walk_slide(slide, state, slide_number, preflight)
@@ -691,20 +749,11 @@ def parse_pptx(
             raise
         except Exception as exc:
             state.errors.append(f"slide{slide_number}:{type(exc).__name__}")
-        if len(state.units) == units_before:
-            # A slide with no text units is honestly partial: image-only or
-            # broken.  Its assets already name the gap; the slide also joins
-            # opaque_pages so coverage_complete stays False.
-            state.opaque_pages.append(slide_number)
-            if not any(asset.slide_number == slide_number for asset in state.assets):
-                state.assets.append(
-                    OpaqueAsset(
-                        asset_kind="unknown",
-                        slide_number=slide_number,
-                        shape_path="*",
-                        gap_reason=GAP_BROKEN_PART,
-                    )
-                )
+            state.native_text_statuses.append("read_failed")
+        else:
+            state.native_text_statuses.append(
+                "observed" if len(state.units) > units_before else "empty"
+            )
     # Unreferenced package media left in package_media is a named gap.
     for part_name in sorted(state.package_media):
         digest = state.package_media[part_name]
@@ -712,13 +761,11 @@ def parse_pptx(
         normalized_name = posixpath.normpath(part_name.replace("\\", "/")).lstrip("/")
         state.assets.append(
             OpaqueAsset(
-                asset_kind="image"
-                if _IMAGE_PART_RE.match(normalized_name)
-                else "media",
+                asset_kind="media",
                 slide_number=None,
                 shape_path="unattached",
                 media_sha256=digest,
-                mime_type=_mime_for_image_part(normalized_name),
+                mime_type=_unattached_media_mime_hint(normalized_name),
                 byte_size=len(payload),
                 original_bytes=payload,
                 gap_reason=GAP_UNATTACHED_MEDIA,
@@ -743,11 +790,20 @@ def _result(
         units=tuple(state.units),
         page_count=page_count,
         pages_read=state.pages_read,
-        opaque_pages=tuple(sorted(set(state.opaque_pages))),
+        opaque_pages=tuple(sorted({
+            asset.slide_number for asset in state.assets
+            if asset.slide_number is not None and asset.rendered and asset.gap_reason is not None
+        })),
         table_scan_pages=(),
         deferred_table_pages=(),
         line_count=0,
         errors=tuple(state.errors),
+        native_text_coverage={
+            "schema_version": "native-text-coverage/1",
+            "source_id": state.source_id,
+            "page_count": page_count,
+            "page_statuses": tuple(state.native_text_statuses),
+        } if page_count and state.parser_version != "1.0.0" else None,
     )
     metadata: dict[str, Any] = {
         "zip_member_count": preflight.member_count,

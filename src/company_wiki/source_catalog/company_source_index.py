@@ -39,7 +39,7 @@ from typing import Any, cast
 from company_wiki.source_contract.source_version import SourceRef
 
 from .document_kinds import SOURCE_FACT_KINDS
-from .identity_candidates import identity_candidate_clause, request_identity_tokens
+from .identity_candidates import identity_candidate_clause
 from .metadata_observation import metadata_state, observe_metadata
 from .reader import CatalogReaderUnavailable
 from .resolver import SourceResolver, _source_metadata
@@ -263,12 +263,13 @@ class CompanySourceIndex:
         """
         if not isinstance(request, CompanySourceIndexRequest):
             raise TypeError("request must be CompanySourceIndexRequest")
-        entries, security_ids = self._matched_versions(request)
+        tokens = self._resolver.issuer_identity_tokens(request.company.entity)
+        entries, security_ids = self._matched_versions(request, tokens)
         status, reason = "ok", ""
         if not entries:
             # An empty page caused by the caller's own filters is not the same
             # answer as an issuer the owner does not index at all.
-            if self._company_known(request.company):
+            if self._company_known(request.company, tokens):
                 status, reason = "ok", ""
             else:
                 status, reason = "not_found", "company_not_indexed"
@@ -314,47 +315,59 @@ class CompanySourceIndex:
             ),
         }
 
-    def _company_known(self, identity: CompanyIdentity) -> bool:
+    def _company_known(self, identity: CompanyIdentity, tokens: tuple[str, ...]) -> bool:
         """Is this issuer indexed at all, regardless of the caller's filters?
 
-        One bounded lookahead over the same identity candidate set; the entity
-        gate is the same authority used for the listing.
+        A dirty projection row is a candidate, not proof of identity. A
+        complete search or a qualified match is required to answer.
         """
-        tokens = request_identity_tokens(identity.entity, self._resolver)
-        identity_clause, identity_params = identity_candidate_clause(
-            self.catalog.reader, tokens
-        )
+        after: str | None = None
+        remaining = MAX_CANDIDATES
         try:
-            rows = self.catalog.reader.fetchall(
-                f"""SELECT d.document_id, d.primary_source_id AS document_source_id,
-                           d.title, d.document_kind, d.published_date,
-                           d.source_status, d.metadata_json,
-                           s.content_sha256, s.byte_size, s.mime_type
-                    FROM documents d
-                    LEFT JOIN sources s ON s.source_id = d.primary_source_id
-                    WHERE d.source_status IN ('active', 'retired')
-                      {identity_clause}
-                    ORDER BY d.document_id
-                    LIMIT 500""",
-                identity_params,
+            identity_clause, identity_params = identity_candidate_clause(
+                self.catalog.reader, tokens
             )
+            while True:
+                limit = min(500, remaining + 1)
+                cursor_clause = "AND d.document_id > ?" if after is not None else ""
+                cursor_params = (after,) if after is not None else ()
+                rows = self.catalog.reader.fetchall(
+                    f"""SELECT d.document_id, d.primary_source_id AS document_source_id,
+                               d.title, d.document_kind, d.published_date,
+                               d.source_status, d.metadata_json,
+                               s.content_sha256, s.byte_size, s.mime_type
+                        FROM documents d
+                        LEFT JOIN sources s ON s.source_id = d.primary_source_id
+                        WHERE d.source_status IN ('active', 'retired')
+                          {identity_clause}
+                          {cursor_clause}
+                        ORDER BY d.document_id
+                        LIMIT ?""",
+                    (*identity_params, *cursor_params, limit),
+                )
+                page = rows[:remaining]
+                entities = self._entities_for([row["document_id"] for row in page])
+                for row in page:
+                    payload = self._row_dict(row, entities)
+                    if self._resolver._entity_matches(
+                        identity.entity, payload, metadata=self._visible_metadata(payload),
+                        identity_tokens=tokens,
+                    ):
+                        return True
+                if len(rows) > remaining:
+                    raise CompanySourceIndexError("unavailable", "candidate_budget_exceeded")
+                if len(rows) < limit:
+                    return False
+                remaining -= len(rows)
+                after = rows[-1]["document_id"]
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise CompanySourceIndexError("unavailable", "catalog_unavailable") from None
-        entities = self._entities_for([row["document_id"] for row in rows])
-        for row in rows:
-            payload = self._row_dict(row, entities)
-            if self._resolver._entity_matches(
-                identity.entity, payload, metadata=self._visible_metadata(payload),
-            ):
-                return True
-        return False
 
     # -- candidate scan -----------------------------------------------------
 
     def _matched_versions(
-        self, request: CompanySourceIndexRequest,
+        self, request: CompanySourceIndexRequest, tokens: tuple[str, ...],
     ) -> tuple[list[_Entry], set[str]]:
-        tokens = request_identity_tokens(request.company.entity, self._resolver)
         rows = self._candidate_rows(request, tokens)
         entries: dict[str, _Entry] = {}
         security_ids: set[str] = set()
@@ -362,6 +375,7 @@ class CompanySourceIndex:
             metadata = self._visible_metadata(row)
             if not self._resolver._entity_matches(
                 request.company.entity, row, metadata=metadata,
+                identity_tokens=tokens,
             ):
                 continue
             if not self._identity_matches(request.company, metadata):
@@ -393,30 +407,26 @@ class CompanySourceIndex:
     def _candidate_rows(
         self, request: CompanySourceIndexRequest, tokens: tuple[str, ...],
     ) -> list[dict[str, Any]]:
-        identity_clause, identity_params = identity_candidate_clause(
-            self.catalog.reader, tokens
-        )
         kind_clause, kind_params = _kind_clause(request.document_kinds)
-        sql = f"""SELECT d.document_id, d.primary_source_id AS document_source_id,
-                         d.title, d.document_kind, d.published_date,
-                         d.source_status, d.metadata_json,
-                         s.content_sha256, s.byte_size, s.mime_type
-                  FROM documents d
-                  LEFT JOIN sources s ON s.source_id = d.primary_source_id
-                  WHERE d.source_status IN ('active', 'retired')
-                    AND (d.published_date IS NULL OR d.published_date <= ?)
-                    {kind_clause}
-                    {identity_clause}
-                  ORDER BY COALESCE(d.published_date, '') DESC, d.document_id ASC
-                  LIMIT ?"""
-        params: tuple[Any, ...] = (
-            request.as_of_date,
-            *kind_params,
-            *identity_params,
-            MAX_CANDIDATES + 1,
-        )
         try:
-            rows = self.catalog.reader.fetchall(sql, params)
+            identity_clause, identity_params = identity_candidate_clause(
+                self.catalog.reader, tokens
+            )
+            rows = self.catalog.reader.fetchall(
+                f"""SELECT d.document_id, d.primary_source_id AS document_source_id,
+                           d.title, d.document_kind, d.published_date,
+                           d.source_status, d.metadata_json,
+                           s.content_sha256, s.byte_size, s.mime_type
+                    FROM documents d
+                    LEFT JOIN sources s ON s.source_id = d.primary_source_id
+                    WHERE d.source_status IN ('active', 'retired')
+                      AND (d.published_date IS NULL OR d.published_date <= ?)
+                      {kind_clause}
+                      {identity_clause}
+                    ORDER BY COALESCE(d.published_date, '') DESC, d.document_id ASC
+                    LIMIT ?""",
+                (request.as_of_date, *kind_params, *identity_params, MAX_CANDIDATES + 1),
+            )
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise CompanySourceIndexError("unavailable", "catalog_unavailable") from None
         if len(rows) > MAX_CANDIDATES:
@@ -460,7 +470,7 @@ class CompanySourceIndex:
                     row = dict(item)
                     found.setdefault(row.pop("document_id"), []).append(row)
         except (CatalogReaderUnavailable, sqlite3.Error):
-            return found
+            raise CompanySourceIndexError("unavailable", "catalog_unavailable") from None
         return found
 
     def _visible_metadata(self, row: dict[str, Any]) -> dict[str, Any]:

@@ -201,3 +201,7 @@ def align_char_range(
             return hits[0][0], hits[0][1], "relocated"
 
     return None, None, "unknown"
+
+__all__ = [
+    'resolve_limits',
+]

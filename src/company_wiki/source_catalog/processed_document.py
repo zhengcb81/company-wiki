@@ -33,7 +33,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from company_wiki.automation.narrative_contracts import SourceRefValue
 from company_wiki.document_normalization import (
     PARSER_NAME as DN_PARSER_NAME,
     NormalizationError,
@@ -42,10 +41,14 @@ from company_wiki.document_normalization import (
     normalize_document,
 )
 from company_wiki.canonical_ingest import ParserResult
-from company_wiki.source_contract import EvidenceCoordinates, ParseStatus
-from company_wiki.source_contract.evidence_span import _plain_json
+from company_wiki.source_contract import (
+    EvidenceCoordinates,
+    ParseStatus,
+    SourceReadError,
+    SourceRef,
+    plain_json_value,
+)
 from company_wiki.source_contract.source_manifest import SourceManifest
-from company_wiki.source_contract.source_version import SourceReadError, SourceRef
 
 from .normalizer import (
     NormalizationCancelledError,
@@ -454,7 +457,7 @@ def _units_from_results(
         structured = result.structured_value
         if isinstance(structured, Mapping) and "sheet" in structured:
             kind = "sheet"
-            content: Any = _plain_json(structured)
+            content: Any = plain_json_value(structured)
         elif coordinates.table_index is not None:
             kind = "table"
             content = result.raw_text
@@ -484,15 +487,7 @@ def read_processed_document(
 ) -> dict[str, Any]:
     """Serve one ``company-wiki-processed-document/1`` response for a request."""
     _validate_request(request)
-    ref_value = SourceRefValue.from_dict(request["source_ref"])
-    ref = SourceRef(
-        schema_version=ref_value.schema_version,
-        document_id=ref_value.document_id,
-        source_id=ref_value.source_id,
-        content_sha256=ref_value.content_sha256,
-        byte_size=ref_value.byte_size,
-        mime_type=ref_value.mime_type,
-    )
+    ref = SourceRef.from_dict(request["source_ref"])
     content, manifest = reader.open_described_version(ref, purpose="source_export")
     if content.data is None:  # pragma: no cover - retain_bytes=True guarantees bytes
         raise SourceReadError("unavailable", "verification_invariant_broken")
@@ -547,7 +542,7 @@ def read_processed_document(
     status = "partial" if continuation is not None else outcome.status
     return {
         "schema_version": PROCESSED_DOCUMENT_SCHEMA_VERSION,
-        "source_ref": ref_value.to_dict(),
+        "source_ref": ref.to_dict(),
         "manifest": manifest,
         "parser": {
             "name": outcome.parser_name,

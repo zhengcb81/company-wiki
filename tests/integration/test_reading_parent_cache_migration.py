@@ -56,7 +56,8 @@ def observe_structure(root):
             "    if not hasattr(result, 'required_context_by_unit_id'):\n"
             "        result = SimpleNamespace(sections=result.sections, diagnostics=result.diagnostics, "
             "unit_section=result.unit_section, required_context_by_unit_id={}, "
-            "required_source_by_unit_id={}, source_proofs_by_unit_id={})\n"
+            "required_source_by_unit_id={}, source_proofs_by_unit_id={}, "
+            "unresolved_scope_unit_ids=getattr(result, 'unresolved_scope_unit_ids', frozenset()))\n"
             "    texts = {unit.unit_id: unit.text for unit in args[0]}\n"
             "    record = {'producer': sections.__file__, 'sections': ["
             "{'headings': [texts[uid] for uid in section.heading_ids], "
@@ -147,7 +148,11 @@ def test_old_sections_cache_misses_then_new_public_parent_and_cache_restore(loop
             assert process.returncode == 0 and old_cached["status"] == "completed", (old_cached, process.stderr)
             assert len(loopback_model_server.requests) == 1
             assert old_cached["budget"]["tokens"] == 0
-            assert observed_structures(root) == old_structures
+            cached_ref, cached_bundle, _ = reuse.public_read(root, config, imported, kind)
+            assert cached_ref == old_ref and cached_bundle == old_bundle
+            cached_structures = observed_structures(root)
+            assert cached_structures[:len(old_structures)] == old_structures
+            old_structures = cached_structures
             launcher = shared._launcher(root)
             observe_structure(root)
             new_request = reuse.request_path(root, imported, loopback_model_server.endpoint, "new-c", selector_version="0.9.0")

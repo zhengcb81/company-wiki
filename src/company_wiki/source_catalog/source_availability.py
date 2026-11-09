@@ -213,3 +213,7 @@ def verified_availability_evidence(catalog, ref: SourceRef, *, budget=None) -> d
             raise
     budget.check()
     return min(proofs, key=lambda proof: (proof["available_by"], proof["evidence_ref"])) if proofs else None
+
+__all__ = [
+    'verified_availability_evidence',
+]

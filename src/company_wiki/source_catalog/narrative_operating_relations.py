@@ -209,7 +209,7 @@ class SourceOperatingSession:
     def _prepare_group(self, owner: str):
         if owner in self.analysis:
             return
-        members = self.groups[owner]
+        members = self.groups.get(owner, (owner,))
         first = self.units[members[0]]
         if any(self.units[uid].source_id != first.source_id for uid in members):
             raise ValueError("operating continuity cannot cross original parents")
@@ -220,9 +220,14 @@ class SourceOperatingSession:
         cjk = re.compile(r"[\u3400-\u9fff]")
         punctuation = frozenset("。！？；，、：）》】”’（《【“‘")
         for index, uid in enumerate(members):
-            raw = self.units[uid].raw_text
+            unit = self.units[uid]
+            raw = unit.raw_text
             start = 0 if index == 0 else len(raw) - len(raw.lstrip())
             end = len(raw) if index == len(members) - 1 else len(raw.rstrip())
+            printed = unit.metadata.get("printed_turn")
+            if printed is not None and "body_start" in printed:
+                start = max(start, printed["body_start"])
+                end = min(end, printed["body_end"])
             text = raw[start:end]
             left, right = previous[-1:], text[:1]
             if previous and text:
@@ -237,8 +242,10 @@ class SourceOperatingSession:
                 cursor += len(text)
                 previous = text
         self.maps[owner] = segments
+        printed = first.metadata.get("printed_turn")
         self.analysis[owner] = {"text": "".join(parts), "parent_id": first.source_id,
-            "role": first.source_role, "kind": "closed_native_analysis", "locator": first.coordinates}
+            "role": printed["role"] if printed else first.source_role,
+            "kind": "closed_native_analysis", "locator": first.coordinates}
 
     def _original_refs(self, owner: str, refs):
         segments = self.maps[owner]
@@ -261,7 +268,7 @@ class SourceOperatingSession:
         if owner not in self.results:
             used_before = self.work_budget.used
             try:
-                if owner in self.groups:
+                if owner in self.groups or "printed_turn" in self.units[owner].metadata:
                     self._prepare_group(owner)
                 result = self.engine.detect(owner, self.context_for(owner))
                 self.bindings[owner] = self.engine.relation_bindings(
@@ -294,7 +301,7 @@ class SourceOperatingSession:
         if cached is not None:
             return cached
         key = self.owner_for(uid)
-        if key in self.groups and key not in self.analysis:
+        if key not in self.analysis and (key in self.groups or "printed_turn" in self.units[key].metadata):
             try:
                 self._prepare_group(key)
             except (WorkBudgetExceeded, ValueError):
@@ -331,7 +338,7 @@ class SourceOperatingSession:
             observed = {entry: self.units.get(entry, self.originals.get(entry))
                         for entry in predecessors}
             if key in self.analysis:
-                first = self.units[self.groups[key][0]]
+                first = self.units[self.groups.get(key, (key,))[0]]
                 observed[key] = {**self.analysis[key], 'metadata': first.metadata}
             else:
                 observed[key] = self.units[key]

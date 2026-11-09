@@ -9,7 +9,7 @@ always run the established metadata/identity qualification afterwards.
 from __future__ import annotations
 
 import json
-from typing import Any
+from typing import Any, Iterator
 
 from .security_identity import _normalize_text
 
@@ -56,12 +56,24 @@ def metadata_identity_tokens(value: object, *, assertion: bool = False) -> set[s
     return result
 
 
-def request_identity_tokens(entity: str, resolver) -> tuple[str, ...]:
-    """Use the resolver's same issuer-alias authority, without reimplementing it."""
-    wanted = _normalize_text(entity)
-    token_to_issuer, issuer_tokens = resolver._issuer_index()
-    issuer = token_to_issuer.get(wanted)
-    return tuple(sorted({wanted, *issuer_tokens.get(issuer, ())} - {""}))
+def iter_identity_filing_candidates(
+    catalog, *, document_kind: str, identity_tokens: tuple[str, ...],
+    published_on_or_before: str | None = None,
+    source_statuses: tuple[str, ...] = ("active",),
+) -> Iterator[dict[str, Any]]:
+    """Page through an issuer's candidate superset in stable document-ID order."""
+    page_size = 1000
+    cursor = None
+    while True:
+        page = catalog.query_filing_candidates(
+            document_kind=document_kind, source_statuses=source_statuses,
+            identity_tokens=identity_tokens, after_document_id=cursor,
+            published_on_or_before=published_on_or_before, limit=page_size,
+        )
+        yield from page
+        if len(page) < page_size:
+            return
+        cursor = page[-1]["document_id"]
 
 
 def ensure_identity_projection(connection) -> None:

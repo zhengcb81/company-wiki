@@ -10,12 +10,14 @@ from __future__ import annotations
 
 import re
 import sqlite3
-from collections.abc import Iterator
+from collections.abc import Iterator, Mapping
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
+from types import MappingProxyType
 from typing import Any
 
 from .document_kinds import PERIODIC_DOCUMENT_KINDS
+from .policy import _effective_reusable
 from .policy_2x import export_policy_2x
 from .qualification import qualify_source, latest_source_index
 from .prompt_injection import (
@@ -79,6 +81,23 @@ class SourceQueryResult:
     reason: str
     schema_version: str = SOURCE_REF_SCHEMA_VERSION
     excluded_candidates: tuple[dict[str, object], ...] = ()
+
+
+@dataclass(frozen=True, init=False)
+class FilingReuseObservation:
+    """The exact filing verified for one local acquisition decision."""
+
+    source_ref: SourceRef
+    receipt: VerifiedVersionReceipt
+    admitted_copy: Mapping[str, Any]
+    request_id: str
+
+    def __init__(self) -> None:
+        raise TypeError("observe filing reuse through SourceVersionReader")
+
+    @property
+    def location_id(self) -> str:
+        return str(self.admitted_copy["location_id"])
 
 
 class SourceVersionReader:
@@ -152,31 +171,21 @@ class SourceVersionReader:
         self, request: SourceRequest, *, include_unknown_publication: bool = False,
         identity_tokens: tuple[str, ...] | None = None,
     ) -> Iterator[dict[str, Any]]:
+        from .identity_candidates import iter_identity_filing_candidates
         from .security_identity import _normalize_text
+
         tokens = identity_tokens if identity_tokens is not None else (_normalize_text(request.entity),)
-        page_size, max_candidates, yielded = 1000, 20_000, 0
-        cursor = None
-        while yielded < max_candidates:
-            count = min(page_size, max_candidates - yielded)
-            try:
-                documents = self.catalog.query_filing_candidates(
-                    document_kind=request.document_kind,
-                    source_statuses=("active",),
-                    identity_tokens=tokens,
-                    after_document_id=cursor,
-                    published_on_or_before=(None if include_unknown_publication else request.as_of_date),
-                    # One lookahead distinguishes exact EOF from true truncation.
-                    limit=count + 1,
-                )
-            except (CatalogReaderUnavailable, sqlite3.Error):
-                raise SourceReadError("unavailable", "catalog_unavailable") from None
-            page = documents[:count]
-            yield from page
-            yielded += len(page)
-            if len(documents) <= count:
-                return
-            cursor = page[-1]["document_id"]
-        raise SourceReadError("unavailable", "candidate_budget_exceeded")
+        candidates = iter_identity_filing_candidates(
+            self.catalog, document_kind=request.document_kind, identity_tokens=tokens,
+            published_on_or_before=None if include_unknown_publication else request.as_of_date,
+        )
+        try:
+            for number, document in enumerate(candidates, start=1):
+                if number > 20_000:
+                    raise SourceReadError("unavailable", "candidate_budget_exceeded")
+                yield document
+        except (CatalogReaderUnavailable, sqlite3.Error):
+            raise SourceReadError("unavailable", "catalog_unavailable") from None
 
     def query_ref(self, document_id: str, source_id: str, expected_sha256: str) -> SourceRef:
         from .source_references import query_source_reference
@@ -225,8 +234,7 @@ class SourceVersionReader:
             return SourceQueryResult(status, matches, reason,
                                      excluded_candidates=tuple(excluded))
 
-        from .identity_candidates import request_identity_tokens
-        candidate_tokens = request_identity_tokens(request.entity, resolver)
+        candidate_tokens = resolver.issuer_identity_tokens(request.entity)
         for document in self._candidate_pages(
             request, include_unknown_publication=True, identity_tokens=candidate_tokens,
         ):
@@ -238,7 +246,8 @@ class SourceVersionReader:
                 active_cohorts=resolver.active_cohorts,
                 legacy_bridge_allowed=resolver.legacy_bridge_allowed,
             )
-            if not resolver._entity_matches(request.entity, document, metadata=metadata):
+            if not resolver._entity_matches(request.entity, document, metadata=metadata,
+                                            identity_tokens=candidate_tokens):
                 continue
             if "published_date" in metadata:
                 document["published_date"] = metadata["published_date"]
@@ -389,6 +398,12 @@ class SourceVersionReader:
         if row is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
         return observe_metadata(row["metadata_json"]).to_dict()
+
+    def availability_evidence(self, ref: SourceRef) -> dict[str, str] | None:
+        """Read recorded historical availability for the exact source reference."""
+        from .source_availability import verified_availability_evidence
+
+        return verified_availability_evidence(self.catalog, ref)
 
     def open_described_version(
         self, ref: SourceRef, *, purpose: str = "source_export",
@@ -582,12 +597,95 @@ class SourceVersionReader:
         assert isinstance(result, VerifiedVersionReceipt)
         return result
 
+    def verify_reusable_version(
+        self, ref: SourceRef, *, request: SourceRequest, metadata: dict[str, Any],
+        budget: _ReadBudget,
+    ) -> FilingReuseObservation:
+        """Verify the selected version under filing-root and SEC scope rules."""
+        from .assertion_service import source_scope_qualification
+
+        scope = source_scope_qualification(self.catalog, ref, metadata=metadata, request=request)
+        receipt, admitted_copy = self._verified_location(
+            ref, purpose="filing_reuse", expected_read_policy_sha256=None,
+            retain_bytes=False, budget=budget, scope_qualification=scope,
+            reusable_only=True,
+        )
+        assert isinstance(receipt, VerifiedVersionReceipt) and admitted_copy is not None
+        observation = object.__new__(FilingReuseObservation)
+        object.__setattr__(observation, "source_ref", ref)
+        object.__setattr__(observation, "receipt", receipt)
+        object.__setattr__(observation, "admitted_copy", admitted_copy)
+        object.__setattr__(observation, "request_id", request.request_id)
+        return observation
+
+    def _admitted_candidates(
+        self, ref: SourceRef, version_row: sqlite3.Row, *, roots: dict[str, Any],
+    ) -> list[dict[str, Any]]:
+        """The readable locations for one ref, after the catalog annotator
+        and root policy.
+
+        This is the single admission gate shared by every byte path, so the
+        whole-buffer reader and any transport elect the same candidate by
+        construction.  The existing catalog annotator owns role/status/
+        rejections filtering and the stable preference order.  Policy decides
+        action eligibility.
+        """
+        locations = []
+        try:
+            indexed_locations = self.catalog.reader.exact_source_locations(
+                ref.document_id, ref.source_id
+            )
+        except (CatalogReaderUnavailable, sqlite3.Error):
+            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        for row in indexed_locations:
+            location = dict(row)
+            root = roots.get(location["root_id"])
+            if root is None:
+                continue
+            location["root_priority"] = root.priority
+            locations.append(location)
+        if not locations:
+            raise SourceReadError("unavailable", "no_indexed_location")
+        annotated = self.catalog._annotate_locations(ref.document_id, locations)
+        admitted = []
+        for location in annotated:
+            root = roots[location["root_id"]]
+            if location["candidate_rank"] <= 0:
+                continue
+            kinds = root.allowed_document_kinds
+            if kinds and version_row["document_kind"] not in kinds:
+                continue
+            limit = root.max_file_size
+            if limit is not None and ref.byte_size > limit:
+                continue
+            statuses = root.allowed_statuses
+            if statuses and version_row["source_status"] not in statuses:
+                continue
+            admitted.append(location)
+        if not admitted:
+            raise SourceReadError("blocked", "root_admission_denied")
+        return admitted
+
     def _verified_version(
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
         budget: _ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
     ) -> VerifiedContent | VerifiedVersionReceipt:
+        verified, _ = self._verified_location(
+            ref, purpose=purpose, expected_read_policy_sha256=expected_read_policy_sha256,
+            retain_bytes=retain_bytes, current_read_policy_sha256=current_read_policy_sha256,
+            budget=budget, scope_qualification=scope_qualification,
+        )
+        return verified
+
+    def _verified_location(
+        self, ref: SourceRef, *, purpose: str,
+        expected_read_policy_sha256: str | None,
+        retain_bytes: bool, current_read_policy_sha256: str | None = None,
+        budget: _ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
+        reusable_only: bool = False,
+    ) -> tuple[VerifiedContent | VerifiedVersionReceipt, Mapping[str, Any] | None]:
         """Verify through the current policy and same-SHA location fallback.
 
         The current catalog, root policy and registered relative locations are
@@ -625,45 +723,9 @@ class SourceVersionReader:
         elif scope_qualification is _SCOPE_UNOBSERVED:
             scope_qualification = None
         config = self.catalog.config
-        roots = {root.root_id: root for root in config.roots}
-        locations = []
-        try:
-            indexed_locations = self.catalog.reader.exact_source_locations(
-                ref.document_id, ref.source_id
-            )
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
-        for row in indexed_locations:
-            location = dict(row)
-            root = roots.get(location["root_id"])
-            if root is None:
-                continue
-            location["root_priority"] = root.priority
-            locations.append(location)
-        if not locations:
-            raise SourceReadError("unavailable", "no_indexed_location")
-
-        # The existing catalog annotator owns role/status/rejections filtering
-        # and the stable preference order.  Policy decides action eligibility.
-        annotated = self.catalog._annotate_locations(ref.document_id, locations)
-        admitted = []
-        for location in annotated:
-            root = roots[location["root_id"]]
-            if location["candidate_rank"] <= 0:
-                continue
-            kinds = root.allowed_document_kinds
-            if kinds and version_row["document_kind"] not in kinds:
-                continue
-            limit = root.max_file_size
-            if limit is not None and ref.byte_size > limit:
-                continue
-            statuses = root.allowed_statuses
-            if statuses and version_row["source_status"] not in statuses:
-                continue
-            admitted.append(location)
-        if not admitted:
-            raise SourceReadError("blocked", "root_admission_denied")
-        candidates = admitted
+        roots = {root.root_id: root for root in config.roots
+                 if not reusable_only or _effective_reusable(root, config)}
+        candidates = self._admitted_candidates(ref, version_row, roots=roots)
 
         supplied_budget = budget is not None
         if budget is None:
@@ -672,6 +734,7 @@ class SourceVersionReader:
         elif not isinstance(budget, _ReadBudget):
             raise TypeError("budget must be a read budget")
         failures: list[str] = []
+        all_missing = True
         policy_sha256, _ = export_policy_2x(config)
         for location in sorted(candidates, key=lambda item: item["candidate_rank"]):
             root = roots[location["root_id"]]
@@ -679,42 +742,56 @@ class SourceVersionReader:
                 resolved = resolve_source_location(root, str(location["relative_path"]))
             except SourceLocationError as exc:
                 failures.append(exc.reason)
+                all_missing = False
                 continue
-            data, status, reason, detail = _read_verified_bytes(
+            observation, status, reason, detail = _read_verified_bytes(
                 resolved, expected_sha256=ref.content_sha256, budget=budget,
                 expected_byte_size=ref.byte_size,
                 retain_bytes=retain_bytes or bool(scope_qualification and scope_qualification.needs_original),
             )
             if not status:
+                assert observation is not None
                 if scope_qualification is not None:
-                    scope_qualification.verify(data, budget=budget)
+                    scope_qualification.verify(observation.data, budget=budget)
                 review = self._review_for_result(
                     ref, purpose=purpose, retain_bytes=retain_bytes
                 )
-                receipt_fields = dict(
-                    document_id=ref.document_id,
-                    source_id=ref.source_id,
-                    content_sha256=ref.content_sha256,
-                    read_at=datetime.now(UTC).isoformat(),
-                    policy_sha256=policy_sha256,
-                    source_read_policy_sha256=read_policy_sha256,
-                )
+                read_at = datetime.now(UTC).isoformat()
                 if retain_bytes:
-                    if data is None:
-                        raise SourceReadError("unavailable", "verification_invariant_broken")
-                    return VerifiedContent(
-                        data=data, byte_size=len(data),
-                        review=review,
-                        **receipt_fields,
+                    content = VerifiedContent.from_observation(
+                        ref, observation, read_at=read_at, policy_sha256=policy_sha256,
+                        source_read_policy_sha256=read_policy_sha256, review=review,
                     )
-                return VerifiedVersionReceipt(
-                    byte_size=ref.byte_size, review=review, **receipt_fields
+                    return content, None
+                receipt = VerifiedVersionReceipt(
+                    document_id=ref.document_id, source_id=ref.source_id,
+                    content_sha256=ref.content_sha256, byte_size=observation.byte_size,
+                    read_at=read_at, policy_sha256=policy_sha256,
+                    source_read_policy_sha256=read_policy_sha256, review=review,
                 )
+                # Only the catalog's legacy handle projection needs physical
+                # coordinates. Use this exact admitted copy, even if the
+                # same location ID was rebound after candidate lookup.
+                admitted_copy = MappingProxyType({
+                    **location, "absolute_path": str(resolved),
+                    "verified_sha256": observation.content_sha256,
+                }) if reusable_only else None
+                return receipt, admitted_copy
             failures.append(reason or status or detail or "read_failed")
+            all_missing = all_missing and reason == "read_failed" and detail == "FileNotFoundError"
             if reason in {"cancelled", "budget_exceeded"}:
                 if supplied_budget:
                     raise SourceReadError("unavailable", reason)
                 break
+        if reusable_only and all_missing:
+            raise SourceReadError("not_found", "local_original_missing")
         raise SourceReadError(
             "unavailable", "no_verified_location", ",".join(sorted(set(failures)))
         )
+
+__all__ = [
+    'SourceReadError',
+    'SourceRef',
+    'SourceVersionReader',
+    'VerifiedContent',
+]

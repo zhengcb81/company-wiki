@@ -5,11 +5,12 @@ from types import SimpleNamespace
 import pymupdf as fitz
 import pytest
 
-from company_wiki.automation import narrative_select as execution
-from company_wiki.automation import narrative_selector_binding as binding
+from company_wiki.source_catalog import narrative_selection as selection
+from company_wiki.source_catalog import narrative_selector_binding as binding
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded
 from company_wiki.source_catalog import narrative_evidence as source
 from company_wiki.source_catalog.narrative_document import DocumentStructure, NarrativeEvidencePackage
+from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 
 
 def package(parsed, *, complete=True):
@@ -19,8 +20,17 @@ def package(parsed, *, complete=True):
 
 def payload():
     return SimpleNamespace(source_ref=SimpleNamespace(mime_type='application/pdf', source_id='source',
-        content_sha256='a' * 64), source_metadata=SimpleNamespace(language='en',
+        content_sha256='a' * 64), source_metadata=SimpleNamespace(source_class='filing', language='en',
         title='Annual Report', document_kind='annual_report'))
+
+
+def select(source, data, *, parser=None, selector=None, version='0.9.0'):
+    reader = selection.RawNarrativeSelector(
+        pdf_reading=PdfReading(parser=parser),
+        selector=binding.bind_narrative_selector(selector, selector_version=version),
+    )
+    return reader.select(data, source_ref=source.source_ref, source_metadata=source.source_metadata,
+                         checkpoint=lambda: None)
 
 
 @pytest.mark.parametrize('version,expected', [('0.9.0', [False]), ('0.8.0', [False, True])])
@@ -30,10 +40,9 @@ def test_shared_empty_selection_never_resets_source_by_full_scan(version, expect
         calls.append(kwargs['full_table_scan'])
         return DocumentStructure('source', 'a' * 64, 'en', (), page_count=3,
             pages_read=3, deferred_table_pages=(3,))
-    handler = execution.NarrativeSelectHandler(reader=object(), pdf_parser=parser,
-        selector=lambda parsed, **kw: package(parsed, complete=False), selector_version=version)
-    with pytest.raises(execution._SelectFailure):
-        handler._select_pdf(payload(), b'not opened by injected parser', SimpleNamespace(checkpoint=lambda: None))
+    with pytest.raises(selection.NarrativeMaterialError):
+        select(payload(), b'not opened by injected parser', parser=parser, version=version,
+               selector=lambda parsed, **kw: package(parsed, complete=False))
     assert calls == expected
 
 
@@ -56,9 +65,25 @@ def test_production_passes_one_budget_from_source_to_builtin_selector(monkeypatc
         observed['selector'].charge(11)
         return package(parsed)
     monkeypatch.setattr(binding, 'select_narrative_evidence', selector)
-    handler = execution.NarrativeSelectHandler(reader=object(), pdf_parser=parser, selector_version='0.9.0')
-    handler._select_pdf(payload(), b'fixture', SimpleNamespace(checkpoint=lambda: None))
+    select(payload(), b'fixture', parser=parser)
     assert observed['source'].used == 28
+
+
+def test_pdf_selection_preserves_the_callers_checkpoint_exception():
+    cancelled = RuntimeError("selection lease ended")
+
+    def checkpoint():
+        raise cancelled
+
+    def parser(*_args, **_kwargs):
+        pytest.fail("cancelled selection reached the parser")
+
+    event = payload()
+    reader = selection.RawNarrativeSelector(pdf_reading=PdfReading(parser=parser))
+    with pytest.raises(RuntimeError) as rejected:
+        reader.select(b"fixture", source_ref=event.source_ref, source_metadata=event.source_metadata,
+                      checkpoint=checkpoint)
+    assert rejected.value is cancelled
 
 
 def synthetic_pdf():
@@ -124,15 +149,15 @@ def test_source_work_limit_has_a_specific_terminal_production_diagnostic(monkeyp
     observed = []
     monkeypatch.setattr(resource_budget, 'new_document_work_budget', lambda: WorkBudget(0))
     monkeypatch.setattr(source, '_pdf_text_blocks', lambda *args, **kw: observed.append('read'))
-    handler = execution.NarrativeSelectHandler(reader=object(), selector_version='0.9.0')
-    monkeypatch.setattr(handler, '_run_selector', lambda *args, **kw: observed.append('select'))
+    def no_selector(*args, **kwargs):
+        pytest.fail('selector ran after the source work budget was exhausted')
+
     data = synthetic_pdf()
     original = payload()
     original.source_ref.content_sha256 = hashlib.sha256(data).hexdigest()
-    with pytest.raises(execution._SelectFailure) as failure:
-        handler._select_pdf(original, data, SimpleNamespace(checkpoint=lambda: None))
+    with pytest.raises(selection.NarrativeMaterialError) as failure:
+        select(original, data, selector=no_selector)
     assert failure.value.code == 'PARSER_INCOMPLETE'
-    assert failure.value.outcome == execution.HandlerOutcome.TERMINAL_FAILURE
     assert 'document_work limit reached' in failure.value.detail
     assert observed == []
 

@@ -162,10 +162,6 @@ def _commit_shared(catalog, staged, state, validated, *, layout_id, layout_statu
         provenance_extensions=provenance_extensions,
         cleanup_staged=False,
     )
-    attempt = _journal(catalog, state,
-                       outcome=("imported_original" if result.status.value == "imported_new"
-                                else "deduplicated_original"),
-                       canonical_path=result.canonical_path)
     out = {
         "schema_version": IMPORT_RESULT_V2_SCHEMA,
         "status": "imported_new" if result.status.value == "imported_new" else "deduplicated",
@@ -181,7 +177,10 @@ def _commit_shared(catalog, staged, state, validated, *, layout_id, layout_statu
         "download_events": 0,
     }
     from .official_source_flow import _persist_completed
-    _persist_completed(catalog, state, out, journal_attempt_id=attempt.attempt_id)
+    _persist_completed(
+        catalog, state, out, canonical_path=result.canonical_path,
+        outcome="imported_original" if result.status.value == "imported_new" else "deduplicated_original",
+    )
     return out
 
 

@@ -179,7 +179,7 @@ def test_bad_originals_refused_before_canonical_write(data, mime, error):
 
 
 def test_bad_sha_refused_and_failed_import_cleans_only_owned_staging(monkeypatch):
-    from company_wiki.source_catalog.official_source_flow import (
+    from company_wiki.automation.source_request import (
         import_official_source,
         OfficialSourceError,
     )
@@ -333,7 +333,7 @@ def test_format_selection_replay_32_spans_parses_original_once(monkeypatch):
     import company_wiki.automation.narrative_replay as replay
     from types import SimpleNamespace
     from company_wiki.source_contract import source_id_for_sha256
-    from company_wiki.automation.narrative_formats import parser_component
+    from company_wiki.source_catalog.narrative_formats import parser_component
 
     data = (
         "<html>"
@@ -638,7 +638,7 @@ def _public_narrative(root, config, operation, request_value):
             "utf8",
             "-B",
             "-m",
-            "company_wiki.source_catalog.narrative_transport_cli",
+            "company_wiki.automation.narrative_transport_cli",
             "--config",
             str(config),
             "--operation",
@@ -678,7 +678,7 @@ def test_configured_official_three_formats_summary_public_read_and_repeat(
     loopback_model_server, monkeypatch
 ):
     import pymupdf as fitz
-    from company_wiki.source_catalog.official_source_flow import (
+    from company_wiki.automation.source_request import (
         prepare_official_narrative_request,
     )
     from company_wiki.automation.narrative_run_store import NarrativeRunStore

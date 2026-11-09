@@ -164,7 +164,7 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=No
                 source_ref = {"schema_version": ref.schema_version, "document_id": ref.document_id,
                               "source_id": ref.source_id, "content_sha256": ref.content_sha256,
                               "byte_size": ref.byte_size, "mime_type": ref.mime_type}
-                transport = [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli",
+                transport = [sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli",
                              "--config", str(state.config_path)]
                 rf_command = [sys.executable, "-B", str(exported / "narrative_source_preparation.py"),
                               "--company-wiki-catalog-config", str(state.config_path)]

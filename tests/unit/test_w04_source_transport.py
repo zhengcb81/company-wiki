@@ -16,7 +16,7 @@ from company_wiki.automation.narrative_evidence_view import NarrativeEvidenceVie
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 from company_wiki.source_catalog.resolver import SourceRequest
 from company_wiki.source_catalog.source_reader import SourceVersionReader
-from company_wiki.source_catalog.narrative_transport_cli import _dispatch
+from company_wiki.automation.narrative_transport_cli import dispatch_transport_request
 from integration.test_official_json_transport_subject import owned_state, publish, loader_for, bundle_for
 from company_wiki.narrative_subject import NarrativeSubject
 from company_wiki.source_catalog.narrative_artifact_store import LocalNarrativeObjectStore, NarrativeArtifactStore
@@ -92,7 +92,7 @@ def test_compact_projected_public_operations_keep_full_lineage_and_verify_once(t
             projection_ref_resolver=loader_for(state, calls))
         request = {"schema_version": "narrative-reference-request/3", "subject_ref": compact(subject),
                    "generation_sha256": generation}
-        reference_bytes, receipt = _dispatch("reference", request, transport)
+        reference_bytes, receipt = dispatch_transport_request("reference", request, transport)
         reference = json.loads(reference_bytes)
         assert set(reference) == {"schema_version", "artifact_version_id", "artifact_sha256",
                                   "byte_size", "generation_sha256", "subject_ref"}
@@ -218,7 +218,7 @@ def test_compact_65_parent_wire_stays_small_without_truncating_body(tmp_path, mo
         assert len(wire_bytes(subject.to_dict())) > 16384
         transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog),
             projection_ref_resolver=loader_for(state, []))
-        data, metadata = _dispatch("reference", {"schema_version": "narrative-reference-request/3",
+        data, metadata = dispatch_transport_request("reference", {"schema_version": "narrative-reference-request/3",
             "subject_ref": compact(subject), "generation_sha256": generation}, transport)
         parsed = read_request(json.loads(data))
         calls = []
@@ -263,7 +263,7 @@ def test_compact_read_preserves_native_refusals(tmp_path, mutation, reason):
         _, generation, _ = publish(state, subject, "w04-" + mutation, wire=wire)
         transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog),
             projection_ref_resolver=loader_for(state, []))
-        data, _ = _dispatch("reference", {"schema_version": "narrative-reference-request/3",
+        data, _ = dispatch_transport_request("reference", {"schema_version": "narrative-reference-request/3",
             "subject_ref": compact(subject), "generation_sha256": generation}, transport)
         reference = json.loads(data)
         constraints = {}

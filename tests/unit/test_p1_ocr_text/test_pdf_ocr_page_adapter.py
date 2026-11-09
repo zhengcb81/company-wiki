@@ -231,6 +231,85 @@ def test_ocr_line_char_ranges_bind_into_the_page_text(tmp_path):
     ] == "Beta"
 
 
+@pytest.mark.parametrize(
+    ("text", "lines", "error"),
+    [
+        ("One", [_line(0, "One", 0, 40)], "char range"),
+        ("abc", [_line(0, "ab", 0, 2), _line(1, "bc", 1, 3)], "overlap"),
+        ("One unsupported", [_line(0, "One", 0, 3)], "unbound"),
+    ],
+)
+def test_ocr_page_requires_exact_non_overlapping_body_locators(tmp_path, text, lines, error):
+    from company_wiki.parser_adapters.pdf_ocr_page_adapter import OCRPageAdapterError
+
+    with pytest.raises(OCRPageAdapterError, match=error):
+        adapt_ocr_pages(synth.build_manifest(tmp_path), [_ocr_page(1, _ocr_doc(text, lines))])
+
+
+def test_adapter_preserves_geometric_reading_order_from_ocr_producer(tmp_path):
+    from company_wiki.document_normalization.ocr_page_text import order_page_lines
+
+    document = order_page_lines(synth.load_fixture("shuffled"))
+    result = adapt_ocr_pages(synth.build_manifest(tmp_path), [_ocr_page(1, document)])
+
+    assert [item.raw_text for item in result.parser_results] == document["text"].splitlines()
+    assert [item.structured_value["line_index"] for item in result.parser_results] == [1, 3, 0, 2]
+
+
+@pytest.mark.parametrize("reason", ["bbox_invalid", "column_overflow", "future_diagnostic"])
+def test_unmapped_deferral_does_not_certify_page_as_complete(tmp_path, reason):
+    lines = [_line(0, "One", 0, 3), _line(1, "Other", 0, 0, accepted=False, defer_reasons=[reason])]
+    result = adapt_ocr_pages(synth.build_manifest(tmp_path), [_ocr_page(1, _ocr_doc("One", lines))])
+
+    assert result.normalized_text == "One"
+    assert result.parser_results[0].parse_status is ParseStatus.PARTIAL
+
+
+def test_invalid_deferred_diagnostics_cannot_discard_verified_ocr_text(tmp_path):
+    accepted = _line(0, "Keep", 0, 4)
+    del accepted["defer_reasons"]
+    deferred = _line(1, "e\u0301\r\n", 0, 0, accepted=False)
+    deferred["defer_reasons"] = {"unrecognized": "format"}
+    page = _ocr_page(1, _ocr_doc("Keep", [accepted, deferred]))
+
+    result = adapt_ocr_pages(synth.build_manifest(tmp_path), [page])
+
+    assert result.normalized_text == "Keep"
+    assert result.parser_results[0].parse_status is ParseStatus.PARTIAL
+
+
+def test_plain_text_survives_a_failed_page_with_truthful_quality(tmp_path):
+    pages = [_text_page(1, "Keep"), _ocr_page(2, _ocr_doc("", []))]
+    result = adapt_ocr_pages(synth.build_manifest(tmp_path), pages)
+
+    assert result.normalized_text == "Keep"
+    assert [item.parse_status for item in result.parser_results] == [ParseStatus.PARTIAL, ParseStatus.FAILED]
+    assert result.parser_results[0].quality_flags
+
+
+def test_ocr_snapshot_is_validated_once(tmp_path):
+    class ObservedDocument(dict):
+        reads = 0
+
+        def get(self, key, default=None):
+            if key == "lines":
+                self.reads += 1
+            return super().get(key, default)
+
+    document = ObservedDocument(_ocr_doc("One", [_line(0, "One", 0, 3)]))
+    result = adapt_ocr_pages(synth.build_manifest(tmp_path), [_ocr_page(1, document)])
+
+    assert result.parser_results[0].raw_text == "One"
+    assert document.reads == 1
+
+
+def test_ocr_adapter_reports_large_invalid_quality_score(tmp_path):
+    from company_wiki.parser_adapters.pdf_ocr_page_adapter import OCRPageAdapterError
+
+    with pytest.raises(OCRPageAdapterError, match="quality_score"):
+        adapt_ocr_pages(synth.build_manifest(tmp_path), [_text_page(1, "One", 10**400)])
+
+
 # --------------------------------------------------------------------------
 # Failure semantics: duplicate / <=0 page numbers, bad ocr schema.
 # --------------------------------------------------------------------------

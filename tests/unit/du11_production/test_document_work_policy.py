@@ -8,7 +8,8 @@ import pytest
 import yaml
 
 from company_wiki.automation.narrative_generation import current_reading_decision_matches
-from company_wiki.automation.narrative_select import NarrativeSelectHandler, _SelectFailure
+from company_wiki.source_catalog.narrative_selection import NarrativeMaterialError, RawNarrativeSelector
+from company_wiki.source_catalog.narrative_selector_binding import bind_narrative_selector
 from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 
 
@@ -37,7 +38,7 @@ def run_pdf(tmp_path, monkeypatch):
     digest = hashlib.sha256(original).hexdigest()
     payload = SimpleNamespace(source_ref=SimpleNamespace(mime_type="application/pdf",
         source_id="urn:company-wiki:source:sha256:" + digest, content_sha256=digest),
-        source_metadata=SimpleNamespace(language="en", title="Annual Report", document_kind="annual_report"))
+        source_metadata=SimpleNamespace(source_class="filing", language="en", title="Annual Report", document_kind="annual_report"))
 
     def run(work, *, tokens=10_000_000, micro_usd=20_000_000):
         config.write_text(yaml.safe_dump({"schema_version": "company-wiki-budget-policy/1",
@@ -67,11 +68,13 @@ def run_pdf(tmp_path, monkeypatch):
                         return selected
                 return super().select(*args, selector=ObservedSelector(), **kwargs)
 
-        handler = NarrativeSelectHandler(reader=object(), pdf_reading=ObservedReading(),
-                                        selector_version="0.9.0")
+        selector = RawNarrativeSelector(
+            pdf_reading=ObservedReading(), selector=bind_narrative_selector(selector_version="0.9.0"),
+        )
         try:
-            handler._select_pdf(payload, original, SimpleNamespace(checkpoint=lambda: None))
-        except _SelectFailure:
+            selector.select(original, source_ref=payload.source_ref, source_metadata=payload.source_metadata,
+                            checkpoint=lambda: None)
+        except NarrativeMaterialError:
             assert work < 16_000_000
         assert hashlib.sha256(original).hexdigest() == digest
         assert observed["budget"].max_work_units == work

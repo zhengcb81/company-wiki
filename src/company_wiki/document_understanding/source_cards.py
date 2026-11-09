@@ -105,3 +105,12 @@ def source_cards(plan: SummaryTaskPlan, spans: Mapping[str, EvidenceSpan]) -> It
             yield SourceCard(task, (), False, 'source_table_unresolved')
             continue
         yield SourceCard(task, tuple(spans[sid] for sid in task.support_ids), True, 'source_card')
+
+__all__ = [
+    'SOURCE_CARD_UNAVAILABLE_REASONS',
+    'SourceCard',
+    'source_card_generation_reason',
+    'source_card_scope',
+    'source_cards',
+    'source_task_admission',
+]

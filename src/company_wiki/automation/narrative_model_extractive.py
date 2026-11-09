@@ -11,8 +11,6 @@ from copy import deepcopy
 from dataclasses import dataclass
 import hashlib
 import json
-import sys
-from pathlib import Path
 from typing import Any
 
 from company_wiki.document_understanding.source_cards import source_cards, source_card_scope, source_card_generation_reason
@@ -20,9 +18,12 @@ from company_wiki.document_understanding.summary_tasks import SummaryTaskPlan, b
 from company_wiki.document_understanding.source_card_allocation import (
     SOURCE_CARD_ALLOCATION_VERSION, source_allocation_order as _source_allocation_order,
 )
-from company_wiki.source_catalog.narrative_evidence import (
-    summary_claim_type_for_roles, validate_summary_claim,
+from company_wiki.implementation_identity import code_sha256
+from company_wiki.source_catalog.narrative_contracts import narrative_wire_sha256
+from company_wiki.source_catalog.narrative_claims import (
+    summary_claims_sha256, summary_claim_type_for_roles, validate_summary_claim,
 )
+from company_wiki.wire_json import encoding_sha256
 
 from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import (
@@ -30,7 +31,7 @@ from .narrative_contracts import (
     _claim_from_dict,
 )
 from . import narrative_model as legacy
-from .narrative_rank_material import ranking_material, ranking_strategy
+from .narrative_rank_material import RANK_MATERIAL_SCHEMA, ranking_material, ranking_strategy
 
 
 EXTRACTIVE_MODEL_PROJECTION_VERSION = 'reading-model-input/5'
@@ -253,28 +254,32 @@ def decode_extractive_result(response, *, selected: NarrativeSelectResult) -> Ex
 
 
 def extractive_boundary_identity(boundary) -> dict[str, Any]:
-    from company_wiki import narrative_subject
-    from company_wiki.document_understanding import source_cards as cards, summary_tasks, reading_context_contract, source_card_allocation
-    from company_wiki.source_catalog import narrative_evidence
-    from . import narrative_contracts, narrative_model_runtime, models
+    from company_wiki.document_understanding.reading_identity import (
+        reading_context_sha256, source_card_allocation_sha256, source_cards_sha256, summary_tasks_sha256,
+    )
+    from company_wiki.narrative_subject import subject_contract_sha256
+    from . import narrative_model_runtime
     from . import narrative_summary_execution
     from . import narrative_rank_material
-    modules = {'protocol': sys.modules[__name__], 'source_cards': cards,
-               'source_task_plan': summary_tasks, 'role_quality_owner': narrative_evidence,
-               'source_use_contract': reading_context_contract,
-               'canonical_contracts': narrative_contracts, 'canonical_encoding': models,
-               'runtime': narrative_model_runtime,
-               'legacy_utilities': legacy, 'subject_contracts': narrative_subject,
-               'execution_contract': narrative_summary_execution}
-    modules.update(source_card_allocation=source_card_allocation, ranking_material=narrative_rank_material)
-    def _module_path(module: Any) -> Path:
-        path = getattr(module, "__file__", None)
-        if not path:
-            raise RuntimeError("module has no file")
-        return Path(path)
-
-    dependencies = {name: hashlib.sha256(_module_path(module).read_bytes()
-        .replace(b'\r\n', b'\n').replace(b'\r', b'\n')).hexdigest() for name, module in modules.items()}
+    modules = {
+        'runtime': narrative_model_runtime, 'legacy_utilities': legacy,
+        'execution_contract': narrative_summary_execution, 'ranking_material': narrative_rank_material,
+    }
+    dependencies = {
+        name: code_sha256(module.__file__, universal_newlines=True)
+        for name, module in modules.items()
+    }
+    dependencies.update({
+        'protocol': code_sha256(__file__, universal_newlines=True),
+        'canonical_contracts': narrative_wire_sha256(universal_newlines=True),
+        'canonical_encoding': encoding_sha256(universal_newlines=True),
+        'source_cards': source_cards_sha256(universal_newlines=True),
+        'source_task_plan': summary_tasks_sha256(universal_newlines=True),
+        'role_quality_owner': summary_claims_sha256(universal_newlines=True),
+        'source_use_contract': reading_context_sha256(universal_newlines=True),
+        'subject_contracts': subject_contract_sha256(universal_newlines=True),
+        'source_card_allocation': source_card_allocation_sha256(universal_newlines=True),
+    })
     return {'schema_version': 'reading-model-boundary/1',
         'source_card_allocation_version': SOURCE_CARD_ALLOCATION_VERSION,
         'reading_projection_version': boundary.reading_projection_version,
@@ -283,3 +288,9 @@ def extractive_boundary_identity(boundary) -> dict[str, Any]:
         'instruction_sha256': hashlib.sha256(EXTRACTIVE_INSTRUCTION.encode()).hexdigest(),
         'response_schema_sha256': canonical_json_hash(extractive_response_schema()),
         'decoder_sha256': canonical_json_hash(dependencies), 'implementation_dependencies': dependencies}
+
+__all__ = [
+    'EXTRACTIVE_MODEL_PROJECTION_VERSION',
+    'EXTRACTIVE_REQUEST_SCHEMA',
+    'RANK_MATERIAL_SCHEMA',
+]

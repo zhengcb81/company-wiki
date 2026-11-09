@@ -471,3 +471,9 @@ def find_product_declarations(text: str) -> tuple[ProductDeclaration, ...]:
     before it could be read" use :func:`scan_product_declarations` directly.
     """
     return scan_product_declarations(text).declarations
+
+__all__ = [
+    'find_product_deictic',
+    'head_class',
+    'product_head_spans',
+]

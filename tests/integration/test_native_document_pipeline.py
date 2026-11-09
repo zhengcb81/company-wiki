@@ -16,7 +16,7 @@ from support.native_document_fixtures import (
 )
 from company_wiki.source_catalog.models import CatalogConfig, RootSpec
 from company_wiki.source_catalog.service import SourceCatalog
-from company_wiki.source_catalog.official_source_flow import (
+from company_wiki.automation.source_request import (
     prepare_official_narrative_request,
 )
 from company_wiki.source_catalog.source_reader import SourceVersionReader
@@ -230,7 +230,7 @@ def test_two_native_formats_full_cli_worker_reuse_restores_test_directory(
                 root,
                 [
                     "-m",
-                    "company_wiki.source_catalog.narrative_transport_cli",
+                    "company_wiki.automation.narrative_transport_cli",
                     "--config",
                     str(config),
                     "--operation",
@@ -245,7 +245,7 @@ def test_two_native_formats_full_cli_worker_reuse_restores_test_directory(
                 root,
                 [
                     "-m",
-                    "company_wiki.source_catalog.narrative_transport_cli",
+                    "company_wiki.automation.narrative_transport_cli",
                     "--config",
                     str(config),
                     "--operation",

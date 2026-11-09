@@ -165,7 +165,7 @@ def test_wrapped_guidance_native_carrier_uses_its_complete_source_body_for_exter
 
 
 def test_actual_guidance_module_bytes_invalidate_the_real_complete_cache_and_restore(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory as inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as inventory
     from company_wiki.document_understanding.decision_dependencies import freeze_decision_dependencies
     from unit.document_understanding_selection.test_reading_decision_inventory import _real_interim_pipeline
 

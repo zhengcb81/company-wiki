@@ -32,15 +32,30 @@ from .observation_adapter import build_observation, is_selectable, selectable_un
 from .orchestration import build_dependency_packages, package_units_for_prompt
 from .pipeline import PIPELINE_SCHEMA_VERSION, understand_units
 from .summary_input import SUMMARY_INPUT_SCHEMA_VERSION, build_summary_input
+from .source_discourse import SourceDiscourseObservation, observe_source_discourse
+from . import (
+    assertion_frames as assertion_frames,
+    reading_context_contract as reading_context_contract,
+    source_card_allocation as source_card_allocation,
+    source_cards as source_cards,
+    summary_tasks as summary_tasks,
+)
 
 __all__ = [
-    "PIPELINE_SCHEMA_VERSION",
-    "SUMMARY_INPUT_SCHEMA_VERSION",
-    "build_dependency_packages",
-    "build_observation",
-    "build_summary_input",
-    "is_selectable",
-    "package_units_for_prompt",
-    "selectable_unit_ids",
-    "understand_units",
+    'PIPELINE_SCHEMA_VERSION',
+    'SUMMARY_INPUT_SCHEMA_VERSION',
+    'build_dependency_packages',
+    'build_observation',
+    'build_summary_input',
+    'SourceDiscourseObservation',
+    'observe_source_discourse',
+    'is_selectable',
+    'package_units_for_prompt',
+    'selectable_unit_ids',
+    'understand_units',
+    'assertion_frames',
+    'reading_context_contract',
+    'source_card_allocation',
+    'source_cards',
+    'summary_tasks',
 ]

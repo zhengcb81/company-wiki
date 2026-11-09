@@ -398,4 +398,9 @@ def _pipeline_diagnostics(
     return diagnostics
 
 
-__all__ = ["NARRATIVE_FAMILIES", "PIPELINE_SCHEMA_VERSION", "understand_units"]
+__all__ = [
+    'NARRATIVE_FAMILIES',
+    'PIPELINE_SCHEMA_VERSION',
+    'understand_units',
+    'PIPELINE_FEATURE_VERSION',
+]

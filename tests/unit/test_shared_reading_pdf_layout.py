@@ -423,18 +423,15 @@ def test_rich_layout_preserves_all_old_metadata_and_durable_evidence_identity():
 
 
 def test_production_default_parser_gets_opt_in_but_legacy_custom_parser_keeps_its_interface():
-    from company_wiki.automation.narrative_select import NarrativeSelectHandler
+    from company_wiki.source_catalog.narrative_pdf_reading import PdfReading, PdfReadingRequest
 
     raw = _bytes()
     sha = hashlib.sha256(raw).hexdigest()
-    payload = SimpleNamespace(
-        source_ref=SimpleNamespace(
-            source_id=source_id_for_sha256(sha), content_sha256=sha
-        ),
-        source_metadata=SimpleNamespace(language="en", title="Annual Report", document_kind="annual_report"),
+    request = PdfReadingRequest(
+        source_id=source_id_for_sha256(sha), source_sha256=sha,
+        language="en", title="Annual Report", document_kind="annual_report",
     )
-    default = NarrativeSelectHandler(reader=None, selector_version="0.9.0")
-    assert default._parse_pdf(payload, raw).layout_coverage is not None
+    assert PdfReading().read(raw, request, selector_version="0.9.0").layout_coverage is not None
     calls = []
 
     def custom(data, *, source_id, source_sha256, language, full_table_scan=False, **reading_options):
@@ -448,10 +445,7 @@ def test_production_default_parser_gets_opt_in_but_legacy_custom_parser_keeps_it
             **reading_options,
         )
 
-    compatible = NarrativeSelectHandler(
-        reader=None, pdf_parser=custom, selector_version="0.9.0"
-    )
-    parsed = compatible._parse_pdf(payload, raw)
+    parsed = PdfReading(parser=custom).read(raw, request, selector_version="0.9.0")
     assert calls == [True]
     assert parsed.layout_coverage is not None
 

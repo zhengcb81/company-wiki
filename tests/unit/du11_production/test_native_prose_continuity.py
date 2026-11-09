@@ -150,15 +150,15 @@ def test_real_source_boundaries_do_not_join_unrelated_material(boundary):
 
 
 def test_prose_producer_is_a_current_pdf_only_cache_dependency(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory as inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as inventory
     from company_wiki.source_catalog import narrative_evidence as source
 
-    before = inventory._versions(pdf_frontend=True, mime_type="application/pdf")
-    other = inventory._versions(pdf_frontend=False, mime_type="text/html")
+    before = inventory.decision_versions(pdf_frontend=True, mime_type="application/pdf")
+    other = inventory.decision_versions(pdf_frontend=False, mime_type="text/html")
     assert before["pdf_native_prose"] == source.PDF_PROSE_LAYOUT_FEATURE_VERSION
     monkeypatch.setattr(source, "PDF_PROSE_LAYOUT_FEATURE_VERSION", "pdf-native-prose-layout/test")
-    assert inventory._versions(pdf_frontend=True, mime_type="application/pdf") != before
-    assert inventory._versions(pdf_frontend=False, mime_type="text/html") == other
+    assert inventory.decision_versions(pdf_frontend=True, mime_type="application/pdf") != before
+    assert inventory.decision_versions(pdf_frontend=False, mime_type="text/html") == other
 
 
 def normalized_style_fragments():

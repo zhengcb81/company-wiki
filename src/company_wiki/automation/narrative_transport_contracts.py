@@ -386,3 +386,15 @@ def parse_compact_reference_request(value: object) -> tuple[NarrativeSubjectRef,
     if item["schema_version"] != NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA:
         raise NarrativeContractError("unsupported compact narrative reference request schema")
     return _compact_subject(item["subject_ref"]), _generation(item["generation_sha256"])
+
+__all__ = [
+    'NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA',
+    'NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA',
+    'NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA',
+    'NARRATIVE_READ_RECEIPT_SCHEMA',
+    'NarrativeReadRequest',
+    'NarrativeTransportError',
+    'parse_compact_reference_request',
+    'parse_projected_reference_request',
+    'parse_reference_request',
+]

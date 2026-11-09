@@ -3,7 +3,9 @@
 import importlib
 import importlib.util
 import json
+import os
 from pathlib import Path
+import unicodedata
 
 import pytest
 
@@ -96,6 +98,116 @@ def test_same_bytes_at_another_path_keep_source_id_but_not_location(tmp_path):
     assert left_manifest.original_path != right_manifest.original_path
 
 
+def test_manifest_keeps_distinct_unicode_file_names_with_the_same_bytes(tmp_path):
+    module = _contract()
+    composed = tmp_path / "Caf\u00e9.md"
+    decomposed = tmp_path / "Cafe\u0301.md"
+    for path in (composed, decomposed):
+        path.write_bytes(b"same immutable bytes")
+    if {child.name for child in tmp_path.iterdir()} != {composed.name, decomposed.name}:
+        pytest.skip("this filesystem cannot distinguish canonically equivalent names")
+
+    first = _manifest(module, tmp_path, composed)
+    second = _manifest(module, tmp_path, decomposed)
+
+    assert first.source_id == second.source_id
+    assert first.original_path == composed.name
+    assert second.original_path == decomposed.name
+    assert module.SourceManifest.from_dict(second.to_dict()) == second
+    first.verify_file(root=tmp_path, file_path=composed)
+    second.verify_file(root=tmp_path, file_path=decomposed)
+    with pytest.raises(module.SourceManifestMismatchError, match="location"):
+        first.verify_file(root=tmp_path, file_path=decomposed)
+    with pytest.raises(module.SourceManifestMismatchError, match="location"):
+        second.verify_file(root=tmp_path, file_path=composed)
+    decomposed.unlink()
+    with pytest.raises(module.SourceManifestMismatchError):
+        second.verify_file(root=tmp_path)
+
+
+def test_manifest_rejects_ambiguous_old_nfc_locator_without_selecting_by_hash(tmp_path):
+    module = _contract()
+    first = tmp_path / "e\u0327\u0301.md"
+    second = tmp_path / "e\u0301\u0327.md"
+    first.write_bytes(b"known original")
+    second.write_bytes(b"different file")
+    if {child.name for child in tmp_path.iterdir()} != {first.name, second.name}:
+        pytest.skip("this filesystem cannot distinguish canonically equivalent names")
+    canonical = unicodedata.normalize("NFC", first.name)
+    assert canonical == unicodedata.normalize("NFC", second.name)
+    assert canonical not in (first.name, second.name)
+    manifest = module.SourceManifest.from_dict({
+        **_manifest(module, tmp_path, first).to_dict(), "original_path": canonical,
+    })
+
+    with pytest.raises(module.SourceManifestMismatchError, match="ambiguous"):
+        manifest.verify_file(root=tmp_path, file_path=first)
+
+
+def test_old_nfc_fallback_rejects_shadowed_parent_even_if_one_parent_is_exact(tmp_path):
+    module = _contract()
+    parents = (tmp_path / "Caf\u00e9", tmp_path / "Cafe\u0301")
+    for parent in parents:
+        parent.mkdir(exist_ok=True)
+    if {child.name for child in tmp_path.iterdir()} != {parent.name for parent in parents}:
+        pytest.skip("this filesystem cannot distinguish canonically equivalent names")
+    first = parents[0] / "Re\u0301sume\u0301.md"
+    second = parents[1] / "R\u00e9sum\u00e9.md"
+    first.write_bytes(b"known original")
+    second.write_bytes(b"another original")
+    observed = _manifest(module, tmp_path, first)
+    legacy = module.SourceManifest.from_dict({
+        **observed.to_dict(), "original_path": unicodedata.normalize("NFC", observed.original_path),
+    })
+
+    with pytest.raises(module.SourceManifestMismatchError, match="ambiguous"):
+        legacy.verify_file(root=tmp_path)
+
+
+def test_old_nfc_fallback_does_not_hash_a_canonically_equivalent_outside_link(tmp_path, monkeypatch):
+    module = _contract()
+    implementation = importlib.import_module("company_wiki.source_contract.source_manifest")
+    root = tmp_path / "repo"
+    outside = tmp_path / "outside"
+    root.mkdir()
+    outside.mkdir()
+    original = root / "valid.md"
+    original.write_bytes(b"known original")
+    (outside / "valid.md").write_bytes(original.read_bytes())
+    try:
+        (root / "Cafe\u0301").symlink_to(outside, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks are unavailable on this host")
+    manifest = module.SourceManifest.from_dict({
+        **_manifest(module, root, original).to_dict(), "original_path": "Caf\u00e9/valid.md",
+    })
+
+    def unexpected_hash(_path):
+        pytest.fail("a locator outside the root reached the SHA read")
+
+    monkeypatch.setattr(implementation, "_hash_file", unexpected_hash)
+    with pytest.raises(module.SourceManifestMismatchError, match="inside root"):
+        manifest.verify_file(root=root)
+
+
+def test_old_nfc_locator_never_falls_through_existing_exact_spelling(tmp_path):
+    module = _contract()
+    decomposed = tmp_path / "Cafe\u0301.md"
+    composed = tmp_path / "Caf\u00e9.md"
+    decomposed.write_bytes(b"original")
+    composed.write_bytes(b"tampered")
+    if {child.name for child in tmp_path.iterdir()} != {composed.name, decomposed.name}:
+        pytest.skip("this filesystem cannot distinguish canonically equivalent names")
+    manifest = module.SourceManifest.from_dict({
+        **_manifest(module, tmp_path, decomposed).to_dict(), "original_path": composed.name,
+    })
+
+    with pytest.raises(module.SourceManifestMismatchError, match="SHA-256"):
+        manifest.verify_file(root=tmp_path, file_path=composed)
+    with pytest.raises(module.SourceManifestMismatchError, match="location"):
+        manifest.verify_file(root=tmp_path, file_path=decomposed)
+
+
 def test_entity_ids_are_unique_sorted_and_unicode_normalized(tmp_path):
     module = _contract()
     root = tmp_path / "repo"
@@ -118,9 +230,25 @@ def test_entity_ids_are_unique_sorted_and_unicode_normalized(tmp_path):
     assert manifest.entity_ids == ("SSE:688012", "sector:半导体设备")
 
 
+def test_manifest_keeps_historical_posix_names_with_nonleading_colons(tmp_path):
+    module = _contract()
+    source = tmp_path / "original.pdf"
+    source.write_bytes(b"unchanged bytes")
+    manifest = _manifest(module, tmp_path, source)
+    relative_path = "reports/C:annual.pdf"
+    stored = module.SourceManifest.from_dict({**manifest.to_dict(), "original_path": relative_path})
+
+    assert stored.original_path == relative_path
+    if os.name != "nt":
+        physical = tmp_path / relative_path
+        physical.parent.mkdir()
+        physical.write_bytes(source.read_bytes())
+        stored.verify_file(root=tmp_path, file_path=physical)
+
+
 @pytest.mark.parametrize(
     "relative_path",
-    ("../escape.pdf", "/absolute.pdf", "companies/./report.pdf", "a\\b.pdf"),
+    ("../escape.pdf", "/absolute.pdf", "companies/./report.pdf", "a\\b.pdf", "C:escape.pdf"),
 )
 def test_manifest_rejects_noncanonical_original_paths(relative_path):
     module = _contract()
@@ -237,6 +365,26 @@ def test_verify_file_detects_size_or_hash_drift(tmp_path):
     assert source.stat().st_size == manifest.byte_size
     with pytest.raises(module.SourceManifestMismatchError):
         manifest.verify_file(root=root, file_path=source)
+
+
+def test_verify_file_refuses_a_source_changed_during_hashing(tmp_path, monkeypatch):
+    module = _contract()
+    implementation = importlib.import_module("company_wiki.source_contract.source_manifest")
+    source = tmp_path / "report.pdf"
+    source.write_bytes(b"original")
+    manifest = _manifest(module, tmp_path, source)
+    hash_file = implementation._hash_file
+
+    def hash_then_mutate(path):
+        digest = hash_file(path)
+        before = path.stat()
+        path.write_bytes(b"tampered")
+        os.utime(path, ns=(before.st_atime_ns, before.st_mtime_ns + 1_000_000_000))
+        return digest
+
+    monkeypatch.setattr(implementation, "_hash_file", hash_then_mutate)
+    with pytest.raises(module.SourceManifestMismatchError, match="changed while hashing"):
+        manifest.verify_file(root=tmp_path, file_path=source)
 
 
 def test_schema_documentation_lists_every_field_and_semantic_boundary():

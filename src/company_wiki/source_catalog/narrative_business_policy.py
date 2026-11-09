@@ -9,7 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 import re
 
-from company_wiki.document_normalization.text_matching import matching_reading_text
+from company_wiki.document_model.text_matching import matching_reading_text
 from company_wiki.document_understanding.operating_states.assertion_roles import (
     SourceAssertionRoles, abstract_source_argument, SOURCE_DESCRIPTION_SCAN_PASSES,
 )

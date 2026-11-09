@@ -21,6 +21,11 @@ QA_HEADING = re.compile(
     r"^(?:questions?\s*(?:&|and)\s*answers?(?:\s+session)?|Q\s*&\s*A(?:\s+session)?)\s*:?[ \t]*$",
     re.I,
 )
+DISCLOSURE_HEADING = re.compile(
+    r"^(?:forward[- ]looking statements?|(?:cautionary statement(?: regarding forward[- ]looking statements?))|"
+    r"safe harbou?r(?: statements?)?|disclaimer|前瞻性[陳陈]述|免[責责]聲明|免[責责]声明)\s*[:：]?$",
+    re.I,
+)
 END = re.compile(
     r"^(?:end(?:\s+of\s+(?:the\s+)?(?:call|transcript))?|\[?end\s+of\s+transcript\]?)\s*[.!]?$|(?:this\s+concludes|concludes?\s+today[’\']?s).{0,100}(?:conference|earnings)?\s*call|you\s+may\s+(?:now\s+)?disconnect",
     re.I,
@@ -41,6 +46,14 @@ _NON_SPEAKER = frozenset(
         "financial results",
     }
 )
+_ROLE_LABELS = {
+    "analyst": "analyst",
+    "operator": "operator",
+    "ceo": "management",
+    "cfo": "management",
+    "management": "management",
+    "president": "management",
+}
 _NAME = re.compile(r"^[A-Z][A-Za-z.\'’ -]{1,75}$")
 _ROLE = re.compile(
     r"chief|CEO|CFO|president|executive|officer|analyst|investor relations|operator",
@@ -125,20 +138,25 @@ class AnonymousTurnObserver:
 def valid_speaker(name):
     if not name or name.casefold() in _NON_SPEAKER:
         return False
-    if name.casefold() in {
-        "ceo",
-        "cfo",
-        "operator",
-        "analyst",
-        "management",
-        "president",
-    }:
+    if name.casefold() in _ROLE_LABELS:
         return True
     words = name.split()
     return 2 <= len(words) <= 5 and all(
         word[:1].isupper() or word.casefold() in {"de", "van", "von", "der"}
         for word in words
     )
+
+
+def declared_speaker_role(name: str, title: str) -> str:
+    """Use the printed title or an explicit role label, never part of a name."""
+    if re.search(r"\boperator\b", title, re.I):
+        return "operator"
+    if re.search(r"\banalyst\b", title, re.I):
+        return "analyst"
+    if re.search(r"\b(?:CEO|CFO|chief|president|executive|officer|investor relations|management)\b",
+                 title, re.I):
+        return "management"
+    return _ROLE_LABELS.get(name.casefold(), "unknown")
 
 
 def speaker_fields(lines, index, legacy_fields, *, allow_affiliation=False, allow_native=False):
@@ -238,3 +256,16 @@ def body_start(lines, explicit_start, legacy_fields, *, allow_affiliation=False,
                 if len(actors) >= 2 and substantive:
                     return first, False
     return None
+
+__all__ = [
+    'AnonymousTurnObserver',
+    'DISCLOSURE_HEADING',
+    'END',
+    'NATURAL_START',
+    'QA_HEADING',
+    'body_start',
+    'declared_speaker_role',
+    'legacy_speaker_fields',
+    'speaker_fields',
+    'valid_speaker',
+]

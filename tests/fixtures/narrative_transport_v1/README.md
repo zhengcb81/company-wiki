@@ -37,11 +37,10 @@ modes. Existing dated golden files remain unchanged.
 
 ## Reviewed current-v2 snapshot (2026-10-21)
 
-`current-v2/` is the exact current producer expectation; the root v1 JSON bytes,
-reference, request, receipt and metadata hashes are unchanged. Both snapshots
-remain strict bundle/wire/hash compatibility vectors. The public current-producer
-test compares all bytes against current-v2 after the same documented installation
-normalization, and never removes provenance or accepts arbitrary span IDs.
+`current-v2/` preserves the exact producer expectation reviewed on 2026-10-21;
+the root v1 JSON bytes, reference, request, receipt and metadata hashes remain
+unchanged. It is a historical compatibility vector and is no longer the current
+producer expectation. All snapshots remain strict bundle/wire/hash vectors.
 
 The reviewed evolution has 12 changed JSON paths:
 
@@ -67,3 +66,30 @@ Negative tests reject an invented numeric fact, added unit or old-span citation.
 The proposal was generated into isolated tmp through the real runtime/CLI, then
 copied as a new versioned fixture only after that semantic comparison passed.
 No provenance-only refresh of the root v1 files was performed.
+
+## Reviewed current-v3 snapshot (2026-11-06)
+
+`current-v3/` is the current public producer expectation. It was generated from
+the isolated local Replay pipeline; `bundle.expected_read_policy_sha256`, the
+reference artifact identity/size/hash, and the receipt policy hash/read time are
+normalized exactly as recorded in `current-v3/metadata.json`. The root v1 and
+`current-v2/` snapshots remain byte-for-byte historical vectors.
+
+The reviewed v2-to-v3 changes are restricted to the same selected transcript
+sentence:
+
+- The parser identity advances from `0.3.1` to `0.4.0`.
+- `operating_mechanism` and `business_progress` are added to that sentence's
+  topic labels; `operating_mechanism` and `operating_activity` are added to its
+  selection reasons.
+- The changed span hash and span ID are regenerated from those exact structured
+  fields. The summary claim still quotes the original sentence, and its citation
+  and original-byte binding point to the regenerated span.
+- Source SHA/size, source-byte range, locator, raw sentence, claim meaning, model,
+  prompt, selector identity, and all other fields remain equal to v2.
+
+The v2-to-v3 evolution test reconstructs those exact fields from the historical
+v2 object and requires complete object equality. It replays both saved parser
+versions against the same synthetic TXT and rejects extra topics, reasons, or
+content. The public current-producer test compares all normalized output bytes
+against `current-v3/`; it does not mutate either historical snapshot.

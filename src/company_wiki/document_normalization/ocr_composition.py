@@ -20,6 +20,7 @@ from .ocr_region_recovery import RecoveryBudget, recover_regions
 from .units import FORMAT_PPTX, PPTX_OCR_PARSER_VERSION, build_unit
 
 OCR_LOCATOR_SCHEMA = "cwp-pptx-image-ocr/1"
+ImageOccurrence = tuple[int, str, str]
 
 
 def adapter_identity(ocr: OCRAdapter):
@@ -43,7 +44,7 @@ def enrich_pptx(
     ocr: OCRAdapter,
     limits,
     ocr_limits: OCRLimits | None = None,
-    selected_media_sha256s: frozenset[str] | None = None,
+    selected_images: frozenset[ImageOccurrence] | None = None,
 ):
     """Compose configured native OCR behind one reusable hard process boundary.
 
@@ -67,11 +68,11 @@ def enrich_pptx(
         with IsolatedOCRAdapter(ocr.config, deadline=deadline) as bounded:
             return _enrich_pptx(
                 document, ocr=bounded, limits=limits, ocr_limits=ocr_limits,
-                selected_media_sha256s=selected_media_sha256s,
+                selected_images=selected_images,
             )
     return _enrich_pptx(
         document, ocr=ocr, limits=limits, ocr_limits=ocr_limits,
-        selected_media_sha256s=selected_media_sha256s,
+        selected_images=selected_images,
     )
 
 
@@ -81,7 +82,7 @@ def _enrich_pptx(
     ocr: OCRAdapter,
     limits,
     ocr_limits: OCRLimits | None = None,
-    selected_media_sha256s: frozenset[str] | None = None,
+    selected_images: frozenset[ImageOccurrence] | None = None,
 ):
     ocr_limits = ocr_limits or OCRLimits()
     if limits.deadline is not None:
@@ -126,22 +127,25 @@ def _enrich_pptx(
     total_unrecovered_regions = 0
     cache: dict = {}
     page_records: dict = {}
+    unattempted_image_pages: set[int] = set()
     assets = []
     errors = list(document.structure.errors)
     for asset in document.opaque_assets:
         limits.check_deadline("OCR asset")
         ocr_limits.check_deadline()
-        if (
-            asset.asset_kind != "image"
-            or asset.original_bytes is None
-            or asset.slide_number is None
-        ):
+        if asset.asset_kind != "image" or asset.slide_number is None:
+            assets.append(asset)
+            continue
+        occurrence = (asset.slide_number, asset.shape_path, asset.media_sha256)
+        selected = (
+            asset.rendered if selected_images is None else occurrence in selected_images
+        )
+        if not selected or asset.original_bytes is None:
+            if asset.rendered:
+                unattempted_image_pages.add(asset.slide_number)
             assets.append(asset)
             continue
         digest = hashlib.sha256(asset.original_bytes).hexdigest()
-        if selected_media_sha256s is not None and digest not in selected_media_sha256s:
-            assets.append(asset)
-            continue
         images += 1
         ocr_limits.require_within("max_images", images)
         if digest != asset.media_sha256 or len(asset.original_bytes) != asset.byte_size:
@@ -315,13 +319,11 @@ def _enrich_pptx(
         )
         if error:
             errors.append(error)
-    # OCR attempts do not prove exhaustive text recall. Keep each image page
-    # opaque/reviewable while exposing individually replayable detected lines.
-    opaque = tuple(sorted(set(document.structure.opaque_pages) | set(page_records)))
+    # The package already records the pages with unresolved visible assets.
+    # Detected lines do not prove that all text on an image was recognized.
     structure = replace(
         document.structure,
         units=tuple(units),
-        opaque_pages=opaque,
         errors=tuple(errors),
         line_count=sum(u.unit_kind == "pptx_image_ocr_line" for u in units),
     )
@@ -338,17 +340,10 @@ def _enrich_pptx(
             "ocr": {
                 "schema_version": "cwp-pptx-ocr-quality/1",
                 "scope": "all_images"
-                if selected_media_sha256s is None
+                if selected_images is None
                 else "selected_media",
                 "attempted_pages": sorted(page_records),
-                "unattempted_image_pages": sorted(
-                    {
-                        a.slide_number
-                        for a in assets
-                        if a.asset_kind == "image" and a.slide_number is not None
-                    }
-                    - set(page_records)
-                ),
+                "unattempted_image_pages": sorted(unattempted_image_pages),
                 "identity": manifest,
                 "fingerprint": fingerprint,
                 "recall_status": "unverified",

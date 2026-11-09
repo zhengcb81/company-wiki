@@ -15,7 +15,7 @@ from company_wiki.document_understanding.summary_tasks import build_summary_task
 from company_wiki.document_understanding.source_cards import (
     SOURCE_CARD_UNAVAILABLE_REASONS, source_card_generation_reason, source_cards,
 )
-from company_wiki.source_catalog.narrative_evidence import summary_claim_type_for_roles
+from company_wiki.source_catalog.narrative_claims import summary_claim_type_for_roles
 from .models import canonical_json, canonical_json_hash, _to_plain
 from .narrative_contracts import (
     NarrativeContractError,
@@ -301,6 +301,13 @@ def wrap_summary(summary: NarrativeSummaryResult, execution: Mapping) -> dict[st
 def parse_summary_job_result(
     value: object, *, selected: NarrativeSelectResult | None = None
 ) -> NarrativeSummaryResult:
+    return read_summary_job_result(value, selected=selected)[0]
+
+
+def read_summary_job_result(
+    value: object, *, selected: NarrativeSelectResult | None = None,
+) -> tuple[NarrativeSummaryResult, dict[str, Any] | None]:
+    """Read a summary and its validated assessor report when one was produced."""
     if isinstance(value,Mapping) and value.get('schema_version')==ASSESSED_INTERNAL_SCHEMA:
         from .narrative_summary_protocols import ASSESSED_PROMPTS, scoped_protocol_for_prompt
         from .narrative_summary_assessment import validate_assessment_wire, validate_assessment_material, validate_assessment_quality
@@ -314,15 +321,18 @@ def parse_summary_job_result(
         try:
             if selected is None:
                 report=validate_assessment_wire(value['assessment'],claims)
+                _require(report['validator']['version'] in (
+                    protocol.assessor_version, *protocol.historical_assessor_versions,
+                ), 'assessment protocol version mismatch')
             else:
                 summary.validate_against(selected)
                 report=validate_assessment_material(value['assessment'],selected.evidence_spans,selected.reading_context,
-                    claims,plan_max_claims=protocol.plan_max_claims,assessor_version=protocol.assessor_version)
-            _require(report['validator']['version']==protocol.assessor_version,'assessment protocol version mismatch')
+                    claims,plan_max_claims=protocol.plan_max_claims,assessor_version=protocol.assessor_version,
+                    historical_assessor_versions=protocol.historical_assessor_versions)
             validate_assessment_quality(report,claims,summary.draft.status)
         except (ValueError,TypeError,KeyError) as exc:
             raise NarrativeContractError('invalid assessed summary wrapper') from exc
-        return summary
+        return summary, report
     if isinstance(value, Mapping) and value.get("schema_version") == INTERNAL_SCHEMA:
         _require(
             set(value) == {"schema_version", "summary", "execution"},
@@ -334,7 +344,7 @@ def parse_summary_job_result(
                  'assessed protocol requires its assessment wrapper')
         report = _report(value["execution"])
         _bind_summary(summary, report, selected)
-        return summary
+        return summary, None
     summary = NarrativeSummaryResult.from_dict(value)
     from .narrative_model_extractive import EXTRACTIVE_PROMPT_VERSION
     from .narrative_summary_protocols import ASSESSED_PROMPTS, scoped_protocol_for_prompt
@@ -346,16 +356,14 @@ def parse_summary_job_result(
     )
     if selected is not None:
         summary.validate_against(selected)
-    return summary
+    return summary, None
 
 
 def extract_summary_execution(value: object) -> dict[str, Any] | None:
     if not isinstance(value, Mapping):
         return None
     if value.get('schema_version')==ASSESSED_INTERNAL_SCHEMA:
-        parse_summary_job_result(value)
-        from .models import _to_plain
-        return _to_plain(value['assessment'])
+        return read_summary_job_result(value)[1]
     if value.get("schema_version") == INTERNAL_SCHEMA:
         parse_summary_job_result(value)
         return _report(value["execution"])

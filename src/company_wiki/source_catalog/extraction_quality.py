@@ -396,7 +396,7 @@ class ExtractionQualityService:
 
     def _narrative(self, connection: sqlite3.Connection, document: sqlite3.Row):
         """Use the shared bounded bundle contract, never the legacy span table."""
-        from company_wiki.automation.narrative_projection import (
+        from .narrative_bundle_reader import (
             NarrativeBundleReader, NarrativeProjectionError,
         )
 

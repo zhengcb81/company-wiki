@@ -22,8 +22,8 @@ import hashlib
 import json
 import re
 
-from company_wiki.document_normalization.form_fields import has_inline_form_response
-from company_wiki.document_normalization.table_shapes import has_tabular_value_tail
+from company_wiki.document_model.form_fields import has_inline_form_response
+from company_wiki.document_model.table_shapes import has_tabular_value_tail
 
 from .text_boundaries import ends_complete_sentence
 
@@ -340,6 +340,12 @@ def _qa_hints(unit: Any, metadata: Mapping[str, Any]) -> dict[str, str]:
             "speaker": native_turn["speaker"], "turn_id": native_turn["turn_id"],
             "native_speaker_turn": native_turn["turn_id"],
         }
+    printed = metadata.get("printed_turn")
+    if isinstance(printed, Mapping) and isinstance(printed.get("turn_id"), str):
+        hints = {"turn_id": printed["turn_id"]}
+        if isinstance(printed.get("speaker"), str):
+            hints["speaker"] = printed["speaker"]
+        return hints
     state = str(metadata.get("qa_state") or "")
     original_role = metadata.get("original_role")
     group = (metadata.get("official_record_group_id")
@@ -477,6 +483,10 @@ def build_observation(
             hints["row"] = coordinates.row_index
         if coordinates.column_index is not None:
             hints["column"] = coordinates.column_index
+        if unit.unit_kind in {"pdf_table_row", "pdf_table_header"}:
+            # An observed PDF row remains a PDF layout candidate even when
+            # its fine slots were unavailable. A DOM table id makes no claim.
+            hints["pdf_table_row"] = True
         if unit.unit_kind.startswith("html_"):
             table_index = metadata.get("table_index")
             if isinstance(table_index, int) and not isinstance(table_index, bool):
@@ -510,7 +520,7 @@ def build_observation(
         if unit.source_role == QA_SHADOW_ROLE:
             hints[QA_SHADOW_HINT] = True
 
-        kind = _wire_kind(unit, coordinates)
+        kind = wire_kind(unit, coordinates)
         if (
             unit.unit_kind in {"pdf_text_block", "html_paragraph", "html_heading"}
             and level is not None
@@ -578,7 +588,7 @@ def build_observation(
     }
 
 
-def _wire_kind(unit: Any, coordinates: Any) -> str:
+def wire_kind(unit: Any, coordinates: Any) -> str:
     """Map a parser unit kind onto the frozen wire vocabulary."""
     if unit.unit_kind == "pdf_table_row":
         # Row 0 of an extracted table is its header; the parser already carries
@@ -603,6 +613,27 @@ def _wire_kind(unit: Any, coordinates: Any) -> str:
             return "footnote"
         return "paragraph"
     return "paragraph"
+
+
+def observes_pdf_table_row(unit: Mapping[str, Any]) -> bool:
+    """Distinguish observed PDF layout rows from native table grids."""
+    hints = unit.get("hints")
+    if not isinstance(hints, Mapping):
+        return False
+    if hints.get("pdf_table_row") is True or hints.get("cells") is not None:
+        return True
+    # Older du-input/1 rows can lack both the marker and the fine slots. The
+    # coordinate-derived page-scoped table ID identifies their original shape.
+    page, row, table_id = unit.get("page"), hints.get("row"), hints.get("table_id")
+    if not (
+        unit.get("kind") in ("table_row", "table_header")
+        and type(page) is int and page >= 0
+        and type(row) is int and row >= 0
+        and isinstance(table_id, str)
+    ):
+        return False
+    page_id, _, table_index = table_id.partition(":t")
+    return page_id == f"p{page}" and table_index.isdecimal()
 
 
 def is_selectable(unit: Mapping[str, Any]) -> bool:
@@ -632,11 +663,14 @@ def selectable_unit_ids(observation: Mapping[str, Any]) -> list[str]:
 
 
 __all__ = [
-    "INPUT_SCHEMA_VERSION",
-    "QA_SHADOW_HINT",
-    "QA_SHADOW_ROLE",
-    "QA_STRUCTURED_ROLES",
-    "build_observation",
-    "is_selectable",
-    "selectable_unit_ids",
+    'INPUT_SCHEMA_VERSION',
+    'QA_SHADOW_HINT',
+    'QA_SHADOW_ROLE',
+    'QA_STRUCTURED_ROLES',
+    'build_observation',
+    'is_selectable',
+    'observes_pdf_table_row',
+    'selectable_unit_ids',
+    'wire_kind',
+    'OBSERVATION_ADAPTER_VERSION',
 ]

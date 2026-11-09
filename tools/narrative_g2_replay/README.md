@@ -42,7 +42,7 @@ python -B -m pytest -q tests/unit/test_w08_narrative_g2_replay.py
 | Batch | `python -m company_wiki.automation.narrative_batch_cli` |
 | Selection | the production selector `select_narrative_evidence` (v0.8.0) |
 | Worker | the real finite AUTO worker / lease / generation / outbox machinery |
-| Public read | `python -m company_wiki.source_catalog.narrative_transport_cli` |
+| Public read | `python -m company_wiki.automation.narrative_transport_cli` |
 | RF consumption | `scripts/narrative_source_preparation.py` from the fixed snapshot |
 
 Only the **remote provider** is replaced: a loopback HTTP server on

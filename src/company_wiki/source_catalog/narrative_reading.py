@@ -13,7 +13,7 @@ import json
 import re
 from typing import Any
 
-from company_wiki.document_normalization.table_shapes import has_unbound_numeric_cells
+from company_wiki.document_model.table_shapes import has_unbound_numeric_cells
 from company_wiki.document_understanding.pipeline import understand_units
 from company_wiki.document_understanding.narrative_continuity import (
     NativeSourceContext, build_native_continuity,
@@ -22,7 +22,11 @@ from company_wiki.document_understanding.reading_context_contract import (
     CURRENT_READING_CONTEXT_SCHEMA, SOURCE_PROCESSING_DIMENSION, SOURCE_PROCESSING_ID_SAMPLE_LIMIT,
 )
 from company_wiki.document_understanding.selection_bridge import build_context_graph
-from company_wiki.document_understanding.summary_input import _sent_policies, _unread, _SHARED_CONSTRAINTS
+from company_wiki.document_understanding.summary_input import (
+    SHARED_CONSTRAINTS as _SHARED_CONSTRAINTS,
+    sent_policies as _sent_policies,
+    unread_units as _unread,
+)
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded, DEFAULT_LIMITS
 
 from .narrative_antecedent import build_antecedent_windows, within_reference_envelope
@@ -33,6 +37,7 @@ from .narrative_business_policy import (
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
 from .narrative_finalize import finalize_selection
+from .narrative_pdf_turns import observe_pdf_transcript_turns, printed_turn_is_context
 from .narrative_routing import DocumentRoute, route_document
 from .narrative_support_use import SUPPORT_USE_SCAN_PASSES, source_support_use, source_narrative_relevance
 
@@ -581,6 +586,10 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             return scope_uses[key]
         try:
             work_budget.charge(len(members) + 1)
+            if any(printed_turn_is_context(units[uid]) for uid in members):
+                assessed = ("context_only", "attribution_context", False, "description", False)
+                scope_uses[key] = assessed
+                return assessed
             if prepared_owner is not None and session.groups.get(prepared_owner) != members:
                 # Generic source qualification may enlarge a closed QA quote.
                 # Prepare the actual final support, not the smaller proof.
@@ -1161,6 +1170,8 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     native_contexts: dict[str, NativeSourceContext] = {}
     try:
         budget.charge()
+        if mime_type == "application/pdf" and route.document_kind == "investor_call_transcript":
+            parsed = observe_pdf_transcript_turns(parsed, work_budget=budget)
         pipeline = _understand(parsed, title=title, kind=route.document_kind, mime_type=mime_type,
                                work_budget=budget, _native_contexts=native_contexts)
     except WorkBudgetExceeded as refusal:

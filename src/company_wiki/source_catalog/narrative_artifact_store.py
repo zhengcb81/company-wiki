@@ -7,6 +7,7 @@ lake locations outside the configured object-store root.
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 from dataclasses import dataclass
 import hashlib
 import json
@@ -16,11 +17,12 @@ import re
 import sqlite3
 import tempfile
 import uuid
-from typing import Any, Callable
+from typing import Any, Callable, Iterator
 
-from company_wiki._id_scope import normalize_id_scope
+from company_wiki.id_scope import normalize_id_scope
 from company_wiki.narrative_subject import NarrativeSubject, SubjectBindingError
 
+from .lock import CatalogOperationLock
 from .store import CatalogStore
 from .reader import ReadOnlyCatalogReader
 
@@ -150,19 +152,33 @@ class NarrativeObjectPut:
     created_bytes: int
 
 
+NarrativeObjectAdmission = Callable[[str, int], None]
+NarrativeObjectWrite = Callable[[NarrativeObjectAdmission | None], NarrativeObjectPut]
+NarrativeObjectWritePolicy = Callable[[str, int, NarrativeObjectWrite], str]
+
+
 class LocalNarrativeObjectStore:
     """Persist immutable bytes under a hash-derived logical key."""
 
-    def __init__(self, root: Path) -> None:
+    def __init__(self, root: Path, *, write_policy: NarrativeObjectWritePolicy | None = None) -> None:
         if not isinstance(root, Path):
             raise TypeError("root must be pathlib.Path")
         self.root = root
+        self._write_policy = write_policy
 
     def put(self, data: bytes) -> str:
-        return self.put_with_usage(data).object_key
+        if self._write_policy is None:
+            return self.put_with_usage(data).object_key
+
+        def write(before_create: NarrativeObjectAdmission | None) -> NarrativeObjectPut:
+            return self.put_with_usage(data, before_create=before_create)
+
+        # Keep the persisted ledger key stable across upgrades. Policies use
+        # it as an opaque identifier and perform writes through the callback.
+        return self._write_policy(str(self.root.resolve()), len(data), write)
 
     def put_with_usage(self, data: bytes, *,
-                       before_create: Callable[[str, int], None] | None = None) -> NarrativeObjectPut:
+                       before_create: NarrativeObjectAdmission | None = None) -> NarrativeObjectPut:
         """Return bytes actually created by this immutable-object writer."""
         if not isinstance(data, bytes):
             raise TypeError("narrative object data must be bytes")
@@ -231,6 +247,19 @@ class LocalNarrativeObjectStore:
             raise NarrativeObjectIntegrityError("stored narrative object failed verification")
 
 
+class NarrativeObjectAccess:
+    """Logical byte capability used for persisted paid-response artifacts."""
+
+    def __init__(self, objects: LocalNarrativeObjectStore) -> None:
+        self.__objects = objects
+
+    def put(self, data: bytes) -> str:
+        return self.__objects.put(data)
+
+    def read(self, key: str, *, expected_sha256: str, expected_size: int) -> bytes:
+        return self.__objects.read(key, expected_sha256=expected_sha256, expected_size=expected_size)
+
+
 class NarrativeArtifactStore:
     """Prepare idempotent bundle versions after writing their immutable bytes."""
 
@@ -249,10 +278,11 @@ class NarrativeArtifactStore:
         """Open an existing catalog without initialization or any writer surface."""
         return NarrativeArtifactReader(database_path, objects)
 
-    @property
-    def catalog_dir(self) -> Path:
-        """Directory containing the catalog-wide operation lock."""
-        return self._catalog.database_path.parent
+    @contextmanager
+    def operation_lock(self, *, operation: str) -> Iterator[None]:
+        """Use the catalog's publication/control lock without exposing storage."""
+        with CatalogOperationLock(self._catalog.database_path.parent, operation=operation):
+            yield
 
     def prepare(self, draft: NarrativeArtifactDraft, payload: bytes) -> NarrativeArtifactVersion:
         if not isinstance(draft, NarrativeArtifactDraft):
@@ -883,7 +913,11 @@ __all__ = [
     "NarrativeArtifactStore",
     "NarrativeArtifactReader",
     "NarrativeArtifactVersion",
+    "NarrativeObjectAccess",
+    "NarrativeObjectAdmission",
     "NarrativeObjectIntegrityError",
     "NarrativeObjectPut",
+    "NarrativeObjectWrite",
+    "NarrativeObjectWritePolicy",
     "NarrativeSourceNotCurrentError",
 ]

@@ -25,7 +25,7 @@ import unicodedata
 from typing import Any, Callable, Iterable, cast
 
 
-from company_wiki._atomic_file import atomic_output
+from company_wiki.atomic_file import atomic_output
 from company_wiki.canonical_ingest import ParserResult
 from company_wiki.parser_adapters import (
     PAGE_AWARE_PDF_PARSER_NAME,
@@ -823,17 +823,12 @@ def _pymupdf_page_snapshots(document: Iterable[Any]) -> tuple[dict[str, Any], ..
                     )
                     rows = int(table.row_count)
                     cols = int(table.col_count)
-                    markdown_method = getattr(table, "to_markdown", None)
-                    if table_bbox is None or not callable(markdown_method):
-                        raise ValueError(
-                            "table geometry or Markdown API is unavailable"
-                        )
-                    markdown = _nfc_lf(str(markdown_method())).strip()
-                    if not markdown:
-                        raise ValueError("table Markdown is empty")
+                    if table_bbox is None:
+                        raise ValueError("table geometry is unavailable")
                     tables.append(
                         {
-                            "markdown": markdown,
+                            # The compatibility field has no bearing on cell evidence.
+                            "markdown": "",
                             "rows": rows,
                             "cols": cols,
                             "data": data,

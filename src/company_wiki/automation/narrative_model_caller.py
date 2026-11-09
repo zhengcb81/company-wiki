@@ -116,7 +116,7 @@ class BudgetedNarrativeCaller:
     ) -> tuple[NarrativeModelResponse, HandlerMetrics]:
         from .narrative_run_store import (
             ModelUsage, RunBudgetExceededError, RunConflictError,
-            RunScopeError, ReservationConflictError,
+            RunScopeError, ReservationConflictError, StorageBudgetExceeded,
         )
         from .store import LeaseLostError, StoreBusyError
 
@@ -152,6 +152,8 @@ class BudgetedNarrativeCaller:
                 if recovered is None:
                     try:
                         self._paid_responses.admit()
+                    except StorageBudgetExceeded as exc:
+                        raise NarrativeBudgetCallError(str(exc), HandlerOutcome.TERMINAL_FAILURE, _ZERO) from None
                     except Exception:
                         raise NarrativeBudgetCallError("MODEL_PAID_RESPONSE_SPACE_DENIED",
                             HandlerOutcome.TERMINAL_FAILURE, _ZERO) from None

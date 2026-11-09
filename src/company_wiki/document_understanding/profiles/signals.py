@@ -17,6 +17,7 @@ Two design rules are enforced here:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from enum import Enum, auto
 import re
 import unicodedata
 from typing import Final, Iterable, Sequence
@@ -443,6 +444,39 @@ ATTACHMENT_KINDS = ("attachment", "link", "external_link", "reference")
 URL_PATTERN = re.compile(r"(?:https?://|www\.)\S+", re.IGNORECASE)
 
 
+class RoutingFact(Enum):
+    """Typed facts from source probes; signal detail is diagnostic prose."""
+
+    ADMIN_CONFIRMATION = auto()
+    ADMIN_DIRECTOR_REPORT = auto()
+    ADMIN_FORMAL_POLICY = auto()
+    ADMIN_OTHER_POLICY = auto()
+    ADMIN_MEETING = auto()
+    ADMIN_MATERIAL = auto()
+    CN_ANNUAL = auto()
+    CN_INTERIM = auto()
+    CN_QUARTERLY = auto()
+    CN_NUMBERED_SECTIONS = auto()
+    CN_BUSINESS_SECTIONS = auto()
+    CN_CONVERTIBLE = auto()
+    CN_REFINANCING = auto()
+    CN_IPO = auto()
+    CN_PROSPECTUS_STRUCTURE = auto()
+    HK_GLOBAL_OFFERING = auto()
+    HK_PROSPECTUS = auto()
+    HK_PROSPECTUS_STRUCTURE = auto()
+    HK_ANNUAL = auto()
+    HK_INTERIM = auto()
+    HK_STRUCTURE = auto()
+    FUNDRAISING = auto()
+    SEC_FORM_LABEL = auto()
+    SEC_10K_ITEMS = auto()
+    SEC_10Q_ITEMS = auto()
+    SEC_20F_ITEMS = auto()
+    SEC_INTERIM_PERIOD = auto()
+    RESULTS_RELEASE = auto()
+
+
 @dataclass(frozen=True)
 class Signal:
     """One piece of evidence with the units that produced it."""
@@ -451,6 +485,7 @@ class Signal:
     unit_ids: tuple[str, ...]
     detail: str
     form_type: str | None = None
+    fact: RoutingFact | None = None
 
 
 @dataclass
@@ -465,7 +500,7 @@ class SignalBag:
     char_limit_hit: bool = False
 
     def add(self, bucket: list[Signal], code: str, unit_ids: Sequence[str], detail: str,
-            *, form_type: str | None = None) -> None:
+            *, form_type: str | None = None, fact: RoutingFact | None = None) -> None:
         """Record a signal. Title-only evidence is valid and cites no unit.
 
         A real document can be unreadable end to end (the ``cn-ipo-confirmation`` sample
@@ -474,7 +509,8 @@ class SignalBag:
         than being dropped -- dropping it would turn a decidable case into ``generic``.
         """
         bucket.append(
-            Signal(code=code, unit_ids=tuple(dict.fromkeys(unit_ids)), detail=detail, form_type=form_type)
+            Signal(code=code, unit_ids=tuple(dict.fromkeys(unit_ids)), detail=detail,
+                   form_type=form_type, fact=fact)
         )
 
     @property
@@ -483,6 +519,9 @@ class SignalBag:
 
     def codes(self) -> set[str]:
         return {signal.code for signal in self.all}
+
+    def has_fact(self, *facts: RoutingFact) -> bool:
+        return any(signal.fact in facts for signal in self.all)
 
     def unit_ids_for(self, code: str) -> tuple[str, ...]:
         ids: list[str] = []
@@ -616,6 +655,19 @@ def _detect_carrier(bag: SignalBag, observation: Observation) -> None:
         bag.add(bag.signals, "TXT_CARRIER", units, f"mime={observation.mime_type}")
 
 
+def _administrative_fact(text: str) -> RoutingFact:
+    for markers, fact in (
+        (("确认意见",), RoutingFact.ADMIN_CONFIRMATION),
+        (("述职",), RoutingFact.ADMIN_DIRECTOR_REPORT),
+        (("管理制度", "管理办法"), RoutingFact.ADMIN_FORMAL_POLICY),
+        (("制度",), RoutingFact.ADMIN_OTHER_POLICY),
+        (("会议通知", "关于召开"), RoutingFact.ADMIN_MEETING),
+    ):
+        if matches_any(text, markers):
+            return fact
+    return RoutingFact.ADMIN_MATERIAL
+
+
 def _detect_administrative(
     bag: SignalBag,
     observation: Observation,
@@ -677,6 +729,7 @@ def _detect_administrative(
             "ADMINISTRATIVE_PURPOSE",
             ids,
             "行政用途措辞: " + "、".join(sorted(set(matched))[:4]),
+            fact=_administrative_fact(" ".join(matched)),
         )
         return
 
@@ -711,6 +764,7 @@ def _detect_administrative(
             "ADMINISTRATIVE_PURPOSE",
             ids,
             "行政用途措辞: " + "、".join(sorted(set(matched))[:4]),
+            fact=_administrative_fact(" ".join(matched)),
         )
         return
 
@@ -734,6 +788,7 @@ def _detect_administrative(
             "ADMINISTRATIVE_PURPOSE",
             tuple(unit.unit_id for unit in body_candidates),
             "行政用途措辞: " + body_candidates[0].text.strip()[:40],
+            fact=_administrative_fact(normalize(body_candidates[0].text)),
         )
         return
 
@@ -749,6 +804,7 @@ def _detect_administrative(
                 "ADMINISTRATIVE_PURPOSE",
                 ids,
                 f"制度类材料: {marker}",
+                fact=RoutingFact.ADMIN_OTHER_POLICY,
             )
             return
 
@@ -820,6 +876,7 @@ def _detect_periodic(
             "COVER_HEADING",
             cover_ids or self_id_ids,
             "封面/标题含年度报告",
+            fact=RoutingFact.CN_ANNUAL,
         )
     if matches_any(haystack, CN_INTERIM_WORDS):
         bag.add(
@@ -827,6 +884,7 @@ def _detect_periodic(
             "COVER_HEADING",
             cover_ids or self_id_ids,
             "封面/标题含半年度报告",
+            fact=RoutingFact.CN_INTERIM,
         )
     if matches_any(haystack, CN_QUARTERLY_WORDS):
         bag.add(
@@ -834,10 +892,12 @@ def _detect_periodic(
             "COVER_HEADING",
             cover_ids or self_id_ids,
             "封面/标题含季度报告",
+            fact=RoutingFact.CN_QUARTERLY,
         )
 
     if matches_any(toc_text, ("第一节", "第二节", "第三节", "第五节", "第十节")):
-        bag.add(bag.toc_signals, "TOC_STRUCTURE", toc_ids, "A股第N节章节编号")
+        bag.add(bag.toc_signals, "TOC_STRUCTURE", toc_ids, "A股第N节章节编号",
+                fact=RoutingFact.CN_NUMBERED_SECTIONS)
     else:
         # The section list often arrives as separate heading units (one per ``第N节``)
         # rather than one dot-leader page, so the structural scan spans all probed units.
@@ -848,6 +908,7 @@ def _detect_periodic(
                 "TOC_STRUCTURE",
                 tuple(unit.unit_id for unit in section_hits),
                 "A股第N节章节标题",
+                fact=RoutingFact.CN_NUMBERED_SECTIONS,
             )
         business_hits = [
             unit
@@ -860,6 +921,7 @@ def _detect_periodic(
                 "SECTION_VOCABULARY",
                 tuple(unit.unit_id for unit in business_hits),
                 "A股业务与管理层讨论章节",
+                fact=RoutingFact.CN_BUSINESS_SECTIONS,
             )
 
 
@@ -878,27 +940,31 @@ def _detect_offering(
     toc_ids = tuple(unit.unit_id for unit in toc_units)
     # Keep the actual evidence channel and matching IDs. A historical body
     # heading cannot borrow an unrelated annual-report cover as its provenance.
-    def add_named_signal(aliases: Sequence[str], detail: str) -> bool:
+    def add_named_signal(aliases: Sequence[str], detail: str, fact: RoutingFact) -> bool:
         cover_hits = [unit.unit_id for unit in cover
                       if is_title_evidence(unit) and matches_any(normalize(unit.text), aliases)]
         body_hits = [unit.unit_id for unit in (*self_id_units, *toc_units)
                      if unit.unit_id not in cover_ids and matches_any(normalize(unit.text), aliases)]
         if cover_hits:
-            bag.add(bag.cover_signals, "COVER_HEADING", cover_hits, detail)
-        elif matches_any(title_text, aliases):
-            bag.add(bag.body_signals, "SECTION_VOCABULARY", body_hits, detail)
-        elif body_hits:
-            bag.add(bag.body_signals, "SECTION_VOCABULARY", body_hits, detail)
-        return bool(cover_hits or body_hits or matches_any(title_text, aliases))
+            bag.add(bag.cover_signals, "COVER_HEADING", cover_hits, detail, fact=fact)
+        elif body_hits or matches_any(title_text, aliases):
+            bag.add(bag.body_signals, "SECTION_VOCABULARY", body_hits, detail, fact=fact)
+        else:
+            return False
+        return True
 
-    for aliases, detail in ((CN_CONVERTIBLE_WORDS, "可转换公司债券募集材料"),
-                            (CN_OFFERING_WORDS, "再融资募集说明书措辞"),
-                            (CN_IPO_WORDS, "首次公开发行/招股措辞")):
-        if add_named_signal(aliases, detail):
+    for aliases, detail, fact in (
+        (CN_CONVERTIBLE_WORDS, "可转换公司债券募集材料", RoutingFact.CN_CONVERTIBLE),
+        (CN_OFFERING_WORDS, "再融资募集说明书措辞", RoutingFact.CN_REFINANCING),
+        (CN_IPO_WORDS, "首次公开发行/招股措辞", RoutingFact.CN_IPO),
+    ):
+        if add_named_signal(aliases, detail, fact):
             break
-    for hk_aliases, hk_detail in ((HK_OFFERING_WORDS, "港股全球发售措辞"),
-                                  (HK_PROSPECTUS_WORDS, "港股招股章程措辞")):
-        if add_named_signal(hk_aliases, hk_detail):
+    for hk_aliases, detail, fact in (
+        (HK_OFFERING_WORDS, "港股全球发售措辞", RoutingFact.HK_GLOBAL_OFFERING),
+        (HK_PROSPECTUS_WORDS, "港股招股章程措辞", RoutingFact.HK_PROSPECTUS),
+    ):
+        if add_named_signal(hk_aliases, detail, fact):
             break
 
     fundraising = (
@@ -919,14 +985,17 @@ def _detect_offering(
             "SECTION_VOCABULARY",
             tuple(unit.unit_id for unit in hits),
             "募投/所得款项章节",
+            fact=RoutingFact.FUNDRAISING,
         )
 
     if matches_any(toc_text, CN_IPO_WORDS) and matches_any(toc_text, ("业务与技术", "财务会计信息")):
-        bag.add(bag.toc_signals, "TOC_STRUCTURE", toc_ids, "招股书目录结构")
+        bag.add(bag.toc_signals, "TOC_STRUCTURE", toc_ids, "招股书目录结构",
+                fact=RoutingFact.CN_PROSPECTUS_STRUCTURE)
     if matches_any(toc_text, ("行業概覽", "行业概览")) or matches_any(
         toc_text, ("歷史及公司架構", "历史及公司架构")
     ):
-        bag.add(bag.toc_signals, "TOC_STRUCTURE", toc_ids, "港股招股书目录结构")
+        bag.add(bag.toc_signals, "TOC_STRUCTURE", toc_ids, "港股招股书目录结构",
+                fact=RoutingFact.HK_PROSPECTUS_STRUCTURE)
 
 
 def _native_form_evidence(observation: Observation) -> list:
@@ -1052,7 +1121,8 @@ def _detect_sec(
 
     if form:
         label_ids = chosen_label_ids or evidence_ids
-        bag.add(bag.cover_signals, "COVER_HEADING", label_ids, f"SEC 表单: {form.upper()}", form_type=form.upper())
+        bag.add(bag.cover_signals, "COVER_HEADING", label_ids, f"SEC 表单: {form.upper()}",
+                form_type=form.upper(), fact=RoutingFact.SEC_FORM_LABEL if chosen_label_ids else None)
 
     if matches_any(haystack, SEC_ANNUAL_FORM_WORDS) and form is None:
         bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "年报式 SEC 封面语")
@@ -1069,6 +1139,7 @@ def _detect_sec(
             "TOC_STRUCTURE",
             structure_ids,
             "10-K Item 编号",
+            fact=RoutingFact.SEC_10K_ITEMS,
         )
     if matches_any(combined, ("item 2. management's discussion and analysis",)) and matches_any(
         combined, ("part i", "condensed consolidated")
@@ -1078,6 +1149,7 @@ def _detect_sec(
             "TOC_STRUCTURE",
             structure_ids,
             "10-Q Part I Item 2 结构",
+            fact=RoutingFact.SEC_10Q_ITEMS,
         )
     if count_matches(combined, SEC_20F_VOCAB) >= 2:
         bag.add(
@@ -1085,6 +1157,7 @@ def _detect_sec(
             "TOC_STRUCTURE",
             structure_ids,
             "20-F Item 编号",
+            fact=RoutingFact.SEC_20F_ITEMS,
         )
 
     # A 10-Q may be probed only in part, so its item header never appears in the observed
@@ -1106,6 +1179,7 @@ def _detect_sec(
                 "SECTION_VOCABULARY",
                 body_ids or evidence_ids,
                 "SEC 中期期间报告措辞",
+                fact=RoutingFact.SEC_INTERIM_PERIOD,
             )
 
 
@@ -1198,9 +1272,9 @@ def _detect_hk(
         for unit in observation.probes
     )
     if hk_vocabulary_present and matches_any(haystack, HK_ANNUAL_WORDS):
-        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "港股年报措辞")
+        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "港股年报措辞", fact=RoutingFact.HK_ANNUAL)
     if hk_vocabulary_present and matches_any(haystack, HK_INTERIM_WORDS):
-        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "港股中期报告措辞")
+        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "港股中期报告措辞", fact=RoutingFact.HK_INTERIM)
 
     # A HK bilingual report's section vocabulary may arrive as separate heading units
     # rather than as one dot-leader TOC page, so the structural scan covers every probed
@@ -1217,6 +1291,7 @@ def _detect_hk(
             "TOC_STRUCTURE",
             tuple(unit.unit_id for unit in hits),
             "港股双语/定期报告章节",
+            fact=RoutingFact.HK_STRUCTURE,
         )
 
 
@@ -1344,7 +1419,7 @@ def _detect_release_and_deck(
     ]
     if matches_any(haystack, HK_RELEASE_WORDS) or release_hits:
         release_ids = tuple(unit.unit_id for unit in release_hits) or all_ids[:3]
-        bag.add(bag.cover_signals, "COVER_HEADING", release_ids, "业绩发布措辞")
+        bag.add(bag.cover_signals, "COVER_HEADING", release_ids, "业绩发布措辞", fact=RoutingFact.RESULTS_RELEASE)
 
     highlight_hits = [
         unit
@@ -1357,6 +1432,7 @@ def _detect_release_and_deck(
             "SECTION_VOCABULARY",
             tuple(unit.unit_id for unit in highlight_hits),
             "Business Highlights",
+            fact=RoutingFact.RESULTS_RELEASE,
         )
     elif "business highlights" in all_text:
         bag.add(
@@ -1364,6 +1440,7 @@ def _detect_release_and_deck(
             "SECTION_VOCABULARY",
             all_ids[:3],
             "Business Highlights",
+            fact=RoutingFact.RESULTS_RELEASE,
         )
 
 
@@ -1384,6 +1461,7 @@ def _detect_attachments(bag: SignalBag, observation: Observation) -> None:
 
 
 __all__ = [
+    "RoutingFact",
     "Signal",
     "SignalBag",
     "count_matches",

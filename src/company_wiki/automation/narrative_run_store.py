@@ -12,8 +12,8 @@ import json
 import sqlite3
 from typing import Callable, TypeVar, TYPE_CHECKING
 
-from company_wiki._id_scope import normalize_id_scope
-from company_wiki._file_mutex import os_file_mutex
+from company_wiki.id_scope import normalize_id_scope
+from company_wiki.file_mutex import os_file_mutex
 
 from . import migrations
 from .models import (Attempt, HandlerOutcome, HandlerResult, Job, RuntimeGate, RuntimeState, canonical_json, canonical_json_hash,
@@ -50,6 +50,14 @@ class FinalOutputOwnerUnresolved(NarrativeRunError):
 
 class RunBudgetExceededError(NarrativeRunError):
     code = "run_budget_exceeded"
+
+
+class StorageBudgetExceeded(ValueError):
+    """An actual write or configured response capacity exceeds the storage limit."""
+
+    CODES = frozenset({
+        "PERSISTENT_BYTES_EXCEEDED", "SCRATCH_BYTES_EXCEEDED", "FINAL_BYTES_EXCEEDED",
+    })
 
 
 class RunScopeError(NarrativeRunError):
@@ -659,7 +667,7 @@ class NarrativeRunStore:
                 "FROM narrative_storage_allocations WHERE run_id=?", (run_id,)
             ).fetchone()[0])
             if total + byte_size > max_bytes:
-                raise ValueError("PERSISTENT_BYTES_EXCEEDED")
+                raise StorageBudgetExceeded("PERSISTENT_BYTES_EXCEEDED")
             connection.execute(
                 "INSERT INTO narrative_storage_allocations "
                 "(run_id,store_id,object_key,byte_size,created_bytes) VALUES (?,?,?,?,NULL) "
@@ -1438,6 +1446,7 @@ class NarrativeRunStore:
 __all__ = [
     "NarrativeRunStore",
     "NarrativeRunError",
+    "StorageBudgetExceeded",
     "RunConflictError",
     "RunBudgetExceededError",
     "ReservationConflictError",

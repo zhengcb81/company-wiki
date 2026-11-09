@@ -8,6 +8,8 @@ import hashlib
 import importlib
 import json
 from pathlib import Path
+import subprocess
+import sys
 import tomllib
 
 import pytest
@@ -30,12 +32,12 @@ PDF_BYTES = (
 
 def _collector():
     return importlib.import_module(
-        "company_wiki.source_contract.announcement_collector"
+        "company_wiki.source_catalog.announcement_collector"
     )
 
 
 def _cli():
-    return importlib.import_module("company_wiki.source_contract.announcement_cli")
+    return importlib.import_module("company_wiki.source_catalog.announcement_cli")
 
 
 def _root(tmp_path: Path) -> Path:
@@ -89,6 +91,83 @@ def _canonical_sha256(value: object) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
+def test_source_contract_can_read_announcement_receipts_without_collection_runtime():
+    probe = r"""
+import importlib.abc
+import sys
+
+class RefuseCollection(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if (fullname in {"urllib.request", "company_wiki.source_contract.announcement_collector",
+                         "company_wiki.source_contract.announcement_cli"}
+                or fullname.startswith("company_wiki.source_catalog")):
+            raise AssertionError("pure contract loaded collection runtime: " + fullname)
+        return None
+
+sys.path.insert(0, sys.argv[1])
+sys.meta_path.insert(0, RefuseCollection())
+from company_wiki.source_contract import AnnouncementCollectionReceipt, EvidenceSpan, SourceManifest, SourceRef
+from company_wiki.source_contract import source_id_for_sha256
+
+digest = "d" * 64
+source_id = source_id_for_sha256(digest)
+ref = SourceRef.from_dict({"schema_version": "2.0", "document_id": "fixture", "source_id": source_id,
+                           "content_sha256": digest, "byte_size": 32, "mime_type": "application/pdf"})
+manifest = SourceManifest.from_dict({
+    "schema_version": "1.0.0", "source_id": source_id, "entity_ids": ["SSE:688012"],
+    "original_path": "companies/Fixture/raw/announcements/document.pdf", "content_sha256": digest,
+    "source_type": "company_announcement", "published_date": "2026-03-25",
+    "retrieved_at": "2026-07-18T12:34:56Z", "collector_name": "company-wiki-explicit-announcement",
+    "collector_version": "1.0.0", "mime_type": "application/pdf", "byte_size": 32,
+    "immutable_status": "verified",
+})
+receipt = AnnouncementCollectionReceipt.create(
+    source_url="https://star.sse.com.cn/item.pdf", final_url="https://static.sse.com.cn/item.pdf",
+    title="Announcement", published_date=manifest.published_date, retrieved_at=manifest.retrieved_at,
+    content_type="application/pdf", etag=None, last_modified=None,
+    manifest_path="source_manifests/companies/Fixture/document.json",
+    provenance_path="source_provenance/companies/Fixture/announcements/document.json",
+    manifest=manifest,
+)
+assert ref.source_id == receipt.manifest.source_id
+assert AnnouncementCollectionReceipt.from_dict(receipt.to_dict()).canonical_json() == receipt.canonical_json()
+assert EvidenceSpan.__module__ == "company_wiki.source_contract.evidence_span"
+"""
+    result = subprocess.run(
+        [sys.executable, "-I", "-B", "-c", probe, str(ROOT / "src")],
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=15,
+    )
+    assert result.returncode == 0, result.stderr
+
+
+def test_legacy_announcement_imports_resolve_to_the_owned_implementation():
+    owned = _collector()
+    legacy = importlib.import_module("company_wiki.source_contract.announcement_collector")
+    contract = importlib.import_module("company_wiki.source_contract")
+    for name in legacy.__all__:
+        assert getattr(legacy, name) is getattr(owned, name)
+        assert getattr(contract, name) is getattr(owned, name)
+
+
+def test_legacy_announcement_cli_forwards_to_the_owned_cli(monkeypatch):
+    legacy = importlib.import_module("company_wiki.source_contract.announcement_cli")
+    owned = _cli()
+    assert legacy.build_parser().prog == owned.build_parser().prog
+    calls = []
+
+    def main(argv):
+        calls.append(argv)
+        return 13
+
+    monkeypatch.setattr(owned, "main", main)
+    assert legacy.main(["--help"]) == 13
+    assert calls == [["--help"]]
+
+
 @pytest.mark.parametrize(
     "url",
     (
@@ -118,6 +197,14 @@ def test_url_policy_rejects_non_official_or_ambiguous_urls(url):
 def test_url_policy_accepts_https_exchange_domains_and_normalizes_host(url):
     module = _collector()
     assert module.validate_official_announcement_url(url) == url
+
+
+def test_url_policy_accepts_explicit_default_https_port():
+    from company_wiki.source_contract import validate_official_announcement_url
+
+    assert validate_official_announcement_url(
+        "https://STATIC.SSE.COM.CN:443/disclosure/item.pdf?name=1"
+    ) == "https://static.sse.com.cn/disclosure/item.pdf?name=1"
 
 
 def test_redirect_handler_rejects_redirect_before_request_leaves_official_domains():
@@ -308,10 +395,10 @@ def test_crash_after_raw_and_manifest_is_recoverable_without_raw_rewrite(
     root = _root(tmp_path)
     original = module._immutable_create_json
 
-    def fail_provenance(path: Path, value: object, *, root: Path):
+    def fail_provenance(path: Path, canonical: str, *, root: Path):
         if "source_provenance" in path.parts:
             raise OSError("injected provenance failure")
-        return original(path, value, root=root)
+        return original(path, canonical, root=root)
 
     monkeypatch.setattr(module, "_immutable_create_json", fail_provenance)
     with pytest.raises(OSError, match="injected provenance failure"):
@@ -372,7 +459,7 @@ def test_download_reads_bounded_bytes_and_preserves_response_metadata():
 
 
 def test_collector_module_is_single_threaded_and_create_only():
-    path = ROOT / "src" / "company_wiki" / "source_contract" / "announcement_collector.py"
+    path = ROOT / "src" / "company_wiki" / "source_catalog" / "announcement_collector.py"
     text = path.read_text(encoding="utf-8")
     tree = ast.parse(text)
     imports = {
@@ -464,7 +551,7 @@ def test_cli_rejects_bad_url_without_stdout_or_files(tmp_path, capsys):
 def test_console_script_and_contract_documentation_are_published():
     project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     assert project["project"]["scripts"]["company-wiki-collect-announcement"] == (
-        "company_wiki.source_contract.announcement_cli:main"
+        "company_wiki.source_catalog.announcement_cli:main"
     )
     text = (
         ROOT / "docs" / "contracts" / "announcement-collector-v1.md"

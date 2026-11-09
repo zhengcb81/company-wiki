@@ -279,7 +279,7 @@ def test_real_transcript_quality_cli_and_transport_restore_test_directory(tmp_pa
         assert result["counts"]["spans"] == len(json.loads(fixture.payload)["evidence_spans"])
         assert len(result["locator_references"]) == 2
 
-        transport = [sys.executable, "-m", "company_wiki.source_catalog.narrative_transport_cli",
+        transport = [sys.executable, "-m", "company_wiki.automation.narrative_transport_cli",
                      "--config", str(fixture.config_path)]
         reference = subprocess.run(
             [*transport, "--operation", "reference"],

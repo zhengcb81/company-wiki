@@ -33,7 +33,8 @@ import os
 from pathlib import Path
 import sys
 from company_wiki.source_catalog import narrative_evidence
-from company_wiki.automation import narrative_batch_request, narrative_select, narrative_formats
+from company_wiki.automation import narrative_batch_request, narrative_select
+from company_wiki.source_catalog import narrative_formats
 kind = os.environ["CWP_N6_TEST_UPGRADE_KIND"]
 version = os.environ["CWP_N6_TEST_UPGRADE_VERSION"]
 for module in (narrative_evidence, narrative_batch_request, narrative_select):

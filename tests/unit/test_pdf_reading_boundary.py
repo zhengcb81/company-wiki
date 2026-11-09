@@ -4,7 +4,9 @@ import json
 from types import SimpleNamespace
 
 from company_wiki.automation import narrative_select as execution
-from company_wiki.automation import narrative_selector_binding as binding
+from company_wiki.source_catalog import narrative_selector_binding as binding
+from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
+from company_wiki.source_catalog.narrative_selection import RawNarrativeSelector, verify_selected_material
 from company_wiki.automation.narrative_contracts import SourceRevisionEventPayload
 from company_wiki.automation.narrative_generation import generation_manifest
 from company_wiki.source_catalog.narrative_document import DocumentStructure, NarrativeEvidencePackage
@@ -30,13 +32,14 @@ def test_replacement_parser_receives_same_budget_and_logical_reading_context(mon
             "annual_report", "skipped_no_narrative", (), 64, 0, 0, 0, 0, True)
 
     monkeypatch.setattr(binding, "select_narrative_evidence", selector)
-    handler = execution.NarrativeSelectHandler(reader=object(), pdf_parser=parser,
-        selector_version="0.9.0")
+    reading = RawNarrativeSelector(pdf_reading=PdfReading(parser=parser),
+        selector=binding.bind_narrative_selector(selector_version="0.9.0"))
     payload = SimpleNamespace(source_ref=SimpleNamespace(mime_type="application/pdf",
         source_id="source", content_sha256="a" * 64),
-        source_metadata=SimpleNamespace(language="en", title="Annual Report",
+        source_metadata=SimpleNamespace(source_class="filing", language="en", title="Annual Report",
                                        document_kind="annual_report"))
-    handler._select_pdf(payload, b"fixture", SimpleNamespace(checkpoint=lambda: None))
+    reading.select(b"fixture", source_ref=payload.source_ref, source_metadata=payload.source_metadata,
+                   checkpoint=lambda: None)
     assert observed["budget"].used == 28
     assert observed["context"].title == "Annual Report"
 
@@ -195,6 +198,22 @@ def test_recipe_snapshot_is_detached_and_execution_rejects_backend_drift():
             selector_version="0.9.0")
 
 
+def test_valid_pdf_recipe_description_does_not_block_the_reader():
+    from company_wiki.source_catalog.narrative_pdf_reading import NativePdfBackend, PdfReadingRequest
+
+    class DescribedBackend(NativePdfBackend):
+        def describe_recipe(self):
+            return {**super().describe_recipe(), "diagnostic_description": "mode info " * 1000}
+
+    request = PdfReadingRequest("source", "a" * 64, "en")
+    backend = DescribedBackend(parser=lambda data, **kwargs: DocumentStructure(
+        request.source_id, request.source_sha256, request.language, (), page_count=1, pages_read=1,
+    ))
+    reading = PdfReading(backend)
+    assert reading.read(b"fixture", request, selector_version="0.9.0").pages_read == 1
+    assert reading.describe_recipe()["diagnostic_description"] == "mode info " * 1000
+
+
 def test_optional_pdf_dependency_does_not_affect_non_pdf_composition(monkeypatch):
     from importlib.metadata import PackageNotFoundError
     import pytest
@@ -261,7 +280,7 @@ def test_transcript_material_validation_never_opens_optional_pdf_runtime(monkeyp
     span = parsed.units[0].to_evidence_span(topics=("business",), selection_reasons=("test",))
     package = NarrativeEvidencePackage(parsed.source_id, parsed.source_sha256,
         "investor_call_transcript", "selected", (span,), 64, 1, 1, 0, 0, True)
-    execution.NarrativeSelectHandler._verify_selected_material(
+    verify_selected_material(
         parsed, package, mime_type="text/plain", pdf_reading=pdf.PdfReading())
 
 

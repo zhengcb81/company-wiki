@@ -15,7 +15,7 @@ from company_wiki.source_catalog.narrative_evidence import (
     NARRATIVE_SELECTOR_NAME,
     resolve_narrative_selector_version,
 )
-from company_wiki.source_catalog.source_reader import SourceReadError
+from company_wiki.source_contract.source_version import SourceReadError, VerifiedContent
 from company_wiki.source_catalog.transcript_text_extract import (
     TranscriptMaterialError,
 )
@@ -31,7 +31,7 @@ from .models import (
     canonical_json_hash,
     make_effect_key,
 )
-from .narrative_formats import parser_component
+from company_wiki.source_catalog.narrative_formats import parser_component
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 from .narrative_contracts import (
@@ -44,11 +44,11 @@ from .narrative_contracts import (
     PromptReviewValue,
     SourceRevisionEventPayload,
 )
-from .narrative_official_json import OfficialProjectionAdapterError, open_verified_projection
-from .narrative_replay import (
+from company_wiki.source_catalog.narrative_official_json import OfficialProjectionAdapterError, open_verified_projection
+from company_wiki.source_catalog.narrative_material_replay import (
     NarrativeReplayError,
     PdfEvidenceReplayer,
-    replay_narrative_evidence,
+    replay_verified_narrative_evidence,
     replay_verified_projection,
 )
 from .narrative_source_guard import (
@@ -100,7 +100,7 @@ def _read_error_result(error: SourceReadError) -> HandlerResult:
 
 def _dependencies(
     context: JobExecutionContext,
-) -> tuple[NarrativeSelectResult, NarrativeSummaryResult]:
+) -> tuple[NarrativeSelectResult, NarrativeSummaryResult, dict[str, Any] | None]:
     selected_raw = context.dependency_results.get("source.narrative_select")
     summary_raw = context.dependency_results.get("source.narrative_summarize")
     values = (selected_raw, summary_raw)
@@ -124,15 +124,15 @@ def _dependencies(
         )
     try:
         selected = NarrativeSelectResult.from_dict(selected_raw.result)
-        from .narrative_summary_execution import parse_summary_job_result
-        summary = parse_summary_job_result(summary_raw.result, selected=selected)
+        from .narrative_summary_execution import read_summary_job_result
+        summary, assessment = read_summary_job_result(summary_raw.result, selected=selected)
     except NarrativeContractError as exc:
         raise _VerifyFailure(
             "DEPENDENCY_INVALID",
             HandlerOutcome.TERMINAL_FAILURE,
             "verify dependency violates its strict contract",
         ) from exc
-    return selected, summary
+    return selected, summary, assessment
 
 
 def _validate_dependency_identity(
@@ -233,7 +233,7 @@ class NarrativeVerifyHandler:
     def _execute(self, context: JobExecutionContext) -> HandlerResult:
         context.checkpoint()
         payload = self._payload(context)
-        selected, summary = _dependencies(context)
+        selected, summary, assessment = _dependencies(context)
         reading_projection_version=(self._reading_model_projection(selected.subject)
                                     if self._reading_model_projection is not None else None)
         _validate_dependency_identity(payload, selected, summary, self._normalization,
@@ -242,12 +242,13 @@ class NarrativeVerifyHandler:
             reading_projection_version=reading_projection_version)
         if payload.subject.kind == "official_json":
             return self._execute_projection(context, payload, selected, summary,
-                                             reading_projection_version=reading_projection_version)
+                reading_projection_version=reading_projection_version, summary_assessment=assessment)
         opened = open_verified_source(self._reader, payload)
         review = self._current_review(selected, summary)
         context.checkpoint()
-        self._replay(opened.data, selected)
-        bundle = self._bundle(selected, summary, review,reading_projection_version=reading_projection_version)
+        self._replay(opened, selected)
+        bundle = self._bundle(selected, summary, review,
+            reading_projection_version=reading_projection_version, summary_assessment=assessment)
         context.checkpoint()
         effect = self._effect(context, bundle)
         return HandlerResult(
@@ -263,6 +264,7 @@ class NarrativeVerifyHandler:
         self, context: JobExecutionContext, payload: SourceRevisionEventPayload,
         selected: NarrativeSelectResult, summary: NarrativeSummaryResult,
         *, reading_projection_version: str | None = None,
+        summary_assessment: dict[str, Any] | None = None,
     ) -> HandlerResult:
         if self._projection_catalog is None:
             raise _VerifyFailure(
@@ -293,7 +295,8 @@ class NarrativeVerifyHandler:
                 "LOCATOR_REPLAY_FAILED", HandlerOutcome.TERMINAL_FAILURE,
                 "selected official fields differ from the verified source view",
             ) from exc
-        bundle = self._bundle(selected, summary, review,reading_projection_version=reading_projection_version)
+        bundle = self._bundle(selected, summary, review,
+            reading_projection_version=reading_projection_version, summary_assessment=summary_assessment)
         generation = self._projection_generation(selected.subject)
         context.checkpoint()
         effect = self._effect(context, bundle, generation_sha256=generation)
@@ -345,9 +348,11 @@ class NarrativeVerifyHandler:
             )
         return selected.prompt_review
 
-    def _replay(self, data: bytes, selected: NarrativeSelectResult) -> None:
+    def _replay(self, content: VerifiedContent, selected: NarrativeSelectResult) -> None:
         try:
-            replay_narrative_evidence(data, selected, pdf_reading=self._pdf_reading, normalization=self._normalization)
+            replay_verified_narrative_evidence(
+                content, selected, pdf_reading=self._pdf_reading, normalization=self._normalization,
+            )
         except NarrativeReplayError as exc:
             raise _VerifyFailure(
                 "LOCATOR_REPLAY_FAILED",
@@ -361,6 +366,7 @@ class NarrativeVerifyHandler:
         summary: NarrativeSummaryResult,
         review: PromptReviewValue,
         *, reading_projection_version: str | None = None,
+        summary_assessment: dict[str, Any] | None = None,
     ) -> NarrativeBundle:
         summary_raw = summary.to_dict()
         from .narrative_summary_protocols import summary_bundle_format, scoped_protocol_for_projection, scoped_protocol_for_prompt
@@ -426,7 +432,9 @@ class NarrativeVerifyHandler:
             raw["subject_binding"] = selected.subject.to_dict()
             for key in ("source_ref", "expected_read_policy_sha256", "transcript_lineage", "transcript_byte_bindings"):
                 raw.pop(key)
-        if recipe.assessed and summary.draft is not None:
+        if recipe.assessed and summary_assessment is not None:
+            raw['summary_assessment'] = summary_assessment
+        elif recipe.assessed and summary.draft is not None:
             assert declared_prompt is not None
             protocol = scoped_protocol_for_prompt(declared_prompt)
             from .narrative_model_scoped import compile_scoped_model_view

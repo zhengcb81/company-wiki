@@ -22,7 +22,7 @@ from company_wiki.source_catalog.narrative_evidence import (
     select_narrative_evidence,
 )
 from company_wiki.source_contract import source_id_for_sha256
-from company_wiki.automation.narrative_formats import parser_component
+from company_wiki.source_catalog.narrative_formats import parser_component
 
 
 def _record(

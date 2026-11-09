@@ -37,7 +37,11 @@ ASSET_KINDS = (
 
 @dataclass(frozen=True)
 class OpaqueAsset:
-    """One non-transcribed asset with its verified byte identity."""
+    """One non-transcribed asset with its verified byte identity.
+
+    An explicitly non-rendered asset keeps its identity for historical replay
+    without representing a gap in current slide material coverage.
+    """
 
     asset_kind: str
     slide_number: int | None
@@ -49,6 +53,7 @@ class OpaqueAsset:
         default=None, repr=False, compare=False, hash=False
     )
     gap_reason: str | None = None
+    rendered: bool = True
 
     def __post_init__(self) -> None:
         if self.asset_kind not in ASSET_KINDS:
@@ -73,6 +78,8 @@ class OpaqueAsset:
             self.original_bytes, bytes
         ):
             raise TypeError("original_bytes must be bytes or None")
+        if type(self.rendered) is not bool:
+            raise TypeError("rendered must be bool")
         if self.original_bytes is not None and self.byte_size is not None:
             if len(self.original_bytes) != self.byte_size:
                 raise ValueError("byte_size must match original_bytes length")
@@ -88,6 +95,7 @@ class OpaqueAsset:
             "byte_size": self.byte_size,
             "gap_reason": self.gap_reason,
             "has_original_bytes": self.original_bytes is not None,
+            "rendered": self.rendered,
         }
 
 

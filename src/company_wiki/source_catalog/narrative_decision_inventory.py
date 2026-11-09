@@ -8,11 +8,10 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from hashlib import sha256
-from importlib import import_module
 import json
-from pathlib import Path
 from typing import Any
 
+from company_wiki.implementation_identity import code_sha256
 from company_wiki.document_understanding.profiles import registry
 from company_wiki.document_understanding.pipeline import PIPELINE_FEATURE_VERSION
 from company_wiki.document_understanding.summary_input import SUMMARY_FEATURE_VERSION
@@ -29,133 +28,118 @@ _NARRATIVE_MATERIAL_MATCHER = "company_wiki.source_catalog.narrative_replay"
 _MATERIAL_MATCHERS = frozenset({_NORMALIZED_MATERIAL_MATCHER, _NARRATIVE_MATERIAL_MATCHER})
 
 
-def _structure_algorithm_hashes(root: Path | None = None) -> dict[str, str]:
-    """Bind the owned structure package, including future child algorithms.
-
-    Module names and normalized bytes are portable between installations. The
-    package boundary excludes tests, configuration and incidental local files.
-    Reading source files does not import children or create another registry.
-    """
-    package_root = root if root is not None else Path(__file__).parents[1] / "document_understanding" / "structure"
-    hashes = {}
-    for path in sorted(package_root.rglob("*.py")):
-        parts = path.relative_to(package_root).with_suffix("").parts
-        if parts[-1] == "__init__":
-            parts = parts[:-1]
-        name = ".".join(("company_wiki.document_understanding.structure", *parts))
-        hashes[name] = sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
-    return hashes
-
-
 def _source_usability_version(mime_type: str | None, material_matcher: str | None = None) -> str:
-    """Bind source-owner code actually used by this carrier, independent of host."""
-    from company_wiki.automation.narrative_formats import NORMALIZED_MIME_TYPES
+    """Bind the selector and the replay owner actually used for this carrier."""
+    from .narrative_formats import NORMALIZED_MIME_TYPES
+    from .narrative_selection import selection_algorithm_sha256
 
-    modules = ["company_wiki.automation.narrative_select"]
-    if material_matcher is not None:
-        modules.append(material_matcher)
-    elif mime_type in NORMALIZED_MIME_TYPES:
-        modules.append(_NORMALIZED_MATERIAL_MATCHER)
-    elif mime_type in {"application/pdf", "text/plain", "application/json"}:
-        modules.append(_NARRATIVE_MATERIAL_MATCHER)
-    hashes = {}
-    for name in modules:
-        module = import_module(name)
-        source_file = module.__file__
-        if source_file is None:
-            raise ValueError("source usability module has no source file")
-        contents = Path(source_file).read_bytes().replace(b"\r\n", b"\n")
-        hashes[name] = sha256(contents).hexdigest()
-    return "source-usability/3+" + _digest(hashes)
+    if material_matcher is None:
+        if mime_type in NORMALIZED_MIME_TYPES:
+            material_matcher = _NORMALIZED_MATERIAL_MATCHER
+        elif mime_type in {"application/pdf", "text/plain", "application/json"}:
+            material_matcher = _NARRATIVE_MATERIAL_MATCHER
+    hashes = {
+        "company_wiki.source_catalog.narrative_selection": selection_algorithm_sha256(),
+    }
+    if material_matcher == _NORMALIZED_MATERIAL_MATCHER:
+        from company_wiki.document_normalization.reading_identity import (
+            normalized_parser_sha256, normalized_replay_sha256,
+        )
+
+        hashes[material_matcher] = normalized_replay_sha256()
+        if mime_type in NORMALIZED_MIME_TYPES:
+            hashes["normalized_carrier_parser"] = normalized_parser_sha256(mime_type)
+    elif material_matcher == _NARRATIVE_MATERIAL_MATCHER:
+        from . import narrative_replay
+
+        hashes[material_matcher] = code_sha256(narrative_replay.__file__)
+    elif material_matcher is not None:
+        raise ValueError("unknown material matcher")
+    return "source-usability/4+" + _digest(hashes)
+
+
+def _pdf_versions() -> dict[str, str]:
+    from company_wiki.document_normalization.layout_snapshots import FEATURE_VERSION
+    from company_wiki.document_understanding.geometry_intent.reading import BRIDGE_VERSION
+    from company_wiki.document_understanding.reading_identity import pdf_reading_algorithm_hashes
+    from company_wiki.resource_budget import budget_algorithm_sha256
+    from . import (narrative_evidence, narrative_native_ranges, narrative_pdf_candidates,
+                   narrative_pdf_intent, narrative_pdf_layout)
+
+    # Capture remains historical. Recompute each owner identity before reuse.
+    algorithms = pdf_reading_algorithm_hashes()
+    algorithms.update({
+        module.__name__: code_sha256(module.__file__)
+        for module in (narrative_pdf_intent, narrative_pdf_candidates, narrative_evidence)
+    })
+    algorithms["company_wiki.resource_budget"] = budget_algorithm_sha256()
+    return {
+        "pdf_reading_bridge": BRIDGE_VERSION,
+        "pdf_reading_algorithms": _digest(algorithms),
+        "pdf_frontend": narrative_pdf_layout.PDF_READING_LAYOUT_FEATURE_VERSION,
+        "pdf_native_prose": narrative_evidence.PDF_PROSE_LAYOUT_FEATURE_VERSION,
+        "pdf_capture": narrative_pdf_layout.PDF_LAYOUT_CAPTURE_STRATEGY,
+        "pdf_projection": FEATURE_VERSION,
+        "pdf_native_range": narrative_native_ranges.NATIVE_PAGE_VIEW_FEATURE_VERSION,
+        "pdf_native_range_parser": narrative_native_ranges.NATIVE_RANGE_CURRENT_PARSER_VERSION,
+        "pdf_page_intent": narrative_pdf_intent.PDF_INTENT_EXECUTION_VERSION,
+    }
 
 
 def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
               material_matcher: str | None = None) -> dict[str, str]:
-    # Resolve the producer's current constant after package initialization.
-    # This avoids making source_catalog's package imports depend on an
-    # inventory module that is still being initialized.
-    from company_wiki.source_catalog.narrative_business_policy import READING_BUSINESS_POLICY_VERSION
-    from company_wiki.source_catalog.narrative_budget import READING_BUDGET_POLICY
+    # Resolve the producer's current constants after package initialization.
+    from .narrative_business_policy import READING_BUSINESS_POLICY_VERSION
+    from .narrative_budget import READING_BUDGET_POLICY
+    from .reading_recipe import business_algorithm_hashes
     from company_wiki.document_understanding.strategy_binding import STRATEGY_BINDING_VERSION
     from company_wiki.document_understanding.observation_adapter import OBSERVATION_ADAPTER_VERSION
     from company_wiki.document_understanding.reading_context_contract import READING_CONTEXT_CONTRACT_FEATURE_VERSION
     from company_wiki.document_understanding.narrative_continuity import NARRATIVE_CONTINUITY_FEATURE_VERSION
     from company_wiki.document_understanding.structure import table_purpose
     from company_wiki.document_understanding.native_table_bridge import NATIVE_TABLE_BRIDGE_VERSION
-    from company_wiki.document_normalization import text_matching
+    from company_wiki.document_understanding.reading_identity import continuity_algorithm_hashes
+    from company_wiki.document_model.text_matching import SCRIPT_MATCHING_VERSION
     from company_wiki.resource_budget import load_budget_policy
 
-    def _module_path(name: str) -> Path:
-        path = getattr(import_module(name), "__file__", None)
-        if not path:
-            raise RuntimeError(f"module {name} has no file")
-        return Path(path)
-
-    from .reading_recipe import business_algorithm_hashes
-    business_hashes = business_algorithm_hashes(pdf_frontend=pdf_frontend)
-    business_hashes.update(_structure_algorithm_hashes())
-
-    versions = {"inventory": "1.12.0",
-            "inventory_algorithm": sha256(Path(__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
-            "context_policy": _digest(registry._CATALOG.get("context_policy", {})), "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
-            "document_work_limit": str(load_budget_policy().document_work_limit),
-            "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
-            "source_usability": _source_usability_version(
-                mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
-            "business_policy": READING_BUSINESS_POLICY_VERSION,
-            "business_algorithms": _digest(business_hashes),
-            "strategy_binding": STRATEGY_BINDING_VERSION,
-            "observation_adapter": OBSERVATION_ADAPTER_VERSION,
-            "continuity": NARRATIVE_CONTINUITY_FEATURE_VERSION,
-            "continuity_algorithms": _digest({name: sha256(
-                _module_path(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
-                for name in ("company_wiki.document_understanding.narrative_continuity",
-                             "company_wiki.document_understanding.source_turn_markers",
-                             "company_wiki.document_understanding.indented_tail_geometry",
-                             "company_wiki.document_understanding.hanging_indent_geometry")}),
-            "table_purpose": table_purpose.FEATURE_VERSION,
-            "script_matching": text_matching.SCRIPT_MATCHING_VERSION,
-            "pipeline": PIPELINE_FEATURE_VERSION, "summary": SUMMARY_FEATURE_VERSION,
-            "reading_context_contract": READING_CONTEXT_CONTRACT_FEATURE_VERSION,
-            "layout": LAYOUT_HINTS_VERSION}
+    usability = _source_usability_version(
+        mime_type or ("application/pdf" if pdf_frontend else None), material_matcher,
+    )
+    versions = {
+        "inventory": "1.12.0",
+        "inventory_algorithm": code_sha256(__file__),
+        "context_policy": _digest(registry.context_policy_config()),
+        "selector": "0.9.0",
+        "budget": READING_BUDGET_POLICY,
+        "document_work_limit": str(load_budget_policy().document_work_limit),
+        "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
+        "source_usability": usability,
+        "business_policy": READING_BUSINESS_POLICY_VERSION,
+        "business_algorithms": _digest(business_algorithm_hashes(pdf_frontend=pdf_frontend)),
+        "strategy_binding": STRATEGY_BINDING_VERSION,
+        "observation_adapter": OBSERVATION_ADAPTER_VERSION,
+        "continuity": NARRATIVE_CONTINUITY_FEATURE_VERSION,
+        "continuity_algorithms": _digest(continuity_algorithm_hashes()),
+        "table_purpose": table_purpose.FEATURE_VERSION,
+        "script_matching": SCRIPT_MATCHING_VERSION,
+        "pipeline": PIPELINE_FEATURE_VERSION,
+        "summary": SUMMARY_FEATURE_VERSION,
+        "reading_context_contract": READING_CONTEXT_CONTRACT_FEATURE_VERSION,
+        "layout": LAYOUT_HINTS_VERSION,
+    }
     if pdf_frontend:
-        from company_wiki.document_understanding.geometry_intent.reading import BRIDGE_VERSION
-        # The source attempt's capture digest is immutable history. Current
-        # algorithm identity must be recomputed independently when checking a
-        # cached decision; an old request digest cannot certify changed code.
-        modules = (
-            "company_wiki.document_understanding.geometry_intent.reading",
-            "company_wiki.document_understanding.geometry_intent.planner",
-            "company_wiki.document_understanding.geometry_intent.contracts",
-            "company_wiki.document_understanding.profiles.geometry_policy",
-            "company_wiki.source_catalog.narrative_pdf_intent",
-            "company_wiki.source_catalog.narrative_pdf_candidates",
-            "company_wiki.source_catalog.narrative_evidence",
-            "company_wiki.resource_budget",
-        )
-        versions["pdf_reading_bridge"] = BRIDGE_VERSION
-        versions["pdf_reading_algorithms"] = _digest({name: sha256(
-            _module_path(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
-            for name in modules})
-        for key, module_name, attribute in (
-            ("pdf_frontend", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_READING_LAYOUT_FEATURE_VERSION"),
-            ("pdf_native_prose", "company_wiki.source_catalog.narrative_evidence", "PDF_PROSE_LAYOUT_FEATURE_VERSION"),
-            ("pdf_capture", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_LAYOUT_CAPTURE_STRATEGY"),
-            ("pdf_projection", "company_wiki.document_normalization.layout_snapshots", "FEATURE_VERSION"),
-            ("pdf_native_range", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_PAGE_VIEW_FEATURE_VERSION"),
-            ("pdf_native_range_parser", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_RANGE_CURRENT_PARSER_VERSION"),
-            ("pdf_page_intent", "company_wiki.source_catalog.narrative_pdf_intent", "PDF_INTENT_EXECUTION_VERSION"),
-        ):
-            try:
-                component = import_module(module_name)
-            except ModuleNotFoundError as exc:
-                if exc.name != module_name:
-                    raise
-                continue
-            version = getattr(component, attribute, None)
-            if isinstance(version, str) and 0 < len(version) <= 256:
-                versions[key] = version
+        versions.update(_pdf_versions())
     return versions
+
+
+def decision_versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
+                      material_matcher: str | None = None) -> dict[str, str]:
+    """Return the public version identity for reading-decision algorithms."""
+    return _versions(
+        pdf_frontend=pdf_frontend,
+        mime_type=mime_type,
+        material_matcher=material_matcher,
+    )
 
 
 def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
@@ -163,6 +147,7 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
                carrier: str | None = None, actual_frontend: str | None = None,
                material_matcher: str | None = None, capture_digest: str | None = None,
                document_work_limit: int | None = None) -> dict[str, Any]:
+    catalog = registry.decision_inventory_inputs()
     components = []
     candidates = []
     if len(scopes) > 64:
@@ -173,7 +158,7 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
     scopes = sorted(scopes, key=lambda scope: scope["scope_id"])
     for scope in scopes:
         sid = scope["scope_id"]
-        binding = next((item for item in registry._CATALOG["legacy_bindings"]
+        binding = next((item for item in catalog["legacy_bindings"]
                         if item["profile_id"] == bindings.get(sid)), None)
         if binding is None:
             complete = False
@@ -181,13 +166,13 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
             identifier = "binding|" + sid + "|" + binding["profile_id"]
             components.append({"component_id": identifier, "version": "catalog-binding/1",
                 "content_digest": _digest(binding), "matcher_digest": _digest(binding), "scope_ids": [sid]})
-        for record in registry._CATALOG["families"]:
+        for record in catalog["families"]:
             applies = record["applies_to"]
             overlay = "lifecycle_overlay" in applies["purposes"]
             if applies["family"] != scope["family"] and not overlay:
                 continue
-            form = registry._base_form(scope["form_type"] if scope["form_type"] != "unknown" else "")
-            forms = {registry._base_form(value) for value in applies["forms"]}
+            form = registry.normalize_form_type(scope["form_type"] if scope["form_type"] != "unknown" else "")
+            forms = {registry.normalize_form_type(value) for value in applies["forms"]}
             eligible = ((scope["regime"] in {"unknown", None} or scope["regime"] in applies["regimes"])
                         and (not form or not forms or form in forms))
             identifier = "family|" + sid + "|" + record["id"]
@@ -202,7 +187,7 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
                                "component_ids": [identifier], "eligible": eligible})
         # Fallback is used for unresolved/ambiguous purpose and still affects
         # reading even if no nonempty candidate ultimately wins selection.
-        fallback = registry._CATALOG["fallback"]
+        fallback = catalog["fallback"]
         identifier = "fallback|" + sid
         components.append({"component_id": identifier, "version": fallback["version"],
             "content_digest": _digest(fallback), "matcher_digest": _digest(fallback), "scope_ids": [sid]})
@@ -212,7 +197,7 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
         # freeze canonicalizes scope order, so insertion-first changes on replay
         # for multi-scope documents (notably the appended PDF geometry scope).
         sid = min(scope["scope_id"] for scope in scopes)
-        for facet in registry._CATALOG["facets"]:
+        for facet in catalog["facets"]:
             identifier = "facet|" + facet["id"]
             matcher = facet["positive_evidence"]
             used = facet["id"] in used_facets
@@ -232,7 +217,15 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
             "version": "parsed-material-matcher/1", "content_digest": proof, "matcher_digest": proof,
             "scope_ids": [scope["scope_id"] for scope in scopes]})
     pdf_used = carrier == "application/pdf" and bool(actual_frontend)
-    versions = _versions(pdf_frontend=pdf_used, mime_type=carrier, material_matcher=material_matcher)
+    try:
+        versions = _versions(pdf_frontend=pdf_used, mime_type=carrier, material_matcher=material_matcher)
+    except (ImportError, AttributeError, OSError, RuntimeError):
+        if not pdf_used:
+            raise
+        # The already recorded frontend observation is still valid. Missing
+        # PDF software cannot establish a complete current cache identity.
+        versions = _versions(mime_type=carrier, material_matcher=material_matcher)
+        complete = False
     if document_work_limit is not None:
         versions["document_work_limit"] = str(document_work_limit)
     if carrier == "application/pdf":
@@ -280,7 +273,9 @@ def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequenc
                 values[name].add(actual)
     root_profile = pipeline.get("profile") or {}
     children = pipeline.get("child_profiles") or {}
-    catalog_bindings = {row["profile_id"]: row for row in registry._CATALOG["legacy_bindings"]}
+    catalog_bindings = {
+        row["profile_id"]: row for row in registry.decision_inventory_inputs()["legacy_bindings"]
+    }
 
     def field(name: str, resolved: Mapping[str, Any], actual: Mapping[str, set[str]],
               fallback: Any = "unknown") -> str:
@@ -435,4 +430,4 @@ def current_decision_trace(frozen: Mapping[str, Any]) -> dict[str, Any]:
                       capture_digest=capture_digest)
 
 
-__all__ = ["build_decision_trace", "current_decision_trace"]
+__all__ = ["build_decision_trace", "current_decision_trace", "decision_versions"]

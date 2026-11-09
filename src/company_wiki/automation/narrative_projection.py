@@ -9,21 +9,25 @@ import json
 import sqlite3
 import uuid
 
-from company_wiki._id_scope import normalize_id_scope
+from company_wiki.id_scope import normalize_id_scope
 from company_wiki.narrative_subject import NarrativeSubject, publication_target
 
 from company_wiki.source_catalog.lock import (
     CatalogOperationLockedError,
-    CatalogOperationLock,
 )
 from company_wiki.source_catalog.narrative_artifact_store import (
     NarrativeArtifactDraft,
     NarrativeArtifactError,
-    NarrativeArtifactReader,
-    NarrativeArtifactNotVisibleError,
     NarrativeArtifactStore,
-    NarrativeArtifactVersion,
     NarrativeSourceNotCurrentError,
+)
+
+from company_wiki.source_catalog.narrative_bundle_reader import (
+    NarrativeArtifactRead,
+    NarrativeBundleReader,
+    NarrativeProjectionError,
+    replay_projected_bundle,
+    validate_projection_manifest,
 )
 
 from .models import (
@@ -34,14 +38,12 @@ from .models import (
     canonical_json,
     canonical_json_hash,
     make_effect_key,
-    require_canonical_json,
     require_utc_timestamp,
 )
 from .narrative_contracts import NarrativeBundle, NarrativeContractError
-from .narrative_summary_protocols import LEGACY_BUNDLE, ASSESSED_BUNDLE
+from .narrative_run_store import StorageBudgetExceeded
 from .narrative_verify import EFFECT_TYPE
-from .narrative_official_json import VerifiedProjectionView
-from .narrative_replay import replay_verified_projection
+from company_wiki.source_catalog.narrative_official_json import VerifiedProjectionView
 from .store import (
     AutomationStore,
     AutomationStoreError,
@@ -61,134 +63,6 @@ class NarrativeProjectionReceipt:
     effect_id: str | None
     status: str
     artifact_version_id: str | None = None
-
-
-@dataclass(frozen=True)
-class NarrativeArtifactRead:
-    artifact: NarrativeArtifactVersion
-    bundle: NarrativeBundle
-
-
-class NarrativeProjectionError(ValueError):
-    """A leased effect does not describe one valid, replayed narrative bundle."""
-
-
-def _projection_manifest(bundle: NarrativeBundle, manifest: object) -> tuple[dict, str]:
-    if (not isinstance(manifest, dict) or manifest.get("schema_version") != "narrative-generation/2"
-            or manifest.get("subject_binding") != bundle.subject.to_dict()):
-        raise NarrativeProjectionError("projection generation manifest differs from bundle subject")
-    metadata = manifest.get("source_metadata")
-    if metadata is not None and metadata != bundle.source_metadata.to_dict():
-        raise NarrativeProjectionError("projection generation metadata differs from bundle")
-    return manifest, canonical_json_hash(manifest)
-
-
-def _replay_projected_bundle(bundle: NarrativeBundle,
-                             loader: Callable[[NarrativeSubject], VerifiedProjectionView] | None) -> None:
-    if bundle.subject.kind != "official_json":
-        return
-    if loader is None:
-        raise NarrativeProjectionError("projection source loader is unavailable")
-    view = loader(bundle.subject)
-    if not isinstance(view, VerifiedProjectionView):
-        raise NarrativeProjectionError("projection source loader returned an invalid view")
-    replay_verified_projection(view, bundle)
-
-
-def _stored_bundle(payload: bytes) -> NarrativeBundle:
-    if not payload:
-        raise NarrativeProjectionError("stored narrative bundle exceeds its byte limit")
-    try:
-        text = payload.decode("utf-8", errors="strict")
-        require_canonical_json(text)
-        return NarrativeBundle.from_dict(json.loads(text))
-    except (UnicodeDecodeError, TypeError, ValueError, NarrativeContractError) as exc:
-        raise NarrativeProjectionError("stored narrative bundle failed its strict wire contract") from exc
-
-
-class NarrativeBundleReader:
-    """Return only hash-checked visible bundles bound to the active source version."""
-
-    def __init__(self, artifacts: NarrativeArtifactStore | NarrativeArtifactReader, *,
-                 projection_loader: Callable[[NarrativeSubject], VerifiedProjectionView] | None = None) -> None:
-        self._artifacts = artifacts
-        self._projection_loader = projection_loader
-
-    def read(
-        self,
-        *,
-        document_id: str,
-        source_id: str,
-        source_sha256: str,
-    ) -> NarrativeArtifactRead:
-        artifact = self._artifacts.latest_visible_version(
-            document_id=document_id,
-            source_id=source_id,
-            source_sha256=source_sha256,
-        )
-        if type(artifact.byte_size) is not int or artifact.byte_size <= 0:
-            raise NarrativeProjectionError("stored narrative bundle exceeds its byte limit")
-        artifact, payload = self._artifacts.read_exact(
-            artifact_version_id=artifact.artifact_version_id,
-            document_id=document_id, source_id=source_id, source_sha256=source_sha256,
-            expected_sha256=artifact.content_sha256, expected_size=artifact.byte_size,
-        )
-        try:
-            text = payload.decode("utf-8", errors="strict")
-            require_canonical_json(text)
-            bundle = NarrativeBundle.from_dict(json.loads(text))
-        except (UnicodeDecodeError, TypeError, ValueError, NarrativeContractError) as exc:
-            raise NarrativeProjectionError(
-                "stored narrative bundle failed its strict wire contract"
-            ) from exc
-        source = bundle.source_ref
-        if (
-            bundle.schema_version not in {LEGACY_BUNDLE.raw_schema,ASSESSED_BUNDLE.raw_schema}
-            or source.document_id != artifact.document_id
-            or source.source_id != artifact.source_id
-            or source.content_sha256 != artifact.source_sha256
-            or source.document_id != document_id
-            or source.source_id != source_id
-            or source.content_sha256 != source_sha256
-            or bundle.selection.status != artifact.selection_status
-            or bundle.quality_status != artifact.quality_status
-            or bundle.expected_read_policy_sha256 != artifact.policy_sha256
-        ):
-            raise NarrativeProjectionError(
-                "stored narrative bundle does not match its source binding"
-            )
-        return NarrativeArtifactRead(artifact=artifact, bundle=bundle)
-
-
-    def read_subject(self, *, subject: NarrativeSubject, generation_sha256: str,
-                     artifact_version_id: str | None = None) -> NarrativeArtifactRead:
-        """Open the exact subject/generation, then replay one fresh source view."""
-        if not isinstance(subject, NarrativeSubject):
-            raise TypeError("subject must be NarrativeSubject")
-        if artifact_version_id is None:
-            candidates = self._artifacts.visible_subject_generation_candidates(
-                subject=subject, generation_sha256=generation_sha256)
-            if not candidates:
-                raise NarrativeArtifactNotVisibleError("no visible bundle for exact subject generation")
-            artifact_version_id = candidates[0].artifact_version_id
-        artifact, payload = self._artifacts.read_current_subject(
-            artifact_version_id=artifact_version_id, subject=subject,
-            generation_sha256=generation_sha256)
-        bundle = _stored_bundle(payload)
-        if (bundle.subject.to_dict() != subject.to_dict()
-                or bundle.selection.status != artifact.selection_status
-                or bundle.quality_status != artifact.quality_status):
-            raise NarrativeProjectionError("stored narrative bundle differs from subject artifact")
-        if subject.kind == "official_json":
-            metadata = json.loads(artifact.metadata_json)
-            _, actual_generation = _projection_manifest(bundle, metadata.get("generation_manifest"))
-            if (actual_generation != generation_sha256
-                    or artifact.policy_sha256 != generation_sha256):
-                raise NarrativeProjectionError("stored narrative bundle generation differs")
-            _replay_projected_bundle(bundle, self._projection_loader)
-        elif bundle.expected_read_policy_sha256 != artifact.policy_sha256:
-            raise NarrativeProjectionError("stored raw bundle policy differs")
-        return NarrativeArtifactRead(artifact=artifact, bundle=bundle)
 
 
 class NarrativeEffectDispatcher:
@@ -247,6 +121,9 @@ class NarrativeEffectDispatcher:
                     metadata["base_generation_sha256"] = canonical_json_hash(base)
                 draft = replace(draft, metadata_json=canonical_json(metadata))
             version = self._artifacts.prepare(draft, payload)
+        except StorageBudgetExceeded as exc:
+            self._retry_or_fail(lease, now=now, permanent=False, error=exc)
+            raise
         except (
             IntegrityViolationError,
             NarrativeArtifactError,
@@ -287,10 +164,7 @@ class NarrativeEffectDispatcher:
             # after AUTO ACK, keep the prepared object invisible until a later
             # enabled generation reconciles it. If publication wins, pause cannot
             # cross the visibility transaction.
-            with CatalogOperationLock(
-                self._artifacts.catalog_dir,
-                operation="narrative-bundle-activate",
-            ):
+            with self._artifacts.operation_lock(operation="narrative-bundle-activate"):
                 gate = self._automation.read_runtime_gate()
                 if (
                     gate.desired_state is not RuntimeState.ENABLED
@@ -314,7 +188,7 @@ class NarrativeEffectDispatcher:
                     )
                 # Prepared bytes are invisible. ACK is only an internal durable
                 # state transition; one fresh source export at visibility is enough.
-                _replay_projected_bundle(bundle, self._projection_loader)
+                replay_projected_bundle(bundle, self._projection_loader)
                 visible = self._artifacts.activate(
                     effect.effect_id,
                     verified_after_hash=version.content_sha256,
@@ -358,10 +232,7 @@ class NarrativeEffectDispatcher:
             limit=limit, allowed_effect_ids=effect_ids,
         ):
             try:
-                with CatalogOperationLock(
-                    self._artifacts.catalog_dir,
-                    operation="narrative-bundle-reconcile",
-                ):
+                with self._artifacts.operation_lock(operation="narrative-bundle-reconcile"):
                     gate = self._automation.read_runtime_gate()
                     if gate.desired_state is not RuntimeState.ENABLED:
                         continue
@@ -377,13 +248,13 @@ class NarrativeEffectDispatcher:
                     if isinstance(metadata.get("subject_binding"), Mapping) and metadata["subject_binding"].get("kind") == "official_json":
                         result = self._automation.result_for_effect(artifact.effect_id)
                         bundle = NarrativeBundle.from_dict(result.to_dict()["result"])
-                        _, generation_sha = _projection_manifest(bundle, metadata.get("generation_manifest"))
+                        _, generation_sha = validate_projection_manifest(bundle, metadata.get("generation_manifest"))
                         if (metadata.get("subject_binding") != bundle.subject.to_dict()
                                 or metadata.get("generation_sha256") != generation_sha
                                 or effect.target != publication_target(bundle.subject, generation_sha)
                                 or canonical_json_hash(bundle.to_dict()) != artifact.content_sha256):
                             raise NarrativeProjectionError("prepared projection differs from acknowledged bundle")
-                        _replay_projected_bundle(bundle, self._projection_loader)
+                        replay_projected_bundle(bundle, self._projection_loader)
                     self._artifacts.activate(
                         artifact.effect_id,
                         verified_after_hash=effect.actual_after_hash,
@@ -414,7 +285,7 @@ class NarrativeEffectDispatcher:
         bundle_hash = canonical_json_hash(bundle.to_dict())
         generation_sha = None
         if bundle.subject.kind == "official_json":
-            _, generation_sha = _projection_manifest(bundle, self._publication_manifest(effect, bundle))
+            _, generation_sha = validate_projection_manifest(bundle, self._publication_manifest(effect, bundle))
         expected_target = publication_target(bundle.subject, generation_sha)
         if (
             effect.target != expected_target
@@ -442,7 +313,7 @@ class NarrativeEffectDispatcher:
         producer_version = bundle.versions.bundle_producer
         artifact_role = "narrative_bundle"
         if bundle.subject.kind == "official_json":
-            manifest, generation_sha = _projection_manifest(bundle, generation_manifest)
+            manifest, generation_sha = validate_projection_manifest(bundle, generation_manifest)
             anchor = bundle.subject.anchor_ref
             metadata = {"bundle_schema": bundle.schema_version, "summary_status": bundle.summary.status,
                         "subject_binding": bundle.subject.to_dict(), "generation_manifest": manifest,

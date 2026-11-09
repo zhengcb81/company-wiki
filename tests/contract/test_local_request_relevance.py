@@ -4,6 +4,7 @@ import pytest
 from helpers.source_fact_fixture import lake, html, imported, close
 from company_wiki.source_catalog.local_reconcile import prepare_local_source
 from company_wiki.source_catalog.resolver import SourceRequest
+from company_wiki.source_catalog.source_reader import SourceVersionReader
 
 
 def request(**kwargs):
@@ -21,31 +22,33 @@ def request(**kwargs):
 
 
 @pytest.mark.parametrize(
-    "year,period,form", [(2022, "FY", "10-K"), (2026, "Q1", "10-Q")]
+    "year,period,form,kind,reason", [
+        (2022, "FY", "10-K", "annual_report", "no_matching_local_period"),
+        (2026, "Q1", "10-Q", "regulatory_filing", "no_registered_local_source"),
+    ],
 )
 def test_actual_wrong_scope_is_excluded_before_irrelevant_date_error(
-    tmp_path, year, period, form
+    tmp_path, year, period, form, kind, reason,
 ):
     cat = lake(tmp_path)
     try:
-        ref, path = imported(
-            cat,
-            html(
-                year=year,
-                period=period,
-                form=form,
-                end="June 30, 2022",
-                transform="unknown:date-format",
-            ),
+        original = html(
+            year=year, period=period, form=form, end="June 30, 2022",
+            transform="unknown:date-format",
         )
+        ref, path = imported(cat, original)
         result = prepare_local_source(cat, request())
         assert result["status"] == "not_found" and not result["blocks_download"]
-        assert result["reason"] == "no_matching_local_period"
-        assert result["download_events"] == 0
-        assert (
-            cat.reader.fetchone("SELECT COUNT(*) FROM source_metadata_assertions")[0]
-            == 1
+        assert result["reason"] == reason
+        assert result["download_events"] == 0 and path.read_bytes() == original
+        actual = SourceVersionReader(cat).describe_version(ref)
+        assert (actual["document_kind"], actual["fiscal_year"], actual["fiscal_period"], actual["form_type"]) == (
+            kind, year, period, form,
         )
+        before = cat.reader.fetchone("SELECT COUNT(*) FROM source_metadata_assertions")[0]
+        retry = prepare_local_source(cat, request())
+        assert retry["status"] == "not_found" and not retry["blocks_download"]
+        assert cat.reader.fetchone("SELECT COUNT(*) FROM source_metadata_assertions")[0] == before
     finally:
         close(cat)
 
@@ -174,10 +177,13 @@ def test_cached_request_hit_requires_actual_original_scope(tmp_path, phase, actu
         cat.record_source_facts(ref=ref, facts=facts, evidence=evidence(ref, facts))
         assert SourceVersionReader(cat).query_local(request()).status == "found"
         result = _prepare_local_source(cat, request(), _discovery_done=phase == "after_discovery")
-        assert result["status"] == "blocked" and result["blocks_download"]
-        expected = "primary_issuer_conflict" if actual == "wrong_cik" else "primary_scope_conflict"
-        assert expected in str(result)
-        assert result["reason"] != "no_matching_local_period"
+        if actual == "wrong_cik":
+            assert result["status"] == "blocked" and result["blocks_download"]
+            assert "primary_issuer_conflict" in str(result)
+        else:
+            assert result["status"] == "not_found" and not result["blocks_download"]
+            assert result["reason"] == "no_matching_local_period"
+            assert SourceVersionReader(cat).describe_version(ref)["fiscal_year"] == 2022
         assert result["download_events"] == 0 and path.read_bytes() == data
     finally:
         close(cat)
@@ -231,8 +237,68 @@ def test_annual_kind_cannot_be_qualified_by_actual_quarter_form(tmp_path):
         annual = replace(request(), form_type=None)
         assert SourceVersionReader(cat).query_local(annual).status == "found"
         result = prepare_local_source(cat, annual)
-        assert result["status"] == "blocked" and result["blocks_download"]
-        assert "primary_scope_conflict" in str(result)
+        assert result["status"] == "not_found" and not result["blocks_download"]
+        assert result["source_ref"] is None and result["download_events"] == 0
+        actual = SourceVersionReader(cat).describe_version(ref)
+        assert (actual["document_kind"], actual["form_type"], actual["fiscal_period"]) == (
+            "regulatory_filing", "10-Q", "Q1",
+        )
+    finally:
+        close(cat)
+
+
+@pytest.mark.parametrize("mode", ["exact", "latest_as_of"])
+def test_registered_archive_reconciles_actual_scope_even_when_layout_discovery_finds_nothing(tmp_path, mode):
+    from dataclasses import replace
+    from helpers.source_fact_fixture import evidence
+
+    cat = lake(tmp_path)
+    try:
+        original = html(year=2022, end="2022-06-30")
+        ref, path = imported(cat, original, published="2026-07-30", declared_year=2026)
+        facts = {"form_type": "10-K", "fiscal_period": "FY"}
+        cat.record_source_facts(ref=ref, facts=facts, evidence=evidence(ref, facts))
+        root = cat.config.roots[0].path
+        archive = root / "Off-layout archive"
+        archive.mkdir()
+        moved = path.rename(archive / path.name)
+        with cat.store.transaction() as connection:
+            connection.execute(
+                "UPDATE locations SET absolute_path=?, relative_path=? "
+                "WHERE document_id=? AND role='original_primary'",
+                (str(moved), moved.relative_to(root).as_posix(), ref.document_id),
+            )
+
+        requested = replace(request(), mode=mode)
+        assert SourceVersionReader(cat).query_local(requested).status == "found"
+        result = prepare_local_source(cat, requested)
+        assert result["status"] == "not_found" and not result["blocks_download"], result
+        assert result["reason"] == "no_matching_local_period"
+        assert result["source_ref"] is None and result["download_events"] == 0
+        assert SourceVersionReader(cat).describe_version(ref)["fiscal_year"] == 2022
+        assert moved.read_bytes() == original
+    finally:
+        close(cat)
+
+
+@pytest.mark.parametrize("mode", ["exact", "latest_as_of"])
+def test_nonperiodic_sec_form_does_not_require_periodic_scope_proof(tmp_path, mode):
+    from dataclasses import replace
+    from helpers.source_fact_fixture import evidence
+
+    cat = lake(tmp_path)
+    try:
+        original = b'<html><body><ix:nonNumeric name="dei:DocumentType">8-K</ix:nonNumeric><p>Company update</p></body></html>'
+        ref, path = imported(cat, original, published="2026-07-30", document_kind="regulatory_filing")
+        facts = {"form_type": "8-K"}
+        cat.record_source_facts(ref=ref, facts=facts, evidence=evidence(ref, facts))
+        requested = replace(request(), document_kind="regulatory_filing", form_type="8-K", fiscal_year=None, mode=mode)
+        assert SourceVersionReader(cat).query_local(requested).status == "found"
+
+        result = prepare_local_source(cat, requested)
+        assert result["status"] == "ready" and result["download_events"] == 0
+        assert result["source_ref"]["content_sha256"] == ref.content_sha256
+        assert path.read_bytes() == original
     finally:
         close(cat)
 

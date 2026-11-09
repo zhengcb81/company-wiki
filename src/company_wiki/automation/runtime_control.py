@@ -3,12 +3,10 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+from contextlib import AbstractContextManager
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Any, Protocol
-
-from company_wiki.source_catalog.lock import CatalogOperationLock
 
 from .models import RuntimeGate, RuntimeState
 from .store import AutomationStore
@@ -26,6 +24,10 @@ class LegacyWorkerControl(Protocol):
     def persist_automation_interlock(self, enabled: bool) -> dict[str, object]: ...
 
     def stop(self, **kwargs: Any) -> dict[str, object]: ...
+
+
+class OperationLock(Protocol):
+    def __call__(self, *, operation: str) -> AbstractContextManager[object]: ...
 
 
 def _utc_now() -> str:
@@ -54,20 +56,17 @@ class AutomationWorkerController:
         self,
         *,
         store: AutomationStore,
-        catalog_dir: Path,
+        operation_lock: OperationLock,
         legacy_controller: LegacyWorkerControl,
         timestamp: Callable[[], str] = _utc_now,
     ) -> None:
         self._store = store
-        self._catalog_dir = catalog_dir
+        self._operation_lock = operation_lock
         self._legacy = legacy_controller
         self._timestamp = timestamp
 
     def enable(self) -> RuntimeGate:
-        with CatalogOperationLock(
-            self._catalog_dir,
-            operation="automation-worker-enable",
-        ):
+        with self._operation_lock(operation="automation-worker-enable"):
             legacy_state = self._legacy.interlock_state()
             _require_paused_legacy_state(legacy_state)
             gate = self._store.read_runtime_gate()
@@ -100,10 +99,7 @@ class AutomationWorkerController:
     ) -> PauseResult:
         gate: RuntimeGate | None = None
         failure: Exception | None = None
-        with CatalogOperationLock(
-            self._catalog_dir,
-            operation="automation-worker-pause",
-        ):
+        with self._operation_lock(operation="automation-worker-pause"):
             try:
                 gate = self._store.set_runtime_gate(
                     RuntimeState.PAUSED,

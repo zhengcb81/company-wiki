@@ -329,7 +329,7 @@ def test_actual_early_native_owner_bytes_invalidate_complete_cache(module, monke
     from company_wiki.automation.narrative_generation import (
         current_reading_decision_matches,
     )
-    from company_wiki.document_understanding import decision_inventory as inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as inventory
     from company_wiki.document_understanding.decision_dependencies import (
         freeze_decision_dependencies,
     )

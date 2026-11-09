@@ -333,3 +333,13 @@ def extract_transcript_material(
         parser.close()
         return _material(original, mime_type, parser.rows, max_lines=limit)
     raise TranscriptMaterialError("unsupported original MIME type")
+
+__all__ = [
+    'TRANSCRIPT_JSON_EXTRACTOR',
+    'TRANSCRIPT_MATERIAL_EXTRACTOR',
+    'TRANSCRIPT_MIME_TYPES',
+    'TranscriptMaterial',
+    'TranscriptMaterialError',
+    'TranscriptTextLine',
+    'extract_transcript_material',
+]

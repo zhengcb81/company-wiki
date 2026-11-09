@@ -21,7 +21,7 @@ def _pipeline():
 
 
 def test_decision_inventory_changes_for_unselected_applicable_policy(monkeypatch):
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     # Use the actual installed binding ID rather than an imagined provider ID.
     binding = next(row for row in registry._CATALOG["legacy_bindings"]
                    if row["family"] == "annual" and row["regime"] == "cn_exchange")
@@ -38,7 +38,7 @@ def test_decision_inventory_changes_for_unselected_applicable_policy(monkeypatch
 
 
 def test_unrelated_family_content_does_not_invalidate_this_source(monkeypatch):
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     binding = next(row for row in registry._CATALOG["legacy_bindings"]
                    if row["family"] == "annual" and row["regime"] == "cn_exchange")
     pipeline = _pipeline()
@@ -53,7 +53,7 @@ def test_unrelated_family_content_does_not_invalidate_this_source(monkeypatch):
 
 
 def test_missing_inventory_cannot_claim_complete():
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     trace = {"schema_version": "du-decision-trace/1", "scopes": [], "components": [],
              "candidates": [], "versions": {}, "inventory_complete": False}
     assert module.current_decision_trace(trace)["inventory_complete"] is False
@@ -62,36 +62,38 @@ def test_missing_inventory_cannot_claim_complete():
 @pytest.mark.parametrize("order", [("z-parent", "a-child"), ("a-child", "z-parent")])
 def test_source_wide_facets_survive_scope_sorting_and_frozen_replay(order):
     """Source-global facets cannot acquire a new scope when freeze sorts IDs."""
-    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
     from company_wiki.document_understanding.decision_dependencies import (
         compare_decision_dependencies, freeze_decision_dependencies,
     )
+    from company_wiki.source_catalog import narrative_decision_inventory as source_inventory
 
     binding = next(row for row in registry._CATALOG["legacy_bindings"]
                    if row["family"] == "annual" and row["regime"] == "cn_exchange")
     scopes = [{"scope_id": sid, "family": "annual", "regime": "cn_exchange",
                "form_type": "unknown", "purpose": "annual"} for sid in order]
     used = {registry._CATALOG["facets"][0]["id"]}
-    trace = decision_inventory._inventory(
+    trace = source_inventory._inventory(
         scopes, dict.fromkeys(order, binding["profile_id"]), used, carrier="text/plain")
     frozen = freeze_decision_dependencies(trace)
     assert frozen["status"] == "complete"
     current = decision_inventory.current_decision_trace(frozen)
     assert compare_decision_dependencies(frozen, current)["status"] == "same"
-    reversed_trace = decision_inventory._inventory(
+    reversed_trace = source_inventory._inventory(
         list(reversed(scopes)), dict.fromkeys(order, binding["profile_id"]), used,
         carrier="text/plain")
     assert freeze_decision_dependencies(reversed_trace)["decision_digest"] == frozen["decision_digest"]
 
 
 def test_transient_script_matching_change_invalidates_actual_decision(monkeypatch):
-    from company_wiki.document_normalization import normalize_document, text_matching
+    from company_wiki.document_model import text_matching
+    from company_wiki.document_normalization import normalize_document
     from company_wiki.document_understanding import understand_units
     from company_wiki.document_understanding.decision_dependencies import (
         compare_decision_dependencies, freeze_decision_dependencies,
     )
 
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     raw = b"<html><body><p>INTERIM REPORT 2026. Our company launched a new product for overseas customers.</p></body></html>"
     digest = sha256(raw).hexdigest()
     source_id = "urn:company-wiki:source:sha256:" + digest
@@ -109,7 +111,7 @@ def test_transient_script_matching_change_invalidates_actual_decision(monkeypatc
 
 
 def test_reading_business_admission_version_is_an_actual_cache_dependency(monkeypatch):
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     policy = importlib.import_module("company_wiki.source_catalog.narrative_business_policy")
     before = module.build_decision_trace(_real_interim_pipeline())
     assert before["versions"].get("business_policy") == policy.READING_BUSINESS_POLICY_VERSION
@@ -124,7 +126,7 @@ def test_reading_business_admission_version_is_an_actual_cache_dependency(monkey
 
 
 def test_reporting_rule_only_change_invalidates_the_actual_decision_cache(tmp_path, monkeypatch):
-    from company_wiki.document_understanding import decision_inventory as inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as inventory
     from company_wiki.document_understanding.decision_dependencies import (
         freeze_decision_dependencies, compare_decision_dependencies,
     )
@@ -143,7 +145,8 @@ def test_reporting_rule_only_change_invalidates_the_actual_decision_cache(tmp_pa
 
 
 def test_changed_continuity_algorithm_invalidates_a_real_complete_manifest(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory, narrative_continuity
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
+    from company_wiki.document_understanding import narrative_continuity
     from company_wiki.document_understanding.decision_dependencies import (
         freeze_decision_dependencies, compare_decision_dependencies,
     )
@@ -159,17 +162,17 @@ def test_changed_continuity_algorithm_invalidates_a_real_complete_manifest(monke
 
 def test_native_source_range_algorithm_is_a_pdf_dependency_only(monkeypatch):
     from company_wiki.source_catalog import narrative_native_ranges
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
-    before = module._versions(pdf_frontend=True)
-    unrelated = module._versions(pdf_frontend=False)
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
+    before = module.decision_versions(pdf_frontend=True)
+    unrelated = module.decision_versions(pdf_frontend=False)
     assert before.get("pdf_native_range") == narrative_native_ranges.NATIVE_PAGE_VIEW_FEATURE_VERSION
     monkeypatch.setattr(narrative_native_ranges, "NATIVE_PAGE_VIEW_FEATURE_VERSION", "native-pdf-page-view/next")
-    assert module._versions(pdf_frontend=True) != before
-    assert module._versions(pdf_frontend=False) == unrelated
+    assert module.decision_versions(pdf_frontend=True) != before
+    assert module.decision_versions(pdf_frontend=False) == unrelated
 
 
 def test_changed_table_meaning_invalidates_a_complete_manifest(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
     from company_wiki.document_understanding.structure import table_purpose
     from company_wiki.document_understanding.decision_dependencies import (
         freeze_decision_dependencies, compare_decision_dependencies,
@@ -186,7 +189,7 @@ def test_changed_table_meaning_invalidates_a_complete_manifest(monkeypatch):
 @pytest.mark.parametrize("first", ["inventory", "policy", "source-selector"])
 def test_actual_business_version_import_chain_is_safe_from_fresh_entry_points(first):
     modules = {
-        "inventory": "company_wiki.document_understanding.decision_inventory",
+        "inventory": "company_wiki.source_catalog.narrative_decision_inventory",
         "policy": "company_wiki.source_catalog.narrative_business_policy",
         "source-selector": "company_wiki.source_catalog.narrative_reading",
     }
@@ -195,9 +198,9 @@ def test_actual_business_version_import_chain_is_safe_from_fresh_entry_points(fi
     script = (
         "import importlib,json,sys; "
         "[importlib.import_module(name) for name in json.loads(sys.argv[1])]; "
-        "inventory=importlib.import_module('company_wiki.document_understanding.decision_inventory'); "
+        "inventory=importlib.import_module('company_wiki.source_catalog.narrative_decision_inventory'); "
         "policy=importlib.import_module('company_wiki.source_catalog.narrative_business_policy'); "
-        "assert inventory._versions()['business_policy']==policy.READING_BUSINESS_POLICY_VERSION"
+        "assert inventory.decision_versions()['business_policy']==policy.READING_BUSINESS_POLICY_VERSION"
     )
     result = subprocess.run([sys.executable, "-c", script, json.dumps(ordered)],
                             cwd=repo, env={**os.environ, "PYTHONPATH": str(repo / "src"),
@@ -226,7 +229,7 @@ def _real_interim_pipeline():
 
 
 def test_real_hk_interim_inventory_records_the_resolved_family_and_invalidates_changed_policy(monkeypatch):
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     pipeline = _real_interim_pipeline()
     trace = module.build_decision_trace(pipeline)
     assert trace["scopes"][0]["family"] == "interim"
@@ -241,7 +244,7 @@ def test_real_hk_interim_inventory_records_the_resolved_family_and_invalidates_c
 
 
 def test_actual_child_unit_family_wins_over_legacy_binding_and_parent_form():
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     pipeline = _real_interim_pipeline()
     child_key = "hk_periodic:actually-read-child"
     pid = pipeline["profile"]["profile_id"]
@@ -260,7 +263,7 @@ def test_actual_child_unit_family_wins_over_legacy_binding_and_parent_form():
 
 @pytest.mark.parametrize("origin", ["resolved_profile", "actual_units"])
 def test_resolved_parent_family_is_not_replaced_by_an_obsolete_route_or_binding(origin):
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     pipeline = _real_interim_pipeline()
     pipeline["route"]["family"] = "annual"
     if origin == "actual_units":
@@ -270,7 +273,7 @@ def test_resolved_parent_family_is_not_replaced_by_an_obsolete_route_or_binding(
 
 
 def test_actual_child_regime_does_not_inherit_the_parent_market_or_profile_default():
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     pipeline = _real_interim_pipeline()
     child_key = "observed-sec-child"
     # This is an actual resolved scoped view. The compatibility profile ID is
@@ -283,14 +286,14 @@ def test_actual_child_regime_does_not_inherit_the_parent_market_or_profile_defau
 
 
 def test_unresolved_child_scope_cannot_claim_complete_using_a_legacy_default():
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     pipeline = _real_interim_pipeline()
     pipeline["reading_plan"]["used_profiles"].append({"profile_id": "hk_periodic", "reading_profile_key": "missing-child"})
     assert module.build_decision_trace(pipeline)["inventory_complete"] is False
 
 
 def test_actual_scope_retains_ineligible_metadata_candidates_and_their_admission_matcher(monkeypatch):
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     trace = module.build_decision_trace(_real_interim_pipeline())
     ineligible = [row for row in trace["candidates"] if row["candidate_id"].startswith("family|") and not row["eligible"]]
     assert ineligible
@@ -305,14 +308,14 @@ def test_actual_scope_retains_ineligible_metadata_candidates_and_their_admission
 
 
 def test_missing_actual_root_family_cannot_be_filled_from_the_compatibility_binding():
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     pipeline = _pipeline()
     pipeline["route"].pop("family")
     assert module.build_decision_trace(pipeline)["inventory_complete"] is False
 
 
 def test_conflicting_actual_unit_families_cannot_be_reused_as_an_arbitrary_first_scope():
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     pipeline = _real_interim_pipeline()
     first = next(iter(pipeline["reading_plan"]["unit_profiles"].values()))
     pipeline["reading_plan"]["unit_profiles"]["contradictory"] = {**first, "family": "annual"}
@@ -320,12 +323,12 @@ def test_conflicting_actual_unit_families_cannot_be_reused_as_an_arbitrary_first
 
 
 def test_real_multi_parent_reading_bridge_namespaces_actual_profiles_for_complete_inventory():
-    from company_wiki.automation.narrative_official_json import _unit
+    from company_wiki.source_catalog.narrative_official_json import _unit
     from company_wiki.source_catalog.narrative_document import DocumentStructure
     from company_wiki.source_catalog.narrative_reading import _understand
     from unit.test_official_json_model_subject import selection
 
-    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    module = importlib.import_module("company_wiki.source_catalog.narrative_decision_inventory")
     original = selection()
     units = tuple(_unit(span) for span in original.evidence_spans)
     parsed = DocumentStructure(original.source_ref.source_id, original.source_ref.content_sha256,
@@ -363,7 +366,7 @@ def test_real_multi_parent_reading_bridge_namespaces_actual_profiles_for_complet
     "company_wiki.document_understanding.structure.sections",
 ])
 def test_w08_changed_source_implementation_invalidates_the_real_complete_decision(monkeypatch, module_name):
-    from company_wiki.document_understanding import decision_inventory as inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as inventory
     from company_wiki.document_understanding.decision_dependencies import (
         compare_decision_dependencies, freeze_decision_dependencies,
     )
@@ -391,29 +394,29 @@ def test_w08_changed_source_implementation_invalidates_the_real_complete_decisio
 
 @pytest.mark.parametrize("pdf", [False, True])
 def test_product_identity_source_bytes_are_part_of_the_actual_current_decision(monkeypatch, pdf):
-    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as decision_inventory
     from company_wiki.document_understanding.operating_states import product_reference
     target = Path(product_reference.__file__).resolve()
     assert target.is_relative_to(Path(__file__).resolve().parents[3] / "src")
     read_bytes = Path.read_bytes
-    before = decision_inventory._versions(pdf_frontend=pdf)
+    before = decision_inventory.decision_versions(pdf_frontend=pdf)
     with monkeypatch.context() as patch:
         def changed_source(path):
             raw = read_bytes(path)
             return raw + b"\n# changed source identity policy\n" if path.resolve() == target else raw
         patch.setattr(Path, "read_bytes", changed_source)
-        changed = decision_inventory._versions(pdf_frontend=pdf)
+        changed = decision_inventory.decision_versions(pdf_frontend=pdf)
         assert changed["business_algorithms"] != before["business_algorithms"]
         assert changed["budget"] == before["budget"]
-    assert decision_inventory._versions(pdf_frontend=pdf) == before
+    assert decision_inventory.decision_versions(pdf_frontend=pdf) == before
 
 
 def test_navigation_context_policy_content_changes_current_decision(monkeypatch):
-    from company_wiki.document_understanding import decision_inventory as inventory
-    before = inventory._versions(pdf_frontend=False)
+    from company_wiki.source_catalog import narrative_decision_inventory as inventory
+    before = inventory.decision_versions(pdf_frontend=False)
     changed = deepcopy(registry._CATALOG)
     changed["context_policy"]["generic_navigation_titles"].append("Additional generic navigation")
     monkeypatch.setattr(registry, "_CATALOG", changed)
-    after = inventory._versions(pdf_frontend=False)
+    after = inventory.decision_versions(pdf_frontend=False)
     assert after["context_policy"] != before["context_policy"]
     assert after["budget"] == before["budget"]

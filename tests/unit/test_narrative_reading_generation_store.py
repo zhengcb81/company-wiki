@@ -272,3 +272,18 @@ def test_constructed_model_effective_spec_must_match_frozen_generation(field, va
     options[field] = value
     with pytest.raises(ValueError, match="NARRATIVE_RUN_MODEL_CONFIG_MISMATCH"):
         verify(NarrativeHTTPModel(**options), [frozen])
+
+
+def test_worker_uses_the_models_public_effective_request_configuration():
+    from company_wiki.automation.narrative_worker_factory import _verify_effective_model
+
+    frozen = {"model_id": "fixture", "endpoint": "https://[::1]:9443/chat/completions",
+              "max_output_tokens": 200, "output_token_field": "max_tokens"}
+
+    class OpaqueModel:
+        def effective_request_options(self):
+            return dict(frozen)
+
+    _verify_effective_model(OpaqueModel(), [frozen])
+    with pytest.raises(ValueError, match="NARRATIVE_RUN_MODEL_CONFIG_MISMATCH"):
+        _verify_effective_model(OpaqueModel(), [{**frozen, "max_output_tokens": 201}])

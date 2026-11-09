@@ -49,7 +49,7 @@ DEFAULT_MAX_CHARS = 48000
 
 #: Instruction fragments shared by every profile. The per-type focus is appended to these,
 #: so a new document type changes what is emphasised, never whether these hold.
-_SHARED_CONSTRAINTS: tuple[str, ...] = (
+SHARED_CONSTRAINTS: tuple[str, ...] = (
     "只使用下面给出的原文单元，不补充任何未出现的数字、主体或时间。",
     "保留原语言，不翻译、不改写单位与币种。",
     "每个事实必须能回指到给出的 locator；无法回指的内容不要输出。",
@@ -115,7 +115,7 @@ def build_summary_input(
     selected, unsafe = _validate_sent_context(selected, graph["groups"], units_by_id, index=graph["index"])
     dropped.extend(unsafe)
     used_chars = sum(len(member["text"]) for entry in selected for member in entry["members"])
-    policies, facets, policy_version = _sent_policies(pipeline_result, selected)
+    policies, facets, policy_version = sent_policies(pipeline_result, selected)
     return {
         "schema_version": SCHEMA_VERSION,
         "feature_version": SUMMARY_FEATURE_VERSION,
@@ -133,7 +133,7 @@ def build_summary_input(
         "prefer_semantic_units": _unique([kind for p in policies for kind in p.get("semantic_units") or ()]),
         "section_priorities": _unique([row for p in policies for row in p.get("section_priorities") or ()]),
         "negative_hints": _unique([hint for p in policies for hint in p.get("negative_hints") or ()]),
-        "constraints": list(_SHARED_CONSTRAINTS),
+        "constraints": list(SHARED_CONSTRAINTS),
         "evidence_packages": selected,
         "reading_policies": policies,
         "business_facets": facets,
@@ -155,7 +155,7 @@ def build_summary_input(
             "diagnostics": closure["diagnostics"],
         },
         "deferred": dropped,
-        "unread": _unread(structure, observation),
+        "unread": unread_units(structure, observation),
         "diagnostics": list(pipeline_result.get("diagnostics", ())),
     }
 
@@ -172,7 +172,7 @@ def _unique(values: Sequence[Any]) -> list[Any]:
     return output
 
 
-def _sent_policies(
+def sent_policies(
     pipeline: Mapping[str, Any], entries: Sequence[Mapping[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str]:
     """Version only used policies; select hints only from the final source material.
@@ -206,7 +206,7 @@ def _sent_policies(
                 "summary_feature_version": SUMMARY_FEATURE_VERSION,
                 "layout_feature_version": (pipeline.get("layout_hints") or {}).get("feature_version"),
                 "business_facets": [{k: v for k, v in f.items() if k != "selection_basis"}
-                                    for f in facets], "constraints": list(_SHARED_CONSTRAINTS)}
+                                    for f in facets], "constraints": list(SHARED_CONSTRAINTS)}
     digest = sha256(json.dumps(manifest, ensure_ascii=False, sort_keys=True,
                                separators=(",", ":")).encode()).hexdigest()
     return policies, facets, "du-sent-policy/1+" + digest
@@ -462,7 +462,7 @@ def _validate_sent_context(
     return kept, dropped
 
 
-def _unread(
+def unread_units(
     structure: Mapping[str, Any], observation: Mapping[str, Any]
 ) -> dict[str, Any]:
     """Report what this request does not cover, so a gap cannot read as completeness.
@@ -489,9 +489,13 @@ def _unread(
 
 
 __all__ = [
-    "DEFAULT_MAX_CHARS",
-    "DEFAULT_MAX_PACKAGES",
-    "SCHEMA_VERSION",
-    "SUMMARY_INPUT_SCHEMA_VERSION",
-    "build_summary_input",
+    'DEFAULT_MAX_CHARS',
+    'DEFAULT_MAX_PACKAGES',
+    'SCHEMA_VERSION',
+    'SUMMARY_INPUT_SCHEMA_VERSION',
+    'build_summary_input',
+    'sent_policies',
+    'unread_units',
+    'SHARED_CONSTRAINTS',
+    'SUMMARY_FEATURE_VERSION',
 ]

@@ -45,7 +45,7 @@ def _request(fixture, *, as_of_date="2026-09-01"):
 
 def _cli(config_path, request, operation, *options):
     return subprocess.run(
-        [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli",
+        [sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli",
          "--config", str(config_path), "--operation", operation, *options],
         input=canonical_json(request).encode("utf-8"), capture_output=True,
         cwd=config_path.parent, timeout=40,

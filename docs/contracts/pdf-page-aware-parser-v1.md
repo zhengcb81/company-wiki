@@ -7,11 +7,9 @@ between a page-level PDF runtime and `ParserResult`. It consumes explicit physic
 page snapshots and never opens a PDF, imports PyMuPDF/legacy scripts, calls an LLM,
 or writes raw, derived files, databases, Wiki, review state, or StockWiki.
 
-The pure core is **not production-wired** directly into a worker or scheduler and
-still owns no file I/O. CW-2.20 separately wires the source-catalog PyMuPDF fallback
-to build strict page snapshots and call this core. That wiring was validated only
-with synthetic PDFs and temporary catalogs; it did not run the production backlog
-or restart the production worker.
+The source-catalog legacy PyMuPDF fallback builds page snapshots and calls this
+adapter. The current finite narrative workflow uses its own reading port. The
+adapter owns no file I/O in either case.
 
 ## Strict input
 
@@ -20,15 +18,16 @@ The caller supplies a verified `application/pdf` `SourceManifest`, a semantic
 
 - `page_number`: explicit physical page, contiguous and 1-based;
 - `text`: NFC text with LF line endings;
-- `tables`: page-local v3 table mappings with `markdown`, `rows`, `cols`, and
-  rectangular `data`;
+- `tables`: page-local table mappings with `rows`, `cols` and rectangular `data`.
+  A historical `markdown` display field is accepted and ignored;
 - `quality_score`, `ocr_used`, `ocr_confidence`, `layout_ambiguous`, and
   `encoding_repaired`;
 - `error`: null or a page extraction error.
 
 Unknown/missing fields, page gaps, invalid OCR metadata, non-rectangular tables,
-non-finite values, non-NFC text, CR line endings, and conflicting error/output all
-fail closed. Page identity is never guessed from an aggregate block or `[TABLE N]`.
+non-finite values, non-NFC evidence text, CR line endings in evidence text and
+conflicting error/output all fail closed. Page identity is never guessed from
+an aggregate block or `[TABLE N]`.
 
 ## Output and locators
 
@@ -69,7 +68,8 @@ are joined with stable blank-line paragraph boundaries before adaptation.
 
 If `Page.find_tables` is unavailable or table extraction/geometry cannot be trusted,
 the page keeps extractable narrative but is marked `layout_ambiguous`; no table cell
-locator is invented. A page text exception becomes page-only `parser_error`, while a
-truly empty page becomes page-only `empty_output`. Document-level open, encryption,
-or corruption errors continue through the source catalog's truthful unsupported
-artifact path with zero EvidenceSpan output.
+locator is invented. A backend's Markdown renderer is unnecessary because the
+catalog renders the verified cells and locators directly. A page text exception
+becomes page-only `parser_error`, while a truly empty page becomes page-only
+`empty_output`. Document-level open, encryption, or corruption errors continue
+through the source catalog's unsupported artifact path with zero EvidenceSpan output.

@@ -490,7 +490,7 @@ def read_public_artifact(lake: SimpleNamespace, pin: dict, env: dict[str, str],
     request = read_request_for(lake, pin)
     command = [
         sys.executable, "-B", "-m",
-        "company_wiki.source_catalog.narrative_transport_cli",
+        "company_wiki.automation.narrative_transport_cli",
         "--config", str(lake.config_path),
         "--operation", "read",
     ]

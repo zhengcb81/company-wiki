@@ -5,7 +5,7 @@ from hashlib import sha256
 
 import pytest
 
-from company_wiki.document_normalization import table_shapes
+from company_wiki.document_model import table_shapes
 from company_wiki.resource_budget import WorkBudget
 from company_wiki.source_catalog.narrative_pdf_enhancement import ParagraphEnhancement
 from company_wiki.source_catalog.narrative_pdf_paragraphs import triage_paragraph_gaps

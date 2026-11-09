@@ -321,15 +321,28 @@ def test_cli_rejects_unverified_pdf_span_and_publishes_pdf_manifest_only(
     assert _snapshot(tmp_path) == before
 
 
-def test_cli_rejects_bad_source_ref_hash_with_empty_stdout(
+def test_cli_rejects_bad_source_ref_hash_before_accessing_the_catalog(
     tmp_path: Path,
 ) -> None:
     config_path, _raw, guard_dir, ref, span = _fixture(tmp_path)
     ref["content_sha256"] = "0" * 64
     before = _snapshot(tmp_path)
-    proc = _run_cli(config_path, guard_dir, ref, span, tmp_path / "caller")
-    _one_json_error(proc, tmp_path)
+    proc = _run_cli(config_path.with_name("absent.yaml"), guard_dir, ref, span, tmp_path / "caller")
+    error = _one_json_error(proc, tmp_path)
+    assert (error["status"], error["reason"]) == ("unavailable", "expected_version_mismatch")
     assert _snapshot(tmp_path) == before
+
+
+def test_cli_reports_a_real_json_decoder_stack_error_as_one_refusal(tmp_path):
+    request = b'{"schema_version":"2.0","source_refs":' + b"[" * 8000 + b"0" + b"]" * 8000
+    request += b',"evidence_spans":[]}'
+    env = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
+    proc = subprocess.run(
+        [sys.executable, "-B", "-m", CLI_MODULE, "--config", str(tmp_path / "absent.yaml")],
+        input=request, cwd=tmp_path, env=env, capture_output=True, check=False, timeout=30,
+    )
+    error = _one_json_error(proc, tmp_path)
+    assert (proc.returncode, error["status"], error["reason"]) == (2, "blocked", "invalid_request")
 
 
 def test_cli_rejects_same_size_raw_byte_drift_with_empty_stdout(

@@ -8,7 +8,7 @@ from pathlib import Path
 from types import SimpleNamespace
 import pytest
 from company_wiki import document_normalization as dn
-from company_wiki.automation.narrative_formats import parser_component
+from company_wiki.source_catalog.narrative_formats import parser_component
 from company_wiki.automation.narrative_generation import generation_manifest
 from company_wiki.automation.narrative_contracts import (
     NarrativeSelectResult,
@@ -119,6 +119,30 @@ def normalize(value, data):
 def test_actual_carrier_component_uses_pure_pptx_11_not_html_constant():
     assert parser_component("text/html")[1] == "1.0.0"
     assert parser_component(MIME)[1] == "1.1.0"
+
+
+def test_verified_initial_selection_preserves_a_legacy_normalizer_override():
+    from company_wiki.source_contract.source_version import VerifiedContent
+
+    data = b"<html><body><p>A new plant started producing components.</p></body></html>"
+    digest = hashlib.sha256(data).hexdigest()
+    opened = VerifiedContent(
+        "document", "urn:company-wiki:source:sha256:" + digest, digest, data, len(data),
+        "2026-11-09T00:00:00Z", "a" * 64, "b" * 64,
+    )
+    calls = []
+
+    class EarlierNormalizer(_module().NarrativeNormalization):
+        def normalize(self, data, *, source_id, source_sha256, mime_type, document_id=None):
+            calls.append(document_id)
+            return super().normalize(
+                data, source_id=source_id, source_sha256=source_sha256,
+                mime_type=mime_type, document_id=document_id,
+            )
+
+    result = EarlierNormalizer().normalize_verified(opened, mime_type="text/html")
+    assert calls == [opened.document_id]
+    assert result.units[0].raw_text == "A new plant started producing components."
 
 
 def test_generation_uses_actual_normalization_identity_and_overrides_parser_component():
@@ -284,6 +308,21 @@ def test_original_language_samples_only_bounded_unique_images(tmp_path):
     assert adapters[0].calls == 2 and adapters[0].validations == 1
 
 
+def test_original_language_does_not_initialize_ocr_for_a_hidden_picture(tmp_path):
+    from io import BytesIO
+    from pptx import Presentation
+
+    deck = Presentation(BytesIO(image_deck(1)))
+    picture = deck.slides[0].shapes[0]
+    picture._element.nvPicPr.cNvPr.set("hidden", "1")
+    data = BytesIO()
+    deck.save(data)
+
+    value, adapters = port(tmp_path / "models")
+    assert value.sample_text(data.getvalue(), MIME) == ""
+    assert adapters == []
+
+
 @pytest.mark.parametrize("mode", ["blank", "low"])
 def test_no_reliable_ocr_span_stays_incomplete_without_successful_skip(tmp_path, mode):
     value, adapters = port(
@@ -399,13 +438,8 @@ def test_partial_completed_derivation_public_replays_and_reuses(
         source_reader.opened,
         manifest,
     )
-    # This public-read double also owns an empty source catalog: there is no
-    # availability observation for this current-mode OCR fixture. Keep real
-    # qualification/replay and all generation assertions in place.
-    source_reader.catalog = SimpleNamespace(
-        reader=SimpleNamespace(exact_source_locations=lambda document_id, source_id: []),
-        config=SimpleNamespace(roots=()),
-    )
+    # This current-mode fixture has no historical availability observation.
+    source_reader.availability_evidence = lambda current: None
     version = SimpleNamespace(
         content_sha256=digest,
         byte_size=len(raw),
@@ -554,7 +588,8 @@ def test_declared_binding3_without_manifest_is_rejected_not_downgraded(frozen_ru
     )
     broken = replace(run, binding_json=canonical_json(frozen))
     with pytest.raises(batch.BatchResumeError, match="BATCH_FROZEN_BINDING_INVALID"):
-        batch._resume_binding(request, state.reader, store, runs, broken, deadline=None)
+        batch._resume_binding(request, state.reader, store, runs, broken, deadline=None,
+                              open_artifacts=state.catalog.open_narrative_artifact_reader)
     assert runs.get_run(run.run_id) == run
     assert all(store.list_attempts(job_id) == () for job_id in run.job_ids)
 

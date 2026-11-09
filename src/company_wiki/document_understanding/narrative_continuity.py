@@ -1059,4 +1059,10 @@ def build_native_continuity(
     }
 
 
-__all__ = ["NARRATIVE_CONTINUITY_FEATURE_VERSION", "build_native_continuity"]
+__all__ = [
+    'NARRATIVE_CONTINUITY_FEATURE_VERSION',
+    'build_native_continuity',
+    'NativeSourceContext',
+    'SourcePageFlow',
+    'native_section_key',
+]

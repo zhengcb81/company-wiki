@@ -112,7 +112,7 @@ def _exercise_real_sources_and_committed_consumers(
             _export_stockwiki(sw_root, consumer_heads["stockwiki"], sw_export)
             env = {**os.environ, "PYTHONPATH": os.pathsep.join((str(REPO / "src"), str(sw_export))),
                    "PYTHONUTF8": "1", "PYTHONDONTWRITEBYTECODE": "1", "PYTHON_DOTENV_DISABLED": "1"}
-            producer = [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli",
+            producer = [sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli",
                         "--config", str(config)]
             consumer_config = root / "consumer.json"
             consumer_config.write_text(json.dumps({"schema_version": "1.0", "python_executable": sys.executable,

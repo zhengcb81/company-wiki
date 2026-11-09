@@ -42,7 +42,7 @@ hash payload 包含 `schema_version`、两个下游 schema version、`counts`、
 incremental 语义是 `base ∪ new records`，不是更新或覆盖：
 
 - exact duplicate 按 ID 幂等去重；
-- 同 ID 但 canonical record 不同会失败；
+- 同 ID 但 canonical record 不同会失败。旧 NFC 清单可以保留在 `--base` 里并追加不同来源。若同一来源 ID 同时提交了历史定位和新实名定位，仍按不同记录报告冲突；
 - 同一 `source_id + locator` 出现不同输出 span 会失败；
 - span 引用 bundle 外 source 时作为 orphan 失败；
 - 无新增记录的 replay 与 base 逐字节相同；
@@ -50,7 +50,7 @@ incremental 语义是 `base ∪ new records`，不是更新或覆盖：
 
 ## Raw fail-closed
 
-输出前会对最终集合中的每个 manifest 执行路径、size 和 SHA-256 校验。raw 被删除、移动、替换或同尺寸篡改都会阻断 export；base 不会绕过该检查。CLI 只读 raw、JSONL 和可选 base，不修改源目录、输入文件、数据库或 Git 状态。
+输出前会对最终集合中的每个 manifest 执行路径、size 和 SHA-256 校验。清单定位按 [Source Manifest v1](source-manifest-v1.md) 解析，旧 NFC 定位符兼容重放时保留原 bundle 字节和 ID。原件缺失、位置歧义、越根或同尺寸篡改会阻断 export，`--base` 同样执行复验。CLI 只读 raw、JSONL 和可选 base，不修改源目录、输入文件、数据库或 Git 状态。
 
 ## 职责边界
 

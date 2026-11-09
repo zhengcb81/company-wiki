@@ -16,6 +16,7 @@ from lxml import etree
 from company_wiki.source_contract.evidence_span import EvidenceCoordinates
 from company_wiki.document_model.narrative import DocumentStructure
 from company_wiki.document_model.turns import AnonymousTurnObserver
+from ._source_input import _NormalizationSource
 from .document import NormalizedDocument
 from .errors import NormalizationLimitError, UnsupportedFormatError
 from .limits import MAX_ZIP_MEMBERS
@@ -478,8 +479,18 @@ def parse_docx(
     original, *, source_id, source_sha256, mime_type, limits,
     parser_version=DOCX_PARSER_VERSION,
 ):
+    """Verify raw DOCX bytes and normalize their visible body."""
+    if mime_type.split(";")[0].strip().lower() not in SUPPORTED_MIME_TYPES:
+        raise UnsupportedFormatError(f"mime_type {mime_type!r} is not a DOCX document type")
+    source = _NormalizationSource.from_bytes(
+        original, source_id=source_id, source_sha256=source_sha256, limits=limits,
+    )
+    return _parse_docx(source, limits=limits, parser_version=parser_version)
+
+
+def _parse_docx(source: _NormalizationSource, *, limits, parser_version):
     require_parser_version(FORMAT_DOCX, parser_version)
-    package, parts, total = _inventory(original, limits)
+    package, parts, total = _inventory(source.data, limits)
     try:
         if "word/document.xml" not in parts:
             raise UnsupportedFormatError("DOCX main document is missing")
@@ -490,17 +501,28 @@ def parse_docx(
         if root.tag != W + "document" or body is None:
             raise UnsupportedFormatError("DOCX document body is missing")
         external = 0
+        unreadable_relationships = []
         for name, info in parts.items():
-            if name.endswith(".rels"):
+            if not name.endswith(".rels"):
+                continue
+            try:
                 relations = _xml(package, info, limits)
-                external += sum(
-                    1
-                    for r in relations
-                    if r.tag == REL + "Relationship"
-                    and r.get("TargetMode") == "External"
-                )
+            except UnsupportedFormatError:
+                # The body parser never follows relationship targets. A failed
+                # optional count does not invalidate visible text or locators.
+                unreadable_relationships.append(name)
+                continue
+            if relations.tag != REL + "Relationships":
+                unreadable_relationships.append(name)
+                continue
+            external += sum(
+                1
+                for r in relations
+                if r.tag == REL + "Relationship"
+                and r.get("TargetMode") == "External"
+            )
         state = _DocxBody(
-            source_id, source_sha256, limits, parser_version=parser_version
+            source.source_id, source.source_sha256, limits, parser_version=parser_version
         )
         if parser_version != LEGACY_DOCX_PARSER_VERSION:
             styles = (
@@ -514,16 +536,16 @@ def parse_docx(
         if any(re.fullmatch(r"word/(?:header|footer)\d+\.xml", name) for name in parts):
             state.diagnostics.add("docx_header_footer_not_parsed")
         structure = DocumentStructure(
-            source_id,
-            source_sha256,
+            source.source_id,
+            source.source_sha256,
             "und",
             tuple(state.units),
             line_count=max(1, state.paragraphs + state.tables),
             errors=tuple(sorted(state.diagnostics)),
         )
         return NormalizedDocument(
-            source_id,
-            source_sha256,
+            source.source_id,
+            source.source_sha256,
             FORMAT_DOCX,
             PARSER_NAME,
             parser_version,
@@ -531,7 +553,11 @@ def parse_docx(
             metadata={
                 "archive_member_count": len(parts),
                 "uncompressed_bytes": total,
-                "external_relationship_count": external,
+                "external_relationship_count": None if unreadable_relationships else external,
+                **(
+                    {"unreadable_relationship_parts": tuple(sorted(unreadable_relationships))}
+                    if unreadable_relationships else {}
+                ),
                 "body_paragraph_count": state.paragraphs,
                 "table_count": state.tables,
             },

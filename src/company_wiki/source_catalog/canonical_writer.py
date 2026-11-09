@@ -13,7 +13,7 @@ import shutil
 import unicodedata
 from typing import TYPE_CHECKING, Any, Mapping
 
-from company_wiki._atomic_file import atomic_output
+from company_wiki.atomic_file import atomic_output
 from company_wiki.source_contract import source_id_for_sha256
 
 from .acquisition import DownloadCandidate, DownloadReceipt

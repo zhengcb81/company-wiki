@@ -18,7 +18,7 @@ import re
 import threading
 from typing import Any, Literal, Protocol
 
-from company_wiki.source_catalog.narrative_evidence import SummaryClaim
+from company_wiki.source_catalog.narrative_claims import SummaryClaim
 from company_wiki.source_contract.evidence_span import EvidenceSpan
 
 

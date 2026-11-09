@@ -1005,13 +1005,14 @@ def test_runtime_e2e_model_transient_stops_before_verify_effect(
         _cleanup(tmp_path, run_root, baseline, catalog)
 
 
-def test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_receipt(
+def test_runtime_e2e_historical_policy_is_lineage_and_changed_bytes_stop_before_model(
     tmp_path: Path,
 ) -> None:
     run_root, baseline = _run_root(tmp_path, "m3-e4-runtime-auto-checks")
     catalog = None
     try:
         annual = _pdf_bytes("Company launched a new product for overseas customers.")
+        changed = _pdf_bytes("Company expanded product qualification for overseas customers.")
         transcript = (
             b"Full Conference Call Transcript\n"
             b"CEO: We launched a new product and expanded overseas capacity.\n"
@@ -1031,24 +1032,30 @@ def test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_r
                     "title": "ACME earnings call",
                     "document_kind": "investor_call_transcript",
                 },
+                {
+                    "name": "changed.pdf",
+                    "data": changed,
+                    "title": "ACME results",
+                    "document_kind": "annual_report",
+                },
             ],
         )
         model = ReplayNarrativeModel()
         store, scheduler, worker = _runtime(run_root, reader, model)
         refs = {data: ref for data, ref in indexed.values()}
-        refused = _event(
+        historical = _event(
             reader,
             refs[annual],
-            event_id="event-read-policy-mismatch",
+            event_id="event-historical-read-policy",
         )
-        refused_payload = json.loads(refused.payload_json)
-        refused_payload["expected_read_policy_sha256"] = _sha("wrong-read-policy")
-        refused_parsed = SourceRevisionEventPayload.from_dict(refused_payload)
-        refused = Event(
+        historical_payload = json.loads(historical.payload_json)
+        historical_payload["expected_read_policy_sha256"] = _sha("earlier-read-policy")
+        historical_parsed = SourceRevisionEventPayload.from_dict(historical_payload)
+        historical = Event(
             **{
-                **refused.to_dict(),
-                "input_hash": refused_parsed.input_hash,
-                "payload_json": canonical_json(refused_payload),
+                **historical.to_dict(),
+                "input_hash": historical_parsed.input_hash,
+                "payload_json": canonical_json(historical_payload),
             }
         )
         transcript_event = _event(
@@ -1056,12 +1063,15 @@ def test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_r
             refs[transcript],
             event_id="event-transcript-no-review",
         )
-        for event in (refused, transcript_event):
+        changed_event = _event(reader, refs[changed], event_id="event-changed-original")
+        changed_path = next((run_root / "companies").rglob("changed.pdf"))
+        changed_path.write_bytes(b"!" + changed[1:])  # Keep size, invalidate the registered digest.
+        for event in (historical, transcript_event, changed_event):
             store.put_event(event)
             scheduler.materialize_event(event)
 
         processed = _drain(worker, scheduler)
-        assert processed == 4, [
+        assert processed == 7, [
             (job.job_type, job.status.value, job.last_error_code, job.last_error_detail)
             for job in store.list_jobs()
         ]
@@ -1069,7 +1079,7 @@ def test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_r
         refused_select = next(
             job
             for job in jobs
-            if job.created_from_event_id == refused.event_id
+            if job.created_from_event_id == changed_event.event_id
             and job.job_type == "source.narrative_select"
         )
         transcript_verify = next(
@@ -1078,11 +1088,18 @@ def test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_r
             if job.created_from_event_id == transcript_event.event_id
             and job.job_type == "source.narrative_verify"
         )
+        historical_verify = next(
+            job for job in jobs
+            if job.created_from_event_id == historical.event_id
+            and job.job_type == "source.narrative_verify"
+        )
         assert refused_select.status is JobStatus.DEAD_LETTER
-        assert refused_select.last_error_code == "POLICY_DENIED"
+        assert refused_select.last_error_code == "SOURCE_UNAVAILABLE"
+        assert refused_select.last_error_detail == "no_verified_location"
         assert transcript_verify.status is JobStatus.VERIFYING
+        assert historical_verify.status is JobStatus.VERIFYING
         assert store.list_outbox_entries(status="pending")
-        assert len(model.calls) == 1
+        assert len(model.calls) == 2
     finally:
         _cleanup(tmp_path, run_root, baseline, catalog)
 

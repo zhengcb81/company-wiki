@@ -19,7 +19,7 @@ import pytest
 
 from company_wiki.automation.models import canonical_json
 from company_wiki.automation.narrative_contracts import NarrativeBundle
-from company_wiki.automation import narrative_select
+from company_wiki.source_catalog import narrative_selection, narrative_selector_binding
 from company_wiki.automation.narrative_transport import NarrativeTransportReader
 from company_wiki.automation.narrative_transport_contracts import (
     NarrativeReadRequest, NarrativeTransportError,
@@ -110,10 +110,10 @@ def _disable_new_selection(monkeypatch):
     def forbidden(*_args, **_kwargs):
         raise AssertionError("reading a frozen final must not run current selection")
 
-    for module in (narrative_evidence, narrative_select):
-        monkeypatch.setattr(module, "NARRATIVE_SELECTOR_VERSION", "0.4.0")
+    monkeypatch.setattr(narrative_evidence, "NARRATIVE_SELECTOR_VERSION", "0.4.0")
+    for module in (narrative_evidence, narrative_selector_binding):
         monkeypatch.setattr(module, "select_narrative_evidence", forbidden)
-    monkeypatch.setattr(narrative_select.NarrativeSelectHandler, "_run_selector", forbidden)
+    monkeypatch.setattr(narrative_selection.RawNarrativeSelector, "select", forbidden)
 
 
 def _persistent_bytes(root):

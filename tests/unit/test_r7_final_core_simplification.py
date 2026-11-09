@@ -45,11 +45,11 @@ def test_explicit_final_budget_roundtrips_above_old_emergency_ceiling():
 
 
 def test_actual_object_writer_uses_the_requested_final_budget_without_hidden_ceiling(tmp_path):
-    from types import SimpleNamespace
-    from company_wiki.automation.narrative_batch import _BudgetedObjects
-    guard = SimpleNamespace(max_scratch_bytes=8 * 1024**2, owned_accounting=None, peak=0,
-                            check=lambda: None)
-    store = _BudgetedObjects(tmp_path / 'objects', guard, 5 * 1024**2)
+    from company_wiki.automation.narrative_storage_budget import BatchStorageBudget
+    from company_wiki.source_catalog.narrative_artifact_store import LocalNarrativeObjectStore
+    guard = BatchStorageBudget(files=(), persistent_dirs=(tmp_path,), scratch_dirs=(),
+                               max_persistent_bytes=10 * 1024**2, max_scratch_bytes=8 * 1024**2)
+    store = LocalNarrativeObjectStore(tmp_path / 'objects', write_policy=guard.object_write_policy(5 * 1024**2))
     assert store.put(b'x' * (3 * 1024**2))
     before = sorted(str(p.relative_to(tmp_path)) for p in tmp_path.rglob('*'))
     with pytest.raises(ValueError, match='FINAL_BYTES_EXCEEDED'):

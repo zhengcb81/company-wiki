@@ -2,18 +2,21 @@
 
 from __future__ import annotations
 
+from contextlib import closing
 from dataclasses import dataclass
 from datetime import UTC, datetime
 import hashlib
 import json
+import logging
 import os
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Generator
 
-from .lock import _acquisition_mutex
+from .lock import CatalogOperationLockedError, _acquisition_mutex
 from .store import canonical_json
 
 
+_LOG = logging.getLogger(__name__)
 ACQUISITION_JOURNAL_SCHEMA_VERSION = "1.0"
 ACQUISITION_OUTCOMES = frozenset(
     {
@@ -45,6 +48,18 @@ def _optional(value: str | None) -> str | None:
     return value
 
 
+def _attempt_id(values: dict[str, Any]) -> str:
+    digest = hashlib.sha256(canonical_json(values).encode("utf-8")).hexdigest()
+    return "urn:company-wiki:acquisition-attempt:sha256:" + digest
+
+
+def _attempt_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    value = dict(pairs)
+    if len(value) != len(pairs):
+        raise ValueError("duplicate acquisition journal field")
+    return value
+
+
 @dataclass(frozen=True)
 class AcquisitionAttempt:
     schema_version: str
@@ -65,6 +80,44 @@ class AcquisitionAttempt:
 
     def to_dict(self) -> dict[str, Any]:
         return dict(self.__dict__)
+
+
+class AcquisitionJournalReadError(ValueError):
+    """Stored journal content cannot be decoded as acquisition attempts."""
+
+
+def record_acquisition_observation(
+    write: Callable[[], AcquisitionAttempt], *, request_id: str,
+) -> AcquisitionAttempt | None:
+    """Report observation failures separately from a source operation's result."""
+    try:
+        return write()
+    except (OSError, CatalogOperationLockedError, AcquisitionJournalReadError, UnicodeError) as exc:
+        _LOG.warning("acquisition_journal_unavailable request_id=%r error_type=%s", request_id, type(exc).__name__)
+        return None
+
+
+def verified_download_attempt(raw: bytes | bytearray) -> AcquisitionAttempt | None:
+    """Accept legacy evidence only when this exact success attempt verifies."""
+    if not raw.strip():
+        return None
+    try:
+        fields = json.loads(raw, object_pairs_hook=_attempt_object)
+        if not isinstance(fields, dict) or fields.get("outcome") not in (
+            "downloaded_new", "deduplicated_after_download",
+        ):
+            return None
+        attempt = AcquisitionAttempt(**fields)
+        payload = {key: value for key, value in fields.items()
+                   if key not in {"schema_version", "attempt_id", "recorded_at"}}
+        if (attempt.schema_version == ACQUISITION_JOURNAL_SCHEMA_VERSION
+                and isinstance(attempt.content_sha256, str)
+                and all(value is None or isinstance(value, str) for value in payload.values())
+                and attempt.attempt_id == _attempt_id(payload)):
+            return attempt
+    except (TypeError, ValueError, RecursionError):
+        pass
+    return None
 
 
 class AcquisitionJournal:
@@ -110,12 +163,9 @@ class AcquisitionJournal:
             "error_type": _optional(error_type),
             "error": _optional(error),
         }
-        attempt_hash = hashlib.sha256(
-            canonical_json(values).encode("utf-8")
-        ).hexdigest()
         attempt = AcquisitionAttempt(
             schema_version=ACQUISITION_JOURNAL_SCHEMA_VERSION,
-            attempt_id="urn:company-wiki:acquisition-attempt:sha256:" + attempt_hash,
+            attempt_id=_attempt_id(values),
             recorded_at=_utc_now(),
             **values,
         )
@@ -124,9 +174,10 @@ class AcquisitionJournal:
         # worker's long batches hold it for hours, and journaling every
         # acquisition outcome (even read-only MISSING) would block on it.
         with _acquisition_mutex(self.path):
-            existing = {item.attempt_id: item for item in self.read_all()}
-            if attempt.attempt_id in existing:
-                return existing[attempt.attempt_id]
+            with closing(self._iter_attempts()) as history:
+                for existing in history:
+                    if existing.attempt_id == attempt.attempt_id:
+                        return existing
             self.catalog_dir.mkdir(parents=True, exist_ok=True)
             encoded = (canonical_json(attempt.to_dict()) + "\n").encode("utf-8")
             with self.path.open("ab") as stream:
@@ -136,23 +187,22 @@ class AcquisitionJournal:
         return attempt
 
     def read_all(self) -> tuple[AcquisitionAttempt, ...]:
+        return tuple(self._iter_attempts())
+
+    def _iter_attempts(self) -> Generator[AcquisitionAttempt, None, None]:
         if not self.path.is_file():
-            return ()
-        attempts: list[AcquisitionAttempt] = []
-        for line_number, raw in enumerate(
-            self.path.read_text(encoding="utf-8").splitlines(),
-            start=1,
-        ):
-            if not raw.strip():
-                continue
-            try:
-                value = json.loads(raw)
-                attempts.append(AcquisitionAttempt(**value))
-            except (TypeError, ValueError, json.JSONDecodeError) as exc:
-                raise ValueError(
-                    f"invalid acquisition journal line {line_number}: {exc}"
-                ) from exc
-        return tuple(attempts)
+            return
+        with self.path.open(encoding="utf-8") as stream:
+            for line_number, raw in enumerate(stream, start=1):
+                if not raw.strip():
+                    continue
+                try:
+                    value = json.loads(raw)
+                    yield AcquisitionAttempt(**value)
+                except (TypeError, ValueError, RecursionError) as exc:
+                    raise AcquisitionJournalReadError(
+                        f"invalid acquisition journal line {line_number}: {exc}"
+                    ) from exc
 
 
 __all__ = [

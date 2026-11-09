@@ -19,7 +19,7 @@ from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import SourceRefValue
 from .narrative_http_model import NarrativeHTTPModel
 from .narrative_model import MODEL_REQUEST_SCHEMA, NARRATIVE_PROMPT_VERSION
-from .narrative_formats import NORMALIZED_MIME_TYPES
+from company_wiki.source_catalog.narrative_formats import NORMALIZED_MIME_TYPES
 from company_wiki.document_normalization import (
     PARSER_VERSION as NORMALIZATION_PARSER_VERSION,
 )
@@ -350,7 +350,7 @@ class NarrativeBatchRequest:
             versions["document_normalization"] = NORMALIZATION_PARSER_VERSION
         if any(item.kind == "official_json" for item in self.work_items):
             from .narrative_model import PROJECTION_MODEL_REQUEST_SCHEMA, PROJECTION_NARRATIVE_PROMPT_VERSION
-            from .narrative_official_json import NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
+            from company_wiki.source_catalog.narrative_official_json import NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
             versions.update(projection_prompt=PROJECTION_NARRATIVE_PROMPT_VERSION,
                 projection_model_request_schema=PROJECTION_MODEL_REQUEST_SCHEMA,
                 official_json_adapter=NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION)

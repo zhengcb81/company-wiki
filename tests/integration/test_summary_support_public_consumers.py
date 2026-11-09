@@ -46,7 +46,7 @@ value=validate_narrative_response(request,body,receipt).to_dict()
 assert value['reading_context']['schema_version']=='du-production-reading/4'
 views=[v for g in value['reading_context']['groups'] for v in g['citation_views']]
 assert views and all(v['reading_support_use'] in ('support','context_only','unresolved') for v in views)
-argv=[sys.executable,'-B','-X','utf8','-m','company_wiki.source_catalog.narrative_transport_cli',
+argv=[sys.executable,'-B','-X','utf8','-m','company_wiki.automation.narrative_transport_cli',
       '--config',str(root/'config'/'source_catalog.json')]
 reader=NarrativeSourceTransport(argv_prefix=argv,timeout_s=30,max_stdout_bytes=1310720)
 stock=reader.read(request)
@@ -139,7 +139,7 @@ def test_current_source_use_survives_actual_public_reader_bytes_and_recovery(
                 "-X",
                 "utf8",
                 "-m",
-                "company_wiki.source_catalog.narrative_transport_cli",
+                "company_wiki.automation.narrative_transport_cli",
                 "--config",
                 str(public_config),
             ]
