@@ -324,6 +324,41 @@ def test_sec_original_rejects_conflicting_issuer_even_when_index_claims_match(tm
         catalog.close()
 
 
+def test_sec_primary_bytes_can_complete_incomplete_listing_sidecar_identity(tmp_path):
+    catalog = source_fact_fixture.lake(tmp_path)
+    try:
+        body = source_fact_fixture.html(cik="12345")
+        ref, original = source_fact_fixture.imported(
+            catalog, body, published="2026-07-30", declared_year=2026
+        )
+        facts = {"form_type": "10-K", "fiscal_period": "FY"}
+        catalog.record_source_facts(
+            ref=ref, facts=facts, evidence=source_fact_fixture.evidence(ref, facts)
+        )
+
+        row = catalog.reader.fetchone(
+            "SELECT metadata_json FROM documents WHERE document_id=?", (ref.document_id,)
+        )
+        metadata = json.loads(row["metadata_json"])
+        metadata["acquisition"].pop("market", None)
+        metadata["acquisition"].pop("security_id", None)
+        metadata["acquisition"]["candidate"].pop("market", None)
+        with catalog.store.transaction() as connection:
+            connection.execute(
+                "UPDATE documents SET metadata_json=? WHERE document_id=?",
+                (json.dumps(metadata), ref.document_id),
+            )
+
+        prepared = prepare_local_source(catalog, sec_request())
+
+        assert prepared["status"] == "ready", prepared
+        assert prepared["source_ref"]["content_sha256"] == ref.content_sha256
+        assert original.read_bytes() == body
+        assert prepared["download_events"] == 0
+    finally:
+        catalog.close()
+
+
 @pytest.mark.parametrize("changed", [False, True])
 def test_latest_provider_boundary_reverifies_only_after_discovery(tmp_path_factory, monkeypatch, changed):
     tmp_path = tmp_path_factory.mktemp("latest")

@@ -214,12 +214,12 @@ class TestSecurityIdFiltering:
 
 
 # ---------------------------------------------------------------------------
-# Auxiliary identity missing on a company-owned source does not veto reuse.
+# An explicit source market cannot be inferred from the company folder/name.
 # ---------------------------------------------------------------------------
 
 
 class TestIdentityMissingDiagnostics:
-    """The company anchor remains usable without redundant security fields."""
+    """Requested source identity must be present on the candidate."""
 
     def test_request_with_market_but_candidate_no_identity(self, tmp_path):
         from company_wiki.source_catalog import (
@@ -236,8 +236,150 @@ class TestIdentityMissingDiagnostics:
             as_of_date="2026-07-18",
         )
         result = SourceResolver(catalog).resolve(request)
-        assert result.status is ResolutionStatus.REUSED_EQUIVALENT
-        assert len(result.matches) == 1 and not result.download_required
+        assert result.status is ResolutionStatus.MISSING
+        assert result.matches == () and result.download_required
+        from company_wiki.source_catalog import SourceVersionReader
+        assert SourceVersionReader(catalog).query_local(request).status == "not_found"
+
+    def test_shared_market_alias_cannot_reuse_the_only_document_with_that_name(self, tmp_path):
+        from company_wiki.source_catalog import (
+            ResolutionStatus,
+            SecurityMasterStore,
+            SourceRequest,
+            SourceResolver,
+            SourceVersionReader,
+        )
+        from company_wiki.source_catalog.local_reconcile import _prepare_local_source_operation
+        from helpers.source_factory import canonical_source, company_raw_catalog
+
+        canonical_source(
+            tmp_path,
+            company="Issuer One",
+            market="HK",
+            security_id="00001",
+            kind_dir="annual",
+            filename="report.txt",
+            extra_sidecar={
+                "company_name": "SHARED",
+                "fiscal_year": 2025,
+                "fiscal_period": "FY",
+                "published_date": "2026-03-01",
+            },
+        )
+        catalog = company_raw_catalog(tmp_path)
+        master = SecurityMasterStore(catalog.config.catalog_dir / "security_master")
+
+        def record(name: str, code: str):
+            from company_wiki.source_catalog import SecurityRecord
+
+            return SecurityRecord(
+                canonical_name=name,
+                market="HK",
+                exchange="HKEX",
+                ticker=code,
+                security_id=code,
+                aliases=("SHARED",),
+                active=True,
+                source_name="hkex",
+                source_url="https://official.example/hk",
+                source_record_id=code,
+                identifiers={},
+            )
+
+        master.write_market(
+            "HK",
+            (record("Issuer One Holdings", "00001"), record("Issuer Two Holdings", "00002")),
+            retrieved_at="2026-11-09T00:00:00Z",
+            sources=("https://official.example/hk",),
+        )
+        request = SourceRequest(
+            entity="SHARED",
+            market="HK",
+            document_kind="annual_report",
+            fiscal_year=2025,
+            fiscal_period="FY",
+            as_of_date="2026-11-09",
+        )
+
+        resolved = SourceResolver(catalog).resolve(request)
+        queried = SourceVersionReader(catalog).query_local(request)
+        prepared = _prepare_local_source_operation(catalog, request)
+
+        assert resolved.status is ResolutionStatus.MISSING
+        assert resolved.matches == ()
+        assert queried.status == "not_found" and queried.matches == ()
+        assert prepared["status"] == "not_found"
+        assert prepared["blocks_download"] is False
+
+    def test_exact_security_id_disambiguates_a_shared_market_alias(self, tmp_path):
+        from company_wiki.source_catalog import (
+            ResolutionStatus,
+            SecurityMasterStore,
+            SourceRequest,
+            SourceResolver,
+            SourceVersionReader,
+        )
+        from company_wiki.source_catalog.local_reconcile import _prepare_local_source_operation
+        from helpers.source_factory import canonical_source, company_raw_catalog
+
+        canonical_source(
+            tmp_path,
+            company="Issuer One",
+            market="HK",
+            security_id="00001",
+            kind_dir="annual",
+            filename="report.txt",
+            extra_sidecar={
+                "company_name": "SHARED",
+                "fiscal_year": 2025,
+                "fiscal_period": "FY",
+                "published_date": "2026-03-01",
+            },
+        )
+        catalog = company_raw_catalog(tmp_path)
+        master = SecurityMasterStore(catalog.config.catalog_dir / "security_master")
+
+        def record(name: str, code: str):
+            from company_wiki.source_catalog import SecurityRecord
+
+            return SecurityRecord(
+                canonical_name=name,
+                market="HK",
+                exchange="HKEX",
+                ticker=code,
+                security_id=code,
+                aliases=("SHARED",),
+                active=True,
+                source_name="hkex",
+                source_url="https://official.example/hk",
+                source_record_id=code,
+                identifiers={},
+            )
+
+        master.write_market(
+            "HK",
+            (record("Issuer One Holdings", "00001"), record("Issuer Two Holdings", "00002")),
+            retrieved_at="2026-11-09T00:00:00Z",
+            sources=("https://official.example/hk",),
+        )
+        request = SourceRequest(
+            entity="SHARED",
+            market="HK",
+            security_id="00001",
+            document_kind="annual_report",
+            fiscal_year=2025,
+            fiscal_period="FY",
+            as_of_date="2026-11-09",
+        )
+
+        resolved = SourceResolver(catalog).resolve(request)
+        queried = SourceVersionReader(catalog).query_local(request)
+        prepared = _prepare_local_source_operation(catalog, request)
+
+        assert resolved.status is ResolutionStatus.REUSED_EQUIVALENT
+        assert len(resolved.matches) == 1
+        assert queried.status == "found" and len(queried.matches) == 1
+        assert prepared["status"] == "ready" and not prepared["blocks_download"]
 
 
 # ---------------------------------------------------------------------------

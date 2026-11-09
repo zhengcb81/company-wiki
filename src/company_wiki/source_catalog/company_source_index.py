@@ -263,7 +263,11 @@ class CompanySourceIndex:
         """
         if not isinstance(request, CompanySourceIndexRequest):
             raise TypeError("request must be CompanySourceIndexRequest")
-        tokens = self._resolver.issuer_identity_tokens(request.company.entity)
+        tokens = self._resolver.issuer_identity_tokens(
+            request.company.entity,
+            market=request.company.market,
+            security_id=request.company.security_id,
+        )
         entries, security_ids = self._matched_versions(request, tokens)
         status, reason = "ok", ""
         if not entries:

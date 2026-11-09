@@ -27,3 +27,10 @@ E12 已证实 CLI 等价链的复用与具名拒绝。用独立临时 CWP 根、
 1. FF 发布记录确认实际 Python、FF 代码 SHA、`config/company_wiki.json` connector 版本、CWP 实例标识及作业目录。配置属于各自 owner。Dashboard 的 `DASHBOARD_FF_JOBS_{PYTHON,ROOT,CONFIG,DIR}` 与短请求配置分开。已有默认部署登记可复用。
 2. 给 Dashboard D00 一个窄适配器修复。其 `backend/dashboard/adapters/m8_owner_jobs/ff_job.py` 在 run 传配置，在 act(reconcile) 漏传。FF 公共 reconcile 已接收 `--config`。在 Dashboard 仓用两个隔离 connector/store 先写失败用例，断言运行和只读核对同一配置及来源实例，再修转发。FF 保持自己的公开接口。
 3. 在最终组合用实际 Dashboard 适配器调用 FF public CLI，验证默认/非默认根、显式不可用、复用、恢复和零重复开销。CLI 单独运行的记录按实际范围引用。
+
+## FF P2 · 跨市场请求合同验收（2026-11-09）
+
+- FF 现在把用户选定的挂牌市场、issuer-link、期次、文种及 `as-of` 分别传给 CWP；CWP 返回的原件来源市场仍以已验 `SourceRef` 为准，不能被请求挂牌市场覆盖。绑定不完整或有冲突时使用具名拒绝，正确跨市场发行人可复用。
+- 36 项定向测试、Ruff、`git diff --check` 和独立审查通过。真实 HKEX 阿里 FY2025、B 站 FY2022 年报在隔离 CWP 快照中从 US 挂牌查询命中同一来源 SHA，且没有启动 provider 或下载。错误市场、security、period、form 和 as-of 负例均拒绝；细节见总计划 `validation/p2_cross_market_e2e_receipt.json`。
+- FF 候选遵守 owner 写域，没有改 CWP 身份/来源数据。CWP 生产快照缺 LEI/ISIN 的上游事实问题仍开放，需等通用标识 feed 接通后在实际部署复验；FF 不得用 ticker/name 猜发行人或伪造 source market。
+- 当前候选尚未提交；提交后在此记录确切 release SHA、远端分支及 CI 状态。

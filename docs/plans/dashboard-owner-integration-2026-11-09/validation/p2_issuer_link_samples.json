@@ -1,0 +1,87 @@
+{
+  "schema_version": "p2-official-issuer-link-samples/2",
+  "description": "Frozen public evidence for offline tests only. The security-master snapshots and source originals copied by the test remain disposable; this fixture never changes a production cache.",
+  "samples": [
+    {
+      "key": "alibaba",
+      "legal_name": "Alibaba Group Holding Limited",
+      "lei": "5493001NTNQJDH60PM02",
+      "gleif_record": {
+        "file": "alibaba-gleif-record.json",
+        "url": "https://api.gleif.org/api/v1/lei-records/5493001NTNQJDH60PM02",
+        "sha256": "786b54a760a89211714ce2a43f6ba8cce2492929eba2b7ca126be0d700386aee"
+      },
+      "gleif_isins": {
+        "file": "alibaba-gleif-isins.json",
+        "url": "https://api.gleif.org/api/v1/lei-records/5493001NTNQJDH60PM02/isins?page%5Bsize%5D=100",
+        "sha256": "d254ecb4bc53b5165b4434f280e5c0f155c8bcda75ccd5ef701c9b48c0deb610"
+      },
+      "gleif_publish_date": "2026-11-09T08:00:00Z",
+      "cross_listing_evidence_url": "https://depositaryreceipts.citi.com/adr/guides/pgm_d.aspx?cusip=01609W102&pageId=15&subpageid=105",
+      "cross_listing": {
+        "evidence_publisher": "Citi Depositary Receipt Services",
+        "us": {"market": "US", "security_id": "BABA", "instrument": "ADR", "isin": "US01609W1027"},
+        "hk": {"market": "HK", "security_id": "09988", "instrument": "ordinary_share", "isin": "KYG017191142"},
+        "depositary_ratio": "8 ADR : 1 ordinary share"
+      },
+      "listings": [
+        {
+          "market": "US",
+          "security_id": "BABA",
+          "source_name": "sec_nasdaq",
+          "source_url": "https://www.sec.gov/files/company_tickers.json",
+          "source_record_id": "0001577552",
+          "instrument_isin": "US01609W1027"
+        },
+        {
+          "market": "HK",
+          "security_id": "09988",
+          "source_name": "hkex",
+          "source_url": "https://www1.hkexnews.hk/ncms/script/eds/activestock_sehk_c.json",
+          "source_record_id": "7353",
+          "instrument_isin": "KYG017191142"
+        }
+      ]
+    },
+    {
+      "key": "bilibili",
+      "legal_name": "Bilibili Inc.",
+      "lei": "5493008V60M52L3PIS45",
+      "gleif_record": {
+        "file": "bilibili-gleif-record.json",
+        "url": "https://api.gleif.org/api/v1/lei-records/5493008V60M52L3PIS45",
+        "sha256": "c69419c169947293f8059221f9959a662448af6a89e9f4e42e2b0e0033539b73"
+      },
+      "gleif_isins": {
+        "file": "bilibili-gleif-isins.json",
+        "url": "https://api.gleif.org/api/v1/lei-records/5493008V60M52L3PIS45/isins?page%5Bsize%5D=100",
+        "sha256": "0ad0c804f93ae6eb0a5705b4a82d09abebf626f92e77b54baafcf1e9aecd6aeb"
+      },
+      "gleif_publish_date": "2026-11-09T08:00:00Z",
+      "cross_listing_evidence_url": "https://adr.db.com/drwebrebrand/dr-universe/dr_details.html?identifier=11346",
+      "cross_listing": {
+        "evidence_publisher": "Deutsche Bank Depositary Receipts",
+        "us": {"market": "US", "security_id": "BILI", "instrument": "ADR", "isin": "US0900401060"},
+        "hk": {"market": "HK", "security_id": "09626", "instrument": "ordinary_share", "isin": "KYG1098A1013"}
+      },
+      "listings": [
+        {
+          "market": "US",
+          "security_id": "BILI",
+          "source_name": "sec_nasdaq",
+          "source_url": "https://www.sec.gov/files/company_tickers.json",
+          "source_record_id": "0001723690",
+          "instrument_isin": "US0900401060"
+        },
+        {
+          "market": "HK",
+          "security_id": "09626",
+          "source_name": "hkex",
+          "source_url": "https://www1.hkexnews.hk/ncms/script/eds/activestock_sehk_c.json",
+          "source_record_id": "15753",
+          "instrument_isin": "KYG1098A1013"
+        }
+      ]
+    }
+  ]
+}

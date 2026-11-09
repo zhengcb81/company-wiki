@@ -234,7 +234,9 @@ class SourceVersionReader:
             return SourceQueryResult(status, matches, reason,
                                      excluded_candidates=tuple(excluded))
 
-        candidate_tokens = resolver.issuer_identity_tokens(request.entity)
+        candidate_tokens = resolver.issuer_identity_tokens(
+            request.entity, market=request.market, security_id=request.security_id,
+        )
         for document in self._candidate_pages(
             request, include_unknown_publication=True, identity_tokens=candidate_tokens,
         ):

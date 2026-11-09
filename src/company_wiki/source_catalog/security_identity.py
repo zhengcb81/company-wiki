@@ -9,6 +9,7 @@ from difflib import SequenceMatcher
 from enum import Enum
 from functools import lru_cache
 import io
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -21,6 +22,7 @@ import requests
 
 
 SECURITY_IDENTITY_SCHEMA_VERSION = "1.0"
+IDENTITY_RESULT_SCHEMA_VERSION = "1.1"
 SECURITY_MARKETS = ("CN", "HK", "US")
 
 CNINFO_STOCK_URL = "https://www.cninfo.com.cn/new/data/szse_stock.json"
@@ -91,6 +93,22 @@ def _market(value: Any) -> str:
 def _normalize_text(value: str) -> str:
     normalized = unicodedata.normalize("NFKC", value).casefold()
     return "".join(character for character in normalized if character.isalnum())
+
+
+def _validated_lei(record: SecurityRecord) -> str | None:
+    """Return a syntactically and checksum-valid LEI from an official record."""
+    candidates = {
+        str(value).strip().upper()
+        for key, value in record.identifiers.items()
+        if _normalize_text(key) in {"lei", "issuerlei", "legalentityidentifier", "gleiflei"}
+    }
+    if len(candidates) != 1:
+        return None
+    lei = next(iter(candidates))
+    if re.fullmatch(r"[A-Z0-9]{18}\d{2}", lei) is None:
+        return None
+    expanded = "".join(str(ord(char) - 55) if char.isalpha() else char for char in lei)
+    return lei if int(expanded) % 97 == 1 else None
 
 
 @lru_cache(maxsize=1)
@@ -293,6 +311,43 @@ class SecurityMaster:
     snapshots: dict[str, dict[str, Any]]
 
 
+def _cross_market_issuer_link_ids(
+    master: SecurityMaster,
+) -> dict[tuple[str, str], str]:
+    """Link listings only when their official records carry the same valid LEI.
+
+    Names and trading aliases are search aids, not proof that different
+    securities belong to the same legal issuer. The LEI is read from the
+    provider-owned identifier record and checksum-validated before it can bind
+    markets.
+    """
+    lei_nodes: dict[str, set[tuple[str, str]]] = {}
+    node_leis: dict[tuple[str, str], set[str]] = {}
+    for record in master.records:
+        lei = _validated_lei(record)
+        security_id = _ticker_key(record.security_id, record.market)
+        if not security_id or lei is None:
+            continue
+        node = (record.market, security_id)
+        lei_nodes.setdefault(lei, set()).add(node)
+        node_leis.setdefault(node, set()).add(lei)
+
+    link_candidates: dict[tuple[str, str], set[str]] = {}
+    for lei, nodes in lei_nodes.items():
+        if len({market for market, _name in nodes}) < 2:
+            continue
+        link_id = "issuer-link-v1:" + hashlib.sha256(f"lei:{lei}".encode("ascii")).hexdigest()
+        for node in nodes:
+            link_candidates.setdefault(node, set()).add(link_id)
+    # A source snapshot that declares multiple different LEIs for the same
+    # normalized issuer name is internally ambiguous; do not publish a link.
+    return {
+        node: next(iter(candidates))
+        for node, candidates in link_candidates.items()
+        if len(candidates) == 1 and len(node_leis.get(node, ())) == 1
+    }
+
+
 def _record_sort_key(record: SecurityRecord) -> tuple[Any, ...]:
     return (
         _MARKET_ORDER[record.market],
@@ -304,18 +359,21 @@ def _record_sort_key(record: SecurityRecord) -> tuple[Any, ...]:
 
 @lru_cache(maxsize=8)
 def _issuer_aliases(
-    path: Path, _generation: tuple[int, int, int, int, int],
-) -> tuple[dict[str, str], dict[str, frozenset[str]]]:
+    path: Path, _generation: tuple[int, int, int, int, int], market: str,
+) -> tuple[
+    dict[str, str], dict[str, frozenset[str]], dict[str, frozenset[str]], dict[str, str],
+]:
     """Read the alias projection, including from older partial snapshots."""
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (ValueError, RecursionError):
-        return {}, {}
+        return {}, {}, {}, {}
     records = payload.get("records") if isinstance(payload, dict) else None
     if not isinstance(records, list):
-        return {}, {}
-    issuers: dict[str, str] = {}
+        return {}, {}, {}, {}
     tokens_by_issuer: dict[str, set[str]] = {}
+    issuers_by_token: dict[str, set[str]] = {}
+    issuers_by_security_id: dict[str, set[str]] = {}
     for record in records:
         if not isinstance(record, dict):
             continue
@@ -329,9 +387,29 @@ def _issuer_aliases(
         tokens = {issuer, *(_normalize_text(str(value)) for value in values if value)} - {""}
         tokens_by_issuer.setdefault(issuer, set()).update(tokens)
         for token in tokens:
-            if issuers.setdefault(token, issuer) != issuer:
-                issuers[token] = ""  # A shared token cannot anchor an issuer.
-    return issuers, {issuer: frozenset(tokens) for issuer, tokens in tokens_by_issuer.items()}
+            issuers_by_token.setdefault(token, set()).add(issuer)
+        for value in (record.get("security_id"), record.get("ticker")):
+            if isinstance(value, str) and value.strip():
+                key = _ticker_key(value, market)
+                issuers_by_security_id.setdefault(key, set()).add(issuer)
+    token_owners = {
+        token: frozenset(issuers)
+        for token, issuers in issuers_by_token.items()
+    }
+    token_issuers = {
+        token: next(iter(issuers)) if len(issuers) == 1 else ""
+        for token, issuers in issuers_by_token.items()
+    }
+    security_issuers = {
+        security_id: next(iter(issuers)) if len(issuers) == 1 else ""
+        for security_id, issuers in issuers_by_security_id.items()
+    }
+    return (
+        token_issuers,
+        {issuer: frozenset(tokens) for issuer, tokens in tokens_by_issuer.items()},
+        token_owners,
+        security_issuers,
+    )
 
 
 class SecurityMasterStore:
@@ -348,11 +426,52 @@ class SecurityMasterStore:
     def has_market(self, market: str) -> bool:
         return self.path_for(market).is_file()
 
-    def issuer_identity_tokens(self, entity: str) -> tuple[str, ...]:
-        """Project one issuer scope from the currently installed snapshots."""
+    def issuer_identity_tokens(
+        self, entity: str, *, market: str | None = None, security_id: str | None = None,
+    ) -> tuple[str, ...]:
+        """Project issuer aliases, optionally within the requested source market.
+
+        A source-market query must resolve aliases against that market's own
+        verified listing snapshot.  A ticker from another listing is only a
+        usable alias when the source-market snapshot itself records it.
+        """
         wanted = _normalize_text(entity)
         if not wanted:
             return ()
+        if market is not None:
+            path = self.path_for(market)
+            try:
+                stat = path.stat()
+                generation = stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
+                token_issuers, issuer_tokens, token_owners, security_issuers = _issuer_aliases(
+                    path, generation, _market(market),
+                )
+            except OSError:
+                # Existing catalogs may have no downloaded security master.
+                # The exact source-market/security metadata gate still runs
+                # downstream, so retain name discovery without implying a
+                # cross-market issuer relationship.
+                return (wanted,)
+            issuer = token_issuers.get(wanted, "")
+            matched_unambiguous_alias = bool(issuer)
+            if not issuer and security_id is not None:
+                issuer = security_issuers.get(_ticker_key(security_id, market), "")
+                if issuer and wanted in token_owners and issuer not in token_owners[wanted]:
+                    return ()
+            if not issuer:
+                # An ambiguous alias must not silently become a global text
+                # search. An exact same-market security id can disambiguate it.
+                return (wanted,) if wanted not in token_owners else ()
+            scoped = {
+                token for token in issuer_tokens.get(issuer, ())
+                if token_issuers.get(token) == issuer
+            }
+            # An exact security id can disambiguate a shared search alias,
+            # but the ambiguous alias itself must not be carried into the
+            # candidate query or it would match every issuer that owns it.
+            if matched_unambiguous_alias:
+                scoped.add(wanted)
+            return tuple(sorted(scoped))
         matches: set[str] = set()
         indexes = []
         for market in SECURITY_MARKETS:
@@ -360,7 +479,9 @@ class SecurityMasterStore:
             try:
                 stat = path.stat()
                 generation = stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
-                token_issuers, issuer_tokens = _issuer_aliases(path, generation)
+                token_issuers, issuer_tokens, _token_owners, _security_issuers = _issuer_aliases(
+                    path, generation, market,
+                )
             except OSError:
                 continue
             if wanted in token_issuers:
@@ -508,6 +629,7 @@ class IdentityCandidate:
     source_url: str
     source_record_id: str
     identifiers: dict[str, str]
+    issuer_link_id: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return dict(self.__dict__)
@@ -523,7 +645,7 @@ class IdentityResult:
     reason: str
     resolved: IdentityCandidate | None
     candidates: tuple[IdentityCandidate, ...]
-    schema_version: str = SECURITY_IDENTITY_SCHEMA_VERSION
+    schema_version: str = IDENTITY_RESULT_SCHEMA_VERSION
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -555,9 +677,10 @@ class SecurityIdentityResolver:
         if not isinstance(master, SecurityMaster):
             raise TypeError("master must be SecurityMaster")
         self.master = master
+        self._issuer_link_ids = _cross_market_issuer_link_ids(master)
 
-    @staticmethod
     def _candidate(
+        self,
         record: SecurityRecord,
         *,
         basis: str,
@@ -579,20 +702,22 @@ class SecurityIdentityResolver:
             source_url=record.source_url,
             source_record_id=record.source_record_id,
             identifiers=record.identifiers,
+            issuer_link_id=self._issuer_link_ids.get(
+                (record.market, _ticker_key(record.security_id, record.market))
+            ),
         )
 
-    @staticmethod
-    def _exact(record: SecurityRecord, query: str) -> IdentityCandidate | None:
+    def _exact(self, record: SecurityRecord, query: str) -> IdentityCandidate | None:
         if _ticker_key(query, record.market) in {
             _ticker_key(record.ticker, record.market),
             _ticker_key(record.security_id, record.market),
         }:
-            return SecurityIdentityResolver._candidate(
+            return self._candidate(
                 record, basis="ticker_exact", matched_value=record.ticker, score=1.0
             )
         normalized = _normalize_text(query)
         if normalized == _normalize_text(record.canonical_name):
-            return SecurityIdentityResolver._candidate(
+            return self._candidate(
                 record,
                 basis="official_name_exact",
                 matched_value=record.canonical_name,
@@ -600,13 +725,12 @@ class SecurityIdentityResolver:
             )
         for alias in record.aliases:
             if normalized == _normalize_text(alias):
-                return SecurityIdentityResolver._candidate(
+                return self._candidate(
                     record, basis="alias_exact", matched_value=alias, score=1.0
                 )
         return None
 
-    @staticmethod
-    def _fuzzy(record: SecurityRecord, normalized_query: str) -> IdentityCandidate:
+    def _fuzzy(self, record: SecurityRecord, normalized_query: str) -> IdentityCandidate:
         values = (record.canonical_name, *record.aliases)
         scored = [
             (
@@ -617,7 +741,7 @@ class SecurityIdentityResolver:
             if _normalize_text(value)
         ]
         score, value = max(scored, key=lambda item: (item[0], item[1]))
-        return SecurityIdentityResolver._candidate(
+        return self._candidate(
             record, basis="strong_fuzzy", matched_value=value, score=score
         )
 
@@ -1152,6 +1276,7 @@ __all__ = [
     "IdentityCandidate",
     "IdentityResult",
     "IdentityStatus",
+    "IDENTITY_RESULT_SCHEMA_VERSION",
     "NASDAQ_LISTED_URL",
     "NASDAQ_OTHER_LISTED_URL",
     "OfficialSecurityMasterRefresher",

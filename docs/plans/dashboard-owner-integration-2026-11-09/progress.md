@@ -51,3 +51,14 @@
 - RF 在临时托管目录登记自己的合成合格报告夹具。实际 BFF 的报告列表、精确 ReportView 结果 SHA 和公开 Job status 均核对通过。单独的 RF 真实 CLI 测试覆盖受控来源到计算与发布。本次组合的身份及数据是控制样本，真实 MDB 入册、阿里来源和付费 RF 均留在 P2 或后续计划。
 - 首轮在沙箱中未返回，已停止自有测试进程并查无遗留命名临时目录。随后用白名单环境、阶段输出及堆栈诊断在宿主运行，通过并确认测试目录已移除。组合证据限于本批接口，流式原文、canonical 证明、Range 仍按后续批次处理。
 - Dashboard 两个适配器提交留在自己的消费候选，供 D00 独立接收。远端 Dashboard `main` 的依赖版本另行发布，保持 110 提交的原有历史范围与本批三仓 owner 并线分开。
+
+## 2026-11-09 P2：跨市场和 MDB 入册
+
+- CWP 与 FF 的 P2 隔离修改完成独立复核；阿里/B 站真实 HKEX 原件正向复用与期次/市场负例均通过。RF 初版 importer 45 项定向回归通过，独审确认 per-job 并发竞态修复、失败清理、SourceExport contract 和 public DTO 子进程测试通过。
+- MDB 原始 job `rfjob-20261108-eb9f2a3ed336` 的 job/input/result strict hash 已重算匹配，关键 JSON 孤立 surrogate 数为 0；源阶段明确 reused_existing、0 download，compute/publication 成功。公开 `list-reports` 入册前返回 0 项，catalog revision `a2ae0e7179f9d76b47bc81788e1501ede2da25efb6a59946748556b87c295a3d`。
+- 首次真实 RF CLI 安全拒绝且未改目录，暴露 importer 对 `source-preparation-result/1` 添加了不存在的顶层 `status=source_candidate` 先决条件。真实状态在 `filing_fetch.status`。首轮修复后回归发现 retained attempt validator 仍重复错误判断，4 项用例失败；已同时修正两个校验点，并移除 fixture 中不真实的顶层状态。
+- 修复后的 RF importer 定向回归 **45 passed**，Ruff、`git diff --check` 通过；独立审查确认实际 DTO 修正、per-job 并发锁和失败清理没有 stop-ship。随后通过 RF 公共 `import-rf-job` 首次登记 MDB 成功报告，并用公开目录命令重放为 `already_registered`，两次均 `forecast_executions=0`。
+- RF 公开只读回读确认 MDB listing 总数 1，报告 `validated`、作业 `complete`、attempt `succeeded`，entity/listing、源/input/result SHA 一致。回读收据为 `validation/mdb-rf-job-readback.json`。报告仍明确显示 1 条 partial 且无 locator 的 citation 和 10 条 quality gaps，因此只签收入册/可回读/哈希一致，不签“证据毫无缺口”。
+- CWP/FF P2 owner 改动分别完成独立审查、定向测试及阿里/B 站真实 HKEX 原件 E2E。E2E 正例复用原件且零下载，错误市场、期次、表单、来源证券及 as-of 均拒绝；详细原件 SHA、issuer-link 证据、命令结果见 `validation/p2_cross_market_e2e_receipt.json` 和 `validation/evidence/`。生产 CWP snapshot 缺 LEI/ISIN，故通用算法完成但真实部署的跨市场自动联结覆盖仍开放。
+- 清理本轮 RF pytest 临时目录及两份临时部署配置、调试日志和 `__pycache__`；保留必要的无路径回执和公开证据样本。代码仍在三个 owner 隔离 worktree 的候选分支，待提交/推送并记录确切 release SHA。
+- 最终跨 owner 定向复跑：CWP 70、FF 36、RF 45 项通过。测试启动时两次临时路径设置暴露环境问题：第一轮 `--basetemp` 的父目录未创建，`tmp_path` 初始化失败；显式载入 `pytest-asyncio` 后，稍长的 basetemp 被 Windows 路径防护搬到更长的沙箱目录，CWP 文件锁相关用例因此失败。改用 41 字符短路径后同一 CWP 套件 70/70 通过；不是产品代码回归。相关临时目录已清理，项目测试目录恢复。

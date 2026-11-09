@@ -38,3 +38,10 @@
 ## CWP-3 · Range 后置
 
 保留 E13 的现行语义，当前完整原文流不声明 Range。验证完整 GET 和 Range 的明确不可用行为，Dashboard 展示按实际能力。未来需要 Range 时独立设计并验收 206、416、If-Range、范围摘要和取消。未发布能力不影响前三批。
+
+## CWP P2 · 跨市场匹配验收（2026-11-09）
+
+- 通用 issuer-link 判定及来源市场/挂牌市场/期间隔离已实现并通过 70 项定向测试、Ruff 和独立审查。离线真实原件组合使用阿里 FY2025、B 站 FY2022 HKEX 年报，GLEIF LEI/ISIN 与存托凭证发行人公开证据；US BABA/BILI 挂牌可复用同 issuer 的 HK 原件，匹配结果保留 HK 来源市场和原 security ID。
+- 反例拒绝错误财年、文种、财政期间、来源证券、来源市场以及 `as-of` 晚于已知发布日期的来源。Query/local_prepare/ensure 使用同一候选语义，E2E 对原件 SHA 复核且零下载。
+- **生产数据闭环仍未完成**：部署 CWP 身份快照当前没有 LEI/ISIN，现有 refreshers 只提供 CN org ID、HKEX 证券 ID、US CIK。故测试证明通用匹配逻辑，不证明线上能自动建立跨市场 issuer link。后续须接入带来源、发布时间与刷新规则的通用权威标识 feed，再在实际部署对 BABA/BILI 做只读复验；禁止把 fixture 中两个公司的 ID 写入生产或加入公司特判。
+- 当前候选尚未提交；提交后在此记录确切 release SHA、远端分支及 CI 状态。

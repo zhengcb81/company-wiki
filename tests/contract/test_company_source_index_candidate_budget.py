@@ -52,9 +52,9 @@ def test_known_company_with_no_matching_kind_is_found_past_first_dirty_page(tmp_
         authority = index._resolver.issuer_identity_tokens
         calls = []
 
-        def observe_identity(entity):
+        def observe_identity(entity, *, market=None, security_id=None):
             calls.append(entity)
-            return authority(entity)
+            return authority(entity, market=market, security_id=security_id)
 
         monkeypatch.setattr(index._resolver, "issuer_identity_tokens", observe_identity)
         result = index.page(request)

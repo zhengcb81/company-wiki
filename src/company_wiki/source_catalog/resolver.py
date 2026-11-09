@@ -1281,7 +1281,9 @@ class SourceResolver:
         # metadata, period, publication and byte qualification remain here.
         from .identity_candidates import iter_identity_filing_candidates
 
-        identity_tokens = self.issuer_identity_tokens(request.entity)
+        identity_tokens = self.issuer_identity_tokens(
+            request.entity, market=request.market, security_id=request.security_id,
+        )
         candidates = iter_identity_filing_candidates(
             self.catalog, document_kind=request.document_kind,
             identity_tokens=identity_tokens,
@@ -1336,8 +1338,9 @@ class SourceResolver:
                     f"{document['title']}: identity_conflict_market_or_security_id"
                 )
                 continue
-            if not metadata.get("market") or not metadata.get("security_id"):
+            if market_match == "incomplete":
                 trace.append(f"{document['title']}: identity_fields_incomplete")
+                continue
             year = _fiscal_year(document, metadata)
             if request.fiscal_year is not None and year != request.fiscal_year:
                 trace.append(f"{document['title']}: fiscal_year_mismatch")
@@ -1581,9 +1584,9 @@ class SourceResolver:
         """Check market/security_id identity.
 
         Returns:
-            "match" — identity matches or request has no identity filter
-            "conflict" — explicit identity conflict (market or security_id mismatch)
-            Missing auxiliary fields do not contradict an anchored issuer.
+            "match" — every requested source identity field is present and matches
+            "conflict" — a present field contradicts the request
+            "incomplete" — a requested source identity field is absent
         """
         req_market = request.market
         req_security_id = request.security_id
@@ -1594,9 +1597,8 @@ class SourceResolver:
             return "match"
         cand_market = str(metadata.get("market") or "").strip().upper() or None
         cand_security_id = str(metadata.get("security_id") or "").strip() or None
-        if req_market and cand_market and req_market != cand_market:
+        if req_market and cand_market and cand_market != req_market:
             return "conflict"
-
         if (
             req_security_id
             and cand_security_id
@@ -1606,17 +1608,25 @@ class SourceResolver:
             # Discovery names/aliases belong to the security master. Only the
             # shared, market-qualified source-code representation applies here.
             return "conflict"
+        if req_market and cand_market is None:
+            return "incomplete"
+        if req_security_id and cand_security_id is None:
+            return "incomplete"
         return "match"
 
-    def issuer_identity_tokens(self, entity: str) -> tuple[str, ...]:
-        """Observe one alias scope for both candidate discovery and qualification."""
+    def issuer_identity_tokens(
+        self, entity: str, *, market: str | None = None, security_id: str | None = None,
+    ) -> tuple[str, ...]:
+        """Observe aliases in the requested source market when it is explicit."""
         from .security_identity import SecurityMasterStore, _normalize_text
 
         catalog_dir = getattr(self.catalog.config, "catalog_dir", None)
         if catalog_dir is None:
             wanted = _normalize_text(entity)
             return (wanted,) if wanted else ()
-        return SecurityMasterStore(Path(catalog_dir) / "security_master").issuer_identity_tokens(entity)
+        return SecurityMasterStore(Path(catalog_dir) / "security_master").issuer_identity_tokens(
+            entity, market=market, security_id=security_id,
+        )
 
     def _entity_matches(
         self, entity: str, document: dict[str, Any], *, metadata: dict[str, Any] | None = None,

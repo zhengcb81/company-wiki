@@ -131,6 +131,38 @@ def test_public_writer_old_annual_does_not_block_next_year(lake, market):
     assert hashlib.sha256(checked).hexdigest() == old_sha
 
 
+def test_incomplete_local_listing_metadata_does_not_block_valid_market_acquisition(lake):
+    from company_wiki.source_catalog.local_reconcile import _prepare_local_source_operation
+
+    report = (
+        lake.config.project_root / "companies" / "Acme" / "raw"
+        / "financial_reports" / "annual"
+        / "2025-03-01_Acme_2024_annual_report.txt"
+    )
+    report.parent.mkdir(parents=True)
+    report.write_text("legacy local report with no source-market assertion", encoding="utf-8")
+    report.with_name(report.name + ".source.json").write_text(
+        json.dumps({
+            "company_name": "Acme",
+            "source_title": "Acme FY2024 Annual Report",
+            "document_kind": "annual_report",
+            "fiscal_year": 2024,
+            "fiscal_period": "FY",
+        }),
+        encoding="utf-8",
+    )
+    lake.scan()
+    adapter = PeriodAdapter()
+    prepared = _prepare_local_source_operation(lake, request("HK", 2024))
+    assert prepared["blocks_download"] is False, prepared
+
+    result = ensure(service(lake, adapter), request("HK", 2024))
+
+    assert adapter.discoveries == adapter.fetches == 1, result.to_dict()
+    assert result.status.value == "imported", result.to_dict()
+    assert result.canonical_import is not None
+
+
 @pytest.mark.parametrize("kind,old_period,new_period,new_year", [
     ("quarterly_report", "Q2", "Q3", 2024),
     ("semi_annual_report", "H1", "H1", 2025),

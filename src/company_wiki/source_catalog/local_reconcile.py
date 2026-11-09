@@ -657,7 +657,9 @@ def _prepare_local_source(
             root_id=scope.root_id, relative_paths=set(scope.relative_paths), budget=budget
         )
     resolver = SourceResolver(catalog)
-    identity_tokens = resolver.issuer_identity_tokens(request.entity)
+    identity_tokens = resolver.issuer_identity_tokens(
+        request.entity, market=request.market, security_id=request.security_id,
+    )
     indexed_candidates = iter_identity_filing_candidates(
         catalog, document_kind=request.document_kind, source_statuses=("active", "retired"),
         identity_tokens=identity_tokens,
@@ -682,7 +684,14 @@ def _prepare_local_source(
         ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
         body_owner = (_sec_original(ref, request.market, request.document_kind)
                       or request.market == "CN" and ref.mime_type == "application/pdf")
-        if resolver._identity_matches(request, metadata) == "conflict" and not body_owner:
+        identity_match = resolver._identity_matches(request, metadata)
+        if identity_match == "incomplete" and not body_owner:
+            diagnostics.append({
+                "document_id": candidate["document_id"],
+                "reason": "registered_identity_incomplete",
+            })
+            continue
+        if identity_match == "conflict" and not body_owner:
             diagnostics.append({"document_id": candidate["document_id"], "reason": "registered_identity_conflict"})
             continue
         qualified = qualified_source_scope(catalog,ref,candidate,historical=historical)

@@ -1,0 +1,33 @@
+{
+  "schema_version": "mdb-rf-public-readback/1",
+  "checked_at": "2026-11-09T22:13:58.3754409Z",
+  "status": "passed_with_report_quality_gaps",
+  "entity_id": "ENT_41250504-734e-4460-9843-86c4e1f3851d",
+  "listing_id": "LST_2d86780f-c98e-49cc-a214-34885c8820fa",
+  "run_id": "rfjob-20261108-eb9f2a3ed336",
+  "attempt_id": "rfjob-20261108-eb9f2a3ed336.succeeded",
+  "report_id": "rfjob-39b99b7422ceb47a161a007ebaf7e00fae08bf0b6a378844de95b432aedef180",
+  "catalog_revision": "c14312b6013612f2e47774cdbd1aff58387a17dc7f073129e63bbdaa1f71be01",
+  "input_sha256": "6169ea8aca81638d83026153474d584ca19be38c166bb71ab0ae4e76924cde59",
+  "result_sha256": "04768c2742d663e3e7ac748c9fde8c7648cc1cd0e424e4d931e150379c038816",
+  "source_sha256": "b37880685db65034ed1dd023d943352399c4c88179df2b52a9572bff687b88b8",
+  "report_status": "validated",
+  "run_status": "complete",
+  "attempt_status": "succeeded",
+  "list_total": 1,
+  "import_and_replay_forecast_executions": 0,
+  "checks": {
+    "exactly_one_report_for_entity": true,
+    "report_metadata_matches": true,
+    "run_completed": true,
+    "successful_attempt_matches": true,
+    "source_sha_matches": true,
+    "import_and_replay_did_not_run_forecast": true
+  },
+  "report_evidence_diagnostics": {
+    "citation_count": 1,
+    "partial_citation_count": 1,
+    "missing_locator_count": 1,
+    "quality_gap_count": 10
+  }
+}

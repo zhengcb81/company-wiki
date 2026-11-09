@@ -14,6 +14,7 @@ def _record(
     exchange: str,
     ticker: str,
     aliases: tuple[str, ...] = (),
+    identifiers: dict[str, str] | None = None,
     source_record_id: str | None = None,
 ):
     from company_wiki.source_catalog import SecurityRecord
@@ -29,7 +30,7 @@ def _record(
         source_name={"CN": "cninfo", "HK": "hkex", "US": "sec_nasdaq"}[market],
         source_url=f"https://official.example/{market.lower()}",
         source_record_id=source_record_id or ticker,
-        identifiers={},
+        identifiers=identifiers or {},
     )
 
 
@@ -174,6 +175,204 @@ def test_standalone_identify_cli_emits_machine_readable_result(tmp_path, capsys)
     assert payload["resolved"]["market"] == "HK"
     assert payload["resolved"]["exchange"] == "HKEX"
     assert payload["resolved"]["ticker"] == "01810"
+
+
+def test_source_market_alias_projection_uses_only_that_market_snapshot(tmp_path):
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "source-market-master")
+    store.write_market(
+        "HK",
+        (_record(name="示例集团", market="HK", exchange="HKEX",
+                 ticker="09988", aliases=("EXAMPLE", "Example HK"),
+                 identifiers={"lei": "5493001NTNQJDH60PM02"}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Example Holdings", market="US", exchange="NYSE",
+                 ticker="EXM", aliases=("EXAMPLE", "Example US"),
+                 identifiers={"lei": "5493001NTNQJDH60PM02"}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    hk_tokens = store.issuer_identity_tokens("EXAMPLE", market="HK")
+
+    assert {"example", "09988", "examplehk"}.issubset(hk_tokens)
+    assert "exm" not in hk_tokens and "exampleus" not in hk_tokens
+    resolver = SecurityIdentityResolver(store.load(markets=("CN", "HK", "US")))
+    hk_identity = resolver.identify("EXAMPLE", market="HK").resolved
+    us_identity = resolver.identify("EXAMPLE", market="US").resolved
+    assert hk_identity is not None and us_identity is not None
+    assert hk_identity.issuer_link_id is not None
+    assert hk_identity.issuer_link_id == us_identity.issuer_link_id
+
+
+def test_cross_market_link_is_not_inferred_from_shared_names_or_aliases(tmp_path):
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "name-only-master")
+    store.write_market(
+        "HK",
+        (_record(name="Same Official Name Limited", market="HK", exchange="HKEX",
+                 ticker="09988", aliases=("EXAMPLE",)),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Same Official Name Limited", market="US", exchange="NYSE",
+                 ticker="EXM", aliases=("EXAMPLE",)),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    resolver = SecurityIdentityResolver(store.load(markets=("HK", "US")))
+
+    assert resolver.identify("EXAMPLE", market="HK").resolved.issuer_link_id is None
+    assert resolver.identify("EXM", market="US").resolved.issuer_link_id is None
+
+
+def test_cross_market_link_does_not_spread_through_an_alias_chain(tmp_path):
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "alias-chain-master")
+    lei = "5493001NTNQJDH60PM02"
+    store.write_market(
+        "HK",
+        (_record(name="Issuer One Limited", market="HK", exchange="HKEX",
+                 ticker="00001", aliases=("BRIDGE-ONE",), identifiers={"lei": lei}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Issuer One Limited", market="US", exchange="NYSE",
+                 ticker="ONE", aliases=("BRIDGE-ONE", "BRIDGE-TWO"), identifiers={"lei": lei}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/us",),
+    )
+    store.write_market(
+        "CN",
+        (_record(name="Issuer Three Limited", market="CN", exchange="SSE",
+                 ticker="600001", aliases=("BRIDGE-TWO",)),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/cn",),
+    )
+
+    resolver = SecurityIdentityResolver(store.load(markets=("CN", "HK", "US")))
+
+    linked = resolver.identify("00001", market="HK").resolved
+    unrelated = resolver.identify("600001", market="CN").resolved
+    assert linked is not None and linked.issuer_link_id is not None
+    assert unrelated is not None and unrelated.issuer_link_id is None
+
+
+def test_cross_market_link_rejects_malformed_lei(tmp_path):
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "malformed-lei-master")
+    store.write_market(
+        "HK",
+        (_record(name="Issuer One Limited", market="HK", exchange="HKEX",
+                 ticker="00001", identifiers={"lei": "5493001NTNQJDH60PM03"}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Issuer One Limited", market="US", exchange="NYSE",
+                 ticker="ONE", identifiers={"lei": "5493001NTNQJDH60PM03"}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    identity = SecurityIdentityResolver(store.load(markets=("HK", "US"))).identify(
+        "ONE", market="US"
+    ).resolved
+
+    assert identity is not None and identity.issuer_link_id is None
+
+
+def test_identity_link_extension_versions_the_response_without_changing_snapshots(tmp_path):
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    lei = "5493001NTNQJDH60PM02"
+    store = SecurityMasterStore(tmp_path / "versioned-identity-master")
+    store.write_market(
+        "HK",
+        (_record(name="Issuer One Limited", market="HK", exchange="HKEX",
+                 ticker="00001", identifiers={"lei": lei}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Issuer One Limited", market="US", exchange="NYSE",
+                 ticker="ONE", identifiers={"lei": lei}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("HK", "US"))).identify(
+        "ONE", market="US",
+    ).to_dict()
+    us_snapshot = json.loads(store.path_for("US").read_text(encoding="utf-8"))
+
+    assert result["schema_version"] == "1.1"
+    assert result["resolved"]["issuer_link_id"].startswith("issuer-link-v1:")
+    assert us_snapshot["schema_version"] == "1.0"
+    assert "issuer_link_id" not in us_snapshot["records"][0]
+
+
+def test_link_is_bound_to_each_exact_listing_not_only_issuer_name(tmp_path):
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    lei = "5493001NTNQJDH60PM02"
+    store = SecurityMasterStore(tmp_path / "listing-scoped-lei-master")
+    store.write_market(
+        "HK",
+        (
+            _record(name="Same Issuer Limited", market="HK", exchange="HKEX",
+                    ticker="00001", identifiers={"lei": lei}),
+            _record(name="Same Issuer Limited", market="HK", exchange="HKEX",
+                    ticker="00002"),
+        ),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Same Issuer Limited", market="US", exchange="NYSE",
+                 ticker="SAME", identifiers={"lei": lei}),),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    resolver = SecurityIdentityResolver(store.load(markets=("HK", "US")))
+    proved_listing = resolver.identify("00001", market="HK").resolved
+    unproved_same_name = resolver.identify("00002", market="HK").resolved
+
+    assert proved_listing is not None and proved_listing.issuer_link_id is not None
+    assert unproved_same_name is not None and unproved_same_name.issuer_link_id is None
+
+
+def test_shared_alias_in_source_market_is_not_an_identity_anchor(tmp_path):
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "shared-alias-master")
+    store.write_market(
+        "HK",
+        (
+            _record(name="Issuer One Holdings", market="HK", exchange="HKEX",
+                    ticker="00001", aliases=("SHARED",)),
+            _record(name="Issuer Two Holdings", market="HK", exchange="HKEX",
+                    ticker="00002", aliases=("SHARED",)),
+        ),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/hk",),
+    )
+
+    assert store.issuer_identity_tokens("SHARED", market="HK") == ()
+    scoped_tokens = store.issuer_identity_tokens("SHARED", market="HK", security_id="00001")
+    assert {"issueroneholdings", "00001"}.issubset(scoped_tokens)
+    assert "shared" not in scoped_tokens
+    assert store.issuer_identity_tokens(
+        "SHARED", market="HK", security_id="09999"
+    ) == ()
+    master = store.load(markets=("HK",))
+    resolver = SecurityIdentityResolver(master)
+    canonical_identity = resolver.identify("Issuer One Holdings", market="HK").resolved
+    assert canonical_identity is not None
+    assert canonical_identity.issuer_link_id is None
 
 
 def test_cross_market_identify_refuses_an_incomplete_master(tmp_path, capsys):
