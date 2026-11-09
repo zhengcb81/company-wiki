@@ -23,14 +23,14 @@ $env:PWF_PLAN_ROOT = $null
 | 阶段 | 状态 | 可以并行的工作 |
 |---|---|---|
 | P0 核对证据和责任 | complete | 三份反馈共 13 项，已按代码、提交和历史回执复核。启动时重取主线和实际部署指纹 |
-| P1 发布可独立验收的接口 | in_progress | CWP 基础浏览已发布。FF 修独审发现的未知结果重试，RF 独立完成作业与目录候选 |
+| P1 发布可独立验收的接口 | complete | CWP、FF、RF 正式主线已发布，独审、CI 及本批 Dashboard 公开接口组合均通过 |
 | P2 修复真实业务缺口 | pending | CWP-ID 诊断、FF 客户端复验、RF-MDB 入册可以并行。FF 的市场合同修复等 CWP 产出契约；RF 阿里输入等一份合格来源 |
 | P3 收口流式与发行人证明 | pending | Reader 流式端口与原生 PDF 端口可独立开发。CWP 总控串行接入可能共享的公开入口，先流式后 canonical。基础 browse 与 MDB 入册不依赖本阶段 |
-| P4 组合验收和消费切换 | pending | Dashboard D00 使用候选部署组合验证，再更新自己的 pin；各 owner 自己发布和复查。自然缺档下载、Range 和 RF 扩展各自保留状态 |
+| P4 全能力组合验收和消费切换 | pending | P1 公开接口的隔离组合已通过。后续由 Dashboard D00 在自己的发布计划接收确切修订，再按实际启用的 P2/P3 能力验收与切换 |
 
 ## Next Step
 
-FF-JOB 修复回执不完整、恢复和共用时间预算后复验。RF-JOB/CATALOG 冻结最小组合并独审。两者正式发布后固定 Dashboard 消费候选做本批组合验收。
+进入 P2 时，固定实际部署后对齐 CWP 的 query、local_prepare、ensure 与 FF 对来源市场的消费。RF 可并行核定 MDB 既有证据是否满足成功发布合同。首批接口已发布的 SHA 与组合结果见 [进度](progress.md)。
 
 ## 依赖与发布顺序
 

@@ -35,3 +35,9 @@ RF 的六路线归档在 `0993abb305dc86a2197b8b2aee10a3b8d8339949:.planning/rf-
 - FF 作业实际按 `allowed_actions` 提供排队 cancel、合格的零支出终态 retry、unknown 的只读 reconcile。无 resume。filings 无 refresh，statements 有。部署根配置已登记，发布时复验选中的解释器、代码和 connector 配置。
 - FF 当前候选绑定对缺 market 键和显式 null 走不同分支。需用来源证据统一。Dashboard 的 run 转发自定义 FF connector，act(reconcile) 当前遗漏，FF 公开命令已能接收该参数。配置缺口归 Dashboard 适配器。
 - RF v1 差异以 Dashboard `handoffs/m8-executor-integrate-01/handoff.md` 及 RF facade 的实际执行为准。金额上限在原 v1 只检查配置而未证明执行，需在付费 owner 入口验证有效预算，v2 其余表达差异单独演进。
+
+## P1 发布前独审发现的共用问题
+
+FF 与 RF 的旧作业层都曾根据过时的 PID 文件删除锁。两个独立进程可以把对方刚获取的新锁删掉。各自 owner 使用可由操作系统在进程退出时释放的锁，在锁内重新观察并变更当前状态。RF 的活作业核对只读，恢复时复用已经验证的终态或阶段证据。
+
+下载事件为零只说明没有观察到已提交事件。请求已派发而回执丢失时，开销及外部副作用保持未知。FF 财报和伴随电话会都要进入同一个作业的获取意图和真实证据统计。RF 有获取潜力的来源阶段在缺证据时也保留未知。保留只读核对和已证明无新增开销的安全恢复。两个 owner 分别以通用临时公司及实际进程竞态复验。
