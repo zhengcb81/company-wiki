@@ -1,0 +1,30 @@
+{
+  "schema_version": "du11-paid-batch-recovery-test-independent-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at_utc": "2026-10-18T00:36:00.396330+00:00",
+  "verdict": "PASS_FROZEN_RECOVERY_TEST_DESIGN_PRIOR_RUNTIME_EVIDENCE_ONLY",
+  "files_sha256": {
+    "tests/unit/du11_paid_response/test_batch_recovery.py": "769ae160ec2b47807c5a89d6736accf0da7bb4f4cb1e0ace6c82b713838fa316",
+    "tests/unit/du11_paid_response/du11_fault_runtime.py": "0416741571dc9558f362502dd844c371234997b56a7c0f6ee2cb95c6d9cfb935"
+  },
+  "findings": [],
+  "quality": [
+    "Realrun_batch/nativechild/productionfactory/AUTO/objectstore used; onlytestsupervisorfactorypathsubstitution. Testmodulemarkerpatches_responseafterdurablebytes, noapplicationfaultoption/permissionsadded.",
+    "Firstterminalfailure thenmarkerremoved/keyremoved,samefrozenrequest/run,newlease0POST; originalpinbytesSHA/size,92tokens111microUSD originalreservationonce,positivefinaloutput andoldfailedattemptidentity/errorremain.",
+    "Finalreadonlyrepeat comparesexactmainDB/nonemptyWALbytespluslogicalSQLdump,budget/documentsandPOSTcount. MissingWAL andempty0byteWAL arebothzerobytes; nonemptyWAL nevernormalized. SHMreadmarks intentionallyexcludedfromauthoritativebyteclaim.",
+    "Isolatedfixture usesonlysmalllocalTXT/sentinel andownedcleanup, raw/config/sourceunchanged assertions. Nooriginalclone/realAPI."
+  ],
+  "reused_author_evidence": {
+    "red": "1FAIL/10.50s exactly terminal-history resumed.status failed",
+    "first_green_measurement_failure": "recovery all business/fee/output/oldattempt assertions passed; measurement only failed because0byte WAL sidecar appeared; original log retained",
+    "final": "1PASS/15.65s",
+    "runtime_sha_binding": "PrioractualruntimeSHAsinWTbatch-recovery-handoff; ROOTlaterproductionP2fixesareNOTdeclaredrerunbythistestreview."
+  },
+  "execution": {
+    "independent_test_runs": 0,
+    "network_calls": 0,
+    "pdf_reads": 0,
+    "source_edits": 0
+  },
+  "open": "ROOTfinalproductionruntimefreeze/deltaandconcentratedsuite/skipCpending; thisacceptsnewtestfiles, notalllatestWIPbehavior."
+}

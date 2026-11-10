@@ -1,0 +1,118 @@
+{
+  "schema_version": "du11-native-prose-real-guard/1",
+  "scope": "source-selection-guard-only-not-model-summary",
+  "sample": "cn-h1",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "source_unchanged": true,
+  "POSTs": 0,
+  "reservations": 0,
+  "parse": {
+    "seconds": 2.617619799973909,
+    "work": 574081,
+    "units": 5335,
+    "pages": 210
+  },
+  "selection": {
+    "seconds": 8.302851899992675,
+    "total_work": 5290029,
+    "limit": 16000000,
+    "exhausted": false,
+    "spans": 96,
+    "chars": 7678,
+    "candidate_count": 1616,
+    "omitted": 1520,
+    "status": "partial",
+    "diagnostics": [
+      {
+        "code": "budget_full",
+        "count": 569
+      }
+    ],
+    "native_ranges": 55
+  },
+  "continuity": {
+    "windows": 275,
+    "complete": false,
+    "diagnostics": [
+      {
+        "code": "CONTINUITY_OPEN_END",
+        "count": 290
+      },
+      {
+        "code": "CONTINUITY_WINDOW_LIMIT",
+        "count": 20
+      }
+    ],
+    "package_kinds": {
+      "operating_table": 2,
+      "risk": 79,
+      "paragraph_event": 138,
+      "background": 2146,
+      "project": 6,
+      "native_continuity": 307
+    }
+  },
+  "required_business": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "supported": false,
+      "all_anchors_individually_present": false
+    },
+    {
+      "id": "f-current-coverage-30",
+      "supported": false,
+      "all_anchors_individually_present": false
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-gan-power-stage",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-inp-development-started",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "required_supported": 8,
+  "required_count": 10,
+  "missing_ids": [
+    "f-five-year-target-is-plan",
+    "f-current-coverage-30"
+  ],
+  "files_sha256": {
+    "src/company_wiki/source_catalog/narrative_evidence.py": "7d3ea360fbc4862dd34dfe55939ca84daea2780f6c31dece06c45fec5d129a08",
+    "src/company_wiki/document_understanding/decision_inventory.py": "36c5002c6f5a7169fa352dfc281a4972976fe0cab2cb95291692477e4f4bedc8",
+    "tests/unit/du11_production/test_native_prose_continuity.py": "609c8500f8dc1696b8891a9b6b8a85bf261a4279448f1e75f51500a7416020e7"
+  }
+}

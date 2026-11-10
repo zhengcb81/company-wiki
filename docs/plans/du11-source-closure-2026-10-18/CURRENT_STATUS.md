@@ -1,16 +1,16 @@
-# 当前状态 — D4/D5 解耦已验收；T4/SEM-QUAL-01 大节点收口中
+# 当前状态 — P2 已并线；D4/D5 范围验收通过；source-facts 当前主线复验与工作区核销未完成
 
 唯一入口：[当前状态](CURRENT_STATUS.md) / [机器状态](CURRENT_STATUS.json)；详细顺序见 [task_plan](task_plan.md)，交接见 [HANDOFF](HANDOFF.md)，固定长期目标见 [MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。
 
-**截至 2026-11-06：D5 全局解耦 ACCEPTED，当前主线不再等待外包卡。** CWP 的 pathless 规范化文档 port 与 StockWiki 三个默认消费入口已进入各自主线；FF schema 2.0 走 V2/pathless，显式 V1 兼容仍保留并有独立边界测试。最终跨仓套件 18 passed、0 skipped、0 failed/errors，独立审查 PASS。完整证据：[ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
+**截至 2026-11-10：P2 已分别并入 CWP/FF/RF 主线并推送；D4/D5 解耦按冻结范围 ACCEPTED。** D4/D5 的含义是 owner 通过版本化公开接口协作，且既有接口边界和组合样本测试通过；不是零依赖，也不是 Dashboard 全计划完成。D5 跨仓套件为 18 passed、0 skipped、0 failed/errors，独立审查 PASS。P3 Reader/PDF 端口和 P4 Dashboard 实际切换仍 OPEN。P2 与解耦结果的细节见 [Dashboard owner plan](../dashboard-owner-integration-2026-11-09/task_plan.md)；D5 证据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
 
-**当前唯一下一步：**完成 T4 source-note-parent + SEM-QUAL-01 的大节点收口。责任层实现和聚焦回归已在本地工作区完成；真实 H1 观察为 12/12 必需原文单元精确覆盖、112 个 spans、28.42 秒，未调用模型、未下载或复制原件，数据库/原件/runtime/observer 均未变化。最终独立审查、102 对此前 101 个 native members 的差异解释、证据归档与测试 scratch 恢复仍 OPEN，所以此节点尚未 ACCEPTED。通过后才恢复新版真实摘要、缓存恢复、RF 实际采用以及固定公司循环。
+**当前唯一下一步：**在当前主线精确复验 source-facts 候选所报告的遗漏，并完成本地 worktree/分支核销。候选观察显示 coverage guard 10/10、native-prose guard 8/10（漏两个指定业务事实），当次预算未耗尽且没有模型调用；但观察绑定 detached worktree 的源码，不能升级为主线通过或失败。先对当前 `master` 做小范围零模型重放，只有缺口复现才改生产 owner 层。此前 H1 的 102 对 101 个 native-member 差异、locator/context 对齐、最终独审和 scratch 恢复仍未完成。通过当前主线复验与修复后才恢复新版真实摘要、缓存恢复、RF 实际采用及固定公司循环。
 
-## T4/SEM-QUAL-01 当前观察
+## T4/SEM-QUAL-01 候选观察（不是当前主线验收）
 
-- TDD 反例已先红后绿；本地实现覆盖来源 note 的父链重置，以及中英文跨 span 的计划/条件限定词绑定。当前变更尚未提交。
+- detached candidate worktree 中有 11 个 tracked 文件修改和 12 个 untracked 开发/测试/收据文件；改动横跨来源语义、解析、只读观察和测试工具。它不是一项可直接快进的单一补丁，且未绑定当前主线复验。
 - 最近一次相关测试记录：note-scope 91 passed；source-case-runner 20 passed；decoder/source-frame/summary 组合 271 passed；qualifier 专项 17 passed。这些来自不同测试命令，可能有覆盖重叠，不能相加成总数。最终 Ruff 与大节点独审还未完成。
-- H1 收据暂存于本机 `.planning/t4-sem-h1-20261106-attempt2/h1.json`，不是持久交接证据；准确覆盖 12/12，9 个结构/context 观察均有记录。该收据状态是 `OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE`，不能当成公司或财报质量验收。
+- H1/selection 收据原先只在 detached candidate worktree 的 `.planning` 下；已把五份关键 JSON 收据复制到 `review/source-facts-reconciliation-20261110/`，且五份归档 JSON 的 SHA-256 均与候选 worktree 原件一致。运行状态为 `OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE`，不能当成公司或财报质量验收。
 - 与先前基线相比 native-member 数为 102 对 101；这不自动判失败，也不能忽略，需在收口时解释映射差异并检查 12 个成员/locator。
 - 第一次 observer 尝试在读取原件前因 Windows `os.link` WinError 5 失败；改为 Windows 同目录原子 `os.rename` 首次发布后重跑成功。该失败不涉及来源、网络或模型调用。
 

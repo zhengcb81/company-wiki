@@ -410,3 +410,10 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - 单例真实 H1 第二次运行 28.4237 秒，112 spans，12/12 必需原文成员精确覆盖；102 native members，较旧基线 101 多 1，差异仍待核；9 个结构/context 检查输出。model posts/downloads/raw copies 为 0，数据库、原件、runtime、observer 均未变。结果是 observer-only，不是公司或经济质量验收。
 - 首次 H1 observer 在读取来源前因 Windows `os.link` WinError 5 失败；根修后第二次运行成功。两个 ROOT 建立的 scratch 目录目前仍在本机，待耐久化收据后精确恢复到初始不存在状态；不能将此记录误读为 scratch 已清理。
 - 下一步：查清 101→102 映射并核 12 个 locator/context，完成最终 Ruff 和一次独立大节点审查；将收据归档并恢复 scratch，再将 T4/SEM 标为 ACCEPTED。随后才进入新版真实摘要。
+# 2026-11-10 — P2 状态、source-facts 候选与清理核账
+
+- P2 已进入 CWP/FF/RF 各自 owner 主线；见 `dashboard-owner-integration-2026-11-09/task_plan.md` 和 P2 E2E receipt。不要重复 cherry-pick，也不要把 P3/P4 写成 P2 未完成。
+- D4/D5 在冻结接口/组合验收范围内 CLOSED/ACCEPTED；不声称“零依赖”或 Dashboard 整体完成。Dashboard P3/P4 仍 OPEN。
+- 复核到 detached `du11-source-facts` 候选中有 11 个 tracked 修改、12 个 untracked 开发/测试/收据文件；包含 10/10 coverage guard 与 8/10 native-prose 观察。两个遗漏在记录中归因于 source-meaning/operating-relation 入选，不是预算耗尽；候选改动未进入当前主线，且各收据不完全绑定同一最终代码版本。五份 JSON 已逐字节核对并复制进独立 PWF review 目录；在当前主线小范围重放前不删候选 worktree，不接受候选补丁。
+- CWP 根 `master` 当前与 `origin/master` 同步于 `fb868064e4d37a0441373578f4286964e739e6b4`。根目录仍有约 14,022 项历史未跟踪状态，Git 中保留的 CWP/外部 worktree 还包含未提交证据、部署绑定或模型缓存；不能 bulk reset/clean。逐项核销另见 `dashboard-owner-integration-2026-11-09/review/local_workspace_reconciliation-2026-11-10.md`，本轮仅处理证据明确且已过测试的窄项。
+- 聚焦回归发现集成测试仍 monkeypatch 已退役的 `select_budget_items`，而当前 finalizer 使用 `plan_budget_items`。修正测试绑定公开当前函数后，指定 6 个文件组测试为 203 passed（6.72 秒）；代码无生产变化。待把测试和 PWF 变更正常提交/推送。

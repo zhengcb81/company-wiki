@@ -1,0 +1,61 @@
+{
+  "schema_version": "du11-paid-response-independent-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at_utc": "2026-10-18T00:26:43.757929+00:00",
+  "verdict": "PASS_PAID_RESPONSE_ENGINEERING_WITH_EXPLICIT_REVIEW_TEMP_NOT_CLEAN",
+  "files_sha256": {
+    "src/company_wiki/automation/narrative_paid_response.py": "bd6e31fd999af211a1b3f133c18f3eca5db911364c3138bcec1ad8c4fda47fb7",
+    "src/company_wiki/automation/narrative_model_caller.py": "1075adef0fa798a0d819b11c96c7a489a6c8abfa596cd8c5450e58c62a0d31da",
+    "src/company_wiki/automation/narrative_http_model.py": "efe4b489af3ccff47773318d294bc274cd425e2774d8a06cc72607d31f9954d9",
+    "src/company_wiki/automation/narrative_run_store.py": "126ffc7c7d5928f57cf239281d5663b978f052a260a9c2d20a0f71c166425708",
+    "src/company_wiki/automation/migrations.py": "5f6c74024a9dd836e3c01b608468fb54e673afd1567641af9d16bc392fb34bb9",
+    "src/company_wiki/automation/store.py": "b36a0d3c5b03189bdbf3a05247600d92560d1689420ab7c154db2dc1931aa0cd",
+    "tests/unit/du11_paid_response/test_paid_response.py": "261debc9ef91f2e862a1899ec17874205d322f13ad5c3ac9326d029f36f698b9",
+    "tests/integration/test_du11_paid_response_recovery.py": "4a949b1d8a90b8b11e0fd497d72ad514ac694bb2a25c529c2307974428ea7fe9"
+  },
+  "scope": "8 frozen durability files; excludes ROOT factory/batch/default source-card wiring, terminal compaction change and final real provider C.",
+  "unresolved_confirmed_runtime_defects": [],
+  "architecture": [
+    "One additive nullable paid_response_json column in existing AUTOreservation, schema6→7, no second taskstore/cache/ledger/table. Existing immutable objects hold complete bounded outerHTTP body, not public narrative_bundle records.",
+    "Original request hash binds canonical modelinput and actualHTTPbody; model/adapter/prompt/byteSHA+size/status/duration pin stored before envelope interpretation. Key/header/requestbody not recorded in pin.",
+    "Existing originalattempt token/generation can attach original paid evidence after publicationlease lost, but cannot publish. Currentlease/frozenmembership is rechecked before oldzerooutputslot reopened.",
+    "Replay verifies exact stored bytes and request/model/adapter/prompt/membership; never credentials/POST on samepaidoperation, never treats clippedprefix/hashororphanobject as replay. Changed/missing/corrupt cases preserve conservative accounting.",
+    "Original reservation is settled once; replay uses original paidattempt. No new providerreservation or fakefreecredits; actual knownusage can resolve priorunknown after complete replay, historicalunknowns elsewhere remain.",
+    "Positiveoutput, successfulattempt/effect, activeunfinishedattempt or frozenmembership mismatch cannot be reset byretry. Final publication stays existingverify/outbox owner."
+  ],
+  "independent_validation": {
+    "kind": "2 finite direct synthetic fake-transport controls inownedTemp, explicit WT/src moduleimports; nopytestsuite/socket/PDF",
+    "runtime_assertions": "PASSED and reachedfinalTemporaryDirectorycleanup",
+    "control1": "Knownpaidterminalfailure→retry_paid_narrative_summary→newcurrentlease→response replay withsynthetickeyremoved: totalfakePOST1, originalreservation1, original92tokens/feesunchanged, originaloutputslotreopened.",
+    "control2": "Postfinalnarrowchange: validfailedpaidoperation syntheticallygiven10positiveoutputbytes isdenied atretrytransaction; jobstatusunchanged,totalfakePOST1. ReadonlyleftoverDB confirms known73input/19output/45microUSD/output10.",
+    "shell_exit": "1 fromreviewfixture cleanup only, NOT runtimeassertion failure. Initial earlierprobe omittedownchilddirectory andfailedInvalidStorePathError beforefakePOST/reservation; correctedfixture only; no source change.",
+    "suite_reruns": 0,
+    "real_network_calls": 0,
+    "pdf_reads": 0
+  },
+  "reused_author_evidence": {
+    "initial_red": "18FAIL/2PASS",
+    "concentrated_beforefinaldelta": "168PASS20.98s",
+    "final_focused": "28PASS9.06s afteridentity/emptyandjobmembershipfix",
+    "last_positive_output_precheck": "Notclaimedcoveredbyold28; independentlycheckedabove",
+    "loopback_integration": "Author1realownedloopbackPOST→replay0POST/newlease, reusednotrerun",
+    "ruff": "AuthorPASS reused"
+  },
+  "cleanup": {
+    "status": "NOT_CLEAN_REVIEW_FIXTURE_ONLY",
+    "path": "C:/Users/郑曾波/AppData/Local/Temp/du11-independent-paid-lij5od2g",
+    "files": 7,
+    "bytes": 393369,
+    "cause": "Reviewfixture sqlite3 withcontext committed but didnotexplicitlyclose connection; WinError32 duringTemporaryDirectoryexit. Processended, subsequent exactabsoluteverifiedPowerShell cleanup rejectedbyplatformpolicy. Noalternatechannel/retry attempted.",
+    "contents": "SyntheticAUTO SQLite andownedresponseobjects only; no originals/config/keys/productiondata",
+    "runtime_effect": "No source/raw/config or productionDB changed; this isnotbusinessruntime red or all-directories-restored claim."
+  },
+  "boundaries": [
+    "Lostproviderreturnbeforelocaldurability remainsunknown; noauto resend.",
+    "DurableobjectbeforeDBpin can leaveorphan smallobject; no inferredreplay.",
+    "Historicalv4 remainsitsidentity/semantics; neithernewprotocol norfreeresend isauthorizedbyoldprefix.",
+    "ROOT must wireactualstoragepreflight includingimmutableobject/WAL/scratchoverhead, newmode caller andterminalfailedresume path, thenexisting finalartifact/outbox recovery.",
+    "No final providercontent/activation/cache/source-card completeness acceptance claimed."
+  ],
+  "integration": "Exact8filebytes mayintegrate now. ROOT may subsequently change store terminalcompaction in separate finite delta; do not alter accepted recovery methods without review."
+}

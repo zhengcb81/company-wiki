@@ -1,0 +1,100 @@
+{
+  "schema_version": "du11-business-coverage-guard/1",
+  "scope": "source-selection-development-regression-not-summary-or-holdout",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "module_path_verified": {
+    "policy": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_business_policy.py",
+    "source": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_evidence.py"
+  },
+  "files_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c0f4475170ef982de93f8d77ea25f82cb313f1079f352a0e159945f1a79f64e9",
+    "tests/unit/du11_production/test_business_coverage_relations.py": "2c6526ac740b5d0c43086ccaa0790681e0ad5c0ad9f04e1b76f9d027b1d9f58a",
+    "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py": "65ff44850f0aa9946daba88015ffe0c9bd5a62aaa57e125d91d8a86a12b15e01"
+  },
+  "POSTs": 0,
+  "reservations": 0,
+  "parse": {
+    "seconds": 1.491658200044185,
+    "work": 574081,
+    "units": 5335,
+    "pages": 210
+  },
+  "selection": {
+    "seconds": 8.403302100021392,
+    "total_work": 5290029,
+    "limit": 16000000,
+    "exhausted": false,
+    "spans": 96,
+    "chars": 7739,
+    "status": "partial"
+  },
+  "required_business": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-current-coverage-30",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-gan-power-stage",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-inp-development-started",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "required_supported": 10,
+  "required_count": 10,
+  "missing_ids": [],
+  "status": "PASS",
+  "source_unchanged": true,
+  "config_unchanged": true,
+  "gold_unchanged": true,
+  "runtime_files_sha256": {
+    "src/company_wiki/source_catalog/narrative_evidence.py": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1",
+    "src/company_wiki/document_understanding/decision_inventory.py": "36c5002c6f5a7169fa352dfc281a4972976fe0cab2cb95291692477e4f4bedc8",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c0f4475170ef982de93f8d77ea25f82cb313f1079f352a0e159945f1a79f64e9"
+  },
+  "test_receipt": {
+    "focused": "30 PASS / 2.46s",
+    "prior_related": "190 PASS / sole stale literal version expectation corrected separately; not repeated",
+    "tdd": "initial22:10RED/12PASS; additional relationship controls:3RED; CN no-comma control:1RED; all repaired"
+  }
+}

@@ -38,7 +38,7 @@
     },
     {
       "id": "P1",
-      "status": "T4_SEM_LOCAL_IMPLEMENTATION_AND_H1_OBSERVED; FINAL_ACCEPTANCE_OPEN; NEW_RUNTIME_C_ACCEPTANCE_OPEN",
+      "status": "SOURCE_FACTS_CANDIDATE_ONLY; CURRENT_MAIN_REPLAY_OPEN; FINAL_ACCEPTANCE_OPEN; NEW_RUNTIME_C_ACCEPTANCE_OPEN",
       "task": "Close T4/SEM milestone first; then accept new real summaries/content coverage. Historical Huali15/12atoms and Berkshire73/10atoms recovery remain bounded evidence; 15 Berkshire units and full-source partial remain explicit."
     },
     {
@@ -77,7 +77,7 @@
     }
   },
   "current_limits_to_close": [
-    "T4/SEM-QUAL-01 final acceptance: inspect the H1 native-member delta (102 versus prior 101), all 12 exact required locators and structure/context evidence; independent review and scratch restoration remain open.",
+    "Source-facts candidate is not merged: replay the 10/10 versus 8/10 selection diagnostic against exact current-main code; then explain the 101-to-102 native-member delta only if still relevant, verify bound locators, complete independent review and restore scratch.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
     "Berkshire 15 unprocessed explicitly retained; full-source/long-frontier generalization remains partial; 10 required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatory PDF/HK/US RPO and genuinely unexposed holdouts"
@@ -89,10 +89,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "D4_D5_DECOUPLING_ACCEPTED_T4_SEM_LOCAL_IMPLEMENTATION_H1_REVIEW_OPEN",
-  "as_of_date": "2026-11-06",
-  "observed_at_utc": "2026-11-06T20:42:53Z",
-  "next_action": "Finish T4 source-note-parent + SEM-QUAL-01 acceptance: explain the 101-to-102 native-member delta against the prior H1, verify all 12 exact required locators and the 9 structure/context observations, complete final Ruff and one independent milestone review, write durable receipts, and restore the two ROOT-created scratch directories. Do not mark H1 as company/economic acceptance. After acceptance, proceed to new real-summary quality, cache recovery, RF adoption, and the fixed-company loop.",
+  "project_status": "P2_OWNER_MAINLINES_COMPLETE_D4_D5_SCOPE_ACCEPTED_SOURCE_FACTS_CURRENT_MAIN_REPLAY_OPEN_WORKSPACE_RECONCILIATION_OPEN",
+  "as_of_date": "2026-11-10",
+  "observed_at_utc": "2026-11-10T13:29:18Z",
+  "next_action": "Current-main source-facts replay and per-worktree disposition; do not begin full company loop or paid summary before this closes.",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -215,12 +215,12 @@
     },
     "code_and_tests_pushed": true,
     "all_exact_ci_success": false,
-    "note": "Prior exact-head CI records remain historical. D5 local validation is accepted; current ROOT integration commit must be pushed and its exact-head CI checked before marking current publication green."
+    "note": "Historical D5 validation is accepted. P2 is separately published to CWP/FF/RF owner mains. Current exact-main work is source-facts replay and local worktree reconciliation; do not infer new CI status from earlier commit runs."
   },
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "D4/D5 global decoupling is accepted (D4 27-case suite; D5 18-case cross-repository suite, 0 skips, independent review PASS). Current ROOT work is T4/SEM local implementation and one-H1 acceptance; the final H1 review/receipt is open. Do not restart or redispatch D5.",
+    "current_work": "P2 is merged/pushed to the CWP, FF, and RF owner mains. D4/D5 decoupling is accepted only for frozen public-interface and composition-test scope; it is not zero coupling and does not complete Dashboard P3/P4. ROOT must replay the detached source-facts selection diagnostic against current CWP master, then reconcile remaining local worktrees and refs. Candidate worktree changes are not accepted or merged.",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -247,23 +247,23 @@
     },
     {
       "id": "T4-source-parent",
-      "status": "IMPLEMENTED_LOCAL; H1_OBSERVED; FINAL_REVIEW_OPEN",
+      "status": "DETACHED_CANDIDATE_ONLY; CURRENT_MAIN_REPLAY_OPEN; FINAL_ACCEPTANCE_OPEN",
       "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md",
       "blocked_by_d5": false,
-      "next": "Complete H1 differential review, independent milestone review, durable evidence and scratch restoration."
+      "next": "Run bounded zero-model source-selection replay on exact current master; decide whether candidate misses reproduce. Do not accept detached code before this result."
     },
     {
       "id": "SEM-QUAL-01",
-      "status": "IMPLEMENTED_LOCAL; FOCUSED_TESTS_PASS; FINAL_ACCEPTANCE_OPEN",
+      "status": "CANDIDATE_EVIDENCE_ARCHIVED; CURRENT_MAIN_REPLAY_OPEN; FINAL_ACCEPTANCE_OPEN",
       "evidence": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/cwp-contract-followup.json",
       "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md",
-      "current_evidence": ".planning/t4-sem-h1-20261106-attempt2/h1.json (local scratch; not yet archived)",
+      "current_evidence": "review/source-facts-reconciliation-20261110/; five JSON files SHA-256 match detached source. Candidate worktree still contains 11 tracked modifications and 12 untracked files.",
       "blocked_by_d5": false,
-      "next": "Complete H1 differential review, independent milestone review, durable evidence and scratch restoration."
+      "next": "Replay against current master; if reproduced, use generic source-meaning TDD, then bound locator/member review and one independent milestone review."
     },
     {
       "id": "C-source",
-      "status": "H1_OBSERVED; FINAL_REVIEW_OPEN; BUSINESS_ACCEPTANCE_NOT_CLAIMED",
+      "status": "CANDIDATE_OBSERVED; CURRENT_MAIN_REPLAY_OPEN; BUSINESS_ACCEPTANCE_NOT_CLAIMED",
       "evidence": "review/architecture-quality-20261101/implementation-results/C-source-v4-independent.md"
     },
     {
@@ -697,7 +697,7 @@
     }
   },
   "t4_sem_qual": {
-    "status": "LOCAL_IMPLEMENTATION_AND_FOCUSED_TESTS_PASS; H1_OBSERVED; FINAL_ACCEPTANCE_OPEN",
+    "status": "DETACHED_CANDIDATE_ONLY; CURRENT_MAIN_REPLAY_OPEN; FINAL_ACCEPTANCE_OPEN",
     "source_changes_uncommitted": true,
     "tests": [
       {
@@ -720,7 +720,7 @@
     "ruff": "NOT_FINAL_VERIFICATION",
     "real_h1": {
       "receipt_local_scratch": ".planning/t4-sem-h1-20261106-attempt2/h1.json",
-      "status": "OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE",
+      "status": "CANDIDATE_OBSERVED_NOT_CURRENT_MAIN_ACCEPTANCE",
       "seconds": 28.423656700004358,
       "selected_spans": 112,
       "required_units": 12,
@@ -737,11 +737,30 @@
       "observer_unchanged": true
     },
     "open_items": [
-      "Explain 101-to-102 native-member delta and verify exact locator/member mapping.",
-      "Complete final Ruff and one independent milestone review.",
-      "Archive durable evidence and restore ROOT-created scratch directories."
+      "Run the bounded zero-model source-selection replay against exact current-main code.",
+      "If the miss reproduces, add company-neutral RED and positive controls at the source-meaning owner and fix the generic cause.",
+      "Explain the candidate 101-to-102 native-member delta and verify exact locators only after deciding the current-main result.",
+      "Complete one independent milestone review, archive bound evidence, and restore only scratch created for that run."
     ],
     "windows_observer_retry": "First attempt failed before source access because os.link raised WinError 5; Windows initial publication now uses same-directory os.rename, with POSIX hardlink behavior retained.",
-    "test_counts_non_additive": true
+    "test_counts_non_additive": true,
+    "candidate_worktree": {
+      "path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki",
+      "head": "fcee443ef5cb5a7d67a35741a7de46d791f3328c",
+      "tracked_modified_files": 11,
+      "untracked_development_or_receipt_files": 12,
+      "merged_to_current_main": false,
+      "evidence_archive": "review/source-facts-reconciliation-20261110/"
+    },
+    "current_main_replay": "OPEN; candidate 10/10 coverage and 8/10 native-prose observations are not current-main acceptance"
+  },
+  "workspace_reconciliation": {
+    "cwp_root_head": "fb868064e4d37a0441373578f4286964e739e6b4",
+    "cwp_root_matches_origin_master": true,
+    "root_untracked_status_entries": 14022,
+    "worktree_count_including_root_and_temporary_reconciliation": 18,
+    "cleanup_complete": false,
+    "next_action": "Replay the source-facts selection diagnostic against current master; then reconcile each remaining worktree/ref from its PWF and evidence. Do not bulk-clean.",
+    "p2_status": "merged_and_pushed_to_cwp_ff_rf_owner_mains"
   }
 }

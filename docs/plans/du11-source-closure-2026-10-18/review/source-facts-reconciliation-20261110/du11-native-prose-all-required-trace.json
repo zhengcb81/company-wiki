@@ -1,0 +1,3644 @@
+{
+  "schema_version": "du11-all-required-selection-trace/1",
+  "scope": "read-only actual owner trace; not a new classifier/packer or model acceptance",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "source_unchanged": true,
+  "POSTs": 0,
+  "reservations": 0,
+  "same_account": true,
+  "parse_work": 574081,
+  "total_work": 5290029,
+  "work_limit": 16000000,
+  "work_exhausted": false,
+  "parse_seconds": 1.89342310000211,
+  "select_seconds": 8.178458199952729,
+  "selected_count": 96,
+  "selected_chars": 7678,
+  "candidate_count": 1616,
+  "omitted": 1520,
+  "packing_options": {
+    "limit": 96,
+    "policy": "reading_plan/3",
+    "max_chars": 48000
+  },
+  "required": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "source_anchors": [
+        {
+          "page": 13,
+          "native_quote_present": true,
+          "native_view_range": [
+            528,
+            583
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+            "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+            "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-five-year-target-is-plan",
+        "supported": false,
+        "all_anchors_individually_present": false
+      }
+    },
+    {
+      "id": "f-current-coverage-30",
+      "source_anchors": [
+        {
+          "page": 13,
+          "native_quote_present": true,
+          "native_view_range": [
+            495,
+            527
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-current-coverage-30",
+        "supported": false,
+        "all_anchors_individually_present": false
+      }
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "source_anchors": [
+        {
+          "page": 13,
+          "native_quote_present": true,
+          "native_view_range": [
+            91,
+            160
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4",
+            "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-cmp-acquisition-completed",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "source_anchors": [
+        {
+          "page": 18,
+          "native_quote_present": true,
+          "native_view_range": [
+            152,
+            250
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+            "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+            "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-microled-sample-verification",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    },
+    {
+      "id": "f-gan-power-stage",
+      "source_anchors": [
+        {
+          "page": 18,
+          "native_quote_present": true,
+          "native_view_range": [
+            409,
+            476
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+            "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+            "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-gan-power-stage",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "source_anchors": [
+        {
+          "page": 18,
+          "native_quote_present": true,
+          "native_view_range": [
+            648,
+            686
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4",
+            "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-sic-8inch-stage",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    },
+    {
+      "id": "f-inp-development-started",
+      "source_anchors": [
+        {
+          "page": 18,
+          "native_quote_present": true,
+          "native_view_range": [
+            849,
+            932
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+            "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+            "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+            "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-inp-development-started",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "source_anchors": [
+        {
+          "page": 18,
+          "native_quote_present": true,
+          "native_view_range": [
+            1013,
+            1056
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+            "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-advanced-packaging-primo-matrix",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "source_anchors": [
+        {
+          "page": 18,
+          "native_quote_present": true,
+          "native_view_range": [
+            950,
+            1012
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+            "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-tsv-300e-serving",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "source_anchors": [
+        {
+          "page": 18,
+          "native_quote_present": true,
+          "native_view_range": [
+            1060,
+            1114
+          ],
+          "original_ids": [
+            "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+            "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+          ]
+        }
+      ],
+      "final_score": {
+        "id": "f-third-gen-tsv-rd",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    }
+  ],
+  "target_units": {
+    "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a": {
+      "page": 18,
+      "paragraph": 30,
+      "block": 21,
+      "source_start": "讯等新兴应用需求，公司积极与行业领先客户开展合作，于报告期内启动磷化铟（InP）材料体系",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            464.3773193359375,
+            531.3690795898438,
+            478.08770751953125
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m169",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:efa464d0a4abf459c12ca68824b7475392f86ca7c4663353d3260b0d3f708911",
+            "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+            "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+            "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+            "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:4a4ad804fa266933ae2beae0eabe585755db25b68305ada33d4ee7dbc73b5c93",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_description_unknown"
+        ],
+        "chars": 113,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2": {
+      "page": 18,
+      "paragraph": 15,
+      "block": 11,
+      "source_start": "了用于氮化镓功率器件生产应用的MOCVD 设备PRISMO PD5，目前已交付客户进行生产验",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            260.1372985839844,
+            512.1654052734375,
+            273.8476867675781
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m164",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:6bc39e44e07879a7ba5c1a5f97d98d603dbc334cd3e30924fb59bb983e3aea81",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+            "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+            "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79",
+            "urn:company-wiki:narrative-unit:sha256:4e42beb49c6ddecc93e09a6eabdaf89adb50a5662e5f7b75041e14fbdc3c2101",
+            "urn:company-wiki:narrative-unit:sha256:56d285259bcf47eb21259c56aa82af49c3419d354e0243c4ce82b5bfe7cbfb26"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:6bc39e44e07879a7ba5c1a5f97d98d603dbc334cd3e30924fb59bb983e3aea81",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:9558b28e80dd6748c8bc4767b60ff01c411f593db049740c6dc3ed2aab500fe0",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business",
+          "capacity_projects"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business",
+          "capacity_projects"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 6,
+        "reason_codes": [
+          "reading_plan",
+          "operating_mechanism",
+          "operating_state_unknown"
+        ],
+        "chars": 121,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa": {
+      "page": 18,
+      "paragraph": 8,
+      "block": 6,
+      "source_start": "报告期内样机验证进展顺利，其性能与可靠性已满足客户产线要求，并获得客户的重复订单。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            159.55035400390625,
+            536.6500244140625,
+            170.00035095214844
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m162",
+          "kind": "paragraph_event",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:16bd8e3286e0fa9abc0741221f2a78d5d962acffb43106a7ba10542af8330a3c",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+            "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+            "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:16bd8e3286e0fa9abc0741221f2a78d5d962acffb43106a7ba10542af8330a3c",
+          "kind": "native_continuity",
+          "member_count": 3
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:3a1bea6336507341b65fa72b3f8dd6920055bcebd6a8ce6304508f1ed60092f8",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_description_unknown"
+        ],
+        "chars": 98,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79": {
+      "page": 18,
+      "paragraph": 16,
+      "block": 12,
+      "source_start": "证，并取得了重复订单。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            280.53729248046875,
+            522.6082763671875,
+            294.2476806640625
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m164",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:6bc39e44e07879a7ba5c1a5f97d98d603dbc334cd3e30924fb59bb983e3aea81",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+            "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+            "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79",
+            "urn:company-wiki:narrative-unit:sha256:4e42beb49c6ddecc93e09a6eabdaf89adb50a5662e5f7b75041e14fbdc3c2101",
+            "urn:company-wiki:narrative-unit:sha256:56d285259bcf47eb21259c56aa82af49c3419d354e0243c4ce82b5bfe7cbfb26"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:6bc39e44e07879a7ba5c1a5f97d98d603dbc334cd3e30924fb59bb983e3aea81",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:9558b28e80dd6748c8bc4767b60ff01c411f593db049740c6dc3ed2aab500fe0",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business",
+          "capacity_projects"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business",
+          "capacity_projects"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 6,
+        "reason_codes": [
+          "reading_plan",
+          "operating_mechanism",
+          "operating_state_unknown"
+        ],
+        "chars": 121,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac": {
+      "page": 18,
+      "paragraph": 7,
+      "block": 6,
+      "source_start": "证。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            159.55035400390625,
+            536.6500244140625,
+            170.00035095214844
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m161",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:16bd8e3286e0fa9abc0741221f2a78d5d962acffb43106a7ba10542af8330a3c",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+            "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+            "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:16bd8e3286e0fa9abc0741221f2a78d5d962acffb43106a7ba10542af8330a3c",
+          "kind": "native_continuity",
+          "member_count": 3
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:3a1bea6336507341b65fa72b3f8dd6920055bcebd6a8ce6304508f1ed60092f8",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_description_unknown"
+        ],
+        "chars": 98,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e": {
+      "page": 18,
+      "paragraph": 6,
+      "block": 5,
+      "source_start": "公司于2023 年底付运Micro-LED 应用的设备样机Preciomo Udx 至国内领先客户开展生产验",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            110.87999725341797,
+            137.49630737304688,
+            531.484130859375,
+            151.20669555664062
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m161",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:16bd8e3286e0fa9abc0741221f2a78d5d962acffb43106a7ba10542af8330a3c",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+            "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+            "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:16bd8e3286e0fa9abc0741221f2a78d5d962acffb43106a7ba10542af8330a3c",
+          "kind": "native_continuity",
+          "member_count": 3
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:3a1bea6336507341b65fa72b3f8dd6920055bcebd6a8ce6304508f1ed60092f8",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_description_unknown"
+        ],
+        "chars": 98,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b": {
+      "page": 18,
+      "paragraph": 32,
+      "block": 22,
+      "source_start": "下半年将结合客户反馈意见，加快产品开发，",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            484.7773132324219,
+            536.6500244140625,
+            498.4877014160156
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m170",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:efa464d0a4abf459c12ca68824b7475392f86ca7c4663353d3260b0d3f708911",
+            "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+            "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+            "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+            "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:4a4ad804fa266933ae2beae0eabe585755db25b68305ada33d4ee7dbc73b5c93",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_description_unknown"
+        ],
+        "chars": 113,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2": {
+      "page": 18,
+      "paragraph": 37,
+      "block": 26,
+      "source_start": "公司用于先进封装等离子体切割的Primo Matrix 即将发往国内",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s49",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            584.6173095703125,
+            521.8883056640625,
+            598.3276977539062
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m172",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+            "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+            "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+            "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+            "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+            "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "kind": "native_continuity",
+          "member_count": 6
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:848968a5696a6ab39ecfbda4c6a194b7e352933d12cc871155e7d3e40e5081da",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:d8379a4814780ca5c16704f21be40fefeae612a8fe36384d409c82f1f55a94a9"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_state_unknown"
+        ],
+        "chars": 170,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031": {
+      "page": 18,
+      "paragraph": 31,
+      "block": 22,
+      "source_start": "专用MOCVD 设备的开发，实验室已取得良好进展。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            484.7773132324219,
+            536.6500244140625,
+            498.4877014160156
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m169",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:efa464d0a4abf459c12ca68824b7475392f86ca7c4663353d3260b0d3f708911",
+            "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+            "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+            "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+            "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:4a4ad804fa266933ae2beae0eabe585755db25b68305ada33d4ee7dbc73b5c93",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_description_unknown"
+        ],
+        "chars": 113,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696": {
+      "page": 13,
+      "paragraph": 18,
+      "block": 14,
+      "source_start": "目前公司的五十多种设备产品已经覆盖了超30%前道集成电路设备产品，未来五年，公司将通",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 2,
+        "section_role": "operating_metrics",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s43",
+        "profile_role": "operating_metrics",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            321.3373107910156,
+            521.0419921875,
+            335.0476989746094
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m110",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:0b90aa9f138e7b284d0df8e05baf78df552408aad3848f9d73f398559d573dfc",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+            "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+            "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:0b90aa9f138e7b284d0df8e05baf78df552408aad3848f9d73f398559d573dfc",
+          "kind": "native_continuity",
+          "member_count": 3
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:1ea9d2e4c8a511acd8718a507d19a5d9e4f26f21f5c585dcbec2ef341b07b6e1",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 2,
+        "topics": [
+          "operating_metrics"
+        ],
+        "context_only": false,
+        "value_band": "description",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:f03d1ac765caf68284d828d470b844ea623ecca35d4abc8d0d95876a8b033c60"
+        ]
+      },
+      "packing_item": {
+        "priority": 2,
+        "topics": [
+          "operating_metrics"
+        ],
+        "value_band": "description",
+        "context_only": false,
+        "score": 0,
+        "reason_codes": [
+          "reading_plan"
+        ],
+        "chars": 110,
+        "required_count": 1
+      },
+      "selected": false,
+      "packing_diagnostics": [
+        {
+          "reason": "budget_full",
+          "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:1ea9d2e4c8a511acd8718a507d19a5d9e4f26f21f5c585dcbec2ef341b07b6e1",
+          "item_count": 1
+        }
+      ]
+    },
+    "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0": {
+      "page": 18,
+      "paragraph": 24,
+      "block": 17,
+      "source_start": "延设备已进入国内头部企业进行生产验证，并取得了重复订单。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            384.1893615722656,
+            383.7600402832031,
+            394.63934326171875
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m167",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:b595d241bbe4f8ef0e872eeb6aff90ee1c2a644cb01f923b3615d6b369784542",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:93b8e30ec529bab4a5be6e2379c8928023d4a1938643b77750df273dad06e24c",
+            "urn:company-wiki:narrative-unit:sha256:12a6013b0fde7c7600f15bc4a715e520dbd8811920652b513087525c02f42d85",
+            "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4",
+            "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:b595d241bbe4f8ef0e872eeb6aff90ee1c2a644cb01f923b3615d6b369784542",
+          "kind": "native_continuity",
+          "member_count": 4
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:b971795bc52133e11c2041f401a63396e0b2fb3e40bcf0135b9a7c1b94dd129a",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_other_party_state"
+        ],
+        "chars": 113,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4": {
+      "page": 13,
+      "paragraph": 4,
+      "block": 4,
+      "source_start": "同时，公司于报告期内完成对众硅公司控股权的收购，完成了对化学机械抛光（CMP）设",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 2,
+        "section_role": "operating_metrics",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s43",
+        "profile_role": "operating_metrics",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            110.87999725341797,
+            117.09629821777344,
+            521.4098510742188,
+            130.80670166015625
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m106",
+          "kind": "paragraph_event",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:bd594256eb5ad4d8ce0b87bc16e3f008f8a933f8061c3efea7c7ced7642f1b54",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4",
+            "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386",
+            "urn:company-wiki:narrative-unit:sha256:e0ce23d300b92d6894c0f68318299381a28f3d31c52b7ced2bf7f82435fb9001",
+            "urn:company-wiki:narrative-unit:sha256:b6975d8f9bf367c03d8ad677da27dc8075683fbc232a77d2c06c6c14d5a34dee",
+            "urn:company-wiki:narrative-unit:sha256:93006f15ca152aade6c78c8859b859419e0fe2b1683c97bde8cb160ea5cb883b"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:bd594256eb5ad4d8ce0b87bc16e3f008f8a933f8061c3efea7c7ced7642f1b54",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:3b8a42327f71a0f239ffc1f60c3f5c1ec028f7ffeb98852b8fc8cd31c0752ea1",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 2,
+        "topics": [
+          "new_business",
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:f03d1ac765caf68284d828d470b844ea623ecca35d4abc8d0d95876a8b033c60"
+        ]
+      },
+      "packing_item": {
+        "priority": 2,
+        "topics": [
+          "new_business",
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "corporate_development",
+          "operating_description_unknown"
+        ],
+        "chars": 131,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12": {
+      "page": 18,
+      "paragraph": 14,
+      "block": 10,
+      "source_start": "于2022 年推出",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            239.7373046875,
+            525.4892578125,
+            253.44769287109375
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m164",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:6bc39e44e07879a7ba5c1a5f97d98d603dbc334cd3e30924fb59bb983e3aea81",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+            "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+            "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79",
+            "urn:company-wiki:narrative-unit:sha256:4e42beb49c6ddecc93e09a6eabdaf89adb50a5662e5f7b75041e14fbdc3c2101",
+            "urn:company-wiki:narrative-unit:sha256:56d285259bcf47eb21259c56aa82af49c3419d354e0243c4ce82b5bfe7cbfb26"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:6bc39e44e07879a7ba5c1a5f97d98d603dbc334cd3e30924fb59bb983e3aea81",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:9558b28e80dd6748c8bc4767b60ff01c411f593db049740c6dc3ed2aab500fe0",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business",
+          "capacity_projects"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business",
+          "capacity_projects"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 6,
+        "reason_codes": [
+          "reading_plan",
+          "operating_mechanism",
+          "operating_state_unknown"
+        ],
+        "chars": 121,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4": {
+      "page": 18,
+      "paragraph": 23,
+      "block": 16,
+      "source_start": "目前，该新型8 寸碳化硅外",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            362.2572937011719,
+            530.7691040039062,
+            375.9676818847656
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m167",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:b595d241bbe4f8ef0e872eeb6aff90ee1c2a644cb01f923b3615d6b369784542",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:93b8e30ec529bab4a5be6e2379c8928023d4a1938643b77750df273dad06e24c",
+            "urn:company-wiki:narrative-unit:sha256:12a6013b0fde7c7600f15bc4a715e520dbd8811920652b513087525c02f42d85",
+            "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4",
+            "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:b595d241bbe4f8ef0e872eeb6aff90ee1c2a644cb01f923b3615d6b369784542",
+          "kind": "native_continuity",
+          "member_count": 4
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:b971795bc52133e11c2041f401a63396e0b2fb3e40bcf0135b9a7c1b94dd129a",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_other_party_state"
+        ],
+        "chars": 113,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6": {
+      "page": 18,
+      "paragraph": 33,
+      "block": 23,
+      "source_start": "尽早付运样机至客户端开展生产验证。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s48",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            506.7103576660156,
+            268.3240051269531,
+            517.1603393554688
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m170",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:efa464d0a4abf459c12ca68824b7475392f86ca7c4663353d3260b0d3f708911",
+            "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+            "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+            "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+            "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:4a4ad804fa266933ae2beae0eabe585755db25b68305ada33d4ee7dbc73b5c93",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:83f756ba9ac9e54f38cc6d498fc345075c435d0c1d888d1cbfec38e97999337a"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_description_unknown"
+        ],
+        "chars": 113,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc": {
+      "page": 18,
+      "paragraph": 35,
+      "block": 25,
+      "source_start": "报告期内，公司用于2.5D、SoIC WoW 及高深宽比深槽电容刻蚀的Primo TSV 300E 产品持",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s49",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            110.87999725341797,
+            564.21728515625,
+            526.6892700195312,
+            577.9276733398438
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m171",
+          "kind": "paragraph_event",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+            "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+            "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+            "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+            "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+            "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "kind": "native_continuity",
+          "member_count": 6
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:848968a5696a6ab39ecfbda4c6a194b7e352933d12cc871155e7d3e40e5081da",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:d8379a4814780ca5c16704f21be40fefeae612a8fe36384d409c82f1f55a94a9"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_state_unknown"
+        ],
+        "chars": 170,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5": {
+      "page": 13,
+      "paragraph": 19,
+      "block": 15,
+      "source_start": "过自主开发与外延并购，覆盖60%以上的集成电路高端设备市场和70%以上的先进封装设备市",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 2,
+        "section_role": "operating_metrics",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s43",
+        "profile_role": "operating_metrics",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            341.7373046875,
+            521.8867797851562,
+            355.44769287109375
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m110",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:0b90aa9f138e7b284d0df8e05baf78df552408aad3848f9d73f398559d573dfc",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+            "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+            "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:0b90aa9f138e7b284d0df8e05baf78df552408aad3848f9d73f398559d573dfc",
+          "kind": "native_continuity",
+          "member_count": 3
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:1ea9d2e4c8a511acd8718a507d19a5d9e4f26f21f5c585dcbec2ef341b07b6e1",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 2,
+        "topics": [
+          "operating_metrics"
+        ],
+        "context_only": false,
+        "value_band": "description",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:f03d1ac765caf68284d828d470b844ea623ecca35d4abc8d0d95876a8b033c60"
+        ]
+      },
+      "packing_item": {
+        "priority": 2,
+        "topics": [
+          "operating_metrics"
+        ],
+        "value_band": "description",
+        "context_only": false,
+        "score": 0,
+        "reason_codes": [
+          "reading_plan"
+        ],
+        "chars": 110,
+        "required_count": 1
+      },
+      "selected": false,
+      "packing_diagnostics": [
+        {
+          "reason": "budget_full",
+          "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:1ea9d2e4c8a511acd8718a507d19a5d9e4f26f21f5c585dcbec2ef341b07b6e1",
+          "item_count": 1
+        }
+      ]
+    },
+    "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386": {
+      "page": 13,
+      "paragraph": 5,
+      "block": 5,
+      "source_start": "备的覆盖，实现从“干法”向“干法+湿法”整体解决方案的关键跨越。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 2,
+        "section_role": "operating_metrics",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s43",
+        "profile_role": "operating_metrics",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            137.49630737304688,
+            526.0822143554688,
+            151.20669555664062
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m106",
+          "kind": "paragraph_event",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:bd594256eb5ad4d8ce0b87bc16e3f008f8a933f8061c3efea7c7ced7642f1b54",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4",
+            "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386",
+            "urn:company-wiki:narrative-unit:sha256:e0ce23d300b92d6894c0f68318299381a28f3d31c52b7ced2bf7f82435fb9001",
+            "urn:company-wiki:narrative-unit:sha256:b6975d8f9bf367c03d8ad677da27dc8075683fbc232a77d2c06c6c14d5a34dee",
+            "urn:company-wiki:narrative-unit:sha256:93006f15ca152aade6c78c8859b859419e0fe2b1683c97bde8cb160ea5cb883b"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:bd594256eb5ad4d8ce0b87bc16e3f008f8a933f8061c3efea7c7ced7642f1b54",
+          "kind": "native_continuity",
+          "member_count": 5
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:3b8a42327f71a0f239ffc1f60c3f5c1ec028f7ffeb98852b8fc8cd31c0752ea1",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 2,
+        "topics": [
+          "new_business",
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:f03d1ac765caf68284d828d470b844ea623ecca35d4abc8d0d95876a8b033c60"
+        ]
+      },
+      "packing_item": {
+        "priority": 2,
+        "topics": [
+          "new_business",
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "corporate_development",
+          "operating_description_unknown"
+        ],
+        "chars": 131,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c": {
+      "page": 18,
+      "paragraph": 38,
+      "block": 27,
+      "source_start": "头部客户产线验证。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s49",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            605.017333984375,
+            513.7244873046875,
+            618.7277221679688
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m172",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+            "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+            "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+            "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+            "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+            "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "kind": "native_continuity",
+          "member_count": 6
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:848968a5696a6ab39ecfbda4c6a194b7e352933d12cc871155e7d3e40e5081da",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:d8379a4814780ca5c16704f21be40fefeae612a8fe36384d409c82f1f55a94a9"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_state_unknown"
+        ],
+        "chars": 170,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa": {
+      "page": 18,
+      "paragraph": 39,
+      "block": 27,
+      "source_start": "同时，先进封装所用的第三代TSV 刻蚀机研发顺利，获得优良的工艺结",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s49",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            605.017333984375,
+            513.7244873046875,
+            618.7277221679688
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m173",
+          "kind": "paragraph_event",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+            "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+            "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+            "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+            "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+            "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "kind": "native_continuity",
+          "member_count": 6
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:848968a5696a6ab39ecfbda4c6a194b7e352933d12cc871155e7d3e40e5081da",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:d8379a4814780ca5c16704f21be40fefeae612a8fe36384d409c82f1f55a94a9"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_state_unknown"
+        ],
+        "chars": 170,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d": {
+      "page": 13,
+      "paragraph": 20,
+      "block": 16,
+      "source_start": "场，在规模上成为全球领先的高端设备平台型公司。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 2,
+        "section_role": "operating_metrics",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s43",
+        "profile_role": "operating_metrics",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            363.79034423828125,
+            331.32171630859375,
+            374.2403259277344
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m110",
+          "kind": "background",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:0b90aa9f138e7b284d0df8e05baf78df552408aad3848f9d73f398559d573dfc",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+            "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+            "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:0b90aa9f138e7b284d0df8e05baf78df552408aad3848f9d73f398559d573dfc",
+          "kind": "native_continuity",
+          "member_count": 3
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:1ea9d2e4c8a511acd8718a507d19a5d9e4f26f21f5c585dcbec2ef341b07b6e1",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 2,
+        "topics": [
+          "operating_metrics"
+        ],
+        "context_only": false,
+        "value_band": "description",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:f03d1ac765caf68284d828d470b844ea623ecca35d4abc8d0d95876a8b033c60"
+        ]
+      },
+      "packing_item": {
+        "priority": 2,
+        "topics": [
+          "operating_metrics"
+        ],
+        "value_band": "description",
+        "context_only": false,
+        "score": 0,
+        "reason_codes": [
+          "reading_plan"
+        ],
+        "chars": 110,
+        "required_count": 1
+      },
+      "selected": false,
+      "packing_diagnostics": [
+        {
+          "reason": "budget_full",
+          "bundle_key": "item:urn:company-wiki:narrative-unit:sha256:1ea9d2e4c8a511acd8718a507d19a5d9e4f26f21f5c585dcbec2ef341b07b6e1",
+          "item_count": 1
+        }
+      ]
+    },
+    "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738": {
+      "page": 18,
+      "paragraph": 36,
+      "block": 26,
+      "source_start": "续服务客户，并获得重复订单。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s49",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            584.6173095703125,
+            521.8883056640625,
+            598.3276977539062
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m171",
+          "kind": "paragraph_event",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+            "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+            "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+            "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+            "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+            "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "kind": "native_continuity",
+          "member_count": 6
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:848968a5696a6ab39ecfbda4c6a194b7e352933d12cc871155e7d3e40e5081da",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:d8379a4814780ca5c16704f21be40fefeae612a8fe36384d409c82f1f55a94a9"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_state_unknown"
+        ],
+        "chars": 170,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    },
+    "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0": {
+      "page": 18,
+      "paragraph": 40,
+      "block": 28,
+      "source_start": "果，并且已得到多家客户订单，即将发往客户端验证。",
+      "canonical_kind": "pdf_text_block",
+      "actual_kind": "paragraph",
+      "excluded": false,
+      "actual_profile": {
+        "priority": 1,
+        "section_role": "management_discussion",
+        "reading_profile_key": null
+      },
+      "native_validation": {
+        "accepted": true,
+        "actual_kind": "paragraph",
+        "role": "company_filing",
+        "heading": false,
+        "table_id": null,
+        "section": "s49",
+        "profile_role": "management_discussion",
+        "profile_key": null,
+        "layout": {
+          "coordinate_frame": "dict",
+          "rotation": 0,
+          "column": null,
+          "bbox": [
+            89.87999725341797,
+            626.9503173828125,
+            341.7615661621094,
+            637.4003295898438
+          ],
+          "font_size": 10.449999809265137,
+          "font_weight": "regular"
+        }
+      },
+      "font_validation": {
+        "actual_font": [
+          10.449999809265137,
+          "regular"
+        ],
+        "runs": 1
+      },
+      "initial_packages": [
+        {
+          "id": "m173",
+          "kind": "paragraph_event",
+          "truncated": false
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "member_ids": [
+            "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+            "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+            "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+            "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+            "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+            "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+          ]
+        }
+      ],
+      "continuity_blocked": false,
+      "expanded_packages": [
+        {
+          "id": "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e",
+          "kind": "native_continuity",
+          "member_count": 6
+        }
+      ],
+      "carrier": "urn:company-wiki:narrative-unit:sha256:848968a5696a6ab39ecfbda4c6a194b7e352933d12cc871155e7d3e40e5081da",
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:d8379a4814780ca5c16704f21be40fefeae612a8fe36384d409c82f1f55a94a9"
+        ]
+      },
+      "packing_item": {
+        "priority": 1,
+        "topics": [
+          "core_business"
+        ],
+        "value_band": "meaningful_fact",
+        "context_only": false,
+        "score": 3,
+        "reason_codes": [
+          "reading_plan",
+          "operating_state_unknown"
+        ],
+        "chars": 170,
+        "required_count": 1
+      },
+      "selected": true,
+      "packing_diagnostics": []
+    }
+  },
+  "native_edges": [
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:734da785c1bab83268539d463afdfa72358c86ef415f60b8dbf9ed2a91d7f60f",
+      "right": "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4",
+      "accepted": false,
+      "observed_failed_checks": [
+        "left_terminal",
+        "overlap"
+      ],
+      "blocks": [
+        3,
+        4
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4",
+      "right": "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        4,
+        5
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386",
+      "right": "urn:company-wiki:narrative-unit:sha256:e0ce23d300b92d6894c0f68318299381a28f3d31c52b7ced2bf7f82435fb9001",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        5,
+        5
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:edfc50d33e753376241393528ffe986009fed57cf9b2d18c1ddec6e4d342e953",
+      "right": "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+      "accepted": false,
+      "observed_failed_checks": [
+        "left_terminal"
+      ],
+      "blocks": [
+        13,
+        14
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+      "right": "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        14,
+        15
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+      "right": "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        15,
+        16
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d",
+      "right": "urn:company-wiki:narrative-unit:sha256:e6af0221b98d7e48518d8ba83845f1ecb63b07228152939443f54caa0bab3cb6",
+      "accepted": false,
+      "observed_failed_checks": [
+        "left_terminal",
+        "block_gap",
+        "vertical_gap"
+      ],
+      "blocks": [
+        16,
+        18
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:9d41e30efc85fe9f3f27e5e2c0bad8147ec87bdd8cbb47c93696f8e85b12ee93",
+      "right": "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+      "accepted": false,
+      "observed_failed_checks": [
+        "left_terminal",
+        "overlap"
+      ],
+      "blocks": [
+        4,
+        5
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+      "right": "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        5,
+        6
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+      "right": "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        6,
+        6
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa",
+      "right": "urn:company-wiki:narrative-unit:sha256:b8f91fc11616fcf358eadc98d79012b94054f11ea56fc69fa5d5544b4c52866d",
+      "accepted": false,
+      "observed_failed_checks": [
+        "left_terminal"
+      ],
+      "blocks": [
+        6,
+        7
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:ead1cb834a085b1ab86581fa2678a0303d4d20e16d8d6347197ff3b85ca07284",
+      "right": "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        10,
+        10
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+      "right": "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        10,
+        11
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+      "right": "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        11,
+        12
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79",
+      "right": "urn:company-wiki:narrative-unit:sha256:4e42beb49c6ddecc93e09a6eabdaf89adb50a5662e5f7b75041e14fbdc3c2101",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        12,
+        12
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:12a6013b0fde7c7600f15bc4a715e520dbd8811920652b513087525c02f42d85",
+      "right": "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        16,
+        16
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4",
+      "right": "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        16,
+        17
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0",
+      "right": "urn:company-wiki:narrative-unit:sha256:0ead66c4ea52d516f6e81802441a831f43061b337f41bd69b7b5b0607ad42ab2",
+      "accepted": false,
+      "observed_failed_checks": [
+        "left_terminal"
+      ],
+      "blocks": [
+        17,
+        18
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:efa464d0a4abf459c12ca68824b7475392f86ca7c4663353d3260b0d3f708911",
+      "right": "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        20,
+        21
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+      "right": "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        21,
+        22
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+      "right": "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        22,
+        22
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+      "right": "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        22,
+        23
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+      "right": "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        25,
+        26
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+      "right": "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        26,
+        26
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+      "right": "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        26,
+        27
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+      "right": "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        27,
+        27
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+      "right": "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0",
+      "accepted": true,
+      "observed_failed_checks": [],
+      "blocks": [
+        27,
+        28
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    },
+    {
+      "left": "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0",
+      "right": "urn:company-wiki:narrative-unit:sha256:2f72a8f3fcfefe29c661594efc3ba01cabebaf8ca7f1decfe30973417017fe54",
+      "accepted": false,
+      "observed_failed_checks": [
+        "left_terminal"
+      ],
+      "blocks": [
+        28,
+        29
+      ],
+      "fonts": [
+        [
+          10.449999809265137,
+          "regular"
+        ],
+        [
+          10.449999809265137,
+          "regular"
+        ]
+      ],
+      "columns": [
+        null,
+        null
+      ]
+    }
+  ],
+  "native_finish_calls": [
+    {
+      "target_ids": [
+        "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4",
+        "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386"
+      ],
+      "run_ids": [
+        "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4",
+        "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386",
+        "urn:company-wiki:narrative-unit:sha256:e0ce23d300b92d6894c0f68318299381a28f3d31c52b7ced2bf7f82435fb9001",
+        "urn:company-wiki:narrative-unit:sha256:b6975d8f9bf367c03d8ad677da27dc8075683fbc232a77d2c06c6c14d5a34dee",
+        "urn:company-wiki:narrative-unit:sha256:93006f15ca152aade6c78c8859b859419e0fe2b1683c97bde8cb160ea5cb883b",
+        "urn:company-wiki:narrative-unit:sha256:4666776fb7c1a58d6a59b22c5322e0c02b34690769319ccd74f483485e66042c",
+        "urn:company-wiki:narrative-unit:sha256:5558b18e6e84ac2a39295df0002e1e7757478148957adc173a89975d5c6f67de",
+        "urn:company-wiki:narrative-unit:sha256:bb7400e81bfdcd766261e4603da612ebfb4b569c46fa63a96aab6787ac116b27"
+      ],
+      "run_size": 8,
+      "diagnostics_added": {},
+      "window_ids": [
+        "native-continuity:bd594256eb5ad4d8ce0b87bc16e3f008f8a933f8061c3efea7c7ced7642f1b54",
+        "native-continuity:96c49e898a1b54ed13ad1aeb85cd32df749dbc84de52fd11000d097de308fd48"
+      ],
+      "terminal_last": true
+    },
+    {
+      "target_ids": [
+        "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+        "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+        "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d"
+      ],
+      "run_ids": [
+        "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+        "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+        "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d"
+      ],
+      "run_size": 3,
+      "diagnostics_added": {},
+      "window_ids": [
+        "native-continuity:0b90aa9f138e7b284d0df8e05baf78df552408aad3848f9d73f398559d573dfc"
+      ],
+      "terminal_last": true
+    },
+    {
+      "target_ids": [
+        "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+        "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+        "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa"
+      ],
+      "run_ids": [
+        "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+        "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+        "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa"
+      ],
+      "run_size": 3,
+      "diagnostics_added": {},
+      "window_ids": [
+        "native-continuity:16bd8e3286e0fa9abc0741221f2a78d5d962acffb43106a7ba10542af8330a3c"
+      ],
+      "terminal_last": true
+    },
+    {
+      "target_ids": [
+        "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+        "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+        "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79"
+      ],
+      "run_ids": [
+        "urn:company-wiki:narrative-unit:sha256:e18f1d8268d08f71bbe392e2905bf3714bd5807ab35ddcef384b1eab66ddd2d7",
+        "urn:company-wiki:narrative-unit:sha256:96028802566e305cff0b29568faec1764e8aaf6242e1850ead2fe2e20b48f391",
+        "urn:company-wiki:narrative-unit:sha256:34c849867d8d045a35a70b3ef275b8f683bd446f7d3ca0dfa955bc4b54b146d2",
+        "urn:company-wiki:narrative-unit:sha256:ead1cb834a085b1ab86581fa2678a0303d4d20e16d8d6347197ff3b85ca07284",
+        "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+        "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+        "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79",
+        "urn:company-wiki:narrative-unit:sha256:4e42beb49c6ddecc93e09a6eabdaf89adb50a5662e5f7b75041e14fbdc3c2101",
+        "urn:company-wiki:narrative-unit:sha256:56d285259bcf47eb21259c56aa82af49c3419d354e0243c4ce82b5bfe7cbfb26",
+        "urn:company-wiki:narrative-unit:sha256:75d7bf526915c2237789a1041bfd509a135b4f919d87c776e472f6d1bce91f7a",
+        "urn:company-wiki:narrative-unit:sha256:a3c577acf9000cf01e5b47def473ea4b30078db1af034f180487844e159ed920"
+      ],
+      "run_size": 11,
+      "diagnostics_added": {},
+      "window_ids": [
+        "native-continuity:d653465e20e61a841c18230c8cfd261394a275a04a34650e03af5a993e36158f",
+        "native-continuity:6bc39e44e07879a7ba5c1a5f97d98d603dbc334cd3e30924fb59bb983e3aea81",
+        "native-continuity:de01b855dd29139b2271c3656b84fc03d79b090bc8a506de368d4762c7317fa2"
+      ],
+      "terminal_last": true
+    },
+    {
+      "target_ids": [
+        "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4",
+        "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0"
+      ],
+      "run_ids": [
+        "urn:company-wiki:narrative-unit:sha256:93b8e30ec529bab4a5be6e2379c8928023d4a1938643b77750df273dad06e24c",
+        "urn:company-wiki:narrative-unit:sha256:12a6013b0fde7c7600f15bc4a715e520dbd8811920652b513087525c02f42d85",
+        "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4",
+        "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0"
+      ],
+      "run_size": 4,
+      "diagnostics_added": {},
+      "window_ids": [
+        "native-continuity:b595d241bbe4f8ef0e872eeb6aff90ee1c2a644cb01f923b3615d6b369784542"
+      ],
+      "terminal_last": true
+    },
+    {
+      "target_ids": [
+        "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+        "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+        "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+        "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6"
+      ],
+      "run_ids": [
+        "urn:company-wiki:narrative-unit:sha256:0ead66c4ea52d516f6e81802441a831f43061b337f41bd69b7b5b0607ad42ab2",
+        "urn:company-wiki:narrative-unit:sha256:cbc5d61f381532da60710a475a179ad54dcd913ab3c406846777adbc145cbc76",
+        "urn:company-wiki:narrative-unit:sha256:999887d0f090e7b67d35865945c774ec8632e6c31a2630f2668adf84c9c4a022",
+        "urn:company-wiki:narrative-unit:sha256:0b93a60368fd00c748e833a850c5a14f7c8ac24b34c88ba11d1d0aaba4332154",
+        "urn:company-wiki:narrative-unit:sha256:efa464d0a4abf459c12ca68824b7475392f86ca7c4663353d3260b0d3f708911",
+        "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+        "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+        "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+        "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6"
+      ],
+      "run_size": 9,
+      "diagnostics_added": {},
+      "window_ids": [
+        "native-continuity:cae0c4db07d4a45ae562380b935bb6cc5cee3d6a073ea62e61e4ae9ad96abf69",
+        "native-continuity:6a3784cd8397b117608bb2705d082a33982a3ac56f01485ca1e7fa74acb480a0"
+      ],
+      "terminal_last": true
+    },
+    {
+      "target_ids": [
+        "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+        "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+        "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+        "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+        "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+        "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+      ],
+      "run_ids": [
+        "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+        "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+        "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+        "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+        "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+        "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+      ],
+      "run_size": 6,
+      "diagnostics_added": {},
+      "window_ids": [
+        "native-continuity:da1325a94cd533a84064ce37faa06c92951b14dcb624014e0108e97d41526a9e"
+      ],
+      "terminal_last": true
+    }
+  ],
+  "actual_admissions": [
+    {
+      "carrier": "urn:company-wiki:narrative-unit:sha256:3a1bea6336507341b65fa72b3f8dd6920055bcebd6a8ce6304508f1ed60092f8",
+      "source_ids": [
+        "urn:company-wiki:narrative-unit:sha256:4112f5093927d53ac0b8623f8ea3e529b7fbf15a229ef8d310446d8c91c2242e",
+        "urn:company-wiki:narrative-unit:sha256:fe89c6b1054b5ad890ec8abd8ec6a11efd384f29a9ee5d727514316b4415b5ac",
+        "urn:company-wiki:narrative-unit:sha256:c64e727e1e93b28e8bc2b4097d2a80b2a027b7ea7607ac5551e8d04a46c1cbaa"
+      ],
+      "kind": "native_continuity",
+      "admitted": true,
+      "role": "management_discussion",
+      "priority": 1,
+      "financial_only": false,
+      "is_heading": false,
+      "fact": {
+        "eligible": true,
+        "score": 3,
+        "reasons": [
+          "operating_description_unknown"
+        ],
+        "topics": [
+          "core_business"
+        ]
+      }
+    },
+    {
+      "carrier": "urn:company-wiki:narrative-unit:sha256:9558b28e80dd6748c8bc4767b60ff01c411f593db049740c6dc3ed2aab500fe0",
+      "source_ids": [
+        "urn:company-wiki:narrative-unit:sha256:6397a3069373f611fd6043463c6a06030d36cfeab03a8a52eb12fd7eb8528c12",
+        "urn:company-wiki:narrative-unit:sha256:ed6c77dce950dcea14c25b2193424c68e41b10147d6a46609be12a810e30bce2",
+        "urn:company-wiki:narrative-unit:sha256:e43677ae03864a74e50b0a090f0de69ad5c926cedaa0a62ffe5f9432e8e82d79",
+        "urn:company-wiki:narrative-unit:sha256:4e42beb49c6ddecc93e09a6eabdaf89adb50a5662e5f7b75041e14fbdc3c2101",
+        "urn:company-wiki:narrative-unit:sha256:56d285259bcf47eb21259c56aa82af49c3419d354e0243c4ce82b5bfe7cbfb26"
+      ],
+      "kind": "native_continuity",
+      "admitted": true,
+      "role": "management_discussion",
+      "priority": 1,
+      "financial_only": false,
+      "is_heading": false,
+      "fact": {
+        "eligible": true,
+        "score": 6,
+        "reasons": [
+          "operating_mechanism",
+          "operating_state_unknown"
+        ],
+        "topics": [
+          "core_business",
+          "capacity_projects"
+        ]
+      }
+    },
+    {
+      "carrier": "urn:company-wiki:narrative-unit:sha256:b971795bc52133e11c2041f401a63396e0b2fb3e40bcf0135b9a7c1b94dd129a",
+      "source_ids": [
+        "urn:company-wiki:narrative-unit:sha256:93b8e30ec529bab4a5be6e2379c8928023d4a1938643b77750df273dad06e24c",
+        "urn:company-wiki:narrative-unit:sha256:12a6013b0fde7c7600f15bc4a715e520dbd8811920652b513087525c02f42d85",
+        "urn:company-wiki:narrative-unit:sha256:d27f153710246121b97f989f6fae90138257658b1e08feb40b580ed987452ef4",
+        "urn:company-wiki:narrative-unit:sha256:c0050d8501bdb808c04e156ad7143fadb101726b937ab0d7770f3b3db114b5c0"
+      ],
+      "kind": "native_continuity",
+      "admitted": true,
+      "role": "management_discussion",
+      "priority": 1,
+      "financial_only": false,
+      "is_heading": false,
+      "fact": {
+        "eligible": true,
+        "score": 3,
+        "reasons": [
+          "operating_other_party_state"
+        ],
+        "topics": [
+          "core_business"
+        ]
+      }
+    },
+    {
+      "carrier": "urn:company-wiki:narrative-unit:sha256:4a4ad804fa266933ae2beae0eabe585755db25b68305ada33d4ee7dbc73b5c93",
+      "source_ids": [
+        "urn:company-wiki:narrative-unit:sha256:efa464d0a4abf459c12ca68824b7475392f86ca7c4663353d3260b0d3f708911",
+        "urn:company-wiki:narrative-unit:sha256:96adf0289d45977e8b25160b08f099cce0822889152281d467a99987ff7cd71a",
+        "urn:company-wiki:narrative-unit:sha256:956914ec9cbba28b2e93dca51e68e5b70889cc59309efea7d3f57d50de9b6031",
+        "urn:company-wiki:narrative-unit:sha256:9ac812c10d8d1d52d8af8a440c5aba7a15aec642fea667da2b0aa813e919dd2b",
+        "urn:company-wiki:narrative-unit:sha256:8a749fc5aea3f6b716857ab55dda13e993546a62345e2495743f6f963edcbdf6"
+      ],
+      "kind": "native_continuity",
+      "admitted": true,
+      "role": "management_discussion",
+      "priority": 1,
+      "financial_only": false,
+      "is_heading": false,
+      "fact": {
+        "eligible": true,
+        "score": 3,
+        "reasons": [
+          "operating_description_unknown"
+        ],
+        "topics": [
+          "core_business"
+        ]
+      }
+    },
+    {
+      "carrier": "urn:company-wiki:narrative-unit:sha256:848968a5696a6ab39ecfbda4c6a194b7e352933d12cc871155e7d3e40e5081da",
+      "source_ids": [
+        "urn:company-wiki:narrative-unit:sha256:cc090ec07293a495e860377e681428bef731aea79c11c73131ed29b118e78cbc",
+        "urn:company-wiki:narrative-unit:sha256:8d982e24b423ca61797a7376674b8937f390d052af6b50bd4f188c52b0d22738",
+        "urn:company-wiki:narrative-unit:sha256:95c1ba9153ef7ac0b16300cbb14e3fd838b2ac25ec301cebd642f47db12ee5f2",
+        "urn:company-wiki:narrative-unit:sha256:7af4c298084df04f68a0dc16312f52e35d1e5e60fdcaa2263f5d1228787e334c",
+        "urn:company-wiki:narrative-unit:sha256:cd1781d8d92cb525d021da540e69d8671849c1f6e229f10122750a2ec65a2efa",
+        "urn:company-wiki:narrative-unit:sha256:34ce86e29213bf98ec517e41ef4c336c72c3791bbfa89bd75f8de7c270e310a0"
+      ],
+      "kind": "native_continuity",
+      "admitted": true,
+      "role": "management_discussion",
+      "priority": 1,
+      "financial_only": false,
+      "is_heading": false,
+      "fact": {
+        "eligible": true,
+        "score": 3,
+        "reasons": [
+          "operating_state_unknown"
+        ],
+        "topics": [
+          "core_business"
+        ]
+      }
+    },
+    {
+      "carrier": "urn:company-wiki:narrative-unit:sha256:3b8a42327f71a0f239ffc1f60c3f5c1ec028f7ffeb98852b8fc8cd31c0752ea1",
+      "source_ids": [
+        "urn:company-wiki:narrative-unit:sha256:68f0a3fb0ff5c3478cc1855411f261ebc1f9e87ab55be1af3ed04a9fcce157e4",
+        "urn:company-wiki:narrative-unit:sha256:3df74f8c1c1d7cac74b7a86c3d0f98a9c4bf689688abf43cfb732c23cf992386",
+        "urn:company-wiki:narrative-unit:sha256:e0ce23d300b92d6894c0f68318299381a28f3d31c52b7ced2bf7f82435fb9001",
+        "urn:company-wiki:narrative-unit:sha256:b6975d8f9bf367c03d8ad677da27dc8075683fbc232a77d2c06c6c14d5a34dee",
+        "urn:company-wiki:narrative-unit:sha256:93006f15ca152aade6c78c8859b859419e0fe2b1683c97bde8cb160ea5cb883b"
+      ],
+      "kind": "native_continuity",
+      "admitted": true,
+      "role": "operating_metrics",
+      "priority": 2,
+      "financial_only": false,
+      "is_heading": false,
+      "fact": {
+        "eligible": true,
+        "score": 3,
+        "reasons": [
+          "corporate_development",
+          "operating_description_unknown"
+        ],
+        "topics": [
+          "new_business",
+          "core_business"
+        ]
+      }
+    },
+    {
+      "carrier": "urn:company-wiki:narrative-unit:sha256:1ea9d2e4c8a511acd8718a507d19a5d9e4f26f21f5c585dcbec2ef341b07b6e1",
+      "source_ids": [
+        "urn:company-wiki:narrative-unit:sha256:ac5e1351e484a18d3cf1c959694f748c15c57f3e30b2018361b9a5adfb308696",
+        "urn:company-wiki:narrative-unit:sha256:0f436e5c130732a0d04e7ee2be1a61262daa0798b3099d7e2f7f6d833e9339a5",
+        "urn:company-wiki:narrative-unit:sha256:e060b0fef4c268d893916a2ce340866628a10f5d180eb51a0328aa44aef7d50d"
+      ],
+      "kind": "native_continuity",
+      "admitted": true,
+      "role": "operating_metrics",
+      "priority": 2,
+      "financial_only": false,
+      "is_heading": false,
+      "fact": {
+        "eligible": false,
+        "score": 0,
+        "reasons": [],
+        "topics": []
+      }
+    }
+  ],
+  "selected_value_bands": {
+    "description": 27,
+    "meaningful_fact": 69
+  },
+  "selected_priorities": {
+    "2": 32,
+    "1": 64
+  },
+  "packing_reason_counts": {
+    "budget_full": 569
+  },
+  "source_files_sha256": {
+    "src/company_wiki/source_catalog/narrative_evidence.py": "7d3ea360fbc4862dd34dfe55939ca84daea2780f6c31dece06c45fec5d129a08",
+    "src/company_wiki/document_understanding/decision_inventory.py": "36c5002c6f5a7169fa352dfc281a4972976fe0cab2cb95291692477e4f4bedc8",
+    "src/company_wiki/source_catalog/narrative_reading.py": "a61e30673ae8411db7d9f508a4ccdffc66422598572092569bbe6de601a63cb6",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "6df1333188e703f0ae9028c920b9abe6ff3afa56640e784cd983ee14cc7930a0",
+    "src/company_wiki/source_catalog/narrative_budget.py": "44d2a739f4a1db6efcf0aa7fc33bb2227537b03f2659ec430c8220c838ca75b8"
+  }
+}

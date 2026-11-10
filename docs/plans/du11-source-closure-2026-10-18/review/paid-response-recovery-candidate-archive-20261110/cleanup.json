@@ -1,0 +1,18 @@
+{
+  "status": "PLATFORM_REJECTED_NO_DELETE_EXECUTED",
+  "operation": "PowerShell literal-path recursive cleanup of eight owned Temp test basetemps, guarded by absolute Temp prefix and reparse checks",
+  "reason": "exec command creation rejected by policy; no alternate channel used",
+  "temporary_only": true,
+  "originals_copied": 0,
+  "paths": [
+    "du11-paid-response-red",
+    "du11-paid-green2",
+    "du11-paid-e2e",
+    "du11-paid-meta-red",
+    "du11-paid-related",
+    "du11-paid-binding-red",
+    "du11-paid-final-first",
+    "cw-pytest-basetemp/20261018-001805-d22280d4"
+  ],
+  "base": "C:/Users/郑曾波/AppData/Local/Temp"
+}

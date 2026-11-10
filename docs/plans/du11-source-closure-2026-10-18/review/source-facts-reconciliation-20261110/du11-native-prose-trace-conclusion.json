@@ -1,0 +1,37 @@
+{
+  "schema_version": "du11-native-prose-trace-conclusion/1",
+  "trace": "du11-native-prose-all-required-trace.json",
+  "traced_source_revision_sha256": "7d3ea360fbc4862dd34dfe55939ca84daea2780f6c31dece06c45fec5d129a08",
+  "note": "Trace executed before subsequent NFC/style-only repair; never claim latest sourceSHA real-summary acceptance.",
+  "missing_fact_ids": [
+    "f-five-year-target-is-plan",
+    "f-current-coverage-30"
+  ],
+  "actual_causal_chain": {
+    "source": "Both quotes are in one actual paragraph across physical native blocks14/15/16, three original units.",
+    "continuity": "All3 native accepted, both edges accepted, same section/font/frame, no column mismatch, window3 units terminal complete; not excluded/blocked.",
+    "carrier": "urn:company-wiki:narrative-unit:sha256:1ea9d2e4c8a511acd8718a507d19a5d9e4f26f21f5c585dcbec2ef341b07b6e1",
+    "admission": "admitted true; financial_only false; role operating_metrics, priority2; exact native carrier110 chars plus1 required heading.",
+    "semantic_fact": "SourceOperatingSession.fact -> assess_reading_business_fact/project_reading_business_fact gives eligible false, score0, empty reasons/topics.",
+    "candidate": "_candidates classifies full carrier as value_band description with only section operating_metrics topic; it was not rejected.",
+    "packing": "Actual BudgetDiagnostic reason budget_full on this full carrier. The hard96 cap was not spent on these3 physical fragments; they were already one carrier.",
+    "final": "8 other required facts supported, these2 not selected. Actual spent5,290,029/16M; no work exhaustion,0POST."
+  },
+  "root_owner_to_fix": "Shared source meaning/operating relationship projection owner (narrative_business_policy + actual OperatingRelationSession if source-state detail is needed), not PDF continuity/source metadata, model codec or cap.",
+  "portable_tdd": [
+    "Use an unseen generic issuer and different numbers: existing42 product categories cover27% of an explicit product/function scope; plans within3 years to cover45% and extend to a second application scope. The full native source carrier should be a meaningful bounded business-coverage fact/plan, not a generic strategy description.",
+    "Keep a current ratio and future target in the SAME paragraph/window; preserve product-category coverage vs market share/revenue share, current vs planned and time horizon. Never upgrade aspiration to achieved penetration.",
+    "Countercontrols: only aims to become a world leader (no measurable scoped relationship); financial provision/collateral/insurance-coverage ratio; third-party industry forecast; bare percentage next to unrelated product noun; deny/conditional target; a different paragraph cannot lend the target subject.",
+    "With unchanged tight96 budget and enough lower-value descriptive background, a proven complete coverage relation competes in the meaningful source-fact class and keeps exact native closure/character cost. Do not add gold IDs/company names/page numbers/strategic buzzwords or global priority exceptions."
+  ],
+  "source_repair_delta_after_trace": {
+    "nfc_style_control": "Changed fragment normalization now withholds all font assertions; unchanged sibling fragment retains actual exact source fonts.",
+    "tests": "10 source tests PASS2.91s; ruff/diffcheck PASS; no full72 or real PDF rerun",
+    "source_sha256": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1",
+    "decision_inventory_sha256": "36c5002c6f5a7169fa352dfc281a4972976fe0cab2cb95291692477e4f4bedc8",
+    "test_sha256": "4e9d6582a79dc84bf18e17e743dd9ebba11bedc9c2aad898971d22b11ea2833d"
+  },
+  "code_edits_in_second_layer": false,
+  "models": 0,
+  "pending_owned_processes": 0
+}

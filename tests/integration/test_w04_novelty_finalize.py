@@ -134,11 +134,11 @@ def test_same_complete_fact_with_only_layout_changes_is_soft_deprioritized():
 def test_finalizer_builds_one_native_order_signature_before_pure_budget(monkeypatch):
     from company_wiki.source_catalog import narrative_finalize as module
     seen = []
-    original = module.select_budget_items
+    original = module.plan_budget_items
     def observe(items, **kwargs):
         seen.extend(items)
         return original(items, **kwargs)
-    monkeypatch.setattr(module, "select_budget_items", observe)
+    monkeypatch.setattr(module, "plan_budget_items", observe)
     finish([(1, [(10, "备已累计交付300反应台。"), (9, "LPCVD设")], 30),
             (2, [(1, WEAK)], 1)], limit=3, reverse=True)
     members = [item for item in seen if item.page_key == ("page", 1)]

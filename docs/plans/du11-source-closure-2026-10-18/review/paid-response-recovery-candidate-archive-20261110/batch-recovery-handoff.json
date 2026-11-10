@@ -1,0 +1,44 @@
+{
+  "status": "INDEPENDENT_TEST_DESIGN_REVIEW_PASS_ROOT_INTEGRATION_READY",
+  "red": "1FAIL/10.50s exactly terminal-history resumed.status failed",
+  "first_green_attempt": "recovery all business/fee/output/oldattempt assertions passed; measurement only failed because0byte WAL sidecar appeared; original log retained",
+  "measurement_fix": "absent WAL equals empty0bytes only; main DB and every nonempty WAL byte compared exactly; SHM transient locks excluded; physical directory-item identity not claimed",
+  "final": "1PASS/15.65s",
+  "source_sha256_before_after_equal": true,
+  "runtime_files_sha256": {
+    "narrative_batch.py": "57d82148df1b6db4acb655765a389121f558c7e36f6d2bf136d15e861e8abd4c",
+    "narrative_worker_factory.py": "a3da54b98d3b1ee264652d357f8e02a0a81feac963a9c12b18a7362e08f08465",
+    "narrative_summarize.py": "c65daa721f118be1d4d62c344d5a89406baa658b30c7927412b46aee7bf197fb",
+    "narrative_model_runtime.py": "2fcb1cf5282c08cffb8ae137225fbf457ee33da3749ffe38a908256198c74f5d",
+    "narrative_model_extractive.py": "57c4c09c0abe304c5a7f270e8ac38bead228efd7afb7334ea4fc3f4bb7f440f7",
+    "narrative_model_caller.py": "1075adef0fa798a0d819b11c96c7a489a6c8abfa596cd8c5450e58c62a0d31da",
+    "narrative_http_model.py": "efe4b489af3ccff47773318d294bc274cd425e2774d8a06cc72607d31f9954d9",
+    "narrative_run_store.py": "126ffc7c7d5928f57cf239281d5663b978f052a260a9c2d20a0f71c166425708",
+    "store.py": "1e8213eb04a1f324e1145c64120bbca5d7ce76a369a62b4ec485be72a104cfa6",
+    "narrative_verify.py": "da491f44da72a74434aece9e0649627e4b53045a5b5c70d222a5c855c187e92c",
+    "narrative_summary_execution.py": "351b8108b3522ff5cc9c721aec4fdd0ad6e9ad35080fb27d50f1c4564e8b8bb7"
+  },
+  "files_sha256": {
+    "tests/unit/du11_paid_response/test_batch_recovery.py": "769ae160ec2b47807c5a89d6736accf0da7bb4f4cb1e0ace6c82b713838fa316",
+    "tests/unit/du11_paid_response/du11_fault_runtime.py": "0416741571dc9558f362502dd844c371234997b56a7c0f6ee2cb95c6d9cfb935"
+  },
+  "verified": [
+    "actual batch.run_batch and native child real production factory except test-only pre-envelope fault seam",
+    "only1 actual synthetic loopback POST across first fail/resume/final readonly",
+    "complete original body persisted/real SHA+size rechecked before simulated envelope decode failure",
+    "same run frozenbinding unchanged; originalattempt92tokens/111microUSD once; no key on resume",
+    "originaloutput0 reopens and final positive bytes settle; no extra providerreservation",
+    "old failedattempt identity/error/outcome/result retained through compaction",
+    "third same-run documents/budget + mainDB/nonemptyWALbytes + SQLdump unchanged",
+    "fixture only small localTXT; source exactbytes preserved; standard isolated_batch_directory restored nested root/sentinel"
+  ],
+  "live_API_calls": 0,
+  "production_changes_by_lane": 0,
+  "independent_review": {
+    "status": "PASS",
+    "reviewer": "/root/du10_et_reception_review",
+    "report": "C:/Users/郑曾波/Projects/company-wiki/.planning/shared-reading-production/du11/paid-batch-recovery-test-independent-review.md/json",
+    "boundary": "test design/source review;15.65s execution stays bound to recorded runtime snapshot, not later ROOT P2 changes; no additional worker replay"
+  },
+  "test_sha_still_match": true
+}

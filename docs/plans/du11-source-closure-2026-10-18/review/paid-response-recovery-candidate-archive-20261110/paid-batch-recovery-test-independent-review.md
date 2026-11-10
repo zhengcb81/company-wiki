@@ -1,0 +1,7 @@
+# 真实batch付费恢复新测试独审
+
+**PASS：两份冻结测试设计可接收；实际runtime版本证据仍按原收据绑定。**
+
+真实batch/native子进程使用生产factory、HTTP、AUTO与对象设施，唯测试supervisor换测试factory；marker只在测试模块注envelope故障，生产无faultflag。校验已durable原响应、首次失败后去marker/去key、同run/request新lease0POST、原92tokens/111microUSD一次、final正输出、旧失败身份/错误留存；第三次readonly比较主DB/非空WAL字节和SQLdump、budget及POST。缺席WAL与0byteWAL归一为零字节合理，非空内容不放宽，SHM锁标记不当权威状态。
+
+先真实RED1FAIL terminalearlyreturn，修后第一次GREEN只0byteWAL观测失败留证，最后1PASS15.65s可复用。两testSHA匹配769ae160/04167415。本审0新增worker/测试套件/网络/PDF。ROOT后续P2及skip修复不能借旧SHA收据冒称重跑，须最终节点绑定。

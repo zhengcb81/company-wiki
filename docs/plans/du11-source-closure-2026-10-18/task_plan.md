@@ -1,12 +1,14 @@
-**2026-11-06 状态：D4/D5 解耦已 ACCEPTED；T4 source-note-parent + SEM-QUAL-01 已本地实施并完成聚焦测试和单份真实 H1 观察，最终大节点审查尚 OPEN。** D4-01～06 继续 CLOSED。CWP 已成为通用规范化文档解析唯一 owner；StockWiki 三个 provider 默认入口统一消费 pathless port；FF schema 2.0 的 V2 主路径保持无物理路径，V1 兼容路径独立保留并测试。D5 依据 run-6 的跨仓真实样本组合、零 skip、独立最终审查通过后 ACCEPTED。完整收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
+**2026-11-10 状态：P2 已并入 CWP/FF/RF 各自主线；D4/D5 解耦在冻结的接口与组合测试范围内 ACCEPTED；T4 source-note-parent + SEM-QUAL-01 仍未验收。** 不能把“D4/D5 已通过”表述成全项目永远没有耦合：它证明已冻结的公开接口和测试范围可以独立协作，Dashboard P3/P4、后续新缺口仍是开放工作。T4 候选代码仍在 detached worktree `C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki`，未进入当前主线；此前单份 H1/selection 收据绑定候选源码，不能代表当前主线已通过。完整 D5 收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)，本地代码与证据的核销见 [source-facts 对账](review/source-facts-reconciliation-20261110/README.md)。
 
 # 主线剩余实施计划
 
 **当前：上一轮逐项表只证明其定义范围；新确认残留见本轮架构复核，已完成工程不重复施工。**
 
-## Next Step — 收口 T4 source-note-parent + SEM-QUAL-01 大节点
+## Next Step — 在当前主线复验 source-facts 缺口并完成本地工作区核销
 
-D5 代码已按快进方式进入 CWP master 与 StockWiki master；ROOT 的 FF V2/V1 边界和 CWP→StockWiki→FF 组合验收绑定到已审查版本。T4/SEM 的 RED 测试、owner 层本地根修、聚焦测试和一份隔离真实 H1 观察已经完成。H1 覆盖 12/12 必需原文单元、112 spans、102 native members，28.42 秒；原件、数据库、runtime、observer 均未变化，0 模型 POST、0 下载、0 raw copy。不可将观察态提升为正式产品验收：102 对前次 101 的 native-member 差异尚待解释，需核对 12 个 locator/成员、完成一次独立大节点审查、将收据写入 review 并恢复测试 scratch。完成这些才 ACCEPT T4/SEM；不要提前进入批量真实摘要。
+D5 代码已按快进方式进入 CWP master 与 StockWiki master，P2 已分别进入 CWP/FF/RF 正式主线。此前的 H1 观察来自未合并的 source-facts 候选，显示 business-coverage guard 10/10，但 native-prose guard 8/10；预算未耗尽、没有模型 POST。它不是当前主线验收。先用当前 `master` 的准确版本做小范围零模型 source-selection replay；若缺口复现，按责任层增加泛化 RED/正例并修复，再只跑受影响测试。并行完成已核实可处理的旧工作树/本地分支清理；保留尚未判定或仍有独立验收用途的证据与 worktree。只有当前主线复现并通过复测、绑定完整来源/locator 证据后，才收口 T4/SEM 并恢复真实摘要。不得先跑整批公司或付费摘要。
+
+候选 H1 原收据中的 12/12、112 spans、102 native members、28.42 秒及“0 POST/下载/原件复制”仍是被记录的运行观察，但它绑定的不是当前主线源码；101→102 差异也尚未解释。归档副本位于 [source-facts reconciliation](review/source-facts-reconciliation-20261110/)，该副本不等于主线复验或独立验收。
 
 **阶段边界：** D4/D5 通过只关闭本计划冻结范围内的解耦，不等于新摘要、跨运行缓存恢复、RF 实际采用或八家公司循环完成。模块通过版本化公开合同协作是预期设计，不要求零依赖。关键节点集中测试与独审，不为每个小 helper 增加签收；测试环境必须隔离并恢复。
 

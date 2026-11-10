@@ -1,0 +1,32 @@
+{
+  "schema_version": "du11-paid-response-durability-design/1",
+  "status": "DESIGN_READ_ONLY_NOT_IMPLEMENTED",
+  "tests_executed": 0,
+  "PDF_parses": 0,
+  "API_calls": 0,
+  "source_changes": 0,
+  "recommendation": "existing AUTO reservation receipt + bounded existing content-addressed object byte port + transport-complete sink before envelope decode; no second task/response cache",
+  "critical_boundaries": [
+    "HTTP body SHA != final content SHA",
+    "caller-only persistence misses envelope-decode seam",
+    "current artifact role is bundle-only",
+    "terminal failed jobs do not automatically resume decode",
+    "remote paid before local durability cannot be guaranteed recoverable; preserve uncertainty/0 blind resend",
+    "unknown historic charges and immutable protocol identity remain"
+  ],
+  "minimum_tdd_groups": 7,
+  "files_sha256": {
+    "src/company_wiki/automation/narrative_model_caller.py": "8c453ad2b479241c6dd646be4b0896762a624f9a151730122859c2db0ffd3d04",
+    "src/company_wiki/automation/narrative_http_model.py": "f6545e5999474b9e1f3b177c6afe93db1341778f5f83faa061366b24167a21ef",
+    "src/company_wiki/automation/narrative_model.py": "2306aa70f532e508f8a470fb03088bce52bf1e340f4a44dc623f3d7d95e4f702",
+    "src/company_wiki/automation/narrative_run_store.py": "83ea08d532e1ea9121b435294a6fd150450909c18d7c4a7f1041ac0a81962ddb",
+    "src/company_wiki/automation/narrative_summarize.py": "37c27b9b83a8fd7c02fab6f1b02f8fd36e8fce5047a8c69dd370dbbf678ff956",
+    "src/company_wiki/automation/narrative_projection.py": "0164080a2e6db980f3e5eccaebde3b380d94ea488d152fb65d479ba0b6bbfc45",
+    "src/company_wiki/automation/narrative_batch.py": "48956ab3f732e0945b3d3594a8f657392f7728b99e118744930980c0a20dced2",
+    "src/company_wiki/automation/narrative_worker_factory.py": "bd4be883f5975863feef196a0a40d5ac5780af024a664f62bb4b309a2b6408f5",
+    "src/company_wiki/automation/store.py": "4646402295499f74bbcd2084aefcd6cbb95d1c4213d499e7dea66fb0a600fcd4",
+    "src/company_wiki/automation/migrations.py": "bf1fc0559e224d97dcc74efe95406d5dfc25780196c289561a4f54bb3c061749",
+    "src/company_wiki/source_catalog/narrative_artifact_store.py": "0ef88398dc53877bde1ce251324232c890514a7e15d9e46d159a4ed64298c7cb"
+  },
+  "report_sha256": "c77563d4bf4c795d0d7d4bba99f1559c9b725e6a757667e47540449f9ab4fd87"
+}

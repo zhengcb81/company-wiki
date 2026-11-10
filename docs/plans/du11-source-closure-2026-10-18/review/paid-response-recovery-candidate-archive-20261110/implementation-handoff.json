@@ -1,0 +1,56 @@
+{
+  "status": "INDEPENDENT_REVIEW_PASS_READY_ROOT_INTEGRATION",
+  "base": "2340b78c",
+  "files_sha256": {
+    "src/company_wiki/automation/narrative_paid_response.py": "bd6e31fd999af211a1b3f133c18f3eca5db911364c3138bcec1ad8c4fda47fb7",
+    "src/company_wiki/automation/narrative_model_caller.py": "1075adef0fa798a0d819b11c96c7a489a6c8abfa596cd8c5450e58c62a0d31da",
+    "src/company_wiki/automation/narrative_http_model.py": "efe4b489af3ccff47773318d294bc274cd425e2774d8a06cc72607d31f9954d9",
+    "src/company_wiki/automation/narrative_run_store.py": "126ffc7c7d5928f57cf239281d5663b978f052a260a9c2d20a0f71c166425708",
+    "src/company_wiki/automation/migrations.py": "5f6c74024a9dd836e3c01b608468fb54e673afd1567641af9d16bc392fb34bb9",
+    "src/company_wiki/automation/store.py": "b36a0d3c5b03189bdbf3a05247600d92560d1689420ab7c154db2dc1931aa0cd",
+    "tests/unit/du11_paid_response/test_paid_response.py": "261debc9ef91f2e862a1899ec17874205d322f13ad5c3ac9326d029f36f698b9",
+    "tests/integration/test_du11_paid_response_recovery.py": "4a949b1d8a90b8b11e0fd497d72ad514ac694bb2a25c529c2307974428ea7fe9"
+  },
+  "evidence": {
+    "initial_RED": "18FAIL/2PASS/8.35s",
+    "identity_empty_RED": "4FAIL/1PASS/4.10s",
+    "job_binding_RED": "2FAIL/4.57s",
+    "concentrated_related": "168PASS/20.98s before final narrow job binding delta",
+    "final_focused": "28PASS/9.06s after job binding delta",
+    "lint": "PASS",
+    "API": "0 live provider calls, only one synthetic loopback POST in integration",
+    "PDF_parse": 0
+  },
+  "root_integration": {
+    "constructor": "PaidResponseArtifacts(objects,max_response_bytes=<actual frozen HTTP cap>,preflight=storage_callback); BudgetedNarrativeCaller(...,paid_responses=artifacts)",
+    "preflight": "validate actual request/model/adapter/prompt receipt first, then admit invokes callback(max_response_bytes) BEFORE reservation/POST; no callback on replay. Callback must reserve actual persistent response body and writer scratch/WAL overhead within existing storage limits. Port does not create a second storage guard.",
+    "transport": "generate(request,*,response_sink=None) complete bounded body sink BEFORE _response; replay_response(request,body,*,http_status,duration_ms) no credential reads/POST",
+    "retry": "AutomationStore.retry_paid_narrative_summary(run_id,job_id,request_sha256,now,expected_generation) after enabling owned gate, only exact paid unsuccessful operation; root must route new protocol failed run past old terminal early return; legacy v4 unmodified",
+    "output": "caller reads/hash-verifies original object then RunStore.reopen_paid_output with current active lease only if original output0; re-reserves original final-output slot. No new provider reservation or usage migration.",
+    "generation": "run/job frozen input/handler membership + exact input/body requestSHA + model/adapter/prompt pin; original runtime generation bound only for recording original paid bytes, current lease fenced for output/publication",
+    "compaction": "NOT modified; ROOT may now add bounded v5 execution terminal-receipt preservation separately"
+  },
+  "limitations": [
+    "remote paid before local bytes durable remains unknown unavailable; no blind resend",
+    "object durable before DB attach can leave unbound small object; do not infer replay from prefix/hash/unbound bytes",
+    "old v4 cannot become new protocol or silently change decoder identity",
+    "new byte port enabled only by ROOT for new protocol; default None retains legacy fixture/semantics",
+    "full final artifact activation/sourcecard quality E2E remains ROOT responsibility; this receipt is raw-response/decode recovery only",
+    "positive-output precheck in retry entry added after28 focused run; independent delta should cover it; no broad suite repeated"
+  ],
+  "temporary_dirs": "Owned Temp basetemps will be removed after independent acceptance; no original/config/keys/production writes",
+  "independent_review": {
+    "status": "PASS",
+    "reviewer": "/root/du10_et_reception_review",
+    "scope": "8 exact SHA plus independent terminal-failure/new-lease0POST/original usage once/positive10byte output refusal controls",
+    "report": "C:/Users/郑曾波/Projects/company-wiki/.planning/shared-reading-production/du11/paid-response-independent-review.md/json"
+  },
+  "source_sha_still_match": false,
+  "cleanup": "NOT_CLEAN_PLATFORM_REJECTED: fixture Temp only, originals0; see cleanup.json and reviewer own receipt. ROOT instructed no alternate delete method.",
+  "root_delta_after_independent_review": {
+    "src/company_wiki/automation/store.py": {
+      "reviewed_sha256": "b36a0d3c5b03189bdbf3a05247600d92560d1689420ab7c154db2dc1931aa0cd",
+      "now_sha256": "1e8213eb04a1f324e1145c64120bbca5d7ce76a369a62b4ec485be72a104cfa6"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-10",
+  "base": "C:\\Users\\郑曾波\\AppData\\Local\\Temp",
+  "operation": "Remove only explicitly recorded test basetemp directories",
+  "original_files_removed": 0,
+  "live_provider_calls": 0,
+  "entries": [
+    {
+      "Relative": "du11-paid-response-red",
+      "Status": "removed_empty_test_directories",
+      "Files": 0,
+      "Directories": 16,
+      "Bytes": 0
+    },
+    {
+      "Relative": "du11-paid-green2",
+      "Status": "removed_empty_test_directories",
+      "Files": 0,
+      "Directories": 60,
+      "Bytes": 0
+    },
+    {
+      "Relative": "du11-paid-e2e",
+      "Status": "removed_empty_test_directories",
+      "Files": 0,
+      "Directories": 5,
+      "Bytes": 0
+    },
+    {
+      "Relative": "du11-paid-meta-red",
+      "Status": "removed_empty_test_directories",
+      "Files": 0,
+      "Directories": 9,
+      "Bytes": 0
+    },
+    {
+      "Relative": "du11-paid-related",
+      "Status": "removed_empty_test_directories",
+      "Files": 0,
+      "Directories": 136,
+      "Bytes": 0
+    },
+    {
+      "Relative": "du11-paid-binding-red",
+      "Status": "removed_empty_test_directories",
+      "Files": 0,
+      "Directories": 10,
+      "Bytes": 0
+    },
+    {
+      "Relative": "du11-paid-final-first",
+      "Status": "removed_empty_test_directories",
+      "Files": 0,
+      "Directories": 88,
+      "Bytes": 0
+    },
+    {
+      "Relative": "cw-pytest-basetemp\\20261018-001805-d22280d4",
+      "Status": "removed_empty_test_directories",
+      "Files": 0,
+      "Directories": 2,
+      "Bytes": 0
+    }
+  ]
+}

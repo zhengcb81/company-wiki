@@ -1,0 +1,17 @@
+{
+  "schema_version": "du11-business-coverage-review-delta/1",
+  "files_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "20cb13f7e4259d53e6f418da457efc1b28ae8e78b4fcacd2bcc38f2948e12a0c",
+    "tests/unit/du11_production/test_business_coverage_relations.py": "65925870e6cb25d2eb7324058a66672fba13e1b433847b146b9c980586019a15",
+    "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py": "65ff44850f0aa9946daba88015ffe0c9bd5a62aaa57e125d91d8a86a12b15e01"
+  },
+  "review_findings_closed": "4 independent financial controls RED then repaired; valid coverage+later finance1RED then repaired; financial result-family8RED then repaired;45focusedPASS/3.34s",
+  "changes": "coverage owner financial-denominator result-family matches legacy finance noun concept incl singular/plural & CN/TC; balances subject separate from ordinary sales service/network; existing local relationship break excludes neighboring independent financial clause",
+  "native_source_carrier_still_eligible": true,
+  "native_source_carrier_reasons": [
+    "business_strategy",
+    "business_coverage_relation"
+  ],
+  "whole_pdf_replay": "not repeated after financial-only delta; prior guard10/10 binds prior revision in du11-business-coverage-guard.json; ROOT final C will use accepted latest revision",
+  "paid_calls": 0
+}
