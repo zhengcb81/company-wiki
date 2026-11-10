@@ -53,6 +53,7 @@ class _FakeAdapter:
                 fiscal_period="FY",
                 language="en",
                 amended=False,
+                security_id=request.security_id,
             ),
         )
 
@@ -492,6 +493,7 @@ def test_e2e_f01_html_disguised_as_pdf_is_quarantined(tmp_path):
                     source_url="https://www.sec.gov/x.pdf",
                     document_kind="annual_report", filing_date="2026-04-15",
                     fiscal_year=2025,
+                    security_id=request.security_id,
                 ),
             )
 

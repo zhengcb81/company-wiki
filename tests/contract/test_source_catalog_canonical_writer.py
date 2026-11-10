@@ -33,6 +33,7 @@ class _SingleCnAdapter:
                 fiscal_year=2025,
                 fiscal_period="FY",
                 language="zh-CN",
+                security_id=request.security_id,
             ),
         )
 
@@ -115,6 +116,7 @@ def _staged_contract(tmp_path: Path):
         fiscal_year=2025,
         fiscal_period="FY",
         language="zh-CN",
+        security_id="600000",
     )
     receipt = DownloadReceipt(
         candidate_id=candidate.candidate_id,

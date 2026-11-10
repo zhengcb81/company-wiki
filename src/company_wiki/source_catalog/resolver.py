@@ -62,6 +62,12 @@ if TYPE_CHECKING:
 # `companies` fallback are NOT part of this repository's contract (design B07
 # scope table: they belong to phase C).
 SOURCE_RESOLVER_SCHEMA_VERSION = "1.0"
+SOURCE_QUERY_REQUEST_SCHEMA_VERSION = "1.1"
+_SOURCE_QUERY_REQUEST_SCHEMA_VERSIONS = {
+    SOURCE_RESOLVER_SCHEMA_VERSION,
+    SOURCE_QUERY_REQUEST_SCHEMA_VERSION,
+}
+_ISSUER_LINK_ID_RE = re.compile(r"issuer-link-v1:[0-9a-f]{64}")
 _YEAR_RE = re.compile(r"(?<!\d)(19\d{2}|20\d{2}|21\d{2})(?!\d)")
 
 
@@ -505,6 +511,8 @@ class SourceRequest:
     as_of_date: str
     market: str | None = None
     security_id: str | None = None
+    identity_scope: str | None = None
+    issuer_link_id: str | None = None
     form_type: str | None = None
     fiscal_year: int | None = None
     fiscal_period: str | None = None
@@ -519,10 +527,13 @@ class SourceRequest:
     schema_version: str = SOURCE_RESOLVER_SCHEMA_VERSION
 
     def __post_init__(self) -> None:
-        if self.schema_version != SOURCE_RESOLVER_SCHEMA_VERSION:
+        schema_version = _required_text(self.schema_version, "schema_version")
+        if schema_version not in _SOURCE_QUERY_REQUEST_SCHEMA_VERSIONS:
             raise SourceResolutionError(
-                f"schema_version must be {SOURCE_RESOLVER_SCHEMA_VERSION}"
+                "schema_version must be one of "
+                f"{', '.join(sorted(_SOURCE_QUERY_REQUEST_SCHEMA_VERSIONS))}"
             )
+        object.__setattr__(self, "schema_version", schema_version)
         object.__setattr__(self, "entity", _required_text(self.entity, "entity"))
         object.__setattr__(
             self,
@@ -540,6 +551,32 @@ class SourceRequest:
             "security_id",
             _optional_text(self.security_id, "security_id"),
         )
+        identity_scope = _optional_text(self.identity_scope, "identity_scope")
+        issuer_link_id = _optional_text(self.issuer_link_id, "issuer_link_id")
+        if identity_scope not in {None, "listing", "issuer"}:
+            raise SourceResolutionError("identity_scope must be 'listing' or 'issuer'")
+        if issuer_link_id is not None and _ISSUER_LINK_ID_RE.fullmatch(issuer_link_id) is None:
+            raise SourceResolutionError("issuer_link_id is malformed")
+        if schema_version == SOURCE_RESOLVER_SCHEMA_VERSION and (
+            identity_scope is not None or issuer_link_id is not None
+        ):
+            raise SourceResolutionError(
+                "identity scope fields require source query request schema 1.1"
+            )
+        if (identity_scope is None) != (issuer_link_id is None):
+            raise SourceResolutionError(
+                "identity_scope and issuer_link_id must be supplied together"
+            )
+        if identity_scope == "issuer" and (
+            market is None or self.security_id is not None
+        ):
+            raise SourceResolutionError(
+                "issuer identity scope requires market and forbids security_id"
+            )
+        if identity_scope == "listing" and self.security_id is None:
+            raise SourceResolutionError("listing identity scope requires security_id")
+        object.__setattr__(self, "identity_scope", identity_scope)
+        object.__setattr__(self, "issuer_link_id", issuer_link_id)
         object.__setattr__(self, "provider", provider.lower() if provider else None)
         object.__setattr__(
             self, "form_type", _optional_text(self.form_type, "form_type")
@@ -574,7 +611,7 @@ class SourceRequest:
             object.__setattr__(self, "mode", mode)
 
     def identity_dict(self) -> dict[str, Any]:
-        return {
+        identity = {
             "schema_version": self.schema_version,
             "entity": self.entity,
             "market": self.market,
@@ -589,6 +626,10 @@ class SourceRequest:
             "as_of_date": self.as_of_date,
             "mode": self.mode,
         }
+        if self.schema_version == SOURCE_QUERY_REQUEST_SCHEMA_VERSION:
+            identity["identity_scope"] = self.identity_scope
+            identity["issuer_link_id"] = self.issuer_link_id
+        return identity
 
     @property
     def request_id(self) -> str:
@@ -1220,6 +1261,7 @@ class SourceResolver:
         # B02: optional injected read budget (tests / caller cancellation).
         # It is consumed by ONE resolve() call — counters are per request.
         self.read_budget = read_budget
+        self._issuer_link_ids: dict[tuple[str, str], str] | None = None
         # New catalogs use steady verified facts without a rollout snapshot.
         # Explicit schema-1 snapshots retain historical visibility semantics;
         # the public reader validates a present snapshot before injecting it.
@@ -1282,7 +1324,10 @@ class SourceResolver:
         from .identity_candidates import iter_identity_filing_candidates
 
         identity_tokens = self.issuer_identity_tokens(
-            request.entity, market=request.market, security_id=request.security_id,
+            request.entity,
+            market=request.market,
+            security_id=request.security_id,
+            issuer_link_id=request.issuer_link_id,
         )
         candidates = iter_identity_filing_candidates(
             self.catalog, document_kind=request.document_kind,
@@ -1579,22 +1624,28 @@ class SourceResolver:
         diagnostic["source_ref"] = asdict(ref)
         return diagnostic
 
-    @staticmethod
-    def _identity_matches(request: SourceRequest, metadata: dict[str, Any]) -> str:
-        """Check market/security_id identity.
+    def match_source_identity(
+        self,
+        *,
+        market: str | None,
+        security_id: str | None,
+        issuer_link_id: str | None = None,
+        metadata: Mapping[str, Any],
+    ) -> str:
+        """Match a source's market-qualified identity through the resolver API.
 
-        Returns:
-            "match" — every requested source identity field is present and matches
-            "conflict" — a present field contradicts the request
-            "incomplete" — a requested source identity field is absent
+        This is the shared owner contract for consumers that list or qualify
+        source metadata without constructing a full filing-period request.
+        It deliberately returns the same three states as normal resolution so
+        callers cannot turn missing identity into a match.
         """
-        req_market = request.market
-        req_security_id = request.security_id
+        req_market = market
+        req_security_id = security_id
         disputed = metadata.get("_conflicted_fields", ())
         if (req_market and "market" in disputed) or (req_security_id and "security_id" in disputed):
             return "conflict"
         if not req_market and not req_security_id:
-            return "match"
+            return "incomplete" if issuer_link_id is not None else "match"
         cand_market = str(metadata.get("market") or "").strip().upper() or None
         cand_security_id = str(metadata.get("security_id") or "").strip() or None
         if req_market and cand_market and cand_market != req_market:
@@ -1612,10 +1663,56 @@ class SourceResolver:
             return "incomplete"
         if req_security_id and cand_security_id is None:
             return "incomplete"
+        if issuer_link_id is not None:
+            if cand_security_id is None or cand_market is None:
+                return "incomplete"
+            link_id = self._issuer_link_id_for_security(cand_market, cand_security_id)
+            if link_id is None:
+                return "incomplete"
+            if link_id != issuer_link_id:
+                return "conflict"
         return "match"
+
+    def _identity_matches(self, request: SourceRequest, metadata: dict[str, Any]) -> str:
+        """Check market/security_id identity.
+
+        Returns:
+            "match" — every requested source identity field is present and matches
+            "conflict" — a present field contradicts the request
+            "incomplete" — a requested source identity field is absent
+        """
+        return self.match_source_identity(
+            market=request.market,
+            security_id=request.security_id,
+            issuer_link_id=request.issuer_link_id,
+            metadata=metadata,
+        )
+
+    def _issuer_link_id_for_security(self, market: str, security_id: str) -> str | None:
+        from .security_identity import (
+            SecurityIdentityError,
+            SecurityMasterStore,
+            SecurityMasterUnavailableError,
+            _cross_market_issuer_link_ids,
+            _ticker_key,
+        )
+
+        if self._issuer_link_ids is None:
+            catalog_dir = getattr(self.catalog.config, "catalog_dir", None)
+            if catalog_dir is None:
+                self._issuer_link_ids = {}
+            else:
+                try:
+                    master = SecurityMasterStore(Path(catalog_dir) / "security_master").load()
+                except (OSError, SecurityIdentityError, SecurityMasterUnavailableError):
+                    self._issuer_link_ids = {}
+                else:
+                    self._issuer_link_ids = _cross_market_issuer_link_ids(master)
+        return self._issuer_link_ids.get((market.strip().upper(), _ticker_key(security_id, market)))
 
     def issuer_identity_tokens(
         self, entity: str, *, market: str | None = None, security_id: str | None = None,
+        issuer_link_id: str | None = None,
     ) -> tuple[str, ...]:
         """Observe aliases in the requested source market when it is explicit."""
         from .security_identity import SecurityMasterStore, _normalize_text
@@ -1626,6 +1723,7 @@ class SourceResolver:
             return (wanted,) if wanted else ()
         return SecurityMasterStore(Path(catalog_dir) / "security_master").issuer_identity_tokens(
             entity, market=market, security_id=security_id,
+            issuer_link_id=issuer_link_id,
         )
 
     def _entity_matches(
@@ -2120,6 +2218,7 @@ __all__ = [
     "ByteReadResult",
     "ResolutionResult",
     "ResolutionStatus",
+    "SOURCE_QUERY_REQUEST_SCHEMA_VERSION",
     "SOURCE_RESOLVER_SCHEMA_VERSION",
     "SourceHandle",
     "SourceRequest",

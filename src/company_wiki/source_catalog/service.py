@@ -128,6 +128,51 @@ class SourceCatalog:
                 reason="company_identity_snapshot_unavailable", resolved=None, candidates=())
         return SecurityIdentityResolver(master).identify(query, market=market)
 
+    def register_sec_20f_listing_link(
+        self, *, document_id: str, source_id: str, content_sha256: str,
+    ) -> dict[str, Any]:
+        """Import SEC cross-market listing rows from an exact CWP SourceRef.
+
+        The caller supplies only the public source identifiers.  CWP resolves
+        the exact SourceRef, reads it through SourceVersionReader, verifies its
+        bytes, and stores a versioned issuer-link fact beside the owned market
+        snapshots. No physical document path crosses the public boundary.
+        """
+        from .security_identity import SecurityMasterStore
+        from .security_listing_evidence import _build_sec_20f_listing_evidence
+        from .source_reader import SourceVersionReader
+
+        reader = SourceVersionReader(self)
+        ref = reader.query_ref(document_id, source_id, content_sha256)
+        content, metadata = reader.open_described_version(ref, purpose="filing_reuse")
+        store = SecurityMasterStore(self.config.catalog_dir / "security_master")
+        master = store.load()
+        evidence = _build_sec_20f_listing_evidence(
+            content, metadata=metadata, master=master,
+        )
+        if evidence is None:
+            return {
+                "status": "no_verified_cross_market_equity_rows",
+                "source_id": ref.source_id,
+                "content_sha256": ref.content_sha256,
+            }
+        with self.operation_lock(operation="source-identity-link"):
+            existed = any(
+                item.issuer_link_id == evidence.issuer_link_id
+                and item.source_sha256 == evidence.source_sha256
+                for item in store._load_issuer_link_evidence()
+            )
+            store._write_issuer_link(evidence)
+        return {
+            "status": "already_registered" if existed else "registered",
+            "issuer_link_id": evidence.issuer_link_id,
+            "issuer_cik": evidence.issuer_cik,
+            "source_id": evidence.source_id,
+            "content_sha256": evidence.source_sha256,
+            "listing_count": len(evidence.listings),
+            "markets": sorted({item.market for item in evidence.listings}),
+        }
+
     def __init__(self, config: CatalogConfig):
         if not isinstance(config, CatalogConfig):
             raise TypeError("config must be CatalogConfig")

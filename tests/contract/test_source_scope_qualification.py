@@ -79,7 +79,7 @@ def test_false_cached_scope_is_rejected_at_every_filing_reuse_entry(tmp_path, ac
                     service.ensure(request())
                 else:
                     from company_wiki.source_catalog.acquisition import AcquisitionResult, AcquisitionStatus, DownloadCandidate
-                    candidate = DownloadCandidate("c-1", "official", "p-1", "US", "Acme", "annual", "https://www.sec.gov/Archives/edgar/data/12345/original.htm", "annual_report", "2026-07-30", 2026, form_type="10-K", fiscal_period="FY")
+                    candidate = DownloadCandidate("c-1", "official", "p-1", "US", "Acme", "annual", "https://www.sec.gov/Archives/edgar/data/12345/original.htm", "annual_report", "2026-07-30", 2026, form_type="10-K", fiscal_period="FY", security_id="ACME")
                     selection = AcquisitionResult("1.0", AcquisitionStatus.SELECTED, empty, candidate=candidate)
                     service.coordinator.stage_selected(replace(request(), allow_download=True), selection)
         assert error.value.status == "blocked"

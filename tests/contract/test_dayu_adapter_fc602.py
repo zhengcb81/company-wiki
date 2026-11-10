@@ -45,7 +45,13 @@ def _dayu_filing(root: Path, ticker: str, filing_id: str, *,
     }
     (group / "meta.json").write_text(json.dumps(meta, ensure_ascii=False),
                                      encoding="utf-8")
-    (group / f"{filing_id}.pdf").write_bytes(b"%PDF-1.4 " + ticker.encode())
+    # Distinct fiscal filings must have distinct original bytes. Reusing the
+    # same synthetic payload across FY2024/FY2023 creates a real metadata
+    # conflict on one immutable source hash, which correctly makes its period
+    # unknown and invalidates exact reuse.
+    (group / f"{filing_id}.pdf").write_bytes(
+        b"%PDF-1.4 " + ticker.encode() + b" " + filing_id.encode()
+    )
     if add_docling:
         (group / f"{filing_id}.pdf_docling.json").write_text(
             json.dumps({"text": "x"}), encoding="utf-8")

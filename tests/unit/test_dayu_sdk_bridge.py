@@ -66,7 +66,9 @@ def test_sec_discovery_uses_sdk_and_correct_fiscal_year_without_original_downloa
     assert len(candidates) == 1
     candidate = candidates[0]
     assert (candidate["fiscal_year"], candidate["fiscal_period"]) == (2026, "Q1")
+    assert candidate["security_id"] == request.security_id
     assert candidate["sdk_company_profile"]["company_name"] == "Provider Company"
+    assert candidate["sdk_company_profile"]["ticker"] == candidate["security_id"]
     assert candidate["fiscal_year_basis"]["report_date"] == "2025-09-30"
     assert sdk.original_calls == 0
     assert len(sdk.history_calls) == 1
@@ -121,7 +123,9 @@ def test_hk_provider_profile_and_title_year_remain_in_candidate():
                             document_kind="annual_report", fiscal_year=2025,
                             as_of_date="2026-10-08", allow_download=True)
     values = discover_hk(request, FakeHK(), query_type=SimpleNamespace)
+    assert values[0]["security_id"] == request.security_id
     assert values[0]["sdk_company_profile"]["company_name"] == "官方公司"
+    assert values[0]["sdk_company_profile"]["ticker"] == values[0]["security_id"]
     assert values[0]["sdk_report_candidate"]["source_id"] == "HK-DOC-2025"
     assert values[0]["fiscal_year_basis"]["kind"] == "explicit_title_year"
 

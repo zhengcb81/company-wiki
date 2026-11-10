@@ -378,6 +378,26 @@ class DayuCliDownloadAdapter:
             raise DayuCliAdapterError("Dayu filing meta must be an object")
         if value.get("is_deleted") is True:
             return None
+        provider_security_id = value.get("security_id") or value.get("ticker")
+        if isinstance(provider_security_id, str):
+            provider_security_id = provider_security_id.strip()
+        else:
+            provider_security_id = None
+        if request.security_id:
+            from .security_code import security_codes_equivalent
+
+            if provider_security_id is None or not security_codes_equivalent(
+                request.security_id,
+                provider_security_id,
+                left_market=self.market,
+                right_market=self.market,
+            ):
+                return None
+        elif request.identity_scope in {"listing", "issuer"}:
+            # The downloaded portfolio metadata, not the caller's requested
+            # company label, must identify a listing for scoped requests.
+            if provider_security_id is None:
+                return None
         # Accept filings where the primary PDF exists, even if post-processing (docling) failed
         primary_doc = value.get("primary_document")
         filing_dir = meta_path.parent
@@ -496,6 +516,7 @@ class DayuCliDownloadAdapter:
             last_modified=_optional_text(file_entry.get("http_last_modified")),
             remote_size=byte_size,
             adapter_payload_json=canonical_json(adapter_payload),
+            security_id=provider_security_id,
         )
         self._assets[candidate_id] = _DownloadedAsset(
             candidate_id=candidate_id,

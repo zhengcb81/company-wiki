@@ -34,7 +34,7 @@ import re
 import sqlite3
 from dataclasses import dataclass
 from datetime import date
-from typing import Any, cast
+from typing import Any
 
 from company_wiki.source_contract.source_version import SourceRef
 
@@ -77,14 +77,6 @@ class CompanySourceIndexError(ValueError):
         self.status = status
         self.reason = reason
         super().__init__(f"{status}: {reason}")
-
-
-@dataclass(frozen=True)
-class _IdentityNarrowing:
-    """The two fields the resolver's identity gate actually reads."""
-
-    market: str | None
-    security_id: str | None
 
 
 @dataclass(frozen=True)
@@ -394,18 +386,12 @@ class CompanySourceIndex:
         ordered.sort(key=lambda entry: entry.published_date, reverse=True)
         return ordered, security_ids
 
-    @staticmethod
-    def _identity_matches(identity: CompanyIdentity, metadata: dict[str, Any]) -> bool:
-        """Reuse the resolver's market/security gate without a per-kind request.
-
-        The owner's gate reads exactly ``market`` and ``security_id`` from the
-        request, so a two-field stand-in is passed instead of inventing a
-        document kind and period this endpoint does not have.  A future change
-        to that gate would be a contract change, not a silent bypass.
-        """
-        narrowed = _IdentityNarrowing(identity.market, identity.security_id)
-        return SourceResolver._identity_matches(
-            cast(Any, narrowed), metadata,
+    def _identity_matches(self, identity: CompanyIdentity, metadata: dict[str, Any]) -> bool:
+        """Use the resolver's public identity contract for company listings."""
+        return self._resolver.match_source_identity(
+            market=identity.market,
+            security_id=identity.security_id,
+            metadata=metadata,
         ) == "match"
 
     def _candidate_rows(

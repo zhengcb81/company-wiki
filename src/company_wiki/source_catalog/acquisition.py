@@ -31,6 +31,8 @@ if TYPE_CHECKING:
 
 
 ACQUISITION_SCHEMA_VERSION = "1.0"
+DOWNLOAD_CANDIDATE_SCHEMA_VERSION = "1.1"
+_DOWNLOAD_CANDIDATE_SCHEMA_VERSIONS = {"1.0", DOWNLOAD_CANDIDATE_SCHEMA_VERSION}
 _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 _UTC_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 _SEMVER_RE = re.compile(
@@ -106,11 +108,18 @@ class DownloadCandidate:
     last_modified: str | None = None
     remote_size: int | None = None
     adapter_payload_json: str | None = None
-    schema_version: str = ACQUISITION_SCHEMA_VERSION
+    # The provider's exact market-local listing identifier. It is optional
+    # for legacy adapters, but mandatory when a schema-1.1 identity scope is
+    # being enforced at selection/import boundaries.
+    security_id: str | None = None
+    schema_version: str = DOWNLOAD_CANDIDATE_SCHEMA_VERSION
 
     def __post_init__(self) -> None:
-        if self.schema_version != ACQUISITION_SCHEMA_VERSION:
-            raise ValueError(f"schema_version must be {ACQUISITION_SCHEMA_VERSION}")
+        if self.schema_version not in _DOWNLOAD_CANDIDATE_SCHEMA_VERSIONS:
+            raise ValueError(
+                "schema_version must be one of "
+                f"{', '.join(sorted(_DOWNLOAD_CANDIDATE_SCHEMA_VERSIONS))}"
+            )
         for name in (
             "candidate_id",
             "provider",
@@ -137,6 +146,7 @@ class DownloadCandidate:
             "etag",
             "last_modified",
             "adapter_payload_json",
+            "security_id",
         ):
             object.__setattr__(self, name, _optional_text(getattr(self, name), name))
         if self.adapter_payload_json is not None:
@@ -315,7 +325,8 @@ class _AcquisitionDecision:
 
 def acquisition_target_sha256(request: SourceRequest, candidate: DownloadCandidate) -> str:
     """Stable target/staging lock identity, excluding modes, limits and TTLs."""
-    target = {"market": candidate.market, "security": (request.security_id or request.entity).upper(),
+    target = {"market": candidate.market,
+              "security": (request.security_id or candidate.security_id or request.entity).upper(),
               "document_kind": candidate.document_kind, "provider": candidate.provider,
               "accession": candidate.provider_document_id, "fiscal_year": candidate.fiscal_year,
               "fiscal_period": candidate.fiscal_period, "form_type": candidate.form_type}
@@ -476,13 +487,24 @@ class AcquisitionCoordinator:
         if request.market is None:
             raise MarketRoutingError("market is required before adapter discovery")
         adapter = self.adapters.for_market(request.market)
+        adapter_request, identity_reason = self._provider_request_for_identity(request)
+        if adapter_request is None:
+            status = (AcquisitionStatus.AMBIGUOUS
+                      if identity_reason == "issuer_scope_has_multiple_target_listings"
+                      else AcquisitionStatus.MISSING)
+            return _AcquisitionDecision(AcquisitionResult(
+                schema_version=ACQUISITION_SCHEMA_VERSION,
+                status=status,
+                resolution=resolution,
+                reason=identity_reason or "issuer_scope_has_no_target_listing",
+            ))
         if budget is None:
-            candidates = tuple(adapter.discover(request))
+            candidates = tuple(adapter.discover(adapter_request))
         else:
             self._require_bounded_adapter(adapter)
             budget.ensure_open()
-            candidates = tuple(cast(Any, adapter).discover_bounded(request, budget))
-        self._validate_candidates(request, candidates)
+            candidates = tuple(cast(Any, adapter).discover_bounded(adapter_request, budget))
+        self._validate_candidates(adapter_request, candidates, catalog=self.catalog)
         candidates = tuple(c for c in candidates
                            if (candidate_scope is None or candidate_scope(c))
                            and (c.filing_date is None or c.filing_date <= request.as_of_date))
@@ -502,14 +524,67 @@ class AcquisitionCoordinator:
             status=AcquisitionStatus.SELECTED, resolution=resolution,
             adapter_name=adapter.name, candidate=candidates[0], reason="candidate_selected"))
 
+    def _provider_request_for_identity(
+        self, request: SourceRequest,
+    ) -> tuple[SourceRequest | None, str | None]:
+        """Resolve an issuer request to one exact provider listing, if possible.
+
+        Providers download by a market-local listing ID. An issuer link may
+        contain several listings in that market; choosing one by name or
+        ordering would be unsafe, so callers must narrow it explicitly.
+        """
+        if request.identity_scope != "issuer":
+            return request, None
+        from .security_identity import (
+            SecurityIdentityError,
+            SecurityMasterStore,
+            SecurityMasterUnavailableError,
+        )
+
+        try:
+            store = SecurityMasterStore(
+                self.catalog.config.catalog_dir / "security_master"
+            )
+            security_ids = store.security_ids_for_issuer_link(
+                request.market or "", request.issuer_link_id or "",
+            )
+        except (OSError, SecurityIdentityError, SecurityMasterUnavailableError):
+            security_ids = ()
+        if len(security_ids) != 1:
+            return None, (
+                "issuer_scope_has_multiple_target_listings"
+                if len(security_ids) > 1
+                else "issuer_scope_has_no_target_listing"
+            )
+        return replace(request, identity_scope="listing", security_id=security_ids[0]), None
+
     @staticmethod
-    def _validate_candidates(request: SourceRequest, candidates: tuple[DownloadCandidate, ...]) -> None:
+    def _validate_candidates(
+        request: SourceRequest,
+        candidates: tuple[DownloadCandidate, ...],
+        *,
+        catalog: SourceCatalog | None = None,
+    ) -> None:
         from .acquisition_validation import candidate_scope_problem
+        from .security_identity import SecurityMasterStore
+
+        link_store = (
+            SecurityMasterStore(catalog.config.catalog_dir / "security_master")
+            if catalog is not None else None
+        )
+
+        def issuer_link_lookup(market: str, security_id: str) -> str | None:
+            if link_store is None:
+                return None
+            return link_store.issuer_link_id_for_security(market, security_id)
 
         for candidate in candidates:
             if not isinstance(candidate, DownloadCandidate):
                 raise AcquisitionError("adapter returned a non-DownloadCandidate value")
-            problem = candidate_scope_problem(request, candidate)
+            problem = candidate_scope_problem(
+                request, candidate,
+                issuer_link_lookup=issuer_link_lookup if link_store is not None else None,
+            )
             if problem is not None:
                 raise AcquisitionError(f"adapter candidate {problem} does not match request")
 
@@ -532,7 +607,7 @@ class AcquisitionCoordinator:
             raise AcquisitionError("staging requires a selected candidate")
         if not request.allow_download:
             raise AcquisitionError("staging requires a download request")
-        self._validate_candidates(request, (candidate,))
+        self._validate_candidates(request, (candidate,), catalog=self.catalog)
         if candidate.filing_date and candidate.filing_date > request.as_of_date:
             raise AcquisitionError("candidate publication exceeds as-of")
         adapter = self.adapters.for_market(candidate.market)
@@ -596,12 +671,25 @@ class AcquisitionCoordinator:
     @staticmethod
     def target_request(request: SourceRequest, candidate: DownloadCandidate) -> SourceRequest:
         """Pin the verified selection for lock recheck and final byte resolution."""
-        return replace(request, mode="exact", provider=candidate.provider,
+        return replace(
+            request,
+            mode="exact",
+            identity_scope=(
+                "listing" if request.identity_scope == "issuer" and candidate.security_id
+                else request.identity_scope
+            ),
+            security_id=(
+                candidate.security_id
+                if request.identity_scope == "issuer" and candidate.security_id
+                else request.security_id
+            ),
+            provider=candidate.provider,
             provider_document_id=candidate.provider_document_id,
             fiscal_year=request.fiscal_year or candidate.fiscal_year,
             fiscal_period=request.fiscal_period or candidate.fiscal_period,
             form_type=request.form_type or candidate.form_type,
-            language=request.language or candidate.language)
+            language=request.language or candidate.language,
+        )
 
     def cleanup_target(self, request: SourceRequest, candidate: DownloadCandidate) -> None:
         """Remove only this transaction's scratch while its target lock is held."""
@@ -632,9 +720,31 @@ class AcquisitionCoordinator:
         if request.market is None:
             raise MarketRoutingError("market is required before adapter discovery")
         adapter = self.adapters.for_market(request.market)
+        discovery_request, identity_reason = self._provider_request_for_identity(request)
+        if discovery_request is None:
+            status = (AcquisitionStatus.AMBIGUOUS
+                      if identity_reason == "issuer_scope_has_multiple_target_listings"
+                      else AcquisitionStatus.MISSING)
+            plan = build_gap_plan(
+                request_id=request.request_id,
+                as_of_date=request.as_of_date,
+                document_kind=request.document_kind,
+                entity=request.entity,
+                market=request.market,
+                local_handles=list(resolution.matches),
+                remote_candidates=[],
+                provider_error=identity_reason,
+            )
+            return _AcquisitionDecision(AcquisitionResult(
+                schema_version=ACQUISITION_SCHEMA_VERSION,
+                status=status,
+                resolution=resolution,
+                adapter_name=adapter.name,
+                gap_plan=plan,
+                reason=identity_reason or "issuer_scope_has_no_target_listing",
+            ))
         # Latest discovery belongs to the provider, including its bounded
         # completeness window. Never guess a fiscal year from the cutoff.
-        discovery_request = request
         provider_error: str | None = None
         acquisition_failure = None
         try:
@@ -662,7 +772,7 @@ class AcquisitionCoordinator:
             attach_acquisition_failure(exc, budget=budget, code="acquisition_validation_failed")
             acquisition_failure = published_acquisition_failure(exc)
             discovered = ()
-        self._validate_candidates(request, discovered)
+        self._validate_candidates(discovery_request, discovered, catalog=self.catalog)
         discovered = tuple(c for c in discovered if candidate_scope is None or candidate_scope(c))
         candidate = None
         verified = None

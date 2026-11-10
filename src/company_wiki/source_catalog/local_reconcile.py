@@ -684,7 +684,12 @@ def _prepare_local_source(
         ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
         body_owner = (_sec_original(ref, request.market, request.document_kind)
                       or request.market == "CN" and ref.mime_type == "application/pdf")
-        identity_match = resolver._identity_matches(request, metadata)
+        identity_match = resolver.match_source_identity(
+            market=request.market,
+            security_id=request.security_id,
+            issuer_link_id=request.issuer_link_id,
+            metadata=metadata,
+        )
         if identity_match == "incomplete" and not body_owner:
             diagnostics.append({
                 "document_id": candidate["document_id"],

@@ -55,9 +55,16 @@ def _candidate(payload: dict[str, Any], market: str) -> tuple[DownloadCandidate,
         raise DayuBridgeError("invalid_candidate", "candidate SDK payload or market is invalid")
     for key in ("candidate_id", "provider", "provider_document_id", "entity", "title", "market",
                 "source_url", "document_kind", "filing_date", "fiscal_year", "fiscal_period",
-                "form_type", "language", "amended"):
+                "form_type", "language", "amended", "security_id"):
         if raw.get(key) != getattr(candidate, key):
             raise DayuBridgeError("invalid_candidate", "candidate differs from its discovery metadata")
+    profile = raw.get("sdk_company_profile")
+    if not candidate.security_id or not isinstance(profile, dict) or (
+        profile.get("ticker") != candidate.security_id
+    ):
+        raise DayuBridgeError(
+            "invalid_candidate", "candidate listing differs from the provider profile"
+        )
     url = urlsplit(candidate.source_url)
     domain = (url.hostname or "").lower()
     expected = "sec.gov" if market == "US" else "hkexnews.hk"

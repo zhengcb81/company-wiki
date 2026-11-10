@@ -11,6 +11,7 @@ from functools import lru_cache
 import io
 import hashlib
 import json
+import logging
 import os
 from pathlib import Path
 import re
@@ -19,6 +20,12 @@ import unicodedata
 from uuid import uuid4
 
 import requests
+
+from .security_listing_evidence import (
+    IssuerListingEvidence,
+    ListingEvidenceError,
+    encode_evidence,
+)
 
 
 SECURITY_IDENTITY_SCHEMA_VERSION = "1.0"
@@ -309,17 +316,18 @@ class SecurityMaster:
     records: tuple[SecurityRecord, ...]
     markets: tuple[str, ...]
     snapshots: dict[str, dict[str, Any]]
+    issuer_link_evidence: tuple[IssuerListingEvidence, ...] = ()
 
 
 def _cross_market_issuer_link_ids(
     master: SecurityMaster,
 ) -> dict[tuple[str, str], str]:
-    """Link listings only when their official records carry the same valid LEI.
+    """Link exact listings only through a verified LEI or SEC filing proof.
 
     Names and trading aliases are search aids, not proof that different
-    securities belong to the same legal issuer. The LEI is read from the
-    provider-owned identifier record and checksum-validated before it can bind
-    markets.
+    securities belong to the same legal issuer. LEIs come from provider-owned
+    identifier records; filing-backed links are loaded from the separate,
+    hash-bound evidence store and attached only to its exact listed records.
     """
     lei_nodes: dict[str, set[tuple[str, str]]] = {}
     node_leis: dict[tuple[str, str], set[str]] = {}
@@ -339,12 +347,59 @@ def _cross_market_issuer_link_ids(
         link_id = "issuer-link-v1:" + hashlib.sha256(f"lei:{lei}".encode("ascii")).hexdigest()
         for node in nodes:
             link_candidates.setdefault(node, set()).add(link_id)
+
+    records_by_listing = {
+        (record.market, _ticker_key(record.security_id, record.market)): record
+        for record in master.records
+    }
+    for evidence in master.issuer_link_evidence:
+        if not isinstance(evidence, IssuerListingEvidence):
+            continue
+        evidence_nodes: set[tuple[str, str]] = set()
+        evidence_leis: set[str] = set()
+        valid = True
+        for listing in evidence.listings:
+            key = (listing.market, _ticker_key(listing.security_id, listing.market))
+            listing_record = records_by_listing.get(key)
+            if (
+                listing_record is None
+                or listing_record.exchange != listing.exchange
+                or listing_record.source_name != listing.source_name
+                or listing_record.source_record_id != listing.source_record_id
+            ):
+                valid = False
+                break
+            if listing.market == "US":
+                record_cik = str(listing_record.identifiers.get("cik", "")).zfill(10)
+                if record_cik != evidence.issuer_cik:
+                    valid = False
+                    break
+            lei = _validated_lei(listing_record)
+            if lei:
+                evidence_leis.add(lei)
+            evidence_nodes.add(key)
+        if not valid or len({market for market, _security_id in evidence_nodes}) < 2:
+            continue
+        # Prefer the globally stable LEI when the exact linked listings already
+        # carry one. Otherwise use the SEC CIK proven by the filing table.
+        # Conflicting LEIs make the evidence unusable instead of linking them.
+        if len(evidence_leis) > 1:
+            continue
+        link_id = (
+            "issuer-link-v1:" + hashlib.sha256(
+                f"lei:{next(iter(evidence_leis))}".encode("ascii")
+            ).hexdigest()
+            if evidence_leis
+            else evidence.issuer_link_id
+        )
+        for node in evidence_nodes:
+            link_candidates.setdefault(node, set()).add(link_id)
     # A source snapshot that declares multiple different LEIs for the same
     # normalized issuer name is internally ambiguous; do not publish a link.
     return {
         node: next(iter(candidates))
         for node, candidates in link_candidates.items()
-        if len(candidates) == 1 and len(node_leis.get(node, ())) == 1
+        if len(candidates) == 1 and len(node_leis.get(node, ())) <= 1
     }
 
 
@@ -426,19 +481,174 @@ class SecurityMasterStore:
     def has_market(self, market: str) -> bool:
         return self.path_for(market).is_file()
 
+    def issuer_link_id_for_security(self, market: str, security_id: str) -> str | None:
+        """Return the current source-backed link for one exact market listing."""
+        master = self.load()
+        return _cross_market_issuer_link_ids(master).get(
+            (_market(market), _ticker_key(security_id, market))
+        )
+
+    def security_ids_for_issuer_link(self, market: str, issuer_link_id: str) -> tuple[str, ...]:
+        """Return all current official listing IDs bound to one verified link."""
+        target_market = _market(market)
+        master = self.load()
+        link_ids = _cross_market_issuer_link_ids(master)
+        return tuple(sorted({
+            record.security_id
+            for record in master.records
+            if record.market == target_market
+            and link_ids.get((record.market, _ticker_key(record.security_id, record.market)))
+            == issuer_link_id
+        }))
+
+    @property
+    def issuer_link_directory(self) -> Path:
+        return self.cache_dir / "issuer_links"
+
+    def _write_issuer_link(self, evidence: IssuerListingEvidence) -> Path:
+        """Store one source-derived issuer link, keyed by exact source bytes.
+
+        Market snapshots remain provider-owned and unchanged.  Evidence is an
+        append-only derived fact so refreshing a market can neither erase nor
+        silently rewrite a filing-backed cross-listing.
+        """
+        if not isinstance(evidence, IssuerListingEvidence):
+            raise TypeError("evidence must be IssuerListingEvidence")
+        try:
+            encoded = encode_evidence(evidence)
+        except ListingEvidenceError:
+            raise
+        directory = self.issuer_link_directory
+        directory.mkdir(parents=True, exist_ok=True)
+        evidence_sha256 = evidence.to_dict()["evidence_sha256"]
+        path = directory / f"s20f-{evidence.source_sha256[:24]}-{evidence_sha256[:16]}.json"
+        invalid_paths: list[Path] = []
+        matching_path_exists = False
+        for existing_path in directory.glob(f"s20f-{evidence.source_sha256[:24]}-*.json"):
+            try:
+                existing_bytes = existing_path.read_bytes()
+                existing_value = json.loads(existing_bytes.decode("utf-8"))
+                existing = IssuerListingEvidence.from_dict(existing_value)
+                expected_name = (
+                    f"s20f-{existing.source_sha256[:24]}-"
+                    f"{existing.to_dict()['evidence_sha256'][:16]}.json"
+                )
+                if existing_path.name != expected_name:
+                    raise ListingEvidenceError("cache filename does not match evidence digest")
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError, ListingEvidenceError) as exc:
+                logging.getLogger(__name__).warning(
+                    "rebuilding invalid issuer-link cache %s from verified source: %s",
+                    existing_path.name, exc,
+                )
+                invalid_paths.append(existing_path)
+                continue
+            if existing_bytes != encoded:
+                raise SecurityIdentityError(
+                    "immutable issuer-link evidence conflicts for the same source SHA"
+                )
+            matching_path_exists = True
+        temporary = path.with_name(f"tmp-{uuid4().hex[:16]}.json")
+        try:
+            if not matching_path_exists:
+                temporary.write_bytes(encoded)
+                # The public SourceCatalog writer holds the catalog operation
+                # lock while doing this check and rename; the temporary file keeps
+                # readers from seeing partial JSON. Replacing an invalid derived
+                # cache entry is safe because the verified filing bytes are the
+                # authority and the cache key binds those exact bytes.
+                os.replace(temporary, path)
+            for invalid_path in invalid_paths:
+                if invalid_path != path:
+                    invalid_path.unlink(missing_ok=True)
+        finally:
+            temporary.unlink(missing_ok=True)
+        return path
+
+    def _load_issuer_link_evidence(self) -> tuple[IssuerListingEvidence, ...]:
+        directory = self.issuer_link_directory
+        if not directory.exists():
+            return ()
+        if not directory.is_dir():
+            raise SecurityIdentityError("issuer-link evidence path must be a directory")
+        evidence: list[IssuerListingEvidence] = []
+        for path in sorted(directory.glob("s20f-*.json")):
+            try:
+                raw = path.read_bytes()
+                value = json.loads(raw.decode("utf-8"))
+                item = IssuerListingEvidence.from_dict(value)
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError, ListingEvidenceError) as exc:
+                logging.getLogger(__name__).warning(
+                    "ignoring invalid issuer-link cache %s: %s", path.name, exc,
+                )
+                continue
+            expected_name = (
+                f"s20f-{item.source_sha256[:24]}-"
+                f"{item.to_dict()['evidence_sha256'][:16]}.json"
+            )
+            if path.name != expected_name:
+                logging.getLogger(__name__).warning(
+                    "ignoring issuer-link cache with mismatched content identity: %s",
+                    path.name,
+                )
+                continue
+            evidence.append(item)
+        # These files are derived cache entries. A corrupt relationship must
+        # not make otherwise valid market snapshots unusable.
+        return tuple(evidence)
+
     def issuer_identity_tokens(
         self, entity: str, *, market: str | None = None, security_id: str | None = None,
+        issuer_link_id: str | None = None,
     ) -> tuple[str, ...]:
-        """Project issuer aliases, optionally within the requested source market.
+        """Project exact issuer tokens into a requested source market.
 
-        A source-market query must resolve aliases against that market's own
-        verified listing snapshot.  A ticker from another listing is only a
-        usable alias when the source-market snapshot itself records it.
+        A foreign-market ticker is projected only through source-backed exact
+        listing evidence, and only when target rows resolve to one issuer link.
         """
         wanted = _normalize_text(entity)
         if not wanted:
             return ()
         if market is not None:
+            target_market = _market(market)
+            if issuer_link_id is not None:
+                try:
+                    master = self.load()
+                except (OSError, SecurityIdentityError, SecurityMasterUnavailableError):
+                    return ()
+                link_ids = _cross_market_issuer_link_ids(master)
+                source_links = {
+                    link_ids[(record.market, _ticker_key(record.security_id, record.market))]
+                    for record in master.records
+                    if wanted in {
+                        _normalize_text(record.canonical_name),
+                        _normalize_text(record.ticker),
+                        _normalize_text(record.security_id),
+                        *(_normalize_text(alias) for alias in record.aliases),
+                    }
+                    and (record.market, _ticker_key(record.security_id, record.market)) in link_ids
+                }
+                if issuer_link_id not in source_links:
+                    return ()
+                if security_id is not None and link_ids.get((
+                    target_market, _ticker_key(security_id, target_market),
+                )) != issuer_link_id:
+                    return ()
+                linked = [
+                    record for record in master.records
+                    if record.market == target_market
+                    and link_ids.get((record.market, _ticker_key(record.security_id, record.market)))
+                    == issuer_link_id
+                ]
+                if not linked:
+                    return ()
+                return tuple(sorted({
+                    _normalize_text(value)
+                    for record in linked
+                    for value in (
+                        record.canonical_name, record.ticker, record.security_id, *record.aliases,
+                    )
+                    if _normalize_text(value)
+                }))
             path = self.path_for(market)
             try:
                 stat = path.stat()
@@ -454,10 +664,53 @@ class SecurityMasterStore:
                 return (wanted,)
             issuer = token_issuers.get(wanted, "")
             matched_unambiguous_alias = bool(issuer)
-            if not issuer and security_id is not None:
-                issuer = security_issuers.get(_ticker_key(security_id, market), "")
-                if issuer and wanted in token_owners and issuer not in token_owners[wanted]:
+            security_issuer = (
+                security_issuers.get(_ticker_key(security_id, target_market), "")
+                if security_id is not None else ""
+            )
+            if issuer and security_issuer and issuer != security_issuer:
+                return ()
+            if not issuer and security_issuer:
+                issuer = security_issuer
+            if not issuer and wanted not in token_owners:
+                try:
+                    master = self.load()
+                except (OSError, SecurityIdentityError, SecurityMasterUnavailableError):
                     return ()
+                link_ids = _cross_market_issuer_link_ids(master)
+                source_links = {
+                    link_ids[(record.market, _ticker_key(record.security_id, record.market))]
+                    for record in master.records
+                    if record.market != target_market
+                    and wanted in {
+                        _normalize_text(record.canonical_name),
+                        _normalize_text(record.ticker),
+                        _normalize_text(record.security_id),
+                        *(_normalize_text(alias) for alias in record.aliases),
+                    }
+                    and (record.market, _ticker_key(record.security_id, record.market)) in link_ids
+                }
+                target_link = link_ids.get((
+                    target_market, _ticker_key(security_id, target_market),
+                )) if security_id is not None else None
+                if target_link is not None and source_links and target_link not in source_links:
+                    return ()
+                if target_link is not None and target_link in source_links:
+                    source_links = {target_link}
+                if len(source_links) == 1:
+                    linked = [
+                        record for record in master.records
+                        if record.market == target_market
+                        and link_ids.get((record.market, _ticker_key(record.security_id, record.market)))
+                        in source_links
+                    ]
+                    if linked:
+                        return tuple(sorted({
+                            _normalize_text(value)
+                            for record in linked
+                            for value in (record.canonical_name, record.ticker, record.security_id, *record.aliases)
+                            if _normalize_text(value)
+                        }))
             if not issuer:
                 # An ambiguous alias must not silently become a global text
                 # search. An exact same-market security id can disambiguate it.
@@ -592,6 +845,7 @@ class SecurityMasterStore:
             tuple(sorted(records, key=_record_sort_key)),
             tuple(loaded_markets),
             snapshots,
+            self._load_issuer_link_evidence(),
         )
 
 
@@ -777,6 +1031,35 @@ class SecurityIdentityResolver:
             candidates=candidates,
         )
 
+    def _linked_exact_candidates(
+        self,
+        exact: tuple[IdentityCandidate, ...],
+        *,
+        market: str | None,
+        exchange: str | None,
+        matched_value: str,
+    ) -> tuple[IdentityCandidate, ...]:
+        """Map an exact foreign-market symbol through a verified issuer link."""
+        if market is None or any(item.market == market for item in exact):
+            return ()
+        if not exact or any(item.issuer_link_id is None for item in exact):
+            return ()
+        link_ids = {item.issuer_link_id for item in exact}
+        records = [
+            record for record in self.master.records
+            if (market is None or record.market == market)
+            and (exchange is None or record.exchange == exchange)
+            and self._issuer_link_ids.get(
+                (record.market, _ticker_key(record.security_id, record.market))
+            ) in link_ids
+        ]
+        return tuple(sorted((
+            self._candidate(
+                record, basis="issuer_link_exact", matched_value=matched_value, score=1.0,
+            )
+            for record in records
+        ), key=_candidate_sort_key))
+
     def identify(
         self,
         query: str,
@@ -820,6 +1103,22 @@ class SecurityIdentityResolver:
                 IdentityStatus.AMBIGUOUS,
                 "multiple_verified_exact_identities",
                 eligible_exact,
+            )
+        linked_exact = self._linked_exact_candidates(
+            exact,
+            market=market_hint,
+            exchange=exchange_hint,
+            matched_value=query,
+        )
+        if len(linked_exact) == 1:
+            return self._result(
+                query, normalized_query, market_hint, exchange_hint,
+                IdentityStatus.RESOLVED, "one_verified_linked_exact_identity", linked_exact,
+            )
+        if len(linked_exact) > 1:
+            return self._result(
+                query, normalized_query, market_hint, exchange_hint,
+                IdentityStatus.AMBIGUOUS, "multiple_linked_exact_market_listings", linked_exact,
             )
         if exact and (market_hint or exchange_hint):
             return self._result(

@@ -13,6 +13,7 @@ import sqlite3
 from collections.abc import Iterator, Mapping
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
+from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
@@ -236,6 +237,7 @@ class SourceVersionReader:
 
         candidate_tokens = resolver.issuer_identity_tokens(
             request.entity, market=request.market, security_id=request.security_id,
+            issuer_link_id=request.issuer_link_id,
         )
         for document in self._candidate_pages(
             request, include_unknown_publication=True, identity_tokens=candidate_tokens,
@@ -253,7 +255,12 @@ class SourceVersionReader:
                 continue
             if "published_date" in metadata:
                 document["published_date"] = metadata["published_date"]
-            if resolver._identity_matches(request, metadata) != "match":
+            if resolver.match_source_identity(
+                market=request.market,
+                security_id=request.security_id,
+                issuer_link_id=request.issuer_link_id,
+                metadata=metadata,
+            ) != "match":
                 continue
             if request.fiscal_year is not None and (
                 _fiscal_year(document, metadata) != request.fiscal_year
@@ -410,6 +417,7 @@ class SourceVersionReader:
     def open_described_version(
         self, ref: SourceRef, *, purpose: str = "source_export",
         expected_read_policy_sha256: str | None = None,
+        identity_cache_dir: Path | None = None,
     ) -> tuple[VerifiedContent, dict[str, str | int | None]]:
         """Observe facts once and verify the actual buffer under one read context."""
         self._validate_read_policy_pin(expected_read_policy_sha256)
@@ -420,7 +428,10 @@ class SourceVersionReader:
         qualification = None
         if purpose == "filing_reuse":
             from .assertion_service import source_scope_qualification
-            qualification = source_scope_qualification(self.catalog, ref, metadata=manifest)
+            qualification = source_scope_qualification(
+                self.catalog, ref, metadata=manifest,
+                identity_cache_dir=identity_cache_dir,
+            )
         opened = self._verified_version(ref, purpose=purpose, expected_read_policy_sha256=None,
                                         retain_bytes=True, current_read_policy_sha256=pin,
                                         scope_qualification=qualification)
@@ -506,7 +517,7 @@ class SourceVersionReader:
                 for key in ("retrieved_at", "collector_name", "collector_version")
             )
         )
-        return {
+        candidate: dict[str, object] = {
             "source_ref": asdict(ref),
             "document_id": ref.document_id,
             "source_id": ref.source_id,
@@ -541,6 +552,25 @@ class SourceVersionReader:
             "prompt_injection_status": review_status,
             "capture_provenance": "indexed_location_manifest" if capture else None,
         }
+        market = candidate.get("market")
+        security_id = candidate.get("security_id")
+        if isinstance(market, str) and isinstance(security_id, str) and security_id:
+            try:
+                from .security_identity import (
+                    SecurityIdentityError,
+                    SecurityMasterStore,
+                    SecurityMasterUnavailableError,
+                )
+
+                store = SecurityMasterStore(
+                    Path(self.catalog.config.catalog_dir) / "security_master"
+                )
+                issuer_link_id = store.issuer_link_id_for_security(market, security_id)
+            except (OSError, SecurityIdentityError, SecurityMasterUnavailableError):
+                issuer_link_id = None
+            if issuer_link_id is not None:
+                candidate["issuer_link_id"] = issuer_link_id
+        return candidate
 
     def _current_review(self, ref: SourceRef) -> ReviewSnapshot:
         """Return an optional review diagnostic, never a read prerequisite."""

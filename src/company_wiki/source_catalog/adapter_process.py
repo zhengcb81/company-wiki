@@ -528,6 +528,7 @@ class JsonCommandAdapter:
                 last_modified=value.get("last_modified"),
                 remote_size=value.get("remote_size", value.get("content_length")),
                 adapter_payload_json=canonical_json(value),
+                security_id=value.get("security_id"),
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise AdapterProcessError(f"invalid adapter candidate: {exc}") from exc

@@ -36,7 +36,13 @@ from .portfolio_promoter import (
 )
 from .service import SourceCatalog
 from .source_read_policy import source_read_policy_sha256
-from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
+from .resolver import (
+    SOURCE_QUERY_REQUEST_SCHEMA_VERSION,
+    ResolutionResult,
+    ResolutionStatus,
+    SourceRequest,
+    SourceResolver,
+)
 from .security_identity import (
     IdentityResult,
     IdentityStatus,
@@ -268,6 +274,14 @@ def _parser() -> argparse.ArgumentParser:
     identify.add_argument("--identity-cache-dir", type=Path)
     identify.add_argument("--refresh", action="store_true")
 
+    identity_link = subparsers.add_parser(
+        "identity-link",
+        help="derive cross-market issuer links from an exact verified SEC 20-F SourceRef",
+    )
+    identity_link.add_argument("--document-id", required=True)
+    identity_link.add_argument("--source-id", required=True)
+    identity_link.add_argument("--content-sha256", required=True)
+
     query = subparsers.add_parser(
         "query", help="query catalog metadata and artifact paths"
     )
@@ -324,6 +338,8 @@ def _parser() -> argparse.ArgumentParser:
     resolve.add_argument("--market")
     resolve.add_argument("--exchange")
     resolve.add_argument("--security-id")
+    resolve.add_argument("--identity-scope", choices=("listing", "issuer"))
+    resolve.add_argument("--issuer-link-id")
     resolve.add_argument("--identity-cache-dir", type=Path)
     resolve.add_argument("--form-type")
     resolve.add_argument("--fiscal-year", type=int)
@@ -345,6 +361,8 @@ def _parser() -> argparse.ArgumentParser:
     ensure.add_argument("--market")
     ensure.add_argument("--exchange")
     ensure.add_argument("--security-id")
+    ensure.add_argument("--identity-scope", choices=("listing", "issuer"))
+    ensure.add_argument("--issuer-link-id")
     ensure.add_argument("--identity-cache-dir", type=Path)
     ensure.add_argument("--form-type")
     ensure.add_argument("--fiscal-year", type=int)
@@ -841,6 +859,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             entity=resolved.canonical_name if resolved else args.entity,
             market=resolved.market if resolved else args.market,
             security_id=resolved.security_id if resolved else args.security_id,
+            identity_scope=(
+                (
+                    "listing" if resolved.security_id else "issuer"
+                ) if resolved and resolved.issuer_link_id
+                else getattr(args, "identity_scope", None)
+            ),
+            issuer_link_id=(
+                resolved.issuer_link_id if resolved else getattr(args, "issuer_link_id", None)
+            ),
             document_kind=args.document_kind,
             form_type=args.form_type,
             fiscal_year=args.fiscal_year,
@@ -851,6 +878,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             as_of_date=args.as_of_date,
             mode=getattr(args, "mode", None),
             allow_download=allow_download,
+            schema_version=(
+                SOURCE_QUERY_REQUEST_SCHEMA_VERSION
+                if (resolved and resolved.issuer_link_id)
+                or getattr(args, "issuer_link_id", None)
+                else "1.0"
+            ),
         )
         return request, identity
 
@@ -974,6 +1007,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = identified_identity.to_dict()
             if refresh is not None:
                 result["refresh"] = refresh
+        elif args.command == "identity-link":
+            result = get_catalog().register_sec_20f_listing_link(
+                document_id=args.document_id,
+                source_id=args.source_id,
+                content_sha256=args.content_sha256,
+            )
         elif args.command == "query":
             result = get_catalog().query(
                 text=args.text,

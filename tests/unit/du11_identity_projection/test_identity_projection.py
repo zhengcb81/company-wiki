@@ -17,6 +17,24 @@ def request(market="HK", code="09896"):
                          as_of_date="2026-10-18", market=market, security_id=code)
 
 
+@pytest.fixture
+def resolver(tmp_path):
+    owned = tmp_path / "resolver-owner"
+    owned.mkdir()
+    raw_root = owned / "raw"
+    raw_root.mkdir()
+    catalog = SourceCatalog(CatalogConfig(
+        owned,
+        owned / "catalog",
+        (RootSpec("raw", raw_root, "directory"),),
+        ("directory",),
+    ))
+    try:
+        yield SourceResolver(catalog)
+    finally:
+        catalog.close()
+
+
 @pytest.mark.parametrize("market,left,right,expected", [
     ("HK", "9896", "09896", "match"), ("HK", "09896", "9896", "match"),
     ("HK", "700", "00700", "match"), ("HK", "9896", "09897", "conflict"),
@@ -31,9 +49,13 @@ def request(market="HK", code="09896"):
     ("HK", "98 96", "9896", "conflict"),
     ("HK", "９８９６", "09896", "conflict"),
 ])
-def test_strict_match_is_market_qualified(market, left, right, expected):
-    assert SourceResolver._identity_matches(request(market, left),
-        {"market": market, "security_id": right}) == expected
+def test_strict_match_is_market_qualified(resolver, market, left, right, expected):
+    identity = request(market, left)
+    assert resolver.match_source_identity(
+        market=identity.market,
+        security_id=identity.security_id,
+        metadata={"market": market, "security_id": right},
+    ) == expected
 
 
 @pytest.mark.parametrize("metadata", [
@@ -41,8 +63,22 @@ def test_strict_match_is_market_qualified(market, left, right, expected):
     {"market": None, "security_id": "9896"},
     {"market": "HK", "security_id": "9896", "_conflicted_fields": ["security_id"]},
 ])
-def test_known_market_is_not_borrowed_from_request_or_over_conflict(metadata):
-    assert SourceResolver._identity_matches(request(), metadata) == "conflict"
+def test_known_market_is_not_borrowed_from_request_or_over_conflict(resolver, metadata):
+    identity = request()
+    assert resolver.match_source_identity(
+        market=identity.market,
+        security_id=identity.security_id,
+        metadata=metadata,
+    ) == "conflict"
+
+
+def test_issuer_link_without_listing_scope_is_incomplete(resolver):
+    assert resolver.match_source_identity(
+        market=None,
+        security_id=None,
+        issuer_link_id="issuer-link-v1:" + "0" * 64,
+        metadata={"market": "HK", "security_id": "09988"},
+    ) == "incomplete"
 
 
 @pytest.fixture

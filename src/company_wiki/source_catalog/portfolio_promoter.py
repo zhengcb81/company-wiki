@@ -254,6 +254,7 @@ def _build_candidate(
         fiscal_period=str(meta.get("fiscal_period") or "").strip() or None,
         language=str(meta.get("source_language") or "").strip() or None,
         amended=bool(meta.get("amended")),
+        security_id=identity.security_id,
     )
 
 

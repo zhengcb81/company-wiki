@@ -92,6 +92,7 @@ async def discover_sec(
             "candidate_id": "sec:" + record.accession_number,
             "provider": "sec", "provider_document_id": record.accession_number,
             "market": "US", "entity": request.entity,
+            "security_id": request.security_id,
             "title": f"{company_name} {record.form_type} {record.report_date}",
             "document_kind": request.document_kind, "form_type": record.form_type,
             "filing_date": record.filing_date, "fiscal_year": year, "fiscal_period": period,
@@ -157,7 +158,8 @@ def discover_hk(
         value = {
             "candidate_id": "hkexnews:" + candidate.source_id,
             "provider": "hkexnews", "provider_document_id": candidate.source_id,
-            "market": "HK", "entity": request.entity, "title": candidate.title,
+            "market": "HK", "entity": request.entity, "security_id": profile.ticker,
+            "title": candidate.title,
             "source_url": candidate.source_url, "document_kind": request.document_kind,
             "form_type": candidate.fiscal_period, "filing_date": candidate.filing_date,
             "fiscal_year": candidate.fiscal_year, "fiscal_period": candidate.fiscal_period,

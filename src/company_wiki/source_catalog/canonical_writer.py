@@ -556,7 +556,8 @@ class CanonicalSourceWriter:
                                    (receipt.mime_type,source_id))
         ref = SourceRef(document_id, source_id, receipt.content_sha256, receipt.byte_size, receipt.mime_type)
         facts = {"entity": request.entity, "market": candidate.market,
-            "security_id": request.security_id, "document_kind": candidate.document_kind,
+            "security_id": getattr(candidate, "security_id", None) or request.security_id,
+            "document_kind": candidate.document_kind,
             "fiscal_year": candidate.fiscal_year, "fiscal_period": candidate.fiscal_period,
             "form_type": candidate.form_type, "published_date": candidate.filing_date,
             "filing_date": candidate.filing_date, "provider": candidate.provider,
@@ -567,13 +568,16 @@ class CanonicalSourceWriter:
             "candidate": {key:getattr(candidate,key) for key in (
                 "candidate_id", "provider", "provider_document_id", "market", "entity",
                 "title", "source_url", "document_kind", "filing_date", "fiscal_year",
-                "fiscal_period", "form_type", "language")},
+                "fiscal_period", "form_type", "language", "security_id")
+                if hasattr(candidate, key)},
             "receipt": {key:getattr(receipt,key) for key in (
                 "candidate_id", "provider", "provider_document_id", "source_url",
                 "content_sha256", "byte_size", "mime_type", "adapter_name", "adapter_version")}}
         claim_sha = hashlib.sha256(canonical_json(claim).encode("utf-8")).hexdigest()
         evidence = {key:{"locator":"canonical-commit:/" + (
-                "request/security_id" if key=="security_id" else "candidate/" + key),
+                ("candidate/security_id" if getattr(candidate, "security_id", None)
+                 else "request/security_id")
+                if key=="security_id" else "candidate/" + key),
                 "value":value, "content_sha256":ref.content_sha256,
                 "commit_sha256":claim_sha, "extraction_method":"provider-metadata-import/1"}
             for key,value in facts.items()}
@@ -629,7 +633,16 @@ class CanonicalSourceWriter:
     ) -> Path:
         from .acquisition_validation import candidate_scope_problem, receipt_binding_problem
 
-        problem = candidate_scope_problem(request, candidate)
+        from .security_identity import SecurityMasterStore
+
+        security_master = SecurityMasterStore(
+            self.catalog.config.catalog_dir / "security_master"
+        )
+        problem = candidate_scope_problem(
+            request,
+            candidate,
+            issuer_link_lookup=security_master.issuer_link_id_for_security,
+        )
         if problem is not None:
             raise CanonicalImportError(f"candidate {problem} does not match request")
         problem = receipt_binding_problem(candidate, receipt)
@@ -761,7 +774,8 @@ class CanonicalSourceWriter:
             # prefer-new metadata merge both read market at top level, while
             # security_id already sits here (portfolio-promotion spike).
             "market": candidate.market,
-            "security_id": getattr(request, "security_id", None),
+            "security_id": getattr(candidate, "security_id", None)
+                or getattr(request, "security_id", None),
             "source_title": candidate.title,
             "provider": candidate.provider,
             "provider_document_id": candidate.provider_document_id,

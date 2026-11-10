@@ -45,6 +45,7 @@ def _payload(market):
         market=market, entity="Fixture", title="Fixture fiscal report", source_url="https://www.sec.gov/Archives/fixture.htm",
         document_kind="quarterly_report", form_type="10-Q", filing_date="2025-10-25",
         fiscal_year=2026, fiscal_period="Q1", language="en", amended=False,
+        security_id="FIXTURE", sdk_company_profile={"ticker": "FIXTURE"},
         cik="123", report_date="2025-09-30")
     if market == "HK":
         sdk = HKCandidate()
@@ -52,10 +53,12 @@ def _payload(market):
             provider_document_id=sdk.source_id, source_url=sdk.source_url,
             document_kind="annual_report", form_type="FY", fiscal_year=2025,
             fiscal_period="FY", language="zh", title=sdk.title, filing_date=sdk.filing_date,
+            security_id="0700.HK", sdk_company_profile={"ticker": "0700.HK"},
             sdk_report_candidate=asdict(sdk))
     candidate = DownloadCandidate(**{k: raw[k] for k in (
         "candidate_id", "provider", "provider_document_id", "market", "entity", "title", "source_url",
-        "document_kind", "form_type", "filing_date", "fiscal_year", "fiscal_period", "language", "amended")},
+        "document_kind", "form_type", "filing_date", "fiscal_year", "fiscal_period", "language", "amended",
+        "security_id")},
         adapter_payload_json=canonical_json(raw))
     return candidate.to_dict()
 
@@ -164,3 +167,53 @@ def test_fetch_rejects_changed_discovery_binding_before_provider():
     payload["fiscal_year"] = 2025
     with pytest.raises(DayuBridgeError, match="discovery metadata"):
         _candidate(payload, "US")
+
+
+@pytest.mark.parametrize("market,wrong_code", [("US", "BILI"), ("HK", "09988.HK")])
+def test_fetch_rejects_provider_profile_listing_mismatch_before_get(
+    tmp_path, monkeypatch, fetch_loop, market, wrong_code,
+):
+    from company_wiki.source_catalog.dayu_sdk_cli import _sec_operation, _hk_operation
+    from company_wiki.source_catalog.dayu_sdk_bridge import DayuBridgeError
+    from types import SimpleNamespace
+
+    payload = _payload(market)
+    raw = __import__("json").loads(payload["adapter_payload_json"])
+    # Simulate a wire record which is self-consistent at the outer candidate
+    # layer but contradicts the provider-resolved official listing profile.
+    payload["security_id"] = wrong_code
+    raw["security_id"] = wrong_code
+    payload["adapter_payload_json"] = canonical_json(raw)
+    calls = []
+    def respond(request):
+        calls.append(request)
+        return httpx.Response(200, stream=httpx.ByteStream(b"fixture"))
+    monkeypatch.setattr(httpx, "AsyncHTTPTransport", lambda: httpx.MockTransport(respond))
+    monkeypatch.setattr(httpx, "HTTPTransport", lambda: httpx.MockTransport(respond))
+    scratch, staging = tmp_path / "scratch", tmp_path / "staging"
+    scratch.mkdir()
+    staging.mkdir()
+    if market == "US":
+        monkeypatch.setenv("SEC_USER_AGENT", "test-fixture (not a real request)")
+        class Downloader:
+            def __init__(self, workspace_root, client): self.client = client
+            async def fetch_file_bytes(self, url):
+                return (await self.client.get(url)).content
+        _module(monkeypatch, "dayu.fins.downloaders.sec_downloader", SecDownloader=Downloader)
+        _module(monkeypatch, "dayu.fins.pipelines.sec_filing_collection", collect_filings_from_table=None)
+        with pytest.raises(DayuBridgeError, match="provider profile"):
+            fetch_loop.run_until_complete(_sec_operation(
+                "fetch", payload, _budget(), scratch, tmp_path, staging,
+                {"name": "test", "version": "1.0.0"}, None,
+            ))
+    else:
+        class Downloader:
+            def __init__(self, client, sleep_func): self.client = client
+            def download_report_pdf(self, candidate):
+                return SimpleNamespace(pdf_path=scratch / "unused.pdf", content_length=0, sha256="")
+        _module(monkeypatch, "dayu.fins.downloaders.hkexnews_downloader", HkexnewsDiscoveryClient=Downloader)
+        _module(monkeypatch, "dayu.fins.pipelines.cn_download_models", CnReportCandidate=HKCandidate, CnReportQuery=None)
+        with pytest.raises(DayuBridgeError, match="provider profile"):
+            _hk_operation("fetch", payload, _budget(), scratch, staging,
+                          {"name": "test", "version": "1.0.0"}, None)
+    assert calls == []
