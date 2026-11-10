@@ -459,3 +459,9 @@ DU3-dependencies分支25个交付路径全部与master同blob，六个实施comm
 ## 2026-11-10 CI42912332126 根修
 
 源码729a78764的Unit tests远端2F，本机复现同两例。实际错误是正确security_id让任意entity被重命名为该issuer，错误目录名因此也命中。修复归SecurityMasterStore.issuer_identity_tokens，exact id只消歧该issuer真实拥有的alias或等价市场代码。新contract先1F，修后相关59项通过，涵盖query/resolve、共享alias、零填充和跨市场关系。前一CI失败保持记录，后续CI待验证。
+
+R4工作量探针在28e18043c完成，24.865秒，9/12保持，source runtime稳定。9,051,854单位约56.6%来自fact统一扫描预扣，下一步查预估和下层实际计费重叠。探针没有改变budget，收据已归档。28e18043c已推送，push smoke18项5.58秒，远端CI42914407976正在运行。
+
+## 2026-11-10 22:31 UTC 最终发布结果
+
+身份修复源码28e18043ccad06495a0843760ea46c79e0d2222c已推送，远端CI42914407976 completed/success。首轮42912332126两例失败继续保留，相关59项与独立22项通过，第二次push smoke18项5.58秒。下一步按P3公开owner接口优先，再用已有R4工作量收据改进统一预扣与实际计费关系。

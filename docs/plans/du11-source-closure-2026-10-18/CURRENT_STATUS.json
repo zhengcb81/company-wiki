@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "MODULARITY_GATES_PATCH_REVIEWED_P3_PUBLIC_PORTS_OPEN_R4_WORK_EXHAUSTION_OPEN_CLEANUP_OPEN",
+  "project_status": "MODULARITY_AND_GATES_PATCH_PUBLISHED_CI_GREEN_P3_PORTS_OPEN_R4_WORK_ACCOUNTING_OPEN_CLEANUP_OPEN",
   "as_of_date": "2026-11-10",
-  "observed_at_utc": "2026-11-10T22:13:57Z",
-  "next_action": "Finish P3 public Reader streaming and parser ports with isolation tests, then profile R4 repeated work under the unchanged 16M work account. Continue evidence-based worktree retirement.",
+  "observed_at_utc": "2026-11-10T22:31:23Z",
+  "next_action": "Finish P3 public Reader streaming and parser interfaces, then use the recorded R4 work profile to reconcile blanket precharges with already charged lower-level operations and fix the three omitted business units under the existing account.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -757,7 +757,7 @@
       "observer_unchanged": true
     },
     "open_items": [
-      "Profile the work exhausted R4 selection and eliminate repeated work within the same account.",
+      "Use the stored R4 charge profile to reconcile blanket reading-business scan precharges with actual lower-level charges. Add owner-level RED/positive controls and correct the common cause under the existing 16M account.",
       "Verify all three omitted original units with current source/locator bindings.",
       "Complete T4 parent-chain and SEM-QUAL-01 input/decoder controls and independent acceptance."
     ],
@@ -785,7 +785,15 @@
       "r4_h1_native_members": 67,
       "model_posts": 0,
       "downloads": 0,
-      "scratch_restored": true
+      "scratch_restored": true,
+      "work_profile": {
+        "receipt": "review/current-main-replay-20261110/r4-work-profile.json",
+        "seconds": 24.86516610000399,
+        "largest_charge_site": "SourceOperatingSession.fact",
+        "largest_charge": 9051854,
+        "largest_charge_calls": 1388,
+        "interpretation": "56.6% of configured logical work is charged at a blanket business-scan preflight. Investigate overlap with already charged lower-level operations before changing accounting."
+      }
     }
   },
   "workspace_reconciliation": {
@@ -804,12 +812,12 @@
     "dashboard_owner_p2_e2e_receipt": "docs/plans/dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json",
     "starting_root_head": "fb868064e4d37a0441373578f4286964e739e6b4",
     "starting_root_matched_origin_master": true,
-    "last_verified_main_head": "729a787641fccdad490f81b34e10669b16385e53",
+    "last_verified_main_head": "28e18043ccad06495a0843760ea46c79e0d2222c",
     "last_verified_main_matches_origin_master": true,
     "worktree_count_including_root": 8,
     "local_branch_count": 18,
     "non_ancestor_local_branch_count": 13,
-    "latest_workspace_snapshot_utc": "2026-11-10T22:13:57Z",
+    "latest_workspace_snapshot_utc": "2026-11-10T22:31:23Z",
     "current_tracked_worktree_clean": true,
     "untracked_by_top_level": {
       ".planning": {
@@ -985,9 +993,20 @@
       "existing_red_cases": 2,
       "added_red_case": 1,
       "related_tests_passed": 59,
-      "followup_publication": "included in this commit; final remote CI pending",
+      "followup_publication": "pushed to master; exact source workflow passed",
       "independent_review": "PASS",
-      "independent_key_cases_passed": 22
+      "independent_key_cases_passed": 22,
+      "source_commit": "28e18043ccad06495a0843760ea46c79e0d2222c",
+      "pushed": true,
+      "push_smoke": {
+        "passed": 18,
+        "seconds": 5.58
+      },
+      "ci_run": 42914407976,
+      "ci_status": "completed",
+      "ci_conclusion": "success",
+      "ci_updated_at": "2026-11-10T22:31:23Z",
+      "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/42914407976"
     }
   }
 }

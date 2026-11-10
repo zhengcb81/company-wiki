@@ -1,0 +1,1538 @@
+{
+  "case_id": "r4-cn-h1-real",
+  "source_ref": {
+    "byte_size": 1216470,
+    "content_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+    "document_id": "urn:company-wiki:document:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f"
+  },
+  "status": "OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE",
+  "seconds": 24.86516610000399,
+  "model_posts": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "selection": {
+    "status": "partial",
+    "coverage_complete": false,
+    "source_units": 4183,
+    "candidate_count": 3167,
+    "selected_count": 74,
+    "omitted_candidate_count": 3093,
+    "dropped_financial_count": 309,
+    "pages_total": 199,
+    "pages_read": 199,
+    "lines_total": 0,
+    "tables_total": 133,
+    "tables_scanned": 0
+  },
+  "native_member_count": 67,
+  "session_work": {
+    "used": 15994242,
+    "limit": 16000000,
+    "exhausted": true,
+    "complete": false
+  },
+  "checkpoint_gaps": {
+    "unrepresented_required_units": [
+      "urn:company-wiki:narrative-unit:sha256:c544bc121bc2e4de36c86c0f459943c49fa3faf3a3ff112ede94c47cd590ca40",
+      "urn:company-wiki:narrative-unit:sha256:3eb2cb46e23a6845f0c75c349b8fc96e03a33c476b4b4088cc5d7af7cee6d0f0",
+      "urn:company-wiki:narrative-unit:sha256:7b796f7cbba8c4ca2b8025471ef940675b1d5708eeb5ef94f7dd4613e498566e"
+    ],
+    "previous_bad_context_pairs": []
+  },
+  "database_unchanged": true,
+  "original_files_unchanged": true,
+  "runtime_before": {
+    "files": 479,
+    "source_and_linguistic_assets_sha256": "bc76da91aeb2dae6357d066c4ec588575588dcd1916717637c0436329e644b7d"
+  },
+  "runtime_after": {
+    "files": 479,
+    "source_and_linguistic_assets_sha256": "bc76da91aeb2dae6357d066c4ec588575588dcd1916717637c0436329e644b7d"
+  },
+  "runtime_unchanged": true,
+  "error_type": null,
+  "error": null,
+  "method": "in-process observation of root WorkBudget.charge; unchanged real account/limits; source_case owner read-only runner",
+  "charges": [
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:fact:792",
+      "calls": 1388,
+      "charged": 9051854,
+      "requested": 9067562
+    },
+    {
+      "callsite": "document|document_understanding/statement_grammar/__init__.py:observe_statement:318",
+      "calls": 965,
+      "charged": 1053189,
+      "requested": 1053189
+    },
+    {
+      "callsite": "document|document_understanding/structure/_work.py:stage:33",
+      "calls": 9,
+      "charged": 1015244,
+      "requested": 1015244
+    },
+    {
+      "callsite": "document|source_catalog/narrative_source_purpose.py:source_purpose:249",
+      "calls": 1369,
+      "charged": 560196,
+      "requested": 560196
+    },
+    {
+      "callsite": "document|<stdin>:observed_charge:11",
+      "calls": 62858,
+      "charged": 463527,
+      "requested": 463527
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:local_operating_context_dependencies:734",
+      "calls": 327,
+      "charged": 287502,
+      "requested": 287502
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_clause_events:694",
+      "calls": 9860,
+      "charged": 260950,
+      "requested": 260950
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/contract.py:charge:185",
+      "calls": 13616,
+      "charged": 258653,
+      "requested": 258653
+    },
+    {
+      "callsite": "document|source_catalog/narrative_actor_context.py:actor_context_closure:143",
+      "calls": 479,
+      "charged": 190024,
+      "requested": 190024
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:statement_members:332",
+      "calls": 365,
+      "charged": 177792,
+      "requested": 177792
+    },
+    {
+      "callsite": "document|document_understanding/structure/source_scopes.py:build_source_marked_scopes:86",
+      "calls": 4321,
+      "charged": 177582,
+      "requested": 177582
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:local_qualification_dependencies:645",
+      "calls": 3331,
+      "charged": 162280,
+      "requested": 162280
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/columns.py:observe_single_body_lane:57",
+      "calls": 3953,
+      "charged": 160634,
+      "requested": 160634
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_detect_operating_relations:1299",
+      "calls": 1112,
+      "charged": 154832,
+      "requested": 154832
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:657",
+      "calls": 455,
+      "charged": 153780,
+      "requested": 153780
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:181",
+      "calls": 702,
+      "charged": 134376,
+      "requested": 134376
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:_qualification_pair:487",
+      "calls": 335,
+      "charged": 124332,
+      "requested": 124332
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_overlay_observation:46",
+      "calls": 4406,
+      "charged": 88444,
+      "requested": 88444
+    },
+    {
+      "callsite": "document|document_understanding/structure/_work.py:reserve:17",
+      "calls": 15568,
+      "charged": 82824,
+      "requested": 82824
+    },
+    {
+      "callsite": "document|source_catalog/narrative_pdf_candidates.py:charge:40",
+      "calls": 12253,
+      "charged": 79396,
+      "requested": 79396
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:matching_text:1006",
+      "calls": 1388,
+      "charged": 76198,
+      "requested": 76198
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_detect_operating_relations:1279",
+      "calls": 1388,
+      "charged": 75048,
+      "requested": 75048
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:_qualification_pair:482",
+      "calls": 558,
+      "charged": 73970,
+      "requested": 73970
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/neighbours.py:_query:55",
+      "calls": 60664,
+      "charged": 60664,
+      "requested": 60664
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/neighbours.py:_assign:35",
+      "calls": 57763,
+      "charged": 57763,
+      "requested": 57763
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:175",
+      "calls": 11,
+      "charged": 52490,
+      "requested": 52490
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:fold:44",
+      "calls": 51344,
+      "charged": 51344,
+      "requested": 51344
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:_source_material_range:459",
+      "calls": 801,
+      "charged": 45377,
+      "requested": 45377
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_view_and_names:264",
+      "calls": 247,
+      "charged": 42268,
+      "requested": 42268
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:_result_reference:373",
+      "calls": 479,
+      "charged": 38388,
+      "requested": 38388
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:matches:51",
+      "calls": 32772,
+      "charged": 33028,
+      "requested": 33028
+    },
+    {
+      "callsite": "document|source_catalog/narrative_pdf_intent.py:request:71",
+      "calls": 198,
+      "charged": 29502,
+      "requested": 29502
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:visit:273",
+      "calls": 25537,
+      "charged": 25537,
+      "requested": 25537
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/contracts.py:charge_material:110",
+      "calls": 24379,
+      "charged": 24379,
+      "requested": 24379
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/fine_geometry.py:_range:89",
+      "calls": 21692,
+      "charged": 22954,
+      "requested": 22954
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/fine_geometry.py:_take:46",
+      "calls": 21692,
+      "charged": 21692,
+      "requested": 21692
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_view_and_names:262",
+      "calls": 247,
+      "charged": 21475,
+      "requested": 21475
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_detect_operating_relations:1294",
+      "calls": 193,
+      "charged": 20278,
+      "requested": 20278
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:bind_layout_context:235",
+      "calls": 2142,
+      "charged": 19329,
+      "requested": 19329
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:bind_reading_plan:403",
+      "calls": 705,
+      "charged": 18969,
+      "requested": 18969
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:72",
+      "calls": 2142,
+      "charged": 18540,
+      "requested": 18540
+    },
+    {
+      "callsite": "document|source_catalog/narrative_evidence.py:_project_native_prose:1128",
+      "calls": 18443,
+      "charged": 18443,
+      "requested": 18443
+    },
+    {
+      "callsite": "document|document_understanding/narrative_continuity.py:__init__:344",
+      "calls": 1,
+      "charged": 17625,
+      "requested": 17625
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/contracts.py:charge_material:112",
+      "calls": 2444,
+      "charged": 16110,
+      "requested": 16110
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/columns.py:observe_single_body_lane:66",
+      "calls": 183,
+      "charged": 15572,
+      "requested": 15572
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:50",
+      "calls": 1,
+      "charged": 15361,
+      "requested": 15361
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_clause_events:688",
+      "calls": 290,
+      "charged": 15350,
+      "requested": 15350
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/columns.py:observe_single_body_lane:86",
+      "calls": 54,
+      "charged": 14758,
+      "requested": 14758
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:add:187",
+      "calls": 13449,
+      "charged": 13449,
+      "requested": 13449
+    },
+    {
+      "callsite": "document|document_understanding/pipeline.py:understand_units:146",
+      "calls": 1,
+      "charged": 13219,
+      "requested": 13219
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:36",
+      "calls": 1,
+      "charged": 13219,
+      "requested": 13219
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:147",
+      "calls": 704,
+      "charged": 12122,
+      "requested": 12122
+    },
+    {
+      "callsite": "document|document_understanding/structure/_work.py:observe:28",
+      "calls": 4406,
+      "charged": 10056,
+      "requested": 10056
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:253",
+      "calls": 1,
+      "charged": 9207,
+      "requested": 9207
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:123",
+      "calls": 1,
+      "charged": 8813,
+      "requested": 8813
+    },
+    {
+      "callsite": "document|source_catalog/narrative_antecedent.py:build_antecedent_windows:104",
+      "calls": 1,
+      "charged": 8813,
+      "requested": 8813
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/neighbours.py:vertical_clearances:95",
+      "calls": 8812,
+      "charged": 8812,
+      "requested": 8812
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:_match_rule:140",
+      "calls": 8664,
+      "charged": 8664,
+      "requested": 8664
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/contracts.py:charge_material:115",
+      "calls": 1898,
+      "charged": 8178,
+      "requested": 8178
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/contracts.py:charge_material:118",
+      "calls": 4583,
+      "charged": 7109,
+      "requested": 7109
+    },
+    {
+      "callsite": "document|document_understanding/native_table_bridge.py:_each:20",
+      "calls": 6548,
+      "charged": 6548,
+      "requested": 6548
+    },
+    {
+      "callsite": "document|source_catalog/narrative_evidence.py:_project_native_prose:1096",
+      "calls": 4406,
+      "charged": 5676,
+      "requested": 5676
+    },
+    {
+      "callsite": "document|document_understanding/structure/source_scopes.py:build_source_marked_scopes:108",
+      "calls": 96,
+      "charged": 5572,
+      "requested": 5572
+    },
+    {
+      "callsite": "document|document_understanding/structure/source_scopes.py:build_source_marked_scopes:68",
+      "calls": 1,
+      "charged": 4769,
+      "requested": 4769
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:143",
+      "calls": 1,
+      "charged": 4748,
+      "requested": 4748
+    },
+    {
+      "callsite": "document|source_catalog/narrative_evidence.py:_project_native_prose:1075",
+      "calls": 199,
+      "charged": 4605,
+      "requested": 4605
+    },
+    {
+      "callsite": "document|source_catalog/narrative_evidence.py:_project_native_prose:1111",
+      "calls": 4570,
+      "charged": 4570,
+      "requested": 4570
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:_copy_policy_material:61",
+      "calls": 4569,
+      "charged": 4569,
+      "requested": 4569
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/fine_geometry.py:_font_style:241",
+      "calls": 4563,
+      "charged": 4563,
+      "requested": 4563
+    },
+    {
+      "callsite": "document|document_understanding/structure/sections.py:build_sections:353",
+      "calls": 1,
+      "charged": 4407,
+      "requested": 4407
+    },
+    {
+      "callsite": "document|source_catalog/narrative_evidence.py:_project_native_prose:1082",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|source_catalog/narrative_evidence.py:_project_native_prose:1150",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|source_catalog/narrative_pdf_reading.py:_read:215",
+      "calls": 1,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_understand:1080",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/native_signal_bridge.py:collect_native_signals:15",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/source_signals/__init__.py:_index_units:141",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_overlay_observation:44",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_apply_layout:71",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_derive:85",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/headings.py:detect_repeated_furniture:32",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/headings.py:body_font_size:58",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/geometry.py:band_geometry_units:183",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/geometry.py:band_cells:231",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/columns.py:observe_single_body_lane:44",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/ordering.py:build_reading_order:20",
+      "calls": 3049,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/ordering.py:build_reading_order:25",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/neighbours.py:vertical_clearances:71",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_derive:420",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_derive:451",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_apply_layout:151",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/structure/contract.py:parse_observation:326",
+      "calls": 1,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/structure/contract.py:parse_observation:338",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:226",
+      "calls": 1,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:local_qualification_dependencies:568",
+      "calls": 4406,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:local_qualification_dependencies:623",
+      "calls": 1,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:local_qualification_dependencies:634",
+      "calls": 1,
+      "charged": 4406,
+      "requested": 4406
+    },
+    {
+      "callsite": "document|document_understanding/structure/sections.py:_native_list_scopes:205",
+      "calls": 4405,
+      "charged": 4405,
+      "requested": 4405
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_apply_layout:145",
+      "calls": 1056,
+      "charged": 4152,
+      "requested": 4152
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:bind_reading_plan:382",
+      "calls": 704,
+      "charged": 4044,
+      "requested": 4044
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/columns.py:detect_document_lanes:155",
+      "calls": 199,
+      "charged": 3760,
+      "requested": 3760
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:_copy_policy_material:70",
+      "calls": 3752,
+      "charged": 3752,
+      "requested": 3752
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:_copy_policy_material:66",
+      "calls": 775,
+      "charged": 3686,
+      "requested": 3686
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/columns.py:compute_cuts:115",
+      "calls": 3561,
+      "charged": 3561,
+      "requested": 3561
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_bind_context:270",
+      "calls": 3380,
+      "charged": 3380,
+      "requested": 3380
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:match:225",
+      "calls": 740,
+      "charged": 3220,
+      "requested": 3220
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_windows:103",
+      "calls": 740,
+      "charged": 3217,
+      "requested": 3217
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_bind_context:280",
+      "calls": 3206,
+      "charged": 3206,
+      "requested": 3206
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:73",
+      "calls": 2142,
+      "charged": 3206,
+      "requested": 3206
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_bind_context:285",
+      "calls": 3096,
+      "charged": 3096,
+      "requested": 3096
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/tables.py:analyse_page:138",
+      "calls": 3049,
+      "charged": 3049,
+      "requested": 3049
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/tables.py:build_region_drafts:166",
+      "calls": 3049,
+      "charged": 3049,
+      "requested": 3049
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:context:199",
+      "calls": 468,
+      "charged": 2591,
+      "requested": 2591
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_clause_events:877",
+      "calls": 29,
+      "charged": 2461,
+      "requested": 2461
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:context:190",
+      "calls": 702,
+      "charged": 2458,
+      "requested": 2458
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:_source_material_range:450",
+      "calls": 801,
+      "charged": 2346,
+      "requested": 2346
+    },
+    {
+      "callsite": "document|source_catalog/narrative_actor_context.py:actor_context_closure:130",
+      "calls": 479,
+      "charged": 2225,
+      "requested": 2225
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/headings.py:body_font_size:76",
+      "calls": 2221,
+      "charged": 2221,
+      "requested": 2221
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:137",
+      "calls": 704,
+      "charged": 2217,
+      "requested": 2217
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_bind_context:277",
+      "calls": 2142,
+      "charged": 2142,
+      "requested": 2142
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_bind_context:295",
+      "calls": 1,
+      "charged": 2142,
+      "requested": 2142
+    },
+    {
+      "callsite": "document|document_understanding/pipeline.py:understand_units:247",
+      "calls": 2142,
+      "charged": 2142,
+      "requested": 2142
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:69",
+      "calls": 2142,
+      "charged": 2142,
+      "requested": 2142
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_clause_events:918",
+      "calls": 151,
+      "charged": 1986,
+      "requested": 1986
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_predicate_modifiers:645",
+      "calls": 165,
+      "charged": 1830,
+      "requested": 1830
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:_source_material_range:441",
+      "calls": 1770,
+      "charged": 1770,
+      "requested": 1770
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/assertion_roles.py:_scope_argument_observation:472",
+      "calls": 12,
+      "charged": 1676,
+      "requested": 1676
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_unit:247",
+      "calls": 1625,
+      "charged": 1625,
+      "requested": 1625
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:_prepare_group:216",
+      "calls": 4,
+      "charged": 1587,
+      "requested": 1587
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/tables.py:build_region_drafts:186",
+      "calls": 1528,
+      "charged": 1528,
+      "requested": 1528
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:111",
+      "calls": 704,
+      "charged": 1417,
+      "requested": 1417
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:168",
+      "calls": 704,
+      "charged": 1417,
+      "requested": 1417
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:reference:337",
+      "calls": 479,
+      "charged": 1352,
+      "requested": 1352
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:fold:46",
+      "calls": 1315,
+      "charged": 1329,
+      "requested": 1329
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:native_fields:203",
+      "calls": 468,
+      "charged": 1170,
+      "requested": 1170
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:161",
+      "calls": 468,
+      "charged": 1170,
+      "requested": 1170
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_detect_operating_relations:1262",
+      "calls": 1388,
+      "charged": 1164,
+      "requested": 1164
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:add_group:203",
+      "calls": 1056,
+      "charged": 1056,
+      "requested": 1056
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_derive:610",
+      "calls": 1056,
+      "charged": 1056,
+      "requested": 1056
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_bind_context:266",
+      "calls": 1056,
+      "charged": 1056,
+      "requested": 1056
+    },
+    {
+      "callsite": "document|source_catalog/narrative_pdf_intent.py:request:67",
+      "calls": 198,
+      "charged": 990,
+      "requested": 990
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/columns.py:observe_single_body_lane:81",
+      "calls": 980,
+      "charged": 980,
+      "requested": 980
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:scope_use:588",
+      "calls": 460,
+      "charged": 931,
+      "requested": 931
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:scope_use:614",
+      "calls": 460,
+      "charged": 931,
+      "requested": 931
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_windows:139",
+      "calls": 158,
+      "charged": 898,
+      "requested": 898
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:native_fields:210",
+      "calls": 702,
+      "charged": 778,
+      "requested": 778
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_native_rows:60",
+      "calls": 740,
+      "charged": 740,
+      "requested": 740
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_native_rows:75",
+      "calls": 740,
+      "charged": 740,
+      "requested": 740
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_windows:124",
+      "calls": 740,
+      "charged": 740,
+      "requested": 740
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_native_rows:83",
+      "calls": 737,
+      "charged": 737,
+      "requested": 737
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:heading_text:330",
+      "calls": 713,
+      "charged": 725,
+      "requested": 725
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:heading_text:325",
+      "calls": 704,
+      "charged": 713,
+      "requested": 713
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:164",
+      "calls": 1,
+      "charged": 705,
+      "requested": 705
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:125",
+      "calls": 704,
+      "charged": 704,
+      "requested": 704
+    },
+    {
+      "callsite": "document|source_catalog/narrative_antecedent.py:build_antecedent_windows:117",
+      "calls": 702,
+      "charged": 702,
+      "requested": 702
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:656",
+      "calls": 455,
+      "charged": 666,
+      "requested": 666
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_windows:132",
+      "calls": 582,
+      "charged": 582,
+      "requested": 582
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_detect_operating_relations:1242",
+      "calls": 582,
+      "charged": 582,
+      "requested": 582
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:local_qualification_dependencies:589",
+      "calls": 1,
+      "charged": 559,
+      "requested": 559
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:305",
+      "calls": 1,
+      "charged": 558,
+      "requested": 558
+    },
+    {
+      "callsite": "document|source_catalog/narrative_operating_relations.py:local_operating_context_dependencies:705",
+      "calls": 558,
+      "charged": 558,
+      "requested": 558
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:77",
+      "calls": 2142,
+      "charged": 509,
+      "requested": 509
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/tables.py:analyse_region:320",
+      "calls": 489,
+      "charged": 489,
+      "requested": 489
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:94",
+      "calls": 93,
+      "charged": 485,
+      "requested": 485
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:449",
+      "calls": 468,
+      "charged": 479,
+      "requested": 479
+    },
+    {
+      "callsite": "document|source_catalog/narrative_qa_scopes.py:close_qa_packages:391",
+      "calls": 468,
+      "charged": 468,
+      "requested": 468
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:537",
+      "calls": 52,
+      "charged": 467,
+      "requested": 467
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:bind_layout_context:231",
+      "calls": 1,
+      "charged": 445,
+      "requested": 445
+    },
+    {
+      "callsite": "document|document_understanding/narrative_continuity.py:_charge:391",
+      "calls": 395,
+      "charged": 441,
+      "requested": 441
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/tables.py:_flag_wrapped_rows:365",
+      "calls": 407,
+      "charged": 407,
+      "requested": 407
+    },
+    {
+      "callsite": "document|document_understanding/narrative_continuity.py:__init__:368",
+      "calls": 1,
+      "charged": 399,
+      "requested": 399
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_bind_context:290",
+      "calls": 397,
+      "charged": 397,
+      "requested": 397
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:124",
+      "calls": 21,
+      "charged": 315,
+      "requested": 315
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:204",
+      "calls": 73,
+      "charged": 269,
+      "requested": 269
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:221",
+      "calls": 73,
+      "charged": 269,
+      "requested": 269
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/assertion_roles.py:directed_provision:546",
+      "calls": 5,
+      "charged": 247,
+      "requested": 247
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_clause_events:701",
+      "calls": 290,
+      "charged": 236,
+      "requested": 236
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/tables.py:analyse_region:338",
+      "calls": 234,
+      "charged": 234,
+      "requested": 234
+    },
+    {
+      "callsite": "document|document_understanding/structure/source_scopes.py:build_source_marked_scopes:159",
+      "calls": 72,
+      "charged": 212,
+      "requested": 212
+    },
+    {
+      "callsite": "document|source_catalog/narrative_evidence.py:_parse_pdf_document:1695",
+      "calls": 1,
+      "charged": 200,
+      "requested": 200
+    },
+    {
+      "callsite": "document|source_catalog/narrative_pdf_intent.py:scan_planned_pages:190",
+      "calls": 199,
+      "charged": 199,
+      "requested": 199
+    },
+    {
+      "callsite": "document|source_catalog/narrative_pdf_intent.py:request:56",
+      "calls": 199,
+      "charged": 199,
+      "requested": 199
+    },
+    {
+      "callsite": "document|source_catalog/narrative_pdf_intent.py:request:57",
+      "calls": 199,
+      "charged": 199,
+      "requested": 199
+    },
+    {
+      "callsite": "document|source_catalog/narrative_evidence.py:_emit_pdf_page:1579",
+      "calls": 199,
+      "charged": 199,
+      "requested": 199
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_derive:108",
+      "calls": 199,
+      "charged": 199,
+      "requested": 199
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_clause_events:696",
+      "calls": 194,
+      "charged": 194,
+      "requested": 194
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_clause_events:708",
+      "calls": 194,
+      "charged": 194,
+      "requested": 194
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:193",
+      "calls": 73,
+      "charged": 193,
+      "requested": 193
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:_copy_policy_material:63",
+      "calls": 30,
+      "charged": 170,
+      "requested": 170
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_detect_operating_relations:1324",
+      "calls": 151,
+      "charged": 151,
+      "requested": 151
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:183",
+      "calls": 146,
+      "charged": 146,
+      "requested": 146
+    },
+    {
+      "callsite": "document|document_understanding/narrative_continuity.py:__init__:353",
+      "calls": 1,
+      "charged": 134,
+      "requested": 134
+    },
+    {
+      "callsite": "document|document_understanding/structure/contract.py:parse_observation:335",
+      "calls": 2,
+      "charged": 133,
+      "requested": 133
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:213",
+      "calls": 120,
+      "charged": 120,
+      "requested": 120
+    },
+    {
+      "callsite": "document|document_understanding/structure/source_scopes.py:build_source_marked_scopes:183",
+      "calls": 11,
+      "charged": 119,
+      "requested": 119
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:85",
+      "calls": 41,
+      "charged": 93,
+      "requested": 93
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:87",
+      "calls": 93,
+      "charged": 93,
+      "requested": 93
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:173",
+      "calls": 1,
+      "charged": 93,
+      "requested": 93
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:164",
+      "calls": 20,
+      "charged": 80,
+      "requested": 80
+    },
+    {
+      "callsite": "document|document_understanding/structure/sections.py:build_sections:519",
+      "calls": 8,
+      "charged": 75,
+      "requested": 75
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_derive:387",
+      "calls": 72,
+      "charged": 72,
+      "requested": 72
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_derive:397",
+      "calls": 72,
+      "charged": 72,
+      "requested": 72
+    },
+    {
+      "callsite": "document|document_understanding/structure/sections.py:_native_list_scopes:270",
+      "calls": 54,
+      "charged": 54,
+      "requested": 54
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_windows:159",
+      "calls": 10,
+      "charged": 41,
+      "requested": 41
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:159",
+      "calls": 1,
+      "charged": 40,
+      "requested": 40
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:prepare_geometry_reading:252",
+      "calls": 35,
+      "charged": 35,
+      "requested": 35
+    },
+    {
+      "callsite": "document|document_understanding/operating_states/relations.py:_predicate_modifiers:656",
+      "calls": 27,
+      "charged": 27,
+      "requested": 27
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/planner.py:plan_geometry_requests:517",
+      "calls": 1,
+      "charged": 23,
+      "requested": 23
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:113",
+      "calls": 20,
+      "charged": 21,
+      "requested": 21
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:107",
+      "calls": 2142,
+      "charged": 20,
+      "requested": 20
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:109",
+      "calls": 20,
+      "charged": 20,
+      "requested": 20
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:222",
+      "calls": 73,
+      "charged": 20,
+      "requested": 20
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:native_fields:213",
+      "calls": 702,
+      "charged": 20,
+      "requested": 20
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:native_fields:216",
+      "calls": 702,
+      "charged": 20,
+      "requested": 20
+    },
+    {
+      "callsite": "document|document_understanding/structure/sections.py:build_sections:508",
+      "calls": 4,
+      "charged": 18,
+      "requested": 18
+    },
+    {
+      "callsite": "document|document_understanding/structure/sections.py:_native_list_scopes:312",
+      "calls": 2,
+      "charged": 13,
+      "requested": 13
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:302",
+      "calls": 13,
+      "charged": 13,
+      "requested": 13
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/planner.py:plan_geometry_requests:562",
+      "calls": 1,
+      "charged": 11,
+      "requested": 11
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_derive:493",
+      "calls": 11,
+      "charged": 11,
+      "requested": 11
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_windows:168",
+      "calls": 10,
+      "charged": 10,
+      "requested": 10
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/__init__.py:_region_descriptor:775",
+      "calls": 10,
+      "charged": 10,
+      "requested": 10
+    },
+    {
+      "callsite": "document|document_understanding/structure/contract.py:parse_observation:330",
+      "calls": 2,
+      "charged": 9,
+      "requested": 9
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:_candidates:566",
+      "calls": 1,
+      "charged": 9,
+      "requested": 9
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_windows:96",
+      "calls": 1,
+      "charged": 7,
+      "requested": 7
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/planner.py:_parse_rules:133",
+      "calls": 6,
+      "charged": 6,
+      "requested": 6
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/planner.py:_canonicalize:264",
+      "calls": 1,
+      "charged": 6,
+      "requested": 6
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/planner.py:plan_geometry_requests:532",
+      "calls": 1,
+      "charged": 6,
+      "requested": 6
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_windows:187",
+      "calls": 5,
+      "charged": 5,
+      "requested": 5
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/planner.py:_validate_windows:185",
+      "calls": 5,
+      "charged": 5,
+      "requested": 5
+    },
+    {
+      "callsite": "document|document_understanding/structure/sections.py:build_sections:513",
+      "calls": 2,
+      "charged": 5,
+      "requested": 5
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/tables.py:_attach_context:298",
+      "calls": 3,
+      "charged": 3,
+      "requested": 3
+    },
+    {
+      "callsite": "document|document_understanding/layout_hints/tables.py:_attach_context:283",
+      "calls": 2,
+      "charged": 2,
+      "requested": 2
+    },
+    {
+      "callsite": "document|source_catalog/narrative_pdf_intent.py:scan_planned_pages:158",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:prepare_geometry_reading:250",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/geometry_intent/reading.py:_native_rows:49",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|source_catalog/narrative_reading.py:select_reading_evidence:1172",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/pipeline.py:understand_units:104",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:_overlay_observation:39",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/structure/__init__.py:build_structure:89",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/layout_bridge.py:bind_layout_context:226",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:bind_reading_plan:259",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/strategy_binding.py:bind_reading_plan:444",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/native_table_bridge.py:bind_native_tables:120",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|document_understanding/native_table_bridge.py:close_native_table_dependencies:185",
+      "calls": 1,
+      "charged": 1,
+      "requested": 1
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:218",
+      "calls": 120,
+      "charged": 0,
+      "requested": 0
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_dependencies.py:collect_native_dependencies:228",
+      "calls": 1,
+      "charged": 0,
+      "requested": 0
+    },
+    {
+      "callsite": "document|source_catalog/narrative_native_materials.py:prepare_native_materials:83",
+      "calls": 2142,
+      "charged": 0,
+      "requested": 0
+    }
+  ],
+  "base_commit": "28e18043ccad06495a0843760ea46c79e0d2222c"
+}

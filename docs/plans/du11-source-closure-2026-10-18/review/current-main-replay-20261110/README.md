@@ -53,3 +53,11 @@ W04 config 旧工区的 3 个修改文件、22 个未跟踪文件及 binary patc
 CI42912332126的Unit tests有2F，位于test_source_fact_entity_projection的query/resolve参数例。实际失败在错误公司名加正确证券代码时仍被接收。SecurityMasterStore把精确代码误当成任意名字的重命名依据。现将精确代码消歧限制在真实alias成员或等价市场代码内，保留已证明跨市场关系与原样名字查询。新增contract先1F，修后59项相关回归通过。该缺陷归身份owner，发布修复后继续核验远端结果。
 
 身份增量独审通过。独立22个关键回归通过，4.64秒，复核同名/共享别名、零填充代码、已证明跨市场关系与wrong-directory反控。
+
+## R4 工作量分诊
+
+在源码28e18043c上以只读execute运行，观察root WorkBudget.charge，保持16M账户与原规则。24.865秒，仍9/12、74 spans、账户耗尽，源码和原件稳定。SourceOperatingSession.fact统一业务扫描预扣记9,051,854单位、1,388次调用，占全部账户约56.6%。该费用按READING_BUSINESS_SCAN_PASSES乘文本长度预扣，下层语法和purpose也有独立实际计费。下一步核对预估是否重复覆盖下层计费，再按真实执行的owner归账。观察没有改变计费规则或额度，完整统计在r4-work-profile.json。
+
+## 2026-11-10 22:31 UTC 最终发布结果
+
+身份修复源码28e18043ccad06495a0843760ea46c79e0d2222c已推送，远端CI42914407976 completed/success。首轮42912332126两例失败继续保留，相关59项与独立22项通过，第二次push smoke18项5.58秒。下一步按P3公开owner接口优先，再用已有R4工作量收据改进统一预扣与实际计费关系。
