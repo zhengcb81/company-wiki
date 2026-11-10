@@ -90,7 +90,7 @@
 - 本地检查：CWP 当前层边界/文档层隔离/DU 核心隔离 68 passed，push smoke 18/18；FF push hook 11 passed，P2 精确候选 quality run 有成功记录；RF push hook 12/12。RF 完整远端 CI 与本次 CWP/FF main push 新触发 Actions 均未 fresh 确认，不将本地 hook 冒称完整 CI。
 - 对 D4/D5 的准确表述：按 du11 冻结接口和跨仓矩阵已 ACCEPTED；模块通过 owner 公开版本化接口协作。它不代表零依赖，也不关闭新的产品集成工作。P3 Reader 流式/原生 PDF 端口、P4 Dashboard 消费切换仍 OPEN。
 - 已移除四个 `%TEMP%` 的删除态测试 worktree（共 14,498 条 tracked deletion 状态）；逐个确认 HEAD 是 `origin/master` 祖先，`companies/sectors/themes` 无文件且无 untracked/ignored 数据。另移除两个由主线覆盖的 CWP local refs。
-- 本地工作区尚未全净：CWP 有约 14,022 条 untracked 状态、91 个登记 worktree（外部 73 clean、17 dirty）及 23 个非祖先 local branch；旧 PWF/大测试环境和 P3 候选按收据保留，逐项清单见 [workspace reconciliation](review/local_workspace_reconciliation_2026-11-10.md)。
+- 本地工作区尚未全净：CWP 根仍有 14,022 条 untracked 状态；登记 worktree 已从 91 收到 77（外部 59 clean、17 dirty）；本地分支 74 条，其中 23 个 tip 不是当前主线祖先。又移除了 14 个提交已在主线、状态干净且没有公司数据目录的旧 checkout/本地分支；旧 PWF、大测试环境、原件/业务目录和 P3 候选继续保留，逐项清单见 [workspace reconciliation](review/local_workspace_reconciliation_2026-11-10.md)。
 - FF 本机 `main` 已对齐 `origin/main`=`f65e6ca75fbce0616e65870f0aea78b793ef883c`。核对确认远端已有 ff-job/1 入口及更新后的周边实现/测试；本地七提交系列作为旧候选保留在 `codex/ff-job-facade-01`，不再作为待并线代码。第一次 reset 因可能丢失未核实提交被平台自动审查拦截；完成主线差异核对并确认候选分支仍保留后，正常 reset 成功，没有删除该分支或未跟踪资料。FF 根目录仍有 304 项未跟踪状态（含运行数据、PWF、工作树、缓存和密钥文件）；密钥内容未读，其他项目继续逐项核销。
 - RF 本机 `main` 已安全快进至 `b005a179`。保留了四个 tracked assurance 运行文件；它们记录多次 daily canary `bound=0 events=473` 和 weekly T3 exit 1，作为真实失败证据待 RF owner 单独查根因，没有回滚或并入 P2 代码。
 
