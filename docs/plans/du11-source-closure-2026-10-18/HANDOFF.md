@@ -5,9 +5,9 @@
 ## 最近确认
 
 - P2 三仓主线：CWP `0fc56b25b89da9f3da5921ba64122d9745e1752d`（当前更后续提交已包含）、FF `f65e6ca75fbce0616e65870f0aea78b793ef883c`、RF `b005a179280ee19695578bdba9427b4dd44cdd73`。按 owner 分别发布，不重复 cherry-pick；E2E 见 [P2 收据](../dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json)。
-- CWP 本地 `master` 与 `origin/master` 对齐在 `fb868064e4d37a0441373578f4286964e739e6b4`。本机仍有大量历史未跟踪项和未核销 worktree/ref，不能称已清理完成；逐项状态见 [workspace reconciliation](../dashboard-owner-integration-2026-11-09/review/local_workspace_reconciliation-2026-11-10.md)。
+- 上次代码/测试整理发布点是 `f01ba7411908d7a6a38451781ce5f9f18600bf9b`；后续只会再发布本次状态文档核账。该 SHA 是代码修订点，不代表当前文档 HEAD。本机仍有大量历史未跟踪项和未核销 worktree/ref，不能称已清理完成；逐项状态见 [workspace reconciliation](../dashboard-owner-integration-2026-11-09/review/local_workspace_reconciliation-2026-11-10.md)。
 - Source-facts 候选仍在 detached worktree，不接受其源码为已并线代码。五份关键 JSON 收据已复制并以 SHA-256 核实；guard 结果需在当前主线复验，见 [source-facts 对账](review/source-facts-reconciliation-20261110/README.md)。
-- CWP 定向测试曾因旧集成测试 monkeypatch 已退役的 `select_budget_items` 而 202/203 失败；改为观察现行 `plan_budget_items` 后，同一组定向测试 203 passed（6.72 秒）。这一测试/PWF 修订仍待提交发布。
+- CWP 定向测试曾因旧集成测试 monkeypatch 已退役的 `select_budget_items` 而 202/203 失败；改为观察现行 `plan_budget_items` 后，同一组定向测试 203 passed（6.72 秒）。修订已提交并推送：`f01ba7411908d7a6a38451781ce5f9f18600bf9b`；推送时 fixed smoke 为 18/18，完整远端 CI 尚未在本记录中核实。
 
 ## 已验收的 D5
 

@@ -416,4 +416,6 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - D4/D5 在冻结接口/组合验收范围内 CLOSED/ACCEPTED；不声称“零依赖”或 Dashboard 整体完成。Dashboard P3/P4 仍 OPEN。
 - 复核到 detached `du11-source-facts` 候选中有 11 个 tracked 修改、12 个 untracked 开发/测试/收据文件；包含 10/10 coverage guard 与 8/10 native-prose 观察。两个遗漏在记录中归因于 source-meaning/operating-relation 入选，不是预算耗尽；候选改动未进入当前主线，且各收据不完全绑定同一最终代码版本。五份 JSON 已逐字节核对并复制进独立 PWF review 目录；在当前主线小范围重放前不删候选 worktree，不接受候选补丁。
 - CWP 根 `master` 当前与 `origin/master` 同步于 `fb868064e4d37a0441373578f4286964e739e6b4`。根目录仍有约 14,022 项历史未跟踪状态，Git 中保留的 CWP/外部 worktree 还包含未提交证据、部署绑定或模型缓存；不能 bulk reset/clean。逐项核销另见 `dashboard-owner-integration-2026-11-09/review/local_workspace_reconciliation-2026-11-10.md`，本轮仅处理证据明确且已过测试的窄项。
-- 聚焦回归发现集成测试仍 monkeypatch 已退役的 `select_budget_items`，而当前 finalizer 使用 `plan_budget_items`。修正测试绑定公开当前函数后，指定 6 个文件组测试为 203 passed（6.72 秒）；代码无生产变化。待把测试和 PWF 变更正常提交/推送。
+- 聚焦回归发现集成测试仍 monkeypatch 已退役的 `select_budget_items`，而当前 finalizer 使用 `plan_budget_items`。修正测试绑定公开当前函数后，指定 6 个文件组测试为 203 passed（6.72 秒）；代码无生产变化。PWF/测试修订 commit `f01ba7411908d7a6a38451781ce5f9f18600bf9b` 已推到 `origin/master`；push fixed smoke 18/18，完整 Actions 待核。
+- 已清理 paid-response handoff 指定的 8 个 Temp 测试目录（均为无文件空目录），以及旧 extractive worktree 中 30,155,225 字节的 mypy/ruff/pytest/pyc 可重建缓存。旧 worktree 本身仍保留：其 129 个 W04–W08 `.planning` 文件与根目录版本不同，尚需同正式计划逐项对账。
+- 临时整合 worktree/ref 已移除后，在本次状态核账时 CWP 本地 `master` 与 `origin/master` 均为代码/测试整理点 `f01ba7411908d7a6a38451781ce5f9f18600bf9b`；仍有 17 个 worktree（含根目录）和 14,021 个未跟踪状态项，workspace cleanup 未完成。之后发布的状态文档提交不改变该代码/测试整理点。

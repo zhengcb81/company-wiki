@@ -91,8 +91,8 @@
   },
   "project_status": "P2_OWNER_MAINLINES_COMPLETE_D4_D5_SCOPE_ACCEPTED_SOURCE_FACTS_CURRENT_MAIN_REPLAY_OPEN_WORKSPACE_RECONCILIATION_OPEN",
   "as_of_date": "2026-11-10",
-  "observed_at_utc": "2026-11-10T13:29:18Z",
-  "next_action": "Current-main source-facts replay and per-worktree disposition; do not begin full company loop or paid summary before this closes.",
+  "observed_at_utc": "2026-11-10T13:56:14Z",
+  "next_action": "Replay the source-facts diagnostic against exact current-main code, then reconcile the remaining 16 non-root worktrees and local refs from PWF/evidence. Do not bulk-clean.",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -755,12 +755,22 @@
     "current_main_replay": "OPEN; candidate 10/10 coverage and 8/10 native-prose observations are not current-main acceptance"
   },
   "workspace_reconciliation": {
-    "cwp_root_head": "fb868064e4d37a0441373578f4286964e739e6b4",
-    "cwp_root_matches_origin_master": true,
-    "root_untracked_status_entries": 14022,
-    "worktree_count_including_root_and_temporary_reconciliation": 18,
+    "root_untracked_status_entries": 14021,
     "cleanup_complete": false,
     "next_action": "Replay the source-facts selection diagnostic against current master; then reconcile each remaining worktree/ref from its PWF and evidence. Do not bulk-clean.",
-    "p2_status": "merged_and_pushed_to_cwp_ff_rf_owner_mains"
+    "p2_status": "merged_and_pushed_to_cwp_ff_rf_owner_mains",
+    "starting_root_head": "fb868064e4d37a0441373578f4286964e739e6b4",
+    "starting_root_matched_origin_master": true,
+    "last_verified_main_head": "f01ba7411908d7a6a38451781ce5f9f18600bf9b",
+    "last_verified_main_matches_origin_master": true,
+    "worktree_count_including_root": 17,
+    "temporary_reconciliation_worktree_removed": true,
+    "mainline_reconciliation_commit": "f01ba7411908d7a6a38451781ce5f9f18600bf9b",
+    "verified_cleanup": {
+      "empty_temp_test_directories_removed": 8,
+      "rebuildable_cache_logical_bytes_removed": 30155225,
+      "original_files_removed": 0
+    },
+    "du11_extractive_runtime_worktree": "retained pending comparison of 129 differing W04-W08 planning snapshots; no source-code delta and all original-document paths verified in root"
   }
 }

@@ -86,10 +86,10 @@ E2E 原件、SHA、复用零下载及 MDB 公共目录读回仍以 [P2 E2E recei
 
 ## 2026-11-10 后续核账
 
-- 临时整合 worktree 为 `codex/root-reconcile-integration-20261110`，从当时 CWP `master` 创建，仅承载一项集成测试修正和 PWF 对齐；合并发布后会删除此临时 worktree/ref。
+- 临时整合 worktree `codex/root-reconcile-integration-20261110` 从当时 CWP `master` 创建，仅承载一项集成测试修正和 PWF 对齐；commit `f01ba7411908d7a6a38451781ce5f9f18600bf9b` 推送后，临时 worktree/ref 已移除。
 - detached `du11-source-facts` 核实为 HEAD `fcee443e`，11 个 tracked 修改、12 个 untracked 文件；五份关键 JSON 已 SHA-256 对照候选原件并归档。10/10 与 8/10 guard 绑定不同的代码文件快照，且最终 financial-only delta 后没有完整 PDF 重放；候选补丁暂不接受，当前主线重放仍 OPEN。
-- CWP 的定向测试曾为 202 passed / 1 failed。唯一失败为旧集成测试 monkeypatch 已由当前 `plan_budget_items` 取代的 `select_budget_items`。修正测试绑定现行函数后，同一组测试 203 passed / 6.72 秒，无生产代码变化。该修订待提交推送。
+- CWP 的定向测试曾为 202 passed / 1 failed。唯一失败为旧集成测试 monkeypatch 已由当前 `plan_budget_items` 取代的 `select_budget_items`。修正测试绑定现行函数后，同一组测试 203 passed / 6.72 秒，无生产代码变化。该修订已在 commit `f01ba7411908d7a6a38451781ce5f9f18600bf9b` 推送；push fixed smoke 18/18，完整 CI 本轮未核实。
 - 旧 `du11-extractive-runtime` 分支的 HEAD `51019397` 已是 `origin/master` 的祖先，tracked worktree clean。其 `companies/sectors/themes` 共 94 个 tracked 文件在当前根目录均有同路径；63 个字节相同，31 个是当前主线更新过的 Markdown/JSON/Obsidian 资产，未发现额外 PDF/Office 原件。其余 1211 个未跟踪或忽略文件合计 30.2 MB，分类为 829 个 `.planning` 快照/输出、1155 个可重建 mypy JSON、28 个 pyc、19 个 ruff cache 项、2 个 pytest cache 项及标记文件。`.planning` 中有 63 个只在该副本出现的命令日志；10 份 paid-response handoff/design/review 文档已复制到 `du11-source-closure-2026-10-18/review/paid-response-recovery-candidate-archive-20261110/` 并逐个 SHA 核对。其余 129 个与根目录同路径但字节不同的 W04–W08 PWF/脚本快照仍待与正式 `docs/plans` 对账；在此之前保留该 worktree，不删其 `.planning` 或 local ref。远端历史与原始资料仍在主线/提交历史中。
 - 已从该旧 checkout 清理可重建的 `.mypy_cache`、`.ruff_cache`、`.pytest_cache` 和 28 个 `src/**/*.pyc`，共 30,155,225 逻辑字节；删除前确认全部 untracked/ignored、无 reparse point，且不含原件。缓存以后需要时可重建。
 - 原 paid-response cleanup receipt 点名的 8 个 `%LOCALAPPDATA%\Temp` 测试目录已逐个重验：都在 Temp 根内、非 reparse、零文件，只含空测试子目录；这些空目录现已删除，0 个原件被删。结果在 `paid-response-recovery-candidate-archive-20261110/cleanup-followup-20261110.json`。
-- 本次核账期间 CWP 根 `master` 仍与 `origin/master` 同步于 `fb868064e4d37a0441373578f4286964e739e6b4`。根目录仍有 14,022 个未跟踪状态项；16 个既有非根 dirty worktree 未作 bulk reset/clean。D4/D5 为冻结公开合同范围内已验收，Dashboard P2 已在 CWP/FF/RF owner 主线；P3/P4 仍开放。
+- 临时整合 worktree/ref 已移除；状态文档核账时 CWP 根 `master` 与 `origin/master` 均为代码/测试整理点 `f01ba7411908d7a6a38451781ce5f9f18600bf9b`。根目录仍有 14,021 个未跟踪状态项、17 个 worktree（含根目录；16 个非根旧/外部 worktree），尚未 bulk reset/clean。D4/D5 为冻结公开合同范围内已验收，Dashboard P2 已在 CWP/FF/RF owner 主线；P3/P4 仍开放。后续状态文档发布会产生 docs-only HEAD，不改变上述代码/测试整理点。
