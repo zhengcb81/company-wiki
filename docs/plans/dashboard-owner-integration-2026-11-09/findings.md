@@ -50,9 +50,9 @@ FF 与 RF 的旧作业层都曾根据过时的 PID 文件删除锁。两个独�
 - 实施判断：不应只下载 HKEX ISIN 表、再按名称或 ticker 自动并 issuer。CWP 需要拥有一个 owner 级、可版本化的 issuer/listing 关系来源合同：自动关系只由精确类型化标识匹配生成；其他关系须绑定发行人或监管文件的 HTTPS 来源、原件 SHA、locator、证券类型/挂牌、有效期及 as-of，并保留未证实/冲突状态。关系数据可以因公司而不同，但实现逻辑必须统一，不得加公司代码/别名特判，也不得用模糊名称把母子公司或 ADR/普通股混并。FF 只消费 CWP 的公开合同及保留来源市场、期间、表单和 as-of 的结果。StockWiki 是下游 owner，只有先证明身份调用不会产生依赖环，才可考虑其公开 DTO 作为独立来源；当前不把它作为 CWP 的隐式回调。
 - 下一验证节点：用官方 HKEX ISIN 文件和 GLEIF 当前映射文件只读检查阿里、B 站两组证券的实际覆盖；同时核对发行人/监管文件可否提供 CIK 与具体 HK listing 的直接关系证据。覆盖不足时明确标记 `identity_link_unavailable` 并保持 P2 开放，而不是对生产快照手写样本。随后由 CWP 写通用来源 owner 与刷新/撤销规则，FF 对公开 DTO 做合同测试，最后以实际部署 cache-only 查询验收两家公司和一个冲突负例。
 
-## P2 收口复审补充（2026-11-09）
+## P2 收口复审补充（2026-11-09，历史状态）
 
-- CWP 与 FF 的 P2 实现及独立审查已通过。阿里与 B 站离线 E2E 使用各自真实 HKEX 年报原件、GLEIF LEI/ISIN 与 ADR 发行人证据；US 挂牌可以匹配 HK 来源原件，同时严格保留来源市场、证券代码、报告期、表单类型与 as-of。负例覆盖错误财年、表单、期次、来源证券、来源市场和发布日期。测试用的临时快照未改生产安全证券主数据；当前生产快照缺 LEI/ISIN，因此生产自动跨市场联结覆盖率仍未解决，不能宣称已全面生效。
+- 当时的中间结论：CWP/FF 离线 E2E 使用隔离快照，虽可证明算法和负例，但尚不能证明生产链接已生成。该缺口已由文末 2026-11-10 的正式来源导入与真实目录验证解决；全市场历史覆盖仍不在 P2 承诺内。
 - RF 独立审查发现 `import_rf_job` 同一 job 并发注册的竞态：文件 staging 位于目录 append 锁外，失败清理可能删除另一调用已登记的 artifact。须新增 job-id OS 文件锁，覆盖已有项检查、artifact staging、catalog append 和清理；确定性回归固定“首调用已 staging 并暂停，第二调用先到达”的时序。真实入册前先修复和复审。
 - 同次独审还发现 adapter 跨进程 DTO 测试、失败清理测试、SourceExport 嵌套 schema/manifest shape 校验覆盖不足。RF 直接导入 sibling 模块私有 `_read_proof`；改为 RF 公共 adapter 后保留原消费者兼容入口。
 - MDB 原始工作在 `C:/Users/郑曾波/Projects/rf-input-prep-01-wt/.planning/rf-input-prep-01/job-root/artifacts/rf_jobs/jobs/rfjob-20261108-eb9f2a3ed336` 可读取。RF 的主 owner 根已有 `artifacts/report_catalog/catalog.jsonl`；导入应通过 P2 CLI 明确指定此 canonical 根，而不是把记录写入临时 worktree。复核到 job succeeded、source 复用 0 下载、compute 与 publication 均成功。要求独立 job SHA `17ec542035cb87de4c0fa718efa745ae0db9f6c0a6623621b73646c78c994ba6`、Markdown SHA `0bae0856fd4e658b456b1808bec06da937d08c5fa76b2d8e421a76fcbba20e63`；报告登记不触发预测。冻结 snapshot 可选且未导入，既有输入、结果、报告和来源证据足以满足当前目录列表/详情用途。
