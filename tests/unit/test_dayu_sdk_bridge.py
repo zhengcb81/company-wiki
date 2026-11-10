@@ -74,6 +74,37 @@ def test_sec_discovery_uses_sdk_and_correct_fiscal_year_without_original_downloa
     assert len(sdk.history_calls) == 1
 
 
+def test_sec_annual_discovery_uses_report_date_year_when_sec_omits_fiscal_year_end(sdk_loop):
+    from company_wiki.source_catalog.dayu_sdk_bridge import discover_sec
+
+    class MissingFiscalYearEndSEC(FakeSEC):
+        async def fetch_submissions(self, cik):
+            return {"cik": 123, "filings": {
+                "recent": {"name": "recent"}, "files": [],
+            }}
+
+    sdk = MissingFiscalYearEndSEC()
+    request = SourceRequest(entity="Provider Company", market="US", security_id="FIXTURE",
+                            document_kind="annual_report", form_type="20-F", fiscal_year=2025,
+                            fiscal_period="FY", as_of_date="2026-10-08", allow_download=True)
+
+    def collect(records, table, form_windows, end_date):
+        assert set(form_windows) == {"20-F"}
+        assert end_date.isoformat() == "2026-10-08"
+        records["0000000123-25-000003"] = SimpleNamespace(
+            form_type="20-F", filing_date="2025-06-26", report_date="2025-03-31",
+            accession_number="0000000123-25-000003", primary_document="annual.htm",
+        )
+
+    candidates = sdk_loop.run_until_complete(discover_sec(request, sdk, collect=collect))
+    assert len(candidates) == 1
+    candidate = candidates[0]
+    assert (candidate["fiscal_year"], candidate["fiscal_period"]) == (2025, "FY")
+    assert candidate["fiscal_year_basis"]["kind"] == "annual_report_date_year_requires_primary_dei"
+    assert candidate["fiscal_year_basis"]["fiscal_year_end"] is None
+    assert sdk.original_calls == 0
+
+
 @pytest.mark.parametrize("form", ["8-K", "8-K/A", "6-K"])
 def test_unsupported_exhibit_or_ambiguous_period_request_is_explicit_before_sdk(sdk_loop, form):
     from company_wiki.source_catalog.dayu_sdk_bridge import discover_sec, DayuBridgeError

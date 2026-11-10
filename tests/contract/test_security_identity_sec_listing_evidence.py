@@ -226,8 +226,11 @@ def test_sec_provider_20f_can_establish_links_from_verified_sec_filing(tmp_path)
         )
 
 
-def test_sec_provider_canonical_writer_registers_verified_listing_link(tmp_path_factory):
+def test_sec_provider_canonical_writer_registers_verified_listing_link(
+    tmp_path_factory, monkeypatch,
+):
     import hashlib
+    from pathlib import Path
 
     from company_wiki.source_catalog import (
         CanonicalSourceWriter,
@@ -236,6 +239,7 @@ def test_sec_provider_canonical_writer_registers_verified_listing_link(tmp_path_
         SourceRequest,
     )
     from company_wiki.source_catalog.models import CatalogConfig, RootSpec
+    from company_wiki.source_catalog.security_identity import SecurityIdentityResolver
     from company_wiki.source_catalog.service import SourceCatalog
 
     tmp_path = tmp_path_factory.mktemp("sec")
@@ -258,7 +262,7 @@ def test_sec_provider_canonical_writer_registers_verified_listing_link(tmp_path_
     company_root = project_root / "companies"
     company_root.mkdir(parents=True)
     catalog_dir = project_root / ".source_catalog"
-    _master(catalog_dir)
+    security_master = _master(catalog_dir)
     catalog = SourceCatalog(CatalogConfig(
         project_root=project_root,
         catalog_dir=catalog_dir,
@@ -312,16 +316,39 @@ def test_sec_provider_canonical_writer_registers_verified_listing_link(tmp_path_
     imported = CanonicalSourceWriter(catalog, staging_root=staging_root).import_staged(
         request, candidate, receipt,
     )
+    resolver = SecurityIdentityResolver(security_master.load(markets=("HK", "US")))
+    baba_us = resolver.identify("BABA", market="US").resolved
+    baba_hk = resolver.identify("09988", market="HK").resolved
+    assert baba_us is not None and baba_hk is not None
+    assert baba_us.issuer_link_id is not None
+    assert baba_us.issuer_link_id == baba_hk.issuer_link_id
+
     registered = catalog.register_sec_20f_listing_link(
         document_id=imported.source_ref.document_id,
         source_id=imported.source_ref.source_id,
         content_sha256=imported.source_ref.content_sha256,
     )
 
-    assert registered["status"] == "registered"
+    assert registered["status"] == "already_registered"
     assert registered["listing_count"] == 3
     assert registered["markets"] == ["HK", "US"]
     assert registered["content_sha256"] == hashlib.sha256(html).hexdigest()
+    assert Path(imported.canonical_path).read_bytes() == html
+
+    # A derived-link outage must not turn a successfully committed original
+    # into a failed acquisition or remove the immutable bytes.
+    from dataclasses import replace
+
+    def fail_projection(**_kwargs):
+        raise OSError("temporary derived-cache failure")
+
+    monkeypatch.setattr(catalog, "register_sec_20f_listing_link", fail_projection)
+    staged.write_bytes(html)
+    replay = CanonicalSourceWriter(catalog, staging_root=staging_root).import_staged(
+        request, candidate, replace(receipt, staged_path=str(staged)),
+    )
+    assert replay.status.value == "deduplicated_after_download"
+    assert Path(imported.canonical_path).read_bytes() == html
 
 
 def test_sec_20f_link_requires_verified_bytes_accession_and_exact_market_rows(tmp_path):

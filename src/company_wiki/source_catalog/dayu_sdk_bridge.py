@@ -80,6 +80,7 @@ async def discover_sec(
         collect(records=records, table=table, form_windows=windows, end_date=end)
     values = []
     unresolved = []
+    fiscal_year_end = submissions.get("fiscalYearEnd")
     for record in records.values():
         if request.provider_document_id and record.accession_number != request.provider_document_id:
             continue
@@ -98,9 +99,14 @@ async def discover_sec(
             "filing_date": record.filing_date, "fiscal_year": year, "fiscal_period": period,
             "language": "en", "amended": record.form_type.endswith("/A"),
             "cik": str(int(cik)), "report_date": record.report_date,
-            "fiscal_year_basis": {"kind": "submissions_candidate_requires_primary_dei",
+            "fiscal_year_basis": {"kind": (
+                                      "annual_report_date_year_requires_primary_dei"
+                                      if fiscal_year_end in (None, "")
+                                      and record.form_type.upper().removesuffix("/A") in {"10-K", "20-F"}
+                                      else "submissions_candidate_requires_primary_dei"
+                                  ),
                                   "report_date": record.report_date,
-                                  "fiscal_year_end": submissions.get("fiscalYearEnd")},
+                                  "fiscal_year_end": fiscal_year_end},
             "sdk_company_profile": {"company_name": company_name, "cik": str(int(cik)),
                                     "ticker": request.security_id},
         }

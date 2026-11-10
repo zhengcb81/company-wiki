@@ -23,17 +23,28 @@ def sec_period(report_date: str | None, fiscal_year_end: str | None, form: str) 
     calendars. Annual forms must match Q4. This remains a candidate inference:
     DEI in the downloaded original confirms label/end/CIK before staging.
     """
+    normalized = form.upper().removesuffix("/A")
+    if normalized not in {"10-K", "20-F", "10-Q"}:
+        raise FiscalMetadataError("SEC form has no supported fiscal-period evidence")
+    try:
+        actual = date.fromisoformat(report_date or "")
+    except (ValueError, TypeError) as exc:
+        raise FiscalMetadataError("SEC report date or fiscal year end is invalid") from exc
+    if fiscal_year_end is None or fiscal_year_end == "":
+        if normalized in {"10-K", "20-F"}:
+            # SEC submissions may omit fiscalYearEnd for foreign issuers. For
+            # annual forms, reportDate still identifies the candidate FY label;
+            # the downloaded primary DEI must confirm year, period, date and CIK
+            # before the source is staged.
+            return actual.year, "FY"
+        raise FiscalMetadataError("SEC fiscal year end is missing or invalid")
     if not isinstance(fiscal_year_end, str) or not re.fullmatch(r"\d{4}", fiscal_year_end):
         raise FiscalMetadataError("SEC fiscal year end is missing or invalid")
     try:
-        actual = date.fromisoformat(report_date or "")
         month, day = int(fiscal_year_end[:2]), int(fiscal_year_end[2:])
         date(2000, month, day)
     except (ValueError, TypeError) as exc:
         raise FiscalMetadataError("SEC report date or fiscal year end is invalid") from exc
-    normalized = form.upper().removesuffix("/A")
-    if normalized not in {"10-K", "20-F", "10-Q"}:
-        raise FiscalMetadataError("SEC form has no supported fiscal-period evidence")
     matches = []
     for year in range(actual.year - 1, actual.year + 2):
         for quarter in range(1, 5):

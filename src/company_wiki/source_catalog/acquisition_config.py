@@ -53,6 +53,11 @@ class AcquisitionConfig:
                 project_root=spec.project_root,
                 timeout_seconds=self.timeout_seconds,
                 supports_acquisition_budget=spec.supports_acquisition_budget,
+                # External SDKs may run with a lower-integrity token than the
+                # parent and cannot create nested scratch under the host's
+                # isolated %TEMP%. Reuse CWP's configured writable staging
+                # root for short-lived adapter scratch; it is removed per call.
+                scratch_parent=self.staging_root,
             )
 
         def build_dayu(spec: AdapterCommandSpec, market: str) -> DayuCliDownloadAdapter:

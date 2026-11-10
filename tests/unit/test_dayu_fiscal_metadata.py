@@ -10,6 +10,9 @@ import pytest
     ("2025-06-30", "0630", "10-K", (2025, "FY")),
     ("2025-12-27", "0926", "10-Q", (2026, "Q1")),
     ("2026-02-02", "0131", "10-K", (2026, "FY")),
+    ("2025-03-31", None, "20-F", (2025, "FY")),
+    ("2025-01-31", None, "10-K", (2025, "FY")),
+    ("2026-03-31", None, "20-F/A", (2026, "FY")),
 ])
 def test_sec_cross_calendar_and_week_based_candidate_periods(report_date, fye, form, expected):
     from company_wiki.source_catalog.dayu_fiscal_metadata import sec_period
@@ -17,7 +20,7 @@ def test_sec_cross_calendar_and_week_based_candidate_periods(report_date, fye, f
 
 
 @pytest.mark.parametrize("report_date,fye,form", [
-    (None, "1231", "10-K"), ("2025-12-31", None, "10-K"),
+    (None, "1231", "10-K"), ("2025-12-31", None, "10-Q"),
     ("2025-05-12", "1231", "10-Q"), ("2025-12-31", "bogus", "10-K"),
     ("2025-12-31", "1231", "6-K"), ("2025-09-30", "1231", "10-K"),
 ])

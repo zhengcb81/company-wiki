@@ -157,14 +157,9 @@ class SourceCatalog:
                 "content_sha256": ref.content_sha256,
             }
         with self.operation_lock(operation="source-identity-link"):
-            existed = any(
-                item.issuer_link_id == evidence.issuer_link_id
-                and item.source_sha256 == evidence.source_sha256
-                for item in store._load_issuer_link_evidence()
-            )
-            store._write_issuer_link(evidence)
+            created = store.register_issuer_link_evidence(evidence)
         return {
-            "status": "already_registered" if existed else "registered",
+            "status": "registered" if created else "already_registered",
             "issuer_link_id": evidence.issuer_link_id,
             "issuer_cik": evidence.issuer_cik,
             "source_id": evidence.source_id,

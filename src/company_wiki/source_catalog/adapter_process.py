@@ -84,9 +84,11 @@ def _parse_adapter_failure(
 
 
 @contextmanager
-def _scratch_directory():
+def _scratch_directory(parent: Path | None = None):
     """Scratch cleanup must not replace the provider/transport primary cause."""
-    directory = TemporaryDirectory(prefix="cwpad-")
+    if parent is not None:
+        parent.mkdir(parents=True, exist_ok=True)
+    directory = TemporaryDirectory(prefix="cwpad-", dir=parent)
     try:
         yield directory.name
     except BaseException as primary:
@@ -111,6 +113,7 @@ class JsonCommandAdapter:
         project_root: Path,
         timeout_seconds: float = 300.0,
         supports_acquisition_budget: bool = False,
+        scratch_parent: Path | None = None,
     ):
         if not isinstance(name, str) or not name.strip():
             raise ValueError("name must be non-empty text")
@@ -127,12 +130,15 @@ class JsonCommandAdapter:
             raise ValueError("timeout_seconds must be positive")
         if not isinstance(supports_acquisition_budget, bool):
             raise TypeError("supports_acquisition_budget must be bool")
+        if scratch_parent is not None and not isinstance(scratch_parent, Path):
+            raise TypeError("scratch_parent must be pathlib.Path or None")
         self.name = name
         self.version = version
         self.command = normalized
         self.project_root = project_root.resolve(strict=True)
         self.timeout_seconds = float(timeout_seconds)
         self.supports_acquisition_budget = supports_acquisition_budget
+        self.scratch_parent = scratch_parent.resolve() if scratch_parent is not None else None
 
     def discover(self, request: SourceRequest) -> tuple[DownloadCandidate, ...]:
         if not isinstance(request, SourceRequest):
@@ -324,7 +330,7 @@ class JsonCommandAdapter:
             # The parent owns SDK scratch and the complete OS process tree,
             # including Windows venv redirectors. Reap it before removing files.
             # Successful originals must reside in the explicit staging allocation.
-            with _scratch_directory() as scratch:
+            with _scratch_directory(self.scratch_parent) as scratch:
                 environment["CWP_ADAPTER_SCRATCH_ROOT"] = scratch
                 completed = run_json_process(
                     command,

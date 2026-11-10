@@ -6,6 +6,7 @@ from dataclasses import asdict, dataclass, field
 from enum import Enum
 import hashlib
 import json
+import logging
 import os
 from pathlib import Path
 import re
@@ -302,8 +303,64 @@ class CanonicalSourceWriter:
             except (TypeError, ValueError) as exc:
                 raise CanonicalImportError("provenance extensions must be canonical JSON") from exc
         staged = self._validate_staged(request, candidate, receipt)
-        return self._commit_staged(request, candidate, receipt, staged,
-                                   provenance_extensions=provenance_extensions, budget=budget)
+        result = self._commit_staged(
+            request,
+            candidate,
+            receipt,
+            staged,
+            provenance_extensions=provenance_extensions,
+            budget=budget,
+        )
+        self._register_sec_20f_listing_evidence(request, candidate, result)
+        return result
+
+    def _register_sec_20f_listing_evidence(
+        self, request: SourceRequest, candidate: Any, result: CanonicalImportResult,
+    ) -> None:
+        """Refresh the derived issuer-link cache after committing a SEC 20-F.
+
+        This is a best-effort projection of an already committed, immutable
+        filing. A parsing or cache error must never turn a successful original
+        import into a failed acquisition; the public identity-link command can
+        replay the derivation from the exact SourceRef later.
+        """
+        metadata = getattr(candidate, "metadata", None)
+        if not isinstance(metadata, Mapping):
+            metadata = {}
+        provider = str(getattr(candidate, "provider", "") or "").casefold()
+        market = str(getattr(candidate, "market", None) or request.market).upper()
+        document_kind = str(
+            getattr(candidate, "document_kind", None) or request.document_kind
+        ).casefold()
+        form_type = str(
+            getattr(candidate, "form_type", None) or metadata.get("form_type") or ""
+        ).upper()
+        if (
+            provider not in {"sec", "official"}
+            or market != "US"
+            or document_kind not in {"annual_report", "regulatory_filing"}
+            or form_type not in {"20-F", "20-F/A"}
+        ):
+            return
+        source_ref = result.source_ref
+        try:
+            outcome = self.catalog.register_sec_20f_listing_link(
+                document_id=source_ref.document_id,
+                source_id=source_ref.source_id,
+                content_sha256=source_ref.content_sha256,
+            )
+        except Exception as exc:
+            logging.getLogger(__name__).warning(
+                "SEC 20-F issuer-link projection failed for %s (%s); source remains committed",
+                source_ref.source_id,
+                type(exc).__name__,
+            )
+            return
+        logging.getLogger(__name__).info(
+            "SEC 20-F issuer-link projection for %s: %s",
+            source_ref.source_id,
+            outcome.get("status", "unknown"),
+        )
 
     def _commit_staged(self, request, candidate, receipt, staged, *,
                        provenance_extensions=None, budget=None, reactivate_retired=True, cleanup_staged=True):
@@ -432,9 +489,17 @@ class CanonicalSourceWriter:
         )
         receipt = _OriginalStorageReceipt(str(staged), content_sha256, byte_size,
                                           mime_type, retrieved_at)
-        return self._commit_staged(request, candidate, receipt, staged,
-                                  provenance_extensions={"official_capture": dict(capture_receipt)},
-                                  reactivate_retired=False, cleanup_staged=cleanup_staged)
+        result = self._commit_staged(
+            request,
+            candidate,
+            receipt,
+            staged,
+            provenance_extensions={"official_capture": dict(capture_receipt)},
+            reactivate_retired=False,
+            cleanup_staged=cleanup_staged,
+        )
+        self._register_sec_20f_listing_evidence(request, candidate, result)
+        return result
 
     def import_third_party_dataset_bytes(self, *, request_id: str,
             original: ThirdPartyDatasetOriginal, data: bytes, content_sha256: str,

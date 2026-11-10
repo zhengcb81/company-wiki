@@ -11,6 +11,7 @@ _FAKE_ADAPTER = r"""
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 
@@ -19,6 +20,11 @@ parser.add_argument("action", choices=("discover", "fetch"))
 parser.add_argument("--staging-dir")
 args = parser.parse_args()
 payload = json.loads(sys.stdin.read())
+scratch_root = Path(os.environ["CWP_ADAPTER_SCRATCH_ROOT"])
+(scratch_root / "tmp").mkdir()
+scratch_log = os.environ.get("CWP_TEST_SCRATCH_LOG")
+if scratch_log:
+    Path(scratch_log).write_text(str(scratch_root), encoding="utf-8")
 identity = {"name": "fake-json", "version": "1.0.0"}
 if args.action == "discover":
     assert payload["security_id"] == "600000"
@@ -156,6 +162,38 @@ adapters:
     assert registry.us.__class__.__name__ == "DayuCliDownloadAdapter"
     assert config.staging_root == project / ".source_catalog" / "staging"
     assert args.allow_download is False
+    assert registry.cn.scratch_parent == config.staging_root
+
+
+def test_json_command_adapter_uses_owner_scratch_parent_for_child_runtime(tmp_path: Path, monkeypatch):
+    from company_wiki.source_catalog import JsonCommandAdapter, SourceRequest
+
+    project = tmp_path / "adapter"
+    project.mkdir()
+    script = project / "fake_adapter.py"
+    script.write_text(_FAKE_ADAPTER, encoding="utf-8")
+    scratch_parent = tmp_path / "cwp-owned-staging"
+    scratch_log = tmp_path / "scratch-path.txt"
+    monkeypatch.setenv("CWP_TEST_SCRATCH_LOG", str(scratch_log))
+    adapter = JsonCommandAdapter(
+        name="fake-json",
+        version="1.0.0",
+        command=(sys.executable, str(script)),
+        project_root=project,
+        timeout_seconds=30,
+        scratch_parent=scratch_parent,
+    )
+    request = SourceRequest(
+        entity="示例公司", security_id="600000", market="CN",
+        document_kind="annual_report", fiscal_year=2025,
+        as_of_date="2026-07-18", allow_download=True,
+    )
+
+    assert len(adapter.discover(request)) == 1
+
+    child_scratch = Path(scratch_log.read_text(encoding="utf-8"))
+    assert child_scratch.parent == scratch_parent
+    assert list(scratch_parent.iterdir()) == []
 
 
 def test_ensure_cli_requires_complete_budget_for_provider_access():

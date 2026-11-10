@@ -596,6 +596,25 @@ class SecurityMasterStore:
         # not make otherwise valid market snapshots unusable.
         return tuple(evidence)
 
+    def register_issuer_link_evidence(
+        self, evidence: IssuerListingEvidence,
+    ) -> bool:
+        """Persist verified listing evidence through the security-master owner.
+
+        Return ``True`` only when this exact evidence was not already present.
+        Callers use this public operation instead of coordinating the private
+        cache reader and writer themselves.
+        """
+        if not isinstance(evidence, IssuerListingEvidence):
+            raise TypeError("evidence must be IssuerListingEvidence")
+        existed = any(
+            item.issuer_link_id == evidence.issuer_link_id
+            and item.source_sha256 == evidence.source_sha256
+            for item in self._load_issuer_link_evidence()
+        )
+        self._write_issuer_link(evidence)
+        return not existed
+
     def issuer_identity_tokens(
         self, entity: str, *, market: str | None = None, security_id: str | None = None,
         issuer_link_id: str | None = None,

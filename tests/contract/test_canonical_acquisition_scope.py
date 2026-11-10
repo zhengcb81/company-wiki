@@ -58,6 +58,7 @@ class PeriodAdapter:
             document_kind=request.document_kind, fiscal_year=year,
             fiscal_period=period, form_type=request.document_kind,
             filing_date=f"{year + 1}-03-01", language="en",
+            security_id=request.security_id,
         ),)
 
     def fetch(self, candidate, staging_dir):

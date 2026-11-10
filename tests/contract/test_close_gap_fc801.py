@@ -94,6 +94,7 @@ class _FakeAdapter:
             source_url="https://www.sec.gov/x/2025.pdf",
             document_kind="annual_report", form_type="annual_report",
             filing_date="2026-04-15", fiscal_year=2025,
+            security_id=request.security_id,
         ),)
 
     def fetch(self, candidate, staging_dir):
