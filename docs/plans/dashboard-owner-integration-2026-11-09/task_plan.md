@@ -24,15 +24,15 @@ $env:PWF_PLAN_ROOT = $null
 |---|---|---|
 | P0 核对证据和责任 | complete | 三份反馈共 13 项，已按代码、提交和历史回执复核。启动时重取主线和实际部署指纹 |
 | P1 发布可独立验收的接口 | complete | CWP、FF、RF 正式主线已发布，独审、CI 及本批 Dashboard 公开接口组合均通过 |
-| P2 修复真实业务缺口 | **complete（owner 候选已推送）** | CWP/FF 通用挂牌与来源期次匹配、SEC 20-F 原件驱动的关系登记、Alibaba/Bilibili 真实 US→HK 年报、Reader SHA 验真、实际来源目录 cache-only 身份复验、歧义/错市场负例及 MDB RF 公开目录读回均完成。CWP 代码提交 `174b422077f761422f9d826c12ee68eeef478ecb` 已推送到候选分支；随后 PWF-only 收尾提交也推至同一分支。push fast-gate 18 项通过。该分支没有 GitHub Actions run，不声称全量远端 CI 通过。CWP `master` 未更新：本地 master 已分叉（远端独有 9、本地独有 10 个提交），且有 4 个同写域文件未提交修改；保留在候选分支避免混入/覆盖其他工作。支持范围限于可追溯关系，不承诺全市场历史覆盖 |
+| P2 修复真实业务缺口 | **complete（三个 owner 均已并入并推送各自主线）** | CWP/FF 通用挂牌与来源期次匹配、SEC 20-F 原件驱动的关系登记、Alibaba/Bilibili 真实 US→HK 年报、Reader SHA 验真、生产来源目录 cache-only 身份复验、歧义/错市场负例及 MDB RF 公开目录读回均完成。当前 owner 主线：CWP `master`=`0fc56b25b89da9f3da5921ba64122d9745e1752d`；FF `main`=`f65e6ca75fbce0616e65870f0aea78b793ef883c`；RF `main`=`b005a179280ee19695578bdba9427b4dd44cdd73`。均为普通快进，无强推。CWP 快速发布 smoke 18/18、层边界定向回归 68 passed；FF 发布 hook 11 passed，精确 P2 候选的 `quality` workflow 有成功记录；RF 发布 hook 12 passed，完整远端 Actions 状态未确认。不得把本地 hook 代称完整 CI。支持范围限于可追溯关系，不承诺全市场历史覆盖 |
 | P3 收口流式与发行人证明 | pending | Reader 流式端口与原生 PDF 端口可独立开发。CWP 总控串行接入可能共享的公开入口，先流式后 canonical。基础 browse 与 MDB 入册不依赖本阶段 |
 | P4 全能力组合验收和消费切换 | pending | P1 公开接口的隔离组合已通过。后续由 Dashboard D00 在自己的发布计划接收确切修订，再按实际启用的 P2/P3 能力验收与切换 |
 
 ## Next Step
 
-P2 实现和真实 E2E 已完成，CWP owner 候选已推送且远端 SHA 已核对一致；下一阶段进入 P3。主线 master 推进另行处理，因为本地根工作区已有分叉和同写域未提交改动，不在本轮触碰。CWP 候选在导入经验证的精确 SEC 20-F 原件时，通过公开 owner 接口登记原件 SHA 绑定的 issuer/listing 关系；FF 分别从 US 挂牌请求 Alibaba、Bilibili 的 HK FY2025 年报，CWP Reader 按公开接口实读并核对完整字节 SHA；重放均复用现存件，provider 未启动、0 次下载/HTTP。生产来源目录 cache-only 身份验证、模糊名称歧义和错市场冲突负例也已完成。无来源证据、无挂牌范围或多挂牌歧义仍返回 incomplete/ambiguous，不回退到 ticker/name 猜测。此阶段只对可追溯关系路径验收，不代表所有公司和历史挂牌自动覆盖。MDB 报告已通过 RF 公开目录唯一登记并读回，未重跑预测。SHA、字节数、请求与验真收据见 [P2 E2E 收据](validation/p2_cross_market_e2e_receipt.json)。
+P2 已分别并入并推送 CWP `master`=`0fc56b25b89da9f3da5921ba64122d9745e1752d`、FF `main`=`f65e6ca75fbce0616e65870f0aea78b793ef883c`、RF `main`=`b005a179280ee19695578bdba9427b4dd44cdd73`。此前“本地分叉、4 个同写域未提交改动”的文字是 CWP 合并前快照，现已处理。P2 的 SEC 20-F 来源证明、Alibaba/Bilibili FY2025 US→HK 请求、原件 SHA 验真、零下载重放、身份负例与 MDB 报告读回均见 [P2 E2E 收据](validation/p2_cross_market_e2e_receipt.json)。模块化解耦按 D5 冻结验收范围已 ACCEPTED；这表示跨仓通过版本化公开接口协作，不表示模块间零依赖或未来不会发现缺口。下一阶段进入 P3：Reader 流式端口与解析层原生 PDF 端口只通过 CWP owner 公开边界接入，不把解析实现泄漏给 FF/RF/Dashboard。P4 是 Dashboard 按实际启用能力做组合验收与消费切换。P2 不表示 P3/P4 全计划完成。
 
-**下一步：P3** 的 Reader 流式端口与解析层原生 PDF 端口；按 CWP owner 公开边界接入，不把解析实现泄漏给 FF/RF/Dashboard。P4 是 Dashboard 按实际启用能力做组合验收与消费切换。P2 与这些未做阶段严格分开。此处“P2 complete”指 owner 候选已验证并推送；CWP master 推进需要另行协调当前分叉且有未提交重叠修改的根工作区，不属于本候选提交。
+**唯一下一步：P3**。按 CWP owner 公开边界收口 Reader 流式端口与解析层原生 PDF 端口；随后由 Dashboard D00 对实际启用能力做 P4 组合验收与消费切换。
 
 ## 依赖与发布顺序
 

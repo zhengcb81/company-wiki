@@ -75,12 +75,25 @@
 - MDB 继续只有 1 条既有成功报告，RF 公开 list/get/run/attempt 回读一致；本次没有重跑预测、重复入册或写 RF canonical root。报告仍保留 1 条 partial citation（缺 locator）和 10 条质量缺口。
 - **实施中的中间状态，已由下方最终收口取代：**当时真实 E2E 尚使用隔离快照，不能证明实际来源目录已经建立关系。随后 CWP 正式导入 SEC 20-F 原件并登记来源绑定关系，完成真实 HK 年报获取、Reader SHA 验真、重复零下载和 production cache-only 查询。下方记录是当前状态。
 
-## 2026-11-10 P2 最终收口
+## 2026-11-10 P2 候选最终验收快照（主线状态见下方更新）
 
-- **P2 complete（owner 候选已推送）。** 当前计划范围内的 issuer-link 来源证据、来源市场/期次绑定、真实下载与原件复用、CWP Reader 完整字节验真、cache-only 身份检查、歧义/错市场拒绝，以及此前完成的 MDB RF 公开目录读回全部通过。完整数据见 `validation/p2_cross_market_e2e_receipt.json`。
+- 此处记录的是候选代码最终验收快照；P2 三个 owner 的主线并入状态以本文件下方“P2 三仓并线与工作区对账”为准。issuer-link 来源证据、来源市场/期次绑定、真实下载与原件复用、CWP Reader 完整字节验真、cache-only 身份检查、歧义/错市场拒绝，以及 MDB RF 公开目录读回均见 `validation/p2_cross_market_e2e_receipt.json`。
 - CWP acquisition/canonical import 验真并登记 Alibaba FY2025 SEC 20-F（7,720,458 bytes，SHA `36daec0ce8b9f646d67b692a7ae7923589a6204bd58fddc02fff37f53a46bb17`）与 Bilibili FY2025 SEC 20-F（4,401,350 bytes，SHA `d5004d200eceaed8288d6c28916b5eac7c664cc003671f11c94418203128ffd4`）；公开 issuer-link owner 生成 `US:BABA ↔ HK:09988` 和 `US:BILI ↔ HK:09626` 两条 SHA 来源绑定关系。
 - FF→CWP 对两家均以 US listing 身份请求 HK FY2025 annual report，使用来源市场原生表单 `FY`。HK 原件 SHA 分别为 `8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182`（4,630,060 bytes）和 `88623041b7af0e423eb65a984ba34ca7bcba826b737210b062091bf51485bf4d`（2,473,744 bytes）。Public Reader 打开的实际字节与 SHA 完全一致，manifest 保留 HK 市场与 `09988`/`09626`。
 - 两个精确请求重放都为 `reused_existing`、0 下载、0 HTTP、provider 未启动。provider 未提供数值成本，成本记录是 `null`，不声称已证明零费用。生产来源目录 cache-only 查询匹配两组链接；`Alibaba + HK` 模糊查找是 ambiguous，`09626 + CN` 是 conflict。隔离负例拒绝错财年/表单/期次/来源证券/市场/未来 `as-of`。
 - CWP 本轮定向测试 127 passed（15.90s）、470 个源文件 mypy、Ruff、独立代码审查及提交钩子通过。代码提交 `174b422077f761422f9d826c12ee68eeef478ecb` 已推送并由远端候选分支确认包含；PWF-only 收尾提交也推到该分支。push fast-gate 18 项通过。GitHub Actions API 对该候选分支返回 0 个 run，因此完整远端 CI 未运行/未判绿。FF 定向测试 11 项、M3 兼容 21 项与独审通过，FF quality workflow 成功。
-- CWP 根工作区的 `master` 与远端分叉（remote-only 9 commits/local-only 10 commits），且 `adapter_process.py`、`canonical_writer.py`、`security_identity.py`、`service.py` 有未提交改动；本轮未更改该 worktree，也未将 P2 candidate 推到 master，以免混入这批并行工作。下一步仍按 P3 进入 Reader 流式和 PDF 原生端口；主线整合需在根工作区冲突审查后单独处理。P2 不等于 P3/P4 全计划完成。
 - **边界：**已完成的是可由 SEC 20-F 精确原文证明的通用 issuer-link 路径和真实 US→HK 年报链路。它不证明所有历史或所有市场证券的关系都已自动覆盖。缺少证明、缺挂牌范围和多候选仍明确返回 incomplete、ambiguous 或 conflict。下一阶段是 P3 Reader 流式与 PDF 原生端口，之后才是 P4 Dashboard 组合验收。
+
+## 2026-11-10 P2 三仓并线与工作区对账
+
+- P2 已全部并入并推送各 owner 主线：CWP `master`=`0fc56b25b89da9f3da5921ba64122d9745e1752d`，FF `main`=`f65e6ca75fbce0616e65870f0aea78b793ef883c`，RF `main`=`b005a179280ee19695578bdba9427b4dd44cdd73`。均普通快进，无强推。FF/RF 的远端候选 refs 保留；本机重复 P2 worktree 与 local candidate ref 已移除。
+- 本地检查：CWP 当前层边界/文档层隔离/DU 核心隔离 68 passed，push smoke 18/18；FF push hook 11 passed，P2 精确候选 quality run 有成功记录；RF push hook 12/12。RF 完整远端 CI 与本次 CWP/FF main push 新触发 Actions 均未 fresh 确认，不将本地 hook 冒称完整 CI。
+- 对 D4/D5 的准确表述：按 du11 冻结接口和跨仓矩阵已 ACCEPTED；模块通过 owner 公开版本化接口协作。它不代表零依赖，也不关闭新的产品集成工作。P3 Reader 流式/原生 PDF 端口、P4 Dashboard 消费切换仍 OPEN。
+- 已移除四个 `%TEMP%` 的删除态测试 worktree（共 14,498 条 tracked deletion 状态）；逐个确认 HEAD 是 `origin/master` 祖先，`companies/sectors/themes` 无文件且无 untracked/ignored 数据。另移除两个由主线覆盖的 CWP local refs。
+- 本地工作区尚未全净：CWP 有约 14,022 条 untracked 状态、91 个登记 worktree（外部 73 clean、17 dirty）及 23 个非祖先 local branch；旧 PWF/大测试环境和 P3 候选按收据保留，逐项清单见 [workspace reconciliation](review/local_workspace_reconciliation_2026-11-10.md)。
+- FF 本机 `main` 仍 ahead 7 / behind 4；七个 local-only 提交是 job facade 与交接记录，不能只凭较新远端已有相关功能就直接销毁。平台自动审批拒绝了 `reset --hard`，理由是这七个提交尚未逐提交核实/备份。本轮不绕过拒绝，需先完成核实或等明确处置决定。FF API key 文件保留且未读取。
+- RF 本机 `main` 已安全快进至 `b005a179`。保留了四个 tracked assurance 运行文件；它们记录多次 daily canary `bound=0 events=473` 和 weekly T3 exit 1，作为真实失败证据待 RF owner 单独查根因，没有回滚或并入 P2 代码。
+
+## 当前下一步
+
+进入 P3：由 CWP owner 接入 Reader 流式与解析层原生 PDF 公共端口；独立端口和合同通过后，再进入 Dashboard P4 组合验收/消费切换。并行继续本地 workspace reconciliation，但只处理已逐项确认可删的临时结果和由主线完整覆盖的引用，不批量删除未审计 PWF 或其他 harness 的真实改动。

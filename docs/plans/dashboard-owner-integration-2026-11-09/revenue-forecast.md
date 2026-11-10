@@ -29,6 +29,12 @@
 - 2026-11-10 只读复核 RF 公开 `list-reports/get-report/get-run/get-attempt`，仍为同一条已登记 MDB 报告；没有重跑预测、没有重复导入，也没有改动 RF canonical root。登记仅表示目录可读和 artifact 哈希已绑定；报告自身 1 条 partial citation（无 locator）与 10 条 `quality_gaps` 仍需下游展示。
 - importer 已提交并推送 `b005a179280ee19695578bdba9427b4dd44cdd73` 至 `origin/codex/dashboard-p2-rf-mdb-20261109`。push fast-gate 12 项通过；push hook 标记 full validation pending，未在本轮取得远端全量 CI 结果。
 
+### RF P2 主线状态（2026-11-10）
+
+- P2 提交 `b005a179280ee19695578bdba9427b4dd44cdd73` 已从 `origin/main` 的 `cd24976a958bc2abee841a592691268b45b117ee` 普通快进推送至 `origin/main`；本地 RF `main` 也已安全快进至同一 SHA。
+- 主线发布 hook 的 Ruff 与固定 smoke 12/12 通过。远端完整 GitHub Actions 结果本轮无法获取，不把本地 hook 结果描述成完整 CI 通过。
+- MDB 入册仍保留报告自身的 1 条 partial citation（无 locator）和 10 条 quality gaps；这次只是把已验收 importer 并入主线，没有重跑预测或改动 canonical 报告。
+
 ## RF-3 · v2 兼容演进
 
 先验证并补实际费用执行，复用现有 RF/供应商预算责任层。采用有限 Decimal 表示，拒绝负数和非有限金额。并发以原子预留处理实际余额，失败和恢复以原用量结算，未知支出保留 unknown。对无法实施预算的付费阶段返回明确不可用；允许已证可恢复的零新开销场景。用边界值、并发、重试、断线和已付费恢复测试。这个缺口优先于表达字段的收敛。

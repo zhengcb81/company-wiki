@@ -52,6 +52,6 @@
 - 代码与测试提交：`174b422077f761422f9d826c12ee68eeef478ecb`，分支 `codex/dashboard-p2-cwp-market-20261109`。
 - 精确复跑：8 个 P2 合同/单元测试文件 **127 passed**；`python -m mypy src` 470 个源文件通过；Ruff、`git diff --check` 通过。提交钩子的 Ruff、mypy、config doctor 也通过。
 - 独立审查：代码审查无阻断项；最终 PWF/真实收据复核结果和远端同步状态记在总计划 `progress.md`。
-- `origin/codex/dashboard-p2-cwp-market-20261109` 已包含代码提交 `174b422077f761422f9d826c12ee68eeef478ecb`；PWF-only 收尾提交随后推到同一分支。push fast-gate 18 项通过。GitHub Actions 对该分支没有运行记录，因此不声称完整远端 CI 已绿。
-- 本地 `master` 保持原样。它相对远端 master 已分叉且有四个与 P2 同写域的未提交文件；本轮只发布独立候选，不把其他未提交变更并入。
+- **当前结果（2026-11-10）：**上述 CWP P2 候选与 PWF 收尾已普通快进并入、推送至 `master`。本地和 `origin/master` 都在 `0fc56b25b89da9f3da5921ba64122d9745e1752d`；发布 hook 的快速 smoke 为 18/18。FF/RF 的对应 P2 也已分别并入其 owner 主线，精确版本和测试状态见[总计划](task_plan.md)及[工作区对账报告](review/local_workspace_reconciliation_2026-11-10.md)。此前的分叉与 4 个同写域未提交文件是合并前快照，已先核对其实际 blob 与远端基线，再对齐根工作区；没有覆盖独立 P3 提交。
+- 当前本地针对架构边界、文档层隔离和 DU 核心隔离的定向回归为 68 passed。尚未确认本次 `master` 更新触发的完整 GitHub Actions 结果；本地定向测试不等同于全量远端 CI 通过。
 - 此提交只改 CWP owner 和本计划；未改 FF、Dayu、Dashboard 或 RF 代码。
