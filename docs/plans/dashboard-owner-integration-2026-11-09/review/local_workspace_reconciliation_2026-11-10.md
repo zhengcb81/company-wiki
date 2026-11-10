@@ -31,6 +31,7 @@ E2E 原件、SHA、复用零下载及 MDB 公共目录读回仍以 [P2 E2E recei
 - 删除 CWP 两个没有工作树、且提交系列已由 `origin/master` patch-equivalent 覆盖的 local refs：`codex/r1-contract-debt` 与 `codex/r1-summary-runtime`。
 - 另删除 14 个已并入 `origin/master`、无 tracked/untracked 改动、没有 `companies/sectors/themes` 数据目录的本地 worktree 与对应 local branch refs：`d4-01-company-source-index`、`d4-03-document-model`、`d4-04-transcript-wire`、`d5-cwp-processed-port`、`du-benchmark-20261013`、`du-profiles-20261013`、`du4-form-20261015`、`du4-state-20261015`、`du4-table-20261015`、`du5-corpus-20261015`、`du7-pdf-tables-20261016`、`du9-geometry-planner-20261016`、`du9-geometry-policy-20261016`、`main-replay-config-isolation-20261009`。删除前核对的 ignored 内容只有 Python/pytest 可再生成缓存；远端分支一律保留。
 - 再删除 7 个同样满足“提交在主线、工作树干净、无公司数据目录”的本地 checkout/ref：`r1-holdout-controller`、`w05-cwp-ocr`、`w18-cwp-holdout-20261025`、`w19-sina-statements-20261025`、`w22-atomic-io-20261030`、`root-du67-pdf-20261016`、`w22-pdf-deploy-20261030`。最后两个额外核实了 `.ingested/ingested.db` 仅有 0 行表，以及 `w22probe-m0qvqkpo/s.pdf` 是未被任何计划引用的 2.1 KB 临时测试文件；目录中的其余 ignored 项都是缓存。完整 handoff/evidence 已在 CWP 主线，远端 refs 未删除。
+- 再移除 `_w22r` 收口工作树：该分支已在主线，tracked 内容干净，唯一 48 个未跟踪文件是 4.2 KB `.cg-tmp` CodeGraph 测试夹具；相关独审/PWF 已提交在主线。先核对路径与文件类型后仅删除该临时目录，再正常移除 worktree/ref。另移除 DU3 quality 的干净重复 checkout/ref：4 个提交全部 patch-equivalent、无原件目录、只有可重建缓存。
 
 没有实测磁盘空闲量变化；工作树可能含硬链接，逻辑文件大小不能当作物理释放空间。
 
@@ -43,31 +44,30 @@ E2E 原件、SHA、复用零下载及 MDB 公共目录读回仍以 [P2 E2E recei
 - `docs/plans/du11-source-closure-2026-10-18/review/` 下 143 个审查/运行证据文件，约 17 MB；保留为历史验收材料。`tools/document_understanding_benchmark/gold/us-10k.du11-v2-20261024.json` 被既有报告按 SHA 引用，保留为 benchmark fixture。`.workbuddy-ai/memory/2026-11-02.md` 是 D4-03 交付记忆，保留。
 - `.worktrees/d00-e13-owner-integration` 是干净 P3 候选 `62602102ae5ab9a6bba54879756b800854c941a1`，与 `origin/codex/d00-e13-owner-integration-20261107` 相同但尚未并入主线；P3 仍待接线，保留。
 
-当前 CWP 共有 70 个已登记 worktree（含根目录），52 个外部 worktree clean，17 个 dirty，0 个无法读取；本地分支共 67 条，其中仍有 23 个 tip 不是 `origin/master` 的祖先。17 个 dirty worktree 的状态：
+当前 CWP 共有 68 个已登记 worktree（含根目录），51 个外部 worktree clean，16 个 dirty，0 个无法读取；本地分支共 65 条，其中仍有 22 个 tip 不是 `origin/master` 的祖先。16 个 dirty worktree 的状态：
 
 | Worktree | 状态摘要 | 本轮处理 |
 |---|---|---|
-| `.codex/worktrees/du11-extractive-runtime/company-wiki` | 65 条，仅 `.planning` 输出 | 保留，待按对应 PWF 核对 |
+| `.codex/worktrees/du11-extractive-runtime/company-wiki` | 81 个 file-level untracked，仅 `.planning` 输出 | 保留，待按对应 PWF 核对 |
 | `.codex/worktrees/du11-source-facts/company-wiki` | 11 条 tracked source/test 修改 + 12 条本地文件 | 保留，可能关联 T4，不作为 P2 处理 |
-| `.codex/worktrees/m3-acceptance-20261010/company-wiki` | 22 条 tracked 修改 + 37 条本地文件 | 保留，需按 M3 交接审查 |
-| `.codex/worktrees/m3-acquisition-usage-20261010/company-wiki` | 1 个新增计划目录 | 保留 |
-| `.codex/worktrees/w04-llm-config-scope-20261011/company-wiki` | 配置/脚本/测试修改及新增用例 | 保留，需比对主线和 W04 PWF |
-| `.codex/worktrees/w04-narrative-semantics-20261011/company-wiki` | 叙述语义代码/测试及 evidence 修改 | 保留，需比对主线和 W04 PWF |
+| `.codex/worktrees/m3-acceptance-20261010/company-wiki` | 22 条 tracked 修改 + 317 个 file-level untracked，含 `.planning`、docs、src、tests | 保留，需按 M3 交接审查 |
+| `.codex/worktrees/m3-acquisition-usage-20261010/company-wiki` | 3 个未跟踪 W06 PWF 文档 | 保留，核对是否已归档进 canonical plan |
+| `.codex/worktrees/w04-llm-config-scope-20261011/company-wiki` | 3 条 tracked 脚本/测试修改 + 22 个新增用例/PWF文件 | 保留，需比对主线和 W04 PWF |
+| `.codex/worktrees/w04-narrative-semantics-20261011/company-wiki` | 3 条 tracked 叙述代码/测试修改 + 92 个新增 PWF/docs/evidence 文件 | 保留，需比对主线和 W04 PWF |
 | `_harness_worktrees/document-reading-review-20261013/facets` | 1 个 `bindings.local.json` | 保留本机绑定配置 |
 | `_harness_worktrees/document-reading-review-20261013/families` | 1 个 `bindings.local.json` | 保留本机绑定配置 |
-| `_harness_worktrees/w06/cwp-acquisition-scope-root` | 1 个 `.planning` 目录 | 保留 |
-| `_harness_worktrees/w06/cwp-portability` | 1 个 handoff 输入目录 | 保留，输入来源未核销 |
-| `_harness_worktrees/w08/cwp-g2-replay` | 1 个 `.planning` 目录 | 保留 |
-| `Projects/_w22r` | 1 个 `.cg-tmp` | 临时索引文件，待确认无运行进程后清理 |
-| `Projects/company-wiki-r1-local-observation` | 98 条 tracked 文件变化 + 260 条新增文件 | 保留；属于较大 R1 观察/证据集，不能当临时产物丢弃 |
-| `Projects/company-wiki-w23-xiaomi-ocr` | 1 个 `.w23_cache` | 识别为缓存，大小/是否还需复用尚未确认 |
-| `Projects/company-wiki-w23-xiaomi-ocr-r1` | 1 个 `.w23_cache` | 同上 |
-| `Projects/investment-dashboard/.worktrees/b34-cwp-prospectus` | 1 个 `.test-runs` | 保留测试证据，等待 Dashboard owner 对账 |
-| `Projects/investment-dashboard/.worktrees/return5-cwp-audit` | 1 个 `.d00-audit` | 保留审计证据，等待 Dashboard owner 对账 |
+| `_harness_worktrees/w06/cwp-acquisition-scope-root` | 3 个未跟踪 PWF 文件 | 保留，核对后可归档 |
+| `_harness_worktrees/w06/cwp-portability` | 6 个 handoff/input 文件 | 保留，输入来源未核销 |
+| `_harness_worktrees/w08/cwp-g2-replay` | 12 个未跟踪 PWF/合同/receipt 文件 | 保留，核对是否已归档进 canonical plan |
+| `Projects/company-wiki-r1-local-observation` | 98 条 tracked 文件变化 + 566 个 file-level untracked（PWF/审查/运行证据） | 保留；属于较大 R1 观察/证据集，不能当临时产物丢弃 |
+| `Projects/company-wiki-w23-xiaomi-ocr` | 47 个文件，5.27 GB `.w23_cache/hub` 模型快照 | 明确为 W23-R1 共享模型资产，PWF要求复用并留存；不误删为普通缓存 |
+| `Projects/company-wiki-w23-xiaomi-ocr-r1` | 19 个文件，116 KB `.w23_cache/r1_cache` 结果缓存 | 保留以支持已记录的缓存恢复/复验；不是模型权重 |
+| `Projects/investment-dashboard/.worktrees/b34-cwp-prospectus` | 5 个 XML 测试收据，81 KB | 保留测试证据，等待 Dashboard owner 对账 |
+| `Projects/investment-dashboard/.worktrees/return5-cwp-audit` | 8 个 JSON/Python 审计证据，72 KB | 保留审计证据，等待 Dashboard owner 对账 |
 
 仍有 23 个 CWP local branch tip 不是 `origin/master` 的祖先：
 
-`codex/d00-cwp-canonical-calendar-fix`, `codex/d00-e13-owner-integration-20261107`, `codex/d00-return5-cwp-audit`, `codex/dashboard-b33-cwp-source-proof`, `codex/dashboard-cwp-b34-diagnostic`, `codex/dashboard-cwp-b34-prospectus`, `codex/dashboard-cwp-canonical`, `codex/dashboard-cwp-exact-reader`, `codex/dashboard-cwp-public-browser`, `codex/dashboard-cwp-readiness`, `codex/dashboard-cwp-return4-d00-fix`, `codex/du3-dependencies-20261014`, `codex/du3-geometry-20261014`, `codex/du3-quality-20261014`, `codex/g1-legacy-entry-retirement`, `codex/n4t2-selective-narrative-coverage`, `codex/p5-storage-retirement`, `codex/rf-state-audit`, `codex/w13-cwp-gates-20261024`, `codex/w21-pdf-runtime-20261029`, `codex/x-c04-current-main-compat-01`, `codex/x-c04-cwp-original-stream-01`, `codex/x-c04-integrity-repair-01`.
+`codex/d00-cwp-canonical-calendar-fix`, `codex/d00-e13-owner-integration-20261107`, `codex/d00-return5-cwp-audit`, `codex/dashboard-b33-cwp-source-proof`, `codex/dashboard-cwp-b34-diagnostic`, `codex/dashboard-cwp-b34-prospectus`, `codex/dashboard-cwp-canonical`, `codex/dashboard-cwp-exact-reader`, `codex/dashboard-cwp-public-browser`, `codex/dashboard-cwp-readiness`, `codex/dashboard-cwp-return4-d00-fix`, `codex/du3-dependencies-20261014`, `codex/du3-geometry-20261014`, `codex/g1-legacy-entry-retirement`, `codex/n4t2-selective-narrative-coverage`, `codex/p5-storage-retirement`, `codex/rf-state-audit`, `codex/w13-cwp-gates-20261024`, `codex/w21-pdf-runtime-20261029`, `codex/x-c04-current-main-compat-01`, `codex/x-c04-cwp-original-stream-01`, `codex/x-c04-integrity-repair-01`.
 
 这 23 个不能用 ancestry 状态直接判断为未完成或可删除：部分是 Dashboard P3 候选或仍有唯一改动，部分已 patch-equivalent，部分仅文档/审计。各分支在最终处理前要确认对应 PWF/handoff、当前 worktree dirty 状态及主线内容；本次没有 bulk merge 或 bulk delete。
 
