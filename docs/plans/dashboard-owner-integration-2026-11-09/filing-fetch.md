@@ -2,10 +2,12 @@
 
 工作目录为 `C:/Users/郑曾波/Projects/filing-fetch`。写域为 FF 的请求适配、公开 job CLI、FF 部署合同及测试。来源目录、CWP 配置、StockWiki 及 RF 通过公开接口接入。归属和批次见 [总计划](task_plan.md)。
 
-## FF-JOB · 发布已接受的 ff-job/1
+## FF-JOB · ff-job/1 并线状态已核销
 
-1. 重核远端 `main`。当前已核远端 `bf7e1dab`，本地 `154c292c` 已有 FF 作业代码和交接，包含 `a34f60e` 到 `154c292` 七项提交。核实这段的写域、父链、原独审证据和当前候选代码等同。采用窄范围正常发布，保留原工作树的其他内容。
-2. 用交付的定向作业测试和 FF v2 组合回归。覆盖 submit/status、意图、冲突/幂等、实际成本状态、process 失联后的只读 reconcile。验证新版 FF 仍接受旧调用请求。按本仓 CI 发布，记录完整 SHA 与 `ff-job/1` 公开合同。
+- `origin/main` 当前为 `f65e6ca75fbce0616e65870f0aea78b793ef883c`，已包含 `ff-job/1` 公开 CLI、作业存储/runner、协议和测试；与本地历史候选比较，远端已有同一 `scripts/ff_job.py` 入口及更新后的周边实现与回归。P2 并线无需再 cherry-pick 旧候选。
+- FF 本地 `main` 已对齐 `origin/main`。原七提交候选完整保留在 `codex/ff-job-facade-01`（HEAD `154c292cb25293afd090aec4ef8859c2bb2b150d`），其中的交接与独审记录可用于追溯；它是归档候选，不是待发布主线。
+- 该候选的原独审曾记录一个开放 P3（F-08）；当前主线代码比候选更新，不能把旧审查当作当前版本的审查结论。若 Dashboard 后续需要核对残余窗口，应以当前 FF `main` 为对象重测。
+- 并线后快门：P2 精确候选 quality workflow `42746994685` 成功，push hook 11 项通过；本轮没有确认此次 main 对齐后的完整远端 CI 新运行。
 
 ## FF-1 · 绑定明确挂牌和已验来源
 

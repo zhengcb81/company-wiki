@@ -6,7 +6,7 @@
 
 - **P2 已全部进入三个 owner 的远端主线。** 每个模块只在自己的仓库发布；没有把 CWP 私有实现搬进 FF/RF。
 - **D4/D5 解耦按冻结的验收范围已 ACCEPTED。** 含义是跨模块通过 owner 的版本化公开接口协作并由隔离/组合测试验证；不代表绝对零依赖，也不代表以后不需要修复新发现的问题。
-- **本地工作区尚未全部清理。** CWP 根目录仍有大量历史 PWF/审查文件，CWP 还有未合并分支及外部工作树；FF 本地 `main` 有七个未推送提交；RF 有未提交的 assurance 运行结果和其他产物。具体状态见下文，未将它们误报为 P2 代码。
+- **本地工作区尚未全部清理。** CWP 根目录仍有大量历史 PWF/审查文件，CWP 还有未合并分支及外部工作树；FF 留有一条已核实为旧 ff-job 候选的归档分支及未跟踪运行产物；RF 有未提交的 assurance 运行结果和其他产物。具体状态见下文，未将它们误报为 P2 代码。
 
 ## P2 正式主线
 
@@ -71,13 +71,13 @@ E2E 原件、SHA、复用零下载及 MDB 公共目录读回仍以 [P2 E2E recei
 
 ## FF/RF owner 根目录剩余状态
 
-- FF 远端 `main` 已在 `f65e6ca`。本机 `main` 仍在 `154c292`，状态为 ahead 7 / behind 4，tracked worktree clean；7 个 local-only commits 是 FF job facade 代码与收尾文档，远端已有较新的 job 实现及 P2，但提交补丁不完全等价。本轮自动审批**拒绝**了 `git reset --hard origin/main`，理由是会删除 7 个尚未逐提交核实/备份的本地提交。没有尝试通过其他命令绕过；需先逐提交核对或取得明确的处置指令。未跟踪的 `.ff_jobs`、`.mimosa`、`.planning`、`.worktrees`、pytest 输出及 `config/FMP_API_KEY.txt` 均保留，未读取 API key 内容。
+- FF 本机 `main` 已对齐远端 `f65e6ca75fbce0616e65870f0aea78b793ef883c`。原七提交 `a34f60e`…`154c292` 保存在 `codex/ff-job-facade-01`；独立交接和审查显示它是完整 ff-job 候选，且远端当前主线已包含同一 CLI 入口及更新后的实现/测试。因此没有把旧代码重复 cherry-pick；历史分支暂保留供追溯。自动审批第一次拒绝 reset，是因为当时尚未证明这七项改动如何保留；核对远端树和确认备份分支后，正常 reset 成功，未绕过审批或删除提交。FF 根目录仍有 304 项未跟踪状态，主要含 `.ff_jobs`、`.mimosa`、`.planning`、`.worktrees`、pytest 输出、可重建缓存与 `config/FMP_API_KEY.txt`；API key 内容未读，未对这些材料做批量删除。
 - RF 本机 `main` 与 `origin/main` 均为 `b005a179`。4 个 tracked 修改是 `assurance/runs/daily_alert.jsonl`、`weekly_alert.jsonl` 和两个 manifest，记录 2026-10-06 至 2026-11-09 的 daily canary `bound=0 events=473`，weekly T3 run 持续 exit 1；monthly manifest 已更新至 2026-11-01、weekly manifest 至 2026-11-08。它们是运行失败证据，不是 P2 代码，未回滚、未提交；应由 RF owner 单独调查。
 - RF 另有约 5,867 个未跟踪状态，主要为 `.mimosa`、`.planning`、`.worktrees`、delivery 和 output。它们包含此前的研究/交付或运行材料，不在本轮删除。
 
 ## 尚未完成的清理
 
-1. 先处理 FF 本地 `main` 的七个提交：逐提交确认它们仅是被主线替代的 job 实现与重复 handoff，或明确决定保留/丢弃；自动审批拒绝后不得直接 reset。
-2. 继续按各自 PWF 对 CWP 17 个 dirty worktree 与 23 个非祖先 branch tip 分类；完成任务的提交/并线，过期日志和缓存仅在确认无输入、无唯一收据后清理。
-3. RF 的 assurance 失败是单独问题；保留证据并由 RF owner 查明 canary 绑定数为零的根因，不用本轮 P2 变更掩盖。
-4. `.planning` 大型旧结果按引用与 owner 收据分批裁剪。先保留仍被 W21/W22、D5、M3/R1 handoff 明确依赖的运行物；不要用 `.gitignore` 或索引排除来伪装成“清理完成”。
+1. 继续按各自 PWF 对 CWP 17 个 dirty worktree 与 23 个非祖先 branch tip 分类；完成任务的提交/并线，过期日志和缓存仅在确认无输入、无唯一收据后清理。
+2. RF 的 assurance 失败是单独问题；保留证据并由 RF owner 查明 canary 绑定数为零的根因，不用本轮 P2 变更掩盖。
+3. `.planning` 大型旧结果按引用与 owner 收据分批裁剪。先保留仍被 W21/W22、D5、M3/R1 handoff 明确依赖的运行物；不要用 `.gitignore` 或索引排除来伪装成“清理完成”。
+4. FF 的本地主线已经对齐；待其未跟踪材料逐项核销后，再决定旧候选分支是否保留为归档，不能把“文件已被 Git 忽略”当成清理证据。

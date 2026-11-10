@@ -91,7 +91,7 @@
 - 对 D4/D5 的准确表述：按 du11 冻结接口和跨仓矩阵已 ACCEPTED；模块通过 owner 公开版本化接口协作。它不代表零依赖，也不关闭新的产品集成工作。P3 Reader 流式/原生 PDF 端口、P4 Dashboard 消费切换仍 OPEN。
 - 已移除四个 `%TEMP%` 的删除态测试 worktree（共 14,498 条 tracked deletion 状态）；逐个确认 HEAD 是 `origin/master` 祖先，`companies/sectors/themes` 无文件且无 untracked/ignored 数据。另移除两个由主线覆盖的 CWP local refs。
 - 本地工作区尚未全净：CWP 有约 14,022 条 untracked 状态、91 个登记 worktree（外部 73 clean、17 dirty）及 23 个非祖先 local branch；旧 PWF/大测试环境和 P3 候选按收据保留，逐项清单见 [workspace reconciliation](review/local_workspace_reconciliation_2026-11-10.md)。
-- FF 本机 `main` 仍 ahead 7 / behind 4；七个 local-only 提交是 job facade 与交接记录，不能只凭较新远端已有相关功能就直接销毁。平台自动审批拒绝了 `reset --hard`，理由是这七个提交尚未逐提交核实/备份。本轮不绕过拒绝，需先完成核实或等明确处置决定。FF API key 文件保留且未读取。
+- FF 本机 `main` 已对齐 `origin/main`=`f65e6ca75fbce0616e65870f0aea78b793ef883c`。核对确认远端已有 ff-job/1 入口及更新后的周边实现/测试；本地七提交系列作为旧候选保留在 `codex/ff-job-facade-01`，不再作为待并线代码。第一次 reset 因可能丢失未核实提交被平台自动审查拦截；完成主线差异核对并确认候选分支仍保留后，正常 reset 成功，没有删除该分支或未跟踪资料。FF 根目录仍有 304 项未跟踪状态（含运行数据、PWF、工作树、缓存和密钥文件）；密钥内容未读，其他项目继续逐项核销。
 - RF 本机 `main` 已安全快进至 `b005a179`。保留了四个 tracked assurance 运行文件；它们记录多次 daily canary `bound=0 events=473` 和 weekly T3 exit 1，作为真实失败证据待 RF owner 单独查根因，没有回滚或并入 P2 代码。
 
 ## 当前下一步
