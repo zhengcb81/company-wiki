@@ -60,7 +60,7 @@ FF 与 RF 的旧作业层都曾根据过时的 PID 文件删除锁。两个独�
 - RF 独立复审当前不签收并发安全性；其新发现成为真实 MDB 入册的阻断项。现已修复为 job-id OS 文件锁，并完成 RF 定向测试、独立复审及公开 CLI 入册/读回：单一 run/attempt/report、所有 SHA 可读、重放幂等且 `forecast_executions=0`。
 - RF 真实 importer 首次拒绝还暴露生产合同与测试夹具漂移：`source-preparation-result/1` 的顶层只含 `schema_version/source/filing_fetch/narrative`，成功候选状态在嵌套 `filing_fetch.status`；旧实现及 fixture 都虚构顶层 `status=source_candidate`。修复两处真实校验并把 fixture 改成生产结构，避免放松其他源身份、期次、SHA 或 issuer proof 检查。首轮修复漏改 retained-attempt validator，4 项测试及时捕获，第二轮改正后 45 项通过。
 - MDB 以 RF 公开 `list-reports/get-report/get-run/get-attempt` 回读，唯一 report、run、attempt、issuer/listing、source SHA、input/result SHA 均一致，revision 固定为 `c14312b6013612f2e47774cdbd1aff58387a17dc7f073129e63bbdaa1f71be01`。入册与重放均为 `forecast_executions=0`。报告本身仍有 1 条 `partial` citation、无 locator，另有 10 条显式 `quality_gaps`；此诊断保留，不把目录登记等同于研究证据无缺。
-- P2 的根因范围还剩一项生产数据缺口：当前 CWP 官方身份刷新器写入 CN 统一社会信用代码、HKEX 证券 ID、US CIK，但部署快照没有跨市场 LEI/ISIN。两个真实双上市样本的 E2E 使用可验证的 GLEIF/存托凭证公开证据构造隔离快照，证明算法与负例；它不能证明生产路由已自动得到这些 issuer links。下一步需定通用权威标识的获取/刷新 owner 和过期策略，再用真实部署只读验证，不可手填公司特例。
+- P2 的生产数据缺口是当时的中间状态，现由下方 2026-11-10 最终收口记录取代：随后通过 CWP 正式 SEC 20-F 来源导入生成了带原件 SHA 的两个真实 issuer-link，并在实际来源目录 cache-only 验证。全市场历史挂牌覆盖仍未证明，也不是 P2 验收承诺。
 - RF strict canonical 检查已完成：精确 `compute_input`、`compute_result`、`job.json` 的孤立 surrogate 数均为 0；input canonical hash `6169ea8aca81638d83026153474d584ca19be38c166bb71ab0ae4e76924cde59` 与 result 中记录相同，result strict payload hash `04768c2742d663e3e7ac748c9fde8c7648cc1cd0e424e4d931e150379c038816` 与自哈希相同；完整 input raw SHA `a799977ac7ee30c6be4cbc254a03bfc872064b8d5d90f3e5609c95ac02018b2d`、result raw SHA `c0dce8c3df7e49431a351de67d15847db40a4ffd7bfa140cf378db437b017963`。无需放宽 strict UTF-8 哈希合同。MDB 主目录在入册前通过 RF 公开只读 CLI 查询为 0 条，catalog revision `a2ae0e7179f9d76b47bc81788e1501ede2da25efb6a59946748556b87c295a3d`。
 - 首次真实 CLI 入册未写目录，拒绝原因是 importer 错误要求 `source-preparation-result/1` 顶层有 `status=source_candidate`。真实 DTO 顶层只有 schema、source、filing_fetch，候选状态由 `filing_fetch.status=source_candidate` 承载；人工合成 fixture 之前错误地添加了不存在的顶层状态。应以 owner 的实际公开结果形状为合同，删除虚假顶层条件并使 fixture 反映真实形状；保留 nested filing 的 `reused_existing`、零下载、annual_report/FY2025 和 CWP SourceRef/manifest 校验。失败后公开 list 仍为 0 条，revision 未变。
 
@@ -69,6 +69,14 @@ FF 与 RF 的旧作业层都曾根据过时的 PID 文件删除锁。两个独�
 - 静态检查暴露 `CompanySourceIndex` 通过伪造窄 request 与 `cast(Any)` 调用 `SourceResolver._identity_matches` 私有实现。修正为 SourceResolver 的公开 `match_source_identity` 输入契约，并将 SourceVersionReader、local_reconcile 的跨模块调用一起迁移；正常 market/security/issuer-link 判定语义一致。
 - 独立审查发现公开 matcher 的无挂牌范围、仅 issuer-link 请求会错误早返为 `match`。现在明确返回 `incomplete` 并由 `test_issuer_link_without_listing_scope_is_incomplete` 锁定；最终独审通过，无 stop-ship。
 - CWP 新增 SEC 20-F 挂牌证据路径仅接受已验原件、SEC accession/URL/CIK、对应官方 US listing 和 SEC 表格中的精确证券/交易所；由 canonical writer 导入并经 SourceCatalog 公共登记。没有放宽普通 official-source 流程，也不按公司名或 ticker 生成关系。
-- 阿里 FY2025 与 B 站 FY2022 的真实 HKEX 原件 SHA、issuer-link 来源和零下载复用证据见 `validation/p2_cross_market_e2e_receipt.json`。CWP focused 127 passed、mypy 470 source files、Ruff 通过；FF focused 11 + M3 21 passed，两个 owner 候选已推送。完整远端 CI 尚待确认。
+- **较早的隔离快照结果（历史，不是当前生产验收）：**Alibaba FY2025 与 Bilibili FY2022 HKEX 原件完成当时的 fixture 复用测试。后续 P2 最终真实来源目录验收使用两家 FY2025；准确的来源 SHA 和结果见本文件末尾的最终收口记录。CWP 的早期候选 `e3b9a9219cb0c9e48ea8f73c21ff028880564463` 曾推送；本次增量实现 SHA `174b422077f761422f9d826c12ee68eeef478ecb` 的最终 push/CI 见 `progress.md`。
 - 测试必须使用满足 Windows 路径长度的短临时根。默认外部沙箱临时目录会令旧 CWP acquisition 锁文件路径过长并失败；使用仓库内短路径基准后同一套件 127 项通过。测试回执确认自动临时子目录清除；手动清理了前两轮失败测试留下的自有临时目录，未改原件或业务数据。
-- 当前部署 security master 文件只有 CN/HK/US 各自的身份列表，尚无普遍跨市场链接。因此本轮证明的是通用匹配、来源绑定与真实原件复用逻辑，仍不证明生产数据自动覆盖已闭环；下一步工作是 owner 级关系来源/刷新机制和实际部署只读验收。
+- **实施时的早期状态（历史，已被后续结果取代）：**当时部署 security master 尚无这两组 issuer-link，所以本轮还不能证明生产链接。随后正式导入带精确 SEC listing 的 FY2025 20-F 原件，CWP owner 创建 SHA 来源绑定链接，并在实际来源目录完成 cache-only 复验；最终结果见下节。全市场历史挂牌覆盖仍未证明。
+
+## P2 生产数据最终收口（2026-11-10）
+
+- 前文 2026-11-09 和 2026-11-10 的“生产身份快照缺 issuer-link”是当时的状态；下列真实来源导入与实际来源目录验证完成后，不能继续作为当前阻塞。
+- CWP 在 SEC FY2025 20-F 原件通过 canonical import 验真后，抽取 SEC 原文精确 US/HK listing 行，经公开 issuer-link owner API 登记关系及来源 SHA。Alibaba (`US:BABA ↔ HK:09988`) 关系绑定 SEC 原件 SHA `36daec0ce8b9f646d67b692a7ae7923589a6204bd58fddc02fff37f53a46bb17`；Bilibili (`US:BILI ↔ HK:09626`) 关系绑定 `d5004d200eceaed8288d6c28916b5eac7c664cc003671f11c94418203128ffd4`。实现依赖可验证原文，不以公司名、ticker 或行业猜关系。
+- FF 以 US listing 为请求身份、HK 为 `source_market`，请求 FY2025 annual report 并传递 HK 原生表单 `FY`。两份真实 HKEX 原件由 CWP Reader 公开接口打开，实际字节长度和 SHA 均匹配；重复执行均 `reused_existing`，0 downloads、0 HTTP、provider 未启动。provider 未报告数值费用，记录为 `null`，不将其表述为零费用。
+- 实际 CWP 来源目录的 cache-only 复验确认 US/HK 精确挂牌各自共享同一 issuer-link。`Alibaba` + HK 的模糊名称查询返回 ambiguous；`09626` + CN 返回 conflict。隔离合同回归另外覆盖错财年、表单、期次、来源证券/市场及未来 `as-of` 的拒绝。
+- P2 完成只表示通用 SEC 20-F 证明路径与这两家真实 US→HK 年报流程已闭环，不表示所有历史证券或 CN/HK/US 所有挂牌均已自动连通。缺证据仍保持 incomplete/ambiguous/conflict。全部请求、SHA、字节数、provider 观察和测试结果见 `validation/p2_cross_market_e2e_receipt.json`。

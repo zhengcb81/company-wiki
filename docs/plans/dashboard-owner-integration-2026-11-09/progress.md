@@ -67,9 +67,20 @@
 
 ## 2026-11-10 P2 实施更新
 
+- 以下提交与隔离样本记录是最终生产实测前的阶段快照；当前唯一状态以本文件最后的“P2 最终收口”段为准。
 - CWP 候选提交 `e3b9a9219cb0c9e48ea8f73c21ff028880564463` 已推送至 `codex/dashboard-p2-cwp-market-20261109`；FF 候选 `f65e6ca75fbce0616e65870f0aea78b793ef883c` 已推送至 `codex/dashboard-p2-ff-market-20261109`。两仓只改各自 owner 范围，未并入主线。push fast-gate 分别 18、11 项通过；FF GitHub quality run 42746994685 成功，CWP 候选分支未发现 Actions 运行记录。
 - CWP 修复跨模块私有身份方法调用：CompanySourceIndex、SourceVersionReader、local_reconcile 现在都经 SourceResolver 的公开 `match_source_identity` 契约。独立审查先发现“只有 issuer_link_id 会错误匹配”的 fail-open；实现改为 `incomplete` 并加回归，最终复审通过。
 - CWP 定向测试 127 passed；470 个源文件 mypy、Ruff、`git diff --check` 通过。SEC 20-F 的公开关系登记链路经 CanonicalSourceWriter 与 SourceCatalog 集成测试验证：登记出的 HK/US 挂牌、源 SHA 与已验证原件一致。FF 跨市场 11 项与 M3 兼容 21 项通过；FF 独立审查通过。FF 完整本地套件剩余 8 个失败已在精确基线复现，属既有失败，本次 P2 定向测试不受影响。
-- CWP/FF 候选提交后，重新运行真实原件端到端脚本：阿里 FY2025 HKEX 年报 SHA `c7806bf5da28032e1b15dbe9a334011d65f5d69efe3bf11a9d212f64f07ca9b2` 与 B 站 FY2022 HKEX 年报 SHA `712e23dc04fb7efa3a4d31b839b08eaf6ff92ea1d4c89f6458ace095b8bd24cf` 均在隔离快照完成跨市场复用；来源市场、证券、报告期、文种、as-of 保持准确，provider 未启动，下载数为 0，生产安全证券快照未改。测试结束后删除了本轮临时取得的官方 PDF 和隔离目录，源公司目录原件未改。
+- **早期隔离快照实测（历史）：**Alibaba FY2025 年报 SHA `c7806bf5da28032e1b15dbe9a334011d65f5d69efe3bf11a9d212f64f07ca9b2` 与 Bilibili FY2022 年报 SHA `712e23dc04fb7efa3a4d31b83908eaf6ff92ea1d4c89f6458ace095b8bd24cf` 在隔离快照完成过跨市场复用；这不是当前生产来源目录终验，也不是本轮两家 FY2025 下载的 SHA。原件和临时隔离目录按当时测试要求清理。
 - MDB 继续只有 1 条既有成功报告，RF 公开 list/get/run/attempt 回读一致；本次没有重跑预测、重复入册或写 RF canonical root。报告仍保留 1 条 partial citation（缺 locator）和 10 条质量缺口。
-- **剩余阻塞**：正式 CWP 身份快照还缺普遍、可追溯的跨市场 issuer-link 来源数据。SEC 20-F 证明路径已进入 CWP owner 代码，但真实 E2E 使用隔离快照，不能据此宣称部署自动关联已完成。下一步先接通通用的权威关系来源/刷新流程，再用实际部署 cache-only 验阿里、B 站和歧义负例；P2 保持 `in_progress`。本节覆盖旧的 2026-11-09 候选提交状态记录。
+- **实施中的中间状态，已由下方最终收口取代：**当时真实 E2E 尚使用隔离快照，不能证明实际来源目录已经建立关系。随后 CWP 正式导入 SEC 20-F 原件并登记来源绑定关系，完成真实 HK 年报获取、Reader SHA 验真、重复零下载和 production cache-only 查询。下方记录是当前状态。
+
+## 2026-11-10 P2 最终收口
+
+- **P2 complete（owner 候选已推送）。** 当前计划范围内的 issuer-link 来源证据、来源市场/期次绑定、真实下载与原件复用、CWP Reader 完整字节验真、cache-only 身份检查、歧义/错市场拒绝，以及此前完成的 MDB RF 公开目录读回全部通过。完整数据见 `validation/p2_cross_market_e2e_receipt.json`。
+- CWP acquisition/canonical import 验真并登记 Alibaba FY2025 SEC 20-F（7,720,458 bytes，SHA `36daec0ce8b9f646d67b692a7ae7923589a6204bd58fddc02fff37f53a46bb17`）与 Bilibili FY2025 SEC 20-F（4,401,350 bytes，SHA `d5004d200eceaed8288d6c28916b5eac7c664cc003671f11c94418203128ffd4`）；公开 issuer-link owner 生成 `US:BABA ↔ HK:09988` 和 `US:BILI ↔ HK:09626` 两条 SHA 来源绑定关系。
+- FF→CWP 对两家均以 US listing 身份请求 HK FY2025 annual report，使用来源市场原生表单 `FY`。HK 原件 SHA 分别为 `8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182`（4,630,060 bytes）和 `88623041b7af0e423eb65a984ba34ca7bcba826b737210b062091bf51485bf4d`（2,473,744 bytes）。Public Reader 打开的实际字节与 SHA 完全一致，manifest 保留 HK 市场与 `09988`/`09626`。
+- 两个精确请求重放都为 `reused_existing`、0 下载、0 HTTP、provider 未启动。provider 未提供数值成本，成本记录是 `null`，不声称已证明零费用。生产来源目录 cache-only 查询匹配两组链接；`Alibaba + HK` 模糊查找是 ambiguous，`09626 + CN` 是 conflict。隔离负例拒绝错财年/表单/期次/来源证券/市场/未来 `as-of`。
+- CWP 本轮定向测试 127 passed（15.90s）、470 个源文件 mypy、Ruff、独立代码审查及提交钩子通过。代码提交 `174b422077f761422f9d826c12ee68eeef478ecb` 已推送并由远端候选分支确认包含；PWF-only 收尾提交也推到该分支。push fast-gate 18 项通过。GitHub Actions API 对该候选分支返回 0 个 run，因此完整远端 CI 未运行/未判绿。FF 定向测试 11 项、M3 兼容 21 项与独审通过，FF quality workflow 成功。
+- CWP 根工作区的 `master` 与远端分叉（remote-only 9 commits/local-only 10 commits），且 `adapter_process.py`、`canonical_writer.py`、`security_identity.py`、`service.py` 有未提交改动；本轮未更改该 worktree，也未将 P2 candidate 推到 master，以免混入这批并行工作。下一步仍按 P3 进入 Reader 流式和 PDF 原生端口；主线整合需在根工作区冲突审查后单独处理。P2 不等于 P3/P4 全计划完成。
+- **边界：**已完成的是可由 SEC 20-F 精确原文证明的通用 issuer-link 路径和真实 US→HK 年报链路。它不证明所有历史或所有市场证券的关系都已自动覆盖。缺少证明、缺挂牌范围和多候选仍明确返回 incomplete、ambiguous 或 conflict。下一阶段是 P3 Reader 流式与 PDF 原生端口，之后才是 P4 Dashboard 组合验收。

@@ -41,7 +41,17 @@
 
 ## CWP P2 · 跨市场匹配验收（2026-11-10 更新）
 
-- 通用 issuer-link 判定及来源市场/挂牌市场/期间隔离已实现。阿里 FY2025、B 站 FY2022 的真实 HKEX 年报原件在隔离快照中从 US BABA/BILI 挂牌复用同一来源 SHA；原件准备、CWP query、local_prepare、ensure 和 FF query/ensure 均零下载，结果保留 HK 来源市场及来源证券代码。错误财年、文种、期次、来源证券/市场和晚于 `as-of` 的来源均拒绝。收据与原件 SHA 见总计划 `validation/p2_cross_market_e2e_receipt.json`。
-- 本轮根因修正了 CWP 模块间私有身份方法穿透：`SourceResolver.match_source_identity` 成为公开 owner 接口，CompanySourceIndex、SourceVersionReader 和 local_reconcile 经该接口使用相同的 market/security/issuer-link 判定；删除假 request DTO 与 `cast(Any)`。只有 issuer-link 而没有挂牌范围时返回 `incomplete`，已加回归测试。SEC 20-F 关系证据也支持 `provider=sec` 的规范入库路径；新集成测试从 CanonicalSourceWriter 导入经验证字节的原件，再经公开 `SourceCatalog.register_sec_20f_listing_link` 登记并核对 HK/US 挂牌与 SHA。独审无阻断项。
-- 最终 CWP 定向套件 **127 passed**；`python -m mypy src` 检查 470 个源文件通过；Ruff 与 `git diff --check` 通过。提交 `e3b9a9219cb0c9e48ea8f73c21ff028880564463` 已推送至 `origin/codex/dashboard-p2-cwp-market-20261109`，push fast-gate 18 项通过。查询 GitHub Actions API 未找到该候选分支的运行记录，故远端完整 CI 尚未通过证据确认；不能记为 CI 全绿或并入主线。
-- **生产数据闭环仍未完成**：当前正式 CWP 身份快照没有普遍跨市场 LEI/ISIN 关系。已实现 SEC 20-F 证据登记入口，但当前真实样本 E2E 使用隔离、来源可追溯的身份快照，不能证明部署快照已自动得到所有 issuer links。下一步接通可追溯的关系来源/刷新流程并对阿里、B 站及歧义负例做部署 cache-only 验证；禁止把样本 ID 写入生产或加入公司特判。P2 保持 `in_progress`。
+- **通用 owner 路径：**SEC 20-F 经 CWP acquisition/canonical import 验真后，从原文精确挂牌表提取证券/交易所，并通过公开 `SourceCatalog.register_sec_20f_listing_link` 登记原件 SHA 绑定关系；关系数据与原件在 CWP owner 内持久化。代码不按公司名或 ticker 猜关系。Dayu SEC submissions 没有 `fiscalYearEnd` 时，只生成候选 FY；下载后还要以 SEC 原文 DEI 核对 CIK、财年、期别和期末日，失败不写入。子进程 scratch 改到配置的 CWP staging 根，避免 Windows 低完整性 Dayu 进程因系统 Temp ACL 无法创建目录。
+- **真实 CWP/FF→HK 原件端到端：**Alibaba `US:BABA → HK:09988` 的 SEC FY2025 20-F SHA 为 `36daec0ce8b9f646d67b692a7ae7923589a6204bd58fddc02fff37f53a46bb17`；Bilibili `US:BILI → HK:09626` 的 SEC FY2025 20-F SHA 为 `d5004d200eceaed8288d6c28916b5eac7c664cc003671f11c94418203128ffd4`。由这两份正式来源生成的 issuer-link ID、HK 年报 URL/元数据及原件字节数在总计划的 P2 E2E JSON 收据。
+- FF 分别以 US 挂牌为公司身份、`source_market=HK` 请求 FY2025 `annual_report`，并使用来源市场的原生表单 `FY`。Alibaba HK 年报 SHA `8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182`（4,630,060 bytes），Bilibili HK 年报 SHA `88623041b7af0e423eb65a984ba34ca7bcba826b737210b062091bf51485bf4d`（2,473,744 bytes）。CWP public Reader 实读两份原件，长度与 SHA 均完全一致，receipt `ok`，manifest 均显示 HK 来源市场及正确挂牌代码。每项重放均为 `reused_existing`、0 downloads、0 provider HTTP exchanges、provider 未启动。
+- **生产来源目录 cache-only 验证：**US/HK 两组精确挂牌查询分别返回同一 issuer-link；HK `Alibaba` 模糊名称保留 `ambiguous`，把 `09626` 以 CN 市场查询则返回 `conflict`。测试环境的错财年、错表单、错期次、错 source security/market、晚于 `as-of` 用例均拒绝候选。请求/关系证据、零下载重放与 SHA 见 [`validation/p2_cross_market_e2e_receipt.json`](validation/p2_cross_market_e2e_receipt.json)。
+- **验证与交付状态：**CWP 本轮定向集成/合同/单元测试 **127 passed**；Ruff、`git diff --check` 和独立代码审查通过。代码变更、最终验收和远端分支信息以本文件末尾的 P2 收尾记录为准。P2 完成范围是已支持的 SEC 20-F 证明路径和真实 US→HK 复用；没有来源证明的发行人关系继续标记未知，不承诺对所有历史挂牌自动覆盖。FF owner 代码不在本工作树改动范围内。
+
+### P2 CWP 最终交付
+
+- 代码与测试提交：`174b422077f761422f9d826c12ee68eeef478ecb`，分支 `codex/dashboard-p2-cwp-market-20261109`。
+- 精确复跑：8 个 P2 合同/单元测试文件 **127 passed**；`python -m mypy src` 470 个源文件通过；Ruff、`git diff --check` 通过。提交钩子的 Ruff、mypy、config doctor 也通过。
+- 独立审查：代码审查无阻断项；最终 PWF/真实收据复核结果和远端同步状态记在总计划 `progress.md`。
+- `origin/codex/dashboard-p2-cwp-market-20261109` 已包含代码提交 `174b422077f761422f9d826c12ee68eeef478ecb`；PWF-only 收尾提交随后推到同一分支。push fast-gate 18 项通过。GitHub Actions 对该分支没有运行记录，因此不声称完整远端 CI 已绿。
+- 本地 `master` 保持原样。它相对远端 master 已分叉且有四个与 P2 同写域的未提交文件；本轮只发布独立候选，不把其他未提交变更并入。
+- 此提交只改 CWP owner 和本计划；未改 FF、Dayu、Dashboard 或 RF 代码。

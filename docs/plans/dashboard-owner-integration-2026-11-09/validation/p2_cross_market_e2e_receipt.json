@@ -1,1 +1,182 @@
-{"production_security_master_modified": false, "provider_started": false, "samples": [{"company": "alibaba", "ensure_downloads": 0, "fiscal_period": "FY", "fiscal_year": 2025, "issuer_link_evidence": "https://depositaryreceipts.citi.com/adr/guides/pgm_d.aspx?cusip=01609W102&pageId=15&subpageid=105", "issuer_link_id": "issuer-link-v1:d0eb22cf04e9413e087e45aa0c82ac6ea4e1cfc05d1eadadfeca8a7dfc059336", "listing": "US:BABA", "local_prepare_sha_matches": true, "query_downloads": 0, "sha256": "c7806bf5da28032e1b15dbe9a334011d65f5d69efe3bf11a9d212f64f07ca9b2", "source": "HK:09988"}, {"company": "bilibili", "ensure_downloads": 0, "fiscal_period": "FY", "fiscal_year": 2022, "issuer_link_evidence": "https://adr.db.com/drwebrebrand/dr-universe/dr_details.html?identifier=11346", "issuer_link_id": "issuer-link-v1:7185ce21fa30dccf84efaaec7168666fd2ec4d223c77d0ff7708c3234c4334cd", "listing": "US:BILI", "local_prepare_sha_matches": true, "query_downloads": 0, "sha256": "712e23dc04fb7efa3a4d31b839b08eaf6ff92ea1d4c89f6458ace095b8bd24cf", "source": "HK:09626"}, {"negative_case": "wrong_fiscal_year", "result": "not_found"}, {"negative_case": "wrong_form_type", "result": "not_found"}, {"negative_case": "wrong_fiscal_period", "result": "not_found"}, {"negative_case": "wrong_source_security", "result": "not_found"}, {"negative_case": "wrong_source_market", "result": "not_found"}, {"negative_case": "published_after_as_of", "result": "not_found"}], "sourced_issuer_links": [{"cross_listing_evidence_url": "https://depositaryreceipts.citi.com/adr/guides/pgm_d.aspx?cusip=01609W102&pageId=15&subpageid=105", "gleif_evidence": {"gleif_publish_date": "2026-11-09T08:00:00Z", "isins_sha256": "d254ecb4bc53b5165b4434f280e5c0f155c8bcda75ccd5ef701c9b48c0deb610", "legal_name": "Alibaba Group Holding Limited", "lei": "5493001NTNQJDH60PM02", "record_sha256": "786b54a760a89211714ce2a43f6ba8cce2492929eba2b7ca126be0d700386aee"}, "gleif_isins_url": "https://api.gleif.org/api/v1/lei-records/5493001NTNQJDH60PM02/isins?page%5Bsize%5D=100", "gleif_record_url": "https://api.gleif.org/api/v1/lei-records/5493001NTNQJDH60PM02", "lei": "5493001NTNQJDH60PM02", "listings": ["HK:09988", "US:BABA"], "sample": "alibaba"}, {"cross_listing_evidence_url": "https://adr.db.com/drwebrebrand/dr-universe/dr_details.html?identifier=11346", "gleif_evidence": {"gleif_publish_date": "2026-11-09T08:00:00Z", "isins_sha256": "0ad0c804f93ae6eb0a5705b4a82d09abebf626f92e77b54baafcf1e9aecd6aeb", "legal_name": "Bilibili Inc.", "lei": "5493008V60M52L3PIS45", "record_sha256": "c69419c169947293f8059221f9959a662448af6a89e9f4e42e2b0e0033539b73"}, "gleif_isins_url": "https://api.gleif.org/api/v1/lei-records/5493008V60M52L3PIS45/isins?page%5Bsize%5D=100", "gleif_record_url": "https://api.gleif.org/api/v1/lei-records/5493008V60M52L3PIS45", "lei": "5493008V60M52L3PIS45", "listings": ["HK:09626", "US:BILI"], "sample": "bilibili"}], "status": "passed"}
+{
+  "schema_version": "p2-cross-market-e2e/2",
+  "status": "passed",
+  "completed_at": "2026-11-10",
+  "scope": "Cross-market issuer relation, source-market preservation, filing-period matching, actual acquisition, byte-level Reader verification, and exact-request reuse for Alibaba and Bilibili; plus the already completed RF MDB catalog readback.",
+  "code_revisions": {
+    "company_wiki_base_commit": "390696883273069668d868e0ff7be363e4251e9d",
+    "company_wiki_final_commit": "174b422077f761422f9d826c12ee68eeef478ecb",
+    "company_wiki_branch": "codex/dashboard-p2-cwp-market-20261109",
+    "company_wiki_remote_contains_code_commit": true,
+    "company_wiki_push_fast_gate": "18 passed in 4.62s; fixed CI contract smoke only",
+    "company_wiki_github_actions_runs_at_check": 0,
+    "company_wiki_note": "Implementation commit 174b422077f761422f9d826c12ee68eeef478ecb was verified on the isolated candidate branch. The final PWF-only commit is appended to that same branch. No GitHub Actions run was observed for that branch at final check; this receipt does not claim full remote CI is green. Master was left unchanged because the local master worktree is diverged and has overlapping uncommitted source changes.",
+    "filing_fetch_commit": "f65e6ca75fbce0616e65870f0aea78b793ef883c",
+    "filing_fetch_branch": "codex/dashboard-p2-ff-market-20261109",
+    "revenue_forecast_mdb_report_readback": "validation/mdb-rf-job-readback.json"
+  },
+  "source_backed_issuer_links": [
+    {
+      "issuer": "Alibaba Group Holding Limited",
+      "issuer_link_id": "issuer-link-v1:a651e7399eb2c8ba60c24cf6c83cffe26af0060f955d9a042b83c87f7adaf793",
+      "listings": ["US:BABA", "HK:09988"],
+      "evidence_source": "SEC FY2025 Form 20-F",
+      "evidence_url": "https://www.sec.gov/Archives/edgar/data/1577552/000095017025090161/baba-20250331.htm",
+      "evidence_sha256": "36daec0ce8b9f646d67b692a7ae7923589a6204bd58fddc02fff37f53a46bb17",
+      "evidence_bytes": 7720458,
+      "registration_path": "CWP verified canonical import -> public SourceCatalog.register_sec_20f_listing_link"
+    },
+    {
+      "issuer": "Bilibili Inc.",
+      "issuer_link_id": "issuer-link-v1:417bd79497df69b492346b2a10297809162a7c6863be623e7db5790131270d77",
+      "listings": ["US:BILI", "HK:09626"],
+      "evidence_source": "SEC FY2025 Form 20-F, accession 0001193125-26-157842",
+      "evidence_url": "https://www.sec.gov/Archives/edgar/data/1723690/000119312526157842/d91984d20f.htm",
+      "evidence_sha256": "d5004d200eceaed8288d6c28916b5eac7c664cc003671f11c94418203128ffd4",
+      "evidence_bytes": 4401350,
+      "registration_path": "CWP verified canonical import -> public SourceCatalog.register_sec_20f_listing_link"
+    }
+  ],
+  "real_cross_market_runs": [
+    {
+      "issuer": "Alibaba Group Holding Limited",
+      "request_identity": "US:BABA",
+      "source_market": "HK",
+      "requested_fiscal_period": "FY",
+      "requested_fiscal_year": 2025,
+      "document_kind": "annual_report",
+      "provider_native_form_type": "FY",
+      "result_security": "HK:09988",
+      "first_result": {
+        "outcome": "downloaded",
+        "sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "bytes": 4630060,
+        "mime_type": "application/pdf",
+        "provider_http_exchanges": 7,
+        "provider_wire_bytes": 5815251,
+        "reported_provider_cost_usd": null
+      },
+      "reader_verification": {
+        "interface": "public CWP source_reader_cli",
+        "status": "ok",
+        "opened_bytes": 4630060,
+        "opened_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "manifest_market": "HK",
+        "manifest_security_id": "09988"
+      },
+      "exact_repeat": {
+        "outcome": "reused_existing",
+        "download_events": 0,
+        "downloads": 0,
+        "provider_http_exchanges": 0,
+        "provider_started": false
+      }
+    },
+    {
+      "issuer": "Bilibili Inc.",
+      "request_identity": "US:BILI",
+      "source_market": "HK",
+      "requested_fiscal_period": "FY",
+      "requested_fiscal_year": 2025,
+      "document_kind": "annual_report",
+      "provider_native_form_type": "FY",
+      "result_security": "HK:09626",
+      "first_result": {
+        "outcome": "downloaded",
+        "sha256": "88623041b7af0e423eb65a984ba34ca7bcba826b737210b062091bf51485bf4d",
+        "bytes": 2473744,
+        "mime_type": "application/pdf",
+        "provider_http_exchanges": 7,
+        "provider_wire_bytes": 3658731,
+        "reported_provider_cost_usd": null
+      },
+      "reader_verification": {
+        "interface": "public CWP source_reader_cli",
+        "status": "ok",
+        "opened_bytes": 2473744,
+        "opened_sha256": "88623041b7af0e423eb65a984ba34ca7bcba826b737210b062091bf51485bf4d",
+        "manifest_market": "HK",
+        "manifest_security_id": "09626"
+      },
+      "exact_repeat": {
+        "outcome": "reused_existing",
+        "download_events": 0,
+        "downloads": 0,
+        "provider_http_exchanges": 0,
+        "provider_started": false
+      }
+    }
+  ],
+  "cost_interpretation": {
+    "configured_max_cost_usd": 0.0,
+    "reported_provider_cost_usd": null,
+    "statement": "The provider did not report a numeric cost. Null is not evidence that the actual cost was zero."
+  },
+  "production_source_catalog_cache_only_checks": [
+    {
+      "queries": ["US:BABA", "HK:09988"],
+      "result": "same issuer_link_id",
+      "issuer_link_id": "issuer-link-v1:a651e7399eb2c8ba60c24cf6c83cffe26af0060f955d9a042b83c87f7adaf793"
+    },
+    {
+      "queries": ["US:BILI", "HK:09626"],
+      "result": "same issuer_link_id",
+      "issuer_link_id": "issuer-link-v1:417bd79497df69b492346b2a10297809162a7c6863be623e7db5790131270d77"
+    },
+    {
+      "query": "Alibaba with market HK and no exact security selector",
+      "result": "ambiguous",
+      "reason": "fuzzy_candidates_require_user_selection"
+    },
+    {
+      "query": "09626 with market CN",
+      "result": "conflict",
+      "reason": "exact_identity_conflicts_with_market_or_exchange_hint"
+    }
+  ],
+  "isolated_negative_cases": [
+    {"case": "wrong_fiscal_year", "result": "not_found"},
+    {"case": "wrong_form_type", "result": "not_found"},
+    {"case": "wrong_fiscal_period", "result": "not_found"},
+    {"case": "wrong_source_security", "result": "not_found"},
+    {"case": "wrong_source_market", "result": "not_found"},
+    {"case": "published_after_as_of", "result": "not_found"}
+  ],
+  "validation": {
+    "company_wiki_focused_tests": "127 passed in 15.90s; hosted outside the sandbox because Windows asyncio socketpair is blocked in the sandbox",
+    "company_wiki_mypy_source_files": 470,
+    "company_wiki_ruff": "passed",
+    "company_wiki_git_diff_check": "passed",
+    "company_wiki_independent_review": "no blocking findings on CWP source diff at base 390696883273069668d868e0ff7be363e4251e9d",
+    "filing_fetch_focused_tests": {"cross_market": 11, "m3_compatibility": 21},
+    "filing_fetch_quality_workflow": "https://github.com/zhengcb81/filing-fetch/actions/runs/42746994685"
+  },
+  "p2_boundary": "P2 is complete for the supported, source-backed SEC 20-F relationship path and the tested real US-to-HK filing flow. It does not claim automatic coverage of every historical issuer/listing across CN, HK, and US. Missing or ambiguous proof remains explicit and is never inferred from company name or ticker.",
+  "previous_isolated_snapshot": {
+    "status": "passed",
+    "production_security_master_modified": false,
+    "note": "Historical isolated-snapshot result retained for provenance; it predates this production source-catalog verification and was not evidence of production issuer-link coverage.",
+    "samples": [
+      {
+        "company": "alibaba",
+        "fiscal_period": "FY",
+        "fiscal_year": 2025,
+        "listing": "US:BABA",
+        "source": "HK:09988",
+        "sha256": "c7806bf5da28032e1b15dbe9a334011d65f5d69efe3bf11a9d212f64f07ca9b2",
+        "issuer_link_id": "issuer-link-v1:d0eb22cf04e9413e087e45aa0c82ac6ea4e1cfc05d1eadadfeca8a7dfc059336",
+        "evidence_url": "https://depositaryreceipts.citi.com/adr/guides/pgm_d.aspx?cusip=01609W102&pageId=15&subpageid=105"
+      },
+      {
+        "company": "bilibili",
+        "fiscal_period": "FY",
+        "fiscal_year": 2022,
+        "listing": "US:BILI",
+        "source": "HK:09626",
+        "sha256": "712e23dc04fb7efa3a4d31b839b08eaf6ff92ea1d4c89f6458ace095b8bd24cf",
+        "issuer_link_id": "issuer-link-v1:7185ce21fa30dccf84efaaec7168666fd2ec4d223c77d0ff7708c3234c4334cd",
+        "evidence_url": "https://adr.db.com/drwebrebrand/dr-universe/dr_details.html?identifier=11346"
+      }
+    ]
+  }
+}
