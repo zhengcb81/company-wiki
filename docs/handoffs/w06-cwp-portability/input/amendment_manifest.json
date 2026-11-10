@@ -1,0 +1,12 @@
+{
+  "schema_version": "w06-input-amendment/1",
+  "base_manifest_sha256": "56baa2ebe06c16e3b1264c0fe94850dda89e52fa94423a8788b49f57341a6a97",
+  "files": [
+    {
+      "path": "ROOT_INTERFACE_AMENDMENT.md",
+      "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+      "bytes": 2220
+    }
+  ],
+  "note": "Old input and manifest bytes unchanged."
+}

@@ -1,0 +1,1381 @@
+{
+  "schema_version": "narrative-g2-replay/1",
+  "run": {
+    "run_id": "attempt-0001",
+    "runner_pid": 1648,
+    "started_at": "2026-10-12T19:46:55.811359Z",
+    "finished_at": "2026-10-12T19:47:41.776839Z",
+    "code_binding": {
+      "base_head": "122bbe3ba142979a2e478f886eb25de76edf2e00",
+      "branch": "codex/w08-cwp-g2-replay",
+      "modules": [
+        {
+          "path": "src/company_wiki/automation/narrative_batch_cli.py",
+          "sha256": "17b7d3c04242340aabb132e8fbd4ce1f51cb5a245c2d84b028a51e72f681d8a2",
+          "byte_size": 5425,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_batch.py",
+          "sha256": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+          "byte_size": 91660,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_batch_request.py",
+          "sha256": "347e0bfc3e329f1e3d4d395863b6d13b03973aaf284c59ce3304089507879f41",
+          "byte_size": 14078,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_select.py",
+          "sha256": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+          "byte_size": 23546,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_summarize.py",
+          "sha256": "641f8d000f24c9c081be23be7f3e64acd347d2c5fd3934ab7e92554d5a8a0930",
+          "byte_size": 15319,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_verify.py",
+          "sha256": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+          "byte_size": 19311,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_runtime.py",
+          "sha256": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+          "byte_size": 2806,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_formats.py",
+          "sha256": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+          "byte_size": 1882,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/automation/narrative_transport_contracts.py",
+          "sha256": "6fca7f092e3f4441e9a92b2f6ddcefbb08fc0553fd70bf36409ea1b51ae456b5",
+          "byte_size": 15087,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/narrative_transport_cli.py",
+          "sha256": "8a2cbc088581496a8b48094cb53767f12b7a58448831f715c9cfb6397d41138e",
+          "byte_size": 8746,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+          "sha256": "5cd7fde85f695198a532e920e30423a7c8a6a35e5f15bd9eef2b9d9c7e587571",
+          "byte_size": 82935,
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/narrative_normalization.py",
+          "sha256": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd",
+          "byte_size": 11492,
+          "source": "worktree"
+        }
+      ],
+      "python_binding": {
+        "company_wiki_file": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/src/company_wiki/__init__.py",
+        "bound_root": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/src"
+      }
+    },
+    "rf_project": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/.planning/w08-cwp-g2-replay/input/runtime/rf",
+    "elapsed_seconds": 45.965
+  },
+  "scope": {
+    "lane_id": "W08-CWP-G2-REPLAY",
+    "supplier_fixture": true,
+    "llm_semantic_quality": "not_evaluated",
+    "source_truth_verified": "local synthetic originals only; SHA/size/locator verified in this workspace, no real company identity claimed",
+    "paid_calls": 0
+  },
+  "code_binding": {
+    "base_head": "122bbe3ba142979a2e478f886eb25de76edf2e00",
+    "branch": "codex/w08-cwp-g2-replay",
+    "modules": [
+      {
+        "path": "src/company_wiki/automation/narrative_batch_cli.py",
+        "sha256": "17b7d3c04242340aabb132e8fbd4ce1f51cb5a245c2d84b028a51e72f681d8a2",
+        "byte_size": 5425,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch.py",
+        "sha256": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+        "byte_size": 91660,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch_request.py",
+        "sha256": "347e0bfc3e329f1e3d4d395863b6d13b03973aaf284c59ce3304089507879f41",
+        "byte_size": 14078,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_select.py",
+        "sha256": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+        "byte_size": 23546,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_summarize.py",
+        "sha256": "641f8d000f24c9c081be23be7f3e64acd347d2c5fd3934ab7e92554d5a8a0930",
+        "byte_size": 15319,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_verify.py",
+        "sha256": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+        "byte_size": 19311,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_runtime.py",
+        "sha256": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+        "byte_size": 2806,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_formats.py",
+        "sha256": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+        "byte_size": 1882,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_transport_contracts.py",
+        "sha256": "6fca7f092e3f4441e9a92b2f6ddcefbb08fc0553fd70bf36409ea1b51ae456b5",
+        "byte_size": 15087,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_transport_cli.py",
+        "sha256": "8a2cbc088581496a8b48094cb53767f12b7a58448831f715c9cfb6397d41138e",
+        "byte_size": 8746,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+        "sha256": "5cd7fde85f695198a532e920e30423a7c8a6a35e5f15bd9eef2b9d9c7e587571",
+        "byte_size": 82935,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_normalization.py",
+        "sha256": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd",
+        "byte_size": 11492,
+        "source": "worktree"
+      }
+    ],
+    "python_binding": {
+      "company_wiki_file": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/src/company_wiki/__init__.py",
+      "bound_root": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/src"
+    },
+    "rf_snapshot_modules": [
+      {
+        "path": "scripts/company_wiki_narrative_reader.py",
+        "sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+        "byte_size": 3382,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/narrative_source_preparation.py",
+        "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+        "byte_size": 2400,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_contracts.py",
+        "sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+        "byte_size": 41228,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_process.py",
+        "sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+        "byte_size": 8500,
+        "source": "worktree"
+      }
+    ],
+    "rf_project_ref": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/.planning/w08-cwp-g2-replay/input/runtime/rf"
+  },
+  "rf_snapshot": {
+    "project_ref": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/.planning/w08-cwp-g2-replay/input/runtime/rf",
+    "modules": [
+      {
+        "path": "scripts/company_wiki_narrative_reader.py",
+        "sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+        "byte_size": 3382,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/narrative_source_preparation.py",
+        "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+        "byte_size": 2400,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_contracts.py",
+        "sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+        "byte_size": 41228,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_process.py",
+        "sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+        "byte_size": 8500,
+        "source": "worktree"
+      }
+    ]
+  },
+  "case_specs": [
+    {
+      "case_id": "annual-report",
+      "group_id": "periodic-filings",
+      "document_kind": "annual_report",
+      "source_class": "filing",
+      "language": "zh",
+      "mime_type": "application/pdf",
+      "filename": "w08-annual-report-2025.pdf",
+      "fixture_key": "annual_report",
+      "expectation": "narrative",
+      "typed_request": true,
+      "required_span_text": "公司新建产线已完成客户认证并进入批量交付",
+      "forbidden_summary_text": [
+        "本报告经审计",
+        "单位：人民币元"
+      ],
+      "notes": "narrative prose plus a financial table and audit boilerplate"
+    },
+    {
+      "case_id": "half-year-report",
+      "group_id": "periodic-filings",
+      "document_kind": "semi_annual_report",
+      "source_class": "filing",
+      "language": "zh",
+      "mime_type": "application/pdf",
+      "filename": "w08-half-year-report-2026h1.pdf",
+      "fixture_key": "half_year_report",
+      "expectation": "narrative",
+      "typed_request": true,
+      "required_span_text": "海外子公司新增产能已于本期投产",
+      "forbidden_summary_text": [
+        "未经审计",
+        "单位：人民币元"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "quarterly-report",
+      "group_id": "periodic-filings",
+      "document_kind": "quarterly_report",
+      "source_class": "filing",
+      "language": "zh",
+      "mime_type": "application/pdf",
+      "filename": "w08-quarterly-report-2026q1.pdf",
+      "fixture_key": "quarterly_report",
+      "expectation": "narrative",
+      "typed_request": true,
+      "required_span_text": "新一代产品已通过主要客户验证",
+      "forbidden_summary_text": [
+        "单位：人民币元"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "prospectus",
+      "group_id": "offering-documents",
+      "document_kind": "prospectus",
+      "source_class": "filing",
+      "language": "zh",
+      "mime_type": "application/pdf",
+      "filename": "w08-prospectus.pdf",
+      "fixture_key": "prospectus",
+      "expectation": "narrative",
+      "typed_request": true,
+      "required_span_text": "募集资金将用于扩建生产线及补充流动资金",
+      "forbidden_summary_text": [
+        "重要提示"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "placement",
+      "group_id": "offering-documents",
+      "document_kind": "equity_offering_prospectus",
+      "source_class": "filing",
+      "language": "zh",
+      "mime_type": "application/pdf",
+      "filename": "w08-placement.pdf",
+      "fixture_key": "placement",
+      "expectation": "typed_only",
+      "typed_request": true,
+      "required_span_text": null,
+      "forbidden_summary_text": [],
+      "notes": "shares one group with convertible-bond; typed request still runs"
+    },
+    {
+      "case_id": "convertible-bond",
+      "group_id": "offering-documents",
+      "document_kind": "convertible_bond_prospectus",
+      "source_class": "filing",
+      "language": "zh",
+      "mime_type": "application/pdf",
+      "filename": "w08-convertible-bond.pdf",
+      "fixture_key": "convertible_bond",
+      "expectation": "typed_only",
+      "typed_request": true,
+      "required_span_text": null,
+      "forbidden_summary_text": [],
+      "notes": "shares one group with placement; typed request still runs"
+    },
+    {
+      "case_id": "ir-policy",
+      "group_id": "non-narrative",
+      "document_kind": "investor_relations",
+      "source_class": "filing",
+      "language": "zh",
+      "mime_type": "application/pdf",
+      "filename": "投资者关系管理办法（2025年8月）.pdf",
+      "fixture_key": "ir_policy",
+      "expectation": "skip",
+      "typed_request": true,
+      "required_span_text": null,
+      "forbidden_summary_text": [],
+      "notes": "format boilerplate only; must skip with no summary and no model call"
+    },
+    {
+      "case_id": "call-txt-zh",
+      "group_id": "original-language-calls",
+      "document_kind": "investor_call_transcript",
+      "source_class": "transcript",
+      "language": "zh",
+      "mime_type": "text/plain",
+      "filename": "w08-call-zh.txt",
+      "fixture_key": "call_zh",
+      "expectation": "narrative",
+      "typed_request": true,
+      "required_span_text": "公司完成海外产能扩张",
+      "forbidden_summary_text": [],
+      "notes": "original-language TXT; SHA and language must not change"
+    },
+    {
+      "case_id": "call-txt-en",
+      "group_id": "original-language-calls",
+      "document_kind": "investor_call_transcript",
+      "source_class": "transcript",
+      "language": "en",
+      "mime_type": "text/plain",
+      "filename": "w08-call-en.txt",
+      "fixture_key": "call_en",
+      "expectation": "narrative",
+      "typed_request": true,
+      "required_span_text": "We expanded overseas capacity",
+      "forbidden_summary_text": [],
+      "notes": "original-language TXT; must not be converted to PDF"
+    }
+  ],
+  "coverage": {
+    "required_case_ids": [
+      "annual-report",
+      "half-year-report",
+      "quarterly-report",
+      "prospectus",
+      "placement",
+      "convertible-bond",
+      "ir-policy",
+      "call-txt-zh",
+      "call-txt-en"
+    ],
+    "executed_case_ids": [
+      "annual-report",
+      "half-year-report",
+      "quarterly-report",
+      "prospectus",
+      "placement",
+      "convertible-bond",
+      "ir-policy",
+      "call-txt-zh",
+      "call-txt-en"
+    ],
+    "missing_case_ids": [],
+    "unknown_case_ids": [],
+    "group_coverage": {
+      "periodic-filings": {
+        "required": [
+          "annual-report",
+          "half-year-report",
+          "quarterly-report"
+        ],
+        "missing": []
+      },
+      "offering-documents": {
+        "required": [
+          "prospectus",
+          "placement",
+          "convertible-bond"
+        ],
+        "missing": []
+      },
+      "non-narrative": {
+        "required": [
+          "ir-policy"
+        ],
+        "missing": []
+      },
+      "original-language-calls": {
+        "required": [
+          "call-txt-zh",
+          "call-txt-en"
+        ],
+        "missing": []
+      }
+    }
+  },
+  "run_plan": {
+    "deadline_seconds": 178.1582020999922,
+    "per_command_seconds": 30.0,
+    "second_run_reuse": true,
+    "rf_consumption": true
+  },
+  "runs": [
+    {
+      "run_index": 1,
+      "model_posts": 8,
+      "status": "completed",
+      "exit_code": 0
+    },
+    {
+      "run_index": 2,
+      "model_posts": 0,
+      "status": "completed",
+      "exit_code": 0,
+      "reuse_pins_identical": true
+    }
+  ],
+  "model_accounting": {
+    "run1_posts": 8,
+    "run2_posts": 0,
+    "total_posts": 8,
+    "provider_calls": 0,
+    "llm_calls": 8,
+    "paid_usd": 0.0,
+    "stub_errors": [],
+    "loopback_endpoint_ref": "loopback://127.0.0.1/v1/chat/completions"
+  },
+  "rf_consumption": {
+    "consumer": "scripts/narrative_source_preparation.py",
+    "read_ok": true,
+    "period_preserved": true,
+    "language_preserved": true,
+    "gaps_reported": [],
+    "reads": [
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:3a0bc98ff1ee70c2b5dd3247c98c589d94026bfda027dc55c1867f0a05ec11fd",
+        "context_sha256": "33ddbc8a81bd043c0a7bd10b50fe99ea9c13fd4747c6fdf18bc56b3b56a15df8",
+        "span_count": 1,
+        "locator_count": 1,
+        "locators": [
+          "loc:v1/page:1/paragraph:0"
+        ],
+        "languages": [
+          "zh"
+        ],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": true,
+        "gaps_reported": []
+      },
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:d63130f17908aa91b8dbce07b86b1cfeffb7cc6989852e0cfb315c9fae79b46a",
+        "context_sha256": "b38da45c3d777a89355b78e04515196a2068f2d3d9eec17c8c40cb16b5ab29db",
+        "span_count": 1,
+        "locator_count": 1,
+        "locators": [
+          "loc:v1/page:1/paragraph:0"
+        ],
+        "languages": [
+          "zh"
+        ],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": true,
+        "gaps_reported": []
+      },
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:bc15e0504aca3adb04baeba683f3ec701a56295011b3756d485d6c8bb26ccd72",
+        "context_sha256": "29258c15f5282639f479f4ddcee36e17706d0711022e1002ca4d587b22cfaa47",
+        "span_count": 1,
+        "locator_count": 1,
+        "locators": [
+          "loc:v1/page:1/paragraph:0"
+        ],
+        "languages": [
+          "zh"
+        ],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": true,
+        "gaps_reported": []
+      },
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:b74b4bf545b9d133a881e6980b51e2b754a3f7af49e663a575e8e0d3bb35097f",
+        "context_sha256": "b9b4e791e922e49f0b34c54587b5aa17097cfb8a3dd02daad4da9fa8e767cc2c",
+        "span_count": 2,
+        "locator_count": 2,
+        "locators": [
+          "loc:v1/page:2/paragraph:0",
+          "loc:v1/page:2/paragraph:1"
+        ],
+        "languages": [
+          "zh"
+        ],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": true,
+        "gaps_reported": []
+      },
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:cfc97c50316e7802bdabc1de5bf192fce3e5219f5061c05065fcd3089d1d0434",
+        "context_sha256": "077c2371352c5acc6289507b6846174c441bfdac7562c00c1d1acac91eced42a",
+        "span_count": 1,
+        "locator_count": 1,
+        "locators": [
+          "loc:v1/page:2/paragraph:0"
+        ],
+        "languages": [
+          "zh"
+        ],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": true,
+        "gaps_reported": []
+      },
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:6fff64ac47dc05398ffe26435ccd246e1b86a41dcb2ca5a9aecd966ccd68810f",
+        "context_sha256": "1c9fc7a6e4675393a21a173f2680cbd8f36af62a44815c4528f630dc0af8da94",
+        "span_count": 1,
+        "locator_count": 1,
+        "locators": [
+          "loc:v1/page:2/paragraph:0"
+        ],
+        "languages": [
+          "zh"
+        ],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": true,
+        "gaps_reported": []
+      },
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:1addca8e27a63f3f6ed0b5c98789a1c0941dcf5e6736415e9145f65177b03810",
+        "context_sha256": "f8a7f5f5f9f2d9db2fdf235d6897c8dcd0112ecf1732c5886f16ca896c6e5777",
+        "span_count": 0,
+        "locator_count": 0,
+        "locators": [],
+        "languages": [],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": false,
+        "gaps_reported": []
+      },
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:50832ae34f3cb43e550372ea1f9e31e5fffe109da1f98ba9b0d151440c080f03",
+        "context_sha256": "c003d83ae3b46b0ef5e6a7cf8c21d0149b4e9dbec508e54fad8c77e94176f9a7",
+        "span_count": 1,
+        "locator_count": 1,
+        "locators": [
+          "loc:v1/paragraph:2/chars:0-27"
+        ],
+        "languages": [
+          "zh"
+        ],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": true,
+        "gaps_reported": []
+      },
+      {
+        "consumer": "scripts/narrative_source_preparation.py",
+        "read_ok": true,
+        "exit_code": 0,
+        "document_id": "urn:company-wiki:document:sha256:c29eef789489b4c87c85c3fb406ece7b562faa3758f1f6833cbc6a78665f1f72",
+        "context_sha256": "ba68658cdc7b499fd10c0a3079926b725086e31d00c1b2f0eb548eb2c220969b",
+        "span_count": 2,
+        "locator_count": 2,
+        "locators": [
+          "loc:v1/paragraph:2/chars:0-83",
+          "loc:v1/paragraph:5/chars:0-63"
+        ],
+        "languages": [
+          "en"
+        ],
+        "as_of_date_echoed": true,
+        "period_preserved": true,
+        "language_preserved": true,
+        "gaps_reported": []
+      }
+    ],
+    "verified_reads": 9,
+    "read_with_evidence": 8
+  },
+  "cases": [
+    {
+      "case_id": "annual-report",
+      "group_id": "periodic-filings",
+      "expected": {
+        "expectation": "narrative",
+        "document_kind_preserved": "annual_report",
+        "requires_summary": true,
+        "language": "zh"
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "annual_report",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "c81152c38965bcb43dabbca376c6dc49c59bec7313fe0721fcac4a80a6b381bb",
+          "byte_size": 3704,
+          "artifact_version_id": "narrative-818735ed507245c4b830eade52f90dd9",
+          "document_id": "urn:company-wiki:document:sha256:3a0bc98ff1ee70c2b5dd3247c98c589d94026bfda027dc55c1867f0a05ec11fd",
+          "source_id": "urn:company-wiki:source:sha256:3a0bc98ff1ee70c2b5dd3247c98c589d94026bfda027dc55c1867f0a05ec11fd",
+          "source_sha256": "3a0bc98ff1ee70c2b5dd3247c98c589d94026bfda027dc55c1867f0a05ec11fd",
+          "locators": [
+            "urn:company-wiki:evidence-span:sha256:39613463810a1868ccebf570d2872a785d26f487bf8f20f032456f0ff3d0a72b"
+          ],
+          "locator_replay_verified": true
+        }
+      ],
+      "model": {
+        "posts": 1
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "3a0bc98ff1ee70c2b5dd3247c98c589d94026bfda027dc55c1867f0a05ec11fd",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "c81152c38965bcb43dabbca376c6dc49c59bec7313fe0721fcac4a80a6b381bb",
+          "selection_status": "selected",
+          "quality_status": "needs_review",
+          "summary_status": "completed",
+          "draft_language": "zh",
+          "locator_count": 1,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:39613463810a1868ccebf570d2872a785d26f487bf8f20f032456f0ff3d0a72b",
+              "page_number": 1,
+              "paragraph_index": 0,
+              "raw_text_sha256": "5a1b00c3b27ab1814e5d1d49bc6446fa77f126e54ba89b2eeacf07f302253801"
+            }
+          ]
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    },
+    {
+      "case_id": "half-year-report",
+      "group_id": "periodic-filings",
+      "expected": {
+        "expectation": "narrative",
+        "document_kind_preserved": "semi_annual_report",
+        "requires_summary": true,
+        "language": "zh"
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "semi_annual_report",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "ef75a691d4588b210f02c1471d2155e82d7007a82f84c8629cb369c442f53fb1",
+          "byte_size": 3739,
+          "artifact_version_id": "narrative-3fc8ee75e417466195d4e81f102830a1",
+          "document_id": "urn:company-wiki:document:sha256:d63130f17908aa91b8dbce07b86b1cfeffb7cc6989852e0cfb315c9fae79b46a",
+          "source_id": "urn:company-wiki:source:sha256:d63130f17908aa91b8dbce07b86b1cfeffb7cc6989852e0cfb315c9fae79b46a",
+          "source_sha256": "d63130f17908aa91b8dbce07b86b1cfeffb7cc6989852e0cfb315c9fae79b46a",
+          "locators": [
+            "urn:company-wiki:evidence-span:sha256:9e850217e6b562a1d2dbdcbbc1330fa361c71ba79c9d8096fb43fe4b7c0de884"
+          ],
+          "locator_replay_verified": true
+        }
+      ],
+      "model": {
+        "posts": 1
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "d63130f17908aa91b8dbce07b86b1cfeffb7cc6989852e0cfb315c9fae79b46a",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "ef75a691d4588b210f02c1471d2155e82d7007a82f84c8629cb369c442f53fb1",
+          "selection_status": "selected",
+          "quality_status": "needs_review",
+          "summary_status": "completed",
+          "draft_language": "zh",
+          "locator_count": 1,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9e850217e6b562a1d2dbdcbbc1330fa361c71ba79c9d8096fb43fe4b7c0de884",
+              "page_number": 1,
+              "paragraph_index": 0,
+              "raw_text_sha256": "920b76116b3101f3b7ebbc316f4283cbcd5b368ecad6054bd216d43a3f021b55"
+            }
+          ]
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    },
+    {
+      "case_id": "quarterly-report",
+      "group_id": "periodic-filings",
+      "expected": {
+        "expectation": "narrative",
+        "document_kind_preserved": "quarterly_report",
+        "requires_summary": true,
+        "language": "zh"
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "quarterly_report",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "87bf3807e1f184094a9b3168888715a33bc1c58618fe05e8cb42293d14155005",
+          "byte_size": 3767,
+          "artifact_version_id": "narrative-4da6f5abff444f4dbad50261945c0de9",
+          "document_id": "urn:company-wiki:document:sha256:bc15e0504aca3adb04baeba683f3ec701a56295011b3756d485d6c8bb26ccd72",
+          "source_id": "urn:company-wiki:source:sha256:bc15e0504aca3adb04baeba683f3ec701a56295011b3756d485d6c8bb26ccd72",
+          "source_sha256": "bc15e0504aca3adb04baeba683f3ec701a56295011b3756d485d6c8bb26ccd72",
+          "locators": [
+            "urn:company-wiki:evidence-span:sha256:6697d00f75bbf812e89b0817fca1b830d3dfb301abc13ffa4af9b09c2fd8617f"
+          ],
+          "locator_replay_verified": true
+        }
+      ],
+      "model": {
+        "posts": 1
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "bc15e0504aca3adb04baeba683f3ec701a56295011b3756d485d6c8bb26ccd72",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "87bf3807e1f184094a9b3168888715a33bc1c58618fe05e8cb42293d14155005",
+          "selection_status": "selected",
+          "quality_status": "needs_review",
+          "summary_status": "completed",
+          "draft_language": "zh",
+          "locator_count": 1,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:6697d00f75bbf812e89b0817fca1b830d3dfb301abc13ffa4af9b09c2fd8617f",
+              "page_number": 1,
+              "paragraph_index": 0,
+              "raw_text_sha256": "185e9713910d2f820150305288eee26b5a95ae43dc621b5b2d8edc7352f38ef8"
+            }
+          ]
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    },
+    {
+      "case_id": "prospectus",
+      "group_id": "offering-documents",
+      "expected": {
+        "expectation": "narrative",
+        "document_kind_preserved": "prospectus",
+        "requires_summary": true,
+        "language": "zh"
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "prospectus",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "4ba5c79b64f288bdcd3efb9191e2b15b51e68b78eaa589f63271dfa86d3c4ecf",
+          "byte_size": 4936,
+          "artifact_version_id": "narrative-ee88ed18337b4a318da9326d95467daf",
+          "document_id": "urn:company-wiki:document:sha256:b74b4bf545b9d133a881e6980b51e2b754a3f7af49e663a575e8e0d3bb35097f",
+          "source_id": "urn:company-wiki:source:sha256:b74b4bf545b9d133a881e6980b51e2b754a3f7af49e663a575e8e0d3bb35097f",
+          "source_sha256": "b74b4bf545b9d133a881e6980b51e2b754a3f7af49e663a575e8e0d3bb35097f",
+          "locators": [
+            "urn:company-wiki:evidence-span:sha256:9500af428535808244f6105416273462d31fc62db7d69c3d22caef34030f6017",
+            "urn:company-wiki:evidence-span:sha256:9f9ffd78fc53e188ed2c156d5debd4edd236389679919b441ac3c40d507e7210"
+          ],
+          "locator_replay_verified": true
+        }
+      ],
+      "model": {
+        "posts": 1
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "b74b4bf545b9d133a881e6980b51e2b754a3f7af49e663a575e8e0d3bb35097f",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "4ba5c79b64f288bdcd3efb9191e2b15b51e68b78eaa589f63271dfa86d3c4ecf",
+          "selection_status": "selected",
+          "quality_status": "needs_review",
+          "summary_status": "completed",
+          "draft_language": "zh",
+          "locator_count": 2,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9500af428535808244f6105416273462d31fc62db7d69c3d22caef34030f6017",
+              "page_number": 2,
+              "paragraph_index": 0,
+              "raw_text_sha256": "59399a8478afbb5d1bc26d2c0ee232a505174a466ff1692f1a6adb166d6f375d"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9f9ffd78fc53e188ed2c156d5debd4edd236389679919b441ac3c40d507e7210",
+              "page_number": 2,
+              "paragraph_index": 1,
+              "raw_text_sha256": "af6b60d72f1bb8acba8a34778b8f74212e358625030178ae8620d2d7d9ed6286"
+            }
+          ]
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    },
+    {
+      "case_id": "placement",
+      "group_id": "offering-documents",
+      "expected": {
+        "expectation": "typed_only",
+        "document_kind_preserved": "equity_offering_prospectus",
+        "requires_summary": false,
+        "language": "zh"
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "equity_offering_prospectus",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "2e084454fae48e96b20725524323341e64939711cf501ee4aa1cc4ad015e7580",
+          "byte_size": 3571,
+          "artifact_version_id": "narrative-1cd014a1f8b445cb80ecedd11b2337c4",
+          "document_id": "urn:company-wiki:document:sha256:cfc97c50316e7802bdabc1de5bf192fce3e5219f5061c05065fcd3089d1d0434",
+          "source_id": "urn:company-wiki:source:sha256:cfc97c50316e7802bdabc1de5bf192fce3e5219f5061c05065fcd3089d1d0434",
+          "source_sha256": "cfc97c50316e7802bdabc1de5bf192fce3e5219f5061c05065fcd3089d1d0434",
+          "locators": [
+            "urn:company-wiki:evidence-span:sha256:32c910c2b913d54bb854ca9862bb339c1765cc818b83d9595f3edb312008bff0"
+          ],
+          "locator_replay_verified": true
+        }
+      ],
+      "model": {
+        "posts": 1
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "cfc97c50316e7802bdabc1de5bf192fce3e5219f5061c05065fcd3089d1d0434",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "2e084454fae48e96b20725524323341e64939711cf501ee4aa1cc4ad015e7580",
+          "selection_status": "selected",
+          "quality_status": "needs_review",
+          "summary_status": "completed",
+          "draft_language": "zh",
+          "locator_count": 1,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:32c910c2b913d54bb854ca9862bb339c1765cc818b83d9595f3edb312008bff0",
+              "page_number": 2,
+              "paragraph_index": 0,
+              "raw_text_sha256": "d1e8c149434759006316715c37cd785a9b9b5267bbbaeb72292a7879d4dc67c8"
+            }
+          ]
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    },
+    {
+      "case_id": "convertible-bond",
+      "group_id": "offering-documents",
+      "expected": {
+        "expectation": "typed_only",
+        "document_kind_preserved": "convertible_bond_prospectus",
+        "requires_summary": false,
+        "language": "zh"
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "convertible_bond_prospectus",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "10252df48ec34dba6d036779f82d554ac5ad0318c41a8b367f1c7fd29d678af9",
+          "byte_size": 3574,
+          "artifact_version_id": "narrative-75a2e407e6664200bb8a861b24d4ac2e",
+          "document_id": "urn:company-wiki:document:sha256:6fff64ac47dc05398ffe26435ccd246e1b86a41dcb2ca5a9aecd966ccd68810f",
+          "source_id": "urn:company-wiki:source:sha256:6fff64ac47dc05398ffe26435ccd246e1b86a41dcb2ca5a9aecd966ccd68810f",
+          "source_sha256": "6fff64ac47dc05398ffe26435ccd246e1b86a41dcb2ca5a9aecd966ccd68810f",
+          "locators": [
+            "urn:company-wiki:evidence-span:sha256:e42195cd50c1a26df37feea2cb9d8a279eb0667dfb2ffd4d8bd234952f94f775"
+          ],
+          "locator_replay_verified": true
+        }
+      ],
+      "model": {
+        "posts": 1
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "6fff64ac47dc05398ffe26435ccd246e1b86a41dcb2ca5a9aecd966ccd68810f",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "10252df48ec34dba6d036779f82d554ac5ad0318c41a8b367f1c7fd29d678af9",
+          "selection_status": "selected",
+          "quality_status": "needs_review",
+          "summary_status": "completed",
+          "draft_language": "zh",
+          "locator_count": 1,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e42195cd50c1a26df37feea2cb9d8a279eb0667dfb2ffd4d8bd234952f94f775",
+              "page_number": 2,
+              "paragraph_index": 0,
+              "raw_text_sha256": "c42ba2a1d011c95fbab7c0932a31c66d9e821535997a5c7a052197a47414424a"
+            }
+          ]
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    },
+    {
+      "case_id": "ir-policy",
+      "group_id": "non-narrative",
+      "expected": {
+        "expectation": "skip",
+        "document_kind_preserved": "investor_relations",
+        "routed_kind": "ir_policy",
+        "requires_summary": false,
+        "skip_expected": "skipped_no_narrative",
+        "language": "zh"
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "investor_relations",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "skipped_no_narrative",
+        "selection_status": "skipped_no_narrative",
+        "quality_status": "skipped_no_narrative"
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "c27db94b2c293c6395348fbf0d1d6eb9168fd691c3e4dfdbb16f1bab73aa1230",
+          "byte_size": 1442,
+          "artifact_version_id": "narrative-c2bc3b62287b4053b283a12a188747f2",
+          "document_id": "urn:company-wiki:document:sha256:1addca8e27a63f3f6ed0b5c98789a1c0941dcf5e6736415e9145f65177b03810",
+          "source_id": "urn:company-wiki:source:sha256:1addca8e27a63f3f6ed0b5c98789a1c0941dcf5e6736415e9145f65177b03810",
+          "source_sha256": "1addca8e27a63f3f6ed0b5c98789a1c0941dcf5e6736415e9145f65177b03810",
+          "locators": [],
+          "locator_replay_verified": false
+        }
+      ],
+      "model": {
+        "posts": 0
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "1addca8e27a63f3f6ed0b5c98789a1c0941dcf5e6736415e9145f65177b03810",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "c27db94b2c293c6395348fbf0d1d6eb9168fd691c3e4dfdbb16f1bab73aa1230",
+          "selection_status": "skipped_no_narrative",
+          "quality_status": "skipped_no_narrative",
+          "summary_status": "summary_not_needed",
+          "draft_language": null,
+          "locator_count": 0,
+          "locators": []
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    },
+    {
+      "case_id": "call-txt-zh",
+      "group_id": "original-language-calls",
+      "expected": {
+        "expectation": "narrative",
+        "document_kind_preserved": "investor_call_transcript",
+        "requires_summary": true,
+        "language": "zh",
+        "transcript_must_stay_txt": true
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "investor_call_transcript",
+        "language": "zh",
+        "mime_type": "text/plain",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review",
+        "converted_to_pdf": false,
+        "source_sha256_changed": false
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "742720432da7dae61eba5fb8be82c96b99f78206a8f18449017419e37d598c17",
+          "byte_size": 4171,
+          "artifact_version_id": "narrative-e2a6d7fe97f5448088227eb9726bf1c9",
+          "document_id": "urn:company-wiki:document:sha256:50832ae34f3cb43e550372ea1f9e31e5fffe109da1f98ba9b0d151440c080f03",
+          "source_id": "urn:company-wiki:source:sha256:50832ae34f3cb43e550372ea1f9e31e5fffe109da1f98ba9b0d151440c080f03",
+          "source_sha256": "50832ae34f3cb43e550372ea1f9e31e5fffe109da1f98ba9b0d151440c080f03",
+          "locators": [
+            "urn:company-wiki:evidence-span:sha256:aa4e2e344f18db1a223b21762fe86e008cbe123479379bc2d3e197a5e208e85a"
+          ],
+          "locator_replay_verified": true
+        }
+      ],
+      "model": {
+        "posts": 1
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "50832ae34f3cb43e550372ea1f9e31e5fffe109da1f98ba9b0d151440c080f03",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "742720432da7dae61eba5fb8be82c96b99f78206a8f18449017419e37d598c17",
+          "selection_status": "selected",
+          "quality_status": "needs_review",
+          "summary_status": "completed",
+          "draft_language": "zh",
+          "locator_count": 1,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:aa4e2e344f18db1a223b21762fe86e008cbe123479379bc2d3e197a5e208e85a",
+              "page_number": null,
+              "paragraph_index": 2,
+              "raw_text_sha256": "0a5d1e2834019687eed03a1c9ccb340b54fc8afe8bd7231fe7453289f2343472"
+            }
+          ]
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    },
+    {
+      "case_id": "call-txt-en",
+      "group_id": "original-language-calls",
+      "expected": {
+        "expectation": "narrative",
+        "document_kind_preserved": "investor_call_transcript",
+        "requires_summary": true,
+        "language": "en",
+        "transcript_must_stay_txt": true
+      },
+      "status": "PASS",
+      "actual": {
+        "document_kind": "investor_call_transcript",
+        "language": "en",
+        "mime_type": "text/plain",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review",
+        "converted_to_pdf": false,
+        "source_sha256_changed": false
+      },
+      "request": {
+        "path_ref": "requests/run1.json",
+        "sha256": "b4ffe711a5db0715902da6fbe6d56489d77d8554a8bb4ac0f215d47ddb287d2d"
+      },
+      "result": {
+        "receipt_ref": "receipts/run1.json",
+        "exit_code": 0
+      },
+      "artifacts": [
+        {
+          "kind": "narrative_bundle",
+          "sha256": "c08e824cdc107506372bb684969e5ee9f6eac9055024467598559ddd75a32585",
+          "byte_size": 5626,
+          "artifact_version_id": "narrative-dce29046c3f84789afb12d6e0288779e",
+          "document_id": "urn:company-wiki:document:sha256:c29eef789489b4c87c85c3fb406ece7b562faa3758f1f6833cbc6a78665f1f72",
+          "source_id": "urn:company-wiki:source:sha256:c29eef789489b4c87c85c3fb406ece7b562faa3758f1f6833cbc6a78665f1f72",
+          "source_sha256": "c29eef789489b4c87c85c3fb406ece7b562faa3758f1f6833cbc6a78665f1f72",
+          "locators": [
+            "urn:company-wiki:evidence-span:sha256:02e4a420307848081dadf4713742e92a4db4ca9e764b259f24c18e304a385b19",
+            "urn:company-wiki:evidence-span:sha256:208854d535dcc3f306413a42f03c5d1716c9b411f4e85cf905ef26909933d130"
+          ],
+          "locator_replay_verified": true
+        }
+      ],
+      "model": {
+        "posts": 1
+      },
+      "evidence": {
+        "raw_receipt_present": true,
+        "raw_sha256": "c29eef789489b4c87c85c3fb406ece7b562faa3758f1f6833cbc6a78665f1f72",
+        "raw_bytes_match_fixture": true,
+        "public_read": {
+          "ok": true,
+          "body_matches_pin": true,
+          "body_sha256": "c08e824cdc107506372bb684969e5ee9f6eac9055024467598559ddd75a32585",
+          "selection_status": "selected",
+          "quality_status": "needs_review",
+          "summary_status": "completed",
+          "draft_language": "en",
+          "locator_count": 2,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:02e4a420307848081dadf4713742e92a4db4ca9e764b259f24c18e304a385b19",
+              "page_number": null,
+              "paragraph_index": 2,
+              "raw_text_sha256": "6cdbbac8465ec657f9c08cee51b74c4fd59a924d0db079dadd7fdf08d40b9be2"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:208854d535dcc3f306413a42f03c5d1716c9b411f4e85cf905ef26909933d130",
+              "page_number": null,
+              "paragraph_index": 5,
+              "raw_text_sha256": "6ac70dce24df803217806fe0e7d23b6f5ecdcf3013002f34cbd6f69c5a250e62"
+            }
+          ]
+        }
+      },
+      "failure": null,
+      "cleanup": {
+        "restored": true,
+        "remaining": []
+      }
+    }
+  ],
+  "bytes": {
+    "raw_bytes": 13846,
+    "derived_bytes": 757388
+  },
+  "cleanup": {
+    "baseline": {
+      "exists": false,
+      "sentinels": []
+    },
+    "after": {
+      "exists": false,
+      "sentinels": []
+    },
+    "deleted_within_owned": true,
+    "restored": true,
+    "remaining": []
+  },
+  "known_baseline_failures": [
+    {
+      "case_id": "w04-baseline-sparse-language",
+      "test_id": "tests/integration/test_narrative_batch_cli_e2e.py::test_cli_infers_sparse_languages_from_verified_pdf_and_transcript_bytes",
+      "status": "FAIL",
+      "root_cause": "real batch CLI exits 2 with status=failed where the test expects completed",
+      "owner": "ROOT",
+      "reproduced_at": "122bbe3ba142979a2e478f886eb25de76edf2e00"
+    },
+    {
+      "case_id": "w04-baseline-read-identity",
+      "test_id": "tests/integration/test_narrative_runtime_e2e.py::test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_receipt",
+      "status": "FAIL",
+      "root_cause": "attempt/job row count assertion 6 != 4",
+      "owner": "ROOT",
+      "reproduced_at": "122bbe3ba142979a2e478f886eb25de76edf2e00"
+    }
+  ],
+  "receipts": {
+    "run1_error": null,
+    "run2_error": null,
+    "run1_status": "completed",
+    "run2_status": "completed"
+  },
+  "oracle_verdict": {
+    "statuses": {
+      "annual-report": "PASS",
+      "half-year-report": "PASS",
+      "quarterly-report": "PASS",
+      "prospectus": "PASS",
+      "placement": "PASS",
+      "convertible-bond": "PASS",
+      "ir-policy": "PASS",
+      "call-txt-zh": "PASS",
+      "call-txt-en": "PASS"
+    },
+    "overall": "PASS",
+    "findings": []
+  }
+}

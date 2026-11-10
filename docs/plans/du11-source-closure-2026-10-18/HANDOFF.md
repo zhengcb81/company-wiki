@@ -1,11 +1,11 @@
 # 当前交接 — P2 已并线；D4/D5 已按范围验收；ROOT 复验 source-facts 并清理工作区
 
-**唯一入口**：先读 [CURRENT_STATUS.md](CURRENT_STATUS.md) 和 [CURRENT_STATUS.json](CURRENT_STATUS.json)，再按 [task_plan.md](task_plan.md) 执行。长期目标只看 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。截至 2026-11-10，Dashboard P2 已进入 CWP、FF、RF 各自主线；D4/D5 在已冻结的接口和组合验收范围内接受。模块解耦不等同“零依赖”，也不等于 Dashboard P3/P4 完成。
+**唯一入口**：先读 [CURRENT_STATUS.md](CURRENT_STATUS.md) 和 [CURRENT_STATUS.json](CURRENT_STATUS.json)，再按 [task_plan.md](task_plan.md) 执行。长期目标只看 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。截至 2026-11-10，Dashboard owner P2 已进入 CWP、FF、RF 各自主线且远端同步；主线循环里的 RF 实际采用 P2 仍 OPEN。D4/D5 只在冻结的接口和组合验收范围内接受。模块解耦不等同“零依赖”，也不等于 Dashboard P3/P4 完成。
 
 ## 最近确认
 
 - P2 三仓主线：CWP `0fc56b25b89da9f3da5921ba64122d9745e1752d`（当前更后续提交已包含）、FF `f65e6ca75fbce0616e65870f0aea78b793ef883c`、RF `b005a179280ee19695578bdba9427b4dd44cdd73`。按 owner 分别发布，不重复 cherry-pick；E2E 见 [P2 收据](../dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json)。
-- 上次代码/测试整理发布点是 `f01ba7411908d7a6a38451781ce5f9f18600bf9b`；后续只会再发布本次状态文档核账。该 SHA 是代码修订点，不代表当前文档 HEAD。本机仍有大量历史未跟踪项和未核销 worktree/ref，不能称已清理完成；逐项状态见 [workspace reconciliation](../dashboard-owner-integration-2026-11-09/review/local_workspace_reconciliation-2026-11-10.md)。
+- CWP 最新已验证的 `master` 与 `origin/master` 为 `2862fe951f08547cba9bd8b39ec5e13c5dc286c9`，tracked worktree clean。当前仍有 14,067 项约 253.8 MB 未跟踪文件、9 个工区（含根目录）及 17 个非祖先本地分支；其中只有 7 个已确认完成/重复的工区本轮归档后移除。不能称工作区已全部清理；逐项状态见 [workspace reconciliation](review/workspace-reconciliation-20261110/README.md)。
 - Source-facts 候选仍在 detached worktree，不接受其源码为已并线代码。五份关键 JSON 收据已复制并以 SHA-256 核实；guard 结果需在当前主线复验，见 [source-facts 对账](review/source-facts-reconciliation-20261110/README.md)。
 - CWP 定向测试曾因旧集成测试 monkeypatch 已退役的 `select_budget_items` 而 202/203 失败；改为观察现行 `plan_budget_items` 后，同一组定向测试 203 passed（6.72 秒）。修订已提交并推送：`f01ba7411908d7a6a38451781ce5f9f18600bf9b`；推送时 fixed smoke 为 18/18，完整远端 CI 尚未在本记录中核实。
 

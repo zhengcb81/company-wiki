@@ -1,0 +1,19 @@
+{
+  "lane_id": "W08-CWP-G2-REPLAY",
+  "input": "own pinned CWP + code-only RF8dc26710 snapshot + small synthetic documents/model fixture",
+  "entry": "python -B tools/narrative_g2_replay/run.py --rf-project ABS_FIXED --owned-root ABS_NEW --out-root ABS_NEW",
+  "report_schema": "narrative-g2-replay/1",
+  "must_observe": [
+    "scope/code_binding",
+    "fixed typed CaseSpecs/actual executed IDs",
+    "real canonical/finite worker/read/RF entry",
+    "request/result/artifact refs",
+    "actual model POST and reuse counters",
+    "raw hash/locators",
+    "raw/derived bytes",
+    "cleanup/remaining",
+    "known W04 baseline failures"
+  ],
+  "ROOT_consumer": "rerun same package on accepted W04; then separate real configured G2, no fixture semantic-quality claim",
+  "new_dependency_on_other_W08": false
+}

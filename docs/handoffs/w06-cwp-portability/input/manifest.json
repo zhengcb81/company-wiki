@@ -1,0 +1,21 @@
+{
+  "schema_version": "w06-input-manifest/1",
+  "lane": "W06-CWP-PORTABILITY",
+  "files": [
+    {
+      "path": "construction_card.md",
+      "sha256": "d3f73a4e421335159d53b2d1ff7bfdebd0296b2a999f13f132cda8ae023bbe22",
+      "bytes": 6135
+    },
+    {
+      "path": "handoff_contract.md",
+      "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+      "bytes": 3345
+    },
+    {
+      "path": "inputs.json",
+      "sha256": "46119404b7088666e7b41af6dadd93881d9f5d14ef5a62cd3a23ab631a56d770",
+      "bytes": 5717
+    }
+  ]
+}

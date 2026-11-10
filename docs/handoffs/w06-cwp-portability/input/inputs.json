@@ -1,0 +1,124 @@
+{
+  "schema_version": "w06-lane-input/1",
+  "lane": "W06-CWP-PORTABILITY",
+  "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability",
+  "repository": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+  "branch": "codex/w06-cwp-portability",
+  "plan_id": "w06-cwp-portability",
+  "pwf_directory": ".planning/w06-cwp-portability",
+  "input_read_only": true,
+  "write_prefixes": [
+    "tools/source_root_portability/",
+    "tests/unit/test_w06_root_portability_oracle.py",
+    "tests/integration/test_w06_root_portability.py",
+    ".planning/w06-cwp-portability/",
+    "docs/handoffs/w06-cwp-portability/"
+  ],
+  "references": [
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "AGENTS.md",
+      "sha256": "c7d82854df893225adc1a265f267055bbcfd9a50a33f4821eaba843e4575b8dc",
+      "bytes": 12029,
+      "git_blob_sha256": "e6f9a5f8c3359a759b92bd151e34e2780f6340054b4f5fce78155b3d013d7d23",
+      "git_blob_bytes": 11815,
+      "committed_equivalent": true
+    },
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "src/company_wiki/source_catalog/source_reader.py",
+      "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+      "bytes": 35904,
+      "git_blob_sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+      "git_blob_bytes": 35904,
+      "committed_equivalent": true
+    },
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "src/company_wiki/source_catalog/source_export_v2_cli.py",
+      "sha256": "41e1ab1d7b9d62f5467c564ae42b748f1fb93d2d9cbe57f0f98d9c9942c4fa61",
+      "bytes": 4139,
+      "git_blob_sha256": "2cef48cad967fc10c40ec9d50dde90fbf5887288feb11308f1916e9d489bfb54",
+      "git_blob_bytes": 4018,
+      "committed_equivalent": true
+    },
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "src/company_wiki/source_catalog/config.py",
+      "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+      "bytes": 11841,
+      "git_blob_sha256": "412056e5610d6a8f5488c43c812fc045160ef39454dee9f7cd42c18781c43297",
+      "git_blob_bytes": 11575,
+      "committed_equivalent": true
+    },
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "src/company_wiki/source_catalog/service.py",
+      "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+      "bytes": 62571,
+      "git_blob_sha256": "40e2147fff1baf3f079e9ec6ac39c7fd11f90d3e265611e33a146dce266aab7d",
+      "git_blob_bytes": 61218,
+      "committed_equivalent": true
+    },
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "src/company_wiki/source_catalog/cli.py",
+      "sha256": "c297615bf26889e7959a994918d8bca1511423303a449a93de7fa969661a1ed7",
+      "bytes": 60147,
+      "git_blob_sha256": "57f14a4f911fce319b4c893621170c937cca9cac76aff2e141a90d363cffdcbf",
+      "git_blob_bytes": 58739,
+      "committed_equivalent": true
+    },
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "src/company_wiki/source_catalog/document_kinds.py",
+      "sha256": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+      "bytes": 1480,
+      "git_blob_sha256": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+      "git_blob_bytes": 1480,
+      "committed_equivalent": true
+    },
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "tests/unit/test_default_steady_source_reader.py",
+      "sha256": "1a682b8e7ca2690f23d8f5ab6576b9f1bff1686e69e138540f0a6636c761fa88",
+      "bytes": 4282,
+      "git_blob_sha256": "1a682b8e7ca2690f23d8f5ab6576b9f1bff1686e69e138540f0a6636c761fa88",
+      "git_blob_bytes": 4282,
+      "committed_equivalent": true
+    },
+    {
+      "repository": "cwp",
+      "repository_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "path": "tests/unit/test_replay_config_isolation.py",
+      "sha256": "28863e70b6b15355446d36774506a708dce1d53ac38e5d4a5ec8f7fad342e232",
+      "bytes": 19257,
+      "git_blob_sha256": "b239b3ef20f6b6a648b572a80713283b3d9b249b78fdffba4802f6b18a2c216b",
+      "git_blob_bytes": 18944,
+      "committed_equivalent": true
+    }
+  ],
+  "network_calls": 0,
+  "model_calls": 0,
+  "real_provider_calls": 0,
+  "dependency_recovery": "If producer HEAD advances, materialize the pinned committed code into owned scratch using git show/archive; record actual module files/SHA. Git checkout EOL conversion can change physical file SHA: verify committed equivalence and record both, do not call this implementation change.",
+  "frozen_input_contract": "ROOT correction uses separate amendment; do not overwrite fixed input."
+}

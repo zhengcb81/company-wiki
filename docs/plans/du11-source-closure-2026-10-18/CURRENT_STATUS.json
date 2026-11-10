@@ -44,7 +44,9 @@
     {
       "id": "P2",
       "status": "OPEN_AFTER_P1",
-      "task": "Prove the same accepted new artifact is consumed by RF native parameters/formula"
+      "task": "Prove the same accepted new artifact is consumed by RF native parameters/formula",
+      "scope": "revenue_forecast_audit_mainline_loop",
+      "scope_note": "This remaining RF-adoption P2 is distinct from Dashboard owner-integration P2, which is merged and pushed to CWP, FF, and RF."
     },
     {
       "id": "P3",
@@ -91,8 +93,8 @@
   },
   "project_status": "P2_OWNER_MAINLINES_COMPLETE_D4_D5_SCOPE_ACCEPTED_SOURCE_FACTS_CURRENT_MAIN_REPLAY_OPEN_WORKSPACE_RECONCILIATION_OPEN",
   "as_of_date": "2026-11-10",
-  "observed_at_utc": "2026-11-10T13:56:14Z",
-  "next_action": "Replay the source-facts diagnostic against exact current-main code, then reconcile the remaining 16 non-root worktrees and local refs from PWF/evidence. Do not bulk-clean.",
+  "observed_at_utc": "2026-11-10T19:16:03Z",
+  "next_action": "Run the bounded source-facts diagnostic against exact current CWP master, then finish evidence-based triage of the remaining eight worktrees, 17 non-ancestor local refs, and cross-repository runtime artifacts. CWP tracked main worktree is clean; 14,067 untracked files (~253.8 MB) remain. Do not bulk-clean.",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -220,7 +222,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "P2 is merged/pushed to the CWP, FF, and RF owner mains. D4/D5 decoupling is accepted only for frozen public-interface and composition-test scope; it is not zero coupling and does not complete Dashboard P3/P4. ROOT must replay the detached source-facts selection diagnostic against current CWP master, then reconcile remaining local worktrees and refs. Candidate worktree changes are not accepted or merged.",
+    "current_work": "Dashboard owner-integration P2 is merged/pushed to CWP, FF, and RF owner mains. The separate revenue-forecast-audit P2 (prove the same accepted artifact is consumed by RF) remains open after P1. D4/D5 decoupling is accepted only for frozen public-interface and composition-test scope; it is not zero coupling and does not complete Dashboard P3/P4. ROOT must replay the detached source-facts selection diagnostic against current CWP master, then reconcile remaining local worktrees and refs. Candidate worktree changes are not accepted or merged.",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -755,15 +757,51 @@
     "current_main_replay": "OPEN; candidate 10/10 coverage and 8/10 native-prose observations are not current-main acceptance"
   },
   "workspace_reconciliation": {
-    "root_untracked_status_entries": 14021,
+    "root_untracked_status_entries": 14067,
+    "root_untracked_logical_bytes": 253830848,
+    "root_tracked_dirty_entries": 0,
     "cleanup_complete": false,
-    "next_action": "Replay the source-facts selection diagnostic against current master; then reconcile each remaining worktree/ref from its PWF and evidence. Do not bulk-clean.",
-    "p2_status": "merged_and_pushed_to_cwp_ff_rf_owner_mains",
+    "next_action": "Run the bounded current-master source-facts replay; reconcile the eight remaining worktrees and all 17 non-ancestor local refs against PWF/evidence; classify root and cross-repository untracked run artifacts. Do not bulk-clean.",
+    "p2_status": "dashboard_owner_integration_merged_and_pushed_to_cwp_ff_rf_owner_mains; revenue_forecast_audit_p2_open_after_p1",
+    "dashboard_owner_p2_commits": {
+      "cwp": "0fc56b25b89da9f3da5921ba64122d9745e1752d",
+      "filing_fetch": "f65e6ca75fbce0616e65870f0aea78b793ef883c",
+      "revenue_forecast": "b005a179280ee19695578bdba9427b4dd44cdd73"
+    },
+    "dashboard_owner_p2_verified_heads_match_upstreams": true,
+    "dashboard_owner_p2_e2e_receipt": "docs/plans/dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json",
     "starting_root_head": "fb868064e4d37a0441373578f4286964e739e6b4",
     "starting_root_matched_origin_master": true,
-    "last_verified_main_head": "f01ba7411908d7a6a38451781ce5f9f18600bf9b",
+    "last_verified_main_head": "2862fe951f08547cba9bd8b39ec5e13c5dc286c9",
     "last_verified_main_matches_origin_master": true,
-    "worktree_count_including_root": 17,
+    "worktree_count_including_root": 9,
+    "local_branch_count": 52,
+    "non_ancestor_local_branch_count": 17,
+    "cleanup_batch_record": "review/workspace-reconciliation-20261110/README.md",
+    "completed_cleanup_batch": {
+      "retired_worktrees": 7,
+      "retired_merged_local_refs": 7,
+      "original_company_files_removed": 0,
+      "w06_portability_input_archive": "docs/handoffs/w06-cwp-portability/input/archive-manifest.json",
+      "w06_acquisition_author_pwf_archive": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06-cross-period-acquisition-root/author-pwf/archive-manifest.json",
+      "w08_replay_archive": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w08_parallel_completion_2026-10-12/evidence/author-package/archive-manifest.json",
+      "w23_r1_cache_archive": "docs/plans/w23-xiaomi-ocr-2026-10-30/evidence/r1-cache/archive-manifest.json"
+    },
+    "remaining_worktrees": [
+      {"path": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki", "tracked_dirty": 0, "untracked": 81, "state": "PWF/snapshot reconciliation open"},
+      {"path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki", "tracked_dirty": 11, "untracked": 12, "state": "current-main replay and final acceptance open"},
+      {"path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki", "tracked_dirty": 22, "untracked": 317, "state": "overlapping M3/W04 candidate code and evidence require owner review"},
+      {"path": "C:/Users/郑曾波/.codex/worktrees/w04-llm-config-scope-20261011/company-wiki", "tracked_dirty": 3, "untracked": 22, "state": "final handoff exists; overlaps M3 candidate and needs current-main acceptance"},
+      {"path": "C:/Users/郑曾波/.codex/worktrees/w04-narrative-semantics-20261011/company-wiki", "tracked_dirty": 3, "untracked": 92, "state": "candidate semantics changes; final handoff JSON absent"},
+      {"path": "C:/Users/郑曾波/Projects/company-wiki-r1-local-observation", "tracked_dirty": 0, "untracked": 566, "state": "R1 observation/PWF artifacts require canonical comparison"},
+      {"path": "C:/Users/郑曾波/Projects/investment-dashboard/.worktrees/b34-cwp-prospectus", "tracked_dirty": 0, "untracked": 5, "state": "non-ancestor Dashboard branch; outside completed P2"},
+      {"path": "C:/Users/郑曾波/Projects/investment-dashboard/.worktrees/return5-cwp-audit", "tracked_dirty": 0, "untracked": 8, "state": "non-ancestor Dashboard branch; outside completed P2"}
+    ],
+    "related_repository_inventory": {
+      "filing_fetch": "main/origin/main synchronized; tracked clean; 304 untracked runtime/planning items including 205 .mimosa files, 87 pytest-temp files, 9 .ff_jobs records, and config/FMP_API_KEY.txt (contents not read; preserved)",
+      "revenue_forecast": "main/origin/main synchronized; 4 tracked changes are assurance run records/manifests, not source-code files; 5,867 untracked items dominated by .mimosa=5,005, delivery=582, output=147, .planning=133; retained pending evidence triage",
+      "stockwiki": "local commit 12c441e86282135b49120112dcf21c17509bbdd0 contains F05 module-boundary changes; no Git remote is configured; 7 untracked SQLite/log/run artifacts preserved pending owner review"
+    },
     "temporary_reconciliation_worktree_removed": true,
     "mainline_reconciliation_commit": "f01ba7411908d7a6a38451781ce5f9f18600bf9b",
     "verified_cleanup": {

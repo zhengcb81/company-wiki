@@ -4,6 +4,10 @@
 
 **截至 2026-11-10：P2 已分别并入 CWP/FF/RF 主线并推送；D4/D5 解耦按冻结范围 ACCEPTED。** D4/D5 的含义是 owner 通过版本化公开接口协作，且既有接口边界和组合样本测试通过；不是零依赖，也不是 Dashboard 全计划完成。D5 跨仓套件为 18 passed、0 skipped、0 failed/errors，独立审查 PASS。P3 Reader/PDF 端口和 P4 Dashboard 实际切换仍 OPEN。P2 与解耦结果的细节见 [Dashboard owner plan](../dashboard-owner-integration-2026-11-09/task_plan.md)；D5 证据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
 
+**同名 P2 需要区分：**上述“已完成”是 Dashboard owner 接线 P2；本计划 `remaining_stages.P2` 是后续证明 RF 实际消费同一份已接受摘要 artifact，仍为 OPEN，依赖 P1 完成。模块化并非整个 Dashboard/RF 工作流已全部完成。
+
+**工作区核销仍在进行（2026-11-10 19:16 UTC）：**CWP 当前 `master` 与 `origin/master` 同步于 `2862fe951f08547cba9bd8b39ec5e13c5dc286c9`，已跟踪文件干净；仍有 14,067 项未跟踪文件、约 253.8 MB，9 个注册工区（含根目录）和 17 个非祖先本地分支。刚完成 7 个已并线工区的归档后清理，没有删除原始公司文档。逐项证据、剩余工区与下一步见 [工作区核销记录](review/workspace-reconciliation-20261110/README.md)。
+
 **当前唯一下一步：**在当前主线精确复验 source-facts 候选所报告的遗漏，并完成本地 worktree/分支核销。候选观察显示 coverage guard 10/10、native-prose guard 8/10（漏两个指定业务事实），当次预算未耗尽且没有模型调用；但观察绑定 detached worktree 的源码，不能升级为主线通过或失败。先对当前 `master` 做小范围零模型重放，只有缺口复现才改生产 owner 层。此前 H1 的 102 对 101 个 native-member 差异、locator/context 对齐、最终独审和 scratch 恢复仍未完成。通过当前主线复验与修复后才恢复新版真实摘要、缓存恢复、RF 实际采用及固定公司循环。
 
 ## T4/SEM-QUAL-01 候选观察（不是当前主线验收）

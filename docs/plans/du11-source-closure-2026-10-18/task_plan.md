@@ -1,4 +1,4 @@
-**2026-11-10 状态：P2 已并入 CWP/FF/RF 各自主线；D4/D5 解耦在冻结的接口与组合测试范围内 ACCEPTED；T4 source-note-parent + SEM-QUAL-01 仍未验收。** 不能把“D4/D5 已通过”表述成全项目永远没有耦合：它证明已冻结的公开接口和测试范围可以独立协作，Dashboard P3/P4、后续新缺口仍是开放工作。T4 候选代码仍在 detached worktree `C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki`，未进入当前主线；此前单份 H1/selection 收据绑定候选源码，不能代表当前主线已通过。完整 D5 收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)，本地代码与证据的核销见 [source-facts 对账](review/source-facts-reconciliation-20261110/README.md)。
+**2026-11-10 状态：Dashboard owner P2 已并入 CWP/FF/RF 各自主线；主线循环中的 RF 实际采用 P2 仍 OPEN，依赖 P1。D4/D5 解耦在冻结的接口与组合测试范围内 ACCEPTED；T4 source-note-parent + SEM-QUAL-01 仍未验收。** 不能把“D4/D5 已通过”表述成全项目永远没有耦合：它证明已冻结的公开接口和测试范围可以独立协作，Dashboard P3/P4、后续新缺口仍是开放工作。T4 候选代码仍在 detached worktree `C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki`，未进入当前主线；此前单份 H1/selection 收据绑定候选源码，不能代表当前主线已通过。完整 D5 收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)，source-facts 对账见 [候选证据](review/source-facts-reconciliation-20261110/README.md)，整体工区核销见 [workspace reconciliation](review/workspace-reconciliation-20261110/README.md)。
 
 # 主线剩余实施计划
 
@@ -6,7 +6,7 @@
 
 ## Next Step — 在当前主线复验 source-facts 缺口并完成本地工作区核销
 
-D5 代码已按快进方式进入 CWP master 与 StockWiki master，P2 已分别进入 CWP/FF/RF 正式主线。此前的 H1 观察来自未合并的 source-facts 候选，显示 business-coverage guard 10/10，但 native-prose guard 8/10；预算未耗尽、没有模型 POST。它不是当前主线验收。先用当前 `master` 的准确版本做小范围零模型 source-selection replay；若缺口复现，按责任层增加泛化 RED/正例并修复，再只跑受影响测试。并行完成已核实可处理的旧工作树/本地分支清理；保留尚未判定或仍有独立验收用途的证据与 worktree。只有当前主线复现并通过复测、绑定完整来源/locator 证据后，才收口 T4/SEM 并恢复真实摘要。不得先跑整批公司或付费摘要。
+D5 代码已按快进方式进入 CWP master 与 StockWiki master。Dashboard owner P2 已分别进入 CWP/FF/RF 正式主线并和 upstream 同步；本计划另一个 RF 实际采用 P2 仍 OPEN。此前的 H1 观察来自未合并的 source-facts 候选，显示 business-coverage guard 10/10，但 native-prose guard 8/10；预算未耗尽、没有模型 POST。它不是当前主线验收。先用当前 `master` 的准确版本做小范围零模型 source-selection replay；若缺口复现，按责任层增加泛化 RED/正例并修复，再只跑受影响测试。并行完成已核实可处理的旧工作树/本地分支清理；最新逐项状态见 [workspace reconciliation](review/workspace-reconciliation-20261110/README.md)。保留尚未判定或仍有独立验收用途的证据与 worktree。只有当前主线复现并通过复测、绑定完整来源/locator 证据后，才收口 T4/SEM 并恢复真实摘要。不得先跑整批公司或付费摘要。
 
 候选 H1 原收据中的 12/12、112 spans、102 native members、28.42 秒及“0 POST/下载/原件复制”仍是被记录的运行观察，但它绑定的不是当前主线源码；101→102 差异也尚未解释。归档副本位于 [source-facts reconciliation](review/source-facts-reconciliation-20261110/)，该副本不等于主线复验或独立验收。
 

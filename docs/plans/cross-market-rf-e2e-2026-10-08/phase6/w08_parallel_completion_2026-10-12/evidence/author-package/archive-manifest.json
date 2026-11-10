@@ -1,0 +1,485 @@
+{
+  "schema": "local-worktree-evidence-archive/1",
+  "lane": "W08-CWP-G2-REPLAY",
+  "source_worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay",
+  "source_head": "a60104801be78ec2b1c441ac45afec46508e9439",
+  "archive_root": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w08_parallel_completion_2026-10-12/evidence/author-package",
+  "file_count": 79,
+  "total_bytes": 1136943.0,
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 17,
+      "sha256": "bb2193dec96737fad038314ba5ad622f815ac99cf4fc182b3aa38ec10f22e9ea",
+      "identical": true
+    },
+    {
+      "path": "施工卡.md",
+      "bytes": 6144,
+      "sha256": "982f98e6f4a886630f62b1ad19ac2453205c50103d0997c5107f15df38385890",
+      "identical": true
+    },
+    {
+      "path": "findings.md",
+      "bytes": 5361,
+      "sha256": "cf9d6381714e20d75646469c55881dcb766f7569fc2e4bdb725ae041e52eb238",
+      "identical": true
+    },
+    {
+      "path": "HANDOFF_CONTRACT.md",
+      "bytes": 2521,
+      "sha256": "c031b496e789addca5e1f64454db5b99dd05a41edd87cc113ca46519789eee1f",
+      "identical": true
+    },
+    {
+      "path": "INPUTS.json",
+      "bytes": 63003,
+      "sha256": "5088e8724e96b0564a192e1474503a18a69bb010b52b119ce888d301362f44cf",
+      "identical": true
+    },
+    {
+      "path": "INTERFACES.json",
+      "bytes": 809,
+      "sha256": "289cf695650de191c07ffd897e3b7623b87eaf7b57a8c10c62bf537381d201ec",
+      "identical": true
+    },
+    {
+      "path": "progress.md",
+      "bytes": 1527,
+      "sha256": "8d50ccaa054ba28c3a2d21bcfc3fb512e94b2a6b26f860efb16d42e1ed81528d",
+      "identical": true
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 554,
+      "sha256": "7b7108b12bd9682c98450737028764ff7b60f0c856e5d94846178295b8cf79d8",
+      "identical": true
+    },
+    {
+      "path": "task_plan.md",
+      "bytes": 540,
+      "sha256": "da09a7d3505a383710b1a21a46f2de46d5ef12aaca3f54551c09f6a2effd1c64",
+      "identical": true
+    },
+    {
+      "path": "evidence\\report-attempt-0001.json",
+      "bytes": 49124,
+      "sha256": "3906fb5711c6a10e4b22e9445c6e6fc4a002c64771e1a599f41ea8259cdfa3a0",
+      "identical": true
+    },
+    {
+      "path": "evidence\\report-attempt-0002.json",
+      "bytes": 49123,
+      "sha256": "05faedbec92c784ed2976345d3f812d46c9023ba365a087de378d7262ee3891d",
+      "identical": true
+    },
+    {
+      "path": "evidence\\report-final-acceptance.json",
+      "bytes": 49124,
+      "sha256": "20819f5c4a58b7053628a806362861bcfb5f8e6ed275dcfb98d5f3bbac8e6b34",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\__init__.py",
+      "bytes": 35,
+      "sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\asset_ownership.py",
+      "bytes": 10622,
+      "sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\commercial_terms.py",
+      "bytes": 4795,
+      "sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\company_wiki_narrative_contracts.py",
+      "bytes": 41228,
+      "sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\company_wiki_narrative_posix.py",
+      "bytes": 2824,
+      "sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\company_wiki_narrative_process.py",
+      "bytes": 8500,
+      "sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\company_wiki_narrative_reader.py",
+      "bytes": 3382,
+      "sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\company_wiki_narrative_tree.py",
+      "bytes": 6960,
+      "sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\company_wiki_source_reader_v2.py",
+      "bytes": 17186,
+      "sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\company_wiki_source_v2.py",
+      "bytes": 16571,
+      "sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\company_wiki_source.py",
+      "bytes": 20953,
+      "sha256": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\confidence_policy.py",
+      "bytes": 7843,
+      "sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\filing_fetch_client.py",
+      "bytes": 19426,
+      "sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\filing_upstream_cause.py",
+      "bytes": 16962,
+      "sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\fix_hashes.py",
+      "bytes": 8484,
+      "sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\generate_input_template.py",
+      "bytes": 15970,
+      "sha256": "5fe3fc24c2a68069a6ea7827a6b0c93bec00d070fda7140f4e34c105c8da2c70",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\internal_flow.py",
+      "bytes": 4841,
+      "sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\lint_input.py",
+      "bytes": 21589,
+      "sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\mine_year_operation.py",
+      "bytes": 4670,
+      "sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\mixed_recognition.py",
+      "bytes": 4034,
+      "sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\model_extensions.py",
+      "bytes": 16009,
+      "sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\model_registry.py",
+      "bytes": 30116,
+      "sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\narrative_source_preparation.py",
+      "bytes": 2400,
+      "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\processed_artifact_canary.py",
+      "bytes": 4639,
+      "sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\processing_demand.py",
+      "bytes": 8231,
+      "sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\publication_registry.py",
+      "bytes": 10674,
+      "sha256": "334586e60f8667de21afaaf7253cae69af9fda71ff1f267deb3e268a22f5fe23",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\reconciliation.py",
+      "bytes": 4224,
+      "sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research_support_diagnostics.py",
+      "bytes": 6708,
+      "sha256": "8ce8390fc201b9fedb081be7074a4f6ae236ef41d14bff59c4eaeb6dbd14e688",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\revenue_backtest.py",
+      "bytes": 30110,
+      "sha256": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\revenue_constraints.py",
+      "bytes": 15064,
+      "sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\revenue_core.py",
+      "bytes": 26101,
+      "sha256": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\revenue_forecast.py",
+      "bytes": 5324,
+      "sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\revenue_publication.py",
+      "bytes": 24917,
+      "sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\revenue_report.py",
+      "bytes": 82832,
+      "sha256": "7f12259cedfb232ea05118d3d29a3c75ba49732c1b9cc0fbaeed76fd50a3964d",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\rolling_backtest.py",
+      "bytes": 8900,
+      "sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\schema_compatibility.py",
+      "bytes": 5299,
+      "sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\schema_fields.py",
+      "bytes": 1526,
+      "sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\schema_optin.py",
+      "bytes": 2263,
+      "sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\source_narrative_context.py",
+      "bytes": 8074,
+      "sha256": "3bdb21c4b08e85f03ff190a1d43945a70ac272afe1000a5748d17d7f2b4f0223",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\source_period_semantics.py",
+      "bytes": 423,
+      "sha256": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\source_preparation.py",
+      "bytes": 26650,
+      "sha256": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\trust_anchor.py",
+      "bytes": 1634,
+      "sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\analysis\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\analysis\\confidence.py",
+      "bytes": 14476,
+      "sha256": "0413b4d07ed19b976820d358c80d86f2780e9fe38113138ceb43ede5119cf05f",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\analysis\\sensitivity.py",
+      "bytes": 13266,
+      "sha256": "0b9f5f15bc14ac5a1ec8c58396ebb1379f8481d2a1e7d7ce02141bae7971b2c0",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\contracts\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\contracts\\annual_consumption.py",
+      "bytes": 7537,
+      "sha256": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\contracts\\constants.py",
+      "bytes": 8718,
+      "sha256": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\contracts\\document.py",
+      "bytes": 52038,
+      "sha256": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\contracts\\evidence.py",
+      "bytes": 15959,
+      "sha256": "cf200313135108d23ed803f6089bc2be7778a3a3ff4c91e892f461abd8bbaa6a",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\contracts\\period_flow.py",
+      "bytes": 26965,
+      "sha256": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\contracts\\recognition.py",
+      "bytes": 4559,
+      "sha256": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\contracts\\source_clock.py",
+      "bytes": 9677,
+      "sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\forecast\\calc.py",
+      "bytes": 18909,
+      "sha256": "cac7c1fb3fd4a4b17701c691e0f621a5256048a63c90a9a25e882d4ee24d9faf",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\forecast\\segments.py",
+      "bytes": 25436,
+      "sha256": "15ee89945da4ee05276af7393e4924ae39e1eeeccdc6d3d9659ebc577b355190",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\communication_scope.py",
+      "bytes": 7654,
+      "sha256": "96e4b63a3c90825241c395281ff5f3b4cf8496290a63757f150cb74244140a8e",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\coverage.py",
+      "bytes": 5657,
+      "sha256": "a9e4f70e5fb3d94a987e6310a4a59b8156b1246c039cb26e9c86befb03f3fabb",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\drivers.py",
+      "bytes": 24185,
+      "sha256": "964fa1dba1429dd11321d52b6389a95803a09454f4ddcfa74821f15cdedb3456",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\evidence_roles.py",
+      "bytes": 16538,
+      "sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\input_evidence.py",
+      "bytes": 14093,
+      "sha256": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\input_quantities.py",
+      "bytes": 9970,
+      "sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\input_targets.py",
+      "bytes": 14221,
+      "sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\native_dependencies.py",
+      "bytes": 5709,
+      "sha256": "9dad832d2b6a8cbe3f2faf6e2e9f27b988319ae2d87f212fde26a6863a327dec",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\target_measurement.py",
+      "bytes": 12423,
+      "sha256": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\targets.py",
+      "bytes": 36535,
+      "sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+      "identical": true
+    },
+    {
+      "path": "input\\runtime\\rf\\scripts\\research\\timing_bridge.py",
+      "bytes": 5578,
+      "sha256": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d",
+      "identical": true
+    }
+  ]
+}

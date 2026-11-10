@@ -419,3 +419,13 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - 聚焦回归发现集成测试仍 monkeypatch 已退役的 `select_budget_items`，而当前 finalizer 使用 `plan_budget_items`。修正测试绑定公开当前函数后，指定 6 个文件组测试为 203 passed（6.72 秒）；代码无生产变化。PWF/测试修订 commit `f01ba7411908d7a6a38451781ce5f9f18600bf9b` 已推到 `origin/master`；push fixed smoke 18/18，完整 Actions 待核。
 - 已清理 paid-response handoff 指定的 8 个 Temp 测试目录（均为无文件空目录），以及旧 extractive worktree 中 30,155,225 字节的 mypy/ruff/pytest/pyc 可重建缓存。旧 worktree 本身仍保留：其 129 个 W04–W08 `.planning` 文件与根目录版本不同，尚需同正式计划逐项对账。
 - 临时整合 worktree/ref 已移除后，在本次状态核账时 CWP 本地 `master` 与 `origin/master` 均为代码/测试整理点 `f01ba7411908d7a6a38451781ce5f9f18600bf9b`；仍有 17 个 worktree（含根目录）和 14,021 个未跟踪状态项，workspace cleanup 未完成。之后发布的状态文档提交不改变该代码/测试整理点。
+
+## 2026-11-10 19:16 UTC — P2 重名澄清与第二批工区核销
+
+- 重新核对 owner main 与 upstream：CWP `2862fe95`、FF `f65e6ca7`、RF `b005a179` 均包含 Dashboard owner-integration P2，且分别与 `origin/master` / `origin/main` 同步；P2 跨市场 E2E 收据仍可定位。此处 `remaining_stages.P2` 单独指 RF 真实采用同一摘要 artifact，依赖 P1，仍 OPEN。
+- D4/D5 只在冻结接口和组合验收范围内 ACCEPTED；不是全项目零耦合，也不是 Dashboard P3/P4 完成。
+- 按逐项 PWF/Git 核对，本轮归档后移除 7 个已并线工区及 7 个本地已并线分支。W06 portability handoff 输入、W06 acquisition 作者 PWF、W08 79 文件完整复现包、W23-R1 19 份 derived cache 均已归档并校 SHA；唯一删除的用户侧/运行状态是空的 12 KB SQLite、两份本地 path binding、M3 三份未完成草稿及可重建 pytest/ruff/mypy/pyc 缓存。原始公司文件删除数为 0。
+- W23 primary OCR cache 在此前清理实测释放 5,267,775,488 bytes；本轮 W23-R1 另移除 1,152 个 bytecode 文件，逻辑大小 30,923,099 bytes。没有把逻辑大小冒称为物理磁盘释放量。
+- 当前 CWP 根已跟踪文件 clean，HEAD 与 origin/master 均为 `2862fe951f08547cba9bd8b39ec5e13c5dc286c9`；仍有 14,067 个未跟踪文件（253,830,848 bytes）、9 个工区（含根）和 17 个非祖先本地 refs。剩余每个工区/跨仓状态及下一步见 [workspace reconciliation](review/workspace-reconciliation-20261110/README.md)。
+- 当前剩余重点：source-facts 当前主线复验；M3/W04 重叠代码候选的统一接收/淘汰；R1 observation 与 extractive runtime 唯一 PWF 对账；17 个非祖先 refs、根 untracked 运行记录和 FF/RF/StockWiki 本地状态逐项核销。
+- 本轮只读盘点、哈希归档及 PWF 更新，没有改产品源码，也没有运行产品测试。

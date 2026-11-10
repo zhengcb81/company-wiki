@@ -1,0 +1,39 @@
+{
+  "schema": "local-worktree-evidence-archive/1",
+  "lane": "W06-CWP-PORTABILITY",
+  "source_worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/cwp-portability",
+  "source_head": "f8d5e0f4f6047375fdaef38e15e54edff2abe61d",
+  "archive_root": "docs/handoffs/w06-cwp-portability/input",
+  "files": [
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/amendment_manifest.json",
+      "bytes": 374,
+      "sha256": "320a27c9a60250eed7a46c0b2fed5ddba41baf104b67dcc2f7e1af56a9367891"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/construction_card.md",
+      "bytes": 6135,
+      "sha256": "d3f73a4e421335159d53b2d1ff7bfdebd0296b2a999f13f132cda8ae023bbe22"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/handoff_contract.md",
+      "bytes": 3345,
+      "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/inputs.json",
+      "bytes": 5717,
+      "sha256": "46119404b7088666e7b41af6dadd93881d9f5d14ef5a62cd3a23ab631a56d770"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/manifest.json",
+      "bytes": 552,
+      "sha256": "56baa2ebe06c16e3b1264c0fe94850dda89e52fa94423a8788b49f57341a6a97"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/ROOT_INTERFACE_AMENDMENT.md",
+      "bytes": 2220,
+      "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb"
+    }
+  ]
+}

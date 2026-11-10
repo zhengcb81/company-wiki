@@ -1,0 +1,25 @@
+{
+  "schema": "local-worktree-evidence-archive/1",
+  "lane": "W06-CROSS-PERIOD-ACQUISITION-ROOT",
+  "source_worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/cwp-acquisition-scope-root",
+  "source_head": "983c173244f99041a6cc02a610315dee92f69e16",
+  "implementation_head_is_ancestor_of_master": true,
+  "archive_root": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06-cross-period-acquisition-root/author-pwf",
+  "files": [
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06-cross-period-acquisition-root/author-pwf/findings.md",
+      "bytes": 2595,
+      "sha256": "66b55b84e8975fc6a7a2fbf5f3cdc583f23666f71c32af63f53d4e403d6b0969"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06-cross-period-acquisition-root/author-pwf/progress.md",
+      "bytes": 3901,
+      "sha256": "8d8bfe9cb1b051de0711e96435d4116bd19b0b9e1b5539f2447e04b51f0f3d61"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06-cross-period-acquisition-root/author-pwf/task_plan.md",
+      "bytes": 10710,
+      "sha256": "1696d8f384b1a94fb5e8f909affc29e456c4a883404949001e609de0ef7e05a8"
+    }
+  ]
+}
