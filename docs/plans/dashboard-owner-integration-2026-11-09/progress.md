@@ -67,7 +67,7 @@
 
 ## 2026-11-10 P2 实施更新
 
-- CWP 候选提交 `e3b9a9219cb0c9e48ea8f73c21ff028880564463` 已推送至 `codex/dashboard-p2-cwp-market-20261109`；FF 候选 `f65e6ca75fbce0616e65870f0aea78b793ef883c` 已推送至 `codex/dashboard-p2-ff-market-20261109`。两仓只改各自 owner 范围，未并入主线。push fast-gate 分别 18、11 项通过；完整远端 CI 仍未确认。
+- CWP 候选提交 `e3b9a9219cb0c9e48ea8f73c21ff028880564463` 已推送至 `codex/dashboard-p2-cwp-market-20261109`；FF 候选 `f65e6ca75fbce0616e65870f0aea78b793ef883c` 已推送至 `codex/dashboard-p2-ff-market-20261109`。两仓只改各自 owner 范围，未并入主线。push fast-gate 分别 18、11 项通过；FF GitHub quality run 42746994685 成功，CWP 候选分支未发现 Actions 运行记录。
 - CWP 修复跨模块私有身份方法调用：CompanySourceIndex、SourceVersionReader、local_reconcile 现在都经 SourceResolver 的公开 `match_source_identity` 契约。独立审查先发现“只有 issuer_link_id 会错误匹配”的 fail-open；实现改为 `incomplete` 并加回归，最终复审通过。
 - CWP 定向测试 127 passed；470 个源文件 mypy、Ruff、`git diff --check` 通过。SEC 20-F 的公开关系登记链路经 CanonicalSourceWriter 与 SourceCatalog 集成测试验证：登记出的 HK/US 挂牌、源 SHA 与已验证原件一致。FF 跨市场 11 项与 M3 兼容 21 项通过；FF 独立审查通过。FF 完整本地套件剩余 8 个失败已在精确基线复现，属既有失败，本次 P2 定向测试不受影响。
 - CWP/FF 候选提交后，重新运行真实原件端到端脚本：阿里 FY2025 HKEX 年报 SHA `c7806bf5da28032e1b15dbe9a334011d65f5d69efe3bf11a9d212f64f07ca9b2` 与 B 站 FY2022 HKEX 年报 SHA `712e23dc04fb7efa3a4d31b839b08eaf6ff92ea1d4c89f6458ace095b8bd24cf` 均在隔离快照完成跨市场复用；来源市场、证券、报告期、文种、as-of 保持准确，provider 未启动，下载数为 0，生产安全证券快照未改。测试结束后删除了本轮临时取得的官方 PDF 和隔离目录，源公司目录原件未改。
