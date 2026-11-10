@@ -1,0 +1,308 @@
+diff --git a/scripts/config.py b/scripts/config.py
+index d3fe719c..8d338665 100644
+--- a/scripts/config.py
++++ b/scripts/config.py
+@@ -11,6 +11,7 @@
+ import os
+ import copy
+ import re
++import math
+ import yaml
+ from dataclasses import dataclass, field, replace
+ from pathlib import Path
+@@ -76,6 +77,12 @@ def _ensure_dotenv():
+         _dotenv_loaded = True
+ 
+ 
++def _raise_config_errors(errors: List[str]) -> None:
++    if errors:
++        error_msg = "配置验证失败:\n" + "\n".join(f"  - {error}" for error in errors)
++        raise ValueError(error_msg + "\n\n请检查 config.yaml 或设置环境变量")
++
++
+ @dataclass
+ class LLMFallbackConfig:
+     """Secondary provider profile with an explicit workload policy."""
+@@ -104,6 +111,41 @@ class LLMConfig:
+     fallback: LLMFallbackConfig = field(default_factory=LLMFallbackConfig)
+     generation_policy: Dict[str, Dict[str, Dict[str, str]]] = field(default_factory=dict)
+ 
++    def _validation_errors(self, strict: bool = True) -> List[str]:
++        """Validate only this responsibility layer; never expose credential values."""
++        errors = []
++        if strict and (not isinstance(self.api_key, str) or not self.api_key.strip()):
++            errors.append(f"缺少 LLM API Key (设置 {self.api_key_env} 环境变量)")
++        valid_providers = {"minimax", "mimo", "deepseek", "openai", "claude"}
++        if not isinstance(self.provider, str) or self.provider not in valid_providers:
++            errors.append("不支持的 LLM provider")
++        if not isinstance(self.fallback.provider, str) or self.fallback.provider not in valid_providers:
++            errors.append("不支持的备用 LLM provider")
++        if self.fallback.usage_scope != "general":
++            errors.append("不支持的备用 LLM usage_scope")
++        if not isinstance(self.fallback.enabled, bool):
++            errors.append("备用 LLM enabled 必须为布尔值")
++        try:
++            self.generation_options()
++        except ValueError as exc:
++            errors.append(str(exc))
++        if self.temperature is not None and (
++            type(self.temperature) not in (int, float)
++            or not math.isfinite(self.temperature) or not 0 <= self.temperature <= 2
++        ):
++            errors.append("temperature 必须是 [0, 2] 内的有限数值")
++        if self.max_tokens is not None and (type(self.max_tokens) is not int or self.max_tokens < 1):
++            errors.append("max_tokens 必须为正整数")
++        if type(self.max_document_chars) is not int or self.max_document_chars < 1:
++            errors.append("max_document_chars 必须为正整数")
++        if not isinstance(self.reasoning_split, bool):
++            errors.append("reasoning_split 必须为布尔值")
++        return errors
++
++    def validate(self, strict: bool = True) -> None:
++        """Check LLM parameters and, by default, the selected runtime credential."""
++        _raise_config_errors(self._validation_errors(strict))
++
+     def generation_options(self, purpose: str = "general") -> Dict[str, Any]:
+         """Resolve explicit provider/purpose options without credentials or defaults."""
+         policy = self.generation_policy
+@@ -204,20 +246,8 @@ class Config:
+             FileNotFoundError: 配置文件不存在
+             ValueError: 配置验证失败
+         """
+-        # 确定配置文件路径
+-        if config_path is None:
+-            config_path = WIKI_ROOT / "config.yaml"
+-            # 仅在使用默认路径时自动加载 .env（测试传入自定义路径时跳过）
+-            _ensure_dotenv()
+-        
+-        # 加载 YAML 配置
+-        raw_config = {}
+-        if config_path.exists():
+-            with open(config_path, "r", encoding="utf-8") as f:
+-                raw_config = yaml.safe_load(f) or {}
+-        else:
+-            logger.warning(f"配置文件不存在: {config_path}，使用默认值")
+-        
++        config_path, raw_config = cls._read_config(config_path)
++
+         # 应用环境变量覆盖
+         raw_config = cls._apply_env_overrides(raw_config)
+         
+@@ -232,29 +262,58 @@ class Config:
+         config._raw = raw_config
+         return config
+ 
+-    def llm_for_provider(self, provider: Optional[str] = None) -> LLMConfig:
+-        """Select an existing provider profile without changing persisted config.
++    @classmethod
++    def load_llm(cls, config_path: Optional[Path] = None, *,
++                 llm_provider: Optional[str] = None) -> LLMConfig:
++        """Load only LLM dependencies, strictly in production and tests alike.
+ 
+-        Primary and configured fallback retain their exact model/endpoint. Other
+-        providers use this loader's defaults with the shared generation settings.
+-        Credentials stay runtime-only. Selection is explicit; this does not retry.
++        Explicit paths keep the full loader's no-dotenv contract. Provider
++        selection is explicit; a missing primary key never triggers fallback.
+         """
+-        if provider is None or provider == self.llm.provider:
+-            return self.llm
+-        fallback = self.llm.fallback
++        _, raw = cls._read_config(config_path)
++        llm = cls._select_llm(cls._build_llm(raw.get("llm", {})), llm_provider)
++        llm.validate()
++        return llm
++
++    @staticmethod
++    def _read_config(config_path: Optional[Path]) -> tuple[Path, Dict[str, Any]]:
++        if config_path is None:
++            config_path = WIKI_ROOT / "config.yaml"
++            _ensure_dotenv()
++        raw = {}
++        if config_path.exists():
++            with config_path.open("r", encoding="utf-8") as stream:
++                try:
++                    raw = yaml.safe_load(stream) or {}
++                except yaml.YAMLError:
++                    raise ValueError("配置 YAML 无效") from None
++        else:
++            logger.warning(f"配置文件不存在: {config_path}，使用默认值")
++        if not isinstance(raw, dict):
++            raise ValueError("配置必须为映射")
++        return config_path, raw
++
++    def llm_for_provider(self, provider: Optional[str] = None) -> LLMConfig:
++        """Select a configured profile or shared defaults without full Config."""
++        return self._select_llm(self.llm, provider)
++
++    @classmethod
++    def _select_llm(cls, llm: LLMConfig, provider: Optional[str]) -> LLMConfig:
++        if provider is None or provider == llm.provider:
++            return llm
++        fallback = llm.fallback
+         if provider == fallback.provider:
+             if not fallback.enabled:
+                 raise ValueError("configured fallback is disabled")
+-            return replace(self.llm, provider=fallback.provider, api_key=fallback.api_key,
++            return replace(llm, provider=fallback.provider, api_key=fallback.api_key,
+                            api_key_env=fallback.api_key_env, model=fallback.model,
+                            base_url=fallback.base_url)
+-        generation = {name: getattr(self.llm, name) for name in (
++        generation = {name: getattr(llm, name) for name in (
+             "max_tokens", "max_document_chars", "temperature", "reasoning_split", "generation_policy")}
+-        selected = self._build_config({"llm": {"provider": provider, **generation}},
+-                                      self.paths.wiki_root)
++        selected = cls._build_llm({"provider": provider, **generation})
+         selected.validate(strict=False)
+-        return replace(selected.llm, fallback=fallback)
+-    
++        return replace(selected, fallback=fallback)
++
+     @staticmethod
+     def _apply_env_overrides(raw: Dict[str, Any]) -> Dict[str, Any]:
+         """Apply non-secret overrides and remove repository-stored LLM keys."""
+@@ -279,10 +338,10 @@ class Config:
+         return raw
+     
+     @staticmethod
+-    def _build_config(raw: Dict[str, Any], base_dir: Path) -> 'Config':
+-        """构建配置对象"""
+-        # LLM 配置
+-        llm_raw = raw.get("llm", {})
++    def _build_llm(llm_raw: Dict[str, Any]) -> LLMConfig:
++        """The single provider/profile builder; runtime-only credentials."""
++        if not isinstance(llm_raw, dict):
++            raise ValueError("llm 必须为映射")
+         provider_defaults = {
+             "minimax": ("MINIMAX_API_KEY", "MiniMax-M3", "https://api.minimaxi.com/v1"),
+             "mimo": ("MIMO_API_KEY", "mimo-v2.6-flash", "https://token-plan-cn.xiaomimimo.com/v1"),
+@@ -291,11 +350,17 @@ class Config:
+             "claude": ("ANTHROPIC_API_KEY", "claude-3-opus-20240229", "https://api.anthropic.com"),
+         }
+         provider = llm_raw.get("provider", "minimax")
++        if not isinstance(provider, str):
++            raise ValueError("不支持的 LLM provider")
+         api_key_env, default_model, default_base_url = provider_defaults.get(
+             provider, provider_defaults["minimax"]
+         )
+         fallback_raw = llm_raw.get("fallback", {})
++        if not isinstance(fallback_raw, dict):
++            raise ValueError("llm.fallback 必须为映射")
+         fallback_provider = fallback_raw.get("provider", "mimo")
++        if not isinstance(fallback_provider, str):
++            raise ValueError("不支持的备用 LLM provider")
+         fallback_env, fallback_model, fallback_base_url = provider_defaults.get(
+             fallback_provider, provider_defaults["mimo"]
+         )
+@@ -305,10 +370,10 @@ class Config:
+             api_key_env=fallback_env,
+             model=fallback_raw.get("model", fallback_model),
+             base_url=fallback_raw.get("base_url", fallback_base_url),
+-            enabled=bool(fallback_raw.get("enabled", True)),
++            enabled=fallback_raw.get("enabled", True),
+             usage_scope=fallback_raw.get("usage_scope", "general"),
+         )
+-        llm = LLMConfig(
++        return LLMConfig(
+             provider=provider,
+             api_key=os.getenv(api_key_env, ""),
+             api_key_env=api_key_env,
+@@ -317,11 +382,16 @@ class Config:
+             max_tokens=llm_raw.get("max_tokens", 8192),
+             max_document_chars=llm_raw.get("max_document_chars", 800000),
+             temperature=llm_raw.get("temperature", 1.0),
+-            reasoning_split=bool(llm_raw.get("reasoning_split", True)),
++            reasoning_split=llm_raw.get("reasoning_split", True),
+             fallback=fallback,
+             generation_policy=copy.deepcopy(llm_raw.get("generation_policy", {})),
+         )
+-        
++
++    @classmethod
++    def _build_config(cls, raw: Dict[str, Any], base_dir: Path) -> 'Config':
++        """构建配置对象"""
++        llm = cls._build_llm(raw.get("llm", {}))
++
+         # 搜索配置
+         search_raw = raw.get("search", {})
+         search = SearchConfig(
+@@ -378,33 +448,7 @@ class Config:
+         Raises:
+             ValueError: 配置验证失败
+         """
+-        errors = []
+-
+-        # 验证 LLM 配置
+-        if strict and not self.llm.api_key:
+-            errors.append(f"缺少 LLM API Key (设置 {self.llm.api_key_env} 环境变量)")
+-
+-        # LLM provider 白名单
+-        valid_providers = {"minimax", "mimo", "deepseek", "openai", "claude"}
+-        if self.llm.provider and self.llm.provider not in valid_providers:
+-            errors.append(f"不支持的 LLM provider: {self.llm.provider} (支持: {valid_providers})")
+-        if self.llm.fallback.provider not in valid_providers:
+-            errors.append(f"不支持的备用 LLM provider: {self.llm.fallback.provider}")
+-        if self.llm.fallback.usage_scope != "general":
+-            errors.append(
+-                f"不支持的备用 LLM usage_scope: {self.llm.fallback.usage_scope}"
+-            )
+-
+-        try:
+-            self.llm.generation_options()
+-        except ValueError as exc:
+-            errors.append(str(exc))
+-
+-        # 数值范围验证
+-        if self.llm.temperature is not None and not (0 <= self.llm.temperature <= 2):
+-            errors.append(f"temperature 超出范围 [0, 2]: {self.llm.temperature}")
+-        if self.llm.max_tokens is not None and self.llm.max_tokens < 1:
+-            errors.append(f"max_tokens 必须为正数: {self.llm.max_tokens}")
++        errors = self.llm._validation_errors(strict)
+ 
+         # 验证搜索配置
+         if strict and not self.search.api_key:
+@@ -422,10 +466,7 @@ class Config:
+         if strict and not self.paths.wiki_root.exists():
+             errors.append(f"Wiki 根目录不存在: {self.paths.wiki_root}")
+ 
+-        if errors:
+-            error_msg = "配置验证失败:\n" + "\n".join(f"  - {e}" for e in errors)
+-            error_msg += "\n\n请检查 config.yaml 或设置环境变量"
+-            raise ValueError(error_msg)
++        _raise_config_errors(errors)
+     
+     def get_llm_api_key(self) -> str:
+         """获取 LLM API Key"""
+diff --git a/scripts/narrative_batch_configured.py b/scripts/narrative_batch_configured.py
+index ee651a49..4941c87f 100644
+--- a/scripts/narrative_batch_configured.py
++++ b/scripts/narrative_batch_configured.py
+@@ -25,7 +25,7 @@ def main(argv: Sequence[str] | None = None) -> int:
+         return batch_main(["--help"])
+     try:
+         options = model_options_from_config(
+-            Config.load(args.llm_config, llm_provider=args.llm_provider).llm)
++            Config.load_llm(args.llm_config, llm_provider=args.llm_provider))
+         if args.allow_local_model_http:
+             options["allow_local_http"] = True  # HTTP adapter still requires a loopback IP.
+     except (OSError, TypeError, ValueError):
+diff --git a/tests/unit/test_narrative_model_config.py b/tests/unit/test_narrative_model_config.py
+index a5a4c816..aa86d003 100644
+--- a/tests/unit/test_narrative_model_config.py
++++ b/tests/unit/test_narrative_model_config.py
+@@ -212,13 +212,13 @@ def test_configured_entrypoint_selects_provider_through_authoritative_loader(mon
+         loaded.append((path, llm_provider))
+         config = Config()
+         config.llm = config.llm_for_provider(llm_provider)
+-        return config
++        return config.llm
+ 
+     def batch(args, *, loaded_model_options):
+         captured.append((args, loaded_model_options))
+         return 0
+ 
+-    monkeypatch.setattr(entrypoint.Config, "load", load)
++    monkeypatch.setattr(entrypoint.Config, "load_llm", load)
+     monkeypatch.setattr(entrypoint, "batch_main", batch)
+     assert entrypoint.main(["--llm-provider", provider, "--request", "fixture.json"]) == 0
+     assert loaded == [(None, provider)]

@@ -1,0 +1,55 @@
+{
+  "schema_version": "retired-process-log-archive/1",
+  "reason": "Seven obsolete failed push attempts from 2026-10-23/24. Existing release checks were later replaced; preserve exact failures in compressed form.",
+  "files": [
+    {
+      "path": ".planning/market-m2-push-20261024.log",
+      "logical_bytes": 2254128,
+      "sha256": "f8f66bdc0fbe84b97c7ace335077ce688d61fcf0b605c273902690a1d499fe22",
+      "archive": "docs/plans/du11-source-closure-2026-10-18/review/workspace-reconciliation-20261110/retired-push-logs/01-market-m2-push-20261024.log.gz",
+      "archive_bytes": 192930
+    },
+    {
+      "path": ".planning/r1-w08-crosspage-publication-20261024/normal-main-push.txt",
+      "logical_bytes": 2505735,
+      "sha256": "8c5bc7323832edfc53e1aac4ea93ac11069c021b03ebd7d543c754a0a2fb7c40",
+      "archive": "docs/plans/du11-source-closure-2026-10-18/review/workspace-reconciliation-20261110/retired-push-logs/02-normal-main-push.txt.gz",
+      "archive_bytes": 220631
+    },
+    {
+      "path": ".planning/r1-w08-main-integration-20261024/normal-push.txt",
+      "logical_bytes": 2419707,
+      "sha256": "43a22d68ec143d1f1a88db7e2e54e4c34405246c7ba46d4127aad4a54dd9a9ad",
+      "archive": "docs/plans/du11-source-closure-2026-10-18/review/workspace-reconciliation-20261110/retired-push-logs/03-normal-push.txt.gz",
+      "archive_bytes": 215886
+    },
+    {
+      "path": ".planning/r1-w08-real-20261023/branch-push-final.log",
+      "logical_bytes": 2282922,
+      "sha256": "9426399d6cdbc12ffa25056d880c35064c3c1a5695b8d1b64c404a024d21a211",
+      "archive": "docs/plans/du11-source-closure-2026-10-18/review/workspace-reconciliation-20261110/retired-push-logs/04-branch-push-final.log.gz",
+      "archive_bytes": 207037
+    },
+    {
+      "path": ".planning/r1-w08-prepush-repro-20261024.txt",
+      "logical_bytes": 2198584,
+      "sha256": "9b545f98eac23715df5dc6283d3f7a7b06249db6811667a8a8988ce1bb709f80",
+      "archive": "docs/plans/du11-source-closure-2026-10-18/review/workspace-reconciliation-20261110/retired-push-logs/05-r1-w08-prepush-repro-20261024.txt.gz",
+      "archive_bytes": 203476
+    },
+    {
+      "path": ".planning/r1-w11-publication-20261023/normal-push.txt",
+      "logical_bytes": 2132804,
+      "sha256": "f5db7022dd8833a6fe8ec03b05a5e4a996fbd9674fc04f51079e9a5e9351c601",
+      "archive": "docs/plans/du11-source-closure-2026-10-18/review/workspace-reconciliation-20261110/retired-push-logs/06-normal-push.txt.gz",
+      "archive_bytes": 196576
+    },
+    {
+      "path": ".planning/r1-w03-join/cwp-final-push.log",
+      "logical_bytes": 2102665,
+      "sha256": "6ecdf389f214cc9c0a0c8867a8d2910c5998ae15e12f8864ae853daf1fd7871f",
+      "archive": "docs/plans/du11-source-closure-2026-10-18/review/workspace-reconciliation-20261110/retired-push-logs/07-cwp-final-push.log.gz",
+      "archive_bytes": 194019
+    }
+  ]
+}

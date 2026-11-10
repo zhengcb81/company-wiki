@@ -1,0 +1,21 @@
+{
+  "phase": "green",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_w04_llm_config_scope.py",
+    "tests/unit/test_config.py",
+    "tests/unit/test_llm_defaults.py",
+    "tests/unit/test_narrative_model_config.py",
+    "tests/unit/test_finite_configured_entrypoint_launch.py",
+    "tests/unit/test_llm_client.py",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 23.817,
+  "log_sha256": "92d3926166a75a06fa0e08f0eb07e8726e39ea542d4901af42bb6da184166027",
+  "exceptions": "captured verbatim in green.log"
+}

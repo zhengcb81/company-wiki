@@ -1,41 +1,20 @@
-# 当前交接 — P2 已并线；D4/D5 已按范围验收；ROOT 复验 source-facts 并清理工作区
+# 当前交接
 
-**唯一入口**：先读 [CURRENT_STATUS.md](CURRENT_STATUS.md) 和 [CURRENT_STATUS.json](CURRENT_STATUS.json)，再按 [task_plan.md](task_plan.md) 执行。长期目标只看 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。截至 2026-11-10，Dashboard owner P2 已进入 CWP、FF、RF 各自主线且远端同步；主线循环里的 RF 实际采用 P2 仍 OPEN。D4/D5 只在冻结的接口和组合验收范围内接受。模块解耦不等同“零依赖”，也不等于 Dashboard P3/P4 完成。
+先读 CURRENT_STATUS.md/json，再执行 task_plan.md。Dashboard P2 已并线。D4/D5 已有范围验收，本轮又修了三条 PDF SDK 消费绕行和两个观察/基准门禁，并通过独审。
 
-## 最近确认
+## 已接收的本轮工作
 
-- P2 三仓主线：CWP `0fc56b25b89da9f3da5921ba64122d9745e1752d`（当前更后续提交已包含）、FF `f65e6ca75fbce0616e65870f0aea78b793ef883c`、RF `b005a179280ee19695578bdba9427b4dd44cdd73`。按 owner 分别发布，不重复 cherry-pick；E2E 见 [P2 收据](../dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json)。
-- CWP 代码核查基线为 `master == origin/master == 5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`，tracked clean；FF `main == origin/main == f65e6ca75fbce0616e65870f0aea78b793ef883c`，RF `main == origin/main == b005a179280ee19695578bdba9427b4dd44cdd73`。三个 owner 的 Dashboard P2 commit 都是各自 main 的祖先。CWP 基线有 13,279 个未跟踪文件、198,372,372 logical bytes，9 个 worktree（含根）、23 个本地分支（17 个非祖先）；本次提交只更新 PWF，不改产品代码，不能称本地工作区已全部清理。
-- 本轮清掉 CWP 内 269 个标准缓存目录/8,350 个文件（182,104,985 logical bytes）；此前另清 `.planning` 缓存 1,746 个目录/7,891 个文件。PDF SDK 环境与真实运行、证据和 PWF 保留；没有删除原始公司文档。逻辑大小不是物理释放量。
-- 误拒历史已按 10 个根因类别对账：4 个真实结果的观察/审计误拒，外加 1 个合法 DTO 版本错配；窄口径 2 类明确过度设计门、含错误 registry gate 为 3 类，宽口径把观察器故障也算入为 4 类。R7 已修并有现存回归；真实资源、source-truth、数值及恢复边界保留。详见 [失败根因对账](review/failure-root-cause-reconciliation-20261110.md)。
-- Source-facts 候选仍在 detached worktree，不接受其源码为已并线代码。五份关键 JSON 收据已复制并以 SHA-256 核实；guard 结果需在当前主线复验，见 [source-facts 对账](review/source-facts-reconciliation-20261110/README.md)。
-- CWP 定向测试曾因旧集成测试 monkeypatch 已退役的 `select_budget_items` 而 202/203 失败；改为观察现行 `plan_budget_items` 后，同一组定向测试 203 passed（6.72 秒）。修订已提交并推送：`f01ba7411908d7a6a38451781ce5f9f18600bf9b`；推送时 fixed smoke 为 18/18，完整远端 CI 尚未在本记录中核实。
+解析端口、mtime 内容比较、gold 请求范围与历史 gold 隔离、UTF-8/旧测试入口修复、真实半年报复验和 W04 工区退休均见 review/current-main-replay-20261110/README.md。cn-h1 的冻结 0.9 复验为 10/10，r4-cn-h1-real 为 9/12 且工作预算耗尽。两份来源 SHA 和模型/下载次数均单列。
 
-## 已验收的 D5
+## 下一步
 
-- CWP producer port：`a28692a6c49125143d2240b4a6d6df2ba29a28a1`；StockWiki consumers：`6d1e40bcdcde5e99488e22c38d57bd8e1b33c27e`。两个候选版本均通过快进进入各自主线。
-- CWP/StockWiki/FF 固定组合套件 `run-6`：18 passed，0 skipped/failed/errors；包含 13 个 CWP contract 用例、StockWiki 三入口和真实样本 E2E、FF V2/V1 路由边界。
-- 真实 PDF SHA/大小/mtime 稳定；隔离 scratch 已清理；候选 worktree 运行前后干净；StockWiki transport 内容匹配被审查 commit（按 Git clean-filter blob 比较，正确处理 Windows CRLF/LF）。
-- ROOT runner 范围单测 15 passed，Ruff 通过；主线 CWP 合并后 contract suite 13 passed。最终独立审查 PASS。
-- 证据入口：[ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)；机器测试收据 [run-6/report.json](review/decoupling-recheck-20261104/root-d5-final/run-6/report.json)。
-- StockWiki 仓库没有 Git remote，记录为本地并线；不得把本地并线说成已推送。CWP push/精确 CI 状态以 closeout 的发布字段为准，没核实就不要填绿。
-- CWP ROOT 接收 commit `c28b122075748d99547fb0a7e2fd4adcd7490269` 与本机 `origin/master` tracking ref 相同；本次未能直接查询实时远端或该 head 的 exact CI。`e7469d68` 的已知 CI 只绑定 D4 head，不能冒作 c28 的 CI。
+1. 继续 owner P3。参考 dashboard-owner-integration-2026-11-09/company-wiki.md，将流式和 canonical 候选迁到公开 Reader/解析/证明端口。先补私有调用、两阶段预算、阻塞锁反控，完成同 owner 组合验收后发布。
+2. 对 R4 来源在原工作账户内分诊重复处理，修复三个已解析但未入选的业务单位。候选 worktree 中 11 个源码差异和 12 个 untracked 仍需结合现行实现对账。
+3. 继续 T4 父链与 SEM-QUAL-01 实际输入/解码反控，再做真实摘要、恢复和 RF 实际采用。
+4. 继续核销剩余 7 个外部注册工区、15 个非祖先分支和历史运行产物。W04 config 已退休，完整 25 文件作者包与 SHA 清单在 workspace-reconciliation-20261110/w04-config-author-package。原始日志 gzip 映射在同目录 retired-push-logs。
 
-## 当前 ROOT 唯一下一步：当前主线复验与本地核销
+## 质量与发布证据
 
-1. 对当前主线做小范围、零模型 source-selection replay，核验候选观察中的 10/10 coverage 与 8/10 native-prose 差异。若当前主线不复现，记录原因后不合入候选代码；若复现，在来源语义 owner 写泛化 RED/正例，修复共因并跑受影响测试。
-2. 只有复现后仍相关时，才解释候选 101→102 native-member 差异并校验 locator/context；避免在候选版本上继续扩展与主线无关的验收。
-3. 按 PWF 和 Git 证据逐一核销剩余 CWP worktree/ref 与本地未跟踪目录。仅删除已证明代码/交付物已被主线或 canonical PWF 覆盖的 checkout；独有证据、部署绑定、模型资产先归档或明确保留。不得 bulk reset/clean。
-4. 当前主线问题闭环后，按 task_plan 顺序恢复新版真实摘要、缓存恢复、RF 实际采用。每个大节点再做一次独审，不增加小节点签收。
+本轮 147 项组合与最终 123 项组合有重叠。受影响集成 10 项、当前配置 25 项通过，独审另跑 42 项并增量复核语言采样。源码与归档只以本次提交的实际 Git 对象为准。完整公司审查循环和 Dashboard P3/P4 继续开放。
 
-## 接下来仍未完成的工作
-
-T4/SEM 通过后，按 task_plan 顺序实施新版真实摘要与内容召回验收；随后做付费中断/同 run/跨 run 缓存恢复，再验证 Revenue Forecast 实际消费同一份摘要 artifact，最后恢复固定公司审查循环。各阶段分别记录真实范围、预算、证据、测试恢复和独立大节点审查。D5 组合测试不等价于这些产品验收。
-
-## 明确未声称的能力
-
-D5 没有建立第二套缓存，也没有证明存在可复用的通用 CWP normalized-unit 持久缓存；当前 port 按请求读取/解析。缓存恢复仍是后续独立任务。D5 测试使用一份真实本地材料，但不代表市场/文种读取策略或八家公司循环已验收。
-
-## 边界
-
-只修改职责 owner 的范围；始终保留公司原始文档。StockWiki 继续拥有投资语义，CWP 只负责来源和通用解析，FF 的 V1 继续显式隔离兼容。除逐项核销明确属于其他仓的工作树外，不改 Dayu/IQS 或其它仍在施工的外部项目。
+各 owner 只写自己的代码与状态。真实来源、预算、单位和恢复事实仍由责任层验证。可选观察、mtime 和无关样本不能成为业务执行许可。

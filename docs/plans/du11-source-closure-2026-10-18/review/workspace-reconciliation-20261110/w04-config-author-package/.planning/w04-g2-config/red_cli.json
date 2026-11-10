@@ -1,0 +1,16 @@
+{
+  "phase": "RED CLI",
+  "exit_code": 1,
+  "elapsed_seconds": 7.543,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_w04_llm_config_scope.py::test_production_configured_cli_completes_with_only_llm_dependencies",
+    "-q",
+    "--tb=short"
+  ],
+  "log_sha256": "6e1773c9e3f7015b7167ad2f9afdb34d6378a0a4ff8d473e06297a2d745102c5",
+  "note": "Fixed new test fixture mapping iteration before implementation; now reaches true configured CLI refusal."
+}

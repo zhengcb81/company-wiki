@@ -1,0 +1,205 @@
+{
+  "schema_version": "w04-llm-config-scope-handoff/1",
+  "status": "STOP_READY_FOR_ROOT_INTEGRATION",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\w04-llm-config-scope-20261011\\company-wiki",
+  "base_head": "159b993e2f4d36c7e86dc12c9d6028f4a31b353a",
+  "completed_utc": "2026-10-11T07:34:00.035143+00:00",
+  "interface": "Config.load_llm(config_path=None, *, llm_provider=None) -> LLMConfig",
+  "products": [
+    {
+      "path": "scripts/config.py",
+      "bytes": 21147,
+      "sha256": "63c8a3982715d6b716ef01d973a067ce3c9bf0b0a26cb8405d096e216211ce5f"
+    },
+    {
+      "path": "scripts/narrative_batch_configured.py",
+      "bytes": 1642,
+      "sha256": "123ad26d54d5c3aedb0ccfbe7cbdcbf6ddb14eb4833c3d0f539f258c588a3374"
+    },
+    {
+      "path": "tests/unit/test_w04_llm_config_scope.py",
+      "bytes": 14007,
+      "sha256": "0be78f38edb81ea1c4c475dd1b6c5479588de05328ae62b81fafbafc02612cc8"
+    },
+    {
+      "path": "tests/unit/test_narrative_model_config.py",
+      "bytes": 13877,
+      "sha256": "d6460baf85f3ab69ba75aecbd64719a30823afcc26df150d44b778b74635f8a6"
+    }
+  ],
+  "implementation": [
+    "Config._read_config is shared; default dotenv/explicit-path contract unchanged.",
+    "Config._build_llm is the single provider/profile table and runtime credential builder.",
+    "Config._select_llm is shared by full/LLM-only selection; no full Config constructed to select DeepSeek.",
+    "LLMConfig._validation_errors/validate implement shared LLM validation; strict selected credential independent of pytest marker.",
+    "Full Config.load retains legacy pytest credential/path relaxation, search/wiki checks and unrelated configuration construction.",
+    "Configured CLI calls load_llm and retains static error receipt; no new flags, providers, override policy or authorization files."
+  ],
+  "parameter_validation_changes": [
+    "Reject bool/string/NaN numeric generation values, non-bool reasoning_split/enabled, nonpositive max_document_chars instead of coercing invalid inputs.",
+    "Provider/fallback/mapping errors do not interpolate untrusted values; invalid YAML becomes a static ValueError.",
+    "None temperature/max_tokens retain existing Config compatibility; the narrative HTTP adapter retains its own wire requirements."
+  ],
+  "existing_test_amendment": {
+    "file": "tests/unit/test_narrative_model_config.py",
+    "test": "test_configured_entrypoint_selects_provider_through_authoritative_loader",
+    "changes": [
+      "return config -> return config.llm",
+      "monkeypatch Config.load -> Config.load_llm"
+    ],
+    "expectations_changed": false,
+    "authorization": "ROOT approved two provider-parametrized mock cases"
+  },
+  "tdd": {
+    "red": {
+      "phase": "RED",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_w04_llm_config_scope.py",
+        "-q",
+        "--tb=short"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 10.116,
+      "log_sha256": "0bf7205e85b05805cccf30bdc6305306ce1143cdbf0f9fa191a782c9cb945a88",
+      "product_sha256": {
+        "scripts\\config.py": "c7889864f3693f9f28f8c4d88bb8f9e8a56564eebf533bbba105a53259cb9f94",
+        "scripts\\narrative_batch_configured.py": "3def255fb8f1488955b2fc4c8023eafbf76e4ba0dd3cb4f96f47aecdb540a696"
+      },
+      "exceptions": "captured verbatim in red.log"
+    },
+    "red_cli": {
+      "phase": "RED CLI",
+      "exit_code": 1,
+      "elapsed_seconds": 7.543,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_w04_llm_config_scope.py::test_production_configured_cli_completes_with_only_llm_dependencies",
+        "-q",
+        "--tb=short"
+      ],
+      "log_sha256": "6e1773c9e3f7015b7167ad2f9afdb34d6378a0a4ff8d473e06297a2d745102c5",
+      "note": "Fixed new test fixture mapping iteration before implementation; now reaches true configured CLI refusal."
+    },
+    "first_green": {
+      "phase": "green",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_w04_llm_config_scope.py",
+        "tests/unit/test_config.py",
+        "tests/unit/test_llm_defaults.py",
+        "tests/unit/test_narrative_model_config.py",
+        "tests/unit/test_finite_configured_entrypoint_launch.py",
+        "tests/unit/test_llm_client.py",
+        "-q",
+        "--tb=short"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 23.817,
+      "log_sha256": "92d3926166a75a06fa0e08f0eb07e8726e39ea542d4901af42bb6da184166027",
+      "exceptions": "captured verbatim in green.log"
+    },
+    "final_green": {
+      "phase": "green_final",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_w04_llm_config_scope.py",
+        "tests/unit/test_config.py",
+        "tests/unit/test_llm_defaults.py",
+        "tests/unit/test_narrative_model_config.py",
+        "tests/unit/test_finite_configured_entrypoint_launch.py",
+        "tests/unit/test_llm_client.py",
+        "-q",
+        "--tb=short"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 20.699,
+      "log_sha256": "9c8a80d475f7b1167ba327f65dace8c31053ff074347acc58cc4828218f8b58c",
+      "exceptions": "captured verbatim in green_final.log"
+    },
+    "lint": {
+      "phase": "lint",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/config.py",
+        "scripts/narrative_batch_configured.py",
+        "tests/unit/test_w04_llm_config_scope.py",
+        "tests/unit/test_narrative_model_config.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.132,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "exceptions": "captured verbatim in lint.log"
+    },
+    "diff_check": {
+      "phase": "diff_check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.056,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exceptions": "captured verbatim in diff_check.log"
+    }
+  },
+  "acceptance": {
+    "new_test_cases": 28,
+    "affected_tests_passed": 102,
+    "pytest_report_seconds": 17.75,
+    "wall_seconds": 20.699,
+    "production_without_search_or_wiki_dependency": "PASS; real child interpreter, no PYTEST_CURRENT_TEST and no TAVILY key",
+    "real_configured_cli": "PASS; spawned finite worker + one localhost fake POST per successful suite, artifact_ref present",
+    "fake_metering": {
+      "input_tokens": 73,
+      "output_tokens": 19,
+      "charged_tokens": 92,
+      "estimated_micro_usd": 111,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "exact_wire": "stub-model / max_tokens8192 / temperature0.6 / thinking disabled from configured DeepSeek policy",
+    "no_automatic_fallback": "PASS",
+    "credentials_strict_under_pytest": "PASS",
+    "dotenv_managed_and_deepseek_env_first": "PASS; true child processes with tmp .env fake keys",
+    "fixture_restoration": "isolated batch run removed, preexisting keep.txt preserved; fixture raw/config bytes unchanged before cleanup",
+    "canonical_config_unchanged": true
+  },
+  "known_nonproduct_issues": [
+    "First new-test RED had one raw_paths dict iteration error; corrected before product edits and separate production CLI RED captured.",
+    "First compatibility run lacked config.yaml in sparse checkout; exact HEAD blob materialized after ROOT approval. Contents match canonical; LF/CRLF differs only.",
+    "13 existing PytestUnknownMarkWarning(unit) in sparse checkout; no test failure, no marker configuration edits."
+  ],
+  "git_status": " M scripts/config.py\n M scripts/narrative_batch_configured.py\n M tests/unit/test_narrative_model_config.py\n?? .planning/w04-g2-config/\n?? tests/unit/test_w04_llm_config_scope.py\n",
+  "tracked_diff_sha256": "a42daee6388860ab44869a9c91423036dd4f493c052aa9d0fbb719eef5d5a7a5",
+  "did_not_execute": [
+    "external HTTP/provider/model calls",
+    "live fee or token ledger writes",
+    "production config/raw/registry/AUTO changes",
+    "installed skill changes",
+    "other repository or shared ROOT plan edits",
+    "old preparation/run changes",
+    "git commit/push"
+  ],
+  "external_calls": 0,
+  "live_cost_usd": "0",
+  "live_tokens": 0,
+  "root_next_step": "Review and integrate the four exact product/test files; new test is untracked and not included in tracked_changes.patch. Preserve configured model/policy. Then perform ROOT-owned real G2 and campaign accounting; no worker live execution."
+}

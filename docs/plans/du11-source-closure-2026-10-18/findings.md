@@ -197,3 +197,7 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 - 真实 H1 observer 首次在读取来源前因 Windows `os.link` WinError 5 失败；写入路径改为 Windows 同目录 `os.rename` 原子首次发布，POSIX 仍保留 hardlink；20 项 runner 用例通过。失败尝试没有读取原件、网络、模型或下载。
 - 第二次单例观察耗时 28.4237 秒，112 spans，12/12 必需单元 parsed-exact/represented，102 native members；9 个结构/context 检查均有输出；model posts/downloads/raw copies 均为 0，database/original/runtime/observer 比较均不变。状态仅为 `OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE`。
 - 未关闭项：相对先前 H1 的 101 native members 增至 102，尚未解释；需逐项核对原文成员和 locator，完成大节点独立审查、耐久化收据、scratch 恢复后才能 ACCEPT。真实业务召回、摘要、缓存/RF 不由此观察代签。
+
+## 2026-11-10 当前复核
+
+前次门禁检查覆盖phaseC/holdout，source-case对非SHM文件仍使用mtime许可，现统一内容比较。历史gold与活动gold混放使无关样本重复阻断指定样本，现分离历史输入且loader按请求作用域验证。来源入库、CN封面与语言采样绕过解析端口，现由同一公开parser_adapters负责。两个H1名字指向不同SHA与公司材料，旧版0.8和现行0.9也须各自记录。实际R4缺口伴随工作账户耗尽，后续对重复计算做分诊。P3旧stream/canonical候选还有私有接口与资源语义遗漏，具体TDD顺序见current-main-replay-20261110/README.md。

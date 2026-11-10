@@ -1,0 +1,57 @@
+........................................................................ [ 70%]
+..............................                                           [100%]
+============================== warnings summary ===============================
+tests\unit\test_config.py:155
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_config.py:155: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:15
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:15: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:43
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:43: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:60
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:60: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:70
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:70: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:97
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:97: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:112
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:112: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:122
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:122: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:135
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:135: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_client.py:28
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_client.py:28: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_client.py:76
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_client.py:76: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_client.py:189
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_client.py:189: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_client.py:233
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_client.py:233: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+102 passed, 13 warnings in 17.75s

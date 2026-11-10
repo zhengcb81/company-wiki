@@ -1,0 +1,516 @@
+{
+  "schema_version": "current-main-source-replay/1",
+  "sample_id": "cn-h1",
+  "base_commit": "e7758d54e162d97c7d97f6a76e3af9cd39ca627b",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "runtime_before": {
+    "files": 479,
+    "source_and_linguistic_assets_sha256": "290a3afe2bbb4e0a0d4ceac5cbed1876b2df9376e8f5be7441b1109d2c45326f"
+  },
+  "runtime_after": {
+    "files": 479,
+    "source_and_linguistic_assets_sha256": "290a3afe2bbb4e0a0d4ceac5cbed1876b2df9376e8f5be7441b1109d2c45326f"
+  },
+  "runtime_unchanged": true,
+  "execution": {
+    "entry_point": "company_wiki.source_catalog.narrative_evidence",
+    "parse_entry": "PdfReading.read",
+    "parser_version": "0.1.2",
+    "selector_version": "0.9.0",
+    "work_used": 15999040,
+    "work_limit": 16000000,
+    "calls": 0,
+    "elapsed_seconds": 55.582,
+    "mode": "native"
+  },
+  "status": "PARTIAL",
+  "metrics": {
+    "critical_fact_recall": 1.0,
+    "critical_fact_recall_denominator": 7,
+    "critical_fact_recall_denominator_declared": 7,
+    "critical_fact_unavailable": 0,
+    "critical_fact_not_evaluated": 0,
+    "optional_correctness_facts": 0,
+    "critical_fact_coverage": 1.0,
+    "narrative_fact_recall": 1.0,
+    "narrative_facts_passed": 10,
+    "narrative_facts_total": 10,
+    "document_meta_fact_recall": null,
+    "document_meta_facts_passed": 0,
+    "document_meta_facts_total": 0,
+    "fact_recall": 1.0,
+    "fact_recall_denominator": 10,
+    "fact_recall_denominator_declared": 10,
+    "route_accuracy": 1.0,
+    "evidence_validity": 1.0,
+    "basis_pass_rate": 1.0,
+    "context_completeness": null,
+    "selected_span_count": 112,
+    "claim_count": 0,
+    "semantic_unit_count": 0,
+    "review_supplied": false,
+    "reviewed_claims": 0,
+    "selected_spans": 112,
+    "candidate_count": 4127,
+    "source_units": 4862,
+    "dropped_financial_count": 136,
+    "omitted_candidate_count": 4015,
+    "selection_limit": 112,
+    "page_count": 210,
+    "pages_read": 210,
+    "selected_text_bytes": 19612,
+    "read_text_dense_chars": 156762,
+    "unusable_block_ratio": 0.0,
+    "unusable_block_chars": 0,
+    "parse_seconds": 3.401,
+    "select_seconds": 52.181,
+    "selector_status": "partial"
+  },
+  "checks": [
+    {
+      "check_id": "integrity.source_identity",
+      "dimension": "observation_integrity",
+      "status": "PASS",
+      "expected": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "observed": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "integrity.selected_source_material",
+      "dimension": "observation_integrity",
+      "status": "PASS",
+      "expected": "every selected locator carries original source text",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "route.family",
+      "dimension": "route_type",
+      "status": "PASS",
+      "expected": [
+        "interim",
+        "semi_annual_report"
+      ],
+      "observed": "interim",
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "integrity.text_legibility",
+      "dimension": "observation_integrity",
+      "status": "PASS",
+      "expected": "unusable-block ratio < 0.005",
+      "observed": {
+        "unusable_block_ratio": 0.0,
+        "dense_chars": 156762,
+        "basis": "parsed_text"
+      },
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-five-year-target-is-plan",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:13/paragraph:18/chars:495-605"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-current-coverage-30",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:13/paragraph:18/chars:495-605"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-cmp-acquisition-completed",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:13/paragraph:4/chars:88-219"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-microled-sample-verification",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:18/paragraph:6/chars:152-250"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-gan-power-stage",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:18/paragraph:14/chars:409-530"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-sic-8inch-stage",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:18/paragraph:21/chars:574-687"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-inp-development-started",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:18/paragraph:29/chars:819-932"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-advanced-packaging-primo-matrix",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:18/paragraph:35/chars:945-1115"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-tsv-300e-serving",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:18/paragraph:35/chars:945-1115"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-third-gen-tsv-rd",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/page:18/paragraph:35/chars:945-1115"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-catalog-is-toc-not-content",
+      "dimension": "disposition_context",
+      "status": "NOT_EVALUATED",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+    },
+    {
+      "check_id": "recall.f-page-count-210",
+      "dimension": "disposition_context",
+      "status": "NOT_EVALUATED",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+    },
+    {
+      "check_id": "basis.f-five-year-target-is-plan",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-current-coverage-30",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-cmp-acquisition-completed",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-microled-sample-verification",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-gan-power-stage",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-sic-8inch-stage",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-inp-development-started",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-advanced-packaging-primo-matrix",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-tsv-300e-serving",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-third-gen-tsv-rd",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-catalog-is-toc-not-content",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "basis.f-page-count-210",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "replay.evidence_locators",
+      "dimension": "citation_replay",
+      "status": "PASS",
+      "expected": "all cited locators were selected",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "integrity.unsupported_claims",
+      "dimension": "observation_integrity",
+      "status": "PASS",
+      "expected": "every claim cites at least one selected locator",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "context.semantic_units",
+      "dimension": "context_completeness",
+      "status": "NOT_EVALUATED",
+      "expected": "semantic units with complete member sets",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "baseline has no new structure; context completeness unmeasurable"
+    },
+    {
+      "check_id": "coverage.no_false_complete",
+      "dimension": "context_completeness",
+      "status": "PASS",
+      "expected": "complete only when no page/unit is unread",
+      "observed": {
+        "complete": false,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "deferred_unit_ids": [],
+        "unassigned_unit_ids": []
+      },
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.quantity_provenance",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "each quantity carries unit and period",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "observation reports no quantities"
+    },
+    {
+      "check_id": "bilingual.duplicate_summary",
+      "dimension": "bilingual_redundancy",
+      "status": "PASS",
+      "expected": "no duplicated fact across languages",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": "single language lane in observation"
+    },
+    {
+      "check_id": "derived_space.budget",
+      "dimension": "derived_space",
+      "status": "NOT_EVALUATED",
+      "expected": "derived_bytes <= 204800",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "observation reports no derived size"
+    },
+    {
+      "check_id": "resource.elapsed",
+      "dimension": "time_resource",
+      "status": "PASS",
+      "expected": "elapsed_seconds <= 900.0",
+      "observed": 55.582,
+      "evidence_refs": [],
+      "detail": "elapsed is reported, not a throughput claim"
+    },
+    {
+      "check_id": "semantics.entailment",
+      "dimension": "untested_semantics",
+      "status": "NOT_EVALUATED",
+      "expected": "independent semantic review of each claim against its evidence",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "no independent review supplied; deterministic checks cannot prove entailment"
+    }
+  ],
+  "not_evaluated": [
+    {
+      "check_id": "recall.f-catalog-is-toc-not-content",
+      "dimension": "disposition_context",
+      "status": "NOT_EVALUATED",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+    },
+    {
+      "check_id": "recall.f-page-count-210",
+      "dimension": "disposition_context",
+      "status": "NOT_EVALUATED",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+    },
+    {
+      "check_id": "basis.f-catalog-is-toc-not-content",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "basis.f-page-count-210",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "context.semantic_units",
+      "dimension": "context_completeness",
+      "status": "NOT_EVALUATED",
+      "expected": "semantic units with complete member sets",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "baseline has no new structure; context completeness unmeasurable"
+    },
+    {
+      "check_id": "basis.quantity_provenance",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "each quantity carries unit and period",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "observation reports no quantities"
+    },
+    {
+      "check_id": "derived_space.budget",
+      "dimension": "derived_space",
+      "status": "NOT_EVALUATED",
+      "expected": "derived_bytes <= 204800",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "observation reports no derived size"
+    },
+    {
+      "check_id": "semantics.entailment",
+      "dimension": "untested_semantics",
+      "status": "NOT_EVALUATED",
+      "expected": "independent semantic review of each claim against its evidence",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "no independent review supplied; deterministic checks cannot prove entailment"
+    }
+  ],
+  "source_sha256_after": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "original_stat_unchanged": true,
+  "model_posts": 0,
+  "downloads": 0,
+  "scratch_created": false
+}

@@ -30,6 +30,8 @@
 
 ## CWP-CANONICAL · 第三批发布
 
+2026-11-10 已提供 parser_adapters 公开的 NativePdfError、validate_native_pdf 和 read_native_pdf_prefix。入库校验、CN封面scope、语言采样三个现行入口均已迁移并通过边界测试。下一步 canonical 候选的 CN issuer 读取也应消费该 owner 能力，并同步收口浏览器私有扫描。流式候选仍需处理私有 Reader 访问、预算重置、固定字节帽及 POSIX 阻塞锁后接收。
+
 1. 将 `cn_primary_issuer.py` 的直接 PyMuPDF 调用替换为有界原生页文本端口。先查现有解析 API 能否满足需要。需要新端口时仅由 parser/normalization owner 实现，DTO 含页序与明确的缺口，接受调用的工作预算。保留原生证据定位、加密/坏文档诊断和无 OCR/模型的读取语义。相同受影响的 CN cover 路径按同一端口收口。
 2. 来源目录以验证原件建立 CN USCC、登记主体、证券代码和出处的匹配，调用自己 owner 的有界公共查询。将 canonical 浏览对基础浏览私有扫描方法的依赖改成同 owner 的稳定读取端口。保留既有 SEC 发行人验证，不通过代码或语言猜市场。
 3. StockWiki 自己签发当前版本的发行人证明。canonical 浏览消费受信配置的版本化证明端口，端口调用由组合适配层提供。保持同 issuer/listing/as-of 的请求绑定和证据完整性，拒绝任意调用者给出的未验证证明。避免来源领域对象绑定具体 StockWiki subprocess 客户端。

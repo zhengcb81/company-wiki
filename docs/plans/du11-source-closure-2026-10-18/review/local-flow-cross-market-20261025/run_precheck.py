@@ -27,7 +27,7 @@ from company_wiki.source_catalog.source_reader import SourceRef, SourceVersionRe
 
 MARKET = HERE.parent / "market-family-upgrade-20261024"
 CASES = [
-    ("us-10k", "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe", 8158067, "text/html", "Microsoft 10-K FY2025", "annual_report", "en", ROOT / "tools/document_understanding_benchmark/gold/us-10k.du11-v2-20261024.json"),
+    ("us-10k", "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe", 8158067, "text/html", "Microsoft 10-K FY2025", "annual_report", "en", Path(__file__).with_name("us-10k.du11-v2-20261024.json")),
     ("du5-hk-kingsoft-interim", "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36", 3396644, "application/pdf", "2025 中期報告", "semi_annual_report", "zh-hant", MARKET / "m1-source-checkpoints/gold/du5-hk-kingsoft-interim.json"),
     ("cn-ipo", "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67", 11211796, "application/pdf", "中微公司：首次公开发行股票并在科创板上市招股说明书", "prospectus", "zh", None),
 ]

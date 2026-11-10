@@ -16,6 +16,8 @@ import uuid
 from urllib.parse import urlsplit
 from typing import Any
 
+from company_wiki.parser_adapters import NativePdfError, validate_native_pdf
+
 from .assertion_service import SOURCE_FACT_FIELDS
 from .canonical_writer import CanonicalSourceWriter, CanonicalImportError
 from .acquisition_journal import AcquisitionJournal, record_acquisition_observation
@@ -153,13 +155,9 @@ def _validate_bytes(data, mime):
     if mime == "application/pdf":
         if not data.startswith(b"%PDF-"):
             raise OfficialSourceError("mime_mismatch")
-        import pymupdf as fitz
-
         try:
-            with fitz.open(stream=data, filetype="pdf") as doc:
-                if doc.page_count < 1:
-                    raise ValueError()
-        except (RuntimeError, ValueError):
+            validate_native_pdf(data)
+        except NativePdfError:
             raise OfficialSourceError("invalid_pdf") from None
     elif mime == _PPTX_MIME:
         _validate_presentation(data)

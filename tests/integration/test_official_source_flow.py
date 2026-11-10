@@ -179,7 +179,7 @@ def test_bad_originals_refused_before_canonical_write(data, mime, error):
 
 
 def test_bad_sha_refused_and_failed_import_cleans_only_owned_staging(monkeypatch):
-    from company_wiki.automation.source_request import (
+    from company_wiki.source_catalog.official_source_flow import (
         import_official_source,
         OfficialSourceError,
     )
@@ -330,7 +330,7 @@ def test_pdf_call_is_normalized_as_pdf_and_unknown_language_is_detected():
 def test_format_selection_replay_32_spans_parses_original_once(monkeypatch):
     from company_wiki.document_normalization import normalize_document
     from company_wiki.source_catalog.narrative_evidence import select_narrative_evidence
-    import company_wiki.automation.narrative_replay as replay
+    import company_wiki.source_catalog.narrative_material_replay as replay
     from types import SimpleNamespace
     from company_wiki.source_contract import source_id_for_sha256
     from company_wiki.source_catalog.narrative_formats import parser_component
@@ -360,13 +360,13 @@ def test_format_selection_replay_32_spans_parses_original_once(monkeypatch):
     from company_wiki import document_normalization as dn
     from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
     port = NarrativeNormalization()
-    original = dn.normalize_document
+    original = dn._normalize_source
 
     def counted(*args, **kwargs):
         calls.append(1)
         return original(*args, **kwargs)
 
-    monkeypatch.setattr(dn, "normalize_document", counted)
+    monkeypatch.setattr(dn, "_normalize_source", counted)
     name, version = parser_component("text/html")
     selected = SimpleNamespace(
         source_ref=SimpleNamespace(

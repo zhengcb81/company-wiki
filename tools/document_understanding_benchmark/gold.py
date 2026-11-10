@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from collections.abc import Mapping
+from collections.abc import Mapping, Set
 from pathlib import Path
 from typing import Any
 
@@ -26,27 +26,44 @@ class GoldError(RuntimeError):
     """Gold or bindings are structurally wrong (a refused run, not a FAIL)."""
 
 
-def load_gold(path: Path) -> dict[str, Any]:
+def _read_gold_json(path: Path) -> Any:
     try:
-        raw = json.loads(Path(path).read_text(encoding="utf8"))
+        return json.loads(Path(path).read_text(encoding="utf8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise GoldError(f"cannot read gold {path}: {exc}") from exc
-    return validate_gold(raw)
 
 
-def load_gold_dir(directory: Path | None = None) -> list[dict[str, Any]]:
+def load_gold(path: Path) -> dict[str, Any]:
+    return validate_gold(_read_gold_json(path))
+
+
+def load_gold_dir(
+    directory: Path | None = None, *, sample_ids: Set[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Validate and index the requested cases, or the entire unscoped set."""
     root = Path(directory) if directory else GOLD_DIR
     if not root.is_dir():
         raise GoldError(f"gold directory missing: {root}")
-    records = [load_gold(path) for path in sorted(root.glob("*.json"))]
-    if not records:
-        raise GoldError(f"no gold records in {root}")
+    records = []
     seen: set[str] = set()
-    for record in records:
+    for path in sorted(root.glob("*.json")):
+        raw = _read_gold_json(path)
+        if sample_ids is not None and isinstance(raw, Mapping):
+            sample_id = raw.get("sample_id")
+            if isinstance(sample_id, str) and sample_id not in sample_ids:
+                continue
+        record = validate_gold(raw)
         sample_id = record["sample_id"]
         if sample_id in seen:
             raise BenchmarkSchemaError(f"duplicate gold sample_id: {sample_id}")
         seen.add(sample_id)
+        records.append(record)
+    if sample_ids is not None:
+        missing = sample_ids - seen
+        if missing:
+            raise GoldError(f"no gold matches requested samples: {sorted(missing)}")
+    if not records:
+        raise GoldError(f"no gold records in {root}")
     return records
 
 

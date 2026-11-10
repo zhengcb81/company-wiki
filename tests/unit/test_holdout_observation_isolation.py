@@ -84,7 +84,7 @@ def test_controller_retains_native_json_after_large_diagnostics(tmp_path):
     assert code == 0
     assert len(json.loads(stdout)['payload']) == 2200000
     assert len(stderr) == 4096 and stderr.endswith(b'END')
-    receipt = json.loads((tmp_path/'native.command.json').read_text())
+    receipt = json.loads((tmp_path/'native.command.json').read_text(encoding='utf-8'))
     assert receipt['stdout_sha256'] == hashlib.sha256(stdout).hexdigest()
     assert receipt['stdout_bytes'] == len(stdout)
     assert receipt['stderr_bytes'] == 20003
@@ -131,7 +131,7 @@ def test_diagnostic_file_failure_does_not_discard_successful_protocol(tmp_path, 
         timeout=5, log_limit=4096)
     assert code == 0 and json.loads(stdout)['status'] == 'completed'
     assert b'HOLDOUT_OBSERVATION_INCOMPLETE' in stderr
-    assert json.loads((tmp_path/'diagnostic.command.json').read_text())['exit'] == 0
+    assert json.loads((tmp_path/'diagnostic.command.json').read_text(encoding='utf-8'))['exit'] == 0
 
 
 def test_observation_status_does_not_depend_on_how_much_log_tail_is_displayed(tmp_path):
@@ -142,7 +142,8 @@ def test_observation_status_does_not_depend_on_how_much_log_tail_is_displayed(tm
     assert code == 0 and json.loads(stdout)['status'] == 'completed'
     assert b'HOLDOUT_OBSERVATION_INCOMPLETE' in stderr
     assert (tmp_path/'tiny-tail.stderr.log').read_bytes() == b'\n'
-    assert json.loads((tmp_path/'tiny-tail.command.json').read_text())['observation_incomplete'] is True
+    receipt = json.loads((tmp_path/'tiny-tail.command.json').read_text(encoding='utf-8'))
+    assert receipt['observation_incomplete'] is True
 
 
 def test_a_diagnostic_chunk_observer_failure_does_not_change_the_native_outcome():
@@ -217,7 +218,7 @@ def test_accumulated_event_diagnostics_do_not_prevent_the_one_actual_transport(o
     http.client.HTTPConnection('offline.invalid').request('POST', '/', body=body)
     assert sent == [True]
     assert (root/'post-once').exists()
-    assert json.loads((root/'events.jsonl').read_text().splitlines()[-1])['event'] == 'http_post'
+    assert json.loads((root/'events.jsonl').read_text(encoding='utf-8').splitlines()[-1])['event'] == 'http_post'
     with pytest.raises(RuntimeError, match='HOLDOUT_SECOND_POST_REFUSED'):
         http.client.HTTPConnection('offline.invalid').request('POST', '/', body=body)
     assert len(sent) == 1

@@ -354,18 +354,14 @@ def run_native(args: argparse.Namespace) -> int:
     from .observer import ObserverUnavailable, carrier_support, observe_native
 
     try:
-        golds = load_gold_dir(Path(args.gold_dir) if args.gold_dir else None)
+        golds = load_gold_dir(
+            Path(args.gold_dir) if args.gold_dir else None,
+            sample_ids=set(args.sample) if args.sample else None,
+        )
         bindings = load_bindings(Path(args.bindings) if args.bindings else None)
     except (GoldError, BenchmarkSchemaError) as exc:
         print(f"refused: {exc}", file=sys.stderr)
         return EXIT_REFUSED
-
-    selected = set(args.sample or [])
-    if selected:
-        golds = [gold for gold in golds if gold["sample_id"] in selected]
-        if not golds:
-            print(f"refused: no gold matches {sorted(selected)}", file=sys.stderr)
-            return EXIT_REFUSED
 
     out_dir = Path(args.output)
     owned = out_dir / "native"

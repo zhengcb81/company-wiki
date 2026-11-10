@@ -1,16 +1,30 @@
-# 当前状态 — P2 已并线；D4/D5 范围验收通过；误拒根因已对账；source-facts 主线复验与工作区核销未完成
+# 当前状态
 
-唯一入口：[当前状态](CURRENT_STATUS.md) / [机器状态](CURRENT_STATUS.json)；详细顺序见 [task_plan](task_plan.md)，交接见 [HANDOFF](HANDOFF.md)，固定长期目标见 [MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。
+唯一入口为本文件和 CURRENT_STATUS.json。实施顺序见 task_plan.md，交接见 HANDOFF.md，长期循环见 MAINLINE_LOOP_GOAL.md。
 
-**截至 2026-11-10：P2 已分别并入 CWP/FF/RF 主线并推送；D4/D5 解耦按冻结范围 ACCEPTED。** D4/D5 的含义是 owner 通过版本化公开接口协作，且既有接口边界和组合样本测试通过；不是零依赖，也不是 Dashboard 全计划完成。D5 跨仓套件为 18 passed、0 skipped、0 failed/errors，独立审查 PASS。P3 Reader/PDF 端口和 P4 Dashboard 实际切换仍 OPEN。P2 与解耦结果的细节见 [Dashboard owner plan](../dashboard-owner-integration-2026-11-09/task_plan.md)；D5 证据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)。
+## 2026-11-10 本轮结果
 
-**同名 P2 需要区分：**上述“已完成”是 Dashboard owner 接线 P2；本计划 `remaining_stages.P2` 是后续证明 RF 实际消费同一份已接受摘要 artifact，仍为 OPEN，依赖 P1 完成。模块化并非整个 Dashboard/RF 工作流已全部完成。
+- Dashboard P2 已并入 CWP、FF、RF 主线。D4/D5 的冻结公开接口和组合测试已有通过记录。
+- 本轮进一步修复三条 PDF SDK 绕行。来源入库、CN 封面读取和语言采样现调用 parser_adapters 公开端口。边界测试和独立审查通过。
+- 清除 source-case 对非 SHM 文件的 mtime 额外限制，统一内容 SHA、大小、存在性判定。指定基准样本加载限制在请求范围，历史 gold 独立归档。UTF-8 误读及退休测试观察点已修。
+- cn-h1 原文 SHA 182e2062… 的 0.9 读取器复验为 10/10 业务事实、7/7 critical，整体 PARTIAL。冻结源码与原件检查、完整指标和检查点在 review/current-main-replay-20261110/cn-h1-09.json。
+- r4-cn-h1-real 原文 SHA d0dba19e… 的正式 Reader 为 9/12。三项原文单位已解析但未入选，工作账户耗尽。两个样本分别记录，T4/SEM-QUAL-01 继续开放。
+- W04 config 旧工区完整归档 25 个 modified/untracked 文件后移除。两个重复别名 ref 已清除。七份过期原始 push 日志压缩后减约 13.80 MiB，四个进程控制 scratch 文件已清除。
 
-**工作区核销仍在进行（2026-11-10 20:49 UTC 代码快照）：**本次盘点基线 CWP `master == origin/master == 5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`，跟踪文件干净；有 13,279 个未跟踪文件，逻辑大小 198,372,372 bytes（189.19 MiB），9 个注册工区（含根目录）、23 个本地分支，其中 17 个非祖先。根下识别的 269 个缓存路径中，268 个是可重建缓存（8,349 文件、182,104,966 logical bytes）；一个同名 `.pytest_cache` 实际是已跟踪测试夹具，已按 index checkout 字节恢复并保留。加上此前清掉的 `.planning` 缓存，本仓净移除约 324.58 MiB 缓存逻辑数据。没有删除原始公司文档、生产配置或模型环境；逻辑字节不等于实际释放的磁盘空间。本状态提交只更新 PWF，不改产品代码。逐项证据见 [工作区核销记录](review/workspace-reconciliation-20261110/README.md)。
+本轮源码、工具与测试经独审通过。定向组合先后为 147 passed 和最终补充组合 123 passed，两者有重叠。受影响集成 10 passed，现行配置范围 25 passed，独审另跑 42 passed。详细范围、原失败与留项见 review/current-main-replay-20261110/README.md。
 
-**误拒根因核对（2026-11-10）：**历史审计归并了 10 类根因而非 10 次运行；确认 4 个真实结果被观察/审计错误挡住，另有 1 个合法公共错误 DTO 被旧消费者拒绝。窄口径有 2 个明确过度设计门槛（mtime 与任意 300 KB 上限）；把错误 registry predicate 也算进去是 3 类门禁误拒；再把观察器 KeyError 耦合算入则宽口径共 4 类。R7 已移除或修正这些限制。真实预算、原文身份/哈希/期次、数值和付费恢复约束保留。分类、证据与当前代码核对见 [误拒根因对账](review/failure-root-cause-reconciliation-20261110.md)。
+## 现在的顺序
 
-**当前唯一下一步：**在当前主线精确复验 source-facts 候选所报告的遗漏，并完成本地 worktree/分支核销。候选观察显示 coverage guard 10/10、native-prose guard 8/10（漏两个指定业务事实），当次预算未耗尽且没有模型调用；但观察绑定 detached worktree 的源码，不能升级为主线通过或失败。先对当前 `master` 做小范围零模型重放，只有缺口复现才改生产 owner 层。此前 H1 的 102 对 101 个 native-member 差异、locator/context 对齐、最终独审和 scratch 恢复仍未完成。通过当前主线复验与修复后才恢复新版真实摘要、缓存恢复、RF 实际采用及固定公司循环。
+1. 优先收口 Dashboard P3 公开 Reader 流与解析端口。旧 stream 候选仍有私有 Reader 调用、两阶段预算重置、固定字节帽、POSIX 阻塞锁，canonical 候选也有私有浏览扫描与 SDK 调用。按 owner 公开接口迁移并写隔离测试后接收。
+2. 对 R4 半年报做工作量分诊，定位重复解析、重复语义扫描和投影开销，在原 16M 账户内修复并复验三项遗漏。
+3. 完成 T4 父链和 SEM-QUAL-01 反控及真实验收，随后推进新版摘要、同/跨 run 恢复、RF 实际采用和固定公司循环。
+4. 核销 source-facts、M3、W04 semantics、R1 observation 与 Dashboard 工区，逐项合并已接受代码和移除已替代状态。
+
+## 工作区快照
+
+本轮基于 e7758d54e162d97c7d97f6a76e3af9cd39ca627b 实施。退休 W04 工区与两个重复 ref 后，注册工区为 8 个（含根）、本地分支 20 个，其中 15 个 tip 非 master 祖先。已解释的原始运行日志完成迁移，其他尚需核销的历史运行产物继续列入清理。原件、生产配置和各 owner 数据库继续由所属 owner 管理。
+
+## 历史候选与验收记录
 
 ## T4/SEM-QUAL-01 候选观察（不是当前主线验收）
 

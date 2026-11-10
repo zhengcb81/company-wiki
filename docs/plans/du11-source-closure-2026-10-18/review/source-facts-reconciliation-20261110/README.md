@@ -55,3 +55,7 @@ Each copied JSON was SHA-256 compared with its candidate-worktree source on
 | `du11-native-prose-all-required-trace.json` | `c198d2be73f3ef70f559bf7a996ede418ece0cf74297c13816a5a9b5b100e9c5` |
 | `du11-native-prose-guard.json` | `1785070e1cd4ae383d83130d2f958670d80a5b7c10d42caf0aa5c668f4bf4649` |
 | `du11-native-prose-trace-conclusion.json` | `fda966c3d94b58262d06625a186cbeca23fceabdd08214a3a44a38836bc02b8` |
+
+## 2026-11-10 当前主线复验
+
+cn-h1 SHA182e2062…使用0.9公开PdfReading和selector得到10/10，源码与原件稳定，整体PARTIAL。另一份r4-cn-h1-real SHA d0dba19e…在正式Reader得到9/12，工作量15,994,242/16,000,000耗尽。两份材料分别核对，当前无需移植旧11文件整体补丁。后续工作量/限定/父链仍OPEN。完整记录在 ../current-main-replay-20261110/README.md。

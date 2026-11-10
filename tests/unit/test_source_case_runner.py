@@ -118,7 +118,9 @@ def test_unexpected_execution_failure_retains_prior_checkpoint_without_inventing
 
 def test_observer_code_change_is_recorded_and_cannot_validate_the_source_run(tmp_path, monkeypatch):
     output, _checkpoint = cli(tmp_path, monkeypatch)
-    states = iter(({"synthetic": "before"}, {"synthetic": "after"}))
+    before = {"synthetic": {"exists": True, "bytes": 1, "sha256": "a" * 64}}
+    after = {"synthetic": {"exists": True, "bytes": 1, "sha256": "b" * 64}}
+    states = iter((before, after))
     monkeypatch.setattr(runner, "observer_state", lambda: next(states))
     monkeypatch.setattr(runner, "execute", lambda _case, **_kwargs: producer_record())
     with pytest.raises(SystemExit) as exc:
@@ -126,9 +128,36 @@ def test_observer_code_change_is_recorded_and_cannot_validate_the_source_run(tmp
     assert exc.value.code == 2
     saved = json.loads(output.read_bytes())
     assert saved["observer_unchanged"] is False
-    assert saved["observer_before"] == {"synthetic": "before"}
-    assert saved["observer_after"] == {"synthetic": "after"}
+    assert saved["observer_before"] == before
+    assert saved["observer_after"] == after
     assert saved["required_units"][0]["represented"] is True
+
+
+def test_mtime_only_changes_do_not_reject_an_observation(tmp_path, monkeypatch):
+    output, _checkpoint = cli(tmp_path, monkeypatch)
+    names = ("original.pdf", "catalog.sqlite", "catalog.sqlite-wal", "observer.py")
+    before = {name: {"exists": True, "bytes": 1, "sha256": "a" * 64, "mtime_ns": 1}
+              for name in names}
+    after = {name: {**value, "mtime_ns": 2} for name, value in before.items()}
+    states = iter((before, after))
+    monkeypatch.setattr(runner, "observer_state", lambda: next(states))
+    monkeypatch.setattr(runner, "execute", lambda _case, **_kwargs: producer_record())
+    runner.main()
+    saved = json.loads(output.read_bytes())
+    assert saved["observer_unchanged"] is True
+    assert saved["observer_comparison"]["all_file_stats_unchanged"] is False
+    assert not runner.compare_storage_observations({}, {})["all_supplied_files_content_unchanged"]
+
+
+@pytest.mark.parametrize("replacement", [
+    {}, {"exists": True}, {"exists": False},
+    {"exists": True, "bytes": 2, "sha256": "a" * 64},
+    {"exists": True, "bytes": 1, "sha256": "b" * 64},
+])
+def test_content_or_missing_proof_is_still_detected(replacement):
+    prior = {"exists": True, "bytes": 1, "sha256": "a" * 64}
+    result = runner.compare_storage_observations({"source": prior}, {"source": replacement})
+    assert result["all_supplied_files_content_unchanged"] is False
 
 
 def test_owned_writer_does_not_overwrite_foreign_result(tmp_path):

@@ -439,3 +439,11 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - CWP 当前工作树在审计快照时为 `5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`，与本地 `origin/master` tracking ref 相同，tracked clean；13,279 个未跟踪文件、198,372,372 bytes，9 个工区（含根）、23 个本地分支/17 个非祖先分支。FF/RF owner main 也分别与本地 upstream tracking refs 同步，且 P2 commit 均为 main 祖先。所有工作区未跟踪工件仍需按归属逐项核销。
 - 当前主线 source-facts zero-model replay 尚未运行；11 modified/12 untracked 的 detached candidate 仍保留，不能用候选结果替代当前 master 结论。下一步继续按 `task_plan.md` 做绑定到准确主线版本的有界重放，再按证据清理 worktree/ref 和运行产物。
 - 缓存清理过程补记：首次候选扫描误把一个 `.pytest_cache` 目录里的 19-byte tracked test fixture 当缓存删掉；通过 Git index checkout 原样恢复，Git 内容比较无差异。净清理统计已排除这个文件和目录；当前这一个同名目录仅因保留测试夹具而存在，其他标准缓存目录已无剩余。
+
+## 2026-11-10 22:05 UTC 本轮工程与清理
+
+解析入库、CN封面与语言三个 SDK 绕行已收口到公开 parser_adapters，边界/回归及独审通过。source-case 非SHM同字节mtime误拒已清除，gold按请求作用域加载，历史重复gold迁移并核SHA。显式UTF-8和退休测试入口已修。先有147项组合，再有123项最终组合，受影响集成10项、配置25项、独审42项通过，组合有重叠。
+
+实际复验区分两份半年报。cn-h1 SHA182e2062…的0.9为10/10，整体PARTIAL并有源码冻结收据。R4 SHA d0dba19e…为9/12且16M账户耗尽，原件/DB/runtime保持一致，0模型/下载，scratch恢复。当前source-facts缺口调查由此进入工作量分诊。
+
+W04 config 的25个修改/未跟踪文件已逐字节归档，旧工区和已并线分支移除。两个重复别名ref已移除，七份原始失败push日志压缩后由15,896,545降至1,430,555 bytes，四个旧测试控制文件17bytes移除。下一步优先P3公开Reader/解析接线，再做R4共因优化。

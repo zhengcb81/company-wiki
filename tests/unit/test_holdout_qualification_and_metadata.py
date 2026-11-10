@@ -125,18 +125,18 @@ def test_replay_manifest_acceptance_and_declared_clean_eligibility_are_separate(
     assert result['eligible_sample_count'] == int(eligible)
     assert result['samples'][0]['eligible_for_clean_holdout'] is eligible
     assert result['scope'] == 'declared_sample_independence_not_quality_or_loop_stopping'
-    assert record == json.loads(path.read_text())
+    assert record == json.loads(path.read_text(encoding='utf-8'))
 
 
 @pytest.mark.parametrize('prior', [None, {'status':'unknown'}, {'status':{'untrusted':'metadata'}}])
 def test_unknown_or_missing_prior_use_is_not_an_execution_permission(tmp_path, prior):
     path, _, _, _ = _manifest(tmp_path,frozen=True)
-    record=json.loads(path.read_text())
+    record=json.loads(path.read_text(encoding='utf-8'))
     if prior is None:
         record['samples'][0].pop('prior_use')
     else:
         record['samples'][0]['prior_use']=prior
-    path.write_text(json.dumps(record))
+    path.write_text(json.dumps(record), encoding='utf-8')
     loaded=manifest_owner.load_manifest(path)
     qualification=manifest_owner.declared_holdout_qualification(loaded)
     assert qualification['eligible_for_clean_holdout'] is False
@@ -168,7 +168,8 @@ def test_bootstrap_and_run_cli_preserve_qualification_in_their_outward_receipts(
     assert cli.cmd_bootstrap_lake(args) == 0
     bootstrap=json.loads(capsys.readouterr().out)
     assert len(requests)==1 and bootstrap['holdout_qualification']['eligible_sample_count']==0
-    assert json.loads((args.lake_dir/'bootstrap.json').read_text())['holdout_qualification']==bootstrap['holdout_qualification']
+    receipt = json.loads((args.lake_dir/'bootstrap.json').read_text(encoding='utf-8'))
+    assert receipt['holdout_qualification'] == bootstrap['holdout_qualification']
     monkeypatch.setattr(cli,'run_replay',lambda **kwargs: dict(overall='ok',attempt_dir='synthetic-observation',
         samples=[{'sample_id':'example-ir','status':'ok'}],holdout_qualification=bootstrap['holdout_qualification']))
     for name,value in dict(out_dir=tmp_path/'not-created',sample=None,lake_config=None,lake_root=None,

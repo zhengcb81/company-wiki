@@ -1,0 +1,25 @@
+{
+  "created_utc": "2026-10-11T07:24:57.456397+00:00",
+  "files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\w04-llm-config-scope-20261011\\company-wiki\\scripts\\config.py",
+      "bytes": 19119,
+      "sha256": "c7889864f3693f9f28f8c4d88bb8f9e8a56564eebf533bbba105a53259cb9f94"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\w04-llm-config-scope-20261011\\company-wiki\\scripts\\narrative_batch_configured.py",
+      "bytes": 1642,
+      "sha256": "3def255fb8f1488955b2fc4c8023eafbf76e4ba0dd3cb4f96f47aecdb540a696"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\w04-llm-config-scope-20261011\\company-wiki\\tests\\unit\\test_narrative_model_config.py",
+      "bytes": 13869,
+      "sha256": "59475efbaacfa68383bc08f6e07118ed66ca2a30b47fba06a716281760e627f0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\G2_LLM_CONFIG_INTERFACE_AMENDMENT.md",
+      "bytes": 2135,
+      "sha256": "e841576d9a3ef06a3c241cf92c044fbd254abeadbcad0b5d099b56532ad6fd7e"
+    }
+  ]
+}

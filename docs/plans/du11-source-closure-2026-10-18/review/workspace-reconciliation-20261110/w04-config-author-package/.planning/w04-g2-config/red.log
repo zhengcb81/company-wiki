@@ -1,0 +1,178 @@
+FFFFFFFFFFFFFFFFFFFFFFFFF..F                                             [100%]
+================================== FAILURES ===================================
+__ test_production_llm_only_loader_has_no_search_wiki_or_schedule_dependency __
+tests\unit\test_w04_llm_config_scope.py:62: in test_production_llm_only_loader_has_no_search_wiki_or_schedule_dependency
+    assert result.returncode == 0, result.stdout + result.stderr
+E   AssertionError: Traceback (most recent call last):
+E       File "<string>", line 1, in <module>
+E         from config import Config; import json; c=Config.load_llm(__import__('pathlib').Path('C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pytest-of-郑曾波\\pytest-247\\test_production_llm_only_loade0\\llm.yaml')); print(json.dumps([c.provider,c.model,c.max_tokens]))
+E                                                   ^^^^^^^^^^^^^^^
+E     AttributeError: type object 'Config' has no attribute 'load_llm'
+E     
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', '-c', "from config import Config; import json; c=Config.load...                              ^^^^^^^^^^^^^^^\nAttributeError: type object \'Config\' has no attribute \'load_llm\'\n').returncode
+___________ test_unrelated_malformed_sections_are_never_constructed ___________
+tests\unit\test_w04_llm_config_scope.py:71: in test_unrelated_malformed_sections_are_never_constructed
+    llm = Config.load_llm(path)
+          ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+__________ test_selected_credentials_are_strict_even_in_pytest[None] __________
+tests\unit\test_w04_llm_config_scope.py:86: in test_selected_credentials_are_strict_even_in_pytest
+    Config.load_llm(path)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_ test_selected_credentials_are_strict_even_in_pytest[synthetic pytest marker] _
+tests\unit\test_w04_llm_config_scope.py:86: in test_selected_credentials_are_strict_even_in_pytest
+    Config.load_llm(path)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+________ test_full_and_llm_only_loaders_share_exact_profiles[minimax] _________
+tests\unit\test_w04_llm_config_scope.py:105: in test_full_and_llm_only_loaders_share_exact_profiles
+    selected = Config.load_llm(path, llm_provider=provider)
+               ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+__________ test_full_and_llm_only_loaders_share_exact_profiles[mimo] __________
+tests\unit\test_w04_llm_config_scope.py:105: in test_full_and_llm_only_loaders_share_exact_profiles
+    selected = Config.load_llm(path, llm_provider=provider)
+               ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+________ test_full_and_llm_only_loaders_share_exact_profiles[deepseek] ________
+tests\unit\test_w04_llm_config_scope.py:105: in test_full_and_llm_only_loaders_share_exact_profiles
+    selected = Config.load_llm(path, llm_provider=provider)
+               ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_full_and_llm_only_loaders_share_exact_profiles[openai] _________
+tests\unit\test_w04_llm_config_scope.py:105: in test_full_and_llm_only_loaders_share_exact_profiles
+    selected = Config.load_llm(path, llm_provider=provider)
+               ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_full_and_llm_only_loaders_share_exact_profiles[claude] _________
+tests\unit\test_w04_llm_config_scope.py:105: in test_full_and_llm_only_loaders_share_exact_profiles
+    selected = Config.load_llm(path, llm_provider=provider)
+               ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_______________ test_selection_does_not_build_unrelated_config ________________
+tests\unit\test_w04_llm_config_scope.py:128: in test_selection_does_not_build_unrelated_config
+    assert Config.load_llm(path, llm_provider="deepseek").model == "deepseek-flash"
+           ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+______ test_explicit_selection_rejects_disabled_or_unknown_profile[mimo] ______
+tests\unit\test_w04_llm_config_scope.py:137: in test_explicit_selection_rejects_disabled_or_unknown_profile
+    Config.load_llm(path, llm_provider=provider)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_ test_explicit_selection_rejects_disabled_or_unknown_profile[misspelled-provider] _
+tests\unit\test_w04_llm_config_scope.py:137: in test_explicit_selection_rejects_disabled_or_unknown_profile
+    Config.load_llm(path, llm_provider=provider)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm0] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm1] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm2] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm3] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm4] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm5] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm6] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm7] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm8] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_________ test_invalid_llm_parameters_fail_through_both_loaders[llm9] _________
+tests\unit\test_w04_llm_config_scope.py:150: in test_invalid_llm_parameters_fail_through_both_loaders
+    for load in (Config.load_llm, Config.load):
+                 ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+_______ test_explicit_config_does_not_search_dotenv_or_accept_yaml_key ________
+tests\unit\test_w04_llm_config_scope.py:165: in test_explicit_config_does_not_search_dotenv_or_accept_yaml_key
+    Config.load_llm(path)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: type object 'Config' has no attribute 'load_llm'
+__ test_default_dotenv_keeps_managed_keys_and_deepseek_env_precedence[False] __
+tests\unit\test_w04_llm_config_scope.py:187: in test_default_dotenv_keeps_managed_keys_and_deepseek_env_precedence
+    assert process.returncode == 0, process.stdout + process.stderr
+E   AssertionError: Traceback (most recent call last):
+E       File "<string>", line 1, in <module>
+E         from config import Config; a=Config.load_llm();b=Config.load_llm(llm_provider='deepseek'); assert a.api_key=='managed-primary-fixture'; assert b.api_key=='dotenv-deepseek-fixture'; print('verified')
+E                                      ^^^^^^^^^^^^^^^
+E     AttributeError: type object 'Config' has no attribute 'load_llm'
+E     
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', '-c', "from config import Config; a=Config.load_llm();b=Conf...                              ^^^^^^^^^^^^^^^\nAttributeError: type object \'Config\' has no attribute \'load_llm\'\n').returncode
+__ test_default_dotenv_keeps_managed_keys_and_deepseek_env_precedence[True] ___
+tests\unit\test_w04_llm_config_scope.py:187: in test_default_dotenv_keeps_managed_keys_and_deepseek_env_precedence
+    assert process.returncode == 0, process.stdout + process.stderr
+E   AssertionError: Traceback (most recent call last):
+E       File "<string>", line 1, in <module>
+E         from config import Config; a=Config.load_llm();b=Config.load_llm(llm_provider='deepseek'); assert a.api_key=='managed-primary-fixture'; assert b.api_key=='environment-deepseek-fixture'; print('verified')
+E                                      ^^^^^^^^^^^^^^^
+E     AttributeError: type object 'Config' has no attribute 'load_llm'
+E     
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', '-c', "from config import Config; a=Config.load_llm();b=Conf...                              ^^^^^^^^^^^^^^^\nAttributeError: type object \'Config\' has no attribute \'load_llm\'\n').returncode
+_____ test_production_configured_cli_completes_with_only_llm_dependencies _____
+tests\unit\test_w04_llm_config_scope.py:227: in test_production_configured_cli_completes_with_only_llm_dependencies
+    original_bytes = {p: p.read_bytes() for p in state.raw_paths}
+                         ^^^^^^^^^^^^
+E   AttributeError: 'str' object has no attribute 'read_bytes'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_w04_llm_config_scope.py::test_production_llm_only_loader_has_no_search_wiki_or_schedule_dependency
+FAILED tests/unit/test_w04_llm_config_scope.py::test_unrelated_malformed_sections_are_never_constructed
+FAILED tests/unit/test_w04_llm_config_scope.py::test_selected_credentials_are_strict_even_in_pytest[None]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_selected_credentials_are_strict_even_in_pytest[synthetic pytest marker]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_full_and_llm_only_loaders_share_exact_profiles[minimax]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_full_and_llm_only_loaders_share_exact_profiles[mimo]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_full_and_llm_only_loaders_share_exact_profiles[deepseek]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_full_and_llm_only_loaders_share_exact_profiles[openai]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_full_and_llm_only_loaders_share_exact_profiles[claude]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_selection_does_not_build_unrelated_config
+FAILED tests/unit/test_w04_llm_config_scope.py::test_explicit_selection_rejects_disabled_or_unknown_profile[mimo]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_explicit_selection_rejects_disabled_or_unknown_profile[misspelled-provider]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm0]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm1]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm2]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm3]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm4]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm5]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm6]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm7]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm8]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_invalid_llm_parameters_fail_through_both_loaders[llm9]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_explicit_config_does_not_search_dotenv_or_accept_yaml_key
+FAILED tests/unit/test_w04_llm_config_scope.py::test_default_dotenv_keeps_managed_keys_and_deepseek_env_precedence[False]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_default_dotenv_keeps_managed_keys_and_deepseek_env_precedence[True]
+FAILED tests/unit/test_w04_llm_config_scope.py::test_production_configured_cli_completes_with_only_llm_dependencies
+26 failed, 2 passed in 7.47s

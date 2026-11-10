@@ -1,0 +1,12 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____ test_production_configured_cli_completes_with_only_llm_dependencies _____
+tests\unit\test_w04_llm_config_scope.py:250: in test_production_configured_cli_completes_with_only_llm_dependencies
+    assert process.returncode == 0, process.stdout + process.stderr
+E   AssertionError: {"error":"NARRATIVE_MODEL_CONFIG_INVALID","schema_version":"narrative-batch-result/1","status":"failed"}
+E     
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', 'C:\\Users\\郑曾波\\.codex\\worktrees\\w04-llm-config-scope-202...{"error":"NARRATIVE_MODEL_CONFIG_INVALID","schema_version":"narrative-batch-result/1","status":"failed"}\n', stderr='').returncode
+=========================== short test summary info ===========================
+FAILED tests/unit/test_w04_llm_config_scope.py::test_production_configured_cli_completes_with_only_llm_dependencies
+1 failed in 3.79s

@@ -1,0 +1,127 @@
+{
+  "schema_version": "bounded-file-manifest/1",
+  "scope": "4 changed product/test files plus owned PWF/evidence only; no lake traversal",
+  "files": [
+    {
+      "path": "scripts\\config.py",
+      "bytes": 21147,
+      "sha256": "63c8a3982715d6b716ef01d973a067ce3c9bf0b0a26cb8405d096e216211ce5f"
+    },
+    {
+      "path": "scripts\\narrative_batch_configured.py",
+      "bytes": 1642,
+      "sha256": "123ad26d54d5c3aedb0ccfbe7cbdcbf6ddb14eb4833c3d0f539f258c588a3374"
+    },
+    {
+      "path": "tests\\unit\\test_w04_llm_config_scope.py",
+      "bytes": 14007,
+      "sha256": "0be78f38edb81ea1c4c475dd1b6c5479588de05328ae62b81fafbafc02612cc8"
+    },
+    {
+      "path": "tests\\unit\\test_narrative_model_config.py",
+      "bytes": 13877,
+      "sha256": "d6460baf85f3ab69ba75aecbd64719a30823afcc26df150d44b778b74635f8a6"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\baseline.json",
+      "bytes": 1204,
+      "sha256": "820049f97dfbdd7cd7da7977cbfff3bdcccfe2fbb1363312d2a742d8669407dd"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\diff_check.json",
+      "bytes": 279,
+      "sha256": "cbde5456a6b4d3727ad6ecc22cac5453b8f4d86875e097f88aa634f83a25361a"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\diff_check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\findings.md",
+      "bytes": 1127,
+      "sha256": "937746cdd7106d0f8251a52d7119b8d4e2e5c027647fefd0110541f24e398dac"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\green.json",
+      "bytes": 603,
+      "sha256": "8891401aaef9e6d3b50e2dc6bf9301c0d23a8347b29445e7655fbf0babe8b583"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\green.log",
+      "bytes": 6494,
+      "sha256": "92d3926166a75a06fa0e08f0eb07e8726e39ea542d4901af42bb6da184166027"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\green_final.json",
+      "bytes": 615,
+      "sha256": "f53b8f0af95c6f20668dd26787ddd6bb4b35de44efe5044b75e92e7c69c3ded9"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\green_final.log",
+      "bytes": 5158,
+      "sha256": "9c8a80d475f7b1167ba327f65dace8c31053ff074347acc58cc4828218f8b58c"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\handoff.json",
+      "bytes": 8887,
+      "sha256": "eefba1177b6ad219fc028d2c0dcb21a2cb5340f5a947e7208c0bdb551a3d5e8c"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\handoff.md",
+      "bytes": 2819,
+      "sha256": "e46d1ae1d90aebcce1a392804821345285759d9517073ec4f51bff253d34a00f"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\lint.json",
+      "bytes": 479,
+      "sha256": "d1822535fbfc54f7a667b47529de7ec4df53b2a2f1a719ea2e24fa5d90a39159"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\lint.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\progress.md",
+      "bytes": 1572,
+      "sha256": "f42c8fa538f0965ad047c7ebdf95ac7b82fd05730535a572c75f4355592c7af4"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\red.json",
+      "bytes": 612,
+      "sha256": "423ac9e00021aae42d75f95530f440cc024f615a0e468d33c05efb86151a6811"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\red.log",
+      "bytes": 13996,
+      "sha256": "0bf7205e85b05805cccf30bdc6305306ce1143cdbf0f9fa191a782c9cb945a88"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\red_cli.json",
+      "bytes": 516,
+      "sha256": "984f96a997d508b12da89a7370b67f49f722413b5ce40e19726e0c78e6433742"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\red_cli.log",
+      "bytes": 1076,
+      "sha256": "6e1773c9e3f7015b7167ad2f9afdb34d6378a0a4ff8d473e06297a2d745102c5"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\sparse_checkout_repair.json",
+      "bytes": 714,
+      "sha256": "b744c8096abd068e43faa040851db94355c4523184c4500eb486c1b5cc0cc831"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\task_plan.md",
+      "bytes": 2153,
+      "sha256": "b87d3f67216aa485f214a746c84239abbf87ba82beed59be4fdb348c4513efd1"
+    },
+    {
+      "path": ".planning\\w04-g2-config\\tracked_changes.patch",
+      "bytes": 14513,
+      "sha256": "a42daee6388860ab44869a9c91423036dd4f493c052aa9d0fbb719eef5d5a7a5"
+    }
+  ],
+  "total_bytes": 113509
+}

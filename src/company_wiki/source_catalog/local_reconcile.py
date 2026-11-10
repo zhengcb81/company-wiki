@@ -7,6 +7,9 @@ from pathlib import Path
 import re
 import os
 from typing import Any
+
+from company_wiki.parser_adapters import NativePdfError, read_native_pdf_prefix
+
 from .assertion_service import (
     SOURCE_FACT_FIELDS,
     _evidence_payload,
@@ -260,17 +263,11 @@ def _cn_cover_titles(lines, name, *, coded):
 
 def _cn_cover_scope(original, identity, budget, *, allow_other_kinds=False):
     """Observe a bounded periodic cover, never turn its filename into facts."""
-    import pymupdf as fitz
-
     try:
-        with fitz.open(stream=original.data, filetype="pdf") as pdf:
-            pages = []
-            for number in range(min(3, len(pdf))):
-                budget.check()
-                pages.append(pdf[number].get_text()[:20000])
-    except SourceReadError:
-        raise
-    except (RuntimeError, ValueError) as exc:
+        pages = read_native_pdf_prefix(
+            original.data, max_pages=3, max_chars_per_page=20_000, checkpoint=budget.check,
+        )
+    except NativePdfError as exc:
         raise SourceReadError("blocked", "local_original_unreadable") from exc
     for number, text in enumerate(pages, 1):
         compact = re.sub(r"\s+", "", text)

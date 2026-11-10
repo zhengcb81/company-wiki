@@ -38,7 +38,7 @@
     },
     {
       "id": "P1",
-      "status": "SOURCE_FACTS_CANDIDATE_ONLY; CURRENT_MAIN_REPLAY_OPEN; FINAL_ACCEPTANCE_OPEN; NEW_RUNTIME_C_ACCEPTANCE_OPEN",
+      "status": "CN_H1_09_RECALL_10_OF_10; R4_H1_RECALL_9_OF_12_WORK_EXHAUSTED; T4_SEM_FINAL_OPEN",
       "task": "Close T4/SEM milestone first; then accept new real summaries/content coverage. Historical Huali15/12atoms and Berkshire73/10atoms recovery remain bounded evidence; 15 Berkshire units and full-source partial remain explicit."
     },
     {
@@ -79,7 +79,7 @@
     }
   },
   "current_limits_to_close": [
-    "Source-facts candidate is not merged: replay the 10/10 versus 8/10 selection diagnostic against exact current-main code; then explain the 101-to-102 native-member delta only if still relevant, verify bound locators, complete independent review and restore scratch.",
+    "P3 stream candidate still calls private Reader admission, resets the read budget, applies a fixed byte cap and uses blocking POSIX flock; canonical uses private browser methods and direct SDK. Port to owner public interfaces with tests.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
     "Berkshire 15 unprocessed explicitly retained; full-source/long-frontier generalization remains partial; 10 required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatory PDF/HK/US RPO and genuinely unexposed holdouts"
@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "P2_OWNER_MAINLINES_COMPLETE_D4_D5_SCOPE_ACCEPTED_FAILURE_ROOTS_RECONCILED_SOURCE_FACTS_CURRENT_MAIN_REPLAY_OPEN_WORKSPACE_RECONCILIATION_OPEN",
+  "project_status": "MODULARITY_GATES_PATCH_REVIEWED_P3_PUBLIC_PORTS_OPEN_R4_WORK_EXHAUSTION_OPEN_CLEANUP_OPEN",
   "as_of_date": "2026-11-10",
-  "observed_at_utc": "2026-11-10T20:49:51Z",
-  "next_action": "Run the bounded zero-model source-facts diagnostic against exact CWP master 5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5, then continue evidence-based reconciliation of the remaining worktrees, 17 non-ancestor local refs, and cross-repository runtime artifacts. CWP tracked main is clean; 13,279 untracked files (198,372,372 logical bytes) remain. Do not bulk-clean.",
+  "observed_at_utc": "2026-11-10T22:05:00Z",
+  "next_action": "Finish P3 public Reader streaming and parser ports with isolation tests, then profile R4 repeated work under the unchanged 16M work account. Continue evidence-based worktree retirement.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -717,7 +717,7 @@
     }
   },
   "t4_sem_qual": {
-    "status": "DETACHED_CANDIDATE_ONLY; CURRENT_MAIN_REPLAY_OPEN; FINAL_ACCEPTANCE_OPEN",
+    "status": "CURRENT_MAIN_REPLAY_RECORDED; R4_WORK_EXHAUSTION_AND_SEMANTIC_ACCEPTANCE_OPEN",
     "source_changes_uncommitted": true,
     "tests": [
       {
@@ -757,10 +757,9 @@
       "observer_unchanged": true
     },
     "open_items": [
-      "Run the bounded zero-model source-selection replay against exact current-main code.",
-      "If the miss reproduces, add company-neutral RED and positive controls at the source-meaning owner and fix the generic cause.",
-      "Explain the candidate 101-to-102 native-member delta and verify exact locators only after deciding the current-main result.",
-      "Complete one independent milestone review, archive bound evidence, and restore only scratch created for that run."
+      "Profile the work exhausted R4 selection and eliminate repeated work within the same account.",
+      "Verify all three omitted original units with current source/locator bindings.",
+      "Complete T4 parent-chain and SEM-QUAL-01 input/decoder controls and independent acceptance."
     ],
     "windows_observer_retry": "First attempt failed before source access because os.link raised WinError 5; Windows initial publication now uses same-directory os.rename, with POSIX hardlink behavior retained.",
     "test_counts_non_additive": true,
@@ -772,14 +771,29 @@
       "merged_to_current_main": false,
       "evidence_archive": "review/source-facts-reconciliation-20261110/"
     },
-    "current_main_replay": "OPEN; candidate 10/10 coverage and 8/10 native-prose observations are not current-main acceptance"
+    "current_main_replay": {
+      "cn_h1_source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "cn_h1_selector_version": "0.9.0",
+      "cn_h1_fact_recall": "10/10",
+      "cn_h1_status": "PARTIAL",
+      "receipt": "review/current-main-replay-20261110/cn-h1-09.json",
+      "r4_h1_source_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+      "r4_h1_required_represented": "9/12",
+      "r4_h1_work_used": 15994242,
+      "r4_h1_work_limit": 16000000,
+      "r4_h1_exhausted": true,
+      "r4_h1_native_members": 67,
+      "model_posts": 0,
+      "downloads": 0,
+      "scratch_restored": true
+    }
   },
   "workspace_reconciliation": {
-    "root_untracked_status_entries": 13279,
-    "root_untracked_logical_bytes": 198372372,
+    "root_untracked_status_entries": 13267,
+    "root_untracked_logical_bytes": 182457744,
     "root_tracked_dirty_entries": 0,
     "cleanup_complete": false,
-    "next_action": "Run the bounded current-master zero-model source-facts replay; reconcile the remaining worktrees and all 17 non-ancestor local refs against PWF/evidence; classify root and cross-repository untracked run artifacts. Do not bulk-clean.",
+    "next_action": "Reconcile remaining M3, source-facts, W04 semantics, R1 observation and Dashboard worktrees against accepted public interfaces and current behavior.",
     "p2_status": "dashboard_owner_integration_merged_and_pushed_to_cwp_ff_rf_owner_mains; revenue_forecast_audit_p2_open_after_p1",
     "dashboard_owner_p2_commits": {
       "cwp": "0fc56b25b89da9f3da5921ba64122d9745e1752d",
@@ -790,22 +804,49 @@
     "dashboard_owner_p2_e2e_receipt": "docs/plans/dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json",
     "starting_root_head": "fb868064e4d37a0441373578f4286964e739e6b4",
     "starting_root_matched_origin_master": true,
-    "last_verified_main_head": "5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5",
+    "last_verified_main_head": "e7758d54e162d97c7d97f6a76e3af9cd39ca627b",
     "last_verified_main_matches_origin_master": true,
-    "worktree_count_including_root": 9,
-    "local_branch_count": 23,
-    "non_ancestor_local_branch_count": 17,
-    "latest_workspace_snapshot_utc": "2026-11-10T20:49:51Z",
+    "worktree_count_including_root": 8,
+    "local_branch_count": 20,
+    "non_ancestor_local_branch_count": 15,
+    "latest_workspace_snapshot_utc": "2026-11-10T22:05:00Z",
     "current_tracked_worktree_clean": true,
     "untracked_by_top_level": {
-      ".planning": {"files": 13134, "logical_bytes": 181178404},
-      "docs": {"files": 143, "logical_bytes": 17173810},
-      "tools": {"files": 1, "logical_bytes": 18066},
-      ".workbuddy-ai": {"files": 1, "logical_bytes": 2092}
+      ".planning": {
+        "files": 13134,
+        "logical_bytes": 181178404
+      },
+      "docs": {
+        "files": 143,
+        "logical_bytes": 17173810
+      },
+      "tools": {
+        "files": 1,
+        "logical_bytes": 18066
+      },
+      ".workbuddy-ai": {
+        "files": 1,
+        "logical_bytes": 2092
+      }
     },
     "cache_cleanup": {
-      "current_batch": {"candidate_directories": 269, "removed_directories": 268, "removed_files": 8349, "removed_logical_bytes": 182104966, "tracked_test_fixture_restored": "tools/storage_footprint/tests/fixtures/static_root/.pytest_cache/scratch.txt", "paths_verified_inside_workspace": true, "reparse_points_found": false, "same_named_cache_directories_remaining": 1, "remaining_named_directory_is_tracked_test_fixture": true, "tracked_tree_clean_after_restore": true},
-      "prior_planning_batch": {"directories": 1746, "files": 7891, "logical_bytes": 158237631},
+      "current_batch": {
+        "candidate_directories": 269,
+        "removed_directories": 268,
+        "removed_files": 8349,
+        "removed_logical_bytes": 182104966,
+        "tracked_test_fixture_restored": "tools/storage_footprint/tests/fixtures/static_root/.pytest_cache/scratch.txt",
+        "paths_verified_inside_workspace": true,
+        "reparse_points_found": false,
+        "same_named_cache_directories_remaining": 1,
+        "remaining_named_directory_is_tracked_test_fixture": true,
+        "tracked_tree_clean_after_restore": true
+      },
+      "prior_planning_batch": {
+        "directories": 1746,
+        "files": 7891,
+        "logical_bytes": 158237631
+      },
       "combined_removed_directories": 2014,
       "combined_removed_files": 16240,
       "combined_logical_bytes": 340342597,
@@ -822,14 +863,54 @@
       "w23_r1_cache_archive": "docs/plans/w23-xiaomi-ocr-2026-10-30/evidence/r1-cache/archive-manifest.json"
     },
     "remaining_worktrees": [
-      {"path": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki", "tracked_dirty": 0, "untracked": 81, "state": "PWF/snapshot reconciliation open"},
-      {"path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki", "tracked_dirty": 11, "untracked": 12, "state": "current-main replay and final acceptance open"},
-      {"path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki", "tracked_dirty": 22, "untracked": 317, "state": "overlapping M3/W04 candidate code and evidence require owner review"},
-      {"path": "C:/Users/郑曾波/.codex/worktrees/w04-llm-config-scope-20261011/company-wiki", "tracked_dirty": 3, "untracked": 22, "state": "final handoff exists; overlaps M3 candidate and needs current-main acceptance"},
-      {"path": "C:/Users/郑曾波/.codex/worktrees/w04-narrative-semantics-20261011/company-wiki", "tracked_dirty": 3, "untracked": 92, "state": "candidate semantics changes; final handoff JSON absent"},
-      {"path": "C:/Users/郑曾波/Projects/company-wiki-r1-local-observation", "tracked_dirty": 0, "untracked": 566, "state": "R1 observation/PWF artifacts require canonical comparison"},
-      {"path": "C:/Users/郑曾波/Projects/investment-dashboard/.worktrees/b34-cwp-prospectus", "tracked_dirty": 0, "untracked": 5, "state": "non-ancestor Dashboard branch; outside completed P2"},
-      {"path": "C:/Users/郑曾波/Projects/investment-dashboard/.worktrees/return5-cwp-audit", "tracked_dirty": 0, "untracked": 8, "state": "non-ancestor Dashboard branch; outside completed P2"}
+      {
+        "path": "C:/Users/郑曾波/.codex/worktrees/du11-extractive-runtime/company-wiki",
+        "tracked_dirty": 0,
+        "untracked": 81,
+        "state": "PWF/snapshot reconciliation open"
+      },
+      {
+        "path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki",
+        "tracked_dirty": 11,
+        "untracked": 12,
+        "state": "current-main replay and final acceptance open"
+      },
+      {
+        "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki",
+        "tracked_dirty": 22,
+        "untracked": 317,
+        "state": "overlapping M3/W04 candidate code and evidence require owner review"
+      },
+      {
+        "path": "C:/Users/郑曾波/.codex/worktrees/w04-llm-config-scope-20261011/company-wiki",
+        "tracked_dirty": 3,
+        "untracked": 22,
+        "state": "final handoff exists; overlaps M3 candidate and needs current-main acceptance"
+      },
+      {
+        "path": "C:/Users/郑曾波/.codex/worktrees/w04-narrative-semantics-20261011/company-wiki",
+        "tracked_dirty": 3,
+        "untracked": 92,
+        "state": "candidate semantics changes; final handoff JSON absent"
+      },
+      {
+        "path": "C:/Users/郑曾波/Projects/company-wiki-r1-local-observation",
+        "tracked_dirty": 0,
+        "untracked": 566,
+        "state": "R1 observation/PWF artifacts require canonical comparison"
+      },
+      {
+        "path": "C:/Users/郑曾波/Projects/investment-dashboard/.worktrees/b34-cwp-prospectus",
+        "tracked_dirty": 0,
+        "untracked": 5,
+        "state": "non-ancestor Dashboard branch; outside completed P2"
+      },
+      {
+        "path": "C:/Users/郑曾波/Projects/investment-dashboard/.worktrees/return5-cwp-audit",
+        "tracked_dirty": 0,
+        "untracked": 8,
+        "state": "non-ancestor Dashboard branch; outside completed P2"
+      }
     ],
     "related_repository_inventory": {
       "filing_fetch": "main/origin/main synchronized; tracked clean; 304 untracked runtime/planning items including 205 .mimosa files, 87 pytest-temp files, 9 .ff_jobs records, and config/FMP_API_KEY.txt (contents not read; preserved)",
@@ -843,6 +924,37 @@
       "rebuildable_cache_logical_bytes_removed": 30155225,
       "original_files_removed": 0
     },
-    "du11_extractive_runtime_worktree": "retained pending comparison of 129 differing W04-W08 planning snapshots; no source-code delta and all original-document paths verified in root"
+    "du11_extractive_runtime_worktree": "retained pending comparison of 129 differing W04-W08 planning snapshots; no source-code delta and all original-document paths verified in root",
+    "new_retirement": {
+      "w04_config": "25-file SHA archive; current generic config scope 25 passed; worktree and merged local branch removed",
+      "duplicate_alias_refs_retired": 2,
+      "old_test_control_files_removed": 4,
+      "old_push_log_files_compacted": 7,
+      "old_push_logs_bytes": 15896545,
+      "compressed_log_bytes": 1430555,
+      "original_files_removed": 0
+    }
+  },
+  "implementation_20261110": {
+    "review": "PASS including incremental language sampling review",
+    "receipt": "review/current-main-replay-20261110/README.md",
+    "code": "public parser port for official import, cover scope and language; metadata-only observation is diagnostic; gold selection scoped to request",
+    "tests": {
+      "intermediate_combination": 147,
+      "final_combination": 123,
+      "affected_integration": 10,
+      "config_scope": 25,
+      "independent_subset": 42,
+      "counts_overlap": true
+    },
+    "gates_removed": [
+      "source-case non-SHM mtime rejection",
+      "unrelated gold duplicates blocking a selected sample"
+    ],
+    "other_repairs": [
+      "explicit UTF-8 in tests",
+      "retired official-import and replay observation entrypoints"
+    ],
+    "publication": "code and PWF included in this release"
   }
 }

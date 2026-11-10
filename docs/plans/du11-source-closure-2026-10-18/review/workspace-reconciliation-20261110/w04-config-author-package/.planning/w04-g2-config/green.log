@@ -1,0 +1,74 @@
+......................................................................F. [ 70%]
+..............................                                           [100%]
+================================== FAILURES ===================================
+___________ test_production_yaml_requests_user_selected_mimo_flash ____________
+tests\unit\test_narrative_model_config.py:249: in test_production_yaml_requests_user_selected_mimo_flash
+    raw = yaml.safe_load(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\.codex\\worktrees\\w04-llm-config-scope-20261011\\company-wiki\\config.yaml'
+============================== warnings summary ===============================
+tests\unit\test_config.py:155
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_config.py:155: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:15
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:15: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:43
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:43: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:60
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:60: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:70
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:70: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:97
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:97: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:112
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:112: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:122
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:122: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_defaults.py:135
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_defaults.py:135: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_client.py:28
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_client.py:28: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_client.py:76
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_client.py:76: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_client.py:189
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_client.py:189: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+tests\unit\test_llm_client.py:233
+  C:\Users\郑曾波\.codex\worktrees\w04-llm-config-scope-20261011\company-wiki\tests\unit\test_llm_client.py:233: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.unit
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_model_config.py::test_production_yaml_requests_user_selected_mimo_flash
+1 failed, 101 passed, 13 warnings in 20.87s

@@ -20,9 +20,11 @@ from tools.document_understanding_benchmark.gold import (
     GOLD_DIR,
     GoldError,
     load_bindings,
+    load_gold,
     load_gold_dir,
 )
 from tools.document_understanding_benchmark.records import validate_gold
+from tools.document_understanding_benchmark.schema import BenchmarkSchemaError
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 BINDINGS_CANDIDATES = (
@@ -51,6 +53,36 @@ def test_gold_set_loads_and_has_both_scopes():
     scopes = {record["scope"] for record in records}
     assert "development" in scopes
     assert "holdout" in scopes, "a benchmark with no holdout cannot measure generalisation"
+
+
+def test_scoped_gold_load_ignores_unrelated_duplicates(tmp_path):
+    gold = load_gold(GOLD_DIR / "cn-h1.json")
+    (tmp_path / "requested.json").write_text(json.dumps(gold), encoding="utf8")
+    for name in ("old", "new"):
+        (tmp_path / f"{name}.json").write_text(
+            json.dumps({**gold, "sample_id": "other-sample"}), encoding="utf8",
+        )
+    assert load_gold_dir(tmp_path, sample_ids={gold["sample_id"]}) == [gold]
+    with pytest.raises(BenchmarkSchemaError, match="duplicate gold sample_id"):
+        load_gold_dir(tmp_path, sample_ids={"other-sample"})
+    with pytest.raises(BenchmarkSchemaError, match="duplicate gold sample_id"):
+        load_gold_dir(tmp_path)
+
+
+def test_scoped_gold_load_reports_each_missing_request(tmp_path):
+    gold = load_gold(GOLD_DIR / "cn-h1.json")
+    (tmp_path / "requested.json").write_text(json.dumps(gold), encoding="utf8")
+    with pytest.raises(GoldError, match="missing-sample"):
+        load_gold_dir(tmp_path, sample_ids={gold["sample_id"], "missing-sample"})
+
+
+def test_scoped_gold_load_keeps_selected_schema_validation(tmp_path):
+    gold = load_gold(GOLD_DIR / "cn-h1.json")
+    (tmp_path / "requested.json").write_text(
+        json.dumps({**gold, "schema_version": "invalid"}), encoding="utf8",
+    )
+    with pytest.raises(BenchmarkSchemaError):
+        load_gold_dir(tmp_path, sample_ids={gold["sample_id"]})
 
 
 def test_every_gold_record_has_facts_and_expected_families():

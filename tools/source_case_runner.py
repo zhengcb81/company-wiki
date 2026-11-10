@@ -635,14 +635,14 @@ def execute(case, *, checkpoint_sink=None):
             original_files_before, record["original_files_after"]
         )
         record["original_files_unchanged"] = record["original_files_comparison"][
-            "strict_files_and_shm_bytes_pass"
+            "all_supplied_files_content_unchanged"
         ]
         record["database_after"] = {str(p): file_state(p) for p in db_paths}
         record["database_comparison"] = compare_storage_observations(
             before, record["database_after"]
         )
         record["database_unchanged"] = record["database_comparison"][
-            "strict_files_and_shm_bytes_pass"
+            "all_supplied_files_content_unchanged"
         ]
         record["runtime_after"] = runtime_state()
         record["runtime_unchanged"] = record["runtime_after"] == runtime
@@ -698,7 +698,12 @@ def main(*, default_manifest=None, output_root=None):
             }
         record["observer_before"] = observer_before
         record["observer_after"] = observer_state()
-        record["observer_unchanged"] = record["observer_after"] == observer_before
+        record["observer_comparison"] = compare_storage_observations(
+            observer_before, record["observer_after"]
+        )
+        record["observer_unchanged"] = record["observer_comparison"][
+            "all_supplied_files_content_unchanged"
+        ]
         persist_checkpoint(record, "RESULT_READY")
         try:
             encoded = encode_receipt(record)

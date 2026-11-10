@@ -1,16 +1,15 @@
-**2026-11-10 20:49 UTC 状态：Dashboard owner P2 已并入 CWP/FF/RF 各自主线；主线循环中的 RF 实际采用 P2 仍 OPEN，依赖 P1。D4/D5 解耦在冻结的接口与组合测试范围内 ACCEPTED；T4 source-note-parent + SEM-QUAL-01 仍未验收。** 不能把“D4/D5 已通过”表述成全项目永远没有耦合：它证明已冻结的公开接口和测试范围可以独立协作，Dashboard P3/P4、后续新缺口仍是开放工作。T4 候选代码仍在 detached worktree `C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki`，未进入当前主线；此前单份 H1/selection 收据绑定候选源码，不能代表当前主线已通过。失败审计已按 10 类根因完成对账：4 个有真实结果的观察/审计误拒，另有 1 个合法 error DTO 旧 schema 拒收；宽/窄口径和当前代码证据见 [误拒根因对账](review/failure-root-cause-reconciliation-20261110.md)。CWP 当前主线为 `5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`，P2 与工作区现值见 [当前状态](CURRENT_STATUS.md)。完整 D5 收据见 [ROOT D5 closeout](review/decoupling-recheck-20261104/root-d5-final/README.md)，source-facts 对账见 [候选证据](review/source-facts-reconciliation-20261110/README.md)，整体工区核销见 [workspace reconciliation](review/workspace-reconciliation-20261110/README.md)。
+# 主线实施计划
 
-# 主线剩余实施计划
+2026-11-10 本轮接口、工具和清理已独审。实时入口为 CURRENT_STATUS.md/json。当前结果与三个后续责任分别记录。
 
-**当前：上一轮逐项表只证明其定义范围；新确认残留见本轮架构复核，已完成工程不重复施工。**
+## 下一步
 
-## Next Step — 在当前主线复验 source-facts 缺口并完成本地工作区核销
+1. 优先完成 Dashboard P3 的公开 Reader 流和解析端口接线。旧 stream 候选的私有 Reader 访问、预算重置、固定帽和阻塞 flock 由 owner 修复。canonical 私有扫描和 PDF SDK 直连通过公开接口收口。
+2. R4 正式半年报 9/12，工作量耗尽，三项原文已解析。对重复处理做单账户分诊，先泛化 RED 再优化，在原 16M 内验收。
+3. cn-h1 0.9 业务召回 10/10 的源码冻结结果已有独立收据。T4 父链和 SEM-QUAL-01 仍需现行输入/解码反控与真实独审，之后再做新版摘要、缓存恢复、RF 实际采用和公司循环。
+4. 继续核销剩余工作树与未跟踪产物。W04 config 已归档退休，两个重复 ref 和四个旧测试控制文件已清理，七份历史失败 push 日志完成原样压缩。
 
-D5 代码已按快进方式进入 CWP master 与 StockWiki master。Dashboard owner P2 已分别进入 CWP/FF/RF 正式主线并和 upstream 同步；本计划另一个 RF 实际采用 P2 仍 OPEN。此前的 H1 观察来自未合并的 source-facts 候选，显示 business-coverage guard 10/10，但 native-prose guard 8/10；预算未耗尽、没有模型 POST。它不是当前主线验收。先用当前 `master` 的准确版本做小范围零模型 source-selection replay；若缺口复现，按责任层增加泛化 RED/正例并修复，再只跑受影响测试。并行完成已核实可处理的旧工作树/本地分支清理；最新逐项状态见 [workspace reconciliation](review/workspace-reconciliation-20261110/README.md)。保留尚未判定或仍有独立验收用途的证据与 worktree。只有当前主线复现并通过复测、绑定完整来源/locator 证据后，才收口 T4/SEM 并恢复真实摘要。不得先跑整批公司或付费摘要。
-
-候选 H1 原收据中的 12/12、112 spans、102 native members、28.42 秒及“0 POST/下载/原件复制”仍是被记录的运行观察，但它绑定的不是当前主线源码；101→102 差异也尚未解释。归档副本位于 [source-facts reconciliation](review/source-facts-reconciliation-20261110/)，该副本不等于主线复验或独立验收。
-
-**阶段边界：** D4/D5 通过只关闭本计划冻结范围内的解耦，不等于新摘要、跨运行缓存恢复、RF 实际采用或八家公司循环完成。模块通过版本化公开合同协作是预期设计，不要求零依赖。关键节点集中测试与独审，不为每个小 helper 增加签收；测试环境必须隔离并恢复。
+实施细节、测试计数和两份半年报来源 SHA 在 review/current-main-replay-20261110/README.md。当前接口修复通过工程独审。后续每个大节点集中做测试与独审。
 
 ## P0-D — 六项解耦遗漏（D4 CLOSED）
 

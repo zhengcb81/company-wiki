@@ -1,0 +1,12 @@
+{
+  "root_head": "159b993e2f4d36c7e86dc12c9d6028f4a31b353a",
+  "tracked_config_sha256": "ecf4b420fd863cb75bbf9cbfd876856e02ef8279f5c79214a222d3a9ddbc45ce",
+  "bytes": 3514,
+  "canonical_config_sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+  "canonical_unchanged": true,
+  "same_content": true,
+  "line_endings": "HEAD LF; canonical CRLF; isolated file exact HEAD blob",
+  "action": "materialized exact HEAD blob in isolated sparse checkout only",
+  "root_approval": "ROOT confirmed isolated checkout repair; no production changes",
+  "first_attempt": "strict byte SHA equality rejected Windows line-ending difference before writes; normalized bytes verified identical"
+}

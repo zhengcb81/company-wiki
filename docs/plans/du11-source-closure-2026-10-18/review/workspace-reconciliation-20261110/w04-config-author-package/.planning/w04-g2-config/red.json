@@ -1,0 +1,20 @@
+{
+  "phase": "RED",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_w04_llm_config_scope.py",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 10.116,
+  "log_sha256": "0bf7205e85b05805cccf30bdc6305306ce1143cdbf0f9fa191a782c9cb945a88",
+  "product_sha256": {
+    "scripts\\config.py": "c7889864f3693f9f28f8c4d88bb8f9e8a56564eebf533bbba105a53259cb9f94",
+    "scripts\\narrative_batch_configured.py": "3def255fb8f1488955b2fc4c8023eafbf76e4ba0dd3cb4f96f47aecdb540a696"
+  },
+  "exceptions": "captured verbatim in red.log"
+}

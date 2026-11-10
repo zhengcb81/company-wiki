@@ -97,17 +97,16 @@ def _text_for_mime(data: bytes, mime_type: str, *, normalization=None) -> str:
         except (RuntimeError, ValueError) as exc:
             raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED") from exc
     if mime_type == "application/pdf":
+        from company_wiki.parser_adapters import NativePdfError, read_native_pdf_prefix
+
         try:
-            import pymupdf as fitz  # type: ignore[import-untyped]
+            return "\n".join(read_native_pdf_prefix(
+                data, max_pages=5, max_chars_per_page=_MAX_SAMPLE_CHARS,
+                checkpoint=lambda: None,
+            ))[:_MAX_SAMPLE_CHARS]
         except ImportError:
             raise NarrativeLanguageError("SOURCE_LANGUAGE_PDF_UNAVAILABLE") from None
-        try:
-            with fitz.open(stream=data, filetype="pdf") as document:
-                return "\n".join(
-                    document.load_page(index).get_text()
-                    for index in range(min(5, document.page_count))
-                )[:_MAX_SAMPLE_CHARS]
-        except Exception as exc:
+        except NativePdfError as exc:
             raise NarrativeLanguageError("SOURCE_LANGUAGE_PDF_INVALID") from exc
 
     if mime_type not in _SUPPORTED_TEXT_MIME_TYPES:

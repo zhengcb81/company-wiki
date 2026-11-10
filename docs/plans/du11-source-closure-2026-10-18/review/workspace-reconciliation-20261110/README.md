@@ -1,5 +1,15 @@
 # 本地工作区核销 — 2026-11-10
 
+## 22:05 UTC 更新
+
+W04 config 的 25 个修改/未跟踪文件和 binary patch 已逐文件核 SHA，归档在 w04-config-author-package。当前 Config.load(validation_scope="llm") 已承担其职责并通过 25 项现行测试，旧工区与已并线本地分支已经移除。
+
+重复别名 codex/d00-cwp-canonical-calendar-fix 与 codex/dashboard-cwp-readiness 已删除，全部 commit 分别由 codex/d00-return5-cwp-audit 和 codex/dashboard-cwp-return4-d00-fix 保留。现在有 8 个注册工区、20 个本地分支、15 个非祖先分支。
+
+七份原始失败 push 日志从 15,896,545 bytes 压缩为 1,430,555 bytes，完整 gzip 已往返核验，原文件删除。路径与 SHA 映射见 retired-push-logs/manifest.json。另清除四个旧进程测试控制文件，共17bytes。已解释产物随本次提交归档，剩余运行产物继续逐项核销。
+
+门禁与解析边界的新增修复和两份真实半年报复验见 ../current-main-replay-20261110/README.md。本节覆盖较早快照的状态数字。
+
 ## 20:49 UTC 复核更新（覆盖较早快照的当前值）
 
 - CWP 代码盘点基线 `master == origin/master == 5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`；FF `main == origin/main == f65e6ca75fbce0616e65870f0aea78b793ef883c`；RF `main == origin/main == b005a179280ee19695578bdba9427b4dd44cdd73`。三个 Dashboard owner P2 提交均在各自 main 中。以上是本地 refs 对账，没有在这次快照声称新鲜查询 GitHub 服务端；随后的本次提交只更新 PWF，不改产品代码。
