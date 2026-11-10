@@ -63,3 +63,12 @@ FF 与 RF 的旧作业层都曾根据过时的 PID 文件删除锁。两个独�
 - P2 的根因范围还剩一项生产数据缺口：当前 CWP 官方身份刷新器写入 CN 统一社会信用代码、HKEX 证券 ID、US CIK，但部署快照没有跨市场 LEI/ISIN。两个真实双上市样本的 E2E 使用可验证的 GLEIF/存托凭证公开证据构造隔离快照，证明算法与负例；它不能证明生产路由已自动得到这些 issuer links。下一步需定通用权威标识的获取/刷新 owner 和过期策略，再用真实部署只读验证，不可手填公司特例。
 - RF strict canonical 检查已完成：精确 `compute_input`、`compute_result`、`job.json` 的孤立 surrogate 数均为 0；input canonical hash `6169ea8aca81638d83026153474d584ca19be38c166bb71ab0ae4e76924cde59` 与 result 中记录相同，result strict payload hash `04768c2742d663e3e7ac748c9fde8c7648cc1cd0e424e4d931e150379c038816` 与自哈希相同；完整 input raw SHA `a799977ac7ee30c6be4cbc254a03bfc872064b8d5d90f3e5609c95ac02018b2d`、result raw SHA `c0dce8c3df7e49431a351de67d15847db40a4ffd7bfa140cf378db437b017963`。无需放宽 strict UTF-8 哈希合同。MDB 主目录在入册前通过 RF 公开只读 CLI 查询为 0 条，catalog revision `a2ae0e7179f9d76b47bc81788e1501ede2da25efb6a59946748556b87c295a3d`。
 - 首次真实 CLI 入册未写目录，拒绝原因是 importer 错误要求 `source-preparation-result/1` 顶层有 `status=source_candidate`。真实 DTO 顶层只有 schema、source、filing_fetch，候选状态由 `filing_fetch.status=source_candidate` 承载；人工合成 fixture 之前错误地添加了不存在的顶层状态。应以 owner 的实际公开结果形状为合同，删除虚假顶层条件并使 fixture 反映真实形状；保留 nested filing 的 `reused_existing`、零下载、annual_report/FY2025 和 CWP SourceRef/manifest 校验。失败后公开 list 仍为 0 条，revision 未变。
+
+## P2 owner 实施复核补充（2026-11-10）
+
+- 静态检查暴露 `CompanySourceIndex` 通过伪造窄 request 与 `cast(Any)` 调用 `SourceResolver._identity_matches` 私有实现。修正为 SourceResolver 的公开 `match_source_identity` 输入契约，并将 SourceVersionReader、local_reconcile 的跨模块调用一起迁移；正常 market/security/issuer-link 判定语义一致。
+- 独立审查发现公开 matcher 的无挂牌范围、仅 issuer-link 请求会错误早返为 `match`。现在明确返回 `incomplete` 并由 `test_issuer_link_without_listing_scope_is_incomplete` 锁定；最终独审通过，无 stop-ship。
+- CWP 新增 SEC 20-F 挂牌证据路径仅接受已验原件、SEC accession/URL/CIK、对应官方 US listing 和 SEC 表格中的精确证券/交易所；由 canonical writer 导入并经 SourceCatalog 公共登记。没有放宽普通 official-source 流程，也不按公司名或 ticker 生成关系。
+- 阿里 FY2025 与 B 站 FY2022 的真实 HKEX 原件 SHA、issuer-link 来源和零下载复用证据见 `validation/p2_cross_market_e2e_receipt.json`。CWP focused 127 passed、mypy 470 source files、Ruff 通过；FF focused 11 + M3 21 passed，两个 owner 候选已推送。完整远端 CI 尚待确认。
+- 测试必须使用满足 Windows 路径长度的短临时根。默认外部沙箱临时目录会令旧 CWP acquisition 锁文件路径过长并失败；使用仓库内短路径基准后同一套件 127 项通过。测试回执确认自动临时子目录清除；手动清理了前两轮失败测试留下的自有临时目录，未改原件或业务数据。
+- 当前部署 security master 文件只有 CN/HK/US 各自的身份列表，尚无普遍跨市场链接。因此本轮证明的是通用匹配、来源绑定与真实原件复用逻辑，仍不证明生产数据自动覆盖已闭环；下一步工作是 owner 级关系来源/刷新机制和实际部署只读验收。

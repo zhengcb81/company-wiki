@@ -63,4 +63,13 @@
 - 清理本轮 RF pytest 临时目录及两份临时部署配置、调试日志和 `__pycache__`；保留必要的无路径回执和公开证据样本。提交前代码只在三个 owner 隔离 worktree 候选分支。
 - 最终跨 owner 定向复跑：CWP 70、FF 36、RF 45 项通过。测试启动时两次临时路径设置暴露环境问题：第一轮 `--basetemp` 的父目录未创建，`tmp_path` 初始化失败；显式载入 `pytest-asyncio` 后，稍长的 basetemp 被 Windows 路径防护搬到更长的沙箱目录，CWP 文件锁相关用例因此失败。改用 41 字符短路径后同一 CWP 套件 70/70 通过；不是产品代码回归。相关临时目录已清理，项目测试目录恢复。
 - 对跨市场数据根因作了额外官方源核对（只读、未改生产数据）：CWP refresh 当前不消费 HKEX ISIN 专项表；HKEX 公布 HKEX 指派和其他 NNA 指派两种证券 ISIN 表。GLEIF 公开 API 和 ISIN→LEI 文件适合做通用补强，但官方说明当前文件覆盖参与早期 NNA 的新发 ISIN、legacy 覆盖仍属后续计划，且映射列表未提供 CIK→LEI 文件。结论是只加入 HKEX ISIN / GLEIF 不足以证明 US CIK 与全部 HK/CN 挂牌贯通；P2 继续开放，下一步改由 CWP 为有官方来源证据的 issuer/listing 关系定义通用 owner 合同，FF 再消费该公开合同。详细来源及不使用名称猜测的实施边界见 `findings.md` 与 `task_plan.md`。
-- 当前所有者分支在本地与对应 origin 分支 SHA 一致，CWP 最新计划跟进提交为 `79ebd33f1064b14950ef308d1695bcebd58be676`；FF `58627a66e6c9603f836aaea20b6924a7dd8aa14d`；RF `b005a179280ee19695578bdba9427b4dd44cdd73`。三个工作树已清洁。固定 push fast-gates 通过，但远端完整 CI 仍待确认。
+- 2026-11-09 收尾时的 owner 分支快照（历史记录，已由下方 2026-11-10 更新取代）：CWP `79ebd33f1064b14950ef308d1695bcebd58be676`、FF `58627a66e6c9603f836aaea20b6924a7dd8aa14d`、RF `b005a179280ee19695578bdba9427b4dd44cdd73`。当时固定 push fast-gates 通过，远端完整 CI 尚待确认。
+
+## 2026-11-10 P2 实施更新
+
+- CWP 候选提交 `e3b9a9219cb0c9e48ea8f73c21ff028880564463` 已推送至 `codex/dashboard-p2-cwp-market-20261109`；FF 候选 `f65e6ca75fbce0616e65870f0aea78b793ef883c` 已推送至 `codex/dashboard-p2-ff-market-20261109`。两仓只改各自 owner 范围，未并入主线。push fast-gate 分别 18、11 项通过；完整远端 CI 仍未确认。
+- CWP 修复跨模块私有身份方法调用：CompanySourceIndex、SourceVersionReader、local_reconcile 现在都经 SourceResolver 的公开 `match_source_identity` 契约。独立审查先发现“只有 issuer_link_id 会错误匹配”的 fail-open；实现改为 `incomplete` 并加回归，最终复审通过。
+- CWP 定向测试 127 passed；470 个源文件 mypy、Ruff、`git diff --check` 通过。SEC 20-F 的公开关系登记链路经 CanonicalSourceWriter 与 SourceCatalog 集成测试验证：登记出的 HK/US 挂牌、源 SHA 与已验证原件一致。FF 跨市场 11 项与 M3 兼容 21 项通过；FF 独立审查通过。FF 完整本地套件剩余 8 个失败已在精确基线复现，属既有失败，本次 P2 定向测试不受影响。
+- CWP/FF 候选提交后，重新运行真实原件端到端脚本：阿里 FY2025 HKEX 年报 SHA `c7806bf5da28032e1b15dbe9a334011d65f5d69efe3bf11a9d212f64f07ca9b2` 与 B 站 FY2022 HKEX 年报 SHA `712e23dc04fb7efa3a4d31b839b08eaf6ff92ea1d4c89f6458ace095b8bd24cf` 均在隔离快照完成跨市场复用；来源市场、证券、报告期、文种、as-of 保持准确，provider 未启动，下载数为 0，生产安全证券快照未改。测试结束后删除了本轮临时取得的官方 PDF 和隔离目录，源公司目录原件未改。
+- MDB 继续只有 1 条既有成功报告，RF 公开 list/get/run/attempt 回读一致；本次没有重跑预测、重复入册或写 RF canonical root。报告仍保留 1 条 partial citation（缺 locator）和 10 条质量缺口。
+- **剩余阻塞**：正式 CWP 身份快照还缺普遍、可追溯的跨市场 issuer-link 来源数据。SEC 20-F 证明路径已进入 CWP owner 代码，但真实 E2E 使用隔离快照，不能据此宣称部署自动关联已完成。下一步先接通通用的权威关系来源/刷新流程，再用实际部署 cache-only 验阿里、B 站和歧义负例；P2 保持 `in_progress`。本节覆盖旧的 2026-11-09 候选提交状态记录。

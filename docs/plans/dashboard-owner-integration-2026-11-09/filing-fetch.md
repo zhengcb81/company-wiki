@@ -28,9 +28,9 @@ E12 已证实 CLI 等价链的复用与具名拒绝。用独立临时 CWP 根、
 2. 给 Dashboard D00 一个窄适配器修复。其 `backend/dashboard/adapters/m8_owner_jobs/ff_job.py` 在 run 传配置，在 act(reconcile) 漏传。FF 公共 reconcile 已接收 `--config`。在 Dashboard 仓用两个隔离 connector/store 先写失败用例，断言运行和只读核对同一配置及来源实例，再修转发。FF 保持自己的公开接口。
 3. 在最终组合用实际 Dashboard 适配器调用 FF public CLI，验证默认/非默认根、显式不可用、复用、恢复和零重复开销。CLI 单独运行的记录按实际范围引用。
 
-## FF P2 · 跨市场请求合同验收（2026-11-09）
+## FF P2 · 跨市场请求合同验收（2026-11-10 更新）
 
-- FF 现在把用户选定的挂牌市场、issuer-link、期次、文种及 `as-of` 分别传给 CWP；CWP 返回的原件来源市场仍以已验 `SourceRef` 为准，不能被请求挂牌市场覆盖。绑定不完整或有冲突时使用具名拒绝，正确跨市场发行人可复用。
-- 36 项定向测试、Ruff、`git diff --check` 和独立审查通过。真实 HKEX 阿里 FY2025、B 站 FY2022 年报在隔离 CWP 快照中从 US 挂牌查询命中同一来源 SHA，且没有启动 provider 或下载。错误市场、security、period、form 和 as-of 负例均拒绝；细节见总计划 `validation/p2_cross_market_e2e_receipt.json`。
-- FF 候选遵守 owner 写域，没有改 CWP 身份/来源数据。CWP 生产快照缺 LEI/ISIN 的上游事实问题仍开放，需等通用标识 feed 接通后在实际部署复验；FF 不得用 ticker/name 猜发行人或伪造 source market。
-- 已提交并推送候选 `58627a66e6c9603f836aaea20b6924a7dd8aa14d` 至 `origin/codex/dashboard-p2-ff-market-20261109`。本机 push fast-gate 11 项通过；push hook 标记 full validation pending，未在本轮取得远端全量 CI 结果。候选尚未与 CWP 生产标识数据源一起切换。
+- FF 把用户选定的挂牌市场、issuer-link、期次、文种及 `as-of` 传给 CWP；CWP 回来的原件来源市场仍由已验 `SourceRef` 决定，不会被请求挂牌市场覆盖。issuer 范围下有多个目标挂牌时保留歧义，不按 ticker/name 自选；CWP 没有经验证关系时具名拒绝。
+- 独立审查通过，无阻断项。跨市场定向套件 11 项和 M3 兼容回归 21 项通过，Ruff、mypy public contracts、host-assumption guard 与 `git diff --check` 通过。阿里 FY2025、B 站 FY2022 真实 HKEX 原件的隔离 E2E 及市场、证券、期次、文种、`as-of` 负例记录在总计划 `validation/p2_cross_market_e2e_receipt.json`。
+- 提交 `f65e6ca75fbce0616e65870f0aea78b793ef883c` 已推送至 `origin/codex/dashboard-p2-ff-market-20261109`，push fast-gate 11 项通过。FF 本地完整套件仍有 8 项已在精确基线 `58627a66e6c9603f836aaea20b6924a7dd8aa14d` 复现的既有失败，不归因于本次 P2；全量远端 CI 结果尚未确认。
+- FF 没有改 CWP 数据或代码。CWP 部署身份快照缺少普遍跨市场 issuer-link 事实仍是 P2 的剩余数据闭环；FF 必须继续只消费 CWP 公开、已验证的关系和来源事实。

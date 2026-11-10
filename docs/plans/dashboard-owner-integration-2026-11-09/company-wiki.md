@@ -39,9 +39,9 @@
 
 保留 E13 的现行语义，当前完整原文流不声明 Range。验证完整 GET 和 Range 的明确不可用行为，Dashboard 展示按实际能力。未来需要 Range 时独立设计并验收 206、416、If-Range、范围摘要和取消。未发布能力不影响前三批。
 
-## CWP P2 · 跨市场匹配验收（2026-11-09）
+## CWP P2 · 跨市场匹配验收（2026-11-10 更新）
 
-- 通用 issuer-link 判定及来源市场/挂牌市场/期间隔离已实现并通过 70 项定向测试、Ruff 和独立审查。离线真实原件组合使用阿里 FY2025、B 站 FY2022 HKEX 年报，GLEIF LEI/ISIN 与存托凭证发行人公开证据；US BABA/BILI 挂牌可复用同 issuer 的 HK 原件，匹配结果保留 HK 来源市场和原 security ID。
-- 反例拒绝错误财年、文种、财政期间、来源证券、来源市场以及 `as-of` 晚于已知发布日期的来源。Query/local_prepare/ensure 使用同一候选语义，E2E 对原件 SHA 复核且零下载。
-- **生产数据闭环仍未完成**：部署 CWP 身份快照当前没有 LEI/ISIN，现有 refreshers 只提供 CN org ID、HKEX 证券 ID、US CIK。故测试证明通用匹配逻辑，不证明线上能自动建立跨市场 issuer link。后续须接入带来源、发布时间与刷新规则的通用权威标识 feed，再在实际部署对 BABA/BILI 做只读复验；禁止把 fixture 中两个公司的 ID 写入生产或加入公司特判。
-- 已提交并推送候选 `17b960a4657b93820d4f6cf99b1fdd6f25a8d2c1` 至 `origin/codex/dashboard-p2-cwp-market-20261109`。本机 push fast-gate 18 项通过；push hook 标记 full validation pending，未在本轮取得远端全量 CI 结果。生产 issuer 标识 feed 闭环前保持 P2 开放，不把候选描述为已经切换生产。
+- 通用 issuer-link 判定及来源市场/挂牌市场/期间隔离已实现。阿里 FY2025、B 站 FY2022 的真实 HKEX 年报原件在隔离快照中从 US BABA/BILI 挂牌复用同一来源 SHA；原件准备、CWP query、local_prepare、ensure 和 FF query/ensure 均零下载，结果保留 HK 来源市场及来源证券代码。错误财年、文种、期次、来源证券/市场和晚于 `as-of` 的来源均拒绝。收据与原件 SHA 见总计划 `validation/p2_cross_market_e2e_receipt.json`。
+- 本轮根因修正了 CWP 模块间私有身份方法穿透：`SourceResolver.match_source_identity` 成为公开 owner 接口，CompanySourceIndex、SourceVersionReader 和 local_reconcile 经该接口使用相同的 market/security/issuer-link 判定；删除假 request DTO 与 `cast(Any)`。只有 issuer-link 而没有挂牌范围时返回 `incomplete`，已加回归测试。SEC 20-F 关系证据也支持 `provider=sec` 的规范入库路径；新集成测试从 CanonicalSourceWriter 导入经验证字节的原件，再经公开 `SourceCatalog.register_sec_20f_listing_link` 登记并核对 HK/US 挂牌与 SHA。独审无阻断项。
+- 最终 CWP 定向套件 **127 passed**；`python -m mypy src` 检查 470 个源文件通过；Ruff 与 `git diff --check` 通过。提交 `e3b9a9219cb0c9e48ea8f73c21ff028880564463` 已推送至 `origin/codex/dashboard-p2-cwp-market-20261109`，push fast-gate 18 项通过。远端完整 CI 尚未核实，不能记为 CI 全绿或并入主线。
+- **生产数据闭环仍未完成**：当前正式 CWP 身份快照没有普遍跨市场 LEI/ISIN 关系。已实现 SEC 20-F 证据登记入口，但当前真实样本 E2E 使用隔离、来源可追溯的身份快照，不能证明部署快照已自动得到所有 issuer links。下一步接通可追溯的关系来源/刷新流程并对阿里、B 站及歧义负例做部署 cache-only 验证；禁止把样本 ID 写入生产或加入公司特判。P2 保持 `in_progress`。
