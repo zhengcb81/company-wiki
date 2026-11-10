@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from .config import CatalogConfigError, load_catalog_config
     from .models import (
         CATALOG_SCHEMA_VERSION,
+        CatalogBrowseVersion,
         CatalogConfig,
         NORMALIZER_VERSION,
         ProcessingReport,
@@ -22,6 +23,7 @@ if TYPE_CHECKING:
         SUMMARIZER_VERSION,
         ScanReport,
         SECTION_EXTRACTOR_VERSION,
+        SourceVersionIdentity,
     )
     from .service import SourceCatalog
     from .resolver import (
@@ -135,6 +137,7 @@ _EXPORTS_BY_MODULE = {
     ".config": ("CatalogConfigError", "load_catalog_config"),
     ".models": (
         "CATALOG_SCHEMA_VERSION",
+        "CatalogBrowseVersion",
         "CatalogConfig",
         "NORMALIZER_VERSION",
         "ProcessingReport",
@@ -144,6 +147,7 @@ _EXPORTS_BY_MODULE = {
         "SUMMARIZER_VERSION",
         "ScanReport",
         "SECTION_EXTRACTOR_VERSION",
+        "SourceVersionIdentity",
     ),
     ".service": ("SourceCatalog",),
     ".resolver": (
@@ -284,6 +288,7 @@ __all__ = [
     'AdapterProcessError',
     'CANONICAL_IMPORT_SCHEMA_VERSION',
     'CATALOG_SCHEMA_VERSION',
+    'CatalogBrowseVersion',
     'CatalogConfig',
     'CatalogConfigError',
     'CatalogOperationLockedError',
@@ -353,6 +358,7 @@ __all__ = [
     'SourceReadError',
     'SourceRef',
     'SourceVersionReader',
+    'SourceVersionIdentity',
     'VerifiedContent',
     'SecurityIdentityError',
     'SecurityIdentityResolutionError',

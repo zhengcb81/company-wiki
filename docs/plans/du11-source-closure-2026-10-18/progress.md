@@ -465,3 +465,11 @@ R4工作量探针在28e18043c完成，24.865秒，9/12保持，source runtime稳
 ## 2026-11-10 22:31 UTC 最终发布结果
 
 身份修复源码28e18043ccad06495a0843760ea46c79e0d2222c已推送，远端CI42914407976 completed/success。首轮42912332126两例失败继续保留，相关59项与独立22项通过，第二次push smoke18项5.58秒。下一步按P3公开owner接口优先，再用已有R4工作量收据改进统一预扣与实际计费关系。
+
+## 2026-11-10 23:17 UTC — P3 Catalog/Browser 端口与 Windows 长路径根修
+
+- 在主线 0a74c7478b2ffa78cb78547d83416126eeef9a15 上先写边界测试。初始三个新 contract 检查分别复现 Reader 调 Catalog 私有注解、Browser 直接 SQL、SourceCatalog 缺少 owner query ports。实现把排序归 Catalog owner，浏览与 reopen 通过冻结 pathless DTO。Reader 使用公开 source_location_candidates；Browser 不再知道 metadata JSON field path。
+- Independent review 进一步发现 Windows 长路径只在 _file_mutex primitive 被覆盖，CatalogOperationLock 仍直接创建/读/删除 operation.lock。把 Win32 extended path 适配提升为 company_wiki.file_mutex 公共接口，按 UTF-16 code units 选路径形式，支持盘符与 UNC；CatalogOperationLock 全生命周期和 acquisition ensure_locks 创建都走该 adapter。
+- 浏览日期第一次投影误将旧的 regex-only 行为收紧为日历日期校验。新增 RED 用例后恢复旧 wire 形状语义。resolver handle 消费核对补回 source_id、candidate_rank、manifest 等必要字段。旧 Windows CIM 测试依赖宿主 WMI 实际服务且在沙箱返回 unavailable；改成 deterministic subprocess contract test 验证命令/时间解析，生产 unavailable 行为保持不变。
+- 独立只读审查 PASS，无阻断；其未运行测试。最终定向组合 130 passed（无 skip）；Ruff 全部变更文件通过；mypy 235 source files 无问题。完整记录在 review/p3-public-ports-20261110/README.md。
+- 没有宣布全局解耦完成。Current SourceVersionReader 仍直接依赖 Resolver/Policy 私有预算、字节验证与 metadata helper；公开 stream/parser port 仍 OPEN。历史 stream/canonical 分支不在当前主线，先在现行版本复现其缺口再决定迁移。

@@ -79,7 +79,7 @@
     }
   },
   "current_limits_to_close": [
-    "P3 stream candidate still calls private Reader admission, resets the read budget, applies a fixed byte cap and uses blocking POSIX flock; canonical uses private browser methods and direct SDK. Port to owner public interfaces with tests.",
+    "P3 remains open: SourceVersionReader still imports Resolver/Policy private budget, byte-verification and metadata helpers; public streaming and parser ports are unfinished. Historical stream/canonical candidates are not current production and must be replayed against current main before adoption. The current Catalog/Browser public-port subnode is locally implemented and independently reviewed.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
     "Berkshire 15 unprocessed explicitly retained; full-source/long-frontier generalization remains partial; 10 required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatory PDF/HK/US RPO and genuinely unexposed holdouts"
@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "MODULARITY_AND_GATES_PATCH_PUBLISHED_CI_GREEN_P3_PORTS_OPEN_R4_WORK_ACCOUNTING_OPEN_CLEANUP_OPEN",
+  "project_status": "P3_CATALOG_BROWSER_PORTS_AND_WIN32_LONG_PATH_REVIEWED_LOCAL_REMAINDER_OPEN_R4_WORK_ACCOUNTING_OPEN_CLEANUP_OPEN",
   "as_of_date": "2026-11-10",
-  "observed_at_utc": "2026-11-10T22:31:23Z",
-  "next_action": "Finish P3 public Reader streaming and parser interfaces, then use the recorded R4 work profile to reconcile blanket precharges with already charged lower-level operations and fix the three omitted business units under the existing account.",
+  "observed_at_utc": "2026-11-10T23:17:11Z",
+  "next_action": "Commit and publish the reviewed P3 Catalog/Browser port and complete Windows lock-path fix; then TDD the remaining SourceVersionReader-to-Resolver/Policy private dependencies and public stream/parser interfaces. After that reconcile the R4 blanket precharge with lower-level work and repair the three omitted units within the existing account.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -240,7 +240,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "Dashboard owner-integration P2 is merged/pushed to CWP, FF, and RF owner mains. The separate revenue-forecast-audit P2 (prove the same accepted artifact is consumed by RF) remains open after P1. D4/D5 decoupling is accepted only for frozen public-interface and composition-test scope; it is not zero coupling and does not complete Dashboard P3/P4. ROOT must replay the detached source-facts selection diagnostic against current CWP master, then reconcile remaining local worktrees and refs. Candidate worktree changes are not accepted or merged.",
+    "current_work": "Dashboard owner-integration P2 is merged/pushed to CWP, FF, and RF owner mains. The separate revenue-forecast-audit P2 (prove the same accepted artifact is consumed by RF) remains open after P1. D4/D5 decoupling is accepted only for frozen public-interface and composition-test scope; it is not zero coupling and does not complete Dashboard P3/P4. Current-main source-facts replay and R4 work-profile observations are recorded. A P3 Catalog/Browser public-port subnode and complete Windows lock-path repair are locally implemented and independently reviewed; remaining Resolver private ports, streaming/parser work, and local worktree reconciliation remain open. Historical candidate branches are not accepted or merged.",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -1008,5 +1008,30 @@
       "ci_updated_at": "2026-11-10T22:31:23Z",
       "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/42914407976"
     }
+  },
+  "p3_public_ports_20261110": {
+    "status": "LOCAL_IMPLEMENTATION_INDEPENDENT_REVIEW_PASS_PUBLIC_STREAM_AND_RESOLVER_PORTS_OPEN",
+    "base_head": "0a74c7478b2ffa78cb78547d83416126eeef9a15",
+    "receipt": "review/p3-public-ports-20261110/README.md",
+    "changes": [
+      "SourceCatalog owns ranked location candidates and typed pathless document browse/version identity queries",
+      "PublicDocumentBrowser no longer embeds catalog SQL or metadata field paths",
+      "SourceVersionReader no longer calls Catalog private annotation helpers",
+      "Win32 file path conversion is a public file_mutex port using UTF-16 units and UNC handling; full CatalogOperationLock and acquisition lock-directory lifecycle uses it",
+      "Legacy browse date-shape behavior is preserved; optional CIM parser test no longer requires host WMI availability"
+    ],
+    "tests": {
+      "final_focused_passed": 130,
+      "skipped": 0,
+      "ruff": "PASS",
+      "mypy_source_files": 235,
+      "mypy": "PASS",
+      "independent_review": "PASS; reviewer did not run tests"
+    },
+    "remaining": [
+      "Replace SourceVersionReader imports of private Resolver/Policy budget, byte verification, and metadata helpers with owner public ports and TDD contracts",
+      "Implement and test public streaming and parser interfaces",
+      "Replay historical stream/canonical branch claims against current main before adopting any candidate"
+    ]
   }
 }

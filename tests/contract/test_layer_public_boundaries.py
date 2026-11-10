@@ -511,7 +511,9 @@ def test_cross_layer_symbols_are_listed_in_their_owner_public_exports():
             "STATE_HEAD_PATTERN",
         },
         "source_catalog/narrative_decision_inventory.py": {"decision_versions"},
-        "file_mutex.py": {"FileMutexLockedError", "os_file_mutex"},
+        "file_mutex.py": {
+            "FileMutexLockedError", "os_file_mutex", "win32_filesystem_path",
+        },
         "id_scope.py": {"normalize_id_scope"},
         "atomic_file.py": {"atomic_output"},
         "bounded_process.py": {"run_bounded", "run_json_process", "WINDOWS_WAIT_BOOTSTRAP"},

@@ -13,11 +13,28 @@ class FileMutexLockedError(RuntimeError):
     """Another process holds this mutex; process death releases it automatically."""
 
 
+def win32_filesystem_path(path: Path) -> Path:
+    """Return a path usable by Win32 file APIs beyond legacy MAX_PATH."""
+    if sys.platform != "win32":
+        return path
+    absolute = os.path.abspath(os.fspath(path))
+    if absolute.startswith(("\\\\?\\", "\\\\.\\")):
+        return path
+    utf16_units = len(absolute.encode("utf-16-le", errors="surrogatepass")) // 2
+    if utf16_units < 248:
+        return path
+    if absolute.startswith("\\\\"):
+        absolute = "\\\\?\\UNC\\" + absolute[2:]
+    else:
+        absolute = "\\\\?\\" + absolute
+    return Path(absolute)
+
+
 @contextmanager
 def os_file_mutex(path: Path, *, timeout_seconds: float = 10.0) -> Iterator[None]:
     if isinstance(timeout_seconds, bool) or not isinstance(timeout_seconds, (int, float)) or not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
         raise ValueError("mutex timeout must be finite and positive")
-    descriptor = os.open(path, os.O_CREAT | os.O_RDWR, 0o600)
+    descriptor = os.open(win32_filesystem_path(path), os.O_CREAT | os.O_RDWR, 0o600)
     acquired = False
     try:
         if os.fstat(descriptor).st_size < 1:
@@ -55,4 +72,4 @@ def os_file_mutex(path: Path, *, timeout_seconds: float = 10.0) -> Iterator[None
         os.close(descriptor)
 
 
-__all__ = ["FileMutexLockedError", "os_file_mutex"]
+__all__ = ["FileMutexLockedError", "os_file_mutex", "win32_filesystem_path"]

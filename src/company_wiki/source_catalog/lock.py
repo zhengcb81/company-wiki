@@ -14,7 +14,9 @@ import time
 from typing import Iterator, Any, cast
 import uuid
 
-from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
+from company_wiki.file_mutex import (
+    FileMutexLockedError, os_file_mutex, win32_filesystem_path,
+)
 from .download_budget import AcquisitionBudget
 
 
@@ -297,7 +299,7 @@ def _remove_if_unchanged(path: Path, expected_text: str) -> bool:
 def operation_lock_status(catalog_dir: Path) -> dict[str, object]:
     """Describe the operation lock without changing or exposing its token."""
 
-    path = catalog_dir / "operation.lock"
+    path = win32_filesystem_path(catalog_dir / "operation.lock")
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
@@ -328,7 +330,7 @@ class CatalogOperationLock(AbstractContextManager["CatalogOperationLock"]):
     def __init__(self, catalog_dir: Path, *, operation: str, budget: AcquisitionBudget | None = None):
         if budget is not None and not isinstance(budget, AcquisitionBudget):
             raise TypeError("budget must be AcquisitionBudget")
-        self.path = catalog_dir / "operation.lock"
+        self.path = win32_filesystem_path(catalog_dir / "operation.lock")
         self.operation = operation
         self.budget = budget
         self.token = uuid.uuid4().hex

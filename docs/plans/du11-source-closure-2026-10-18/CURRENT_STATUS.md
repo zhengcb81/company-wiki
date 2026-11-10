@@ -13,16 +13,23 @@
 
 本轮源码、工具与测试经独审通过。定向组合先后为 147 passed 和最终补充组合 123 passed，两者有重叠。受影响集成 10 passed，现行配置范围 25 passed，独审另跑 42 passed。详细范围、原失败与留项见 review/current-main-replay-20261110/README.md。
 
+## 2026-11-10 P3 公共 Reader 端口子节点
+
+- CWP `SourceCatalog` 接管原文位置排序和浏览查询：`SourceVersionReader` 不再调用 `_annotate_locations`；`PublicDocumentBrowser` 不再直接执行 SQLite 查询或持有 metadata JSON 字段路径。新增冻结、pathless 的 `CatalogBrowseVersion` / `SourceVersionIdentity` DTO，以及 Catalog owner 查询接口。
+- 用 AST 契约测试先验证原有穿透，再验证 Reader 只能调用公开 Catalog 方法、浏览器不能触碰 raw SQL。修复复用 handle 投影遗漏的 source/rank/manifest 字段，避免 Resolver 生成 canonical handle 时缺值。
+- 定向边界组合 **66 passed**；浏览、原文复用、入库与锁组合 **52 passed**。扩展修复后最终固定组合 **130 passed**、无跳过；Ruff 通过；mypy 检查 235 个源文件通过。Windows 长路径测试先复现 260 字符处 `os.open` 失败，再覆盖 CatalogOperationLock 完整生命周期；独立审查 PASS，见 review/p3-public-ports-20261110/README.md。
+- **此子节点不代表全项目解耦完成。** P3 仍 OPEN：未并入的旧 stream/canonical 候选不代表当前主线生产缺陷；当前 Reader 仍依赖 Resolver 的私有预算/字节验证/metadata helper，公开流式 Reader 与 parser 接口也未完成。下一步应先为这些 owner 接口写隔离测试，再迁移调用。
+
 ## 现在的顺序
 
-1. 优先收口 Dashboard P3 公开 Reader 流与解析端口。旧 stream 候选仍有私有 Reader 调用、两阶段预算重置、固定字节帽、POSIX 阻塞锁，canonical 候选也有私有浏览扫描与 SDK 调用。按 owner 公开接口迁移并写隔离测试后接收。
+1. 继续 Dashboard P3。先收口 SourceVersionReader 对 Resolver 私有 helper 的依赖，再实现单一预算/生命周期的公开流式读取与 parser port；历史 stream/canonical 分支候选要先对当前主线行为重放，不能当作已上线代码的问题。按 owner 公开接口迁移并写隔离测试。
 2. R4 工作量分诊已有收据。优先核对占9.05M的业务扫描统一预扣与下层实际计费重叠，增加owner回归并在原16M账户内修复三项遗漏。
 3. 完成 T4 父链和 SEM-QUAL-01 反控及真实验收，随后推进新版摘要、同/跨 run 恢复、RF 实际采用和固定公司循环。
 4. 核销 source-facts、M3、W04 semantics、R1 observation 与 Dashboard 工区，逐项合并已接受代码和移除已替代状态。
 
 ## 工作区快照
 
-本轮基于 e7758d54e162d97c7d97f6a76e3af9cd39ca627b 实施。退休 W04 工区与两个重复 ref 后，注册工区为 8 个（含根）、本地分支 18 个，其中 13 个 tip 非 master 祖先。已解释的原始运行日志完成迁移，其他尚需核销的历史运行产物继续列入清理。原件、生产配置和各 owner 数据库继续由所属 owner 管理。
+11-10 工作区整理以 e7758d54e162d97c7d97f6a76e3af9cd39ca627b 为起点。当前 P3 子节点从 master/origin-master 同步的 0a74c7478b2ffa78cb78547d83416126eeef9a15 开始；本轮仅修改 CWP 实现、契约测试和本计划证据。注册工区最后核实为 8 个（含根）、本地分支 18 个，其中 13 个 tip 非 master 祖先；历史运行产物仍须按 owner 核销。原件、生产配置和各 owner 数据库继续由所属 owner 管理。
 
 ## 历史候选与验收记录
 
@@ -64,4 +71,4 @@
 
 ## 本轮发布记录
 
-本轮源码和PWF提交729a787641fccdad490f81b34e10669b16385e53已进入master并推送。Ruff/mypy通过，push smoke18项通过。CI42912332126的两例身份失败已从共因修复，修复提交28e18043ccad06495a0843760ea46c79e0d2222c已推送，CI42914407976在22:31:23 UTC结束为success。相关回归59项和增量独审22项通过。当前历史未跟踪工件为13,267文件、182,457,744bytes，跟踪文件已收口。
+本轮源码和PWF提交729a787641fccdad490f81b34e10669b16385e53已进入master并推送；身份根修28e18043ccad06495a0843760ea46c79e0d2222c已推送，CI42914407976成功。后续 P3 子节点待提交/推送及 exact-head CI 核验。当前历史未跟踪工件计数为上次观察值 13,267 文件、182,457,744 bytes；该数字未在本子节点重测，跟踪文件目前有本轮修改。

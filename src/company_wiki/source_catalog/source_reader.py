@@ -38,6 +38,7 @@ from .resolver import (
     SourceRequest,
     SourceResolver,
 )
+from .models import RankedSourceLocation
 from .service import SourceCatalog
 from .store import metadata_state
 from .security_code import canonical_security_code
@@ -449,7 +450,7 @@ class SourceVersionReader:
         manifest = self.describe_version(ref)
         try:
             version = self.catalog.reader.exact_source_version(ref.document_id)
-            indexed = self.catalog.reader.exact_source_locations(
+            locations = self.catalog.source_location_candidates(
                 ref.document_id, ref.source_id
             )
         except (CatalogReaderUnavailable, sqlite3.Error):
@@ -457,23 +458,15 @@ class SourceVersionReader:
         if version is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
         roots = {root.root_id: root for root in self.catalog.config.roots}
-        locations = []
-        for row in indexed:
-            location = dict(row)
-            root = roots.get(location["root_id"])
-            if root is None:
-                continue
-            location["root_priority"] = root.priority
-            locations.append(location)
         capture: dict[str, object] | None = None
         for location in sorted(
-            self.catalog._annotate_locations(ref.document_id, locations),
-            key=lambda item: (item["root_priority"], item["root_id"],
-                              item["relative_path"], item["location_id"]),
+            locations,
+            key=lambda item: (item.candidate_rank or 2**31, item.root_id,
+                              item.relative_path, item.location_id),
         ):
-            root = roots[location["root_id"]]
-            if location["candidate_rank"] <= 0 or _relative_segments(
-                str(location["relative_path"])
+            root = roots.get(location.root_id)
+            if root is None or location.candidate_rank <= 0 or _relative_segments(
+                location.relative_path
             ) is None:
                 continue
             if root.allowed_document_kinds and version["document_kind"] not in (
@@ -486,7 +479,7 @@ class SourceVersionReader:
                 continue
             if root.max_file_size is not None and ref.byte_size > root.max_file_size:
                 continue
-            observed, problem = metadata_state(location["manifest_json"])
+            observed, problem = metadata_state(location.manifest_json)
             if problem is not None:
                 continue
             if observed.get("content_sha256") not in (None, "", ref.content_sha256):
@@ -652,7 +645,7 @@ class SourceVersionReader:
 
     def _admitted_candidates(
         self, ref: SourceRef, version_row: sqlite3.Row, *, roots: dict[str, Any],
-    ) -> list[dict[str, Any]]:
+    ) -> list[RankedSourceLocation]:
         """The readable locations for one ref, after the catalog annotator
         and root policy.
 
@@ -662,27 +655,18 @@ class SourceVersionReader:
         rejections filtering and the stable preference order.  Policy decides
         action eligibility.
         """
-        locations = []
         try:
-            indexed_locations = self.catalog.reader.exact_source_locations(
+            locations = self.catalog.source_location_candidates(
                 ref.document_id, ref.source_id
             )
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
-        for row in indexed_locations:
-            location = dict(row)
-            root = roots.get(location["root_id"])
-            if root is None:
-                continue
-            location["root_priority"] = root.priority
-            locations.append(location)
         if not locations:
             raise SourceReadError("unavailable", "no_indexed_location")
-        annotated = self.catalog._annotate_locations(ref.document_id, locations)
         admitted = []
-        for location in annotated:
-            root = roots[location["root_id"]]
-            if location["candidate_rank"] <= 0:
+        for location in locations:
+            root = roots.get(location.root_id)
+            if root is None or location.candidate_rank <= 0:
                 continue
             kinds = root.allowed_document_kinds
             if kinds and version_row["document_kind"] not in kinds:
@@ -768,10 +752,10 @@ class SourceVersionReader:
         failures: list[str] = []
         all_missing = True
         policy_sha256, _ = export_policy_2x(config)
-        for location in sorted(candidates, key=lambda item: item["candidate_rank"]):
-            root = roots[location["root_id"]]
+        for location in sorted(candidates, key=lambda item: item.candidate_rank):
+            root = roots[location.root_id]
             try:
-                resolved = resolve_source_location(root, str(location["relative_path"]))
+                resolved = resolve_source_location(root, location.relative_path)
             except SourceLocationError as exc:
                 failures.append(exc.reason)
                 all_missing = False
@@ -805,7 +789,13 @@ class SourceVersionReader:
                 # coordinates. Use this exact admitted copy, even if the
                 # same location ID was rebound after candidate lookup.
                 admitted_copy = MappingProxyType({
-                    **location, "absolute_path": str(resolved),
+                    "location_id": location.location_id,
+                    "source_id": location.source_id,
+                    "candidate_rank": location.candidate_rank,
+                    "root_id": location.root_id,
+                    "relative_path": location.relative_path,
+                    "manifest_json": location.manifest_json,
+                    "absolute_path": str(resolved),
                     "verified_sha256": observation.content_sha256,
                 }) if reusable_only else None
                 return receipt, admitted_copy

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import base64
 from contextlib import closing
+from dataclasses import FrozenInstanceError
 import hashlib
 import json
 import os
@@ -224,6 +225,58 @@ def _iter_pages(browser: PublicDocumentBrowser, first: dict, limit: int = 2):
         if page["page"]["next_cursor"] is None:
             return
         page = _browse(browser, limit=limit, cursor=page["page"]["next_cursor"])
+
+
+def test_catalog_browse_ports_are_typed_pathless_and_match_browser_projection(tmp_path):
+    catalog = _build(tmp_path)
+    try:
+        records = catalog.browse_entity_records(ENT)
+        assert records
+        assert all(not hasattr(record, "path") for record in records)
+        assert all(not hasattr(record, "relative_path") for record in records)
+        assert all(not hasattr(record, "absolute_path") for record in records)
+
+        browser = PublicDocumentBrowser(catalog)
+        response = _browse(browser)
+        projected_ids = {
+            item["document_version_id"] for item in response["items"]
+        }
+        record_ids = {
+            document_version_id(
+                record.document_id, record.source_id, record.content_sha256,
+            )
+            for record in records
+        }
+        assert projected_ids == record_ids
+
+        first = records[0]
+        with pytest.raises(FrozenInstanceError):
+            first.title = "mutated"
+
+        document_records = catalog.browse_document_records(first.document_id)
+        assert {record.source_id for record in document_records} == {
+            record.source_id for record in records
+            if record.document_id == first.document_id
+        }
+        identities = {
+            (item.document_id, item.source_id, item.content_sha256)
+            for item in catalog.iter_original_version_identities()
+        }
+        assert all(
+            (record.document_id, record.source_id, record.content_sha256) in identities
+            for record in records
+        )
+    finally:
+        catalog.close()
+
+
+def test_catalog_projection_preserves_legacy_date_shape_behavior():
+    from company_wiki.source_catalog.service import _browse_date_or_none
+
+    # The browse wire contract historically passed through any YYYY-MM-DD-shaped
+    # metadata string; stricter calendar validation would be an unplanned API change.
+    assert _browse_date_or_none("2025-13-40") == "2025-13-40"
+    assert _browse_date_or_none("2025-1-04") is None
 
 
 # --- happy path: cross-kind, pathless, complete SourceRefs -------------------

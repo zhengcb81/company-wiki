@@ -4,7 +4,7 @@
 
 ## 下一步
 
-1. 优先完成 Dashboard P3 的公开 Reader 流和解析端口接线。旧 stream 候选的私有 Reader 访问、预算重置、固定帽和阻塞 flock 由 owner 修复。canonical 私有扫描和 PDF SDK 直连通过公开接口收口。
+1. **P3 公共 Catalog/Reader 端口继续实施。** 本地子节点已把位置排序和浏览查询归 Catalog owner：Browser 不持有 raw SQL/metadata 字段路径，SourceVersionReader 不调用 Catalog 私有注解方法。独审 PASS；RED/GREEN 边界和完整定向组合 130 passed，无跳过；Ruff 与 mypy 235 源文件通过。Windows 长路径根修覆盖 CatalogOperationLock 生命周期、盘符/UNC 与 UTF-16 长度。下一步为 Resolver 私有预算/字节读取/metadata helper 建公开 owner ports 和隔离测试，再接公开 stream/parser。历史 stream/canonical 候选尚未并入主线；接入前必须先证明候选问题可在当前主线复现。详细收据：review/p3-public-ports-20261110/README.md。
 2. R4 正式半年报 9/12，工作量耗尽，三项原文已解析。分诊已定位统一扫描预扣占约9.05M。核对预扣和下层实际计费的重叠，先泛化 RED 再优化，在原 16M 内验收。
 3. cn-h1 0.9 业务召回 10/10 的源码冻结结果已有独立收据。T4 父链和 SEM-QUAL-01 仍需现行输入/解码反控与真实独审，之后再做新版摘要、缓存恢复、RF 实际采用和公司循环。
 4. 继续核销剩余工作树与未跟踪产物。W04 config 已归档退休，两个重复 ref 和四个旧测试控制文件已清理，七份历史失败 push 日志完成原样压缩。

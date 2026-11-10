@@ -201,3 +201,11 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 ## 2026-11-10 当前复核
 
 前次门禁检查覆盖phaseC/holdout，source-case对非SHM文件仍使用mtime许可，现统一内容比较。历史gold与活动gold混放使无关样本重复阻断指定样本，现分离历史输入且loader按请求作用域验证。来源入库、CN封面与语言采样绕过解析端口，现由同一公开parser_adapters负责。两个H1名字指向不同SHA与公司材料，旧版0.8和现行0.9也须各自记录。实际R4缺口伴随工作账户耗尽，后续对重复计算做分诊。P3旧stream/canonical候选还有私有接口与资源语义遗漏，具体TDD顺序见current-main-replay-20261110/README.md。
+
+## 2026-11-10 P3 公共端口与 Windows 锁路径
+
+- Catalog owner 是唯一适合解释数据库 metadata schema、位置排序、来源候选和浏览投影的责任层。Browser 只能见 pathless version DTO；Reader 的 admission 需要相对 locator，故其内部 CWP port 可以携带相对路径和 manifest，但不可导出为 Dashboard/FF wire。
+- 根因不只是临时目录名字过长：完整 Windows pytest 根路径让锁文件绝对路径到达 260 字符，目录存在但非 extended os.open 找不到文件。只修底层 mutex 不够，因为 CatalogOperationLock 另有 lock 文件创建、读取、删除路径；adapter 必须覆盖完整 owner 生命周期与确保锁目录初始化。
+- UTF-16 code units 是 Win32 长路径阈值的单位；Python len() 对 supplementary characters 会少算。UNC 要转成 \\?\UNC\server\share\...，已有公共 adapter 与 tests now enforce both。实际配置、身份与资源限制未改变。
+- CatalogOperationLock 的真实 WMI/CIM fallback test 不应依赖沙箱是否开放 WMI 服务来决定主测试绿。现在单元契约检查 command/timestamp parser，而真实 lookup unavailable 仍由生产代码按既有方式返回 None；没有放宽 PID identity 判断。
+- 独审指出 Reader→Resolver/Policy 私有辅助调用仍存在。它不是本节点解决的内容，下一次要先冻结 typed verification/budget/metadata ports 并写 RED 边界测试；不得把 current ports 写成零依赖，也不得将未并入候选分支描述成 current production bug。

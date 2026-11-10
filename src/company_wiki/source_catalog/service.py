@@ -5,13 +5,21 @@ from __future__ import annotations
 from contextlib import contextmanager
 import csv
 import hashlib
+import re
 from pathlib import Path
 from typing import Any, Callable, Iterator
 
 from company_wiki.atomic_file import atomic_output
 from company_wiki.file_usage import database_file_sizes, file_tree_bytes
 
-from .models import CatalogConfig, ProcessingReport, ScanReport
+from .models import (
+    CatalogBrowseVersion,
+    CatalogConfig,
+    ProcessingReport,
+    RankedSourceLocation,
+    ScanReport,
+    SourceVersionIdentity,
+)
 from .acquisition_journal import AcquisitionJournal
 from .lock import CatalogOperationLock
 from .narrative_artifact_store import (
@@ -31,6 +39,24 @@ _EXACT_DUPLICATE_PREFIX = "urn:company-wiki:duplicate:exact:sha256:"
 
 # B02 segment 2: provider-rejected paths never become reusable candidates.
 _REJECTIONS_SEGMENT = ".rejections"
+
+# Capture facts are projected here because the catalog owns metadata layout.
+# The browser consumes only CatalogBrowseVersion and never knows these paths.
+# Acquisition and portfolio records retain their separate canonical containers.
+_BROWSE_FACT_PATHS: dict[str, tuple[str, ...]] = {
+    "market": ("$.acquisition.market", "$.dayu_meta.market"),
+    "language": ("$.acquisition.language", "$.dayu_meta.language",
+                 "$.dayu_meta.source_language"),
+    "canonical_entity_id": ("$.acquisition.canonical_entity_id",
+                            "$.dayu_meta.canonical_entity_id"),
+    "display_name": ("$.acquisition.display_name",
+                     "$.dayu_meta.display_name"),
+    "fiscal_year": ("$.acquisition.fiscal_year", "$.dayu_meta.fiscal_year"),
+    "period_start": ("$.acquisition.period_start", "$.dayu_meta.period_start"),
+    "period_end": ("$.acquisition.period_end", "$.dayu_meta.period_end"),
+}
+_BROWSE_DATE = re.compile(r"\d{4}-\d{2}-\d{2}\Z")
+_BROWSE_VERSION_ROLES = ("original_primary", "original_attachment", "indexed_only")
 
 
 def _exact_duplicate_group_id(document_id: str, source_id: str) -> str:
@@ -115,7 +141,224 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _required_catalog_text(value: Any, field: str) -> str:
+    if not isinstance(value, str) or not value.strip() or value != value.strip():
+        raise ValueError(f"{field} must be non-empty trimmed text")
+    return value
+
+
+def _browse_projection_sql(where_clause: str) -> str:
+    fact_columns = ",\n".join(
+        "CASE WHEN json_valid(d.metadata_json) THEN COALESCE("
+        + ", ".join(f"json_extract(d.metadata_json, {path!r})" for path in paths)
+        + ") END AS fact_" + name
+        for name, paths in _BROWSE_FACT_PATHS.items()
+    )
+    return (
+        "SELECT d.document_id, d.primary_source_id, d.title, d.document_kind, "
+        "d.published_date, d.source_status, " + fact_columns
+        + " FROM documents d" + where_clause
+    )
+
+
+def _browse_text_or_none(value: Any) -> str | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text or None
+
+
+def _browse_int_or_none(value: Any) -> int | None:
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str) and value.strip().isdigit():
+        return int(value.strip())
+    return None
+
+
+def _browse_date_or_none(value: Any) -> str | None:
+    text = _browse_text_or_none(value)
+    return text if text is not None and _BROWSE_DATE.fullmatch(text) else None
+
+
+def _browse_document(row: Any) -> dict[str, Any]:
+    facts = {name: row[f"fact_{name}"] for name in _BROWSE_FACT_PATHS}
+    return {
+        "document_id": str(row["document_id"]),
+        "primary_source_id": (
+            str(row["primary_source_id"]) if row["primary_source_id"] else None
+        ),
+        "title": str(row["title"] or "") or None,
+        "document_kind": str(row["document_kind"] or "") or None,
+        "published_date": str(row["published_date"] or "") or None,
+        "source_status": str(row["source_status"] or "") or None,
+        "market": _browse_text_or_none(facts.get("market")),
+        "language": _browse_text_or_none(facts.get("language")),
+        "canonical_entity_id": _browse_text_or_none(facts.get("canonical_entity_id")),
+        "display_name": _browse_text_or_none(facts.get("display_name")),
+        "fiscal_year": _browse_int_or_none(facts.get("fiscal_year")),
+        "period_start": _browse_date_or_none(facts.get("period_start")),
+        "period_end": _browse_date_or_none(facts.get("period_end")),
+    }
+
+
 class SourceCatalog:
+    def source_location_candidates(
+        self, document_id: str, source_id: str,
+    ) -> tuple[RankedSourceLocation, ...]:
+        """Return immutable catalog-ranked locations for one exact source.
+
+        Ranking and duplicate annotation remain owned by the catalog. Root
+        admission and byte verification remain owned by SourceVersionReader.
+        Physical locators are confined to this source-catalog package.
+        """
+        roots = {root.root_id: root for root in self.config.roots}
+        locations: list[dict[str, Any]] = []
+        for row in self.reader.exact_source_locations(document_id, source_id):
+            location = dict(row)
+            root = roots.get(str(location["root_id"]))
+            if root is None:
+                continue
+            location["root_priority"] = root.priority
+            locations.append(location)
+        ranked = self._annotate_locations(document_id, locations)
+        return tuple(
+            RankedSourceLocation(
+                location_id=str(item["location_id"]),
+                source_id=str(item["source_id"]),
+                root_id=str(item["root_id"]),
+                relative_path=str(item["relative_path"]),
+                role=str(item["role"]),
+                location_status=str(item["location_status"]),
+                candidate_rank=int(item["candidate_rank"]),
+                exclusion_reason=str(item["exclusion_reason"]),
+                manifest_json=(
+                    str(item["manifest_json"])
+                    if item.get("manifest_json") is not None else None
+                ),
+            )
+            for item in ranked
+        )
+
+    def browse_entity_records(self, canonical_entity_id: str) -> tuple[CatalogBrowseVersion, ...]:
+        """Return the catalog-owned pathless browse projection for an entity."""
+        entity = _required_catalog_text(canonical_entity_id, "canonical_entity_id")
+        sql = _browse_projection_sql(
+            " WHERE d.document_id IN ("
+            "SELECT document_id FROM document_entities WHERE entity_id = ?)"
+            " OR (json_valid(d.metadata_json) AND ("
+            "json_extract(d.metadata_json, '$.acquisition.canonical_entity_id') = ?"
+            " OR json_extract(d.metadata_json, '$.dayu_meta.canonical_entity_id') = ?))"
+        )
+        rows = self.reader.fetchall(sql, (entity, entity, entity))
+        records: list[CatalogBrowseVersion] = []
+        for row in rows:
+            records.extend(self._browse_versions_for_document(_browse_document(row)))
+        return tuple(records)
+
+    def browse_document_records(self, document_id: str) -> tuple[CatalogBrowseVersion, ...]:
+        """Return all original versions for one indexed document."""
+        document = _required_catalog_text(document_id, "document_id")
+        row = self.reader.fetchone(
+            _browse_projection_sql(" WHERE d.document_id = ?"), (document,)
+        )
+        if row is None:
+            return ()
+        return tuple(self._browse_versions_for_document(_browse_document(row)))
+
+    def iter_original_version_identities(self) -> tuple[SourceVersionIdentity, ...]:
+        """Return pathless identities for exact reopen-token resolution."""
+        role_clause = ", ".join("?" for _ in _BROWSE_VERSION_ROLES)
+        location_rows = self.reader.fetchall(
+            f"""SELECT l.document_id, l.source_id, s.content_sha256
+                FROM locations l JOIN sources s ON s.source_id=l.source_id
+                WHERE l.source_id IS NOT NULL AND l.role IN ({role_clause})""",
+            _BROWSE_VERSION_ROLES,
+        )
+        primary_rows = self.reader.fetchall(
+            """SELECT d.document_id, d.primary_source_id AS source_id,
+                      s.content_sha256
+               FROM documents d JOIN sources s ON s.source_id=d.primary_source_id
+               WHERE d.primary_source_id IS NOT NULL"""
+        )
+        identities = {
+            (str(row["document_id"]), str(row["source_id"])):
+                str(row["content_sha256"])
+            for row in (*location_rows, *primary_rows)
+        }
+        return tuple(
+            SourceVersionIdentity(document_id, source_id, digest)
+            for (document_id, source_id), digest in sorted(identities.items())
+        )
+
+    def _browse_versions_for_document(
+        self, document: dict[str, Any],
+    ) -> list[CatalogBrowseVersion]:
+        document_id = str(document["document_id"])
+        role_clause = ", ".join("?" for _ in _BROWSE_VERSION_ROLES)
+        location_rows = self.reader.fetchall(
+            f"""SELECT source_id, root_id, role, location_status, relative_path
+               FROM locations
+               WHERE document_id = ? AND source_id IS NOT NULL
+                 AND role IN ({role_clause})""",
+            (document_id, *_BROWSE_VERSION_ROLES),
+        )
+        source_ids = {str(item["source_id"]) for item in location_rows}
+        if document["primary_source_id"]:
+            source_ids.add(str(document["primary_source_id"]))
+        if not source_ids:
+            return []
+        placeholders = ", ".join("?" for _ in source_ids)
+        source_rows = self.reader.fetchall(
+            f"""SELECT source_id, content_sha256, byte_size, mime_type, first_seen_at
+                FROM sources WHERE source_id IN ({placeholders})
+                ORDER BY first_seen_at, source_id""",
+            tuple(sorted(source_ids)),
+        )
+        config_root_ids = {root.root_id for root in self.config.roots}
+        from .source_location import relative_segments
+
+        locations_by_source: dict[str, list[Any]] = {}
+        for location in location_rows:
+            locations_by_source.setdefault(str(location["source_id"]), []).append(location)
+        records: list[CatalogBrowseVersion] = []
+        for ordinal, source in enumerate(source_rows, start=1):
+            source_id = str(source["source_id"])
+            locations = locations_by_source.get(source_id, [])
+            resolvable = any(
+                str(location["location_status"]) == "active"
+                and str(location["root_id"]) in config_root_ids
+                and isinstance(location["relative_path"], str)
+                and relative_segments(location["relative_path"]) is not None
+                for location in locations
+            )
+            records.append(CatalogBrowseVersion(
+                document_id=document_id,
+                source_id=source_id,
+                content_sha256=str(source["content_sha256"]),
+                byte_size=int(source["byte_size"]),
+                mime_type=str(source["mime_type"]),
+                primary=document["primary_source_id"] == source_id,
+                ordinal=ordinal,
+                title=document["title"],
+                document_kind=document["document_kind"],
+                published_date=document["published_date"],
+                source_status=document["source_status"],
+                fiscal_year=document["fiscal_year"],
+                period_start=document["period_start"],
+                period_end=document["period_end"],
+                language=document["language"],
+                market=document["market"],
+                canonical_entity_id=document["canonical_entity_id"],
+                display_name=document["display_name"],
+                first_seen_at=str(source["first_seen_at"]),
+                roles=tuple(sorted({str(item["role"]) for item in locations})),
+                resolvable=resolvable,
+            ))
+        return records
+
     def identify_company(self, query: str, *, market: str):
         from .security_identity import (SecurityMasterStore, SecurityIdentityResolver,
             SecurityMasterUnavailableError, IdentityResult, IdentityStatus, load_identity_master)

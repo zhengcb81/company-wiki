@@ -53,6 +53,29 @@ def test_new_lock_records_creation_identity_and_rejects_the_matching_owner(
                 pass
 
 
+@pytest.mark.skipif(os.name != "nt", reason="Win32 extended-path catalog lock contract")
+def test_catalog_operation_lock_full_lifecycle_on_long_root(tmp_path, monkeypatch):
+    import company_wiki.source_catalog.lock as lock_module
+
+    monkeypatch.setattr(
+        lock_module,
+        "_process_identity",
+        lambda _pid: _identity(creation_time=2_000.0),
+    )
+    catalog_dir = tmp_path
+    for index in range(4):
+        catalog_dir = catalog_dir / (f"deep-{index}-" + "x" * 56)
+        os.mkdir("\\\\?\\" + os.path.abspath(str(catalog_dir)))
+
+    with lock_module.CatalogOperationLock(catalog_dir, operation="normalize"):
+        assert lock_module.operation_lock_status(catalog_dir)["state"] == "live"
+        with pytest.raises(lock_module.CatalogOperationLockedError):
+            with lock_module.CatalogOperationLock(catalog_dir, operation="export"):
+                pytest.fail("a second owner entered a long-path operation lock")
+
+    assert lock_module.operation_lock_status(catalog_dir)["state"] == "absent"
+
+
 def test_reused_pid_with_mismatched_creation_identity_is_stale_and_replaceable(
     tmp_path, monkeypatch
 ):
@@ -316,13 +339,24 @@ def test_stale_takeover_is_serialized_across_the_final_unlink(tmp_path, monkeypa
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Windows CIM identity fallback")
-def test_windows_cim_fallback_returns_a_real_process_creation_time():
+def test_windows_cim_fallback_parses_creation_time_without_wmi_dependency(monkeypatch):
     import company_wiki.source_catalog.lock as lock_module
 
+    captured = {}
+    def fake_run(command, **kwargs):
+        captured["command"] = command
+        captured["kwargs"] = kwargs
+        return lock_module.subprocess.CompletedProcess(
+            command, 0, stdout="2026-11-10T22:00:00.0000000Z", stderr=""
+        )
+
+    monkeypatch.setattr(lock_module.subprocess, "run", fake_run)
     creation_time = lock_module._windows_creation_time_via_cim(os.getpid())
 
-    assert isinstance(creation_time, float)
-    assert creation_time > 0
+    assert creation_time == 1_794_348_000.0
+    assert str(os.getpid()) in captured["command"][-1]
+    assert captured["kwargs"]["timeout"] == 5
+    assert captured["kwargs"]["check"] is False
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Windows lock payload identity")

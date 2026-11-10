@@ -20,6 +20,40 @@ def test_same_path_excludes_another_owner_without_pid_files(tmp_path):
         assert path.stat().st_size == 1
 
 
+def test_windows_long_lock_path_is_opened(tmp_path):
+    """Temp roots and nested owner locks can cross the legacy MAX_PATH limit."""
+    module = importlib.import_module("company_wiki._file_mutex")
+    parent = tmp_path
+    for index in range(4):
+        parent = parent / (f"nested-{index}-" + "x" * 56)
+        if os.name == "nt":
+            # Build the fixture with the Win32 extended-path form so the test
+            # reaches os_file_mutex instead of failing during directory setup.
+            extended = "\\\\?\\" + os.path.abspath(str(parent))
+            os.mkdir(extended)
+        else:
+            parent.mkdir()
+    path = parent / "runtime.lock"
+    if os.name == "nt":
+        assert len(str(path)) >= 260
+
+    with module.os_file_mutex(path, timeout_seconds=0.1):
+        assert os.stat("\\\\?\\" + os.path.abspath(str(path))).st_size == 1 \
+            if os.name == "nt" else path.stat().st_size == 1
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Win32 extended-path contract")
+def test_win32_path_adapter_counts_utf16_units_and_supports_unc():
+    from company_wiki.file_mutex import win32_filesystem_path
+
+    near_limit = Path("C:\\" + "a" * 240 + "😀" * 4)
+    assert len(str(near_limit)) < 248
+    assert str(win32_filesystem_path(near_limit)).startswith("\\\\?\\C:\\")
+
+    unc = Path("\\\\server\\share\\" + "x" * 280)
+    assert str(win32_filesystem_path(unc)).startswith("\\\\?\\UNC\\server\\share\\")
+
+
 def test_killed_process_releases_runtime_mutex_immediately(tmp_path, hermetic_runtime):
     module = importlib.import_module("company_wiki._file_mutex")
     path = tmp_path / "runtime.lock"

@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from enum import Enum
 from typing import Any, Callable
+from company_wiki.file_mutex import win32_filesystem_path
 
 from .acquisition import (
     AcquisitionCoordinator,
@@ -133,7 +134,9 @@ class SourceAcquisitionService:
             acquisition = decision.result
             if acquisition.status is AcquisitionStatus.SELECTED:
                 assert acquisition.candidate is not None
-                lock_dir = self.coordinator.catalog.config.catalog_dir / "ensure_locks"
+                lock_dir = win32_filesystem_path(
+                    self.coordinator.catalog.config.catalog_dir / "ensure_locks"
+                )
                 lock_dir.mkdir(parents=True, exist_ok=True)
                 lock_path = lock_dir / (acquisition_target_sha256(request, acquisition.candidate) + ".lock")
                 timeout = 10.0 if budget is None else budget.remaining_seconds

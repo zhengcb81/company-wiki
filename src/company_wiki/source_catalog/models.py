@@ -8,6 +8,57 @@ from pathlib import Path
 from typing import Any
 
 
+@dataclass(frozen=True)
+class RankedSourceLocation:
+    """Catalog-ranked location consumed by the source reader owner."""
+
+    location_id: str
+    source_id: str
+    root_id: str
+    relative_path: str
+    role: str
+    location_status: str
+    candidate_rank: int
+    exclusion_reason: str
+    manifest_json: str | None
+
+
+@dataclass(frozen=True)
+class CatalogBrowseVersion:
+    """Pathless, storage-independent projection for the public browse API."""
+
+    document_id: str
+    source_id: str
+    content_sha256: str
+    byte_size: int
+    mime_type: str
+    primary: bool
+    ordinal: int
+    title: str | None
+    document_kind: str | None
+    published_date: str | None
+    source_status: str | None
+    fiscal_year: int | None
+    period_start: str | None
+    period_end: str | None
+    language: str | None
+    market: str | None
+    canonical_entity_id: str | None
+    display_name: str | None
+    first_seen_at: str
+    roles: tuple[str, ...]
+    resolvable: bool
+
+
+@dataclass(frozen=True)
+class SourceVersionIdentity:
+    """Pathless identity needed to reopen a deterministic version token."""
+
+    document_id: str
+    source_id: str
+    content_sha256: str
+
+
 CATALOG_SCHEMA_VERSION = "1.4.0"
 SCANNER_VERSION = "1.0.2"
 NORMALIZER_VERSION = "1.0.0"

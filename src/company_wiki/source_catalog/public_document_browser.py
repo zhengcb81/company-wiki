@@ -34,13 +34,6 @@ of the v2 read slice:
   configured root and a valid relative locator. On open, the source reader
   checks the current filesystem location, eligibility and original bytes.
 
-Field provenance: fiscal_year / period_start / period_end / market /
-language / canonical_entity_id / display_name live inside
-``documents.metadata_json`` (``$.acquisition.*`` capture containers,
-``$.dayu_meta.*`` portfolio containers — the same two containers
-``query_filing_candidates`` reads).  ``language`` additionally falls back
-to ``$.dayu_meta.source_language``, mirroring the portfolio promoter's
-mapping.
 """
 
 from __future__ import annotations
@@ -53,8 +46,8 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..wire_json import parse_json
+from .models import CatalogBrowseVersion
 from .service import SourceCatalog
-from .source_location import relative_segments
 from .source_reader import SOURCE_REF_SCHEMA_VERSION
 
 
@@ -72,16 +65,6 @@ _ISO_DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}\Z")
 _MAX_LIMIT = 500
 _DEFAULT_LIMIT = 50
 
-#: Only these location roles carry original document bytes.  Sidecars and
-#: derived JSON are hashed as their own sources under the same document_id
-#: but are not byte versions of the document (scanner roles: ``metadata``,
-#: ``processed_docling`` …).  ``indexed_only`` is an original file whose
-#: sidecar was too incomplete to qualify for filing reuse — the bytes are
-#: still the document, so the cabinet lists it (with its degraded status).
-_VERSION_LOCATION_ROLES = (
-    "original_primary", "original_attachment", "indexed_only",
-)
-
 _BROWSE_REQUEST_FIELDS = frozenset({
     "schema_version", "canonical_entity_id", "market", "document_kinds",
     "fiscal_years", "language", "source_statuses", "limit", "cursor",
@@ -96,21 +79,6 @@ _FILTER_KEYS = (
 _SNAPSHOT_VERSION = 1
 
 _UNKNOWN_FACET_KEY = "unknown"
-
-# metadata_json containers read per projected fact.  Order = precedence.
-_FACT_PATHS: dict[str, tuple[str, ...]] = {
-    "market": ("$.acquisition.market", "$.dayu_meta.market"),
-    "language": ("$.acquisition.language", "$.dayu_meta.language",
-                 "$.dayu_meta.source_language"),
-    "canonical_entity_id": ("$.acquisition.canonical_entity_id",
-                            "$.dayu_meta.canonical_entity_id"),
-    "display_name": ("$.acquisition.display_name",
-                     "$.dayu_meta.display_name"),
-    "fiscal_year": ("$.acquisition.fiscal_year", "$.dayu_meta.fiscal_year"),
-    "period_start": ("$.acquisition.period_start", "$.dayu_meta.period_start"),
-    "period_end": ("$.acquisition.period_end", "$.dayu_meta.period_end"),
-}
-
 
 class PublicBrowseError(RuntimeError):
     """A named, in-band refusal (invalid request or unusable token)."""
@@ -243,20 +211,6 @@ def _filters_conflict(request_filters: dict[str, Any],
         if list(requested) != list(pinned):
             return True
     return False
-
-
-def _text_or_none(value: Any) -> str | None:
-    if value is None:
-        return None
-    text = str(value).strip()
-    return text or None
-
-
-def _date_or_none(value: Any) -> str | None:
-    text = _text_or_none(value)
-    if text is None or not _ISO_DATE_RE.fullmatch(text):
-        return None
-    return text
 
 
 @dataclass(frozen=True)
@@ -437,36 +391,14 @@ class PublicDocumentBrowser:
         if not isinstance(wanted, str) or not _VERSION_ID_RE.fullmatch(wanted):
             raise PublicBrowseError("invalid_document_version_id")
 
-        # Spill-free on purpose: DISTINCT/GROUP BY over the full locations
-        # table forces a temp b-tree; on Windows hosts whose %TEMP% path
-        # cannot host SQLite temp files that fails with "unable to open
-        # database file".  Deduplicate and order in Python instead.
-        candidates: dict[tuple[str, str], str] = {}
-        role_clause = " OR ".join("l.role = ?" for _ in _VERSION_LOCATION_ROLES)
-        for row in self.catalog.reader.fetchall(
-            f"""SELECT l.document_id, l.source_id, s.content_sha256
-               FROM locations l JOIN sources s ON s.source_id = l.source_id
-               WHERE l.source_id IS NOT NULL AND ({role_clause})""",
-            _VERSION_LOCATION_ROLES,
-        ):
-            candidates[(str(row["document_id"]), str(row["source_id"]))] = \
-                str(row["content_sha256"])
-        for row in self.catalog.reader.fetchall(
-            """SELECT d.document_id, d.primary_source_id, s.content_sha256
-               FROM documents d JOIN sources s ON s.source_id = d.primary_source_id
-               WHERE d.primary_source_id IS NOT NULL""",
-        ):
-            candidates.setdefault(
-                (str(row["document_id"]), str(row["primary_source_id"])),
-                str(row["content_sha256"]),
-            )
-        match = next(
-            ((document_id, source_id)
-             for (document_id, source_id), sha in sorted(candidates.items())
-             if document_version_id(document_id, source_id, sha) == wanted),
-            None,
-        )
-        if match is None:
+        identity = next((
+            candidate for candidate in self.catalog.iter_original_version_identities()
+            if document_version_id(
+                candidate.document_id, candidate.source_id,
+                candidate.content_sha256,
+            ) == wanted
+        ), None)
+        if identity is None:
             return {
                 "schema_version": REOPEN_RESPONSE_SCHEMA,
                 "state": "not_found",
@@ -474,13 +406,11 @@ class PublicDocumentBrowser:
                 "document_version_id": wanted,
                 "document": None,
             }
-        document_id, source_id = match
-        document = self._document(document_id)
-        versions = (
-            [version for version in self._document_versions(document)
-             if version.source_id == source_id]
-            if document is not None else []
-        )
+        versions = [
+            self._version_row(record)
+            for record in self.catalog.browse_document_records(identity.document_id)
+            if record.source_id == identity.source_id
+        ]
         if not versions:
             return {
                 "schema_version": REOPEN_RESPONSE_SCHEMA,
@@ -532,142 +462,39 @@ class PublicDocumentBrowser:
             raise PublicBrowseError("invalid_snapshot_id")
         return _Snapshot(entity, pinned_filters, revision)
 
-    def _entity_documents(self, entity: str) -> list[dict[str, Any]]:
-        """Documents linked to the entity key, with projected capture facts.
-
-        Matching mirrors the two canonical channels the writer maintains:
-        the ``document_entities`` link and the declared
-        ``canonical_entity_id`` capture field (both containers).  json_valid
-        guards json_extract the same way the filing-candidate pushdown does.
-        """
-        sql = self._projection_sql(
-            " WHERE d.document_id IN ("
-            "     SELECT document_id FROM document_entities WHERE entity_id = ?)"
-            " OR (json_valid(d.metadata_json)"
-            "     AND (json_extract(d.metadata_json,"
-            "                       '$.acquisition.canonical_entity_id') = ?"
-            "          OR json_extract(d.metadata_json,"
-            "                          '$.dayu_meta.canonical_entity_id') = ?))")
-        return [self._project_row(row) for row
-                in self.catalog.reader.fetchall(sql, (entity, entity, entity))]
-
-    def _document(self, document_id: str) -> dict[str, Any] | None:
-        sql = self._projection_sql(" WHERE d.document_id = ?")
-        row = self.catalog.reader.fetchone(sql, (document_id,))
-        return None if row is None else self._project_row(row)
-
-    @staticmethod
-    def _projection_sql(where_clause: str) -> str:
-        fact_columns = ",\n".join(
-            "CASE WHEN json_valid(d.metadata_json) THEN "
-            + "COALESCE("
-            + ", ".join(f"json_extract(d.metadata_json, {path!r})"
-                        for path in paths)
-            + ") END AS fact_" + name
-            for name, paths in _FACT_PATHS.items()
-        )
-        return ("""SELECT d.document_id, d.primary_source_id, d.title,
-                         d.document_kind, d.published_date, d.source_status,
-                         """ + fact_columns
-                + """ FROM documents d""" + where_clause)
-
-    @staticmethod
-    def _project_row(row: Any) -> dict[str, Any]:
-        facts = {name: row[f"fact_{name}"] for name in _FACT_PATHS}
-        return {
-            "document_id": str(row["document_id"]),
-            "primary_source_id": (
-                str(row["primary_source_id"])
-                if row["primary_source_id"] else None),
-            "title": str(row["title"] or "") or None,
-            "document_kind": str(row["document_kind"] or "") or None,
-            "published_date": (
-                str(row["published_date"] or "") or None),
-            "source_status": str(row["source_status"] or "") or None,
-            "market": _text_or_none(facts.get("market")),
-            "language": _text_or_none(facts.get("language")),
-            "canonical_entity_id": _text_or_none(
-                facts.get("canonical_entity_id")),
-            "display_name": _text_or_none(facts.get("display_name")),
-            "fiscal_year": _int_or_none(facts.get("fiscal_year")),
-            "period_start": _date_or_none(facts.get("period_start")),
-            "period_end": _date_or_none(facts.get("period_end")),
-        }
-
-    def _document_versions(self, document: dict[str, Any]) -> list[_VersionRow]:
-        """Every frozen byte version of one document (originals only)."""
-        document_id = document["document_id"]
-        role_placeholders = ", ".join("?" for _ in _VERSION_LOCATION_ROLES)
-        location_rows = self.catalog.reader.fetchall(
-            f"""SELECT source_id, root_id, role, location_status, relative_path
-               FROM locations
-               WHERE document_id = ? AND source_id IS NOT NULL
-                 AND role IN ({role_placeholders})""",
-            (document_id, *_VERSION_LOCATION_ROLES),
-        )
-        source_ids = {str(item["source_id"]) for item in location_rows}
-        if document["primary_source_id"]:
-            source_ids.add(document["primary_source_id"])
-        if not source_ids:
-            return []
-        placeholders = ", ".join("?" for _ in source_ids)
-        source_rows = self.catalog.reader.fetchall(
-            f"""SELECT source_id, content_sha256, byte_size, mime_type,
-                       first_seen_at FROM sources
-                WHERE source_id IN ({placeholders})
-                ORDER BY first_seen_at, source_id""",
-            tuple(sorted(source_ids)),
-        )
-        config_root_ids = {root.root_id for root in self.catalog.config.roots}
-        locations_by_source: dict[str, list[Any]] = {}
-        for item in location_rows:
-            locations_by_source.setdefault(
-                str(item["source_id"]), []).append(item)
-        versions: list[_VersionRow] = []
-        for ordinal, source in enumerate(source_rows, start=1):
-            source_id = str(source["source_id"])
-            locations = locations_by_source.get(source_id, [])
-            roles = sorted({str(item["role"]) for item in locations})
-            # This is a catalog projection. The Reader verifies the actual
-            # location and original bytes when a caller opens the SourceRef.
-            resolvable = any(
-                str(item["location_status"]) == "active"
-                and str(item["root_id"]) in config_root_ids
-                and isinstance(item["relative_path"], str)
-                and relative_segments(item["relative_path"]) is not None
-                for item in locations
-            )
-            versions.append(_VersionRow(
-                document_id=document_id,
-                source_id=source_id,
-                content_sha256=str(source["content_sha256"]),
-                byte_size=int(source["byte_size"]),
-                mime_type=str(source["mime_type"]),
-                primary=document["primary_source_id"] == source_id,
-                ordinal=ordinal,
-                title=document["title"],
-                document_kind=document["document_kind"],
-                published_date=document["published_date"],
-                source_status=document["source_status"],
-                fiscal_year=document["fiscal_year"],
-                period_start=document["period_start"],
-                period_end=document["period_end"],
-                language=document["language"],
-                market=document["market"],
-                canonical_entity_id=document["canonical_entity_id"],
-                display_name=document["display_name"],
-                first_seen_at=str(source["first_seen_at"]),
-                roles=tuple(roles),
-                resolvable=resolvable,
-            ))
-        return versions
-
     def _entity_versions(self, entity: str) -> list[_VersionRow]:
-        versions: list[_VersionRow] = []
-        for document in self._entity_documents(entity):
-            versions.extend(self._document_versions(document))
+        versions = [
+            self._version_row(record)
+            for record in self.catalog.browse_entity_records(entity)
+        ]
         versions.sort(key=_VersionRow.sort_key)
         return versions
+
+    @staticmethod
+    def _version_row(record: CatalogBrowseVersion) -> _VersionRow:
+        return _VersionRow(
+            document_id=record.document_id,
+            source_id=record.source_id,
+            content_sha256=record.content_sha256,
+            byte_size=record.byte_size,
+            mime_type=record.mime_type,
+            primary=record.primary,
+            ordinal=record.ordinal,
+            title=record.title,
+            document_kind=record.document_kind,
+            published_date=record.published_date,
+            source_status=record.source_status,
+            fiscal_year=record.fiscal_year,
+            period_start=record.period_start,
+            period_end=record.period_end,
+            language=record.language,
+            market=record.market,
+            canonical_entity_id=record.canonical_entity_id,
+            display_name=record.display_name,
+            first_seen_at=record.first_seen_at,
+            roles=record.roles,
+            resolvable=record.resolvable,
+        )
 
     @staticmethod
     def _revision(versions: list[_VersionRow]) -> str:
@@ -754,16 +581,6 @@ class PublicDocumentBrowser:
             "market": counts("market"),
             "fiscal_year": counts("fiscal_year", as_text=True),
         }
-
-
-def _int_or_none(value: Any) -> int | None:
-    if isinstance(value, bool):
-        return None
-    if isinstance(value, int):
-        return value
-    if isinstance(value, str) and value.strip().isdigit():
-        return int(value.strip())
-    return None
 
 
 def _entity_facts(versions: list[_VersionRow]) -> dict[str, Any] | None:
