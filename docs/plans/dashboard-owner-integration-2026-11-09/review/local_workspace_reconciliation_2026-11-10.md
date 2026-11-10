@@ -30,6 +30,7 @@ E2E 原件、SHA、复用零下载及 MDB 公共目录读回仍以 [P2 E2E recei
 - 删除 FF/RF 两份已经并线的 P2 本机候选 worktree 与本地 ref。它们工作树干净，仅有 Python/test caches；各自 P2 commit 已是 `origin/main` 的祖先。远端 candidate ref 保留。
 - 删除 CWP 两个没有工作树、且提交系列已由 `origin/master` patch-equivalent 覆盖的 local refs：`codex/r1-contract-debt` 与 `codex/r1-summary-runtime`。
 - 另删除 14 个已并入 `origin/master`、无 tracked/untracked 改动、没有 `companies/sectors/themes` 数据目录的本地 worktree 与对应 local branch refs：`d4-01-company-source-index`、`d4-03-document-model`、`d4-04-transcript-wire`、`d5-cwp-processed-port`、`du-benchmark-20261013`、`du-profiles-20261013`、`du4-form-20261015`、`du4-state-20261015`、`du4-table-20261015`、`du5-corpus-20261015`、`du7-pdf-tables-20261016`、`du9-geometry-planner-20261016`、`du9-geometry-policy-20261016`、`main-replay-config-isolation-20261009`。删除前核对的 ignored 内容只有 Python/pytest 可再生成缓存；远端分支一律保留。
+- 再删除 7 个同样满足“提交在主线、工作树干净、无公司数据目录”的本地 checkout/ref：`r1-holdout-controller`、`w05-cwp-ocr`、`w18-cwp-holdout-20261025`、`w19-sina-statements-20261025`、`w22-atomic-io-20261030`、`root-du67-pdf-20261016`、`w22-pdf-deploy-20261030`。最后两个额外核实了 `.ingested/ingested.db` 仅有 0 行表，以及 `w22probe-m0qvqkpo/s.pdf` 是未被任何计划引用的 2.1 KB 临时测试文件；目录中的其余 ignored 项都是缓存。完整 handoff/evidence 已在 CWP 主线，远端 refs 未删除。
 
 没有实测磁盘空闲量变化；工作树可能含硬链接，逻辑文件大小不能当作物理释放空间。
 
@@ -42,7 +43,7 @@ E2E 原件、SHA、复用零下载及 MDB 公共目录读回仍以 [P2 E2E recei
 - `docs/plans/du11-source-closure-2026-10-18/review/` 下 143 个审查/运行证据文件，约 17 MB；保留为历史验收材料。`tools/document_understanding_benchmark/gold/us-10k.du11-v2-20261024.json` 被既有报告按 SHA 引用，保留为 benchmark fixture。`.workbuddy-ai/memory/2026-11-02.md` 是 D4-03 交付记忆，保留。
 - `.worktrees/d00-e13-owner-integration` 是干净 P3 候选 `62602102ae5ab9a6bba54879756b800854c941a1`，与 `origin/codex/d00-e13-owner-integration-20261107` 相同但尚未并入主线；P3 仍待接线，保留。
 
-当前 CWP 共有 77 个已登记 worktree（含根目录），59 个外部 worktree clean，17 个 dirty，0 个无法读取；本地分支共 74 条，其中仍有 23 个 tip 不是 `origin/master` 的祖先。17 个 dirty worktree 的状态：
+当前 CWP 共有 70 个已登记 worktree（含根目录），52 个外部 worktree clean，17 个 dirty，0 个无法读取；本地分支共 67 条，其中仍有 23 个 tip 不是 `origin/master` 的祖先。17 个 dirty worktree 的状态：
 
 | Worktree | 状态摘要 | 本轮处理 |
 |---|---|---|
