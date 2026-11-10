@@ -91,10 +91,28 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "P2_OWNER_MAINLINES_COMPLETE_D4_D5_SCOPE_ACCEPTED_SOURCE_FACTS_CURRENT_MAIN_REPLAY_OPEN_WORKSPACE_RECONCILIATION_OPEN",
+  "project_status": "P2_OWNER_MAINLINES_COMPLETE_D4_D5_SCOPE_ACCEPTED_FAILURE_ROOTS_RECONCILED_SOURCE_FACTS_CURRENT_MAIN_REPLAY_OPEN_WORKSPACE_RECONCILIATION_OPEN",
   "as_of_date": "2026-11-10",
-  "observed_at_utc": "2026-11-10T19:16:03Z",
-  "next_action": "Run the bounded source-facts diagnostic against exact current CWP master, then finish evidence-based triage of the remaining eight worktrees, 17 non-ancestor local refs, and cross-repository runtime artifacts. CWP tracked main worktree is clean; 14,067 untracked files (~253.8 MB) remain. Do not bulk-clean.",
+  "observed_at_utc": "2026-11-10T20:49:51Z",
+  "next_action": "Run the bounded zero-model source-facts diagnostic against exact CWP master 5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5, then continue evidence-based reconciliation of the remaining worktrees, 17 non-ancestor local refs, and cross-repository runtime artifacts. CWP tracked main is clean; 13,279 untracked files (198,372,372 logical bytes) remain. Do not bulk-clean.",
+  "failure_root_cause_summary": {
+    "source": "review/failure-root-cause-reconciliation-20261110.md",
+    "normalized_root_cause_classes": 10,
+    "historical_attempt_count": "not recoverable from the deduplicated audit; do not treat 10 classes as 10 runs",
+    "real_false_result_rejections": 4,
+    "additional_legal_error_dto_rejections": 1,
+    "clear_redundant_policy_gates": 2,
+    "including_buggy_registry_acceptance_gate": 3,
+    "including_optional_observer_failure_as_gate_behavior": 4,
+    "status": "R7 implementation and regression evidence closed identified observation/representation gates; current-main source-facts replay and real product quality remain open",
+    "retained_controls": [
+      "actual configured token/fee/time/byte/space budgets",
+      "source bytes SHA, identity, period, as-of and locator",
+      "numeric/currency/unit correctness",
+      "durable paid status and one-POST recovery semantics",
+      "protocol/version compatibility and truthful partial/unknown status"
+    ]
+  },
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -757,11 +775,11 @@
     "current_main_replay": "OPEN; candidate 10/10 coverage and 8/10 native-prose observations are not current-main acceptance"
   },
   "workspace_reconciliation": {
-    "root_untracked_status_entries": 14067,
-    "root_untracked_logical_bytes": 253830848,
+    "root_untracked_status_entries": 13279,
+    "root_untracked_logical_bytes": 198372372,
     "root_tracked_dirty_entries": 0,
     "cleanup_complete": false,
-    "next_action": "Run the bounded current-master source-facts replay; reconcile the eight remaining worktrees and all 17 non-ancestor local refs against PWF/evidence; classify root and cross-repository untracked run artifacts. Do not bulk-clean.",
+    "next_action": "Run the bounded current-master zero-model source-facts replay; reconcile the remaining worktrees and all 17 non-ancestor local refs against PWF/evidence; classify root and cross-repository untracked run artifacts. Do not bulk-clean.",
     "p2_status": "dashboard_owner_integration_merged_and_pushed_to_cwp_ff_rf_owner_mains; revenue_forecast_audit_p2_open_after_p1",
     "dashboard_owner_p2_commits": {
       "cwp": "0fc56b25b89da9f3da5921ba64122d9745e1752d",
@@ -772,11 +790,27 @@
     "dashboard_owner_p2_e2e_receipt": "docs/plans/dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json",
     "starting_root_head": "fb868064e4d37a0441373578f4286964e739e6b4",
     "starting_root_matched_origin_master": true,
-    "last_verified_main_head": "2862fe951f08547cba9bd8b39ec5e13c5dc286c9",
+    "last_verified_main_head": "5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5",
     "last_verified_main_matches_origin_master": true,
     "worktree_count_including_root": 9,
-    "local_branch_count": 52,
+    "local_branch_count": 23,
     "non_ancestor_local_branch_count": 17,
+    "latest_workspace_snapshot_utc": "2026-11-10T20:49:51Z",
+    "current_tracked_worktree_clean": true,
+    "untracked_by_top_level": {
+      ".planning": {"files": 13134, "logical_bytes": 181178404},
+      "docs": {"files": 143, "logical_bytes": 17173810},
+      "tools": {"files": 1, "logical_bytes": 18066},
+      ".workbuddy-ai": {"files": 1, "logical_bytes": 2092}
+    },
+    "cache_cleanup": {
+      "current_batch": {"candidate_directories": 269, "removed_directories": 268, "removed_files": 8349, "removed_logical_bytes": 182104966, "tracked_test_fixture_restored": "tools/storage_footprint/tests/fixtures/static_root/.pytest_cache/scratch.txt", "paths_verified_inside_workspace": true, "reparse_points_found": false, "same_named_cache_directories_remaining": 1, "remaining_named_directory_is_tracked_test_fixture": true, "tracked_tree_clean_after_restore": true},
+      "prior_planning_batch": {"directories": 1746, "files": 7891, "logical_bytes": 158237631},
+      "combined_removed_directories": 2014,
+      "combined_removed_files": 16240,
+      "combined_logical_bytes": 340342597,
+      "note": "Logical file sizes only; not a measured physical disk-space delta. One tracked test fixture under a .pytest_cache path was restored byte-for-byte and preserved. Original company files, production config, and PDF SDK environment were preserved."
+    },
     "cleanup_batch_record": "review/workspace-reconciliation-20261110/README.md",
     "completed_cleanup_batch": {
       "retired_worktrees": 7,

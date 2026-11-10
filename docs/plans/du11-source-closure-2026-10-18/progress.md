@@ -429,3 +429,13 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 - 当前 CWP 根已跟踪文件 clean，HEAD 与 origin/master 均为 `2862fe951f08547cba9bd8b39ec5e13c5dc286c9`；仍有 14,067 个未跟踪文件（253,830,848 bytes）、9 个工区（含根）和 17 个非祖先本地 refs。剩余每个工区/跨仓状态及下一步见 [workspace reconciliation](review/workspace-reconciliation-20261110/README.md)。
 - 当前剩余重点：source-facts 当前主线复验；M3/W04 重叠代码候选的统一接收/淘汰；R1 observation 与 extractive runtime 唯一 PWF 对账；17 个非祖先 refs、根 untracked 运行记录和 FF/RF/StockWiki 本地状态逐项核销。
 - 本轮只读盘点、哈希归档及 PWF 更新，没有改产品源码，也没有运行产品测试。
+
+## 2026-11-10 20:41 UTC — 失败根因分类与缓存清理更新
+
+- 按冻结审计与 R7 收口交叉对账：H01–H10 是 10 类归并根因，不是 10 次模拟运行。能确认的正常真实结果误拒有 H01/H03/H04/H05 四个；另有 H06 一个有效错误 DTO 被旧协议消费者拒绝。严格按多余策略门槛统计为 2 类（mtime-only、任意 300 KB）；把错误 registry 接收判定也列入则为 3 类；把可选 observer `KeyError` 的结果遮蔽视作门禁行为则宽口径为 4 类。逐类与保留项见 `review/failure-root-cause-reconciliation-20261110.md`。历史材料未逐次统计重复 rerun，不能给出全体 attempt 总数。
+- 已直接核对当前主线：可选事件写入/日志大小不再拒绝 native 成功；现有回归覆盖累计事件超显示额度仍允许唯一 POST、观察 I/O 失败不掩盖成功、实际输入不一致仍拒绝、durable paid pin 和真实 native 错误不变。本轮读取代码/用例，没有重新运行全量或真实付费测试。
+- 进一步检查发现 `verify_preparation` 只用 SHA-256 + byte size 确认保护内容，mtime 差异仅记入 `metadata_changes`；非冻结样本可正常 replay，只是不具备 clean-holdout 资格。两项旧 audit 推荐当前不会构成运行许可门。source SHA、来源身份/期间/as-of、真实费用/token/时间/字节预算及恢复约束继续保留。
+- 对 CWP 识别了 269 个标准 Python/pytest/mypy/ruff 缓存路径；其中 268 个确属可重建缓存，清除 8,349 个文件、182,104,966 logical bytes。清理时曾误把一个位于 `.pytest_cache` 名称目录下的 tracked test fixture 纳入候选；已用 index checkout 按 CRLF 规则恢复、核对内容一致，tracked tree clean。该夹具不计入清理数，今后只删除确认无 tracked 内容的 cache 目录。加此前 `.planning` 缓存批次合计净清除 2,014 个目录、16,240 个文件、340,342,597 logical bytes（约324.58 MiB）。未删原件、生产配置或 PDF SDK 环境；逻辑大小不是物理释放量。
+- CWP 当前工作树在审计快照时为 `5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`，与本地 `origin/master` tracking ref 相同，tracked clean；13,279 个未跟踪文件、198,372,372 bytes，9 个工区（含根）、23 个本地分支/17 个非祖先分支。FF/RF owner main 也分别与本地 upstream tracking refs 同步，且 P2 commit 均为 main 祖先。所有工作区未跟踪工件仍需按归属逐项核销。
+- 当前主线 source-facts zero-model replay 尚未运行；11 modified/12 untracked 的 detached candidate 仍保留，不能用候选结果替代当前 master 结论。下一步继续按 `task_plan.md` 做绑定到准确主线版本的有界重放，再按证据清理 worktree/ref 和运行产物。
+- 缓存清理过程补记：首次候选扫描误把一个 `.pytest_cache` 目录里的 19-byte tracked test fixture 当缓存删掉；通过 Git index checkout 原样恢复，Git 内容比较无差异。净清理统计已排除这个文件和目录；当前这一个同名目录仅因保留测试夹具而存在，其他标准缓存目录已无剩余。

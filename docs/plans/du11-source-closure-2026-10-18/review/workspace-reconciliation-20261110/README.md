@@ -1,5 +1,16 @@
 # 本地工作区核销 — 2026-11-10
 
+## 20:49 UTC 复核更新（覆盖较早快照的当前值）
+
+- CWP 代码盘点基线 `master == origin/master == 5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`；FF `main == origin/main == f65e6ca75fbce0616e65870f0aea78b793ef883c`；RF `main == origin/main == b005a179280ee19695578bdba9427b4dd44cdd73`。三个 Dashboard owner P2 提交均在各自 main 中。以上是本地 refs 对账，没有在这次快照声称新鲜查询 GitHub 服务端；随后的本次提交只更新 PWF，不改产品代码。
+- CWP tracked worktree clean；9 个注册 worktree（含根）、23 个本地分支、17 个 tip 非 `master` 祖先。
+- 当前未跟踪文件精确枚举为 13,279 个、198,372,372 bytes（189.19 MiB）：`.planning` 13,134 个/181,178,404 bytes；`docs` 143 个/17,173,810 bytes；`tools` 1 个/18,066 bytes；`.workbuddy-ai` 1 个/2,092 bytes。不能仅因未跟踪就删除。
+- 本轮核实 269 个根仓标准 Python/pytest/mypy/ruff 缓存候选；268 个可重建 cache 目录已清除（8,349 文件、182,104,966 logical bytes）。其中一个位于名为 `.pytest_cache` 的 tracked test fixture 目录；初次清理误删该 19-byte fixture，随后按 index checkout 规则恢复并验证内容无 diff，因此该目录保留且不计入净清理数。另含此前 `.planning` 已移除的 1,746 个缓存目录（7,891 文件、158,237,631 logical bytes）。合计净清理 2,014 个 cache 目录、16,240 个文件、340,342,597 logical bytes（324.58 MiB）；逻辑大小不代表物理盘准确释放量。PDF SDK 环境、真实 run/paid evidence、原文、生产配置未清理。
+- 剩余 CWP worktree 状态最新只读计数：extractive runtime `0 tracked / 81 untracked`；source-facts `11 modified / 12 untracked`；M3 acceptance `22 modified / 317 untracked`；W04 config `3 modified / 22 untracked`；W04 semantics `3 modified / 92 untracked`；R1 observation `98 modified / 566 untracked`。Dashboard 的两个 owner worktree 分别有 5 与 8 个未跟踪文件，仍需在各自 P3/P4 归属下核销。没有对上述工区进行 checkout、修改或清理。
+- 失败分类已在[根因对账](../failure-root-cause-reconciliation-20261110.md)中单列：10 个归并根因类别不是 10 次尝试；4 个真实正常结果误拒，另有 1 个合法 error DTO 旧 schema 拒收。2 个明确过度设计检查已移除；错误 registry gate 和观察器故障也已修，不应再反复修同一旧收据。真实资源和来源事实约束仍有效。
+
+下面未加时间标记的清理与跨仓盘点段落是更早的工作底稿；遇到数字冲突时，以本复核更新和 [CURRENT_STATUS](../CURRENT_STATUS.md) 为准。
+
 ## 结论
 
 - Dashboard owner-integration **P2 已完成**，CWP、FF、RF 对应提交均已进入各自 owner main，且本机 main 与配置的 `origin/main` 同步。E2E 收据：[`p2_cross_market_e2e_receipt.json`](../../../dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json)。

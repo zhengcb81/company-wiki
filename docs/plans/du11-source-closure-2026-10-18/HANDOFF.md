@@ -5,7 +5,9 @@
 ## 最近确认
 
 - P2 三仓主线：CWP `0fc56b25b89da9f3da5921ba64122d9745e1752d`（当前更后续提交已包含）、FF `f65e6ca75fbce0616e65870f0aea78b793ef883c`、RF `b005a179280ee19695578bdba9427b4dd44cdd73`。按 owner 分别发布，不重复 cherry-pick；E2E 见 [P2 收据](../dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json)。
-- CWP 最新已验证的 `master` 与 `origin/master` 为 `2862fe951f08547cba9bd8b39ec5e13c5dc286c9`，tracked worktree clean。当前仍有 14,067 项约 253.8 MB 未跟踪文件、9 个工区（含根目录）及 17 个非祖先本地分支；其中只有 7 个已确认完成/重复的工区本轮归档后移除。不能称工作区已全部清理；逐项状态见 [workspace reconciliation](review/workspace-reconciliation-20261110/README.md)。
+- CWP 代码核查基线为 `master == origin/master == 5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`，tracked clean；FF `main == origin/main == f65e6ca75fbce0616e65870f0aea78b793ef883c`，RF `main == origin/main == b005a179280ee19695578bdba9427b4dd44cdd73`。三个 owner 的 Dashboard P2 commit 都是各自 main 的祖先。CWP 基线有 13,279 个未跟踪文件、198,372,372 logical bytes，9 个 worktree（含根）、23 个本地分支（17 个非祖先）；本次提交只更新 PWF，不改产品代码，不能称本地工作区已全部清理。
+- 本轮清掉 CWP 内 269 个标准缓存目录/8,350 个文件（182,104,985 logical bytes）；此前另清 `.planning` 缓存 1,746 个目录/7,891 个文件。PDF SDK 环境与真实运行、证据和 PWF 保留；没有删除原始公司文档。逻辑大小不是物理释放量。
+- 误拒历史已按 10 个根因类别对账：4 个真实结果的观察/审计误拒，外加 1 个合法 DTO 版本错配；窄口径 2 类明确过度设计门、含错误 registry gate 为 3 类，宽口径把观察器故障也算入为 4 类。R7 已修并有现存回归；真实资源、source-truth、数值及恢复边界保留。详见 [失败根因对账](review/failure-root-cause-reconciliation-20261110.md)。
 - Source-facts 候选仍在 detached worktree，不接受其源码为已并线代码。五份关键 JSON 收据已复制并以 SHA-256 核实；guard 结果需在当前主线复验，见 [source-facts 对账](review/source-facts-reconciliation-20261110/README.md)。
 - CWP 定向测试曾因旧集成测试 monkeypatch 已退役的 `select_budget_items` 而 202/203 失败；改为观察现行 `plan_budget_items` 后，同一组定向测试 203 passed（6.72 秒）。修订已提交并推送：`f01ba7411908d7a6a38451781ce5f9f18600bf9b`；推送时 fixed smoke 为 18/18，完整远端 CI 尚未在本记录中核实。
 

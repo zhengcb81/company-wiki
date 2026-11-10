@@ -1,4 +1,4 @@
-# 当前状态 — P2 已并线；D4/D5 范围验收通过；source-facts 当前主线复验与工作区核销未完成
+# 当前状态 — P2 已并线；D4/D5 范围验收通过；误拒根因已对账；source-facts 主线复验与工作区核销未完成
 
 唯一入口：[当前状态](CURRENT_STATUS.md) / [机器状态](CURRENT_STATUS.json)；详细顺序见 [task_plan](task_plan.md)，交接见 [HANDOFF](HANDOFF.md)，固定长期目标见 [MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。
 
@@ -6,7 +6,9 @@
 
 **同名 P2 需要区分：**上述“已完成”是 Dashboard owner 接线 P2；本计划 `remaining_stages.P2` 是后续证明 RF 实际消费同一份已接受摘要 artifact，仍为 OPEN，依赖 P1 完成。模块化并非整个 Dashboard/RF 工作流已全部完成。
 
-**工作区核销仍在进行（2026-11-10 19:16 UTC）：**CWP 当前 `master` 与 `origin/master` 同步于 `2862fe951f08547cba9bd8b39ec5e13c5dc286c9`，已跟踪文件干净；仍有 14,067 项未跟踪文件、约 253.8 MB，9 个注册工区（含根目录）和 17 个非祖先本地分支。刚完成 7 个已并线工区的归档后清理，没有删除原始公司文档。逐项证据、剩余工区与下一步见 [工作区核销记录](review/workspace-reconciliation-20261110/README.md)。
+**工作区核销仍在进行（2026-11-10 20:49 UTC 代码快照）：**本次盘点基线 CWP `master == origin/master == 5d4b4f4b6ea70f703ca7710d65e3a27d158f62a5`，跟踪文件干净；有 13,279 个未跟踪文件，逻辑大小 198,372,372 bytes（189.19 MiB），9 个注册工区（含根目录）、23 个本地分支，其中 17 个非祖先。根下识别的 269 个缓存路径中，268 个是可重建缓存（8,349 文件、182,104,966 logical bytes）；一个同名 `.pytest_cache` 实际是已跟踪测试夹具，已按 index checkout 字节恢复并保留。加上此前清掉的 `.planning` 缓存，本仓净移除约 324.58 MiB 缓存逻辑数据。没有删除原始公司文档、生产配置或模型环境；逻辑字节不等于实际释放的磁盘空间。本状态提交只更新 PWF，不改产品代码。逐项证据见 [工作区核销记录](review/workspace-reconciliation-20261110/README.md)。
+
+**误拒根因核对（2026-11-10）：**历史审计归并了 10 类根因而非 10 次运行；确认 4 个真实结果被观察/审计错误挡住，另有 1 个合法公共错误 DTO 被旧消费者拒绝。窄口径有 2 个明确过度设计门槛（mtime 与任意 300 KB 上限）；把错误 registry predicate 也算进去是 3 类门禁误拒；再把观察器 KeyError 耦合算入则宽口径共 4 类。R7 已移除或修正这些限制。真实预算、原文身份/哈希/期次、数值和付费恢复约束保留。分类、证据与当前代码核对见 [误拒根因对账](review/failure-root-cause-reconciliation-20261110.md)。
 
 **当前唯一下一步：**在当前主线精确复验 source-facts 候选所报告的遗漏，并完成本地 worktree/分支核销。候选观察显示 coverage guard 10/10、native-prose guard 8/10（漏两个指定业务事实），当次预算未耗尽且没有模型调用；但观察绑定 detached worktree 的源码，不能升级为主线通过或失败。先对当前 `master` 做小范围零模型重放，只有缺口复现才改生产 owner 层。此前 H1 的 102 对 101 个 native-member 差异、locator/context 对齐、最终独审和 scratch 恢复仍未完成。通过当前主线复验与修复后才恢复新版真实摘要、缓存恢复、RF 实际采用及固定公司循环。
 
