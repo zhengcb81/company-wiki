@@ -447,3 +447,15 @@ CWP D4 merge/ROOT commit 已推到 origin/master。AUDIT 删除旧跨仓测试�
 实际复验区分两份半年报。cn-h1 SHA182e2062…的0.9为10/10，整体PARTIAL并有源码冻结收据。R4 SHA d0dba19e…为9/12且16M账户耗尽，原件/DB/runtime保持一致，0模型/下载，scratch恢复。当前source-facts缺口调查由此进入工作量分诊。
 
 W04 config 的25个修改/未跟踪文件已逐字节归档，旧工区和已并线分支移除。两个重复别名ref已移除，七份原始失败push日志压缩后由15,896,545降至1,430,555 bytes，四个旧测试控制文件17bytes移除。下一步优先P3公开Reader/解析接线，再做R4共因优化。
+
+## 2026-11-10 22:13 UTC 发布
+
+工程与PWF提交729a787641fccdad490f81b34e10669b16385e53已推送master。提交钩子Ruff/mypy通过，push smoke18 passed，6.04秒。GitHub CI42912332126已启动，当前in_progress。当前跟踪文件干净，剩余untracked13,267文件/182,457,744bytes。25个当前配置测试产生的llm.yaml临时夹具共10,344bytes已删除，目录恢复初始不存在。八个工区/20分支/15非祖先状态继续有效。
+
+## 2026-11-10 22:18 UTC 重复分支核销
+
+DU3-dependencies分支25个交付路径全部与master同blob，六个实施commit已有patch-equivalent接收，已删除旧本地ref ef59a574…。RF-state-audit只有旧可见性不全的临时报告，正式同路径报告已在main 11b6472c3，旧docs-only ref447d1c7…已删除。现在18个本地分支，其中13个非祖先，工区8个。
+
+## 2026-11-10 CI42912332126 根修
+
+源码729a78764的Unit tests远端2F，本机复现同两例。实际错误是正确security_id让任意entity被重命名为该issuer，错误目录名因此也命中。修复归SecurityMasterStore.issuer_identity_tokens，exact id只消歧该issuer真实拥有的alias或等价市场代码。新contract先1F，修后相关59项通过，涵盖query/resolve、共享alias、零填充和跨市场关系。前一CI失败保持记录，后续CI待验证。

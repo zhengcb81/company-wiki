@@ -689,7 +689,13 @@ class SecurityMasterStore:
             )
             if issuer and security_issuer and issuer != security_issuer:
                 return ()
-            if not issuer and security_issuer:
+            # The explicit listing disambiguates a known alias or an equivalent
+            # market code. It does not rename an unrelated request entity.
+            entity_code_issuer = security_issuers.get(_ticker_key(entity, target_market), "")
+            if not issuer and security_issuer and (
+                security_issuer in token_owners.get(wanted, ())
+                or entity_code_issuer == security_issuer
+            ):
                 issuer = security_issuer
             if not issuer and wanted not in token_owners:
                 try:

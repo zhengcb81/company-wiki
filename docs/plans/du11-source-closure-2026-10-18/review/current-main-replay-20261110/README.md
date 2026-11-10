@@ -43,3 +43,13 @@ W04 config 旧工区的 3 个修改文件、22 个未跟踪文件及 binary patc
 两个重复本地别名已移除，commit 继续由 codex/d00-return5-cwp-audit 与 codex/dashboard-cwp-return4-d00-fix 引用。原始公司文档保留。
 
 七份历史失败 push 原日志共 15,896,545 bytes，已进行 gzip 原样往返核对并保留于 retired-push-logs，共 1,430,555 bytes，原未跟踪日志已移除。另清除四个已结束测试的进程控制文件，共 17 bytes。原始日志路径和 SHA 映射见该目录 manifest.json。
+
+## 发布与测试恢复
+
+源码和本轮PWF已在729a787641fccdad490f81b34e10669b16385e53进入master并推送。Ruff/mypy与18项push smoke通过。25份当前配置测试的llm.yaml临时夹具共10,344bytes已核对为自有测试产物并清理，目录恢复初始不存在。远端CI记录42912332126目前in_progress。
+
+## 远端 CI 增量根修
+
+CI42912332126的Unit tests有2F，位于test_source_fact_entity_projection的query/resolve参数例。实际失败在错误公司名加正确证券代码时仍被接收。SecurityMasterStore把精确代码误当成任意名字的重命名依据。现将精确代码消歧限制在真实alias成员或等价市场代码内，保留已证明跨市场关系与原样名字查询。新增contract先1F，修后59项相关回归通过。该缺陷归身份owner，发布修复后继续核验远端结果。
+
+身份增量独审通过。独立22个关键回归通过，4.64秒，复核同名/共享别名、零填充代码、已证明跨市场关系与wrong-directory反控。

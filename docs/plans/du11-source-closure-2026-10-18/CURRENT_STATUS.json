@@ -93,7 +93,7 @@
   },
   "project_status": "MODULARITY_GATES_PATCH_REVIEWED_P3_PUBLIC_PORTS_OPEN_R4_WORK_EXHAUSTION_OPEN_CLEANUP_OPEN",
   "as_of_date": "2026-11-10",
-  "observed_at_utc": "2026-11-10T22:05:00Z",
+  "observed_at_utc": "2026-11-10T22:13:57Z",
   "next_action": "Finish P3 public Reader streaming and parser ports with isolation tests, then profile R4 repeated work under the unchanged 16M work account. Continue evidence-based worktree retirement.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
@@ -804,25 +804,21 @@
     "dashboard_owner_p2_e2e_receipt": "docs/plans/dashboard-owner-integration-2026-11-09/validation/p2_cross_market_e2e_receipt.json",
     "starting_root_head": "fb868064e4d37a0441373578f4286964e739e6b4",
     "starting_root_matched_origin_master": true,
-    "last_verified_main_head": "e7758d54e162d97c7d97f6a76e3af9cd39ca627b",
+    "last_verified_main_head": "729a787641fccdad490f81b34e10669b16385e53",
     "last_verified_main_matches_origin_master": true,
     "worktree_count_including_root": 8,
-    "local_branch_count": 20,
-    "non_ancestor_local_branch_count": 15,
-    "latest_workspace_snapshot_utc": "2026-11-10T22:05:00Z",
+    "local_branch_count": 18,
+    "non_ancestor_local_branch_count": 13,
+    "latest_workspace_snapshot_utc": "2026-11-10T22:13:57Z",
     "current_tracked_worktree_clean": true,
     "untracked_by_top_level": {
       ".planning": {
-        "files": 13134,
-        "logical_bytes": 181178404
+        "files": 13123,
+        "logical_bytes": 165281842
       },
       "docs": {
         "files": 143,
         "logical_bytes": 17173810
-      },
-      "tools": {
-        "files": 1,
-        "logical_bytes": 18066
       },
       ".workbuddy-ai": {
         "files": 1,
@@ -932,7 +928,23 @@
       "old_push_log_files_compacted": 7,
       "old_push_logs_bytes": 15896545,
       "compressed_log_bytes": 1430555,
-      "original_files_removed": 0
+      "original_files_removed": 0,
+      "config_test_scratch": {
+        "files": 25,
+        "logical_bytes": 10344,
+        "restored_to_initial_absence": true
+      },
+      "du3_dependencies": {
+        "retired_ref": "codex/du3-dependencies-20261014",
+        "tip": "ef59a574bfe6525e6d7dc1c123b2e9294e00ea5e",
+        "delivered_paths_equal_main": 25,
+        "reason": "all final source/test/PWF blobs already equal master; six patch-equivalent implementation commits are integrated"
+      },
+      "rf_state_audit": {
+        "retired_ref": "codex/rf-state-audit",
+        "tip": "447d1c74b78bec369ff5dc32fe78097905ce6342",
+        "reason": "docs-only incomplete visibility report superseded by completed canonical audit in main 11b6472c3"
+      }
     }
   },
   "implementation_20261110": {
@@ -955,6 +967,27 @@
       "explicit UTF-8 in tests",
       "retired official-import and replay observation entrypoints"
     ],
-    "publication": "code and PWF included in this release"
+    "publication": {
+      "source_commit": "729a787641fccdad490f81b34e10669b16385e53",
+      "pushed": true,
+      "precommit_ruff": "PASS",
+      "precommit_mypy": "PASS",
+      "push_smoke_passed": 18,
+      "push_smoke_seconds": 6.04,
+      "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/42912332126",
+      "ci_observed_status": "completed",
+      "ci_conclusion": "failure",
+      "ci_failures": 2
+    },
+    "ci_followup": {
+      "cause": "SecurityMasterStore allowed explicit security_id to rename an unrelated requested entity, including an old folder hint, to the verified issuer.",
+      "repair": "Exact security disambiguates only a name owned by the issuer or a market-equivalent security code; unrecognized literal names and proven cross-market evidence follow existing discovery rules.",
+      "existing_red_cases": 2,
+      "added_red_case": 1,
+      "related_tests_passed": 59,
+      "followup_publication": "included in this commit; final remote CI pending",
+      "independent_review": "PASS",
+      "independent_key_cases_passed": 22
+    }
   }
 }

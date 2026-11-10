@@ -89,3 +89,7 @@ StockWiki 的 F05 模块边界改造已在本地提交 `12c441e86282135b49120112
 5. 再复核 `git status`、worktree、branch 和上游同步，更新本文件与 `CURRENT_STATUS.json`；只有所有残项都有“已并入/已归档/已证明可删”结论，才把 `cleanup_complete` 改为 true。
 
 本轮没有运行产品测试：仅做只读 Git/文件盘点、SHA 归档核对和 SQLite schema/row-count 查询。也没有改写任何产品代码。
+
+## 22:18 UTC 追加核销
+
+DU3-dependencies分支交付的25个源码/测试/PWF路径与master逐blob一致，六个早期提交可按patch-equivalent核对。旧本地ref ef59a574bfe6525e6d7dc1c123b2e9294e00ea5e已清理。RF-state-audit旧ref447d1c74b78bec369ff5dc32fe78097905ce6342只含初期可见性不全的报告，main11b6472c3已有完整正式报告，旧ref已清理。当前工区8个、本地分支18个、非祖先13个。

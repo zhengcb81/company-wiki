@@ -11,7 +11,7 @@
 1. 继续 owner P3。参考 dashboard-owner-integration-2026-11-09/company-wiki.md，将流式和 canonical 候选迁到公开 Reader/解析/证明端口。先补私有调用、两阶段预算、阻塞锁反控，完成同 owner 组合验收后发布。
 2. 对 R4 来源在原工作账户内分诊重复处理，修复三个已解析但未入选的业务单位。候选 worktree 中 11 个源码差异和 12 个 untracked 仍需结合现行实现对账。
 3. 继续 T4 父链与 SEM-QUAL-01 实际输入/解码反控，再做真实摘要、恢复和 RF 实际采用。
-4. 继续核销剩余 7 个外部注册工区、15 个非祖先分支和历史运行产物。W04 config 已退休，完整 25 文件作者包与 SHA 清单在 workspace-reconciliation-20261110/w04-config-author-package。原始日志 gzip 映射在同目录 retired-push-logs。
+4. 继续核销剩余 7 个外部注册工区、13 个非祖先分支和历史运行产物。W04 config 已退休，完整 25 文件作者包与 SHA 清单在 workspace-reconciliation-20261110/w04-config-author-package。原始日志 gzip 映射在同目录 retired-push-logs。
 
 ## 质量与发布证据
 

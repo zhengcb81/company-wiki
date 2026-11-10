@@ -375,6 +375,29 @@ def test_shared_alias_in_source_market_is_not_an_identity_anchor(tmp_path):
     assert canonical_identity.issuer_link_id is None
 
 
+def test_exact_security_disambiguates_only_names_or_codes_owned_by_that_issuer(tmp_path):
+    from company_wiki.source_catalog import SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "scoped-master")
+    store.write_market(
+        "HK",
+        (
+            _record(name="Issuer One", market="HK", exchange="HKEX", ticker="00001"),
+            _record(name="Issuer Two", market="HK", exchange="HKEX",
+                    ticker="00002", aliases=("OTHER_SHARED",)),
+            _record(name="Issuer Three", market="HK", exchange="HKEX",
+                    ticker="00003", aliases=("OTHER_SHARED",)),
+        ),
+        retrieved_at="2026-11-09T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    for entity in ("Unlisted Name", "OTHER_SHARED"):
+        tokens = store.issuer_identity_tokens(entity, market="HK", security_id="00001")
+        assert "issuerone" not in tokens
+        assert "00001" not in tokens
+    tokens = store.issuer_identity_tokens("1", market="HK", security_id="00001")
+    assert {"issuerone", "00001"}.issubset(tokens)
+
+
 def test_cross_market_identify_refuses_an_incomplete_master(tmp_path, capsys):
     from company_wiki.source_catalog import SecurityMasterStore
     from company_wiki.source_catalog.identity_cli import main
