@@ -50,9 +50,9 @@ def _source_usability_version(mime_type: str | None, material_matcher: str | Non
         if mime_type in NORMALIZED_MIME_TYPES:
             hashes["normalized_carrier_parser"] = normalized_parser_sha256(mime_type)
     elif material_matcher == _NARRATIVE_MATERIAL_MATCHER:
-        from . import narrative_replay
+        from .narrative_replay import replay_algorithm_sha256
 
-        hashes[material_matcher] = code_sha256(narrative_replay.__file__)
+        hashes[material_matcher] = replay_algorithm_sha256()
     elif material_matcher is not None:
         raise ValueError("unknown material matcher")
     return "source-usability/4+" + _digest(hashes)
@@ -63,26 +63,31 @@ def _pdf_versions() -> dict[str, str]:
     from company_wiki.document_understanding.geometry_intent.reading import BRIDGE_VERSION
     from company_wiki.document_understanding.reading_identity import pdf_reading_algorithm_hashes
     from company_wiki.resource_budget import budget_algorithm_sha256
-    from . import (narrative_evidence, narrative_native_ranges, narrative_pdf_candidates,
-                   narrative_pdf_intent, narrative_pdf_layout)
+    from . import narrative_native_ranges, narrative_pdf_layout
+    from .narrative_evidence import PDF_PROSE_LAYOUT_FEATURE_VERSION as PDF_PROSE_LAYOUT_FEATURE_VERSION
+    from .narrative_evidence import evidence_algorithm_sha256
+    from .narrative_pdf_candidates import pdf_candidate_algorithm_sha256
+    from .narrative_pdf_intent import PDF_INTENT_EXECUTION_VERSION as PDF_INTENT_EXECUTION_VERSION
+    from .narrative_pdf_intent import pdf_intent_algorithm_sha256
 
     # Capture remains historical. Recompute each owner identity before reuse.
     algorithms = pdf_reading_algorithm_hashes()
     algorithms.update({
-        module.__name__: code_sha256(module.__file__)
-        for module in (narrative_pdf_intent, narrative_pdf_candidates, narrative_evidence)
+        "company_wiki.source_catalog.narrative_evidence": evidence_algorithm_sha256(),
+        "company_wiki.source_catalog.narrative_pdf_candidates": pdf_candidate_algorithm_sha256(),
+        "company_wiki.source_catalog.narrative_pdf_intent": pdf_intent_algorithm_sha256(),
     })
     algorithms["company_wiki.resource_budget"] = budget_algorithm_sha256()
     return {
         "pdf_reading_bridge": BRIDGE_VERSION,
         "pdf_reading_algorithms": _digest(algorithms),
         "pdf_frontend": narrative_pdf_layout.PDF_READING_LAYOUT_FEATURE_VERSION,
-        "pdf_native_prose": narrative_evidence.PDF_PROSE_LAYOUT_FEATURE_VERSION,
+        "pdf_native_prose": PDF_PROSE_LAYOUT_FEATURE_VERSION,
         "pdf_capture": narrative_pdf_layout.PDF_LAYOUT_CAPTURE_STRATEGY,
         "pdf_projection": FEATURE_VERSION,
         "pdf_native_range": narrative_native_ranges.NATIVE_PAGE_VIEW_FEATURE_VERSION,
         "pdf_native_range_parser": narrative_native_ranges.NATIVE_RANGE_CURRENT_PARSER_VERSION,
-        "pdf_page_intent": narrative_pdf_intent.PDF_INTENT_EXECUTION_VERSION,
+        "pdf_page_intent": PDF_INTENT_EXECUTION_VERSION,
     }
 
 

@@ -23,7 +23,7 @@ from typing import Any, Callable
 
 from .adapters.parity import ParityDiff, ParityReport, run_parity
 from .models import RootSpec
-from .scanner import _scan_root_v1, scan_root_strategy
+from .scanner import scan_root_strategy
 
 # Migration-rules ledger: (relative_path, field) -> reason.  A rule may only
 # be registered when the frozen corpus actually exhibits that diff.
@@ -91,8 +91,8 @@ def run_root_shadow_parity(
     progress: Callable[..., None] | None = None,
 ) -> ParityReport:
     """Compare v1 and v2 scanner output over the same frozen tree."""
-    v1_candidates, v1_excluded, _ = _scan_root_v1(
-        root, company_names, progress=progress
+    v1_candidates, v1_excluded, _ = scan_root_strategy(
+        root, company_names, progress=progress, v2_scan_shadow=False
     )
     v2_candidates = _v2_candidates(root, company_names)
     # content-hash comparison: every v2 candidate must carry the same

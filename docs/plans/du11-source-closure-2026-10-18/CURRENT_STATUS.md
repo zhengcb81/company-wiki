@@ -18,11 +18,20 @@
 - CWP `SourceCatalog` 接管原文位置排序和浏览查询：`SourceVersionReader` 不再调用 `_annotate_locations`；`PublicDocumentBrowser` 不再直接执行 SQLite 查询或持有 metadata JSON 字段路径。新增冻结、pathless 的 `CatalogBrowseVersion` / `SourceVersionIdentity` DTO，以及 Catalog owner 查询接口。
 - 用 AST 契约测试先验证原有穿透，再验证 Reader 只能调用公开 Catalog 方法、浏览器不能触碰 raw SQL。修复复用 handle 投影遗漏的 source/rank/manifest 字段，避免 Resolver 生成 canonical handle 时缺值。
 - 定向边界组合 **66 passed**；浏览、原文复用、入库与锁组合 **52 passed**。扩展修复后最终固定组合 **130 passed**、无跳过；Ruff 通过；mypy 检查 235 个源文件通过。Windows 长路径测试先复现 260 字符处 `os.open` 失败，再覆盖 CatalogOperationLock 完整生命周期；独立审查 PASS，见 review/p3-public-ports-20261110/README.md。
-- **此子节点不代表全项目解耦完成。** P3 仍 OPEN：未并入的旧 stream/canonical 候选不代表当前主线生产缺陷；当前 Reader 仍依赖 Resolver 的私有预算/字节验证/metadata helper，公开流式 Reader 与 parser 接口也未完成。下一步应先为这些 owner 接口写隔离测试，再迁移调用。
+- **此子节点不代表全项目解耦完成。** 截至 11-10，Reader 仍依赖 Resolver 私有预算/字节验证/metadata helper；这些调用于 11-11 子节点迁为公开 owner ports，见下节。旧 stream/canonical 候选不代表当前主线生产缺陷；公开流式 Reader 与 parser 接口仍未完成。
+
+## 2026-11-11 P3 source_catalog 模块边界契约
+
+- 在上一子节点公开 Resolver 读取端口基础上，为整个 `src/company_wiki/source_catalog` 增加 AST 边界契约：生产模块不能跨 sibling 读取私有符号/方法或导入私有模块；owner 的共享 API 必须在 `__all__` 中声明。规则在测试中扫描全包，而不是只测 Reader 几个已知调用点。
+- 按独审发现先写 RED 探针并再修扫描器：覆盖直接/别名/局部导入、静态与未知动态导入、`sys.modules` 与反射、敏感模块和 sibling 的 wildcard import、helper/方法/绑定方法别名的参数传递、闭包/nonlocal 捕获、推导式作用域、方法体不查找 class namespace，以及参数重绑定时的误报反控。
+- 扫描器契约 **6 passed**；SourceCatalog/Writer/获取范围/身份/摘要资格/读取器/恢复及真实字节 E2E 固定组合 **165 passed in 53.98s**，无跳过。补齐全部新增 owner-port 合同后的扩展组合 **285 passed in 145.11s**，无跳过；两套集合有重叠，不能相加。Ruff 通过。
+- 首轮检查发现新的 AST 契约未在 CI 固定合同清单中运行。先给 `test_pre_push_gate.py` 加失败用例，再将该文件纳入 `FAST_CONTRACT_CASES`；清单用例 + 6 个边界测试 **7 passed in 11.01s**。CI 每次提交新增约 11 秒静态边界合同，不运行 145 秒 owner-port/E2E 扩展组合。
+- 独立只读复核对最终探针组合给出概念 PASS（审查者未运行测试），并确认 nonlocal、推导式、class namespace 和重绑定反控已覆盖。审查绑定文件 `tests/contract/test_source_catalog_module_contracts.py` SHA-256 `a30dd6eea305b525aac8fbb1b6c1dee6bb117e5bec6455c4118bdccd8914bfc6`。AST 检查是静态 CI 规则，不是 Python 运行时沙箱，也不阻止任意动态代码生成。
+- **范围仍有限**：这是 source_catalog 包内模块边界的制度化回归，不表示跨仓整体解耦、公开 streaming/parser ports 或所有其它包的内部边界已完成。下一步仍按 owner 契约迁移 stream/parser，再对其它模块应用同样的 RED/owner-port/组合验证方式。
 
 ## 现在的顺序
 
-1. 继续 Dashboard P3。先收口 SourceVersionReader 对 Resolver 私有 helper 的依赖，再实现单一预算/生命周期的公开流式读取与 parser port；历史 stream/canonical 分支候选要先对当前主线行为重放，不能当作已上线代码的问题。按 owner 公开接口迁移并写隔离测试。
+1. 继续 Dashboard P3。SourceVersionReader、Catalog 与 Resolver 当前可见的 sibling 私有调用已迁到公开 owner ports，并由 source_catalog 全包 AST 合同覆盖；下一步实现单一预算/生命周期的公开流式读取与 parser port。历史 stream/canonical 分支候选要先对当前主线行为重放，不能当作已上线代码的问题。按 owner 公开接口迁移并写隔离测试。
 2. R4 工作量分诊已有收据。优先核对占9.05M的业务扫描统一预扣与下层实际计费重叠，增加owner回归并在原16M账户内修复三项遗漏。
 3. 完成 T4 父链和 SEM-QUAL-01 反控及真实验收，随后推进新版摘要、同/跨 run 恢复、RF 实际采用和固定公司循环。
 4. 核销 source-facts、M3、W04 semantics、R1 observation 与 Dashboard 工区，逐项合并已接受代码和移除已替代状态。
@@ -72,3 +81,9 @@
 ## 本轮发布记录
 
 本轮源码和PWF提交729a787641fccdad490f81b34e10669b16385e53已进入master并推送；身份根修28e18043ccad06495a0843760ea46c79e0d2222c已推送，CI42914407976成功。后续 P3 子节点待提交/推送及 exact-head CI 核验。当前历史未跟踪工件计数为上次观察值 13,267 文件、182,457,744 bytes；该数字未在本子节点重测，跟踪文件目前有本轮修改。
+
+## 2026-11-11 Commit-hook failure repaired by owner contract
+
+- The first commit-hook run correctly stopped publication. Ruff and mypy found that the PDF version-identity refactor had removed two sibling module aliases while `_pdf_versions()` still read constants through those names; the existing PDF cache-identity regression reproduced the `NameError` (RED).
+- Replaced those references with explicit public constants from the owning modules and exported `PDF_PROSE_LAYOUT_FEATURE_VERSION` from `narrative_evidence.__all__`. The same cache-identity regression plus the source_catalog boundary contract pass 7/7; assertion-owner port and cache-identity targeted checks pass 2/2; targeted Ruff passes.
+- Ruff also found one unused local in the new assertion owner-port test; removed it. No hook was bypassed. The full commit hooks have not yet been rerun after these repairs.

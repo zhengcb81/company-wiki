@@ -187,8 +187,14 @@ def test_complete_original_scope_proof_streams_sha_without_master_or_reparse(tmp
         elif entry == "resolver":
             assert SourceResolver(cat, read_budget=budget).resolve(request()).matches
         else:
-            assert local_reconcile._prepare_local_source(cat, request(), _budget=budget)["status"] == "ready"
-        assert len(opened) == 1 and budget.bytes_read == ref.byte_size
+            assert prepare_local_source(
+                cat,
+                request(),
+                limits=LocalPrepareLimits(max_bytes=ref.byte_size),
+            )["status"] == "ready"
+        assert len(opened) == 1
+        if entry != "prepare":
+            assert budget.bytes_read == ref.byte_size
     finally:
         close(cat)
 

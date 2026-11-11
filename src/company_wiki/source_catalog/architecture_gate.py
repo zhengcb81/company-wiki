@@ -112,16 +112,19 @@ _ROOT_HARDCODE_ALLOWED_FILES = frozenset({
     "adapters/registry.py", "policy_2x.py", "policy_3x.py", "config.py",
     "adapter_dispatch.py", "adapters/company_raw.py", "adapters/dayu.py",
     "adapters/sidecar.py", "scanner.py", "models.py", "canonical_writer.py",
-    "portfolio_promoter.py", "admission.py", "focus_cleanup.py",
+    "portfolio_promoter.py", "admission.py", "focus_cleanup.py", "architecture_gate.py",
     "backfill_v2.py", "cli.py",
 })
 
 
 def no_root_specific_hardcode(src_dir: Path | None = None) -> tuple[bool, list[str]]:
-    """Find old root tokens in executable conditionals, never documentation.
+    """Find old root tokens in executable string literals, never documentation.
 
     Exceptions are exact source-relative owner paths, not a basename wildcard
-    that silently exempts a different package's config.py.
+    that silently exempts a different package's config.py. Checking every
+    executable literal catches assignments and dispatch tables as well as
+    conditionals, so moving a root special case out of an ``if`` cannot bypass
+    the architecture check.
     """
     src_dir = src_dir or Path(__file__).resolve().parent
     owner_paths = _ROOT_HARDCODE_ALLOWED_FILES
@@ -130,12 +133,28 @@ def no_root_specific_hardcode(src_dir: Path | None = None) -> tuple[bool, list[s
         if py_file.name.startswith("test_") or py_file.relative_to(src_dir).as_posix() in owner_paths:
             continue
         tree = ast.parse(py_file.read_text(encoding="utf-8-sig"))
-        for condition in ast.walk(tree):
-            if not isinstance(condition, (ast.Compare, ast.MatchValue)):
+        docstrings: set[ast.Constant] = set()
+        for scope in ast.walk(tree):
+            if not isinstance(
+                scope, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)
+            ) or not scope.body:
                 continue
-            for node in ast.walk(condition):
-                if isinstance(node, ast.Constant) and node.value in _ROOT_HARDCODE_TOKENS:
-                    violations.append(f"{py_file.relative_to(src_dir)}:{node.lineno}: hardcodes {node.value!r}")
+            first = scope.body[0]
+            if (
+                isinstance(first, ast.Expr)
+                and isinstance(first.value, ast.Constant)
+                and isinstance(first.value.value, str)
+            ):
+                docstrings.add(first.value)
+        for node in ast.walk(tree):
+            if (
+                isinstance(node, ast.Constant)
+                and node not in docstrings
+                and node.value in _ROOT_HARDCODE_TOKENS
+            ):
+                violations.append(
+                    f"{py_file.relative_to(src_dir)}:{node.lineno}: hardcodes {node.value!r}"
+                )
     return not violations, violations
 
 

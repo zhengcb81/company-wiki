@@ -370,14 +370,14 @@ def test_concurrent_prepare_never_exposes_inflight_and_retry_reuses(lake, monkey
     retire(lake, ref)
     entered = Event()
     release = Event()
-    original = assertion_service._write_source_fact_projection
+    original = assertion_service.write_source_fact_projection
 
     def paused(*args):
         original(*args)
         entered.set()
         assert release.wait(5)
 
-    monkeypatch.setattr(assertion_service, "_write_source_fact_projection", paused)
+    monkeypatch.setattr(assertion_service, "write_source_fact_projection", paused)
     with ThreadPoolExecutor(max_workers=2) as pool:
         first = pool.submit(prepare, lake)
         assert entered.wait(5)
@@ -402,7 +402,7 @@ def test_concurrent_prepare_never_exposes_inflight_and_retry_reuses(lake, monkey
 def test_local_read_failure_preserves_retirement(lake, monkeypatch, failure):
     from company_wiki.source_catalog.local_reconcile import prepare_local_source
     from company_wiki.source_catalog.local_inventory import LocalPrepareLimits
-    from company_wiki.source_catalog import resolver
+    from company_wiki.source_catalog import source_location
 
     ref, path, _ = imported(lake)
     retire(lake, ref)
@@ -417,7 +417,7 @@ def test_local_read_failure_preserves_retirement(lake, monkeypatch, failure):
                 (ref.document_id,),
             )
     elif failure == "placeholder":
-        monkeypatch.setattr(resolver, "_needs_hydration", lambda _: True)
+        monkeypatch.setattr(source_location, "is_hydration_required", lambda _: True)
     elif failure == "byte_cap":
         limits = LocalPrepareLimits(max_bytes=10)
     elif failure == "deadline":

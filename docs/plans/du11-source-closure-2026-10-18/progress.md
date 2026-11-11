@@ -473,3 +473,30 @@ R4工作量探针在28e18043c完成，24.865秒，9/12保持，source runtime稳
 - 浏览日期第一次投影误将旧的 regex-only 行为收紧为日历日期校验。新增 RED 用例后恢复旧 wire 形状语义。resolver handle 消费核对补回 source_id、candidate_rank、manifest 等必要字段。旧 Windows CIM 测试依赖宿主 WMI 实际服务且在沙箱返回 unavailable；改成 deterministic subprocess contract test 验证命令/时间解析，生产 unavailable 行为保持不变。
 - 独立只读审查 PASS，无阻断；其未运行测试。最终定向组合 130 passed（无 skip）；Ruff 全部变更文件通过；mypy 235 source files 无问题。完整记录在 review/p3-public-ports-20261110/README.md。
 - 没有宣布全局解耦完成。Current SourceVersionReader 仍直接依赖 Resolver/Policy 私有预算、字节验证与 metadata helper；公开 stream/parser port 仍 OPEN。历史 stream/canonical 分支不在当前主线，先在现行版本复现其缺口再决定迁移。
+
+## 2026-11-11 — P3 Resolver 读取端口续接（独审待收）
+
+- 先加 LocalInventory、CompanySourceIndex、assertion service 的 AST 边界 RED，再改 owner API 与调用方。Resolver 当前提供 `read_registered_original(ref, location_id, budget)`，把 source/version/location/root/locator/bytes/SHA 验证留在来源 owner 内；Reader 和库存不再从 Resolver 导入 `_read_verified_bytes`、`_ReadBudget` 或 `_needs_hydration`。
+- `company_source_index` 使用 `SourceResolver.entity_matches/project_source_metadata`；`assertion_service` 使用公开 metadata projection，source error/ref 从 source_contract 导入。测试夹具把未受支持的 `SSE` 请求值改成规范市场族 `CN`。
+- 定向命令合计 **198 passed**, 0 skipped；Ruff 变更文件通过。中途在长临时路径运行出现15个夹具初始化失败，根因是路径重定位越过 Win32 路径预算；短路径 `.p3r` 的最终组合全绿。短路径下真实来源字节 E2E 四例通过。
+- 全包私有导入扫描还发现 acquisition、security identity、narrative parser 等多处跨文件私有 import；它们尚未检查/修复。当前 `resolver.py` 内 `_ReadBudget` 兼容别名仍被旧测试引用，计划将测试迁到 public `ReadBudget` 后移除；独立审查已对当前 diff 发起，结论待收。
+- 尚未提交/推送；尚未运行全量 CI；P3 和全局解耦均保持 OPEN。
+
+
+## 2026-11-11 P3 source_catalog sibling-boundary TDD
+
+- Independent review exposed remaining scanner gaps after the first green run: method and nested-helper calls, parameter reflection, wildcard imports, nested-scope module aliases, closure/nonlocal capture, comprehension scope, method global-name lookup, and parameter rebind false positives. Each was converted to a negative or positive probe before changing the AST contract.
+- Updated the package contract to reject wildcard imports from `sys`, `importlib`, `operator`, and source_catalog siblings; fail closed on dynamic registry/import/reflection forms; resolve module aliases by lexical scope; inspect known direct, nested, method, and bound-method helper calls; and distinguish closure reads from shadowed/rebound names. Added a clear comment that this static check is not a Python sandbox.
+- Focused boundary contract: **6 passed**. Affected SourceCatalog integration/E2E set: **165 passed in 53.98s**, 0 skips. Ruff on the contract file passed. The same 165-case set is kept bounded; no full CI was run.
+- Expanded owner-port/source-reader contract set: **285 passed in 145.11s**, 0 skips. This overlaps the 165-case set and is a one-time major-node check; parser-liveness process fixtures contribute most of the elapsed time.
+- The boundary file was initially absent from `CI_CONTRACT_CASES`. Added a RED inventory assertion in `tests/unit/test_pre_push_gate.py`, then included `tests/contract/test_source_catalog_module_contracts.py` in `FAST_CONTRACT_CASES`. The inventory assertion plus all six boundary tests pass **7/7 in 11.01s**; this keeps the recurring CI check bounded and does not add the 145-second suite to each commit.
+- Independent read-only review gave conceptual PASS for the final probe families; reviewer did not run tests. Reviewed scanner file SHA-256: `a30dd6eea305b525aac8fbb1b6c1dee6bb117e5bec6455c4118bdccd8914bfc6`. The implementation and 165-case test results are green locally, but not yet committed/published. No commit/push has been made for the current uncommitted P3 work.
+- Remaining P3: public streaming and parser interfaces, replay of historical stream/canonical claims on current main, then wider module-owner and cross-repository boundary closure. Whole-project modularity is still OPEN.
+- Before publication, registered the static boundary contract in fast CI after a RED test caught its omission. The registration assertion plus six scanner checks pass 7/7 in 11.01s; the expanded owner-port/source-reader set passes 285/285 in 145.11s (overlapping the 165-case subset). The long set remains a major-node run, not a per-commit gate.
+- PWF records the CI omission root cause and bounded recurring test scope. This milestone remains uncommitted until the exact staged diff is checked.
+
+## 2026-11-11 Commit-hook failure repaired by owner contract
+
+- The first commit-hook run correctly stopped publication. Ruff and mypy found that the PDF version-identity refactor had removed two sibling module aliases while `_pdf_versions()` still read constants through those names; the existing PDF cache-identity regression reproduced the `NameError` (RED).
+- Replaced those references with explicit public constants from the owning modules and exported `PDF_PROSE_LAYOUT_FEATURE_VERSION` from `narrative_evidence.__all__`. The same cache-identity regression plus the source_catalog boundary contract pass 7/7; assertion-owner port and cache-identity targeted checks pass 2/2; targeted Ruff passes.
+- Ruff also found one unused local in the new assertion owner-port test; removed it. No hook was bypassed. The full commit hooks have not yet been rerun after these repairs.

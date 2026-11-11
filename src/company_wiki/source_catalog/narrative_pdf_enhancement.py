@@ -79,7 +79,7 @@ class ParagraphRuntimeConfig:
             "environment_implementation_sha256": sha256(Path(__file__).with_name("narrative_pdf_environment.py").read_bytes().replace(b"\r\n", b"\n")).hexdigest()})
         return {**binding, "engine": "docling", "engine_version": self.docling_version,
                 "checkpoint_protocol": page_checkpoints.CHECKPOINT_PROTOCOL,
-                "checkpoint_implementation_sha256": sha256(Path(page_checkpoints.__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
+                "checkpoint_implementation_sha256": page_checkpoints.implementation_sha256(),
                 "model_sha256": self.model_sha256, "model_config_sha256": self.model_config_sha256,
                 "runtime_versions": dict(self.runtime_versions),
                 "environment_sha256": self.environment_sha256,

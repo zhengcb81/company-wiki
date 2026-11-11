@@ -228,11 +228,19 @@ def verify_replayed_pdf_spans(
     return tuple(verified), tuple(failed)
 
 
+def replay_algorithm_sha256() -> str:
+    """Return this owner's stable implementation fingerprint."""
+    from company_wiki.implementation_identity import code_sha256
+
+    return code_sha256(__file__)
+
+
 __all__ = [
     "plan_pdf_replay",
     "PdfReplayPlan",
     "prepare_pdf_replay",
     "prepare_pdf_replay_bytes",
+    "replay_algorithm_sha256",
     "span_roundtrip_key",
     "unit_roundtrip_key",
     "verify_replayed_pdf_spans",

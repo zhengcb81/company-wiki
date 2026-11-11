@@ -62,7 +62,7 @@ class SourceRegistrationScope:
 
     @classmethod
     def all_company_paths(cls, root: Path, company: str) -> list[Path]:
-        from .adapters.common import _walk_files
+        from .filesystem_discovery import walk_document_files
 
         base = root / company
         if not base.is_dir() or base.is_symlink():
@@ -70,7 +70,7 @@ class SourceRegistrationScope:
         paths = list(base.iterdir())
         raw = base / "raw"
         if raw.is_dir() and not raw.is_symlink():
-            paths.extend(_walk_files(raw))
+            paths.extend(walk_document_files(raw))
         return sorted(path for path in paths if cls._company_file(root, company, path))
 
     def company_paths(self, root: Path, company: str, sidecar_suffix: str) -> list[Path]:

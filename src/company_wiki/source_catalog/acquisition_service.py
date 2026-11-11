@@ -21,7 +21,7 @@ from .canonical_writer import (
     CanonicalSourceWriter,
 )
 from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
-from .lock import _acquisition_mutex
+from .lock import acquisition_mutex
 
 
 SOURCE_ENSURE_SCHEMA_VERSION = "1.0"
@@ -142,7 +142,7 @@ class SourceAcquisitionService:
                 timeout = 10.0 if budget is None else budget.remaining_seconds
                 if budget is not None:
                     budget.ensure_open()
-                with _acquisition_mutex(lock_path, timeout_seconds=timeout):
+                with acquisition_mutex(lock_path, timeout_seconds=timeout):
                     if budget is not None:
                         budget.ensure_open()
                     try:

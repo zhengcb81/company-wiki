@@ -209,3 +209,31 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 - UTF-16 code units 是 Win32 长路径阈值的单位；Python len() 对 supplementary characters 会少算。UNC 要转成 \\?\UNC\server\share\...，已有公共 adapter 与 tests now enforce both。实际配置、身份与资源限制未改变。
 - CatalogOperationLock 的真实 WMI/CIM fallback test 不应依赖沙箱是否开放 WMI 服务来决定主测试绿。现在单元契约检查 command/timestamp parser，而真实 lookup unavailable 仍由生产代码按既有方式返回 None；没有放宽 PID identity 判断。
 - 独审指出 Reader→Resolver/Policy 私有辅助调用仍存在。它不是本节点解决的内容，下一次要先冻结 typed verification/budget/metadata ports 并写 RED 边界测试；不得把 current ports 写成零依赖，也不得将未并入候选分支描述成 current production bug。
+
+## 2026-11-11 P3 Resolver 公共读取端口
+
+- 新增 AST RED 契约后，确认 `SourceVersionReader`、`local_inventory`、`company_source_index`、`assertion_service` 对 Resolver 私有 helper 存在依赖；其中库存还直接导入私有 byte verifier、Hydration 函数和私有路径解析别名。
+- Resolver 现在提供基于 `SourceRef + location_id + ReadBudget` 的登记原件验证端口，重新查当前 source/location/root 映射，在 Resolver 内解析受配置根约束的 locator，并对同一字节流验 size/SHA。库存只把成功后的登记相对 locator交给 source_location owner 做其本地收据路径投影；无原始 path/hash 参数穿过 Resolver port。
+- SourceReader 已使用 public metadata/entity/root/budget/read ports；CompanySourceIndex 和 assertion service 的 `_source_metadata` / `_entity_matches` 私有调用迁为 Resolver public methods。库存 hydration helper 与 skip-dir policy 也改为 owner public symbols。这个子节点仍未处置 source_catalog 包内其它子系统的所有私有导入；不要把本节点写成全包或全局解耦完成。
+- 198 项定向组合通过。第一次显式 basetemp 被 Windows 长路径 hook 重定位至过长系统临时路径，造成 15 个夹具创建失败；用工作区短路径 `.p3r` 重跑后成功。CompanySourceIndex 既有夹具误传不被 `SECURITY_MARKETS=(CN, HK, US)` 接受的 `SSE`，修正测试输入为市场族 `CN`，证券代码仍保留 `.SH` venue 后缀，不放宽产品市场枚举。
+- 当前仍待独立审查；需要继续核对 Resolver 私有 byte reader 兼容测试、预算 owner、公共 streaming/parser ports 和 `source_catalog` 其余明确模块边界。
+
+
+## 2026-11-11 独审后的 source_catalog AST 边界补强
+
+- RED 探针证实首版扫描会漏掉 instance method、闭包参数反射、wildcard import、函数内 module alias、嵌套 helper/function alias，以及部分反射/registry 入口；作用域抽象还会把局部导入误投到 module scope。
+- 第二轮复核再指出 `nonlocal`、comprehension target、Python method 不读取 class namespace，以及参数在闭包调用前重绑定导致误报。实现加入对应正反例并修复；复核概念路径认可这些形式已被覆盖，但明确要求当前快照最终复核，并禁止把 AST 扫描器称为运行时安全边界。
+- 目前可证明的范围：source_catalog 生产模块通过静态私有 sibling 边界扫描；常见、可静态解析的 import/alias/reflection/call/closure 形式有红绿契约。任意 `eval`、运行期代码生成、未知外部插件或动态猴子补丁不由该 AST 测试证明不可达。不能用“所有私有调用都绝对不可能”作验收结论。
+- 结果：6 项扫描契约通过；受影响固定集 165 passed/0 skipped，53.98 秒；Ruff 通过。独立只读复核概念 PASS，绑定扫描器文件 SHA-256 `a30dd6eea305b525aac8fbb1b6c1dee6bb117e5bec6455c4118bdccd8914bfc6`，审查者未运行测试。
+
+## 2026-11-11 Fast CI registration
+
+- Root cause: the new source_catalog AST boundary test existed and passed locally, but was absent from `FAST_CONTRACT_CASES`; a green local run alone did not make the rule institutional.
+- Added a RED inventory assertion first, then registered the static boundary test in the fast pre-push contract list. The inventory assertion plus six boundary tests pass 7/7 in 11.01 seconds.
+- The expanded owner-port/source-reader set passes 285/285 in 145.11 seconds, with overlap against the 165-case focused set. It remains a one-time major-node test, not a per-commit CI gate. Remote exact-head CI has not run yet.
+
+## 2026-11-11 Commit-hook failure repaired by owner contract
+
+- The first commit-hook run correctly stopped publication. Ruff and mypy found that the PDF version-identity refactor had removed two sibling module aliases while `_pdf_versions()` still read constants through those names; the existing PDF cache-identity regression reproduced the `NameError` (RED).
+- Replaced those references with explicit public constants from the owning modules and exported `PDF_PROSE_LAYOUT_FEATURE_VERSION` from `narrative_evidence.__all__`. The same cache-identity regression plus the source_catalog boundary contract pass 7/7; assertion-owner port and cache-identity targeted checks pass 2/2; targeted Ruff passes.
+- Ruff also found one unused local in the new assertion owner-port test; removed it. No hook was bypassed. The full commit hooks have not yet been rerun after these repairs.

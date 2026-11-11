@@ -133,7 +133,7 @@ def test_public_writer_old_annual_does_not_block_next_year(lake, market):
 
 
 def test_incomplete_local_listing_metadata_does_not_block_valid_market_acquisition(lake):
-    from company_wiki.source_catalog.local_reconcile import _prepare_local_source_operation
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source_operation
 
     report = (
         lake.config.project_root / "companies" / "Acme" / "raw"
@@ -154,7 +154,7 @@ def test_incomplete_local_listing_metadata_does_not_block_valid_market_acquisiti
     )
     lake.scan()
     adapter = PeriodAdapter()
-    prepared = _prepare_local_source_operation(lake, request("HK", 2024))
+    prepared = prepare_local_source_operation(lake, request("HK", 2024))
     assert prepared["blocks_download"] is False, prepared
 
     result = ensure(service(lake, adapter), request("HK", 2024))

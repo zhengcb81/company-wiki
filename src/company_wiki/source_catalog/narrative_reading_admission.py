@@ -124,3 +124,9 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
     if not offer_relevant and use == 'unresolved':
         return decision(False,'unresolved_without_business_relevance')
     return decision(readable_business, None if readable_business else reason)
+
+
+is_financial_only = _financial_only
+is_admitted = _admitted
+
+__all__ = ["CONTEXT_ROLES", "is_admitted", "is_financial_only"]

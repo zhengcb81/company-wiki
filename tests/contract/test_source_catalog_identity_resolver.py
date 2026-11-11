@@ -249,7 +249,7 @@ class TestIdentityMissingDiagnostics:
             SourceResolver,
             SourceVersionReader,
         )
-        from company_wiki.source_catalog.local_reconcile import _prepare_local_source_operation
+        from company_wiki.source_catalog.local_reconcile import prepare_local_source_operation
         from helpers.source_factory import canonical_source, company_raw_catalog
 
         canonical_source(
@@ -303,7 +303,7 @@ class TestIdentityMissingDiagnostics:
 
         resolved = SourceResolver(catalog).resolve(request)
         queried = SourceVersionReader(catalog).query_local(request)
-        prepared = _prepare_local_source_operation(catalog, request)
+        prepared = prepare_local_source_operation(catalog, request)
 
         assert resolved.status is ResolutionStatus.MISSING
         assert resolved.matches == ()
@@ -319,7 +319,7 @@ class TestIdentityMissingDiagnostics:
             SourceResolver,
             SourceVersionReader,
         )
-        from company_wiki.source_catalog.local_reconcile import _prepare_local_source_operation
+        from company_wiki.source_catalog.local_reconcile import prepare_local_source_operation
         from helpers.source_factory import canonical_source, company_raw_catalog
 
         canonical_source(
@@ -374,7 +374,7 @@ class TestIdentityMissingDiagnostics:
 
         resolved = SourceResolver(catalog).resolve(request)
         queried = SourceVersionReader(catalog).query_local(request)
-        prepared = _prepare_local_source_operation(catalog, request)
+        prepared = prepare_local_source_operation(catalog, request)
 
         assert resolved.status is ResolutionStatus.REUSED_EQUIVALENT
         assert len(resolved.matches) == 1

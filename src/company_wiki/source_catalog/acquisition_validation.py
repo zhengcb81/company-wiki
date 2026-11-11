@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Callable
 
-from .security_identity import _normalize_text
+from .security_identity import normalize_identity_text
 
 if TYPE_CHECKING:
     from .acquisition import DownloadCandidate, DownloadReceipt
@@ -25,7 +25,7 @@ def candidate_scope_problem(
         return "market"
     if candidate.document_kind != request.document_kind:
         return "document_kind"
-    if _normalize_text(candidate.entity) != _normalize_text(request.entity):
+    if normalize_identity_text(candidate.entity) != normalize_identity_text(request.entity):
         return "entity"
     for field in ("provider", "provider_document_id", "fiscal_period", "form_type", "language"):
         requested, actual = getattr(request, field), getattr(candidate, field)

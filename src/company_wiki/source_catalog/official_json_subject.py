@@ -198,8 +198,8 @@ def validate_import_request_v2(value: Any) -> ImportRequestV2:
     receipt = value.get("capture_receipt")
     if not isinstance(receipt, dict):
         raise SourceSubjectError("invalid_capture_receipt")
-    from .official_source_flow import _validate_capture_receipt
-    _validate_capture_receipt(receipt, sha=sha)
+    from .official_source_flow import validate_capture_receipt
+    validate_capture_receipt(receipt, sha=sha)
     expected = value.get("expected_content_sha256")
     if expected is not None and (not isinstance(expected, str)
                                  or not _SHA256_RE.fullmatch(expected)):

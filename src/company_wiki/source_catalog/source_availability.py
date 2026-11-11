@@ -43,7 +43,7 @@ def verified_open_observation(original) -> dict:
             "verified_at": datetime.now(timezone.utc).isoformat()}
 
 
-def _open_evidence(observation, ref: SourceRef) -> dict[str, str] | None:
+def open_source_evidence(observation, ref: SourceRef) -> dict[str, str] | None:
     from dataclasses import asdict
     if not isinstance(observation, dict) or observation.get("schema_version") != "source-verified-open/1":
         return None
@@ -78,11 +78,11 @@ def stored_availability_evidence(catalog, ref: SourceRef, *, budget=None) -> dic
             raise SourceReadError("unavailable", stop)
         fields = json.loads(raw).get("source_fact_evidence", {})
         observation = fields.get("published_date", {})
-        opened = _open_evidence(observation.get("verified_open"), ref)
+        opened = open_source_evidence(observation.get("verified_open"), ref)
         # Captures are retained in their canonical form; all byte/HTTP
         # bindings are checked again without reading the original.
         captured = observation.get("availability_capture")
-        prior = _capture_evidence(json.dumps(captured).encode(), ref) if isinstance(captured, dict) else None
+        prior = capture_source_evidence(json.dumps(captured).encode(), ref) if isinstance(captured, dict) else None
         proofs = [p for p in (opened, prior) if p is not None]
         return min(proofs, key=lambda p: p["available_by"]) if proofs else None
     except (ValueError, TypeError, AttributeError, UnicodeError, RecursionError):
@@ -109,7 +109,7 @@ def _provenance_path(root: Path, relative: str) -> Path | None:
     return sidecar
 
 
-def _capture_evidence(data: bytes, ref: SourceRef) -> dict[str, str] | None:
+def capture_source_evidence(data: bytes, ref: SourceRef) -> dict[str, str] | None:
     try:
         payload = json.loads(data)
         return _capture_payload_evidence(payload, ref, hashlib.sha256(data).hexdigest())

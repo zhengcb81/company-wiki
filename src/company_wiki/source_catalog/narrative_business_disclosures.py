@@ -12,7 +12,11 @@ import re
 from company_wiki.document_understanding.operating_states.assertion_roles import source_nominal_members
 
 from .n6_candidate_operating_facts import OperatingFact
-from .narrative_business_meaning import _component_structure, _STRUCTURE, _OBJECT
+from .narrative_business_meaning import (
+    BUSINESS_OBJECT_PATTERN,
+    BUSINESS_STRUCTURE_PATTERN,
+    is_component_structure,
+)
 from .narrative_predicate_state import predicate_scope
 from .n6_scope_changes import scope_change_reasons
 
@@ -518,7 +522,7 @@ def disclosure_relations(clause: str) -> tuple[str, ...]:
         relations.append("business_financing_terms")
     for match in _CN_SCOPE.finditer(clause):
         parts = match.group("parts") or match.group("types")
-        if (source_nominal_members(parts) and _component_structure("业务包括" + parts)
+        if (source_nominal_members(parts) and is_component_structure("业务包括" + parts)
                 or _CN_NAMED_LINE_DETAIL.search(parts)):
             relations.append("business_scope")
             break
@@ -532,8 +536,9 @@ def disclosure_relations(clause: str) -> tuple[str, ...]:
     # The legacy structure label also matches bare "comprises/consists".
     # Named scope above and concrete use/channel mechanics below supply the
     # reader's material interpretation; legacy DTO recognition stays intact.
-    if (_OBJECT.search(clause) and any(not _COMPOSITION_VERB.fullmatch(match.group())
-            for match in _STRUCTURE.finditer(clause))):
+    if (BUSINESS_OBJECT_PATTERN.search(clause)
+            and any(not _COMPOSITION_VERB.fullmatch(match.group())
+                    for match in BUSINESS_STRUCTURE_PATTERN.finditer(clause))):
         relations.append("business_structure_mechanism")
     if _customer_geography(clause):
         relations.append("customer_revenue_geography")

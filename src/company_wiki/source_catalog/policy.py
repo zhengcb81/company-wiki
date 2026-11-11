@@ -72,6 +72,11 @@ def _effective_reusable(spec, config) -> bool:
     return spec.kind in config.reusable_root_kinds
 
 
+def root_is_reusable_for_filing(spec, config) -> bool:
+    """Public owner port for the effective filing-reuse decision."""
+    return _effective_reusable(spec, config)
+
+
 def validate_policy_hash(expected: str, actual: str) -> list[str]:
     if expected != actual:
         return [f"policy hash {actual[:12]} != expected {expected[:12]} (POL-02)"]

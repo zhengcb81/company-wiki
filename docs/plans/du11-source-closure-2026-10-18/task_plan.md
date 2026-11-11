@@ -4,7 +4,7 @@
 
 ## 下一步
 
-1. **P3 公共 Catalog/Reader 端口继续实施。** 本地子节点已把位置排序和浏览查询归 Catalog owner：Browser 不持有 raw SQL/metadata 字段路径，SourceVersionReader 不调用 Catalog 私有注解方法。独审 PASS；RED/GREEN 边界和完整定向组合 130 passed，无跳过；Ruff 与 mypy 235 源文件通过。Windows 长路径根修覆盖 CatalogOperationLock 生命周期、盘符/UNC 与 UTF-16 长度。下一步为 Resolver 私有预算/字节读取/metadata helper 建公开 owner ports 和隔离测试，再接公开 stream/parser。历史 stream/canonical 候选尚未并入主线；接入前必须先证明候选问题可在当前主线复现。详细收据：review/p3-public-ports-20261110/README.md。
+1. **P3 公共 Catalog/Reader 端口继续实施。** 11-10 子节点把位置排序和浏览查询归 Catalog owner，且独审/定向组合 130 passed。11-11 已把 SourceReader、local inventory、company index、assertion service 的 Resolver 私有 helper 调用迁到 public owner methods；198 项定向契约/真实字节组合通过，Ruff 通过，独立审查待收。此处只是一个 Resolver 边界子节点，不是 P3/全局解耦完成。下一步先核对并移除旧测试对 `_ReadBudget` / `_needs_hydration` 的私有依赖，再继续公开 stream/parser port 与其它经明确模块边界扫描出的依赖。历史 stream/canonical 候选尚未并入主线；接入前先证明当前主线可复现。详细历史收据：review/p3-public-ports-20261110/README.md；本轮记录在 findings/progress 中。
 2. R4 正式半年报 9/12，工作量耗尽，三项原文已解析。分诊已定位统一扫描预扣占约9.05M。核对预扣和下层实际计费的重叠，先泛化 RED 再优化，在原 16M 内验收。
 3. cn-h1 0.9 业务召回 10/10 的源码冻结结果已有独立收据。T4 父链和 SEM-QUAL-01 仍需现行输入/解码反控与真实独审，之后再做新版摘要、缓存恢复、RF 实际采用和公司循环。
 4. 继续核销剩余工作树与未跟踪产物。W04 config 已归档退休，两个重复 ref 和四个旧测试控制文件已清理，七份历史失败 push 日志完成原样压缩。
@@ -62,6 +62,13 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 ## P3 — R4四审完成，候选源层工程隔离，真实复验与其他共因OPEN
 
 R4主/五压力/报告/snapshot和四审已封存。73检查、6P2，无新增已证实P0/P1；每项具体证据、根因确认程度、TDD命令/接口/失败清理/兼容与恢复在AUDIT同run/remediation/r1-remediation-04/implementation.md。它续接W08–W12，不是新外包卡。
+
+### P3 当前主线解耦子节点：source_catalog sibling 边界（本地绿，待发布）
+
+- 先写 AST RED/GREEN 合同，扫描 `src/company_wiki/source_catalog` 全部生产 Python 模块，拒绝跨 sibling 私有成员/模块访问和未声明的共享 owner API。探针覆盖静态可解析的导入、别名、反射、`sys.modules`、wildcard、helper/method 参数、闭包/nonlocal、推导式和局部重绑定正反例。
+- 接口实现已有 Resolver/Catalog/Reader owner ports；当前 scanner contract 6/6 通过，受影响固定组合 165/165 通过、零跳过，Ruff 通过。独立只读复核 PASS（仅概念复核，未执行测试），审查器 SHA 在 CURRENT_STATUS.md 记录。
+- 该子节点只证明规定静态形式在 CI 中被捕获，不是 Python 运行时沙箱；任何 `eval`、运行期代码生成或未分析插件路径都不因此被宣称不可能。此子节点也不关闭公开 streaming/parser、其他 Python package/跨仓接口、历史候选重放或整个 P3。
+- 发布前再核对工作区完整 diff 与测试目录清理；保持此批次精确提交/推送。其后继续公开 streaming/parser TDD 与跨模块责任扫描，不先启动真实摘要/RF 验收。
 
 1. **来源层优先**：旧T3与R7工程均已并线；实际H1独审仍发现peer note继承旧局部子标题。按[T4细则](review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md)冻结泛化正反例、同层根修和单例真实复验；保十二重点/原生成员，不加公司词库、额度或普遍bbox要求。
 2. **共享语义合同**：完成ghost-formula kind与formula/input互斥预检，validate/lint薄复用；完成同口径signed temporal complement，保留alias/origin/provenance、重叠/空隙/跨期/口径反控；inverseYoY使用显式比较关系，禁止放宽日期冒通过。

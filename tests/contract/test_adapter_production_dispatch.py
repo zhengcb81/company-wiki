@@ -7,6 +7,7 @@ the adapter instead of raising 'unavailable'; scanner keeps writing
 unified candidates, never a root-specific metadata container.
 """
 import sys
+import ast
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
@@ -150,6 +151,25 @@ def test_adapters_reachable_from_production_dispatch():
         assert adapter_id in source, (
             f"{adapter_id} missing from production dispatch"
         )
+
+
+def test_adapter_dispatch_does_not_import_scanner_private_candidate_types():
+    from company_wiki.source_catalog import adapter_dispatch
+
+    tree = ast.parse(Path(adapter_dispatch.__file__).read_text(encoding="utf-8"))
+    private_scanner_imports = [
+        f"line {node.lineno}: {node.module}"
+        for node in ast.walk(tree)
+        if isinstance(node, ast.ImportFrom)
+        and node.module is not None
+        and node.module.endswith("scanner")
+    ]
+
+    assert not private_scanner_imports, (
+        "adapter dispatch must return its shared scan contract; scanner owns "
+        "conversion to the scanner's internal representation: "
+        + ", ".join(private_scanner_imports)
+    )
 
 
 # --- scanner keeps unified candidates (no root-specific containers) -------

@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 from typing import Any, Iterator
 
-from .security_identity import _normalize_text
+from .security_identity import normalize_identity_text
 
 _IDENTITY_FIELDS = (
     "display_name",
@@ -36,7 +36,7 @@ def _tokens(values) -> set[str]:
     return {
         token
         for value in values
-        if value and (token := _normalize_text(str(value)))
+        if value and (token := normalize_identity_text(str(value)))
     }
 
 
@@ -182,7 +182,7 @@ def register_identity_read_functions(connection) -> None:
     connection.create_function(
         "cwp_identity_token",
         1,
-        lambda value: _normalize_text(str(value)) if value else "",
+        lambda value: normalize_identity_text(str(value)) if value else "",
         deterministic=True,
     )
     connection.create_function(

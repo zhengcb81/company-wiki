@@ -439,10 +439,12 @@ class AcquisitionCoordinator:
             ))
         # Explicit intake may reconcile existing local declarations. A proven
         # local gap is not byte absence and must not trigger another fetch.
-        from .local_reconcile import _prepare_local_source_operation
+        from .local_reconcile import prepare_local_source_operation
         from .local_inventory import LocalPrepareLimits
         limits = LocalPrepareLimits(timeout_seconds=min(30.0, budget.remaining_seconds)) if budget is not None else None
-        local = _prepare_local_source_operation(self.catalog, request, limits=limits, verified_reuse=verified)
+        local = prepare_local_source_operation(
+            self.catalog, request, limits=limits, verified_reuse=verified,
+        )
         if budget is not None:
             budget.ensure_open()
         if local["status"] == "ready":

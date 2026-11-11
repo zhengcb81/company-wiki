@@ -10,7 +10,7 @@ import pytest
 from company_wiki.source_catalog.local_inventory import LocalPrepareLimits, LocalReadBudget
 from company_wiki.source_catalog.local_reconcile import _cn_cover_scope
 from company_wiki.source_catalog.qualification import latest_source_index, qualify_source
-from company_wiki.source_catalog.source_availability import _open_evidence, verified_open_observation
+from company_wiki.source_catalog.source_availability import open_source_evidence, verified_open_observation
 from company_wiki.source_catalog.source_reader import SourceRef, SourceReadError
 
 NAME = "\u548c\u5149\u79d1\u6280"
@@ -68,7 +68,7 @@ def test_mixed_verified_and_unproved_period_does_not_revert_to_legacy_publicatio
 def test_current_open_byte_binding_clock_and_unknown_publication_controls():
     original = original_with_text(NAME + "\n" + TITLE)
     observation = verified_open_observation(original)
-    proof = _open_evidence(observation, original.ref)
+    proof = open_source_evidence(observation, original.ref)
     today = datetime.now(timezone.utc).date()
     assert proof["available_by"] == today.isoformat()
     assert proof["basis"] == "current_verified_open"
@@ -79,11 +79,11 @@ def test_current_open_byte_binding_clock_and_unknown_publication_controls():
                               source_sha256=original.ref.content_sha256, availability_evidence=proof).historical_reuse_eligible
     assert not qualify_source((today+timedelta(days=1)).isoformat(), as_of_date=today.isoformat(), local_bytes_status="verified",
                               source_sha256=original.ref.content_sha256, availability_evidence=proof).historical_reuse_eligible
-    assert _open_evidence(observation, replace(original.ref, byte_size=original.ref.byte_size+1)) is None
-    assert _open_evidence(observation, replace(original.ref, mime_type="text/plain")) is None
-    assert _open_evidence(observation, replace(original.ref, content_sha256="a"*64)) is None
-    assert _open_evidence({**observation, "verified_at": (datetime.now(timezone.utc)+timedelta(days=1)).isoformat()}, original.ref) is None
-    assert _open_evidence({**observation, "verified_at": "2026-10-21T00:00:00"}, original.ref) is None
+    assert open_source_evidence(observation, replace(original.ref, byte_size=original.ref.byte_size+1)) is None
+    assert open_source_evidence(observation, replace(original.ref, mime_type="text/plain")) is None
+    assert open_source_evidence(observation, replace(original.ref, content_sha256="a"*64)) is None
+    assert open_source_evidence({**observation, "verified_at": (datetime.now(timezone.utc)+timedelta(days=1)).isoformat()}, original.ref) is None
+    assert open_source_evidence({**observation, "verified_at": "2026-10-21T00:00:00"}, original.ref) is None
 
 
 

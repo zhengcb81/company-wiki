@@ -198,6 +198,36 @@ def test_writer_saves_future_publication_without_claiming_historical_reuse(tmp_p
         catalog.close()
 
 
+def test_writer_public_original_read_returns_verified_bytes_without_a_path(tmp_path):
+    from company_wiki.source_catalog import CanonicalSourceWriter
+
+    catalog = _catalog(tmp_path)
+    request, candidate, receipt, _staged = _staged_contract(tmp_path)
+    try:
+        imported = CanonicalSourceWriter(catalog).import_staged(request, candidate, receipt)
+        writer = CanonicalSourceWriter(catalog)
+
+        original = writer.read_existing_original(
+            imported.source_ref.content_sha256,
+            max_bytes=receipt.byte_size,
+        )
+        bounded = writer.read_existing_original(
+            imported.source_ref.content_sha256,
+            max_bytes=7,
+        )
+        missing = writer.read_existing_original(
+            hashlib.sha256(b"not present").hexdigest(),
+            max_bytes=receipt.byte_size,
+        )
+
+        assert original == b"%PDF-1.7\ncanonical annual report bytes"
+        assert bounded == original[:8]
+        assert missing is None
+        assert not isinstance(original, Path)
+    finally:
+        catalog.close()
+
+
 def test_writer_returns_exact_committed_ref_without_semantic_resolver(tmp_path, monkeypatch):
     import pytest
     from company_wiki.source_catalog import CanonicalSourceWriter, SourceResolver

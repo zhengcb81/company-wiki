@@ -2517,14 +2517,14 @@ def _candidate_rules(*, selector_version: str | None = None) -> CandidateRules:
         return replace(rules, operating_facts=detect_legacy_operating_fact)
     if effective == "0.8.0":
         from .narrative_business_groups import (
-            _operating_fact,
-            _commercialization_milestone,
+            evaluate_operating_fact,
+            extract_commercialization_milestone,
         )
 
         return replace(
             rules,
-            operating_facts=_operating_fact,
-            new_product_detector=_commercialization_milestone,
+            operating_facts=evaluate_operating_fact,
+            new_product_detector=extract_commercialization_milestone,
             reject_text=reject_finance_only_text,
         )
     if effective in {"0.7.0", "0.7.1"}:
@@ -2773,19 +2773,33 @@ def evidence_algorithm_sha256(*, universal_newlines: bool = False) -> str:
     return code_sha256(__file__, universal_newlines=universal_newlines)
 
 
+QA_ANSWER_PATTERN = _QA_ANSWER
+has_pdf_question = _has_pdf_question
+pdf_text_blocks = _pdf_text_blocks
+record_pdf_native_view = _record_pdf_native_view
+emit_pdf_text_units = _emit_pdf_text_units
+emit_pdf_page = _emit_pdf_page
+
 __all__ = [
     'NARRATIVE_PARSER_NAME',
     'NARRATIVE_PARSER_VERSION',
     'NARRATIVE_SELECTOR_NAME',
     'NARRATIVE_SELECTOR_VERSION',
     'NarrativeSelectorVersionError',
+    'PDF_PROSE_LAYOUT_FEATURE_VERSION',
+    'QA_ANSWER_PATTERN',
     'SourceSummaryDraft',
     'SummaryClaim',
     'SummaryValidationError',
     'evidence_algorithm_sha256',
+    'emit_pdf_page',
+    'emit_pdf_text_units',
+    'has_pdf_question',
     'parse_transcript_text',
+    'pdf_text_blocks',
     'project_summary_claim_quality',
     'resolve_narrative_selector_version',
+    'record_pdf_native_view',
     'select_narrative_evidence',
     'summary_claim_type_for_roles',
     'transcript_parser_contract',

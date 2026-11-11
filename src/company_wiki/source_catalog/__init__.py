@@ -118,6 +118,7 @@ if TYPE_CHECKING:
         IdentityResult,
         IdentityStatus,
         OfficialSecurityMasterRefresher,
+        cross_market_issuer_link_ids,
         SecurityIdentityError,
         SecurityIdentityResolutionError,
         SecurityIdentityResolver,
@@ -126,6 +127,8 @@ if TYPE_CHECKING:
         SecurityMasterUnavailableError,
         SecurityRecord,
         load_identity_master,
+        normalize_identity_text,
+        security_listing_key,
     )
     from . import narrative_evidence as narrative_evidence
 
@@ -239,6 +242,7 @@ _EXPORTS_BY_MODULE = {
         "IdentityResult",
         "IdentityStatus",
         "OfficialSecurityMasterRefresher",
+        "cross_market_issuer_link_ids",
         "SecurityIdentityError",
         "SecurityIdentityResolutionError",
         "SecurityIdentityResolver",
@@ -247,6 +251,8 @@ _EXPORTS_BY_MODULE = {
         "SecurityMasterUnavailableError",
         "SecurityRecord",
         "load_identity_master",
+        "normalize_identity_text",
+        "security_listing_key",
     ),
     ".narrative_evidence": ("narrative_evidence",),
 }
@@ -367,9 +373,12 @@ __all__ = [
     'SecurityMasterStore',
     'SecurityMasterUnavailableError',
     'SecurityRecord',
+    'cross_market_issuer_link_ids',
     'load_catalog_config',
     'load_acquisition_config',
     'load_identity_master',
+    'normalize_identity_text',
+    'security_listing_key',
     'recycle_to_windows_bin',
     'narrative_evidence',
 ]

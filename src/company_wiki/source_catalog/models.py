@@ -24,6 +24,25 @@ class RankedSourceLocation:
 
 
 @dataclass(frozen=True)
+class SourceCopyAvailabilityRequest:
+    """Pathless inputs for the catalog-owned physical copy observation."""
+
+    document_id: str
+    source_id: str
+    document_kind: str
+    byte_size: int
+    content_sha256: str
+
+
+@dataclass(frozen=True)
+class SourceCopyAvailability:
+    """Logical copy count and current readability, with no physical locator."""
+
+    copy_count: int
+    readable: bool
+
+
+@dataclass(frozen=True)
 class CatalogBrowseVersion:
     """Pathless, storage-independent projection for the public browse API."""
 

@@ -116,7 +116,7 @@ def _metadata(cik: str, accession: str, filename: str) -> dict[str, str]:
 def test_sec_20f_table_links_exact_market_listings_for_two_issuers(tmp_path):
     from company_wiki.source_catalog.security_identity import SecurityIdentityResolver
     from company_wiki.source_catalog.security_listing_evidence import (
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
 
     store = _master(tmp_path)
@@ -156,7 +156,7 @@ def test_sec_20f_table_links_exact_market_listings_for_two_issuers(tmp_path):
     )
 
     for cik, accession, filename, html, expected in cases:
-        evidence = _build_sec_20f_listing_evidence(
+        evidence = build_sec_20f_listing_evidence(
             _verified_html(html),
             metadata=_metadata(cik, accession, filename),
             master=master,
@@ -191,7 +191,7 @@ def test_sec_20f_table_links_exact_market_listings_for_two_issuers(tmp_path):
 def test_sec_provider_20f_can_establish_links_from_verified_sec_filing(tmp_path):
     from company_wiki.source_catalog.security_listing_evidence import (
         ListingEvidenceError,
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
 
     store = _master(tmp_path)
@@ -213,7 +213,7 @@ def test_sec_provider_20f_can_establish_links_from_verified_sec_filing(tmp_path)
         "provider": "sec",
     }
 
-    evidence = _build_sec_20f_listing_evidence(
+    evidence = build_sec_20f_listing_evidence(
         content, metadata=metadata, master=master,
     )
 
@@ -221,7 +221,7 @@ def test_sec_provider_20f_can_establish_links_from_verified_sec_filing(tmp_path)
     assert {listing.security_id for listing in evidence.listings} == {"BABA", "09988", "89988"}
     unsupported_provider = {**metadata, "provider": "third_party"}
     with pytest.raises(ListingEvidenceError, match="official US filing source"):
-        _build_sec_20f_listing_evidence(
+        build_sec_20f_listing_evidence(
             content, metadata=unsupported_provider, master=master,
         )
 
@@ -356,7 +356,7 @@ def test_sec_20f_link_requires_verified_bytes_accession_and_exact_market_rows(tm
 
     from company_wiki.source_catalog.security_listing_evidence import (
         ListingEvidenceError,
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
 
     store = _master(tmp_path)
@@ -381,26 +381,26 @@ def test_sec_20f_link_requires_verified_bytes_accession_and_exact_market_rows(tm
 
     tampered = replace(content, data=content.data + b" ")
     with pytest.raises(Exception, match="source bytes do not match"):
-        _build_sec_20f_listing_evidence(tampered, metadata=metadata, master=master)
+        build_sec_20f_listing_evidence(tampered, metadata=metadata, master=master)
 
     wrong_accession = {**metadata, "provider_document_id": "0000000000-00-000000"}
     with pytest.raises(ListingEvidenceError, match="accession"):
-        _build_sec_20f_listing_evidence(content, metadata=wrong_accession, master=master)
+        build_sec_20f_listing_evidence(content, metadata=wrong_accession, master=master)
 
     wrong_cik = {**metadata, "source_url": metadata["source_url"].replace("1577552", "1723690")}
-    assert _build_sec_20f_listing_evidence(content, metadata=wrong_cik, master=master) is None
+    assert build_sec_20f_listing_evidence(content, metadata=wrong_cik, master=master) is None
 
     debt_only = _verified_html(html.replace("Ordinary Shares", "Senior Notes"))
-    assert _build_sec_20f_listing_evidence(debt_only, metadata=metadata, master=master) is None
+    assert build_sec_20f_listing_evidence(debt_only, metadata=metadata, master=master) is None
 
     one_market = _verified_html(html.replace("New York Stock Exchange", "Unknown Exchange"))
-    assert _build_sec_20f_listing_evidence(one_market, metadata=metadata, master=master) is None
+    assert build_sec_20f_listing_evidence(one_market, metadata=metadata, master=master) is None
 
 
 def test_linked_identity_projects_source_aliases_into_an_unaliased_target_market(tmp_path):
     from company_wiki.source_catalog.security_identity import SecurityIdentityResolver
     from company_wiki.source_catalog.security_listing_evidence import (
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
 
     store = _master(tmp_path, omit_hk_listing_ticker_aliases=True)
@@ -418,7 +418,7 @@ def test_linked_identity_projects_source_aliases_into_an_unaliased_target_market
         <tr><td>American Depositary Shares</td><td>{ticker}</td>
         <td>{'Nasdaq Global Select Market' if ticker == 'BILI' else 'New York Stock Exchange'}</td></tr>
         </table>"""
-        evidence = _build_sec_20f_listing_evidence(
+        evidence = build_sec_20f_listing_evidence(
             _verified_html(html), metadata=_metadata(cik, accession, filename), master=master,
         )
         store._write_issuer_link(evidence)
@@ -448,7 +448,7 @@ def test_listing_link_is_not_reused_when_official_market_record_identity_changes
         SecurityRecord,
     )
     from company_wiki.source_catalog.security_listing_evidence import (
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
 
     store = _master(tmp_path, omit_hk_listing_ticker_aliases=True)
@@ -460,7 +460,7 @@ def test_listing_link_is_not_reused_when_official_market_record_identity_changes
     <td>The Stock Exchange of Hong Kong Limited</td></tr>
     <tr><td>American Depositary Shares</td><td>BABA</td>
     <td>New York Stock Exchange</td></tr></table>"""
-    evidence = _build_sec_20f_listing_evidence(
+    evidence = build_sec_20f_listing_evidence(
         _verified_html(html),
         metadata=_metadata(_BABA_CIK, "0000950170-25-090161", "baba-20250331.htm"),
         master=store.load(markets=("HK", "US")),
@@ -497,7 +497,7 @@ def test_listing_link_is_not_reused_when_official_market_record_identity_changes
 
 def test_sec_table_grid_applies_colspan_to_headers_and_data_rows(tmp_path):
     from company_wiki.source_catalog.security_listing_evidence import (
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
 
     store = _master(tmp_path)
@@ -508,7 +508,7 @@ def test_sec_table_grid_applies_colspan_to_headers_and_data_rows(tmp_path):
     <td>The Stock Exchange of Hong Kong Limited</td></tr>
     <tr><td>American Depositary Shares</td><td colspan="2">BABA</td>
     <td>New York Stock Exchange</td></tr></table>"""
-    evidence = _build_sec_20f_listing_evidence(
+    evidence = build_sec_20f_listing_evidence(
         _verified_html(html),
         metadata=_metadata(_BABA_CIK, "0000950170-25-090161", "baba-20250331.htm"),
         master=store.load(markets=("HK", "US")),
@@ -543,7 +543,7 @@ def test_listing_evidence_digest_rejects_changed_rows_and_bad_cache_is_nonblocki
     from company_wiki.source_catalog.security_listing_evidence import (
         IssuerListingEvidence,
         ListingEvidenceError,
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
 
     store = _master(tmp_path)
@@ -553,7 +553,7 @@ def test_listing_evidence_digest_rejects_changed_rows_and_bad_cache_is_nonblocki
     <td>The Stock Exchange of Hong Kong Limited</td></tr>
     <tr><td>American Depositary Shares</td><td>BABA</td>
     <td>New York Stock Exchange</td></tr></table>"""
-    evidence = _build_sec_20f_listing_evidence(
+    evidence = build_sec_20f_listing_evidence(
         _verified_html(html),
         metadata=_metadata(_BABA_CIK, "0000950170-25-090161", "baba-20250331.htm"),
         master=store.load(markets=("HK", "US")),
@@ -673,7 +673,7 @@ def test_source_catalog_imports_only_exact_verified_ref_and_is_idempotent(tmp_pa
     )
 
     from company_wiki.source_catalog.security_listing_evidence import (
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
 
     bili_html = """<html><body><table>
@@ -684,7 +684,7 @@ def test_source_catalog_imports_only_exact_verified_ref_and_is_idempotent(tmp_pa
     <tr><td>Class Z ordinary shares, par value US$0.0001 per share</td>
     <td></td><td>9626</td><td></td><td>The Stock Exchange of Hong Kong Limited</td></tr>
     </table></body></html>"""
-    bili_evidence = _build_sec_20f_listing_evidence(
+    bili_evidence = build_sec_20f_listing_evidence(
         _verified_html(bili_html),
         metadata=_metadata(_BILI_CIK, "0001193125-26-157842", "d91984d20f.htm"),
         master=store.load(markets=("HK", "US")),
@@ -836,7 +836,7 @@ def test_provider_candidate_listing_is_bound_before_fetch_and_survives_import(tm
     from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter
     from company_wiki.source_catalog.resolver import SourceRequest, SourceResolver
     from company_wiki.source_catalog.security_listing_evidence import (
-        _build_sec_20f_listing_evidence,
+        build_sec_20f_listing_evidence,
     )
     tmp_path = tmp_path_factory.mktemp("link")
     catalog_dir = tmp_path / ".source_catalog"
@@ -849,7 +849,7 @@ def test_provider_candidate_listing_is_bound_before_fetch_and_survives_import(tm
     <tr><td>American Depositary Shares</td><td>BABA</td>
     <td>New York Stock Exchange</td></tr>
     </table></body></html>"""
-    evidence = _build_sec_20f_listing_evidence(
+    evidence = build_sec_20f_listing_evidence(
         _verified_html(listing_html),
         metadata=_metadata(_BABA_CIK, "0000950170-25-090161", "baba-20250331.htm"),
         master=store.load(markets=("HK", "US")),

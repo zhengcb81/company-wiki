@@ -11,6 +11,7 @@ from collections.abc import Mapping, Sequence
 import math
 from typing import Any, TypeGuard
 
+from company_wiki.implementation_identity import code_sha256
 from company_wiki.document_understanding.structure.table_purpose import (
     operating_header, qualify_table,
 )
@@ -248,9 +249,9 @@ def _field_eligibility(headers, body, pairs, budget):
 
 def _qa_marker(text, parser_version):
     # This is the existing source grammar, not a second Q&A classifier.
-    from .narrative_evidence import _has_pdf_question, _QA_ANSWER
+    from .narrative_evidence import has_pdf_question, QA_ANSWER_PATTERN
 
-    return _has_pdf_question(text, parser_version) or bool(_QA_ANSWER.search(text))
+    return has_pdf_question(text, parser_version) or bool(QA_ANSWER_PATTERN.search(text))
 
 
 def _pair_candidate(first, second, budget, qa, parser_version):
@@ -400,4 +401,9 @@ def observe_pdf_candidate(snapshot, *, work_budget: WorkBudget, qa: bool = False
                     reason='work_budget_exhausted', partial=True)
 
 
-__all__ = ['observe_pdf_candidate']
+def pdf_candidate_algorithm_sha256() -> str:
+    """Return this owner's stable candidate-observation fingerprint."""
+    return code_sha256(__file__)
+
+
+__all__ = ['observe_pdf_candidate', 'pdf_candidate_algorithm_sha256']

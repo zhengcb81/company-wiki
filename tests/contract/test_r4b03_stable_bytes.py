@@ -39,11 +39,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from company_wiki.source_catalog import resolver as resolver_module  # noqa: E402
 from company_wiki.source_catalog.models import RootSpec  # noqa: E402
+from company_wiki.source_catalog import source_location as source_location_module  # noqa: E402
+from company_wiki.source_catalog.read_budget import ReadBudget  # noqa: E402
 from company_wiki.source_catalog.resolver import (  # noqa: E402
     B03_BYTES_SOURCE_HANDLE,
     SourceRequest,
     SourceResolver,
-    _ReadBudget,
 )
 
 BODY = b"%PDF-1.4 r4b03-stable-bytes-payload"
@@ -207,12 +208,13 @@ def test_r4b03_truncated_file_is_refused(tmp_path):
 def test_r4b03_placeholder_is_refused_without_hydrating(tmp_path, monkeypatch):
     """A cloud placeholder whose bytes are not local is refused without reading.
 
-    The detection itself is B02's (``_needs_hydration`` reads the Windows recall
+    The detection itself belongs to ``source_location.is_hydration_required``
+    (it reads the Windows recall
     attributes from ``stat``); this case pins the B03 rule that such a copy is
     never opened and never served.
     """
     resolver, handle, path = _served(tmp_path)
-    monkeypatch.setattr(resolver_module, "_needs_hydration", lambda stat_result: True)
+    monkeypatch.setattr(source_location_module, "is_hydration_required", lambda stat_result: True)
     out = resolver.read_verified_bytes(handle)
     assert out.data is None
     assert out.status == "unavailable"
@@ -272,7 +274,7 @@ def test_r4b03_size_ceiling_refuses_instead_of_serving_a_partial_buffer(tmp_path
 
 def test_r4b03_cancelled_read_is_never_answered(tmp_path):
     resolver, handle, _ = _served(tmp_path)
-    budget = _ReadBudget()
+    budget = ReadBudget()
     budget.cancel()
     out = resolver.read_verified_bytes(handle, budget=budget)
     assert out.data is None
@@ -282,7 +284,7 @@ def test_r4b03_cancelled_read_is_never_answered(tmp_path):
 
 def test_r4b03_budget_exhaustion_is_a_reason_not_a_sixth_status(tmp_path):
     resolver, handle, _ = _served(tmp_path)
-    budget = _ReadBudget(max_bytes=1)
+    budget = ReadBudget(max_bytes=1)
     out = resolver.read_verified_bytes(handle, budget=budget)
     assert out.data is None
     assert out.status == "unavailable"
@@ -300,7 +302,7 @@ def test_r4b03_every_refusal_stays_inside_the_contract_error_values(tmp_path, mo
     outside.write_bytes(BODY)
     scenarios.append(("out_of_root", replace(handle, canonical_path=str(outside)), None))
 
-    monkeypatch.setattr(resolver_module, "_needs_hydration", lambda stat_result: True)
+    monkeypatch.setattr(source_location_module, "is_hydration_required", lambda stat_result: True)
     scenarios.append(("placeholder", handle, None))
     monkeypatch.undo()
 
@@ -308,7 +310,7 @@ def test_r4b03_every_refusal_stays_inside_the_contract_error_values(tmp_path, mo
     scenarios.append(("too_large", handle, None))
     monkeypatch.undo()
 
-    budget = _ReadBudget()
+    budget = ReadBudget()
     budget.cancel()
     scenarios.append(("cancelled", handle, budget))
 
@@ -411,7 +413,7 @@ def test_r4b03_cancellation_inside_the_last_read_is_honoured(tmp_path, monkeypat
     only the tail guard can refuse it (checked by mutation: removing the tail
     guard makes this case fail)."""
     resolver, handle, path = _served(tmp_path)
-    budget = _ReadBudget()
+    budget = ReadBudget()
     real_open = Path.open
     calls = {"n": 0}
 
@@ -456,7 +458,7 @@ def test_r4b03_cancellation_stops_the_read_early(tmp_path, monkeypatch):
     path.write_bytes(BODY * 4)  # several chunks once the chunk size is small
     monkeypatch.setattr(resolver_module, "_BYTE_READ_CHUNK", 8)
 
-    budget = _ReadBudget()
+    budget = ReadBudget()
     real_open = Path.open
     calls = {"n": 0}
 
@@ -504,17 +506,17 @@ def test_r4b03_a_volume_root_configured_root_contains_its_files(tmp_path):
     that name is relative and the containment answer is legitimately False."""
     from types import SimpleNamespace
 
-    from company_wiki.source_catalog.resolver import _inside_configured_roots
+    from company_wiki.source_catalog.source_location import inside_configured_roots
 
     volume_root = tmp_path.anchor  # "C:\\" on Windows, "/" on POSIX
     assert volume_root, "the platform must expose a volume anchor"
     anchored = SimpleNamespace(path=volume_root)
-    assert _inside_configured_roots(tmp_path, (anchored,))
-    assert _inside_configured_roots(Path(volume_root), (anchored,))
+    assert inside_configured_roots(tmp_path, (anchored,))
+    assert inside_configured_roots(Path(volume_root), (anchored,))
 
     sibling = SimpleNamespace(path=tmp_path / "companies")
-    assert _inside_configured_roots(tmp_path / "companies" / "2025.pdf", (sibling,))
-    assert not _inside_configured_roots(
+    assert inside_configured_roots(tmp_path / "companies" / "2025.pdf", (sibling,))
+    assert not inside_configured_roots(
         tmp_path / "companies_x" / "2025.pdf", (sibling,)
     )
 

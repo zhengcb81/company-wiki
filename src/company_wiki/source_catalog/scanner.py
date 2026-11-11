@@ -18,7 +18,6 @@ from typing import Any, Callable
 from company_wiki.source_contract import SourceManifest, SourceType
 
 from .admission import (
-    AdmissionDecision,
     FOCUS_RELATIVE_PREFIX,
     FOCUS_ROOT_ID,
     evaluate_admission,
@@ -29,32 +28,20 @@ from .adapters.dayu import (
     construct_edgar_url as _construct_edgar_url,
     enrich_dayu_metadata as _enrich_dayu_portfolio_metadata,
 )
-from .adapters.common import (
-    _ACQUISITION_SIDECAR_SUFFIX,
-    _SKIP_DIRS,
-    _load_acquisition_metadata,
-    _relative,
-    _walk_files,
+from .acquisition_sidecar import (
+    ACQUISITION_SIDECAR_SUFFIX,
+    read_acquisition_sidecar,
 )
+from .filesystem_discovery import SKIP_DIRS, walk_document_files
 from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
 from .store import CatalogStore, canonical_json, metadata_object, metadata_state
 from .registration_scope import SourceRegistrationScope, existing_group_locations
+from .source_location import relative_source_path
+from .scan_contract import ScanCandidate as _Candidate
+from .scan_contract import infer_company_name as _infer_company
 
 
 _DATE_RE = re.compile(r"(?<!\d)(20\d{2})[-_.年](0[1-9]|1[0-2]|[1-9])[-_.月](0[1-9]|[12]\d|3[01]|[1-9])")
-
-
-@dataclass(frozen=True)
-class _Candidate:
-    root: RootSpec
-    path: Path
-    relative_path: str
-    group_key: str
-    role: str
-    entity_name: str | None
-    group_metadata: dict[str, Any]
-    source_status: str
-    admission: AdmissionDecision | None = None
 
 
 @dataclass(frozen=True)
@@ -209,12 +196,6 @@ def _company_names(config: CatalogConfig) -> tuple[str, ...]:
     return tuple(sorted(names, key=lambda value: (-len(value), value.casefold())))
 
 
-def _infer_company(relative_path: str, names: tuple[str, ...]) -> str | None:
-    folded = relative_path.casefold()
-    matches = [name for name in names if name.casefold() in folded]
-    return matches[0] if len(matches) == 1 else None
-
-
 def _load_dayu_portfolio_urls(config: CatalogConfig) -> dict[str, str]:
     """Build company_name -> source_url from dayu portfolio meta.json files,
     so company_raw documents whose sidecar lacks a URL can be enriched
@@ -284,7 +265,7 @@ def _scan_root_v1(
     relative_paths: set[str] | None = None,
     metadata_reader=None, file_walker=None,
 ) -> tuple[list[_Candidate], int, int]:
-    read_metadata = metadata_reader or _load_acquisition_metadata
+    read_metadata = metadata_reader or read_acquisition_sidecar
     candidates: list[_Candidate] = []
     excluded = 0
     policy_excluded = 0
@@ -307,18 +288,18 @@ def _scan_root_v1(
                     detail=f"enumerating root {root.root_id}",
                 )
             paths = (SourceRegistrationScope(root.root_id, frozenset(relative_paths)).company_paths(
-                root.path, company.name, _ACQUISITION_SIDECAR_SUFFIX)
+                root.path, company.name, ACQUISITION_SIDECAR_SUFFIX)
                      if relative_paths is not None else SourceRegistrationScope.all_company_paths(root.path, company.name))
             sidecars = {
-                str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
+                str(path)[: -len(ACQUISITION_SIDECAR_SUFFIX)]: path
                 for path in paths
-                if path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+                if path.name.endswith(ACQUISITION_SIDECAR_SUFFIX)
             }
             primary_paths = [
-                path for path in paths if not path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+                path for path in paths if not path.name.endswith(ACQUISITION_SIDECAR_SUFFIX)
             ]
             for path in primary_paths:
-                relative = _relative(path, root.path)
+                relative = relative_source_path(path, root.path)
                 sidecar = sidecars.get(str(path))
                 metadata: dict[str, Any] = read_metadata(sidecar) if sidecar else {}
                 # Phase 16.1: a sidecar without any source URL is enriched
@@ -361,7 +342,7 @@ def _scan_root_v1(
                         _Candidate(
                             root,
                             sidecar,
-                            _relative(sidecar, root.path),
+                            relative_source_path(sidecar, root.path),
                             relative,
                             "metadata",
                             company.name,
@@ -373,13 +354,13 @@ def _scan_root_v1(
             for target, sidecar in sorted(sidecars.items()):
                 if target in primary_names:
                     continue
-                relative = _relative(sidecar, root.path)
+                relative = relative_source_path(sidecar, root.path)
                 candidates.append(
                     _Candidate(
                         root,
                         sidecar,
                         relative,
-                        relative[: -len(_ACQUISITION_SIDECAR_SUFFIX)],
+                        relative[: -len(ACQUISITION_SIDECAR_SUFFIX)],
                         "metadata",
                         company.name,
                         read_metadata(sidecar),
@@ -388,12 +369,12 @@ def _scan_root_v1(
                 )
     elif root.kind == "directory":
         entries = (SourceRegistrationScope(root.root_id, frozenset(relative_paths)).directory_entries(
-            root.path, _ACQUISITION_SIDECAR_SUFFIX) if relative_paths is not None else os.walk(root.path))
+            root.path, ACQUISITION_SIDECAR_SUFFIX) if relative_paths is not None else os.walk(root.path))
         for directory_index, (current, directories, files) in enumerate(
             entries,
             start=1,
         ):
-            directories[:] = [name for name in directories if name not in _SKIP_DIRS]
+            directories[:] = [name for name in directories if name not in SKIP_DIRS]
             current_path = Path(current)
             if progress is not None:
                 progress(
@@ -409,7 +390,7 @@ def _scan_root_v1(
                     excluded += 1
                     continue
                 supported.append(path)
-            relative_dir = _relative(current_path, root.path)
+            relative_dir = relative_source_path(current_path, root.path)
             # WU-702: route-configured focus scope; legacy FOCUS constants
             # remain only for v1 configs without routes
             if root.routes:
@@ -427,11 +408,11 @@ def _scan_root_v1(
                 # sidecar contract; FC-505: the Dropbox root must never be
                 # resolvable-MISSING when the sidecar evidence exists).
                 for path in supported:
-                    relative = _relative(path, root.path)
+                    relative = relative_source_path(path, root.path)
                     metadata = {}
-                    if not path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX):
+                    if not path.name.endswith(ACQUISITION_SIDECAR_SUFFIX):
                         sidecar = path.with_name(
-                            path.name + _ACQUISITION_SIDECAR_SUFFIX
+                            path.name + ACQUISITION_SIDECAR_SUFFIX
                         )
                         if sidecar.is_file():
                             metadata = read_metadata(sidecar)
@@ -450,17 +431,17 @@ def _scan_root_v1(
                     )
                 continue
             sidecars = {
-                str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
+                str(path)[: -len(ACQUISITION_SIDECAR_SUFFIX)]: path
                 for path in supported
-                if path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+                if path.name.endswith(ACQUISITION_SIDECAR_SUFFIX)
             }
             primary_paths = [
                 path
                 for path in supported
-                if not path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+                if not path.name.endswith(ACQUISITION_SIDECAR_SUFFIX)
             ]
             for path in primary_paths:
-                relative = _relative(path, root.path)
+                relative = relative_source_path(path, root.path)
                 sidecar = sidecars.get(str(path))
                 metadata = read_metadata(sidecar) if sidecar else {}
                 if root.kind == "dayu_portfolio":
@@ -496,7 +477,7 @@ def _scan_root_v1(
                         _Candidate(
                             root,
                             sidecar,
-                            _relative(sidecar, root.path),
+                            relative_source_path(sidecar, root.path),
                             relative,
                             "metadata",
                             entity_name,
@@ -512,7 +493,7 @@ def _scan_root_v1(
                 excluded += 1
                 orphan_decision = evaluate_admission(
                     root_id=root.root_id,
-                    relative_path=_relative(sidecar, root.path),
+                    relative_path=relative_source_path(sidecar, root.path),
                     metadata=read_metadata(sidecar),
                 )
                 if orphan_decision is not None:
@@ -520,7 +501,7 @@ def _scan_root_v1(
     else:
         raw_groups: dict[str, list[Path]] = defaultdict(list)
         paths_to_visit = (SourceRegistrationScope(root.root_id, frozenset(relative_paths)).filing_paths(
-            root.path, file_walker or _walk_files) if relative_paths is not None else _walk_files(root.path))
+            root.path, file_walker or walk_document_files) if relative_paths is not None else walk_document_files(root.path))
         for file_index, path in enumerate(paths_to_visit, start=1):
             if progress is not None and file_index % 100 == 1:
                 progress(
@@ -529,7 +510,7 @@ def _scan_root_v1(
                     total=0,
                     detail=f"enumerating root {root.root_id}",
                 )
-            relative = _relative(path, root.path)
+            relative = relative_source_path(path, root.path)
             parts = Path(relative).parts
             if len(parts) >= 3 and parts[1] == "filings":
                 if len(parts) >= 4 and parts[2] == ".rejections":
@@ -653,7 +634,7 @@ def _scan_root_v1(
                     _Candidate(
                         root,
                         path,
-                        _relative(path, root.path),
+                        relative_source_path(path, root.path),
                         group_key,
                         role,
                         ticker,
@@ -999,7 +980,8 @@ def _scan_catalog_impl(
                     total=len(group_items),
                     detail=f"scanning root {root.root_id}",
                 )
-            metadata = primary_candidate.group_metadata if primary_candidate else group[0].group_metadata
+            metadata_source = primary_candidate or group[0]
+            metadata = metadata_source.group_metadata_payload()
             admission = (
                 primary_candidate.admission
                 if primary_candidate is not None

@@ -10,7 +10,10 @@ import re
 from itertools import chain
 from collections.abc import Callable
 
-from .narrative_business_meaning import _CLAUSES, _GENERIC_DEFINITION
+from .narrative_business_meaning import (
+    BUSINESS_CLAUSE_BOUNDARY_PATTERN,
+    GENERIC_DEFINITION_PATTERN,
+)
 from .narrative_predicate_state import (
     PredicateObservation, prepare_predicate_context,
 )
@@ -88,7 +91,7 @@ def operating_resource_relations(text: str, *, purpose_for: Callable[[str], str]
     reasons: list[str] = []
     purpose_for = source_purpose if purpose_for is None else purpose_for
     sentence_start = 0
-    for boundary in chain(_CLAUSES.finditer(text), (None,)):
+    for boundary in chain(BUSINESS_CLAUSE_BOUNDARY_PATTERN.finditer(text), (None,)):
         sentence_end = boundary.start() if boundary is not None else len(text)
         sentence = text[sentence_start:sentence_end]
         sentence_start = boundary.end() if boundary is not None else len(text)
@@ -103,7 +106,7 @@ def operating_resource_relations(text: str, *, purpose_for: Callable[[str], str]
             part = sentence[start:cursor]
             if not part.strip():
                 continue
-            if (_QUESTION_OR_EXAMPLE.search(part) or _GENERIC_DEFINITION.search(part)
+            if (_QUESTION_OR_EXAMPLE.search(part) or GENERIC_DEFINITION_PATTERN.search(part)
                     or purpose_for(part) in NON_OPERATING_PURPOSES):
                 inherited = None
                 continue

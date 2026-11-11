@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import multiprocessing
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -108,7 +109,7 @@ def _parser_with_descendant(
         creationflags=creationflags,
     )
     path.with_suffix(path.suffix + ".descendant.pid").write_text(
-        str(descendant.pid), encoding="ascii"
+        json.dumps(_process_identity(descendant.pid)), encoding="ascii"
     )
     while True:
         time.sleep(1)
@@ -239,21 +240,168 @@ def test_hung_parser_times_out_and_is_reaped(tmp_path):
     assert not list(tmp_path.glob(".parser-result-*.json"))
 
 
-def _kill_pid_tree_for_test(pid: int) -> None:
+def _process_creation_token(pid: int) -> str | None:
     if os.name == "nt":
-        subprocess.run(
-            ["taskkill.exe", "/PID", str(pid), "/T", "/F"],
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            creationflags=subprocess.CREATE_NO_WINDOW,
-            check=False,
+        import ctypes
+        from ctypes import wintypes
+
+        class _FileTime(ctypes.Structure):
+            _fields_ = [("low", wintypes.DWORD), ("high", wintypes.DWORD)]
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.GetProcessTimes.argtypes = (
+            wintypes.HANDLE,
+            ctypes.POINTER(_FileTime),
+            ctypes.POINTER(_FileTime),
+            ctypes.POINTER(_FileTime),
+            ctypes.POINTER(_FileTime),
         )
-        return
+        kernel32.GetProcessTimes.restype = wintypes.BOOL
+        kernel32.CloseHandle.argtypes = (wintypes.HANDLE,)
+        handle = kernel32.OpenProcess(0x1000, False, pid)
+        if not handle:
+            return None
+        try:
+            created = _FileTime()
+            exited = _FileTime()
+            kernel = _FileTime()
+            user = _FileTime()
+            if not kernel32.GetProcessTimes(
+                handle,
+                ctypes.byref(created),
+                ctypes.byref(exited),
+                ctypes.byref(kernel),
+                ctypes.byref(user),
+            ):
+                return None
+            return str((created.high << 32) | created.low)
+        finally:
+            kernel32.CloseHandle(handle)
+    stat_path = Path(f"/proc/{pid}/stat")
+    if stat_path.is_file():
+        try:
+            fields = stat_path.read_text(encoding="ascii").rsplit(")", 1)[1].split()
+            return fields[19]
+        except (OSError, IndexError):
+            return None
+    return None
+
+
+def _process_identity(pid: int) -> dict[str, int | str | None]:
+    return {"pid": int(pid), "creation_token": _process_creation_token(int(pid))}
+
+
+def _process_is_active(identity: dict[str, object]) -> bool:
+    pid = int(identity["pid"])
+    expected_token = identity.get("creation_token")
+    if os.name == "nt":
+        import ctypes
+        from ctypes import wintypes
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.WaitForSingleObject.argtypes = (wintypes.HANDLE, wintypes.DWORD)
+        kernel32.WaitForSingleObject.restype = wintypes.DWORD
+        kernel32.CloseHandle.argtypes = (wintypes.HANDLE,)
+        handle = kernel32.OpenProcess(0x101000, False, pid)
+        if not handle:
+            return False
+        try:
+            observed_token = _process_creation_token_from_handle(kernel32, handle)
+            if expected_token is not None and observed_token != expected_token:
+                return False
+            return kernel32.WaitForSingleObject(handle, 0) == 258
+        finally:
+            kernel32.CloseHandle(handle)
+    observed_token = _process_creation_token(pid)
+    if expected_token is not None and observed_token != expected_token:
+        return False
     try:
-        os.kill(pid, 9)
+        os.kill(pid, 0)
     except ProcessLookupError:
-        pass
+        return False
+    return True
+
+
+def _process_creation_token_from_handle(kernel32, handle) -> str | None:
+    import ctypes
+    from ctypes import wintypes
+
+    class _FileTime(ctypes.Structure):
+        _fields_ = [("low", wintypes.DWORD), ("high", wintypes.DWORD)]
+
+    kernel32.GetProcessTimes.argtypes = (
+        wintypes.HANDLE,
+        ctypes.POINTER(_FileTime),
+        ctypes.POINTER(_FileTime),
+        ctypes.POINTER(_FileTime),
+        ctypes.POINTER(_FileTime),
+    )
+    kernel32.GetProcessTimes.restype = wintypes.BOOL
+    created = _FileTime()
+    exited = _FileTime()
+    kernel = _FileTime()
+    user = _FileTime()
+    if not kernel32.GetProcessTimes(
+        handle,
+        ctypes.byref(created),
+        ctypes.byref(exited),
+        ctypes.byref(kernel),
+        ctypes.byref(user),
+    ):
+        return None
+    return str((created.high << 32) | created.low)
+
+
+def _terminate_process_for_test(identity: dict[str, object]) -> None:
+    pid = int(identity["pid"])
+    expected_token = identity.get("creation_token")
+    if os.name == "nt":
+        import ctypes
+        from ctypes import wintypes
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.TerminateProcess.argtypes = (wintypes.HANDLE, wintypes.UINT)
+        kernel32.TerminateProcess.restype = wintypes.BOOL
+        kernel32.WaitForSingleObject.argtypes = (wintypes.HANDLE, wintypes.DWORD)
+        kernel32.WaitForSingleObject.restype = wintypes.DWORD
+        kernel32.CloseHandle.argtypes = (wintypes.HANDLE,)
+        handle = kernel32.OpenProcess(0x101001, False, pid)
+        if not handle:
+            return
+        try:
+            observed_token = _process_creation_token_from_handle(kernel32, handle)
+            if expected_token is not None and observed_token != expected_token:
+                return
+            kernel32.TerminateProcess(handle, 1)
+            kernel32.WaitForSingleObject(handle, 5000)
+        finally:
+            kernel32.CloseHandle(handle)
+        return
+    if hasattr(os, "pidfd_open") and hasattr(__import__("signal"), "pidfd_send_signal"):
+        import signal
+
+        try:
+            descriptor = os.pidfd_open(pid)
+        except ProcessLookupError:
+            return
+        try:
+            observed_token = _process_creation_token(pid)
+            if expected_token is None or observed_token == expected_token:
+                signal.pidfd_send_signal(descriptor, signal.SIGKILL)
+        finally:
+            os.close(descriptor)
+        return
+    if expected_token is None or _process_creation_token(pid) == expected_token:
+        try:
+            os.kill(pid, 9)
+        except ProcessLookupError:
+            pass
 
 
 def test_hung_parser_timeout_reaps_its_descendants(tmp_path):
@@ -269,14 +417,14 @@ def test_hung_parser_timeout_reaps_its_descendants(tmp_path):
                 parser=_parser_with_descendant,
                 timeout_seconds=5,
             )
-        descendant_pid = int(descendant_pid_file.read_text(encoding="ascii"))
+        descendant_pid = json.loads(descendant_pid_file.read_text(encoding="ascii"))
         deadline = time.monotonic() + 5
-        while _pid_is_active(descendant_pid) and time.monotonic() < deadline:
+        while _process_is_active(descendant_pid) and time.monotonic() < deadline:
             time.sleep(0.1)
-        assert not _pid_is_active(descendant_pid)
+        assert not _process_is_active(descendant_pid)
     finally:
-        if descendant_pid is not None and _pid_is_active(descendant_pid):
-            _kill_pid_tree_for_test(descendant_pid)
+        if descendant_pid is not None and _process_is_active(descendant_pid):
+            _terminate_process_for_test(descendant_pid)
 
 
 def test_stop_cancels_parser_and_reaps_it(tmp_path):
@@ -372,7 +520,9 @@ def test_normalize_timeout_retries_once_then_becomes_terminal(tmp_path, monkeypa
     second_status = read_pipeline_status(catalog.config.database_path)["markdown"]
     third = legacy_normalize(catalog, limit=2, retry_limit=2, retry_backoff_seconds=0)
 
-    assert (first.completed, first.failed) == (1, 1)
+    assert (first.completed, first.failed) == (1, 1), (
+        f"first={first!r}; status={first_status}; attempts={attempts}"
+    )
     assert first_status["retryable_failed"] == 1
     assert first_status["terminal_failed"] == 0
     assert first_status["pending"] == 1
@@ -479,7 +629,7 @@ def test_corrupt_xls_is_terminal_unsupported_instead_of_retryable(tmp_path):
     second = legacy_normalize(catalog, limit=1, retry_limit=3, retry_backoff_seconds=0)
     markdown = read_pipeline_status(catalog.config.database_path)["markdown"]
 
-    assert (first.unsupported, first.failed) == (1, 0)
+    assert (first.unsupported, first.failed) == (1, 0), f"first={first!r}"
     assert (second.unsupported, second.failed) == (0, 0)
     assert markdown["unsupported"] == 1
     assert markdown["failed"] == 0
@@ -506,30 +656,10 @@ def test_corrupt_xls_is_terminal_unsupported_instead_of_retryable(tmp_path):
     }
 
 
-def _pid_is_active(pid: int) -> bool:
-    if os.name != "nt":
-        try:
-            os.kill(pid, 0)
-        except ProcessLookupError:
-            return False
-        return True
-    import ctypes
-    from ctypes import wintypes
+def test_pid_probe_rejects_a_reused_pid_with_a_different_creation_token():
+    identity = {"pid": os.getpid(), "creation_token": "not-this-process"}
 
-    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
-    kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
-    kernel32.OpenProcess.restype = wintypes.HANDLE
-    kernel32.GetExitCodeProcess.argtypes = (wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD))
-    kernel32.GetExitCodeProcess.restype = wintypes.BOOL
-    kernel32.CloseHandle.argtypes = (wintypes.HANDLE,)
-    handle = kernel32.OpenProcess(0x1000, False, pid)
-    if not handle:
-        return False
-    try:
-        exit_code = wintypes.DWORD()
-        return bool(kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code))) and exit_code.value == 259
-    finally:
-        kernel32.CloseHandle(handle)
+    assert not _process_is_active(identity)
 
 
 def test_parser_tree_exits_when_its_parent_crashes(tmp_path):
@@ -539,8 +669,9 @@ def test_parser_tree_exits_when_its_parent_crashes(tmp_path):
     descendant_pid_file = source.with_suffix(source.suffix + ".descendant.pid")
     code = """
 import os
+import json
 from pathlib import Path
-from test_source_catalog_parser_liveness import _manifest, _parser_with_descendant
+from test_source_catalog_parser_liveness import _manifest, _parser_with_descendant, _process_identity
 from company_wiki.source_catalog.normalizer import _run_parser_isolated
 
 source = Path(os.environ['PARSER_SOURCE'])
@@ -550,7 +681,7 @@ descendant_pid_file = Path(os.environ['DESCENDANT_PID_FILE'])
 def crash_parent(details):
     if not descendant_pid_file.is_file():
         return
-    pid_file.write_text(str(details['parser_pid']), encoding='ascii')
+    pid_file.write_text(json.dumps(_process_identity(details['parser_pid'])), encoding='ascii')
     os._exit(71)
 
 _run_parser_isolated(
@@ -574,7 +705,7 @@ _run_parser_isolated(
     env["PARSER_PID_FILE"] = str(pid_file)
     env["DESCENDANT_PID_FILE"] = str(descendant_pid_file)
 
-    parser_pid = descendant_pid = None
+    parser_identity = descendant_identity = None
     try:
         parent = subprocess.run(
             [sys.executable, "-c", code],
@@ -587,20 +718,20 @@ _run_parser_isolated(
         )
 
         assert parent.returncode == 71, (parent.stdout, parent.stderr)
-        parser_pid = int(pid_file.read_text(encoding="ascii"))
-        descendant_pid = int(descendant_pid_file.read_text(encoding="ascii"))
+        parser_identity = json.loads(pid_file.read_text(encoding="ascii"))
+        descendant_identity = json.loads(descendant_pid_file.read_text(encoding="ascii"))
         deadline = time.monotonic() + 10
         while (
-            _pid_is_active(parser_pid) or _pid_is_active(descendant_pid)
+            _process_is_active(parser_identity) or _process_is_active(descendant_identity)
         ) and time.monotonic() < deadline:
             time.sleep(0.1)
-        assert not _pid_is_active(parser_pid)
-        assert not _pid_is_active(descendant_pid)
+        assert not _process_is_active(parser_identity)
+        assert not _process_is_active(descendant_identity)
         assert not list(tmp_path.glob(".parser-result-*.json"))
     finally:
-        for pid in (parser_pid, descendant_pid):
-            if pid is not None and _pid_is_active(pid):
-                _kill_pid_tree_for_test(pid)
+        for identity in (parser_identity, descendant_identity):
+            if identity is not None and _process_is_active(identity):
+                _terminate_process_for_test(identity)
 
 
 # --- WR-10.13 controlled slow canary (shortened clock) ---

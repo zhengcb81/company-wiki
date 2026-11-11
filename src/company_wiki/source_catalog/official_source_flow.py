@@ -21,7 +21,7 @@ from company_wiki.parser_adapters import NativePdfError, validate_native_pdf
 from .assertion_service import SOURCE_FACT_FIELDS
 from .canonical_writer import CanonicalSourceWriter, CanonicalImportError
 from .acquisition_journal import AcquisitionJournal, record_acquisition_observation
-from .lock import _acquisition_mutex
+from .lock import acquisition_mutex
 from .store import canonical_json
 from .document_kinds import SOURCE_FACT_KINDS
 from .resolver import SourceRequest
@@ -470,7 +470,7 @@ def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=Fals
                    ("deduplicated_after_download" if captured_http else "deduplicated_original"))
         _persist_completed(catalog, state, out, outcome=outcome, canonical_path=result.canonical_path)
         # A durable result must survive a lost response before raw cleanup.
-        writer._remove_staged(staged)
+        writer.discard_staged(staged)
         descriptor.unlink()
         return out
     except Exception as primary:
@@ -702,7 +702,7 @@ def _cleanup_completed_staging(catalog, capture_id, record):
                     or (before.st_size, before.st_mtime_ns, before.st_ino)
                     != (after.st_size, after.st_mtime_ns, after.st_ino)):
                 return {"status": "retained", "reason": "retained_capture_identity_mismatch"}
-            CanonicalSourceWriter(catalog)._remove_staged(staged)
+            CanonicalSourceWriter(catalog).discard_staged(staged)
         # Raw can already be gone after interrupted descriptor cleanup.
         descriptor.unlink(missing_ok=True)
         return None
@@ -750,7 +750,7 @@ def recover_official_source(catalog, *, capture_id, max_bytes=None):
     root = _staging_root(catalog)
     # Reuse the existing file mutex; the .r suffix keeps its Win32 name bounded
     # and distinct from captured raw or recovery records in inventory.
-    with _acquisition_mutex(root / (capture_id + ".r")):
+    with acquisition_mutex(root / (capture_id + ".r")):
         replay = _replay_completed(catalog, capture_id, max_bytes=max_bytes)
         if replay is not None:
             return replay
@@ -790,10 +790,12 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
     if not isinstance(budget, AcquisitionBudget):
         raise TypeError("budget must be AcquisitionBudget")
     if expected is not None:
-        path = CanonicalSourceWriter(catalog)._existing_original(expected)
-        if path is not None:
-            with path.open("rb") as stream:
-                original = stream.read(cap + 1)
+        original = CanonicalSourceWriter(catalog).read_existing_original(
+            expected, max_bytes=cap,
+        )
+        if original is not None:
+            if len(original) > cap:
+                raise OfficialSourceError("source_byte_limit")
             capture = {"capture_method": "verified_local_reuse", "tool_name": "company-wiki-official-source",
                        "tool_call_id": "reuse-" + uuid.uuid4().hex,
                        "captured_at": datetime.now(timezone.utc).isoformat(),
@@ -921,3 +923,24 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
     out["download_events"] = 1
     out["acquisition_usage"] = http_capture["acquisition_usage"]
     return out
+
+
+# Shared owner ports for the versioned JSON import adapters.
+attach_capture_http_observation = _attach_capture_http_observation
+journal_capture = _journal
+persist_capture = _persist_capture
+persist_completed_capture = _persist_completed
+validate_capture_receipt = _validate_capture_receipt
+
+__all__ = [
+    "OfficialSourceError",
+    "attach_capture_http_observation",
+    "capture_official_source",
+    "import_official_source",
+    "journal_capture",
+    "list_retained_official_captures",
+    "persist_capture",
+    "persist_completed_capture",
+    "recover_official_source",
+    "validate_capture_receipt",
+]

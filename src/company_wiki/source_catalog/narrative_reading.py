@@ -42,7 +42,7 @@ from .narrative_routing import DocumentRoute, route_document
 from .narrative_support_use import SUPPORT_USE_SCAN_PASSES, source_support_use, source_narrative_relevance
 
 from .narrative_reading_admission import (
-    CONTEXT_ROLES as _CONTEXT_ROLES, _admitted as _admitted, _financial_only as _financial_only,
+    CONTEXT_ROLES, is_admitted,
 )
 from .narrative_business_policy import detect_reading_business_fact as detect_reading_business_fact
 
@@ -72,7 +72,7 @@ def _citation_support_views(entry, originals):
             return unit.get("role") if isinstance(unit, Mapping) else unit.source_role
         declared = entry.get("anchor_unit_ids")
         answers = {uid for uid in (declared if declared is not None else entry["member_unit_ids"])
-                   if uid in originals and role(uid) not in _CONTEXT_ROLES
+                   if uid in originals and role(uid) not in CONTEXT_ROLES
                    and (declared is not None or role(uid) == "management")}
         views = [list(dict.fromkeys(uid for uid in view if uid in answers))
                  for view in views or [list(answers)]]
@@ -612,7 +612,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             # The closed scope's capability was prepared once in the session.
             # Do not charge a second full text scan for consuming that cache.
             work_budget.charge(SUPPORT_USE_SCAN_PASSES * len(text) if passage is None else len(members) + 1)
-            context_role = all(units[uid].source_role in _CONTEXT_ROLES for uid in members)
+            context_role = all(units[uid].source_role in CONTEXT_ROLES for uid in members)
             use = source_support_use(text, fact=fact, financial_only=session.financial_only(owner),
                 table_qualified=table_qualified,
                 context_role=context_role,
@@ -725,7 +725,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 withheld.append({"package_id": str(package["package_id"]),
                     "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": sorted(required)})
                 continue
-            admitted, fact = _admitted(unit, view, package["kind"],
+            admitted, fact = is_admitted(unit, view, package["kind"],
                                        fact=fact,
                                        financial_only=session.financial_only(uid),
                                        is_heading=uid in headings, table_qualified=table_qualified,

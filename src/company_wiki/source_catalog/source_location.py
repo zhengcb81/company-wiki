@@ -6,10 +6,18 @@ for the current location. The root owner resolves the relative locator again.
 from __future__ import annotations
 
 import os
+import unicodedata
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 from .models import RootSpec
+
+_HYDRATION_ATTRIBUTES = 0x400000 | 0x40000 | 0x1000
+
+
+def is_hydration_required(stat_result: os.stat_result) -> bool:
+    """Return whether opening this Windows placeholder may fetch remote bytes."""
+    return bool(getattr(stat_result, "st_file_attributes", 0) & _HYDRATION_ATTRIBUTES)
 
 
 class SourceLocationError(ValueError):
@@ -27,6 +35,11 @@ def relative_segments(relative_path: str) -> tuple[str, ...] | None:
         return None
     segments = tuple(normalized.split("/"))
     return None if any(segment in {"", ".", ".."} for segment in segments) else segments
+
+
+def relative_source_path(path: Path, root: Path) -> str:
+    """Return one NFC-normalized, root-relative locator for a discovered path."""
+    return unicodedata.normalize("NFC", path.relative_to(root).as_posix())
 
 
 def inside_configured_roots(path: Path, roots: tuple[Any, ...]) -> bool:
@@ -69,4 +82,11 @@ def resolve_source_location(root: RootSpec, relative_path: str) -> Path:
     return resolved
 
 
-__all__ = ["SourceLocationError", "inside_configured_roots", "relative_segments", "resolve_source_location"]
+__all__ = [
+    "SourceLocationError",
+    "inside_configured_roots",
+    "is_hydration_required",
+    "relative_segments",
+    "relative_source_path",
+    "resolve_source_location",
+]

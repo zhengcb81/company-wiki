@@ -21,6 +21,7 @@ from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog  
 from company_wiki.source_catalog.policy_2x import export_policy_2x  # noqa: E402
 from company_wiki.source_catalog.runtime_policy import build_snapshot  # noqa: E402
 from company_wiki.source_catalog.resolver import SourceRequest  # noqa: E402
+from company_wiki.source_catalog.read_budget import ReadBudget  # noqa: E402
 from company_wiki.source_catalog.source_reader import (  # noqa: E402
     SourceReadError,
     SourceVersionReader,
@@ -207,6 +208,154 @@ def test_exact_ref_contains_no_location_and_delivers_verified_bytes(tmp_path):
     assert opened.document_id == ids["document_id"]
     assert opened.source_id == ids["source_id"]
     assert opened.policy_sha256 == export_policy_2x(catalog.config)[0]
+
+
+def test_reusable_read_reports_missing_when_only_nonreusable_copy_exists(tmp_path):
+    catalog, paths, roots, ids = _fixture(tmp_path, three_roots=True)
+    try:
+        # The catalog knows three exact copies. Current filing policy admits
+        # neither directory copy, while the only admitted roots have lost the
+        # file since indexing. A rejected nonreusable copy must not change the
+        # missing-original result into a generic verification failure.
+        catalog.config = replace(
+            catalog.config,
+            roots=(replace(roots[0], reusable_for_filing=False), *roots[1:]),
+        )
+        paths[1].unlink()
+        paths[2].unlink()
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+
+        with pytest.raises(SourceReadError) as error:
+            reader.verify_reusable_version(
+                ref,
+                request=SourceRequest(
+                    entity="Acme",
+                    document_kind="annual_report",
+                    as_of_date="2026-03-01",
+                    market="CN",
+                    security_id="ACME",
+                ),
+                metadata={"market": "CN", "document_kind": "annual_report"},
+                budget=ReadBudget(),
+            )
+
+        assert error.value.status == "not_found"
+        assert error.value.reason == "local_original_missing"
+    finally:
+        catalog.close()
+
+
+def test_open_version_retries_next_copy_when_location_disappears_after_lookup(
+    tmp_path, monkeypatch,
+):
+    from company_wiki.source_catalog.resolver import SourceResolver
+
+    catalog, _paths, _roots, ids = _fixture(tmp_path, three_roots=True)
+    reader = SourceVersionReader(catalog)
+    ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+    locations = sorted(
+        catalog.source_location_candidates(ref.document_id, ref.source_id),
+        key=lambda item: item.candidate_rank,
+    )
+    assert len(locations) == 3
+    first_location_id = locations[0].location_id
+    current_lookup = SourceResolver._current_source_location
+    removed: set[str] = set()
+
+    def remove_first_record_before_resolver_lookup(resolver, source_ref, location_id, budget):
+        if location_id == first_location_id and location_id not in removed:
+            with catalog.store.transaction() as connection:
+                connection.execute(
+                    "DELETE FROM locations WHERE location_id=?", (location_id,),
+                )
+            removed.add(location_id)
+        return current_lookup(resolver, source_ref, location_id, budget)
+
+    # The Reader has already captured candidate DTOs. Remove the first current
+    # catalog row immediately before Resolver re-reads it, so the production
+    # resolver path discovers the race itself.
+    monkeypatch.setattr(
+        SourceResolver, "_current_source_location", remove_first_record_before_resolver_lookup,
+    )
+
+    try:
+        result = reader.open_version(ref, purpose="filing_reuse")
+        assert result.data == BODY
+        assert removed == {first_location_id}
+    finally:
+        catalog.close()
+
+
+def test_disappeared_location_record_does_not_claim_original_missing(
+    tmp_path, monkeypatch,
+):
+    from company_wiki.source_catalog.resolver import SourceResolver
+
+    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    reader = SourceVersionReader(catalog)
+    ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+    location = catalog.source_location_candidates(ref.document_id, ref.source_id)[0]
+    current_lookup = SourceResolver._current_source_location
+    removed: set[str] = set()
+
+    def remove_record_before_resolver_lookup(resolver, source_ref, location_id, budget):
+        if location_id == location.location_id and location_id not in removed:
+            with catalog.store.transaction() as connection:
+                connection.execute(
+                    "DELETE FROM locations WHERE location_id=?", (location_id,),
+                )
+            removed.add(location_id)
+        return current_lookup(resolver, source_ref, location_id, budget)
+
+    monkeypatch.setattr(
+        SourceResolver, "_current_source_location", remove_record_before_resolver_lookup,
+    )
+    try:
+        with pytest.raises(SourceReadError) as error:
+            reader.verify_reusable_version(
+                ref,
+                request=SourceRequest(
+                    entity="Acme",
+                    document_kind="annual_report",
+                    as_of_date="2026-03-01",
+                    market="CN",
+                    security_id="ACME",
+                ),
+                metadata={"market": "CN", "document_kind": "annual_report"},
+                budget=ReadBudget(),
+            )
+        assert error.value.status == "unavailable"
+        assert error.value.reason == "no_verified_location"
+        assert removed == {location.location_id}
+    finally:
+        catalog.close()
+
+
+def test_resolver_source_ref_change_is_not_treated_as_a_retryable_location_race(
+    tmp_path, monkeypatch,
+):
+    from company_wiki.source_catalog.resolver import SourceResolver
+
+    catalog, _paths, _roots, ids = _fixture(tmp_path, three_roots=True)
+    reader = SourceVersionReader(catalog)
+    ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+    attempts: list[str] = []
+
+    def changed_source_ref(_resolver, _source_ref, location_id, **_kwargs):
+        attempts.append(location_id)
+        raise SourceReadError("unavailable", "source_ref_changed")
+
+    monkeypatch.setattr(
+        SourceResolver, "read_verified_source_location", changed_source_ref,
+    )
+    try:
+        with pytest.raises(SourceReadError) as error:
+            reader.open_version(ref, purpose="filing_reuse")
+        assert error.value.reason == "source_ref_changed"
+        assert len(attempts) == 1
+    finally:
+        catalog.close()
 
 
 def test_narrative_derivation_open_and_verify_return_bound_review_snapshot(
@@ -831,3 +980,42 @@ def test_review_store_failure_is_diagnostic_and_verified_bytes_remain_usable(
     with pytest.raises(SourceReadError) as error:
         reader.open_version(ref, purpose="filing_reuse")
     assert error.value.reason == "no_verified_location"
+
+
+def test_resolver_location_port_validates_source_ref_and_requires_budget(tmp_path):
+    from company_wiki.source_catalog.read_budget import ReadBudget
+    from company_wiki.source_catalog.resolver import SourceResolver
+
+    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    reader = SourceVersionReader(catalog)
+    ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+    location = next(
+        item for item in catalog.source_location_candidates(
+            ref.document_id, ref.source_id,
+        ) if item.candidate_rank > 0
+    )
+    resolver = SourceResolver(catalog)
+
+    result = resolver.read_verified_source_location(
+        ref, location.location_id, budget=ReadBudget(),
+    )
+    assert result.ok
+    assert result.location.location_id == location.location_id
+    assert result.observation is not None and result.observation.data == BODY
+
+    with pytest.raises(SourceReadError, match="invalid_source_ref"):
+        resolver.read_verified_source_location(
+            replace(ref, content_sha256=OTHER_SHA),
+            location.location_id,
+            budget=ReadBudget(),
+        )
+    with pytest.raises(SourceReadError, match="unsupported_version"):
+        resolver.read_verified_source_location(
+            replace(ref, schema_version="1"),
+            location.location_id,
+            budget=ReadBudget(),
+        )
+    with pytest.raises(TypeError, match="read budget"):
+        resolver.read_verified_source_location(
+            ref, location.location_id, budget=None,  # type: ignore[arg-type]
+        )

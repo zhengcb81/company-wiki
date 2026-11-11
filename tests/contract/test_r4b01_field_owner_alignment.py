@@ -418,7 +418,8 @@ def test_r4b01_empty_reusable_set_serves_nothing(tmp_path):
     """B-VR01-05: the candidate filter has no empty-set escape.  An omitted or
     empty set has to mean "nothing qualifies" - if it meant "no filtering", a
     future direct caller would silently get the fail-open behaviour back."""
-    from company_wiki.source_catalog.resolver import SourceResolver, _ReadBudget
+    from company_wiki.source_catalog.read_budget import ReadBudget
+    from company_wiki.source_catalog.resolver import SourceResolver
 
     path = _write_copy(
         tmp_path / "companies" / "Acme" / "raw" / "financial_reports" / "annual"
@@ -443,12 +444,12 @@ def test_r4b01_empty_reusable_set_serves_nothing(tmp_path):
         ],
     }
     refused = SourceResolver._select_candidate(
-        document, budget=_ReadBudget(), reusable_roots={}
+        document, budget=ReadBudget(), reusable_roots={}
     )
     assert refused[0] is None, refused
     assert refused[1] == "placeholder_no_handle", refused
     served = SourceResolver._select_candidate(
-        document, budget=_ReadBudget(), reusable_roots={
+        document, budget=ReadBudget(), reusable_roots={
             "company_raw": RootSpec("company_raw", path.parent, "company_raw"),
         },
     )

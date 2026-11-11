@@ -9,9 +9,13 @@ import os
 from pathlib import Path
 import time
 from typing import Any, NoReturn
-from .resolver import _ReadBudget, _inside_configured_roots, _read_verified_bytes
-from .policy import _effective_reusable
-from .source_reader import SourceReadError, SourceRef, _relative_segments
+from company_wiki.source_contract.source_version import SourceReadError, SourceRef
+
+from .read_budget import ReadBudget
+from .location_read_contract import RegisteredLocationBinding
+from .resolver import SourceResolver
+from .source_location import is_hydration_required, resolve_source_location
+from company_wiki.source_catalog.filesystem_discovery import SKIP_DIRS
 
 
 @dataclass(frozen=True)
@@ -40,7 +44,7 @@ class LocalPrepareLimits:
             raise ValueError("invalid local deadline")
 
 
-class LocalReadBudget(_ReadBudget):
+class LocalReadBudget(ReadBudget):
     def __init__(self, limits: LocalPrepareLimits):
         super().__init__(
             max_candidates=limits.max_candidates, max_bytes=limits.max_bytes
@@ -55,6 +59,10 @@ class LocalReadBudget(_ReadBudget):
         self.max_discovery_entries = limits.max_discovery_entries
         self.discovery_groups = 0
         self.discovery_entries = 0
+
+    def begin_request(self):
+        """Keep this parent operation's account across nested Resolver calls."""
+        self.check()
 
     def _stop(self, reason: str, bound: str) -> NoReturn:
         self.triggered_bound = bound
@@ -118,8 +126,7 @@ class LocalReadBudget(_ReadBudget):
             before = resolved.stat()
         except FileNotFoundError:
             return None
-        from .resolver import _needs_hydration
-        if _needs_hydration(before):
+        if is_hydration_required(before):
             raise SourceReadError("unavailable", "placeholder_not_hydrated")
         if not resolved.is_file():
             raise SourceReadError("blocked", "local_metadata_unreadable")
@@ -158,7 +165,6 @@ class LocalReadBudget(_ReadBudget):
     def walk_files(self, root):
         """Only explicit registration groups; bounded recursive file enumeration."""
         from .models import DOCUMENT_EXTENSIONS
-        from .resolver import _needs_hydration
         stack = [root]
         while stack:
             directory = stack.pop()
@@ -171,12 +177,11 @@ class LocalReadBudget(_ReadBudget):
                     status = entry.stat(follow_symlinks=False)
                     if getattr(status, "st_file_attributes", 0) & 0x400:
                         continue
-                    if _needs_hydration(status):
+                    if is_hydration_required(status):
                         raise SourceReadError("unavailable", "placeholder_not_hydrated")
                     path = Path(entry.path)
                     if entry.is_dir(follow_symlinks=False):
-                        from .adapters.common import _SKIP_DIRS
-                        if entry.name not in _SKIP_DIRS:
+                        if entry.name not in SKIP_DIRS:
                             stack.append(path)
                     elif path.suffix.lower() in DOCUMENT_EXTENSIONS:
                         yield path
@@ -191,8 +196,7 @@ class LocalReadBudget(_ReadBudget):
         except ValueError:
             raise SourceReadError("blocked", "artifact_path_outside_allowed_root") from None
         before = resolved.stat()
-        from .resolver import _needs_hydration
-        if _needs_hydration(before):
+        if is_hydration_required(before):
             raise SourceReadError("unavailable", "placeholder_not_hydrated")
         if path.is_symlink() or getattr(path.lstat(), "st_file_attributes", 0) & 0x400:
             raise SourceReadError("blocked", "artifact_path_outside_allowed_root")
@@ -245,8 +249,16 @@ class LocalReadBudget(_ReadBudget):
 class LocalOriginal:
     ref: SourceRef
     data: bytes
-    locations: tuple[tuple[str, Path, Any], ...]
+    locations: tuple[RegisteredLocationBinding, ...]
     failures: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class RegisteredSidecarObservation:
+    metadata: dict[str, Any]
+    content_sha256: str
+    original_name: str
+    locator: str
 
 
 def _inventory_rows(catalog, sql, parameters, *, budget):
@@ -350,6 +362,7 @@ def verify_registered_original(
     ) != (ref.source_id, ref.content_sha256, ref.byte_size, ref.mime_type):
         raise SourceReadError("unavailable", "source_ref_changed")
     roots = {x.root_id: x for x in catalog.config.roots}
+    resolver = SourceResolver(catalog)
     budget.check()
     rows = list(_location_rows(catalog, ref.document_id, ref.source_id, budget=budget))
     valid = []
@@ -365,48 +378,31 @@ def verify_registered_original(
     ):
         budget.check()
         root = roots.get(loc["root_id"])
-        if (
-            root is None
-            or not _effective_reusable(root, catalog.config)
-            or (root.allowed_statuses and "active" not in root.allowed_statuses)
-        ):
+        if root is None:
             failures.append("root_admission_denied")
             continue
-        if (
-            root.allowed_document_kinds
-            and row["document_kind"] not in root.allowed_document_kinds
-        ) or (root.max_file_size is not None and ref.byte_size > root.max_file_size):
-            failures.append("root_admission_denied")
-            continue
-        segments = _relative_segments(str(loc["relative_path"]))
-        if (
-            loc["role"] != "original_primary"
-            or loc["location_status"] not in {"active", "retired"}
-            or segments is None
-            or ".rejections" in segments
-        ):
-            failures.append("location_ineligible")
-            continue
-        resolved = Path(os.path.realpath(root.path.joinpath(*segments)))
-        if not _inside_configured_roots(resolved, (root,)):
-            failures.append("artifact_path_outside_allowed_root")
-            continue
-        observation, status, reason, detail = _read_verified_bytes(
-            resolved,
-            expected_sha256=ref.content_sha256,
-            expected_byte_size=ref.byte_size,
+        result = resolver.read_registered_original(
+            ref,
+            str(loc["location_id"]),
             budget=budget,
             retain_bytes=first is None,
         )
-        if status:
-            failures.append("local_original_missing" if reason == "read_failed" and detail == "FileNotFoundError" else (reason or status))
+        if not result.ok:
+            reason, detail, status = result.reason, result.detail, result.status
+            failures.append(
+                "local_original_missing"
+                if reason == "read_failed" and detail == "FileNotFoundError"
+                else (reason or status)
+            )
             if reason in {"cancelled", "budget_exceeded"}:
                 raise SourceReadError(status, reason, detail)
             continue
         if first is None:
-            assert observation is not None
-            first = observation.data
-        valid.append((loc["location_id"], resolved, root))
+            assert result.observation is not None
+            first = result.observation.data
+        if result.binding is None:
+            raise SourceReadError("unavailable", "location_binding_missing")
+        valid.append(result.binding)
     if first is None:
         if failures and set(failures) == {"local_original_missing"}:
             raise SourceReadError("not_found", "local_original_missing")
@@ -414,3 +410,66 @@ def verify_registered_original(
             "unavailable", "no_verified_location", ",".join(sorted(set(failures)))
         )
     return LocalOriginal(ref, first, tuple(valid), tuple(failures))
+
+
+def read_registered_sidecar(
+    catalog,
+    ref: SourceRef,
+    location: RegisteredLocationBinding,
+    *,
+    kind: str,
+    budget: LocalReadBudget,
+) -> RegisteredSidecarObservation | None:
+    """Read a known adjacent sidecar without exporting its filesystem path.
+
+    ``location`` is the binding emitted with the verified original. Resolver
+    re-reads the catalog mapping before each metadata read and refuses a root or
+    relative-locator rebind. The only accepted sidecar forms are the two
+    registration conventions already consumed by local reconciliation.
+    """
+    if kind not in {"sec_provider_meta", "source_sidecar"}:
+        raise ValueError("unsupported registered sidecar kind")
+    budget.check()
+    resolver = SourceResolver(catalog)
+    descriptor = resolver.describe_registered_location(
+        ref, location, budget=budget
+    )
+    if not descriptor.ok:
+        raise SourceReadError(descriptor.status, descriptor.reason, descriptor.detail)
+    roots = {root.root_id: root for root in catalog.config.roots}
+    root = roots.get(descriptor.location.root_id)
+    if root is None:
+        raise SourceReadError("unavailable", "location_root_missing")
+    try:
+        original_path = resolve_source_location(root, descriptor.location.relative_path)
+    except ValueError as exc:
+        reason = getattr(exc, "reason", "artifact_path_outside_allowed_root")
+        raise SourceReadError("unavailable", reason) from None
+    sidecar_path = (
+        original_path.with_name("meta.json")
+        if kind == "sec_provider_meta"
+        else original_path.with_name(original_path.name + ".source.json")
+    )
+    observation = budget.read_metadata_observation(sidecar_path, root=root.path)
+    after_read = resolver.describe_registered_location(
+        ref, location, budget=budget
+    )
+    if not after_read.ok or after_read.binding != location:
+        raise SourceReadError(
+            after_read.status or "unavailable",
+            after_read.reason or "location_binding_changed",
+            after_read.detail,
+        )
+    if observation is None:
+        return None
+    metadata, digest = observation
+    return RegisteredSidecarObservation(
+        metadata=metadata,
+        content_sha256=digest,
+        original_name=original_path.name,
+        locator=(
+            "registered-provider-cache:/meta.json"
+            if kind == "sec_provider_meta"
+            else "registered-source-sidecar:/.source.json"
+        ),
+    )

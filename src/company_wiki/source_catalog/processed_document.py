@@ -14,7 +14,7 @@ parser state: the port reads bytes through :class:`SourceVersionReader`
 process for PDF/XLSX/text and everything else the catalog already parses.
 Nothing here re-implements a parser, adds a second cache, or invents budgets:
 parser isolation, deadlines and result caps come from the existing owner
-machinery (``normalizer._run_parser_isolated`` defaults).
+machinery and parser limits come from the public normalizer runtime contract.
 
 The response never contains a physical path, storage root, SQLite detail or
 neighbour-repo location.  Legacy ``SourceManifest.to_dict()`` (which carries
@@ -53,13 +53,13 @@ from company_wiki.source_contract.source_manifest import SourceManifest
 from .normalizer import (
     NormalizationCancelledError,
     NormalizationTimeoutError,
+    NormalizedDocument,
     ParserProcessError,
     UnsupportedDocumentError,
-    _Normalized,
-    _escape_cell,
-    _normalize_source,
-    _run_parser_isolated,
-    _unsupported,
+    escape_table_cell,
+    normalize_source_file,
+    run_parser_isolated,
+    unsupported_result,
 )
 from .source_reader import SourceVersionReader
 
@@ -305,7 +305,7 @@ def _parse_direct_lane(
 
 def _port_parse_source(
     path: Path, manifest: SourceManifest, docling_path: Path | None
-) -> _Normalized:
+) -> NormalizedDocument:
     """Isolated-child parser: the catalog dispatch plus the D5 sheet adapter.
 
     The catalog parser emits one unit per workbook sheet as pipe-joined text;
@@ -317,15 +317,15 @@ def _port_parse_source(
     if suffix == ".xlsx":
         return _xlsx_structured(path, manifest.source_id)
     try:
-        return _normalize_source(path, manifest, docling_path)
+        return normalize_source_file(path, manifest, docling_path)
     except ValueError as exc:
         if str(exc) == "empty text output":
             # An empty text source is honestly unsupported, not a fake parse.
-            return _unsupported(path, "empty text output")
+            return unsupported_result(path, "empty text output")
         raise
 
 
-def _xlsx_structured(path: Path, source_id: str) -> _Normalized:
+def _xlsx_structured(path: Path, source_id: str) -> NormalizedDocument:
     import openpyxl
 
     workbook = openpyxl.load_workbook(path, read_only=True, data_only=True)
@@ -338,7 +338,7 @@ def _xlsx_structured(path: Path, source_id: str) -> _Normalized:
             if not rows:
                 continue
             raw = "\n".join(
-                " | ".join(_escape_cell(value) for value in row) for row in rows
+                " | ".join(escape_table_cell(value) for value in row) for row in rows
             )
             structured_rows = [
                 [None if value is None else str(value) for value in row]
@@ -360,7 +360,7 @@ def _xlsx_structured(path: Path, source_id: str) -> _Normalized:
         workbook.close()
     if not results:
         raise ValueError("XLSX contains no non-empty sheets")
-    return _Normalized(
+    return NormalizedDocument(
         body="",
         parser_results=tuple(results),
         parser_name="openpyxl",
@@ -395,7 +395,7 @@ def _parse_isolated_lane(
     data_path.write_bytes(content.data)
     try:
         try:
-            normalized = _run_parser_isolated(
+            normalized = run_parser_isolated(
                 data_path,
                 manifest,
                 None,
@@ -409,7 +409,7 @@ def _parse_isolated_lane(
             # The parser proved these bytes unparseable for their format: say
             # so honestly instead of inventing a parse or a fake failure.
             return _outcome_from_normalized(
-                _unsupported(
+                unsupported_result(
                     data_path, _sanitize_temp_path(str(exc), data_path)
                 ),
                 content_sha256=manifest.content_sha256,
@@ -428,7 +428,7 @@ def _parse_isolated_lane(
 
 
 def _outcome_from_normalized(
-    normalized: _Normalized, *, content_sha256: str,
+    normalized: NormalizedDocument, *, content_sha256: str,
 ) -> _Outcome:
     status = _STATUS_BY_CATALOG_STATUS.get(normalized.status)
     if status is None:

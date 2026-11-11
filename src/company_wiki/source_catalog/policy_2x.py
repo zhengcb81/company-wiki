@@ -20,7 +20,12 @@ import yaml
 
 from .adapters.registry import admission_profile, registered_adapter
 from .config import (
-    CatalogConfigError, _expand_path, _mapping, _require_boolean, _route_spec, _unresolved_variables,
+    CatalogConfigError,
+    expand_config_path,
+    mapping_from_config,
+    require_boolean_root_fields,
+    route_spec_from_config,
+    unresolved_path_variables,
 )
 from .models import ROOT_KINDS, CatalogConfig, RootSpec, RouteSpec
 
@@ -65,7 +70,7 @@ def load_root_policy_2x(
     if not isinstance(path, Path):
         raise TypeError("path must be pathlib.Path")
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
-    data = _mapping(payload, "config")
+    data = mapping_from_config(payload, "config")
     required = {"schema_version", "catalog_dir", "roots"}
     if not set(data) <= (required | {"reusable_root_kinds"}) or not required <= set(data):
         raise CatalogConfigError(
@@ -82,7 +87,7 @@ def load_root_policy_2x(
     roots: list[RootSpec] = []
     seen_root_ids: set[str] = set()
     for index, raw in enumerate(raw_roots):
-        item = _mapping(raw, f"roots[{index}]")
+        item = mapping_from_config(raw, f"roots[{index}]")
         unknown = set(item) - ALLOWED_ROOT_FIELDS_2X
         if unknown:
             raise CatalogConfigError(
@@ -93,7 +98,7 @@ def load_root_policy_2x(
             raise CatalogConfigError(f"duplicate root_id: {root_id}")
         seen_root_ids.add(root_id)
         raw_path = item.get("path", "")
-        unresolved = _unresolved_variables(raw_path)
+        unresolved = unresolved_path_variables(raw_path)
         if unresolved:
             raise CatalogConfigError(
                 f"roots[{index}] path contains unresolved variable(s) "
@@ -112,7 +117,7 @@ def load_root_policy_2x(
             raise CatalogConfigError(
                 f"roots[{index}] admission_profile_id {profile_id!r} unknown"
             )
-        _require_boolean(index, item, nullable=("reusable_for_filing",))
+        require_boolean_root_fields(index, item, nullable=("reusable_for_filing",))
         read_only = item.get("read_only", True)
         reusable_for_filing = item.get("reusable_for_filing")
         write_target = item.get("canonical_write_target")
@@ -145,7 +150,7 @@ def load_root_policy_2x(
         roots.append(
             RootSpec(
                 root_id=root_id,
-                path=_expand_path(raw_path, project_root=resolved_project),
+                path=expand_config_path(raw_path, project_root=resolved_project),
                 kind=kind,
                 priority=int(item.get("priority", 100)),
                 adapter_id=str(adapter_id) if adapter_id is not None else None,
@@ -184,7 +189,7 @@ def load_root_policy_2x(
         )
     return CatalogConfig(
         project_root=resolved_project,
-        catalog_dir=_expand_path(data["catalog_dir"], project_root=resolved_project),
+        catalog_dir=expand_config_path(data["catalog_dir"], project_root=resolved_project),
         roots=tuple(roots),
         reusable_root_kinds=tuple(raw_kinds),
     )
@@ -193,7 +198,7 @@ def load_root_policy_2x(
 def _parse_route_2x(
     raw, root_index: int, route_index: int, allowed_kinds: tuple[str, ...]
 ) -> RouteSpec:
-    item = _mapping(raw, f"roots[{root_index}].routes[{route_index}]")
+    item = mapping_from_config(raw, f"roots[{root_index}].routes[{route_index}]")
     unknown = set(item) - {
         "include",
         "exclude",
@@ -213,7 +218,7 @@ def _parse_route_2x(
             f"roots[{root_index}].routes[{route_index}] widens allowed kinds "
             f"beyond root policy: {sorted(extra)}"
         )
-    return _route_spec(item, route_index)
+    return route_spec_from_config(item, route_index)
 
 
 # --- 1.x -> 2.x doctor ------------------------------------------------------
@@ -236,19 +241,19 @@ def doctor_root_policy(
     """Report the config's RootPolicy version and which 2.x fields each root
     is missing.  Read-only; never changes production scan behavior."""
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
-    data = _mapping(payload, "config")
+    data = mapping_from_config(payload, "config")
     schema = str(data.get("schema_version", "?"))
     raw_roots = data.get("roots", [])
     missing: list[str] = []
     for index, raw in enumerate(raw_roots):
-        item = _mapping(raw, f"roots[{index}]")
+        item = mapping_from_config(raw, f"roots[{index}]")
         for field in _2X_FIELDS:
             if field not in item:
                 missing.append(f"roots[{index}].{field}")
     # a config is 2.x when every root carries adapter + profile + write target
     every_root_explicit = all(
-        "adapter_id" in _mapping(raw, f"roots[{index}]")
-        and "admission_profile_id" in _mapping(raw, f"roots[{index}]")
+        "adapter_id" in mapping_from_config(raw, f"roots[{index}]")
+        and "admission_profile_id" in mapping_from_config(raw, f"roots[{index}]")
         for index, raw in enumerate(raw_roots)
     )
     return {

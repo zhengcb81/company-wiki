@@ -14,7 +14,6 @@ import socket
 import stat
 import subprocess
 import tracemalloc
-import uuid
 from dataclasses import asdict
 from pathlib import Path
 
@@ -169,7 +168,9 @@ def _new_run(tmp_path: Path) -> tuple[Path, dict[str, tuple], os.stat_result, di
     baseline = _tree_state(tmp_path)
     parent_state = tmp_path.stat()
     fixed_tests = _tree_state(Path(__file__).parent)
-    run_root = tmp_path / f"real-reader-{uuid.uuid4().hex}"
+    # tmp_path is already unique per test. A second UUID directory needlessly
+    # pushes nested real-source fixture paths beyond Windows MAX_PATH.
+    run_root = tmp_path / "r"
     assert not run_root.exists()
     run_root.mkdir()
     return run_root, baseline, parent_state, fixed_tests
@@ -186,11 +187,11 @@ def _finish_run(
 ) -> None:
     if catalog is not None:
         catalog.close()
+    assert run_root == tmp_path / "r"
     if run_root.exists():
         intended_parent = tmp_path.resolve(strict=True)
         resolved = run_root.resolve(strict=True)
         assert resolved.parent == intended_parent
-        assert run_root.name.startswith("real-reader-")
         _tree_state(run_root)
         shutil.rmtree(run_root)
     os.utime(tmp_path, ns=(parent_state.st_atime_ns, parent_state.st_mtime_ns))
@@ -225,7 +226,7 @@ def _exact_row(catalog: SourceCatalog, digest: str) -> dict:
     return dict(row)
 
 
-def test_real_star_native_metadata_conflict_is_priority_independent(
+def test_real_star_native_metadata_conflict_is_diagnostic_and_priority_independent(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     original_states = _available_originals(STAR_ORIGINAL, STAR_SHA, STAR_SIZE)
@@ -319,10 +320,15 @@ def test_real_star_native_metadata_conflict_is_priority_independent(
                 "path" not in key and "root" not in key and "location" not in key
                 for key in asdict(ref)
             )
-            with pytest.raises(SourceReadError) as error:
-                reader.describe_version(ref)
-            assert error.value.status == "blocked"
-            assert error.value.reason == "metadata_conflict"
+            # Conflicting optional metadata stays visible as a diagnostic; it
+            # cannot veto reading the exact hash-pinned bytes. The request
+            # query above remains the admission decision and excludes this
+            # source from formal reuse.
+            description = reader.describe_version(ref)
+            assert description["source_id"] == ref.source_id
+            assert reader.metadata_diagnostics(ref)["conflicted_fields"]
+            opened = reader.open_version(ref, purpose="preview")
+            assert hashlib.sha256(opened.data).hexdigest() == STAR_SHA
 
             version = catalog.reader.exact_source_version(ref.document_id)
             assert version is not None
@@ -348,7 +354,7 @@ def test_real_star_native_metadata_conflict_is_priority_independent(
         )
 
 
-def test_real_p06_sparse_sidecar_preview_is_not_formal_reuse(
+def test_real_p06_sparse_sidecar_preview_is_readable_but_not_reusable(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     original_states = _available_originals(P06_ORIGINAL, P06_SHA, P06_SIZE)
@@ -388,10 +394,16 @@ def test_real_p06_sparse_sidecar_preview_is_not_formal_reuse(
         preview = reader.open_version(ref, purpose="preview")
         assert preview.byte_size == P06_SIZE
         assert hashlib.sha256(preview.data).hexdigest() == P06_SHA
-        with pytest.raises(SourceReadError) as error:
-            reader.open_version(ref, purpose="filing_reuse")
-        assert error.value.status == "blocked"
-        assert error.value.reason == "capture_incomplete"
+        # Exact-version byte reading is independent from acquisition
+        # admission. The sparse source remains excluded by query_local, which
+        # is the request/identity/period decision port used for formal reuse.
+        candidate = reader.describe_candidate(ref)
+        assert candidate["capture_ready"] is False
+        from company_wiki.source_catalog import ResolutionStatus, SourceResolver
+
+        resolution, reuse = SourceResolver(catalog).resolve_for_acquisition(request)
+        assert resolution.status is ResolutionStatus.MISSING
+        assert reuse is None
     finally:
         _finish_run(
             tmp_path, run_root, baseline, parent_state, fixed_tests,

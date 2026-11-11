@@ -85,6 +85,7 @@ class _SpyAdapter:
         return (DownloadCandidate(
             candidate_id="c-2025", provider="spy",
             provider_document_id="acc-2025", market="US", entity="ACME",
+            security_id="ACME",
             title="ACME 2025 annual",
             source_url="https://spy.example/acc-2025",
             document_kind="annual_report", form_type="annual_report",
@@ -391,7 +392,9 @@ def test_cg_c1_single_flight_one_fetch(tmp_path):
     assert adapter.fetch_calls == 1, (
         f"single-flight violated: {adapter.fetch_calls} fetches")
     outcomes = [r.status for r in results.values()]
-    assert all(o in ("completed",) for o in outcomes), outcomes
+    assert all(o in ("completed",) for o in outcomes), [
+        (result.status, result.reason) for result in results.values()
+    ]
     reused = [r for r in results.values() if r.fetch_events == 0]
     downloaded = [r for r in results.values() if r.fetch_events == 1]
     assert len(downloaded) == 1 and len(reused) == 1, (
@@ -510,7 +513,7 @@ def test_cg_c4_actual_target_lock_wait_consumes_shared_deadline(tmp_path):
     """Hold the actual OS lock; the waiting operation cannot fetch or reset time."""
     from company_wiki.source_catalog.acquisition import acquisition_target_sha256
     from company_wiki.source_catalog.download_budget import AcquisitionBudget
-    from company_wiki.source_catalog.lock import _acquisition_mutex
+    from company_wiki.source_catalog.lock import acquisition_mutex
 
     catalog = _catalog(tmp_path)
     adapter = _SpyAdapter()
@@ -522,7 +525,7 @@ def test_cg_c4_actual_target_lock_wait_consumes_shared_deadline(tmp_path):
     held, release = threading.Event(), threading.Event()
 
     def hold():
-        with _acquisition_mutex(lock_path):
+        with acquisition_mutex(lock_path):
             held.set()
             release.wait(timeout=10)
 

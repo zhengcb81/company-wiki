@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 from typing import Any, Callable, Generator
 
-from .lock import CatalogOperationLockedError, _acquisition_mutex
+from .lock import CatalogOperationLockedError, acquisition_mutex
 from .store import canonical_json
 
 
@@ -173,7 +173,7 @@ class AcquisitionJournal:
         # The global catalog operation lock must NOT be used here — the
         # worker's long batches hold it for hours, and journaling every
         # acquisition outcome (even read-only MISSING) would block on it.
-        with _acquisition_mutex(self.path):
+        with acquisition_mutex(self.path):
             with closing(self._iter_attempts()) as history:
                 for existing in history:
                     if existing.attempt_id == attempt.attempt_id:

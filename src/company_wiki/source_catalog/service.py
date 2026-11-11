@@ -4,10 +4,11 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 import csv
-import hashlib
+import sqlite3
 import re
+from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Callable, Iterator
+from typing import TYPE_CHECKING, Any, Callable, Iterator, Sequence
 
 from company_wiki.atomic_file import atomic_output
 from company_wiki.file_usage import database_file_sizes, file_tree_bytes
@@ -18,7 +19,26 @@ from .models import (
     ProcessingReport,
     RankedSourceLocation,
     ScanReport,
+    SourceCopyAvailability,
+    SourceCopyAvailabilityRequest,
     SourceVersionIdentity,
+)
+from .source_location import (
+    SourceLocationError,
+    relative_segments,
+    resolve_source_location,
+)
+from .location_annotation import (
+    CatalogLocationAnnotation,
+    CatalogLocationCandidate,
+    annotate_locations as rank_location_candidates,
+)
+from .catalog_query_contract import (
+    CatalogDocumentCandidate,
+    CatalogDocumentCandidateQuery,
+    CatalogDuplicateLocationRecord,
+    CatalogEntityRecord,
+    CatalogQueryUnavailable,
 )
 from .acquisition_journal import AcquisitionJournal
 from .lock import CatalogOperationLock
@@ -33,12 +53,11 @@ from .normalizer import backfill_text_fingerprints
 from .scanner import R4_PROVENANCE_KEY, scan_catalog
 from .store import CatalogStore, metadata_object, metadata_state
 from .reader import ReadOnlyCatalogReader
+from .reader import CatalogReaderUnavailable
 
+if TYPE_CHECKING:
+    from .duplicate_cleanup import DuplicateCleanupJournal
 
-_EXACT_DUPLICATE_PREFIX = "urn:company-wiki:duplicate:exact:sha256:"
-
-# B02 segment 2: provider-rejected paths never become reusable candidates.
-_REJECTIONS_SEGMENT = ".rejections"
 
 # Capture facts are projected here because the catalog owns metadata layout.
 # The browser consumes only CatalogBrowseVersion and never knows these paths.
@@ -57,57 +76,6 @@ _BROWSE_FACT_PATHS: dict[str, tuple[str, ...]] = {
 }
 _BROWSE_DATE = re.compile(r"\d{4}-\d{2}-\d{2}\Z")
 _BROWSE_VERSION_ROLES = ("original_primary", "original_attachment", "indexed_only")
-
-
-def _exact_duplicate_group_id(document_id: str, source_id: str) -> str:
-    digest = hashlib.sha256(f"{document_id}\0{source_id}".encode("utf-8")).hexdigest()
-    return _EXACT_DUPLICATE_PREFIX + digest
-
-
-def _location_exclusion_reason(location: dict[str, Any]) -> str:
-    """B02 segments 1-2 — WHY a location may not be REUSED.
-
-    This is the reuse-qualification track (`candidate_rank` /
-    `exclusion_reason`); it deliberately does NOT change the legacy
-    annotation contract (`is_canonical` / `duplicate_relation` /
-    `duplicate_group_id`), which external consumers still read (the
-    duplicate-cleanup planner and the exported index — B-VR02-02/-03).
-
-    Segment 1 (root registration/capability) is structural here: the
-    locations query inner-joins ``roots``, so an unregistered root cannot
-    produce a row, and the reuse-capability check stays with the resolver
-    (``reusable_root_kinds``).  Segment 2 (status and safety) is decided
-    here: only an active, provider-accepted ``original_primary`` with a
-    source id is reusable.  ``.rejections`` is matched as a path SEGMENT
-    (the convention used by the adapters), not as a substring, so an
-    unrelated name such as ``my.rejections_backup`` is not disqualified.
-    """
-    if location["role"] != "original_primary":
-        return "role_not_original_primary"
-    if location["location_status"] != "active":
-        return f"location_status_{location['location_status']}"
-    if not location["source_id"]:
-        return "source_id_missing"
-    segments = location["relative_path"].replace("\\", "/").split("/")
-    if _REJECTIONS_SEGMENT in segments:
-        return "rejections_path"
-    return ""
-
-
-def _location_order_key(location: dict[str, Any]) -> tuple[int, str, str, str]:
-    """B02 segment 4 — the ONLY place ordering is allowed to decide.
-
-    Preference order inside the qualified set (never eligibility): root
-    priority, then root id, relative path and location id as stable
-    tie-breaks, so config order can never change which copy is canonical
-    (ZR-403 C4).
-    """
-    return (
-        int(location["root_priority"]),
-        location["root_id"],
-        location["relative_path"],
-        location["location_id"],
-    )
 
 
 def _read_shared_metadata(raw: Any) -> dict[str, Any]:
@@ -178,6 +146,20 @@ def _browse_int_or_none(value: Any) -> int | None:
     return None
 
 
+def _optional_catalog_integer(value: Any) -> int | None:
+    """Read an optional diagnostic integer without making it a query gate."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str) and value.strip().lstrip("-").isdigit():
+        try:
+            return int(value.strip())
+        except (ValueError, OverflowError):
+            return None
+    return None
+
+
 def _browse_date_or_none(value: Any) -> str | None:
     text = _browse_text_or_none(value)
     return text if text is not None and _BROWSE_DATE.fullmatch(text) else None
@@ -205,14 +187,235 @@ def _browse_document(row: Any) -> dict[str, Any]:
 
 
 class SourceCatalog:
+    def duplicate_cleanup_journal(self) -> "DuplicateCleanupJournal":
+        """Open the retired maintenance journal through its storage owner."""
+        from .duplicate_cleanup import DuplicateCleanupJournal
+
+        return DuplicateCleanupJournal(self.config.catalog_dir)
+
+    def duplicate_cleanup_location_records(
+        self,
+    ) -> tuple[CatalogDuplicateLocationRecord, ...]:
+        """Return typed exact-copy inventory rows from the catalog owner."""
+        try:
+            rows = self.reader.fetchall(
+                """WITH duplicate_keys AS (
+                    SELECT document_id,source_id
+                    FROM locations
+                    WHERE role='original_primary' AND location_status='active'
+                      AND document_id IS NOT NULL AND source_id IS NOT NULL
+                    GROUP BY document_id,source_id HAVING COUNT(*) > 1
+                )
+                SELECT l.location_id,l.document_id,l.root_id,l.relative_path,l.absolute_path,
+                       l.source_id,l.role,l.location_status,l.observed_size,
+                       l.observed_mtime_ns,r.priority AS root_priority,d.title,
+                       d.document_kind,d.published_date,s.content_sha256,l.manifest_json
+                FROM duplicate_keys k
+                JOIN locations l ON l.document_id=k.document_id AND l.source_id=k.source_id
+                JOIN roots r ON r.root_id=l.root_id
+                JOIN documents d ON d.document_id=l.document_id
+                JOIN sources s ON s.source_id=l.source_id
+                WHERE l.role='original_primary' AND l.location_status='active'
+                ORDER BY d.document_id,l.source_id,r.priority,l.root_id,
+                         l.relative_path,l.location_id"""
+            )
+            document_ids = tuple(dict.fromkeys(str(row["document_id"]) for row in rows))
+            entities_by_document: dict[str, list[str]] = {}
+            for start in range(0, len(document_ids), 500):
+                batch = document_ids[start:start + 500]
+                for row in self.reader.fetchall(
+                    """SELECT de.document_id,e.name FROM document_entities de
+                       JOIN entities e ON e.entity_id=de.entity_id
+                       WHERE de.document_id IN ({})
+                       ORDER BY de.document_id,e.entity_id""".format(
+                        ",".join("?" for _ in batch)
+                    ),
+                    batch,
+                ):
+                    entities_by_document.setdefault(str(row["document_id"]), []).append(
+                        str(row["name"] or "")
+                    )
+        except (CatalogReaderUnavailable, sqlite3.Error) as exc:
+            raise CatalogQueryUnavailable("catalog_unavailable") from exc
+
+        grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+        for row in rows:
+            grouped.setdefault(
+                (str(row["document_id"]), str(row["source_id"])), []
+            ).append(dict(row))
+
+        records: list[CatalogDuplicateLocationRecord] = []
+        for (document_id, source_id), locations in grouped.items():
+            candidates = tuple(
+                CatalogLocationCandidate(
+                    location_id=str(item["location_id"]),
+                    source_id=source_id,
+                    root_id=str(item["root_id"]),
+                    relative_path=str(item["relative_path"]),
+                    role=str(item["role"]),
+                    location_status=str(item["location_status"]),
+                    root_priority=int(item["root_priority"]),
+                    manifest_json=(
+                        str(item["manifest_json"])
+                        if item.get("manifest_json") is not None else None
+                    ),
+                )
+                for item in locations
+            )
+            annotations = {
+                annotation.location_id: annotation
+                for annotation in self.annotate_locations(document_id, candidates)
+            }
+            for item in locations:
+                records.append(
+                    CatalogDuplicateLocationRecord(
+                        document_id=document_id,
+                        source_id=source_id,
+                        content_sha256=str(item["content_sha256"]),
+                        title=str(item["title"] or ""),
+                        document_kind=str(item["document_kind"] or ""),
+                        published_date=(
+                            str(item["published_date"])
+                            if item["published_date"] is not None else None
+                        ),
+                        absolute_path=str(item["absolute_path"]),
+                        observed_size=(
+                            _optional_catalog_integer(item["observed_size"])
+                        ),
+                        observed_mtime_ns=(
+                            _optional_catalog_integer(item["observed_mtime_ns"])
+                        ),
+                        entities=tuple(entities_by_document.get(document_id, ())),
+                        annotation=annotations[str(item["location_id"])],
+                    )
+                )
+        return tuple(records)
+
+    def document_candidates(
+        self, query: CatalogDocumentCandidateQuery,
+    ) -> tuple[CatalogDocumentCandidate, ...]:
+        """Return identity-matched document records without exposing SQL rows.
+
+        The Catalog owns identity-index lookup, schema joins, and batched entity
+        projection. Consumers receive detached pathless values and decide the
+        domain-level identity match themselves.
+        """
+        from .identity_candidates import identity_candidate_clause
+
+        conditions = ["d.source_status IN ('active', 'retired')"]
+        parameters: list[Any] = []
+        if query.as_of_date is not None:
+            conditions.append("(d.published_date IS NULL OR d.published_date <= ?)")
+            parameters.append(query.as_of_date)
+        if query.document_kinds:
+            marks = ",".join("?" for _ in query.document_kinds)
+            conditions.append(f"d.document_kind IN ({marks})")
+            parameters.extend(query.document_kinds)
+        if query.after_document_id is not None:
+            conditions.append("d.document_id > ?")
+            parameters.append(query.after_document_id)
+
+        order_by = (
+            "d.document_id ASC"
+            if query.order == "document_id"
+            else "COALESCE(d.published_date, '') DESC, d.document_id ASC"
+        )
+        try:
+            identity_clause, identity_params = identity_candidate_clause(
+                self.reader, query.identity_tokens
+            )
+            rows = self.reader.fetchall(
+                f"""SELECT d.document_id, d.primary_source_id AS document_source_id,
+                           d.title, d.document_kind, d.published_date,
+                           d.source_status, d.metadata_json,
+                           s.content_sha256, s.byte_size, s.mime_type
+                    FROM documents d
+                    LEFT JOIN sources s ON s.source_id = d.primary_source_id
+                    WHERE {' AND '.join(conditions)}
+                      {identity_clause}
+                    ORDER BY {order_by}
+                    LIMIT ?""",
+                (*parameters, *identity_params, query.limit),
+            )
+            document_ids = [str(row["document_id"]) for row in rows]
+            entities_by_document = self._candidate_entities(document_ids)
+        except (CatalogReaderUnavailable, sqlite3.Error) as exc:
+            raise CatalogQueryUnavailable("catalog_unavailable") from exc
+
+        candidates: list[CatalogDocumentCandidate] = []
+        for row in rows:
+            metadata, problem = metadata_state(row["metadata_json"])
+            candidates.append(
+                CatalogDocumentCandidate(
+                    document_id=str(row["document_id"]),
+                    source_id=(
+                        str(row["document_source_id"])
+                        if row["document_source_id"] is not None else None
+                    ),
+                    title=str(row["title"] or ""),
+                    document_kind=str(row["document_kind"] or ""),
+                    published_date=(
+                        str(row["published_date"])
+                        if row["published_date"] is not None else None
+                    ),
+                    source_status=str(row["source_status"] or ""),
+                    metadata=metadata if problem is None else {},
+                    content_sha256=(
+                        str(row["content_sha256"])
+                        if row["content_sha256"] is not None else None
+                    ),
+                    byte_size=(
+                        int(row["byte_size"])
+                        if row["byte_size"] is not None else None
+                    ),
+                    mime_type=(
+                        str(row["mime_type"])
+                        if row["mime_type"] is not None else None
+                    ),
+                    entities=tuple(entities_by_document.get(str(row["document_id"]), ())),
+                )
+            )
+        return tuple(candidates)
+
+    def _candidate_entities(
+        self, document_ids: Sequence[str],
+    ) -> dict[str, list[CatalogEntityRecord]]:
+        entities: dict[str, list[CatalogEntityRecord]] = {}
+        for start in range(0, len(document_ids), 500):
+            batch = document_ids[start:start + 500]
+            marks = ",".join("?" for _ in batch)
+            for row in self.reader.fetchall(
+                f"""SELECT de.document_id, e.entity_id, e.name, e.entity_kind
+                    FROM document_entities de
+                    JOIN entities e ON e.entity_id = de.entity_id
+                    WHERE de.document_id IN ({marks})
+                    ORDER BY de.document_id, e.entity_id""",
+                tuple(batch),
+            ):
+                entities.setdefault(str(row["document_id"]), []).append(
+                    CatalogEntityRecord(
+                        entity_id=str(row["entity_id"]),
+                        name=str(row["name"] or ""),
+                        entity_kind=str(row["entity_kind"] or ""),
+                    )
+                )
+        return entities
+
+    def source_read_policy_digest(self) -> str:
+        """Expose the configured read policy without exposing CatalogConfig."""
+        from .source_read_policy import source_read_policy_sha256
+
+        return source_read_policy_sha256(self.config, None)
+
     def source_location_candidates(
         self, document_id: str, source_id: str,
     ) -> tuple[RankedSourceLocation, ...]:
         """Return immutable catalog-ranked locations for one exact source.
 
-        Ranking and duplicate annotation remain owned by the catalog. Root
-        admission and byte verification remain owned by SourceVersionReader.
-        Physical locators are confined to this source-catalog package.
+        Ranking and duplicate annotation remain owned by the catalog. The
+        resolver applies current RootSpec admission and verifies bytes through
+        the SourceRef-bound read port. Physical locators are confined to this
+        source-catalog package.
         """
         roots = {root.root_id: root for root in self.config.roots}
         locations: list[dict[str, Any]] = []
@@ -223,7 +426,7 @@ class SourceCatalog:
                 continue
             location["root_priority"] = root.priority
             locations.append(location)
-        ranked = self._annotate_locations(document_id, locations)
+        ranked = self._annotate_location_rows(document_id, locations)
         return tuple(
             RankedSourceLocation(
                 location_id=str(item["location_id"]),
@@ -241,6 +444,87 @@ class SourceCatalog:
             )
             for item in ranked
         )
+
+    def source_copy_availability(
+        self, request: SourceCopyAvailabilityRequest,
+    ) -> SourceCopyAvailability:
+        """Observe registered copies while keeping storage details in Catalog.
+
+        Company-level projections need only copy count and current readability.
+        This port intentionally returns no root objects or physical locators.
+        The actual version read still verifies complete bytes through the
+        SourceRef-bound reader.
+        """
+        try:
+            rows = self.reader.exact_source_locations(
+                request.document_id, request.source_id
+            )
+        except (CatalogReaderUnavailable, sqlite3.Error):
+            return SourceCopyAvailability(copy_count=0, readable=False)
+
+        roots = {root.root_id: root for root in self.config.roots}
+        candidates: list[CatalogLocationCandidate] = []
+        accepted_rows: list[tuple[dict[str, Any], Any]] = []
+        for row in rows:
+            location = dict(row)
+            root = roots.get(str(location["root_id"]))
+            if root is None:
+                continue
+            if relative_segments(str(location["relative_path"])) is None:
+                continue
+            candidates.append(
+                CatalogLocationCandidate(
+                    location_id=str(location["location_id"]),
+                    source_id=(
+                        str(location["source_id"])
+                        if location.get("source_id") is not None else None
+                    ),
+                    root_id=str(location["root_id"]),
+                    relative_path=str(location["relative_path"]),
+                    role=str(location["role"]),
+                    location_status=str(location["location_status"]),
+                    root_priority=root.priority,
+                    manifest_json=(
+                        str(location["manifest_json"])
+                        if location.get("manifest_json") is not None else None
+                    ),
+                )
+            )
+            accepted_rows.append((location, root))
+
+        annotations = {
+            item.location_id: item
+            for item in self.annotate_locations(request.document_id, tuple(candidates))
+        }
+        copy_count = 0
+        readable = False
+        for location, root in accepted_rows:
+            annotation = annotations[str(location["location_id"])]
+            if annotation.candidate_rank <= 0:
+                continue
+            if root.allowed_document_kinds and request.document_kind not in (
+                root.allowed_document_kinds
+            ):
+                continue
+            if root.allowed_statuses and "active" not in root.allowed_statuses:
+                continue
+            if root.max_file_size is not None and request.byte_size > root.max_file_size:
+                continue
+            observed, problem = metadata_state(location.get("manifest_json"))
+            if problem is not None:
+                continue
+            if observed.get("content_sha256") not in (
+                None, "", request.content_sha256
+            ):
+                continue
+            copy_count += 1
+            try:
+                path = resolve_source_location(root, annotation.relative_path)
+            except SourceLocationError:
+                continue
+            if path.is_file():
+                readable = True
+        return SourceCopyAvailability(copy_count=copy_count, readable=readable)
 
     def browse_entity_records(self, canonical_entity_id: str) -> tuple[CatalogBrowseVersion, ...]:
         """Return the catalog-owned pathless browse projection for an entity."""
@@ -382,7 +666,7 @@ class SourceCatalog:
         snapshots. No physical document path crosses the public boundary.
         """
         from .security_identity import SecurityMasterStore
-        from .security_listing_evidence import _build_sec_20f_listing_evidence
+        from .security_listing_evidence import build_sec_20f_listing_evidence
         from .source_reader import SourceVersionReader
 
         reader = SourceVersionReader(self)
@@ -390,7 +674,7 @@ class SourceCatalog:
         content, metadata = reader.open_described_version(ref, purpose="filing_reuse")
         store = SecurityMasterStore(self.config.catalog_dir / "security_master")
         master = store.load()
-        evidence = _build_sec_20f_listing_evidence(
+        evidence = build_sec_20f_listing_evidence(
             content, metadata=metadata, master=master,
         )
         if evidence is None:
@@ -725,7 +1009,7 @@ class SourceCatalog:
         results: list[dict[str, Any]] = []
         for row in entity_rows:
             document_id = row["document_id"]
-            doc_locations = self._annotate_locations(
+            doc_locations = self._annotate_location_rows(
                 document_id, locations.get(document_id, [])
             )
             # B05 read contract (work package b05-read-side-malformed-columns, from
@@ -986,7 +1270,7 @@ class SourceCatalog:
         for document in documents:
             document_id = document["document_id"]
             entities = entities_by_document.get(document_id, [])
-            locations = self._annotate_locations(
+            locations = self._annotate_location_rows(
                 document_id,
                 [dict(item) for item in locations_by_document.get(document_id, [])],
             )
@@ -1056,60 +1340,47 @@ class SourceCatalog:
         return results
 
     @staticmethod
-    def _annotate_locations(
+    def annotate_locations(
         document_id: str,
-        locations: list[dict[str, Any]],
+        locations: tuple[CatalogLocationCandidate, ...],
+    ) -> tuple[CatalogLocationAnnotation, ...]:
+        """Return immutable ranking results for pathless logical candidates."""
+        return rank_location_candidates(document_id, locations)
+
+    @classmethod
+    def _annotate_location_rows(
+        cls,
+        document_id: str,
+        locations: Sequence[dict[str, Any]],
     ) -> list[dict[str, Any]]:
-        # B02 adds a REUSE-QUALIFICATION track on top of the legacy annotation
-        # contract, which stays exactly as it was:
-        #   * `candidate_rank` (1..N inside the qualified candidates of the
-        #     location's own source group, in segment-4 order; 0 = excluded)
-        #     plus `exclusion_reason` — the resolver decides REUSE from these,
-        #     after verifying the bytes (resolver._select_candidate);
-        #   * `is_canonical` / `duplicate_relation` / `duplicate_group_id` /
-        #     `canonical_location_id` are still elected over EVERY active
-        #     original_primary row of the group, regardless of qualification.
-        # Restoring that legacy invariant matters: the duplicate-cleanup
-        # planner reads `duplicate_relation` and `duplicate_cleanup.list_groups`
-        # assumes every group HAS a canonical (a conditional election raised
-        # StopIteration there — B-VR02-02/-03).
-        for location in locations:
-            location.update(
-                {
-                    "is_canonical": False,
-                    "duplicate_relation": "",
-                    "duplicate_group_id": "",
-                    "canonical_location_id": "",
-                    "candidate_rank": 0,
-                    "exclusion_reason": _location_exclusion_reason(location),
-                }
+        """Adapt database rows to the immutable ranking contract internally."""
+        candidates = tuple(
+            CatalogLocationCandidate(
+                location_id=str(location["location_id"]),
+                source_id=(
+                    str(location["source_id"])
+                    if location.get("source_id") is not None else None
+                ),
+                root_id=str(location["root_id"]),
+                relative_path=str(location["relative_path"]),
+                role=str(location["role"]),
+                location_status=str(location["location_status"]),
+                root_priority=int(location["root_priority"]),
+                manifest_json=(
+                    str(location["manifest_json"])
+                    if location.get("manifest_json") is not None else None
+                ),
             )
-        original_groups: dict[str, list[dict[str, Any]]] = {}
-        for location in locations:
-            if (
-                location["role"] == "original_primary"
-                and location["location_status"] == "active"
-                and location["source_id"]
-            ):
-                original_groups.setdefault(location["source_id"], []).append(location)
-        for source_id, group in original_groups.items():
-            ordered = sorted(group, key=_location_order_key)
-            for rank, candidate in enumerate(
-                (item for item in ordered if not item["exclusion_reason"]), start=1
-            ):
-                candidate["candidate_rank"] = rank
-            canonical = ordered[0]
-            canonical["is_canonical"] = True
-            canonical["canonical_location_id"] = canonical["location_id"]
-            if len(ordered) <= 1:
-                continue
-            group_id = _exact_duplicate_group_id(document_id, source_id)
-            canonical["duplicate_group_id"] = group_id
-            for duplicate in ordered[1:]:
-                duplicate["duplicate_relation"] = "exact_copy"
-                duplicate["duplicate_group_id"] = group_id
-                duplicate["canonical_location_id"] = canonical["location_id"]
-        return locations
+            for location in locations
+        )
+        annotations = {
+            item.location_id: asdict(item)
+            for item in cls.annotate_locations(document_id, candidates)
+        }
+        return [
+            {**location, **annotations[str(location["location_id"])]}
+            for location in locations
+        ]
 
     @staticmethod
     def _duplicate_summary(locations: list[dict[str, Any]]) -> dict[str, Any]:

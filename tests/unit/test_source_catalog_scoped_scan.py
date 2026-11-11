@@ -46,8 +46,8 @@ def test_scoped_scan_does_not_rehash_touch_or_mark_unselected_locations_missing(
     monkeypatch.setattr(scanner, "_observe_file", observe)
     def no_walk(_root):
         raise AssertionError("finite company scan must not walk the whole raw directory")
-    original_walk = scanner._walk_files
-    monkeypatch.setattr(scanner, "_walk_files", no_walk)
+    original_walk = scanner.walk_document_files
+    monkeypatch.setattr(scanner, "walk_document_files", no_walk)
     def no_external_metadata(_config):
         raise AssertionError("explicit registration must not discover Dayu metadata")
     monkeypatch.setattr(scanner, "_load_dayu_portfolio_urls", no_external_metadata)
@@ -69,7 +69,7 @@ def test_scoped_scan_does_not_rehash_touch_or_mark_unselected_locations_missing(
     repeated = scan_catalog(config, store, root_ids={"company_raw"}, relative_paths={relative})
     assert repeated.files_hashed == 0 and repeated.files_reused == 1
     assert all(tuple(params) == ("company_raw", relative) for params in fetched)
-    monkeypatch.setattr(scanner, "_walk_files", original_walk)
+    monkeypatch.setattr(scanner, "walk_document_files", original_walk)
     monkeypatch.undo()
     # Only a complete root scan is allowed to discover missing originals.
     scan_catalog(config, store)

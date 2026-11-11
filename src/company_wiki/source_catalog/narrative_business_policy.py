@@ -45,12 +45,12 @@ from .narrative_source_passage import (
 from .narrative_causal_links import CAUSAL_LINK as _DRIVER_LINK
 
 from .narrative_business_meaning import (
-    _CLAUSES,
-    _COMPANY_ANCHOR,
-    _FINANCE,
-    _GENERIC_DEFINITION,
-    _OBJECT,
-    _business_fact,
+    BUSINESS_CLAUSE_BOUNDARY_PATTERN,
+    BUSINESS_OBJECT_PATTERN,
+    COMPANY_ANCHOR_PATTERN,
+    FINANCIAL_ONLY_PATTERN,
+    GENERIC_DEFINITION_PATTERN,
+    classify_operating_fact,
     business_objects,
     business_qualification,
     concrete_operating_event,
@@ -249,7 +249,7 @@ def _reading_clauses(text: str) -> tuple[str, ...]:
     # Native HTML can flatten several metric labels into one paragraph. Keep
     # that original clause for bounded source-purpose/relationship checks; a
     # relevance window is not a license to silently erase a long source span.
-    return tuple(clause for clause in _CLAUSES.split(interpreted) if clause)
+    return tuple(clause for clause in BUSINESS_CLAUSE_BOUNDARY_PATTERN.split(interpreted) if clause)
 
 
 def _brand_portfolio(clause: str) -> tuple[bool, bool]:
@@ -308,7 +308,7 @@ def _operating_causal_relation(clause: str, *,
             scope = prepared.scope(action.start(), action.end())
             if scope not in objects:
                 left, right = scope
-                objects[scope] = bool(_OBJECT.search(clause[max(left, link.end()):right]))
+                objects[scope] = bool(BUSINESS_OBJECT_PATTERN.search(clause[max(left, link.end()):right]))
             if objects[scope] and prepared.observe(action.start(), action.end()).observed:
                 return True
     return False
@@ -404,7 +404,7 @@ def _source_metric_relations(
     identifier/financial subject cannot borrow a nearby growth word through a
     second detector. Spans are local classification offsets, not new locators.
     """
-    if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
+    if GENERIC_DEFINITION_PATTERN.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
         return ()
     prepared = prepared if prepared is not None else prepare_predicate_context(clause)
     relations: list[tuple[str, int, int]] = []
@@ -623,7 +623,7 @@ def _revenue_measure_relations(
     percentage change is direction, not an amount/share; its original wording
     and basis remain in source evidence and are never numerically converted.
     """
-    if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
+    if GENERIC_DEFINITION_PATTERN.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
         return ()
     prepared = prepared if prepared is not None else prepare_predicate_context(clause)
     relations = []
@@ -793,7 +793,7 @@ def _business_coverage_relation(clause: str) -> bool:
         if (_COVERAGE_FINANCIAL.search(subject + relation_tail)
                 or _COVERAGE_FINANCIAL_RESULT.search(relation_tail)):
             continue
-        if not (_COVERAGE_OBJECT.search(before) or _COMPANY_ANCHOR.search(before)):
+        if not (_COVERAGE_OBJECT.search(before) or COMPANY_ANCHOR_PATTERN.search(before)):
             continue
         for measure in _COVERAGE_RATIO.finditer(after):
             prefix = after[:measure.start()]
@@ -863,7 +863,7 @@ def _reading_relations(clauses: tuple[str, ...], *,
         return observation.reasons
     reasons: list[str] = []
     for clause in clauses:
-        if _GENERIC_DEFINITION.search(clause) and not _COMPANY_ANCHOR.search(clause):
+        if GENERIC_DEFINITION_PATTERN.search(clause) and not COMPANY_ANCHOR_PATTERN.search(clause):
             continue
         reasons.extend(disclosure_relations(clause))
         if _brand_portfolio(clause)[1]:
@@ -975,7 +975,7 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
         tuple(dict.fromkeys(reason for item in observed for reason in item.reasons)),
         max((item.score for item in observed), default=0), any(item.financial_exempt for item in observed))
     activity = any(concrete_operating_event(clause) or
-                   (_OBJECT.search(clause) and _ACTIVITY.search(clause)) for clause in clauses)
+                   (BUSINESS_OBJECT_PATTERN.search(clause) and _ACTIVITY.search(clause)) for clause in clauses)
     prepared_relations: list[_ReadingRelationObservation] = []
     relations = _reading_relations(clauses, causal_observations=causal_observations,
                                    metric_observations=metric_observations, prepared=relation_observations,
@@ -996,7 +996,7 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
         fact = OperatingFact()
         activity = False
         relations = ()
-    if not relations and not activity and not _business_fact(interpreted).eligible:
+    if not relations and not activity and not classify_operating_fact(interpreted).eligible:
         # The historical English event recognizer can treat a product-labelled
         # financial growth clause as an event. Preserve legacy replay, but the
         # new path needs operating meaning rather than "revenue grew" plus an
@@ -1084,7 +1084,7 @@ def reading_financial_only(text: str, fact: OperatingFact, *, recognize=None) ->
     if recognize is not None and _SOURCE_ACCOUNTING.search(_reading_text(text)):
         return True
     rejected = (reject_finance_only_text(text) if recognize is None else
-                bool(_FINANCE.search(text) and not recognize(text).eligible))
+                bool(FINANCIAL_ONLY_PATTERN.search(text) and not recognize(text).eligible))
     return rejected or bool(_READING_ACCOUNTING.search(text) and not fact.eligible)
 
 
@@ -1095,7 +1095,7 @@ def source_has_operating_measure(text: str) -> bool:
 
 def source_has_operating_object(text: str) -> bool:
     """Reuse the shared object observer for an unknown but bound predicate."""
-    return bool(_OBJECT.search(_reading_text(text)))
+    return bool(BUSINESS_OBJECT_PATTERN.search(_reading_text(text)))
 
 
 @dataclass(frozen=True)
@@ -1174,7 +1174,7 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
         # generic operating description. No clause recognizer ran on this
         # empty material view; reuse the original broad source-recall owner
         # once, then explicitly keep its value at background (not payload).
-        background = _business_fact(original_text).eligible
+        background = classify_operating_fact(original_text).eligible
     if not description.eligible and background:
         # Complete generic source content remains recallable background. This
         # is not independent material, business relevance or an event proof.

@@ -112,6 +112,12 @@ class _Normalized:
     first_page_text: str | None = None
 
 
+# Stable owner-side value contract for processed-document consumers. The
+# underscored name remains an internal compatibility alias for existing
+# normalizer tests and the isolated-parser bridge.
+NormalizedDocument = _Normalized
+
+
 class NormalizationProcessError(RuntimeError):
     """Base class for failures in the isolated document parser process."""
 
@@ -466,8 +472,10 @@ class _WindowsParserJob:
                 ctypes.sizeof(information),
             ):
                 raise OSError(cast(Any, ctypes).get_last_error(), "SetInformationJobObject failed")
-            process_handle = getattr(process, "_handle", None)
-            if process_handle is None or not kernel32.AssignProcessToJobObject(
+            # ``Process.sentinel`` is the public OS wait handle on Windows.
+            # ``_handle`` belongs to subprocess.Popen, not multiprocessing.Process.
+            process_handle = process.sentinel
+            if not kernel32.AssignProcessToJobObject(
                 handle, wintypes.HANDLE(int(process_handle))
             ):
                 raise OSError(
@@ -1393,6 +1401,51 @@ def _normalize_source(
     return _unsupported(path, "No audited parser is installed for this format")
 
 
+def escape_table_cell(value: Any) -> str:
+    """Escape a cell using the catalog parser's canonical text-table rules."""
+    return _escape_cell(value)
+
+
+def unsupported_result(path: Path, reason: str) -> NormalizedDocument:
+    """Build the parser owner's explicit unsupported-format result."""
+    return _unsupported(path, reason)
+
+
+def normalize_source_file(
+    path: Path, manifest: SourceManifest, docling_path: Path | None = None
+) -> NormalizedDocument:
+    """Normalize one source file using the catalog's audited format dispatch."""
+    return _normalize_source(path, manifest, docling_path)
+
+
+def run_parser_isolated(
+    path: Path,
+    manifest: SourceManifest,
+    docling_path: Path | None,
+    *,
+    timeout_seconds: float,
+    heartbeat_interval_seconds: float,
+    result_max_bytes: int,
+    temp_dir: Path,
+    progress: Callable[[dict[str, Any]], None] | None = None,
+    should_stop: Callable[[], bool] | None = None,
+    parser: Callable[[Path, SourceManifest, Path | None], NormalizedDocument] | None = None,
+) -> NormalizedDocument:
+    """Run the parser owner in its isolated child-process runtime."""
+    return _run_parser_isolated(
+        path,
+        manifest,
+        docling_path,
+        timeout_seconds=timeout_seconds,
+        heartbeat_interval_seconds=heartbeat_interval_seconds,
+        result_max_bytes=result_max_bytes,
+        temp_dir=temp_dir,
+        progress=progress,
+        should_stop=should_stop,
+        parser=parser,
+    )
+
+
 def backfill_text_fingerprints(
     config: CatalogConfig,
     store: CatalogStore,
@@ -1685,6 +1738,18 @@ def backfill_text_fingerprints(
 
 
 __all__ = [
+    "NormalizationCancelledError",
+    "NormalizationProcessError",
+    "NormalizationTimeoutError",
+    "NormalizedDocument",
+    "ParserProcessError",
+    "ParserResultProtocolError",
+    "ParserResultTooLargeError",
+    "UnsupportedDocumentError",
     "backfill_text_fingerprints",
     "compute_text_fingerprint",
+    "escape_table_cell",
+    "normalize_source_file",
+    "run_parser_isolated",
+    "unsupported_result",
 ]

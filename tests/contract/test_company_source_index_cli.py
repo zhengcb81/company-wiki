@@ -32,12 +32,14 @@ CLI_MODULE = "company_wiki.source_catalog.company_source_index_cli"
 
 AMEC_ENTITY = "ent-amec"
 AMEC_NAME = "AMEC"
-AMEC_MARKET = "SSE"
+# Identity requests use the supported market-family vocabulary (CN/HK/US);
+# the listing venue remains encoded in the security identifier suffix.
+AMEC_MARKET = "CN"
 AMEC_SECURITY = "688012.SH"
 
 OTHER_ENTITY = "ent-other"
 OTHER_NAME = "Other Works"
-OTHER_MARKET = "SSE"
+OTHER_MARKET = "CN"
 OTHER_SECURITY = "600000.SH"
 
 

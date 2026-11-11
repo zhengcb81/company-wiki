@@ -102,6 +102,18 @@ def _normalize_text(value: str) -> str:
     return "".join(character for character in normalized if character.isalnum())
 
 
+def normalize_identity_text(value: str) -> str:
+    """Return the canonical token used for source identity comparisons.
+
+    This public port keeps the NFKC/casefold/alphanumeric rule owned here while
+    allowing query and acquisition layers to compare identities without
+    importing this module's private implementation helper.
+    """
+    if not isinstance(value, str):
+        raise TypeError("identity text must be a string")
+    return _normalize_text(value)
+
+
 def _validated_lei(record: SecurityRecord) -> str | None:
     """Return a syntactically and checksum-valid LEI from an official record."""
     candidates = {
@@ -144,6 +156,13 @@ def _ticker_key(value: str, market: str) -> str:
         text = re.sub(r"[.:\-]?HK$", "", text)
         return text.zfill(5) if text.isdigit() and len(text) <= 5 else text
     return re.sub(r"[^A-Z0-9]", "", text)
+
+
+def security_listing_key(value: str, market: str) -> str:
+    """Return the canonical exchange listing key used by identity matching."""
+    if not isinstance(value, str) or not isinstance(market, str):
+        raise TypeError("listing value and market must be strings")
+    return _ticker_key(value, market)
 
 
 def _generated_aliases(name: str, market: str) -> tuple[str, ...]:
@@ -401,6 +420,15 @@ def _cross_market_issuer_link_ids(
         for node, candidates in link_candidates.items()
         if len(candidates) == 1 and len(node_leis.get(node, ())) <= 1
     }
+
+
+def cross_market_issuer_link_ids(
+    master: SecurityMaster,
+) -> dict[tuple[str, str], str]:
+    """Return verified cross-market listing links as detached domain values."""
+    if not isinstance(master, SecurityMaster):
+        raise TypeError("master must be SecurityMaster")
+    return dict(_cross_market_issuer_link_ids(master))
 
 
 def _record_sort_key(record: SecurityRecord) -> tuple[Any, ...]:
@@ -1614,5 +1642,8 @@ __all__ = [
     "SecurityMasterStore",
     "SecurityMasterUnavailableError",
     "SecurityRecord",
+    "cross_market_issuer_link_ids",
     "load_identity_master",
+    "normalize_identity_text",
+    "security_listing_key",
 ]

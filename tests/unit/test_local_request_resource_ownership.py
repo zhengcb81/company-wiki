@@ -10,7 +10,8 @@ from company_wiki.automation import narrative_batch_cli
 from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
 from company_wiki.source_catalog import cli, local_prepare_cli
 from company_wiki.source_catalog.local_inventory import (
-    LocalPrepareLimits, LocalReadBudget, observe_document, verify_registered_original,
+    LocalPrepareLimits, LocalReadBudget, observe_document,
+    read_registered_sidecar, verify_registered_original,
 )
 from company_wiki.source_catalog.source_reader import SourceReadError
 from company_wiki.source_catalog.resolver import SourceRequest
@@ -120,6 +121,97 @@ def test_many_registered_locations_follow_sufficient_and_insufficient_actual_bud
     with pytest.raises(SourceReadError, match="local_discovery_entry_limit"):
         observe_document(catalog, ref.document_id, budget=exhausted)
 
+
+def test_registered_inventory_exports_only_location_identity_and_sidecar_observation(lake):
+    catalog, _, ref, original = lake
+    checked = verify_registered_original(
+        catalog, ref, budget=LocalReadBudget(LocalPrepareLimits())
+    )
+    assert checked.data == original.read_bytes()
+    assert checked.locations
+    assert all(hasattr(location, "location_id") for location in checked.locations)
+    assert all(not hasattr(location, "path") and not hasattr(location, "root")
+               for location in checked.locations)
+
+    sidecar = read_registered_sidecar(
+        catalog,
+        ref,
+        checked.locations[0],
+        kind="source_sidecar",
+        budget=LocalReadBudget(LocalPrepareLimits()),
+    )
+    assert sidecar is not None
+    assert sidecar.original_name == original.name
+    assert sidecar.metadata["company_name"] == "Acme"
+    assert len(sidecar.content_sha256) == 64
+
+
+def test_local_budget_preserves_parent_request_account_on_nested_reads():
+    budget = LocalReadBudget(LocalPrepareLimits(max_bytes=256))
+    assert budget.charge(17) == ""
+    budget.begin_request()
+    assert budget.bytes_read == 17
+    assert budget.max_bytes == 256
+
+
+def test_registered_sidecar_rejects_location_rebind_after_original_verification(lake):
+    catalog, _, ref, original = lake
+    second = original.with_name("rebound.pdf")
+    second.write_bytes(original.read_bytes())
+    second.with_name("meta.json").write_text(
+        json.dumps({"provider": "synthetic-rebound"}), encoding="utf-8"
+    )
+    checked = verify_registered_original(
+        catalog, ref, budget=LocalReadBudget(LocalPrepareLimits())
+    )
+    location = checked.locations[0]
+    relative = second.relative_to(catalog.config.roots[0].path).as_posix()
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            "UPDATE locations SET relative_path=? WHERE location_id=?",
+            (relative, location.location_id),
+        )
+
+    with pytest.raises(SourceReadError, match="location_binding_changed"):
+        read_registered_sidecar(
+            catalog,
+            ref,
+            location,
+            kind="sec_provider_meta",
+            budget=LocalReadBudget(LocalPrepareLimits()),
+        )
+
+
+def test_registered_sidecar_rejects_rebind_during_metadata_read(lake, monkeypatch):
+    catalog, _, ref, original = lake
+    checked = verify_registered_original(
+        catalog, ref, budget=LocalReadBudget(LocalPrepareLimits())
+    )
+    location = checked.locations[0]
+    second = original.with_name("rebound-during-read.pdf")
+    second.write_bytes(original.read_bytes())
+    budget = LocalReadBudget(LocalPrepareLimits())
+    read_metadata = budget.read_metadata_observation
+
+    def read_then_rebind(path, *, root):
+        observation = read_metadata(path, root=root)
+        relative = second.relative_to(catalog.config.roots[0].path).as_posix()
+        with catalog.store.transaction() as connection:
+            connection.execute(
+                "UPDATE locations SET relative_path=? WHERE location_id=?",
+                (relative, location.location_id),
+            )
+        return observation
+
+    monkeypatch.setattr(budget, "read_metadata_observation", read_then_rebind)
+    with pytest.raises(SourceReadError, match="location_binding_changed"):
+        read_registered_sidecar(
+            catalog,
+            ref,
+            location,
+            kind="source_sidecar",
+            budget=budget,
+        )
 
 @pytest.mark.parametrize("stop", ["cancelled", "deadline"])
 def test_inventory_does_not_reset_cancellation_or_deadline(lake, stop):

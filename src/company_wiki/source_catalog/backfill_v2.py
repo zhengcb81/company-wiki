@@ -22,7 +22,8 @@ from pathlib import Path
 # B-VR05M2-03: module level on purpose - the shared tolerant TEXT factory and the shared
 # metadata reader, so neither the driver nor a malformed column can break this module's
 # fetch.  (Both are branches the FC-1204 ratchet refused inline: 26 > 25 frozen.)
-from .store import _tolerate_undecodable_text, metadata_object
+from .store import metadata_object
+from .sqlite_support import configure_tolerant_sqlite_text_decoding
 
 STRONG_FIELDS = (
     "provider_document_id",
@@ -92,7 +93,7 @@ class BackfillResult:
 
 def _connect(path: Path) -> sqlite3.Connection:
     con = sqlite3.connect(path)
-    _tolerate_undecodable_text(con)
+    configure_tolerant_sqlite_text_decoding(con)
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA foreign_keys = ON")
     return con

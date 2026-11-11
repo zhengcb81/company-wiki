@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import hashlib
 import sqlite3
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -40,7 +41,7 @@ class GovernanceError(RuntimeError):
     """
 
 
-def _is_pingan_candidate(relative_path: str, group_metadata: dict) -> bool:
+def _is_pingan_candidate(relative_path: str, group_metadata: Mapping[str, Any]) -> bool:
     return PINGAN_PATH_HINT in relative_path or PINGAN_PATH_HINT in str(
         group_metadata.get("display_name") or ""
     )

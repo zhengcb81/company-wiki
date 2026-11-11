@@ -12,11 +12,11 @@ import hashlib
 import os
 from pathlib import Path
 
-from .common import (
-    _ACQUISITION_SIDECAR_SUFFIX,
-    _load_acquisition_metadata,
-    _relative,
+from ..acquisition_sidecar import (
+    ACQUISITION_SIDECAR_SUFFIX,
+    read_acquisition_sidecar,
 )
+from ..source_location import relative_source_path
 from .interface import NormalizedCandidate
 from ..source_group_scope import SourceRegistrationScope
 from ..models import DOCUMENT_EXTENSIONS
@@ -62,7 +62,7 @@ class CompanyRawAdapter:
                                     and is_local(path, directory=True)):
                                 stack.append(path)
                         elif (path.suffix.lower() in DOCUMENT_EXTENSIONS
-                              and not entry.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+                              and not entry.name.endswith(ACQUISITION_SIDECAR_SUFFIX)
                               and entry.name != "meta.json"
                               and is_local(path, directory=False)):
                             selected.add(path.relative_to(root_path).as_posix())
@@ -70,7 +70,7 @@ class CompanyRawAdapter:
 
     def enumerate(self, root_path: Path, *, limit: int | None = None,
                   relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None, primary_filter=None) -> list[NormalizedCandidate]:
-        read_metadata = metadata_reader or _load_acquisition_metadata
+        read_metadata = metadata_reader or read_acquisition_sidecar
         candidates: list[NormalizedCandidate] = []
         for company in sorted(
             ({root_path / value.split("/", 1)[0] for value in relative_paths}
@@ -78,19 +78,19 @@ class CompanyRawAdapter:
             key=lambda item: item.name,
         ):
             paths = (SourceRegistrationScope(self.adapter_id, frozenset(relative_paths)).company_paths(
-                root_path, company.name, _ACQUISITION_SIDECAR_SUFFIX)
+                root_path, company.name, ACQUISITION_SIDECAR_SUFFIX)
                 if relative_paths is not None else SourceRegistrationScope.all_company_paths(root_path, company.name))
             sidecars = {
-                str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
+                str(path)[: -len(ACQUISITION_SIDECAR_SUFFIX)]: path
                 for path in paths
-                if path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+                if path.name.endswith(ACQUISITION_SIDECAR_SUFFIX)
             }
             primary_paths = [
                 path for path in paths
-                if not path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+                if not path.name.endswith(ACQUISITION_SIDECAR_SUFFIX)
             ]
             for path in primary_paths:
-                relative = _relative(path, root_path)
+                relative = relative_source_path(path, root_path)
                 if primary_filter is not None and not primary_filter(relative):
                     continue
                 sidecar = sidecars.get(str(path))
@@ -125,7 +125,7 @@ class CompanyRawAdapter:
                 ))
                 if sidecar is not None:
                     candidates.append(NormalizedCandidate(
-                        relative_path=_relative(sidecar, root_path),
+                        relative_path=relative_source_path(sidecar, root_path),
                         content_sha256=_sha256_file(sidecar) if compute_hash else "",
                         group_key=relative,
                         role="metadata",
@@ -135,13 +135,13 @@ class CompanyRawAdapter:
             for target, sidecar in sorted(sidecars.items()):
                 if target in primary_names:
                     continue
-                relative = _relative(sidecar, root_path)
+                relative = relative_source_path(sidecar, root_path)
                 if primary_filter is not None and not primary_filter(relative):
                     continue
                 candidates.append(NormalizedCandidate(
                     relative_path=relative,
                     content_sha256=_sha256_file(sidecar) if compute_hash else "",
-                    group_key=relative[: -len(_ACQUISITION_SIDECAR_SUFFIX)],
+                    group_key=relative[: -len(ACQUISITION_SIDECAR_SUFFIX)],
                     role="metadata",
                     normalized=read_metadata(sidecar),
                 ))

@@ -16,14 +16,30 @@ import sqlite3
 import stat
 from typing import Any, TYPE_CHECKING
 
+from company_wiki.source_contract import SourceRefError
 from company_wiki.source_contract.source_version import (
-    SourceByteObservation, SourceByteVerifier, SourceReadError, SourceRef,
+    SOURCE_REF_SCHEMA_VERSION,
+    SourceByteObservation,
+    SourceByteVerifier,
+    SourceReadError,
+    SourceRef,
 )
 
-from .models import RootSpec
-from .source_location import SourceLocationError, resolve_source_location
-from .source_location import inside_configured_roots as _inside_configured_roots
-from .policy import _effective_reusable
+from .models import RankedSourceLocation, RootSpec
+from company_wiki.source_catalog.read_budget import ReadBudget
+from company_wiki.source_catalog.location_read_contract import (
+    RegisteredLocationBinding,
+    RegisteredLocationDescriptor,
+    SourceLocationReadResult,
+)
+from . import source_location
+from .source_location import (
+    SourceLocationError,
+    inside_configured_roots,
+    relative_segments,
+    resolve_source_location,
+)
+from .policy import root_is_reusable_for_filing
 from .qualification import SourceQualification, qualify_source
 from .runtime_policy import resolver_visibility_projection
 from .service import SourceCatalog
@@ -125,6 +141,56 @@ def _json_hash(value: dict[str, Any]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def _registered_location_binding(
+    ref: SourceRef, location: RankedSourceLocation,
+) -> RegisteredLocationBinding:
+    """Bind a logical location ID to its current source/root/relative locator."""
+    digest = _json_hash({
+        "document_id": ref.document_id,
+        "source_id": ref.source_id,
+        "content_sha256": ref.content_sha256,
+        "byte_size": ref.byte_size,
+        "location_id": location.location_id,
+        "root_id": location.root_id,
+        "relative_path": location.relative_path,
+        "role": location.role,
+        "location_status": location.location_status,
+    })
+    return RegisteredLocationBinding(location.location_id, digest)
+
+
+def _registered_location_target(
+    config: Any,
+    ref: SourceRef,
+    version: Mapping[str, Any],
+    location: RankedSourceLocation,
+) -> tuple[Path | None, str, str, str]:
+    """Apply inventory eligibility and resolve one current in-root original."""
+    roots = {root.root_id: root for root in config.roots}
+    root = roots.get(location.root_id)
+    if (
+        root is None
+        or not root_is_reusable_for_filing(root, config)
+        or (root.allowed_statuses and "active" not in root.allowed_statuses)
+        or (root.allowed_document_kinds
+            and version["document_kind"] not in root.allowed_document_kinds)
+        or (root.max_file_size is not None and ref.byte_size > root.max_file_size)
+    ):
+        return None, "blocked", "root_admission_denied", ""
+    if location.role != "original_primary" or location.location_status not in {
+        "active", "retired",
+    }:
+        return None, "blocked", "location_ineligible", ""
+    segments = relative_segments(location.relative_path)
+    if segments is None or ".rejections" in segments:
+        return None, "blocked", "location_ineligible", ""
+    try:
+        resolved = resolve_source_location(root, location.relative_path)
+    except SourceLocationError as exc:
+        return None, "unavailable", exc.reason, ""
+    return resolved, "", "", ""
+
+
 # --- B02 segment 3: bounded, no-network candidate verification --------------
 #
 # Status model (unchanged, five values - see the note in _select_candidate for
@@ -134,14 +200,6 @@ def _json_hash(value: dict[str, Any]) -> str:
 # recorded) or it is not served at all — a non-preferred copy is served only
 # when its bytes really are the requested version.
 _CANDIDATE_BYTES_CAP = 256 * 1024 * 1024
-_REQUEST_MAX_CANDIDATES = 64
-_REQUEST_MAX_BYTES = 2 * 1024 * 1024 * 1024
-# Windows cloud placeholders: FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS (0x400000),
-# FILE_ATTRIBUTE_RECALL_ON_OPEN (0x40000) and FILE_ATTRIBUTE_OFFLINE (0x1000).
-# Opening such a file downloads it; the query path must not trigger that.
-_HYDRATION_ATTRIBUTES = 0x400000 | 0x40000 | 0x1000
-
-
 def _sha256_of_file(path: Path) -> str:
     """Stream EVERY byte of the candidate: a sampled digest can only ever
     exclude a candidate, never prove `content_sha256` equality (B-DR3-03)."""
@@ -150,69 +208,6 @@ def _sha256_of_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
-
-
-def _needs_hydration(stat_result: os.stat_result) -> bool:
-    """True for a cloud placeholder whose bytes are not local (a synced vendor
-    root that materialises files on access).  `stat` reports this without
-    reading data, so the resolver can refuse the candidate BEFORE any network
-    I/O happens — root ids stay configuration, never code (FC-1201)."""
-    attributes = getattr(stat_result, "st_file_attributes", 0)
-    return bool(attributes & _HYDRATION_ATTRIBUTES)
-
-
-@dataclass
-class _ReadBudget:
-    """Per-request read budget (L06/L12): finite resource ceiling plus
-    cancellation, with the counters kept as evidence.  One instance serves
-    exactly one ``resolve`` call."""
-
-    max_candidates: int = _REQUEST_MAX_CANDIDATES
-    max_bytes: int = _REQUEST_MAX_BYTES
-    candidates: int = 0
-    bytes_read: int = 0
-    cancelled: bool = False
-
-    def cancel(self) -> None:
-        """Caller-side cancellation: no further candidate byte is read."""
-        self.cancelled = True
-
-    def check(self) -> None:
-        """Honor the parent's stop state without resetting its read account.
-
-        LocalReadBudget extends this same checkpoint with its real deadline.
-        A plain resolver budget owns bytes/candidates and explicit cancellation.
-        """
-        if self.cancelled:
-            from .source_reader import SourceReadError
-            raise SourceReadError("unavailable", "cancelled")
-
-    def begin_request(self) -> None:
-        """Start a request on this budget.
-
-        The ceilings are PER REQUEST (design B02 rule 3), so the counters
-        restart here: a caller that injects one budget (or resolves twice on
-        one resolver) must not silently lose verification for the second
-        request.  Cancellation is sticky — it is explicit caller intent.
-        """
-        self.candidates = 0
-        self.bytes_read = 0
-
-    def take_candidate(self) -> str:
-        if self.cancelled:
-            return "cancelled"
-        if self.candidates >= self.max_candidates:
-            return "budget_exceeded"
-        self.candidates += 1
-        return ""
-
-    def charge(self, size: int) -> str:
-        if self.cancelled:
-            return "cancelled"
-        if self.bytes_read + size > self.max_bytes:
-            return "budget_exceeded"
-        self.bytes_read += size
-        return ""
 
 
 def _local_copy_probe(location: dict[str, Any]) -> tuple[str, str, int]:
@@ -227,7 +222,7 @@ def _local_copy_probe(location: dict[str, Any]) -> tuple[str, str, int]:
         return "not_readable", exc.__class__.__name__, 0
     if not stat.S_ISREG(stat_result.st_mode):
         return "not_regular_file", "", 0
-    if _needs_hydration(stat_result):
+    if source_location.is_hydration_required(stat_result):
         # Bytes are not local: opening it downloads them, and segment 3
         # forbids network I/O in the query path.
         return "hydration_required", "", 0
@@ -239,7 +234,7 @@ def _verify_candidate(
     *,
     expected_sha256: str,
     size: int,
-    budget: _ReadBudget,
+    budget: ReadBudget,
     scope_qualification=None,
 ) -> tuple[str, str]:
     """B02 segment 3 — verify the candidate's LOCAL bytes against the
@@ -355,7 +350,7 @@ def _owning_root(path: Path, roots: tuple[Any, ...]) -> Any | None:
     the read path uses (``_inside_configured_roots``), longest configured base winning so a
     nested root is attributed to the more specific one.
     """
-    candidates = [root for root in roots if _inside_configured_roots(path, (root,))]
+    candidates = [root for root in roots if inside_configured_roots(path, (root,))]
     if not candidates:
         return None
     return max(candidates, key=lambda root: len(str(getattr(root, "path", "") or "")))
@@ -391,7 +386,7 @@ def _read_verified_bytes(
     path: Path,
     *,
     expected_sha256: str,
-    budget: _ReadBudget | None,
+    budget: ReadBudget | None,
     retain_bytes: bool = True,
     expected_byte_size: int | None = None,
 ) -> tuple[SourceByteObservation | None, str, str, str]:
@@ -413,7 +408,7 @@ def _read_verified_bytes(
         return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
     if not stat.S_ISREG(before.st_mode):
         return None, B03_ERROR_UNAVAILABLE, "not_regular_file", ""
-    if _needs_hydration(before):
+    if source_location.is_hydration_required(before):
         # Bytes are not local: opening it downloads them.  Refuse WITHOUT
         # reading, exactly as the resolver's eligibility probe does.
         return None, B03_ERROR_UNAVAILABLE, "placeholder_not_hydrated", ""
@@ -428,6 +423,17 @@ def _read_verified_bytes(
             return None, B03_ERROR_UNAVAILABLE, stop, str(size)
     verifier = SourceByteVerifier(retain_bytes=retain_bytes)
     read = 0
+    def check_budget() -> bool:
+        if check is None:
+            return False
+        try:
+            check()
+        except SourceReadError as exc:
+            if exc.reason == "cancelled":
+                return True
+            raise
+        return False
+
     try:
         with path.open("rb") as handle:
             while True:
@@ -436,8 +442,8 @@ def _read_verified_bytes(
                     # with bytes that are already in hand.
                     return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
                 check = getattr(budget, "check", None)
-                if check is not None:
-                    check()
+                if check_budget():
+                    return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
                 remaining = (_CANDIDATE_BYTES_CAP - read) if budget is None else (
                     budget.max_bytes - budget.bytes_read + max(0, size - read)
                 )
@@ -454,16 +460,16 @@ def _read_verified_bytes(
                         stop = budget.charge(growth)
                         if stop:
                             return None, B03_ERROR_UNAVAILABLE, stop, str(read)
-                    if check is not None:
-                        check()
+                    if check_budget():
+                        return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
                 if read > _CANDIDATE_BYTES_CAP:
                     # Grew past the ceiling while reading: stop and refuse.
                     return None, B03_ERROR_UNAVAILABLE, "exceeds_candidate_cap", str(read)
     except OSError as exc:
         return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
     check = getattr(budget, "check", None)
-    if check is not None:
-        check()
+    if check_budget():
+        return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
     if budget is not None and budget.cancelled:
         # TAIL GUARD (B-VR03-04): the in-loop check runs BEFORE each read, so a
         # cancellation that lands inside the read that ends the loop - the one
@@ -1251,7 +1257,7 @@ class SourceResolver:
         *,
         observer=None,
         runtime_policy: dict | None = None,
-        read_budget: "_ReadBudget | None" = None,
+        read_budget: "ReadBudget | None" = None,
     ):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
@@ -1277,6 +1283,221 @@ class SourceResolver:
                 self.active_cohorts,
                 self.legacy_bridge_allowed,
             ) = resolver_visibility(runtime_policy)
+
+    def project_source_metadata(self, document: dict[str, Any]) -> dict[str, Any]:
+        """Return source facts visible under this resolver's pinned policy."""
+        return _source_metadata(
+            document,
+            store=self.catalog.reader,
+            observer=self.observer,
+            reader=self.reader,
+            current_epoch=self.current_epoch,
+            active_cohorts=self.active_cohorts,
+            legacy_bridge_allowed=self.legacy_bridge_allowed,
+        )
+
+    @staticmethod
+    def fiscal_year(document: dict[str, Any], metadata: dict[str, Any]) -> int | None:
+        """Resolve a source's reported fiscal year using resolver semantics."""
+        return _fiscal_year(document, metadata)
+
+    @staticmethod
+    def provider_identity(
+        metadata: dict[str, Any],
+    ) -> tuple[str | None, str | None, set[str]]:
+        """Return the provider identity projection used for source matching."""
+        return _provider_identity(metadata)
+
+    def entity_matches(
+        self,
+        entity: str,
+        document: dict[str, Any],
+        *,
+        metadata: dict[str, Any] | None = None,
+        identity_tokens: tuple[str, ...] | None = None,
+    ) -> bool:
+        """Public identity-matching port for source selection consumers."""
+        return self._entity_matches(
+            entity, document, metadata=metadata, identity_tokens=identity_tokens,
+        )
+
+    def _current_source_location(
+        self,
+        ref: SourceRef,
+        location_id: str,
+        budget: ReadBudget,
+    ) -> tuple[dict[str, Any], RankedSourceLocation]:
+        """Validate one public source/location identity against current catalog facts."""
+        if not isinstance(ref, SourceRef):
+            raise TypeError("ref must be SourceRef")
+        if ref.schema_version != SOURCE_REF_SCHEMA_VERSION:
+            raise SourceReadError("unavailable", "unsupported_version")
+        try:
+            validated_ref = SourceRef.from_dict(ref.to_dict())
+        except (SourceRefError, TypeError, ValueError):
+            raise SourceReadError("unavailable", "invalid_source_ref") from None
+        if validated_ref != ref:
+            raise SourceReadError("unavailable", "invalid_source_ref")
+        if not isinstance(location_id, str) or not location_id.strip():
+            raise TypeError("location_id must be non-empty text")
+        if not isinstance(budget, ReadBudget):
+            raise TypeError("budget must be a read budget")
+        from .reader import CatalogReaderUnavailable
+
+        try:
+            version = self.catalog.reader.exact_source_version(ref.document_id)
+            locations = self.catalog.source_location_candidates(
+                ref.document_id, ref.source_id
+            )
+        except (CatalogReaderUnavailable, sqlite3.Error):
+            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        if version is None:
+            raise SourceReadError("not_indexed", "document_not_indexed")
+        if (
+            str(version["source_id"]) != ref.source_id
+            or str(version["content_sha256"]) != ref.content_sha256
+            or int(version["byte_size"]) != ref.byte_size
+            or str(version["mime_type"]) != ref.mime_type
+        ):
+            raise SourceReadError("unavailable", "source_ref_changed")
+        location = next(
+            (item for item in locations if item.location_id == location_id), None
+        )
+        if location is None or location.source_id != ref.source_id:
+            raise SourceReadError("unavailable", "location_not_indexed")
+        return dict(version), location
+
+    def read_verified_source_location(
+        self,
+        ref: SourceRef,
+        location_id: str,
+        *,
+        budget: ReadBudget,
+        retain_bytes: bool = True,
+        reusable_only: bool = False,
+    ) -> SourceLocationReadResult:
+        """Verify a current catalog location for one exact source version.
+
+        The caller supplies only the pathless version and location identities.
+        The resolver re-reads the catalog mapping, applies current root policy,
+        resolves the registered relative locator beneath its configured root,
+        then verifies that exact byte buffer against the SourceRef hash/size.
+        Arbitrary filesystem paths are not accepted at this public port.
+        """
+        version, location = self._current_source_location(ref, location_id, budget)
+
+        roots = {root.root_id: root for root in self.catalog.config.roots}
+        root = roots.get(location.root_id)
+        allowed = bool(root is not None and location.candidate_rank > 0)
+        if root is not None:
+            kinds = root.allowed_document_kinds
+            statuses = root.allowed_statuses
+            allowed = allowed and not (
+                kinds and version["document_kind"] not in kinds
+            ) and not (
+                root.max_file_size is not None and ref.byte_size > root.max_file_size
+            ) and not (
+                statuses and version["source_status"] not in statuses
+            ) and not (
+                reusable_only and not root_is_reusable_for_filing(root, self.catalog.config)
+            )
+        if not allowed or root is None:
+            return SourceLocationReadResult(
+                location, None, "blocked", "root_admission_denied", ""
+            )
+        try:
+            resolved = resolve_source_location(root, location.relative_path)
+        except SourceLocationError as exc:
+            return SourceLocationReadResult(
+                location, None, "unavailable", exc.reason, ""
+            )
+        observation, status, reason, detail = _read_verified_bytes(
+            resolved,
+            expected_sha256=ref.content_sha256,
+            budget=budget,
+            expected_byte_size=ref.byte_size,
+            retain_bytes=retain_bytes,
+        )
+        return SourceLocationReadResult(
+            location, observation, status, reason, detail,
+            (_registered_location_binding(ref, location)
+             if observation is not None and not status else None),
+        )
+
+    def describe_registered_location(
+        self,
+        ref: SourceRef,
+        binding: RegisteredLocationBinding,
+        *,
+        budget: ReadBudget,
+    ) -> RegisteredLocationDescriptor:
+        """Revalidate a prior location binding without returning a physical path.
+
+        This lets the local inventory owner read adjacent metadata only when the
+        current catalog still maps the verified location ID to the same root
+        and relative locator. A location ID that was rebound cannot redirect a
+        sidecar read to a different directory.
+        """
+        if not isinstance(binding, RegisteredLocationBinding):
+            raise TypeError("binding must be RegisteredLocationBinding")
+        if not re.fullmatch(r"[0-9a-f]{64}", binding.binding_sha256):
+            raise TypeError("binding_sha256 must be lowercase SHA-256")
+        version, location = self._current_source_location(
+            ref, binding.location_id, budget
+        )
+        current_binding = _registered_location_binding(ref, location)
+        if current_binding != binding:
+            return RegisteredLocationDescriptor(
+                location, None, "unavailable", "location_binding_changed", ""
+            )
+        _resolved, status, reason, detail = _registered_location_target(
+            self.catalog.config, ref, version, location
+        )
+        if status:
+            return RegisteredLocationDescriptor(
+                location, None, status, reason, detail
+            )
+        return RegisteredLocationDescriptor(
+            location, current_binding, "", "", ""
+        )
+
+    def read_registered_original(
+        self,
+        ref: SourceRef,
+        location_id: str,
+        *,
+        budget: ReadBudget,
+        retain_bytes: bool = True,
+    ) -> SourceLocationReadResult:
+        """Verify a registered original for local inventory and reconciliation.
+
+        This port intentionally admits active and retired original locations;
+        it does not make an inactive copy eligible for consumer reuse. The
+        caller supplies identities only, while root policy, locator resolution,
+        and byte verification remain inside the resolver.
+        """
+        version, location = self._current_source_location(ref, location_id, budget)
+
+        resolved, status, reason, detail = _registered_location_target(
+            self.catalog.config, ref, version, location
+        )
+        if status:
+            return SourceLocationReadResult(
+                location, None, status, reason, detail
+            )
+        assert resolved is not None
+        observation, status, reason, detail = _read_verified_bytes(
+            resolved,
+            expected_sha256=ref.content_sha256,
+            expected_byte_size=ref.byte_size,
+            budget=budget,
+            retain_bytes=retain_bytes,
+        )
+        return SourceLocationReadResult(
+            location, observation, status, reason, detail,
+            (_registered_location_binding(ref, location)
+             if observation is not None and not status else None),
+        )
 
     def resolve(self, request: SourceRequest) -> ResolutionResult:
         """Compatibility resolution, including diagnostic claim fallback."""
@@ -1310,14 +1531,15 @@ class SourceResolver:
         entity_gate_rejected = 0
         # Which roots offer their already-indexed documents for reuse.  B01:
         # this uses the SAME function the cross-repo policy export uses
-        # (`policy._effective_reusable`) rather than a second copy of the rule,
+        # (`policy.root_is_reusable_for_filing`) rather than a second copy of the rule,
         # so an explicit `reusable_for_filing: false` is honoured here too
         # (owner R-2 / design P-7) and the resolver can never disagree with the
         # exported containment policy.  `None` keeps following the kind-level
         # `reusable_root_kinds` allowance.
         config = self.catalog.config
         reusable_roots = {
-            root.root_id: root for root in config.roots if _effective_reusable(root, config)
+        root.root_id: root for root in config.roots
+        if root_is_reusable_for_filing(root, config)
         }
         # The identity projection supplies a candidate superset. Current
         # metadata, period, publication and byte qualification remain here.
@@ -1337,10 +1559,8 @@ class SourceResolver:
         # The ceilings are per request: begin_request() restarts the counters so
         # an injected/reused budget cannot silently un-verify later requests
         # (B-VR02-04).
-        budget = self.read_budget or _ReadBudget()
-        from .local_inventory import LocalReadBudget
-        if not isinstance(budget, LocalReadBudget):
-            budget.begin_request()
+        budget = self.read_budget or ReadBudget()
+        budget.begin_request()
         from .metadata_observation import observe_metadata
         from .source_reader import SourceVersionReader
 
@@ -1483,10 +1703,25 @@ class SourceResolver:
                         raise
                     selected_copy = (None, exc.reason, ())
                 else:
-                    location = verified.admitted_copy
-                    selected_copy = (location, _candidate_reason(location), ())
-                    assert observations is not None
-                    observations[source_ref.document_id] = verified
+                    location = dict(verified.admitted_copy)
+                    root = reusable_roots.get(str(location.get("root_id") or ""))
+                    try:
+                        if root is None:
+                            raise SourceLocationError("root_not_configured")
+                        resolved = resolve_source_location(
+                            root, str(location.get("relative_path") or "")
+                        )
+                    except SourceLocationError:
+                        selected_copy = (None, "local_original_missing", ())
+                    else:
+                        # Physical paths are reconstructed here for the legacy
+                        # SourceHandle projection. The Reader→Resolver handoff
+                        # carries only the catalog location identity/relative
+                        # locator and the hash it actually verified.
+                        location["absolute_path"] = str(resolved)
+                        selected_copy = (location, _candidate_reason(location), ())
+                        assert observations is not None
+                        observations[source_ref.document_id] = verified
             selection = self._handle(
                 document,
                 metadata=metadata,
@@ -1693,8 +1928,8 @@ class SourceResolver:
             SecurityIdentityError,
             SecurityMasterStore,
             SecurityMasterUnavailableError,
-            _cross_market_issuer_link_ids,
-            _ticker_key,
+            cross_market_issuer_link_ids,
+            security_listing_key,
         )
 
         if self._issuer_link_ids is None:
@@ -1707,19 +1942,21 @@ class SourceResolver:
                 except (OSError, SecurityIdentityError, SecurityMasterUnavailableError):
                     self._issuer_link_ids = {}
                 else:
-                    self._issuer_link_ids = _cross_market_issuer_link_ids(master)
-        return self._issuer_link_ids.get((market.strip().upper(), _ticker_key(security_id, market)))
+                    self._issuer_link_ids = cross_market_issuer_link_ids(master)
+        return self._issuer_link_ids.get(
+            (market.strip().upper(), security_listing_key(security_id, market))
+        )
 
     def issuer_identity_tokens(
         self, entity: str, *, market: str | None = None, security_id: str | None = None,
         issuer_link_id: str | None = None,
     ) -> tuple[str, ...]:
         """Observe aliases in the requested source market when it is explicit."""
-        from .security_identity import SecurityMasterStore, _normalize_text
+        from .security_identity import SecurityMasterStore, normalize_identity_text
 
         catalog_dir = getattr(self.catalog.config, "catalog_dir", None)
         if catalog_dir is None:
-            wanted = _normalize_text(entity)
+            wanted = normalize_identity_text(entity)
             return (wanted,) if wanted else ()
         return SecurityMasterStore(Path(catalog_dir) / "security_master").issuer_identity_tokens(
             entity, market=market, security_id=security_id,
@@ -1732,12 +1969,12 @@ class SourceResolver:
     ) -> bool:
         # Phase 14 R8 fix: the entity gate must use the SAME canonical
         # normalization as the identity layer (NFKC + casefold + alnum-only —
-        # security_identity._normalize_text).  Plain casefold left "Apple Inc."
+        # security_identity.normalize_identity_text). Plain casefold left "Apple Inc."
         # (SEC canonical, trailing period) failing against "Apple Inc", which
         # would drop every period-terminated US issuer under bridge-off.
         # This is normalization, not soft-matching (FC-702 semantics intact:
         # company-name-vs-ticker still conflicts).
-        from .security_identity import _normalize_text
+        from .security_identity import normalize_identity_text
 
         if metadata is None:
             metadata = _source_metadata(
@@ -1758,15 +1995,15 @@ class SourceResolver:
         doc_values: set[str] = set()
         if not authoritative:
             doc_values.update(
-                _normalize_text(str(item.get(key) or ""))
+                normalize_identity_text(str(item.get(key) or ""))
                 for item in document["entities"] for key in ("entity_id", "name")
             )
             if metadata.get("company_name"):
-                doc_values.add(_normalize_text(str(metadata["company_name"])))
+                doc_values.add(normalize_identity_text(str(metadata["company_name"])))
             if metadata.get("ticker"):
-                doc_values.add(_normalize_text(str(metadata["ticker"])))
+                doc_values.add(normalize_identity_text(str(metadata["ticker"])))
         doc_values.update(
-            _normalize_text(str(value))
+            normalize_identity_text(str(value))
             for value in (
                 metadata.get("security_id"),
                 metadata.get("canonical_entity_id"),
@@ -1783,7 +2020,7 @@ class SourceResolver:
     def _select_candidate(
         document: dict[str, Any],
         *,
-        budget: _ReadBudget,
+        budget: ReadBudget,
         reusable_roots: Mapping[str, RootSpec],
         scope_qualification=None,
     ) -> tuple[dict[str, Any] | None, str, tuple[str, ...]]:
@@ -2062,7 +2299,7 @@ class SourceResolver:
         handle: SourceHandle,
         *,
         expected_content_sha256: str | None = None,
-        budget: _ReadBudget | None = None,
+        budget: ReadBudget | None = None,
     ) -> ByteReadResult:
         """B03 — the read path's verified-byte entry point.
 
@@ -2090,7 +2327,7 @@ class SourceResolver:
         the size ceiling (``exceeds_candidate_cap``), a size or mtime change
         (``changed_during_read``) and caller cancellation (``cancelled``).
 
-        Passing the request's ``_ReadBudget`` keeps the per-request resource
+        Passing the request's ``ReadBudget`` keeps the per-request resource
         ceiling and cancellation semantics of ``resolve``; without one the byte
         cap still applies.
 
@@ -2138,7 +2375,7 @@ class SourceResolver:
         # swapped in between them is never seen (B-VR03-07).  The hardlink case
         # stays a registered limitation - realpath does not resolve hardlinks.
         resolved = Path(os.path.realpath(path))
-        if not _inside_configured_roots(path, tuple(self.catalog.config.roots)):
+        if not inside_configured_roots(path, tuple(self.catalog.config.roots)):
             # The reason code is the ALREADY REGISTERED one for this meaning
             # ("artifact path outside allowed roots"), not a new one: the
             # FC-1301 taxonomy gate fails closed on any unregistered
@@ -2163,7 +2400,7 @@ class SourceResolver:
         # not authorize reuse (`no_reusable_root_location`), but this primitive used to gate
         # on containment only, so a caller that built its own handle could still be served
         # the bytes of a denied root - measured, and registered as F-BAR-11.  The rule is the
-        # SAME function the decision path and the policy export use (``_effective_reusable``),
+        # SAME function the decision path and the policy export use (``root_is_reusable_for_filing``),
         # and the root is resolved with the SAME key the decision path uses (the location's
         # root_id, with the path only as a fallback - B.VR-ba1 F-BA1-03), so the layers cannot
         # disagree.  The reason code is the already-registered `policy_denied` ("root policy
@@ -2173,7 +2410,8 @@ class SourceResolver:
             handle, path, roots, getattr(self.catalog, "reader", None)
         )
         reusable_root_ids = frozenset(
-            root.root_id for root in roots if _effective_reusable(root, self.catalog.config)
+            root.root_id for root in roots
+            if root_is_reusable_for_filing(root, self.catalog.config)
         )
         if owning_root is None or owning_root.root_id not in reusable_root_ids:
             return ByteReadResult(

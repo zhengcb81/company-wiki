@@ -17,7 +17,7 @@ from typing import Any, Callable
 
 from .adapters.parity import ParityDiff, ParityReport
 from .models import RootSpec
-from .scanner import _scan_root_v1, scan_root_strategy
+from .scanner import scan_root_strategy
 from .shadow_parity import migration_ledger
 
 _MIME_BY_SUFFIX = {
@@ -203,7 +203,9 @@ def run_trace_parity(
 ) -> ParityReport:
     """Compare the v1 scanner path and the v2 adapter path over the same
     frozen tree on the full source/document/location/handle/bundle trace."""
-    v1_candidates, _, _ = _scan_root_v1(root, company_names, progress=progress)
+    v1_candidates, _, _ = scan_root_strategy(
+        root, company_names, progress=progress, v2_scan_shadow=False
+    )
     v2_candidates = scan_root_strategy(root, company_names, v2_scan_shadow=True)[0]
     return compare_traces(
         candidate_trace(v1_candidates),

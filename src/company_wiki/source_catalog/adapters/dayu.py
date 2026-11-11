@@ -16,7 +16,7 @@ import json
 import os
 from pathlib import Path
 
-from .common import _walk_files
+from ..filesystem_discovery import walk_document_files
 from .interface import NormalizedCandidate
 from ..source_group_scope import SourceRegistrationScope, filing_group_key
 from ..models import DOCUMENT_EXTENSIONS
@@ -139,7 +139,7 @@ class DayuAdapter:
         candidates: list[NormalizedCandidate] = []
         groups: dict[str, list[Path]] = {}
         paths_to_visit = (_selected_dayu_paths(root_path, relative_paths, file_walker=file_walker)
-                          if relative_paths is not None else sorted(_walk_files(root_path)))
+                          if relative_paths is not None else sorted(walk_document_files(root_path)))
         for path in paths_to_visit:
             groups.setdefault(
                 _group_key(path.relative_to(root_path).as_posix()), []
@@ -241,7 +241,7 @@ class DayuAdapter:
 
 def _selected_dayu_paths(root: Path, paths: set[str], *, file_walker=None) -> list[Path]:
     scope = SourceRegistrationScope("dayu", frozenset(paths))
-    return scope.filing_paths(root, file_walker or _walk_files)
+    return scope.filing_paths(root, file_walker or walk_document_files)
 
 
 def _sha256_file(path: Path) -> str:

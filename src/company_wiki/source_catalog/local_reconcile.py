@@ -12,29 +12,29 @@ from company_wiki.parser_adapters import NativePdfError, read_native_pdf_prefix
 
 from .assertion_service import (
     SOURCE_FACT_FIELDS,
-    _evidence_payload,
+    evidence_payload,
     get_verified_assertion,
     restore_document_facts,
     source_issuer_identity,
     source_scope_qualification,
-    _sec_original,
+    sec_original,
     SOURCE_SCOPE_METHOD as SEC_SCOPE_METHOD,
 )
 from .dayu_fiscal_metadata import extract_sec_scope, complete_sec_primary, FiscalMetadataError
 from .identity_candidates import iter_identity_filing_candidates
+from .policy import root_is_reusable_for_filing
 from .local_inventory import (
     LocalPrepareLimits,
     LocalReadBudget,
     metadata_retirement,
     observe_document,
+    read_registered_sidecar,
 )
 from .resolver import (
     SourceRequest,
     SourceResolver,
-    _needs_hydration,
-    _inside_configured_roots,
-    _source_metadata,
 )
+from .source_location import inside_configured_roots, is_hydration_required
 from .source_reader import FilingReuseObservation, SourceReadError, SourceRef, SourceVersionReader
 from .source_group_scope import SourceRegistrationScope
 from .lock import CatalogOperationLockedError
@@ -75,11 +75,6 @@ def _identity(catalog, request, cache_dir):
     return source_issuer_identity(catalog, request, cache_dir)
 
 
-def _read_metadata(path, root, budget):
-    """One storage read budget handles provider cache and registration metadata."""
-    return budget.read_metadata_observation(path, root=root.path)
-
-
 def _register_local_sources(catalog, *, root_id, relative_paths, budget):
     """A quarantined requested original is a gap, not an empty local lake.
 
@@ -98,20 +93,23 @@ def _register_local_sources(catalog, *, root_id, relative_paths, budget):
             raise SourceReadError("unavailable", "local_original_registration_failed")
 
 
-def _sec_cache(original, primary, budget):
+def _sec_cache(catalog, original, primary, budget):
     """Bind provider publication facts to primary file/hash/size, CIK and accession."""
     observations = []
-    for _location_id, path, root in original.locations:
-        cached = _read_metadata(path.with_name("meta.json"), root, budget)
+    for location in original.locations:
+        cached = read_registered_sidecar(
+            catalog, original.ref, location, kind="sec_provider_meta", budget=budget
+        )
         if cached is None:
             continue
-        meta, sha = cached
+        meta, sha = cached.metadata, cached.content_sha256
+        original_name = cached.original_name
         accession = meta.get("accession_number") or meta.get("internal_document_id")
         if (
             meta.get("is_deleted") is not False
             or meta.get("ingest_complete") is not True
             or str(meta.get("company_id", "")).lstrip("0") != primary["cik"]
-            or meta.get("primary_document") != path.name
+            or meta.get("primary_document") != original_name
             or meta.get("form_type") != primary["form_type"]
             or meta.get("report_date") != primary["report_date"]
             or not isinstance(accession, str)
@@ -120,7 +118,7 @@ def _sec_cache(original, primary, budget):
             raise SourceReadError("blocked", "provider_cache_identity_conflict")
         files = meta.get("files")
         matching = (
-            [x for x in files if isinstance(x, dict) and x.get("name") == path.name]
+            [x for x in files if isinstance(x, dict) and x.get("name") == original_name]
             if isinstance(files, list)
             else []
         )
@@ -143,7 +141,7 @@ def _sec_cache(original, primary, budget):
             + "/"
             + accession.replace("-", "")
             + "/"
-            + path.name
+            + original_name
         )
         url = matching[0].get("source_url")
         # Only true cached URLs or SEC accession+primary construction, never a guessed hostname.
@@ -175,18 +173,20 @@ def _sec_cache(original, primary, budget):
 
 
 
-def _sec_sidecar(original, identity, budget):
+def _sec_sidecar(catalog, original, identity, budget):
     """Observed publication declarations bound to the actual registered original.
 
     Body-derived issuer/scope is established separately. This is the existing
     direct/raw storage metadata, never a filename/capture-time date fallback.
     """
     observations = []
-    for _location_id, path, root in original.locations:
-        cached = _read_metadata(path.with_name(path.name + ".source.json"), root, budget)
+    for location in original.locations:
+        cached = read_registered_sidecar(
+            catalog, original.ref, location, kind="source_sidecar", budget=budget
+        )
         if cached is None:
             continue
-        meta, sha = cached
+        meta, sha = cached.metadata, cached.content_sha256
         if (meta.get("content_sha256") != original.ref.content_sha256
                 or (meta.get("market"), meta.get("security_id")) != (identity.market, identity.security_id)
                 or meta.get("entity") != identity.canonical_name):
@@ -201,7 +201,7 @@ def _sec_sidecar(original, identity, budget):
         observations.append({"published_date": published, "source_url": meta.get("source_url"),
                              "provider": meta.get("provider"),
                              "provider_document_id": meta.get("provider_document_id"),
-                             "locator": "registered-source-sidecar:/.source.json", "metadata_sha256": sha})
+                             "locator": cached.locator, "metadata_sha256": sha})
     if not observations:
         return None
     if len({(x["published_date"], x["source_url"], x["provider"], x["provider_document_id"])
@@ -212,7 +212,7 @@ def _sec_sidecar(original, identity, budget):
 
 def _prior_source_facts(catalog, ref):
     prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
-    previous = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
+    previous = evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
     return previous.get("source_fact_patch") or {}, previous.get("source_fact_evidence") or {}
 
 
@@ -333,9 +333,9 @@ def _proven_facts(catalog, original, identity, request, budget, *, claimed_match
         # Discovery records the source's actual observed scope, including a
         # different period, so bounded retries can move past it. Irrelevance
         # does not require publication/provider details from another period.
-        cache = _sec_cache(original, primary, budget) if matches else None
+        cache = _sec_cache(catalog, original, primary, budget) if matches else None
         if matches and cache is None and prior_patch.get("published_date") is None:
-            cache = _sec_sidecar(original, identity, budget)
+            cache = _sec_sidecar(catalog, original, identity, budget)
         # A prior verified assertion is already hash-bound, but legacy row/filename/mtime is not proof.
         published = (
             cache["published_date"] if cache else prior_patch.get("published_date")
@@ -458,8 +458,6 @@ def _facts_with_availability(catalog, original, identity, request, budget, **opt
 def _discover_source_groups(catalog, identity, budget, request, *, historical=None, _progress=None):
     """Finite issuer-layout metadata enumeration, separate from raw verification."""
     from .adapter_dispatch import discover_issuer_paths
-    from .policy import _effective_reusable
-
     changed = False
     unresolved = []
     progress = _progress or _PreparationProgress()
@@ -472,15 +470,15 @@ def _discover_source_groups(catalog, identity, budget, request, *, historical=No
             status = path.lstat()
         except FileNotFoundError:
             return False
-        if _needs_hydration(status):
+        if is_hydration_required(status):
             raise SourceReadError("unavailable", "placeholder_not_hydrated")
         if path.is_symlink() or getattr(status, "st_file_attributes", 0) & 0x400:
             return False
-        return (path.is_dir() if directory else path.is_file()) and _inside_configured_roots(
+        return (path.is_dir() if directory else path.is_file()) and inside_configured_roots(
             Path(os.path.realpath(path)), (root,))
 
     for root in catalog.config.roots:
-        if not _effective_reusable(root, catalog.config):
+        if not root_is_reusable_for_filing(root, catalog.config):
             continue
         selected = discover_issuer_paths(
             root, names=tuple(names), security_ids=(identity.ticker, identity.security_id),
@@ -623,16 +621,19 @@ def _prepare_local_source(
         try:
             metadata = reader.describe_version(ref) if request.market is None else None
             market = request.market if metadata is None else metadata.get("market")
-            if not _sec_original(ref, market, request.document_kind):
+            if not sec_original(ref, market, request.document_kind):
                 reader.verify_version(ref, purpose="filing_reuse", budget=budget)
                 return _result("ready", ready_reason, ref=ref)
             qualification = source_scope_qualification(catalog, ref,
                 metadata=metadata if metadata is not None else reader.describe_version(ref),
                 request=request, identity_cache_dir=identity_cache_dir)
             if qualification is None or qualification.primary is not None:
-                reader._verified_version(ref, purpose="filing_reuse",
-                    expected_read_policy_sha256=None, retain_bytes=False, budget=budget,
-                    scope_qualification=qualification)
+                reader.verify_version_with_scope(
+                    ref,
+                    purpose="filing_reuse",
+                    budget=budget,
+                    scope_qualification=qualification,
+                )
                 return _result("ready", ready_reason, ref=ref)
         except (ValueError, SourceReadError) as exc:
             return _result(getattr(exc, "status", "blocked"),
@@ -670,16 +671,18 @@ def _prepare_local_source(
     registered_issuer = False
     for candidate in indexed_candidates:
         budget.check()
-        metadata = _source_metadata(candidate, store=catalog.reader, reader="steady")
-        if not resolver._entity_matches(request.entity, candidate, metadata=metadata,
-                                        identity_tokens=identity_tokens):
+        metadata = resolver.project_source_metadata(candidate)
+        if not resolver.entity_matches(
+            request.entity, candidate, metadata=metadata,
+            identity_tokens=identity_tokens,
+        ):
             continue
         registered_issuer = True
         if candidate["document_id"] in progress.not_relevant_documents:
             continue
         row = catalog.reader.exact_source_version(candidate["document_id"])
         ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
-        body_owner = (_sec_original(ref, request.market, request.document_kind)
+        body_owner = (sec_original(ref, request.market, request.document_kind)
                       or request.market == "CN" and ref.mime_type == "application/pdf")
         identity_match = resolver.match_source_identity(
             market=request.market,
@@ -934,3 +937,10 @@ def _prepare_local_source_operation(
     if result["status"] != "ready":
         result["operations"].append(budget.observation(reason=result["reason"]))
     return result
+
+
+# Public owner port for acquisition consumers. Keep the implementation helper
+# local so callers cannot couple to its internal name.
+prepare_local_source_operation = _prepare_local_source_operation
+
+__all__ = ["prepare_local_source", "prepare_local_source_operation"]

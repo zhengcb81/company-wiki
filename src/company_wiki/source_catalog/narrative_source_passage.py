@@ -24,7 +24,7 @@ from company_wiki.document_understanding.statement_grammar import (
 )
 
 from .narrative_causal_links import CAUSAL_LINK
-from .narrative_business_meaning import _OBJECT
+from .narrative_business_meaning import BUSINESS_OBJECT_PATTERN
 from .narrative_reporting_rules import arithmetic_presentation
 from .narrative_source_context import (
     SOURCE_CONTEXT_SCAN_PASSES, SourceClauseContext, source_clause_context, statement_complement_context,
@@ -249,7 +249,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             business_cause = source_cause or bool(tail and not accounting_text(tail)
                 and not _FINANCIAL_CAUSAL_ARGUMENT.search(tail)
                 and not abstract_source_argument(tail)
-                and (_OBJECT.search(tail) or STATE_HEAD_PATTERN.search(tail))
+                and (BUSINESS_OBJECT_PATTERN.search(tail) or STATE_HEAD_PATTERN.search(tail))
                 and _CAUSAL_PROCESS.search(tail))
             independent = any(clause.independent_payload is True for clause in members)
             # A separately observed business measurement remains readable even

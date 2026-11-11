@@ -101,15 +101,15 @@ def test_large_stored_availability_is_not_lost_to_inline_representation_size(mon
 
 
 def test_large_source_fact_evidence_validates_json_and_retains_same_scope():
-    from company_wiki.source_catalog.assertion_service import _validate_source_facts
+    from company_wiki.source_catalog.assertion_service import validate_source_facts
     facts = {'published_date': None}
     evidence = {'published_date': {'value': None, 'locator': '/source-availability',
                                   'availability_capture': large_capture()}}
-    _validate_source_facts(facts, evidence)
+    validate_source_facts(facts, evidence)
     with pytest.raises(ValueError):
-        _validate_source_facts(facts, {'published_date': {**evidence['published_date'], 'value': 'wrong'}})
+        validate_source_facts(facts, {'published_date': {**evidence['published_date'], 'value': 'wrong'}})
     with pytest.raises(ValueError):
-        _validate_source_facts(facts, {'published_date': {**evidence['published_date'], 'nonfinite': float('nan')}})
+        validate_source_facts(facts, {'published_date': {**evidence['published_date'], 'nonfinite': float('nan')}})
 
 
 @pytest.mark.parametrize('stop', ['cancelled', 'deadline'])
@@ -123,7 +123,7 @@ def test_stored_proof_obeys_stop_after_metadata_validation(monkeypatch, stop):
                'published_date': {'verified_open': observation}}})}
     monkeypatch.setattr(assertions, 'get_verified_assertion', lambda *_args, **_kw: row)
     budget = LocalReadBudget(LocalPrepareLimits())
-    original = owner._open_evidence
+    original = owner.open_source_evidence
     def checked(*args):
         result = original(*args)
         if stop == 'cancelled':
@@ -131,7 +131,7 @@ def test_stored_proof_obeys_stop_after_metadata_validation(monkeypatch, stop):
         else:
             budget.deadline = 0
         return result
-    monkeypatch.setattr(owner, '_open_evidence', checked)
+    monkeypatch.setattr(owner, 'open_source_evidence', checked)
     with pytest.raises(SourceReadError) as raised:
         owner.stored_availability_evidence(SimpleNamespace(reader=object()), REF, budget=budget)
     assert raised.value.reason == ('cancelled' if stop == 'cancelled' else 'local_prepare_deadline')
@@ -140,7 +140,7 @@ def test_stored_proof_obeys_stop_after_metadata_validation(monkeypatch, stop):
 @pytest.mark.parametrize('scenario', ['no_proof', 'stored', 'cancelled'])
 def test_stored_proof_uses_default_resolver_parent_account(monkeypatch, scenario):
     import company_wiki.source_catalog.assertion_service as assertions
-    from company_wiki.source_catalog.resolver import _ReadBudget
+    from company_wiki.source_catalog.read_budget import ReadBudget
     from types import SimpleNamespace
     observation = {'schema_version': 'source-verified-open/1', 'source_ref': asdict(REF),
                    'verified_at': '2026-10-07T00:00:00Z'}
@@ -148,7 +148,7 @@ def test_stored_proof_uses_default_resolver_parent_account(monkeypatch, scenario
     row = {'document_id': REF.document_id, 'evidence_basis': 'source-facts', 'evidence_json': raw}
     monkeypatch.setattr(assertions, 'get_verified_assertion',
                         lambda *_args, **_kw: None if scenario == 'no_proof' else row)
-    budget = _ReadBudget(max_bytes=1024**2)
+    budget = ReadBudget(max_bytes=1024**2)
     assert budget.charge(30) == ''
     if scenario == 'cancelled':
         budget.cancel()

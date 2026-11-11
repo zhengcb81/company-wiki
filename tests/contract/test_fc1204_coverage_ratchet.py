@@ -60,7 +60,6 @@ FROZEN = {
     "acquisition_service.py": 82,
     "adapter_dispatch.py": 89,
     "adapter_process.py": 70,
-    "adapters/common.py": 86,
     "adapters/company_raw.py": 86,
     "adapters/conformance.py": 100,
     "adapters/dayu.py": 83,

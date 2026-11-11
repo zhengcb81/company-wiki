@@ -104,6 +104,8 @@ FAST_CONTRACT_CASES = (
     *CURRENT_CI_REGRESSION_CASES,
     "tests/contract/test_layer_public_boundaries.py",
     "tests/contract/test_source_catalog_independent.py",
+    # Enforce the package-wide source_catalog public/private owner boundary.
+    "tests/contract/test_source_catalog_module_contracts.py",
     "tests/contract/test_announcement_collector.py",
     "tests/contract/test_narrative_output_plan.py",
     "tests/contract/test_summary_group_coverage.py",

@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import Any, Protocol, Sequence, runtime_checkable
 
 from .models import CATALOG_SCHEMA_VERSION
+from .sqlite_support import configure_tolerant_sqlite_text_decoding
 
 SUPPORTED_SCHEMA_VERSIONS = frozenset({CATALOG_SCHEMA_VERSION})
 
@@ -190,9 +191,7 @@ class ReadOnlyCatalogReader:
         # Without this the read path raised `sqlite3.OperationalError: Could not decode
         # to UTF-8 column ...` from inside the fetch, i.e. before any caller guard - so
         # the envelope was fixed first and the read side still died on the same row.
-        from .store import _tolerate_undecodable_text  # local import: avoids a cycle
-
-        _tolerate_undecodable_text(self._connection)
+        configure_tolerant_sqlite_text_decoding(self._connection)
         from .identity_candidates import register_identity_read_functions
         register_identity_read_functions(self._connection)
         # The connection can only ever read; a write attempt raises

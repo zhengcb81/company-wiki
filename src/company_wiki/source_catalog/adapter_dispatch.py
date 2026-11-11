@@ -2,9 +2,9 @@
 
 The scanner facade resolves the registered adapter for a root (by
 ``adapter_id`` — the effective route) and runs its enumerate().  The
-adapter produces unified NormalizedCandidates; the dispatch converts them
-to the scanner's internal _Candidate shape.  Unknown/missing adapter ids
-fail closed.  The v1 scanner path is untouched (FC-305 cutover); this is
+adapter produces unified NormalizedCandidates; dispatch binds them to the
+shared ScanCandidate contract.  Unknown/missing adapter ids fail closed.
+The v1 scanner path is untouched (FC-305 cutover); this is
 the production caller seam that gives SidecarFilingAdapter,
 CompanyRawAdapter and DayuAdapter their production callers.
 """
@@ -15,13 +15,14 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import Any
 
-from .adapters.common import _ACQUISITION_SIDECAR_SUFFIX
+from .acquisition_sidecar import ACQUISITION_SIDECAR_SUFFIX
 from .adapters.company_raw import CompanyRawAdapter
 from .adapters.dayu import DayuAdapter
 from .adapters.interface import NormalizedCandidate
 from .adapters.registry import registered_adapter
 from .adapters.sidecar import SidecarFilingAdapter
 from .models import RootSpec
+from .scan_contract import ScanCandidate, infer_company_name
 
 
 class AdapterDispatchError(RuntimeError):
@@ -96,23 +97,25 @@ def discover_issuer_paths(root: RootSpec, **ports) -> set[str]:
     return selected
 
 
-def _to_scanner_candidate(root: RootSpec, item: NormalizedCandidate, company_names):
-    """Convert a NormalizedCandidate to the scanner's internal _Candidate.
+def _to_scanner_candidate(
+    root: RootSpec,
+    item: NormalizedCandidate,
+    company_names: tuple[str, ...],
+) -> ScanCandidate:
+    """Convert a NormalizedCandidate to the shared scan contract.
 
     The adapter emits relative paths, group keys, roles and normalized
     metadata; entity_name is inferred the same way the v1 scanner does
     (from the company directory name embedded in the relative path).
     """
-    from .scanner import _Candidate, _infer_company
-
     path = root.path / item.relative_path
-    return _Candidate(
+    return ScanCandidate(
         root=root,
         path=path,
         relative_path=item.relative_path,
         group_key=item.group_key,
         role=item.role,
-        entity_name=_infer_company(item.relative_path, company_names),
+        entity_name=infer_company_name(item.relative_path, company_names),
         group_metadata=dict(item.normalized or {}),
         source_status="active",
     )
@@ -125,13 +128,13 @@ def scan_root_via_adapter(
     progress: Any = None,
     relative_paths: set[str] | None = None,
     metadata_reader=None, file_walker=None,
-) -> list[Any]:
-    """Run the root's registered adapter and return scanner candidates.
+) -> list[ScanCandidate]:
+    """Run the root's registered adapter and return shared scan candidates.
 
     This is the production caller for the three registered adapters
     (FC-302 CodeGraph gate: caller>=1 each).  Adapter candidates are
-    converted to the scanner's internal _Candidate shape; the v1 scanner
-    path is unchanged.
+    converted to the shared scan-candidate contract; the v1 scanner path is
+    unchanged.
     """
     configured = _configured_adapter_roots(root)
     if not configured:
@@ -148,7 +151,7 @@ def scan_root_via_adapter(
         scoped_paths = relative_paths
         if root.routes:
             def owned(relative, *, adapter_id=configured_root.adapter_id):
-                primary = relative.removesuffix(_ACQUISITION_SIDECAR_SUFFIX)
+                primary = relative.removesuffix(ACQUISITION_SIDECAR_SUFFIX)
                 return root.effective_root_for_path(primary).adapter_id == adapter_id
             options["primary_filter"] = owned
             if relative_paths is not None:
@@ -172,15 +175,12 @@ def scan_root_via_adapter(
                 if previous is not None and previous != effective:
                     raise AdapterDispatchError("source attachment has conflicting route owners")
                 attachment_owners[item.relative_path] = effective
-    converted: list[Any] = []
+    converted: list[ScanCandidate] = []
     seen: set[str] = set()
     for configured_root, candidates, primaries in groups:
         for item in candidates:
             if not isinstance(item, NormalizedCandidate):
-                if root.routes:
-                    raise AdapterDispatchError("routed adapter returned an invalid candidate")
-                converted.append(item)
-                continue
+                raise AdapterDispatchError("adapter returned an invalid candidate")
             # Group membership from the owning adapter outranks another
             # layout's attempt to treat that metadata file as a new original.
             owner = attachment_owners.get(item.relative_path)

@@ -636,7 +636,7 @@ def test_completed_replay_cleans_only_pending_exact_staging(tmp_path, monkeypatc
             def fail(*_args, **_kwargs):
                 raise OSError("fixture-cleanup")
             if fault == "raw":
-                patch.setattr(writer_module.CanonicalSourceWriter, "_remove_staged", fail)
+                patch.setattr(writer_module.CanonicalSourceWriter, "discard_staged", fail)
             else:
                 actual_unlink = Path.unlink
                 def unlink(path, *args, **kwargs):
@@ -681,7 +681,7 @@ def test_completed_replay_cleanup_failure_returns_result_with_safe_diagnostic(tm
         with monkeypatch.context() as patch:
             def fail(*_args, **_kwargs):
                 raise OSError("fixture-cleanup-sensitive-path:" + str(root))
-            patch.setattr(writer_module.CanonicalSourceWriter, "_remove_staged", fail)
+            patch.setattr(writer_module.CanonicalSourceWriter, "discard_staged", fail)
             with pytest.raises(OSError):
                 flow.recover_official_source(catalog, capture_id=capture_id)
             replay = flow.recover_official_source(catalog, capture_id=capture_id)
@@ -708,7 +708,7 @@ def test_completed_replay_refusal_preserves_pending_raw_before_cleanup(tmp_path,
         with monkeypatch.context() as patch:
             def fail(*_args, **_kwargs):
                 raise OSError("fixture-cleanup")
-            patch.setattr(writer_module.CanonicalSourceWriter, "_remove_staged", fail)
+            patch.setattr(writer_module.CanonicalSourceWriter, "discard_staged", fail)
             with pytest.raises(OSError):
                 flow.recover_official_source(catalog, capture_id=capture_id)
         result_path = descriptor.parent / (capture_id + ".result.json")
@@ -741,7 +741,7 @@ def test_completed_replay_keeps_changed_or_unknown_retained_raw(tmp_path, monkey
         with monkeypatch.context() as patch:
             def fail(*_args, **_kwargs):
                 raise OSError("fixture-cleanup")
-            patch.setattr(writer_module.CanonicalSourceWriter, "_remove_staged", fail)
+            patch.setattr(writer_module.CanonicalSourceWriter, "discard_staged", fail)
             with pytest.raises(OSError):
                 flow.recover_official_source(catalog, capture_id=capture_id)
         saved_receipt = descriptor.read_bytes()

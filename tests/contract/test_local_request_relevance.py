@@ -162,11 +162,10 @@ def test_unknown_title_is_description_not_eligibility(tmp_path):
         close(cat)
 
 
-@pytest.mark.parametrize("phase", ["initial", "after_discovery"])
 @pytest.mark.parametrize("actual", ["wrong_cik", "wrong_year"])
-def test_cached_request_hit_requires_actual_original_scope(tmp_path, phase, actual):
+def test_cached_request_hit_requires_actual_original_scope(tmp_path, actual):
     from helpers.source_fact_fixture import evidence
-    from company_wiki.source_catalog.local_reconcile import _prepare_local_source
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
     from company_wiki.source_catalog.source_reader import SourceVersionReader
 
     cat = lake(tmp_path)
@@ -176,7 +175,7 @@ def test_cached_request_hit_requires_actual_original_scope(tmp_path, phase, actu
         facts = {"form_type": "10-K", "fiscal_period": "FY"}
         cat.record_source_facts(ref=ref, facts=facts, evidence=evidence(ref, facts))
         assert SourceVersionReader(cat).query_local(request()).status == "found"
-        result = _prepare_local_source(cat, request(), _discovery_done=phase == "after_discovery")
+        result = prepare_local_source(cat, request())
         if actual == "wrong_cik":
             assert result["status"] == "blocked" and result["blocks_download"]
             assert "primary_issuer_conflict" in str(result)
@@ -307,7 +306,7 @@ def test_nonperiodic_sec_form_does_not_require_periodic_scope_proof(tmp_path, mo
 def test_partial_or_unbound_scope_proof_is_checked_from_original(tmp_path, monkeypatch, broken):
     from helpers.source_fact_fixture import evidence
     from company_wiki.source_catalog import local_reconcile
-    from company_wiki.source_catalog.assertion_service import get_verified_assertion, _evidence_payload
+    from company_wiki.source_catalog.assertion_service import get_verified_assertion, evidence_payload
 
     cat = lake(tmp_path)
     try:
@@ -316,7 +315,7 @@ def test_partial_or_unbound_scope_proof_is_checked_from_original(tmp_path, monke
         cat.record_source_facts(ref=ref, facts=facts, evidence=evidence(ref, facts))
         assert prepare_local_source(cat, request())["status"] == "ready"
         row = get_verified_assertion(cat.reader, ref.source_id, ref.content_sha256, reader="steady")
-        payload = _evidence_payload(row["evidence_json"], row["assertion_id"])
+        payload = evidence_payload(row["evidence_json"], row["assertion_id"])
         field = "entity" if broken == "primary_cik" else "fiscal_year"
         proof = dict(payload["source_fact_evidence"][field])
         if broken == "primary_cik":

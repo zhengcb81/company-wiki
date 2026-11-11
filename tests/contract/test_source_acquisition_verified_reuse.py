@@ -93,7 +93,7 @@ def test_after_discovery_reuse_verifies_current_bytes_once_under_target_lock(tmp
     catalog = _catalog(tmp_path, with_source=False)
     try:
         inside_target_lock = False
-        mutex = service_module._acquisition_mutex
+        mutex = service_module.acquisition_mutex
 
         @contextmanager
         def track_lock(*args, **kwargs):
@@ -105,7 +105,7 @@ def test_after_discovery_reuse_verifies_current_bytes_once_under_target_lock(tmp
                 finally:
                     inside_target_lock = False
 
-        monkeypatch.setattr(service_module, "_acquisition_mutex", track_lock)
+        monkeypatch.setattr(service_module, "acquisition_mutex", track_lock)
 
         class LocalArrival(_FakeAdapter):
             def discover(self, request):

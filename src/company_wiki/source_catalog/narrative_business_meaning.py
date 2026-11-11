@@ -298,3 +298,36 @@ def describes_business_structure(clause: str) -> bool:
     """An explicit product use, channel or composition, not a generic benefit."""
     return bool(_OBJECT.search(clause)
                 and (_STRUCTURE.search(clause) or _component_structure(clause)))
+
+
+# Explicit module ports shared by the narrative readers. Keep the regex
+# definitions private while exposing their source-classification meaning.
+BUSINESS_OBJECT_PATTERN = _OBJECT
+BUSINESS_STRUCTURE_PATTERN = _STRUCTURE
+BUSINESS_CLAUSE_BOUNDARY_PATTERN = _CLAUSES
+FINANCIAL_ONLY_PATTERN = _FINANCE
+GENERIC_DEFINITION_PATTERN = _GENERIC_DEFINITION
+COMPANY_ANCHOR_PATTERN = _COMPANY_ANCHOR
+is_component_structure = _component_structure
+classify_operating_fact = _business_fact
+
+__all__ = [
+    "BUSINESS_CLAUSE_BOUNDARY_PATTERN",
+    "BUSINESS_OBJECT_PATTERN",
+    "BUSINESS_STRUCTURE_PATTERN",
+    "COMPANY_ANCHOR_PATTERN",
+    "FINANCIAL_ONLY_PATTERN",
+    "GENERIC_DEFINITION_PATTERN",
+    "business_objects",
+    "business_qualification",
+    "classify_operating_fact",
+    "concrete_operating_event",
+    "describes_business",
+    "describes_business_structure",
+    "detect_business_fact",
+    "detect_legacy_business_fact",
+    "is_component_structure",
+    "prepare_business_observation",
+    "reject_finance_only_text",
+    "reject_legacy_finance_only_text",
+]

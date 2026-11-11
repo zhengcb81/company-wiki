@@ -149,4 +149,10 @@ def build_pdf_context_groups(
     return tuple(groups)
 
 
-__all__ = ["PdfContextGroup", "PdfGroupRules", "build_pdf_context_groups"]
+bounding_box = _bbox
+has_visual_overlap = _has_visual_overlap
+
+__all__ = [
+    "PdfContextGroup", "PdfGroupRules", "bounding_box", "build_pdf_context_groups",
+    "has_visual_overlap",
+]

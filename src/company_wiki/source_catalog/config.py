@@ -20,13 +20,15 @@ class CatalogConfigError(ValueError):
     """Raised when source-catalog configuration is invalid."""
 
 
-def _mapping(value: Any, field_name: str) -> dict[str, Any]:
+def mapping_from_config(value: Any, field_name: str) -> dict[str, Any]:
+    """Return an object value from a versioned catalog configuration."""
     if not isinstance(value, dict):
         raise CatalogConfigError(f"{field_name} must be an object")
     return value
 
 
-def _expand_path(value: Any, *, project_root: Path) -> Path:
+def expand_config_path(value: Any, *, project_root: Path) -> Path:
+    """Resolve a configured catalog path against the owning project root."""
     if not isinstance(value, str) or not value.strip():
         raise CatalogConfigError("path must be non-empty text")
     tokens = {
@@ -49,7 +51,7 @@ def _expand_path(value: Any, *, project_root: Path) -> Path:
     return path.resolve(strict=False)
 
 
-def _require_boolean(
+def require_boolean_root_fields(
     index: int, item: dict[str, Any], *, nullable: tuple[str, ...] = ()
 ) -> None:
     """CFG-08 (B01 review B-VR01-04): the root's BOOLEAN fields must really be
@@ -84,7 +86,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
     if not isinstance(path, Path):
         raise TypeError("path must be pathlib.Path")
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
-    data = _mapping(payload, "config")
+    data = mapping_from_config(payload, "config")
     required = {"schema_version", "catalog_dir", "roots"}
     allowed = required | {"reusable_root_kinds"}
     if not set(data) <= allowed or not required <= set(data):
@@ -101,7 +103,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
     roots: list[RootSpec] = []
     seen_root_ids: set[str] = set()
     for index, raw in enumerate(raw_roots):
-        item = _mapping(raw, f"roots[{index}]")
+        item = mapping_from_config(raw, f"roots[{index}]")
         # WU-301: v2 additive fields; v1 configs (no v2 keys) load unchanged.
         allowed_root_fields = {
             "root_id", "path", "kind", "priority", "adapter_id",
@@ -118,7 +120,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
             raise CatalogConfigError(f"duplicate root_id: {root_id} (CFG-03)")
         seen_root_ids.add(root_id)
         raw_path = item.get("path", "")
-        unresolved = _unresolved_variables(raw_path)
+        unresolved = unresolved_path_variables(raw_path)
         if unresolved:
             raise CatalogConfigError(
                 f"roots[{index}] path contains unresolved variable(s) "
@@ -142,7 +144,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
         # `"true" is not True` skips the CFG-05/CFG-07 checks below.  The
         # admission point is the only place that can refuse it.  The check lives
         # in its own function so the frozen complexity table stays untouched.
-        _require_boolean(index, item, nullable=("reusable_for_filing",))
+        require_boolean_root_fields(index, item, nullable=("reusable_for_filing",))
         if reusable_for_filing is True and read_only is not True:
             raise CatalogConfigError(
                 f"roots[{index}] reusable external root must be read_only (CFG-05)"
@@ -161,7 +163,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
         roots.append(
             RootSpec(
                 root_id=root_id,
-                path=_expand_path(raw_path, project_root=resolved_project),
+                path=expand_config_path(raw_path, project_root=resolved_project),
                 kind=str(item.get("kind", "")),
                 priority=int(item.get("priority", 100)),
                 adapter_id=str(adapter_id) if adapter_id is not None else None,
@@ -192,7 +194,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
         )
     return CatalogConfig(
         project_root=resolved_project,
-        catalog_dir=_expand_path(data["catalog_dir"], project_root=resolved_project),
+        catalog_dir=expand_config_path(data["catalog_dir"], project_root=resolved_project),
         roots=tuple(roots),
         reusable_root_kinds=tuple(raw_kinds),
     )
@@ -201,7 +203,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
 _CONTROLLED_PATH_TOKENS = {"PROJECT_ROOT", "USER_PROFILE"}
 
 
-def _unresolved_variables(raw_path) -> set[str]:
+def unresolved_path_variables(raw_path: Any) -> set[str]:
     """Variables inside ${...} that are not controlled tokens (CFG-04)."""
     if not isinstance(raw_path, str):
         return {"<non-string-path>"}
@@ -210,16 +212,16 @@ def _unresolved_variables(raw_path) -> set[str]:
 
 
 def _parse_route(raw, root_index: int, route_index: int) -> RouteSpec:
-    item = _mapping(raw, f"roots[{root_index}].routes[{route_index}]")
+    item = mapping_from_config(raw, f"roots[{root_index}].routes[{route_index}]")
     unknown = set(item) - {"include", "exclude", "adapter_id", "admission_profile_id"}
     if unknown:
         raise CatalogConfigError(
             f"roots[{root_index}].routes[{route_index}] unknown fields: {sorted(unknown)}"
         )
-    return _route_spec(item, route_index)
+    return route_spec_from_config(item, route_index)
 
 
-def _route_spec(item: dict[str, Any], route_index: int) -> RouteSpec:
+def route_spec_from_config(item: dict[str, Any], route_index: int) -> RouteSpec:
     """Shared route shape/port validation; overlap is resolved by list order."""
     patterns = {}
     for name in ("include", "exclude"):
@@ -241,4 +243,12 @@ def _route_spec(item: dict[str, Any], route_index: int) -> RouteSpec:
     )
 
 
-__all__ = ["CatalogConfigError", "load_catalog_config"]
+__all__ = [
+    "CatalogConfigError",
+    "expand_config_path",
+    "load_catalog_config",
+    "mapping_from_config",
+    "require_boolean_root_fields",
+    "route_spec_from_config",
+    "unresolved_path_variables",
+]

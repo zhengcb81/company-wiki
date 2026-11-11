@@ -32,9 +32,9 @@ from .official_json_subject import (
 )
 from .official_source_flow import (
     OfficialSourceError,
-    _attach_capture_http_observation,
-    _journal,
-    _persist_capture,
+    attach_capture_http_observation,
+    journal_capture,
+    persist_capture,
 )
 
 IMPORT_RESULT_V2_SCHEMA = "official-source-import-result/2"
@@ -76,13 +76,13 @@ def import_official_json_source(catalog, *, original: bytes, request: dict[str, 
         raise OfficialSourceError("source_sha_mismatch")
 
     def retained_failure(reason: str, error_type: str, receipt: dict) -> OfficialSourceError:
-        staged, descriptor, state = _persist_capture(
+        staged, descriptor, state = persist_capture(
             catalog, original, validated.to_dict())
         error = OfficialSourceError(reason)
         setattr(error, "capture_id", state["capture_id"])
         setattr(error, "capture_receipt", dict(receipt))
         try:
-            _journal(catalog, state, outcome="failed", reason=reason,
+            journal_capture(catalog, state, outcome="failed", reason=reason,
                      error_type=error_type, canonical_path=str(staged.resolve()))
         except Exception as journal_error:  # pragma: no cover - best effort
             error.add_note("capture journal failed: " + type(journal_error).__name__)
@@ -103,7 +103,7 @@ def import_official_json_source(catalog, *, original: bytes, request: dict[str, 
         raise retained_failure("response_is_error", "OfficialSourceError",
                                validated.capture_receipt)
 
-    staged, descriptor, state = _persist_capture(
+    staged, descriptor, state = persist_capture(
         catalog, original, validated.to_dict())
     try:
         result = _commit_shared(catalog, staged, state, validated,
@@ -112,16 +112,16 @@ def import_official_json_source(catalog, *, original: bytes, request: dict[str, 
     except Exception as primary:
         setattr(primary, "capture_id", state["capture_id"])
         setattr(primary, "capture_receipt", dict(validated.capture_receipt))
-        _attach_capture_http_observation(primary, validated.capture_receipt)
+        attach_capture_http_observation(primary, validated.capture_receipt)
         try:
-            _journal(catalog, state, outcome="failed", reason="official_json_import_failed",
+            journal_capture(catalog, state, outcome="failed", reason="official_json_import_failed",
                      error_type=type(primary).__name__,
                      canonical_path=str(staged.resolve()))
         except Exception as journal_error:  # pragma: no cover
             primary.add_note("capture journal failed: " + type(journal_error).__name__)
         raise
     writer = CanonicalSourceWriter(catalog)
-    writer._remove_staged(staged)
+    writer.discard_staged(staged)
     descriptor.unlink()
     return result
 
@@ -176,8 +176,8 @@ def _commit_shared(catalog, staged, state, validated, *, layout_id, layout_statu
         "capture_receipt": dict(validated.capture_receipt),
         "download_events": 0,
     }
-    from .official_source_flow import _persist_completed
-    _persist_completed(
+    from .official_source_flow import persist_completed_capture
+    persist_completed_capture(
         catalog, state, out, canonical_path=result.canonical_path,
         outcome="imported_original" if result.status.value == "imported_new" else "deduplicated_original",
     )
@@ -249,6 +249,6 @@ def import_official_json_staged(catalog, staged, descriptor, state) -> dict[str,
                             original=original)
     result["acquisition_usage"] = {"schema_version": "1.0", "response_bytes": 0,
                                    "cost_usd": "0"}
-    CanonicalSourceWriter(catalog)._remove_staged(staged)
+    CanonicalSourceWriter(catalog).discard_staged(staged)
     descriptor.unlink()
     return result

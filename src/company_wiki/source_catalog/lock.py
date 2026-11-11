@@ -25,7 +25,7 @@ class CatalogOperationLockedError(RuntimeError):
 
 
 @contextmanager
-def _acquisition_mutex(path: Path, *, timeout_seconds: float = 10.0) -> Iterator[None]:
+def acquisition_mutex(path: Path, *, timeout_seconds: float = 10.0) -> Iterator[None]:
     """Serialize lock-file create/takeover without introducing another PID lock."""
 
     try:
@@ -361,7 +361,7 @@ class CatalogOperationLock(AbstractContextManager["CatalogOperationLock"]):
 
     def _acquire_once(self, payload):
         timeout = 10.0 if self.budget is None else self.budget.remaining_seconds
-        with _acquisition_mutex(self.path, timeout_seconds=timeout):
+        with acquisition_mutex(self.path, timeout_seconds=timeout):
             for attempt in range(3):
                 try:
                     descriptor = os.open(
@@ -403,7 +403,7 @@ class CatalogOperationLock(AbstractContextManager["CatalogOperationLock"]):
     def __exit__(self, exc_type, exc_value, traceback) -> None:
         if not self._owned:
             return None
-        with _acquisition_mutex(self.path):
+        with acquisition_mutex(self.path):
             try:
                 existing = json.loads(self.path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):
@@ -417,5 +417,6 @@ class CatalogOperationLock(AbstractContextManager["CatalogOperationLock"]):
 __all__ = [
     "CatalogOperationLock",
     "CatalogOperationLockedError",
+    "acquisition_mutex",
     "operation_lock_status",
 ]

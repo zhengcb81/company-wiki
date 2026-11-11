@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from hashlib import sha256
 import json
 import math
+from pathlib import Path
 from typing import Any
 
 from .narrative_pdf_environment import ENVIRONMENT_ALGORITHM
@@ -374,3 +375,24 @@ def decode_output(raw: bytes, request: Mapping[str, Any], *, process_failed: boo
     if (terminal and tail) or (not process_failed and not terminal):
         raise ValueError("paragraph checkpoint stream is incomplete")
     return CompletedPages(tuple(items), tuple(completed), terminal and not process_failed, truncated, peak)
+
+
+def implementation_sha256() -> str:
+    """Return a stable digest of this owner's checkpoint protocol code."""
+    return sha256(Path(__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
+__all__ = [
+    "CHECKPOINT_PROTOCOL",
+    "MAX_CPU_THREADS",
+    "MAX_INPUT_BYTES",
+    "MAX_MEMORY_BYTES",
+    "MAX_OUTPUT_BYTES",
+    "MAX_PAGES",
+    "MAX_SECONDS",
+    "CompletedPages",
+    "decode_output",
+    "decode_single_json",
+    "implementation_sha256",
+    "request_sha256",
+]

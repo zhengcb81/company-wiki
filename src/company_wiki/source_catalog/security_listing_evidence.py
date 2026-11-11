@@ -266,7 +266,7 @@ def _validate_evidence(value: IssuerListingEvidence) -> None:
         raise ListingEvidenceError("listing evidence lacks an exact market-record identity")
 
 
-def _build_sec_20f_listing_evidence(
+def build_sec_20f_listing_evidence(
     content: VerifiedContent,
     *,
     metadata: Mapping[str, Any],
@@ -402,5 +402,6 @@ __all__ = [
     "IssuerListingEvidence",
     "LISTING_EVIDENCE_SCHEMA_VERSION",
     "ListingEvidenceError",
+    "build_sec_20f_listing_evidence",
     "encode_evidence",
 ]

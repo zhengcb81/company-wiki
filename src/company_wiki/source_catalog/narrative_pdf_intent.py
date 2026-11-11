@@ -15,6 +15,7 @@ from company_wiki.document_understanding.geometry_intent.reading import (
     PdfReadingContext, prepare_geometry_reading,
 )
 from company_wiki.resource_budget import WorkBudgetExceeded
+from company_wiki.implementation_identity import code_sha256
 from .narrative_pdf_candidates import observe_pdf_candidate
 
 PDF_INTENT_EXECUTION_VERSION = "pdf-reading-execution/1"
@@ -143,7 +144,7 @@ class SourceGeometrySession:
 def scan_planned_pages(state, document, *, reading_context, work_budget):
     """Reuse two cover pages, then emit in physical order without a second parse."""
     from .narrative_evidence import (
-        _emit_pdf_page, _emit_pdf_text_units, _pdf_text_blocks, _record_pdf_native_view,
+        emit_pdf_page, emit_pdf_text_units, pdf_text_blocks, record_pdf_native_view,
     )
 
     collector = state.layout_collector
@@ -168,7 +169,7 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
             probes: list[Any] = []
             for number, blocks in cover:
                 start = len(state.units)
-                _emit_pdf_text_units(state, number, blocks)
+                emit_pdf_text_units(state, number, blocks)
                 members = tuple(state.units[start:])
                 state.prepared_text_units[number] = members
                 probes.extend(members)
@@ -184,16 +185,16 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
             collector.capture_pending_page(number, requested=fine)
             if discover:
                 state.table_scan_pages.add(number)
-            _emit_pdf_page(state, document, number, blocks)
+            emit_pdf_page(state, document, number, blocks)
 
         for number, page in enumerate(document, start=1):
             budget.charge()
             try:
                 geometry: dict[str, Any] = {}
-                blocks = _pdf_text_blocks(page, geometry_out=geometry,
+                blocks = pdf_text_blocks(page, geometry_out=geometry,
                                           layout_collector=collector, page_number=number)
                 state.page_geometry[number] = geometry
-                _record_pdf_native_view(state, number, blocks)
+                record_pdf_native_view(state, number, blocks)
                 state.pages_read += 1
                 if not blocks:
                     state.empty_pages.add(number)
@@ -221,3 +222,16 @@ def scan_planned_pages(state, document, *, reading_context, work_budget):
     finally:
         collector.pending_pages.clear()
         collector.pages.clear()
+
+
+def pdf_intent_algorithm_sha256() -> str:
+    """Return this owner's stable page-intent execution fingerprint."""
+    return code_sha256(__file__)
+
+
+__all__ = [
+    "PDF_INTENT_EXECUTION_VERSION",
+    "SourceGeometrySession",
+    "pdf_intent_algorithm_sha256",
+    "scan_planned_pages",
+]

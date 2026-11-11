@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from dataclasses import asdict, dataclass, field
 from enum import Enum
 import hashlib
@@ -273,6 +274,36 @@ class CanonicalSourceWriter:
         self.staging_root = (
             staging_root or catalog.config.catalog_dir / "staging"
         ).resolve(strict=False)
+
+    def read_existing_original(
+        self, content_sha256: str, *, max_bytes: int,
+    ) -> bytes | None:
+        """Read a verified canonical original without exposing its storage path.
+
+        At most ``max_bytes + 1`` bytes are returned. The extra byte lets the
+        caller distinguish an over-limit original without unbounded reads.
+        """
+        if not isinstance(content_sha256, str) or not re.fullmatch(
+            r"[0-9a-f]{64}", content_sha256,
+        ):
+            raise ValueError("invalid original content SHA-256")
+        if type(max_bytes) is not int or max_bytes <= 0:
+            raise ValueError("max_bytes must be a positive integer")
+        for path in self._existing_original_candidates(content_sha256):
+            try:
+                with path.open("rb") as stream:
+                    data = stream.read(max_bytes + 1)
+            except FileNotFoundError:
+                continue
+            if len(data) > max_bytes:
+                return data
+            if hashlib.sha256(data).hexdigest() == content_sha256:
+                return data
+        return None
+
+    def discard_staged(self, staged: Path) -> None:
+        """Discard one writer-owned staging file through its storage owner."""
+        self._remove_staged(staged)
 
     def import_staged(
         self,
@@ -599,8 +630,8 @@ class CanonicalSourceWriter:
             # Official JSON/shared source intake has its own source-fact owner.
             return
         from .assertion_service import (
-            _evidence_payload, _prepare_source_fact_write, _validate_source_facts,
-            _write_source_fact_projection, get_verified_assertion,
+            evidence_payload, prepare_source_fact_write, validate_source_facts,
+            write_source_fact_projection, get_verified_assertion,
         )
         from .source_reader import SourceRef
 
@@ -648,7 +679,7 @@ class CanonicalSourceWriter:
             for key,value in facts.items()}
         prior = get_verified_assertion(store, ref.source_id, ref.content_sha256, reader="steady")
         if prior:
-            old = _evidence_payload(prior["evidence_json"],prior["assertion_id"])
+            old = evidence_payload(prior["evidence_json"],prior["assertion_id"])
             previous = old.get("source_fact_patch") or {}
             for key,value in previous.items():
                 if key in {"entity","market","security_id","document_kind","fiscal_year","fiscal_period","form_type"} and key in facts and value is not None and facts[key] is not None:
@@ -660,13 +691,13 @@ class CanonicalSourceWriter:
             evidence = {key:value for key,value in evidence.items() if key in facts}
         if not facts:
             return
-        _validate_source_facts(facts,evidence)
-        assertion, projection, _ = _prepare_source_fact_write(
+        validate_source_facts(facts,evidence)
+        assertion, projection, _ = prepare_source_fact_write(
             self.catalog,ref,{"display_name":request.entity},facts,evidence,
             assertion_store=store,capture_evidence={**claim,"sha256":claim_sha})
         if assertion is not None:
             with store.transaction() as connection:
-                _write_source_fact_projection(connection,ref,assertion,projection)
+                write_source_fact_projection(connection,ref,assertion,projection)
 
     def source_ref_for_import(
         self,
@@ -755,6 +786,12 @@ class CanonicalSourceWriter:
     def _existing_original(self, content_sha256: str) -> Path | None:
         # Reuse only the currently configured canonical root. DB root kinds
         # and absolute paths are historical observations and may outlive a move.
+        for path in self._existing_original_candidates(content_sha256):
+            if _hash_file(path) == content_sha256:
+                return path
+        return None
+
+    def _existing_original_candidates(self, content_sha256: str) -> Iterator[Path]:
         rows = self.catalog.store.fetchall(
             """SELECT l.relative_path FROM sources s
             JOIN locations l ON l.source_id=s.source_id
@@ -768,9 +805,8 @@ class CanonicalSourceWriter:
                 path = resolve_source_location(self.company_root, row["relative_path"])
             except SourceLocationError:
                 continue
-            if path.is_file() and _hash_file(path) == content_sha256:
-                return path
-        return None
+            if path.is_file():
+                yield path
 
     def _destination(
         self,

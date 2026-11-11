@@ -19,11 +19,13 @@ import re
 from typing import Any
 from urllib.parse import urlsplit
 
+from company_wiki.source_contract.source_version import SourceReadError, SourceRef
+
 from .store import CatalogStore, canonical_json
 from .document_kinds import SOURCE_FACT_KINDS
 
 
-def _evidence_payload(raw: Any, assertion_id: str) -> dict[str, Any]:
+def evidence_payload(raw: Any, assertion_id: str) -> dict[str, Any]:
     """F-B10R2-MISSINGFILE family, site 2 (owner instruction 2026-09-18).
 
     `upsert_verified_assertion` copies an existing assertion's evidence forward, and the
@@ -52,7 +54,6 @@ ASSERTION_REQUIRED_FIELDS = frozenset(
 
 def source_issuer_identity(catalog, request, cache_dir):
     from .security_identity import SecurityIdentityResolver, SecurityMasterStore, IdentityStatus
-    from .source_reader import SourceReadError
 
     master = SecurityMasterStore(
         cache_dir or catalog.config.catalog_dir / "security_master"
@@ -98,7 +99,7 @@ def source_issuer_identity(catalog, request, cache_dir):
 SOURCE_SCOPE_METHOD = "sec-primary-dei/1"
 
 
-def _sec_original(ref, market, document_kind):
+def sec_original(ref, market, document_kind):
     return (market == "US" and ref.mime_type in {"text/html", "application/xhtml+xml"}
             and document_kind in {"regulatory_filing", "annual_report"})
 
@@ -162,7 +163,6 @@ class SourceScopeQualification:
 
     def scope(self, data, *, budget=None, extractor=None):
         from .dayu_fiscal_metadata import extract_sec_scope, FiscalMetadataError
-        from .source_reader import SourceReadError
 
         if budget is not None and callable(getattr(budget, "check", None)):
             budget.check()
@@ -183,7 +183,6 @@ class SourceScopeQualification:
 
     def verify(self, data, *, budget=None):
         from .dayu_fiscal_metadata import complete_sec_primary, FiscalMetadataError
-        from .source_reader import SourceReadError
 
         primary = self.scope(data, budget=budget)
         if (any(value is not None and value != primary.get(key)
@@ -211,7 +210,6 @@ def _registered_sec_cik(metadata):
     compared with the registered-company binding and raw scope; it is neither
     that company binding nor evidence of original DEI extraction.
     """
-    from .source_reader import SourceReadError
 
     ciks = set()
     for field in ("cik", "company_id"):
@@ -239,7 +237,7 @@ def _registered_sec_cik(metadata):
     return next(iter(ciks), None)
 
 
-def _proved_sec_identity(ref, metadata, patch, proof):
+def proved_sec_identity(ref, metadata, patch, proof):
     """Original issuer binding does not depend on unrelated date completeness."""
     from types import SimpleNamespace
 
@@ -270,15 +268,15 @@ def _proved_sec_identity(ref, metadata, patch, proof):
     return identity
 
 
-def _proved_sec_issuer(ref, metadata, patch, proof):
+def proved_sec_issuer(ref, metadata, patch, proof):
     """Reuse only complete original DEI scope for positive filing access."""
-    identity=_proved_sec_identity(ref,metadata,patch,proof)
+    identity=proved_sec_identity(ref,metadata,patch,proof)
     if identity is None:
         return None
     return identity if _reusable_sec_scope(ref, identity, patch, proof) is not None else None
 
 
-def _observed_sec_scope_fields(ref, patch, proof):
+def observed_sec_scope_fields(ref, patch, proof):
     """Project only individually bound fields; unknowns cannot make a match."""
     from .document_kinds import sec_primary_document_kind
     fields={'fiscal_year':'DocumentFiscalYearFocus','fiscal_period':'DocumentFiscalPeriodFocus',
@@ -305,11 +303,10 @@ def source_scope_qualification(catalog, ref, *, metadata, request=None, identity
     Generic raw export/preview chooses its byte-only read purpose.
     """
     from types import SimpleNamespace
-    from .source_reader import SourceReadError
 
     market = getattr(request, "market", None) or metadata.get("market")
     kind = getattr(request, "document_kind", None) or metadata.get("document_kind")
-    if not _sec_original(ref, market, kind):
+    if not sec_original(ref, market, kind):
         return None
     form = getattr(request, "form_type", None) or metadata.get("form_type")
     if kind == "regulatory_filing" and form and form.removesuffix("/A") not in {"10-K", "10-Q", "20-F"}:
@@ -319,14 +316,14 @@ def source_scope_qualification(catalog, ref, *, metadata, request=None, identity
     expected["period_end"] = metadata.get("period_end")
     prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
     try:
-        previous = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
+        previous = evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
     except ValueError as exc:
         raise SourceReadError("blocked", "local_fact_validation_failed") from exc
     patch = previous.get("source_fact_patch") or {}
     proof = previous.get("source_fact_evidence") or {}
     registered_cik = _registered_sec_cik(metadata)
     if identity is None:
-        identity = _proved_sec_issuer(ref, metadata, patch, proof)
+        identity = proved_sec_issuer(ref, metadata, patch, proof)
     if identity is None:
         # URL CIK describes where the bytes came from; it does not prove that
         # the imported company labels belong to that CIK. Observe the existing
@@ -353,7 +350,7 @@ SOURCE_FACT_FIELDS = frozenset({
 })
 
 
-def _validate_source_facts(facts: dict[str, Any], evidence: dict[str, Any]) -> None:
+def validate_source_facts(facts: dict[str, Any], evidence: dict[str, Any]) -> None:
     if not isinstance(facts, dict) or not facts or not set(facts) <= SOURCE_FACT_FIELDS:
         raise ValueError("source facts must be a nonempty object of known fields")
     if not isinstance(evidence, dict) or set(evidence) != set(facts):
@@ -393,41 +390,41 @@ def record_source_facts(catalog: Any, *, ref: Any, facts: dict[str, Any],
     candidate, review receipt, rollout flag or second task store is introduced.
     """
     from .lock import CatalogOperationLock
-    from .source_reader import SourceRef, SourceVersionReader
+    from .source_reader import SourceVersionReader
 
     if not isinstance(ref, SourceRef):
         raise TypeError("ref must be SourceRef")
-    _validate_source_facts(facts, evidence)
+    validate_source_facts(facts, evidence)
     with CatalogOperationLock(catalog.config.catalog_dir, operation="source_facts"):
         reader = SourceVersionReader(catalog)
         reader.verify_version(ref, purpose="source_export")
         current = reader.describe_version(ref)
-        assertion, projection, assertion_id = _prepare_source_fact_write(catalog, ref, current, facts, evidence)
+        assertion, projection, assertion_id = prepare_source_fact_write(catalog, ref, current, facts, evidence)
         if assertion is not None:
             with catalog.store.transaction() as connection:
-                _write_source_fact_projection(connection, ref, assertion, projection)
+                write_source_fact_projection(connection, ref, assertion, projection)
         return {"status": "recorded" if assertion is not None else "unchanged",
                 "assertion_id": assertion_id, "document_id": ref.document_id, "source_id": ref.source_id}
 
 
-def _prepare_source_fact_write(catalog, ref, current, facts, evidence, *, assertion_store=None, capture_evidence=None):
+def prepare_source_fact_write(catalog, ref, current, facts, evidence, *, assertion_store=None, capture_evidence=None):
     """One semantic correction builder shared by active updates and atomic restoration."""
     prior = get_verified_assertion(assertion_store or catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
-    previous_evidence = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
+    previous_evidence = evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
     patch = dict(previous_evidence.get("source_fact_patch") or {})
     field_evidence = dict(previous_evidence.get("source_fact_evidence") or {})
     patch.update(facts)
     field_evidence.update(evidence)
-    _validate_source_facts(patch, field_evidence)
-    evidence_payload = {**previous_evidence, "source_fact_patch": patch, "source_fact_evidence": field_evidence}
+    validate_source_facts(patch, field_evidence)
+    assembled_evidence = {**previous_evidence, "source_fact_patch": patch, "source_fact_evidence": field_evidence}
     if capture_evidence is not None:
-        evidence_payload["canonical_commit"] = capture_evidence
+        assembled_evidence["canonical_commit"] = capture_evidence
     def semantic_evidence(value: dict[str, Any]) -> dict[str, Any]:
         fields = value.get("source_fact_evidence") or {}
         return {"source_fact_patch": value.get("source_fact_patch"),
                 "source_fact_evidence": {key: {k: v for k, v in proof.items() if k != "observed_at"}
                                          for key, proof in fields.items()}}
-    if prior and prior["evidence_basis"] == "source-facts" and semantic_evidence(previous_evidence) == semantic_evidence(evidence_payload):
+    if prior and prior["evidence_basis"] == "source-facts" and semantic_evidence(previous_evidence) == semantic_evidence(assembled_evidence):
         return None, {}, prior["assertion_id"]
     values = {key: current.get(key) for key in SOURCE_FACT_FIELDS}
     values["entity"] = current.get("display_name")
@@ -439,7 +436,7 @@ def _prepare_source_fact_write(catalog, ref, current, facts, evidence, *, assert
     assertion = _build_assertion(
         source_id=ref.source_id, document_id=ref.document_id, content_sha256=ref.content_sha256,
         **{key: value for key, value in values.items() if key not in {"published_date", "language", "title"}},
-        evidence_basis="source-facts", evidence_json=evidence_payload, decision="verified",
+        evidence_basis="source-facts", evidence_json=assembled_evidence, decision="verified",
         supersedes_assertion_id=prior["assertion_id"] if prior else None,
         created_by="automated-source-facts",
     )
@@ -454,7 +451,7 @@ def _prepare_source_fact_write(catalog, ref, current, facts, evidence, *, assert
     return assertion, projection, assertion["assertion_id"]
 
 
-def _write_source_fact_projection(connection, ref, assertion, projection):
+def write_source_fact_projection(connection, ref, assertion, projection):
     columns = tuple(assertion)
     connection.execute(
         f"INSERT INTO source_metadata_assertions ({','.join(columns)}) VALUES ({','.join('?' for _ in columns)})",
@@ -479,15 +476,14 @@ def restore_document_facts(catalog, *, ref, facts=None, evidence=None, retiremen
     from .local_inventory import (LocalPrepareLimits, LocalReadBudget,
                                   metadata_retirement, observe_document, verify_registered_original)
     from .lock import CatalogOperationLock
-    from .source_reader import SourceReadError, SourceRef
-    from .resolver import _source_metadata
+    from .resolver import SourceResolver
     from .metadata_observation import observe_metadata
 
     if not isinstance(ref, SourceRef):
         raise TypeError("ref must be SourceRef")
     computed = facts is None and evidence is None and fact_replay is not None
     if not computed:
-        _validate_source_facts(facts, evidence)
+        validate_source_facts(facts, evidence)
     budget = budget or LocalReadBudget(LocalPrepareLimits())
     with CatalogOperationLock(catalog.config.catalog_dir, operation="local_source_reconcile"):
         budget.check()
@@ -506,37 +502,38 @@ def restore_document_facts(catalog, *, ref, facts=None, evidence=None, retiremen
                     return {"status": "not_relevant", "source_ref": ref}
             elif (replayed_facts,replayed_evidence) != (facts,evidence):
                 raise SourceReadError("unavailable", "local_fact_observation_changed")
-        _validate_source_facts(facts, evidence)
+        validate_source_facts(facts, evidence)
         required = {"entity", "market", "security_id", "document_kind"}
         if any(not facts.get(key) for key in required):
             raise SourceReadError("blocked", "local_metadata_incomplete")
         if facts.get("published_date") is None:
-            from .source_availability import _open_evidence, _capture_evidence
+            from .source_availability import open_source_evidence, capture_source_evidence
             date_proof = evidence.get("published_date", {})
             captured = date_proof.get("availability_capture")
-            if (_open_evidence(date_proof.get("verified_open"), ref) is None
+            if (open_source_evidence(date_proof.get("verified_open"), ref) is None
                     and (not isinstance(captured, dict)
-                         or _capture_evidence(canonical_json(captured).encode(), ref) is None)):
+                         or capture_source_evidence(canonical_json(captured).encode(), ref) is None)):
                 raise SourceReadError("blocked", "publication_date_unknown")
         row = observed["version"]
         metadata = observe_metadata(row["metadata_json"]).metadata
-        current = _source_metadata({"source_id":ref.source_id, "metadata":metadata},
-                                   store=catalog.reader, reader="steady")
+        current = SourceResolver(catalog).project_source_metadata(
+            {"source_id": ref.source_id, "metadata": metadata}
+        )
         current.update(document_kind=row["document_kind"],
                        published_date=current.get("published_date",row["published_date"]),
                        display_name=current.get("display_name") or current.get("company_name"))
-        assertion, projection, assertion_id = _prepare_source_fact_write(catalog,ref,current,facts,evidence)
+        assertion, projection, assertion_id = prepare_source_fact_write(catalog,ref,current,facts,evidence)
         audit_id = f"restore-{uuid.uuid4().hex}" if status == "retired" else None
         with catalog.store.transaction() as connection:
             if observe_document(catalog, ref.document_id, budget=budget) != observed:
                 raise SourceReadError("unavailable", "local_observation_changed")
             budget.check()
             if assertion is not None:
-                _write_source_fact_projection(connection,ref,assertion,projection)
+                write_source_fact_projection(connection,ref,assertion,projection)
             if status == "retired":
                 connection.execute("UPDATE documents SET source_status='active' WHERE document_id=?",(ref.document_id,))
-                for location_id, _path, _root in original.locations:
-                    connection.execute("UPDATE locations SET location_status='active' WHERE location_id=? AND source_id=? AND location_status='retired'",(location_id,ref.source_id))
+                for location in original.locations:
+                    connection.execute("UPDATE locations SET location_status='active' WHERE location_id=? AND source_id=? AND location_status='retired'",(location.location_id,ref.source_id))
                 connection.execute("INSERT INTO document_restore_audit(audit_id,document_id,reason,created_by,created_at) VALUES(?,?,?,?,?)",
                     (audit_id,ref.document_id,"verified local original and corrected source facts; prior retirement audits retained",
                      "automated-local-reconcile",datetime.now(tz=timezone.utc).isoformat()))
@@ -560,12 +557,12 @@ def source_fact_projection(connection: Any, *, document_id: str,
     ).fetchone()
     if row is None or row["evidence_basis"] != "source-facts":
         return {}
-    evidence = _evidence_payload(row["evidence_json"], document_id)
+    evidence = evidence_payload(row["evidence_json"], document_id)
     patch = evidence.get("source_fact_patch")
     fact_evidence = evidence.get("source_fact_evidence")
     if not isinstance(patch, dict) or not isinstance(fact_evidence, dict):
         return {}
-    _validate_source_facts(patch, fact_evidence)
+    validate_source_facts(patch, fact_evidence)
     projection: dict[str, Any] = {}
     if "document_kind" in patch:
         projection.update(document_kind=patch["document_kind"], source_type=SOURCE_FACT_KINDS[patch["document_kind"]])
@@ -909,7 +906,7 @@ def verify_assertion(
         source_url=existing["source_url"],
         filing_date=existing["filing_date"],
         evidence_basis=existing["evidence_basis"],
-        evidence_json=_evidence_payload(existing["evidence_json"], assertion_id),
+        evidence_json=evidence_payload(existing["evidence_json"], assertion_id),
         decision="verified",
         supersedes_assertion_id=supersedes,
         created_by=confirmed_by,

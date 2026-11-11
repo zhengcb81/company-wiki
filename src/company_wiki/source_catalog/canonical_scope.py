@@ -11,7 +11,7 @@ from company_wiki.source_contract.source_version import SourceReadError
 
 from .acquisition_journal import AcquisitionAttempt, AcquisitionJournal, verified_download_attempt
 from .assertion_service import (
-    _evidence_payload, _sec_original, _validate_source_facts, get_verified_assertion,
+    evidence_payload, sec_original, validate_source_facts, get_verified_assertion,
 )
 from .resolver import SourceRequest
 from .store import canonical_json
@@ -161,17 +161,17 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
     market = capture.get("market") if isinstance(capture, dict) else None
     prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
     if prior and prior["document_id"] == ref.document_id and prior["evidence_basis"] == "source-facts":
-        payload = _evidence_payload(prior["evidence_json"], prior["assertion_id"])
+        payload = evidence_payload(prior["evidence_json"], prior["assertion_id"])
         facts, evidence = payload.get("source_fact_patch"), payload.get("source_fact_evidence")
         if not isinstance(facts, dict) or not isinstance(evidence, dict):
             raise ValueError("source facts must be a nonempty object of known fields")
-        _validate_source_facts(facts, evidence)
-        if _sec_original(ref, facts.get("market") or market, facts.get("document_kind")):
-            from .assertion_service import _proved_sec_issuer, _proved_sec_identity, _observed_sec_scope_fields
-            if _proved_sec_issuer(ref, facts, facts, evidence) is None:
-                if _proved_sec_identity(ref,facts,facts,evidence) is None:
+        validate_source_facts(facts, evidence)
+        if sec_original(ref, facts.get("market") or market, facts.get("document_kind")):
+            from .assertion_service import proved_sec_issuer, proved_sec_identity, observed_sec_scope_fields
+            if proved_sec_issuer(ref, facts, facts, evidence) is None:
+                if proved_sec_identity(ref,facts,facts,evidence) is None:
                     return SourceScope({}, {}, "primary-original-required")
-                return SourceScope(_observed_sec_scope_fields(ref,facts,evidence),evidence,'source-facts-partial')
+                return SourceScope(observed_sec_scope_fields(ref,facts,evidence),evidence,'source-facts-partial')
             from .document_kinds import sec_primary_document_kind
             facts={**facts,'document_kind':sec_primary_document_kind(facts['form_type'])}
         commit = payload.get("canonical_commit")
@@ -191,7 +191,7 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
             if not valid:
                 raise SourceReadError("blocked","canonical_capture_binding_conflict")
         return SourceScope(facts, evidence, "source-facts")
-    if _sec_original(ref, market, document.get("document_kind")):
+    if sec_original(ref, market, document.get("document_kind")):
         return SourceScope({}, {}, "primary-original-required")
     if historical is not None:
         known = historical.scope(ref, document)

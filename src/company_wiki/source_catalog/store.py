@@ -17,6 +17,7 @@ from .financial_statements.schema import FINANCIAL_STATEMENTS_DDL
 from .lock import operation_lock_status
 from .llm_failure_policy import effective_llm_summary_failure_scope
 from .models import CATALOG_SCHEMA_VERSION, FingerprintStatus, NORMALIZER_VERSION
+from .sqlite_support import configure_tolerant_sqlite_text_decoding
 
 
 _NORMALIZER_NAME = "source_catalog_normalizer"
@@ -958,20 +959,6 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
         return _empty_pipeline_status(error=f"{type(exc).__name__}: {str(exc)[:500]}")
 
 
-def _tolerate_undecodable_text(connection: sqlite3.Connection) -> None:
-    """Decode TEXT with replacement characters instead of raising from the driver.
-
-    B-VR05M-03 (P1): with bytes that are not valid UTF-8 in a TEXT column, the sqlite3
-    driver raises `sqlite3.OperationalError: Could not decode to UTF-8 column ...` from
-    INSIDE the fetch - before any caller's own guard can run, so catching
-    UnicodeDecodeError in the callers was not enough (measured).  A catalog that must
-    never crash on data decodes visibly: the replacement character ends up in the value,
-    and the JSON guard upstream reports the document as unreadable metadata instead of
-    the process dying.
-    """
-    connection.text_factory = lambda raw: raw.decode("utf-8", "replace")
-
-
 def metadata_state(raw: Any) -> tuple[dict[str, Any], str | None]:
     """The reporting half of the single chain: the column as ``(object, state)``.
 
@@ -1118,7 +1105,7 @@ class CatalogStore:
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path, timeout=30.0)
-        _tolerate_undecodable_text(connection)
+        configure_tolerant_sqlite_text_decoding(connection)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA foreign_keys=ON")
         connection.execute("PRAGMA busy_timeout=30000")
@@ -1585,8 +1572,10 @@ class CatalogStore:
         between them cannot leave the two tables inconsistent. The UPSERT also
         covers documents that have no state row yet (newly scanned).
         """
-        if status not in FingerprintStatus._value2member_map_:
-            raise ValueError(f"invalid fingerprint status: {status!r}")
+        try:
+            FingerprintStatus(status)
+        except ValueError as exc:
+            raise ValueError(f"invalid fingerprint status: {status!r}") from exc
         stamp = updated_at or _utc_iso()
         with self.transaction() as connection:
             connection.execute(

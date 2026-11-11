@@ -54,6 +54,7 @@ def test_daily_and_ci_inventories_have_distinct_responsibilities():
     for path in (
         "tests/contract/test_layer_public_boundaries.py",
         "tests/contract/test_source_catalog_independent.py",
+        "tests/contract/test_source_catalog_module_contracts.py",
         "tests/contract/test_announcement_collector.py",
         "tests/contract/test_narrative_pdf_replay_once.py::test_native_pdf_entry_hashes_the_original_once",
         "tests/contract/test_narrative_pdf_replay_once.py::test_native_html_entry_hashes_the_original_once",

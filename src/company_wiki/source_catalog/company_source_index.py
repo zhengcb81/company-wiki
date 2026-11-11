@@ -29,24 +29,24 @@ from __future__ import annotations
 import base64
 import binascii
 import json
-import os
 import re
-import sqlite3
 from dataclasses import dataclass
 from datetime import date
 from typing import Any
 
 from company_wiki.source_contract.source_version import SourceRef
 
+from .catalog_query_contract import (
+    CatalogDocumentCandidate,
+    CatalogDocumentCandidateQuery,
+    CatalogQueryUnavailable,
+)
 from .document_kinds import SOURCE_FACT_KINDS
-from .identity_candidates import identity_candidate_clause
-from .metadata_observation import metadata_state, observe_metadata
-from .reader import CatalogReaderUnavailable
-from .resolver import SourceResolver, _source_metadata
+from .metadata_observation import observe_metadata
+from .resolver import SourceResolver
 from .security_code import canonical_security_code
 from .service import SourceCatalog
-from .source_location import relative_segments as _relative_segments
-from .source_read_policy import source_read_policy_sha256
+from .models import SourceCopyAvailabilityRequest
 
 
 REQUEST_SCHEMA_VERSION = "company-wiki-company-source-index-request/1"
@@ -306,58 +306,50 @@ class CompanySourceIndex:
                 "count": len(window),
             },
             "sources": [self._entry_payload(entry) for entry in window],
-            "source_read_policy_sha256": source_read_policy_sha256(
-                self.catalog.config, None
-            ),
+            "source_read_policy_sha256": self.catalog.source_read_policy_digest(),
         }
 
     def _company_known(self, identity: CompanyIdentity, tokens: tuple[str, ...]) -> bool:
-        """Is this issuer indexed at all, regardless of the caller's filters?
-
-        A dirty projection row is a candidate, not proof of identity. A
-        complete search or a qualified match is required to answer.
-        """
+        """Check issuer presence through Catalog's bounded query port."""
         after: str | None = None
         remaining = MAX_CANDIDATES
         try:
-            identity_clause, identity_params = identity_candidate_clause(
-                self.catalog.reader, tokens
-            )
             while True:
                 limit = min(500, remaining + 1)
-                cursor_clause = "AND d.document_id > ?" if after is not None else ""
-                cursor_params = (after,) if after is not None else ()
-                rows = self.catalog.reader.fetchall(
-                    f"""SELECT d.document_id, d.primary_source_id AS document_source_id,
-                               d.title, d.document_kind, d.published_date,
-                               d.source_status, d.metadata_json,
-                               s.content_sha256, s.byte_size, s.mime_type
-                        FROM documents d
-                        LEFT JOIN sources s ON s.source_id = d.primary_source_id
-                        WHERE d.source_status IN ('active', 'retired')
-                          {identity_clause}
-                          {cursor_clause}
-                        ORDER BY d.document_id
-                        LIMIT ?""",
-                    (*identity_params, *cursor_params, limit),
+                rows = tuple(
+                    self._candidate_payload(candidate)
+                    for candidate in self.catalog.document_candidates(
+                        CatalogDocumentCandidateQuery(
+                            identity_tokens=tokens,
+                            limit=limit,
+                            after_document_id=after,
+                            order="document_id",
+                        )
+                    )
                 )
                 page = rows[:remaining]
-                entities = self._entities_for([row["document_id"] for row in page])
                 for row in page:
-                    payload = self._row_dict(row, entities)
-                    if self._resolver._entity_matches(
-                        identity.entity, payload, metadata=self._visible_metadata(payload),
+                    if self._resolver.entity_matches(
+                        identity.entity,
+                        row,
+                        metadata=self._visible_metadata(row),
                         identity_tokens=tokens,
                     ):
                         return True
                 if len(rows) > remaining:
-                    raise CompanySourceIndexError("unavailable", "candidate_budget_exceeded")
+                    raise CompanySourceIndexError(
+                        "unavailable", "candidate_budget_exceeded"
+                    )
                 if len(rows) < limit:
                     return False
                 remaining -= len(rows)
                 after = rows[-1]["document_id"]
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise CompanySourceIndexError("unavailable", "catalog_unavailable") from None
+        except CatalogQueryUnavailable:
+            raise CompanySourceIndexError(
+                "unavailable", "catalog_unavailable"
+            ) from None
+
+    # -- candidate scan -----------------------------------------------------
 
     # -- candidate scan -----------------------------------------------------
 
@@ -369,7 +361,7 @@ class CompanySourceIndex:
         security_ids: set[str] = set()
         for row in rows:
             metadata = self._visible_metadata(row)
-            if not self._resolver._entity_matches(
+            if not self._resolver.entity_matches(
                 request.company.entity, row, metadata=metadata,
                 identity_tokens=tokens,
             ):
@@ -397,83 +389,52 @@ class CompanySourceIndex:
     def _candidate_rows(
         self, request: CompanySourceIndexRequest, tokens: tuple[str, ...],
     ) -> list[dict[str, Any]]:
-        kind_clause, kind_params = _kind_clause(request.document_kinds)
         try:
-            identity_clause, identity_params = identity_candidate_clause(
-                self.catalog.reader, tokens
+            candidates = self.catalog.document_candidates(
+                CatalogDocumentCandidateQuery(
+                    identity_tokens=tokens,
+                    limit=MAX_CANDIDATES + 1,
+                    as_of_date=request.as_of_date,
+                    document_kinds=request.document_kinds,
+                    order="published_date",
+                )
             )
-            rows = self.catalog.reader.fetchall(
-                f"""SELECT d.document_id, d.primary_source_id AS document_source_id,
-                           d.title, d.document_kind, d.published_date,
-                           d.source_status, d.metadata_json,
-                           s.content_sha256, s.byte_size, s.mime_type
-                    FROM documents d
-                    LEFT JOIN sources s ON s.source_id = d.primary_source_id
-                    WHERE d.source_status IN ('active', 'retired')
-                      AND (d.published_date IS NULL OR d.published_date <= ?)
-                      {kind_clause}
-                      {identity_clause}
-                    ORDER BY COALESCE(d.published_date, '') DESC, d.document_id ASC
-                    LIMIT ?""",
-                (request.as_of_date, *kind_params, *identity_params, MAX_CANDIDATES + 1),
-            )
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise CompanySourceIndexError("unavailable", "catalog_unavailable") from None
-        if len(rows) > MAX_CANDIDATES:
+        except CatalogQueryUnavailable:
+            raise CompanySourceIndexError(
+                "unavailable", "catalog_unavailable"
+            ) from None
+        if len(candidates) > MAX_CANDIDATES:
             raise CompanySourceIndexError("unavailable", "candidate_budget_exceeded")
-        entities = self._entities_for([row["document_id"] for row in rows])
-        return [self._row_dict(row, entities) for row in rows]
+        return [self._candidate_payload(candidate) for candidate in candidates]
 
-    def _row_dict(
-        self, row: sqlite3.Row, entities: dict[str, list[dict[str, Any]]] | None = None,
-    ) -> dict[str, Any]:
-        payload = dict(row)
-        observed, problem = metadata_state(payload.pop("metadata_json", None))
-        payload["metadata"] = observed if problem is None else {}
-        payload["source_id"] = payload.pop("document_source_id", None)
-        document_id = payload["document_id"]
-        if entities is None:
-            entities = self._entities_for([document_id])
-        payload["entities"] = entities.get(document_id, [])
-        return payload
-
-    def _entities_for(
-        self, document_ids: list[str],
-    ) -> dict[str, list[dict[str, Any]]]:
-        """One batched lookup, so a wide candidate set is not N+1 queries."""
-        found: dict[str, list[dict[str, Any]]] = {}
-        if not document_ids:
-            return found
-        chunk = 500
-        try:
-            for start in range(0, len(document_ids), chunk):
-                batch = document_ids[start:start + chunk]
-                marks = ", ".join("?" for _ in batch)
-                for item in self.catalog.reader.fetchall(
-                    f"""SELECT de.document_id, e.entity_id, e.name, e.entity_kind
-                        FROM document_entities de
-                        JOIN entities e ON e.entity_id = de.entity_id
-                        WHERE de.document_id IN ({marks})
-                        ORDER BY de.document_id, e.entity_id""",
-                    tuple(batch),
-                ):
-                    row = dict(item)
-                    found.setdefault(row.pop("document_id"), []).append(row)
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise CompanySourceIndexError("unavailable", "catalog_unavailable") from None
-        return found
+    @staticmethod
+    def _candidate_payload(candidate: CatalogDocumentCandidate) -> dict[str, Any]:
+        """Adapt Catalog's detached record into the resolver's identity view."""
+        return {
+            "document_id": candidate.document_id,
+            "source_id": candidate.source_id,
+            "title": candidate.title,
+            "document_kind": candidate.document_kind,
+            "published_date": candidate.published_date,
+            "source_status": candidate.source_status,
+            "content_sha256": candidate.content_sha256,
+            "byte_size": candidate.byte_size,
+            "mime_type": candidate.mime_type,
+            "metadata": candidate.metadata_as_dict(),
+            "entities": [
+                {
+                    "entity_id": entity.entity_id,
+                    "name": entity.name,
+                    "entity_kind": entity.entity_kind,
+                }
+                for entity in candidate.entities
+            ],
+        }
 
     def _visible_metadata(self, row: dict[str, Any]) -> dict[str, Any]:
         document = observe_metadata(row.get("metadata")).project_document(dict(row))
         row["published_date"] = document.get("published_date")
-        return _source_metadata(
-            document,
-            store=self.catalog.reader,
-            reader=self._resolver.reader,
-            current_epoch=self._resolver.current_epoch,
-            active_cohorts=self._resolver.active_cohorts,
-            legacy_bridge_allowed=self._resolver.legacy_bridge_allowed,
-        )
+        return self._resolver.project_source_metadata(document)
 
     @staticmethod
     def _merge(
@@ -568,59 +529,20 @@ class CompanySourceIndex:
         }
 
     def _copy_state(self, entry: _Entry) -> tuple[str, int]:
-        """Report the owner's copy count and whether any copy is readable now.
-
-        Copies are the indexed original locations of this source version; the
-        catalog keys versions by content hash, so identical bytes in several
-        roots are one version with several copies.  Readability is one bounded
-        existence check per copy — the read itself re-verifies the bytes.
-        """
-        copies = 0
-        readable = False
-        for location in self._annotated_locations(entry.document_id, entry.source_id):
-            root = location["root"]
-            if location["candidate_rank"] <= 0:
-                continue
-            if root.allowed_document_kinds and entry.document_kind not in (
-                root.allowed_document_kinds
-            ):
-                continue
-            if root.allowed_statuses and "active" not in root.allowed_statuses:
-                continue
-            if root.max_file_size is not None and entry.byte_size > root.max_file_size:
-                continue
-            observed, problem = metadata_state(location["manifest_json"])
-            if problem is not None:
-                continue
-            if observed.get("content_sha256") not in (None, "", entry.content_sha256):
-                continue
-            copies += 1
-            if os.path.isfile(root.path / str(location["relative_path"])):
-                readable = True
+        """Ask Catalog's storage port for a pathless copy observation."""
+        availability = self.catalog.source_copy_availability(
+            SourceCopyAvailabilityRequest(
+                document_id=entry.document_id,
+                source_id=entry.source_id,
+                document_kind=entry.document_kind,
+                byte_size=entry.byte_size,
+                content_sha256=entry.content_sha256,
+            )
+        )
         if not entry.active:
-            return "retired", copies
-        return ("available" if readable else "unreadable"), copies
-
-    def _annotated_locations(
-        self, document_id: str, source_id: str,
-    ) -> list[dict[str, Any]]:
-        try:
-            indexed = self.catalog.reader.exact_source_locations(document_id, source_id)
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            return []
-        roots = {root.root_id: root for root in self.catalog.config.roots}
-        annotated: list[dict[str, Any]] = []
-        for item in indexed:
-            location = dict(item)
-            root = roots.get(location["root_id"])
-            if root is None:
-                continue
-            if _relative_segments(str(location["relative_path"])) is None:
-                continue
-            location["root_priority"] = root.priority
-            location["root"] = root
-            annotated.append(location)
-        return self.catalog._annotate_locations(document_id, annotated)
+            return "retired", availability.copy_count
+        status = "available" if availability.readable else "unreadable"
+        return status, availability.copy_count
 
 
 def _after(key: tuple[str, str], cursor: tuple[str, str]) -> bool:
@@ -630,13 +552,6 @@ def _after(key: tuple[str, str], cursor: tuple[str, str]) -> bool:
     if published != cursor_published:
         return published < cursor_published
     return document_id > cursor_document
-
-
-def _kind_clause(kinds: tuple[str, ...]) -> tuple[str, tuple[str, ...]]:
-    if not kinds:
-        return "", ()
-    marks = ", ".join("?" for _ in kinds)
-    return f"AND d.document_kind IN ({marks})", kinds
 
 
 _SECURITY_CODE_RE = re.compile(

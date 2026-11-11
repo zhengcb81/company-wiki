@@ -22,7 +22,7 @@ from .narrative_candidates import CandidateRules, EvidenceCandidate, assess_unit
 from .narrative_document import NarrativeUnit
 from .narrative_visual_units import is_ocr_unit, ocr_continues, ocr_identity, join_unit_text
 from .narrative_group_candidates import AtomicSentenceOwner
-from .narrative_pdf_groups import _bbox, _has_visual_overlap
+from .narrative_pdf_groups import bounding_box, has_visual_overlap
 from .n6_candidate_operating_facts import OperatingFact
 
 _EXCLUDED_ROLES = frozenset({"analyst", "investor_question", "operator", "editorial", "qa_text_shadow"})
@@ -399,7 +399,7 @@ def _physical_link(left: NarrativeUnit, right: NarrativeUnit, rules: CandidateRu
     same_block = left.metadata.get("pdf_block") is not None and (
         left.metadata.get("pdf_block") == right.metadata.get("pdf_block")
         and left.metadata.get("block_sha256") == right.metadata.get("block_sha256"))
-    return same_block or _has_visual_overlap(left, right)
+    return same_block or has_visual_overlap(left, right)
 
 
 def _sentence_continues(left: NarrativeUnit, right: NarrativeUnit, rules: CandidateRules) -> bool:
@@ -423,12 +423,12 @@ def _sentence_continues(left: NarrativeUnit, right: NarrativeUnit, rules: Candid
 
 
 def _visual_title(body: NarrativeUnit, units: Sequence[NarrativeUnit], rules: CandidateRules) -> NarrativeUnit | None:
-    b = _bbox(body)
+    b = bounding_box(body)
     if body.unit_kind != "pdf_text_block" or b is None or not body.raw_text.startswith(("•", "▪")):
         return None
     choices: list[tuple[float, NarrativeUnit]] = []
     for title in units:
-        t = _bbox(title)
+        t = bounding_box(title)
         if title.unit_id == body.unit_id or t is None or title.unit_kind != "pdf_text_block":
             continue
         if not _same_boundary(title, body, respect_native_structure=True):
@@ -562,4 +562,11 @@ def _enrich_operating_context(units: Sequence[NarrativeUnit], *,
         MappingProxyType(groups),frozenset(excluded),tuple(diagnostics),frozenset(restored))
 
 
-__all__ = ["BusinessGroupDiagnostic", "BusinessEnrichmentResult", "enrich_business_groups"]
+evaluate_operating_fact = _operating_fact
+extract_commercialization_milestone = _commercialization_milestone
+
+__all__ = [
+    "BusinessGroupDiagnostic", "BusinessEnrichmentResult",
+    "enrich_business_groups", "evaluate_operating_fact",
+    "extract_commercialization_milestone",
+]

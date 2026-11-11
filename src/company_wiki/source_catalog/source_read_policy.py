@@ -24,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from .models import CatalogConfig, RootSpec
-from .policy import _effective_reusable
+from .policy import root_is_reusable_for_filing
 from .runtime_policy import resolver_visibility_projection
 
 
@@ -52,7 +52,7 @@ def _root_read_policy(root: RootSpec, config: CatalogConfig) -> dict[str, Any]:
         "path": _path_identity(root.path),
         "kind": root.kind,
         "priority": root.priority,
-        "reusable_for_filing": _effective_reusable(root, config),
+        "reusable_for_filing": root_is_reusable_for_filing(root, config),
         "allowed_document_kinds": sorted(set(root.allowed_document_kinds)),
         "allowed_statuses": sorted(set(root.allowed_statuses)),
         "max_file_size": root.max_file_size,

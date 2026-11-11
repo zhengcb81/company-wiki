@@ -18,25 +18,30 @@ def _dayu_catalog(tmp_path: Path, reusable_kinds: tuple[str, ...]):
     portfolio = tmp_path / "dayu" / "portfolio"
     filing = portfolio / "ACME" / "filings" / "fil_2025"
     filing.mkdir(parents=True)
-    primary = filing / "annual.htm"
-    primary.write_text("<html><body>ACME FY2025 annual report.</body></html>", encoding="utf-8")
+    # This contract isolates root-kind reuse. SEC HTML filings have a separate
+    # original-DEI identity/scope contract, so keep this fixture plain text and
+    # state its document kind explicitly instead of pretending it is valid SEC
+    # primary HTML.
+    primary = filing / "annual.txt"
+    primary.write_text("ACME FY2025 annual report.", encoding="utf-8")
     meta = {
         "ticker": "ACME",
         "market": "US",
         "security_id": "ACME",
         "document_id": "fil_2025",
-        "accession_number": "0001234567-26-000001",
-        "provider": "sec",
+        "provider_document_id": "fixture-acme-fy2025",
+        "provider": "fixture",
         "source_title": "ACME 2025 Annual Report",
-        "form_type": "10-K",
+        "form_type": "ANNUAL",
+        "document_kind": "annual_report",
         "filing_date": "2026-02-20",
         "fiscal_year": 2025,
         "fiscal_period": "FY",
-        "primary_document": "annual.htm",
-        "selected_primary_document": "annual.htm",
+        "primary_document": "annual.txt",
+        "selected_primary_document": "annual.txt",
         "ingest_complete": True,
-        "source_url": "https://www.sec.gov/Archives/edgar/data/1234567/annual.htm",
-        "files": [{"name": "annual.htm", "source": "original"}],
+        "source_url": "https://example.test/fixtures/annual.txt",
+        "files": [{"name": "annual.txt", "source": "original"}],
     }
     (filing / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
     catalog = SourceCatalog(
@@ -59,10 +64,10 @@ def _request():
         market="US",
         security_id="ACME",
         document_kind="annual_report",
-        form_type="10-K",
+        form_type="ANNUAL",
         fiscal_year=2025,
-        provider="sec",
-        provider_document_id="0001234567-26-000001",
+        provider="fixture",
+        provider_document_id="fixture-acme-fy2025",
         as_of_date="2026-07-18",
     )
 
@@ -83,7 +88,7 @@ def test_dayu_portfolio_reused_when_kind_is_config_driven(tmp_path):
     handle = result.matches[0]
     assert handle.capture_ready is True
     assert Path(handle.canonical_path) == primary
-    assert handle.https_url.startswith("https://www.sec.gov/")
+    assert handle.https_url == "https://example.test/fixtures/annual.txt"
     assert not handle.missing_capture_fields
 
 

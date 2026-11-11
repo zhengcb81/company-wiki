@@ -76,16 +76,18 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from company_wiki.source_catalog.models import RootSpec  # noqa: E402
+from company_wiki.source_catalog.read_budget import (  # noqa: E402
+    DEFAULT_REQUEST_MAX_BYTES,
+    DEFAULT_REQUEST_MAX_CANDIDATES,
+    ReadBudget,
+)
 from company_wiki.source_catalog.resolver import (  # noqa: E402
     _CANDIDATE_BYTES_CAP,
-    _REQUEST_MAX_BYTES,
-    _REQUEST_MAX_CANDIDATES,
-    _ReadBudget,
-    _needs_hydration,
     ResolutionStatus,
     SourceRequest,
     SourceResolver,
 )
+from company_wiki.source_catalog.source_location import is_hydration_required  # noqa: E402
 
 BODY = b"%PDF-1.4 r4b02-same-version"
 DIGEST = hashlib.sha256(BODY).hexdigest()
@@ -414,7 +416,7 @@ def test_r4b02_budget_counters_bound_candidate_reads(tmp_path):
     trace (never a silent unverified reuse)."""
     paths = _three_copy_fixture(tmp_path)
     catalog = _scan(tmp_path, _roots(paths))
-    budget = _ReadBudget(max_candidates=4, max_bytes=1)
+    budget = ReadBudget(max_candidates=4, max_bytes=1)
     resolver = SourceResolver(catalog, read_budget=budget)
     result = resolver.resolve(_request())
     assert budget.bytes_read == 0, budget
@@ -506,7 +508,7 @@ def test_r4b02_mid_read_cancellation_returns_no_handle(tmp_path, monkeypatch):
     catalog = _scan(tmp_path, _roots(paths))
     from company_wiki.source_catalog import resolver as resolver_module
 
-    budget = _ReadBudget()
+    budget = ReadBudget()
     real_sha256_of_file = resolver_module._sha256_of_file
 
     def cancel_then_hash(path):
@@ -564,7 +566,7 @@ def test_r4b02_injected_budget_is_per_request(tmp_path):
     (or one resolver) must not silently un-verify the next request."""
     paths = _three_copy_fixture(tmp_path)
     catalog = _scan(tmp_path, _roots(paths))
-    budget = _ReadBudget(max_candidates=4, max_bytes=4 * len(BODY))
+    budget = ReadBudget(max_candidates=4, max_bytes=4 * len(BODY))
     resolver = SourceResolver(catalog, read_budget=budget)
 
     first = resolver.resolve(_request())
@@ -583,9 +585,9 @@ def test_r4b02_injected_budget_is_per_request(tmp_path):
 
 def test_r4b02_budget_default_ceilings_are_finite(tmp_path):
     """The documented defaults stay finite and identical to the design."""
-    budget = _ReadBudget()
-    assert budget.max_candidates == _REQUEST_MAX_CANDIDATES == 64
-    assert budget.max_bytes == _REQUEST_MAX_BYTES == 2 * 1024 * 1024 * 1024
+    budget = ReadBudget()
+    assert budget.max_candidates == DEFAULT_REQUEST_MAX_CANDIDATES == 64
+    assert budget.max_bytes == DEFAULT_REQUEST_MAX_BYTES == 2 * 1024 * 1024 * 1024
     assert _CANDIDATE_BYTES_CAP == 256 * 1024 * 1024
     assert budget.cancelled is False and budget.bytes_read == 0
 
@@ -593,7 +595,7 @@ def test_r4b02_budget_default_ceilings_are_finite(tmp_path):
 def test_r4b02_cancellation_reads_no_byte_and_returns_no_handle(tmp_path):
     paths = _three_copy_fixture(tmp_path)
     catalog = _scan(tmp_path, _roots(paths))
-    budget = _ReadBudget()
+    budget = ReadBudget()
     budget.cancel()
     result = SourceResolver(catalog, read_budget=budget).resolve(_request())
     assert budget.bytes_read == 0, budget
@@ -608,7 +610,7 @@ def test_r4b02_verified_copy_is_read_once_per_candidate(tmp_path):
     the file it read — the counters are the evidence L06 asks for."""
     paths = _three_copy_fixture(tmp_path)
     catalog = _scan(tmp_path, _roots(paths))
-    budget = _ReadBudget(max_candidates=10, max_bytes=10 * len(BODY))
+    budget = ReadBudget(max_candidates=10, max_bytes=10 * len(BODY))
     result = SourceResolver(catalog, read_budget=budget).resolve(_request())
     assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
     assert budget.candidates == 1, budget
@@ -623,10 +625,10 @@ def test_r4b02_verified_copy_is_read_once_per_candidate(tmp_path):
 def test_r4b02_placeholder_attributes_are_detected_without_reading():
     """`stat` reports the Windows cloud-placeholder attributes; the helper
     must read that flag (0x400000 | 0x1000) and nothing else."""
-    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0)) is False
-    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x80)) is False
-    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x400000)) is True
-    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x1000)) is True
+    assert is_hydration_required(types.SimpleNamespace(st_file_attributes=0)) is False
+    assert is_hydration_required(types.SimpleNamespace(st_file_attributes=0x80)) is False
+    assert is_hydration_required(types.SimpleNamespace(st_file_attributes=0x400000)) is True
+    assert is_hydration_required(types.SimpleNamespace(st_file_attributes=0x1000)) is True
 
 
 def test_r4b02_cloud_placeholder_candidate_is_not_read(tmp_path, monkeypatch):
@@ -649,7 +651,7 @@ def test_r4b02_cloud_placeholder_candidate_is_not_read(tmp_path, monkeypatch):
         return result
 
     monkeypatch.setattr(Path, "stat", stat_with_placeholder_attribute, raising=True)
-    budget = _ReadBudget()
+    budget = ReadBudget()
     result = SourceResolver(catalog, read_budget=budget).resolve(_request())
     assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
     assert budget.bytes_read == len(BODY), budget
@@ -694,7 +696,7 @@ def test_r4b02_only_placeholder_copy_is_unavailable(tmp_path, monkeypatch):
         return result
 
     monkeypatch.setattr(Path, "stat", stat_with_placeholder_attribute, raising=True)
-    budget = _ReadBudget()
+    budget = ReadBudget()
     result = SourceResolver(catalog, read_budget=budget).resolve(_request())
     assert result.matches == (), result.debug_trace
     assert budget.bytes_read == 0, budget
@@ -917,10 +919,10 @@ def test_r4b02_rejections_is_matched_as_a_path_segment() -> None:
 
 def test_r4b02_recall_on_open_placeholders_are_detected() -> None:
     """B-VR02-07: RECALL_ON_OPEN (0x40000) also hydrates on open."""
-    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x40000)) is True
-    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x400000)) is True
-    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x1000)) is True
-    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x20)) is False
+    assert is_hydration_required(types.SimpleNamespace(st_file_attributes=0x40000)) is True
+    assert is_hydration_required(types.SimpleNamespace(st_file_attributes=0x400000)) is True
+    assert is_hydration_required(types.SimpleNamespace(st_file_attributes=0x1000)) is True
+    assert is_hydration_required(types.SimpleNamespace(st_file_attributes=0x20)) is False
 
 
 def test_r4b02_cancel_during_the_last_candidate_read(tmp_path, monkeypatch):
@@ -935,7 +937,7 @@ def test_r4b02_cancel_during_the_last_candidate_read(tmp_path, monkeypatch):
 
     for name in ("companies", "dropbox", "future_lake"):
         (paths[name] / "2025.pdf").write_bytes(BODY + b"# drifted")
-    budget = _ReadBudget()
+    budget = ReadBudget()
     real_sha256_of_file = resolver_module._sha256_of_file
     seen: list[str] = []
 
@@ -963,7 +965,7 @@ def test_r4b02_claim_reason_names_the_anchor_failure(tmp_path):
     catalog = _scan(tmp_path, _roots(paths))
     for name in ("companies", "dropbox"):
         (paths[name] / "2025.pdf").write_bytes(BODY + b"# drifted")
-    budget = _ReadBudget(max_candidates=2, max_bytes=64 * len(BODY))
+    budget = ReadBudget(max_candidates=2, max_bytes=64 * len(BODY))
     result = SourceResolver(catalog, read_budget=budget).resolve(_request())
     assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
     assert any(

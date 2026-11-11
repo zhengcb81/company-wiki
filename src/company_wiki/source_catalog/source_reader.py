@@ -15,10 +15,9 @@ from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from types import MappingProxyType
-from typing import Any
+from typing import Any, Protocol
 
 from .document_kinds import PERIODIC_DOCUMENT_KINDS
-from .policy import _effective_reusable
 from .policy_2x import export_policy_2x
 from .qualification import qualify_source, latest_source_index
 from .prompt_injection import (
@@ -29,24 +28,12 @@ from .source_read_policy import exact_source_read_policy_sha256, source_read_pol
 from .reader import CatalogReaderUnavailable
 from .runtime_policy import validate_snapshot
 from .metadata_observation import observe_metadata
-from .resolver import (
-    _ReadBudget,
-    _fiscal_year,
-    _provider_identity,
-    _read_verified_bytes,
-    _source_metadata,
-    SourceRequest,
-    SourceResolver,
-)
-from .models import RankedSourceLocation
+from company_wiki.source_catalog.read_budget import ReadBudget
+from .resolver import SourceRequest, SourceResolver
 from .service import SourceCatalog
 from .store import metadata_state
 from .security_code import canonical_security_code
-from .source_location import (
-    SourceLocationError,
-    relative_segments as _relative_segments,
-    resolve_source_location,
-)
+from .source_location import relative_segments
 
 
 from company_wiki.source_contract.source_version import (
@@ -64,6 +51,15 @@ _EXACT_SOURCE_FACT_FIELDS = (
     "title", "language",
 )
 _SCOPE_UNOBSERVED = object()
+
+
+class SourceScopeVerifier(Protocol):
+    """Public plugin contract for checking source facts against verified bytes."""
+
+    ref: SourceRef
+    needs_original: bool
+
+    def verify(self, data: bytes, *, budget: ReadBudget) -> Any: ...
 
 
 
@@ -174,9 +170,9 @@ class SourceVersionReader:
         identity_tokens: tuple[str, ...] | None = None,
     ) -> Iterator[dict[str, Any]]:
         from .identity_candidates import iter_identity_filing_candidates
-        from .security_identity import _normalize_text
+        from .security_identity import normalize_identity_text
 
-        tokens = identity_tokens if identity_tokens is not None else (_normalize_text(request.entity),)
+        tokens = identity_tokens if identity_tokens is not None else (normalize_identity_text(request.entity),)
         candidates = iter_identity_filing_candidates(
             self.catalog, document_kind=request.document_kind, identity_tokens=tokens,
             published_on_or_before=None if include_unknown_publication else request.as_of_date,
@@ -244,15 +240,11 @@ class SourceVersionReader:
             request, include_unknown_publication=True, identity_tokens=candidate_tokens,
         ):
             document = observe_metadata(document.get("metadata")).project_document(document)
-            metadata = _source_metadata(
-                document, store=self.catalog.reader,
-                reader=resolver.reader,
-                current_epoch=resolver.current_epoch,
-                active_cohorts=resolver.active_cohorts,
-                legacy_bridge_allowed=resolver.legacy_bridge_allowed,
-            )
-            if not resolver._entity_matches(request.entity, document, metadata=metadata,
-                                            identity_tokens=candidate_tokens):
+            metadata = resolver.project_source_metadata(document)
+            if not resolver.entity_matches(
+                request.entity, document, metadata=metadata,
+                identity_tokens=candidate_tokens,
+            ):
                 continue
             if "published_date" in metadata:
                 document["published_date"] = metadata["published_date"]
@@ -264,7 +256,7 @@ class SourceVersionReader:
             ) != "match":
                 continue
             if request.fiscal_year is not None and (
-                _fiscal_year(document, metadata) != request.fiscal_year
+                resolver.fiscal_year(document, metadata) != request.fiscal_year
             ):
                 continue
             if request.form_type and metadata.get("form_type") != request.form_type:
@@ -275,7 +267,7 @@ class SourceVersionReader:
                 continue
             if request.language and metadata.get("language") != request.language:
                 continue
-            provider, provider_document_id, identities = _provider_identity(metadata)
+            provider, provider_document_id, identities = resolver.provider_identity(metadata)
             if request.provider and (
                 provider != request.provider
                 if include_unknown_publication
@@ -354,13 +346,8 @@ class SourceVersionReader:
         observation = observe_metadata(version_row["metadata_json"])
         shared = observation.metadata
         row: dict[str, Any] = observation.project_document(dict(version_row))
-        visible = _source_metadata(
-            {"source_id": ref.source_id, "metadata": shared},
-            store=self.catalog.reader,
-            reader=resolver.reader,
-            current_epoch=resolver.current_epoch,
-            active_cohorts=resolver.active_cohorts,
-            legacy_bridge_allowed=resolver.legacy_bridge_allowed,
+        visible = resolver.project_source_metadata(
+            {"source_id": ref.source_id, "metadata": shared}
         )
         def claim(key: str) -> str | None:
             value = visible.get(key)
@@ -465,7 +452,7 @@ class SourceVersionReader:
                               item.relative_path, item.location_id),
         ):
             root = roots.get(location.root_id)
-            if root is None or location.candidate_rank <= 0 or _relative_segments(
+            if root is None or location.candidate_rank <= 0 or relative_segments(
                 location.relative_path
             ) is None:
                 continue
@@ -611,7 +598,7 @@ class SourceVersionReader:
     def verify_version(
         self, ref: SourceRef, *, purpose: str = "source_export",
         expected_read_policy_sha256: str | None = None,
-        budget: _ReadBudget | None = None,
+        budget: ReadBudget | None = None,
     ) -> VerifiedVersionReceipt:
         """Stream-verify the version with open_version's exact read rules."""
         result = self._verified_version(
@@ -622,9 +609,35 @@ class SourceVersionReader:
         assert isinstance(result, VerifiedVersionReceipt)
         return result
 
+    def verify_version_with_scope(
+        self,
+        ref: SourceRef,
+        *,
+        scope_qualification: SourceScopeVerifier | None,
+        purpose: str = "filing_reuse",
+        expected_read_policy_sha256: str | None = None,
+        budget: ReadBudget | None = None,
+    ) -> VerifiedVersionReceipt:
+        """Verify without retaining bytes and apply a caller-owned scope check.
+
+        The verifier supplies only a public structural contract: identity,
+        whether the complete original is needed, and a check over the exact
+        bytes already verified by this reader.
+        """
+        result = self._verified_version(
+            ref,
+            purpose=purpose,
+            expected_read_policy_sha256=expected_read_policy_sha256,
+            retain_bytes=False,
+            budget=budget,
+            scope_qualification=scope_qualification,
+        )
+        assert isinstance(result, VerifiedVersionReceipt)
+        return result
+
     def verify_reusable_version(
         self, ref: SourceRef, *, request: SourceRequest, metadata: dict[str, Any],
-        budget: _ReadBudget,
+        budget: ReadBudget,
     ) -> FilingReuseObservation:
         """Verify the selected version under filing-root and SEC scope rules."""
         from .assertion_service import source_scope_qualification
@@ -643,50 +656,11 @@ class SourceVersionReader:
         object.__setattr__(observation, "request_id", request.request_id)
         return observation
 
-    def _admitted_candidates(
-        self, ref: SourceRef, version_row: sqlite3.Row, *, roots: dict[str, Any],
-    ) -> list[RankedSourceLocation]:
-        """The readable locations for one ref, after the catalog annotator
-        and root policy.
-
-        This is the single admission gate shared by every byte path, so the
-        whole-buffer reader and any transport elect the same candidate by
-        construction.  The existing catalog annotator owns role/status/
-        rejections filtering and the stable preference order.  Policy decides
-        action eligibility.
-        """
-        try:
-            locations = self.catalog.source_location_candidates(
-                ref.document_id, ref.source_id
-            )
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
-        if not locations:
-            raise SourceReadError("unavailable", "no_indexed_location")
-        admitted = []
-        for location in locations:
-            root = roots.get(location.root_id)
-            if root is None or location.candidate_rank <= 0:
-                continue
-            kinds = root.allowed_document_kinds
-            if kinds and version_row["document_kind"] not in kinds:
-                continue
-            limit = root.max_file_size
-            if limit is not None and ref.byte_size > limit:
-                continue
-            statuses = root.allowed_statuses
-            if statuses and version_row["source_status"] not in statuses:
-                continue
-            admitted.append(location)
-        if not admitted:
-            raise SourceReadError("blocked", "root_admission_denied")
-        return admitted
-
     def _verified_version(
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
-        budget: _ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
+        budget: ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
     ) -> VerifiedContent | VerifiedVersionReceipt:
         verified, _ = self._verified_location(
             ref, purpose=purpose, expected_read_policy_sha256=expected_read_policy_sha256,
@@ -699,7 +673,7 @@ class SourceVersionReader:
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
-        budget: _ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
+        budget: ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
         reusable_only: bool = False,
     ) -> tuple[VerifiedContent | VerifiedVersionReceipt, Mapping[str, Any] | None]:
         """Verify through the current policy and same-SHA location fallback.
@@ -739,32 +713,54 @@ class SourceVersionReader:
         elif scope_qualification is _SCOPE_UNOBSERVED:
             scope_qualification = None
         config = self.catalog.config
-        roots = {root.root_id: root for root in config.roots
-                 if not reusable_only or _effective_reusable(root, config)}
-        candidates = self._admitted_candidates(ref, version_row, roots=roots)
+        try:
+            candidates = self.catalog.source_location_candidates(
+                ref.document_id, ref.source_id
+            )
+        except (CatalogReaderUnavailable, sqlite3.Error):
+            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        if not candidates:
+            raise SourceReadError("unavailable", "no_indexed_location")
+        read_resolver = self._resolver_for_request()
 
         supplied_budget = budget is not None
         if budget is None:
-            budget = _ReadBudget()
+            budget = ReadBudget()
             budget.begin_request()
-        elif not isinstance(budget, _ReadBudget):
+        elif not isinstance(budget, ReadBudget):
             raise TypeError("budget must be a read budget")
         failures: list[str] = []
-        all_missing = True
+        saw_non_denied_location = False
+        all_admitted_missing = True
+        all_root_denied = True
         policy_sha256, _ = export_policy_2x(config)
         for location in sorted(candidates, key=lambda item: item.candidate_rank):
-            root = roots[location.root_id]
             try:
-                resolved = resolve_source_location(root, location.relative_path)
-            except SourceLocationError as exc:
+                read = read_resolver.read_verified_source_location(
+                    ref, location.location_id, budget=budget,
+                    retain_bytes=retain_bytes or bool(
+                        scope_qualification and scope_qualification.needs_original
+                    ),
+                    reusable_only=reusable_only,
+                )
+            except SourceReadError as exc:
+                # A location may disappear after the catalog returns its
+                # candidate list. Retry the remaining same-SHA copies; keep
+                # identity/configuration failures visible to the caller.
+                if exc.reason != "location_not_indexed":
+                    raise
                 failures.append(exc.reason)
-                all_missing = False
+                saw_non_denied_location = True
+                # A disappearing catalog row proves neither that the backing
+                # bytes are gone nor that the location remains admitted.
+                all_admitted_missing = False
+                all_root_denied = False
                 continue
-            observation, status, reason, detail = _read_verified_bytes(
-                resolved, expected_sha256=ref.content_sha256, budget=budget,
-                expected_byte_size=ref.byte_size,
-                retain_bytes=retain_bytes or bool(scope_qualification and scope_qualification.needs_original),
+            location = read.location
+            observation, status, reason, detail = (
+                read.observation, read.status, read.reason, read.detail,
             )
+            all_root_denied = all_root_denied and reason == "root_admission_denied"
             if not status:
                 assert observation is not None
                 if scope_qualification is not None:
@@ -795,18 +791,28 @@ class SourceVersionReader:
                     "root_id": location.root_id,
                     "relative_path": location.relative_path,
                     "manifest_json": location.manifest_json,
-                    "absolute_path": str(resolved),
                     "verified_sha256": observation.content_sha256,
                 }) if reusable_only else None
                 return receipt, admitted_copy
             failures.append(reason or status or detail or "read_failed")
-            all_missing = all_missing and reason == "read_failed" and detail == "FileNotFoundError"
+            # Root admission is an eligibility decision, not evidence that an
+            # admitted original is missing. Ignore denied copies when deciding
+            # whether the reusable set has disappeared from disk.
+            if reason != "root_admission_denied":
+                saw_non_denied_location = True
+                all_admitted_missing = (
+                    all_admitted_missing
+                    and reason == "read_failed"
+                    and detail == "FileNotFoundError"
+                )
             if reason in {"cancelled", "budget_exceeded"}:
                 if supplied_budget:
                     raise SourceReadError("unavailable", reason)
                 break
-        if reusable_only and all_missing:
+        if reusable_only and saw_non_denied_location and all_admitted_missing:
             raise SourceReadError("not_found", "local_original_missing")
+        if all_root_denied:
+            raise SourceReadError("blocked", "root_admission_denied")
         raise SourceReadError(
             "unavailable", "no_verified_location", ",".join(sorted(set(failures)))
         )
@@ -814,6 +820,7 @@ class SourceVersionReader:
 __all__ = [
     'SourceReadError',
     'SourceRef',
+    'SourceScopeVerifier',
     'SourceVersionReader',
     'VerifiedContent',
 ]
