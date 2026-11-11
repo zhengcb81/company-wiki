@@ -87,3 +87,7 @@
 - The first commit-hook run correctly stopped publication. Ruff and mypy found that the PDF version-identity refactor had removed two sibling module aliases while `_pdf_versions()` still read constants through those names; the existing PDF cache-identity regression reproduced the `NameError` (RED).
 - Replaced those references with explicit public constants from the owning modules and exported `PDF_PROSE_LAYOUT_FEATURE_VERSION` from `narrative_evidence.__all__`. The same cache-identity regression plus the source_catalog boundary contract pass 7/7; assertion-owner port and cache-identity targeted checks pass 2/2; targeted Ruff passes.
 - Ruff also found one unused local in the new assertion owner-port test; removed it. No hook was bypassed. The full commit hooks have not yet been rerun after these repairs.
+
+## 2026-11-11 P3 milestone committed
+
+SourceCatalog owner ports, package-wide static sibling-boundary contract, fast-CI registration, hook fixes, and the corresponding tests are committed as `e5dd29b1f`. Commit hooks passed Ruff, mypy runtime-source checks, and config doctor. The commit is not pushed yet; exact-head remote CI has not run. The next implementation node is the public stream/parser owner interface, starting with RED contracts.
