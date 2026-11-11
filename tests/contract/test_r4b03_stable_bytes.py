@@ -22,7 +22,8 @@ Design §B03, with the rule list of
 Matrix items: L05, L06 (phase-B acceptance map, reverse-coverage
 section; step B03 claims these, and the cases below are what exercises them).
 
-Product code is NOT modified by this file (file-scope F10: new tests only).
+These tests retain the B03 byte-verification contract while exercising the
+single request-owned byte budget instead of a second hard-coded per-file cap.
 """
 
 from __future__ import annotations
@@ -258,13 +259,12 @@ def test_r4b03_directory_in_place_of_the_file_is_refused(tmp_path):
     assert out.reason == "not_regular_file"
 
 
-def test_r4b03_size_ceiling_refuses_instead_of_serving_a_partial_buffer(tmp_path, monkeypatch):
+def test_r4b03_request_budget_refuses_instead_of_serving_a_partial_buffer(tmp_path):
     resolver, handle, _ = _served(tmp_path)
-    monkeypatch.setattr(resolver_module, "_CANDIDATE_BYTES_CAP", 4)
-    out = resolver.read_verified_bytes(handle)
+    out = resolver.read_verified_bytes(handle, budget=ReadBudget(max_bytes=4))
     assert out.data is None
     assert out.status == "unavailable"
-    assert out.reason == "exceeds_candidate_cap"
+    assert out.reason == "budget_exceeded"
 
 
 # ---------------------------------------------------------------------------
@@ -306,9 +306,7 @@ def test_r4b03_every_refusal_stays_inside_the_contract_error_values(tmp_path, mo
     scenarios.append(("placeholder", handle, None))
     monkeypatch.undo()
 
-    monkeypatch.setattr(resolver_module, "_CANDIDATE_BYTES_CAP", 4)
-    scenarios.append(("too_large", handle, None))
-    monkeypatch.undo()
+    scenarios.append(("too_large", handle, ReadBudget(max_bytes=4)))
 
     budget = ReadBudget()
     budget.cancel()

@@ -20,7 +20,7 @@ from company_wiki.automation.narrative_transport_contracts import (
 )
 from company_wiki.narrative_subject import NarrativeSubjectRef
 from company_wiki.source_catalog import source_availability as availability_module
-from company_wiki.source_catalog import source_reader as reader_module
+from company_wiki.source_catalog import SourceResolver
 from company_wiki.source_catalog.source_availability import (
     verified_availability_evidence, verified_open_observation,
 )
@@ -235,12 +235,12 @@ def test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer(tmp_pa
         proof = owner_proof(fixture, "prior_verified_capture")
         transport = NarrativeTransportReader(fixture.artifacts, fixture.reader)
         reference = transport.reference(fixture.source_ref)
-        real_read = reader_module._read_verified_bytes
+        real_read = SourceResolver.read_verified_source_location
         observations = []
 
-        def counted_read(*args, **kwargs):
+        def counted_read(resolver, *args, **kwargs):
             observations.append("original")
-            return real_read(*args, **kwargs)
+            return real_read(resolver, *args, **kwargs)
 
         def lookup(catalog, ref):
             observations.append("proof")
@@ -250,7 +250,7 @@ def test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer(tmp_pa
         def forbidden(*args, **kwargs):
             pytest.fail("narrative reads must not create observations or source facts")
 
-        monkeypatch.setattr(reader_module, "_read_verified_bytes", counted_read)
+        monkeypatch.setattr(SourceResolver, "read_verified_source_location", counted_read)
         monkeypatch.setattr(availability_module, "verified_availability_evidence", lookup)
         monkeypatch.setattr(fixture.catalog, "record_source_facts", forbidden)
         result = transport.read(NarrativeReadRequest.from_dict(

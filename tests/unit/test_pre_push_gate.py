@@ -7,6 +7,7 @@ which test inventory daily pushes must share with CI.
 from io import StringIO
 from pathlib import Path
 import sys
+from tempfile import TemporaryDirectory
 
 import pytest
 import yaml
@@ -79,6 +80,19 @@ def test_daily_and_ci_inventories_have_distinct_responsibilities():
         'tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native',
     }
     assert required_ocr <= set(gate.CI_CONTRACT_CASES)
+
+
+def test_streaming_source_owner_contracts_are_in_the_fast_gate():
+    required = {
+        "tests/contract/test_source_version_reader.py::test_stream_version_is_a_public_source_port_and_shares_one_read_budget",
+        "tests/contract/test_source_version_reader.py::test_stream_version_accepts_a_structural_budget_port",
+        "tests/contract/test_source_version_reader.py::test_stream_version_sink_failure_is_not_misreported_as_source_read_failure",
+        "tests/contract/test_source_version_reader.py::test_stream_version_discards_mismatched_copy_before_same_sha_fallback",
+        "tests/contract/test_source_version_reader.py::test_stream_version_cancellation_never_commits_partial_input",
+        "tests/contract/test_source_version_reader.py::test_stream_version_uses_request_budget_instead_of_legacy_fixed_file_cap",
+        "tests/contract/test_r4b02_candidate_selection.py::test_r4b02_source_resolver_accepts_a_resettable_budget_port",
+    }
+    assert required <= set(gate.FAST_CONTRACT_CASES)
 
 
 @pytest.mark.parametrize("changes", RUNTIME_RANGES)
@@ -176,32 +190,43 @@ def test_explicit_full_mode_runs_all_stages_and_only_one_unit_collection(monkeyp
 
 
 @pytest.mark.parametrize("daily", [True, False])
-def test_total_deadline_worker_scope_and_owned_scratch_remain_real(tmp_path, monkeypatch, daily):
-    monkeypatch.setattr(gate, "PROJECT_ROOT", tmp_path)
-    # Observe the actual freshly owned short scratch selected by its owner.
-    # A long pytest fixture cannot be forced past the real Windows path budget.
-    owned = []
-    open_scratch = gate._open_scratch
-    def capture_scratch(candidates):
-        scratch = open_scratch(candidates)
-        owned.append(Path(scratch.name))
-        assert owned[-1].is_dir()
-        return scratch
-    monkeypatch.setattr(gate, "_open_scratch", capture_scratch)
-    observed = []
-    monkeypatch.setattr(gate, "_run", lambda cmd, label, **kwargs: observed.append((cmd, kwargs)) or 0)
-    targets = list(gate.DAILY_PUSH_CASES) if daily else ["tests/unit"]
-    label = gate.DAILY_PUSH_LABEL_PREFIX + " fixture" if daily else "unit tests"
-    assert gate._run_pytest_gate([sys.executable, "-m", "pytest", *targets], label) == 0
-    command, options = observed[0]
-    assert options["timeout"] == (gate.DAILY_PUSH_TIMEOUT_SECONDS if daily else 600)
-    assert "-vv" in command and "--durations=15" in command
-    assert all(target in command for target in targets)
-    assert ("-n" in command) is (not daily)
-    if not daily:
-        assert command[command.index("-n") + 1] == "2"
-    assert len(owned) == 1 and not owned[0].exists()
-    assert not list(tmp_path.iterdir())
+def test_total_deadline_worker_scope_and_owned_scratch_remain_real(monkeypatch, daily):
+    # pytest's platform temp path can already exceed our path budget. Create
+    # this fixture beside the checkout so the test remains executable on
+    # Windows even when %TEMP% is deeply nested.
+    repo_root = Path(__file__).resolve().parents[2]
+    with TemporaryDirectory(prefix="t", dir=repo_root) as short_root:
+        short_root_path = Path(short_root)
+        monkeypatch.setattr(gate, "PROJECT_ROOT", short_root_path)
+        for name in ("TEMP", "TMP", "TMPDIR"):
+            monkeypatch.delenv(name, raising=False)
+        # Observe the actual freshly owned short scratch selected by its owner.
+        owned = []
+        open_scratch = gate._open_scratch
+
+        def capture_scratch(candidates):
+            scratch = open_scratch(candidates)
+            owned.append(Path(scratch.name))
+            assert owned[-1].is_dir()
+            return scratch
+
+        monkeypatch.setattr(gate, "_open_scratch", capture_scratch)
+        observed = []
+        monkeypatch.setattr(
+            gate, "_run", lambda cmd, label, **kwargs: observed.append((cmd, kwargs)) or 0,
+        )
+        targets = list(gate.DAILY_PUSH_CASES) if daily else ["tests/unit"]
+        label = gate.DAILY_PUSH_LABEL_PREFIX + " fixture" if daily else "unit tests"
+        assert gate._run_pytest_gate([sys.executable, "-m", "pytest", *targets], label) == 0
+        command, options = observed[0]
+        assert options["timeout"] == (gate.DAILY_PUSH_TIMEOUT_SECONDS if daily else 600)
+        assert "-vv" in command and "--durations=15" in command
+        assert all(target in command for target in targets)
+        assert ("-n" in command) is (not daily)
+        if not daily:
+            assert command[command.index("-n") + 1] == "2"
+        assert len(owned) == 1 and not owned[0].exists()
+        assert not list(short_root_path.iterdir())
 
 
 def test_real_ci_and_hook_wiring_keeps_full_unit_and_separate_contracts():

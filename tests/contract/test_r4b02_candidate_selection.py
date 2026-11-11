@@ -82,7 +82,6 @@ from company_wiki.source_catalog.read_budget import (  # noqa: E402
     ReadBudget,
 )
 from company_wiki.source_catalog.resolver import (  # noqa: E402
-    _CANDIDATE_BYTES_CAP,
     ResolutionStatus,
     SourceRequest,
     SourceResolver,
@@ -588,8 +587,74 @@ def test_r4b02_budget_default_ceilings_are_finite(tmp_path):
     budget = ReadBudget()
     assert budget.max_candidates == DEFAULT_REQUEST_MAX_CANDIDATES == 64
     assert budget.max_bytes == DEFAULT_REQUEST_MAX_BYTES == 2 * 1024 * 1024 * 1024
-    assert _CANDIDATE_BYTES_CAP == 256 * 1024 * 1024
     assert budget.cancelled is False and budget.bytes_read == 0
+
+
+def test_r4b02_request_budget_is_the_only_candidate_byte_ceiling(tmp_path, monkeypatch):
+    import company_wiki.source_catalog.resolver as resolver_module
+
+    # The request account already owns the byte ceiling; a stale per-file cap
+    # must not block a source whose bytes fit the request.
+    monkeypatch.setattr(resolver_module, "_CANDIDATE_BYTES_CAP", 4, raising=False)
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    budget = ReadBudget(max_candidates=3, max_bytes=3 * len(BODY))
+    result = SourceResolver(catalog, read_budget=budget).resolve(_request())
+    assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
+    assert budget.bytes_read == len(BODY)
+
+
+def test_r4b02_source_resolver_accepts_a_resettable_budget_port(tmp_path):
+    from company_wiki.source_contract import ResettableSourceReadBudgetPort
+
+    class BudgetAdapter:
+        def __init__(self):
+            self.inner = ReadBudget(max_candidates=3, max_bytes=3 * len(BODY))
+
+        @property
+        def max_candidates(self):
+            return self.inner.max_candidates
+
+        @property
+        def max_bytes(self):
+            return self.inner.max_bytes
+
+        @property
+        def candidates(self):
+            return self.inner.candidates
+
+        @property
+        def bytes_read(self):
+            return self.inner.bytes_read
+
+        @property
+        def cancelled(self):
+            return self.inner.cancelled
+
+        def begin_request(self):
+            self.inner.begin_request()
+
+        def take_candidate(self):
+            return self.inner.take_candidate()
+
+        def charge(self, size):
+            return self.inner.charge(size)
+
+        def check(self):
+            return self.inner.check()
+
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    try:
+        budget = BudgetAdapter()
+        result = SourceResolver(catalog, read_budget=budget).resolve(_request())
+
+        assert isinstance(budget, ResettableSourceReadBudgetPort)
+        assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
+        assert budget.candidates == 1
+        assert budget.bytes_read == len(BODY)
+    finally:
+        catalog.close()
 
 
 def test_r4b02_cancellation_reads_no_byte_and_returns_no_handle(tmp_path):
@@ -892,29 +957,27 @@ def test_r4b02_selection_reason_names_the_source_group(tmp_path):
 
 def test_r4b02_rejections_is_matched_as_a_path_segment() -> None:
     """B-VR02-07: a substring match disqualified unrelated names."""
-    from company_wiki.source_catalog.service import _location_exclusion_reason
+    from company_wiki.source_catalog.location_annotation import (
+        CatalogLocationCandidate,
+        annotate_locations,
+    )
 
-    def location(relative_path: str) -> dict:
-        return {
-            "role": "original_primary",
-            "location_status": "active",
-            "source_id": "urn:company-wiki:source:sha256:" + "a" * 64,
-            "relative_path": relative_path,
-        }
+    def exclusion_reason(relative_path: str) -> str:
+        location = CatalogLocationCandidate(
+            location_id=relative_path,
+            source_id="urn:company-wiki:source:sha256:" + "a" * 64,
+            root_id="root",
+            relative_path=relative_path,
+            role="original_primary",
+            location_status="active",
+            root_priority=10,
+            manifest_json=None,
+        )
+        return annotate_locations("document", (location,))[0].exclusion_reason
 
-    assert _location_exclusion_reason(location("annual/my.rejections_backup/2025.pdf")) == ""
-    assert (
-        _location_exclusion_reason(location("annual/my.rejections_backup/2025.pdf"))
-        != "rejections_path"
-    )
-    assert (
-        _location_exclusion_reason(location("Acme/raw/.rejections/2025.pdf"))
-        == "rejections_path"
-    )
-    assert (
-        _location_exclusion_reason(location(r"Acme\raw\.rejections\2025.pdf"))
-        == "rejections_path"
-    )
+    assert exclusion_reason("annual/my.rejections_backup/2025.pdf") == ""
+    assert exclusion_reason("Acme/raw/.rejections/2025.pdf") == "rejections_path"
+    assert exclusion_reason(r"Acme\raw\.rejections\2025.pdf") == "rejections_path"
 
 
 def test_r4b02_recall_on_open_placeholders_are_detected() -> None:

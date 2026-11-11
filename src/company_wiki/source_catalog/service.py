@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 import csv
+import json
 import sqlite3
 import re
 from dataclasses import asdict
@@ -12,6 +13,11 @@ from typing import TYPE_CHECKING, Any, Callable, Iterator, Sequence
 
 from company_wiki.atomic_file import atomic_output
 from company_wiki.file_usage import database_file_sizes, file_tree_bytes
+from company_wiki.source_contract.source_version import (
+    SourceProcessingDescriptor,
+    SourceRef,
+)
+from company_wiki.source_contract.source_manifest import SourceManifest
 
 from .models import (
     CatalogBrowseVersion,
@@ -444,6 +450,48 @@ class SourceCatalog:
             )
             for item in ranked
         )
+
+    def processing_descriptor(
+        self, ref: SourceRef,
+    ) -> SourceProcessingDescriptor | None:
+        """Return pathless parser metadata for one exact registered source.
+
+        Manifest JSON and physical locators stay within the catalog owner.
+        Consumers receive only source identity, the logical format hint and
+        validated provenance fields required by the parser runtime.
+        """
+        if not isinstance(ref, SourceRef):
+            raise TypeError("ref must be SourceRef")
+        for location in self.source_location_candidates(
+            ref.document_id, ref.source_id,
+        ):
+            if location.candidate_rank <= 0 or not location.manifest_json:
+                continue
+            try:
+                payload = json.loads(location.manifest_json)
+                manifest = SourceManifest.from_dict(payload)
+            except Exception:  # malformed location metadata is one bad candidate
+                continue
+            if (
+                manifest.source_id != ref.source_id
+                or manifest.content_sha256 != ref.content_sha256
+                or manifest.byte_size != ref.byte_size
+                or manifest.mime_type != ref.mime_type
+            ):
+                continue
+            suffix = Path(manifest.original_path).suffix.lower()
+            return SourceProcessingDescriptor(
+                source_ref=ref,
+                format_hint=suffix.lstrip(".") or None,
+                source_type=manifest.source_type.value,
+                entity_ids=manifest.entity_ids,
+                published_date=manifest.published_date,
+                retrieved_at=manifest.retrieved_at,
+                collector_name=manifest.collector_name,
+                collector_version=manifest.collector_version,
+                immutable_status=manifest.immutable_status.value,
+            )
+        return None
 
     def source_copy_availability(
         self, request: SourceCopyAvailabilityRequest,

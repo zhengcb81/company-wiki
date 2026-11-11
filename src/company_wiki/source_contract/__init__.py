@@ -67,7 +67,21 @@ from .source_manifest import (
     SourceType,
     source_id_for_sha256,
 )
-from .source_version import SourceReadError, SourceRef, SourceRefError, SourceVersionPort
+from .source_version import (
+    SOURCE_REF_SCHEMA_VERSION,
+    ReviewSnapshot,
+    SourceChunkSink,
+    SourceChunkSinkError,
+    SourceReadBudgetPort,
+    ResettableSourceReadBudgetPort,
+    SourceProcessingDescriptor,
+    SourceReadError,
+    SourceRef,
+    SourceRefError,
+    SourceVersionPort,
+    VerifiedContent,
+    VerifiedVersionReceipt,
+)
 
 if TYPE_CHECKING:
     from .announcement_collector import (
@@ -121,9 +135,18 @@ __all__ = [
     "SourceManifestError",
     "SourceManifestMismatchError",
     "SourceReadError",
+    "SourceChunkSink",
+    "SourceChunkSinkError",
+    "SOURCE_REF_SCHEMA_VERSION",
+    "ReviewSnapshot",
+    "SourceReadBudgetPort",
+    "ResettableSourceReadBudgetPort",
+    "SourceProcessingDescriptor",
     "SourceRef",
     "SourceRefError",
     "SourceVersionPort",
+    "VerifiedContent",
+    "VerifiedVersionReceipt",
     "SourceType",
     "SourceExportBundle",
     "SourceExportBundleV2",

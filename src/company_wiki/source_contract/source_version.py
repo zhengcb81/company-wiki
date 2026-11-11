@@ -211,12 +211,107 @@ class VerifiedVersionReceipt:
     schema_version: str = SOURCE_REF_SCHEMA_VERSION
 
 
+@dataclass(frozen=True)
+class SourceProcessingDescriptor:
+    """Pathless parser input metadata owned by the source catalog.
+
+    ``format_hint`` is a logical file-format hint derived inside the storage
+    owner. No original directory or locator crosses this contract.
+    """
+
+    source_ref: SourceRef
+    format_hint: str | None
+    source_type: str
+    entity_ids: tuple[str, ...]
+    published_date: str | None
+    retrieved_at: str
+    collector_name: str
+    collector_version: str
+    immutable_status: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.source_ref, SourceRef):
+            raise TypeError("source_ref must be SourceRef")
+        if self.format_hint is not None:
+            if (
+                not isinstance(self.format_hint, str)
+                or not self.format_hint
+                or self.format_hint != self.format_hint.strip().lower()
+                or "/" in self.format_hint
+                or "\\" in self.format_hint
+            ):
+                raise ValueError("format_hint must be a normalized pathless hint")
+
+
+@runtime_checkable
+class SourceReadBudgetPort(Protocol):
+    """Structural view of the one caller-owned read account.
+
+    ``check`` returns normally while the request may continue and raises
+    ``SourceReadError(reason="cancelled")`` when caller cancellation is set.
+    """
+
+    max_candidates: int
+    max_bytes: int
+    candidates: int
+    bytes_read: int
+    cancelled: bool
+
+    def take_candidate(self) -> str: ...
+    def charge(self, size: int) -> str: ...
+    def check(self) -> None: ...
+
+
+@runtime_checkable
+class ResettableSourceReadBudgetPort(SourceReadBudgetPort, Protocol):
+    """Read budget owned across operations and reset by its owner."""
+
+    def begin_request(self) -> None: ...
+
+
+@runtime_checkable
+class SourceChunkSink(Protocol):
+    """Transactional sink for candidate bytes from one verified source read.
+
+    Chunks remain provisional until ``commit_verified``. The source owner calls
+    ``discard_candidate`` after any location, byte, policy, budget or sink
+    failure, then may try another registered same-version location. A sink
+    must not expose staged content before commit.
+    """
+
+    def begin_candidate(self) -> None: ...
+    def write_chunk(self, chunk: bytes) -> None: ...
+    def discard_candidate(self) -> None: ...
+    def commit_verified(self, receipt: VerifiedVersionReceipt) -> None: ...
+
+
+class SourceChunkSinkError(RuntimeError):
+    """A parser or other downstream sink failed while the source was streamed."""
+
+
 @runtime_checkable
 class SourceVersionPort(Protocol):
     """Narrow source-owner interface. Serialization still verifies input bytes."""
 
-    def open_version(self, ref: SourceRef, *, purpose: str) -> VerifiedContent: ...
+    def open_version(
+        self,
+        ref: SourceRef,
+        *,
+        purpose: str,
+        budget: SourceReadBudgetPort | None = None,
+    ) -> VerifiedContent: ...
     def verify_version(self, ref: SourceRef, *, purpose: str) -> VerifiedVersionReceipt: ...
+    def describe_processing_version(
+        self, ref: SourceRef,
+    ) -> SourceProcessingDescriptor: ...
+    def stream_version(
+        self,
+        ref: SourceRef,
+        *,
+        sink: SourceChunkSink,
+        purpose: str,
+        budget: SourceReadBudgetPort | None = None,
+    ) -> VerifiedVersionReceipt: ...
     def describe_version(self, ref: SourceRef) -> dict[str, str | int | None]: ...
 
 __all__ = [
@@ -227,6 +322,11 @@ __all__ = [
     'SourceReadError',
     'SourceRef',
     'SourceRefMismatchError',
+    'SourceChunkSink',
+    'SourceChunkSinkError',
+    'SourceReadBudgetPort',
+    'ResettableSourceReadBudgetPort',
+    'SourceProcessingDescriptor',
     'VerifiedContent',
     'VerifiedVersionReceipt',
 ]

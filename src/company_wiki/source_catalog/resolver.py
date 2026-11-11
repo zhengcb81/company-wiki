@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from enum import Enum
@@ -21,6 +21,9 @@ from company_wiki.source_contract.source_version import (
     SOURCE_REF_SCHEMA_VERSION,
     SourceByteObservation,
     SourceByteVerifier,
+    SourceChunkSinkError,
+    SourceReadBudgetPort,
+    ResettableSourceReadBudgetPort,
     SourceReadError,
     SourceRef,
 )
@@ -199,7 +202,10 @@ def _registered_location_target(
 # copy (served on the catalog's claim, exactly as before B02, with the reason
 # recorded) or it is not served at all — a non-preferred copy is served only
 # when its bytes really are the requested version.
-_CANDIDATE_BYTES_CAP = 256 * 1024 * 1024
+class _SourceChunkConsumerFailure(Exception):
+    """Keep downstream sink errors distinct from source-file read failures."""
+
+
 def _sha256_of_file(path: Path) -> str:
     """Stream EVERY byte of the candidate: a sampled digest can only ever
     exclude a candidate, never prove `content_sha256` equality (B-DR3-03)."""
@@ -234,7 +240,7 @@ def _verify_candidate(
     *,
     expected_sha256: str,
     size: int,
-    budget: ReadBudget,
+    budget: SourceReadBudgetPort,
     scope_qualification=None,
 ) -> tuple[str, str]:
     """B02 segment 3 — verify the candidate's LOCAL bytes against the
@@ -262,8 +268,6 @@ def _verify_candidate(
     stop = budget.take_candidate()
     if stop:
         return stop, ""
-    if size > _CANDIDATE_BYTES_CAP:
-        return "exceeds_candidate_cap", str(size)
     stop = budget.charge(size)
     if stop:
         return stop, str(size)
@@ -386,9 +390,10 @@ def _read_verified_bytes(
     path: Path,
     *,
     expected_sha256: str,
-    budget: ReadBudget | None,
+    budget: SourceReadBudgetPort | None,
     retain_bytes: bool = True,
     expected_byte_size: int | None = None,
+    chunk_consumer: Callable[[bytes], None] | None = None,
 ) -> tuple[SourceByteObservation | None, str, str, str]:
     """B03 rules R1-R4/R6: read once and verify the exact source version.
 
@@ -396,11 +401,14 @@ def _read_verified_bytes(
     and size. The empty status distinguishes success from refusal.
     The same size, mtime, hydration, budget and digest checks serve both modes.
     Returns ``(observation, "", "", digest)`` on success, else
-    ``(None, status, reason, detail)``.  Every refusal happens BEFORE any byte
-    is handed out, and none of them is a status value of its own (see the error
-    model note above).
+    ``(None, status, reason, detail)``. A streaming sink may receive provisional
+    chunks during verification; its transaction is committed only after the
+    complete size and digest checks succeed. Refusals never produce a verified
+    observation.
     """
-    if budget is not None and budget.cancelled:
+    if budget is None:
+        budget = ReadBudget()
+    if budget.cancelled:
         return None, B03_ERROR_UNAVAILABLE, "cancelled", ""
     try:
         before = path.stat()
@@ -413,21 +421,16 @@ def _read_verified_bytes(
         # reading, exactly as the resolver's eligibility probe does.
         return None, B03_ERROR_UNAVAILABLE, "placeholder_not_hydrated", ""
     size = int(before.st_size)
-    if size > _CANDIDATE_BYTES_CAP:
-        return None, B03_ERROR_UNAVAILABLE, "exceeds_candidate_cap", str(size)
     if expected_byte_size is not None and size != expected_byte_size:
         return None, B03_ERROR_UNAVAILABLE, "byte_size_mismatch", str(size)
-    if budget is not None:
-        stop = budget.take_candidate() or budget.charge(size)
-        if stop:
-            return None, B03_ERROR_UNAVAILABLE, stop, str(size)
+    stop = budget.take_candidate() or budget.charge(size)
+    if stop:
+        return None, B03_ERROR_UNAVAILABLE, stop, str(size)
     verifier = SourceByteVerifier(retain_bytes=retain_bytes)
     read = 0
     def check_budget() -> bool:
-        if check is None:
-            return False
         try:
-            check()
+            budget.check()
         except SourceReadError as exc:
             if exc.reason == "cancelled":
                 return True
@@ -437,40 +440,44 @@ def _read_verified_bytes(
     try:
         with path.open("rb") as handle:
             while True:
-                if budget is not None and budget.cancelled:
+                if budget.cancelled:
                     # Cancellation is sticky caller intent: never answer, even
                     # with bytes that are already in hand.
                     return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
-                check = getattr(budget, "check", None)
                 if check_budget():
                     return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
-                remaining = (_CANDIDATE_BYTES_CAP - read) if budget is None else (
-                    budget.max_bytes - budget.bytes_read + max(0, size - read)
-                )
+                remaining = budget.max_bytes - budget.bytes_read + max(0, size - read)
                 chunk = handle.read(min(_BYTE_READ_CHUNK, remaining + 1))
                 if not chunk:
                     break
                 verifier.update(chunk)
+                if chunk_consumer is not None:
+                    try:
+                        chunk_consumer(chunk)
+                    except Exception as exc:
+                        # Keep a sink's OSError distinct from an OSError raised
+                        # by opening/reading the registered source itself.
+                        raise _SourceChunkConsumerFailure from exc
                 previous_read = read
                 read += len(chunk)
-                if budget is not None:
-                    # Initial stat bytes were reserved above; charge only actual growth.
-                    growth = max(0, read - size) - max(0, previous_read - size)
-                    if growth:
-                        stop = budget.charge(growth)
-                        if stop:
-                            return None, B03_ERROR_UNAVAILABLE, stop, str(read)
-                    if check_budget():
-                        return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
-                if read > _CANDIDATE_BYTES_CAP:
-                    # Grew past the ceiling while reading: stop and refuse.
-                    return None, B03_ERROR_UNAVAILABLE, "exceeds_candidate_cap", str(read)
+                # Initial stat bytes were reserved above; charge only actual growth.
+                growth = max(0, read - size) - max(0, previous_read - size)
+                if growth:
+                    stop = budget.charge(growth)
+                    if stop:
+                        return None, B03_ERROR_UNAVAILABLE, stop, str(read)
+                if check_budget():
+                    return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
+    except _SourceChunkConsumerFailure as exc:
+        cause = exc.__cause__
+        if isinstance(cause, SourceChunkSinkError):
+            raise cause from cause.__cause__
+        raise SourceChunkSinkError("source chunk sink failed") from cause
     except OSError as exc:
         return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
-    check = getattr(budget, "check", None)
     if check_budget():
         return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
-    if budget is not None and budget.cancelled:
+    if budget.cancelled:
         # TAIL GUARD (B-VR03-04): the in-loop check runs BEFORE each read, so a
         # cancellation that lands inside the read that ends the loop - the one
         # returning b"" - was never seen and the bytes were handed over anyway.
@@ -1257,7 +1264,7 @@ class SourceResolver:
         *,
         observer=None,
         runtime_policy: dict | None = None,
-        read_budget: "ReadBudget | None" = None,
+        read_budget: ResettableSourceReadBudgetPort | None = None,
     ):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
@@ -1325,7 +1332,7 @@ class SourceResolver:
         self,
         ref: SourceRef,
         location_id: str,
-        budget: ReadBudget,
+        budget: SourceReadBudgetPort,
     ) -> tuple[dict[str, Any], RankedSourceLocation]:
         """Validate one public source/location identity against current catalog facts."""
         if not isinstance(ref, SourceRef):
@@ -1340,7 +1347,7 @@ class SourceResolver:
             raise SourceReadError("unavailable", "invalid_source_ref")
         if not isinstance(location_id, str) or not location_id.strip():
             raise TypeError("location_id must be non-empty text")
-        if not isinstance(budget, ReadBudget):
+        if not isinstance(budget, SourceReadBudgetPort):
             raise TypeError("budget must be a read budget")
         from .reader import CatalogReaderUnavailable
 
@@ -1372,9 +1379,10 @@ class SourceResolver:
         ref: SourceRef,
         location_id: str,
         *,
-        budget: ReadBudget,
+        budget: SourceReadBudgetPort,
         retain_bytes: bool = True,
         reusable_only: bool = False,
+        chunk_consumer: Callable[[bytes], None] | None = None,
     ) -> SourceLocationReadResult:
         """Verify a current catalog location for one exact source version.
 
@@ -1417,6 +1425,7 @@ class SourceResolver:
             budget=budget,
             expected_byte_size=ref.byte_size,
             retain_bytes=retain_bytes,
+            chunk_consumer=chunk_consumer,
         )
         return SourceLocationReadResult(
             location, observation, status, reason, detail,
@@ -1429,7 +1438,7 @@ class SourceResolver:
         ref: SourceRef,
         binding: RegisteredLocationBinding,
         *,
-        budget: ReadBudget,
+        budget: SourceReadBudgetPort,
     ) -> RegisteredLocationDescriptor:
         """Revalidate a prior location binding without returning a physical path.
 
@@ -1466,7 +1475,7 @@ class SourceResolver:
         ref: SourceRef,
         location_id: str,
         *,
-        budget: ReadBudget,
+        budget: SourceReadBudgetPort,
         retain_bytes: bool = True,
     ) -> SourceLocationReadResult:
         """Verify a registered original for local inventory and reconciliation.
@@ -2020,7 +2029,7 @@ class SourceResolver:
     def _select_candidate(
         document: dict[str, Any],
         *,
-        budget: ReadBudget,
+        budget: SourceReadBudgetPort,
         reusable_roots: Mapping[str, RootSpec],
         scope_qualification=None,
     ) -> tuple[dict[str, Any] | None, str, tuple[str, ...]]:
@@ -2299,7 +2308,7 @@ class SourceResolver:
         handle: SourceHandle,
         *,
         expected_content_sha256: str | None = None,
-        budget: ReadBudget | None = None,
+        budget: SourceReadBudgetPort | None = None,
     ) -> ByteReadResult:
         """B03 — the read path's verified-byte entry point.
 
@@ -2324,12 +2333,13 @@ class SourceResolver:
         placeholder whose bytes are not local
         (``unavailable`` / ``placeholder_not_hydrated`` — opening it would
         download).  Refusals during the read: interruption (``read_failed``),
-        the size ceiling (``exceeds_candidate_cap``), a size or mtime change
+        the request byte budget (``budget_exceeded``), a size or mtime change
         (``changed_during_read``) and caller cancellation (``cancelled``).
 
         Passing the request's ``ReadBudget`` keeps the per-request resource
-        ceiling and cancellation semantics of ``resolve``; without one the byte
-        cap still applies.
+        ceiling and cancellation semantics of ``resolve``. Without one, this
+        owner creates the standard finite request budget; there is no separate
+        hard-coded per-file ceiling.
 
         ``expected_content_sha256`` is PINNED to the handle (B-VR03-01): it may
         only repeat the version the handle already names.  Anything else is

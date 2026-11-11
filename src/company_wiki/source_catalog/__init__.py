@@ -7,7 +7,10 @@ from typing import TYPE_CHECKING, Any
 # initialize download, storage or parser modules.
 if TYPE_CHECKING:
     from company_wiki.source_contract.source_version import (
-        SOURCE_REF_SCHEMA_VERSION, SourceReadError, SourceRef, VerifiedContent,
+        SOURCE_REF_SCHEMA_VERSION, SourceChunkSink, SourceChunkSinkError,
+        SourceReadBudgetPort, ResettableSourceReadBudgetPort,
+        SourceProcessingDescriptor,
+        SourceReadError, SourceRef, VerifiedContent,
     )
 
     from .config import CatalogConfigError, load_catalog_config
@@ -135,7 +138,10 @@ if TYPE_CHECKING:
 
 _EXPORTS_BY_MODULE = {
     "..source_contract.source_version": (
-        "SOURCE_REF_SCHEMA_VERSION", "SourceReadError", "SourceRef", "VerifiedContent",
+        "SOURCE_REF_SCHEMA_VERSION", "SourceChunkSink", "SourceChunkSinkError",
+        "SourceReadBudgetPort", "ResettableSourceReadBudgetPort",
+        "SourceProcessingDescriptor",
+        "SourceReadError", "SourceRef", "VerifiedContent",
     ),
     ".config": ("CatalogConfigError", "load_catalog_config"),
     ".models": (
@@ -362,6 +368,11 @@ __all__ = [
     'SourceResolver',
     'SourceQueryResult',
     'SourceReadError',
+    'SourceChunkSink',
+    'SourceChunkSinkError',
+    'SourceReadBudgetPort',
+    'ResettableSourceReadBudgetPort',
+    'SourceProcessingDescriptor',
     'SourceRef',
     'SourceVersionReader',
     'SourceVersionIdentity',

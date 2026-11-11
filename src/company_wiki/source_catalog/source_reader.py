@@ -15,7 +15,7 @@ from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from types import MappingProxyType
-from typing import Any, Protocol
+from typing import Any, Callable, Protocol
 
 from .document_kinds import PERIODIC_DOCUMENT_KINDS
 from .policy_2x import export_policy_2x
@@ -36,9 +36,10 @@ from .security_code import canonical_security_code
 from .source_location import relative_segments
 
 
-from company_wiki.source_contract.source_version import (
-    SOURCE_REF_SCHEMA_VERSION, SourceReadError, SourceRef, ReviewSnapshot,
-    VerifiedContent, VerifiedVersionReceipt,
+from company_wiki.source_contract import (
+    SOURCE_REF_SCHEMA_VERSION, ReviewSnapshot, SourceChunkSink,
+    SourceChunkSinkError, SourceProcessingDescriptor, SourceReadBudgetPort,
+    SourceReadError, SourceRef, VerifiedContent, VerifiedVersionReceipt,
 )
 SOURCE_READ_RECEIPT_SCHEMA_VERSION = "2.1"
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
@@ -53,13 +54,22 @@ _EXACT_SOURCE_FACT_FIELDS = (
 _SCOPE_UNOBSERVED = object()
 
 
+def _call_source_chunk_sink(operation: Callable[..., None], *args: Any) -> None:
+    try:
+        operation(*args)
+    except SourceChunkSinkError:
+        raise
+    except Exception as exc:
+        raise SourceChunkSinkError("source chunk sink operation failed") from exc
+
+
 class SourceScopeVerifier(Protocol):
     """Public plugin contract for checking source facts against verified bytes."""
 
     ref: SourceRef
     needs_original: bool
 
-    def verify(self, data: bytes, *, budget: ReadBudget) -> Any: ...
+    def verify(self, data: bytes, *, budget: SourceReadBudgetPort) -> Any: ...
 
 
 
@@ -585,26 +595,71 @@ class SourceVersionReader:
     def open_version(
         self, ref: SourceRef, *, purpose: str = "filing_reuse",
         expected_read_policy_sha256: str | None = None,
+        budget: SourceReadBudgetPort | None = None,
     ) -> VerifiedContent:
         """Return only fully verified bytes of the pinned version, or refuse."""
         result = self._verified_version(
             ref, purpose=purpose,
             expected_read_policy_sha256=expected_read_policy_sha256,
             retain_bytes=True,
+            budget=budget,
         )
         assert isinstance(result, VerifiedContent)
         return result
 
+    def describe_processing_version(
+        self, ref: SourceRef,
+    ) -> SourceProcessingDescriptor:
+        """Return parser metadata without exposing a stored location or manifest."""
+        if self.query_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
+            raise SourceReadError("unavailable", "source_ref_changed")
+        try:
+            descriptor = self.catalog.processing_descriptor(ref)
+        except (CatalogReaderUnavailable, sqlite3.Error):
+            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        if descriptor is None:
+            raise SourceReadError("unavailable", "source_manifest_unavailable")
+        return descriptor
+
     def verify_version(
         self, ref: SourceRef, *, purpose: str = "source_export",
         expected_read_policy_sha256: str | None = None,
-        budget: ReadBudget | None = None,
+        budget: SourceReadBudgetPort | None = None,
     ) -> VerifiedVersionReceipt:
         """Stream-verify the version with open_version's exact read rules."""
         result = self._verified_version(
             ref, purpose=purpose,
             expected_read_policy_sha256=expected_read_policy_sha256,
             retain_bytes=False, budget=budget,
+        )
+        assert isinstance(result, VerifiedVersionReceipt)
+        return result
+
+    def stream_version(
+        self,
+        ref: SourceRef,
+        *,
+        sink: SourceChunkSink,
+        purpose: str = "source_export",
+        expected_read_policy_sha256: str | None = None,
+        budget: SourceReadBudgetPort | None = None,
+    ) -> VerifiedVersionReceipt:
+        """Stream bytes to a transactional sink under the same owner policy.
+
+        The sink may stage chunks while the digest is in flight, but must not
+        publish them until the reader calls ``commit_verified`` with the exact
+        verified receipt. A failed location is discarded before a same-SHA
+        copy can be tried. The supplied request budget is used as-is.
+        """
+        if not isinstance(sink, SourceChunkSink):
+            raise TypeError("sink must implement the SourceChunkSink contract")
+        result = self._verified_version(
+            ref,
+            purpose=purpose,
+            expected_read_policy_sha256=expected_read_policy_sha256,
+            retain_bytes=False,
+            budget=budget,
+            chunk_sink=sink,
         )
         assert isinstance(result, VerifiedVersionReceipt)
         return result
@@ -616,7 +671,7 @@ class SourceVersionReader:
         scope_qualification: SourceScopeVerifier | None,
         purpose: str = "filing_reuse",
         expected_read_policy_sha256: str | None = None,
-        budget: ReadBudget | None = None,
+        budget: SourceReadBudgetPort | None = None,
     ) -> VerifiedVersionReceipt:
         """Verify without retaining bytes and apply a caller-owned scope check.
 
@@ -637,7 +692,7 @@ class SourceVersionReader:
 
     def verify_reusable_version(
         self, ref: SourceRef, *, request: SourceRequest, metadata: dict[str, Any],
-        budget: ReadBudget,
+        budget: SourceReadBudgetPort,
     ) -> FilingReuseObservation:
         """Verify the selected version under filing-root and SEC scope rules."""
         from .assertion_service import source_scope_qualification
@@ -660,12 +715,14 @@ class SourceVersionReader:
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
-        budget: ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
+        budget: SourceReadBudgetPort | None = None, scope_qualification=_SCOPE_UNOBSERVED,
+        chunk_sink: SourceChunkSink | None = None,
     ) -> VerifiedContent | VerifiedVersionReceipt:
         verified, _ = self._verified_location(
             ref, purpose=purpose, expected_read_policy_sha256=expected_read_policy_sha256,
             retain_bytes=retain_bytes, current_read_policy_sha256=current_read_policy_sha256,
             budget=budget, scope_qualification=scope_qualification,
+            chunk_sink=chunk_sink,
         )
         return verified
 
@@ -673,8 +730,9 @@ class SourceVersionReader:
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
-        budget: ReadBudget | None = None, scope_qualification=_SCOPE_UNOBSERVED,
+        budget: SourceReadBudgetPort | None = None, scope_qualification=_SCOPE_UNOBSERVED,
         reusable_only: bool = False,
+        chunk_sink: SourceChunkSink | None = None,
     ) -> tuple[VerifiedContent | VerifiedVersionReceipt, Mapping[str, Any] | None]:
         """Verify through the current policy and same-SHA location fallback.
 
@@ -725,9 +783,10 @@ class SourceVersionReader:
 
         supplied_budget = budget is not None
         if budget is None:
-            budget = ReadBudget()
-            budget.begin_request()
-        elif not isinstance(budget, ReadBudget):
+            request_budget = ReadBudget()
+            request_budget.begin_request()
+            budget = request_budget
+        elif not isinstance(budget, SourceReadBudgetPort):
             raise TypeError("budget must be a read budget")
         failures: list[str] = []
         saw_non_denied_location = False
@@ -735,15 +794,26 @@ class SourceVersionReader:
         all_root_denied = True
         policy_sha256, _ = export_policy_2x(config)
         for location in sorted(candidates, key=lambda item: item.candidate_rank):
+            sink_active = False
             try:
+                if chunk_sink is not None:
+                    sink_active = True
+                    _call_source_chunk_sink(chunk_sink.begin_candidate)
                 read = read_resolver.read_verified_source_location(
                     ref, location.location_id, budget=budget,
                     retain_bytes=retain_bytes or bool(
                         scope_qualification and scope_qualification.needs_original
                     ),
                     reusable_only=reusable_only,
+                    chunk_consumer=(
+                        (lambda chunk: _call_source_chunk_sink(chunk_sink.write_chunk, chunk))
+                        if chunk_sink is not None else None
+                    ),
                 )
             except SourceReadError as exc:
+                if sink_active and chunk_sink is not None:
+                    _call_source_chunk_sink(chunk_sink.discard_candidate)
+                    sink_active = False
                 # A location may disappear after the catalog returns its
                 # candidate list. Retry the remaining same-SHA copies; keep
                 # identity/configuration failures visible to the caller.
@@ -756,44 +826,68 @@ class SourceVersionReader:
                 all_admitted_missing = False
                 all_root_denied = False
                 continue
+            except Exception:
+                if sink_active and chunk_sink is not None:
+                    _call_source_chunk_sink(chunk_sink.discard_candidate)
+                raise
             location = read.location
             observation, status, reason, detail = (
                 read.observation, read.status, read.reason, read.detail,
             )
             all_root_denied = all_root_denied and reason == "root_admission_denied"
             if not status:
-                assert observation is not None
-                if scope_qualification is not None:
-                    scope_qualification.verify(observation.data, budget=budget)
-                review = self._review_for_result(
-                    ref, purpose=purpose, retain_bytes=retain_bytes
-                )
-                read_at = datetime.now(UTC).isoformat()
-                if retain_bytes:
-                    content = VerifiedContent.from_observation(
-                        ref, observation, read_at=read_at, policy_sha256=policy_sha256,
+                try:
+                    assert observation is not None
+                    if scope_qualification is not None:
+                        scope_qualification.verify(observation.data, budget=budget)
+                    review = self._review_for_result(
+                        ref, purpose=purpose, retain_bytes=retain_bytes
+                    )
+                    read_at = datetime.now(UTC).isoformat()
+                    if retain_bytes:
+                        content = VerifiedContent.from_observation(
+                            ref, observation, read_at=read_at, policy_sha256=policy_sha256,
+                            source_read_policy_sha256=read_policy_sha256, review=review,
+                        )
+                        if chunk_sink is not None:
+                            receipt = VerifiedVersionReceipt(
+                                document_id=ref.document_id, source_id=ref.source_id,
+                                content_sha256=ref.content_sha256, byte_size=observation.byte_size,
+                                read_at=read_at, policy_sha256=policy_sha256,
+                                source_read_policy_sha256=read_policy_sha256, review=review,
+                            )
+                            _call_source_chunk_sink(chunk_sink.commit_verified, receipt)
+                            sink_active = False
+                        return content, None
+                    receipt = VerifiedVersionReceipt(
+                        document_id=ref.document_id, source_id=ref.source_id,
+                        content_sha256=ref.content_sha256, byte_size=observation.byte_size,
+                        read_at=read_at, policy_sha256=policy_sha256,
                         source_read_policy_sha256=read_policy_sha256, review=review,
                     )
-                    return content, None
-                receipt = VerifiedVersionReceipt(
-                    document_id=ref.document_id, source_id=ref.source_id,
-                    content_sha256=ref.content_sha256, byte_size=observation.byte_size,
-                    read_at=read_at, policy_sha256=policy_sha256,
-                    source_read_policy_sha256=read_policy_sha256, review=review,
-                )
-                # Only the catalog's legacy handle projection needs physical
-                # coordinates. Use this exact admitted copy, even if the
-                # same location ID was rebound after candidate lookup.
-                admitted_copy = MappingProxyType({
-                    "location_id": location.location_id,
-                    "source_id": location.source_id,
-                    "candidate_rank": location.candidate_rank,
-                    "root_id": location.root_id,
-                    "relative_path": location.relative_path,
-                    "manifest_json": location.manifest_json,
-                    "verified_sha256": observation.content_sha256,
-                }) if reusable_only else None
-                return receipt, admitted_copy
+                    if chunk_sink is not None:
+                        _call_source_chunk_sink(chunk_sink.commit_verified, receipt)
+                        sink_active = False
+                    # Only the catalog's legacy handle projection needs physical
+                    # coordinates. Use this exact admitted copy, even if the
+                    # same location ID was rebound after candidate lookup.
+                    admitted_copy = MappingProxyType({
+                        "location_id": location.location_id,
+                        "source_id": location.source_id,
+                        "candidate_rank": location.candidate_rank,
+                        "root_id": location.root_id,
+                        "relative_path": location.relative_path,
+                        "manifest_json": location.manifest_json,
+                        "verified_sha256": observation.content_sha256,
+                    }) if reusable_only else None
+                    return receipt, admitted_copy
+                except Exception:
+                    if sink_active and chunk_sink is not None:
+                        _call_source_chunk_sink(chunk_sink.discard_candidate)
+                    raise
+            if sink_active and chunk_sink is not None:
+                _call_source_chunk_sink(chunk_sink.discard_candidate)
+                sink_active = False
             failures.append(reason or status or detail or "read_failed")
             # Root admission is an eligibility decision, not evidence that an
             # admitted original is missing. Ignore denied copies when deciding

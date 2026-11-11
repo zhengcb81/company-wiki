@@ -106,6 +106,17 @@ FAST_CONTRACT_CASES = (
     "tests/contract/test_source_catalog_independent.py",
     # Enforce the package-wide source_catalog public/private owner boundary.
     "tests/contract/test_source_catalog_module_contracts.py",
+    # Verified streaming is a public source port; keep the transactional,
+    # fallback, cancellation, and single-budget contracts in every fast gate.
+    "tests/contract/test_source_version_reader.py::test_stream_version_is_a_public_source_port_and_shares_one_read_budget",
+    "tests/contract/test_source_version_reader.py::test_stream_version_accepts_a_structural_budget_port",
+    "tests/contract/test_source_version_reader.py::test_stream_version_sink_failure_is_not_misreported_as_source_read_failure",
+    "tests/contract/test_source_version_reader.py::test_stream_version_discards_mismatched_copy_before_same_sha_fallback",
+    "tests/contract/test_source_version_reader.py::test_stream_version_cancellation_never_commits_partial_input",
+    "tests/contract/test_source_version_reader.py::test_stream_version_uses_request_budget_instead_of_legacy_fixed_file_cap",
+    "tests/contract/test_processed_document_owner_boundary.py::test_temp_parse_session_attempts_directory_cleanup_after_discard_failure",
+    "tests/contract/test_processed_document_owner_boundary.py::test_source_failure_survives_parser_session_close_failure",
+    "tests/contract/test_r4b02_candidate_selection.py::test_r4b02_source_resolver_accepts_a_resettable_budget_port",
     "tests/contract/test_announcement_collector.py",
     "tests/contract/test_narrative_output_plan.py",
     "tests/contract/test_summary_group_coverage.py",

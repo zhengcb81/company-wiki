@@ -1019,3 +1019,243 @@ def test_resolver_location_port_validates_source_ref_and_requires_budget(tmp_pat
         resolver.read_verified_source_location(
             ref, location.location_id, budget=None,  # type: ignore[arg-type]
         )
+
+
+class _StagedSourceChunks:
+    """Test sink that keeps candidate bytes provisional until receipt commit."""
+
+    def __init__(self):
+        self.attempts = 0
+        self.discards = 0
+        self.chunks: list[bytes] = []
+        self.committed: bytes | None = None
+        self.receipt = None
+
+    def begin_candidate(self):
+        self.attempts += 1
+        self.chunks = []
+
+    def write_chunk(self, chunk: bytes):
+        self.chunks.append(chunk)
+
+    def discard_candidate(self):
+        self.discards += 1
+        self.chunks = []
+
+    def commit_verified(self, receipt):
+        self.committed = b"".join(self.chunks)
+        self.receipt = receipt
+
+
+def test_stream_version_is_a_public_source_port_and_shares_one_read_budget(tmp_path):
+    from company_wiki.source_contract import (
+        SourceChunkSink,
+        SourceReadBudgetPort,
+        SourceVersionPort,
+    )
+    from company_wiki.source_catalog import SourceChunkSink as CatalogChunkSink
+
+    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    try:
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+        sink = _StagedSourceChunks()
+        budget = ReadBudget(max_candidates=3, max_bytes=len(BODY) * 3)
+        budget.begin_request()
+
+        receipt = reader.stream_version(
+            ref, sink=sink, purpose="source_export", budget=budget,
+        )
+
+        assert "stream_version" in SourceVersionPort.__dict__
+        assert isinstance(reader, SourceVersionPort)
+        assert SourceChunkSink is CatalogChunkSink
+        assert isinstance(budget, SourceReadBudgetPort)
+        assert sink.committed == BODY
+        assert sink.receipt == receipt
+        assert receipt.content_sha256 == SHA
+        assert budget.candidates == 1
+        assert budget.bytes_read == len(BODY)
+        assert sink.discards == 0
+    finally:
+        catalog.close()
+
+
+def test_processing_descriptor_exposes_format_without_physical_path(tmp_path):
+    import company_wiki.source_contract as source_api
+
+    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    try:
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+        descriptor = reader.describe_processing_version(ref)
+
+        descriptor_type = source_api.SourceProcessingDescriptor
+        assert isinstance(descriptor, descriptor_type)
+        assert descriptor.source_ref == ref
+        assert descriptor.format_hint == "pdf"
+        assert not hasattr(descriptor, "original_path")
+        assert not hasattr(descriptor, "catalog")
+    finally:
+        catalog.close()
+
+
+def test_stream_version_accepts_a_structural_budget_port(tmp_path):
+    from company_wiki.source_contract import SourceReadBudgetPort
+
+    class BudgetAdapter:
+        """A caller-owned budget implementation, not the catalog class."""
+
+        def __init__(self):
+            self.inner = ReadBudget(max_candidates=2, max_bytes=len(BODY))
+
+        @property
+        def max_candidates(self):
+            return self.inner.max_candidates
+
+        @property
+        def max_bytes(self):
+            return self.inner.max_bytes
+
+        @property
+        def candidates(self):
+            return self.inner.candidates
+
+        @property
+        def bytes_read(self):
+            return self.inner.bytes_read
+
+        @property
+        def cancelled(self):
+            return self.inner.cancelled
+
+        def take_candidate(self):
+            return self.inner.take_candidate()
+
+        def charge(self, size):
+            return self.inner.charge(size)
+
+        def check(self):
+            return self.inner.check()
+
+    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    try:
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+        sink = _StagedSourceChunks()
+        budget = BudgetAdapter()
+
+        receipt = reader.stream_version(
+            ref, sink=sink, purpose="source_export", budget=budget,
+        )
+
+        assert isinstance(budget, SourceReadBudgetPort)
+        assert not isinstance(budget, ReadBudget)
+        assert receipt.content_sha256 == SHA
+        assert sink.committed == BODY
+        assert budget.candidates == 1
+        assert budget.bytes_read == len(BODY)
+    finally:
+        catalog.close()
+
+
+def test_stream_version_sink_failure_is_not_misreported_as_source_read_failure(tmp_path):
+    from company_wiki.source_contract import SourceChunkSinkError
+
+    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    try:
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+        sink = _StagedSourceChunks()
+        budget = ReadBudget(max_candidates=3, max_bytes=len(BODY) * 3)
+        budget.begin_request()
+
+        def fail_write(_chunk):
+            raise OSError("staging disk failed")
+
+        sink.write_chunk = fail_write
+        with pytest.raises(SourceChunkSinkError) as error:
+            reader.stream_version(
+                ref, sink=sink, purpose="source_export", budget=budget,
+            )
+        assert isinstance(error.value.__cause__, OSError)
+        assert sink.committed is None
+        assert sink.discards == 1
+    finally:
+        catalog.close()
+
+
+def test_stream_version_discards_mismatched_copy_before_same_sha_fallback(tmp_path):
+    catalog, paths, _roots, ids = _fixture(tmp_path, three_roots=True)
+    try:
+        # Keep the first registered location's size but make its bytes belong
+        # to another revision. The next same-SHA location must be the only
+        # candidate committed to the parser sink.
+        paths[0].write_bytes(b"X" * len(BODY))
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+        sink = _StagedSourceChunks()
+        budget = ReadBudget(max_candidates=3, max_bytes=len(BODY) * 3)
+        budget.begin_request()
+
+        receipt = reader.stream_version(
+            ref, sink=sink, purpose="source_export", budget=budget,
+        )
+
+        assert sink.attempts == 2
+        assert sink.discards == 1
+        assert sink.committed == BODY
+        assert sink.receipt == receipt
+        assert budget.candidates == 2
+        assert budget.bytes_read == len(BODY) * 2
+    finally:
+        catalog.close()
+
+
+def test_stream_version_cancellation_never_commits_partial_input(tmp_path):
+    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    try:
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+        sink = _StagedSourceChunks()
+        budget = ReadBudget(max_candidates=3, max_bytes=len(BODY) * 3)
+        budget.begin_request()
+        budget.cancel()
+
+        with pytest.raises(SourceReadError, match="cancelled"):
+            reader.stream_version(
+                ref, sink=sink, purpose="source_export", budget=budget,
+            )
+
+        assert sink.committed is None
+        assert sink.discards == 1
+        assert budget.bytes_read == 0
+    finally:
+        catalog.close()
+
+
+def test_stream_version_uses_request_budget_instead_of_legacy_fixed_file_cap(
+    tmp_path, monkeypatch,
+):
+    import company_wiki.source_catalog.resolver as resolver_module
+
+    # Simulate a tiny legacy file ceiling. The request's own account is the
+    # single byte-limit owner and is large enough for this source.
+    monkeypatch.setattr(resolver_module, "_CANDIDATE_BYTES_CAP", 4, raising=False)
+    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    try:
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+        sink = _StagedSourceChunks()
+        budget = ReadBudget(max_candidates=2, max_bytes=len(BODY))
+        budget.begin_request()
+
+        receipt = reader.stream_version(
+            ref, sink=sink, purpose="source_export", budget=budget,
+        )
+
+        assert receipt.content_sha256 == SHA
+        assert sink.committed == BODY
+        assert budget.bytes_read == len(BODY)
+    finally:
+        catalog.close()

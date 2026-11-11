@@ -34,9 +34,13 @@ from company_wiki.parser_adapters import (
 )
 from company_wiki.source_contract import (
     EvidenceCoordinates,
+    ImmutableStatus,
     ParseStatus,
     QualityFlag,
+    SOURCE_MANIFEST_SCHEMA_VERSION,
     SourceManifest,
+    SourceProcessingDescriptor,
+    SourceType,
 )
 from company_wiki.source_contract.source_manifest import SourceManifestMismatchError
 
@@ -1420,7 +1424,7 @@ def normalize_source_file(
 
 def run_parser_isolated(
     path: Path,
-    manifest: SourceManifest,
+    manifest: SourceManifest | SourceProcessingDescriptor,
     docling_path: Path | None,
     *,
     timeout_seconds: float,
@@ -1432,6 +1436,23 @@ def run_parser_isolated(
     parser: Callable[[Path, SourceManifest, Path | None], NormalizedDocument] | None = None,
 ) -> NormalizedDocument:
     """Run the parser owner in its isolated child-process runtime."""
+    if isinstance(manifest, SourceProcessingDescriptor):
+        source_ref = manifest.source_ref
+        manifest = SourceManifest(
+            schema_version=SOURCE_MANIFEST_SCHEMA_VERSION,
+            source_id=source_ref.source_id,
+            entity_ids=manifest.entity_ids,
+            original_path=path.name,
+            content_sha256=source_ref.content_sha256,
+            source_type=SourceType(manifest.source_type),
+            published_date=manifest.published_date,
+            retrieved_at=manifest.retrieved_at,
+            collector_name=manifest.collector_name,
+            collector_version=manifest.collector_version,
+            mime_type=source_ref.mime_type,
+            byte_size=source_ref.byte_size,
+            immutable_status=ImmutableStatus(manifest.immutable_status),
+        )
     return _run_parser_isolated(
         path,
         manifest,
