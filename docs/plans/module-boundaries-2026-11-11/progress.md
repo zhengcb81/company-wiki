@@ -1,5 +1,16 @@
 # 规划进度
 
+## 最新：A1核销交付（2026-11-11）
+
+- 用户新增授权后，三路独立agent逐模块审查Git refs、worktrees、dirty、PWF/交接/等价补丁；ROOT fetch六个有origin仓。StockWiki/Audit没有remote，未猜建。
+- FF B34修复先复现当前main错误拒绝，独立候选保留当前市场/期次/issuer约束，相关回归176 passed/2 skip/38 subtests；追加4例后B34最终23 passed。独审PASS，d563b63快进main并推origin；候选工区回收。
+- Dashboard既有4项WIP及边界测试整理，修同名收集冲突和过宽dynamic-import限制；189项平台/文档/预览与29项adapter/70subtests通过，独审PASS，2049356入main并推。审查期间另一harness接收的3个不重叠提交已观察保留，不冒称ROOT作者。24条真实owner stream setup仍缺CWP旧CLI，登记为未通过。
+- 清理4个CWP、3个FF测试目录（4971文件/215903376字节）、7个空旧Temp工区、CWP source-facts 11+5重复源码、已吸收stash、ET旧eval、FF空placeholder。RF4生成文件完整保留原字节证据后restore。原始财报、费用stash、真实业务状态保留。
+- 五张原卡加入A0逐项接收与测试边界；FF基线更新d563b63。RF B37、SW C38/B03、CWP历史端口差额明确分给对应owner/ROOT，SID有价值WIP先修再收。不新增重叠作者或逐步人工门。
+- 完整30.17MB Git元数据快照无损压成1.54MB，字段/记录未裁，未复制任何源码树/原件。M0完成、A1完成；M1/M2及原业务循环未启动。最终发布与清理结果看本轮review收据及Git记录。
+
+以下为M0早先的历史进度，涉及“未测试/未改代码/未建工区”的描述仅对当时成立。
+
 ## 2026-11-11
 
 - 用户要求先做完整模块路线图，再支持多个独立 harness。
@@ -20,3 +31,6 @@
 - 所有JSON解析、文档相对链接、五工区唯一性及14项责任唯一owner检查通过；git diff --check通过。没有运行pytest或生产端到端。
 - 五卡状态READY_TO_DISPATCH_NOT_STARTED；M0完成，M1/M2待实施。原生goal经get_goal确认为paused，本轮未恢复源码实施。
 - 本次只提交该子计划和父PWF的对齐文档；无源码/配置/原件修改，没有建工区、下载、模型调用或全局技能同步。提交/远端版本由Git记录，避免在文档中嵌入自身HEAD。
+
+
+CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B34回归加入既有显式CI清单（原日常smoke不变）；CI清单+B34共38 passed/1.25s。首轮把scratch放在CWP内导致pytest根/JUnit前缀污染，仓外新Temp复验通过，未放宽断言。MB-FF基线采用该最终提交。完整远端CI尚未核验。

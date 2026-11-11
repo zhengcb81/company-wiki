@@ -1,0 +1,147 @@
+{
+  "schema_version": "cwp-reconciliation-cleanup/1",
+  "observed_master": "46127c13465552a18e4560d107b0e68ee28268ff",
+  "worktree": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki",
+  "observed_worktree_head": "fcee443ef5cb5a7d67a35741a7de46d791f3328c",
+  "evidence_method": "git hash-object --path=<relative> <absolute> (without -w); exact blob present in git rev-list --objects master -- <relative>. HEAD is ancestor of master.",
+  "action_scope": "ROOT requested this manifest. Review agent performed no restore/delete. Recheck current clean-filtered blob before mutation; tracked restoration targets worktree HEAD, not master, and leaves index unchanged.",
+  "preserve": [
+    ".planning/du11-business-coverage-final-delta.json",
+    ".planning/du11-business-coverage-guard.json",
+    ".planning/du11-business-coverage-wrong-import-baseline.json",
+    ".planning/du11-native-prose-all-required-trace.json",
+    ".planning/du11-native-prose-guard.json",
+    ".planning/du11-native-prose-trace-conclusion.json",
+    ".planning/du11-source-facts-tool.xml"
+  ],
+  "items": [
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/src/company_wiki/document_understanding/decision_inventory.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "00d9de349b87b900351e45fa7fc1e1d45d1cf73b",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/src/company_wiki/source_catalog/narrative_business_policy.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "9d3823e3966c5c435e9533c9ef5495ef16ff65d4",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/src/company_wiki/source_catalog/narrative_evidence.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "711aba1adb5bacba7c7b36636ac248c4d7b13dad",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/resolver.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/src/company_wiki/source_catalog/resolver.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "84659ad4ff69da9f2ef39e40f7edc4c7ad57d446",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/source_reader.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/src/company_wiki/source_catalog/source_reader.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "c9560c261c5ee57afbaebce670174d682236761a",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "tests/test_phase_c_readonly_source.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tests/test_phase_c_readonly_source.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "7ca6bbecdcb06b78e9e4df595fff5bbf4fb85539",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "5fb74bee94cb1589841a3f0ca0ac3e873cf15e95",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "tools/changed_unit_tests.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tools/changed_unit_tests.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "d341b386ce6358772838c677af1d21abf932b8ca",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tools/document_understanding_benchmark/phase_c_observer.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "9032eeb4770d7e148b081993e5958278f88b53f0",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_readonly_source.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tools/document_understanding_benchmark/phase_c_readonly_source.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "6cf7e52504ae5bed574b5068b85b4420a553e27d",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tools/document_understanding_benchmark/phase_c_runner.py",
+      "status": "tracked",
+      "observed_clean_filtered_blob": "51a1ab36eec07097fe274b986ccf8556299510fa",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "restore_worktree_from_own_HEAD_without_index_change"
+    },
+    {
+      "path": "tests/test_phase_c_activation_recovery.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tests/test_phase_c_activation_recovery.py",
+      "status": "untracked",
+      "observed_clean_filtered_blob": "3998e09ef3a3af258f70568cf270439d4f14e8d5",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "delete_exact_untracked_file_after_hash_recheck"
+    },
+    {
+      "path": "tests/unit/du11_production/test_business_coverage_relations.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tests/unit/du11_production/test_business_coverage_relations.py",
+      "status": "untracked",
+      "observed_clean_filtered_blob": "1ffd71f63f02182e79aad6166838a597ca2659d0",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "delete_exact_untracked_file_after_hash_recheck"
+    },
+    {
+      "path": "tests/unit/du11_production/test_native_prose_continuity.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tests/unit/du11_production/test_native_prose_continuity.py",
+      "status": "untracked",
+      "observed_clean_filtered_blob": "2a8466e88f5792cd1494f5ba32035003e8190a09",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "delete_exact_untracked_file_after_hash_recheck"
+    },
+    {
+      "path": "tests/unit/test_changed_resource_scope.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tests/unit/test_changed_resource_scope.py",
+      "status": "untracked",
+      "observed_clean_filtered_blob": "5b820703bc5c3ff88adac3d5a184fdaec86d0699",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "delete_exact_untracked_file_after_hash_recheck"
+    },
+    {
+      "path": "tests/unit/test_source_fact_entity_projection.py",
+      "absolute_path": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki/tests/unit/test_source_fact_entity_projection.py",
+      "status": "untracked",
+      "observed_clean_filtered_blob": "6d677079da30fc006ca83c39cb3bc6446ebfb438",
+      "exact_blob_reachable_from_master": true,
+      "recommended_action": "delete_exact_untracked_file_after_hash_recheck"
+    }
+  ]
+}

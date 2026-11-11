@@ -1,0 +1,30 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.p3",
+    "reason": "completed isolated pytest basetemp; no tracked paths; no links; production originals outside target",
+    "files": 1406,
+    "bytes": 62612503.0,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.p3r",
+    "reason": "completed isolated pytest basetemp; no tracked paths; no links; production originals outside target",
+    "files": 1649,
+    "bytes": 69518800.0,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.p5",
+    "reason": "completed isolated pytest basetemp; no tracked paths; no links; production originals outside target",
+    "files": 968,
+    "bytes": 48965422.0,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.pytest-p3-20261110-r2",
+    "reason": "completed isolated pytest basetemp; no tracked paths; no links; production originals outside target",
+    "files": 819,
+    "bytes": 34629469.0,
+    "removed": true
+  }
+]

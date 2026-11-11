@@ -1,0 +1,1 @@
+{"baseline": "f65e6ca75fbce0616e65870f0aea78b793ef883c", "expected_behavior": "logical candidate retains explicit unknown publication", "observed": "rejected", "error_code": "upstream_error", "message": "handle published_date must use YYYY-MM-DD format", "red_reproduced": true}

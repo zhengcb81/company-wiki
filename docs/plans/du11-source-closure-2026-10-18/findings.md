@@ -257,3 +257,8 @@ The SourceCatalog owner-port and static module-boundary milestone was pushed to 
 - TDD exposed/fixed several boundary defects: missing package exports for `VerifiedContent`, string/reflection-based sink method dispatch, temp-fixture path assumptions exceeding the real Windows path budget, and cleanup errors skipping directory cleanup or obscuring the original source/parser failure. A later gate caught two old tests still monkeypatching the removed `_read_verified_bytes`; the tests now observe the public `SourceResolver.read_verified_source_location` while keeping their original one-read/proof-order assertions.
 - Final focused set: 205 passed, 1 skipped; host fast-gate: 277 passed/0 failed in 59.18 seconds; push hook smoke: 18 passed in 3.78 seconds; Ruff/mypy passed. Independent read-only review final PASS. Exact evidence: `review/p3-public-stream-parser-20261111/README.md`.
 - Published commit: `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca`; `master` and `origin/master` matched after push. Remote full CI was not verified. This closes one engineering node only; P3/company audit loop and whole-project modularity remain OPEN.
+
+
+## 2026-11-11 A1 repository reconciliation
+
+The subsequent user-authorized audit covered eight repositories, 390 branch/remote refs and 253 worktrees. Completed tested intakes: FF d563b63 and Dashboard 2049356, both main and pushed. Known scratch/redundant copies were removed; originals, unique history and active state were preserved. Remaining CWP/RF/StockWiki public-interface deltas and SID WIP are assigned in ../module-boundaries-2026-11-11/reconciliation.md and the five original cards A0. No broad architecture lane or business loop has restarted; see CURRENT_STATUS.md/json for the current entry.

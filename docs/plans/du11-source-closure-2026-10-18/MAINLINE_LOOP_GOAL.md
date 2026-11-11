@@ -2,7 +2,7 @@
 
 本文件定义目标，不维护版本日志；执行状态见[CURRENT_STATUS](CURRENT_STATUS.md)，下一步见[task_plan](task_plan.md)。
 
-2026-11-11前置优先级：先完成 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md) 的有限模块边界验收，才继续本文件的业务循环。其架构出口与本文件的资料/研究质量出口分开；新计划只承接解耦前置，不删减本目标责任。本轮只规划，native实施目标仍暂停。
+2026-11-11前置优先级：先完成 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md) 的有限模块边界验收，才继续本文件的业务循环。其架构出口与本文件的资料/研究质量出口分开；M0规划与用户后续授权的A1逐仓核销/有限并线已执行，M1/M2未完成，native业务目标仍保留暂停状态。
 
 完成以company-wiki→filing-fetch→revenue-forecast→revenue-forecast-audit为一条解耦、可复查的真实业务链。先完成已有药明康德失败整改及新attempt、药明合联/Snowflake泛化责任；再完成固定八家责任与通用循环停止条件。已有局部工程或旧公司报告不能代替本目标要求的完整新版本验收。
 

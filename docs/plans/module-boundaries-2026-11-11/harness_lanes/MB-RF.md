@@ -1,5 +1,19 @@
 # MB-RF — 独立施工卡
 
+## A0：收敛旧release差额与未提交材料（2026-11-11新增）
+
+先读总计划 `reconciliation.md` 和 `review/repo_reconciliation_20261111/research_review.md` §3/7。96个refs并非96项待并；旧Dashboard/B31/B34/B35/B37家族合成一个参考顶点 `28d646d306e8f0b5f90d402e204676cf97d2b5a1`。不要逐祖先重复合并、整树覆盖main或复制旧安装产物。当前main的durable job/concurrency/recovery、RF实际来源端口和报告入册必须保留。
+
+最小候选19个产品路径：4个与main相同；9个同名有变化，逐hunk适配；6个main缺失：`scripts/report_catalog_compare.py`、`report_catalog_compare_cli.py`、`report_catalog_scope_binding.py`、`report_catalog_subject_resolver.py`、`report_catalog_verified_compare.py`、`report_catalog_verified_compare_cli.py`。完整19路径及历史handoff在报告§3.2。写集合相应加入这些目录/身份/compare/scope/publication owner模块、薄CLI和对应测试，不扩成旧release整仓。
+
+1. A先为当前必需公开compare/scope/publication合同建立失败或已满足证据。B用RF自身owner实现，旧CWP SQLite/private layout依赖不能随并线复活；StockWiki仅通过公开DTO/CLI通讯。缺StockWiki实现时用冻结公开fixture推进RF本地，ROOT负责真实组合，RF作者不能改SW。
+2. 当前回归入口：`tests/test_report_catalog_rf_job_import.py`、`test_rf_job_concurrency.py`、`test_rf_job_recovery.py`、`test_rf_job_boundary_regression.py`、`test_decoupled_source_port.py`、`test_d4_narrative_consumption_port.py`。参考分支用例：`tests/b37_scope_binding/`、`b37_publication_sources/`、`b34_publication/`、`b35_lineage/` 和相应compare tests。仅迁移仍属当前合同的反例，集中验证，不重跑预测。
+3. 旧job-facade大包已由main更新替代，不再整体合。`rf-input-prep-01`的118个研究资料不是runtime改进，旧W04 authoring草稿不能覆盖当前SKILL/可选attestation；这些回父研究计划。
+4. ROOT已归档4份assurance生成物原字节并restore，主工区tracked已清。日志内旧canary/bound-stale失败保留，归本卡旧分发/运行入口退役核对，不因清理日志宣称失败修好了。
+5. `rf-impl`的238 staged中233与main同blob，余5是独有PWF/审计；先归档5项，后给ROOT精确核销清单。4个含msft原文的Temp工区保留。`3b00b938`原型有codex/revenue-source-reader引用，不建第二reader；先核销合同差额再退役。release路径仍被Dashboard配置引用，ROOT组合前不删除。
+
+A0和本卡原core/report/分发边界由同一RF作者顺序推进；验收后ROOT并main，不增加人工许可。StockWiki C38/B03归ROOT自己的SW工作，不是RF作者写集合。
+
 ## 任务定位与唯一工区
 
 - 原仓：`C:/Users/郑曾波/Projects/revenue-forecast`；基线 `b005a179`；目标主线 `main`。
@@ -49,7 +63,7 @@ python -B -m pytest tests/test_single_owner_guard.py tests/test_architecture_dep
 python -B -m pytest tests/test_module_boundary_closure.py -q -p no:cacheprovider
 ```
 
-实际文件名开工核对后记入PWF；不得把文件找不到当产品失败。Dashboard比较功能的release与main差异交ROOT记录，未经范围确认不并外部owner worktree。本卡不重跑公司预测、不改假设/模型算法或给任何公司打补丁。
+实际文件名开工核对后记入PWF；不得把文件找不到当产品失败。Dashboard比较功能在本卡A0已明确为RF仓内差额接收范围，按指定19路径逐合同移植，不复制外部owner工区。本卡不重跑公司预测、不改假设/模型算法或给任何公司打补丁。
 
 ## 出口
 

@@ -1,0 +1,93 @@
+{
+  "schema_version": "w13-review/1",
+  "reviewer": "independent-agent",
+  "reviewed_code_commit": "56baea4c",
+  "reviewed_files_sha256_prefix": {
+    "tools/pre_push_gate.py": "879905f697de",
+    ".githooks/pre-push": "ce4822bb5a08",
+    ".pre-commit-config.yaml": "be244d4c63e5",
+    "tests/unit/test_daily_push_policy.py": "7aaab7779e71",
+    "tests/unit/test_ci_push_selection.py": "5740e2dc4b7c",
+    "tests/unit/test_pre_push_parallel_phases.py": "e259bc8052fa",
+    "tools/changed_unit_tests.py": "6774558e8fdc"
+  },
+  "commands": [
+    {"cmd": "git diff a31300a7..56baea4c --name-status (write-scope audit; src/ scripts/ config/ .github/ diff empty)", "exit_code": 0},
+    {"cmd": "git diff a31300a7..56baea4c -- tools/changed_unit_tests.py", "exit_code": 0},
+    {"cmd": "AST compare FAST_CONTRACT_CASES + CURRENT_CI_REGRESSION_CASES base vs HEAD (identical; 29 members, 0 internal duplicates)", "exit_code": 0},
+    {"cmd": "sh <tempdir>/.githooks/pre-push (real hook copied to temp dir without tools/)", "exit_code": 1},
+    {"cmd": "echo 'refs/heads/x <a8045416> refs/heads/x <56baea4c>' | python tools/pre_push_gate.py --push-checks", "exit_code": 0},
+    {"cmd": "python -m pytest -q -p no:cacheprovider tests/unit/test_daily_push_policy.py -k real_push", "exit_code": 0},
+    {"cmd": "python -m pytest -q -p no:cacheprovider --tb=short tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py", "exit_code": 0},
+    {"cmd": "python -m ruff check tools/pre_push_gate.py tools/changed_unit_tests.py tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py", "exit_code": 0},
+    {"cmd": "python scripts/config_doctor.py", "exit_code": 1},
+    {"cmd": "python -m pytest -q -p no:cacheprovider tests/unit/test_narrative_selector_binding.py tests/unit/test_w04_source_transport.py tests/unit/document_understanding_selection/test_reading_structured_qa.py (serial rerun of the 19 xdist failures)", "exit_code": 0},
+    {"cmd": "python -m pytest -q -p no:cacheprovider tests/contract/test_b10_read_chain.py", "exit_code": 1},
+    {"cmd": "grep -rn _run_parallel_pytest_gates (whole tree excl .git; only historical plan/review docs)", "exit_code": 0},
+    {"cmd": "grep -rn 'safe to push' tools/ tests/ .githooks/ .pre-commit-config.yaml .github/ scripts/ src/ (only negative assertions in new test)", "exit_code": 0},
+    {"cmd": "G07 matrix scratch in system temp: changed_paths -> select_unit_tests -> _push_targets over 12 scenarios in a throwaway git repo", "exit_code": 0},
+    {"cmd": "git ls-tree 56baea4c + git hash-object (blob binding of reviewed files; matches task-given prefixes)", "exit_code": 0}
+  ],
+  "requirements": {
+    "G01": "PASS",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "minor",
+      "file": "tools/pre_push_gate.py:279-280",
+      "evidence": "Push-mode gate label is always 'daily push fast feedback: affected units and CI contract smoke' even when targets are smoke-only with zero affected units (defer / no-behavior-changes paths). The preceding 'Push scope' line is accurate; only the diagnostic label is imprecise. No effect on target set or exit codes.",
+      "suggested_fix": "Optional: pick a more precise label per defer branch in a later cleanup; diagnostic-only."
+    },
+    {
+      "id": "F2",
+      "severity": "minor",
+      "file": "tools/pre_push_gate.py:203-205",
+      "evidence": "_push_targets dedup only covers 'selected whole file contains FAST case' (and directory prefix). If selected ever contained a node-id identical to a FAST_CONTRACT_CASES member it would be duplicated on the command line (pytest itself dedups identical node-ids, so real harm is nil). Unreachable today: tools/changed_unit_tests.py:236 returns whole test files only. Latent defensive gap, not a defect in this package.",
+      "suggested_fix": "None required for this package; if select_unit_tests ever emits node-ids, dedup the assembled command as a set."
+    },
+    {
+      "id": "F3",
+      "severity": "minor",
+      "file": "delivery/w13/scope-report.json",
+      "evidence": "The <=60s claim is honest per the implementer's measurements (docs 44.5s / unknown 46.6s / real push 42.2s, logs corroborate inner pytest times), but wall time is load-sensitive on this host: the reviewer's rerun of the identical docs scope took 130.32s of pytest (vs 37.93s in the evidence). Correctly, no wall-clock approval threshold exists in product code (only the pre-existing 600s subprocess cap and --timeout=180).",
+      "suggested_fix": "Documentation wording only: note that wall times vary with host load and that CI / full local mode remain authoritative."
+    }
+  ],
+  "environment_limits": [
+    "config_doctor exits 1 in this worktree (no .source_catalog data dir); scripts/config_doctor.py is byte-identical to base a31300a7, so the failure pre-dates the package.",
+    "Full units stage shows 19 xdist tmp-file flake failures across 3 files; reviewer's serial rerun passed 58/58 in 80.81s (exit 0), matching the handoff claim.",
+    "tests/contract/test_b10_read_chain.py has 3 ratchet failures at HEAD (3 failed, 13 passed); git diff a31300a7..56baea4c -- src/ scripts/ config/ is empty, so the failures exist at the frozen base and are outside this package's write scope (reported to ROOT in handoff)."
+  ],
+  "conclusion": "APPROVE. All G01-G09 verified PASS by independent execution: card test set 145 passed (exit 0), card ruff clean (exit 0), real_push E2E 3 passed (exit 0), real push-mode invocation prints scope/targets/deferral with local_fast_pass and full_validation_pending and never claims 'safe to push', missing-runner hook measured exit 1, 12-scenario G07 matrix never lets a bare tests/unit into push targets, FAST_CONTRACT_CASES byte/AST-identical to base with select_unit_tests untouched, full local mode and --fast-contracts-only/--junitxml contracts unchanged including -n 2 worker rules and owned TEMP cleanup, no wall-clock approval threshold added, and the retired _run_parallel_pytest_gates has no dangling references. Three minor findings (F1-F3), none blocking; worktree left clean, no product or test files modified by the reviewer.",
+  "delta_re_review": {
+    "commit": "852dff28",
+    "reviewer": "independent-agent",
+    "changed_files": {
+      "tools/pre_push_gate.py": {"git_blob": "94eb1003", "sha256_prefix": "bdcc6294cb4f"},
+      "delivery/w13/scope-report.json": {"git_blob": "c79431fd"}
+    },
+    "commands": [
+      {"cmd": "git show 852dff28 (only tools/pre_push_gate.py + delivery/w13/scope-report.json)", "exit_code": 0},
+      {"cmd": "F2 dedup scratch in system temp: 7 scenarios (exact node match, whole file, empty, node sibling of a whole-file FAST member, file+node mix, synthetic directory, full-recommendation early return)", "exit_code": 0},
+      {"cmd": "F1 label scratch in-process: selected=[] / narrow / full-recommendation", "exit_code": 0},
+      {"cmd": "python -m pytest -q -p no:cacheprovider --tb=short tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py", "exit_code": 0},
+      {"cmd": "python -m ruff check tools/pre_push_gate.py tools/changed_unit_tests.py tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py", "exit_code": 0},
+      {"cmd": "json.load(delivery/w13/scope-report.json) validity check", "exit_code": 0}
+    ],
+    "findings": {
+      "F1": "RESOLVED. Label is 'daily push fast feedback: CI contract smoke (no affected unit files)' exactly when the affected set is empty (verified in-process for empty/narrow/full-recommendation selections). Residual cosmetic note: the full-recommendation defer path (selected==['tests/unit']) also runs smoke-only but keeps the generic label; the preceding 'Push scope: ... deferred to CI' line keeps diagnostics unambiguous. Not blocking.",
+      "F2": "RESOLVED. New dedup proven sound by case analysis and 7 empirical scenarios: exact node duplicate dropped (runs once), sibling FAST cases in the same file preserved (G03 membership intact), whole-file selection still covers all its nodes, no duplicates possible (extension excludes strings already in selected and FAST_CONTRACT_CASES itself has no internal duplicates), lost_fast_members=[] in every scenario including defensive directory input. Removing the old directory-prefix drop can only enlarge targets (coverage never shrinks). Note: the node-id branch has no dedicated unit test but is unreachable via current select_unit_tests (whole files only); defensive code, acceptable.",
+      "F3": "RESOLVED. measurement_caveat field added to delivery/w13/scope-report.json: states wall times are load-sensitive evidence citing the reviewer's 130.3s docs-scope re-run, not a threshold, and that no wall-clock approval gate exists in product code (G09). JSON valid."
+    },
+    "final_conclusion": "APPROVE. All three minor findings resolved in commit 852dff28; card test set re-run by reviewer: 145 passed (exit 0); card ruff clean (exit 0). Reviewed code commit for delivery purposes is now 852dff28. Residual items are cosmetic/informational only and require no further action."
+  }
+}

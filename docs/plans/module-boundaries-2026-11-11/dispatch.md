@@ -1,6 +1,6 @@
 # 并行施工与ROOT职责
 
-状态：**READY_TO_DISPATCH_NOT_STARTED；方案独审PASS，五张卡已准备，未派发、未创建工区。** 详见review/plan_independent_review.md，无需另建许可或让用户逐卡批准小步骤。
+状态：**READY_TO_DISPATCH_NOT_STARTED；M0方案独审PASS，A1逐仓核销结果已纳入五卡A0。** 五张架构卡未派发、未创建其工区；ROOT本轮FF临时接收工区已合并回收。旧方案独审见review/plan_independent_review.md，最新处置见reconciliation.md，无需逐卡逐步新增许可。
 
 ## 不重叠写入
 
@@ -18,16 +18,16 @@
 
 - 五卡可同时做A/B/C：它们均保持现有跨仓协议；内部新端口和测试仅归本repo。已通过的现有能力不重做。
 - 资源只够三个harness时先CWP、RF、ET；后续空出的harness接SID、FF。这是资源建议，不是额外依赖。
-- StockWiki与Audit没有新实现卡；ROOT只准备其公开接口fixture/现有test清单，待组合时验证。若发现真实RED，由其owner修有限问题，优先扩大已有责任表，不建立无限“每发现一项再来一轮全仓审计”。
-- Dashboard有既有4项WIP和release工区，由原owner接续；本轮只给公开兼容问题和测试结果，不派竞争作者。IQS/Dayu不改。SID原11项WIP和RF四项assurance输出不并入本卡。
+- StockWiki与Audit不增加新分包卡。StockWiki由ROOT在自己的SW隔离工区按reconciliation.md接收C38/B03公开合同差额，再做真实组合；Audit只准备公开fixture/现有test清单并验证。真实RED归所属owner有限修复，不建立无限“每发现一项再来一轮全仓审计”。
+- Dashboard原4项WIP已由ROOT受测接收至2049356并推main，后续仍由原owner接续；不派竞争作者。IQS/Dayu不改。SID11项WIP纳入MB-SID A0修复接收；RF四项assurance已归档原字节后restore，旧失败事实保留。
 
 ## ROOT现在与实施期分别做什么
 
-本轮：读代码/历史、五卡/接口/验收矩阵、方案独审、更新父PWF并发布文档。实现期：
+本轮：已完成M0规划及A1逐仓审查/有限受测并线/精确清理。实现期：
 
 1. 汇总各harness实际baseline、声明接口版本和新增fixture路径；记录一个生产者/消费者组合清单。文档提交不改变代码基线，不为文档SHA重跑测试。
 2. 选定四份已有真实文档与已有报告/三表快照，仅通过公开owner入口取得引用；在跑结果前冻结E04必需检查点。不要全库复制或重新下载。
-3. 只读核实Dashboard选择的code-root/HEAD/contract/data-root组合，不把主仓、release分支、运行配置混为一谈；必需公开功能如只存在已交付release，协调既有owner按独立验收并线，ROOT不跨层补内部调用。
+3. 核实Dashboard选择的code-root/HEAD/contract/data-root组合，不把配置当运行进程证明。ROOT在StockWiki自己的隔离工区按C38/B03合同差额接收；CWP和RF历史接口差额已归各卡A0，由各自作者承接。ROOT不跨层补内部调用、不改IQS、不对真实状态repair/apply。真实stream24-case待CWP T-READ后明确组合验证。
 4. 交付一个接一个接收：确认实际diff在卡范围内、测试与独审对应最后源码版本；兼容且无共享冲突即可并入所属主线并推已有remote，不积压全部支线。跨卡依赖变更仅协调相关两方，无需其他卡停工。
 5. CWP完成后再修改ROOT组合runner；执行acceptance E01–E09、现有D4/D5相关场景、安装/移动目录/错误/恢复反控，集中一次独审。失败按owner修，复跑受影响矩阵格。
 6. 全部必需格通过即CLOSED；清理本次自有worktree与临时数据、保留必要完整小证据，父PWF恢复R4/T4/真实摘要/恢复/RF循环。

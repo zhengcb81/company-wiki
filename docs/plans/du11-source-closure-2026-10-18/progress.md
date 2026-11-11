@@ -525,3 +525,8 @@ The SourceCatalog owner-port and static module-boundary milestone was pushed to 
 按用户要求先规划，不恢复源码实施。三路独立调查覆盖CWP、采集侧和研究/消费者侧，ROOT对账历史验收范围及测试/安装盲区。新子计划module-boundaries-2026-11-11固定14项有限责任、九类组合场景和五卡（CWP/FF/RF/ET/SID）；StockWiki/Audit先组合，Dashboard原owner接续。各卡独立仓库/worktree与PWF、TDD步骤、现有和新增测试、独审与统一交接已写明。
 
 独立方案审查PASS；fixture停等与B34历史迁移两阻断已消除，安装参数/身份owner/脚本runtime交付三澄清已复核。JSON/相对链接/工区互斥/责任覆盖及diff检查通过；产品测试、网络/付费均未运行。既有RF/SID/Dashboard WIP未改；D4/D5/P3旧证据保留限定范围。当前五卡可派发但未开工，native目标仍paused。本次以正常Git文档提交/推送交付；下一实施按子计划，不再无界追逐历史候选细节。
+
+
+## 2026-11-11 A1 repository reconciliation
+
+The subsequent user-authorized audit covered eight repositories, 390 branch/remote refs and 253 worktrees. Completed tested intakes: FF d563b63 and Dashboard 2049356, both main and pushed. Known scratch/redundant copies were removed; originals, unique history and active state were preserved. Remaining CWP/RF/StockWiki public-interface deltas and SID WIP are assigned in ../module-boundaries-2026-11-11/reconciliation.md and the five original cards A0. No broad architecture lane or business loop has restarted; see CURRENT_STATUS.md/json for the current entry.

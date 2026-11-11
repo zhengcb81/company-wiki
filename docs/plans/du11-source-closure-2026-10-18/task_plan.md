@@ -1,13 +1,13 @@
 # 主线实施计划
 
-2026-11-11 当前优先为 [模块边界收口子计划](../module-boundaries-2026-11-11/README.md)：三路代码调查、明确TDD边界、五个独立工区、一次ROOT组合出口。本轮只规划，代码尚未恢复实施。P3 source stream/parser子节点已完成并推送54f8b470c，继续作为已验收基础保留。实时归总入口为CURRENT_STATUS.md/json。
+2026-11-11 当前优先为 [模块边界收口子计划](../module-boundaries-2026-11-11/README.md)：M0规划与A1逐仓核销已完成，FF/Dashboard有限修复已受测并线推送；五张架构卡尚未派发。最新支线/WIP接收顺序见其reconciliation.md和各卡A0。P3 source stream/parser子节点54f8b470c继续保留；原业务循环未恢复。实时归总入口为CURRENT_STATUS.md/json。
 
 ## 下一步
 
-1. **先按新子计划收口全模块边界。** 路线为M0完整规划与接口范围→M1五owner独立TDD→M2一次ROOT组合/独审/并线。新计划中每条已确认缺口都有owner和退出证明，不再从一个私有helper无限展开。既有Catalog/Reader/stream/parser成果保留；205P1skip/277P是历史该子节点证据，不代替新矩阵。本轮只交规划与施工卡，实施等待下一次执行指令或已分配harness。
+1. **先按新子计划收口全模块边界。** M0/A1完成→M1五owner各自A0接收及TDD→M2 ROOT组合/独审/并线。ROOT另负责StockWiki C38/B03与Dashboard组合，不与五卡交叉写仓。既有Catalog/Reader/stream/parser成果保留；旧205P1skip/277P只证明当时子节点。剩余旧分支按精确差额接收，不整体回退主线。
 2. R4 正式半年报 9/12，工作量耗尽，三项原文已解析。分诊已定位统一扫描预扣占约9.05M。核对预扣和下层实际计费的重叠，先泛化 RED 再优化，在原 16M 内验收。
 3. cn-h1 0.9 业务召回 10/10 的源码冻结结果已有独立收据。T4 父链和 SEM-QUAL-01 仍需现行输入/解码反控与真实独审，之后再做新版摘要、缓存恢复、RF 实际采用和公司循环。
-4. 继续核销剩余工作树与未跟踪产物。W04 config 已归档退休，两个重复 ref 和四个旧测试控制文件已清理，七份历史失败 push 日志完成原样压缩。
+4. 后续历史工区/资料核销按新子计划reconciliation.md的owner和清单执行；A1已做的约216MB测试清理、7空工区、重复源码/生成物不重做。原件、费用及独有证据保留；每卡接收完成后ROOT再回收对应旧工区。
 
 实施细节、测试计数和两份半年报来源 SHA 在 review/current-main-replay-20261110/README.md。当前接口修复通过工程独审。后续每个大节点集中做测试与独审。
 

@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "module_boundary_planning_only_implementation_not_restarted",
+  "execution_mode": "module_boundary_reconciliation_complete_architecture_lanes_not_dispatched",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -61,7 +61,7 @@
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "get_goal during 2026-11-11 module-boundary planning",
-    "execution": "Confirmed paused via get_goal during 2026-11-11 architecture planning. This user turn authorizes investigation and planning; production implementation has not restarted. Follow module_boundaries_20261111 before resuming the business loop.",
+    "execution": "Native goal last observed paused during M0. The subsequent user request authorized this bounded audit, cleanup and tested intake, not a restart of the business loop.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "MODULE_BOUNDARY_PLAN_ACCEPTED_READY_TO_DISPATCH; CODE_IMPLEMENTATION_NOT_RESTARTED; D4_D5_P3_SCOPED_RESULTS_PRESERVED; BUSINESS_LOOP_DEFERRED",
+  "project_status": "M0_ACCEPTED_A1_RECONCILED_M1_M2_PENDING; FF_DASHBOARD_NARROW_FIXES_MERGED_PUSHED; BUSINESS_LOOP_DEFERRED",
   "as_of_date": "2026-11-11",
   "observed_at_utc": "2026-11-11T08:25:53Z",
-  "next_action": "Use docs/plans/module-boundaries-2026-11-11/dispatch.md and the five independent cards. Plan review PASS; no production implementation resumed in this turn. ROOT coordinates versions, final E01-E09 and mainline integration after owner delivery.",
+  "next_action": "Use module-boundaries-2026-11-11/reconciliation.md and updated five cards A0 then A/B/C; ROOT owns StockWiki intake and final public-interface composition.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -240,7 +240,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "Current P3 source stream/parser owner node is implemented and published at 54f8b470c. Whole-module closure now follows module-boundaries-2026-11-11: five owner lanes and one ROOT composition matrix, planning only. D4/D5 scoped proofs remain accepted. Business replay and historical workspace cleanup remain separately open.",
+    "current_work": "P3 source stream/parser owner node remains published at 54f8b470c. M0 and A1 repository reconciliation are complete; narrow FF/Dashboard fixes are merged/pushed. Five architecture cards with A0 intakes remain undispatched; ROOT owns StockWiki intake and later composition. Business replay remains deferred.",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -1104,11 +1104,31 @@
       "Two narrative-read tests still monkeypatched the removed private _read_verified_bytes; observation now wraps public SourceResolver.read_verified_source_location and retains original assertions"
     ],
     "tests": {
-      "focused_suite": {"passed": 205, "skipped": 1, "failed": 0, "seconds": 63.58},
-      "post_final_adjustment_cleanup_and_boundary": {"passed": 5, "failed": 0},
-      "stale_test_migration": {"passed": 2, "failed": 0},
-      "host_fast_gate": {"passed": 277, "skipped": 0, "failed": 0, "seconds": 59.18},
-      "push_hook_smoke": {"passed": 18, "failed": 0, "seconds": 3.78},
+      "focused_suite": {
+        "passed": 205,
+        "skipped": 1,
+        "failed": 0,
+        "seconds": 63.58
+      },
+      "post_final_adjustment_cleanup_and_boundary": {
+        "passed": 5,
+        "failed": 0
+      },
+      "stale_test_migration": {
+        "passed": 2,
+        "failed": 0
+      },
+      "host_fast_gate": {
+        "passed": 277,
+        "skipped": 0,
+        "failed": 0,
+        "seconds": 59.18
+      },
+      "push_hook_smoke": {
+        "passed": 18,
+        "failed": 0,
+        "seconds": 3.78
+      },
       "ruff": "PASS",
       "mypy": "PASS: seven touched source contract/catalog modules",
       "diff_check": "PASS"
@@ -1133,7 +1153,7 @@
     "plan": "../module-boundaries-2026-11-11/README.md",
     "task_plan": "../module-boundaries-2026-11-11/task_plan.md",
     "matrix": "../module-boundaries-2026-11-11/boundary_matrix.json",
-    "status": "PLAN_ACCEPTED_READY_TO_DISPATCH_IMPLEMENTATION_NOT_STARTED",
+    "status": "M0_ACCEPTED_A1_RECONCILED_M1_M2_PENDING",
     "lanes": [
       "MB-CWP",
       "MB-FF",
@@ -1141,10 +1161,22 @@
       "MB-ET",
       "MB-SID"
     ],
-    "code_changes_this_turn": false,
-    "tests_run_this_turn": false,
+    "code_changes_this_turn": true,
+    "tests_run_this_turn": true,
     "dispatched": false,
     "parent_business_tasks_retained": true,
-    "next_business_action_after_closure": "R4/T4/SEM -> real summary -> paid/cache recovery -> actual RF adoption -> fixed company loop"
+    "next_business_action_after_closure": "R4/T4/SEM -> real summary -> paid/cache recovery -> actual RF adoption -> fixed company loop",
+    "reconciliation": "../module-boundaries-2026-11-11/reconciliation.md",
+    "merged_and_pushed": {
+      "filing-fetch": "ac798a250b2310e0c2714053b08246ad94fffd0c",
+      "investment-dashboard": "20493562f86b1351d97bc164bbc254efacddacdf"
+    },
+    "remaining_intake_owners": [
+      "MB-CWP historical public interfaces",
+      "MB-RF B37 compare/scope",
+      "MB-SID 11 WIP fixes",
+      "ROOT StockWiki C38/B03",
+      "Dashboard owner composition"
+    ]
   }
 }

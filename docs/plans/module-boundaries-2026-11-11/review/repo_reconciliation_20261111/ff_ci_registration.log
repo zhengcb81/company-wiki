@@ -1,0 +1,40 @@
+...F..................................                                   [100%]
+================================== FAILURES ===================================
+________ test_real_pytest_failure_reports_node_and_restores_owned_temp ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001FF4DB6E9E0>
+tmp_path = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-ci-registration/test_real_pytest_failure_repor0')
+capsys = <_pytest.capture.CaptureFixture object at 0x000001FF4DB8C7D0>
+wiki_source = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-ci-registration/test_real_pytest_failure_repor0/runtime-src')
+
+    def test_real_pytest_failure_reports_node_and_restores_owned_temp(
+        monkeypatch, tmp_path, capsys, wiki_source,
+    ):
+        monkeypatch.setenv("GITHUB_ACTIONS", "true")
+        runner = _load("ff_ci_real_failure", "tools/ci_tests.py")
+        monkeypatch.setattr(runner, "PROJECT_ROOT", tmp_path)
+        monkeypatch.setattr(runner, "CI_TESTS", ("test_owned_failure.py",))
+        (tmp_path / "test_owned_failure.py").write_text(
+            "def test_specific_ci_failure():\n    assert False, 'specific-ci-failure'\n", encoding="utf-8")
+        before = set(tmp_path.iterdir())
+        allocated = []
+        original = runner.tempfile.TemporaryDirectory
+    
+        def owned_temp(*args, **kwargs):
+            directory = original(*args, **kwargs)
+            allocated.append(Path(directory.name))
+            return directory
+    
+        monkeypatch.setattr(runner.tempfile, "TemporaryDirectory", owned_temp)
+        assert runner.run_tests() == 1
+        output = capsys.readouterr()
+        assert "test_specific_ci_failure" in output.out
+        assert "specific-ci-failure" in output.out
+>       assert "::error title=pytest failure::test_owned_failure::test_specific_ci_failure" in output.out
+E       assert '::error title=pytest failure::test_owned_failure::test_specific_ci_failure' in 'CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\...failure::.planning.mb11-ci-registration.test_real_pytest_failure_repor0.test_owned_failure::test_specific_ci_failure\n'
+E        +  where 'CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\...failure::.planning.mb11-ci-registration.test_real_pytest_failure_repor0.test_owned_failure::test_specific_ci_failure\n' = CaptureResult(out='CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\\\Users\\\\\\u90d1\\u66fe\\u6....planning.mb11-ci-registration.test_real_pytest_failure_repor0.test_owned_failure::test_specific_ci_failure\n', err='').out
+
+tests\test_ci_tests.py:138: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ci_tests.py::test_real_pytest_failure_reports_node_and_restores_owned_temp
+1 failed, 37 passed in 1.90s

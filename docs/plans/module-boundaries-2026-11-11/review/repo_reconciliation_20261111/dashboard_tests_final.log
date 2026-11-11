@@ -1,0 +1,1441 @@
+..............................EEE.EEE...................EEEEEEEEEEEEEEEE [ 38%]
+E...............................EEEEEEEEEEEEE.EEEEEEEEEE................ [ 76%]
+.............................................                            [100%]
+=================================== ERRORS ====================================
+_____ ERROR at setup of test_register_all_registers_exactly_38_operations _____
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_register_all_registers_exactly_38_operations>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_______ ERROR at setup of test_every_registered_operation_id_is_unique ________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_every_registered_operation_id_is_unique>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_all_nine_module_register_files_exist_and_contribute_their_ops _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_all_nine_module_register_files_exist_and_contribute_their_ops>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+____ ERROR at setup of test_register_all_covers_every_module_registration _____
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_register_all_covers_every_module_registration>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_____ ERROR at setup of test_registry_matches_the_contract_operation_ids ______
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_registry_matches_the_contract_operation_ids>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_register_all_is_the_only_entry_point_and_is_idempotent _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_register_all_is_the_only_entry_point_and_is_idempotent>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_information_as_of_is_refused_for_ownerless_date_operations[listDocuments] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_information_as_of_is_refused_for_ownerless_date_operations[listDocuments]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_information_as_of_is_refused_for_ownerless_date_operations[getResearch] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_information_as_of_is_refused_for_ownerless_date_operations[getResearch]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_information_as_of_is_refused_for_ownerless_date_operations[listForecastRuns] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_information_as_of_is_refused_for_ownerless_date_operations[listForecastRuns]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_information_as_of_is_refused_for_ownerless_date_operations[listReports] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_information_as_of_is_refused_for_ownerless_date_operations[listReports]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_the_information_as_of_guard_fires_before_the_handler[listDocuments] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_the_information_as_of_guard_fires_before_the_handler[listDocuments]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_the_information_as_of_guard_fires_before_the_handler[getResearch] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_the_information_as_of_guard_fires_before_the_handler[getResearch]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_the_information_as_of_guard_fires_before_the_handler[listForecastRuns] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_the_information_as_of_guard_fires_before_the_handler[listForecastRuns]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_the_information_as_of_guard_fires_before_the_handler[listReports] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_the_information_as_of_guard_fires_before_the_handler[listReports]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_cursor_is_refused_for_bounded_local_views[listMetricDefinitions] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_cursor_is_refused_for_bounded_local_views[listMetricDefinitions]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_cursor_is_refused_for_bounded_local_views[listSavedViews] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_cursor_is_refused_for_bounded_local_views[listSavedViews]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_the_cursor_guard_fires_before_the_handler[listMetricDefinitions] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_the_cursor_guard_fires_before_the_handler[listMetricDefinitions]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_the_cursor_guard_fires_before_the_handler[listSavedViews] _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_the_cursor_guard_fires_before_the_handler[listSavedViews]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+__________ ERROR at setup of test_unknown_operation_raises_key_error __________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_unknown_operation_raises_key_error>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_unknown_operation_is_rejected_even_with_guarded_query_names _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_unknown_operation_is_rejected_even_with_guarded_query_names>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_cursor_is_allowed_for_operations_that_support_pagination _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_cursor_is_allowed_for_operations_that_support_pagination>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_information_as_of_is_allowed_for_the_aggregated_company_view _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_information_as_of_is_allowed_for_the_aggregated_company_view>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+________ ERROR at setup of test_guards_do_not_leak_between_operations _________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_guards_do_not_leak_between_operations>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_verified_transfer_delivers_exactly_the_locked_bytes __
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_verified_transfer_delivers_exactly_the_locked_bytes>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_stream_final_gate_keeps_the_last_chunk_back_on_receipt_failure _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_final_gate_keeps_the_last_chunk_back_on_receipt_failure>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_stream_rejects_bytes_that_differ_from_the_locked_source_ref _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_rejects_bytes_that_differ_from_the_locked_source_ref>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+__ ERROR at setup of test_stream_refuses_overemit_past_the_locked_byte_size ___
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_refuses_overemit_past_the_locked_byte_size>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+___________ ERROR at setup of test_stream_refuses_a_short_transfer ____________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_refuses_a_short_transfer>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+________ ERROR at setup of test_stream_refuses_a_missing_final_receipt ________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_refuses_a_missing_final_receipt>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_________ ERROR at setup of test_stream_refuses_an_exit_code_mismatch _________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_refuses_an_exit_code_mismatch>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+________ ERROR at setup of test_stream_surfaces_a_named_owner_refusal _________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_surfaces_a_named_owner_refusal>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+________ ERROR at setup of test_stream_rejects_an_invalid_lock_receipt ________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_rejects_an_invalid_lock_receipt>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_stream_rejects_a_lock_receipt_that_differs_from_the_source_ref _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_rejects_a_lock_receipt_that_differs_from_the_source_ref>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+__ ERROR at setup of test_stream_times_out_a_stalled_owner_and_ends_its_tree __
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_times_out_a_stalled_owner_and_ends_its_tree>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_stream_fails_closed_when_stderr_floods_before_the_lock _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_stream_fails_closed_when_stderr_floods_before_the_lock>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_____ ERROR at setup of test_aclose_after_first_chunk_ends_the_owner_tree _____
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_aclose_after_first_chunk_ends_the_owner_tree>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_output_limit_is_pre_rejected_before_any_owner_process _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_output_limit_is_pre_rejected_before_any_owner_process>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_range_is_refused_unconditionally_before_any_owner_interaction _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_range_is_refused_unconditionally_before_any_owner_interaction>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+___ ERROR at setup of test_range_is_refused_even_when_the_owner_is_healthy ____
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_range_is_refused_even_when_the_owner_is_healthy>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+___ ERROR at setup of test_list_documents_passes_filters_and_cursor_through ___
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_list_documents_passes_filters_and_cursor_through>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_____ ERROR at setup of test_list_documents_absent_query_values_stay_none _____
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_list_documents_absent_query_values_stay_none>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+____ ERROR at setup of test_list_documents_listing_query_reaches_identity _____
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_list_documents_listing_query_reaches_identity>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_information_as_of_guard_refuses_list_documents_before_the_port _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_information_as_of_guard_refuses_list_documents_before_the_port>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+______ ERROR at setup of test_get_document_version_dispatches_path_value ______
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_get_document_version_dispatches_path_value>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_________ ERROR at setup of test_get_extraction_dispatches_path_value _________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_get_extraction_dispatches_path_value>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+_ ERROR at setup of test_m3_ops_are_registered_exactly_once_under_their_names _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_m3_ops_are_registered_exactly_once_under_their_names>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/֣����/Projects/company-wiki/.planning/mb11-reconciliation-tests/dashboard/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: 'C:\\Users\\֣����\\Projects\\company-wiki\\.planning\\mb11-reconciliation-tests\\dashboard\\pytest'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+============================== warnings summary ===============================
+tests/integration/preview_isolation/test_metadata_semantics_d00.py::test_real_wire_range_rejection_and_valid_control[bytes 0-1/1-2-ab-502]
+  C:\Miniconda\Lib\site-packages\websockets\legacy\__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/integration/preview_isolation/test_metadata_semantics_d00.py::test_real_wire_range_rejection_and_valid_control[bytes 0-1/1-2-ab-502]
+  C:\Miniconda\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR tests/unit/m0-platform/test_ops_registry.py::test_register_all_registers_exactly_38_operations
+ERROR tests/unit/m0-platform/test_ops_registry.py::test_every_registered_operation_id_is_unique
+ERROR tests/unit/m0-platform/test_ops_registry.py::test_all_nine_module_register_files_exist_and_contribute_their_ops
+ERROR tests/unit/m0-platform/test_ops_registry.py::test_register_all_covers_every_module_registration
+ERROR tests/unit/m0-platform/test_ops_registry.py::test_registry_matches_the_contract_operation_ids
+ERROR tests/unit/m0-platform/test_ops_registry.py::test_register_all_is_the_only_entry_point_and_is_idempotent
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_information_as_of_is_refused_for_ownerless_date_operations[listDocuments]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_information_as_of_is_refused_for_ownerless_date_operations[getResearch]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_information_as_of_is_refused_for_ownerless_date_operations[listForecastRuns]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_information_as_of_is_refused_for_ownerless_date_operations[listReports]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_the_information_as_of_guard_fires_before_the_handler[listDocuments]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_the_information_as_of_guard_fires_before_the_handler[getResearch]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_the_information_as_of_guard_fires_before_the_handler[listForecastRuns]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_the_information_as_of_guard_fires_before_the_handler[listReports]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_cursor_is_refused_for_bounded_local_views[listMetricDefinitions]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_cursor_is_refused_for_bounded_local_views[listSavedViews]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_the_cursor_guard_fires_before_the_handler[listMetricDefinitions]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_the_cursor_guard_fires_before_the_handler[listSavedViews]
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_unknown_operation_raises_key_error
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_unknown_operation_is_rejected_even_with_guarded_query_names
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_cursor_is_allowed_for_operations_that_support_pagination
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_information_as_of_is_allowed_for_the_aggregated_company_view
+ERROR tests/unit/m0-platform/test_service_execute_guards.py::test_guards_do_not_leak_between_operations
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_verified_transfer_delivers_exactly_the_locked_bytes
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_final_gate_keeps_the_last_chunk_back_on_receipt_failure
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_rejects_bytes_that_differ_from_the_locked_source_ref
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_refuses_overemit_past_the_locked_byte_size
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_refuses_a_short_transfer
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_refuses_a_missing_final_receipt
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_refuses_an_exit_code_mismatch
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_surfaces_a_named_owner_refusal
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_rejects_an_invalid_lock_receipt
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_rejects_a_lock_receipt_that_differs_from_the_source_ref
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_times_out_a_stalled_owner_and_ends_its_tree
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_stream_fails_closed_when_stderr_floods_before_the_lock
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_aclose_after_first_chunk_ends_the_owner_tree
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_output_limit_is_pre_rejected_before_any_owner_process
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_range_is_refused_unconditionally_before_any_owner_interaction
+ERROR tests/unit/m3-documents/test_cwp_stream_units.py::test_range_is_refused_even_when_the_owner_is_healthy
+ERROR tests/unit/m3-documents/test_ops_m3_documents.py::test_list_documents_passes_filters_and_cursor_through
+ERROR tests/unit/m3-documents/test_ops_m3_documents.py::test_list_documents_absent_query_values_stay_none
+ERROR tests/unit/m3-documents/test_ops_m3_documents.py::test_list_documents_listing_query_reaches_identity
+ERROR tests/unit/m3-documents/test_ops_m3_documents.py::test_information_as_of_guard_refuses_list_documents_before_the_port
+ERROR tests/unit/m3-documents/test_ops_m3_documents.py::test_get_document_version_dispatches_path_value
+ERROR tests/unit/m3-documents/test_ops_m3_documents.py::test_get_extraction_dispatches_path_value
+ERROR tests/unit/m3-documents/test_ops_m3_documents.py::test_m3_ops_are_registered_exactly_once_under_their_names

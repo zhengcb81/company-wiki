@@ -1,0 +1,26 @@
+[
+  {
+    "path": "assurance/runs/daily_alert.jsonl",
+    "sha256": "D635166CB8D78A5007F3FAC6056220EEF4EEDF1460B6604474375B0E3B7969B4",
+    "archive": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\module-boundaries-2026-11-11\\review\\repo_reconciliation_20261111\\retained\\rf_assurance\\daily_alert.jsonl",
+    "reason": "scheduled assurance output retained for evidence; restore source working copy only"
+  },
+  {
+    "path": "assurance/runs/monthly_manifest.json",
+    "sha256": "96685A5A1F656771E8A127838AED2EC287B5599AB20677A37B8AC17E40971A06",
+    "archive": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\module-boundaries-2026-11-11\\review\\repo_reconciliation_20261111\\retained\\rf_assurance\\monthly_manifest.json",
+    "reason": "scheduled assurance output retained for evidence; restore source working copy only"
+  },
+  {
+    "path": "assurance/runs/weekly_alert.jsonl",
+    "sha256": "E5E65BFF0823F93FCA34B9E7AA06B229A6822F6148F516A866BBAB0374076CAA",
+    "archive": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\module-boundaries-2026-11-11\\review\\repo_reconciliation_20261111\\retained\\rf_assurance\\weekly_alert.jsonl",
+    "reason": "scheduled assurance output retained for evidence; restore source working copy only"
+  },
+  {
+    "path": "assurance/runs/weekly_manifest.json",
+    "sha256": "32519B6D69E0C60B0865290B644FC45050775B9DFF6E576A15BD05D67DAE61D6",
+    "archive": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\module-boundaries-2026-11-11\\review\\repo_reconciliation_20261111\\retained\\rf_assurance\\weekly_manifest.json",
+    "reason": "scheduled assurance output retained for evidence; restore source working copy only"
+  }
+]

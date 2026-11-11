@@ -1,5 +1,11 @@
 # 调查发现
 
+## 最新：A1逐仓审查与接收（2026-11-11）
+
+完整结果见reconciliation.md及review/repo_reconciliation_20261111三份逐仓报告。范围8仓390分支/remote refs、253工区，另7RF tag和2CWP stash。最重要的纠正是：refs未成祖先不一定漏并（FF job已整合接收）；tracked clean/untracked=0不代表无原件（四个RF Temp仍有msft原文）；release与main确有公开能力差额（RF B37、SW C38/B03、CWP历史CLI），不能说全部已并线。
+
+本轮已受测接收FF明确null发布日期修复与Dashboard边界WIP，均独审、main推送。SID11项WIP的路径子串/跨请求CONFIRMED_EMPTY/空tab全页回退问题已写原卡A0；不直接并入。Dashboard真实stream24-case缺owner入口仍未通过，归CWP T-READ/ROOT组合；静态扫描和mock通过不替代该证明。清理仅限确认测试产物、已吸收副本/空工区/旧生成物，独有账目、原件、业务状态、研究历史保留并分配owner。
+
 ## 2026-11-11 初始快照
 
 - CWP HEAD `08dfe8bf1ae97dff34b28976d532b3482d3ba358`，跟踪文件干净；源码最近提交 `54f8b470c` 完成 source stream/parser owner 子节点。

@@ -1,7 +1,7 @@
 {
   "schema_version": "module-boundary-plan/1",
   "date": "2026-11-11",
-  "status": "PLAN_ACCEPTED_READY_TO_DISPATCH_IMPLEMENTATION_NOT_STARTED",
+  "status": "M0_ACCEPTED_A1_RECONCILED_M1_M2_PENDING",
   "canonical_entry": "README.md",
   "parent_plan": "../du11-source-closure-2026-10-18",
   "scope": "Current production/public runtime boundaries; excludes research quality and general document-recall improvements",
@@ -10,7 +10,8 @@
     "tests_run": false,
     "production_code_changed": false,
     "remote_fetched": false,
-    "index_limit": "CWP index 461 Python sources, physical inventory479; cross-repository indexes incomplete, reports state read-only fallbacks"
+    "index_limit": "CWP index 461 Python sources, physical inventory479; cross-repository indexes incomplete, reports state read-only fallbacks",
+    "scope": "Historical M0 planning observation; see reconciliation for subsequent authorized changes"
   },
   "lanes": [
     {
@@ -29,13 +30,14 @@
         "CWP-03",
         "CWP-04",
         "CWP-05"
-      ]
+      ],
+      "historical_intake": "See A0 in harness_lanes/MB-CWP.md"
     },
     {
       "id": "MB-FF",
       "owner": "filing-fetch",
       "repo": "C:/Users/郑曾波/Projects/filing-fetch",
-      "baseline": "f65e6ca75fbce0616e65870f0aea78b793ef883c",
+      "baseline": "ac798a250b2310e0c2714053b08246ad94fffd0c",
       "target": "main",
       "worktree": "C:/Users/郑曾波/Projects/mb11-ff",
       "branch": "codex/mb11-ff",
@@ -44,7 +46,8 @@
       "requirements": [
         "FF-01",
         "FF-02"
-      ]
+      ],
+      "historical_intake": "See A0 in harness_lanes/MB-FF.md"
     },
     {
       "id": "MB-RF",
@@ -60,7 +63,8 @@
         "RF-01",
         "RF-02",
         "RF-03"
-      ]
+      ],
+      "historical_intake": "See A0 in harness_lanes/MB-RF.md"
     },
     {
       "id": "MB-ET",
@@ -75,7 +79,8 @@
       "requirements": [
         "ET-01",
         "ET-02"
-      ]
+      ],
+      "historical_intake": "See A0 in harness_lanes/MB-ET.md"
     },
     {
       "id": "MB-SID",
@@ -90,7 +95,8 @@
       "requirements": [
         "SID-01",
         "SID-02"
-      ]
+      ],
+      "historical_intake": "See A0 in harness_lanes/MB-SID.md"
     }
   ],
   "requirements": [
@@ -207,37 +213,6 @@
       "status": "NOT_IMPLEMENTED"
     }
   ],
-  "root_verification_only": [
-    {
-      "owner": "StockWiki",
-      "baseline": "12c441e",
-      "scope": "existing source/processed-document/index public ports; owner state isolation",
-      "status": "PENDING_COMPOSITION"
-    },
-    {
-      "owner": "revenue-forecast-audit",
-      "baseline": "3589b69",
-      "scope": "public execution/summary imports; independent diagnostics; portable bundle",
-      "status": "PENDING_COMPOSITION"
-    },
-    {
-      "owner": "investment-dashboard",
-      "baseline": "b707473",
-      "scope": "existing owner continues; current deployed tuple not inferred from main",
-      "status": "PENDING_OWNER_COORDINATION",
-      "existing_wip": true
-    },
-    {
-      "owner": "Dayu",
-      "scope": "external SDK accessed only by CWP bridge",
-      "status": "READ_ONLY_EXTERNAL"
-    },
-    {
-      "owner": "IQS",
-      "scope": "existing public consumer protocol only; no internal change",
-      "status": "READ_ONLY_EXTERNAL"
-    }
-  ],
   "interfaces": [
     {
       "id": "I01",
@@ -343,5 +318,56 @@
     "report": "review/plan_independent_review.md",
     "open_findings": []
   },
-  "next_action": "Hand off the five standalone cards to distinct harnesses; each may start A/B/C from its local existing contracts. ROOT prepares version/sample composition and integrates after delivery. No implementation started in this planning turn."
+  "next_action": "Updated five cards: own A0 intake then A/B/C. ROOT owns StockWiki C38/B03 intake and later public-interface composition. A1 narrow FF/Dashboard fixes are merged and pushed; architecture lanes not dispatched; business loop remains deferred.",
+  "reconciliation": {
+    "status": "COMPLETE_WITH_ASSIGNED_INTAKES",
+    "entry": "reconciliation.md",
+    "before_inventory": "review/repo_reconciliation_20261111/inventory_before.json.gz",
+    "repositories": 8,
+    "branch_remote_refs_before": 390,
+    "registered_worktrees_before": 253,
+    "paid_calls": 0,
+    "architecture_lanes_dispatched": false,
+    "business_loop_resumed": false,
+    "merged_and_pushed": {
+      "filing-fetch": "ac798a250b2310e0c2714053b08246ad94fffd0c",
+      "investment-dashboard": "20493562f86b1351d97bc164bbc254efacddacdf"
+    }
+  },
+  "root_owned_work": [
+    {
+      "owner": "StockWiki",
+      "baseline": "12c441e",
+      "scope": "ROOT receives C38/B03 public-contract deltas in a StockWiki-only worktree, preserves current source/F05 owners, then composes",
+      "status": "PENDING_ROOT_INTAKE_AND_COMPOSITION",
+      "reference_tips": [
+        "4532b0da",
+        "652f6a48"
+      ]
+    },
+    {
+      "owner": "revenue-forecast-audit",
+      "baseline": "3589b69",
+      "scope": "public execution/summary imports; independent diagnostics; portable bundle",
+      "status": "PENDING_COMPOSITION"
+    },
+    {
+      "owner": "investment-dashboard",
+      "baseline": "20493562f86b1351d97bc164bbc254efacddacdf",
+      "scope": "narrow boundary WIP accepted and pushed; original owner continues; actual owner stream combination still pending",
+      "status": "NARROW_INTAKE_MERGED_COMPOSITION_PENDING",
+      "existing_wip": false,
+      "historical_baseline": "b707473"
+    },
+    {
+      "owner": "Dayu",
+      "scope": "external SDK accessed only by CWP bridge",
+      "status": "READ_ONLY_EXTERNAL"
+    },
+    {
+      "owner": "IQS",
+      "scope": "existing public consumer protocol only; no internal change",
+      "status": "READ_ONLY_EXTERNAL"
+    }
+  ]
 }

@@ -1,8 +1,8 @@
 # 当前交接
 
-2026-11-11后续用户要求先做全模块架构与TDD路线图。**当前执行入口转到 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)**，父计划只归总。已完成三路只读代码调查、五卡、接口/测试/并行/交接设计；子计划task_plan记录方案独审与发布情况。本轮没有恢复代码实施。五卡尚未派发或开工，不把PLANNED当DELIVERED。
+**当前执行入口：[module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)**，父计划只归总。M0完整规划和A1逐模块Git审查已完成，最新实际接收/清理/余项见 [reconciliation.md](../module-boundaries-2026-11-11/reconciliation.md)。FF与Dashboard有限修复已受测、独审、入main并推送；五张架构卡仍未派发，不把这两次有限接收当作M1/M2完成。
 
-下次从子计划dispatch.md选择对应独立卡：CWP/FF/RF/ET/SID各一个作者；ROOT统管接口、最终组合与并线。StockWiki/Audit先黑盒验证，Dashboard接续原owner。原R4/真实摘要/缓存/RF循环保留，在模块边界CLOSED后恢复。不要再以历史候选逐个重放作为没有清单的全局解耦路线。
+下次从子计划dispatch.md选择更新后的独立卡：CWP/FF/RF/ET/SID各一个作者，先A0再A/B/C；ROOT统管接口、StockWiki C38/B03接收、最终组合与并线。Audit只验证，Dashboard接续原owner。SID11项WIP不能原样接收，RF/CWP旧release不能全树覆盖新main；各自已写精确范围与测试。原R4/真实摘要/缓存/RF循环保留，在模块边界CLOSED后恢复。
 
 ## 已发布的前一子节点（历史快照）
 

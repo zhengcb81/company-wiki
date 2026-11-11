@@ -1,0 +1,5 @@
+{
+  "dropped": "5b1415d6e36cf8476943567f59faf6a80a8061ba",
+  "reason": "both post-image source blobs reachable from master; see cwp_review section 6",
+  "retained": "18ac0d0562 expense delta and historical removals preserved"
+}

@@ -1,0 +1,1148 @@
+[
+  {
+    "id": "cwp",
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "groups": {
+      ".planning/shared-reading-production": {
+        "files": 5537,
+        "bytes": 48924607,
+        "missing": 0,
+        "latest": 1793514204.622848
+      },
+      ".planning/r1-w09-root-integration-20261023": {
+        "files": 548,
+        "bytes": 28547366,
+        "missing": 0,
+        "latest": 1792797459.7490056
+      },
+      ".planning/c3-20261028": {
+        "files": 1457,
+        "bytes": 23701745,
+        "missing": 0,
+        "latest": 1793293928.8566504
+      },
+      ".p3": {
+        "files": 362,
+        "bytes": 23214673,
+        "missing": 0,
+        "latest": 1794355320.1871445
+      },
+      ".p3r": {
+        "files": 710,
+        "bytes": 23110527,
+        "missing": 0,
+        "latest": 1794359492.6577013
+      },
+      "docs": {
+        "files": 143,
+        "bytes": 17173810,
+        "missing": 0,
+        "latest": 1793991093.8633177
+      },
+      ".p5": {
+        "files": 461,
+        "bytes": 14633251,
+        "missing": 0,
+        "latest": 1794366482.019078
+      },
+      ".planning/summary-quality-20261030": {
+        "files": 1108,
+        "bytes": 11419222,
+        "missing": 0,
+        "latest": 1793483488.7956975
+      },
+      ".planning/mainline-closeout-20261031": {
+        "files": 743,
+        "bytes": 9590040,
+        "missing": 0,
+        "latest": 1793522765.2450337
+      },
+      ".planning/r1-w08-target-trace-20261024": {
+        "files": 8,
+        "bytes": 5278757,
+        "missing": 0,
+        "latest": 1792818831.9415517
+      },
+      ".planning/w16-w17-root-acceptance": {
+        "files": 249,
+        "bytes": 5073112,
+        "missing": 0,
+        "latest": 1792944199.5107546
+      },
+      ".planning/r1-w08-real-20261023": {
+        "files": 45,
+        "bytes": 4916837,
+        "missing": 0,
+        "latest": 1792792466.2871847
+      },
+      ".planning/p3w12-20261101": {
+        "files": 56,
+        "bytes": 3910014,
+        "missing": 0,
+        "latest": 1793519510.5249195
+      },
+      ".planning/c3-20261026": {
+        "files": 396,
+        "bytes": 3160899,
+        "missing": 0,
+        "latest": 1793170840.7987087
+      },
+      ".planning/architecture-quality-20261101": {
+        "files": 586,
+        "bytes": 2970276,
+        "missing": 0,
+        "latest": 1793642011.5625489
+      },
+      ".pytest-p3-20261110-r2": {
+        "files": 127,
+        "bytes": 2864651,
+        "missing": 0,
+        "latest": 1794353885.9698665
+      },
+      ".planning/r1-r2-triage": {
+        "files": 50,
+        "bytes": 1925802,
+        "missing": 0,
+        "latest": 1792620241.4966614
+      },
+      ".planning/source-information-20261029": {
+        "files": 152,
+        "bytes": 1756492,
+        "missing": 0,
+        "latest": 1793320066.274066
+      },
+      ".planning/source-description-20261030": {
+        "files": 297,
+        "bytes": 1595983,
+        "missing": 0,
+        "latest": 1793345865.0818307
+      },
+      ".planning/du8-ff41-root-20261016": {
+        "files": 209,
+        "bytes": 1151039,
+        "missing": 0,
+        "latest": 1792533554.472247
+      },
+      ".planning/w04-selector-reception": {
+        "files": 82,
+        "bytes": 863068,
+        "missing": 0,
+        "latest": 1792533557.505653
+      },
+      ".planning/r1-w07-live": {
+        "files": 58,
+        "bytes": 822963,
+        "missing": 0,
+        "latest": 1792700675.635736
+      },
+      ".planning/r1-w08-real-20261024-composed-annual14": {
+        "files": 4,
+        "bytes": 663500,
+        "missing": 0,
+        "latest": 1792803506.3400693
+      },
+      ".planning/r1-w08-real-20261024-v4": {
+        "files": 1,
+        "bytes": 652667,
+        "missing": 0,
+        "latest": 1792819676.9176059
+      },
+      ".planning/source-information-20261030": {
+        "files": 69,
+        "bytes": 509250,
+        "missing": 0,
+        "latest": 1793324631.426569
+      },
+      ".planning/r1-w04-test": {
+        "files": 51,
+        "bytes": 470561,
+        "missing": 0,
+        "latest": 1792622659.9257388
+      },
+      ".planning/r1-w08-prepush-final-rootfix-20261024": {
+        "files": 44,
+        "bytes": 443689,
+        "missing": 0,
+        "latest": 1792805407.6246817
+      },
+      ".planning/w19-root-reception-20261026": {
+        "files": 84,
+        "bytes": 410794,
+        "missing": 0,
+        "latest": 1793041099.429083
+      },
+      ".planning/r1-w02-test": {
+        "files": 48,
+        "bytes": 386438,
+        "missing": 0,
+        "latest": 1792623670.3525896
+      },
+      ".planning/pdf-c2-enhancement-20261025": {
+        "files": 39,
+        "bytes": 384846,
+        "missing": 0,
+        "latest": 1792967158.8457665
+      },
+      ".planning/t4-sem-h1-20261106-attempt2": {
+        "files": 1,
+        "bytes": 379876,
+        "missing": 0,
+        "latest": 1793995814.1833808
+      },
+      ".planning/r1-w08-annual14-independent-20261024": {
+        "files": 4,
+        "bytes": 377310,
+        "missing": 0,
+        "latest": 1792804068.5412095
+      },
+      ".planning/r1-w01-test": {
+        "files": 55,
+        "bytes": 349600,
+        "missing": 0,
+        "latest": 1792623716.0361302
+      },
+      ".planning/cf-source-20261025": {
+        "files": 66,
+        "bytes": 307414,
+        "missing": 0,
+        "latest": 1793214247.938136
+      },
+      ".planning/decoupling-implementation-20261102": {
+        "files": 95,
+        "bytes": 304484,
+        "missing": 0,
+        "latest": 1793656284.1649423
+      },
+      ".planning/qa-scope-20261030": {
+        "files": 51,
+        "bytes": 294930,
+        "missing": 0,
+        "latest": 1793326340.304389
+      },
+      ".planning/r1-w03-join": {
+        "files": 101,
+        "bytes": 278624,
+        "missing": 0,
+        "latest": 1792703476.6292124
+      },
+      ".planning/gate-rejection-followup-20261102": {
+        "files": 68,
+        "bytes": 249214,
+        "missing": 0,
+        "latest": 1793645794.5236924
+      },
+      ".planning/w20-reception-r3-20261029": {
+        "files": 68,
+        "bytes": 244887,
+        "missing": 0,
+        "latest": 1793306527.8534327
+      },
+      ".planning/w20-reception-r2-20261029": {
+        "files": 36,
+        "bytes": 242507,
+        "missing": 0,
+        "latest": 1793300111.6870425
+      },
+      ".planning/r1-w08-predicate-publication-fix-20261024": {
+        "files": 11,
+        "bytes": 231182,
+        "missing": 0,
+        "latest": 1792801328.7605157
+      },
+      ".planning/r1-w08-crosspage-independent-20261024": {
+        "files": 29,
+        "bytes": 230812,
+        "missing": 0,
+        "latest": 1792805622.926081
+      },
+      ".planning/w20-reception-20261029": {
+        "files": 28,
+        "bytes": 168477,
+        "missing": 0,
+        "latest": 1793294316.569631
+      },
+      ".planning/gcwp-canonical-20261030": {
+        "files": 6,
+        "bytes": 162298,
+        "missing": 0,
+        "latest": 1793351098.407333
+      },
+      ".planning/older-packages-merge-20261031": {
+        "files": 27,
+        "bytes": 145010,
+        "missing": 0,
+        "latest": 1793481050.300983
+      },
+      ".planning/w22-w23-reception-20261031": {
+        "files": 53,
+        "bytes": 143647,
+        "missing": 0,
+        "latest": 1793478684.085443
+      },
+      ".planning/r1-closeout": {
+        "files": 47,
+        "bytes": 133619,
+        "missing": 0,
+        "latest": 1792709949.7078319
+      },
+      ".planning/r1-w02-independent": {
+        "files": 16,
+        "bytes": 119980,
+        "missing": 0,
+        "latest": 1792623654.4637828
+      },
+      ".planning/r1-w01-independent": {
+        "files": 25,
+        "bytes": 104659,
+        "missing": 0,
+        "latest": 1792623360.1296604
+      },
+      ".planning/budget-regime-20261023": {
+        "files": 16,
+        "bytes": 89111,
+        "missing": 0,
+        "latest": 1792795458.9332788
+      },
+      ".planning/decoupling-recheck-20261103": {
+        "files": 22,
+        "bytes": 86971,
+        "missing": 0,
+        "latest": 1793659174.5898664
+      },
+      ".planning/w08-root-reception": {
+        "files": 10,
+        "bytes": 83502,
+        "missing": 0,
+        "latest": 1792533557.522608
+      },
+      ".planning/pdf-parser-reuse-20261025": {
+        "files": 20,
+        "bytes": 73424,
+        "missing": 0,
+        "latest": 1792959736.2827835
+      },
+      ".planning/r1-w04-w05-independent": {
+        "files": 12,
+        "bytes": 60174,
+        "missing": 0,
+        "latest": 1792623592.2027774
+      },
+      ".planning/r1-ff-integration-20261022": {
+        "files": 30,
+        "bytes": 52200,
+        "missing": 0,
+        "latest": 1792624252.7668347
+      },
+      ".planning/w21-root-reception-20261030": {
+        "files": 13,
+        "bytes": 45410,
+        "missing": 0,
+        "latest": 1793346243.9871473
+      },
+      ".planning/architecture-quality-20261013": {
+        "files": 3,
+        "bytes": 43878,
+        "missing": 0,
+        "latest": 1792533554.3720715
+      },
+      ".planning/pwf-reconcile-20261031": {
+        "files": 8,
+        "bytes": 42414,
+        "missing": 0,
+        "latest": 1793483844.544354
+      },
+      ".planning/r1-ci-independent": {
+        "files": 26,
+        "bytes": 42062,
+        "missing": 0,
+        "latest": 1792693627.4755678
+      },
+      ".planning/pdf-c2-20261025": {
+        "files": 12,
+        "bytes": 40502,
+        "missing": 0,
+        "latest": 1792963499.1201177
+      },
+      ".planning/architecture-reassessment-20261102": {
+        "files": 37,
+        "bytes": 39805,
+        "missing": 0,
+        "latest": 1793647420.7044415
+      },
+      ".planning/r1-w08-missing-design-specs-20261024.json": {
+        "files": 1,
+        "bytes": 30839,
+        "missing": 0,
+        "latest": 1792804745.549982
+      },
+      ".planning/r1rv21": {
+        "files": 4,
+        "bytes": 27869,
+        "missing": 0,
+        "latest": 1792618869.3643909
+      },
+      ".planning/decoupling-first-20261102": {
+        "files": 36,
+        "bytes": 27583,
+        "missing": 0,
+        "latest": 1793648321.099097
+      },
+      ".planning/r1-w08-reporting-publication-20261024": {
+        "files": 15,
+        "bytes": 25996,
+        "missing": 0,
+        "latest": 1792834452.4910922
+      },
+      ".planning/r1-external-packets-20261023": {
+        "files": 4,
+        "bytes": 25773,
+        "missing": 0,
+        "latest": 1792783187.2643497
+      },
+      ".planning/r1-w08-crosspage-publication-20261024": {
+        "files": 25,
+        "bytes": 24048,
+        "missing": 0,
+        "latest": 1792806625.6231668
+      },
+      ".planning/w18-root-acceptance-20261025": {
+        "files": 6,
+        "bytes": 20971,
+        "missing": 0,
+        "latest": 1792961034.9763703
+      },
+      ".planning/market-m2-stage-paths.json": {
+        "files": 1,
+        "bytes": 20153,
+        "missing": 0,
+        "latest": 1792846026.69831
+      },
+      ".planning/r1-w11-publication-20261023": {
+        "files": 9,
+        "bytes": 18450,
+        "missing": 0,
+        "latest": 1792798778.3882246
+      },
+      ".planning/r1-w08-close-current-publication-20261024.py": {
+        "files": 1,
+        "bytes": 17946,
+        "missing": 0,
+        "latest": 1792806380.4440062
+      },
+      ".planning/pdf-reuse-c2-explore-20261025": {
+        "files": 2,
+        "bytes": 17336,
+        "missing": 0,
+        "latest": 1792958863.5413754
+      },
+      ".planning/r1-w08-publish-current-node-docs-20261024.py": {
+        "files": 1,
+        "bytes": 17280,
+        "missing": 0,
+        "latest": 1792804744.597708
+      },
+      ".planning/r1-published-status-20261024.py": {
+        "files": 1,
+        "bytes": 17191,
+        "missing": 0,
+        "latest": 1792799293.9303007
+      },
+      ".planning/r1-w08-main-integration-20261024": {
+        "files": 8,
+        "bytes": 15075,
+        "missing": 0,
+        "latest": 1792801942.3023536
+      },
+      ".planning/r1-w08-main-publication-final-20261024.py": {
+        "files": 1,
+        "bytes": 14168,
+        "missing": 0,
+        "latest": 1792802078.32968
+      },
+      ".planning/r1-published-docs-stage-20261024.json": {
+        "files": 1,
+        "bytes": 12276,
+        "missing": 0,
+        "latest": 1792799322.184695
+      },
+      ".planning/r1-w08-publication-checkpoint-20261024.py": {
+        "files": 1,
+        "bytes": 11543,
+        "missing": 0,
+        "latest": 1792801267.9522479
+      },
+      ".planning/pdf-c2-publication-20261026": {
+        "files": 4,
+        "bytes": 11370,
+        "missing": 0,
+        "latest": 1793002961.0462854
+      },
+      ".planning/r1-published-docs-commit-20261024.txt": {
+        "files": 1,
+        "bytes": 10743,
+        "missing": 0,
+        "latest": 1792799342.4482987
+      },
+      ".planning/r1-w08-finish-main-rootfix-20261024.py": {
+        "files": 1,
+        "bytes": 8994,
+        "missing": 0,
+        "latest": 1792805821.434448
+      },
+      ".planning/w22-dispatch-20261030": {
+        "files": 3,
+        "bytes": 8934,
+        "missing": 0,
+        "latest": 1793389712.513284
+      },
+      ".planning/r1-w11-acceptance-20261023.py": {
+        "files": 1,
+        "bytes": 8379,
+        "missing": 0,
+        "latest": 1792797207.9544673
+      },
+      ".planning/market-status-final-20261024.py": {
+        "files": 1,
+        "bytes": 7669,
+        "missing": 0,
+        "latest": 1792840427.9734156
+      },
+      ".planning/r1-w08-budget-role-decision-20261024.py": {
+        "files": 1,
+        "bytes": 6816,
+        "missing": 0,
+        "latest": 1792802411.9781713
+      },
+      ".planning/market-publication-close-20261024.py": {
+        "files": 1,
+        "bytes": 6423,
+        "missing": 0,
+        "latest": 1792841676.0104823
+      },
+      ".planning/r1-w08-declaration-marker-root-20261024.py": {
+        "files": 1,
+        "bytes": 6166,
+        "missing": 0,
+        "latest": 1792802751.6119142
+      },
+      ".planning/r1-w08-material-publish-paths-20261024.json": {
+        "files": 1,
+        "bytes": 6025,
+        "missing": 0,
+        "latest": 1792836830.2239008
+      },
+      ".planning/r1-w11-expanded-red.txt": {
+        "files": 1,
+        "bytes": 5792,
+        "missing": 0,
+        "latest": 1792796922.8304389
+      },
+      ".planning/market-study-status-20261024.py": {
+        "files": 1,
+        "bytes": 5612,
+        "missing": 0,
+        "latest": 1792838594.1565158
+      },
+      ".planning/r1-w11-status-20261023.py": {
+        "files": 1,
+        "bytes": 5389,
+        "missing": 0,
+        "latest": 1792795950.9801114
+      },
+      ".planning/r1-w11-encoding-closeout-20261024.py": {
+        "files": 1,
+        "bytes": 5164,
+        "missing": 0,
+        "latest": 1792798219.0816782
+      },
+      ".planning/market-m2-publication-20261024.py": {
+        "files": 1,
+        "bytes": 4921,
+        "missing": 0,
+        "latest": 1792846024.9158926
+      },
+      ".planning/r1-parallel-checkpoint-20261024.py": {
+        "files": 1,
+        "bytes": 4912,
+        "missing": 0,
+        "latest": 1792797759.5040061
+      },
+      ".planning/market-checkpoints-20261024.py": {
+        "files": 1,
+        "bytes": 4469,
+        "missing": 0,
+        "latest": 1792840791.85682
+      },
+      ".planning/w23-xiaomi-ocr-20261030": {
+        "files": 2,
+        "bytes": 4431,
+        "missing": 0,
+        "latest": 1793390072.6309147
+      },
+      ".planning/budget-regime-20261023-dimensions-red.txt": {
+        "files": 1,
+        "bytes": 4066,
+        "missing": 0,
+        "latest": 1792793577.7048218
+      },
+      ".planning/budget-regime-20261023-dimensions-red2.txt": {
+        "files": 1,
+        "bytes": 3933,
+        "missing": 0,
+        "latest": 1792793604.0889368
+      },
+      ".planning/r1-w08-composed-annual-20261024.py": {
+        "files": 1,
+        "bytes": 3706,
+        "missing": 0,
+        "latest": 1792803441.2751367
+      },
+      ".planning/market-policy-fix-20261024.py": {
+        "files": 1,
+        "bytes": 3690,
+        "missing": 0,
+        "latest": 1792839346.7882802
+      },
+      ".planning/market-strategy-push-2.log": {
+        "files": 1,
+        "bytes": 3617,
+        "missing": 0,
+        "latest": 1792841445.3994348
+      },
+      ".planning/market-du5-read-20261024.py": {
+        "files": 1,
+        "bytes": 3606,
+        "missing": 0,
+        "latest": 1792838742.3848896
+      },
+      ".planning/r1-w08-restore-missing-specs-20261024.py": {
+        "files": 1,
+        "bytes": 3563,
+        "missing": 0,
+        "latest": 1792804744.5937068
+      },
+      ".planning/market-m2-push-blocked-20261024.py": {
+        "files": 1,
+        "bytes": 3479,
+        "missing": 0,
+        "latest": 1792847139.0057588
+      },
+      ".planning/p3w12-r4-20261101": {
+        "files": 8,
+        "bytes": 3479,
+        "missing": 0,
+        "latest": 1793514241.9874094
+      },
+      ".planning/market-m2-status-20261024.py": {
+        "files": 1,
+        "bytes": 3345,
+        "missing": 0,
+        "latest": 1792845916.1029108
+      },
+      ".planning/r1-w08-crosspage-natural-20261024.py": {
+        "files": 1,
+        "bytes": 3327,
+        "missing": 0,
+        "latest": 1792804327.8232534
+      },
+      ".planning/r1-w08-marker-closeout-20261024.py": {
+        "files": 1,
+        "bytes": 3320,
+        "missing": 0,
+        "latest": 1792802812.4193563
+      },
+      ".planning/budget-regime-20261023-dimensions-red3.txt": {
+        "files": 1,
+        "bytes": 3028,
+        "missing": 0,
+        "latest": 1792793627.803791
+      },
+      ".planning/r1-w08-save-reviewed-source-20261024.py": {
+        "files": 1,
+        "bytes": 3021,
+        "missing": 0,
+        "latest": 1792804504.2309077
+      },
+      ".planning/r1-w08-cache-debug.py": {
+        "files": 1,
+        "bytes": 2888,
+        "missing": 0,
+        "latest": 1792811048.0795517
+      },
+      ".planning/r1-w08-marker-roman-case-20261024.py": {
+        "files": 1,
+        "bytes": 2886,
+        "missing": 0,
+        "latest": 1792802918.8665528
+      },
+      ".planning/budget-regime-20261023-root-red2.txt": {
+        "files": 1,
+        "bytes": 2840,
+        "missing": 0,
+        "latest": 1792793292.736457
+      },
+      ".planning/r1-w08-current-main-publish-20261024.py": {
+        "files": 1,
+        "bytes": 2819,
+        "missing": 0,
+        "latest": 1792805172.9402215
+      },
+      ".planning/budget-regime-20261023-root-red.txt": {
+        "files": 1,
+        "bytes": 2814,
+        "missing": 0,
+        "latest": 1792793279.4284465
+      },
+      ".planning/market-m2-observe-publication-20261024.py": {
+        "files": 1,
+        "bytes": 2745,
+        "missing": 0,
+        "latest": 1792846868.4360335
+      },
+      ".p3r-g3check-20261111": {
+        "files": 7,
+        "bytes": 2678,
+        "missing": 0,
+        "latest": 1794360501.7534802
+      },
+      ".planning/r1-w01-postprocess": {
+        "files": 2,
+        "bytes": 2571,
+        "missing": 0,
+        "latest": 1792623795.876706
+      },
+      ".planning/r1-w08-current-docs-publish-20261024.py": {
+        "files": 1,
+        "bytes": 2450,
+        "missing": 0,
+        "latest": 1792802458.5470524
+      },
+      ".planning/market-compat-status-20261024.py": {
+        "files": 1,
+        "bytes": 2449,
+        "missing": 0,
+        "latest": 1792841093.5290027
+      },
+      ".planning/r1-w08-spec-receipt-reconstruction-20261024.py": {
+        "files": 1,
+        "bytes": 2376,
+        "missing": 0,
+        "latest": 1792804744.600959
+      },
+      ".planning/market-extra-source-read-20261024.py": {
+        "files": 1,
+        "bytes": 2342,
+        "missing": 0,
+        "latest": 1792839768.9840038
+      },
+      ".planning/test_market_family_policy_upgrade.py": {
+        "files": 1,
+        "bytes": 2279,
+        "missing": 0,
+        "latest": 1792839260.9051042
+      },
+      ".planning/r1-w11-encoding-red.txt": {
+        "files": 1,
+        "bytes": 2195,
+        "missing": 0,
+        "latest": 1792797847.6593468
+      },
+      ".planning/market-policy-references-20261024.py": {
+        "files": 1,
+        "bytes": 2174,
+        "missing": 0,
+        "latest": 1792839619.47184
+      },
+      ".workbuddy-ai": {
+        "files": 1,
+        "bytes": 2092,
+        "missing": 0,
+        "latest": 1793665521.9718308
+      },
+      ".planning/budget-regime-20261023-cache-green.txt": {
+        "files": 1,
+        "bytes": 2057,
+        "missing": 0,
+        "latest": 1792794298.4903207
+      },
+      ".planning/r1-w08-composed-freeze-v3-20261024.py": {
+        "files": 1,
+        "bytes": 1861,
+        "missing": 0,
+        "latest": 1792804327.8242548
+      },
+      ".planning/budget-regime-20261023-related.txt": {
+        "files": 1,
+        "bytes": 1822,
+        "missing": 0,
+        "latest": 1792793471.0375187
+      },
+      ".planning/budget-regime-20261023-dimensions-green.txt": {
+        "files": 1,
+        "bytes": 1759,
+        "missing": 0,
+        "latest": 1792793685.3102772
+      },
+      ".planning/r1-w08-current-docs-paths-20261024.json": {
+        "files": 1,
+        "bytes": 1737,
+        "missing": 0,
+        "latest": 1792802462.4651308
+      },
+      ".planning/market-policy-baseline-upgrade-20261024.py": {
+        "files": 1,
+        "bytes": 1695,
+        "missing": 0,
+        "latest": 1792840894.346004
+      },
+      ".planning/market-ipo-policy-fix-20261024.py": {
+        "files": 1,
+        "bytes": 1664,
+        "missing": 0,
+        "latest": 1792839973.037342
+      },
+      ".planning/r1-w11-shared-green.txt": {
+        "files": 1,
+        "bytes": 1586,
+        "missing": 0,
+        "latest": 1792797078.1889358
+      },
+      ".planning/budget-regime-20261023-green.txt": {
+        "files": 1,
+        "bytes": 1575,
+        "missing": 0,
+        "latest": 1792793427.733196
+      },
+      ".planning/r1-w11-docs-commit-20261023.txt": {
+        "files": 1,
+        "bytes": 1542,
+        "missing": 0,
+        "latest": 1792795989.3480089
+      },
+      ".planning/r1-w08-exact-ci-observe-20261024.py": {
+        "files": 1,
+        "bytes": 1497,
+        "missing": 0,
+        "latest": 1792805172.941265
+      },
+      ".planning/r1-w11-encoding-conda-green.txt": {
+        "files": 1,
+        "bytes": 1476,
+        "missing": 0,
+        "latest": 1792797884.265695
+      },
+      ".planning/budget-regime-20261023-lifecycle.txt": {
+        "files": 1,
+        "bytes": 1421,
+        "missing": 0,
+        "latest": 1792794100.6072724
+      },
+      ".planning/budget-regime-20261023-permanent.txt": {
+        "files": 1,
+        "bytes": 1420,
+        "missing": 0,
+        "latest": 1792794424.0189376
+      },
+      ".planning/market-publication-observe-20261024.py": {
+        "files": 1,
+        "bytes": 1396,
+        "missing": 0,
+        "latest": 1792839679.101509
+      },
+      ".planning/r1-w08-current-docs-commit-20261024.txt": {
+        "files": 1,
+        "bytes": 1388,
+        "missing": 0,
+        "latest": 1792802463.459584
+      },
+      ".planning/r1-w11-encoding-venv-green.txt": {
+        "files": 1,
+        "bytes": 1267,
+        "missing": 0,
+        "latest": 1792797940.7722485
+      },
+      ".planning/market-m2-status-stage.json": {
+        "files": 1,
+        "bytes": 975,
+        "missing": 0,
+        "latest": 1792847267.0224316
+      },
+      ".planning/r1-w08-missing-du4-fixtures-20261024.json": {
+        "files": 1,
+        "bytes": 813,
+        "missing": 0,
+        "latest": 1792804208.6619732
+      },
+      ".planning/r1-w09-publication-20261023": {
+        "files": 1,
+        "bytes": 608,
+        "missing": 0,
+        "latest": 1792796626.313708
+      },
+      ".planning/r1-w08-current-docs-diff-check-20261024.txt": {
+        "files": 1,
+        "bytes": 444,
+        "missing": 0,
+        "latest": 1792802462.279363
+      },
+      ".planning/r1-w08-current-docs-stage-20261024.txt": {
+        "files": 1,
+        "bytes": 444,
+        "missing": 0,
+        "latest": 1792802462.4295762
+      },
+      ".planning/market-s1-request.json": {
+        "files": 1,
+        "bytes": 358,
+        "missing": 0,
+        "latest": 1792840094.1384962
+      },
+      ".planning/r1-published-docs-push-20261024.txt": {
+        "files": 1,
+        "bytes": 335,
+        "missing": 0,
+        "latest": 1792799380.5668414
+      },
+      ".planning/r1-w11-docs-push-20261023.txt": {
+        "files": 1,
+        "bytes": 335,
+        "missing": 0,
+        "latest": 1792796065.1622536
+      },
+      ".planning/r1-w08-current-docs-push-20261024.txt": {
+        "files": 1,
+        "bytes": 330,
+        "missing": 0,
+        "latest": 1792802498.5468295
+      },
+      ".planning/market-current-ci.json": {
+        "files": 1,
+        "bytes": 281,
+        "missing": 0,
+        "latest": 1792841729.9701803
+      },
+      ".planning/budget-regime-20261023-mypy-final.txt": {
+        "files": 1,
+        "bytes": 46,
+        "missing": 0,
+        "latest": 1792794638.4278343
+      },
+      ".planning/budget-regime-20261023-mypy.txt": {
+        "files": 1,
+        "bytes": 46,
+        "missing": 0,
+        "latest": 1792794516.5163617
+      }
+    }
+  },
+  {
+    "id": "ff",
+    "root": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+    "groups": {
+      ".mimosa": {
+        "files": 205,
+        "bytes": 1916485,
+        "missing": 0,
+        "latest": 1794094399.2681136
+      },
+      "pytest-of-ff-s3-p5-full": {
+        "files": 51,
+        "bytes": 45754,
+        "missing": 0,
+        "latest": 1792862105.6705508
+      },
+      "pytest-of-ff-root-failures-fixed": {
+        "files": 18,
+        "bytes": 17555,
+        "missing": 0,
+        "latest": 1792862030.2438185
+      },
+      "pytest-of-ff-root-failures": {
+        "files": 18,
+        "bytes": 16577,
+        "missing": 0,
+        "latest": 1792861894.9478493
+      },
+      ".ff_jobs": {
+        "files": 9,
+        "bytes": 8038,
+        "missing": 0,
+        "latest": 1794118271.1185243
+      },
+      ".workbuddy-ai": {
+        "files": 1,
+        "bytes": 1600,
+        "missing": 0,
+        "latest": 1793693644.8836536
+      },
+      "config": {
+        "files": 1,
+        "bytes": 32,
+        "missing": 0,
+        "latest": 1790488448.9300654
+      },
+      ".planning/du11-empty-placeholder-original.py": {
+        "files": 1,
+        "bytes": 0,
+        "missing": 0,
+        "latest": 1792277886.67993
+      }
+    }
+  },
+  {
+    "id": "rf",
+    "root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "groups": {
+      ".mimosa": {
+        "files": 5005,
+        "bytes": 63170495,
+        "missing": 0,
+        "latest": 1794102080.9437141
+      },
+      "output": {
+        "files": 147,
+        "bytes": 56942728,
+        "missing": 0,
+        "latest": 1791450581.1478615
+      },
+      "delivery": {
+        "files": 582,
+        "bytes": 11953050,
+        "missing": 0,
+        "latest": 1793608725.9403334
+      },
+      ".planning/source-quote-adoption-20261030": {
+        "files": 64,
+        "bytes": 9473061,
+        "missing": 0,
+        "latest": 1793373817.7939496
+      },
+      ".planning/m8-native-adoption-20261031": {
+        "files": 69,
+        "bytes": 2858236,
+        "missing": 0,
+        "latest": 1793494672.8110297
+      }
+    }
+  },
+  {
+    "id": "et",
+    "root": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts",
+    "groups": {
+      "eval_results.json": {
+        "files": 1,
+        "bytes": 38956,
+        "missing": 0,
+        "latest": 1783459409.7394106
+      },
+      ".workbuddy-ai": {
+        "files": 3,
+        "bytes": 6941,
+        "missing": 0,
+        "latest": 1793661863.7807682
+      }
+    }
+  },
+  {
+    "id": "sid",
+    "root": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "groups": {
+      "scripts": {
+        "files": 1,
+        "bytes": 8544,
+        "missing": 0,
+        "latest": 1784978814.191432
+      },
+      "a_share_companies.txt": {
+        "files": 1,
+        "bytes": 3898,
+        "missing": 0,
+        "latest": 1784978814.1827595
+      },
+      "companies.txt": {
+        "files": 1,
+        "bytes": 137,
+        "missing": 0,
+        "latest": 1784978814.1827595
+      }
+    }
+  },
+  {
+    "id": "stockwiki",
+    "root": "C:\\Users\\郑曾波\\Projects\\StockWiki",
+    "groups": {
+      "runs": {
+        "files": 2,
+        "bytes": 212992,
+        "missing": 0,
+        "latest": 1792347239.9880264
+      },
+      "data": {
+        "files": 4,
+        "bytes": 77824,
+        "missing": 0,
+        "latest": 1794086994.6848378
+      },
+      "logs": {
+        "files": 1,
+        "bytes": 1278,
+        "missing": 0,
+        "latest": 1794335486.599082
+      }
+    }
+  },
+  {
+    "id": "audit",
+    "root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+    "groups": {
+      "docs": {
+        "files": 2,
+        "bytes": 8895,
+        "missing": 0,
+        "latest": 1792794049.2548008
+      }
+    }
+  },
+  {
+    "id": "dashboard",
+    "root": "C:\\Users\\郑曾波\\Projects\\investment-dashboard",
+    "groups": {
+      "tmpu5oe_zvo": {
+        "files": 2,
+        "bytes": 32768,
+        "missing": 0,
+        "latest": 1794225818.9331486
+      },
+      "tmpc9wo1k66": {
+        "files": 1,
+        "bytes": 20480,
+        "missing": 0,
+        "latest": 1794225811.7963862
+      },
+      "tests": {
+        "files": 2,
+        "bytes": 12418,
+        "missing": 0,
+        "latest": 1794286629.6045058
+      },
+      "tmpbzf_cgmj": {
+        "files": 1,
+        "bytes": 12288,
+        "missing": 0,
+        "latest": 1794225652.0604837
+      },
+      ".workbuddy-ai": {
+        "files": 1,
+        "bytes": 10307,
+        "missing": 0,
+        "latest": 1794082227.0523584
+      },
+      ".tmp_e07_adapter_probe.py": {
+        "files": 1,
+        "bytes": 1238,
+        "missing": 0,
+        "latest": 1794127014.8572648
+      }
+    }
+  }
+]

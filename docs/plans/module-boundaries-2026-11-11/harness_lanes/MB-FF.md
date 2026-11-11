@@ -1,14 +1,22 @@
 # MB-FF — 独立施工卡
 
+## A0：旧分支/未提交改动的接收状态（2026-11-11新增）
+
+先读总计划 `reconciliation.md` 和 `review/repo_reconciliation_20261111/acquisition_review.md` §3/4/5。ROOT已将B34逻辑候选显式null发布日期修复接收至main `d563b630df887219039b9340703217b68da48c69` 并推送，最终反例保留当前form_type/fiscal_period/source_market/issuer绑定。176项相关回归及最终23项B34通过，独审PASS；CI清单随后在`ac798a2`接入同一回归（38项通过，日常smoke不变）。不要再cherry-pick旧53285c2或整合旧B34树。
+
+旧 `codex/ff-job-facade-01` 的7个cherry+已被57351d0/7d8392e接收，不是7个新需求；旧job工区6个重复源码/测试已精准restore，协议两处语义也已吸收。`codex/transcript-companion` 原型由正式ET transport替代，不得带回猜目录逻辑。FF三处pytest/空placeholder/三个空Temp工区已清理。
+
+A0剩余：将旧job协议差量、W06的两份过期PWF与六份输入、W07唯一首失败/最终/时序收据归档后给ROOT回收清单；不把旧16-case完成声明覆盖ROOT后续41-case证据。`.ff_jobs`是业务作业状态，配置密钥、工具状态和记忆保留，不当垃圾。上述整理不引入第二job库，也不扩成产品许可。随后按原六operation/安装隔离目标执行本卡；允许NO_CHANGE_PROVEN。
+
 ## 任务定位与唯一工区
 
-- 原仓：`C:/Users/郑曾波/Projects/filing-fetch`；基线 `f65e6ca75fbce0616e65870f0aea78b793ef883c`；目标主线 `main`。
+- 原仓：`C:/Users/郑曾波/Projects/filing-fetch`；基线 `ac798a250b2310e0c2714053b08246ad94fffd0c`；目标主线 `main`。
 - 新工区：`C:/Users/郑曾波/Projects/mb11-ff`；分支 `codex/mb11-ff`。本卡尚未开工，不把准备好的卡称为已派发。
 - 本仓PWF：`docs/plans/mb11-ff-2026-11-11/`。先建立 task_plan.md、findings.md、progress.md，记录真实基线与工作量；本卡及公共接口说明可复制到该目录inputs。
 - 总控计划：`C:/Users/郑曾波/Projects/company-wiki/docs/plans/module-boundaries-2026-11-11/`。开工只需读本卡、该目录 interfaces.md、acceptance.md、runtime_verification.md 和本仓AGENTS；无需回放旧聊天/全部历史PWF。
 
 ```powershell
-git -C 'C:/Users/郑曾波/Projects/filing-fetch' worktree add -b codex/mb11-ff 'C:/Users/郑曾波/Projects/mb11-ff' f65e6ca75fbce0616e65870f0aea78b793ef883c
+git -C 'C:/Users/郑曾波/Projects/filing-fetch' worktree add -b codex/mb11-ff 'C:/Users/郑曾波/Projects/mb11-ff' ac798a250b2310e0c2714053b08246ad94fffd0c
 ```
 
 若工区/分支已存在，先只读核归属；不能 reset、清别人的目录或接管未知工作区。可以用新的唯一后缀并记录。用仓库实际可用的Python/离线依赖；不要重新抓取原件或部署到全局技能目录。

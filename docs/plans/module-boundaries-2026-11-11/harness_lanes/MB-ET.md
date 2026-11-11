@@ -1,5 +1,11 @@
 # MB-ET — 独立施工卡
 
+## A0：旧分支与材料已核销（2026-11-11新增）
+
+`review/repo_reconciliation_20261111/acquisition_review.md` 已逐项审查19个refs/13工区：全部refs均为main祖先，没有漏并代码。ROOT已删除只剩.git指针的旧Temp工区与2026-07-07的eval_results.json（旧翻译评估生成物，无运行读取引用）；工具记忆保留。不要重新合旧分支、执行翻译评价或重复采集。
+
+本卡按原协议/worker表示限额/隔离方案继续即可；开始时核实际main增量，已满足的合同可NO_CHANGE_PROVEN。旧工区/branch退休由ROOT核对原件和部署引用后执行，ET作者不对外层Projects/earnings-transcripts或其他仓做递归清理。完整before/执行后状态见总计划reconciliation.md。
+
 ## 任务定位与唯一工区
 
 - 原仓：`C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts`；基线 `003c1c065109d0b02c7bd4de09ad3e8461a99c0e`；目标主线 `main`。

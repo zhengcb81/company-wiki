@@ -1,5 +1,20 @@
 # MB-SID — 独立施工卡
 
+## A0：先把11项有价值但未完成的WIP安全接收（2026-11-11新增）
+
+先读总计划 `reconciliation.md` 及 `review/repo_reconciliation_20261111/acquisition_review.md` §4 SID逐文件表。6个refs都已进入正式 `v2-clean-rewrite`，不存在待合旧分支；问题是主工区11项未提交旧CW-2.27D/H下载器改进（743增/94删）。它们有价值但没有绑定当前内容的完整验收，不能直接commit或当垃圾restore。
+
+保留输入精确11路径：`README.md`、`config_template.json`、`main.py`、`src/browser.py`、`src/downloader.py`、`src/logger.py`、`src/mapping.py`、`src/models.py`、`tests/e2e/official_e2e_test.py`、`tests/unit/test_downloader.py`、`tests/unit/test_official_e2e_contract.py`。额外 `scripts/capture_byd_fy2024_fixture.py` 是现有离线fixture的唯一生成出处，保留到测试工具/说明，不能执行成新公司特判采集。公司名单是用户输入，保留。原件/运行config不动。
+
+在本卡新工区中按单一职责读入上述差量并先写行为RED，允许本卡原写集合增加这些legacy browser/downloader/日志/映射/命令模块与测试：
+
+1. 同一实例先收到CONFIRMED_EMPTY、再处理不同公司/期次；第二请求必须重新取得对应状态，不能继承第一次空。不可只预置私有属性模拟证明已接好真实API。
+2. 目的目录组件正确匹配：POSIX合法路径、Windows大小写/分隔符，以及`raw/prospectus`与`raw/prospectus-extra`必须区分。不能反斜杠替换后做字符串子串判断。
+3. active tab为空、非活动tab有公告：必须保持当前筛选范围，不退回整个页面下载其他类型/期次。测试真实DOM行为，不检查browser源码字符串凑绿。
+4. JSON模式stdout只有协议结果、诊断走stderr；有效配置/CLI/业务模型保持兼容。legacy浏览器用fake DOM/response，测试不真实下载；官方E2E改动只记录既有受控入口，不以7月139测试/旧README数字冒当前结果。
+
+随后将通用改进分成可回退的小提交，完成原SID-01 typed错误、SID-02纯metadata边界。C阶段集中运行受影响unit/协议测试与独审；可选真实采集只有确有验收需求才由ROOT安排，不每步下载。旧WIP原工区在本卡交付且ROOT确认等价接收后才清理；SID G4三份PWF镜像先保留唯一历史说明再回收。此A0直接进入原A/B/C，无需ROOT另行批准每个小步骤。
+
 ## 任务定位与唯一工区
 
 - 原仓：`C:/Users/郑曾波/Projects/StockInfoDLSimple/v2-clean-rewrite`；基线 `c0f07e12d4ba3e232d712bb6e5e491832023b0a0`；目标主线 `v2-clean-rewrite`。
@@ -25,7 +40,7 @@ git -C 'C:/Users/郑曾波/Projects/StockInfoDLSimple/v2-clean-rewrite' worktree
 
 ## 目标与基线注意
 
-SID当前正式provider在v2-clean-rewrite分支；不创建假的main/master，不处理旧StockInfoDownloader。原工作树有11项WIP，ROOT基线列在review/root_baseline.md。只从已提交c0f07e1创建新工区，不把WIP复制进来。
+SID当前正式provider在v2-clean-rewrite分支；不创建假的main/master，不处理旧StockInfoDownloader。只从已提交c0f07e1创建新工区，再按本卡A0逐职责受测接收已明确的11项WIP差量；不复制整个旧工作树。原始WIP保持到ROOT接收后再清理。
 
 本卡合并两个同根问题：fetch包装丢失CninfoApiError.error_code/retryable；底层cninfo_api反向调用上层adapter私有_report_metadata。让错误和公告元数据归纯provider domain，API/adapter分别依赖它，保持现有公开JSON1.0。
 
@@ -33,7 +48,7 @@ SID当前正式provider在v2-clean-rewrite分支；不创建假的main/master，
 
 `src/company_wiki_adapter.py`、`src/company_wiki_adapter_cli.py`、`src/cninfo_api.py`、新增`src/cninfo_report_metadata.py`或现有等价纯模块；对应 `tests/unit/test_company_wiki_adapter.py`、`test_company_wiki_adapter_cli_budget.py`、`test_cninfo_api_budget.py`、`test_g5_provider_runtime.py` 和新增 `test_provider_error_contract.py`、`test_provider_dependency_direction.py`。本仓PWF和最小引用文档可写。
 
-禁止修改原11项WIP、`main.py/browser/downloader/logger/mapping/models`等standalone链、生产config/cache/canonical目录、CWP/FF/Dayu。新增纯metadata模块不能依赖那些WIP模块。若发现工作树关系冲突，保留双方，提交失败证据给ROOT合流，不reset。
+本卡可以在新工区按A0修改已登记的standalone链，但不写原工区11项WIP、生产config/cache/canonical目录、CWP/FF/Dayu。纯metadata模块仍不依赖browser/downloader上层。发生真实语义冲突时用失败例与ROOT协调，不能reset别人的工区。
 
 ## A/B/C与测试
 
@@ -41,7 +56,7 @@ SID当前正式provider在v2-clean-rewrite分支；不创建假的main/master，
 2. RED：API纯读取/过滤在拒绝import company_wiki_adapter、browser/downloader的子进程仍工作；用已有年/半年/季报/类型/期间fixture锁过滤语义，合法多市场/期次不凭公司名字改。
 3. GREEN：保留typed cause从transport→adapter→CLI全链；测量usage不丢，unknown不写0。将_report_metadata纯解析移动到domain模块，API和adapter使用同一函数；保留必要旧兼容仅在adapter侧重导出，下层不反查它。
 4. 组合：独立临时runtime+公开`python -m src.company_wiki_adapter_cli discover|fetch`，HTTP由本地fixture供应；只写本次staging，失败.part清理、成功hash/receipt一致；无CWP内部库/浏览器运行时。
-5. 独立审查全部本卡变化及测试，再修复交付。ROOT只接provider adapter改动，不顺带并11项WIP。
+5. 独立审查全部本卡变化及测试，再修复交付。ROOT接收A0经过修复和证明的WIP与原provider边界改动；两部分分提交、同一大节点验收，不原样顺带提交旧11文件。
 
 ```powershell
 python -B -m pytest tests/unit/test_company_wiki_adapter.py tests/unit/test_company_wiki_adapter_cli.py tests/unit/test_company_wiki_adapter_cli_budget.py tests/unit/test_cninfo_api_budget.py tests/unit/test_g5_provider_runtime.py -q -p no:cacheprovider

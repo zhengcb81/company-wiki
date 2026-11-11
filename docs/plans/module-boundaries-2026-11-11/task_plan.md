@@ -2,9 +2,20 @@
 
 ## Goal
 
-从当前各模块架构出发，定义有限、可验收的模块化与解耦范围；用公开接口、独立安装/隔离测试、owner 状态归属和 TDD 完成边界封装，再恢复原主线。父计划为 `../du11-source-closure-2026-10-18/`。本轮仅调查和规划，不实施生产代码。
+从当前各模块架构出发，定义有限、可验收的模块化与解耦范围；用公开接口、独立安装/隔离测试、owner 状态归属和 TDD 完成边界封装，再恢复原主线。父计划为 `../du11-source-closure-2026-10-18/`。M0原为规划；用户随后明确授权A1调查、清理和有限并线，执行结果见reconciliation.md。
 
 ## Current Phase
+
+### Phase A1 — 各模块工作区与未并线提交核销
+**Status:** complete
+
+2026-11-11用户新增授权：逐模块调查未提交及已提交未并线改动；确认归属后可删除无用改动，尽量并入正确主线；余项必须写进原施工卡。ROOT负责所有Git/清理变更，各路审查只读。保留下载原件；已证明需保留的有效代码和正在施工内容先分类，不能用整仓reset/clean代替调查。
+
+步骤：新鲜Git refs/worktree/dirty盘点 → PWF/commit/交接与patch-equivalence逐项归因 → 删除确认无用内容/并线有依据且可验收分支 → 余项逐卡归属/顺序/测试 → 独立核对与发布。
+
+证据集中在review/repo_reconciliation_20261111/；新架构实现仍按五卡后续执行，本节点仅做用户新要求的仓库整理与并线。
+
+结果：8仓390个分支/remote refs、253工区、7tag、2stash已调查并分责；FF B34与Dashboard边界修复独审/定向回归后已入main、推origin。清理确定测试目录约216MB、7个空旧工区、source-facts重复源码、已吸收stash及生成物；未接收能力/有价值WIP全部加入原五卡A0和ROOT清单。A1 complete只代表本次核销交付，不代表所有历史工区清空或M1/M2完成。
 
 ### Phase A / M0 — 当前架构、接口与完整施工图
 **Status:** complete
@@ -30,7 +41,7 @@
 | ET | ET-01纯合同/进程与provider分离，02固定表示限额复现根修 | worker CLI成功/错误/unknown/预算/取消 |
 | SID | SID-01typed错误贯通，02metadata反向依赖 | 纯API、稳定wire/过滤语义、staging-only |
 
-ROOT在此期间只准备组合清单/样本和已存在StockWiki/Audit/Dashboard公开接口证据，不写lane源码。不另派竞争Dashboard任务。每条卡交付前独审并修复；接口兼容可及时并main/推送，无须积压到全部卡完成。
+ROOT在此期间准备组合清单/样本，在自己的StockWiki隔离工区按reconciliation.md接收C38/B03合同差额；Audit只验证，Dashboard由原owner接续。ROOT不写五卡lane源码、不派竞争Dashboard任务。每条卡交付前独审并修复；接口兼容可及时并main/推送，无须积压到全部卡完成。
 
 ### Phase C / M2 — ROOT组合与整个架构阶段关闭
 **Status:** pending
@@ -45,7 +56,7 @@ ROOT在此期间只准备组合清单/样本和已存在StockWiki/Audit/Dashboar
 
 ## Next Step
 
-五张卡可分别交给独立harness；实施时各自A→B→C，不等逐步批准。ROOT维护版本/样本组合并在CWP交付后接M2。本轮规划完成，保持代码实施暂停。
+五张更新后的卡可分别交给独立harness；先处理各卡A0接收差额，再A→B→C，不等逐步批准。ROOT按reconciliation.md承担StockWiki接收、Dashboard组合和最终并线，不跨写作者代码。当前只完成A1；五卡架构实施未派发，原业务循环仍暂停。
 
 ## Decisions
 

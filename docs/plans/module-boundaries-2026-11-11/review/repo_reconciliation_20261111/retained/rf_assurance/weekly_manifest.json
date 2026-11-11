@@ -1,0 +1,11 @@
+{
+  "latest_run_id": "20261108T043000Z",
+  "ok": false,
+  "report_path": "weekly-run-20261108T043000Z.log",
+  "started_at": "2026-11-08T04:30:32.007093+00:00",
+  "triplet": {
+    "filing": "154c292cb25293afd090aec4ef8859c2bb2b150d",
+    "revenue": "90c562ac6e305c4c5f6fba5a439851b20e0490a9",
+    "wiki": "62602102ae5ab9a6bba54879756b800854c941a1"
+  }
+}

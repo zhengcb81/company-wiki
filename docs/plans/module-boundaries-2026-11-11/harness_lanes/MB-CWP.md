@@ -1,14 +1,33 @@
 # MB-CWP — 独立施工卡
 
+## A0：先接回历史成果，再完成本卡边界（2026-11-11新增）
+
+用户已授权逐项清理/并线。本卡仍只有一个CWP作者；不另开重叠reader/config工作线。先读总计划 `reconciliation.md` 与 `review/repo_reconciliation_20261111/cwp_review.md` §3/5/6。本卡未开工；下列是有限接收清单，不表示架构已完成。
+
+ROOT已完成：source-facts 11个tracked+5个untracked源码副本精确核销、4个pytest目录和已吸收stash清理、W13历史最终独审/交接补齐。不要重新执行旧W13代码或重复恢复source-facts。当前已有stream/parser owner端口和预算语义必须保留。
+
+| 子项 | 输入/具体任务 | 通过或核销条件 |
+|---|---|---|
+| T-READ | `3199adab` / X-C04历史CLI；现有 `stream_version`、parser sink、读取预算。Dashboard的24条真实stream测试目前缺配置owner入口，不能用fake代替。 | 当前公开port之上提供确有消费者的兼容CLI；取消/关闭/非primary admission/真实字节验真遵循当前owner。若CLI不再需要，必须给消费者已迁移证据。 |
+| T-CANON | `62602102a` 的canonical browser/CN issuer及calendar反例，按报告逐路径移植 | 不新增第二身份库/下载预算；当前公共入口及ROOT精确组合通过。 |
+| T-B33 | `dc837a21f` readiness/legacy source link/recovery，历史交付独审仍未完 | 先重放候选测试，用现有restore/source接口承接；本卡独审关闭对应问题，不对生产恢复。 |
+| T-B34 | `29b562dac` diagnostic/IPO cover，对照当前local_reconcile多轮owner修复 | 不带回固定8条诊断帽或旧强制前页限制；有证据的cover可用，冲突/未绑定不冒事实。 |
+| T-N4 | `2b5bec914` 的CN quarterly/IR等独有反例 | 映射现行source material/stage语义；已绿则核销旧实现，不能恢复旧eligibility策略。 |
+| T-CONFIG/W04 | 旧M3的config.py、narrative_batch_configured.py、test_narrative_model_config.py、test_w04_llm_config_scope.py；W04 scoped-negation失败反例 | 主线已有 `Config.load(validation_scope='llm')`，不再接第二load_llm。反例按当前合同证明或注明被替代；保留旧失败记录。 |
+
+A0可读旧工区/refs，不直接覆盖本卡新工区的同名整文件。允许本卡写集合增加上述source_catalog公共入口、其测试和必要薄CLI；内部仍只用当前公开owner端口。具体历史测试路径在报告§3，先比较现行行为再决定测试迁移，不跑旧整仓全量。
+
+旧M3已吸收21个源码/测试/工具blob、R1的98个clean-filter等价JSON和独有审计材料分开处理；本卡完成后给ROOT精确可回收清单，ROOT处理原工区。费用stash由ROOT账目归档，不归CWP代码作者。A0是原A/B/C的输入整理，无需用户逐步签收。
+
 ## 任务定位与唯一工区
 
-- 原仓：`C:/Users/郑曾波/Projects/company-wiki`；基线 `08dfe8bf1`；目标主线 `master`。
+- 原仓：`C:/Users/郑曾波/Projects/company-wiki`；基线 `08dfe8bf1ae97dff34b28976d532b3482d3ba358`；目标主线 `master`。
 - 新工区：`C:/Users/郑曾波/Projects/mb11-cwp`；分支 `codex/mb11-cwp`。本卡尚未开工，不把准备好的卡称为已派发。
 - 本仓PWF：`docs/plans/mb11-cwp-2026-11-11/`。先建立 task_plan.md、findings.md、progress.md，记录真实基线与工作量；本卡及公共接口说明可复制到该目录inputs。
 - 总控计划：`C:/Users/郑曾波/Projects/company-wiki/docs/plans/module-boundaries-2026-11-11/`。开工只需读本卡、该目录 interfaces.md、acceptance.md、runtime_verification.md 和本仓AGENTS；无需回放旧聊天/全部历史PWF。
 
 ```powershell
-git -C 'C:/Users/郑曾波/Projects/company-wiki' worktree add -b codex/mb11-cwp 'C:/Users/郑曾波/Projects/mb11-cwp' 08dfe8bf1
+git -C 'C:/Users/郑曾波/Projects/company-wiki' worktree add -b codex/mb11-cwp 'C:/Users/郑曾波/Projects/mb11-cwp' 08dfe8bf1ae97dff34b28976d532b3482d3ba358
 ```
 
 若工区/分支已存在，先只读核归属；不能 reset、清别人的目录或接管未知工作区。可以用新的唯一后缀并记录。用仓库实际可用的Python/离线依赖；不要重新抓取原件或部署到全局技能目录。

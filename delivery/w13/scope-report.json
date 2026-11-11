@@ -9,7 +9,9 @@
   "scopes": [
     {
       "name": "docs",
-      "changeset": ["docs/plans/w13-cwp-gates-2026-10-24/progress.md"],
+      "changeset": [
+        "docs/plans/w13-cwp-gates-2026-10-24/progress.md"
+      ],
       "selection_reason": "no behavior changes",
       "targets_count": 29,
       "targets": "FAST_CONTRACT_CASES (29)",
@@ -22,7 +24,9 @@
     },
     {
       "name": "narrow",
-      "changeset": ["tests/unit/test_narrative_evidence.py"],
+      "changeset": [
+        "tests/unit/test_narrative_evidence.py"
+      ],
       "selection_reason": "affected unit tests",
       "targets_count": 28,
       "targets": "1 affected file + 27 smoke cases (2 node cases deduplicated)",
@@ -35,7 +39,9 @@
     },
     {
       "name": "unknown",
-      "changeset": ["config/source_catalog.yaml"],
+      "changeset": [
+        "config/source_catalog.yaml"
+      ],
       "selection_reason": "configuration or test entrypoint changed",
       "targets_count": 29,
       "targets": "FAST_CONTRACT_CASES (29)",
@@ -49,7 +55,9 @@
     },
     {
       "name": "wide",
-      "changeset": ["src/company_wiki/source_catalog/narrative_business_meaning.py"],
+      "changeset": [
+        "src/company_wiki/source_catalog/narrative_business_meaning.py"
+      ],
       "selection_reason": "affected unit tests (closed list, 333 files)",
       "targets_count": 357,
       "targets": "333 affected files + 24 smoke cases",
@@ -79,15 +87,36 @@
   "full_local_mode_once": {
     "command": "python tools/pre_push_gate.py",
     "stages": [
-      {"stage": "ruff (CI WU-1.2 full scope)", "exit_code": 0},
-      {"stage": "compileall", "exit_code": 0},
-      {"stage": "config_doctor (CI WU-7.1)", "exit_code": 1,
-       "detail": "CONFIG-PROBLEM: catalog_dir is not a directory: ...w13-gates\\.source_catalog — this worktree has no runtime .source_catalog data directory; identical failure at base commit a31300a7 in any fresh worktree; environment limit, not a package defect"},
-      {"stage": "host assumption guard", "exit_code": 0, "seconds": 22.2},
-      {"stage": "unit tests", "exit_code": 1, "seconds": 594.1,
-       "detail": "8126 passed, 24 skipped, 19 failed — all 19 are FileNotFoundError on atomic-write *.json.*.tmp inside the owned basetemp under xdist -n 2; the same 3 files pass 58/58 serially (53.02s); executor code path untouched by this package; Windows xdist/AV flake class"},
-      {"stage": "focused contracts", "exit_code": 1, "seconds": 116.7,
-       "detail": "221 passed, 3 failed — tests/contract/test_b10_read_chain.py ratchet tests only; they scan src business files byte-identical to base a31300a7 (git diff a31300a7..HEAD -- src/ scripts/ config/ is empty), so the failures exist at the frozen base"}
+      {
+        "stage": "ruff (CI WU-1.2 full scope)",
+        "exit_code": 0
+      },
+      {
+        "stage": "compileall",
+        "exit_code": 0
+      },
+      {
+        "stage": "config_doctor (CI WU-7.1)",
+        "exit_code": 1,
+        "detail": "CONFIG-PROBLEM: catalog_dir is not a directory: ...w13-gates\\.source_catalog — this worktree has no runtime .source_catalog data directory; identical failure at base commit a31300a7 in any fresh worktree; environment limit, not a package defect"
+      },
+      {
+        "stage": "host assumption guard",
+        "exit_code": 0,
+        "seconds": 22.2
+      },
+      {
+        "stage": "unit tests",
+        "exit_code": 1,
+        "seconds": 594.1,
+        "detail": "8126 passed, 24 skipped, 19 failed — all 19 are FileNotFoundError on atomic-write *.json.*.tmp inside the owned basetemp under xdist -n 2; the same 3 files pass 58/58 serially (53.02s); executor code path untouched by this package; Windows xdist/AV flake class"
+      },
+      {
+        "stage": "focused contracts",
+        "exit_code": 1,
+        "seconds": 116.7,
+        "detail": "221 passed, 3 failed — tests/contract/test_b10_read_chain.py ratchet tests only; they scan src business files byte-identical to base a31300a7 (git diff a31300a7..HEAD -- src/ scripts/ config/ is empty), so the failures exist at the frozen base"
+      }
     ],
     "first_red_honored": "gate stopped at config_doctor with exit 1 (G06); remaining stages were rerun individually for evidence only",
     "log": "delivery/w13/logs/full-local-mode.log",
@@ -100,5 +129,6 @@
     "command": "python -m pytest -q -p no:cacheprovider tests/unit/test_ci_push_selection.py tests/unit/test_changed_resource_scope.py tests/unit/test_changed_test_module_scope.py tests/unit/test_pre_push_temp_scope.py tests/unit/test_pre_push_parallel_phases.py tests/unit/test_pre_push_full_unit_workers.py tests/unit/test_daily_push_policy.py",
     "result": "145 passed in 35.88s",
     "ruff": "All checks passed! (card file list)"
-  }
+  },
+  "measurement_caveat": "wall times are load-sensitive on this shared host, not a threshold: an independent reviewer's re-run of the same docs scope took 130.3s for the pytest child. The numbers record this host at measurement time; no wall-clock approval gate exists in product code and none may be added (G09)."
 }
