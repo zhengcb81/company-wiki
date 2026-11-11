@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "P3_SOURCE_CATALOG_OWNER_PORTS_AND_STATIC_BOUNDARY_CONTRACT_COMMITTED_NOT_PUSHED_STREAM_PARSER_OPEN_R4_WORK_ACCOUNTING_OPEN_CLEANUP_OPEN",
+  "project_status": "P3_SOURCE_CATALOG_OWNER_PORTS_AND_STATIC_BOUNDARY_CONTRACT_PUSHED_LOCAL_FAST_GATE_GREEN_REMOTE_FULL_CI_PENDING_STREAM_PARSER_OPEN_R4_WORK_ACCOUNTING_OPEN_CLEANUP_OPEN",
   "as_of_date": "2026-11-11",
-  "observed_at_utc": "2026-11-11T04:56:09Z",
-  "next_action": "Push commit e5dd29b1f after this PWF status commit, verify the published HEAD, then start test-first design for the single-budget public stream/parser interfaces; replay historical stream/canonical claims only against current main.",
+  "observed_at_utc": "2026-11-11T05:03:25Z",
+  "next_action": "Start test-first design for the single-budget public stream/parser interfaces. Keep the pushed P3 exact-head remote CI as pending evidence; then replay historical stream/canonical claims only against current main.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1035,7 +1035,7 @@
     ]
   },
   "p3_source_catalog_boundary_20261111": {
-    "status": "COMMITTED_NOT_PUSHED_LOCAL_HOOKS_PASS",
+    "status": "PUSHED_LOCAL_FAST_GATE_GREEN_REMOTE_FULL_CI_PENDING",
     "contract_file": "tests/contract/test_source_catalog_module_contracts.py",
     "contract_file_sha256": "a30dd6eea305b525aac8fbb1b6c1dee6bb117e5bec6455c4118bdccd8914bfc6",
     "scope": "Static CI rules over all production Python modules in src/company_wiki/source_catalog; private sibling imports/member access and declared owner ports",
@@ -1076,8 +1076,11 @@
     "publication": {
       "committed": true,
       "commit": "e5dd29b1f",
-      "pushed": false,
-      "remote_exact_head_ci": "NOT_YET_OBSERVED"
+      "pushed": true,
+      "remote_exact_head_ci": "NOT_VERIFIED_GH_CLI_UNAVAILABLE",
+      "pushed_head": "e7fc2238c177b39dcc91d901a9ac3ac91263830a",
+      "pushed_at_utc": "2026-11-11T04:59Z",
+      "push_fast_gate": "PASS_18_IN_3.88S"
     },
     "ci_registration_root_cause": "The new static boundary contract was not in FAST_CONTRACT_CASES; a RED inventory regression was added before registering it.",
     "commit_hook_first_attempt": "BLOCKED by Ruff/mypy: two removed owner module aliases remained in PDF version identity construction; one unused local in a boundary test.",

@@ -504,3 +504,7 @@ R4工作量探针在28e18043c完成，24.865秒，9/12保持，source runtime稳
 ## 2026-11-11 P3 milestone committed
 
 SourceCatalog owner ports, package-wide static sibling-boundary contract, fast-CI registration, hook fixes, and the corresponding tests are committed as `e5dd29b1f`. Commit hooks passed Ruff, mypy runtime-source checks, and config doctor. The commit is not pushed yet; exact-head remote CI has not run. The next implementation node is the public stream/parser owner interface, starting with RED contracts.
+
+## 2026-11-11 P3 published
+
+The SourceCatalog owner-port and static module-boundary milestone is pushed to `origin/master` at `e7fc2238c177b39dcc91d901a9ac3ac91263830a`. The push fast gate passed its fixed 18-case smoke in 3.88 seconds. The local commit hooks passed Ruff, mypy runtime-source checks, and config doctor. Exact-head remote CI is not yet verified because `gh` is not installed and the sandbox GitHub lookup could not start its DNS worker. This is a local/PWF evidence limit, not a claim of remote CI failure or success. Continue with RED tests for the public stream/parser owner interfaces.
