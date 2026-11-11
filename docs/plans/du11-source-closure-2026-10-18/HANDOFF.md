@@ -1,13 +1,13 @@
 # 当前交接
 
-截至 2026-11-11 08:25 UTC，先读 `CURRENT_STATUS.md/json`，再按 `task_plan.md` 执行。当前子节点“SourceCatalog 流式读取 + parser owner 接线”已完成、独立审查通过、提交并推送：`54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca`。工作区跟踪文件干净；其他历史未跟踪产物未纳入本次提交，也未清理。
+截至 2026-11-11 08:25 UTC，先读 `CURRENT_STATUS.md/json`，再按 `task_plan.md` 执行。当前子节点“SourceCatalog 流式读取 + parser owner 接线”已完成、独立审查通过、提交并推送：源码提交 `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca`。其后有 PWF-only 收尾提交及状态更正提交，均未改生产代码。工作区跟踪文件干净；其他历史未跟踪产物未纳入本次提交，也未清理。
 
 ## 已完成节点
 
 - pathless source-processing descriptor、公开流式读取端口、单一 caller-owned 读取预算、事务式 parser sink 与 parser-owner port 已接入 processed-document endpoint。
 - endpoint 不访问 source catalog 私有状态、SQLite、`SourceManifest` 或物理原件路径。失败候选不提交；临时 staging cleanup 失败会保留主错误并留下诊断。
 - 定向组合 205 passed/1 skipped；宿主 fast-gate 277/277（59.18 秒）；push hook 固定 smoke 18/18（3.78 秒）；Ruff、mypy 通过。独立审查最终 PASS。详见 `review/p3-public-stream-parser-20261111/README.md`。
-- `master` 与 `origin/master` 都是 `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca`。本次未核验远端完整 CI，不应把本地 fast-gate 说成远端完整 CI。
+- 本次 PWF 状态更正推送后核对 `master` 与 `origin/master` 一致。远端完整 CI 未核验，不应把本地 fast-gate 说成远端完整 CI。
 
 ## 下次恢复时
 

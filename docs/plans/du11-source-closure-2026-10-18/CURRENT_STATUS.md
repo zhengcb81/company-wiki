@@ -7,7 +7,7 @@
 - `SourceVersionPort` 现在提供 pathless processing descriptor 与流式读取；候选字节先写入事务式 parser sink，只有 source owner 对身份、大小、SHA 验真后才提交给解析器。读取预算仍是单一 caller-owned budget，取消及失败候选会清理暂存；移除了额外固定 256 MiB 候选帽。
 - processed-document endpoint 只组合公开来源端口与 parser-owner port。格式路由、临时 staging 和解析结果归 `processed_document_parser.py`；不直接读取目录、SQLite、`SourceManifest` 或物理原件路径。
 - 定向源流/CLI/包边界回归 **205 passed、1 skipped，63.58 秒**；宿主 pre-push fast-gate **277 passed，59.18 秒**；push hook 固定 smoke **18 passed，3.78 秒**。Ruff、mypy 通过。cleanup/owner-boundary 的 5 项及最后的公开 Resolver 测试迁移也在最终源码后复跑通过。
-- 独立只读审查最终 PASS。提交 `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca` 已推送，`master` 与 `origin/master` 一致。远端完整 CI 未核验。
+- 独立只读审查最终 PASS。源码提交 `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca` 已推送；随后仅有 PWF closeout 文档提交，当前分支在其上，未再改生产代码。PWF 推送后 `master` 与 `origin/master` 一致。远端完整 CI 未核验。
 - 先前 fast-gate 沙箱执行曾有 16 个 `WinError 5` 硬链接夹具失败；宿主重跑清除了这些环境失败并暴露两个旧测试仍引用已删除的私有 helper。测试改为 spy 公开 `SourceResolver.read_verified_source_location` 后，完整宿主 gate 277/277 通过；没有删用例或放宽产品路径预算。
 - 用户要求当前子节点完成后暂停。下次恢复先把历史 stream/canonical 候选与当前主线逐项对照、只修当前可复现缺口。P3 与全局模块化/解耦继续 OPEN。
 

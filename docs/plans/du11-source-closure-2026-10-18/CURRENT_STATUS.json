@@ -1123,7 +1123,8 @@
       "commit": "54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca",
       "subject": "refactor(cwp): expose streamed parser owner port",
       "pushed_to": "origin/master",
-      "local_head_matches_origin_master": true,
+      "local_head_matched_origin_master_at_code_push": true,
+      "follow_up_pwf_closeout_commit": "515b03d2d2cfdde275cd55388e24600233d5b030",
       "remote_full_ci": "NOT_CHECKED"
     },
     "next_action_after_user_pause": "Replay historical stream/canonical claims against current master; adopt only reproducible current-main fixes. Then continue remaining package/cross-repository owner-boundary work."
