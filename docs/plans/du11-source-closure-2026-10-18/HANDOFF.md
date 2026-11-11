@@ -1,5 +1,11 @@
 # 当前交接
 
+2026-11-11后续用户要求先做全模块架构与TDD路线图。**当前执行入口转到 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)**，父计划只归总。已完成三路只读代码调查、五卡、接口/测试/并行/交接设计；子计划task_plan记录方案独审与发布情况。本轮没有恢复代码实施。五卡尚未派发或开工，不把PLANNED当DELIVERED。
+
+下次从子计划dispatch.md选择对应独立卡：CWP/FF/RF/ET/SID各一个作者；ROOT统管接口、最终组合与并线。StockWiki/Audit先黑盒验证，Dashboard接续原owner。原R4/真实摘要/缓存/RF循环保留，在模块边界CLOSED后恢复。不要再以历史候选逐个重放作为没有清单的全局解耦路线。
+
+## 已发布的前一子节点（历史快照）
+
 截至 2026-11-11 08:25 UTC，先读 `CURRENT_STATUS.md/json`，再按 `task_plan.md` 执行。当前子节点“SourceCatalog 流式读取 + parser owner 接线”已完成、独立审查通过、提交并推送：源码提交 `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca`。其后有 PWF-only 收尾提交及状态更正提交，均未改生产代码。工作区跟踪文件干净；其他历史未跟踪产物未纳入本次提交，也未清理。
 
 ## 已完成节点
@@ -9,9 +15,9 @@
 - 定向组合 205 passed/1 skipped；宿主 fast-gate 277/277（59.18 秒）；push hook 固定 smoke 18/18（3.78 秒）；Ruff、mypy 通过。独立审查最终 PASS。详见 `review/p3-public-stream-parser-20261111/README.md`。
 - 本次 PWF 状态更正推送后核对 `master` 与 `origin/master` 一致。远端完整 CI 未核验，不应把本地 fast-gate 说成远端完整 CI。
 
-## 下次恢复时
+## 前一节点的剩余责任（由新路线图归并）
 
-用户要求当前子节点完成后暂停，故现在不继续开下一节点。恢复后先把历史 stream/canonical 候选声明与当前主线逐条对照并重放，只对能在当前 main 复现的问题决定迁移；之后继续其他模块及跨仓 owner 边界。P3、全局模块化/解耦仍 OPEN。随后按父计划处理 R4 工作量归属、T4/SEM 真实验收、新版真实摘要、缓存恢复、RF 实际采用和固定公司审查循环，不把本地接口测试当成业务验收。
+P3与全局模块边界仍OPEN。旧stream/canonical候选如命中新矩阵的具体缺口，才由对应owner对当前main复现并纳入；其余保留为历史工区核销，不替代或扩展本次有限架构退出标准。R4工作量、T4/SEM、新版真实摘要、真实缓存恢复、RF实际采用与固定公司循环继续沿父计划。
 
 ## 交接约束
 

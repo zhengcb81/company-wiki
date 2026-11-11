@@ -2,6 +2,17 @@
 
 唯一入口为本文件和 CURRENT_STATUS.json。实施顺序见 task_plan.md，交接见 HANDOFF.md，长期循环见 MAINLINE_LOOP_GOAL.md。
 
+## 2026-11-11 最新优先项：全模块架构收口规划
+
+用户要求先从每个模块当前代码做完整规划，再按TDD并行实施。已完成三路独立只读架构调查及ROOT对账，形成独立子计划 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)、五卡、接口/测试/退出矩阵；方案独审与发布状态看子计划task_plan。本轮没有恢复生产代码实施或运行新产品测试。
+
+- **下一步入口唯一为新子计划**。先完成该有限模块边界计划，再回R4/T4、真实摘要、缓存恢复、RF实际采用与公司循环。历史候选/工区清理不再作为无界的“解耦下一步”。
+- D4/D5及P3 source stream/parser保留已验收范围；它们不是所有仓内模块、安装产物和遗留入口都完成的全局证据。父计划旧“D5全局ACCEPTED”口径在本次更正为冻结接口范围通过。
+- 五卡覆盖CWP、FF、RF、ET、SID，独立工区、同一repo一个作者；StockWiki/Audit先ROOT黑盒验证，Dashboard接续原owner。未派发/未开工不得标完成。
+- 新基线：CWP源码08dfe8bf1、FF f65e6ca、RF b005a179、ET003c1c0、SID c0f07e1。RF四项assurance、SID十一项与Dashboard四项既有WIP保留，见子计划review/root_baseline.md。
+
+下方各日期记录均为历史阶段快照，当前优先顺序由本节与子计划维护。原native目标的实施暂停状态不因本轮规划自动变为active。
+
 ## 2026-11-11 P3 stream/parser owner-port 子节点（已发布；之后暂停）
 
 - `SourceVersionPort` 现在提供 pathless processing descriptor 与流式读取；候选字节先写入事务式 parser sink，只有 source owner 对身份、大小、SHA 验真后才提交给解析器。读取预算仍是单一 caller-owned budget，取消及失败候选会清理暂存；移除了额外固定 256 MiB 候选帽。

@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "mainline_after_d5_global_decoupling",
+  "execution_mode": "module_boundary_planning_only_implementation_not_restarted",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -34,7 +34,7 @@
     {
       "id": "P0-E",
       "status": "COMPLETE_ACCEPTED",
-      "task": "D5 global decoupling accepted: CWP pathless normalized-document port, StockWiki three default consumers, FF V2/V1 boundary, and ROOT real-sample cross-repository acceptance"
+      "task": "D5 frozen-interface scope accepted: CWP pathless normalized-document port, StockWiki three consumers and FF V2/V1. Current full-module closure is a separate finite prerequisite in module-boundaries-2026-11-11."
     },
     {
       "id": "P1",
@@ -60,8 +60,8 @@
   "history_index": "HISTORY.md",
   "native_goal": {
     "observed_status": "paused",
-    "observed_via": "get_goal during 2026-11-06 D5 closeout",
-    "execution": "The native goal registry still reports paused. The user has since instructed continuation; manual execution follows this CURRENT_STATUS/task_plan. The objective remains incomplete.",
+    "observed_via": "get_goal during 2026-11-11 module-boundary planning",
+    "execution": "Confirmed paused via get_goal during 2026-11-11 architecture planning. This user turn authorizes investigation and planning; production implementation has not restarted. Follow module_boundaries_20261111 before resuming the business loop.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "PAUSED_AFTER_P3_STREAM_PARSER_OWNER_PORT_NODE_PUBLISHED; WHOLE_PROJECT_DECOUPLING_OPEN; REMOTE_FULL_CI_UNCHECKED; R4_AND_REAL_SUMMARY_RF_LOOP_OPEN",
+  "project_status": "MODULE_BOUNDARY_PLAN_ACCEPTED_READY_TO_DISPATCH; CODE_IMPLEMENTATION_NOT_RESTARTED; D4_D5_P3_SCOPED_RESULTS_PRESERVED; BUSINESS_LOOP_DEFERRED",
   "as_of_date": "2026-11-11",
   "observed_at_utc": "2026-11-11T08:25:53Z",
-  "next_action": "PAUSED_BY_USER_AFTER_CURRENT_NODE. On resume, replay historical stream/canonical claims against current master and fix only reproducible gaps; do not treat this node as whole-project decoupling completion.",
+  "next_action": "Use docs/plans/module-boundaries-2026-11-11/dispatch.md and the five independent cards. Plan review PASS; no production implementation resumed in this turn. ROOT coordinates versions, final E01-E09 and mainline integration after owner delivery.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -240,7 +240,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "Dashboard owner-integration P2 is merged/pushed to CWP, FF, and RF owner mains. The separate revenue-forecast-audit P2 (prove the same accepted artifact is consumed by RF) remains open after P1. D4/D5 decoupling is accepted only for frozen public-interface and composition-test scope; it is not zero coupling and does not complete Dashboard P3/P4. Current-main source-facts replay and R4 work-profile observations are recorded. A P3 Catalog/Browser public-port subnode and complete Windows lock-path repair are locally implemented and independently reviewed; SourceCatalog sibling boundaries now have a green local AST contract and conceptual review; public streaming/parser work and local worktree reconciliation remain open. Historical candidate branches are not accepted or merged.",
+    "current_work": "Current P3 source stream/parser owner node is implemented and published at 54f8b470c. Whole-module closure now follows module-boundaries-2026-11-11: five owner lanes and one ROOT composition matrix, planning only. D4/D5 scoped proofs remain accepted. Business replay and historical workspace cleanup remain separately open.",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -472,13 +472,13 @@
     ],
     "code_changes": true,
     "real_provider_calls": 0,
-    "decoupling": "D5 global decoupling ACCEPTED on 2026-11-06; current scope and receipt are recorded under d5_decoupling.",
+    "decoupling": "Historical D5 frozen-interface acceptance remains valid; whole-module closure is now governed by module-boundaries-2026-11-11, not by that scoped acceptance.",
     "dispatch_status": "D5_ACCEPTED; NO_ACTIVE_DECOUPLING_DISPATCH",
     "recheck": "review/decoupling-recheck-20261102/README.md",
     "status_at_snapshot": "D5_GLOBAL_DECOUPLING_OPEN",
     "snapshot_date": "2026-11-02",
     "superseded_by": "d5_decoupling (ACCEPTED 2026-11-06)",
-    "current_status_note": "T4/SEM implementation is local; final H1 milestone review is open.",
+    "current_status_note": "Historical snapshot only; current architecture planning and dispatch state are in module_boundaries_20261111.",
     "decoupling_at_snapshot": "D3 and D4 scoped results remain accepted; global decoupling is OPEN because CWP normalized-document output is not yet the sole parser boundary for StockWiki. FF caller audit found no active internal production V1 caller and current RF preparation uses V2/pathless; the isolated V2/V1 route sub-suite passes, and the final version-bound composition still remains",
     "active_writers_at_snapshot": {
       "ROOT": "D5 owns FF V1/V2 boundary proof, cross-repo integration and final review; read-only caller inventory is complete; T4/SEM and all other mainline paused"
@@ -508,7 +508,7 @@
     "status_at_snapshot": "D5_GLOBAL_DECOUPLING_OPEN",
     "snapshot_date": "2026-11-02",
     "superseded_by": "d5_decoupling (ACCEPTED 2026-11-06)",
-    "current_status_note": "D5 accepted on 2026-11-06; no decoupling package remains active.",
+    "current_status_note": "Historical D5 scoped acceptance; five new module-boundary cards are prepared in module-boundaries-2026-11-11, not yet implemented or dispatched.",
     "open_at_snapshot": [
       "D5 CWP pathless normalized-document port and StockWiki three-entry consumption",
       "ROOT FF V1/V2 caller inventory and 3-case route suite PASS; final version-bound cross-repository boundary proof remains open",
@@ -1128,5 +1128,23 @@
       "remote_full_ci": "NOT_CHECKED"
     },
     "next_action_after_user_pause": "Replay historical stream/canonical claims against current master; adopt only reproducible current-main fixes. Then continue remaining package/cross-repository owner-boundary work."
+  },
+  "module_boundaries_20261111": {
+    "plan": "../module-boundaries-2026-11-11/README.md",
+    "task_plan": "../module-boundaries-2026-11-11/task_plan.md",
+    "matrix": "../module-boundaries-2026-11-11/boundary_matrix.json",
+    "status": "PLAN_ACCEPTED_READY_TO_DISPATCH_IMPLEMENTATION_NOT_STARTED",
+    "lanes": [
+      "MB-CWP",
+      "MB-FF",
+      "MB-RF",
+      "MB-ET",
+      "MB-SID"
+    ],
+    "code_changes_this_turn": false,
+    "tests_run_this_turn": false,
+    "dispatched": false,
+    "parent_business_tasks_retained": true,
+    "next_business_action_after_closure": "R4/T4/SEM -> real summary -> paid/cache recovery -> actual RF adoption -> fixed company loop"
   }
 }

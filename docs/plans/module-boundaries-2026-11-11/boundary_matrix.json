@@ -1,0 +1,347 @@
+{
+  "schema_version": "module-boundary-plan/1",
+  "date": "2026-11-11",
+  "status": "PLAN_ACCEPTED_READY_TO_DISPATCH_IMPLEMENTATION_NOT_STARTED",
+  "canonical_entry": "README.md",
+  "parent_plan": "../du11-source-closure-2026-10-18",
+  "scope": "Current production/public runtime boundaries; excludes research quality and general document-recall improvements",
+  "investigation": {
+    "method": "three independent read-only architecture audits plus ROOT source/test/package/plan reconciliation",
+    "tests_run": false,
+    "production_code_changed": false,
+    "remote_fetched": false,
+    "index_limit": "CWP index 461 Python sources, physical inventory479; cross-repository indexes incomplete, reports state read-only fallbacks"
+  },
+  "lanes": [
+    {
+      "id": "MB-CWP",
+      "owner": "company-wiki",
+      "repo": "C:/Users/郑曾波/Projects/company-wiki",
+      "baseline": "08dfe8bf1ae97dff34b28976d532b3482d3ba358",
+      "target": "master",
+      "worktree": "C:/Users/郑曾波/Projects/mb11-cwp",
+      "branch": "codex/mb11-cwp",
+      "card": "harness_lanes/MB-CWP.md",
+      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "requirements": [
+        "CWP-01",
+        "CWP-02",
+        "CWP-03",
+        "CWP-04",
+        "CWP-05"
+      ]
+    },
+    {
+      "id": "MB-FF",
+      "owner": "filing-fetch",
+      "repo": "C:/Users/郑曾波/Projects/filing-fetch",
+      "baseline": "f65e6ca75fbce0616e65870f0aea78b793ef883c",
+      "target": "main",
+      "worktree": "C:/Users/郑曾波/Projects/mb11-ff",
+      "branch": "codex/mb11-ff",
+      "card": "harness_lanes/MB-FF.md",
+      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "requirements": [
+        "FF-01",
+        "FF-02"
+      ]
+    },
+    {
+      "id": "MB-RF",
+      "owner": "revenue-forecast",
+      "repo": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "baseline": "b005a179",
+      "target": "main",
+      "worktree": "C:/Users/郑曾波/Projects/mb11-rf",
+      "branch": "codex/mb11-rf",
+      "card": "harness_lanes/MB-RF.md",
+      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "requirements": [
+        "RF-01",
+        "RF-02",
+        "RF-03"
+      ]
+    },
+    {
+      "id": "MB-ET",
+      "owner": "earnings-transcripts",
+      "repo": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts",
+      "baseline": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+      "target": "main",
+      "worktree": "C:/Users/郑曾波/Projects/mb11-et",
+      "branch": "codex/mb11-et",
+      "card": "harness_lanes/MB-ET.md",
+      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "requirements": [
+        "ET-01",
+        "ET-02"
+      ]
+    },
+    {
+      "id": "MB-SID",
+      "owner": "StockInfoDLSimple",
+      "repo": "C:/Users/郑曾波/Projects/StockInfoDLSimple/v2-clean-rewrite",
+      "baseline": "c0f07e12d4ba3e232d712bb6e5e491832023b0a0",
+      "target": "v2-clean-rewrite",
+      "worktree": "C:/Users/郑曾波/Projects/mb11-sid",
+      "branch": "codex/mb11-sid",
+      "card": "harness_lanes/MB-SID.md",
+      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "requirements": [
+        "SID-01",
+        "SID-02"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "CWP-01",
+      "kind": "confirmed_static_dependency",
+      "problem": "NarrativeTransportSource protocol lacks catalog/config, normalization infers OCR via reader.catalog",
+      "proof": "review/cwp_architecture.md",
+      "test": "protocol-only source with explicit OCR replay",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "CWP-02",
+      "kind": "confirmed_hidden_configuration",
+      "problem": "RawNarrativeSelector allocates document budget through implicit repo/env config",
+      "proof": "review/cwp_architecture.md",
+      "test": "injected work budget; two configs; no config I/O in selector",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "CWP-03",
+      "kind": "confirmed_dependency",
+      "problem": "neutral source guard types load concrete source reader/catalog runtime",
+      "proof": "review/cwp_architecture.md",
+      "test": "guard imports with catalog runtime unavailable",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "CWP-04",
+      "kind": "proof_gap",
+      "problem": "product wheel installed public entrypoint/asset/extra behavior unproven",
+      "proof": "review/cwp_architecture.md",
+      "test": "actual installed package, empty cwd, no source PYTHONPATH",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "CWP-05",
+      "kind": "architecture_coverage",
+      "problem": "root/shared/legacy and same-owner storage/pure DTO boundaries need finite classification, alias and alternate implementation checks",
+      "proof": "review/cwp_architecture.md",
+      "test": "owned metadata mutation; public artifact port substitution; active entrypoint inventory",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "FF-01",
+      "kind": "proof_gap",
+      "problem": "six operations plus ET/job/statements need packaged isolated subprocess coverage",
+      "proof": "review/acquisition_architecture.md",
+      "test": "six configured public operation fixtures, no sibling source",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "FF-02",
+      "kind": "design_gap_to_reproduce",
+      "problem": "ET command/interpreter and repeated request connection composition mix deployment with flow",
+      "proof": "review/acquisition_architecture.md",
+      "test": "explicit command descriptor and one request config snapshot; NO_CHANGE if already proven",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "RF-01",
+      "kind": "confirmed_distributed_tool_boundary",
+      "problem": "legacy canary SQL/DAG copied into installed runtime",
+      "proof": "review/research_architecture.md",
+      "test": "runtime closure cannot open neighbor DB; active tool retirement/public delegate",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "RF-02",
+      "kind": "confirmed_internal_dependency",
+      "problem": "report imports core aggregation while core orchestrates report; pure/formal contract unclear",
+      "proof": "review/research_architecture.md",
+      "test": "report uses existing leaf API; pure leaf side effect isolation; golden outputs",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "RF-03",
+      "kind": "compatibility_scope",
+      "problem": "B34 historical admission tied to retained execution/code layout; default leakage must be ruled out",
+      "proof": "review/research_architecture.md",
+      "test": "legacy B34 retained-path compatibility; portable artifacts only where already declared; current default no private CWP shape dependency",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "ET-01",
+      "kind": "confirmed_internal_dependency",
+      "problem": "supervisor imports provider implementation for values; worker imports supervisor wire",
+      "proof": "review/acquisition_architecture.md",
+      "test": "pure contracts/settings/protocol import without HTTP/provider modules",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "ET-02",
+      "kind": "static_policy_risk_to_reproduce",
+      "problem": "worker fixed MAX_RESULT_BYTES may reject within explicitly configured operation budget",
+      "proof": "review/acquisition_architecture.md",
+      "test": "legal envelope accepted; real quota exceeded still rejected with measured/unknown usage",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "SID-01",
+      "kind": "confirmed_static_error_loss",
+      "problem": "fetch discards provider error_code/retryable",
+      "proof": "review/acquisition_architecture.md",
+      "test": "typed host/magic/small/timeout failures preserved through CLI",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "SID-02",
+      "kind": "confirmed_reverse_dependency",
+      "problem": "CNINFO API imports adapter private report_metadata",
+      "proof": "review/acquisition_architecture.md",
+      "test": "pure metadata golden + API imports without adapter/browser",
+      "status": "NOT_IMPLEMENTED"
+    }
+  ],
+  "root_verification_only": [
+    {
+      "owner": "StockWiki",
+      "baseline": "12c441e",
+      "scope": "existing source/processed-document/index public ports; owner state isolation",
+      "status": "PENDING_COMPOSITION"
+    },
+    {
+      "owner": "revenue-forecast-audit",
+      "baseline": "3589b69",
+      "scope": "public execution/summary imports; independent diagnostics; portable bundle",
+      "status": "PENDING_COMPOSITION"
+    },
+    {
+      "owner": "investment-dashboard",
+      "baseline": "b707473",
+      "scope": "existing owner continues; current deployed tuple not inferred from main",
+      "status": "PENDING_OWNER_COORDINATION",
+      "existing_wip": true
+    },
+    {
+      "owner": "Dayu",
+      "scope": "external SDK accessed only by CWP bridge",
+      "status": "READ_ONLY_EXTERNAL"
+    },
+    {
+      "owner": "IQS",
+      "scope": "existing public consumer protocol only; no internal change",
+      "status": "READ_ONLY_EXTERNAL"
+    }
+  ],
+  "interfaces": [
+    {
+      "id": "I01",
+      "owner": "CWP source_contract",
+      "declaration": "src/company_wiki/source_contract/source_version.py",
+      "public_names": [
+        "SourceVersionPort",
+        "SourceProcessingDescriptor",
+        "SourceChunkSink",
+        "VerifiedContent"
+      ],
+      "wire_policy": "existing Python port, no signature breaking change",
+      "existing_proof": "tests/contract/test_source_reader_public_port_boundaries.py"
+    },
+    {
+      "id": "I02",
+      "owner": "CWP document_model/normalization",
+      "declaration": "src/company_wiki/document_model/__init__.py",
+      "public_names": [
+        "NarrativeUnit"
+      ],
+      "wire_policy": "existing normalized units and processed-document/1",
+      "existing_proof": "tests/unit/test_document_understanding_core_isolation.py"
+    },
+    {
+      "id": "I03",
+      "owner": "CWP",
+      "declaration": "src/company_wiki/source_catalog",
+      "wire_policy": "existing versioned query/read/processed/narrative/index; producer fixture constants authoritative",
+      "existing_proof": "tools/run_source_system_tests.py D4/D5"
+    },
+    {
+      "id": "I04",
+      "owner": "FF",
+      "declaration": "scripts/filing_contracts.py; scripts/ff_job_contracts.py",
+      "wire_policy": "current filing v2 and ff-job/1; same CLI exits",
+      "existing_proof": "tests/test_decoupled_connection.py"
+    },
+    {
+      "id": "I05",
+      "owner": "ET/SID/CWP respective sides",
+      "declaration": "transcript_tool.py; src/company_wiki_adapter_cli.py; CWP transcript_import_cli.py",
+      "wire_policy": "current ET wire constants; SID JSON1.0; transcript-import-request/2 and response/3",
+      "existing_proof": "FF tests/test_et_s0b_contract.py; SID tests/unit/test_company_wiki_adapter_cli.py"
+    },
+    {
+      "id": "I06",
+      "owner": "CWP financial_statements",
+      "declaration": "src/company_wiki/source_catalog/financial_statements/contracts.py",
+      "wire_policy": "financial-statements-request/1 and financial-statements-response/1",
+      "existing_proof": "tests/financial_statements/test_layer_ports.py; FF tests/financial_statements/test_layer_boundary.py"
+    },
+    {
+      "id": "I07",
+      "owner": "RF",
+      "declaration": "scripts/report_catalog_cli.py; scripts/rf_job_cli.py",
+      "wire_policy": "rf-report-catalog/1; rf-job/1; explicit historic admission profile",
+      "existing_proof": "tests/test_rf_job_boundary_regression.py"
+    },
+    {
+      "id": "I08",
+      "owner": "each business owner",
+      "declaration": "respective result/error/usage contracts",
+      "wire_policy": "optional observer output cannot replace business status",
+      "existing_proof": "CWP tests/unit/test_holdout_observation_isolation.py"
+    },
+    {
+      "id": "I09",
+      "owner": "configuration/resource owner",
+      "declaration": "CWP resource_budget.py; FF WikiConnection; ET retrieval_budget.py; SID acquisition_budget.py",
+      "wire_policy": "same configured budgets explicit injection; no second quota owner",
+      "existing_proof": "per-lane explicit budget/cleanup proofs"
+    }
+  ],
+  "integration": {
+    "owner": "ROOT",
+    "case_ids": [
+      "E01",
+      "E02",
+      "E03",
+      "E04",
+      "E05",
+      "E06",
+      "E07",
+      "E08",
+      "E09"
+    ],
+    "status": "NOT_RUN",
+    "write_after_cwp_delivery": [
+      "integration/**",
+      "tools/run_source_system_tests.py",
+      ".github/workflows/source-system.yml"
+    ],
+    "paid_calls_required": false
+  },
+  "inherited_passes": {
+    "D4": "scoped evidence remains accepted",
+    "D5": "scoped evidence remains accepted",
+    "P3_stream_parser": "54f8b470c shipped; not reimplemented"
+  },
+  "planning_review": {
+    "status": "PASS",
+    "report": "review/plan_independent_review.md",
+    "open_findings": []
+  },
+  "next_action": "Hand off the five standalone cards to distinct harnesses; each may start A/B/C from its local existing contracts. ROOT prepares version/sample composition and integrates after delivery. No implementation started in this planning turn."
+}
