@@ -84,3 +84,10 @@ python -B -m pytest tests/contract/test_layer_public_boundaries.py tests/contrac
 ## 交付判据
 
 七责任均有清楚结果，四缺口有真实RED→GREEN或独立证实原假设不成立；全部活动入口具有归属，兼容不变、安装与替身证明完成，独审无本卡未修问题。当前摘要召回和后续收费恢复不属于本卡关闭条件。
+
+## 并线交接步骤（目标分支：CWP `master`）
+
+1. 作者提交并推送卡片分支，交付最终tip、精确diff、包级测试、独审绑定tip及临时测试目录恢复记录；不把未提交工作区当成卡片交付。
+2. ROOT在独立集成工区核对最新 `origin/master`、提交祖先关系与本卡写集合，只接收交付提交；保留其他工区未提交文件、配置和原始资料。
+3. 在集成后CWP树集中运行本卡受影响suite一次。若冲突解决改变源码，测试和独审绑定最终代码tip；不做整树覆盖或`git clean`。
+4. 通过后由ROOT推送 `master`，在本卡handoff与总控reconciliation记录实际SHA、测试和状态`MERGED`；有具体失败则交回CWP作者修复。

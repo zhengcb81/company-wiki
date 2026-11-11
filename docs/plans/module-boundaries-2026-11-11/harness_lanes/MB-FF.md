@@ -61,3 +61,10 @@ python -B -m pytest tests/test_public_operation_isolation.py -q -p no:cacheprovi
 ## 出口
 
 六operation、ET独立命令及一次请求配置归属均有证明，当前CLI/wire不变；无邻仓代码可见也能工作，真实不支持operation具名失败且不猜目录。没有缺陷的部分允许`NO_CHANGE_PROVEN`，必须附实际测试依据。
+
+## 并线交接步骤（目标分支：FF `main`）
+
+1. 作者提交并推送卡片分支，交付最终tip、精确diff、包级测试、独审绑定tip及测试目录恢复记录；不把未提交工作区当成卡片交付。
+2. ROOT在独立集成工区核对最新 `origin/main`、提交祖先关系与本卡写集合，只接收交付提交；保留其他工区未提交文件、provider配置和`.ff_jobs`状态。
+3. 在集成后FF树集中运行本卡受影响suite一次。若冲突解决改变源码，测试和独审绑定最终代码tip；不整树覆盖、不删未登记状态。
+4. 通过后由ROOT推送 `main`，在本卡handoff与总控reconciliation记录实际SHA、测试和状态`MERGED`；具体失败交回FF作者，不扩成跨仓私有调用。

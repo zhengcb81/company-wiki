@@ -1,7 +1,7 @@
 {
   "schema_version": "module-boundary-plan/1",
   "date": "2026-11-11",
-  "status": "M0_ACCEPTED_A1_RECONCILED_M1_M2_PENDING",
+  "status": "M0_ACCEPTED_A1_RECONCILED_M1_IN_PROGRESS_RF_B1_MERGED_M2_PENDING",
   "canonical_entry": "README.md",
   "parent_plan": "../du11-source-closure-2026-10-18",
   "scope": "Current production/public runtime boundaries; excludes research quality and general document-recall improvements",
@@ -53,12 +53,14 @@
       "id": "MB-RF",
       "owner": "revenue-forecast",
       "repo": "C:/Users/郑曾波/Projects/revenue-forecast",
-      "baseline": "b005a179",
+      "baseline": "6341759b9cdfd13e8aa7d51d5c755e361046da0c",
+      "historical_candidate_comparison_base": "b005a179",
       "target": "main",
       "worktree": "C:/Users/郑曾波/Projects/mb11-rf",
       "branch": "codex/mb11-rf",
       "card": "harness_lanes/MB-RF.md",
-      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "status": "ROOT_B1_SAFE_SLICE_MERGED_B2_OPEN",
+      "worktree_policy": "Continue existing codex/mb11-rf worktree at current main tip; only if unavailable, create a unique worktree from current origin/main and record its tip.",
       "requirements": [
         "RF-01",
         "RF-02",
@@ -318,9 +320,9 @@
     "report": "review/plan_independent_review.md",
     "open_findings": []
   },
-  "next_action": "Updated five cards: own A0 intake then A/B/C. ROOT owns StockWiki C38/B03 intake and later public-interface composition. A1 narrow FF/Dashboard fixes are merged and pushed; architecture lanes not dispatched; business loop remains deferred.",
+  "next_action": "Continue MB-RF B2 public scope/subject tests across accounting bases, fiscal calendars and segments, or start MB-CWP/MB-FF/MB-ET/MB-SID independently. ROOT owns StockWiki C38/B03 and final public-interface composition; business loop remains paused.",
   "reconciliation": {
-    "status": "COMPLETE_WITH_ASSIGNED_INTAKES",
+    "status": "PARTIAL_RF_SAFE_INTAKE_MERGED_WITH_REMAINING_ASSIGNED",
     "entry": "reconciliation.md",
     "before_inventory": "review/repo_reconciliation_20261111/inventory_before.json.gz",
     "repositories": 8,
@@ -328,10 +330,14 @@
     "registered_worktrees_before": 253,
     "paid_calls": 0,
     "architecture_lanes_dispatched": false,
+    "root_started_modules": [
+      "MB-RF"
+    ],
     "business_loop_resumed": false,
     "merged_and_pushed": {
       "filing-fetch": "ac798a250b2310e0c2714053b08246ad94fffd0c",
-      "investment-dashboard": "20493562f86b1351d97bc164bbc254efacddacdf"
+      "investment-dashboard": "20493562f86b1351d97bc164bbc254efacddacdf",
+      "revenue-forecast": "B37 regression tests 058be4fd60c394963be216580bcf7213af572a04; PWF 6341759b9cdfd13e8aa7d51d5c755e361046da0c"
     }
   },
   "root_owned_work": [

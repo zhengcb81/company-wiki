@@ -1,8 +1,8 @@
 # 当前交接
 
-**当前执行入口：[module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)**，父计划只归总。M0完整规划和A1逐模块Git审查已完成，最新实际接收/清理/余项见 [reconciliation.md](../module-boundaries-2026-11-11/reconciliation.md)。FF与Dashboard有限修复已受测、独审、入main并推送；五张架构卡仍未派发，不把这两次有限接收当作M1/M2完成。
+**当前执行入口：[module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)**，父计划只归总。M0与A1已完成；M1部分进行中：ROOT已把RF B37 compare及部署/来源回归安全子范围受测、独审并推送至RF main；scope/subject/verified-compare仍待B2重做。MB-CWP、MB-FF、MB-ET、MB-SID尚未派发，M2未完成，不把有限接收描述为全局模块解耦完成。最新实际接收/余项见 [reconciliation.md](../module-boundaries-2026-11-11/reconciliation.md)。
 
-下次从子计划dispatch.md选择更新后的独立卡：CWP/FF/RF/ET/SID各一个作者，先A0再A/B/C；ROOT统管接口、StockWiki C38/B03接收、最终组合与并线。Audit只验证，Dashboard接续原owner。SID11项WIP不能原样接收，RF/CWP旧release不能全树覆盖新main；各自已写精确范围与测试。原R4/真实摘要/缓存/RF循环保留，在模块边界CLOSED后恢复。
+下一步继续MB-RF B2：先用公开合同覆盖跨会计准则、财年和多分部，再接回scope/subject/verified-compare；也可独立启动MB-CWP、MB-FF、MB-ET或MB-SID。ROOT统管StockWiki C38/B03接收、Dashboard组合和最终并线；Audit只验证，Dashboard接续原owner。SID11项WIP不能原样接收，RF/CWP旧release不能全树覆盖新main；各卡已列出隔离测试和并线步骤。原R4/真实摘要/缓存/RF循环保留，在模块边界CLOSED后恢复。
 
 ## 已发布的前一子节点（历史快照）
 

@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "module_boundary_reconciliation_complete_architecture_lanes_not_dispatched",
+  "execution_mode": "module_boundary_m1_in_progress_rf_safe_slice_merged_other_lanes_not_dispatched",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -61,7 +61,7 @@
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "get_goal during 2026-11-11 module-boundary planning",
-    "execution": "Native goal last observed paused during M0. The subsequent user request authorized this bounded audit, cleanup and tested intake, not a restart of the business loop.",
+    "execution": "Native goal last observed paused during M0. Work has since continued on the module-boundary plan, including a reviewed RF regression-test intake; the business loop remains paused.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "M0_ACCEPTED_A1_RECONCILED_M1_M2_PENDING; FF_DASHBOARD_NARROW_FIXES_MERGED_PUSHED; BUSINESS_LOOP_DEFERRED",
+  "project_status": "M0_ACCEPTED_A1_RECONCILED_M1_IN_PROGRESS_RF_B37_SAFE_SLICE_MERGED; OTHER_MB_LANES_PENDING; M2_PENDING; BUSINESS_LOOP_PAUSED",
   "as_of_date": "2026-11-11",
-  "observed_at_utc": "2026-11-11T08:25:53Z",
-  "next_action": "Use module-boundaries-2026-11-11/reconciliation.md and updated five cards A0 then A/B/C; ROOT owns StockWiki intake and final public-interface composition.",
+  "observed_at_utc": "2026-11-11T22:17:29Z",
+  "next_action": "Continue MB-RF B2 public scope/subject contract tests, or start MB-CWP/MB-FF/MB-ET/MB-SID independently; ROOT owns StockWiki intake and final public-interface composition.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -508,7 +508,7 @@
     "status_at_snapshot": "D5_GLOBAL_DECOUPLING_OPEN",
     "snapshot_date": "2026-11-02",
     "superseded_by": "d5_decoupling (ACCEPTED 2026-11-06)",
-    "current_status_note": "Historical D5 scoped acceptance; five new module-boundary cards are prepared in module-boundaries-2026-11-11, not yet implemented or dispatched.",
+    "current_status_note": "Historical D5 snapshot dated 2026-11-02; current module status is tracked in the 2026-11-11 module-boundary plan: RF B1 is merged, RF B2 remains open, and the other four cards are pending.",
     "open_at_snapshot": [
       "D5 CWP pathless normalized-document port and StockWiki three-entry consumption",
       "ROOT FF V1/V2 caller inventory and 3-case route suite PASS; final version-bound cross-repository boundary proof remains open",
@@ -1153,7 +1153,7 @@
     "plan": "../module-boundaries-2026-11-11/README.md",
     "task_plan": "../module-boundaries-2026-11-11/task_plan.md",
     "matrix": "../module-boundaries-2026-11-11/boundary_matrix.json",
-    "status": "M0_ACCEPTED_A1_RECONCILED_M1_M2_PENDING",
+    "status": "M0_ACCEPTED_A1_RECONCILED_M1_IN_PROGRESS_RF_SAFE_SLICE_MERGED_M2_PENDING",
     "lanes": [
       "MB-CWP",
       "MB-FF",
@@ -1164,16 +1164,33 @@
     "code_changes_this_turn": true,
     "tests_run_this_turn": true,
     "dispatched": false,
+    "root_started_modules": [
+      "MB-RF"
+    ],
     "parent_business_tasks_retained": true,
     "next_business_action_after_closure": "R4/T4/SEM -> real summary -> paid/cache recovery -> actual RF adoption -> fixed company loop",
     "reconciliation": "../module-boundaries-2026-11-11/reconciliation.md",
     "merged_and_pushed": {
       "filing-fetch": "ac798a250b2310e0c2714053b08246ad94fffd0c",
-      "investment-dashboard": "20493562f86b1351d97bc164bbc254efacddacdf"
+      "investment-dashboard": "20493562f86b1351d97bc164bbc254efacddacdf",
+      "revenue-forecast": "B37 regression tests 058be4fd60c394963be216580bcf7213af572a04; PWF 6341759b9cdfd13e8aa7d51d5c755e361046da0c"
+    },
+    "rf_b37_safe_intake": {
+      "compare_commit": "e060a8607a904547645ee8eaee347bd159004d01",
+      "regression_commit": "058be4fd60c394963be216580bcf7213af572a04",
+      "final_pwf_commit": "6341759b9cdfd13e8aa7d51d5c755e361046da0c",
+      "origin_main": "6341759b9cdfd13e8aa7d51d5c755e361046da0c",
+      "tests": {
+        "combined": "171 passed, 1 skipped",
+        "deployment": "38 passed",
+        "push_smoke": "12 passed on each of two pushes"
+      },
+      "independent_review": "PASS",
+      "remaining": "Scope/subject/verified-compare is not merged; redesign the public contracts across accounting standards, fiscal calendars and multiple segments, preserving import-rf-job."
     },
     "remaining_intake_owners": [
       "MB-CWP historical public interfaces",
-      "MB-RF B37 compare/scope",
+      "MB-RF B37 scope/subject/verified-compare generalization",
       "MB-SID 11 WIP fixes",
       "ROOT StockWiki C38/B03",
       "Dashboard owner composition"

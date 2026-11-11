@@ -66,3 +66,10 @@ python -B -m pytest tests/unit/test_provider_error_contract.py tests/unit/test_p
 ## 出口
 
 API→domain←adapter依赖单向；错误类别/可重试性/计量贯通；staging-only/预算/旧入口无退化，独审通过，目标分支和现有owner WIP的关系在handoff清楚。
+
+## 并线交接步骤（目标分支：`v2-clean-rewrite`）
+
+1. 作者提交并推送卡片分支，交付最终tip、精确diff、包级测试、独审绑定tip及隔离测试恢复记录；未提交11项旧WIP不得作为已完成交付。
+2. ROOT在独立集成工区核对最新目标分支、提交祖先关系与本卡写集合，只接收经过测试的修复提交；保留原工区未提交状态，不能恢复掉未核销文件。
+3. 在集成后SID树集中运行本卡受影响suite一次。若冲突解决改变源码，测试和独审绑定最终代码tip；不创建假的`main/master`，不修改旧StockInfoDownloader。
+4. 通过后由ROOT推送 `v2-clean-rewrite`，在本卡handoff与总控reconciliation记录实际SHA、测试和状态`MERGED`；具体失败交回SID作者。

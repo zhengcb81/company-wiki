@@ -60,3 +60,10 @@ python -B -m pytest tests/test_runtime_contract_isolation.py tests/test_worker_r
 ## 出口
 
 协议层/生命周期不依赖provider实现，worker不反向导入supervisor私有协议；额度内输出不被固定表示帽拒绝，真实资源超额/超时/unknown仍准确；安装/CLI/原语言行为与独审通过。
+
+## 并线交接步骤（目标分支：ET `main`）
+
+1. 作者提交并推送卡片分支，交付最终tip、精确diff、包级测试、独审绑定tip及隔离测试恢复记录；不把未提交工作区当成卡片交付。
+2. ROOT在独立集成工区核对最新 `origin/main`、提交祖先关系与本卡写集合，只接收交付提交；保留其他工区未提交内容与历史运行材料。
+3. 在集成后ET树集中运行本卡受影响suite一次。若冲突解决改变源码，测试和独审绑定最终代码tip；不整树覆盖、不更改FF owner实现。
+4. 通过后由ROOT推送 `main`，在本卡handoff与总控reconciliation记录实际SHA、测试和状态`MERGED`；具体失败交回ET作者。

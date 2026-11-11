@@ -1,6 +1,6 @@
 # 工作区、支线和接收顺序（本轮唯一处置表）
 
-2026-11-11。用户明确授权：逐模块弄清未提交改动，删除确认无用内容，尽量接收未并线成果，余项加入原施工包。本轮完成调查、有限修复接收和清理；五张 MB 架构卡仍未派发，原业务循环仍暂停。不得将本页写成“所有分支已合并/所有本地文件已清空”。
+2026-11-11。用户明确授权：逐模块弄清未提交改动，删除确认无用内容，尽量接收未并线成果，余项加入原施工包。本轮完成调查、有限修复接收和清理；随后ROOT继续并入RF B37中可独立验收的compare及部署/来源回归切片。RF剩余scope/subject/verified-compare未并入；其他四张MB架构卡也未开始。原业务循环仍暂停。不得将本页写成“所有分支已合并/所有本地文件已清空”。
 
 ## 已实际执行
 
@@ -8,7 +8,7 @@
 |---|---|---|
 | CWP | 62 refs、8工区、2 stash逐项查过；多数是主线祖先/已吸收。清理4个pytest目录、旧source-facts的11个tracked副本+5个重复测试、已吸收stash。补入W13历史最终独审/交接，明确不回退旧gate代码。 | MB-CWP A0：历史公开接口与当前owner接收，详下表。费用stash及独有审计材料保留。 |
 | FF | B34明确null发布日期修复已受测接收为 `d563b630df887219039b9340703217b68da48c69`，CI清单接线为 `ac798a250b2310e0c2714053b08246ad94fffd0c`，main已推origin。旧job功能由57351d0/7d8392e吸收；其6个重复源码/测试已restore。删除3个pytest目录、空占位脚本和3个空Temp工区；本轮候选工区已回收。 | MB-FF不重做B34/job/旧companion；A0归档剩余旧交接材料，随后原六operation隔离工作。 |
-| RF | 96 refs、62工区；未并线release有实际能力，不能全树覆盖新main。主工区4个assurance生成文件原字节存入本轮review/retained/rf_assurance，随后定点restore；删除1个空Temp工区。 | MB-RF A0按B37合同差额接收；研究草稿归父研究计划。四个含原文的残缺Temp工区保留。 |
+| RF | 96 refs、62工区；未并线release有实际能力，不能全树覆盖新main。主工区4个assurance生成文件原字节存入本轮review/retained/rf_assurance，随后定点restore；删除1个空Temp工区。之后ROOT在MB-RF工区将compare与部署/来源测试切片并入RF main，当前远端head `6341759b9cdfd13e8aa7d51d5c755e361046da0c`。 | MB-RF剩余scope/subject/verified-compare按B2重做；研究草稿归父研究计划。四个含原文的残缺Temp工区保留。 |
 | ET | 19 refs全部已为main祖先；删除旧翻译eval_results.json和1个空Temp工区；工具记忆保留。 | MB-ET没有旧分支漏并任务，继续原协议/worker边界任务。 |
 | SID | 6 refs全部已为v2-clean-rewrite祖先；11项dirty属于旧下载器改进，有价值且有真实缺陷，保留；fixture生成脚本是独有出处。 | MB-SID A0先补RED并修复接收，不能直接commit旧WIP或恢复掉。 |
 | StockWiki | 36 refs、30工区；18条非祖先主要共享C38/B03家族，存在公开身份/研究接口差额。删除2个空Temp工区。无remote。 | ROOT在StockWiki自己目录接收C38/B03最小合同，保留新source consumer/F05，不修改IQS或真实数据库。 |
@@ -28,7 +28,7 @@ before快照总计390个分支/remote refs、253个登记工区，另7个RF tag�
 | 本轮 ROOT（完成） | FF `53285c2`最小修复；Dashboard已有边界WIP；CWP W13历史文档；确定垃圾/重复源码清理 | 上表已执行结果、独审和定向回归；不是整个架构计划完成。 |
 | MB-CWP A0→A/B/C，同一作者 | T-READ `3199adab`/X-C04流协议映射当前`stream_version`；T-CANON `62602102a`；T-B33 `dc837a21f`；T-B34 `29b562dac`；T-N4 `2b5bec914`；T-CONFIG旧M3四文件反例 | 先按review/cwp_review.md逐项重放当前公开行为，保留主线预算/解析/R7语义。支持的端口通过真实owner组合；已替代的候选给明确映射。B33历史独审未完成不能称旧包已验收。 |
 | ROOT StockWiki（仓内独立接收） | `4532b0da` C38：43个touched产品路径，37 main缺失/6变化；`652f6a48` d00-b03只比三文件公开assessment差额。精确路径见research_review §4。 | 用既有CLI/contracts先验证，再按需移植，保留master当前source/F05与单一identity owner。用tmp状态证明读取/恢复/撤回；不对生产执行repair/apply。对应公开行为与当前消费者同时绿。无remote时交付本地master及原因，不假推送。 |
-| MB-RF A0→A/B/C，同一作者 | `28d646d3` B37：19路径中6缺失/9变化/4相同；compare/scope是重点，不重复合其所有祖先。保留main新job/concurrency/recovery与D4 reader。 | 旧公开compare/scope/publication合同+当前job/source/目录测试通过；历史固定路径profile不变成默认依赖。不并rf-input-prep的118个研究产物、不重新付费预测。 |
+| MB-RF A0→A/B/C，同一作者 | `28d646d3` B37：19路径中6缺失/9变化/4相同；ROOT已把compare模块/CLI `e060a8607` 与部署/来源测试 `058be4fd6` 并入RF main，最终PWF提交 `6341759b9`。本轮171 passed、1 skipped，独立审查PASS。scope/subject候选私调私有符号、固定IFRS/12-31/单分部并会移除 `import-rf-job`，不原样接收。 | 下一步B2先设计公开DTO和TDD，覆盖不同会计准则/财年/多分部，再通过owner公开reader接线，保留job命令。旧公开compare合同/current job/source/目录回归通过后按模块并入；不并rf-input-prep的118个研究产物、不重跑预测。 |
 | MB-SID A0→A/B/C，同一作者 | 11项旧WIP+fixture出处，路径/请求状态/tab范围先RED，按职责拆提交 | 新请求不继承旧CONFIRMED_EMPTY，路径按组件而非子串/反斜杠，空active tab不借另一tab；stdout仍单JSON，原配置/下载协议不回退。再完成原typed-error/metadata边界。 |
 | MB-FF/ET | 已吸收旧分支不再合；登记历史资料与部署状态，执行原边界卡 | 当前公开runtime隔离测试与独审；历史收据不是当前测试。 |
 | ROOT + Dashboard既有owner | 在上述owner交付后选择实际HEAD/CLI/schema/config/data-root组合；通过公开接口联调 | 重跑缺owner的24-case stream以及RF/SW公开入口；不猜路径/不复制邻仓内部。组合绿后才切本地配置引用和回收release工区。 |
@@ -37,6 +37,7 @@ before快照总计390个分支/remote refs、253个登记工区，另7个RF tag�
 
 ## 已跑的测试与已知限制
 
+- RF B37安全切片：合并compare/job/recovery/source-port/部署/来源组合 **171 passed、1 skipped、71.41秒**；部署文件单测 **38 passed**；独立审查PASS；两次推送前Ruff与固定smoke均通过，smoke各12 passed。代码/测试和PWF已推送并进入RF main。scope候选失败及原因见RF卡，不计为绿或完成。
 - FF：旧main RED真实复现；相关四文件176 passed、2 existing skips、38 subtests/15.24s；最终B34含4条新反例23 passed/0.50s。两集合重叠，不相加。独立静态审查PASS；正常pre-commit ruff/mypy/host guard通过，push smoke11 passed。
 - Dashboard：平台/文档/预览189 passed；两个adapter29 passed、70 subtests。独审PASS。旧24-case真实owner stream因找不到配置所需source_stream_cli入口在setup失败，没有删除用例或造fake owner转绿。另有既存Queue.put lifecycle warning，交原owner在stream组合阶段复核，不谎称全量绿。
 - 初轮Dashboard同名测试收集冲突、ROOT忘建basetemp父目录均分别记录并修正；环境设置错误不归因成产品缺陷。

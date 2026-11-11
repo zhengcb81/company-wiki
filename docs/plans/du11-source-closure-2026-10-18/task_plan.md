@@ -1,6 +1,6 @@
 # 主线实施计划
 
-2026-11-11 当前优先为 [模块边界收口子计划](../module-boundaries-2026-11-11/README.md)：M0规划与A1逐仓核销已完成，FF/Dashboard有限修复已受测并线推送；五张架构卡尚未派发。最新支线/WIP接收顺序见其reconciliation.md和各卡A0。P3 source stream/parser子节点54f8b470c继续保留；原业务循环未恢复。实时归总入口为CURRENT_STATUS.md/json。
+2026-11-11 当前优先为 [模块边界收口子计划](../module-boundaries-2026-11-11/README.md)：M0规划与A1逐仓核销已完成；ROOT已把MB-RF B37 compare及部署/来源回归安全子范围受测并入RF main，scope/subject/verified-compare仍留在B2重做；MB-CWP、MB-FF、MB-ET、MB-SID尚未派发。并线与余项见reconciliation.md和各卡。P3 source stream/parser子节点54f8b470c继续保留；原业务循环未恢复。实时归总入口为CURRENT_STATUS.md/json。
 
 ## 下一步
 

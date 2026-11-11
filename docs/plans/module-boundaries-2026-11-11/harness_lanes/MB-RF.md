@@ -12,20 +12,36 @@
 4. ROOT已归档4份assurance生成物原字节并restore，主工区tracked已清。日志内旧canary/bound-stale失败保留，归本卡旧分发/运行入口退役核对，不因清理日志宣称失败修好了。
 5. `rf-impl`的238 staged中233与main同blob，余5是独有PWF/审计；先归档5项，后给ROOT精确核销清单。4个含msft原文的Temp工区保留。`3b00b938`原型有codex/revenue-source-reader引用，不建第二reader；先核销合同差额再退役。release路径仍被Dashboard配置引用，ROOT组合前不删除。
 
-A0和本卡原core/report/分发边界由同一RF作者顺序推进；验收后ROOT并main，不增加人工许可。StockWiki C38/B03归ROOT自己的SW工作，不是RF作者写集合。
+### ROOT已完成的B1安全并线（2026-11-11）
+
+- compare owner/CLI `e060a8607` 已在RF main；部署及publication-source回归提交 `058be4fd6` 已进入main，PWF状态提交 `6341759b9` 已推送。当前origin/main为 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`。
+- B1最终组合 **171 passed、1 skipped**，部署单测 **38 passed**，独立审查PASS；推送前固定smoke两次均为 **12 passed**。publication-source生产实现本来就与main一致，只接回测试。
+- scope/subject/verified-compare未并入。候选跨越ReportCatalog私有面、固定IFRS/12-31/单分部并会删除 `import-rf-job`；不能把原候选当成已验收。其余B2要求见本卡A/B/C。
+
+A0和本卡原core/report/分发边界由同一RF作者顺序推进；compare及部署/来源回归的安全子范围已由ROOT并入main，剩余scope/subject/verified-compare按B2完成后再由ROOT接收，不增加人工许可。StockWiki C38/B03归ROOT自己的SW工作，不是RF作者写集合。
 
 ## 任务定位与唯一工区
 
-- 原仓：`C:/Users/郑曾波/Projects/revenue-forecast`；基线 `b005a179`；目标主线 `main`。
-- 新工区：`C:/Users/郑曾波/Projects/mb11-rf`；分支 `codex/mb11-rf`。本卡尚未开工，不把准备好的卡称为已派发。
-- 本仓PWF：`docs/plans/mb11-rf-2026-11-11/`。先建立 task_plan.md、findings.md、progress.md，记录真实基线与工作量；本卡及公共接口说明可复制到该目录inputs。
+- 原仓：`C:/Users/郑曾波/Projects/revenue-forecast`；当前续做基线为RF `main` / `origin/main` 的 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`；目标主线 `main`。`b005a179` 仅是历史候选比较基线，不是当前主线或续做起点。
+- 现有工区：`C:/Users/郑曾波/Projects/mb11-rf`；分支 `codex/mb11-rf`。ROOT已在该工区启动并完成B1安全并线；当前分支已包含主线 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`，MB-RF其余B2未完成。先核对并继续使用此工区，不要重复创建同路径/同分支，也不要把当前B1并线描述成整卡交付。
+- 本仓PWF：`docs/plans/mb11-rf-2026-11-11/`。现有 `task_plan.md`、`findings.md`、`progress.md` 已记录B1已并线与B2差额；接手时先读并增量更新，不要重建或覆盖。仅在缺失时创建记录文件；公共接口说明可放入该目录inputs。
 - 总控计划：`C:/Users/郑曾波/Projects/company-wiki/docs/plans/module-boundaries-2026-11-11/`。开工只需读本卡、该目录 interfaces.md、acceptance.md、runtime_verification.md 和本仓AGENTS；无需回放旧聊天/全部历史PWF。
 
 ```powershell
-git -C 'C:/Users/郑曾波/Projects/revenue-forecast' worktree add -b codex/mb11-rf 'C:/Users/郑曾波/Projects/mb11-rf' b005a179
+git -C 'C:/Users/郑曾波/Projects/mb11-rf' status --short
+git -C 'C:/Users/郑曾波/Projects/mb11-rf' rev-parse HEAD
 ```
 
-若工区/分支已存在，先只读核归属；不能 reset、清别人的目录或接管未知工作区。可以用新的唯一后缀并记录。用仓库实际可用的Python/离线依赖；不要重新抓取原件或部署到全局技能目录。
+预期先核实该工区仍属于 `codex/mb11-rf` 且基于当前主线。若原工区确实不可用，才创建新的唯一工区/分支，并从当时的 `origin/main` 起步（当前已知 tip 为 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`）；记录实际tip与原因。不能 reset、清别人的目录或接管未知工作区。用仓库实际可用的Python/离线依赖；不要重新抓取原件或部署到全局技能目录。
+
+## B2：公开scope/subject/verified-compare合同
+
+B2只完成本卡剩余的 RF owner 实现，不复活候选中的私有跨层访问，也不重跑公司预测。按TDD先补公开行为测试，再补实现：
+
+1. 通过 RF 自己拥有的公开 DTO 和 reader 暴露 scope、subject、verified-compare 所需数据；调用方不得导入或读取 `ReportCatalog` 私有函数、私有存储布局或内部数据库表。用依赖隔离测试验证公开入口可用且没有私有调用绕行。
+2. Golden/参数化合同覆盖不同会计准则（至少 IFRS 与 US GAAP）、不同财年结束日（至少 6月30日与12月31日）和多分部公司；期次、主体、scope与比较对象必须沿公开字段绑定，不得把单分部或12月年结当作默认事实。对缺源、重复源、身份/期次不匹配和互相冲突的scope分别验证稳定的结果或错误语义。
+3. 保留现有 `import-rf-job` 管理入口及其CLI行为；增加回归验证确保B2改动不移除或改写该入口。新数据展示完整候选结果；不得添加与配置工作预算无关的任意行数/字节截断。真实配置的资源预算仍按现有owner合同执行。
+4. B2定向测试通过后运行RF受影响回归一次，并由独立审查绑定最终源码tip；交付卡和handoff记录具体DTO/reader入口、正反例、测试命令/结果、审查结论与最终tip。若公开接口不足，先在RF owner范围内补齐并给ROOT记录组合接口变化，不以直接访问邻仓私有实现代替。
 
 ## 全卡共用完成规则
 
@@ -68,3 +84,10 @@ python -B -m pytest tests/test_module_boundary_closure.py -q -p no:cacheprovider
 ## 出口
 
 RF模型/研究leaf、runtime副作用、report/catalog/jobs和source adapters边界清楚；已分发越层工具消失或公开委托；历史profile隔离有证据；安装、兼容与公开替代端口通过，独审无未修本卡问题。
+
+## 并线交接步骤（目标分支：RF `main`）
+
+1. 作者在最终交付提交中给出本卡分支tip、精确产品diff、包级测试和绑定该tip的独立审查；不能把未提交工作区当作交付。
+2. ROOT在独立集成工区核对最新 `origin/main`、提交祖先关系与卡片写集合，只接收交付提交；保留其他工区的未提交状态及生产运行文件。
+3. 在集成后的RF树集中运行本卡受影响测试一次。若集成解决冲突改变了产品代码，审查与测试需绑定最终代码tip；否则不得回退到旧候选整树覆盖。
+4. 通过后由ROOT推送 `main`，在本卡handoff及总控 `reconciliation.md` 记下实际main SHA、测试、审查及状态 `MERGED`；失败时保留分支并把明确失败项交回本卡作者修复。

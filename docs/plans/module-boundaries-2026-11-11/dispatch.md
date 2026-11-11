@@ -1,6 +1,8 @@
 # 并行施工与ROOT职责
 
-状态：**READY_TO_DISPATCH_NOT_STARTED；M0方案独审PASS，A1逐仓核销结果已纳入五卡A0。** 五张架构卡未派发、未创建其工区；ROOT本轮FF临时接收工区已合并回收。旧方案独审见review/plan_independent_review.md，最新处置见reconciliation.md，无需逐卡逐步新增许可。
+状态：**PARTIAL_IN_PROGRESS；M0方案独审PASS，A1逐仓核销结果已纳入五卡A0。** ROOT已在 `mb11-rf` 推进并合入RF B37安全子范围；RF剩余scope/subject/verified-compare仍开放。MB-CWP、MB-FF、MB-ET、MB-SID尚未派发。每卡新增ROOT并线步骤，避免作者工作区与主线集成互相覆盖。旧方案独审见review/plan_independent_review.md，最新处置见reconciliation.md。
+
+RF当前 `origin/main` 为 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`。compare owner/CLI `e060a8607`、部署和来源回归 `058be4fd6` 已并入；171 passed、1 skipped，独立审查PASS，push smoke 12 passed。候选scope实现未并线，根因与后续B2入口见MB-RF卡及RF自身PWF。
 
 ## 不重叠写入
 
@@ -23,7 +25,7 @@
 
 ## ROOT现在与实施期分别做什么
 
-本轮：已完成M0规划及A1逐仓审查/有限受测并线/精确清理。实现期：
+本轮：已完成M0规划及A1逐仓审查/有限受测并线/精确清理；继续完成RF B37可独立验收的compare与部署/来源测试切片。实现期：
 
 1. 汇总各harness实际baseline、声明接口版本和新增fixture路径；记录一个生产者/消费者组合清单。文档提交不改变代码基线，不为文档SHA重跑测试。
 2. 选定四份已有真实文档与已有报告/三表快照，仅通过公开owner入口取得引用；在跑结果前冻结E04必需检查点。不要全库复制或重新下载。

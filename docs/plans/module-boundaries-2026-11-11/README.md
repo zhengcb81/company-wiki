@@ -1,6 +1,6 @@
 # 模块化与解耦：一次有明确出口的收口
 
-当前阶段：**M0规划完成；A1逐模块Git核销、有限接收与清理已执行；五张架构卡仍待派发。** 当前入口是本目录，父计划 `../du11-source-closure-2026-10-18/CURRENT_STATUS.md` 只归总。本轮已受测接收FF、Dashboard小修并推送，未启动五卡的大规模架构实施或恢复业务循环。详见 [reconciliation.md](reconciliation.md)，它是支线/未提交材料的唯一处置表。
+当前阶段：**M0规划与A1核销完成；M1部分进行中。ROOT已把RF B37 compare和部署/来源回归安全切片并入RF main；剩余scope/subject/verified-compare待按公开接口重做。MB-CWP、MB-FF、MB-ET、MB-SID四卡仍待派发，M2组合验收未开始。** 当前入口是本目录，父计划 `../du11-source-closure-2026-10-18/CURRENT_STATUS.md` 只归总。原业务循环仍暂停。详见 [reconciliation.md](reconciliation.md)，它是支线/未提交材料的唯一处置表。
 
 先读 [task_plan.md](task_plan.md)，再读 [architecture.md](architecture.md)、[interfaces.md](interfaces.md)、[acceptance.md](acceptance.md)。并行安排和卡片见 [dispatch.md](dispatch.md)，交接格式见 [handoff_contract.md](handoff_contract.md)，机器对照见 [boundary_matrix.json](boundary_matrix.json)。
 
@@ -53,4 +53,4 @@ flowchart LR
 
 本计划关闭表示：当前登记的活动入口只能通过公开接口通信，纯域/配置/存储职责清楚、真实交付包可独立运行、替换实现和越界反控能稳定验收、已并入各自正确主线。后续新的业务缺陷仍归所属模块；不会因为出现研究或摘要质量问题再把这次架构结论说成从未完成。
 
-本轮没有初始化索引、真实下载、模型调用或全局技能部署。按新增授权做了精确清理、FF隔离候选接收（工区已回收）、Dashboard有限修复及离线/回环测试。历史真实来源/收费验收没有重跑。
+本轮A1没有初始化索引、真实下载、模型调用或全局技能部署。按新增授权做了精确清理、FF隔离候选接收（工区已回收）、Dashboard有限修复及离线/回环测试。后续RF安全测试切片只使用合成夹具，没有重跑历史付费来源验收。

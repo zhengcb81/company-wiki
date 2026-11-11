@@ -29,7 +29,9 @@
 - [x] 方案独审与修复、父计划状态对齐及文档JSON/链接/工区互斥检查完成；本轮以正常Git文档提交交付，实际发布版本看Git历史。
 
 ### Phase B / M1 — 五个owner并行TDD与模块交付
-**Status:** pending
+**Status:** in_progress（ROOT已完成并线MB-RF的B1安全子范围；RF B2和其他四条lane仍待实施）
+
+MB-RF当前主线为 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`：compare实现 `e060a8607` 已在先前提交进入main；部署/来源回归测试 `058be4fd6` 已通过171 passed、1 skipped及独立审查并进入main；最新PWF记录也已推送。B37剩余scope/subject/verified-compare不在主线，候选跨私有接口及固定IFRS/财年/单分部假设，继续按卡内B2重做。MB-CWP、MB-FF、MB-ET、MB-SID目前仍未派发。
 
 任务卡见 dispatch.md。保持现有跨仓wire，作者各自A→B→C连续实施；不是每一步等ROOT批准。
 
@@ -37,7 +39,7 @@
 |---|---|---|
 | CWP | CWP-01协议外OCR配置、02隐藏预算、03类型导入、04实际安装、05根/状态/模型边界分类 | 七责任逐项说明，公开替身/安装/恢复/原件保护 |
 | FF | FF-01六operation及job/三表隔离，02command/config组装 | 真subprocess+无邻仓环境；已满足允许NO_CHANGE |
-| RF | RF-01旧越层工具分发、02core/report依赖、03历史profile与默认隔离 | 纯计算/报告golden不变、来源/目录/job公开端口、安装 |
+| RF | RF-01旧越层工具分发、02core/report依赖、03历史profile与默认隔离；继续B37公开scope/subject/verified-compare | 已并入compare与部署/来源回归子范围；剩余公开合同跨会计准则、财年、多分部，且保留job命令；纯计算/报告golden、来源/目录/job公开端口、安装 |
 | ET | ET-01纯合同/进程与provider分离，02固定表示限额复现根修 | worker CLI成功/错误/unknown/预算/取消 |
 | SID | SID-01typed错误贯通，02metadata反向依赖 | 纯API、稳定wire/过滤语义、staging-only |
 
@@ -56,7 +58,7 @@ ROOT在此期间准备组合清单/样本，在自己的StockWiki隔离工区按
 
 ## Next Step
 
-五张更新后的卡可分别交给独立harness；先处理各卡A0接收差额，再A→B→C，不等逐步批准。ROOT按reconciliation.md承担StockWiki接收、Dashboard组合和最终并线，不跨写作者代码。当前只完成A1；五卡架构实施未派发，原业务循环仍暂停。
+下一步继续MB-RF B2：先建立跨会计准则、财年和多分部的公开scope/subject合同测试，再用RF owner公开reader实现并接回CLI，保留 `import-rf-job`。其余四张卡可独立启动，A0差额已写在各卡。ROOT继续按reconciliation.md负责StockWiki接收、Dashboard组合和各仓最终并线；原业务循环仍暂停。
 
 ## Decisions
 
