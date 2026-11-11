@@ -1,5 +1,7 @@
 # 执行进度
 
+> 本文是按时间追加的执行日志。较早条目中的“未完成/下一步”是历史快照；当前状态以 `CURRENT_STATUS.md/json` 与本文件最后一个事件条目为准。
+
 ## 2026-10-31 — PWF状态对账（文档任务）
 
 - 三个独立只读审计分别核外包交付、目标/缺口、文档可恢复性；ROOT核Git、精确CI和本机三个失败节点。
@@ -507,4 +509,13 @@ SourceCatalog owner ports, package-wide static sibling-boundary contract, fast-C
 
 ## 2026-11-11 P3 published
 
-The SourceCatalog owner-port and static module-boundary milestone is pushed to `origin/master` at `e7fc2238c177b39dcc91d901a9ac3ac91263830a`. The push fast gate passed its fixed 18-case smoke in 3.88 seconds. The local commit hooks passed Ruff, mypy runtime-source checks, and config doctor. Exact-head remote CI is not yet verified because `gh` is not installed and the sandbox GitHub lookup could not start its DNS worker. This is a local/PWF evidence limit, not a claim of remote CI failure or success. Continue with RED tests for the public stream/parser owner interfaces.
+The SourceCatalog owner-port and static module-boundary milestone was pushed to `origin/master` at `e7fc2238c177b39dcc91d901a9ac3ac91263830a`. The push fast gate passed its fixed 18-case smoke in 3.88 seconds. The local commit hooks passed Ruff, mypy runtime-source checks, and config doctor. Exact-head remote CI was not verified at that checkpoint. The then-next stream/parser work has since been completed; see the latest event below.
+
+## 2026-11-11 08:25 UTC — P3 stream/parser node complete; pause requested
+
+- Added public `SourceProcessingDescriptor`, `SourceVersionPort.stream_version`, structural read-budget and transactional sink contracts; parser owner now handles the staging and format routing behind a public parser port. The endpoint no longer reads catalog internals, raw manifest data, SQLite, or original paths.
+- Removed the extra fixed candidate-size cap; byte/candidate/deadline/cancellation accounting remains with the single caller budget. Candidate content is committed to parser staging only after identity/SHA/size verification.
+- Fixed root causes found by the tests: public `VerifiedContent` export omitted; dynamic `getattr` prevented static boundary verification; old private-helper test spies remained after owner migration; long `%TEMP%` paths made two path-budget tests impossible on this host; cleanup failure could skip temp directory removal or mask the primary error.
+- TDD cleanup tests first failed 2/2, then passed. Final focused combination **205 passed/1 skipped in 63.58s**. The current fast-gate initially showed 16 sandbox-only hard-link errors; host execution isolated two real stale test spies, which were migrated to the public Resolver port. Final host fast-gate **277 passed in 59.18s**, zero skipped/failed. Push hook **18 passed in 3.78s**. Ruff, mypy, exact diff checks, and two rounds of independent review passed.
+- Commit `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca` pushed to `origin/master`; local and tracking refs matched. Remote full CI not checked. All PWF entry points now mark this node done and the next planned action as historical candidate replay against current main.
+- No other untracked run artifacts or historic workspace material were staged/removed. Whole P3, other cross-package boundaries, real-summary/cache/RF acceptance and the company review loop remain open. Work pauses here per user request.

@@ -1,6 +1,6 @@
 # P3 public stream and parser owner port — closeout
 
-**Status:** implementation, focused regression, and independent review complete locally; publication status is recorded in `CURRENT_STATUS.md` and `CURRENT_STATUS.json` after the commit/push operation.
+**Status:** implementation, focused regression, independent review, commit, and push complete. Remote full CI was not checked. Current state is in `CURRENT_STATUS.md` and `CURRENT_STATUS.json`.
 
 ## Scope delivered
 
@@ -34,6 +34,8 @@ After the final logging-only diagnostic adjustment, the five cleanup/public-boun
 The exact host fast-gate command, after replacing the stale private-helper test spy, passed **277/277 in 59.18 seconds**. Running the same gate under the restricted sandbox initially produced 16 `WinError 5` hard-link failures in unrelated temporary fixtures; the same gate under the authorized host process removed those failures and isolated the two genuine stale test references described above. No cases were skipped or removed to obtain the green result.
 
 Independent read-only review: **PASS, no blockers**. Review scope was the current stream/parser owner-port implementation and cleanup/boundary changes; reviewer did not run tests. The review does not assert whole-project decoupling is complete.
+
+Commit `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca` (`refactor(cwp): expose streamed parser owner port`) is pushed to `origin/master`. The push hook fixed smoke passed **18/18 in 3.78 seconds**. After push, `master` and `origin/master` matched at that exact commit. Remote full CI status was not checked.
 
 ## Remaining scope
 

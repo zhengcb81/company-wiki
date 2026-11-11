@@ -2,6 +2,8 @@
 
 当前执行状态仅看[CURRENT_STATUS](CURRENT_STATUS.md)/json，实施顺序看task_plan/HANDOFF。本文保留有效共因与未完责任；此前详细观察在Git848b4ee0的同一路径保留，历史失败和原审查收据不改写。
 
+> 下方按日期记录的是各节点发生时的发现快照；其中“仍待审/未发布/下一步”只代表当时。当前执行状态以本文件最后一个日期条目和 CURRENT_STATUS 为准。
+
 ## R6：来源材料属性与世界事实混用，R5整合CI已通过
 
 原整合候选6668bc97完整CI63F、9f575810完整22F、2b0787dc完整70F均保留。最初存在测试私有patch/import owner迁移、AUTO v8旧表断言和真实来源语义缺陷，不能统一称测试错误。R3/R4局部审查又共同误把材料eligible/自足信息当世界事实证明，scope统一mask/downgrade造成计划、口径、具名业务范围丢失。此为实现和审查合同解释错误，不用公司词库或删旧测试掩盖。
@@ -244,4 +246,12 @@ SourceCatalog owner ports, package-wide static sibling-boundary contract, fast-C
 
 ## 2026-11-11 P3 published
 
-The SourceCatalog owner-port and static module-boundary milestone is pushed to `origin/master` at `e7fc2238c177b39dcc91d901a9ac3ac91263830a`. The push fast gate passed its fixed 18-case smoke in 3.88 seconds. The local commit hooks passed Ruff, mypy runtime-source checks, and config doctor. Exact-head remote CI is not yet verified because `gh` is not installed and the sandbox GitHub lookup could not start its DNS worker. This is a local/PWF evidence limit, not a claim of remote CI failure or success. Continue with RED tests for the public stream/parser owner interfaces.
+The SourceCatalog owner-port and static module-boundary milestone was pushed to `origin/master` at `e7fc2238c177b39dcc91d901a9ac3ac91263830a`. The push fast gate passed its fixed 18-case smoke in 3.88 seconds. The local commit hooks passed Ruff, mypy runtime-source checks, and config doctor. Exact-head remote CI was not verified at that checkpoint. The then-next stream/parser work has since been completed; see the latest dated section below.
+
+## 2026-11-11 — P3 stream/parser owner interface
+
+- Production cause addressed: the processed-document endpoint previously mixed source lookup/verification and parser routing/staging. It now composes pathless `SourceVersionPort` and parser-owner interfaces. The catalog owns path/manifest projection; the parser receives only a pathless descriptor and content that has already passed the requested source identity/SHA/size check.
+- Streaming bytes remain provisional in a transactional sink until verification commits the receipt. A single caller-owned `SourceReadBudgetPort` owns candidate, byte, deadline, and cancellation accounting; no second parser budget or fixed 256 MiB candidate cap was added.
+- TDD exposed/fixed several boundary defects: missing package exports for `VerifiedContent`, string/reflection-based sink method dispatch, temp-fixture path assumptions exceeding the real Windows path budget, and cleanup errors skipping directory cleanup or obscuring the original source/parser failure. A later gate caught two old tests still monkeypatching the removed `_read_verified_bytes`; the tests now observe the public `SourceResolver.read_verified_source_location` while keeping their original one-read/proof-order assertions.
+- Final focused set: 205 passed, 1 skipped; host fast-gate: 277 passed/0 failed in 59.18 seconds; push hook smoke: 18 passed in 3.78 seconds; Ruff/mypy passed. Independent read-only review final PASS. Exact evidence: `review/p3-public-stream-parser-20261111/README.md`.
+- Published commit: `54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca`; `master` and `origin/master` matched after push. Remote full CI was not verified. This closes one engineering node only; P3/company audit loop and whole-project modularity remain OPEN.

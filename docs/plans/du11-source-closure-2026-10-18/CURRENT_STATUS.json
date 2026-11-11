@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "P3_SOURCE_CATALOG_OWNER_PORTS_AND_STATIC_BOUNDARY_CONTRACT_PUSHED_LOCAL_FAST_GATE_GREEN_REMOTE_FULL_CI_PENDING_STREAM_PARSER_OPEN_R4_WORK_ACCOUNTING_OPEN_CLEANUP_OPEN",
+  "project_status": "PAUSED_AFTER_P3_STREAM_PARSER_OWNER_PORT_NODE_PUBLISHED; WHOLE_PROJECT_DECOUPLING_OPEN; REMOTE_FULL_CI_UNCHECKED; R4_AND_REAL_SUMMARY_RF_LOOP_OPEN",
   "as_of_date": "2026-11-11",
-  "observed_at_utc": "2026-11-11T05:03:25Z",
-  "next_action": "Start test-first design for the single-budget public stream/parser interfaces. Keep the pushed P3 exact-head remote CI as pending evidence; then replay historical stream/canonical claims only against current main.",
+  "observed_at_utc": "2026-11-11T08:25:53Z",
+  "next_action": "PAUSED_BY_USER_AFTER_CURRENT_NODE. On resume, replay historical stream/canonical claims against current master and fix only reproducible gaps; do not treat this node as whole-project decoupling completion.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1085,5 +1085,47 @@
     "ci_registration_root_cause": "The new static boundary contract was not in FAST_CONTRACT_CASES; a RED inventory regression was added before registering it.",
     "commit_hook_first_attempt": "BLOCKED by Ruff/mypy: two removed owner module aliases remained in PDF version identity construction; one unused local in a boundary test.",
     "root_cause_fix": "Import PDF version constants from their owning public exports; explicitly export PDF_PROSE_LAYOUT_FEATURE_VERSION; remove unused test local. Existing cache identity test and module contract are green."
+  },
+  "p3_source_stream_parser_20261111": {
+    "status": "COMPLETE_PUBLISHED_LOCAL_GATES_GREEN_REMOTE_FULL_CI_UNCHECKED_PARENT_P3_OPEN",
+    "closeout_receipt": "review/p3-public-stream-parser-20261111/README.md",
+    "scope": "Pathless SourceProcessingDescriptor + public SourceVersionPort streaming and parser-owner port used by the processed-document endpoint; one caller-owned read budget and transactional parser staging",
+    "design_outcome": [
+      "Source location, SQLite, raw SourceManifest, and physical path remain inside their owner; endpoint composes only public source and parser ports",
+      "Parser staging remains provisional until source owner verifies the requested source identity, byte count, and SHA and commits the receipt",
+      "Candidate, byte, time, and cancellation accounting remain on one caller-owned budget; removed the extra fixed 256 MiB candidate cap",
+      "Cleanup attempts directory removal even if candidate discard fails and preserves an earlier source/parser error"
+    ],
+    "root_causes_fixed": [
+      "VerifiedContent and VerifiedVersionReceipt existed in the source contract module but were missing from package exports",
+      "String-based getattr sink dispatch could not be verified against the public protocol; replaced by direct public protocol methods",
+      "Windows path-budget tests inherited a deeply nested pytest temp path; changed only the test fixture root and did not relax the product path budget",
+      "Parser discard failure could skip TemporaryDirectory.cleanup and a cleanup error could mask the primary error",
+      "Two narrative-read tests still monkeypatched the removed private _read_verified_bytes; observation now wraps public SourceResolver.read_verified_source_location and retains original assertions"
+    ],
+    "tests": {
+      "focused_suite": {"passed": 205, "skipped": 1, "failed": 0, "seconds": 63.58},
+      "post_final_adjustment_cleanup_and_boundary": {"passed": 5, "failed": 0},
+      "stale_test_migration": {"passed": 2, "failed": 0},
+      "host_fast_gate": {"passed": 277, "skipped": 0, "failed": 0, "seconds": 59.18},
+      "push_hook_smoke": {"passed": 18, "failed": 0, "seconds": 3.78},
+      "ruff": "PASS",
+      "mypy": "PASS: seven touched source contract/catalog modules",
+      "diff_check": "PASS"
+    },
+    "initial_sandbox_gate_observation": "16 WinError 5 hard-link fixture failures disappeared in authorized host execution; host run then exposed two genuine stale private-helper test spies, which were migrated and revalidated. No tests were deleted or skipped to obtain green.",
+    "independent_review": {
+      "result": "PASS",
+      "reviewer_ran_tests": false,
+      "scope": "Current stream/parser owner ports, transactional staging/cleanup, source-owner boundary, and public Resolver test spy; not whole-project decoupling"
+    },
+    "publication": {
+      "commit": "54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca",
+      "subject": "refactor(cwp): expose streamed parser owner port",
+      "pushed_to": "origin/master",
+      "local_head_matches_origin_master": true,
+      "remote_full_ci": "NOT_CHECKED"
+    },
+    "next_action_after_user_pause": "Replay historical stream/canonical claims against current master; adopt only reproducible current-main fixes. Then continue remaining package/cross-repository owner-boundary work."
   }
 }

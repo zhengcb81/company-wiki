@@ -1,10 +1,10 @@
 # 主线实施计划
 
-2026-11-10 本轮接口、工具和清理已独审。实时入口为 CURRENT_STATUS.md/json。当前结果与三个后续责任分别记录。
+2026-11-11 当前 P3 source stream/parser owner-port 子节点已完成、独审通过并推送：`54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca`。详细边界、根因与测试见 `review/p3-public-stream-parser-20261111/README.md`。实时入口为 CURRENT_STATUS.md/json。
 
 ## 下一步
 
-1. **P3 公共 Catalog/Reader 端口继续实施。** 11-10 子节点把位置排序和浏览查询归 Catalog owner，且独审/定向组合 130 passed。11-11 已把 SourceReader、local inventory、company index、assertion service 的 Resolver 私有 helper 调用迁到 public owner methods；198 项定向契约/真实字节组合通过，Ruff 通过，独立审查待收。此处只是一个 Resolver 边界子节点，不是 P3/全局解耦完成。下一步先核对并移除旧测试对 `_ReadBudget` / `_needs_hydration` 的私有依赖，再继续公开 stream/parser port 与其它经明确模块边界扫描出的依赖。历史 stream/canonical 候选尚未并入主线；接入前先证明当前主线可复现。详细历史收据：review/p3-public-ports-20261110/README.md；本轮记录在 findings/progress 中。
+1. **P3 来源层公共接口已推进到流式读取和解析器 owner。** Catalog/Reader public ports、全包静态 sibling-boundary 契约及 stream/parser port 已在当前主线。最新子节点 205 passed、1 skipped；宿主 fast-gate 277/277；Ruff、mypy 和两轮独立只读审查通过，提交 `54f8b470c` 已推送。完整验收后按用户要求暂停。下次恢复时先把历史 stream/canonical 候选声称与当前主线逐项重放，只接纳当前可复现的问题；随后继续其他模块/跨仓 owner 边界。P3 与全局解耦仍 OPEN。
 2. R4 正式半年报 9/12，工作量耗尽，三项原文已解析。分诊已定位统一扫描预扣占约9.05M。核对预扣和下层实际计费的重叠，先泛化 RED 再优化，在原 16M 内验收。
 3. cn-h1 0.9 业务召回 10/10 的源码冻结结果已有独立收据。T4 父链和 SEM-QUAL-01 仍需现行输入/解码反控与真实独审，之后再做新版摘要、缓存恢复、RF 实际采用和公司循环。
 4. 继续核销剩余工作树与未跟踪产物。W04 config 已归档退休，两个重复 ref 和四个旧测试控制文件已清理，七份历史失败 push 日志完成原样压缩。
@@ -63,12 +63,13 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 
 R4主/五压力/报告/snapshot和四审已封存。73检查、6P2，无新增已证实P0/P1；每项具体证据、根因确认程度、TDD命令/接口/失败清理/兼容与恢复在AUDIT同run/remediation/r1-remediation-04/implementation.md。它续接W08–W12，不是新外包卡。
 
-### P3 当前主线解耦子节点：source_catalog sibling 边界（本地绿，待发布）
+### P3 已完成的 source_catalog 公共 owner-port 子节点
 
-- 先写 AST RED/GREEN 合同，扫描 `src/company_wiki/source_catalog` 全部生产 Python 模块，拒绝跨 sibling 私有成员/模块访问和未声明的共享 owner API。探针覆盖静态可解析的导入、别名、反射、`sys.modules`、wildcard、helper/method 参数、闭包/nonlocal、推导式和局部重绑定正反例。
-- 接口实现已有 Resolver/Catalog/Reader owner ports；当前 scanner contract 6/6 通过，受影响固定组合 165/165 通过、零跳过，Ruff 通过。独立只读复核 PASS（仅概念复核，未执行测试），审查器 SHA 在 CURRENT_STATUS.md 记录。
-- 该子节点只证明规定静态形式在 CI 中被捕获，不是 Python 运行时沙箱；任何 `eval`、运行期代码生成或未分析插件路径都不因此被宣称不可能。此子节点也不关闭公开 streaming/parser、其他 Python package/跨仓接口、历史候选重放或整个 P3。
-- 发布前再核对工作区完整 diff 与测试目录清理；保持此批次精确提交/推送。其后继续公开 streaming/parser TDD 与跨模块责任扫描，不先启动真实摘要/RF 验收。
+- Catalog owner 查询、Resolver/Reader public read ports、SourceCatalog 全包 AST sibling-boundary 契约及其 fast-CI 注册均已推送。扫描规则覆盖静态可解析的导入、别名、反射、`sys.modules`、wildcard、helper/method 参数、闭包/nonlocal、推导式和局部重绑定正反例；具体测试与独立审查记录在 11-10/11 收据及 `CURRENT_STATUS.json`。AST 规则不是 Python 运行时沙箱。
+- 2026-11-11 stream/parser 子节点把 pathless `SourceProcessingDescriptor`、同一调用者预算、事务式 `SourceChunkSink`、public `SourceVersionPort.stream_version` 和 parser-owner port 接入生产 processed-document endpoint。处理层不访问目录/SQLite/原始 manifest/物理路径。旧固定 256 MiB 候选帽移除，仍由单一实际请求预算控制字节/候选/时间/取消。
+- 先写失效边界与清理 RED 用例，再修复契约导出缺失、跨包动态 `getattr`、pytest 长临时路径测试夹具、session 清理异常遮盖主错误，以及旧 narrative 测试继续 spy 已删除私有 helper 等根因。最终组合 205 passed、1 个既有 skip；宿主 fast-gate 277/277、59.18 秒；Ruff/mypy 通过。独立只读审查最终 PASS。证据：`review/p3-public-stream-parser-20261111/README.md`。
+- 子节点提交并推送到 `origin/master`：`54f8b470c36a7dd932bfe4ac6ba52ba4edbf01ca`。push hook 固定 18 项通过、3.78 秒。远端完整 CI 本次未核验，不声称已通过。
+- **不外推结论：** 已完成的只是 CWP 来源流与解析边界子节点，不代表所有包/跨仓零耦合、P3 公司审查循环或全项目目标完成。历史候选重放及其他明确模块边界仍开放。
 
 1. **来源层优先**：旧T3与R7工程均已并线；实际H1独审仍发现peer note继承旧局部子标题。按[T4细则](review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md)冻结泛化正反例、同层根修和单例真实复验；保十二重点/原生成员，不加公司词库、额度或普遍bbox要求。
 2. **共享语义合同**：完成ghost-formula kind与formula/input互斥预检，validate/lint薄复用；完成同口径signed temporal complement，保留alias/origin/provenance、重叠/空隙/跨期/口径反控；inverseYoY使用显式比较关系，禁止放宽日期冒通过。
