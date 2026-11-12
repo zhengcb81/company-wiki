@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Any, Protocol
 
 from company_wiki.narrative_subject import NarrativeSubject
+from company_wiki.resource_budget import WorkBudget
 
 from .execution_context import JobExecutionContext
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
@@ -45,6 +46,7 @@ class NarrativeRuntimeDependencies:
     selector_version: str | None = None
     reading_model_projection: Callable[[NarrativeSubject], str | None] | None = None
     validate_model_execution: Callable[[NarrativeSubject], None] | None = None
+    work_budget_factory: Callable[[], WorkBudget] | None = None
 
 
 def register_narrative_handlers(
@@ -59,7 +61,8 @@ def register_narrative_handlers(
         "source.narrative_select",
         NarrativeSelectHandler(reader=dependencies.reader, normalization=dependencies.normalization,
             pdf_reading=pdf_reading,
-            projection_catalog=dependencies.projection_catalog, selector_version=selector_version),
+            projection_catalog=dependencies.projection_catalog, selector_version=selector_version,
+            work_budget_factory=dependencies.work_budget_factory),
     )
     registrar.register(
         "source.narrative_summarize",

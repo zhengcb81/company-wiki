@@ -15,6 +15,7 @@ from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
+from company_wiki.resource_budget import document_work_budget_factory
 from company_wiki.source_catalog.narrative_evidence import (
     NarrativeSelectorVersionError, resolve_narrative_selector_version,
 )
@@ -374,6 +375,12 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             pdf_reading.validate_frozen_recipe(manifest["parser_components"])
     registry = create_default_registry()
     executor = HandlerExecutor()
+    # The worker entry point binds the document-work ceiling once.  Every
+    # document read then owns one account drawn from that ceiling instead of
+    # re-reading a configuration file inside the selection algorithm.
+    work_budget_factory = document_work_budget_factory(
+        policy_path=options.get("budget_policy_path"),
+    )
     register_narrative_handlers(
         executor,
         NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization,
@@ -382,6 +389,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             reading_model_projection=(lambda subject: reading_projections[subject.item_key])
                 if reading_projections else None,
             validate_model_execution=validate_model_execution if snapshot.frozen_generations else None,
+            work_budget_factory=work_budget_factory,
             generation_sha256=_generation_resolver(run_store, options["run_id"], generation_values,
                                                    selector_version=selector_version) if generation_values else None),
     )

@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Protocol
 
-from company_wiki.source_catalog.source_reader import (
+from company_wiki.source_contract import (
     SourceRef,
     VerifiedContent,
 )

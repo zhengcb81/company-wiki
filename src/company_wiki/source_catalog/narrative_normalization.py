@@ -30,7 +30,8 @@ class NarrativeNormalization:
     """Own one immutable config and one lazy adapter in the calling process."""
 
     def __init__(
-        self, config=None, *, adapter_factory=None, deadline=None, parser_versions=None
+        self, config=None, *, adapter_factory=None, deadline=None, parser_versions=None,
+        config_loader=None,
     ):
         if config is not None and not isinstance(config, dn.LocalOCRConfig):
             raise TypeError("normalization config must be LocalOCRConfig")
@@ -52,12 +53,25 @@ class NarrativeNormalization:
             )
         ):
             raise ValueError("NARRATIVE_NORMALIZATION_OPTIONS_INVALID")
-        self.config = config
+        if config_loader is not None and not callable(config_loader):
+            raise TypeError("normalization config loader must be callable")
+        self._config = config
+        self._config_loader = config_loader
+        self._config_resolved = config is not None or config_loader is None
         self.deadline = deadline
         self.parser_versions = dict(parser_versions or {})
         self._adapter_factory = adapter_factory
         self._adapter = None
         self._validated = False
+
+    @property
+    def config(self):
+        """The bound OCR config, read once and only when a caller needs it."""
+        if not self._config_resolved:
+            self._config_resolved = True
+            loader = self._config_loader
+            self._config = None if loader is None else loader()
+        return self._config
 
     @classmethod
     def from_snapshot(cls, snapshot, **kwargs):
@@ -76,13 +90,23 @@ class NarrativeNormalization:
         return cls.from_snapshot(json.loads(raw.decode("utf-8")), **kwargs)
 
     @classmethod
-    def from_reader(cls, reader, *, enabled=True, **kwargs):
-        catalog = getattr(reader, "catalog", None)
-        return (
-            cls.from_project(catalog.config.project_root, enabled=enabled, **kwargs)
-            if catalog is not None
-            else cls(**kwargs)
-        )
+    def deferred_from_project(cls, project_root, **kwargs):
+        """Bind the project OCR config now and read it only if a replay needs it.
+
+        The caller owns the configuration location.  The file is opened at most
+        once, and only when a normalization actually asks for the config, so a
+        deployment without OCR work never touches the file.
+        """
+        path = Path(project_root) / "config/local_ocr.json"
+
+        def load():
+            if not path.exists():
+                return None
+            with path.open("rb") as stream:
+                raw = stream.read()
+            return dn.LocalOCRConfig.from_dict(json.loads(raw.decode("utf-8")))
+
+        return cls(None, config_loader=load, **kwargs)
 
     def snapshot(self):
         return None if self.config is None else self.config.to_dict()

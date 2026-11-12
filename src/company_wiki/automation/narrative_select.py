@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from company_wiki.document_model.narrative import NarrativeEvidencePackage, NarrativeParseResult
+from company_wiki.resource_budget import WorkBudget
 from company_wiki.source_catalog.narrative_evidence import NARRATIVE_SELECTOR_NAME
 from company_wiki.source_catalog.narrative_formats import parser_component
 from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
@@ -21,7 +22,7 @@ from company_wiki.source_catalog.narrative_selection import (
 )
 from company_wiki.source_catalog.narrative_selector_binding import NarrativeSelector, bind_narrative_selector
 from company_wiki.source_catalog.official_json_projection import ProjectionError
-from company_wiki.source_catalog.source_reader import SourceReadError
+from company_wiki.source_contract import SourceReadError
 from company_wiki.source_catalog.transcript_text_extract import TranscriptMaterialError
 
 from .execution_context import JobExecutionContext
@@ -134,6 +135,7 @@ class NarrativeSelectHandler:
         selector_version: str | None = None,
         normalization: NarrativeNormalization | None = None,
         projection_catalog: Any | None = None,
+        work_budget_factory: Callable[[], WorkBudget] | None = None,
     ) -> None:
         self._reader = reader
         if pdf_parser is not None and pdf_reading is not None:
@@ -142,6 +144,7 @@ class NarrativeSelectHandler:
         self._selector = bind_narrative_selector(selector, selector_version=selector_version)
         self._selection = RawNarrativeSelector(
             pdf_reading=self._pdf_reading, selector=self._selector, normalization=normalization,
+            work_budget_factory=work_budget_factory,
         )
         self._projection_catalog = projection_catalog
 

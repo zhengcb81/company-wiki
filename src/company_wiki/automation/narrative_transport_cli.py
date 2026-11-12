@@ -36,9 +36,11 @@ from company_wiki.automation.narrative_transport_contracts import (
 
 from company_wiki.source_catalog.config import CatalogConfigError, load_catalog_config
 from company_wiki.source_catalog.narrative_artifact_store import NarrativeArtifactReader
+from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 from company_wiki.source_catalog.reader import CatalogReaderUnavailable
 from company_wiki.source_catalog.service import SourceCatalog
-from company_wiki.source_catalog.source_reader import SourceReadError, SourceVersionReader
+from company_wiki.source_contract import SourceReadError
+from company_wiki.source_catalog.source_reader import SourceVersionReader
 
 
 __all__ = ["dispatch_transport_request", "main"]
@@ -187,16 +189,24 @@ def main(argv: Sequence[str] | None = None) -> int:
                 expected_projection_sha256=subject.subject_sha256,
             )
 
+        # The composition root owns the OCR configuration location.  The
+        # transport only consumes the normalization port it is given, so a
+        # protocol-only source implementation needs no catalog or project
+        # layout of its own.
+        normalization = NarrativeNormalization.deferred_from_project(config.project_root)
         if isinstance(request, dict) and request.get("schema_version") in {
             "narrative-reference-request/2", "narrative-read-request/2",
             "narrative-reference-request/3", "narrative-read-request/3",
         }:
             reader = NarrativeTransportReader(
-                artifacts, SourceVersionReader(catalog), projection_loader=projection_loader,
+                artifacts, SourceVersionReader(catalog), normalization=normalization,
+                projection_loader=projection_loader,
                 projection_ref_resolver=projection_loader,
             )
         else:
-            reader = NarrativeTransportReader(artifacts, SourceVersionReader(catalog))
+            reader = NarrativeTransportReader(
+                artifacts, SourceVersionReader(catalog), normalization=normalization,
+            )
         # Some PDF backends print optional-package notices. The two protocol
         # streams belong exclusively to artifact bytes and the JSON receipt.
         with _quiet_transport_operation():

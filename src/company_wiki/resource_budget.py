@@ -8,6 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import os
 from pathlib import Path
+from typing import Callable
 
 import yaml
 
@@ -24,6 +25,7 @@ __all__ = [
     "WorkBudgetExceeded",
     "budget_algorithm_sha256",
     "budget_policy_path",
+    "document_work_budget_factory",
     "load_budget_policy",
     "new_document_work_budget",
 ]
@@ -92,6 +94,25 @@ def new_document_work_budget(*, max_work_units: int | None = None,
     limit = (load_budget_policy(policy_path).document_work_limit
              if max_work_units is None else max_work_units)
     return WorkBudget(limit, phase=phase)
+
+
+def document_work_budget_factory(*, max_work_units: int | None = None,
+                                  policy_path: str | Path | None = None,
+                                  phase: str = "document") -> "Callable[[], WorkBudget]":
+    """Resolve one document-work ceiling and hand out one account per call.
+
+    The configuration is read once, where the caller binds it.  Each call
+    returns a fresh account with that same ceiling, so one document read owns
+    one account and never silently re-reads a configuration file.
+    """
+    limit = (load_budget_policy(policy_path).document_work_limit
+             if max_work_units is None else max_work_units)
+    _nonnegative_int(limit, "max_work_units")
+
+    def factory() -> "WorkBudget":
+        return WorkBudget(limit, phase=phase)
+
+    return factory
 
 
 class WorkBudgetExceeded(RuntimeError):

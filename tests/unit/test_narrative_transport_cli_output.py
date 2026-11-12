@@ -27,7 +27,9 @@ def test_parser_console_output_does_not_corrupt_bundle_or_json_receipt(
     monkeypatch.setattr(sys, "stdout", output_stream)
     monkeypatch.setattr(sys, "stderr", receipt_stream)
     closed: list[str] = []
-    config = object()
+    # The composition root now binds the OCR configuration location from the
+    # catalog config; the stub mirrors that required field without file I/O.
+    config = SimpleNamespace(project_root=Path(__file__).resolve().parents[2])
     artifacts = SimpleNamespace(close=lambda: closed.append("artifacts"))
     catalog = SimpleNamespace(open_narrative_artifact_reader=lambda: artifacts,
                               close=lambda: closed.append("catalog"))
@@ -36,7 +38,7 @@ def test_parser_console_output_does_not_corrupt_bundle_or_json_receipt(
     monkeypatch.setattr(cli, "SourceVersionReader", lambda _: object())
 
     class NoisyReader:
-        def __init__(self, *_):
+        def __init__(self, *_args, **_kwargs):
             pass
 
         def read(self, _):
@@ -66,7 +68,7 @@ sys.path.insert(0, sys.argv[1])
 from company_wiki.automation import narrative_transport_cli as cli
 from company_wiki.automation.narrative_transport_contracts import NarrativeTransportError
 
-cli.load_catalog_config = lambda path: None
+cli.load_catalog_config = lambda path: SimpleNamespace(project_root='')
 cli.SourceVersionReader = lambda catalog: None
 cli.SourceCatalog = lambda config: SimpleNamespace(
     open_narrative_artifact_reader=lambda: SimpleNamespace(close=lambda: None), close=lambda: None,

@@ -24,7 +24,7 @@ from company_wiki.source_catalog.narrative_artifact_store import (
 from company_wiki.source_catalog.narrative_bundle_reader import (
     NarrativeProjectionError, decode_stored_narrative_bundle,
 )
-from company_wiki.source_catalog.source_reader import (
+from company_wiki.source_contract import (
     SourceReadError,
     SourceRef,
     VerifiedContent,
@@ -32,7 +32,6 @@ from company_wiki.source_catalog.source_reader import (
 from company_wiki.source_catalog.reader import CatalogReaderUnavailable
 from company_wiki.source_catalog.narrative_normalization import (
     NarrativeNormalization,
-    PPTX_MIME,
 )
 from company_wiki.source_catalog.qualification import qualify_source
 
@@ -362,10 +361,13 @@ class NarrativeTransportReader:
         # it neither reopens raw bytes nor creates a new availability observation.
         availability = self._reader.availability_evidence(current)
         _require_manifest(manifest, request, bundle, availability_evidence=availability)
-        normalization = self._normalization or NarrativeNormalization.from_reader(
-            self._reader,
-            enabled=source.mime_type == PPTX_MIME and bundle.versions.parser == "2.0.0",
-        )
+        # The transport consumes the normalization port it was given.  It never
+        # inspects its source port for configuration: a source implementation
+        # that satisfies the protocol has no catalog or project layout, and a
+        # replay that needs OCR without a bound normalization fails by name.
+        normalization = self._normalization
+        if normalization is None:
+            normalization = NarrativeNormalization()
         locator_count = replay_verified_narrative_evidence(
             opened, bundle, normalization=normalization
         )

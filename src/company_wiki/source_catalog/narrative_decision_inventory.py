@@ -92,7 +92,8 @@ def _pdf_versions() -> dict[str, str]:
 
 
 def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
-              material_matcher: str | None = None) -> dict[str, str]:
+              material_matcher: str | None = None,
+              document_work_limit: int | None = None) -> dict[str, str]:
     # Resolve the producer's current constants after package initialization.
     from .narrative_business_policy import READING_BUSINESS_POLICY_VERSION
     from .narrative_budget import READING_BUDGET_POLICY
@@ -116,7 +117,12 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "context_policy": _digest(registry.context_policy_config()),
         "selector": "0.9.0",
         "budget": READING_BUDGET_POLICY,
-        "document_work_limit": str(load_budget_policy().document_work_limit),
+        # The ceiling in force is an explicit input when the caller already
+        # resolved it.  Only an unbound decision reads the policy file.
+        "document_work_limit": str(
+            load_budget_policy().document_work_limit
+            if document_work_limit is None else document_work_limit
+        ),
         "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
         "source_usability": usability,
         "business_policy": READING_BUSINESS_POLICY_VERSION,
@@ -223,16 +229,17 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
             "scope_ids": [scope["scope_id"] for scope in scopes]})
     pdf_used = carrier == "application/pdf" and bool(actual_frontend)
     try:
-        versions = _versions(pdf_frontend=pdf_used, mime_type=carrier, material_matcher=material_matcher)
+        versions = _versions(pdf_frontend=pdf_used, mime_type=carrier,
+                             material_matcher=material_matcher,
+                             document_work_limit=document_work_limit)
     except (ImportError, AttributeError, OSError, RuntimeError):
         if not pdf_used:
             raise
         # The already recorded frontend observation is still valid. Missing
         # PDF software cannot establish a complete current cache identity.
-        versions = _versions(mime_type=carrier, material_matcher=material_matcher)
+        versions = _versions(mime_type=carrier, material_matcher=material_matcher,
+                             document_work_limit=document_work_limit)
         complete = False
-    if document_work_limit is not None:
-        versions["document_work_limit"] = str(document_work_limit)
     if carrier == "application/pdf":
         if not pdf_used or not versions.get("pdf_projection") or versions.get("pdf_frontend") != actual_frontend:
             complete = False

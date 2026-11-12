@@ -22,7 +22,8 @@ from company_wiki.source_catalog.narrative_artifact_store import (
 )
 from company_wiki.source_catalog.narrative_language import detect_narrative_language, narrative_language_family
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
-from company_wiki.source_catalog.source_reader import SourceVersionReader, SourceRef
+from company_wiki.source_contract import SourceRef
+from company_wiki.source_catalog.source_reader import SourceVersionReader
 from company_wiki.source_catalog.source_read_policy import (
     EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION, READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
 )
@@ -1040,7 +1041,7 @@ def _resume_item_binding(
         raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID") from exc
 
 
-def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog):
+def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog, normalization=None):
     from .narrative_transport import NarrativeTransportReader
     from .narrative_transport_contracts import NarrativeReadRequest
     from .narrative_contracts import NarrativeBundle
@@ -1053,7 +1054,8 @@ def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog):
     ) != generation_sha256(manifest):
         raise ValueError("BATCH_REUSE_PIN_SUBJECT_MISMATCH")
     result = NarrativeTransportReader(
-        artifacts, reader, projection_loader=_projection_loader(catalog)
+        artifacts, reader, normalization=normalization,
+        projection_loader=_projection_loader(catalog)
     ).read(
         NarrativeReadRequest.from_dict(
             {
@@ -1151,7 +1153,8 @@ def _find_item_reuse_pin(
             "generation_sha256": generation_sha256(effective),
         }
         if discovered_cache_read(lambda: _read_projected_pin(
-            artifacts, reader, payload, pin, effective, catalog=catalog
+            artifacts, reader, payload, pin, effective, catalog=catalog,
+            normalization=normalization,
         )):
             return pin
     return None

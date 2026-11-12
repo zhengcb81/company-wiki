@@ -11,7 +11,7 @@ from pathlib import Path
 import sys
 from typing import Sequence
 
-from company_wiki.source_catalog.source_reader import SourceReadError
+from company_wiki.source_contract import SourceReadError
 from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
 
 from .models import canonical_json

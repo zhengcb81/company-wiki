@@ -9,7 +9,11 @@ from company_wiki.document_model.narrative import NarrativeEvidencePackage, Narr
 from company_wiki.document_normalization.replay import verify_parsed_evidence_spans
 from company_wiki.document_normalization.units import PARSER_NAME as NORMALIZATION_PARSER_NAME
 from company_wiki.implementation_identity import code_sha256
-from company_wiki.resource_budget import WorkBudgetExceeded
+from company_wiki.resource_budget import (
+    WorkBudget,
+    WorkBudgetExceeded,
+    document_work_budget_factory,
+)
 from company_wiki.source_contract import EvidenceSpan, ParseStatus
 from company_wiki.source_contract.source_version import SourceRefMismatchError, VerifiedContent
 
@@ -46,10 +50,15 @@ class RawNarrativeSelector:
         self, *, pdf_reading: PdfReading | None = None,
         normalization: NarrativeNormalization | None = None,
         selector: BoundNarrativeSelector | None = None,
+        work_budget_factory: Callable[[], WorkBudget] | None = None,
     ) -> None:
         self._pdf_reading = pdf_reading or PdfReading()
         self._normalization = normalization or NarrativeNormalization()
         self._selector = selector or bind_narrative_selector()
+        if work_budget_factory is not None and not callable(work_budget_factory):
+            raise TypeError("work budget factory must be callable")
+        self._work_budget_factory = work_budget_factory
+        self._default_budget_factory: Callable[[], WorkBudget] | None = None
 
     def select(
         self, data: bytes | VerifiedContent, *, source_ref: SourceRefValue, source_metadata: SourceMetadataValue,
@@ -98,18 +107,29 @@ class RawNarrativeSelector:
         package = self._require_usable_selection(parsed, package)
         return RawNarrativeSelection(parsed, package, None, (document.parser_name, document.parser_version))
 
+    def _work_budget(self) -> WorkBudget:
+        """The one account this document read spends.
+
+        An injected factory is the caller's explicit ceiling.  Without one the
+        selector resolves the policy once for its own lifetime instead of on
+        every document, so one read never re-reads a configuration file.
+        """
+        if self._work_budget_factory is not None:
+            return self._work_budget_factory()
+        if self._default_budget_factory is None:
+            self._default_budget_factory = document_work_budget_factory()
+        return self._default_budget_factory()
+
     def _select_pdf(
         self, data: bytes, source_ref: SourceRefValue, source_metadata: SourceMetadataValue,
         checkpoint: Callable[[], None],
     ) -> RawNarrativeSelection:
-        from company_wiki.resource_budget import new_document_work_budget
-
         if source_ref.mime_type != "application/pdf":
             raise NarrativeMaterialError(
                 "UNSUPPORTED_SOURCE_TYPE",
                 "filing source is not a PDF",
             )
-        work_budget = new_document_work_budget()
+        work_budget = self._work_budget()
         try:
             parsed, package = self._pdf_reading.select(
                 data, self._pdf_request(source_ref, source_metadata), selector=self._selector,
