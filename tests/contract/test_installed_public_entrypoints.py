@@ -32,6 +32,14 @@ CHILD_ENV.pop("PYTHONPATH", None)
 MODULE_CLIS = (
     "company_wiki.source_catalog.processed_document_cli",
     "company_wiki.source_catalog.financial_statements.cli",
+    # The A0-ported public diagnostics ship in the same wheel and must start
+    # from the installed layout like every other module entry point.
+    "company_wiki.source_catalog.source_stream_cli",
+    "company_wiki.source_catalog.public_document_browser_cli",
+    "company_wiki.source_catalog.public_canonical_browser_cli",
+    "company_wiki.source_catalog.public_source_readiness_cli",
+    "company_wiki.source_catalog.public_legacy_source_link_cli",
+    "company_wiki.source_catalog.public_legacy_source_recovery_cli",
 )
 
 #: Console entry points that must start with base dependencies only.
