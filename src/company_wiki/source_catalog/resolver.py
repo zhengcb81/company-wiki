@@ -89,6 +89,21 @@ _SOURCE_QUERY_REQUEST_SCHEMA_VERSIONS = {
 _ISSUER_LINK_ID_RE = re.compile(r"issuer-link-v1:[0-9a-f]{64}")
 _YEAR_RE = re.compile(r"(?<!\d)(19\d{2}|20\d{2}|21\d{2})(?!\d)")
 
+#: Location roles that carry original bytes of a NON-primary version of one
+#: document.  Mirror of the public browser's version roles
+#: (``public_document_browser._BROWSE_VERSION_ROLES``): the browser lists
+#: these as frozen byte versions of the document, so the exact reader must be
+#: able to verify exactly those bytes too.  Kept local: the resolver sits
+#: below the browser module and must not import upward.
+_NONPRIMARY_VERSION_ROLES = frozenset(
+    {"original_primary", "original_attachment", "indexed_only"}
+)
+
+#: The annotator's rejection-path SEGMENT convention
+#: (``location_annotation._REJECTIONS_SEGMENT``).  Local mirror of the same
+#: convention so the admission gate below does not import a private name.
+_REJECTIONS_PATH_SEGMENT = ".rejections"
+
 
 class SourceResolutionError(ValueError):
     """Raised when a source request violates the resolver contract."""
@@ -1352,14 +1367,21 @@ class SourceResolver:
         from .reader import CatalogReaderUnavailable
 
         try:
-            version = self.catalog.reader.exact_source_version(ref.document_id)
+            version = self.catalog.reader.exact_source_pair(
+                ref.document_id, ref.source_id
+            )
             locations = self.catalog.source_location_candidates(
                 ref.document_id, ref.source_id
             )
+            if (
+                version is None
+                and self.catalog.reader.document(ref.document_id) is None
+            ):
+                raise SourceReadError("not_indexed", "document_not_indexed")
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         if version is None:
-            raise SourceReadError("not_indexed", "document_not_indexed")
+            raise SourceReadError("not_found", "document_source_mismatch")
         if (
             str(version["source_id"]) != ref.source_id
             or str(version["content_sha256"]) != ref.content_sha256
@@ -1397,6 +1419,22 @@ class SourceResolver:
         roots = {root.root_id: root for root in self.catalog.config.roots}
         root = roots.get(location.root_id)
         allowed = bool(root is not None and location.candidate_rank > 0)
+        if (
+            not allowed
+            and root is not None
+            and not reusable_only
+            and str(version.get("primary_source_id") or "") != ref.source_id
+            and location.role in _NONPRIMARY_VERSION_ROLES
+            and location.location_status == "active"
+            and _REJECTIONS_PATH_SEGMENT
+            not in str(location.relative_path).replace("\\", "/").split("/")
+        ):
+            # A NON-primary byte version of the document is a different frozen
+            # version, not a duplicate copy of the primary: its original
+            # locations (the browse version roles) are admitted directly under
+            # the same root gates below.  The reuse-qualification track
+            # (candidate_rank, reusable_only) stays primary-only.
+            allowed = True
         if root is not None:
             kinds = root.allowed_document_kinds
             statuses = root.allowed_statuses

@@ -79,6 +79,12 @@ class CatalogReader(Protocol):
         """Typed: document identity joined to its primary source version."""
         ...
 
+    def exact_source_pair(
+        self, document_id: str, source_id: str
+    ) -> sqlite3.Row | None:
+        """Typed: document identity joined to the requested source version."""
+        ...
+
     def exact_source_locations(
         self, document_id: str, source_id: str
     ) -> list[sqlite3.Row]:
@@ -247,6 +253,40 @@ class ReadOnlyCatalogReader:
                LEFT JOIN sources s ON s.source_id=d.primary_source_id
                WHERE d.document_id=?""",
             (document_id,),
+        )
+
+    def exact_source_pair(
+        self, document_id: str, source_id: str
+    ) -> sqlite3.Row | None:
+        """Catalog identity for one requested (document, source) version pair.
+
+        Primary or not, the pair is the version identity: a NON-primary
+        (history/attachment) source registered under the same document
+        resolves to ITS OWN version row, and a pair that was never
+        registered under this document yields no row at all (fail closed),
+        so the current primary can never be substituted for a different
+        request.  Also projects the document's ``primary_source_id`` so a
+        read policy can tell primary from history without a second query.
+        """
+        return self.fetchone(
+            """SELECT doc.document_id, v.source_id, doc.source_status,
+                      doc.title, doc.document_kind, doc.published_date,
+                      doc.metadata_json, doc.primary_source_id,
+                      s.content_sha256, s.byte_size, s.mime_type
+               FROM (
+                   SELECT doc2.document_id AS document_id,
+                          doc2.primary_source_id AS source_id
+                   FROM documents doc2
+                   WHERE doc2.document_id = ? AND doc2.primary_source_id = ?
+                   UNION ALL
+                   SELECT loc.document_id, loc.source_id
+                   FROM locations loc
+                   WHERE loc.document_id = ? AND loc.source_id = ?
+               ) v
+               JOIN documents doc ON doc.document_id = v.document_id
+               LEFT JOIN sources s ON s.source_id = v.source_id
+               LIMIT 1""",
+            (document_id, source_id, document_id, source_id),
         )
 
     def exact_source_locations(

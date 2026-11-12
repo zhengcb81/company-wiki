@@ -196,8 +196,18 @@ class SourceVersionReader:
             raise SourceReadError("unavailable", "catalog_unavailable") from None
 
     def query_ref(self, document_id: str, source_id: str, expected_sha256: str) -> SourceRef:
-        from .source_references import query_source_reference
-        return query_source_reference(lambda: self.catalog.reader, document_id, source_id, expected_sha256)
+        """Resolve one exact (document, source, sha) triple from the catalog.
+
+        The lookup is pair-precise: a NON-primary (history/attachment) source
+        registered under the same document resolves to ITS OWN version row,
+        never to the document's current primary, and a pair that was never
+        registered under this document fails closed.  Availability and
+        current action policy remain open gates.
+        """
+        from .source_references import query_exact_pair_reference
+        return query_exact_pair_reference(
+            lambda: self.catalog.reader, document_id, source_id, expected_sha256
+        )
 
     def query_local(self, request: SourceRequest) -> SourceQueryResult:
         """Find indexed versions by business identity without opening source bytes.

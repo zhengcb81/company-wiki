@@ -1,6 +1,6 @@
 # MB-CWP 模块归属清单（本轮交付时点）
 
-基线 `08dfe8bf1`；本轮 tip 见 handoff。`src/company_wiki` 共 480 个 Python 文件（新增 `source_catalog/source_stream_cli.py`）。本清单回答卡上"活动入口、逻辑模块、公开面、状态owner、依赖方向、兼容/退休分类"的交付要求；与 `review/cwp_architecture.md` §1/§5 不一致处以本清单为准（标注差异）。
+基线 `08dfe8bf1`；本轮 tip 见 handoff。`src/company_wiki` 共 489 个 Python 文件（本轮新增 10：stream/canonical/readiness/link/recovery CLI 与模块、cn_primary_issuer；`source_catalog` 251）。本清单回答卡上"活动入口、逻辑模块、公开面、状态owner、依赖方向、兼容/退休分类"的交付要求；与 `review/cwp_architecture.md` §1/§5 不一致处以本清单为准（标注差异）。
 
 ## 1. 活动交付入口（全部有归属）
 
@@ -27,6 +27,11 @@
 | `python -m company_wiki.source_catalog.processed_document_cli` | source_catalog processed-document port |
 | `python -m company_wiki.source_catalog.financial_statements.cli` | source_catalog financial_statements |
 | `python -m company_wiki.source_catalog.source_stream_cli` | source_catalog 大原件流式读取（本轮恢复；2.2 双回执协议） |
+| `python -m company_wiki.source_catalog.public_document_browser_cli` | source_catalog pathless 文档浏览（主线已有） |
+| `python -m company_wiki.source_catalog.public_canonical_browser_cli` | source_catalog canonical issuer→document 浏览（本轮 T-CANON 移植；Dashboard `cwp.py:213` 消费） |
+| `python -m company_wiki.source_catalog.public_source_readiness_cli` | source_catalog SourceRef readiness 诊断（本轮 T-B33 移植） |
+| `python -m company_wiki.source_catalog.public_legacy_source_link_cli` | source_catalog legacy path key→exact source（本轮 T-B33 移植） |
+| `python -m company_wiki.source_catalog.public_legacy_source_recovery_cli` | source_catalog legacy 原件 preview/apply 恢复（本轮 T-B33 移植；只读 preview 默认） |
 
 ### 1.3 进程入口（子进程组合，owner 启动）
 

@@ -48,3 +48,33 @@
 - `model_config.py:34` 与 `resource_budget.py:55` 都读仓库根 `config/`，不入 wheel。
 - `scripts/narrative_batch_configured.py:9` `from config import Config` 依赖未安装的 `scripts/` 目录。
 - 公开 module CLI：`python -m company_wiki.source_catalog.processed_document_cli`（`processed_document_cli.py:102-103`）、`python -m company_wiki.source_catalog.financial_statements.cli`（`financial_statements/cli.py:236-237`）。
+
+## A0 逐项处置（2026-11-12 实测）
+
+| 子项 | 处置 | 证据 |
+|---|---|---|
+| T-READ | 移植 `source_stream_cli.py`（132 行薄传输，2.2 双回执协议），全部准入/预算/取消走当前 `stream_version` owner；非 primary 准入按 owner 语义处理（见下） | `tests/contract/test_source_stream_cli.py` 6 项；`test_source_reader_exact_history.py` 9 项（自 `89fd952a5` 恢复） |
+| T-CANON | 移植 `public_canonical_browser.py`(1332)+CLI(166)+两测试(1615+57)；`public_document_browser` 增 3 个 typed-port 有界枚举方法（无裸 SQL） | 101 项通过（60+9+20+12） |
+| T-B33 | 移植 readiness/link/recovery 六模块+三测试；`resolver._ReadBudget`→`read_budget.ReadBudget` 适配 | 118 项通过（readiness 60+、link 15、recovery ~15、exact_history 9） |
+| T-B34 | `record_unresolved`（去重无固定帽）+ `_cn_ipo_prospectus_cover`（全前页扫描） | 33 项通过 |
+| T-N4 | 核销：主线等价测试绿（9+78）；`test_quarterly_and_ir_narrative_categories...` 行为主线已满足（agent 实证）；signal-free skip 是主线有意的计数规则（`narrative_finalize.py:237-244` 注释），不恢复 | 重放 9+78 通过 |
+| T-CONFIG | 8 个严格类型反例 RED→GREEN（`max_tokens`/`temperature` bool+str、`reasoning_split` 字符串、`max_document_chars` 全部）；`bool("false")` 强转改为具名拒绝；旧 M3 等 profile 反例被主线 `test_unselected_fallback_is_not_constructed` 有意取代，不加第二 `load_llm` | `tests/unit/test_narrative_config_scope.py` 72 项 |
+
+## 非 primary 版本读取（owner 级变更，T-B33/T-READ 交汇）
+
+历史 `89fd952a5` 的能力在当前主线缺失，实证三道门：
+1. `query_ref` → `query_source_reference` 只查 primary（`document_source_mismatch` 拒绝）；
+2. `_current_source_location` 用 primary 行比对 ref（`source_ref_changed`）；
+3. resolver `candidate_rank > 0` 门（历史版本位置 role=`original_attachment` 排位 0，`role_not_original_primary`）。
+
+主线产品面已暴露非 primary 版本（browser `browse`/`reopen` 返回完整 SourceRef、canonical browser 列历史版本为 item），owner 拒读是矛盾。移植（4 处，owner 内）：
+- `reader.exact_source_pair(document_id, source_id)`：pair 精确 UNION 查询，含 `primary_source_id`；未注册 pair 不返回行（fail closed，primary 永不替代）；
+- `source_references.query_exact_pair_reference`：错误映射与历史一致（文档不存在→`document_not_indexed`；pair 未注册→`document_source_mismatch`；status/sha/空值门保留）；registration 路径 `query_source_reference` **不变**（primary 语义）；
+- `SourceVersionReader.query_ref` → pair 路径；
+- resolver：`_current_source_location` 改用 pair 行（身份比对变为 ref-vs-自身 pair）；`read_verified_source_location` 对**非 primary 且非 reuse** 的位置按 browser 版本角色（original_primary/attachment/indexed_only + active + 无 `.rejections` 段）准入，root 各门照旧；`reusable_only`（filing_reuse）与 primary 排位语义不变。
+
+## 其他发现
+
+- 主线 `tests/integration/test_source_processing_handler_wire.py::test_current_wire_feature_is_bound_to_the_actual_recipe` 在 baseline `879953c7f` 即失败（`_versions` 未定义名，ruff F821/F401），属既有损坏，不在 MB-CWP 写集合（`tests/integration/`），列给 ROOT。
+- `lxml` 曾只在 requirements.txt、未进 pyproject catalog/all extra（CWP-04 缺口），已补声明。
+- 提交钩子 Mimosa L3 以基线既有文件（`test_automation_migrations.py`/`test_llm_client.py`/`identity_candidates.py`）拦截；按 AGENTS 跑正式封印扫描（`scan-2026-11-12T21-35-54` 与 `scan-2026-11-12T22-18-39`，各 137 项发现、本卡 diff 零新增）后带证据放行，未改写命令或绕过。
