@@ -470,6 +470,86 @@ class PublicDocumentBrowser:
         versions.sort(key=_VersionRow.sort_key)
         return versions
 
+    def _document(self, document_id: str) -> dict[str, Any] | None:
+        """One indexed document's pathless facts, or None when not indexed.
+
+        Shared with the canonical browse consumer: read-only reuse of this
+        browser's exact document/version enumeration, never a second query
+        path of its own.
+        """
+        records = self.catalog.browse_document_records(document_id)
+        if not records:
+            return None
+        primary = next((record for record in records if record.primary), None)
+        head = records[0]
+        return {
+            "document_id": head.document_id,
+            "primary_source_id": primary.source_id if primary else None,
+            "title": head.title,
+            "document_kind": head.document_kind,
+            "published_date": head.published_date,
+            "source_status": head.source_status,
+            "market": head.market,
+            "language": head.language,
+            "canonical_entity_id": head.canonical_entity_id,
+            "display_name": head.display_name,
+            "fiscal_year": head.fiscal_year,
+        }
+
+    def _entity_documents_with_limit(
+        self, entity: str, *, limit: int | None
+    ) -> tuple[list[dict[str, Any]], bool, int]:
+        """Bound entity enumeration for diagnostic-only callers.
+
+        The default public browse remains complete. Bounded callers receive a
+        deterministic prefix (ordered by document id), a truncation flag, and
+        the number of documents read: at most ``limit + 1``, the same bounded
+        read count the historical ``LIMIT ?`` query reported, so downstream
+        scan budgets account identically through the typed port.
+        """
+        if limit is not None and (isinstance(limit, bool)
+                                  or not isinstance(limit, int) or limit < 1):
+            raise ValueError("entity document limit must be positive")
+        document_ids = sorted({
+            record.document_id
+            for record in self.catalog.browse_entity_records(entity)
+        })
+        scanned = len(document_ids)
+        truncated = limit is not None and scanned > limit
+        if limit is not None:
+            scanned = min(scanned, limit + 1)
+            document_ids = document_ids[:limit]
+        documents = [
+            document for document_id in document_ids
+            if (document := self._document(document_id)) is not None
+        ]
+        return documents, truncated, scanned
+
+    def _document_versions_with_limit(
+        self, document: dict[str, Any], *, limit: int | None
+    ) -> tuple[list["_VersionRow"], bool, int]:
+        """Enumerate a deterministic bounded prefix of exact source versions.
+
+        ``rows_read`` keeps the bounded ``limit + 1`` accounting of the
+        historical query so caller scan budgets stay unchanged.
+        """
+        if limit is not None and (isinstance(limit, bool)
+                                  or not isinstance(limit, int) or limit < 1):
+            raise ValueError("document version limit must be positive")
+        versions = [
+            self._version_row(record)
+            for record in self.catalog.browse_document_records(
+                str(document["document_id"])
+            )
+        ]
+        versions.sort(key=_VersionRow.sort_key)
+        scanned = len(versions)
+        truncated = limit is not None and scanned > limit
+        if limit is not None:
+            scanned = min(scanned, limit + 1)
+            versions = versions[:limit]
+        return versions, truncated, scanned
+
     @staticmethod
     def _version_row(record: CatalogBrowseVersion) -> _VersionRow:
         return _VersionRow(
