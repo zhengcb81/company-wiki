@@ -22,6 +22,28 @@ from company_wiki.source_contract.evidence_span import (
     ParseStatus,
 )
 
+#: Native reading context is borrowed, not owned: a reader hands large
+#: transient backend views to the unit for the duration of one read.  The
+#: model never copies or serializes them; everything else is owned wire
+#: evidence whose values are snapshotted at construction.
+_BORROWED_METADATA_KEYS = frozenset({"reading_layout", "native_source_view"})
+
+
+def _owned_wire_value(value: Any) -> Any:
+    """Copy one owned wire value so caller aliases cannot rewrite history."""
+    if isinstance(value, dict):
+        return {key: _owned_wire_value(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_owned_wire_value(item) for item in value]
+    return value
+
+
+def _owned_wire_snapshot(metadata: Mapping[str, Any]) -> dict[str, Any]:
+    owned: dict[str, Any] = {}
+    for key, value in dict(metadata).items():
+        owned[key] = value if key in _BORROWED_METADATA_KEYS else _owned_wire_value(value)
+    return owned
+
 
 @dataclass(frozen=True)
 class NarrativeUnit:
@@ -48,7 +70,9 @@ class NarrativeUnit:
             raise ValueError("unit_id must be a canonical narrative-unit SHA-256")
         if not isinstance(self.coordinates, EvidenceCoordinates):
             raise TypeError("coordinates must be EvidenceCoordinates")
-        object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
+        object.__setattr__(
+            self, "metadata", MappingProxyType(_owned_wire_snapshot(self.metadata))
+        )
 
     @property
     def text_sha256(self) -> str:

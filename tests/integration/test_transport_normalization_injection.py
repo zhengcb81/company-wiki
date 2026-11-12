@@ -16,7 +16,6 @@ import pytest
 from company_wiki.automation.narrative_transport import NarrativeTransportReader
 from company_wiki.automation.narrative_transport_contracts import (
     NarrativeReadRequest,
-    NarrativeTransportError,
 )
 from company_wiki.document_normalization.units import PPTX_PARSER_VERSION
 from company_wiki.source_catalog.narrative_normalization import (

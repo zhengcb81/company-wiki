@@ -249,3 +249,47 @@ def test_budget_policy_file_is_not_inside_the_installed_package():
     package_root = Path(resource_budget.__file__).resolve().parents[1]
     assert not (package_root / "config" / "resource_budget.yaml").is_file()
     assert resource_budget.budget_policy_path().parent.name == "config"
+
+
+# --------------------------------------------------------------------------
+# CWP-04: base entry points must start without any optional SDK
+# --------------------------------------------------------------------------
+
+_BASE_CONSOLE_MODULES = (
+    "company_wiki.source_contract.cli",
+    "company_wiki.source_catalog.announcement_cli",
+    "company_wiki.source_catalog.source_reader_cli",
+    "company_wiki.source_catalog.source_query_cli",
+    "company_wiki.source_catalog.company_source_index_cli",
+    "company_wiki.source_catalog.source_export_v2_cli",
+    "company_wiki.source_catalog.transcript_import_cli",
+)
+
+
+@pytest.mark.parametrize("module", _BASE_CONSOLE_MODULES)
+def test_base_console_modules_import_without_optional_sdks(module):
+    """CWP-04: the seven base entry points never load an optional SDK."""
+    completed = run_probe(
+        _REFUSING_IMPORTER
+        + f'''
+import importlib
+
+importlib.import_module({module!r})
+print("ok")
+''',
+        "pymupdf",
+        "fitz",
+        "docx",
+        "pptx",
+        "openpyxl",
+        "xlrd",
+        "opencc",
+        "bs4",
+        "markdownify",
+        "langid",
+        "docling",
+        "cryptography",
+        "playwright",
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "ok" in completed.stdout

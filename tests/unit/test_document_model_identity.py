@@ -175,3 +175,76 @@ def test_legacy_grammar_still_parses_saved_label_forms():
     assert legacy_turns.QA_HEADING.fullmatch("Q&A Session")
     assert legacy_turns.NATURAL_START.fullmatch("Acme Fourth Quarter Earnings Conference Call")
     assert legacy_turns.END.fullmatch("End of transcript")
+
+
+def test_owned_wire_metadata_keeps_its_construction_identity_under_alias_mutation():
+    """Owned wire values are snapshotted; borrowed native context stays shared."""
+    topics = ["revenue", "overseas"]
+    nested = {"page_role": "cover", "order": 1}
+    native_view = {"pages": [1, 2, 3], "origin": "native-reader"}
+    unit = neutral_model.NarrativeUnit(
+        unit_id=UNIT_ID,
+        source_id="urn:company-wiki:source:sha256:" + "a" * 64,
+        parser_name="cwp_document_normalization",
+        parser_version="1.0.0",
+        coordinates=_coordinates(),
+        raw_text="营业收入为 12.3 亿元，同比增长 8%。",
+        unit_kind="html_paragraph",
+        source_role="company_filing",
+        language="zh",
+        quality_flags=("unit_inferred",),
+        metadata={
+            "topics": topics,
+            "native_index": 4,
+            "nested": nested,
+            "native_source_view": native_view,
+        },
+    )
+
+    # The caller mutates every aliased input after construction.
+    topics.append("mutated")
+    nested["page_role"] = "mutated"
+    nested["order"] = 99
+    native_view["pages"].append(99)
+
+    # Owned wire values keep the values the unit was constructed with.
+    assert unit.metadata["topics"] == ["revenue", "overseas"]
+    assert unit.metadata["native_index"] == 4
+    assert unit.metadata["nested"] == {"page_role": "cover", "order": 1}
+    # The native context is borrowed for reading and is not owned by the model.
+    assert unit.metadata["native_source_view"]["pages"][-1] == 99
+
+    span = unit.to_evidence_span(topics=("revenue",), selection_reasons=("numeric",))
+    structured = dict(span.structured_value)
+    assert list(structured["topics"]) == ["revenue"]
+    assert structured["nested"] == {"page_role": "cover", "order": 1}
+    assert structured["native_index"] == 4
+    # Borrowed native context never enters serialized evidence identity.
+    assert "native_source_view" not in unit.evidence_metadata()
+    assert "native_source_view" not in structured
+
+
+def test_borrowed_native_context_stays_one_object_with_the_reader():
+    """The model must not deep-copy large native context (reading identity)."""
+    native_view = {"pages": [1, 2, 3]}
+    unit = neutral_model.NarrativeUnit(
+        unit_id=UNIT_ID,
+        source_id="urn:company-wiki:source:sha256:" + "a" * 64,
+        parser_name="cwp_document_normalization",
+        parser_version="1.0.0",
+        coordinates=_coordinates(),
+        raw_text="营业收入为 12.3 亿元，同比增长 8%。",
+        unit_kind="html_paragraph",
+        source_role="company_filing",
+        language="zh",
+        metadata={"native_source_view": native_view},
+    )
+    assert unit.metadata["native_source_view"] is native_view
+    with pytest.raises(TypeError):
+        unit.metadata["native_source_view"] = {"pages": []}  # type: ignore[index]
+
+
+def test_plain_string_metadata_values_are_untouched_by_the_owned_snapshot():
+    unit = _unit(neutral_model.NarrativeUnit)
+    assert unit.metadata == {"native_index": 4}
+    assert type(unit.metadata["native_index"]) is int
