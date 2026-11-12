@@ -10,6 +10,7 @@
 
 import os
 import copy
+import math
 import re
 import yaml
 from dataclasses import dataclass, field, replace
@@ -418,7 +419,9 @@ class Config:
             max_tokens=llm_raw.get("max_tokens", 8192),
             max_document_chars=llm_raw.get("max_document_chars", 800000),
             temperature=llm_raw.get("temperature", 1.0),
-            reasoning_split=bool(llm_raw.get("reasoning_split", True)),
+            # Kept raw so validate() can refuse a string by name instead of
+            # letting ``bool("false") is True`` coerce a misconfiguration.
+            reasoning_split=llm_raw.get("reasoning_split", True),
             fallback=fallback,
             generation_policy=copy.deepcopy(llm_raw.get("generation_policy", {})),
         )
@@ -505,10 +508,29 @@ class Config:
         except ValueError as exc:
             errors.append(str(exc))
 
+        # 类型即合同：布尔/字符串冒充数值是误配置，必须具名拒绝，不能静默
+        # 强转（bool("false") is True）。类型检查独立于 strict（凭据/路径）。
+        if isinstance(self.llm.temperature, bool) or not isinstance(
+            self.llm.temperature, (int, float)
+        ) or (isinstance(self.llm.temperature, float) and not math.isfinite(self.llm.temperature)):
+            errors.append(f"temperature 必须是有限数值: {self.llm.temperature!r}")
+        if isinstance(self.llm.max_tokens, bool) or not isinstance(self.llm.max_tokens, int):
+            errors.append(f"max_tokens 必须是整数: {self.llm.max_tokens!r}")
+        if isinstance(self.llm.max_document_chars, bool) or not isinstance(
+            self.llm.max_document_chars, int
+        ) or self.llm.max_document_chars < 1:
+            errors.append(f"max_document_chars 必须是正整数: {self.llm.max_document_chars!r}")
+        if type(self.llm.reasoning_split) is not bool:
+            errors.append(f"reasoning_split 必须是布尔值: {self.llm.reasoning_split!r}")
+
         # 数值范围验证
-        if self.llm.temperature is not None and not (0 <= self.llm.temperature <= 2):
+        if self.llm.temperature is not None and not isinstance(self.llm.temperature, bool) \
+                and isinstance(self.llm.temperature, (int, float)) \
+                and math.isfinite(self.llm.temperature) \
+                and not (0 <= self.llm.temperature <= 2):
             errors.append(f"temperature 超出范围 [0, 2]: {self.llm.temperature}")
-        if self.llm.max_tokens is not None and self.llm.max_tokens < 1:
+        if not isinstance(self.llm.max_tokens, bool) and isinstance(self.llm.max_tokens, int) \
+                and self.llm.max_tokens < 1:
             errors.append(f"max_tokens 必须为正数: {self.llm.max_tokens}")
 
         if not llm_only:

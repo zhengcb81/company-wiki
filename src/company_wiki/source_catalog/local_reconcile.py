@@ -57,6 +57,44 @@ class _PreparationProgress:
         self.operations.append({key: value for key, value in operation.items()
                                 if key not in {"source_ref", "verified_locations"}})
 
+    def record_unresolved(self, ref: SourceRef, reason: str) -> None:
+        """Expose pathless logical identity only; this is not availability proof.
+
+        Deduplication keeps the list bounded by distinct unresolved sources in
+        this call.  No fixed count cap: trimming the caller's own result to
+        hit a representation quota would be silent evidence loss (R7).
+        """
+        # Never project exception text, unrecognised reason values or storage metadata.
+        failure_reason = (reason if reason == "local_document_kind_unresolved"
+                          else "local_fact_validation_failed")
+        diagnostic: dict[str, Any] = {
+            "reason": "unresolved_source_reference_invalid",
+            "failure_reason": failure_reason,
+        }
+        if _diagnostic_ref_valid(ref):
+            diagnostic["reason"] = "local_candidate_scope_unresolved"
+            diagnostic["source_ref"] = asdict(ref)
+        if diagnostic not in self.diagnostics:
+            self.diagnostics.append(diagnostic)
+
+
+def _diagnostic_ref_valid(ref: SourceRef) -> bool:
+    """Validate the existing six-field value without reading a catalog or original."""
+    if type(ref) is not SourceRef:
+        return False
+    digest = ref.content_sha256
+    return (
+        ref.schema_version == "2.0"
+        and isinstance(digest, str)
+        and re.fullmatch(r"[0-9a-f]{64}", digest) is not None
+        and ref.document_id == "urn:company-wiki:document:sha256:" + digest
+        and ref.source_id == "urn:company-wiki:source:sha256:" + digest
+        and type(ref.byte_size) is int
+        and 0 <= ref.byte_size <= 2**63 - 1
+        and isinstance(ref.mime_type, str)
+        and re.fullmatch(r"[A-Za-z0-9!#$&^_.+-]{1,127}/[A-Za-z0-9!#$&^_.+-]{1,127}", ref.mime_type) is not None
+    )
+
 
 def _result(status, reason, *, ref=None, blocks=False, operations=(), diagnostics=()):
     return {
@@ -261,6 +299,76 @@ def _cn_cover_titles(lines, name, *, coded):
             yield original,title
 
 
+def _cn_ipo_prospectus_cover(pages, identity, digest):
+    """Only a native cover block binds IPO scope; body mentions cannot name it.
+
+    All text is already within the existing three-page read budget. Check the
+    full frontmatter for contradictions before returning any positive proof:
+    a positive earlier page never authorises a different or unbound cover
+    elsewhere in the same frontmatter.
+    """
+    name = re.sub(r"\s+", "", identity.canonical_name)
+    title = "首次公开发行股票招股说明书"
+    periodic = re.compile(r"(20\d{2})年?(半年度|年度|第一季度|第二季度|第三季度|第四季度)报告(?:[（(](?:修订|更正|更新).*?[）)])?")
+    found = []
+    seen_title = False
+    conflict = False
+    for number, text in enumerate(pages, 1):
+        lines = [re.sub(r"\s+", "", line) for line in text.splitlines() if line.strip()][:40]
+        codes = set(re.findall(r"(?:股票|证券)代码[:：]?([0-9]{6})(?!\d)", re.sub(r"\s+", "", text)))
+        if codes and codes != {identity.security_id}:
+            conflict = True
+        for _, heading in _cn_cover_titles(lines, name, coded=True):
+            if periodic.fullmatch(heading) or heading in {
+                "投资者关系活动记录表", "投资者关系活动记录", "投资者交流活动记录表"
+            }:
+                conflict = True
+        for start in range(min(12, len(lines))):
+            for width in range(1, 4):
+                if "".join(lines[start:start+width]) != title:
+                    continue
+                seen_title = True
+                issuer_bound = False
+                prefix_valid = True
+                for line in lines[:start]:
+                    code = re.fullmatch(r"(?:股票|证券)代码[:：]?([0-9]{6})", line)
+                    company = re.fullmatch(r"[\w（）()·]{1,100}(?:公司|集团)", line)
+                    if line == name:
+                        issuer_bound = True
+                    elif code:
+                        issuer_bound = issuer_bound or code[1] == identity.security_id
+                        prefix_valid = prefix_valid and code[1] == identity.security_id
+                    elif company:
+                        # A short name is not an authority for another legal
+                        # name, including a subsidiary sharing that substring.
+                        # Only the exact known issuer line or code can bind it.
+                        prefix_valid = False
+                    elif re.fullmatch(r"证券简称[:：]?" + re.escape(name), line):
+                        issuer_bound = True
+                    elif re.fullmatch(r"[A-Za-z0-9&.,()\-]{1,200}", line):
+                        pass  # English spelling/page number, not issuer authority.
+                    elif re.fullmatch(r"[（(](?:住所|注册地址)[:：].{1,200}[）)]", line):
+                        pass
+                    else:
+                        prefix_valid = False
+                if prefix_valid and issuer_bound:
+                    found.append(number)
+                else:
+                    # A positive earlier page cannot authorise a different or
+                    # unbound IPO cover elsewhere in the same frontmatter.
+                    conflict = True
+    if not seen_title:
+        return None
+    if conflict or not found:
+        raise SourceReadError("blocked", "local_document_kind_unresolved")
+    facts = {"entity": identity.canonical_name, "market": identity.market,
+             "security_id": identity.security_id, "document_kind": "prospectus",
+             "title": title, "fiscal_year": None, "fiscal_period": None}
+    return facts, {key: {"value": value, "locator": f"pdf:page:{found[0]}:ipo-prospectus-cover",
+                        "content_sha256": digest, "extraction_method": "cn-ipo-prospectus-cover/1"}
+                   for key, value in facts.items()}
+
+
 def _cn_cover_scope(original, identity, budget, *, allow_other_kinds=False):
     """Observe a bounded periodic cover, never turn its filename into facts."""
     try:
@@ -269,6 +377,10 @@ def _cn_cover_scope(original, identity, budget, *, allow_other_kinds=False):
         )
     except NativePdfError as exc:
         raise SourceReadError("blocked", "local_original_unreadable") from exc
+    if allow_other_kinds:
+        prospectus = _cn_ipo_prospectus_cover(pages, identity, original.ref.content_sha256)
+        if prospectus is not None:
+            return prospectus
     for number, text in enumerate(pages, 1):
         compact = re.sub(r"\s+", "", text)
         name = re.sub(r"\s+", "", identity.canonical_name)
@@ -556,6 +668,7 @@ def _discover_source_groups(catalog, identity, budget, request, *, historical=No
                 if isinstance(exc, SourceReadError) and exc.reason in {"budget_exceeded", "cancelled", "local_prepare_deadline"}:
                     raise
                 if not isinstance(exc, SourceReadError) or exc.reason != "local_original_missing":
+                    progress.record_unresolved(ref, getattr(exc, "reason", "local_fact_validation_failed"))
                     unresolved.append((getattr(exc, "status", "unavailable" if isinstance(exc, CatalogOperationLockedError) else "blocked"),
                                        getattr(exc, "reason", getattr(exc, "error_code", "local_fact_validation_failed"))))
             if request.mode != "latest_as_of" and SourceVersionReader(catalog).query_local(request).status == "found":

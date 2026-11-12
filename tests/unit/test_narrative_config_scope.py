@@ -148,6 +148,30 @@ def test_unknown_validation_scope_does_not_silently_skip_validation(isolated_con
         Config.load(path, validation_scope=scope)
 
 
+@pytest.mark.parametrize("key,value", [
+    ("max_tokens", True), ("max_tokens", "8192"),
+    ("temperature", True), ("temperature", "1"),
+    ("max_document_chars", 0),
+    ("max_document_chars", True), ("max_document_chars", "800000"),
+])
+def test_wrong_typed_llm_values_fail_the_scoped_loader(isolated_config, key, value):
+    """A bool/str value is a misconfiguration, never a silent coercion."""
+    path, raw, write = isolated_config
+    raw["llm"][key] = value
+    write()
+    with pytest.raises(ValueError, match=key):
+        Config.load(path, validation_scope="llm")
+
+
+def test_reasoning_split_string_fails_by_name_instead_of_bool_coercion(isolated_config):
+    """``bool("false") is True``: a string must fail validation, not coerce."""
+    path, raw, write = isolated_config
+    raw["llm"]["reasoning_split"] = "false"
+    write()
+    with pytest.raises(ValueError, match="reasoning_split"):
+        Config.load(path, validation_scope="llm")
+
+
 def test_configured_narrative_cli_uses_real_llm_scope(isolated_config, monkeypatch):
     path, _, _ = isolated_config
     monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
