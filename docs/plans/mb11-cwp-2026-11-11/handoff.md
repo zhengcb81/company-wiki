@@ -98,7 +98,7 @@
 
 - 测试全部用 pytest `tmp_path`/`tmp_path_factory`；无生产原件、`config/source_catalog.yaml`、AUTO 账、他人 WIP 被写（`production_config_integrity` fixture 会话内未触发）。
 - 会话产物已清理：`build/`、`src/company_wiki.egg-info/`、`.ingested/`、全仓 `__pycache__/`（gitignored，重建即回）；`.mypy_cache`/`.ruff_cache` 为工具缓存保留。
-- 网络调用 0；模型调用 0；费用 unknown（无费用账操作）。
+- 网络调用：**产品/下载/LLM 网络 0 次**；git 远端操作仅有交付动作 `git push`（分支 `codex/mb11-cwp`，1 次成功）与 `git ls-remote` 核验。模型调用 0；费用 unknown（无费用账操作）。
 - 封印扫描 5 次（2026-11-12/13，normal×4 + deep×1），各次 findings 与基线一致、本卡 diff 文件零命中；seal 见 progress/commit messages。
 
 ## 7. 安装 / 部署 / CI / 合并状态（分开）
