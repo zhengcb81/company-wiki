@@ -56,6 +56,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--source-id", required=True)
     parser.add_argument("--content-sha256", required=True, type=_digest_argument)
     parser.add_argument("--purpose", default="filing_reuse")
+    parser.add_argument(
+        "--exact-pair", action="store_true",
+        help="Resolve the exact registered pair, including non-primary history versions.",
+    )
     parser.add_argument("--expected-read-policy-sha256", type=_digest_argument)
     parser.add_argument("--include-availability-evidence", action="store_true",
                         help="Return receipt 2.2 with existing historical capture evidence, or null.")
@@ -67,9 +71,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         config = load_catalog_config(args.config)
         catalog = SourceCatalog(config)
         reader = SourceVersionReader(catalog)
-        ref = reader.query_ref(
-            args.document_id, args.source_id, args.content_sha256
-        )
+        query = reader.query_exact_pair_ref if args.exact_pair else reader.query_ref
+        ref = query(args.document_id, args.source_id, args.content_sha256)
         opened, manifest = reader.open_described_version(
             ref, purpose=args.purpose,
             expected_read_policy_sha256=args.expected_read_policy_sha256,

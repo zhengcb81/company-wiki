@@ -196,13 +196,21 @@ class SourceVersionReader:
             raise SourceReadError("unavailable", "catalog_unavailable") from None
 
     def query_ref(self, document_id: str, source_id: str, expected_sha256: str) -> SourceRef:
-        """Resolve one exact (document, source, sha) triple from the catalog.
+        """Resolve the document's primary source version by its exact identity."""
+        from .source_references import query_source_reference
+        return query_source_reference(
+            lambda: self.catalog.reader, document_id, source_id, expected_sha256
+        )
 
-        The lookup is pair-precise: a NON-primary (history/attachment) source
-        registered under the same document resolves to ITS OWN version row,
-        never to the document's current primary, and a pair that was never
-        registered under this document fails closed.  Availability and
-        current action policy remain open gates.
+    def query_exact_pair_ref(
+        self, document_id: str, source_id: str, expected_sha256: str,
+    ) -> SourceRef:
+        """Resolve an exact registered (document, source, sha) version pair.
+
+        This explicit operation includes non-primary history and attachment
+        versions.  It never substitutes the document's primary source; callers
+        that need the established primary-only lookup keep using ``query_ref``.
+        Availability and current action policy remain open gates.
         """
         from .source_references import query_exact_pair_reference
         return query_exact_pair_reference(
@@ -355,7 +363,7 @@ class SourceVersionReader:
         """Project facts under the same validated visibility as the scoped pin."""
         if not isinstance(ref, SourceRef):
             raise TypeError("ref must be SourceRef")
-        if self.query_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
+        if self.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
         try:
             version_row = self.catalog.reader.exact_source_version(ref.document_id)
@@ -410,7 +418,7 @@ class SourceVersionReader:
 
     def metadata_diagnostics(self, ref: SourceRef) -> dict[str, object]:
         """Read-only field quality for an exact source, outside the v2 manifest."""
-        self.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
+        self.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256)
         row = self.catalog.reader.exact_source_version(ref.document_id)
         if row is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
@@ -621,7 +629,7 @@ class SourceVersionReader:
         self, ref: SourceRef,
     ) -> SourceProcessingDescriptor:
         """Return parser metadata without exposing a stored location or manifest."""
-        if self.query_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
+        if self.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
         try:
             descriptor = self.catalog.processing_descriptor(ref)
@@ -755,7 +763,7 @@ class SourceVersionReader:
             raise SourceReadError("unavailable", "unsupported_version")
         if purpose not in _SUPPORTED_READ_PURPOSES:
             raise SourceReadError("blocked", "unsupported_purpose")
-        current = self.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
+        current = self.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256)
         if current != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
         if current_read_policy_sha256 is None:

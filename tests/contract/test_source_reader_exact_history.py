@@ -176,6 +176,23 @@ def _run_cli(config_path: Path, document_id: str, source_id: str,
     )
 
 
+def _run_stream_cli(config_path: Path, document_id: str, source_id: str,
+                    sha256: str, tmp_path: Path,
+                    extra: list[str] | None = None) -> subprocess.CompletedProcess:
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2] / "src")
+    env["PYTHONUTF8"] = "1"
+    return subprocess.run(
+        [sys.executable, "-B", "-m", "company_wiki.source_catalog.source_stream_cli",
+         "--config", str(config_path),
+         "--document-id", document_id,
+         "--source-id", source_id,
+         "--content-sha256", sha256,
+         *(extra or [])],
+        capture_output=True, cwd=str(tmp_path), env=env, timeout=60,
+    )
+
+
 # --- RED probe: the full public chain must read the requested version --------
 
 
@@ -194,8 +211,19 @@ def test_cli_reads_nonprimary_history_version_of_same_document(tmp_path):
     catalog.close()
 
     ref = history["source_ref"]
+    # Existing consumers retain primary-only behavior unless they opt into an
+    # exact historical pair read through the additive CLI flag.
+    default_read = _run_cli(config_path, ref["document_id"], ref["source_id"],
+                            ref["content_sha256"], tmp_path)
+    assert default_read.returncode == 2
+    assert default_read.stdout == b""
+    default_receipt = json.loads(default_read.stderr.decode("utf-8").splitlines()[-1])
+    assert (default_receipt["status"], default_receipt["reason"]) == (
+        "not_found", "document_source_mismatch"
+    )
+
     proc = _run_cli(config_path, ref["document_id"], ref["source_id"],
-                    ref["content_sha256"], tmp_path)
+                    ref["content_sha256"], tmp_path, extra=["--exact-pair"])
     # stdout is the requested version's bytes, nothing else
     assert proc.stdout == AMENDED, (
         "CLI stdout is not the requested history version bytes; "
@@ -215,6 +243,32 @@ def test_cli_reads_nonprimary_history_version_of_same_document(tmp_path):
     assert manifest["source_id"] == ref["source_id"]
     assert manifest["content_sha256"] == AMENDED_SHA
     assert manifest["byte_size"] == len(AMENDED)
+
+    default_stream = _run_stream_cli(
+        config_path, ref["document_id"], ref["source_id"], ref["content_sha256"],
+        tmp_path,
+    )
+    assert default_stream.returncode == 2
+    assert default_stream.stdout == b""
+    stream_refusal = json.loads(
+        default_stream.stderr.decode("utf-8").splitlines()[-1]
+    )
+    assert (stream_refusal["status"], stream_refusal["reason"]) == (
+        "not_found", "document_source_mismatch"
+    )
+
+    exact_stream = _run_stream_cli(
+        config_path, ref["document_id"], ref["source_id"], ref["content_sha256"],
+        tmp_path, extra=["--exact-pair"],
+    )
+    assert exact_stream.returncode == 0, exact_stream.stderr.decode("utf-8")
+    assert exact_stream.stdout == AMENDED
+    streamed_receipts = [
+        json.loads(line) for line in exact_stream.stderr.decode("utf-8").splitlines()
+    ]
+    assert [item["status"] for item in streamed_receipts] == ["locked", "ok"]
+    assert streamed_receipts[-1]["content_sha256"] == AMENDED_SHA
+
     # primary read still works and returns primary bytes
     proc = _run_cli(config_path, primary["source_ref"]["document_id"],
                     primary["source_ref"]["source_id"],
@@ -228,9 +282,17 @@ def test_reader_module_reads_nonprimary_version_and_reports_exact_facts(tmp_path
     catalog, browser, primary, history = _history_items(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = SourceRef(**history["source_ref"])
-    # query_ref resolves the requested pair, never the primary row
-    resolved = reader.query_ref(ref.document_id, ref.source_id,
-                                ref.content_sha256)
+    # The compatibility query remains primary-only. Exact historical reads
+    # use a separately named public operation so callers cannot widen the
+    # old query contract by accident.
+    with pytest.raises(SourceReadError) as error:
+        reader.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
+    assert (error.value.status, error.value.reason) == (
+        "not_found", "document_source_mismatch"
+    )
+    resolved = reader.query_exact_pair_ref(
+        ref.document_id, ref.source_id, ref.content_sha256
+    )
     assert resolved == ref
     opened, manifest = reader.open_described_version(ref, purpose="preview")
     assert opened.data == AMENDED
@@ -242,7 +304,7 @@ def test_reader_module_reads_nonprimary_version_and_reports_exact_facts(tmp_path
     receipt = reader.verify_version(ref, purpose="source_export")
     assert receipt.content_sha256 == AMENDED_SHA
     assert receipt.byte_size == len(AMENDED)
-    # and the primary pair keeps resolving to the primary version
+    # The primary pair remains available through the established query.
     primary_ref = SourceRef(**primary["source_ref"])
     assert reader.query_ref(primary_ref.document_id, primary_ref.source_id,
                             primary_ref.content_sha256) == primary_ref
@@ -338,15 +400,17 @@ def test_hash_mismatch_of_history_version_stays_unavailable(tmp_path):
         mime_type=history_ref.mime_type,
     )
     with pytest.raises(SourceReadError) as error:
-        reader.query_ref(corrupted.document_id, corrupted.source_id,
-                         corrupted.content_sha256)
+        reader.query_exact_pair_ref(corrupted.document_id, corrupted.source_id,
+                                    corrupted.content_sha256)
     assert error.value.status == "unavailable"
     assert error.value.reason == "expected_version_mismatch"
     # a source_id this document never registered must not resolve either
     with pytest.raises(SourceReadError) as error:
-        reader.query_ref(history_ref.document_id,
-                         "urn:company-wiki:source:sha256:" + "0" * 64,
-                         "0" * 64)
+        reader.query_exact_pair_ref(
+            history_ref.document_id,
+            "urn:company-wiki:source:sha256:" + "0" * 64,
+            "0" * 64,
+        )
     assert error.value.status == "not_found"
     assert error.value.reason == "document_source_mismatch"
     catalog.close()

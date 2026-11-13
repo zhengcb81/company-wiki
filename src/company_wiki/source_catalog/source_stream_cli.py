@@ -164,6 +164,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--source-id", required=True)
     parser.add_argument("--content-sha256", required=True, type=_digest_argument)
     parser.add_argument("--purpose", default="preview")
+    parser.add_argument(
+        "--exact-pair", action="store_true",
+        help="Resolve the exact registered pair, including non-primary history versions.",
+    )
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
@@ -172,9 +176,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         config = load_catalog_config(args.config)
         catalog = SourceCatalog(config)
         reader = SourceVersionReader(catalog)
-        # The owner's gate pins the exact identity; the transport never
-        # substitutes the primary or any other version for the request.
-        ref = reader.query_ref(args.document_id, args.source_id, args.content_sha256)
+        # Preserve the primary-only default for existing consumers. A history
+        # browser explicitly opts into the exact registered document/source pair.
+        query = reader.query_exact_pair_ref if args.exact_pair else reader.query_ref
+        ref = query(args.document_id, args.source_id, args.content_sha256)
         budget = ReadBudget()
         budget.begin_request()
         sink = _StdoutVerifiedStream(ref)
