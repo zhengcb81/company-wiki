@@ -2,6 +2,28 @@
 
 唯一入口为本文件和 CURRENT_STATUS.json。实施顺序见 task_plan.md，交接见 HANDOFF.md，长期循环见 MAINLINE_LOOP_GOAL.md。
 
+## 2026-11-11 最新：逐模块Git核销与有限接收已完成
+
+当前执行入口仍是 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)，支线/未提交改动的唯一处置表为其 [reconciliation.md](../module-boundaries-2026-11-11/reconciliation.md)。本轮新增授权下已审查8仓390个分支/remote refs和253工区，结合PWF/交接/patch与blob归因，结果已加入原五张卡A0和ROOT接收清单。
+
+- FF B34小修已受测/独审接收并推main `d563b63`；Dashboard原边界WIP已修复、受测、独审并推main `2049356`。W13历史最终交接/独审已补回，不回退旧gate源码。
+- 随后ROOT在MB-RF隔离工区并入RF B37 compare与部署/来源回归安全子范围：compare代码`e060a8607`已在main，测试`058be4fd6`、PWF状态`6341759b9`已推送，当前origin/main为`6341759b9cdfd13e8aa7d51d5c755e361046da0c`。组合171 passed/1 skipped、部署单测38 passed、独审PASS、push smoke 12 passed。scope/subject候选有跨私有接口及固定准则/财年/分部假设，未并入，留在MB-RF B2。
+- 确定测试目录清理约216MB、7个只剩Git指针的旧工区已回收；source-facts重复源码、已吸收stash等定点清理；RF4项生成物保留原字节证据后restore。原始财报、密钥、真实状态和独有账目/审计材料保留。
+- RF B37剩余scope/subject/verified-compare、StockWiki C38/B03、CWP历史公开接口仍有真实未吸收差额；SID11项WIP仍有路径/状态/tab问题。这些已分配到模块卡/ROOT，不能写“全已并线”或“全工作区干净”。StockWiki/Audit无remote，不假报推送。
+- Dashboard真实stream24-case依赖未配置的旧CWP公开CLI，尚未通过，归CWP T-READ和ROOT组合；有限mock/回环回归不代替该验证。
+- M1由ROOT在MB-RF部分启动并已合入上述安全子范围；MB-CWP、MB-FF、MB-ET、MB-SID仍未派发，完整模块整改与M2组合验收未完成。原业务循环保留暂停。下一步继续RF B2或启动其余独立卡，按各卡并线步骤逐仓接收，不重启旧无清单的逐分支返工。
+
+## 同日较早的M0规划快照（已由上节补充）
+
+用户要求先从每个模块当前代码做完整规划，再按TDD并行实施。已完成三路独立只读架构调查及ROOT对账，形成独立子计划 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)、五卡、接口/测试/退出矩阵；方案独审与发布状态看子计划task_plan。本轮没有恢复生产代码实施或运行新产品测试。
+
+- **下一步入口唯一为新子计划**。先完成该有限模块边界计划，再回R4/T4、真实摘要、缓存恢复、RF实际采用与公司循环。历史候选/工区清理不再作为无界的“解耦下一步”。
+- D4/D5及P3 source stream/parser保留已验收范围；它们不是所有仓内模块、安装产物和遗留入口都完成的全局证据。父计划旧“D5全局ACCEPTED”口径在本次更正为冻结接口范围通过。
+- 五卡覆盖CWP、FF、RF、ET、SID，独立工区、同一repo一个作者；StockWiki/Audit先ROOT黑盒验证，Dashboard接续原owner。未派发/未开工不得标完成。
+- 新基线：CWP源码08dfe8bf1、FF f65e6ca、RF b005a179、ET003c1c0、SID c0f07e1。RF四项assurance、SID十一项与Dashboard四项既有WIP保留，见子计划review/root_baseline.md。
+
+下方各日期记录均为历史阶段快照，当前优先顺序由本节与子计划维护。原native目标的实施暂停状态不因本轮规划自动变为active。
+
 ## 2026-11-11 P3 stream/parser owner-port 子节点（已发布；之后暂停）
 
 - `SourceVersionPort` 现在提供 pathless processing descriptor 与流式读取；候选字节先写入事务式 parser sink，只有 source owner 对身份、大小、SHA 验真后才提交给解析器。读取预算仍是单一 caller-owned budget，取消及失败候选会清理暂存；移除了额外固定 256 MiB 候选帽。

@@ -1,0 +1,13 @@
+{
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/dashboard-ff-job-20261109",
+  "paths": [
+    "tools/ci_tests.py",
+    "scripts/ff_job_store.py",
+    "scripts/fetch_filing.py",
+    "tests/test_ff_job_cross_process.py",
+    "tests/test_ff_job_facade.py",
+    "scripts/ff_job_runner.py"
+  ],
+  "absorbed_commit": "57351d0053cb5be529b532bec1297b0da7788c79",
+  "remaining_document": "docs/ff-job-protocol.md semantic delta absorbed; retained pending final provenance archival"
+}

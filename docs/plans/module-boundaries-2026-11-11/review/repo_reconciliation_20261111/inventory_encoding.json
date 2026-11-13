@@ -1,0 +1,7 @@
+{
+  "format": "gzip-compressed complete UTF-8 JSON",
+  "uncompressed_bytes": 30174104,
+  "compressed_bytes": 1535403,
+  "uncompressed_sha256": "4ecf6771e4417316c04da321f5eaee18d263547916a703f9e095a54d76fbd06e",
+  "contents": "all original fields retained; no file payloads or credentials; paths/refs/status metadata only"
+}

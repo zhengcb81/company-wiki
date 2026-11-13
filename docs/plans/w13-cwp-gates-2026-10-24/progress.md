@@ -18,3 +18,8 @@
 - 真实 `git push -u origin codex/w13-cwp-gates-20261024`：42.2s，真实 hook，unknown range → defer → GREEN(local_fast_pass + full_validation_pending)，分支已上 origin。
 - handoff 草稿就绪（`delivery/w13/handoff.md/json`，状态 INCOMPLETE_EXTERNAL_BLOCKER）：独审派发撞平台5小时用量上限（19:04 触顶，23:28:49 重置）；已登记一次性定时任务在重置后自动派独审→修复→补审→翻状态→push。工程与证据不依赖该步骤，均已提交。
 
+
+
+### ROOT historical reconciliation — 2026-11-11
+
+Final independent review and handoff from `6efd4fccb` are restored under `delivery/w13/`. They apply to historical code `852dff28`; main subsequently implemented the fixes in `67439d0ac` and fixed smoke dispatch in `819cef31a`. The stale pending-review statement is superseded. No old gate implementation is merged and no new current-main test pass is claimed.

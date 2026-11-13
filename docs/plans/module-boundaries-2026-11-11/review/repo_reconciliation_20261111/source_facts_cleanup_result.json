@@ -1,0 +1,16 @@
+{
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki",
+  "head": "fcee443ef5cb5a7d67a35741a7de46d791f3328c",
+  "tracked_restored": 11,
+  "untracked_redundant_sources_removed": 5,
+  "preserved": [
+    ".planning/du11-business-coverage-final-delta.json",
+    ".planning/du11-business-coverage-guard.json",
+    ".planning/du11-business-coverage-wrong-import-baseline.json",
+    ".planning/du11-native-prose-all-required-trace.json",
+    ".planning/du11-native-prose-guard.json",
+    ".planning/du11-native-prose-trace-conclusion.json",
+    ".planning/du11-source-facts-tool.xml"
+  ],
+  "tracked_status": null
+}

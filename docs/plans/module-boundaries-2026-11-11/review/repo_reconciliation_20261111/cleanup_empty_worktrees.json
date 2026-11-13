@@ -1,0 +1,51 @@
+[
+  {
+    "repository": "ff",
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+    "head": "41ba0150c9c634f6021c9346744cada391ec2c4c",
+    "reason": "Only .git pointer remained; HEAD ancestor of main",
+    "removed": true
+  },
+  {
+    "repository": "ff",
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-source-reader-v2-20260927",
+    "head": "c47c397c4d93979d8a7defbe026eff9e9edf0e6d",
+    "reason": "Only .git pointer remained; HEAD ancestor of main",
+    "removed": true
+  },
+  {
+    "repository": "ff",
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\filing-fetch",
+    "head": "89c8bdb2cfba4d88720d005d0558f422957e8ade",
+    "reason": "Only .git pointer remained; HEAD ancestor of main",
+    "removed": true
+  },
+  {
+    "repository": "rf",
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009",
+    "head": "ccce3bf4aa8905753565c4cef5905550d394b958",
+    "reason": "Only .git pointer remained; HEAD ancestor of main",
+    "removed": true
+  },
+  {
+    "repository": "et",
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\et-fresh-transcript-launch-20261009",
+    "head": "c91f5f54bc2a24e7b5d6e648dba3f9d578f5fa52",
+    "reason": "Only .git pointer remained; HEAD ancestor of main",
+    "removed": true
+  },
+  {
+    "repository": "stockwiki",
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\stockwiki-narrative-consumer-20261003",
+    "head": "4c3334ed412a6a6241eac307f20ad0593355f90f",
+    "reason": "Only .git pointer remained; HEAD ancestor of main",
+    "removed": true
+  },
+  {
+    "repository": "stockwiki",
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\stockwiki-w04-mic-relations-20260930",
+    "head": "afa969226dd56d1d0a729990eb6bd30912fd7a45",
+    "reason": "Only .git pointer remained; HEAD ancestor of main",
+    "removed": true
+  }
+]

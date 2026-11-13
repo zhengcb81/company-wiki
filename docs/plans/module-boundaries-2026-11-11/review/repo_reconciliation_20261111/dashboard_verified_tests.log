@@ -1,0 +1,25 @@
+........................................................................ [ 38%]
+........................................................................ [ 76%]
+.............................................                            [100%]
+============================== warnings summary ===============================
+tests/unit/m3-documents/test_cwp_stream_units.py::test_verified_transfer_delivers_exactly_the_locked_bytes
+  C:\Miniconda\Lib\asyncio\base_events.py:750: RuntimeWarning: coroutine 'Queue.put' was never awaited
+    self._ready.clear()
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/unit/m3-documents/test_cwp_stream_units.py::test_verified_transfer_delivers_exactly_the_locked_bytes
+  C:\Users\֣����\Projects\investment-dashboard\backend\dashboard\adapters\cwp_stream.py:267: RuntimeWarning: coroutine 'Queue.put' was never awaited
+    future = asyncio.run_coroutine_threadsafe(queue.put(item), self._loop)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/integration/preview_isolation/test_metadata_semantics_d00.py::test_real_wire_range_rejection_and_valid_control[bytes 0-1/1-2-ab-502]
+  C:\Miniconda\Lib\site-packages\websockets\legacy\__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/integration/preview_isolation/test_metadata_semantics_d00.py::test_real_wire_range_rejection_and_valid_control[bytes 0-1/1-2-ab-502]
+  C:\Miniconda\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

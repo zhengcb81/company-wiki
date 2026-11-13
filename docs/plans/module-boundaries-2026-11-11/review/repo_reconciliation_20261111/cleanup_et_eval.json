@@ -1,0 +1,6 @@
+{
+  "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/eval_results.json",
+  "bytes": 38956,
+  "sha256": "9D8BBF7E93FFFDC2287F612556881B349F4972FEE7C898FF338C36B3311E2A29",
+  "reason": "2026-07-07 translation evaluation output; no runtime readers; main PWF already records outcome"
+}

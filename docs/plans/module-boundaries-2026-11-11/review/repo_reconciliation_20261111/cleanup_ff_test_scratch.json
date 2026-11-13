@@ -1,0 +1,23 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\pytest-of-ff-root-failures-fixed",
+    "files": 27,
+    "bytes": 38462.0,
+    "reason": "R7 completed pytest basetemp; no tracked files",
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\pytest-of-ff-root-failures",
+    "files": 27,
+    "bytes": 37430.0,
+    "reason": "R7 completed pytest basetemp; no tracked files",
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\pytest-of-ff-s3-p5-full",
+    "files": 75,
+    "bytes": 101290.0,
+    "reason": "R7 completed pytest basetemp; no tracked files",
+    "removed": true
+  }
+]

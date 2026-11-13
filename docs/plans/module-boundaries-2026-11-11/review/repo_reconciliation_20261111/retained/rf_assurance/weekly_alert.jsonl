@@ -1,0 +1,10 @@
+{"at_utc": "2026-09-06T07:09:09.952763+00:00", "exit_code": 0, "reason": "T3 suite fully skipped (credentials/network missing)", "run_id": "20260906T070858Z", "status": "blocked"}
+{"at_utc": "2026-09-13T06:48:04.984641+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20260913T064640Z", "status": "not-ok"}
+{"at_utc": "2026-09-20T03:31:58.516185+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20260920T033000Z", "status": "not-ok"}
+{"at_utc": "2026-09-27T03:31:35.358242+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20260927T033001Z", "status": "not-ok"}
+{"at_utc": "2026-10-04T03:30:23.116117+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20261004T033000Z", "status": "not-ok"}
+{"at_utc": "2026-10-11T03:30:16.234833+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20261011T033000Z", "status": "not-ok"}
+{"at_utc": "2026-10-18T03:31:35.235409+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20261018T033001Z", "status": "not-ok"}
+{"at_utc": "2026-10-25T04:30:25.332540+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20261025T043000Z", "status": "not-ok"}
+{"at_utc": "2026-11-01T04:30:23.300430+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20261101T043000Z", "status": "not-ok"}
+{"at_utc": "2026-11-08T04:30:32.007093+00:00", "exit_code": 1, "reason": "T3 suite exit 1", "run_id": "20261108T043000Z", "status": "not-ok"}

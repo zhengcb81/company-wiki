@@ -1,0 +1,1443 @@
+.............................EEEEEEEEEEEEEEEEEEEEEEEE                      [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_stream_serves_exact_primary_bytes_with_locked_metadata _
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_stream_serves_exact_primary_bytes_with_locked_metadata>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_ ERROR at setup of test_non_primary_history_version_refused_like_the_reader __
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_non_primary_history_version_refused_like_the_reader>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+________ ERROR at setup of test_html_and_txt_stream_as_original_bytes _________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_html_and_txt_stream_as_original_bytes>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_ ERROR at setup of test_wrong_sha_refusal_maps_to_unavailable_before_any_byte _
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_wrong_sha_refusal_maps_to_unavailable_before_any_byte>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+___________ ERROR at setup of test_missing_file_refuses_before_lock ___________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_missing_file_refuses_before_lock>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_________ ERROR at setup of test_output_limit_precheck_spawns_nothing _________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_output_limit_precheck_spawns_nothing>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+____________ ERROR at setup of test_range_stays_named_unsupported _____________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_range_stays_named_unsupported>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_________ ERROR at setup of test_read_exact_small_file_path_unchanged _________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_read_exact_small_file_path_unchanged>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_________ ERROR at setup of test_concurrent_transfers_are_independent _________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_concurrent_transfers_are_independent>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+________ ERROR at setup of test_short_stream_is_an_incomplete_transfer ________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_short_stream_is_an_incomplete_transfer>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+______________ ERROR at setup of test_overlong_stream_is_refused ______________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_overlong_stream_is_refused>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+__ ERROR at setup of test_receipt_digest_mismatch_refuses_complete_transfer ___
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_receipt_digest_mismatch_refuses_complete_transfer>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+________ ERROR at setup of test_nonzero_exit_refuses_complete_transfer ________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_nonzero_exit_refuses_complete_transfer>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+______ ERROR at setup of test_bad_lock_receipt_is_rejected_before_stream ______
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_bad_lock_receipt_is_rejected_before_stream>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+______ ERROR at setup of test_owner_refusal_receipt_maps_to_unavailable _______
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_owner_refusal_receipt_maps_to_unavailable>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_________ ERROR at setup of test_stderr_noise_exceeding_bound_refuses _________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_stderr_noise_exceeding_bound_refuses>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+____ ERROR at setup of test_stalled_stream_times_out_and_terminates_owner _____
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_stalled_stream_times_out_and_terminates_owner>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+__________ ERROR at setup of test_slow_owner_stream_still_completes ___________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_slow_owner_stream_still_completes>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+___________ ERROR at setup of test_slow_consumer_keeps_eof_sentinel ___________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_slow_consumer_keeps_eof_sentinel>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+__ ERROR at setup of test_abort_with_full_queue_joins_pump_and_leaks_nothing __
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_abort_with_full_queue_joins_pump_and_leaks_nothing>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_________ ERROR at setup of test_client_leave_closes_owner_and_pipes __________
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_client_leave_closes_owner_and_pipes>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_______ ERROR at setup of test_transfer_without_start_refuses_to_stream _______
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_transfer_without_start_refuses_to_stream>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_ ERROR at setup of test_midstream_source_replacement_never_reaches_the_consumer _
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_midstream_source_replacement_never_reaches_the_consumer>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+_ ERROR at setup of test_same_size_tamper_before_the_pass_is_refused_before_any_byte _
+
+fixturedef = <FixtureDef argname='real_catalog' scope='function' baseid='tests/adapters/cwp_original_stream'>
+request = <SubRequest 'real_catalog' for <Function test_same_size_tamper_before_the_pass_is_refused_before_any_byte>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\adapters\cwp_original_stream\conftest.py:25: in real_catalog
+    config_path = build_catalog(tmp_path, {
+tests\adapters\cwp_original_stream\owner_catalog.py:68: in build_catalog
+    ensure_owner_importable()
+tests\adapters\cwp_original_stream\owner_catalog.py:56: in ensure_owner_importable
+    src = str(owner_src())
+              ^^^^^^^^^^^
+tests\adapters\cwp_original_stream\owner_catalog.py:52: in owner_src
+    return owner_root() / "src"
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def owner_root() -> Path:
+        """The company-wiki worktree this package verifies (overridable).
+    
+        Searched relative to this checkout: a nested ``.worktrees`` directory,
+        then sibling worktrees of the main dashboard checkout.  The first
+        candidate that actually contains the owner stream CLI wins.
+        """
+        configured = os.environ.get("CWP_OWNER_ROOT")
+        if configured:
+            return Path(configured)
+        here = Path(__file__).resolve()
+        worktree = here.parents[3]
+        # The current-main compat owner worktree first: this package verifies the
+        # repaired owner ported onto the current company-wiki mainline (protected
+        # byte lock), then the isolated pre-ports for history.
+        for candidate in (worktree / ".worktrees" / "x-c04-compat-owner",
+                          worktree / ".worktrees" / "x-c04-integrity-owner",
+                          worktree / ".worktrees" / "x-c04-cwp-owner-stream",
+                          worktree.parent / "x-c04-compat-owner",
+                          worktree.parent / "x-c04-integrity-owner",
+                          worktree.parent / "x-c04-cwp-owner-stream"):
+            if (candidate / "src" / "company_wiki" / "source_catalog"
+                    / "source_stream_cli.py").is_file():
+                return candidate
+>       raise AssertionError(
+            "company-wiki worktree with source_stream_cli.py not found; "
+            "set CWP_OWNER_ROOT")
+E       AssertionError: company-wiki worktree with source_stream_cli.py not found; set CWP_OWNER_ROOT
+
+tests\adapters\cwp_original_stream\owner_catalog.py:46: AssertionError
+=========================== short test summary info ===========================
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_stream_serves_exact_primary_bytes_with_locked_metadata
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_non_primary_history_version_refused_like_the_reader
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_html_and_txt_stream_as_original_bytes
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_wrong_sha_refusal_maps_to_unavailable_before_any_byte
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_missing_file_refuses_before_lock
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_output_limit_precheck_spawns_nothing
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_range_stays_named_unsupported
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_read_exact_small_file_path_unchanged
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_concurrent_transfers_are_independent
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_short_stream_is_an_incomplete_transfer
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_overlong_stream_is_refused
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_receipt_digest_mismatch_refuses_complete_transfer
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_nonzero_exit_refuses_complete_transfer
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_bad_lock_receipt_is_rejected_before_stream
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_owner_refusal_receipt_maps_to_unavailable
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_stderr_noise_exceeding_bound_refuses
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_stalled_stream_times_out_and_terminates_owner
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_slow_owner_stream_still_completes
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_slow_consumer_keeps_eof_sentinel
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_abort_with_full_queue_joins_pump_and_leaks_nothing
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_client_leave_closes_owner_and_pipes
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_transfer_without_start_refuses_to_stream
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_midstream_source_replacement_never_reaches_the_consumer
+ERROR tests/adapters/cwp_original_stream/test_adapter_stream.py::test_same_size_tamper_before_the_pass_is_refused_before_any_byte
