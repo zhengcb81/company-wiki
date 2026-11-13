@@ -104,13 +104,12 @@ python -B -m pytest tests/unit/test_narrative_selection_architecture.py tests/un
 - **结果**：`test_missing_file_refuses_before_lock` 由 FAIL → PASS；我方 `test_source_stream_cli.py` 以两条用例钉住新序（无字节→仅拒绝；同尺寸篡改→[locked, unavailable] 无 ok）。Dashboard 24 条现 21 过。
 - 剩余 3 条见升级 2 与 OUT-SCOPE 清单。
 
-### 升级 2：`query_ref` 非 primary 可读性（需 ROOT 一次决定）
+### 升级 2：primary 查询与历史精确读取分开命名（ROOT 已裁决）
 
-- **失败例**：Dashboard `test_non_primary_history_version_refused_like_the_reader` 断言 `query_ref(HISTORY)` 拒绝 `("not_found","document_source_mismatch")`（其 docstring 称"current mainline converges readable locations on its primary admission"）；本卡为 T-B33 readiness（D00-001）与 `test_source_reader_exact_history`（9 项）把 `query_ref` 改为 pair 精确后，该断言 FAIL。
-- **两个具名消费者方向相反**：B33 readiness 走 `verify_version→query_ref` 必须能读非 primary；Dashboard 流与 whole-buffer reader 要求与 `query_ref` 拒绝一致。
-- **方案 A（本卡现状，推荐）**：pair 精确 `query_ref` 成立；Dashboard 该测试的断言随 owner 演进更新（其 docstring 自认追踪 current mainline）；readiness/browser/stream 语义一致（可浏览→可诊断→可读）。
-- **方案 B**：`query_ref` 回退 primary-only，非 primary 只经显式 `query_exact_pair_reference`（已存在）；readiness 需要自己的 pair 读取入口（第二读取入口，与"不另做读取 owner"有张力）；`test_source_reader_exact_history` 9 项的 `query_ref` 断言需映射到新入口。
-- 本卡不单方关闭此项；失败例与两方案已记录，ROOT 对接 Dashboard owner 一次决定。本卡其余交付不依赖该决定。
+- **冲突证据**：Dashboard `test_non_primary_history_version_refused_like_the_reader` 明确要求旧 `query_ref(HISTORY)` 拒绝 `("not_found","document_source_mismatch")`；最初把它改成 pair 精确会破坏既有 whole-buffer 与 stream 一致性。
+- **ROOT 决定采用方案 B**：`query_ref` 保持既有 primary-only 语义；同一个 `SourceVersionReader` 增加 `query_exact_pair_ref`，由它处理精确的历史/附件版本。`describe_version`、`verify_version`、`open_version` 等以既有 `SourceRef` 为输入的操作沿用该精确身份，不再重新收窄到 primary 行。
+- `source_reader_cli` 与 `source_stream_cli` 保留默认 primary-only 行为；新增 `--exact-pair` 后才能按完整 document/source/SHA 对读取非 primary 版本。旧 Dashboard 调用不需改动或新增批准步骤；浏览器/历史版本调用方可显式选用 exact pair。
+- **验证结果**：CWP 历史/reader/stream 合同 61 项通过；Dashboard 既有 non-primary 拒绝合同通过；CWP owner proof library + 来源版本合同 192 项通过。ROOT 在本轮重新跑 Dashboard adapter suite 为 22 passed / 2 failed：失败仅是 Dashboard 测试导入 CWP 基线即不存在的私有 _ReadBudget；本仓不恢复私有实现，消费端需改用公开 port。最终 CWP 修复提交 0a03b5886 的独审为 PASS。
 
 ### OUT-SCOPE（列给 ROOT，不在 MB-CWP 写集合）
 

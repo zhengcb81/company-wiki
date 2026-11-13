@@ -63,8 +63,8 @@
 
 1. **新增 module CLI（ additive，同 wheel）**：`source_stream_cli`、`public_canonical_browser_cli`、`public_source_readiness_cli`、`public_legacy_source_link_cli`、`public_legacy_source_recovery_cli`（+ 主线已有 `public_document_browser_cli`）。Dashboard 以 `-m` 调用，无 console 表变更。
 2. **`locked` 回执语义（2.2 schema 不变，语义收紧）**：由"候选已暂存即发"改为**首字节前惰性发出**；无字节的拒绝不带锁行；`ok` 是全量验真声明。失败例与方案见 findings「公开协议升级事项」升级 1（已实施）。ROOT 需知会 Dashboard owner：`test_missing_file_refuses_before_lock` 依赖此序。
-3. **`query_ref` 非 primary 可读（需 ROOT 一次决定）**：pair 精确化后 Dashboard `test_non_primary_history_version_refused_like_the_reader` 断言反向。失败例 + 方案 A/B 见 findings 升级 2。本卡交付不依赖该决定。
-4. **`source_references` 新增公共函数 `query_exact_pair_reference`**（additive；`query_source_reference` 逐字节未动，registration 语义不变）。
+3. **primary 查询与历史精确读取分开命名**：ROOT 保留 `query_ref` 的 primary-only 兼容语义；同一 `SourceVersionReader` 增加 `query_exact_pair_ref`。`source_reader_cli`/`source_stream_cli` 默认仍为 primary-only，调用方须显式传 `--exact-pair` 才读取历史或附件版本。Dashboard 旧行为和真实消费者合同保持不变；详见 findings 升级 2。
+4. **`source_references` 增加 pair 精确查询函数 `query_exact_pair_reference`**（由 `SourceVersionReader.query_exact_pair_ref` 调用；`query_source_reference` 与既有 primary 查询语义不变）。
 5. **`reader.exact_source_pair` 新增**（Protocol + 实现；additive）。
 6. **`observability.REASONS`/`STAGES_BY_REASON` 各 +14**（additive 注册，集合相等保持）。
 7. **`Config.load` 行为收紧**：错型 LLM 值具名 `ValueError`（原为强转/TypeError）；`validation_scope` 结构未变。
@@ -121,6 +121,16 @@
   - 已尝试且无效：normal/deep 两种深度、两个项目、focusLines 聚焦改行、后台 `start→status` 流程（此前两次放行正是该形态）、拆开 `git add` 与 `git commit`、间隔 9–10 分钟重试、极简与长篇两种证据消息格式。
   - 未采取的动作（明确记录）：未改写命令绕过、未切换通道、未使用 `--no-verify`、未宣称已关闭平台审查、未擅自修改基线 SQL/凭据文件（修它们属 ROOT 范围且会动 catalog SQL 语义，风险高于其本身）。
   - 净结果：被拦截的只有最后那几行**文档表述**修正；全部代码、测试、handoff.md、review.md、handoff.json 均已在 `fe8d24669` 推送并经独审 Round 2 判定 DELIVERABLE。拦截窗口随后放开，作者已把该文档修正落地为 `1d49fb2f5` 并推送（见 §1「平台拦截期的暂存残留」）；**ROOT 无需补充命令**。
-- **ROOT 下一步（一条命令）**：在独立集成工区核对本卡 tip 后运行
+- **ROOT 组合证据**：ROOT 在隔离集成工区完成上述 proof library，并另跑 Dashboard `test_non_primary_history_version_refused_like_the_reader`。两个测试集都通过；默认 stream/reader 仍拒绝历史版本，`--exact-pair` 精确读取返回请求版本字节。最终代码/交接 SHA 以本分支提交和后续 ROOT 合并记录为准。
+- **原交接建议命令（历史记录）**：
   `python -B -m pytest tests/contract/test_layer_public_boundaries.py tests/contract/test_source_reader_public_port_boundaries.py tests/contract/test_processed_document_owner_boundary.py tests/unit/test_document_understanding_core_isolation.py tests/unit/test_source_summary_layer_isolation.py tests/unit/test_document_model_identity.py tests/unit/test_pdf_reading_boundary.py tests/financial_statements/test_layer_ports.py -q -p no:cacheprovider`
-  （卡证明库；随后按 findings 升级 2 决定 `query_ref` 非 primary 方案 A/B 并知会 Dashboard owner locked 语义。）
+  （卡证明库；历史方案 A/B 已由 ROOT 裁决，结论见 findings 升级 2。）
+
+
+## 8. ROOT 并线验收（2026-11-13）
+
+- ROOT 决定保留 query_ref 的 primary-only 默认语义；历史版本只由同一 owner reader 的 query_exact_pair_ref / CLI 显式 --exact-pair 读取。T-B33 的 readiness 从精确 SourceRef 走 exact-pair 入口，不改变默认 Dashboard 消费行为。
+- 根因修复与 TDD 提交：0a03b588651e3da32fb5fcde988573957f8bd985（fix(cwp): preserve primary-only source reads）。新增回归先证明 query_ref(history) 与默认 stream CLI 拒绝旧版本，再用 query_exact_pair_ref/--exact-pair 证明精确版本字节、receipt 与身份一致。
+- CWP proof library + source-version 合同：192 passed（复跑结果见 integration log）；独立 reviewer /root/audit_cwp_delivery 对代码提交 0a03b5886 判定 PASS。
+- Dashboard adapter suite：22 passed / 2 failed。两项失败是 Dashboard 消费端 import 了 CWP 基线不存在的私有 _ReadBudget（与包外发现相同），不是 CWP public contract 的回归；本仓没有增加私有兼容层，Dashboard owner 应改用公开 ReadBudget port。
+- 该验收将与包分支合并当前 master 后再重跑 proof library、更新 handoff 并推送。此前 delivery branch 的未并线状态以本节为 ROOT 后续集成记录；实际 merge commit 和 push SHA 会在最终 PWF 记录补齐。

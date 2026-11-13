@@ -24,3 +24,11 @@ diff 规模见 handoff.md §1（终态以 `git diff --stat 08dfe8bf1..HEAD` 为�
 - 完整 CI 远端核验：ROOT 在集成后执行。
 - `tests/integration/test_source_processing_handler_wire.py` 基线既有失败（`_versions` 未定义名）：非本卡写集合，列给 ROOT（见 findings「其他发现」）。
 - 提交钩子 Mimosa L3 对基线文件的拦截：以正式封印扫描（3 次，均 137 项与基线一致、本卡 diff 零新增）+ 证据说明放行；未改写命令。
+
+
+## ROOT 集成（2026-11-13）
+
+- 主线基线 master=origin/master=879953c7f70fde8e65133f30413d4f2d820bd351；集成工作树为 .planning/mb11-cwp-integration-20261113，分支 codex/root-mb11-cwp-fix。
+- 根因处理：保持默认来源查询 primary-only，把历史精确读取做成同一 owner 的显式接口；0a03b5886 的先红后绿测试和独审均通过。
+- owner proof library + 历史/版本契约复跑 192 passed。Dashboard adapter 22 passed / 2 failed（仅消费端引用 owner 基线不存在的私有 _ReadBudget）；没有把私有符号恢复到 CWP。
+- 下一步：将当前 master 合入隔离集成树，重跑 owner proof library，然后合并、推送并记最终 SHA。大量既有 untracked PWF/证据保持原样，不在本轮清理。

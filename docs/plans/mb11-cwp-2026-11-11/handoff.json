@@ -17,7 +17,13 @@
     "resolution": "the block window later reopened; the documentation-only correction that was held back was committed by the author as 1d49fb2f529a06d9a17d025bcd8d9d799f5e781c and pushed (fe8d24669..1d49fb2f5); it touches only handoff.md/handoff.json wording, no product code",
     "root_action_required": "none"
   },
-  "diff_at_delivery": {"reference_commit": "be955446f3a591f638f76d73c059845ea0dbaae7", "files": 66, "insertions": 10490, "deletions": 49, "note": "code tip under independent review; handoff/review/handoff.json documentation commits are additional and listed in changed_paths"},
+  "diff_at_delivery": {
+    "reference_commit": "be955446f3a591f638f76d73c059845ea0dbaae7",
+    "files": 66,
+    "insertions": 10490,
+    "deletions": 49,
+    "note": "code tip under independent review; handoff/review/handoff.json documentation commits are additional and listed in changed_paths"
+  },
   "changed_paths": [
     ".github/workflows/ci.yml",
     "docs/plans/mb11-cwp-2026-11-11/findings.md",
@@ -89,19 +95,84 @@
     "tools/pre_push_gate.py"
   ],
   "requirements": [
-    {"id": "CWP-01", "result": "PASS", "red_evidence": "test_transport_replays_ocr_with_protocol_only_source + test_transport_has_no_reader_back_channel_for_configuration red at baseline (from_reader present, no injection)", "green_evidence": "tests/integration/test_transport_normalization_injection.py 4 passed; from_reader removed; deferred_from_project binds path and reads once on demand"},
-    {"id": "CWP-02", "result": "PASS", "red_evidence": "test_raw_selector_uses_injected_work_budget_without_config_io red at baseline (per-document config read)", "green_evidence": "tests/unit/test_work_budget_injection.py 7 passed; document_work_budget_factory threaded through selector/handler/runtime/worker/batch; no 256MiB cap"},
-    {"id": "CWP-03", "result": "PASS", "red_evidence": "test_source_guard_imports_without_catalog_runtime red at baseline (guard imports source_catalog.source_reader)", "green_evidence": "tests/contract/test_module_owner_isolation.py probes green with resolver/service/store/source_reader refused; automation neutral types now import source_contract (object-identical)"},
-    {"id": "CWP-04", "result": "PASS", "red_evidence": "baseline had no wheel build/install acceptance; lxml undeclared in pyproject (requirements-only)", "green_evidence": "tests/contract/test_installed_public_entrypoints.py 6 passed (offline wheel -> exact-path venv -> 11 console + 8 module CLIs from foreign cwd -> package data via importlib.resources -> site-packages identity; bidirectional console equality); lxml declared in catalog/all extras; base SDK refusal probe 7 passed"},
-    {"id": "T-READ", "result": "PASS", "red_evidence": "baseline had no source_stream_cli (dashboard 24 stream tests could not find the owner entry)", "green_evidence": "tests/contract/test_source_stream_cli.py 7 passed over current stream_version owner; dashboard stream suite 21/24 (3 remaining: 1 escalated non-primary decision, 2 consumer-side _ReadBudget imports absent at baseline); locked receipt lazily ordered per review blocker 2"},
-    {"id": "T-CANON", "result": "PASS", "red_evidence": "baseline had no public_canonical_browser / cn_primary_issuer (dashboard cwp.py:213 consumer unmet)", "green_evidence": "101 passed (canonical 51 + calendar 9 + document_browser 20 + port_boundaries 21); 3 typed-port bounded enumerators added, no raw SQL; no second identity store or download budget"},
-    {"id": "T-B33", "result": "PASS", "red_evidence": "baseline lacked readiness/legacy link/recovery modules and pair-precise reads (D00-001 counterexamples fail)", "green_evidence": "118 passed (readiness 86 + link 15 + recovery 8 + exact_history 9); 4 owner-internal pair-precise changes with query_source_reference byte-identical; recovery goes through existing restore_document_facts, preview default"},
-    {"id": "T-B34", "result": "PASS", "red_evidence": "baseline local_reconcile refused every prospectus cover and had no unresolved-ref diagnostics", "green_evidence": "33 passed (diagnostic 18 + prospectus 15); dedup with no fixed 8-item cap; full bounded-frontmatter sweep with no first-page rule; budget/cancel refusals precede diagnostics"},
-    {"id": "T-N4", "result": "NO_CHANGE_PROVEN", "red_evidence": "n/a - historical 2b5bec914 counterexamples replayed against mainline", "green_evidence": "two reproducible commands in findings.md: -k selection 9 passed (quarterly/IR category params) + selection_architecture/select_handler 78 passed; signal-free skip superseded by mainline counter-rule (narrative_finalize.py:237-244 + test_titleless_signal_free_quarterly_remains_reviewable)"},
-    {"id": "T-CONFIG", "result": "PASS", "red_evidence": "8 mistyped LLM values accepted/coerced/TypeError at baseline (bool('false') etc.)", "green_evidence": "8 counterexamples RED->GREEN in tests/unit/test_narrative_config_scope.py; 72 passed (config_scope 33 + model_config 39); no second Config.load_llm; equal-profiles counterexample superseded by deliberate mainline llm-only no-fallback construction"},
-    {"id": "OWNERSHIP", "result": "PASS", "red_evidence": "n/a", "green_evidence": "ownership.md: all active entrypoints (11 console + 8 module CLIs + process entries), 7-responsibility x module table, base/extra applicability table, 35 root modules classified (canonical/compat/retired), dependency rules"},
-    {"id": "COMPATIBILITY", "result": "PASS", "red_evidence": "n/a", "green_evidence": "pyproject diff +2 lines (lxml extras only), console table unchanged; no CLI/schema field removed; public_contract_changes enumerated in this file"},
-    {"id": "INDEPENDENT_REVIEW", "result": "PASS", "red_evidence": "round 1 on 09434acef: NOT-DELIVERABLE (2 blockers + 10 in-scope)", "green_evidence": "round 2 on be955446f: DELIVERABLE - per-finding FIXED with independent reruns; report docs/plans/mb11-cwp-2026-11-11/review.md"}
+    {
+      "id": "CWP-01",
+      "result": "PASS",
+      "red_evidence": "test_transport_replays_ocr_with_protocol_only_source + test_transport_has_no_reader_back_channel_for_configuration red at baseline (from_reader present, no injection)",
+      "green_evidence": "tests/integration/test_transport_normalization_injection.py 4 passed; from_reader removed; deferred_from_project binds path and reads once on demand"
+    },
+    {
+      "id": "CWP-02",
+      "result": "PASS",
+      "red_evidence": "test_raw_selector_uses_injected_work_budget_without_config_io red at baseline (per-document config read)",
+      "green_evidence": "tests/unit/test_work_budget_injection.py 7 passed; document_work_budget_factory threaded through selector/handler/runtime/worker/batch; no 256MiB cap"
+    },
+    {
+      "id": "CWP-03",
+      "result": "PASS",
+      "red_evidence": "test_source_guard_imports_without_catalog_runtime red at baseline (guard imports source_catalog.source_reader)",
+      "green_evidence": "tests/contract/test_module_owner_isolation.py probes green with resolver/service/store/source_reader refused; automation neutral types now import source_contract (object-identical)"
+    },
+    {
+      "id": "CWP-04",
+      "result": "PASS",
+      "red_evidence": "baseline had no wheel build/install acceptance; lxml undeclared in pyproject (requirements-only)",
+      "green_evidence": "tests/contract/test_installed_public_entrypoints.py 6 passed (offline wheel -> exact-path venv -> 11 console + 8 module CLIs from foreign cwd -> package data via importlib.resources -> site-packages identity; bidirectional console equality); lxml declared in catalog/all extras; base SDK refusal probe 7 passed"
+    },
+    {
+      "id": "T-READ",
+      "result": "PASS",
+      "red_evidence": "baseline had no source_stream_cli (dashboard 24 stream tests could not find the owner entry)",
+      "green_evidence": "tests/contract/test_source_stream_cli.py 7 passed over current stream_version owner; dashboard stream suite 21/24 (3 remaining: 1 escalated non-primary decision, 2 consumer-side _ReadBudget imports absent at baseline); locked receipt lazily ordered per review blocker 2"
+    },
+    {
+      "id": "T-CANON",
+      "result": "PASS",
+      "red_evidence": "baseline had no public_canonical_browser / cn_primary_issuer (dashboard cwp.py:213 consumer unmet)",
+      "green_evidence": "101 passed (canonical 51 + calendar 9 + document_browser 20 + port_boundaries 21); 3 typed-port bounded enumerators added, no raw SQL; no second identity store or download budget"
+    },
+    {
+      "id": "T-B33",
+      "result": "PASS",
+      "red_evidence": "baseline lacked readiness/legacy link/recovery modules and pair-precise reads (D00-001 counterexamples fail)",
+      "green_evidence": "118 passed (readiness 86 + link 15 + recovery 8 + exact_history 9); 4 owner-internal pair-precise changes with query_source_reference byte-identical; recovery goes through existing restore_document_facts, preview default"
+    },
+    {
+      "id": "T-B34",
+      "result": "PASS",
+      "red_evidence": "baseline local_reconcile refused every prospectus cover and had no unresolved-ref diagnostics",
+      "green_evidence": "33 passed (diagnostic 18 + prospectus 15); dedup with no fixed 8-item cap; full bounded-frontmatter sweep with no first-page rule; budget/cancel refusals precede diagnostics"
+    },
+    {
+      "id": "T-N4",
+      "result": "NO_CHANGE_PROVEN",
+      "red_evidence": "n/a - historical 2b5bec914 counterexamples replayed against mainline",
+      "green_evidence": "two reproducible commands in findings.md: -k selection 9 passed (quarterly/IR category params) + selection_architecture/select_handler 78 passed; signal-free skip superseded by mainline counter-rule (narrative_finalize.py:237-244 + test_titleless_signal_free_quarterly_remains_reviewable)"
+    },
+    {
+      "id": "T-CONFIG",
+      "result": "PASS",
+      "red_evidence": "8 mistyped LLM values accepted/coerced/TypeError at baseline (bool('false') etc.)",
+      "green_evidence": "8 counterexamples RED->GREEN in tests/unit/test_narrative_config_scope.py; 72 passed (config_scope 33 + model_config 39); no second Config.load_llm; equal-profiles counterexample superseded by deliberate mainline llm-only no-fallback construction"
+    },
+    {
+      "id": "OWNERSHIP",
+      "result": "PASS",
+      "red_evidence": "n/a",
+      "green_evidence": "ownership.md: all active entrypoints (11 console + 8 module CLIs + process entries), 7-responsibility x module table, base/extra applicability table, 35 root modules classified (canonical/compat/retired), dependency rules"
+    },
+    {
+      "id": "COMPATIBILITY",
+      "result": "PASS",
+      "red_evidence": "n/a",
+      "green_evidence": "pyproject diff +2 lines (lxml extras only), console table unchanged; no CLI/schema field removed; public_contract_changes enumerated in this file"
+    },
+    {
+      "id": "INDEPENDENT_REVIEW",
+      "result": "PASS",
+      "red_evidence": "round 1 on 09434acef: NOT-DELIVERABLE (2 blockers + 10 in-scope)",
+      "green_evidence": "round 2 on be955446f: DELIVERABLE - per-finding FIXED with independent reruns; report docs/plans/mb11-cwp-2026-11-11/review.md"
+    }
   ],
   "public_contract_changes": [
     "additive module CLIs: source_stream_cli, public_canonical_browser_cli, public_source_readiness_cli, public_legacy_source_link_cli, public_legacy_source_recovery_cli (invoked via -m; console table unchanged)",
@@ -115,15 +186,87 @@
     "narrative_batch binds work_budget_factory once at entry (no per-document config read)"
   ],
   "test_runs": [
-    {"command": "python -B -m pytest <card proof library 8 files as written in card> -q -p no:cacheprovider", "exit_code": 0, "passed": 138, "failed": 0, "skipped": 0, "seconds": 43.1, "log": "handoff.md section 4"},
-    {"command": "python -B -m pytest <29 files: proof library + all new/port + taxonomy + module contracts> -q -p no:cacheprovider", "exit_code": 1, "passed": 572, "failed": 1, "skipped": 0, "seconds": 366.5, "log": "only failure = test_fc1301_reason_taxonomy (64 baseline emission sites, this diff net 0)"},
-    {"command": "python tools/pre_push_gate.py --fast-contracts-only", "exit_code": 0, "passed": 325, "failed": 0, "skipped": 0, "seconds": 109.5, "log": "includes the 6 newly wired boundary files"},
-    {"command": "python -B -m pytest tests/contract/test_public_source_readiness.py tests/contract/test_public_legacy_source_link.py tests/contract/test_public_legacy_source_recovery.py tests/contract/test_source_reader_exact_history.py -q", "exit_code": 0, "passed": 118, "failed": 0, "skipped": 0, "seconds": 60.1, "log": "86+15+8+9"},
-    {"command": "python -B -m pytest tests/contract/test_installed_public_entrypoints.py -q", "exit_code": 0, "passed": 6, "failed": 0, "skipped": 0, "seconds": 64.2, "log": "fresh wheel build + venv install + bidirectional console equality"},
-    {"command": "python -m mypy src", "exit_code": 0, "passed": 489, "failed": 0, "skipped": 0, "seconds": null, "log": "Success: no issues found in 489 source files"},
-    {"command": "ruff check <exact ci.yml:53 path list>", "exit_code": 0, "passed": 0, "failed": 0, "skipped": 0, "seconds": null, "log": "All checks passed"},
-    {"command": "CWP_OWNER_ROOT=<worktree> python -m pytest tests/adapters/cwp_original_stream/ -q (dashboard repo, read-only)", "exit_code": 1, "passed": 21, "failed": 3, "skipped": 0, "seconds": null, "log": "3 remaining = 1 escalated (non-primary) + 2 consumer-side _ReadBudget imports absent at baseline"},
-    {"command": "full tests/unit and tests/contract at baseline A/B (reviewer-run)", "exit_code": 1, "passed": null, "failed": null, "skipped": null, "seconds": null, "log": "baseline-red inventory in findings.md; not re-run wholesale by author per card (affected sets only)"}
+    {
+      "command": "python -B -m pytest <card proof library 8 files as written in card> -q -p no:cacheprovider",
+      "exit_code": 0,
+      "passed": 138,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 43.1,
+      "log": "handoff.md section 4"
+    },
+    {
+      "command": "python -B -m pytest <29 files: proof library + all new/port + taxonomy + module contracts> -q -p no:cacheprovider",
+      "exit_code": 1,
+      "passed": 572,
+      "failed": 1,
+      "skipped": 0,
+      "seconds": 366.5,
+      "log": "only failure = test_fc1301_reason_taxonomy (64 baseline emission sites, this diff net 0)"
+    },
+    {
+      "command": "python tools/pre_push_gate.py --fast-contracts-only",
+      "exit_code": 0,
+      "passed": 325,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 109.5,
+      "log": "includes the 6 newly wired boundary files"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_public_source_readiness.py tests/contract/test_public_legacy_source_link.py tests/contract/test_public_legacy_source_recovery.py tests/contract/test_source_reader_exact_history.py -q",
+      "exit_code": 0,
+      "passed": 118,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 60.1,
+      "log": "86+15+8+9"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_installed_public_entrypoints.py -q",
+      "exit_code": 0,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 64.2,
+      "log": "fresh wheel build + venv install + bidirectional console equality"
+    },
+    {
+      "command": "python -m mypy src",
+      "exit_code": 0,
+      "passed": 489,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": null,
+      "log": "Success: no issues found in 489 source files"
+    },
+    {
+      "command": "ruff check <exact ci.yml:53 path list>",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": null,
+      "log": "All checks passed"
+    },
+    {
+      "command": "CWP_OWNER_ROOT=<worktree> python -m pytest tests/adapters/cwp_original_stream/ -q (dashboard repo, read-only)",
+      "exit_code": 1,
+      "passed": 21,
+      "failed": 3,
+      "skipped": 0,
+      "seconds": null,
+      "log": "3 remaining = 1 escalated (non-primary) + 2 consumer-side _ReadBudget imports absent at baseline"
+    },
+    {
+      "command": "full tests/unit and tests/contract at baseline A/B (reviewer-run)",
+      "exit_code": 1,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "seconds": null,
+      "log": "baseline-red inventory in findings.md; not re-run wholesale by author per card (affected sets only)"
+    }
   ],
   "independent_review": {
     "reviewer": "agent_eeb4e482-3059-4c96-8796-2b3a7cde80ec (independent general-purpose agent, read-only judgment + test execution)",
@@ -144,5 +287,26 @@
     "baseline-red (reproduced at baseline, outside this card's write scope): tests/unit 6 collection errors (ImportError _admitted) + 3 failures; tests/contract 60 remaining failures (this card fixed 1); test_fc1301 64 residual baseline emission sites; test_source_system_docs",
     "tests/integration/test_source_processing_handler_wire.py baseline failure (_versions undefined, F821/F401)"
   ],
-  "next_root_action": "In an integration worktree, run the card proof library: python -B -m pytest tests/contract/test_layer_public_boundaries.py tests/contract/test_source_reader_public_port_boundaries.py tests/contract/test_processed_document_owner_boundary.py tests/unit/test_document_understanding_core_isolation.py tests/unit/test_source_summary_layer_isolation.py tests/unit/test_document_model_identity.py tests/unit/test_pdf_reading_boundary.py tests/financial_statements/test_layer_ports.py -q -p no:cacheprovider ; then decide query_ref non-primary option A/B (findings.md upgrade 2) and inform the dashboard owner of the locked-receipt order"
+  "next_root_action": "Merge the reviewed CWP integration onto current master, rerun the owner proof library, record the merge/push SHA, then leave Dashboard's two consumer-private imports to the Dashboard owner.",
+  "root_integration": {
+    "date": "2026-11-13",
+    "integration_code_commit": "0a03b588651e3da32fb5fcde988573957f8bd985",
+    "review": "PASS by independent reviewer on exact integration code commit",
+    "cwp_proof_library": {
+      "passed": 192,
+      "failed": 0,
+      "skipped": 0
+    },
+    "dashboard_adapter_suite": {
+      "passed": 22,
+      "failed": 2,
+      "skipped": 0,
+      "failures": [
+        "Two Dashboard consumer tests import historical private _ReadBudget names absent from CWP baseline; not repaired by restoring a private CWP backchannel."
+      ]
+    },
+    "query_semantics": "query_ref remains primary-only; exact history uses query_exact_pair_ref or explicit --exact-pair.",
+    "merge_commit": null,
+    "push_verified": false
+  }
 }
