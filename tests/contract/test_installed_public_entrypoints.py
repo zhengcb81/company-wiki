@@ -99,15 +99,25 @@ def installed(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
 
 
 def test_wheel_exposes_exactly_the_declared_console_scripts(installed):
-    """CWP-04: the wheel's entry-point registry matches pyproject verbatim."""
+    """CWP-04: the wheel's entry-point registry matches pyproject verbatim.
+
+    Both directions: every declared target ships, and the wheel declares no
+    console script that pyproject does not (the name says exactly).
+    """
     import zipfile
 
     with zipfile.ZipFile(installed["wheel"]) as archive:
         entry_points = archive.read("company_wiki-0.1.0.dist-info/entry_points.txt").decode("utf-8")
     declared = _console_scripts()
-    for name, target in declared.items():
-        expected = "%s = %s" % (name, target)
-        assert expected in entry_points, (expected, entry_points)
+    section = entry_points.split("[console_scripts]", 1)[-1]
+    shipped = {}
+    for line in section.splitlines():
+        line = line.strip()
+        if not line or line.startswith("["):
+            continue
+        name, _, target = line.partition("=")
+        shipped[name.strip()] = target.strip()
+    assert shipped == declared, (set(shipped) ^ set(declared), shipped, declared)
     scripts_dir = installed["venv"] / "Scripts"
     for name in declared:
         assert (scripts_dir / (name + ".exe")).is_file(), name

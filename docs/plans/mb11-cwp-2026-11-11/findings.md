@@ -118,7 +118,7 @@ python -B -m pytest tests/unit/test_narrative_selection_architecture.py tests/un
 - 基线既有红（全部在 baseline `08dfe8bf1`/`879953c7f` 复现，与本卡 diff 无关）：
   - `tests/unit`：6 个收集错误（`ImportError: cannot import name '_admitted' from narrative_reading`，旧测试文件引用已被祖先 `e5dd29b1f` 删除的私有名）+ 3 个失败（`test_operating_relation_production` 的 `_financial_only`、2×`test_source_contract_reader_port`）——CI Unit 步骤在基线即红；
   - `tests/contract`：61 个失败（本卡修复其中 `test_source_catalog_module_contracts` 1 个——即独审 blocker 1；其余 60 个基线同失败，其中多数不在 fast gate 内）；
-  - `test_fc1301_reason_taxonomy::test_every_emitted_reason_is_registered`：基线 65 个未注册 code；本卡注册了 14 个（13 个新增发射 + `catalog_unavailable`），现剩 **64 个全为基线代码**（`source_stream_cli.py:205` 的 `catalog_unavailable` 发射点已随注册闭合）；本卡净贡献 0。
+  - `test_fc1301_reason_taxonomy::test_every_emitted_reason_is_registered`：基线 65 个未注册 code；本卡注册了 14 个（13 个新增发射 + `catalog_unavailable`），现剩 **64 个全部是基线既有发射点**（独审 round 2 逐行核对：7 个虽在本卡触碰过的文件内被报告，但发射行全部是基线行；`residual ∩ 本卡新增行字符串字面量` 为空）；本卡净贡献 0。
   - `test_source_system_docs`（README/ARCHITECTURE/OPERATIONS，三文件本卡未动）。
 
 ### `scripts/config.py` 写入披露（finding 8）
