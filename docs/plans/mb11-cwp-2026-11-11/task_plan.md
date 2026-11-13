@@ -9,21 +9,21 @@
 
 | 阶段 | 内容 | 状态 |
 |---|---|---|
-| A0 | 接收历史未并线成果（T-READ / T-CANON / T-B33 / T-B34 / T-N4 / T-CONFIG） | 进行中 |
-| A | 活动入口/模块归属/依赖方向清单 | 未开始 |
-| B | 四项已确认缺口 CWP-01..04 的 RED→GREEN | 未开始 |
-| C | 七责任逐项结果 + 安装验收 + 独审 + 交接 | 未开始 |
+| A0 | 接收历史未并线成果（T-READ / T-CANON / T-B33 / T-B34 / T-N4 / T-CONFIG） | 已关闭（六子项处置与证据见 findings.md A0 表） |
+| A | 活动入口/模块归属/依赖方向清单 | 已完成（ownership.md） |
+| B | 四项已确认缺口 CWP-01..04 的 RED→GREEN | 已完成（四缺口全部真实 RED→GREEN） |
+| C | 七责任逐项结果 + 安装验收 + 独审 + 交接 | 已完成（终套 537 绿；独审两轮+修复；handoff/review.md 见本目录） |
 
 ## A0 接收清单（来自卡 A0 表）
 
 | 子项 | 历史提交 | 处理方式 | 状态 |
 |---|---|---|---|
-| T-READ | `3199adab`（X-C04 compat CLI） | 与现行 `stream_version` / parser sink / 读取预算比对；给消费者迁移证据或撤销 | 未开始 |
-| T-CANON | `62602102a` | canonical browser / CN issuer / calendar 反例按路径移植 | 未开始 |
-| T-B33 | `dc837a21f` | readiness / legacy source link / recovery 反例重放 | 未开始 |
-| T-B34 | `29b562dac` | diagnostic / IPO cover 对照现行 local_reconcile | 未开始 |
-| T-N4 | `2b5bec914` | CN quarterly / IR 独有反例映射现行语义 | 未开始 |
-| T-CONFIG/W04 | 旧 M3 四文件 + W04 scoped-negation | `Config.load(validation_scope='llm')` 已是主线事实；只迁反例 | 未开始 |
+| T-READ | `3199adab`（X-C04 compat CLI） | 与现行 `stream_version` / parser sink / 读取预算比对；给消费者迁移证据或撤销 | 已关闭（stream CLI 7 测试；locked 语义按裁量修正并升级披露） |
+| T-CANON | `62602102a` | canonical browser / CN issuer / calendar 反例按路径移植 | 已关闭（101 项通过） |
+| T-B33 | `dc837a21f` | readiness / legacy source link / recovery 反例重放 | 已关闭（118 项通过；非 primary 可读性冲突升级 ROOT） |
+| T-B34 | `29b562dac` | diagnostic / IPO cover 对照现行 local_reconcile | 已关闭（33 项通过；无 8 条帽、无首页限制） |
+| T-N4 | `2b5bec914` | CN quarterly / IR 独有反例映射现行语义 | 已核销（可复现命令见 findings.md；signal-free 分支记为被主线替代） |
+| T-CONFIG/W04 | 旧 M3 四文件 + W04 scoped-negation | `Config.load(validation_scope='llm')` 已是主线事实；只迁反例 | 已关闭（72 项；8 严格类型反例 RED→GREEN，不加第二 load_llm） |
 
 约束：A0 可读旧工区/refs，不覆盖本卡工区同名整文件；不新增第二身份库/下载预算；旧 256MiB 帽、固定 8 条诊断帽、旧 eligibility 策略不复活。
 

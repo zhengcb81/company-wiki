@@ -186,12 +186,36 @@ def test_stream_cli_refuses_when_no_candidate_is_admitted(lake, tmp_path):
     assert result.returncode == 2
     assert result.stdout == b""
     receipts = _receipts(result.stderr)
-    # The owner staged the admitted candidate (locked), failed its byte
-    # verification, and refused: no ok receipt, transfer incomplete.
-    assert len(receipts) == 2
-    assert receipts[0]["status"] == "locked"
-    assert receipts[1]["status"] == "unavailable"
+    # No byte crossed the pipe, so no lock line precedes the refusal and no
+    # ok ever exists: the consumer's first receipt is the refusal itself.
+    assert len(receipts) == 1
+    assert receipts[0]["status"] == "unavailable"
     assert "ok" not in {receipt["status"] for receipt in receipts}
+
+
+def test_stream_cli_same_size_tamper_locks_then_refuses_without_ok(lake):
+    """Bytes that fail the digest are locked first and never ok'd.
+
+    Same size passes the pre-read admission, so chunks move (locked precedes
+    the first one); the owner's verification then refuses the stream and no
+    ok receipt exists — the transfer stays incomplete by construction.
+    """
+    original = lake["original"].read_bytes()
+    tampered = bytes((byte + 7) % 256 for byte in original)
+    assert len(tampered) == len(original)
+    lake["original"].write_bytes(tampered)
+    result = _run_cli(
+        lake["config"],
+        document_id=lake["identity"]["document_id"],
+        source_id=lake["identity"]["source_id"],
+        sha=lake["identity"]["content_sha256"],
+    )
+    assert result.returncode == 2
+    receipts = _receipts(result.stderr)
+    assert [receipt["status"] for receipt in receipts] == ["locked", "unavailable"]
+    assert "ok" not in {receipt["status"] for receipt in receipts}
+    # The lock names the REQUESTED identity, not the tampered bytes.
+    assert receipts[0]["content_sha256"] == lake["identity"]["content_sha256"]
 
 
 def test_stream_cli_keeps_the_original_bytes_unchanged(lake):

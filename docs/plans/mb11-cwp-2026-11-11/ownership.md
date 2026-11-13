@@ -56,7 +56,7 @@
 | 规范化 | `document_normalization`（29） | canonical | normalize_document/normalize_verified_document/replay_*；OCR 配置只经 `NarrativeNormalization.from_snapshot/from_project/deferred_from_project` | 契约+中立模型+共享预算；子进程 OCR adapter |
 | PDF adapter | `parser_adapters`（6） | canonical | adapt_pdf_pages/adapt_pdf_extract_v3/validate_native_pdf | 契约、canonical_ingest.ParserResult、解析依赖 |
 | DU | `document_understanding`（81） | canonical | understand_units/build_observation/build_dependency_packages/build_summary_input；新进程隔离 probe 保留 | 契约+中立模型+共享预算；不读原件、不调模型 |
-| Catalog/原件 | `source_catalog`（242，含本轮 stream CLI） | canonical | lazy SourceCatalog/SourceVersionReader；query_ref/open_described_version/stream_version/verify_version；financial_statements 三表 CLI；本轮恢复 source_stream_cli | 下层五包+共享基础设施；不依赖 automation |
+| Catalog/原件 | `source_catalog`（251，含本轮 10 个新模块/CLI） | canonical | lazy SourceCatalog/SourceVersionReader；query_ref/open_described_version/stream_version/verify_version；financial_statements 三表 CLI；本轮恢复 source_stream_cli 与 canonical/readiness/link/recovery 公开面 | 下层五包+共享基础设施；不依赖 automation |
 | AUTO/发布 | `automation`（66） | canonical | register_narrative_handlers/run_batch/NarrativeTransportReader/WorkerRuntime；单 AUTO DB 任务状态 owner | 仅经来源/处理/发布契约调用上游；中立类型直连 source_contract（本轮） |
 | legacy writer | `ingest.py`、`legacy_research_ingest.py` | **退休（冻结）** | 冻结历史 writer；`collect_news.py`/`ingest.py` 按 AGENTS 不作新入口；src 内无人导入（已核） | 不得新增调用 |
 | legacy wiki | `wiki_repository.py` | **兼容（只读）** | legacy Wiki 投影，只读兼容 | — |
@@ -78,6 +78,9 @@
 
 ## 4. 与 cwp_architecture.md 的差异更正
 
-- §1 中 "`source_catalog`（241）" 现为 242 文件（stream CLI 回归）。
+- §1 中 "`source_catalog`（241）" 现为 **251** 文件（本轮 +10：stream/canonical/readiness/link/recovery 各 CLI 与模块、cn_primary_issuer）。与本文件 §2 表和头部计数一致（14+7+29+6+81+251+66+35 = 489）。
+- `src/company_wiki/__init__.py`：包根惰性导出面（`__getattr__` 转发），无状态、无 I/O，归 canonical 共享值层；它不持有任何 owner 状态，仅保证 `company_wiki.X` 的公开名字可导入（`test_layer_public_boundaries` 覆盖其导出一致性）。
+- `scripts/config.py`（T-CONFIG 授权写入，见 findings「scripts/config.py 写入披露」）：共享 LLM/搜索/调度配置加载与校验 owner；公开面 `Config.load(validation_scope="all"|"llm")`；依赖 config/models.yaml；本轮仅加严格类型校验与 `reasoning_split` 免强转，loader 结构未变。它不在 `src/company_wiki` 包内（`scripts/` 目录），故不计入 489。
+- `source_catalog/narrative_transport_cli.py`：历史兼容可执行（`python -m` 下把 transport 请求转发到 `automation.narrative_transport_cli`），受控退休边（`test_layer_public_boundaries` 白名单），不是新入口；它对 automation 的引用是已登记的兼容例外，不违反 §2 的"不依赖 automation"（该规则约束 canonical 实现，不约束兼容转发）。
 - §3 CWP-01/02/03/04 已在本轮关闭（见 handoff 各项）。
 - §5 阶段 2（中立模型 owned/borrowed）本轮以别名变异测试关闭；阶段 1（契约 CWP-03）关闭；阶段 3（规范化注入）关闭；阶段 4（预算注入）关闭；阶段 7（安装验收）关闭。阶段 5（DU）无新缺口证据，保留现有新进程隔离；阶段 6（Catalog）单 DB/CAS 未动。

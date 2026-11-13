@@ -14,6 +14,7 @@ from typing import Any
 
 from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
 from company_wiki.file_usage import database_file_sizes
+from company_wiki.resource_budget import document_work_budget_factory
 
 from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
@@ -1101,7 +1102,8 @@ def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog, n
 
 
 def _find_item_reuse_pin(
-    artifacts, reader, payload, manifest, facts, *, catalog, normalization=None, deadline=None,
+    artifacts, reader, payload, manifest, facts, *, catalog, normalization=None,
+    work_budget_factory=None, deadline=None,
 ):
     def reselect():
         from .narrative_select import NarrativeSelectHandler
@@ -1113,6 +1115,7 @@ def _find_item_reuse_pin(
             return NarrativeSelectHandler(
                 reader=reader, selector_version=manifest["execution_versions"]["selector"],
                 normalization=normalization, projection_catalog=catalog,
+                work_budget_factory=work_budget_factory,
             ).select_source(payload, checkpoint=checkpoint)
         except TimeoutError:
             raise
@@ -1273,6 +1276,9 @@ def _run_owned(
             enabled=any(ref.mime_type == PPTX_MIME for ref in request.sources),
             deadline=deadline,
         )
+    # One document-work ceiling for this batch, resolved once here — the
+    # selection algorithm must not read a configuration file per document.
+    work_budget_factory = document_work_budget_factory()
     prepared_sources = _current_sources(
         request,
         reader,
@@ -1337,6 +1343,7 @@ def _run_owned(
             prepared_sources=prepared_sources,
             manifests=manifests,
             normalization=normalization,
+            work_budget_factory=work_budget_factory,
             effective_versions=effective_versions,
         )
 
@@ -1395,6 +1402,7 @@ def _run_prepared(
     prepared_sources,
     manifests,
     normalization,
+    work_budget_factory,
     effective_versions,
 ):
     reader = SourceVersionReader(catalog)
@@ -1440,6 +1448,7 @@ def _run_prepared(
                             facts[document],
                             catalog=catalog,
                             normalization=normalization,
+                            work_budget_factory=work_budget_factory,
                             deadline=deadline,
                         )
                         if not request.refresh or pointer.exists()

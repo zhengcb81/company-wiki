@@ -221,6 +221,23 @@ REASONS: dict[str, str] = {
     "staged_file_size_mismatch": "staged response size differs from its receipt",
     "staged_file_unavailable": "staged response is unavailable",
     "unsupported_transcript_mime_type": "transcript response MIME type is not allowed",
+    # Public diagnostic surfaces added by the module-boundary intake
+    # (canonical browser, source stream, readiness, legacy link/recovery).
+    # Registered additively with the meaning their call sites give them.
+    "canonical_browse_unavailable": "canonical browse could not be produced",
+    "stream_consumer_gone": "the streaming consumer closed the stdout pipe",
+    "ambiguous": "the observation matched more than one candidate",
+    "available": "the requested object resolved to its current version",
+    "conflict": "the observed facts contradict the requested identity",
+    "not_found": "the requested object is not registered",
+    "unavailable": "the owner could not produce a result right now",
+    "legacy_source_current_version_verified": "legacy key resolves to the current verified version",
+    "legacy_source_multiple_versions": "legacy key maps to more than one registered version",
+    "legacy_source_not_registered": "legacy key is not registered by the owner",
+    "legacy_source_size_changed": "registered bytes no longer match the legacy size",
+    "registered_location_budget_exceeded": "the registered-location scan budget was exhausted",
+    "registered_location_deadline": "the registered-location deadline elapsed",
+    "catalog_unavailable": "the catalog database could not be read",
 }
 
 _PATH_PATTERN = re.compile(r"[A-Za-z]:[\\/][^;,\s]+|[\\/][^;,\s]*[\\/][^;,\s]+")
@@ -757,6 +774,21 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "staged_file_size_mismatch": ("artifact",),
     "staged_file_unavailable": ("artifact",),
     "unsupported_transcript_mime_type": ("safety", "artifact"),
+    # Public diagnostic surfaces added by the module-boundary intake.
+    "canonical_browse_unavailable": ("artifact", "consumer"),
+    "stream_consumer_gone": ("consumer",),
+    "ambiguous": ("resolution",),
+    "available": ("resolution",),
+    "conflict": ("identity",),
+    "not_found": ("resolution",),
+    "unavailable": ("artifact", "consumer"),
+    "legacy_source_current_version_verified": ("consumer",),
+    "legacy_source_multiple_versions": ("consumer",),
+    "legacy_source_not_registered": ("consumer",),
+    "legacy_source_size_changed": ("consumer",),
+    "registered_location_budget_exceeded": ("artifact",),
+    "registered_location_deadline": ("artifact",),
+    "catalog_unavailable": ("artifact", "consumer"),
 }
 
 

@@ -144,6 +144,17 @@ FAST_CONTRACT_CASES = (
     # Reused receipts retain one source-owner read for each operation.
     "tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation",
     "tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee",
+    # Module-boundary intake (MB-CWP): the four-gap probes, the stream wire,
+    # the CN issuer proof, the canonical calendar rule, the injected work
+    # budget, and the protocol-only transport replay.  Slow suites (wheel
+    # install, canonical/readiness full contracts) stay in the proof library
+    # and major nodes; see docs/plans/mb11-cwp-2026-11-11/handoff.md.
+    "tests/contract/test_module_owner_isolation.py",
+    "tests/contract/test_source_stream_cli.py",
+    "tests/contract/test_cn_primary_issuer.py",
+    "tests/contract/test_canonical_as_of_calendar.py",
+    "tests/unit/test_work_budget_injection.py",
+    "tests/integration/test_transport_normalization_injection.py",
 )
 
 # CI and explicit full mode already run all Unit tests. Daily pushes still use

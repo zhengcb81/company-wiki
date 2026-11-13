@@ -4,11 +4,14 @@ The regular :mod:`source_reader_cli` reads the whole verified file into memory
 before one stdout write.  This CLI is the large-original companion: stdout
 carries only source chunks, and stderr carries two JSON lines -
 
-1. a ``locked`` receipt after the owner's ``query_ref`` gate pinned the exact
-   catalog identity (SHA-256, byte size, MIME) and the first admitted
-   candidate was staged, but before any byte is written;
+1. a ``locked`` receipt immediately before the first byte of the admitted
+   candidate crosses stdout (and before ``ok`` for an empty original).  It
+   pins the exact catalog identity (SHA-256, byte size, MIME) of what is
+   about to move; a refusal that produced no bytes carries no lock line,
+   because a consumer reads the first receipt as the transfer gate;
 2. a final ``ok`` receipt after the owner verified every streamed byte and
-   this transport re-digested what actually crossed the pipe.
+   this transport re-digested what actually crossed the pipe.  ``ok`` — not
+   ``locked`` — is the complete-stream verification claim.
 
 Every admission, verification, same-SHA fallback, budget and cancellation
 decision belongs to the current ``SourceVersionPort.stream_version`` owner;
@@ -96,13 +99,23 @@ class _StdoutVerifiedStream(SourceChunkSink):
         self._digest = hashlib.sha256()
         self._total = 0
         self._locked = False
+        self._lock_emitted = False
 
     def begin_candidate(self) -> None:
+        # The candidate is admitted here, but the lock receipt is emitted
+        # lazily: a refusal before the first byte (missing file, denied
+        # root, unreadable copy) must carry no lock line, because a
+        # consumer reads the first receipt as the transfer gate.
         if self._locked:
             raise SourceChunkSinkError(
                 "a stdout stream carries one candidate; retry is a refusal"
             )
         self._locked = True
+
+    def _emit_lock(self) -> None:
+        if self._lock_emitted:
+            return
+        self._lock_emitted = True
         _emit_receipt(
             {
                 "schema_version": STREAM_RECEIPT_SCHEMA_VERSION,
@@ -116,6 +129,10 @@ class _StdoutVerifiedStream(SourceChunkSink):
         )
 
     def write_chunk(self, chunk: bytes) -> None:
+        # The receipt precedes the first stdout byte of the admitted
+        # candidate; verification of the complete stream stays with the
+        # owner and is reported by the final ok receipt.
+        self._emit_lock()
         sys.stdout.buffer.write(chunk)
         self._digest.update(chunk)
         self._total += len(chunk)
@@ -129,6 +146,8 @@ class _StdoutVerifiedStream(SourceChunkSink):
         if self._digest.hexdigest() != self._ref.content_sha256 or self._total != self._ref.byte_size:
             raise SourceChunkSinkError("streamed bytes differ from the locked identity")
         assert receipt.byte_size == self._ref.byte_size
+        # An empty original streams no chunk: the lock still precedes ok.
+        self._emit_lock()
 
 
 def _digest_argument(value: str) -> str:

@@ -6,9 +6,10 @@ import json
 from pathlib import Path
 import sqlite3
 import sys
+from typing import Any
+from company_wiki.wire_json import parse_json
 from .config import CatalogConfigError, load_catalog_config
 from .cn_primary_issuer import PrimaryIssuerUnavailable
-from .public_legacy_source_link_cli import _emit, _nonfinite, _pairs
 from .public_legacy_source_recovery import (
     RESPONSE_SCHEMA,
     recover_legacy_source,
@@ -17,6 +18,19 @@ from .public_legacy_source_recovery import (
 from .reader import CatalogReaderUnavailable
 from .service import SourceCatalog
 from .source_reader import SourceReadError
+
+
+def _emit(value: dict[str, Any], stream) -> None:
+    stream.write(
+        json.dumps(
+            value,
+            ensure_ascii=True,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        )
+        + "\n"
+    )
 
 
 def main(argv=None):
@@ -29,9 +43,7 @@ def main(argv=None):
         raw = sys.stdin.buffer.read(32769)
         if len(raw) > 32768:
             raise SourceReadError("blocked", "recovery_request_limit")
-        request = json.loads(
-            raw.decode("utf-8"), object_pairs_hook=_pairs, parse_constant=_nonfinite
-        )
+        request = parse_json(raw.decode("utf-8"))
         validate_request(request)
         catalog = SourceCatalog(load_catalog_config(args.config))
         _emit(
