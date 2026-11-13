@@ -2,6 +2,12 @@
 
 唯一入口为本文件和 CURRENT_STATUS.json。实施顺序见 task_plan.md，交接见 HANDOFF.md，长期循环见 MAINLINE_LOOP_GOAL.md。
 
+## 2026-11-13 最新：五条模块施工卡已并线，组合仍待完成
+
+模块边界子计划中的 MB-CWP、MB-FF、MB-RF、MB-ET、MB-SID 均已独立审查、并入对应主线并推送，最终状态以 module-boundaries-2026-11-11/README.md、其 boundary_matrix.json 和各仓 ROOT PWF 收据为准。原文档中“其他lane未派发/未开始”的描述是11月11日历史快照，已被子计划后续记录替代。
+
+仍未完成的是ROOT-owned StockWiki C38/B03公开合同接收、E01-E09跨仓组合，以及Dashboard adapter两处消费者私有导入兼容问题。组合矩阵仍 NOT_RUN；因此不能关闭整个模块化阶段或恢复后续公司循环。下一步唯一入口见子计划 README 与 task_plan。
+
 ## 2026-11-11 最新：逐模块Git核销与有限接收已完成
 
 当前执行入口仍是 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)，支线/未提交改动的唯一处置表为其 [reconciliation.md](../module-boundaries-2026-11-11/reconciliation.md)。本轮新增授权下已审查8仓390个分支/remote refs和253工区，结合PWF/交接/patch与blob归因，结果已加入原五张卡A0和ROOT接收清单。

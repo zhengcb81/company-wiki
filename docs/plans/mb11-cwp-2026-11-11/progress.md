@@ -32,3 +32,10 @@ diff 规模见 handoff.md §1（终态以 `git diff --stat 08dfe8bf1..HEAD` 为�
 - 根因处理：保持默认来源查询 primary-only，把历史精确读取做成同一 owner 的显式接口；0a03b5886 的先红后绿测试和独审均通过。
 - 合入当前 master 后卡证明库 138 passed；历史 reader + stream 合同 16 passed；readiness 历史身份合同 4 passed。日志路径见 handoff.md §8。Dashboard adapter 22 passed / 2 failed（仅消费端引用 owner 基线不存在的私有 _ReadBudget）；没有把私有符号恢复到 CWP。
 - 当前 master 已合入隔离集成树（37be14647），三组关键测试复跑通过；独立最终复核后快进 master、推送远端并清理本轮确切临时工作树。大量既有 untracked PWF/证据保持原样。
+
+
+## ROOT 推送收尾（2026-11-13）
+
+- master/origin/master 代码并线 ref 核对一致于 3ee8d0e858448d1114bbb83c407e566b6851ce26；相关提交已推送。
+- CWP 回归 138 + 16 + 4 通过，精确修复提交经独立审查 PASS；Dashboard adapter 仍有 2 个消费端私有导入基线问题，已明确归为后续组合工作。
+- handoff.json / handoff.md 同步为 MB-CWP 已收尾；本卡没有待 ROOT 产品动作。

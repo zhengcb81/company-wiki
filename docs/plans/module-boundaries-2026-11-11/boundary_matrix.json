@@ -1,7 +1,7 @@
 {
   "schema_version": "module-boundary-plan/1",
   "date": "2026-11-11",
-  "status": "M0_ACCEPTED_A1_RECONCILED_M1_IN_PROGRESS_RF_B1_MERGED_M2_PENDING",
+  "status": "M0_ACCEPTED_A1_RECONCILED_M1_OWNER_CARDS_MERGED_M2_PENDING",
   "canonical_entry": "README.md",
   "parent_plan": "../du11-source-closure-2026-10-18",
   "scope": "Current production/public runtime boundaries; excludes research quality and general document-recall improvements",
@@ -23,7 +23,7 @@
       "worktree": "C:/Users/郑曾波/Projects/mb11-cwp",
       "branch": "codex/mb11-cwp",
       "card": "harness_lanes/MB-CWP.md",
-      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "status": "ROOT_INTEGRATED_AND_PUSHED",
       "requirements": [
         "CWP-01",
         "CWP-02",
@@ -31,7 +31,9 @@
         "CWP-04",
         "CWP-05"
       ],
-      "historical_intake": "See A0 in harness_lanes/MB-CWP.md"
+      "historical_intake": "See A0 in harness_lanes/MB-CWP.md",
+      "root_integration_date": "2026-11-13",
+      "delivery_test_and_review": "Owner proof 138 passed; exact history/stream 16 passed; readiness history 4 passed; root fix independently reviewed PASS. Dashboard adapter 22 passed / 2 baseline private-import failures."
     },
     {
       "id": "MB-FF",
@@ -42,12 +44,14 @@
       "worktree": "C:/Users/郑曾波/Projects/mb11-ff",
       "branch": "codex/mb11-ff",
       "card": "harness_lanes/MB-FF.md",
-      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "status": "ROOT_INTEGRATED_AND_PUSHED",
       "requirements": [
         "FF-01",
         "FF-02"
       ],
-      "historical_intake": "See A0 in harness_lanes/MB-FF.md"
+      "historical_intake": "See A0 in harness_lanes/MB-FF.md",
+      "root_integration_date": "2026-11-13",
+      "delivery_test_and_review": "Public operation isolation 26 passed on main; package CI 1012 passed / 2 skipped; independent review PASS."
     },
     {
       "id": "MB-RF",
@@ -59,14 +63,16 @@
       "worktree": "C:/Users/郑曾波/Projects/mb11-rf",
       "branch": "codex/mb11-rf",
       "card": "harness_lanes/MB-RF.md",
-      "status": "ROOT_B1_SAFE_SLICE_MERGED_B2_OPEN",
+      "status": "ROOT_INTEGRATED_AND_PUSHED",
       "worktree_policy": "Continue existing codex/mb11-rf worktree at current main tip; only if unavailable, create a unique worktree from current origin/main and record its tip.",
       "requirements": [
         "RF-01",
         "RF-02",
         "RF-03"
       ],
-      "historical_intake": "See A0 in harness_lanes/MB-RF.md"
+      "historical_intake": "See A0 in harness_lanes/MB-RF.md",
+      "root_integration_date": "2026-11-13",
+      "delivery_test_and_review": "Full card 561 passed / 2 baseline failures / 3 skipped / 31 subtests; independent review PASS; two failures reproduced on package baseline."
     },
     {
       "id": "MB-ET",
@@ -77,12 +83,14 @@
       "worktree": "C:/Users/郑曾波/Projects/mb11-et",
       "branch": "codex/mb11-et",
       "card": "harness_lanes/MB-ET.md",
-      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "status": "ROOT_INTEGRATED_AND_PUSHED",
       "requirements": [
         "ET-01",
         "ET-02"
       ],
-      "historical_intake": "See A0 in harness_lanes/MB-ET.md"
+      "historical_intake": "See A0 in harness_lanes/MB-ET.md",
+      "root_integration_date": "2026-11-13",
+      "delivery_test_and_review": "Affected mainline suite 174 passed / 0 failed / 0 skipped; independent review PASS; package suite has one pre-existing baseline receipt failure."
     },
     {
       "id": "MB-SID",
@@ -93,12 +101,14 @@
       "worktree": "C:/Users/郑曾波/Projects/mb11-sid",
       "branch": "codex/mb11-sid",
       "card": "harness_lanes/MB-SID.md",
-      "status": "READY_TO_DISPATCH_NOT_STARTED",
+      "status": "ROOT_INTEGRATED_AND_PUSHED",
       "requirements": [
         "SID-01",
         "SID-02"
       ],
-      "historical_intake": "See A0 in harness_lanes/MB-SID.md"
+      "historical_intake": "See A0 in harness_lanes/MB-SID.md",
+      "root_integration_date": "2026-11-13",
+      "delivery_test_and_review": "Integrated unit suite 340 passed / 0 failed / 0 skipped; independent review PASS."
     }
   ],
   "requirements": [
@@ -320,7 +330,7 @@
     "report": "review/plan_independent_review.md",
     "open_findings": []
   },
-  "next_action": "Continue MB-RF B2 public scope/subject tests across accounting bases, fiscal calendars and segments, or start MB-CWP/MB-FF/MB-ET/MB-SID independently. ROOT owns StockWiki C38/B03 and final public-interface composition; business loop remains paused.",
+  "next_action": "ROOT: receive the StockWiki C38/B03 public contract deltas, then run the bounded E01-E09 composition through owner public interfaces; include the two Dashboard adapter private-import compatibility failures without restoring CWP private backchannels.",
   "reconciliation": {
     "status": "PARTIAL_RF_SAFE_INTAKE_MERGED_WITH_REMAINING_ASSIGNED",
     "entry": "reconciliation.md",
@@ -375,5 +385,46 @@
       "scope": "existing public consumer protocol only; no internal change",
       "status": "READ_ONLY_EXTERNAL"
     }
-  ]
+  ],
+  "root_package_integration": {
+    "date": "2026-11-13",
+    "status": "FIVE_OWNER_CARDS_REVIEWED_MERGED_AND_PUSHED",
+    "lanes": {
+      "company-wiki": {
+        "branch": "master",
+        "code_ref": "3ee8d0e858448d1114bbb83c407e566b6851ce26",
+        "remote_ref_verified": true
+      },
+      "filing-fetch": {
+        "branch": "main",
+        "code_ref": "41acdc8ea991d0d0b60037ef253c5b16c9492195",
+        "remote_receipt_head": "e6088f29e40a6d96404e44cfe6d4f1a4bb6ca58a",
+        "remote_ref_verified": true,
+        "receipt_head": "e6088f29e40a6d96404e44cfe6d4f1a4bb6ca58a"
+      },
+      "revenue-forecast": {
+        "branch": "main",
+        "code_ref": "6b045b76f2ae4e96184c6c1521b8e1f58ee5441b",
+        "remote_ref_verified": true,
+        "receipt_head": "956b98cb"
+      },
+      "earnings-transcripts": {
+        "branch": "main",
+        "receipt_head": "571b021",
+        "remote_ref_verified": true
+      },
+      "StockInfoDLSimple": {
+        "branch": "v2-clean-rewrite",
+        "code_ref": "53b93585a661ae29d57b6a60a8dcc3f4371a9009",
+        "receipt_head": "6742edac4f3eea80880f7ff4db2c82da17e7b4d5",
+        "remote_ref_verified": true
+      }
+    },
+    "remaining": [
+      "ROOT-owned StockWiki C38/B03 public-contract intake",
+      "E01-E09 public-interface composition",
+      "resolve two Dashboard adapter tests that import private CWP names at consumer side"
+    ],
+    "note": "These lane deliveries are closed; this does not mean the full module-boundary plan or source-system composition is complete."
+  }
 }

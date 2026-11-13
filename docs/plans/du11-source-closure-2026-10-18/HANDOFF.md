@@ -1,8 +1,8 @@
 # 当前交接
 
-**当前执行入口：[module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)**，父计划只归总。M0与A1已完成；M1部分进行中：ROOT已把RF B37 compare及部署/来源回归安全子范围受测、独审并推送至RF main；scope/subject/verified-compare仍待B2重做。MB-CWP、MB-FF、MB-ET、MB-SID尚未派发，M2未完成，不把有限接收描述为全局模块解耦完成。最新实际接收/余项见 [reconciliation.md](../module-boundaries-2026-11-11/reconciliation.md)。
+**当前执行入口：module-boundaries-2026-11-11**，父计划只归总。M0/A1已完成；MB-CWP、MB-FF、MB-RF、MB-ET、MB-SID五条owner施工卡均已独立审查、并入对应主线并推送。整体模块计划尚未完成：ROOT的StockWiki C38/B03公开合同接收、Dashboard两项消费者私有导入兼容，以及E01-E09组合验收仍待执行。准确状态见CURRENT_STATUS.md/json和子计划的boundary_matrix.json；E01-E09当前仍NOT_RUN。
 
-下一步继续MB-RF B2：先用公开合同覆盖跨会计准则、财年和多分部，再接回scope/subject/verified-compare；也可独立启动MB-CWP、MB-FF、MB-ET或MB-SID。ROOT统管StockWiki C38/B03接收、Dashboard组合和最终并线；Audit只验证，Dashboard接续原owner。SID11项WIP不能原样接收，RF/CWP旧release不能全树覆盖新main；各卡已列出隔离测试和并线步骤。原R4/真实摘要/缓存/RF循环保留，在模块边界CLOSED后恢复。
+下一步由ROOT在StockWiki owner边界内接收C38/B03公开合同差额，再经各模块公开接口运行E01-E09；同时修复Dashboard adapter引用CWP历史私有符号的问题，不恢复CWP私有后门。五条owner卡已合并推送；SID及RF工作区中的用户业务资料按PWF保留。原R4/真实摘要/缓存/RF循环仍等待模块组合节点完成后恢复。
 
 ## 已发布的前一子节点（历史快照）
 

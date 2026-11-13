@@ -29,9 +29,9 @@
 - [x] 方案独审与修复、父计划状态对齐及文档JSON/链接/工区互斥检查完成；本轮以正常Git文档提交交付，实际发布版本看Git历史。
 
 ### Phase B / M1 — 五个owner并行TDD与模块交付
-**Status:** in_progress（ROOT已完成并线MB-RF的B1安全子范围；RF B2和其他四条lane仍待实施）
+**Status:** in_progress（MB-CWP/FF/RF/ET/SID五条owner卡已审查、并线并推送；StockWiki ROOT合同接收仍未完成）
 
-MB-RF当前主线为 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`：compare实现 `e060a8607` 已在先前提交进入main；部署/来源回归测试 `058be4fd6` 已通过171 passed、1 skipped及独立审查并进入main；最新PWF记录也已推送。B37剩余scope/subject/verified-compare不在主线，候选跨私有接口及固定IFRS/财年/单分部假设，继续按卡内B2重做。MB-CWP、MB-FF、MB-ET、MB-SID目前仍未派发。
+五条owner卡均已由ROOT接收并并入各自目标分支，测试/独审收据见 progress.md 与 boundary_matrix.json。MB-RF B2已通过本卡并入RF main；并线前整卡两项失败均在旧基线复现，未放宽断言。MB-CWP/FF/ET/SID也均已并线并推送。剩余工作是ROOT-owned StockWiki公开合同接收及E01-E09组合，不再是未派发owner卡。
 
 任务卡见 dispatch.md。保持现有跨仓wire，作者各自A→B→C连续实施；不是每一步等ROOT批准。
 
@@ -58,7 +58,7 @@ ROOT在此期间准备组合清单/样本，在自己的StockWiki隔离工区按
 
 ## Next Step
 
-下一步继续MB-RF B2：先建立跨会计准则、财年和多分部的公开scope/subject合同测试，再用RF owner公开reader实现并接回CLI，保留 `import-rf-job`。其余四张卡可独立启动，A0差额已写在各卡。ROOT继续按reconciliation.md负责StockWiki接收、Dashboard组合和各仓最终并线；原业务循环仍暂停。
+下一步由ROOT在StockWiki owner边界内接收C38/B03公开合同差额，然后按integration矩阵运行E01-E09组合；一并处理Dashboard adapter对CWP私有符号的两项旧引用。五条owner卡已合并推送。业务循环仍暂停，待该模块组合阶段结束后再按父计划恢复。
 
 ## Decisions
 
@@ -75,3 +75,16 @@ ROOT在此期间准备组合清单/样本，在自己的StockWiki隔离工区按
 | 外仓Git普通沙箱status报work-tree/Permission denied | ROOT宿主只读重查成功，记录真实WIP；不是源码缺陷 |
 | installed PWF resolver按旧PWF_PLAN_ROOT=docs/plans静默无结果 | 当前脚本变量语义不同，改用显式-PlanRoot与PLAN_ID，已正确解析本目录；不改技能/不增加许可 |
 | CodeGraph部分当前文件不在索引 | 记录覆盖限制，用文件列表与已定位文件读补齐；未运行init/重建索引 |
+
+
+## 2026-11-13 — 五条 owner 卡并线收尾
+
+- [x] MB-CWP、MB-FF、MB-RF、MB-ET、MB-SID 均已独立审查并进入各自主线。
+- [x] 五条线的最终集成测试、异常基线和独审状态已回写 boundary_matrix.json。
+- [x] 本地/远端引用均核对；各仓 ROOT PWF 收据已推送。
+- [ ] ROOT 接收 StockWiki C38/B03 公开合同差额。
+- [ ] 按公开接口完成 E01-E09 组合，处理 Dashboard adapter 的两个 private-import 失败。
+
+## Next Step
+
+ROOT 在 StockWiki owner 工区接收 C38/B03公开合同差额；然后完成E01-E09组合验收。

@@ -291,7 +291,7 @@
     "baseline-red (reproduced at baseline, outside this card's write scope): tests/unit 6 collection errors (ImportError _admitted) + 3 failures; tests/contract 60 remaining failures (this card fixed 1); test_fc1301 64 residual baseline emission sites; test_source_system_docs",
     "tests/integration/test_source_processing_handler_wire.py baseline failure (_versions undefined, F821/F401)"
   ],
-  "next_root_action": "Final receipt is aligned; fast-forward master to integration commit 37be14647 and push origin/master, then record the verified SHA.",
+  "next_root_action": "none for MB-CWP; parent-plan E01-E09 composition and Dashboard consumer compatibility remain ROOT/consumer work",
   "root_integration": {
     "date": "2026-11-13",
     "integration_code_commit": "0a03b588651e3da32fb5fcde988573957f8bd985",
@@ -313,7 +313,7 @@
     },
     "query_semantics": "query_ref remains primary-only; exact history uses query_exact_pair_ref or explicit --exact-pair.",
     "merge_commit": "37be14647",
-    "push_verified": false,
+    "push_verified": true,
     "integration_commit": "37be14647",
     "integration_parent_main": "879953c7f70fde8e65133f30413d4f2d820bd351",
     "exact_history_and_stream": {
@@ -329,6 +329,8 @@
       "skipped": 0,
       "seconds": 5.03,
       "log": "docs/plans/mb11-cwp-2026-11-11/root_readiness_history_20261113.log"
-    }
+    },
+    "remote_ref_verified": "3ee8d0e858448d1114bbb83c407e566b6851ce26",
+    "root_receipt_commit": "recorded by the following PWF closeout commit"
   }
 }

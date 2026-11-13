@@ -134,3 +134,11 @@
 - CWP 卡证明库在合入当前 master 后复跑 138 passed / 0 failed（28.81s）；历史 reader + stream 合同复跑 16 passed（17.76s），readiness 的 4 条历史身份合同复跑 4 passed（5.03s）；日志分别见 root_integration_proof_20261113.log、root_exact_history_stream_20261113.log、root_readiness_history_20261113.log。独立 reviewer /root/audit_cwp_delivery 对代码提交 0a03b5886 判定 PASS。
 - Dashboard adapter suite：22 passed / 2 failed。两项失败是 Dashboard 消费端 import 了 CWP 基线不存在的私有 _ReadBudget（与包外发现相同），不是 CWP public contract 的回归；本仓没有增加私有兼容层，Dashboard owner 应改用公开 ReadBudget port。
 - 包分支与当前 master 已在隔离集成树无冲突合并，合并提交为 37be14647（master 当时为 879953c7f）；owner proof、历史/stream 和 readiness 关键合同均在合并后通过。主线快进与远端推送待最终独审确认后执行。
+
+
+## 10. ROOT 主线推送收尾（2026-11-13）
+
+- 主线 master 已包含集成提交 3ee8d0e858448d1114bbb83c407e566b6851ce26；该提交在 origin/master 上的远端跟踪 ref 已核实一致，代码与此前 PWF 收据均已推送。
+- 三组 CWP owner 回归：证明库 138 passed，exact history/stream 16 passed，readiness history 4 passed；独立审查对最终修复提交 0a03b588651e3da32fb5fcde988573957f8bd985 判 PASS。
+- Dashboard adapter 套件 22 passed / 2 failed；两项消费端测试导入其历史私有 _ReadBudget 名称，而该名称在 CWP 基线上不存在。没有为通过消费端测试恢复私有跨模块后门。此项继续列入 ROOT 组合 / Dashboard 兼容工作。
+- 更新后的 PWF 收据随主线提交推送。MB-CWP 卡本身已完成；总计划 E01-E09 组合仍未运行。

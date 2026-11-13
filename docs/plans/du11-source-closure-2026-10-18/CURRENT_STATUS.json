@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "module_boundary_m1_in_progress_rf_safe_slice_merged_other_lanes_not_dispatched",
+  "execution_mode": "module_boundary_five_owner_cards_merged_root_stockwiki_and_e01_e09_pending",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -1195,5 +1195,22 @@
       "ROOT StockWiki C38/B03",
       "Dashboard owner composition"
     ]
+  },
+  "module_boundary_current_state": {
+    "as_of": "2026-11-13",
+    "owner_cards": {
+      "company-wiki": "integrated_and_pushed",
+      "filing-fetch": "integrated_and_pushed",
+      "revenue-forecast": "integrated_and_pushed",
+      "earnings-transcripts": "integrated_and_pushed",
+      "StockInfoDLSimple": "integrated_and_pushed"
+    },
+    "remaining": [
+      "ROOT StockWiki C38/B03 public contract intake",
+      "E01-E09 public-interface composition",
+      "two Dashboard adapter private-import compatibility failures"
+    ],
+    "composition_status": "NOT_RUN",
+    "business_company_loop": "paused"
   }
 }

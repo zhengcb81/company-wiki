@@ -1,6 +1,6 @@
 # 模块化与解耦：一次有明确出口的收口
 
-当前阶段：**M0规划与A1核销完成；M1部分进行中。ROOT已把RF B37 compare和部署/来源回归安全切片并入RF main；剩余scope/subject/verified-compare待按公开接口重做。MB-CWP、MB-FF、MB-ET、MB-SID四卡仍待派发，M2组合验收未开始。** 当前入口是本目录，父计划 `../du11-source-closure-2026-10-18/CURRENT_STATUS.md` 只归总。原业务循环仍暂停。详见 [reconciliation.md](reconciliation.md)，它是支线/未提交材料的唯一处置表。
+当前阶段：**M0规划与A1核销完成；MB-CWP/FF/RF/ET/SID五条owner施工卡均已独立审查、并入各自主线并推送。整体模块计划仍在M1/M2收尾：ROOT负责StockWiki C38/B03公开合同接收，随后执行E01-E09组合；Dashboard adapter还有2项消费者私有导入问题待处理。** 当前入口是本目录，父计划 docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md 只归总。原业务循环仍暂停。详见 reconciliation.md，它是支线/未提交材料的唯一处置表。
 
 先读 [task_plan.md](task_plan.md)，再读 [architecture.md](architecture.md)、[interfaces.md](interfaces.md)、[acceptance.md](acceptance.md)。并行安排和卡片见 [dispatch.md](dispatch.md)，交接格式见 [handoff_contract.md](handoff_contract.md)，机器对照见 [boundary_matrix.json](boundary_matrix.json)。
 

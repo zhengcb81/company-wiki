@@ -41,3 +41,14 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - 合并后B37相关suite为171 passed、1 skipped；部署用例38 passed；两次push smoke均12 passed、Ruff通过。最终PWF提交 `6341759b9` 已同步到 `codex/mb11-rf` 与 `origin/main`。
 - 不合入B37 scope候选：发现私有跨模块调用、固定IFRS/12-31/单分部和无配置依据的结果上限，并会移除既有`import-rf-job`。已将根因、公开DTO及跨财年/多分部TDD范围记入MB-RF卡；不把未通过的scope测试标绿。
 - 四张其他MB卡没有启动，ROOT仍负责StockWiki公开合同差额与最终跨模块组合；原业务主线goal保持paused。
+
+
+## 2026-11-13 — 五条 owner 施工卡已并线
+
+- MB-CWP：master 代码并线 ref 3ee8d0e；owner 138、exact history/stream 16、readiness history 4 均通过；root 修复 0a03b588 独审 PASS。Dashboard adapter 22/24，2项为消费端引用不存在于 CWP baseline 的私有名称。
+- MB-FF：main 代码并线 ref 41acdc8；真实主线隔离套件 26 passed；包级 CI 1012 passed/2 skipped；独审 PASS。
+- MB-RF：main 代码并线 ref 6b045b7；完整卡 561 passed、2 failed、3 skipped、31 subtests。两失败已在基线 6341759 复现，分别为历史 subprocess allowlist 和 B34 identity fixture；独审 PASS，不放宽断言。
+- MB-ET：main 已包含交付；主线受影响测试 174 passed。包级唯一失败在 baseline 003c1c0 可复现；独审 PASS。
+- MB-SID：v2-clean-rewrite 代码并线 ref 53b9358；集成单测 340 passed；独审 PASS。后续 PWF 收尾 commit 为 6742eda。
+- 五条线的测试日志、主线ref和WIP处置均已进入各自PWF；原始业务/用户资料仍按各仓清单保留。
+- 剩余不是交付包：StockWiki C38/B03 ROOT intake、E01-E09 public-interface composition，以及两个 Dashboard adapter 的 private-import compatibility failures。完整组合仍 NOT_RUN，不冒称模块阶段全结束。
