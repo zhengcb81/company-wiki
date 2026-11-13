@@ -39,3 +39,9 @@ diff 规模见 handoff.md §1（终态以 `git diff --stat 08dfe8bf1..HEAD` 为�
 - master/origin/master 代码并线 ref 核对一致于 3ee8d0e858448d1114bbb83c407e566b6851ce26；相关提交已推送。
 - CWP 回归 138 + 16 + 4 通过，精确修复提交经独立审查 PASS；Dashboard adapter 仍有 2 个消费端私有导入基线问题，已明确归为后续组合工作。
 - handoff.json / handoff.md 同步为 MB-CWP 已收尾；本卡没有待 ROOT 产品动作。
+
+
+## ROOT worktree cleanup（2026-11-13）
+
+- MB-CWP delivery/integration 两个 clean worktree 已回收；Git 分支保留。
+- 其他未跟踪历史计划/测试证据均未动。

@@ -52,3 +52,11 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - MB-SID：v2-clean-rewrite 代码并线 ref 53b9358；集成单测 340 passed；独审 PASS。后续 PWF 收尾 commit 为 6742eda。
 - 五条线的测试日志、主线ref和WIP处置均已进入各自PWF；原始业务/用户资料仍按各仓清单保留。
 - 剩余不是交付包：StockWiki C38/B03 ROOT intake、E01-E09 public-interface composition，以及两个 Dashboard adapter 的 private-import compatibility failures。完整组合仍 NOT_RUN，不冒称模块阶段全结束。
+
+
+## 2026-11-13 — 专用工区与 scratch 回收
+
+- 已回收五个 MB delivery worktree 与三个 ROOT integration worktree。移除前逐一核实 clean；本轮仅回收这些精确命名工区，分支引用保留。
+- FF handoff 指定的 mb11-ff-scratch 已核对仅含 pytest/review/runtime 测试产物后删除，共 5,030 个文件 / 18,119,347 字节；仓内最终日志与 manifest 保留。
+- 原主仓数据、用户输入名单、业务状态、密钥文件、工具记忆、其他历史 PWF/未跟踪证据均保留。
+- 当前 MB lane 文档的 worktree 字段表示历史交付路径；最新回收状态见 boundary_matrix.json。

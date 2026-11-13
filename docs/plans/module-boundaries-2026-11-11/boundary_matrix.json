@@ -33,7 +33,8 @@
       ],
       "historical_intake": "See A0 in harness_lanes/MB-CWP.md",
       "root_integration_date": "2026-11-13",
-      "delivery_test_and_review": "Owner proof 138 passed; exact history/stream 16 passed; readiness history 4 passed; root fix independently reviewed PASS. Dashboard adapter 22 passed / 2 baseline private-import failures."
+      "delivery_test_and_review": "Owner proof 138 passed; exact history/stream 16 passed; readiness history 4 passed; root fix independently reviewed PASS. Dashboard adapter 22 passed / 2 baseline private-import failures.",
+      "delivery_worktree_removed": true
     },
     {
       "id": "MB-FF",
@@ -51,7 +52,8 @@
       ],
       "historical_intake": "See A0 in harness_lanes/MB-FF.md",
       "root_integration_date": "2026-11-13",
-      "delivery_test_and_review": "Public operation isolation 26 passed on main; package CI 1012 passed / 2 skipped; independent review PASS."
+      "delivery_test_and_review": "Public operation isolation 26 passed on main; package CI 1012 passed / 2 skipped; independent review PASS.",
+      "delivery_worktree_removed": true
     },
     {
       "id": "MB-RF",
@@ -72,7 +74,8 @@
       ],
       "historical_intake": "See A0 in harness_lanes/MB-RF.md",
       "root_integration_date": "2026-11-13",
-      "delivery_test_and_review": "Full card 561 passed / 2 baseline failures / 3 skipped / 31 subtests; independent review PASS; two failures reproduced on package baseline."
+      "delivery_test_and_review": "Full card 561 passed / 2 baseline failures / 3 skipped / 31 subtests; independent review PASS; two failures reproduced on package baseline.",
+      "delivery_worktree_removed": true
     },
     {
       "id": "MB-ET",
@@ -90,7 +93,8 @@
       ],
       "historical_intake": "See A0 in harness_lanes/MB-ET.md",
       "root_integration_date": "2026-11-13",
-      "delivery_test_and_review": "Affected mainline suite 174 passed / 0 failed / 0 skipped; independent review PASS; package suite has one pre-existing baseline receipt failure."
+      "delivery_test_and_review": "Affected mainline suite 174 passed / 0 failed / 0 skipped; independent review PASS; package suite has one pre-existing baseline receipt failure.",
+      "delivery_worktree_removed": true
     },
     {
       "id": "MB-SID",
@@ -108,7 +112,8 @@
       ],
       "historical_intake": "See A0 in harness_lanes/MB-SID.md",
       "root_integration_date": "2026-11-13",
-      "delivery_test_and_review": "Integrated unit suite 340 passed / 0 failed / 0 skipped; independent review PASS."
+      "delivery_test_and_review": "Integrated unit suite 340 passed / 0 failed / 0 skipped; independent review PASS.",
+      "delivery_worktree_removed": true
     }
   ],
   "requirements": [
@@ -425,6 +430,25 @@
       "E01-E09 public-interface composition",
       "resolve two Dashboard adapter tests that import private CWP names at consumer side"
     ],
-    "note": "These lane deliveries are closed; this does not mean the full module-boundary plan or source-system composition is complete."
+    "note": "These lane deliveries are closed; this does not mean the full module-boundary plan or source-system composition is complete.",
+    "delivery_worktrees_removed": [
+      "C:/Users/郑曾波/Projects/mb11-cwp",
+      "C:/Users/郑曾波/Projects/mb11-ff",
+      "C:/Users/郑曾波/Projects/mb11-rf",
+      "C:/Users/郑曾波/Projects/mb11-et",
+      "C:/Users/郑曾波/Projects/mb11-sid"
+    ],
+    "integration_worktrees_removed": [
+      "C:/Users/郑曾波/Projects/company-wiki/.planning/mb11-cwp-integration-20261113",
+      "C:/Users/郑曾波/Projects/revenue-forecast-mb11-integration-20261113",
+      "C:/Users/郑曾波/Projects/StockInfoDLSimple-mb11-integration-20261113"
+    ],
+    "worktree_cleanup_verified": true,
+    "scratch_cleanup": {
+      "path": "C:/Users/郑曾波/Projects/mb11-ff-scratch",
+      "files": 5030,
+      "bytes": 18119347,
+      "status": "removed after evidence confirmed it contained only reproducible pytest/review/runtime test artifacts"
+    }
   }
 }

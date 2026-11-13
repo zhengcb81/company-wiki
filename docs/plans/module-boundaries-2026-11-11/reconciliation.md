@@ -76,3 +76,8 @@ before快照总计390个分支/remote refs、253个登记工区，另7个RF tag�
 
 
 CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B34回归加入既有显式CI清单（原日常smoke不变）；CI清单+B34共38 passed/1.25s。首轮把scratch放在CWP内导致pytest根/JUnit前缀污染，仓外新Temp复验通过，未放宽断言。MB-FF基线采用该最终提交。完整远端CI尚未核验。
+
+
+## 2026-11-13 临时工区清理补记
+
+五条已并线 MB delivery worktree 和三个 ROOT 集成 worktree 均已确认 clean 后回收，远端/本地交付分支保留。FF 可重建 scratch 另回收 5,030 个文件、18,119,347 字节。未清理其他公司工作区的未跟踪计划、业务输出、工具状态、原件、密钥、用户输入名单或审计证据。

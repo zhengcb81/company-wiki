@@ -59,3 +59,10 @@
 ## Next Step
 
 无；MB-CWP owner 卡已完成。整体 E01-E09 仍由 ROOT 后续执行。
+
+
+## ROOT worktree cleanup（2026-11-13）
+
+- [x] 回收已验收的 MB-CWP delivery/integration worktree。
+- [x] 保留远端分支及原仓其他证据。
+- [x] 本卡无下一步。

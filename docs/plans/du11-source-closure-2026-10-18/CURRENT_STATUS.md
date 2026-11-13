@@ -6,7 +6,7 @@
 
 模块边界子计划中的 MB-CWP、MB-FF、MB-RF、MB-ET、MB-SID 均已独立审查、并入对应主线并推送，最终状态以 module-boundaries-2026-11-11/README.md、其 boundary_matrix.json 和各仓 ROOT PWF 收据为准。原文档中“其他lane未派发/未开始”的描述是11月11日历史快照，已被子计划后续记录替代。
 
-仍未完成的是ROOT-owned StockWiki C38/B03公开合同接收、E01-E09跨仓组合，以及Dashboard adapter两处消费者私有导入兼容问题。组合矩阵仍 NOT_RUN；因此不能关闭整个模块化阶段或恢复后续公司循环。下一步唯一入口见子计划 README 与 task_plan。
+仍未完成的是ROOT-owned StockWiki C38/B03公开合同接收、E01-E09跨仓组合，以及Dashboard adapter两处消费者私有导入兼容问题。组合矩阵仍 NOT_RUN；因此不能关闭整个模块化阶段或恢复后续公司循环。五个交付工区和三个ROOT集成工区已回收，FF可重建测试scratch清理约18.1MB，分支保留；其他原始资料、运行输出及历史证据均按用途留存。下一步唯一入口见子计划 README 与 task_plan。
 
 ## 2026-11-11 最新：逐模块Git核销与有限接收已完成
 

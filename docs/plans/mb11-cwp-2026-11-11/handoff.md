@@ -142,3 +142,10 @@
 - 三组 CWP owner 回归：证明库 138 passed，exact history/stream 16 passed，readiness history 4 passed；独立审查对最终修复提交 0a03b588651e3da32fb5fcde988573957f8bd985 判 PASS。
 - Dashboard adapter 套件 22 passed / 2 failed；两项消费端测试导入其历史私有 _ReadBudget 名称，而该名称在 CWP 基线上不存在。没有为通过消费端测试恢复私有跨模块后门。此项继续列入 ROOT 组合 / Dashboard 兼容工作。
 - 更新后的 PWF 收据随主线提交推送。MB-CWP 卡本身已完成；总计划 E01-E09 组合仍未运行。
+
+
+## 11. ROOT worktree cleanup（2026-11-13）
+
+- MB-CWP delivery worktree 与 ROOT integration worktree 均已核实 clean 后移除；交付和 root fix 分支保留。
+- 原仓中的其他 .planning/.mimosa/.workbuddy-ai 和审计/业务资料均未动；只有本轮精确命名的 worktree 被回收。
+- 本卡完成；E01-E09 与 Dashboard 消费端兼容属于总计划剩余项。

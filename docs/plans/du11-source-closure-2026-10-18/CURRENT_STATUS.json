@@ -1211,6 +1211,14 @@
       "two Dashboard adapter private-import compatibility failures"
     ],
     "composition_status": "NOT_RUN",
-    "business_company_loop": "paused"
+    "business_company_loop": "paused",
+    "cleanup": {
+      "delivery_worktrees_removed": 5,
+      "root_integration_worktrees_removed": 3,
+      "ff_scratch_files_removed": 5030,
+      "ff_scratch_bytes_removed": 18119347,
+      "branches_preserved": true,
+      "other_user_data_preserved": true
+    }
   }
 }
