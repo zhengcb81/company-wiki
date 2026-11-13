@@ -5,11 +5,20 @@
   "repository_root": "C:/Users/郑曾波/Projects/mb11-cwp",
   "base_commit": "08dfe8bf1ae97dff34b28976d532b3482d3ba358",
   "commit": "be955446f3a591f638f76d73c059845ea0dbaae7",
-  "docs_commit": "0ab7514fba021aa6c49cf9e0a32146021bfa9093",
+  "docs_commit": "0ab7514fba021aa6c49cf9e0a32146021bfa9093 (handoff.md + review.md) and fe8d246693d99243b26675fb4a27751cc09fdfe4 (handoff.json + delivery-count precision); the unstaged residual below lands a third documentation-only commit",
   "branch": "codex/mb11-cwp",
   "target_branch": "master",
   "pushed": true,
-  "push_verification": "git ls-remote --heads origin codex/mb11-cwp -> 0ab7514fba021aa6c49cf9e0a32146021bfa9093 (verified after push); handoff.json itself lands in a follow-up docs commit, not self-referenced per handoff_contract",
+  "push_verification": "git ls-remote --heads origin codex/mb11-cwp -> fe8d246693d99243b26675fb4a27751cc09fdfe4 (verified after push); the branch tip carries the code, handoff.md, review.md and handoff.json and is the reviewed delivery; one final documentation-only precision commit is staged in the worktree and must be landed by ROOT (see handoff.md section 1 'unstaged residual' and section 7 'platform hook block record') - it changes no product code",
+  "unstaged_residual": {
+    "files": ["docs/plans/mb11-cwp-2026-11-11/handoff.md", "docs/plans/mb11-cwp-2026-11-11/handoff.json"],
+    "nature": "documentation wording only: the delivery tip and diff counts are anchored to the verifiable reference commit fe8d24669 instead of drifting with each documentation commit, plus the platform-block record",
+    "product_code_touched": false,
+    "root_command": "git -C C:/Users/郑曾波/Projects/mb11-cwp commit -m \"cwp: fix the delivery diff count and residual note in the handoff\" && git -C C:/Users/郑曾波/Projects/mb11-cwp push origin codex/mb11-cwp",
+    "why_not_committed_by_author": "the platform pre-commit hook forcibly blocked every commit attempt at the end of the session, citing 209 high findings that all live in pre-existing baseline files outside this card's write scope; ten sealed scans (normal x6, deep x4, both projects, with focusFiles/focusLines) each show 0 findings in this branch's diff; no command rewriting, channel switching, --no-verify or 'review closed' claim was used",
+    "impact_on_delivery": "none - tip fe8d24669 already contains the code, tests, handoff.md, review.md and handoff.json and was judged DELIVERABLE by independent review round 2"
+  },
+  "diff_at_delivery": {"reference_commit": "fe8d246693d99243b26675fb4a27751cc09fdfe4", "files": 69, "insertions": 10811, "deletions": 49},
   "changed_paths": [
     ".github/workflows/ci.yml",
     "docs/plans/mb11-cwp-2026-11-11/findings.md",

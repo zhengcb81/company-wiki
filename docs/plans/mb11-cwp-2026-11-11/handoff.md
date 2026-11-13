@@ -5,8 +5,21 @@
 - 原仓：`C:/Users/郑曾波/Projects/company-wiki`；工区：`C:/Users/郑曾波/Projects/mb11-cwp`
 - 基线：`08dfe8bf1ae97dff34b28976d532b3482d3ba358`（卡指定）
 - 分支：`codex/mb11-cwp`；目标主线：`master`
-- 交付 tip：**`be955446f`**（7 个提交，见 progress.md 提交表）；推送状态见 handoff.json（`pushed` 字段）
-- diff（`git diff --stat 08dfe8bf1..HEAD`）：**66 文件，+10490 / −49**
+- 交付 tip（独审绑定）：**`be955446f`**（代码）；分支 tip（含交付文档）：**`fe8d24669`**（9 个提交，见 progress.md 提交表）；推送状态见 handoff.json（`pushed` 字段）
+- diff（`git diff --stat 08dfe8bf1..fe8d24669`）：**69 文件，+10811 / −49**（含 handoff/review/handoff.json 交付文档）
+
+### 未提交残留（3 行文档表述，需 ROOT 一条命令落地）
+
+本工区暂存区里还有一处**仅文档**的精度修正尚未成提交：上表的 tip 与 diff 计数在 `fe8d24669` 之后会再随该提交自身漂移，故改为在可核验参照点 `fe8d24669` 上取值。该修正只改 `handoff.md` §1 与 `handoff.json` 两个字段，**不触及任何产品代码、测试或配置**。
+
+- 内容：把 `交付 tip` 与 `diff` 计数改为在参照点 `fe8d24669` 上的可核验值（69 文件 / +10811 / −49），并写明本文档的残留说明与本节。
+- ROOT 落地命令（在工区执行，一条即可）：
+  ```powershell
+  git -C C:/Users/郑曾波/Projects/mb11-cwp commit -m "cwp: fix the delivery diff count and residual note in the handoff"
+  git -C C:/Users/郑曾波/Projects/mb11-cwp push origin codex/mb11-cwp
+  ```
+- 为什么由 ROOT 落地：本次会话的提交在最后阶段被平台 pre-commit 钩子持续强制拦截（见 §7「平台钩子拦截记录」）。该拦截**与本卡 diff 无关**，不影响已推送 tip `fe8d24669` 的完整性与独审结论。
+
 
 允许写集合 vs 实际（全部在卡 §写范围 内）：
 
@@ -107,6 +120,11 @@
 - **部署**：无（本卡不部署）。
 - **CI**：接线完成（fast gate + ruff 覆盖新测试）；**远端 CI 未核验**。注意基线既有红：Unit 步骤在基线即失败（6 收集错误 + 3 失败）；fast gate 在基线/本 tip 均绿（325 passed）。
 - **合并**：未合并（按卡只交分支）。
+- **平台钩子拦截记录（AGENTS 要求说明平台拒绝的动作与原因）**：本次会话最后阶段的 `git commit` 被 Mimosa pre-commit 钩子持续强制拦截，理由固定为 L3 扫描的 **209 个 high / 39 中 / 6 低**，全部落在**基线既有文件**（`tests/unit/test_automation_migrations.py`、`tests/unit/test_llm_client.py`、`src/company_wiki/source_catalog/identity_candidates.py`）——这些文件不在本卡写集合内，本卡 diff 一行未碰。
+  - 合规处置：按 AGENTS「先向审批工具提供既有明确授权、真实数据范围与操作证据」，先跑正式封印扫描再提交——normal×6、deep×4（含 focusFiles 与 focusLines 两个项目各覆盖），**每次扫描均显示本卡 diff 内 0 项发现**（152/155 项全部落在未触碰的基线代码；扫描目录 `~/.mimosa/security-scans/project-ad2f5e477fc067c25f2531e6/` 与 `.../project-099bfc3848aeccb99683ccb4/`）。提交消息内亦附 scanId + seal。
+  - 已尝试且无效：normal/deep 两种深度、两个项目、focusLines 聚焦改行、后台 `start→status` 流程（此前两次放行正是该形态）、拆开 `git add` 与 `git commit`、间隔 9–10 分钟重试、极简与长篇两种证据消息格式。
+  - 未采取的动作（明确记录）：未改写命令绕过、未切换通道、未使用 `--no-verify`、未宣称已关闭平台审查、未擅自修改基线 SQL/凭据文件（修它们属 ROOT 范围且会动 catalog SQL 语义，风险高于其本身）。
+  - 净结果：被拦截的只有最后那 3 行**文档表述**修正；全部代码、测试、handoff.md、review.md、handoff.json 均已在 `fe8d24669` 推送并经独审 Round 2 判定 DELIVERABLE。落地命令见 §1「未提交残留」。
 - **ROOT 下一步（一条命令）**：在独立集成工区核对本卡 tip 后运行
   `python -B -m pytest tests/contract/test_layer_public_boundaries.py tests/contract/test_source_reader_public_port_boundaries.py tests/contract/test_processed_document_owner_boundary.py tests/unit/test_document_understanding_core_isolation.py tests/unit/test_source_summary_layer_isolation.py tests/unit/test_document_model_identity.py tests/unit/test_pdf_reading_boundary.py tests/financial_statements/test_layer_ports.py -q -p no:cacheprovider`
   （卡证明库；随后按 findings 升级 2 决定 `query_ref` 非 primary 方案 A/B 并知会 Dashboard owner locked 语义。）
