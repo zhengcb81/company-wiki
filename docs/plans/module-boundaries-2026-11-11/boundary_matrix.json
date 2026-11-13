@@ -403,7 +403,7 @@
       "filing-fetch": {
         "branch": "main",
         "code_ref": "41acdc8ea991d0d0b60037ef253c5b16c9492195",
-        "remote_receipt_head": "d4f35ca",
+        "remote_receipt_head": "d4f35cab5127d09c874d109080d911e6d394dec2",
         "remote_ref_verified": true,
         "receipt_head": "e6088f29e40a6d96404e44cfe6d4f1a4bb6ca58a"
       },
@@ -411,17 +411,17 @@
         "branch": "main",
         "code_ref": "6b045b76f2ae4e96184c6c1521b8e1f58ee5441b",
         "remote_ref_verified": true,
-        "receipt_head": "4a00ee28"
+        "receipt_head": "4a00ee28a992d2ef8a4a652640ac1e18b80f4c67"
       },
       "earnings-transcripts": {
         "branch": "main",
-        "receipt_head": "915f216",
+        "receipt_head": "915f216f764e83012e8ce6f418111c9ef9eacace",
         "remote_ref_verified": true
       },
       "StockInfoDLSimple": {
         "branch": "v2-clean-rewrite",
         "code_ref": "53b93585a661ae29d57b6a60a8dcc3f4371a9009",
-        "receipt_head": "d084c4a",
+        "receipt_head": "d084c4aab48f5f83275f65982bf561e6870ff3a4",
         "remote_ref_verified": true
       }
     },
@@ -450,6 +450,6 @@
       "bytes": 18119347,
       "status": "removed after evidence confirmed it contained only reproducible pytest/review/runtime test artifacts"
     },
-    "receipt_refs_note": "Updated after each repository cleanup receipt was committed and pushed; these are the latest package PWF closeout refs checked in this matrix update."
+    "receipt_refs_note": "Full receipt SHAs were checked against each repository local main ref and origin remote after the cleanup receipts were pushed."
   }
 }
