@@ -83,7 +83,7 @@
 | B33 四文件（readiness/link/recovery/exact_history） | 118 passed（86+15+8+9） | 0 | 60.1s |
 | batch+transport_cli+module_contracts+recovery | 47 passed | 0 | 108.3s |
 | T-N4 重放（findings 内两条命令） | 9 passed + 78 passed | 0 | ~8s |
-| Dashboard `tests/adapters/cwp_original_stream/`（`CWP_OWNER_ROOT` 指向本工区） | 21 passed / 3 failed | 1 | — |
+| Dashboard tests/adapters/cwp_original_stream/（作者交付工区，ROOT 集成前历史运行） | 21 passed / 3 failed | 1 | 初始 non-primary 冲突已由 ROOT 解决；当前集成复跑 22/2，见 §8 |
 | `python -m mypy src` | Success: no issues in 489 files | 0 | — |
 | CI-scope `ruff check ...`（ci.yml:53 原样命令） | All checks passed | 0 | — |
 
@@ -131,6 +131,6 @@
 
 - ROOT 决定保留 query_ref 的 primary-only 默认语义；历史版本只由同一 owner reader 的 query_exact_pair_ref / CLI 显式 --exact-pair 读取。T-B33 的 readiness 从精确 SourceRef 走 exact-pair 入口，不改变默认 Dashboard 消费行为。
 - 根因修复与 TDD 提交：0a03b588651e3da32fb5fcde988573957f8bd985（fix(cwp): preserve primary-only source reads）。新增回归先证明 query_ref(history) 与默认 stream CLI 拒绝旧版本，再用 query_exact_pair_ref/--exact-pair 证明精确版本字节、receipt 与身份一致。
-- CWP proof library + source-version 合同：192 passed（复跑结果见 integration log）；独立 reviewer /root/audit_cwp_delivery 对代码提交 0a03b5886 判定 PASS。
+- CWP 卡证明库在合入当前 master 后复跑 138 passed / 0 failed（28.81s）；历史 reader + stream 合同复跑 16 passed（17.76s），readiness 的 4 条历史身份合同复跑 4 passed（5.03s）；日志分别见 root_integration_proof_20261113.log、root_exact_history_stream_20261113.log、root_readiness_history_20261113.log。独立 reviewer /root/audit_cwp_delivery 对代码提交 0a03b5886 判定 PASS。
 - Dashboard adapter suite：22 passed / 2 failed。两项失败是 Dashboard 消费端 import 了 CWP 基线不存在的私有 _ReadBudget（与包外发现相同），不是 CWP public contract 的回归；本仓没有增加私有兼容层，Dashboard owner 应改用公开 ReadBudget port。
-- 该验收将与包分支合并当前 master 后再重跑 proof library、更新 handoff 并推送。此前 delivery branch 的未并线状态以本节为 ROOT 后续集成记录；实际 merge commit 和 push SHA 会在最终 PWF 记录补齐。
+- 包分支与当前 master 已在隔离集成树无冲突合并，合并提交为 37be14647（master 当时为 879953c7f）；owner proof、历史/stream 和 readiness 关键合同均在合并后通过。主线快进与远端推送待最终独审确认后执行。

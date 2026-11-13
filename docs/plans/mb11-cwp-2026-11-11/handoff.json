@@ -31,6 +31,9 @@
     "docs/plans/mb11-cwp-2026-11-11/ownership.md",
     "docs/plans/mb11-cwp-2026-11-11/progress.md",
     "docs/plans/mb11-cwp-2026-11-11/review.md",
+    "docs/plans/mb11-cwp-2026-11-11/root_exact_history_stream_20261113.log",
+    "docs/plans/mb11-cwp-2026-11-11/root_integration_proof_20261113.log",
+    "docs/plans/mb11-cwp-2026-11-11/root_readiness_history_20261113.log",
     "docs/plans/mb11-cwp-2026-11-11/scratch/locate_reason_codes.py",
     "docs/plans/mb11-cwp-2026-11-11/scratch/materialize_transport_lake.py",
     "docs/plans/mb11-cwp-2026-11-11/scratch/probe_cli_refusal.py",
@@ -123,7 +126,7 @@
       "id": "T-READ",
       "result": "PASS",
       "red_evidence": "baseline had no source_stream_cli (dashboard 24 stream tests could not find the owner entry)",
-      "green_evidence": "tests/contract/test_source_stream_cli.py 7 passed over current stream_version owner; dashboard stream suite 21/24 (3 remaining: 1 escalated non-primary decision, 2 consumer-side _ReadBudget imports absent at baseline); locked receipt lazily ordered per review blocker 2"
+      "green_evidence": "Delivery-worktree pre-integration history: tests/contract/test_source_stream_cli.py 7 passed; Dashboard stream suite 21/24 (3 initial failures: the non-primary compatibility decision later resolved by ROOT, plus 2 consumer imports of private _ReadBudget names absent from CWP baseline). ROOT integration now records 22/24 with only the 2 consumer-side private imports remaining. locked receipt remains lazily ordered per review blocker 2."
     },
     {
       "id": "T-CANON",
@@ -177,7 +180,7 @@
   "public_contract_changes": [
     "additive module CLIs: source_stream_cli, public_canonical_browser_cli, public_source_readiness_cli, public_legacy_source_link_cli, public_legacy_source_recovery_cli (invoked via -m; console table unchanged)",
     "stream 2.2 'locked' receipt semantics tightened: emitted lazily immediately before the first stdout byte (before ok for empty originals); no-byte refusals carry no lock line; 'ok' is the complete-stream verification claim - schema string unchanged; escalation recorded in findings.md (upgrade 1); dashboard test_missing_file_refuses_before_lock depends on this",
-    "SourceVersionReader.query_ref is now pair-precise (non-primary history versions resolve to their own row); conflicts with dashboard test_non_primary_history_version_refused_like_the_reader - escalation with failing example and options A/B in findings.md (upgrade 2), ROOT decides, delivery does not depend on it",
+    "Final ROOT contract: SourceVersionReader.query_ref keeps primary-only compatibility semantics; non-primary history is read through the additive query_exact_pair_ref API or explicit --exact-pair CLI option. The earlier pair-precise query_ref proposal was rejected by ROOT and is documented as resolved in findings.md upgrade 2.",
     "source_references.query_exact_pair_reference added (public, additive); query_source_reference byte-identical (registration keeps primary semantics)",
     "reader.exact_source_pair added (Protocol + implementation, additive)",
     "observability.REASONS +14 and STAGES_BY_REASON +14 (additive, set equality preserved)",
@@ -256,7 +259,8 @@
       "failed": 3,
       "skipped": 0,
       "seconds": null,
-      "log": "3 remaining = 1 escalated (non-primary) + 2 consumer-side _ReadBudget imports absent at baseline"
+      "log": "dashboard stream suite 21/24 (3 initial failures); final integration 22/24 is recorded under root_integration.dashboard_adapter_suite",
+      "phase": "delivery worktree before ROOT integration; historical count"
     },
     {
       "command": "full tests/unit and tests/contract at baseline A/B (reviewer-run)",
@@ -283,19 +287,21 @@
   "cost": "unknown (no fee-ledger operations)",
   "out_of_scope_findings": [
     "dashboard tests test_midstream_source_replacement_never_reaches_the_consumer and test_same_size_tamper_before_the_pass_is_refused_before_any_byte import historical private names (resolver._ReadBudget, reader._admitted_candidates) that do not exist at baseline - consumer-side branch coupling; adapt to read_budget.ReadBudget + catalog.source_location_candidates (ROOT/Dashboard owner)",
-    "dashboard test_non_primary_history_version_refused_like_the_reader conflicts with the pair-precise query_ref required by B33 readiness - public protocol decision escalated to ROOT with failing example and options A/B (findings.md upgrade 2)",
+    "Historical non-primary conflict from the first delivery was resolved by ROOT integration: query_ref is primary-only and exact history is explicit; the two remaining Dashboard consumer failures concern private _ReadBudget imports absent from the CWP baseline.",
     "baseline-red (reproduced at baseline, outside this card's write scope): tests/unit 6 collection errors (ImportError _admitted) + 3 failures; tests/contract 60 remaining failures (this card fixed 1); test_fc1301 64 residual baseline emission sites; test_source_system_docs",
     "tests/integration/test_source_processing_handler_wire.py baseline failure (_versions undefined, F821/F401)"
   ],
-  "next_root_action": "Merge the reviewed CWP integration onto current master, rerun the owner proof library, record the merge/push SHA, then leave Dashboard's two consumer-private imports to the Dashboard owner.",
+  "next_root_action": "Final receipt is aligned; fast-forward master to integration commit 37be14647 and push origin/master, then record the verified SHA.",
   "root_integration": {
     "date": "2026-11-13",
     "integration_code_commit": "0a03b588651e3da32fb5fcde988573957f8bd985",
     "review": "PASS by independent reviewer on exact integration code commit",
     "cwp_proof_library": {
-      "passed": 192,
+      "passed": 138,
       "failed": 0,
-      "skipped": 0
+      "skipped": 0,
+      "seconds": 28.81,
+      "log": "docs/plans/mb11-cwp-2026-11-11/root_integration_proof_20261113.log"
     },
     "dashboard_adapter_suite": {
       "passed": 22,
@@ -306,7 +312,23 @@
       ]
     },
     "query_semantics": "query_ref remains primary-only; exact history uses query_exact_pair_ref or explicit --exact-pair.",
-    "merge_commit": null,
-    "push_verified": false
+    "merge_commit": "37be14647",
+    "push_verified": false,
+    "integration_commit": "37be14647",
+    "integration_parent_main": "879953c7f70fde8e65133f30413d4f2d820bd351",
+    "exact_history_and_stream": {
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 17.76,
+      "log": "docs/plans/mb11-cwp-2026-11-11/root_exact_history_stream_20261113.log"
+    },
+    "readiness_history": {
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 5.03,
+      "log": "docs/plans/mb11-cwp-2026-11-11/root_readiness_history_20261113.log"
+    }
   }
 }

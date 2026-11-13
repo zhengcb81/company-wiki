@@ -78,16 +78,22 @@ python -B -m pytest tests/unit/test_narrative_selection_architecture.py tests/un
 
 ## 非 primary 版本读取（owner 级变更，T-B33/T-READ 交汇）
 
-历史 `89fd952a5` 的能力在当前主线缺失，实证三道门：
-1. `query_ref` → `query_source_reference` 只查 primary（`document_source_mismatch` 拒绝）；
-2. `_current_source_location` 用 primary 行比对 ref（`source_ref_changed`）；
-3. resolver `candidate_rank > 0` 门（历史版本位置 role=`original_attachment` 排位 0，`role_not_original_primary`）。
+历史 89fd952a5 有更丰富的历史版本能力，当前主线曾缺失；最初交付把默认 query_ref 扩为 pair-precise，后来 ROOT 基于 Dashboard 已有默认拒绝合同决定不改变默认行为。最终合同以本节“ROOT 最终决策”为准。
 
-主线产品面已暴露非 primary 版本（browser `browse`/`reopen` 返回完整 SourceRef、canonical browser 列历史版本为 item），owner 拒读是矛盾。移植（4 处，owner 内）：
-- `reader.exact_source_pair(document_id, source_id)`：pair 精确 UNION 查询，含 `primary_source_id`；未注册 pair 不返回行（fail closed，primary 永不替代）；
-- `source_references.query_exact_pair_reference`：错误映射与历史一致（文档不存在→`document_not_indexed`；pair 未注册→`document_source_mismatch`；status/sha/空值门保留）；registration 路径 `query_source_reference` **不变**（primary 语义）；
-- `SourceVersionReader.query_ref` → pair 路径；
-- resolver：`_current_source_location` 改用 pair 行（身份比对变为 ref-vs-自身 pair）；`read_verified_source_location` 对**非 primary 且非 reuse** 的位置按 browser 版本角色（original_primary/attachment/indexed_only + active + 无 `.rejections` 段）准入，root 各门照旧；`reusable_only`（filing_reuse）与 primary 排位语义不变。
+最初诊断的三道读取门：
+1. query_ref → query_source_reference 只查 primary（document_source_mismatch 拒绝）；
+2. _current_source_location 用 primary 行比对 ref（source_ref_changed）；
+3. resolver candidate_rank > 0 门（历史版本位置 role=original_attachment 排位 0，role_not_original_primary）。
+
+已保留的 owner 能力：
+- reader.exact_source_pair(document_id, source_id)：pair 精确 UNION 查询，含 primary_source_id；未注册 pair 不返回行；primary 不会替代目标 pair；
+- source_references.query_exact_pair_reference：错误映射与历史一致；registration 路径 query_source_reference 及其 primary 语义不变；
+- SourceVersionReader.query_exact_pair_ref：独立的精确历史读取入口；query_ref 保持 primary-only；
+- resolver 用 pair 行核对现存 SourceRef 身份；非 primary 且非 reuse 的位置按 browser 版本角色（original_primary/attachment/indexed_only + active + 无 .rejections 段）准入；root 各门照旧；reusable_only（filing_reuse）与 primary 排位语义不变。
+
+### ROOT 最终决策（2026-11-13）
+
+Dashboard 既有测试要求默认 query_ref 对历史版本拒绝。因此最终代码保持 query_ref 的 primary-only 语义；只有调用 query_exact_pair_ref，或 CLI 显式传 --exact-pair，才读取精确历史版本。初版 pair-precise query_ref 是已被替代的中间状态，不是最终公开合同。最终集成证据见本计划 handoff.md §8。
 
 ## 其他发现
 
@@ -109,7 +115,7 @@ python -B -m pytest tests/unit/test_narrative_selection_architecture.py tests/un
 - **冲突证据**：Dashboard `test_non_primary_history_version_refused_like_the_reader` 明确要求旧 `query_ref(HISTORY)` 拒绝 `("not_found","document_source_mismatch")`；最初把它改成 pair 精确会破坏既有 whole-buffer 与 stream 一致性。
 - **ROOT 决定采用方案 B**：`query_ref` 保持既有 primary-only 语义；同一个 `SourceVersionReader` 增加 `query_exact_pair_ref`，由它处理精确的历史/附件版本。`describe_version`、`verify_version`、`open_version` 等以既有 `SourceRef` 为输入的操作沿用该精确身份，不再重新收窄到 primary 行。
 - `source_reader_cli` 与 `source_stream_cli` 保留默认 primary-only 行为；新增 `--exact-pair` 后才能按完整 document/source/SHA 对读取非 primary 版本。旧 Dashboard 调用不需改动或新增批准步骤；浏览器/历史版本调用方可显式选用 exact pair。
-- **验证结果**：CWP 历史/reader/stream 合同 61 项通过；Dashboard 既有 non-primary 拒绝合同通过；CWP owner proof library + 来源版本合同 192 项通过。ROOT 在本轮重新跑 Dashboard adapter suite 为 22 passed / 2 failed：失败仅是 Dashboard 测试导入 CWP 基线即不存在的私有 _ReadBudget；本仓不恢复私有实现，消费端需改用公开 port。最终 CWP 修复提交 0a03b5886 的独审为 PASS。
+- **验证结果**：CWP 历史/reader/stream 合同 61 项通过；Dashboard 既有 non-primary 拒绝合同通过；CWP owner proof library 在合并当前主线后 138 项通过；另外 exact-history + stream 合同 16 项、readiness 历史身份 4 项通过。ROOT 本轮重新跑 Dashboard adapter suite 为 22 passed / 2 failed：失败仅是 Dashboard 测试导入 CWP 基线即不存在的私有 _ReadBudget；本仓不恢复私有实现，消费端需改用公开 port。最终 CWP 修复提交 0a03b5886 的独审为 PASS。
 
 ### OUT-SCOPE（列给 ROOT，不在 MB-CWP 写集合）
 

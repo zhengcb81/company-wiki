@@ -30,5 +30,5 @@ diff 规模见 handoff.md §1（终态以 `git diff --stat 08dfe8bf1..HEAD` 为�
 
 - 主线基线 master=origin/master=879953c7f70fde8e65133f30413d4f2d820bd351；集成工作树为 .planning/mb11-cwp-integration-20261113，分支 codex/root-mb11-cwp-fix。
 - 根因处理：保持默认来源查询 primary-only，把历史精确读取做成同一 owner 的显式接口；0a03b5886 的先红后绿测试和独审均通过。
-- owner proof library + 历史/版本契约复跑 192 passed。Dashboard adapter 22 passed / 2 failed（仅消费端引用 owner 基线不存在的私有 _ReadBudget）；没有把私有符号恢复到 CWP。
-- 下一步：将当前 master 合入隔离集成树，重跑 owner proof library，然后合并、推送并记最终 SHA。大量既有 untracked PWF/证据保持原样，不在本轮清理。
+- 合入当前 master 后卡证明库 138 passed；历史 reader + stream 合同 16 passed；readiness 历史身份合同 4 passed。日志路径见 handoff.md §8。Dashboard adapter 22 passed / 2 failed（仅消费端引用 owner 基线不存在的私有 _ReadBudget）；没有把私有符号恢复到 CWP。
+- 当前 master 已合入隔离集成树（37be14647），三组关键测试复跑通过；独立最终复核后快进 master、推送远端并清理本轮确切临时工作树。大量既有 untracked PWF/证据保持原样。
