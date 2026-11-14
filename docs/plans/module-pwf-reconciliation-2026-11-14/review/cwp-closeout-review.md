@@ -1,6 +1,7 @@
 # CWP-PLAN-WORKTREE-CLOSEOUT 独立最终审查报告
 
-- 审查对象：候选最终 HEAD `ca2602a2f3d0ff7c98f0eaa206ffe102b6fad480`（分支 `master`，父提交 `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`，提交主题 `docs(pwf): close out CWP worktree/ref reconciliation lane`）
+- 审查对象（Round 1）：候选最终 HEAD `ca2602a2f3d0ff7c98f0eaa206ffe102b6fad480`（分支 `master`，父提交 `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`，提交主题 `docs(pwf): close out CWP worktree/ref reconciliation lane`）
+- 审查对象（Round 2 复核，最终绑定）：修复 HEAD `8ae20ce6f402290bb59451df04f79cadbdc76954`（父提交 `ca2602a2f…`，提交主题 `docs(pwf): fix review non-blockers in CWP closeout handoff`）；Round 2 详情见 §13
 - 审查者：未参与实施的独立 agent（本报告为唯一写入文件）
 - 审查日期：2026-11-14
 - 审查依据：`AGENTS.md` 职责边界、[owner_cards/cwp_closeout.md](../owner_cards/cwp_closeout.md)、本计划 task_plan/progress/findings、被审交付物 [cwp-closeout-handoff.md](cwp-closeout-handoff.md)/[.json](cwp-closeout-handoff.json)、归因证据源（module-boundaries cwp_review.md、mb11-cwp handoff.md/findings.md）
@@ -162,7 +163,7 @@ handoff.json `dispositions` 恰有 13 条 `kind=ref` 条目，路径与 tip 全�
 - **N2（handoff.json tests[1].result 键数笔误）**：行文「12 个顶层键齐备」应为 13 个（实际 JSON 与卡枚举均为 13，见 §6）。纯 prose 计数错误。
 - **N3（§4 目录字节为约数）**：et-live「4 KB」实测 apparent size 1,596 字节；storage-audit「940 KB」实测约 877 KB（`du -sb`）。文件数（1、26、9,700）实测精确吻合；字节为描述性约数，不影响 EVIDENCE_KEEP 结论。
 
-## 11. 明确授权声明（收口提交范围）
+## 11. 明确授权声明（Round 1，历史记录；Round 2 更新版见 §13.5）
 
 候选 **通过**。通过后**允许且仅允许一个收口提交**（closeout commit），其内容**严格限定**为以下三项，除此之外不得有任何内容变更：
 
@@ -172,8 +173,133 @@ handoff.json `dispositions` 恰有 13 条 `kind=ref` 条目，路径与 tip 全�
 
 收口提交后按卡步骤 6 推送 `master` 并确认远端 SHA 等于已审收口 HEAD。若推送前需要任何超出上述三行的改动，则构成新候选，须重新走独立审查并绑定新 HEAD。
 
-## 12. 结论
+## 12. Round 1 结论（历史记录，绑定 `ca2602a2f`）
 
 候选 HEAD `ca2602a2f3d0ff7c98f0eaa206ffe102b6fad480` 的 CWP-PLAN-WORKTREE-CLOSEOUT 交付：13 个非祖先 refs、8 个 worktrees、4 个额外 Projects 顶层目录、1 个 stash 全部实时重算一一归因且处置词表合规；ABSORBED 证据（master 路径、MB-CWP 提交、T-W13 历史事实、独有历史文档不可达性）实测成立；清理为零理由链完整且无未解释 WIP 被清理或掩盖；handoff.md/json 结构合规、PENDING 流程已明确说明；文档-only 测试全部通过；模块边界未破坏。发现 3 个 non-blocker（N1–N3），均不阻塞。
+
+Round 1 结论：PASS（绑定 `ca2602a2f`）；最终结论以 §13 Round 2 复核为准。
+
+## 13. Round 2 复核（最终绑定 `8ae20ce6f402290bb59451df04f79cadbdc76954`）
+
+- 复核日期：2026-11-14（同一独立审查者，仍只读 + 仅更新本报告文件）
+- 复核对象：修复 HEAD `8ae20ce6f402290bb59451df04f79cadbdc76954`（分支 `master`，父提交 `ca2602a2f3d0ff7c98f0eaa206ffe102b6fad480`，提交主题 `docs(pwf): fix review non-blockers in CWP closeout handoff`，2026-11-14 13:57:43 +0000）。`origin/master` 仍为 `7361aad82`，本地 `ahead 2`（候选 + 修复），与既定推送流程一致。
+
+### 13.1 delta 核对（`git show 8ae20ce6f --stat` / `git diff --name-status ca2602a2f 8ae20ce6f`）
+
+恰 5 个文件（+190/−11），全部位于 `docs/plans/module-pwf-reconciliation-2026-11-14/`，numstat 目录外过滤零行，无写集合外路径：
+
+- M `findings.md`（+1/−1）：gates 字节同步修正（`~279 MB` → `262,499,631 B`）。
+- M `progress.md`（+2/−2）：提交计数 3→2 同步修正；gates 字节同步修正。
+- M `review/cwp-closeout-handoff.json`（+4/−4）：三处目录 evidence 字节精确化（`4 KB`→`1,596 B`、`~279 MB`→`262,499,631 B（约 250.3 MB）`、`940 KB`→`896,959 B`）；`tests[1].result` 键数 `12 个顶层键齐备`→`13 个顶层键齐备`。`independent_review`/`final` 仍为 PENDING 值，`cleanup` 仍为 0/0/0，无其他字段改动。
+- M `review/cwp-closeout-handoff.md`（+4/−4）：§1 提交计数修正为「其后新增 2 个 docs 提交：a23e73c70、7361aad82；均为 PWF 文档」（消除原句中早于快照点的 f05e8a8ce 与 off-by-one）；§4 三行目录规模精确字节化。§10/§11 未被改动（补录仍留给收口提交）。
+- A `review/cwp-closeout-review.md`（+179）：Round 1 报告 v1 原样入库。实测提交 blob `76beab0121d0dc62478f25af35d853892e22a132` 与审查者工作区 round-1 文件 `git hash-object` 结果一致、`git diff HEAD -- <报告>` 为 0 行——**作者未改动审查报告内容**，与「目录级暂存带入」的说明相符。
+
+delta 与声明（3 处 non-blocker 修复 + 报告 v1 入库）完全一致，**无其他内容变更**。
+
+### 13.2 三项 non-blocker 修复确认（修复值由审查者独立实测验证）
+
+- **N1（提交计数 off-by-one）已修复**：handoff.md §1 与 progress.md 现均记 2 个提交（a23e73c70、7361aad82）。审查者 `git rev-list --count 1f9f3dcf3..7361aad82` = 2，成员一致。关闭。
+- **N2（键数笔误）已修复**：handoff.json `tests[1].result` 现记 13 个顶层键。审查者解析实测 13 键且与卡枚举逐字一致。关闭。
+- **N3（目录字节约数）已修复**：审查者以 `find <dir> -type f -printf '%s\n' | awk '{s+=$1}'` 独立实测——et-live-20261004 = 1 文件/1,596 B；gates = 9,700 文件/262,499,631 B；storage-audit-20261003 = 26 文件/896,959 B——与修复后 handoff.md §4 / handoff.json / findings.md / progress.md 记录逐字节一致。关闭。
+
+### 13.3 关键只读复核重跑（绑定 `8ae20ce6f`，全部仍成立）
+
+- 13 个非祖先 refs：逐 ref `merge-base --is-ancestor` 重算，恰 13 个，列表与 tips 与 Round 1 完全相同（两个 UNCLASSIFIED_HOLD ref 仍在 `ffd67580a`/`29b562dac` 未移动）。
+- 8 个 worktree（`git worktree list --porcelain`）与 1 个 stash（`18ac0d056`）不变；4 个额外 Projects 顶层目录在位。
+- 主仓状态：tracked 0 修改，untracked 266 条且仍恰为声明的四组（.planning 186、docs/du11-review 78、.workbuddy-ai 1、.mimosa 1；报告 v1 已随修复提交入库，计数回到 266）。
+- handoff.json：裸 JSON 可解析、schema_version=1、13 键一致、26 条 disposition 结构与状态分布不变（ABSORBED 11 / EVIDENCE_KEEP 10 / UNCLASSIFIED_HOLD 4 / ACTIVE_KEEP 1）、cleanup 0/0/0、`final.head=PENDING_FINAL_COMMIT`、`independent_review` 四字段 PENDING。
+- ABSORBED master 路径抽查（4 条，含 T-CANON/T-B33/T-B34/T-READ 各 1）在 `8ae20ce6f` 树中 EXISTS。
+- `git diff --check HEAD~1 HEAD`：无输出，exit 0。
+- `python -I docs/plans/module-pwf-reconciliation-2026-11-14/review/check_links_closeout.py`：`links checked: 12`、`PASS: 0 broken links`、exit 0；Round 1 的 PENDING 前向引用已闭合（报告文件现存在，检查器不再单列 PENDING）。
+
+### 13.4 Round 2 新发现
+
+**Blocker：无。Non-blocker：无。** 修复提交 delta 精确、最小，未引入新问题；Round 1 的 N1–N3 全部关闭。
+
+### 13.5 明确授权声明（Round 2，最终版）
+
+候选（现绑定 `8ae20ce6f402290bb59451df04f79cadbdc76954`）**通过**。通过后**允许且仅允许一个收口提交**（closeout commit），其内容**严格限定**为以下三项，除此之外不得有任何内容变更：
+
+1. 本报告文件的 Round 2 更新（即本节对 `docs/plans/module-pwf-reconciliation-2026-11-14/review/cwp-closeout-review.md` 的追加与最终结论重绑）；
+2. `docs/plans/module-pwf-reconciliation-2026-11-14/review/cwp-closeout-handoff.json` 中 `independent_review` 四字段（`reviewer_agent`/`reviewed_head`/`result`/`report_path`）与 `final` 两字段（`head`/`remote_head`）的真实值回填；
+3. `docs/plans/module-pwf-reconciliation-2026-11-14/review/cwp-closeout-handoff.md` §10/§11 的推送记录补录。
+
+收口提交后按卡步骤 6 推送 `master` 并确认远端 SHA 等于已审收口 HEAD。若推送前需要任何超出上述三项的改动，则构成新候选，须重新走独立审查并绑定新 HEAD。
+
+### 13.6 Round 2 结论
+
+修复 HEAD `8ae20ce6f402290bb59451df04f79cadbdc76954` 满足 Round 1 报告的全部通过条件，3 项 non-blocker 修复经独立实测确认，delta 最小且无写集合外变更；Round 1 的覆盖完整性、ABSORBED 证据、处置词表、清理为零合理性、handoff 结构、文档-only 测试与模块边界结论在 `8ae20ce6f` 上全部复验成立。
+
+VERDICT: PASS
+
+## Round 3（新独立审查者）
+
+- 复核日期：2026-11-14。审查者：第三轮独立审查 agent（全新实例，未参与实施与前两轮审查；前两轮审查者 agent_cf557b5f 已不可续用）。
+- 复核对象：HEAD `8ae20ce6f402290bb59451df04f79cadbdc76954`（master，父提交 `ca2602a2f…`）+ 工作区未提交收口记录。审查方式只读，唯一写入为本节末尾追加；未执行任何 git 写操作，未操作其他仓库。
+- 触发背景：round-2 授权声明（§13.5）限定收口提交三项内容；本轮按任务要求核验工作区收口记录与该授权的逐字一致性、抽验 round-2 关键结论、裁定"尚待其他模块 owner 的公开接口依赖"证据链，并对两处待授权新增作出批准/拒绝。
+
+### 14.1 审查范围与命令清单（关键输出摘录）
+
+| 项 | 命令 | 关键输出 |
+|---|---|---|
+| A | `git status --porcelain` | tracked 修改恰 3 个：`cwp-closeout-handoff.md`、`cwp-closeout-handoff.json`、`cwp-closeout-review.md`（均 `M`）；其余均为 `??` 未跟踪项（.mimosa/.planning/.workbuddy-ai/du11 review 历史证据四组） |
+| A | `git diff 8ae20ce6f -- docs/plans/module-pwf-reconciliation-2026-11-14/` | 3 文件 +70/−12，hunk 逐块核对见 §14.2 |
+| A | `git ls-remote origin refs/heads/master` | `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`（复测） |
+| A | `git diff --name-status 7361aad82 8ae20ce6f` | 恰 7 个文件、全部位于本计划目录（复核 §11 拦截无关性声明） |
+| B | 逐 ref `git merge-base --is-ancestor <ref> 8ae20ce6f`（20 个本地 heads 全查） | 恰 13 个非祖先，tips 与 handoff §2 表格一一对应 |
+| B | `git worktree list --porcelain` | 恰 8 个 worktree，路径/branch/HEAD 与 handoff §3 一致 |
+| B | `git stash list` + `git rev-parse stash@{0}` | 唯一 stash，`18ac0d05627672ff0d607be705d57beeadfc0645` |
+| B | `git diff --check 8ae20ce6f`（对工作区） | 无输出，exit 0 |
+| C | 读 `docs/plans/module-boundaries-2026-11-11/reconciliation.md` 2026-11-14 处置段 | 三项工作项登记确认（见 §14.4.1） |
+| C | 读 `docs/plans/module-boundaries-2026-11-11/review/root_composition_20261114.md` | E01–E09 逐项核读（见 §14.4.2） |
+| C | 读 `docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json` 及 `CURRENT_STATUS.md` | P1/P2/P3 与 next_step 对照（见 §14.4.3） |
+
+### 14.2 审查项 A — 收口记录与 round-2 授权逐字一致【通过】
+
+工作区相对 `8ae20ce6f` 的 delta 恰为 3 个文件，hunk 逐块核对：
+
+- `cwp-closeout-handoff.json`：仅两处 hunk——`final.head` `PENDING_FINAL_COMMIT`→`8ae20ce6f402290bb59451df04f79cadbdc76954`、`final.remote_head` `null`→`7361aad82e86cf35310fc05ef51fd8c2c7320b8c`；`independent_review` 的 `reviewer_agent`/`reviewed_head`/`result` 三字段 PENDING 值→真实值（`report_path` 未变）。与授权第 2 项逐字一致，无其他字段改动。
+- `cwp-closeout-handoff.md`：仅两处 hunk——§10 独立审查补录（reviewer 标识、Round 1/Round 2 结论与范围核验）与 §11 推送记录补录（Mimosa L3 门拦截记录、拦截无关性证据、实测终态）。与授权第 3 项逐字一致，其余各节未动。
+- `cwp-closeout-review.md`：Round 2 更新——头部审查对象改双行（Round 1/Round 2 绑定）、§11 标题加历史记录注记、§12 改为 Round 1 结论并加指向句、新增 §13 全节（含 §13.5 最终授权声明）。与授权第 1 项逐字一致。
+
+抽查回填值：`reviewed_head = 8ae20ce6f402290bb59451df04f79cadbdc76954`（与实测 HEAD 一致）；`final.head = 8ae20ce6f402290bb59451df04f79cadbdc76954`；`final.remote_head = 7361aad82e86cf35310fc05ef51fd8c2c7320b8c`——本轮 `git ls-remote origin refs/heads/master` 复测仍为该值。无其他内容变更。**通过**。
+
+### 14.3 审查项 B — round-2 关键结论抽验【全部仍成立】
+
+绑定 `8ae20ce6f` 快速抽验：非祖先本地 refs 恰 13（20 个 heads 中，列表与 tips 同 handoff）；注册 worktree 恰 8；`stash@{0} = 18ac0d0562…`（唯一 stash）；`git diff --check 8ae20ce6f` 对工作区无输出、exit 0。
+
+附带核验 handoff §11"拦截无关性证据"声明：`git diff --name-status 7361aad82 8ae20ce6f` 恰 7 个文件且全部位于 `docs/plans/module-pwf-reconciliation-2026-11-14/`；Mimosa 门标记的三个文件（`tests/unit/test_automation_migrations.py`、`tests/unit/test_llm_client.py`、`src/company_wiki/source_catalog/identity_candidates.py`）均不在该 delta 内。声明成立。**通过**。
+
+### 14.4 审查项 C — "公开接口依赖"证据链核验【通过，附一项措辞观察】
+
+1. **reconciliation.md 2026-11-14 处置段**：确记载三项为分开登记的 Dashboard 侧工作项，各有施工卡——C01 证据可移植性（"新施工卡要求只重做证据清单的跨检出可复现性，**不改 Dashboard 产品层**：harness_lanes/dashboard_c01_evidence_portability.md"）；B-real（all31）预览模块适配（"剩余预览能力**按当前公开 HTTP/application/source-owner 接口**另做模块化适配卡：harness_lanes/dashboard_preview_module_adapter.md"）；旧 B03 独审收据（"剩余 B03 repair-chain 脚本/证据由 B03 独审收口卡定点结案，**当前不合产品代码**：harness_lanes/dashboard_b03_review_closeout.md"）。三张卡文件实测存在。"不改变已验收的模块接口"是对该段语义的准确转述（原文措辞为"不改 Dashboard 产品层/按当前公开接口做适配/当前不合产品代码"），三项均不触及 CWP 公开接口。
+2. **root_composition_20261114.md**：第 3 行声明"M2 已按 E01–E09 工程矩阵关闭"；E01–E08 状态列均为"通过"，E08 确含"Dashboard 流相关组合 55 项通过"。**措辞观察**：E09 状态列为"安装及主要反控已过"（非字面"通过"二字），但其内容列全部为通过项（五卡独立交付与审查通过、CWP wheel 合同 6 项、FF 38 项、ET 19 项、SID 27 项、RF 原模块隔离 14 项、遗留 B10 反控已通过、投影窄读取端口/Worker 资源关闭及恢复 156 项通过、mypy 489 文件通过），与矩阵关闭声明一致；文末"远端 CI 完整运行尚未核验"属 CI 核验事项，不是跨仓接口欠账。该观察不推翻 §14.5 所批文本的断言（其聚焦"无落在 CWP 公开接口上的未结项"）。
+3. **CURRENT_STATUS.json**（as_of 2026-11-14）：P1 = `EXTRACTS_AND_RECOVERY_VERIFIED; BUSINESS_SUMMARY_CHANGES_REQUIRED`、P2 = `TWO_REAL_SOURCE_BINDINGS_ACCEPTED; NEW_SUMMARY_RECHECK_AFTER_P1`、P3 = `OPEN_AFTER_P1_P2`、native_goal `paused`——与 handoff next_step 的顺序一致（P1 业务摘要修正为唯一下一步 → 通过后复验付费缓存恢复与 RF 实际采用 → 父计划公司循环 paused）；next_step 引用的"66 条原文均以 claim 展示、含 26 个模型标为冗余的任务与披露载体/具体承诺人混用"与 CURRENT_STATUS.md 第 16 行原文一致。
+
+**通过**。
+
+### 14.5 审查项 D — 待授权两处新增【批准】
+
+基于 §14.4 证据链，**批准**以下两处新增进入收口提交（本轮仅授权文本，不代写文件，由作者按此执行）：
+
+1. `cwp-closeout-handoff.md` §8 末尾（"未完成"清单之后）新增一行（逐字）：
+
+   > **尚待其他模块 owner 的公开接口依赖**：无未结项。Dashboard C01 证据可移植性、B-real 预览模块适配、旧 B03 独审收据三项为 Dashboard 侧已登记工作项（[reconciliation.md](../../module-boundaries-2026-11-11/reconciliation.md) 2026-11-14 处置段），不落在 CWP 公开接口上；E01–E09 组合通过后无跨仓接口欠账。
+
+2. `cwp-closeout-handoff.json` `remaining_items` 追加一条字符串（逐字）：
+
+   > 跨仓公开接口依赖：无未结项（Dashboard C01/B-real/B03 三项续核为对方侧已登记工作项，不落在 CWP 公开接口上，见 module-boundaries-2026-11-11/reconciliation.md 2026-11-14 处置段）
+
+批准理由：三项续核确为 Dashboard 侧已登记工作项且不落在 CWP 公开接口上（§14.4.1）；E01–E09 组合矩阵关闭、CWP 公开接口相关组合（E01/E03/E04/E05/E06/E07/E08，含 E08 Dashboard 流组合 55 项）均通过，"无跨仓接口欠账"断言与证据一致（§14.4.2）；文本满足卡"交接"段对"CWP 下一步及尚待其他模块 owner 的公开接口依赖"的要求（明确回答"无未结项"并给出归属与依据）；新增行相对链接 `../../module-boundaries-2026-11-11/reconciliation.md` 自 review/ 目录解析为 `docs/plans/module-boundaries-2026-11-11/reconciliation.md`，实测存在。
+
+批准后的完整收口提交内容清单由三项扩为**四项**：① 本报告 Round 3 小节（§14）；② handoff.json 回填（§14.2 已核）+ `remaining_items` 追加上述字符串；③ handoff.md §10/§11 补录（§14.2 已核）+ §8 末尾新增上述行；④ 无其他内容。除此之外不得有任何变更；任何超集改动构成新候选，须重新独立审查并绑定新 HEAD。
+
+### 14.6 推送被平台门拦截（事实记录，非本轮解决对象）
+
+受审 HEAD `8ae20ce6f` 的 `git push origin master` 被 ZCode 平台 Mimosa L3 push 前置门拦截（209 high / 39 medium / 6 low 发现，均为 `origin/master` 既有内容，与本 lane delta 无关，§14.3 附带核验成立）。按 AGENTS.md"工具平台自动审批"条款不得绕过平台拒绝、不得改写命令或转移通道。推送完成（远端等于已审 HEAD）移交用户/后续 owner；本轮不要求审查者解决该门，仅核验 handoff §11 记录如实。
+
+### 14.7 Round 3 结论
+
+工作区未提交收口记录与 round-2 授权逐字一致（恰 3 文件、无额外改动）；round-2 关键结论在 `8ae20ce6f` 上抽验全部成立；"公开接口依赖"证据链核验通过（E09 状态列措辞差异如实记录、不影响裁定）；两处待授权新增文本获批准。收口提交按 §14.5 四项清单执行后即为最终收口版本。
 
 VERDICT: PASS

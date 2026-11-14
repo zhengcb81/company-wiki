@@ -112,6 +112,8 @@
 5. stash `18ac0d0562` 费用差量由账 owner 核销/归档。
 6. r1-local-observation 98 个 clean-filter 伪差量文件的可选核销（勿覆盖证据）。
 
+**尚待其他模块 owner 的公开接口依赖**：无未结项。Dashboard C01 证据可移植性、B-real 预览模块适配、旧 B03 独审收据三项为 Dashboard 侧已登记工作项（[reconciliation.md](../../module-boundaries-2026-11-11/reconciliation.md) 2026-11-14 处置段），不落在 CWP 公开接口上；E01–E09 组合通过后无跨仓接口欠账。
+
 **CWP 当前唯一下一步（业务主线）**：du11 `P1` 业务摘要质量修正——当前来源状态 `partial`，66 条原文均以 claim 展示，含 26 个模型标为冗余的任务与披露载体/具体承诺人混用问题；按 [du11 task_plan.md](../../du11-source-closure-2026-10-18/task_plan.md) 业务摘要段推进"去套话、保归属和计划"，通过后复验付费缓存恢复与 RF 实际采用。父计划公司循环保持 **paused**，本卡不提前执行。
 
 ## 9. 测试
@@ -123,10 +125,14 @@
 
 ## 10. 独立审查
 
-- reviewer：未参与实施的独立 agent（见 [cwp-closeout-review.md](cwp-closeout-review.md)）。
-- 审查绑定 HEAD 与结论：见 review 报告与 [cwp-closeout-handoff.json](cwp-closeout-handoff.json) `independent_review` 字段。
-- 审查范围：13 refs、8 worktrees、4 顶层路径均有状态；清理路径无未解释 WIP；模块 owner 边界未破坏。
+- reviewer：未参与实施的独立 agent（`agent_cf557b5f-8e60-4c45-8765-bad959797d8c`，general-purpose，两轮只读审查 + 测试复核），报告 [cwp-closeout-review.md](cwp-closeout-review.md)。
+- Round 1（绑定候选 `ca2602a2f`）：**PASS**，0 blocker / 3 non-blocker（N1 提交计数、N2 顶层键数、N3 目录音节数）。
+- 修复提交 `8ae20ce6f`（3 处事实修正 + round-1 报告随目录级暂存入库，作者未改动报告内容）。
+- Round 2（绑定 `8ae20ce6f402290bb59451df04f79cadbdc76954`）：**PASS**，0 blocker / 0 non-blocker，N1–N3 全部关闭；最终 VERDICT: PASS 绑定该 HEAD。
+- 审查范围核验：13 refs、8 worktrees、4 顶层路径均有状态且与实时 Git 一致；清理为零无未解释 WIP；模块 owner 边界未破坏。
 
 ## 11. 推送记录
 
-最终推送 SHA 与远端确认：见 [cwp-closeout-handoff.json](cwp-closeout-handoff.json) `final` 字段（本文件定格于候选版本，推送后由 final JSON 为准）。
+- **受审 HEAD `8ae20ce6f` 的推送被平台安全门拒绝，推送未发生。** ZCode 平台 Mimosa L3 push 前置门在 `git push origin master` 时强制拦截：209 high / 39 medium / 6 low 发现（`tests/unit/test_automation_migrations.py`、`tests/unit/test_llm_client.py`、`src/company_wiki/source_catalog/identity_candidates.py` 等）。按仓库规范（AGENTS.md 工具平台自动审批条款）不得绕过平台拒绝、不得改写命令或转移通道；修复既有 high 发现超出本卡文档-only 范围且会使独审绑定失效。
+- **拦截无关性证据**（已核验）：本 lane 两个提交的 delta `7361aad82..8ae20ce6f` 共 7 个文件全部位于 `docs/plans/module-pwf-reconciliation-2026-11-14/`；三个被标记文件均不在 delta 内，为 `origin/master`（`7361aad82`）既有内容。
+- **实测终态**：本地 `master` = `8ae20ce6f`（受审版本，含本收口提交前内容）；`origin/master` = `7361aad82`（`git ls-remote` 实测）。`final.remote_head` 按实测值记录。解除平台门（修复/基线化既有发现或平台放行）后，推送 `8ae20ce6f..HEAD` 即完成本卡"远端等于已审 HEAD"要求；该动作移交用户/后续 owner。
