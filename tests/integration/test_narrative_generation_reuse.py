@@ -197,12 +197,15 @@ def test_different_configured_runs_default_to_one_generation_post_and_public_pin
         )
 
 
-def invoke(root, config, request, llm, run_id, *, database=None, launcher=None):
+def invoke(root, config, request, llm, run_id, *, database=None, launcher=None, bootstrap=None):
     import os
     import subprocess
     import sys
 
     repo = Path(__file__).resolve().parents[2]
+    module_paths = [repo / "src", repo / "scripts"]
+    if bootstrap is not None:
+        module_paths.insert(0, bootstrap)
     process = subprocess.run(
         [
             sys.executable,
@@ -227,7 +230,7 @@ def invoke(root, config, request, llm, run_id, *, database=None, launcher=None):
         cwd=root,
         env={
             **os.environ,
-            "PYTHONPATH": os.pathsep.join([str(repo / "src"), str(repo / "scripts")]),
+            "PYTHONPATH": os.pathsep.join(map(str, module_paths)),
             "PYTHONDONTWRITEBYTECODE": "1",
             "PYTHON_DOTENV_DISABLED": "1",
         },

@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "r4_t4_manual_implementation_after_module_boundary_closure",
+  "execution_mode": "manual_business_summary_quality_after_module_boundary_closure",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -11,13 +11,13 @@
     "cumulative_micro_usd": 20000000,
     "company_allocation": "soft target150000tokens/$1",
     "latest_verified_usage": {
-      "tokens": 1965633,
-      "micro_usd": 762082,
+      "tokens": 1975291,
+      "micro_usd": 763872,
       "includes_historical_unknowns": true,
       "new_unknown_count": 8,
       "prior_unknown_count": 7,
-      "evidence": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-04\\usage_reconcile\\after-native-paid-recovery\\observation.json",
-      "note": "Two initial401 unknown85927tokens/17053microUSD retained; two new known H1 calls9828/1826 and9773/1808. Extra cache POST is a failure and still counted; proxy not invoice."
+      "evidence": "review/phase-c-h1-formal-20261114.md",
+      "note": "The new /5 run used 9658 tokens and an estimated 1790 microUSD. Activation, restart, and cross-run reuse added no POST or usage."
     }
   },
   "remaining_stages": [
@@ -38,13 +38,13 @@
     },
     {
       "id": "P1",
-      "status": "T4_SEM_ACCEPTED; REAL_SUMMARY_AND_CACHE_IN_PROGRESS",
-      "task": "Complete current real summary quality and paid/cache recovery. Historical Huali/Berkshire trials and current H1 source partial remain scoped evidence."
+      "status": "EXTRACTS_AND_RECOVERY_VERIFIED; BUSINESS_SUMMARY_CHANGES_REQUIRED",
+      "task": "Complete concise source-linked business output with role and scope preserved. The current real H1 /5 ranking and single-payment recovery are verified."
     },
     {
       "id": "P2",
-      "status": "OPEN_AFTER_P1",
-      "task": "Prove the same accepted new artifact is consumed by RF native parameters/formula",
+      "status": "TWO_REAL_SOURCE_BINDINGS_ACCEPTED; NEW_SUMMARY_RECHECK_AFTER_P1",
+      "task": "Keep the verified public adoption, calculation, report and snapshot available for the business summary version; two /5 rationale bindings passed independent review.",
       "scope": "revenue_forecast_audit_mainline_loop",
       "scope_note": "This remaining RF-adoption P2 is distinct from Dashboard owner-integration P2, which is merged and pushed to CWP, FF, and RF."
     },
@@ -60,8 +60,8 @@
   "history_index": "HISTORY.md",
   "native_goal": {
     "observed_status": "paused",
-    "observed_via": "get_goal during 2026-11-11 module-boundary planning",
-    "execution": "Native goal last observed paused during M0. Work has since continued on the module-boundary plan, including a reviewed RF regression-test intake; the business loop remains paused.",
+    "observed_via": "get_goal during the 2026-11-14 implementation",
+    "execution": "Manual work continued through module boundaries and current H1 verification. The next complete company attempt follows the current business-summary task.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -79,7 +79,7 @@
     }
   },
   "current_limits_to_close": [
-    "P3 remains open: SourceCatalog sibling private crossings are covered by a static AST contract registered in fast CI; focused, affected, and expanded owner-port tests are green and independent conceptual review passed. This is static analysis, not a Python sandbox. Public streaming/parser interfaces and replay of historical stream/canonical claims on current main remain open.",
+    "Business-summary fidelity and relevance remain open after the current H1 extraction, recovery and scoped RF adoption passed. Keep static CI boundary coverage and tested public ports.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
     "Berkshire 15 unprocessed explicitly retained; full-source/long-frontier generalization remains partial; 10 required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatory PDF/HK/US RPO and genuinely unexposed holdouts"
@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "MODULE_BOUNDARIES_AND_T4_SEM_ACCEPTED; REAL_SUMMARY_CACHE_RF_OPEN",
-  "as_of_date": "2026-11-11",
-  "observed_at_utc": "2026-11-11T22:17:29Z",
-  "next_action": "Run one actual Phase C source summary, prove same- and cross-run recovery without a new charge, then independently verify content and actual RF adoption.",
+  "project_status": "MODULE_BOUNDARIES_T4_SEM_AND_SCOPED_SOURCE_CARD_CHAIN_ACCEPTED; BUSINESS_SUMMARY_CHANGES_REQUIRED",
+  "as_of_date": "2026-11-14",
+  "observed_at_utc": "2026-11-14T05:36:41Z",
+  "next_action": "Separate business highlights from original source cards, reproduce four historical paraphrase errors, and improve source/actor scope on the current frozen evidence before a new real acceptance.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -288,8 +288,9 @@
     },
     {
       "id": "C-summary-cache-RF",
-      "status": "IN_PROGRESS_REAL_SUMMARY",
-      "preparation": "review/architecture-quality-20261101/implementation-results/C-preparation.md"
+      "status": "CACHE_AND_RF_RATIONALE_VERIFIED; SUMMARY_CONTENT_CHANGES_REQUIRED",
+      "preparation": "review/phase-c-h1-preflight-20261114.md",
+      "current_evidence": "review/phase-c-h1-formal-20261114.md"
     },
     {
       "id": "R4-company-and-generalization",

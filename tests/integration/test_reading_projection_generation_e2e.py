@@ -13,6 +13,7 @@ from integration.test_narrative_generation_reuse import (
     record_proof,
     loopback_model_server as _loopback_fixture,
 )
+from support.legacy_reading_producer import deploy_historical_reading_producer
 
 loopback_model_server = _loopback_fixture
 
@@ -71,9 +72,7 @@ def _assert_historical_wire(data, version):
         assert set(data["response_schema"]["properties"]["draft"]["properties"]) == {"claims"}
         return
     assert data["schema_version"] == "narrative-model-request/1.4"
-    # This test freezes a legacy projection choice against today's native
-    # selection. Exact pre-upgrade context/1 bytes are covered by immutable
-    # golden packets and the separate old-code lifecycle replay.
+    # The fixture deploys the historical pre-support-use selector.
     assert data["reading_strategy"]["schema_version"] == (
         "du-production-reading/3" if version is None else version)
     assert {"source_id", "source_sha256", "language"} <= set(
@@ -132,31 +131,30 @@ if __name__ == "__main__":
             # bootstrap. It pauses before reservation, never replaces output.
             bootstrap = root / "pre-http-bootstrap"
             bootstrap.mkdir()
-            # runpy returns the real observer function; startup module caching
-            # must not leave the worker without its pre-HTTP interruption.
+            source_bootstrap, observations, _producer = deploy_historical_reading_producer(root)
+            # Both the controller and children start with the frozen producer
+            # and the same interruption.
             (bootstrap / "sitecustomize.py").write_text(
-                "import runpy\nfixture=runpy.run_path(" + repr(str(launcher)) + ",run_name='fixture_bootstrap')\n"
+                "import runpy\nrunpy.run_path(" + repr(str(source_bootstrap / "sitecustomize.py")) + ")\n"
+                "fixture=runpy.run_path(" + repr(str(launcher)) + ",run_name='fixture_bootstrap')\n"
                 "from company_wiki.automation.narrative_model_caller import BudgetedNarrativeCaller\n"
                 "BudgetedNarrativeCaller.generate=fixture['paused']\n", encoding="utf-8")
-            entry = root / "pause-entry.py"
-            entry.write_text(
-                "import os,sys,runpy\nfrom pathlib import Path\nbootstrap=" + repr(str(bootstrap)) + "\n"
-                "sys.path.insert(0,bootstrap)\nos.environ['PYTHONPATH']=bootstrap+os.pathsep+os.environ['PYTHONPATH']\n"
-                "runpy.run_path(str(Path(bootstrap)/'sitecustomize.py'))\nfrom narrative_batch_configured import main\n"
-                "if __name__=='__main__': raise SystemExit(main())\n", encoding="utf-8")
             path = request_path(root, imported, loopback_model_server.endpoint, "unpaid-old-input", selector_version="0.9.0")
-            process, paused = invoke(root, config, path, llm, "unpaid-old-input", launcher=entry)
+            process, paused = invoke(
+                root, config, path, llm, "unpaid-old-input", launcher=launcher, bootstrap=bootstrap,
+            )
             _proof(root, loopback_model_server, paused, historical_projection, "pre-model-pause")
             error_type = (root / "pause-error-type.txt").read_text(encoding="utf-8") if (root / "pause-error-type.txt").exists() else None
             assert process.returncode == 2 and paused["status"] == "paused", (paused, error_type)
             assert not loopback_model_server.requests and not versioned_replies
             recorded = json.loads((root / "pre-http-request.json").read_text(encoding="utf-8"))
             _assert_historical_wire(json.loads(recorded["data_json"]), historical_projection)
+            assert '"reading_schema": "du-production-reading/3"' in observations.read_text(encoding="utf-8")
             runs = NarrativeRunStore(root / "AUTO.sqlite")
             old = runs.get_run("unpaid-old-input")
             _assert_historical_manifest(old, imported["source_ref"]["document_id"], historical_projection)
             assert not runs.reservations_for_run("unpaid-old-input")
-            process, completed = invoke(root, config, path, llm, "unpaid-old-input")
+            process, completed = invoke(root, config, path, llm, "unpaid-old-input", bootstrap=source_bootstrap)
             _proof(root, loopback_model_server, completed, historical_projection, "legacy-paid-resume")
             assert process.returncode == 0 and completed["status"] == "completed", completed
             assert len(loopback_model_server.requests) == 1 and not loopback_model_server.errors
@@ -189,6 +187,7 @@ def test_old_missing_projection_paid_outbox_recovers_then_new_generation_is_cach
         sentinel.write_bytes(b"preserve existing fixture")
         protected = {p: _fingerprint(p) for p in (config, llm, sentinel, *(root / "companies").rglob("*")) if p.is_file()}
         try:
+            source_bootstrap, observations, _producer = deploy_historical_reading_producer(root)
             launcher = root / "old-model-input.py"
             launcher.write_text(_historical_manifest_binding(historical_projection) + '''
 from company_wiki.source_catalog.narrative_artifact_store import NarrativeArtifactStore
@@ -201,10 +200,11 @@ if __name__ == "__main__":
     raise SystemExit(main())
 ''', encoding="utf-8")
             old_path = request_path(root, imported, loopback_model_server.endpoint, "old-input", selector_version="0.9.0")
-            process, prepared = invoke(root, config, old_path, llm, "old-input", launcher=launcher)
+            process, prepared = invoke(root, config, old_path, llm, "old-input", launcher=launcher, bootstrap=source_bootstrap)
             _proof(root, loopback_model_server, prepared, historical_projection, "legacy-activation-pending")
             assert process.returncode == 2 and prepared["documents"][0]["status"] == "activation_pending", prepared
             assert len(loopback_model_server.requests) == 1
+            assert '"reading_schema": "du-production-reading/3"' in observations.read_text(encoding="utf-8")
             runs = NarrativeRunStore(root / "AUTO.sqlite")
             old = runs.get_run("old-input")
             key = imported["source_ref"]["document_id"]
@@ -225,22 +225,20 @@ if __name__ == "__main__":
             legacy_ref, legacy_bundle, _ = public_read(root, config, imported, kind)
             new_path = request_path(root, imported, loopback_model_server.endpoint, "new-input", selector_version="0.9.0")
             process, current = invoke(root, config, new_path, llm, "new-input")
-            _proof(root, loopback_model_server, current, historical_projection, "current-v4-summary-miss")
+            _proof(root, loopback_model_server, current, historical_projection, "current-source-card-miss")
             assert process.returncode == 0 and current["status"] == "completed", current
             assert len(loopback_model_server.requests) == 2
             manifest = _thaw_generations(json.loads(runs.get_run("new-input").binding_json))[key]
-            assert manifest["reading_model_projection"] == "reading-model-input/4"
-            assert manifest["reading_model_boundary"]["reading_projection_version"] == "reading-model-input/4"
+            assert manifest["reading_model_projection"] == "reading-model-input/5"
+            assert manifest["reading_model_boundary"]["reading_projection_version"] == "reading-model-input/5"
             data = json.loads(json.loads(loopback_model_server.requests[1][1])["messages"][1]["content"])
-            assert data["schema_version"] == "narrative-model-request/5"
-            assert data["reading_strategy"]["schema_version"] == "reading-model-input/4"
-            assert set(versioned_replies[1][1]) == {"drafts_by_task"}
+            assert data["schema_version"] == "narrative-model-request/6"
+            assert data["reading_strategy"]["schema_version"] == "source-extractive-ranking-strategy/1"
+            assert set(versioned_replies[1][1]) == {"decisions"}
             assert "evidence_groups" not in data
             material = data['material']
-            fragments = material['shared_fragments'] + [part for task in material['tasks']
-                for part in task['parts'] if 'text' in part]
-            fragments.sort(key=lambda row: int(row['source_key'][1:]))
-            assert [row['text'] for row in fragments] == [row[1] for row in old_data['evidence']]
+            assert material["schema_version"] == "source-extractive-ranking-view/1"
+            assert [row[1] for row in material["fragments"]] == [row[1] for row in old_data["evidence"]]
             assert runs.reservations_for_run("new-input")[0].request_sha256 != after[0]["request_sha256"]
             assert current["documents"][0]["artifact_ref"] != restored["documents"][0]["artifact_ref"]
             new_usage = tuple(asdict(row) for row in runs.reservations_for_run("new-input"))
@@ -257,7 +255,8 @@ if __name__ == "__main__":
             assert tuple(asdict(row) for row in runs.reservations_for_run("old-input")) == after
             assert len(loopback_model_server.requests) == 2 and not loopback_model_server.errors
             _, new_bundle, _ = public_read(root, config, imported, kind)
-            assert new_bundle["reading_context"] == legacy_bundle["reading_context"]
+            assert legacy_bundle["reading_context"]["schema_version"] == "du-production-reading/3"
+            assert new_bundle["reading_context"]["schema_version"] == "du-production-reading/4"
             assert public_read(root, config, imported, kind, exact=legacy_ref)[1] == legacy_bundle
         finally:
             assert all(_fingerprint(p) == body for p, body in protected.items())
