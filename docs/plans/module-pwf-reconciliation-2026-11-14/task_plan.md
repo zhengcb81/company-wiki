@@ -33,7 +33,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 
 | Lane | 本地目标分支 / 收尾 tip | 远端状态 | ROOT 结论 |
 |---|---|---|---|
-| CWP | `master@d6c873c78510998ff0448baf16937dbc1bc6eee7`；含 `ca2602a2f`、`8ae20ce6f`、`2cbc01156`、`d6c873c` | 最近一次成功核对 `origin/master=7361aad82`；本轮 `ls-remote` 因 `getaddrinfo() thread failed to start` 未刷新 | 本地提交均在 `master`，内容独审 PASS；平台 Mimosa L3 三次阻断 push，**唯一未发布 lane** |
+| CWP | `master`；收尾与总控 PWF 更新均已提交 | 最近一次成功核对 `origin/master=7361aad82`；本轮 `ls-remote` 因 `getaddrinfo() thread failed to start` 未刷新 | 本地提交均在 `master`，内容独审 PASS；平台 Mimosa L3 三次阻断 push，**唯一未发布 lane** |
 | FF | `main@c2aec910b7b2dc210f60c687390b4da220decbbc` | live `origin/main` 相等 | 已推送；原始测试收据与后续 carrier 提交链有说明 |
 | RF | `main@1ea5008290ab302bcfe6d935f3703244139c774f` | live `origin/main` 相等 | 已推送；修正 handoff final SHA 与过期 C4 状态，独审 PASS |
 | ET | `main@c777bf1ca82ba7cadf783dee4d0c7341dd48ec7b` | live `origin/main` 相等 | 已推送；内容提交与后续 receipt carrier 已区分 |
@@ -41,7 +41,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 | Dashboard | `main@4477eb9377a655a5dcbaf5bdcfbb52803b18561a` | live `origin/main` 相等 | 已推送；本地 follow-up 记录的 CWP 状态和远端 SHA 已修正并独审 |
 | RFAudit | `main@50d8ab6fa99db8920358c97f63be4afff8299243` | owner card 明确无 remote | 本地 main 收口完成；交接与 PASS 复核位于 CWP central review |
 
-除 CWP 外，所有本卡新增/修复提交均已进入对应目标主线并推送。既有 active/evidence/跨 owner branch 按收据保留；这不等于漏并线，也不授权把所有非祖先 refs 一律 merge。
+FF、RF、ET、SID、Dashboard 的本卡新增/修复提交已进入对应目标主线并推送；RFAudit 按卡无 remote，在 `main` 本地收口；CWP 的本地提交尚未发布。既有 active/evidence/跨 owner branch 按收据保留；这不等于漏并线，也不授权把所有非祖先 refs 一律 merge。
 
 ### 阶段 3 — 每模块只留一个主要 Projects 目录
 **状态：安全分类与可清理项完成；仍保留的目录均有 owner/证据理由，物理目录未全部收敛为一个**
@@ -56,7 +56,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 
 - [x] 七条 owner 卡按提交、PWF、handoff、测试和独审逐项验收；发现的 RF、SID、Dashboard 收据错误已在各自仓修正。
 - [x] FF/RF/ET/SID/Dashboard 对应 closeout 主线已推送；RFAudit 按卡无 remote。
-- [ ] CWP 本地四笔收尾提交在 `master`，但 push 被平台 Mimosa L3 前置门三次拦截；不得绕过。平台当前阻断范围与未发布 SHA 见 CWP handoff §11 和本次 `progress.md`。
+- [ ] CWP 本地收尾与总控 PWF 提交在 `master`，但 push 被平台 Mimosa L3 前置门三次拦截；不得绕过。平台当前阻断范围与未发布提交见 CWP handoff §11 和本次 `progress.md`。
 - [ ] CWP 远端确认后，重新核对父计划 `du11-source-closure-2026-10-18` 状态；此时仍保持 paused，不自动恢复公司循环或跨模块组合测试。
 
 ## 大节点审查与测试
@@ -76,10 +76,10 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 
 ## 下一步
 
-唯一未完成的发布动作是 CWP 正常推送 `master` 的四笔本地收尾提交。前置平台 Mimosa L3 扫描阻断尚无本仓可安全修复/基线化的完整报告；待平台规则或扫描结果有变化后，执行一次正常 `git push origin master` 并核验 live SHA。不得改命令、停用 hook 或换通道绕过。其余目录保留项与业务后续按各 handoff 的 owner 顺序处理；父业务 goal 继续 paused。
+唯一未完成的发布动作是 CWP 正常推送 `master` 上的本地收尾与 PWF 提交。前置平台 Mimosa L3 扫描阻断尚无本仓可安全修复/基线化的完整报告；待平台规则或扫描结果有变化后，执行一次正常 `git push origin master` 并核验 live SHA。不得改命令、停用 hook 或换通道绕过。其余目录保留项与业务后续按各 handoff 的 owner 顺序处理；父业务 goal 继续 paused。
 
 ## CWP lane 状态（2026-11-14）
 
 CWP 本仓收口已按 [owner_cards/cwp_closeout.md](owner_cards/cwp_closeout.md) 执行完成：13 个非祖先 refs（11 `ABSORBED` + 2 `UNCLASSIFIED_HOLD`）、8 个 worktree、4 个额外 Projects 目录、1 个 stash 全部逐项归因，本轮清理为零（无一项满足四重移除条件，依据逐项见交接文件）。CWP 本仓无未归因 refs/工区/目录残留；涉及其他模块 owner 的剩余项列在交接文件 remaining_items。CWP 业务主线唯一下一步为 du11 P1 业务摘要质量修正，父计划公司循环保持 paused。交接与独审绑定：[review/cwp-closeout-handoff.md](review/cwp-closeout-handoff.md) / [cwp-closeout-handoff.json](review/cwp-closeout-handoff.json)。
 
-阶段 2–4 的 owner 卡已全部提交查收。CWP 本地收尾 tip 为 `d6c873c78`，最近成功观察到的远端仍为 `7361aad82`；平台 push gate 与本轮 DNS/线程错误使远端状态无法刷新，故仅将 CWP 记为 BLOCKED。其他 lane 的实际结果见上表；StockWiki/IQS 仍暂缓。
+阶段 2–4 的 owner 卡已全部提交查收。CWP 收尾及总控 PWF 更新均已提交到本地 `master`；最近成功观察到的远端仍为 `7361aad82`。平台 push gate 与本轮 DNS/线程错误使远端状态无法刷新，故仅将 CWP 记为 BLOCKED。其他 lane 的实际结果见上表；StockWiki/IQS 仍暂缓。

@@ -2,11 +2,11 @@
 
 ## 最终验收状态（2026-11-14）
 
-七张卡均已收到最终交接并核对独立 review。各 owner 新增/修复提交已进入自己的目标主线；除 CWP 外均已验证推送。CWP 本地 `master@d6c873c78`，最近一次成功远端观察 `origin/master@7361aad82`；平台 Mimosa L3 三次拦截正常 push，当前远端不能刷新，不使用绕过方式。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
+七张卡均已收到最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入各自目标主线并验证推送；RFAudit 按卡没有 remote，仅在 `main` 本地收口。CWP 的收尾与总控 PWF 提交都在本地 `master`；最近一次成功远端观察 `origin/master@7361aad82`。平台 Mimosa L3 三次拦截正常 push，当前远端不能刷新，不使用绕过方式。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
 
 | Lane | 当前本地主线 | 远端 | 收尾状态 |
 |---|---|---|---|
-| CWP | `master@d6c873c78` | 最近成功观察 `7361aad82`；本轮 DNS/线程错误未能刷新 | 本地 PASS；发布 BLOCKED |
+| CWP | `master`（收尾与总控 PWF 更新均已提交） | 最近成功观察 `7361aad82`；本轮 DNS/线程错误未能刷新 | 本地 PASS；发布 BLOCKED |
 | FF | `main@c2aec910` | live 相等 | PASS / 已推送 |
 | RF | `main@1ea50082` | live 相等 | PASS / 收据已修 / 已推送 |
 | ET | `main@c777bf1` | live 相等 | PASS / 已推送 |

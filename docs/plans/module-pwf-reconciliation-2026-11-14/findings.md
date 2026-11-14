@@ -5,7 +5,7 @@
 - closeout 的“内容提交”和“后续只写收据的 carrier commit”可能是不同 SHA。RF 和 SID handoff 需明确这两类 SHA，避免把首轮候选、基线或历史提交写成最终主线 tip；Dashboard 的 D00 closeout 与其后 owner-acceptance 记录也需分开记。
 - ROOT 找到并修复三项可确认的收据错位：RF final 错留 base 且 C4 pending；SID `independent_review.reviewed_head` 错留 CHANGES REQUIRED 初轮；Dashboard 汇总报告把 CWP push 写成已闭环并引用过期远端 SHA。对应内容已在 owner 仓修正、独立复核，并在各自主线发布。
 - CWP 未发布的原因不是本卡代码测试失败：平台 PreToolUse 的 Mimosa L3 对全仓历史扫描，阻断三次正常 push；被标记文件在 lane delta 外、delta 仅为 PWF 文档。完整报告没有落盘，已枚举 12 条 high，不完整列出其余 197 high 与 45 medium/low。仓库约定禁止用 `--no-verify`、换 shell/协议或停 hook 绕过；这需要平台/扫描策略处置，不得伪装为项目门禁通过。
-- 本轮最新 `git ls-remote` 对 CWP 因 `getaddrinfo() thread failed to start` 失败；最后一次成功远端观察仍是 `7361aad82`。因此本地 master 的四笔提交虽然已提交在主线，远端状态仍 BLOCKED/未确认。
+- 本轮最新 `git ls-remote` 对 CWP 因 `getaddrinfo() thread failed to start` 失败；最后一次成功远端观察仍是 `7361aad82`。因此本地 master 上的收尾与总控 PWF 提交虽已进入主线，远端状态仍 BLOCKED/未确认。
 - RF `assurance/runs/daily_alert.jsonl` 新增的 2026-11-14 运行记录属于实时运行账本，与 handoff 修复无关，已排除在 stage/commit/push 范围外并保留。不要将 tracked diff 误当作本卡 WIP 或清理掉。
 - owner closeout 的清理目标是逐项归因并清除已证实可删材料，不是把所有非祖先 refs、活动工区、证据目录一律合并或删除。各 handoff 中 `ACTIVE_KEEP`、`EVIDENCE_KEEP`、`UNCLASSIFIED_HOLD` 仍按 owner 依赖处理；StockWiki/IQS 仍隔离。
 
