@@ -24,10 +24,11 @@ def payload():
         title='Annual Report', document_kind='annual_report'))
 
 
-def select(source, data, *, parser=None, selector=None, version='0.9.0'):
+def select(source, data, *, parser=None, selector=None, version='0.9.0', work_budget_factory=None):
     reader = selection.RawNarrativeSelector(
         pdf_reading=PdfReading(parser=parser),
         selector=binding.bind_narrative_selector(selector, selector_version=version),
+        work_budget_factory=work_budget_factory,
     )
     return reader.select(data, source_ref=source.source_ref, source_metadata=source.source_metadata,
                          checkpoint=lambda: None)
@@ -144,11 +145,8 @@ def test_zero_shared_work_stops_before_native_text_or_tables(monkeypatch):
     assert failure.value.dimension == 'document_work' and failure.value.limit == 0
 
 
-def test_source_work_limit_has_a_specific_terminal_production_diagnostic(monkeypatch):
-    from company_wiki import resource_budget
+def test_source_work_limit_has_a_specific_terminal_production_diagnostic():
     observed = []
-    monkeypatch.setattr(resource_budget, 'new_document_work_budget', lambda: WorkBudget(0))
-    monkeypatch.setattr(source, '_pdf_text_blocks', lambda *args, **kw: observed.append('read'))
     def no_selector(*args, **kwargs):
         pytest.fail('selector ran after the source work budget was exhausted')
 
@@ -156,7 +154,9 @@ def test_source_work_limit_has_a_specific_terminal_production_diagnostic(monkeyp
     original = payload()
     original.source_ref.content_sha256 = hashlib.sha256(data).hexdigest()
     with pytest.raises(selection.NarrativeMaterialError) as failure:
-        select(original, data, selector=no_selector)
+        select(original, data, selector=no_selector,
+               work_budget_factory=lambda: WorkBudget(0),
+               parser=lambda *args, **kwargs: observed.append('read'))
     assert failure.value.code == 'PARSER_INCOMPLETE'
     assert 'document_work limit reached' in failure.value.detail
     assert observed == []

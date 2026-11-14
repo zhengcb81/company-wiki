@@ -8,6 +8,9 @@ from types import SimpleNamespace
 
 import pytest
 
+from company_wiki.source_catalog import SourceCatalog
+from company_wiki.source_contract import SourceRef
+from support.narrative_transport_fixture import published_fixture
 from tools import source_case_runner as runner
 
 
@@ -43,6 +46,81 @@ def cli(tmp_path, monkeypatch, *, worker=True):
         args.append("--worker")
     monkeypatch.setattr(sys, "argv", args)
     return output, output.with_suffix(".json.checkpoint.json")
+
+
+@pytest.mark.parametrize("declared_fixture", ["matching", "unobserved", "different"])
+def test_observer_runs_the_verified_public_source_selection(tmp_path, declared_fixture):
+    unrelated = tmp_path / "unrelated.txt"
+    unrelated.write_text("Different immutable source.", encoding="utf-8")
+    with published_fixture(tmp_path, kind="pdf") as fixture:
+        case = _fixture_source_case(fixture)
+        if declared_fixture == "matching":
+            case["original_files"] = [str(fixture.raw_path)]
+        elif declared_fixture == "different":
+            case["original_files"] = [str(unrelated)]
+        phases = []
+        store_descriptor = SourceCatalog.store
+        import_paths = sys.path.copy()
+        result = runner.execute(case, checkpoint_sink=lambda _result, phase: phases.append(phase))
+        assert result["status"] == "OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE", result.get("error")
+        assert result["source_opened"] == {
+            "source_id": fixture.source_ref.source_id,
+            "content_sha256": fixture.source_ref.content_sha256,
+            "byte_size": fixture.source_ref.byte_size,
+        }
+        assert result["parsed_units"] and result["session_work"]["used"] > 0
+        assert result["closure"]["selected_material_replayed_by_handler"]
+        assert result["model_posts"] == result["downloads"] == 0
+        assert result["database_unchanged"]
+        assert result["original_files_unchanged"] is (None if declared_fixture == "unobserved" else True)
+        assert result["original_fixture_matches_source"] is {
+            "matching": True, "unobserved": None, "different": False,
+        }[declared_fixture]
+        assert phases == ["SOURCE_READY", "ORIGINAL_BEFORE_OPEN", "ORIGINAL_OPENED"]
+        assert SourceCatalog.store is store_descriptor
+        assert sys.path == import_paths
+
+
+def _fixture_source_case(fixture):
+    metadata = fixture.reader.describe_version(SourceRef(**fixture.source_ref.to_dict()))
+    return {
+        "case_id": "native-source",
+        "catalog_config": str(fixture.config_path),
+        "request": {
+            "schema_version": "source-revision-event/2.0",
+            "source_ref": fixture.source_ref.to_dict(),
+            "expected_read_policy_sha256": fixture.reader.read_policy_sha256(),
+            "source_metadata": {
+                "source_class": "filing", "title": metadata["title"],
+                "document_kind": metadata["document_kind"], "language": metadata["language"],
+            },
+        },
+    }
+
+
+def test_observer_does_not_claim_replay_for_empty_selection(tmp_path):
+    with published_fixture(tmp_path, kind="skip") as fixture:
+        receipt = runner.execute(_fixture_source_case(fixture))
+    assert receipt["status"] == "OBSERVED_NOT_COMPANY_OR_ECONOMIC_ACCEPTANCE", receipt.get("error")
+    assert receipt["selected_span_count"] == 0
+    assert receipt["closure"]["selected_material_replayed_by_handler"] is False
+
+
+def test_observer_preserves_failed_replay_diagnostics(tmp_path, monkeypatch):
+    from company_wiki.source_catalog.narrative_pdf_reading import NativePdfBackend
+
+    with published_fixture(tmp_path, kind="pdf") as fixture:
+        def rejected(*_args):
+            raise ValueError("synthetic material mismatch")
+
+        monkeypatch.setattr(NativePdfBackend, "verify_material", rejected)
+        receipt = runner.execute(_fixture_source_case(fixture))
+    assert receipt["status"] == "FAILED"
+    assert receipt["error_type"] == "NarrativeMaterialError"
+    assert receipt["session_work"]["used"] > 0
+    assert receipt["selection_before_verification"]["span_ids"]
+    assert isinstance(receipt["selection_before_verification"]["diagnostics"], list)
+    assert not receipt.get("closure", {}).get("selected_material_replayed_by_handler")
 
 
 def test_large_completed_result_is_durable_and_keeps_checkpoint_evidence(tmp_path, monkeypatch):
@@ -240,7 +318,7 @@ def test_parent_timeout_preserves_child_checkpoint_or_committed_result(tmp_path,
 def test_fixed_oracle_excerpts_keep_current_intro_and_explicit_missing_lineage():
     def unit(uid, text):
         return SimpleNamespace(unit_id=uid, source_id="synthetic", source_role="company_filing",
-                               raw_text=text, coordinates=SimpleNamespace(locator=lambda: "loc:" + uid))
+                               raw_text=text, locator="loc:" + uid)
 
     originals = {"current": unit("current", "本公司作出当前承诺。"),
                  "intro": unit("intro", "新主体的原始引介：")}

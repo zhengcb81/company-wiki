@@ -8,6 +8,7 @@ receipt is persisted. Source identities are opened through SourceVersionReader.
 from __future__ import annotations
 
 import argparse
+from collections.abc import Callable, Mapping
 from dataclasses import asdict, is_dataclass
 from datetime import datetime, timezone
 from hashlib import sha256
@@ -17,6 +18,7 @@ from pathlib import Path
 import subprocess
 import sys
 import time
+from typing import TYPE_CHECKING
 from uuid import uuid4
 
 from tools.source_case_checks import (
@@ -25,6 +27,43 @@ from tools.source_case_checks import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
+
+if TYPE_CHECKING:
+    from company_wiki.source_catalog.narrative_reading import ReadingInspection
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
+    from company_wiki.source_contract import SourceRef, VerifiedContent
+
+
+class _ObservedSourceReader:
+    """Observe the verified identity at the same pathless port as the worker."""
+
+    __slots__ = ("__reader", "__before_open", "__after_open")
+
+    def __init__(self, reader: SourceVersionReader, *, before_open: Callable[[], None],
+                 after_open: Callable[[VerifiedContent], None]) -> None:
+        self.__reader = reader
+        self.__before_open = before_open
+        self.__after_open = after_open
+
+    def open_described_version(
+        self, ref: SourceRef, *, purpose: str, expected_read_policy_sha256: str | None = None,
+    ) -> tuple[VerifiedContent, Mapping[str, object]]:
+        self.__before_open()
+        opened, metadata = self.__reader.open_described_version(
+            ref, purpose=purpose, expected_read_policy_sha256=expected_read_policy_sha256,
+        )
+        self.__after_open(opened)
+        return opened, metadata
+
+    def open_version(
+        self, ref: SourceRef, *, purpose: str, expected_read_policy_sha256: str | None = None,
+    ) -> VerifiedContent:
+        return self.open_described_version(
+            ref, purpose=purpose, expected_read_policy_sha256=expected_read_policy_sha256,
+        )[0]
+
+    def describe_version(self, ref: SourceRef) -> Mapping[str, object]:
+        return self.__reader.describe_version(ref)
 
 
 def jsonable(value):
@@ -126,13 +165,13 @@ def observation_checkpoint(record, phase):
     """Retain execution/integrity evidence before large result serialization."""
     fields = (
         "case_id", "started_at_utc", "status", "model_posts", "downloads",
-        "raw_copies", "source_select_calls", "source_ref", "seconds",
+        "raw_copies", "source_select_calls", "source_ref", "source_opened", "seconds",
         "database_before", "database_after", "database_unchanged",
-        "original_files_before", "original_files_after", "original_files_unchanged",
+        "original_files_before", "original_files_after", "original_files_unchanged", "original_fixture_matches_source",
         "runtime_before", "runtime_after", "runtime_unchanged", "selected_span_count",
         "observer_before", "observer_after", "observer_unchanged",
         "native_member_count", "selection_material_sha256", "decision_digest",
-        "checkpoint_gaps", "session_work", "error_type",
+        "checkpoint_gaps", "session_work", "selection_before_verification", "error_type",
     )
     result = {key: record[key] for key in fields if key in record}
     result.update(schema_version="source-observation-checkpoint/1", phase=phase)
@@ -255,7 +294,7 @@ def excerpt_units_for_checkpoints(targets, context_checks, span_index, view_inde
             continue
         rows.append({
             "unit_id": unit.unit_id, "source_id": unit.source_id,
-            "locator": unit.coordinates.locator(), "source_role": unit.source_role,
+            "locator": unit.locator, "source_role": unit.source_role,
             "text_sha256": sha256(unit.raw_text.encode()).hexdigest(), "raw_text": unit.raw_text,
         })
     return rows, {
@@ -295,7 +334,6 @@ def selected_members(span):
 
 
 def execute(case, *, checkpoint_sink=None):
-    sys.path[:0] = [str(ROOT / "src"), str(ROOT / "scripts"), str(ROOT)]
     from company_wiki.source_catalog.config import load_catalog_config
     from company_wiki.source_catalog.service import SourceCatalog
     from company_wiki.source_catalog.source_reader import SourceVersionReader
@@ -305,13 +343,13 @@ def execute(case, *, checkpoint_sink=None):
         PdfReading,
         NativePdfBackend,
     )
-    from company_wiki.source_catalog import narrative_reading
-    from company_wiki.source_catalog import source_reader as source_reader_module
+    from company_wiki.source_catalog.narrative_selector_binding import bind_reading_inspection
 
     config = load_catalog_config(ROOT / case["catalog_config"])
     database = config.database_path
     db_paths = [database, Path(str(database) + "-wal"), Path(str(database) + "-shm")]
     before = {str(p): file_state(p) for p in db_paths}
+    original_files_before = {str(ROOT / p): file_state(ROOT / p) for p in case.get("original_files", ())}
     runtime = runtime_state()
     deadline = time.monotonic() + case.get("max_seconds", 90)
 
@@ -319,45 +357,6 @@ def execute(case, *, checkpoint_sink=None):
         if time.monotonic() > deadline:
             raise TimeoutError("source acceptance checkpoint exceeded")
 
-    def no_store(_):
-        raise AssertionError("read-only acceptance must never create CatalogStore")
-
-    SourceCatalog.store = property(no_store)
-    original = narrative_reading._candidates
-    original_read = source_reader_module._read_verified_bytes
-    original_files_before = {}
-    captured = {}
-
-    def observe_original_read(path, **kwargs):
-        # Observe only paths already resolved by the storage owner; no test-side
-        # root selection and no alternate original are introduced.
-        if str(path) not in original_files_before:
-            original_files_before[str(path)] = file_state(path)
-            record["original_files_before"] = dict(original_files_before)
-            if checkpoint_sink is not None:
-                checkpoint_sink(record, "ORIGINAL_BEFORE_OPEN")
-        return original_read(path, **kwargs)
-
-    def capture(parsed, pipeline, **kwargs):
-        result = original(parsed, pipeline, **kwargs)
-        original_units = {unit.unit_id: unit for unit in parsed.units}
-        structure_checks, structure_ids = structure_context_checkpoints(
-            case.get("context_oracles", ()), pipeline.get("structure", {}), original_units
-        )
-        captured.update(
-            parsed=parsed,
-            pipeline=pipeline,
-            session=(kwargs.get("_session_state") or {}).get("session"),
-            eligible_packages=result[2],
-            original_units=original_units,
-            structure_context_checks=structure_checks,
-            structure_context_ids=structure_ids,
-        )
-        return result
-
-    narrative_reading._candidates = capture
-    source_reader_module._read_verified_bytes = observe_original_read
-    catalog = SourceCatalog(config)
     record = {
         "schema_version": "architecture-real-source-case/3",
         "case_id": case["case_id"],
@@ -367,18 +366,44 @@ def execute(case, *, checkpoint_sink=None):
         "raw_copies": 0,
         "source_select_calls": 1,
         "database_before": before,
+        "original_files_before": original_files_before,
         "runtime_before": runtime,
         "source_ref": case["request"]["source_ref"],
         "status": "RUNNING",
     }
+    inspection: ReadingInspection | None = None
+
+    def capture(observed: ReadingInspection) -> None:
+        nonlocal inspection
+        inspection = observed
+
+    def before_open() -> None:
+        if checkpoint_sink is not None:
+            checkpoint_sink(record, "ORIGINAL_BEFORE_OPEN")
+
+    def after_open(opened: VerifiedContent) -> None:
+        record["source_opened"] = {
+            "source_id": opened.source_id,
+            "content_sha256": opened.content_sha256,
+            "byte_size": opened.byte_size,
+        }
+        record["original_fixture_matches_source"] = (
+            any(state.get("sha256") == opened.content_sha256 and state.get("bytes") == opened.byte_size
+                for state in original_files_before.values())
+            if original_files_before else None
+        )
+        if checkpoint_sink is not None:
+            checkpoint_sink(record, "ORIGINAL_OPENED")
+
     if checkpoint_sink is not None:
         checkpoint_sink(record, "SOURCE_READY")
     start = time.monotonic()
+    catalog = SourceCatalog(config)
     try:
         payload = SourceRevisionEventPayload.from_dict(case["request"])
         handler = NarrativeSelectHandler(
-            reader=SourceVersionReader(catalog),
-            selector_version="0.9.0",
+            reader=_ObservedSourceReader(SourceVersionReader(catalog), before_open=before_open, after_open=after_open),
+            selector=bind_reading_inspection(capture),
             pdf_reading=PdfReading(NativePdfBackend()),
         )
         raw = handler.select_source(payload, checkpoint=checkpoint).to_dict()
@@ -398,11 +423,11 @@ def execute(case, *, checkpoint_sink=None):
             )
             if i not in by_id
         }
-        originals = captured.get("original_units", {})
+        originals = {unit.unit_id: unit for unit in inspection.original_units} if inspection else {}
         original_lookup = {}
         for unit in originals.values():
             key = (
-                unit.coordinates.locator(),
+                unit.locator,
                 sha256(unit.raw_text.encode()).hexdigest(),
             )
             original_lookup.setdefault(key, []).append(unit.unit_id)
@@ -466,28 +491,13 @@ def execute(case, *, checkpoint_sink=None):
                     None,
                 )
             cached = {}
-            session = captured.get("session")
-            if session is not None and original_unit is not None:
-                origin = (
-                    captured.get("pipeline", {})
-                    .get("_carrier_origins", {})
-                    .get(original_unit.unit_id, original_unit.unit_id)
-                )
-                owner = session.owner_for(origin)
-                cached = {
-                    "owner": owner,
-                    "fact": jsonable(session.facts.get(owner)),
-                    "passage": jsonable(session.passages.get(owner)),
-                    "profile": captured["pipeline"]
-                    .get("reading_plan", {})
-                    .get("unit_profiles", {})
-                    .get(origin),
-                }
+            if inspection is not None and original_unit is not None:
+                cached = inspection.prepared_units.get(original_unit.unit_id, {})
             targets.append(
                 {
                     **target,
                     "parsed_exact_original": None
-                    if not captured.get("parsed")
+                    if inspection is None
                     else original_unit is not None,
                     "current_original_unit_id": None if original_unit is None else original_unit.unit_id,
                     "represented": bool(direct or carriers),
@@ -500,15 +510,16 @@ def execute(case, *, checkpoint_sink=None):
             compare_context_original_members(oracle, span_index, view_index)
             for oracle in case.get("context_oracles", [])
         ]
-        structure_checks = captured.get("structure_context_checks", [])
-        structure_context_ids = captured.get("structure_context_ids", ())
+        structure_checks, structure_context_ids = structure_context_checkpoints(
+            case.get("context_oracles", ()), inspection.structure if inspection else {}, originals,
+        )
         excerpts, excerpt_coverage = excerpt_units_for_checkpoints(
             targets, context_checks, span_index, view_index, originals, additional_ids=structure_context_ids
         )
         groups_by_evidence = {}
         for group in context.get("groups", []):
             groups_by_evidence.setdefault(frozenset(group.get("evidence_ids", [])), []).append(group.get("group_id"))
-        session = captured.get("session")
+        selected_span_ids = inspection.selected_span_ids if inspection else {}
         record.update(
             selection=raw["selection"],
             seconds=time.monotonic() - start,
@@ -521,7 +532,7 @@ def execute(case, *, checkpoint_sink=None):
             source_excerpt_units=excerpts,
             source_excerpt_coverage=excerpt_coverage,
             source_structure_context_checks=structure_checks,
-            captured_pipeline_field_names=sorted(captured.get("pipeline", {})),
+            captured_pipeline_field_names=inspection.pipeline_fields if inspection else (),
             source_package_index=[
                 {
                     "package_id": package.get("package_id"),
@@ -530,17 +541,17 @@ def execute(case, *, checkpoint_sink=None):
                     "member_unit_ids": package.get("member_unit_ids", []),
                     "required_context_unit_ids": package.get("required_context_unit_ids", []),
                     "matched_group_ids": groups_by_evidence.get(frozenset(
-                            captured["pipeline"]["selected_span_ids"][uid]
+                            selected_span_ids[uid]
                             for uid in (
                                 *package.get("member_unit_ids", []),
                                 *package.get("required_context_unit_ids", []),
                             )
-                            if uid in captured["pipeline"]["selected_span_ids"]
+                            if uid in selected_span_ids
                         ), []),
                 }
-                for package in captured.get("eligible_packages", [])
+                for package in (inspection.source_packages if inspection else ())
                 if all(
-                    uid in captured["pipeline"]["selected_span_ids"]
+                    uid in selected_span_ids
                     for uid in (
                         *package.get("member_unit_ids", []),
                         *package.get("required_context_unit_ids", []),
@@ -551,7 +562,7 @@ def execute(case, *, checkpoint_sink=None):
                 k: v for k, v in context.items()
                 if k not in {"groups", "business_facets", "reading_policies"}
             },
-            parsed_units=None if not captured.get("parsed") else len(originals),
+            parsed_units=None if inspection is None else len(originals),
             native_member_count=sum(map(len, members.values())),
             invalid_native_members=[
                 m for rows in members.values() for m in rows if not m["valid_slice"]
@@ -563,16 +574,9 @@ def execute(case, *, checkpoint_sink=None):
                 "all_source_ids_match": all(
                     s["source_id"] == payload.source_ref.source_id for s in spans
                 ),
-                "selected_material_replayed_by_handler": True,
+                "selected_material_replayed_by_handler": bool(spans),
             },
-            session_work=None
-            if session is None
-            else {
-                "used": session.work_budget.used,
-                "limit": session.work_budget.max_work_units,
-                "exhausted": session.work_budget.exhausted,
-                "complete": session.complete,
-            },
+            session_work=inspection.work if inspection else None,
             selection_material_sha256=sha256(
                 json.dumps(
                     spans, sort_keys=True, ensure_ascii=False, separators=(",", ":")
@@ -615,8 +619,17 @@ def execute(case, *, checkpoint_sink=None):
                 if o["previous_bad_context_observed"]
             ],
         }
-        assert catalog._store is None
     except Exception as exc:
+        if inspection is not None and record["status"] == "RUNNING":
+            span_ids = sorted(set(inspection.selected_span_ids.values()))
+            record.update(
+                session_work=inspection.work,
+                selected_span_count=len(span_ids),
+                selection_before_verification={
+                    "span_ids": span_ids,
+                    "diagnostics": inspection.selection_diagnostics,
+                },
+            )
         record.update(
             status="FAILED",
             error_type=type(exc).__name__,
@@ -625,18 +638,19 @@ def execute(case, *, checkpoint_sink=None):
         )
     finally:
         catalog.close()
-        narrative_reading._candidates = original
-        source_reader_module._read_verified_bytes = original_read
-        record["original_files_before"] = original_files_before
         record["original_files_after"] = {
             p: file_state(p) for p in original_files_before
         }
         record["original_files_comparison"] = compare_storage_observations(
             original_files_before, record["original_files_after"]
         )
-        record["original_files_unchanged"] = record["original_files_comparison"][
-            "all_supplied_files_content_unchanged"
-        ]
+        if original_files_before:
+            record["original_files_unchanged"] = (
+                all(state["exists"] for state in original_files_before.values())
+                and record["original_files_comparison"]["all_supplied_files_content_unchanged"]
+            )
+        else:
+            record["original_files_unchanged"] = None
         record["database_after"] = {str(p): file_state(p) for p in db_paths}
         record["database_comparison"] = compare_storage_observations(
             before, record["database_after"]
@@ -654,6 +668,8 @@ def main(*, default_manifest=None, output_root=None):
     parser.add_argument("--manifest", type=Path, default=default_manifest, required=default_manifest is None)
     parser.add_argument("--case", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--original-file", type=Path, action="append", default=[],
+                        help="Independently snapshot this frozen local test fixture before and after reading")
     parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     output = args.output.resolve()
@@ -669,6 +685,7 @@ def main(*, default_manifest=None, output_root=None):
     case = next(c for c in manifest["cases"] if c["case_id"] == args.case)
     case = {
         **case,
+        "original_files": [*case.get("original_files", ()), *(str(path.resolve()) for path in args.original_file)],
         "synthetic_controls": manifest.get(
             "synthetic_controls_are_not_real_samples", []
         ),
@@ -688,7 +705,14 @@ def main(*, default_manifest=None, output_root=None):
         persist_checkpoint({"case_id": args.case, "status": "RUNNING", "source_ref": case["request"]["source_ref"],
                             "observer_before": observer_before}, "RUN_START")
         try:
-            record = execute(case, checkpoint_sink=persist_checkpoint)
+            # The checkout CLI also runs through a legacy manifest shim. Scope
+            # its import path to this invocation; execute() works when installed.
+            original_import_paths = sys.path.copy()
+            sys.path.insert(0, str(ROOT / "src"))
+            try:
+                record = execute(case, checkpoint_sink=persist_checkpoint)
+            finally:
+                sys.path[:] = original_import_paths
         except Exception as exc:
             record = {
                 "case_id": args.case, "status": "FAILED", "error_type": type(exc).__name__,
@@ -732,6 +756,7 @@ def main(*, default_manifest=None, output_root=None):
                     ],
                     "database_unchanged": record.get("database_unchanged"),
                     "original_files_unchanged": record.get("original_files_unchanged"),
+                    "original_fixture_matches_source": record.get("original_fixture_matches_source"),
                     "runtime_unchanged": record.get("runtime_unchanged"),
                     "observer_unchanged": record.get("observer_unchanged"),
                 },
@@ -741,7 +766,8 @@ def main(*, default_manifest=None, output_root=None):
         if (
             record["status"] == "FAILED" or saved.get("status") == "OBSERVATION_INCOMPLETE"
             or not record.get("database_unchanged")
-            or not record.get("original_files_unchanged")
+            or record.get("original_files_unchanged") is False
+            or record.get("original_fixture_matches_source") is False
             or not record.get("runtime_unchanged")
             or not record.get("observer_unchanged")
         ):
@@ -762,6 +788,8 @@ def main(*, default_manifest=None, output_root=None):
         str(output),
         "--worker",
     ]
+    for fixture in args.original_file:
+        command.extend(("--original-file", str(fixture.resolve())))
     try:
         result = subprocess.run(
             command,

@@ -530,3 +530,7 @@ The SourceCatalog owner-port and static module-boundary milestone was pushed to 
 ## 2026-11-11 A1 repository reconciliation
 
 The subsequent user-authorized audit covered eight repositories, 390 branch/remote refs and 253 worktrees. Completed tested intakes: FF d563b63 and Dashboard 2049356, both main and pushed. Known scratch/redundant copies were removed; originals, unique history and active state were preserved. Remaining CWP/RF/StockWiki public-interface deltas and SID WIP are assigned in ../module-boundaries-2026-11-11/reconciliation.md and the five original cards A0. No broad architecture lane or business loop has restarted; see CURRENT_STATUS.md/json for the current entry.
+
+## 2026-11-14 — M2 已关闭，R4 公开回放已恢复
+
+E01–E09 组合验收关闭并推送 6635ce76a。回放脚本移除来源目录和内部选材的全局替身，经真实来源端口、同一个工作账户和 owner 观察接口取证。定向 53 项通过，独审 PASS。冻结真实半年报 12/12、原件和 DB 验真零变化，工作账户仍耗尽；继续按责任归账。见 [R4 公开回放](review/r4-public-replay-20261114.md)。

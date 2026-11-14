@@ -5,13 +5,14 @@ selection, not IO, research conclusions, model calls or another task store.
 """
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import replace
+from collections.abc import Callable, Iterable, Mapping, Sequence
+from copy import deepcopy
+from dataclasses import dataclass, replace
 from hashlib import sha256
 from importlib import import_module
 import json
 import re
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from company_wiki.document_model.table_shapes import has_unbound_numeric_cells
 from company_wiki.document_understanding.pipeline import understand_units
@@ -46,6 +47,9 @@ from .narrative_reading_admission import (
 )
 from .narrative_business_policy import detect_reading_business_fact as detect_reading_business_fact
 
+if TYPE_CHECKING:
+    from .narrative_operating_relations import SourceOperatingSession
+
 READING_SELECTOR_VERSION = "0.9.0"
 MAX_READING_CHARS = 48000
 _BUSINESS_ROLES = frozenset({"business", "management_discussion", "operating_metrics",
@@ -59,6 +63,57 @@ _REFERENCE_KINDS = frozenset({"background", "paragraph_event", "risk", "project"
 _REFERENCE_DEFERRAL_REASONS = frozenset({"REFERENCE_UNRESOLVED", "REFERENCE_ENVELOPE"})
 
 
+@dataclass(frozen=True, slots=True)
+class ReadingUnitObservation:
+    unit_id: str
+    source_id: str
+    locator: str
+    source_role: str
+    raw_text: str
+
+
+@dataclass(frozen=True, slots=True)
+class ReadingInspection:
+    """Detached observations from one selection, for offline replay diagnostics."""
+
+    original_units: tuple[ReadingUnitObservation, ...]
+    structure: Mapping[str, Any]
+    prepared_units: Mapping[str, dict[str, Any]]
+    source_packages: tuple[dict[str, Any], ...]
+    selected_span_ids: Mapping[str, str]
+    work: Mapping[str, Any]
+    pipeline_fields: tuple[str, ...]
+    selection_diagnostics: tuple[Mapping[str, Any], ...]
+
+
+def _inspect_reading(parsed: DocumentStructure, pipeline: Mapping[str, Any],
+                     eligible: Sequence[Mapping[str, Any]], budget: WorkBudget,
+                     diagnostics: Sequence[Mapping[str, Any]],
+                     session: SourceOperatingSession | None = None) -> ReadingInspection:
+    origins = pipeline.get("_carrier_origins", {})
+    profiles = pipeline.get("reading_plan", {}).get("unit_profiles", {})
+    prepared = {}
+    if session is not None:
+        for unit in parsed.units:
+            origin = origins.get(unit.unit_id, unit.unit_id)
+            owner = session.owner_for(origin)
+            prepared[unit.unit_id] = {
+                "owner": owner, "fact": session.facts.get(owner),
+                "passage": session.passages.get(owner), "profile": deepcopy(profiles.get(origin)),
+            }
+    fields = ("package_id", "kind", "anchor_unit_ids", "member_unit_ids", "required_context_unit_ids")
+    return ReadingInspection(
+        tuple(ReadingUnitObservation(unit.unit_id, unit.source_id, unit.coordinates.locator(),
+                                     unit.source_role, unit.raw_text) for unit in parsed.units),
+        deepcopy(pipeline.get("structure", {})),
+        prepared,
+        tuple({key: deepcopy(package[key]) for key in fields if key in package} for package in eligible),
+        dict(pipeline.get("selected_span_ids", {})),
+        {"used": budget.used, "limit": budget.max_work_units, "exhausted": budget.exhausted,
+         "complete": session is not None and session.complete},
+        tuple(sorted(pipeline)),
+        tuple(deepcopy(diagnostics)),
+    )
 
 
 
@@ -1161,7 +1216,9 @@ def _package_local_context_members(
 def select_reading_evidence(parsed: DocumentStructure, *, title: str,
                             existing_kind: str = "unknown", max_selected: int | None = None,
                             max_chars: int = MAX_READING_CHARS,
-                            work_budget: WorkBudget | None = None) -> NarrativeEvidencePackage:
+                            work_budget: WorkBudget | None = None,
+                            observe: Callable[[ReadingInspection], None] | None = None,
+                            ) -> NarrativeEvidencePackage:
     route = route_document(title, existing_kind=existing_kind, max_selected=max_selected)
     mime_type = parsed.mime_type or ("text/plain" if route.document_kind == "investor_call_transcript" else
                                     "application/pdf" if parsed.page_count else "text/html")
@@ -1175,14 +1232,21 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         pipeline = _understand(parsed, title=title, kind=route.document_kind, mime_type=mime_type,
                                work_budget=budget, _native_contexts=native_contexts)
     except WorkBudgetExceeded as refusal:
-        return _deferred_selection(parsed, route, budget=budget, refusal=refusal)
-    if pipeline.get("analysis_status") == "deferred":
-        return _deferred_selection(parsed, route, budget=budget)
+        result = _deferred_selection(parsed, route, budget=budget, refusal=refusal)
+        if observe is not None:
+            observe(_inspect_reading(parsed, {}, (), budget, result.selection_diagnostics))
+        return result
     session_state: dict[str, Any] = {}
-    candidates, reading, eligible, graph_complete, withheld = _candidates(
-        parsed, pipeline, work_budget=budget, _session_state=session_state,
-        _native_contexts=native_contexts)
-    session = session_state["session"]
+    if pipeline.get("analysis_status") != "deferred":
+        candidates, reading, eligible, graph_complete, withheld = _candidates(
+            parsed, pipeline, work_budget=budget, _session_state=session_state,
+            _native_contexts=native_contexts)
+    session = session_state.get("session")
+    if session is None:
+        result = _deferred_selection(parsed, route, budget=budget)
+        if observe is not None:
+            observe(_inspect_reading(parsed, pipeline, (), budget, result.selection_diagnostics))
+        return result
     origins = pipeline.get("_carrier_origins", {})
     dropped = 0
     proved_without_offer = 0
@@ -1314,6 +1378,8 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
                                    for row in result.selection_diagnostics):
             trace["inventory_complete"] = False
         dependencies = dependency_port.freeze_decision_dependencies(trace)
+    if observe is not None:
+        observe(_inspect_reading(parsed, pipeline, eligible, budget, result.selection_diagnostics, session))
     return replace(result, reading_context=context, reading_dependencies=dependencies)
 
 
@@ -1355,4 +1421,4 @@ def _deferred_selection(parsed: DocumentStructure, route: DocumentRoute, *,
         selection_diagnostics=(_document_work_diagnostic(budget, refusal),))
 
 
-__all__ = ["select_reading_evidence", "READING_SELECTOR_VERSION"]
+__all__ = ["ReadingInspection", "ReadingUnitObservation", "select_reading_evidence", "READING_SELECTOR_VERSION"]

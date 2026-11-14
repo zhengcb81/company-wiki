@@ -1222,5 +1222,19 @@
       "current_root_test_worktrees_removed": 4,
       "current_root_test_directories_removed": 4
     }
+  },
+  "r4_public_replay_20261114": {
+    "evidence": "review/r4-public-replay-20261114.md",
+    "source_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+    "required_represented": "12/12",
+    "work_used": 15996656,
+    "work_limit": 16000000,
+    "exhausted": true,
+    "source_processing_complete": false,
+    "database_and_original_unchanged": true,
+    "tests_passed": 53,
+    "independent_review": "PASS",
+    "model_posts": 0,
+    "downloads": 0
   }
 }

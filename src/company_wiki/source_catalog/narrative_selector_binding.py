@@ -7,7 +7,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import partial
-from typing import Protocol
+from typing import TYPE_CHECKING, Protocol
+from collections.abc import Callable
 from company_wiki.resource_budget import WorkBudget
 
 from company_wiki.document_model.narrative import DocumentStructure, NarrativeEvidencePackage
@@ -15,25 +16,29 @@ from .narrative_evidence import (
     NarrativeSelectorVersionError, resolve_narrative_selector_version, select_narrative_evidence,
 )
 
+if TYPE_CHECKING:
+    from .narrative_reading import ReadingInspection
+
 
 class NarrativeSelector(Protocol):
     def __call__(self, parsed: DocumentStructure, *, title: str,
                  existing_kind: str = "unknown") -> NarrativeEvidencePackage: ...
 
 
-@dataclass(frozen=True)
+class _BudgetedSelector(Protocol):
+    def __call__(self, parsed: DocumentStructure, *, title: str, existing_kind: str,
+                 work_budget: WorkBudget | None) -> NarrativeEvidencePackage: ...
+
+
+@dataclass(frozen=True, slots=True)
 class BoundNarrativeSelector:
-    selector: NarrativeSelector
+    __select: _BudgetedSelector
     selector_version: str
-    builtin: bool = False
 
     def __call__(self, parsed: DocumentStructure, *, title: str,
                  existing_kind: str = "unknown",
                  work_budget: WorkBudget | None = None) -> NarrativeEvidencePackage:
-        if self.builtin and work_budget is not None:
-            return select_narrative_evidence(parsed, title=title, existing_kind=existing_kind,
-                selector_version=self.selector_version, work_budget=work_budget)
-        return self.selector(parsed, title=title, existing_kind=existing_kind)
+        return self.__select(parsed, title=title, existing_kind=existing_kind, work_budget=work_budget)
 
 
 def bind_narrative_selector(selector: NarrativeSelector | None = None, *,
@@ -46,10 +51,22 @@ def bind_narrative_selector(selector: NarrativeSelector | None = None, *,
         return selector
     if selector is None or selector is select_narrative_evidence:
         effective = resolve_narrative_selector_version(selector_version)
-        return BoundNarrativeSelector(partial(select_narrative_evidence, selector_version=effective), effective, True)
+        return BoundNarrativeSelector(partial(select_narrative_evidence, selector_version=effective), effective)
     if selector_version is None:
         raise NarrativeSelectorVersionError("CUSTOM_SELECTOR_VERSION_REQUIRED")
-    return BoundNarrativeSelector(selector, resolve_narrative_selector_version(selector_version))
+
+    def custom(parsed: DocumentStructure, *, title: str, existing_kind: str,
+               work_budget: WorkBudget | None) -> NarrativeEvidencePackage:
+        return selector(parsed, title=title, existing_kind=existing_kind)
+
+    return BoundNarrativeSelector(custom, resolve_narrative_selector_version(selector_version))
 
 
-__all__ = ["BoundNarrativeSelector", "NarrativeSelector", "bind_narrative_selector"]
+def bind_reading_inspection(observe: Callable[[ReadingInspection], None]) -> BoundNarrativeSelector:
+    """Keep offline inspection on the current selector and its original budget."""
+    from .narrative_reading import READING_SELECTOR_VERSION, select_reading_evidence
+
+    return BoundNarrativeSelector(partial(select_reading_evidence, observe=observe), READING_SELECTOR_VERSION)
+
+
+__all__ = ["BoundNarrativeSelector", "NarrativeSelector", "bind_narrative_selector", "bind_reading_inspection"]
