@@ -6,6 +6,8 @@
 
 五条模块卡已受测并线并推送。StockWiki C38/B03 和公开来源客户端进入本地 master。Dashboard 两处私有依赖已修正并推送 main。安装态浏览、原件、摘要和 D4 跨仓 30 项已通过，RF 三表经临时正式安装和独审，已推 main。本轮隔离测试工作树已回收。完整版本和复验入口见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md) 及 [E01–E09 矩阵](../module-boundaries-2026-11-11/boundary_matrix.json)。
 
+后续仓库续核发现的 Dashboard C01证据可移植性、B-real预览模块适配、旧B03独审收据问题已作为分开的工作项登记；不改变已验收的模块接口，也不能把旧跨层实现并回。状态与施工卡见[模块计划的唯一对账表](../module-boundaries-2026-11-11/reconciliation.md)与[派发矩阵](../module-boundaries-2026-11-11/dispatch.md)。
+
 
 R4 已完成工作量修复。正式半年报回放保持 12/12 检查点和同一选材 SHA，消耗降至 10,753,620 / 16,000,000。当前来源仍为 `partial`，131 张表处于延期状态。见 [来源会话与覆盖回放](review/r4-source-session-20261114.md) 和 [T4 与 SEM 独审](review/t4-sem-20261114.md)。
 
