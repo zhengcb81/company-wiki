@@ -22,6 +22,7 @@ _SENTENCE = re.compile(r"[。！？;；!?]|(?<=[.!?])\s+")
 _BOUNDARY = re.compile(
     r"(?<!\d)[,，]|[,，](?!\d)|\b(?:while|whereas)\b|"
     r"\b(?:and|but|yet)\s+(?=(?:we|our|their|they|it|the|this|that)\b)|"
+    r"\bbut\s+(?=(?:still|now|instead)\s+(?:plans?|intends?|expects?|will)\b)|"
     r"但是|但(?=本?公司|集团|我们)|而(?=本?公司|本?集团|收入|营收)|"
     r"并且(?=本?公司|本?集团|我们)", re.I)
 
@@ -29,9 +30,9 @@ _BOUNDARY = re.compile(
 # Consumers must not maintain their own expect/anticipate/goal/negative lists.
 _MODAL = re.compile(
     r"(?P<conditional>假设|假定|假如|如果|若(?!干)|\b(?:if|unless|assuming)\b|"
-    r"\bassumptions?\s+(?:that|of)\b)|"
+    r"\bassumptions?\s+(?:that|of)\b|\bassum(?:e|es|ed)\s+that\b)|"
     r"(?P<negative>尚未|未能|没有|沒有|并未|並未|并非|並非|不曾|不是|不明|暂无|暫無|并无|並無|"
-    r"不(?=计划|計劃|拟|擬|打算)|\bno\s+(?:(?:current|immediate|present)\s+)?plans?\b|"
+    r"[不未](?=计划|計劃|拟|擬|打算)|\bno\s+(?:(?:current|immediate|present)\s+)?plans?\b|"
     r"\b(?:not|never|unknown|don't|doesn't|didn't|can't|cannot|isn't|aren't|wasn't|weren't)\b)|"
     r"(?P<uncertain>是否|可能|\b(?:may|might|could|would|whether|uncertain|unclear)\b)|"
     r"(?P<expected>预计|预期|预测|有望|展望|指引|"
@@ -332,6 +333,16 @@ class PreparedPredicateContext:
                                   future_frame=bool(first and first.period == "future"))
             self._assertions[scope] = prepared
         return prepared.observe(start, end)
+
+    def has_asserted_intent(self, start: int, end: int) -> bool:
+        """A positive plan cue can carry later conditions, but not inherit a hypothesis."""
+        left, right = self.scope(start, end)
+        assertion = self._assertions.get((left, right))
+        if assertion is None or assertion.leading_condition:
+            return False
+        negative = assertion.tokens.get("negative")
+        return (not assertion.conditions or assertion.conditions[0] >= end) and (
+            negative is None or negative.starts[0] >= end)
 
     def modality_view(self):
         """Equal-length grammar view; never changes source text or evidence.

@@ -332,6 +332,7 @@ def observe_statement(text: str, *, work_budget: WorkBudget | None = None,
 
 __all__ = [
     'StatementObservation',
+    'english_question_start',
     'observe_english_statement_boundary',
     'observe_statement',
     'resource_identity',

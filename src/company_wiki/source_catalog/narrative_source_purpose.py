@@ -261,4 +261,9 @@ def source_purpose(text: str, *, prepared: SourceAssertionRoles | None = None,
                     "operating_investment_disclosure"):
         if purpose in purposes:
             return purpose
+    # A declaration about the report does not classify an independent, still
+    # untyped sentence beside it. Let the source-passage owner assess that
+    # sentence with its own evidence and grammar.
+    if "unknown" in purposes:
+        purposes = [purpose for purpose in purposes if purpose != "reporting_definition"]
     return next((purpose for purpose in purposes if purpose in NON_OPERATING_PURPOSES), "unknown")

@@ -10,6 +10,7 @@ from typing import Literal
 import re
 
 from company_wiki.document_understanding.operating_states.assertion_roles import source_nominal_members
+from company_wiki.document_understanding.statement_grammar import english_question_start
 
 from .n6_candidate_operating_facts import OperatingFact
 from .narrative_business_meaning import (
@@ -17,11 +18,11 @@ from .narrative_business_meaning import (
     BUSINESS_STRUCTURE_PATTERN,
     is_component_structure,
 )
-from .narrative_predicate_state import predicate_scope
+from .narrative_predicate_state import predicate_scope, prepare_predicate_context
 from .n6_scope_changes import scope_change_reasons
 
 
-READING_DISCLOSURE_SCAN_PASSES = 10  # Four new bounded mechanism/constraint proofs.
+READING_DISCLOSURE_SCAN_PASSES = 13  # Includes plan complement, action and object scans.
 _COMPONENT_DEPENDENCE = re.compile(
     r"(?:组成部分|部件|组件)[^。;!?]{0,80}(?:相互依赖|双向依赖|相互结合)|"
     r"\bcomponents?\b[^。;!?]{0,80}\b(?:interdependent|interdependence|mutually dependent)\b", re.I)
@@ -239,6 +240,25 @@ _INTENT_SUBJECT = re.compile(
     r"(?:还是|仍然|后续|未来|的话|\s)*$|"
     r"\b(?:products?|services?|business|platforms?|channels?)\s*$", re.I)
 _INTENT_QUESTION = re.compile(r"请问|是否|会不会|\b(?:whether|will\s+(?:you|the\s+company))\b", re.I)
+_INTENT_BOUNDARY = re.compile(r"[,，]|但是|然而|\b(?:but|while|whereas)\b", re.I)
+_PLAN_COMPLEMENT = re.compile(
+    r"(?:^|(?:披露|所载|所述)(?:的)?|本报告(?:中)?|[。；;])\s*(?:未来)?计划"
+    r"(?:为|是|包括|涵盖)(?!的)|"
+    r"\b(?:the|our) (?:future |current )?plans?\s+(?:is to|are to|includes?|covers?)\b", re.I)
+_PROJECT_PLAN_BRIDGE = re.compile(
+    r"\s+|本公司|本集团|子公司|公司|集团|明年|今年|(?:于)?\d{4}年|拟|计划|将|再|"
+    r"(?:在|于)(?:客户|用户|业主)(?:完成)?(?:验收|认证|验证)(?:通过)?后|"
+    r"(?:在|于)?(?:国内|境内|境外|海外)|"
+    r"\b(?:we|the (?:company|group)|it|its subsidiary|(?:proposes?|plans?|expects?) to|will|to|next year)\b", re.I)
+_PROJECT_ACTION = re.compile(
+    r"建设|新建|扩建|改建|迁建|\b(?:build(?:ing)?|construct(?:ing)?|expand(?:ing)?|relocat(?:e|ing))\b", re.I)
+_PROJECT_OBJECT_PREFIX = re.compile(
+    r"\s+|一[座条家]|其|该|新的|新|国内|境内|境外|海外|生产|制造|组装|研发|物流|"
+    r"\b(?:an?|the|our|its|existing|second|new|additional|overseas|production|manufacturing|assembly|logistics)\b", re.I)
+_PROJECT_OBJECT = re.compile(
+    r"(?:工厂|产线|生产线|基地|设施|车间|仓库)(?=$|[，,。；;\s]|以便|用于|将|并|及|的项目)|"
+    r"\b(?:plants?|factor(?:y|ies)|facilit(?:y|ies)|workshops?|warehouses?|production lines?)"
+    r"\b(?=$|[,.?!;]|\s+(?:in|near|for|at|by|as|with|and|after|once|next|overseas|abroad|domestically)\b)", re.I)
 
 _PLAN_REFERENCE = re.compile(
     r"^\s*(?:(?:但|但是|不过|不過)\s*)?(?:具体|具體|上述|该|該|这项|這項|这一|這一)?"
@@ -287,6 +307,15 @@ def _operating_object_head(text: str) -> bool:
         r"^(?:for|in|on|at|with|by|through|across|that|which|and|to)\b", rest, re.I))
 
 
+def _planned_facility_action(text: str) -> bool:
+    predicate = _after_tokens(text, _PROJECT_PLAN_BRIDGE, stop=_PROJECT_ACTION)
+    action = _PROJECT_ACTION.match(predicate)
+    if action is None:
+        return False
+    target = _after_tokens(predicate[action.end():], _PROJECT_OBJECT_PREFIX, stop=_PROJECT_OBJECT)
+    return _PROJECT_OBJECT.match(target) is not None
+
+
 def _qualitative_operating_intent(clause: str) -> bool:
     """A local plan→action→business-object relation, not a completed event.
 
@@ -294,11 +323,30 @@ def _qualitative_operating_intent(clause: str) -> bool:
     Tight grammar links prevent an employee/financial plan borrowing a product
     noun elsewhere. Questions and unchanged raw uncertainties stay unasserted.
     """
-    for piece in re.split(r"[,，]|但是|然而|\b(?:but|while|whereas)\b", clause):
+    if clause.rstrip().endswith(('?', '？')) or english_question_start(clause):
+        return False
+    scope = None
+    left = 0
+    ends = [(boundary.start(), boundary.end()) for boundary in _INTENT_BOUNDARY.finditer(clause)]
+    ends.append((len(clause), len(clause)))
+    for right, next_left in ends:
+        start = left
+        piece = clause[start:right]
+        left = next_left
         if _INTENT_QUESTION.search(piece):
             continue
+        complement = _PLAN_COMPLEMENT.search(piece)
+        if complement and _planned_facility_action(piece[complement.end():complement.end() + 96]):
+            # The cue is the plan noun, excluding the report's naming prefix.
+            scope = scope or prepare_predicate_context(clause)
+            if scope.has_asserted_intent(start + complement.start(), start + complement.end()):
+                return True
         for marker in _INTENT_MARKER.finditer(piece):
             tail = piece[marker.end():marker.end() + 96]
+            if _planned_facility_action(tail):
+                scope = scope or prepare_predicate_context(clause)
+                if scope.has_asserted_intent(start + marker.start(), start + marker.end()):
+                    return True
             verb_text = _after_tokens(tail, _INTENT_LINK_TOKEN, stop=_INTENT_ACTION)
             action = _INTENT_ACTION.match(verb_text)
             if action is None:

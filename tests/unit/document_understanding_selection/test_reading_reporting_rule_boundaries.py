@@ -4,6 +4,7 @@ from hashlib import sha256
 import pytest
 
 from company_wiki.source_catalog.narrative_business_policy import detect_reading_business_fact
+from company_wiki.source_catalog.narrative_business_disclosures import disclosure_relations
 from company_wiki.source_catalog.narrative_business_meaning import concrete_operating_event
 from company_wiki.source_catalog.narrative_document import DocumentStructure
 from company_wiki.source_catalog.narrative_evidence import _make_unit, select_narrative_evidence
@@ -35,7 +36,8 @@ def unit(text, index=0):
     digest = sha256(b"reporting-purpose-neutral-source").hexdigest()
     return _make_unit(source_id=source_id_for_sha256(digest), parser_version="1.0.0",
         coordinates=EvidenceCoordinates(page_number=1, paragraph_index=index),
-        raw_text=text, unit_kind="paragraph", source_role="company_filing", language="zh", metadata={})
+        raw_text=text, unit_kind="paragraph", source_role="company_filing",
+        language="zh" if not text.isascii() else "en", metadata={})
 
 
 @pytest.mark.parametrize("text", REPORTING_RULES)
@@ -100,3 +102,102 @@ def test_public_selection_spends_limited_slots_on_business_instead_of_reporting_
     selected = {span.raw_text for span in result.evidence_spans}
     assert selected.isdisjoint(REPORTING_RULES)
     assert {backlog, delivery} <= selected
+
+
+@pytest.mark.parametrize("text", [
+    "三、本半年度报告未经审计。",
+    "附註：上述子公司財務數據未經審計。",
+    "The accompanying interim financial statements have not been audited.",
+    "Financial information in this quarterly report is unaudited.",
+    "二、公司全体董事出席董事会会议。",
+    "All board directors attended the meeting of the board of directors.",
+    "本报告中的前瞻性陈述不构成公司对投资者的承诺。",
+    "本报告中所涉及的未来计划、发展战略等前瞻性描述不构成本公司对投资者的承诺，敬请投资者注意投资风险。",
+    "Forward-looking statements in this report do not constitute commitments to investors.",
+])
+def test_administrative_assertions_about_the_disclosure_do_not_become_operating_support(text):
+    assert source_purpose(text) == "reporting_definition"
+    assert not is_admitted(unit(text), {"section_role": "business"}, "paragraph_event")[0]
+
+
+@pytest.mark.parametrize("text", [
+    "本期客户审计已通过，新增订单预计将在验收后交付。",
+    "The plant passed a customer audit and delivered upgraded units to customers.",
+    "本半年度报告未经审计。公司向海外客户交付了新产品。",
+    "The directors attended the meeting. The company opened a second production line.",
+    "本报告中的前瞻性陈述不构成承诺。公司拟在明年建设海外生产基地。",
+    "本報告所載未來計劃包括在東南亞建設一座年產5萬噸的工廠，惟不構成公司承諾。",
+    "Forward-looking statements about the second production facility in the report do not constitute commitments.",
+    "The company signed a commitment with a distributor to open new sales channels.",
+])
+def test_reporting_language_does_not_erase_an_independent_operation(text):
+    assert source_purpose(text) not in NON_OPERATING_PURPOSES
+    assert is_admitted(unit(text), {"section_role": "business"}, "paragraph_event")[0]
+
+
+@pytest.mark.parametrize("text", [
+    "本报告披露的未来计划为明年建设海外工厂，但不构成投资承诺。",
+    "本报告中未来计划包括公司明年拟新建工厂，不构成承诺。",
+    "Our future plans include building a second manufacturing facility after customer acceptance.",
+    "公司计划在客户验收后建设海外工厂。",
+    "公司否认已经与当地政府签约，但仍计划建设海外新工厂。",
+    "The company denied that it had signed with the local government, but still plans to build a new factory overseas.",
+])
+def test_disclosed_future_projects_keep_their_operating_plan_without_a_number(text):
+    assert source_purpose(text) not in NON_OPERATING_PURPOSES
+    admitted, fact = is_admitted(unit(text), {"section_role": "business"}, "paragraph_event")
+    assert admitted
+    assert "operating_plan" in fact.reasons
+    assert "operating_milestone" not in fact.reasons
+
+
+@pytest.mark.parametrize("text", [
+    "公司是否拟于明年建设海外工厂？",
+    "公司计划建设海外工厂吗？",
+    "Are their future plans to build a new plant?",
+    "公司未来计划为明年建设厂房融资方案。",
+    "Our future plans include building a warehouse financing model.",
+    "公司拟做安排。厂区设施待定。",
+    "公司未计划在海外建设新工厂。",
+    "公司不打算扩建海外工厂。",
+    "The company does not plan to build a new factory.",
+    "The company has no plans to build an overseas factory.",
+    "Do they plan to build a new plant",
+    "Are their future plans to build a new plant",
+    "财务模型假设公司将建设海外工厂。",
+    "The financial model assumes that the company will build an overseas plant next year.",
+    "如果公司拟建设海外工厂，需测算资本开支。",
+    "If the company plans to build a second manufacturing facility, capital expenditure would rise.",
+])
+def test_project_relevance_requires_a_scoped_predicate_and_facility_object(text):
+    assert "operating_plan" not in disclosure_relations(text)
+
+
+@pytest.mark.parametrize("text", [
+    "公司全体董事出席会议，批准在海外建设新产线。",
+    "All directors attended the board meeting and approved a second production line.",
+])
+def test_board_action_survives_when_attendance_is_not_the_only_disclosure(text):
+    assert source_purpose(text) not in NON_OPERATING_PURPOSES
+    assert is_admitted(unit(text), {"section_role": "business"}, "paragraph_event")[0]
+
+
+def test_published_selection_keeps_operating_evidence_and_its_bound_locator():
+    texts = (
+        "本半年度报告未经审计。",
+        "本报告中的前瞻性陈述不构成公司对投资者的承诺。",
+        "公司完成海外新产线的客户认证，并已交付首批产品。",
+    )
+    digest = sha256(b"reporting-purpose-neutral-source").hexdigest()
+    parsed = DocumentStructure(
+        source_id_for_sha256(digest), digest, "zh",
+        tuple(unit(text, index) for index, text in enumerate(texts)),
+        page_count=1, pages_read=1, mime_type="text/plain",
+    )
+    result = select_narrative_evidence(parsed, title="Semiannual report", existing_kind="semi_annual_report",
+                                      selector_version="0.9.0", max_selected=3)
+    supports = {item for group in result.reading_context["groups"] for view in group["citation_views"]
+                if view["reading_support_use"] == "support" for item in view["support_evidence_ids"]}
+    spans = [span for span in result.evidence_spans if span.span_id in supports]
+    assert [(span.raw_text, span.coordinates.paragraph_index) for span in spans] == [(texts[2], 2)]
+    assert [item.raw_text for item in parsed.units] == list(texts)

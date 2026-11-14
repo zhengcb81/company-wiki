@@ -749,6 +749,28 @@ _CUSTOMER_PRICING = re.compile(
     r"\b(?:customer\s+orders?|urgent\s+orders?)\b",re.I)
 
 
+_AUDIT_STATUS_DISCLOSURE = re.compile(
+    r"(?:财务(?:报表|数据|资料|信息)|(?:本|该)(?:半年度|中期|季度|年度)?报告)"
+    r"\s*(?:尚未|未经|未予|未作)\s*(?:外部|独立)?审计$|"
+    r"\b(?:financial (?:statements?|information|results|data)|(?:this|the) (?:interim |quarterly |annual )?report)\b"
+    r"[^.;!?]{0,90}\b(?:(?:is|are|was|were)\s+(?:unaudited|not audited)|"
+    r"(?:has|have) not been audited)$", re.I)
+_MEETING_ATTENDANCE_DISCLOSURE = re.compile(
+    r"(?:董事|监事)\s*(?:均)?\s*(?:出席|参加)(?:了|本次|此次)?\s*(?:董事会|监事会)?会议$|"
+    r"\b(?:directors?|board members?)\b\s+(?:all )?(?:attended|were present at)\s+"
+    r"(?:the |a )?(?:(?:board )?meeting|meeting of the board(?: of directors)?)$", re.I)
+_FORWARD_STATEMENT_DISCLAIMER = re.compile(
+    r"(?:本|该)报告(?:中)?(?:的|所(?:涉及|载|述|披露)的)?"
+    r"(?:(?:未来计划|发展战略|经营目标)(?:[、，,]\s*|(?=等)))*"
+    r"(?:等)?前瞻性(?:陈述|描述)\s*(?:不构成|并非|不代表)"
+    r"(?:(?:本)?公司对(?:投资者|股东)的|任何|实质性?)?(?:承诺|保证)"
+    r"(?:[，,]\s*敬请[^。；;!?]{0,24})?$|"
+    r"\bforward[- ]looking statements?\b"
+    r"(?:\s+(?:(?:contained|included|made) )?in (?:this|the) (?:report|release|filing))?\s+"
+    r"(?:do not constitute|are not|should not be construed as)\s+(?:a\s+)?"
+    r"(?:commitments?|promises?|guarantees?)(?:\s+(?:to|of)\s+[^.;!?]{1,32})?$", re.I)
+
+
 def source_reporting_purpose(text: str) -> str:
     """Shared reporting governor/basis role, not a financial-word blacklist."""
     head = _STANDARD_HEAD.search(text)
@@ -756,6 +778,12 @@ def source_reporting_purpose(text: str) -> str:
         return 'accounting_policy'
     if (_REPORT_FIGURE_BASIS.search(text) and _REPORT_FIGURE_RELATION.search(text)
             or _TABLE_INTRODUCTION.fullmatch(text)):
+        return 'reporting_definition'
+    # A complete statement about the disclosure itself is reporting context.
+    statement = text.rstrip(' \t\r\n.。!?？！;；')
+    if any(pattern.search(statement) for pattern in (
+        _AUDIT_STATUS_DISCLOSURE, _MEETING_ATTENDANCE_DISCLOSURE, _FORWARD_STATEMENT_DISCLAIMER,
+    )):
         return 'reporting_definition'
     return ''
 _AWARD_HEAD = re.compile(r"奖励|獎勵|购股权|購股權|股权激励|股權激勵|股份支付|\b(?:share awards?|employee share options?|share.based compensation)\b",re.I)

@@ -94,7 +94,7 @@
   "project_status": "MODULE_BOUNDARIES_T4_SEM_AND_SCOPED_SOURCE_CARD_CHAIN_ACCEPTED; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-14",
   "observed_at_utc": "2026-11-14T05:36:41Z",
-  "next_action": "Separate business highlights from original source cards, reproduce four historical paraphrase errors, and improve source/actor scope on the current frozen evidence before a new real acceptance.",
+  "next_action": "Assess concise business-summary text and actor attribution using the frozen source after the reporting-boilerplate and qualified-facility-plan fixes. Verify four historical paraphrase error families, then repeat real recovery and RF adoption for the new summary.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
