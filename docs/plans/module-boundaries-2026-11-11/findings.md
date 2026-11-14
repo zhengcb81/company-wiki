@@ -1,6 +1,6 @@
 # 调查发现
 
-## 最新：A1逐仓审查与接收（2026-11-11）
+## A1逐仓审查与接收（2026-11-11，历史）
 
 完整结果见reconciliation.md及review/repo_reconciliation_20261111三份逐仓报告。范围8仓390分支/remote refs、253工区，另7RF tag和2CWP stash。最重要的纠正是：refs未成祖先不一定漏并（FF job已整合接收）；tracked clean/untracked=0不代表无原件（四个RF Temp仍有msft原文）；release与main确有公开能力差额（RF B37、SW C38/B03、CWP历史CLI），不能说全部已并线。
 
@@ -42,3 +42,9 @@
 ## 最终方案复核
 
 独立方案复核PASS，全部本轮可行动意见已关闭。安装参数、37个既有测试路径的静态存在已核；没有运行产品测试或实际安装。后续卡完整验收由各owner实施，ROOT最后组合。
+
+## 2026-11-14 继续核查实际边界
+
+- CWP `SourceVersionReader.catalog` 暴露了底层目录对象，调用者也能直接调用读取器内部方法。解析和导出装配把完整读取器交给消费者。导出只使用 `open_version`、`verify_version` 和 `describe_version`，当前运行时却要求解析与流式方法。分别用属性反例、公开读取行为和独立后端证明。
+- StockWiki 本地 `master@f2bc73f` 已有 MC-SW 接收的 C38 接口和 B03 assessment。真实主工作区另有 Quick Scan 未提交改动，复验以提交为基线。仍需验证 StockWiki 的 CWP 证明客户端能否使用独立安装的公开命令。
+- Dashboard 老测试绕过 adapter，调用 CWP 已移除的私有读取器和锁函数。应该在调用方用真实公开流和已知夹具验证拒绝语义，在 CWP owner 内验证打开字节和事务提交语义。Dashboard 主工作区有另一路正在改动的文件。

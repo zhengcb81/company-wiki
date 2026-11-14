@@ -29,9 +29,9 @@
 - [x] 方案独审与修复、父计划状态对齐及文档JSON/链接/工区互斥检查完成；本轮以正常Git文档提交交付，实际发布版本看Git历史。
 
 ### Phase B / M1 — 五个owner并行TDD与模块交付
-**Status:** in_progress（MB-CWP/FF/RF/ET/SID五条owner卡已审查、并线并推送；StockWiki ROOT合同接收仍未完成）
+**Status:** complete
 
-五条owner卡均已由ROOT接收并并入各自目标分支，测试/独审收据见 progress.md 与 boundary_matrix.json。MB-RF B2已通过本卡并入RF main；并线前整卡两项失败均在旧基线复现，未放宽断言。MB-CWP/FF/ET/SID也均已并线并推送。剩余工作是ROOT-owned StockWiki公开合同接收及E01-E09组合，不再是未派发owner卡。
+五条 owner 卡均已审查并入各自主线并推送，测试和发布版本见 [progress.md](progress.md) 与 [boundary_matrix.json](boundary_matrix.json)。StockWiki C38/B03 及公开来源消费者已进入本地 `master`。M2 集中处理各仓公开接口的组合结果。
 
 任务卡见 dispatch.md。保持现有跨仓wire，作者各自A→B→C连续实施；不是每一步等ROOT批准。
 
@@ -39,14 +39,14 @@
 |---|---|---|
 | CWP | CWP-01协议外OCR配置、02隐藏预算、03类型导入、04实际安装、05根/状态/模型边界分类 | 七责任逐项说明，公开替身/安装/恢复/原件保护 |
 | FF | FF-01六operation及job/三表隔离，02command/config组装 | 真subprocess+无邻仓环境；已满足允许NO_CHANGE |
-| RF | RF-01旧越层工具分发、02core/report依赖、03历史profile与默认隔离；继续B37公开scope/subject/verified-compare | 已并入compare与部署/来源回归子范围；剩余公开合同跨会计准则、财年、多分部，且保留job命令；纯计算/报告golden、来源/目录/job公开端口、安装 |
+| RF | RF-01 旧越层工具分发、02 core/report 依赖、03 历史 profile 与默认隔离及 B37 公开合同 | MB-RF 已并入，证明范围以该卡收据为准 |
 | ET | ET-01纯合同/进程与provider分离，02固定表示限额复现根修 | worker CLI成功/错误/unknown/预算/取消 |
 | SID | SID-01typed错误贯通，02metadata反向依赖 | 纯API、稳定wire/过滤语义、staging-only |
 
-ROOT在此期间准备组合清单/样本，在自己的StockWiki隔离工区按reconciliation.md接收C38/B03合同差额；Audit只验证，Dashboard由原owner接续。ROOT不写五卡lane源码、不派竞争Dashboard任务。每条卡交付前独审并修复；接口兼容可及时并main/推送，无须积压到全部卡完成。
+ROOT 已在 StockWiki 和 Dashboard 各自工区接收对应接口。Audit 的公开资料包读取在 D4 被重新验证，五卡原作者工区已回收。
 
 ### Phase C / M2 — ROOT组合与整个架构阶段关闭
-**Status:** pending
+**Status:** complete
 
 1. 锁各模块交付commit和正式runtime形态；选择真实本地样本/已有报告/三表快照并冻结必需点。
 2. 核对Dashboard选用release代码根与数据根，不把缓存remote、main或旧配置当现行部署事实。既有owner处理必需release并线。
@@ -58,7 +58,7 @@ ROOT在此期间准备组合清单/样本，在自己的StockWiki隔离工区按
 
 ## Next Step
 
-下一步由ROOT在StockWiki owner边界内接收C38/B03公开合同差额，然后按integration矩阵运行E01-E09组合；一并处理Dashboard adapter对CWP私有符号的两项旧引用。五条owner卡已合并推送。业务循环仍暂停，待该模块组合阶段结束后再按父计划恢复。
+E01–E09 已通过，当前发布版本、独审和测试清理见 [ROOT 组合记录](review/root_composition_20261114.md) 和 [E01–E09 矩阵](boundary_matrix.json)。下一步沿 [父计划](../du11-source-closure-2026-10-18/task_plan.md) 推进 R4/T4、真实摘要、缓存恢复和公司循环。
 
 ## Decisions
 
@@ -82,9 +82,6 @@ ROOT在此期间准备组合清单/样本，在自己的StockWiki隔离工区按
 - [x] MB-CWP、MB-FF、MB-RF、MB-ET、MB-SID 均已独立审查并进入各自主线。
 - [x] 五条线的最终集成测试、异常基线和独审状态已回写 boundary_matrix.json。
 - [x] 本地/远端引用均核对；各仓 ROOT PWF 收据已推送。
-- [ ] ROOT 接收 StockWiki C38/B03 公开合同差额。
-- [ ] 按公开接口完成 E01-E09 组合，处理 Dashboard adapter 的两个 private-import 失败。
-
-## Next Step
-
-ROOT 在 StockWiki owner 工区接收 C38/B03公开合同差额；然后完成E01-E09组合验收。
+- [x] ROOT 接收 StockWiki C38/B03 及安装态来源读取。
+- [x] Dashboard 移除 CWP 私有读取依赖，公开流及摘要通过独立安装测试。
+- [ ] 按矩阵收口 E01–E09，复验并线版本和回收自有工区。

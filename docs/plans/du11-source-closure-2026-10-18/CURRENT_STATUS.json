@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "module_boundary_five_owner_cards_merged_root_stockwiki_and_e01_e09_pending",
+  "execution_mode": "r4_t4_manual_implementation_after_module_boundary_closure",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "M0_ACCEPTED_A1_RECONCILED_M1_IN_PROGRESS_RF_B37_SAFE_SLICE_MERGED; OTHER_MB_LANES_PENDING; M2_PENDING; BUSINESS_LOOP_PAUSED",
+  "project_status": "MODULE_BOUNDARIES_CLOSED; R4_T4_IN_PROGRESS",
   "as_of_date": "2026-11-11",
   "observed_at_utc": "2026-11-11T22:17:29Z",
-  "next_action": "Continue MB-RF B2 public scope/subject contract tests, or start MB-CWP/MB-FF/MB-ET/MB-SID independently; ROOT owns StockWiki intake and final public-interface composition.",
+  "next_action": "Reconcile R4 source assessment work charges under the existing 16M account, then T4/SEM and real-summary/cache/RF acceptance.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -240,7 +240,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "P3 source stream/parser owner node remains published at 54f8b470c. M0 and A1 repository reconciliation are complete; narrow FF/Dashboard fixes are merged/pushed. Five architecture cards with A0 intakes remain undispatched; ROOT owns StockWiki intake and later composition. Business replay remains deferred.",
+    "current_work": "M0/A1/M1/M2 complete. Current module-boundary evidence is in the child plan. R4 current local PDF reaches all 12 fixed checkpoints but the 16M work account still exhausts.",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -1153,7 +1153,7 @@
     "plan": "../module-boundaries-2026-11-11/README.md",
     "task_plan": "../module-boundaries-2026-11-11/task_plan.md",
     "matrix": "../module-boundaries-2026-11-11/boundary_matrix.json",
-    "status": "M0_ACCEPTED_A1_RECONCILED_M1_IN_PROGRESS_RF_SAFE_SLICE_MERGED_M2_PENDING",
+    "status": "CLOSED",
     "lanes": [
       "MB-CWP",
       "MB-FF",
@@ -1163,19 +1163,26 @@
     ],
     "code_changes_this_turn": true,
     "tests_run_this_turn": true,
-    "dispatched": false,
+    "dispatched": true,
     "root_started_modules": [
-      "MB-RF"
+      "MB-RF",
+      "StockWiki",
+      "investment-dashboard",
+      "ROOT composition"
     ],
     "parent_business_tasks_retained": true,
     "next_business_action_after_closure": "R4/T4/SEM -> real summary -> paid/cache recovery -> actual RF adoption -> fixed company loop",
     "reconciliation": "../module-boundaries-2026-11-11/reconciliation.md",
     "merged_and_pushed": {
-      "filing-fetch": "ac798a250b2310e0c2714053b08246ad94fffd0c",
-      "investment-dashboard": "20493562f86b1351d97bc164bbc254efacddacdf",
-      "revenue-forecast": "B37 regression tests 058be4fd60c394963be216580bcf7213af572a04; PWF 6341759b9cdfd13e8aa7d51d5c755e361046da0c"
+      "company-wiki": "c6189c623f6ec30e2a1a1059499e78c8ffe5b443",
+      "filing-fetch": "d4f35cab5127d09c874d109080d911e6d394dec2",
+      "revenue-forecast": "fab819c25922af1366d7240af9bfee58d3bd612a",
+      "earnings-transcripts": "915f216f764e83012e8ce6f418111c9ef9eacace",
+      "StockInfoDLSimple": "d084c4aab48f5f83275f65982bf561e6870ff3a4",
+      "investment-dashboard": "e1d1f927cc09a1249c0db31e9f98cd4d358d7ee1"
     },
-    "rf_b37_safe_intake": {
+    "remaining_intake_owners": [],
+    "historical_rf_b37_safe_intake": {
       "compare_commit": "e060a8607a904547645ee8eaee347bd159004d01",
       "regression_commit": "058be4fd60c394963be216580bcf7213af572a04",
       "final_pwf_commit": "6341759b9cdfd13e8aa7d51d5c755e361046da0c",
@@ -1188,37 +1195,32 @@
       "independent_review": "PASS",
       "remaining": "Scope/subject/verified-compare is not merged; redesign the public contracts across accounting standards, fiscal calendars and multiple segments, preserving import-rf-job."
     },
-    "remaining_intake_owners": [
-      "MB-CWP historical public interfaces",
-      "MB-RF B37 scope/subject/verified-compare generalization",
-      "MB-SID 11 WIP fixes",
-      "ROOT StockWiki C38/B03",
-      "Dashboard owner composition"
-    ]
+    "current_composition": "../module-boundaries-2026-11-11/review/root_composition_20261114.md"
   },
   "module_boundary_current_state": {
-    "as_of": "2026-11-13",
+    "as_of": "2026-11-14",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
       "revenue-forecast": "integrated_and_pushed",
       "earnings-transcripts": "integrated_and_pushed",
-      "StockInfoDLSimple": "integrated_and_pushed"
+      "StockInfoDLSimple": "integrated_and_pushed",
+      "StockWiki": "integrated_locally_no_remote",
+      "investment_dashboard": "integrated_and_pushed",
+      "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
-    "remaining": [
-      "ROOT StockWiki C38/B03 public contract intake",
-      "E01-E09 public-interface composition",
-      "two Dashboard adapter private-import compatibility failures"
-    ],
-    "composition_status": "NOT_RUN",
-    "business_company_loop": "paused",
+    "remaining": [],
+    "composition_status": "CLOSED",
+    "business_company_loop": "manual_R4_in_progress_native_goal_paused",
     "cleanup": {
       "delivery_worktrees_removed": 5,
       "root_integration_worktrees_removed": 3,
       "ff_scratch_files_removed": 5030,
       "ff_scratch_bytes_removed": 18119347,
       "branches_preserved": true,
-      "other_user_data_preserved": true
+      "other_user_data_preserved": true,
+      "current_root_test_worktrees_removed": 4,
+      "current_root_test_directories_removed": 4
     }
   }
 }

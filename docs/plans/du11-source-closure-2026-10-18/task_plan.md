@@ -1,13 +1,12 @@
 # 主线实施计划
 
-2026-11-11 当前优先为 [模块边界收口子计划](../module-boundaries-2026-11-11/README.md)：M0规划与A1逐仓核销已完成；ROOT已把MB-RF B37 compare及部署/来源回归安全子范围受测并入RF main，scope/subject/verified-compare仍留在B2重做；MB-CWP、MB-FF、MB-ET、MB-SID尚未派发。并线与余项见reconciliation.md和各卡。P3 source stream/parser子节点54f8b470c继续保留；原业务循环未恢复。实时归总入口为CURRENT_STATUS.md/json。
+2026-11-14，[模块边界收口子计划](../module-boundaries-2026-11-11/README.md) 已完成。各仓发布、隔离测试及 E01–E09 见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md)。当前按下表推进 R4/T4 及业务验收。
 
 ## 下一步
 
-1. **先按新子计划收口全模块边界。** M0/A1完成→M1五owner各自A0接收及TDD→M2 ROOT组合/独审/并线。ROOT另负责StockWiki C38/B03与Dashboard组合，不与五卡交叉写仓。既有Catalog/Reader/stream/parser成果保留；旧205P1skip/277P只证明当时子节点。剩余旧分支按精确差额接收，不整体回退主线。
-2. R4 正式半年报 9/12，工作量耗尽，三项原文已解析。分诊已定位统一扫描预扣占约9.05M。核对预扣和下层实际计费的重叠，先泛化 RED 再优化，在原 16M 内验收。
-3. cn-h1 0.9 业务召回 10/10 的源码冻结结果已有独立收据。T4 父链和 SEM-QUAL-01 仍需现行输入/解码反控与真实独审，之后再做新版摘要、缓存恢复、RF 实际采用和公司循环。
-4. 后续历史工区/资料核销按新子计划reconciliation.md的owner和清单执行；A1已做的约216MB测试清理、7空工区、重复源码/生成物不重做。原件、费用及独有证据保留；每卡接收完成后ROOT再回收对应旧工区。
+1. **R4 工作量。** 当前正式半年报回放 12/12，工作耗尽。过往 9/12 的分诊记录提供统一扫描预扣约 9.05M 的证据。先写与公司无关的 RED 及真实耗尽反控，再由实际扫描阶段扣同一账户，在原 16M 内复验召回、完整性与归属。
+2. cn-h1 0.9 业务召回 10/10 的源码冻结结果已有独立收据。T4 父链和 SEM-QUAL-01 仍需现行输入/解码反控与真实独审，之后再做新版摘要、缓存恢复、RF 实际采用和公司循环。
+3. 后续历史工区/资料核销按新子计划reconciliation.md的owner和清单执行；A1已做的约216MB测试清理、7空工区、重复源码/生成物不重做。原件、费用及独有证据保留；每卡接收完成后ROOT再回收对应旧工区。
 
 实施细节、测试计数和两份半年报来源 SHA 在 review/current-main-replay-20261110/README.md。当前接口修复通过工程独审。后续每个大节点集中做测试与独审。
 
@@ -35,7 +34,7 @@
 
 **D5 完成定义：** 每个模块只负责自己的实现、状态和错误语义，并通过自己的独立契约测试；跨模块只经版本化公开合同组合，不依赖邻仓私有模块、物理路径或内部数据库。CWP 是通用文档解析唯一 owner；StockWiki 三个 provider 入口消费同一 pathless 规范化 reader，业务层可引用 locator 且不再解析 CWP PDF/Office 原件；FF schema 2.0 provider 主路径不暴露/消费 canonical_path，当前内部生产消费者使用 V2，旧 V1 若保留则作为版本显式、隔离且有测试的兼容接口。三仓独立测试与一个临时环境的 producer→consumer 实际 E2E 通过；原件 SHA 稳定、测试目录初始状态复原；最终独审绑定交付版本。这些条件定义D5冻结接口范围的ACCEPTED；当前全模块解耦以module-boundaries-2026-11-11的矩阵验收为准。
 
-**当前恢复顺序（2026-11-11更新）：** 先完成module-boundaries-2026-11-11有限收口计划，随后回T4 source-note-parent + SEM-QUAL-01、新版真实摘要、付费中断/同跨run缓存恢复、RF实际采用和固定公司循环。原D5卡的冻结责任已完成，不因此重写原收据。
+**当前恢复顺序（2026-11-14）：** 模块边界已验收，继续 R4 工作量、T4 source-note-parent + SEM-QUAL-01、新版真实摘要、付费中断及同跨 run 缓存恢复、RF 实际采用和固定公司循环。
 
 **缓存范围说明：** D5 把通用解析 owner 收敛到 CWP，没有建立第二套缓存。验收没有证明 CWP 有可复用的通用持久化 normalized-unit cache；当前 port 按请求读取/解析。跨运行缓存恢复仍属于后续主线任务，不能据本次解耦验收标为通过。
 

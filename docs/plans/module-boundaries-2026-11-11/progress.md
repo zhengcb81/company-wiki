@@ -1,6 +1,14 @@
 # 规划进度
 
-## 最新：A1核销交付（2026-11-11）
+## 最新进展（2026-11-14）
+
+- E01–E09 已关闭。发布最终 Dashboard `main@e1d1f92`，原件中断测试 3 项、独立审查通过。四个本轮测试工作树与四个测试目录已移除。父计划恢复半年报 R4 及后续业务验收。
+- CWP 将来源目录状态留在读取 owner 中，消费端只拿所需能力。原件流只在实际字节验真与事务锁定后发出。独立审查通过后推送 `master@9e76592e1`。
+- StockWiki C38/B03 与安装态公开来源读取进入本地 `master@21cf4891`。Dashboard 消费端移除了对 CWP 私有符号及源码布局的依赖。现有安装验收覆盖浏览、原件和摘要证据。
+- 实跑 D4 跨仓 30/30、摘要缓存和恢复 36/36、真实募集说明书四根位置替换。RF → FF → CWP 三表新入口已由实际技能安装副本跑通，中微冻结快照两次复用均为零 HTTP，独立审查通过并推送 RF `fab819c2`。
+- 当前版本及 E01–E09 验收见 [ROOT 组合记录](review/root_composition_20261114.md)。
+
+## A1核销交付（2026-11-11，历史）
 
 - 用户新增授权后，三路独立agent逐模块审查Git refs、worktrees、dirty、PWF/交接/等价补丁；ROOT fetch六个有origin仓。StockWiki/Audit没有remote，未猜建。
 - FF B34修复先复现当前main错误拒绝，独立候选保留当前市场/期次/issuer约束，相关回归176 passed/2 skip/38 subtests；追加4例后B34最终23 passed。独审PASS，d563b63快进main并推origin；候选工区回收。

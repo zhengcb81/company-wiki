@@ -1,10 +1,8 @@
 # 并行施工与ROOT职责
 
-状态：**PARTIAL_IN_PROGRESS；M0方案独审PASS，A1逐仓核销结果已纳入五卡A0。** ROOT已在 `mb11-rf` 推进并合入RF B37安全子范围；RF剩余scope/subject/verified-compare仍开放。MB-CWP、MB-FF、MB-ET、MB-SID尚未派发。每卡新增ROOT并线步骤，避免作者工作区与主线集成互相覆盖。旧方案独审见review/plan_independent_review.md，最新处置见reconciliation.md。
+**五卡与 ROOT M2 均已收口。** 卡片保留为交付依据，原作者工区已回收。版本、测试和处置见 [组合记录](review/root_composition_20261114.md) 与 [对账表](reconciliation.md)。
 
-RF当前 `origin/main` 为 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`。compare owner/CLI `e060a8607`、部署和来源回归 `058be4fd6` 已并入；171 passed、1 skipped，独立审查PASS，push smoke 12 passed。候选scope实现未并线，根因与后续B2入口见MB-RF卡及RF自身PWF。
-
-## 不重叠写入
+## 已完成的写入划分
 
 | Lane | 独占代码仓与新工区 | PWF只写自己的目录 | ROOT不同时写 |
 |---|---|---|---|
@@ -16,16 +14,16 @@ RF当前 `origin/main` 为 `6341759b9cdfd13e8aa7d51d5c755e361046da0c`。compare 
 
 五份卡文件只由ROOT维护，harness对自己的PWF负责。共享测试/生产代码文件不存在双作者；CWP integration/** 与 tools/run_source_system_tests.py 属ROOT，必须在CWP卡交付后才修改。跨仓通信兼容现行公开wire，因此无需同步重写邻仓。
 
-## 可同时启动的范围
+## 原并行安排
 
 - 五卡可同时做A/B/C：它们均保持现有跨仓协议；内部新端口和测试仅归本repo。已通过的现有能力不重做。
 - 资源只够三个harness时先CWP、RF、ET；后续空出的harness接SID、FF。这是资源建议，不是额外依赖。
 - StockWiki与Audit不增加新分包卡。StockWiki由ROOT在自己的SW隔离工区按reconciliation.md接收C38/B03公开合同差额，再做真实组合；Audit只准备公开fixture/现有test清单并验证。真实RED归所属owner有限修复，不建立无限“每发现一项再来一轮全仓审计”。
 - Dashboard原4项WIP已由ROOT受测接收至2049356并推main，后续仍由原owner接续；不派竞争作者。IQS/Dayu不改。SID11项WIP纳入MB-SID A0修复接收；RF四项assurance已归档原字节后restore，旧失败事实保留。
 
-## ROOT现在与实施期分别做什么
+## ROOT 组合验收顺序
 
-本轮：已完成M0规划及A1逐仓审查/有限受测并线/精确清理；继续完成RF B37可独立验收的compare与部署/来源测试切片。实现期：
+当前进度以 [组合记录](review/root_composition_20261114.md) 为准。
 
 1. 汇总各harness实际baseline、声明接口版本和新增fixture路径；记录一个生产者/消费者组合清单。文档提交不改变代码基线，不为文档SHA重跑测试。
 2. 选定四份已有真实文档与已有报告/三表快照，仅通过公开owner入口取得引用；在跑结果前冻结E04必需检查点。不要全库复制或重新下载。

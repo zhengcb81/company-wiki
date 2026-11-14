@@ -1,6 +1,6 @@
 # 实际交付包隔离验收操作
 
-这些命令用于实施阶段的测试临时目标。本轮规划未执行。`$laneRoot`为卡内新工区，`$scratch`为本次新建的临时目录；运行前保存初始清单。禁止省略destination而使用全局默认目标。
+这些命令使用测试临时目标。当前组合实跑结果见 [ROOT 记录](review/root_composition_20261114.md)。`$laneRoot` 为候选工区，`$scratch` 为本次新建的临时目录。安装器显式传入该目录，验收后恢复测试目录。
 
 ## CWP：现有setuptools wheel
 

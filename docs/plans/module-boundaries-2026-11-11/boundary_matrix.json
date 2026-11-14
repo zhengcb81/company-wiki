@@ -1,7 +1,7 @@
 {
   "schema_version": "module-boundary-plan/1",
   "date": "2026-11-11",
-  "status": "M0_ACCEPTED_A1_RECONCILED_M1_OWNER_CARDS_MERGED_M2_PENDING",
+  "status": "CLOSED",
   "canonical_entry": "README.md",
   "parent_plan": "../du11-source-closure-2026-10-18",
   "scope": "Current production/public runtime boundaries; excludes research quality and general document-recall improvements",
@@ -123,7 +123,7 @@
       "problem": "NarrativeTransportSource protocol lacks catalog/config, normalization infers OCR via reader.catalog",
       "proof": "review/cwp_architecture.md",
       "test": "protocol-only source with explicit OCR replay",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "CWP-02",
@@ -131,7 +131,7 @@
       "problem": "RawNarrativeSelector allocates document budget through implicit repo/env config",
       "proof": "review/cwp_architecture.md",
       "test": "injected work budget; two configs; no config I/O in selector",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "CWP-03",
@@ -139,7 +139,7 @@
       "problem": "neutral source guard types load concrete source reader/catalog runtime",
       "proof": "review/cwp_architecture.md",
       "test": "guard imports with catalog runtime unavailable",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "CWP-04",
@@ -147,7 +147,7 @@
       "problem": "product wheel installed public entrypoint/asset/extra behavior unproven",
       "proof": "review/cwp_architecture.md",
       "test": "actual installed package, empty cwd, no source PYTHONPATH",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "CWP-05",
@@ -155,7 +155,7 @@
       "problem": "root/shared/legacy and same-owner storage/pure DTO boundaries need finite classification, alias and alternate implementation checks",
       "proof": "review/cwp_architecture.md",
       "test": "owned metadata mutation; public artifact port substitution; active entrypoint inventory",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "FF-01",
@@ -163,7 +163,7 @@
       "problem": "six operations plus ET/job/statements need packaged isolated subprocess coverage",
       "proof": "review/acquisition_architecture.md",
       "test": "six configured public operation fixtures, no sibling source",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "FF-02",
@@ -171,7 +171,7 @@
       "problem": "ET command/interpreter and repeated request connection composition mix deployment with flow",
       "proof": "review/acquisition_architecture.md",
       "test": "explicit command descriptor and one request config snapshot; NO_CHANGE if already proven",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "RF-01",
@@ -179,7 +179,7 @@
       "problem": "legacy canary SQL/DAG copied into installed runtime",
       "proof": "review/research_architecture.md",
       "test": "runtime closure cannot open neighbor DB; active tool retirement/public delegate",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "RF-02",
@@ -187,7 +187,7 @@
       "problem": "report imports core aggregation while core orchestrates report; pure/formal contract unclear",
       "proof": "review/research_architecture.md",
       "test": "report uses existing leaf API; pure leaf side effect isolation; golden outputs",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "RF-03",
@@ -195,7 +195,7 @@
       "problem": "B34 historical admission tied to retained execution/code layout; default leakage must be ruled out",
       "proof": "review/research_architecture.md",
       "test": "legacy B34 retained-path compatibility; portable artifacts only where already declared; current default no private CWP shape dependency",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "ET-01",
@@ -203,7 +203,7 @@
       "problem": "supervisor imports provider implementation for values; worker imports supervisor wire",
       "proof": "review/acquisition_architecture.md",
       "test": "pure contracts/settings/protocol import without HTTP/provider modules",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "ET-02",
@@ -211,7 +211,7 @@
       "problem": "worker fixed MAX_RESULT_BYTES may reject within explicitly configured operation budget",
       "proof": "review/acquisition_architecture.md",
       "test": "legal envelope accepted; real quota exceeded still rejected with measured/unknown usage",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "SID-01",
@@ -219,7 +219,7 @@
       "problem": "fetch discards provider error_code/retryable",
       "proof": "review/acquisition_architecture.md",
       "test": "typed host/magic/small/timeout failures preserved through CLI",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     },
     {
       "id": "SID-02",
@@ -227,7 +227,7 @@
       "problem": "CNINFO API imports adapter private report_metadata",
       "proof": "review/acquisition_architecture.md",
       "test": "pure metadata golden + API imports without adapter/browser",
-      "status": "NOT_IMPLEMENTED"
+      "status": "OWNER_DELIVERY_ACCEPTED"
     }
   ],
   "interfaces": [
@@ -280,7 +280,7 @@
       "owner": "CWP financial_statements",
       "declaration": "src/company_wiki/source_catalog/financial_statements/contracts.py",
       "wire_policy": "financial-statements-request/1 and financial-statements-response/1",
-      "existing_proof": "tests/financial_statements/test_layer_ports.py; FF tests/financial_statements/test_layer_boundary.py"
+      "existing_proof": "tests/financial_statements/test_layer_ports.py; tests/financial_statements/test_offline_e2e_full.py; RF tests/test_financial_statement_source.py"
     },
     {
       "id": "I07",
@@ -317,13 +317,35 @@
       "E08",
       "E09"
     ],
-    "status": "NOT_RUN",
+    "status": "CLOSED",
     "write_after_cwp_delivery": [
       "integration/**",
       "tools/run_source_system_tests.py",
       ".github/workflows/source-system.yml"
     ],
-    "paid_calls_required": false
+    "paid_calls_required": false,
+    "report": "review/root_composition_20261114.md",
+    "cases": {
+      "E01": "PASS_REAL_CROSS_MARKET_REUSE_AND_OWNER_CONTRACTS",
+      "E02": "PASS",
+      "E03": "PASS",
+      "E04": "PASS",
+      "E05": "PASS_LOOPBACK_RECOVERY",
+      "E06": "PASS",
+      "E07": "PASS_INSTALLED_AND_REVIEWED",
+      "E08": "PASS_INSTALLED_AND_STREAM_COMPOSITION",
+      "E09": "PASS_INSTALLED_ARCHITECTURE_AND_BEHAVIOR"
+    },
+    "rf_statements_ref": "fab819c25922af1366d7240af9bfee58d3bd612a",
+    "cwp_composition_ref": "c6189c623f6ec30e2a1a1059499e78c8ffe5b443",
+    "independent_review": {
+      "cwp": "PASS; added scanner parse-count behavior test after quality review",
+      "rf_three_statements": "PASS; reviewer replayed canonical installer E2E independently",
+      "dashboard_stream": "PASS; final unit and real HTTP interruption tests: 3 passed."
+    },
+    "d4_replay": "review/root_d4_current_20261114.json",
+    "dashboard_ref": "e1d1f927cc09a1249c0db31e9f98cd4d358d7ee1",
+    "reviewed_2026_11_14": true
   },
   "inherited_passes": {
     "D4": "scoped evidence remains accepted",
@@ -335,7 +357,7 @@
     "report": "review/plan_independent_review.md",
     "open_findings": []
   },
-  "next_action": "ROOT: receive the StockWiki C38/B03 public contract deltas, then run the bounded E01-E09 composition through owner public interfaces; include the two Dashboard adapter private-import compatibility failures without restoring CWP private backchannels.",
+  "next_action": "Resume R4/T4, configured real summary, cache recovery and RF adoption under the parent plan.",
   "reconciliation": {
     "status": "PARTIAL_RF_SAFE_INTAKE_MERGED_WITH_REMAINING_ASSIGNED",
     "entry": "reconciliation.md",
@@ -353,32 +375,35 @@
       "filing-fetch": "ac798a250b2310e0c2714053b08246ad94fffd0c",
       "investment-dashboard": "20493562f86b1351d97bc164bbc254efacddacdf",
       "revenue-forecast": "B37 regression tests 058be4fd60c394963be216580bcf7213af572a04; PWF 6341759b9cdfd13e8aa7d51d5c755e361046da0c"
-    }
+    },
+    "scope": "A1 and RF safe-intake historical snapshot (2026-11-11)"
   },
   "root_owned_work": [
     {
       "owner": "StockWiki",
       "baseline": "12c441e",
-      "scope": "ROOT receives C38/B03 public-contract deltas in a StockWiki-only worktree, preserves current source/F05 owners, then composes",
-      "status": "PENDING_ROOT_INTAKE_AND_COMPOSITION",
+      "scope": "C38/B03 and public CWP transport accepted; current D4, D5 and installed-caller proof",
+      "status": "MERGED_LOCALLY_NO_REMOTE",
       "reference_tips": [
         "4532b0da",
         "652f6a48"
-      ]
+      ],
+      "accepted_ref": "21cf4891019c8202e9e86996f47f0dbde7976293"
     },
     {
       "owner": "revenue-forecast-audit",
       "baseline": "3589b69",
       "scope": "public execution/summary imports; independent diagnostics; portable bundle",
-      "status": "PENDING_COMPOSITION"
+      "status": "D4_PUBLIC_CONSUMPTION_VERIFIED",
+      "accepted_ref": "3589b69cb9d28d7395607ce4fe689025b9acee96"
     },
     {
       "owner": "investment-dashboard",
       "baseline": "20493562f86b1351d97bc164bbc254efacddacdf",
-      "scope": "narrow boundary WIP accepted and pushed; original owner continues; actual owner stream combination still pending",
-      "status": "NARROW_INTAKE_MERGED_COMPOSITION_PENDING",
-      "existing_wip": false,
-      "historical_baseline": "b707473"
+      "scope": "configured public browse, original stream and persisted evidence; isolated wheel combination",
+      "status": "MERGED_AND_PUSHED_INSTALLED_COMPOSITION_VERIFIED",
+      "historical_baseline": "b707473",
+      "accepted_ref": "e1d1f927cc09a1249c0db31e9f98cd4d358d7ee1"
     },
     {
       "owner": "Dayu",
@@ -425,12 +450,8 @@
         "remote_ref_verified": true
       }
     },
-    "remaining": [
-      "ROOT-owned StockWiki C38/B03 public-contract intake",
-      "E01-E09 public-interface composition",
-      "resolve two Dashboard adapter tests that import private CWP names at consumer side"
-    ],
-    "note": "These lane deliveries are closed; this does not mean the full module-boundary plan or source-system composition is complete.",
+    "remaining": [],
+    "note": "Owner delivery and scoped E01-E09 composition are closed. Parent plan retains semantic, paid recovery and business adoption work.",
     "delivery_worktrees_removed": [
       "C:/Users/郑曾波/Projects/mb11-cwp",
       "C:/Users/郑曾波/Projects/mb11-ff",
@@ -450,6 +471,12 @@
       "bytes": 18119347,
       "status": "removed after evidence confirmed it contained only reproducible pytest/review/runtime test artifacts"
     },
-    "receipt_refs_note": "Full receipt SHAs were checked against each repository local main ref and origin remote after the cleanup receipts were pushed."
+    "receipt_refs_note": "Full receipt SHAs were checked against each repository local main ref and origin remote after the cleanup receipts were pushed.",
+    "root_composition_test_worktrees_removed": [
+      "C:/Temp/cwmb0-1114-84d1",
+      "C:/Temp/swmb-1114-84d1",
+      "C:/Temp/rfmb-statements-1114",
+      "C:/Temp/damb-1114-84d1"
+    ]
   }
 }

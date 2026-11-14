@@ -1,14 +1,21 @@
 # 当前状态
 
-唯一入口为本文件和 CURRENT_STATUS.json。实施顺序见 task_plan.md，交接见 HANDOFF.md，长期循环见 MAINLINE_LOOP_GOAL.md。
+本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-13 最新：五条模块施工卡已并线，组合仍待完成
+## 2026-11-14 当前：M2 已完成，推进 R4
+
+五条模块卡已受测并线并推送。StockWiki C38/B03 和公开来源客户端进入本地 master。Dashboard 两处私有依赖已修正并推送 main。安装态浏览、原件、摘要和 D4 跨仓 30 项已通过，RF 三表经临时正式安装和独审，已推 main。本轮隔离测试工作树已回收。完整版本和复验入口见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md) 及 [E01–E09 矩阵](../module-boundaries-2026-11-11/boundary_matrix.json)。
+
+
+父计划已恢复来源回放。当前实际样本 12 个检查点均找到原文，16M 工作账户仍耗尽，尚未代表全部来源处理完成。下一步按实际执行分配工作量，再做 T4/SEM、真实摘要、缓存恢复及 RF 实际采用。自动目标仍处于暂停状态，本次手工实施已恢复。
+
+## 2026-11-13 历史：五条模块施工卡已并线
 
 模块边界子计划中的 MB-CWP、MB-FF、MB-RF、MB-ET、MB-SID 均已独立审查、并入对应主线并推送，最终状态以 module-boundaries-2026-11-11/README.md、其 boundary_matrix.json 和各仓 ROOT PWF 收据为准。原文档中“其他lane未派发/未开始”的描述是11月11日历史快照，已被子计划后续记录替代。
 
 仍未完成的是ROOT-owned StockWiki C38/B03公开合同接收、E01-E09跨仓组合，以及Dashboard adapter两处消费者私有导入兼容问题。组合矩阵仍 NOT_RUN；因此不能关闭整个模块化阶段或恢复后续公司循环。五个交付工区和三个ROOT集成工区已回收，FF可重建测试scratch清理约18.1MB，分支保留；其他原始资料、运行输出及历史证据均按用途留存。下一步唯一入口见子计划 README 与 task_plan。
 
-## 2026-11-11 最新：逐模块Git核销与有限接收已完成
+## 2026-11-11 历史：逐模块Git核销与有限接收
 
 当前执行入口仍是 [module-boundaries-2026-11-11](../module-boundaries-2026-11-11/README.md)，支线/未提交改动的唯一处置表为其 [reconciliation.md](../module-boundaries-2026-11-11/reconciliation.md)。本轮新增授权下已审查8仓390个分支/remote refs和253工区，结合PWF/交接/patch与blob归因，结果已加入原五张卡A0和ROOT接收清单。
 
@@ -68,7 +75,7 @@
 
 ## 现在的顺序
 
-1. 当前 P3 来源层 stream/parser 子节点已按 RED/GREEN、独立审查和宿主 fast-gate 收口并推送。当前暂停。下次恢复先对照历史 stream/canonical 候选与当前 master 重放；只对现行主线可复现的缺口决定迁移，随后继续明确的模块/跨仓 owner 边界。
+1. 以 [M2 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md) 和矩阵为准收尾当前跨仓模块验收，保留已发布的 P3 来源流、解析端口和既有交付。
 2. R4 工作量分诊已有收据。优先核对占9.05M的业务扫描统一预扣与下层实际计费重叠，增加owner回归并在原16M账户内修复三项遗漏。
 3. 完成 T4 父链和 SEM-QUAL-01 反控及真实验收，随后推进新版摘要、同/跨 run 恢复、RF 实际采用和固定公司循环。
 4. 核销 source-facts、M3、W04 semantics、R1 observation 与 Dashboard 工区，逐项合并已接受代码和移除已替代状态。

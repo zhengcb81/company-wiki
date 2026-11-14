@@ -1,8 +1,8 @@
 # 当前交接
 
-**当前执行入口：module-boundaries-2026-11-11**，父计划只归总。M0/A1已完成；MB-CWP、MB-FF、MB-RF、MB-ET、MB-SID五条owner施工卡均已独立审查、并入对应主线并推送。整体模块计划尚未完成：ROOT的StockWiki C38/B03公开合同接收、Dashboard两项消费者私有导入兼容，以及E01-E09组合验收仍待执行。准确状态见CURRENT_STATUS.md/json和子计划的boundary_matrix.json；E01-E09当前仍NOT_RUN。
+**当前执行入口为 [主线实施计划](task_plan.md) 的 R4/T4。** 五条模块交付及 M2 组合已验收完成。StockWiki C38/B03 与 Dashboard 通过公开接口接入，验收版本见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md)。
 
-下一步由ROOT在StockWiki owner边界内接收C38/B03公开合同差额，再经各模块公开接口运行E01-E09；同时修复Dashboard adapter引用CWP历史私有符号的问题，不恢复CWP私有后门。五条owner卡已合并推送；SID及RF工作区中的用户业务资料按PWF保留。原R4/真实摘要/缓存/RF循环仍等待模块组合节点完成后恢复。
+用当前 R4 真实半年报基线核对统一扫描预扣和下层实际计费，同一文档账户按责任计费。随后按顺序收口 T4/SEM、真实摘要、缓存恢复、RF 采用和公司循环。上一子节点的历史快照见下文。
 
 ## 已发布的前一子节点（历史快照）
 
