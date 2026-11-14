@@ -9,11 +9,13 @@ contract pins what a consumer may rely on and what the transport refuses.
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import os
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -75,6 +77,10 @@ def _run_cli(config: Path, *, document_id: str, source_id: str, sha: str,
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONUTF8"] = "1"
     env["COMPANY_WIKI_NETWORK"] = "blocked"
+    scratch = config.parent / "stream-scratch"
+    scratch.mkdir(exist_ok=True)
+    for key in ("TMP", "TEMP", "TMPDIR"):
+        env[key] = str(scratch)
     return subprocess.run(
         [sys.executable, "-B", "-m", "company_wiki.source_catalog.source_stream_cli",
          "--config", str(config), "--document-id", document_id,
@@ -89,8 +95,8 @@ def _receipts(stderr: bytes) -> list[dict]:
 
 
 @pytest.fixture()
-def lake(tmp_path: Path):
-    catalog, original, identity = _catalog(tmp_path)
+def lake(tmp_path: Path, request):
+    catalog, original, identity = _catalog(tmp_path, body=getattr(request, "param", BODY))
     config_path = tmp_path / "source_catalog.yaml"
     config_path.write_text(json.dumps({
         "schema_version": "1.0",
@@ -193,17 +199,13 @@ def test_stream_cli_refuses_when_no_candidate_is_admitted(lake, tmp_path):
     assert "ok" not in {receipt["status"] for receipt in receipts}
 
 
-def test_stream_cli_same_size_tamper_locks_then_refuses_without_ok(lake):
-    """Bytes that fail the digest are locked first and never ok'd.
-
-    Same size passes the pre-read admission, so chunks move (locked precedes
-    the first one); the owner's verification then refuses the stream and no
-    ok receipt exists — the transfer stays incomplete by construction.
-    """
+def test_stream_cli_same_size_tamper_refuses_before_exposing_any_bytes(lake):
     original = lake["original"].read_bytes()
     tampered = bytes((byte + 7) % 256 for byte in original)
     assert len(tampered) == len(original)
+    old_stat = lake["original"].stat()
     lake["original"].write_bytes(tampered)
+    os.utime(lake["original"], ns=(old_stat.st_atime_ns, old_stat.st_mtime_ns))
     result = _run_cli(
         lake["config"],
         document_id=lake["identity"]["document_id"],
@@ -211,11 +213,67 @@ def test_stream_cli_same_size_tamper_locks_then_refuses_without_ok(lake):
         sha=lake["identity"]["content_sha256"],
     )
     assert result.returncode == 2
+    assert result.stdout == b""
     receipts = _receipts(result.stderr)
-    assert [receipt["status"] for receipt in receipts] == ["locked", "unavailable"]
-    assert "ok" not in {receipt["status"] for receipt in receipts}
-    # The lock names the REQUESTED identity, not the tampered bytes.
-    assert receipts[0]["content_sha256"] == lake["identity"]["content_sha256"]
+    assert [receipt["status"] for receipt in receipts] == ["unavailable"]
+    assert list(lake["config"].parent.joinpath("stream-scratch").iterdir()) == []
+
+
+@pytest.mark.parametrize("lake", [BODY + b"a" * (2 * 1024 * 1024)], indirect=True, ids=["multi-chunk"])
+def test_stream_cli_first_stdout_write_cannot_change_the_committed_snapshot(lake, capsys, monkeypatch):
+    from company_wiki.source_catalog.source_stream_cli import main
+
+    original = lake["original"].read_bytes()
+    replacement = original[:len(BODY)] + b"b" * (len(original) - len(BODY))
+
+    class ReplaceDuringTransfer(io.BytesIO):
+        changed = False
+
+        def write(self, data):
+            if not self.changed:
+                lake["original"].write_bytes(replacement)
+                self.changed = True
+            return super().write(data)
+
+    stdout = ReplaceDuringTransfer()
+    with monkeypatch.context() as patch:
+        patch.setattr(sys, "stdout", SimpleNamespace(buffer=stdout))
+        assert main([
+            "--config", str(lake["config"]),
+            "--document-id", lake["identity"]["document_id"],
+            "--source-id", lake["identity"]["source_id"],
+            "--content-sha256", lake["identity"]["content_sha256"],
+        ]) == 0
+    assert stdout.changed
+    assert hashlib.sha256(stdout.getvalue()).digest() == hashlib.sha256(original).digest()
+    assert hashlib.sha256(lake["original"].read_bytes()).digest() == hashlib.sha256(replacement).digest()
+    assert [r["status"] for r in _receipts(capsys.readouterr().err.encode())] == ["locked", "ok"]
+
+
+def test_stream_staging_does_not_publish_on_scratch_failure(lake, capsys, monkeypatch):
+    import tempfile
+
+    from company_wiki.source_catalog.source_stream_cli import main
+
+    def disk_full(**_):
+        raise OSError("scratch volume full")
+
+    stdout = io.BytesIO()
+    with monkeypatch.context() as patch:
+        patch.setattr(tempfile, "TemporaryFile", disk_full)
+        patch.setattr(sys, "stdout", SimpleNamespace(buffer=stdout))
+        with pytest.raises(SystemExit) as refusal:
+            main([
+                "--config", str(lake["config"]),
+                "--document-id", lake["identity"]["document_id"],
+                "--source-id", lake["identity"]["source_id"],
+                "--content-sha256", lake["identity"]["content_sha256"],
+            ])
+    assert refusal.value.code == 2
+    assert stdout.getvalue() == b""
+    assert _receipts(capsys.readouterr().err.encode()) == [
+        {"schema_version": "2.2", "status": "unavailable", "reason": "stream_staging_unavailable"},
+    ]
 
 
 def test_stream_cli_keeps_the_original_bytes_unchanged(lake):
@@ -227,3 +285,46 @@ def test_stream_cli_keeps_the_original_bytes_unchanged(lake):
     )
     assert result.returncode == 0
     assert lake["original"].read_bytes() == BODY
+    assert list(lake["config"].parent.joinpath("stream-scratch").iterdir()) == []
+
+
+def _run_with_stream_pipes(lake, monkeypatch, *, stdout, stderr):
+    from company_wiki.source_catalog.source_stream_cli import main
+
+    with monkeypatch.context() as patch:
+        patch.setattr(sys, "stdout", SimpleNamespace(buffer=stdout))
+        patch.setattr(sys, "stderr", stderr)
+        return main([
+            "--config", str(lake["config"]),
+            "--document-id", lake["identity"]["document_id"],
+            "--source-id", lake["identity"]["source_id"],
+            "--content-sha256", lake["identity"]["content_sha256"],
+        ])
+
+
+@pytest.mark.parametrize("failed_receipt", ["locked", "ok"])
+def test_stream_cli_cannot_succeed_without_a_delivered_receipt(lake, monkeypatch, failed_receipt):
+    class BrokenReceiptPipe(io.StringIO):
+        def write(self, line):
+            if json.loads(line)["status"] == failed_receipt:
+                raise BrokenPipeError("consumer closed diagnostics pipe")
+            return super().write(line)
+
+    stdout, stderr = io.BytesIO(), BrokenReceiptPipe()
+    with pytest.raises(SystemExit) as refusal:
+        _run_with_stream_pipes(lake, monkeypatch, stdout=stdout, stderr=stderr)
+    assert refusal.value.code == 2
+    if failed_receipt == "locked":
+        assert not stdout.getvalue()
+    assert all(row["status"] != "ok" for row in _receipts(stderr.getvalue().encode()))
+
+
+def test_stream_cli_reports_success_only_after_a_complete_stdout_write(lake, monkeypatch):
+    class ShortOutputPipe(io.BytesIO):
+        def write(self, data):
+            return super().write(data[:7])
+
+    stdout, stderr = ShortOutputPipe(), io.StringIO()
+    assert _run_with_stream_pipes(lake, monkeypatch, stdout=stdout, stderr=stderr) == 0
+    assert stdout.getvalue() == BODY
+    assert [row["status"] for row in _receipts(stderr.getvalue().encode())] == ["locked", "ok"]

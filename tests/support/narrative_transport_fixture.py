@@ -17,6 +17,7 @@ from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.narrative_artifact_store import (
     LocalNarrativeObjectStore, NarrativeArtifactStore,
 )
+from company_wiki.source_catalog.narrative_formats import source_class_for
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from integration.test_narrative_runtime_e2e import _drain, _new_catalog, _pdf_bytes, _runtime
 from support.narrative_model_fixture import ReplayNarrativeModel
@@ -105,7 +106,6 @@ def published_fixture(
                 spec["sidecar_overrides"] = {
                     **dict(spec.get("sidecar_overrides") or {}), "language": spec["language"],
                 }
-            transcript = spec["document_kind"] == "investor_call_transcript"
         catalog, reader, indexed = _new_catalog(root, [spec])
         _, source = next(iter(indexed.values()))
         source_ref = SourceRefValue.from_dict({
@@ -120,7 +120,7 @@ def published_fixture(
             "source_ref": source_ref.to_dict(),
             "expected_read_policy_sha256": reader.read_policy_sha256(source if scoped_policy else None),
             "source_metadata": {
-                "source_class": "transcript" if transcript else "filing",
+                "source_class": source_class_for(source.mime_type, str(spec["document_kind"])),
                 "title": metadata["title"], "document_kind": metadata["document_kind"],
                 "language": metadata["language"],
             },

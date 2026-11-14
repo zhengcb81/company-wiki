@@ -55,7 +55,7 @@ class ReplayNarrativeModel:
                     "claim_id": "claim-replay-001",
                     # This fixture bootstraps production-current generation. Long
                     # historical drafts are constructed explicitly by read tests.
-                    "text": first[1][:200],
+                    "text": first[1].strip()[:200].rstrip(),
                     "evidence_ids": [first[0]],
                     "claim_type": claim_type,
                     "modality": modality,

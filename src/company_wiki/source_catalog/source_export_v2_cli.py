@@ -82,7 +82,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         refs, spans = _read_request()
         catalog = SourceCatalog(load_catalog_config(args.config))
         bundle = SourceExportBundleV2.build(
-            source_reader=SourceVersionReader(catalog),
+            source_reader=SourceVersionReader(catalog).as_export_port(),
             refs=refs,
             evidence_spans=spans,
         )

@@ -17,7 +17,7 @@ from company_wiki.wire_json import parse_json
 from .evidence_span import EVIDENCE_SPAN_SCHEMA_VERSION, EvidenceSpan
 from .source_export import SOURCE_EXPORT_ID_PREFIX, SourceExportError
 from .source_version import (
-    SOURCE_REF_SCHEMA_VERSION, SourceRef, SourceRefError, SourceVersionPort,
+    SOURCE_REF_SCHEMA_VERSION, SourceExportPort, SourceRef, SourceRefError,
     SourceRefMismatchError, VerifiedContent, VerifiedVersionReceipt,
 )
 
@@ -112,11 +112,11 @@ class SourceExportBundleV2:
     def build(
         cls,
         *,
-        source_reader: SourceVersionPort,
+        source_reader: SourceExportPort,
         refs: Sequence[SourceRef],
         evidence_spans: Sequence[EvidenceSpan],
     ) -> SourceExportBundleV2:
-        if not isinstance(source_reader, SourceVersionPort):
+        if not isinstance(source_reader, SourceExportPort):
             raise TypeError("source_reader must implement the verified source port")
         if isinstance(refs, (str, bytes)) or not isinstance(refs, Sequence):
             raise TypeError("refs must be a sequence")

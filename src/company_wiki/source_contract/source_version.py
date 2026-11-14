@@ -290,8 +290,17 @@ class SourceChunkSinkError(RuntimeError):
 
 
 @runtime_checkable
-class SourceVersionPort(Protocol):
-    """Narrow source-owner interface. Serialization still verifies input bytes."""
+class SourceExportPort(Protocol):
+    """The verified byte and manifest operations needed by an export."""
+
+    def open_version(self, ref: SourceRef, *, purpose: str) -> VerifiedContent: ...
+    def verify_version(self, ref: SourceRef, *, purpose: str) -> VerifiedVersionReceipt: ...
+    def describe_version(self, ref: SourceRef) -> dict[str, str | int | None]: ...
+
+
+@runtime_checkable
+class SourceVersionPort(SourceExportPort, Protocol):
+    """Pathless source operations for consumers that also prepare a parser."""
 
     def open_version(
         self,
@@ -300,7 +309,6 @@ class SourceVersionPort(Protocol):
         purpose: str,
         budget: SourceReadBudgetPort | None = None,
     ) -> VerifiedContent: ...
-    def verify_version(self, ref: SourceRef, *, purpose: str) -> VerifiedVersionReceipt: ...
     def describe_processing_version(
         self, ref: SourceRef,
     ) -> SourceProcessingDescriptor: ...
@@ -312,7 +320,6 @@ class SourceVersionPort(Protocol):
         purpose: str,
         budget: SourceReadBudgetPort | None = None,
     ) -> VerifiedVersionReceipt: ...
-    def describe_version(self, ref: SourceRef) -> dict[str, str | int | None]: ...
 
 __all__ = [
     'ReviewSnapshot',
@@ -324,9 +331,11 @@ __all__ = [
     'SourceRefMismatchError',
     'SourceChunkSink',
     'SourceChunkSinkError',
+    'SourceExportPort',
     'SourceReadBudgetPort',
     'ResettableSourceReadBudgetPort',
     'SourceProcessingDescriptor',
+    'SourceVersionPort',
     'VerifiedContent',
     'VerifiedVersionReceipt',
 ]

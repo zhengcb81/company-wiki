@@ -8,8 +8,76 @@ from pathlib import Path
 import pytest
 
 from company_wiki.source_catalog.source_reader import SourceVersionReader
-from company_wiki.source_contract import SourceExportBundleV2, SourceExportError
+from company_wiki.source_contract import (
+    SourceExportBundleV2,
+    SourceExportError,
+    SourceExportPort,
+    SourceVersionPort,
+)
 from contract.test_source_export_v2 import _fixture
+from contract.test_source_read_policy import _runtime_snapshot
+
+
+def test_source_reader_hides_owner_state_and_internal_operations(tmp_path):
+    catalog, _, _, ref, _ = _fixture(tmp_path, text_mode=True)
+    try:
+        reader = SourceVersionReader(catalog)
+        for name in (
+            "catalog", "_catalog", "_runtime_policy", "_read_context",
+            "_candidate_pages", "_describe_version", "_verified_version", "_verified_location",
+        ):
+            with pytest.raises(AttributeError):
+                getattr(reader, name)
+        with pytest.raises(AttributeError):
+            setattr(reader, "catalog", catalog)
+        assert reader.verify_version(ref, purpose="source_export").content_sha256 == ref.content_sha256
+    finally:
+        catalog.close()
+
+
+def test_version_port_carries_pathless_reads_without_catalog_owner_operations(tmp_path):
+    catalog, _, _, ref, _ = _fixture(tmp_path, text_mode=True)
+    try:
+        reader = SourceVersionReader(catalog)
+        port = reader.as_version_port()
+        assert isinstance(port, SourceVersionPort)
+        for name in (
+            "catalog", "_reader", "_verified_location", "query_local", "query_exact_pair_ref",
+            "verify_reusable_version", "open_described_version",
+        ):
+            with pytest.raises(AttributeError):
+                getattr(port, name)
+        assert port.open_version(ref, purpose="preview").data == reader.open_version(
+            ref, purpose="preview",
+        ).data
+        assert port.describe_version(ref) == reader.describe_version(ref)
+    finally:
+        catalog.close()
+
+
+def test_export_port_only_exposes_export_operations(tmp_path):
+    catalog, _, _, ref, span = _fixture(tmp_path, text_mode=True)
+    try:
+        port = SourceVersionReader(catalog).as_export_port()
+        assert isinstance(port, SourceExportPort)
+        for name in ("catalog", "stream_version", "describe_processing_version", "_reader"):
+            with pytest.raises(AttributeError):
+                getattr(port, name)
+        assert SourceExportBundleV2.build(source_reader=port, refs=(ref,), evidence_spans=(span,))
+    finally:
+        catalog.close()
+
+
+def test_source_reader_owns_its_explicit_compatibility_snapshot(tmp_path):
+    catalog, _, _, _, _ = _fixture(tmp_path, text_mode=True)
+    try:
+        policy = _runtime_snapshot(catalog.config)
+        reader = SourceVersionReader(catalog, runtime_policy=policy)
+        original = reader.read_policy_sha256()
+        policy["flags"]["legacy_bridge_enabled"] = True
+        assert reader.read_policy_sha256() == original
+    finally:
+        catalog.close()
 
 
 def test_export_accepts_delegating_read_backend_without_concrete_inheritance(tmp_path):

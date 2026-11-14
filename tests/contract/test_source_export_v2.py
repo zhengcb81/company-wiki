@@ -229,16 +229,23 @@ def test_v2_rejects_end_past_original_even_if_slicing_returns_the_quote(tmp_path
     {"mime_type": "application/octet-stream"},
     {"original_path": "private/should-not-leave.pdf"},
 ))
-def test_v2_builder_binds_manifest_to_the_verified_ref(tmp_path, monkeypatch, change):
+def test_v2_builder_binds_manifest_to_the_verified_ref(tmp_path, change):
     catalog, _, _, ref, _ = _fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     manifest = reader.describe_version(ref)
-    monkeypatch.setattr(reader, "describe_version", lambda _: {**manifest, **change})
 
-    with pytest.raises(SourceExportError, match="v2 manifest"):
-        _v2_module().SourceExportBundleV2.build(
-            source_reader=reader, refs=(ref,), evidence_spans=(),
-        )
+    backend = SimpleNamespace(
+        open_version=reader.open_version,
+        verify_version=reader.verify_version,
+        describe_version=lambda _: {**manifest, **change},
+    )
+    try:
+        with pytest.raises(SourceExportError, match="v2 manifest"):
+            _v2_module().SourceExportBundleV2.build(
+                source_reader=backend, refs=(ref,), evidence_spans=(),
+            )
+    finally:
+        catalog.close()
 
 
 @pytest.mark.parametrize("change", (
@@ -258,16 +265,22 @@ def test_v2_loader_requires_manifest_identity_usable_as_a_ref(tmp_path, change):
         bundle_type.from_dict(wire)
 
 
-def test_v2_passes_through_observed_historical_fiscal_year(tmp_path, monkeypatch):
+def test_v2_passes_through_observed_historical_fiscal_year(tmp_path):
     catalog, _, _, ref, _ = _fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     manifest = reader.describe_version(ref)
-    monkeypatch.setattr(reader, "describe_version", lambda _: {**manifest, "fiscal_year": 1890})
     bundle_type = _v2_module().SourceExportBundleV2
+    backend = SimpleNamespace(
+        open_version=reader.open_version,
+        verify_version=reader.verify_version,
+        describe_version=lambda _: {**manifest, "fiscal_year": 1890},
+    )
 
-    wire = bundle_type.build(source_reader=reader, refs=(ref,), evidence_spans=()).to_dict()
-
-    assert bundle_type.from_dict(wire).to_dict()["manifests"][0]["fiscal_year"] == 1890
+    try:
+        wire = bundle_type.build(source_reader=backend, refs=(ref,), evidence_spans=()).to_dict()
+        assert bundle_type.from_dict(wire).to_dict()["manifests"][0]["fiscal_year"] == 1890
+    finally:
+        catalog.close()
 
 
 def test_v2_rejects_text_span_when_original_is_not_utf8(tmp_path):

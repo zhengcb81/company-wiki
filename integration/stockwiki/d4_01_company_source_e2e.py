@@ -135,6 +135,10 @@ def build_workspace(tmp: Path, catalog_config: Path) -> Path:
         "schema_version": "1.0",
         "catalog_config": [str(catalog_config)],
         "env": {"PYTHONPATH": str(CWP / "src")},
+        "processed_command": [
+            "-m", "company_wiki.source_catalog.processed_document_cli",
+            "--config", str(catalog_config),
+        ],
         "timeout_s": 120,
         "max_index_stdout_bytes": 8388608,
         "max_source_bytes": 67108864,

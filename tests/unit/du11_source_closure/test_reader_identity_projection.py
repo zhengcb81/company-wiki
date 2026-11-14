@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from company_wiki.source_catalog.source_reader import SourceVersionReader
+from company_wiki.source_catalog.resolver import SourceResolver
 from company_wiki.source_catalog.source_reader_cli import main
 from unit.du11_identity_projection.test_identity_projection import indexed  # noqa: F401
 
@@ -20,13 +20,13 @@ def test_reader_exposes_same_observation_canonical_identity(indexed, purpose, ca
             "kind": "directory", "adapter_id": "sidecar_filing_v1", "reusable_for_filing": True}]}), encoding="utf-8")
     before = raw.read_bytes(), raw.with_name(raw.name + ".source.json").read_bytes()
     observations = []
-    describe = SourceVersionReader._describe_version
+    project_metadata = SourceResolver.project_source_metadata
 
     def observe(self, *args, **kwargs):
         observations.append(1)
-        return describe(self, *args, **kwargs)
+        return project_metadata(self, *args, **kwargs)
 
-    monkeypatch.setattr(SourceVersionReader, "_describe_version", observe)
+    monkeypatch.setattr(SourceResolver, "project_source_metadata", observe)
     code = main(["--config", str(config), "--document-id", ref.document_id,
         "--source-id", ref.source_id, "--content-sha256", ref.content_sha256,
         "--purpose", purpose, "--include-canonical-identity"])

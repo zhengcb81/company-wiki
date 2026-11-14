@@ -75,67 +75,28 @@ def test_exact_query_does_not_project_unrelated_same_kind_documents(
         catalog.close()
 
 
-def test_candidate_budget_exact_eof_is_not_overflow():
-    from types import SimpleNamespace
-    from company_wiki.source_catalog.source_reader import SourceVersionReader
+@pytest.mark.parametrize("count", (20_000, 20_001), ids=("exact-eof", "overflow"))
+def test_query_candidate_budget_distinguishes_exact_eof_from_overflow(tmp_path, monkeypatch, count):
+    catalog, _, _, _ = _fixture(tmp_path)
+    observed = []
 
-    class Catalog:
-        def query_filing_candidates(self, **kwargs):
-            start = (
-                int(kwargs.get("after_document_id") or "-1") + 1
-                if "after_document_id" in kwargs
-                else kwargs["offset"]
-            )
-            return [
-                {"document_id": str(i)}
-                for i in range(start, min(20_000, start + kwargs["limit"]))
-            ]
+    def query_candidates(*, after_document_id, limit, **_):
+        start = int(after_document_id) + 1 if after_document_id is not None else 0
+        page = [{"document_id": str(i), "entities": []} for i in range(start, min(count, start + limit))]
+        observed.extend(row["document_id"] for row in page)
+        return page
 
-    reader = object.__new__(SourceVersionReader)
-    reader.catalog = Catalog()
-    assert (
-        len(
-            list(
-                reader._candidate_pages(
-                    SimpleNamespace(
-                        entity="Acme",
-                        document_kind="annual_report",
-                        as_of_date="2026-10-21",
-                    )
-                )
-            )
-        )
-        == 20_000
-    )
-
-
-def test_true_related_candidate_overflow_is_still_bounded():
-    from types import SimpleNamespace
-
-    class Catalog:
-        def query_filing_candidates(self, **kwargs):
-            start = (
-                int(kwargs.get("after_document_id") or "-1") + 1
-                if "after_document_id" in kwargs
-                else kwargs["offset"]
-            )
-            return [
-                {"document_id": str(i)}
-                for i in range(start, min(20_001, start + kwargs["limit"]))
-            ]
-
-    reader = object.__new__(SourceVersionReader)
-    reader.catalog = Catalog()
-    with pytest.raises(SourceReadError, match="candidate_budget_exceeded"):
-        list(
-            reader._candidate_pages(
-                SimpleNamespace(
-                    entity="Acme",
-                    document_kind="annual_report",
-                    as_of_date="2026-10-21",
-                )
-            )
-        )
+    monkeypatch.setattr(catalog, "query_filing_candidates", query_candidates)
+    try:
+        reader = SourceVersionReader(catalog)
+        if count == 20_000:
+            assert reader.query_local(request()).status == "not_found"
+        else:
+            with pytest.raises(SourceReadError, match="candidate_budget_exceeded"):
+                reader.query_local(request())
+        assert len(observed) == count
+    finally:
+        catalog.close()
 
 
 def corrected_assertion(catalog, ids):

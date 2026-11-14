@@ -43,7 +43,7 @@ def test_query_shows_excluded_version_without_reading_or_granting_reuse(lake, mo
     def no_open(*args, **kwargs):
         raise AssertionError("catalog query must not open raw bytes")
 
-    monkeypatch.setattr(reader, "open_version", no_open)
+    monkeypatch.setattr(SourceResolver, "read_verified_source_location", no_open)
     result = reader.query_local(request)
     assert result.status == "not_found" and result.matches == ()
     diagnostic, = result.excluded_candidates

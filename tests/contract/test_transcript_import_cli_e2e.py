@@ -441,6 +441,7 @@ def test_internal_defaulted_field_does_not_change_the_wire(
         assert _EVOLVED_CONSTRUCTIONS == [
             _EvolvedSourceRequest,
             _EvolvedDownloadCandidate,
+            _EvolvedDownloadCandidate,  # the verified listing is carried into an immutable owner value
         ]
         assert response["status"] == "imported"
         assert response["canonical_status"] == "imported_new"

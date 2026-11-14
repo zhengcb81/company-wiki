@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+from dataclasses import replace
 import hashlib
 import json
 from pathlib import Path
@@ -172,6 +173,12 @@ def test_import_rejects_wrong_identity_and_hash_and_reuses_exact_bytes(
         assert not writer.staging_root.exists()
 
         raw = _result(request, candidate, body)
+        with pytest.raises(TranscriptImportError, match="candidate security_id"):
+            import_transcript_tool_result(
+                raw, request=request, candidate=replace(candidate, security_id="OTHER"),
+                writer=writer, now="2026-09-27T12:01:00Z",
+            )
+        assert not list((root / "companies").rglob("*.html"))
         first = import_transcript_tool_result(
             raw, request=request, candidate=candidate, writer=writer,
             now="2026-09-27T12:01:00Z",

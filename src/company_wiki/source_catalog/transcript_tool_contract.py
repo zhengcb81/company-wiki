@@ -66,6 +66,7 @@ _FMP_RESULT_FIELDS = frozenset(
 class ValidatedTranscriptPayload:
     original: bytes
     mime_type: str
+    security_id: str
     retrieved_at: str
     adapter_name: str
     adapter_version: str
@@ -266,8 +267,9 @@ def _ticker_key(value: str) -> str:
 
 def _validate_security(
     payload: dict[str, Any], request: SourceRequest, candidate: DownloadCandidate
-) -> None:
+) -> str:
     identity = _candidate_identity(candidate)
+    security_id = identity.get("security_id")
     expected_exchange = identity.get("exchange")
     result_ticker = _text(payload["ticker"], "ticker", max_length=32)
     result_exchange = _text(payload["exchange"], "exchange", max_length=32)
@@ -278,12 +280,14 @@ def _validate_security(
         and result_exchange.casefold() == expected_exchange.casefold()
         and result_exchange.casefold() in {"nyse", "nasdaq"}
         and identity.get("market") == request.market
-        and identity.get("security_id") == request.security_id
+        and security_id == request.security_id
     )
     if not matches:
         raise TranscriptToolContractError(
             "result ticker/exchange does not match selected security"
         )
+    assert isinstance(security_id, str)
+    return security_id
 
 
 def _validate_byte_cap(original: bytes, max_bytes: int) -> None:
@@ -357,7 +361,7 @@ def parse_transcript_tool_result(
         call_date, publication_date, cutoff_verified = _validate_period(
             payload, request, candidate
         )
-    _validate_security(payload, request, candidate)
+    security_id = _validate_security(payload, request, candidate)
     mime_type, extraction, payload_sha = _validate_payload_metadata(
         payload, original, max_bytes=max_bytes
     )
@@ -367,6 +371,7 @@ def parse_transcript_tool_result(
     return ValidatedTranscriptPayload(
         original=original,
         mime_type=mime_type,
+        security_id=security_id,
         retrieved_at=_timestamp(payload["retrieved_at"]),
         adapter_name=_text(payload["adapter_name"], "adapter_name", max_length=128),
         adapter_version=_text(

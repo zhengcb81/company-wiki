@@ -42,17 +42,17 @@ def _launcher(root, *, hold_activation=False, count_source_opens=False):
     if count_source_opens:
         bootstrap_source += """from pathlib import Path
 import json
-from company_wiki.source_catalog.source_reader import SourceVersionReader
-if not getattr(SourceVersionReader._verified_version, '_reading_test_observer', False):
-    # Both open_version and open_described_version delegate actual byte
-    # verification here; observing just one public entry point misses the other.
-    _reading_original_open = SourceVersionReader._verified_version
+from company_wiki.source_catalog.resolver import SourceResolver
+if not getattr(SourceResolver.read_verified_source_location, '_reading_test_observer', False):
+    # Both open_version and open_described_version ask this collaborator to
+    # verify the selected location. Observe the work at that boundary.
+    _reading_original_open = SourceResolver.read_verified_source_location
     def _reading_counted_open(self, ref, *args, **kwargs):
         with (Path(__file__).parent.parent / 'source-open-count.jsonl').open('a', encoding='utf-8') as stream:
             stream.write(json.dumps({'document_id': ref.document_id, 'source_id': ref.source_id}) + '\\n')
         return _reading_original_open(self, ref, *args, **kwargs)
     _reading_counted_open._reading_test_observer = True
-    SourceVersionReader._verified_version = _reading_counted_open
+    SourceResolver.read_verified_source_location = _reading_counted_open
 """
     (bootstrap / "sitecustomize.py").write_text(bootstrap_source, encoding="utf-8")
     launcher = root / ("reading-hold.py" if hold_activation else "reading-run.py")

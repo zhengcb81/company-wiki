@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import tempfile
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime
 from pathlib import Path
 
@@ -121,6 +121,11 @@ def import_transcript_tool_result(
         )
     except TranscriptToolContractError as exc:
         raise TranscriptImportError(str(exc)) from exc
+    # Import wire v2 carries the listing in its adapter payload. Promote it
+    # only once the transcript contract has bound it to the request and tool
+    # result, so the canonical writer sees the same verified listing.
+    if candidate.security_id is None:
+        candidate = replace(candidate, security_id=payload.security_id)
     _check_time(payload.retrieved_at, now)
     try:
         material = extract_transcript_material(

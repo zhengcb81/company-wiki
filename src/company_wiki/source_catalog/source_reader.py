@@ -11,6 +11,7 @@ from __future__ import annotations
 import re
 import sqlite3
 from collections.abc import Iterator, Mapping
+from copy import deepcopy
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -38,8 +39,8 @@ from .source_location import relative_segments
 
 from company_wiki.source_contract import (
     SOURCE_REF_SCHEMA_VERSION, ReviewSnapshot, SourceChunkSink,
-    SourceChunkSinkError, SourceProcessingDescriptor, SourceReadBudgetPort,
-    SourceReadError, SourceRef, VerifiedContent, VerifiedVersionReceipt,
+    SourceChunkSinkError, SourceExportPort, SourceProcessingDescriptor, SourceReadBudgetPort,
+    SourceReadError, SourceRef, SourceVersionPort, VerifiedContent, VerifiedVersionReceipt,
 )
 SOURCE_READ_RECEIPT_SCHEMA_VERSION = "2.1"
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
@@ -111,42 +112,53 @@ class FilingReuseObservation:
 class SourceVersionReader:
     """Read an exact catalog version without accepting or returning a raw path."""
 
+    __slots__ = ("__catalog", "__runtime_policy")
+
     def __init__(self, catalog: SourceCatalog, *, runtime_policy: dict[str, Any] | None = None):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
-        self.catalog = catalog
-        if runtime_policy is not None and validate_snapshot(runtime_policy):
+        policy = deepcopy(runtime_policy)
+        if policy is not None and validate_snapshot(policy):
             raise ValueError("invalid explicit compatibility snapshot")
-        self._runtime_policy = runtime_policy
+        self.__catalog = catalog
+        self.__runtime_policy = policy
 
-    def _read_context(self) -> tuple[SourceResolver, dict[str, Any] | None, str]:
+    def as_export_port(self) -> SourceExportPort:
+        """Give the exporter verified bytes and metadata through its own port."""
+        return _ExportReader(self)
+
+    def as_version_port(self) -> SourceVersionPort:
+        """Give the parser verified bytes, metadata and a transactional stream."""
+        return _ProcessingReader(self)
+
+    def __read_context(self) -> tuple[SourceResolver, dict[str, Any] | None, str]:
         """Use current steady facts, or a caller's explicit compatibility view.
 
         An automatically discovered rollout file cannot grant or deny reads.
         """
-        policy = self._runtime_policy
-        read_policy_sha256 = source_read_policy_sha256(self.catalog.config, policy)
-        resolver = SourceResolver(self.catalog, runtime_policy=policy)
+        policy = self.__runtime_policy
+        read_policy_sha256 = source_read_policy_sha256(self.__catalog.config, policy)
+        resolver = SourceResolver(self.__catalog, runtime_policy=policy)
         return resolver, policy, read_policy_sha256
 
-    def _resolver_and_read_policy(
+    def __resolver_and_read_policy(
         self, expected_read_policy_sha256: str | None = None, *, ref: SourceRef | None = None,
     ) -> tuple[SourceResolver, str]:
         """Report the current fingerprint; stored fingerprints are lineage."""
-        resolver, policy, read_policy_sha256 = self._read_context()
-        self._validate_read_policy_pin(expected_read_policy_sha256)
+        resolver, policy, read_policy_sha256 = self.__read_context()
+        self.__validate_read_policy_pin(expected_read_policy_sha256)
         if expected_read_policy_sha256 is not None:
             if expected_read_policy_sha256 != read_policy_sha256 and ref is not None:
-                read_policy_sha256 = self._exact_read_policy(ref, resolver, policy)
+                read_policy_sha256 = self.__exact_read_policy(ref, resolver, policy)
         return resolver, read_policy_sha256
 
     @staticmethod
-    def _validate_read_policy_pin(value: str | None) -> None:
+    def __validate_read_policy_pin(value: str | None) -> None:
         if value is not None and (not isinstance(value, str) or not _SHA256.fullmatch(value)):
             raise SourceReadError("blocked", "invalid_read_policy_pin")
 
-    def _resolver_for_request(self) -> SourceResolver:
-        return self._resolver_and_read_policy()[0]
+    def __resolver_for_request(self) -> SourceResolver:
+        return self.__resolver_and_read_policy()[0]
 
     def read_policy_sha256(self, ref: SourceRef | None = None) -> str:
         """Return scoped schema-3 identity, or global schema-2 selection identity.
@@ -154,28 +166,28 @@ class SourceVersionReader:
         No-argument calls retain their existing selection/legacy semantics.
         Physical location is resolved and actual bytes checked again on open.
         """
-        resolver, policy, global_pin = self._read_context()
+        resolver, policy, global_pin = self.__read_context()
         if ref is None:
             return global_pin
-        return self._exact_read_policy(ref, resolver, policy)
+        return self.__exact_read_policy(ref, resolver, policy)
 
-    def _exact_read_policy(
+    def __exact_read_policy(
         self, ref: SourceRef, resolver: SourceResolver, runtime_policy: dict[str, Any] | None,
         *, metadata: dict[str, str | int | None] | None = None,
     ) -> str:
         if metadata is None:
-            metadata = self._describe_version(ref, resolver)
+            metadata = self.__describe_version(ref, resolver)
         try:
-            locations = self.catalog.reader.exact_source_locations(ref.document_id, ref.source_id)
+            locations = self.__catalog.reader.exact_source_locations(ref.document_id, ref.source_id)
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         return exact_source_read_policy_sha256(
-            self.catalog.config, runtime_policy, source_ref=asdict(ref),
+            self.__catalog.config, runtime_policy, source_ref=asdict(ref),
             source_facts={field: metadata.get(field) for field in _EXACT_SOURCE_FACT_FIELDS},
             registered_root_ids=(location["root_id"] for location in locations),
         )
 
-    def _candidate_pages(
+    def __candidate_pages(
         self, request: SourceRequest, *, include_unknown_publication: bool = False,
         identity_tokens: tuple[str, ...] | None = None,
     ) -> Iterator[dict[str, Any]]:
@@ -184,7 +196,7 @@ class SourceVersionReader:
 
         tokens = identity_tokens if identity_tokens is not None else (normalize_identity_text(request.entity),)
         candidates = iter_identity_filing_candidates(
-            self.catalog, document_kind=request.document_kind, identity_tokens=tokens,
+            self.__catalog, document_kind=request.document_kind, identity_tokens=tokens,
             published_on_or_before=None if include_unknown_publication else request.as_of_date,
         )
         try:
@@ -199,7 +211,7 @@ class SourceVersionReader:
         """Resolve the document's primary source version by its exact identity."""
         from .source_references import query_source_reference
         return query_source_reference(
-            lambda: self.catalog.reader, document_id, source_id, expected_sha256
+            lambda: self.__catalog.reader, document_id, source_id, expected_sha256
         )
 
     def query_exact_pair_ref(
@@ -214,7 +226,7 @@ class SourceVersionReader:
         """
         from .source_references import query_exact_pair_reference
         return query_exact_pair_reference(
-            lambda: self.catalog.reader, document_id, source_id, expected_sha256
+            lambda: self.__catalog.reader, document_id, source_id, expected_sha256
         )
 
     def query_local(self, request: SourceRequest) -> SourceQueryResult:
@@ -223,7 +235,7 @@ class SourceVersionReader:
         This lookup never scans, downloads, or grants permission to reuse a
         filing.  The selected action is checked again by open_version.
         """
-        return self._query_local(request, include_unknown_publication=False)
+        return self.__query_local(request, include_unknown_publication=False)
 
     def lookup_transcript_import(self, request: SourceRequest) -> SourceQueryResult:
         """Find an exact stored transcript for duplicate suppression.
@@ -244,14 +256,14 @@ class SourceVersionReader:
             or request.mode not in {None, "exact"}
         ):
             raise ValueError("transcript import lookup requires exact company and period")
-        return self._query_local(request, include_unknown_publication=True)
+        return self.__query_local(request, include_unknown_publication=True)
 
-    def _query_local(
+    def __query_local(
         self, request: SourceRequest, *, include_unknown_publication: bool
     ) -> SourceQueryResult:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
-        resolver = self._resolver_for_request()
+        resolver = self.__resolver_for_request()
         found: list[tuple[str, str, SourceRef]] = []
         found_scopes: list[dict] = []
         excluded: list[dict[str, object]] = []
@@ -264,7 +276,7 @@ class SourceVersionReader:
             request.entity, market=request.market, security_id=request.security_id,
             issuer_link_id=request.issuer_link_id,
         )
-        for document in self._candidate_pages(
+        for document in self.__candidate_pages(
             request, include_unknown_publication=True, identity_tokens=candidate_tokens,
         ):
             document = observe_metadata(document.get("metadata")).project_document(document)
@@ -316,7 +328,7 @@ class SourceVersionReader:
             except SourceReadError:
                 continue
             from .source_availability import stored_availability_evidence
-            availability = stored_availability_evidence(self.catalog, ref) if not document["published_date"] else None
+            availability = stored_availability_evidence(self.__catalog, ref) if not document["published_date"] else None
             qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date,
                                            availability_evidence=availability, source_sha256=ref.content_sha256)
             if not qualification.historical_date_eligible and not (
@@ -327,7 +339,7 @@ class SourceVersionReader:
             published = str(document["published_date"] or "")
             found.append((published, provider_document_id or "", ref))
             from .canonical_scope import qualified_source_scope
-            scope = qualified_source_scope(self.catalog, ref, document)
+            scope = qualified_source_scope(self.__catalog, ref, document)
             found_scopes.append({**scope.facts, "scope_verified": scope.authority == "source-facts",
                                  "published_date": published, "provider_document_id": provider_document_id,
                                  "source_id": source_id})
@@ -355,9 +367,9 @@ class SourceVersionReader:
         Only explicit capture fields are exported.  A scanner title derived
         from a filename is deliberately not promoted into a source title.
         """
-        return self._describe_version(ref, self._resolver_for_request())
+        return self.__describe_version(ref, self.__resolver_for_request())
 
-    def _describe_version(
+    def __describe_version(
         self, ref: SourceRef, resolver: SourceResolver,
     ) -> dict[str, str | int | None]:
         """Project facts under the same validated visibility as the scoped pin."""
@@ -366,7 +378,7 @@ class SourceVersionReader:
         if self.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
         try:
-            version_row = self.catalog.reader.exact_source_version(ref.document_id)
+            version_row = self.__catalog.reader.exact_source_version(ref.document_id)
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         if version_row is None:
@@ -419,7 +431,7 @@ class SourceVersionReader:
     def metadata_diagnostics(self, ref: SourceRef) -> dict[str, object]:
         """Read-only field quality for an exact source, outside the v2 manifest."""
         self.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256)
-        row = self.catalog.reader.exact_source_version(ref.document_id)
+        row = self.__catalog.reader.exact_source_version(ref.document_id)
         if row is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
         return observe_metadata(row["metadata_json"]).to_dict()
@@ -428,7 +440,7 @@ class SourceVersionReader:
         """Read recorded historical availability for the exact source reference."""
         from .source_availability import verified_availability_evidence
 
-        return verified_availability_evidence(self.catalog, ref)
+        return verified_availability_evidence(self.__catalog, ref)
 
     def open_described_version(
         self, ref: SourceRef, *, purpose: str = "source_export",
@@ -436,19 +448,19 @@ class SourceVersionReader:
         identity_cache_dir: Path | None = None,
     ) -> tuple[VerifiedContent, dict[str, str | int | None]]:
         """Observe facts once and verify the actual buffer under one read context."""
-        self._validate_read_policy_pin(expected_read_policy_sha256)
-        resolver, policy, global_pin = self._read_context()
-        manifest = self._describe_version(ref, resolver)
+        self.__validate_read_policy_pin(expected_read_policy_sha256)
+        resolver, policy, global_pin = self.__read_context()
+        manifest = self.__describe_version(ref, resolver)
         pin = (global_pin if expected_read_policy_sha256 == global_pin else
-               self._exact_read_policy(ref, resolver, policy, metadata=manifest))
+               self.__exact_read_policy(ref, resolver, policy, metadata=manifest))
         qualification = None
         if purpose == "filing_reuse":
             from .assertion_service import source_scope_qualification
             qualification = source_scope_qualification(
-                self.catalog, ref, metadata=manifest,
+                self.__catalog, ref, metadata=manifest,
                 identity_cache_dir=identity_cache_dir,
             )
-        opened = self._verified_version(ref, purpose=purpose, expected_read_policy_sha256=None,
+        opened = self.__verified_version(ref, purpose=purpose, expected_read_policy_sha256=None,
                                         retain_bytes=True, current_read_policy_sha256=pin,
                                         scope_qualification=qualification)
         assert isinstance(opened, VerifiedContent)
@@ -464,15 +476,15 @@ class SourceVersionReader:
         """
         manifest = self.describe_version(ref)
         try:
-            version = self.catalog.reader.exact_source_version(ref.document_id)
-            locations = self.catalog.source_location_candidates(
+            version = self.__catalog.reader.exact_source_version(ref.document_id)
+            locations = self.__catalog.source_location_candidates(
                 ref.document_id, ref.source_id
             )
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         if version is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
-        roots = {root.root_id: root for root in self.catalog.config.roots}
+        roots = {root.root_id: root for root in self.__catalog.config.roots}
         capture: dict[str, object] | None = None
         for location in sorted(
             locations,
@@ -510,7 +522,7 @@ class SourceVersionReader:
                 capture = observed
                 break
 
-        review_status = self._current_review(ref).status
+        review_status = self.__current_review(ref).status
         url = manifest["source_url"]
         https_url = url if isinstance(url, str) and url.startswith("https://") else None
         period_known = bool(
@@ -571,7 +583,7 @@ class SourceVersionReader:
                 )
 
                 store = SecurityMasterStore(
-                    Path(self.catalog.config.catalog_dir) / "security_master"
+                    Path(self.__catalog.config.catalog_dir) / "security_master"
                 )
                 issuer_link_id = store.issuer_link_id_for_security(market, security_id)
             except (OSError, SecurityIdentityError, SecurityMasterUnavailableError):
@@ -580,11 +592,11 @@ class SourceVersionReader:
                 candidate["issuer_link_id"] = issuer_link_id
         return candidate
 
-    def _current_review(self, ref: SourceRef) -> ReviewSnapshot:
+    def __current_review(self, ref: SourceRef) -> ReviewSnapshot:
         """Return an optional review diagnostic, never a read prerequisite."""
         try:
             review = read_prompt_injection_review(
-                self.catalog.reader, ref.document_id
+                self.__catalog.reader, ref.document_id
             )
         except (PromptInjectionReviewError, sqlite3.Error):
             return ReviewSnapshot("not_reviewed", None, None, None, None)
@@ -601,13 +613,13 @@ class SourceVersionReader:
             str(review.get("reviewed_at") or "") or None,
         )
 
-    def _review_for_result(
+    def __review_for_result(
         self, ref: SourceRef, *, purpose: str, retain_bytes: bool
     ) -> ReviewSnapshot | None:
         if purpose == "narrative_derivation":
-            return self._current_review(ref)
+            return self.__current_review(ref)
         if retain_bytes and purpose == "filing_reuse":
-            return self._current_review(ref)
+            return self.__current_review(ref)
         return None
 
     def open_version(
@@ -616,7 +628,7 @@ class SourceVersionReader:
         budget: SourceReadBudgetPort | None = None,
     ) -> VerifiedContent:
         """Return only fully verified bytes of the pinned version, or refuse."""
-        result = self._verified_version(
+        result = self.__verified_version(
             ref, purpose=purpose,
             expected_read_policy_sha256=expected_read_policy_sha256,
             retain_bytes=True,
@@ -632,7 +644,7 @@ class SourceVersionReader:
         if self.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
         try:
-            descriptor = self.catalog.processing_descriptor(ref)
+            descriptor = self.__catalog.processing_descriptor(ref)
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         if descriptor is None:
@@ -645,7 +657,7 @@ class SourceVersionReader:
         budget: SourceReadBudgetPort | None = None,
     ) -> VerifiedVersionReceipt:
         """Stream-verify the version with open_version's exact read rules."""
-        result = self._verified_version(
+        result = self.__verified_version(
             ref, purpose=purpose,
             expected_read_policy_sha256=expected_read_policy_sha256,
             retain_bytes=False, budget=budget,
@@ -671,7 +683,7 @@ class SourceVersionReader:
         """
         if not isinstance(sink, SourceChunkSink):
             raise TypeError("sink must implement the SourceChunkSink contract")
-        result = self._verified_version(
+        result = self.__verified_version(
             ref,
             purpose=purpose,
             expected_read_policy_sha256=expected_read_policy_sha256,
@@ -697,7 +709,7 @@ class SourceVersionReader:
         whether the complete original is needed, and a check over the exact
         bytes already verified by this reader.
         """
-        result = self._verified_version(
+        result = self.__verified_version(
             ref,
             purpose=purpose,
             expected_read_policy_sha256=expected_read_policy_sha256,
@@ -715,8 +727,8 @@ class SourceVersionReader:
         """Verify the selected version under filing-root and SEC scope rules."""
         from .assertion_service import source_scope_qualification
 
-        scope = source_scope_qualification(self.catalog, ref, metadata=metadata, request=request)
-        receipt, admitted_copy = self._verified_location(
+        scope = source_scope_qualification(self.__catalog, ref, metadata=metadata, request=request)
+        receipt, admitted_copy = self.__verified_location(
             ref, purpose="filing_reuse", expected_read_policy_sha256=None,
             retain_bytes=False, budget=budget, scope_qualification=scope,
             reusable_only=True,
@@ -729,14 +741,14 @@ class SourceVersionReader:
         object.__setattr__(observation, "request_id", request.request_id)
         return observation
 
-    def _verified_version(
+    def __verified_version(
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
         budget: SourceReadBudgetPort | None = None, scope_qualification=_SCOPE_UNOBSERVED,
         chunk_sink: SourceChunkSink | None = None,
     ) -> VerifiedContent | VerifiedVersionReceipt:
-        verified, _ = self._verified_location(
+        verified, _ = self.__verified_location(
             ref, purpose=purpose, expected_read_policy_sha256=expected_read_policy_sha256,
             retain_bytes=retain_bytes, current_read_policy_sha256=current_read_policy_sha256,
             budget=budget, scope_qualification=scope_qualification,
@@ -744,7 +756,7 @@ class SourceVersionReader:
         )
         return verified
 
-    def _verified_location(
+    def __verified_location(
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
@@ -767,13 +779,13 @@ class SourceVersionReader:
         if current != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
         if current_read_policy_sha256 is None:
-            _, read_policy_sha256 = self._resolver_and_read_policy(
+            _, read_policy_sha256 = self.__resolver_and_read_policy(
                 expected_read_policy_sha256, ref=ref,
             )
         else:
             read_policy_sha256 = current_read_policy_sha256
         try:
-            version_row = self.catalog.reader.exact_source_version(ref.document_id)
+            version_row = self.__catalog.reader.exact_source_version(ref.document_id)
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         if version_row is None:
@@ -783,21 +795,21 @@ class SourceVersionReader:
             if scope_qualification is _SCOPE_UNOBSERVED:
                 from .assertion_service import source_scope_qualification
                 scope_qualification = source_scope_qualification(
-                    self.catalog, ref, metadata=self.describe_version(ref))
+                    self.__catalog, ref, metadata=self.describe_version(ref))
             elif scope_qualification is not None and scope_qualification.ref != ref:
                 raise SourceReadError("unavailable", "source_scope_ref_changed")
         elif scope_qualification is _SCOPE_UNOBSERVED:
             scope_qualification = None
-        config = self.catalog.config
+        config = self.__catalog.config
         try:
-            candidates = self.catalog.source_location_candidates(
+            candidates = self.__catalog.source_location_candidates(
                 ref.document_id, ref.source_id
             )
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         if not candidates:
             raise SourceReadError("unavailable", "no_indexed_location")
-        read_resolver = self._resolver_for_request()
+        read_resolver = self.__resolver_for_request()
 
         supplied_budget = budget is not None
         if budget is None:
@@ -858,7 +870,7 @@ class SourceVersionReader:
                     assert observation is not None
                     if scope_qualification is not None:
                         scope_qualification.verify(observation.data, budget=budget)
-                    review = self._review_for_result(
+                    review = self.__review_for_result(
                         ref, purpose=purpose, retain_bytes=retain_bytes
                     )
                     read_at = datetime.now(UTC).isoformat()
@@ -928,6 +940,43 @@ class SourceVersionReader:
         raise SourceReadError(
             "unavailable", "no_verified_location", ",".join(sorted(set(failures)))
         )
+
+
+class _ExportReader:
+    __slots__ = ("__reader",)
+
+    def __init__(self, reader: SourceVersionReader) -> None:
+        self.__reader = reader
+
+    def open_version(
+        self, ref: SourceRef, *, purpose: str, budget: SourceReadBudgetPort | None = None,
+    ) -> VerifiedContent:
+        return self.__reader.open_version(ref, purpose=purpose, budget=budget)
+
+    def verify_version(self, ref: SourceRef, *, purpose: str) -> VerifiedVersionReceipt:
+        return self.__reader.verify_version(ref, purpose=purpose)
+
+    def describe_version(self, ref: SourceRef) -> dict[str, str | int | None]:
+        return self.__reader.describe_version(ref)
+
+
+class _ProcessingReader(_ExportReader):
+    __slots__ = ("__describe_processing", "__stream")
+
+    def __init__(self, reader: SourceVersionReader) -> None:
+        super().__init__(reader)
+        self.__describe_processing = reader.describe_processing_version
+        self.__stream = reader.stream_version
+
+    def describe_processing_version(self, ref: SourceRef) -> SourceProcessingDescriptor:
+        return self.__describe_processing(ref)
+
+    def stream_version(
+        self, ref: SourceRef, *, sink: SourceChunkSink, purpose: str,
+        budget: SourceReadBudgetPort | None = None,
+    ) -> VerifiedVersionReceipt:
+        return self.__stream(ref, sink=sink, purpose=purpose, budget=budget)
+
 
 __all__ = [
     'SourceReadError',

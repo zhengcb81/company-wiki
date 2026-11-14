@@ -82,7 +82,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         args = parser.parse_args(argv)
         request = _read_request()
         catalog = SourceCatalog(load_catalog_config(args.config))
-        envelope = read_processed_document(SourceVersionReader(catalog), request)
+        envelope = read_processed_document(SourceVersionReader(catalog).as_version_port(), request)
         _write_json_line(sys.stdout, envelope)
         return 0
     except SourceReadError as exc:

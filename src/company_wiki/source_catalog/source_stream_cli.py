@@ -1,48 +1,31 @@
-"""Bounded streaming transport over the current stream_version owner port.
+"""Stream only the committed snapshot of an exact original.
 
-The regular :mod:`source_reader_cli` reads the whole verified file into memory
-before one stdout write.  This CLI is the large-original companion: stdout
-carries only source chunks, and stderr carries two JSON lines -
+The source owner verifies registered bytes into a temporary sink. It may retry
+another copy of the same version while the sink is private. Before the first
+stdout byte, the transport emits one 2.2 ``locked`` identity receipt. After
+writing and flushing the verified snapshot it emits the final ``ok`` receipt.
+A refusal before verification has no lock and exposes no bytes.
 
-1. a ``locked`` receipt immediately before the first byte of the admitted
-   candidate crosses stdout (and before ``ok`` for an empty original).  It
-   pins the exact catalog identity (SHA-256, byte size, MIME) of what is
-   about to move; a refusal that produced no bytes carries no lock line,
-   because a consumer reads the first receipt as the transfer gate;
-2. a final ``ok`` receipt after the owner verified every streamed byte and
-   this transport re-digested what actually crossed the pipe.  ``ok`` — not
-   ``locked`` — is the complete-stream verification claim.
-
-Every admission, verification, same-SHA fallback, budget and cancellation
-decision belongs to the current ``SourceVersionPort.stream_version`` owner;
-this transport adds none.  Success requires exit code 0, the locked receipt,
-the final ``ok`` receipt, and the caller's own digest check over the received
-bytes.  Any failure after bytes started moving is a refusal with no ``ok``
-receipt: the transfer stays incomplete by construction, and consumers keep
-the last chunk held back until the receipt confirms it.
-
-``filing_reuse`` is refused here: that purpose must verify scope against
-whole retained bytes and belongs to the regular reader CLI.  A stdout pipe
-cannot express a mid-stream switch between same-SHA copies, so a second
-staged candidate is a named refusal rather than concatenated bytes.  The
-caller never receives a filesystem path.
+The existing source read budget covers candidate selection and staging.
+``filing_reuse`` remains on the whole-buffer source reader CLI for scope
+verification. The caller receives the two receipts and the source bytes.
 """
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import sys
+import tempfile
 from pathlib import Path
-from typing import NoReturn, Sequence
+from typing import BinaryIO, NoReturn, Sequence, cast
 
 from company_wiki.source_contract import (
-    SourceChunkSink,
     SourceChunkSinkError,
     SourceReadError,
     SourceRef,
+    VerifiedVersionReceipt,
 )
 
 from .config import CatalogConfigError, load_catalog_config
@@ -54,8 +37,8 @@ from .source_reader import SourceVersionReader
 #: Stream receipts are their own additive protocol.  The 2.1 schema of the
 #: whole-buffer reader stays untouched; refusals keep its five-value statuses.
 STREAM_RECEIPT_SCHEMA_VERSION = "2.2"
-_SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 _STREAMABLE_PURPOSES = frozenset({"preview", "source_export", "narrative_derivation"})
+_OUTPUT_CHUNK_BYTES = 1024 * 1024
 
 
 class _JsonArgumentParser(argparse.ArgumentParser):
@@ -64,90 +47,77 @@ class _JsonArgumentParser(argparse.ArgumentParser):
 
 
 def _emit_receipt(payload: dict[str, object]) -> None:
+    line = json.dumps(payload, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n"
+    if sys.stderr.write(line) != len(line):
+        raise BrokenPipeError("source receipt was not delivered")
+    sys.stderr.flush()
+
+
+def _refuse(status: str, reason: str) -> NoReturn:
     try:
-        line = json.dumps(payload, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
-        sys.stderr.write(line + "\n")
-        sys.stderr.flush()
-    except OSError:
-        # A consumer that is gone cannot be told so either; the non-zero exit
-        # below still says no ok receipt exists.
-        pass
-
-
-def _refuse(status: str, reason: str, detail: str = "") -> NoReturn:
-    _emit_receipt(
-        {
+        _emit_receipt({
             "schema_version": STREAM_RECEIPT_SCHEMA_VERSION,
             "status": status,
             "reason": reason,
-        }
-    )
+        })
+    except OSError:
+        # A closed receipt pipe still yields a failing process exit.
+        pass
     raise SystemExit(2)
 
 
-class _StdoutVerifiedStream(SourceChunkSink):
-    """stdout is the provisional staging area; the receipts are the transaction.
+class _StagedSourceStream:
+    """One request's scratch file, writable only through the transactional sink."""
 
-    One lock receipt precedes the first chunk of the one admitted candidate.
-    The owner may discard a failing copy, but a pipe cannot unsend its bytes,
-    so a second staged candidate refuses the whole transfer instead of
-    emitting concatenated copies.
-    """
+    __slots__ = ("__file", "__committed")
 
-    def __init__(self, ref: SourceRef) -> None:
-        self._ref = ref
-        self._digest = hashlib.sha256()
-        self._total = 0
-        self._locked = False
-        self._lock_emitted = False
+    def __init__(self, file: BinaryIO) -> None:
+        self.__file = file
+        self.__committed = False
 
     def begin_candidate(self) -> None:
-        # The candidate is admitted here, but the lock receipt is emitted
-        # lazily: a refusal before the first byte (missing file, denied
-        # root, unreadable copy) must carry no lock line, because a
-        # consumer reads the first receipt as the transfer gate.
-        if self._locked:
-            raise SourceChunkSinkError(
-                "a stdout stream carries one candidate; retry is a refusal"
-            )
-        self._locked = True
-
-    def _emit_lock(self) -> None:
-        if self._lock_emitted:
-            return
-        self._lock_emitted = True
-        _emit_receipt(
-            {
-                "schema_version": STREAM_RECEIPT_SCHEMA_VERSION,
-                "status": "locked",
-                "document_id": self._ref.document_id,
-                "source_id": self._ref.source_id,
-                "content_sha256": self._ref.content_sha256,
-                "mime_type": self._ref.mime_type,
-                "byte_size": self._ref.byte_size,
-            }
-        )
+        self.discard_candidate()
 
     def write_chunk(self, chunk: bytes) -> None:
-        # The receipt precedes the first stdout byte of the admitted
-        # candidate; verification of the complete stream stays with the
-        # owner and is reported by the final ok receipt.
-        self._emit_lock()
-        sys.stdout.buffer.write(chunk)
-        self._digest.update(chunk)
-        self._total += len(chunk)
+        if self.__file.write(chunk) != len(chunk):
+            raise SourceChunkSinkError("source staging did not accept the complete chunk")
 
     def discard_candidate(self) -> None:
-        # Bytes already piped cannot be recalled; no ok receipt follows, so
-        # the transfer stays incomplete by construction.
-        return None
+        self.__committed = False
+        self.__file.seek(0)
+        self.__file.truncate()
 
-    def commit_verified(self, receipt) -> None:
-        if self._digest.hexdigest() != self._ref.content_sha256 or self._total != self._ref.byte_size:
-            raise SourceChunkSinkError("streamed bytes differ from the locked identity")
-        assert receipt.byte_size == self._ref.byte_size
-        # An empty original streams no chunk: the lock still precedes ok.
-        self._emit_lock()
+    def commit_verified(self, receipt: VerifiedVersionReceipt) -> None:
+        if self.__file.tell() != receipt.byte_size:
+            raise SourceChunkSinkError("source staging size differs from the verified receipt")
+        self.__file.seek(0)
+        self.__committed = True
+
+    def copy_to(self, output: BinaryIO) -> None:
+        if not self.__committed:
+            raise SourceChunkSinkError("source snapshot was not committed")
+        while chunk := self.__file.read(_OUTPUT_CHUNK_BYTES):
+            remaining = memoryview(chunk)
+            while remaining:
+                written = output.write(remaining)
+                if written is None or not 0 < written <= len(remaining):
+                    raise OSError("source output write made no progress")
+                remaining = remaining[written:]
+        output.flush()
+
+
+def _emit_lock(ref: SourceRef) -> None:
+    _emit_receipt(
+        {
+            "schema_version": STREAM_RECEIPT_SCHEMA_VERSION,
+            "status": "locked",
+            "document_id": ref.document_id,
+            "source_id": ref.source_id,
+            "content_sha256": ref.content_sha256,
+            "mime_type": ref.mime_type,
+            "byte_size": ref.byte_size,
+        }
+    )
 
 
 def _digest_argument(value: str) -> str:
@@ -182,13 +152,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         ref = query(args.document_id, args.source_id, args.content_sha256)
         budget = ReadBudget()
         budget.begin_request()
-        sink = _StdoutVerifiedStream(ref)
-        receipt = reader.stream_version(
-            ref, sink=sink, purpose=args.purpose, budget=budget,
-        )
-        sys.stdout.buffer.flush()
-        _emit_receipt(
-            {
+        try:
+            with tempfile.TemporaryFile(mode="w+b") as scratch:
+                # On Windows TemporaryFile is a wrapper around a binary file.
+                sink = _StagedSourceStream(cast(BinaryIO, scratch))
+                receipt = reader.stream_version(
+                    ref, sink=sink, purpose=args.purpose, budget=budget,
+                )
+                _emit_lock(ref)
+                sink.copy_to(sys.stdout.buffer)
+        except BrokenPipeError:
+            _refuse("unavailable", "stream_consumer_gone")
+        except (OSError, SourceChunkSinkError):
+            _refuse("unavailable", "stream_staging_unavailable")
+        try:
+            _emit_receipt({
                 "schema_version": STREAM_RECEIPT_SCHEMA_VERSION,
                 "status": "ok",
                 "document_id": receipt.document_id,
@@ -198,12 +176,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "read_at": receipt.read_at,
                 "policy_sha256": receipt.policy_sha256,
                 "source_read_policy_sha256": receipt.source_read_policy_sha256,
-            }
-        )
+            })
+        except OSError:
+            raise SystemExit(2) from None
         return 0
-    except SourceChunkSinkError:
-        # Includes the consumer-disappeared case: bytes cannot be piped on.
-        _refuse("unavailable", "stream_consumer_gone")
     except SourceReadError as exc:
         _refuse(exc.status, exc.reason)
     except (CatalogConfigError, CatalogReaderUnavailable):
