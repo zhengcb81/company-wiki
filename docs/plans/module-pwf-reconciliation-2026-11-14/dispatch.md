@@ -1,6 +1,22 @@
 # Owner 卡派发总表
 
-## 派发状态
+## 最终验收状态（2026-11-14）
+
+七张卡均已收到最终交接并核对独立 review。各 owner 新增/修复提交已进入自己的目标主线；除 CWP 外均已验证推送。CWP 本地 `master@d6c873c78`，最近一次成功远端观察 `origin/master@7361aad82`；平台 Mimosa L3 三次拦截正常 push，当前远端不能刷新，不使用绕过方式。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
+
+| Lane | 当前本地主线 | 远端 | 收尾状态 |
+|---|---|---|---|
+| CWP | `master@d6c873c78` | 最近成功观察 `7361aad82`；本轮 DNS/线程错误未能刷新 | 本地 PASS；发布 BLOCKED |
+| FF | `main@c2aec910` | live 相等 | PASS / 已推送 |
+| RF | `main@1ea50082` | live 相等 | PASS / 收据已修 / 已推送 |
+| ET | `main@c777bf1` | live 相等 | PASS / 已推送 |
+| SID | `v2-clean-rewrite@85f39ec` | live 相等 | PASS / 收据已修 / 已推送 |
+| Dashboard | `main@4477eb9` | live 相等 | PASS / 汇总状态已修 / 已推送 |
+| RFAudit | `main@50d8ab6` | 无 remote（按卡约定） | PASS / 本地收口 |
+
+StockWiki 和 IQS 不在本批写集；Dayu 仍是外部项目，均未操作。既有 active/evidence refs 按 handoff 保留，不作全量强制 merge。
+
+## 派发安排与开工快照（历史）
 
 可并行执行：CWP、FF、RF、ET、SID、Dashboard、RFAudit 七条 owner lane。它们只写自己的仓库，互不共享产品代码。CWP 是 ROOT 当前责任；其余卡可分别交给对应项目 owner/harness。StockWiki 和 IQS 当前暂停派发，避免撞到并行工作。
 
