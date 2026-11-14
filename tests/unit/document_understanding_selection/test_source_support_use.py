@@ -451,7 +451,7 @@ def test_saved_native_source_scope_replays_real_business_not_prior_metadata(save
     # existing-credit going-concern background cannot be summary support.
     current_expected = False if number in {19, 22, 42} else expected
     assert (observed[key][0]=="support") is current_expected, (number,observed[key],session.source_text(key))
-    assert session.groups[key]==ids
+    assert session.members_for(key)==ids
 
 
 def test_source_session_shares_one_role_assessment_without_repeated_scans(monkeypatch):
@@ -512,7 +512,7 @@ def test_native_critical_and_financial_note_services_keep_original_support(saved
     key=f'scope-{number}'
     assert observed[key][0]=='support'
     expected=next(ids for n,ids,_expected in _NATIVE_V3_SCOPES if n==number)
-    assert session.groups[key]==expected
+    assert session.members_for(key)==expected
 
 
 @pytest.mark.parametrize('text',(

@@ -21,9 +21,9 @@ def test_explicit_manufacturing_argument_does_not_need_a_known_product_suffix(te
     assert observed_use(session, uid)[0] == 'unresolved'
     assert source_narrative_relevance(fact=session.fact(uid), source_roles=session.source_assertions(uid))
     result = session.relations(uid)
-    bound = session.engine.relation_bindings(uid)
+    bound = session.relation_bindings(uid)
     assert not any(bound)
-    assert session.engine.unknown_argument(uid)
+    assert session.unknown_argument(uid)
     relations = result['relations']
     if 'currently manufacture qx' not in text:
         assert all(r['polarity'] == 'negative' for r in relations)
@@ -59,7 +59,7 @@ def test_financial_abstract_numeric_question_and_unclosed_arguments_are_not_qual
     session, _ = session_for([text])
     uid = unit_id(0)
     assert observed_use(session, uid)[0] != 'support'
-    assert not any(session.engine.relation_bindings(uid))
+    assert not any(session.relation_bindings(uid))
 
 
 def test_known_related_party_can_contact_a_named_party_without_resolving_its_entity_type():

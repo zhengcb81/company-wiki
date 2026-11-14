@@ -206,12 +206,24 @@ def test_adjacency_respects_existing_original_window_char_limit():
 
 def test_dependency_budget_exhaustion_is_partial_and_never_restarts_a_scan():
     parsed, result, session = case([LEFT, NEGATIVE])
-    session.work_budget = WorkBudget(0)
-    session.engine.work_budget = session.work_budget
+    session.work_budget.max_work_units = session.work_budget.used
+    used = session.work_budget.used
     assert session.local_qualification_dependencies(result["adjacency_edges"]) == {}
     assert session.work_budget.exhausted and not session.complete
     assert session.local_qualification_dependencies(result["adjacency_edges"]) == {}
-    assert session.work_budget.used == 0
+    assert session.work_budget.used == used
+
+
+def test_qualification_reads_cannot_mutate_prior_results_or_reuse_modified_edges():
+    parsed, result, session = case([LEFT, NEGATIVE])
+    first, second = (unit.unit_id for unit in parsed.units)
+    edges = result["adjacency_edges"]
+    observed = session.local_qualification_dependencies(edges)
+    assert observed == {first: (second,)}
+    observed.clear()
+    assert session.local_qualification_dependencies(edges) == {first: (second,)}
+    edges.clear()
+    assert session.local_qualification_dependencies(edges) == {}
 
 
 @pytest.mark.parametrize("left,right", [

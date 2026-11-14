@@ -96,10 +96,8 @@ def _inspect_reading(parsed: DocumentStructure, pipeline: Mapping[str, Any],
     if session is not None:
         for unit in parsed.units:
             origin = origins.get(unit.unit_id, unit.unit_id)
-            owner = session.owner_for(origin)
             prepared[unit.unit_id] = {
-                "owner": owner, "fact": session.facts.get(owner),
-                "passage": session.passages.get(owner), "profile": deepcopy(profiles.get(origin)),
+                **session.prepared_observation(origin), "profile": deepcopy(profiles.get(origin)),
             }
     fields = ("package_id", "kind", "anchor_unit_ids", "member_unit_ids", "required_context_unit_ids")
     return ReadingInspection(
@@ -488,7 +486,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         collect_components(local_context, local_components)
         collect_components(support_context, support_components)
     except WorkBudgetExceeded:
-        session.complete = False
+        session.mark_incomplete()
         local_unexamined.update(local_context)
     for index, package in enumerate(budget_packages):
         if index in deferred_packages:
@@ -505,7 +503,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 len(local_components.get(member, ())) + len(project_context.get(member, ()))
                 for member in member_ids))
         except WorkBudgetExceeded:
-            session.complete = False
+            session.mark_incomplete()
             deferred_packages.add(index)
             withheld.append({"package_id": str(package["package_id"]),
                              "reason": "OPERATING_WORK_BUDGET",
@@ -520,7 +518,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                                + len(package.get("member_unit_ids", ()))
                                + len(package.get("required_context_unit_ids", ())))
         except WorkBudgetExceeded:
-            session.complete = False
+            session.mark_incomplete()
             deferred_packages.add(index)
             withheld.append({"package_id": str(package["package_id"]),
                              "reason": "OPERATING_WORK_BUDGET",
@@ -560,7 +558,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 packages[index] = {**package, "citation_support_views": [
                     sorted(set(view) | extra, key=original_order.__getitem__) for view in views]}
         except WorkBudgetExceeded:
-            session.complete = False
+            session.mark_incomplete()
             deferred_packages.update(intrinsic_support)
     contexts: dict[str, set[str]] = {}
     for package in budget_packages:
@@ -578,7 +576,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 owner = "analysis:" + package["package_id"] + ":" + str(index)
                 analysis_groups[owner] = tuple(view)
                 contexts[owner] = context_ids - set(view)
-    session.contexts = {**session.contexts, **{uid: tuple(sorted(ids)) for uid, ids in contexts.items()}}
+    session.bind_contexts({uid: tuple(sorted(ids)) for uid, ids in contexts.items()})
     graph = build_context_graph({**pipeline["packages"], "packages": budget_packages}, texts)
     # One union of readable native ancestry, product deictics and restrictions.
     # Proven running furniture pays source work, never a new model-material fee.
@@ -599,7 +597,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                                               needed, original_units, expand=original_members)
         except WorkBudgetExceeded:
             valid = False
-            session.complete = False
+            session.mark_incomplete()
         if not valid:
             deferred_packages.add(index)
             withheld.append({"package_id": str(package["package_id"]),
@@ -618,16 +616,12 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         return (min((int(reading.get(uid, {}).get("priority", 2)) for uid in anchors), default=2), index)
 
     try:
-        work_budget.charge(2 * len(session.groups) + 1)
+        session.prepare_citations()
     except WorkBudgetExceeded:
         scope_ready = False
-        session.complete = False
-        support_groups = {}
+        session.mark_incomplete()
     else:
         scope_ready = True
-        support_groups = dict(session.groups)
-        session.groups = support_groups
-    scope_owners = {tuple(members): owner for owner, members in support_groups.items()}
     scope_uses: dict[tuple[Any, ...], tuple[str, str, bool, str, bool]] = {}
 
     def scope_use(native_support, *, table_qualified=False, prepared_owner=None):
@@ -645,21 +639,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 assessed = ("context_only", "attribution_context", False, "description", False)
                 scope_uses[key] = assessed
                 return assessed
-            if prepared_owner is not None and session.groups.get(prepared_owner) != members:
-                # Generic source qualification may enlarge a closed QA quote.
-                # Prepare the actual final support, not the smaller proof.
-                context = tuple(uid for uid in session.context_for(prepared_owner) if uid not in members)
-                prepared_owner = session.support_owner(members, meaning_context=context)
-            owner = prepared_owner or scope_owners.get(members)
-            if owner is None:
-                if len(members) == 1 and session.owner_for(members[0]) == members[0]:
-                    owner = members[0]
-                else:
-                    # Add an analysis owner, never override any unit's owner.
-                    # Its contexts are empty: context cannot donate a predicate.
-                    owner = "source-support:" + str(len(scope_owners))
-                    support_groups[owner] = members
-                scope_owners[members] = owner
+            owner = session.citation_owner(members, prepared_owner=prepared_owner)
             fact = session.fact(owner)
             text = session.source_text(owner)
             source_roles=session.source_assertions(owner)
@@ -671,7 +651,6 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             use = source_support_use(text, fact=fact, financial_only=session.financial_only(owner),
                 table_qualified=table_qualified,
                 context_role=context_role,
-                source_relations=session.relations(owner), support_unit_ids=members,
                 source_roles=source_roles, passage=passage,
                 numeric_ambiguous=any(uid in numeric_shape_uncertain for uid in members)
                     or bool(source_roles and source_roles.numeric_ambiguous))
@@ -683,7 +662,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                                    and not context_role and not table_qualified)
             assessed=(*use,relevance,value,source_deferred)
         except (WorkBudgetExceeded, ValueError):
-            session.complete = False
+            session.mark_incomplete()
             assessed = ("unresolved", "source_assessment_incomplete", False, "description", False)
         scope_uses[key] = assessed
         return assessed
@@ -711,7 +690,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 work_budget.charge(len(unexamined_quality))
                 work_budget.charge(4 * sum(len(units[uid].raw_text) for uid in unexamined_quality))
             except WorkBudgetExceeded:
-                session.complete = False
+                session.mark_incomplete()
                 withheld.append({"package_id": str(package["package_id"]),
                                  "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": sorted(required)})
                 continue
@@ -770,8 +749,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 continue
             unit = units[uid]
             view = reading.get(uid, {})
-            if session.work_budget.exhausted and session.owner_for(uid) not in session.facts:
-                session.complete = False
+            if session.work_budget.exhausted and not session.has_fact(uid):
+                session.mark_incomplete()
                 withheld.append({"package_id": str(package["package_id"]),
                     "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": sorted(required)})
                 continue
@@ -1248,6 +1227,12 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
             observe(_inspect_reading(parsed, pipeline, (), budget, result.selection_diagnostics))
         return result
     origins = pipeline.get("_carrier_origins", {})
+    # A negative document result needs positive disposition proof. When a
+    # structural gap already prevents it, observe prepared scopes only. This
+    # preserves their diagnostics and never turns an unread area into coverage.
+    can_prove_complete = parsed.coverage_complete and graph_complete and not any(
+        entry.get("reason") not in _REFERENCE_DEFERRAL_REASONS for entry in withheld
+    )
     dropped = 0
     proved_without_offer = 0
     unexplained_numeric = False
@@ -1255,9 +1240,12 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
                            for uid in row["known_unit_ids"]}
     for unit in parsed.units:
         uid = session.owner_for(origins.get(unit.unit_id, unit.unit_id))
-        if budget.exhausted and uid not in session.facts:
-            session.complete = False
-            break
+        if not session.has_fact(uid):
+            if budget.exhausted:
+                session.mark_incomplete()
+                break
+            if not can_prove_complete:
+                continue
         financial = session.financial_only(uid)
         if financial is None:
             passage = session.source_passage(uid)
@@ -1270,7 +1258,7 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
                 # One unavailable/long scope is not a global work stop. Other
                 # independent scopes still receive their own prepared use.
                 continue
-            session.complete = False
+            session.mark_incomplete()
             break
         dropped += financial
         source_roles=session.source_assertions(uid)
@@ -1287,7 +1275,7 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     # document: it is reported separately and does not downgrade coverage.
     blocking_withheld = [entry for entry in withheld
                          if entry.get("reason") not in _REFERENCE_DEFERRAL_REASONS]
-    processing_base_complete = graph_complete and session.complete and not budget.exhausted and not any(
+    processing_base_complete = parsed.coverage_complete and graph_complete and session.complete and not budget.exhausted and not any(
         "BUDGET" in str(entry.get("code", "")) or "LIMIT_REACHED" in str(entry.get("code", ""))
         for entry in pipeline.get("diagnostics", ()))
     processing_complete = processing_base_complete and not blocking_withheld

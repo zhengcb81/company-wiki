@@ -30,6 +30,23 @@ def test_declared_accounting_scope_does_not_reserve_a_passage_fallback():
     assert 0 < work.used < work.max_work_units
 
 
+def test_late_exhaustion_does_not_expose_preliminary_roles_as_final(monkeypatch):
+    from company_wiki.source_catalog import narrative_operating_relations as owner
+    from unit.du11_production.test_source_information_binding import session_for, unit_id
+
+    def stopped(*_args, **_kwargs):
+        raise WorkBudgetExceeded("prepared roles could not be assessed")
+
+    monkeypatch.setattr(owner, "prepare_reading_business_assessment", stopped)
+    session, budget = session_for(["Our sales services cover 17 regional markets."])
+    uid = unit_id(0)
+    result = session.fact(uid)
+    assert result.purpose == "unassessed" and not session.complete
+    assert session.source_assertions(uid) is None and session.source_passage(uid) is None
+    used = budget.used
+    assert session.fact(uid) is result and budget.used == used
+
+
 @pytest.mark.parametrize('text, payload, use', (
     ('Our software supports customer engagement.', False, 'context_only'),
     ('Our platform supports outstanding goals.', None, 'unresolved'),

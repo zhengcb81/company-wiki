@@ -71,14 +71,14 @@ def test_typed_binding_is_per_relation_and_cached_without_more_work():
     ])
     for uid in (unit_id(0), unit_id(1)):
         result = session.relations(uid)
-        proofs = session.engine.relation_bindings(uid)
+        proofs = session.relation_bindings(uid)
         assert len(proofs) == len(result["relations"])
         if uid == unit_id(0):
             assert not any(proofs)
         else:
             assert any(proofs)
     before = budget.used
-    assert session.engine.relation_bindings(unit_id(1))
+    assert session.relation_bindings(unit_id(1))
     assert budget.used == before
     assert observed_use(session, unit_id(0))[0] == "context_only"
 
@@ -99,7 +99,7 @@ def test_mixed_source_does_not_donate_binding_to_financial_relations():
         # supplies the unqualified relation needed for the mixed-proof control.
         + "本公司财务资源仍持续经营。"])
     result = session.relations(unit_id(0))
-    bindings = session.engine.relation_bindings(unit_id(0))
+    bindings = session.relation_bindings(unit_id(0))
     assert any(bindings) and not all(bindings)
     assert len(bindings) == len(result["relations"])
     for relation, bound in zip(result["relations"], bindings):
@@ -119,10 +119,10 @@ def test_actual_contract_and_partner_bindings_need_no_product_head():
     ):
         session, _ = session_for([text])
         assert observed_use(session, unit_id(0))[0] == "support", text
-        assert any(session.engine.relation_bindings(unit_id(0)))
+        assert any(session.relation_bindings(unit_id(0)))
 
 
 def test_signing_arbitrary_text_does_not_create_a_business_relationship_proof():
     session, _ = session_for(["We signed the financial statements."])
     assert observed_use(session, unit_id(0))[0] == "context_only"
-    assert not any(session.engine.relation_bindings(unit_id(0)))
+    assert not any(session.relation_bindings(unit_id(0)))

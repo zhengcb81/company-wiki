@@ -38,7 +38,7 @@
     },
     {
       "id": "P1",
-      "status": "CN_H1_09_RECALL_10_OF_10; R4_H1_RECALL_9_OF_12_WORK_EXHAUSTED; T4_SEM_FINAL_OPEN",
+      "status": "CN_H1_09_RECALL_10_OF_10; R4_H1_RECALL_12_OF_12_UNDER_WORK_LIMIT_PARTIAL; T4_SEM_FINAL_OPEN",
       "task": "Close T4/SEM milestone first; then accept new real summaries/content coverage. Historical Huali15/12atoms and Berkshire73/10atoms recovery remain bounded evidence; 15 Berkshire units and full-source partial remain explicit."
     },
     {
@@ -94,7 +94,7 @@
   "project_status": "MODULE_BOUNDARIES_CLOSED; R4_T4_IN_PROGRESS",
   "as_of_date": "2026-11-11",
   "observed_at_utc": "2026-11-11T22:17:29Z",
-  "next_action": "Reduce the confirmed post-selection full-source classification cost under the shared 16M account, preserving unknowns and qualifiers, then T4/SEM and real summary/cache/RF acceptance.",
+  "next_action": "Complete the T4/SEM real source ancestry and qualifier input/decode milestone review, then real summary/cache/RF acceptance.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -240,7 +240,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "M0/A1/M1/M2 complete. Current module-boundary evidence is in the child plan. R4 current local PDF reaches all 12 fixed checkpoints but the 16M work account still exhausts.",
+    "current_work": "M0/A1/M1/M2 complete. R4 current local PDF reaches all 12 fixed checkpoints under the 16M work account. Source coverage remains partial; T4/SEM milestone review is next.",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -1245,5 +1245,24 @@
     "exhausted": true,
     "unchanged_selection_sha256": "3520a72cd9f817a5c068bf86699d90e2bf55008f972b5638a80124d1ff5d8fa9",
     "status": "OWNER_ACCOUNTING_VERIFIED_FULL_SOURCE_PROCESSING_OPEN"
+  },
+  "r4_source_session_20261114": {
+    "evidence": "review/r4-source-session-20261114.md",
+    "source_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+    "source_byte_size": 1216470,
+    "required_represented": "12/12",
+    "work_used": 10753620,
+    "work_limit": 16000000,
+    "exhausted": false,
+    "source_processing_complete": false,
+    "tables_deferred": 131,
+    "selection_sha256": "3520a72cd9f817a5c068bf86699d90e2bf55008f972b5638a80124d1ff5d8fa9",
+    "ephemeral_receipt_sha256": "6a44b68f0d763f4efa0dc224044abed8b240834122c57d335348dd2b0cc9b59b",
+    "original_and_db_unchanged": true,
+    "independent_review": "PASS",
+    "final_focused_tests_passed": 32,
+    "original_context_support_members_with_complete_paths": 17,
+    "downloads": 0,
+    "model_posts": 0
   }
 }

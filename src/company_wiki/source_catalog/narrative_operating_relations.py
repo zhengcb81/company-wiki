@@ -4,9 +4,11 @@ No parsing, IO, registry or extra work balance. The source owner fixes native
 carriers and structural context first; consumers share the resulting facts.
 """
 from collections.abc import Iterable, Mapping
+from copy import deepcopy
 from dataclasses import dataclass, replace
 from bisect import bisect_right
 from itertools import chain
+from types import MappingProxyType
 import re
 from typing import Any
 
@@ -136,36 +138,117 @@ class _ObservedUnits(Mapping):
 
 
 class SourceOperatingSession:
+    """Own one source's immutable scope bindings, results and work account."""
+
+    __slots__ = (
+        "__units", "__work_budget", "__contexts", "__groups", "__owners",
+        "__antecedents", "__originals", "__analysis", "__maps", "__engine",
+        "__results", "__bindings", "__facts", "__financial", "__assertions",
+        "__passages", "__references", "__complete",
+        "__support_owners", "__support_contexts", "__citation_groups", "__source_positions",
+    )
+
     def __init__(self, units: Mapping[str, Any], *, work_budget: WorkBudget,
                  contexts: Mapping[str, tuple[str, ...]] | None = None,
                  groups: Mapping[str, tuple[str, ...]] | None = None,
                  antecedents: Mapping[str, tuple[tuple[str, ...], bool]] | None = None,
                  originals: Mapping[str, Any] | None = None):
-        self.units = units
-        self.work_budget = work_budget
-        self.contexts = contexts or {}
-        self.groups = dict(groups or {})
-        self._support_owners: dict[tuple[tuple[str, ...], tuple[str, ...]], str] = {}
-        self._support_contexts: dict[str, tuple[str, ...]] = {}
-        self.owners = {uid: gid for gid, members in self.groups.items() for uid in members}
-        self.antecedents = antecedents or {}
-        self.originals = originals or {}
-        self.analysis: dict[str, Any] = {}
-        self.maps: dict[str, list[tuple[int, int, str, int]]] = {}
-        self.engine = OperatingRelationSession(
-            _ObservedUnits(units, self.analysis, self.originals), work_budget=work_budget)
-        self.results: dict[str, dict[str, Any]] = {}
-        self.bindings: dict[str, tuple[bool, ...]] = {}
-        self.facts: dict[str, OperatingFact] = {}
-        self.financial: dict[str, bool | None] = {}
-        self.assertions: dict[str, Any] = {}
-        self.passages: dict[str, Any] = {}
-        self.references: dict[str, dict[str, Any]] = {}
-        self.complete = True
-        self.qualifications: dict[tuple[int, int, int], tuple[Any, Any, dict[str, tuple[str, ...]]]] = {}
+        self.__units = MappingProxyType(dict(units))
+        self.__work_budget = work_budget
+        self.__contexts = dict(contexts or {})
+        self.__groups = dict(groups or {})
+        self.__support_owners: dict[tuple[tuple[str, ...], tuple[str, ...]], str] = {}
+        self.__support_contexts: dict[str, tuple[str, ...]] = {}
+        self.__citation_groups: dict[tuple[str, ...], str | None] = {}
+        self.__owners = {uid: gid for gid, members in self.__groups.items() for uid in members}
+        self.__antecedents = dict(antecedents or {})
+        self.__originals = MappingProxyType(dict(originals or {}))
+        self.__source_positions: dict[str, int] | None = None
+        self.__analysis: dict[str, Any] = {}
+        self.__maps: dict[str, list[tuple[int, int, str, int]]] = {}
+        self.__engine = OperatingRelationSession(
+            _ObservedUnits(self.__units, self.__analysis, self.__originals), work_budget=work_budget)
+        self.__results: dict[str, dict[str, Any]] = {}
+        self.__bindings: dict[str, tuple[bool, ...]] = {}
+        self.__facts: dict[str, OperatingFact] = {}
+        self.__financial: dict[str, bool | None] = {}
+        self.__assertions: dict[str, Any] = {}
+        self.__passages: dict[str, Any] = {}
+        self.__references: dict[tuple[str, tuple[str, ...], bool], dict[str, Any]] = {}
+        self.__complete = True
+
+    @property
+    def units(self) -> Mapping[str, Any]:
+        return self.__units
+
+    @property
+    def work_budget(self) -> WorkBudget:
+        return self.__work_budget
+
+    @property
+    def complete(self) -> bool:
+        return self.__complete
+
+    def mark_incomplete(self) -> None:
+        self.__complete = False
+
+    def bind_contexts(self, contexts: Mapping[str, tuple[str, ...]]) -> None:
+        """Register the structural context before citation assessment.
+
+        Already prepared scopes keep their original semantic view. Context
+        for a genuinely different prepared scope travels with its own ID.
+        """
+        self.__contexts.update((uid, tuple(ids)) for uid, ids in contexts.items() if uid not in self.__results)
+
+    def prepare_citations(self) -> None:
+        self.__work_budget.charge(2 * len(self.__groups) + 1)
+        indexed: dict[tuple[str, ...], str | None] = {}
+        for owner, members in self.__groups.items():
+            if members not in indexed:
+                indexed[members] = owner
+            elif (previous := indexed[members]) is not None and self.context_for(previous) != self.context_for(owner):
+                indexed[members] = None
+        self.__citation_groups = indexed
+
+    def members_for(self, owner: str) -> tuple[str, ...]:
+        return self.__groups.get(owner, (owner,))
+
+    def citation_owner(self, members: tuple[str, ...], *, prepared_owner: str | None = None) -> str:
+        """Resolve one exact support scope, preserving explicit meaning context."""
+        if prepared_owner is not None:
+            if self.members_for(prepared_owner) == members:
+                return prepared_owner
+            meaning = tuple(uid for uid in self.context_for(prepared_owner) if uid not in members)
+            return self.support_owner(members, meaning_context=meaning)
+        if members in self.__citation_groups:
+            owner = self.__citation_groups[members]
+            return owner if owner is not None else self.support_owner(members)
+        if len(members) == 1 and self.owner_for(members[0]) == members[0]:
+            return members[0]
+        return self.support_owner(members)
+
+    def has_fact(self, uid: str) -> bool:
+        return self.owner_for(uid) in self.__facts
+
+    def prepared_observation(self, uid: str) -> dict[str, Any]:
+        owner = self.owner_for(uid)
+        return {"owner": owner, "fact": self.__facts.get(owner), "passage": self.__passages.get(owner)}
+
+    def prepared_relation_ids(self) -> tuple[str, ...]:
+        return tuple(self.__results)
+
+    def relation_bindings(self, uid: str) -> tuple[bool, ...]:
+        self.__relations_for(uid)
+        return self.__bindings.get(self.owner_for(uid), ())
+
+    def unknown_argument(self, uid: str) -> bool:
+        if self.__relations_for(uid)["status"] != "complete":
+            return False
+        owner = self.owner_for(uid)
+        return self.__engine.unknown_argument(owner, self.context_for(owner))
 
     def owner_for(self, uid: str) -> str:
-        return self.owners.get(uid, uid)
+        return self.__owners.get(uid, uid)
 
     def support_owner(self, support: tuple[str, ...], *,
                       meaning_context: tuple[str, ...] = ()) -> str:
@@ -183,44 +266,44 @@ class SourceOperatingSession:
         if any(type(uid) is not str for uid in (*support, *meaning_context)):
             raise ValueError('invalid source support identity')
         key = (support, meaning_context)
-        cached = self._support_owners.get(key)
+        cached = self.__support_owners.get(key)
         if cached is not None:
             return cached
-        self.work_budget.charge(1 + len(support) + len(meaning_context))
-        if (any(type(uid) is not str or uid not in self.units for uid in (*support, *meaning_context))
+        self.__work_budget.charge(1 + len(support) + len(meaning_context))
+        if (any(type(uid) is not str or uid not in self.__units for uid in (*support, *meaning_context))
                 or len(set(support)) != len(support) or set(support) & set(meaning_context)):
             raise ValueError('invalid source support members')
-        source = self.units[support[0]].source_id
-        if any(self.units[uid].source_id != source for uid in (*support, *meaning_context)):
+        source = self.__units[support[0]].source_id
+        if any(self.__units[uid].source_id != source for uid in (*support, *meaning_context)):
             raise ValueError('source support cannot cross originals')
-        owner = 'source-scope:' + str(len(self._support_owners))
-        self.groups[owner] = support
-        self._support_contexts[owner] = meaning_context
-        self._support_owners[key] = owner
+        owner = 'source-scope:' + str(len(self.__support_owners))
+        self.__groups[owner] = support
+        self.__support_contexts[owner] = meaning_context
+        self.__support_owners[key] = owner
         return owner
 
     def context_for(self, owner: str) -> tuple[str, ...]:
-        return self._support_contexts.get(owner, self.contexts.get(owner, ()))
+        return self.__support_contexts.get(owner, self.__contexts.get(owner, ()))
 
     def source_text(self, uid: str) -> str:
         owner = self.owner_for(uid)
-        return self.analysis[owner]["text"] if owner in self.analysis else self.units[owner].raw_text
+        return self.__analysis[owner]["text"] if owner in self.__analysis else self.__units[owner].raw_text
 
     def _prepare_group(self, owner: str):
-        if owner in self.analysis:
+        if owner in self.__analysis:
             return
-        members = self.groups.get(owner, (owner,))
-        first = self.units[members[0]]
-        if any(self.units[uid].source_id != first.source_id for uid in members):
+        members = self.__groups.get(owner, (owner,))
+        first = self.__units[members[0]]
+        if any(self.__units[uid].source_id != first.source_id for uid in members):
             raise ValueError("operating continuity cannot cross original parents")
-        self.work_budget.charge(2 * sum(len(self.units[uid].raw_text) for uid in members) + len(members))
+        self.__work_budget.charge(2 * sum(len(self.__units[uid].raw_text) for uid in members) + len(members))
         parts, segments = [], []
         cursor = 0
         previous = ""
         cjk = re.compile(r"[\u3400-\u9fff]")
         punctuation = frozenset("。！？；，、：）》】”’（《【“‘")
         for index, uid in enumerate(members):
-            unit = self.units[uid]
+            unit = self.__units[uid]
             raw = unit.raw_text
             start = 0 if index == 0 else len(raw) - len(raw.lstrip())
             end = len(raw) if index == len(members) - 1 else len(raw.rstrip())
@@ -241,14 +324,14 @@ class SourceOperatingSession:
                 segments.append((cursor, cursor + len(text), uid, start))
                 cursor += len(text)
                 previous = text
-        self.maps[owner] = segments
+        self.__maps[owner] = segments
         printed = first.metadata.get("printed_turn")
-        self.analysis[owner] = {"text": "".join(parts), "parent_id": first.source_id,
+        self.__analysis[owner] = {"text": "".join(parts), "parent_id": first.source_id,
             "role": printed["role"] if printed else first.source_role,
             "kind": "closed_native_analysis", "locator": first.coordinates}
 
     def _original_refs(self, owner: str, refs):
-        segments = self.maps[owner]
+        segments = self.__maps[owner]
         ends = [segment[1] for segment in segments]
         mapped = []
         for ref in refs:
@@ -263,45 +346,59 @@ class SourceOperatingSession:
                 index += 1
         return mapped
 
-    def relations(self, uid: str):
+    def relations(self, uid: str) -> dict[str, Any]:
+        """Return an independent serializable observation of the prepared scope."""
+        return deepcopy(self.__relations_for(uid))
+
+    def __relations_for(self, uid: str) -> dict[str, Any]:
         owner = self.owner_for(uid)
-        if owner not in self.results:
-            used_before = self.work_budget.used
+        if owner not in self.__results:
+            used_before = self.__work_budget.used
+            context = self.context_for(owner)
             try:
-                if owner in self.groups or "printed_turn" in self.units[owner].metadata:
+                if owner in self.__groups or "printed_turn" in self.__units[owner].metadata:
                     self._prepare_group(owner)
-                result = self.engine.detect(owner, self.context_for(owner))
-                self.bindings[owner] = self.engine.relation_bindings(
-                    owner, self.context_for(owner))
+                result = self.__engine.detect(owner, context)
+                self.__bindings[owner] = self.__engine.relation_bindings(owner, context)
             except WorkBudgetExceeded:
                 result = {"schema_version": "du4-operating-relations/1", "unit_id": owner,
                     "relations": [], "diagnostics": [{"code": "work_budget_exhausted", "unit_id": owner}],
                     "status": "partial", "work_used": 0}
-            if owner in self.maps:
+            if owner in self.__maps:
                 result = {**result, "relations": [{**relation, **{
                     field: self._original_refs(owner, relation[field]) for field in
                     ("assertion_refs", "actor_refs", "object_refs", "predicate_refs", "qualifier_refs")}}
                     for relation in result["relations"]]}
-            result = {**result, "work_used": self.work_budget.used - used_before}
-            self.results[owner] = result
+            result = {**result, "work_used": self.__work_budget.used - used_before}
+            self.__results[owner] = result
             if result["status"] != "complete":
-                self.complete = False
-        return self.results[owner]
+                self.__complete = False
+        return self.__results[owner]
 
-    def reference(self, uid: str) -> dict[str, Any]:
-        """Bounded product-reference readiness for one original or analysis owner.
+    def reference(self, uid: str, *,
+                  window: tuple[tuple[str, ...], bool] | None = None) -> dict[str, Any]:
+        """Resolve the explicit predecessor window and detach its receipt."""
+        return deepcopy(self.__reference_for(uid, window))
 
-        Legacy relations/facts are untouched. Declaration refs stay in the
-        original namespace: they are validated against their own source text,
-        never re-mapped through the target's offsets.
-        """
+    def __reference_for(self, uid: str, window: tuple[tuple[str, ...], bool] | None) -> dict[str, Any]:
         # Cache by the requested target, not only by its analysis owner: two
         # anchors of one joined window can carry different predecessor scopes.
-        cached = self.references.get(uid)
+        # Missing window denotes unknown scope, and a later explicit window
+        # may legitimately give the same target a different reference result.
+        predecessors, window_complete = self.__antecedents.get(uid, ((), False)) if window is None else window
+        cache_key = (uid, predecessors, window_complete)
+        cached = self.__references.get(cache_key)
         if cached is not None:
             return cached
         key = self.owner_for(uid)
-        if key not in self.analysis and (key in self.groups or "printed_turn" in self.units[key].metadata):
+        if predecessors and not self.__predecessors_are_prior(key, predecessors):
+            invalid = {"schema_version": "du11-reference-closure/1", "unit_id": key,
+                       "status": "partial", "reference_refs": [], "declaration_refs": [],
+                       "member_refs": [], "required_original_unit_ids": (), "attribution": "unknown",
+                       "diagnostics": [{"code": "invalid_antecedent_scope", "unit_id": uid}], "work_used": 0}
+            self.__references[cache_key] = invalid
+            return invalid
+        if key not in self.__analysis and (key in self.__groups or "printed_turn" in self.__units[key].metadata):
             try:
                 self._prepare_group(key)
             except (WorkBudgetExceeded, ValueError):
@@ -311,17 +408,14 @@ class SourceOperatingSession:
                           "attribution": "unknown",
                           "diagnostics": [{"code": "unprepared_analysis_owner", "unit_id": uid}],
                           "work_used": 0}
-                self.references[uid] = result
+                self.__references[cache_key] = result
                 return result
-        # An absent window is unknown scope, never a proven absence.
-        predecessors, complete = self.antecedents.get(uid, ((), False))
-        result = self._result_reference(key, tuple(predecessors), complete)
+        result = self._result_reference(key, predecessors, window_complete)
         if result is not None:
-            self.references[uid] = result
+            self.__references[cache_key] = result
             return result
         try:
-            result = self.engine.reference_closure(key, tuple(predecessors),
-                                                   window_complete=complete)
+            result = self.__engine.reference_closure(key, predecessors, window_complete=window_complete)
         except ValueError:
             result = {"schema_version": "du11-reference-closure/1", "unit_id": key,
                       "status": "partial", "reference_refs": [], "declaration_refs": [],
@@ -334,17 +428,17 @@ class SourceOperatingSession:
             # closure. First-person narration only needs its adjacent source
             # context retained; it must not invent a resolved issuer identity.
             from .narrative_actor_context import actor_context_closure
-            self.work_budget.charge(1 + len(predecessors))
-            observed = {entry: self.units.get(entry, self.originals.get(entry))
+            self.__work_budget.charge(1 + len(predecessors))
+            observed = {entry: self.__units.get(entry, self.__originals.get(entry))
                         for entry in predecessors}
-            if key in self.analysis:
-                first = self.units[self.groups.get(key, (key,))[0]]
-                observed[key] = {**self.analysis[key], 'metadata': first.metadata}
+            if key in self.__analysis:
+                first = self.__units[self.__groups.get(key, (key,))[0]]
+                observed[key] = {**self.__analysis[key], 'metadata': first.metadata}
             else:
-                observed[key] = self.units[key]
-            result = actor_context_closure(key, tuple(predecessors), units=observed,
-                window_complete=complete, work_budget=self.work_budget)
-            if key in self.maps and result['reference_refs']:
+                observed[key] = self.__units[key]
+            result = actor_context_closure(key, predecessors, units=observed,
+                window_complete=window_complete, work_budget=self.__work_budget)
+            if key in self.__maps and result['reference_refs']:
                 result = {**result, 'reference_refs': self._original_refs(key, result['reference_refs'])}
         if result["status"] in {"unique", "collective"}:
             declarations = self._validate_original_refs(result["declaration_refs"])
@@ -358,8 +452,64 @@ class SourceOperatingSession:
                                           {"code": "invalid_original_reference", "unit_id": uid}]}
             else:
                 result = {**result, "declaration_refs": declarations, "member_refs": members}
-        self.references[uid] = result
+        self.__references[cache_key] = result
         return result
+
+    def __predecessors_are_prior(self, owner: str, predecessors: tuple[str, ...]) -> bool:
+        units = self.__originals or self.__units
+        if self.__source_positions is None:
+            self.__work_budget.charge(len(units))
+            self.__source_positions = {uid: i for i, uid in enumerate(units)}
+        positions = self.__source_positions
+        self.__work_budget.charge(1 + len(predecessors))
+
+        def bounds(uid: str, source_id: str) -> tuple[int, int] | None:
+            source = units.get(uid)
+            index = positions.get(uid)
+            if source is not None and index is not None:
+                return (index, index) if source.source_id == source_id else None
+            carrier = self.__units.get(uid)
+            if carrier is None or carrier.source_id != source_id:
+                return None
+            native_range = carrier.metadata.get("native_range")
+            if not isinstance(native_range, Mapping) or native_range.get("schema_version") != "native-pdf-range/1":
+                return None
+            members = native_range.get("members", ())
+            self.__work_budget.charge(len(members))
+            indexes = []
+            for member in members:
+                member_id = member["unit_id"]
+                original = units.get(member_id)
+                if original is None or original.source_id != source_id:
+                    return None
+                indexes.append(positions[member_id])
+            return (min(indexes), max(indexes)) if indexes else None
+
+        targets = self.members_for(owner)
+        target = self.__units.get(targets[0]) or units.get(targets[0])
+        if target is None:
+            return False
+        target_bounds = [bounds(uid, target.source_id) for uid in targets]
+        if any(span is None for span in target_bounds):
+            return False
+        target_start = min(span[0] for span in target_bounds if span is not None)
+        last = -1
+        for uid in predecessors:
+            span = bounds(uid, target.source_id)
+            if span is None or not last < span[0] <= span[1] < target_start:
+                return False
+            last = span[1]
+        return True
+
+    def match_qa_qualification(self, left: str, right: str, *, left_owner: str,
+                               right_owner: str, inherited_head: str | None = None) -> _LocalQualification | None:
+        """Match an explicitly ordered answer pair using each exact member."""
+        left_scope = self.__source_material_range(left, left)
+        right_scope = self.__source_material_range(right, right)
+        if left_scope is None or right_scope is None:
+            raise ValueError("qa_original_range_unavailable")
+        return self.__qualification_pair(left, right, left_scope, right_scope, inherited_head=inherited_head,
+                                         left_owner=left_owner, right_owner=right_owner, qa_sequence=True)
 
     def _result_reference(self, owner: str, predecessors: tuple[str, ...], complete: bool):
         """Close one bare result over its proven adjacent source statement.
@@ -368,28 +518,28 @@ class SourceOperatingSession:
         Multiple changes, an unobserved predicate or an incomplete window stay
         unresolved; the model cannot obtain a subject from another output.
         """
-        used_before = self.work_budget.used
+        used_before = self.__work_budget.used
         text = self.source_text(owner)
-        self.work_budget.charge(len(text) + 1)
+        self.__work_budget.charge(len(text) + 1)
         marker = _RESULT_REFERENCE.search(text)
         if marker is None:
             return None
         # A reference inside one original statement may already have its own
         # named result. Do not force it to find a second statement outside.
         internal = text[:marker.start()]
-        self.work_budget.charge(len(internal) + 1)
+        self.__work_budget.charge(len(internal) + 1)
         internal_changes = tuple(_RESULT_CHANGE.finditer(internal))
         if len(internal_changes) == 1:
             change = internal_changes[0]
-            self.work_budget.charge(2 * len(internal))
+            self.__work_budget.charge(2 * len(internal))
             observation = observe_metric_predicate(internal, change.start(), change.end())
             if (observation.observed
-                    and source_result_subject(internal, change.start(), change.end(), work_budget=self.work_budget)
+                    and source_result_subject(internal, change.start(), change.end(), work_budget=self.__work_budget)
                     and (marker.group('neutral') or change.lastgroup == _result_direction(marker.group('cn') or marker.group('en')))):
                 return {'schema_version':'du11-reference-closure/1','unit_id':owner,
                     'status':'not_applicable','reference_refs':[], 'declaration_refs':[],
                     'member_refs':[],'required_original_unit_ids':(), 'attribution':'unknown',
-                    'diagnostics':[],'work_used':self.work_budget.used-used_before}
+                    'diagnostics':[],'work_used':self.__work_budget.used-used_before}
         reference = {"unit_id": owner, "char_start": marker.start("marker"),
                      "char_end": marker.end("marker")}
         result: dict[str, Any] = {"schema_version": "du11-reference-closure/1", "unit_id": owner,
@@ -397,22 +547,22 @@ class SourceOperatingSession:
             "declaration_refs": [], "member_refs": [], "required_original_unit_ids": (),
             "support_original_unit_ids": (), "reference_kind": "causal_result",
             "attribution": "unknown", "diagnostics": [], "work_used": 0}
-        if owner in self.maps:
+        if owner in self.__maps:
             result["reference_refs"] = self._original_refs(owner, [reference])
         if complete and predecessors:
             previous_id = predecessors[-1]
-            previous = self.units.get(previous_id) or self.originals.get(previous_id)
-            target_id = self.groups.get(owner, (owner,))[0]
-            target = self.units[target_id]
+            previous = self.__units.get(previous_id) or self.__originals.get(previous_id)
+            target_id = self.__groups.get(owner, (owner,))[0]
+            target = self.__units[target_id]
             if (previous is not None and previous.source_id == target.source_id
                     and previous.source_role == target.source_role):
-                self.work_budget.charge(len(previous.raw_text) + 1)
+                self.__work_budget.charge(len(previous.raw_text) + 1)
                 changes = tuple(_RESULT_CHANGE.finditer(previous.raw_text))
                 if len(changes) > 1:
                     result["status"] = "ambiguous"
                 elif len(changes) == 1:
                     change = changes[0]
-                    self.work_budget.charge(4 * len(previous.raw_text) + len(marker.group("marker")))
+                    self.__work_budget.charge(4 * len(previous.raw_text) + len(marker.group("marker")))
                     observation = observe_metric_predicate(previous.raw_text, change.start(), change.end())
                     previous_basis = source_comparison_bases(previous.raw_text, change.start(), change.end())
                     reference_basis = source_comparison_bases(marker.group("marker"))
@@ -422,7 +572,7 @@ class SourceOperatingSession:
                             and _RESULT_REFERENCE.search(previous.raw_text) is None
                             and (marker.group('neutral') or change.lastgroup == _result_direction(marker.group("cn") or marker.group("en")))
                             and source_result_subject(previous.raw_text, change.start(), change.end(),
-                                                      work_budget=self.work_budget)):
+                                                      work_budget=self.__work_budget)):
                         declaration = {"unit_id": previous_id, "char_start": 0,
                                        "char_end": len(previous.raw_text)}
                         result.update(status="unique", declaration_refs=[declaration],
@@ -430,19 +580,19 @@ class SourceOperatingSession:
                             support_original_unit_ids=(previous_id,), attribution="unknown")
         if result["status"] != "unique":
             result["diagnostics"] = [{"code": "result_antecedent_unresolved", "unit_id": owner}]
-        result["work_used"] = self.work_budget.used - used_before
+        result["work_used"] = self.__work_budget.used - used_before
         return result
 
-    def _source_material_range(self, original_id: str, material_id: str):
+    def __source_material_range(self, original_id: str, material_id: str):
         """Exact original body range in the current relation-ref namespace.
 
         A native carrier retains the observed page-view member offsets. Use
         those actual offsets, never text search or whole-carrier pronoun counts.
         Non-carried original units already share the relation namespace.
         """
-        original = self.originals.get(original_id) or self.units.get(original_id)
-        material = self.units.get(material_id)
-        self.work_budget.charge()
+        original = self.__originals.get(original_id) or self.__units.get(original_id)
+        material = self.__units.get(material_id)
+        self.__work_budget.charge()
         if original is None or material is None or original.source_id != material.source_id:
             return None
         if original_id == material_id:
@@ -451,7 +601,7 @@ class SourceOperatingSession:
         binding = material.metadata.get("native_range")
         if isinstance(binding, Mapping) and binding.get("schema_version") == "native-pdf-range/1":
             members = binding.get("members", ())
-            self.work_budget.charge(len(members))
+            self.__work_budget.charge(len(members))
             for member in members:
                 if member.get("unit_id") != original_id:
                     continue
@@ -460,7 +610,7 @@ class SourceOperatingSession:
                 if type(start) is not int or type(end) is not int or type(base) is not int:
                     return None
                 start, end = start - base, end - base
-                self.work_budget.charge(len(original.raw_text))
+                self.__work_budget.charge(len(original.raw_text))
                 if (0 <= start < end <= len(material.raw_text)
                         and material.raw_text[start:end] == original.raw_text):
                     return original.raw_text, {"unit_id": material_id, "char_start": start,
@@ -473,22 +623,22 @@ class SourceOperatingSession:
                                       "char_end": len(original.raw_text)}
         return None
 
-    def _qualification_pair(self, left, right, left_scope, right_scope, *,
+    def __qualification_pair(self, left, right, left_scope, right_scope, *,
                             inherited_head=None, left_owner=None, right_owner=None,
                             qa_sequence=False):
         """Semantic match only; callers own their physical/QA sequence proof."""
-        a, b = self.units[left], self.units[right]
+        a, b = self.__units[left], self.__units[right]
         def intersects(ref, marker):
             return (ref["unit_id"] == marker["unit_id"]
                     and ref["char_start"] < marker["char_end"]
                     and marker["char_start"] < ref["char_end"])
         right_text, right_marker = right_scope
-        self.work_budget.charge(2 * len(right_text))
+        self.__work_budget.charge(2 * len(right_text))
         # Revenue outlooks are not product objects. Their explicit
         # local premise uses this same source dependency projection,
         # while the caller owns transitive envelope/budget closure.
         if left != right:
-            self.work_budget.charge(2 * (len(a.raw_text) + len(b.raw_text)))
+            self.__work_budget.charge(2 * (len(a.raw_text) + len(b.raw_text)))
             if (revenue_guidance_premise(a.raw_text, b.raw_text, follows=True)
                     or revenue_guidance_premise(b.raw_text, a.raw_text, follows=False)):
                 return _LocalQualification()
@@ -502,12 +652,12 @@ class SourceOperatingSession:
         marker = {**right_marker,
                   "char_start": right_marker["char_start"] + deictic.span[0],
                   "char_end": right_marker["char_start"] + deictic.span[1]}
-        result = self.relations(right_owner or right)
+        result = self.__relations_for(right_owner or right)
         if result["status"] != "complete":
             return None
         restriction = False
         for relation in result["relations"]:
-            self.work_budget.charge(1 + len(relation["object_refs"]))
+            self.__work_budget.charge(1 + len(relation["object_refs"]))
             if (relation["attribution"] in {"other", "quoted_related_party"}
                     or relation["modality"] not in {"actual", "conditional"}
                     or not (relation["polarity"] == "negative" or relation["stage"] in {
@@ -518,27 +668,27 @@ class SourceOperatingSession:
                 break
         if not restriction:
             return None
-        previous = self.relations(left_owner or left)
+        previous = self.__relations_for(left_owner or left)
         if previous["status"] != "complete":
             return None
         objects: list[tuple[str, int, int]] = []
         left_marker = left_scope[1]
-        self.work_budget.charge(len(previous["relations"]))
+        self.__work_budget.charge(len(previous["relations"]))
         for relation in previous["relations"]:
             inherited = (relation["attribution"] == "unknown"
                          and inherited_head == head_class(deictic.head))
             if ((relation["attribution"] != "issuer" and not inherited)
                     or relation["modality"] not in {"actual", "conditional"}):
                 continue
-            self.work_budget.charge(len(relation["object_refs"]))
+            self.__work_budget.charge(len(relation["object_refs"]))
             for ref in relation["object_refs"]:
                 if not intersects(ref, left_marker):
                     continue
-                unit = self.units.get(ref["unit_id"]) or self.originals.get(ref["unit_id"])
+                unit = self.__units.get(ref["unit_id"]) or self.__originals.get(ref["unit_id"])
                 if unit is None or not 0 <= ref["char_start"] < ref["char_end"] <= len(unit.raw_text):
                     continue
                 text = unit.raw_text[ref["char_start"]:ref["char_end"]]
-                self.work_budget.charge(len(text))
+                self.__work_budget.charge(len(text))
                 objects.extend((ref["unit_id"], ref["char_start"] + start,
                                 ref["char_start"] + end)
                                for start, end, head in product_head_spans(text)
@@ -555,10 +705,6 @@ class SourceOperatingSession:
         cannot erase source-unit dependencies or invent one shared pronoun.
         Reading still counts the whole transitive original envelope.
         """
-        key = (id(edges), id(origins), id(section_ids))
-        cached = self.qualifications.get(key)
-        if cached is not None:
-            return cached[2]
         origins = origins if origins is not None else {}
         dependencies: dict[str, tuple[str, ...]] = {}
         bound_heads: dict[str, str] = {}
@@ -568,8 +714,8 @@ class SourceOperatingSession:
             # tables and speaker changes. Only neighbouring original units may
             # use that proof; no full-turn merge or inferred affiliation.
             previous = None
-            for original_id, unit in (self.originals or self.units).items():
-                self.work_budget.charge()
+            for original_id, unit in (self.__originals or self.__units).items():
+                self.__work_budget.charge()
                 turn = unit.metadata.get("native_speaker_turn")
                 if previous is not None and isinstance(turn, Mapping) and turn.get("turn_id"):
                     prev_id, prev_unit, prev_turn = previous
@@ -580,17 +726,17 @@ class SourceOperatingSession:
                             and prev_unit.source_role == unit.source_role):
                         left = origins.get(prev_id, prev_id)
                         right = origins.get(original_id, original_id)
-                        if left != right and left in self.units and right in self.units:
-                            left_scope = self._source_material_range(prev_id, left)
-                            right_scope = self._source_material_range(original_id, right)
+                        if left != right and left in self.__units and right in self.__units:
+                            left_scope = self.__source_material_range(prev_id, left)
+                            right_scope = self.__source_material_range(original_id, right)
                             if left_scope is not None and right_scope is not None:
-                                self.work_budget.charge(2 * len(right_scope[0]))
+                                self.__work_budget.charge(2 * len(right_scope[0]))
                                 if (is_backward_plan_qualification(right_scope[0])
                                         and "operating_plan" in self.fact(left).reasons):
                                     dependencies[left] = tuple(dict.fromkeys(
                                         (*dependencies.get(left, ()), right)))
                 previous = (original_id, unit, turn)
-            self.work_budget.charge(1 + len(edges))
+            self.__work_budget.charge(1 + len(edges))
             for edge in edges:
                 if edge.get("basis") != "source_body_adjacency":
                     continue
@@ -599,18 +745,18 @@ class SourceOperatingSession:
                         or left_original == right_original):
                     continue
                 left, right = origins.get(left_original, left_original), origins.get(right_original, right_original)
-                if left not in self.units or right not in self.units:
+                if left not in self.__units or right not in self.__units:
                     continue
-                a, b = self.units[left], self.units[right]
+                a, b = self.__units[left], self.__units[right]
                 if (a.source_id != b.source_id or edge.get("source_id") != a.source_id
                         or a.source_role != b.source_role
                         or a.source_role not in {"company_filing", "management", "management_discussion"}):
                     continue
-                left_scope = self._source_material_range(left_original, left)
-                right_scope = self._source_material_range(right_original, right)
+                left_scope = self.__source_material_range(left_original, left)
+                right_scope = self.__source_material_range(right_original, right)
                 if left_scope is None or right_scope is None:
                     continue
-                matched = self._qualification_pair(left, right, left_scope, right_scope,
+                matched = self.__qualification_pair(left, right, left_scope, right_scope,
                     inherited_head=bound_heads.get(left_original))
                 if matched is not None:
                     if matched.head:
@@ -622,9 +768,9 @@ class SourceOperatingSession:
             # uniquely known section, plus exact paragraph coordinates. This
             # is a semantic reference edge, never a physical adjacency proof.
             if section_ids:
-                source_units = self.originals or self.units
+                source_units = self.__originals or self.__units
                 by_position: dict[tuple[str, int, str, int], list[str]] = {}
-                self.work_budget.charge(len(source_units))
+                self.__work_budget.charge(len(source_units))
                 for original_id, unit in source_units.items():
                     coordinates = getattr(unit, "coordinates", None)
                     section_id = section_ids.get(original_id)
@@ -635,7 +781,7 @@ class SourceOperatingSession:
                             or getattr(coordinates, "table_index", None) is not None):
                         continue
                     by_position.setdefault((unit.source_id, page, section_id, paragraph), []).append(original_id)
-                self.work_budget.charge(len(source_units))
+                self.__work_budget.charge(len(source_units))
                 for premise_id, premise in source_units.items():
                     coordinates = getattr(premise, "coordinates", None)
                     section_id = section_ids.get(premise_id)
@@ -646,7 +792,7 @@ class SourceOperatingSession:
                             or getattr(coordinates, "table_index", None) is not None
                             or premise.source_role not in {"company_filing", "management", "management_discussion"}):
                         continue
-                    self.work_budget.charge(1 + len(premise.raw_text))
+                    self.__work_budget.charge(1 + len(premise.raw_text))
                     if not is_explicit_backward_revenue_guidance_premise(premise.raw_text):
                         continue
                     # Include the immediate predecessor to detect ambiguity,
@@ -672,22 +818,21 @@ class SourceOperatingSession:
                                 continue
                             left = origins.get(forecast_id, forecast_id)
                             right = origins.get(premise_id, premise_id)
-                            if left == right or left not in self.units or right not in self.units:
+                            if left == right or left not in self.__units or right not in self.__units:
                                 continue
-                            left_scope = self._source_material_range(forecast_id, left)
-                            right_scope = self._source_material_range(premise_id, right)
+                            left_scope = self.__source_material_range(forecast_id, left)
+                            right_scope = self.__source_material_range(premise_id, right)
                             if left_scope is None or right_scope is None:
                                 continue
                             forecast_text, premise_text = left_scope[0], right_scope[0]
-                            self.work_budget.charge(2 * (len(forecast_text) + len(premise_text)))
+                            self.__work_budget.charge(2 * (len(forecast_text) + len(premise_text)))
                             if revenue_guidance_premise(forecast_text, premise_text, follows=True):
                                 matches.add((left, right, gap))
                     if len(matches) == 1 and next(iter(matches))[2] > 1:
                         left, right, _ = next(iter(matches))
                         dependencies[left] = tuple(dict.fromkeys((*dependencies.get(left, ()), right)))
         except WorkBudgetExceeded:
-            self.complete = False
-        self.qualifications[key] = (edges, origins, dependencies)
+            self.__complete = False
         return dependencies
 
     def local_operating_context_dependencies(
@@ -706,7 +851,7 @@ class SourceOperatingSession:
         contexts: dict[str, list[str]] = {}
         try:
             for edge in edges:
-                self.work_budget.charge()
+                self.__work_budget.charge()
                 if edge.get("basis") != "source_body_adjacency":
                     continue
                 left_original, right_original = edge.get("left"), edge.get("right")
@@ -714,9 +859,9 @@ class SourceOperatingSession:
                         or left_original == right_original):
                     continue
                 left, right = origins.get(left_original, left_original), origins.get(right_original, right_original)
-                if left == right or left not in self.units or right not in self.units:
+                if left == right or left not in self.__units or right not in self.__units:
                     continue
-                a, b = self.units[left], self.units[right]
+                a, b = self.__units[left], self.__units[right]
                 if (a.source_id != b.source_id or edge.get("source_id") != a.source_id
                         or a.source_role != b.source_role
                         or a.source_role not in {"company_filing", "management", "management_discussion"}):
@@ -730,12 +875,12 @@ class SourceOperatingSession:
                 left_section, right_section = section_ids.get(left_original), section_ids.get(right_original)
                 if not isinstance(left_section, str) or not left_section or left_section != right_section:
                     continue
-                left_scope = self._source_material_range(left_original, left)
-                right_scope = self._source_material_range(right_original, right)
+                left_scope = self.__source_material_range(left_original, left)
+                right_scope = self.__source_material_range(right_original, right)
                 if left_scope is None or right_scope is None:
                     continue
                 left_text, right_text = left_scope[0], right_scope[0]
-                self.work_budget.charge(
+                self.__work_budget.charge(
                     _LOCAL_CONTEXT_TERM_SCAN_PASSES * (len(left_text) + len(right_text))
                 )
                 if not (_specific_context_terms(left_text) & _specific_context_terms(right_text)):
@@ -753,7 +898,7 @@ class SourceOperatingSession:
                 contexts.setdefault(left, []).append(right)
                 contexts.setdefault(right, []).append(left)
         except WorkBudgetExceeded:
-            self.complete = False
+            self.__complete = False
         return {owner: tuple(dict.fromkeys(neighbours)) for owner, neighbours in contexts.items()}
 
     def _validate_original_refs(self, refs) -> list[dict[str, Any]] | None:
@@ -764,9 +909,9 @@ class SourceOperatingSession:
             if (not isinstance(uid, str) or not isinstance(start, int) or isinstance(start, bool)
                     or not isinstance(end, int) or isinstance(end, bool)):
                 return None
-            unit = self.units.get(uid)
+            unit = self.__units.get(uid)
             if unit is None:
-                unit = self.originals.get(uid)
+                unit = self.__originals.get(uid)
             if unit is None:
                 return None
             text = getattr(unit, "raw_text", None)
@@ -781,51 +926,51 @@ class SourceOperatingSession:
 
     def fact(self, uid: str) -> OperatingFact:
         owner = self.owner_for(uid)
-        if owner in self.facts:
-            return self.facts[owner]
-        result = self.relations(uid)
-        text = self.source_text(uid) if owner in self.analysis or owner not in self.groups else ""
+        if owner in self.__facts:
+            return self.__facts[owner]
+        result = self.__relations_for(uid)
+        text = self.source_text(uid) if owner in self.__analysis or owner not in self.__groups else ""
         def ref_text(ref):
-            return self.units[ref["unit_id"]].raw_text[ref["char_start"]:ref["char_end"]]
+            return self.__units[ref["unit_id"]].raw_text[ref["char_start"]:ref["char_end"]]
         # Each source owner accounts for its own observation on the same
         # budget. Exhaustion must not restart through a text-only fallback.
         financial: bool | None
         try:
-            if result["status"] == "partial" and self.work_budget.exhausted:
+            if result["status"] == "partial" and self.__work_budget.exhausted:
                 raise WorkBudgetExceeded("operating relation work exhausted")
             from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
-            self.assertions[owner] = replace(prepare_source_assertions(text, work_budget=self.work_budget),
-                bound_operating=(self.engine.complete_assertion(owner,self.context_for(owner))
-                    or self.engine.unknown_argument(owner,self.context_for(owner))))
+            roles = replace(prepare_source_assertions(text, work_budget=self.__work_budget),
+                bound_operating=(self.__engine.complete_assertion(owner,self.context_for(owner))
+                    or self.__engine.unknown_argument(owner,self.context_for(owner))))
             assessment = prepare_reading_business_assessment(text, result, ref_text=ref_text,
-                source_roles=self.assertions[owner], relation_bindings=self.bindings.get(owner, ()),
-                grammar_work_budget=self.work_budget)
+                source_roles=roles, relation_bindings=self.__bindings.get(owner, ()),
+                grammar_work_budget=self.__work_budget)
             fact, financial = assessment.fact, assessment.financial_only
-            self.assertions[owner] = assessment.source_roles
-            self.passages[owner] = assessment.passage
+            self.__assertions[owner] = assessment.source_roles
+            self.__passages[owner] = assessment.passage
         except WorkBudgetExceeded:
-            self.complete = False
+            self.__complete = False
             # Closed relations retain their exact qualifiers and states without
             # restarting the text recognizer or scanning an unexamined tail.
             fact = project_reading_business_fact(text, result,
                 include_description=False, ref_text=ref_text,
-                relation_bindings=self.bindings.get(owner, ())) if result["relations"] else OperatingFact()
+                relation_bindings=self.__bindings.get(owner, ())) if result["relations"] else OperatingFact()
             fact = replace(fact, purpose="unassessed")
             financial = False if fact.financial_exempt else None
-        self.facts[owner] = fact
-        self.financial[owner] = financial
+        self.__facts[owner] = fact
+        self.__financial[owner] = financial
         return fact
 
     def financial_only(self, uid: str) -> bool | None:
         self.fact(uid)
-        return self.financial[self.owner_for(uid)]
+        return self.__financial[self.owner_for(uid)]
 
     def source_assertions(self, uid: str):
         """The exact owner's already charged role proof, never a second scan."""
         self.fact(uid)
-        return self.assertions.get(self.owner_for(uid))
+        return self.__assertions.get(self.owner_for(uid))
 
     def source_passage(self, uid: str):
         """The same charged owner's quote capability, not an event proof."""
         self.fact(uid)
-        return self.passages.get(self.owner_for(uid))
+        return self.__passages.get(self.owner_for(uid))

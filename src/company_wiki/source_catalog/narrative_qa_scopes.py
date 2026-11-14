@@ -187,11 +187,8 @@ def _sparse_qualifications(answers, owners, observed, session, union, failures, 
                 budget.charge(len(candidates) * max(1, len(candidates).bit_length()))
                 for left in sorted(candidates, key=position.__getitem__):
                     budget.charge()
-                    left_scope = session._source_material_range(left, left)
-                    right_scope = session._source_material_range(uid, uid)
-                    matched = None if left_scope is None or right_scope is None else session._qualification_pair(
-                        left, uid, left_scope, right_scope, left_owner=owners[left],
-                        right_owner=owner, qa_sequence=True)
+                    matched = session.match_qa_qualification(left, uid, left_owner=owners[left],
+                                                             right_owner=owner)
                     if matched is not None:
                         matches.append((left, matched))
                 identities = {match.object_ref if match.object_ref is not None else ('scope', left)
@@ -276,8 +273,7 @@ def _close_long_answer(package, answers, required, session, source_position):
         first = max(frame_start, offset - MAX_WINDOW_UNITS)
         predecessors = tuple(answers[first:offset])
         budget.charge(1 + len(predecessors))
-        session.antecedents[owner] = (predecessors, first == frame_start)
-        closure = session.reference(owner)
+        closure = session.reference(owner, window=(predecessors, first == frame_start))
         if closure['status'] in {'ambiguous', 'missing', 'partial'}:
             failures[segment[0]] = 'qa_reference_' + closure['status']
             continue
@@ -304,14 +300,8 @@ def _close_long_answer(package, answers, required, session, source_position):
             budget.charge()
             if left not in owners or owners[left] == owners[right]:
                 continue
-            left_scope = session._source_material_range(left, left)
-            right_scope = session._source_material_range(right, right)
-            if left_scope is None or right_scope is None:
-                failures[right] = 'qa_original_range_unavailable'
-                continue
-            matched = session._qualification_pair(left, right, left_scope, right_scope,
-                inherited_head=bound_heads.get(left), left_owner=owners[left],
-                right_owner=owners[right], qa_sequence=True)
+            matched = session.match_qa_qualification(left, right, inherited_head=bound_heads.get(left),
+                                                     left_owner=owners[left], right_owner=owners[right])
             if matched is not None:
                 matches.append((left, matched))
         identities = {qualification_roots.get(left, match.object_ref)
@@ -432,8 +422,7 @@ def close_qa_packages(packages, budget_packages, session):
             for offset, uid in enumerate(answers):
                 budget.charge(1 + offset)
                 predecessors = tuple(answers[:offset])
-                session.antecedents[owners[uid]] = (predecessors, not package.get('truncated', False))
-                closure = session.reference(owners[uid])
+                closure = session.reference(owners[uid], window=(predecessors, not package.get('truncated', False)))
                 if closure['status'] in {'ambiguous', 'missing', 'partial'}:
                     raise ValueError('qa_reference_' + closure['status'])
                 needed = set(closure.get('required_original_unit_ids', ()))
@@ -450,13 +439,8 @@ def close_qa_packages(packages, budget_packages, session):
                 matches = []
                 for left in answers[:offset]:
                     budget.charge()
-                    left_scope = session._source_material_range(left, left)
-                    right_scope = session._source_material_range(right, right)
-                    if left_scope is None or right_scope is None:
-                        raise ValueError('qa_original_range_unavailable')
-                    matched = session._qualification_pair(left, right, left_scope, right_scope,
-                        inherited_head=bound_heads.get(left), left_owner=owners[left],
-                        right_owner=owners[right], qa_sequence=True)
+                    matched = session.match_qa_qualification(left, right, inherited_head=bound_heads.get(left),
+                                                             left_owner=owners[left], right_owner=owners[right])
                     if matched is not None:
                         matches.append((left, matched))
                 identities = {qualification_roots.get(left, matched.object_ref)
@@ -523,7 +507,7 @@ def close_qa_packages(packages, budget_packages, session):
             withheld.append({'package_id':str(package['package_id']), 'reason':'QA_SCOPE_PARTIAL',
                              'status':str(exc), 'known_unit_ids':[]})
         except WorkBudgetExceeded:
-            session.complete = False
+            session.mark_incomplete()
             withheld.append({'package_id':'qa-source-closure', 'reason':'OPERATING_WORK_BUDGET',
                 'unexamined_from_index':index, 'unexamined_package_count':len(packages)-index,
                 'known_unit_ids':[]})

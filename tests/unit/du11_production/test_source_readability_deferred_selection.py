@@ -95,6 +95,32 @@ def test_known_pure_finance_does_not_require_grammar_or_become_deferred():
     tagger.assert_not_called()
 
 
+def test_known_partial_source_reuses_prepared_dispositions_without_an_extra_scan(monkeypatch):
+    from company_wiki.source_catalog import narrative_reading as reading
+    from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
+    from unit.document_understanding_selection.test_reading_production_selection import _package
+
+    business = _unit('公司已交付设备至客户开展生产验证，尚未完成量产认证。', language='zh')
+    background = _unit('Unclassified passage awaiting a separate source read.', paragraph=1)
+    parsed = _document(business, background, opaque=(2,), language='zh')
+    understood = reading._understand(parsed, title='Annual report', kind='annual_report',
+                                     mime_type='application/pdf', work_budget=new_document_work_budget())
+    understood['packages'].update(packages=[_package('qualified', business)], package_count=1)
+    monkeypatch.setattr(reading, '_understand', lambda *_args, **_kwargs: understood)
+    original = SourceOperatingSession.fact
+
+    def assess(self, uid):
+        assert uid != background.unit_id, 'full disposition scan cannot turn this source complete'
+        return original(self, uid)
+
+    monkeypatch.setattr(SourceOperatingSession, 'fact', assess)
+    result = _select(parsed)
+    assert result.status == 'partial' and not result.reading_context['source_processing_complete']
+    assert {span.raw_text for span in result.evidence_spans} == {business.raw_text}
+    assert not any(row['code'] == 'work_budget_exhausted' for row in result.selection_diagnostics)
+    assert not result.dropped_financial_count
+
+
 def test_clear_fragment_is_rejected_without_capability_deferral():
     text = 'Our vessels that are transporting gas.'
     assessment = prepare_reading_business_assessment(text, {'relations': []})

@@ -81,18 +81,19 @@ def test_long_qa_cannot_use_question_as_product_predecessor():
     question=units[0].unit_id
     assert withheld
     assert all(question not in p['anchor_unit_ids'] for p in source)
-    assert all(question not in session._support_contexts.get(p.get('_source_scope_owner'), ()) for p in source)
+    assert all(question not in session.context_for(p['_source_scope_owner'])
+               for p in source if '_source_scope_owner' in p)
     target=units[-1].unit_id
     assert all(p.get('_qa_scope_complete') is False for p in source if target in p['anchor_unit_ids'])
 
 
 def test_long_qa_pair_matching_is_bounded_not_all_prefix_pairs(monkeypatch):
     calls=[]
-    original=SourceOperatingSession._qualification_pair
+    original=SourceOperatingSession.match_qa_qualification
     def observed(self,*args,**kwargs):
         calls.append(1)
         return original(self,*args,**kwargs)
-    monkeypatch.setattr(SourceOperatingSession,'_qualification_pair',observed)
+    monkeypatch.setattr(SourceOperatingSession,'match_qa_qualification',observed)
     texts=[f'本公司已交付{i+1}台专用设备。' for i in range(32)]
     (source,_,withheld),_,_=run_answers(texts)
     assert not withheld and len(source)==32
@@ -106,6 +107,7 @@ def test_zero_budget_reads_no_source_units():
         def __iter__(self):
             pytest.fail('unpaid source iteration')
     session=SimpleNamespace(units=NoRead(),work_budget=WorkBudget(0),complete=True)
+    session.mark_incomplete = lambda: setattr(session, "complete", False)
     p={'kind':'qa_exchange','package_id':'qa','member_unit_ids':['x']}
     source,material,withheld=close_qa_packages([p],[p],session)
     assert not source and not material and withheld[0]['reason']=='OPERATING_WORK_BUDGET'
@@ -188,11 +190,11 @@ def test_english_distant_unsupported_plan_is_partial_instead_of_false_closure(re
 
 def test_many_same_head_candidates_stay_bounded_and_do_not_hide_other_business(monkeypatch):
     calls=[]
-    original=SourceOperatingSession._qualification_pair
+    original=SourceOperatingSession.match_qa_qualification
     def observed(self,*args,**kwargs):
         calls.append(1)
         return original(self,*args,**kwargs)
-    monkeypatch.setattr(SourceOperatingSession,'_qualification_pair',observed)
+    monkeypatch.setattr(SourceOperatingSession,'match_qa_qualification',observed)
     plans=[f'本公司计划新建第{i+1}条生产线。' for i in range(10)]
     unrelated='公司已启动仓库建设。'
     restrictions=['该生产线尚未取得批准。' for _ in range(10)]

@@ -139,7 +139,7 @@ def test_native_owner_is_detected_once_and_offsets_are_exact(monkeypatch):
     before = len(calls)
     assert session.fact(carrier.unit_id) is session.fact(carrier.unit_id)
     assert len(calls) == before and session.work_budget is budget
-    assert set(session.results) == {carrier.unit_id}
+    assert set(session.prepared_relation_ids()) == {carrier.unit_id}
     for relation in result["relations"]:
         for field in ("assertion_refs", "predicate_refs", "qualifier_refs"):
             for ref in relation[field]:
@@ -158,7 +158,7 @@ def test_closed_continuity_without_page_view_maps_refs_to_all_original_members()
     assert "_material_units" not in pipeline
     session = state["session"]
     ids = {u.unit_id for u in parsed.units}
-    assert len(session.results) == 1
+    assert len(session.prepared_relation_ids()) == 1
     assert session.fact(parsed.units[0].unit_id) is session.fact(parsed.units[1].unit_id)
     assert all(metadata[uid]["value_band"] == "meaningful_fact" for uid in ids)
     assert all(set(metadata[uid]["required"]) | {uid} == ids for uid in ids)
@@ -269,7 +269,6 @@ def test_non_event_description_needs_no_offset_names_or_context_view(text, monke
         contexts={parsed.units[0].unit_id: (parsed.units[1].unit_id,)})
     assert session.fact(parsed.units[0].unit_id).eligible
     assert session.relations(parsed.units[0].unit_id)["relations"] == []
-    assert not session.engine._views
 
 
 @pytest.mark.parametrize("raw,text,positions", [

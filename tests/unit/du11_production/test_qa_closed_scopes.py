@@ -190,6 +190,7 @@ def test_zero_work_stops_before_any_qa_source_read_or_iteration():
         def __getitem__(self, _):
             pytest.fail('unpaid source read')
     session=SimpleNamespace(units=NoRead(),work_budget=WorkBudget(0),complete=True)
+    session.mark_incomplete = lambda: setattr(session, "complete", False)
     package={'package_id':'qa','kind':'qa_exchange','member_unit_ids':['x']}
     source, material, withheld=close_qa_packages([package],[package],session)
     assert not source and not material
