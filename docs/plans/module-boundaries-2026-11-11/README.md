@@ -2,7 +2,7 @@
 
 **M2 已完成。** 五条模块施工卡已受测并入各自主线并推送。StockWiki 公开来源读取已进入本地 `master`，Dashboard 的公开浏览、原件流和摘要读取已推送 `main`。D4 跨仓回放 30 项全过，E01–E09 均有组合证据。 [组合记录](review/root_composition_20261114.md) · [矩阵](boundary_matrix.json)
 
-当前实施回到 [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)，推进 R4 工作量和真实摘要等验收。
+当前实施已回到 [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。R4 和 T4/SEM 已验收，真实来源卡的付费恢复和两条 RF 实际采用通过。正在修正业务摘要内容。
 
 先读 [task_plan.md](task_plan.md)，再读 [architecture.md](architecture.md)、[interfaces.md](interfaces.md)、[acceptance.md](acceptance.md)。并行安排和卡片见 [dispatch.md](dispatch.md)，交接格式见 [handoff_contract.md](handoff_contract.md)，机器对照见 [boundary_matrix.json](boundary_matrix.json)。
 
@@ -34,8 +34,12 @@ flowchart LR
   C5 --> D
   S[StockWiki和Dashboard公开接口已接收] --> D
   D --> E[逐仓发布并关闭工程矩阵]
-  E --> F[当前位置 R4来源回放与工作量]
-  F --> G[真实摘要到缓存恢复与RF公司循环]
+  E --> F[R4工作量与T4来源限定已验收]
+  F --> G[真实来源卡与零重复收费恢复已验收]
+  G --> H[两条证据进入RF实际计算已验收]
+  H --> I[当前位置：业务摘要内容]
+  I --> J[新版摘要的缓存和RF组合复验]
+  J --> K[完整公司审查循环]
 ```
 
 五卡可在不同工区并行，彼此不写对方repo。CWP内部七责任由一个作者顺序完成，避免多作者同时改同一个catalog/边界测试。ROOT管理接口、集成和并线，并在StockWiki自己的隔离工区接收C38/B03差额，不与五卡作者同时写其生产代码。
