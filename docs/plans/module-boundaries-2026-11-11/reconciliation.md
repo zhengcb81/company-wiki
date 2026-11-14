@@ -1,5 +1,13 @@
 # 工作区、支线和接收顺序（本轮唯一处置表）
 
+## 当前并线责任边界（2026-11-14，优先于下方历史调度记录）
+
+- 每个模块的仓库 owner 自己核对本仓未提交内容、挑选可保留改动、修正与当前模块接口不兼容的支线，并在本仓完成测试、提交、并入主线和推送。总控只协调接口、记录交接并做只读组合验收；不代替 FF、RF、StockWiki、Dashboard、ET 或 SID 执行 Git 写操作，也不把一个仓的实现搬进另一个仓。
+- company-wiki 总控只对 company-wiki 自己的代码和分支负责。发现跨仓问题时，记录可复现证据与所属 owner，由该 owner 在自己的模块边界内修复；组合测试失败按失败所在层回交，不由总控跨层打补丁。
+- StockWiki 正由另一并行项目修改。其当前源码、工作区、计划和分支均保持原样；等该项目 owner 给出最终交接版本后，再由 StockWiki owner 自己判断接收/清理。当前不启动与其重叠的盘点或施工。
+- 2026-11-14 之前 Dashboard 的三个文档交接提交（`0b31f48`、`8111194`、`63f6820`）已由总控推入 Dashboard `main`，内容仅为 handoff 文档，无产品代码。这是本边界明确前的既成状态；后续 Dashboard 代码或分支并线一律交 Dashboard owner。
+- 以下“ROOT 在 StockWiki 工区接收”及“ROOT merge”属于较早阶段的历史授权和已完成事项，不构成当前继续写入其他模块的授权。不要据此覆盖正在进行的仓内改动。
+
 ## 2026-11-14 模块化并线与本地改动续核
 
 - 用户再次明确：模块化架构必须保留。判断支线时先比对公开模块接口；整支合并会覆盖/绕过 owner 边界的，不得强并，应由支线作者在所属模块内改写并经模块测试后再收。
@@ -38,7 +46,7 @@
 | RF | 96 refs、62工区；未并线release有实际能力，不能全树覆盖新main。主工区4个assurance生成文件原字节存入本轮review/retained/rf_assurance，随后定点restore；删除1个空Temp工区。之后ROOT在MB-RF工区将compare与部署/来源测试切片并入RF main，当前远端head `6341759b9cdfd13e8aa7d51d5c755e361046da0c`。 | MB-RF剩余scope/subject/verified-compare按B2重做；研究草稿归父研究计划。四个含原文的残缺Temp工区保留。 |
 | ET | 19 refs全部已为main祖先；删除旧翻译eval_results.json和1个空Temp工区；工具记忆保留。 | MB-ET没有旧分支漏并任务，继续原协议/worker边界任务。 |
 | SID | 6 refs全部已为v2-clean-rewrite祖先；11项dirty属于旧下载器改进，有价值且有真实缺陷，保留；fixture生成脚本是独有出处。 | MB-SID A0先补RED并修复接收，不能直接commit旧WIP或恢复掉。 |
-| StockWiki | 36 refs、30工区；18条非祖先主要共享C38/B03家族，存在公开身份/研究接口差额。删除2个空Temp工区。无remote。 | ROOT在StockWiki自己目录接收C38/B03最小合同，保留新source consumer/F05，不修改IQS或真实数据库。 |
+| StockWiki | 36 refs、30工区；18条非祖先主要共享C38/B03家族，存在公开身份/研究接口差额。删除2个空Temp工区。无remote。 | C38/B03最小合同此前已由ROOT接收，属于已完成历史事项。后续并线由StockWiki owner在该仓处理；当前并行项目交接前不再操作其工作区。 |
 | Audit | 22 refs全部已为main祖先；没有新代码需并线，无remote。 | ROOT只验公开消费；小型历史脚本/材料归档后回收。不强造改造卡。 |
 | Dashboard | 原4项WIP及有限边界测试已接收为 `20493562f86b1351d97bc164bbc254efacddacdf`，main已推origin。修复同名测试收集冲突及“所有动态import一律禁止”的过宽规则。审查期间另一个harness接收了5a16ca7/c56e9ce/0addea2f，ROOT观察保留并验证，不冒称作者。 | 原Dashboard owner/D00；ROOT协同公开版本组合。24条真实stream用例缺少旧owner CLI工区，尚未通过，映射CWP T-READ。 |
 

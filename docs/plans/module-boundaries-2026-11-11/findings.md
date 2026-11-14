@@ -1,5 +1,9 @@
 # 调查发现
 
+## 2026-11-14 当前仓库所有权决策
+
+模块化的并线动作必须留在代码所属仓库：owner 负责理解本仓提交/脏改动，按当前公开接口适配并做本仓测试，然后提交、并入和推送。ROOT/company-wiki 可以协调接口和做只读组合验收，但不跨仓改文件或操作 Git。StockWiki 有另一项目正在改动，需等该项目 owner 交接后再由 StockWiki owner 自己接续；不能把旧审查结果当作允许 ROOT 直接写入的依据。
+
 ## A1逐仓审查与接收（2026-11-11，历史）
 
 完整结果见reconciliation.md及review/repo_reconciliation_20261111三份逐仓报告。范围8仓390分支/remote refs、253工区，另7RF tag和2CWP stash。最重要的纠正是：refs未成祖先不一定漏并（FF job已整合接收）；tracked clean/untracked=0不代表无原件（四个RF Temp仍有msft原文）；release与main确有公开能力差额（RF B37、SW C38/B03、CWP历史CLI），不能说全部已并线。
