@@ -166,14 +166,14 @@
       "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-et-live-20261004",
       "status": "EVIDENCE_KEEP",
       "reason": "唯一历史验收记录（2026-10-04 ET-LIVE acceptance report，基线 CWP 6b93481/FF e1eda60/ET 93fe52c），无副本",
-      "evidence": "实测 1 文件/4 KB；非 git 仓；report.md 首部内容核读"
+      "evidence": "实测 1 文件/1,596 B；非 git 仓；report.md 首部内容核读"
     },
     {
       "kind": "projects_directory",
       "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-gates",
       "status": "EVIDENCE_KEEP",
       "reason": "架构 gate 历史观测产物（ctrl-*、ctrl03-candidate-* 等）；产物绑定当时基线/配置，可重建性未经证实且无收据，不满足删除条件",
-      "evidence": "实测 9,700 文件/~279 MB；非 git 仓；目录枚举核读"
+      "evidence": "实测 9,700 文件/262,499,631 B（约 250.3 MB）；非 git 仓；目录枚举核读"
     },
     {
       "kind": "projects_directory",
@@ -187,7 +187,7 @@
       "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-storage-audit-20261003",
       "status": "EVIDENCE_KEEP",
       "reason": "S5 存储审计原始证据（.planning/s5-storage-audit-20261003 + results/ 6 份原始扫描 JSON），唯一出处",
-      "evidence": "实测 26 文件/940 KB；非 git 仓；results/ 枚举核读"
+      "evidence": "实测 26 文件/896,959 B；非 git 仓；results/ 枚举核读"
     },
     {
       "kind": "stash",
@@ -251,7 +251,7 @@
     },
     {
       "command": "python -I -c \"import json;json.load(open('docs/plans/module-pwf-reconciliation-2026-11-14/review/cwp-closeout-handoff.json',encoding='utf-8'))\"",
-      "result": "PASS（裸 JSON 可解析，schema_version=1，12 个顶层键齐备）"
+      "result": "PASS（裸 JSON 可解析，schema_version=1，13 个顶层键齐备）"
     },
     {
       "command": "python -I docs/plans/module-pwf-reconciliation-2026-11-14/review/check_links_closeout.py（相对链接核验：handoff.md 引用的仓内相对路径均存在）",

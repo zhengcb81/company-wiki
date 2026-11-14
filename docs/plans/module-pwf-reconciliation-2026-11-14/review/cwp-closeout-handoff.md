@@ -10,7 +10,7 @@
 | 项 | 卡面快照 | 本卡实时重核 |
 |---|---|---|
 | branch | master | master |
-| 本地 HEAD | `1f9f3dcf3` | `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`（其后新增 3 个 docs 提交：a23e73c70、f05e8a8ce、1f9f3dcf3→7361aad82 之间的 owner-card 修订；均为 PWF 文档） |
+| 本地 HEAD | `1f9f3dcf3` | `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`（其后新增 2 个 docs 提交：a23e73c70、7361aad82；均为 PWF 文档） |
 | origin/master | 对齐 | `7361aad82`（与本地一致） |
 | tracked 工作区 | clean | clean（`git status --porcelain` 仅 266 条 `??` 未跟踪项，无 tracked 修改） |
 | 注册 worktree | 8 | 8（含主仓） |
@@ -72,10 +72,10 @@
 
 | 目录 | 实测规模 | Git | 处置 | 依据 |
 |---|---|---|---|---|
-| `Projects/company-wiki-et-live-20261004` | 1 文件 / 4 KB（`report.md`：2026-10-04 ET-LIVE acceptance result，基线 CWP 6b93481 / FF e1eda60 / ET 93fe52c） | 非 git 仓 | **EVIDENCE_KEEP** | 唯一历史验收记录，无副本 |
-| `Projects/company-wiki-gates` | 9,700 文件 / ~279 MB（ctrl-\*、ctrl03-candidate-\* 等 gate 观测输出） | 非 git 仓 | **EVIDENCE_KEEP** | 架构 gate 历史观测产物；可重建性未经证实（产物绑定当时基线/配置），卡要求"确认纯可重建产物并列出收据"才可删，现无收据 |
+| `Projects/company-wiki-et-live-20261004` | 1 文件 / 1,596 B（`report.md`：2026-10-04 ET-LIVE acceptance result，基线 CWP 6b93481 / FF e1eda60 / ET 93fe52c） | 非 git 仓 | **EVIDENCE_KEEP** | 唯一历史验收记录，无副本 |
+| `Projects/company-wiki-gates` | 9,700 文件 / 262,499,631 B（约 250.3 MB；ctrl-\*、ctrl03-candidate-\* 等 gate 观测输出） | 非 git 仓 | **EVIDENCE_KEEP** | 架构 gate 历史观测产物；可重建性未经证实（产物绑定当时基线/配置），卡要求"确认纯可重建产物并列出收据"才可删，现无收据 |
 | `Projects/company-wiki-r1-local-observation` | 即 §3 worktree #6 | CWP 注册工区 | **EVIDENCE_KEEP** | 见 §3 #6 |
-| `Projects/company-wiki-storage-audit-20261003` | 26 文件 / 940 KB（`.planning/s5-storage-audit-20261003/` + `results/*_raw.json` 6 份原始扫描） | 非 git 仓 | **EVIDENCE_KEEP** | S5 存储审计原始证据（db/dup/inventory 扫描），唯一出处 |
+| `Projects/company-wiki-storage-audit-20261003` | 26 文件 / 896,959 B（`.planning/s5-storage-audit-20261003/` + `results/*_raw.json` 6 份原始扫描） | 非 git 仓 | **EVIDENCE_KEEP** | S5 存储审计原始证据（db/dup/inventory 扫描），唯一出处 |
 
 ## 5. 未提交例外（dirty exceptions，全部保留）
 

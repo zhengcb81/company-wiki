@@ -26,10 +26,10 @@
 
 ## 2026-11-14 — CWP lane 收口（cwp_closeout 卡执行）
 
-- 实时重核基线：`master@7361aad82` = `origin/master`（卡面快照 `1f9f3dcf3` 之后的 3 个 docs 提交已计入）；tracked clean；8 个注册 worktree、13 个非祖先 refs、1 个 stash（`18ac0d0562`）与卡面计数一致。
+- 实时重核基线：`master@7361aad82` = `origin/master`（卡面快照 `1f9f3dcf3` 之后的 2 个 docs 提交已计入）；tracked clean；8 个注册 worktree、13 个非祖先 refs、1 个 stash（`18ac0d0562`）与卡面计数一致。
 - 13 个非祖先 refs 全部归因：11 个 `ABSORBED`（T-READ/T-CANON/T-B33/T-B34/T-N4/T-CONFIG 能力已由 [MB-CWP 卡](../../mb11-cwp-2026-11-11/handoff.md) 移植进 master，T-W13 历史文档已补回；master 路径逐一实测存在），2 个 `UNCLASSIFIED_HOLD`（`codex/d00-return5-cwp-audit`、`codex/dashboard-cwp-b34-prospectus`，按卡步骤 2 不得推断；工区物理位于 Dashboard 目录）。ABSORBED refs 一律保留：其提交携带主线没有的历史 handoff 文档，删除会使独有历史不可达。
 - 8 个 worktree 全部归因：主仓 `ACTIVE_KEEP`；4 个 CWP 侧工区 `EVIDENCE_KEEP`（唯一 .planning 审计材料、已归因未归档的 M3/W04 WIP、clean-filter 伪差量 + R1 resume 证据）；2 个 Dashboard 物理工区 `UNCLASSIFIED_HOLD`（只读记录 branch/HEAD/dirty）。
-- 四个额外 Projects 顶层目录全部 `EVIDENCE_KEEP`：et-live-20261004（1 文件验收记录）、gates（9,700 文件/~279 MB 观测产物，可重建性未证实）、r1-local-observation（即注册工区）、storage-audit-20261003（26 文件审计原始扫描）。
+- 四个额外 Projects 顶层目录全部 `EVIDENCE_KEEP`：et-live-20261004（1 文件验收记录）、gates（9,700 文件/262,499,631 B 观测产物，可重建性未证实）、r1-local-observation（即注册工区）、storage-audit-20261003（26 文件审计原始扫描）。
 - 本轮清理为零（0 路径/0 文件/0 字节）：无一项同时满足"owner 已完成+源码在主线+无唯一证据+工区 clean"四个移除条件；历史清理收据已在 module-boundaries review 目录，不重复执行。
 - 文档-only 校验：`git diff --check`、handoff JSON 可解析、相对链接核验（check_links_closeout.py）全部通过。
 - CWP 唯一下一步：du11 P1 业务摘要质量修正（66 条 claim 展示、26 个冗余任务、披露载体/承诺人混用），通过后复验缓存恢复与 RF 采用；父计划公司循环保持 paused。

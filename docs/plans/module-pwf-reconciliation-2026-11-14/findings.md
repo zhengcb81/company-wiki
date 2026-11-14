@@ -40,6 +40,6 @@ Git 状态只读报告分别来自模块 agent 和 ROOT 命令。每个模块 ow
 - 13 个非祖先 refs 中 11 个已 `ABSORBED`：cwp_review.md（2026-11-11）第 3 节指认的全部 T-\* 候选能力均由 MB-CWP 卡移植进 master（`source_stream_cli`、`public_canonical_browser`、readiness/link/recovery 六模块、B34 诊断/IPO 封面、T-N4 核销、T-CONFIG 严格类型反例），本卡用 `git ls-tree master` 逐一实测了移植模块/CLI/测试路径存在。T-W13 历史完成事实已在 `delivery/w13/handoff.md`（提交 `050c6d479`）。
 - ABSORBED ≠ 可删 ref：这些分支的原始提交携带主线没有的历史 handoff 文档（`docs/handoffs/dashboard-*` 等路径只在对应 refs 可达），删除会使独有历史不可达；退休 refs 须先归档这些提交内容。
 - 两个 Dashboard 物理工区（`b34-cwp-prospectus`、`return5-cwp-audit`）tracked 均 clean、各含 1 个 untracked 证据目录；按卡步骤 2 保持 `UNCLASSIFIED_HOLD`，CWP 侧仅记录 branch/HEAD/dirty。
-- 清理为零的直接原因：所有 CWP 侧工区都含唯一证据（.planning 审计材料、M3/W04 未归档 WIP、R1 resume 记录）或 clean-filter 伪差量；三个非 git 的 Projects 目录（et-live、gates、storage-audit）都是唯一历史证据，gates 的 9,700 文件/~279 MB 观测产物可重建性未经证实。
+- 清理为零的直接原因：所有 CWP 侧工区都含唯一证据（.planning 审计材料、M3/W04 未归档 WIP、R1 resume 记录）或 clean-filter 伪差量；三个非 git 的 Projects 目录（et-live、gates、storage-audit）都是唯一历史证据，gates 的 9,700 文件/262,499,631 B 观测产物可重建性未经证实。
 - stash 仅剩 `18ac0d0562`（br-ci-fix）：c3 semantic 的 `5b1415d6e` 已退休；剩余 stash 含 llm_cost_log 独有差量，归账 owner 处置。
 - CWP 业务主线唯一下一步未变：du11 P1 业务摘要质量修正（partial 来源；66 条 claim、26 个冗余任务、载体/承诺人混用），其后复验缓存恢复与 RF 采用；公司循环 paused。
