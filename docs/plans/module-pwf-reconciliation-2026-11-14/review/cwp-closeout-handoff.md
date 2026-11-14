@@ -131,8 +131,58 @@
 - Round 2（绑定 `8ae20ce6f402290bb59451df04f79cadbdc76954`）：**PASS**，0 blocker / 0 non-blocker，N1–N3 全部关闭；最终 VERDICT: PASS 绑定该 HEAD。
 - 审查范围核验：13 refs、8 worktrees、4 顶层路径均有状态且与实时 Git 一致；清理为零无未解释 WIP；模块 owner 边界未破坏。
 
-## 11. 推送记录
+## 11. 推送受阻详录（平台 Mimosa L3 门）
 
-- **受审 HEAD `8ae20ce6f` 的推送被平台安全门拒绝，推送未发生。** ZCode 平台 Mimosa L3 push 前置门在 `git push origin master` 时强制拦截：209 high / 39 medium / 6 low 发现（`tests/unit/test_automation_migrations.py`、`tests/unit/test_llm_client.py`、`src/company_wiki/source_catalog/identity_candidates.py` 等）。按仓库规范（AGENTS.md 工具平台自动审批条款）不得绕过平台拒绝、不得改写命令或转移通道；修复既有 high 发现超出本卡文档-only 范围且会使独审绑定失效。
-- **拦截无关性证据**（已核验）：本 lane 两个提交的 delta `7361aad82..8ae20ce6f` 共 7 个文件全部位于 `docs/plans/module-pwf-reconciliation-2026-11-14/`；三个被标记文件均不在 delta 内，为 `origin/master`（`7361aad82`）既有内容。
-- **实测终态**：本地 `master` = `8ae20ce6f`（受审版本，含本收口提交前内容）；`origin/master` = `7361aad82`（`git ls-remote` 实测）。`final.remote_head` 按实测值记录。解除平台门（修复/基线化既有发现或平台放行）后，推送 `8ae20ce6f..HEAD` 即完成本卡"远端等于已审 HEAD"要求；该动作移交用户/后续 owner。
+### 11.1 结论
+
+受审内容 HEAD `8ae20ce6f` 及其后收口记录提交的 `git push origin master` 已**三次**被 ZCode 平台 Mimosa L3 前置门强制拦截，推送从未执行；`origin/master` 实测停留在 `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`。本节详录为卡片 owner 于 round-3 复核（PASS）之后的明确指示，作为补充记录写入；不改变 round-2 §13.5 / round-3 §14.5 审查授权的内容清单，本节更新在收口提交 `2cbc01156` 之后单独提交。
+
+### 11.2 尝试时间线（全部为 2026-11-14 本会话）
+
+| # | 动作 | 结果 |
+|---|---|---|
+| 1 | `git commit` → `ca2602a2f`（候选收口内容） | 通过（commit 门放行） |
+| 2 | `git commit` → `8ae20ce6f`（独审 non-blocker 修复） | 通过 |
+| 3 | `git push origin master`（推送受审 HEAD） | **拦截**：Mimosa L3 全仓扫描 209 high / 39 medium / 6 low |
+| 4 | `git commit`（收口记录首次尝试） | **拦截**（同一批发现；当时 commit 门同步升级为全仓扫描口径） |
+| 5 | `git commit` → `2cbc01156`（round-3 收口记录） | 通过（commit 门恢复 docs-only 放行） |
+| 6 | `git push origin master` | **拦截**（同一批发现，输出逐字相同） |
+| 7 | `git push origin master`（round-3 后复测） | **拦截**（同一批发现，输出逐字相同；复合命令含 `git ls-remote` 亦整体未执行） |
+
+### 11.3 拦截方与门行为
+
+拦截方为 ZCode 平台 PreToolUse hook（Mimosa L3），**不是**本仓 `.githooks/pre-push`（仓内 gate 与本次拦截无关，且未运行到）。实测门行为：push 前做**全仓**扫描并按最高等级阻断，与本 lane delta 是否含代码无关；commit 门为轻量/增量口径，docs-only 提交可过（同一会话内 commit 通过而 push 连续拦截的不对称已复现两次）。会话级基线快照位于 `.mimosa/hook-state/`（快照上限 5000 文件），实测不豁免既有发现的阻断。门输出自带声明："本次覆盖不完整，不能把未发现更多问题解释为项目安全"；`.mimosa/reports/` 在本会话未生成报告文件。
+
+### 11.4 发现清单（门输出原文）
+
+门报告总计 **209 high / 39 medium / 6 low**，仅逐条枚举以下 12 条 high；中/低危 45 项未逐条给出，需 Mimosa 完整报告（本会话无报告文件落盘）：
+
+- `tests/unit/test_automation_migrations.py:280`、`:310`、`:314`、`:341`、`:460` — [high] SQL 注入（5 条）
+- `tests/unit/test_llm_client.py:47`、`:129`、`:135`、`:156`、`:162` — [high] 硬编码凭据（5 条）
+- `src/company_wiki/source_catalog/identity_candidates.py:94`、`:109` — [high] SQL 注入（2 条）
+
+（前两类多为测试夹具中故意构造的 SQL/凭据字面量，但门不做此区分；是否如此定性属安全修复 lane 的裁定，不在本卡范围内断言。）
+
+### 11.5 无关性证据（已核验）
+
+- 本 lane 全部三个提交的并集 delta：`git diff --name-only 7361aad82 2cbc01156` = **恰 7 个文件**，全部位于 `docs/plans/module-pwf-reconciliation-2026-11-14/`（逐提交 delta：`ca2602a2f` 6 文件、`8ae20ce6f` 5 文件、`2cbc01156` 3 文件，互为子集）。
+- 三个被标记文件均不在并集 delta 内（`git diff --name-only 7361aad82 2cbc01156 | grep <标记文件>` = 空）。
+- 三个被标记文件均为 `origin/master@7361aad82` **既有内容**——即远端基线已包含它们，此前推送历史证明这些内容曾正常入库；本次拦截针对的是**既有发现**，不是本 lane 变更引入的问题。
+- `git ls-remote origin refs/heads/master` 多次实测 = `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`（round-3 复核者亦独立复测一致）。
+
+### 11.6 未绕过的依据
+
+AGENTS.md"工具平台的自动审批不由仓库控制……不得改写命令或转移通道绕过拒绝"。全程未使用 `--no-verify`、未换 shell/协议/机器通道；修复 209 个既有发现超出本卡文档-only 写集合，且会使三轮独审绑定（`8ae20ce6f`）失效——安全修复属独立 lane，须另行派卡。
+
+### 11.7 实测终态
+
+- 本地 `master` = `2cbc01156`，领先远端 3 个提交：`ca2602a2f`（收口内容）→ `8ae20ce6f`（独审修复）→ `2cbc01156`（round-3 记录 + 依赖声明）。
+- `origin/master` = `7361aad82`（多次实测）。
+- 工作区 tracked clean，无未提交内容。
+- `handoff.json` `final.head` = `8ae20ce6f`（三轮独审绑定的受审内容 HEAD）；`final.remote_head` = `7361aad82`（实测值）。
+
+### 11.8 解除路径与解锁后操作
+
+- **解除路径（二选一，均在本卡范围外）**：(a) 安全修复 lane——修复或基线化既有 209 high 发现；(b) 平台侧处置（对既有发现基线化/放行，或 push 门改为 delta 范围扫描）。
+- **解锁后唯一操作**：`git push origin master`，一次推送即发布全部 3 个提交。
+- **推送后 SHA 语义**：远端 tip 将为当时最新提交（含 `2cbc01156` 或其后的本节记录提交）；受审内容 HEAD `8ae20ce6f` 作为祖先**逐字发布**。卡片"远端等于已审 HEAD"按"受审内容逐字发布 + 增量恰为独审者预授权的记录提交"闭环（round-2 §13.5、round-3 §14.5 均已明文预授权该增量）。`handoff.json` `final.head` 亦因此定格于受审内容 SHA，`final.remote_head` 如实记录推送前实测值。
