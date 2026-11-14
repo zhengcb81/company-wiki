@@ -4,6 +4,8 @@
 
 ## 2026-11-14 当前状态
 
+模块 PWF 与 Projects 目录清理正在按 owner 分仓整理，唯一总控入口为[模块计划与工区对账计划](../module-pwf-reconciliation-2026-11-14/task_plan.md)。本项只整理状态、交接和清理责任，不改变当前业务主线步骤，也不自动恢复暂停的目标。各仓 owner 在自己的仓内更新 PWF、清理已核实的临时工区并完成本仓并线；StockWiki 及 IQS 等在途项目先保持原样。
+
 五条模块卡已受测并线并推送。StockWiki C38/B03 和公开来源客户端进入本地 master。Dashboard 两处私有依赖已修正并推送 main。安装态浏览、原件、摘要和 D4 跨仓 30 项已通过，RF 三表经临时正式安装和独审，已推 main。本轮隔离测试工作树已回收。完整版本和复验入口见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md) 及 [E01–E09 矩阵](../module-boundaries-2026-11-11/boundary_matrix.json)。
 
 后续仓库续核发现的 Dashboard C01证据可移植性、B-real预览模块适配、旧B03独审收据问题已作为分开的工作项登记；不改变已验收的模块接口，也不能把旧跨层实现并回。状态与施工卡见[模块计划的唯一对账表](../module-boundaries-2026-11-11/reconciliation.md)与[派发矩阵](../module-boundaries-2026-11-11/dispatch.md)。

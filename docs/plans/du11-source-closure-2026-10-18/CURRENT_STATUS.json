@@ -1198,6 +1198,18 @@
     },
     "current_composition": "../module-boundaries-2026-11-11/review/root_composition_20261114.md"
   },
+  "module_pwf_and_projects_cleanup": {
+    "as_of_date": "2026-11-14",
+    "status": "IN_PROGRESS_OWNER_SPECIFIC_PLAN_RECONCILIATION",
+    "canonical_plan": "../module-pwf-reconciliation-2026-11-14/task_plan.md",
+    "projects_matching_directories_observed": 63,
+    "directory_cleanup_status": "INVENTORIED_NOT_CLASSIFIED_OR_DELETED",
+    "integration_owner_rule": "Each module owner updates its own PWF, classifies dirty work, tests, commits, merges, and pushes in that module repository; ROOT coordinates interfaces and performs read-only composition only.",
+    "StockWiki": "DEFERRED_UNTIL_CONCURRENT_PROJECT_HANDOFF; do not modify its plans, worktrees, or Git state.",
+    "invest_quick_scan": "DEFERRED_UNTIL_CURRENT_OWNER_HANDOFF",
+    "module_status_snapshots": "../module-pwf-reconciliation-2026-11-14/findings.md",
+    "directory_inventory": "../module-pwf-reconciliation-2026-11-14/projects_directory_inventory.md"
+  },
   "module_boundary_current_state": {
     "as_of": "2026-11-14",
     "owner_cards": {
