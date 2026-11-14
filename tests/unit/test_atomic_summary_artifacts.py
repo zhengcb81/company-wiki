@@ -18,7 +18,7 @@ from company_wiki.automation.narrative_verify import NarrativeVerifyHandler
 from unit.test_narrative_extractive_runtime import selected
 
 VERSION = 'reading-model-input/7'
-ASSESSOR = 'source-summary-assessment/1.2.0'
+ASSESSOR = 'source-summary-assessment/1.3.0'
 
 
 def materials(source=None, version=VERSION, *, claim_text='甲方正在完善海外服务网络。', modality='planned'):

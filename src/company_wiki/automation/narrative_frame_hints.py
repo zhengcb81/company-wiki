@@ -25,7 +25,7 @@ def compact_frame_hints(parts: Iterable[tuple[str, str]]) -> dict[str, Any]:
                                 ('future', frame.future_marker),
                                 ('reported', bool(frame.reporting_prefix)),
                                 ('inherits_reporting', frame.reporting_inherited),
-                                ('condition_present', bool(frame.project_condition))):
+                                ('condition_present', bool(frame.project_condition or frame.pending_requirement))):
                 if value:
                     flags[name] = True
             if frame.quantity_basis is not None:

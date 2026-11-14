@@ -45,6 +45,10 @@ _HEADING_NUMBER = re.compile(
     r"（[一二三四五六七八九十]+）|\([一二三四五六七八九十]+\)|"
     r"\d+(?:\.\d+){1,3}\s|\d+[、．.](?!\d)\s*\S|[IVXLC]+\.\s|Item\s+\d+[A-Z]?\.?\s)",
 )
+_LOCAL_HEADING_NUMBER = re.compile(
+    r"^\s*(?:（[一二三四五六七八九十百零\d]+）|\([一二三四五六七八九十百零\d]+\)|"
+    r"\d+[、．.](?!\d)\s*\S)"
+)
 _APPENDIX_HEADING = re.compile(
     r'^\s*(?:附[件录錄][一二三四五六七八九十百零0-9A-Z]+|'
     r'(?:appendix|annex|attachment)\s+(?:[A-Z]|[IVXLC]+|\d+))'
@@ -339,6 +343,11 @@ def heading_label(unit: ObservationUnit) -> str:
     return " ".join(text.split()).casefold()
 
 
+def is_local_heading_numbering(unit: ObservationUnit) -> bool:
+    """Local list marks do not establish an outer outline for a new source scope."""
+    return unit.heading_level_source != "native" and bool(_LOCAL_HEADING_NUMBER.match(unit.text))
+
+
 def same_column(left: ObservationUnit, right: ObservationUnit) -> bool:
     if left.column is None or right.column is None:
         return True
@@ -449,6 +458,7 @@ __all__ = [
     "heading_label",
     "horizontal_gap",
     "is_heading",
+    "is_local_heading_numbering",
     "looks_like_footnote",
     "looks_like_footnote_marker",
     "order_units",

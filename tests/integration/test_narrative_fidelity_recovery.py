@@ -26,7 +26,7 @@ loopback_model_server = _loopback_model_server
 
 @pytest.mark.parametrize('projection,request_schema,assessor', [
     ('reading-model-input/6', 'narrative-model-request/7', 'source-summary-assessment/1.0.0'),
-    ('reading-model-input/7', 'narrative-model-request/8', 'source-summary-assessment/1.2.0'),
+    ('reading-model-input/7', 'narrative-model-request/8', 'source-summary-assessment/1.3.0'),
 ])
 def test_explicit_fidelity_actual_http_and_same_cross_run_cache(tmp_path_factory,loopback_model_server,monkeypatch,
                                                                projection,request_schema,assessor):

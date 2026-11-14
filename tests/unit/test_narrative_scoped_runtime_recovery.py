@@ -1,8 +1,8 @@
 """Real v3 completion and CLI recovery across a simulated validator upgrade.
 
-Loopback is an actual HTTP transport, never a supplier. The historical case
-deploys one exact pre-use source producer plus typed-v3 model protocol; other
-modules are current. It is not an entire old release or relabelled v4 output.
+Loopback uses actual HTTP. The historical case deploys exact producer and
+compatible operating-session bytes plus the original typed-v3 model protocol.
+The other modules are current.
 """
 from dataclasses import replace
 import json
@@ -87,7 +87,7 @@ def test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_rec
 def test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade(
     tmp_path_factory, loopback_model_server, record_testsuite_property,
 ):
-    """Real old producer component + v3 codec, then current-only CLI recovery."""
+    """Historical source producer and v3 codec, then current-only CLI recovery."""
     with isolated_batch_directory(tmp_path_factory) as root:
         state = prepare_source_catalog(root, one_source=True, include_policy=False)
         try:
@@ -182,7 +182,7 @@ raise SystemExit(main())
             assert upgraded['legacy_bootstrap_loaded'] is False
             assert observations.read_bytes()==frozen_observations
             record_testsuite_property('legacy_producer_recovery',json.dumps({
-                'scope':'one actual pre-use source component plus typed-v3 protocol; other runtime current',
+                'scope':'frozen source producer and compatible operating session plus typed-v3 codec',
                 'producer_observations':observed,
                 'historical_model_request_schema':loopback_model_server.requests[0][0]['schema_version'],
                 'historical_projection':'reading-model-input/3',

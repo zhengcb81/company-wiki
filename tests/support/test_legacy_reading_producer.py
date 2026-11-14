@@ -18,7 +18,11 @@ def test_exact_historical_component_is_physically_deployed_without_running_git(t
     assert sha256(producer.read_bytes()).hexdigest() == manifest["source_sha256"]
     assert producer.read_bytes() == gzip.decompress((historical.FIXTURE/manifest["artifact"]).read_bytes())
     assert (bootstrap/"sitecustomize.py").is_file() and not observations.exists()
-    assert list(producer.parent.iterdir()) == [producer]
+    dependency = manifest["producer_dependency"]
+    operating = producer.parent / "narrative_operating_relations.py"
+    assert sha256(operating.read_bytes()).hexdigest() == dependency["source_sha256"]
+    assert operating.read_bytes() == gzip.decompress((historical.FIXTURE/dependency["artifact"]).read_bytes())
+    assert set(producer.parent.iterdir()) == {producer, operating}
 
 
 def test_resigning_an_edited_code_fixture_cannot_claim_the_original_git_blob(tmp_path, monkeypatch):
@@ -29,7 +33,7 @@ def test_resigning_an_edited_code_fixture_cannot_claim_the_original_git_blob(tmp
     compressed = gzip.compress(data, mtime=0)
     (directory/manifest["artifact"]).write_bytes(compressed)
     manifest.update(source_sha256=sha256(data).hexdigest(), source_bytes=len(data),
-                    gzip_sha256=sha256(compressed).hexdigest())
+                    gzip_sha256=sha256(compressed).hexdigest(), gzip_bytes=len(compressed))
     (directory/"manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
     monkeypatch.setattr(historical, "FIXTURE", directory)
     with pytest.raises(ValueError, match="actual Git blob"):

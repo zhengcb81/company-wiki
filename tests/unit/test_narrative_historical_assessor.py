@@ -39,13 +39,31 @@ def _frozen_result(monkeypatch, assessor_version, *, source=None, **claim):
 
 
 @pytest.mark.parametrize("surface", ["bundle", "summary-job"])
-def test_frozen_atomic_1_1_artifact_survives_current_1_2_production(monkeypatch, surface):
+def test_frozen_atomic_1_1_artifact_survives_current_production(monkeypatch, surface):
     source, summary, bundle, result = _frozen_result(monkeypatch, "source-summary-assessment/1.1.0")
-    assert protocols.scoped_protocol_for_projection(VERSION).assessor_version == "source-summary-assessment/1.2.0"
+    assert protocols.scoped_protocol_for_projection(VERSION).assessor_version == "source-summary-assessment/1.3.0"
     if surface == "bundle":
         assert NarrativeBundle.from_dict(json.loads(json.dumps(bundle))).to_dict() == bundle
     else:
         assert parse_summary_job_result(json.loads(json.dumps(result)), selected=source) == summary
+
+
+def test_old_intra_span_condition_report_loads_without_rewriting_its_claims(monkeypatch):
+    from unit.test_narrative_qualifier_binding import decode_current, selected_source
+
+    text = "本安排包括为工厂提供产能保障，该安排仍须客户完成验收后方可投产。"
+    claim = "公司已为工厂提供产能保障。"
+    selected = selected_source((text,), current=True)
+    selected, summary, bundle, result = _frozen_result(
+        monkeypatch, "source-summary-assessment/1.2.0", source=selected, claim_text=claim,
+        modality="actual",
+    )
+
+    assert all(row["rule_code"] != "possible_condition_scope_loss"
+               for row in bundle["summary_assessment"]["diagnostics"])
+    assert decode_current(selected, claim)["status"] == "needs_review"
+    assert NarrativeBundle.from_dict(bundle).to_dict() == bundle
+    assert parse_summary_job_result(result, selected=selected) == summary
 
 
 @pytest.mark.parametrize("surface", ["bundle", "summary-job"])

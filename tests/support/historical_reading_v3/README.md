@@ -1,5 +1,5 @@
 # Actual pre-use source producer fixture
 
-Exact Git bytes from commit `5002e8c3c40ca14a29f3ed8a08f6fcab2ec14b9c`, `src/company_wiki/source_catalog/narrative_reading.py`, blob `8a06bfa7b92808db448fa8dee1eb2ba016cfc140`. The gzip is deterministic and preserves LF source bytes; the manifest binds both compressed and source SHA. Tests deploy it as an actual .py file before source reading loads; the current dependency inventory observes that physical file. No version/tag/group/hash in produced data is rewritten.
+Tests deploy exact Git bytes for the pre-support-use source producer from commit `5002e8c3c40ca14a29f3ed8a08f6fcab2ec14b9c` and its last compatible operating-session dependency from commit `a6a2a8be54e628e68569caea245a48888744d607`. The manifest binds each Git blob, source SHA and compressed SHA. Both modules load from their physical fixture files. The test observes produced schema, groups and hashes unchanged.
 
-Only this source-producer component and the existing typed-v3 codec are historical; all other modules are today's runtime. This is not a full historic release, original company content, PDF fixture, or copied SDK. Current /4 producers must still refuse the legacy codec. Normal CI needs no Git objects or network.
+This mixed-version test uses the two frozen modules and a legacy codec with today's remaining runtime. Current /4 producers still reject legacy codecs that lack support-use semantics. CI reads the vendored fixture without Git or network access.

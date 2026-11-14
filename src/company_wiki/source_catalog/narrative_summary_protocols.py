@@ -3,6 +3,9 @@ from dataclasses import dataclass
 from types import MappingProxyType
 
 
+CLAUSE_SCOPE_ASSESSMENT_VERSION = 'source-summary-assessment/1.3.0'
+
+
 @dataclass(frozen=True)
 class ScopedSummaryProtocol:
     projection: str
@@ -26,8 +29,8 @@ FIDELITY_SCOPED = ScopedSummaryProtocol('reading-model-input/6','reading-source-
     'fidelity','source_scoped/1','coverage','source-summary-assessment/1.0.0',False)
 ATOMIC_SCOPED = ScopedSummaryProtocol('reading-model-input/7','reading-source-scoped/4.3.0',
     'narrative-model-request/8','reading-scoped-task-decoder/7',40,True,
-    'atomic','source_frames/1','coverage','source-summary-assessment/1.2.0',False,
-    historical_assessor_versions=('source-summary-assessment/1.1.0',))
+    'atomic','source_frames/1','coverage',CLAUSE_SCOPE_ASSESSMENT_VERSION,False,
+    historical_assessor_versions=('source-summary-assessment/1.1.0', 'source-summary-assessment/1.2.0'))
 
 SCOPED_PROTOCOLS = (LEGACY_SCOPED, FIDELITY_SCOPED, ATOMIC_SCOPED)
 _BY_PROJECTION = MappingProxyType({item.projection: item for item in SCOPED_PROTOCOLS})
@@ -84,7 +87,7 @@ def summary_protocols_sha256(*, universal_newlines: bool = False) -> str:
 
 
 __all__ = [
-    "ASSESSED_BUNDLE", "ASSESSED_PROMPTS", "ATOMIC_SCOPED", "FIDELITY_SCOPED",
+    "ASSESSED_BUNDLE", "ASSESSED_PROMPTS", "ATOMIC_SCOPED", "CLAUSE_SCOPE_ASSESSMENT_VERSION", "FIDELITY_SCOPED",
     "LEGACY_BUNDLE", "LEGACY_SCOPED", "SCOPED_PROJECTIONS", "SCOPED_PROTOCOLS",
     "ScopedSummaryProtocol", "SummaryBundleFormat", "scoped_protocol_for_projection",
     "scoped_protocol_for_prompt", "scoped_protocol_for_request",

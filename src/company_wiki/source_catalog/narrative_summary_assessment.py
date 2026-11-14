@@ -17,13 +17,15 @@ from company_wiki.source_contract import EvidenceSpan
 from company_wiki.wire_json import canonical_json, canonical_json_hash, encoding_sha256, plain_json
 from .narrative_contracts import NarrativeSelectResult
 from .narrative_summary_material import compile_scoped_material_view, scoped_material_sha256
+from .narrative_summary_protocols import CLAUSE_SCOPE_ASSESSMENT_VERSION
 
 ASSESSMENT_SCHEMA = 'summary-assessment/1'
 ASSESSMENT_VERSION = 'source-summary-assessment/1.0.0'
 ATOMIC_ASSESSMENT_VERSION = 'source-summary-assessment/1.1.0'
 QUALIFIED_ASSESSMENT_VERSION = 'source-summary-assessment/1.2.0'
+_QUALIFIER_ASSESSMENTS = frozenset({QUALIFIED_ASSESSMENT_VERSION, CLAUSE_SCOPE_ASSESSMENT_VERSION})
 ASSESSMENT_VERSIONS = frozenset({
-    ASSESSMENT_VERSION, ATOMIC_ASSESSMENT_VERSION, QUALIFIED_ASSESSMENT_VERSION,
+    ASSESSMENT_VERSION, ATOMIC_ASSESSMENT_VERSION, *_QUALIFIER_ASSESSMENTS,
 })
 MAX_DIAGNOSTICS = 64
 ASSESSMENT_MAX_BYTES = 64 * 1024
@@ -61,7 +63,7 @@ def assessment_identity(version: str | None = None) -> dict[str, Any]:
         'encoding': encoding_sha256(), 'claim_roles': summary_claims_sha256(),
         'assessment': code_sha256(__file__),
     }
-    if version in {ATOMIC_ASSESSMENT_VERSION, QUALIFIED_ASSESSMENT_VERSION}:
+    if version == ATOMIC_ASSESSMENT_VERSION or version in _QUALIFIER_ASSESSMENTS:
         dependencies['assertion_frames'] = assertion_frames_sha256()
     return {'version':version,'implementation_sha256':canonical_json_hash(dependencies),
             'dependencies':dependencies}
@@ -162,16 +164,66 @@ def qualified_prose_diagnostics(source: str, claim: str, modality: str) -> list[
     return [dict(rule_code=code) for code in dict.fromkeys(row['rule_code'] for row in result)]
 
 
+def _historical_condition_losses(evidence_spans, support, cited, claim_frames):
+    """Replay 1.2's span-level condition semantics for immutable assessments."""
+    from company_wiki.document_understanding.assertion_frames import source_assertion_frames
+
+    frames_by_span = {span.span_id: source_assertion_frames(span.raw_text or '')
+                      for span in evidence_spans if span.span_id in cited}
+    matching_support = {
+        sid for sid in support
+        if any(_same_proposition(frame.matching_text, part.matching_text)
+               for frame in frames_by_span[sid] for part in claim_frames)
+    }
+    if any(
+        frame.anaphoric_pending_condition and _same_proposition(frame.matching_text, part.matching_text)
+        for frames in frames_by_span.values() for frame in frames for part in claim_frames
+    ):
+        return
+    has_matching_support = False
+    for sid, frames in frames_by_span.items():
+        if has_matching_support and any(frame.anaphoric_pending_condition for frame in frames):
+            yield sid
+        has_matching_support = has_matching_support or sid in matching_support
+
+
+def _condition_losses(evidence_spans, support, cited, claim_frames):
+    """Diagnose an omitted prerequisite of the preceding proposition in cited source order."""
+    from company_wiki.document_understanding.assertion_frames import source_assertion_frames
+
+    conditions = {' '.join(frame.pending_requirement.casefold().split())
+                  for frame in claim_frames if frame.pending_requirement}
+    previous_scope = None
+    antecedent_matches = False
+    for span in evidence_spans:
+        if span.span_id not in cited:
+            previous_scope = None
+            antecedent_matches = False
+            continue
+        scope = (span.source_id, span.structured_value.get('source_role'),
+                 span.structured_value.get('speaker'), span.structured_value.get('turn_id'))
+        if scope != previous_scope:
+            antecedent_matches = False
+        previous_scope = scope
+        for frame in source_assertion_frames(span.raw_text or ''):
+            requirement = frame.pending_requirement
+            backward_reference = frame.anaphoric_pending_condition or frame.coordinated_pending_condition
+            if not backward_reference:
+                proposition = frame.requirement_proposition or frame.matching_text
+                antecedent_matches = span.span_id in support and any(
+                    _same_proposition(proposition, claim_frame.matching_text) for claim_frame in claim_frames
+                )
+            if (antecedent_matches and requirement
+                    and ' '.join(requirement.casefold().split()) not in conditions):
+                yield span.span_id
+
+
 def claim_qualifier_diagnostics(
     evidence_spans: Sequence[EvidenceSpan], support_ids: Sequence[str],
     context_ids: Sequence[str], claim: str, modality: str, *, include_existing_atomic: bool = True,
+    assessor_version: str = CLAUSE_SCOPE_ASSESSMENT_VERSION,
 ) -> list[dict[str, str]]:
-    """Bind known finite constraints only across this claim's cited source scope.
-
-    Support can establish the proposition. Cited context can qualify it. An
-    anaphoric pending condition is linked only when it follows a support span
-    with a proposition matching the claim in the source's native order.
-    """
+    """Cited support supplies the proposition, and cited context can qualify it."""
     from company_wiki.document_understanding.assertion_frames import source_assertion_frames
 
     by_id = {span.span_id: span for span in evidence_spans}
@@ -186,36 +238,12 @@ def claim_qualifier_diagnostics(
         diagnostics.extend({'source_span_id': sid, **row}
                            for row in direct)
 
-    claim_frames = source_assertion_frames(claim)
-    matching_support = {
-        sid for sid in support
-        if any(_same_proposition(frame.matching_text, part.matching_text)
-               for frame in source_assertion_frames(by_id[sid].raw_text or '')
-               for part in claim_frames)
-    }
-    preserved_conditions = {
-        frame.matching_text
-        for span in evidence_spans if span.span_id in cited
-        for frame in source_assertion_frames(span.raw_text or '')
-        if frame.anaphoric_pending_condition
-    }
-    claim_preserves_condition = any(
-        _same_proposition(condition, part.matching_text)
-        for condition in preserved_conditions for part in claim_frames
+    condition_losses = (_historical_condition_losses if assessor_version == QUALIFIED_ASSESSMENT_VERSION
+                        else _condition_losses)
+    diagnostics.extend(
+        {'source_span_id': sid, 'rule_code': 'possible_condition_scope_loss'}
+        for sid in condition_losses(evidence_spans, set(support), cited, source_assertion_frames(claim))
     )
-    source_order = [span.span_id for span in evidence_spans if span.span_id in cited]
-    position = {sid: index for index, sid in enumerate(source_order)}
-    for qualifier_id in source_order:
-        if not any(frame.anaphoric_pending_condition
-                   for frame in source_assertion_frames(by_id[qualifier_id].raw_text or '')):
-            continue
-        if not claim_preserves_condition and any(
-               position.get(support_id, len(source_order)) < position[qualifier_id]
-               for support_id in matching_support if support_id != qualifier_id):
-            diagnostics.append({
-                'source_span_id': qualifier_id,
-                'rule_code': 'possible_condition_scope_loss',
-            })
     unique: dict[tuple[str, str], dict[str, str]] = {}
     for row in diagnostics:
         unique[(row['source_span_id'], row['rule_code'])] = row
@@ -241,9 +269,7 @@ def assess_summary_material(
     """Consume the same owned source material from a selection or final bundle."""
     version = assessor_version or ASSESSMENT_VERSION
     identity = assessment_identity(version)
-    if version == QUALIFIED_ASSESSMENT_VERSION:
-        diagnostics_for_prose = qualified_prose_diagnostics
-    elif version == ATOMIC_ASSESSMENT_VERSION:
+    if version == ATOMIC_ASSESSMENT_VERSION:
         diagnostics_for_prose = atomic_prose_diagnostics
     else:
         diagnostics_for_prose = prose_diagnostics
@@ -282,10 +308,10 @@ def assess_summary_material(
             continue
         task=matches[0]
         emitted.add(task.key)
-        if version == QUALIFIED_ASSESSMENT_VERSION:
+        if version in _QUALIFIER_ASSESSMENTS:
             rows = claim_qualifier_diagnostics(
                 evidence_spans, task.support_ids, task.context_ids,
-                claim['text'], claim['modality'],
+                claim['text'], claim['modality'], assessor_version=version,
             )
             for row in rows:
                 record({'task_key': task.key, 'claim_id': claim['claim_id'], **row})
@@ -350,7 +376,7 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
     require(isinstance(validator['version'],str) and validator['version'] in ASSESSMENT_VERSIONS)
     deps=validator['dependencies']
     dep_keys = {'matching','task_plan','admission','scoped_view','encoding','claim_roles','assessment'}
-    if validator['version'] in {ATOMIC_ASSESSMENT_VERSION, QUALIFIED_ASSESSMENT_VERSION}:
+    if validator['version'] == ATOMIC_ASSESSMENT_VERSION or validator['version'] in _QUALIFIER_ASSESSMENTS:
         dep_keys.add('assertion_frames')
     require(isinstance(deps,dict) and set(deps)==dep_keys)
     require(all(sha(digest) for digest in deps.values()))
@@ -401,7 +427,7 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
            'unmatched_claim_scope','ambiguous_claim_scope'}
     if validator['version'] == ATOMIC_ASSESSMENT_VERSION:
         rules |= {'possible_current_action_as_future', 'possible_project_capacity_basis_loss'}
-    if validator['version'] == QUALIFIED_ASSESSMENT_VERSION:
+    if validator['version'] in _QUALIFIER_ASSESSMENTS:
         rules |= {'possible_current_action_as_future', 'possible_project_capacity_basis_loss',
                   'possible_condition_scope_loss'}
     for row in diagnostics:
@@ -453,4 +479,4 @@ def assessment_sha256() -> str:
     return code_sha256(__file__)
 
 
-__all__ = ['ASSESSMENT_MAX_BYTES', 'ASSESSMENT_SCHEMA', 'ASSESSMENT_VERSION', 'ASSESSMENT_VERSIONS', 'ATOMIC_ASSESSMENT_VERSION', 'MAX_DIAGNOSTICS', 'QUALIFIED_ASSESSMENT_VERSION', 'assess_summary', 'assess_summary_material', 'assessment_identity', 'assessment_sha256', 'atomic_prose_diagnostics', 'claim_qualifier_diagnostics', 'prose_diagnostics', 'qualified_prose_diagnostics', 'source_frame_modality_diagnostics', 'validate_assessment_material', 'validate_assessment_quality', 'validate_assessment_wire']
+__all__ = ['ASSESSMENT_MAX_BYTES', 'ASSESSMENT_SCHEMA', 'ASSESSMENT_VERSION', 'ASSESSMENT_VERSIONS', 'ATOMIC_ASSESSMENT_VERSION', 'CLAUSE_SCOPE_ASSESSMENT_VERSION', 'MAX_DIAGNOSTICS', 'QUALIFIED_ASSESSMENT_VERSION', 'assess_summary', 'assess_summary_material', 'assessment_identity', 'assessment_sha256', 'atomic_prose_diagnostics', 'claim_qualifier_diagnostics', 'prose_diagnostics', 'qualified_prose_diagnostics', 'source_frame_modality_diagnostics', 'validate_assessment_material', 'validate_assessment_quality', 'validate_assessment_wire']

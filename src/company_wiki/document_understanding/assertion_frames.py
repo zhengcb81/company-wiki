@@ -46,14 +46,17 @@ _EXISTING = re.compile(r'现有|已(?:经)?投产|已建成|\b(?:existing|commis
 _NEGATED_PREFIX = re.compile(r'(?:未|不|没有|尚无|(?:\bnot|\bnever)(?:\s+\w+){0,2})\s*$', re.I)
 _CONDITION = re.compile(r'(?:建成|投产|完成|获批)后|'
                         r'\b(?:following|upon|after) completion\b', re.I)
-_ANAPHORIC_REFERENCE = re.compile(
-    r'^(?:该|此|上述|本|这一|该项)(?:安排|计划|项目|事项|交易|合作|订单|申请|承诺|方案)|'
-    r'^(?:this|that|the aforementioned|such a)\s+'
-    r'(?:arrangement|plan|project|matter|transaction|cooperation|order|application|commitment|proposal)\b',
-    re.I,
+_ANAPHORIC_MARKER = (
+    r'(?:该|此|上述|本|这一|该项)(?:安排|计划|项目|事项|交易|合作|订单|申请|承诺|方案)|'
+    r'(?:this|that|the aforementioned|such a)\s+'
+    r'(?:arrangement|plan|project|matter|transaction|cooperation|order|application|commitment|proposal)\b'
+)
+_ANAPHORIC_REFERENCE = re.compile(rf'^(?:{_ANAPHORIC_MARKER})', re.I)
+_COORDINATED_REFERENCE = re.compile(
+    rf'^(?:并且|而且|同时|并|且|(?:and|also|moreover)\s+)\s*(?:{_ANAPHORIC_MARKER})', re.I,
 )
 _PENDING_REQUIREMENT = re.compile(
-    r'(?<!无)(?<!不)(?<!不再)(?:仍|尚|还)?(?:须|需|需要|必须|有待|取决于|依赖于)|'
+    r'(?<!无)(?<!不)(?<!不再)(?:仍|尚|还)?(?:须|需要|需|必须|有待|取决于|依赖于)|'
     r'\b(?:remains?\s+(?:subject to|conditional on)|is\s+subject to|'
     r'depends?\s+on|requires?|pending)\b',
     re.I,
@@ -63,6 +66,9 @@ _NEGATED_REQUIREMENT = re.compile(
     r'\b(?:does not|do not|did not|no longer|never)\s+'
     r'(?:remain\s+)?(?:require\w*|depend\w*\s+on|be\s+subject\s+to|be\s+conditional\s+on)\b',
     re.I,
+)
+_REQUIREMENT_CONSEQUENCE = re.compile(
+    r'后(?:方可|才能|才可|才会)|\b(?:before|prior to)\b', re.I,
 )
 _NON_ASSERTION = re.compile(
     r'^(?:请问|问[:：]|问题[:：]|模板[:：]|示例[:：]|例如[:：]|填写说明[:：]|'
@@ -83,6 +89,9 @@ class SourceAssertionFrame:
     # An explicit backward reference plus an unresolved requirement. This is
     # only a candidate for binding to earlier cited evidence, not a truth test.
     anaphoric_pending_condition: bool = False
+    pending_requirement: str | None = None
+    requirement_proposition: str | None = None
+    coordinated_pending_condition: bool = False
 
 
 def _existing_stage(text: str) -> bool:
@@ -155,16 +164,21 @@ def source_assertion_frames(source: str) -> tuple[SourceAssertionFrame, ...]:
             ongoing = _ONGOING.search(text)
             if ongoing and _NEGATED_PREFIX.search(text[max(0, ongoing.start() - 32):ongoing.start()]):
                 ongoing = None
+            requirement = _PENDING_REQUIREMENT.search(text) if not non_assertion else None
+            if requirement is not None and _NEGATED_REQUIREMENT.search(text):
+                requirement = None
+            requirement_text = None
+            if requirement is not None:
+                body = text[requirement.end():].strip()
+                requirement_text = _REQUIREMENT_CONSEQUENCE.split(body, maxsplit=1)[0].strip() or None
             frame = SourceAssertionFrame(
                 matching_text=text, reporting_prefix=prefix, reporting_inherited=inherited,
                 ongoing_activity=not non_assertion and ongoing is not None and not future,
                 future_marker=future, quantity_basis=basis,
-                anaphoric_pending_condition=(
-                    not non_assertion
-                    and bool(_ANAPHORIC_REFERENCE.search(text))
-                    and bool(_PENDING_REQUIREMENT.search(text))
-                    and not _NEGATED_REQUIREMENT.search(text)
-                ),
+                anaphoric_pending_condition=requirement is not None and bool(_ANAPHORIC_REFERENCE.search(text)),
+                pending_requirement=requirement_text,
+                requirement_proposition=text[:requirement.start()].strip() if requirement_text and requirement else None,
+                coordinated_pending_condition=requirement is not None and bool(_COORDINATED_REFERENCE.search(text)),
             )
             scoped_frames.append((frame, active_project))
         for frame, group in scoped_frames:

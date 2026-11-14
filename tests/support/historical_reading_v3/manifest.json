@@ -8,7 +8,17 @@
   "gzip_sha256": "1d3a1e0c48eee694a5ade8871fbde0c66f87ece1cddebe3b96e85e35b4e78b4a",
   "gzip_bytes": 22804,
   "artifact": "narrative_reading.py.gz",
-  "scope": "One exact pre-support-use source producer component plus typed-v3 model protocol; remaining runtime is current. Not an entire historical release.",
+  "scope": "Exact pre-support-use source producer plus its last compatible pre-encapsulation session and typed-v3 codec. All other runtime modules are current.",
   "contains_original_documents": false,
-  "contains_sdk": false
+  "contains_sdk": false,
+  "producer_dependency": {
+    "git_path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+    "git_blob_sha1": "7a01204d5dff7970fee4b30fc3dfa3418d1d2f9e",
+    "source_sha256": "5acb0401dd9df379148295867eb432f353807d1f757657555f5a4c4d4a428e61",
+    "source_bytes": 47494,
+    "gzip_sha256": "0014d29c5fd16c0ff7de4f35d616979e37404fc7fd38e6faa5c09ca297ce7255",
+    "gzip_bytes": 11851,
+    "artifact": "narrative_operating_relations.py.gz",
+    "commit": "a6a2a8be54e628e68569caea245a48888744d607"
+  }
 }
