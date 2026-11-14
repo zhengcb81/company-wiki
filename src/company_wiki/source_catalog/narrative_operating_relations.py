@@ -25,7 +25,7 @@ from .narrative_revenue_guidance import (
     revenue_guidance_premise,
 )
 from .narrative_business_policy import (
-    READING_BUSINESS_SCAN_PASSES, prepare_reading_business_assessment, project_reading_business_fact,
+    prepare_reading_business_assessment, project_reading_business_fact,
     source_result_subject,
     SOURCE_COMPARISON_MODIFIER_PATTERN,
     source_comparison_bases,
@@ -377,12 +377,14 @@ class SourceOperatingSession:
         # A reference inside one original statement may already have its own
         # named result. Do not force it to find a second statement outside.
         internal = text[:marker.start()]
-        self.work_budget.charge((3 + READING_BUSINESS_SCAN_PASSES) * len(internal) + 1)
+        self.work_budget.charge(len(internal) + 1)
         internal_changes = tuple(_RESULT_CHANGE.finditer(internal))
         if len(internal_changes) == 1:
             change = internal_changes[0]
+            self.work_budget.charge(2 * len(internal))
             observation = observe_metric_predicate(internal, change.start(), change.end())
-            if (source_result_subject(internal, change.start(), change.end()) and observation.observed
+            if (observation.observed
+                    and source_result_subject(internal, change.start(), change.end(), work_budget=self.work_budget)
                     and (marker.group('neutral') or change.lastgroup == _result_direction(marker.group('cn') or marker.group('en')))):
                 return {'schema_version':'du11-reference-closure/1','unit_id':owner,
                     'status':'not_applicable','reference_refs':[], 'declaration_refs':[],
@@ -404,21 +406,23 @@ class SourceOperatingSession:
             target = self.units[target_id]
             if (previous is not None and previous.source_id == target.source_id
                     and previous.source_role == target.source_role):
-                self.work_budget.charge((3 + READING_BUSINESS_SCAN_PASSES) * len(previous.raw_text) + 1)
+                self.work_budget.charge(len(previous.raw_text) + 1)
                 changes = tuple(_RESULT_CHANGE.finditer(previous.raw_text))
                 if len(changes) > 1:
                     result["status"] = "ambiguous"
                 elif len(changes) == 1:
                     change = changes[0]
+                    self.work_budget.charge(4 * len(previous.raw_text) + len(marker.group("marker")))
                     observation = observe_metric_predicate(previous.raw_text, change.start(), change.end())
                     previous_basis = source_comparison_bases(previous.raw_text, change.start(), change.end())
                     reference_basis = source_comparison_bases(marker.group("marker"))
                     compatible_basis = (len(previous_basis) <= 1 and len(reference_basis) <= 1
                         and (not previous_basis or not reference_basis or previous_basis == reference_basis))
-                    if (source_result_subject(previous.raw_text, change.start(), change.end())
+                    if (observation.observed and compatible_basis
                             and _RESULT_REFERENCE.search(previous.raw_text) is None
                             and (marker.group('neutral') or change.lastgroup == _result_direction(marker.group("cn") or marker.group("en")))
-                            and observation.observed and compatible_basis):
+                            and source_result_subject(previous.raw_text, change.start(), change.end(),
+                                                      work_budget=self.work_budget)):
                         declaration = {"unit_id": previous_id, "char_start": 0,
                                        "char_end": len(previous.raw_text)}
                         result.update(status="unique", declaration_refs=[declaration],
@@ -783,13 +787,12 @@ class SourceOperatingSession:
         text = self.source_text(uid) if owner in self.analysis or owner not in self.groups else ""
         def ref_text(ref):
             return self.units[ref["unit_id"]].raw_text[ref["char_start"]:ref["char_end"]]
-        # The compatibility recognizer also scans text. Reserve its work before
-        # running it; exhaustion must not restart through a text-only fallback.
+        # Each source owner accounts for its own observation on the same
+        # budget. Exhaustion must not restart through a text-only fallback.
         financial: bool | None
         try:
             if result["status"] == "partial" and self.work_budget.exhausted:
                 raise WorkBudgetExceeded("operating relation work exhausted")
-            self.work_budget.charge(READING_BUSINESS_SCAN_PASSES * len(text))
             from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
             self.assertions[owner] = replace(prepare_source_assertions(text, work_budget=self.work_budget),
                 bound_operating=(self.engine.complete_assertion(owner,self.context_for(owner))

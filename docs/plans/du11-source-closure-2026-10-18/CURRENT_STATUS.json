@@ -94,7 +94,7 @@
   "project_status": "MODULE_BOUNDARIES_CLOSED; R4_T4_IN_PROGRESS",
   "as_of_date": "2026-11-11",
   "observed_at_utc": "2026-11-11T22:17:29Z",
-  "next_action": "Reconcile R4 source assessment work charges under the existing 16M account, then T4/SEM and real-summary/cache/RF acceptance.",
+  "next_action": "Reduce the confirmed post-selection full-source classification cost under the shared 16M account, preserving unknowns and qualifiers, then T4/SEM and real summary/cache/RF acceptance.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1236,5 +1236,14 @@
     "independent_review": "PASS",
     "model_posts": 0,
     "downloads": 0
+  },
+  "r4_work_accounting_20261114": {
+    "evidence": "review/r4-work-accounting-20261114.md",
+    "work_used": 15999426,
+    "work_limit": 16000000,
+    "required_represented": "12/12",
+    "exhausted": true,
+    "unchanged_selection_sha256": "3520a72cd9f817a5c068bf86699d90e2bf55008f972b5638a80124d1ff5d8fa9",
+    "status": "OWNER_ACCOUNTING_VERIFIED_FULL_SOURCE_PROCESSING_OPEN"
   }
 }

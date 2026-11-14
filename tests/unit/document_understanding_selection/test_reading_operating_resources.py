@@ -6,11 +6,33 @@ import pytest
 
 from company_wiki.source_catalog import narrative_business_policy as policy
 from company_wiki.source_catalog import narrative_reading as reading
+from company_wiki.source_catalog.narrative_operating_resources import operating_resource_relations
+from company_wiki.source_catalog.narrative_source_purpose import source_purpose
 from unit.document_understanding_selection.test_reading_native_carriers import source_fixture, selected
 
 
 ACTUAL = {"operating_resource_stock", "operating_resource_allocation"}
 NEW = ACTUAL | {"operating_plan"}
+
+
+@pytest.mark.parametrize("text, expected", (
+    ("Membership terms remained stable. Net income was unchanged.", ()),
+    ("营业收入同比增长。该表列示基本每股收益。", ()),
+    ("We plan to maintain quality, and invest in research and development.", ("operating_plan",)),
+    ("We plan to maintain quality, but invest in research and development.", ()),
+))
+def test_resource_purpose_is_scoped_to_actual_candidate_or_plan_frame(text, expected):
+    assessed = []
+
+    def purpose(value):
+        assessed.append(value)
+        return source_purpose(value)
+
+    assert operating_resource_relations(text, purpose_for=purpose) == expected
+    assert all("net income" not in value.lower() and "membership terms" not in value.lower()
+               and "基本每股收益" not in value and "营业收入" not in value for value in assessed)
+    if "we plan" in text.lower():
+        assert any("we plan" in value.lower() for value in assessed)
 
 
 def project(text):

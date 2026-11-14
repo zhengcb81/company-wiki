@@ -11,8 +11,9 @@ import re
 
 from company_wiki.document_model.text_matching import matching_reading_text
 from company_wiki.document_understanding.operating_states.assertion_roles import (
-    SourceAssertionRoles, abstract_source_argument, SOURCE_DESCRIPTION_SCAN_PASSES,
+    SourceAssertionRoles, abstract_source_argument,
 )
+from company_wiki.resource_budget import WorkBudget
 
 from .n6_candidate_operating_facts import OperatingFact
 from .narrative_source_purpose import (
@@ -20,7 +21,6 @@ from .narrative_source_purpose import (
     revenue_recognition_mechanism,
     descriptive_operating_relation,
     source_purpose,
-    SOURCE_PURPOSE_EXTENSION_SCAN_PASSES,
 )
 from .narrative_revenue_guidance import revenue_guidance
 from .narrative_recognition_scope import (
@@ -30,7 +30,6 @@ from .narrative_recognition_scope import (
 from .narrative_predicate_state import (
     PreparedPredicateContext, observe_metric_predicate, predicate_scope, prepare_predicate_context,
 )
-from .narrative_operating_resources import RESOURCE_READING_SCAN_PASSES
 from .narrative_business_disclosures import (
     READING_DISCLOSURE_SCAN_PASSES,
     UNRESOLVED_READING_REASONS,
@@ -39,7 +38,7 @@ from .narrative_business_disclosures import (
     reading_material_value as reading_material_value,
 )
 from .narrative_source_passage import (
-    SOURCE_PASSAGE_SCAN_PASSES, SourcePassageCapability, prepare_source_passage,
+    SourcePassageCapability, prepare_source_passage,
     prepare_source_statement_scope, statement_assertion_key,
 )
 from .narrative_causal_links import CAUSAL_LINK as _DRIVER_LINK
@@ -67,13 +66,15 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/29"
-READING_BUSINESS_SCAN_PASSES = (
-    16 + SOURCE_PURPOSE_EXTENSION_SCAN_PASSES + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
-    + RESOURCE_READING_SCAN_PASSES
-    + SOURCE_DESCRIPTION_SCAN_PASSES
-    + SOURCE_PASSAGE_SCAN_PASSES
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/30"
+# Description, disclosure and recognition scans. Other owners bill their
+# actual scope preparation, matching and fallback on the same account.
+_BUSINESS_ASSESSMENT_SCAN_PASSES = (
+    16 + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
 )
+# The result-reference path invokes metric/predicate grammar and basis checks
+# only. It never runs the full resource, purpose or passage assessment.
+_RESULT_SUBJECT_SCAN_PASSES = 16 + READING_DISCLOSURE_SCAN_PASSES
 _SOURCE_DYNAMIC_REASONS = frozenset({"operating_activity", "specific_business_event",
     "applied_operating_milestone", "customer_adoption_milestone"})
 _FINANCIAL_BUSINESS_RELATIONS = frozenset({
@@ -670,7 +671,7 @@ def _business_revenue_measure(clause: str, *,
                    part, metric_observations=metric_observations))
 
 
-def source_result_subject(text: str, start: int, end: int) -> bool:
+def source_result_subject(text: str, start: int, end: int, *, work_budget: WorkBudget | None = None) -> bool:
     """A result's subject must have an existing source-owned metric binding.
 
     A nonempty prefix can be a time frame, existential construction or pronoun.
@@ -679,6 +680,8 @@ def source_result_subject(text: str, start: int, end: int) -> bool:
     This observes subject identity only; it does not supply a missing growth
     comparison basis, period, value, or completed operating state.
     """
+    if work_budget is not None:
+        work_budget.charge(_RESULT_SUBJECT_SCAN_PASSES * len(text))
     prepared = prepare_predicate_context(text)
     scope = prepared.scope(start, end)
     for kind, left, right in _source_metric_relations(text, prepared=prepared):
@@ -1020,12 +1023,15 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
                          bool(_FINANCIAL_BUSINESS_RELATIONS.intersection(relations)))
 
 
-def detect_reading_business_fact(text: str, *, include_source_descriptions: bool = True) -> OperatingFact:
+def detect_reading_business_fact(text: str, *, include_source_descriptions: bool = True,
+                                 work_budget: WorkBudget | None = None) -> OperatingFact:
     """Text compatibility view of the shared preparation, not production state."""
     if include_source_descriptions:
-        return prepare_reading_business_assessment(text, {"relations": []}).text_fact
+        return prepare_reading_business_assessment(text, {"relations": []}, grammar_work_budget=work_budget).text_fact
     from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
-    roles = prepare_source_assertions(text)
+    if work_budget is not None:
+        work_budget.charge(_BUSINESS_ASSESSMENT_SCAN_PASSES * len(text))
+    roles = prepare_source_assertions(text, work_budget=work_budget)
     causal_observations: dict[str, bool] = {}
     metric_observations: _MetricObservations = {}
     relation_observations: dict[str, _ReadingRelationObservation] = {}
@@ -1034,7 +1040,7 @@ def detect_reading_business_fact(text: str, *, include_source_descriptions: bool
                          metric_observations=metric_observations,
                          relation_observations=relation_observations,
                          include_source_descriptions=include_source_descriptions),
-                         source_purpose(text, prepared=roles))
+                         source_purpose(text, prepared=roles, work_budget=work_budget))
 
 
 def _purpose_fact(fact: OperatingFact, purpose: str) -> OperatingFact:
@@ -1115,8 +1121,11 @@ class ReadingBusinessAssessment:
 
 def prepare_reading_business_assessment(text: str, source_relations: dict, *, ref_text=None,
         source_roles: SourceAssertionRoles | None = None,
-        relation_bindings: tuple[bool, ...] = (), grammar_work_budget=None) -> ReadingBusinessAssessment:
+        relation_bindings: tuple[bool, ...] = (),
+        grammar_work_budget: WorkBudget | None = None) -> ReadingBusinessAssessment:
     """One charged exact-view assessment shared by every reading consumer."""
+    if grammar_work_budget is not None:
+        grammar_work_budget.charge(_BUSINESS_ASSESSMENT_SCAN_PASSES * len(text))
     legacy_facts: dict[str, OperatingFact] = {}
     operating_observed: list[bool] = []
     def recognize(value):
@@ -1164,7 +1173,7 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
                                                             metric_observations=metric_observations,
                                                             relation_observations=relation_observations,
                                                             payload_observations=observed),
-                                source_purpose(text, prepared=fact_roles))
+                                source_purpose(text, prepared=fact_roles, work_budget=grammar_work_budget))
     background = any(clause.operating and clause.independent_payload is False and not clause.rule_purpose
                      for clause in statement_scope.roles.clauses)
     if (not background and not text.strip() and statement_scope.roles.clauses
@@ -1192,8 +1201,11 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
             resource_purposes[key] = source_purpose(value, prepared=prepared, work_budget=grammar_work_budget)
         return resource_purposes[key]
 
-    resource_reasons = operating_resource_relations(_reading_text(text), purpose_for=resource_purpose)
-    recognition_scope = named_recognition_scope(_reading_text(text))
+    normalized = _reading_text(text)
+    resource_reasons = operating_resource_relations(
+        normalized, purpose_for=resource_purpose, work_budget=grammar_work_budget,
+    )
+    recognition_scope = named_recognition_scope(normalized)
     fact_roles = replace(fact_roles, bound_payload=bool(
         fact_roles.bound_payload or any(relation_bindings) or any(observed)
         or any(operating_observed) or resource_reasons or recognition_scope

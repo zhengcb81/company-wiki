@@ -4,7 +4,7 @@ from copy import deepcopy
 import pytest
 
 from company_wiki.source_catalog.narrative_business_policy import project_reading_business_fact
-from company_wiki.source_catalog.narrative_reading import _admitted
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
 from company_wiki.source_catalog.narrative_support_use import source_narrative_relevance, source_support_use
 from unit.du11_production.test_source_information_binding import session_for, unit_id
 
@@ -36,7 +36,7 @@ def test_subject_led_unknown_business_is_readable_without_upgrading_fact(text):
     roles = session.source_assertions(uid)
     use = source_support_use(text, fact=fact, financial_only=session.financial_only(uid),
                              source_roles=roles, passage=passage)
-    assert _admitted(session.units[uid], {'priority': 1}, 'business_narrative',
+    assert is_admitted(session.units[uid], {'priority': 1}, 'business_narrative',
                      fact=fact, support_use=use, offer_relevant=source_narrative_relevance(
                          fact=fact, source_roles=roles, passage=passage))[0]
     assert fact == frozen
@@ -139,12 +139,13 @@ def test_the_same_vocabulary_with_a_matrix_predicate_is_readable(text):
     'Our vessels that are transporting gas.',
     '公司拥有的沿海码头。',
 ))
-def test_causal_hint_without_an_independent_proof_uses_charged_grammar(text):
+def test_causal_hint_without_an_independent_proof_uses_charged_grammar(text, monkeypatch):
     from company_wiki.document_understanding.operating_states.assertion_roles import (
         AssertionRole, SourceAssertionRoles,
     )
     from company_wiki.document_understanding.statement_grammar import STATEMENT_GRAMMAR_WORK_PER_CHAR
     from company_wiki.resource_budget import WorkBudget
+    from company_wiki.source_catalog import narrative_source_passage as owner
     from company_wiki.source_catalog.narrative_source_passage import (
         SourceStatementScope, prepare_source_passage, statement_assertion_key,
     )
@@ -155,12 +156,22 @@ def test_causal_hint_without_an_independent_proof_uses_charged_grammar(text):
     scope = SourceStatementScope(text, roles,
         business_causal_keys=frozenset((statement_assertion_key(text),)))
     budget = WorkBudget(100_000)
+    grammar_charges = []
+    observed = owner.observe_statement
+
+    def counted(value, *, work_budget, **kwargs):
+        before = work_budget.used
+        result = observed(value, work_budget=work_budget, **kwargs)
+        grammar_charges.append(work_budget.used - before)
+        return result
+
+    monkeypatch.setattr(owner, 'observe_statement', counted)
     passage = prepare_source_passage(text, roles, purpose='unknown', financial_only=True,
         accounting_text=lambda _text: True, non_operating_purposes=frozenset(),
         existing_use=('context_only', 'financial_only'), existing_relevant=False,
         statement_scope=scope, grammar_work_budget=budget)
     assert not passage.relevant and passage.use != 'support'
-    assert budget.used == STATEMENT_GRAMMAR_WORK_PER_CHAR * len(text) + 1
+    assert grammar_charges == [STATEMENT_GRAMMAR_WORK_PER_CHAR * len(text) + 1]
 
 
 @pytest.mark.parametrize('text', (
@@ -239,7 +250,7 @@ def test_fixed_pos_lexical_ambiguity_keeps_the_original_without_a_fact_upgrade(t
     assert fact == project_reading_business_fact(text, {'relations': []}, source_roles=roles)
     use = source_support_use(text, fact=fact, financial_only=session.financial_only(uid),
                              source_roles=roles, passage=passage)
-    assert _admitted(session.units[uid], {'priority': 1}, 'business_narrative', fact=fact,
+    assert is_admitted(session.units[uid], {'priority': 1}, 'business_narrative', fact=fact,
         support_use=use, offer_relevant=source_narrative_relevance(
             fact=fact, source_roles=roles, passage=passage))[0]
     assert session.source_text(uid) == text

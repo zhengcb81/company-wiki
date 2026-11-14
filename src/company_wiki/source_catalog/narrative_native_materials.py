@@ -167,13 +167,13 @@ def prepare_native_materials(parsed: DocumentStructure, pipeline: Mapping[str, A
         ids = section.get("heading_unit_ids", ())
         work_budget.charge(1 + len(ids))
         if "native_numbered_list" in section.get("basis", ()):
-            from .narrative_business_policy import detect_reading_business_fact, READING_BUSINESS_SCAN_PASSES
+            from .narrative_business_policy import detect_reading_business_fact
             # Structural numbering alone does not supply a subject. Observe
             # each native head once, never once per descendant or candidate.
             for uid in ids:
                 if uid in units:
-                    work_budget.charge(1 + READING_BUSINESS_SCAN_PASSES * len(units[uid].raw_text))
-                    if detect_reading_business_fact(units[uid].raw_text).eligible:
+                    work_budget.charge()
+                    if detect_reading_business_fact(units[uid].raw_text, work_budget=work_budget).eligible:
                         native_heads.add(uid)
         else:
             for uid in ids:

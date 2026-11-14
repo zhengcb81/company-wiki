@@ -198,7 +198,6 @@ def test_real_preparation_entries_share_the_same_scope_work_account(monkeypatch)
 
 def test_scope_budget_failure_never_caches_partial_assertions_as_complete():
     from company_wiki.document_understanding.operating_states import assertion_roles as owner
-    from company_wiki.source_catalog.narrative_operating_relations import READING_BUSINESS_SCAN_PASSES
     from unit.du11_production.test_source_information_binding import session_for, unit_id
 
     text = 'Our software platform covers hospital workflows.'
@@ -206,7 +205,8 @@ def test_scope_budget_failure_never_caches_partial_assertions_as_complete():
     uid = unit_id(0)
     session.relations(uid)
     cost = owner.SOURCE_SCOPE_ARGUMENT_WORK_PER_CHAR * len('hospital workflows.') + 1
-    budget.max_work_units = budget.used + READING_BUSINESS_SCAN_PASSES * len(session.source_text(uid)) + cost - 1
+    base = owner.SOURCE_DESCRIPTION_SCAN_PASSES * len(session.source_text(uid))
+    budget.max_work_units = budget.used + base + cost - 1
     fact = session.fact(uid)
     assert fact.purpose == 'unassessed' and not session.complete
     assert session.source_assertions(uid) is None and session.source_passage(uid) is None

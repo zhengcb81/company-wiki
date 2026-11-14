@@ -4,9 +4,30 @@ from types import SimpleNamespace
 import pytest
 
 from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
+from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 from company_wiki.source_catalog.narrative_business_policy import prepare_reading_business_assessment
 from company_wiki.source_catalog.narrative_source_passage import prepare_source_statement_scope
-from company_wiki.source_catalog.narrative_reading import _admitted
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
+
+
+def test_assertion_owner_enforces_its_base_scan_budget_before_normalizing(monkeypatch):
+    from company_wiki.document_understanding.operating_states import assertion_roles
+
+    def unexpected(_text):
+        pytest.fail("source role scanning ran on an empty budget")
+
+    monkeypatch.setattr(assertion_roles, "matching_reading_text", unexpected)
+    with pytest.raises(WorkBudgetExceeded):
+        prepare_source_assertions("Our team provides logistics services.", work_budget=WorkBudget(0))
+
+
+def test_declared_accounting_scope_does_not_reserve_a_passage_fallback():
+    text = "现金流量按照会计政策列报。"
+    bound = prepare_reading_business_assessment(text, {"relations": []})
+    assert bound.passage.use == "context_only"
+    work = WorkBudget(85 * len(text))
+    assert prepare_reading_business_assessment(text, {"relations": []}, grammar_work_budget=work) == bound
+    assert 0 < work.used < work.max_work_units
 
 
 @pytest.mark.parametrize('text, payload, use', (
@@ -62,7 +83,7 @@ def test_existing_coverage_proof_is_prepared_before_generic_quote_fallback(monke
 ))
 def test_each_original_marker_counterexample_is_independently_admitted(text):
     unit = SimpleNamespace(raw_text=text, source_role='company_filing', unit_kind='html_paragraph')
-    assert _admitted(unit, {'section_role': 'business'}, 'narrative')[0]
+    assert is_admitted(unit, {'section_role': 'business'}, 'narrative')[0]
 
 
 @pytest.mark.parametrize('text', (
@@ -93,14 +114,13 @@ def test_bound_relation_owner_is_observed_once_for_true_and_false_results(monkey
 
 def test_no_typed_pre_scan_runs_before_shared_phase_budget_reservation(monkeypatch):
     from company_wiki.source_catalog import narrative_business_policy as owner
-    from company_wiki.source_catalog.narrative_operating_relations import READING_BUSINESS_SCAN_PASSES
     from unit.du11_production.test_source_information_binding import session_for, unit_id
 
     text = 'Our sales services cover 17 regional markets.'
     session, budget = session_for([text])
     uid = unit_id(0)
     session.relations(uid)
-    budget.max_work_units = budget.used + READING_BUSINESS_SCAN_PASSES * len(session.source_text(uid)) - 1
+    budget.max_work_units = budget.used
 
     def unexpected(*args, **kwargs):
         raise AssertionError('phase must reserve work before typed relation preparation')

@@ -7,7 +7,7 @@ from company_wiki.document_understanding.layout_hints.contract import WorkBudget
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
 from company_wiki.source_catalog.narrative_evidence import _make_unit
 from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
-from company_wiki.source_catalog.narrative_reading import _admitted
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
 
 
 def assessment(text, *, role="company_filing", section="business"):
@@ -17,7 +17,7 @@ def assessment(text, *, role="company_filing", section="business"):
         unit_kind="pdf_text_block", source_role=role, language="mixed", metadata={})
     session = SourceOperatingSession({unit.unit_id: unit}, work_budget=WorkBudget(500000))
     fact = session.fact(unit.unit_id)
-    admitted, _ = _admitted(unit, {"section_role": section, "family": "annual"},
+    admitted, _ = is_admitted(unit, {"section_role": section, "family": "annual"},
         "paragraph_event", fact=fact, financial_only=session.financial_only(unit.unit_id))
     return admitted, fact, session
 
@@ -79,7 +79,7 @@ def test_exhausted_purpose_budget_does_not_restart_an_unbounded_text_fallback(mo
     fact = session.fact(unit.unit_id)
     monkeypatch.setattr(reading, "detect_reading_business_fact",
                         lambda *args: pytest.fail("unbudgeted text fallback"))
-    admitted, _ = reading._admitted(unit, {"section_role": "business"}, "paragraph_event",
+    admitted, _ = is_admitted(unit, {"section_role": "business"}, "paragraph_event",
         fact=fact, financial_only=session.financial_only(unit.unit_id))
     assert not admitted
     assert not session.complete

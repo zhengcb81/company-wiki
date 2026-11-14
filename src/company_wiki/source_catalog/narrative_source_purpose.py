@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING
 
 from company_wiki.document_model.text_matching import matching_reading_text
 from company_wiki.document_understanding.operating_states.assertion_roles import (
-    SourceAssertionRoles, prepare_source_assertions, SOURCE_DESCRIPTION_SCAN_PASSES,
+    SourceAssertionRoles, prepare_source_assertions,
     descriptive_operating_relation as descriptive_operating_relation,
     source_reporting_purpose,
 )
@@ -238,6 +238,8 @@ def source_purpose(text: str, *, prepared: SourceAssertionRoles | None = None,
     useful. Generic model, product, improve and test words cannot override an
     accounting/audit/treasury purpose by themselves.
     """
+    if work_budget is not None:
+        work_budget.charge(len(text))
     value = matching_reading_text(text)
     if _LABELLED_NO_EVENT.fullmatch(value):
         return "template_no_event"
@@ -245,11 +247,15 @@ def source_purpose(text: str, *, prepared: SourceAssertionRoles | None = None,
     # verb. Conversely a genuine independent business sentence is retained
     # inside an acquisition/lease note rather than blacklisting that chapter.
     if prepared is None:
-        if work_budget is not None:
-            work_budget.charge(SOURCE_DESCRIPTION_SCAN_PASSES * len(value))
-        prepared = prepare_source_assertions(value, work_budget=work_budget)
-    purposes = tuple(clause.rule_purpose or _clause_purpose(clause.text,
-        operating_proof=clause.operating) for clause in prepared.clauses)
+        prepared = prepare_source_assertions(text, work_budget=work_budget)
+    purposes = []
+    for clause in prepared.clauses:
+        purpose = clause.rule_purpose
+        if not purpose:
+            if work_budget is not None:
+                work_budget.charge((SOURCE_PURPOSE_EXTENSION_SCAN_PASSES - 1) * len(clause.text))
+            purpose = _clause_purpose(clause.text, operating_proof=clause.operating)
+        purposes.append(purpose)
     for purpose in ("operating_contract_stock", "operating", "operating_metric_basis",
                     "operating_guidance", "operating_structure_basis",
                     "operating_investment_disclosure"):

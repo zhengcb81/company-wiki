@@ -8,6 +8,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
 from company_wiki.source_catalog import narrative_budget as budget
 from company_wiki.source_catalog import narrative_reading as reading
 from company_wiki.source_catalog.narrative_document import DocumentStructure
@@ -182,7 +183,7 @@ def test_legacy_and_semantic_do_not_consume_reading_value():
     "一", "二〇二六", "壹佰", "一、", "IV", "XII.", "Ⅳ", "(a)", "（b）"])
 def test_scope_cannot_turn_punctuation_or_page_count_into_an_anchor(text):
     unit = SimpleNamespace(raw_text=text, source_role="company_filing", unit_kind="html_paragraph")
-    assert not reading._admitted(unit, {"section_role": "business"}, "narrative")[0]
+    assert not is_admitted(unit, {"section_role": "business"}, "narrative")[0]
 
 
 def source_candidates(texts, *, headings=(), kinds=None, table=False):
@@ -344,7 +345,7 @@ def test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes():
     for text in ("IV therapy services are provided to hospitals.", "Our 2026 product portfolio includes recycling systems.",
                  "一体化生产服务覆盖多个下游客户工序。"):
         unit = SimpleNamespace(raw_text=text, source_role="company_filing", unit_kind="html_paragraph")
-        assert reading._admitted(unit, {"section_role": "business"}, "narrative")[0]
+        assert is_admitted(unit, {"section_role": "business"}, "narrative")[0]
 
 
 @pytest.mark.parametrize('text', ['Our 2026 product portfolio', '一体化生产服务'])
@@ -355,5 +356,5 @@ def test_noun_only_product_labels_are_readable_context_not_independent_summary_a
     fact = detect_reading_business_fact(unit.raw_text)
     use, reason = source_support_use(unit.raw_text, fact=fact, financial_only=reading_financial_only(unit.raw_text,fact))
     assert (use, reason) == ('context_only','no_independent_business_support')
-    assert not reading._admitted(unit, {'section_role':'business'}, 'narrative')[0]
+    assert not is_admitted(unit, {'section_role':'business'}, 'narrative')[0]
     assert unit.raw_text == text

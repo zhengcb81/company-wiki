@@ -9,7 +9,7 @@ from company_wiki.source_catalog.narrative_source_purpose import source_purpose,
 from company_wiki.source_catalog.narrative_business_policy import detect_reading_business_fact
 from company_wiki.source_catalog.narrative_evidence import _make_unit, select_narrative_evidence
 from company_wiki.source_catalog.narrative_document import DocumentStructure
-from company_wiki.source_catalog.narrative_reading import _admitted
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
 
 
@@ -57,19 +57,19 @@ def test_accounting_definitions_are_not_business_facts_even_in_business_profile(
     assert source_purpose(text) == "accounting_policy"
     fact = detect_reading_business_fact(text)
     assert not fact.eligible
-    assert not _admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
+    assert not is_admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
 
 
 @pytest.mark.parametrize("text", NO_EVENTS)
 def test_lettered_form_no_event_is_not_a_disclosed_operating_percentage(text):
     assert source_purpose(text) == "template_no_event"
-    assert not _admitted(unit(text), {"section_role": "business"}, "background")[0]
+    assert not is_admitted(unit(text), {"section_role": "business"}, "background")[0]
 
 
 @pytest.mark.parametrize("text", NAVIGATION)
 def test_pure_forward_pointer_is_not_a_business_status(text):
     assert source_purpose(text) == "navigation"
-    assert not _admitted(unit(text), {"section_role": "business"}, "background")[0]
+    assert not is_admitted(unit(text), {"section_role": "business"}, "background")[0]
 
 
 @pytest.mark.parametrize("text", [
@@ -114,7 +114,7 @@ def test_revenue_recognition_and_customer_delivery_terms_are_business_mechanisms
     assert source_purpose(text) not in NON_OPERATING_PURPOSES
     assert fact.eligible
     assert "business_revenue_recognition" in fact.reasons
-    assert _admitted(unit(text), {"section_role": "unknown"}, "background", fact=fact)[0]
+    assert is_admitted(unit(text), {"section_role": "unknown"}, "background", fact=fact)[0]
 
 
 @pytest.mark.parametrize("text", (
@@ -158,7 +158,7 @@ def test_independently_found_purpose_boundaries(case):
     purpose = source_purpose(case["text"])
     assert (purpose in NON_OPERATING_PURPOSES) is case["expected_nonoperating"]
     if case["expected_nonoperating"]:
-        assert not _admitted(unit(case["text"]), {"section_role": "business"}, "background")[0]
+        assert not is_admitted(unit(case["text"]), {"section_role": "business"}, "background")[0]
 
 
 

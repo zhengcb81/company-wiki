@@ -346,9 +346,11 @@ def test_source_fact_and_financial_status_share_one_owner_assessment(monkeypatch
 
 
 def test_production_admission_and_dropped_do_not_restart_financial_detector(monkeypatch):
+    from company_wiki.source_catalog import narrative_reading_admission as admission
+
     parsed, _ = native([("公司已量产ZX-9产品。",), ("Total revenue increased 10%.",)])
     def forbidden(*_args, **_kwargs):
         pytest.fail("production restarted a text-only finance detector")
-    monkeypatch.setattr(reading, "_financial_only", forbidden)
+    monkeypatch.setattr(admission, "_financial_only", forbidden)
     result = reading.select_reading_evidence(parsed, title="2025 annual report", work_budget=WorkBudget(2000000))
     assert any("已量产" in span.raw_text for span in result.evidence_spans)

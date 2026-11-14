@@ -5,6 +5,7 @@ from dataclasses import replace
 
 import pytest
 
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
 from company_wiki.source_catalog import narrative_reading as reading
 from unit.document_understanding_selection.test_reading_native_carriers import source_fixture, selected
 
@@ -712,7 +713,7 @@ def test_direct_admission_projects_use_and_relevance_from_one_preparation(monkey
         return actual(value, work_budget=work_budget)
     monkeypatch.setattr(assertion_roles,'prepare_source_assertions',observed)
     monkeypatch.setattr(narrative_support_use,'prepare_source_assertions',observed)
-    assert reading._admitted(parsed.units[0],{},'background',fact=OperatingFact(),financial_only=False)[0]
+    assert is_admitted(parsed.units[0],{},'background',fact=OperatingFact(),financial_only=False)[0]
     assert calls==[text]
     assert len(accounts)==1 and isinstance(accounts[0], WorkBudget)
 

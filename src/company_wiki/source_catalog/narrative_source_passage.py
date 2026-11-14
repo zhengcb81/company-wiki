@@ -19,6 +19,7 @@ from company_wiki.document_understanding.source_turn_markers import (
     explicit_qa_marker, ROLE_INVESTOR, SOURCE_TURN_MARKER_PREFIX_CHARS,
 )
 from company_wiki.document_model.text_matching import matching_reading_text
+from company_wiki.resource_budget import WorkBudget
 from company_wiki.document_understanding.statement_grammar import (
     StatementObservation, observe_english_statement_boundary, observe_statement,
 )
@@ -27,16 +28,16 @@ from .narrative_causal_links import CAUSAL_LINK
 from .narrative_business_meaning import BUSINESS_OBJECT_PATTERN
 from .narrative_reporting_rules import arithmetic_presentation
 from .narrative_source_context import (
-    SOURCE_CONTEXT_SCAN_PASSES, SourceClauseContext, source_clause_context, statement_complement_context,
+    SourceClauseContext, source_clause_context, statement_complement_context,
 )
 
 
 SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/10'
-# Preparation reuses normalized clauses from the already charged assessment.
-# Includes generic grammar, negative envelopes, account and cause scans, plus
-# the measurement callback's normalized clause view. Metric proofs themselves
-# share the assessment cache with causal and business consumers.
-SOURCE_PASSAGE_SCAN_PASSES = 24 + SOURCE_CONTEXT_SCAN_PASSES
+# Scope construction and quote fallback are separate work. Syntax/argument
+# owners already charge their detailed passes on the same account.
+_STATEMENT_SCOPE_SCAN_PASSES = 6
+_STATEMENT_ALIGNMENT_SCAN_PASSES = 6
+_PASSAGE_FALLBACK_SCAN_PASSES = 10
 
 
 @dataclass(frozen=True)
@@ -112,7 +113,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         quantified_argument: Callable[[str], bool] | None = None,
         business_relation: Callable[[str], bool] | None = None,
         scope_relation: Callable[[str], bool] | None = None,
-        grammar_work_budget=None) -> SourceStatementScope:
+        grammar_work_budget: WorkBudget | None = None) -> SourceStatementScope:
     """Observe every sentence once; suppress question/courtesy proof anywhere.
 
     The masked classification string has exactly the original length. One
@@ -120,6 +121,8 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
     is transient and never supplies source offsets. Policy and passage share
     this observation instead of scanning/preparing assertions again.
     """
+    if grammar_work_budget is not None:
+        grammar_work_budget.charge(_STATEMENT_SCOPE_SCAN_PASSES * len(text))
     start = 0
     segments: list[tuple[int, int, bool]] = []
     suppressed = False
@@ -136,7 +139,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
 
     for clause in roles.clauses:
         key = statement_assertion_key(clause.text)
-        context = source_clause_context(clause.text, clause)
+        context = source_clause_context(clause.text, clause, work_budget=grammar_work_budget)
         typed_business = bool(context.status == 'candidate' and not context.objective_operator
                               and business_relation and business_relation(clause.text))
         scope_description = bool(context.status == 'candidate' and not context.objective_operator
@@ -196,6 +199,8 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             and all(observation.status != 'unknown' for observation in prepared_grammar.values())):
         return SourceStatementScope(text, roles, grammar_results=tuple(grammar_results),
                                     context_results=context_results, fact_roles=roles)
+    if grammar_work_budget is not None:
+        grammar_work_budget.charge(_STATEMENT_ALIGNMENT_SCAN_PASSES * len(text))
     normalized = []
     segment_ranges = []
     offset = 0
@@ -304,7 +309,7 @@ def _declarative(text: str, *, grammar_observations: list[StatementObservation] 
     observation = grammar_results.get(key) if grammar_results is not None else None
     prepared = clause_contexts.get(key) if clause_contexts is not None else None
     if prepared is None and source_role is not None:
-        prepared = source_clause_context(text, source_role)
+        prepared = source_clause_context(text, source_role, work_budget=grammar_work_budget)
         if clause_contexts is not None:
             clause_contexts[key] = prepared
     if prepared is not None and prepared.status != 'candidate':
@@ -359,7 +364,7 @@ def prepare_source_passage(
     existing_use: tuple[str, str], existing_relevant: bool,
     statement_scope: SourceStatementScope | None = None,
     existing_fact_proof: bool = False,
-    grammar_work_budget=None,
+    grammar_work_budget: WorkBudget | None = None,
 ) -> SourcePassageCapability:
     """Prepare once; two consumers share the same capability without rescanning.
 
@@ -394,6 +399,8 @@ def prepare_source_passage(
             return scoped_uncertainty
     if purpose in non_operating_purposes:
         return context('non_operating_purpose')
+    if grammar_work_budget is not None:
+        grammar_work_budget.charge(len(text))
     if _NON_ASSERTION.search(text):
         return context('source_non_assertion')
     prepared_use = statement_scope is not None
@@ -448,6 +455,8 @@ def prepare_source_passage(
     semantic_results: dict[str, SourceClauseContext] = {}
     for clause in clauses:
         text = clause.text
+        if grammar_work_budget is not None:
+            grammar_work_budget.charge(_PASSAGE_FALLBACK_SCAN_PASSES * len(text))
         if statement_assertion_key(text) in statement_scope.financial_context_keys:
             finance_seen = True
             continue

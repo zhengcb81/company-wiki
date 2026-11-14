@@ -52,18 +52,23 @@ _METATEXT_OBJECT = re.compile(r'\b(?:glossar\w*|index|lists?|terms?)\b|索引|�
 _OBJECTIVE = re.compile(r'\b(?:striv\w*|aspir\w*|aim(?:s|ed|ing)?|committed\s+to|'
                          r'efforts?\s+to)\b|努力|争取|坚持', re.I)
 _PRINCIPLE = re.compile(r'^(?P<content>.+?)的(?:原则|理念|愿景)$')
-def source_clause_context(value: str, role: AssertionRole) -> SourceClauseContext:
+def source_clause_context(value: str, role: AssertionRole, *,
+                          work_budget: WorkBudget | None = None) -> SourceClauseContext:
     """Observe a prepared clause's discourse purpose once, before fallbacks.
 
     Typed independent content retains its own authority. A generic effort is
     not negative by itself: only a closed principle/courtesy envelope can be
     settled without the matrix/complement observation.
     """
-    objective = _OBJECTIVE.search(value)
     if role.independent_payload is False:
         return SourceClauseContext('context', 'source_generic_objective')
+    if work_budget is not None:
+        work_budget.charge(len(value))
+    objective = _OBJECTIVE.search(value)
     if role.independent_payload is True and not objective:
         return SourceClauseContext()
+    if work_budget is not None:
+        work_budget.charge((SOURCE_CONTEXT_SCAN_PASSES - 1) * len(value))
     if arithmetic_presentation(value):
         return SourceClauseContext('context', 'source_arithmetic_presentation')
     if _PAGE_NAME.fullmatch(value):

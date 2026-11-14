@@ -121,20 +121,30 @@ def test_fallback_charges_existing_budget_before_model_work(monkeypatch):
     'When order volumes recover, our software processes customer billing records.',
 ))
 def test_shared_source_session_turns_grammar_budget_stop_into_partial_once(monkeypatch, text):
-    from company_wiki.source_catalog.narrative_operating_relations import READING_BUSINESS_SCAN_PASSES
+    from company_wiki.source_catalog import narrative_source_passage
     from unit.du11_production.test_source_information_binding import session_for, unit_id
 
     def unexpected(_text):
         raise AssertionError('exhausted source must not execute POS')
 
     monkeypatch.setattr(grammar, '_english_statement', unexpected)
+    observe_statement = grammar.observe_statement
+    attempts = []
+
+    def stop_at_grammar(value, *, work_budget, **kwargs):
+        attempts.append(value)
+        work_budget.max_work_units = work_budget.used
+        return observe_statement(value, work_budget=work_budget, **kwargs)
+
+    monkeypatch.setattr(grammar, 'observe_statement', stop_at_grammar)
+    monkeypatch.setattr(narrative_source_passage, 'observe_statement', stop_at_grammar)
     session, budget = session_for([text])
     uid = unit_id(0)
     session.relations(uid)
-    budget.max_work_units = budget.used + READING_BUSINESS_SCAN_PASSES * len(session.source_text(uid))
     session.fact(uid)
     used = budget.used
     assert not session.complete
+    assert attempts and budget.exhausted
     assert session.source_passage(uid) is None
     session.fact(uid)
     assert budget.used == used
@@ -149,20 +159,24 @@ def test_statement_boundary_result_is_reused_for_the_same_scope_without_a_second
     text = 'When order volumes recover, we reopen the coastal terminals.'
     roles = SourceAssertionRoles((AssertionRole(text, False),))
     budget = WorkBudget(100_000)
+    observe = grammar.observe_statement
+    charges = []
+
+    def counted(value, *, work_budget, **kwargs):
+        before = work_budget.used
+        observed = observe(value, work_budget=work_budget, **kwargs)
+        charges.append(work_budget.used - before)
+        return observed
+
+    monkeypatch.setattr(grammar, 'observe_statement', counted)
+    monkeypatch.setattr(passage_owner, 'observe_statement', counted)
     scope = passage_owner.prepare_source_statement_scope(text, roles, grammar_work_budget=budget)
-    used = budget.used
-    assert used == grammar.STATEMENT_GRAMMAR_WORK_PER_CHAR * len(text) + 1
-
-    def unexpected(*args, **kwargs):
-        raise AssertionError('same scope must reuse the prepared grammar observation')
-
-    monkeypatch.setattr(passage_owner, 'observe_statement', unexpected)
     passage = passage_owner.prepare_source_passage(text, roles, purpose='unknown', financial_only=False,
         accounting_text=lambda _text: False, non_operating_purposes=frozenset(),
         existing_use=('context_only', 'no_independent_business_support'), existing_relevant=False,
         statement_scope=scope, grammar_work_budget=budget)
     assert passage.use == 'support' and passage.relevant
-    assert budget.used == used
+    assert charges == [grammar.STATEMENT_GRAMMAR_WORK_PER_CHAR * len(text) + 1]
 
 
 def test_existing_typed_proof_never_needs_pos_fallback(monkeypatch):

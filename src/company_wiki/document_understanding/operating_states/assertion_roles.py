@@ -22,7 +22,7 @@ if TYPE_CHECKING:
     from company_wiki.resource_budget import WorkBudget
 
 # Composition/process indexes and the bounded comma-continuation preparation.
-# The caller reserves these passes on its existing document account.
+# The assertion owner charges these passes on the existing document account.
 # Closed member identity is observed for both typed and unfamiliar arguments.
 SOURCE_DESCRIPTION_SCAN_PASSES = 19
 SOURCE_SCOPE_ARGUMENT_WORK_PER_CHAR = 8
@@ -838,6 +838,8 @@ class SourceAssertionRoles:
 
 def prepare_source_assertions(text: str, *, work_budget: WorkBudget | None = None) -> SourceAssertionRoles:
     """Prepare one scope's local role evidence; no stage or attribution guess."""
+    if work_budget is not None:
+        work_budget.charge(SOURCE_DESCRIPTION_SCAN_PASSES * len(text))
     value=matching_reading_text(text)
     clauses=[]
     scope_cache: dict[str, _ScopeArgumentObservation] = {}

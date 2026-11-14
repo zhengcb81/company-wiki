@@ -14,9 +14,9 @@ from .narrative_business_meaning import (
     BUSINESS_CLAUSE_BOUNDARY_PATTERN,
     GENERIC_DEFINITION_PATTERN,
 )
-from .narrative_predicate_state import (
-    PredicateObservation, prepare_predicate_context,
-)
+from company_wiki.resource_budget import WorkBudget
+
+from .narrative_predicate_state import PredicateObservation, prepare_predicate_context
 from .narrative_source_purpose import NON_OPERATING_PURPOSES, source_purpose
 
 
@@ -65,6 +65,11 @@ _RESOURCE_ACTION = re.compile(
     r"(?:提升|加强|扩充|建设)(?:我们的)?(?:人工智能|AI|云计算|研发|技术研发)能力|"
     r"\b(?:enhance|enhancing|strengthen|strengthening|build|building)\s+"
     r"(?:our\s+)?(?:AI|artificial intelligence|research|cloud computing)\s+capabilities\b", re.I)
+_RESOURCE_HEAD = re.compile(
+    rf"(?:{_RESEARCH})|(?:{_WORKFORCE})|"
+    r"\b(?:software|technical)\s+(?:engineers|staff|personnel)\b|"
+    r"人工智能|云计算|技术|\b(?:AI|artificial intelligence|research|cloud computing)\b", re.I,
+)
 _ACTOR = re.compile(r"本公司|公司|本集团|集团|我们|\b(?:we|our|the\s+(?:company|group))\b", re.I)
 _CONTINUATION = re.compile(
     r"^\s*(?:(?:并且|并|且|同时|不断|持续|继续|全面|进一步|积极)\s*|"
@@ -80,7 +85,8 @@ def _projection(state: PredicateObservation, actual: str) -> str | None:
     return None
 
 
-def operating_resource_relations(text: str, *, purpose_for: Callable[[str], str] | None = None) -> tuple[str, ...]:
+def operating_resource_relations(text: str, *, purpose_for: Callable[[str], str] | None = None,
+                                 work_budget: WorkBudget | None = None) -> tuple[str, ...]:
     """Observe only closed resource predicates in the caller's matching view.
 
     The number, units, roles and qualifiers remain in the original source;
@@ -89,7 +95,11 @@ def operating_resource_relations(text: str, *, purpose_for: Callable[[str], str]
     subject, a standalone quantity, or a separate source sentence.
     """
     reasons: list[str] = []
-    purpose_for = source_purpose if purpose_for is None else purpose_for
+    def purpose(value: str) -> str:
+        return (source_purpose(value, work_budget=work_budget) if purpose_for is None
+                else purpose_for(value))
+    if work_budget is not None:
+        work_budget.charge(2 * len(text))
     sentence_start = 0
     for boundary in chain(BUSINESS_CLAUSE_BOUNDARY_PATTERN.finditer(text), (None,)):
         sentence_end = boundary.start() if boundary is not None else len(text)
@@ -99,6 +109,13 @@ def operating_resource_relations(text: str, *, purpose_for: Callable[[str], str]
         # away first would turn an analyst question into a company's plan.
         if boundary is not None and any(char in boundary.group() for char in "?？"):
             continue
+        # Every supported resource predicate contains one of these exact
+        # resource vocabularies. Cheap negative routing avoids full predicate
+        # and purpose preparation for sentences without a possible match.
+        if _RESOURCE_HEAD.search(sentence) is None:
+            continue
+        if work_budget is not None:
+            work_budget.charge((RESOURCE_READING_SCAN_PASSES - 2) * len(sentence))
         inherited: PredicateObservation | None = None
         context = prepare_predicate_context(sentence)
         matching = context.modality_view()
@@ -106,28 +123,35 @@ def operating_resource_relations(text: str, *, purpose_for: Callable[[str], str]
             part = sentence[start:cursor]
             if not part.strip():
                 continue
-            if (_QUESTION_OR_EXAMPLE.search(part) or GENERIC_DEFINITION_PATTERN.search(part)
-                    or purpose_for(part) in NON_OPERATING_PURPOSES):
+            if _QUESTION_OR_EXAMPLE.search(part) or GENERIC_DEFINITION_PATTERN.search(part):
                 inherited = None
                 continue
             actor = _ACTOR.search(part)
             action = _RESOURCE_ACTION.search(part)
+            quantities = tuple(
+                (match, actual)
+                for pattern, actual in ((_COUNT, "operating_resource_stock"),
+                                        (_EMPLOYED, "operating_resource_stock"),
+                                        (_INVESTED, "operating_resource_allocation"),
+                                        (_RESEARCH_ALLOCATION, "operating_resource_allocation"))
+                if (match := pattern.search(matching[start:cursor] if pattern is _COUNT else part))
+                is not None
+            )
+            frame = context.observe(start, cursor) if actor is not None else None
+            can_preserve_plan = frame is not None and frame.forward_outlook
+            if (action is None and not quantities and not can_preserve_plan
+                    or purpose(part) in NON_OPERATING_PURPOSES):
+                inherited = None
+                continue
             coordinated = bool(action and _CONTINUATION.fullmatch(part[:action.start()]))
-            frame = context.observe(start, cursor)
-            if actor is not None:
+            if frame is not None:
                 inherited = frame if frame.forward_outlook else None
             elif not coordinated:
                 inherited = None
             # A fixed number of complete subject/predicate patterns is checked
             # once per assertion. An irrelevant first noun cannot donate money
             # or a manual/identifier number through an unbounded gap.
-            for pattern, actual in ((_COUNT, "operating_resource_stock"),
-                                    (_EMPLOYED, "operating_resource_stock"),
-                                    (_INVESTED, "operating_resource_allocation"),
-                                    (_RESEARCH_ALLOCATION, "operating_resource_allocation")):
-                match = pattern.search(matching[start:cursor] if pattern is _COUNT else part)
-                if match is None:
-                    continue
+            for match, actual in quantities:
                 state = context.observe(start + match.start(), start + match.end())
                 reason = _projection(state, actual)
                 if reason is not None:

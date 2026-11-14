@@ -10,7 +10,7 @@ from company_wiki.source_catalog.narrative_business_policy import (
 )
 from company_wiki.source_catalog.narrative_document import DocumentStructure
 from company_wiki.source_catalog.narrative_evidence import _make_unit, select_narrative_evidence
-from company_wiki.source_catalog.narrative_reading import _admitted
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
 from company_wiki.source_catalog.narrative_source_purpose import (
     NON_OPERATING_PURPOSES,
     source_purpose,
@@ -65,7 +65,7 @@ def test_updated_reporting_definition_survives_a_long_flat_native_paragraph():
     assert "reporting_definition_change" in fact.reasons
     assert "reporting_metric_definition" in fact.reasons
     assert "operating_metric_change" not in fact.reasons
-    assert _admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
+    assert is_admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
 
 
 def test_mechanical_outlook_recast_is_retained_without_inventing_growth():
@@ -79,7 +79,7 @@ def test_mechanical_outlook_recast_is_retained_without_inventing_growth():
     assert "reporting_outlook_recast" in fact.reasons
     assert "source_revenue_guidance" not in fact.reasons
     assert "operating_metric_change" not in fact.reasons
-    assert _admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
+    assert is_admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
 
 
 @pytest.mark.parametrize("text, reason", (
@@ -93,7 +93,7 @@ def test_reporting_scope_and_future_investment_limits_are_preserved(text, reason
     assert fact.eligible
     assert reason in fact.reasons
     assert source_purpose(text) not in NON_OPERATING_PURPOSES
-    assert _admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
+    assert is_admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
 
 
 @pytest.mark.parametrize("text", (
@@ -142,7 +142,7 @@ def test_quantified_rpo_with_intervening_definition_is_an_operating_contract_sto
     assert fact.eligible
     assert "operating_contract_stock" in fact.reasons
     assert "contract_revenue_conversion" in fact.reasons
-    assert _admitted(
+    assert is_admitted(
         unit(MICROSOFT_RPO_DISCLOSURE),
         {"section_role": "unknown"},
         "background",

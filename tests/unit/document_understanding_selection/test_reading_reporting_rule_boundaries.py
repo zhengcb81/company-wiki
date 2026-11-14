@@ -7,7 +7,7 @@ from company_wiki.source_catalog.narrative_business_policy import detect_reading
 from company_wiki.source_catalog.narrative_business_meaning import concrete_operating_event
 from company_wiki.source_catalog.narrative_document import DocumentStructure
 from company_wiki.source_catalog.narrative_evidence import _make_unit, select_narrative_evidence
-from company_wiki.source_catalog.narrative_reading import _admitted
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
 from company_wiki.source_catalog.narrative_source_purpose import NON_OPERATING_PURPOSES, source_purpose
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
 
@@ -43,7 +43,7 @@ def test_reporting_object_and_treatment_are_not_operating_events(text):
     assert source_purpose(text) == "accounting_policy"
     fact = detect_reading_business_fact(text)
     assert not fact.eligible
-    assert not _admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
+    assert not is_admitted(unit(text), {"section_role": "business"}, "background", fact=fact)[0]
 
 
 @pytest.mark.parametrize("text", (
@@ -61,7 +61,7 @@ def test_reporting_object_and_treatment_are_not_operating_events(text):
 ))
 def test_actual_customer_business_and_currency_exposure_are_preserved(text):
     assert source_purpose(text) not in NON_OPERATING_PURPOSES
-    assert _admitted(unit(text), {"section_role": "business"}, "background")[0]
+    assert is_admitted(unit(text), {"section_role": "business"}, "background")[0]
 
 
 @pytest.mark.parametrize("text", ("外币货币性项目", "Financial instruments and foreign currency monetary items."))

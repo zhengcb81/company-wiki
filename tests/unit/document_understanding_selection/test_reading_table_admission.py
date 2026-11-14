@@ -5,6 +5,7 @@ from dataclasses import replace
 
 import pytest
 
+from company_wiki.source_catalog.narrative_reading_admission import is_admitted
 from company_wiki.document_understanding import understand_units
 from company_wiki.source_catalog import narrative_evidence as evidence
 from company_wiki.source_catalog import narrative_reading as reading
@@ -243,7 +244,7 @@ def test_shared_purpose_service_has_an_explicit_bounded_unknown_outcome():
 
 def test_structural_table_name_alone_cannot_bypass_explicit_source_qualification():
     parsed, _ = fixture("项目 | 2026", ["100"])
-    admitted, _ = reading._admitted(
+    admitted, _ = is_admitted(
         parsed.units[1], {"section_role": "business"}, "operating_table"
     )
     assert not admitted
