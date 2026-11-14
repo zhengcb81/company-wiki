@@ -28,3 +28,9 @@
 - 新计划与父状态入口的相对 Markdown 链接有效。
 - `git diff --check` 通过。
 - 不包含外仓代码修改、Git 操作、外部下载、产品测试或生产数据清理。
+
+## 后续单卡自包含性复核（2026-11-14）
+
+用户追问单张卡能否独立交给 harness 后，ROOT 对七张可执行卡逐张复读并补充了此前不够具体的交接信息：目标仓的 PWF 读取入口、固定 handoff JSON/Markdown 文件名、独立审查报告文件名、统一处置状态词义，以及由未参与实施的 reviewer agent 审最终已发布 HEAD 的顺序。另对照实际目录确认列出的 PWF 入口均存在，`git diff --check` 通过。
+
+首轮复核对更新版本给出 FAIL，发现 ET、RF、SID、RFAudit 仍有“自行选择唯一入口”的歧义。ROOT 将其分别固定为 ET 根 `task_plan.md`、RF 根 `PLANNING_STATUS.md`、SID `docs/plans/mb11-sid-2026-11-11/task_plan.md`、RFAudit `docs/plans/company-pool-cycle-2026-10-09/task_plan.md`，并禁止新增或选择第二入口。随后独立 reviewer 对七张卡的最新版复核为 **PASS**：交付路径、JSON schema、处置状态、commit→独审→修复复审→push顺序及 RFAudit 无 remote 例外一致。ROOT 另只读确认这四个固定入口和其余卡中列出的入口在各目标仓存在；此路径核对不涉及外仓写入。各 lane 实施完成时仍须按卡内约定由另一名 agent 审查最终提交 HEAD，修复后复核通过。
