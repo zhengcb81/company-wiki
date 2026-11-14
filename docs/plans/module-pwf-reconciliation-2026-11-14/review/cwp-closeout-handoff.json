@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "lane": "CWP-PLAN-WORKTREE-CLOSEOUT",
+  "repo_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "canonical_pwf": "docs/plans/module-pwf-reconciliation-2026-11-14/task_plan.md",
+  "base": {
+    "branch": "master",
+    "head": "7361aad82e86cf35310fc05ef51fd8c2c7320b8c",
+    "remote_head": "7361aad82e86cf35310fc05ef51fd8c2c7320b8c"
+  },
+  "final": {
+    "branch": "master",
+    "head": "PENDING_FINAL_COMMIT",
+    "remote_head": null
+  },
+  "dispositions": [
+    {
+      "kind": "ref",
+      "path": "codex/d00-e13-owner-integration-20261107",
+      "status": "ABSORBED",
+      "reason": "T-CANON 能力已由 MB-CWP 卡移植进 master；分支保留（其提交含主线没有的历史 handoff 文档，删除会使独有历史不可达）",
+      "evidence": "tip 62602102a 非祖先；MB-CWP 提交 eda1f4f9b（canonical 51+calendar 9+document_browser 20+port_boundaries 21 项）；master 存在 src/company_wiki/source_catalog/public_canonical_browser.py、public_canonical_browser_cli.py、cn_primary_issuer.py、tests/contract/test_public_canonical_browser.py、tests/contract/test_cn_primary_issuer.py（git ls-tree 实测）；docs/plans/mb11-cwp-2026-11-11/handoff.md findings.md"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/d00-return5-cwp-audit",
+      "status": "UNCLASSIFIED_HOLD",
+      "reason": "卡步骤 2：dirty/owner 归因未完整收口，不推断为活动或可删；工区物理位于 Projects/investment-dashboard/.worktrees/return5-cwp-audit，本卡禁止对该物理目录做删除/移动/checkout/清理；branch 被注册工区 pin 住",
+      "evidence": "tip ffd67580a 非祖先（master 253/ref 独有 29，cwp_review 2026-11-11 基线）；工区实时 dirty 摘要：tracked clean，1 untracked .d00-audit/；T-B33 家族能力已由 MB-CWP 566f4cc23 移植，但按卡不据此推断"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/dashboard-b33-cwp-source-proof",
+      "status": "ABSORBED",
+      "reason": "T-B33 readiness/legacy_source_link/legacy_source_recovery 六模块+CLI+contract 测试已移植进 master；分支保留（含主线没有的历史 handoff 提交）",
+      "evidence": "tip dc837a21f；MB-CWP 提交 566f4cc23（readiness 86+link 15+recovery 8+exact_history 9=118 项）；master 存在 src/company_wiki/source_catalog/public_source_readiness.py(+_cli.py)、public_legacy_source_link.py(+_cli.py)、public_legacy_source_recovery.py(+_cli.py) 与 tests/contract/test_public_source_readiness.py、test_public_legacy_source_link.py、test_public_legacy_source_recovery.py（git ls-tree 实测）"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/dashboard-cwp-b34-diagnostic",
+      "status": "ABSORBED",
+      "reason": "T-B34 诊断能力（record_unresolved 去重、无固定 8 条帽）已移植进 master；分支保留",
+      "evidence": "tip 7f5f50f8f；MB-CWP 提交 be85d9ddc（diagnostic 18+prospectus 15=33 项）；master 存在 tests/unit/b34_cwp_diagnostic/test_unresolved_diagnostics.py（git ls-tree 实测）"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/dashboard-cwp-b34-prospectus",
+      "status": "UNCLASSIFIED_HOLD",
+      "reason": "卡步骤 2：工区物理位于 Projects/investment-dashboard/.worktrees/b34-cwp-prospectus，本卡禁止操作该物理目录；dirty/owner 归因未完整收口，不推断",
+      "evidence": "tip 29b562dac 非祖先（146/8，cwp_review 基线）；工区实时 dirty 摘要：tracked clean，1 untracked .test-runs/；T-B34 IPO 封面能力已由 MB-CWP be85d9ddc 移植（master 存在 tests/unit/b34_cwp_prospectus/test_ipo_cover.py），但按卡不据此推断工区处置"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/dashboard-cwp-canonical",
+      "status": "ABSORBED",
+      "reason": "T-B33/T-CANON 家族候选；与 #1/#3 共享大量历史提交（cwp_review：不能把每个 + 重复当新任务），能力已由 MB-CWP 移植；分支保留",
+      "evidence": "tip 97d55a2dc；cwp_review.md 第 4 节（253/28）；master T-CANON/T-B33 路径实测存在"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/dashboard-cwp-exact-reader",
+      "status": "ABSORBED",
+      "reason": "T-READ 历史 admission 契约已关闭：exact_history 9 项移植测试与 ref 逐字节相同（MB-CWP review.md 核对项 37），stream 读取统一走当前 stream_version owner 端口；分支保留",
+      "evidence": "tip 671149011；MB-CWP f32fbabf8（source_stream_cli 薄传输）+ master tests/contract/test_source_reader_exact_history.py、test_source_stream_cli.py 实测存在"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/dashboard-cwp-return4-d00-fix",
+      "status": "ABSORBED",
+      "reason": "T-B33 家族候选，能力已由 MB-CWP 移植；分支保留",
+      "evidence": "tip b04e9a80d；cwp_review.md 第 4 节（253/25）；master T-B33 路径实测存在"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/n4t2-selective-narrative-coverage",
+      "status": "ABSORBED",
+      "reason": "T-N4 NO_CHANGE_PROVEN 核销：反例已被主线满足，不恢复旧实现；分支保留",
+      "evidence": "tip 2b5bec914；MB-CWP findings.md「T-N4 核销的可复现证据」（两条命令 9+78 passed，2026-11-13 复跑）与主线反向断言 test_titleless_signal_free_quarterly_remains_reviewable（narrative_finalize.py:237-244）"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/w13-cwp-gates-20261024",
+      "status": "ABSORBED",
+      "reason": "T-W13：历史完成事实（COMPLETE、独审 APPROVE、被审版本 852dff28）已补回 master delivery/w13/handoff.md；不回退旧 gate 代码；分支保留",
+      "evidence": "tip 6efd4fccb；master delivery/w13/handoff.md 含 ROOT reconciliation 2026-11-11 记录（提交 050c6d479）；cwp_review.md T-W13 行"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/x-c04-current-main-compat-01",
+      "status": "ABSORBED",
+      "reason": "T-READ：旧 stream CLI/byte-lock 路径由 MB-CWP source_stream_cli 薄传输接当前 stream_version owner 替代；Non-primary fallback admission 未恢复的约束按 owner 级 pair 精确读取公开合同处理；分支保留",
+      "evidence": "tip 3199adab0（41/1）；MB-CWP findings.md T-READ 行 + 非 primary 版本读取专节；master src/company_wiki/source_catalog/source_stream_cli.py 实测存在"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/x-c04-cwp-original-stream-01",
+      "status": "ABSORBED",
+      "reason": "T-READ 同上；分支保留",
+      "evidence": "tip 6b32163ec（253/32）；MB-CWP T-READ 移植记录"
+    },
+    {
+      "kind": "ref",
+      "path": "codex/x-c04-integrity-repair-01",
+      "status": "ABSORBED",
+      "reason": "T-READ 同上；分支保留",
+      "evidence": "tip 1664c55f1（253/34）；MB-CWP T-READ 移植记录"
+    },
+    {
+      "kind": "worktree",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "status": "ACTIVE_KEEP",
+      "reason": "主仓主线（master）；未跟踪项为 .mimosa/.planning/.workbuddy-ai/du11 审查证据，卡与对账表明确保留",
+      "evidence": "HEAD 7361aad82 = origin/master；tracked clean；266 untracked 分四顶层组，无 tracked 修改"
+    },
+    {
+      "kind": "worktree",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-extractive-runtime\\company-wiki",
+      "status": "EVIDENCE_KEEP",
+      "reason": "分支（codex/r1-narrative-availability @ 510193979）已是 master 祖先，但工区含 65 个未跟踪 .planning/du11-* 审计日志，未逐文件去重，不得按未跟踪批量删或直接拆工区",
+      "evidence": "实时 git status：65 untracked，tracked clean；cwp_review.md §5 行 2（分支可退休；审计材料尚未逐文件去重，保留或归档后再拆工区）"
+    },
+    {
+      "kind": "worktree",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki",
+      "status": "EVIDENCE_KEEP",
+      "reason": "detached @ fcee443ef（master 祖先）；11 个 tracked 旧副本已按收据恢复、5 个冗余 untracked 已删；余 7 份 .planning 审计 JSON 为唯一证据，工区因含唯一证据不满足移除条件",
+      "evidence": "实时 git status：7 untracked，tracked clean；source_facts_cleanup_result.json（tracked_restored 11，untracked_redundant_sources_removed 5，preserved 7 项清单）"
+    },
+    {
+      "kind": "worktree",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "status": "EVIDENCE_KEEP",
+      "reason": "分支（codex/main-auto-official-json-20261010 @ 35a9a6459）为 master 祖先；22 个 tracked WIP 已由 cwp_review 归因（21 blob 主线历史可达、T-CONFIG 反例已由 MB-CWP 接收且旧 loader 被有意取代、6 份 PWF 为独有过程记录）；恢复/归档为后续定点动作，本卡不销毁未提交字节",
+      "evidence": "实时 git status：22 M + 37 untracked；cwp_review.md §5 M3 与 W04 的精确路径边界；MB-CWP findings.md T-CONFIG 行（be85d9ddc，72 项）"
+    },
+    {
+      "kind": "worktree",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\w04-narrative-semantics-20261011\\company-wiki",
+      "status": "EVIDENCE_KEEP",
+      "reason": "分支（codex/w04-narrative-semantics-20261011 @ 32a412bb5）为 master 祖先；3 tracked M + untracked test 未证明 blob 等效；旧 HANDOFF 为 STOP_PARTIAL，scoped negation 反例差集待与主线 stage tests 映射后才能核销退休",
+      "evidence": "实时 git status：3 M + 5 untracked；cwp_review.md §5 行 5 与「W04 未证明完整blob等效的三文件」节"
+    },
+    {
+      "kind": "worktree",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+      "status": "EVIDENCE_KEEP",
+      "reason": "分支（codex/r1-final3-source-semantics @ ef49ae3e8）为 master 祖先；98 个 M 为 clean-filter 伪差量（与自身 HEAD 逐 blob 相同，非行为修改）；260 untracked 含 R1 resume 记录等独有观察证据",
+      "evidence": "实时 git status：98 M + 260 untracked；cwp_review.md §5 行 6（98/98 clean-filter 哈希相同，diff 空）"
+    },
+    {
+      "kind": "worktree",
+      "path": "C:\\Users\\郑曾波\\Projects\\investment-dashboard\\.worktrees\\b34-cwp-prospectus",
+      "status": "UNCLASSIFIED_HOLD",
+      "reason": "卡步骤 2 + 独占范围：物理目录属 Dashboard 仓，本卡禁止删除/移动/checkout/清理；CWP owner 仅记录 branch/HEAD/dirty 摘要，目录处置由 Dashboard owner 协调",
+      "evidence": "branch codex/dashboard-cwp-b34-prospectus @ 29b562dac（非祖先）；实时只读 git status：tracked clean，1 untracked .test-runs/"
+    },
+    {
+      "kind": "worktree",
+      "path": "C:\\Users\\郑曾波\\Projects\\investment-dashboard\\.worktrees\\return5-cwp-audit",
+      "status": "UNCLASSIFIED_HOLD",
+      "reason": "同上：物理目录属 Dashboard 仓，本卡禁写；仅记录 CWP Git 状态",
+      "evidence": "branch codex/d00-return5-cwp-audit @ ffd67580a（非祖先）；实时只读 git status：tracked clean，1 untracked .d00-audit/"
+    },
+    {
+      "kind": "projects_directory",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-et-live-20261004",
+      "status": "EVIDENCE_KEEP",
+      "reason": "唯一历史验收记录（2026-10-04 ET-LIVE acceptance report，基线 CWP 6b93481/FF e1eda60/ET 93fe52c），无副本",
+      "evidence": "实测 1 文件/4 KB；非 git 仓；report.md 首部内容核读"
+    },
+    {
+      "kind": "projects_directory",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-gates",
+      "status": "EVIDENCE_KEEP",
+      "reason": "架构 gate 历史观测产物（ctrl-*、ctrl03-candidate-* 等）；产物绑定当时基线/配置，可重建性未经证实且无收据，不满足删除条件",
+      "evidence": "实测 9,700 文件/~279 MB；非 git 仓；目录枚举核读"
+    },
+    {
+      "kind": "projects_directory",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-r1-local-observation",
+      "status": "EVIDENCE_KEEP",
+      "reason": "即上方注册工区（见 worktree 条目）；R1 观察证据保留",
+      "evidence": "git worktree list 注册项；实时 dirty 摘要 98 M + 260 untracked"
+    },
+    {
+      "kind": "projects_directory",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-storage-audit-20261003",
+      "status": "EVIDENCE_KEEP",
+      "reason": "S5 存储审计原始证据（.planning/s5-storage-audit-20261003 + results/ 6 份原始扫描 JSON），唯一出处",
+      "evidence": "实测 26 文件/940 KB；非 git 仓；results/ 枚举核读"
+    },
+    {
+      "kind": "stash",
+      "path": "stash@{0} (18ac0d05627672ff0d607be705d57beeadfc0645, On ci-diag-0fb7152: br-ci-fix)",
+      "status": "EVIDENCE_KEEP",
+      "reason": "含 llm_cost_log.csv 16 行独有费用差量（blob 不在主线历史）；须由账 owner 核销/归档后再处置；所夹 39 项旧删除无当前任务理由，不整体 pop/drop",
+      "evidence": "实时 git stash list（唯一 stash）；cwp_review.md §6 stash@{1}=18ac0d0562 行；module-boundaries reconciliation.md 剩余资料处置表 CWP stash 行"
+    }
+  ],
+  "dirty_exceptions": [
+    {
+      "scope": "主仓 .planning/（主体）、.mimosa/、.workbuddy-ai/、docs/plans/du11-source-closure-2026-10-18/review/** 未跟踪件",
+      "content": "历史运行/审计材料、工具状态/记忆、du11 审查证据",
+      "reason": "PWF 历史证据与工具状态，卡与对账表明确保留；逐内容去重无当前任务授权"
+    },
+    {
+      "scope": "stash@{0} 18ac0d0562",
+      "content": "llm_cost_log.csv 16 行独有差量 + 39 项旧删除 + 2 个已吸收测试修复",
+      "reason": "费用账目归原账 owner；39 项删除无任务理由，不整体 pop/drop"
+    },
+    {
+      "scope": "worktree m3-acceptance-20261010",
+      "content": "22 tracked M + 37 untracked",
+      "reason": "已归因（21 blob 主线/T-CONFIG 已吸收/6 PWF 独有），保留至归档收据产生"
+    },
+    {
+      "scope": "worktree w04-narrative-semantics-20261011",
+      "content": "3 tracked M + 5 untracked",
+      "reason": "scoped negation 反例差集未映射，保留"
+    },
+    {
+      "scope": "worktree r1-local-observation",
+      "content": "98 M（clean-filter 伪差量）+ 260 untracked",
+      "reason": "伪差量不重写；R1 resume 记录为独有证据"
+    },
+    {
+      "scope": "worktree du11-extractive-runtime",
+      "content": "65 untracked .planning/du11-* 日志",
+      "reason": "审计材料未去重，保留"
+    },
+    {
+      "scope": "worktree du11-source-facts",
+      "content": "7 untracked .planning 审计 JSON",
+      "reason": "唯一审计证据，保留（tracked 旧副本已按收据恢复）"
+    },
+    {
+      "scope": "Dashboard .worktrees/b34-cwp-prospectus 与 return5-cwp-audit",
+      "content": "各 1 untracked（.test-runs/、.d00-audit/）",
+      "reason": "本卡禁写 Dashboard 物理目录，仅记录"
+    }
+  ],
+  "cleanup": {
+    "paths": [],
+    "file_count": 0,
+    "bytes": 0
+  },
+  "tests": [
+    {
+      "command": "git diff --check",
+      "result": "PASS（文档-only 变更，无空白错误）"
+    },
+    {
+      "command": "python -I -c \"import json;json.load(open('docs/plans/module-pwf-reconciliation-2026-11-14/review/cwp-closeout-handoff.json',encoding='utf-8'))\"",
+      "result": "PASS（裸 JSON 可解析，schema_version=1，12 个顶层键齐备）"
+    },
+    {
+      "command": "python -I docs/plans/module-pwf-reconciliation-2026-11-14/review/check_links_closeout.py（相对链接核验：handoff.md 引用的仓内相对路径均存在）",
+      "result": "PASS（0 个断链；cwp-closeout-review.md 为独立 reviewer 收口时创建的已知前向引用，检查器单列 PENDING，最终发布状态必须存在）"
+    }
+  ],
+  "independent_review": {
+    "reviewer_agent": "PENDING_INDEPENDENT_REVIEW",
+    "reviewed_head": "PENDING",
+    "result": "PENDING",
+    "report_path": "docs/plans/module-pwf-reconciliation-2026-11-14/review/cwp-closeout-review.md"
+  },
+  "remaining_items": [
+    "Dashboard owner 协调 Projects/investment-dashboard/.worktrees/{b34-cwp-prospectus,return5-cwp-audit} 两个物理目录处置（CWP 侧 branch/HEAD/dirty 摘要已记录；涉及 branch codex/dashboard-cwp-b34-prospectus@29b562dac、codex/d00-return5-cwp-audit@ffd67580a）",
+    "m3-acceptance-20261010 工区：6 份独有 PWF 归档 + 22 tracked WIP 按 cwp_review 逐 blob 依据定点恢复（需归档收据先行）",
+    "w04-narrative-semantics-20261011 工区：scoped negation 反例差集与主线 stage tests 映射（cwp_review 关闭条件）后核销退休",
+    "du11-extractive-runtime 工区：65 份 .planning/du11-* 材料逐文件去重后再退休工区",
+    "stash 18ac0d0562：llm_cost_log 独有差量由账 owner 核销/归档",
+    "r1-local-observation：98 个 clean-filter 伪差量的可选核销（不得覆盖 R1 证据）",
+    "13 个 ABSORBED refs 的退休（如需）须先归档各分支携带的主线没有的历史 handoff 提交（docs/handoffs/dashboard-* 等）"
+  ],
+  "next_step": "CWP 唯一下一步：du11-source-closure-2026-10-18 P1 业务摘要质量修正（当前来源 partial；66 条原文均以 claim 展示，含 26 个模型标冗余任务与披露载体/具体承诺人混用），按 docs/plans/du11-source-closure-2026-10-18/task_plan.md 业务摘要段推进『去套话、保归属和计划』，通过后复验付费缓存恢复与 RF 实际采用。父计划公司循环保持 paused。模块计划（本计划）阶段 2–4 的 CWP lane 由本卡完成；FF/RF/ET/SID/Dashboard/RFAudit 各 lane 等其 owner 按对应 owner card 执行。"
+}

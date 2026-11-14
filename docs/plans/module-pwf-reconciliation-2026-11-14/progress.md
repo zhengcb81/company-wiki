@@ -23,3 +23,14 @@
 - 已把这些上下文补进每张卡，分别写明目标仓、PWF 入口、固定 handoff 与 review 文件名、状态分类、以实时目标主线为准，以及由未参与实施的 agent 按最终已发布 HEAD 审查、问题修复后复核。
 - 只读确认了所引用的 PWF 入口在七个目标仓均存在；本仓 `git diff --check` 通过。未访问 StockWiki/IQS 工区，未改外仓、未跑产品测试、未提交或推送。
 - 首轮独立复核指出 ET、RF、SID、RFAudit 仍让执行者选择唯一状态入口；已将四处固定到具体现存文件，并明确旧入口回链。独立 reviewer 对更新后的七卡复核 PASS；ROOT 另只读确认所列 PWF 入口存在。各 lane 实施完成时仍必须按卡要求对最终提交做独立最终审查。
+
+## 2026-11-14 — CWP lane 收口（cwp_closeout 卡执行）
+
+- 实时重核基线：`master@7361aad82` = `origin/master`（卡面快照 `1f9f3dcf3` 之后的 3 个 docs 提交已计入）；tracked clean；8 个注册 worktree、13 个非祖先 refs、1 个 stash（`18ac0d0562`）与卡面计数一致。
+- 13 个非祖先 refs 全部归因：11 个 `ABSORBED`（T-READ/T-CANON/T-B33/T-B34/T-N4/T-CONFIG 能力已由 [MB-CWP 卡](../../mb11-cwp-2026-11-11/handoff.md) 移植进 master，T-W13 历史文档已补回；master 路径逐一实测存在），2 个 `UNCLASSIFIED_HOLD`（`codex/d00-return5-cwp-audit`、`codex/dashboard-cwp-b34-prospectus`，按卡步骤 2 不得推断；工区物理位于 Dashboard 目录）。ABSORBED refs 一律保留：其提交携带主线没有的历史 handoff 文档，删除会使独有历史不可达。
+- 8 个 worktree 全部归因：主仓 `ACTIVE_KEEP`；4 个 CWP 侧工区 `EVIDENCE_KEEP`（唯一 .planning 审计材料、已归因未归档的 M3/W04 WIP、clean-filter 伪差量 + R1 resume 证据）；2 个 Dashboard 物理工区 `UNCLASSIFIED_HOLD`（只读记录 branch/HEAD/dirty）。
+- 四个额外 Projects 顶层目录全部 `EVIDENCE_KEEP`：et-live-20261004（1 文件验收记录）、gates（9,700 文件/~279 MB 观测产物，可重建性未证实）、r1-local-observation（即注册工区）、storage-audit-20261003（26 文件审计原始扫描）。
+- 本轮清理为零（0 路径/0 文件/0 字节）：无一项同时满足"owner 已完成+源码在主线+无唯一证据+工区 clean"四个移除条件；历史清理收据已在 module-boundaries review 目录，不重复执行。
+- 文档-only 校验：`git diff --check`、handoff JSON 可解析、相对链接核验（check_links_closeout.py）全部通过。
+- CWP 唯一下一步：du11 P1 业务摘要质量修正（66 条 claim 展示、26 个冗余任务、披露载体/承诺人混用），通过后复验缓存恢复与 RF 采用；父计划公司循环保持 paused。
+- 交接：[cwp-closeout-handoff.md](review/cwp-closeout-handoff.md) / [cwp-closeout-handoff.json](review/cwp-closeout-handoff.json)；独立审查结论见 [review 目录](review/)，绑定候选 HEAD。FF/RF/ET/SID/Dashboard/RFAudit 各 lane 仍等其 owner 按对应卡执行。

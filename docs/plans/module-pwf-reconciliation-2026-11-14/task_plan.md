@@ -65,3 +65,9 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 ## 下一步
 
 将 `dispatch.md` 和七张 owner 卡交给对应模块 owner 并行实施阶段2–4。除 CWP 本仓外，不删除其他项目目录、不替其他仓并线；StockWiki/IQS 待当前项目 owner 交接后再建卡。
+
+## CWP lane 状态（2026-11-14）
+
+CWP 本仓收口已按 [owner_cards/cwp_closeout.md](owner_cards/cwp_closeout.md) 执行完成：13 个非祖先 refs（11 `ABSORBED` + 2 `UNCLASSIFIED_HOLD`）、8 个 worktree、4 个额外 Projects 目录、1 个 stash 全部逐项归因，本轮清理为零（无一项满足四重移除条件，依据逐项见交接文件）。CWP 本仓无未归因 refs/工区/目录残留；涉及其他模块 owner 的剩余项列在交接文件 remaining_items。CWP 业务主线唯一下一步为 du11 P1 业务摘要质量修正，父计划公司循环保持 paused。交接与独审绑定：[review/cwp-closeout-handoff.md](review/cwp-closeout-handoff.md) / [cwp-closeout-handoff.json](review/cwp-closeout-handoff.json)。
+
+阶段 2–4 的其他 lane（FF/RF/ET/SID/Dashboard/RFAudit；StockWiki/IQS 暂缓）仍待各 owner 按对应卡执行，状态不变。
