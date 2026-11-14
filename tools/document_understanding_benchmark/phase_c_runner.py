@@ -283,6 +283,31 @@ def mother_budget_fits(totals: dict, *, tokens_bound: int, micro_usd_bound: int)
             and totals["charged_micro_usd"] + micro_usd_bound <= totals["micro_usd_limit"])
 
 
+def _sealed_baseline_attempts(baseline: dict) -> dict[Path, set[str]]:
+    """Recover the booked attempt membership from durable evidence after scratch cleanup."""
+    try:
+        body = Path(baseline["mother_receipt"]).read_bytes()
+        if hashlib.sha256(body).hexdigest() != baseline["mother_receipt_sha256"]:
+            raise ValueError("receipt content differs")
+        receipt = json.loads(body)
+        amounts = (
+            ("prior_charged_tokens", "cumulative_charged_tokens_including_old_hold"),
+            ("prior_charged_micro_usd", "cumulative_charged_micro_usd_including_old_hold"),
+            ("old_unknown_hold_count_already_in_baseline", "old_unknown_hold_preserved_already_in_baseline"),
+            ("retained_fx_hold_micro_usd", "retained_fx_guard_micro_usd"),
+        )
+        if any(baseline[field] != receipt[key] for field, key in amounts):
+            raise ValueError("receipt balance differs")
+        databases = {company: Path(entry["database_path"]).resolve()
+                     for company, entry in receipt["company"].items()}
+        attempts: dict[Path, set[str]] = {}
+        for row in receipt["rows"]:
+            attempts.setdefault(databases[row["company"]], set()).add(row["attempt_id"])
+        return attempts
+    except (OSError, AttributeError, KeyError, TypeError, ValueError) as exc:
+        raise ValueError("MOTHER_BASELINE_RECEIPT_INVALID") from exc
+
+
 def verify_preparation(meta: dict, *, mode: str) -> dict:
     before = {}
     metadata_changes = {}
@@ -303,13 +328,22 @@ def verify_preparation(meta: dict, *, mode: str) -> dict:
     ocr = ROOT / "config/local_ocr.json"
     if ocr.exists():
         before[str(ocr)] = fingerprint(ocr)
-    # Existing native attempts must agree with the prepared baseline. Read-only
-    # SQLite plus file fingerprints prevents silently resetting historic usage.
+    # Read existing databases directly. The sealed receipt retains their booked
+    # attempts and cumulative amounts after owned scratch has been removed.
     native = []
-    for prior in meta["mother_budget"]["native_observations"] if mode == "live" else []:
+    baseline = meta["mother_budget"] if mode == "live" else {}
+    archived_attempts = None
+    for prior in baseline.get("native_observations", ()):
         database = Path(prior["database"])
         if not database.exists():
-            raise ValueError("MOTHER_NATIVE_DATABASE_MISSING")
+            if archived_attempts is None:
+                archived_attempts = _sealed_baseline_attempts(baseline)
+            known = archived_attempts.get(database.resolve())
+            if known is None or known != set(prior["current_attempt_ids"]):
+                raise ValueError("MOTHER_BASELINE_NATIVE_ATTEMPTS_CHANGED")
+            native.append({"database": str(database), "attempts": len(known),
+                           "basis": "sealed_mother_receipt"})
+            continue
         actual = fingerprint(database)
         if not _same_content(actual, prior['fingerprint']):
             raise ValueError("MOTHER_NATIVE_DATABASE_CHANGED")
@@ -1616,13 +1650,9 @@ def _run_pair_in_owned_root(
                 imported["source_ref"]["document_id"]
             )
             if version == "0.9.0":
-                assert (
-                    final is not None
-                    and final["reading_dependencies"]["status"] == "complete"
-                )
-                assert final["selection_generation"][
-                    "material_sha256"
-                ] == reading_material_sha256(bundle)
+                from tools.document_understanding_benchmark.phase_c_observer import observe_reading_generation
+
+                state["published_reading_generation"] = observe_reading_generation(final, bundle)
                 from company_wiki.source_catalog.config import load_catalog_config
 
                 catalog_db = load_catalog_config(

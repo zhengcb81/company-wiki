@@ -4,6 +4,7 @@ from copy import deepcopy
 import pytest
 
 from tools.document_understanding_benchmark import phase_c_runner as runner
+from tools.document_understanding_benchmark.phase_c_observer import observe_reading_generation
 
 
 def prepared_sample():
@@ -34,6 +35,25 @@ def test_unseen_sample_uses_explicit_company_and_language_without_id_mapping():
     assert descriptor["document_kind"] == "investor_relations"
     assert descriptor["published_date"] == "2020-03-11"
     assert sample == before
+
+
+def test_bound_partial_reading_material_remains_eligible_for_formal_observation():
+    from company_wiki.automation.narrative_selection_generation import reading_material_sha256
+    from unit.test_narrative_qualifier_binding import selected_source
+
+    selected = selected_source(("公司已经拓展国际服务网络。",), current=True)
+    digest = reading_material_sha256(selected)
+    frozen = {
+        "reading_dependencies": {"status": "partial"},
+        "selection_generation": {"material_sha256": digest},
+    }
+
+    assert observe_reading_generation(frozen, selected) == {
+        "material_sha256": digest, "dependency_status": "partial",
+    }
+    frozen["selection_generation"]["material_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="PHASE_C_READING_MATERIAL_MISMATCH"):
+        observe_reading_generation(frozen, selected)
 
 
 def test_source_owned_correction_supersedes_unreliable_observation_for_every_field():

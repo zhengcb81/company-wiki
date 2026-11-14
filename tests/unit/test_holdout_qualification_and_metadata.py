@@ -71,6 +71,45 @@ def test_same_native_database_touch_keeps_actual_attempt_history(tmp_path, monke
     assert str(database) in result['metadata_changes']
 
 
+@pytest.mark.parametrize("fault", [None, "receipt_changed", "attempt_missing", "tokens_changed"])
+def test_retired_preparation_database_replays_its_sealed_baseline(tmp_path, monkeypatch, fault):
+    _, metadata = _prepared(tmp_path, monkeypatch)
+    database = tmp_path / "retired.sqlite"
+    receipt = tmp_path / "closed-usage.json"
+    source = {
+        "company": {"target": {"database_path": str(database)}},
+        "rows": [{"company": "target", "attempt_id": "baseline-attempt"}],
+        "cumulative_charged_tokens_including_old_hold": 125,
+        "cumulative_charged_micro_usd_including_old_hold": 32,
+        "old_unknown_hold_preserved_already_in_baseline": 2,
+        "retained_fx_guard_micro_usd": 4,
+    }
+    receipt.write_text(json.dumps(source), encoding="utf-8")
+    metadata["mother_budget"].update(
+        mother_receipt=str(receipt),
+        mother_receipt_sha256=phase_c.fingerprint(receipt)["sha256"],
+        prior_charged_tokens=125 if fault != "tokens_changed" else 0,
+        prior_charged_micro_usd=32,
+        old_unknown_hold_count_already_in_baseline=2,
+        retained_fx_hold_micro_usd=4,
+        native_observations=[{
+            "database": str(database),
+            "current_attempt_ids": ["different-attempt" if fault == "attempt_missing" else "baseline-attempt"],
+        }],
+    )
+    if fault == "receipt_changed":
+        receipt.write_text(json.dumps({**source, "rows": []}), encoding="utf-8")
+    if fault in ("receipt_changed", "attempt_missing", "tokens_changed"):
+        with pytest.raises(ValueError, match="MOTHER_BASELINE"):
+            phase_c.verify_preparation(metadata, mode="live")
+    else:
+        observed = phase_c.verify_preparation(metadata, mode="live")
+        assert observed["native"] == [{
+            "database": str(database), "attempts": 1, "basis": "sealed_mother_receipt",
+        }]
+    assert not database.exists()
+
+
 def test_post_execution_content_and_optional_usage_observations_ignore_only_metadata(tmp_path):
     path=tmp_path/'usage.jsonl'
     path.write_text('{"tokens":17}\n',encoding='utf-8')

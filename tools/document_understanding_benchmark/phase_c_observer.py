@@ -271,6 +271,18 @@ def gold_admission_missing(observation, *, attempt_no):
     return sent["missing_ids"]
 
 
+def observe_reading_generation(final, material) -> dict:
+    """Record coverage independently of exact selected-material identity."""
+    from company_wiki.automation.narrative_selection_generation import reading_material_sha256
+
+    generation = (final or {}).get("selection_generation", {})
+    digest = reading_material_sha256(material)
+    if generation.get("material_sha256") != digest:
+        raise ValueError("PHASE_C_READING_MATERIAL_MISMATCH")
+    dependencies = (final or {}).get("reading_dependencies") or {}
+    return {"material_sha256": digest, "dependency_status": dependencies.get("status")}
+
+
 def gold_observation(gold: dict, selected, envelope: dict) -> dict:
     from company_wiki.automation.narrative_model import _group_mapping
     from tools.document_understanding_benchmark.records import gold_fact_target_kind
@@ -532,12 +544,7 @@ def install() -> None:
         run = caller._store.get_run(caller._run_id)
         assert run is not None and run.model_id == http["model"]
         version = selected.selector.version
-        if version == "0.9.0":
-            assert final is not None
-            assert final["selection_generation"][
-                "material_sha256"
-            ] == reading_material_sha256(selected)
-            assert final["reading_dependencies"]["status"] == "complete"
+        reading_generation = observe_reading_generation(final, selected) if version == "0.9.0" else None
         gold_bytes = Path(config["gold"]).read_bytes()
         assert hashlib.sha256(gold_bytes).hexdigest() == config["gold_sha256"]
         gold = json.loads(gold_bytes)
@@ -564,6 +571,7 @@ def install() -> None:
             "gold": observation,
             "selection_checkpoint": selection_checkpoint,
             "generation_checkpoint": generation_checkpoint,
+            "reading_generation": reading_generation,
             "mode": config["mode"],
         }
         _append(config["events"], event)
