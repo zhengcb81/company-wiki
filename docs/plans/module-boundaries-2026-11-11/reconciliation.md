@@ -1,5 +1,20 @@
 # 工作区、支线和接收顺序（本轮唯一处置表）
 
+## 2026-11-14 模块化并线与本地改动续核
+
+- 用户再次明确：模块化架构必须保留。判断支线时先比对公开模块接口；整支合并会覆盖/绕过 owner 边界的，不得强并，应由支线作者在所属模块内改写并经模块测试后再收。
+- Dashboard 主线仍为 `main@ff6e764f1e4da3aa9de73d1469770a653b8af654`，上次尝试接收 C01 后已恢复到该已推送版本。C02 与 IQS B03 的有效行为已进入当前 operation/adapter 模块；旧 `service.py` / `adapters/iqs.py` 实现会回退模块边界，故只标记为功能已吸收，不整支合并。
+- C01 的 28 项验证在候选工作区曾通过，但不能据此并线：在 Windows `core.autocrlf=true` 的干净主线，签名清单因文本 CRLF/LF 转换失配而失败；`baseline-state.txt` 工作区 298 字节、Git blob 297 字节，`ce01-backup.log` 工作区 371 字节、Git blob 369 字节；主线已有的 `handoffs/external/X-C01-SCHEMA7-REHEARSAL-FINALIZE-01/README.md` 未列入候选清单。已撤销本地未推送 merge，产品代码未变。新施工卡要求只重做证据清单的跨检出可复现性，不改 Dashboard 产品层：[`dashboard_c01_evidence_portability.md`](harness_lanes/dashboard_c01_evidence_portability.md)。
+- CWP 已确认并删除 `.p3r-g3check-20261111` 隔离测试临时目录：16 个测试夹具/派生 DB 文件，435,503 字节；无链接、无原始业务文档，删除目标为仓库内单一直接子目录。
+- StockWiki 当前主仓有明确的 `2026-11-14-dashboard-owner-improvements` PWF，Phase 4 正在按独审补修 schema-7 store writer 绕行及事务竞态；这不是垃圾 WIP，也未达到可提交条件。保留其源码、测试和用户数据，按该计划接续，不将其与 Dashboard/CWP 互相写入。
+- RF `assurance/runs/daily_alert.jsonl` 末尾三条 2026-11-11 至 11-13 canary 失败已按 run ID 记入 [RF运行日志处置记录](review/rf_daily_alert_disposition_20261114.md)，然后只恢复该运行日志到 HEAD；不改RF源码。`.ff_jobs`、`.mimosa`、技能记忆、公司数据库/报告/名单与 CWP Phase-C 证据均属活状态或业务证据，不做通配清理。
+- RF 另一个历史工作树 `Projects/rf-impl` 的分支 `codex/rf-preserved-main-wip-20261006@6fb2def7` 是 `main@ec5ba004` 的祖先，落后 261 个提交；索引中有 238 项暂存状态，其中 230 项在 `execution_runs`。该目录实际物化的 49 个文件共 10,353,177 字节，均为测试/快照/审查运行材料；索引与当前 main 对照后只有 `verification_output.txt`、`recompute_metric.py` 两个 execution-run 路径不在 main，其余 run 内容已在 main 同 blob。旧 `.coveragerc`、hooks、CI 与 owner-decision 文本不等于当前 main，不能并线覆盖。快进前确认 4 个原件类路径在旧 HEAD 与 main 的 Git blob 完全相同；3 个在磁盘的源 HTML SHA-256 也一致；Microsoft 10-K HTML 在两边同 blob、由 sparse checkout 未物化。后续该工区已只快进到当前 main，原件未动；仅清除了经映射的陈旧暂存快照，没有通配 `clean`。
+- `revenue-forecast-audit` 仅两段未跟踪工具脚本，均与已存在的 budget-regime handoff/results 配套且可复跑，已加 EOF 格式修正后本地提交 `fa0564f`；无 Git remote，不虚报推送。StockWiki 当前 schema-7 writer remediation 仍按其 Phase 4 明确未完成项继续，不提前提交。
+- Dashboard `all31-listing-preview-combo` 实际为 120 条暂存路径：108 个 Git blob 已与当前 main 相同，10 个不同，2 个旧 UI 路径已被 `features/documents` 结构取代。旧 transport/UI 不能整包合并；剩余预览能力按当前公开 HTTP/application/source-owner 接口另做 [模块化适配卡](harness_lanes/dashboard_preview_module_adapter.md)。原历史工区保持只读，交付不得覆盖模块 owner。
+- Dashboard B03 旧分支 `codex/dashboard-iqs-b03-company-result@8f126ed1` 相对当前 `main@ff6e764f` 有 19 个分支独有提交，双方均有独有历史，不能快进。其产品行为已映射到当前 operation/adapter/feature 主线，旧集中式 `application/service.py`、`adapters/iqs.py` 和 `views/QuickScan.tsx` 不整支接收。旧包 R2 为 `CLEAN / 0 OPEN`，但 R1 文件仍有 `[ROUND4_VERDICT]`、`[R1_FINAL_VERDICT]` 字面占位符，JSON 也写 `PENDING_ROUND4`；它是未完成的独审收据，不是可签收绿灯。配置漂移 `.codegraph/config.json` 已恢复；剩余 B03 repair-chain 脚本/证据由 [B03 独审收口卡](harness_lanes/dashboard_b03_review_closeout.md) 定点结案，当前不合产品代码。
+- RF `rf-impl` 已快进到 `main@ec5ba0044b3252d2fc58c4a50c2fe9bc234cf5ad`，工作区干净；执行记录中独有的两个临时入口已确认不是尚未吸收的生产源码。原件 Git blob 与磁盘哈希核对无变化。其 230 项陈旧暂存运行快照不再留在活动工区；可追溯分析保存在本节及配套核对记录。此前分支未并线条目为历史快照，不代表现状。
+- 当前分流原则：可验证的完整模块成果在各自仓库完成定向回归后单独接收；仅历史证据应留在其所有者计划/交付目录；运行状态、原件、用户输入不恢复、不删除；旧代码若已被新模块实现替代则记录映射并归档差异，不为“合并率”倒退架构。
+
 ## 2026-11-14 当前处置
 
 五卡原作者工区已回收。StockWiki 已将 C38/B03 和来源公开客户端并入本地 `master`，仓库未配置远端。Dashboard 旧测试依赖的私有导入已在消费端消除，当前源码并入并推送 `main`。StockWiki 的 Quick Scan 文件、RF 的 assurance 运行记录和 Dashboard 历史输出仍有各自归属。最终版本 `e1d1f92` 增补消费者终止后队列唤醒。四个本轮测试工作树和四个测试目录已经过精确核对并回收。详细版本和测试证据见 [ROOT 组合记录](review/root_composition_20261114.md)。
@@ -63,7 +78,7 @@ before快照总计390个分支/remote refs、253个登记工区，另7个RF tag�
 | CWP M3/W04独有反例、T-CONFIG，R1的552份resume记录 | MB-CWP A0：反例映射现行语义；原始失败/审查资料去重归档。98个JSON只是clean-filter等价，不能当新源码合并。 |
 | CWP剩余stash `18ac0d0562` | ROOT账目归档：保留独有llm_cost_log差量；两测试已吸收，39个旧删除不再执行。无需运行LLM。 |
 | RF rf-impl的233份已与main同blob staged文件，余5个历史PWF；旧W04研究说明 | MB-RF A0先保留5份独有历史证据，再精确核销已吸收副本；研究说明回父计划，不能覆盖当前SKILL。 |
-| SID11文件、capture_byd_fy2024_fixture.py、公司名单 | MB-SID按A0接收；公司名单是用户输入，保留；fixture脚本不得当生产公司特判执行。 |
+| SID11文件、capture_byd_fy2024_fixture.py、公司名单 | MB-SID按A0接收；公司名单是用户输入，保留；fixture脚本不得当生产公司特判执行。原11文件差异以gzip保存于[只读对账归档](review/mb11-sid-wip/wip-11files.patch.gz)：53,423字节压为15,327字节，解压后SHA-256 `08a8b63148f2cb47cf77c1b852cf7b93ebc8c3148dddbd2fa6166520a0864dd1` 与原件完全一致。BYD fixture脚本仅作为schema捕获实现来源，不在此执行。 |
 | FF W06/W07输入/测试材料、旧job协议文档；SID G4镜像 | 对应MB卡A0归档唯一证据再回收，不能用旧complete/16case替代后来的41case收据。 |
 | Dashboard all31组合110个已吸收blob、余10个旧文档/被替代UI；B03 repair_chain；m5独审补记 | Dashboard原owner核销/归档，B03等待SW对应公开协议；m5独审是有效证据，不能当临时文件删。 |
 | RF/SW配置引用的release工区；含原文的RF Temp；.ff_jobs、StockWiki data、RF delivery/output、工具状态/记忆 | 明确保留，有实际部署/原件/业务状态/历史用途。接收成功并通过公开组合后才迁换引用；不做全量恢复演练或复制整库。 |

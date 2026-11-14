@@ -7,6 +7,8 @@
 - StockWiki C38/B03 与安装态公开来源读取进入本地 `master@21cf4891`。Dashboard 消费端移除了对 CWP 私有符号及源码布局的依赖。现有安装验收覆盖浏览、原件和摘要证据。
 - 实跑 D4 跨仓 30/30、摘要缓存和恢复 36/36、真实募集说明书四根位置替换。RF → FF → CWP 三表新入口已由实际技能安装副本跑通，中微冻结快照两次复用均为零 HTTP，独立审查通过并推送 RF `fab819c2`。
 - 当前版本及 E01–E09 验收见 [ROOT 组合记录](review/root_composition_20261114.md)。
+- 续核本地改动时按实际 SHA 纠正了旧 Dashboard B-real 统计：120 条 staged path（108 同 blob、10 不同、2 个旧 UI 路径已迁移），没有整包合入。新增 C01证据、B-real模块适配、B03独审收据三张不重叠卡；R1的占位符及 `PENDING_ROUND4` 被登记为未完成，未冒称验收。RF `rf-impl` 历史工区已精确快进到当前 main；其他活跃证据、原件和 StockWiki remediation 保留。详见 [对账表](reconciliation.md) 和 [派发矩阵](dispatch.md)。
+- CWP `.p3r-g3check-20261111` 精确回收16个派生夹具/DB文件（435,503字节）；MB-SID原11文件差异以SHA可复核gzip归档从53,423压至15,327字节；`revenue-forecast-audit` 两个已配套工具已本地提交 `fa0564f`，仓库无remote。CWP 本轮只改计划/交接和只读WIP归档，没有修改产品代码。
 
 ## A1核销交付（2026-11-11，历史）
 

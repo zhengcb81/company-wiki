@@ -2,6 +2,8 @@
 
 **M2 已完成。** 五条模块施工卡已受测并入各自主线并推送。StockWiki 公开来源读取已进入本地 `master`，Dashboard 的公开浏览、原件流和摘要读取已推送 `main`。D4 跨仓回放 30 项全过，E01–E09 均有组合证据。 [组合记录](review/root_composition_20261114.md) · [矩阵](boundary_matrix.json)
 
+M2 之后的工作区续核不改变上述结论，也不允许恢复旧的跨层实现。Dashboard 三项未收口材料按文件域拆开：[C01证据可移植性](harness_lanes/dashboard_c01_evidence_portability.md)、[B-real预览模块适配](harness_lanes/dashboard_preview_module_adapter.md)、[B03独审收据收口](harness_lanes/dashboard_b03_review_closeout.md)。唯一处置表在 [reconciliation.md](reconciliation.md)，并行写集合见 [dispatch.md](dispatch.md)。
+
 当前实施已回到 [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。R4 和 T4/SEM 已验收，真实来源卡的付费恢复和两条 RF 实际采用通过。正在修正业务摘要内容。
 
 先读 [task_plan.md](task_plan.md)，再读 [architecture.md](architecture.md)、[interfaces.md](interfaces.md)、[acceptance.md](acceptance.md)。并行安排和卡片见 [dispatch.md](dispatch.md)，交接格式见 [handoff_contract.md](handoff_contract.md)，机器对照见 [boundary_matrix.json](boundary_matrix.json)。

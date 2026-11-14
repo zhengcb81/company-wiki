@@ -14,6 +14,18 @@
 
 五份卡文件只由ROOT维护，harness对自己的PWF负责。共享测试/生产代码文件不存在双作者；CWP integration/** 与 tools/run_source_system_tests.py 属ROOT，必须在CWP卡交付后才修改。跨仓通信兼容现行公开wire，因此无需同步重写邻仓。
 
+## M2之后的Dashboard独立续核卡
+
+以下是本轮只读盘点后发现的未收口差额，不重开M2，也不允许以旧分支覆盖当前模块结构。三卡都以 Dashboard 当前 modular main 为产品边界，交付时分别使用独立工区与独立 handoff：
+
+| 卡 | 独占范围 | 不得触碰 | 当前基线/完成条件 |
+|---|---|---|---|
+| [C01证据可移植性](harness_lanes/dashboard_c01_evidence_portability.md) | C01 schema-7 rehearsal evidence、manifest、verifier、C01测试 | Dashboard产品代码、其他仓库、非C01证据 | main `ff6e764f`；两个 `core.autocrlf` 新鲜检出都通过，原28场景不减，manifest精确覆盖文件集，独审绑定最终HEAD |
+| [B-real预览模块适配](harness_lanes/dashboard_preview_module_adapter.md) | documents preview UI、Dashboard transport及其定向测试 | `application/ops`、公共契约、CWP/FF/StockWiki源码、旧 staged worktree | main `ff6e764f`；仅通过公开UI→HTTP→application operation→owner adapter/source port完成功能，原件身份/hash/locator不变 |
+| [B03独审收据收口](harness_lanes/dashboard_b03_review_closeout.md) | 仅旧B03 handoff/review/evidence和隔离复验 | 任何产品代码或生产数据；不得把集中式旧adapter/service合并 | 旧B03 R1当前为PENDING且报告有字面占位符；只有独立reviewer给出绑定源码SHA的最终结论才可标完成 |
+
+三卡目录、改动清单与验收证据不得交叉写入。B-real只新增产品代码；C01与B03只改各自历史交接证据。即使不同harness并行，其合并顺序也是各自独立提交到当前Dashboard主线，出现共享接口差额时回到owner公开合同，不允许跨层调用。
+
 ## 原并行安排
 
 - 五卡可同时做A/B/C：它们均保持现有跨仓协议；内部新端口和测试仅归本repo。已通过的现有能力不重做。

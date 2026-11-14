@@ -1,0 +1,12 @@
+ README.md                                | 126 ++++++++++---
+ config_template.json                     |   3 +-
+ main.py                                  |  13 ++
+ src/browser.py                           |  81 ++++++--
+ src/downloader.py                        | 212 +++++++++++++++++++--
+ src/logger.py                            |   2 +-
+ src/mapping.py                           |  38 ++--
+ src/models.py                            |   9 +
+ tests/e2e/official_e2e_test.py           |  38 ++--
+ tests/unit/test_downloader.py            | 313 ++++++++++++++++++++++++++++++-
+ tests/unit/test_official_e2e_contract.py |   2 +-
+ 11 files changed, 743 insertions(+), 94 deletions(-)
