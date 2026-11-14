@@ -241,6 +241,15 @@ def test_unknown_producer_file_is_refused_on_load(tmp_path):
         assert error.value.code == "unsupported_producer_version"
 
 
+def test_lookup_of_unknown_projection_does_not_create_storage(tmp_path):
+    with catalog_for(tmp_path) as catalog:
+        before = set(tmp_path.rglob("*"))
+        with pytest.raises(ProjectionError) as error:
+            load_projection(catalog, PROJECTION_ID_PREFIX + "a" * 64)
+        assert error.value.code == "projection_not_found"
+        assert set(tmp_path.rglob("*")) == before
+
+
 def test_repeated_canonical_persist_keeps_one_derived_per_projection(tmp_path):
     with catalog_for(tmp_path) as catalog:
         page1 = import_page(catalog, standard_pages()[0])

@@ -14,6 +14,7 @@ from typing import Any
 
 from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
 from company_wiki.file_usage import database_file_sizes
+from company_wiki.narrative_subject import NARRATIVE_SUBJECT_REF_SCHEMA, NarrativeSubjectRef
 from company_wiki.resource_budget import document_work_budget_factory
 
 from company_wiki.source_catalog import SourceCatalog
@@ -39,7 +40,7 @@ from .narrative_generation_binding import (
     freeze_generation_manifests as _freeze_generations,
     thaw_generation_manifests,
 )
-from company_wiki.source_catalog.narrative_official_json import open_verified_projection
+from company_wiki.source_catalog.narrative_official_json import ProjectionLoader, bind_projection_loader
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
 from company_wiki.source_catalog.narrative_formats import source_class_for
 from .narrative_projection import NarrativeEffectDispatcher
@@ -101,7 +102,7 @@ def _check_preparation_deadline(deadline: float | None) -> None:
 
 
 def _current_sources(
-    request, reader, *, deadline=None, normalization=None, projection_catalog=None
+    request, reader, *, deadline=None, normalization=None, projection_loader: ProjectionLoader | None = None
 ):
     """Read current identity/period and exact version admission without writing."""
     _check_preparation_deadline(deadline)
@@ -110,13 +111,13 @@ def _current_sources(
     for item in request.work_items:
         _check_preparation_deadline(deadline)
         if item.kind == "official_json":
-            if projection_catalog is None:
+            if projection_loader is None:
                 raise ValueError("PROJECTION_SOURCE_PORT_UNAVAILABLE")
-            view = open_verified_projection(
-                projection_catalog,
-                projection_id=item.projection_id,
-                expected_projection_sha256=item.projection_sha256,
+            assert item.projection_id is not None and item.projection_sha256 is not None
+            reference = NarrativeSubjectRef(
+                NARRATIVE_SUBJECT_REF_SCHEMA, item.kind, item.projection_id, item.projection_sha256,
             )
+            view = projection_loader(reference)
             _check_preparation_deadline(deadline)
             descriptions = [
                 reader.describe_version(SourceRef(**ref))
@@ -224,12 +225,12 @@ def build_batch_events(
     *,
     now: str,
     deadline: float | None = None,
-    projection_catalog=None,
+    projection_loader: ProjectionLoader | None = None,
     normalization=None,
 ) -> BatchEvents:
     """Bind current source facts and execution settings before materializing jobs."""
     payloads, facts = _current_sources(
-        request, reader, deadline=deadline, projection_catalog=projection_catalog,
+        request, reader, deadline=deadline, projection_loader=projection_loader,
         normalization=normalization
     )
     return _events_from_sources(request, payloads, facts, now=now)
@@ -781,17 +782,6 @@ def _resume_binding(
         raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID") from exc
 
 
-def _projection_loader(catalog):
-    def load(subject):
-        return open_verified_projection(
-            catalog,
-            projection_id=subject.item_key,
-            expected_projection_sha256=subject.subject_sha256,
-        )
-
-    return load
-
-
 def _item_generation(request, payload, *, normalization=None, versions=None,
                      parser_components=None,
                      reading_model_projection=READING_PROJECTION_UNSET):
@@ -1042,7 +1032,9 @@ def _resume_item_binding(
         raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID") from exc
 
 
-def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog, normalization=None):
+def _read_projected_pin(
+    artifacts, reader, payload, pin, manifest, *, projection_loader: ProjectionLoader | None, normalization=None,
+):
     from .narrative_transport import NarrativeTransportReader
     from .narrative_transport_contracts import NarrativeReadRequest
     from .narrative_contracts import NarrativeBundle
@@ -1056,7 +1048,7 @@ def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog, n
         raise ValueError("BATCH_REUSE_PIN_SUBJECT_MISMATCH")
     result = NarrativeTransportReader(
         artifacts, reader, normalization=normalization,
-        projection_loader=_projection_loader(catalog)
+        projection_loader=projection_loader
     ).read(
         NarrativeReadRequest.from_dict(
             {
@@ -1102,7 +1094,7 @@ def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog, n
 
 
 def _find_item_reuse_pin(
-    artifacts, reader, payload, manifest, facts, *, catalog, normalization=None,
+    artifacts, reader, payload, manifest, facts, *, projection_loader: ProjectionLoader | None = None, normalization=None,
     work_budget_factory=None, deadline=None,
 ):
     def reselect():
@@ -1114,7 +1106,7 @@ def _find_item_reuse_pin(
         try:
             return NarrativeSelectHandler(
                 reader=reader, selector_version=manifest["execution_versions"]["selector"],
-                normalization=normalization, projection_catalog=catalog,
+                normalization=normalization, projection_loader=projection_loader,
                 work_budget_factory=work_budget_factory,
             ).select_source(payload, checkpoint=checkpoint)
         except TimeoutError:
@@ -1156,7 +1148,7 @@ def _find_item_reuse_pin(
             "generation_sha256": generation_sha256(effective),
         }
         if discovered_cache_read(lambda: _read_projected_pin(
-            artifacts, reader, payload, pin, effective, catalog=catalog,
+            artifacts, reader, payload, pin, effective, projection_loader=projection_loader,
             normalization=normalization,
         )):
             return pin
@@ -1242,6 +1234,7 @@ def _run_owned(
 ):
     _check_preparation_deadline(deadline)
     reader = SourceVersionReader(catalog)
+    projection_loader = bind_projection_loader(catalog)
     # This directory is dedicated to batch records/logs. It must not contain or
     # be an ancestor of raw/config/catalog/database paths being measured.
     if catalog.storage_is_within(work_dir) or any(
@@ -1284,7 +1277,7 @@ def _run_owned(
         reader,
         deadline=deadline,
         normalization=normalization,
-        projection_catalog=catalog,
+        projection_loader=projection_loader,
     )
     effective_versions = _effective_execution_versions(
         request,
@@ -1343,6 +1336,7 @@ def _run_owned(
             prepared_sources=prepared_sources,
             manifests=manifests,
             normalization=normalization,
+            projection_loader=projection_loader,
             work_budget_factory=work_budget_factory,
             effective_versions=effective_versions,
         )
@@ -1402,6 +1396,7 @@ def _run_prepared(
     prepared_sources,
     manifests,
     normalization,
+    projection_loader: ProjectionLoader,
     work_budget_factory,
     effective_versions,
 ):
@@ -1446,7 +1441,7 @@ def _run_prepared(
                             payload,
                             manifests[document],
                             facts[document],
-                            catalog=catalog,
+                            projection_loader=projection_loader,
                             normalization=normalization,
                             work_budget_factory=work_budget_factory,
                             deadline=deadline,
@@ -1513,7 +1508,7 @@ def _run_prepared(
                 job_ids=previous.job_ids,
                 reader=reader,
                 normalization=normalization,
-                projection_catalog=catalog,
+                projection_loader=projection_loader,
             )
         finally:
             readonly_artifacts.close()
@@ -1616,7 +1611,7 @@ def _run_prepared(
                     job_ids=(),
                     reader=reader,
                     normalization=normalization,
-                    projection_catalog=catalog,
+                    projection_loader=projection_loader,
                 )
                 try:
                     guard.check()
@@ -1642,7 +1637,7 @@ def _run_prepared(
             artifacts,
             allowed_job_ids=run.job_ids,
             generation_manifests=binding.generation_manifests,
-            projection_loader=_projection_loader(catalog),
+            projection_loader=projection_loader,
         )
         supervisor = AutomationSupervisor(
             SupervisorConfig(
@@ -1775,7 +1770,7 @@ def _run_prepared(
         job_ids=run.job_ids,
         reader=reader,
         normalization=normalization,
-        projection_catalog=catalog,
+        projection_loader=projection_loader,
     )
     for document in documents:
         manifest = binding.generation_manifests.get(
@@ -2033,7 +2028,7 @@ def _final_documents(
     job_ids=None,
     reader=None,
     normalization=None,
-    projection_catalog=None,
+    projection_loader: ProjectionLoader | None = None,
 ):
     documents = []
     reservations = {
@@ -2080,7 +2075,7 @@ def _final_documents(
                     payload,
                     pin,
                     manifest,
-                    catalog=projection_catalog,
+                    projection_loader=projection_loader,
                 )
                 if projected
                 else read_reuse_pin(
@@ -2150,7 +2145,7 @@ def _final_documents(
                             payload,
                             artifact_ref,
                             manifest,
-                            catalog=projection_catalog,
+                            projection_loader=projection_loader,
                         )
                     ):
                         raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID")
@@ -2212,15 +2207,7 @@ def _final_documents(
                         job_ids=tuple(job.job_id for job in jobs),
                         final_artifact=final_pin,
                         compacted_at=_now(),
-                        **(
-                            {
-                                "projection_loader": _projection_loader(
-                                    projection_catalog
-                                )
-                            }
-                            if projected
-                            else {}
-                        ),
+                        projection_loader=projection_loader if projected else None,
                     )
             except NarrativeArtifactNotVisibleError:
                 document_status = "activation_pending"

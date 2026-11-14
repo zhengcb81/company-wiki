@@ -92,21 +92,11 @@ def test_only_complete_matching_visible_and_replayed_candidate_is_eligible(
             LocalNarrativeObjectStore(fixture.catalog.config.catalog_dir),
         )
         try:
-            if state == "forged_metadata":
-                with pytest.raises(ValueError, match="BATCH_REUSE"):
-                    find_reuse_pin(
-                        reader,
-                        fixture.reader,
-                        payload,
-                        manifest,
-                        binding.source_facts[0],
-                    )
-            else:
-                pin = find_reuse_pin(
-                    reader, fixture.reader, payload, manifest, binding.source_facts[0]
-                )
-                assert (pin is not None) is (state in {"complete", "partial"})
-                if pin:
-                    assert pin["artifact_version_id"] == prepared.artifact_version_id
+            pin = find_reuse_pin(
+                reader, fixture.reader, payload, manifest, binding.source_facts[0]
+            )
+            assert (pin is not None) is (state in {"complete", "partial"})
+            if pin:
+                assert pin["artifact_version_id"] == prepared.artifact_version_id
         finally:
             reader.close()

@@ -10,11 +10,14 @@ exclusion, and corrupt-original rejection.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
 import sys
 from pathlib import Path
+
+import pytest
 
 from company_wiki.source_catalog.models import CatalogConfig, RootSpec
 from company_wiki.source_catalog.narrative_routing import classify_document_kind
@@ -181,6 +184,93 @@ def _db_counts(wiki_root: Path):
             "SELECT COUNT(*) FROM artifacts WHERE artifact_role IN ('normalized','summary')"
         ).fetchone()[0]
     return versions, values, normalized
+
+
+@pytest.mark.skipif(
+    not os.environ.get("MB_RF_ROOT") or not os.environ.get("MB_FF_ROOT"),
+    reason="ROOT E07 uses explicitly selected RF and FF runtimes",
+)
+def test_rf_reads_three_statement_histories_through_ff(tmp_path):
+    wiki_root = _wiki_root(tmp_path)
+    fixture_root = _fixture_root(tmp_path)
+    initial = _run(wiki_root, fixture_root)
+    assert initial.returncode == 0, initial.stderr.decode("utf-8", errors="replace")
+    captured = json.loads(initial.stdout)
+    assert captured["status"] == "complete"
+    reports = [report for table in captured["statements"] for report in table["reports"]]
+    as_of = max(report["observed_at"][:10] for report in reports)
+    # A further provider read would fail because the fixture manifest is gone.
+    (fixture_root / "manifest.json").unlink()
+    original_hashes = {path: hashlib.sha256(path.read_bytes()).hexdigest()
+                       for path in _lake(wiki_root)}
+    counts = _db_counts(wiki_root)
+    assert counts == (105, TOTAL_SOURCE_ROWS, 0)
+
+    empty = tmp_path / "unrelated-cwd"
+    empty.mkdir()
+    config = tmp_path / "ff-connection.json"
+    config.write_text(json.dumps({
+        "schema_version": "1.0",
+        "connection": {"cwd": str(empty), "commands": {"financial_statements": [
+            sys.executable, "-B", "-m", "company_wiki.source_catalog.financial_statements.cli",
+            "--wiki-root", str(wiki_root), "--fixture-root", str(fixture_root),
+        ]}},
+    }), encoding="utf-8")
+    rf = Path(os.environ["MB_RF_ROOT"]).resolve(strict=True)
+    ff = Path(os.environ["MB_FF_ROOT"]).resolve(strict=True)
+    env = {**os.environ, "PYTHONPATH": str(REPO_ROOT / "src"), "PYTHONUTF8": "1",
+           "PYTHONDONTWRITEBYTECODE": "1", "PYTHON_DOTENV_DISABLED": "1"}
+    command = [
+        sys.executable, "-B", str(rf / "scripts/financial_statement_source.py"),
+        "--filing-fetch-root", str(ff), "--company-wiki-config", str(config),
+    ]
+    # RF defaults to reuse. Query the same history twice as of a proven
+    # observation date, with the table's own currency and period semantics.
+    request = {**REQUEST, "as_of_date": as_of, "knowledge_mode": "point_in_time"}
+    del request["intent"], request["acquisition_limits"]
+    responses = []
+    for _ in range(2):
+        result = subprocess.run(
+            command, input=json.dumps(request, ensure_ascii=False).encode("utf-8"),
+            capture_output=True, cwd=empty, env=env, check=False, timeout=60,
+        )
+        assert result.returncode == 0, result.stderr.decode("utf-8", errors="replace")
+        received = json.loads(result.stdout)
+        assert received["status"] == "complete", received.get("reason")
+        assert received["usage"]["http_requests"] == 0
+        assert received["request"]["knowledge_mode"] == "point_in_time"
+        responses.append(received["statements"])
+    assert responses[0] == responses[1]
+
+    by_type = {table["statement_type"]: table for table in responses[0]}
+    assert set(by_type) == set(ANCHORS)
+    by_hash = {sha: path for path, sha in original_hashes.items()}
+    for table, (period, field, expected) in ANCHORS.items():
+        assert len(by_type[table]["reports"]) == PAGE_COUNTS[table]
+        report = next(r for r in by_type[table]["reports"] if r["period_end"] == period)
+        assert report["currency"] == "CNY" and report["pit_verified"] is True
+        assert report["period_semantics"] == ("instant" if table == "balance_sheet" else "duration")
+        assert report["observed_at"][:10] <= as_of
+        row = next(r for r in report["rows"] if r["provider_field"] == field)
+        assert row["value_decimal"] == expected
+        # Display precision is not the reporting scale. These amount rows
+        # have no proven unit; per-share rows below do have one.
+        assert row["scale"] is None and row["unit"] is None
+        original = by_hash[report["source_ref"]["content_sha256"]]
+        value = json.loads(original.read_bytes())
+        for key in row["json_pointer"].split("/")[1:]:
+            value = value[int(key)] if isinstance(value, list) else value[key]
+        assert value == expected
+
+    income = next(r for r in by_type["income_statement"]["reports"]
+                  if r["period_end"] == ANCHORS["income_statement"][0])
+    eps = next(row for row in income["rows"] if row["provider_field"] == "BASICEPS")
+    assert eps["unit"] == "CNY/share" and eps["scale"] == 1
+
+    assert _db_counts(wiki_root) == counts
+    assert {path: hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in _lake(wiki_root)} == original_hashes
+    assert not tuple(empty.iterdir())
 
 
 class TestFullHistoryOfflineEndToEnd:

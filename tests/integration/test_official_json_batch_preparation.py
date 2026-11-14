@@ -7,6 +7,7 @@ from company_wiki.automation.narrative_batch import (
     _thaw_generations,
 )
 from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
+from company_wiki.source_catalog.narrative_official_json import bind_projection_loader
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from integration.test_official_json_transport_subject import owned_state
 from unit.test_narrative_batch_request import _request
@@ -34,7 +35,7 @@ def test_two_issuers_sharing_parents_produce_distinct_bound_events(tmp_path):
             request,
             SourceVersionReader(state.catalog),
             now="2026-10-10T00:00:00Z",
-            projection_catalog=state.catalog,
+            projection_loader=bind_projection_loader(state.catalog),
         )
         assert len(binding.events) == 2
         assert [e.subject_id for e in binding.events] == [

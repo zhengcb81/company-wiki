@@ -23,6 +23,10 @@ from .store import AutomationStore
 from .worker import HandlerExecutor, Worker
 
 
+def _no_resources_to_close() -> None:
+    pass
+
+
 @dataclass(frozen=True)
 class WorkerRuntime:
     """Objects constructed inside one child process by an importable factory."""
@@ -31,6 +35,7 @@ class WorkerRuntime:
     executor: HandlerExecutor
     model_client: object | None = None
     lifecycle_callback: Callable[[str, ClaimedWork], None] | None = None
+    close: Callable[[], None] = _no_resources_to_close
 
 
 class StopEvent(Protocol):
@@ -152,12 +157,14 @@ def run_worker_process(
         max_bytes=spec.child_log_max_bytes,
     )
     with redirect_stdout(stdout), redirect_stderr(stderr):
+        runtime = None
         try:
             _start_parent_watchdog(parent_pid)
             factory = _resolve_factory(spec.runtime_factory_path)
-            runtime = factory(spec)
-            if not isinstance(runtime, WorkerRuntime):
+            built = factory(spec)
+            if not isinstance(built, WorkerRuntime):
                 raise TypeError("runtime factory must return WorkerRuntime")
+            runtime = built
             validate_runtime(
                 runtime, role=spec.role, allowed_job_types=spec.allowed_job_types
             )
@@ -179,6 +186,13 @@ def run_worker_process(
         except BaseException:
             traceback.print_exc()
             raise
+        finally:
+            if runtime is not None:
+                try:
+                    runtime.close()
+                except Exception:
+                    # Cleanup diagnostics do not replace the worker outcome.
+                    traceback.print_exc()
 
 
 def _start_parent_watchdog(parent_pid: int) -> threading.Thread:

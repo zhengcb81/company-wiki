@@ -796,10 +796,7 @@ _PROJECTIONS_DIRNAME = "projections"
 
 
 def _projections_root(catalog) -> Path:
-    from pathlib import Path
-    root = Path(catalog.config.catalog_dir) / _PROJECTIONS_DIRNAME
-    root.mkdir(parents=True, exist_ok=True)
-    return root
+    return Path(catalog.config.catalog_dir) / _PROJECTIONS_DIRNAME
 
 
 def persist_projection(catalog, projection: SourceProjection) -> str:
@@ -811,6 +808,7 @@ def persist_projection(catalog, projection: SourceProjection) -> str:
         # mismatch is a named refusal, never a silent re-hash.
         raise ProjectionError("projection_payload_mismatch")
     path = _projections_root(catalog) / (projection.projection_sha256 + ".json")
+    path.parent.mkdir(parents=True, exist_ok=True)
     encoded = _canonical_json(projection.to_dict()).encode("utf-8")
     if path.exists():
         if path.read_bytes() != encoded + b"\n":

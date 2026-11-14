@@ -149,8 +149,10 @@ def test_actual_worker_options_start_current_docx_and_recover_frozen_selection(
         source_sha256=digest,
         mime_type=DOCX_MIME,
     )
+    runtimes = []
     try:
         first = factory.create_runtime(spec)
+        runtimes.append(first)
         assert first.model_client is None
         port = dependencies[-1].normalization
         document = port.normalize(data, document_id="docx-document", **kwargs)
@@ -167,6 +169,7 @@ def test_actual_worker_options_start_current_docx_and_recover_frozen_selection(
         port.close()
 
         recovered = factory.create_runtime(spec)
+        runtimes.append(recovered)
         assert recovered.model_client is None
         replay_port = dependencies[-1].normalization
         assert replay_port is not port
@@ -187,4 +190,5 @@ def test_actual_worker_options_start_current_docx_and_recover_frozen_selection(
     finally:
         for ports in dependencies:
             ports.normalization.close()
-            ports.projection_catalog.close()
+        for runtime in runtimes:
+            runtime.close()

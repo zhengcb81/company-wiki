@@ -16,6 +16,7 @@ from company_wiki.automation.narrative_contracts import NarrativeSelectResult, S
 from company_wiki.automation.narrative_official_json import open_verified_projection
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.narrative_subject import NarrativeSubject
+from company_wiki.source_catalog.narrative_official_json import bind_projection_loader
 from company_wiki.source_catalog.models import CatalogConfig, RootSpec
 from company_wiki.source_catalog.official_json_import import import_official_json_source
 from company_wiki.source_catalog.official_json_projection import (
@@ -106,7 +107,7 @@ def make_context(projection, *, language="en", subject_override=None):
 
 
 def handler(catalog):
-    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_loader=bind_projection_loader(catalog))
 
 
 def assert_zero_resources(result):
@@ -281,14 +282,13 @@ def test_missing_projection_dependency_has_typed_failure_no_transcript_fallback(
         assert_zero_resources(result)
 
 
-def test_unknown_layout_source_port_refusal_has_typed_failure_no_fallback(tmp_path, monkeypatch):
+def test_unknown_layout_source_port_refusal_has_typed_failure_no_fallback(tmp_path):
     with owned_catalog(tmp_path) as (catalog, _root):
         ref, _ = import_page(catalog, flat_page(1))
         context = make_context(persist(catalog, [ref]))
         def refuse(*args, **kwargs):
             raise ProjectionError("unknown_layout_id")
-        monkeypatch.setattr("company_wiki.automation.narrative_select.open_verified_projection", refuse)
-        result = handler(catalog)(context)
+        result = NarrativeSelectHandler(reader=NoRawReader(), projection_loader=refuse)(context)
         assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
         assert result.error.code == "PARSER_INCOMPLETE"
         assert result.error.detail == "unknown_layout_id"

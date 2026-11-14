@@ -195,6 +195,36 @@ def _receipt(catalog, document_id: str) -> None:
         con.close()
 
 
+def test_metadata_merge_consumes_the_observed_document_value_once(tmp_path, monkeypatch):
+    companies = tmp_path / "companies"
+    home = companies / "Acme" / "raw"
+    sidecar = _sidecar()
+    _write_copy(home, sidecar)
+    catalog = _scan(tmp_path, _roots(("company_raw", companies, 10)))
+    document_id = _sole_document_id(catalog)
+    marker = "only present in persisted catalog metadata"
+    state = _metadata(catalog, document_id)
+    state["test_marker"] = marker
+    wire = json.dumps(state, sort_keys=True)
+    with catalog.store.transaction() as connection:
+        connection.execute("UPDATE documents SET metadata_json=? WHERE document_id=?",
+                           (wire, document_id))
+    _write_copy(home, {**sidecar, "document_title": "Updated title on rescan"})
+    loads = json.loads
+    decoded = []
+
+    def track(raw, *args, **kwargs):
+        if raw == wire:
+            decoded.append(raw)
+        return loads(raw, *args, **kwargs)
+
+    with monkeypatch.context() as patch:
+        patch.setattr(json, "loads", track)
+        catalog.scan()
+    assert decoded == [wire]
+    assert _metadata(catalog, document_id)["test_marker"] == marker
+
+
 # ---------------------------------------------------------------------------
 # The reserved key: present, hashed, schema-versioned, additive
 # ---------------------------------------------------------------------------

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Protocol
+from typing import Protocol
 
 from company_wiki.narrative_subject import NarrativeSubject
 from company_wiki.resource_budget import WorkBudget
@@ -12,6 +12,7 @@ from company_wiki.resource_budget import WorkBudget
 from .execution_context import JobExecutionContext
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
+from company_wiki.source_catalog.narrative_official_json import ProjectionLoader
 from .models import HandlerResult
 from .narrative_model import NarrativeModel
 from .narrative_model_caller import NarrativeModelCaller
@@ -41,7 +42,7 @@ class NarrativeRuntimeDependencies:
     model_caller: NarrativeModelCaller | None = None
     normalization: NarrativeNormalization | None = None
     pdf_reading: PdfReading | None = None
-    projection_catalog: Any | None = None
+    projection_loader: ProjectionLoader | None = None
     generation_sha256: Callable[[NarrativeSubject], str] | None = None
     selector_version: str | None = None
     reading_model_projection: Callable[[NarrativeSubject], str | None] | None = None
@@ -61,7 +62,7 @@ def register_narrative_handlers(
         "source.narrative_select",
         NarrativeSelectHandler(reader=dependencies.reader, normalization=dependencies.normalization,
             pdf_reading=pdf_reading,
-            projection_catalog=dependencies.projection_catalog, selector_version=selector_version,
+            projection_loader=dependencies.projection_loader, selector_version=selector_version,
             work_budget_factory=dependencies.work_budget_factory),
     )
     registrar.register(
@@ -74,7 +75,7 @@ def register_narrative_handlers(
         "source.narrative_verify",
         NarrativeVerifyHandler(reader=dependencies.reader, normalization=dependencies.normalization,
             pdf_reading=pdf_reading,
-            projection_catalog=dependencies.projection_catalog, generation_sha256=dependencies.generation_sha256,
+            projection_loader=dependencies.projection_loader, generation_sha256=dependencies.generation_sha256,
             selector_version=selector_version, reading_model_projection=dependencies.reading_model_projection),
     )
 

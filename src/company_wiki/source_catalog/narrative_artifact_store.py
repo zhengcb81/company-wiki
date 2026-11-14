@@ -20,7 +20,7 @@ import uuid
 from typing import Any, Callable, Iterator
 
 from company_wiki.id_scope import normalize_id_scope
-from company_wiki.narrative_subject import NarrativeSubject, SubjectBindingError
+from company_wiki.narrative_subject import NarrativeSubject
 
 from .lock import CatalogOperationLock
 from .store import CatalogStore
@@ -65,6 +65,10 @@ class NarrativeArtifactConflictError(NarrativeArtifactError):
 
 class NarrativeObjectIntegrityError(NarrativeArtifactError):
     """An object key or stored object does not match its content hash."""
+
+
+class _StoredObjectMismatch(NarrativeObjectIntegrityError):
+    """Bytes were read, but do not match their content address."""
 
 
 class NarrativeSourceNotCurrentError(NarrativeArtifactError):
@@ -167,11 +171,18 @@ class LocalNarrativeObjectStore:
         self._write_policy = write_policy
 
     def put(self, data: bytes) -> str:
+        return self._put(data)
+
+    def _put_bundle(self, data: bytes) -> str:
+        """Publish known derived bytes and repair their exact corrupted address."""
+        return self._put(data, repair_mismatch=True)
+
+    def _put(self, data: bytes, *, repair_mismatch: bool = False) -> str:
         if self._write_policy is None:
-            return self.put_with_usage(data).object_key
+            return self._write(data, repair_mismatch=repair_mismatch).object_key
 
         def write(before_create: NarrativeObjectAdmission | None) -> NarrativeObjectPut:
-            return self.put_with_usage(data, before_create=before_create)
+            return self._write(data, before_create=before_create, repair_mismatch=repair_mismatch)
 
         # Keep the persisted ledger key stable across upgrades. Policies use
         # it as an opaque identifier and perform writes through the callback.
@@ -180,6 +191,10 @@ class LocalNarrativeObjectStore:
     def put_with_usage(self, data: bytes, *,
                        before_create: NarrativeObjectAdmission | None = None) -> NarrativeObjectPut:
         """Return bytes actually created by this immutable-object writer."""
+        return self._write(data, before_create=before_create)
+
+    def _write(self, data: bytes, *, before_create: NarrativeObjectAdmission | None = None,
+               repair_mismatch: bool = False) -> NarrativeObjectPut:
         if not isinstance(data, bytes):
             raise TypeError("narrative object data must be bytes")
         digest = hashlib.sha256(data).hexdigest()
@@ -187,9 +202,16 @@ class LocalNarrativeObjectStore:
         target = self._physical_path(key)
         target.parent.mkdir(parents=True, exist_ok=True)
 
+        repair = False
         if target.exists():
-            self.read(key, expected_sha256=digest, expected_size=len(data))
-            return NarrativeObjectPut(key, 0)
+            try:
+                self.read(key, expected_sha256=digest, expected_size=len(data))
+            except _StoredObjectMismatch:
+                if not repair_mismatch:
+                    raise
+                repair = True
+            else:
+                return NarrativeObjectPut(key, 0)
 
         if before_create is not None:
             before_create(key, len(data))
@@ -204,6 +226,11 @@ class LocalNarrativeObjectStore:
                 temporary.write(data)
                 temporary.flush()
                 os.fsync(temporary.fileno())
+            if repair:
+                # Replacement is atomic. Concurrent writers for this address
+                # can only publish these same SHA-derived bytes.
+                os.replace(temporary_name, target)
+                return NarrativeObjectPut(key, len(data))
             created = True
             try:
                 # A hard link is an atomic create-if-absent operation. It avoids
@@ -244,7 +271,7 @@ class LocalNarrativeObjectStore:
     @staticmethod
     def _verify(data: bytes, digest: str, size: int) -> None:
         if len(data) != size or hashlib.sha256(data).hexdigest() != digest:
-            raise NarrativeObjectIntegrityError("stored narrative object failed verification")
+            raise _StoredObjectMismatch("stored narrative object failed verification")
 
 
 class NarrativeObjectAccess:
@@ -290,11 +317,12 @@ class NarrativeArtifactStore:
         if not isinstance(payload, bytes):
             raise TypeError("payload must be bytes")
 
+        subject, _ = _metadata_binding(draft.metadata_json)
         content_sha256 = hashlib.sha256(payload).hexdigest()
         with self._catalog.transaction() as connection:
             _require_bound_current(
                 document_id=draft.document_id, source_id=draft.source_id,
-                source_sha256=draft.source_sha256, metadata_json=draft.metadata_json,
+                source_sha256=draft.source_sha256, subject=subject,
                 fetchone=lambda sql, params: connection.execute(sql, params).fetchone(),
             )
             existing = self._existing(connection, draft, content_sha256)
@@ -304,11 +332,11 @@ class NarrativeArtifactStore:
         # Bytes are durable before the short catalog transaction. If that
         # transaction fails, the next attempt reuses this content-addressed
         # object; no catalog lock is held while the filesystem is written.
-        object_key = self._objects.put(payload)
+        object_key = self._objects._put_bundle(payload)
         with self._catalog.transaction() as connection:
             _require_bound_current(
                 document_id=draft.document_id, source_id=draft.source_id,
-                source_sha256=draft.source_sha256, metadata_json=draft.metadata_json,
+                source_sha256=draft.source_sha256, subject=subject,
                 fetchone=lambda sql, params: connection.execute(sql, params).fetchone(),
             )
             existing = self._existing(connection, draft, content_sha256)
@@ -608,9 +636,10 @@ class NarrativeArtifactStore:
     def _require_current_source(
         connection: sqlite3.Connection, row: sqlite3.Row
     ) -> None:
+        subject, _ = _row_binding(row)
         _require_bound_current(
             document_id=row["document_id"], source_id=row["source_id"],
-            source_sha256=row["source_sha256"], metadata_json=row["metadata_json"],
+            source_sha256=row["source_sha256"], subject=subject,
             fetchone=lambda sql, params: connection.execute(sql, params).fetchone(),
         )
 
@@ -627,18 +656,23 @@ def _require_current_identity(row: sqlite3.Row, source: sqlite3.Row | None) -> N
         )
 
 
-def _metadata_binding(metadata_json: str) -> tuple[dict[str, Any], NarrativeSubject | None]:
+def _metadata_binding(metadata_json: str) -> tuple[NarrativeSubject | None, object]:
     try:
         metadata = json.loads(metadata_json)
         if not isinstance(metadata, dict):
             raise ValueError("artifact metadata is not an object")
         binding = metadata.get("subject_binding")
         subject = None if binding is None else NarrativeSubject.from_dict(binding)
+        generation = metadata.get("generation_sha256")
         if subject is not None and subject.kind == "official_json":
-            _require_generation_sha(metadata.get("generation_sha256"))
-    except (TypeError, ValueError, SubjectBindingError) as exc:
+            _require_generation_sha(generation)
+    except (TypeError, ValueError, RecursionError) as exc:
         raise NarrativeArtifactConflictError("artifact subject binding is inconsistent") from exc
-    return metadata, subject
+    return subject, generation
+
+
+def _row_binding(row: sqlite3.Row) -> tuple[NarrativeSubject | None, object]:
+    return _metadata_binding(row["metadata_json"])
 
 
 def _require_generation_sha(value: object) -> None:
@@ -647,11 +681,10 @@ def _require_generation_sha(value: object) -> None:
 
 
 def _require_bound_current(
-    *, document_id: str, source_id: str, source_sha256: str, metadata_json: str,
+    *, document_id: str, source_id: str, source_sha256: str, subject: NarrativeSubject | None,
     fetchone: Callable[[str, tuple[str, ...]], sqlite3.Row | None],
 ) -> None:
     """Validate all declared parent relations without opening or parsing raw files."""
-    _, subject = _metadata_binding(metadata_json)
     refs: tuple[dict[str, Any], ...]
     if subject is None:
         refs = ({"document_id": document_id, "source_id": source_id,
@@ -677,9 +710,8 @@ def _require_bound_current(
 
 
 def _require_subject_match(
-    row: sqlite3.Row, subject: NarrativeSubject, generation_sha256: str,
+    row: sqlite3.Row, subject: NarrativeSubject, stored: NarrativeSubject | None,
 ) -> None:
-    metadata, stored = _metadata_binding(row["metadata_json"])
     if stored is None:
         anchor = subject.anchor_ref
         if subject.kind != "raw" or (
@@ -688,8 +720,6 @@ def _require_subject_match(
             raise NarrativeArtifactConflictError("exact artifact belongs to another subject")
     elif stored.to_dict() != subject.to_dict():
         raise NarrativeArtifactConflictError("exact artifact belongs to another subject")
-    if metadata.get("generation_sha256") != generation_sha256:
-        raise NarrativeArtifactConflictError("exact artifact belongs to another generation")
 
 
 class NarrativeArtifactReader:
@@ -719,15 +749,25 @@ class NarrativeArtifactReader:
         row = self._fetchone(sql, params)
         if row is None:
             raise NarrativeArtifactNotVisibleError("the narrative artifact is not visible")
-        self._require_row_current(row)
+        subject, _ = _row_binding(row)
+        self._require_row_current(row, subject)
         return NarrativeArtifactVersion.from_row(row)
 
-    def _require_row_current(self, row: sqlite3.Row) -> None:
+    def _require_row_current(self, row: sqlite3.Row, subject: NarrativeSubject | None) -> None:
         _require_bound_current(
             document_id=row["document_id"], source_id=row["source_id"],
-            source_sha256=row["source_sha256"], metadata_json=row["metadata_json"],
+            source_sha256=row["source_sha256"], subject=subject,
             fetchone=self._fetchone,
         )
+
+    def _require_subject_row_current(
+        self, row: sqlite3.Row, subject: NarrativeSubject, generation_sha256: str,
+    ) -> None:
+        stored, generation = _row_binding(row)
+        _require_subject_match(row, subject, stored)
+        if generation != generation_sha256:
+            raise NarrativeArtifactConflictError("exact artifact belongs to another generation")
+        self._require_row_current(row, stored)
 
     def _fetchall(self, sql: str, params: tuple[object, ...]) -> list[sqlite3.Row]:
         if self._connection is not None:
@@ -762,8 +802,7 @@ class NarrativeArtifactReader:
             params = (subject.kind, subject.item_key, subject.subject_sha256, generation_sha256, limit)
         rows = self._fetchall(sql, params)
         for row in rows:
-            _require_subject_match(row, subject, generation_sha256)
-            self._require_row_current(row)
+            self._require_subject_row_current(row, subject, generation_sha256)
         return tuple(NarrativeArtifactVersion.from_row(row) for row in rows)
 
     def visible_base_generation_candidates(
@@ -793,7 +832,8 @@ class NarrativeArtifactReader:
             "ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT ?",
             parameters + (base_generation_sha256, limit))
         for row in rows:
-            self._require_row_current(row)
+            stored, _ = _row_binding(row)
+            self._require_row_current(row, stored)
         return tuple(NarrativeArtifactVersion.from_row(row) for row in rows)
 
     def visible_subject_metadata(self, *, subject: NarrativeSubject,
@@ -803,9 +843,9 @@ class NarrativeArtifactReader:
                              "WHERE artifact_version_id=? AND status='visible'", (artifact_version_id,))
         if row is None:
             raise NarrativeArtifactNotVisibleError("the exact subject artifact is not visible")
-        metadata = json.loads(row["metadata_json"])
-        _require_subject_match(row, subject, metadata.get("generation_sha256"))
-        self._require_row_current(row)
+        stored, _ = _row_binding(row)
+        _require_subject_match(row, subject, stored)
+        self._require_row_current(row, stored)
         return NarrativeArtifactVersion.from_row(row)
 
     def read_current_subject(
@@ -823,8 +863,7 @@ class NarrativeArtifactReader:
         row = self._fetchone(sql, (artifact_version_id,))
         if row is None:
             raise NarrativeArtifactNotVisibleError("the exact subject artifact is not visible")
-        _require_subject_match(row, subject, generation_sha256)
-        self._require_row_current(row)
+        self._require_subject_row_current(row, subject, generation_sha256)
         version = NarrativeArtifactVersion.from_row(row)
         if ((expected_sha256 is not None and version.content_sha256 != expected_sha256)
                 or (expected_size is not None and version.byte_size != expected_size)):
@@ -834,8 +873,7 @@ class NarrativeArtifactReader:
         current = self._fetchone(sql, (artifact_version_id,))
         if current is None:
             raise NarrativeArtifactNotVisibleError("the exact artifact changed while reading")
-        _require_subject_match(current, subject, generation_sha256)
-        self._require_row_current(current)
+        self._require_subject_row_current(current, subject, generation_sha256)
         if NarrativeArtifactVersion.from_row(current) != version:
             raise NarrativeArtifactConflictError("exact artifact metadata changed while reading")
         return version, data

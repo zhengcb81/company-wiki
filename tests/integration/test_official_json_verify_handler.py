@@ -26,6 +26,7 @@ from company_wiki.automation.worker_process import WorkerProcessSpec
 from company_wiki.automation.narrative_official_json import open_verified_projection
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.narrative_subject import NarrativeSubject
+from company_wiki.source_catalog.narrative_official_json import bind_projection_loader
 from company_wiki.source_catalog.models import CatalogConfig, RootSpec
 from company_wiki.source_catalog.official_json_import import import_official_json_source
 from company_wiki.source_catalog.official_json_projection import (
@@ -139,7 +140,7 @@ class OfflineProjectionModel:
 
 
 def dependencies_for(catalog, projection, *, subject_override=None):
-    selected = NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)(make_context(projection))
+    selected = NarrativeSelectHandler(reader=NoRawReader(), projection_loader=bind_projection_loader(catalog))(make_context(projection))
     assert selected.outcome is HandlerOutcome.SUCCEEDED, selected.error
     if subject_override is not None:
         selected = replace_result(selected, "subject_binding", subject_override)
@@ -163,7 +164,7 @@ def verification_context(projection, dependencies, *, subject_override=None):
 
 
 def verifier(catalog, generation=GENERATION):
-    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_loader=bind_projection_loader(catalog),
         generation_sha256=None if generation is None else lambda _subject: generation)
 
 
@@ -314,7 +315,7 @@ def test_projection_verify_without_source_port_is_typed_not_raw_dispatch(tmp_pat
         assert result.effects == ()
 
 
-def test_runtime_registers_shared_catalog_and_generation_resolver_for_real_handlers(tmp_path):
+def test_runtime_registers_only_a_verified_projection_loader_for_real_handlers(tmp_path):
     class Registrar:
         def __init__(self):
             self.handlers = {}
@@ -323,9 +324,21 @@ def test_runtime_registers_shared_catalog_and_generation_resolver_for_real_handl
     with owned_catalog(tmp_path) as (catalog, _root):
         ref, _ = import_page(catalog, flat_page(1))
         projection = persist(catalog, [ref])
+        subject = NarrativeSubject.from_projection(projection)
+        verified = open_verified_projection(catalog, projection_id=subject.item_key,
+                                            expected_projection_sha256=subject.subject_sha256)
+        received = []
+
+        def load(reference):
+            received.append(reference)
+            assert reference.item_key == subject.item_key
+            assert reference.subject_sha256 == subject.subject_sha256
+            return verified
+
         registrar = Registrar()
         dependencies = NarrativeRuntimeDependencies(reader=NoRawReader(), model=OfflineProjectionModel(),
-            projection_catalog=catalog, generation_sha256=lambda _subject: GENERATION)
+            projection_loader=load, generation_sha256=lambda _subject: GENERATION)
+        assert not hasattr(dependencies, "projection_catalog")
         register_narrative_handlers(registrar, dependencies)
         selected = registrar.handlers["source.narrative_select"](make_context(projection))
         assert selected.outcome is HandlerOutcome.SUCCEEDED, selected.error
@@ -336,6 +349,7 @@ def test_runtime_registers_shared_catalog_and_generation_resolver_for_real_handl
             {"source.narrative_select": selected, "source.narrative_summarize": summary}))
         assert result.outcome is HandlerOutcome.SUCCEEDED, result.error
         assert result.effects[0].target.endswith(":" + GENERATION)
+        assert len(received) == 2
 
 
 @pytest.mark.parametrize("invalid_component", [None, "projection_prompt", "projection_model_request_schema",
@@ -413,11 +427,11 @@ def test_factory_reads_frozen_generation_binding_and_checks_actual_execution_ver
             assert len(captured) == 1
             try:
                 assert captured[0].generation_sha256(subject) == expected_generation
-                view = open_verified_projection(captured[0].projection_catalog,
-                    projection_id=subject.item_key, expected_projection_sha256=subject.subject_sha256)
+                assert not hasattr(captured[0], 'projection_catalog')
+                view = captured[0].projection_loader(subject)
                 assert view.subject == subject
             finally:
-                captured[0].projection_catalog.close()
+                runtime.close()
 
 
 def test_native_whitespace_and_source_nfc_display_pass_actual_transport_replay(tmp_path):

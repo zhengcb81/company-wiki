@@ -18,6 +18,7 @@ from company_wiki.automation.narrative_batch_request import NarrativeBatchReques
 from company_wiki.automation.narrative_generation import generation_sha256, find_reuse_pin
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from company_wiki.source_catalog import narrative_evidence as policy
+from company_wiki.source_catalog.narrative_official_json import bind_projection_loader
 from company_wiki.source_catalog.narrative_artifact_store import NarrativeArtifactReader, LocalNarrativeObjectStore
 from integration import test_official_json_verify_handler as official
 from integration import test_narrative_legacy_effort_history as history
@@ -42,7 +43,7 @@ def test_official_actual_version_keeps_native_parent_roles_whitespace_partial_an
         ref, original = official.import_page(catalog, page)
         ref2, original2 = official.import_page(catalog, second)
         projection = official.persist(catalog, [ref, ref2])  # page 3 deliberately missing => partial
-        handler = NarrativeSelectHandler(reader=official.NoRawReader(), projection_catalog=catalog, selector_version=version)
+        handler = NarrativeSelectHandler(reader=official.NoRawReader(), projection_loader=bind_projection_loader(catalog), selector_version=version)
         selected = handler(official.make_context(projection, language="zh"))
         assert selected.outcome is HandlerOutcome.SUCCEEDED, selected.error
         assert selected.result["selector"]["version"] == version
@@ -61,7 +62,7 @@ def test_official_actual_version_keeps_native_parent_roles_whitespace_partial_an
             official.make_context(projection, language="zh", job_type="source.narrative_summarize", dependencies=dependencies))
         assert summarized.outcome is HandlerOutcome.SUCCEEDED, summarized.error
         dependencies["source.narrative_summarize"] = summarized
-        verified = NarrativeVerifyHandler(reader=official.NoRawReader(), projection_catalog=catalog,
+        verified = NarrativeVerifyHandler(reader=official.NoRawReader(), projection_loader=bind_projection_loader(catalog),
             generation_sha256=lambda _subject: official.GENERATION, selector_version=version)(
             official.make_context(projection, language="zh", job_type="source.narrative_verify", dependencies=dependencies))
         assert verified.outcome is HandlerOutcome.SUCCEEDED, verified.error

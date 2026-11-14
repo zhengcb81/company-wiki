@@ -18,6 +18,9 @@ These tests enforce the parts that are machine-checkable:
 
 The AST scan is repeated here on purpose: a contract test may not depend on the evidence
 tooling under assurance/, which is not part of the product.
+The literal direct-parse scan is paired with behavior tests for one decoded
+value per persisted snapshot. Passing raw values through arbitrary helpers
+cannot be established by counting function names.
 """
 
 from __future__ import annotations
@@ -125,87 +128,12 @@ def _function_nodes(path: Path, symbol: str) -> list[ast.AST]:
     return nodes
 
 
-def _reads_column_as_value(node: ast.AST) -> bool:
-    """True when the expression reads the column as a VALUE (not a SQL string literal)."""
-    for sub in ast.walk(node):
-        if (isinstance(sub, ast.Subscript) and isinstance(sub.slice, ast.Constant)
-                and sub.slice.value == COLUMN):
-            return True
-        if (isinstance(sub, ast.Call) and isinstance(sub.func, ast.Attribute)
-                and sub.func.attr == "get" and sub.args
-                and isinstance(sub.args[0], ast.Constant) and sub.args[0].value == COLUMN):
-            return True
-    return False
-
-
-def _scan_column_value_handoffs() -> Counter[str]:
-    """`relative/path.py::Class.method` -> how many times that scope hands the value out.
-
-    Counted for the same measured reason as the direct-reader scan above.
-    """
-    found: Counter[str] = Counter()
-    for path in sorted(SOURCE.rglob("*.py")):
-        source = path.read_text(encoding="utf-8")
-        tree = ast.parse(source)
-        visitor = _ScopeVisitor()
-        visitor.visit(tree)
-        for node in ast.walk(tree):
-            if not isinstance(node, ast.Call):
-                continue
-            if not any(_reads_column_as_value(argument) for argument in node.args):
-                continue
-            relative = path.relative_to(SOURCE).as_posix()
-            found[f"{relative}::{visitor.scopes.get(id(node), '<module>')}"] += 1
-    return found
-
-
 def _expected(registry: dict[str, object], key: str) -> int:
-    """The baseline count for a key: an int for the handoff dict, a `sites` string here."""
+    """Number of known direct parses."""
     value = registry[key]
     if isinstance(value, dict):
         return int(str(value["sites"]))
     return int(str(value))
-
-
-def test_b10_handoff_scan_is_not_vacuous() -> None:
-    handoffs = _scan_column_value_handoffs()
-    assert handoffs, "the handoff scan found nothing - it would prove nothing"
-    assert set(handoffs) & set(read_chain.COLUMN_VALUE_HANDOFFS), (
-        "no scanned handoff matches the baseline: this ratchet is not measuring anything"
-    )
-
-
-def test_b10_no_new_column_value_handoff() -> None:
-    scanned = _scan_column_value_handoffs()
-    baseline = read_chain.COLUMN_VALUE_HANDOFFS
-    new = sorted(set(scanned) - set(baseline))
-    assert not new, (
-        "new places hand the shared column's value into a call: " + ", ".join(new) +
-        " - if that call parses the column, converge it onto store.metadata_object; if it "
-        "does not, register it in read_chain.COLUMN_VALUE_HANDOFFS with the reason "
-        "(the ratchet may only shrink)"
-    )
-    grew = sorted(key for key, count in scanned.items()
-                  if count > _expected(baseline, key))
-    assert not grew, (
-        "an ADDITIONAL handoff of the column appeared inside an already-baselined scope: " +
-        ", ".join(f"{key} ({scanned[key]} > {_expected(baseline, key)})" for key in grew)
-    )
-
-
-def test_b10_handoff_baseline_has_no_stale_entry() -> None:
-    scanned = _scan_column_value_handoffs()
-    baseline = read_chain.COLUMN_VALUE_HANDOFFS
-    stale = sorted(key for key in baseline if key not in scanned)
-    assert not stale, (
-        "the handoff baseline still lists sites that no longer pass the column: " +
-        ", ".join(stale) + " - remove them so the ratchet keeps meaning something"
-    )
-    shrank = sorted(key for key in baseline if scanned.get(key, 0) < _expected(baseline, key))
-    assert not shrank, (
-        "fewer handoffs than the baseline records: " + ", ".join(shrank) +
-        " - lower the recorded count so the ratchet keeps meaning something"
-    )
 
 
 PACKAGE = Path(__file__).resolve().parents[2] / "src" / "company_wiki"
@@ -280,26 +208,6 @@ def test_b10_scripts_have_no_direct_reader() -> None:
         "scripts/ parses the shared column directly: " + ", ".join(found) +
         " - route it through store.metadata_object/metadata_state (the two historical sites "
         "were converged on 2026-09-18; this rule is a hard zero for scripts/)"
-    )
-
-
-def test_b10_gate_boundaries_stay_documented() -> None:
-    """The gate's measured limits must stay written down next to the gate.
-
-    A gate whose reach is not documented gets trusted beyond it.  Each of these shapes was
-    PROBED against the gate; deleting one from the record would silently turn a known limit
-    into an assumed guarantee, so the ids are pinned.
-    """
-    assert read_chain.GATE_BOUNDARIES, "the measured gate boundaries were removed"
-    assert set(read_chain.GATE_BOUNDARIES) == {
-        "intermediate_variable",
-        "subscript_inside_the_callee",
-        "third_party_or_alternative_parser",
-        "closed_helper_at_call_site",
-        "readers_outside_the_scanned_roots",
-    }, "the documented boundary set changed without updating this test"
-    assert "PROBED" in read_chain.GATE_BOUNDARIES["intermediate_variable"], (
-        "each boundary must say whether it was actually probed"
     )
 
 

@@ -1369,7 +1369,7 @@ def _declaration_matches(column: str, raw: Any, used: Any) -> bool:
 
 
 def _merge_metadata_json(
-    stored_json: Any,
+    stored: dict[str, Any],
     incoming: dict[str, Any],
     *,
     prefer_new: bool,
@@ -1387,14 +1387,6 @@ def _merge_metadata_json(
     The business values follow the pre-B05 ``prefer_new`` rule; ``priority`` is
     no longer consulted here (it only ranks candidates, see ``_merge_columns``).
     """
-    try:
-        stored = json.loads(stored_json or "{}")
-        if not isinstance(stored, dict):
-            stored = {}
-    except (json.JSONDecodeError, TypeError, RecursionError):
-        # B-VR05M-02/-04: RecursionError (deeply nested JSON) is a RuntimeError and
-        # escaped the original guard, so a re-scan could still die on a malformed column.
-        stored = {}
     merged = dict(stored)
     if prefer_new:
         merged.update(incoming)
@@ -1408,6 +1400,7 @@ def _merge_metadata_json(
             payload = merged.get(container)
             if not isinstance(payload, dict):
                 continue
+            payload = merged[container] = dict(payload)
             for column, keys in _DECLARING_KEYS.items():
                 value = aligned_columns.get(column)
                 if value in (None, ""):
@@ -1756,7 +1749,7 @@ def _merge_document_row(
                     conflicts=[],
                 )
         insert_metadata = _merge_metadata_json(
-            "{}",
+            {},
             document_metadata,
             prefer_new=True,
             provenance_fields=provenance_fields,
@@ -1936,7 +1929,7 @@ def _merge_document_row(
                     conflicts=[],
                 )
         update_metadata = _merge_metadata_json(
-            existing_document["metadata_json"],
+            existing_meta,
             document_metadata,
             prefer_new=prefer_new,
             provenance_fields=provenance_fields,
@@ -2010,7 +2003,7 @@ def _merge_document_row(
     lower_priority_provenance.update(capture_conflicts)
     if lower_priority_provenance:
         updated_metadata = _merge_metadata_json(
-            existing_document["metadata_json"], {}, prefer_new=False,
+            existing_meta, {}, prefer_new=False,
             provenance_fields=lower_priority_provenance,
         )
         connection.execute(

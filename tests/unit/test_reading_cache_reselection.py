@@ -9,6 +9,7 @@ import pytest
 from company_wiki.automation import narrative_generation as generation
 from company_wiki.automation.models import canonical_json, canonical_json_hash
 from company_wiki.automation.narrative_selection_generation import reading_material_sha256
+from company_wiki.source_catalog.narrative_official_json import bind_projection_loader
 from unit.test_narrative_extractive_production import new_request
 from unit.test_narrative_summarize_handler import _context
 
@@ -125,7 +126,7 @@ def test_projected_candidates_use_the_same_current_material_fallback(monkeypatch
     payload = SourceRevisionEventPayload.from_dict({"schema_version": "source-revision-event/3.0",
         "subject_binding": view.subject.to_dict(), "source_metadata": {"source_class": "official_json",
         "title": "Official business Q&A", "document_kind": "investor_relations", "language": "zh"}})
-    handler = NarrativeSelectHandler(reader=None, projection_catalog=catalog, selector_version="0.9.0")
+    handler = NarrativeSelectHandler(reader=None, projection_loader=bind_projection_loader(catalog), selector_version="0.9.0")
     selected = handler.select_source(payload, checkpoint=lambda: None)
     _, request = new_request()
     base = generation.projection_generation_manifest(
@@ -146,5 +147,5 @@ def test_projected_candidates_use_the_same_current_material_fallback(monkeypatch
     monkeypatch.setattr(NarrativeSelectHandler, "select_source", lambda *a, **kw: calls.append("source") or selected)
     monkeypatch.setattr(batch, "_read_projected_pin", lambda *a, **kw: True)
     artifacts = SimpleNamespace(visible_base_generation_candidates=lambda **kw: (version,))
-    pin = batch._find_item_reuse_pin(artifacts, None, payload, base, {}, catalog=catalog)
+    pin = batch._find_item_reuse_pin(artifacts, None, payload, base, {}, projection_loader=bind_projection_loader(catalog))
     assert pin["artifact_version_id"] == "projected-paid" and calls == ["source"]

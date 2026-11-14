@@ -22,6 +22,9 @@ one place a test can check:
   (``tests/contract/test_b10_read_chain.py``), and an entry that no longer exists must be
   removed from the baseline rather than left to rot.
 
+The direct-reader test checks literal JSON parsing in product sources. Reuse of
+decoded values, malformed data and exact source behavior have executable tests.
+
 Baseline provenance: ``assurance/runs/2026-09-11_r4-phase-b/evidence/b10_read_chain_inventory.py``
 (AST inventory; the run is recorded in ``b10-read-chain-inventory.json`` next to it).
 """
@@ -114,34 +117,6 @@ CONFIRMED_DIRECT_READERS: dict[str, dict[str, str]] = {
     },
 }
 
-#: ``module.py::Class.method`` -> how many calls in that scope hand the column's value out.
-#: A COUNT, not just a key set: the review measured that a SECOND direct reader added inside
-#: an already-baselined scope kept the same qualified key and passed (probe: exit code 0,
-#: "1 passed").  The count closes that: one more site in a known scope is a new violation,
-#: and one fewer means the baseline must be lowered.  The counts are MACHINE-DERIVED from the
-#: tree; the unused shadow lifecycle reader was removed in R1. The earlier
-#: 12/15 and 13/16 counts are historical, not the current baseline; my first hand-written version
-#: under-counted two of them, which is exactly why they are derived now.
-COLUMN_VALUE_HANDOFFS: dict[str, str] = {
-    "artifact_backfill.py::_classify": "1",
-    "artifact_read_model.py::_artifact_row": "1",
-    "backfill_v2.py::run_backfill": "1",
-    # Unknown-date originals use the reporting decoder; malformed rows cannot match.
-    "canonical_writer.py::CanonicalSourceWriter._verify_unknown_date_index": "1",
-    "extraction_quality.py::ExtractionQualityService._artifact": "1",
-    "migration_ledger.py::build_quality_ledger": "1",
-    "resolver.py::_metadata_conflict_reason": "1",
-    # One decoded object is reused by both priority branches in the scanner.
-    "scanner.py::_merge_document_row": "3",
-    "section_query.py::SectionQueryService.list_sections": "1",
-    "service.py::SourceCatalog.query": "2",
-    "service.py::SourceCatalog.query_filing_candidates": "1",
-    # SourceVersionReader uses the reporting half of the shared metadata chain
-    # so malformed metadata stays distinguishable from an empty object.
-    "source_reader.py::SourceVersionReader._verified_version": "1",
-    "source_reader.py::SourceVersionReader.describe_version": "1",
-}
-
 #: Readers that deliberately do NOT go through the chain.  Declared so "not on the chain" is
 #: a stated decision, never a silent double-run (the B10 acceptance rule: if it cannot be
 #: made compatible, STOP the switch - do not convert it quietly).
@@ -157,59 +132,6 @@ EXPLICIT_NON_CHAIN_READERS: dict[str, str] = {
     "section_query.py::SectionQueryService.list_sections": (
         "raises SectionQueryError('sections artifact metadata is not valid JSON') on "
         "malformed artifact metadata - degrading to {} would hide that error"
-    ),
-}
-
-#: The column's VALUE being passed into a call.  A parse-by-helper indirection is invisible
-#: to the `json.loads` scan above - measured, not theorised: I built a probe with a generic
-#: helper (`_parse(raw)`) called as `_parse(row["metadata_json"])` in a temp copy and the
-#: whole gate passed.  Building this list then showed that REAL sites already parse that way
-#: (`extraction_quality._artifact`, `scanner._merge_document_row` via
-#: `_previous_provenance_fields`/`_merge_metadata_json`), i.e. the confirmed list above is a
-#: ratchet over the common shape, NOT a completeness proof.  This second ratchet closes the
-#: indirection: any NEW place that hands the column's value into a call fails the gate.
-#:
-#: The scan looks for a SUBSCRIPT/`.get()` of the column INSIDE the call's arguments, so the
-#: SQL text that merely mentions the column name (the majority of the name matches) is not
-#: counted.  `metadata_object(...)`/`metadata_state(...)` call sites appear here too, and
-#: that is intended: they are the chain, and they must not grow either.
-
-#: What the two ratchets above do NOT catch, MEASURED on temp copies rather than assumed.
-#: Written into the product so nobody trusts the gate beyond its reach: it recognises two
-#: common SYNTACTIC shapes, it is not a dataflow analysis and not a completeness proof.
-#: Each entry was built as a probe and RUN against the gate; the verdict is recorded.
-GATE_BOUNDARIES: dict[str, str] = {
-    "intermediate_variable": (
-        "`raw = row[\"metadata_json\"]` followed by `parse(raw)`: the column never appears "
-        "in a call argument. PROBED: the gate passed (still open)."
-    ),
-    "subscript_inside_the_callee": (
-        "`def f(obj): ... obj[\"metadata_json\"] ...` called as `f(row)`: the subscript is "
-        "an assignment inside the callee, not a call argument. PROBED: the gate passed."
-    ),
-    "third_party_or_alternative_parser": (
-        "`json.JSONDecoder().decode(...)`, orjson/ujson, or any wrapper whose call site and "
-        "parameter both avoid the column name. PROBED BY CONSTRUCTION (not run): the scans "
-        "key on the `json.loads` name and on `[" + "\"metadata_json\"" + "]`/`.get(...)`."
-    ),
-    "closed_helper_at_call_site": (
-        "`_parse(row[\"metadata_json\"])` with a GENERIC helper was the first bypass found "
-        "(probe passed, and three production sites already had that shape); "
-        "COLUMN_VALUE_HANDOFFS closes it. PROBED: now caught."
-    ),
-    "readers_outside_the_scanned_roots": (
-        "the ratchet scans `src/company_wiki/source_catalog/**`; a second hard rule covers "
-        "the REST of the PRODUCT package (`src/company_wiki/**` minus source_catalog) and "
-        "currently finds ZERO readers there - that rule is ENFORCED. MEASURED OUTSIDE IT "
-        "(2026-09-17): `scripts/` had 2 direct readers of this column (legacy_observer.py:96, "
-        "wu904_remediation_restore.py:65) and `tests/` had 10 (fixtures), while `tools/` had "
-        "0 - tools/ and scripts/ were OUTSIDE the rule's root, so those numbers were "
-        "OBSERVATIONS, not enforcement (B-VR-B10R3-02: injecting a reader into either place "
-        "left the gate green). CONVERGED 2026-09-18 (owner instruction): both `scripts/` sites "
-        "now call `store.metadata_object`, and `tests/contract/test_b10_read_chain.py::"
-        "test_b10_scripts_have_no_direct_reader` enforces a HARD ZERO over `scripts/` - the "
-        "follow-up this boundary registered is closed. What remains outside every rule is "
-        "`tests/` (fixtures, reported not enforced) and any code outside the three roots."
     ),
 }
 

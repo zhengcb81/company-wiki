@@ -12,10 +12,10 @@ import hashlib
 import json
 import re
 from types import MappingProxyType
-from typing import Any, Protocol, cast
+from typing import Any, Callable, Protocol, cast
 import unicodedata
 
-from company_wiki.narrative_subject import NarrativeSubject
+from company_wiki.narrative_subject import NarrativeSubject, NarrativeSubjectRef
 from company_wiki.document_model.narrative import (
     DocumentStructure, NarrativeEvidencePackage, NarrativeUnit,
 )
@@ -165,6 +165,20 @@ class VerifiedProjectionView:
         return cast(dict[str, Any], json.loads(self._adapter_json))
 
 
+ProjectionLoader = Callable[[NarrativeSubject | NarrativeSubjectRef], VerifiedProjectionView]
+
+
+def bind_projection_loader(catalog: Any) -> ProjectionLoader:
+    """Bind the verified read capability without passing catalog state downstream."""
+    def load(reference: NarrativeSubject | NarrativeSubjectRef) -> VerifiedProjectionView:
+        return open_verified_projection(
+            catalog, projection_id=reference.item_key,
+            expected_projection_sha256=reference.subject_sha256,
+        )
+
+    return load
+
+
 def open_verified_projection(catalog: Any, *, projection_id: str,
                              expected_projection_sha256: str) -> VerifiedProjectionView:
     """Load then export once; source ports own current-byte and semantic checks."""
@@ -261,6 +275,6 @@ def select_verified_projection(view: VerifiedProjectionView, *, title: str,
     return package
 
 
-__all__ = ["NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION",
+__all__ = ["NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION", "ProjectionLoader", "bind_projection_loader",
            "OfficialProjectionAdapterError", "VerifiedProjectionView",
            "open_verified_projection", "select_verified_projection"]

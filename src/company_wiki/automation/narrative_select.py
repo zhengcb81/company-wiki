@@ -28,8 +28,8 @@ from company_wiki.source_catalog.transcript_text_extract import TranscriptMateri
 from .execution_context import JobExecutionContext
 from company_wiki.source_catalog.narrative_official_json import (
     OfficialProjectionAdapterError,
+    ProjectionLoader,
     VerifiedProjectionView,
-    open_verified_projection,
     select_verified_projection,
 )
 from .models import (
@@ -134,7 +134,7 @@ class NarrativeSelectHandler:
         selector: NarrativeSelector | None = None,
         selector_version: str | None = None,
         normalization: NarrativeNormalization | None = None,
-        projection_catalog: Any | None = None,
+        projection_loader: ProjectionLoader | None = None,
         work_budget_factory: Callable[[], WorkBudget] | None = None,
     ) -> None:
         self._reader = reader
@@ -146,7 +146,7 @@ class NarrativeSelectHandler:
             pdf_reading=self._pdf_reading, selector=self._selector, normalization=normalization,
             work_budget_factory=work_budget_factory,
         )
-        self._projection_catalog = projection_catalog
+        self.__projection_loader = projection_loader
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
@@ -238,15 +238,12 @@ class NarrativeSelectHandler:
     def _execute_projection(
         self, payload: SourceRevisionEventPayload, checkpoint: Callable[[], None]
     ) -> NarrativeSelectResult:
-        if self._projection_catalog is None:
+        if self.__projection_loader is None:
             raise _SelectFailure(
                 "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
                 "official projection source port is not configured",
             )
-        view = open_verified_projection(
-            self._projection_catalog, projection_id=payload.subject.item_key,
-            expected_projection_sha256=payload.subject.subject_sha256,
-        )
+        view = self.__projection_loader(payload.subject)
         # The source port already checked all parents' bytes/state/layout. This
         # binds the requested issuer/as-of/coverage to that verified operation.
         if view.subject != payload.subject:

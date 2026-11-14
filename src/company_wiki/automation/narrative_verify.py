@@ -44,7 +44,7 @@ from .narrative_contracts import (
     PromptReviewValue,
     SourceRevisionEventPayload,
 )
-from company_wiki.source_catalog.narrative_official_json import OfficialProjectionAdapterError, open_verified_projection
+from company_wiki.source_catalog.narrative_official_json import OfficialProjectionAdapterError, ProjectionLoader
 from company_wiki.source_catalog.narrative_material_replay import (
     NarrativeReplayError,
     PdfEvidenceReplayer,
@@ -187,7 +187,7 @@ class NarrativeVerifyHandler:
         pdf_replayer: PdfEvidenceReplayer | None = None,
         pdf_reading: PdfReading | None = None,
         normalization: NarrativeNormalization | None = None,
-        projection_catalog: Any | None = None,
+        projection_loader: ProjectionLoader | None = None,
         generation_sha256: Callable[[NarrativeSubject], str] | None = None,
         selector_version: str | None = None,
         reading_model_projection: Callable[[NarrativeSubject], str | None] | None = None,
@@ -198,7 +198,7 @@ class NarrativeVerifyHandler:
             raise ValueError("provide one complete PDF reading implementation")
         self._pdf_reading = pdf_reading or PdfReading(replayer=pdf_replayer)
         self._normalization = normalization or NarrativeNormalization()
-        self._projection_catalog = projection_catalog
+        self.__projection_loader = projection_loader
         self._generation_sha256 = generation_sha256
         self._reading_model_projection = reading_model_projection
 
@@ -266,15 +266,12 @@ class NarrativeVerifyHandler:
         *, reading_projection_version: str | None = None,
         summary_assessment: dict[str, Any] | None = None,
     ) -> HandlerResult:
-        if self._projection_catalog is None:
+        if self.__projection_loader is None:
             raise _VerifyFailure(
                 "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
                 "official projection source port is not configured",
             )
-        view = open_verified_projection(
-            self._projection_catalog, projection_id=payload.subject.item_key,
-            expected_projection_sha256=payload.subject.subject_sha256,
-        )
+        view = self.__projection_loader(payload.subject)
         if view.subject != selected.subject:
             raise _VerifyFailure(
                 "DEPENDENCY_INVALID", HandlerOutcome.TERMINAL_FAILURE,

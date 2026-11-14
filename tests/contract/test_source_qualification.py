@@ -166,11 +166,12 @@ def test_committed_reference_needs_no_semantic_selection_or_capture_receipt(lake
 
 
 @pytest.mark.parametrize("missing_fields", [("market",), ("security_id",), ("market", "security_id")])
-def test_company_owned_source_missing_auxiliary_identity_reuses_without_assertion(lake, missing_fields):
+def test_company_owned_source_without_listing_proof_only_allows_preview(lake, missing_fields):
     catalog, reader, ref, original, request = lake
     row = catalog.reader.exact_source_version(ref.document_id)
     metadata = json.loads(row["metadata_json"])
-    # Keep the source's actual company and period; remove only auxiliary identifiers.
+    # Keep the source's actual company and period, but remove the listing
+    # metadata. The synthetic PDF contains no intrinsic listing evidence.
     for field in missing_fields:
         metadata.pop(field, None)
         for payload in metadata.values():
@@ -179,11 +180,12 @@ def test_company_owned_source_missing_auxiliary_identity_reuses_without_assertio
     with catalog.store.transaction() as connection:
         connection.execute("UPDATE documents SET metadata_json=? WHERE document_id=?",
                            (json.dumps(metadata), ref.document_id))
-    assert reader.query_local(request).matches == (ref,)
+    query = reader.query_local(request)
+    assert query.status == "not_found" and query.matches == ()
     result = SourceResolver(catalog).resolve(request)
-    assert result.status is ResolutionStatus.REUSED_EQUIVALENT
-    assert len(result.matches) == 1 and result.matches[0].content_sha256 == SHA
-    assert not result.download_required and original.read_bytes() == BODY
+    assert result.status is ResolutionStatus.MISSING
+    assert result.matches == () and result.download_required
+    assert reader.open_version(ref, purpose="preview").data == original.read_bytes() == BODY
 
 
 def test_wrong_local_candidate_does_not_prohibit_fetching_correct_target(lake):

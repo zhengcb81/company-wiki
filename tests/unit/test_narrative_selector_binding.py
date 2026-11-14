@@ -210,12 +210,12 @@ def test_factory_decodes_frozen_binding_once_and_pins_before_model(tmp_path, mon
         monkeypatch.setattr(factory, "BudgetedNarrativeCaller", forbidden)
         monkeypatch.setattr(policy, "NARRATIVE_SELECTOR_VERSION", "0.7.0")
         if version in {"0.6.0", "0.7.0", "0.7.1"}:
-            factory.create_runtime(spec)
+            runtime = factory.create_runtime(spec)
             try:
                 assert captured[0].selector_version == version
                 assert captured[0].generation_sha256(subject) == official.GENERATION
             finally:
-                captured[0].projection_catalog.close()
+                runtime.close()
         else:
             with pytest.raises(policy.NarrativeSelectorVersionError):
                 factory.create_runtime(spec)
@@ -301,7 +301,7 @@ def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejectio
             if projection == "unavailable/99":
                 # Construction may restore an already completed canonical
                 # summary. Only a pending model execution needs its decoder.
-                factory.create_runtime(spec)
+                runtime = factory.create_runtime(spec)
                 deps = captured[0]
                 try:
                     assert deps.reading_model_projection(subject) == projection
@@ -310,7 +310,7 @@ def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejectio
                         deps.validate_model_execution(subject)
                     assert len(models) == len(callers) == 1
                 finally:
-                    deps.projection_catalog.close()
+                    runtime.close()
             elif error is not None:
                 kind = ModelResponseError if error == "READING_MODEL_PROJECTION_UNAVAILABLE" else ValueError
                 with pytest.raises(kind, match=error):
@@ -318,7 +318,7 @@ def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejectio
                 assert not captured and not callers
                 assert len(models) == (1 if error == "NARRATIVE_RUN_MODEL_CONFIG_MISMATCH" else 0)
             else:
-                factory.create_runtime(spec)
+                runtime = factory.create_runtime(spec)
                 deps = captured[0]
                 assert deps.selector_version == "0.9.0"
                 assert deps.reading_model_projection(subject) == (None if projection == "missing" else projection)
@@ -326,7 +326,7 @@ def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejectio
                 assert len(models) == len(callers) == (0 if role == "compute" else 1)
                 if role != "compute":
                     assert callers[0]["model"] is models[0] is deps.model
-                deps.projection_catalog.close()
+                runtime.close()
             assert len(decoded) == 1
         finally:
             assert original.read_bytes() == b"keep original fixture"

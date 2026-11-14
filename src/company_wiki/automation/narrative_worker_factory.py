@@ -26,7 +26,9 @@ from .narrative_http_model import NarrativeHTTPModel
 from .narrative_model import (
     NARRATIVE_PROMPT_VERSION, PROJECTION_NARRATIVE_PROMPT_VERSION, PROJECTION_MODEL_REQUEST_SCHEMA,
 )
-from company_wiki.source_catalog.narrative_official_json import NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
+from company_wiki.source_catalog.narrative_official_json import (
+    NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION, bind_projection_loader,
+)
 from .narrative_model_caller import BudgetedNarrativeCaller
 from .narrative_run_store import NarrativeRunError, NarrativeRunStore
 from .narrative_storage_budget import BatchStorageBudget
@@ -385,7 +387,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
         executor,
         NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization,
             pdf_reading=pdf_reading,
-            projection_catalog=catalog, selector_version=selector_version,
+            projection_loader=bind_projection_loader(catalog), selector_version=selector_version,
             reading_model_projection=(lambda subject: reading_projections[subject.item_key])
                 if reading_projections else None,
             validate_model_execution=validate_model_execution if snapshot.frozen_generations else None,
@@ -393,7 +395,13 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             generation_sha256=_generation_resolver(run_store, options["run_id"], generation_values,
                                                    selector_version=selector_version) if generation_values else None),
     )
-    runtime = WorkerRuntime(registry=registry, executor=executor, model_client=model)
+    def close() -> None:
+        try:
+            normalization.close()
+        finally:
+            catalog.close()
+
+    runtime = WorkerRuntime(registry=registry, executor=executor, model_client=model, close=close)
     validate_runtime(runtime, role=spec.role, allowed_job_types=spec.allowed_job_types)
     return runtime
 

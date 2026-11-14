@@ -5,11 +5,14 @@ from __future__ import annotations
 from contextlib import contextmanager
 from dataclasses import replace
 import hashlib
+import json
 from pathlib import Path
 import sqlite3
 
 import pytest
 
+from company_wiki.narrative_subject import NarrativeSubject
+from company_wiki.source_contract import source_id_for_sha256
 from company_wiki.source_catalog.narrative_artifact_store import (
     LocalNarrativeObjectStore,
     NarrativeArtifactConflictError,
@@ -30,14 +33,14 @@ WORK_KEY = hashlib.sha256(b"work-key").hexdigest()
 T0 = "2026-09-29T10:00:00Z"
 
 
-def _catalog(tmp_path: Path) -> CatalogStore:
+def _catalog(tmp_path: Path, *, source_id: str = "source-1") -> CatalogStore:
     catalog = CatalogStore(tmp_path / "catalog.sqlite3")
     with catalog.transaction() as connection:
         connection.execute(
             "INSERT INTO sources "
             "(source_id, content_sha256, byte_size, mime_type, first_seen_at) "
             "VALUES (?,?,?,?,?)",
-            ("source-1", SOURCE_SHA, 10, "text/plain", T0),
+            (source_id, SOURCE_SHA, 10, "text/plain", T0),
         )
         connection.execute(
             "INSERT INTO sources "
@@ -53,7 +56,7 @@ def _catalog(tmp_path: Path) -> CatalogStore:
             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 "document-1",
-                "source-1",
+                source_id,
                 "Example source",
                 "file",
                 "investor_call_transcript",
@@ -380,6 +383,48 @@ def test_metadata_reference_does_not_open_object_bytes(
     assert artifacts.latest_visible_version(
         document_id="document-1", source_id="source-1", source_sha256=SOURCE_SHA,
     ) == visible
+
+
+def test_subject_metadata_uses_one_owner_decode_and_no_object_read(tmp_path, monkeypatch):
+    source_id = source_id_for_sha256(SOURCE_SHA)
+    catalog = _catalog(tmp_path, source_id=source_id)
+    objects = LocalNarrativeObjectStore(tmp_path / "objects")
+    writer = NarrativeArtifactStore(catalog, objects)
+    metadata = json.dumps({"generation_sha256": WORK_KEY, "summary_status": "completed"})
+    prepared = writer.prepare(replace(_draft(source_id=source_id), metadata_json=metadata), b'{"bundle":1}')
+    visible = writer.activate(prepared.effect_id, verified_after_hash=prepared.content_sha256,
+                              activated_at=T0)
+    subject = NarrativeSubject.from_raw({
+        "schema_version": "2.0", "document_id": "document-1", "source_id": source_id,
+        "content_sha256": SOURCE_SHA, "byte_size": 10, "mime_type": "text/plain",
+    })
+    calls = []
+    loads = json.loads
+
+    def observe(data, *args, **kwargs):
+        if data == metadata:
+            calls.append(data)
+        return loads(data, *args, **kwargs)
+
+    def forbid_read(*args, **kwargs):
+        pytest.fail("subject metadata must not open the artifact object")
+
+    monkeypatch.setattr(json, "loads", observe)
+    monkeypatch.setattr(objects, "read", forbid_read)
+    reader = NarrativeArtifactStore.for_reading(catalog.database_path, objects)
+    try:
+        assert reader.visible_subject_metadata(subject=subject,
+            artifact_version_id=visible.artifact_version_id) == visible
+        assert calls == [metadata]
+        with catalog.transaction() as connection:
+            connection.execute(
+                "UPDATE narrative_artifact_versions SET metadata_json=? WHERE artifact_version_id=?",
+                ('{"broken"', visible.artifact_version_id),
+            )
+        with pytest.raises(NarrativeArtifactConflictError, match="binding is inconsistent"):
+            reader.visible_subject_metadata(subject=subject, artifact_version_id=visible.artifact_version_id)
+    finally:
+        reader.close()
 
 
 def test_exact_read_rejects_wrong_reference_before_object_io(

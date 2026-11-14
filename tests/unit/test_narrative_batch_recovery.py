@@ -208,6 +208,8 @@ def _resume_harness(tmp_path, monkeypatch, *, status, completed):
     catalog = SimpleNamespace(open_narrative_artifact_reader=lambda: artifacts)
     return lambda: batch._run_prepared(request, catalog, tmp_path, tmp_path / "config.json", db, tmp_path / "work",
         deadline=None, prepared_sources=((), ()), manifests={}, normalization=None,
+        projection_loader=lambda _subject: pytest.fail("raw recovery must not read official projections"),
+        work_budget_factory=lambda: pytest.fail("read-only recovery must not start document work"),
         effective_versions=batch._execution_versions(request))
 
 

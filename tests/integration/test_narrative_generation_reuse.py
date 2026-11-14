@@ -453,7 +453,7 @@ def test_failed_refresh_preserves_visible_pin_and_known_charge_then_allows_new_r
 
 
 @pytest.mark.parametrize("damage", ["missing", "corrupt"])
-def test_matching_damaged_object_refuses_without_new_post(
+def test_discovered_damaged_object_rebuilds_once_with_current_source_and_budget(
     loopback_model_server, monkeypatch, damage
 ):
     monkeypatch.setenv("DEEPSEEK_API_KEY", official.batch_fixtures.KEY)
@@ -484,16 +484,19 @@ def test_matching_damaged_object_refuses_without_new_post(
             path = request_path(
                 root, imported, loopback_model_server.endpoint, "damaged-b"
             )
-            process, failed = invoke(root, config, path, llm, "damaged-b")
-            assert process.returncode == 2 and failed["status"] == "failed", failed
-            assert (
-                len(loopback_model_server.requests) == 1
-                and failed["budget"]["tokens"] == 0
-            )
+            process, rebuilt = invoke(root, config, path, llm, "damaged-b")
+            assert process.returncode == 0 and rebuilt["status"] == "completed", rebuilt
+            assert "CACHE_CANDIDATE_INVALID" in process.stderr
+            assert len(loopback_model_server.requests) == 2 and rebuilt["budget"]["tokens"] == 92
+            assert rebuilt["documents"][0]["artifact_ref"]["source_sha256"] == pin["source_sha256"]
+            assert obj.read_bytes() == original
+            process, resumed = invoke(root, config, path, llm, "damaged-b")
+            assert process.returncode == 0 and resumed["documents"] == rebuilt["documents"]
+            assert len(loopback_model_server.requests) == 2
         finally:
             obj.write_bytes(original)
         _, _, receipt = public_read(root, config, imported, kind)
-        record_proof("object-" + damage, loopback_model_server, failed, receipt)
+        record_proof("object-" + damage, loopback_model_server, rebuilt, receipt)
 
 
 def test_older_compatible_generation_is_pinned_behind_newer_model_setting(

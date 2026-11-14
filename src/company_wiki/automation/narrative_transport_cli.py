@@ -178,16 +178,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         config = load_catalog_config(args.config)
         catalog = SourceCatalog(config)
         artifacts = catalog.open_narrative_artifact_reader()
-        from company_wiki.source_catalog.narrative_official_json import (
-            open_verified_projection,
-        )
-
-        def projection_loader(subject):
-            return open_verified_projection(
-                catalog,
-                projection_id=subject.item_key,
-                expected_projection_sha256=subject.subject_sha256,
-            )
+        from company_wiki.source_catalog.narrative_official_json import bind_projection_loader
 
         # The composition root owns the OCR configuration location.  The
         # transport only consumes the normalization port it is given, so a
@@ -198,6 +189,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "narrative-reference-request/2", "narrative-read-request/2",
             "narrative-reference-request/3", "narrative-read-request/3",
         }:
+            projection_loader = bind_projection_loader(catalog)
             reader = NarrativeTransportReader(
                 artifacts, SourceVersionReader(catalog), normalization=normalization,
                 projection_loader=projection_loader,
