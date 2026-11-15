@@ -615,3 +615,144 @@ def test_hk_refresh_uses_standard_transfer_fallback_and_english_aliases(
     records = {record.ticker: record for record in store.load(markets=("HK",)).records}
     assert "XIAOMI-W" in records["01810"].aliases
     assert "TENCENT" in records["00700"].aliases
+
+
+def test_corporate_suffix_equivalence_resolves_the_alibaba_name_family(tmp_path):
+    """CWP-1 A1: a query spelled with the long legal form must hit the exact
+    path of the short-form official name instead of degrading to fuzzy."""
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver
+
+    resolver = SecurityIdentityResolver(_master(tmp_path).load())
+    us = resolver.identify("Advanced Micro Devices Incorporated")
+
+    assert us.status is IdentityStatus.RESOLVED
+    assert us.reason == "one_verified_exact_identity"
+    assert us.resolved.security_id == "AMD"
+    assert us.resolved.match_basis == "official_name_exact"
+    # The stored record is never rewritten by comparison normalization.
+    assert us.resolved.canonical_name == "Advanced Micro Devices, Inc."
+
+
+def test_corporate_suffix_equivalence_applies_to_aliases_too(tmp_path):
+    from company_wiki.source_catalog import (
+        IdentityStatus,
+        SecurityIdentityResolver,
+        SecurityMasterStore,
+    )
+
+    store = SecurityMasterStore(tmp_path / "suffix-alias-master")
+    store.write_market(
+        "US",
+        (_record(name="Example Holdings Inc", market="US", exchange="NASDAQ",
+                 ticker="EXM", aliases=("Example Holdings Limited",)),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("US",))).identify(
+        "Example Holdings Ltd"
+    )
+
+    assert result.status is IdentityStatus.RESOLVED
+    assert result.resolved.match_basis == "alias_exact"
+    assert result.resolved.matched_value == "Example Holdings Limited"
+
+
+def test_chinese_legal_form_suffixes_compare_equivalently(tmp_path):
+    from company_wiki.source_catalog import (
+        IdentityStatus,
+        SecurityIdentityResolver,
+        SecurityMasterStore,
+    )
+
+    store = SecurityMasterStore(tmp_path / "cn-suffix-master")
+    store.write_market(
+        "CN",
+        (_record(name="示例集团控股股份有限公司", market="CN", exchange="SSE",
+                 ticker="600001"),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/cn",),
+    )
+
+    for query in ("示例集团控股有限公司", "示例集团控股有限责任公司"):
+        result = SecurityIdentityResolver(store.load(markets=("CN",))).identify(query)
+        assert result.status is IdentityStatus.RESOLVED, query
+        assert result.resolved.match_basis == "official_name_exact"
+        assert result.resolved.canonical_name == "示例集团控股股份有限公司"
+
+
+def test_bare_name_is_not_equated_with_its_suffixed_official_name(tmp_path):
+    """The widening must stay conservative: dropping the legal form entirely is
+    a different spelling, not a suffix variant, and belongs to fuzzy."""
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "bare-name-master")
+    store.write_market(
+        "US",
+        (_record(name="Example Holdings Ltd", market="US", exchange="NYSE",
+                 ticker="EXM"),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("US",))).identify(
+        "Example Holdings"
+    )
+
+    assert result.resolved is None
+    assert all(
+        item.match_basis != "official_name_exact" for item in result.candidates
+    )
+
+
+def test_suffix_equivalence_still_fails_closed_on_multiple_exact_candidates(
+    tmp_path,
+):
+    """Two issuers whose names differ only by legal-form spelling must surface
+    as an ambiguous exact candidate set, never a silently picked winner."""
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "suffix-collision-master")
+    store.write_market(
+        "US",
+        (
+            _record(name="Example Holdings Ltd", market="US", exchange="NYSE",
+                    ticker="EXM"),
+            _record(name="Example Holdings Limited", market="US", exchange="NYSE",
+                    ticker="EXM2"),
+        ),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("US",))).identify(
+        "Example Holdings Limited"
+    )
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "multiple_verified_exact_identities"
+    assert sorted(item.security_id for item in result.candidates) == ["EXM", "EXM2"]
+
+
+def test_ascii_suffixes_require_a_word_boundary_not_a_glued_tail(tmp_path):
+    """Differential sweep on the live master (2026-11-15) proved that matching
+    glued tails turns ticker-like short aliases into junk keys: alias 'VSE'
+    and query 'VSA' both collapsed to 'vplc' via SE/SA stripping and made the
+    VSA ticker query ambiguous. ASCII legal forms only canonicalize when they
+    are the final whitespace-delimited word of the raw text."""
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "word-boundary-master")
+    store.write_market(
+        "US",
+        (
+            _record(name="VSE Corp", market="US", exchange="NASDAQ",
+                    ticker="VSEC", aliases=("VSE",)),
+            _record(name="VisionSys AI Inc", market="US", exchange="NASDAQ",
+                    ticker="VSA", aliases=("VisionSys AI",)),
+        ),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+    resolver = SecurityIdentityResolver(store.load(markets=("US",)))
+
+    vsa = resolver.identify("VSA")
+    glued = resolver.identify("VSE")
+
+    assert vsa.status is IdentityStatus.RESOLVED and vsa.resolved.security_id == "VSA"
+    assert glued.status is IdentityStatus.RESOLVED and glued.resolved.match_basis == "alias_exact"
