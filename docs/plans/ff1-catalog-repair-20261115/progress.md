@@ -20,3 +20,11 @@
     - `tests/contract/test_activation_transaction.py::test_cli_activation_apply_rollback_roundtrip`（activation 命令已退役 vs 旧测试）
   - 全量基线数字：跑批中（后台 exec_c468fb2a，完成后续记）。
 - [N1] B1 实现完成：resolver.py（reason 拆分 + unknown_date_match_count + _excluded_candidate 白名单增强 + 常量导出）、observability.py（7 个新 code 注册 REASONS/STAGES）、新测试 tests/contract/test_ff1_unknown_date_classification.py（6 用例 + 注册枚举参数化，全绿；test_source_qualification.py 回归全绿）。
+- [N1] B1 提交 da35f6c25（首次提交被 pre-commit mypy 拦截：Mapping vs dict 形参不匹配，正当修复后通过）。
+- [N2] B2 实现完成：
+  - 新模块 catalog_repair.py（只读预检 plan_undated_group_repairs + GroupRepair + CatalogRepairJournal append-only catalog_repairs.jsonl，事件 catalog_repair_applied 含 root/relative_path/sidecar_kind/filing_date/data_source）。
+  - registration_scope.register_groups(catalog, root_id, relative_paths) 库函数（提取 register 子命令定向登记；service.register_sources 与 cli register 分支均改为委托，行为不变；CLI 冒烟实测 rc=0、ScanReport 形状一致；tests/integration/test_financing_scanner_cli.py 为环境门控 skip）。
+  - acquisition_service._ensure 挂 _heal_undated_catalog_sources：命中两类 unknown-date reason → 预检 → 有声明才 register_groups（每 root 一次，锁序：ensure 互斥段之前，无嵌套）→ journal 事件 → 恰好重跑一次 _select_for_ensure；登记失败降级为具名失败（warning 日志）。
+  - 测试 tests/contract/test_ff1_ensure_catalog_repair.py 4 用例全绿：company_raw 声明→一次修复后 REUSED（calls==2、published_date=2026-02-20、journal 事件断言）；无声明→unique_match_published_date_unknown 直接失败（calls==1、无 journal）；dayu 组 meta.json 声明→修复 REUSED（sidecar_kind=group_meta_json）；预检只读（规划后行未变、无 journal）。
+  - 回归：test_source_catalog_acquisition / scoped_scan / scanner_direct / verified_reuse / canonical_acquisition_scope / scan_candidate_immutability 74 通过。
+- [N2] B2 待提交。

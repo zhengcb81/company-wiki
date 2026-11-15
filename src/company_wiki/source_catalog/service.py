@@ -857,11 +857,12 @@ class SourceCatalog:
 
     def register_sources(self, *, root_id: str, relative_paths: set[str], budget=None) -> ScanReport:
         """Register explicit groups without full-root discovery or reconciliation."""
-        from .registration_scope import SourceRegistrationScope, register_catalog_sources
+        from .registration_scope import register_groups
 
-        scope = SourceRegistrationScope(root_id, frozenset(relative_paths))
-        with CatalogOperationLock(self.config.catalog_dir, operation="source_registration"):
-            return register_catalog_sources(self.config, self.store, scope, budget=budget)
+        # FF-1 B2: the directed registration now lives in the library function
+        # the ensure self-heal shares; behavior (lock + scan + report) is
+        # unchanged for the ``catalog register`` subcommand.
+        return register_groups(self, root_id, relative_paths, budget=budget)
 
     def record_source_facts(self, *, ref: Any, facts: dict[str, Any],
                             evidence: dict[str, Any]) -> dict[str, Any]:

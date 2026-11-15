@@ -131,6 +131,7 @@ class SourceAcquisitionService:
         failure_reason = "adapter_or_staging_failed"
         try:
             decision = self.coordinator._select_for_ensure(request, budget=budget, candidate_scope=candidate_scope)
+            decision = self._heal_undated_catalog_sources(request, decision, budget=budget, candidate_scope=candidate_scope)
             acquisition = decision.result
             if acquisition.status is AcquisitionStatus.SELECTED:
                 assert acquisition.candidate is not None
@@ -180,6 +181,79 @@ class SourceAcquisitionService:
             except Exception as journal_error:
                 exc.add_note(f"acquisition journal failed: {type(journal_error).__name__}")
             raise
+
+    def _heal_undated_catalog_sources(self, request, decision, *, budget=None, candidate_scope=None):
+        """FF-1 B2: one-shot, declaration-driven repair of undated catalog groups.
+
+        When this request's resolution hit an unknown-published-date reason, the
+        excluded candidates' groups are PRE-CHECKED read-only: a repair happens
+        only when the on-disk sidecar (dayu group ``meta.json`` / company_raw &
+        directory ``.source.json``) declares a filing date.  Declared groups are
+        re-registered through the SAME directed registration as the
+        ``catalog register`` subcommand, the repair is journaled append-only
+        (``catalog_repair_applied``), and resolution is re-run EXACTLY once.
+        A still-failing resolution falls through with its named reason; an
+        undeclared sidecar never spins (no registration, no retry).
+
+        Lock ordering (ADR-008): this hook runs BEFORE the ensure acquisition
+        mutex section and holds no lock while planning; ``register_groups``
+        takes the catalog operation lock on its own and releases it, and the
+        repair journal uses its own per-file mutex afterwards — no nesting of
+        ensure/journal locks under scan/catalog locks.  resolve/query never
+        call this (ensure-only self-heal; reuse_only callers see no writes
+        unless the declared-sidecar repair actually applies).
+        """
+        from .acquisition import AcquisitionStatus
+        from .catalog_repair import (
+            CatalogRepairJournal,
+            plan_undated_group_repairs,
+        )
+        from .resolver import UNKNOWN_PUBLISHED_DATE_REASONS
+
+        result = decision.result
+        resolution = result.resolution
+        if (
+            result.status is not AcquisitionStatus.AMBIGUOUS
+            or resolution.reason not in UNKNOWN_PUBLISHED_DATE_REASONS
+        ):
+            return decision
+        repairs = plan_undated_group_repairs(self.coordinator.catalog, resolution)
+        if not repairs:
+            # No sidecar declares a date: fail with the named reason directly.
+            return decision
+        from .registration_scope import register_groups
+
+        by_root: dict[str, set[str]] = {}
+        for repair in repairs:
+            by_root.setdefault(repair.root_id, set()).add(repair.relative_path)
+        registered: list = []
+        for root_id in sorted(by_root):
+            try:
+                register_groups(self.coordinator.catalog, root_id, by_root[root_id])
+            except Exception as exc:  # noqa: BLE001 - a failed repair degrades to the named failure
+                import logging
+
+                logging.getLogger(__name__).warning(
+                    "undated_group_repair_failed request_id=%r root_id=%s error=%s: %s",
+                    request.request_id, root_id, type(exc).__name__, exc,
+                )
+                continue
+            registered.extend(
+                repair for repair in repairs if repair.root_id == root_id
+            )
+        if not registered:
+            return decision
+        CatalogRepairJournal(
+            self.coordinator.catalog.config.catalog_dir
+        ).record_repair_applied(
+            request_id=request.request_id,
+            resolution_reason=resolution.reason,
+            repairs=registered,
+        )
+        # Exactly one resolution retry after a successful repair.
+        return self.coordinator._select_for_ensure(
+            request, budget=budget, candidate_scope=candidate_scope,
+        )
 
     def _stage_with_retry(self, request, selected, *, budget=None):
         from .adapter_process import AdapterProcessError

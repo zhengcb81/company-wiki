@@ -44,3 +44,22 @@ def register_catalog_sources(config: CatalogConfig, store: CatalogStore,
                         relative_paths=set(scope.relative_paths),
                         v2_scan_shadow=bool(selected.adapter_id), progress=progress, budget=budget,
                          on_registered=on_registered)
+
+
+def register_groups(catalog: Any, root_id: str, relative_paths: set[str], *,
+                    budget=None) -> ScanReport:
+    """Directed registration of explicit source groups (FF-1 B2).
+
+    The exact storage action the ``catalog register`` CLI subcommand performs,
+    extracted as a library function so in-process callers (the ensure
+    self-heal) repair a declaring group through the SAME lock and scanner
+    choreography instead of a parallel write path.  Takes the catalog
+    operation lock itself: callers must NOT hold the ensure/journal locks
+    while calling (ADR-008 lock ordering — end the current lock segment,
+    register, then re-enter).
+    """
+    from .lock import CatalogOperationLock
+
+    scope = SourceRegistrationScope(root_id, frozenset(relative_paths))
+    with CatalogOperationLock(catalog.config.catalog_dir, operation="source_registration"):
+        return register_catalog_sources(catalog.config, catalog.store, scope, budget=budget)
