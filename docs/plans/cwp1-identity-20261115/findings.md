@@ -188,3 +188,16 @@ route3 两边都 `exit=0 / found_capture_ready`，其余 5 条失败原因逐字
 > 任务执行并线**；触发人：company-wiki 主线 owner（操作者）。
 > Dashboard 侧消费以 handoff.json 的 `release_tag_or_commit_for_dashboard`
 > 为准（40 位 SHA，可 git rev-parse；不在此处写死以免文档自指）。
+
+### F-08 决策登记: release commit 取 `8de234871` 而非重审时点 HEAD
+
+独立重审 F-R7 建议用重审时点的 HEAD `4b0fc3fe5`。实际 handoff.json 采用
+`8de23487113bc8316b45bd5c8ca6a2680be6b333`（重审报告 + F-R5 证据闭环之后的提交）。
+理由: 该提交与 `4b0fc3fe5` 的**实现与验收证据逐字节相同**，只多出
+`INDEPENDENT_REVIEW.md`、3 个主探针 `.command.txt`、`evidence/replay/` 与 PWF
+节点状态，全部为 docs/evidence-only，不改变任何实现语义；Dashboard 按该
+commit 消费可一次取到实现、全部证据与独立重审结论。
+handoff 文档本身是同分支上更晚的 docs-only 提交（`f927062ef`），
+**不写进 release commit 以避免文档自指**（沿 parallel-lanes 惯例：
+`result_commit` 指向实际产品/证据提交，元数据提交另行登记）。
+两个 SHA 均可 `git rev-parse`，分支 `codex/cwp1-identity-suffix-20261115`。
