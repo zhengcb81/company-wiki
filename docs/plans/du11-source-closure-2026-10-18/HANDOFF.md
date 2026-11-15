@@ -4,7 +4,7 @@
 
 当前 CWP 另完成一项独立的 push/测试清理修复：四个根级 PWF 文档不会再触发运行时 fixed smoke；pytest 退出时能清理 Windows Git 只读对象，并拒绝对链接/reparse 路径改权限。独审 PASS，57 passed/1 host-dependent skip，cleanup `removed=true`；`56f9cc73d` 已推送并由远端确认，完整 GitHub CI 仍未核验。哈希绑定证据见[独审报告](../module-boundaries-2026-11-11/review/pre-push-classification-and-temp-cleanup-20261115.md)。此项不改变下列 M3 外仓 owner 前置条件。
 
-CWP CI run `43749426185` / job `132919838860` 的回归根因已修复在当前工作树：joined reference predecessor scope、大表 prose-group 错误路由、planned-PDF mock alias、旧 work-budget fixture、paid-response 当前诊断期望。受影响测试 236 passed（Python 3.13.9），push smoke 23 passed，mypy/Ruff/diff check 及独立审查通过。实施记录：[CI root-cause review](review/ci-failure-root-cause-20261115.md)。**这组代码尚未发布，精确提交的远端完整 CI 仍待运行与核验；不得称为已绿。**提交/推送后先看该 SHA 的完整 workflow；本地 Python 3.12 不可用，因此以远端结果为准。
+CWP CI run `43749426185` / job `132919838860` 的回归根因已修复：joined reference predecessor scope、大表 prose-group 错误路由、planned-PDF mock alias、旧 work-budget fixture、paid-response 当前诊断期望。原注释汇总 32 个失败实例。修复提交 `895f66f57ce2346c8eb2102c9bd475a828b3e8c8` 已推送，远端 ref 精确确认；但其完整 CI run `43755195576` 有 4 项失败：新增日常回归未登记到父固定清单；Windows rename 回退测试误在 Linux 执行。follow-up 已修复并本地验证：注释驱动 13 文件 500 passed、push smoke 23 passed、Ruff/diff check 通过；POSIX 分支用窄 OS adapter 验证，独立复审 PASS（审查绑定 `895f66f57`，仅覆盖两份 follow-up 代码文件）。follow-up 尚未提交/推送，提交后仍须验证新 SHA 的完整 GitHub CI。详见[CI根因记录](review/ci-failure-root-cause-20261115.md)。**整体 CI 尚未通过。**
 
 1. FF owner 给所有下载型 T3 请求传入有限 acquisition_limits，并留下通过的 T3 rerun 与 canonical PWF 记录；local/server main@dd716217 一致，tracked-clean。
 2. RF owner 将 20261115T084227Z / ok=false 和失败归因写入 canonical PLANNING_STATUS.md，同时核对 local main@88892536 相对 live origin/main@f2215959 超前的 8 个提交，以及 assurance/runs/weekly_alert.jsonl、weekly_manifest.json 两项 tracked 修改。ROOT 不改动这些文件。

@@ -101,6 +101,13 @@ FAST_CONTRACT_CASES = (
 
     "tests/integration/test_m3_official_json_acceptance.py",
     "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+    # Daily-push regressions are part of the fixed fast inventory as well;
+    # CI runs these through its complete unit-test phase, not contract remainder.
+    "tests/unit/du11_production/test_actor_context_wiring.py::test_joined_reference_uses_the_scope_before_the_whole_group",
+    "tests/unit/document_understanding_selection/test_reading_table_rows.py::test_large_table_keeps_eligible_rows_with_their_original_context[80]",
+    "tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[None-planned]",
+    "tests/unit/du11_production/test_source_preparation_axes.py::test_declared_accounting_scope_does_not_reserve_a_passage_fallback",
+    "tests/unit/test_narrative_claim_grounding.py::test_real_paid_response_replays_through_the_actual_decoder",
     *CURRENT_CI_REGRESSION_CASES,
     "tests/contract/test_layer_public_boundaries.py",
     "tests/contract/test_source_catalog_independent.py",

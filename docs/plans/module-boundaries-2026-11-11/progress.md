@@ -122,4 +122,17 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - Added five exact regressions to the existing fixed daily push list (14 total exact nodes, 180s cap); no changed-file fan-out or full suite added to the hook. Pre-commit remains static by design, which is why it did not catch runtime pytest failures.
 - Local validation: affected set 236 passed/19.96s on Python 3.13.9; mypy 490 source files passed; Ruff and diff check passed; push smoke 23 passed/12.11s; pytest cleanup `removed=true`. Independent read-only review found no blocker. It did not run tests.
 - Local Python 3.14 had one grammar scanner environment mismatch that passed under Python 3.13; Python 3.12 is unavailable locally. No full suite was run locally.
-- Exact-head GitHub CI, publication commit and remote verification remain pending; do not claim CI green until the new pushed SHA's run is observed. See [CI root-cause review](../du11-source-closure-2026-10-18/review/ci-failure-root-cause-20261115.md).
+- At 19:50 UTC, publication and exact-head CI were still pending. This checkpoint was superseded by the 20:01 UTC publication entry below; the exact run remains in progress there. See [CI root-cause review](../du11-source-closure-2026-10-18/review/ci-failure-root-cause-20261115.md).
+
+## 2026-11-15 20:01 UTC — CI fix published; exact-head run active
+
+- Commit `895f66f57ce2346c8eb2102c9bd475a828b3e8c8` is pushed; independent `git ls-remote` confirms `origin/master` at the same SHA. Push hook's fixed smoke: 23 passed in 10.71s.
+- The original run annotations reported 32 failed instances, broader than the five initial local targets. Re-ran the annotation-driven twelve-file suite as a set: **469 passed in 24.62s**, cleanup `removed=true`.
+- Full GitHub run `43755195576` / CI #536 for the exact commit was in progress at this checkpoint and later completed with four failures, recorded below. No claim of full CI success.
+
+## 2026-11-15 20:11 UTC — exact-head run narrowed residual to two test contracts
+
+- GitHub run `43755195576` for `895f66f57` completed with four failed instances: three parameter cases of a Windows-only no-replace rename fallback test running on Linux, and one assertion that the daily list remains a strict subset of the fixed fast inventory.
+- Production behavior was already platform-guarded. The Windows test now declares its platform; a platform-proxy companion asserts POSIX hard-link denial propagates and cannot overwrite a concurrent object. The five new daily unit nodes are also recorded in `FAST_CONTRACT_CASES`; `CI_CONTRACT_CASES` still removes unit nodes because full Unit CI owns them.
+- TDD/verification: exact CI provided RED for the inventory contract and platform mismatch. The annotation-driven 13-file local suite passed **500/500 in 44.44s**; daily smoke 23/23 in 19.72s; Ruff and diff check passed. Local OS is Windows/Python 3.13.9; real POSIX execution awaits the next GitHub run.
+- Scoped independent review passed at baseline `895f66f57`, covering the two follow-up code files. Follow-up edits and PWF are not yet committed. The next exact-head CI must be observed before this issue is closed.

@@ -6,8 +6,10 @@ from contextlib import contextmanager
 from dataclasses import replace
 import hashlib
 import json
+import os
 from pathlib import Path
 import sqlite3
+from types import SimpleNamespace
 
 import pytest
 
@@ -22,6 +24,7 @@ from company_wiki.source_catalog.narrative_artifact_store import (
     NarrativeObjectIntegrityError,
     NarrativeSourceNotCurrentError,
 )
+from company_wiki.source_catalog import narrative_artifact_store as artifact_store
 from company_wiki.source_catalog.store import CatalogStore
 from company_wiki.source_catalog.reader import CatalogReaderUnavailable
 
@@ -175,6 +178,10 @@ def test_local_object_store_returns_logical_key_and_checks_existing_bytes(
 
 
 @pytest.mark.parametrize("racing_bytes", [None, b"same bytes", b"tampered"])
+@pytest.mark.skipif(
+    os.name != "nt",
+    reason="os.rename is no-replace on Windows; POSIX must propagate hard-link denial",
+)
 def test_object_store_uses_windows_no_replace_rename_when_hardlinks_are_denied(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, racing_bytes: bytes | None,
 ) -> None:
@@ -201,6 +208,41 @@ def test_object_store_uses_windows_no_replace_rename_when_hardlinks_are_denied(
         assert result.object_key == f"objects/sha256/{digest[:2]}/{digest}.json"
         assert result.created_bytes == (len(data) if racing_bytes is None else 0)
         assert objects.read(result.object_key, expected_sha256=digest, expected_size=len(data)) == data
+    assert list(target.parent.glob(".narrative-*.partial")) == []
+
+
+def test_posix_hardlink_denial_never_uses_replace_fallback(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    data = b"same bytes"
+    racing_bytes = b"concurrent object"
+    objects = LocalNarrativeObjectStore(tmp_path / "objects")
+    digest = hashlib.sha256(data).hexdigest()
+    target = tmp_path / "objects" / "objects" / "sha256" / digest[:2] / f"{digest}.json"
+
+    def deny_hardlink(_source, destination):
+        Path(destination).write_bytes(racing_bytes)
+        raise PermissionError("hard links unavailable")
+
+    def unexpected_rename(*_args):
+        pytest.fail("POSIX hard-link denial must not use replace-capable rename")
+
+    real_os = artifact_store.os
+    monkeypatch.setattr(
+        artifact_store,
+        "os",
+        SimpleNamespace(
+            name="posix",
+            fsync=real_os.fsync,
+            link=deny_hardlink,
+            rename=unexpected_rename,
+        ),
+    )
+
+    with pytest.raises(PermissionError, match="hard links unavailable"):
+        objects.put_with_usage(data)
+
+    assert target.read_bytes() == racing_bytes
     assert list(target.parent.glob(".narrative-*.partial")) == []
 
 

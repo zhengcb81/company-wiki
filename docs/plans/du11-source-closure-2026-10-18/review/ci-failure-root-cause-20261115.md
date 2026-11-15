@@ -20,9 +20,12 @@
 
 `.pre-commit-config.yaml` intentionally runs static checks and does not run pytest. The previous fixed daily push smoke also did not include these regression cases. This explains the gap; it is not evidence that static pre-commit can prove runtime correctness. The daily push list now includes five exact cases (14 total including the prior nine), one representing the shared planned-PDF alias path. The list is fixed, remains under the existing 180-second cap, and does not expand with changed-file count. The other planned-PDF parameter variants remain in GitHub's full suite.
 
+The original GitHub annotation summarized **32 failed instances**. Reported nodes were in: `tests/unit/document_understanding_root/test_operating_relation_production.py`; `tests/unit/document_understanding_selection/test_native_text_page_coverage.py`, `test_reading_native_carriers.py`, `test_reading_native_continuity.py`, `test_reading_native_list_ancestry.py`, `test_reading_semantic_value.py`, `test_reading_table_rows.py`, and `test_source_operating_actions.py`; `tests/unit/du11_production/test_source_preparation_axes.py`; `tests/unit/test_narrative_artifact_store.py`, `test_narrative_claim_grounding.py`; and `tests/unit/test_pdf_paragraph_reading_integration.py`. The annotation-driven rerun included all twelve files together so interactions within the reported failure surface were exercised; this was not a full `tests/unit` run.
+
 ## Validation
 
 - Affected ten test files: **236 passed**, 19.96 seconds, Python 3.13.9.
+- After inspecting the original run annotations, the broader twelve-file annotation-driven set also passed: **469 passed**, 24.62 seconds, Python 3.13.9. It covers `test_operating_relation_production`, `test_native_text_page_coverage`, `test_reading_native_carriers`, `test_reading_native_continuity`, `test_reading_native_list_ancestry`, `test_reading_semantic_value`, `test_reading_table_rows`, `test_source_operating_actions`, `test_source_preparation_axes`, `test_narrative_artifact_store`, `test_narrative_claim_grounding`, and `test_pdf_paragraph_reading_integration`.
 - Daily push fast smoke: **23 passed**, 12.11 seconds; cleanup receipt `removed=true`.
 - `mypy`: 490 source files passed.
 - Ruff and `git diff --check`: passed.
@@ -32,4 +35,6 @@
 
 ## State
 
-Local fixes and focused checks are green. The fix is not complete for publication purposes until committed, pushed, and checked against the exact GitHub Actions SHA. Do not describe local push smoke or local targeted tests as full remote CI success.
+Commit `895f66f57ce2346c8eb2102c9bd475a828b3e8c8` is pushed and independently confirmed at `origin/master`. Exact-head GitHub CI run `43755195576` completed with four failed instances: the daily test inventory was not also listed in its parent fast inventory, and three parameter cases assumed Windows no-replace rename semantics while running on POSIX. The production POSIX behavior was correct; the test scope was wrong.
+
+The follow-up adds all five unit regressions to `FAST_CONTRACT_CASES` (unit tests remain excluded from the CI contract remainder and are owned by full Unit CI), skips the Windows-only fallback test off Windows, and adds a portable injected-POSIX test proving hard-link denial propagates without overwriting a concurrent object. The follow-up passed the 13-file annotation-driven suite (**500 passed**), daily push smoke (**23 passed**), Ruff, and `git diff --check`; temporary test cleanup reported `removed=true`. Independent review **PASS** at baseline `895f66f57`, scoped to the two code files in the follow-up; it confirmed the fast-inventory filter and POSIX no-clobber assertions. The real Linux branch still requires the next GitHub run. The follow-up is ready to publish; do not describe local push smoke or local targeted tests as full remote CI success.

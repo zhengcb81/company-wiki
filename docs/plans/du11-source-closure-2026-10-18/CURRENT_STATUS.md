@@ -4,7 +4,16 @@
 
 ## 2026-11-15 最新状态
 
-### 19:50 UTC update — CI regression roots fixed; publication and exact-head CI pending
+### 20:11 UTC update — second CI run exposed two remaining test-scope mismatches
+
+The first repair commit `895f66f57ce2346c8eb2102c9bd475a828b3e8c8` reached `origin/master`, but its exact run `43755195576` failed **4 instances**: one daily/fast-inventory contract assertion, plus three parameter cases of a Windows-only no-replace-rename test running on Linux. These were new test wiring/platform issues; no new product defect was indicated.
+
+- The five unit regressions were added to `DAILY_PUSH_CASES` but not its parent fixed `FAST_CONTRACT_CASES` inventory. The invariant intentionally requires the daily set to be a strict subset. Added the same five IDs to the parent inventory; `CI_CONTRACT_CASES` continues to exclude unit nodes because GitHub's complete Unit phase owns them.
+- The object-store fallback is correctly Windows-specific: on POSIX the production code propagates `PermissionError` rather than use a replace-capable `os.rename`. The old test asserted Windows behavior on every OS. It now runs only on Windows; a companion test injects the POSIX platform branch on any host and proves hard-link denial propagates without overwriting the racing object.
+
+Validation after these fixes: the 13-file annotation-driven suite **500 passed** in 44.44s; daily push smoke **23 passed** in 19.72s; Ruff and `git diff --check` passed; the temporary test tree was cleaned. The new POSIX-branch test ran via a narrow OS adapter on this Windows host; the next Linux CI run will verify it under the real CI platform. Independent review of the code follow-up passed at baseline `895f66f57`, covering the inventory filter and Windows/POSIX test split. `895f66f57` remains the remote SHA with failing CI. The follow-up is ready to commit/push; do not mark CI complete until the next exact-head run succeeds.
+
+### 20:01 UTC update — CI regression roots fixed and pushed; exact-head run active
 
 Run `43749426185`, job `132919838860`, failed in the full Unit suite. The anonymous Actions log endpoint returned 403, so this record is based on locally reproduced failures and the exact affected tests; no credentials were reused. Five underlying test/behavior areas were corrected:
 
@@ -16,7 +25,11 @@ Run `43749426185`, job `132919838860`, failed in the full Unit suite. The anonym
 
 Pre-commit did not catch these because it intentionally runs static checks and not pytest. The old push smoke also omitted these regressions. The fixed daily push list now adds five exact tests (one representative of the shared planned-PDF alias path) to its existing 9 cases; it remains a fixed list with the existing 180-second cap and no changed-file expansion. Exact residual PDF parameter variants remain in full CI.
 
-Validation: affected suites **236 passed** under local Python 3.13.9 in 19.96s; `mypy` **490 source files** passed; Ruff and `git diff --check` passed; fixed push smoke **23 passed** in 12.11s. Pytest scratch cleanup reported `removed=true`. A local Python 3.14-only grammar scanner mismatch did not reproduce on Python 3.13; the repo's CI Python 3.12 is not installed locally. Independent read-only review found no blocker and confirmed table qualification/admission and fixed push scope. This is local evidence only: exact-head GitHub CI is still pending and must not be reported green until observed.
+The run's annotation reported 32 failed instances across continuity/semantic-value, carrier/source-proof, list ancestry, PDF observation/integration, operating-table, artifact-store fallback, work-accounting and replay tests. The failures were concentrated in the affected document-reading suites, not a set of 32 separate architectural defects. To avoid assuming that a small smoke covered the whole annotation, the exact listed test files were rerun together after the fixes: **469 passed** in 24.62s on Python 3.13.9; cleanup receipt `removed=true`.
+
+Validation: affected first-pass suites **236 passed** under local Python 3.13.9 in 19.96s; expanded annotation-driven suites **469 passed** in 24.62s; `mypy` **490 source files** passed; Ruff and `git diff --check` passed; fixed push smoke **23 passed** in 12.11s. Independent read-only review found no blocker and confirmed table qualification/admission and fixed push scope. Local Python 3.14 had one grammar scanner mismatch that passed under Python 3.13; the repo's CI Python 3.12 is not installed locally.
+
+Commit `895f66f57ce2346c8eb2102c9bd475a828b3e8c8` is pushed and `git ls-remote` confirms `origin/master` at that SHA. GitHub CI run `43755195576` (workflow run #536) later completed with four test instances failed; the 20:11 UTC checkpoint below records the residual causes and local follow-up. This 20:01 entry is a historical snapshot.
 
 ### 18:58 UTC update — root PWF push classification and pytest scratch cleanup repaired and published
 
