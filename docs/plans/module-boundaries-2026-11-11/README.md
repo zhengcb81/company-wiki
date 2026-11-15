@@ -2,11 +2,11 @@
 
 **M2 已完成。** 五条模块施工卡已受测并入各自主线并推送。StockWiki 公开来源读取已进入本地 `master`，Dashboard 的公开浏览、原件流和摘要读取已推送 `main`。D4 跨仓回放 30 项全过，E01–E09 均有组合证据。 [组合记录](review/root_composition_20261114.md) · [矩阵](boundary_matrix.json)
 
-**M3 当前 HEAD 漂移审查进行中。** M2 结论继续绑定原已审查版本；2026-11-15 的只读对比发现多个仓在这些版本之后仍有源码变化。CWP 第一组差异已用 RED→GREEN 修复；边界合同补上对 `__builtins__`、`builtins.__dict__`、`vars()`、`globals()`/`locals()` 和 `.get()` 的动态执行字典查找。定向集合最新为 119 项通过，真实 CLI E2E 在存储修复后 1 项通过；pytest 默认临时路径和 Windows 硬链接被拒两项环境根因也已修复。其余 CWP 和其他仓的源码差异仍待 owner 归因和测试；不把后续代码自动继承为已验收，也不重跑整套历史矩阵。实施细则见 [M3 task plan](task_plan.md#M3--当前-HEAD-边界漂移审查2026-11-15-新增)。
+**M3 当前 HEAD 漂移审查进行中。** M2 结论继续绑定原已审查版本；第二轮只读复核已把九模块当前可识别产品差异逐项归类。CWP 第一组差异已用 RED→GREEN 修复；边界合同补上对 `__builtins__`、`builtins.__dict__`、`vars()`、`globals()`/`locals()` 和 `.get()` 的动态执行字典查找。定向集合最新为 119 项通过，真实 CLI E2E 在存储修复后 1 项通过；pytest 默认临时路径和 Windows 硬链接被拒两项环境根因也已修复。I10/I11 已有 IQS→StockWiki 与 StockWiki→IQS/Dashboard owner 互操作证据，I12 是 CWP 内部公开 façade；不重复跑相同测试。尚待 StockWiki 根 PWF 与 RF weekly 运行记录由各自 owner 对齐，并把最终矩阵绑定精确 refs；不把后续代码自动继承为已验收，也不重跑整套历史矩阵。实施细则见 [M3 task plan](task_plan.md#M3--当前-HEAD-边界漂移审查2026-11-15-新增)。
 
-M2 之后的工作区续核不改变上述结论，也不允许恢复旧的跨层实现。Dashboard 三项未收口材料按文件域拆开：[C01证据可移植性](harness_lanes/dashboard_c01_evidence_portability.md)、[B-real预览模块适配](harness_lanes/dashboard_preview_module_adapter.md)、[B03独审收据收口](harness_lanes/dashboard_b03_review_closeout.md)。唯一处置表在 [reconciliation.md](reconciliation.md)，并行写集合见 [dispatch.md](dispatch.md)。
+M2 之后的工作区续核不改变上述结论，也不允许恢复旧的跨层实现。Dashboard 三项历史卡现已按 Dashboard owner 的 11-14 收尾记录重新分类：C01 证据可移植性已由 `c8939e5` 吸收；B-real 预览模块适配尚未执行，原卡基线已过时，开工前必须按当前 `main@3f83bb5` 重做路径对账；B03 独审收据仍不完整，属于证据收口而非产品实现。后两项是 Dashboard owner 后续事项，不是 CWP M3 的接口阻塞。卡片与证据入口：[C01](harness_lanes/dashboard_c01_evidence_portability.md)、[B-real预览](harness_lanes/dashboard_preview_module_adapter.md)、[B03](harness_lanes/dashboard_b03_review_closeout.md)。唯一处置表在 [reconciliation.md](reconciliation.md)，并行写集合见 [dispatch.md](dispatch.md)。
 
-当前实施已回到 [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。R4 和 T4/SEM 已验收，真实来源卡的付费恢复和两条 RF 实际采用通过。正在修正业务摘要内容。
+当前优先事项仍是完成 M3 当前 HEAD 边界漂移审查。R4 和 T4/SEM、真实来源卡的付费恢复、两条 RF 实际采用已有验收；业务摘要 P1 仍待续办，按顺序在 M3 关闭后回到[父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。固定公司循环继续暂停。
 
 先读 [task_plan.md](task_plan.md)，再读 [architecture.md](architecture.md)、[interfaces.md](interfaces.md)、[acceptance.md](acceptance.md)。并行安排和卡片见 [dispatch.md](dispatch.md)，交接格式见 [handoff_contract.md](handoff_contract.md)，机器对照见 [boundary_matrix.json](boundary_matrix.json)。
 
@@ -37,11 +37,12 @@ flowchart LR
   C4 --> D
   C5 --> D
   S[StockWiki和Dashboard公开接口已接收] --> D
-  D --> E[逐仓发布并关闭工程矩阵]
-  E --> F[R4工作量与T4来源限定已验收]
+  D --> E[逐仓发布并关闭M2冻结矩阵]
+  E --> M3[当前位置：M3 当前HEAD边界漂移审查]
+  M3 --> F[R4工作量与T4来源限定已验收]
   F --> G[真实来源卡与零重复收费恢复已验收]
   G --> H[两条证据进入RF实际计算已验收]
-  H --> I[当前位置：业务摘要内容]
+  H --> I[待续：业务摘要内容]
   I --> J[新版摘要的缓存和RF组合复验]
   J --> K[完整公司审查循环]
 ```

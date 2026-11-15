@@ -2,7 +2,7 @@
 
 ## 2026-11-15 M3 CWP 当前发布状态
 
-CWP M3 首组边界修复代码 commit `3bc4ed86a` 已推送，M3 PWF 回执 carrier `f175e6c37` 随后推送；该次 push 后本地 `master` 与 `origin/master` 相等。其后总控 PWF 状态对齐也已作为 docs-only 变更正常推送。定向边界/对象存储/短路径/JSON preparation 合计 119 项通过，受影响 Ruff 与 pre-commit mypy 通过，push fast smoke 18 项通过。M3 其余 CWP 和其他 owner 仓源码差异仍在审查，不能把本次发布写成全项目解耦验收。
+CWP M3 首组边界修复代码 commit `3bc4ed86a` 已推送，M3 PWF 回执 carrier `f175e6c37` 随后推送；该次 push 后本地 `master` 与 `origin/master` 相等。其后总控 PWF 状态对齐也已作为 docs-only 变更正常推送。定向边界/对象存储/短路径/JSON preparation 合计 119 项通过，受影响 Ruff 与 pre-commit mypy 通过，push fast smoke 18 项通过。11-15 第二轮已完成九模块当前可识别产品差异归类，并确认 I10/I11 owner 互操作证据；M3 仍未关闭，待 StockWiki 根 PWF 与 RF weekly 运行记录由 owner 对齐及最终精确 refs 报告。不要把本次发布写成全项目解耦验收。
 
 ## 最终验收状态（2026-11-15）
 
@@ -18,7 +18,7 @@ CWP M3 首组边界修复代码 commit `3bc4ed86a` 已推送，M3 PWF 回执 car
 | Dashboard | `main@3f83bb5` | owner fresh 核对 live 相等 | PASS / 最终 receipt-only review 绑定 `8cd2d947` 并已推送报告载体 |
 | RFAudit | `main@50d8ab6` | 无 remote（按卡约定） | PASS / 本地收口 |
 
-StockWiki 和 IQS 不在本批写集，owner PWF 仍列有 OPEN 验收；2026-11-15 的只读复核无法访问其 Git 元数据，11-14 SHA 及工区数仅作 last-known snapshot，不作今天的 live 状态。Dayu 仍是外部项目，均未操作。既有 active/evidence refs 按 handoff 保留，不作全量强制 merge。
+StockWiki 和 IQS 不在本批写集，各自 owner 仍有 OPEN 项。2026-11-15 14:33 UTC 的只读核对已取得当前 Git 元数据：StockWiki `master@0450506` tracked clean、无 remote，根 PWF 尚待 owner 对齐；IQS `master@3d9243c=origin/master`，活动 `codex/iqs-manifest-delivery-01@ecb4a5d` tracked clean，分支相对 master 仍只有计划/状态/证据变化，无产品源码差异。worktree 与 untracked 数量仍沿用 11-14 inventory，不声称实时。Dayu 仍是外部项目，未操作。既有 active/evidence refs 按 handoff 保留，不作全量强制 merge。
 
 ## 派发安排与开工快照（历史）
 

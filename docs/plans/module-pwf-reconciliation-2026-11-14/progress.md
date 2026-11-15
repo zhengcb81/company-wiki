@@ -1,5 +1,16 @@
 # 进度
 
+## 2026-11-15 — M3 当前 HEAD 与 PWF 第二轮核对
+
+- 将旧的 post-M2 路径筛选按源码/测试/计划重新分类，修正“Dashboard 缺 final receipt”的过期判断：Dashboard START_HERE 与 receipt carrier 已在 `3f83bb5` 收口；本地缓存 `origin/main` 同为 3f83。Owner 记录含此前 fresh remote 验证，本轮没有另发网络查询。
+- 当前版本表与 I10–I12 三条接口已写入 `module-boundaries-2026-11-11/task_plan.md`、`interfaces.md`、`boundary_matrix.json`。I10 已有 IQS active package 生成 53 题 envelope 并在隔离 StockWiki workspace publish/readback 的互操作证据；C06 真实历史覆盖仍 OPEN，属于 owner 业务数据项。I11 已由 StockWiki CLI 版本字段测试及 IQS 当前 C38/C5 120 passed、固定核心组合 296 passed 覆盖，不再要求重复回放。I12 是 CWP 内部 DU public façade 与 SourceCatalog 的边界合同，当前 119 项通过；CodeGraph 未解析到调用边，按其 best-effort 限制记录为未知消费关系，而不是判作无调用。
+- IQS 当前 `master@3d9243c=origin/master`；活动 `codex/iqs-manifest-delivery-01@ecb4a5d` 只有 PWF/状态/证据改动、无产品源变化，因此不改变 I10/I11 当前代码证据。StockWiki `master@0450506` tracked clean、无 remote；其根 PWF 的阶段/提交状态差异仍由 owner 对齐。
+- StockWiki `master@0450506` 的公司评估 lineage 与 membership 边界代码均已在当前主线；两个 11-14 子计划记录了 owner 测试与部分独审，但根 canonical PWF 日期停在 11-08，且子计划仍写“未提交/待 review”。按 StockWiki 活动 owner 隔离原则不写其工作区，登记为 owner reconciliation，不把代码/证据删掉或误称未交付。
+- FF `main/origin@1dfd818`、RF `main/origin@f2215959` 当前状态核对完成；RF 两个 weekly run 文件仍 tracked dirty，保留给 owner。Dashboard 与 RFAudit 的当前代码差异均保持各自模块边界；RF 变化仅落在其 report renderer/test，FF 无产品源变化，Audit 无新增产品源码。
+- CWP 目前 `master@origin/master=91137e257`，tracked clean；未跟踪仍为 23,334 个文件且与既有分类一致。本轮仅整理 PWF，不修改其他仓库，不对这批历史/运行资料做无差别清理。
+- Dashboard owner 的续核卡另行分类：C01 已由 `c8939e5` 吸收；B-real 预览适配未执行，必须基于 Dashboard `main@3f83bb5` 重做候选差异；B03 旧独审收据仍 incomplete。它们不属于 CWP M3 的完成门槛，也不改变跨仓只读约定。
+- M3 仍 IN_PROGRESS：需要 StockWiki owner 对齐根 canonical PWF、RF owner 记录两项 tracked weekly run 结果，并由 ROOT 把九模块当前 refs、CWP 24 个产品路径复核及 I10–I12 证据绑定到最终报告。I11 不再安排重复回放；未发现的边界缺口不通过扩大测试或新增审批流程制造工作。父 P1 业务摘要仍排在 M3 后，固定公司循环继续暂停。
+
 ## 2026-11-15 — M3 CWP 首组边界修复完成
 
 - 补充动态执行边界负例后，`eval/exec/compile`（含 `builtins` 属性/直接别名、`__builtins__`/`builtins.__dict__`、`vars()`/`vars(builtins)`、`globals()`/`locals()` 和 `.get()` 查找）不能绕过 AST 合同；每轮新增反例先 RED 后转 GREEN，生产代码未发现对应动态调用。

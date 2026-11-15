@@ -1,6 +1,6 @@
 # 当前交接
 
-**当前执行入口为 [主线实施计划](task_plan.md) 的业务摘要内容。** 五条模块交付及 M2 组合已验收完成。StockWiki C38/B03 与 Dashboard 通过公开接口接入，验收版本见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md)。
+**当前执行入口是 [模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)，不是业务摘要。** M2/E01–E09 仅在冻结版本范围内验收完成；M3 当前 HEAD 审查仍进行中。九模块产品差异已分类，I10/I11 owner 互操作证据及 CWP I12 边界合同已有；当前剩余是 StockWiki 根 canonical PWF、RF weekly runtime 记录由各自 owner 对齐，随后 ROOT 绑定精确 refs 出最终 M3 收据。不要重复运行已通过的 I10/I11 回放。M3 关闭后才回到本文件所述业务摘要 P1；固定公司循环继续暂停。M2 原始组合记录见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md)。
 
 R4 统一预扣已迁回执行阶段。已有覆盖缺口时，选材末尾复用已准备的观察并保留部分状态。从正式入口回放冻结半年报，12/12 和选材 SHA 一致，工作账户使用 10,753,620 / 16,000,000。见 [来源会话与覆盖回放](review/r4-source-session-20261114.md)。[T4 与 SEM 验收](review/t4-sem-20261114.md) 已独审通过。
 

@@ -8,7 +8,17 @@
 - 2026-11-14 之前 Dashboard 的三个文档交接提交（`0b31f48`、`8111194`、`63f6820`）已由总控推入 Dashboard `main`，内容仅为 handoff 文档，无产品代码。这是本边界明确前的既成状态；后续 Dashboard 代码或分支并线一律交 Dashboard owner。
 - 以下“ROOT 在 StockWiki 工区接收”及“ROOT merge”属于较早阶段的历史授权和已完成事项，不构成当前继续写入其他模块的授权。不要据此覆盖正在进行的仓内改动。
 
+## 2026-11-15 Dashboard 卡片状态复核（优先于 11-14 快照）
+
+Dashboard owner 的 `dashboard-closeout-handoff.md` 与其 canonical `START_HERE.md` 对照后，三张 CWP 登记卡的状态如下。它们是 Dashboard owner 的独立后续事项，不是 CWP M3 的跨仓接口阻塞；本仓只记录，不改 Dashboard 文件。
+
+- **C01 证据可移植性：已完成。** Dashboard 收尾记录绑定 `codex/x-c01-schema7-rehearsal` 的独审证据，并由 `c8939e5` 吸收；允许路径已在 Dashboard main。对应 CWP 卡可归档，不再作为待办。
+- **B-real 预览模块适配：未执行。** 旧 `all31-listing-preview-combo` staged 树仍是唯一历史证据；原卡的 main 基线早于当前 Dashboard `main@3f83bb5`。如 owner 启动，先按当前 main 重做逐路径核对；不整包合并历史树。
+- **B03 独审收据收口：未完成、仅证据范围。** Dashboard owner 收尾记录仍确认 `[ROUND4_VERDICT]`、`[R1_FINAL_VERDICT]` 与 `PENDING_ROUND4` 未闭合；产品侧 B03 live 验证/修复已另行吸收，不能把产品修复等同于这份 R1 独审收据完成。
+
 ## 2026-11-14 模块化并线与本地改动续核
+
+> 历史快照：本节 Dashboard 的 C01/B-real/B03状态已由上方 11-15 owner handoff 复核取代。
 
 - 用户再次明确：模块化架构必须保留。判断支线时先比对公开模块接口；整支合并会覆盖/绕过 owner 边界的，不得强并，应由支线作者在所属模块内改写并经模块测试后再收。
 - Dashboard 主线仍为 `main@ff6e764f1e4da3aa9de73d1469770a653b8af654`，上次尝试接收 C01 后已恢复到该已推送版本。C02 与 IQS B03 的有效行为已进入当前 operation/adapter 模块；旧 `service.py` / `adapters/iqs.py` 实现会回退模块边界，故只标记为功能已吸收，不整支合并。

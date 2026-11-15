@@ -1,8 +1,8 @@
 # 模块 PWF、工区与主线整合计划
 
-> **2026-11-15 状态校正：** 阶段 1/2 的“完成”仅指最初七条 owner lane 的交付，不代表九个范围模块的 PWF、在途任务和工作区已全部收口。总续办仍为 **IN_PROGRESS**：StockWiki/IQS 仍有 owner 任务；Dashboard 自身 START_HERE 未记最终 11-15 receipt carrier；RF 自身 PWF 尚未吸收最新 T3 工作区结果；FF 的 F-08 仍是待修产品问题。阶段 3 也未达成“物理上每模块只留一个目录”。本条以 2026-11-15 只读实查为准，详见本计划下方新增状态表与 `progress.md`；旧阶段快照保留为历史。
+> **2026-11-15 状态校正：** 阶段 1/2 的“完成”仅指最初七条 owner lane 的交付，不代表九个范围模块、owner PWF 和在途任务全部收口。总续办仍为 **IN_PROGRESS**：StockWiki/IQS 仍有 owner 任务；StockWiki 当前 `master@0450506` 的根 `task_plan.md` 尚未跟上 11-14 并线内容；RF 有两项 tracked weekly runtime 文件待 owner 记录；FF 的 F-08 仍开放。Dashboard 的 START_HERE 与 receipt carrier 已更新至 `3f83bb5`，不得再写成待补。阶段 3 也未达成“物理上每模块只留一个目录”。本条以 11-15 第二轮只读复核为准，见 `findings.md`、`progress.md` 和 module-boundaries M3 表；更早快照保留为历史。
 
-> **2026-11-15 M3 最新状态：** CWP 首个当前 HEAD TDD 修复切片已完成：测试覆盖动态执行与内建命名空间字典绕行、`NarrativeSubjectRef` schema owner、pytest 默认长临时路径、Windows 硬链接拒绝的原子发布兼容。最新 119 项定向合同/集成测试通过，真实 CLI E2E 在对象存储修复后通过。代码提交 `3bc4ed86a` 已推送，M3 状态回执 `f175e6c37` 也已推送；其后总控 PWF 的状态对齐更新也完成并推送。M3 其余仓源码差异审查仍开放。此结果不改变 StockWiki/IQS owner 隔离；FF、RF、Dashboard 的 PWF 差异仍由各仓 owner 在 canonical PWF 中收口，ROOT 只维护总控快照。详见 `module-boundaries-2026-11-11/task_plan.md` 与本计划 `progress.md`。
+> **2026-11-15 M3 当前状态：** CWP 首个 TDD 修复切片已推送：`3bc4ed86a` 代码、`f175e6c37` M3 回执、当前 `master@origin/master=91137e257`；119 项定向合同测试、真实 CLI E2E、Ruff 和 push fast smoke 均有对应记录。第二轮逐仓复核已把九模块可识别产品差异分类，登记 I10/I11/I12。IQS `master@3d9243c` 上 C38/C5 120 项、固定核心组合 296 项和 IQS→StockWiki 53 题 publish/readback 已给出 I10/I11 互操作证据；活动 `codex/iqs-manifest-delivery-01@ecb4a5d` 截至 14:33 UTC 只含 PWF/状态/证据文件，不改产品实现，故不重复派发相同回放。M3 仍开放：StockWiki 根 canonical PWF 与 RF 两项 weekly runtime 结果需各自 owner 对齐，随后 ROOT 绑定最终精确 refs。Dashboard 收据 `3f83bb5` 已收口，不再列为待办；外仓仍保持只读。详见 module-boundaries task plan/matrix 与本计划 `findings.md`、`progress.md`。
 
 ## 目标
 
@@ -115,7 +115,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 | earnings-transcripts | `main@50d9190` = `origin/main` | 47 个 Python/test 缓存文件删除，815,153 B；PWF 提交已推送 | 8 个 Mimosa/WorkBuddy 未跟踪状态保留；既有 `transcript_audit --write-receipts` 冲突退出码 defect 是业务后续项 |
 | revenue-forecast / RFAudit | RF `main@f221595` = `origin/main`；RFAudit `main@50d8ab6`，无 remote，clean | RF 两条大幅分歧支线仅选择性接收 PWF/证据；37+45 定向测试通过，3ca 内容与 f221 收据载体独审均 PASS；临时 worktree 已处理。RFAudit 17 个工区/4,264 文件/67,449,856 B 清理，最终独审 PASS | 外部 pytest cache 因 Access Denied 保留；真实 `daily_alert.jsonl` 运行记录保留 |
 | SID / Dashboard | SID `v2-clean-rewrite@26704a0` = origin；Dashboard `main@3f83bb5` = origin/main | SID 用户公司名单保留；Dashboard 初审 7 项修复，定向测试/锁/临时E2E恢复收据齐备；最终 post-push receipt-only review PASS（绑定 `8cd2d947`），报告追加 carrier `3f83bb5` 已推送并 fresh 核对远端 | 两仓本轮收尾完成；E14 用户暂停包与 WorkBuddy 用户资料保留 |
-| StockWiki / IQS | Last-known 11-14: StockWiki `master@0450506`，无 remote，28 worktrees/39 refs/41 untracked；IQS `master@dab872` = `origin/master`，13 worktrees/13 refs/22,658 untracked。11-15 fresh Git read 均被 Permission denied | PWF 只读复核显示 SW Phase 40 真实数据/owner-shape release 终验仍 OPEN；IQS 11-14 计划仍有跨仓复跑、主体 bundle、真实付费样本及独审 OPEN。无写入、清理或并线 | 维持只读 hold。旧 SHA/数量不代表实时状态；待权限环境可读且 owner 提交最终交接/HEAD 后续做。不能把 `.tmp-*` 或 untracked 直接判垃圾 |
+| StockWiki / IQS | StockWiki `master@0450506` tracked clean、无 remote；IQS `master@3d9243c` = `origin/master`，另有活动 `codex/iqs-manifest-delivery-01@ecb4a5d`，tracked clean，分支差异只含 PWF/状态/证据文件。11-15 只读复核；worktree/untracked 数量仍只引用 11-14 inventory，不冒充当前数量 | StockWiki 根 canonical `task_plan.md` 仍需 owner 对齐；Phase 40 真实数据/owner-shape release 终验仍 OPEN。IQS C38/C5 120 passed、固定核心组合 296 passed，I1–I7 模块工程验收已记录；活动 manifest-delivery 计划仍由其 owner 推进，真实研究/付费样本等 OPEN 项与边界审查分开。ROOT 未写入、清理或并线 | 保持 owner 隔离。StockWiki PWF 等 owner 完成交接后再核对；IQS 活动分支不得当作未提交主线代码。无凭据不删除 `.tmp-*`/untracked |
 
 ### 完成条件
 

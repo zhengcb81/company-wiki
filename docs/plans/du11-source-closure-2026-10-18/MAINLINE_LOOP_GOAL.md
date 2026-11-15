@@ -2,7 +2,7 @@
 
 本文件定义目标，不维护版本日志；执行状态见[CURRENT_STATUS](CURRENT_STATUS.md)，下一步见[task_plan](task_plan.md)。
 
-2026-11-14，[模块边界工程验收](../module-boundaries-2026-11-11/README.md) 已完成，当前工作回到主线资料与研究验收。
+2026-11-15：M2/E01–E09 已在冻结接口版本范围内验收；M3 当前 HEAD 边界与 PWF 对齐仍进行中。执行状态和唯一下一步见 [CURRENT_STATUS](CURRENT_STATUS.md) 与 [M3 计划](../module-boundaries-2026-11-11/task_plan.md)。固定公司循环暂不恢复；M3 关闭后按父计划先处理业务摘要 P1，再继续本目标所列真实公司审查循环。
 
 完成以company-wiki→filing-fetch→revenue-forecast→revenue-forecast-audit为一条解耦、可复查的真实业务链。先完成已有药明康德失败整改及新attempt、药明合联/Snowflake泛化责任；再完成固定八家责任与通用循环停止条件。已有局部工程或旧公司报告不能代替本目标要求的完整新版本验收。
 

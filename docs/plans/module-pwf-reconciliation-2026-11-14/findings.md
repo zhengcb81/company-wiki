@@ -1,5 +1,16 @@
 # 调查发现
 
+## 2026-11-15 — M3 当前 HEAD 第二轮核对（取代开工快照的待办判断）
+
+- 精确的 M2→当前源码 diff 为：CWP 24 个 `src/` 文件；FF 0 个产品源文件、1 个测试文件；RF 1 个报告源文件及1个测试；StockWiki 4 个产品模块并带 owner 测试/fixture；Dashboard 2 个产品源文件，另有 UI 测试和测试依赖；RFAudit 没有计划/证据目录以外的产品源码变化。旧段落中的 `25/7/4/5/1` 是第一轮宽泛“代码形态路径”筛选，不能当成产品源码计数。
+- 当前主线/状态：CWP `master@91137e257` 与 `origin/master` 相等且 tracked clean；FF `main@1dfd818` 与 `origin/main` 相等；RF `main@f2215959` 与 `origin/main` 相等，但 `assurance/runs/weekly_alert.jsonl` 与 `weekly_manifest.json` 有两项 tracked runtime 变化，原样保留；Dashboard `main@3f83bb5` 的本地 `origin/main` 缓存也在 3f83，owner 的 START_HERE 已记录 final receipt carrier，早前“缺收据”判断过时；RFAudit `main@50d8ab6` 按 owner 约定无 remote。
+- StockWiki 当前 `master@0450506` 无 upstream，且把两条并行 owner 变更提交到了主线。其 11-14 子计划保留了详细测试/独审记录，但根 canonical `task_plan.md` 最后更新于 11-08，子计划中的“未提交/不提交”阶段声明与当前主线状态不一致。该仓另有活动 owner，ROOT 只登记差异并等待其 owner 更新，不改其代码/PWF/数据。
+- 将 M2 后发现的两条公开 StockWiki wire 加入 I10/I11：I10 `stockwiki.company_assessment/2`（schema `2.0.0`，IQS→StockWiki），IQS active package 生成 53 题 envelope 并在隔离 StockWiki workspace publish/readback，另有 producer golden、StockWiki 107 项测试和独立 ACCEPT；C06 真实历史覆盖仍 OPEN，但不等于 wire 互操作未验证。I11 `stockwiki.membership_request/1.0.0`（StockWiki CLI→Dashboard/IQS adapter），StockWiki CLI 测试断言 lookup/history 的 `protocol` 字段；IQS 当前 PWF 记录 C38/C5 120 passed、固定核心组合 296 passed，足以覆盖当前 consumer 链，不再重复回放。Dashboard 公司评估仍通过 IQS `/1` 投影，不能误画成直接消费 StockWiki v2。
+- IQS 主线与活动包分开登记：`master@3d9243c=origin/master`，截至 14:33 UTC 活动 `codex/iqs-manifest-delivery-01@ecb4a5d` tracked clean；相对 master 只有 `task_plan.md` 与计划/状态/证据文件，无产品源差异。该分支较上一快照 `239838b` 又新增了状态、SHA 清单与两份 dry-run 证据，并修正两个计划措辞；产品源码未变。当前活动包仍由 IQS owner 完成，ROOT 不改其文件。
+- 以上接口登记和对应剩余项已同步到 `module-boundaries/interfaces.md`、`boundary_matrix.json` 与 M3 task plan。M2 E01–E09 继续只绑定原冻结 refs；本次不把新差异回写成 M2 已验收。
+- CWP tracked 工作区仍 clean；`git ls-files -o --exclude-standard` 为 23,334 个未跟踪文件，与 11-15 清单相符（`.mimosa` 10,010、`.planning` 13,180、`docs` 143、`.workbuddy-ai` 1）。这些由既有目录 inventory 分别保留，未整批加入或删除。
+- Dashboard 三张跨仓续核卡已与 owner `dashboard-closeout-handoff.md` 核对：C01 证据可移植性已由 `c8939e5` 并入 main；B-real 预览模块适配尚未执行，旧清单必须按当前 `main@3f83bb5` 重基线；B03 旧 review-closeout 仍缺绑定 R1 终态，只是证据任务，产品侧 B03 live 修复/验证另已接收。三者均不阻塞 CWP M3，外仓仍只读。
+
 ## 2026-11-15 — 九模块 canonical PWF 与主线状态复核（M3 开工快照）
 
 - M3 的 TDD 反例先确认 `eval/exec/compile` 字符串执行能绕过当前 AST 边界扫描（RED）；扫描器增加对直接调用及 builtins 别名的识别后，专用反例通过。全量 `tests/contract/test_layer_public_boundaries.py` 为 63 passed / 1 failed，唯一失败是当前新增的 `automation/narrative_batch.py:17` 导入 `narrative_subject.NARRATIVE_SUBJECT_REF_SCHEMA`，但该常量未列入 provider 的公开 API。此为真实跨层合同违例；不允许通过扩大 `__all__` 或忽略该模块来消绿，先核实该数据的 owner 和适当接口位置。
@@ -106,10 +117,10 @@ Git 状态只读报告分别来自模块 agent 和 ROOT 命令。每个模块 ow
 - Dashboard owner 报告 tracked worktree clean，E14 用户暂停 handoff 与 `.workbuddy-ai/` 仍保留。无产品代码修改、未重跑产品测试；最终内容代码测试仍按此前实现证据及最终完整审查记录引用。
 - 本轮总控 PWF 已更新为 Dashboard 最终 `3f83bb5`，不再把 Dashboard 报告追加 carrier 写作待办。CWP push 状态和 StockWiki/IQS owner hold 见后续 dated update。
 
-## StockWiki / IQS 只读状态复核（2026-11-15）
+## StockWiki / IQS 首轮读取失败快照（2026-11-15，已由文首第二轮刷新取代）
 
 - 两仓 canonical PWF 可读，均显示 owner 工作未闭合：StockWiki Phase 40 的真实数据与 owner-shape release 终验仍 OPEN；IQS 的跨仓组合复跑、主体 bundle 核验、真实付费样本和独立终审仍 OPEN。
-- 本次尝试刷新两仓 Git HEAD/remote/worktree 均因当前文件系统权限返回 `Permission denied`，没有写入。`master@0450506`（StockWiki）与 `master@dab8724`（IQS）及工区计数只能引用 2026-11-14 上次已知快照，不得称本轮实时核验；权限可读且对应 owner 交付后再继续收尾。
+- 此次较早的尝试因文件系统权限未读到 Git 元数据；这一失败是历史观察，已由文首第二轮只读核验取代。当前可用 ref、owner 活动分支和 tracked 状态只看 2026-11-15 顶部第二轮记录；旧 SHA/工区数不作实时状态。
 
 ## 全模块收尾续办现场（2026-11-14）
 

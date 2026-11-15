@@ -4,10 +4,12 @@
 
 ## 2026-11-15 最新状态
 
-九模块 PWF 与 Projects 收尾的唯一总控入口是[模块计划与工区对账计划](../module-pwf-reconciliation-2026-11-14/task_plan.md)，逐仓快照和待 owner 修订项见其 `findings.md`。本轮已把 CWP 总控记录更新到实际复核结果；模块 owner 仍需在自己的 canonical PWF 中补齐当前状态：FF 的 F-08 仍开放、RF 的 11-15 T3 运行变化尚待吸收、Dashboard 的 START_HERE 尚未记录最终 receipt carrier。StockWiki 与 IQS 仍由各自活动 owner 负责，总控不覆盖其代码/PWF或工作区。
+九模块 PWF 与 Projects 收尾的唯一总控入口是[模块计划与工区对账计划](../module-pwf-reconciliation-2026-11-14/task_plan.md)，逐仓快照和待 owner 修订项见其 `findings.md`。M3 第二轮只读核对确认：FF `main@origin/main=1dfd818`，F-08 仍开放；RF `main@origin/main=f2215959`，两项 weekly runtime 文件仍 tracked dirty，需 owner 写入 canonical PWF；Dashboard 的 START_HERE 与最终 receipt carrier 已在 `3f83bb5` 更新，本地 `origin/main` 也等于 3f83，旧“待补收据”判断已撤销；StockWiki `master@0450506` 已合入两个 owner 变更，但根 `task_plan.md` 停在 11-08，需 owner 对齐。IQS `master@origin/master=3d9243c`，活动 `codex/iqs-manifest-delivery-01@ecb4a5d` 相比先前核对只增加 PWF/状态/证据内容，没有产品源码变化；C38/C5 的 120 项回归与固定核心组合 296 项已记录，可复用为 I11 当前接口证据。StockWiki/IQS 仍由各自 owner 负责，总控不覆盖其代码/PWF或工作区。
 
-- **解耦范围：** M2/E01–E09 继续对当时冻结接口版本有效；不能据此声称所有当前代码已彻底解耦。M3 当前 HEAD 漂移审查正在进行，已完成 CWP 首组 TDD 修复：动态 `eval/exec/compile` 及 `__builtins__`/`builtins.__dict__`、`vars()`、`globals()`/`locals()`、`.get()`字典查找绕行纳入边界合同；automation 不再读 `NarrativeSubjectRef` 私有 schema 常量；pytest 自动临时目录从实测 153 字符改为独立 53 字符并自动清理；对象存储在 Windows 沙箱拒绝硬链接时使用无覆盖原子重命名。
-- **本组验收：** 短路径、对象存储、Subject owner、层边界和官方 JSON batch preparation 最新定向合同共 **119 passed / 42.68 秒**；真实 CLI 官方 JSON 摘要/发布/读取/缓存复用在对象存储修复后 **1 passed / 40.48 秒**；Ruff 通过。M3 其他 CWP/跨仓源码差异仍待审查，不重跑整套历史矩阵。
+Dashboard 的三张旧续核卡已对照其 owner handoff 重新分类：C01 证据包已吸收进 main（`c8939e5`）；B-real 预览模块适配仍未执行，旧基线需对当前 `main@3f83bb5` 重做路径对账；B03 是仍未完成的证据审查收口，不是产品接口缺陷。后两项留在 Dashboard owner 侧，不阻塞本仓 M3；细节见模块边界计划的 `reconciliation.md`。
+
+- **解耦范围：** M2/E01–E09 继续对当时冻结接口版本有效；不能据此声称所有当前代码已彻底解耦。M3 已完成九模块当前可识别产品差异的逐项归类，并登记 I10/I11/I12；CWP 首组 TDD 修复覆盖动态 `eval/exec/compile` 及内建命名空间字典查找绕行、`NarrativeSubjectRef` schema owner、pytest 默认长临时路径和 Windows 硬链接拒绝后的原子发布 fallback。I10 的隔离 publish/readback、I11 的 IQS C38/C5 120/296 项回归已有 owner 证据，无需重复回放。M3 仍开放，待 StockWiki 根 PWF 与 RF 两项 weekly runtime 结果由各自 owner 对齐，并完成精确版本绑定。
+- **本组验收：** 短路径、对象存储、Subject owner、层边界和官方 JSON batch preparation 最新定向合同共 **119 passed / 42.68 秒**；真实 CLI 官方 JSON 摘要/发布/读取/缓存复用在对象存储修复后 **1 passed / 40.48 秒**；Ruff 通过。没有重跑整套历史矩阵，也不把已有 owner 通过项重复派发。
 - **发布：** CWP 代码 commit `3bc4ed86a` 与后续 PWF receipt carrier `f175e6c37` 均已推送；代码 push fast smoke **18 passed / 15.06 秒**，最终本地 master 与 origin/master 相等。GitHub Actions 完整 CI 未在本地预判。
 - **原业务主线：** 正式摘要仍是 `BUSINESS_SUMMARY_CHANGES_REQUIRED`；下一业务任务仍是修正冗余片段和主体/计划归属、按冻结样本验真，然后再复验恢复及 RF 实际采用。固定公司循环保持暂停；本轮架构处理不自动恢复它。
 
@@ -30,22 +32,22 @@ R4 已完成工作量修复。正式半年报回放保持 12/12 检查点和同�
 
 ```mermaid
 flowchart TD
-  A["已通过｜模块边界 · 5 个施工线 · 14 项要求"] --> B["已通过｜E01–E09 组合 · 30 项跨仓回归"]
-  B --> C["已通过｜来源工作量、原文结构与前置条件"]
-  C --> D["已通过｜同一真实半年报 · 12 个冻结点可回源"]
-  D --> E["已通过｜付费中断和缓存恢复 · 零额外请求"]
-  D --> F["已通过｜两条依据实际进入 RF 公式、报告和快照"]
-  E --> G["当前位置｜真正的业务摘要：去套话、保归属和计划"]
-  F --> G
-  G --> H["待做｜独审新摘要内容 · 复验缓存与 RF"]
-  H --> I["待做｜原公司完整复跑 · 药明合联及 Snowflake 泛化"]
-  I --> J["待做｜固定八家公司 · 每轮改进审查技能"]
-  J --> K["收口｜同一有效版本连续三家公司无主要问题"]
+  A["已通过｜M2 冻结范围：5 条 owner 线 · E01–E09"] --> B["当前位置｜M3 当前 HEAD 边界漂移审查"]
+  B --> C["待完成｜StockWiki/RF canonical PWF 对齐 + M3 精确版本收据"]
+  C --> D["随后｜业务摘要 P1：去套话、保主体/计划归属"]
+  D --> E["待复验｜独审新版摘要、缓存恢复与 RF 实际采用"]
+  E --> F["之后｜药明康德复跑；药明合联与 Snowflake 泛化验证"]
+  F --> G["后续｜固定八家公司逐轮执行并改进审查技能"]
+  G --> H["收口｜同一有效版本连续三家公司无主要问题"]
   classDef current fill:#fff2c7,stroke:#9a6500,color:#251500,stroke-width:3px;
-  class G current;
+  class B current;
 ```
 
-模块边界矩阵 14/14、组合场景 9/9，原架构收口余项 0。StockWiki 和审查技能仓已本地合流，目前没有配置 Git 远端。其余参与仓按实际主线发布。静态边界测试和独立安装继续约束后续改动。来源卡与 RF 收据覆盖上图已标范围，真实摘要和完整公司研究质量有各自的验收证据。
+## 2026-11-10 之前的架构与业务验收快照（历史）
+
+以下段落保留当时的验收记录，不代表 2026-11-15 当前 M3 已关闭；当前状态只以上方 11-15 摘要和模块边界 M3 矩阵为准。
+
+模块边界矩阵 14/14、组合场景 9/9，原架构收口余项 0。StockWiki 和审查技能仓已本地合流，当时没有配置 Git 远端。其余参与仓按实际主线发布。静态边界测试和独立安装继续约束后续改动。来源卡与 RF 收据覆盖当时图示范围，真实摘要和完整公司研究质量有各自的验收证据。
 
 RF 报告已明确公司级反证指标和分部驱动的可证伪条件。26 项报告回归、12 项推送 smoke，已推送 `main@ec5ba004`。CWP 已修正披露模板占位、无数字计划漏入，以及计划与否定、假设、问句混淆。最终定向 602 项通过，独立复验关键边界 22 项通过。同一半年报的摘要请求保留全部 12 个冻结检查点，待验收生成的正文。
 

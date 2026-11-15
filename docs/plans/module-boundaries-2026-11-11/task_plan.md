@@ -2,7 +2,7 @@
 
 ## M3 — 当前 HEAD 边界漂移审查（2026-11-15 新增）
 
-**状态：IN_PROGRESS — 九仓基线已记录；CWP 第一组边界漂移已按 TDD 修复并通过定向验收；其余当前版本差异仍待逐仓审查。** 原 M2/E01-E09 仍对其绑定版本有效；M3 不抹去原收据，也不把新版本自动视为已验收。
+**状态：IN_PROGRESS — 九模块当前主线与可识别产品差异已逐项归类；CWP 第一组边界漂移已按 TDD 修复并通过定向验收。** M3 尚待 StockWiki 根 canonical PWF 与 RF 运行记录由各自 owner 对齐，并由 ROOT 绑定精确版本完成最终报告。原 M2/E01-E09 仍只对其绑定版本有效；M3 不抹去原收据，也不把新版本自动视为已验收。
 
 ### 目标与设计原则
 
@@ -11,7 +11,7 @@
 ### 工作阶段
 
 1. **冻结当前基线（完成首轮快照）**：记录九个仓 current HEAD、PWF 唯一入口、M2 接收 ref、主线/remote 状态；逐仓列出接收 ref 之后的源代码改动文件。快照和 owner 状态差异见父计划 `module-pwf-reconciliation-2026-11-14/findings.md`。历史快照不得覆盖最新 owner 状态。
-2. **审查边界差异（进行中）**：每个变化映射到所属模块、公开 consumer、数据/配置/预算 owner 和方向；检查内部导入、跨仓路径/数据库操作、重复校验、循环依赖、全局可变状态及绕过公开 CLI/API 的方式。无代码差异的仓只核对合同，不强行改代码。
+2. **审查边界差异（当前快照已完成）**：每个观察到的变化已映射到所属模块、公开 consumer、数据/配置/预算 owner 和方向；检查内部导入、跨仓路径/数据库操作、重复校验、循环依赖、全局可变状态及绕过公开 CLI/API 的方式。无代码差异的仓只核对合同，不强行改代码。owner 后续提交若改变 refs，再按新版本增量复核。
 3. **测试先行**：每个可复现越界路径先添加最小负例并确认 RED；静态扫描覆盖显式/相对/别名/动态导入的约定范围，安装测试从构建产物验证公开入口；CWP 只维护本仓测试。不得用 grep 私有名字计数冒充完整边界验证。
 4. **归属修复**：源码修复和本模块测试由对应 repo owner 完成；ROOT 维护总矩阵与 CWP 组合检查，不直接改其他模块实现。只复跑受影响合同和一次最终组合审查，避免全量测试反复运行。
 
@@ -30,7 +30,37 @@
 - 正式摘要 E2E 还暴露了 Windows 沙箱拒绝 `os.link` 的环境限制（独立复现 `WinError 5`）。对象存储层现在仅在 Windows 硬链接被拒时退回同目录、原子、无覆盖的 `os.rename`；遇到并发已存在目标仍按实际内容 hash 验真，损坏目标不覆盖。
 - 最新定向结果：短路径与默认路径合同、对象存储、Subject owner、层边界合同（含上述命名空间绕行反例）、官方 JSON batch preparation 合计 **119 passed / 42.68 秒**；测试日志再次显示默认根 153 字符→仓内实际 53 字符，退出清理成功。完整空内容 CLI 摘要/发布/读取/缓存复用 E2E 在对象存储修复后 **1 passed / 40.48 秒**；受影响文件 Ruff 通过。此前首次集成失败已分别归因于长默认 temp 和硬链接被沙箱拒绝，修复后各自复验通过。
 - CWP 实现与总控 PWF 已提交 `3bc4ed86a` 并推送 `origin/master`；推送 fast smoke **18 passed / 15.06 秒**。精确 CI 仍按仓库配置待 GitHub Actions 完成，不把本地快门测试称为完整 CI。
-- **M3 仍 OPEN**：上述仅是 CWP 一组差异的当前版本审查，不能替代 CWP 剩余差异或 RF、StockWiki、Dashboard、RFAudit 代码变化的归因与 owner 合同测试，也不关闭父业务摘要质量任务。
+- **第一轮结论（历史，已由下方第二轮扩展）**：当时仅完成 CWP 首组差异，不能外推到其他仓或当前所有路径。下方第二轮补充了九模块差异归类、owner 证据和 I10–I12 契约；M3 当前剩余项以本节“下一步”为准。
+
+### 2026-11-15 M3 第二轮当前 HEAD 审查
+
+**状态：M3 仍 OPEN。** 当前版本的产品差异已逐仓归类；I10/I11 已有 owner 侧真实 producer/consumer 证据，本轮不重复跑同一回放。剩余是 StockWiki owner 对齐根 canonical PWF、RF owner 记录两项 weekly runtime 结果、绑定最终精确 refs，并完成 CWP 当前边界报告收口。本轮对外仓只读，不运行作者代码、不编辑其 PWF、不碰活动数据。
+
+| 仓库 | 基线 / 当前 ref | 源码差异与边界处置 | 当前证据/剩余项 |
+|---|---|---|---|
+| company-wiki | `c6189c623` → `master@91137e257` (=本地 `origin/master`) | 精确 diff 为 24 个 `src/` Python 文件，分布于 automation、document_understanding、narrative_subject、source_catalog；依赖保持在 CWP 内部或经已声明公开 DU/WorkBudget 值接口。既有 layer-boundary 合同未发现新的私有跨仓依赖 | 3bc4 切片 119 项定向测试及 CLI E2E 已过；本轮没有源码变更，不重复跑全套 |
+| filing-fetch | `d4f35cab` → `main@1dfd818` (= `origin/main`) | M2 后一项测试文件变化，无产品源码变化；F-08 仍是 FF owner 的单独开放产品项，不是新边界失败 | `PLANNING_STATUS.md` 已记录 11-14 主线收尾；F-08 owner 后续按 FF PWF 处理 |
+| revenue-forecast | `fab819c2` → `main@f2215959` (= `origin/main`) | 产品变化限 `scripts/revenue_report.py` 与对应报告测试，属 RF 自有报告呈现，不引入跨仓实现依赖 | `assurance/runs/weekly_alert.jsonl` 与 `weekly_manifest.json` 当前 tracked dirty，视为运行记录保留；RF owner 需把 11-15 运行结果写入 canonical PWF |
+| earnings-transcripts | 当前 `main@50d9190` (= `origin/main`) | M3 观察到的差异限测试路径；无产品源变化或新跨层依赖 | owner PWF 另有 transcript-audit 退出码后续项，不属于本轮边界回归 |
+| StockInfoDLSimple | 当前 `v2-clean-rewrite@26704a0` (= `origin/v2-clean-rewrite`) | 本轮未发现新增产品边界变化 | 用户名单与本仓工作区按 owner 收据保留；不扩展为 StockInfoDownloader 主线 |
+| StockWiki | `21cf4891` → `master@0450506`（无 upstream） | 本仓 assessment、quick-scan store/universe 及根 CLI；不见导入邻仓私有实现。新发现两个公开 wire，登记为 I10/I11；不能以 I10 新版替代 Dashboard 当前 IQS 投影 v1 | assessment v2 有 107 项 owner 测试与独立 ACCEPT 记录；quick-scan owner 记录 C06 组合未跑成。根 `task_plan.md` 最后改于 11-08，隔离子计划 11-14 内容与主线提交状态不一致；由 StockWiki owner 在并行任务后对齐，本总控不写 |
+| invest-quick-scan | `master@3d9243c` (= `origin/master`)，活动 `codex/iqs-manifest-delivery-01@ecb4a5d`（tracked clean；较先前核对新增证据/状态文件并修订计划，仍无产品源码差异） | 活动分支只含 `task_plan.md`、状态及证据文件；不把 owner 的真实研究/付费样本任务当作边界缺陷 | C38/C5 **120 passed**、固定核心组合 **296 passed**；该 owner 证据覆盖 I11 当前 consumer 链，不重复派发 lookup/history 回放 |
+| investment-dashboard | `e1d1f927` → `main@3f83bb5` | 两个产品文件的变化为 Dashboard 自有比较错误呈现与 synthetic fixture；不新增对 CWP/RF/StockWiki 私有模块的导入。Dashboard 报告仍通过其 IQS adapter 消费已有公开 projection | `START_HERE` 及 receipt carrier 已更新至 3f83bb5；owner 收据记 fresh remote 对齐，本地 `origin/main` 亦相等 |
+| revenue-forecast-audit | `3589b69c` → `main@50d8ab6`（按 owner 约定无 remote） | M2 后没有计划/证据目录外的产品源码变化 | canonical cycle 计划把 W08 子卡标为 complete；无新增边界回归 |
+
+#### 新增的公开契约与 M3 退出检查
+
+- I10 `stockwiki.company_assessment/2` / schema `2.0.0`：IQS 当前 producer 用 active package 生成 53 题 envelope，并在隔离 StockWiki workspace publish/readback；StockWiki 107 项 owner 测试、IQS producer golden 与独立 ACCEPT 也已留证。协议边界有真实互操作证据；C06 的真实历史覆盖/完整业务 run 仍 OPEN，归 StockWiki/IQS owner 业务计划，不据此把已通过的 wire 合同标红或声称业务闭环。
+- I11 `stockwiki.membership_request/1.0.0`：StockWiki public CLI 的成功 apply/lookup/history 均带 `protocol`，IQS C38 使用该公开 CLI，Dashboard adapter 读取同版本响应。IQS owner PWF 已记录隔离 C38/C5 **120 passed** 与固定核心组合 **296 passed**，StockWiki CLI 测试也断言 lookup/history 版本字段；这些当前 producer/consumer 证据足以覆盖 I11，不再重复跑 M2 E08 或另造回放。
+- I12（CWP 内部公开模块协作）`document_understanding` → `source_catalog`：`document_understanding.assertion_frames.source_assertion_frames` 与 `statement_grammar.english_question_start` 是显式公开函数；只消费调用者传入的文本和 owner 提供的 WorkBudget，不自行访问来源目录、分配业务身份或产出研究结论。`test_layer_public_boundaries.py` 把依赖方向纳入合同，当前定向组 **119 passed**。CodeGraph 当前没有解析出这两个函数的调用边；该跨文件图为 best-effort，不据此声称接口未使用，也不把它当运行时封锁证明。
+- Dashboard 最终 receipt carrier 的待办已经完成；旧 11-14 快照中的“START_HERE 未记录 final receipt”被 11-15 `3f83bb5` 取代。不要重复派发 Dashboard PWF 修复。
+- ROOT 本仓 `git status`：tracked clean；仍有 **23,334** 个未跟踪文件，按当前清单分布于 `.mimosa` 10,010、`.planning` 13,180、`docs` 143、`.workbuddy-ai` 1。它们是 hook 状态、PWF/审查证据与用户记忆；本轮不提交、不整体删除，后续按已有 inventory 精确处置。
+
+#### 下一步
+
+1. 由 StockWiki owner 对齐根 canonical PWF 与已并入 `master@0450506` 的计划/源码，并由 RF owner 记录 weekly runtime 结果；ROOT 保持只读，不重复更改其他仓 PWF。
+2. 将 CWP 当前 24 个产品路径审查结果、I12 公共接口和 119 项边界合同绑定到 `master@91137e257`，确认无未分类越界路径；已有 IQS 120/296、StockWiki 107/独审和 IQS→StockWiki 53 题 publish/readback 作为 I10/I11 证据，不重跑同一测试。
+3. 最终核对九模块当前 refs、对应 owner PWF 和活动/dirty 状态，更新矩阵及总控状态；只对证据不足或能复现的真实边界问题补 RED→GREEN。全部报告绑定精确 HEAD 后才关闭 M3。
 
 ## Goal
 
@@ -90,7 +120,7 @@ ROOT 已在 StockWiki 和 Dashboard 各自工区接收对应接口。Audit 的�
 
 ## Next Step
 
-E01–E09 已通过，范围限定见 [ROOT 组合记录](review/root_composition_20261114.md) 和 [E01–E09 矩阵](boundary_matrix.json)。当前唯一架构下一步是完成本计划 M3：复核其余 CWP 后续代码差异，并把 RF、StockWiki、Dashboard、RFAudit 在 M2 接收 ref 之后的产品代码改动按 owner 逐项归属；只为可复现越界先写测试并修复，提交时绑定最终版本。M3 没有关闭前，不声称全项目当前版本已完全解耦，也不把旧收据外推到新代码。M3 有限范围完成后，再回 [父计划](../du11-source-closure-2026-10-18/task_plan.md) 的 P1 真实摘要任务；公司循环继续按原 PWF 保持暂停。
+E01–E09 已通过，范围限定见 [ROOT 组合记录](review/root_composition_20261114.md) 和 [E01–E09 矩阵](boundary_matrix.json)。当前唯一架构下一步是完成本计划 M3 的有限收口：九模块可识别产品差异已分类；CWP 当前 24 个产品路径和 I12 边界合同已审，IQS/StockWiki 的 I10/I11 有 owner 侧互操作证明。剩余为 StockWiki 根 PWF 与 RF weekly 运行记录由各自 owner 对齐，再由 ROOT 将当前 refs/owner receipts 绑定到最终 M3 报告。只对新版本里可复现的越界先写测试并修复；不重复已通过回放。M3 没有关闭前，不声称全项目当前版本已完全解耦，也不把旧收据外推到新代码。M3 有限范围完成后，再回 [父计划](../du11-source-closure-2026-10-18/task_plan.md) 的 P1 真实摘要任务；公司循环继续按原 PWF 保持暂停。
 
 ## Decisions
 

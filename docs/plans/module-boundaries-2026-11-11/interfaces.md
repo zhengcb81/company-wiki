@@ -14,6 +14,18 @@
 | I08 | 各owner → Audit/日志 | 业务终态、稳定错误、可选诊断；日志存储/格式失败独立记录，不触发已成功业务重跑 | 各owner隔离反控；Audit组合 |
 | I09 | 公共配置/进程工具 → 各模块 | 显式配置值、唯一实际预算、可取消调用；派生算法版本由算法owner公开提供 | 工具owner；调用计数/关闭/恢复测试 |
 
+## M3 后发现的公共 API / owner wire
+
+以下是 M2 冻结后确认的 CWP 层间公开 API 和已进入 owner 主线的新协议，只登记真实所有权和消费关系，不把它们倒算为 M2 已验收范围，也不由 ROOT 改写其他模块实现。
+
+| ID | Producer → Consumer | 最小合同与禁止泄漏 | 现有证明与剩余验收 |
+|---|---|---|---|
+| I10 | invest-quick-scan → StockWiki owner | `stockwiki.company_assessment/2`、schema `2.0.0`。输入保留原 `source_release` 字节语义，并用独立 hash 绑定 `lineage_provenance` 与 `lineage_groups`；每题只归入一个 lineage group，不跨组聚合。StockWiki 验证并持有发布/读取状态；不得导入 IQS 私有模块 | StockWiki `tests/test_public_company_assessments.py` 与 golden fixture 107 passed、独立 ACCEPT；IQS 当前 active package 生成 53 题 envelope 并在隔离 StockWiki workspace publish/readback。I10 wire 互操作已有证据；C06 真实历史覆盖仍 OPEN，属于 owner 业务验收，不把它误报成接口失败 |
+| I11 | StockWiki membership CLI → IQS owner → Dashboard adapter | `stockwiki.membership_request/1.0.0`。成功的 `apply`、`lookup`、`history` 均返回 `protocol`；错误继续使用 `schema_version` 与稳定 `error_code`。消费者使用 JSON/CLI 合同，不导入 StockWiki 私有 store | StockWiki `test_public_cli_apply_lookup_and_history` 覆盖公开 CLI 的查找/历史版本字段；IQS 11-14 PWF 记录当前公开 CLI 接线及隔离 C38 回归 **120 passed**、固定核心组合 **296 passed**，Dashboard 的 adapter 位于 `backend/dashboard/adapters/iqs/universe.py`。该证据覆盖 I11 的当前 consumer 链，不重复做整套 E08 |
+| I12 | CWP document_understanding → CWP source_catalog | `document_understanding.assertion_frames` 公开模块的 `source_assertion_frames`，以及 `statement_grammar` façade 的 `english_question_start`；只提供局部语法/限定观察，不读来源目录、不分配业务身份、不产生研究结论。调用者传入文本与由 owner 提供的 WorkBudget | `document_understanding/__init__.py` 显式导出 `assertion_frames`，`statement_grammar.__all__` 显式导出函数；CWP `test_layer_public_boundaries.py` 纳入依赖方向合同，当前 M3 定向组 119 passed。CodeGraph caller 查询未解析出这些符号的调用边；该图谱跨文件解析为 best-effort，不据此否定显式导出或合同测试，也不把它当作运行时封锁 |
+
+Dashboard 的公司评估页面仍通过 IQS 的 `iqs.dashboard.company_assessment/1` 投影；不把 I10 的 StockWiki V2 owner 输入协议误记为 Dashboard 的直接消费协议。Python package/facade 与静态边界合同定义的是模块协作边界，不声称能把同一解释器中的私有符号变成运行时访问控制。
+
 ## 各lane对接口的处理
 
 - 工区使用现有版本和本仓已有contract fixture。缺少对应fixture时由该lane在自己的tests补齐。先跑自己consumer/producer的合同，正常用例已绿则保留；ROOT在M2汇总真实producer/consumer组合。

@@ -93,8 +93,8 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T13:19:25Z",
-  "next_action": "Continue the M3 current-head drift audit: review remaining CWP and owner-repository source deltas, bind each to its public interface and owner, and add only reproducible boundary regressions. Keep the business-summary P1 next in the existing sequence and do not resume the fixed company loop.",
+  "observed_at_utc": "2026-11-15T14:33:55Z",
+  "next_action": "Finish finite M3 PWF reconciliation: StockWiki owner aligns its root canonical plan with master@0450506, RF owner records the two tracked weekly runtime results, and ROOT binds the reviewed CWP/owner evidence to exact refs. IQS C38/C5 120-pass and 296-pass owner runs plus I10 isolated publish/readback already cover the current producer-consumer contracts; do not repeat them. Resume business-summary P1 only after M3; keep the fixed company loop paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1154,7 +1154,7 @@
     "plan": "../module-boundaries-2026-11-11/README.md",
     "task_plan": "../module-boundaries-2026-11-11/task_plan.md",
     "matrix": "../module-boundaries-2026-11-11/boundary_matrix.json",
-    "status": "CLOSED",
+    "status": "M2_CLOSED_M3_IN_PROGRESS",
     "lanes": [
       "MB-CWP",
       "MB-FF",
@@ -1213,9 +1213,9 @@
     "owner_pwf_followups": {
       "filing-fetch": "F-08 remains open; its current PWF wording must agree on this next step.",
       "revenue-forecast": "Absorb the 2026-11-15 T3 run artifacts into its canonical PWF.",
-      "investment_dashboard": "Record final 2026-11-15 receipt carrier in START_HERE.",
+      "investment_dashboard": "COMPLETE at main@3f83bb5; START_HERE and final receipt carrier align. Do not reopen.",
       "StockWiki": "Active owner work remains; ROOT keeps its PWF and worktree read-only.",
-      "invest-quick-scan": "Active owner work remains; ROOT keeps its PWF and worktree read-only."
+      "invest-quick-scan": "Active manifest-delivery owner branch codex/iqs-manifest-delivery-01@ecb4a5d contains only PWF/status/evidence changes relative to master@3d9243c; ROOT keeps its PWF and worktree read-only."
     }
   },
   "module_boundary_current_state": {
@@ -1230,7 +1230,9 @@
       "investment_dashboard": "integrated_and_pushed",
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
-    "remaining": [],
+    "remaining": [
+      "M3 final receipt: StockWiki owner PWF reconciliation and RF weekly runtime result reconciliation, followed by exact-ref ROOT report"
+    ],
     "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_DRIFT_AUDIT_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
     "cleanup": {
@@ -1255,7 +1257,7 @@
         "windows_object_publication": "PermissionError from hardlink now falls back to atomic no-replace same-directory rename; existing content remains hash-verified.",
         "tests": "Latest targeted contract/unit/integration run: 119 passed in 42.68 seconds, including namespace/dictionary-lookup bypass cases; default temp 153 chars routed to 53 chars and cleaned. One official JSON CLI E2E passed in 40.48 seconds after object-store fix; affected Ruff passed. Push fast smoke: 18 passed in 15.06 seconds; full GitHub Actions CI remains authoritative."
       },
-      "remaining": "Review other current CWP source deltas and RF, StockWiki, Dashboard, and RFAudit post-M2 source changes; do not infer acceptance from historical M2 receipts."
+      "remaining": "Current post-M2 product deltas across the nine-module snapshot are classified; I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await StockWiki root canonical PWF and RF weekly runtime record reconciliation by their owners, then bind the final report to exact refs."
     }
   },
   "r4_public_replay_20261114": {

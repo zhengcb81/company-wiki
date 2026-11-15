@@ -357,7 +357,140 @@
     "report": "review/plan_independent_review.md",
     "open_findings": []
   },
-  "next_action": "Resume R4/T4, configured real summary, cache recovery and RF adoption under the parent plan.",
+  "m3_current_head_review": {
+    "date": "2026-11-15",
+    "observed_at_utc": "2026-11-15T14:33:55Z",
+    "status": "IN_PROGRESS",
+    "scope_note": "M2 E01-E09 remains CLOSED for the exact refs below; this M3 ledger is a separate post-M2 current-head audit. No external repository was modified or tested by ROOT in this pass.",
+    "reviewed_owner_heads": [
+      {
+        "repository": "company-wiki",
+        "m2_ref": "c6189c623f6ec30e2a1a1059499e78c8ffe5b443",
+        "current_ref": "master@91137e2579c9990e79b1efbdcd9d7d42f5128fd2",
+        "remote_ref": "origin/master@91137e2579c9990e79b1efbdcd9d7d42f5128fd2",
+        "changed_product_sources": 24,
+        "disposition": "reviewed; dependencies stay within CWP or use declared public DU/WorkBudget values; current boundary regression suite remains green"
+      },
+      {
+        "repository": "filing-fetch",
+        "m2_ref": "d4f35cab5127d09c874d109080d911e6d394dec2",
+        "current_ref": "main@1dfd818",
+        "remote_ref": "origin/main@1dfd818",
+        "changed_product_sources": 0,
+        "changed_test_paths": 1,
+        "disposition": "no post-M2 product source change; existing F-08 remains an FF-owned product follow-up"
+      },
+      {
+        "repository": "revenue-forecast",
+        "m2_ref": "fab819c25922af1366d7240af9bfee58d3bd612a",
+        "current_ref": "main@f2215959",
+        "remote_ref": "origin/main@f2215959",
+        "changed_product_sources": 1,
+        "changed_test_paths": 1,
+        "disposition": "report-rendering change is RF-owned; two tracked weekly runtime files remain dirty and are preserved for owner PWF reconciliation"
+      },
+      {
+        "repository": "earnings-transcripts",
+        "m2_ref": null,
+        "current_ref": "main@50d9190",
+        "remote_ref": "origin/main@50d9190",
+        "changed_product_sources": 0,
+        "changed_test_paths": 4,
+        "disposition": "no post-M2 product-source delta or new cross-module dependency; owner PWF separately tracks the transcript-audit exit-code follow-up"
+      },
+      {
+        "repository": "StockInfoDLSimple",
+        "m2_ref": null,
+        "current_ref": "v2-clean-rewrite@26704a0",
+        "remote_ref": "origin/v2-clean-rewrite@26704a0",
+        "changed_product_sources": 0,
+        "disposition": "no post-M2 product-boundary delta observed; user data and owner work remain untouched"
+      },
+      {
+        "repository": "StockWiki",
+        "m2_ref": "21cf4891019c8202e9e86996f47f0dbde7976293",
+        "current_ref": "master@0450506",
+        "remote_ref": "none-configured",
+        "changed_product_sources": 4,
+        "disposition": "owner code is within StockWiki; root PWF must reconcile committed owner work after active parallel task; no ROOT writes"
+      },
+      {
+        "repository": "invest-quick-scan",
+        "m2_ref": null,
+        "current_ref": "master@3d9243c",
+        "remote_ref": "origin/master@3d9243c",
+      "active_owner_ref": "codex/iqs-manifest-delivery-01@ecb4a5d",
+        "active_owner_ref_delta": "four evidence/status files and task_plan.md only; no product source delta relative to master",
+        "changed_product_sources": 0,
+        "disposition": "C38 membership CLI consumer and C5/C38 boundary tests are recorded by IQS owner; active manifest-delivery work does not change the consumer implementation; remaining real-research and paid-sample tasks are not boundary failures"
+      },
+      {
+        "repository": "investment-dashboard",
+        "m2_ref": "e1d1f927cc09a1249c0db31e9f98cd4d358d7ee1",
+        "current_ref": "main@3f83bb5",
+        "remote_ref": "origin/main@3f83bb5",
+        "changed_product_sources": 2,
+        "disposition": "Dashboard-owned error presentation and synthetic fixture; current START_HERE and receipt carrier align to 3f83bb5"
+      },
+      {
+        "repository": "revenue-forecast-audit",
+        "m2_ref": "3589b69cb9d28d7395607ce4fe689025b9acee96",
+        "current_ref": "main@50d8ab6",
+        "remote_ref": "none-configured-by-owner",
+        "changed_product_sources": 0,
+        "disposition": "no product source changes outside planning/evidence; canonical cycle plan marks W08 complete"
+      }
+    ],
+    "new_public_interfaces": [
+      {
+        "id": "I10",
+        "owner": "StockWiki",
+        "producer": "invest-quick-scan",
+        "consumer": "StockWiki company-assessment owner",
+        "protocol": "stockwiki.company_assessment/2",
+        "schema_version": "2.0.0",
+        "proof": "IQS current producer generated a 53-question envelope from its active package and completed isolated StockWiki publish/readback; StockWiki owner tests 107 passed, IQS producer golden fixture, independent review ACCEPT",
+        "remaining": "C06 real historical coverage/business run remains OPEN in owner plans; it is separate from the already demonstrated versioned wire interoperability"
+      },
+      {
+        "id": "I11",
+        "owner": "StockWiki",
+        "producer": "StockWiki dashboard_membership_request_cli.py",
+        "consumer": "Dashboard/IQS membership adapter",
+        "protocol": "stockwiki.membership_request/1.0.0",
+        "proof": "StockWiki public CLI tests assert versioned apply/lookup/history; IQS owner PWF records current isolated C38/C5 120 passed and fixed core composition 296 passed; Dashboard adapter consumes the same protocol",
+        "remaining": "none for the current I11 boundary evidence; do not repeat the same replay. StockWiki root PWF reconciliation remains an owner documentation task"
+      },
+      {
+        "id": "I12",
+        "owner": "company-wiki",
+        "producer": "CWP document_understanding assertion_frames and statement_grammar public façade",
+        "consumer": "CWP source_catalog",
+        "protocol": "in-process public Python functions plus owner-supplied WorkBudget",
+        "proof": "document_understanding package exports and test_layer_public_boundaries contract; current CWP focused suite 119 passed. CodeGraph did not resolve callers for these symbols; its cross-file call edges are best-effort, not proof that no consumer exists",
+        "remaining": "none found in the reviewed 24-file current CWP product diff; final report still binds the exact CWP head"
+      }
+    ],
+    "canonical_pwf_followups": [
+      "StockWiki root task_plan.md predates master@0450506; isolated 2026-11-14 plans contain evidence but their commit/phase status needs owner reconciliation",
+      "RF assurance/runs/weekly_alert.jsonl and weekly_manifest.json are tracked runtime changes; preserve and have RF owner reconcile current run result",
+      "FF PLANNING_STATUS.md records F-08 as open; no boundary finding was added in this review",
+    "IQS codex/iqs-manifest-delivery-01@ecb4a5d is active and documentation/evidence-only relative to master@3d9243c; keep its worktree owner-owned and do not count it as a product boundary delta",
+      "Dashboard START_HERE and receipt carrier are current at 3f83bb5; do not re-open the already completed receipt-only work"
+    ],
+    "cwp_untracked_snapshot": {
+      "files": 23334,
+      "groups": {
+        ".mimosa": 10010,
+        ".planning": 13180,
+        "docs": 143,
+        ".workbuddy-ai": 1
+      },
+      "disposition": "preserve by existing inventory; no bulk add or delete"
+    },
+    "next_action": "StockWiki owner reconciles its root canonical PWF; ROOT binds the completed current CWP boundary review and existing I10/I11 owner interoperability evidence to exact refs, checks remaining owner PWF discrepancies, then issues the finite M3 exit report. Do not repeat passed producer/consumer tests."
+  },
+  "next_action": "M2 remains accepted for its frozen scope. Finish the finite M3 current-head/PWF reconciliation first; then resume parent P1 business-summary work. Keep the fixed company loop paused.",
   "reconciliation": {
     "status": "PARTIAL_RF_SAFE_INTAKE_MERGED_WITH_REMAINING_ASSIGNED",
     "entry": "reconciliation.md",
