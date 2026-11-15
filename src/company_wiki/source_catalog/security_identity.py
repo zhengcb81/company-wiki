@@ -114,6 +114,69 @@ def normalize_identity_text(value: str) -> str:
     return _normalize_text(value)
 
 
+# Corporate-suffix equivalence classes, applied to the EXACT name-comparison
+# paths only (official_name_exact / alias_exact). An official name and a query
+# that differ solely in the legal-form suffix denote the same registered name
+# family, e.g. canonical "Alibaba Group Holding Ltd" vs query
+# "Alibaba Group Holding Limited". The trailing suffix token is canonicalized
+# to the first member of its class before comparison:
+#   Ltd ~= Limited; Inc ~= Incorporated; Corp ~= Corporation; Co ~= Company;
+#   PLC ~= AG ~= SE ~= NV ~= SA (European public legal forms);
+#   LP ~= LLP; 有限公司 ~= 股份有限公司 ~= 有限责任公司.
+# Dotted spellings ("Inc.", "Ltd.", "S.A.") lose the dot inside
+# _normalize_text, so only bare token forms are listed.
+#
+# BOUNDARY RULES (proven necessary by a full-master differential sweep,
+# 2026-11-15): ASCII legal forms are separate WORDS in real names
+# ("BASF SE", "Apple, Inc."), so they only canonicalize when the suffix is
+# the final whitespace-delimited word of the raw text — a glued ticker-like
+# token ("VSE", "LANV", "LASE") must never lose its tail to "SE"/"SA"/"NV".
+# Chinese legal forms are glued to the name (no spaces), so they match by
+# string suffix, longest first ("股份有限公司" before "有限公司"), with a
+# non-empty stem. 控股 (holdings) is NAME material, not a suffix — names
+# ending 控股有限公司 are covered through the 有限公司 member, and 控股 stays
+# in the compared stem so 騰訊控股 keeps matching 腾讯控股.
+#
+# Scope guarantees: this never rewrites stored records or matched_value, the
+# ticker comparison stays strictly exact, and the fuzzy path keeps plain
+# _normalize_text. A bare name is NOT equal to its suffixed form. If the
+# widened comparison admits several exact candidates the resolver still fails
+# closed into the ambiguous candidate set.
+_CORPORATE_SUFFIX_CLASSES: tuple[tuple[str, ...], ...] = (
+    ("ltd", "limited"),
+    ("inc", "incorporated"),
+    ("corp", "corporation"),
+    ("co", "company"),
+    ("plc", "ag", "se", "nv", "sa"),
+    ("lp", "llp"),
+)
+_ASCII_SUFFIX_TO_CANONICAL: dict[str, str] = {
+    suffix: classes[0]
+    for classes in _CORPORATE_SUFFIX_CLASSES
+    for suffix in classes
+}
+_CJK_SUFFIX_MATCH_ORDER: tuple[str, ...] = (
+    "股份有限公司",
+    "有限责任公司",
+    "有限公司",
+)
+_CJK_SUFFIX_CANONICAL = "有限公司"
+
+
+def _suffix_equivalent_text(value: str) -> str:
+    """Return the comparison token with a trailing corporate suffix canonicalized."""
+    normalized = _normalize_text(value)
+    for suffix in _CJK_SUFFIX_MATCH_ORDER:
+        if len(normalized) > len(suffix) and normalized.endswith(suffix):
+            return normalized[: -len(suffix)] + _CJK_SUFFIX_CANONICAL
+    last_word = value.strip().split()[-1] if value.strip() else ""
+    word_key = _normalize_text(last_word)
+    canonical = _ASCII_SUFFIX_TO_CANONICAL.get(word_key)
+    if canonical is not None and len(normalized) > len(word_key):
+        return normalized[: -len(word_key)] + canonical
+    return normalized
+
+
 def _validated_lei(record: SecurityRecord) -> str | None:
     """Return a syntactically and checksum-valid LEI from an official record."""
     candidates = {
@@ -1022,8 +1085,11 @@ class SecurityIdentityResolver:
             return self._candidate(
                 record, basis="ticker_exact", matched_value=record.ticker, score=1.0
             )
-        normalized = _normalize_text(query)
-        if normalized == _normalize_text(record.canonical_name):
+        # Names and aliases compare through suffix-equivalent normalization so
+        # "Alibaba Group Holding Limited" matches canonical
+        # "Alibaba Group Holding Ltd"; tickers above stay strictly exact.
+        normalized = _suffix_equivalent_text(query)
+        if normalized == _suffix_equivalent_text(record.canonical_name):
             return self._candidate(
                 record,
                 basis="official_name_exact",
@@ -1031,7 +1097,7 @@ class SecurityIdentityResolver:
                 score=1.0,
             )
         for alias in record.aliases:
-            if normalized == _normalize_text(alias):
+            if normalized == _suffix_equivalent_text(alias):
                 return self._candidate(
                     record, basis="alias_exact", matched_value=alias, score=1.0
                 )
@@ -1148,13 +1214,28 @@ class SecurityIdentityResolver:
                 eligible_exact,
             )
         if len(eligible_exact) > 1:
+            # Exact candidates that span markets yet all carry the SAME verified
+            # issuer link are one dual-listed issuer; name that case so callers
+            # can prompt for a market, but still fail closed — the candidate set
+            # is returned uncollapsed and no side is picked silently. Same-market
+            # multiplicity, or cross-market candidates without a shared link,
+            # keep the generic reason.
+            link_ids = {item.issuer_link_id for item in eligible_exact}
+            markets = {item.market for item in eligible_exact}
+            reason = (
+                "cross_market_dual_listing_requires_market_selection"
+                if len(markets) > 1
+                and None not in link_ids
+                and len(link_ids) == 1
+                else "multiple_verified_exact_identities"
+            )
             return self._result(
                 query,
                 normalized_query,
                 market_hint,
                 exchange_hint,
                 IdentityStatus.AMBIGUOUS,
-                "multiple_verified_exact_identities",
+                reason,
                 eligible_exact,
             )
         linked_exact = self._linked_exact_candidates(

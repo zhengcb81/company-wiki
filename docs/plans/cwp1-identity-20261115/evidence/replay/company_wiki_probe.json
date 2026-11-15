@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "connection": {
+    "cwd": "C:/Users/\u90d1\u66fe\u6ce2/Projects/company-wiki-cwp1-identity-20261115",
+    "commands": {
+      "catalog": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:/Users/\u90d1\u66fe\u6ce2/AppData/Local/Temp/cwp1-probe/catalog_probe.yaml"
+      ],
+      "query": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:/Users/\u90d1\u66fe\u6ce2/AppData/Local/Temp/cwp1-probe/catalog_probe.yaml"
+      ],
+      "local_prepare": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.local_prepare_cli",
+        "--config",
+        "C:/Users/\u90d1\u66fe\u6ce2/AppData/Local/Temp/cwp1-probe/catalog_probe.yaml"
+      ],
+      "open": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:/Users/\u90d1\u66fe\u6ce2/AppData/Local/Temp/cwp1-probe/catalog_probe.yaml"
+      ]
+    }
+  }
+}

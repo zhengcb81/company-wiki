@@ -615,3 +615,250 @@ def test_hk_refresh_uses_standard_transfer_fallback_and_english_aliases(
     records = {record.ticker: record for record in store.load(markets=("HK",)).records}
     assert "XIAOMI-W" in records["01810"].aliases
     assert "TENCENT" in records["00700"].aliases
+
+
+def test_corporate_suffix_equivalence_resolves_the_alibaba_name_family(tmp_path):
+    """CWP-1 A1: a query spelled with the long legal form must hit the exact
+    path of the short-form official name instead of degrading to fuzzy."""
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver
+
+    resolver = SecurityIdentityResolver(_master(tmp_path).load())
+    us = resolver.identify("Advanced Micro Devices Incorporated")
+
+    assert us.status is IdentityStatus.RESOLVED
+    assert us.reason == "one_verified_exact_identity"
+    assert us.resolved.security_id == "AMD"
+    assert us.resolved.match_basis == "official_name_exact"
+    # The stored record is never rewritten by comparison normalization.
+    assert us.resolved.canonical_name == "Advanced Micro Devices, Inc."
+
+
+def test_corporate_suffix_equivalence_applies_to_aliases_too(tmp_path):
+    from company_wiki.source_catalog import (
+        IdentityStatus,
+        SecurityIdentityResolver,
+        SecurityMasterStore,
+    )
+
+    store = SecurityMasterStore(tmp_path / "suffix-alias-master")
+    store.write_market(
+        "US",
+        (_record(name="Example Holdings Inc", market="US", exchange="NASDAQ",
+                 ticker="EXM", aliases=("Example Holdings Limited",)),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("US",))).identify(
+        "Example Holdings Ltd"
+    )
+
+    assert result.status is IdentityStatus.RESOLVED
+    assert result.resolved.match_basis == "alias_exact"
+    assert result.resolved.matched_value == "Example Holdings Limited"
+
+
+def test_chinese_legal_form_suffixes_compare_equivalently(tmp_path):
+    from company_wiki.source_catalog import (
+        IdentityStatus,
+        SecurityIdentityResolver,
+        SecurityMasterStore,
+    )
+
+    store = SecurityMasterStore(tmp_path / "cn-suffix-master")
+    store.write_market(
+        "CN",
+        (_record(name="示例集团控股股份有限公司", market="CN", exchange="SSE",
+                 ticker="600001"),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/cn",),
+    )
+
+    for query in ("示例集团控股有限公司", "示例集团控股有限责任公司"):
+        result = SecurityIdentityResolver(store.load(markets=("CN",))).identify(query)
+        assert result.status is IdentityStatus.RESOLVED, query
+        assert result.resolved.match_basis == "official_name_exact"
+        assert result.resolved.canonical_name == "示例集团控股股份有限公司"
+
+
+def test_bare_name_is_not_equated_with_its_suffixed_official_name(tmp_path):
+    """The widening must stay conservative: dropping the legal form entirely is
+    a different spelling, not a suffix variant, and belongs to fuzzy."""
+    from company_wiki.source_catalog import SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "bare-name-master")
+    store.write_market(
+        "US",
+        (_record(name="Example Holdings Ltd", market="US", exchange="NYSE",
+                 ticker="EXM"),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("US",))).identify(
+        "Example Holdings"
+    )
+
+    assert result.resolved is None
+    assert all(
+        item.match_basis != "official_name_exact" for item in result.candidates
+    )
+
+
+def test_suffix_equivalence_still_fails_closed_on_multiple_exact_candidates(
+    tmp_path,
+):
+    """Two issuers whose names differ only by legal-form spelling must surface
+    as an ambiguous exact candidate set, never a silently picked winner."""
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "suffix-collision-master")
+    store.write_market(
+        "US",
+        (
+            _record(name="Example Holdings Ltd", market="US", exchange="NYSE",
+                    ticker="EXM"),
+            _record(name="Example Holdings Limited", market="US", exchange="NYSE",
+                    ticker="EXM2"),
+        ),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("US",))).identify(
+        "Example Holdings Limited"
+    )
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "multiple_verified_exact_identities"
+    assert sorted(item.security_id for item in result.candidates) == ["EXM", "EXM2"]
+
+
+def test_ascii_suffixes_require_a_word_boundary_not_a_glued_tail(tmp_path):
+    """Differential sweep on the live master (2026-11-15) proved that matching
+    glued tails turns ticker-like short aliases into junk keys: alias 'VSE'
+    and query 'VSA' both collapsed to 'vplc' via SE/SA stripping and made the
+    VSA ticker query ambiguous. ASCII legal forms only canonicalize when they
+    are the final whitespace-delimited word of the raw text."""
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "word-boundary-master")
+    store.write_market(
+        "US",
+        (
+            _record(name="VSE Corp", market="US", exchange="NASDAQ",
+                    ticker="VSEC", aliases=("VSE",)),
+            _record(name="VisionSys AI Inc", market="US", exchange="NASDAQ",
+                    ticker="VSA", aliases=("VisionSys AI",)),
+        ),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+    resolver = SecurityIdentityResolver(store.load(markets=("US",)))
+
+    vsa = resolver.identify("VSA")
+    glued = resolver.identify("VSE")
+
+    assert vsa.status is IdentityStatus.RESOLVED and vsa.resolved.security_id == "VSA"
+    assert glued.status is IdentityStatus.RESOLVED and glued.resolved.match_basis == "alias_exact"
+
+
+def test_cross_market_dual_listing_exact_candidates_get_the_named_reason(tmp_path):
+    """CWP-1 A2: 'BABA' hits the HK alias and the US ticker exactly; both are
+    one issuer through a verified link. The response names that dual-listing
+    shape so callers can ask for a market, but never picks a side."""
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    lei = "5493001NTNQJDH60PM02"
+    store = SecurityMasterStore(tmp_path / "dual-listing-master")
+    store.write_market(
+        "HK",
+        (_record(name="示例集团－Ｗ", market="HK", exchange="HKEX",
+                 ticker="09988", aliases=("BABA",), identifiers={"lei": lei}),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Example Group Holding Ltd", market="US", exchange="NYSE",
+                 ticker="BABA", identifiers={"lei": lei}),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("HK", "US"))).identify("BABA")
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "cross_market_dual_listing_requires_market_selection"
+    assert result.resolved is None
+    assert [(item.market, item.exchange, item.ticker) for item in result.candidates] == [
+        ("HK", "HKEX", "09988"),
+        ("US", "NYSE", "BABA"),
+    ]
+    link_ids = {item.issuer_link_id for item in result.candidates}
+    assert len(link_ids) == 1 and None not in link_ids
+
+
+def test_market_hint_still_resolves_one_side_of_the_dual_listing(tmp_path):
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    lei = "5493001NTNQJDH60PM02"
+    store = SecurityMasterStore(tmp_path / "dual-listing-hint-master")
+    store.write_market(
+        "HK",
+        (_record(name="示例集团－Ｗ", market="HK", exchange="HKEX",
+                 ticker="09988", aliases=("BABA",), identifiers={"lei": lei}),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Example Group Holding Ltd", market="US", exchange="NYSE",
+                 ticker="BABA", identifiers={"lei": lei}),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+    resolver = SecurityIdentityResolver(store.load(markets=("HK", "US")))
+
+    us = resolver.identify("BABA", market="US")
+    hk = resolver.identify("BABA", market="HK")
+
+    assert us.status is IdentityStatus.RESOLVED and us.resolved.security_id == "BABA"
+    assert hk.status is IdentityStatus.RESOLVED and hk.resolved.security_id == "09988"
+
+
+def test_same_market_exact_multiplicity_keeps_the_generic_reason(tmp_path):
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "same-market-multi-master")
+    store.write_market(
+        "HK",
+        (
+            _record(name="Issuer One Holdings", market="HK", exchange="HKEX",
+                    ticker="00001", aliases=("SHARED",)),
+            _record(name="Issuer Two Holdings", market="HK", exchange="HKEX",
+                    ticker="00002", aliases=("SHARED",)),
+        ),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/hk",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("HK",))).identify("SHARED")
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "multiple_verified_exact_identities"
+
+
+def test_cross_market_exact_multiplicity_without_shared_link_keeps_generic_reason(
+    tmp_path,
+):
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "unlinked-cross-market-master")
+    store.write_market(
+        "CN",
+        (_record(name="万科A", market="CN", exchange="SZSE",
+                 ticker="000002", aliases=("万科",)),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/cn",),
+    )
+    store.write_market(
+        "HK",
+        (_record(name="万科企业", market="HK", exchange="HKEX",
+                 ticker="02202", aliases=("万科",)),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/hk",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("CN", "HK"))).identify("万科")
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "multiple_verified_exact_identities"

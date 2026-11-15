@@ -1,0 +1,22 @@
+{
+  "schema_version": "2.0",
+  "status": "identity_error",
+  "request_period": {
+    "mode": "exact",
+    "fiscal_year": 2025,
+    "fiscal_period": null,
+    "as_of_date": "2026-11-08"
+  },
+  "filing": {
+    "status": "identity_error",
+    "reason": "company identity is not uniquely resolved: ambiguous / fuzzy_candidates_require_user_selection",
+    "retryable": false,
+    "stage": "identify"
+  },
+  "transcript": {
+    "status": "not_requested",
+    "retryable": false
+  },
+  "calls": 1,
+  "downloads": 0
+}

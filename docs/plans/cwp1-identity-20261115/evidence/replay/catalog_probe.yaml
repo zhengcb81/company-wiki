@@ -1,0 +1,24 @@
+schema_version: "1.0"
+catalog_dir: "C:/Users/郑曾波/Projects/company-wiki/.source_catalog"
+# Legacy resolver compatibility: all configured root kinds can be reused.
+# The path-independent reader qualifies a filing by source evidence and bytes.
+reusable_root_kinds: [company_raw, dayu_portfolio, directory]
+roots:
+  - root_id: company_raw
+    kind: company_raw
+    path: "C:/Users/郑曾波/Projects/company-wiki/companies"
+    priority: 10
+  - root_id: dayu_portfolio
+    kind: dayu_portfolio
+    path: "C:/Users/郑曾波/Projects/company-wiki/../dayu-agent/workspace/portfolio"
+    priority: 20
+  - root_id: dropbox_stock
+    kind: directory
+    path: "C:/Users/郑曾波/Dropbox/Stock"
+    priority: 30
+  # A new root joins by configuration plus its registered sidecar adapter.
+  - root_id: future_lake
+    kind: directory
+    path: "C:/Users/郑曾波/Projects/company-wiki/future_lake"
+    adapter_id: sidecar_filing_v1
+    priority: 40

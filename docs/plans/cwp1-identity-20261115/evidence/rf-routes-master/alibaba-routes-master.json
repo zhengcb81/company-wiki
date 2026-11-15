@@ -1,0 +1,71 @@
+[
+  {
+    "route": "route1-hk-fy2026-reuse",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "source_blocked",
+      "reason": "local source preparation blocked: unknown",
+      "upstream_cause": "unknown",
+      "local_prepare_reason": "invalid_local_prepare_request",
+      "downloads": 0
+    }
+  },
+  {
+    "route": "route2-hk-fy2026-fetch-if-missing",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "upstream_cause": "acquisition_validation_failed",
+      "local_prepare_reason": null,
+      "downloads": 0
+    }
+  },
+  {
+    "route": "route3-hk-fy2025-reuse",
+    "exit_code": 0,
+    "stdout_bytes": 7335,
+    "observed": {
+      "status": "found_capture_ready",
+      "title": "2025財務年度報告"
+    }
+  },
+  {
+    "route": "route4-us-fy2026-fetch-if-missing",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "upstream_cause": "acquisition_validation_failed",
+      "local_prepare_reason": null,
+      "downloads": 0
+    }
+  },
+  {
+    "route": "route5-hk-latest-as-of-reuse",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "upstream_cause": "acquisition_validation_failed",
+      "local_prepare_reason": null,
+      "downloads": 0
+    }
+  },
+  {
+    "route": "route6-hk-latest-as-of-fetch-if-missing",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "upstream_cause": "acquisition_validation_failed",
+      "local_prepare_reason": null,
+      "downloads": 0
+    }
+  }
+]
