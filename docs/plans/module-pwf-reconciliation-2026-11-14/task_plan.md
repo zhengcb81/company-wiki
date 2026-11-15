@@ -6,6 +6,8 @@
 
 > **2026-11-15 M3 补充诊断（16:51 UTC）：** 已从 no-network 临时 wiki 复现 RF 周跑的 FF ensure exited 1：下载测试请求设置 allow_download=True，却没有 acquisition_limits，因此 CWP 在 provider 启动前以缺少 bytes/time/cost 上限退出。该预算合同由 CWP 既有测试覆盖，保持不放宽；FF owner 应修正下载用例/请求合同，RF owner 记录周跑，ROOT 不改外仓。详见 [复现与 owner 修复项](../module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md)。另一次带预算正向 smoke 超过 60 秒并被中断，不计通过。
 
+> **2026-11-15 发布收据（17:06 UTC）：** 根因和预算合同状态已提交并推送为 CWP PWF carrier 476cb4a79a7aa97080baa5a6a256052403d89596；Git push 服务端响应为 d46357c12..476cb4a79 master -> master。Push fixed smoke 18/18、9.26 秒；完整 GitHub CI 仍待运行。随后 fresh ls-remote 因本地 DNS resolver thread 无法启动而失败，所以此处只以 Git push 成功响应及本地 HEAD/origin/master 一致作为发布证据，不写成 fresh remote read。
+
 ## 目标
 
 把各模块的 PWF 状态、仓库/工区数量、未提交改动、未并线分支及后续主线任务整理成一套可交接的总计划和互不重叠的 owner 施工卡。每个模块只保留一个明确的 Projects 主仓目录；额外临时目录经证据确认后由该模块 owner 清理。模块 owner 自己负责本仓代码修改、提交、并线、推送和本仓 PWF。ROOT/company-wiki 只负责 CWP 本仓工作、总计划、接口协调和只读组合验收。

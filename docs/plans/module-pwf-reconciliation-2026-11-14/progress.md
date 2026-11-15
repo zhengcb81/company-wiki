@@ -11,6 +11,11 @@
 
 - 运行 tests/contract/test_source_catalog_adapter_process.py 中缺失/完整预算两条用例：2 passed / 3.49 秒。没有 provider 调用；这只确认 CWP 现有预算合同仍按设计工作，不替代 FF 请求修复或真实 T3 复验。
 
+### 17:06 UTC PWF 发布收据
+
+- 根因记录和 PWF 对齐提交为 476cb4a79a7aa97080baa5a6a256052403d89596。Git push 服务端确认 d46357c12..476cb4a79 推到 master；push fixed smoke 为 18/18、9.26 秒。
+- 推送后本地 HEAD 与 origin/master tracking ref 均为 476cb4a79。额外 fresh ls-remote 因本地 Git 报 getaddrinfo() thread failed to start 而未完成；不将 push 响应之外的证据写成独立远端读取。完整 GitHub CI 尚未核验。
+
 ## 2026-11-15 15:42 UTC — CWP lambda 闭包边界盲区修复并推送
 
 - 独立架构复核指出边界扫描器的 lambda visitor 只查默认参数，未检查表达式结果；`return lambda: du` 可将导入的外部模块对象藏在闭包里，绕过普通 `return du` 的模块对象逃逸规则。先添加 RED 用例确认失败，再在 `_local_body` 检查 lambda 结果，同时保留参数遮蔽控制例 `lambda du: du`。

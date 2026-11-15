@@ -74,6 +74,7 @@
 - FF local main is now d694d11 while its local origin/main tracking ref is 1dfd818; the visible difference includes active FF1 envelope work, so ROOT leaves that worktree untouched. The failure run itself used FF 1dfd818. The detailed reproduction and owner action are in [FF budget root cause](review/ff-weekly-budget-root-cause-20261115.md).
 - A supplemental no-network smoke with complete limits exceeded 60 seconds and was interrupted; it is not counted as passed. M3 stays open until owner records and exact refs are reconciled.
 - Follow-up: the two focused CWP budget-contract tests passed (2 passed / 3.49s); this verifies the existing contract, not the real provider E2E.
+- PWF carrier commit 476cb4a79 was pushed; the server response confirmed master moved from d46357c12 to 476cb4a79. Push fixed smoke passed 18/18 in 9.26s. Fresh ls-remote then failed because the local Git process could not start a resolver thread; local HEAD and origin/master tracking ref still match. Full GitHub CI remains pending.
 
 ## Goal
 

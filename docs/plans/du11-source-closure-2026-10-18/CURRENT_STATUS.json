@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T17:02:44Z",
+  "observed_at_utc": "2026-11-15T17:06:32Z",
   "next_action": "Finish finite M3 reconciliation: FF owner supplies complete request-owned acquisition_limits to every download-capable T3 request and reruns the opt-in suite; RF owner records weekly run 20261115T084227Z in canonical PWF; StockWiki owner aligns its root canonical plan and verifies its Git worktree. ROOT then binds reviewed current refs and owner evidence to the final finite M3 report. Root cause is missing FF byte/time/cost ceilings, reproduced offline; keep the CWP budget contract unchanged. Do not repeat IQS C38/C5 or I10 interoperability runs already evidenced. Resume business-summary P1 only after M3; keep the fixed company loop paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
@@ -1220,7 +1220,7 @@
   },
   "module_boundary_current_state": {
     "as_of": "2026-11-15",
-    "observed_at_utc": "2026-11-15T17:02:44Z",
+    "observed_at_utc": "2026-11-15T17:06:32Z",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
@@ -1251,7 +1251,7 @@
       "status": "IN_PROGRESS",
       "cwp_first_slice": {
         "published_head": "b1e948276860ee0386e47253ce32479a4fa41919; final scanner/test-only commit; fresh ls-remote, local master and origin/master all match.",
-        "m3_pwf_receipt_head": "f175e6c37; pushed after the code commit and local master matched origin/master. Later total-PWF reconciliation was also pushed.",
+        "m3_pwf_receipt_head": "476cb4a79a7aa97080baa5a6a256052403d89596; PWF root-cause carrier. Git push server response confirmed d46357c12..476cb4a79 master -> master; local HEAD and origin/master tracking ref match. Fresh ls-remote failed because local Git could not start a resolver thread. Push fixed smoke 18/18 in 9.26 seconds; full GitHub CI not yet verified.",
         "dynamic_execution_boundary": "eval/exec/compile calls, aliases, __builtins__/builtins.__dict__ mapping access, vars/globals/locals and get-based lookup covered by RED-to-GREEN static contract; subsequent expression-flow tests close module escapes through lambda closures, IfExp, BoolOp, comprehensions, yield/yield-from and walrus aliases. Comprehension targets are isolated while walrus bindings follow Python outer-scope semantics. No production use found; this static contract is not runtime isolation.",
         "subject_schema_owner": "NarrativeSubjectRef public factory now owns compact official JSON schema construction.",
         "pytest_temp_path": "153-character default sandbox temp now routes to a 53-character unique checkout temp and is removed on exit.",
@@ -1318,6 +1318,14 @@
         "CWP_change": "none; retain existing bounded-acquisition contract",
         "positive_budget_smoke": "interrupted after 60 seconds; not counted as pass",
         "CWP_budget_contract_tests": "2 passed in 3.49 seconds; no provider called; confirms existing missing/complete-budget contract only"
+      },
+      "pwf_publication": {
+        "commit": "476cb4a79a7aa97080baa5a6a256052403d89596",
+        "server_push_response": "d46357c12..476cb4a79 master -> master",
+        "local_head_and_tracking_ref": "both 476cb4a79a7aa97080baa5a6a256052403d89596",
+        "fresh_ls_remote": "not_completed; getaddrinfo thread failed to start",
+        "push_fast_smoke": "18 passed in 9.26 seconds",
+        "full_github_ci": "not verified"
       }
     }
   },

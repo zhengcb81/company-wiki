@@ -10,6 +10,8 @@
 
 FF 外仓只读观察另见本地 main@d694d11、tracking ref origin/main@1dfd818，且存在活动 FF1 envelope 差异；ROOT 未改动该仓。一次补充带限额 no-network smoke 超过 60 秒后被中断，不计为通过。 17:02 UTC 的两条 CWP 预算合同测试通过（2 passed / 3.49 秒），未调用 provider。
 
+根因/PWF carrier 476cb4a79a7aa97080baa5a6a256052403d89596 已推送；服务端响应确认 d46357c12..476cb4a79 master -> master，push fixed smoke 18/18、9.26 秒。推送后本地 HEAD 与 origin/master tracking ref 一致；独立 fresh ls-remote 因本机 Git resolver thread 无法启动失败，所以没有记作独立远端读取。完整 GitHub CI 仍未核验。
+
 **M3 CWP 边界扫描器 follow-up（16:23 UTC）**：最新扫描器与合同测试提交 `b1e948276860ee0386e47253ce32479a4fa41919` 已由独立 `git ls-remote` 确认与 `origin/master` 相同。代码只改测试支持扫描器及合同测试，没有产品源文件改动。最终合同文件本地 **86 passed / 13.28 秒**，独立 reviewer 对同一最终文件复跑 **86 passed / 12.96 秒**；受影响 Ruff 通过。完整 GitHub Actions CI 未核实，不能将 push 成功或本地快测写成完整 CI 通过。
 
 这次 follow-up 把扫描器从“识别简单返回节点”扩为识别表达式可能产出的值，修复外部模块对象藏在条件表达式、`and/or`、lambda 条件体、列表/字典/集合/生成器推导及 `yield/yield from` 中的静态边界漏检；同时修正推导式循环变量作用域隔离，以及 walrus 变量按 Python 语义向外层写回的误判。测试也覆盖空迭代保留既有模块绑定、参数遮蔽和合法公开端口正例。该静态合同不是运行时沙箱保证。
