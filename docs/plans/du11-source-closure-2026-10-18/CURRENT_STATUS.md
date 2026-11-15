@@ -14,13 +14,12 @@ The CWP M3 inventory counts **36 `src/` paths** changed from its M2 baseline and
 
 Global M3 is **still in progress** because FF must provide finite request-owned limits and rerun T3, RF must record the weekly not-ok run in its canonical PWF, and StockWiki must reconcile its root PWF/worktree. CWP did not relax its bounded-provider contract. No external repository was modified. See [CWP identity review](../module-boundaries-2026-11-11/review/cwp1-legal-form-identity-20261115.md) and [FF failure root cause](../module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md).
 
-### 17:58 UTC update — latest FF/RF/StockWiki refs checked read-only
+### 18:13 UTC update — elevated read-only status and live refs reconciled
 
-- FF local `main@dd716217` matches its local `origin/main` tracking ref; this is not a fresh server query. Since M2, FF has no `src/` path delta, four test-path changes, and one plan-verifier tool change. Root planning files contain no weekly T3/acquisition-limit repair or rerun receipt. Git status still fails with `must be run in a work tree`; no FF files were changed.
-- RF local `main@88892536` is seven commits ahead of local `origin/main@f2215959`; no fresh remote query. The weekly manifest remains `20261115T084227Z / ok=false`, tied to FF `1dfd818`, RF `f2215959`, CWP `0e741063`. Canonical `PLANNING_STATUS.md` was last committed 11-14 and does not record that run. Git status is unavailable, so tracked cleanliness is unknown. No RF files were changed.
-- StockWiki local `master@e1f9f559` has no remote. Its latest M2-relative delta is 13 product source paths and 19 test paths. Root progress/findings include the 11-15 research run; root `task_plan.md` last commit is 11-08. Normal and `worktreeConfig=false` status checks both fail with `must be run in a work tree`, so tracked cleanliness is unknown. No StockWiki files were changed.
-- Updated the module matrix and current-status JSON with these owner refs and the work still needed. CWP is published; global M3 remains open. For non-CWP repositories, recorded `origin/*` values are local tracking refs, not fresh server reads.
-
+- FF local main@dd716217 matches the freshly queried server origin/main@dd716217. Elevated read-only git status --short --branch --untracked-files=no confirms tracked files clean. Since M2, FF has no src/ path delta, four test-path changes, and one plan-verifier tool change. The root FF planning files still lack finite T3 limits/repair and rerun receipt. Untracked files were not enumerated; no FF files were changed.
+- RF local main@88892536 is eight commits ahead of freshly queried server origin/main@f2215959. Tracked modifications are assurance/runs/weekly_alert.jsonl and assurance/runs/weekly_manifest.json. The manifest remains 20261115T084227Z / ok=false, tied to FF 1dfd818, RF f2215959, CWP 0e741063. Canonical PLANNING_STATUS.md was last committed 11-14 and does not record that run. Untracked files were not enumerated; no RF files were changed.
+- StockWiki local master@e1f9f559 has no remote. Its M2-relative delta is 13 product source paths and 19 test paths. Root progress/findings include the 11-15 research run; root task_plan.md last commit is 11-08. Elevated read-only status confirms tracked files clean; untracked files were not enumerated. No StockWiki files were changed.
+- The earlier must be run in a work tree failures occurred only in the restricted sandbox; the same read-only status commands succeeded in the approved elevated context. This is an execution-context issue, not a repository defect. No external repository was modified. M3 remains open for owner PWF/ref reconciliation and FF's passing T3 rerun.
 
 ### 16:51 UTC 更新：RF weekly T3 的真实失败根因已查明
 

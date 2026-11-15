@@ -91,3 +91,11 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - RF now reads local main@88892536 versus local origin/main@f2215959, seven commits behind the local branch. Weekly run `20261115T084227Z` remains `ok=false` on its historical triplet; it is absent from root canonical `PLANNING_STATUS.md` (last commit 11-14). Status cannot be confirmed.
 - StockWiki now reads local master@e1f9f559 with no remote. Root progress/findings include the 11-15 research run, but task_plan's last commit is 11-08; both status commands still fail.
 - No external repository was modified. M3 remains open for those owner PWF/ref/worktree actions; CWP identity fix is complete and published. Matrix records exact snapshots and their limits.
+
+
+## 2026-11-15 18:13 UTC — elevated read-only M3 owner status and live refs
+
+- Fresh git ls-remote confirms FF origin/main@dd716217; local main matches and tracked files are clean under elevated read-only git status --untracked-files=no. FF still owes finite request-owned acquisition limits and a passing T3 rerun.
+- Fresh git ls-remote confirms RF origin/main@f2215959; local main@88892536 is eight commits ahead, with tracked modifications in assurance/runs/weekly_alert.jsonl and weekly_manifest.json. The weekly run remains not-ok and absent from canonical root PWF. ROOT leaves RF untouched.
+- StockWiki master@e1f9f559 has no remote and is tracked-clean under elevated read-only status. Its root task_plan still requires owner reconciliation; ROOT leaves its worktree untouched.
+- Elevated status succeeded where restricted-sandbox status had failed. The error is attributed to execution context, not repository health. Untracked files were not enumerated because status used --untracked-files=no. Matrix and parent current status now carry the corrected facts.

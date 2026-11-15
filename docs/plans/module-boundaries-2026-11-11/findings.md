@@ -56,3 +56,8 @@
 ## 2026-11-15 — Distinct company legal forms must not auto-resolve
 
 CWP1's broad suffix class treated `PLC`, `AG`, `SE`, `NV`, `SA`, `LP`/`LLP`, and two different Chinese company types as interchangeable. An exact-name fixture reproduced a false `resolved`; after narrowing exact normalization, a long canonical name with a suffix-free alias still auto-resolved through strong fuzzy matching. The general fix is owner-side: preserve only same-form spelling expansions, encode the two Chinese within-type alternatives in Company Law Article 7, and inspect the selected security record's canonical name plus every alias before fuzzy auto-resolution. Keep an explicit exact alias usable. No new status or manual-review gate was added; conflicts use the existing ambiguous candidate result. RED/GREEN, legal sources, exact hashes, test scope, and independent PASS are in `review/cwp1-legal-form-identity-20261115.md`.
+
+
+## 2026-11-15 — Git worktree-status error isolated to sandbox context
+
+The previous read-only commands in the restricted sandbox returned fatal: this operation must be run in a work tree for FF, RF, and StockWiki, although rev-parse reported a worktree. Repeating the same status operation in the approved elevated host context succeeded for all three, and fresh git ls-remote calls confirmed live FF/RF main refs. This establishes an execution-context difference; there is no evidence of a repository configuration defect. FF and StockWiki tracked files are clean. RF has two tracked weekly-assurance modifications and its local main is eight commits ahead of live remote. Status was run with --untracked-files=no, so no conclusion is made about untracked files. All owner repositories remained read-only.

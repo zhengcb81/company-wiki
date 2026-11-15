@@ -93,8 +93,8 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T17:58:56Z",
-  "next_action": "Finish finite M3 reconciliation: FF owner supplies bounded acquisition_limits and reruns T3; RF owner records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 with tracking origin/main@f2215959; StockWiki owner aligns the root task_plan and verifies worktree state. ROOT then binds fresh exact refs and owner evidence to the finite report. CWP slice is reviewed and pushed at master@5ae4a60; keep CWP budget contract unchanged. Then resume P1 business-summary work; keep fixed company loop paused.",
+  "observed_at_utc": "2026-11-15T18:13:29Z",
+  "next_action": "Finish finite M3 reconciliation: FF owner supplies bounded acquisition_limits and reruns T3; RF owner records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 (8 commits ahead of live origin/main@f2215959, with two tracked weekly-assurance edits); StockWiki owner aligns root task_plan. Elevated read-only status confirms FF and StockWiki tracked files clean and identifies the RF edits; untracked files were not enumerated. ROOT then binds fresh exact refs and owner evidence to the finite report. CWP slice is reviewed and pushed at master@5ae4a60; keep CWP budget contract unchanged. Then resume P1 business-summary work; keep fixed company loop paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1233,7 +1233,7 @@
   },
   "module_boundary_current_state": {
     "as_of": "2026-11-15",
-    "observed_at_utc": "2026-11-15T17:58:56Z",
+    "observed_at_utc": "2026-11-15T18:13:29Z",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
@@ -1245,7 +1245,7 @@
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
     "remaining": [
-      "M3 final receipt: FF finite request limits and T3 rerun; RF canonical PWF entry for weekly run 20261115T084227Z and reconciliation of local main@88892536 vs tracking origin/main@f2215959; StockWiki root task_plan and worktree status reconciliation; ROOT binds fresh exact owner refs and publishes finite report"
+      "M3 final receipt: FF finite request limits and T3 rerun; RF canonical PWF entry for weekly run 20261115T084227Z and reconciliation of local main@88892536 (8 commits ahead of live origin/main@f2215959, with two modified weekly assurance files); StockWiki root task_plan reconciliation. ROOT binds fresh exact refs and owner evidence to the finite report."
     ],
     "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_REVIEWED_FOR_CWP_AND_EXTERNAL_OWNER_RECONCILIATION_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
@@ -1290,22 +1290,28 @@
         "filing-fetch": {
           "observed_ref": "local main@dd7162172718e8276a809e9c205e3c80da06141a",
           "local_tracking_ref": "origin/main@dd7162172718e8276a809e9c205e3c80da06141a",
-          "remote_status": "tracking ref observed locally; fresh ls-remote not run",
+          "remote_status": "Fresh read-only git ls-remote confirmed origin/main@dd7162172718e8276a809e9c205e3c80da06141a at 2026-11-15 18:13 UTC.",
           "m2_product_source_delta": 0,
           "m2_test_path_delta": 4,
           "additional_tool_path": "tools/verify_plan_claims.py",
-          "git_status": "unconfirmed; status reports must be run in a work tree",
-          "canonical_pwf_action": "finite acquisition limits and T3 rerun not recorded in the root planning files"
+          "git_status": "Tracked files clean; elevated read-only git status succeeded with --untracked-files=no. Untracked files were not enumerated.",
+          "canonical_pwf_action": "finite acquisition limits and T3 rerun not recorded in the root planning files",
+          "untracked_status": "not_enumerated"
         },
         "revenue-forecast": {
           "observed_ref": "local main@88892536e8d53893427fc6afeabdfe17741536a5",
           "local_tracking_ref": "origin/main@f2215959d33abc76778342a95d39a8e38191da75",
-          "unpublished_commits_ahead": 7,
-          "remote_status": "tracking ref observed locally; fresh ls-remote not run",
+          "unpublished_commits_ahead": 8,
+          "remote_status": "Fresh read-only git ls-remote confirmed origin/main@f2215959d33abc76778342a95d39a8e38191da75 at 2026-11-15 18:13 UTC.",
           "weekly_run_id": "20261115T084227Z",
           "weekly_status": "not-ok; manifest remains pinned to FF 1dfd818 / RF f2215959 / CWP 0e741063",
           "canonical_pwf": "PLANNING_STATUS.md last commit 3ca619283411cf2a48afa57a449c44e2aa907768 on 2026-11-14; weekly run ID absent",
-          "git_status": "unconfirmed; status reports must be run in a work tree"
+          "git_status": "Tracked files modified: assurance/runs/weekly_alert.jsonl and assurance/runs/weekly_manifest.json; observed with elevated read-only git status --untracked-files=no. Untracked files were not enumerated.",
+          "modified_tracked_paths": [
+            "assurance/runs/weekly_alert.jsonl",
+            "assurance/runs/weekly_manifest.json"
+          ],
+          "untracked_status": "not_enumerated"
         },
         "StockWiki": {
           "observed_ref": "local master@e1f9f559c08ca20e1806a0b1ac205cdd75d875f8",
@@ -1314,10 +1320,11 @@
           "test_paths_since_m2": 19,
           "task_plan_last_commit": "9baaf3d10178a8d9aa9a3853c417f223e8de50de on 2026-11-08",
           "progress_findings_last_commit": "b3f5777455dfdea6b84b0a6e30fa8e8d42370b96 on 2026-11-15",
-          "git_status": "unconfirmed; standard and worktreeConfig=false status both report must be run in a work tree"
+          "git_status": "Tracked files clean; elevated read-only git status succeeded with --untracked-files=no. Untracked files were not enumerated.",
+          "untracked_status": "not_enumerated"
         }
       },
-      "remaining": "Current post-M2 product deltas are classified, and I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await FF finite-budget request repair/T3 evidence, RF canonical PWF reconciliation, and StockWiki root PWF/worktree reconciliation by their owners; then bind the final report to exact refs.",
+      "remaining": "Current post-M2 product deltas are classified, and I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await FF finite-budget request repair/T3 evidence, RF canonical PWF reconciliation (including its 8 unpublished commits and two tracked weekly-assurance edits), and StockWiki root PWF reconciliation by their owners; then bind the final report to exact refs.",
       "failure_reconciliation": {
         "weekly_run_id": "20261115T084227Z",
         "triplet": {
