@@ -2,7 +2,7 @@
 
 ## 2026-11-15 M3 CWP 当前发布状态
 
-CWP M3 首组边界修复代码 commit `3bc4ed86a` 已推送，PWF 回执 carrier `f175e6c37` 随后推送；最终本地 `master` 与 `origin/master` 相等。定向边界/对象存储/短路径/JSON preparation 合计 119 项通过，受影响 Ruff 与 pre-commit mypy 通过，push fast smoke 18 项通过。M3 其余 CWP 和其他 owner 仓源码差异仍在审查，不能把本次发布写成全项目解耦验收。
+CWP M3 首组边界修复代码 commit `3bc4ed86a` 已推送，M3 PWF 回执 carrier `f175e6c37` 随后推送；该次 push 后本地 `master` 与 `origin/master` 相等。其后总控 PWF 状态对齐也已作为 docs-only 变更正常推送。定向边界/对象存储/短路径/JSON preparation 合计 119 项通过，受影响 Ruff 与 pre-commit mypy 通过，push fast smoke 18 项通过。M3 其余 CWP 和其他 owner 仓源码差异仍在审查，不能把本次发布写成全项目解耦验收。
 
 ## 最终验收状态（2026-11-15）
 
@@ -10,7 +10,7 @@ CWP M3 首组边界修复代码 commit `3bc4ed86a` 已推送，PWF 回执 carrie
 
 | Lane | 当前本地主线 | 远端 | 收尾状态 |
 |---|---|---|---|
-| CWP | `master@f175e6c37`（M3代码 `3bc4ed86a` 与当前PWF carrier已推送） | 两次正常 push 响应确认 `f58011ddd..3bc4ed86a`、`3bc4ed86a..f175e6c37`；最终本地 `origin/master` 与 HEAD 一致 | 首组 M3 修复已发布；其余当前 HEAD 漂移审查仍开放 |
+| CWP | `master`（M3代码 `3bc4ed86a` 已发布，后续 PWF 对齐亦已推送） | 正常 push 响应确认代码与 PWF 回执更新成功；推送后本地 refs 相等 | 首组 M3 修复已发布；其余当前 HEAD 漂移审查仍开放 |
 | FF | `main@1dfd818` | live 相等 | PASS / 已推送 |
 | RF | `main@f221595` | live 相等 | PASS / 内容与收据已复核并推送 |
 | ET | `main@50d9190` | live 相等 | PASS / 已推送 |
