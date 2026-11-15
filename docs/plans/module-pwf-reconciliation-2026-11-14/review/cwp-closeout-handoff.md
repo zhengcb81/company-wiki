@@ -192,4 +192,5 @@ AGENTS.md"工具平台的自动审批不由仓库控制……不得改写命令�
 - 以普通 `git push origin master` 发布 CWP 收尾序列。GitHub 返回 `7361aad82..0e741063f master -> master`，确认服务端接受；此次推送没有被 Mimosa 拦截。差量为 13 个路径，均为本计划 PWF、handoff/review 文件和一次性 `.tmp-build-registry.py` 删除，不含生产源码。
 - 仓库 push fast feedback 的 fixed smoke 为 **18 passed in 6.58s**；输出仍注明完整 CI 会在远端运行。没有 `--no-verify` 或其他绕过。
 - 推送后单独 `git ls-remote origin refs/heads/master` 报 `getaddrinfo() thread failed to start`，故没有独立 fresh-read。`handoff.json` 的 `final.remote_head=7361aad82` 与独审绑定 `final.head=8ae20ce6f` 保留为 2026-11-14 交接时的审查快照；当前发布记录以本节 push 响应为准。
-- 该成功只证明这一次正常 push 被接受，不能推断此前扫描列出的安全发现已消失或平台策略已永久改变。本轮后续 PWF 状态更新按同一正常推送流程发布。
+- 该成功只证明这一次正常 push 被接受，不能推断此前扫描列出的安全发现已消失或平台策略已永久改变。后续 PWF 状态更新已按同一正常推送流程发布，详见下一条。
+- 后续 docs-only PWF carrier 由普通 push 成功发布，GitHub 响应为 `0e741063f..f58011ddd master -> master`；推送后本地 `HEAD` 与 `origin/master` 均为 `f58011ddd`。因此 CWP closeout 主线及状态收据均已发布；§11 三次 Mimosa L3 拦截仍只代表 2026-11-14 的历史尝试。

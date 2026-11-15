@@ -89,4 +89,5 @@ Git 状态只读报告分别来自模块 agent 和 ROOT 命令。每个模块 ow
 
 - 11-14 的三次 Mimosa L3 全仓扫描拦截仍是有效历史事实。11-15 以普通 `git push origin master` 重试后推送成功，GitHub 响应明确为 `7361aad82..0e741063f master -> master`；这次未见 Mimosa 拦截。不能由一次成功推送推断此前告警已修复或平台规则已永久改变。
 - push 快速反馈的 fixed smoke 为 **18/18** 通过（6.58 秒）；输出仍注明完整 CI 会在远端运行。推送差量由 `git diff --name-only 7361aad82 0e741063f` 核对，共 13 个 PWF/审查文件及一次性脚本删除，无生产源码改动。
-- 推送后单独读取 `git ls-remote` 时，本地 Git 报 `getaddrinfo() thread failed to start`。因此以 Git push 服务端成功响应作为当次发布证据，不虚报独立 fresh-read；本次后续 PWF 状态 carrier 将按正常路径一起发布。
+- 推送后单独读取 `git ls-remote` 时，本地 Git 报 `getaddrinfo() thread failed to start`。因此以 Git push 服务端成功响应作为当次发布证据，不虚报独立 fresh-read；该读取限制已写入后续 PWF 状态 carrier `f58011ddd` 并通过普通 push 发布。
+- 后续 PWF 状态 carrier `f58011ddd` 已由正常 push 发布，服务端响应为 `0e741063f..f58011ddd`；随后本地 `origin/master` 与 `HEAD` 相同。独立 `ls-remote` 不重复尝试；这两次正常 push 均未复现 11-14 的 Mimosa L3 拦截。

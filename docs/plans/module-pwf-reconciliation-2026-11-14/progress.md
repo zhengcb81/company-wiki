@@ -4,8 +4,14 @@
 
 - `git push origin master` 通过正常路径成功，GitHub 响应为 `7361aad82..0e741063f master -> master`，即当时本地 8 个待发提交全部进入远端。推送 delta 共 13 个路径，限于本计划文档/交接审查文件与一次性脚本删除，没有产品源码变更。
 - 本仓 push fast feedback 识别出 9 个固定目标，实际 fixed smoke **18 passed in 6.58s**；输出说明更大的完整验证仍由 CI 执行。没有跳过 hook。
-- 随后独立 `git ls-remote origin refs/heads/master` 因 `getaddrinfo() thread failed to start` 失败。发布结论依据 GitHub push 成功响应；不把失败的读取尝试写成 fresh remote 核验。当前这份 PWF 状态更新将作为后续 docs-only carrier 正常推送。
+- 随后独立 `git ls-remote origin refs/heads/master` 因 `getaddrinfo() thread failed to start` 失败。发布结论依据 GitHub push 成功响应；不把失败的读取尝试写成 fresh remote 核验。该读取限制后来已记录在 docs-only PWF carrier `f58011ddd` 并通过普通 push 发布。
 - 2026-11-14 的三次 Mimosa L3 拦截是准确的历史记录；2026-11-15 这次普通推送未被拦截。现有证据只能说明此次放行，不能说明 209/39/6 的告警已清零或平台规则已变。
+
+## 2026-11-15 — PWF 状态载体完成发布
+
+- 五份状态文档/交接记录已另作 docs-only commit，普通 push 返回 `0e741063f..f58011ddd master -> master`；推送后 `git rev-parse HEAD` 与本地 `git rev-parse origin/master` 均为 `f58011ddd`。
+- 本次 docs-only carrier 按 push-hook 配置未运行产品测试；独立 review、`git diff --check`、11 个相对链接与 CWP/RFAudit 两个 handoff JSON 均已核验通过。跟踪文件工作区干净。
+- 23,334 个 untracked 项按 `.mimosa`、`.planning`、`docs` 与 `.workbuddy-ai` 分类保留；没有批量清除运行/审查记录或用户资料。
 
 ## 2026-11-15 — Dashboard 最终收据及总控 PWF 对齐
 
