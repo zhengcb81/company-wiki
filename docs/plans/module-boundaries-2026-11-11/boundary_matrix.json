@@ -359,17 +359,17 @@
   },
   "m3_current_head_review": {
     "date": "2026-11-15",
-    "observed_at_utc": "2026-11-15T15:49:05Z",
+    "observed_at_utc": "2026-11-15T16:23:32Z",
     "status": "IN_PROGRESS",
     "scope_note": "M2 E01-E09 remains CLOSED for the exact refs below; this M3 ledger is a separate post-M2 current-head audit. CWP was refreshed at 15:49 UTC and its remote confirmed by push; non-CWP refs/statuses remain the last local snapshot read at 15:38 UTC, not fresh remote queries. No external repository was modified or tested by ROOT in this pass.",
     "reviewed_owner_heads": [
       {
         "repository": "company-wiki",
         "m2_ref": "c6189c623f6ec30e2a1a1059499e78c8ffe5b443",
-        "current_ref": "master@07d48118022e660d65e3218594bfb02085710caf",
-        "remote_ref": "origin/master@07d48118022e660d65e3218594bfb02085710caf",
+        "current_ref": "master@b1e948276860ee0386e47253ce32479a4fa41919",
+        "remote_ref": "origin/master@b1e948276860ee0386e47253ce32479a4fa41919",
         "changed_product_sources": 24,
-        "disposition": "reviewed; dependencies stay within CWP or use declared public DU/WorkBudget values; 07d481180 adds only scanner support and boundary-contract tests (no product source change), closes the lambda-closure module escape, and was independently rechecked; 66 boundary contract tests pass, Ruff passes, push smoke 18 passes. CWP remote was confirmed by push; other module refs in this matrix remain the last local snapshot"
+        "disposition": "reviewed; dependencies stay within CWP or use declared public DU/WorkBudget values; 07d481180 and b1e948276 add only scanner support and boundary-contract tests (no product source change). The final b1e948276 contract covers module escapes through lambda/conditional/boolean/container/comprehension/yield/walrus expressions and comprehension scope; 86 tests pass locally and independently, Ruff passes, and fresh ls-remote matches. Full GitHub Actions CI is not checked; other module refs in this matrix remain their stated local snapshots"
       },
       {
         "repository": "filing-fetch",
@@ -387,7 +387,7 @@
         "remote_ref": "origin/main@f2215959",
         "changed_product_sources": 1,
         "changed_test_paths": 1,
-        "disposition": "report-rendering change is RF-owned; two tracked weekly runtime files remain dirty and are preserved for owner PWF reconciliation"
+        "disposition": "report-rendering change is RF-owned; weekly run 20261115T084227Z is T3 not-ok: four FF download E2Es fail at company-wiki ensure with zero downloads; inner cause is absent from available log. The triplet pins CWP at 0e741063, so this is not attributed to b1e948276 scanner tests. RF owner must reconcile the run into canonical PWF; weekly files were read directly but current git status was not confirmed in this harness"
       },
       {
         "repository": "earnings-transcripts",
@@ -412,7 +412,7 @@
         "current_ref": "master@0450506",
         "remote_ref": "none-configured",
         "changed_product_sources": 4,
-        "disposition": "owner code is within StockWiki; root PWF must reconcile committed owner work after active parallel task; no ROOT writes"
+        "disposition": "owner code is within StockWiki; master@0450506, no remote. Root task_plan.md/progress.md last modified 2026-11-08 09:28/10:46 local; root PWF must reconcile committed owner work after active parallel task. rev-parse reports inside-work-tree=true and bare=false, but normal and one-shot worktreeConfig=false git status return 'this operation must be run in a work tree', so tracked cleanliness is unconfirmed; no ROOT writes"
       },
       {
         "repository": "invest-quick-scan",
@@ -467,7 +467,7 @@
         "producer": "CWP document_understanding assertion_frames and statement_grammar public façade",
         "consumer": "CWP source_catalog",
         "protocol": "in-process public Python functions plus owner-supplied WorkBudget",
-        "proof": "document_understanding package exports and test_layer_public_boundaries contract; current CWP focused suite 119 passed. CodeGraph did not resolve callers for these symbols; its cross-file call edges are best-effort, not proof that no consumer exists",
+      "proof": "document_understanding package exports and test_layer_public_boundaries contract; baseline focused suite 119 passed and final scanner contract follow-up 86 passed locally and independently at b1e948276. CodeGraph did not resolve callers for these symbols; its cross-file call edges are best-effort, not proof that no consumer exists",
         "remaining": "none found in the reviewed 24-file current CWP product diff; final report still binds the exact CWP head"
       }
     ],
@@ -488,7 +488,7 @@
       },
       "disposition": "preserve by existing inventory; no bulk add or delete"
     },
-    "next_action": "StockWiki owner reconciles its root canonical PWF; ROOT binds the completed current CWP boundary review and existing I10/I11 owner interoperability evidence to exact refs, checks remaining owner PWF discrepancies, then issues the finite M3 exit report. Do not repeat passed producer/consumer tests."
+    "next_action": "StockWiki owner reconciles its root canonical PWF and verifies current Git worktree state; RF owner records weekly run 20261115T084227Z (T3 not-ok) in canonical PWF. ROOT binds the CWP scanner contract at b1e948276 and current owner evidence to exact refs, confirms no unclassified boundary paths, then issues the finite M3 exit report. Do not repeat passed producer/consumer tests."
   },
   "next_action": "M2 remains accepted for its frozen scope. Finish the finite M3 current-head/PWF reconciliation first; then resume parent P1 business-summary work. Keep the fixed company loop paused.",
   "reconciliation": {

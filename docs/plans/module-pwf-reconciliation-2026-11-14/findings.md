@@ -143,3 +143,11 @@ Git 状态只读报告分别来自模块 agent 和 ROOT 命令。每个模块 ow
 - push 快速反馈的 fixed smoke 为 **18/18** 通过（6.58 秒）；输出仍注明完整 CI 会在远端运行。推送差量由 `git diff --name-only 7361aad82 0e741063f` 核对，共 13 个 PWF/审查文件及一次性脚本删除，无生产源码改动。
 - 推送后单独读取 `git ls-remote` 时，本地 Git 报 `getaddrinfo() thread failed to start`。因此以 Git push 服务端成功响应作为当次发布证据，不虚报独立 fresh-read；该读取限制已写入后续 PWF 状态 carrier `f58011ddd` 并通过普通 push 发布。
 - 后续 PWF 状态 carrier `f58011ddd` 已由正常 push 发布，服务端响应为 `0e741063f..f58011ddd`；随后本地 `origin/master` 与 `HEAD` 相同。独立 `ls-remote` 不重复尝试；这两次正常 push 均未复现 11-14 的 Mimosa L3 拦截。
+# 2026-11-15 CWP M3 follow-up：scanner escape 与作用域边界
+
+- 最新 CWP 代码/测试提交 `b1e948276860ee0386e47253ce32479a4fa41919` 经 fresh `git ls-remote origin refs/heads/master` 确认为远端 master；该提交仅修改测试支持扫描器和边界合同测试，不修改 `src/` 生产代码。
+- 根因不是单个 lambda 语法：原扫描器的 `_reference` 只识别若干简单 AST 形态，故不能归纳表达式可能返回值；推导式又被通用 visitor 当成普通块遍历，循环目标泄漏到父作用域，导致模块导入可能被错误视为局部遮蔽。修复分别把值流判定扩展到 IfExp/BoolOp/NamedExpr/容器与生成器/Yield，及把推导式改为隔离作用域并处理 walrus 写回。
+- TDD 正反例包括条件/lambda/逻辑表达式返回、列表/字典/集合/生成器、yield/yield-from、walrus、零迭代时旧模块绑定、循环目标不泄漏、公开 callable/opaque port 和参数遮蔽。首批新增表达式反例 6 项 RED；作用域/walrus 独立审查反例再 RED，修复后最终合同文件 86 项通过。
+- ROOT 最终结果 86 passed / 13.28s；独立 reviewer 最终结果 86 passed / 12.96s；Ruff 通过。没有重跑整套历史 CI；完整远端 GitHub Actions 未查验。Push 的可核实事实为远端 master SHA 等于该 commit。
+- RF 的 T3 周跑失败与本改动分离：weekly manifest 绑定 CWP `0e741063…`、RF `f2215959…`、FF `1dfd818…`；4 个下载测试均停在 `company-wiki ensure exited 1`，0 次下载，日志没有更内层 traceback。RF owner 需在其 canonical PWF 解释并保留运行资料；ROOT 不修写 RF/FF。
+- StockWiki 当前可见 `master@0450506`、无 remote；根 `task_plan.md`/`progress.md` 时间为 11-08 09:28/10:46。当前 `git status` 试读报告 “must be run in a work tree”，因此 cleanliness 未确认。StockWiki owner 应核实其工作树并对齐 canonical PWF；ROOT 不写其仓。

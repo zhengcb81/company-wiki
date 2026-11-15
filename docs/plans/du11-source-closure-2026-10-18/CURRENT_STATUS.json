@@ -93,8 +93,8 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T15:49:05Z",
-  "next_action": "Finish finite M3 PWF reconciliation: StockWiki owner aligns its root canonical plan with master@0450506, RF owner records the two tracked weekly runtime results, and ROOT binds the reviewed CWP/owner evidence to exact refs. CWP's lambda-closure scanner gap is now fixed and independently rechecked at 07d48118022e660d65e3218594bfb02085710caf; IQS C38/C5 120-pass and 296-pass owner runs plus I10 isolated publish/readback already cover the current producer-consumer contracts; do not repeat them. Resume business-summary P1 only after M3; keep the fixed company loop paused.",
+  "observed_at_utc": "2026-11-15T16:23:32Z",
+  "next_action": "Finish finite M3 PWF reconciliation: StockWiki owner aligns its root canonical plan with master@0450506 and verifies its Git worktree; RF owner records the 2026-11-15 T3 not-ok result in canonical PWF; ROOT then binds reviewed CWP/owner evidence to exact refs. CWP scanner contract follow-up is independently rechecked and pushed at b1e948276860ee0386e47253ce32479a4fa41919 (86 tests; Ruff pass). RF's four failed FF download E2Es stop at company-wiki ensure and the available log has no inner cause; triplet CWP is 0e741063, so do not attribute this to the scanner test-only change. IQS C38/C5 120-pass and 296-pass owner runs plus I10 isolated publish/readback already cover current producer-consumer contracts; do not repeat them. Resume business-summary P1 only after M3; keep the fixed company loop paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1220,6 +1220,7 @@
   },
   "module_boundary_current_state": {
     "as_of": "2026-11-15",
+    "observed_at_utc": "2026-11-15T16:23:32Z",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
@@ -1231,7 +1232,7 @@
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
     "remaining": [
-      "M3 final receipt: StockWiki owner PWF reconciliation and RF weekly runtime result reconciliation, followed by exact-ref ROOT report"
+      "M3 final receipt: StockWiki owner reconciles root canonical PWF and verifies Git worktree state; RF owner reconciles the 2026-11-15 weekly T3 not-ok result; ROOT binds exact refs and publishes final finite M3 report"
     ],
     "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_DRIFT_AUDIT_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
@@ -1249,15 +1250,40 @@
     "m3_current_head_drift_audit": {
       "status": "IN_PROGRESS",
       "cwp_first_slice": {
-        "published_head": "07d48118022e660d65e3218594bfb02085710caf; code/test commit pushed from 24502ace5 and local master/origin/master matched after push.",
+        "published_head": "b1e948276860ee0386e47253ce32479a4fa41919; final scanner/test-only commit; fresh ls-remote, local master and origin/master all match.",
         "m3_pwf_receipt_head": "f175e6c37; pushed after the code commit and local master matched origin/master. Later total-PWF reconciliation was also pushed.",
-        "dynamic_execution_boundary": "eval/exec/compile calls, aliases, __builtins__/builtins.__dict__ mapping access, vars/globals/locals and get-based lookup covered by RED-to-GREEN static contract; a later review found lambda closures could return imported foreign module objects, now rejected while parameter shadowing remains allowed; no production use found; static contract is not runtime isolation.",
+        "dynamic_execution_boundary": "eval/exec/compile calls, aliases, __builtins__/builtins.__dict__ mapping access, vars/globals/locals and get-based lookup covered by RED-to-GREEN static contract; subsequent expression-flow tests close module escapes through lambda closures, IfExp, BoolOp, comprehensions, yield/yield-from and walrus aliases. Comprehension targets are isolated while walrus bindings follow Python outer-scope semantics. No production use found; this static contract is not runtime isolation.",
         "subject_schema_owner": "NarrativeSubjectRef public factory now owns compact official JSON schema construction.",
         "pytest_temp_path": "153-character default sandbox temp now routes to a 53-character unique checkout temp and is removed on exit.",
         "windows_object_publication": "PermissionError from hardlink now falls back to atomic no-replace same-directory rename; existing content remains hash-verified.",
-        "tests": "Earlier focused contract/unit/integration run: 119 passed in 42.68 seconds; official JSON CLI E2E: 1 passed in 40.48 seconds. Follow-up boundary scanner contract file: 66 passed in 6.47 seconds, independently rerun with the same result; lambda closure escape rejected and lambda-parameter shadowing allowed. Affected Ruff passed. Follow-up push fast smoke: 18 passed in 45.23 seconds; full GitHub Actions CI remains authoritative."
+        "tests": "Earlier focused contract/unit/integration run: 119 passed in 42.68 seconds; official JSON CLI E2E: 1 passed in 40.48 seconds. Final boundary scanner contract file: ROOT 86 passed in 13.28 seconds and independent reviewer 86 passed in 12.96 seconds; affected Ruff passed. Exact full GitHub Actions CI for b1e948276 was not checked."
       },
-      "remaining": "Current post-M2 product deltas across the nine-module snapshot are classified; I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await StockWiki root canonical PWF and RF weekly runtime record reconciliation by their owners, then bind the final report to exact refs."
+      "latest_owner_snapshots": {
+        "StockWiki": {
+          "observed_ref": "master@0450506fc94adbfecd33001c244221a42ba0a00d",
+          "remote": "none-configured",
+          "root_plan_files_last_write_local": {
+            "task_plan.md": "2026-11-08 09:28",
+            "progress.md": "2026-11-08 10:46"
+          },
+          "git_status": "not_confirmed; rev-parse reports inside-work-tree=true and bare=false, but normal and one-shot worktreeConfig=false git status both return 'this operation must be run in a work tree'",
+          "owner_action": "reconcile root canonical PWF and verify worktree state"
+        },
+        "revenue-forecast": {
+          "observed_ref": "main@f2215959d33abc76778342a95d39a8e38191da75",
+          "weekly_run_id": "20261115T084227Z",
+          "weekly_status": "not-ok; T3 suite exit 1",
+          "git_status": "not_confirmed in this harness; weekly manifest and alert contents were read directly",
+          "triplet": {
+            "filing-fetch": "1dfd81836794ec3bf73b41014a98714e97299ae8",
+            "revenue-forecast": "f2215959d33abc76778342a95d39a8e38191da75",
+            "company-wiki": "0e741063f510d5bc1c5921aa192b90fab94b6064"
+          },
+          "failure_summary": "Four FF download E2Es failed at company-wiki ensure, downloads=0; available log does not expose inner ensure cause. Do not attribute to CWP scanner commit b1e948276, which is test-support/contracts only.",
+          "owner_action": "record the run and reconcile canonical RF PWF; preserve run artifacts"
+        }
+      },
+      "remaining": "Current post-M2 product deltas across the nine-module snapshot are classified; I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await StockWiki root canonical PWF/worktree reconciliation and RF weekly runtime result reconciliation by their owners, then bind the final report to exact refs."
     }
   },
   "r4_public_replay_20261114": {

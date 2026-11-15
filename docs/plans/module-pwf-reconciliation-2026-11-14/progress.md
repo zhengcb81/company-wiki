@@ -172,3 +172,12 @@
 - FF 最终 `c2aec91`、ET `c777bf1`、RF `1ea50082`、SID `85f39ec`、Dashboard `4477eb9` 的 live remote 已核验分别等于本地 tip。RFAudit 最终 `50d8ab6` 本地 clean、无 remote，交接/review 位于本计划 review 目录。
 - RF 仓的 scheduled `assurance/runs/daily_alert.jsonl` 在本轮出现一条 2026-11-14 运行记录（outcome `not-ok`）；已识别为运行数据并保留，未暂存或带入收据提交。
 - 当前阶段：PWF 入口与 safe-cleanup disposition 已完成；保留目录因 active/evidence/跨 owner 理由未全部删除，不能称“物理上每仓只剩一个目录”。唯一阻塞是 CWP 远端发布；主业务 goal `du11-source-closure-2026-10-18` 继续 paused。
+# 2026-11-15 — CWP 边界扫描器第二轮表达式/作用域修复
+
+- 从第一轮 lambda 闭包修复继续审查表达式出口。最小反例证明外部模块对象仍可通过条件表达式、`and/or`、lambda 条件体、容器/生成器推导、`yield/yield from` 和 walrus alias 漏过简单名字扫描；测试先 RED，再改 `_reference` 与 visitor 处理转 GREEN。
+- 独立复审进一步发现推导式循环变量泄漏到外层作用域会错误遮蔽已有模块绑定，并可能造成假阴性。修复按 Python 作用域分析：首个 iterable 在外层求值，循环目标与其余表达式隔离；循环目标不写回，walrus 绑定按语义向外层传播，并保守考虑推导式零次/多次运行。
+- 正反例覆盖模块对象直接/嵌套表达式逃逸、lambda 参数遮蔽、公开 callable/opaque-port 通过、`and/or` 常量短路、dict/set/list/generator comprehensions、yield、yield-from、walrus alias、零迭代保留旧绑定与循环变量不外泄。
+- 最终 `tests/contract/test_layer_public_boundaries.py`：ROOT **86 passed / 13.28 秒**；独立 reviewer 对最终文件复跑 **86 passed / 12.96 秒**；受影响 Ruff 通过。reviewer 未改文件，结论 PASS。提交 `b1e948276860ee0386e47253ce32479a4fa41919` 已推送，fresh `ls-remote`、本地 HEAD 与 `origin/master` 一致。完整 GitHub Actions CI 未核验；本改动仅限测试支持扫描器和合同测试，不改生产代码。
+- 外仓只读快照：RF `main@f2215959` 的 11-15 weekly run `20261115T084227Z` 为 T3 `not-ok`，四个 FF 下载 E2E 在 `company-wiki ensure` 阶段退出 1，`downloads=0`；可见日志没有 ensure 内部原因。triplet 为 FF `1dfd818…` / RF `f2215959…` / CWP `0e741063…`，所以这不是本次 CWP 测试扫描器提交的回归证据。RF owner 需把两条 tracked weekly 文件与失败原因写入 RF canonical PWF。
+- StockWiki `master@0450506`，未配置 remote；根 `task_plan.md`、`progress.md` 修改时间仍为 11-08 09:28/10:46。当前只读 `git status` 返回 “must be run in a work tree”，不能据此断言干净；StockWiki owner 在对齐根 PWF 时应核对 Git 工作树并记录。ROOT 未修改 StockWiki/RF。
+- 后续仍是有限 M3 收口：待两位 owner 补齐 canonical PWF/工作树事实，ROOT 再绑定九仓精确 refs 与已通过证据。CWP 当前模块边界静态合同有明确范围，不声称是运行时隔离；完整远端 CI 也仍需精确 SHA 结果。
