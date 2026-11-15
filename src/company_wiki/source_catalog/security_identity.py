@@ -1214,13 +1214,28 @@ class SecurityIdentityResolver:
                 eligible_exact,
             )
         if len(eligible_exact) > 1:
+            # Exact candidates that span markets yet all carry the SAME verified
+            # issuer link are one dual-listed issuer; name that case so callers
+            # can prompt for a market, but still fail closed — the candidate set
+            # is returned uncollapsed and no side is picked silently. Same-market
+            # multiplicity, or cross-market candidates without a shared link,
+            # keep the generic reason.
+            link_ids = {item.issuer_link_id for item in eligible_exact}
+            markets = {item.market for item in eligible_exact}
+            reason = (
+                "cross_market_dual_listing_requires_market_selection"
+                if len(markets) > 1
+                and None not in link_ids
+                and len(link_ids) == 1
+                else "multiple_verified_exact_identities"
+            )
             return self._result(
                 query,
                 normalized_query,
                 market_hint,
                 exchange_hint,
                 IdentityStatus.AMBIGUOUS,
-                "multiple_verified_exact_identities",
+                reason,
                 eligible_exact,
             )
         linked_exact = self._linked_exact_candidates(

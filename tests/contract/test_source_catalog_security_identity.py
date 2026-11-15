@@ -756,3 +756,109 @@ def test_ascii_suffixes_require_a_word_boundary_not_a_glued_tail(tmp_path):
 
     assert vsa.status is IdentityStatus.RESOLVED and vsa.resolved.security_id == "VSA"
     assert glued.status is IdentityStatus.RESOLVED and glued.resolved.match_basis == "alias_exact"
+
+
+def test_cross_market_dual_listing_exact_candidates_get_the_named_reason(tmp_path):
+    """CWP-1 A2: 'BABA' hits the HK alias and the US ticker exactly; both are
+    one issuer through a verified link. The response names that dual-listing
+    shape so callers can ask for a market, but never picks a side."""
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    lei = "5493001NTNQJDH60PM02"
+    store = SecurityMasterStore(tmp_path / "dual-listing-master")
+    store.write_market(
+        "HK",
+        (_record(name="示例集团－Ｗ", market="HK", exchange="HKEX",
+                 ticker="09988", aliases=("BABA",), identifiers={"lei": lei}),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Example Group Holding Ltd", market="US", exchange="NYSE",
+                 ticker="BABA", identifiers={"lei": lei}),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("HK", "US"))).identify("BABA")
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "cross_market_dual_listing_requires_market_selection"
+    assert result.resolved is None
+    assert [(item.market, item.exchange, item.ticker) for item in result.candidates] == [
+        ("HK", "HKEX", "09988"),
+        ("US", "NYSE", "BABA"),
+    ]
+    link_ids = {item.issuer_link_id for item in result.candidates}
+    assert len(link_ids) == 1 and None not in link_ids
+
+
+def test_market_hint_still_resolves_one_side_of_the_dual_listing(tmp_path):
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    lei = "5493001NTNQJDH60PM02"
+    store = SecurityMasterStore(tmp_path / "dual-listing-hint-master")
+    store.write_market(
+        "HK",
+        (_record(name="示例集团－Ｗ", market="HK", exchange="HKEX",
+                 ticker="09988", aliases=("BABA",), identifiers={"lei": lei}),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/hk",),
+    )
+    store.write_market(
+        "US",
+        (_record(name="Example Group Holding Ltd", market="US", exchange="NYSE",
+                 ticker="BABA", identifiers={"lei": lei}),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/us",),
+    )
+    resolver = SecurityIdentityResolver(store.load(markets=("HK", "US")))
+
+    us = resolver.identify("BABA", market="US")
+    hk = resolver.identify("BABA", market="HK")
+
+    assert us.status is IdentityStatus.RESOLVED and us.resolved.security_id == "BABA"
+    assert hk.status is IdentityStatus.RESOLVED and hk.resolved.security_id == "09988"
+
+
+def test_same_market_exact_multiplicity_keeps_the_generic_reason(tmp_path):
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "same-market-multi-master")
+    store.write_market(
+        "HK",
+        (
+            _record(name="Issuer One Holdings", market="HK", exchange="HKEX",
+                    ticker="00001", aliases=("SHARED",)),
+            _record(name="Issuer Two Holdings", market="HK", exchange="HKEX",
+                    ticker="00002", aliases=("SHARED",)),
+        ),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/hk",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("HK",))).identify("SHARED")
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "multiple_verified_exact_identities"
+
+
+def test_cross_market_exact_multiplicity_without_shared_link_keeps_generic_reason(
+    tmp_path,
+):
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver, SecurityMasterStore
+
+    store = SecurityMasterStore(tmp_path / "unlinked-cross-market-master")
+    store.write_market(
+        "CN",
+        (_record(name="万科A", market="CN", exchange="SZSE",
+                 ticker="000002", aliases=("万科",)),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/cn",),
+    )
+    store.write_market(
+        "HK",
+        (_record(name="万科企业", market="HK", exchange="HKEX",
+                 ticker="02202", aliases=("万科",)),),
+        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/hk",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("CN", "HK"))).identify("万科")
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "multiple_verified_exact_identities"

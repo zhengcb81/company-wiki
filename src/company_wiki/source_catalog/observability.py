@@ -172,6 +172,9 @@ REASONS: dict[str, str] = {
     # Registered 2026-09-15/16 with the meaning their call sites give them.
     "one_verified_exact_identity": "exactly one verified exact identity candidate",
     "multiple_verified_exact_identities": "more than one verified exact identity candidate",
+    # CWP-1 A2 (2026-11-15): refinement of the ambiguous exact-multi case where
+    # the candidates span markets but share one verified issuer link.
+    "cross_market_dual_listing_requires_market_selection": "exact candidates are one dual-listed issuer across markets; a market must be selected",
     "exact_identity_conflicts_with_market_or_exchange_hint": "exact identity contradicts the market/exchange hint",
     "no_verified_identity_candidate": "no identity candidate could be verified",
     "one_unique_strong_fuzzy_identity": "exactly one unique strong fuzzy identity match",
@@ -695,6 +698,7 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     # resolution -> identity, reuse decisions -> resolution, policy binding -> freshness)
     "one_verified_exact_identity": ("identity",),
     "multiple_verified_exact_identities": ("identity",),
+    "cross_market_dual_listing_requires_market_selection": ("identity",),
     "exact_identity_conflicts_with_market_or_exchange_hint": ("identity",),
     "no_verified_identity_candidate": ("identity",),
     "one_unique_strong_fuzzy_identity": ("identity",),
