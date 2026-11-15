@@ -1,0 +1,77 @@
+{
+  "schema_version": "owner-handoff/1.0",
+  "package_id": "OWNERPKG-CWP-CANDIDATES-01",
+  "package_file": "C:/Users/郑曾波/Projects/investment-dashboard/handoffs/owner-requests/company-wiki/CANDIDATES-FIX-01.md",
+  "owner_repo": "company-wiki",
+  "status": "delivered_pending_mainline_merge",
+  "branch": "codex/cwp1-identity-suffix-20261115",
+  "worktree": "C:/Users/郑曾波/Projects/company-wiki-cwp1-identity-20261115",
+  "base_commit": "ac8841c55cb416c63f6d426dfb7c8edcd68729a2",
+  "release_tag_or_commit_for_dashboard": "8de23487113bc8316b45bd5c8ca6a2680be6b333",
+  "release_commit_note": "40-digit commit containing all implementation, acceptance evidence and the independent review; handoff documents are a later docs-only commit on the same branch (avoids self-reference). Dashboard consumes by commit, not branch name.",
+  "commits": [
+    {"sha": "7fa16a213", "subject": "fix(identity): canonicalize corporate suffixes on exact name match"},
+    {"sha": "7595473f2", "subject": "feat(identity): name the cross-market dual-listing ambiguity reason"},
+    {"sha": "a311c3127", "subject": "docs(pwf): record CWP1 identity-matching closeout"},
+    {"sha": "8cdff1e5e", "subject": "docs(pwf): enumerate the CWP1 identity test selection (F-01 erratum)"},
+    {"sha": "4b0fc3fe5", "subject": "test(identity): add FF/RF linkage acceptance evidence for Alibaba (CWP-1)"},
+    {"sha": "8de234871", "subject": "docs(pwf): record independent review and close F-R5 evidence gap (CWP-1)"}
+  ],
+  "pwf_files": [
+    "docs/plans/cwp1-identity-20261115/task_plan.md",
+    "docs/plans/cwp1-identity-20261115/progress.md",
+    "docs/plans/cwp1-identity-20261115/findings.md",
+    "docs/plans/cwp1-identity-20261115/evidence/README.md",
+    "docs/plans/cwp1-identity-20261115/INDEPENDENT_REVIEW.md"
+  ],
+  "acceptance": {
+    "section_5_1": {
+      "status": "delivered",
+      "summary": "Alibaba Group Holding Limited -> resolved US BABA (official_name_exact); 09988 -> resolved HK 09988; BABA -> ambiguous with named cross_market_dual_listing_requires_market_selection and 2 named candidates; 4 explicit --market probes all resolve uniquely. No fuzzy candidate set.",
+      "evidence": "evidence/identify-*.stdout.json, evidence/identify-*_market_*.stdout.json"
+    },
+    "section_5_2": {
+      "status": "delivered",
+      "summary": "fetch_filing.py reuse_only for Alibaba 20-F FY2025: master -> exit 2 identity_error / fuzzy_candidates_require_user_selection; fixed lane -> exit 0 source_candidate / reused_existing / download_events=0 (sha256 36daec0c...). BABA without market retained as named failure sample.",
+      "evidence": "evidence/ff-*.stdout.json, evidence/baseline-master/master-ff-20f-reuse.stdout"
+    },
+    "section_5_3": {
+      "status": "delivered_with_named_residual_gaps",
+      "summary": "route3-hk-fy2025-reuse -> exit 0 found_capture_ready. Remaining five routes fail with named downstream causes (local_prepare schema 1.0/1.1 contract, acquisition_validation_failed), zero downloads. Attribution control: identical results on unfixed master, so route3 success is NOT attributable to this package and no RF regression was introduced.",
+      "evidence": "evidence/rf-routes/alibaba-routes-after-fix.json, evidence/rf-routes-master/alibaba-routes-master.json"
+    },
+    "section_5_4": {
+      "status": "delivered",
+      "summary": "command/stdout/stderr/exit files for every probe; failure samples preserved unmodified; replay scripts and tmp fixture copies under evidence/replay/.",
+      "evidence": "evidence/README.md"
+    }
+  },
+  "independent_review": {
+    "status": "approved",
+    "report": "docs/plans/cwp1-identity-20261115/INDEPENDENT_REVIEW.md",
+    "open_p1": 0,
+    "open_p2": 0,
+    "p3_closed": ["F-R4", "F-R5", "F-R6", "F-R7"]
+  },
+  "budget": {"downloads": 0, "models": 0, "network_calls": 0, "api_cost_usd": "0.00"},
+  "redlines": {
+    "dashboard_adapter_unchanged": true,
+    "registered_entities_unchanged": true,
+    "candidate_data_deleted": false,
+    "production_config_written": false,
+    "pushed": false,
+    "merged_to_master": false
+  },
+  "not_delivered": [
+    {"id": "RF-route1-local-prepare", "reason": "FF ff_local_source_prepare.py sends identity_scope/issuer_link_id with schema_version=1.0 while CWP resolver.py:591 requires 1.1. FF<->CWP contract-layer gap, outside this package write scope."},
+    {"id": "RF-route2-4-5-6", "reason": "company-wiki ensure exits 1 with acquisition_validation_failed, provider_started=false. Existing ensure/metadata-layer gap (CWP-2 / FF1 catalog lane scope), not identity resolution."}
+  ],
+  "merge_handoff_task": {
+    "section": "8-3 case 2 (explicit handoff, no forced merge)",
+    "condition": "main working tree has in-flight PWF WIP (module-pwf-reconciliation-2026-11-14) and codex/ff1-catalog-repair-20261115 lane B4 is not yet closed",
+    "task": "After the in-flight mainline PWF is closed and ff1-catalog lane is merged or confirmed non-conflicting, merge branch codex/cwp1-identity-suffix-20261115 into master; record the merge commit and regression result in PWF progress.md",
+    "trigger": "company-wiki mainline owner (operator)",
+    "dashboard_consumes": "8de23487113bc8316b45bd5c8ca6a2680be6b333 until the merge is done"
+  },
+  "next_action": "Dashboard D00: rerun the Alibaba FF drill and RF six collection routes against the release commit; then notify m5 / RF INPUT-AUTHOR-01 that the Alibaba half is unblocked. Route the two named residual gaps to FF owner and CWP FF1 lane respectively."
+}
