@@ -211,9 +211,10 @@ class SourceAcquisitionService:
         from .resolver import UNKNOWN_PUBLISHED_DATE_REASONS
 
         result = decision.result
-        resolution = result.resolution
+        resolution = getattr(result, "resolution", None)
         if (
             result.status is not AcquisitionStatus.AMBIGUOUS
+            or resolution is None
             or resolution.reason not in UNKNOWN_PUBLISHED_DATE_REASONS
         ):
             return decision
