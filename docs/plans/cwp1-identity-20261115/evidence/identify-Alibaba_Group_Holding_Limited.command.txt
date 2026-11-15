@@ -1,0 +1,1 @@
+PYTHONUTF8=1 PYTHONPATH=C:/Users/郑曾波/Projects/company-wiki-cwp1-identity-20261115/src C:/Miniconda/python.exe -B -m company_wiki.source_catalog.cli --config C:/Users/郑曾波/Projects/company-wiki-cwp1-identity-20261115/config/source_catalog.yaml identify --query "Alibaba Group Holding Limited"

@@ -183,7 +183,8 @@ route3 两边都 `exit=0 / found_capture_ready`，其余 5 条失败原因逐字
 **不强行并线**，改为显式交接：
 
 > `OWNERPKG-CWP-CANDIDATES-01` 分支 `codex/cwp1-identity-suffix-20261115`
-> head_commit `<见 handoff.json release_tag_or_commit_for_dashboard>` 通过独立重审
+> 通过独立重审（`INDEPENDENT_REVIEW.md`，reviewer_status=approved，0 OPEN P1/P2）
 > 后，**待主工作区在途 PWF 收口、且 ff1-catalog lane 并入/明确不冲突后，由主线
 > 任务执行并线**；触发人：company-wiki 主线 owner（操作者）。
-> Dashboard 侧消费以该候选 commit 为准（40 位 SHA，可 git rev-parse）。
+> Dashboard 侧消费以 handoff.json 的 `release_tag_or_commit_for_dashboard`
+> 为准（40 位 SHA，可 git rev-parse；不在此处写死以免文档自指）。

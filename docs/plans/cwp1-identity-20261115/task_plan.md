@@ -47,8 +47,9 @@
 | 7 | §5.2 FF reuse_only 联动（阿里 20-F）+ master 基线对照 | done |
 | 8 | §5.3 RF 六路线联动 + 六路线 master 归因对照 | done |
 | 9 | §5.4 证据索引/失败样本保留 + 提交 | done |
-| 10 | §8-1 独立 agent 重审（0 OPEN P1/P2 才交接） | 见 findings |
-| 11 | §8-3 并线或明示交接 + handoff | 见 findings |
+| 9b | F-R5 闭环（主探针命令文件 + 复跑夹具落盘） | done |
+| 10 | §8-1 独立 agent 重审（approved / 0 OPEN P1/P2） | done |
+| 11 | §8-2/§8-3 PWF 收口 + 明示交接 + handoff | done |
 
 ## 本轮追加节点（2026-11-15 续作，施工包全文执行）
 

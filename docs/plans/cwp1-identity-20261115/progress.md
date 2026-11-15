@@ -70,7 +70,18 @@
 - [节点 9] §5.4 证据: 每条探针落盘 command/stdout/stderr/exit；失败样本未改写；
   汇总 evidence/README.md；总 < 300KB 全量落盘。夹具不进 git，生产配置零改动。
   验证: find 清单 + du。遗留: 无。
-- [节点 10/11] §8-1 独立重审与 §8-3 交接: 主工作区有在途 WIP、ff1 lane 未收口，
-  按 §8-3 情形 2 不并线，PWF 写显式交接任务 + handoff（含 40 位 release commit）。
-  详见 findings.md 与 handoff 文档。
+- [节点 10] §8-1 独立重审: 派未参与实现的独立审查 agent 只读重审，报告落盘
+  `INDEPENDENT_REVIEW.md`：`reviewer_status=approved`、**0 OPEN P1/P2**、
+  4 条 P3 全 CLOSED（F-R4 汇总字段口径 / F-R5 主探针缺命令文件 /
+  F-R6 run.log 中间态 / F-R7 handoff SHA 待落盘）。§5 四项全部 delivered，
+  红线五条全通过，无 mock 冒真实证据。P3 随 handoff 交回。
+  验证: 报告逐条对照 + 抽查 JSON 字段。遗留: F-R5/F-R7 在节点 11 闭环。
+- [节点 9b] F-R5 闭环: 为 3 个主 identify 探针补 `.command.txt`（7/7 齐全），
+  并把 3 个复跑脚本与 2 个 tmp 夹具副本落盘 `evidence/replay/`，使
+  README §5.4「每条探针落盘 command」字面成立、复跑自包含。
+  验证: ls 清单。遗留: 无。
+- [节点 11] §8-2/§8-3 收口: `findings.md` 的 SHA 占位符改为指向 handoff.json
+  （避免文档自指）；按 §8-3 情形 2 不并线，落盘 handoff 含 40 位
+  `release_tag_or_commit_for_dashboard` 与显式并线交接任务。
+  详见 `handoff.md` / `handoff.json`。
 
