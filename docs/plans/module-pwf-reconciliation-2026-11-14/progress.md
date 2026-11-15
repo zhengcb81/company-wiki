@@ -1,5 +1,13 @@
 # 进度
 
+## 2026-11-15 15:42 UTC — CWP lambda 闭包边界盲区修复并推送
+
+- 独立架构复核指出边界扫描器的 lambda visitor 只查默认参数，未检查表达式结果；`return lambda: du` 可将导入的外部模块对象藏在闭包里，绕过普通 `return du` 的模块对象逃逸规则。先添加 RED 用例确认失败，再在 `_local_body` 检查 lambda 结果，同时保留参数遮蔽控制例 `lambda du: du`。
+- 修复限于 `tests/support/layer_boundary_scan.py` 与 `tests/contract/test_layer_public_boundaries.py`，未改生产模块代码。最终定向合同文件 **66 passed / 6.47s**；独立审查 agent 对最终修复单独复跑同命令也是 **66 passed / 6.47s**；受影响 Ruff 通过。
+- 同次独立复核检查 `worker_process` 与 OCR 的动态 factory 入口，确认当前生产构造由所属模块组装并指向 owner-local 实现，未找到具体跨包穿透。任意运行时模块字符串无法由静态 AST 扫描完整证明；记录为方法限制，不当成已发现生产缺陷或开展无边界重构。
+- 代码提交 `07d48118022e660d65e3218594bfb02085710caf` 已通过正常 `git push origin master` 推到 `origin/master`；push 前 fast smoke **18 passed / 45.23s**，GitHub Actions 完整 CI 仍以该精确 HEAD 的远端运行结果为准。PWF 随后按此 ref 对齐并另行提交推送。
+- M3 仍未关闭：StockWiki 根 canonical PWF、RF 两项 weekly runtime 结果仍由各自 owner 对齐；ROOT 之后绑定九模块确切 refs 出具最终报告。其余外仓只读。
+
 ## 2026-11-15 — M3 当前 HEAD 与 PWF 第二轮核对
 
 - 将旧的 post-M2 路径筛选按源码/测试/计划重新分类，修正“Dashboard 缺 final receipt”的过期判断：Dashboard START_HERE 与 receipt carrier 已在 `3f83bb5` 收口；本地缓存 `origin/main` 同为 3f83。Owner 记录含此前 fresh remote 验证，本轮没有另发网络查询。

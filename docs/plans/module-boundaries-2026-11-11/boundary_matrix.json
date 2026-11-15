@@ -359,17 +359,17 @@
   },
   "m3_current_head_review": {
     "date": "2026-11-15",
-    "observed_at_utc": "2026-11-15T14:33:55Z",
+    "observed_at_utc": "2026-11-15T15:49:05Z",
     "status": "IN_PROGRESS",
-    "scope_note": "M2 E01-E09 remains CLOSED for the exact refs below; this M3 ledger is a separate post-M2 current-head audit. No external repository was modified or tested by ROOT in this pass.",
+    "scope_note": "M2 E01-E09 remains CLOSED for the exact refs below; this M3 ledger is a separate post-M2 current-head audit. CWP was refreshed at 15:49 UTC and its remote confirmed by push; non-CWP refs/statuses remain the last local snapshot read at 15:38 UTC, not fresh remote queries. No external repository was modified or tested by ROOT in this pass.",
     "reviewed_owner_heads": [
       {
         "repository": "company-wiki",
         "m2_ref": "c6189c623f6ec30e2a1a1059499e78c8ffe5b443",
-        "current_ref": "master@91137e2579c9990e79b1efbdcd9d7d42f5128fd2",
-        "remote_ref": "origin/master@91137e2579c9990e79b1efbdcd9d7d42f5128fd2",
+        "current_ref": "master@07d48118022e660d65e3218594bfb02085710caf",
+        "remote_ref": "origin/master@07d48118022e660d65e3218594bfb02085710caf",
         "changed_product_sources": 24,
-        "disposition": "reviewed; dependencies stay within CWP or use declared public DU/WorkBudget values; current boundary regression suite remains green"
+        "disposition": "reviewed; dependencies stay within CWP or use declared public DU/WorkBudget values; 07d481180 adds only scanner support and boundary-contract tests (no product source change), closes the lambda-closure module escape, and was independently rechecked; 66 boundary contract tests pass, Ruff passes, push smoke 18 passes. CWP remote was confirmed by push; other module refs in this matrix remain the last local snapshot"
       },
       {
         "repository": "filing-fetch",

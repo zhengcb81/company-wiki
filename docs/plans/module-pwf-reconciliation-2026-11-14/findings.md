@@ -1,5 +1,13 @@
 # 调查发现
 
+## 2026-11-15 — 边界扫描器 lambda 闭包漏检已由 TDD 关闭
+
+- 独立复核发现扫描器的 `visit_Lambda` 处理了默认参数，却没有把 lambda expression body 当作潜在的逃逸值检查。因此 `from company_wiki import document_understanding as du; return lambda: du` 能把外部模块对象藏入闭包；常规 `return du` 已被扫描器拒绝。
+- 最小负例先 RED；修复让 `_local_body` 在 lambda 参数绑定仍生效时检查 expression body。参数同名遮蔽反例 `lambda du: du` 仍通过，防止把合法本地参数误判成导入模块引用。
+- 最终 `tests/contract/test_layer_public_boundaries.py` **66 passed / 6.47s**，独立 reviewer 对同一最终代码复跑 **66 passed / 6.47s**；Ruff 通过。只改扫描器支持代码与契约测试，无生产代码改动。
+- 对动态 factory 的具体入口做只读审查：`worker_process` 和 OCR 当前生产构造均从所属模块内组装且使用 owner-local factory，没有发现当前跨包穿透。静态扫描不能证明任意运行时字符串拼接安全；这是明确的方法边界，不是生产缺陷证据。
+- 修复 commit `07d48118022e660d65e3218594bfb02085710caf` 已正常推送，push smoke 18 passed / 45.23s。M3 仍等待 StockWiki 与 RF owner 更新各自 PWF/weekly 运行记录，再绑定九模块最终 refs。
+
 ## 2026-11-15 — M3 当前 HEAD 第二轮核对（取代开工快照的待办判断）
 
 - 精确的 M2→当前源码 diff 为：CWP 24 个 `src/` 文件；FF 0 个产品源文件、1 个测试文件；RF 1 个报告源文件及1个测试；StockWiki 4 个产品模块并带 owner 测试/fixture；Dashboard 2 个产品源文件，另有 UI 测试和测试依赖；RFAudit 没有计划/证据目录以外的产品源码变化。旧段落中的 `25/7/4/5/1` 是第一轮宽泛“代码形态路径”筛选，不能当成产品源码计数。

@@ -8,9 +8,9 @@
 
 Dashboard 的三张旧续核卡已对照其 owner handoff 重新分类：C01 证据包已吸收进 main（`c8939e5`）；B-real 预览模块适配仍未执行，旧基线需对当前 `main@3f83bb5` 重做路径对账；B03 是仍未完成的证据审查收口，不是产品接口缺陷。后两项留在 Dashboard owner 侧，不阻塞本仓 M3；细节见模块边界计划的 `reconciliation.md`。
 
-- **解耦范围：** M2/E01–E09 继续对当时冻结接口版本有效；不能据此声称所有当前代码已彻底解耦。M3 已完成九模块当前可识别产品差异的逐项归类，并登记 I10/I11/I12；CWP 首组 TDD 修复覆盖动态 `eval/exec/compile` 及内建命名空间字典查找绕行、`NarrativeSubjectRef` schema owner、pytest 默认长临时路径和 Windows 硬链接拒绝后的原子发布 fallback。I10 的隔离 publish/readback、I11 的 IQS C38/C5 120/296 项回归已有 owner 证据，无需重复回放。M3 仍开放，待 StockWiki 根 PWF 与 RF 两项 weekly runtime 结果由各自 owner 对齐，并完成精确版本绑定。
-- **本组验收：** 短路径、对象存储、Subject owner、层边界和官方 JSON batch preparation 最新定向合同共 **119 passed / 42.68 秒**；真实 CLI 官方 JSON 摘要/发布/读取/缓存复用在对象存储修复后 **1 passed / 40.48 秒**；Ruff 通过。没有重跑整套历史矩阵，也不把已有 owner 通过项重复派发。
-- **发布：** CWP 代码 commit `3bc4ed86a` 与后续 PWF receipt carrier `f175e6c37` 均已推送；代码 push fast smoke **18 passed / 15.06 秒**，最终本地 master 与 origin/master 相等。GitHub Actions 完整 CI 未在本地预判。
+- **解耦范围：** M2/E01–E09 继续对当时冻结接口版本有效；不能据此声称所有当前代码已彻底解耦。M3 已完成九模块当前可识别产品差异的逐项归类，并登记 I10/I11/I12；CWP 首组 TDD 修复覆盖动态 `eval/exec/compile` 及内建命名空间字典查找绕行、`NarrativeSubjectRef` schema owner、pytest 默认长临时路径和 Windows 硬链接拒绝后的原子发布 fallback。后续边界扫描器审查又发现 lambda 闭包可返回外部模块对象；已用 RED→GREEN 补上闭包体逃逸检查并保留参数遮蔽控制例。I10 的隔离 publish/readback、I11 的 IQS C38/C5 120/296 项回归已有 owner 证据，无需重复回放。M3 仍开放，待 StockWiki 根 PWF 与 RF 两项 weekly runtime 结果由各自 owner 对齐，并完成精确版本绑定。
+- **本组验收：** 前一组短路径、对象存储、Subject owner、层边界和官方 JSON batch preparation 定向合同 **119 passed / 42.68 秒**；真实 CLI 官方 JSON 摘要/发布/读取/缓存复用 **1 passed / 40.48 秒**。本次扫描器合同文件 **66 passed / 6.47 秒**（独立复核另跑同文件也为 66 passed / 6.47 秒）；Ruff 通过。推送 fast smoke **18 passed / 45.23 秒**。没有重跑整套历史矩阵，也不重复派发已有 owner 通过项。
+- **发布：** 后续扫描器测试/支持代码 commit `07d48118022e660d65e3218594bfb02085710caf` 已推送到 `origin/master`，push 响应将远端从 `24502ace5` 更新到该提交；本地 `master`、`origin/master` 与推送后的 HEAD 一致。GitHub Actions 完整 CI 仍以精确 HEAD 运行结果为准，未在本地预判。
 - **原业务主线：** 正式摘要仍是 `BUSINESS_SUMMARY_CHANGES_REQUIRED`；下一业务任务仍是修正冗余片段和主体/计划归属、按冻结样本验真，然后再复验恢复及 RF 实际采用。固定公司循环保持暂停；本轮架构处理不自动恢复它。
 
 当前实施入口为[模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)和本总控 PWF；本文件下方 11-14 及更早章节是历史收据，按日期读取，不覆盖本节。

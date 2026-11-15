@@ -2,7 +2,7 @@
 
 > **2026-11-15 状态校正：** 阶段 1/2 的“完成”仅指最初七条 owner lane 的交付，不代表九个范围模块、owner PWF 和在途任务全部收口。总续办仍为 **IN_PROGRESS**：StockWiki/IQS 仍有 owner 任务；StockWiki 当前 `master@0450506` 的根 `task_plan.md` 尚未跟上 11-14 并线内容；RF 有两项 tracked weekly runtime 文件待 owner 记录；FF 的 F-08 仍开放。Dashboard 的 START_HERE 与 receipt carrier 已更新至 `3f83bb5`，不得再写成待补。阶段 3 也未达成“物理上每模块只留一个目录”。本条以 11-15 第二轮只读复核为准，见 `findings.md`、`progress.md` 和 module-boundaries M3 表；更早快照保留为历史。
 
-> **2026-11-15 M3 当前状态：** CWP 首个 TDD 修复切片已推送：`3bc4ed86a` 代码、`f175e6c37` M3 回执、当前 `master@origin/master=91137e257`；119 项定向合同测试、真实 CLI E2E、Ruff 和 push fast smoke 均有对应记录。第二轮逐仓复核已把九模块可识别产品差异分类，登记 I10/I11/I12。IQS `master@3d9243c` 上 C38/C5 120 项、固定核心组合 296 项和 IQS→StockWiki 53 题 publish/readback 已给出 I10/I11 互操作证据；活动 `codex/iqs-manifest-delivery-01@ecb4a5d` 截至 14:33 UTC 只含 PWF/状态/证据文件，不改产品实现，故不重复派发相同回放。M3 仍开放：StockWiki 根 canonical PWF 与 RF 两项 weekly runtime 结果需各自 owner 对齐，随后 ROOT 绑定最终精确 refs。Dashboard 收据 `3f83bb5` 已收口，不再列为待办；外仓仍保持只读。详见 module-boundaries task plan/matrix 与本计划 `findings.md`、`progress.md`。
+> **2026-11-15 M3 当前状态：** CWP TDD 修复已推送至 `master@origin/master=07d48118022e660d65e3218594bfb02085710caf`。原修复切片 `3bc4ed86a` 的 119 项定向合同、真实 CLI E2E 与 Ruff 记录仍有效；后续新增 lambda 闭包逃逸负例及参数遮蔽控制例，最终边界合同文件 66 项通过、独立复跑 PASS、push fast smoke 18 项通过。第二轮逐仓复核已把九模块可识别产品差异分类，登记 I10/I11/I12。IQS `master@3d9243c` 上 C38/C5 120 项、固定核心组合 296 项和 IQS→StockWiki 53 题 publish/readback 已给出 I10/I11 互操作证据；活动 `codex/iqs-manifest-delivery-01@ecb4a5ddf6` 在 15:38 UTC 本地快照中仍只有 PWF/状态/证据变化、没有产品源码差异；这不是新鲜远端查询，故不重复派发相同回放。M3 仍开放：StockWiki 根 canonical PWF 与 RF 两项 weekly runtime 结果需各自 owner 对齐，随后 ROOT 绑定最终精确 refs。Dashboard 收据 `3f83bb5` 已收口，不再列为待办；外仓仍保持只读。详见 module-boundaries task plan/matrix 与本计划 `findings.md`、`progress.md`。
 
 ## 目标
 
@@ -101,6 +101,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 
 - 本计划启动续办时，`master` 基线 HEAD 为 `66c97834`（当时相对缓存 `origin/master` ahead 6）；后续七卡收尾序列到 `f58011ddd`。M3 新代码 `3bc4ed86a` 与专属 PWF 回执 `f175e6c37` 已正常推送；随后总控 PWF 对齐更新也正常推送。每次推送后均核对本地 refs 相等。独立 `ls-remote` 曾因本机 `getaddrinfo() thread failed to start` 失败，不能把它称为 fresh-read；远端证据来自 push 响应与推送后本地 refs。11-14 Mimosa L3 拦截保留为历史状态；11-15 本次 push 未被该门拦截。
 - 初次 closeout 清理快照中 tracked 源码无已知产品代码差异；当时 tracked 改动仅为本计划的 `dispatch.md`、`task_plan.md`、`progress.md`、`findings.md` 与移除过时的一次性 `.tmp-build-registry.py`。提交四份新增收据后，2026-11-15 复测 `git ls-files -o --exclude-standard` 共 23,334 项：`.mimosa/` 10,010、`.planning/` 13,180、`docs/` 143、`.workbuddy-ai/` 1。按用途逐组分类，不能整体 `git clean`。后续五份 PWF/交接状态更新的提交和推送见本计划 `progress.md` 最新记录。
+- 最新 CWP 代码/测试提交 `07d48118022e660d65e3218594bfb02085710caf` 只改 `tests/support/layer_boundary_scan.py` 与 `tests/contract/test_layer_public_boundaries.py`，没有生产源文件差异；推送成功且 `master`、`origin/master` 对齐。lambda closure RED→GREEN 和独立复跑证据已记入 module-boundaries M3 与本计划 `progress.md` / `findings.md`。
 - 已删除 37 个位于 CWP 根目录、内容及嵌套均为空、mtime 早于 2026-11-01 且不是注册 worktree 的旧 `.tmp*`/`.t*`/长度探测目录，合计释放 0 字节。
 - 已清理 7 个无引用的旧 `.tmp_*.json` 诊断输出（16,301 B）、2 个 11-02 集成测试遗留 `tmp/osred/**/race.json`（20 B），以及 `.tmp-build-registry.py` 一次性 catalog 检查脚本（1,019 B；仅历史审计文档提到，无生产引用）。本次累计释放 17,340 B，另移除空目录 37 个。工具缓存、Mimosa hook 状态、PWF/审查材料和用户数据未批量清理。
 - 后续清理根目录可重建缓存 `.mypy_cache`、`.pytest_cache`、`.ruff_cache`、`__pycache__` 共 1,682 文件/36,929,089 B，以及空 `tmp/pdfs`、`tmp` 两级目录；复查均已不存在。保留 222 MB `.codegraph` 索引、`.venv`、Mimosa 当前状态、历史 PWF/审查证据及用户数据。
