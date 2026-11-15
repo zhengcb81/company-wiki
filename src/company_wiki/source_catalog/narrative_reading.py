@@ -627,6 +627,13 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     def scope_use(native_support, *, table_qualified=False, prepared_owner=None):
         # A carrier stands for all original characters in its native range.
         # This key is exactly the scope later projected to canonical spans.
+        if table_qualified:
+            # TablePurpose already qualified this exact table and selected its
+            # eligible rows with their header/footnote closure. Treating every
+            # row as one prose scope needlessly invokes the general semantic
+            # group path (whose member limit is for joined prose), and can turn
+            # a valid large table into an unresolved source assessment.
+            return "support", "qualified_operating_table", True, "meaningful_fact", False
         if not scope_ready:
             return "unresolved", "source_assessment_incomplete", False, "description", False
         members = tuple(dict.fromkeys(origins.get(uid, uid) for uid in native_support))

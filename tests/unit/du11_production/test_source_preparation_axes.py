@@ -25,7 +25,10 @@ def test_declared_accounting_scope_does_not_reserve_a_passage_fallback():
     text = "现金流量按照会计政策列报。"
     bound = prepare_reading_business_assessment(text, {"relations": []})
     assert bound.passage.use == "context_only"
-    work = WorkBudget(85 * len(text))
+    # The assessment also charges the bounded negative route in the resource
+    # observer; leave room for that real scan instead of testing an obsolete
+    # pre-observer cost estimate.
+    work = WorkBudget(90 * len(text))
     assert prepare_reading_business_assessment(text, {"relations": []}, grammar_work_budget=work) == bound
     assert 0 < work.used < work.max_work_units
 

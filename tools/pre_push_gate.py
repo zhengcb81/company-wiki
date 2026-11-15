@@ -1,7 +1,7 @@
 """Local validation helpers for the GitHub CI fast gate.
 
 Three bounded layers share one script. Commits keep static checks (pre-commit).
-Daily pushes run the fixed shared fast contract set once and defer everything
+Daily pushes run the fixed shared fast regression set once and defer everything
 else to CI. They classify only the changed paths, never build an AST impact
 graph or append affected test files. Authors run change-specific tests during
 implementation. A proven non-runtime range starts no
@@ -175,6 +175,13 @@ DAILY_PUSH_CASES = (
     "tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee",
     "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
     "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+    # CI 43749426185: run only the five corrected unit regressions locally
+    # before push; the full unit inventory remains in GitHub CI.
+    "tests/unit/du11_production/test_actor_context_wiring.py::test_joined_reference_uses_the_scope_before_the_whole_group",
+    "tests/unit/document_understanding_selection/test_reading_table_rows.py::test_large_table_keeps_eligible_rows_with_their_original_context[80]",
+    "tests/unit/document_understanding_selection/test_native_text_page_coverage.py::test_parser_records_text_and_emission_in_existing_single_page_walk[None-planned]",
+    "tests/unit/du11_production/test_source_preparation_axes.py::test_declared_accounting_scope_does_not_reserve_a_passage_fallback",
+    "tests/unit/test_narrative_claim_grounding.py::test_real_paid_response_replays_through_the_actual_decoder",
 )
 
 

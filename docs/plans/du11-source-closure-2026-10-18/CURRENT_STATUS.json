@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T18:58:00Z",
+  "observed_at_utc": "2026-11-15T19:50:00Z",
   "recent_cwp_gate_checkpoint": {
     "date_utc": "2026-11-15",
     "scope": "root PWF documentation-only push classification and pytest-owned Windows scratch cleanup",
@@ -107,6 +107,33 @@
     "push_fixed_smoke": "18 passed in 3.57s",
     "full_github_ci": "not verified",
     "m3_owner_actions_unchanged": true
+  },
+  "recent_cwp_ci_remediation": {
+    "date_utc": "2026-11-15",
+    "source_ci_run": "43749426185",
+    "source_ci_job": "132919838860",
+    "status": "locally_fixed_independent_review_no_blocker_publication_pending_exact_head_ci_pending",
+    "root_cause_categories": [
+      "joined_group_reference_used_a_later_member_scope_containing_an_internal_group_member",
+      "eligible_large_table_was_sent_through_prose_group_member_limit_and_collapsed_to_unresolved",
+      "planned_pdf_test_mocked_private_reader_but_production_called_public_alias",
+      "work_budget_fixture_underestimated_existing_bounded_negative_route_charge",
+      "saved_paid_response_expectation_did_not_include_current_condition_scope_diagnostics"
+    ],
+    "local_validation": {
+      "affected_tests": "236 passed in 19.96s on Python 3.13.9",
+      "mypy": "490 source files passed",
+      "ruff": "passed",
+      "git_diff_check": "passed",
+      "daily_push_smoke": "23 passed in 12.11s; fixed 14-node list",
+      "pytest_cleanup_receipt": "removed=true",
+      "independent_review": "no blocking issue found"
+    },
+    "pre_commit_root_cause": "pre-commit runs static checks only; pytest is not part of commit hooks",
+    "remote_exact_head_ci": "pending",
+    "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
+    "published_commit": null,
+    "full_github_ci": "not verified"
   },
   "next_action": "Finish finite M3 reconciliation: FF owner supplies bounded acquisition_limits and reruns T3; RF owner records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 (8 commits ahead of live origin/main@f2215959, with two tracked weekly-assurance edits); StockWiki owner aligns root task_plan. Elevated read-only status confirms FF and StockWiki tracked files clean and identifies the RF edits; untracked files were not enumerated. ROOT then binds fresh exact refs and owner evidence to the finite report. CWP slice is reviewed and pushed at master@5ae4a60; keep CWP budget contract unchanged. Then resume P1 business-summary work; keep fixed company loop paused.",
   "failure_root_cause_summary": {

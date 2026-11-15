@@ -1,6 +1,6 @@
 # Local static pre-commit checks mirror the CI quality workflow.
 # Pins match CI exactly (ruff 0.15.18, mypy 1.19.0 via the local system).
-# Commits do not run pytest. Daily pushes run the fixed contract smoke once;
+# Commits do not run pytest. Daily pushes run the fixed fast regression smoke once;
 # proven documentation ranges start no tests. Authors run change-specific
 # tests during implementation; CI runs all Unit tests and major nodes cover
 # relevant integration/end-to-end behavior. local_fast_pass proves smoke only.

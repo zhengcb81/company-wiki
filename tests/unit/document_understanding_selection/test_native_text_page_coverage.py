@@ -153,6 +153,9 @@ def test_parser_records_text_and_emission_in_existing_single_page_walk(monkeypat
         return actual_emit(state, number, blocks)
 
     monkeypatch.setattr(parser, "_pdf_text_blocks", read)
+    # Planned scanning uses the public alias imported by narrative_pdf_intent;
+    # patch both names so the test observes the shared native read boundary.
+    monkeypatch.setattr(parser, "pdf_text_blocks", read)
     monkeypatch.setattr(parser, "_emit_pdf_text_units", emit)
     budget = new_document_work_budget()
     try:

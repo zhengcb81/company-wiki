@@ -138,7 +138,11 @@ class _ObservedUnits(Mapping):
 
 
 class SourceOperatingSession:
-    """Own one source's immutable scope bindings, results and work account."""
+    """Own one source's immutable scope bindings, results and work account.
+
+    Analysis-group members are supplied in source order. A joined group's
+    default predecessor scope is the window before its first member.
+    """
 
     __slots__ = (
         "__units", "__work_budget", "__contexts", "__groups", "__owners",
@@ -381,16 +385,25 @@ class SourceOperatingSession:
         return deepcopy(self.__reference_for(uid, window))
 
     def __reference_for(self, uid: str, window: tuple[tuple[str, ...], bool] | None) -> dict[str, Any]:
-        # Cache by the requested target, not only by its analysis owner: two
-        # anchors of one joined window can carry different predecessor scopes.
-        # Missing window denotes unknown scope, and a later explicit window
-        # may legitimately give the same target a different reference result.
-        predecessors, window_complete = self.__antecedents.get(uid, ((), False)) if window is None else window
+        key = self.owner_for(uid)
+        group_members = self.members_for(key)
+        if window is None and len(group_members) > 1:
+            # A joined analysis owner describes the whole source window. Its
+            # external predecessor scope therefore begins before the first
+            # member; later members' windows also contain earlier members of
+            # this same group and are not valid predecessor scopes for it.
+            uid = group_members[0]
+            predecessors, window_complete = self.__antecedents.get(uid, ((), False))
+        else:
+            predecessors, window_complete = (
+                self.__antecedents.get(uid, ((), False)) if window is None else window
+            )
+        # An explicit window can legitimately give the same target a different
+        # result, so retain it in cache identity.
         cache_key = (uid, predecessors, window_complete)
         cached = self.__references.get(cache_key)
         if cached is not None:
             return cached
-        key = self.owner_for(uid)
         if predecessors and not self.__predecessors_are_prior(key, predecessors):
             invalid = {"schema_version": "du11-reference-closure/1", "unit_id": key,
                        "status": "partial", "reference_refs": [], "declaration_refs": [],

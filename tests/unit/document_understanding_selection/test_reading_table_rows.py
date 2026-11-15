@@ -119,6 +119,7 @@ def test_large_table_keeps_eligible_rows_with_their_original_context(body_count)
     assert not pipeline["work"]["exhausted"]
     result = reading._candidates(parsed, pipeline)
     candidates, groups = result[0], result[2]
+    assert result[3]  # eligible table rows remain a complete source assessment
     assert len(groups) == 1
     assert not groups[0]["truncated"]
     assert set(groups[0]["required_context_unit_ids"]) == {parsed.units[0].unit_id, parsed.units[-1].unit_id}

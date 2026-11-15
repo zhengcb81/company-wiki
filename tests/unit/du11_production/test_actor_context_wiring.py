@@ -32,6 +32,30 @@ def test_composed_material_reference_offsets_return_to_original_units():
     assert all(ref['unit_id'] != 'joined' for ref in result['reference_refs'])
 
 
+def test_joined_reference_uses_the_scope_before_the_whole_group():
+    parsed, _, ids = text_case([
+        'Oriole serves this market.',
+        'Beyond this, we have not',
+        'started shipments.',
+    ])
+    session = SourceOperatingSession(
+        {unit.unit_id: unit for unit in parsed.units},
+        work_budget=WorkBudget(100_000),
+        groups={'joined': tuple(ids[1:])},
+        antecedents={
+            ids[1]: ((ids[0],), True),
+            ids[2]: ((ids[0], ids[1]), True),
+        },
+    )
+
+    first_member = session.reference(ids[1])
+    later_member = session.reference(ids[2])
+
+    assert first_member['status'] == 'unique'
+    assert later_member == first_member
+    assert first_member['required_original_unit_ids'] == (ids[0],)
+
+
 @pytest.mark.parametrize('nested', [False, True])
 def test_actual_metadata_turn_boundary_prevents_borrowing_previous_business(nested):
     parsed, _, ids = text_case(['Oriole serves this market.', 'Beyond this, we plan production next year.'])

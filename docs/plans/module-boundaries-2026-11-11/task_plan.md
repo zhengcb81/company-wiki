@@ -138,6 +138,8 @@ E01–E09 remain accepted for their frozen scope. The current CWP M3 source revi
 
 **CWP push/cleanup maintenance (completed 2026-11-15):** root PWF-only changes are now positively classified as documentation, while runtime/mixed/unknown ranges retain the existing fixed smoke. Pytest scratch cleanup safely removes Windows read-only Git objects and refuses symlink/reparse chmod. Independent review PASS; 57 focused regressions passed, 1 host-dependent symlink case skipped; cleanup receipt `removed=true`. Published `master@56f9cc73d` and server-confirmed. See [bound review](review/pre-push-classification-and-temp-cleanup-20261115.md). This does not close or broaden M3.
 
+**Current CWP CI repair (2026-11-15):** run `43749426185` / job `132919838860` exposed five root-cause categories that the static commit hook and previous fixed push smoke did not cover. The current worktree contains the TDD fixes; 236 affected tests, 490-file mypy, Ruff, diff check and the 23-case push smoke pass, and independent review found no blocker. Review: [CI failure root cause](../du11-source-closure-2026-10-18/review/ci-failure-root-cause-20261115.md). Next publication must run full CI on the exact pushed SHA; do not treat local smoke as CI success. If that run fails, inspect the exact job and repair only reproduced root causes; do not run the full suite locally.
+
 ## Decisions
 
 - 主线质量问题与模块边界分别记账；不以全文摘要/研究质量作为架构阶段永远延后的出口。

@@ -80,9 +80,11 @@ def test_real_paid_response_replays_through_the_actual_decoder(real_case):
     }
     assert real_case["expected_public_draft"] == frozen_projection
     assert len(draft["claims"]) == 20
-    # The saved old result is not rewritten, while the new replay points out
-    # source modalities that the archived output upgraded to completed facts.
-    assert [row["claim_id"] for row in draft["claims"] if row["needs_review"]] == ["c15", "c18", "c19"]
+    # The saved old result is not rewritten, while the current decoder adds
+    # source condition/modality diagnostics to claims that omit those qualifiers.
+    assert [row["claim_id"] for row in draft["claims"] if row["needs_review"]] == [
+        "c6", "c10", "c15", "c18", "c19",
+    ]
     assert draft["status"] == "needs_review"
     observations = score_claim_facts(real_case["reviewed_fact_checks"], claims=draft["claims"],
         evidence_spans=selected.evidence_spans, reading_context=selected.reading_context,
