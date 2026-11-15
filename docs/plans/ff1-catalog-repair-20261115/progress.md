@@ -27,4 +27,8 @@
   - acquisition_service._ensure 挂 _heal_undated_catalog_sources：命中两类 unknown-date reason → 预检 → 有声明才 register_groups（每 root 一次，锁序：ensure 互斥段之前，无嵌套）→ journal 事件 → 恰好重跑一次 _select_for_ensure；登记失败降级为具名失败（warning 日志）。
   - 测试 tests/contract/test_ff1_ensure_catalog_repair.py 4 用例全绿：company_raw 声明→一次修复后 REUSED（calls==2、published_date=2026-02-20、journal 事件断言）；无声明→unique_match_published_date_unknown 直接失败（calls==1、无 journal）；dayu 组 meta.json 声明→修复 REUSED（sidecar_kind=group_meta_json）；预检只读（规划后行未变、无 journal）。
   - 回归：test_source_catalog_acquisition / scoped_scan / scanner_direct / verified_reuse / canonical_acquisition_scope / scan_candidate_immutability 74 通过。
-- [N2] B2 待提交。
+- [N2] B2 提交 1cf52e825（首次提交被 ruff F401 拦截：3 个未用 import，删除后通过）。
+- [N3] B3 实现完成：canonical_writer._record_validated_capture 的 prior-patch 过滤加显式未知豁免——previous[key] 为 None/""（显式未知=空列）且本次 facts 带非空声明（published_date/filing_date，值=candidate.filing_date）时保留该 fact，走既有 prepare_source_fact_write/write_source_fact_projection 落库（断言 evidence locator canonical-commit:/candidate/published_date + provider-metadata-import/1）；prior 非空值仍获胜、scope 冲突检查不变、无猜测值。
+  - 测试 tests/contract/test_ff1_import_published_date.py 3 用例全绿：声明导入→published_date=2026-03-11+声明溯源；prior 显式未知（模拟 2026-11-08 批量）+声明再导入→填上；prior 已知日期→不被导入替换。
+  - 回归：test_source_catalog_canonical_writer.py 全绿（17 通过含新增 3）。
+- [N3] B3 待提交。

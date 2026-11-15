@@ -686,8 +686,19 @@ class CanonicalSourceWriter:
                     left, right = str(value).casefold(), str(facts[key]).casefold()
                     if left != right:
                         raise CanonicalImportError("canonical_scope_conflict:" + key)
-            # An explicit correction/unknown is stronger than another provider declaration.
-            facts = {key:value for key,value in facts.items() if key not in previous}
+            # An explicit correction/unknown is stronger than another provider
+            # declaration — with ONE carve-out (FF-1 B3): a recorded UNKNOWN
+            # (None) is an EMPTY stored column, not a correction.  A capture
+            # whose acquisition candidate DECLARES a filing date fills it
+            # through the same source-facts mechanism (the scanner's FILL
+            # rule: stored empty column + declaring capture); no value is
+            # ever guessed, and a prior non-empty value still wins.
+            facts = {
+                key: value for key, value in facts.items()
+                if key not in previous
+                or (key in {"published_date", "filing_date"}
+                    and previous[key] in (None, "") and value not in (None, ""))
+            }
             evidence = {key:value for key,value in evidence.items() if key in facts}
         if not facts:
             return
