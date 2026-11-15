@@ -114,28 +114,23 @@ def normalize_identity_text(value: str) -> str:
     return _normalize_text(value)
 
 
-# Corporate-suffix equivalence classes, applied to the EXACT name-comparison
-# paths only (official_name_exact / alias_exact). An official name and a query
-# that differ solely in the legal-form suffix denote the same registered name
-# family, e.g. canonical "Alibaba Group Holding Ltd" vs query
-# "Alibaba Group Holding Limited". The trailing suffix token is canonicalized
-# to the first member of its class before comparison:
-#   Ltd ~= Limited; Inc ~= Incorporated; Corp ~= Corporation; Co ~= Company;
-#   PLC ~= AG ~= SE ~= NV ~= SA (European public legal forms);
-#   LP ~= LLP; 有限公司 ~= 股份有限公司 ~= 有限责任公司.
-# Dotted spellings ("Inc.", "Ltd.", "S.A.") lose the dot inside
-# _normalize_text, so only bare token forms are listed.
+# Corporate-suffix spelling equivalence classes, applied only to exact
+# name/alias comparisons. These classes contain abbreviation/expansion pairs
+# for the same legal-form token (Ltd/Limited, Inc/Incorporated,
+# Corp/Corporation, Co/Company); they do not equate different legal forms.
+# Dotted spellings ("Inc.", "Ltd.") lose the dot inside _normalize_text.
+# PLC, AG, SE, NV, SA and LP/LLP remain distinct forms. PRC Company Law
+# Article 7 gives two alternative name suffixes for each Chinese company type:
+# 有限责任公司/有限公司 and 股份有限公司/股份公司. Those pairs compare as the
+# same form; a limited-liability form and a joint-stock form do not.
 #
 # BOUNDARY RULES (proven necessary by a full-master differential sweep,
 # 2026-11-15): ASCII legal forms are separate WORDS in real names
-# ("BASF SE", "Apple, Inc."), so they only canonicalize when the suffix is
-# the final whitespace-delimited word of the raw text — a glued ticker-like
-# token ("VSE", "LANV", "LASE") must never lose its tail to "SE"/"SA"/"NV".
-# Chinese legal forms are glued to the name (no spaces), so they match by
-# string suffix, longest first ("股份有限公司" before "有限公司"), with a
-# non-empty stem. 控股 (holdings) is NAME material, not a suffix — names
-# ending 控股有限公司 are covered through the 有限公司 member, and 控股 stays
-# in the compared stem so 騰訊控股 keeps matching 腾讯控股.
+# ("BASF SE", "Apple, Inc."), so form detection only considers the final
+# whitespace-delimited word; a glued ticker-like token ("VSE", "LANV",
+# "LASE") must never lose its tail. Chinese forms are glued to the name and
+# are detected longest first. 控股 (holdings) is name material, not a legal
+# form suffix; it remains part of the compared stem.
 #
 # Scope guarantees: this never rewrites stored records or matched_value, the
 # ticker comparison stays strictly exact, and the fuzzy path keeps plain
@@ -147,33 +142,68 @@ _CORPORATE_SUFFIX_CLASSES: tuple[tuple[str, ...], ...] = (
     ("inc", "incorporated"),
     ("corp", "corporation"),
     ("co", "company"),
-    ("plc", "ag", "se", "nv", "sa"),
-    ("lp", "llp"),
 )
 _ASCII_SUFFIX_TO_CANONICAL: dict[str, str] = {
     suffix: classes[0]
     for classes in _CORPORATE_SUFFIX_CLASSES
     for suffix in classes
 }
-_CJK_SUFFIX_MATCH_ORDER: tuple[str, ...] = (
-    "股份有限公司",
-    "有限责任公司",
-    "有限公司",
+_DISTINCT_ASCII_LEGAL_FORMS = frozenset({"plc", "ag", "se", "nv", "sa", "lp", "llp"})
+_ASCII_LEGAL_FORMS = frozenset(_ASCII_SUFFIX_TO_CANONICAL) | _DISTINCT_ASCII_LEGAL_FORMS
+_CJK_LEGAL_FORM_CLASSES: tuple[tuple[str, ...], ...] = (
+    ("有限责任公司", "有限責任公司", "有限公司"),
+    ("股份有限公司", "股份公司"),
 )
-_CJK_SUFFIX_CANONICAL = "有限公司"
+_CJK_SUFFIX_TO_CANONICAL = {
+    suffix: legal_forms[0]
+    for legal_forms in _CJK_LEGAL_FORM_CLASSES
+    for suffix in legal_forms
+}
+_CJK_LEGAL_FORM_SUFFIXES = tuple(sorted(
+    _CJK_SUFFIX_TO_CANONICAL, key=len, reverse=True,
+))
+
+
+def _canonical_legal_form(form: str) -> str:
+    if form.startswith("cjk:"):
+        suffix = form.removeprefix("cjk:")
+        return f"cjk:{_CJK_SUFFIX_TO_CANONICAL.get(suffix, suffix)}"
+    return _ASCII_SUFFIX_TO_CANONICAL.get(form, form)
+
+
+def _trailing_legal_form(value: str) -> str | None:
+    """Return a recognized trailing legal form without conflating its type."""
+    normalized = _normalize_text(value)
+    for suffix in _CJK_LEGAL_FORM_SUFFIXES:
+        if len(normalized) > len(suffix) and normalized.endswith(suffix):
+            return f"cjk:{suffix}"
+    words = value.strip().split()
+    word_key = _normalize_text(words[-1]) if words else ""
+    if word_key in _ASCII_LEGAL_FORMS and len(normalized) > len(word_key):
+        return word_key
+    return None
+
+
+def _has_distinct_legal_form_suffixes(left: str, right: str) -> bool:
+    left_form = _trailing_legal_form(left)
+    right_form = _trailing_legal_form(right)
+    if left_form is None or right_form is None:
+        return False
+    return _canonical_legal_form(left_form) != _canonical_legal_form(right_form)
 
 
 def _suffix_equivalent_text(value: str) -> str:
     """Return the comparison token with a trailing corporate suffix canonicalized."""
     normalized = _normalize_text(value)
-    for suffix in _CJK_SUFFIX_MATCH_ORDER:
+    for suffix in _CJK_LEGAL_FORM_SUFFIXES:
         if len(normalized) > len(suffix) and normalized.endswith(suffix):
-            return normalized[: -len(suffix)] + _CJK_SUFFIX_CANONICAL
+            cjk_canonical = _CJK_SUFFIX_TO_CANONICAL[suffix]
+            return normalized[: -len(suffix)] + cjk_canonical
     last_word = value.strip().split()[-1] if value.strip() else ""
     word_key = _normalize_text(last_word)
-    canonical = _ASCII_SUFFIX_TO_CANONICAL.get(word_key)
-    if canonical is not None and len(normalized) > len(word_key):
-        return normalized[: -len(word_key)] + canonical
+    ascii_canonical = _ASCII_SUFFIX_TO_CANONICAL.get(word_key)
+    if ascii_canonical is not None and len(normalized) > len(word_key):
+        return normalized[: -len(word_key)] + ascii_canonical
     return normalized
 
 
@@ -1128,6 +1158,26 @@ class SecurityIdentityResolver:
             exchange is None or candidate.exchange == exchange
         )
 
+    def _has_legal_form_conflict(
+        self, query: str, candidate: IdentityCandidate,
+    ) -> bool:
+        record = next((
+            item for item in self.master.records
+            if item.market == candidate.market
+            and item.exchange == candidate.exchange
+            and item.security_id == candidate.security_id
+            and item.source_record_id == candidate.source_record_id
+        ), None)
+        names = (
+            (record.canonical_name, *record.aliases)
+            if record is not None
+            else (candidate.matched_value,)
+        )
+        return any(
+            _has_distinct_legal_form_suffixes(query, name)
+            for name in names
+        )
+
     @staticmethod
     def _result(
         query: str,
@@ -1291,7 +1341,11 @@ class SecurityIdentityResolver:
             )
         top = candidates[0]
         runner_up = candidates[1].score if len(candidates) > 1 else 0.0
-        if top.score >= _FUZZY_RESOLVE_THRESHOLD and top.score - runner_up >= _FUZZY_MARGIN:
+        if (
+            top.score >= _FUZZY_RESOLVE_THRESHOLD
+            and top.score - runner_up >= _FUZZY_MARGIN
+            and not self._has_legal_form_conflict(query, top)
+        ):
             return self._result(
                 query,
                 normalized_query,

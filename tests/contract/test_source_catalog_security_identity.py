@@ -657,26 +657,105 @@ def test_corporate_suffix_equivalence_applies_to_aliases_too(tmp_path):
     assert result.resolved.matched_value == "Example Holdings Limited"
 
 
-def test_chinese_legal_form_suffixes_compare_equivalently(tmp_path):
+def test_distinct_legal_form_suffixes_do_not_auto_resolve_one_another(tmp_path):
     from company_wiki.source_catalog import (
         IdentityStatus,
         SecurityIdentityResolver,
         SecurityMasterStore,
     )
 
-    store = SecurityMasterStore(tmp_path / "cn-suffix-master")
-    store.write_market(
-        "CN",
-        (_record(name="示例集团控股股份有限公司", market="CN", exchange="SSE",
-                 ticker="600001"),),
-        retrieved_at="2026-11-15T00:00:00Z", sources=("https://official.example/cn",),
+    cases = (
+        ("Example Holdings AG", "Example Holdings PLC", "US", "NASDAQ", "EXM"),
+        ("Example Holdings SE", "Example Holdings PLC", "US", "NASDAQ", "EXM"),
+        ("Example Holdings NV", "Example Holdings PLC", "US", "NASDAQ", "EXM"),
+        ("Example Holdings SA", "Example Holdings PLC", "US", "NASDAQ", "EXM"),
+        ("Example Holdings LP", "Example Holdings LLP", "US", "NASDAQ", "EXM"),
+        ("示例集团控股股份有限公司", "示例集团控股有限公司", "CN", "SSE", "600001"),
+        ("示例集团控股股份有限公司", "示例集团控股有限责任公司", "CN", "SSE", "600001"),
+    )
+    for index, (canonical, query, market, exchange, ticker) in enumerate(cases):
+        store = SecurityMasterStore(tmp_path / f"legal-form-master-{index}")
+        store.write_market(
+            market,
+            (_record(
+                name=canonical, market=market, exchange=exchange, ticker=ticker,
+            ),),
+            retrieved_at="2026-11-15T00:00:00Z",
+            sources=(f"https://official.example/{market.lower()}",),
+        )
+
+        result = SecurityIdentityResolver(store.load(markets=(market,))).identify(query)
+
+        assert result.status is IdentityStatus.AMBIGUOUS, (canonical, query)
+        assert result.reason == "fuzzy_candidates_require_user_selection"
+        assert result.resolved is None
+        assert result.candidates[0].match_basis == "strong_fuzzy"
+
+
+def test_prc_company_law_alternative_suffixes_compare_as_the_same_form(tmp_path):
+    from company_wiki.source_catalog import (
+        IdentityStatus,
+        SecurityIdentityResolver,
+        SecurityMasterStore,
     )
 
-    for query in ("示例集团控股有限公司", "示例集团控股有限责任公司"):
+    cases = (
+        ("示例集团有限公司", "示例集团有限责任公司"),
+        ("示例集团有限公司", "示例集团有限責任公司"),
+        ("示例集团股份有限公司", "示例集团股份公司"),
+    )
+    for index, (canonical, query) in enumerate(cases):
+        store = SecurityMasterStore(tmp_path / f"cn-legal-form-master-{index}")
+        store.write_market(
+            "CN",
+            (_record(
+                name=canonical,
+                market="CN",
+                exchange="SSE",
+                ticker=f"60000{index}",
+            ),),
+            retrieved_at="2026-11-15T00:00:00Z",
+            sources=("https://official.example/cn",),
+        )
+
         result = SecurityIdentityResolver(store.load(markets=("CN",))).identify(query)
-        assert result.status is IdentityStatus.RESOLVED, query
+
+        assert result.status is IdentityStatus.RESOLVED, (canonical, query)
         assert result.resolved.match_basis == "official_name_exact"
-        assert result.resolved.canonical_name == "示例集团控股股份有限公司"
+        assert result.resolved.canonical_name == canonical
+
+
+def test_distinct_legal_form_conflict_uses_canonical_name_when_alias_omits_form(
+    tmp_path,
+):
+    from company_wiki.source_catalog import (
+        IdentityStatus,
+        SecurityIdentityResolver,
+        SecurityMasterStore,
+    )
+
+    canonical = "Example Global Industrial Holdings with a Very Long Corporate Name AG"
+    store = SecurityMasterStore(tmp_path / "legal-form-alias-master")
+    store.write_market(
+        "US",
+        (_record(
+            name=canonical,
+            market="US",
+            exchange="NASDAQ",
+            ticker="EXM",
+            aliases=("Example Global Industrial Holdings with a Very Long Corporate Name",),
+        ),),
+        retrieved_at="2026-11-15T00:00:00Z",
+        sources=("https://official.example/us",),
+    )
+
+    result = SecurityIdentityResolver(store.load(markets=("US",))).identify(
+        "Example Global Industrial Holdings with a Very Long Corporate Name PLC"
+    )
+
+    assert result.status is IdentityStatus.AMBIGUOUS
+    assert result.reason == "fuzzy_candidates_require_user_selection"
+    assert result.resolved is None
 
 
 def test_bare_name_is_not_equated_with_its_suffixed_official_name(tmp_path):
