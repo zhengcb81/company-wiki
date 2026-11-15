@@ -566,3 +566,18 @@ Closed the current CWP identity false-positive discovered during the M3 source r
 ## 2026-11-15 — M3 owner refs refreshed read-only
 
 Latest owner observations: FF local main@dd716217 equals its local tracking ref but has no current root-PWF receipt for bounded T3 limits or rerun; RF local main@88892536 is seven commits ahead of local origin/main@f2215959, while weekly run `20261115T084227Z` remains not-ok and absent from canonical `PLANNING_STATUS.md`; StockWiki local master@e1f9f559 has no remote, current progress/findings but a root task_plan last committed 11-08, and Git status remains unusable. No external repo was modified. Exact local refs, deltas, and uncertainty are in `../module-boundaries-2026-11-11/boundary_matrix.json`; M3 remains open pending owner reconciliation.
+
+
+## 2026-11-15 20:52 UTC — current PWF reconciled to refreshed owner refs
+
+- Reconciled the parent current status/handoff and M3 child plan/matrix against the 20:37 UTC read-only owner snapshot. FF local/server `main@dd716217` matches and tracked files are clean; FF's separate S3 BYD bounded-provider E2E is explicitly distinguished from the four failed RF weekly T3 downloads, which still lack finite `acquisition_limits` and a current-main rerun receipt.
+- RF local `main@be0caa4` is nine commits ahead of fresh live `origin/main@f2215959`; `assurance/runs/weekly_alert.jsonl` and `weekly_manifest.json` are modified. Run `20261115T084227Z` remains not-ok on historical FF/RF/CWP refs and absent from canonical PWF. StockWiki local `master@235ac72` has no remote and is tracked-clean; the recent commit updates three CWP source links and a research handoff, while root `task_plan.md` remains owner reconciliation.
+- Exact CWP code SHA `1391ae81` passed GitHub CI #537; current `master@3e7b723` is its PWF-only descendant. The local tree separately contains uncommitted CN issuer-proof byte-ceiling changes in one source file and one contract test (64MB→512MB); they are unreviewed/untested and excluded from the accepted source delta. No external repository was modified and external untracked files were not enumerated.
+
+
+## 2026-11-15 21:28 UTC — root budget fix verified; M3 owner snapshot refreshed
+
+- Replaced the separate CN issuer-proof byte counter with the SourceCatalog request `ReadBudget`, threaded through `SourceVersionReader.open_described_version()` into the existing verifier/resolver. Actual bytes/candidates and exact SHA/size are handled by the existing catalog verifier; per-file PDF/page/text validation remains. The unpublished 512MB intermediate is not part of the final tree.
+- The 36×3.5MB corpus regression and exact reader budget regression pass. Both affected contract files pass **62/62 / 171.67s / exit 0** with `removed=true`; Ruff, JSON parsing, `git diff --check`, and independent hash-bound review pass. Existing test cleanup leak discovered on the first full run was repaired with `finally` and covered in the green rerun. Review note: direct CN-browser max-candidate-envelope case is absent but non-blocking.
+- Corrected an earlier CI statement: `3e7b723` includes intervening CWP feature `707efe814`; exact GitHub CI #537 passed on ancestor `1391ae81`, not on `3e7b723`. The current local final fix remains unpublished pending an amended clean commit and exact-head CI.
+- External tracked-only snapshot at 21:24: FF main@dd716217 clean; RF main@be0caa4 nine commits ahead with daily/weekly alert and weekly manifest modified; StockWiki master@54f72c9 no remote, tracked-clean, root plan/progress updated at 5f79e7b 17:30. User confirms another project is driving those external changes; none were changed here. M3 remains open for FF/RF owner evidence.

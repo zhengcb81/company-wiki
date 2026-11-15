@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "manual_business_summary_quality_after_module_boundary_closure",
+  "execution_mode": "manual_m3_owner_reconciliation_before_p1_business_summary",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T20:27:00Z",
+  "observed_at_utc": "2026-11-15T21:28:24Z",
   "recent_cwp_gate_checkpoint": {
     "date_utc": "2026-11-15",
     "scope": "root PWF documentation-only push classification and pytest-owned Windows scratch cleanup",
@@ -142,22 +142,22 @@
       "ruff": "passed",
       "git_diff_check": "passed",
       "windows_rename_fallback_cases": "passed on Windows",
-      "posix_hardlink_denial_branch": "passed through injected POSIX adapter; real Linux CI rerun pending",
-          "independent_review": "PASS at baseline HEAD 895f66f57; scoped to the two follow-up code files; no blocker found",
-          "published_commit": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
-          "push_hook_smoke": "23 passed in 14.31s",
-          "exact_github_ci_run": "43757282611",
-          "exact_github_ci_workflow_run_number": 537,
-          "exact_github_ci_head_sha": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
-          "exact_github_ci_job": "132944030549",
-          "exact_github_ci_duration": "7m 52s",
-          "exact_github_ci_status": "completed_success",
-          "exact_github_ci_annotations": "one warning and one notice about upstream GitHub runner/action deprecations; no failing annotations"
+      "posix_hardlink_denial_branch": "passed on the real POSIX path in exact GitHub CI run 43757282611; Linux CI verified propagation without replacing a concurrent target",
+      "independent_review": "PASS at baseline HEAD 895f66f57; scoped to the two follow-up code files; no blocker found",
+      "published_commit": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
+      "push_hook_smoke": "23 passed in 14.31s",
+      "exact_github_ci_run": "43757282611",
+      "exact_github_ci_workflow_run_number": 537,
+      "exact_github_ci_head_sha": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
+      "exact_github_ci_job": "132944030549",
+      "exact_github_ci_duration": "7m 52s",
+      "exact_github_ci_status": "completed_success",
+      "exact_github_ci_annotations": "one warning and one notice about upstream GitHub runner/action deprecations; no failing annotations"
     },
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-    "next_action": "Publish this exact-head CI success in PWF. Then continue finite M3 reconciliation: FF owner supplies bounded acquisition_limits and reruns T3; RF owner records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 (8 commits ahead of live origin/main@f2215959, with two tracked weekly-assurance edits); StockWiki owner aligns root task_plan. ROOT then binds fresh exact refs and owner evidence to the finite report. CWP budget contract stays unchanged. Then resume P1 business-summary work; keep fixed company loop paused.",
+  "next_action": "Publish the reviewed CWP shared-read-budget fix by replacing the unpublished 512MB intermediate commit, then run/confirm exact-head GitHub CI. M3 remains open for FF finite acquisition_limits on the four failed weekly T3 downloads plus a current-main T3 receipt, and RF canonical PWF reconciliation of 20261115T084227Z / not-ok with its nine local commits and three tracked assurance edits. StockWiki root plan/progress were refreshed at 5f79e7b and latest handoff at 54f72c9; ROOT has read-only reconciled this action. User confirms external changes are from another project's active progress; do not revert or overwrite. After finite M3 closes, resume P1 business-summary work; fixed company loop remains paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -209,7 +209,7 @@
         ]
       },
       "company-wiki": {
-        "source_head": "5ae4a60b6fc883a73c198fb706a5b6979352dd29",
+        "source_head": "3e7b7231a2d6466ca21a7d7291b41b3c563a3a57 (published baseline; root fix pending)",
         "remote": "origin/master",
         "published": true,
         "push_hook": {
@@ -244,6 +244,17 @@
             "head_sha": "e7469d684b10a4cd37772e045eb3e588254c5ab8",
             "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41919818624",
             "updated_at": "2026-11-04T21:52:42Z"
+          },
+          {
+            "name": "CI",
+            "id": 43757282611,
+            "workflow_run_number": 537,
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
+            "head_branch": "master",
+            "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/43757282611",
+            "updated_at": "2026-11-15T20:27:00Z"
           }
         ],
         "d5_candidate_merge": {
@@ -262,20 +273,17 @@
           "post_push_local_origin_master_tracking_ref": "bd2c9ee328831f80626a216a99a7d503cebcfdd5",
           "post_push_tracking_refs_match": true
         },
-        "exact_ci_scope": "Existing run IDs in this object are the D4 closeout CI for head e7469d684b10a4cd37772e045eb3e588254c5ab8; they do not establish exact-head CI for D5 ROOT closeout c28b122075748d99547fb0a7e2fd4adcd7490269. The PWF-only follow-up bd2c9ee328831f80626a216a99a7d503cebcfdd5 is pushed, but its exact-head CI is also not freshly verified.",
+        "exact_ci_scope": "GitHub #537/run 43757282611 is exact only for code SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c. Current remote master 3e7b7231 includes later product commit 707efe814 and is not covered by that run. The root shared-budget fix is pending publication and needs a new exact-head CI result.",
         "latest_published_code": {
-          "commit": "5ae4a60b6fc883a73c198fb706a5b6979352dd29",
-          "server_confirmation": "e74840d22..5ae4a60b6 master -> master",
-          "independent_review": "PASS",
-          "source_sha256": "f2badf20d076c24754647210880bafccf244dd91067a111e74480dd783d79830",
-          "test_sha256": "30c8484bde3fcab13fcc1dae9864c820ba639390ea0acb0083d3ae497f0ade11",
-          "targeted_tests": "69 passed / 20.62 seconds",
-          "push_fixed_smoke": "18 passed / 6.23 seconds",
-          "ruff": "passed",
-          "mypy": "passed; 490 source files",
-          "config_doctor": "passed",
-          "full_github_ci": "not_verified"
-        }
+          "commit": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
+          "server_confirmation": "Pushed to origin/master; observed origin/master at 3e7b7231a2d6466ca21a7d7291b41b3c563a3a57. This ref contains subsequent product commit 707efe814 and is not an exact descendant with only PWF changes from CI-tested 1391ae81.",
+          "independent_review": "PASS at baseline 895f66f57 for the CI follow-up test changes; original code repair and scoped follow-up review are documented in review/ci-failure-root-cause-20261115.md",
+          "targeted_tests": "annotation-driven regression suite 500 passed; fixed push smoke 23 passed",
+          "push_fixed_smoke": "23 passed / 14.31 seconds",
+          "full_github_ci": "passed on exact SHA 1391ae81; run 43757282611 / workflow #537 / job 132944030549 / 7m52s",
+          "current_worktree_note": "Local unpushed 7fd7f248 is a 512MB intermediate budget change. It is being replaced, not independently published, by the TDD-verified shared ReadBudget root fix; exact final source/test hashes and independent review are in module-boundaries-2026-11-11/review/cwp-cn-issuer-read-budget-20261115.md."
+        },
+        "current_ci_coverage_note": "Run 43757282611 / #537 is exact only for 1391ae81. The current published 3e7b7231 includes later product commit 707efe814 and is not covered by that exact run; final root fix requires a new exact-head CI result."
       },
       "filing-fetch": {
         "source_head": "508aba308cf5206c486119c446b66172debdc09a",
@@ -1296,7 +1304,7 @@
   },
   "module_boundary_current_state": {
     "as_of": "2026-11-15",
-    "observed_at_utc": "2026-11-15T18:13:29Z",
+    "observed_at_utc": "2026-11-15T21:28:24Z",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
@@ -1308,7 +1316,7 @@
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
     "remaining": [
-      "M3 final receipt: FF finite request limits and T3 rerun; RF canonical PWF entry for weekly run 20261115T084227Z and reconciliation of local main@88892536 (8 commits ahead of live origin/main@f2215959, with two modified weekly assurance files); StockWiki root task_plan reconciliation. ROOT binds fresh exact refs and owner evidence to the finite report."
+      "M3 final receipt: CWP shared-read-budget root fix is TDD-verified/independently reviewed and awaiting clean publication plus exact-head CI. FF adds finite acquisition_limits to the four failing T3 download requests and reruns T3 on current main. RF records the failing 20261115T084227Z run in canonical PWF and reconciles local main@be0caa4 (9 commits ahead of origin/main@f2215959, with three tracked assurance files modified). StockWiki root task_plan/progress are current at 5f79e7b and latest handoff is 54f72c9; ROOT read-only reconciled this. Bind fresh refs after owner evidence, then close the finite report."
     ],
     "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_REVIEWED_FOR_CWP_AND_EXTERNAL_OWNER_RECONCILIATION_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
@@ -1326,7 +1334,7 @@
     "m3_current_head_drift_audit": {
       "status": "IN_PROGRESS",
       "cwp_first_slice": {
-        "published_head": "5ae4a60b6fc883a73c198fb706a5b6979352dd29; source fix pushed and server confirmed origin/master. Full GitHub Actions CI not verified.",
+        "published_head": "Current origin/master@3e7b7231a2d6466ca21a7d7291b41b3c563a3a57 includes product commit 707efe814 after exact-CI SHA 1391ae81; CI #537 on 1391 does not cover current remote. Root shared-budget change is locally TDD-verified and independently reviewed, pending publication and final exact CI.",
         "m3_pwf_receipt_head": "476cb4a79a7aa97080baa5a6a256052403d89596; PWF root-cause carrier. Git push server response confirmed d46357c12..476cb4a79 master -> master; local HEAD and origin/master tracking ref match. Fresh ls-remote failed because local Git could not start a resolver thread. Push fixed smoke 18/18 in 9.26 seconds; full GitHub CI not yet verified.",
         "dynamic_execution_boundary": "eval/exec/compile calls, aliases, __builtins__/builtins.__dict__ mapping access, vars/globals/locals and get-based lookup covered by RED-to-GREEN static contract; subsequent expression-flow tests close module escapes through lambda closures, IfExp, BoolOp, comprehensions, yield/yield-from and walrus aliases. Comprehension targets are isolated while walrus bindings follow Python outer-scope semantics. No production use found; this static contract is not runtime isolation.",
         "subject_schema_owner": "NarrativeSubjectRef public factory now owns compact official JSON schema construction.",
@@ -1347,47 +1355,69 @@
           "scope": "CWP identity name resolution only; no external repository or production data changed by ROOT"
         },
         "identity_review_evidence": "../module-boundaries-2026-11-11/review/cwp1-legal-form-identity-20261115.md",
-        "current_source_delta": "36 src/ paths versus M2 CWP baseline c6189c623; 12 src/ paths versus scanner head b1e948276"
+        "current_source_delta": "Published origin/master has 37 src/ paths versus M2 baseline c6189c623. Current local final tree has 39 src/ paths. The previously unpublished 512MB cap was replaced with the reviewed shared ReadBudget change; 62 affected tests pass and exact-head CI for the final commit is pending."
       },
       "latest_owner_snapshots": {
         "filing-fetch": {
           "observed_ref": "local main@dd7162172718e8276a809e9c205e3c80da06141a",
           "local_tracking_ref": "origin/main@dd7162172718e8276a809e9c205e3c80da06141a",
-          "remote_status": "Fresh read-only git ls-remote confirmed origin/main@dd7162172718e8276a809e9c205e3c80da06141a at 2026-11-15 18:13 UTC.",
+          "remote_status": "Read-only local tracking refresh at 2026-11-15 21:24 UTC: local main and origin/main both dd7162172718e8276a809e9c205e3c80da06141a; tracked-clean. Latest commit is fix(gate): bind the archive exemption to content and bound its scope. Previous fresh live ls-remote confirmation was 20:37 UTC.",
           "m2_product_source_delta": 0,
           "m2_test_path_delta": 4,
           "additional_tool_path": "tools/verify_plan_claims.py",
           "git_status": "Tracked files clean; elevated read-only git status succeeded with --untracked-files=no. Untracked files were not enumerated.",
-          "canonical_pwf_action": "finite acquisition limits and T3 rerun not recorded in the root planning files",
+          "canonical_pwf_action": "Current root PWF records the separate S3 BYD bounded-provider E2E and FF-1 merge; these do not establish that the four failed RF weekly T3 download requests have been fixed or rerun. Those requests omitted acquisition_limits; FF owner must supply finite limits and rerun T3 on current main.",
           "untracked_status": "not_enumerated"
         },
         "revenue-forecast": {
-          "observed_ref": "local main@88892536e8d53893427fc6afeabdfe17741536a5",
+          "observed_ref": "local main@be0caa4b506a4174d1bad860946ade73279627d4",
           "local_tracking_ref": "origin/main@f2215959d33abc76778342a95d39a8e38191da75",
-          "unpublished_commits_ahead": 8,
-          "remote_status": "Fresh read-only git ls-remote confirmed origin/main@f2215959d33abc76778342a95d39a8e38191da75 at 2026-11-15 18:13 UTC.",
+          "unpublished_commits_ahead": 9,
+          "remote_status": "Fresh read-only git ls-remote confirmed origin/main@f2215959d33abc76778342a95d39a8e38191da75 at 2026-11-15 20:37 UTC.",
           "weekly_run_id": "20261115T084227Z",
-          "weekly_status": "not-ok; manifest remains pinned to FF 1dfd818 / RF f2215959 / CWP 0e741063",
-          "canonical_pwf": "PLANNING_STATUS.md last commit 3ca619283411cf2a48afa57a449c44e2aa907768 on 2026-11-14; weekly run ID absent",
-          "git_status": "Tracked files modified: assurance/runs/weekly_alert.jsonl and assurance/runs/weekly_manifest.json; observed with elevated read-only git status --untracked-files=no. Untracked files were not enumerated.",
+          "weekly_status": "not-ok; T3 suite exit 1, 4 download E2Es failed at ensure before any download; manifest remains pinned to historical FF 1dfd818 / RF f2215959 / CWP 0e741063",
+          "canonical_pwf": "PLANNING_STATUS.md last committed 2026-11-14 at 3ca619283411cf2a48afa57a449c44e2aa907768; weekly run 20261115T084227Z / not-ok was absent at last read of current local main; owner update still required.",
+          "git_status": "Tracked modified: assurance/runs/daily_alert.jsonl, assurance/runs/weekly_alert.jsonl, assurance/runs/weekly_manifest.json. Read-only local snapshot at 21:24 UTC; untracked not enumerated. User confirms these are active changes from another project; ROOT leaves them untouched.",
           "modified_tracked_paths": [
+            "assurance/runs/daily_alert.jsonl",
             "assurance/runs/weekly_alert.jsonl",
             "assurance/runs/weekly_manifest.json"
           ],
           "untracked_status": "not_enumerated"
         },
         "StockWiki": {
-          "observed_ref": "local master@e1f9f559c08ca20e1806a0b1ac205cdd75d875f8",
+          "observed_ref": "local master@54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e",
           "remote": "none-configured",
           "source_paths_since_m2": 13,
           "test_paths_since_m2": 19,
-          "task_plan_last_commit": "9baaf3d10178a8d9aa9a3853c417f223e8de50de on 2026-11-08",
-          "progress_findings_last_commit": "b3f5777455dfdea6b84b0a6e30fa8e8d42370b96 on 2026-11-15",
-          "git_status": "Tracked files clean; elevated read-only git status succeeded with --untracked-files=no. Untracked files were not enumerated.",
-          "untracked_status": "not_enumerated"
+          "task_plan_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
+          "progress_findings_last_commit": "progress.md last commit 5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z); findings.md last observed commit 0450506fc94adbfecd33001c244221a42ba0a00d",
+          "git_status": "Tracked-clean; no remote configured; untracked files not enumerated. Root task_plan/progress were refreshed at 5f79e7b and latest research handoff summary at 54f72c9; current-plan alignment observed by ROOT.",
+          "untracked_status": "not_enumerated",
+          "canonical_pwf_action": "Latest root task_plan/progress commit 5f79e7b includes the 11-15 modularity/WIP inventory; ROOT read-only checked it and the latest SW-RESEARCH-PRODUCTION-01 handoff. No further root-plan reconciliation action remains in this snapshot.",
+          "canonical_pwf_refs": {
+            "task_plan_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
+            "progress_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
+            "findings_last_commit": "0450506fc94adbfecd33001c244221a42ba0a00d (2026-11-14T10:37:04Z)",
+            "latest_handoff_commit": "54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e"
+          }
+        },
+        "company-wiki": {
+          "published_ref": "origin/master@3e7b7231a2d6466ca21a7d7291b41b3c563a3a57",
+          "included_product_commit_after_last_exact_ci": "707efe814c5556c7c47ce09dd16fbb02e6a1afe7",
+          "last_exact_ci": "GitHub #537 / run 43757282611 passed at 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; it does not cover 707efe814 or the pending current fix.",
+          "local_status": "HEAD 7fd7f248 is one unpublished intermediate commit ahead of origin plus a verified shared-budget worktree fix. Plan is to amend/replace the intermediate and push one final net fix.",
+          "m2_baseline_product_source_paths_published": 37,
+          "m2_baseline_product_source_paths_local_final_tree": 39,
+          "tracked_changes_owned_by_root": [
+            "src/company_wiki/source_catalog/public_canonical_browser.py",
+            "src/company_wiki/source_catalog/source_reader.py",
+            "tests/contract/test_public_canonical_browser.py",
+            "tests/contract/test_source_reader_exact_history.py"
+          ]
         }
       },
-      "remaining": "Current post-M2 product deltas are classified, and I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await FF finite-budget request repair/T3 evidence, RF canonical PWF reconciliation (including its 8 unpublished commits and two tracked weekly-assurance edits), and StockWiki root PWF reconciliation by their owners; then bind the final report to exact refs.",
+      "remaining": "CWP shared request-budget fix is TDD-verified and independently reviewed, pending clean publication and exact-head CI; FF still owes finite limits and current-main T3 rerun for the four failed requests; RF still owes canonical PWF record of the historical not-ok weekly run and owner reconciliation of nine commits plus three tracked assurance edits. StockWiki current-plan drift was refreshed/accepted by ROOT at master@54f72c9; no remote exists. Then bind exact refs and close only the finite M3 report.",
       "failure_reconciliation": {
         "weekly_run_id": "20261115T084227Z",
         "triplet": {
@@ -1409,6 +1439,16 @@
         "fresh_ls_remote": "not_completed; getaddrinfo thread failed to start",
         "push_fast_smoke": "18 passed in 9.26 seconds",
         "full_github_ci": "not verified"
+      },
+      "cwp_root_owned_budget_fix": {
+        "status": "TDD_VERIFIED_INDEPENDENT_REVIEW_PASS_PENDING_PUBLICATION",
+        "prior_unpublished_intermediate": "7fd7f248deed8ff161ddab439f6b4d8a2875b239 (512MB private cap; not to be pushed as a standalone commit)",
+        "root_cause": "CN issuer proof used a separate aggregate byte counter because open_described_version did not accept SourceCatalog ReadBudget.",
+        "fix": "One ReadBudget per browse is passed through SourceVersionReader.open_described_version into the existing verified resolver; duplicate cap/counter removed. Size/SHA verification and per-PDF/page/text limits remain.",
+        "local_head_before_publication": "7fd7f248deed8ff161ddab439f6b4d8a2875b239",
+        "tests": "Affected contract files: 62 passed in 171.67s, exit 0; cleanup removed=true. Ruff, JSON parsing, git diff --check passed.",
+        "independent_review": "PASS; reviewed source/test hashes recorded in module-boundaries-2026-11-11/review/cwp-cn-issuer-read-budget-20261115.md.",
+        "review_note": "Non-blocking: no direct CN-browser max_candidates exhaustion envelope test; byte exhaustion and general pathless behavior are separately covered."
       }
     }
   },

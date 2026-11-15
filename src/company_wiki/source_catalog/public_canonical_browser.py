@@ -19,9 +19,11 @@ zero-write read model:
   master. The D00 E13 integration addendum also authorizes one narrow CN
   route: an exact, already-indexed PDF SourceRef may be read locally and
   parsed by ``cn-primary-uscc/1`` after source facts and official cache checks
-  (≤16MB, ≤1,000 pages, ≤8M extracted text characters). This route does not
-  download, OCR, call a model, or write catalog state. Every returned item
-  still requires its own exact issuer proof;
+  (per-file PDF/page/text limits). Aggregate original-byte reads share the
+  source catalog's single request budget for this browse; there is no separate
+  issuer-proof corpus cap. This route does not download, OCR, call a model, or
+  write catalog state. Every returned item still requires its own exact issuer
+  proof;
 - supported namespace matrix (see the D00 integration addendum): StockWiki
   source bindings in ``cwp_source_export_v2`` resolve natively inside CWP by
   exact source URN; proven CWP issuer namespaces are ``sec.cik`` via
@@ -66,6 +68,7 @@ from .public_document_browser import (
     document_version_id,
 )
 from .source_reader import SOURCE_REF_SCHEMA_VERSION, SourceRef
+from .read_budget import ReadBudget
 from .service import SourceCatalog
 
 
@@ -88,7 +91,6 @@ ISSUER_NAMESPACE_SEC_CIK = "sec.cik"
 ISSUER_VERIFIER_SEC_DEI = "sec-primary-dei/1"
 ISSUER_NAMESPACE_CN_USCC = "cn.uscc"
 ISSUER_VERIFIER_CN_PRIMARY = "cn-primary-uscc/1"
-_MAX_CN_PROOF_BYTES = 64_000_000
 
 _SOURCE_URN_RE = re.compile(
     r"urn:company-wiki:source:sha256:[0-9a-f]{64}\Z")
@@ -602,7 +604,7 @@ class PublicCanonicalBrowser:
         # are never a persistent health/content cache across requests.
         self._cn_verified: dict[str, tuple[ResolvedIssuer, dict[str, Any]]] = {}
         self._cn_target_security = None
-        self._cn_read_bytes = 0
+        self._cn_read_budget = ReadBudget()
         self._cn_budget_exhausted = False
         entity = _required_text(request["canonical_entity_id"],
                                 "canonical_entity_id")
@@ -901,14 +903,10 @@ class PublicCanonicalBrowser:
                 cached = getattr(self, "_cn_verified", {}).get(source_id)
                 if cached is not None:
                     return cached
-                total = getattr(self, "_cn_read_bytes", 0) + ref.byte_size
-                if total > _MAX_CN_PROOF_BYTES:
-                    self._cn_budget_exhausted = True
-                    return Binding(status="unavailable", reason_codes=_reasons("cn_primary_proof_budget_exceeded"),
-                                   resolved_source=cwp_pin)
-                self._cn_read_bytes = total
                 try:
-                    opened, metadata = SourceVersionReader(self.catalog).open_described_version(ref, purpose="source_export")
+                    opened, metadata = SourceVersionReader(self.catalog).open_described_version(
+                        ref, purpose="source_export", budget=self._cn_read_budget,
+                    )
                     proof = extract_cn_issuer(self.catalog, ref, pages=pdf_text_pages(opened.data), metadata=metadata)
                 except PrimaryIssuerUnavailable as exc:
                     return Binding(status="unknown", reason_codes=_reasons(exc.reason), resolved_source=cwp_pin)
@@ -926,6 +924,13 @@ class PublicCanonicalBrowser:
                 identity_cache_dir=self.catalog.config.catalog_dir
                 / "security_master")
         except SourceReadError as exc:
+            if exc.reason == "budget_exceeded":
+                self._cn_budget_exhausted = True
+                return Binding(
+                    status="unavailable",
+                    reason_codes=_reasons("cn_primary_proof_budget_exceeded"),
+                    resolved_source=cwp_pin,
+                )
             status = "conflict" if exc.reason == "primary_issuer_conflict" \
                 else "unknown"
             return Binding(

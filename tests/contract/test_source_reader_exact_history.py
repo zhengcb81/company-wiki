@@ -381,11 +381,14 @@ def test_root_admission_denial_stays_blocked(tmp_path):
         roots=(replace(_roots(tmp_path)[0], max_file_size=len(AMENDED) - 1),),
         reusable_root_kinds=("dayu_portfolio",),
     ))
-    with pytest.raises(SourceReadError) as error:
-        SourceVersionReader(tiny).open_version(history_ref, purpose="preview")
-    assert error.value.status == "blocked"
-    assert error.value.reason == "root_admission_denied"
-    catalog.close()
+    try:
+        with pytest.raises(SourceReadError) as error:
+            SourceVersionReader(tiny).open_version(history_ref, purpose="preview")
+        assert error.value.status == "blocked"
+        assert error.value.reason == "root_admission_denied"
+    finally:
+        tiny.close()
+        catalog.close()
 
 
 def test_hash_mismatch_of_history_version_stays_unavailable(tmp_path):
@@ -481,3 +484,28 @@ def test_cli_rejects_bad_arguments_and_reports_pathless_errors(tmp_path):
     stderr_text = proc.stderr.decode("utf-8")
     assert str(tmp_path) not in stderr_text
     assert "portfolio" not in stderr_text
+
+
+def test_open_described_version_uses_the_callers_shared_read_budget(tmp_path):
+    from company_wiki.source_catalog.read_budget import ReadBudget
+
+    catalog, _, _, history = _history_items(tmp_path)
+    try:
+        reader = SourceVersionReader(catalog)
+        ref = SourceRef(**history["source_ref"])
+        budget = ReadBudget(max_candidates=8, max_bytes=len(AMENDED))
+        opened, _ = reader.open_described_version(
+            ref, purpose="preview", budget=budget,
+        )
+        assert opened.data == AMENDED
+        assert budget.bytes_read == len(AMENDED)
+        assert budget.candidates == 1
+
+        exhausted = ReadBudget(max_candidates=8, max_bytes=len(AMENDED) - 1)
+        with pytest.raises(SourceReadError, match="budget_exceeded"):
+            reader.open_described_version(
+                ref, purpose="preview", budget=exhausted,
+            )
+        assert exhausted.bytes_read == 0
+    finally:
+        catalog.close()

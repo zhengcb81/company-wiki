@@ -146,3 +146,20 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 
 - GitHub Actions CI #537 / run `43757282611` passed on `1391ae81d8126b5026209e26ae56a7d9bb0a9f0c`; job `132944030549` completed in 7m52s.
 - The run showed one Node.js deprecation warning and one Ubuntu runner migration notice, with no failing annotations. The CI incident follow-up is closed; continue with finite M3 owner reconciliations.
+
+
+## 2026-11-15 20:52 UTC — current owner snapshot and CI status reconciled (superseded by 21:28 snapshot)
+
+- CWP code SHA `1391ae81` passed exact GitHub CI #537; current `master@3e7b723` is a PWF-only descendant. This closes the CI incident, not M3.
+- FF local/server `main@dd716217` matches and is tracked-clean. Its PWF records another S3 BYD bounded-provider E2E and FF-1 merge, but not the current-main rerun for the four RF weekly T3 requests. Those requests omitted finite `acquisition_limits`; FF owner action remains.
+- RF local `main@be0caa4` is 9 commits ahead of fresh live `origin/main@f2215959`, with two tracked weekly-assurance files modified. `20261115T084227Z` remains not-ok, pinned to historical FF/RF/CWP refs, and absent from canonical root PWF.
+- StockWiki local `master@235ac72` has no remote and is tracked-clean. Latest commit added three CWP source links and updated the `SW-RESEARCH-PRODUCTION-01` handoff; the root task plan remains to be aligned by its owner.
+- The CWP working tree also contains an uncommitted source/test candidate changing CN issuer proof cap 64MB→512MB. This is not reviewed, tested, published, or included in the 37-path accepted M3 source snapshot. ROOT will review its root cause before accepting it. No external repo was modified; external untracked files were not enumerated.
+
+
+## 2026-11-15 21:28 UTC — shared budget root fix and fresh owner alignment
+
+- The 64MB CN issuer proof cap was a duplicate resource owner. `PublicCanonicalBrowser` now passes one request `ReadBudget` into `SourceVersionReader.open_described_version()`; actual bytes/candidates and exact SHA/size are handled by the existing catalog verifier. Removed both `_MAX_CN_PROOF_BYTES` and the local duplicate byte counter; per-PDF/page/text bounds remain.
+- TDD evidence: the 36×3.5MB (126MB) browse behavior test, real shared-budget SourceVersionReader test, and affected contracts passed **62/62 in 171.67s**, exit 0, with cleanup `removed=true`; Ruff/JSON/diff-check passed. The first 62-assertion run had teardown exit 1 because an existing root-admission test left its second SQLite catalog open; the `finally` repair now passes standalone and in the full affected pair. Independent review PASS, hash-bound; no production blocker, with a non-blocking note that a CN-browser max-candidate-exhaustion envelope lacks a direct test.
+- CI evidence binding corrected: current remote `3e7b7231` contains later product commit `707efe814` after CI-tested `1391ae81`; GitHub #537 is not exact CI for `3e7b7231`. Local `7fd7f248` is an unpublished 512MB intermediate. The final shared-budget change will replace that unpublished commit, be pushed, then receive exact-head CI.
+- Read-only owner refresh: FF `main@dd716217` tracked-clean; RF `main@be0caa4` is 9 commits ahead and has three tracked assurance changes; StockWiki `master@54f72c9` has no remote, is tracked-clean, and its root plan/progress updated at `5f79e7b` 17:30 UTC. User confirmed those external changes come from another active project; ROOT preserves them. M3 now waits on FF/RF owner evidence, not a stale StockWiki task-plan date.

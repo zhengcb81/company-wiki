@@ -359,32 +359,45 @@
   },
   "m3_current_head_review": {
     "date": "2026-11-15",
-    "observed_at_utc": "2026-11-15T18:13:29Z",
+    "observed_at_utc": "2026-11-15T21:28:24Z",
     "status": "IN_PROGRESS",
-    "scope_note": "M2 E01-E09 remains CLOSED for frozen refs. CWP is source-reviewed and server-confirmed at 5ae4a60. FF/RF advertised main refs were freshly queried read-only; elevated read-only git status resolved the sandbox-only worktree errors. Status used --untracked-files=no, so tracked state is known but untracked files were not enumerated. No external repository was modified.",
+    "scope_note": "M2 E01-E09 remains CLOSED only for frozen refs. Read-only external owner snapshot refreshed at 2026-11-15 21:24 UTC; tracked status only, untracked not enumerated. Published CWP master 3e7b723 includes product commit 707efe814; exact CI #537 passed on ancestor 1391ae81 only and is not exact for current published ref. Current local final CWP shared-budget fix is TDD-verified/reviewed and pending publication/exact CI. The user confirms external changes are from another project; ROOT preserves them.",
     "reviewed_owner_heads": [
       {
         "repository": "company-wiki",
         "m2_ref": "c6189c623f6ec30e2a1a1059499e78c8ffe5b443",
-        "current_ref": "master@5ae4a60b6fc883a73c198fb706a5b6979352dd29",
-        "remote_ref": "origin/master@5ae4a60b6fc883a73c198fb706a5b6979352dd29",
-        "changed_product_sources": 36,
-        "disposition": "ROOT previously reviewed the 24-path CWP source delta at scanner head b1e948276. The current M2-baseline delta is 36 src/ paths; the incremental 12 paths since b1 are the CWP1/FF1 source_catalog changes plus the identity correction. Owner-lane handoffs and focused tests were reconciled; the CWP1 legal-form false-positive and fuzzy-alias bypass were fixed and pushed at 5ae4a60b6. Exact equivalence is limited to same-form expansions and statutory within-type Chinese alternatives; strong fuzzy auto-resolution checks the candidate canonical name and all aliases. Final six-file regression 69 passed/20.62s; targeted Ruff, pre-commit mypy (490 sources), config doctor and push fixed smoke 18/18 passed. Independent reviewer PASS bound to exact source/test SHA (review/cwp1-legal-form-identity-20261115.md). Full GitHub Actions CI for this head is not verified.",
+        "current_ref": "published master@3e7b7231a2d6466ca21a7d7291b41b3c563a3a57; local root fix pending",
+        "remote_ref": "origin/master@3e7b7231a2d6466ca21a7d7291b3c563a3a57",
+        "changed_product_sources": 37,
+        "disposition": "Published M2-baseline delta is 37 src/ paths. Remote 3e7b723 includes product commit 707efe814 after exact-CI SHA 1391ae81, so #537 does not prove exact CI for current remote. Local working tree has a 39-path M2-baseline source delta including the reviewed root fix; final pending commit removes duplicate 64MB cap and threads shared request ReadBudget into CN proof reads. Tests 62/62 and independent review PASS; final exact CI pending.",
         "review_evidence": "review/cwp1-legal-form-identity-20261115.md",
-        "reviewed_source_commit": "5ae4a60b6fc883a73c198fb706a5b6979352dd29",
+        "reviewed_source_commit": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
         "independent_review": "PASS",
         "targeted_tests": "69 passed / 20.62 seconds; reviewer reran 3 key regressions",
         "source_sha256": "f2badf20d076c24754647210880bafccf244dd91067a111e74480dd783d79830",
-        "test_sha256": "30c8484bde3fcab13fcc1dae9864c820ba639390ea0acb0083d3ae497f0ade11"
+        "test_sha256": "30c8484bde3fcab13fcc1dae9864c820ba639390ea0acb0083d3ae497f0ade11",
+        "exact_ci": "GitHub CI #537 / run 43757282611 / job 132944030549 passed in 7m52s on 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; that SHA predates 707efe814 and current local fix.",
+        "worktree_candidate": {
+          "paths": [
+            "src/company_wiki/source_catalog/public_canonical_browser.py",
+            "src/company_wiki/source_catalog/source_reader.py",
+            "tests/contract/test_public_canonical_browser.py",
+            "tests/contract/test_source_reader_exact_history.py"
+          ],
+          "change": "Remove duplicate CN proof aggregate byte cap; pass browse-scoped SourceCatalog ReadBudget through SourceVersionReader into the existing verified resolver; repair exact-history test catalog cleanup.",
+          "status": "TDD_VERIFIED_INDEPENDENT_REVIEW_PASS_PENDING_PUBLICATION",
+          "tests": "62 passed / 171.67 seconds / exit 0; pytest cleanup removed=true; Ruff and diff-check passed",
+          "review": "PASS; see review/cwp-cn-issuer-read-budget-20261115.md; reviewer noted non-blocking direct max_candidates envelope coverage gap."
+        }
       },
       {
         "repository": "filing-fetch",
         "m2_ref": "d4f35cab5127d09c874d109080d911e6d394dec2",
         "current_ref": "local main@dd7162172718e8276a809e9c205e3c80da06141a",
-        "remote_ref": "origin/main@dd7162172718e8276a809e9c205e3c80da06141a (fresh git ls-remote, 2026-11-15 18:13 UTC)",
+        "remote_ref": "origin/main@dd7162172718e8276a809e9c205e3c80da06141a (fresh git ls-remote, 2026-11-15 20:37 UTC)",
         "changed_product_sources": 0,
         "changed_test_paths": 4,
-        "disposition": "Since M2, no src/ product path changed; four test paths and tools/verify_plan_claims.py changed. Fresh ls-remote confirms local main and server origin/main both at dd716217. Elevated read-only git status confirms tracked-clean; untracked files were not enumerated. Root FF PWF still lacks finite acquisition_limits repair and T3 rerun evidence. ROOT made no FF changes.",
+        "disposition": "Since M2, no src/ product path changed; four test paths and tools/verify_plan_claims.py changed. Fresh ls-remote confirms local main and server origin/main both at dd716217; elevated read-only status confirms tracked-clean, untracked not enumerated. Current root PWF records a separate S3 BYD bounded-provider E2E and FF-1 merge, not a rerun of the four failed RF weekly T3 downloads. Those requests omitted acquisition_limits; finite request limits and a passing current-main T3 rerun are still owed. ROOT made no FF changes.",
         "changed_tool_paths": 1,
         "tracked_worktree_status": "clean; elevated read-only status with --untracked-files=no",
         "untracked_status": "not_enumerated"
@@ -392,18 +405,19 @@
       {
         "repository": "revenue-forecast",
         "m2_ref": "fab819c25922af1366d7240af9bfee58d3bd612a",
-        "current_ref": "local main@88892536e8d53893427fc6afeabdfe17741536a5",
-        "remote_ref": "origin/main@f2215959d33abc76778342a95d39a8e38191da75 (fresh git ls-remote, 2026-11-15 18:13 UTC)",
+        "current_ref": "local main@be0caa4b506a4174d1bad860946ade73279627d4",
+        "remote_ref": "origin/main@f2215959d33abc76778342a95d39a8e38191da75 (fresh git ls-remote, 2026-11-15 20:37 UTC)",
         "changed_product_sources": 1,
         "changed_test_paths": 1,
-        "disposition": "Local main@88892536 is eight commits ahead of freshly queried server origin/main@f2215959. Elevated read-only status reports tracked modifications in assurance/runs/weekly_alert.jsonl and weekly_manifest.json; untracked files were not enumerated. Weekly manifest remains 20261115T084227Z / ok=false on historical FF 1dfd818, RF f2215959, CWP 0e741063. Canonical PLANNING_STATUS.md last commit is 11-14 and does not record the run ID. Owner reconciliation required; ROOT did not modify RF.",
+        "disposition": "Local main@be0caa4 is nine commits ahead of origin/main@f2215959; read-only 21:24 snapshot shows three tracked assurance files modified (daily_alert.jsonl, weekly_alert.jsonl, weekly_manifest.json); untracked not enumerated. Historical weekly run remains not-ok and absent from canonical PWF at last read. User confirms these are changes from another active project; ROOT leaves them untouched. Owner PWF/ref reconciliation remains.",
         "changed_assurance_paths": 5,
-        "local_commits_ahead_of_tracking_ref": 8,
+        "local_commits_ahead_of_tracking_ref": 9,
         "tracked_modified_paths": [
+          "assurance/runs/daily_alert.jsonl",
           "assurance/runs/weekly_alert.jsonl",
           "assurance/runs/weekly_manifest.json"
         ],
-        "tracked_worktree_status": "modified; elevated read-only status with --untracked-files=no",
+        "tracked_worktree_status": "modified; read-only snapshot 2026-11-15 21:24 UTC; user confirms concurrent project progress",
         "untracked_status": "not_enumerated"
       },
       {
@@ -426,14 +440,15 @@
       {
         "repository": "StockWiki",
         "m2_ref": "21cf4891019c8202e9e86996f47f0dbde7976293",
-        "current_ref": "local master@e1f9f559c08ca20e1806a0b1ac205cdd75d875f8",
+        "current_ref": "local master@54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e",
         "remote_ref": "none-configured",
         "changed_product_sources": 13,
-        "disposition": "Since M2, current local master delta includes 12 stockwiki/ source paths and scripts/warm_parse_cache.py plus 19 test paths. Root progress.md and findings.md include the 2026-11-15 three-company research run; root task_plan.md last commit is 2026-11-08. No remote is configured. Elevated read-only status confirms tracked-clean with --untracked-files=no; untracked files were not enumerated. Owner still needs to reconcile the canonical root task plan. ROOT made no StockWiki changes.",
+        "disposition": "No remote configured. Tracked-clean at 21:24. Root task_plan.md and progress.md refreshed at 5f79e7b on 2026-11-15 17:30; latest handoff summary commit 54f72c9. ROOT read-only reconciled the updated canonical plan; no further root-plan alignment action remains for this snapshot. Untracked files were not enumerated; external project progress preserved.",
         "changed_test_paths": 19,
         "canonical_pwf_refs": {
-          "task_plan_last_commit": "9baaf3d10178a8d9aa9a3853c417f223e8de50de (2026-11-08)",
-          "progress_findings_last_commit": "b3f5777455dfdea6b84b0a6e30fa8e8d42370b96 (2026-11-15)"
+          "task_plan_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
+          "progress_findings_last_commit": "task_plan/progress at 5f79e7bc530a8d4f5360026d072f3edf5396eed1; findings last observed at 0450506fc94adbfecd33001c244221a42ba0a00d",
+          "latest_handoff_commit": "54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e"
         },
         "tracked_worktree_status": "clean; elevated read-only status with --untracked-files=no",
         "untracked_status": "not_enumerated"
@@ -499,7 +514,7 @@
       "filing-fetch": {
         "canonical_entry": "PLANNING_STATUS.md",
         "weekly_run_reference": "not found in PLANNING_STATUS.md/task_plan.md/progress.md/findings.md",
-        "owner_action": "provide finite acquisition_limits for every download-capable T3 request and record/rerun result; no pass is evidenced",
+        "owner_action": "add finite acquisition_limits to the four failed weekly T3 download requests, rerun T3 on current main, and record the exact ref/result; the separate S3 BYD E2E does not close this",
         "status_observation": "clean; elevated read-only status with --untracked-files=no"
       },
       "revenue-forecast": {
@@ -507,8 +522,8 @@
         "last_commit": "3ca619283411cf2a48afa57a449c44e2aa907768 (2026-11-14)",
         "weekly_run_id": "20261115T084227Z",
         "weekly_status": "not-ok, absent from canonical root PWF",
-        "owner_action": "record run, its historical triplet, failure attribution and current main/tracking-ref split",
-        "status_observation": "8 local commits ahead of live remote; two tracked weekly-assurance files modified"
+        "owner_action": "record 20261115T084227Z and historical refs/failure attribution in canonical PWF; reconcile local main@be0caa4 (9 commits ahead of live origin/main@f2215959) and three tracked assurance modifications (daily_alert.jsonl, weekly_alert.jsonl, weekly_manifest.json)",
+        "status_observation": "9 local commits ahead of live remote; three tracked assurance files modified; untracked not enumerated; concurrent project changes preserved"
       },
       "StockWiki": {
         "canonical_entries": [
@@ -516,11 +531,12 @@
           "progress.md",
           "findings.md"
         ],
-        "task_plan_last_commit": "9baaf3d10178a8d9aa9a3853c417f223e8de50de (2026-11-08)",
-        "progress_findings_last_commit": "b3f5777455dfdea6b84b0a6e30fa8e8d42370b96 (2026-11-15)",
-        "owner_action": "reconcile root task_plan to recent committed research work and verify tracked worktree state",
-        "status_observation": "clean; elevated read-only status with --untracked-files=no"
-      }
+        "task_plan_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
+        "progress_findings_last_commit": "progress.md 5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z); findings.md 0450506fc94adbfecd33001c244221a42ba0a00d (2026-11-14T10:37:04Z)",
+        "owner_action": "No additional root-plan update requested in this snapshot: ROOT read-only reconciled task_plan/progress at 5f79e7b and latest handoff at 54f72c9; no remote is configured. Preserve external project work.",
+        "status_observation": "local master@54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e; no remote; tracked-clean; root task_plan/progress updated at 5f79e7b; untracked not enumerated"
+      },
+      "status_observation": "local/server main@dd716217 matches; tracked-clean under elevated read-only status --untracked-files=no; untracked not enumerated"
     },
     "cwp_untracked_snapshot": {
       "files": 23334,
@@ -532,9 +548,9 @@
       },
       "disposition": "preserve by existing inventory; no bulk add or delete"
     },
-    "next_action": "External-owner M3 reconciliation: FF supplies finite request-owned acquisition_limits and reruns T3; RF records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 (8 commits ahead of live origin/main@f2215959, with two tracked weekly-assurance edits); StockWiki aligns root task_plan. Elevated read-only status confirms FF and StockWiki tracked-clean and identifies the RF edits; untracked files were not enumerated. ROOT then binds fresh exact refs and owner receipts to the finite report. CWP slice is complete and published; do not repeat its passed contracts or loosen CWP budgets."
+    "next_action": "ROOT publishes the reviewed CWP shared-budget fix and obtains exact-head CI. FF owner supplies finite acquisition_limits on four failed weekly T3 downloads and reruns T3 on current main with PWF receipt. RF owner records 20261115T084227Z/not-ok in canonical PWF and reconciles local main@be0caa4 (nine commits ahead; three tracked assurance files). StockWiki root PWF is current at task_plan/progress commit 5f79e7b and latest handoff 54f72c9; ROOT binds that ref without repeating plan work. Refresh exact refs after owner action, then close finite M3; keep external repositories read-only."
   },
-  "next_action": "External-owner M3 reconciliation: FF supplies finite request-owned acquisition_limits and reruns T3; RF records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 (8 commits ahead of live origin/main@f2215959, with two tracked weekly-assurance edits); StockWiki aligns root task_plan. Elevated read-only status confirms FF and StockWiki tracked-clean and identifies the RF edits; untracked files were not enumerated. ROOT then binds fresh exact refs and owner receipts to the finite report. CWP slice is complete and published; do not repeat its passed contracts or loosen CWP budgets. Then resume parent P1 business-summary work; keep fixed company loop paused.",
+  "next_action": "ROOT publishes the reviewed CWP shared-budget fix and obtains exact-head CI. FF owner supplies finite acquisition_limits on four failed weekly T3 downloads and reruns T3 on current main with PWF receipt. RF owner records 20261115T084227Z/not-ok in canonical PWF and reconciles local main@be0caa4 (nine commits ahead; three tracked assurance files). StockWiki root PWF is current at task_plan/progress commit 5f79e7b and latest handoff 54f72c9; ROOT binds that ref without repeating plan work. Refresh exact refs after owner action, then close finite M3; keep external repositories read-only.",
   "reconciliation": {
     "status": "PARTIAL_RF_SAFE_INTAKE_MERGED_WITH_REMAINING_ASSIGNED",
     "entry": "reconciliation.md",

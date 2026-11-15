@@ -280,3 +280,19 @@ The subsequent user-authorized audit covered eight repositories, 390 branch/remo
 ## 2026-11-15 — CWP identity legal-form auto-resolution root cause
 
 The CWP1 exact-name suffix classes collapsed distinct corporate forms, and its unique strong-fuzzy branch could still resolve a conflicting legal form when only a suffix-free alias matched. The fix keeps exact equivalence to safe same-form abbreviations and Chinese within-type statutory alternatives, and rejects automatic fuzzy resolution when the candidate's canonical name or any alias carries a conflicting form. This is an identity correctness rule, not a manual approval control; it preserves the existing ambiguous candidate path. TDD and independent evidence are in `../module-boundaries-2026-11-11/review/cwp1-legal-form-identity-20261115.md`.
+
+
+## 2026-11-15 — M3 owner refresh and pending CWP budget candidate
+
+The 20:37 UTC owner snapshot confirms FF's separate S3 BYD bounded-provider end-to-end success does not close the four RF weekly T3 download failures: those requests lacked finite `acquisition_limits`, and no current-main rerun receipt is present. The CWP ensure contract remains unchanged. RF is nine local commits ahead of live main and has two tracked weekly-assurance changes; its weekly result remains not-ok and unrecorded in canonical PWF. StockWiki's recent commit updates source links/handoff, but its canonical root plan still needs owner reconciliation. These are owner-boundary handoffs; ROOT does not write those repositories.
+
+This was the 20:52 UTC finding and is superseded by the root-cause result below: the 512MB candidate was not retained.
+
+
+## 2026-11-15 21:21 UTC — CN issuer proof must consume the owner request budget
+
+The public CN identity proof had a separate 64MB aggregate byte counter, while `SourceCatalog` already owns a per-request `ReadBudget` (2GiB / 64 candidates by default). `open_described_version()` did not accept that budget, so the issuer-only proof path bypassed the canonical accounting contract and rejected a valid 36-filing / 126MB corpus. Raising the private cap to 512MB would leave two quota owners and still fail to follow the actual configured request budget.
+
+Root fix: create one `ReadBudget` per `PublicCanonicalBrowser.browse()` call; pass it through `SourceVersionReader.open_described_version()` into the existing verified-location resolver; remove `_MAX_CN_PROOF_BYTES` and the duplicate byte counter. Preserve actual byte-size/SHA verification, request candidate accounting, the established pathless `cn_primary_proof_budget_exceeded` result, and per-PDF/page/text bounds. A second browse receives a fresh budget. The earlier test's second `SourceCatalog` was not closed, causing pytest teardown to leave a SQLite lock even though all assertions passed; closing both catalogs in `finally` made test cleanup deterministic.
+
+Evidence: 36×3.5MB behavior case (126MB) passes without allocating a large fixture; real source-reader fixture checks caller budget charging and byte exhaustion; the two affected contract files pass 62/62 with exit code zero and cleanup receipt `removed=true`; Ruff and `git diff --check` pass. Independent review PASS bound to source/test hashes; reviewer notes a non-blocking missing direct CN-browser `max_candidates` exhaustion envelope regression. See `../module-boundaries-2026-11-11/review/cwp-cn-issuer-read-budget-20261115.md`.

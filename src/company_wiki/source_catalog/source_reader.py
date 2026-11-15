@@ -446,6 +446,7 @@ class SourceVersionReader:
         self, ref: SourceRef, *, purpose: str = "source_export",
         expected_read_policy_sha256: str | None = None,
         identity_cache_dir: Path | None = None,
+        budget: SourceReadBudgetPort | None = None,
     ) -> tuple[VerifiedContent, dict[str, str | int | None]]:
         """Observe facts once and verify the actual buffer under one read context."""
         self.__validate_read_policy_pin(expected_read_policy_sha256)
@@ -462,7 +463,7 @@ class SourceVersionReader:
             )
         opened = self.__verified_version(ref, purpose=purpose, expected_read_policy_sha256=None,
                                         retain_bytes=True, current_read_policy_sha256=pin,
-                                        scope_qualification=qualification)
+                                        budget=budget, scope_qualification=qualification)
         assert isinstance(opened, VerifiedContent)
         return opened, manifest
 

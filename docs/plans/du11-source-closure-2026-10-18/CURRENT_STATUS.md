@@ -4,6 +4,24 @@
 
 ## 2026-11-15 最新状态
 
+### 21:28 UTC update — read budget fixed; owner snapshot refreshed; CI binding corrected
+
+CN proof 修复的根因与验证见下节。另纠正 CI 绑定：远端 `3e7b723` 的父链包含产品代码提交 `707efe814`，不是 `1391ae81` 的 PWF-only 后继；#537 只证明 `1391ae81`，不能外推到当前远端。当前本地 `master@7fd7f248` 含未推送的 512MB 中间提交，最终工作区已用共享预算修复替代，计划折叠为单一最终提交后推送并验 exact-head CI。
+
+外仓只读状态刷新：FF `main@dd716217` 跟踪一致、tracked-clean；RF `main@be0caa4` 仍领先本地 `origin/main@f2215959` 9 个提交，`daily_alert.jsonl`、`weekly_alert.jsonl`、`weekly_manifest.json` 三个 tracked 文件有变动，weekly run `20261115T084227Z` 仍 not-ok 且未见于 canonical PWF；StockWiki `master@54f72c9` 无 remote、tracked-clean，根 `task_plan.md`/`progress.md` 已在 `5f79e7b`（17:30 UTC）更新，handoff 于 `54f72c9` 更新。用户说明外仓变化由另一项目并行推进；均未回退、清理或写入。M3 仍待 FF/RF 两项 owner 证据。
+
+### 21:21 UTC update — CN issuer proof now uses the shared read budget
+
+复核发现原有 CN issuer proof 另设 64 MB 总量阈值，和 SourceCatalog 的每请求 `ReadBudget` 脱节；改成 512 MB 常数只能掩盖问题。现在 `PublicCanonicalBrowser.browse()` 每次创建一份共享预算，并传入 `SourceVersionReader.open_described_version()`，由同一 resolver 按实际读取字节/候选数扣账；SHA、实际大小、每份 PDF 的 16 MB/1,000 页/800 万字符限制均保留。超过共享预算仍以无路径的 `cn_primary_proof_budget_exceeded` 返回。
+
+TDD/验证：36 份、累计 126 MB 的行为回归通过；SourceVersionReader 真实 fixture 验证预算扣账与超限；受影响的两份契约测试 **62 passed / 171.67 秒，退出码 0**，临时目录 `removed=true`；Ruff、JSON 解析、`git diff --check` 通过。曾有一次同组 62 项均通过但 pytest 清理退出失败，根因是既有准入拒绝测试漏关第二个 SQLite catalog；已加 `finally` 并单条复验，完整重跑干净通过。独立边界审查 PASS，绑定四个文件哈希；指出 max_candidates 的 CN 浏览器最终 envelope 没有专门回归，该项非阻塞，保留为测试覆盖备注。代码与PWF尚待提交推送。
+
+### 20:37 UTC update — CI closed; owner refs refreshed
+
+CI 修复已在 exact SHA `1391ae81d8126b5026209e26ae56a7d9bb0a9f0c` 通过 GitHub CI #537（run `43757282611`）。唯一下一步仍是有限 M3 owner 对账：FF local/server `main@dd716217` 一致且 tracked-clean；FF PWF 已记载另一项 S3 BYD 有界下载 E2E 和 FF-1 合并，但这不等于 RF 周测四个失败下载请求已修复或复验——该周测请求漏传 `acquisition_limits`，当前主线 T3 复跑证据仍缺。RF local `main@be0caa4` 比 fresh live `origin/main@f2215959` 超前 9 个提交，两份 weekly assurance 跟踪文件有未提交修改；`20261115T084227Z` 仍为 not-ok，未见于 canonical PWF。StockWiki local `master@235ac72` 无 remote、tracked-clean；最近提交更新了三条 CWP 来源链接和 `SW-RESEARCH-PRODUCTION-01` 交接，但 root `task_plan.md` 仍需 owner 对齐。status 核对仅覆盖 tracked 文件，未枚举 untracked。外仓均保持只读。
+
+以上 owner refs 仍是 20:37 UTC 的只读快照；其余外仓 owner 事项未变。CWP 的 64→512 MB 候选已被根因修复替代：删除重复常数，改用 SourceCatalog 统一请求预算；该工作区改动已通过定向测试与独审，等待发布。不要将此前“未审/未验收”的状态沿用到当前差异。
+
 ### 20:27 UTC update — exact-head CI passed
 
 GitHub Actions CI #537 / run `43757282611` passed on the exact pushed SHA `1391ae81d8126b5026209e26ae56a7d9bb0a9f0c`; job `132944030549` completed in 7m52s. The job had one warning and one notice about upstream Node/runner migrations, and no failure annotations. This closes the current CI regression repair. The preceding `895f66f57` CI failure remains documented as the evidence that drove the follow-up. Next project work resumes at the finite M3 owner reconciliations below.

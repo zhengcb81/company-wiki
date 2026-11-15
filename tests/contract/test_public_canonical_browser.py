@@ -1613,3 +1613,135 @@ def test_incomplete_us_dei_evidence_is_missing_evidence_not_guess(workspace):
     assert amended and amended[0]["reason_code"] == "issuer_proof_missing"
     # And the proven binding still pins the complete-DEI source only.
     assert result["binding"]["issuer"]["source_id"] == ACME_URN
+
+
+def test_cn_issuer_proof_uses_one_request_read_budget_for_the_whole_corpus(
+        workspace, monkeypatch):
+    """A valid 126MB issuer-proof corpus uses the shared source-read account.
+
+    Source bytes are represented by a small fake reader so this regression
+    exercises the real browser orchestration without creating a 126MB fixture.
+    The source-reader contract separately verifies real byte/hash enforcement.
+    """
+    from types import SimpleNamespace
+
+    import company_wiki.source_catalog.cn_primary_issuer as cn_issuer
+    import company_wiki.source_catalog.source_reader as source_reader
+    from company_wiki.source_catalog.public_canonical_browser import (
+        Binding, PublicCanonicalBrowser,
+    )
+    from company_wiki.source_catalog.read_budget import ReadBudget
+    from company_wiki.source_catalog.source_reader import SourceReadError
+
+    tmp_path, catalog, _ = workspace
+    sidecar = {
+        "schema_version": "1.0",
+        "canonical_entity_id": ENT_ACME,
+        "display_name": "ACME CORP",
+        "market": "CN",
+        "security_id": "600000",
+        "document_kind": "annual_report",
+        "filing_date": "2026-03-30",
+        "form_type": "FY",
+        "provider": "test",
+        "language": "zh",
+        "fiscal_year": 2025,
+        "period_end": "2025-12-31",
+    }
+    facts = {
+        "entity": "ACME CORP", "market": "CN", "security_id": "600000",
+        "document_kind": "annual_report", "fiscal_year": 2025,
+        "period_end": "2025-12-31",
+    }
+    evidence = {
+        key: {"locator": "sidecar:" + key, "value": value}
+        for key, value in facts.items()
+    }
+    source_ids = [_source_urn(ACME_CN_BODY)]
+    cn_dir = tmp_path / "companies" / "ACME" / "raw" / "cn"
+    added_bodies = []
+    for index in range(35):
+        body = f"%PDF-1.4 corpus-member-{index}".encode("ascii")
+        added_bodies.append(body)
+        source_ids.append(_source_urn(body))
+        _write_doc(cn_dir, f"corpus-{index}.pdf", body,
+                   {**sidecar, "provider_document_id": f"cn-{index}"})
+    catalog.scan()
+    for body in added_bodies:
+        _record_facts(catalog, body, "application/pdf", facts, evidence)
+
+    metadata = {
+        "market": "CN", "document_kind": "annual_report",
+        "security_id": "600000",
+    }
+    passed_budgets = []
+
+    class BudgetAwareReader:
+        def __init__(self, _catalog):
+            pass
+
+        def describe_version(self, _ref):
+            return metadata
+
+        def open_described_version(self, _ref, *, purpose, budget):
+            assert purpose == "source_export"
+            passed_budgets.append(budget)
+            assert budget.take_candidate() == ""
+            error = budget.charge(3_500_000)
+            if error:
+                raise SourceReadError("unavailable", error)
+            return SimpleNamespace(data=b"fixture pdf"), metadata
+
+    monkeypatch.setattr(source_reader, "SourceVersionReader", BudgetAwareReader)
+    monkeypatch.setattr(cn_issuer, "pdf_text_pages", lambda _data: [])
+    monkeypatch.setattr(
+        cn_issuer, "extract_cn_issuer",
+        lambda *_args, **_kwargs: {
+            "key": {"value": "913101157626272806"},
+            "security": {"security_id": "600000"},
+        },
+    )
+
+    browser = PublicCanonicalBrowser(catalog)
+
+    def prove_corpus(self, _entity, _listing, _as_of):
+        for source_id in source_ids:
+            result = self._resolve_source_facts(source_id)
+            assert not isinstance(result, Binding)
+        return Binding(status="unknown", reason_codes=["fixture_complete"])
+
+    monkeypatch.setattr(PublicCanonicalBrowser, "_resolve_binding", prove_corpus)
+    first = browser.browse(_request())
+    first_budget = browser._cn_read_budget
+    assert first["state"] == "empty"
+    assert first_budget.bytes_read == 126_000_000
+    assert first_budget.bytes_read > 64_000_000
+    assert all(budget is first_budget for budget in passed_budgets)
+
+    passed_budgets.clear()
+    second = browser.browse(_request())
+    second_budget = browser._cn_read_budget
+    assert second["state"] == "empty"
+    assert second_budget is not first_budget
+    assert second_budget.bytes_read == 126_000_000
+    assert all(budget is second_budget for budget in passed_budgets)
+
+    budget_limited = PublicCanonicalBrowser(catalog)
+    budget_limited._cn_read_budget = ReadBudget(max_bytes=64_000_000)
+    budget_limited._cn_verified = {}
+    budget_limited._cn_target_security = None
+    budget_limited._cn_budget_exhausted = False
+    for source_id in source_ids:
+        result = budget_limited._resolve_source_facts(source_id)
+        if budget_limited._cn_budget_exhausted:
+            break
+    assert budget_limited._cn_budget_exhausted
+    assert isinstance(result, Binding)
+    budget_limited._verified_assertions = lambda: []
+    verified_binding = Binding(
+        status="verified", reason_codes=[], issuer_pin={
+            "namespace": "cn.uscc", "value": "913101157626272806",
+        },
+    )
+    with pytest.raises(SourceReadError, match="cn_primary_proof_budget_exceeded"):
+        budget_limited._proven_versions(verified_binding)
