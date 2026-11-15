@@ -1,5 +1,8 @@
 # Findings & Decisions
 
+> **当前发现入口（2026-11-15）**：本文件是根目录历史发现日志，不是当前任务的 findings。现行架构发现见 [模块边界 findings](docs/plans/module-boundaries-2026-11-11/findings.md)，当前状态与下一步见 [总控 CURRENT_STATUS](docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md)。旧记录保留为历史，不覆盖现行计划。
+
+
 ## 2026-10-04 G1-LEGACY 集成发现
 
 - 外包 handoff 中对 `source_catalog_pilot_check.py` 的环境独立入口阻断描述与实际源代码不一致：脚本虽导入 `enforce_direct_cli`，但调用路径漏接。主线新增 plain 与 `PYTHONPATH=scripts` 的真实启动合同并接上 guard，修复后两种启动均被统一阻断。

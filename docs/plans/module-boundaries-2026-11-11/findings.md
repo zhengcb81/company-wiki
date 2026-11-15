@@ -61,3 +61,8 @@ CWP1's broad suffix class treated `PLC`, `AG`, `SE`, `NV`, `SA`, `LP`/`LLP`, and
 ## 2026-11-15 — Git worktree-status error isolated to sandbox context
 
 The previous read-only commands in the restricted sandbox returned fatal: this operation must be run in a work tree for FF, RF, and StockWiki, although rev-parse reported a worktree. Repeating the same status operation in the approved elevated host context succeeded for all three, and fresh git ls-remote calls confirmed live FF/RF main refs. This establishes an execution-context difference; there is no evidence of a repository configuration defect. FF and StockWiki tracked files are clean. RF has two tracked weekly-assurance modifications and its local main is eight commits ahead of live remote. Status was run with --untracked-files=no, so no conclusion is made about untracked files. All owner repositories remained read-only.
+
+
+## 2026-11-15 — Root-level planning files are historical indexes
+
+Inspection found the root PLANNING_STATUS.md still presents a 2026-09-12 approval snapshot, while root progress.md and findings.md stop at 2026-10-04. The selected PWF plan is under docs/plans/du11-source-closure-2026-10-18 and its M3 child; root files are retained as historical logs, not rewritten. Added prominent links at their tops to the current-status, module-boundary matrix, and handoff. This removes competing apparent execution entrypoints without deleting history.

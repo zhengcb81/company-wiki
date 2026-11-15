@@ -99,3 +99,9 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - Fresh git ls-remote confirms RF origin/main@f2215959; local main@88892536 is eight commits ahead, with tracked modifications in assurance/runs/weekly_alert.jsonl and weekly_manifest.json. The weekly run remains not-ok and absent from canonical root PWF. ROOT leaves RF untouched.
 - StockWiki master@e1f9f559 has no remote and is tracked-clean under elevated read-only status. Its root task_plan still requires owner reconciliation; ROOT leaves its worktree untouched.
 - Elevated status succeeded where restricted-sandbox status had failed. The error is attributed to execution context, not repository health. Untracked files were not enumerated because status used --untracked-files=no. Matrix and parent current status now carry the corrected facts.
+
+
+## 2026-11-15 18:30 UTC — root PWF entrypoints redirected
+
+- Marked the root PLANNING_STATUS.md September snapshot and root progress.md/findings.md October logs as historical, with links to the selected current PWF and M3 records. Existing entries and evidence were preserved.
+- This avoids treating stale approval/status text as current without creating another plan or rewriting historical logs. Root status, M3 plan, matrix, README, and handoff now agree on the owner work remaining.

@@ -1,5 +1,8 @@
 # Progress Log
 
+> **当前状态入口（2026-11-15）**：本文件是根目录历史进度日志，最新旧记录日期为 2026-10-04；它不负责表达当前状态。请读 [总控当前状态](docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md) 和 [模块边界 M3 进度](docs/plans/module-boundaries-2026-11-11/progress.md)。历史日志保留，不覆盖现行计划。
+
+
 ## 2026-10-04 G1-LEGACY 外包包接收并入主线
 
 - 当前 CWP 起点为 `master@1906295`。外包分支 `codex/g1-legacy-entry-retirement@1cf8183` 的删除与兼容变更已合入当前 master merge；机器专用 `config/source_acquisition.yaml` 保持未暂存、未纳入合并。

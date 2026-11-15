@@ -1,5 +1,8 @@
 # company-wiki 当前规划状态
 
+> **现行入口说明（2026-11-15）**：本文下方的 2026-09-12 状态与“从哪里继续”仅是历史存档，不是当前计划或待批准事项。company-wiki 唯一总控状态见 [当前状态](docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md)；当前架构工作见 [模块边界 M3 计划](docs/plans/module-boundaries-2026-11-11/task_plan.md)、[当前矩阵](docs/plans/module-boundaries-2026-11-11/boundary_matrix.json) 和 [交接](docs/plans/du11-source-closure-2026-10-18/HANDOFF.md)。遵循这几个现行文件；不要从本文历史条目推断当前许可、状态或下一步。
+
+
 > **2026-09-12 上午最新覆盖（R4 阶段 A v0.4.2 / 阶段 B v0.1.5 边界已定 / A06 首个真实基线）**：
 > ✅ **owner 已定 6 项 B 边界（2026-09-12，"全按推荐来"）**：**S-1** B 可新增测试文件（`tests/contract/**`，仅新增不改既有，F10/F11 已批）；**S-2** owner **R-1/R-4** 整改**不纳入 B**（另立工作包）；**S-3** **不动**在产 `export_policy_2x`（跨仓 policy_hash 保持）；**S-4** 消费者侧归 **C**，B 不签；**S-5** G8 隔离副本**两级**（L1 机制层可立即开工）；**S-6** 需要第四轮复审（已完成）。权威记录：revenue `assurance/runs/2026-09-11_r4-phase-b/owner-scope-decisions-2026-09-12.md`。
 > 📌 **2026-09-12 11:20 更新**：阶段 B 设计已到 **v0.1.6**，并新增**可复跑的**双向自证工具 `assurance/runs/2026-09-11_r4-phase-b/evidence/claim_fact_audit.py`（17/17 通过；它取代了被 rev6 正确驳回的"只有断言没有证据"的 JSON）。`B.DR` **六轮 rejected**，但每轮都确认**技术实质成立**、问题在文档纪律（作者已把该纪律工具化）。CI：revenue #154、wiki #107 均 success。
