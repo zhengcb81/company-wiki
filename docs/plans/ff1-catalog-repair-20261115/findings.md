@@ -90,3 +90,42 @@
     与既有 provider/form_type 等 strip 一致。测试：补 2 用例（"  mdb-2025 " 双分支投影后 trim
     断言 + 注释引用消费方形状规则；空白-only title 拒绝发射），56 通过。
   - **F-R1 / F-R2：随 handoff 交回**（不在本 lane 分支修复，按 §8 规矩移交）。
+
+## F8 facts 修正 pass（2026-11-15 晚，用户全授权修改生产 catalog）
+
+**授权**：用户 2026-11-15 明确授权对生产 `.source_catalog/catalog.sqlite3` 的 4 个 MDB 文档行做 facts 修正（仅新增 superseding 断言，严禁裸 SQL / 删除断言 / 触碰这 4 行之外数据——红线全程遵守）。
+
+### 机制（superseding 断言如何压过旧 None pin）
+
+研究确认（assertion_service.py / scanner.py / resolver.py / cli.py + test_ff1_import_published_date.py）：
+
+1. 旧 pin 的成因：`source_fact_projection`（assertion_service.py:546）按 `ORDER BY created_at DESC LIMIT 1` 取最新 verified source-facts 断言并投影其 `source_fact_patch`（None 也投影）；scanner `_merge_document_row`（scanner.py:1842-1861）的 `effective` 判定在 sidecar 声明值未变（`new_raw == old_raw`）时让事实值生效——于是 None 压住声明值，定向登记（register_groups）无法回填（与 Lane B 隔离重放结论一致）。
+2. 设计内修正路径：CLI `source-facts --request`（cli.py:902）→ `record_source_facts`（assertion_service.py:385）：
+   - `validate_source_facts`：facts/evidence 逐字段校验（每字段需 locator+value 匹配，published_date 必须 ISO 日期）；
+   - `reader.verify_version(ref, purpose="source_export")`：对盘上原件做字节校验（sha256+size 对 sources 行）；
+   - `prepare_source_fact_write`（:410）：`patch.update(facts)` 把合并后的 patch 从 `published_date: None` 变为声明值；新断言带 `supersedes_assertion_id=<旧>`、`decision=verified`、`evidence_basis=source-facts`；旧断言记录原样保留（append-only）；
+   - `write_source_fact_projection`（:454）：同一事务内 INSERT 断言 + `UPDATE documents SET published_date=?`；
+   - 此后 `source_fact_projection` 读到的是新断言 → 投影声明值 → scanner effective 判定（`_declaration_matches(new_raw, value)` 或声明缺省）放行 → resolve 走正常复用分支。
+3. `record_source_facts` 的 docstring "Explicit unknowns survive later corrections" 指**其他字段**修正不连带清 published_date；显式给出非 None 的 `published_date` fact 正是该机制设计内的覆盖路径（test_prior_known_publication_date_still_wins 同理反证）。
+
+### 执行证据
+
+- 前置（只读快照 + 独立预校验）：4 行 `published_date=NULL`、各行恰 1 条 2026-11-08T06:09 断言（patch `published_date: null, filing_date: null`）；对每行盘上原件独立重哈希（sha256+size 全对上 sources 行）并核对 sidecar meta.json `filing_date` 声明后才发请求。注意 mdb-* 是 documents.title（团队速记），document_id 实为 sha256 URN。
+- 修正（2026-11-15T17:08Z，CLI source-facts，全部 `status: recorded`）：
+
+| title | 旧断言 | 新断言（supersedes） | published_date 前→后 |
+|---|---|---|---|
+| mdb-20220131 | sa-708eeb5419a342ecb23e3761a55adabd | sa-2dadd762f04f4acc864113f41095e650 | NULL → 2022-03-18 |
+| mdb-20230131 | sa-6dcefacab568426fb6600b244a2a6be6 | sa-17a828f4ed5b4f42a26ccbb8ad79f035 | NULL → 2023-03-17 |
+| mdb-20240131 | sa-5aa65c9a4d134f4f9910b9691c3e95f3 | sa-354fe846b8c84c6982c33b0fd81446ab | NULL → 2024-03-15 |
+| mdb-20260131 | sa-30c42c679b9549928f1c224e6cc9824d | sa-a04a90d3f7e9461d8a0c225a9b5af42d | NULL → 2026-03-11 |
+
+- 溯源完整性：每条新断言 evidence 的 published_date 字段带 `locator=dayu-portfolio-sidecar:MDB/filings/<组>/meta.json#filing_date`、`extraction_method=sidecar-declaration-repair/1`、`content_sha256`、`byte_size`、`observed_at`、`repair_pass=ff1-catalog-repair-20261115/facts-correction`、`authorized_by=user-approval-2026-11-15`。
+- 本 pass 未追加 catalog_repairs.jsonl（该 journal 属 B2 定向登记自愈；facts 修正的审计落在 source_metadata_assertions 表）。现存唯一一条 16:47:05Z 事件是当日 16:47 ensure job 失败尝试时的 B2 自愈，先于本 pass。
+- resolve 探针（--company-query "MONGODB, INC." --market US --annual_report --form-type 10-K --as-of 2025-07-18）：
+  - 前：FY2022/2023/2024 均 `ambiguous / unique_match_published_date_unknown`（unknown_date_match_count=1，对应行 published_date_unknown）；
+  - 后：三者均 `reused_equivalent / one_existing_source_satisfies_semantic_request`，match published_date 正确，bundle_status=available。
+
+### FY2026 遗留（超范围，非本 pass 失败）
+
+- mdb-20260131 行的 pin 已清（2026-03-11 已回填），但 resolve FY2026 仍 `blocked: fiscal_period_unresolved`。在盘上原件独立复现（dayu_fiscal_metadata）：primary 内含两个 DEI 日期观测，`ixt:date-month-day-year`（文本 `1/31/2026`）**不在** `_inline_date` 的闭集变换表（仅收录 monthname-en 三个 TR4 变换），`complete_sec_primary` 要求全部观测归一 → 抛 "SEC primary inline date cannot be normalized"。即重审 F-R6 的独立预存问题（代码缺口，非数据缺口），需另行 lane 处理。

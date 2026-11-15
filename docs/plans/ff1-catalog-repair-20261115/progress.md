@@ -60,3 +60,14 @@
 
 - 分支最终 commit（6 个）：da35f6c25(B1) → 1cf52e825(B2) → c2d621cb5(B3) → 63a665005(B4) → fa517aac8(决策桩容错) → aa35d8609(架构门禁重构)。
 - 全部验收与对照数据齐备，本文件与 findings.md 以 docs(pwf) 提交收口。不 push、不并 master。
+
+## [N6] facts 修正 pass（2026-11-15 晚，子代理执行，用户 2026-11-15 全授权）
+
+- [x] 先研究后动手：test_ff1_import_published_date.py（B3 机制测试）、assertion_service.py（validate/record_source_facts/prepare_source_fact_write/write_source_fact_projection/source_fact_projection）、cli.py source-facts 子命令、scanner.py:1842-1861 effective 判定、resolver.py:1932 分类。结论：显式给出非 None `published_date` 的 source-facts 断言即设计内 supersede 路径，无需旁路。
+- [x] 前置快照（只读）：4 行 published_date=NULL + 各 1 条 2026-11-08T06:09 None-patch 断言；resolve FY2022/2023/2024（as-of 2025-07-18）均 `ambiguous / unique_match_published_date_unknown`。
+- [x] 逐行修正（CLI source-facts，2026-11-15T17:08Z，4/4 recorded）：独立预校验盘上原件 sha256+size + sidecar meta.json filing_date → 请求文件（临时目录）→ verify_version 再校验 → 新增 superseding 断言（supersedes_assertion_id 指向旧断言，旧记录原样保留）+ 原子 UPDATE documents.published_date。SQL 复查：2022-03-18 / 2023-03-17 / 2024-03-15 / 2026-03-11 全部回填。
+- [x] 后置探针：FY2022/2023/2024 → `reused_equivalent`（bundle available）；FY2026 仍 blocked（F-R6：`ixt:date-month-day-year` 不在 _inline_date 闭集 → fiscal_period_unresolved，盘上复现，超范围遗留）。
+- [x] 端到端闭环（filing-fetch）：`act retry`（idempotency-key ff1-acceptance-mdb-fy2024-retry-20261115，零花费证据放行）→ `run` → **succeeded / reused_existing / 0.00 USD（engine_zero_evidence）/ downloads 0**，source_ref=mdb-20240131 sha256 2f997be5…。
+- [x] 回归：ff1 四个契约测试文件 **34 passed**（B1 12 + B2 4 + B3 3 + B4 15）。
+- [x] 本 pass 审计：source_metadata_assertions 新增 4 条 verified 断言（evidence 含 locator/extraction_method/content_sha256/repair_pass/authorized_by）；catalog_repairs.jsonl 无追加（facts 修正不走 B2 自愈 journal）。
+- 注：不提交 git——主工作区有他人在途工作流，docs 留工作区改动由整合者统一收口。
