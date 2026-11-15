@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 import hashlib
 import json
 import mimetypes
@@ -36,6 +36,7 @@ from .filesystem_discovery import SKIP_DIRS, walk_document_files
 from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
 from .store import CatalogStore, canonical_json, metadata_object, metadata_state
 from .registration_scope import SourceRegistrationScope, existing_group_locations
+from .source_group_scope import filing_group_key
 from .source_location import relative_source_path
 from .scan_contract import ScanCandidate as _Candidate
 from .scan_contract import infer_company_name as _infer_company
@@ -1295,6 +1296,56 @@ def root_fingerprint(candidates: list[Any]) -> dict[str, Any]:
             hashlib.sha256(data).hexdigest(),
         ))
     return {"files": sorted(files)}
+
+
+def declared_group_publication_date(root: RootSpec, relative_path: str) -> tuple[str, str] | None:
+    """The publication date a group's on-disk sidecar DECLARES, or None.
+
+    FF-1 catalog repair precheck (read-only): this is the scanner's own
+    layout knowledge — which declaring container a group carries per root
+    kind — exposed without a write path.  A dayu portfolio group declares
+    through its directory ``meta.json``; company_raw and directory groups
+    declare through the sibling ``.source.json`` acquisition sidecar.  Only
+    a canonical ISO date counts as a declaration (``_DECLARING_KEYS``
+    semantics: ``filing_date`` first, then ``published_date``); anything
+    else is treated as absent rather than guessed.
+
+    Returns ``(sidecar_kind, filing_date)`` where ``sidecar_kind`` names the
+    declaring container (``group_meta_json`` / ``acquisition_sidecar``).
+    """
+    if root.kind == "dayu_portfolio":
+        group = filing_group_key(relative_path)
+        meta_path = root.path.joinpath(*Path(group).parts) / "meta.json"
+        try:
+            payload = json.loads(meta_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            return None
+        sidecar_kind = "group_meta_json"
+    elif root.kind in {"company_raw", "directory"}:
+        sidecar = root.path.joinpath(*Path(relative_path).parts).with_name(
+            Path(relative_path).name + ACQUISITION_SIDECAR_SUFFIX
+        )
+        if not sidecar.is_file():
+            return None
+        payload = read_acquisition_sidecar(sidecar)
+        sidecar_kind = "acquisition_sidecar"
+    else:
+        return None
+    if not isinstance(payload, dict):
+        return None
+    for key in ("filing_date", "published_date"):
+        value = payload.get(key)
+        if not isinstance(value, str) or not value.strip():
+            continue
+        candidate_date = value.strip()
+        try:
+            parsed = date.fromisoformat(candidate_date)
+        except ValueError:
+            continue
+        if parsed.isoformat() != candidate_date:
+            continue
+        return sidecar_kind, candidate_date
+    return None
 
 
 R4_PROVENANCE_KEY = "r4_provenance"

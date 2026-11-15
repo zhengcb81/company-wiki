@@ -11,25 +11,22 @@ directed registration the ``catalog register`` subcommand uses
 Red lines honoured here:
   * the planner only READS (sidecar files + the catalog reader);
   * the repair never invents a value: a group is registered only when its
-    sidecar declares a filing date (``_DECLARING_KEYS`` semantics);
+    sidecar declares a filing date — the declaration judgment itself is the
+    scanner's layout knowledge (``scanner.declared_group_publication_date``),
+    so this module stays free of root-kind dispatch;
   * resolve/query never call into this module (ensure-only self-heal).
 """
 
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from datetime import date, UTC, datetime
+from datetime import UTC, datetime
 import json
 import os
 from pathlib import Path
 from typing import Any
 
-from .acquisition_sidecar import (
-    ACQUISITION_SIDECAR_SUFFIX,
-    read_acquisition_sidecar,
-)
 from .lock import acquisition_mutex
-from .source_group_scope import filing_group_key
 from .store import canonical_json
 
 
@@ -37,9 +34,6 @@ CATALOG_REPAIR_JOURNAL_SCHEMA_VERSION = "catalog-repair/1"
 
 #: Where a repaired group's declaration came from (journal ``data_source``).
 DATA_SOURCE_GROUP_SIDECAR_DECLARATION = "group_sidecar_declaration"
-
-_DAYU_GROUP_SIDECAR = "group_meta_json"
-_ACQUISITION_GROUP_SIDECAR = "acquisition_sidecar"
 
 
 @dataclass(frozen=True)
@@ -59,65 +53,18 @@ def _utc_now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
-def _declared_filing_date(payload: dict[str, Any]) -> str | None:
-    """The sidecar's declared publication date, or None when undeclared.
-
-    Mirrors the scanner's ``_DECLARING_KEYS["published_date"]`` order
-    (``filing_date`` first, then ``published_date``): only a canonical ISO
-    date counts as a declaration — anything else is treated as absent
-    rather than guessed into the catalog.
-    """
-    for key in ("filing_date", "published_date"):
-        value = payload.get(key)
-        if not isinstance(value, str) or not value.strip():
-            continue
-        candidate = value.strip()
-        try:
-            parsed = date.fromisoformat(candidate)
-        except ValueError:
-            continue
-        if parsed.isoformat() == candidate:
-            return candidate
-    return None
-
-
-def _dayu_group_repair(root: Any, relative: str) -> GroupRepair | None:
-    group = filing_group_key(relative)
-    meta_path = root.path.joinpath(*Path(group).parts) / "meta.json"
-    try:
-        payload = json.loads(meta_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError):
-        return None
-    if not isinstance(payload, dict):
-        return None
-    declared = _declared_filing_date(payload)
-    if declared is None:
-        return None
-    return GroupRepair(str(root.root_id), relative, _DAYU_GROUP_SIDECAR, declared)
-
-
-def _acquisition_sidecar_repair(root: Any, relative: str) -> GroupRepair | None:
-    sidecar = root.path.joinpath(*Path(relative).parts).with_name(
-        Path(relative).name + ACQUISITION_SIDECAR_SUFFIX
-    )
-    if not sidecar.is_file():
-        return None
-    payload = read_acquisition_sidecar(sidecar)
-    declared = _declared_filing_date(payload)
-    if declared is None:
-        return None
-    return GroupRepair(str(root.root_id), relative, _ACQUISITION_GROUP_SIDECAR, declared)
-
-
 def plan_undated_group_repairs(catalog: Any, resolution: Any) -> tuple[GroupRepair, ...]:
     """Read-only plan: which excluded undated candidates' groups DECLARE a date.
 
     Only candidates the resolver excluded for an unknown published date are
     considered; a repair target is emitted solely when the group's sidecar on
-    disk declares a filing date.  The registration relative path is the
-    candidate's own active ``original_primary`` location, so the directed
-    registration selects exactly that group (``SourceRegistrationScope``).
+    disk declares a filing date (judged by the scanner's layout owner, not
+    here).  The registration relative path is the candidate's own active
+    ``original_primary`` location, so the directed registration selects
+    exactly that group (``SourceRegistrationScope``).
     """
+    from .scanner import declared_group_publication_date
+
     roots = {root.root_id: root for root in catalog.config.roots}
     planned: dict[tuple[str, str], GroupRepair] = {}
     for candidate in getattr(resolution, "excluded_candidates", ()) or ():
@@ -147,14 +94,20 @@ def plan_undated_group_repairs(catalog: Any, resolution: Any) -> tuple[GroupRepa
             relative = str(location["relative_path"])
             if root is None:
                 continue
-            if root.kind == "dayu_portfolio":
-                repair = _dayu_group_repair(root, relative)
-            elif root.kind in {"company_raw", "directory"}:
-                repair = _acquisition_sidecar_repair(root, relative)
-            else:
+            try:
+                declared = declared_group_publication_date(root, relative)
+            except Exception:  # noqa: BLE001 - unreadable sidecars are not repairable
                 continue
-            if repair is not None:
-                planned.setdefault((repair.root_id, repair.relative_path), repair)
+            if declared is None:
+                continue
+            sidecar_kind, filing_date = declared
+            repair = GroupRepair(
+                root_id=str(root.root_id),
+                relative_path=relative,
+                sidecar_kind=sidecar_kind,
+                filing_date=filing_date,
+            )
+            planned.setdefault((repair.root_id, repair.relative_path), repair)
     return tuple(planned.values())
 
 
