@@ -31,4 +31,10 @@
 - [N3] B3 实现完成：canonical_writer._record_validated_capture 的 prior-patch 过滤加显式未知豁免——previous[key] 为 None/""（显式未知=空列）且本次 facts 带非空声明（published_date/filing_date，值=candidate.filing_date）时保留该 fact，走既有 prepare_source_fact_write/write_source_fact_projection 落库（断言 evidence locator canonical-commit:/candidate/published_date + provider-metadata-import/1）；prior 非空值仍获胜、scope 冲突检查不变、无猜测值。
   - 测试 tests/contract/test_ff1_import_published_date.py 3 用例全绿：声明导入→published_date=2026-03-11+声明溯源；prior 显式未知（模拟 2026-11-08 批量）+声明再导入→填上；prior 已知日期→不被导入替换。
   - 回归：test_source_catalog_canonical_writer.py 全绿（17 通过含新增 3）。
-- [N3] B3 待提交。
+- [N3] B3 提交 c2d621cb5（安全门禁一次通过）。
+- [N4] B4 实现完成：
+  - operation_contract.py：SourceOperationInput 新增 candidates（解析 resolution.excluded_candidates）与 reason（acquisition.reason→resolution.reason 优先级）两个可选字段；导出 OPERATION_REASONS 闭集（resolver 终态 11 个 + coordinator 决策 8 个，含契约示例的全部 4 个）。
+  - operation_projection.py：status∈{ambiguous,not_found} 且有候选时投影 candidates（白名单逐字段构造，多 match→multiple_candidates，excluded→各自 reason，≤5 截断保留原序）；reason 仅在闭集内透传（未知词表省略可选字段，不臆造映射）；completed/gap 永不携带；白名单外的键（含物理路径）逐项剥除 + 顶层 _contains_physical_field 兜底；operation_schema_version 保持 "1.0"。
+  - 测试 tests/contract/test_ff1_operation_candidates.py 10 用例全绿：白名单逐字段、多 match 投影、≤5 截断原序、completed/gap 不携带（含带 excluded_candidates 的载荷）、未知 reason 省略、pathless guard（注入 canonical_path/absolute_location 被剥除）、6 组畸形候选拒绝、闭集导出断言。
+  - 回归：test_source_operation_v2 35 通过（含新增 10）；acquisition_failure_return_paths / canonical_acquisition_scope / verified_source_operation 共 49 通过。
+- [N4] B4 待提交。

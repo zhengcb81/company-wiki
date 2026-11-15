@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import asdict
+import re
 from typing import Any, cast, Protocol
 
 from .operation_contract import (
+    OPERATION_REASONS,
     SourceOperationInput,
     SourceOperationProjectionError,
 )
+from .resolver import CANDIDATE_EXCLUSION_REASONS
 from .source_reader import SourceRef
 
 
@@ -25,6 +28,18 @@ _GAP_ITEM_FIELDS = frozenset({
     "fiscal_period", "period_end", "reason",
 })
 _PHYSICAL_FIELD_PARTS = ("path", "location", "root", "bundle")
+
+# FF-1 B4: the pathless candidate whitelist (contract text 2026-11-15 — the
+# consumer lane implements the SAME text; do not deviate).  Exactly these
+# keys, at most five items, only for status ambiguous / not_found.
+_CANDIDATE_ITEM_FIELDS = (
+    "document_id", "title", "document_kind", "provider", "provider_document_id",
+    "form_type", "fiscal_year", "fiscal_period", "language", "content_sha256",
+    "byte_size", "publication_status", "exclusion_reason",
+)
+_CANDIDATE_MAX_ITEMS = 5
+_CANDIDATE_PUBLICATION_STATUSES = frozenset({"known", "unknown", "future"})
+_SHA256_RE = re.compile(r"[0-9a-f]{64}")
 
 
 class VersionReader(Protocol):
@@ -63,6 +78,86 @@ def _contains_physical_field(value: object) -> bool:
     if isinstance(value, (list, tuple)):
         return any(_contains_physical_field(child) for child in value)
     return False
+
+
+def _candidate_text(item: dict[str, Any], key: str) -> str | None:
+    value = item.get(key)
+    if value is None:
+        return None
+    if not isinstance(value, str) or not value:
+        raise SourceOperationProjectionError(f"candidate {key} must be text or null")
+    return value
+
+
+def _project_candidate(
+    item: dict[str, Any], *, exclusion_reason: str | None = None,
+) -> dict[str, Any]:
+    """One candidate projected onto the whitelist — nothing else survives."""
+    document_id = item.get("document_id")
+    if not isinstance(document_id, str) or not document_id:
+        raise SourceOperationProjectionError("candidate document_id must be text")
+    digest = item.get("content_sha256") or item.get("snapshot_sha256")
+    if not isinstance(digest, str) or not _SHA256_RE.fullmatch(digest):
+        raise SourceOperationProjectionError(
+            "candidate content_sha256 must be a 64-hex sha256"
+        )
+    byte_size = item.get("byte_size")
+    if isinstance(byte_size, bool) or not isinstance(byte_size, int) or byte_size < 0:
+        raise SourceOperationProjectionError(
+            "candidate byte_size must be a non-negative integer"
+        )
+    publication_status = item.get("publication_status")
+    if publication_status is None:
+        publication_status = "known" if item.get("published_date") else "unknown"
+    if publication_status not in _CANDIDATE_PUBLICATION_STATUSES:
+        raise SourceOperationProjectionError(
+            "candidate publication_status is outside the closed set"
+        )
+    reason = exclusion_reason or item.get("exclusion_reason")
+    if reason not in CANDIDATE_EXCLUSION_REASONS:
+        raise SourceOperationProjectionError(
+            "candidate exclusion_reason is outside the closed set"
+        )
+    fiscal_year = item.get("fiscal_year")
+    if fiscal_year is not None and (
+        isinstance(fiscal_year, bool) or not isinstance(fiscal_year, int)
+    ):
+        raise SourceOperationProjectionError(
+            "candidate fiscal_year must be an integer or null"
+        )
+    return {
+        "document_id": document_id,
+        "title": _candidate_text(item, "title"),
+        "document_kind": _candidate_text(item, "document_kind"),
+        "provider": _candidate_text(item, "provider"),
+        "provider_document_id": _candidate_text(item, "provider_document_id"),
+        "form_type": _candidate_text(item, "form_type"),
+        "fiscal_year": fiscal_year,
+        "fiscal_period": _candidate_text(item, "fiscal_period"),
+        "language": _candidate_text(item, "language"),
+        "content_sha256": digest,
+        "byte_size": byte_size,
+        "publication_status": publication_status,
+        "exclusion_reason": reason,
+    }
+
+
+def _operation_candidates(operation_input: SourceOperationInput) -> list[dict[str, Any]]:
+    """Candidates for an ambiguous / not_found payload, capped at five.
+
+    Several matching sources ARE the candidate set (each excluded because the
+    request is ambiguous between them); otherwise the resolver's excluded
+    candidates are republished with their own per-candidate reason.
+    Existing producer order is preserved; the cap truncates.
+    """
+    if len(operation_input.matches) > 1:
+        projected = [
+            _project_candidate(match, exclusion_reason="multiple_candidates")
+            for match in operation_input.matches
+        ]
+    else:
+        projected = [_project_candidate(item) for item in operation_input.candidates]
+    return projected[:_CANDIDATE_MAX_ITEMS]
 
 
 def _identity(match: dict[str, Any]) -> tuple[str, str, str]:
@@ -128,7 +223,7 @@ def project_source_operation(
     if not isinstance(operation_input, SourceOperationInput):
         raise TypeError("operation_input must be SourceOperationInput")
     status, ref, candidate = _status_and_source(operation_input, reader)
-    result = {
+    result: dict[str, Any] = {
         "operation_schema_version": OPERATION_SCHEMA_VERSION,
         "operation": operation_input.operation,
         "status": status,
@@ -140,6 +235,13 @@ def project_source_operation(
         "candidate": candidate,
         "gap_plan": _gap_projection(operation_input.gap_plan) if status == "gap" else None,
     }
+    if status in {"ambiguous", "not_found"}:
+        # FF-1 B4: additive optional fields — never on completed/gap payloads.
+        candidates = _operation_candidates(operation_input)
+        if candidates:
+            result["candidates"] = candidates
+        if operation_input.reason in OPERATION_REASONS:
+            result["reason"] = operation_input.reason
     if operation_input.local_preparation is not None:
         result["local_preparation"] = operation_input.local_preparation
     if _contains_physical_field(result):
