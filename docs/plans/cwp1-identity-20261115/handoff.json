@@ -3,12 +3,12 @@
   "package_id": "OWNERPKG-CWP-CANDIDATES-01",
   "package_file": "C:/Users/郑曾波/Projects/investment-dashboard/handoffs/owner-requests/company-wiki/CANDIDATES-FIX-01.md",
   "owner_repo": "company-wiki",
-  "status": "delivered_pending_mainline_merge",
+  "status": "delivered_merged_to_mainline",
   "branch": "codex/cwp1-identity-suffix-20261115",
   "worktree": "C:/Users/郑曾波/Projects/company-wiki-cwp1-identity-20261115",
   "base_commit": "ac8841c55cb416c63f6d426dfb7c8edcd68729a2",
-  "release_tag_or_commit_for_dashboard": "8de23487113bc8316b45bd5c8ca6a2680be6b333",
-  "release_commit_note": "40-digit commit containing all implementation, acceptance evidence and the independent review; handoff documents are a later docs-only commit on the same branch (avoids self-reference). Dashboard consumes by commit, not branch name.",
+  "release_tag_or_commit_for_dashboard": "569615ecffe84a72d96149a6fc175c07b6fa2bb9",
+  "release_commit_note": "Master merge commit 569615ecf lands BOTH the identity lane (ce64f0239) and the ff1 catalog-repair lane, verified together (focused suites 89 passed, FC-1301 unchanged). Master has advanced past it with docs-only commits and a follow-on identity iteration by another lane; Dashboard consumes by commit, not branch name.",
   "commits": [
     {"sha": "7fa16a213", "subject": "fix(identity): canonicalize corporate suffixes on exact name match"},
     {"sha": "7595473f2", "subject": "feat(identity): name the cross-market dual-listing ambiguity reason"},
@@ -59,19 +59,20 @@
     "registered_entities_unchanged": true,
     "candidate_data_deleted": false,
     "production_config_written": false,
-    "pushed": false,
-    "merged_to_master": false
+    "pushed": true,
+    "merged_to_master": true
   },
   "not_delivered": [
     {"id": "RF-route1-local-prepare", "reason": "FF ff_local_source_prepare.py sends identity_scope/issuer_link_id with schema_version=1.0 while CWP resolver.py:591 requires 1.1. FF<->CWP contract-layer gap, outside this package write scope."},
     {"id": "RF-route2-4-5-6", "reason": "company-wiki ensure exits 1 with acquisition_validation_failed, provider_started=false. Existing ensure/metadata-layer gap (CWP-2 / FF1 catalog lane scope), not identity resolution."}
   ],
   "merge_handoff_task": {
-    "section": "8-3 case 2 (explicit handoff, no forced merge)",
+    "section": "8-3 case 2 -> resolved as case 1 (2026-11-15)",
     "condition": "main working tree has in-flight PWF WIP (module-pwf-reconciliation-2026-11-14) and codex/ff1-catalog-repair-20261115 lane B4 is not yet closed",
     "task": "After the in-flight mainline PWF is closed and ff1-catalog lane is merged or confirmed non-conflicting, merge branch codex/cwp1-identity-suffix-20261115 into master; record the merge commit and regression result in PWF progress.md",
     "trigger": "company-wiki mainline owner (operator)",
-    "dashboard_consumes": "8de23487113bc8316b45bd5c8ca6a2680be6b333 until the merge is done"
+    "dashboard_consumes": "569615ecffe84a72d96149a6fc175c07b6fa2bb9 (merged; pushed to origin/master)",
+    "resolution": "Merged 2026-11-15 as ce64f0239 together with the ff1-catalog lane (569615ecf), zero conflicts (observability registrations unioned), focused suites green; pushed to origin/master the same day. The file is kept for the record; the pending-merge condition no longer applies."
   },
   "next_action": "Dashboard D00: rerun the Alibaba FF drill and RF six collection routes against the release commit; then notify m5 / RF INPUT-AUTHOR-01 that the Alibaba half is unblocked. Route the two named residual gaps to FF owner and CWP FF1 lane respectively."
 }
