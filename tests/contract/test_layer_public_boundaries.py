@@ -143,6 +143,8 @@ def test_boundary_scanner_rejects_undeclared_module_attributes():
         ("from company_wiki import document_understanding as du\n"
          "def engine():\n    return du", "module object"),
         ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    return lambda: du", "module object"),
+        ("from company_wiki import document_understanding as du\n"
          "owner._engine = du", "module object"),
         ("from company_wiki import document_understanding as du\n"
          "def caller(engine=du):\n    return engine._implementation()", "module object"),
@@ -184,6 +186,15 @@ def test_boundary_scanner_allows_passing_a_published_callable_as_a_port():
     source = """
 from company_wiki import document_understanding as du
 configure(understand=du.understand_units)
+"""
+    assert not _scan(path, ast.parse(source)).violations
+
+
+def test_boundary_scanner_allows_lambda_parameter_shadowing_imported_module():
+    path = SOURCE_ROOT / "automation" / "_boundary_probe.py"
+    source = """
+from company_wiki import document_understanding as du
+identity = lambda du: du
 """
     assert not _scan(path, ast.parse(source)).violations
 

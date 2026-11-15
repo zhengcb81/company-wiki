@@ -466,7 +466,8 @@ class _Scanner(ast.NodeVisitor):
 
     def _local_body(self, body: Iterable[ast.AST], arguments: ast.arguments | None = None, *,
                     class_fields: dict[str, _Reference] | None = None,
-                    receiver: tuple[str, dict[str, _Reference]] | None = None) -> None:
+                    receiver: tuple[str, dict[str, _Reference]] | None = None,
+                    module_escape: ast.AST | None = None) -> None:
         enclosing = self.bindings
         enclosing_imports = self.imported_modules
         enclosing_fields, enclosing_receiver = self.class_fields, self.receiver
@@ -482,6 +483,8 @@ class _Scanner(ast.NodeVisitor):
                         self.bindings[variadic.arg] = None
             for item in body:
                 self.visit(item)
+            if module_escape is not None:
+                self._check_module_objects(module_escape, (module_escape,))
         finally:
             self.bindings = enclosing
             self.imported_modules = enclosing_imports
@@ -511,7 +514,7 @@ class _Scanner(ast.NodeVisitor):
     def visit_Lambda(self, node: ast.Lambda) -> None:
         self.visit(node.args)
         self._check_module_objects(node, (*node.args.defaults, *node.args.kw_defaults))
-        self._local_body([node.body], node.args)
+        self._local_body([node.body], node.args, module_escape=node.body)
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
         for item in (*node.bases, *node.keywords, *node.decorator_list):
