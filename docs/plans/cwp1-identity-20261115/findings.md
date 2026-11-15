@@ -67,3 +67,44 @@
   分支 + reason 值域 + observability 纯增量注册，邻接契约已覆盖。NOT_RUN 诚实登记。
 - 未做 FC-1301 既有漂移的修复（超范围，见偏离登记）。
 - 未 push、未并入 master（按红线）。
+
+## 勘误（F-01，2026-11-15 复审后补）: "身份相关集"选集未枚举
+
+复审指出前文"12 文件身份相关集 116→126 / 2 skipped"未列文件清单，第三方无法精确
+复算（审查者等价选集得 105→115 / 0 skipped）。勘误如下，逐文件枚举本环境实际跑的
+选集与两态数字；两口径下 +10 增量与失败同一性一致，差异仅来自选集不同。
+
+实际执行的 12 个测试文件（pytest 位置参数顺序即此）:
+
+1. tests/contract/test_source_catalog_security_identity.py（A1/A2 新测试所在文件）
+2. tests/contract/test_security_identity_public_ports.py
+3. tests/contract/test_security_identity_sec_listing_evidence.py
+4. tests/contract/test_fc1301_reason_taxonomy.py
+5. tests/contract/test_source_catalog_resolver.py
+6. tests/contract/test_cn_primary_issuer.py
+7. tests/contract/test_r8_entity_gate_normalization.py
+8. tests/contract/test_source_catalog_quality_boundaries.py
+9. tests/contract/test_public_legacy_source_recovery.py
+10. tests/contract/test_fc1204_coverage_ratchet.py（2 个 skip 的唯一来源）
+11. tests/unit/test_local_source_boundaries.py
+12. tests/unit/test_stage_taxonomy.py
+
+本环境（/c/Miniconda/python 3.13.9 + pytest 9.1.1，PYTHONUTF8=1，未设
+FC1204_COVERAGE_GATE，零网络零下载零模型）实际数字，2026-11-15 勘误时在
+同一 worktree 用 `git switch --detach ac8841c55` 基线态 / lane 分支改后态
+同口径复算复核:
+
+- 基线（ac8841c55）: 116 passed / 2 failed / 2 skipped（19.12s）
+- 改后（a311c3127）: 126 passed / 2 failed / 2 skipped（18.96s）
+- 2 个 skip 两态完全相同: tests/contract/test_fc1204_coverage_ratchet.py:121 的
+  2 个参数化用例，skip 原因 "coverage gate runs as a separate step
+  (FC1204_COVERAGE_GATE=1)" — 环境变量门控，与本包改动无关。
+- 2 个 failed 两态完全相同且与本包无关:（a）test_fc1301_reason_taxonomy.py::
+  test_every_emitted_reason_is_registered（master 既有注册漂移，失败清单两态均
+  不含本包新 code cross_market_dual_listing_requires_market_selection）;
+  （b）test_r8_entity_gate_normalization.py::test_entity_gate_normalizes_trailing_period
+  （SourceResolver 装配 AttributeError，master 既有）。
+- 审查者 105→115 / 0 skipped 与本勘误 116→126 / 2 skipped 的差异全部来自选集:
+  本选集多出的 11 passed 与 2 skipped 来自第 10 项 fc1204（2 skip）及第 12 项
+  test_stage_taxonomy（20 passed）等文件的存在与否；两种选集下 +10 增量、
+  同两个失败、skip 无状态变化均成立。
