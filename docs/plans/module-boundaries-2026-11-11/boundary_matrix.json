@@ -359,24 +359,32 @@
   },
   "m3_current_head_review": {
     "date": "2026-11-15",
-    "observed_at_utc": "2026-11-15T21:28:24Z",
+    "observed_at_utc": "2026-11-15T21:55:46Z",
     "status": "IN_PROGRESS",
-    "scope_note": "M2 E01-E09 remains CLOSED only for frozen refs. Read-only external owner snapshot refreshed at 2026-11-15 21:24 UTC; tracked status only, untracked not enumerated. Published CWP master 3e7b723 includes product commit 707efe814; exact CI #537 passed on ancestor 1391ae81 only and is not exact for current published ref. Current local final CWP shared-budget fix is TDD-verified/reviewed and pending publication/exact CI. The user confirms external changes are from another project; ROOT preserves them.",
+    "scope_note": "M2 E01-E09 remains CLOSED only for frozen refs. External owner state was refreshed read-only at 2026-11-15 21:55 UTC; tracked status only, untracked not enumerated. CWP root shared-read-budget fix is published at 56d10f2 and exact-head GitHub CI run 43765642890/job 132969996667 passed. StockWiki handoff 54f72c9 records the former local 7fd7f248d 512MB candidate as historical; the final CWP fix supersedes it. User confirms the other-project changes are intentional; ROOT preserves all external workspaces. M3 remains open only for FF/RF owner evidence.",
     "reviewed_owner_heads": [
       {
         "repository": "company-wiki",
         "m2_ref": "c6189c623f6ec30e2a1a1059499e78c8ffe5b443",
-        "current_ref": "published master@3e7b7231a2d6466ca21a7d7291b41b3c563a3a57; local root fix pending",
-        "remote_ref": "origin/master@3e7b7231a2d6466ca21a7d7291b3c563a3a57",
-        "changed_product_sources": 37,
-        "disposition": "Published M2-baseline delta is 37 src/ paths. Remote 3e7b723 includes product commit 707efe814 after exact-CI SHA 1391ae81, so #537 does not prove exact CI for current remote. Local working tree has a 39-path M2-baseline source delta including the reviewed root fix; final pending commit removes duplicate 64MB cap and threads shared request ReadBudget into CN proof reads. Tests 62/62 and independent review PASS; final exact CI pending.",
+        "current_ref": "published master@56d10f269b7c67845c7af66b33083f62d46cde4d",
+        "remote_ref": "origin/master@56d10f269b7c67845c7af66b33083f62d46cde4d (fresh git ls-remote, 2026-11-15 21:55 UTC)",
+        "changed_product_sources": 39,
+        "disposition": "Published M2-baseline delta is 39 src/ paths. The shared ReadBudget root fix is committed and pushed at 56d10f2; the old local 512MB candidate 7fd7f248d is superseded. Affected contracts passed 62/62, independent review PASS, commit hooks and push smoke passed, and exact-head GitHub CI run 43765642890/job 132969996667 passed on Python 3.12 in 7m13s. The prior CI #537 remains historical for 1391ae81 only.",
         "review_evidence": "review/cwp1-legal-form-identity-20261115.md",
         "reviewed_source_commit": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
         "independent_review": "PASS",
         "targeted_tests": "69 passed / 20.62 seconds; reviewer reran 3 key regressions",
         "source_sha256": "f2badf20d076c24754647210880bafccf244dd91067a111e74480dd783d79830",
         "test_sha256": "30c8484bde3fcab13fcc1dae9864c820ba639390ea0acb0083d3ae497f0ade11",
-        "exact_ci": "GitHub CI #537 / run 43757282611 / job 132944030549 passed in 7m52s on 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; that SHA predates 707efe814 and current local fix.",
+        "exact_ci": {
+          "run_id": 43765642890,
+          "job_id": 132969996667,
+          "head_sha": "56d10f269b7c67845c7af66b33083f62d46cde4d",
+          "conclusion": "success",
+          "runtime": "Python 3.12",
+          "duration": "7m13s",
+          "annotations": "one warning and one runner migration notice; no failure"
+        },
         "worktree_candidate": {
           "paths": [
             "src/company_wiki/source_catalog/public_canonical_browser.py",
@@ -385,16 +393,19 @@
             "tests/contract/test_source_reader_exact_history.py"
           ],
           "change": "Remove duplicate CN proof aggregate byte cap; pass browse-scoped SourceCatalog ReadBudget through SourceVersionReader into the existing verified resolver; repair exact-history test catalog cleanup.",
-          "status": "TDD_VERIFIED_INDEPENDENT_REVIEW_PASS_PENDING_PUBLICATION",
+          "status": "PUBLISHED_EXACT_HEAD_CI_PASS",
           "tests": "62 passed / 171.67 seconds / exit 0; pytest cleanup removed=true; Ruff and diff-check passed",
-          "review": "PASS; see review/cwp-cn-issuer-read-budget-20261115.md; reviewer noted non-blocking direct max_candidates envelope coverage gap."
+          "review": "PASS; see review/cwp-cn-issuer-read-budget-20261115.md; reviewer noted non-blocking direct max_candidates envelope coverage gap.",
+          "published_commit": "56d10f269b7c67845c7af66b33083f62d46cde4d",
+          "push_hook_smoke": "23 passed / 35.86 seconds",
+          "exact_ci": "GitHub Actions run 43765642890, job 132969996667, exact head 56d10f269b7c67845c7af66b33083f62d46cde4d, passed in 7m13s."
         }
       },
       {
         "repository": "filing-fetch",
         "m2_ref": "d4f35cab5127d09c874d109080d911e6d394dec2",
         "current_ref": "local main@dd7162172718e8276a809e9c205e3c80da06141a",
-        "remote_ref": "origin/main@dd7162172718e8276a809e9c205e3c80da06141a (fresh git ls-remote, 2026-11-15 20:37 UTC)",
+        "remote_ref": "origin/main@dd7162172718e8276a809e9c205e3c80da06141a (fresh git ls-remote, 2026-11-15 21:55 UTC)",
         "changed_product_sources": 0,
         "changed_test_paths": 4,
         "disposition": "Since M2, no src/ product path changed; four test paths and tools/verify_plan_claims.py changed. Fresh ls-remote confirms local main and server origin/main both at dd716217; elevated read-only status confirms tracked-clean, untracked not enumerated. Current root PWF records a separate S3 BYD bounded-provider E2E and FF-1 merge, not a rerun of the four failed RF weekly T3 downloads. Those requests omitted acquisition_limits; finite request limits and a passing current-main T3 rerun are still owed. ROOT made no FF changes.",
@@ -406,7 +417,7 @@
         "repository": "revenue-forecast",
         "m2_ref": "fab819c25922af1366d7240af9bfee58d3bd612a",
         "current_ref": "local main@be0caa4b506a4174d1bad860946ade73279627d4",
-        "remote_ref": "origin/main@f2215959d33abc76778342a95d39a8e38191da75 (fresh git ls-remote, 2026-11-15 20:37 UTC)",
+        "remote_ref": "origin/main@f2215959d33abc76778342a95d39a8e38191da75 (fresh git ls-remote, 2026-11-15 21:55 UTC)",
         "changed_product_sources": 1,
         "changed_test_paths": 1,
         "disposition": "Local main@be0caa4 is nine commits ahead of origin/main@f2215959; read-only 21:24 snapshot shows three tracked assurance files modified (daily_alert.jsonl, weekly_alert.jsonl, weekly_manifest.json); untracked not enumerated. Historical weekly run remains not-ok and absent from canonical PWF at last read. User confirms these are changes from another active project; ROOT leaves them untouched. Owner PWF/ref reconciliation remains.",
@@ -443,7 +454,7 @@
         "current_ref": "local master@54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e",
         "remote_ref": "none-configured",
         "changed_product_sources": 13,
-        "disposition": "No remote configured. Tracked-clean at 21:24. Root task_plan.md and progress.md refreshed at 5f79e7b on 2026-11-15 17:30; latest handoff summary commit 54f72c9. ROOT read-only reconciled the updated canonical plan; no further root-plan alignment action remains for this snapshot. Untracked files were not enumerated; external project progress preserved.",
+        "disposition": "No remote configured. Read-only at 21:53 UTC: local master@54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e, tracked-clean. Root task_plan/progress at 5f79e7b and handoff at 54f72c9 are current for this snapshot. The handoff records CWP candidate 7fd7f248d as the historical 512MB cap state; CWP 56d10f2 now supersedes it. ROOT makes no StockWiki edits; untracked files not enumerated.",
         "changed_test_paths": 19,
         "canonical_pwf_refs": {
           "task_plan_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
@@ -498,7 +509,7 @@
         "consumer": "Dashboard/IQS membership adapter",
         "protocol": "stockwiki.membership_request/1.0.0",
         "proof": "StockWiki public CLI tests assert versioned apply/lookup/history; IQS owner PWF records current isolated C38/C5 120 passed and fixed core composition 296 passed; Dashboard adapter consumes the same protocol",
-        "remaining": "none for the current I11 boundary evidence; do not repeat the same replay. StockWiki root PWF reconciliation remains an owner documentation task"
+        "remaining": "None for current I11 boundary evidence. StockWiki root task_plan/progress and latest handoff have been reconciled read-only by ROOT in this M3 snapshot; no repeated owner or ROOT plan update is required."
       },
       {
         "id": "I12",
@@ -548,9 +559,9 @@
       },
       "disposition": "preserve by existing inventory; no bulk add or delete"
     },
-    "next_action": "ROOT publishes the reviewed CWP shared-budget fix and obtains exact-head CI. FF owner supplies finite acquisition_limits on four failed weekly T3 downloads and reruns T3 on current main with PWF receipt. RF owner records 20261115T084227Z/not-ok in canonical PWF and reconciles local main@be0caa4 (nine commits ahead; three tracked assurance files). StockWiki root PWF is current at task_plan/progress commit 5f79e7b and latest handoff 54f72c9; ROOT binds that ref without repeating plan work. Refresh exact refs after owner action, then close finite M3; keep external repositories read-only."
+    "next_action": "ROOT has published the CWP shared-budget fix and confirmed exact-head CI at 56d10f2. FF owner supplies finite acquisition_limits on four failed weekly T3 downloads and reruns T3 on current main with a PWF receipt. RF owner records 20261115T084227Z/not-ok in canonical PWF and reconciles local main@be0caa4 (nine commits ahead; three tracked assurance files). StockWiki root PWF is current at task_plan/progress 5f79e7b and handoff 54f72c9; its historical reference to 7fd7f248d is superseded by CWP 56d10f2. Refresh exact refs after FF/RF owner evidence, then close finite M3; external repositories stay read-only."
   },
-  "next_action": "ROOT publishes the reviewed CWP shared-budget fix and obtains exact-head CI. FF owner supplies finite acquisition_limits on four failed weekly T3 downloads and reruns T3 on current main with PWF receipt. RF owner records 20261115T084227Z/not-ok in canonical PWF and reconciles local main@be0caa4 (nine commits ahead; three tracked assurance files). StockWiki root PWF is current at task_plan/progress commit 5f79e7b and latest handoff 54f72c9; ROOT binds that ref without repeating plan work. Refresh exact refs after owner action, then close finite M3; keep external repositories read-only.",
+  "next_action": "ROOT has published the CWP shared-budget fix and confirmed exact-head CI at 56d10f2. FF owner supplies finite acquisition_limits on four failed weekly T3 downloads and reruns T3 on current main with a PWF receipt. RF owner records 20261115T084227Z/not-ok in canonical PWF and reconciles local main@be0caa4 (nine commits ahead; three tracked assurance files). StockWiki root PWF is current at task_plan/progress 5f79e7b and handoff 54f72c9; its historical reference to 7fd7f248d is superseded by CWP 56d10f2. Refresh exact refs after FF/RF owner evidence, then close finite M3; external repositories stay read-only.",
   "reconciliation": {
     "status": "PARTIAL_RF_SAFE_INTAKE_MERGED_WITH_REMAINING_ASSIGNED",
     "entry": "reconciliation.md",

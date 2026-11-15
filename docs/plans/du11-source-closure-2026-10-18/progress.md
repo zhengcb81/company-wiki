@@ -575,9 +575,16 @@ Latest owner observations: FF local main@dd716217 equals its local tracking ref 
 - Exact CWP code SHA `1391ae81` passed GitHub CI #537; current `master@3e7b723` is its PWF-only descendant. The local tree separately contains uncommitted CN issuer-proof byte-ceiling changes in one source file and one contract test (64MB→512MB); they are unreviewed/untested and excluded from the accepted source delta. No external repository was modified and external untracked files were not enumerated.
 
 
-## 2026-11-15 21:28 UTC — root budget fix verified; M3 owner snapshot refreshed
+## 2026-11-15 21:28 UTC — root budget fix verified; M3 owner snapshot refreshed (superseded by 21:54 update)
 
 - Replaced the separate CN issuer-proof byte counter with the SourceCatalog request `ReadBudget`, threaded through `SourceVersionReader.open_described_version()` into the existing verifier/resolver. Actual bytes/candidates and exact SHA/size are handled by the existing catalog verifier; per-file PDF/page/text validation remains. The unpublished 512MB intermediate is not part of the final tree.
 - The 36×3.5MB corpus regression and exact reader budget regression pass. Both affected contract files pass **62/62 / 171.67s / exit 0** with `removed=true`; Ruff, JSON parsing, `git diff --check`, and independent hash-bound review pass. Existing test cleanup leak discovered on the first full run was repaired with `finally` and covered in the green rerun. Review note: direct CN-browser max-candidate-envelope case is absent but non-blocking.
 - Corrected an earlier CI statement: `3e7b723` includes intervening CWP feature `707efe814`; exact GitHub CI #537 passed on ancestor `1391ae81`, not on `3e7b723`. The current local final fix remains unpublished pending an amended clean commit and exact-head CI.
 - External tracked-only snapshot at 21:24: FF main@dd716217 clean; RF main@be0caa4 nine commits ahead with daily/weekly alert and weekly manifest modified; StockWiki master@54f72c9 no remote, tracked-clean, root plan/progress updated at 5f79e7b 17:30. User confirms another project is driving those external changes; none were changed here. M3 remains open for FF/RF owner evidence.
+
+## 2026-11-15 21:54 UTC — CWP root fix published; exact-head CI green
+
+- Commit `56d10f269b7c67845c7af66b33083f62d46cde4d` is now on `origin/master`; a fresh live ref read confirmed it. The fixed push smoke passed 23/23 in 35.86s; commit hooks passed Ruff, mypy and config doctor.
+- Exact GitHub Actions run `43765642890` / job `132969996667` passed on that SHA (Python 3.12, 7m13s); one warning and one runner migration notice, no test failures. The 62-test affected contract suite and hash-bound independent review were green before publication.
+- StockWiki's new handoff records the former CWP local `7fd7f248d` 512MB candidate. Treat that as the state observed during the parallel run; the current CWP mainline replaces it with one browse-scoped request `ReadBudget` and keeps per-file SHA/size/PDF limits. ROOT did not modify the StockWiki record or any RF/FF files.
+- At 21:55 UTC fresh live reads still show FF `main@dd716217` clean; RF `main@be0caa4` nine commits ahead of live `origin/main@f2215959` with three tracked assurance changes and weekly run `20261115T084227Z` not-ok/unreconciled; StockWiki `master@54f72c9` has no remote and is tracked-clean. Finite M3 remains open only for FF/RF owner evidence.

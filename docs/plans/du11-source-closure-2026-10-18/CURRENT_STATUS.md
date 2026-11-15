@@ -4,7 +4,13 @@
 
 ## 2026-11-15 最新状态
 
-### 21:28 UTC update — read budget fixed; owner snapshot refreshed; CI binding corrected
+### 21:54 UTC update — shared-budget root fix published; exact-head CI green
+
+最终 CWP 提交 `56d10f269b7c67845c7af66b33083f62d46cde4d` 已推送，远端 `master` 已复核为同一 SHA。提交钩子的 23 项固定快测通过（35.86 秒）；GitHub Actions run `43765642890` / job `132969996667` 在精确 SHA `56d10f2` 上通过，Python 3.12 全流程用时 7m13s；仅 1 条警告和 1 条 runner 迁移提示，无失败项。最终代码保持独立审查绑定的四个源/测试文件 SHA，62 项受影响契约测试通过；这次根修删除 CN 证明重复总字节计数器，并将 browse 级 `ReadBudget` 贯穿到现有验证 resolver。
+
+另一项目的 StockWiki handoff `master@54f72c9` 记录过 CWP 本地候选 `7fd7f248d`（64→512MB）与当时的真实浏览结果。该记录是当时状态；CWP 最终主线 `56d10f2` 已用共享预算根因修复替代该候选，未改 StockWiki/RF/FF 文件。StockWiki 根计划已只读核对，无额外 ROOT 对齐任务。M3 仍只待 FF 的四个 T3 下载请求有限 `acquisition_limits` 与当前主线复跑收据，以及 RF 对 `20261115T084227Z / not-ok` 的 canonical PWF 记录和本地九提交/三项 assurance 改动对账；FF/RF 远端 refs 于 21:55 UTC 复核不变。固定公司循环仍暂停。
+
+### 21:28 UTC update — read budget fixed; owner snapshot refreshed; CI binding corrected (superseded by 21:54 update)
 
 CN proof 修复的根因与验证见下节。另纠正 CI 绑定：远端 `3e7b723` 的父链包含产品代码提交 `707efe814`，不是 `1391ae81` 的 PWF-only 后继；#537 只证明 `1391ae81`，不能外推到当前远端。当前本地 `master@7fd7f248` 含未推送的 512MB 中间提交，最终工作区已用共享预算修复替代，计划折叠为单一最终提交后推送并验 exact-head CI。
 

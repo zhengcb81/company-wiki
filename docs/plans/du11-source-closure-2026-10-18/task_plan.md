@@ -1,6 +1,6 @@
 # 主线实施计划
 
-**2026-11-15 当前执行顺序：** CI #537 在 `1391ae81` 通过，但当前远端 `3e7b723` 还包含后续 CN 期报登记代码 `707efe814`，不能把早先 CI 说成当前远端 exact-head 通过。CWP CN issuer proof 的重复预算上限已从根因修复，62 项受影响测试及独立审查通过；先折叠本地未推送中间提交、发布最终修复并验证 exact-head CI。M3 尚未关闭：之后完成 FF/RF owner 对账。StockWiki 最新根计划已于 17:30 UTC 更新，ROOT 只读绑定该进度。外仓变化由另一项目并行推进，不回退、清理或覆盖。M3 关闭后再恢复 P1 业务摘要质量修复，固定公司循环仍暂停。当前唯一状态/交接入口为 [CURRENT_STATUS](CURRENT_STATUS.md) 和 [HANDOFF](HANDOFF.md)。
+**2026-11-15 当前执行顺序：** CWP shared-read-budget 根修复已合成单个净提交 `56d10f2`、推送，并在该精确 SHA 通过 GitHub Actions（run `43765642890`，Python 3.12，7m13s）；其前置 62 项契约测试和独审也通过。StockWiki handoff 曾引用的 `7fd7f248d` 是当时未发布的 512MB 候选，当前最终代码以共享请求预算取代它；不改写外仓历史或内容。M3 尚未关闭：FF owner 仍需为四个失败周测下载请求补有限 `acquisition_limits` 并在当前 main 复跑 T3；RF owner 仍需将 `20261115T084227Z / not-ok` 和历史版本绑定写入 canonical PWF，并对账本地九个提交及三项 tracked assurance 改动。StockWiki 根 PWF 已更新并由 ROOT 只读核对，无额外对齐动作。用户确认外仓变化由另一项目并行推进，不回退、清理或覆盖。M3 关闭后再恢复 P1 业务摘要质量修复，固定公司循环仍暂停。当前唯一状态/交接入口为 [CURRENT_STATUS](CURRENT_STATUS.md) 和 [HANDOFF](HANDOFF.md)。
 
 2026-11-14 的 R4/T4 及业务摘要计划仍作为已完成节点和后续 P1/P3 定义保留。模块边界子计划当前 M3 尚未关闭；完成前不恢复顺序靠后的业务摘要实施。
 
