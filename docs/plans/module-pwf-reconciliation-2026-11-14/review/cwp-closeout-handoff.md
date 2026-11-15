@@ -131,11 +131,11 @@
 - Round 2（绑定 `8ae20ce6f402290bb59451df04f79cadbdc76954`）：**PASS**，0 blocker / 0 non-blocker，N1–N3 全部关闭；最终 VERDICT: PASS 绑定该 HEAD。
 - 审查范围核验：13 refs、8 worktrees、4 顶层路径均有状态且与实时 Git 一致；清理为零无未解释 WIP；模块 owner 边界未破坏。
 
-## 11. 推送受阻详录（平台 Mimosa L3 门）
+## 11. 历史推送受阻详录（平台 Mimosa L3 门，2026-11-14）
 
 ### 11.1 结论
 
-受审内容 HEAD `8ae20ce6f` 及其后收口记录提交的 `git push origin master` 已**三次**被 ZCode 平台 Mimosa L3 前置门强制拦截，推送从未执行；`origin/master` 实测停留在 `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`。本节详录为卡片 owner 于 round-3 复核（PASS）之后的明确指示，作为补充记录写入；不改变 round-2 §13.5 / round-3 §14.5 审查授权的内容清单，本节更新在收口提交 `2cbc01156` 之后单独提交。
+在 2026-11-14，当时受审内容 HEAD `8ae20ce6f` 及其后收口记录提交的 `git push origin master` 曾**三次**被 ZCode 平台 Mimosa L3 前置门强制拦截；当时 `origin/master` 实测停留在 `7361aad82e86cf35310fc05ef51fd8c2c7320b8c`。这段是该日期的历史记录，不代表 2026-11-15 的最新推送状态（见 §12）。本节详录为卡片 owner 于 round-3 复核（PASS）之后的明确指示，作为补充记录写入；不改变 round-2 §13.5 / round-3 §14.5 审查授权的内容清单。
 
 ### 11.2 尝试时间线（全部为 2026-11-14 本会话）
 
@@ -174,15 +174,22 @@
 
 AGENTS.md"工具平台的自动审批不由仓库控制……不得改写命令或转移通道绕过拒绝"。全程未使用 `--no-verify`、未换 shell/协议/机器通道；修复 209 个既有发现超出本卡文档-only 写集合，且会使三轮独审绑定（`8ae20ce6f`）失效——安全修复属独立 lane，须另行派卡。
 
-### 11.7 实测终态
+### 11.7 交接时终态（2026-11-14；已由 §12 更新）
 
 - 本地 `master` = `2cbc01156`，领先远端 3 个提交：`ca2602a2f`（收口内容）→ `8ae20ce6f`（独审修复）→ `2cbc01156`（round-3 记录 + 依赖声明）。
 - `origin/master` = `7361aad82`（多次实测）。
 - 工作区 tracked clean，无未提交内容。
 - `handoff.json` `final.head` = `8ae20ce6f`（三轮独审绑定的受审内容 HEAD）；`final.remote_head` = `7361aad82`（实测值）。
 
-### 11.8 解除路径与解锁后操作
+### 11.8 当时的解除路径（已执行；见 §12）
 
 - **解除路径（二选一，均在本卡范围外）**：(a) 安全修复 lane——修复或基线化既有 209 high 发现；(b) 平台侧处置（对既有发现基线化/放行，或 push 门改为 delta 范围扫描）。
 - **解锁后唯一操作**：`git push origin master`，一次推送即发布全部 3 个提交。
 - **推送后 SHA 语义**：远端 tip 将为当时最新提交（含 `2cbc01156` 或其后的本节记录提交）；受审内容 HEAD `8ae20ce6f` 作为祖先**逐字发布**。卡片"远端等于已审 HEAD"按"受审内容逐字发布 + 增量恰为独审者预授权的记录提交"闭环（round-2 §13.5、round-3 §14.5 均已明文预授权该增量）。`handoff.json` `final.head` 亦因此定格于受审内容 SHA，`final.remote_head` 如实记录推送前实测值。
+
+## 12. 后续推送成功（2026-11-15）
+
+- 以普通 `git push origin master` 发布 CWP 收尾序列。GitHub 返回 `7361aad82..0e741063f master -> master`，确认服务端接受；此次推送没有被 Mimosa 拦截。差量为 13 个路径，均为本计划 PWF、handoff/review 文件和一次性 `.tmp-build-registry.py` 删除，不含生产源码。
+- 仓库 push fast feedback 的 fixed smoke 为 **18 passed in 6.58s**；输出仍注明完整 CI 会在远端运行。没有 `--no-verify` 或其他绕过。
+- 推送后单独 `git ls-remote origin refs/heads/master` 报 `getaddrinfo() thread failed to start`，故没有独立 fresh-read。`handoff.json` 的 `final.remote_head=7361aad82` 与独审绑定 `final.head=8ae20ce6f` 保留为 2026-11-14 交接时的审查快照；当前发布记录以本节 push 响应为准。
+- 该成功只证明这一次正常 push 被接受，不能推断此前扫描列出的安全发现已消失或平台策略已永久改变。本轮后续 PWF 状态更新按同一正常推送流程发布。

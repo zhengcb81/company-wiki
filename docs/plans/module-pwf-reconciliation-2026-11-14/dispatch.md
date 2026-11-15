@@ -2,11 +2,11 @@
 
 ## 最终验收状态（2026-11-15）
 
-七张 owner 卡均已收到最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入各自目标主线并验证推送；Dashboard 最终 receipt-only review PASS 绑定 `8cd2d947`，报告载体 `3f83bb5` 已推送并由 owner fresh 核对远端。RFAudit 按卡没有 remote，仅在 `main` 本地收口。CWP 的本地收尾内容提交为 `3b8fd0e8`；本轮最终状态修订由后续 docs-only carrier 记录。最近一次成功观察 `origin/master@7361aad82`；此前平台 Mimosa L3 三次拦截正常 push，之后远端刷新遇到 DNS/线程启动错误，不使用绕过方式。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
+七张 owner 卡均已收到最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入各自目标主线并验证推送；Dashboard 最终 receipt-only review PASS 绑定 `8cd2d947`，报告载体 `3f83bb5` 已推送并由 owner fresh 核对远端。RFAudit 按卡没有 remote，仅在 `main` 本地收口。CWP 2026-11-15 的普通 `git push origin master` 已成功，GitHub 响应确认远端从 `7361aad82` 前进至 `0e741063f`；仓库 fast feedback 的固定 smoke 为 18/18 通过（6.58 秒）。随后独立 `ls-remote` 刷新遇到 `getaddrinfo() thread failed to start`，因此不声称完成了第二次远端读取；本次 PWF 状态载体记录该成功推送及读取限制。此前三次 Mimosa L3 拦截是历史状态，本次推送未被拦截；没有证据说明旧扫描告警已清除或平台规则已改变。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
 
 | Lane | 当前本地主线 | 远端 | 收尾状态 |
 |---|---|---|---|
-| CWP | `master`（收尾内容提交 `3b8fd0e8`；后续 docs-only 状态载体） | 最近成功观察 `7361aad82`；L3 拦截后刷新遇到 DNS/线程启动错误 | 本地 PWF/清理收据已提交；发布 BLOCKED |
+| CWP | `master`（收尾序列已由正常 push 发布至 `0e741063f`；本状态记录为后续 docs-only carrier） | push 响应确认 `7361aad82..0e741063f`；后续 `ls-remote` 因本机线程启动错误未刷新 | 收尾序列已推送；本状态 carrier 随本次更新发布 |
 | FF | `main@1dfd818` | live 相等 | PASS / 已推送 |
 | RF | `main@f221595` | live 相等 | PASS / 内容与收据已复核并推送 |
 | ET | `main@50d9190` | live 相等 | PASS / 已推送 |

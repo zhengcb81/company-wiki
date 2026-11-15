@@ -4,8 +4,8 @@
 
 - closeout 的“内容提交”和“后续只写收据的 carrier commit”可能是不同 SHA。RF 和 SID handoff 需明确这两类 SHA，避免把首轮候选、基线或历史提交写成最终主线 tip；Dashboard 的 D00 closeout 与其后 owner-acceptance 记录也需分开记。
 - ROOT 找到并修复三项可确认的收据错位：RF final 错留 base 且 C4 pending；SID `independent_review.reviewed_head` 错留 CHANGES REQUIRED 初轮；Dashboard 汇总报告把 CWP push 写成已闭环并引用过期远端 SHA。对应内容已在 owner 仓修正、独立复核，并在各自主线发布。
-- CWP 未发布的原因不是本卡代码测试失败：平台 PreToolUse 的 Mimosa L3 对全仓历史扫描，阻断三次正常 push；被标记文件在 lane delta 外、delta 仅为 PWF 文档。完整报告没有落盘，已枚举 12 条 high，不完整列出其余 197 high 与 45 medium/low。仓库约定禁止用 `--no-verify`、换 shell/协议或停 hook 绕过；这需要平台/扫描策略处置，不得伪装为项目门禁通过。
-- 本轮最新 `git ls-remote` 对 CWP 因 `getaddrinfo() thread failed to start` 失败；最后一次成功远端观察仍是 `7361aad82`。因此本地 master 上的收尾与总控 PWF 提交虽已进入主线，远端状态仍 BLOCKED/未确认。
+- 截至 2026-11-14，CWP 未发布的原因不是本卡代码测试失败：平台 PreToolUse 的 Mimosa L3 对全仓历史扫描，阻断三次正常 push；被标记文件在 lane delta 外，lane delta 仅含 PWF 文档。完整报告没有落盘，已枚举 12 条 high，不完整列出其余 197 high 与 45 medium/low。该日期遵守不绕过平台检查的原则；后续推送状态见本文件 11-15 补记。
+- 截至 2026-11-14，`git ls-remote` 因 `getaddrinfo() thread failed to start` 失败，最后一次成功远端观察仍是 `7361aad82`。当时将本地收尾记为 BLOCKED/未确认；该判断已由 11-15 的 GitHub push 成功响应更新。
 - RF `assurance/runs/daily_alert.jsonl` 新增的 2026-11-14 运行记录属于实时运行账本，与 handoff 修复无关，已排除在 stage/commit/push 范围外并保留。不要将 tracked diff 误当作本卡 WIP 或清理掉。
 - owner closeout 的清理目标是逐项归因并清除已证实可删材料，不是把所有非祖先 refs、活动工区、证据目录一律合并或删除。各 handoff 中 `ACTIVE_KEEP`、`EVIDENCE_KEEP`、`UNCLASSIFIED_HOLD` 仍按 owner 依赖处理；StockWiki/IQS 仍隔离。
 
@@ -71,7 +71,7 @@ Git 状态只读报告分别来自模块 agent 和 ROOT 命令。每个模块 ow
 
 - 先前记录的“等待 8cd 最终 receipt-only 复核”已完成并被新状态取代：独立 reviewer 对 `8cd2d9477b60a6391dc5b1a4e3d0c94fb66dc6d0` 的 post-push 状态收据复核为 PASS，审查报告追加后由 docs-only carrier `3f83bb518ca782cb1bff495f7119fda7f3154097` 推送；fresh remote SHA 与本地 HEAD 一致。
 - Dashboard owner 报告 tracked worktree clean，E14 用户暂停 handoff 与 `.workbuddy-ai/` 仍保留。无产品代码修改、未重跑产品测试；最终内容代码测试仍按此前实现证据及最终完整审查记录引用。
-- 本轮总控 PWF 已更新为最终 `3f83bb5`，不再把 Dashboard 报告追加 carrier 写作待办。CWP 的本地提交/远端门禁与 StockWiki/IQS 的 owner hold 是独立未结项。
+- 本轮总控 PWF 已更新为 Dashboard 最终 `3f83bb5`，不再把 Dashboard 报告追加 carrier 写作待办。CWP push 状态和 StockWiki/IQS owner hold 见后续 dated update。
 
 ## StockWiki / IQS 只读状态复核（2026-11-15）
 
@@ -83,4 +83,10 @@ Git 状态只读报告分别来自模块 agent 和 ROOT 命令。每个模块 ow
 - 用户本轮明确要求重新逐模块更新 PWF、归因并清理未提交项、把有效提交并入主线、移除确认无用的临时材料。ROOT 只改 CWP；FF/ET、RF/RFAudit、SID/Dashboard 由互斥 owner lane 并行。StockWiki/IQS 实时 PWF 仍有在途 owner 工作；两仓暂时只读，不碰活动 worktree，待 owner 交接后续办。
 - CWP untracked 不是一种“垃圾”：提交四份新增收据后，2026-11-15 复测为 23,334 项：`.mimosa` hook-state 10,010、`.planning` 执行/审查记录 13,180、`docs/` PWF 与审查证据 143、`.workbuddy-ai` memory 1。全量删除会丢当前平台 hook 状态、历史测试/审查依据或用户笔记。
 - 已安全删除 CWP 根下 37 个空旧测试目录、7 个已无引用的旧 `.tmp_*.json`（16,301 B）、两个 11-02 测试遗留 `tmp/osred/**/race.json`（20 B），以及无生产引用的一次性 `.tmp-build-registry.py`（1,019 B）。本轮释放 17,340 B，另删 37 个空目录；删除均在 CWP 根内逐项验路径/mtime/文件清单。
-- CWP 当前 tracked 代码未改；`master` 仅增加本任务的文档/临时脚本删除记录。`origin/master` 最近成功 live 观察仍是 `7361aad82`，三次 Mimosa L3 正常 push 阻断继续有效，不绕过。
+- 截至这份 2026-11-14 续办快照，CWP tracked 代码未改；`master` 仅增加本任务的文档/临时脚本删除记录，`origin/master` 最近成功观察为 `7361aad82`。随后正常 push 的状态见下方 2026-11-15 补记。
+
+## CWP 推送状态更新（2026-11-15）
+
+- 11-14 的三次 Mimosa L3 全仓扫描拦截仍是有效历史事实。11-15 以普通 `git push origin master` 重试后推送成功，GitHub 响应明确为 `7361aad82..0e741063f master -> master`；这次未见 Mimosa 拦截。不能由一次成功推送推断此前告警已修复或平台规则已永久改变。
+- push 快速反馈的 fixed smoke 为 **18/18** 通过（6.58 秒）；输出仍注明完整 CI 会在远端运行。推送差量由 `git diff --name-only 7361aad82 0e741063f` 核对，共 13 个 PWF/审查文件及一次性脚本删除，无生产源码改动。
+- 推送后单独读取 `git ls-remote` 时，本地 Git 报 `getaddrinfo() thread failed to start`。因此以 Git push 服务端成功响应作为当次发布证据，不虚报独立 fresh-read；本次后续 PWF 状态 carrier 将按正常路径一起发布。

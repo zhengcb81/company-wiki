@@ -1,5 +1,12 @@
 # 进度
 
+## 2026-11-15 — CWP 正常推送恢复
+
+- `git push origin master` 通过正常路径成功，GitHub 响应为 `7361aad82..0e741063f master -> master`，即当时本地 8 个待发提交全部进入远端。推送 delta 共 13 个路径，限于本计划文档/交接审查文件与一次性脚本删除，没有产品源码变更。
+- 本仓 push fast feedback 识别出 9 个固定目标，实际 fixed smoke **18 passed in 6.58s**；输出说明更大的完整验证仍由 CI 执行。没有跳过 hook。
+- 随后独立 `git ls-remote origin refs/heads/master` 因 `getaddrinfo() thread failed to start` 失败。发布结论依据 GitHub push 成功响应；不把失败的读取尝试写成 fresh remote 核验。当前这份 PWF 状态更新将作为后续 docs-only carrier 正常推送。
+- 2026-11-14 的三次 Mimosa L3 拦截是准确的历史记录；2026-11-15 这次普通推送未被拦截。现有证据只能说明此次放行，不能说明 209/39/6 的告警已清零或平台规则已变。
+
 ## 2026-11-15 — Dashboard 最终收据及总控 PWF 对齐
 
 - Dashboard 最终 receipt-only 独立审查 PASS，精确绑定此前已推送的 `8cd2d9477b60a6391dc5b1a4e3d0c94fb66dc6d0`；审查报告追加作为单文件 docs-only commit `3f83bb518ca782cb1bff495f7119fda7f3154097` 推送。fresh `ls-remote` 与 Dashboard 本地 HEAD 均为 `3f83bb5`，tracked worktree clean；仅保留 `.workbuddy-ai/` 和用户暂停的 E14 handoff。没有重跑产品测试或改产品代码。
