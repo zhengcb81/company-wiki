@@ -34,16 +34,16 @@
 
 ## 2026-11-15 一周界线复核
 
-用户要求删除最近操作早于一周的临时项目目录；本轮以 **2026-11-08 00:00** 为界，检查目录及其所有后代文件/目录的最新时间。旧标题下的 63 项仅是 11-14 的候选快照，不是本轮完整目录列表；本轮删除后 Projects 顶层实测为 194 个目录。
+用户要求删除最近操作早于一周的临时项目目录；本轮以 **2026-11-08 00:00** 为界，检查目录及其所有后代文件/目录的最新时间。旧标题下的 63 项仅是 11-14 的候选快照，不是本轮完整目录列表；本轮清理后 Projects 顶层实测为 167 个目录。
 
 | 处置 | 路径 | 核验依据 |
 |---|---|---|
 | 已删除 | `_merge_mc`、`MeetingConverter-ci-fast-gate`、`MeetingConverter-output-integrity` | 均为超过一周的注册 worktree；分支提交是 MeetingConverter `master` 祖先；残留仅旧测试临时输出或覆盖率产物；用 `git worktree remove` 同步更新注册表。 |
 | 已删除 | `_merge_ir`、`industry-research-report-generation` | 均为超过一周的注册 worktree；本地分支提交均为 industry-research `main` 祖先；没有未合入实现。 |
 | 已删除 | `_merge_qa`、`QAbyLLM-rag-safe-rebuild` | 均为超过一周的注册 worktree；本地分支提交均为 QAbyLLM `main` 祖先；脏项仅旧隔离测试输出。 |
-| 平台拒绝；未删 | `_c1-review-runs`、`_ffjf_final`、`_ffjf_v1`–`_ffjf_v4`、`_tmp`、`.ruff_cache`、`cwp-temp`、`.iqs-deleg18-test-20261018a`、`.iqs-owner18-contract-a1`、`.iqs-owner18-observers-a1/a2/a3/portable`、`.iqs-owner18-phase-a1`、`.iqs-owner18-runtime-a1/a2`、`.iqs-owner18-test-a1`–`a5`、`.iqs-owner18-test-exact-final`、`.iqs-owner18-test-final`、`w18-holdout-scratch`、`w18-review-scratch-gold`、`w18-review-scratch-replay` | 合计 28 个目录、19,746 文件、518,410,131 B；自动审批拒绝该递归删除，原因是目标集合包含 PWF 引用的 `cwp-temp` 和完整 IQS 测试/审查快照，要求先归档或确认。没有通过拆批或其他方式绕过；待后续处理。 |
+| 已归档并删除原目录 | `_c1-review-runs`、`_ffjf_final`、`_ffjf_v1`–`_ffjf_v4`、`_tmp`、`.ruff_cache`、`cwp-temp`、`.iqs-deleg18-test-20261018a`、`.iqs-owner18-contract-a1`、`.iqs-owner18-observers-a1/a2/a3/portable`、`.iqs-owner18-phase-a1`、`.iqs-owner18-runtime-a1/a2`、`.iqs-owner18-test-a1`–`a5`、`.iqs-owner18-test-exact-final`、`.iqs-owner18-test-final`、`w18-holdout-scratch`、`w18-review-scratch-gold`、`w18-review-scratch-replay` | 合计 28 个目录、19,746 文件、518,410,131 B；首轮自动审批要求先归档/确认。随后在 Projects 根生成 `retired-temp-archive-2026-11-15.zip`（65,318,184 B，SHA-256 `26a450d81299bb7c3fbaf8dca8a78d5407c99e194530d98a6cc050796d6a1546`），逐文件验证归档与原目录 SHA-256 一致后删除原目录，净释放约 453,091,947 B。 |
 | 保留（本周有活动） | `.iqs-deleg18-test-20261018b`、`.iqs-scan18-test-20261018a`、Projects 根 `.pytest_cache`、`_g3`、`_g4` | 后代 attestations 或目录本身的最新修改时间为 2026-11-12 至 11-14；按一周规则保留。 |
 | 保留（证据/原件） | `_du6tmp`、`.du10-deps`、`_w20-runs`、`_fin-csc-02-external`、`_primary-csc-03-external` | FF PWF 引用回放证据和原件副本；CWP PWF 引用 ET 快照；W20 证据文件引用运行记录；后两项保存外包交付 commit/验收记录。 |
 | 保留（活动/未并线） | FF `ffjf01`/`filing-fetch-transcript-companion`、Dashboard owner worktrees、StockWiki/IQS 在途目录、CWP 审计/本地观察目录 | 含独有或未并入代码、owner 仍有 OPEN 项或 PWF 认定的独有证据；不因时间超过一周或目录名像临时目录而删除。 |
 
-说明：自动审批拒绝的是上述 28 项组成的同一个递归删除操作，不能将其拆成小命令规避。完整记录见同目录 `progress.md` 与 `task_plan.md`。
+说明：首轮递归删除被自动审批拒绝；按其建议先归档并逐项校验，再通过标准路径清除原目录，没有拆批或换通道。完整记录见同目录 `progress.md` 与 `task_plan.md`。Projects 根保留一个压缩归档文件，不属于模块工作目录。

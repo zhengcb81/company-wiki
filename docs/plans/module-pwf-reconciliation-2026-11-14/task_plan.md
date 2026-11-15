@@ -46,12 +46,12 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推送；Dashboard 新候选已在本地主线但须修复独审发现后再推送；RFAudit 按卡无 remote，在 `main` 本地收口；CWP 的本地提交尚未发布。既有 active/evidence/跨 owner branch 按收据保留；这不等于漏并线，也不授权把所有非祖先 refs 一律 merge。
 
 ### 阶段 3 — 每模块只留一个主要 Projects 目录
-**状态：部分完成；2026-11-15 的一周界线复查重新打开目录清理**
+**状态：一周界线临时目录批次已完成；活动/未并线/独有证据路径仍保留**
 
 - [x] 每个 owner 核清主仓、工区和 Projects 候选并记录 disposition。
 - [x] 已确认可删且不含独有证据的路径按 owner 收据清理；未确认项目、活动工区、审计资料和用户资料保留。
 - [x] 保留路径已说明 owner 与理由；StockWiki/IQS 因独立在途任务不触碰。
-- [ ] 处理 2026-11-15 发现的 28 个过期 no-Git 测试/临时目录；平台自动审批拒绝当前批量删除，因其中包含 PWF 引用的 `cwp-temp` 和 IQS 测试/审查快照。拒绝前未删除，不能拆批绕过；细节见 `progress.md` 和 `projects_directory_inventory.md`。
+- [x] 处理 2026-11-15 发现的 28 个过期 no-Git 测试/临时目录：先归档全部 19,746 个文件并逐项校验 SHA-256，再按标准路径删除原目录。归档位置、hash、释放空间和自动审批首轮拒绝的原因见 `progress.md` 和 `projects_directory_inventory.md`。
 - [ ] 活动/证据/跨 owner 目录由其 owner 在对应任务完成后再评估；因此“Projects 物理上只剩一个目录”的目标尚未完成，不能对外声称已完成。
 
 ### 阶段 4 — 模块 owner 清理、并线与主线接续
@@ -80,7 +80,7 @@ FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推
 
 ## 下一步
 
-当前收尾按用户 2026-11-14 指令逐模块核对 PWF、未提交内容、分支并线和临时目录；2026-11-15 又按用户指示以 2026-11-08 为一周界线清理旧目录。已删除 7 个超过一周且提交已并入主线的旧 MeetingConverter/industry-research/QAbyLLM worktree。另有 28 个旧 no-Git 临时目录、共约 518 MB/19,746 文件，自动审批因其中含 PWF 引用的测试数据库和 IQS 测试/审查数据而拒绝递归删除；没有绕过。其余近期工区、未并入代码、源文档和独有证据按理由保留，细节见 `progress.md`。不能把“模块 owner closeout 已完成”解释成“所有 Projects 辅助目录已删除”。StockWiki/IQS 活动施工保持只读；RF weekly T3 `not-ok` 运行记录保留。父业务 goal 继续 paused。
+当前收尾按用户 2026-11-14 指令逐模块核对 PWF、未提交内容、分支并线和临时目录；2026-11-15 又按用户指示以 2026-11-08 为一周界线清理旧目录。7 个提交已进入各自主线的旧施工 worktree 已移除；28 个无 Git 的旧测试/临时目录先归档并逐 SHA 校验，再删除原目录，归档保留在 Projects 根，净释放约 453 MB。因活动施工、未并线代码、原件或独有证据仍有其它目录保留，故不能宣称 Projects 只剩模块主仓。细节见 `progress.md`。StockWiki/IQS 活动施工保持只读；RF weekly T3 `not-ok` 运行记录保留。父业务 goal 继续 paused。
 
 ## 续办：全模块工作区与主线收尾（2026-11-14）
 
