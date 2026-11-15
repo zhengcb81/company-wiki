@@ -52,3 +52,7 @@
 - CWP `SourceVersionReader.catalog` 暴露了底层目录对象，调用者也能直接调用读取器内部方法。解析和导出装配把完整读取器交给消费者。导出只使用 `open_version`、`verify_version` 和 `describe_version`，当前运行时却要求解析与流式方法。分别用属性反例、公开读取行为和独立后端证明。
 - StockWiki 本地 `master@f2bc73f` 已有 MC-SW 接收的 C38 接口和 B03 assessment。真实主工作区另有 Quick Scan 未提交改动，复验以提交为基线。仍需验证 StockWiki 的 CWP 证明客户端能否使用独立安装的公开命令。
 - Dashboard 老测试绕过 adapter，调用 CWP 已移除的私有读取器和锁函数。应该在调用方用真实公开流和已知夹具验证拒绝语义，在 CWP owner 内验证打开字节和事务提交语义。Dashboard 主工作区有另一路正在改动的文件。
+
+## 2026-11-15 — Distinct company legal forms must not auto-resolve
+
+CWP1's broad suffix class treated `PLC`, `AG`, `SE`, `NV`, `SA`, `LP`/`LLP`, and two different Chinese company types as interchangeable. An exact-name fixture reproduced a false `resolved`; after narrowing exact normalization, a long canonical name with a suffix-free alias still auto-resolved through strong fuzzy matching. The general fix is owner-side: preserve only same-form spelling expansions, encode the two Chinese within-type alternatives in Company Law Article 7, and inspect the selected security record's canonical name plus every alias before fuzzy auto-resolution. Keep an explicit exact alias usable. No new status or manual-review gate was added; conflicts use the existing ambiguous candidate result. RED/GREEN, legal sources, exact hashes, test scope, and independent PASS are in `review/cwp1-legal-form-identity-20261115.md`.

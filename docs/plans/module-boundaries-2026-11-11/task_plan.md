@@ -2,7 +2,7 @@
 
 ## M3 — 当前 HEAD 边界漂移审查（2026-11-15 新增）
 
-**状态：IN_PROGRESS — 九模块当前主线与可识别产品差异已逐项归类；CWP 可复现边界盲区已以 TDD 修复并经独立复核。** 最新扫描器/合同测试提交为 `b1e948276860ee0386e47253ce32479a4fa41919`，已推送且 fresh remote SHA 一致；最终定向文件 86 passed，本地/独立复跑与 Ruff 均通过。M3 尚待 FF owner 修正下载请求限额并复验、StockWiki 根 canonical PWF 与 RF weekly 运行结果由各自 owner 对齐，再由 ROOT 绑定精确版本完成最终报告。原 M2/E01-E09 仍只对其绑定版本有效；M3 不抹去原收据，也不把新版本自动视为已验收。
+**状态：IN_PROGRESS — CWP M3 当前源代码差异已完成有限复核；legal-form identity 假阳性已按 TDD 修复、独审并推送。** CWP 源码 HEAD `5ae4a60b6fc883a73c198fb706a5b6979352dd29` 已由服务端确认在 `origin/master`；69 项定向回归、精确 SHA 独审通过，push fast smoke 18 项通过。完整 GitHub Actions CI 未核验。全局 M3 仍待 FF 提供有限下载限额并复跑 T3、RF 写入 weekly 结果、StockWiki 对齐根 PWF/工区状态，再由 ROOT 绑定最新 owner refs。M2/E01-E09 仍仅对原绑定版本有效；M3 不覆盖旧收据。
 
 ### 目标与设计原则
 
@@ -39,16 +39,16 @@
 
 ### 2026-11-15 M3 第二轮当前 HEAD 审查
 
-**状态：M3 仍 OPEN。** 当前版本的产品差异已逐仓归类；I10/I11 已有 owner 侧真实 producer/consumer 证据，本轮不重复跑同一回放。剩余是 StockWiki owner 对齐根 canonical PWF、RF owner 记录两项 weekly runtime 结果、绑定最终精确 refs，并完成 CWP 当前边界报告收口。本轮对外仓只读，不运行作者代码、不编辑其 PWF、不碰活动数据。
+**状态：M3 仍 OPEN。** CWP 当前 source slice 已复核并发布，I10/I11 已有 owner 侧互操作证明。最新只读刷新显示：FF `main@dd71621` 与本地 `origin/main` tracking ref 相同但未 fresh-query GitHub；RF 本地 `main@8889253` 比本地 `origin/main@f2215959` 多 7 个提交；StockWiki `master@e1f9f55` 无 remote，Git status 仍报 `must be run in a work tree`。RF weekly run 仍 not-ok 且未登记于 canonical `PLANNING_STATUS.md`；StockWiki root task_plan 最近提交仍是 11-08。具体证据及不可确认项在矩阵，ROOT 对外仓继续只读。
 
 | 仓库 | 基线 / 当前 ref | 源码差异与边界处置 | 当前证据/剩余项 |
 |---|---|---|---|
-| company-wiki | `c6189c623` → `master@b1e948276` (=fresh `origin/master`) | 精确产品 diff 仍为 24 个 `src/` Python 文件；`07d481180` 与 `b1e948276` 只改扫描器支持/边界合同测试，不增加产品源路径。依赖保持在 CWP 内部或经已声明公开 DU/WorkBudget 值接口 | 原 119 项定向测试及 CLI E2E 已过；最终扫描器合同 86 项通过，ROOT 与独立 reviewer 分别复跑，Ruff 通过；fresh remote 与本地 ref 一致。完整 GitHub CI 未核验 |
-| filing-fetch | `d4f35cab` → `main@1dfd818` (= `origin/main`) | M2 后一项测试文件变化，无产品源码变化；F-08 仍是 FF owner 的单独开放产品项，不是新边界失败 | `PLANNING_STATUS.md` 已记录 11-14 主线收尾；F-08 owner 后续按 FF PWF 处理 |
-| revenue-forecast | `fab819c2` → `main@f2215959` (= `origin/main`) | 产品变化限 `scripts/revenue_report.py` 与对应报告测试，属 RF 自有报告呈现，不引入跨仓实现依赖 | 只读确认 `20261115T084227Z` T3 `not-ok`：4 个 FF 下载 E2E 在 CWP `ensure` 阶段失败、0 downloads；日志没有内部根因。RF owner 需将结果写入 canonical PWF；不归因于本 CWP 扫描器测试 |
+| company-wiki | `c6189c623` → source `master@5ae4a60b6` (= server-confirmed `origin/master`) | 24 个 `src/` 路径在 `b1e948276` 时已分类；其后新增 12 个路径来自 CWP1/FF1 source_catalog owner 变更及本次 identity 修复，当前 M2-baseline 共 36 路径。具体路径差异、owner handoff 与边界证据见矩阵和各 lane PWF。不同法律形式不再跨类 exact 合并，fuzzy 自动解析前检查候选 canonical 名称及全部 aliases | 当前六文件定向回归 69 passed / 20.62 秒；独立复核按精确 SHA 通过 3 个重点用例，Ruff、mypy（490 源文件）、config doctor 和 push smoke 18 项通过。GitHub Actions 完整 CI 未核验；见 [CWP1 identity review](review/cwp1-legal-form-identity-20261115.md) |
+| filing-fetch | `d4f35cab` → local `main@dd71621` (= local `origin/main@dd71621` tracking ref; no fresh ls-remote) | M2 后 0 个 `src/` 产品文件变化，4 个测试文件与 1 个 tools verifier 文件变化；recent main commits 修了 archive gate 的内容绑定/范围。 | FF root PWF 未记录当前 weekly run 或 acquisition_limits 修复/复跑；本轮无 T3 重新运行证据。`git status` 仍因工作树错误无法核对；继续由 FF owner 提供有限限额并复跑 opt-in T3。 |
+| revenue-forecast | `fab819c2` → local `main@8889253`; local `origin/main@f2215959`（HEAD 有 7 个未发布提交；未 fresh-query remote） | M2 后 1 个产品脚本 `scripts/revenue_report.py`、1 个对应测试变化；另有 5 个 assurance/runtime 文件差异。当前 weekly manifest 为 `20261115T084227Z / ok=false`，绑定 FF `1dfd818`、RF `f2215959`、CWP `0e741063`。 | canonical `PLANNING_STATUS.md` 最近提交 11-14，未提该 run ID；root `git status` 无法运行，tracked cleanliness 未确认。RF owner 需将 not-ok 及来源三仓 refs 记入 canonical PWF，并说明本地 main 与 tracking ref 分叉。 |
 | earnings-transcripts | 当前 `main@50d9190` (= `origin/main`) | M3 观察到的差异限测试路径；无产品源变化或新跨层依赖 | owner PWF 另有 transcript-audit 退出码后续项，不属于本轮边界回归 |
 | StockInfoDLSimple | 当前 `v2-clean-rewrite@26704a0` (= `origin/v2-clean-rewrite`) | 本轮未发现新增产品边界变化 | 用户名单与本仓工作区按 owner 收据保留；不扩展为 StockInfoDownloader 主线 |
-| StockWiki | `21cf4891` → `master@0450506`（无 upstream） | 本仓 assessment、quick-scan store/universe 及根 CLI；不见导入邻仓私有实现。新发现两个公开 wire，登记为 I10/I11；不能以 I10 新版替代 Dashboard 当前 IQS 投影 v1 | assessment v2 有 107 项 owner 测试与独立 ACCEPT 记录；C06 组合仍按 owner 计划开放。根 `task_plan.md`/`progress.md` 最后修改于 11-08 09:28/10:46，须由 owner 对齐。最新只读 `git status` 命令仍报 work-tree 错误，故不宣称 tracked clean；本总控不写 |
+| StockWiki | `21cf4891` → local `master@e1f9f55`（无 remote） | 当前基线差异为 12 个 `stockwiki/` 文件 + `scripts/warm_parse_cache.py`；另有 19 个测试路径。新增研究/解析能力由 StockWiki owner 管理，ROOT 不改其工区。 | root `progress.md`/`findings.md` 有 11-15 三家公司研究记录；root `task_plan.md` 最近提交仍为 11-08，整体状态需对齐该工作；普通与 worktreeConfig=false 的 `git status` 都报 `must be run in a work tree`，无法确认 tracked cleanliness。StockWiki owner 需更新 canonical task plan 并核实工区。 |
 | invest-quick-scan | `master@3d9243c` (= `origin/master`)，活动 `codex/iqs-manifest-delivery-01@ecb4a5d`（tracked clean；较先前核对新增证据/状态文件并修订计划，仍无产品源码差异） | 活动分支只含 `task_plan.md`、状态及证据文件；不把 owner 的真实研究/付费样本任务当作边界缺陷 | C38/C5 **120 passed**、固定核心组合 **296 passed**；该 owner 证据覆盖 I11 当前 consumer 链，不重复派发 lookup/history 回放 |
 | investment-dashboard | `e1d1f927` → `main@3f83bb5` | 两个产品文件的变化为 Dashboard 自有比较错误呈现与 synthetic fixture；不新增对 CWP/RF/StockWiki 私有模块的导入。Dashboard 报告仍通过其 IQS adapter 消费已有公开 projection | `START_HERE` 及 receipt carrier 已更新至 3f83bb5；owner 收据记 fresh remote 对齐，本地 `origin/main` 亦相等 |
 | revenue-forecast-audit | `3589b69c` → `main@50d8ab6`（按 owner 约定无 remote） | M2 后没有计划/证据目录外的产品源码变化 | canonical cycle 计划把 W08 子卡标为 complete；无新增边界回归 |
@@ -63,8 +63,8 @@
 
 #### 下一步
 
-1. 由 StockWiki owner 对齐根 canonical PWF 与已并入 `master@0450506` 的计划/源码，并由 RF owner 记录 weekly runtime 结果；ROOT 保持只读，不重复更改其他仓 PWF。
-2. 将 CWP 当前 24 个产品路径审查结果、I12 公共接口及 119 项基础合同、86 项最终边界扫描合同绑定到 `master@b1e948276860ee0386e47253ce32479a4fa41919`；确认无未分类越界路径。已有 IQS 120/296、StockWiki 107/独审和 IQS→StockWiki 53 题 publish/readback 作为 I10/I11 证据，不重跑同一测试。
+1. FF owner 补齐有限 `acquisition_limits` 并复跑 T3；RF owner 将 weekly not-ok 写入 canonical PWF，并对齐本地 `main@8889253` 与 tracking `origin/main@f2215959`；StockWiki owner 更新 root `task_plan.md` 并核实 worktree。ROOT 对其他仓保持只读。
+2. CWP 当前 M2-baseline 36 个 `src/` 路径及其增量已绑定 `master@5ae4a60b6`；24 路径历史检查在 `b1e948276`，其后 12 路径的 CWP1/FF1 owner 证据及最新身份修复见矩阵和复核报告。I12 及 119 项基础合同、86 项边界扫描保持既有证据；本次身份/FF1 定向集合为 69 项，不把重叠用例相加。I10/I11 的 owner 证据不重复跑。
 3. 最终核对九模块当前 refs、对应 owner PWF 和活动/dirty 状态，更新矩阵及总控状态；只对证据不足或能复现的真实边界问题补 RED→GREEN。全部报告绑定精确 HEAD 后才关闭 M3。
 
 ### 2026-11-15 16:51 UTC — FF weekly T3 ensure failure root cause confirmed
@@ -134,7 +134,7 @@ ROOT 已在 StockWiki 和 Dashboard 各自工区接收对应接口。Audit 的�
 
 ## Next Step
 
-E01–E09 已通过，范围限定见 [ROOT 组合记录](review/root_composition_20261114.md) 和 [E01–E09 矩阵](boundary_matrix.json)。当前唯一架构下一步是完成本计划 M3 的有限收口：九模块可识别产品差异已分类；CWP 当前 24 个产品路径和 I12 边界合同已审，IQS/StockWiki 的 I10/I11 有 owner 侧互操作证明。剩余为 StockWiki 根 PWF 与 RF weekly 运行记录由各自 owner 对齐，再由 ROOT 将当前 refs/owner receipts 绑定到最终 M3 报告。只对新版本里可复现的越界先写测试并修复；不重复已通过回放。M3 没有关闭前，不声称全项目当前版本已完全解耦，也不把旧收据外推到新代码。M3 有限范围完成后，再回 [父计划](../du11-source-closure-2026-10-18/task_plan.md) 的 P1 真实摘要任务；公司循环继续按原 PWF 保持暂停。
+E01–E09 remain accepted for their frozen scope. The current CWP M3 source review is bound to `master@5ae4a60b6fc883a73c198fb706a5b6979352dd29`, confirmed on `origin/master`; 36 `src/` paths differ from the M2 CWP baseline, including 12 paths added since `b1e948276`. The CWP1 legal-form false-positive and fuzzy-alias bypass are fixed and independently reviewed. Evidence and limits: [CWP1 identity review](review/cwp1-legal-form-identity-20261115.md). Other owner snapshots remain unchanged. M3 still awaits FF's finite T3 request limits and rerun, RF's weekly-run PWF entry, and StockWiki's canonical PWF/worktree reconciliation; do not close cross-repository M3 until those owner records and exact refs are reconciled. Then resume parent P1 business-summary work; keep the fixed company loop paused.
 
 ## Decisions
 
@@ -148,7 +148,7 @@ E01–E09 已通过，范围限定见 [ROOT 组合记录](review/root_compositio
 
 | 观察 | 原因与处理 |
 |---|---|
-| 外仓Git普通沙箱status报work-tree/Permission denied | ROOT宿主只读重查成功，记录真实WIP；不是源码缺陷 |
+| FF/RF/StockWiki 的 Git status 均报 `must be run in a work tree`；覆盖参数也未恢复 status | 已核对 rev-parse、refs、提交历史和文件清单，但无法证明 tracked worktree clean；没有改外仓 Git 配置或文件。根因仍未确认，按 owner 工作区状态未知处理 |
 | installed PWF resolver按旧PWF_PLAN_ROOT=docs/plans静默无结果 | 当前脚本变量语义不同，改用显式-PlanRoot与PLAN_ID，已正确解析本目录；不改技能/不增加许可 |
 | CodeGraph部分当前文件不在索引 | 记录覆盖限制，用文件列表与已定位文件读补齐；未运行init/重建索引 |
 
@@ -161,3 +161,18 @@ E01–E09 已通过，范围限定见 [ROOT 组合记录](review/root_compositio
 - [x] ROOT 接收 StockWiki C38/B03 及安装态来源读取。
 - [x] Dashboard 移除 CWP 私有读取依赖，公开流及摘要通过独立安装测试。
 - [x] 2026-11-14 按矩阵收口 E01–E09，复验并线版本和回收自有工区。见 [ROOT 组合记录](review/root_composition_20261114.md)。
+
+### 2026-11-15 17:43 UTC — CWP1 identity resolver regression closed
+
+- CWP code commit `5ae4a60b6fc883a73c198fb706a5b6979352dd29` is pushed; Git confirmed `e74840d22..5ae4a60b6 master -> master`. Push fixed smoke: 18 passed in 6.23s. Full GitHub Actions CI is not yet verified.
+- CWP current-head inventory: 36 `src/` paths differ from M2 baseline `c6189c623`; 12 paths differ from scanner head `b1e948276`. This includes the already merged CWP1/FF1 owner work and the current identity correction. No external repository was modified.
+- CWP1 identity suffix normalization previously merged distinct legal forms and permitted one long-name fuzzy alias bypass. TDD reproduced both. The fix limits equivalence to safe same-form abbreviations and the two within-type Chinese name alternatives in Company Law Article 7; fuzzy auto-resolution now checks the candidate canonical name and all aliases.
+- Final six-file regression on the committed source: 69 passed in 20.62s. Commit hooks passed Ruff, mypy (490 source files), and config doctor. Independent review bound to the exact source/test SHA: 3 targeted regressions passed, Ruff passed, review PASS. Pytest temp path cleanup receipt: removed=true. Evidence: [CWP1 identity review](review/cwp1-legal-form-identity-20261115.md).
+- M3 remains IN_PROGRESS only for the still unrecorded FF/RF/StockWiki owner actions listed above. Keep CWP budget rules unchanged; do not represent the CWP fix or push smoke as global M3 closure or full CI.
+
+### 2026-11-15 17:58 UTC — external owner state refreshed read-only
+
+- FF: local `main@dd716217` equals local `origin/main` tracking ref. Relative to M2 it has no `src/` path delta, four test-path changes, and one `tools/verify_plan_claims.py` change. The latest root FF planning files contain no reference to the weekly run or finite-limit repair/rerun; no new T3 pass evidence was found. Normal `git status` remains unavailable in that worktree. No FF files were modified.
+- RF: local `main@88892536` is seven commits ahead of local `origin/main@f2215959`; only the earlier report script and its test are product-path changes since M2. Weekly manifest remains `20261115T084227Z / ok=false` on the historical triplet FF `1dfd818`, RF `f2215959`, CWP `0e741063`. Canonical `PLANNING_STATUS.md` is last committed 11-14 and does not record the run ID; normal `git status` is unavailable. No RF files were modified.
+- StockWiki: local `master@e1f9f559`, no remote. Since M2, 12 `stockwiki/` source paths and one script path changed, with 19 test paths. `progress.md` and `findings.md` include the 11-15 three-company run, but root `task_plan.md` last commit is 11-08. Normal and `worktreeConfig=false` status commands both report `must be run in a work tree`; cleanliness is unconfirmed. No StockWiki files were modified.
+- Updated the M3 matrix to retain these exact local/tracking refs and owner actions. Only CWP remote publication was server-confirmed; the other `origin/*` values are local tracking refs, not fresh server reads. Global M3 stays open.

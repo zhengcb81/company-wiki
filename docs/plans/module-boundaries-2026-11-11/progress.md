@@ -77,3 +77,17 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - FF handoff 指定的 mb11-ff-scratch 已核对仅含 pytest/review/runtime 测试产物后删除，共 5,030 个文件 / 18,119,347 字节；仓内最终日志与 manifest 保留。
 - 原主仓数据、用户输入名单、业务状态、密钥文件、工具记忆、其他历史 PWF/未跟踪证据均保留。
 - 当前 MB lane 文档的 worktree 字段表示历史交付路径；最新回收状态见 boundary_matrix.json。
+
+## 2026-11-15 — CWP current-head identity repair and publication
+
+- Reviewed all current CWP source deltas in the finite M3 slice. `master@5ae4a60b6` is the source/test head; 36 `src/` paths differ from M2 baseline `c6189c623`, and 12 paths differ from the earlier scanner head `b1e948276`. The complete classification and boundary limits are in `boundary_matrix.json`.
+- Fixed CWP1's false identity equivalence across distinct legal forms and an alias-mediated fuzzy auto-resolution bypass. The TDD regressions, Article 7 form pairs, independent reviewer, exact hashes, and scope are recorded in `review/cwp1-legal-form-identity-20261115.md`.
+- Final six-file suite 69/69 (20.62s), Ruff passed, pre-commit mypy passed across 490 source files, config doctor passed, cleanup receipt removed=true. Independent review PASS; three focused cases passed.
+- Published source commit `5ae4a60b6`; server confirmed `e74840d22..5ae4a60b6 master -> master`; push fixed smoke 18/18 in 6.23s. Full GitHub CI remains unverified. Global M3 remains open for FF, RF and StockWiki owner PWF/ref reconciliation.
+
+## 2026-11-15 17:58 UTC — M3 external refs rechecked without writes
+
+- FF now reads local main@dd716217 and local origin/main tracking ref at the same SHA; the current source delta since M2 is 0 `src/` files, with four test paths and one verifier-tool path. No root FF PWF receipt for finite acquisition limits or a fresh T3 rerun was found. The worktree status command remains unusable.
+- RF now reads local main@88892536 versus local origin/main@f2215959, seven commits behind the local branch. Weekly run `20261115T084227Z` remains `ok=false` on its historical triplet; it is absent from root canonical `PLANNING_STATUS.md` (last commit 11-14). Status cannot be confirmed.
+- StockWiki now reads local master@e1f9f559 with no remote. Root progress/findings include the 11-15 research run, but task_plan's last commit is 11-08; both status commands still fail.
+- No external repository was modified. M3 remains open for those owner PWF/ref/worktree actions; CWP identity fix is complete and published. Matrix records exact snapshots and their limits.

@@ -276,3 +276,7 @@ The SourceCatalog owner-port and static module-boundary milestone was pushed to 
 ## 2026-11-11 A1 repository reconciliation
 
 The subsequent user-authorized audit covered eight repositories, 390 branch/remote refs and 253 worktrees. Completed tested intakes: FF d563b63 and Dashboard 2049356, both main and pushed. Known scratch/redundant copies were removed; originals, unique history and active state were preserved. Remaining CWP/RF/StockWiki public-interface deltas and SID WIP are assigned in ../module-boundaries-2026-11-11/reconciliation.md and the five original cards A0. No broad architecture lane or business loop has restarted; see CURRENT_STATUS.md/json for the current entry.
+
+## 2026-11-15 — CWP identity legal-form auto-resolution root cause
+
+The CWP1 exact-name suffix classes collapsed distinct corporate forms, and its unique strong-fuzzy branch could still resolve a conflicting legal form when only a suffix-free alias matched. The fix keeps exact equivalence to safe same-form abbreviations and Chinese within-type statutory alternatives, and rejects automatic fuzzy resolution when the candidate's canonical name or any alias carries a conflicting form. This is an identity correctness rule, not a manual approval control; it preserves the existing ambiguous candidate path. TDD and independent evidence are in `../module-boundaries-2026-11-11/review/cwp1-legal-form-identity-20261115.md`.

@@ -93,8 +93,8 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T17:06:32Z",
-  "next_action": "Finish finite M3 reconciliation: FF owner supplies complete request-owned acquisition_limits to every download-capable T3 request and reruns the opt-in suite; RF owner records weekly run 20261115T084227Z in canonical PWF; StockWiki owner aligns its root canonical plan and verifies its Git worktree. ROOT then binds reviewed current refs and owner evidence to the final finite M3 report. Root cause is missing FF byte/time/cost ceilings, reproduced offline; keep the CWP budget contract unchanged. Do not repeat IQS C38/C5 or I10 interoperability runs already evidenced. Resume business-summary P1 only after M3; keep the fixed company loop paused.",
+  "observed_at_utc": "2026-11-15T17:58:56Z",
+  "next_action": "Finish finite M3 reconciliation: FF owner supplies bounded acquisition_limits and reruns T3; RF owner records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 with tracking origin/main@f2215959; StockWiki owner aligns the root task_plan and verifies worktree state. ROOT then binds fresh exact refs and owner evidence to the finite report. CWP slice is reviewed and pushed at master@5ae4a60; keep CWP budget contract unchanged. Then resume P1 business-summary work; keep fixed company loop paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -146,7 +146,7 @@
         ]
       },
       "company-wiki": {
-        "source_head": "a28692a6c49125143d2240b4a6d6df2ba29a28a1",
+        "source_head": "5ae4a60b6fc883a73c198fb706a5b6979352dd29",
         "remote": "origin/master",
         "published": true,
         "push_hook": {
@@ -199,7 +199,20 @@
           "post_push_local_origin_master_tracking_ref": "bd2c9ee328831f80626a216a99a7d503cebcfdd5",
           "post_push_tracking_refs_match": true
         },
-        "exact_ci_scope": "Existing run IDs in this object are the D4 closeout CI for head e7469d684b10a4cd37772e045eb3e588254c5ab8; they do not establish exact-head CI for D5 ROOT closeout c28b122075748d99547fb0a7e2fd4adcd7490269. The PWF-only follow-up bd2c9ee328831f80626a216a99a7d503cebcfdd5 is pushed, but its exact-head CI is also not freshly verified."
+        "exact_ci_scope": "Existing run IDs in this object are the D4 closeout CI for head e7469d684b10a4cd37772e045eb3e588254c5ab8; they do not establish exact-head CI for D5 ROOT closeout c28b122075748d99547fb0a7e2fd4adcd7490269. The PWF-only follow-up bd2c9ee328831f80626a216a99a7d503cebcfdd5 is pushed, but its exact-head CI is also not freshly verified.",
+        "latest_published_code": {
+          "commit": "5ae4a60b6fc883a73c198fb706a5b6979352dd29",
+          "server_confirmation": "e74840d22..5ae4a60b6 master -> master",
+          "independent_review": "PASS",
+          "source_sha256": "f2badf20d076c24754647210880bafccf244dd91067a111e74480dd783d79830",
+          "test_sha256": "30c8484bde3fcab13fcc1dae9864c820ba639390ea0acb0083d3ae497f0ade11",
+          "targeted_tests": "69 passed / 20.62 seconds",
+          "push_fixed_smoke": "18 passed / 6.23 seconds",
+          "ruff": "passed",
+          "mypy": "passed; 490 source files",
+          "config_doctor": "passed",
+          "full_github_ci": "not_verified"
+        }
       },
       "filing-fetch": {
         "source_head": "508aba308cf5206c486119c446b66172debdc09a",
@@ -1220,7 +1233,7 @@
   },
   "module_boundary_current_state": {
     "as_of": "2026-11-15",
-    "observed_at_utc": "2026-11-15T17:06:32Z",
+    "observed_at_utc": "2026-11-15T17:58:56Z",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
@@ -1232,9 +1245,9 @@
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
     "remaining": [
-      "M3 final receipt: FF owner repairs download-capable requests with finite acquisition_limits and reruns T3; RF owner records the weekly not-ok result; StockWiki owner reconciles root canonical PWF/worktree; ROOT binds exact refs and publishes the finite report"
+      "M3 final receipt: FF finite request limits and T3 rerun; RF canonical PWF entry for weekly run 20261115T084227Z and reconciliation of local main@88892536 vs tracking origin/main@f2215959; StockWiki root task_plan and worktree status reconciliation; ROOT binds fresh exact owner refs and publishes finite report"
     ],
-    "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_DRIFT_AUDIT_IN_PROGRESS",
+    "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_REVIEWED_FOR_CWP_AND_EXTERNAL_OWNER_RECONCILIATION_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
     "cleanup": {
       "delivery_worktrees_removed": 5,
@@ -1250,58 +1263,58 @@
     "m3_current_head_drift_audit": {
       "status": "IN_PROGRESS",
       "cwp_first_slice": {
-        "published_head": "b1e948276860ee0386e47253ce32479a4fa41919; final scanner/test-only commit; fresh ls-remote, local master and origin/master all match.",
+        "published_head": "5ae4a60b6fc883a73c198fb706a5b6979352dd29; source fix pushed and server confirmed origin/master. Full GitHub Actions CI not verified.",
         "m3_pwf_receipt_head": "476cb4a79a7aa97080baa5a6a256052403d89596; PWF root-cause carrier. Git push server response confirmed d46357c12..476cb4a79 master -> master; local HEAD and origin/master tracking ref match. Fresh ls-remote failed because local Git could not start a resolver thread. Push fixed smoke 18/18 in 9.26 seconds; full GitHub CI not yet verified.",
         "dynamic_execution_boundary": "eval/exec/compile calls, aliases, __builtins__/builtins.__dict__ mapping access, vars/globals/locals and get-based lookup covered by RED-to-GREEN static contract; subsequent expression-flow tests close module escapes through lambda closures, IfExp, BoolOp, comprehensions, yield/yield-from and walrus aliases. Comprehension targets are isolated while walrus bindings follow Python outer-scope semantics. No production use found; this static contract is not runtime isolation.",
         "subject_schema_owner": "NarrativeSubjectRef public factory now owns compact official JSON schema construction.",
         "pytest_temp_path": "153-character default sandbox temp now routes to a 53-character unique checkout temp and is removed on exit.",
         "windows_object_publication": "PermissionError from hardlink now falls back to atomic no-replace same-directory rename; existing content remains hash-verified.",
-        "tests": "Earlier focused contract/unit/integration run: 119 passed in 42.68 seconds; official JSON CLI E2E: 1 passed in 40.48 seconds. Final boundary scanner contract file: ROOT 86 passed in 13.28 seconds and independent reviewer 86 passed in 12.96 seconds; affected Ruff passed. Exact full GitHub Actions CI for b1e948276 was not checked."
+        "tests": "Prior M3 boundary suite: 119 passed / 42.68s; official JSON CLI E2E 1 passed / 40.48s; scanner contract 86 passed locally and 86 passed independently, affected Ruff passed. Latest CWP identity/FF1 fixed six-file regression on master@5ae4a60: 69 passed / 20.62s; independent review reran 3 key cases (PASS); commit hooks Ruff, mypy (490 sources), config doctor passed; push fixed smoke 18 passed / 6.23s. Full GitHub Actions CI for 5ae4a60 not verified.",
+        "identity_legal_form_fix": {
+          "commit": "5ae4a60b6fc883a73c198fb706a5b6979352dd29",
+          "review": "PASS",
+          "source_sha256": "f2badf20d076c24754647210880bafccf244dd91067a111e74480dd783d79830",
+          "test_sha256": "30c8484bde3fcab13fcc1dae9864c820ba639390ea0acb0083d3ae497f0ade11",
+          "root_regression": "69 passed / 20.62 seconds",
+          "independent_regression": "3 passed; exact SHA-bound review",
+          "ruff": "passed",
+          "mypy": "passed across 490 source files",
+          "push_smoke": "18 passed / 6.23 seconds",
+          "full_github_ci": "not_verified",
+          "scope": "CWP identity name resolution only; no external repository or production data changed by ROOT"
+        },
+        "identity_review_evidence": "../module-boundaries-2026-11-11/review/cwp1-legal-form-identity-20261115.md",
+        "current_source_delta": "36 src/ paths versus M2 CWP baseline c6189c623; 12 src/ paths versus scanner head b1e948276"
       },
       "latest_owner_snapshots": {
-        "StockWiki": {
-          "observed_ref": "master@0450506fc94adbfecd33001c244221a42ba0a00d",
-          "remote": "none-configured",
-          "root_plan_files_last_write_local": {
-            "task_plan.md": "2026-11-08 09:28",
-            "progress.md": "2026-11-08 10:46"
-          },
-          "git_status": "not_confirmed; rev-parse reports inside-work-tree=true and bare=false, but normal and one-shot worktreeConfig=false git status both return 'this operation must be run in a work tree'",
-          "owner_action": "reconcile root canonical PWF and verify worktree state"
+        "filing-fetch": {
+          "observed_ref": "local main@dd7162172718e8276a809e9c205e3c80da06141a",
+          "local_tracking_ref": "origin/main@dd7162172718e8276a809e9c205e3c80da06141a",
+          "remote_status": "tracking ref observed locally; fresh ls-remote not run",
+          "m2_product_source_delta": 0,
+          "m2_test_path_delta": 4,
+          "additional_tool_path": "tools/verify_plan_claims.py",
+          "git_status": "unconfirmed; status reports must be run in a work tree",
+          "canonical_pwf_action": "finite acquisition limits and T3 rerun not recorded in the root planning files"
         },
         "revenue-forecast": {
-          "observed_ref": "main@f2215959d33abc76778342a95d39a8e38191da75",
+          "observed_ref": "local main@88892536e8d53893427fc6afeabdfe17741536a5",
+          "local_tracking_ref": "origin/main@f2215959d33abc76778342a95d39a8e38191da75",
+          "unpublished_commits_ahead": 7,
+          "remote_status": "tracking ref observed locally; fresh ls-remote not run",
           "weekly_run_id": "20261115T084227Z",
-          "weekly_status": "not-ok; T3 suite exit 1",
-          "git_status": "not_confirmed in this harness; weekly manifest and alert contents were read directly",
-          "triplet": {
-            "filing-fetch": "1dfd81836794ec3bf73b41014a98714e97299ae8",
-            "revenue-forecast": "f2215959d33abc76778342a95d39a8e38191da75",
-            "company-wiki": "0e741063f510d5bc1c5921aa192b90fab94b6064"
-          },
-          "failure_summary": "Four FF download E2Es failed at company-wiki ensure, downloads=0. Root cause is confirmed: requests at FF 1dfd818 set allow_download=True without acquisition_limits, so CWP rejects before provider startup for missing byte/time/cost ceilings. A no-network temp reproduction returned the exact missing-budget diagnostic. This is an FF request/fixture contract defect, not a CWP scanner regression; the CWP budget rule remains.",
-          "owner_action": "Record the weekly not-ok run in canonical RF PWF and preserve run artifacts; coordinate rerun after FF supplies finite request limits"
+          "weekly_status": "not-ok; manifest remains pinned to FF 1dfd818 / RF f2215959 / CWP 0e741063",
+          "canonical_pwf": "PLANNING_STATUS.md last commit 3ca619283411cf2a48afa57a449c44e2aa907768 on 2026-11-14; weekly run ID absent",
+          "git_status": "unconfirmed; status reports must be run in a work tree"
         },
-        "filing-fetch": {
-          "observed_ref": "local main@d694d11b6c13b97c64bb1673b652027c2b38d0fb",
-          "local_tracking_ref": "origin/main@1dfd81836794ec3bf73b41014a98714e97299ae8",
-          "remote_status": "not freshly verified in this check",
-          "active_delta_vs_tracking_ref": [
-            "PLANNING_STATUS.md",
-            "docs/ff-job-protocol.md",
-            "docs/plans/ff1-envelope-candidates-20261115/findings.md",
-            "docs/plans/ff1-envelope-candidates-20261115/progress.md",
-            "docs/plans/ff1-envelope-candidates-20261115/task_plan.md",
-            "scripts/fetch_filing.py",
-            "scripts/ff_job_contracts.py",
-            "scripts/ff_source_candidate.py",
-            "scripts/ff_v2_envelope.py",
-            "tests/test_ff1_envelope_candidates.py"
-          ],
-          "git_status": "not_confirmed; git status reports this operation must be run in a work tree",
-          "weekly_run_ref": "20261115T084227Z used FF 1dfd81836794ec3bf73b41014a98714e97299ae8",
-          "failure_root_cause": "Real download E2E requests set allow_download=True but omit acquisition_limits. FF passes no max-download byte/time/cost flags; a no-network temporary reproduction received CWP stderr requiring all three limits before provider startup.",
-          "owner_action": "Add complete finite acquisition_limits to every download-capable request including idempotent/retry calls, then rerun bounded opt-in T3. Do not weaken CWP budget validation."
+        "StockWiki": {
+          "observed_ref": "local master@e1f9f559c08ca20e1806a0b1ac205cdd75d875f8",
+          "remote": "none-configured",
+          "source_paths_since_m2": 13,
+          "test_paths_since_m2": 19,
+          "task_plan_last_commit": "9baaf3d10178a8d9aa9a3853c417f223e8de50de on 2026-11-08",
+          "progress_findings_last_commit": "b3f5777455dfdea6b84b0a6e30fa8e8d42370b96 on 2026-11-15",
+          "git_status": "unconfirmed; standard and worktreeConfig=false status both report must be run in a work tree"
         }
       },
       "remaining": "Current post-M2 product deltas are classified, and I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await FF finite-budget request repair/T3 evidence, RF canonical PWF reconciliation, and StockWiki root PWF/worktree reconciliation by their owners; then bind the final report to exact refs.",

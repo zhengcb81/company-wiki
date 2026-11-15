@@ -4,6 +4,24 @@
 
 ## 2026-11-15 最新状态
 
+### 17:43 UTC update — CWP1 identity fix passed review and published
+
+The CWP current-head M3 slice now includes `master@5ae4a60b6fc883a73c198fb706a5b6979352dd29`, pushed to `origin/master`; the server confirmed the ref update from `e74840d22`. The fix closes two reproduced identity false-positive paths: exact legal-form cross-equivalence and a long-name fuzzy bypass through a suffix-free alias. It preserves existing exact alias matching and uses the existing ambiguous-candidate response for conflicts.
+
+Validation on the exact committed code: six targeted files, **69 passed / 20.62 seconds**; Ruff, mypy across 490 source files, config doctor, and `git diff --check` passed. Independent review bound to the exact two file hashes returned **PASS** and reran three key regressions. Push fixed smoke: **18 passed / 6.23 seconds**. Full GitHub Actions CI remains unverified. Pytest scratch cleanup receipt is `removed=true`.
+
+The CWP M3 inventory counts **36 `src/` paths** changed from its M2 baseline and 12 additional paths since the earlier scanner head; the reviewed source reference and test evidence are now recorded in the module-boundary matrix. FF1 MDB fact correction is separately recorded by commit `3552e1050`: four pinned MDB rows were byte-verified against local originals and appended through source-facts supersession; FY2022–FY2024 resolve as reused-equivalent and the FF FY2024 replay is succeeded/reused-existing at $0.00. FY2026 inline XBRL normalization remains explicitly out of scope.
+
+Global M3 is **still in progress** because FF must provide finite request-owned limits and rerun T3, RF must record the weekly not-ok run in its canonical PWF, and StockWiki must reconcile its root PWF/worktree. CWP did not relax its bounded-provider contract. No external repository was modified. See [CWP identity review](../module-boundaries-2026-11-11/review/cwp1-legal-form-identity-20261115.md) and [FF failure root cause](../module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md).
+
+### 17:58 UTC update — latest FF/RF/StockWiki refs checked read-only
+
+- FF local `main@dd716217` matches its local `origin/main` tracking ref; this is not a fresh server query. Since M2, FF has no `src/` path delta, four test-path changes, and one plan-verifier tool change. Root planning files contain no weekly T3/acquisition-limit repair or rerun receipt. Git status still fails with `must be run in a work tree`; no FF files were changed.
+- RF local `main@88892536` is seven commits ahead of local `origin/main@f2215959`; no fresh remote query. The weekly manifest remains `20261115T084227Z / ok=false`, tied to FF `1dfd818`, RF `f2215959`, CWP `0e741063`. Canonical `PLANNING_STATUS.md` was last committed 11-14 and does not record that run. Git status is unavailable, so tracked cleanliness is unknown. No RF files were changed.
+- StockWiki local `master@e1f9f559` has no remote. Its latest M2-relative delta is 13 product source paths and 19 test paths. Root progress/findings include the 11-15 research run; root `task_plan.md` last commit is 11-08. Normal and `worktreeConfig=false` status checks both fail with `must be run in a work tree`, so tracked cleanliness is unknown. No StockWiki files were changed.
+- Updated the module matrix and current-status JSON with these owner refs and the work still needed. CWP is published; global M3 remains open. For non-CWP repositories, recorded `origin/*` values are local tracking refs, not fresh server reads.
+
+
 ### 16:51 UTC 更新：RF weekly T3 的真实失败根因已查明
 
 只读检查与 no-network 临时复现确认，四个 FF 下载用例设置 allow_download=True，却没有提供 acquisition_limits。FF 因此没传 bytes/time/cost 三项参数，CWP 在启动 provider 前按既有预算合同拒绝，原始错误为 “bounded provider access requires --max-download-bytes, --max-download-seconds, and --max-download-cost-usd”。这是 FF 请求/fixture 未满足公开预算合同，不是 CWP 扫描器回归，也不应通过放宽 CWP 预算来修。修复由 FF owner 完成；RF owner 仍需写入该周跑结果，M3 保持开放。完整证据与限度见 [FF weekly failure record](../module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md)。

@@ -558,3 +558,11 @@ E01–E09 组合验收关闭并推送 6635ce76a。回放脚本移除来源目录
 ## 2026-11-14 — 摘要选材首批根因修复
 
 CWP 已将报告的行政陈述与经营过程分开，补了建设行为、设施对象与计划范围的正反测试，真实半年报 12/12 请求覆盖。最终定向 602 项、独审 22 项通过。RF 公司级反证指标和分部条件的显示作用域修正已独立复渲染、推主线，未重新计算历史预测。生成式摘要正文和完整公司循环继续开放。[代码和真实资料核对](review/phase-c-h1-formal-20261114.md)
+
+## 2026-11-15 — CWP1 legal-form identity root fix
+
+Closed the current CWP identity false-positive discovered during the M3 source review. Exact matching no longer treats distinct legal forms as equivalents; strong fuzzy resolution checks the selected canonical security name and every alias before auto-resolving. The two root defects were reproduced RED before repair. Exact-source regression: 69 passed / 20.62s; independent review PASS; code commit `5ae4a60b6` pushed with fixed smoke 18/18. Full GitHub CI is not verified. Global M3 still waits for FF/RF/StockWiki owners' current PWF and exact-ref receipts. See `../module-boundaries-2026-11-11/review/cwp1-legal-form-identity-20261115.md`.
+
+## 2026-11-15 — M3 owner refs refreshed read-only
+
+Latest owner observations: FF local main@dd716217 equals its local tracking ref but has no current root-PWF receipt for bounded T3 limits or rerun; RF local main@88892536 is seven commits ahead of local origin/main@f2215959, while weekly run `20261115T084227Z` remains not-ok and absent from canonical `PLANNING_STATUS.md`; StockWiki local master@e1f9f559 has no remote, current progress/findings but a root task_plan last committed 11-08, and Git status remains unusable. No external repo was modified. Exact local refs, deltas, and uncertainty are in `../module-boundaries-2026-11-11/boundary_matrix.json`; M3 remains open pending owner reconciliation.
