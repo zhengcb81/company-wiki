@@ -3,9 +3,9 @@
 - 交回日期: 2026-11-15
 - owner: company-wiki
 - 分支: `codex/cwp1-identity-suffix-20261115`（独立 worktree `company-wiki-cwp1-identity-20261115`）
-- **release commit（40 位，供 Dashboard 消费）**: `8de23487113bc8316b45bd5c8ca6a2680be6b333`
+- **release commit（40 位，供 Dashboard 消费）**: `569615ecffe84a72d96149a6fc175c07b6fa2bb9`（master 并线合并提交：含身份 lane 合并 `ce64f0239` 与 ff1-catalog lane，2026-11-15 已推送 origin/master。下方 §5 的 §8-3 case 2 交接任务已按 case 1 完成，`handoff.json` 已同步）
 - 机器可读版本: `handoff.json`（同目录）
-- 未 push、未并入 master；Dashboard 按 commit 消费，不按分支名追踪。
+- 交回时点状态存档：~~未 push、未并入 master；Dashboard 按 commit 消费，不按分支名追踪。~~（已完成并线+推送，本行保留原文以存档）
 
 ## 1. 施工包目标与结论
 
@@ -58,15 +58,21 @@ route3 两边都成功。因此 route3 的 `found+capture_ready` **不是本包�
 
 ## 5. §8-3 显式并线交接任务
 
+> **【已解决 — 2026-11-15 按 case 1 完成】** 原 case 2 交接任务：
 > `OWNERPKG-CWP-CANDIDATES-01` 分支 `codex/cwp1-identity-suffix-20261115`
 > release commit `8de23487113bc8316b45bd5c8ca6a2680be6b333` 已通过独立重审
 > （0 OPEN P1/P2）。**待主工作区在途 PWF（module-pwf-reconciliation-2026-11-14）收口、
 > 且 `codex/ff1-catalog-repair-20261115` lane 的 B4 并入或确认不冲突后**，
 > 由 **company-wiki 主线 owner（操作者）** 执行并线，并在 PWF `progress.md` 记录
 > 并线 commit 与回归结果。Dashboard 侧在此之前按上述 40 位候选 commit 消费。
+>
+> 实际执行：与 ff1-catalog lane 同批干净并线（合并提交 `ce64f0239` / `569615ecf`，
+> observability 注册并集、零冲突，聚焦套件 89 passed、FC-1301 与基线同形），
+> 随 master 推送 origin（`09fe9ca2f..e74840d22` 及后续 docs 提交）。
+> Dashboard 消费指针改指 master 合并提交 `569615ecf`（`handoff.json` 同步）。
 
-不强行并线的原因：主工作区有他人在途 WIP，且与另一条在途 lane 尚未收口；
-强行 merge 会与在途 WIP 互踩，违反 §4 红线。
+原"不强行并线的原因"（主工作区在途 WIP 与另一 lane 未收口）在合并时点已不成立
+（在途 PWF 已被其 lane 收口提交，ff1-catalog lane 已交付并通过独立重审）。
 
 ## 6. 交回路径（施工包 §6）
 
