@@ -176,3 +176,61 @@ def test_missing_official_cache_and_source_facts_refuse(tmp_path):
     ):
         with pytest.raises(PrimaryIssuerUnavailable, match="source_facts_missing"):
             extract_cn_issuer(catalog, REF, pages=PAGES, metadata=META)
+
+
+# ---------------------------------------------------------------------------
+# Periodic-report registration shape
+#
+# An annual/semi-annual report states the same registration facts in its own
+# "公司基本情况" section without the prospectus' 创立大会 narrative.  The proof
+# accepts that shape under the same gates: the document is already identified as
+# this issuer by the name/listing table, the passage must be first person and
+# inside that section, and the licence number must sit on the same or the next
+# page.  Checksum, official master and abbreviation agreement are unchanged.
+# ---------------------------------------------------------------------------
+
+PERIODIC_PAGES = [
+    PAGES[0],
+    PAGES[1],
+    "三、公司基本情况1.公司概况√适用□不适用本公司前身为"
+    + NAME.removesuffix("股份有限公司")
+    + "有限公司，系由ControlledInc.Asia于2004年5月31日在江苏省成立的中外合资经营企业。"
+    "经过数次股权变更，本公司变更为外商独资企业。",
+    "于2017年3月1日本公司换领了统一社会信用代码为" + USCC + "的营业执照，现法定代表人为受控。",
+]
+
+
+def test_periodic_report_registration_proof(tmp_path):
+    value = extract(make_catalog(tmp_path), PERIODIC_PAGES)
+    assert value["state"] == "verified"
+    assert value["key"] == {"namespace": "cn.uscc", "value": USCC}
+    # The licence number sits on the page after the narrative: the locator must
+    # name that page, not the page the sentence started on.
+    assert value["evidence"][2]["locator"]["value"] == "4"
+
+
+def test_periodic_report_requires_the_issuer_basic_information_section(tmp_path):
+    pages = list(PERIODIC_PAGES)
+    pages[2] = pages[2].replace("公司基本情况", "经营情况讨论").replace("公司概况", "概述")
+    with pytest.raises(PrimaryIssuerUnavailable, match="registration"):
+        extract(make_catalog(tmp_path), pages)
+
+
+def test_periodic_report_requires_licence_on_same_or_next_page(tmp_path):
+    pages = [*PERIODIC_PAGES[:3], "本页为无关的行业概述，不涉及登记信息。", PERIODIC_PAGES[3]]
+    with pytest.raises(PrimaryIssuerUnavailable, match="registration"):
+        extract(make_catalog(tmp_path), pages)
+
+
+def test_periodic_report_requires_first_person(tmp_path):
+    pages = list(PERIODIC_PAGES)
+    pages[2] = pages[2].replace("本公司前身为", "该公司前身为")
+    with pytest.raises(PrimaryIssuerUnavailable, match="registration"):
+        extract(make_catalog(tmp_path), pages)
+
+
+def test_periodic_report_rejects_invalid_checksum(tmp_path):
+    pages = list(PERIODIC_PAGES)
+    pages[3] = pages[3].replace(USCC, USCC[:-1] + "7")
+    with pytest.raises(PrimaryIssuerUnavailable, match="checksum"):
+        extract(make_catalog(tmp_path), pages)

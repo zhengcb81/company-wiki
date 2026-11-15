@@ -39,6 +39,19 @@ SUPPORTED_CN_FILING_KINDS = frozenset(
 )
 _USCC_ALPHABET = "0123456789ABCDEFGHJKLMNPQRTUWXY"
 _USCC_WEIGHTS = (1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28)
+#: A periodic report's own registration history, as it actually reads in the
+#: "公司基本情况" section: "本公司前身为…有限公司，…本公司于…换领了统一社会
+#: 信用代码为…的营业执照".  The prospectus form (创立大会 / 原公司全体股东决议)
+#: is the other, stricter shape; a report that uses this one is accepted only
+#: inside the issuer's own basic-information section and only when the licence
+#: number falls on the same or the immediately following page.
+_PERIODIC_REGISTRATION = re.compile(
+    r"本公司前身为"
+    r"[\u4e00-\u9fff()（）A-Za-z0-9]{2,80}?(?:有限责任公司|有限公司|股份有限公司)"
+    r"[\s\S]{0,2500}?统一社会信用代码为([0-9A-Z]{18})"
+)
+#: Page markers that make a page the issuer's own basic-information section.
+_BASIC_INFORMATION_MARKERS = ("公司基本情况", "公司概况")
 
 
 class PrimaryIssuerUnavailable(ValueError):
@@ -202,6 +215,28 @@ def observe_cn_original(
             if not valid_uscc(match[1]):
                 raise PrimaryIssuerUnavailable("cn_primary_uscc_checksum_invalid")
             registration.setdefault(match[1], []).append((page, match[0]))
+    if len(registration) != 1:
+        # Second accepted shape: the periodic report's own registration
+        # history.  The document is already identified as this issuer by the
+        # name/listing table above, so what has to be proved here is that the
+        # passage is the issuer speaking about itself — first person, inside
+        # its own basic-information section, licence number on the same or the
+        # next page.  The checksum, the official CN master and the abbreviation
+        # agreement below are the same gates the prospectus shape must pass.
+        for page, raw in enumerate(compact, start=1):
+            text = raw.replace("（", "(").replace("）", ")")
+            if "本公司前身为" not in text:
+                continue
+            if not any(marker in text for marker in _BASIC_INFORMATION_MARKERS):
+                continue
+            window = text
+            if page < len(compact):
+                window += "\n" + compact[page].replace("（", "(").replace("）", ")")
+            for match in _PERIODIC_REGISTRATION.finditer(window):
+                if not valid_uscc(match[1]):
+                    raise PrimaryIssuerUnavailable("cn_primary_uscc_checksum_invalid")
+                uscc_page = page if match[1] in text else page + 1
+                registration.setdefault(match[1], []).append((uscc_page, match[0]))
     if len(registration) != 1:
         raise PrimaryIssuerUnavailable(
             "cn_primary_own_registration_ambiguous_or_missing"
