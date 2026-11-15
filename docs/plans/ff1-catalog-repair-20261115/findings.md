@@ -74,3 +74,19 @@
   `declared_group_publication_date(root, relative_path) -> (sidecar_kind, filing_date) | None`，
   只读、仅认 ISO 日期声明（filing_date→published_date 顺序与 _DECLARING_KEYS 一致）；
   planner 泛化调用，零 root token。门禁与全部 B2 测试转绿（aa35d8609）。
+
+## F7 独立重审结论与 F-R3 修复（2026-11-15）
+
+- 重审结论：0 个 OPEN P1/P2 成立；自报偏离 4 项（base commit、register_groups 签名、独立 repair
+  journal、词表外 reason 省略）全部获批。
+- OPEN P3 共 3 项：
+  - **F-R3（本 lane 修复）**：CWP 投影放行未 trim 的 title——matches 分支与 excluded 分支都透传
+    documents.title 原值，FF 消费方 `fetch_filing.py::_validated_operation_candidates` 以
+    `value.strip() and value == value.strip()` 严格校验（title 分支，filing-fetch
+    scripts/fetch_filing.py 约 923-925 行），违规整载荷拒收（upstream_error）。生产目录当前未
+    观察到该形状（潜在配对断裂）。修复（生产方对齐，不改 documents 数据）：
+    `operation_projection._project_candidate` 的 title 改经 `_candidate_title`（strip 后输出，
+    空白-only fail-closed），B1 排除候选路径 `resolver._excluded_candidate` title 输出 strip——
+    与既有 provider/form_type 等 strip 一致。测试：补 2 用例（"  mdb-2025 " 双分支投影后 trim
+    断言 + 注释引用消费方形状规则；空白-only title 拒绝发射），56 通过。
+  - **F-R1 / F-R2：随 handoff 交回**（不在本 lane 分支修复，按 §8 规矩移交）。

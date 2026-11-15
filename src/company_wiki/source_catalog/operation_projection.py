@@ -89,6 +89,27 @@ def _candidate_text(item: dict[str, Any], key: str) -> str | None:
     return value
 
 
+def _candidate_title(item: dict[str, Any]) -> str:
+    """Title is trimmed non-empty text (F-R3).
+
+    ``documents.title`` is free text and may carry padding; the FF consumer's
+    ``_validated_operation_candidates`` (filing-fetch
+    ``scripts/fetch_filing.py``) rejects any candidate value with
+    ``value != value.strip()`` fail-closed, so the PRODUCER trims the
+    projection output here (documents data itself is untouched) — the same
+    normalization provider/form_type already get at their sources.  A
+    whitespace-only title has no consumer-valid representation and fails
+    closed rather than emitting a payload the consumer must refuse.
+    """
+    value = item.get("title")
+    if not isinstance(value, str):
+        raise SourceOperationProjectionError("candidate title must be text")
+    trimmed = value.strip()
+    if not trimmed:
+        raise SourceOperationProjectionError("candidate title must be non-empty text")
+    return trimmed
+
+
 def _project_candidate(
     item: dict[str, Any], *, exclusion_reason: str | None = None,
 ) -> dict[str, Any]:
@@ -127,7 +148,7 @@ def _project_candidate(
         )
     return {
         "document_id": document_id,
-        "title": _candidate_text(item, "title"),
+        "title": _candidate_title(item),
         "document_kind": _candidate_text(item, "document_kind"),
         "provider": _candidate_text(item, "provider"),
         "provider_document_id": _candidate_text(item, "provider_document_id"),

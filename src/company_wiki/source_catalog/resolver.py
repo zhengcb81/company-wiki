@@ -1954,9 +1954,11 @@ class SourceResolver:
         # FF-1 B1/B4: the pathless candidate whitelist the operation projection
         # republishes.  Physical locators stay out by construction (the
         # "path" not in json.dumps(diagnostic) contract is pinned by tests).
+        # F-R3: title is trimmed here like the other free-text fields — the
+        # consumer's candidate validator rejects value != value.strip().
         provider, provider_document_id, _identities = _provider_identity(metadata)
         diagnostic.update({
-            "title": document["title"],
+            "title": str(document["title"]).strip(),
             "document_kind": document["document_kind"],
             "provider": provider,
             "provider_document_id": provider_document_id,

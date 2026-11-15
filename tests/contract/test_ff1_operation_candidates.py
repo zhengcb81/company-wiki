@@ -261,3 +261,46 @@ def test_vocabulary_and_closed_sets_are_exported_for_the_consumer_lane() -> None
         "identity_mismatch", "capture_not_ready", "other_excluded",
     })
     assert hashlib.sha256(b"").hexdigest()  # sanity: stable digest helper import
+
+
+def test_padded_titles_are_trimmed_in_both_candidate_branches() -> None:
+    """F-R3: documents.title is free text and may carry whitespace padding.
+
+    The FF consumer validates every candidate title with the strict shape
+    rule ``value.strip() and value == value.strip()`` (filing-fetch
+    ``scripts/fetch_filing.py::_validated_operation_candidates``, the
+    ``title`` arm of the trimmed-text loop), refusing the WHOLE payload on a
+    violation.  The producer therefore trims the projection output — the
+    excluded branch (B1 diagnostic) and the matches branch
+    (multiple_candidates) alike — while the stored documents row is
+    untouched.  A trimmed title passes that consumer shape rule.
+    """
+    payload = _ambiguous_payload(excluded=[_undated_candidate(title="  mdb-2025  ")])
+
+    result = project_operation_result(payload, operation="ensure", reader=_Reader())
+
+    candidate, = result["candidates"]
+    assert candidate["title"] == "mdb-2025"
+
+    matched = _ambiguous_payload(
+        reason="multiple_existing_sources_match_semantic_request",
+        matches=[
+            _match("urn:company-wiki:document:sha256:" + "1" * 64, "1" * 64, "  rev-1  "),
+            _match("urn:company-wiki:document:sha256:" + "2" * 64, "2" * 64, "rev-2"),
+        ],
+    )
+
+    result = project_operation_result(matched, operation="ensure", reader=_Reader())
+
+    assert [item["title"] for item in result["candidates"]] == ["rev-1", "rev-2"]
+    assert not _contains_physical_field(result)
+
+
+def test_whitespace_only_title_fails_closed() -> None:
+    """A whitespace-only title has no consumer-valid representation (the FF
+    shape rule requires non-empty trimmed text), so the projection refuses
+    to emit it instead of producing a payload the consumer must reject."""
+    payload = _ambiguous_payload(excluded=[_undated_candidate(title="   ")])
+
+    with pytest.raises(SourceOperationProjectionError, match="title"):
+        project_operation_result(payload, operation="ensure", reader=_Reader())
