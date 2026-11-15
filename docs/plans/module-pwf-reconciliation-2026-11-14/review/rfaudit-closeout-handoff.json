@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "lane": "rfaudit",
+  "repo_root": "C:/Users/郑曾波/Projects/revenue-forecast-audit",
+  "canonical_pwf": "docs/plans/company-pool-cycle-2026-10-09/task_plan.md",
+  "base": {
+    "branch": "main",
+    "head": "fa0564fb11742a412cd66c9216c9e0009dfe30aa",
+    "remote_head": null
+  },
+  "final": {
+    "branch": "main",
+    "head": "50d8ab6fa99db8920358c97f63be4afff8299243",
+    "remote_head": null
+  },
+  "dispositions": [
+    { "kind": "branch", "path": "refs/heads/codex/w04-audit-capture-20261011", "status": "ABSORBED", "reason": "tip为main祖先，内容全部可由main可达；ref保留为标签，本卡未授权删ref", "evidence": "tip c099333；.planning/w04-wp05由main跟踪；W04接收见cycle progress历史节" },
+    { "kind": "branch", "path": "refs/heads/codex/w05-audit-loop", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 2ed0b5e；.planning/w05-audit-loop由main跟踪" },
+    { "kind": "branch", "path": "refs/heads/codex/root-w05-audit-loop-20261011", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 321d4c1；同w05收据" },
+    { "kind": "branch", "path": "refs/heads/codex/w06-audit-measures", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 6a50d7e；.planning/w06-audit-measures由main跟踪" },
+    { "kind": "branch", "path": "refs/heads/codex/root-w06-audit-measures-20261011", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 9cd5ff8；同w06收据" },
+    { "kind": "branch", "path": "refs/heads/codex/w07-audit-analyst-quality", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip e320688；.planning/w07-audit-analyst-quality由main跟踪" },
+    { "kind": "branch", "path": "refs/heads/codex/root-w07-audit-analyst-reception", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip e7c9257；同w07收据" },
+    { "kind": "branch", "path": "refs/heads/codex/w08-audit-evidence", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 96889c6；W08 ROOT接收2026-10-13（company-wiki phase6/w08_parallel_completion_2026-10-12）" },
+    { "kind": "branch", "path": "refs/heads/codex/root-w08-audit-20261013", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip e5189a0；同w08收据（Audit主线444PASS记录）" },
+    { "kind": "branch", "path": "refs/heads/codex/pool-audit-event-compat-20261009", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 681f2d1；cycle progress历史节：W07交接681f2d19已合audit main" },
+    { "kind": "branch", "path": "refs/heads/codex/p7-audit-execution-review", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 40b3810；.planning/p7-audit-execution-review由main跟踪" },
+    { "kind": "branch", "path": "refs/heads/codex/du5-audit-summary-20261015", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 583a13d；docs/plans/du5-summary-2026-10-15内handoff/root-acceptance" },
+    { "kind": "branch", "path": "refs/heads/codex/du6-audit-import-20261016", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip c603d23；docs/plans/du6-import-2026-10-16内root-reception" },
+    { "kind": "branch", "path": "refs/heads/codex/root-du67-audit-20261016", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 8fd5a33；tip提交即ROOT接收修复，收据在docs/plans/du6-import-2026-10-16" },
+    { "kind": "branch", "path": "refs/heads/codex/du8-audit-measures-20261016", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 3ed248d；docs/plans/du8-measures-2026-10-16内handoff/root-reception" },
+    { "kind": "branch", "path": "refs/heads/codex/root-du8-audit-20261016", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 7ea6071；tip提交即ROOT接收修复，收据在docs/plans/du8-measures-2026-10-16" },
+    { "kind": "branch", "path": "refs/heads/codex/w15-audit-portable-20261024", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 9bc2248；delivery/w15收据+计划状态ROOT_ACCEPTED+company-wiki package-reception-w13-w15-20261024" },
+    { "kind": "branch", "path": "refs/heads/codex/w17-audit-coverage-20261025", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 7c71c81；delivery/w17收据+独审APPROVE+company-wiki package-reception-w16-w17-20261025" },
+    { "kind": "branch", "path": "refs/heads/codex/root-w17-acceptance-20261025", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 33200f8；同w17收据" },
+    { "kind": "branch", "path": "refs/heads/codex/w20-audit-checkpoints-20261028", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 5b8aa71；delivery/w20-audit-checkpoints收据+company-wiki w20-reception-20261029/r2/r3" },
+    { "kind": "branch", "path": "refs/heads/codex/root-w20-audit-final-20261029", "status": "ABSORBED", "reason": "tip为main祖先，等价吸收；ref保留", "evidence": "tip 55c29fe；同w20收据（ROOT返工分支，root_closeout.md记录）" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit", "status": "ACTIVE_KEEP", "reason": "唯一长期主仓与canonical PWF所在", "evidence": "git worktree list仅剩此路径；main@2221f53e clean" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du5-summary", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "已结案+clean+收据归主仓，owner依据收据确认结案后移除", "evidence": "codex/du5-audit-summary-20261015@583a13d为main祖先；docs/plans/du5收据在主仓；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du6-import", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "已结案+clean+收据归主仓，移除", "evidence": "c603d23为main祖先；docs/plans/du6收据在主仓；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du67-integration", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "ROOT接收工作区，收据已提交进主仓docs/plans/du6，移除", "evidence": "8fd5a33为main祖先且其tip即ROOT接收修复提交；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-integration", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "ROOT接收工作区，收据已提交进主仓docs/plans/du8，移除", "evidence": "7ea6071为main祖先且其tip即ROOT接收修复提交；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-measures", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "已结案+clean+收据归主仓，移除", "evidence": "3ed248d为main祖先；docs/plans/du8收据在主仓；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w15-portable", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "ROOT_ACCEPTED+clean+收据归主仓，移除", "evidence": "9bc2248为main祖先；delivery/w15在主仓；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w17-coverage", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "已交接+ROOT已接收+clean，移除", "evidence": "7c71c81为main祖先；delivery/w17在主仓；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w20-checkpoints", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "COMPLETE+ROOT三轮接收+clean，移除", "evidence": "5b8aa71为main祖先；delivery/w20-audit-checkpoints在主仓；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/p7/audit", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "W04已并线+clean，移除", "evidence": "c099333为main祖先；.planning/w04-wp05归档；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/pool-20261009/audit-events", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "W07交接已合main+clean，移除", "evidence": "681f2d1为main祖先；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "W05已并线+clean，移除", "evidence": "2ed0b5e为main祖先；.planning/w05-audit-loop归档；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop-root", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "W05 ROOT侧已并线+clean，移除", "evidence": "321d4c1为main祖先；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/audit-measures", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "W06已并线+clean，移除", "evidence": "6a50d7e为main祖先；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/audit-measures-root", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "W06 ROOT侧已并线+clean，移除", "evidence": "9cd5ff8为main祖先；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w07/audit-analyst-quality", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "W07已并线+clean，移除", "evidence": "e320688为main祖先；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w07/root-audit-analyst-reception", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "W07 ROOT接收已并线+clean，移除", "evidence": "e7c9257为main祖先；git worktree remove成功" },
+    { "kind": "worktree", "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/audit-evidence", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "包结案（ROOT 2026-10-13接收）且唯一未跟踪证据先归档主仓，--force移除", "evidence": "96889c6为main祖先；.planning/w08-audit-evidence归档提交2c87539（diff -r字节校验一致，仅task_plan.md末尾空行按diff --check卫生移除）；git worktree remove --force成功" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit", "status": "ACTIVE_KEEP", "reason": "唯一长期主仓目录", "evidence": "收口后Projects下仅剩此目录" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du5-summary", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "同worktree处置，目录随工区移除", "evidence": "移除后路径不存在" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du6-import", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "同worktree处置，目录随工区移除", "evidence": "移除后路径不存在" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du67-integration", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "同worktree处置，目录随工区移除", "evidence": "移除后路径不存在" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-integration", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "同worktree处置，目录随工区移除", "evidence": "移除后路径不存在" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-measures", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "同worktree处置，目录随工区移除", "evidence": "移除后路径不存在" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w15-portable", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "同worktree处置，目录随工区移除", "evidence": "移除后路径不存在" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w17-coverage", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "同worktree处置，目录随工区移除", "evidence": "移除后路径不存在" },
+    { "kind": "projects_dir", "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w20-checkpoints", "status": "DELETE_AFTER_OWNER_CONFIRMATION", "reason": "同worktree处置，目录随工区移除", "evidence": "移除后路径不存在" }
+  ],
+  "dirty_exceptions": [
+    {
+      "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/audit-evidence/.planning/w08-audit-evidence/",
+      "content": "W08施工包PWF（9文件，43008 B），唯一未跟踪内容",
+      "resolution": "已归档主仓.planning/w08-audit-evidence/并提交2c87539；diff -r字节校验一致（仅task_plan.md末尾空行按git diff --check卫生移除）；工区随后--force移除"
+    }
+  ],
+  "cleanup": {
+    "paths": [
+      { "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du5-summary", "file_count": 125, "bytes": 2040832 },
+      { "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du6-import", "file_count": 162, "bytes": 8769536 },
+      { "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du67-integration", "file_count": 144, "bytes": 2034688 },
+      { "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-integration", "file_count": 173, "bytes": 2252800 },
+      { "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-measures", "file_count": 169, "bytes": 2240512 },
+      { "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w15-portable", "file_count": 592, "bytes": 8894464 },
+      { "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w17-coverage", "file_count": 517, "bytes": 7623680 },
+      { "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w20-checkpoints", "file_count": 710, "bytes": 10044416 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/p7/audit", "file_count": 188, "bytes": 2777088 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/pool-20261009/audit-events", "file_count": 72, "bytes": 964608 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop", "file_count": 176, "bytes": 2600960 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop-root", "file_count": 225, "bytes": 3244032 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/audit-measures", "file_count": 71, "bytes": 796672 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/audit-measures-root", "file_count": 259, "bytes": 3604480 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w07/audit-analyst-quality", "file_count": 287, "bytes": 4100096 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w07/root-audit-analyst-reception", "file_count": 293, "bytes": 4163584 },
+      { "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/audit-evidence", "file_count": 101, "bytes": 1297408 }
+    ],
+    "file_count": 4264,
+    "bytes": 67449856
+  },
+  "tests": [
+    { "command": "git diff --check fa0564fb..50d8ab6fa99db8920358c97f63be4afff8299243", "result": "clean，无输出" },
+    { "command": "python -I -c \"import json; json.load(open(r'C:/Users/郑曾波/Projects/company-wiki/docs/plans/module-pwf-reconciliation-2026-11-14/review/rfaudit-closeout-handoff.json', encoding='utf-8'))\"", "result": "PASS（裸JSON可解析，无Markdown围栏）" },
+    { "command": "python -I <temp>/check_links_rfaudit.py（校验交接/review/15个被改plan文件的相对markdown链接）", "result": "PASS（0 broken）" },
+    { "command": "git worktree list; git worktree prune --dry-run", "result": "仅主仓1个worktree；prune无stale" },
+    { "command": "python -B -m unittest discover -s tests -v（AGENTS.md全量回归）", "result": "不适用——无技能源码变更，卡面文档-only按JSON/link/git diff --check检查" }
+  ],
+  "independent_review": {
+    "reviewer_agent": "general-purpose独立agent（agent_cb187a4c，未参与实施）",
+    "reviewed_head": "50d8ab6fa99db8920358c97f63be4afff8299243",
+    "result": "PASS（初审59cdd67a：0×P0-P2、2×P3 F1/F2；修复提交50d8ab6复核：F1/F2 CLOSED，无遗留问题）",
+    "report_path": "docs/plans/module-pwf-reconciliation-2026-11-14/review/rfaudit-closeout-review.md"
+  },
+  "remaining_items": [
+    "本仓业务实施等待ROOT调度：r4-owner-closure-20261102为UNBLOCKED_READY_NOT_STARTED，唯一下一步已写入canonical入口",
+    "W10最终矩阵待真实NVDA新attempt；W11（precall-history）未实施——均在canonical入口计划索引标注",
+    "21个已合并分支ref全部保留（均为main祖先）；后续修剪须另获授权",
+    "pre-commit Mimosa安全扫描两次未得出结论（scanner_enobufs，hook按兼容策略放行并要求不宣称项目安全）；建议后续重跑完整安全审计",
+    "ROOT侧：收好review目录三个新文件并更新module plan lane状态（本卡不在company-wiki做Git操作）",
+    "_harness_worktrees空父目录（w05、p7、pool-20261009）原样保留，处置归harness基础设施owner"
+  ],
+  "next_step": "等待ROOT按总计划（company-wiki docs/plans/du11-source-closure-2026-10-18）调度后启动r4-owner-closure-20261102；恢复前置（CWP du11 P1业务摘要质量修正）与接续顺序已写入canonical入口。本卡不自动恢复业务、不扩大公司清单。"
+}

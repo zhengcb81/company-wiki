@@ -16,7 +16,9 @@
 - 当前主线 goal `du11-source-closure-2026-10-18` 状态为 paused；本任务只整理计划与交接，不自动恢复该代码实施目标。
 - CWP 当前 owner 边界更新已在 commit `1f9f3dcf3` 推送。此前移除的 CWP 临时测试 SDK/cache 目录有逐路径清理证据；其他未跟踪 `.planning`、`.mimosa` 或 handoff 不可按临时目录一概删除。
 
-## 各仓现状（2026-11-14 只读快照）
+## 各仓起始盘点快照（2026-11-14；不是续办后的最新状态）
+
+本表记录七张 owner 卡开工前的基线；StockWiki/IQS 的后续只读实时快照见本文件“本轮只读 hold 的最新现场”，其他模块以续办表与各仓 owner 最终收据为准。
 
 Projects 顶层模块名目录已枚举：CWP 5 个，FF 14 个，RF core 14 个，RFAudit 9 个，ET family 8 个，SID 容器 1 个，Dashboard 3 个，IQS 1 个，StockWiki family 8 个，共 63 个候选路径。具体名字见 [顶层目录清单](projects_directory_inventory.md)。这是命名清单，不是垃圾目录清单。
 
@@ -52,3 +54,33 @@ Git 状态只读报告分别来自模块 agent 和 ROOT 命令。每个模块 ow
 - 清理为零的直接原因：所有 CWP 侧工区都含唯一证据（.planning 审计材料、M3/W04 未归档 WIP、R1 resume 记录）或 clean-filter 伪差量；三个非 git 的 Projects 目录（et-live、gates、storage-audit）都是唯一历史证据，gates 的 9,700 文件/262,499,631 B 观测产物可重建性未经证实。
 - stash 仅剩 `18ac0d0562`（br-ci-fix）：c3 semantic 的 `5b1415d6e` 已退休；剩余 stash 含 llm_cost_log 独有差量，归账 owner 处置。
 - CWP 业务主线唯一下一步未变：du11 P1 业务摘要质量修正（partial 来源；66 条 claim、26 个冗余任务、载体/承诺人混用），其后复验缓存恢复与 RF 采用；公司循环 paused。
+
+## 本轮只读 hold 的最新现场（2026-11-14）
+
+- StockWiki 已有本地 owner commit `0450506`，无 remote；现场是 28 个注册 worktree、39 个分支、41 个主仓 untracked 状态项。IQS `master@dab8724` 与 `origin/master` 一致，13 个注册 worktree/13 个分支，主仓有 22,658 个 untracked 状态项。两仓 PWF 仍有开放并行实现/组合验收；这些差异与测试材料保持 owner 持有，不由 ROOT 删除或整支并线。
+- CWP 自身根 `.mypy_cache`、`.pytest_cache`、`.ruff_cache`、`__pycache__` 是明确可再生的测试/静态检查缓存，已清理 1,682 文件/36,929,089 B；`.codegraph` 索引和 `.venv` 保留。CWP `.planning`、`.mimosa` 与历史 review 文件远大于本轮缓存，但分别承载会话/执行、平台 hook 状态及审查材料；未对它们做 bulk 清理。后续由只读分类决定是否存在可精确删除的冗余副本。
+- FF/ET/RF/SID 的 owner PWF+Git 已分别在主线提交并推送；RF 内容与 receipt carrier 都经独立复核 PASS。Dashboard 已修复初审发现并形成 `4d2def1` 候选，等待最终复审后推送。详见 `progress.md` 的时间顺序记录；本计划保持 `进行中`，不能把 StockWiki/IQS hold 或 CWP 未发布的提交写成完成。
+
+## RF / Dashboard 最终 closeout 独审发现（2026-11-14）
+
+- RF 内容提交 `3ca619283411cf2a48afa57a449c44e2aa907768` 已通过独立复核；只含 146 个 `.planning/`、5 个 `assurance/` 文件及 `PLANNING_STATUS.md`，不含产品源码。审查核对原支线/ledger SHA、排除的 470,806 字节 MDB 摘录仍在源 ref、真实 `daily_alert.jsonl`、测试和 `.pytest_cache` 未删除状态。receipt-only carrier `f2215959d33abc76778342a95d39a8e38191da75` 推送后也经独立复核 PASS：仅四个收据文件变更，旧报告字节前缀保留，handoff/JSON/README 指针一致。
+- Dashboard 初次独审绑定 `9cb67502c8943a4857e48c50d8c2022049ce2a65`，结论 CHANGES_REQUIRED：错误码 `constructor` 触发原型继承并向 React 返回函数；新增 pytest-asyncio 未锁入 `uv.lock`；handoff 最终/审查/远端 SHA 过期；E14 暂停包未记为保留例外；review 报告路径、`schema_version` 类型与 owner-requests 索引不符合施工卡。owner 声明已修复这 7 项，形成 `4d2def1c5dc0a774a0609543a6bcce4d98680518`，相关前端/后端/E2E、构建及锁定安装检查均通过；最终复审尚未完成，未推送。
+- Dashboard 第二轮独审确认 4d2def1 中代码、测试、依赖锁、E14 保留和其余索引/收据问题已修复；先后发现 `handoff.json.final.head` 错指产品提交 `e8eaa85`、e58 的额外顶层键违反卡片固定 schema。owner 的 `fc6dbe7` 修正后独审 PASS，carrier `2e8320e` 推送后发现 status/delivery 与远端字段滞后；最新 docs-only carrier `8cd2d9477b60a6391dc5b1a4e3d0c94fb66dc6d0` 已正常推送，fresh remote SHA 等于本地，等待最终 receipt-only 复核；E14 与 WorkBuddy 均保留。
+
+## Dashboard 最终收据更新（2026-11-15）
+
+- 先前记录的“等待 8cd 最终 receipt-only 复核”已完成并被新状态取代：独立 reviewer 对 `8cd2d9477b60a6391dc5b1a4e3d0c94fb66dc6d0` 的 post-push 状态收据复核为 PASS，审查报告追加后由 docs-only carrier `3f83bb518ca782cb1bff495f7119fda7f3154097` 推送；fresh remote SHA 与本地 HEAD 一致。
+- Dashboard owner 报告 tracked worktree clean，E14 用户暂停 handoff 与 `.workbuddy-ai/` 仍保留。无产品代码修改、未重跑产品测试；最终内容代码测试仍按此前实现证据及最终完整审查记录引用。
+- 本轮总控 PWF 已更新为最终 `3f83bb5`，不再把 Dashboard 报告追加 carrier 写作待办。CWP 的本地提交/远端门禁与 StockWiki/IQS 的 owner hold 是独立未结项。
+
+## StockWiki / IQS 只读状态复核（2026-11-15）
+
+- 两仓 canonical PWF 可读，均显示 owner 工作未闭合：StockWiki Phase 40 的真实数据与 owner-shape release 终验仍 OPEN；IQS 的跨仓组合复跑、主体 bundle 核验、真实付费样本和独立终审仍 OPEN。
+- 本次尝试刷新两仓 Git HEAD/remote/worktree 均因当前文件系统权限返回 `Permission denied`，没有写入。`master@0450506`（StockWiki）与 `master@dab8724`（IQS）及工区计数只能引用 2026-11-14 上次已知快照，不得称本轮实时核验；权限可读且对应 owner 交付后再继续收尾。
+
+## 全模块收尾续办现场（2026-11-14）
+
+- 用户本轮明确要求重新逐模块更新 PWF、归因并清理未提交项、把有效提交并入主线、移除确认无用的临时材料。ROOT 只改 CWP；FF/ET、RF/RFAudit、SID/Dashboard 由互斥 owner lane 并行。StockWiki/IQS 实时 PWF 仍有在途 owner 工作；两仓暂时只读，不碰活动 worktree，待 owner 交接后续办。
+- CWP untracked 不是一种“垃圾”：2026-11-15 实测 23,338 项由 `.mimosa` hook-state 10,010、`.planning` 执行/审查记录 13,180、`docs/` PWF 与审查证据 147、`.workbuddy-ai` memory 1 组成。全量删除会丢当前平台 hook 状态、历史测试/审查依据或用户笔记。
+- 已安全删除 CWP 根下 37 个空旧测试目录、7 个已无引用的旧 `.tmp_*.json`（16,301 B）、两个 11-02 测试遗留 `tmp/osred/**/race.json`（20 B），以及无生产引用的一次性 `.tmp-build-registry.py`（1,019 B）。本轮释放 17,340 B，另删 37 个空目录；删除均在 CWP 根内逐项验路径/mtime/文件清单。
+- CWP 当前 tracked 代码未改；`master` 仅增加本任务的文档/临时脚本删除记录。`origin/master` 最近成功 live 观察仍是 `7361aad82`，三次 Mimosa L3 正常 push 阻断继续有效，不绕过。

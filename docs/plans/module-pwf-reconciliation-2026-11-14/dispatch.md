@@ -1,20 +1,20 @@
 # Owner 卡派发总表
 
-## 最终验收状态（2026-11-14）
+## 最终验收状态（2026-11-15）
 
-七张卡均已收到最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入各自目标主线并验证推送；RFAudit 按卡没有 remote，仅在 `main` 本地收口。CWP 的收尾与总控 PWF 提交都在本地 `master`；最近一次成功远端观察 `origin/master@7361aad82`。平台 Mimosa L3 三次拦截正常 push，当前远端不能刷新，不使用绕过方式。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
+七张 owner 卡均已收到最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入各自目标主线并验证推送；Dashboard 最终 receipt-only review PASS 绑定 `8cd2d947`，报告载体 `3f83bb5` 已推送并由 owner fresh 核对远端。RFAudit 按卡没有 remote，仅在 `main` 本地收口。CWP 最近本地 PWF 状态提交为 `66c97834`；本轮 11-15 总控状态刷新仍在工作区，未提交。最近一次成功远端观察 `origin/master@7361aad82`；此前平台 Mimosa L3 三次拦截正常 push，之后远端刷新遇到 DNS/线程启动错误，不使用绕过方式。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
 
 | Lane | 当前本地主线 | 远端 | 收尾状态 |
 |---|---|---|---|
-| CWP | `master`（收尾与总控 PWF 更新均已提交） | 最近成功观察 `7361aad82`；本轮 DNS/线程错误未能刷新 | 本地 PASS；发布 BLOCKED |
-| FF | `main@c2aec910` | live 相等 | PASS / 已推送 |
-| RF | `main@1ea50082` | live 相等 | PASS / 收据已修 / 已推送 |
-| ET | `main@c777bf1` | live 相等 | PASS / 已推送 |
-| SID | `v2-clean-rewrite@85f39ec` | live 相等 | PASS / 收据已修 / 已推送 |
-| Dashboard | `main@4477eb9` | live 相等 | PASS / 汇总状态已修 / 已推送 |
+| CWP | `master@66c97834`（本轮状态刷新在工作区，未提交） | 最近成功观察 `7361aad82`；L3 拦截后刷新遇到 DNS/线程启动错误 | 本地 PWF/清理收据待提交；发布 BLOCKED |
+| FF | `main@1dfd818` | live 相等 | PASS / 已推送 |
+| RF | `main@f221595` | live 相等 | PASS / 内容与收据已复核并推送 |
+| ET | `main@50d9190` | live 相等 | PASS / 已推送 |
+| SID | `v2-clean-rewrite@26704a0` | live 相等 | PASS / PWF 已推送 |
+| Dashboard | `main@3f83bb5` | owner fresh 核对 live 相等 | PASS / 最终 receipt-only review 绑定 `8cd2d947` 并已推送报告载体 |
 | RFAudit | `main@50d8ab6` | 无 remote（按卡约定） | PASS / 本地收口 |
 
-StockWiki 和 IQS 不在本批写集；Dayu 仍是外部项目，均未操作。既有 active/evidence refs 按 handoff 保留，不作全量强制 merge。
+StockWiki 和 IQS 不在本批写集，owner PWF 仍列有 OPEN 验收；2026-11-15 的只读复核无法访问其 Git 元数据，11-14 SHA 及工区数仅作 last-known snapshot，不作今天的 live 状态。Dayu 仍是外部项目，均未操作。既有 active/evidence refs 按 handoff 保留，不作全量强制 merge。
 
 ## 派发安排与开工快照（历史）
 
