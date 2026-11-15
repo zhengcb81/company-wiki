@@ -219,10 +219,12 @@ def test_unknown_reason_is_omitted_not_invented() -> None:
     assert "reason" not in result
 
 
-def test_pathless_guard_holds_for_candidate_details() -> None:
+def test_pathless_guard_holds_for_candidate_details(tmp_path: Path) -> None:
     leaking = _undated_candidate()
-    leaking["canonical_path"] = "C:/companies/Acme/raw/2025.pdf"
-    leaking["absolute_location"] = "C:/elsewhere"
+    # Host-neutral absolute paths: the projection must strip a candidate
+    # field that names a physical location, whatever the machine's root is.
+    leaking["canonical_path"] = str(tmp_path / "companies" / "Acme" / "raw" / "2025.pdf")
+    leaking["absolute_location"] = str(tmp_path / "elsewhere")
     payload = _ambiguous_payload(excluded=[leaking])
 
     result = project_operation_result(payload, operation="ensure", reader=_Reader())
