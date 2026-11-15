@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import sys
 import tempfile
 from pathlib import Path
@@ -250,6 +251,94 @@ def test_configure_hook_rewrites_option_and_cleans_up(tmp_path, monkeypatch):
     finally:
         if relocated.exists():
             conftest.shutil.rmtree(relocated, ignore_errors=True)
+
+
+def test_unconfigure_removes_readonly_git_object_from_owned_fallback(
+    tmp_path, monkeypatch, capsys
+):
+    requested = Path(tempfile.gettempdir()) / ("deep" * 60)
+    fallback_parent = tmp_path / "fallback-root"
+    monkeypatch.setenv(conftest.FALLBACK_ROOT_ENV, str(fallback_parent))
+    monkeypatch.delenv(conftest.DISABLE_ENV, raising=False)
+
+    class _Option:
+        basetemp = str(requested)
+
+    class _Config:
+        option = _Option()
+
+    config = _Config()
+    conftest.pytest_configure(config)
+    relocated = Path(config.option.basetemp)
+    object_path = relocated / "push-fixture" / "remote.git" / "objects" / "ab" / "cdef"
+    object_path.parent.mkdir(parents=True)
+    object_path.write_bytes(b"synthetic git object")
+    object_path.chmod(0o444)
+
+    try:
+        conftest.pytest_unconfigure(config)
+        assert not relocated.exists()
+        assert '"removed": true' in capsys.readouterr().out
+    finally:
+        # Keep the regression test self-cleaning while the product cleanup is RED.
+        if relocated.exists():
+            for path in relocated.rglob("*"):
+                try:
+                    path.chmod(0o666)
+                except OSError:
+                    pass
+            conftest.shutil.rmtree(relocated, ignore_errors=True)
+
+
+def test_readonly_cleanup_does_not_follow_symlink_outside_owned_tree(tmp_path):
+    sentinel = tmp_path / "protected-sentinel.txt"
+    sentinel.write_text("must remain readonly", encoding="utf-8")
+    sentinel.chmod(0o444)
+    link = tmp_path / "owned-link.txt"
+    try:
+        link.symlink_to(sentinel)
+    except (NotImplementedError, OSError) as exc:
+        pytest.skip(f"host cannot create a symlink for this safety check: {exc}")
+
+    try:
+        error = PermissionError("synthetic readonly-unlink failure")
+        with pytest.raises(PermissionError, match="refusing to change permissions on a link"):
+            conftest._remove_readonly(os.unlink, str(link), (PermissionError, error, None))
+        assert sentinel.read_text(encoding="utf-8") == "must remain readonly"
+        assert not (sentinel.stat().st_mode & conftest.stat.S_IWRITE)
+        assert link.is_symlink()
+    finally:
+        sentinel.chmod(0o666)
+        link.unlink(missing_ok=True)
+
+
+def test_readonly_cleanup_rejects_reparse_metadata_before_chmod(tmp_path, monkeypatch):
+    sentinel = tmp_path / "protected-sentinel.txt"
+    sentinel.write_text("must remain readonly", encoding="utf-8")
+    sentinel.chmod(0o444)
+    reparse_flag = getattr(conftest.stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+    metadata = type(
+        "ReparseMetadata",
+        (),
+        {"st_mode": conftest.stat.S_IFDIR, "st_file_attributes": reparse_flag},
+    )()
+    chmod_calls = []
+
+    with monkeypatch.context() as scoped:
+        scoped.setattr(conftest.os, "lstat", lambda _path: metadata)
+        scoped.setattr(
+            conftest.os,
+            "chmod",
+            lambda *args, **kwargs: chmod_calls.append((args, kwargs)),
+        )
+        error = PermissionError("synthetic readonly-unlink failure")
+        with pytest.raises(PermissionError, match="refusing to change permissions on a link"):
+            conftest._remove_readonly(os.unlink, str(sentinel), (PermissionError, error, None))
+
+    assert chmod_calls == []
+    assert sentinel.read_text(encoding="utf-8") == "must remain readonly"
+    assert not (sentinel.stat().st_mode & conftest.stat.S_IWRITE)
+    sentinel.chmod(0o666)
 
 
 def test_configure_hook_within_budget_never_reroutes(tmp_path, monkeypatch):

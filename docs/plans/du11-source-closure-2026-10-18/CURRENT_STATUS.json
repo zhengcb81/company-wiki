@@ -93,7 +93,18 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T18:13:29Z",
+  "observed_at_utc": "2026-11-15T18:52:00Z",
+  "recent_cwp_gate_checkpoint": {
+    "date_utc": "2026-11-15",
+    "scope": "root PWF documentation-only push classification and pytest-owned Windows scratch cleanup",
+    "tests": "57 passed, 1 skipped in 13.04s",
+    "skip_reason": "host cannot create real symlinks; synthetic Windows reparse sentinel test ran",
+    "cleanup_receipt": "removed=true",
+    "independent_review": "PASS",
+    "ruff": "passed",
+    "full_github_ci": "not verified",
+    "m3_owner_actions_unchanged": true
+  },
   "next_action": "Finish finite M3 reconciliation: FF owner supplies bounded acquisition_limits and reruns T3; RF owner records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 (8 commits ahead of live origin/main@f2215959, with two tracked weekly-assurance edits); StockWiki owner aligns root task_plan. Elevated read-only status confirms FF and StockWiki tracked files clean and identifies the RF edits; untracked files were not enumerated. ROOT then binds fresh exact refs and owner evidence to the finite report. CWP slice is reviewed and pushed at master@5ae4a60; keep CWP budget contract unchanged. Then resume P1 business-summary work; keep fixed company loop paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",

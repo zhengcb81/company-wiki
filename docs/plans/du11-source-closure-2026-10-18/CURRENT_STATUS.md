@@ -4,6 +4,10 @@
 
 ## 2026-11-15 最新状态
 
+### 18:48 UTC update — root PWF push classification and pytest scratch cleanup repaired
+
+The local pre-push classifier now treats the four root planning Markdown files as documentation-only; mixed, runtime/configuration, and unknown ranges still run the fixed smoke. The test-tree cleanup now removes Windows Git loose objects marked ReadOnly and refuses to chmod symlink/reparse paths. TDD evidence: **57 passed, 1 skipped** (the host cannot create real symlinks; synthetic reparse protection ran), cleanup receipt `removed=true`; independent review and Ruff passed. Full GitHub Actions CI remains unverified. This does not change M3: FF finite T3 limits/rerun, RF canonical weekly-run reconciliation, and StockWiki root PWF reconciliation are still owner actions. Implementation and hash-bound review are in [module-boundary progress](../module-boundaries-2026-11-11/progress.md) and [review](../module-boundaries-2026-11-11/review/pre-push-classification-and-temp-cleanup-20261115.md).
+
 ### 17:43 UTC update — CWP1 identity fix passed review and published
 
 The CWP current-head M3 slice now includes `master@5ae4a60b6fc883a73c198fb706a5b6979352dd29`, pushed to `origin/master`; the server confirmed the ref update from `e74840d22`. The fix closes two reproduced identity false-positive paths: exact legal-form cross-equivalence and a long-name fuzzy bypass through a suffix-free alias. It preserves existing exact alias matching and uses the existing ambiguous-candidate response for conflicts.

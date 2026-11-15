@@ -21,8 +21,16 @@ RUNTIME_RANGES = [
     {f"tests/unit/test_changed_{index}.py" for index in range(379)},
     {"README.md", "src/pkg/core.py"}, {"unknown/runtime.txt"}, {"README.js"}, None,
 ]
-DOCUMENT_RANGES = [set(), {"docs/usage.md"},
-    {"README.md", "docs/plans/run/probe.py", ".planning/run/result.json"}]
+DOCUMENT_RANGES = [
+    set(),
+    {"docs/usage.md"},
+    {"README.md", "docs/plans/run/probe.py", ".planning/run/result.json"},
+    {"PLANNING_STATUS.md"},
+    {"progress.md"},
+    {"findings.md"},
+    {"task_plan.md"},
+    {"PLANNING_STATUS.md", "progress.md", "findings.md", "task_plan.md"},
+]
 
 
 def _push(monkeypatch, changes):
@@ -117,6 +125,9 @@ def test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once(monkeypatch,
     assert "full_validation_pending" in output and "safe to push" not in output
     if changes is None:
         assert "unknown push range" in output
+    else:
+        assert "not positively classified as documentation" in output
+        assert "runtime or configuration changes" not in output
 
 
 @pytest.mark.parametrize("changes", DOCUMENT_RANGES)

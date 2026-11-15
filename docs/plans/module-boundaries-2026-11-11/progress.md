@@ -105,3 +105,10 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 
 - Marked the root PLANNING_STATUS.md September snapshot and root progress.md/findings.md October logs as historical, with links to the selected current PWF and M3 records. Existing entries and evidence were preserved.
 - This avoids treating stale approval/status text as current without creating another plan or rewriting historical logs. Root status, M3 plan, matrix, README, and handoff now agree on the owner work remaining.
+
+## 2026-11-15 18:52 UTC — root-PWF push classification and pytest scratch cleanup repaired
+
+- Root `PLANNING_STATUS.md`, `progress.md`, `findings.md`, and `task_plan.md` were missing from the positive documentation-only range. Before the fix, RED regression tests reproduced the extra fixed smoke and the inaccurate “runtime or configuration” label. The exact four PWF paths now skip tests as documentation; unknown, mixed, runtime, and configuration ranges retain the fixed smoke.
+- Real local bare-Git push regression, pre-push classifier tests, and short-basetemp contract ran together: **57 passed, 1 skipped in 13.04s**. The skipped real-symlink case is unsupported by this host; an always-running synthetic Windows reparse test proves chmod is not called. Pytest's final fallback cleanup receipt is `removed=true`.
+- Root cause: Git loose objects on Windows carry the ReadOnly attribute; `rmtree(ignore_errors=True)` swallowed 441 PermissionErrors and stranded owned scratch. Cleanup now clears the bit and retries only after `lstat` rejects symlinks/reparse points. Independent source/test review PASS, bound hashes and limits are in [the review record](review/pre-push-classification-and-temp-cleanup-20261115.md); Ruff and `git diff --check` pass.
+- This bounded push/cleanup correction does not alter the M3 owner exit criteria or CWP product source delta. M3 still awaits FF finite T3 limits/rerun, RF canonical weekly-run reconciliation, and StockWiki root PWF reconciliation. Full GitHub CI remains unverified.

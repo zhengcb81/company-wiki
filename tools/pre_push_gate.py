@@ -393,7 +393,16 @@ def _non_runtime_range(changes: set[str] | None) -> bool:
     range or non-document path always runs smoke, even when no Python import
     consumer is known. Planning archives keep their existing non-runtime role.
     """
-    documents = {"README.md", "CONTRIBUTING.md", "CHANGELOG.md", "AGENTS.md"}
+    documents = {
+        "README.md",
+        "CONTRIBUTING.md",
+        "CHANGELOG.md",
+        "AGENTS.md",
+        "PLANNING_STATUS.md",
+        "progress.md",
+        "findings.md",
+        "task_plan.md",
+    }
     return changes is not None and all(
         name.startswith(("docs/plans/", ".planning/"))
         or name in documents
@@ -469,7 +478,11 @@ def main(argv: list[str] | None = None) -> int:
             print("Push scope: no behavior changes; planned 0 runtime targets. "
                   "tests_not_run: non-runtime range; CI policy unchanged.")
             return 0
-        reason = "unknown push range" if changes is None else "runtime or configuration changes"
+        reason = (
+            "unknown push range"
+            if changes is None
+            else "range not positively classified as documentation"
+        )
         targets = list(DAILY_PUSH_CASES)
         deferred = "change-specific tests are the author's responsibility; full suites remain in CI"
         print(f"Push scope: {reason}; planned {len(targets)} target(s); "

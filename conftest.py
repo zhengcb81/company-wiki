@@ -69,6 +69,7 @@ import getpass
 import json
 import os
 import shutil
+import stat
 import tempfile
 import uuid
 from pathlib import Path
@@ -170,6 +171,24 @@ def _record(decision: dict) -> None:
             handle.write(json.dumps(decision, ensure_ascii=True) + "\n")
 
 
+def _remove_readonly(function, path, exc_info) -> None:
+    """Retry owned pytest scratch cleanup after clearing Git's read-only bit."""
+    error = exc_info[1]
+    if not isinstance(error, PermissionError):
+        raise error
+    metadata = os.lstat(path)
+    reparse_point = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+    if stat.S_ISLNK(metadata.st_mode) or (
+        getattr(metadata, "st_file_attributes", 0) & reparse_point
+    ):
+        raise PermissionError(f"refusing to change permissions on a link or reparse point: {path}")
+    mode = stat.S_IREAD | stat.S_IWRITE
+    if os.path.isdir(path):
+        mode |= stat.S_IEXEC
+    os.chmod(path, mode)
+    function(path)
+
+
 def pytest_configure(config) -> None:
     requested = getattr(config.option, "basetemp", None)
     cwd = os.getcwd()
@@ -196,7 +215,7 @@ def pytest_unconfigure(config) -> None:
         "dir": str(fallback_path),
         "existed": fallback_path.exists(),
     }
-    shutil.rmtree(fallback_path, ignore_errors=True)
+    shutil.rmtree(fallback_path, onerror=_remove_readonly)
     record["removed"] = not fallback_path.exists()
     print(CLEANUP_PREFIX + json.dumps(record, ensure_ascii=True), flush=True)
     path = os.environ.get(DECISION_FILE_ENV)
