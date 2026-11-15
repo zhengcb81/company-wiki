@@ -4,6 +4,12 @@
 
 ## 2026-11-15 最新状态
 
+### 16:51 UTC 更新：RF weekly T3 的真实失败根因已查明
+
+只读检查与 no-network 临时复现确认，四个 FF 下载用例设置 allow_download=True，却没有提供 acquisition_limits。FF 因此没传 bytes/time/cost 三项参数，CWP 在启动 provider 前按既有预算合同拒绝，原始错误为 “bounded provider access requires --max-download-bytes, --max-download-seconds, and --max-download-cost-usd”。这是 FF 请求/fixture 未满足公开预算合同，不是 CWP 扫描器回归，也不应通过放宽 CWP 预算来修。修复由 FF owner 完成；RF owner 仍需写入该周跑结果，M3 保持开放。完整证据与限度见 [FF weekly failure record](../module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md)。
+
+FF 外仓只读观察另见本地 main@d694d11、tracking ref origin/main@1dfd818，且存在活动 FF1 envelope 差异；ROOT 未改动该仓。一次补充带限额 no-network smoke 超过 60 秒后被中断，不计为通过。 17:02 UTC 的两条 CWP 预算合同测试通过（2 passed / 3.49 秒），未调用 provider。
+
 **M3 CWP 边界扫描器 follow-up（16:23 UTC）**：最新扫描器与合同测试提交 `b1e948276860ee0386e47253ce32479a4fa41919` 已由独立 `git ls-remote` 确认与 `origin/master` 相同。代码只改测试支持扫描器及合同测试，没有产品源文件改动。最终合同文件本地 **86 passed / 13.28 秒**，独立 reviewer 对同一最终文件复跑 **86 passed / 12.96 秒**；受影响 Ruff 通过。完整 GitHub Actions CI 未核实，不能将 push 成功或本地快测写成完整 CI 通过。
 
 这次 follow-up 把扫描器从“识别简单返回节点”扩为识别表达式可能产出的值，修复外部模块对象藏在条件表达式、`and/or`、lambda 条件体、列表/字典/集合/生成器推导及 `yield/yield from` 中的静态边界漏检；同时修正推导式循环变量作用域隔离，以及 walrus 变量按 Python 语义向外层写回的误判。测试也覆盖空迭代保留既有模块绑定、参数遮蔽和合法公开端口正例。该静态合同不是运行时沙箱保证。

@@ -93,8 +93,8 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T16:23:32Z",
-  "next_action": "Finish finite M3 PWF reconciliation: StockWiki owner aligns its root canonical plan with master@0450506 and verifies its Git worktree; RF owner records the 2026-11-15 T3 not-ok result in canonical PWF; ROOT then binds reviewed CWP/owner evidence to exact refs. CWP scanner contract follow-up is independently rechecked and pushed at b1e948276860ee0386e47253ce32479a4fa41919 (86 tests; Ruff pass). RF's four failed FF download E2Es stop at company-wiki ensure and the available log has no inner cause; triplet CWP is 0e741063, so do not attribute this to the scanner test-only change. IQS C38/C5 120-pass and 296-pass owner runs plus I10 isolated publish/readback already cover current producer-consumer contracts; do not repeat them. Resume business-summary P1 only after M3; keep the fixed company loop paused.",
+  "observed_at_utc": "2026-11-15T17:02:44Z",
+  "next_action": "Finish finite M3 reconciliation: FF owner supplies complete request-owned acquisition_limits to every download-capable T3 request and reruns the opt-in suite; RF owner records weekly run 20261115T084227Z in canonical PWF; StockWiki owner aligns its root canonical plan and verifies its Git worktree. ROOT then binds reviewed current refs and owner evidence to the final finite M3 report. Root cause is missing FF byte/time/cost ceilings, reproduced offline; keep the CWP budget contract unchanged. Do not repeat IQS C38/C5 or I10 interoperability runs already evidenced. Resume business-summary P1 only after M3; keep the fixed company loop paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1220,7 +1220,7 @@
   },
   "module_boundary_current_state": {
     "as_of": "2026-11-15",
-    "observed_at_utc": "2026-11-15T16:23:32Z",
+    "observed_at_utc": "2026-11-15T17:02:44Z",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
@@ -1232,7 +1232,7 @@
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
     "remaining": [
-      "M3 final receipt: StockWiki owner reconciles root canonical PWF and verifies Git worktree state; RF owner reconciles the 2026-11-15 weekly T3 not-ok result; ROOT binds exact refs and publishes final finite M3 report"
+      "M3 final receipt: FF owner repairs download-capable requests with finite acquisition_limits and reruns T3; RF owner records the weekly not-ok result; StockWiki owner reconciles root canonical PWF/worktree; ROOT binds exact refs and publishes the finite report"
     ],
     "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_DRIFT_AUDIT_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
@@ -1279,11 +1279,46 @@
             "revenue-forecast": "f2215959d33abc76778342a95d39a8e38191da75",
             "company-wiki": "0e741063f510d5bc1c5921aa192b90fab94b6064"
           },
-          "failure_summary": "Four FF download E2Es failed at company-wiki ensure, downloads=0; available log does not expose inner ensure cause. Do not attribute to CWP scanner commit b1e948276, which is test-support/contracts only.",
-          "owner_action": "record the run and reconcile canonical RF PWF; preserve run artifacts"
+          "failure_summary": "Four FF download E2Es failed at company-wiki ensure, downloads=0. Root cause is confirmed: requests at FF 1dfd818 set allow_download=True without acquisition_limits, so CWP rejects before provider startup for missing byte/time/cost ceilings. A no-network temp reproduction returned the exact missing-budget diagnostic. This is an FF request/fixture contract defect, not a CWP scanner regression; the CWP budget rule remains.",
+          "owner_action": "Record the weekly not-ok run in canonical RF PWF and preserve run artifacts; coordinate rerun after FF supplies finite request limits"
+        },
+        "filing-fetch": {
+          "observed_ref": "local main@d694d11b6c13b97c64bb1673b652027c2b38d0fb",
+          "local_tracking_ref": "origin/main@1dfd81836794ec3bf73b41014a98714e97299ae8",
+          "remote_status": "not freshly verified in this check",
+          "active_delta_vs_tracking_ref": [
+            "PLANNING_STATUS.md",
+            "docs/ff-job-protocol.md",
+            "docs/plans/ff1-envelope-candidates-20261115/findings.md",
+            "docs/plans/ff1-envelope-candidates-20261115/progress.md",
+            "docs/plans/ff1-envelope-candidates-20261115/task_plan.md",
+            "scripts/fetch_filing.py",
+            "scripts/ff_job_contracts.py",
+            "scripts/ff_source_candidate.py",
+            "scripts/ff_v2_envelope.py",
+            "tests/test_ff1_envelope_candidates.py"
+          ],
+          "git_status": "not_confirmed; git status reports this operation must be run in a work tree",
+          "weekly_run_ref": "20261115T084227Z used FF 1dfd81836794ec3bf73b41014a98714e97299ae8",
+          "failure_root_cause": "Real download E2E requests set allow_download=True but omit acquisition_limits. FF passes no max-download byte/time/cost flags; a no-network temporary reproduction received CWP stderr requiring all three limits before provider startup.",
+          "owner_action": "Add complete finite acquisition_limits to every download-capable request including idempotent/retry calls, then rerun bounded opt-in T3. Do not weaken CWP budget validation."
         }
       },
-      "remaining": "Current post-M2 product deltas across the nine-module snapshot are classified; I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await StockWiki root canonical PWF/worktree reconciliation and RF weekly runtime result reconciliation by their owners, then bind the final report to exact refs."
+      "remaining": "Current post-M2 product deltas are classified, and I10/I11 owner interoperability evidence is sufficient and must not be rerun. Await FF finite-budget request repair/T3 evidence, RF canonical PWF reconciliation, and StockWiki root PWF/worktree reconciliation by their owners; then bind the final report to exact refs.",
+      "failure_reconciliation": {
+        "weekly_run_id": "20261115T084227Z",
+        "triplet": {
+          "filing-fetch": "1dfd81836794ec3bf73b41014a98714e97299ae8",
+          "revenue-forecast": "f2215959d33abc76778342a95d39a8e38191da75",
+          "company-wiki": "0e741063f510d5bc1c5921aa192b90fab94b6064"
+        },
+        "cause": "FF download-capable requests omit acquisition_limits; CWP requires complete byte/time/cost caps before provider startup",
+        "evidence": "../module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md",
+        "repair_owner": "filing-fetch",
+        "CWP_change": "none; retain existing bounded-acquisition contract",
+        "positive_budget_smoke": "interrupted after 60 seconds; not counted as pass",
+        "CWP_budget_contract_tests": "2 passed in 3.49 seconds; no provider called; confirms existing missing/complete-budget contract only"
+      }
     }
   },
   "r4_public_replay_20261114": {

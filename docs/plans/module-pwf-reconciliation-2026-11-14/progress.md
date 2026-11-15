@@ -1,5 +1,16 @@
 # 进度
 
+## 2026-11-15 16:51 UTC — FF weekly T3 根因诊断完成
+
+- 对 RF 20261115T084227Z 的失败按冻结三仓 ref 查明：FF 1dfd818 的四个下载 E2E fixture 在 allow_download=True 时未提供 acquisition_limits，FF 因而没向 CWP 传入 bytes/time/cost 三项参数。CWP 在 provider 启动前按预算合同退出，原始错误明确为 bounded provider access requires --max-download-bytes, --max-download-seconds, and --max-download-cost-usd，所以本轮 downloads=0。
+- CWP 已有测试要求显式完整限额，保持不变。FF owner 应修正 fixture/公开请求并重跑 opt-in T3；RF owner 仍需同步记录该周跑；ROOT 只负责记录证据并保持外仓只读。
+- 在 FF main@d694d11 与本地 tracking ref origin/main@1dfd818 间看到 FF1 envelope lane 的产品差异，未触碰。该周跑仍绑定旧 1dfd818。FF 当前 git status 异常，不能判断 tracked dirty/clean。
+- 无 provider 的缺预算反例已复现；带限额正向 smoke 超过 60 秒后中断，不计通过。完整证据见 [FF budget root cause](../module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md)。
+
+### 17:02 UTC 定向确认 CWP 预算合同
+
+- 运行 tests/contract/test_source_catalog_adapter_process.py 中缺失/完整预算两条用例：2 passed / 3.49 秒。没有 provider 调用；这只确认 CWP 现有预算合同仍按设计工作，不替代 FF 请求修复或真实 T3 复验。
+
 ## 2026-11-15 15:42 UTC — CWP lambda 闭包边界盲区修复并推送
 
 - 独立架构复核指出边界扫描器的 lambda visitor 只查默认参数，未检查表达式结果；`return lambda: du` 可将导入的外部模块对象藏在闭包里，绕过普通 `return du` 的模块对象逃逸规则。先添加 RED 用例确认失败，再在 `_local_body` 检查 lambda 结果，同时保留参数遮蔽控制例 `lambda du: du`。

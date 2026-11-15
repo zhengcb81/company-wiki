@@ -4,6 +4,8 @@
 
 > **2026-11-15 M3 当前状态（16:23 UTC）：** CWP 最终扫描器/合同测试提交 `b1e948276860ee0386e47253ce32479a4fa41919` 已推送，并经 fresh `ls-remote` 核实远端一致。静态表达式与推导式作用域修复的最终合同文件 86 passed，独立 reviewer 复跑 PASS，Ruff 通过；完整 GitHub Actions CI 未核验。此前 `3bc4ed86a` 的 119 项定向合同与真实 CLI E2E 仍是其自身范围的有效证据。九模块差异分类及 I10/I11/I12 保持；M3 仍开放，等待 RF owner 记录 11-15 T3 `not-ok` 运行、StockWiki owner 对齐根 canonical PWF 并核对其当前工作树，然后 ROOT 才能绑定最终精确 refs。RF 日志看到四个 FF 下载 E2E 在 CWP ensure 阶段失败，但没有内部根因，triplet 的 CWP SHA 是 `0e741063…`，不能归因于本次纯测试扫描器变化。StockWiki 当前 `master@0450506` 无 remote、根计划仍为 11-08 快照；只读 `git status` 命令报 “must be run in a work tree”，不把 cleanliness 写成已确认。Dashboard 收据 `3f83bb5` 已收口，不再列为待办；ROOT 未改 RF/StockWiki。详见 module-boundaries task plan/matrix 与本计划 `findings.md`、`progress.md`。
 
+> **2026-11-15 M3 补充诊断（16:51 UTC）：** 已从 no-network 临时 wiki 复现 RF 周跑的 FF ensure exited 1：下载测试请求设置 allow_download=True，却没有 acquisition_limits，因此 CWP 在 provider 启动前以缺少 bytes/time/cost 上限退出。该预算合同由 CWP 既有测试覆盖，保持不放宽；FF owner 应修正下载用例/请求合同，RF owner 记录周跑，ROOT 不改外仓。详见 [复现与 owner 修复项](../module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md)。另一次带预算正向 smoke 超过 60 秒并被中断，不计通过。
+
 ## 目标
 
 把各模块的 PWF 状态、仓库/工区数量、未提交改动、未并线分支及后续主线任务整理成一套可交接的总计划和互不重叠的 owner 施工卡。每个模块只保留一个明确的 Projects 主仓目录；额外临时目录经证据确认后由该模块 owner 清理。模块 owner 自己负责本仓代码修改、提交、并线、推送和本仓 PWF。ROOT/company-wiki 只负责 CWP 本仓工作、总计划、接口协调和只读组合验收。

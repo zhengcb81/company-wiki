@@ -2,7 +2,7 @@
 
 ## M3 — 当前 HEAD 边界漂移审查（2026-11-15 新增）
 
-**状态：IN_PROGRESS — 九模块当前主线与可识别产品差异已逐项归类；CWP 可复现边界盲区已以 TDD 修复并经独立复核。** 最新扫描器/合同测试提交为 `b1e948276860ee0386e47253ce32479a4fa41919`，已推送且 fresh remote SHA 一致；最终定向文件 86 passed，本地/独立复跑与 Ruff 均通过。M3 尚待 StockWiki 根 canonical PWF 与 RF weekly 运行结果由各自 owner 对齐，并由 ROOT 绑定精确版本完成最终报告。原 M2/E01-E09 仍只对其绑定版本有效；M3 不抹去原收据，也不把新版本自动视为已验收。
+**状态：IN_PROGRESS — 九模块当前主线与可识别产品差异已逐项归类；CWP 可复现边界盲区已以 TDD 修复并经独立复核。** 最新扫描器/合同测试提交为 `b1e948276860ee0386e47253ce32479a4fa41919`，已推送且 fresh remote SHA 一致；最终定向文件 86 passed，本地/独立复跑与 Ruff 均通过。M3 尚待 FF owner 修正下载请求限额并复验、StockWiki 根 canonical PWF 与 RF weekly 运行结果由各自 owner 对齐，再由 ROOT 绑定精确版本完成最终报告。原 M2/E01-E09 仍只对其绑定版本有效；M3 不抹去原收据，也不把新版本自动视为已验收。
 
 ### 目标与设计原则
 
@@ -66,6 +66,14 @@
 1. 由 StockWiki owner 对齐根 canonical PWF 与已并入 `master@0450506` 的计划/源码，并由 RF owner 记录 weekly runtime 结果；ROOT 保持只读，不重复更改其他仓 PWF。
 2. 将 CWP 当前 24 个产品路径审查结果、I12 公共接口及 119 项基础合同、86 项最终边界扫描合同绑定到 `master@b1e948276860ee0386e47253ce32479a4fa41919`；确认无未分类越界路径。已有 IQS 120/296、StockWiki 107/独审和 IQS→StockWiki 53 题 publish/readback 作为 I10/I11 证据，不重跑同一测试。
 3. 最终核对九模块当前 refs、对应 owner PWF 和活动/dirty 状态，更新矩阵及总控状态；只对证据不足或能复现的真实边界问题补 RED→GREEN。全部报告绑定精确 HEAD 后才关闭 M3。
+
+### 2026-11-15 16:51 UTC — FF weekly T3 ensure failure root cause confirmed
+
+- Read-only inspection of the RF weekly run's exact FF revision and a no-network temporary-wiki reproduction confirmed that the four download E2Es omit acquisition_limits while setting allow_download=True. FF emits no budget arguments when that field is absent; CWP rejects before provider startup because byte, time, and cost caps are required.
+- The CWP budget contract is covered by existing tests and stays unchanged. The repair belongs to FF: make every download-capable request provide finite limits, then rerun the opt-in T3 suite. RF owner still needs to record the weekly outcome in its canonical PWF.
+- FF local main is now d694d11 while its local origin/main tracking ref is 1dfd818; the visible difference includes active FF1 envelope work, so ROOT leaves that worktree untouched. The failure run itself used FF 1dfd818. The detailed reproduction and owner action are in [FF budget root cause](review/ff-weekly-budget-root-cause-20261115.md).
+- A supplemental no-network smoke with complete limits exceeded 60 seconds and was interrupted; it is not counted as passed. M3 stays open until owner records and exact refs are reconciled.
+- Follow-up: the two focused CWP budget-contract tests passed (2 passed / 3.49s); this verifies the existing contract, not the real provider E2E.
 
 ## Goal
 

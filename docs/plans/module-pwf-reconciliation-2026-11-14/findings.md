@@ -1,5 +1,15 @@
 # 调查发现
 
+## 2026-11-15 16:51 UTC — RF weekly T3 的 FF acquisition budget 根因
+
+- RF 运行 20261115T084227Z 使用 FF 1dfd81836794ec3bf73b41014a98714e97299ae8、RF f2215959d33abc76778342a95d39a8e38191da75、CWP 0e741063f510d5bc1c5921aa192b90fab94b6064；四个真实下载 E2E 在 ensure 阶段退出，0 次下载。
+- 在该 FF ref 上，tests/test_e2e_download.py 的 CN/US/HK 真实下载、同请求复用、损坏原件后的 acquisition retry 均通过 allow_download=True 启动，但请求体没有 acquisition_limits。_limit_arguments() 因缺字段不产生三个 --max-download-* 参数。
+- CWP _run_ensure_command() 对 --allow-download 要求完整字节、秒数和费用上限。无网络隔离临时复现返回 CWP stderr：bounded provider access requires --max-download-bytes, --max-download-seconds, and --max-download-cost-usd。Provider 尚未启动，解释了 downloads=0。
+- CWP tests/contract/test_source_catalog_adapter_process.py 已覆盖并要求缺少/不完整预算被拒绝；这属于真实 provider 资源上限，不作放宽。修复归 FF owner：每条下载请求和允许下载的复用调用都应提供有限 acquisition_limits，之后重跑 opt-in T3。RF owner 另需把 not-ok 运行写进 canonical PWF。
+- 17:02 UTC 定向复跑 CWP 的两条预算合同测试，2 passed / 3.49s；没有启动 provider。
+- FF 当前本地读取到 main@d694d11、tracking ref origin/main@1dfd818；两者间有 FF1 envelope 产品/计划差异，git status 在该仓仍报 work-tree 错误。周跑根因只绑定其实际冻结 ref 1dfd818；外仓源码、PWF 与活动工作区未修改。
+- 正向无网络烟测在配置完整限额后超过 60 秒，被中断，结果不计通过。该记录不冒称实时 provider 下载或修复后的 T3 通过。详细信息见 module-boundaries-2026-11-11/review/ff-weekly-budget-root-cause-20261115.md。
+
 ## 2026-11-15 — 边界扫描器 lambda 闭包漏检已由 TDD 关闭
 
 - 独立复核发现扫描器的 `visit_Lambda` 处理了默认参数，却没有把 lambda expression body 当作潜在的逃逸值检查。因此 `from company_wiki import document_understanding as du; return lambda: du` 能把外部模块对象藏入闭包；常规 `return du` 已被扫描器拒绝。
