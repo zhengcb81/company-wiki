@@ -54,12 +54,12 @@ FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推
 - [ ] 活动/证据/跨 owner 目录由其 owner 在对应任务完成后再评估；因此“Projects 物理上只剩一个目录”的目标尚未完成，不能对外声称已完成。
 
 ### 阶段 4 — 模块 owner 清理、并线与主线接续
-**状态：FF、ET、RF/RFAudit、SID、Dashboard 的本轮收尾已完成；CWP 本地总控 PWF 收口待提交，远端发布仍受平台门阻断；StockWiki/IQS 保持 owner 在途隔离**
+**状态：FF、ET、RF/RFAudit、SID、Dashboard 的本轮收尾已完成；CWP 总控 PWF/收据已提交至本地 master，远端发布仍受平台门阻断；StockWiki/IQS 保持 owner 在途隔离**
 
 - [x] 七张 owner 卡初轮交付已查收；RF/SID 旧收据修正已验证。Dashboard 本轮最终候选复核结果与发布见下方续办表。
 - [x] FF/RF/ET/SID 对应 closeout 主线已推送，RF 内容与收据 carrier 均经独立复核 PASS（[RF review](review/rf-closeout-review.md)）；RFAudit 按卡无 remote 已收口（[handoff](review/rfaudit-closeout-handoff.md)、[独立审查](review/rfaudit-closeout-review.md)）。
 - [x] Dashboard 初审发现已修复，最终独审 PASS；最终 post-push receipt-only review 绑定 `8cd2d9477b60a6391dc5b1a4e3d0c94fb66dc6d0`，报告追加 carrier `3f83bb518ca782cb1bff495f7119fda7f3154097` 已推送且 fresh remote 与本地一致。
-- [ ] CWP 早前 owner-card 收尾提交已在本地 `master`，本轮总控 PWF 更新仍未提交；正常 push 曾被平台 Mimosa L3 前置门三次拦截，不得绕过。平台当前阻断范围与未发布提交见 CWP handoff §11 和本次 `progress.md`。
+- [x] CWP 总控 PWF 和 RF/RFAudit 收据已在本地 `master` 提交 `3b8fd0e8`；正常 push 曾被平台 Mimosa L3 前置门三次拦截，不得绕过。平台当前阻断范围与未发布提交见 CWP handoff §11 和本次 `progress.md`。
 - [ ] CWP 远端确认后，重新核对父计划 `du11-source-closure-2026-10-18` 状态；此时仍保持 paused，不自动恢复公司循环或跨模块组合测试。
 
 ## 大节点审查与测试
@@ -79,7 +79,7 @@ FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推
 
 ## 下一步
 
-当前收尾按用户 2026-11-14 指令逐模块核对 PWF、未提交内容、分支并线和临时目录。FF、ET、RF/RFAudit、SID、Dashboard 已完成 owner 收尾；Dashboard 最终 post-push 收据已在独立报告 carrier 中提交。接下来由 ROOT 完成本仓 PWF 提交。CWP 本地提交的远端发布仍受 Mimosa L3 扫描阻断；只有平台规则或扫描结果实质变化后才重试一次正常 `git push origin master` 并核验 live SHA。不得改命令、停用 hook 或换通道绕过。StockWiki/IQS 因活动 owner 施工保持只读，不标记完成；父业务 goal 继续 paused。
+当前收尾按用户 2026-11-14 指令逐模块核对 PWF、未提交内容、分支并线和临时目录。FF、ET、RF/RFAudit、SID、Dashboard 已完成 owner 收尾；Dashboard 最终 post-push 收据已在独立报告 carrier 中提交。CWP 本轮 PWF/收据已在本地 `master` 收尾提交序列中（内容提交 `3b8fd0e8`，最终状态由 docs-only carrier 记录）。CWP 本地提交的远端发布仍受 Mimosa L3 扫描阻断；只有平台规则或扫描结果实质变化后才重试一次正常 `git push origin master` 并核验 live SHA。不得改命令、停用 hook 或换通道绕过。StockWiki/IQS 因活动 owner 施工保持只读，不标记完成；父业务 goal 继续 paused。
 
 ## 续办：全模块工作区与主线收尾（2026-11-14）
 
@@ -93,8 +93,8 @@ FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推
 
 ### CWP 当前现场
 
-- `master` 当前本地 HEAD 为本计划开始续办时的 `66c97834`，相对缓存的 `origin/master` 显示 ahead 6；最近成功的 live 远端观察仍是 `7361aad82`。此前正常 push 三次被平台 Mimosa L3 拦截，本轮不绕过，也不宣称已发布。
-- 当前 tracked 源码无已知产品代码差异；本轮 tracked 改动仅为本计划的 `dispatch.md`、`task_plan.md`、`progress.md`、`findings.md` 与移除过时的一次性 `.tmp-build-registry.py`。2026-11-15 实测 `git ls-files -o --exclude-standard` 共 23,338 项：`.mimosa/` 10,010、`.planning/` 13,180、`docs/` 147、`.workbuddy-ai/` 1。按用途逐组分类，不能整体 `git clean`。
+- 本计划启动续办时，`master` 基线 HEAD 为 `66c97834`（当时相对缓存 `origin/master` ahead 6）；本地随后已接收本轮收尾提交。最近成功的 live 远端观察仍是 `7361aad82`。此前正常 push 三次被平台 Mimosa L3 拦截，本轮不绕过，也不宣称已发布。
+- 当前 tracked 源码无已知产品代码差异；本轮 tracked 改动仅为本计划的 `dispatch.md`、`task_plan.md`、`progress.md`、`findings.md` 与移除过时的一次性 `.tmp-build-registry.py`。提交四份新增收据后，2026-11-15 复测 `git ls-files -o --exclude-standard` 共 23,334 项：`.mimosa/` 10,010、`.planning/` 13,180、`docs/` 143、`.workbuddy-ai/` 1。按用途逐组分类，不能整体 `git clean`。
 - 已删除 37 个位于 CWP 根目录、内容及嵌套均为空、mtime 早于 2026-11-01 且不是注册 worktree 的旧 `.tmp*`/`.t*`/长度探测目录，合计释放 0 字节。
 - 已清理 7 个无引用的旧 `.tmp_*.json` 诊断输出（16,301 B）、2 个 11-02 集成测试遗留 `tmp/osred/**/race.json`（20 B），以及 `.tmp-build-registry.py` 一次性 catalog 检查脚本（1,019 B；仅历史审计文档提到，无生产引用）。本次累计释放 17,340 B，另移除空目录 37 个。工具缓存、Mimosa hook 状态、PWF/审查材料和用户数据未批量清理。
 - 后续清理根目录可重建缓存 `.mypy_cache`、`.pytest_cache`、`.ruff_cache`、`__pycache__` 共 1,682 文件/36,929,089 B，以及空 `tmp/pdfs`、`tmp` 两级目录；复查均已不存在。保留 222 MB `.codegraph` 索引、`.venv`、Mimosa 当前状态、历史 PWF/审查证据及用户数据。
@@ -122,4 +122,4 @@ FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推
 
 CWP 本仓收口已按 [owner_cards/cwp_closeout.md](owner_cards/cwp_closeout.md) 执行完成：13 个非祖先 refs（11 `ABSORBED` + 2 `UNCLASSIFIED_HOLD`）、8 个 worktree、4 个额外 Projects 目录、1 个 stash 全部逐项归因，本轮清理为零（无一项满足四重移除条件，依据逐项见交接文件）。CWP 本仓无未归因 refs/工区/目录残留；涉及其他模块 owner 的剩余项列在交接文件 remaining_items。CWP 业务主线唯一下一步为 du11 P1 业务摘要质量修正，父计划公司循环保持 paused。交接与独审绑定：[review/cwp-closeout-handoff.md](review/cwp-closeout-handoff.md) / [cwp-closeout-handoff.json](review/cwp-closeout-handoff.json)。
 
-FF/ET/RF/SID/Dashboard owner 收尾提交已推送；RF 内容提交与 receipt carrier 独立审查 PASS，Dashboard 最终 review PASS 并由 `3f83bb5` receipt-only carrier 推送；RFAudit 按卡无 remote。CWP 本轮总控 PWF 与精确收据仍待纳入本地 `master` 收尾提交；远端最近成功观察仍为 `7361aad82`，此前 Mimosa gate 阻断，本轮不绕过。StockWiki/IQS 仍因 owner 在途任务暂缓。
+FF/ET/RF/SID/Dashboard owner 收尾提交已推送；RF 内容提交与 receipt carrier 独立审查 PASS，Dashboard 最终 review PASS 并由 `3f83bb5` receipt-only carrier 推送；RFAudit 按卡无 remote。CWP 本轮总控 PWF 与精确收据已提交至本地 `master`（内容提交 `3b8fd0e8`，最终状态由后续 docs-only carrier 记录）；远端最近成功观察仍为 `7361aad82`，此前 Mimosa gate 阻断，本轮不绕过。StockWiki/IQS 仍因 owner 在途任务暂缓。

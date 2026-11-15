@@ -2,11 +2,11 @@
 
 ## 最终验收状态（2026-11-15）
 
-七张 owner 卡均已收到最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入各自目标主线并验证推送；Dashboard 最终 receipt-only review PASS 绑定 `8cd2d947`，报告载体 `3f83bb5` 已推送并由 owner fresh 核对远端。RFAudit 按卡没有 remote，仅在 `main` 本地收口。CWP 最近本地 PWF 状态提交为 `66c97834`；本轮 11-15 总控状态刷新仍在工作区，未提交。最近一次成功远端观察 `origin/master@7361aad82`；此前平台 Mimosa L3 三次拦截正常 push，之后远端刷新遇到 DNS/线程启动错误，不使用绕过方式。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
+七张 owner 卡均已收到最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入各自目标主线并验证推送；Dashboard 最终 receipt-only review PASS 绑定 `8cd2d947`，报告载体 `3f83bb5` 已推送并由 owner fresh 核对远端。RFAudit 按卡没有 remote，仅在 `main` 本地收口。CWP 的本地收尾内容提交为 `3b8fd0e8`；本轮最终状态修订由后续 docs-only carrier 记录。最近一次成功观察 `origin/master@7361aad82`；此前平台 Mimosa L3 三次拦截正常 push，之后远端刷新遇到 DNS/线程启动错误，不使用绕过方式。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
 
 | Lane | 当前本地主线 | 远端 | 收尾状态 |
 |---|---|---|---|
-| CWP | `master@66c97834`（本轮状态刷新在工作区，未提交） | 最近成功观察 `7361aad82`；L3 拦截后刷新遇到 DNS/线程启动错误 | 本地 PWF/清理收据待提交；发布 BLOCKED |
+| CWP | `master`（收尾内容提交 `3b8fd0e8`；后续 docs-only 状态载体） | 最近成功观察 `7361aad82`；L3 拦截后刷新遇到 DNS/线程启动错误 | 本地 PWF/清理收据已提交；发布 BLOCKED |
 | FF | `main@1dfd818` | live 相等 | PASS / 已推送 |
 | RF | `main@f221595` | live 相等 | PASS / 内容与收据已复核并推送 |
 | ET | `main@50d9190` | live 相等 | PASS / 已推送 |

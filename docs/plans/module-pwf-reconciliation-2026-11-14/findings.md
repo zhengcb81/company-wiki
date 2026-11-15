@@ -81,6 +81,6 @@ Git 状态只读报告分别来自模块 agent 和 ROOT 命令。每个模块 ow
 ## 全模块收尾续办现场（2026-11-14）
 
 - 用户本轮明确要求重新逐模块更新 PWF、归因并清理未提交项、把有效提交并入主线、移除确认无用的临时材料。ROOT 只改 CWP；FF/ET、RF/RFAudit、SID/Dashboard 由互斥 owner lane 并行。StockWiki/IQS 实时 PWF 仍有在途 owner 工作；两仓暂时只读，不碰活动 worktree，待 owner 交接后续办。
-- CWP untracked 不是一种“垃圾”：2026-11-15 实测 23,338 项由 `.mimosa` hook-state 10,010、`.planning` 执行/审查记录 13,180、`docs/` PWF 与审查证据 147、`.workbuddy-ai` memory 1 组成。全量删除会丢当前平台 hook 状态、历史测试/审查依据或用户笔记。
+- CWP untracked 不是一种“垃圾”：提交四份新增收据后，2026-11-15 复测为 23,334 项：`.mimosa` hook-state 10,010、`.planning` 执行/审查记录 13,180、`docs/` PWF 与审查证据 143、`.workbuddy-ai` memory 1。全量删除会丢当前平台 hook 状态、历史测试/审查依据或用户笔记。
 - 已安全删除 CWP 根下 37 个空旧测试目录、7 个已无引用的旧 `.tmp_*.json`（16,301 B）、两个 11-02 测试遗留 `tmp/osred/**/race.json`（20 B），以及无生产引用的一次性 `.tmp-build-registry.py`（1,019 B）。本轮释放 17,340 B，另删 37 个空目录；删除均在 CWP 根内逐项验路径/mtime/文件清单。
 - CWP 当前 tracked 代码未改；`master` 仅增加本任务的文档/临时脚本删除记录。`origin/master` 最近成功 live 观察仍是 `7361aad82`，三次 Mimosa L3 正常 push 阻断继续有效，不绕过。
