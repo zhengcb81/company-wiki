@@ -2,7 +2,7 @@
 
 **当前执行入口是 [模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)，不是业务摘要。** M2/E01–E09 只在冻结版本范围内验收完成。CWP 当前身份修复 master@5ae4a60b6 已按 TDD、精确 SHA 独审并推送；69 项定向回归及 push smoke 18 项通过，完整 GitHub CI 未核验。M3 当前只剩外仓 owner 与 ROOT 的有限收口：
 
-当前 CWP 另完成一项独立的 push/测试清理修复：四个根级 PWF 文档不会再触发运行时 fixed smoke；pytest 退出时能清理 Windows Git 只读对象，并拒绝对链接/reparse 路径改权限。独审 PASS，57 passed/1 host-dependent skip，cleanup `removed=true`；完整 GitHub CI 仍未核验。哈希绑定证据见[独审报告](../module-boundaries-2026-11-11/review/pre-push-classification-and-temp-cleanup-20261115.md)。此项不改变下列 M3 外仓 owner 前置条件。
+当前 CWP 另完成一项独立的 push/测试清理修复：四个根级 PWF 文档不会再触发运行时 fixed smoke；pytest 退出时能清理 Windows Git 只读对象，并拒绝对链接/reparse 路径改权限。独审 PASS，57 passed/1 host-dependent skip，cleanup `removed=true`；`56f9cc73d` 已推送并由远端确认，完整 GitHub CI 仍未核验。哈希绑定证据见[独审报告](../module-boundaries-2026-11-11/review/pre-push-classification-and-temp-cleanup-20261115.md)。此项不改变下列 M3 外仓 owner 前置条件。
 
 1. FF owner 给所有下载型 T3 请求传入有限 acquisition_limits，并留下通过的 T3 rerun 与 canonical PWF 记录；local/server main@dd716217 一致，tracked-clean。
 2. RF owner 将 20261115T084227Z / ok=false 和失败归因写入 canonical PLANNING_STATUS.md，同时核对 local main@88892536 相对 live origin/main@f2215959 超前的 8 个提交，以及 assurance/runs/weekly_alert.jsonl、weekly_manifest.json 两项 tracked 修改。ROOT 不改动这些文件。

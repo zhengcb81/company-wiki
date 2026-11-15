@@ -2,7 +2,7 @@
 
 ## Result
 
-Independent review: **PASS** on working tree based on `HEAD=e592b3b53ddc15f3148f2270efe69d132b993baf`. The reviewed implementation and tests are bound to the SHA-256 values below. The fix changes CWP test/developer tooling only; it does not change product source, acquisition, or M3 owner exit conditions.
+Independent review: **PASS** on working tree based on `HEAD=e592b3b53ddc15f3148f2270efe69d132b993baf`. The reviewed implementation and tests are bound to the SHA-256 values below. They were published in `56f9cc73dfb8a7f8e84ef30476ffdceef96851bf`; Git's push response and subsequent `ls-remote` confirmed `origin/master` at that SHA. The fix changes CWP test/developer tooling only; it does not change product source, acquisition, or M3 owner exit conditions.
 
 ## Changes and root causes
 

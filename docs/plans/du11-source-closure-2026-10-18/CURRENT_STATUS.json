@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T18:52:00Z",
+  "observed_at_utc": "2026-11-15T18:58:00Z",
   "recent_cwp_gate_checkpoint": {
     "date_utc": "2026-11-15",
     "scope": "root PWF documentation-only push classification and pytest-owned Windows scratch cleanup",
@@ -102,6 +102,9 @@
     "cleanup_receipt": "removed=true",
     "independent_review": "PASS",
     "ruff": "passed",
+    "published_commit": "56f9cc73dfb8a7f8e84ef30476ffdceef96851bf",
+    "remote_confirmation_at_publication": "origin/master=56f9cc73dfb8a7f8e84ef30476ffdceef96851bf",
+    "push_fixed_smoke": "18 passed in 3.57s",
     "full_github_ci": "not verified",
     "m3_owner_actions_unchanged": true
   },
