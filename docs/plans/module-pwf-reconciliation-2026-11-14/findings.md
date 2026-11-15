@@ -1,12 +1,12 @@
 # 调查发现
 
-## 2026-11-15 — 九模块 canonical PWF 与主线状态复核
+## 2026-11-15 — 九模块 canonical PWF 与主线状态复核（M3 开工快照）
 
 - M3 的 TDD 反例先确认 `eval/exec/compile` 字符串执行能绕过当前 AST 边界扫描（RED）；扫描器增加对直接调用及 builtins 别名的识别后，专用反例通过。全量 `tests/contract/test_layer_public_boundaries.py` 为 63 passed / 1 failed，唯一失败是当前新增的 `automation/narrative_batch.py:17` 导入 `narrative_subject.NARRATIVE_SUBJECT_REF_SCHEMA`，但该常量未列入 provider 的公开 API。此为真实跨层合同违例；不允许通过扩大 `__all__` 或忽略该模块来消绿，先核实该数据的 owner 和适当接口位置。
 - 符号使用核对确认：`NarrativeSubjectRef` 是声明的公开值类型，多个层通过该类型传递投影身份；`NARRATIVE_SUBJECT_REF_SCHEMA` 只在 `narrative_subject.py` 内定义/构造，唯独 `automation/narrative_batch.py` 直接读取常量并手动构造类型。正确修复方向是由该值类型提供“从 official-json 投影键构造 ref”的公开工厂，让 schema 版本仍由数据 owner 管理，不把常量扩成公共依赖。
 - CWP 现有 `LayerBoundaries` 扫描器已覆盖常见直接/别名/相对/动态模块加载、`getattr`、私有成员、未声明导出、跨层方向和外部实例成员访问，并有针对性反例；这比仅检查下划线导入扎实。当前发现候选缺口：静态扫描不能执行字符串构造，`eval/exec/compile` 可能绕过语法树引用跟踪。尚未确认生产路径实际使用这些调用；M3 先加最小负例验证是否可绕过，再决定是否禁止动态执行。
 - 本次读取各仓 canonical 入口及本地 Git 元数据；没有 fetch、运行测试或写入其他仓。历史子计划仍按历史记录处理，不把其旧日期单独当作错误。
-- CWP `master@0ff37fde5` 与本地 `origin/master` 相等；FF `main@1dfd818`、RF `main@f2215959`、ET `main@50d9190`、SID `v2-clean-rewrite@26704a0`、IQS `master@a334293` 均与本地 upstream 相等。RFAudit 无 remote；StockWiki 无 upstream，不能据此声称已推送。
+- M3 开工观察时 CWP `master@0ff37fde5` 与本地 `origin/master` 相等；随后代码 `3bc4ed86a` 与 PWF carrier `f175e6c37` 已正常推送，最终两 refs 相等。FF `main@1dfd818`、RF `main@f2215959`、ET `main@50d9190`、SID `v2-clean-rewrite@26704a0`、IQS `master@a334293` 是本轮开工观察；RFAudit 无 remote、StockWiki 无 upstream，不能据此声称已推送。
 - 需 owner 对齐的 canonical PWF：Dashboard START_HERE 仍记录 11-14 的 `2e8320e` 发布观察，CWP 总计划已记录 11-15 最终 carrier `3f83bb5`；RF PWF 快照停在 11-14，现场有两项 T3 运行结果 tracked dirty；FF PWF 的 F-08 仍未修，且“无未结产品 lane”与等待 Dashboard F-08 交付的下一步表述不一致。
 - StockWiki 最近 owner 卡仍为 Phase 4 review remediation in progress，C06 缺完整可采信的组合测试；IQS 最新进度为 11-15，模块工程验收声明 I1-I7 已通过，旧段落中 OPEN 状态须按日期/标题识别为历史。两仓仍有 owner 交接/其他计划余项，ROOT 不替其改写 active work。
 - ET canonical PWF 记录收据冲突退出码缺陷为唯一下一步；SID PWF 有唯一下一步；RFAudit 业务循环明确暂停等待 ROOT 调度。这些是开放任务，不等于模块边界验收失败。

@@ -2,7 +2,7 @@
 
 > **2026-11-15 状态校正：** 阶段 1/2 的“完成”仅指最初七条 owner lane 的交付，不代表九个范围模块的 PWF、在途任务和工作区已全部收口。总续办仍为 **IN_PROGRESS**：StockWiki/IQS 仍有 owner 任务；Dashboard 自身 START_HERE 未记最终 11-15 receipt carrier；RF 自身 PWF 尚未吸收最新 T3 工作区结果；FF 的 F-08 仍是待修产品问题。阶段 3 也未达成“物理上每模块只留一个目录”。本条以 2026-11-15 只读实查为准，详见本计划下方新增状态表与 `progress.md`；旧阶段快照保留为历史。
 
-> **2026-11-15 后续：** CWP 的 M3 当前 HEAD 边界审查已完成首个 TDD 修复切片（动态执行扫描、NarrativeSubjectRef schema owner、pytest 默认长临时路径、Windows 硬链接拒绝的发布兼容）。119 项定向合同/集成测试与 1 项 CLI E2E 通过。该结果不代替其余仓源码差异审查，也不改变 StockWiki/IQS 的 owner 隔离；FF、RF、Dashboard 的 PWF 差异由各仓 owner 在其 canonical PWF 中收口，ROOT 只维护此总控快照。详见 `module-boundaries-2026-11-11/task_plan.md` 与本计划 `progress.md`。
+> **2026-11-15 M3 最新状态：** CWP 首个当前 HEAD TDD 修复切片已完成：测试覆盖动态执行与内建命名空间字典绕行、`NarrativeSubjectRef` schema owner、pytest 默认长临时路径、Windows 硬链接拒绝的原子发布兼容。最新 119 项定向合同/集成测试通过，真实 CLI E2E 在对象存储修复后通过。代码提交 `3bc4ed86a` 已推送，PWF 回执载体 `f175e6c37` 也已推送，本地 `master` 与 `origin/master` 相等；M3 其余仓源码差异审查仍开放。此结果不改变 StockWiki/IQS owner 隔离；FF、RF、Dashboard 的 PWF 差异仍由各仓 owner 在 canonical PWF 中收口，ROOT 只维护总控快照。详见 `module-boundaries-2026-11-11/task_plan.md` 与本计划 `progress.md`。
 
 ## 目标
 
@@ -39,7 +39,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 
 | Lane | 本地目标分支 / 收尾 tip | 远端状态 | ROOT 结论 |
 |---|---|---|---|
-| CWP | `master`；收尾与总控 PWF 更新均已提交 | 最近一次成功核对 `origin/master=7361aad82`；本轮 `ls-remote` 因 `getaddrinfo() thread failed to start` 未刷新 | 本地提交均在 `master`，内容独审 PASS；平台 Mimosa L3 三次阻断 push，**唯一未发布 lane** |
+| CWP | `master`；本行是 11-14 七卡首轮快照 | 当时最近成功观察为 `origin/master=7361aad82`，后续续办 push 到 `f58011ddd` | 当时首轮推送受阻；后续正常推送与当前 M3 发布见下方 11-15 最新状态，勿把此历史行当现场 |
 | FF | `main@c2aec910b7b2dc210f60c687390b4da220decbbc` | live `origin/main` 相等 | 已推送；原始测试收据与后续 carrier 提交链有说明 |
 | RF | `main@f2215959d33abc76778342a95d39a8e38191da75` | live `origin/main` 相等 | 3ca6192 的选择性接收与 f2215959 收据载体均经独立复核 PASS；carrier 只更新审查报告/handoff/README，不含产品代码 |
 | ET | `main@c777bf1ca82ba7cadf783dee4d0c7341dd48ec7b` | live `origin/main` 相等 | 已推送；内容提交与后续 receipt carrier 已区分 |
@@ -47,7 +47,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 | Dashboard | `main@8cd2d9477b60a6391dc5b1a4e3d0c94fb66dc6d0` = `origin/main` | 普通 push 后 fresh `ls-remote` 与本地 HEAD 一致；tracked clean | 初审 7 项均修复；全量独审 PASS@fc6dbe7；8cd post-push 收据对齐已独审 PASS，现仅将该 PASS 报告追加提交/推送为 receipt-only carrier；保留 E14 与 WorkBuddy |
 | RFAudit | `main@50d8ab6fa99db8920358c97f63be4afff8299243` | owner card 明确无 remote | 本地 main 收口完成；交接与 PASS 复核位于 CWP central review |
 
-FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推送；Dashboard 新候选已在本地主线但须修复独审发现后再推送；RFAudit 按卡无 remote，在 `main` 本地收口；CWP 的本地提交尚未发布。既有 active/evidence/跨 owner branch 按收据保留；这不等于漏并线，也不授权把所有非祖先 refs 一律 merge。
+该首轮快照时 FF、RF、ET、SID 已推送，Dashboard 新候选待修复，RFAudit 按卡无 remote，CWP 收尾仍待发布。续办后的最终状态见阶段4及下方当前现场；既有 active/evidence/跨 owner branch 按收据保留，不等于漏并线，也不授权把所有非祖先 refs 一律 merge。
 
 ### 阶段 3 — 每模块只留一个主要 Projects 目录
 **状态：一周界线临时目录批次已完成；活动/未并线/独有证据路径仍保留**
@@ -65,6 +65,7 @@ FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推
 - [x] FF/RF/ET/SID 对应 closeout 主线已推送，RF 内容与收据 carrier 均经独立复核 PASS（[RF review](review/rf-closeout-review.md)）；RFAudit 按卡无 remote 已收口（[handoff](review/rfaudit-closeout-handoff.md)、[独立审查](review/rfaudit-closeout-review.md)）。
 - [x] Dashboard 初审发现已修复，最终独审 PASS；最终 post-push receipt-only review 绑定 `8cd2d9477b60a6391dc5b1a4e3d0c94fb66dc6d0`，报告追加 carrier `3f83bb518ca782cb1bff495f7119fda7f3154097` 已推送且 fresh remote 与本地一致。
 - [x] CWP 收尾序列和后续 PWF 状态 carrier 均经普通 `git push origin master` 发布：GitHub 响应依次确认 `7361aad82..0e741063f`、`0e741063f..f58011ddd`；推送后本地 `origin/master` 与 `HEAD` 同为 `f58011ddd`。首轮 fixed smoke 18/18 通过（6.58 秒）；最终 docs-only carrier 按配置未跑产品测试。一次独立 `ls-remote` 失败记录在 handoff §12。此前 Mimosa 三次拦截保留为历史记录，本次推送未被拦截。
+- [x] M3 当前 HEAD 首组修复随后以代码 commit `3bc4ed86a` 推送；119 项定向测试、受影响 Ruff/mypy、push fast smoke 18/18 通过。最新 PWF receipt carrier `f175e6c37` 已再推送，最终本地 `master == origin/master == f175e6c37`。完整远端 CI 以 GitHub Actions 精确 HEAD 结果为准。
 - [x] 远端接受推送后复核父计划 `du11-source-closure-2026-10-18`，主业务循环仍保持 paused；不因此自动恢复公司循环或跨模块组合测试。
 
 ## 大节点审查与测试
@@ -98,7 +99,7 @@ FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推
 
 ### CWP 当前现场
 
-- 本计划启动续办时，`master` 基线 HEAD 为 `66c97834`（当时相对缓存 `origin/master` ahead 6）；之后正常 push 响应确认收尾提交序列先到 `0e741063f`、状态 carrier 再到 `f58011ddd`。推送后本地 `origin/master` 与 HEAD 同步。首轮 push fast feedback 固定 smoke 18/18 通过；独立 `ls-remote` 曾因本机 `getaddrinfo() thread failed to start` 失败，不能把它称为 fresh-read。11-14 的三次 Mimosa L3 拦截是历史记录；11-15 本次 push 未被该门拦截。
+- 本计划启动续办时，`master` 基线 HEAD 为 `66c97834`（当时相对缓存 `origin/master` ahead 6）；后续收尾序列到 `f58011ddd`。M3 新代码 `3bc4ed86a` 与 PWF carrier `f175e6c37` 已正常推送，当前本地 `origin/master` 与 HEAD 同为 `f175e6c37`。独立 `ls-remote` 曾因本机 `getaddrinfo() thread failed to start` 失败，不能把它称为 fresh-read；当前远端一致性证据来自两次普通 push 响应和推送后本地 refs。11-14 Mimosa L3 拦截保留为历史状态；11-15 本次 push 未被该门拦截。
 - 初次 closeout 清理快照中 tracked 源码无已知产品代码差异；当时 tracked 改动仅为本计划的 `dispatch.md`、`task_plan.md`、`progress.md`、`findings.md` 与移除过时的一次性 `.tmp-build-registry.py`。提交四份新增收据后，2026-11-15 复测 `git ls-files -o --exclude-standard` 共 23,334 项：`.mimosa/` 10,010、`.planning/` 13,180、`docs/` 143、`.workbuddy-ai/` 1。按用途逐组分类，不能整体 `git clean`。后续五份 PWF/交接状态更新的提交和推送见本计划 `progress.md` 最新记录。
 - 已删除 37 个位于 CWP 根目录、内容及嵌套均为空、mtime 早于 2026-11-01 且不是注册 worktree 的旧 `.tmp*`/`.t*`/长度探测目录，合计释放 0 字节。
 - 已清理 7 个无引用的旧 `.tmp_*.json` 诊断输出（16,301 B）、2 个 11-02 集成测试遗留 `tmp/osred/**/race.json`（20 B），以及 `.tmp-build-registry.py` 一次性 catalog 检查脚本（1,019 B；仅历史审计文档提到，无生产引用）。本次累计释放 17,340 B，另移除空目录 37 个。工具缓存、Mimosa hook 状态、PWF/审查材料和用户数据未批量清理。
@@ -125,6 +126,6 @@ FF、RF、ET、SID 的本卡新增/修复提交已进入对应目标主线并推
 
 ## CWP lane 状态（2026-11-14）
 
-CWP 本仓收口已按 [owner_cards/cwp_closeout.md](owner_cards/cwp_closeout.md) 执行完成：13 个非祖先 refs（11 `ABSORBED` + 2 `UNCLASSIFIED_HOLD`）、8 个 worktree、4 个额外 Projects 目录、1 个 stash 全部逐项归因，本轮清理为零（无一项满足四重移除条件，依据逐项见交接文件）。CWP 本仓无未归因 refs/工区/目录残留；涉及其他模块 owner 的剩余项列在交接文件 remaining_items。CWP 业务主线唯一下一步为 du11 P1 业务摘要质量修正，父计划公司循环保持 paused。交接与独审绑定：[review/cwp-closeout-handoff.md](review/cwp-closeout-handoff.md) / [cwp-closeout-handoff.json](review/cwp-closeout-handoff.json)。
+CWP 本仓收尾已按 [owner_cards/cwp_closeout.md](owner_cards/cwp_closeout.md) 完成：13 个非祖先 refs（11 `ABSORBED` + 2 `UNCLASSIFIED_HOLD`）、8 个 worktree、4 个额外 Projects 目录、1 个 stash 全部逐项归因。M3 后续仍在当前 HEAD 漂移审查中，最新代码 `3bc4ed86a` 与 PWF receipt `f175e6c37` 已推送；不能将 closeout 卡完成视为模块化审查整体关闭。CWP 业务主线下一步仍由 du11 P1 管理，父计划公司循环保持 paused。交接与独审绑定：[review/cwp-closeout-handoff.md](review/cwp-closeout-handoff.md) / [cwp-closeout-handoff.json](review/cwp-closeout-handoff.json)。
 
-FF/ET/RF/SID/Dashboard owner 收尾提交已推送；RF 内容提交与 receipt carrier 独立审查 PASS，Dashboard 最终 review PASS 并由 `3f83bb5` receipt-only carrier 推送；RFAudit 按卡无 remote。CWP 收尾序列与最终 PWF carrier 已正常推送至 `f58011ddd`，本地 `origin/master` 与 HEAD 匹配；一次 `ls-remote` 失败不重复尝试。StockWiki/IQS 仍因 owner 在途任务暂缓。
+FF/ET/RF/SID/Dashboard owner 收尾提交已推送；RF 内容提交与 receipt carrier 独立审查 PASS，Dashboard 最终 review PASS 并由 `3f83bb5` receipt-only carrier 推送；RFAudit 按卡无 remote。CWP 七卡 closeout 曾推送至 `f58011ddd`；随后 M3 代码 `3bc4ed86a` 与 PWF carrier `f175e6c37` 已依次推送，当前以 `f175e6c37` 为最新本地/远端对齐状态。StockWiki/IQS 仍因 owner 在途任务暂缓。

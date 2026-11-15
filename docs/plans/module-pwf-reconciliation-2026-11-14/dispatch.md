@@ -1,12 +1,16 @@
 # Owner 卡派发总表
 
+## 2026-11-15 M3 CWP 当前发布状态
+
+CWP M3 首组边界修复代码 commit `3bc4ed86a` 已推送，PWF 回执 carrier `f175e6c37` 随后推送；最终本地 `master` 与 `origin/master` 相等。定向边界/对象存储/短路径/JSON preparation 合计 119 项通过，受影响 Ruff 与 pre-commit mypy 通过，push fast smoke 18 项通过。M3 其余 CWP 和其他 owner 仓源码差异仍在审查，不能把本次发布写成全项目解耦验收。
+
 ## 最终验收状态（2026-11-15）
 
-七张 owner 卡均已收到最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入各自目标主线并验证推送；Dashboard 最终 receipt-only review PASS 绑定 `8cd2d947`，报告载体 `3f83bb5` 已推送并由 owner fresh 核对远端。RFAudit 按卡没有 remote，仅在 `main` 本地收口。CWP 2026-11-15 的正常推送先确认 `7361aad82..0e741063f`，再将 PWF 状态载体 `0e741063f..f58011ddd` 推送成功；仓库 fast feedback 的固定 smoke 为 18/18 通过（6.58 秒），后续 docs-only carrier 按配置未跑产品测试。推送后本地 `HEAD` 与 `origin/master` 均为 `f58011ddd`。一次独立 `ls-remote` 刷新遇到 `getaddrinfo() thread failed to start`，没有重复读取；本次最终 PWF 状态 carrier 通过正常 push 发布。此前三次 Mimosa L3 拦截是历史状态，本次推送未被拦截；没有证据说明旧扫描告警已清除或平台规则已改变。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
+以下为七张 owner 卡原收尾的历史验收快照（早于本次 M3 CWP提交）。七张卡均有最终交接并核对独立 review。FF、RF、ET、SID、Dashboard 的收尾提交已进入对应主线并推送；Dashboard 最终 receipt-only review PASS 绑定 `8cd2d947`，报告载体 `3f83bb5` 已推送。RFAudit 按卡无 remote，在 `main` 本地收口。CWP 原收尾及其 PWF carrier 到 `f58011ddd` 的正常 push 证据见下段；随后 M3 最新发布单独列在本文件顶部。早期 `ls-remote` 的 `getaddrinfo() thread failed to start` 与 Mimosa L3 拦截均保留为历史事实，不代表当前推送状态。详情见 [总控 task plan](task_plan.md) 和 [最新进度](progress.md)。
 
 | Lane | 当前本地主线 | 远端 | 收尾状态 |
 |---|---|---|---|
-| CWP | `master`（收尾主序列及 `f58011ddd` 状态 carrier 已由正常 push 发布） | push 响应确认 `0e741063f..f58011ddd`；推送后本地 `origin/master` 与 HEAD 一致 | 本地 PWF/收据已推送；一次独立 `ls-remote` 读取失败后未重复尝试 |
+| CWP | `master@f175e6c37`（M3代码 `3bc4ed86a` 与当前PWF carrier已推送） | 两次正常 push 响应确认 `f58011ddd..3bc4ed86a`、`3bc4ed86a..f175e6c37`；最终本地 `origin/master` 与 HEAD 一致 | 首组 M3 修复已发布；其余当前 HEAD 漂移审查仍开放 |
 | FF | `main@1dfd818` | live 相等 | PASS / 已推送 |
 | RF | `main@f221595` | live 相等 | PASS / 内容与收据已复核并推送 |
 | ET | `main@50d9190` | live 相等 | PASS / 已推送 |
