@@ -1,6 +1,13 @@
 # 当前交接
 
-**当前执行入口是 [模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)，不是业务摘要。** M2/E01–E09 仅在冻结版本范围内验收完成；M3 当前 HEAD 审查仍进行中。九模块产品差异已分类，I10/I11 owner 互操作证据及 CWP I12 边界合同已有；当前剩余是 StockWiki 根 canonical PWF、RF weekly runtime 记录由各自 owner 对齐，随后 ROOT 绑定精确 refs 出最终 M3 收据。不要重复运行已通过的 I10/I11 回放。M3 关闭后才回到本文件所述业务摘要 P1；固定公司循环继续暂停。M2 原始组合记录见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md)。
+**当前执行入口是 [模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)，不是业务摘要。** M2/E01–E09 只在冻结版本范围内验收完成。CWP 当前身份修复 master@5ae4a60b6 已按 TDD、精确 SHA 独审并推送；69 项定向回归及 push smoke 18 项通过，完整 GitHub CI 未核验。M3 当前只剩外仓 owner 与 ROOT 的有限收口：
+
+1. FF owner 给所有下载型 T3 请求传入有限 acquisition_limits，并留下通过的 T3 rerun 与 canonical PWF 记录；local/server main@dd716217 一致，tracked-clean。
+2. RF owner 将 20261115T084227Z / ok=false 和失败归因写入 canonical PLANNING_STATUS.md，同时核对 local main@88892536 相对 live origin/main@f2215959 超前的 8 个提交，以及 assurance/runs/weekly_alert.jsonl、weekly_manifest.json 两项 tracked 修改。ROOT 不改动这些文件。
+3. StockWiki owner 对齐 root task_plan.md（当前最近提交 11-08）；本地 master@e1f9f559 无 remote，tracked-clean。ROOT 不改 StockWiki 工作区。
+4. ROOT 收齐 owner 记录后刷新精确 refs，发布有限 M3 最终报告。status 在提升权限只读上下文成功；之前 sandbox work-tree 错误不是仓库故障。检查未枚举 untracked。
+
+不要重复运行已通过的 I10/I11 互操作回放。M3 关闭后才回到本文件所述业务摘要 P1；固定公司循环继续暂停。M2 原始组合记录见 [ROOT 组合记录](../module-boundaries-2026-11-11/review/root_composition_20261114.md)。
 
 R4 统一预扣已迁回执行阶段。已有覆盖缺口时，选材末尾复用已准备的观察并保留部分状态。从正式入口回放冻结半年报，12/12 和选材 SHA 一致，工作账户使用 10,753,620 / 16,000,000。见 [来源会话与覆盖回放](review/r4-source-session-20261114.md)。[T4 与 SEM 验收](review/t4-sem-20261114.md) 已独审通过。
 
