@@ -38,3 +38,25 @@
   - 测试 tests/contract/test_ff1_operation_candidates.py 10 用例全绿：白名单逐字段、多 match 投影、≤5 截断原序、completed/gap 不携带（含带 excluded_candidates 的载荷）、未知 reason 省略、pathless guard（注入 canonical_path/absolute_location 被剥除）、6 组畸形候选拒绝、闭集导出断言。
   - 回归：test_source_operation_v2 35 通过（含新增 10）；acquisition_failure_return_paths / canonical_acquisition_scope / verified_source_operation 共 49 通过。
 - [N4] B4 待提交。
+- [N4] B4 提交 63a665005（mypy 首拦：result dict 值类型注解，补 `result: dict[str, Any]` 后过）。
+
+## [N5] 回归对照（基线 vs 分支，同一命令顺序执行）
+
+- 全量混合跑两次都被环境强杀（exit 137，双实例资源争用），按 CI 门禁范围做同口径对照：
+  - `pytest tests/unit`：基线 **29 failed / 11448 passed / 25 skipped**（16:44）；分支首次 **30 failed / 11447 passed / 25 skipped**（17:04）——多出的 1 个为 `tests/unit/test_acquisition_failure_diagnostic.py::test_after_provider_success_completion_error_retains_operation_accounting`（B2 hook 未容错无 resolution 的 decision stub），已修（fa517aac8，getattr 容错）并针对性重跑绿；总数守恒（30+11447 == 29+11448），基线 29 个失败全在 document_understanding/narrative/pdf 域（与 source_catalog 无交集）。
+  - `pytest tests/contract`：基线 **51 failed / 3087 passed / 22 skipped**（45:05，失败集中在 lt_uj(_real)、portfolio_promoter、cn_stockinfo、download_authorization、gap_plan、parser_liveness、pilot_receipt、source_system_docs、zr404/zr501、ensure CLI latest_as_of——环境预存）；分支跑批中。
+- 本 lane 新增/触及域定向回归全绿：ff1 四个新测试文件（B1 12、B2 4、B3 3、B4 10）、source_qualification、source_version_reader(_cli 除预存 2)、identity_resolver、canonical_writer、acquisition 系列、scanner 系列、operation_v2、acquisition_failure_return_paths、canonical_acquisition_scope、verified_source_operation、fc1301（预存失败不变）、stage_taxonomy、financing_scanner_cli（环境门控 skip）。
+- CLI register 子命令冒烟：refactor 后 rc=0，ScanReport 输出形状不变（/tmp/ff1-cli-smoke）。
+
+## [N5续] 收尾（2026-11-15 下午）
+
+- 分支 contract 套件复跑（无截断）：**51 failed / 3119 passed / 22 skipped（32:13）**——失败数与基线持平，passed 恰好多 32（= 本 lane 4 个新验收测试文件）。
+- 失败逐名甄别：基线日志被 tail 截断少记 14 行；把该 14 项 + parser_liveness×2 在干净 baseline worktree 实测——14 项中 12 项基线同样失败（activation、automation_store_boundary、cross_root_dedup_fc603、fc1301、gp002、layer_public_boundaries、location_switch×4、lt02、lt08），另 2 项（fc1201_root_hardcode_gate、future_root_config_only）为**真回归**：catalog_repair.py 硬编码 root kind 触发架构门禁。修复 aa35d8609：kind 分派上移 scanner.declared_group_publication_date（layout owner），planner 无 root token；两门禁转绿，B2 测试/scanner 回归全绿。parser_liveness×2 基线全量跑失败、单跑通过（子进程型 flaky，非本 lane 域）。分支失败集 51 项全部=基线预存。
+- 修复桩容错提交 fa517aac8（unit 对照多出的 1 例）；门禁重构提交 aa35d8609。
+- 四件套验收批：tests/contract/test_ff1_*（4 文件 32 用例）全绿。
+- scanner.py 改动后 unit 套件最终复跑：**29 failed / 11448 passed / 25 skipped**（20:21）——失败集与基线**逐名完全一致**（diff 为空）。回归不低于基线达成。
+
+## [N5] 定稿
+
+- 分支最终 commit（6 个）：da35f6c25(B1) → 1cf52e825(B2) → c2d621cb5(B3) → 63a665005(B4) → fa517aac8(决策桩容错) → aa35d8609(架构门禁重构)。
+- 全部验收与对照数据齐备，本文件与 findings.md 以 docs(pwf) 提交收口。不 push、不并 master。

@@ -40,3 +40,37 @@
 - publication_status 映射：qualification unknown/invalid→unknown；known/eligible→known；
   after_as_of→future。matches（handle）有 published_date，按 as_of 归一。
 - 数量 ≤5 按既有顺序截断；completed/gap 不携带；pathless guard 沿用 `_contains_physical_field`。
+
+## F4 与任务书/契约的偏离（均已在报告登记）
+
+1. base commit 用 ac8841c55（任务书 66c97834d 之后 master 另有 4 个 docs-only 提交，src 零差异）。
+2. `register_groups` 签名为 `register_groups(catalog, root_id, relative_paths, *, budget=None)`（任务书
+   `register_groups(root_id, relative_paths)`——库函数需要 catalog 句柄；CLI/service 均委托，行为不变）。
+3. 修复 journal：独立 append-only `catalog_repairs.jsonl`（事件 `catalog_repair_applied`，含 root_id/
+   relative_path/sidecar_kind/filing_date/data_source），不改 acquisition attempt journal 的冻结 outcome
+   词表（其 CSV 读模型是既有契约）。
+4. B4 未知 reason（词表外）：省略可选字段，不臆造映射（契约允许缺省；拒绝整个载荷对加法式消费方更糟）。
+5. B4 被 after_as_of 排除的候选 exclusion_reason="other_excluded"（闭集无 future 码；
+   publication_status 字段承载 "future"）。
+6. B2 范围注记：存量被 2026-11-08 显式未知断言 pin 的行（真实 catalog 4 个 MDB 行），仅靠定向登记
+   不会清除 scanner 的 verified-fact pin（`_merge_document_row` effective 逻辑）；B3 堵住新增缺口，
+   存量 pin 行需要独立的 facts 修正 pass（不在本 lane 四件套内）。B2 验收按任务书在无 pin 的隔离实例上通过。
+
+## F5 预存失败清单（干净 baseline worktree 实测，非本 lane 回归）
+
+- test_activation_transaction.py::test_cli_activation_apply_rollback_roundtrip
+- test_source_version_reader_cli.py::test_ensure_cli_latest_as_of_projects_gap_without_fetch_or_raw_change
+- test_source_version_reader_cli.py::test_ensure_cli_latest_as_of_preserves_provider_unavailable_gap
+- test_fc1301_reason_taxonomy.py::test_every_emitted_reason_is_registered（60+ 既有未注册 code，非本 lane 引入）
+- test_source_catalog_gap_plan.py 3 例（latest_as_of gap 流，invalid_source_ref，同基线失败）
+- test_lt_uj_e2e.py 5 例（同基线失败）
+- contract 套件全量对照：分支与基线各 51 failed，逐名一致（自动化 store_boundary/cross_root/fc1201 前身/layer_public/location_switch×4/gp002/portfolio_promoter×4/cn_stockinfo×5/download_authorization×2/download_suppression/gap_plan×3/long_running/parser_liveness×2(子进程 flaky)/pilot_receipt×2/source_system_docs×5/zr404/zr501×2/lt_uj(_real)×12/ensure CLI×2 等），甄别过程中发现的 2 个真回归（root-kind 硬编码门禁）已由 aa35d8609 修复。
+
+## F6 架构门禁修复记录（真回归 → 正当修复，未绕过）
+
+- 初版 catalog_repair.py 内联 `root.kind == "dayu_portfolio"` / `in {"company_raw","directory"}`
+  分派，触发 fc1201_root_hardcode_gate 与 future_root_config_only 两门禁（这两门禁在基线通过）。
+- 修复：声明判定上移 scanner.py（layout owner，`_ROOT_HARDCODE_ALLOWED_FILES` 成员）新增
+  `declared_group_publication_date(root, relative_path) -> (sidecar_kind, filing_date) | None`，
+  只读、仅认 ISO 日期声明（filing_date→published_date 顺序与 _DECLARING_KEYS 一致）；
+  planner 泛化调用，零 root token。门禁与全部 B2 测试转绿（aa35d8609）。
