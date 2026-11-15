@@ -1,0 +1,22 @@
+# 进度登记 — ff1-catalog-repair-20261115
+
+## 2026-11-15 开工
+
+- [x] 主工作区建独立 worktree `company-wiki-ff1-catalog-20261115`（分支 codex/ff1-catalog-repair-20261115，base ac8841c55；任务书基线 66c97834d 之后 master 另有 4 个 docs-only 提交，src 无差异，已在 task_plan.md 记录偏离）。
+- [x] 探索：resolver._resolve（unknown_date_matches 计数、_excluded_candidate 结构、_result 工厂）、scanner（_DECLARING_KEYS/_merge_columns FILL 规则/_merge_document_row verified pinning）、registration_scope（register_catalog_sources）、cli register 分支、acquisition_service._ensure、canonical_writer._record_validated_capture、operation_contract/operation_projection、acquisition_journal。
+- [x] 实测根因确认（只读查询主工作区 catalog.sqlite3）：
+  - 4 个 undated MDB 行（2022/2023/2024 dayu + 2026 company_raw）均有 2026-11-08 批量写入的 verified source-facts 断言，patch 内 published_date=None / filing_date=None。
+  - `_record_validated_capture` 的 `facts = {k:v for k,v in facts.items() if k not in previous}` 把后续带 filing_date 声明的导入 facts 过滤掉（显式未知优先），documents.published_date 永远填不上 → B3 根因。
+  - scanner `_merge_document_row` 的 verified fact pinning（new_raw==old_raw → effective=事实值 None）：对这些带 None-patch 断言的存量行，单纯 re-register 不会清掉 pin —— B2 按任务书只做定向登记，存量 pin 行不在 B2/B3 修复范围（记入 findings，需独立 facts 修正 pass）。
+- [x] PWF 文件建立。
+
+## 节点推进
+
+- [N0] 基线核对（干净 baseline worktree @ ac8841c55 实测，2026-11-15）：
+  - 预存失败（非本 lane 回归，照实登记）：
+    - `tests/contract/test_source_version_reader_cli.py::test_ensure_cli_latest_as_of_projects_gap_without_fetch_or_raw_change`（adapter candidate security_id does not match request，环境相关）
+    - `tests/contract/test_source_version_reader_cli.py::test_ensure_cli_latest_as_of_preserves_provider_unavailable_gap`（同上）
+    - `tests/contract/test_fc1301_reason_taxonomy.py::test_every_emitted_reason_is_registered`（src 里 60+ narrative_*/local_* 等 code 未注册；均非本 lane 引入——本 lane 新 code 已全部注册）
+    - `tests/contract/test_activation_transaction.py::test_cli_activation_apply_rollback_roundtrip`（activation 命令已退役 vs 旧测试）
+  - 全量基线数字：跑批中（后台 exec_c468fb2a，完成后续记）。
+- [N1] B1 实现完成：resolver.py（reason 拆分 + unknown_date_match_count + _excluded_candidate 白名单增强 + 常量导出）、observability.py（7 个新 code 注册 REASONS/STAGES）、新测试 tests/contract/test_ff1_unknown_date_classification.py（6 用例 + 注册枚举参数化，全绿；test_source_qualification.py 回归全绿）。
