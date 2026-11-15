@@ -16,6 +16,36 @@ from .resolver import SOURCE_RESOLVER_SCHEMA_VERSION
 
 OperationName = Literal["ensure", "close-gap"]
 
+#: FF-1 B4: the closed reason vocabulary the operation payload may carry for
+#: ambiguous / not_found outcomes.  Sourced from the resolver's terminal
+#: verdicts and the acquisition coordinator's decision reasons — a reason
+#: outside this set is simply NOT emitted (the field is optional; the
+#: alternative — inventing a mapping or failing the whole payload — would
+#: break additive consumers for no diagnostic gain).
+OPERATION_REASONS = frozenset({
+    # resolver terminal verdicts
+    "one_existing_source_matches_provider_identity",
+    "latest_existing_source_matches_provider_identity",
+    "multiple_existing_sources_match_provider_identity",
+    "one_existing_source_satisfies_semantic_request",
+    "latest_existing_source_satisfies_semantic_request",
+    "multiple_existing_sources_match_semantic_request",
+    "identity_mismatch_market_or_security_id",
+    "only_sources_published_after_as_of_date",
+    "matching_sources_have_unknown_published_date",
+    "unique_match_published_date_unknown",
+    "no_existing_source_satisfies_request",
+    # acquisition coordinator decisions
+    "adapter_discovery_returned_no_candidate",
+    "adapter_discovery_returned_multiple_candidates",
+    "download_required_but_not_allowed",
+    "existing_catalog_source_reused_before_adapter",
+    "existing_catalog_source_reused_after_discovery",
+    "existing_local_source_reconciled_before_adapter",
+    "issuer_scope_has_no_target_listing",
+    "missing_source_downloaded_to_staging_pending_canonical_import",
+})
+
 
 class SourceOperationProjectionError(ValueError):
     """A producer result cannot be represented by the pathless contract."""
@@ -35,6 +65,10 @@ class SourceOperationInput:
     matches: tuple[dict[str, Any], ...]
     gap_plan: dict[str, Any] | None
     local_preparation: dict[str, Any] | None = None
+    # FF-1 B4: the resolver's excluded (undated/mismatched) candidates and the
+    # operation-level reason, republished only for ambiguous / not_found.
+    candidates: tuple[dict[str, Any], ...] = ()
+    reason: str | None = None
 
 
 def _object(value: object, name: str) -> dict[str, Any]:
@@ -129,6 +163,33 @@ def _matches(resolution: dict[str, Any]) -> tuple[dict[str, Any], ...]:
     if not isinstance(value, list) or not all(isinstance(item, dict) for item in value):
         raise SourceOperationProjectionError("resolution.matches must be an object array")
     return tuple(value)
+
+
+def _excluded_candidates(resolution: dict[str, Any]) -> tuple[dict[str, Any], ...]:
+    """FF-1 B4: the resolver's excluded-candidate diagnostics (optional)."""
+    value = resolution.get("excluded_candidates", [])
+    if not isinstance(value, list) or not all(isinstance(item, dict) for item in value):
+        raise SourceOperationProjectionError(
+            "resolution.excluded_candidates must be an object array"
+        )
+    return tuple(value)
+
+
+def _operation_reason(
+    result: dict[str, Any], acquisition: dict[str, Any], resolution: dict[str, Any],
+    operation: OperationName,
+) -> str | None:
+    """The coordination-layer verdict, falling back to the resolution's."""
+    primary = (
+        acquisition.get("reason") if operation == "ensure" else result.get("reason")
+    )
+    for value in (primary, resolution.get("reason")):
+        if value is None:
+            continue
+        if not isinstance(value, str) or not value:
+            raise SourceOperationProjectionError("reason must be non-empty text")
+        return value
+    return None
 
 
 def _download_events(
@@ -297,6 +358,8 @@ def parse_operation_payload(
         matches=_matches(resolution),
         gap_plan=gap,
         local_preparation=_local_preparation(acquisition.get("local_preparation")),
+        candidates=_excluded_candidates(resolution),
+        reason=_operation_reason(result, acquisition, resolution, typed_operation),
     )
 
 

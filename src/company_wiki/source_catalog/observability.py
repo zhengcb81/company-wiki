@@ -187,6 +187,16 @@ REASONS: dict[str, str] = {
     "multiple_existing_sources_match_semantic_request": "several sources satisfy the semantic request; ambiguous",
     "identity_mismatch_market_or_security_id": "explicit market or security_id identity conflict",
     "matching_sources_have_unknown_published_date": "matching sources carry no published date to pick a latest",
+    # FF-1 catalog repair (2026-11-15): the unknown-date branch names its
+    # shape, and the pathless candidate projection carries a closed
+    # exclusion_reason vocabulary (registered here so FC-1301 stays green).
+    "unique_match_published_date_unknown": "exactly one semantic match has an unknown published date",
+    "published_date_unknown": "candidate excluded because its published date is unknown",
+    "fiscal_year_mismatch": "candidate fiscal year does not match the request",
+    "multiple_candidates": "several candidates satisfy the request; selection is ambiguous",
+    "identity_mismatch": "candidate identity contradicts the requested identity",
+    "capture_not_ready": "candidate has no verified canonical capture",
+    "other_excluded": "candidate excluded for a reason outside the named codes",
     # gap-plan policy binding (close_gap)
     "no_runtime_policy": "no runtime policy snapshot could be loaded; fail closed",
     "stale_policy_hash": "policy snapshot hash differs from the binding's",
@@ -711,6 +721,14 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "latest_existing_source_satisfies_semantic_request": ("resolution",),
     "multiple_existing_sources_match_semantic_request": ("resolution",),
     "matching_sources_have_unknown_published_date": ("freshness",),
+    # FF-1 catalog repair (2026-11-15)
+    "unique_match_published_date_unknown": ("freshness",),
+    "published_date_unknown": ("freshness",),
+    "fiscal_year_mismatch": ("resolution",),
+    "multiple_candidates": ("resolution",),
+    "identity_mismatch": ("identity",),
+    "capture_not_ready": ("artifact",),
+    "other_excluded": ("resolution",),
     "no_runtime_policy": ("freshness",),
     "stale_policy_hash": ("freshness",),
     # semantic

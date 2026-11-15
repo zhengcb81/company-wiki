@@ -894,8 +894,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 root_ids=set(args.root_id) if args.root_id else None,
             )
         elif args.command == "register":
-            result = get_catalog().register_sources(
-                root_id=args.root_id, relative_paths=set(args.relative_path),
+            from .registration_scope import register_groups
+
+            result = register_groups(
+                get_catalog(), args.root_id, set(args.relative_path),
             )
         elif args.command == "source-facts":
             from .source_reader import SourceRef

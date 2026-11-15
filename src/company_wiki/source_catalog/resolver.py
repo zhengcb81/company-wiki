@@ -104,6 +104,31 @@ _NONPRIMARY_VERSION_ROLES = frozenset(
 #: convention so the admission gate below does not import a private name.
 _REJECTIONS_PATH_SEGMENT = ".rejections"
 
+# FF-1 B1: the two named outcomes of the unknown-published-date branch.  A
+# single undated semantic match is its own, actionable reason; several stay
+# under the original umbrella.  Both remain AMBIGUOUS — the split only names
+# the shape the caller (ensure self-heal, operation projection) must react to.
+UNKNOWN_PUBLISHED_DATE_REASONS = frozenset({
+    "unique_match_published_date_unknown",
+    "matching_sources_have_unknown_published_date",
+})
+
+# FF-1 B4: the closed exclusion_reason vocabulary shared with the pathless
+# operation candidate projection (do not widen without the consumer lane).
+CANDIDATE_EXCLUSION_REASONS = frozenset({
+    "published_date_unknown", "fiscal_year_mismatch", "multiple_candidates",
+    "identity_mismatch", "capture_not_ready", "other_excluded",
+})
+
+
+def _candidate_publication_status(qualification: SourceQualification) -> str:
+    """Qualification label -> the candidate projection's closed enum."""
+    if qualification.publication_status in {"unknown", "invalid"}:
+        return "unknown"
+    if qualification.publication_status == "after_as_of":
+        return "future"
+    return "known"
+
 
 class SourceResolutionError(ValueError):
     """Raised when a source request violates the resolver contract."""
@@ -737,6 +762,10 @@ class ResolutionResult:
     # no candidate passed the entity gate and none were rejected).
     debug_trace: tuple[str, ...] = ()
     excluded_candidates: tuple[dict[str, object], ...] = ()
+    # FF-1 B1: how many SEMANTIC matches were rejected only because their
+    # published date is unknown.  Additive diagnostic: 0 for every result that
+    # did not come from the unknown-date branch, and never a status input.
+    unknown_date_match_count: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         payload: dict[str, Any] = {
@@ -752,6 +781,8 @@ class ResolutionResult:
             payload["debug_trace"] = list(self.debug_trace)
         if self.excluded_candidates:
             payload["excluded_candidates"] = list(self.excluded_candidates)
+        if self.unknown_date_match_count:
+            payload["unknown_date_match_count"] = self.unknown_date_match_count
         return payload
 
 
@@ -1684,7 +1715,9 @@ class SourceResolver:
             qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date)
             if qualification.publication_status == "after_as_of":
                 future_matches += 1
-                excluded.append(self._excluded_candidate(document, qualification))
+                excluded.append(self._excluded_candidate(
+                    document, qualification, metadata, exclusion_reason="other_excluded",
+                ))
                 trace.append(f"{document['title']}: published_after_as_of_date")
                 continue
             # B02: REUSE eligibility is the qualification track, not the legacy
@@ -1695,10 +1728,13 @@ class SourceResolver:
                 item for item in document["locations"] if item.get("candidate_rank")
             ]
             if not canonical_locations:
-                excluded.append(self._excluded_candidate(document, qualify_source(
-                    document["published_date"], as_of_date=request.as_of_date,
-                    local_bytes_status="unavailable",
-                )))
+                excluded.append(self._excluded_candidate(
+                    document, qualify_source(
+                        document["published_date"], as_of_date=request.as_of_date,
+                        local_bytes_status="unavailable",
+                    ),
+                    metadata, exclusion_reason="capture_not_ready",
+                ))
                 if any(
                     item.get("role") == "original_primary"
                     and _is_rejections_path(item.get("relative_path", ""))
@@ -1793,7 +1829,9 @@ class SourceResolver:
                                                if not document["published_date"] else None),
                                            source_sha256=source_ref.content_sha256)
             if handle is None:
-                excluded.append(self._excluded_candidate(document, qualification))
+                excluded.append(self._excluded_candidate(
+                    document, qualification, metadata, exclusion_reason="capture_not_ready",
+                ))
                 trace.append(f"{document['title']}: {selection.reason}")
                 for attempted in selection.tried:
                     trace.append(f"{document['title']}: candidate {attempted}")
@@ -1809,7 +1847,14 @@ class SourceResolver:
                 for attempted in selection.tried:
                     trace.append(f"{document['title']}: candidate {attempted}")
             if not qualification.historical_date_eligible:
-                excluded.append(self._excluded_candidate(document, qualification))
+                excluded.append(self._excluded_candidate(
+                    document, qualification, metadata,
+                    exclusion_reason=(
+                        "published_date_unknown"
+                        if _candidate_publication_status(qualification) == "unknown"
+                        else "other_excluded"
+                    ),
+                ))
                 if availability != "unavailable":
                     unknown_date_matches += 1
                 trace.append(f"{document['title']}: published_date_{qualification.publication_status}")
@@ -1877,10 +1922,19 @@ class SourceResolver:
         if future_matches:
             reason = "only_sources_published_after_as_of_date"
         elif unknown_date_matches:
+            # FF-1 B1: name the shape.  Exactly one undated semantic match is
+            # the directly repairable case (one declaring sidecar group); a
+            # plurality keeps the umbrella reason.  Status stays AMBIGUOUS and
+            # the count rides the result for the ensure self-heal/projection.
             return result(
                 ResolutionStatus.AMBIGUOUS,
-                "matching_sources_have_unknown_published_date",
+                (
+                    "unique_match_published_date_unknown"
+                    if unknown_date_matches == 1
+                    else "matching_sources_have_unknown_published_date"
+                ),
                 (),
+                unknown_date_matches=unknown_date_matches,
             )
         else:
             reason = "no_existing_source_satisfies_request"
@@ -1888,6 +1942,7 @@ class SourceResolver:
 
     def _excluded_candidate(
         self, document: dict[str, Any], qualification: SourceQualification,
+        metadata: dict[str, Any], exclusion_reason: str,
     ) -> dict[str, object]:
         # Construct the existing logical ref without reading files or exporting locations.
         from dataclasses import asdict
@@ -1896,6 +1951,26 @@ class SourceResolver:
         diagnostic: dict[str, object] = {
             "document_id": document["document_id"], "qualification": qualification.to_dict(),
         }
+        # FF-1 B1/B4: the pathless candidate whitelist the operation projection
+        # republishes.  Physical locators stay out by construction (the
+        # "path" not in json.dumps(diagnostic) contract is pinned by tests).
+        # F-R3: title is trimmed here like the other free-text fields — the
+        # consumer's candidate validator rejects value != value.strip().
+        provider, provider_document_id, _identities = _provider_identity(metadata)
+        diagnostic.update({
+            "title": str(document["title"]).strip(),
+            "document_kind": document["document_kind"],
+            "provider": provider,
+            "provider_document_id": provider_document_id,
+            "form_type": str(metadata.get("form_type") or "").strip() or None,
+            "fiscal_year": _fiscal_year(document, metadata),
+            "fiscal_period": str(metadata.get("fiscal_period") or "").strip() or None,
+            "language": str(metadata.get("language") or "").strip() or None,
+            "content_sha256": str(document.get("content_sha256") or "") or None,
+            "byte_size": document.get("byte_size"),
+            "publication_status": _candidate_publication_status(qualification),
+            "exclusion_reason": exclusion_reason,
+        })
         try:
             ref = SourceVersionReader(self.catalog).query_ref(
                 document["document_id"], str(document.get("source_id") or ""),
@@ -2328,6 +2403,7 @@ class SourceResolver:
         matches: tuple[SourceHandle, ...],
         debug_trace: tuple[str, ...] = (),
         excluded_candidates: tuple[dict[str, object], ...] = (),
+        unknown_date_matches: int = 0,
     ) -> ResolutionResult:
         return ResolutionResult(
             schema_version=SOURCE_RESOLVER_SCHEMA_VERSION,
@@ -2339,6 +2415,7 @@ class SourceResolver:
             matches=matches,
             debug_trace=debug_trace,
             excluded_candidates=excluded_candidates,
+            unknown_date_match_count=unknown_date_matches,
         )
 
     def read_verified_bytes(
