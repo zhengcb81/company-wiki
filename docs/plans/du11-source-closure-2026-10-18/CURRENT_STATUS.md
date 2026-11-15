@@ -8,6 +8,7 @@
 
 - **解耦范围：** M2/E01–E09 继续对当时冻结接口版本有效；不能据此声称所有当前代码已彻底解耦。M3 当前 HEAD 漂移审查正在进行，已完成 CWP 首组 TDD 修复：动态 `eval/exec/compile` 及 `__builtins__`/`builtins.__dict__`、`vars()`、`globals()`/`locals()`、`.get()`字典查找绕行纳入边界合同；automation 不再读 `NarrativeSubjectRef` 私有 schema 常量；pytest 自动临时目录从实测 153 字符改为独立 53 字符并自动清理；对象存储在 Windows 沙箱拒绝硬链接时使用无覆盖原子重命名。
 - **本组验收：** 短路径、对象存储、Subject owner、层边界和官方 JSON batch preparation 最新定向合同共 **119 passed / 42.68 秒**；真实 CLI 官方 JSON 摘要/发布/读取/缓存复用在对象存储修复后 **1 passed / 40.48 秒**；Ruff 通过。M3 其他 CWP/跨仓源码差异仍待审查，不重跑整套历史矩阵。
+- **发布：** CWP 代码与总控 PWF 已提交并推送 `3bc4ed86a`；push fast smoke **18 passed / 15.06 秒**，本地 master 与 origin/master 相等。GitHub Actions 完整 CI 未在本地预判。
 - **原业务主线：** 正式摘要仍是 `BUSINESS_SUMMARY_CHANGES_REQUIRED`；下一业务任务仍是修正冗余片段和主体/计划归属、按冻结样本验真，然后再复验恢复及 RF 实际采用。固定公司循环保持暂停；本轮架构处理不自动恢复它。
 
 当前实施入口为[模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)和本总控 PWF；本文件下方 11-14 及更早章节是历史收据，按日期读取，不覆盖本节。

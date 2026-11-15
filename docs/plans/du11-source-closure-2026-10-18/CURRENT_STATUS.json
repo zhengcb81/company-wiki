@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T13:02:23Z",
+  "observed_at_utc": "2026-11-15T13:06:58Z",
   "next_action": "Continue the M3 current-head drift audit: review remaining CWP and owner-repository source deltas, bind each to its public interface and owner, and add only reproducible boundary regressions. Keep the business-summary P1 next in the existing sequence and do not resume the fixed company loop.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
@@ -1247,11 +1247,12 @@
     "m3_current_head_drift_audit": {
       "status": "IN_PROGRESS",
       "cwp_first_slice": {
+        "published_head": "3bc4ed86a; local master and origin/master matched after push.",
         "dynamic_execution_boundary": "eval/exec/compile calls, aliases, __builtins__/builtins.__dict__ mapping access, vars/globals/locals and get-based lookup covered by RED-to-GREEN static contract; no production use found; static contract is not runtime isolation.",
         "subject_schema_owner": "NarrativeSubjectRef public factory now owns compact official JSON schema construction.",
         "pytest_temp_path": "153-character default sandbox temp now routes to a 53-character unique checkout temp and is removed on exit.",
         "windows_object_publication": "PermissionError from hardlink now falls back to atomic no-replace same-directory rename; existing content remains hash-verified.",
-        "tests": "Latest targeted contract/unit/integration run: 119 passed in 42.68 seconds, including namespace/dictionary-lookup bypass cases; default temp 153 chars routed to 53 chars and cleaned. One official JSON CLI E2E passed in 40.48 seconds after object-store fix; affected Ruff passed."
+        "tests": "Latest targeted contract/unit/integration run: 119 passed in 42.68 seconds, including namespace/dictionary-lookup bypass cases; default temp 153 chars routed to 53 chars and cleaned. One official JSON CLI E2E passed in 40.48 seconds after object-store fix; affected Ruff passed. Push fast smoke: 18 passed in 15.06 seconds; full GitHub Actions CI remains authoritative."
       },
       "remaining": "Review other current CWP source deltas and RF, StockWiki, Dashboard, and RFAudit post-M2 source changes; do not infer acceptance from historical M2 receipts."
     }

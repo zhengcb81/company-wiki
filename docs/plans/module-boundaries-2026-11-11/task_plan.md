@@ -29,6 +29,7 @@
 - pytest 默认临时根不是天然短路径：本机沙箱注入的默认基准路径为 153 字符，旧逻辑因 `basetemp is None` 跳过检查，且旧 fallback 仍放在 `%TEMP%` 下。现在按 pytest 默认命名估算实际路径；超过预算时选 checkout 与系统 temp 中较短的根，生成仓内被 `.gitignore` 屏蔽的唯一 `.cwpt-<12hex>` 目录并在退出时清理。实际运行路径为 53 字符，cleanup 收据显示目录已删除。
 - 正式摘要 E2E 还暴露了 Windows 沙箱拒绝 `os.link` 的环境限制（独立复现 `WinError 5`）。对象存储层现在仅在 Windows 硬链接被拒时退回同目录、原子、无覆盖的 `os.rename`；遇到并发已存在目标仍按实际内容 hash 验真，损坏目标不覆盖。
 - 最新定向结果：短路径与默认路径合同、对象存储、Subject owner、层边界合同（含上述命名空间绕行反例）、官方 JSON batch preparation 合计 **119 passed / 42.68 秒**；测试日志再次显示默认根 153 字符→仓内实际 53 字符，退出清理成功。完整空内容 CLI 摘要/发布/读取/缓存复用 E2E 在对象存储修复后 **1 passed / 40.48 秒**；受影响文件 Ruff 通过。此前首次集成失败已分别归因于长默认 temp 和硬链接被沙箱拒绝，修复后各自复验通过。
+- CWP 实现与总控 PWF 已提交 `3bc4ed86a` 并推送 `origin/master`；推送 fast smoke **18 passed / 15.06 秒**。精确 CI 仍按仓库配置待 GitHub Actions 完成，不把本地快门测试称为完整 CI。
 - **M3 仍 OPEN**：上述仅是 CWP 一组差异的当前版本审查，不能替代 CWP 剩余差异或 RF、StockWiki、Dashboard、RFAudit 代码变化的归因与 owner 合同测试，也不关闭父业务摘要质量任务。
 
 ## Goal

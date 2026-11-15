@@ -7,6 +7,7 @@
 - 修复 pytest 的重复长路径根因：默认 `%TEMP%` 路径（实测估算 153 字符）现在也进入长度预算；自动选择 checkout/系统临时根中更短的一处，落到唯一 `.cwpt-<12hex>` 目录（实测 53 字符），退出时清理。短路径测试保持显式、短输入，不再依赖主机 `%TEMP%`。
 - CLI E2E 暴露 Win32 沙箱拒绝 `os.link` 的另一项环境差异（独立探针 `WinError 5`）。对象存储为 Windows 提供同目录原子 `os.rename` 无覆盖 fallback；同内容并发目标仍验 hash，损坏目标不覆盖。
 - 最新定向测试 **119 passed / 42.68 秒**；运行日志复核默认临时根 153 字符被自动切换为仓内 53 字符短根且退出清理成功。官方 JSON 空内容 CLI 摘要、发布、读取和跨 run 缓存复用在存储修复后 **1 passed / 40.48 秒**；受影响 Ruff checks 通过。两次首轮失败分别以默认 pytest 路径预算修复和 Windows rename fallback 修复；本轮没有重跑全量 suite。
+- CWP 实现及本轮总控 PWF 已提交并推送：`3bc4ed86a`，推送 fast smoke **18 passed / 15.06 秒**；本地 `master` 与 `origin/master` 已核对一致，完整 GitHub CI 仍以远端结果为准。
 - 总控 CWP PWF 和 module-boundaries PWF 已补记该结果。M3 仍 IN_PROGRESS：其他 CWP 差异及 RF、StockWiki、Dashboard、RFAudit 当前源码路径尚未完成逐项审查；FF/ RF/ Dashboard 的 canonical PWF 局部状态差异仍由各仓 owner 更新。父业务摘要任务继续按其 PWF 排队，不因这组测试自动恢复公司循环。
 
 ## 2026-11-15 — 九模块 PWF 对齐与边界复核启动时快照（历史）
