@@ -1,5 +1,22 @@
 # 进度
 
+## 2026-11-15 — 一周界线临时目录清理（部分完成）
+
+- 按用户要求以 **2026-11-08 00:00** 为保留分界，并逐目录检查后代文件/目录的最新修改时间；不能只看父目录时间。11-08 之后有活动的目录保留。
+- 已用各自主仓的 `git worktree remove --force` 移除 7 个超过一周、所有分支提交都已是对应主线祖先的旧施工工区：`_merge_mc`、`MeetingConverter-ci-fast-gate`、`MeetingConverter-output-integrity`、`_merge_ir`、`industry-research-report-generation`、`_merge_qa`、`QAbyLLM-rag-safe-rebuild`。删除前核过提交 ancestry、dirty 项；仅测试生成的 `.mc-merge-tmp/`、`.qa-merge-tmp/`、`.coverage`/`coverage.xml` 属于旧工区。Git worktree 注册已同步移除，七个目录都不存在。清理后 CWP/RF/ET/SID/Dashboard 状态未触碰；MeetingConverter 主仓另观察到 `M .coverage`（文件时间 2026-07-09），本次未改该主仓文件。
+- 另一批 **28 个无 Git 元数据的旧测试/临时目录**经只读预检共约 19,746 文件、518,410,131 字节。实际递归删除被平台自动审批拒绝：其理由是目标包含 PWF 引用的 `cwp-temp` 和完整 IQS 测试副本/审查数据，要求先归档或确认。该批未删除，未拆分命令绕过；准确清单为 `_c1-review-runs`、`_ffjf_final`、`_ffjf_v1`–`_ffjf_v4`、`_tmp`、`.ruff_cache`、`cwp-temp`、`.iqs-deleg18-test-20261018a`、`.iqs-owner18-contract-a1`、`.iqs-owner18-observers-a1/a2/a3/portable`、`.iqs-owner18-phase-a1`、`.iqs-owner18-runtime-a1/a2`、`.iqs-owner18-test-a1`–`a5`、`.iqs-owner18-test-exact-final`、`.iqs-owner18-test-final`、`w18-holdout-scratch`、`w18-review-scratch-gold`、`w18-review-scratch-replay`。
+- 明确保留近期目录：`.iqs-deleg18-test-20261018b` 和 `.iqs-scan18-test-20261018a` 内的 `attestations/` 最新时间为 11-13；Projects 根 `.pytest_cache` 最新时间 11-13；空目录 `_g3`、`_g4` 自身时间为 11-14、11-12。也保留有 PWF/独有材料关联的 `_du6tmp`（FF真实回放证据及原件副本）、`.du10-deps`、`_w20-runs`、`_fin-csc-02-external`、`_primary-csc-03-external`，以及 CWP/StockWiki/IQS/Dashboard 的活动或证据工区。
+- 此次删除 7 个旧注册工区后，Projects 顶层目录实测为 194 个；不把旧 11-14 目录清单数字继续当实时数量。当前清理**未全部完成**，被平台拒绝的 no-Git 批次仍需后续处理。
+
+## 2026-11-15 — Projects 外包目录清理复查（进行中）
+
+- 按用户最新指示把盘点扩展到 `Projects` 的全部 204 个顶层目录；发现原 `projects_directory_inventory.md` 的 63 个候选清单没有覆盖全部 `dashboard-owner-*`、IQS/RF lab 等目录，需补成完整当前清单后再退役目录。
+- 已移除 CWP 内空的 `.worktrees/dashboard-p2-market-20261109`，以及 Projects 顶层 6 个经复查完全空、无 Git 元数据的目录（`_g5`、`_merge_checks`、`_r3a`、`_r3b`、`cwp-lanes-20261006`、`cwp-lanes-20261007`）；均为 0 文件 / 0 字节。
+- 已清掉已完成且非 StockWiki/IQS 活动工区中的 1,267 个根级可再生 Ruff/Pytest/Mypy 缓存文件，合计 **38,610,263 B**。目标为 FF、RF、ET 容器、SID 容器和 Dashboard 的精确缓存目录；CWP 本轮相关缓存原本不存在，StockWiki 缓存因 owner 活动保留。
+- 两处缓存无法由当前进程读取：`Projects/filing-fetch/.pytest_cache` 与 `%LOCALAPPDATA%/Temp/rf-merge-review-20260927/.pytest_cache`（PWF 旧测约 33 MB）。均收到 Windows `Access Denied`；未改 ACL、未用强制绕过、未删。
+- 只读主仓现场与上次 PWF 有所不同：CWP `master@ac8841c55cb4` / `origin/master` 相等、tracked clean，但仍有 23,334 个未跟踪文件（约 347,518,173 B，集中于 `.mimosa`、`.planning`、`docs` 和 WorkBuddy）；RF 当前 2 个 tracked 变化是 2026-11-15 周度 T3 失败结果（`weekly_alert.jsonl`/`weekly_manifest.json`），应保留作诊断证据；StockWiki/IQS 当前仍分别有 28/13 个注册工区及大量 owner 状态数据，保持活动隔离。
+- 初次扩展盘点时尚未删除含文件的外包施工目录；随后的一周界线清理结果见本页上方新增记录。已确认 SID 的 `cwp-cninfo-bounded-budget` 含 6 份真实 PDF 和运行日志、SID lineage backup 有唯一回滚材料，均按其交接保留。仍须逐目录对照 owner PWF、Git 并线、dirty/untracked 与独有证据，不能把该初查状态误读为当前完成状态。
+
 ## 2026-11-15 — CWP 正常推送恢复
 
 - `git push origin master` 通过正常路径成功，GitHub 响应为 `7361aad82..0e741063f master -> master`，即当时本地 8 个待发提交全部进入远端。推送 delta 共 13 个路径，限于本计划文档/交接审查文件与一次性脚本删除，没有产品源码变更。
