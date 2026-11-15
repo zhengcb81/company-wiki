@@ -293,6 +293,33 @@ class _Scanner(ast.NodeVisitor):
         if isinstance(node, ast.Name):
             value = self.bindings.get(node.id)
             return value if isinstance(value, _Reference) else None
+        if isinstance(node, ast.IfExp):
+            for branch in (node.body, node.orelse):
+                ref = self._reference(branch)
+                if ref is not None and (ref.module or self._is_foreign_class(ref)):
+                    return ref
+        if isinstance(node, ast.BoolOp):
+            # `and` returns its final operand when all earlier operands are true;
+            # `or` may return any operand that is the first truthy value.
+            if isinstance(node.op, ast.And):
+                if any(
+                    isinstance(value, ast.Constant) and not bool(value.value)
+                    for value in node.values[:-1]
+                ):
+                    return None
+                values = node.values[-1:]
+            else:
+                values = node.values
+            for value in values:
+                if isinstance(node.op, ast.Or) and isinstance(value, ast.Constant):
+                    if bool(value.value):
+                        break
+                    continue
+                ref = self._reference(value)
+                if ref is not None and (ref.module or self._is_foreign_class(ref)):
+                    return ref
+        if isinstance(node, ast.NamedExpr):
+            return self._reference(node.value)
         if isinstance(node, ast.Attribute):
             if (self.receiver is not None and isinstance(node.value, ast.Name)
                     and node.value.id == self.receiver[0]):
@@ -394,6 +421,55 @@ class _Scanner(ast.NodeVisitor):
         self.generic_visit(node)
         self._check_module_objects(node, (*node.keys, *node.values))
 
+    def _visit_comprehension(self, generators: list[ast.comprehension],
+                             values: Iterable[ast.AST]) -> None:
+        if not generators:
+            return
+        # Python evaluates the first iterable outside the implicit comprehension
+        # scope; targets and all remaining expressions live in the local scope.
+        self.visit(generators[0].iter)
+        enclosing_bindings, enclosing_imports = self.bindings, self.imported_modules
+        self.bindings = enclosing_bindings.copy()
+        self.imported_modules = enclosing_imports.copy()
+        target_names = {
+            target.id
+            for generator in generators
+            for target in ast.walk(generator.target)
+            if isinstance(target, ast.Name) and isinstance(target.ctx, ast.Store)
+        }
+        try:
+            for index, generator in enumerate(generators):
+                if index:
+                    self.visit(generator.iter)
+                self.visit(generator.target)
+                for condition in generator.ifs:
+                    self.visit(condition)
+            for value in values:
+                self.visit(value)
+                self._check_module_objects(value, (value,))
+            for name, value in self.bindings.items():
+                if name in target_names or value == enclosing_bindings.get(name):
+                    continue
+                previous = enclosing_bindings.get(name)
+                value_is_boundary = isinstance(value, _Reference) and (
+                    value.module or self._is_foreign_class(value)
+                )
+                previous_is_boundary = isinstance(previous, _Reference) and (
+                    previous.module or self._is_foreign_class(previous)
+                )
+                if value_is_boundary or previous_is_boundary:
+                    # Assignment expressions in comprehensions bind outside the
+                    # implicit scope; retain either possible boundary value when
+                    # the comprehension may execute zero or multiple times.
+                    enclosing_bindings[name] = previous if previous_is_boundary else value
+                else:
+                    enclosing_bindings[name] = value
+        finally:
+            self.bindings, self.imported_modules = enclosing_bindings, enclosing_imports
+
+    def visit_DictComp(self, node: ast.DictComp) -> None:
+        self._visit_comprehension(node.generators, (node.key, node.value))
+
     def visit_List(self, node: ast.List | ast.Tuple | ast.Set) -> None:
         self.generic_visit(node)
         self._check_module_objects(node, node.elts)
@@ -401,7 +477,24 @@ class _Scanner(ast.NodeVisitor):
     visit_Tuple = visit_List
     visit_Set = visit_List
 
+    def visit_ListComp(self, node: ast.ListComp) -> None:
+        self._visit_comprehension(node.generators, (node.elt,))
+
+    def visit_SetComp(self, node: ast.SetComp) -> None:
+        self._visit_comprehension(node.generators, (node.elt,))
+
+    def visit_GeneratorExp(self, node: ast.GeneratorExp) -> None:
+        self._visit_comprehension(node.generators, (node.elt,))
+
     def visit_Return(self, node: ast.Return) -> None:
+        self.generic_visit(node)
+        self._check_module_objects(node, (node.value,))
+
+    def visit_Yield(self, node: ast.Yield) -> None:
+        self.generic_visit(node)
+        self._check_module_objects(node, (node.value,))
+
+    def visit_YieldFrom(self, node: ast.YieldFrom) -> None:
         self.generic_visit(node)
         self._check_module_objects(node, (node.value,))
 

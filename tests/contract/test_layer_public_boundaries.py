@@ -145,6 +145,45 @@ def test_boundary_scanner_rejects_undeclared_module_attributes():
         ("from company_wiki import document_understanding as du\n"
          "def engine():\n    return lambda: du", "module object"),
         ("from company_wiki import document_understanding as du\n"
+         "def engine(condition):\n    return du if condition else None", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine(condition):\n    return [du if condition else None]", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    return [du for _ in (0,)]", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    return {0: du for _ in (0,)}", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    return {du for _ in (0,)}", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    return (du for _ in (0,))", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    return du or None", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    return True and du", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine(condition):\n    return lambda: du if condition else None", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    yield du", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine(condition):\n    yield du if condition else None", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    yield from du", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    return (alias := du)", "module object"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine(condition):\n    alias = du if condition else None\n    return alias._implementation()",
+         "_implementation"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    [(alias := du) and 0 for _ in (0,)]\n    return alias._implementation()",
+         "_implementation"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    alias = du\n    [(alias := None) and 0 for _ in ()]\n"
+         "    return alias._implementation()", "_implementation"),
+        ("from company_wiki import document_understanding as du\n"
+         "def engine():\n    [0 for du in ()]\n    return du", "module object"),
+        ("from importlib import import_module as load\n"
+         "def engine():\n    return load('company_wiki.document_understanding')", "module object"),
+        ("from company_wiki import document_understanding as du\n"
          "owner._engine = du", "module object"),
         ("from company_wiki import document_understanding as du\n"
          "def caller(engine=du):\n    return engine._implementation()", "module object"),
@@ -195,6 +234,31 @@ def test_boundary_scanner_allows_lambda_parameter_shadowing_imported_module():
     source = """
 from company_wiki import document_understanding as du
 identity = lambda du: du
+"""
+    assert not _scan(path, ast.parse(source)).violations
+
+
+def test_boundary_scanner_preserves_comprehension_scope_and_truthy_short_circuit():
+    path = SOURCE_ROOT / "automation" / "_boundary_probe.py"
+    source = """
+from company_wiki import document_understanding as du
+
+def engine():
+    return None and du
+
+def second():
+    return True or du
+"""
+    assert not _scan(path, ast.parse(source)).violations
+
+
+def test_boundary_scanner_allows_public_member_in_conditional_result():
+    path = SOURCE_ROOT / "automation" / "_boundary_probe.py"
+    source = """
+from company_wiki import document_understanding as du
+
+def engine(condition):
+    return du.understand_units if condition else None
 """
     assert not _scan(path, ast.parse(source)).violations
 
