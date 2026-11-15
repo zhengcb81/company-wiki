@@ -4,6 +4,14 @@
 
 ## 2026-11-15 最新状态
 
+### 20:27 UTC update — exact-head CI passed
+
+GitHub Actions CI #537 / run `43757282611` passed on the exact pushed SHA `1391ae81d8126b5026209e26ae56a7d9bb0a9f0c`; job `132944030549` completed in 7m52s. The job had one warning and one notice about upstream Node/runner migrations, and no failure annotations. This closes the current CI regression repair. The preceding `895f66f57` CI failure remains documented as the evidence that drove the follow-up. Next project work resumes at the finite M3 owner reconciliations below.
+
+### 20:19 UTC update — reviewed CI follow-up pushed; exact run active
+
+Follow-up commit `1391ae81d8126b5026209e26ae56a7d9bb0a9f0c` was pushed to `master`. The push hook's fixed smoke passed **23 tests in 14.31s**. GitHub Actions run `43757282611` / CI #537 later passed on that exact SHA (job `132944030549`, 7m52s); final result is recorded in the 20:27 UTC section above. This 20:19 note is the in-progress checkpoint.
+
 ### 20:11 UTC update — second CI run exposed two remaining test-scope mismatches
 
 The first repair commit `895f66f57ce2346c8eb2102c9bd475a828b3e8c8` reached `origin/master`, but its exact run `43755195576` failed **4 instances**: one daily/fast-inventory contract assertion, plus three parameter cases of a Windows-only no-replace-rename test running on Linux. These were new test wiring/platform issues; no new product defect was indicated.
@@ -11,7 +19,7 @@ The first repair commit `895f66f57ce2346c8eb2102c9bd475a828b3e8c8` reached `orig
 - The five unit regressions were added to `DAILY_PUSH_CASES` but not its parent fixed `FAST_CONTRACT_CASES` inventory. The invariant intentionally requires the daily set to be a strict subset. Added the same five IDs to the parent inventory; `CI_CONTRACT_CASES` continues to exclude unit nodes because GitHub's complete Unit phase owns them.
 - The object-store fallback is correctly Windows-specific: on POSIX the production code propagates `PermissionError` rather than use a replace-capable `os.rename`. The old test asserted Windows behavior on every OS. It now runs only on Windows; a companion test injects the POSIX platform branch on any host and proves hard-link denial propagates without overwriting the racing object.
 
-Validation after these fixes: the 13-file annotation-driven suite **500 passed** in 44.44s; daily push smoke **23 passed** in 19.72s; Ruff and `git diff --check` passed; the temporary test tree was cleaned. The new POSIX-branch test ran via a narrow OS adapter on this Windows host; the next Linux CI run will verify it under the real CI platform. Independent review of the code follow-up passed at baseline `895f66f57`, covering the inventory filter and Windows/POSIX test split. `895f66f57` remains the remote SHA with failing CI. The follow-up is ready to commit/push; do not mark CI complete until the next exact-head run succeeds.
+Validation after these fixes: the 13-file annotation-driven suite **500 passed** in 44.44s; daily push smoke **23 passed** in 19.72s; Ruff and `git diff --check` passed; the temporary test tree was cleaned. The new POSIX-branch test ran via a narrow OS adapter on this Windows host; the next Linux CI run will verify it under the real CI platform. Independent review of the code follow-up passed at baseline `895f66f57`, covering the inventory filter and Windows/POSIX test split. `895f66f57` remains the remote SHA with failing CI; follow-up publication and exact run are recorded in the 20:19 section above. Do not mark CI complete until the next exact-head run succeeds.
 
 ### 20:01 UTC update — CI regression roots fixed and pushed; exact-head run active
 

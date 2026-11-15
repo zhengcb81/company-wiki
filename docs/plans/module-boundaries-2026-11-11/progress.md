@@ -136,3 +136,13 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - Production behavior was already platform-guarded. The Windows test now declares its platform; a platform-proxy companion asserts POSIX hard-link denial propagates and cannot overwrite a concurrent object. The five new daily unit nodes are also recorded in `FAST_CONTRACT_CASES`; `CI_CONTRACT_CASES` still removes unit nodes because full Unit CI owns them.
 - TDD/verification: exact CI provided RED for the inventory contract and platform mismatch. The annotation-driven 13-file local suite passed **500/500 in 44.44s**; daily smoke 23/23 in 19.72s; Ruff and diff check passed. Local OS is Windows/Python 3.13.9; real POSIX execution awaits the next GitHub run.
 - Scoped independent review passed at baseline `895f66f57`, covering the two follow-up code files. Follow-up edits and PWF are not yet committed. The next exact-head CI must be observed before this issue is closed.
+
+## 2026-11-15 20:19 UTC — follow-up published; exact CI active
+
+- Commit `1391ae81d8126b5026209e26ae56a7d9bb0a9f0c` is pushed to `master`; its pre-push fixed smoke passed 23/23 in 14.31s.
+- GitHub Actions run `43757282611` / CI #537 is running on this exact SHA (job `132944030549`). This PWF checkpoint records the run as active; await its complete result before closing the CI repair.
+
+## 2026-11-15 20:27 UTC — exact-head CI passed
+
+- GitHub Actions CI #537 / run `43757282611` passed on `1391ae81d8126b5026209e26ae56a7d9bb0a9f0c`; job `132944030549` completed in 7m52s.
+- The run showed one Node.js deprecation warning and one Ubuntu runner migration notice, with no failing annotations. The CI incident follow-up is closed; continue with finite M3 owner reconciliations.

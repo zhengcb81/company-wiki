@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
   "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T20:11:00Z",
+  "observed_at_utc": "2026-11-15T20:27:00Z",
   "recent_cwp_gate_checkpoint": {
     "date_utc": "2026-11-15",
     "scope": "root PWF documentation-only push classification and pytest-owned Windows scratch cleanup",
@@ -113,7 +113,7 @@
     "source_ci_run": "43749426185",
     "source_ci_job": "132919838860",
     "original_failed_instances": 32,
-    "status": "first_fix_ci_failed_four_instances_followup_independently_reviewed_locally_validated_publication_pending",
+    "status": "followup_exact_head_github_ci_success",
     "root_cause_categories": [
       "joined_group_reference_used_a_later_member_scope_containing_an_internal_group_member",
       "eligible_large_table_was_sent_through_prose_group_member_limit_and_collapsed_to_unresolved",
@@ -144,12 +144,20 @@
       "windows_rename_fallback_cases": "passed on Windows",
       "posix_hardlink_denial_branch": "passed through injected POSIX adapter; real Linux CI rerun pending",
           "independent_review": "PASS at baseline HEAD 895f66f57; scoped to the two follow-up code files; no blocker found",
-      "publication": "pending"
+          "published_commit": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
+          "push_hook_smoke": "23 passed in 14.31s",
+          "exact_github_ci_run": "43757282611",
+          "exact_github_ci_workflow_run_number": 537,
+          "exact_github_ci_head_sha": "1391ae81d8126b5026209e26ae56a7d9bb0a9f0c",
+          "exact_github_ci_job": "132944030549",
+          "exact_github_ci_duration": "7m 52s",
+          "exact_github_ci_status": "completed_success",
+          "exact_github_ci_annotations": "one warning and one notice about upstream GitHub runner/action deprecations; no failing annotations"
     },
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
-    "full_github_ci": "failed on 895f66f; follow-up exact-head run pending"
+    "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-    "next_action": "Commit and push the independently reviewed, locally validated CI follow-up: register the five daily unit regressions in FAST_CONTRACT_CASES, scope the no-replace rename test to Windows, and add a cross-platform POSIX-denial companion. Then verify complete GitHub CI on that exact SHA. If it fails, inspect that job and repair only reproduced roots. After CWP CI closeout, finish finite M3 reconciliation: FF owner supplies bounded acquisition_limits and reruns T3; RF owner records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 (8 commits ahead of live origin/main@f2215959, with two tracked weekly-assurance edits); StockWiki owner aligns root task_plan. ROOT then binds fresh exact refs and owner evidence to the finite report. CWP budget contract stays unchanged. Then resume P1 business-summary work; keep fixed company loop paused.",
+    "next_action": "Publish this exact-head CI success in PWF. Then continue finite M3 reconciliation: FF owner supplies bounded acquisition_limits and reruns T3; RF owner records weekly run 20261115T084227Z in canonical PWF and reconciles local main@88892536 (8 commits ahead of live origin/main@f2215959, with two tracked weekly-assurance edits); StockWiki owner aligns root task_plan. ROOT then binds fresh exact refs and owner evidence to the finite report. CWP budget contract stays unchanged. Then resume P1 business-summary work; keep fixed company loop paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
