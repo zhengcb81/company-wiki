@@ -1,0 +1,80 @@
+[
+  {
+    "route": "route1-hk-fy2026-reuse",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "source_blocked",
+      "reason": "local source preparation blocked: unknown",
+      "upstream_cause": "unknown",
+      "local_prepare_reason": "invalid_local_prepare_request",
+      "calls": 3,
+      "downloads": 0
+    }
+  },
+  {
+    "route": "route2-hk-fy2026-fetch-if-missing",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "upstream_cause": "acquisition_validation_failed",
+      "local_prepare_reason": null,
+      "calls": 2,
+      "downloads": 0
+    }
+  },
+  {
+    "route": "route3-hk-fy2025-reuse",
+    "exit_code": 0,
+    "stdout_bytes": 7335,
+    "observed": {
+      "status": "found_capture_ready",
+      "source_id": "urn:company-wiki:source:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+      "title": "2025財務年度報告",
+      "published_date": "2025-06-26",
+      "capture_method": "local_document",
+      "snapshot_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182"
+    }
+  },
+  {
+    "route": "route4-us-fy2026-fetch-if-missing",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "upstream_cause": "acquisition_validation_failed",
+      "local_prepare_reason": null,
+      "calls": 2,
+      "downloads": 0
+    }
+  },
+  {
+    "route": "route5-hk-latest-as-of-reuse",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "upstream_cause": "acquisition_validation_failed",
+      "local_prepare_reason": null,
+      "calls": 2,
+      "downloads": 0
+    }
+  },
+  {
+    "route": "route6-hk-latest-as-of-fetch-if-missing",
+    "exit_code": 3,
+    "stdout_bytes": 0,
+    "observed": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "upstream_cause": "acquisition_validation_failed",
+      "local_prepare_reason": null,
+      "calls": 2,
+      "downloads": 0
+    }
+  }
+]

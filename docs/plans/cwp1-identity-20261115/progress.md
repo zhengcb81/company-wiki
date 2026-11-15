@@ -46,3 +46,31 @@
 - 2026-11-15 PWF 收尾+commit: findings/progress/task_plan 定稿，PWF 三件套作为
   docs(pwf) commit 提交于 lane 分支。未 push、未并入 master。遗留: 无。
 
+## 2026-11-15 续作（施工包 §5 验收 2/3/4 与 §8 收口）
+
+- [节点 6] §5.1 解析探针: 真实 CLI 跑 "Alibaba Group Holding Limited"/"BABA"/"09988"
+  → resolved(BABA US, official_name_exact) / ambiguous(cross_market_dual_listing_
+  requires_market_selection, 2 候选) / resolved(09988 HK)。另跑 4 个显式 --market
+  具名消歧探针，BABA 在 US/HK 下分别唯一解析到 BABA / 09988。全部 stdout/stderr/
+  exit/command 落盘 evidence/。验证: CLI 实跑 + JSON 解析。遗留: 无。
+- [节点 7] §5.2 FF reuse_only 联动: 4 个探针。全称（±market）与 BABA+market=US 均
+  exit=0 / source_candidate / resolution_outcome=reused_existing / download_events=0，
+  命中 20-F 原件 sha256 36daec0c…。BABA 无 market 保留为 exit=2 具名消歧失败样本。
+  未修复 master 对照同一请求 exit=2 / identity_error /
+  "ambiguous / fuzzy_candidates_require_user_selection"，复现施工包 §1，修复后消失。
+  验证: fetch_filing.py 实跑 + 基线对照。遗留: 无。
+- [节点 8] §5.3 RF 六路线联动: 通过 source_preparation.py 官方入口复用 RF 六个原始
+  请求体。route3 (HK FY2025 reuse) exit=0 / found_capture_ready（完整来源记录 +
+  verified_read 收据）；其余 5 条 exit=3，具名原因 acquisition_validation_failed 或
+  local_prepare invalid_local_prepare_request，全部 downloads=0。为诚实归因，在
+  未修复 master 下重跑同样六路线：逐条结果与修复后完全一致（route3 两边都成功）。
+  结论: 本包未引入 RF 回归；route3 成功非本包功劳；剩余 5 条属既有下游契约/
+  元数据缺口，非 fuzzy/ambiguous 复发。验证: 双源码树六路线实跑 + 汇总 JSON。
+  遗留: 5 条缺口具名登记并交接（见 findings）。
+- [节点 9] §5.4 证据: 每条探针落盘 command/stdout/stderr/exit；失败样本未改写；
+  汇总 evidence/README.md；总 < 300KB 全量落盘。夹具不进 git，生产配置零改动。
+  验证: find 清单 + du。遗留: 无。
+- [节点 10/11] §8-1 独立重审与 §8-3 交接: 主工作区有在途 WIP、ff1 lane 未收口，
+  按 §8-3 情形 2 不并线，PWF 写显式交接任务 + handoff（含 40 位 release commit）。
+  详见 findings.md 与 handoff 文档。
+

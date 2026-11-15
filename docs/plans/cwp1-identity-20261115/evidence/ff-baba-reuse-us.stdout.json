@@ -1,0 +1,33 @@
+{
+  "schema_version": "2.0",
+  "status": "source_candidate",
+  "request_period": {
+    "mode": "exact",
+    "fiscal_year": 2025,
+    "fiscal_period": null,
+    "as_of_date": "2026-11-08"
+  },
+  "filing": {
+    "status": "source_candidate",
+    "source_ref": {
+      "byte_size": 7720458,
+      "content_sha256": "36daec0ce8b9f646d67b692a7ae7923589a6204bd58fddc02fff37f53a46bb17",
+      "document_id": "urn:company-wiki:document:sha256:36daec0ce8b9f646d67b692a7ae7923589a6204bd58fddc02fff37f53a46bb17",
+      "mime_type": "text/html",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:36daec0ce8b9f646d67b692a7ae7923589a6204bd58fddc02fff37f53a46bb17"
+    },
+    "byte_verification": "pending_verified_open",
+    "document_kind": "annual_report",
+    "fiscal_year": 2025,
+    "fiscal_period": "FY",
+    "resolution_outcome": "reused_existing",
+    "download_events": 0
+  },
+  "transcript": {
+    "status": "not_requested",
+    "retryable": false
+  },
+  "calls": 2,
+  "downloads": 0
+}

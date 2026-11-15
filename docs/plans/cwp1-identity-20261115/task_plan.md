@@ -43,3 +43,23 @@
 | 3 | A2 具名 reason+注册+单测+commit | done |
 | 4 | 改后全量验证（测试+探针）+commit | done |
 | 5 | PWF 收尾 | done |
+| 6 | §5.1 三查询解析探针 + 具名消歧语义（带命令输出） | done |
+| 7 | §5.2 FF reuse_only 联动（阿里 20-F）+ master 基线对照 | done |
+| 8 | §5.3 RF 六路线联动 + 六路线 master 归因对照 | done |
+| 9 | §5.4 证据索引/失败样本保留 + 提交 | done |
+| 10 | §8-1 独立 agent 重审（0 OPEN P1/P2 才交接） | 见 findings |
+| 11 | §8-3 并线或明示交接 + handoff | 见 findings |
+
+## 本轮追加节点（2026-11-15 续作，施工包全文执行）
+
+- 承接范围: 节点 1-5 为既有实现（A1/A2），本轮**不重做实现、不删/不改候选数据**，
+  只补齐施工包 §5 的验收 2/3/4 与 §8 收口。
+- 写域: 仅本 worktree 的 `docs/plans/cwp1-identity-20261115/` 与 `evidence/`；
+  不碰主工作区在途 WIP、不碰 ff1-catalog lane、不碰 Dashboard 侧适配器、
+  不碰生产配置、不碰既有已登记实体。
+- 联动探针夹具: tmp 目录 `C:/Users/郑曾波/AppData/Local/Temp/cwp1-probe/`，
+  CWP CLI 指向修复后 lane src，catalog 数据只读指向主仓，零下载、零模型。
+- 验收判据: §5.1 三查询具名结果 / §5.2 FF 20-F 不再 ambiguous /
+  §5.3 六路线至少一条 found+capture_ready 或具名新原因 / §5.4 全证据带命令输出。
+- §8-3 并线判断: 主工作区存在在途 WIP（module-pwf-reconciliation-2026-11-14 等），
+  且 ff1-catalog lane 未收口；按 §8-3 情形 2 走**明示交接**，不强行并线。

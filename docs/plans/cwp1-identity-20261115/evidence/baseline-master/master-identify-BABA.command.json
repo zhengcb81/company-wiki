@@ -1,0 +1,11 @@
+[
+  "C:/Miniconda/python.exe",
+  "-B",
+  "-m",
+  "company_wiki.source_catalog.cli",
+  "--config",
+  "C:/Users/郑曾波/AppData/Local/Temp/cwp1-probe/catalog_probe.yaml",
+  "identify",
+  "--query",
+  "BABA"
+]

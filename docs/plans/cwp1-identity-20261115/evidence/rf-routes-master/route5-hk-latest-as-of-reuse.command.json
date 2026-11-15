@@ -1,0 +1,18 @@
+[
+  "C:/Miniconda/python.exe",
+  "-B",
+  "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+  "--result-envelope",
+  "--request-file",
+  "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\rf-input-prep-01\\requests\\route5-hk-latest-as-of-reuse.json",
+  "--company-wiki-config",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp1-probe\\company_wiki_probe.json",
+  "--filing-fetch-root",
+  "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+  "--company-wiki-catalog-config",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp1-probe\\catalog_probe.yaml",
+  "--source-reader-receipt-version",
+  "2.2",
+  "--timeout-seconds",
+  "180"
+]

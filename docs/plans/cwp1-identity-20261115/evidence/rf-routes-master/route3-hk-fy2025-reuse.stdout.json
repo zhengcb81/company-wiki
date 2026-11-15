@@ -1,0 +1,158 @@
+{
+  "schema_version": "source-preparation-result/1",
+  "source": {
+    "source_id": "urn:company-wiki:source:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+    "source_type": "regulatory_filing",
+    "title": "2025財務年度報告",
+    "publisher": "company-wiki",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0626/2025062601065_c.pdf",
+    "published_date": "2025-06-26",
+    "accessed_date": "2026-11-15",
+    "page_or_section": "1",
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "local_document",
+      "tool_name": "company-wiki-source-version-reader",
+      "tool_call_id": "urn:company-wiki:source:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182|2026-11-15T14:19:00.462996+00:00",
+      "captured_date": "2026-11-15",
+      "snapshot_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "company-wiki",
+        "environment": "host-runtime",
+        "tool_name": "company-wiki-source-version-reader",
+        "action": "verified_read",
+        "event_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "timestamp": "2026-11-15T14:19:00.462996+00:00",
+        "receipt_sha256": "853147a859c1cd91b3dc9948e3215dfd46accd82cbfcf4fa52d7aa1d87171ce0"
+      },
+      "receipt_sha256": "50b971ffe67a487ed8e6aabaa62662ab07aa7ca2787d5509d5a4be013eed0fbd"
+    },
+    "company_wiki_trace": {
+      "source_ref": {
+        "byte_size": 4630060,
+        "content_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "document_id": "urn:company-wiki:document:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182"
+      },
+      "review_observation": {
+        "status": "available",
+        "prompt_injection_status": "not_reviewed"
+      },
+      "read_receipt": {
+        "availability_evidence": {
+          "available_by": "2026-11-10",
+          "basis": "prior_verified_capture",
+          "evidence_ref": "source-provenance:urn:company-wiki:document:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182:0951695483ec92777e65ec2fbc45a2e1e1ccbb1f63caa5564e20f9dcc5acfdfc",
+          "locator": "/receipt/content_sha256 + /receipt/retrieved_at + /receipt/http_status",
+          "schema_version": "source-availability-evidence/1",
+          "source_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182"
+        },
+        "byte_size": 4630060,
+        "content_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "document_id": "urn:company-wiki:document:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "read_at": "2026-11-15T14:19:00.462996+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.2",
+        "source_id": "urn:company-wiki:source:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "source_read_policy_sha256": "38af83484ea2dcb4bd2b32150ddaf77203e1b456df8b74b4c600d9cdf6303123",
+        "status": "ok"
+      },
+      "source_manifest": {
+        "byte_size": 4630060,
+        "canonical_entity_id": null,
+        "collector_name": null,
+        "collector_version": null,
+        "content_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "display_name": "阿里巴巴－Ｗ",
+        "document_id": "urn:company-wiki:document:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "document_kind": "annual_report",
+        "fiscal_period": "FY",
+        "fiscal_year": 2025,
+        "form_type": "FY",
+        "language": "zh",
+        "market": "HK",
+        "mime_type": "application/pdf",
+        "period_end": null,
+        "provider": "hkexnews",
+        "provider_document_id": "11727039",
+        "published_date": "2025-06-26",
+        "retrieved_at": null,
+        "security_id": "09988",
+        "source_id": "urn:company-wiki:source:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0626/2025062601065_c.pdf",
+        "title": "2025財務年度報告"
+      },
+      "source_candidate": {
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      }
+    },
+    "availability_evidence": {
+      "available_by": "2026-11-10",
+      "basis": "prior_verified_capture",
+      "evidence_ref": "source-provenance:urn:company-wiki:document:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182:0951695483ec92777e65ec2fbc45a2e1e1ccbb1f63caa5564e20f9dcc5acfdfc",
+      "locator": "/receipt/content_sha256 + /receipt/retrieved_at + /receipt/http_status",
+      "schema_version": "source-availability-evidence/1",
+      "source_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182"
+    },
+    "reuse_receipt": {
+      "parser_calls": null,
+      "llm_calls": null,
+      "download_calls": 0,
+      "outcome": "reused_existing",
+      "policy_hash": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+      "source_read_policy_sha256": "38af83484ea2dcb4bd2b32150ddaf77203e1b456df8b74b4c600d9cdf6303123",
+      "prompt_injection_status": "not_reviewed",
+      "artifact_read": [],
+      "producer_events": [],
+      "artifact_read_events": [],
+      "artifact_failed_events": []
+    }
+  },
+  "filing_fetch": {
+    "schema_version": "2.0",
+    "status": "source_candidate",
+    "request_period": {
+      "mode": "exact",
+      "fiscal_year": 2025,
+      "fiscal_period": null,
+      "as_of_date": "2026-11-08"
+    },
+    "filing": {
+      "status": "source_candidate",
+      "source_ref": {
+        "byte_size": 4630060,
+        "content_sha256": "8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "document_id": "urn:company-wiki:document:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:8ab1234844b56a2be8b90d92301d0a46123c8770610e87f9462bb27b0e2b7182"
+      },
+      "byte_verification": "pending_verified_open",
+      "document_kind": "annual_report",
+      "fiscal_year": 2025,
+      "fiscal_period": "FY",
+      "resolution_outcome": "reused_existing",
+      "download_events": 0
+    },
+    "transcript": {
+      "status": "not_requested",
+      "retryable": false
+    },
+    "calls": 2,
+    "downloads": 0
+  },
+  "narrative": null
+}

@@ -1,0 +1,1 @@
+C:/Miniconda/python.exe -B scripts/fetch_filing.py --config /tmp/cwp1-probe/company_wiki_probe.json --request-file /tmp/cwp1-probe/ff-baba-reuse-us.json --timeout-seconds 120

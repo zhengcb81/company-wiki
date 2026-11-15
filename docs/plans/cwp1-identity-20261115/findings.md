@@ -108,3 +108,82 @@ FC1204_COVERAGE_GATE，零网络零下载零模型）实际数字，2026-11-15 �
   本选集多出的 11 passed 与 2 skipped 来自第 10 项 fc1204（2 skip）及第 12 项
   test_stage_taxonomy（20 passed）等文件的存在与否；两种选集下 +10 增量、
   同两个失败、skip 无状态变化均成立。
+
+## 续作发现（2026-11-15，施工包 §5 验收与 §8 收口）
+
+### F-02: 身份根因确认为「后缀变体 + 无名双上市歧义」，非零候选
+
+基线 master 实测：库中**已有**阿里双上市实体（US BABA / HK 09988，
+共享 `issuer_link_id=issuer-link-v1:a651e739…`）。施工包 §1 推测的三种形态中，
+"零候选"被排除；实际是两种叠加：
+1. `"Alibaba Group Holding Limited"` 与库内 official_name `"Alibaba Group Holding Ltd"`
+   的 Ltd/Limited 后缀差异 → 掉进 strong_fuzzy，得 5 候选 →
+   `fuzzy_candidates_require_user_selection`（A1 后缀归一化修复）。
+2. `"BABA"` 同时命中 HK alias_exact 与 US ticker_exact → 2 个 verified exact，
+   旧 reason `multiple_verified_exact_identities` 未说明如何消歧（A2 具名 reason 修复）。
+
+### F-03: 修复不静默选边，具名消歧是刻意保留的 fail-closed 语义
+
+`BABA` 无 market 仍返回 `ambiguous`，这是施工包 §3 允许的"带消歧语义的具名响应"，
+不是遗漏。理由：不删除任何既有候选数据；两候选各自携带
+market/exchange/ticker/security_id/issuer_link_id；请求可用 `--market`/`--exchange`
+显式选定（4 个消歧探针全部 resolved）；下游 FF 在指定市场后立刻 resolve 成功。
+若强行选 primary 会改变既有已登记实体的引用语义，违反 §4 红线。
+
+### F-04: FF 联动验收通过且可归因（关键修复效果）
+
+未修复 master 对 "Alibaba 20-F FY2025" reuse_only 请求：
+`exit=2 / identity_error / "ambiguous / fuzzy_candidates_require_user_selection"`，
+与施工包 §1 的 E12 实测逐字一致。修复后 lane：
+`exit=0 / source_candidate / resolution_outcome=reused_existing / download_events=0`，
+命中真实原件 sha256 `36daec0c…`。**这是本包唯一可归因的下游解锁**。
+
+### F-05: RF 六路线归因对照 —— 不冒领、不引入回归
+
+六路线在未修复 master 与修复后 lane 下**逐条完全一致**：
+route3 两边都 `exit=0 / found_capture_ready`，其余 5 条失败原因逐字相同。
+因此：
+- route3 满足 §5.3 "至少一条 found+capture_ready"，但**该成功不归因于本包**
+  （该路线用 `阿里巴巴－Ｗ` 精确别名 + 元数据完整的 FY2025 原件，从未撞身份歧义）；
+- 本包**未引入**任何 RF 回归；
+- 剩余 5 条为既有下游缺口，非 fuzzy/ambiguous 复发，符合 §5.3
+  "或具名新原因说明剩余缺口"。
+
+### F-06: 剩余缺口具名根因（交 Dashboard / FF owner）
+
+- route1: FF `ff_local_source_prepare.py` 把 `identity_scope="listing"` /
+  `issuer_link_id` 塞进 `source_request`，却把 `schema_version` 固定 `"1.0"`；
+  CWP `resolver.py:591` 要求 identity scope 字段必须用 schema `1.1`，抛
+  `SourceResolutionError`。CWP CLI 归为 `invalid_local_prepare_request`，
+  FF 再映射成闭集外 `unknown`。**属 FF↔CWP local_prepare 契约层**，
+  不属于身份匹配，也不在本包写域（§4 红线：不改 Dashboard 侧适配器/协议）。
+- route2/4/5/6: `company-wiki ensure exited 1` /
+  `upstream_cause.code=acquisition_validation_failed`，`provider_started=false`。
+  属 ensure/采集校验层，与身份层无关；与 RF INPUT-PREP 记录的
+  `local_metadata_incomplete` 同源（CWP-2 / FF1 目录层在途 lane 的范围）。
+- 建议交接：Dashboard 侧重跑阿里 FF drill 与 RF 采集路线时，把这 5 条作为
+  **下游契约缺口**（非身份缺口）分别派给 FF owner 与 CWP FF1 lane；
+  本包不再扩大写域。
+
+### NOT_RUN / 限制（诚实登记）
+
+- 未改、未重跑 A1/A2 既有实现与单测；本轮只做验收与收口。
+- 未跑全仓测试套件（沿用节点 5 的既有数字与 F-01 勘误，未重复计分母）。
+- 未修复剩余 5 条 RF 缺口的任何下游文件；未 push、未并入 master。
+- 后台执行曾被宿主沙箱拒绝一次（shell 初始化文件读取），已改用前台执行同一
+  Python 脚本完成，未绕过任何拒绝；原始失败记录保留在 `rf-six-routes-run.log`
+  之外的说明中（前台成功日志已落盘）。
+- 联动探针使用 tmp 夹具指向修复后 lane 的 `src`；Dashboard/FF/RF 三仓的
+  生产配置、`config/source_catalog.yaml`、已登记实体与候选数据均零改动。
+
+### §8-3 明示交接任务（不并线）
+
+主工作区存在在途 WIP（`docs/plans/module-pwf-reconciliation-2026-11-14/` 等），
+且 `codex/ff1-catalog-repair-20261115` lane 的 B4 尚未收口。按 §8-3 情形 2
+**不强行并线**，改为显式交接：
+
+> `OWNERPKG-CWP-CANDIDATES-01` 分支 `codex/cwp1-identity-suffix-20261115`
+> head_commit `<见 handoff.json release_tag_or_commit_for_dashboard>` 通过独立重审
+> 后，**待主工作区在途 PWF 收口、且 ff1-catalog lane 并入/明确不冲突后，由主线
+> 任务执行并线**；触发人：company-wiki 主线 owner（操作者）。
+> Dashboard 侧消费以该候选 commit 为准（40 位 SHA，可 git rev-parse）。
