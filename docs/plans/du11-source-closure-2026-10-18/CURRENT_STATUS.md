@@ -33,6 +33,8 @@ FF 外仓只读观察另见本地 main@d694d11、tracking ref origin/main@1dfd81
 
 这次 follow-up 把扫描器从“识别简单返回节点”扩为识别表达式可能产出的值，修复外部模块对象藏在条件表达式、`and/or`、lambda 条件体、列表/字典/集合/生成器推导及 `yield/yield from` 中的静态边界漏检；同时修正推导式循环变量作用域隔离，以及 walrus 变量按 Python 语义向外层写回的误判。测试也覆盖空迭代保留既有模块绑定、参数遮蔽和合法公开端口正例。该静态合同不是运行时沙箱保证。
 
+### 16:23 UTC — prior M3/Dashboard snapshot (superseded by the 18:13 owner refresh above)
+
 九模块 PWF 与 Projects 收尾的唯一总控入口是[模块计划与工区对账计划](../module-pwf-reconciliation-2026-11-14/task_plan.md)，逐仓快照和待 owner 修订项见其 `findings.md`。M3 第二轮只读核对确认：FF `main@origin/main=1dfd818`，F-08 仍开放；RF `main@origin/main=f2215959`，weekly manifest/alert 显示最新 T3 `not-ok`，需 owner 写入 canonical PWF；本轮 `git status` 无法确认两项文件的 tracked dirty 状态；Dashboard 的 START_HERE 与最终 receipt carrier 已在 `3f83bb5` 更新，本地 `origin/main` 也等于 3f83，旧“待补收据”判断已撤销；StockWiki `master@0450506` 已合入两个 owner 变更，但根 `task_plan.md` 停在 11-08，需 owner 对齐。两仓 `git rev-parse --is-inside-work-tree` 为 true，但普通及一次性 `-c extensions.worktreeConfig=false` 的 `git status` 均错误返回 “must be run in a work tree”，所以不把 tracked cleanliness 写成已确认。IQS `master@origin/master=3d9243c`，活动 `codex/iqs-manifest-delivery-01@ecb4a5d` 相比先前核对只增加 PWF/状态/证据内容，没有产品源码变化；C38/C5 的 120 项回归与固定核心组合 296 项已记录，可复用为 I11 当前接口证据。StockWiki/IQS 仍由各自 owner 负责，总控不覆盖其代码/PWF或工作区。
 
 Dashboard 的三张旧续核卡已对照其 owner handoff 重新分类：C01 证据包已吸收进 main（`c8939e5`）；B-real 预览模块适配仍未执行，旧基线需对当前 `main@3f83bb5` 重做路径对账；B03 是仍未完成的证据审查收口，不是产品接口缺陷。后两项留在 Dashboard owner 侧，不阻塞本仓 M3；细节见模块边界计划的 `reconciliation.md`。
@@ -43,7 +45,7 @@ Dashboard 的三张旧续核卡已对照其 owner handoff 重新分类：C01 证
 - **外仓 owner 现状（只读，16:23 UTC）：** RF `main@f2215959` 的 `20261115T084227Z` weekly T3 为 `not-ok`，4 个 FF 下载 E2E 均在 `company-wiki ensure` 阶段失败，`downloads=0`；日志未给出 ensure 内部根因，不能归因到 CWP 扫描器，也不由 ROOT 改 RF/FF。StockWiki `master@0450506`，无 remote；根 `task_plan.md`/`progress.md` 分别最后修改于 11-08 09:28/10:46。此次 `git status` 返回 “must be run in a work tree”，所以 tracked cleanliness 尚未重新确认；由 StockWiki owner 对齐 PWF 时再核对。
 - **原业务主线：** 正式摘要仍是 `BUSINESS_SUMMARY_CHANGES_REQUIRED`；下一业务任务仍是修正冗余片段和主体/计划归属、按冻结样本验真，然后再复验恢复及 RF 实际采用。固定公司循环保持暂停；本轮架构处理不自动恢复它。
 
-当前实施入口为[模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)和本总控 PWF；本文件下方 11-14 及更早章节是历史收据，按日期读取，不覆盖本节。
+当前实施入口为[模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)和本总控 PWF；本节 16:23 UTC 的 M3/Dashboard 信息是历史快照，已被上方 18:13 UTC 的 owner 状态取代。下方 11-14 及更早章节也是历史收据，按日期读取，不覆盖本节最新状态。
 
 ## 2026-11-14 当前状态
 
