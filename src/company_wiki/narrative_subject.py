@@ -119,6 +119,17 @@ class NarrativeSubjectRef:
         return cls(NARRATIVE_SUBJECT_REF_SCHEMA, subject.kind,
                    subject.item_key, subject.subject_sha256)
 
+    @classmethod
+    def for_official_json_projection(
+        cls, *, item_key: str, subject_sha256: str,
+    ) -> NarrativeSubjectRef:
+        """Build the compact public reference for an official JSON projection.
+
+        The schema version is owned here so callers do not reach into this
+        module's wire-format implementation details.
+        """
+        return cls(NARRATIVE_SUBJECT_REF_SCHEMA, "official_json", item_key, subject_sha256)
+
     def to_dict(self) -> dict[str, str]:
         return {"schema_version": self.schema_version, "kind": self.kind,
                 "item_key": self.item_key, "subject_sha256": self.subject_sha256}

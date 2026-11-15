@@ -91,10 +91,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "MODULE_BOUNDARIES_T4_SEM_AND_SCOPED_SOURCE_CARD_CHAIN_ACCEPTED; BUSINESS_SUMMARY_CHANGES_REQUIRED",
-  "as_of_date": "2026-11-14",
-  "observed_at_utc": "2026-11-14T05:36:41Z",
-  "next_action": "Assess concise business-summary text and actor attribution using the frozen source after the reporting-boilerplate and qualified-facility-plan fixes. Verify four historical paraphrase error families, then repeat real recovery and RF adoption for the new summary.",
+  "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_CURRENT_HEAD_AUDIT_IN_PROGRESS; BUSINESS_SUMMARY_CHANGES_REQUIRED",
+  "as_of_date": "2026-11-15",
+  "observed_at_utc": "2026-11-15T13:02:23Z",
+  "next_action": "Continue the M3 current-head drift audit: review remaining CWP and owner-repository source deltas, bind each to its public interface and owner, and add only reproducible boundary regressions. Keep the business-summary P1 next in the existing sequence and do not resume the fixed company loop.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1199,19 +1199,27 @@
     "current_composition": "../module-boundaries-2026-11-11/review/root_composition_20261114.md"
   },
   "module_pwf_and_projects_cleanup": {
-    "as_of_date": "2026-11-14",
+    "as_of_date": "2026-11-15",
     "status": "IN_PROGRESS_OWNER_SPECIFIC_PLAN_RECONCILIATION",
     "canonical_plan": "../module-pwf-reconciliation-2026-11-14/task_plan.md",
     "projects_matching_directories_observed": 63,
-    "directory_cleanup_status": "INVENTORIED_NOT_CLASSIFIED_OR_DELETED",
+    "directory_cleanup_status": "PARTIAL_ROOT_CLEANUP_COMPLETE; active, evidence, and owner-held directories remain; one-directory-per-module goal is not complete",
     "integration_owner_rule": "Each module owner updates its own PWF, classifies dirty work, tests, commits, merges, and pushes in that module repository; ROOT coordinates interfaces and performs read-only composition only.",
     "StockWiki": "DEFERRED_UNTIL_CONCURRENT_PROJECT_HANDOFF; do not modify its plans, worktrees, or Git state.",
     "invest_quick_scan": "DEFERRED_UNTIL_CURRENT_OWNER_HANDOFF",
     "module_status_snapshots": "../module-pwf-reconciliation-2026-11-14/findings.md",
-    "directory_inventory": "../module-pwf-reconciliation-2026-11-14/projects_directory_inventory.md"
+    "directory_inventory": "../module-pwf-reconciliation-2026-11-14/projects_directory_inventory.md",
+    "latest_root_reconciliation": "../module-pwf-reconciliation-2026-11-14/task_plan.md",
+    "owner_pwf_followups": {
+      "filing-fetch": "F-08 remains open; its current PWF wording must agree on this next step.",
+      "revenue-forecast": "Absorb the 2026-11-15 T3 run artifacts into its canonical PWF.",
+      "investment_dashboard": "Record final 2026-11-15 receipt carrier in START_HERE.",
+      "StockWiki": "Active owner work remains; ROOT keeps its PWF and worktree read-only.",
+      "invest-quick-scan": "Active owner work remains; ROOT keeps its PWF and worktree read-only."
+    }
   },
   "module_boundary_current_state": {
-    "as_of": "2026-11-14",
+    "as_of": "2026-11-15",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
@@ -1223,7 +1231,7 @@
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
     "remaining": [],
-    "composition_status": "CLOSED",
+    "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_DRIFT_AUDIT_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
     "cleanup": {
       "delivery_worktrees_removed": 5,
@@ -1234,6 +1242,18 @@
       "other_user_data_preserved": true,
       "current_root_test_worktrees_removed": 4,
       "current_root_test_directories_removed": 4
+    },
+    "m2_scope_note": "E01-E09 remain accepted only for their recorded interface versions; they are not proof that all current repository code is fully decoupled.",
+    "m3_current_head_drift_audit": {
+      "status": "IN_PROGRESS",
+      "cwp_first_slice": {
+        "dynamic_execution_boundary": "eval/exec/compile calls, aliases, __builtins__/builtins.__dict__ mapping access, vars/globals/locals and get-based lookup covered by RED-to-GREEN static contract; no production use found; static contract is not runtime isolation.",
+        "subject_schema_owner": "NarrativeSubjectRef public factory now owns compact official JSON schema construction.",
+        "pytest_temp_path": "153-character default sandbox temp now routes to a 53-character unique checkout temp and is removed on exit.",
+        "windows_object_publication": "PermissionError from hardlink now falls back to atomic no-replace same-directory rename; existing content remains hash-verified.",
+        "tests": "Latest targeted contract/unit/integration run: 119 passed in 42.68 seconds, including namespace/dictionary-lookup bypass cases; default temp 153 chars routed to 53 chars and cleaned. One official JSON CLI E2E passed in 40.48 seconds after object-store fix; affected Ruff passed."
+      },
+      "remaining": "Review other current CWP source deltas and RF, StockWiki, Dashboard, and RFAudit post-M2 source changes; do not infer acceptance from historical M2 receipts."
     }
   },
   "r4_public_replay_20261114": {

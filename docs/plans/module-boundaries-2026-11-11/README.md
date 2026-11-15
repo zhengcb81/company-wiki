@@ -2,6 +2,8 @@
 
 **M2 已完成。** 五条模块施工卡已受测并入各自主线并推送。StockWiki 公开来源读取已进入本地 `master`，Dashboard 的公开浏览、原件流和摘要读取已推送 `main`。D4 跨仓回放 30 项全过，E01–E09 均有组合证据。 [组合记录](review/root_composition_20261114.md) · [矩阵](boundary_matrix.json)
 
+**M3 当前 HEAD 漂移审查进行中。** M2 结论继续绑定原已审查版本；2026-11-15 的只读对比发现多个仓在这些版本之后仍有源码变化。CWP 第一组差异已用 RED→GREEN 修复；边界合同补上对 `__builtins__`、`builtins.__dict__`、`vars()`、`globals()`/`locals()` 和 `.get()` 的动态执行字典查找。定向集合最新为 119 项通过，真实 CLI E2E 在存储修复后 1 项通过；pytest 默认临时路径和 Windows 硬链接被拒两项环境根因也已修复。其余 CWP 和其他仓的源码差异仍待 owner 归因和测试；不把后续代码自动继承为已验收，也不重跑整套历史矩阵。实施细则见 [M3 task plan](task_plan.md#M3--当前-HEAD-边界漂移审查2026-11-15-新增)。
+
 M2 之后的工作区续核不改变上述结论，也不允许恢复旧的跨层实现。Dashboard 三项未收口材料按文件域拆开：[C01证据可移植性](harness_lanes/dashboard_c01_evidence_portability.md)、[B-real预览模块适配](harness_lanes/dashboard_preview_module_adapter.md)、[B03独审收据收口](harness_lanes/dashboard_b03_review_closeout.md)。唯一处置表在 [reconciliation.md](reconciliation.md)，并行写集合见 [dispatch.md](dispatch.md)。
 
 当前实施已回到 [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。R4 和 T4/SEM 已验收，真实来源卡的付费恢复和两条 RF 实际采用通过。正在修正业务摘要内容。

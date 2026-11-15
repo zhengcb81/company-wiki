@@ -1,5 +1,27 @@
 # 进度
 
+## 2026-11-15 — M3 CWP 首组边界修复完成
+
+- 补充动态执行边界负例后，`eval/exec/compile`（含 `builtins` 属性/直接别名、`__builtins__`/`builtins.__dict__`、`vars()`/`vars(builtins)`、`globals()`/`locals()` 和 `.get()` 查找）不能绕过 AST 合同；每轮新增反例先 RED 后转 GREEN，生产代码未发现对应动态调用。
+- 修复层边界合同发现的内部 schema 常量穿透：新增 `NarrativeSubjectRef.for_official_json_projection()`，由 public value owner 管理 schema，automation 调用工厂。
+- 修复 pytest 的重复长路径根因：默认 `%TEMP%` 路径（实测估算 153 字符）现在也进入长度预算；自动选择 checkout/系统临时根中更短的一处，落到唯一 `.cwpt-<12hex>` 目录（实测 53 字符），退出时清理。短路径测试保持显式、短输入，不再依赖主机 `%TEMP%`。
+- CLI E2E 暴露 Win32 沙箱拒绝 `os.link` 的另一项环境差异（独立探针 `WinError 5`）。对象存储为 Windows 提供同目录原子 `os.rename` 无覆盖 fallback；同内容并发目标仍验 hash，损坏目标不覆盖。
+- 最新定向测试 **119 passed / 42.68 秒**；运行日志复核默认临时根 153 字符被自动切换为仓内 53 字符短根且退出清理成功。官方 JSON 空内容 CLI 摘要、发布、读取和跨 run 缓存复用在存储修复后 **1 passed / 40.48 秒**；受影响 Ruff checks 通过。两次首轮失败分别以默认 pytest 路径预算修复和 Windows rename fallback 修复；本轮没有重跑全量 suite。
+- 总控 CWP PWF 和 module-boundaries PWF 已补记该结果。M3 仍 IN_PROGRESS：其他 CWP 差异及 RF、StockWiki、Dashboard、RFAudit 当前源码路径尚未完成逐项审查；FF/ RF/ Dashboard 的 canonical PWF 局部状态差异仍由各仓 owner 更新。父业务摘要任务继续按其 PWF 排队，不因这组测试自动恢复公司循环。
+
+## 2026-11-15 — 九模块 PWF 对齐与边界复核启动时快照（历史）
+
+- M2 接收版本后的真实代码变化集中在 CWP narrative/document-understanding（21 个产品文件，5 个相关提交）、RF 的公开 FF client/三表源适配（3 个产品文件）、StockWiki 的 company assessment/quick-scan owner store（3 个产品文件），以及 Dashboard forecast scope/synthetic adapter。RFAudit 的变化在计划脚本；FF/ET/SID 当前比较差异以文档/测试为主。尚无新越界缺陷被确认。
+- 已用 TDD 确认 CWP 边界扫描器遗漏动态字符串执行：新反例首次失败，补入 eval/exec/compile 检测后专用反例通过。完整边界合同结果 63 passed / 1 failed，暴露 `automation/narrative_batch.py:17` 引用未公开的 `narrative_subject.NARRATIVE_SUBJECT_REF_SCHEMA`；当前转入归属调查和最小公开契约修复，不调整断言。第一次整文件测试调用未返回可见 exit code，第二次以完整进程结果复跑确认上述结论。
+- 根因已定位：Automation 只需构造由 `narrative_subject` owner 管理的紧凑投影 ref，却直接依赖其内部 schema 常量；公开的 `NarrativeSubjectRef` 值类型被正确用于其他路径。计划由类型 owner 增加窄工厂，并让 automation 改用工厂；不扩大常量导出。
+- CodeGraph 首轮结构结果显示：RF 的 filing client 有明确 `resolve_filing` public subprocess entry；Dashboard 的 CWP adapter 经 owner CLI/source adapter；StockWiki quick-scan store 自己持有本仓 SQLite。由于索引覆盖/解析有限，接下来检查具体 import/adapter 与现有边界测试，不把一次搜索无结果判为安全证明。
+- 本轮有两次只读脚本/补丁上下文错误，均没有误写代码或其他仓；已改用正确的 Git exit-code 检查和实际文件标题完成操作。`git diff --check` 通过（仅 Git 行尾转换提示）。
+- 只读核对了九个主模块的 canonical PWF 和 Git 主线状态。发现 CWP 总计划、Dashboard START_HERE、RF 状态快照之间存在日期/交付收据差异；FF F-08 与“无未结产品 lane”措辞相冲；StockWiki C06 仍缺完整组合验收。细节已写入 `findings.md`。
+- 模块边界 M2/E01-E09 的登记验收保持 CLOSED；此结论限于其明确范围，不把 owner 业务任务或一般摘要质量等同于解耦失败，也不把静态测试当运行时封锁。
+- 本次没有改动其他仓或运行产品测试。下一步：完成 owner PWF 对齐（先处理非活动仓；StockWiki/IQS 只依据 owner 允许的状态入口处理），随后按新的 M3 当前 HEAD 架构审查计划建立可复现的边界反例测试；任何产品代码修复先在其所属模块测试中 RED，再由该模块 owner 修改。
+- M2 后源码路径差异的初筛已记录；一次 PowerShell 只读脚本曾因错误的括号表达式失败，未写文件，改为单独检查 `$LASTEXITCODE` 后完成。一次补丁因使用了错误的标题上下文未匹配 module-boundaries 文件；现已按实测标题单独插入 M3 说明。`git diff --check` 无空白错误，仅出现 Git 的 LF→CRLF 提示；未改变仓库行尾策略。
+- 代码图谱核对已发现索引覆盖不完整（ET 无索引，RF 个别模块符号未检出）；不据此下“无跨层调用”的结论。已定位到最新版本中 CWP、RF、StockWiki、Dashboard 的有限源码差异，下一步按具体文件和公开入口检查依赖方向，并为确证的绕行路径先写负例。
+
 ## 2026-11-15 — 一周界线临时目录清理（部分完成）
 
 - 按用户要求以 **2026-11-08 00:00** 为保留分界，并逐目录检查后代文件/目录的最新修改时间；不能只看父目录时间。11-08 之后有活动的目录保留。

@@ -19,7 +19,14 @@ _LAYERS = {
     "automation", "document_model", "document_normalization", "document_understanding",
     "narrative_subject", "parser_adapters", "resource_budget", "source_catalog", "source_contract",
 }
-_BUILTINS = {"__import__", "getattr", "setattr", "delattr", "vars"}
+_BUILTINS = {
+    "__import__", "getattr", "setattr", "delattr", "vars", "globals", "locals",
+    "eval", "exec", "compile",
+}
+_DYNAMIC_CODE_EXECUTION = {"builtins.eval", "builtins.exec", "builtins.compile"}
+_DYNAMIC_CODE_NAMES = {"eval", "exec", "compile"}
+_BUILTIN_NAMESPACE_NAMES = {"builtins", "builtins.__dict__"}
+_MODULE_GLOBALS = "builtins.current_namespace"
 _ATTRIBUTE_LOOKUPS = {"builtins.getattr", "builtins.setattr", "builtins.delattr"}
 _PUBLIC_METADATA = {"__all__", "__name__", "__qualname__", "__doc__", "__module__", "__version__"}
 _SOURCE_INSPECTION = {
@@ -140,7 +147,11 @@ class _Scanner(ast.NodeVisitor):
         self.edges: set[tuple[str, str, tuple[str, ...], int]] = set()
         self.violations: list[str] = []
         self.bindings: dict[str, object] = {name: _Reference(f"builtins.{name}") for name in _BUILTINS}
-        self.bindings.update(__package__=self.package, __name__=name)
+        self.bindings.update(
+            __builtins__=_Reference("builtins", True),
+            __package__=self.package,
+            __name__=name,
+        )
         self.imported_modules: set[str] = set()
         self.class_fields: dict[str, _Reference] | None = None
         self.receiver: tuple[str, dict[str, _Reference]] | None = None
@@ -291,6 +302,13 @@ class _Scanner(ast.NodeVisitor):
         if isinstance(node, ast.Subscript):
             if (name := self._loaded_module(node)) is not None:
                 return _Reference(name, True)
+            base = self._reference(node.value)
+            key = self._literal(node.slice)
+            if base is not None and isinstance(key, str):
+                if base.name in _BUILTIN_NAMESPACE_NAMES and key in _DYNAMIC_CODE_NAMES:
+                    return _Reference(f"builtins.{key}")
+                if base.name == _MODULE_GLOBALS and key == "__builtins__":
+                    return _Reference("builtins", True)
             sequence, index = self._literal(node.value), self._literal(node.slice)
             if isinstance(sequence, tuple) and type(index) is int and -len(sequence) <= index < len(sequence):
                 member = sequence[index]
@@ -301,6 +319,22 @@ class _Scanner(ast.NodeVisitor):
             callee = self._reference(node.func)
             if callee is not None and (callee.provider_value or self._is_foreign_class(callee)):
                 return _Reference(callee.name, provider_value=True)
+            if callee is not None and callee.name == "builtins.vars":
+                target = self._reference(self._argument(node, 0, "object"))
+                if target is None:
+                    return _Reference(_MODULE_GLOBALS)
+                if target is not None and target.name == "builtins":
+                    return _Reference("builtins.__dict__")
+            if callee is not None and callee.name in {"builtins.globals", "builtins.locals"}:
+                return _Reference(_MODULE_GLOBALS)
+            if callee is not None and callee.name.endswith(".get"):
+                namespace = callee.name.removesuffix(".get")
+                key = self._literal(self._argument(node, 0, "key"))
+                if namespace in {*_BUILTIN_NAMESPACE_NAMES, _MODULE_GLOBALS}:
+                    if namespace == _MODULE_GLOBALS and key == "__builtins__":
+                        return _Reference("builtins", True)
+                    if key in _DYNAMIC_CODE_NAMES:
+                        return _Reference(f"builtins.{key}")
             if callee is not None and callee.name == "builtins.getattr":
                 base = self._reference(self._argument(node, 0, "object"))
                 name = self._literal(self._argument(node, 1, "name"))
@@ -380,6 +414,8 @@ class _Scanner(ast.NodeVisitor):
             self._check_module_objects(node, (*node.args, *(kw.value for kw in node.keywords)))
         if callee is None:
             return
+        if callee.name in _DYNAMIC_CODE_EXECUTION:
+            self._report(node, f"dynamic code execution via {callee.name} is forbidden by module boundary contracts")
         target = self._reference(self._argument(node, 0, "object"))
         if target is None:
             return

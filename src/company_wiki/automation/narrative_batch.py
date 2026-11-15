@@ -14,7 +14,7 @@ from typing import Any
 
 from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
 from company_wiki.file_usage import database_file_sizes
-from company_wiki.narrative_subject import NARRATIVE_SUBJECT_REF_SCHEMA, NarrativeSubjectRef
+from company_wiki.narrative_subject import NarrativeSubjectRef
 from company_wiki.resource_budget import document_work_budget_factory
 
 from company_wiki.source_catalog import SourceCatalog
@@ -114,8 +114,8 @@ def _current_sources(
             if projection_loader is None:
                 raise ValueError("PROJECTION_SOURCE_PORT_UNAVAILABLE")
             assert item.projection_id is not None and item.projection_sha256 is not None
-            reference = NarrativeSubjectRef(
-                NARRATIVE_SUBJECT_REF_SCHEMA, item.kind, item.projection_id, item.projection_sha256,
+            reference = NarrativeSubjectRef.for_official_json_projection(
+                item_key=item.projection_id, subject_sha256=item.projection_sha256,
             )
             view = projection_loader(reference)
             _check_preparation_deadline(deadline)

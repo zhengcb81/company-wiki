@@ -55,6 +55,30 @@ def test_boundary_scanner_catches_private_access_patterns():
         assert violations, f"boundary scanner missed private access in: {source}"
 
 
+def test_boundary_scanner_rejects_dynamic_code_execution():
+    source_path = SOURCE_ROOT / "automation" / "_boundary_probe.py"
+    cases = (
+        "eval(\"__import__('company_wiki.source_catalog._impl')\")",
+        "exec(\"from company_wiki.source_catalog import api; api._read_source()\")",
+        "compile('from company_wiki.source_catalog import api', '<probe>', 'exec')",
+        "import builtins\nbuiltins.eval(\"__import__('company_wiki.source_catalog._impl')\")",
+        "from builtins import exec as run_code\nrun_code(\"pass\")",
+        "__builtins__['exec'](\"pass\")",
+        "import builtins\nbuiltins.__dict__['eval'](\"pass\")",
+        "import builtins as runtime\nnamespace = runtime.__dict__\nnamespace['compile']('pass', '<probe>', 'exec')",
+        "import builtins\nvars(builtins)['exec'](\"pass\")",
+        "__builtins__.get('exec')(\"pass\")",
+        "import builtins\nbuiltins.__dict__.get('compile')('pass', '<probe>', 'exec')",
+        "globals()['__builtins__']['eval'](\"pass\")",
+        "vars()['__builtins__']['eval'](\"pass\")",
+        "globals().get('__builtins__').get('exec')(\"pass\")",
+        "locals().get('__builtins__')['compile']('pass', '<probe>', 'exec')",
+    )
+    for source in cases:
+        violations = _scan(source_path, ast.parse(source)).violations
+        assert any("dynamic code execution" in item for item in violations), violations
+
+
 def test_boundary_scanner_rejects_undeclared_module_attributes():
     source_path = SOURCE_ROOT / "automation" / "_boundary_probe.py"
     cases = (

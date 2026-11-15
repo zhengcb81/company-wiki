@@ -49,8 +49,10 @@ recommendation; see this card's decision.md / oracle.md §0+§2):
     no-reroute controls are superseded — written reason wherever recorded: "owner §16 E-1
     chose 150/60; this control's unrouted expectation is superseded").
 
-Fallback: a fresh empty ``%TEMP%/cw-pytest-basetemp/<UTCstamp>-<8hex>`` per relocating
-session (never an attempt/evidence root, never reused), removed in ``pytest_unconfigure``.
+Fallback: a fresh empty ``<shortest-owned-root>/.cwpt-<12hex>`` per relocating session
+(never an attempt/evidence root, never reused), removed in ``pytest_unconfigure``. The
+default pytest path is measured too; it is not assumed to be short because it comes from
+``%TEMP%``.
 No pytest.ini option is loosened; sessions with a within-budget basetemp are untouched
 apart from one decision record.
 
@@ -63,18 +65,19 @@ overrides the fallback parent (tests only).
 
 from __future__ import annotations
 
+import getpass
 import json
 import os
 import shutil
 import tempfile
 import uuid
-from datetime import datetime, timezone
 from pathlib import Path
 
 WIN32_PATH_LIMIT = 210
 GENERATION_RESERVE = 150  # owner §16 E-1; logon node's measured suffix (child: 125)
 BASETEMP_MAX_CHARS = WIN32_PATH_LIMIT - GENERATION_RESERVE  # 60; relocate iff len > 60
-FALLBACK_ROOT_NAME = "cw-pytest-basetemp"
+FALLBACK_DIR_PREFIX = ".cwpt-"
+FALLBACK_DIR_RANDOM_HEX = 12
 DISABLE_ENV = "CW_SHORT_BASETEMP_DISABLE"
 FALLBACK_ROOT_ENV = "CW_BASETEMP_FALLBACK_ROOT"
 DECISION_FILE_ENV = "CW_BASETEMP_DECISION_FILE"
@@ -90,6 +93,17 @@ def resolve_basetemp(cwd, requested) -> Path:
     return Path(cwd) / requested_path
 
 
+def default_basetemp_probe(temp_root=None, user=None) -> Path:
+    """Conservative upper-bound path for pytest's automatically chosen basetemp.
+
+    pytest creates ``<temp>/pytest-of-<user>/pytest-<n>``.  Use a wide numeric
+    suffix so the decision is independent of prior pytest sessions.
+    """
+    root = Path(temp_root) if temp_root is not None else Path(tempfile.gettempdir())
+    username = user if user is not None else getpass.getuser()
+    return root / f"pytest-of-{username}" / "pytest-999999999999"
+
+
 def needs_short_path_fallback(
     cwd,
     requested,
@@ -97,19 +111,14 @@ def needs_short_path_fallback(
     win32_path_limit: int = WIN32_PATH_LIMIT,
     generation_reserve: int = GENERATION_RESERVE,
 ) -> bool:
-    return len(str(resolve_basetemp(cwd, requested))) + generation_reserve > win32_path_limit
+    effective = default_basetemp_probe() if requested is None else resolve_basetemp(cwd, requested)
+    return len(str(effective)) + generation_reserve > win32_path_limit
 
 
 def decide(cwd, requested, *, disabled: bool = False) -> dict:
     """Frozen judgement for one session; pure apart from reading the filesystem length."""
-    if requested is None:
-        return {
-            "event": "decision",
-            "relocated": False,
-            "reason": "no-explicit-basetemp",
-            "detail": "pytest derives its default basetemp from %TEMP%; short by construction",
-        }
-    effective = resolve_basetemp(cwd, requested)
+    defaulted = requested is None
+    effective = default_basetemp_probe() if defaulted else resolve_basetemp(cwd, requested)
     info = {
         "event": "decision",
         "requested_basetemp": str(effective),
@@ -123,15 +132,24 @@ def decide(cwd, requested, *, disabled: bool = False) -> dict:
         info.update(relocated=False, reason="disabled-by-env")
         return info
     if needs_short_path_fallback(cwd, requested):
-        info.update(relocated=True, reason="resolved-basetemp-exceeds-budget")
+        reason = "default-basetemp-exceeds-budget" if defaulted else "resolved-basetemp-exceeds-budget"
+        info.update(relocated=True, reason=reason)
     else:
-        info.update(relocated=False, reason="within-budget")
+        reason = "default-basetemp-within-budget" if defaulted else "within-budget"
+        info.update(relocated=False, reason=reason)
     return info
 
 
 def fallback_root() -> Path:
     override = os.environ.get(FALLBACK_ROOT_ENV)
-    root = Path(override) if override else Path(tempfile.gettempdir()) / FALLBACK_ROOT_NAME
+    if override:
+        root = Path(override)
+    else:
+        # The host may inject a deeply nested %TEMP% (Codex's sandbox does this).
+        # Put session scratch under whichever owned root is shorter; this checkout
+        # root is writable and avoids repeating the same long-path failure.
+        candidates = (Path(__file__).resolve().parent, Path(tempfile.gettempdir()))
+        root = min(candidates, key=lambda path: len(str(path)))
     root.mkdir(parents=True, exist_ok=True)
     return root
 
@@ -139,8 +157,7 @@ def fallback_root() -> Path:
 def make_fallback_dir(root=None) -> Path:
     """Fresh, empty, session-unique directory; caller owns its removal."""
     base = Path(root) if root is not None else fallback_root()
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
-    candidate = base / f"{stamp}-{uuid.uuid4().hex[:8]}"
+    candidate = base / f"{FALLBACK_DIR_PREFIX}{uuid.uuid4().hex[:FALLBACK_DIR_RANDOM_HEX]}"
     candidate.mkdir()
     return candidate
 

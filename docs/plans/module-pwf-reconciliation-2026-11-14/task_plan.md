@@ -1,5 +1,9 @@
 # 模块 PWF、工区与主线整合计划
 
+> **2026-11-15 状态校正：** 阶段 1/2 的“完成”仅指最初七条 owner lane 的交付，不代表九个范围模块的 PWF、在途任务和工作区已全部收口。总续办仍为 **IN_PROGRESS**：StockWiki/IQS 仍有 owner 任务；Dashboard 自身 START_HERE 未记最终 11-15 receipt carrier；RF 自身 PWF 尚未吸收最新 T3 工作区结果；FF 的 F-08 仍是待修产品问题。阶段 3 也未达成“物理上每模块只留一个目录”。本条以 2026-11-15 只读实查为准，详见本计划下方新增状态表与 `progress.md`；旧阶段快照保留为历史。
+
+> **2026-11-15 后续：** CWP 的 M3 当前 HEAD 边界审查已完成首个 TDD 修复切片（动态执行扫描、NarrativeSubjectRef schema owner、pytest 默认长临时路径、Windows 硬链接拒绝的发布兼容）。119 项定向合同/集成测试与 1 项 CLI E2E 通过。该结果不代替其余仓源码差异审查，也不改变 StockWiki/IQS 的 owner 隔离；FF、RF、Dashboard 的 PWF 差异由各仓 owner 在其 canonical PWF 中收口，ROOT 只维护此总控快照。详见 `module-boundaries-2026-11-11/task_plan.md` 与本计划 `progress.md`。
+
 ## 目标
 
 把各模块的 PWF 状态、仓库/工区数量、未提交改动、未并线分支及后续主线任务整理成一套可交接的总计划和互不重叠的 owner 施工卡。每个模块只保留一个明确的 Projects 主仓目录；额外临时目录经证据确认后由该模块 owner 清理。模块 owner 自己负责本仓代码修改、提交、并线、推送和本仓 PWF。ROOT/company-wiki 只负责 CWP 本仓工作、总计划、接口协调和只读组合验收。
@@ -21,7 +25,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 > 2026-11-14 后续单卡检查进一步明确了七张卡的唯一 PWF 入口、handoff/review 文件落点和最终提交 HEAD 独审顺序。独立 reviewer 首轮发现四处入口歧义，修正后复核最新版七卡为 PASS；ROOT 另确认所列 PWF 入口存在。文档 `git diff --check` 通过。
 
 ### 阶段 2 — 清理并统一各模块 PWF
-**状态：完成（七条 owner lane 均已交付；ROOT 修正并登记最终收据）**
+**状态：原七条 owner lane 的交付已完成；九模块总体状态统一仍进行中**
 
 - [x] 每模块确定 canonical PWF 入口；历史/子计划保留并回链。
 - [x] 统一核对状态词和状态冲突；handoff、review、Git 以各 owner 的最终提交证据为准。

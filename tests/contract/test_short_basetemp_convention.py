@@ -142,8 +142,66 @@ def test_decide_reports_lengths_and_reasons(tmp_path):
     assert disabled["relocated"] is False
     assert disabled["reason"] == "disabled-by-env"
     default = conftest.decide(str(tmp_path), None)
-    assert default["relocated"] is False
-    assert default["reason"] == "no-explicit-basetemp"
+    assert default["requested_basetemp_len"] > 0
+
+
+def test_default_pytest_temp_is_measured_and_relocated_when_too_deep(monkeypatch, tmp_path):
+    deep_temp = Path(_FX) / ("t" * 100)
+    monkeypatch.setattr(conftest.tempfile, "gettempdir", lambda: str(deep_temp))
+    decision = conftest.decide(str(tmp_path), None)
+    assert decision["relocated"] is True
+    assert decision["reason"] == "default-basetemp-exceeds-budget"
+    assert decision["requested_basetemp_len"] > conftest.BASETEMP_MAX_CHARS
+
+
+def test_default_pytest_temp_can_remain_when_its_full_path_fits(monkeypatch, tmp_path):
+    monkeypatch.setattr(conftest.tempfile, "gettempdir", lambda: _FX + "tmp")
+    decision = conftest.decide(str(tmp_path), None)
+    assert decision["relocated"] is False
+    assert decision["reason"] == "default-basetemp-within-budget"
+    assert decision["requested_basetemp_len"] <= conftest.BASETEMP_MAX_CHARS
+
+
+def test_fallback_parent_chooses_shorter_owned_root(monkeypatch, tmp_path):
+    checkout = tmp_path / "repo"
+    deep_temp = Path(_FX) / ("t" * 100)
+    monkeypatch.setattr(conftest, "__file__", str(checkout / "conftest.py"))
+    monkeypatch.setattr(conftest.tempfile, "gettempdir", lambda: str(deep_temp))
+    parent = conftest.fallback_root()
+    try:
+        assert parent == checkout
+        child = conftest.make_fallback_dir(root=parent)
+        assert child.is_dir() and not any(child.iterdir())
+    finally:
+        for child in parent.iterdir():
+            child.rmdir()
+        parent.rmdir()
+
+
+def test_configure_hook_relocates_long_default_temp_and_cleans_short_fallback(
+    monkeypatch,
+):
+    deep_temp = Path(_FX) / ("t" * 100)
+    monkeypatch.setattr(conftest.tempfile, "gettempdir", lambda: str(deep_temp))
+    monkeypatch.delenv(conftest.FALLBACK_ROOT_ENV, raising=False)
+    monkeypatch.delenv(conftest.DISABLE_ENV, raising=False)
+
+    class _Option:
+        basetemp = None
+
+    class _Config:
+        option = _Option()
+
+    config = _Config()
+    conftest.pytest_configure(config)
+    relocated = Path(config.option.basetemp)
+    try:
+        assert relocated.is_dir()
+        assert relocated.parent == Path(conftest.__file__).resolve().parent
+        assert len(str(relocated)) <= conftest.BASETEMP_MAX_CHARS
+    finally:
+        conftest.pytest_unconfigure(config)
+    assert not relocated.exists()
 
 
 def test_fallback_dirs_are_fresh_and_unique(tmp_path):
@@ -195,12 +253,8 @@ def test_configure_hook_rewrites_option_and_cleans_up(tmp_path, monkeypatch):
 
 
 def test_configure_hook_within_budget_never_reroutes(tmp_path, monkeypatch):
-    # A short absolute basetemp must pass through untouched at ANY placement.
-    # On this box the name resolves to 58 chars (%TEMP% 31 + "\" + 26) ⇒ 58 ≤ 60 (margin 2
-    # under owner §16 E-1's threshold). The assert below states the invariant relative to the
-    # frozen threshold rather than hardcoding this box's %TEMP% depth; the exact 60/61
-    # boundary is pinned in the criterion table above.
-    requested = Path(tempfile.gettempdir()) / "cw-i14f-unit-within-budget"
+    # A synthetic short absolute basetemp stays independent of the host's temp path.
+    requested = Path(_FX) / "cw-i14f-unit-within-budget"
     assert len(str(requested)) <= conftest.BASETEMP_MAX_CHARS
     monkeypatch.delenv(conftest.DISABLE_ENV, raising=False)
 

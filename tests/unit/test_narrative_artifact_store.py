@@ -174,6 +174,36 @@ def test_local_object_store_returns_logical_key_and_checks_existing_bytes(
     assert physical_object.read_bytes() == b"tampered"
 
 
+@pytest.mark.parametrize("racing_bytes", [None, b"same bytes", b"tampered"])
+def test_object_store_uses_windows_no_replace_rename_when_hardlinks_are_denied(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, racing_bytes: bytes | None,
+) -> None:
+    data = b"same bytes"
+    objects = LocalNarrativeObjectStore(tmp_path / "objects")
+    digest = hashlib.sha256(data).hexdigest()
+    target = tmp_path / "objects" / "objects" / "sha256" / digest[:2] / f"{digest}.json"
+
+    def deny_hardlink(_source, destination):
+        if racing_bytes is not None:
+            Path(destination).write_bytes(racing_bytes)
+        raise PermissionError("hard links unavailable")
+
+    monkeypatch.setattr(
+        "company_wiki.source_catalog.narrative_artifact_store.os.link", deny_hardlink
+    )
+
+    if racing_bytes == b"tampered":
+        with pytest.raises(NarrativeObjectIntegrityError):
+            objects.put_with_usage(data)
+        assert target.read_bytes() == b"tampered"
+    else:
+        result = objects.put_with_usage(data)
+        assert result.object_key == f"objects/sha256/{digest[:2]}/{digest}.json"
+        assert result.created_bytes == (len(data) if racing_bytes is None else 0)
+        assert objects.read(result.object_key, expected_sha256=digest, expected_size=len(data)) == data
+    assert list(target.parent.glob(".narrative-*.partial")) == []
+
+
 def test_prepare_is_idempotent_after_object_write_and_catalog_failure(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

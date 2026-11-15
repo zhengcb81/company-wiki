@@ -4,7 +4,9 @@ import json
 
 import pytest
 
-from company_wiki.narrative_subject import NarrativeSubject, SubjectBindingError, publication_target
+from company_wiki.narrative_subject import (
+    NarrativeSubject, NarrativeSubjectRef, SubjectBindingError, publication_target,
+)
 from company_wiki.source_catalog.official_json_projection import build_source_projection
 from company_wiki.source_catalog.official_json_structure import parse_json_structure
 
@@ -32,6 +34,16 @@ def test_raw_identity_and_legacy_target_are_unchanged():
     assert subject.anchor_ref == ref
     assert publication_target(subject) == (
         "urn:company-wiki:narrative-bundle:" + ref["document_id"] + ":" + ref["content_sha256"])
+
+
+def test_official_json_ref_factory_keeps_schema_version_with_its_owner():
+    source = projection()
+    reference = NarrativeSubjectRef.for_official_json_projection(
+        item_key=source.projection_id,
+        subject_sha256=source.projection_sha256,
+    )
+    expected = NarrativeSubjectRef.from_subject(NarrativeSubject.from_projection(source))
+    assert reference == expected
 
 
 def test_same_parent_two_issuers_are_distinct_compact_subjects():

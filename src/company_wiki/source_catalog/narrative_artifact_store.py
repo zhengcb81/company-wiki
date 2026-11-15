@@ -239,6 +239,18 @@ class LocalNarrativeObjectStore:
             except FileExistsError:
                 created = False
                 self.read(key, expected_sha256=digest, expected_size=len(data))
+            except PermissionError:
+                if os.name != "nt":
+                    raise
+                # Windows can deny hardlinks while allowing same-directory
+                # writes. os.rename is atomic and refuses an existing target
+                # on Windows, preserving create-if-absent and concurrent-writer
+                # semantics without weakening content-address verification.
+                try:
+                    os.rename(temporary_name, target)
+                except FileExistsError:
+                    created = False
+                    self.read(key, expected_sha256=digest, expected_size=len(data))
             return NarrativeObjectPut(key, len(data) if created else 0)
         finally:
             if temporary_name is not None:

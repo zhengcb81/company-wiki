@@ -2,6 +2,16 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
+## 2026-11-15 最新状态
+
+九模块 PWF 与 Projects 收尾的唯一总控入口是[模块计划与工区对账计划](../module-pwf-reconciliation-2026-11-14/task_plan.md)，逐仓快照和待 owner 修订项见其 `findings.md`。本轮已把 CWP 总控记录更新到实际复核结果；模块 owner 仍需在自己的 canonical PWF 中补齐当前状态：FF 的 F-08 仍开放、RF 的 11-15 T3 运行变化尚待吸收、Dashboard 的 START_HERE 尚未记录最终 receipt carrier。StockWiki 与 IQS 仍由各自活动 owner 负责，总控不覆盖其代码/PWF或工作区。
+
+- **解耦范围：** M2/E01–E09 继续对当时冻结接口版本有效；不能据此声称所有当前代码已彻底解耦。M3 当前 HEAD 漂移审查正在进行，已完成 CWP 首组 TDD 修复：动态 `eval/exec/compile` 及 `__builtins__`/`builtins.__dict__`、`vars()`、`globals()`/`locals()`、`.get()`字典查找绕行纳入边界合同；automation 不再读 `NarrativeSubjectRef` 私有 schema 常量；pytest 自动临时目录从实测 153 字符改为独立 53 字符并自动清理；对象存储在 Windows 沙箱拒绝硬链接时使用无覆盖原子重命名。
+- **本组验收：** 短路径、对象存储、Subject owner、层边界和官方 JSON batch preparation 最新定向合同共 **119 passed / 42.68 秒**；真实 CLI 官方 JSON 摘要/发布/读取/缓存复用在对象存储修复后 **1 passed / 40.48 秒**；Ruff 通过。M3 其他 CWP/跨仓源码差异仍待审查，不重跑整套历史矩阵。
+- **原业务主线：** 正式摘要仍是 `BUSINESS_SUMMARY_CHANGES_REQUIRED`；下一业务任务仍是修正冗余片段和主体/计划归属、按冻结样本验真，然后再复验恢复及 RF 实际采用。固定公司循环保持暂停；本轮架构处理不自动恢复它。
+
+当前实施入口为[模块边界 M3 计划](../module-boundaries-2026-11-11/task_plan.md)和本总控 PWF；本文件下方 11-14 及更早章节是历史收据，按日期读取，不覆盖本节。
+
 ## 2026-11-14 当前状态
 
 模块 PWF 与 Projects 目录清理正在按 owner 分仓整理，唯一总控入口为[模块计划与工区对账计划](../module-pwf-reconciliation-2026-11-14/task_plan.md)。本项只整理状态、交接和清理责任，不改变当前业务主线步骤，也不自动恢复暂停的目标。各仓 owner 在自己的仓内更新 PWF、清理已核实的临时工区并完成本仓并线；StockWiki 及 IQS 等在途项目先保持原样。

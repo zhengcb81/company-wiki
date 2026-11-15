@@ -1,5 +1,32 @@
 # 调查发现
 
+## 2026-11-15 — 九模块 canonical PWF 与主线状态复核
+
+- M3 的 TDD 反例先确认 `eval/exec/compile` 字符串执行能绕过当前 AST 边界扫描（RED）；扫描器增加对直接调用及 builtins 别名的识别后，专用反例通过。全量 `tests/contract/test_layer_public_boundaries.py` 为 63 passed / 1 failed，唯一失败是当前新增的 `automation/narrative_batch.py:17` 导入 `narrative_subject.NARRATIVE_SUBJECT_REF_SCHEMA`，但该常量未列入 provider 的公开 API。此为真实跨层合同违例；不允许通过扩大 `__all__` 或忽略该模块来消绿，先核实该数据的 owner 和适当接口位置。
+- 符号使用核对确认：`NarrativeSubjectRef` 是声明的公开值类型，多个层通过该类型传递投影身份；`NARRATIVE_SUBJECT_REF_SCHEMA` 只在 `narrative_subject.py` 内定义/构造，唯独 `automation/narrative_batch.py` 直接读取常量并手动构造类型。正确修复方向是由该值类型提供“从 official-json 投影键构造 ref”的公开工厂，让 schema 版本仍由数据 owner 管理，不把常量扩成公共依赖。
+- CWP 现有 `LayerBoundaries` 扫描器已覆盖常见直接/别名/相对/动态模块加载、`getattr`、私有成员、未声明导出、跨层方向和外部实例成员访问，并有针对性反例；这比仅检查下划线导入扎实。当前发现候选缺口：静态扫描不能执行字符串构造，`eval/exec/compile` 可能绕过语法树引用跟踪。尚未确认生产路径实际使用这些调用；M3 先加最小负例验证是否可绕过，再决定是否禁止动态执行。
+- 本次读取各仓 canonical 入口及本地 Git 元数据；没有 fetch、运行测试或写入其他仓。历史子计划仍按历史记录处理，不把其旧日期单独当作错误。
+- CWP `master@0ff37fde5` 与本地 `origin/master` 相等；FF `main@1dfd818`、RF `main@f2215959`、ET `main@50d9190`、SID `v2-clean-rewrite@26704a0`、IQS `master@a334293` 均与本地 upstream 相等。RFAudit 无 remote；StockWiki 无 upstream，不能据此声称已推送。
+- 需 owner 对齐的 canonical PWF：Dashboard START_HERE 仍记录 11-14 的 `2e8320e` 发布观察，CWP 总计划已记录 11-15 最终 carrier `3f83bb5`；RF PWF 快照停在 11-14，现场有两项 T3 运行结果 tracked dirty；FF PWF 的 F-08 仍未修，且“无未结产品 lane”与等待 Dashboard F-08 交付的下一步表述不一致。
+- StockWiki 最近 owner 卡仍为 Phase 4 review remediation in progress，C06 缺完整可采信的组合测试；IQS 最新进度为 11-15，模块工程验收声明 I1-I7 已通过，旧段落中 OPEN 状态须按日期/标题识别为历史。两仓仍有 owner 交接/其他计划余项，ROOT 不替其改写 active work。
+- ET canonical PWF 记录收据冲突退出码缺陷为唯一下一步；SID PWF 有唯一下一步；RFAudit 业务循环明确暂停等待 ROOT 调度。这些是开放任务，不等于模块边界验收失败。
+- 模块边界计划的 M2 范围是当前登记的生产/公开运行接口；E01-E09 标记通过，排除研究质量和一般文档召回。IQS 边界测试说明覆盖常见静态显式调用，不是运行时沙箱。因此“已验收的接口集合通过”成立，“所有代码路径绝不可能跨层”没有此类证明。
+- 总控计划需要把阶段 2 七仓收尾与九仓续办拆清，并保留阶段 3 未完成标记；本次核对不把 untracked 状态行直接认作垃圾。
+- M2 接收 ref 均仍是当前主线祖先，但其后存在源码变化：CWP、RF、StockWiki、Dashboard、RFAudit 分别有 25、7、4、5、1 个代码形态路径变化。产品代码初筛定位到 CWP narrative/document-understanding、RF filing/report adapter、StockWiki public assessments/quick-scan、Dashboard forecast/synthetic adapter；RFAudit 的差异位于计划执行脚本。该计数是定位工作，不是缺陷判断；M3 需逐项审阅后才决定是否补测试或修复。
+- CodeGraph 可用于 CWP/FF/RF/SID/StockWiki/IQS/Dashboard/RFAudit；ET 未初始化。IQS 本地 CodeGraph 库约 3.7 GB，不为本轮审查重建索引；ET 使用只读 AST/import fallback。一次 CodeGraph 符号搜索未发现 RF 的 `FinancialStatementSource`，说明后续以已确认文件路径做针对性只读检查，不能把索引无结果视为无依赖。
+- M2 接收 ref 均仍是当前主线祖先，但其后存在源码变化：CWP、RF、StockWiki、Dashboard、RFAudit 分别有 25、7、4、5、1 个代码形态路径变化。初步路径筛选显示变化集中在 CWP narrative/document-understanding、RF filing/report adapter、StockWiki public assessments/quick-scan、Dashboard forecast/synthetic adapter；这只是范围定位，不是缺陷判断。M3 逐个审阅相关路径后才能判断是否要补测试或修复。
+- CodeGraph 可用于 CWP/FF/RF/SID/StockWiki/IQS/Dashboard/RFAudit；ET 当前未初始化。IQS 本地 CodeGraph 库约 3.7 GB，不重建或扩张索引；ET 使用只读 AST/import fallback，避免审查本身继续膨胀磁盘。
+
+## 2026-11-15 — M3 CWP 当前版本 TDD 结果
+
+- 首轮 `eval` / `exec` / `compile` 反例证明静态 AST 边界扫描可被字符串动态执行绕过；新增直接调用、`builtins` 属性及别名导入覆盖后，合同扫描会拒绝这条绕行。生产源码没有发现上述调用。
+- 对修复后的扫描器继续做反例检查，又确认 `__builtins__['exec']`、`builtins.__dict__['eval']`、`vars()`/`vars(builtins)`、`globals()`/`locals()` 与 `.get()` 字典查找及别名调用可绕过；这些反例先 RED，扫描器将识别出的内建命名空间及字典查找归一到相同动态执行标识后转 GREEN。静态扫描的边界和未声称运行时隔离均在 M3 计划中说明。
+- 边界合同随后找出一个真实的私有常量引用：`automation/narrative_batch.py` 从 `narrative_subject` 读取未公开的 schema 常量。修复保留常量私有，由公开值类型 `NarrativeSubjectRef.for_official_json_projection()` 持有 wire version；新工厂测试先 RED 后 GREEN。
+- pytest 默认临时路径的 153 字符来自沙箱注入 `%TEMP%`；旧 resolver 只检查显式 `--basetemp`，故默认路径完全跳过长度判断。新的默认路径估算按完整路径做 150 字符工作余量校验，超长时在 checkout/temp 中选更短的根，实际从 153 字符转至仓内 53 字符并成功自动清理。短路径合同同时验证不超预算时保留原路径。
+- CLI E2E 首轮又显示 `NARRATIVE_PROJECTION_PermissionError`。独立 OS 探针确认沙箱拒绝同目录 `os.link`（WinError 5），而同目录 `os.rename` 可用。对象存储只在 Windows 硬链接被拒时回退到无覆盖原子重命名；新文件写入、同内容并发占位、损坏目标不覆盖三种合同都通过。
+- 最新最终定向集合为 **119 passed / 42.68s**；日志复核默认 pytest 路径从 153 字符自动降至 53 字符并在退出时删除。空内容官方 JSON CLI E2E（摘要、发布、读取、跨 run 复用）在对象存储修复后 **1 passed / 40.48s**；受影响 Ruff 通过。首轮两次失败分别由默认 pytest 路径预算遗漏和沙箱硬链接能力不足导致，修复后重新运行通过。
+- 仍需完成 M3 其他差异文件审查与各 owner PWF 同步；这些 CWP 用例不证明 RF/StockWiki/Dashboard/RFAudit 当前源码都通过边界合同，也不改变父业务摘要任务的 OPEN 状态。
+
 ## 2026-11-15 — 临时目录按后代活动时间分类
 
 - 顶层目录 `LastWriteTime` 不能代表整棵目录树的最近活动：两个根目录时间看似很旧的 IQS 测试副本，其 `attestations/` 子目录仍在 11-13 更新；按用户的一周规则必须整目录保留。复核时应取目录、后代文件和子目录时间最大值。
