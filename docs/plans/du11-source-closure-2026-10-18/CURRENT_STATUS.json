@@ -1253,6 +1253,7 @@
     "plan": "../module-boundaries-2026-11-11/README.md",
     "task_plan": "../module-boundaries-2026-11-11/task_plan.md",
     "matrix": "../module-boundaries-2026-11-11/boundary_matrix.json",
+    "ff_cwp_bounded_offline_review": "../module-boundaries-2026-11-11/review/ff-cwp-bounded-offline-20261116.md",
     "status": "M2_CLOSED_M3_IN_PROGRESS",
     "lanes": [
       "MB-CWP",

@@ -155,7 +155,8 @@ if a.action == "discover":
               "acquisition_usage": usage("0.0003"), **extra(),
               "candidates": [{"candidate_id": "one", "provider": "loopback",
                               "provider_document_id": "accession-one", "market": market,
-                              "entity": request["entity"], "title": "Fixture Annual Report",
+                              "entity": request["entity"], "security_id": request["security_id"],
+                              "title": "Fixture Annual Report",
                               "source_url": "https://fixture.invalid/report.txt",
                               "document_kind": "annual_report", "form_type": "10-K",
                               "filing_date": "2026-03-20", "fiscal_year": request.get("fiscal_year"),
@@ -288,7 +289,9 @@ def _cli(root: Path, mode: str, port: int, *, market: str = "US", patched: bool 
     args = [*entry, "--config", str(catalog),
             "ensure", "--entity", "Fixture", "--market", market, "--security-id", "FIXURE" if market == "US" else "FIXCN",
             "--document-kind", "annual_report", "--fiscal-year", "2025", "--as-of-date", "2026-10-10",
-            "--max-download-bytes", str(max_bytes), "--max-download-seconds", "3", "--max-download-cost-usd", "1",
+            # The adapter deadline exercises stalled subprocesses. The shared
+            # fixture budget also has to allow discovery and import work.
+            "--max-download-bytes", str(max_bytes), "--max-download-seconds", "15", "--max-download-cost-usd", "1",
             "--acquisition-config", str(acquisition), "--allow-download", "--source-ref-v2"]
     env = dict(os.environ)
     env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2] / "src")

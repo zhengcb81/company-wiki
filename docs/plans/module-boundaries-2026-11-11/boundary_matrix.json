@@ -537,7 +537,7 @@
         "consumer": "CWP source_catalog",
         "protocol": "in-process public Python functions plus owner-supplied WorkBudget",
         "proof": "document_understanding package exports and test_layer_public_boundaries contract; baseline focused suite 119 passed and final scanner contract follow-up 86 passed locally and independently at b1e948276. CodeGraph did not resolve callers for these symbols; its cross-file call edges are best-effort, not proof that no consumer exists",
-        "remaining": "The earlier 24-path CWP source delta was reviewed at b1e948276. The 12-path incremental delta through CWP1/FF1 was reconciled against their owner handoffs and focused tests; the CWP identity false-positive in that delta was separately fixed and independently reviewed at 5ae4a60b6. No additional unclassified cross-module path remains within the finite M3 slice. Exact current source evidence is in review/cwp1-legal-form-identity-20261115.md and ../ff1-catalog-repair-20261115/progress.md; full GitHub Actions CI for the latest CWP head is not verified."
+        "remaining": "The earlier CWP deltas through CWP1/FF1 and the identity fix were reviewed on their recorded refs. The current browse and parser-owner source evidence and its exact CI are recorded in cwp_browse_boundary below. No additional unclassified cross-module path remains within the observed CWP source slice."
       }
     ],
     "canonical_pwf_followups": {
@@ -577,6 +577,16 @@
       "disposition": "preserve by existing inventory; no bulk add or delete"
     },
     "next_action": "CWP browse/request/catalog/PDF boundary refactor is published at 12e65fe7d with passing GitHub CI for the same commit. FF owner supplies a current-main T3 replay of the four download cases with finite acquisition_limits. RF owner records 20261115T084227Z/not-ok and reconciles local commits and assurance changes. Bind current owner refs to the remaining evidence and close M3. Resume parent P1 afterward; the fixed company loop remains paused.",
+    "ff_cwp_bounded_offline": {
+      "status": "PASSED",
+      "report": "review/ff-cwp-bounded-offline-20261116.md",
+      "ff_ref": "dd7162172718e8276a809e9c205e3c80da06141a",
+      "cwp_base": "ac7b54d8900952f4df669896836d06b2694a54a9",
+      "combined_passed": 24,
+      "final_ff_composition_passed": 3,
+      "independent_review": "PASS",
+      "scope": "Controlled provider, FF 1.1 downloads and FF 2.0 reuse/read in CN/HK/US; FF live T3 and RF weekly reconciliation remain with their owners."
+    },
     "cwp_browse_boundary": {
       "status": "PUBLISHED",
       "commit": "12e65fe7d6f954ef93bed16a257e5821eb02e5c8",

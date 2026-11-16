@@ -13,6 +13,12 @@
 
 **下一步。** 按 [逐仓交接](owner_plans.md) 接收 FF 当前主线的有限预算 T3 和 RF 周跑对账，随后以现行版本收口 M3。各 owner 独立推进未完成的业务与协议演进。
 
+### M3 有限下载组合补证
+
+**CWP 离线验收通过。** 已补合成 provider 的证券身份与夹具限时，保留拒绝反例。隔离临时库复验 FF `dd716217` 的三市场有限下载、原文复用和损坏件拒读，通过 24 项组合及最终 3 项定向复验，临时目录清理和独审通过。见 [有限下载离线验收](review/ff-cwp-bounded-offline-20261116.md)。
+
+M3 的正式 T3 由 FF owner 在本仓当前主线复跑，RF 周跑 `20261115T084227Z / not-ok` 由 RF owner 对齐。FF 1.1 已能携带三项限额，按现行接口复跑即可。
+
 ## M3 — 当前 HEAD 边界漂移审查（2026-11-15 新增）
 
 **状态：IN_PROGRESS — CWP shared-read-budget 根修复已发布且 exact-head CI 通过；M3 仍等 FF/RF owner 收口。** CWP 当前 `master@56d10f269b7c67845c7af66b33083f62d46cde4d` 已推送；GitHub Actions run `43765642890` / job `132969996667` 在精确 SHA 上通过（Python 3.12，7m13s），62 项定向契约与独审也通过。M2 baseline 以来当前树有 39 个 `src/` 路径变化。此前另一项目 StockWiki handoff 引用的本地 `7fd7f248d` 是当时 512MB 候选，现由统一请求 `ReadBudget` 根修复替代；外仓未修改。FF 四个 T3 下载请求仍待有限 `acquisition_limits` 和当前主线复跑；RF 周跑仍需 canonical PWF 收口及九提交/三项 assurance 对账。StockWiki root plan/handoff 已完成只读对账。外仓变化由另一项目推进，ROOT 不回退、清理或覆盖。M2/E01-E09 仍仅对原绑定版本有效；M3 不覆盖旧收据。

@@ -27,7 +27,7 @@
 
 ## 需要组合的交接
 
-- **FF → CWP，有限下载。** 生产请求和真实下载测试共用 FF 的有界请求合同。每个下载意图一次传完整的字节、时间和费用预算，复用请求走原有复用合同。CWP 持有下载、入库和验真。FF 先用替身断言请求和参数，再用临时来源库复跑实际 T3。RF 引用实际版本及结果，仍由 RF 持有日/周运行状态。
+- **FF → CWP，有限下载。** 1.1 入口的三项限额、导入、复用及原件拒读已通过 [CWP 离线组合](review/ff-cwp-bounded-offline-20261116.md)。每个下载意图一次传完整的字节、时间和费用预算，复用请求走原有复用合同。CWP 持有下载、入库和验真。FF owner 在本仓用临时来源库复跑实际 T3，记录真实 provider 行为。RF 引用实际版本及结果，仍由 RF 持有日/周运行状态。
 - **StockWiki → IQS → Dashboard，跨尺度展示。** StockWiki 保存真实分组及来源归属。IQS owner 的交接确认 36 题含两套评分尺度，单一 `scale_version` 无法表达；Dashboard 的 `_map_company_result()` 当前会将缺单值尺度的结果降为 `lineage_unknown`。接续各 owner 已有计划，用同一份 producer 样例对照单尺度和混尺度。投影展示真实的尺度列表和组别证据，各组的比较继续按组处理。需要改公开协议时由 IQS 和 Dashboard owner 在现有协议分支协调兼容，业务完成度从实际题目发表状态读取。
 - **CWP 原件、ET 及 SID。** ET 和 SID 只在各自 provider 构成原始数据和有界结果，CWP 通过 adapter 验真、登记和复用。ET 收据写入冲突由其 CLI 合同覆盖；SID 最新期次由其 provider 测试覆盖，组合只验证公开结果和已用预算。
 
