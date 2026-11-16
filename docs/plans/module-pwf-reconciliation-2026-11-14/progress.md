@@ -197,3 +197,7 @@
 - 外仓只读快照：RF `main@f2215959` 的 11-15 weekly run `20261115T084227Z` 为 T3 `not-ok`，四个 FF 下载 E2E 在 `company-wiki ensure` 阶段退出 1，`downloads=0`；可见日志没有 ensure 内部原因。triplet 为 FF `1dfd818…` / RF `f2215959…` / CWP `0e741063…`，所以这不是本次 CWP 测试扫描器提交的回归证据。RF owner 需把两条 tracked weekly 文件与失败原因写入 RF canonical PWF。
 - StockWiki `master@0450506`，未配置 remote；根 `task_plan.md`、`progress.md` 修改时间仍为 11-08 09:28/10:46。当前只读 `git status` 返回 “must be run in a work tree”，不能据此断言干净；StockWiki owner 在对齐根 PWF 时应核对 Git 工作树并记录。ROOT 未修改 StockWiki/RF。
 - 后续仍是有限 M3 收口：待两位 owner 补齐 canonical PWF/工作树事实，ROOT 再绑定九仓精确 refs 与已通过证据。CWP 当前模块边界静态合同有明确范围，不声称是运行时隔离；完整远端 CI 也仍需精确 SHA 结果。
+
+## 2026-11-16 各模块 PWF 入口对账
+
+九个主模块与四条独立依赖链已按当前 Git 引用和本仓 canonical PWF 对账，详见 [逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。StockWiki `b4ca912` 已更新三组子计划，IQS/Dashboard 的进行中投影事项由各自 owner 接续。此阶段整理的是计划、接口与交接。临时目录处置保留既有清理收据和当前归属。

@@ -1,5 +1,7 @@
 # 模块 PWF、工区与主线整合计划
 
+> **2026-11-16 当前对账。** [各模块计划入口与交接](../module-boundaries-2026-11-11/owner_plans.md)统一索引九个主模块和四条独立消费/依赖链。本仓边界实施见 [M3](../module-boundaries-2026-11-11/task_plan.md)。StockWiki `b4ca912` 对齐三组子计划，研究交接为 `54f72c9`。IQS 已在本仓接续逐模块检查及投影测试。Dashboard 本地有两项新文档提交和一份活动交接修改。下列 11-14、11-15 记录保留为当时的收尾证据。
+
 > **2026-11-15 状态校正：** 阶段 1/2 的“完成”仅指最初七条 owner lane 的交付，不代表九个范围模块、owner PWF 和在途任务全部收口。总续办仍为 **IN_PROGRESS**：StockWiki/IQS 仍有 owner 任务；StockWiki 当前 `master@0450506` 的根 `task_plan.md` 尚未跟上 11-14 并线内容；RF 的最新 weekly manifest/alert 为 `not-ok`，需 owner 记录运行结果（本轮 `git status` 未能确认两项文件的 tracked dirty 状态）；FF 的 F-08 仍开放。Dashboard 的 START_HERE 与 receipt carrier 已更新至 `3f83bb5`，不得再写成待补。阶段 3 也未达成“物理上每模块只留一个目录”。本条以 11-15 第二轮只读复核为准，见 `findings.md`、`progress.md` 和 module-boundaries M3 表；更早快照保留为历史。
 
 > **2026-11-15 M3 当前状态（16:23 UTC）：** CWP 最终扫描器/合同测试提交 `b1e948276860ee0386e47253ce32479a4fa41919` 已推送，并经 fresh `ls-remote` 核实远端一致。静态表达式与推导式作用域修复的最终合同文件 86 passed，独立 reviewer 复跑 PASS，Ruff 通过；完整 GitHub Actions CI 未核验。此前 `3bc4ed86a` 的 119 项定向合同与真实 CLI E2E 仍是其自身范围的有效证据。九模块差异分类及 I10/I11/I12 保持；M3 仍开放，等待 RF owner 记录 11-15 T3 `not-ok` 运行、StockWiki owner 对齐根 canonical PWF 并核对其当前工作树，然后 ROOT 才能绑定最终精确 refs。RF 日志看到四个 FF 下载 E2E 在 CWP ensure 阶段失败，但没有内部根因，triplet 的 CWP SHA 是 `0e741063…`，不能归因于本次纯测试扫描器变化。StockWiki 当前 `master@0450506` 无 remote、根计划仍为 11-08 快照；只读 `git status` 命令报 “must be run in a work tree”，不把 cleanliness 写成已确认。Dashboard 收据 `3f83bb5` 已收口，不再列为待办；ROOT 未改 RF/StockWiki。详见 module-boundaries task plan/matrix 与本计划 `findings.md`、`progress.md`。
@@ -29,7 +31,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 > 2026-11-14 后续单卡检查进一步明确了七张卡的唯一 PWF 入口、handoff/review 文件落点和最终提交 HEAD 独审顺序。独立 reviewer 首轮发现四处入口歧义，修正后复核最新版七卡为 PASS；ROOT 另确认所列 PWF 入口存在。文档 `git diff --check` 通过。
 
 ### 阶段 2 — 清理并统一各模块 PWF
-**状态：原七条 owner lane 的交付已完成；九模块总体状态统一仍进行中**
+**状态：九模块计划入口与本轮可见状态已对账。** FF 的 T3、RF 周跑与本地提交的归位、Dashboard 和 IQS 的活动交付由各自计划继续维护。
 
 - [x] 每模块确定 canonical PWF 入口；历史/子计划保留并回链。
 - [x] 统一核对状态词和状态冲突；handoff、review、Git 以各 owner 的最终提交证据为准。
@@ -89,6 +91,10 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 
 ## 下一步
 
+按 [各模块计划入口与交接](../module-boundaries-2026-11-11/owner_plans.md) 接收各仓的后续状态。ROOT 在 [M3](../module-boundaries-2026-11-11/task_plan.md) 收口 CWP 边界和受影响的跨仓组合。已确认活动工区、本地提交与原件按其 owner 处置。
+
+## 2026-11-15 清理工作（历史）
+
 当前收尾按用户 2026-11-14 指令逐模块核对 PWF、未提交内容、分支并线和临时目录；2026-11-15 又按用户指示以 2026-11-08 为一周界线清理旧目录。7 个提交已进入各自主线的旧施工 worktree 已移除；28 个无 Git 的旧测试/临时目录先归档并逐 SHA 校验，再删除原目录，归档保留在 Projects 根，净释放约 453 MB。因活动施工、未并线代码、原件或独有证据仍有其它目录保留，故不能宣称 Projects 只剩模块主仓。细节见 `progress.md`。StockWiki/IQS 活动施工保持只读；RF weekly T3 `not-ok` 运行记录保留。父业务 goal 继续 paused。
 
 ## 续办：全模块工作区与主线收尾（2026-11-14）
@@ -101,7 +107,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 - StockWiki、IQS 的最新 PWF 与当前工区记录显示另有在途施工（StockWiki 多个注册 worktree；IQS 11-14 的多条 agent 线仍有 OPEN 项）。这次先只读盘点，不清理或合并在途 worktree；待其 owner 最终交接后纳入同一收尾，避免覆盖并行改动。
 - 不因文件未跟踪、分支未祖先或目录名含 `tmp` 就直接删除/合并。credential、原件、运行/业务数据、有效 PWF/审查证据和在途 worktree 必须先归因；仅清理确认无文件或已证明可重建且无活动引用的临时产物。每个仓的最终交付做一次集中相关测试和独立复核。
 
-### CWP 当前现场
+### CWP 施工现场（11-14 至 11-15 历史）
 
 - 本计划启动续办时，`master` 基线 HEAD 为 `66c97834`（当时相对缓存 `origin/master` ahead 6）；后续七卡收尾序列到 `f58011ddd`。M3 新代码 `3bc4ed86a` 与专属 PWF 回执 `f175e6c37` 已正常推送；随后总控 PWF 对齐更新也正常推送。每次推送后均核对本地 refs 相等。独立 `ls-remote` 曾因本机 `getaddrinfo() thread failed to start` 失败，不能把它称为 fresh-read；远端证据来自 push 响应与推送后本地 refs。11-14 Mimosa L3 拦截保留为历史状态；11-15 本次 push 未被该门拦截。
 - 初次 closeout 清理快照中 tracked 源码无已知产品代码差异；当时 tracked 改动仅为本计划的 `dispatch.md`、`task_plan.md`、`progress.md`、`findings.md` 与移除过时的一次性 `.tmp-build-registry.py`。提交四份新增收据后，2026-11-15 复测 `git ls-files -o --exclude-standard` 共 23,334 项：`.mimosa/` 10,010、`.planning/` 13,180、`docs/` 143、`.workbuddy-ai/` 1。按用途逐组分类，不能整体 `git clean`。后续五份 PWF/交接状态更新的提交和推送见本计划 `progress.md` 最新记录。
@@ -112,7 +118,7 @@ StockWiki 当前由另一个项目施工：该仓源代码、计划、Git 状态
 - `.planning` 二次只读审计未找到兼具明确可重建、无 PWF/审查引用且释放量值得清理的候选；保留所有未归因历史/运行记录。`.planning/r1-w09-root-integration-20261023/v3/outputs`（4 JSON/3,495,374 B）有 PWF 明确保留要求；`.planning/du8-ff41-root-20261016/**/artifacts`（205 文件/约 462,525 B）仍需精确收据映射；`shared-reading-production` 与当前缓存/DB/WAL 是活跃生产恢复状态。
 - CWP 对 StockWiki/IQS 的接线与临时目录写入保持隔离；若 PWF 显示活跃 owner 任务，不代替其 owner 改写。
 
-### 续办 owner lane 最新结果
+### 续办 owner lane 交付时点（11-15 历史）
 
 | 模块 | 当前主线与远端 | 本轮清理/并线结果 | 剩余事项 |
 |---|---|---|---|

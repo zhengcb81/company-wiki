@@ -26,6 +26,14 @@
 
 Dashboard 的公司评估页面仍通过 IQS 的 `iqs.dashboard.company_assessment/1` 投影；不把 I10 的 StockWiki V2 owner 输入协议误记为 Dashboard 的直接消费协议。Python package/facade 与静态边界合同定义的是模块协作边界，不声称能把同一解释器中的私有符号变成运行时访问控制。
 
+## CWP 浏览内部职责
+
+| 责任 | 协作者收到的值 | 固定行为 |
+|---|---|---|
+| 目录和来源 owner | `CatalogBrowseVersion`、路径无关的实体 ID 和已验证的事实引用 | 版本范围在 SQL 返回前应用。保留完整历史序号、主版本优先和同一 `SourceRef`；原件字节仍由 `SourceVersionReader` 验真 |
+| 浏览与版本投影 | `CatalogBrowseVersion` 转为既有 browse/version 响应、token 和 revision member | 普通、canonical 和历史定位复用同一版本标识。canonical 的证明、预算与诊断状态属于一次浏览；入口接收装配时指定的证明 reader |
+| PDF parser adapter | 已验真的字节 → 完整物理页序列，保留空页 | 页数或总字符超限时返回具名解析错误。CN 证明层决定单份 PDF 的上限和适用范围，解析器负责原生读取 |
+
 ## 各lane对接口的处理
 
 - 工区使用现有版本和本仓已有contract fixture。缺少对应fixture时由该lane在自己的tests补齐。先跑自己consumer/producer的合同，正常用例已绿则保留；ROOT在M2汇总真实producer/consumer组合。

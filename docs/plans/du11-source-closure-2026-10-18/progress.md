@@ -588,3 +588,9 @@ Latest owner observations: FF local main@dd716217 equals its local tracking ref 
 - Exact GitHub Actions run `43765642890` / job `132969996667` passed on that SHA (Python 3.12, 7m13s); one warning and one runner migration notice, no test failures. The 62-test affected contract suite and hash-bound independent review were green before publication.
 - StockWiki's new handoff records the former CWP local `7fd7f248d` 512MB candidate. Treat that as the state observed during the parallel run; the current CWP mainline replaces it with one browse-scoped request `ReadBudget` and keeps per-file SHA/size/PDF limits. ROOT did not modify the StockWiki record or any RF/FF files.
 - At 21:55 UTC fresh live reads still show FF `main@dd716217` clean; RF `main@be0caa4` nine commits ahead of live `origin/main@f2215959` with three tracked assurance changes and weekly run `20261115T084227Z` not-ok/unreconciled; StockWiki `master@54f72c9` has no remote and is tracked-clean. Finite M3 remains open only for FF/RF owner evidence.
+
+## 2026-11-16 按 owner 整理 PWF，发布 CWP 浏览边界
+
+CWP 源码与测试 `12e65fe7d` 已推送。浏览请求状态隔离、目录负责版本投影、parser adapter 负责完整 PDF 分页读取。定向回归、独立核查、精确版本与 CI 见 [浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)。
+
+[逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)已记录当前模块各自计划、运行状态和公开接口的后续工作。M3 待 FF 和 RF 的实际 owner 证据，父计划随后继续 P1。

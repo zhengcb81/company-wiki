@@ -1,5 +1,7 @@
 # Owner 卡派发总表
 
+当前逐仓计划和主线观察见 [各模块计划入口与交接](../module-boundaries-2026-11-11/owner_plans.md)。以下保留已派卡片和各交付时点的记录。
+
 ## 2026-11-15 M3 CWP 当前发布状态
 
 CWP M3 首组边界修复代码 commit `3bc4ed86a` 已推送，M3 PWF 回执 carrier `f175e6c37` 随后推送；该次 push 后本地 `master` 与 `origin/master` 相等。其后总控 PWF 状态对齐也已作为 docs-only 变更正常推送。定向边界/对象存储/短路径/JSON preparation 合计 119 项通过，受影响 Ruff 与 pre-commit mypy 通过，push fast smoke 18 项通过。11-15 第二轮已完成九模块当前可识别产品差异归类，并确认 I10/I11 owner 互操作证据；M3 仍未关闭，待 StockWiki 根 PWF 与 RF weekly 运行记录由 owner 对齐及最终精确 refs 报告。不要把本次发布写成全项目解耦验收。

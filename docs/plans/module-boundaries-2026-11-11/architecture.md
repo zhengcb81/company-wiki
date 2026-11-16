@@ -1,6 +1,6 @@
 # 架构边界与收口范围
 
-本文件给出目标责任，不把目前代码全部描述为已符合。当前观察见 review/；逐文件清单见 source_inventory.json。CWP 实际 479 个 Python 源文件，CodeGraph 当前索引为 461 个，索引缺项已用磁盘清单补足；关键链深读与全包结构盘点不等于逐行功能审计。
+本文件给出目标责任。本轮实现与各 owner 的现行状态见 [计划](task_plan.md) 和 [逐仓交接](owner_plans.md)。M0 的逐文件清单保留在 source_inventory.json，当时 CWP 盘点 479 个 Python 源文件，CodeGraph 索引覆盖其中 461 个。
 
 ## 当前范围与层次
 
@@ -22,6 +22,8 @@
 | Dashboard | 页面状态、跨模块组合适配；自有watchlist/job视图 | 各模块公开API/CLI、显式code root与state root | 读取owner私有数据库或内部Python模块 |
 
 ET保留已验证的跨仓CLI，卡内修进程/纯协议依赖；StockWiki、AUDIT优先补组合覆盖，未确认缺陷时不强制修改。Dashboard有既有owner/WIP，保持单作者接续。Sina属于CWP采集/数据owner，PDF/OCR只属于解析owner。Dayu为只读外部依赖；IQS独立owner，采用其公开协议且本轮不改；IR/MeetingConverter/QA-RAG等不在当前活动链时列为外部消费者，不加入无证据重构。
+
+浏览子链已经把请求状态和存储状态分开。公开 CLI 装配目录对象和证明端口。目录读模型返回路径无关的 DTO，机读 token 和响应项由共享投影产生。浏览一次只使用该次请求的证明和预算。CN 原文页由 PDF 适配器读取，发行人证明业务只消费提取出的文本与原文身份。型值、预算和例外的组合测试见 [浏览边界验收](review/cwp-browse-owners-20261116.md)。
 
 ## 目标依赖关系
 

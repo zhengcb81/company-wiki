@@ -99,3 +99,9 @@ The same test run also exposed a pytest resource-lifecycle defect: an existing t
 ## 2026-11-15 21:54 UTC — shared-budget root fix published and exact CI passed
 
 Commit `56d10f269b7c67845c7af66b33083f62d46cde4d` replaces the unpublished 512MB candidate with a browse-scoped SourceCatalog `ReadBudget` passed through the source reader to the existing verifier. The affected contracts passed 62/62, independent review passed, push smoke passed 23/23, and exact GitHub Actions run `43765642890` / job `132969996667` passed on the same SHA in 7m13s (Python 3.12). StockWiki's parallel handoff recorded the earlier `7fd7f248d` state; it remains a historical run observation, and ROOT did not modify the StockWiki repository. M3 is still open for FF T3 and RF PWF/ref owner evidence only.
+
+## 2026-11-16 浏览边界与各 owner 的待验收接口
+
+交错调用复现了浏览实例的请求状态串扰。目录枚举还先读完整历史，再在 Python 侧报告有界前缀；CN 发行人证明另外直接打开 PDF SDK。整改把一次调用的证明、观察和预算绑定在同一私有请求实例，目录返回路径无关的有界投影，解析适配器读取完整物理页。响应字段和版本 token 经独立对照保持兼容。Python 3.14 的 JSON 解码不复现 3.13 的固定深度异常，回归改用实际异常注入验证信封。详情见 [浏览边界验收](review/cwp-browse-owners-20261116.md)。
+
+其它模块分别按 [逐仓计划入口](owner_plans.md) 对账。StockWiki `b4ca912` 更新子计划。IQS 与 Dashboard 的混尺度兼容是实际公开接口的后续问题，历史 StockWiki V2 的 wire 和 IQS 样例仍保有各自的验收证据。FF T3 限额和 RF 周跑归位继续是 M3 待收件。

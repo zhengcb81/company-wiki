@@ -169,3 +169,9 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - GitHub Actions run `43765642890`, job `132969996667`, passed on the exact `56d10f2` SHA with Python 3.12 in **7m13s**. It reported one warning and one runner migration notice, with no failures. This supersedes older #537 evidence for `1391ae81`; intervening product commit `707efe814` is included in the exact-tested ancestry.
 - Source/test contents match the four hashes in [the independent review](review/cwp-cn-issuer-read-budget-20261115.md). The former local `7fd7f248d` 512MB candidate was replaced by the shared request-budget fix. StockWiki's parallel handoff references that earlier state as historical; no StockWiki, FF or RF files were changed.
 - Fresh live refs at 21:55 UTC: FF local/live `main@dd716217` still matches and is tracked-clean; RF local `main@be0caa4` remains nine commits ahead of live `origin/main@f2215959`, with three tracked assurance files modified; StockWiki remains local-only `master@54f72c9`, tracked-clean, with root PWF at `5f79e7b`. M3 remains open only for FF's finite-limit/current-main T3 receipt and RF's canonical weekly-run/ref reconciliation. External untracked files remain unenumerated.
+
+## 2026-11-16 分仓 PWF 对账与 CWP 发布
+
+- 九个主模块和四条独立依赖链的入口、版本和各自下一步已核对，记录在 [owner_plans.md](owner_plans.md)。StockWiki 新子计划和 IQS/Dashboard 的活动改动已按 owner 记录。
+- CWP 三项根因先复现再修复。普通浏览最终 21 项、边界和日历等 39 项通过；canonical、原件与 parser 的其它通过项及故障复现按原测试批次见 [验收](review/cwp-browse-owners-20261116.md)。独立审查 PASS。各批次临时根已恢复。
+- `12e65fe7d` 已推送到 `origin/master` 并读回服务端 SHA。推送快测 23 项通过（33.68 秒）。同一 SHA 的 GitHub CI Run 43962477938 成功，Python 3.12 作业 4 分 42 秒。M3 的开放项为 FF 当前主线 T3 和 RF 周跑/版本对账。 [GitHub Actions](https://github.com/zhengcb81/company-wiki/actions/runs/43962477938)

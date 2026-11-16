@@ -1,6 +1,10 @@
 # 模块化与解耦：一次有明确出口的收口
 
+**2026-11-16。** [各模块计划入口与交接](owner_plans.md)按本轮 Git 与 PWF 对账更新。CWP 的浏览请求、目录投影和 PDF 解析边界已通过独审和定向测试并发布为 `12e65fe7d`。M3 仍待 FF 有限下载 T3 和 RF 周跑对账，见 [task_plan.md](task_plan.md)。下方 11-15 记录按其当时版本阅读。
+
 **M2 已完成。** 五条模块施工卡已受测并入各自主线并推送。StockWiki 公开来源读取已进入本地 `master`，Dashboard 的公开浏览、原件流和摘要读取已推送 `main`。D4 跨仓回放 30 项全过，E01–E09 均有组合证据。 [组合记录](review/root_composition_20261114.md) · [矩阵](boundary_matrix.json)
+
+## 2026-11-15 快照
 
 **M3 当前 HEAD 漂移审查仍 OPEN。** M2/E01–E09 仍仅对冻结版本有效。CWP 最终修复 `master@56d10f269b7c67845c7af66b33083f62d46cde4d` 已推送且 exact-head GitHub CI run `43765642890` / job `132969996667` 通过（Python 3.12，7m13s）；此前远端 `3e7b723` 的产品代码 `707efe814` 已包含在该最终提交父链。共享请求预算修复的 62 项受影响测试和独立审查通过。另一项目的 StockWiki handoff 曾基于本地 `7fd7f248d` 512MB候选做记录；这属于历史状态，现由 `56d10f2` 的统一预算根因修复替代，外仓未改。FF `main@dd716217` 与 fresh live `origin/main` 一致且 tracked-clean；S3 BYD E2E 仍不替代四个 RF 周测 T3 下载请求的有限限额及当前主线复跑。RF `main@be0caa4` 比 fresh live `origin/main@f2215959` 超前 9 个提交，三项 tracked assurance 文件有修改；周跑 `20261115T084227Z` 仍 not-ok，未见于 canonical PWF。StockWiki `master@54f72c9` 无 remote、tracked-clean；其根 `task_plan.md` / `progress.md` 已于 `5f79e7b` 更新、最新 handoff 为 `54f72c9`，ROOT 已只读核对。用户说明外仓变化由另一项目推进；ROOT 只对账、不回退、清理或覆盖。外仓 untracked 未枚举。M3 现只待 FF/RF owner 证据，之后再绑定精确 refs 出有限报告；I10/I11 已有互操作证据，不重跑。实施细则见 [M3 task plan](task_plan.md#M3--当前-HEAD-边界漂移审查2026-11-15-新增)。
 
@@ -10,7 +14,9 @@ M2 之后的工作区续核不改变上述结论，也不允许恢复旧的跨�
 
 当前优先事项是收齐 FF 当前主线 T3 与 RF canonical PWF owner 证据，关闭有限 M3。CWP shared-read-budget 根修复已发布并在精确 SHA `56d10f2` 取得 GitHub CI 通过；StockWiki 最新 root PWF 已更新并由 ROOT 只读核对，不需要重复施工。R4 和 T4/SEM、真实来源卡的付费恢复、两条 RF 实际采用已有验收；业务摘要 P1 仍待续办，按顺序在 M3 关闭后回到[父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。固定公司循环继续暂停。
 
-先读 [task_plan.md](task_plan.md)，再读 [architecture.md](architecture.md)、[interfaces.md](interfaces.md)、[acceptance.md](acceptance.md)。并行安排和卡片见 [dispatch.md](dispatch.md)，交接格式见 [handoff_contract.md](handoff_contract.md)，机器对照见 [boundary_matrix.json](boundary_matrix.json)。
+## 当前文档入口
+
+先读 [task_plan.md](task_plan.md) 和 [各模块计划入口](owner_plans.md)，再读 [architecture.md](architecture.md)、[interfaces.md](interfaces.md)、[acceptance.md](acceptance.md)。并行安排见 [dispatch.md](dispatch.md)，交接格式见 [handoff_contract.md](handoff_contract.md)，机器对照见 [boundary_matrix.json](boundary_matrix.json)。
 
 ## 为什么一直没有收尾
 

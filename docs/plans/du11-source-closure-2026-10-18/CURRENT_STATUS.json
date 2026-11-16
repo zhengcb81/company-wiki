@@ -92,8 +92,8 @@
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
   "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_FF_RF_OWNER_EVIDENCE_OPEN; BUSINESS_SUMMARY_CHANGES_REQUIRED",
-  "as_of_date": "2026-11-15",
-  "observed_at_utc": "2026-11-15T21:55:46Z",
+  "as_of_date": "2026-11-16",
+  "observed_at_utc": "2026-11-16T21:42:00Z",
   "recent_cwp_gate_checkpoint": {
     "date_utc": "2026-11-15",
     "scope": "root PWF documentation-only push classification and pytest-owned Windows scratch cleanup",
@@ -157,7 +157,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "CWP shared-read-budget root fix is published at 56d10f269b7c67845c7af66b33083f62d46cde4d and passed exact-head GitHub Actions run 43765642890/job 132969996667 (Python 3.12, 7m13s). M3 remains open only for FF owner evidence: finite acquisition_limits on the four failed weekly T3 downloads plus a passing current-main rerun, and RF canonical PWF reconciliation of 20261115T084227Z/not-ok with its nine local commits and three tracked assurance edits. StockWiki root PWF is current at task_plan/progress commit 5f79e7b and handoff 54f72c9; its historical handoff reference to CWP 7fd7f248d (512MB candidate) is superseded by 56d10f2; ROOT makes no external edits. After finite M3 closes, resume P1 business-summary work; fixed company loop remains paused.",
+  "next_action": "CWP browse/request/catalog/PDF boundary refactor is published at 12e65fe7d with passing GitHub CI for the same commit. FF owner supplies a current-main T3 replay of the four download cases with finite acquisition_limits. RF owner records 20261115T084227Z/not-ok and reconciles local commits and assurance changes. Bind current owner refs to the remaining evidence and close M3. Resume parent P1 afterward; the fixed company loop remains paused.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1298,7 +1298,7 @@
     "current_composition": "../module-boundaries-2026-11-11/review/root_composition_20261114.md"
   },
   "module_pwf_and_projects_cleanup": {
-    "as_of_date": "2026-11-15",
+    "as_of_date": "2026-11-16",
     "status": "IN_PROGRESS_OWNER_SPECIFIC_PLAN_RECONCILIATION",
     "canonical_plan": "../module-pwf-reconciliation-2026-11-14/task_plan.md",
     "projects_matching_directories_observed": 63,
@@ -1312,14 +1312,15 @@
     "owner_pwf_followups": {
       "filing-fetch": "F-08 remains open; its current PWF wording must agree on this next step.",
       "revenue-forecast": "Absorb the 2026-11-15 T3 run artifacts into its canonical PWF.",
-      "investment_dashboard": "COMPLETE at main@3f83bb5; START_HERE and final receipt carrier align. Do not reopen.",
-      "StockWiki": "Active owner work remains; ROOT keeps its PWF and worktree read-only.",
-      "invest-quick-scan": "Active manifest-delivery owner branch codex/iqs-manifest-delivery-01@ecb4a5d contains only PWF/status/evidence changes relative to master@3d9243c; ROOT keeps its PWF and worktree read-only."
-    }
+      "investment_dashboard": "11-15 closeout receipt at origin/main@3f83bb5 is preserved. Local main@93b63570d2cef6bda205085fe175c06b356ef723 and active FF handoff are separate owner progress.",
+      "StockWiki": "Local master@b4ca912ecd7d26ee2a3670d9dc972542ba70046f; three owner subplans updated. The research handoff remains 54f72c9.",
+      "invest-quick-scan": "Active manifest-delivery owner branch @8d0888a2ffa711844934969457fe21eca8bdd1c8 has a plan and two projection tests in progress. Track mixed-scale projection and IQS_22 there."
+    },
+    "owner_pwf_index": "../module-boundaries-2026-11-11/owner_plans.md"
   },
   "module_boundary_current_state": {
-    "as_of": "2026-11-15",
-    "observed_at_utc": "2026-11-15T21:55:46Z",
+    "as_of": "2026-11-16",
+    "observed_at_utc": "2026-11-16T21:42:00Z",
     "owner_cards": {
       "company-wiki": "integrated_and_pushed",
       "filing-fetch": "integrated_and_pushed",
@@ -1331,7 +1332,7 @@
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
     "remaining": [
-      "M3 final receipt: CWP shared-read-budget root fix is published and exact-head CI passed at 56d10f2 (run 43765642890/job 132969996667). FF adds finite acquisition_limits to the four failing T3 download requests and reruns T3 on current main. RF records the failing 20261115T084227Z run in canonical PWF and reconciles local main@be0caa4 (9 commits ahead of live origin/main@f2215959, with three tracked assurance files modified). StockWiki root task_plan/progress are current at 5f79e7b and latest handoff is 54f72c9; its historical reference to CWP 7fd7f248d is superseded by the shared-budget fix. Bind fresh refs after FF/RF owner evidence, then close the finite report."
+      "CWP browse/request/catalog/PDF boundary refactor is published at 12e65fe7d with passing GitHub CI for the same commit. FF owner supplies a current-main T3 replay of the four download cases with finite acquisition_limits. RF owner records 20261115T084227Z/not-ok and reconciles local commits and assurance changes. Bind current owner refs to the remaining evidence and close M3. Resume parent P1 afterward; the fixed company loop remains paused."
     ],
     "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_REVIEWED_FOR_CWP_AND_EXTERNAL_OWNER_RECONCILIATION_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
@@ -1401,39 +1402,35 @@
           "untracked_status": "not_enumerated"
         },
         "StockWiki": {
-          "observed_ref": "local master@54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e",
+          "observed_ref": "local master@b4ca912ecd7d26ee2a3670d9dc972542ba70046f",
           "remote": "none-configured",
           "source_paths_since_m2": 13,
           "test_paths_since_m2": 19,
-          "task_plan_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
-          "progress_findings_last_commit": "progress.md last commit 5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z); findings.md last observed commit 0450506fc94adbfecd33001c244221a42ba0a00d",
-          "git_status": "Tracked-clean; no remote configured; untracked files not enumerated. Root task_plan/progress were refreshed at 5f79e7b and latest research handoff summary at 54f72c9; current-plan alignment observed by ROOT.",
+          "git_status": "Tracked-clean; no remote configured; current changes update three owner PWF subplans.",
           "untracked_status": "not_enumerated",
-          "canonical_pwf_action": "Latest root task_plan/progress commit 5f79e7b includes the 11-15 modularity/WIP inventory; ROOT read-only checked it and the latest SW-RESEARCH-PRODUCTION-01 handoff. No further root-plan reconciliation action remains in this snapshot.",
+          "canonical_pwf_action": "Use the owner subplans updated in b4ca912 and research handoff 54f72c9 for active work.",
           "canonical_pwf_refs": {
-            "task_plan_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
-            "progress_last_commit": "5f79e7bc530a8d4f5360026d072f3edf5396eed1 (2026-11-15T17:30:00Z)",
-            "findings_last_commit": "0450506fc94adbfecd33001c244221a42ba0a00d (2026-11-14T10:37:04Z)",
-            "latest_handoff_commit": "54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e"
+            "root_task_plan_last_commit": "9baaf3d10178a8d9aa9a3853c417f223e8de50de (2026-11-08)",
+            "root_progress_last_commit": "b6511faea05f1d6701135cf12c69cd2e1e9285ae (2026-11-15)",
+            "root_findings_last_commit": "780d495dd575b85c86149138def64f617b6c7316 (2026-11-15)",
+            "latest_handoff_commit": "54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e",
+            "latest_subplan_reconciliation_commit": "b4ca912ecd7d26ee2a3670d9dc972542ba70046f"
           },
-          "remote_status": "Read-only local observation at 2026-11-15 21:53 UTC: master@54f72c969ab1d8211a1cb0eec0c1e96fc9c80c3e, no remote, tracked-clean. Root task_plan/progress remain at 5f79e7b and latest handoff at 54f72c9; the handoff records historical CWP candidate 7fd7f248d, now superseded by CWP 56d10f2. ROOT left StockWiki unchanged."
+          "remote_status": "No remote configured.",
+          "latest_subplan_reconciliation": "b4ca912ecd7d26ee2a3670d9dc972542ba70046f"
         },
         "company-wiki": {
-          "published_ref": "origin/master@56d10f269b7c67845c7af66b33083f62d46cde4d",
+          "published_ref": "origin/master@12e65fe7d6f954ef93bed16a257e5821eb02e5c8",
           "included_product_commit_after_last_exact_ci": "707efe814c5556c7c47ce09dd16fbb02e6a1afe7",
-          "last_exact_ci": "GitHub Actions run 43765642890/job 132969996667 passed on the exact published CWP SHA 56d10f269b7c67845c7af66b33083f62d46cde4d (Python 3.12, 7m13s).",
-          "local_status": "HEAD and origin/master are 56d10f269b7c67845c7af66b33083f62d46cde4d; tracked tree clean. Shared ReadBudget root fix published and exact CI passed. Historical local candidate 7fd7f248d was 512MB and has been superseded; StockWiki records that earlier observed state.",
-          "m2_baseline_product_source_paths_published": 39,
-          "m2_baseline_product_source_paths_local_final_tree": 39,
-          "tracked_changes_owned_by_root": [
-            "src/company_wiki/source_catalog/public_canonical_browser.py",
-            "src/company_wiki/source_catalog/source_reader.py",
-            "tests/contract/test_public_canonical_browser.py",
-            "tests/contract/test_source_reader_exact_history.py"
-          ]
+          "last_exact_ci": "43962477938 / job 133633237930 passed on 12e65fe7d in 4m42s with Python 3.12.",
+          "local_status": "Code published on origin/master. PWF is carried separately.",
+          "m2_baseline_product_source_paths_published": 47,
+          "m2_baseline_product_source_paths_local_final_tree": 47,
+          "tracked_changes_owned_by_root": [],
+          "current_browse_code": "12e65fe7d6f954ef93bed16a257e5821eb02e5c8"
         }
       },
-      "remaining": "CWP shared request-budget fix is published at 56d10f2 and exact-head CI passed; FF still owes finite limits and a current-main T3 rerun for the four failed requests; RF still owes the canonical PWF record of the historical not-ok weekly run and owner reconciliation of nine commits plus three tracked assurance edits. StockWiki current-plan drift was refreshed/accepted by ROOT at master@54f72c9; its historical reference to CWP 7fd7f248d is superseded. Then bind exact refs and close only the finite M3 report.",
+      "remaining": "CWP browse/request/catalog/PDF boundary refactor is published at 12e65fe7d with passing GitHub CI for the same commit. FF owner supplies a current-main T3 replay of the four download cases with finite acquisition_limits. RF owner records 20261115T084227Z/not-ok and reconciles local commits and assurance changes. Bind current owner refs to the remaining evidence and close M3. Resume parent P1 afterward; the fixed company loop remains paused.",
       "failure_reconciliation": {
         "weekly_run_id": "20261115T084227Z",
         "triplet": {
@@ -1473,7 +1470,27 @@
         "exact_github_ci_status": "completed_success on exact published SHA; Python 3.12; 7m13s",
         "supersedes_intermediate": "7fd7f248deed8ff161ddab439f6b4d8a2875b239 (historical 512MB candidate; final code uses one request ReadBudget)"
       },
-      "observed_at_utc": "2026-11-15T21:55:46Z"
+      "observed_at_utc": "2026-11-16T21:42:00Z",
+      "cwp_browse_boundary": {
+        "status": "PUBLISHED",
+        "commit": "12e65fe7d6f954ef93bed16a257e5821eb02e5c8",
+        "remote_ref_confirmed_at_publication": "origin/master@12e65fe7d6f954ef93bed16a257e5821eb02e5c8",
+        "review": "../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md",
+        "worktree_review_manifest_sha256": "9d1fe7b76405b9a4a69ff89cfa4dcfcaacf5c0771b9c2eb23ef25729732267ba",
+        "local_push_smoke_passed": 23,
+        "local_push_smoke_seconds": 33.68,
+        "ci": {
+          "run_id": 43962477938,
+          "job_id": 133633237930,
+          "head_sha": "12e65fe7d6f954ef93bed16a257e5821eb02e5c8",
+          "status": "completed",
+          "url": "https://github.com/zhengcb81/company-wiki/actions/runs/43962477938",
+          "conclusion": "success",
+          "runtime": "Python 3.12",
+          "completed_at": "2026-11-16T21:45:22Z",
+          "job_duration_seconds": 282
+        }
+      }
     }
   },
   "r4_public_replay_20261114": {
@@ -1557,5 +1574,26 @@
       "verified_at_utc": "2026-11-15T21:54:00Z"
     },
     "cross_project_note": "StockWiki master@54f72c9 records historical CWP local candidate 7fd7f248d (64MB to 512MB). The final CWP implementation supersedes that candidate; no StockWiki files or records were modified."
+  },
+  "owner_pwf_index": "../module-boundaries-2026-11-11/owner_plans.md",
+  "recent_cwp_browse_boundary": {
+    "status": "PUBLISHED",
+    "commit": "12e65fe7d6f954ef93bed16a257e5821eb02e5c8",
+    "remote_ref_confirmed_at_publication": "origin/master@12e65fe7d6f954ef93bed16a257e5821eb02e5c8",
+    "review": "../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md",
+    "worktree_review_manifest_sha256": "9d1fe7b76405b9a4a69ff89cfa4dcfcaacf5c0771b9c2eb23ef25729732267ba",
+    "local_push_smoke_passed": 23,
+    "local_push_smoke_seconds": 33.68,
+    "ci": {
+      "run_id": 43962477938,
+      "job_id": 133633237930,
+      "head_sha": "12e65fe7d6f954ef93bed16a257e5821eb02e5c8",
+      "status": "completed",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/43962477938",
+      "conclusion": "success",
+      "runtime": "Python 3.12",
+      "completed_at": "2026-11-16T21:45:22Z",
+      "job_duration_seconds": 282
+    }
   }
 }

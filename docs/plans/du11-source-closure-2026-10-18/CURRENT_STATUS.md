@@ -2,7 +2,13 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-15 最新状态
+## 2026-11-16 最新状态
+
+- 九个主模块和四条独立依赖链已逐仓对账，实际 PWF 入口、当前版本、接口责任和余项见 [各模块计划入口与交接](../module-boundaries-2026-11-11/owner_plans.md)。StockWiki `b4ca912` 已在本仓接续三组 PWF，IQS 的计划和两份投影测试仍在活动分支，Dashboard 的本地文档进展已纳入对账。
+- CWP `12e65fe7d` 将浏览请求状态与证明预算隔离，将候选和来源事实投影归目录 owner，将 CN 原生 PDF 读取归 parser adapter。原有 SourceRef、版本快照和错误信封通过定向回归和独立审查。代码已发布，固定推送快测 23/23，精确 SHA 的 GitHub CI 用时 4 分 42 秒且通过。 [CWP 浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)
+- M2 固定组合已验收。M3 仍需 FF 在当前 main 复跑四个带齐限额的下载型 T3 请求，以及 RF 将 `20261115T084227Z / not-ok` 与并行提交归位。IQS 与 Dashboard 的混尺度 V2 由两仓各自接续。收齐实际依赖证据后继续 P1 业务摘要，固定公司循环当前暂停。
+
+## 2026-11-15 状态记录（历史）
 
 ### 21:54 UTC update — shared-budget root fix published; exact-head CI green
 
@@ -128,7 +134,7 @@ R4 已完成工作量修复。正式半年报回放保持 12/12 检查点和同�
 ```mermaid
 flowchart TD
   A["已通过｜M2 冻结范围：5 条 owner 线 · E01–E09"] --> B["当前位置｜M3 当前 HEAD 边界漂移审查"]
-  B --> C["待完成｜StockWiki/RF canonical PWF 对齐 + M3 精确版本收据"]
+  B --> C["待完成｜FF 有限下载复跑 · RF 周跑对账"]
   C --> D["随后｜业务摘要 P1：去套话、保主体/计划归属"]
   D --> E["待复验｜独审新版摘要、缓存恢复与 RF 实际采用"]
   E --> F["之后｜药明康德复跑；药明合联与 Snowflake 泛化验证"]
@@ -140,7 +146,7 @@ flowchart TD
 
 ## 2026-11-10 之前的架构与业务验收快照（历史）
 
-以下段落保留当时的验收记录，不代表 2026-11-15 当前 M3 已关闭；当前状态只以上方 11-15 摘要和模块边界 M3 矩阵为准。
+本节记录当时验收的范围。现状见本文件顶部更新和模块边界 M3 矩阵。
 
 模块边界矩阵 14/14、组合场景 9/9，原架构收口余项 0。StockWiki 和审查技能仓已本地合流，当时没有配置 Git 远端。其余参与仓按实际主线发布。静态边界测试和独立安装继续约束后续改动。来源卡与 RF 收据覆盖当时图示范围，真实摘要和完整公司研究质量有各自的验收证据。
 

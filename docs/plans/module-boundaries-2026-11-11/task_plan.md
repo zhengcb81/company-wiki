@@ -1,5 +1,18 @@
 # 模块边界收口计划
 
+## 2026-11-16 分仓对账与 CWP 浏览边界
+
+[各模块计划入口与交接](owner_plans.md)记录本轮观察到的分支、当前责任和下一步。各模块以本仓 canonical PWF 管理工作，ROOT 在此协调公开端口和组合证据。下文 11-15 的表是上一轮的版本快照。
+
+1. **分仓入口对账。** 核对九模块的当前 checkout、目标主线、canonical PWF、已验收接口和真正未齐的证据。Dayu 为外部供应商，IR、StockQAbyLLM、MeetingConverter 由其本仓计划说明适配状态。
+2. **CWP 浏览请求隔离。** 先写交错请求行为测试。每次浏览独占发行人证明、候选观察与读取预算，长期存在的入口只持装配好的依赖。用依赖替身验证请求独立，再用真实临时目录中的来源目录和原件验证现有 CLI 响应及原文重开语义。
+3. **CWP 文档与解析所有权。** 先用合同反例证明 CN 发行人证明直接访问 PDF SDK，以及 canonical 浏览借用普通浏览器私有的文档枚举方法。由解析适配层提供有界、完整的原生分页文本，由目录提供路径无关的版本投影。确认调用边界、限额和现有 wire，完成同一大节点的定向测试及独立审查。
+4. **组合收口。** FF 负责四个 T3 下载请求携带有限预算及当前主线的复跑，RF 负责存证和主线对账。I10/I11 的固定版本互操作仍有效。由各 owner 单独验收协议演进；ROOT 仅对实际变化的组合重新验证。业务摘要随后回父计划。
+
+**本轮 CWP 实现与独审完成。** `12e65fe7d` 已发布并通过同一 SHA 的 GitHub CI。本轮用真实临时数据库、公开 CLI 和隔离证明 transport 复验。详见 [CWP 浏览边界验收](review/cwp-browse-owners-20261116.md)。
+
+**下一步。** 按 [逐仓交接](owner_plans.md) 接收 FF 当前主线的有限预算 T3 和 RF 周跑对账，随后以现行版本收口 M3。各 owner 独立推进未完成的业务与协议演进。
+
 ## M3 — 当前 HEAD 边界漂移审查（2026-11-15 新增）
 
 **状态：IN_PROGRESS — CWP shared-read-budget 根修复已发布且 exact-head CI 通过；M3 仍等 FF/RF owner 收口。** CWP 当前 `master@56d10f269b7c67845c7af66b33083f62d46cde4d` 已推送；GitHub Actions run `43765642890` / job `132969996667` 在精确 SHA 上通过（Python 3.12，7m13s），62 项定向契约与独审也通过。M2 baseline 以来当前树有 39 个 `src/` 路径变化。此前另一项目 StockWiki handoff 引用的本地 `7fd7f248d` 是当时 512MB 候选，现由统一请求 `ReadBudget` 根修复替代；外仓未修改。FF 四个 T3 下载请求仍待有限 `acquisition_limits` 和当前主线复跑；RF 周跑仍需 canonical PWF 收口及九提交/三项 assurance 对账。StockWiki root plan/handoff 已完成只读对账。外仓变化由另一项目推进，ROOT 不回退、清理或覆盖。M2/E01-E09 仍仅对原绑定版本有效；M3 不覆盖旧收据。
@@ -37,7 +50,7 @@
 - CWP 实现与总控 PWF 已提交 `3bc4ed86a` 并推送 `origin/master`；推送 fast smoke **18 passed / 15.06 秒**。精确 CI 仍按仓库配置待 GitHub Actions 完成，不把本地快门测试称为完整 CI。
 - **第一轮结论（历史，已由下方第二轮扩展）**：当时仅完成 CWP 首组差异，不能外推到其他仓或当前所有路径。下方第二轮补充了九模块差异归类、owner 证据和 I10–I12 契约；M3 当前剩余项以本节“下一步”为准。
 
-### 2026-11-15 M3 第二轮当前 HEAD 审查
+### 2026-11-15 M3 第二轮 HEAD 审查（历史快照）
 
 **状态：M3 仍 OPEN。** 外仓 tracked 状态最后一次只读刷新为 2026-11-15 21:55 UTC。CWP `master@56d10f2` 已推送；CN shared-read-budget 根修复的 62 项定向测试、独审和精确 SHA 的 GitHub CI run `43765642890` / job `132969996667`（Python 3.12，7m13s）均通过。StockWiki handoff 曾引用 `7fd7f248d` 512MB 候选作为当时状态；该候选已由 `56d10f2` 的统一请求预算实现替代，ROOT 未改 StockWiki 内容。FF local/live `main@dd716217` 一致且 tracked-clean；其 S3 BYD E2E 不替代四个 T3 下载请求的有限 `acquisition_limits` 与当前主线复跑。RF local `main@be0caa4` 比 fresh live `origin/main@f2215959` 超前 9 个提交，`daily_alert.jsonl`、`weekly_alert.jsonl`、`weekly_manifest.json` 三项 tracked 文件有修改；run `20261115T084227Z` 仍 not-ok、未写 canonical PWF。外仓 untracked 未枚举；用户说明外仓变化由另一项目推进，ROOT 不回退、清理或写入。
 
@@ -134,7 +147,7 @@ ROOT 已在 StockWiki 和 Dashboard 各自工区接收对应接口。Audit 的�
 
 ## Next Step
 
-E01–E09 remain accepted only for their frozen scope. CWP `master@56d10f2` includes `707efe814` and the reviewed shared-read-budget root fix; exact GitHub Actions run `43765642890` / job `132969996667` passed on that SHA. The CWP M2-baseline delta is 39 `src/` paths. See [CN shared-read-budget review](review/cwp-cn-issuer-read-budget-20261115.md). M3 now awaits only FF's finite T3 request limits/rerun and RF's weekly-run PWF entry/ref reconciliation. StockWiki root `task_plan.md`/`progress.md` were refreshed at `5f79e7b` and the current handoff at `master@54f72c9`; ROOT has read-only reconciled them. StockWiki's reference to CWP `7fd7f248d` is historical and superseded by `56d10f2`; external project changes remain untouched. Do not close cross-repository M3 until the outstanding FF/RF owner records and exact refs are reconciled. Then resume parent P1 business-summary work; keep the fixed company loop paused.
+按 [逐仓交接](owner_plans.md) 收齐 FF 当前主线的有限下载 T3 与 RF 周跑记录/提交对账，绑定现行依赖版本后关闭 M3，再继续父计划 P1。CWP `12e65fe7d` 的精确 CI 已过。固定公司循环当前暂停。
 
 **CWP push/cleanup maintenance (completed 2026-11-15):** root PWF-only changes are now positively classified as documentation, while runtime/mixed/unknown ranges retain the existing fixed smoke. Pytest scratch cleanup safely removes Windows read-only Git objects and refuses symlink/reparse chmod. Independent review PASS; 57 focused regressions passed, 1 host-dependent symlink case skipped; cleanup receipt `removed=true`. Published `master@56f9cc73d` and server-confirmed. See [bound review](review/pre-push-classification-and-temp-cleanup-20261115.md). This does not close or broaden M3.
 
