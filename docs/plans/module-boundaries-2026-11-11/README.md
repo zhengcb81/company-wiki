@@ -1,6 +1,6 @@
 # 模块化与解耦：一次有明确出口的收口
 
-**2026-11-16。** [各模块计划入口与交接](owner_plans.md)按本轮 Git 与 PWF 对账更新。CWP 的浏览请求、目录投影和 PDF 解析边界已发布为 `12e65fe7d`。FF 到 CWP 的三市场有界采集与复用已通过 [离线组合验收](review/ff-cwp-bounded-offline-20261116.md)。M3 仍待 FF 正式 T3 和 RF 周跑对账，见 [task_plan.md](task_plan.md)。下方 11-15 记录按其当时版本阅读。
+**2026-11-16。M3 已验收。** FF 正式 T3 四项均通过，FF、RF、SID 各自发布并核对远端。现行版本和剩余业务责任见 [验收记录](review/m3-formal-t3-20261116.md) 与 [各模块计划入口与交接](owner_plans.md)。继续父计划 P1 业务摘要，下方 11-15 记录按其当时版本阅读。
 
 **M2 已完成。** 五条模块施工卡已受测并入各自主线并推送。StockWiki 公开来源读取已进入本地 `master`，Dashboard 的公开浏览、原件流和摘要读取已推送 `main`。D4 跨仓回放 30 项全过，E01–E09 均有组合证据。 [组合记录](review/root_composition_20261114.md) · [矩阵](boundary_matrix.json)
 

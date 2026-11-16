@@ -1,5 +1,9 @@
 # 调查发现
 
+## 2026-11-16 真实 provider 复跑
+
+预算补齐后，FF 的首次真跑已进入供应方。CNINFO 发现消费 2,672 字节，精确定位到 StockInfoDLSimple 的候选缺少经核对的证券代码。SID 已在本仓按原公告证券代码校验并输出。HK/US 错误发生在 HTTP 之前。配置中的 Dayu venv 带 Windows Low 完整性标签，部署的 staging 和 provider-state 同为 Low，而旧测试库的普通 Temp 为 Medium。改用 Windows 已有 Low 临时根里的独占测试库后，港美股真实采集通过。四例正式复验、版本及 RF 历史记录见 [收口证据](review/m3-formal-t3-20261116.md)。
+
 ## 2026-11-16 有限下载复验
 
 FF 1.1 已能透传有限下载预算。缺三项业务限额时，CWP 会在启动 provider 前拒绝；同一请求补齐后，离线组合成功。已有 CWP 正向夹具的两种失败可以分别复现。一是缺 `security_id`，被正确拒绝；二是整体测试限时 2 秒，发现步骤可能已用尽时间。修正测试输入和运行夹具，保留生产验真及超时合同。来源与复现见 [验收记录](review/ff-cwp-bounded-offline-20261116.md)。

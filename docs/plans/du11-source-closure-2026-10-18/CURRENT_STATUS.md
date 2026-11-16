@@ -7,7 +7,7 @@
 - 九个主模块和四条独立依赖链已逐仓对账，实际 PWF 入口、当前版本、接口责任和余项见 [各模块计划入口与交接](../module-boundaries-2026-11-11/owner_plans.md)。StockWiki `b4ca912` 已在本仓接续三组 PWF，IQS 的计划和两份投影测试仍在活动分支，Dashboard 的本地文档进展已纳入对账。
 - CWP `12e65fe7d` 将浏览请求状态与证明预算隔离，将候选和来源事实投影归目录 owner，将 CN 原生 PDF 读取归 parser adapter。原有 SourceRef、版本快照和错误信封通过定向回归和独立审查。代码已发布，固定推送快测 23/23，精确 SHA 的 GitHub CI 用时 4 分 42 秒且通过。 [CWP 浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)
 - CWP 使用 FF `dd716217` 的公开入口补齐三市场有限下载离线证据。正向采集、零重复下载、V2 来源复用和损坏件拒读通过，测试目录已清理。 [有限下载离线验收](../module-boundaries-2026-11-11/review/ff-cwp-bounded-offline-20261116.md)
-- M2 固定组合已验收。M3 仍需 FF 在当前 main 复跑四个带齐限额的下载型 T3 请求，以及 RF 将 `20261115T084227Z / not-ok` 与并行提交归位。IQS 与 Dashboard 的混尺度 V2 由两仓各自接续。收齐实际依赖证据后继续 P1 业务摘要，固定公司循环当前暂停。
+- **M3 已验收，当前进入 P1 业务摘要。** FF `4c7f501b` 正式 T3 四项通过，SID `fb8c8ba5` 已发布，RF `220e5441` 记录了旧周跑失败与原始版本。固定公司循环当前暂停。 [M3 证据](../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md)
 
 ## 2026-11-15 状态记录（历史）
 

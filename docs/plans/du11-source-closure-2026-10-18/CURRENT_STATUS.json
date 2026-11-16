@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "manual_m3_owner_reconciliation_before_p1_business_summary",
+  "execution_mode": "manual_p1_business_summary",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -38,7 +38,7 @@
     },
     {
       "id": "P1",
-      "status": "EXTRACTS_AND_RECOVERY_VERIFIED; BUSINESS_SUMMARY_CHANGES_REQUIRED",
+      "status": "EXTRACTS_AND_RECOVERY_VERIFIED; BUSINESS_SUMMARY_IN_PROGRESS",
       "task": "Complete concise source-linked business output with role and scope preserved. The current real H1 /5 ranking and single-payment recovery are verified."
     },
     {
@@ -91,7 +91,7 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "MODULE_BOUNDARIES_M2_FROZEN_SCOPE_ACCEPTED_M3_FF_RF_OWNER_EVIDENCE_OPEN; BUSINESS_SUMMARY_CHANGES_REQUIRED",
+  "project_status": "MODULE_BOUNDARIES_M3_CLOSED; P1_BUSINESS_SUMMARY_IN_PROGRESS",
   "as_of_date": "2026-11-16",
   "observed_at_utc": "2026-11-16T21:42:00Z",
   "recent_cwp_gate_checkpoint": {
@@ -157,7 +157,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "CWP browse/request/catalog/PDF boundary refactor is published at 12e65fe7d with passing GitHub CI for the same commit. FF owner supplies a current-main T3 replay of the four download cases with finite acquisition_limits. RF owner records 20261115T084227Z/not-ok and reconciles local commits and assurance changes. Bind current owner refs to the remaining evidence and close M3. Resume parent P1 afterward; the fixed company loop remains paused.",
+  "next_action": "Implement and verify a focused source-linked business summary view, compare the frozen H1 and IR cases, then verify the new summary and downstream recovery/adoption.",
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,
@@ -1254,7 +1254,8 @@
     "task_plan": "../module-boundaries-2026-11-11/task_plan.md",
     "matrix": "../module-boundaries-2026-11-11/boundary_matrix.json",
     "ff_cwp_bounded_offline_review": "../module-boundaries-2026-11-11/review/ff-cwp-bounded-offline-20261116.md",
-    "status": "M2_CLOSED_M3_IN_PROGRESS",
+    "m3_closeout_report": "../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md",
+    "status": "M2_CLOSED_M3_CLOSED",
     "lanes": [
       "MB-CWP",
       "MB-FF",
@@ -1272,7 +1273,7 @@
       "ROOT composition"
     ],
     "parent_business_tasks_retained": true,
-    "next_business_action_after_closure": "R4/T4/SEM -> real summary -> paid/cache recovery -> actual RF adoption -> fixed company loop",
+    "next_business_action_after_closure": "Business summary P1 -> paid/cache recovery on the new summary -> RF actual adoption -> fixed company loop",
     "reconciliation": "../module-boundaries-2026-11-11/reconciliation.md",
     "merged_and_pushed": {
       "company-wiki": "c6189c623f6ec30e2a1a1059499e78c8ffe5b443",
@@ -1333,7 +1334,7 @@
       "revenue_forecast_audit": "current_public_consumer_replay_pass"
     },
     "remaining": [
-      "CWP browse/request/catalog/PDF boundary refactor is published at 12e65fe7d with passing GitHub CI for the same commit. FF owner supplies a current-main T3 replay of the four download cases with finite acquisition_limits. RF owner records 20261115T084227Z/not-ok and reconciles local commits and assurance changes. Bind current owner refs to the remaining evidence and close M3. Resume parent P1 afterward; the fixed company loop remains paused."
+      "M3 accepted the FF 4/4 formal live T3 and RF PWF record on the exact owner versions. Resume P1 business summary."
     ],
     "composition_status": "M2_CLOSED_WITHIN_FROZEN_PUBLIC_INTERFACE_SCOPE; M3_CURRENT_HEAD_REVIEWED_FOR_CWP_AND_EXTERNAL_OWNER_RECONCILIATION_IN_PROGRESS",
     "business_company_loop": "manual_R4_in_progress_native_goal_paused",
@@ -1349,7 +1350,7 @@
     },
     "m2_scope_note": "E01-E09 remain accepted only for their recorded interface versions; they are not proof that all current repository code is fully decoupled.",
     "m3_current_head_drift_audit": {
-      "status": "IN_PROGRESS",
+      "status": "CLOSED",
       "cwp_first_slice": {
         "published_head": "origin/master@56d10f269b7c67845c7af66b33083f62d46cde4d; shared ReadBudget root fix is published and exact-head CI passed (run 43765642890, job 132969996667).",
         "m3_pwf_receipt_head": "476cb4a79a7aa97080baa5a6a256052403d89596; PWF root-cause carrier. Git push server response confirmed d46357c12..476cb4a79 master -> master; local HEAD and origin/master tracking ref match. Fresh ls-remote failed because local Git could not start a resolver thread. Push fixed smoke 18/18 in 9.26 seconds; full GitHub CI not yet verified.",
@@ -1376,24 +1377,24 @@
       },
       "latest_owner_snapshots": {
         "filing-fetch": {
-          "observed_ref": "local main@dd7162172718e8276a809e9c205e3c80da06141a",
-          "local_tracking_ref": "origin/main@dd7162172718e8276a809e9c205e3c80da06141a",
-          "remote_status": "Fresh live git ls-remote at 2026-11-15 21:55 UTC confirms origin/main=dd7162172718e8276a809e9c205e3c80da06141a; local main and tracking ref match; tracked-clean. Untracked files were not enumerated.",
+          "observed_ref": "local main@4c7f501b036ab8a2779f33d445bc2b1b6fbdb179",
+          "local_tracking_ref": "origin/main@4c7f501b036ab8a2779f33d445bc2b1b6fbdb179",
+          "remote_status": "Published 4c7f501b, server/local/tracking verified; exact GitHub CI success at run 43979121478.",
           "m2_product_source_delta": 0,
-          "m2_test_path_delta": 4,
+          "m2_test_path_delta": 6,
           "additional_tool_path": "tools/verify_plan_claims.py",
           "git_status": "Tracked files clean; elevated read-only git status succeeded with --untracked-files=no. Untracked files were not enumerated.",
-          "canonical_pwf_action": "Current root PWF records the separate S3 BYD bounded-provider E2E and FF-1 merge; these do not establish that the four failed RF weekly T3 download requests have been fixed or rerun. Those requests omitted acquisition_limits; FF owner must supply finite limits and rerun T3 on current main.",
+          "canonical_pwf_action": "FF recorded the bounded formal T3 with four passes and all provider versions on its published main.",
           "untracked_status": "not_enumerated"
         },
         "revenue-forecast": {
           "observed_ref": "local main@be0caa4b506a4174d1bad860946ade73279627d4",
           "local_tracking_ref": "origin/main@f2215959d33abc76778342a95d39a8e38191da75",
           "unpublished_commits_ahead": 9,
-          "remote_status": "Fresh live git ls-remote at 2026-11-15 21:55 UTC confirms origin/main=f2215959d33abc76778342a95d39a8e38191da75; local main remains nine commits ahead. Three tracked assurance files remain modified; untracked files were not enumerated.",
+          "remote_status": "Server main confirmed at 220e544126a6418ef8f05ec9982c2b32f5c54f5f; it is a focused PWF commit from f2215959 with exact-head CI success (43976094176). The active local branch remains nine commits after their common ancestor f2215959. Three tracked assurance files remain modified; untracked files were not enumerated.",
           "weekly_run_id": "20261115T084227Z",
           "weekly_status": "not-ok; T3 suite exit 1, 4 download E2Es failed at ensure before any download; manifest remains pinned to historical FF 1dfd818 / RF f2215959 / CWP 0e741063",
-          "canonical_pwf": "PLANNING_STATUS.md last committed 2026-11-14 at 3ca619283411cf2a48afa57a449c44e2aa907768; weekly run 20261115T084227Z / not-ok was absent at last read of current local main; owner update still required.",
+          "canonical_pwf": "The RF owner recorded 20261115T084227Z / not-ok and its exact historical triplet in PLANNING_STATUS.md at published 220e5441. ROOT verified the original receipts. The concurrent project owns subsequent local synchronization.",
           "git_status": "Tracked modified: assurance/runs/daily_alert.jsonl, assurance/runs/weekly_alert.jsonl, assurance/runs/weekly_manifest.json. Read-only local snapshot at 21:24 UTC; untracked not enumerated. User confirms these are active changes from another project; ROOT leaves them untouched.",
           "modified_tracked_paths": [
             "assurance/runs/daily_alert.jsonl",
@@ -1431,7 +1432,7 @@
           "current_browse_code": "12e65fe7d6f954ef93bed16a257e5821eb02e5c8"
         }
       },
-      "remaining": "CWP browse/request/catalog/PDF boundary refactor is published at 12e65fe7d with passing GitHub CI for the same commit. FF owner supplies a current-main T3 replay of the four download cases with finite acquisition_limits. RF owner records 20261115T084227Z/not-ok and reconciles local commits and assurance changes. Bind current owner refs to the remaining evidence and close M3. Resume parent P1 afterward; the fixed company loop remains paused.",
+      "remaining": "M3 is closed on the published FF, SID and RF owner records. P1 business summary is now active.",
       "failure_reconciliation": {
         "weekly_run_id": "20261115T084227Z",
         "triplet": {
