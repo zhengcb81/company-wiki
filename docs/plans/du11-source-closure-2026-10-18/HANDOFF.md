@@ -3,7 +3,7 @@
 2026-11-16。按 [M3 计划](../module-boundaries-2026-11-11/task_plan.md) 执行，各模块的 canonical PWF、当前 ref、owner 和后续工作统一见 [逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。
 
 1. CWP 的浏览请求隔离、目录投影和 PDF 解析端口已在主线发布为 `12e65fe7d`。定向回归、独审和远端验收状态见 [浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)。上一节点的共享读取预算随父链进入该版本，原收据保留在 [CN 读取预算](../module-boundaries-2026-11-11/review/cwp-cn-issuer-read-budget-20261115.md)。
-2. FF 接续四个缺限额的周测请求，按本仓请求合同补字节、时间、费用上限并在当前 main 复跑 T3。RF 接续 `20261115T084227Z / not-ok` 的历史版本、原因和当前提交对账。外仓已有活动 PWF 继续由其 owner 更新。
+2. FF 1.1 三市场有界下载和 2.0 原件复用已通过 [CWP 离线组合](../module-boundaries-2026-11-11/review/ff-cwp-bounded-offline-20261116.md)。FF 接续四个缺限额的周测请求，按本仓请求合同补字节、时间、费用上限并在当前 main 复跑 T3。RF 接续 `20261115T084227Z / not-ok` 的历史版本、原因和当前提交对账。各模块维护本仓活动 PWF。
 3. 收齐受影响接口的现行证据后关闭 M3，回父计划 P1。M2 的固定组合和 I10/I11 继续引用既有收据，IQS 与 Dashboard 混尺度投影演进走其本仓的计划，固定公司循环仍暂停。
 
 R4 统一预扣已迁回执行阶段。已有覆盖缺口时，选材末尾复用已准备的观察并保留部分状态。从正式入口回放冻结半年报，12/12 和选材 SHA 一致，工作账户使用 10,753,620 / 16,000,000。见 [来源会话与覆盖回放](review/r4-source-session-20261114.md)。[T4 与 SEM 验收](review/t4-sem-20261114.md) 已独审通过。

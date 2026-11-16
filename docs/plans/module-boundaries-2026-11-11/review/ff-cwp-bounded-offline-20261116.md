@@ -19,7 +19,7 @@
 
 组合首次共 **24 passed / 113.99 秒**。独审指出测试项目内的临时资源应主动清理，随后加入子目录自动清理和起止空目录断言，并断言缺限额请求已到达 `ensure`。最终三项 FF 组合 **3 passed / 41.22 秒**，与第一次 24 项运行分别记录。两次 pytest 临时根清理收据均为 `removed=true`。Ruff 和最终独立审查通过，覆盖测试隔离、合同完整性与验收表述。
 
-在仓根使用本机已审查的 FF checkout 复验。先核对其 Git 版本，另可只跑最后一个测试文件快速复验三市场。没有设置 `CWP_TEST_FF_ENTRYPOINT` 时，新的 FF 组合会跳过。
+在仓根使用本机已审查的 FF checkout 复验。先核对其 Git 版本，另可只跑最后一个测试文件快速复验三市场。未设置 `CWP_TEST_FF_ENTRYPOINT` 的对照运行按预期跳过三项，耗时 1.56 秒，临时根已清理。
 
 ```powershell
 $env:CWP_TEST_FF_ENTRYPOINT = '<filing-fetch 仓库的绝对路径>/scripts/fetch_filing.py'
@@ -34,9 +34,13 @@ python -B -m pytest -q -p no:cacheprovider tests/integration/test_acquisition_fa
 | `tests/integration/test_m3_acquisition_usage_cwp.py` | `07643077cbd2342e6630b68d5be8b06d28907efd064f4742f863775507e6b7d0` |
 | `tests/support/acquisition_cli_fixture.py` | `6a85f264b44034869ffedbdc6c0ffd28806b6735799415726a8f50a42b98aa4d` |
 
+## 发布
+
+测试提交 `b72f2db8a5ed6b6d5d16fcd93df8733cbfc9a03c` 已核对远端主线。推送快测 23 项通过，用时 10.02 秒。同一提交的日常 GitHub CI 通过，Python 3.12 作业用时 5 分 36 秒。上面的三市场组合按独立命令复验。 [GitHub CI](https://github.com/zhengcb81/company-wiki/actions/runs/43969376176/job/133657175056)
+
 ## 剩余 owner 交接
 
 此次用宿主 Python 3.13.9、真实 FF 和 CWP 公开 CLI、模拟 provider 与独立临时目录。未访问外网 provider、调用收费 API 或写入生产库。CWP 组合覆盖 FF 1.1 下载及 2.0 复用与读取；FF 自有 T3 的真实下载验收与 RF assurance 仍单独收口。
 
-- **FF**。截至 21:57 UTC，`dd716217` 的四个正式 T3 下载请求仍待补 `acquisition_limits`，重复调用辅助函数也走该合同。FF owner 在本仓以当前主线复跑 T3，记录实际 Git 版本、结果和隔离清理。
+- **FF**。截至 21:57 UTC，`dd716217` 的 `tests/test_e2e_download.py` 中，CN、HK、US 下载及损坏件重试仍待补 `acquisition_limits`，重复调用辅助函数也走该合同。FF owner 在本仓以当前主线复跑这些用例，记录实际 Git 版本、结果和隔离清理。 [原周跑根因](ff-weekly-budget-root-cause-20261115.md)
 - **RF**。截至同一观察，本地 `be0caa4b506a4174d1bad860946ade73279627d4`、远端 `f2215959d33abc76778342a95d39a8e38191da75` 相差九提交。仍有三份跟踪 assurance 文件变更。周跑 `20261115T084227Z / not-ok` 绑定原 FF `1dfd818`、RF `f2215959`、CWP `0e741063`，由 RF owner 对齐当前 PWF 和版本。
