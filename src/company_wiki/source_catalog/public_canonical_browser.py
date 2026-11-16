@@ -60,14 +60,17 @@ import threading
 import time
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any
+from typing import Any, Protocol
 
-from .assertion_service import get_verified_assertion, source_scope_qualification
-from .public_document_browser import (
-    PublicDocumentBrowser,
+from ..source_contract.source_version import SourceReadError
+from .assertion_service import source_scope_qualification
+from .document_browse_projection import (
     document_version_id,
+    version_item,
+    version_revision_member,
+    version_sort_key,
 )
-from .source_reader import SOURCE_REF_SCHEMA_VERSION, SourceRef
+from .models import CatalogBrowseVersion
 from .read_budget import ReadBudget
 from .service import SourceCatalog
 
@@ -580,32 +583,47 @@ class _Snapshot:
         return self._token_text
 
 
+class _IssuerProofReader(Protocol):
+    """A configured proof transport that validates the owner envelope on read."""
+
+    def read(self, *, entity_id: str, listing_id: str | None, as_of: str) -> dict[str, Any]: ...
+
+
 class PublicCanonicalBrowser:
-    """Zero-write canonical issuer browse over the local source catalog."""
+    """Read-only canonical issuer browse with a fresh context for each call."""
+
+    __slots__ = ("__catalog", "__proof_client")
 
     def __init__(self, catalog: SourceCatalog,
-                 proof_client: StockWikiProofClient | None = None):
+                 proof_client: _IssuerProofReader | None = None):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
-        if proof_client is not None \
-                and not isinstance(proof_client, StockWikiProofClient):
-            raise TypeError("proof_client must be StockWikiProofClient")
-        self.catalog = catalog
-        self.proof_client = proof_client
-
-    # -- public entry point ---------------------------------------------------
+        self.__catalog = catalog
+        self.__proof_client = proof_client
 
     def browse(self, request: dict[str, Any]) -> dict[str, Any]:
+        return _CanonicalBrowse(self.__catalog, self.__proof_client).run(request)
+
+
+class _CanonicalBrowse:
+    """One browse's proof observations, accounting, and projection."""
+
+    def __init__(self, catalog: SourceCatalog, proof_client: _IssuerProofReader | None):
+        self.catalog = catalog
+        self.proof_client = proof_client
+        self._cn_verified: dict[str, tuple[ResolvedIssuer, dict[str, Any]]] = {}
+        self._cn_target_security: str | None = None
+        self._cn_read_budget = ReadBudget()
+        self._cn_budget_exhausted = False
+        self._conflicted_documents: list[str] = []
+        self._version_issuer_pins: dict[str, dict[str, Any]] = {}
+        self._candidate_scan_limited = False
+
+    def run(self, request: dict[str, Any]) -> dict[str, Any]:
         if not isinstance(request, dict) or set(request) != _REQUEST_FIELDS:
             raise CanonicalBrowseError("request_fields_not_exact")
         if request["schema_version"] != REQUEST_SCHEMA:
             raise CanonicalBrowseError("unsupported_request_version")
-        # Native CN original observations are scoped to this one browse. They
-        # are never a persistent health/content cache across requests.
-        self._cn_verified: dict[str, tuple[ResolvedIssuer, dict[str, Any]]] = {}
-        self._cn_target_security = None
-        self._cn_read_budget = ReadBudget()
-        self._cn_budget_exhausted = False
         entity = _required_text(request["canonical_entity_id"],
                                 "canonical_entity_id")
         if not _ENT_ID_RE.fullmatch(entity):
@@ -655,10 +673,7 @@ class PublicCanonicalBrowser:
         versions = self._proven_versions(binding)
         if self._conflicted_documents:
             binding = binding.with_reasons("document_issuer_conflict")
-        revision = self._revision(
-            versions, binding,
-            getattr(self, "_version_issuer_pins", {}),
-        )
+        revision = self._revision(versions, binding, self._version_issuer_pins)
         snapshot = _Snapshot(entity, listing, as_of, filters,
                              binding.stockwiki, binding.issuer_pin, revision)
 
@@ -842,41 +857,28 @@ class PublicCanonicalBrowser:
         SourceRef under its byte/page/text limits. It never downloads, OCRs,
         or uses a model. Incomplete proofs stay unknown by name.
         """
-        from .source_reader import SourceReadError, SourceVersionReader
+        from .source_reader import SourceVersionReader
 
-        row = self.catalog.reader.fetchone(
-            "SELECT content_sha256, byte_size, mime_type FROM sources "
-            "WHERE source_id = ?", (source_id,))
-        if row is None:
+        facts = self.catalog.browse_source_facts(source_id)
+        if facts is None:
             return Binding(status="unknown",
                            reason_codes=_reasons("resolved_source_not_indexed"))
-        content_sha256 = str(row["content_sha256"])
-        # Runtime face parity: assertion_service itself passes the catalog
-        # reader here (same fetchall/Row contract); the annotation names the
-        # writer-side store, so the reader goes through the local Any pin.
-        reader_store: Any = self.catalog.reader
-        assertion = get_verified_assertion(
-            reader_store, source_id, content_sha256, reader="steady")
-        if assertion is None:
+        content_sha256 = facts.content_sha256
+        ref, assertion_id = facts.verified_ref, facts.assertion_id
+        if ref is None or assertion_id is None:
             return Binding(
                 status="unknown",
                 reason_codes=_reasons("resolved_source_unverified_facts"),
                 resolved_source={"source_id": source_id,
                                  "content_sha256": content_sha256},
             )
-        document_id = str(assertion["document_id"])
         cwp_pin = {
             "source_id": source_id, "content_sha256": content_sha256,
-            "assertion_id": str(assertion["assertion_id"]),
+            "assertion_id": assertion_id,
         }
-        ref = SourceRef(
-            document_id=document_id, source_id=source_id,
-            content_sha256=content_sha256, byte_size=int(row["byte_size"]),
-            mime_type=str(row["mime_type"]),
-            schema_version=SOURCE_REF_SCHEMA_VERSION,
-        )
+        source_reader = SourceVersionReader(self.catalog)
         try:
-            manifest = SourceVersionReader(self.catalog).describe_version(ref)
+            manifest = source_reader.describe_version(ref)
             if ref.mime_type == "application/pdf" and manifest.get("market") == "CN":
                 from .cn_primary_issuer import (
                     MAX_BYTES as CN_MAX_BYTES, PrimaryIssuerUnavailable,
@@ -894,17 +896,17 @@ class PublicCanonicalBrowser:
                         reason_codes=_reasons("cn_primary_filing_scope_missing"),
                         resolved_source=cwp_pin,
                     )
-                target = getattr(self, "_cn_target_security", None)
+                target = self._cn_target_security
                 # The hint only excludes unrelated candidates. Inclusion still
                 # requires exact original proof of the full legal-issuer key.
                 if target is not None and manifest.get("security_id") != target:
                     return Binding(status="unknown", reason_codes=_reasons("cn_unrelated_security_hint"),
                                    resolved_source=cwp_pin)
-                cached = getattr(self, "_cn_verified", {}).get(source_id)
+                cached = self._cn_verified.get(source_id)
                 if cached is not None:
                     return cached
                 try:
-                    opened, metadata = SourceVersionReader(self.catalog).open_described_version(
+                    opened, metadata = source_reader.open_described_version(
                         ref, purpose="source_export", budget=self._cn_read_budget,
                     )
                     proof = extract_cn_issuer(self.catalog, ref, pages=pdf_text_pages(opened.data), metadata=metadata)
@@ -912,17 +914,12 @@ class PublicCanonicalBrowser:
                     return Binding(status="unknown", reason_codes=_reasons(exc.reason), resolved_source=cwp_pin)
                 issuer = ResolvedIssuer(key=IssuerKey(ISSUER_NAMESPACE_CN_USCC, proof["key"]["value"]),
                                         verifier=ISSUER_VERIFIER_CN_PRIMARY,
-                                        assertion_id=str(assertion["assertion_id"]),
+                                        assertion_id=assertion_id,
                                         source_id=source_id, content_sha256=content_sha256)
-                if not hasattr(self, "_cn_verified"):
-                    self._cn_verified = {}
                 self._cn_verified[source_id] = (issuer, cwp_pin)
                 self._cn_target_security = proof["security"]["security_id"]
                 return issuer, cwp_pin
-            qualification = source_scope_qualification(
-                self.catalog, ref, metadata=manifest,
-                identity_cache_dir=self.catalog.config.catalog_dir
-                / "security_master")
+            qualification = source_scope_qualification(self.catalog, ref, metadata=manifest)
         except SourceReadError as exc:
             if exc.reason == "budget_exceeded":
                 self._cn_budget_exhausted = True
@@ -958,42 +955,15 @@ class PublicCanonicalBrowser:
         issuer = ResolvedIssuer(
             key=IssuerKey(ISSUER_NAMESPACE_SEC_CIK, str(int(cik))),
             verifier=ISSUER_VERIFIER_SEC_DEI,
-            assertion_id=str(assertion["assertion_id"]),
+            assertion_id=assertion_id,
             source_id=source_id, content_sha256=content_sha256,
         )
         return issuer, cwp_pin
 
     # -- proven document set ------------------------------------------------------
 
-    def _verified_assertions(self) -> list[dict[str, Any]]:
-        """Active verified source-facts assertions, bounded, newest per source."""
-        rows = self.catalog.reader.fetchall(
-            """SELECT assertion_id, source_id, document_id,
-                      evidence_basis, created_at, supersedes_assertion_id
-               FROM source_metadata_assertions
-               WHERE decision='verified'
-                 AND visibility_state IN ('legacy','active')
-               ORDER BY created_at, assertion_id
-               LIMIT ?""",
-            (_MAX_ASSERTION_SCAN + 1,),
-        )
-        if len(rows) > _MAX_ASSERTION_SCAN:
-            from .source_reader import SourceReadError
-            raise SourceReadError("unavailable", "issuer_scan_budget_exceeded")
-        superseded = {
-            str(row["supersedes_assertion_id"]) for row in rows
-            if row["supersedes_assertion_id"] is not None
-        }
-        latest: dict[str, dict[str, Any]] = {}
-        for row in rows:
-            if str(row["evidence_basis"]) != "source-facts" \
-                    or str(row["assertion_id"]) in superseded:
-                continue
-            latest[str(row["source_id"])] = dict(row)
-        return list(latest.values())
-
     def _issuer_for_source(self, source_id: str,
-                           memo: dict[str, Any]) -> ResolvedIssuer | None:
+                           memo: dict[str, ResolvedIssuer | None]) -> ResolvedIssuer | None:
         if source_id in memo:
             return memo[source_id]
         # Fail closed per source: one unreadable fact row must not sink the
@@ -1006,29 +976,24 @@ class PublicCanonicalBrowser:
         memo[source_id] = issuer
         return issuer
 
-    def _proven_versions(self, binding: Binding) -> list[Any]:
+    def _proven_versions(self, binding: Binding) -> list[CatalogBrowseVersion]:
         """Return only exact versions independently proven to the issuer."""
         assert binding.issuer_pin is not None  # verified binding precondition
-        self._conflicted_documents = []
         if binding.issuer_pin["namespace"] != ISSUER_NAMESPACE_CN_USCC:
             self._cn_target_security = "cn_not_requested"
         wanted = IssuerKey(str(binding.issuer_pin["namespace"]),
                            str(binding.issuer_pin["value"])).qualified()
-        memo: dict[str, Any] = {}
+        memo: dict[str, ResolvedIssuer | None] = {}
         by_document: dict[str, set[str]] = {}
-        for assertion in self._verified_assertions():
-            issuer = self._issuer_for_source(str(assertion["source_id"]), memo)
+        for document_id, source_id in self.catalog.browse_verified_source_pairs(limit=_MAX_ASSERTION_SCAN):
+            issuer = self._issuer_for_source(source_id, memo)
             if issuer is None:
                 continue
-            by_document.setdefault(str(assertion["document_id"]),
-                                   set()).add(issuer.key.qualified())
-        if getattr(self, "_cn_budget_exhausted", False):
-            from .source_reader import SourceReadError
+            by_document.setdefault(document_id, set()).add(issuer.key.qualified())
+        if self._cn_budget_exhausted:
             raise SourceReadError("unavailable", "cn_primary_proof_budget_exceeded")
-        versions: list[Any] = []
-        self._version_issuer_pins: dict[str, dict[str, Any]] = {}
+        versions: list[CatalogBrowseVersion] = []
         scanned_rows = 0
-        browser = self._fallback_browser()
         for document_id, keys in sorted(by_document.items()):
             if wanted not in keys:
                 continue
@@ -1037,20 +1002,10 @@ class PublicCanonicalBrowser:
                 # never served; it stays out of items and is named in reasons.
                 self._conflicted_documents.append(document_id)
                 continue
-            document = browser._document(document_id)
-            if document is None:
-                continue
             remaining = _MAX_DOCUMENT_VERSION_SCAN - scanned_rows
-            if remaining <= 0:
-                from .source_reader import SourceReadError
-                raise SourceReadError(
-                    "unavailable", "issuer_version_scan_budget_exceeded")
-            document_versions, truncated, rows_read = \
-                browser._document_versions_with_limit(
-                    document, limit=remaining)
-            scanned_rows += rows_read
-            if truncated or scanned_rows > _MAX_DOCUMENT_VERSION_SCAN:
-                from .source_reader import SourceReadError
+            document_versions = self.catalog.browse_document_records(document_id, limit=remaining + 1)
+            scanned_rows += len(document_versions)
+            if scanned_rows > _MAX_DOCUMENT_VERSION_SCAN:
                 raise SourceReadError(
                     "unavailable", "issuer_version_scan_budget_exceeded")
             for version in document_versions:
@@ -1061,47 +1016,34 @@ class PublicCanonicalBrowser:
                     versions.append(version)
                     self._version_issuer_pins[str(version.source_id)] = \
                         version_issuer.pin()
-        versions.sort(key=lambda row: row.sort_key())
+        if self._cn_budget_exhausted:
+            raise SourceReadError("unavailable", "cn_primary_proof_budget_exceeded")
+        versions.sort(key=version_sort_key)
         return versions
 
-    def _fallback_browser(self) -> PublicDocumentBrowser:
-        # Shares the plain browse's exact document/version enumeration,
-        # filtering, facets and revision semantics (read-only reuse).
-        if not hasattr(self, "_browser"):
-            self._browser = PublicDocumentBrowser(self.catalog)
-        return self._browser
-
-    def _unverified_candidates(self, versions: list[Any],
+    def _unverified_candidates(self, versions: list[CatalogBrowseVersion],
                                binding: Binding) -> list[dict[str, Any]]:
         """Pathless diagnostics: same CWP entity keys, unproven or differing."""
         if binding.issuer_pin is None or not versions:
             return []
-        browser = self._fallback_browser()
         item_documents = {version.document_id for version in versions}
         entity_keys: set[str] = {
             str(version.canonical_entity_id) for version in versions
             if version.canonical_entity_id
         }
         remaining = _MAX_UNVERIFIED_CANDIDATE_SCAN
-        self._candidate_scan_limited = False
         for document_id in sorted(item_documents):
             if remaining <= 0:
                 self._candidate_scan_limited = True
                 break
-            budget_before_query = remaining
-            rows = self.catalog.reader.fetchall(
-                "SELECT entity_id FROM document_entities "
-                "WHERE document_id = ? ORDER BY entity_id LIMIT ?",
-                (document_id, budget_before_query + 1),
-            )
-            if len(rows) > budget_before_query:
+            keys = self.catalog.browse_document_entity_ids(document_id, limit=remaining + 1)
+            if len(keys) > remaining:
                 self._candidate_scan_limited = True
-            remaining = max(0, budget_before_query - len(rows))
-            for row in rows[:budget_before_query]:
-                entity_keys.add(str(row["entity_id"]))
+            entity_keys.update(keys[:remaining])
+            remaining = max(0, remaining - len(keys))
         wanted = IssuerKey(str(binding.issuer_pin["namespace"]),
                            str(binding.issuer_pin["value"])).qualified()
-        memo: dict[str, Any] = {}
+        memo: dict[str, ResolvedIssuer | None] = {}
         candidates: list[dict[str, Any]] = []
         seen: set[str] = set()
         stop = False
@@ -1109,15 +1051,12 @@ class PublicCanonicalBrowser:
             if remaining <= 0:
                 self._candidate_scan_limited = True
                 break
-            budget_before_query = remaining
-            documents, truncated, rows_read = \
-                browser._entity_documents_with_limit(
-                    entity, limit=budget_before_query)
-            remaining = max(0, budget_before_query - rows_read)
-            if truncated or rows_read > budget_before_query:
+            document_ids = self.catalog.browse_entity_document_ids(entity, limit=remaining + 1)
+            if len(document_ids) > remaining:
                 self._candidate_scan_limited = True
-            for document in documents:
-                document_id = document["document_id"]
+            documents = document_ids[:remaining]
+            remaining = max(0, remaining - len(document_ids))
+            for document_id in documents:
                 if document_id in item_documents or document_id in seen:
                     continue
                 seen.add(document_id)
@@ -1125,14 +1064,12 @@ class PublicCanonicalBrowser:
                     self._candidate_scan_limited = True
                     stop = True
                     break
-                budget_before_versions = remaining
-                document_versions, truncated, rows_read = \
-                    browser._document_versions_with_limit(
-                        document, limit=budget_before_versions)
-                remaining = max(0, budget_before_versions - rows_read)
-                if truncated or rows_read > budget_before_versions:
+                document_versions = self.catalog.browse_document_records(document_id, limit=remaining + 1)
+                if len(document_versions) > remaining:
                     self._candidate_scan_limited = True
-                for version in document_versions:
+                candidates_for_document = document_versions[:remaining]
+                remaining = max(0, remaining - len(document_versions))
+                for version in candidates_for_document:
                     issuer = self._issuer_for_source(
                         str(version.source_id), memo)
                     if issuer is None:
@@ -1166,17 +1103,15 @@ class PublicCanonicalBrowser:
     # -- snapshot / paging --------------------------------------------------------
 
     @staticmethod
-    def _revision(versions: list[Any], binding: Binding,
-                  version_issuer_pins: dict[str, dict[str, Any]] | None = None
-                  ) -> str:
-        proofs = version_issuer_pins or {}
+    def _revision(versions: list[CatalogBrowseVersion], binding: Binding,
+                  version_issuer_pins: dict[str, dict[str, Any]]) -> str:
         payload = json.dumps(
             {
                 "issuer": binding.issuer_pin,
                 "rows": [
                     {
-                        "version": version.revision_member(),
-                        "issuer_proof": proofs.get(str(version.source_id)),
+                        "version": version_revision_member(version),
+                        "issuer_proof": version_issuer_pins.get(version.source_id),
                     }
                     for version in versions
                 ],
@@ -1231,7 +1166,7 @@ class PublicCanonicalBrowser:
             token_text=_encode_token(pinned_payload),
         )
 
-    def _serve(self, entity: str, versions: list[Any], snapshot: _Snapshot,
+    def _serve(self, entity: str, versions: list[CatalogBrowseVersion], snapshot: _Snapshot,
                offset: int, limit: int, binding: Binding) -> dict[str, Any]:
         filtered = [
             version for version in versions
@@ -1261,7 +1196,7 @@ class PublicCanonicalBrowser:
             state = "partial"
             reason_codes.append("some_versions_not_resolvable")
         candidates = self._unverified_candidates(versions, binding)
-        if getattr(self, "_candidate_scan_limited", False):
+        if self._candidate_scan_limited:
             reason_codes.append("unverified_candidate_scan_truncated")
         return self._envelope(
             state=state, reason_codes=reason_codes, entity=entity,
@@ -1272,7 +1207,7 @@ class PublicCanonicalBrowser:
         )
 
     @staticmethod
-    def _matches(filters: dict[str, Any], version: Any) -> bool:
+    def _matches(filters: dict[str, Any], version: CatalogBrowseVersion) -> bool:
         if filters.get("document_kinds") is not None \
                 and version.document_kind not in filters["document_kinds"]:
             return False
@@ -1288,7 +1223,7 @@ class PublicCanonicalBrowser:
 
     def _envelope(self, *, state: str, reason_codes: list[str], entity: str,
                   listing: str | None, as_of: str | None, binding: Binding,
-                  items: tuple[Any, ...] | list[Any],
+                  items: tuple[CatalogBrowseVersion, ...] | list[CatalogBrowseVersion],
                   snapshot: _Snapshot | None, next_cursor: str | None,
                   total: int | None, candidates: list[dict[str, Any]],
                   catalog_revision: str | None) -> dict[str, Any]:
@@ -1320,7 +1255,7 @@ class PublicCanonicalBrowser:
                 "stockwiki": binding.stockwiki,
                 "cwp_resolved_source": binding.resolved_source,
             },
-            "items": [version.to_item() for version in items] if verified
+            "items": [version_item(version) for version in items] if verified
             else [],
             "unverified_candidates": list(candidates) if verified else [],
             "page": page,

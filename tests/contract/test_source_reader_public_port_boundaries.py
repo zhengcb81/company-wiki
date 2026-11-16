@@ -5,6 +5,8 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
+import pytest
+
 
 SOURCE_ROOT = Path(__file__).resolve().parents[2] / "src" / "company_wiki"
 
@@ -34,8 +36,9 @@ def _read_tree(relative: str) -> ast.Module:
 
 def test_source_reader_uses_only_public_catalog_methods():
     tree = _read_tree("source_catalog/source_reader.py")
-    calls = _calls_on_dotted_owner(tree, ("self", "catalog"))
+    calls = _calls_on_dotted_owner(tree, ("self", "__catalog"))
 
+    assert calls
     assert not [
         f"line {call.lineno}: {ast.unparse(call.func)}"
         for call in calls
@@ -591,15 +594,47 @@ def test_resolver_verified_read_port_is_catalog_bound_and_pathless():
     )
 
 
-def test_document_browser_consumes_typed_catalog_queries_not_sql_storage():
-    tree = _read_tree("source_catalog/public_document_browser.py")
-    calls = _calls_on_dotted_owner(tree, ("self", "catalog", "reader"))
+def _browse_storage_bypasses(tree: ast.AST) -> list[str]:
+    storage_members = {"reader", "store", "_reader", "_store"}
+    accesses = [
+        node for node in ast.walk(tree)
+        if (isinstance(node, ast.Attribute) and node.attr in storage_members)
+        or (isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+            and node.func.id == "getattr" and len(node.args) >= 2
+            and isinstance(node.args[1], ast.Constant)
+            and node.args[1].value in storage_members)
+    ]
+    return [f"line {node.lineno}: {ast.unparse(node)}" for node in accesses]
 
+
+@pytest.mark.parametrize("file", [
+    "public_document_browser.py", "public_canonical_browser.py",
+    "public_canonical_browser_cli.py", "document_browse_projection.py",
+])
+def test_document_browser_consumes_typed_catalog_queries_not_sql_storage(file):
+    tree = _read_tree(f"source_catalog/{file}")
+    assert not _browse_storage_bypasses(tree)
+
+
+@pytest.mark.parametrize("source", [
+    "self.__catalog.reader.fetchall(sql)",
+    "sql = catalog.reader\nsql.fetchall(query)",
+    "getattr(catalog, '_store').execute(sql)",
+])
+def test_browse_storage_boundary_detects_renamed_receivers_and_reader_aliases(source):
+    assert _browse_storage_bypasses(ast.parse(source))
+
+
+def test_canonical_browse_does_not_import_the_plain_browser_implementation():
+    tree = _read_tree("source_catalog/public_canonical_browser.py")
     assert not [
-        f"line {call.lineno}: {ast.unparse(call.func)}"
-        for call in calls
-        if isinstance(call.func, ast.Attribute)
-        and call.func.attr in {"fetchone", "fetchall"}
+        node for node in ast.walk(tree)
+        if isinstance(node, ast.ImportFrom) and (
+            (node.module or "").split(".")[-1] == "public_document_browser"
+            or any(alias.name == "public_document_browser" for alias in node.names)
+        ) or isinstance(node, ast.Import) and any(
+            alias.name.split(".")[-1] == "public_document_browser" for alias in node.names
+        )
     ]
 
 

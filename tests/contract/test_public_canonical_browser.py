@@ -1141,49 +1141,52 @@ def test_explicit_listing_cannot_be_replaced_by_another_proven_listing(workspace
     assert result["page"]["total_status"] == "unknown"
 
 
-def test_public_candidate_helpers_are_query_bounded(workspace):
-    from company_wiki.source_catalog.public_document_browser import (
-        PublicDocumentBrowser,
-    )
-
+def test_candidate_document_ids_are_bounded_without_projecting_versions(workspace, monkeypatch):
     _, catalog, _ = workspace
-    browser = PublicDocumentBrowser(catalog)
-    documents, truncated, rows_read = browser._entity_documents_with_limit(
-        ENT_ACME, limit=1)
-    assert len(documents) == 1
-    assert truncated and rows_read == 2
-    versions, version_truncated, version_rows_read = \
-        browser._document_versions_with_limit(documents[0], limit=1)
-    assert len(versions) <= 1
-    assert version_rows_read <= 4
-    assert isinstance(version_truncated, bool)
+    expected = sorted({item.document_id for item in catalog.browse_entity_records(ENT_ACME)})
+    assert len(expected) > 1
+    fetchall = catalog.reader.fetchall
+    rows_seen = []
+
+    def observe(sql, params=()):
+        rows = fetchall(sql, params)
+        assert set(rows[0].keys()) == {"document_id"}
+        rows_seen.append(len(rows))
+        return rows
+
+    monkeypatch.setattr(catalog.reader, "fetchall", observe)
+    assert catalog.browse_entity_document_ids(ENT_ACME, limit=1) == tuple(expected[:1])
+    assert rows_seen == [1]
 
 
-def test_assertion_scan_is_sql_limited_before_rows_are_materialized():
-    from types import SimpleNamespace
+def test_assertion_scan_is_sql_limited_before_rows_are_materialized(workspace, monkeypatch):
     from company_wiki.source_catalog.public_canonical_browser import (
-        _MAX_ASSERTION_SCAN, PublicCanonicalBrowser,
+        _MAX_ASSERTION_SCAN,
     )
     from company_wiki.source_catalog.source_reader import SourceReadError
 
-    class Reader:
-        def fetchall(self, sql, params):
-            assert "LIMIT ?" in sql
-            assert "evidence_json" not in sql
-            assert params == (_MAX_ASSERTION_SCAN + 1,)
-            return [{"assertion_id": str(index)}
-                    for index in range(_MAX_ASSERTION_SCAN + 1)]
+    _, catalog, _ = workspace
 
-    browser = PublicCanonicalBrowser.__new__(PublicCanonicalBrowser)
-    browser.catalog = SimpleNamespace(reader=Reader())
+    def fetchall(sql, params):
+        assert "LIMIT ?" in sql
+        assert "evidence_json" not in sql
+        assert params == (_MAX_ASSERTION_SCAN + 1,)
+        return [{"assertion_id": str(index)}
+                for index in range(_MAX_ASSERTION_SCAN + 1)]
+
+    monkeypatch.setattr(catalog.reader, "fetchall", fetchall)
     with pytest.raises(SourceReadError, match="issuer_scan_budget_exceeded"):
-        browser._verified_assertions()
+        catalog.browse_verified_source_pairs(limit=_MAX_ASSERTION_SCAN)
 
 
-def test_proven_versions_require_an_exact_proof_for_each_source_ref():
+@pytest.mark.parametrize("late_budget_exhaustion", [False, True], ids=["exact", "late-budget"])
+def test_proven_versions_require_an_exact_proof_for_each_source_ref(late_budget_exhaustion):
+    from dataclasses import replace
     from types import SimpleNamespace
+    from company_wiki.source_contract.source_version import SourceReadError
+    from company_wiki.source_catalog.models import CatalogBrowseVersion
     from company_wiki.source_catalog.public_canonical_browser import (
-        Binding, IssuerKey, PublicCanonicalBrowser, ResolvedIssuer,
+        Binding, IssuerKey, ResolvedIssuer, _CanonicalBrowse,
     )
 
     document_id = "controlled-document"
@@ -1195,37 +1198,43 @@ def test_proven_versions_require_an_exact_proof_for_each_source_ref():
         IssuerKey("sec.cik", CIK_BETA), "sec-primary-dei/1",
         "assertion-foreign", "source-foreign", "b" * 64,
     )
-    rows = [
-        SimpleNamespace(document_id=document_id, source_id="source-good",
-                        sort_key=lambda: (1, "source-good")),
-        SimpleNamespace(document_id=document_id, source_id="source-foreign",
-                        sort_key=lambda: (2, "source-foreign")),
-        SimpleNamespace(document_id=document_id, source_id="source-unproven",
-                        sort_key=lambda: (3, "source-unproven")),
-    ]
-    browser = PublicCanonicalBrowser.__new__(PublicCanonicalBrowser)
-    browser._verified_assertions = lambda: [{
-        "source_id": "source-good", "document_id": document_id,
-    }]
+    primary = CatalogBrowseVersion(
+        document_id=document_id, source_id="source-good", content_sha256="a" * 64,
+        byte_size=100, mime_type="text/html", primary=True, ordinal=1,
+        title=None, document_kind="annual_report", published_date=None, source_status="active",
+        fiscal_year=2025, period_start=None, period_end=None, language="en", market="US",
+        canonical_entity_id=None, display_name=None, first_seen_at="", roles=(), resolvable=True,
+    )
+    rows = (
+        primary,
+        replace(primary, source_id="source-foreign", primary=False, ordinal=2),
+        replace(primary, source_id="source-unproven", primary=False, ordinal=3),
+    )
+    catalog = SimpleNamespace(
+        browse_verified_source_pairs=lambda *, limit: ((document_id, "source-good"),),
+        browse_document_records=lambda requested, *, limit: rows[:limit] if requested == document_id else (),
+    )
+    browser = _CanonicalBrowse(catalog, None)
     issuer_by_source = {
         "source-good": wanted,
         "source-foreign": foreign,
         "source-unproven": None,
     }
-    browser._issuer_for_source = lambda source_id, memo: issuer_by_source[
-        source_id]
-    document = object()
-    fallback = SimpleNamespace(
-        _document=lambda requested: document if requested == document_id else None,
-        _document_versions_with_limit=lambda _, limit: (
-            rows[:limit], False, min(len(rows), limit)),
-    )
-    browser._fallback_browser = lambda: fallback
+    def issuer_for_source(source_id, _memo):
+        if late_budget_exhaustion and source_id == "source-unproven":
+            browser._cn_budget_exhausted = True
+        return issuer_by_source[source_id]
 
-    versions = browser._proven_versions(Binding(
+    browser._issuer_for_source = issuer_for_source
+    binding = Binding(
         status="verified", reason_codes=[], issuer_pin=wanted.pin(),
-    ))
-    assert [row.source_id for row in versions] == ["source-good"]
+    )
+    if late_budget_exhaustion:
+        with pytest.raises(SourceReadError, match="cn_primary_proof_budget_exceeded"):
+            browser._proven_versions(binding)
+    else:
+        versions = browser._proven_versions(binding)
+        assert [row.source_id for row in versions] == ["source-good"]
 
 
 @pytest.mark.parametrize("output_stream", ["stdout", "stderr"])
@@ -1503,6 +1512,26 @@ def test_source_read_budget_refusal_is_named_and_pathless(
     assert "Traceback" not in captured.err
 
 
+def test_canonical_browser_uses_the_configured_proof_port(workspace):
+    from company_wiki.source_catalog.public_canonical_browser import (
+        ProofTransportError, PublicCanonicalBrowser,
+    )
+
+    _, catalog, _ = workspace
+    calls = []
+
+    class OfflineProof:
+        def read(self, *, entity_id, listing_id, as_of):
+            calls.append((entity_id, listing_id, as_of))
+            raise ProofTransportError("fixture_proof_unavailable")
+
+    browser = PublicCanonicalBrowser(catalog, OfflineProof())
+    response = browser.browse(_request())
+    assert response["binding"]["status"] == "unavailable"
+    assert response["binding"]["reason_codes"] == ["fixture_proof_unavailable"]
+    assert calls == [(ENT_ACME, None, AS_OF)]
+
+
 def test_incomplete_proof_configuration_is_blocked(workspace):
     tmp_path, catalog, config_path = workspace
     sw_cli = tmp_path / "sw" / "dashboard_issuer_proof_fixture_cli.py"
@@ -1615,8 +1644,9 @@ def test_incomplete_us_dei_evidence_is_missing_evidence_not_guess(workspace):
     assert result["binding"]["issuer"]["source_id"] == ACME_URN
 
 
+@pytest.mark.parametrize("interleaved", [False, True], ids=["sequential", "interleaved"])
 def test_cn_issuer_proof_uses_one_request_read_budget_for_the_whole_corpus(
-        workspace, monkeypatch):
+        workspace, monkeypatch, interleaved):
     """A valid 126MB issuer-proof corpus uses the shared source-read account.
 
     Source bytes are represented by a small fake reader so this regression
@@ -1628,7 +1658,7 @@ def test_cn_issuer_proof_uses_one_request_read_budget_for_the_whole_corpus(
     import company_wiki.source_catalog.cn_primary_issuer as cn_issuer
     import company_wiki.source_catalog.source_reader as source_reader
     from company_wiki.source_catalog.public_canonical_browser import (
-        Binding, PublicCanonicalBrowser,
+        Binding, PublicCanonicalBrowser, _CanonicalBrowse,
     )
     from company_wiki.source_catalog.read_budget import ReadBudget
     from company_wiki.source_catalog.source_reader import SourceReadError
@@ -1705,14 +1735,20 @@ def test_cn_issuer_proof_uses_one_request_read_budget_for_the_whole_corpus(
     browser = PublicCanonicalBrowser(catalog)
 
     def prove_corpus(self, _entity, _listing, _as_of):
-        for source_id in source_ids:
+        for index, source_id in enumerate(source_ids):
             result = self._resolve_source_facts(source_id)
             assert not isinstance(result, Binding)
+            if index == 0 and interleaved:
+                other = browser.browse(_request(
+                    canonical_entity_id=ENT_BETA,
+                    analysis_subject_id="separate-request",
+                ))
+                assert other["state"] == "unsupported"
         return Binding(status="unknown", reason_codes=["fixture_complete"])
 
-    monkeypatch.setattr(PublicCanonicalBrowser, "_resolve_binding", prove_corpus)
+    monkeypatch.setattr(_CanonicalBrowse, "_resolve_binding", prove_corpus)
     first = browser.browse(_request())
-    first_budget = browser._cn_read_budget
+    first_budget = passed_budgets[0]
     assert first["state"] == "empty"
     assert first_budget.bytes_read == 126_000_000
     assert first_budget.bytes_read > 64_000_000
@@ -1720,24 +1756,21 @@ def test_cn_issuer_proof_uses_one_request_read_budget_for_the_whole_corpus(
 
     passed_budgets.clear()
     second = browser.browse(_request())
-    second_budget = browser._cn_read_budget
+    second_budget = passed_budgets[0]
     assert second["state"] == "empty"
     assert second_budget is not first_budget
     assert second_budget.bytes_read == 126_000_000
     assert all(budget is second_budget for budget in passed_budgets)
 
-    budget_limited = PublicCanonicalBrowser(catalog)
+    budget_limited = _CanonicalBrowse(catalog, None)
     budget_limited._cn_read_budget = ReadBudget(max_bytes=64_000_000)
-    budget_limited._cn_verified = {}
-    budget_limited._cn_target_security = None
-    budget_limited._cn_budget_exhausted = False
     for source_id in source_ids:
         result = budget_limited._resolve_source_facts(source_id)
         if budget_limited._cn_budget_exhausted:
             break
     assert budget_limited._cn_budget_exhausted
     assert isinstance(result, Binding)
-    budget_limited._verified_assertions = lambda: []
+    monkeypatch.setattr(catalog, "browse_verified_source_pairs", lambda *, limit: ())
     verified_binding = Binding(
         status="verified", reason_codes=[], issuer_pin={
             "namespace": "cn.uscc", "value": "913101157626272806",

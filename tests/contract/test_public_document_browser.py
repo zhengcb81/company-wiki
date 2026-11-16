@@ -279,6 +279,32 @@ def test_catalog_projection_preserves_legacy_date_shape_behavior():
     assert _browse_date_or_none("2025-1-04") is None
 
 
+def test_catalog_bounds_version_projection_before_python_materialization(tmp_path, monkeypatch):
+    catalog = _build(tmp_path)
+    try:
+        document_id = next(
+            row.document_id for row in catalog.browse_entity_records(ENT)
+            if row.content_sha256 == _sha(FILING_PRIMARY)
+        )
+        complete = catalog.browse_document_records(document_id)
+        assert len(complete) == 2
+        fetchall = catalog.reader.fetchall
+        source_batch_sizes = []
+
+        def observe(sql, params=()):
+            rows = fetchall(sql, params)
+            if rows and {"source_id", "content_sha256", "byte_size"} <= set(rows[0].keys()):
+                source_batch_sizes.append(len(rows))
+            return rows
+
+        monkeypatch.setattr(catalog.reader, "fetchall", observe)
+        (first,) = catalog.browse_document_records(document_id, limit=1)
+        assert first == next(row for row in complete if row.primary)
+        assert source_batch_sizes == [1]
+    finally:
+        catalog.close()
+
+
 # --- happy path: cross-kind, pathless, complete SourceRefs -------------------
 
 
@@ -737,32 +763,48 @@ def test_cli_browse_and_reopen_roundtrip(tmp_path):
     ("entry", "reason"),
     [("request", "invalid_request"), ("snapshot", "invalid_snapshot_id")],
 )
-def test_cli_reports_json_decoder_stack_failure_without_traceback(tmp_path, entry, reason):
+def test_cli_reports_json_decoder_stack_failure_without_traceback(tmp_path, monkeypatch, capsys, entry, reason):
+    from io import BytesIO
+    from types import SimpleNamespace
+
+    from company_wiki import wire_json
+    from company_wiki.source_catalog import public_document_browser_cli as cli
+
     catalog = _build(tmp_path)
     catalog.close()
     config_path = _write_cli_config(tmp_path)
-    nested = "[" * 3_000 + "0" + "]" * 3_000
     if entry == "request":
-        request = '{"schema_version":"' + BROWSE_REQUEST_SCHEMA + '","nested":' + nested + "}"
+        targeted_json = json.dumps({"schema_version": BROWSE_REQUEST_SCHEMA})
+        request_json = targeted_json
     else:
-        token = base64.urlsafe_b64encode(('{"v":1,"nested":' + nested + "}").encode())
-        request = {
+        targeted_json = json.dumps({"v": 1, "entity": ENT})
+        token = base64.urlsafe_b64encode(targeted_json.encode("utf-8"))
+        request_json = json.dumps({
             "schema_version": BROWSE_REQUEST_SCHEMA,
             "canonical_entity_id": ENT,
             "market": None, "document_kinds": None, "fiscal_years": None,
             "language": None, "source_statuses": None, "limit": None, "cursor": None,
             "snapshot_id": token.decode().rstrip("="),
-        }
+        })
 
-    proc = _run_cli(config_path, request, tmp_path)
-    assert proc.returncode == 2, proc.stderr
-    assert proc.stdout == b""
-    assert json.loads(proc.stderr) == {
+    loads = wire_json.json.loads
+
+    def fail_one_decode(raw, *args, **kwargs):
+        if raw == targeted_json:
+            raise RecursionError("simulated runtime stack limit")
+        return loads(raw, *args, **kwargs)
+
+    monkeypatch.setattr(wire_json.json, "loads", fail_one_decode)
+    monkeypatch.setattr(cli.sys, "stdin", SimpleNamespace(buffer=BytesIO(request_json.encode("utf-8"))))
+    assert cli.main(["--config", str(config_path)]) == 2
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert json.loads(output.err) == {
         "schema_version": "company-wiki-public-document-browse/1",
         "state": "blocked",
         "reason": reason,
     }
-    _assert_no_path_leak(proc.stderr.decode(), tmp_path)
+    _assert_no_path_leak(output.err, tmp_path)
 
 
 def test_invalid_catalog_locator_does_not_advertise_resolvable_original(tmp_path):

@@ -56,6 +56,20 @@ PAGES = [
 META = {"market": "CN", "document_kind": "annual_report", "security_id": "688012"}
 
 
+def test_cn_identity_proof_consumes_complete_pages_through_the_parser_owner(monkeypatch):
+    import company_wiki.source_catalog.cn_primary_issuer as issuer
+
+    calls = []
+
+    def parse(data, *, max_pages, max_text_characters):
+        calls.append((data, max_pages, max_text_characters))
+        return ("first", "", "third")
+
+    monkeypatch.setattr(issuer, "read_native_pdf_pages", parse, raising=False)
+    assert issuer.pdf_text_pages(b"opaque fixture bytes") == ["first", "", "third"]
+    assert calls == [(b"opaque fixture bytes", issuer.MAX_PAGES, issuer.MAX_TEXT_CHARACTERS)]
+
+
 class Catalog:
     def __init__(self, path):
         self.config = type("Config", (), {"catalog_dir": path})()

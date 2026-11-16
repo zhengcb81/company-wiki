@@ -16,13 +16,16 @@ import uuid
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
 import re
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from urllib.parse import urlsplit
 
 from company_wiki.source_contract.source_version import SourceReadError, SourceRef
 
 from .store import CatalogStore, canonical_json
 from .document_kinds import SOURCE_FACT_KINDS
+
+if TYPE_CHECKING:
+    from .reader import CatalogReader
 
 
 def evidence_payload(raw: Any, assertion_id: str) -> dict[str, Any]:
@@ -652,7 +655,7 @@ def _visibility_sql(
 
 
 def _get_active_verified_assertions(
-    store: CatalogStore,
+    store: CatalogStore | CatalogReader,
     source_id: str,
     *,
     reader: str = "v1",
@@ -701,7 +704,7 @@ def _resolve_active_verified(
 
 
 def get_verified_assertion(
-    store: CatalogStore,
+    store: CatalogStore | CatalogReader,
     source_id: str,
     content_sha256: str,
     *,

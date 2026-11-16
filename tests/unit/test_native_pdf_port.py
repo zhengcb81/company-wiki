@@ -6,6 +6,7 @@ import pytest
 
 from company_wiki.parser_adapters import (
     NativePdfError,
+    read_native_pdf_pages,
     read_native_pdf_prefix,
     validate_native_pdf,
 )
@@ -41,7 +42,26 @@ def test_invalid_pdf_is_rejected_by_parser_owner():
         validate_native_pdf(b"%PDF-1.4\n%%EOF")
 
 
-@pytest.mark.parametrize("module", ["local_reconcile", "official_source_flow", "narrative_language"])
+def test_complete_native_pdf_port_preserves_empty_pages_and_rejects_partial_results():
+    with pymupdf.open() as document:
+        document.new_page().insert_text((72, 72), "First")
+        document.new_page()
+        document.new_page().insert_text((72, 72), "Third")
+        data = document.tobytes()
+        encrypted = document.tobytes(encryption=pymupdf.PDF_ENCRYPT_AES_256, user_pw="fixture")
+    assert read_native_pdf_pages(data, max_pages=3, max_text_characters=12) == ("First\n", "", "Third\n")
+
+    for body, page_limit, text_limit, reason in (
+        (data, 2, 100, "page_limit"),
+        (data, 3, 11, "text_limit"),
+        (encrypted, 3, 100, "encrypted"),
+    ):
+        with pytest.raises(NativePdfError) as exc_info:
+            read_native_pdf_pages(body, max_pages=page_limit, max_text_characters=text_limit)
+        assert exc_info.value.reason == reason
+
+
+@pytest.mark.parametrize("module", ["local_reconcile", "official_source_flow", "narrative_language", "cn_primary_issuer"])
 def test_source_intake_does_not_import_pdf_backend(module):
     repo = Path(__file__).resolve().parents[2]
     path = repo / "src" / "company_wiki" / "source_catalog" / f"{module}.py"

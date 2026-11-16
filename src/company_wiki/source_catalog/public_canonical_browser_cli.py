@@ -134,7 +134,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         # Probe the catalog once so an unreadable catalog is the transport
         # fault it is (unavailable), even when no proof is configured and
         # the binding itself would short-circuit.
-        catalog.reader.fetchone("SELECT 1")
+        catalog.check_readable()
         browser = PublicCanonicalBrowser(catalog, proof_client=proof_client)
         response = browser.browse(request)
         _write_json_line(sys.stdout, response)

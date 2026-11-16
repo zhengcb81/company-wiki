@@ -7,8 +7,9 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
+from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog  # noqa: E402
 from company_wiki.source_catalog.public_canonical_browser import (  # noqa: E402
-    CanonicalBrowseError, PublicCanonicalBrowser, REQUEST_SCHEMA,
+    CanonicalBrowseError, ProofTransportError, PublicCanonicalBrowser, REQUEST_SCHEMA,
 )
 
 
@@ -22,16 +23,20 @@ def request(as_of):
     }
 
 
-class OwnerReached(Exception):
-    pass
+@pytest.fixture
+def browser(tmp_path):
+    class OwnerProbe:
+        def read(self, *, entity_id, listing_id, as_of):
+            raise ProofTransportError("owner_probe_reached")
 
-
-def browser():
-    value = object.__new__(PublicCanonicalBrowser)
-    def owner(*args):
-        raise OwnerReached("calendar validation finished")
-    value._resolve_binding = owner
-    return value
+    catalog = SourceCatalog(CatalogConfig(
+        project_root=tmp_path, catalog_dir=tmp_path / "catalog",
+        roots=(RootSpec("fixture", tmp_path, "company_raw"),),
+    ))
+    try:
+        yield PublicCanonicalBrowser(catalog, OwnerProbe())
+    finally:
+        catalog.close()
 
 
 @pytest.mark.parametrize("value", [
@@ -42,9 +47,9 @@ def browser():
     "2026-10-30T00:60:00Z",
     "0000-01-01T00:00:00+00:00",
 ])
-def test_invalid_calendar_never_reaches_owner(value):
+def test_invalid_calendar_never_reaches_owner(browser, value):
     with pytest.raises(CanonicalBrowseError, match="invalid_as_of"):
-        browser().browse(request(value))
+        browser.browse(request(value))
 
 
 @pytest.mark.parametrize("value", [
@@ -52,6 +57,6 @@ def test_invalid_calendar_never_reaches_owner(value):
     "2026-10-30T23:59:59+00:00",
     "2026-10-30T00:00:00.123456Z",
 ])
-def test_valid_utc_calendar_reaches_owner(value):
-    with pytest.raises(OwnerReached):
-        browser().browse(request(value))
+def test_valid_utc_calendar_reaches_owner(browser, value):
+    result = browser.browse(request(value))
+    assert result["binding"]["reason_codes"] == ["owner_probe_reached"]

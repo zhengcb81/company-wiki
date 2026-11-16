@@ -46,9 +46,15 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..wire_json import parse_json
+from .document_browse_projection import (
+    DOCUMENT_VERSION_ID_PREFIX,
+    document_version_id,
+    version_item,
+    version_revision_member,
+    version_sort_key,
+)
 from .models import CatalogBrowseVersion
 from .service import SourceCatalog
-from .source_reader import SOURCE_REF_SCHEMA_VERSION
 
 
 BROWSE_REQUEST_SCHEMA = "company-wiki-public-document-browse-request/1"
@@ -56,9 +62,7 @@ REOPEN_REQUEST_SCHEMA = "company-wiki-public-document-version-request/1"
 BROWSE_RESPONSE_SCHEMA = "company-wiki-public-document-browse/1"
 REOPEN_RESPONSE_SCHEMA = "company-wiki-public-document-version/1"
 
-#: Stable prefix for the opaque, single-segment document version token.
-DOCUMENT_VERSION_ID_PREFIX = "cwpdv1-"
-_VERSION_ID_RE = re.compile(r"cwpdv1-[A-Za-z0-9_-]{43}\Z")
+_VERSION_ID_RE = re.compile(rf"{DOCUMENT_VERSION_ID_PREFIX}[A-Za-z0-9_-]{{43}}\Z")
 _TOKEN_RE = re.compile(r"[A-Za-z0-9_-]+\Z")
 _ISO_DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}\Z")
 
@@ -121,24 +125,6 @@ def _decode_token(token: Any, field: str) -> dict[str, Any]:
     if not isinstance(payload, dict) or payload.get("v") != _SNAPSHOT_VERSION:
         raise PublicBrowseError(f"unsupported_{field}")
     return payload
-
-
-def document_version_id(document_id: str, source_id: str,
-                        content_sha256: str) -> str:
-    """Deterministic opaque token bound to one complete version triple.
-
-    The same triple always yields the same id; the same document_id with a
-    different source/hash never shares it.  The id is a single path segment
-    and carries no path, URL or locator.
-    """
-    digest = hashlib.sha256(
-        "company-wiki:document-version:1\0".encode("utf-8")
-        + document_id.encode("utf-8") + b"\0"
-        + source_id.encode("utf-8") + b"\0"
-        + content_sha256.encode("utf-8")
-    ).digest()
-    return DOCUMENT_VERSION_ID_PREFIX + base64.urlsafe_b64encode(
-        digest).decode("ascii").rstrip("=")
 
 
 def _required_text(value: Any, field: str, *, max_length: int = 300) -> str:
@@ -213,102 +199,13 @@ def _filters_conflict(request_filters: dict[str, Any],
     return False
 
 
-@dataclass(frozen=True)
-class _VersionRow:
-    """One frozen (document, source) version with its projected facts."""
-
-    document_id: str
-    source_id: str
-    content_sha256: str
-    byte_size: int
-    mime_type: str
-    primary: bool
-    ordinal: int
-    title: str | None
-    document_kind: str | None
-    published_date: str | None
-    source_status: str | None
-    fiscal_year: int | None
-    period_start: str | None
-    period_end: str | None
-    language: str | None
-    market: str | None
-    canonical_entity_id: str | None
-    display_name: str | None
-    first_seen_at: str
-    roles: tuple[str, ...]
-    resolvable: bool
-
-    def sort_key(self) -> tuple[Any, ...]:
-        # Deterministic total order: kind, then newest fiscal year and
-        # publication date first, then stable document identity; inside one
-        # document the current version first, then older versions.  (The
-        # ordinal alone cannot express this: sources first seen in the same
-        # scan run tie on first_seen_at.)
-        published = self.published_date or ""
-        return (
-            self.document_kind or "",
-            -(self.fiscal_year or 0),
-            0 if published else 1,
-            tuple(-ord(ch) for ch in published),
-            self.title or "",
-            self.document_id,
-            0 if self.primary else 1,
-            -self.ordinal,
-            self.source_id,
-        )
-
-    def revision_member(self) -> list[Any]:
-        """Everything a response item can show — locations as ids/statuses
-        only, never paths.  Any visible change must change the revision."""
-        return [
-            self.document_id, self.source_id, self.content_sha256,
-            self.byte_size, self.mime_type, self.primary, self.ordinal,
-            self.title, self.document_kind, self.published_date,
-            self.source_status, self.fiscal_year, self.period_start,
-            self.period_end, self.language, self.market,
-            self.canonical_entity_id, self.display_name, self.first_seen_at,
-            sorted(self.roles), self.resolvable,
-        ]
-
-    def to_item(self) -> dict[str, Any]:
-        return {
-            "document_version_id": document_version_id(
-                self.document_id, self.source_id, self.content_sha256),
-            "document_id": self.document_id,
-            "title": self.title,
-            "document_kind": self.document_kind,
-            "published_at": self.published_date,
-            "period_start": self.period_start,
-            "period_end": self.period_end,
-            "fiscal_year": self.fiscal_year,
-            "language": self.language,
-            "market": self.market,
-            "version_label": str(self.ordinal),
-            "is_current_version": self.primary,
-            "processing_state": self.source_status,
-            "location_roles": sorted(self.roles),
-            "first_seen_at": self.first_seen_at,
-            "storage_state": (
-                "resolvable" if self.resolvable else "not_resolvable"),
-            "source_ref": {
-                "document_id": self.document_id,
-                "source_id": self.source_id,
-                "content_sha256": self.content_sha256,
-                "byte_size": self.byte_size,
-                "mime_type": self.mime_type,
-                "schema_version": SOURCE_REF_SCHEMA_VERSION,
-            },
-        }
-
-
 class PublicDocumentBrowser:
     """Zero-write entity document browse and exact version reopen."""
 
     def __init__(self, catalog: SourceCatalog):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
-        self.catalog = catalog
+        self.__catalog = catalog
 
     # -- public entry points --------------------------------------------------
 
@@ -392,7 +289,7 @@ class PublicDocumentBrowser:
             raise PublicBrowseError("invalid_document_version_id")
 
         identity = next((
-            candidate for candidate in self.catalog.iter_original_version_identities()
+            candidate for candidate in self.__catalog.iter_original_version_identities()
             if document_version_id(
                 candidate.document_id, candidate.source_id,
                 candidate.content_sha256,
@@ -407,8 +304,7 @@ class PublicDocumentBrowser:
                 "document": None,
             }
         versions = [
-            self._version_row(record)
-            for record in self.catalog.browse_document_records(identity.document_id)
+            record for record in self.__catalog.browse_document_records(identity.document_id)
             if record.source_id == identity.source_id
         ]
         if not versions:
@@ -419,7 +315,7 @@ class PublicDocumentBrowser:
                 "document_version_id": wanted,
                 "document": None,
             }
-        item = versions[0].to_item()
+        item = version_item(versions[0])
         assert item["document_version_id"] == wanted
         return {
             "schema_version": REOPEN_RESPONSE_SCHEMA,
@@ -462,129 +358,18 @@ class PublicDocumentBrowser:
             raise PublicBrowseError("invalid_snapshot_id")
         return _Snapshot(entity, pinned_filters, revision)
 
-    def _entity_versions(self, entity: str) -> list[_VersionRow]:
-        versions = [
-            self._version_row(record)
-            for record in self.catalog.browse_entity_records(entity)
-        ]
-        versions.sort(key=_VersionRow.sort_key)
-        return versions
-
-    def _document(self, document_id: str) -> dict[str, Any] | None:
-        """One indexed document's pathless facts, or None when not indexed.
-
-        Shared with the canonical browse consumer: read-only reuse of this
-        browser's exact document/version enumeration, never a second query
-        path of its own.
-        """
-        records = self.catalog.browse_document_records(document_id)
-        if not records:
-            return None
-        primary = next((record for record in records if record.primary), None)
-        head = records[0]
-        return {
-            "document_id": head.document_id,
-            "primary_source_id": primary.source_id if primary else None,
-            "title": head.title,
-            "document_kind": head.document_kind,
-            "published_date": head.published_date,
-            "source_status": head.source_status,
-            "market": head.market,
-            "language": head.language,
-            "canonical_entity_id": head.canonical_entity_id,
-            "display_name": head.display_name,
-            "fiscal_year": head.fiscal_year,
-        }
-
-    def _entity_documents_with_limit(
-        self, entity: str, *, limit: int | None
-    ) -> tuple[list[dict[str, Any]], bool, int]:
-        """Bound entity enumeration for diagnostic-only callers.
-
-        The default public browse remains complete. Bounded callers receive a
-        deterministic prefix (ordered by document id), a truncation flag, and
-        the number of documents read: at most ``limit + 1``, the same bounded
-        read count the historical ``LIMIT ?`` query reported, so downstream
-        scan budgets account identically through the typed port.
-        """
-        if limit is not None and (isinstance(limit, bool)
-                                  or not isinstance(limit, int) or limit < 1):
-            raise ValueError("entity document limit must be positive")
-        document_ids = sorted({
-            record.document_id
-            for record in self.catalog.browse_entity_records(entity)
-        })
-        scanned = len(document_ids)
-        truncated = limit is not None and scanned > limit
-        if limit is not None:
-            scanned = min(scanned, limit + 1)
-            document_ids = document_ids[:limit]
-        documents = [
-            document for document_id in document_ids
-            if (document := self._document(document_id)) is not None
-        ]
-        return documents, truncated, scanned
-
-    def _document_versions_with_limit(
-        self, document: dict[str, Any], *, limit: int | None
-    ) -> tuple[list["_VersionRow"], bool, int]:
-        """Enumerate a deterministic bounded prefix of exact source versions.
-
-        ``rows_read`` keeps the bounded ``limit + 1`` accounting of the
-        historical query so caller scan budgets stay unchanged.
-        """
-        if limit is not None and (isinstance(limit, bool)
-                                  or not isinstance(limit, int) or limit < 1):
-            raise ValueError("document version limit must be positive")
-        versions = [
-            self._version_row(record)
-            for record in self.catalog.browse_document_records(
-                str(document["document_id"])
-            )
-        ]
-        versions.sort(key=_VersionRow.sort_key)
-        scanned = len(versions)
-        truncated = limit is not None and scanned > limit
-        if limit is not None:
-            scanned = min(scanned, limit + 1)
-            versions = versions[:limit]
-        return versions, truncated, scanned
+    def _entity_versions(self, entity: str) -> list[CatalogBrowseVersion]:
+        return sorted(self.__catalog.browse_entity_records(entity), key=version_sort_key)
 
     @staticmethod
-    def _version_row(record: CatalogBrowseVersion) -> _VersionRow:
-        return _VersionRow(
-            document_id=record.document_id,
-            source_id=record.source_id,
-            content_sha256=record.content_sha256,
-            byte_size=record.byte_size,
-            mime_type=record.mime_type,
-            primary=record.primary,
-            ordinal=record.ordinal,
-            title=record.title,
-            document_kind=record.document_kind,
-            published_date=record.published_date,
-            source_status=record.source_status,
-            fiscal_year=record.fiscal_year,
-            period_start=record.period_start,
-            period_end=record.period_end,
-            language=record.language,
-            market=record.market,
-            canonical_entity_id=record.canonical_entity_id,
-            display_name=record.display_name,
-            first_seen_at=record.first_seen_at,
-            roles=record.roles,
-            resolvable=record.resolvable,
-        )
-
-    @staticmethod
-    def _revision(versions: list[_VersionRow]) -> str:
+    def _revision(versions: list[CatalogBrowseVersion]) -> str:
         payload = json.dumps(
-            [version.revision_member() for version in versions],
+            [version_revision_member(version) for version in versions],
             ensure_ascii=True, sort_keys=True, separators=(",", ":"),
         )
         return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
-    def _serve(self, entity: str, versions: list[_VersionRow],
+    def _serve(self, entity: str, versions: list[CatalogBrowseVersion],
                snapshot: _Snapshot, offset: int, limit: int) -> dict[str, Any]:
         filtered = [
             version for version in versions
@@ -623,7 +408,7 @@ class PublicDocumentBrowser:
         )
 
     @staticmethod
-    def _matches(filters: dict[str, Any], version: _VersionRow) -> bool:
+    def _matches(filters: dict[str, Any], version: CatalogBrowseVersion) -> bool:
         if filters["market"] is not None \
                 and version.market != filters["market"]:
             return False
@@ -642,7 +427,7 @@ class PublicDocumentBrowser:
         return True
 
     @staticmethod
-    def _facets(versions: list[_VersionRow]) -> dict[str, dict[str, int]]:
+    def _facets(versions: list[CatalogBrowseVersion]) -> dict[str, dict[str, int]]:
         def counts(attribute: str, *, as_text: bool = False) -> dict[str, int]:
             result: dict[str, int] = {}
             for version in versions:
@@ -663,7 +448,7 @@ class PublicDocumentBrowser:
         }
 
 
-def _entity_facts(versions: list[_VersionRow]) -> dict[str, Any] | None:
+def _entity_facts(versions: list[CatalogBrowseVersion]) -> dict[str, Any] | None:
     if not versions:
         return None
     facts: dict[str, Any] = {}
@@ -677,7 +462,7 @@ def _entity_facts(versions: list[_VersionRow]) -> dict[str, Any] | None:
 
 
 def _envelope(state: str, reason_codes: list[str], entity: str,
-              items: tuple[_VersionRow, ...] | list[_VersionRow],
+              items: tuple[CatalogBrowseVersion, ...] | list[CatalogBrowseVersion],
               snapshot: _Snapshot,
               facets: dict[str, dict[str, int]] | None,
               entity_facts: dict[str, Any] | None,
@@ -690,7 +475,7 @@ def _envelope(state: str, reason_codes: list[str], entity: str,
             "requested_key": entity,
             **(entity_facts or {}),
         },
-        "items": [version.to_item() for version in items],
+        "items": [version_item(version) for version in items],
         "page": {
             "next_cursor": next_cursor,
             "snapshot_id": snapshot.encode(),

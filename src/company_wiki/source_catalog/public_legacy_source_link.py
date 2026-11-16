@@ -14,7 +14,7 @@ import re
 import time
 from typing import Any
 
-from .public_document_browser import document_version_id
+from .document_browse_projection import document_version_id
 from .service import SourceCatalog
 from .source_location import relative_segments
 from .source_reader import SourceReadError, SourceRef, SourceVersionReader

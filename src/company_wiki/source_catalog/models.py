@@ -5,7 +5,10 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from enum import Enum
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from ..source_contract.source_version import SourceRef
 
 
 @dataclass(frozen=True)
@@ -67,6 +70,15 @@ class CatalogBrowseVersion:
     first_seen_at: str
     roles: tuple[str, ...]
     resolvable: bool
+
+
+@dataclass(frozen=True)
+class CatalogBrowseSourceFacts:
+    """Indexed hash and the active assertion's exact source reference, if available."""
+
+    content_sha256: str
+    verified_ref: SourceRef | None = None
+    assertion_id: str | None = None
 
 
 @dataclass(frozen=True)

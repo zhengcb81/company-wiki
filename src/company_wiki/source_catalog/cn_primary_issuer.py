@@ -5,12 +5,9 @@ proof requires an own-company registration passage containing a checksum-valid
 USCC, own-company legal-name and listing tables, and the owner's cache-only
 verified official security record. Ambiguity and missing native text refuse.
 
-Ported from the dashboard-B33/CANONICAL candidate (final state `385cee72b`,
-shared with the canonical browser lane).  Follow-up, unchanged here: the
-direct ``pymupdf`` call in :func:`pdf_text_pages` is intended to move onto
-the parser-owner port (``parser_adapters``) per the 2026-11-09 integration
-plan; the named ``native_pdf_reader_unavailable`` refusal already keeps the
-dependency optional.
+The parser adapter supplies complete native page text and enforces the
+requested page/text limits. This module owns issuer-proof policy and maps
+parser failures to the existing proof reasons.
 """
 
 from __future__ import annotations
@@ -20,6 +17,7 @@ import hashlib
 import re
 from typing import Any
 
+from ..parser_adapters import NativePdfError, read_native_pdf_pages
 from .security_identity import (
     CNINFO_STOCK_URL,
     SecurityIdentityError,
@@ -86,25 +84,19 @@ def pdf_text_pages(data: bytes) -> list[str]:
     if len(data) > MAX_BYTES:
         raise PrimaryIssuerUnavailable("primary_pdf_byte_limit")
     try:
-        import pymupdf
+        return list(read_native_pdf_pages(
+            data, max_pages=MAX_PAGES, max_text_characters=MAX_TEXT_CHARACTERS,
+        ))
     except ImportError as exc:
         raise PrimaryIssuerUnavailable("native_pdf_reader_unavailable") from exc
-    try:
-        with pymupdf.open(stream=data, filetype="pdf") as document:
-            if document.is_encrypted or len(document) > MAX_PAGES:
-                raise PrimaryIssuerUnavailable("primary_pdf_page_limit_or_encrypted")
-            pages, length = [], 0
-            for page in document:
-                text = page.get_text("text")
-                length += len(text)
-                if length > MAX_TEXT_CHARACTERS:
-                    raise PrimaryIssuerUnavailable("primary_pdf_text_limit")
-                pages.append(text)
-            return pages
-    except PrimaryIssuerUnavailable:
-        raise
-    except Exception as exc:
-        raise PrimaryIssuerUnavailable("native_pdf_unreadable") from exc
+    except NativePdfError as exc:
+        reasons = {
+            "page_limit": "primary_pdf_page_limit_or_encrypted",
+            "encrypted": "primary_pdf_page_limit_or_encrypted",
+            "text_limit": "primary_pdf_text_limit",
+            "unreadable": "native_pdf_unreadable",
+        }
+        raise PrimaryIssuerUnavailable(reasons[exc.reason]) from exc
 
 
 def _locator(page: int, excerpt: str) -> dict[str, Any]:

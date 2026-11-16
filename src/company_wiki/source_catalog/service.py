@@ -15,11 +15,13 @@ from company_wiki.atomic_file import atomic_output
 from company_wiki.file_usage import database_file_sizes, file_tree_bytes
 from company_wiki.source_contract.source_version import (
     SourceProcessingDescriptor,
+    SourceReadError,
     SourceRef,
 )
 from company_wiki.source_contract.source_manifest import SourceManifest
 
 from .models import (
+    CatalogBrowseSourceFacts,
     CatalogBrowseVersion,
     CatalogConfig,
     ProcessingReport,
@@ -82,6 +84,13 @@ _BROWSE_FACT_PATHS: dict[str, tuple[str, ...]] = {
 }
 _BROWSE_DATE = re.compile(r"\d{4}-\d{2}-\d{2}\Z")
 _BROWSE_VERSION_ROLES = ("original_primary", "original_attachment", "indexed_only")
+_BROWSE_ENTITY_PREDICATE = """(
+    d.document_id IN (SELECT document_id FROM document_entities WHERE entity_id = ?)
+    OR (json_valid(d.metadata_json) AND (
+        json_extract(d.metadata_json, '$.acquisition.canonical_entity_id') = ?
+        OR json_extract(d.metadata_json, '$.dayu_meta.canonical_entity_id') = ?
+    ))
+)"""
 
 
 def _read_shared_metadata(raw: Any) -> dict[str, Any]:
@@ -133,6 +142,11 @@ def _browse_projection_sql(where_clause: str) -> str:
         "d.published_date, d.source_status, " + fact_columns
         + " FROM documents d" + where_clause
     )
+
+
+def _require_browse_limit(limit: int) -> None:
+    if type(limit) is not int or limit < 1:
+        raise ValueError("browse limit must be a positive integer")
 
 
 def _browse_text_or_none(value: Any) -> str | None:
@@ -577,28 +591,99 @@ class SourceCatalog:
     def browse_entity_records(self, canonical_entity_id: str) -> tuple[CatalogBrowseVersion, ...]:
         """Return the catalog-owned pathless browse projection for an entity."""
         entity = _required_catalog_text(canonical_entity_id, "canonical_entity_id")
-        sql = _browse_projection_sql(
-            " WHERE d.document_id IN ("
-            "SELECT document_id FROM document_entities WHERE entity_id = ?)"
-            " OR (json_valid(d.metadata_json) AND ("
-            "json_extract(d.metadata_json, '$.acquisition.canonical_entity_id') = ?"
-            " OR json_extract(d.metadata_json, '$.dayu_meta.canonical_entity_id') = ?))"
-        )
+        sql = _browse_projection_sql(f" WHERE {_BROWSE_ENTITY_PREDICATE}")
         rows = self.reader.fetchall(sql, (entity, entity, entity))
         records: list[CatalogBrowseVersion] = []
         for row in rows:
             records.extend(self._browse_versions_for_document(_browse_document(row)))
         return tuple(records)
 
-    def browse_document_records(self, document_id: str) -> tuple[CatalogBrowseVersion, ...]:
-        """Return all original versions for one indexed document."""
+    def browse_entity_document_ids(self, canonical_entity_id: str, *, limit: int) -> tuple[str, ...]:
+        """Return a bounded document-id prefix without projecting any versions."""
+        entity = _required_catalog_text(canonical_entity_id, "canonical_entity_id")
+        _require_browse_limit(limit)
+        role_marks = ", ".join("?" for _ in _BROWSE_VERSION_ROLES)
+        rows = self.reader.fetchall(
+            f"""SELECT d.document_id FROM documents d
+                WHERE {_BROWSE_ENTITY_PREDICATE}
+                  AND (EXISTS (SELECT 1 FROM sources s WHERE s.source_id = d.primary_source_id)
+                       OR EXISTS (SELECT 1 FROM locations l JOIN sources s ON s.source_id = l.source_id
+                                  WHERE l.document_id = d.document_id AND l.role IN ({role_marks})))
+                ORDER BY d.document_id LIMIT ?""",
+            (entity, entity, entity, *_BROWSE_VERSION_ROLES, limit),
+        )
+        return tuple(str(row["document_id"]) for row in rows)
+
+    def browse_document_entity_ids(self, document_id: str, *, limit: int) -> tuple[str, ...]:
+        """Return a bounded prefix of the entity keys attached to a document."""
         document = _required_catalog_text(document_id, "document_id")
+        _require_browse_limit(limit)
+        rows = self.reader.fetchall(
+            "SELECT entity_id FROM document_entities WHERE document_id = ? ORDER BY entity_id LIMIT ?",
+            (document, limit),
+        )
+        return tuple(str(row["entity_id"]) for row in rows)
+
+    def browse_document_records(
+        self, document_id: str, *, limit: int | None = None,
+    ) -> tuple[CatalogBrowseVersion, ...]:
+        """Return original versions. A bounded prefix is current first, then newest."""
+        document = _required_catalog_text(document_id, "document_id")
+        if limit is not None:
+            _require_browse_limit(limit)
         row = self.reader.fetchone(
             _browse_projection_sql(" WHERE d.document_id = ?"), (document,)
         )
         if row is None:
             return ()
-        return tuple(self._browse_versions_for_document(_browse_document(row)))
+        return tuple(self._browse_versions_for_document(_browse_document(row), limit=limit))
+
+    def browse_source_facts(self, source_id: str) -> CatalogBrowseSourceFacts | None:
+        """Get pathless source identity and current hash-bound facts for issuer browse."""
+        from .assertion_service import get_verified_assertion
+
+        row = self.reader.fetchone(
+            "SELECT content_sha256, byte_size, mime_type FROM sources WHERE source_id = ?",
+            (source_id,),
+        )
+        if row is None:
+            return None
+        content_sha256 = str(row["content_sha256"])
+        assertion = get_verified_assertion(self.reader, source_id, content_sha256, reader="steady")
+        if assertion is None:
+            return CatalogBrowseSourceFacts(content_sha256)
+        return CatalogBrowseSourceFacts(
+            content_sha256=content_sha256,
+            verified_ref=SourceRef(
+                document_id=str(assertion["document_id"]),
+                source_id=source_id,
+                content_sha256=content_sha256,
+                byte_size=int(row["byte_size"]),
+                mime_type=str(row["mime_type"]),
+            ),
+            assertion_id=str(assertion["assertion_id"]),
+        )
+
+    def browse_verified_source_pairs(self, *, limit: int) -> tuple[tuple[str, str], ...]:
+        """List active source-fact (document_id, source_id) pairs for issuer browse."""
+        _require_browse_limit(limit)
+        rows = self.reader.fetchall(
+            """SELECT assertion_id, source_id, document_id,
+                      evidence_basis, created_at, supersedes_assertion_id
+               FROM source_metadata_assertions
+               WHERE decision='verified'
+                 AND visibility_state IN ('legacy','active')
+               ORDER BY created_at, assertion_id LIMIT ?""",
+            (limit + 1,),
+        )
+        if len(rows) > limit:
+            raise SourceReadError("unavailable", "issuer_scan_budget_exceeded")
+        superseded = {str(row["supersedes_assertion_id"]) for row in rows if row["supersedes_assertion_id"] is not None}
+        latest: dict[str, str] = {}
+        for row in rows:
+            if str(row["evidence_basis"]) == "source-facts" and str(row["assertion_id"]) not in superseded:
+                latest[str(row["source_id"])] = str(row["document_id"])
+        return tuple((document_id, source_id) for source_id, document_id in latest.items())
 
     def iter_original_version_identities(self) -> tuple[SourceVersionIdentity, ...]:
         """Return pathless identities for exact reopen-token resolution."""
@@ -626,28 +711,39 @@ class SourceCatalog:
         )
 
     def _browse_versions_for_document(
-        self, document: dict[str, Any],
+        self, document: dict[str, Any], *, limit: int | None = None,
     ) -> list[CatalogBrowseVersion]:
         document_id = str(document["document_id"])
         role_clause = ", ".join("?" for _ in _BROWSE_VERSION_ROLES)
+        primary_source_id = document["primary_source_id"]
+        # The complete history determines the ordinal. Apply the limit after
+        # ordering so even a one-item prefix retains its full-history label.
+        params: tuple[Any, ...] = (document_id, *_BROWSE_VERSION_ROLES, primary_source_id)
+        order = "ORDER BY ordinal"
+        if limit is not None:
+            order = "ORDER BY CASE WHEN source_id = ? THEN 0 ELSE 1 END, ordinal DESC LIMIT ?"
+            params = (*params, primary_source_id, limit)
+        source_rows = self.reader.fetchall(
+            f"""WITH original_sources(source_id) AS (
+                    SELECT source_id FROM locations WHERE document_id = ? AND role IN ({role_clause})
+                    UNION SELECT ?
+                ), ranked AS (
+                    SELECT s.source_id, s.content_sha256, s.byte_size, s.mime_type, s.first_seen_at,
+                           ROW_NUMBER() OVER (ORDER BY s.first_seen_at, s.source_id) AS ordinal
+                    FROM sources s JOIN original_sources originals ON originals.source_id = s.source_id
+                )
+                SELECT * FROM ranked {order}""",
+            params,
+        )
+        if not source_rows:
+            return []
         location_rows = self.reader.fetchall(
             f"""SELECT source_id, root_id, role, location_status, relative_path
                FROM locations
-               WHERE document_id = ? AND source_id IS NOT NULL
-                 AND role IN ({role_clause})""",
-            (document_id, *_BROWSE_VERSION_ROLES),
-        )
-        source_ids = {str(item["source_id"]) for item in location_rows}
-        if document["primary_source_id"]:
-            source_ids.add(str(document["primary_source_id"]))
-        if not source_ids:
-            return []
-        placeholders = ", ".join("?" for _ in source_ids)
-        source_rows = self.reader.fetchall(
-            f"""SELECT source_id, content_sha256, byte_size, mime_type, first_seen_at
-                FROM sources WHERE source_id IN ({placeholders})
-                ORDER BY first_seen_at, source_id""",
-            tuple(sorted(source_ids)),
+               WHERE document_id = ? AND role IN ({role_clause})
+                 AND source_id IN (SELECT value FROM json_each(?))""",
+            (document_id, *_BROWSE_VERSION_ROLES,
+             json.dumps([str(source["source_id"]) for source in source_rows])),
         )
         config_root_ids = {root.root_id for root in self.config.roots}
         from .source_location import relative_segments
@@ -656,7 +752,7 @@ class SourceCatalog:
         for location in location_rows:
             locations_by_source.setdefault(str(location["source_id"]), []).append(location)
         records: list[CatalogBrowseVersion] = []
-        for ordinal, source in enumerate(source_rows, start=1):
+        for source in source_rows:
             source_id = str(source["source_id"])
             locations = locations_by_source.get(source_id, [])
             resolvable = any(
@@ -672,8 +768,8 @@ class SourceCatalog:
                 content_sha256=str(source["content_sha256"]),
                 byte_size=int(source["byte_size"]),
                 mime_type=str(source["mime_type"]),
-                primary=document["primary_source_id"] == source_id,
-                ordinal=ordinal,
+                primary=primary_source_id == source_id,
+                ordinal=int(source["ordinal"]),
                 title=document["title"],
                 document_kind=document["document_kind"],
                 published_date=document["published_date"],
@@ -764,6 +860,10 @@ class SourceCatalog:
         if self._reader is None:
             self._reader = ReadOnlyCatalogReader(self.config.database_path)
         return self._reader
+
+    def check_readable(self) -> None:
+        """Open and probe the catalog's read-only session."""
+        self.reader.fetchone("SELECT 1")
 
     def open_narrative_artifact_reader(self) -> NarrativeArtifactReader:
         """Open a caller-owned read-only artifact session without initializing storage."""
