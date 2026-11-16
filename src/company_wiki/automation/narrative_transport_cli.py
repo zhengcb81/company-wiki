@@ -161,6 +161,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--span-id")
     parser.add_argument("--locator")
     parser.add_argument("--query")
+    parser.add_argument("--claim-id", action="append", dest="claim_ids")
     catalog: SourceCatalog | None = None
     artifacts: NarrativeArtifactReader | None = None
     try:
@@ -169,6 +170,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             name: getattr(args, name)
             for name in ("limit", "offset", "span_id", "locator", "query")
         }
+        if args.claim_ids is not None:
+            filters["claim_ids"] = tuple(args.claim_ids)
         view_query = None
         if args.operation in EVIDENCE_VIEW_OPERATIONS:
             view_query = NarrativeEvidenceViewQuery(args.operation, **filters)

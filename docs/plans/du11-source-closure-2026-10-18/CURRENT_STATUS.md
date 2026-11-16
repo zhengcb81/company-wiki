@@ -8,6 +8,7 @@
 - CWP `12e65fe7d` 将浏览请求状态与证明预算隔离，将候选和来源事实投影归目录 owner，将 CN 原生 PDF 读取归 parser adapter。原有 SourceRef、版本快照和错误信封通过定向回归和独立审查。代码已发布，固定推送快测 23/23，精确 SHA 的 GitHub CI 用时 4 分 42 秒且通过。 [CWP 浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)
 - CWP 使用 FF `dd716217` 的公开入口补齐三市场有限下载离线证据。正向采集、零重复下载、V2 来源复用和损坏件拒读通过，测试目录已清理。 [有限下载离线验收](../module-boundaries-2026-11-11/review/ff-cwp-bounded-offline-20261116.md)
 - **M3 已验收，当前进入 P1 业务摘要。** FF `4c7f501b` 正式 T3 四项通过，SID `fb8c8ba5` 已发布，RF `220e5441` 记录了旧周跑失败与原始版本。固定公司循环当前暂停。 [M3 证据](../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md)
+- **P1 选中引用的展示已验收。** 半年报四张人工选定原文卡保留 12 项业务检查点，投资者关系旧产物的四类归属与限定反例通过，PDF 发言标签投影通过独审。下一步为自动精筛、正式新摘要和恢复。 [展示验收](review/p1-business-quote-view-20261116.md)
 
 ## 2026-11-15 状态记录（历史）
 

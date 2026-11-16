@@ -594,3 +594,9 @@ Latest owner observations: FF local main@dd716217 equals its local tracking ref 
 CWP 源码与测试 `12e65fe7d` 已推送。浏览请求状态隔离、目录负责版本投影、parser adapter 负责完整 PDF 分页读取。定向回归、独立核查、精确版本与 CI 见 [浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)。
 
 [逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)已记录当前模块各自计划、运行状态和公开接口的后续工作。M3 待 FF 和 RF 的实际 owner 证据，父计划随后继续 P1。
+
+## 2026-11-16 — M3 收口与 P1 引用展示
+
+- FF 正式 T3 四项通过，RF 失败周跑与三仓版本已登记，SID 真实候选身份修复发布。总控收据已推 `930874cda`。 [M3 验收](../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md)
+- P1 已实现指定 claim 的业务摘录视图。半年报人工选定四项覆盖 12 个既有检查点，投资者关系三个引用范围保留四处原文限定。PDF 发言归属由独审发现并补回。36 项初验和 28 项定向复验通过，零新模型调用。 [P1 验收](review/p1-business-quote-view-20261116.md)
+- 下一步为自动选材、正式新摘要和新版恢复，以真实回放和 RF 采用判定结果。

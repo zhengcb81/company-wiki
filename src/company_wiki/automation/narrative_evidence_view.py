@@ -13,24 +13,24 @@ import json
 from typing import Any
 
 from company_wiki.document_model.narrative import selected_summary_input
+from company_wiki.source_catalog.narrative_business_quotes import project_business_quotes
 from company_wiki.source_catalog.narrative_retrieval import (
     NARRATIVE_EVIDENCE_BUNDLE_SCHEMA_VERSION, NarrativeEvidenceSearch,
 )
 
 from .models import canonical_json
-from .narrative_contracts import BUNDLE_MAX_BYTES, NarrativeBundle
+from .narrative_contracts import NarrativeBundle
 from .narrative_transport import NarrativeTransportRead, NarrativeTransportReader
 from .narrative_transport_contracts import (
-    MAX_RECEIPT_BYTES, NARRATIVE_COMPACT_REF_SCHEMA, NarrativeReadRequest, NarrativeTransportError,
+    NARRATIVE_COMPACT_REF_SCHEMA, NarrativeReadRequest, NarrativeTransportError,
 )
 
 
-EVIDENCE_VIEW_OPERATIONS = ("evidence-list", "evidence-lookup", "evidence-search")
+EVIDENCE_VIEW_OPERATIONS = ("evidence-list", "evidence-lookup", "evidence-search", "business-summary")
 EVIDENCE_VIEW_SCHEMA = "narrative-evidence-view/1"
 EVIDENCE_VIEW_RECEIPT_SCHEMA = "narrative-evidence-read-receipt/1"
 MAX_EVIDENCE_VIEW_LIMIT = 500
 MAX_EVIDENCE_QUERY_BYTES = 4096
-MAX_EVIDENCE_VIEW_BYTES = BUNDLE_MAX_BYTES + MAX_RECEIPT_BYTES
 
 
 def _text(value: object, maximum: int, *, trimmed: bool) -> bool:
@@ -49,6 +49,7 @@ class NarrativeEvidenceViewQuery:
     span_id: str | None = None
     locator: str | None = None
     query: str | None = None
+    claim_ids: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         """Validate all filters before any catalog or raw read is attempted."""
@@ -60,6 +61,14 @@ class NarrativeEvidenceViewQuery:
             raise ValueError("invalid evidence limit")
         if self.offset is not None and (type(self.offset) is not int or self.offset < 0):
             raise ValueError("invalid evidence offset")
+        if self.operation == "business-summary":
+            if not isinstance(self.claim_ids, tuple) or not self.claim_ids or any(
+                not isinstance(claim_id, str) or not claim_id.strip()
+                for claim_id in self.claim_ids
+            ):
+                raise ValueError("business summary requires selected claim IDs")
+        elif self.claim_ids:
+            raise ValueError("claim IDs require business summary")
         if self.operation == "evidence-lookup":
             if (
                 (self.span_id is None) == (self.locator is None)
@@ -159,6 +168,18 @@ class NarrativeEvidenceViewReader:
     def _items(
         bundle: NarrativeBundle, query: NarrativeEvidenceViewQuery
     ) -> list[dict[str, Any]]:
+        if query.operation == "business-summary":
+            draft = bundle.summary.draft
+            try:
+                return project_business_quotes(
+                    bundle.evidence_spans,
+                    draft.claims if draft is not None else (),
+                    query.claim_ids,
+                )
+            except KeyError as exc:
+                raise NarrativeTransportError(
+                    "not_found", "narrative_summary_claim_not_found"
+                ) from exc
         if query.operation == "evidence-lookup":
             matches = [
                 span

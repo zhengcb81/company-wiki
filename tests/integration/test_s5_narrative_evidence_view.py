@@ -149,6 +149,34 @@ def test_pagination_is_stable_and_search_empty_result_is_explicit(tmp_path):
         assert no_hit["total"] == 0 and no_hit["items"] == []
 
 
+def test_business_summary_opens_selected_original_support(tmp_path):
+    with published_fixture(tmp_path) as fixture:
+        request = _request(fixture)
+        bundle = json.loads(fixture.payload)
+        claim = bundle["summary"]["draft"]["claims"][0]
+        before = _persistent_files(fixture.root)
+        view = _success(
+            _cli(fixture.config_path, request, "business-summary", "--claim-id", claim["claim_id"]),
+            request, "business-summary", len(bundle["evidence_spans"]),
+        )
+        spans = {span["span_id"]: span for span in bundle["evidence_spans"]}
+        assert view["total"] == 1
+        quote = view["items"][0]
+        assert quote["claim_id"] == claim["claim_id"]
+        assert [part["span_id"] for part in quote["support"]] == claim["evidence_ids"]
+        for part in quote["support"]:
+            span = spans[part["span_id"]]
+            assert (part["source_id"], part["locator"], part["text"]) == (
+                span["source_id"], span["locator"], span["raw_text"],
+            )
+        assert view["selection"] == bundle["selection"]
+        absent = _cli(fixture.config_path, request, "business-summary", "--claim-id", "absent")
+        assert absent.returncode == 2
+        assert absent.stdout == b""
+        assert json.loads(absent.stderr)["reason"] == "narrative_summary_claim_not_found"
+        assert _persistent_files(fixture.root) == before
+
+
 def test_old_reference_remains_pinned_when_new_partial_version_is_visible(tmp_path):
     with published_fixture(tmp_path) as fixture:
         old_request = _request(fixture)
@@ -187,6 +215,7 @@ def test_old_reference_remains_pinned_when_new_partial_version_is_visible(tmp_pa
 
 @pytest.mark.parametrize("operation,options", [
     ("reference", ["--limit", "1"]), ("read", ["--query", "sales"]),
+    ("business-summary", []), ("evidence-list", ["--claim-id", "claim-replay-001"]),
     ("evidence-list", ["--query", "sales"]),
     ("evidence-list", ["--limit", "0"]), ("evidence-list", ["--limit", "501"]),
     ("evidence-list", ["--offset", "-1"]),

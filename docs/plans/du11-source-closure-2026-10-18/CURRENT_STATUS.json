@@ -38,7 +38,7 @@
     },
     {
       "id": "P1",
-      "status": "EXTRACTS_AND_RECOVERY_VERIFIED; BUSINESS_SUMMARY_IN_PROGRESS",
+      "status": "BUSINESS_QUOTE_VIEW_ACCEPTED; AUTOMATED_SELECTION_AND_NEW_SUMMARY_OPEN",
       "task": "Complete concise source-linked business output with role and scope preserved. The current real H1 /5 ranking and single-payment recovery are verified."
     },
     {
@@ -157,7 +157,14 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Implement and verify a focused source-linked business summary view, compare the frozen H1 and IR cases, then verify the new summary and downstream recovery/adoption.",
+  "next_action": "Implement automated business-scope selection and validate omissions and qualifications on the frozen H1 and a second disclosure type; then verify the formal new summary, recovery and RF adoption.",
+  "p1_business_quote_view": {
+    "status": "ACCEPTED",
+    "receipt": "review/p1-business-quote-view-20261116.md",
+    "scope": "Caller-selected source quotation view. Frozen H1 12/12 source checks from four selected claims; four historical IR qualifier checks passed.",
+    "independent_review": "PASS",
+    "new_model_calls": 0
+  },
   "failure_root_cause_summary": {
     "source": "review/failure-root-cause-reconciliation-20261110.md",
     "normalized_root_cause_classes": 10,

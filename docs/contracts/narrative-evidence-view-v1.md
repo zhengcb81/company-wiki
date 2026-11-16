@@ -1,9 +1,8 @@
 # Selected narrative evidence views v1
 
-This source-only interface lists, looks up and searches a **single pinned final**.
-It does not search the full lake or model summaries. Source discovery still uses
-SourceRef v2; callers obtain a NarrativeRef with the existing `reference` operation.
-Existing `reference` and `read` request/receipt schemas and exact bytes are unchanged.
+This source-only interface lists, looks up, searches and presents original
+evidence from a **single pinned final**. Source discovery uses SourceRef v2.
+Callers obtain a NarrativeRef with the existing `reference` operation.
 
 ## CLI and input
 
@@ -17,6 +16,7 @@ appears in the request; `--config` selects the storage adapter in the producer.
 | `evidence-list` | `--limit N --offset N` | Complete EvidenceSpan objects in final order / all spans |
 | `evidence-lookup` | Exactly one `--span-id ID` or `--locator LOCATOR` | Exactly one EvidenceSpan / 1 |
 | `evidence-search` | Required `--query TEXT`, optional limit/offset | Existing BM25 selected-text group hits / all matching groups |
+| `business-summary` | Repeat `--claim-id ID` for chosen claims in the pinned final, optional limit/offset | Original support and context in chosen order / distinct selected scopes |
 
 List/search default limit 100, offset 0; limit 1–500, offset nonnegative. Query is
 nonblank and at most 4096 UTF-8 bytes. Exact anchors are trimmed nonblank strings
@@ -45,8 +45,17 @@ NarrativeEvidenceHit wire: source ID/SHA, selection status/coverage, group/membe
 IDs and locators, snippet, BM25 score, matched terms and phrase match. Matching and
 ranking use selected **original text**, not generated summary claims. A group may
 contain several spans; search total is group count, list total is span count.
-The index/group adapter exists only in query memory and writes no files/database.
-Output is capped at `BUNDLE_MAX_BYTES + MAX_RECEIPT_BYTES` (1,327,104 bytes).
+The index/group adapter exists only in query memory.
+
+For `business-summary`, pass claim IDs from the pinned artifact, for example
+`--operation business-summary --claim-id t21-source --claim-id t47-source`.
+Each item contains the selected `claim_id`, original `support` quotations and
+separate original `context`. Both carry a source ID, span ID, locator, exact
+text and parse quality. Available source speaker and role metadata accompany
+each quotation. PDF printed turns also carry the verified speaker label
+locator and title when present. Identical support and context scopes appear once, in the first
+selected position. The caller selects the claims; the view uses their original
+bindings to construct the output.
 
 Stderr has one JSON line, at most 16 KiB, with schema
 `narrative-evidence-read-receipt/1`, status `ok`, `view_sha256`, `byte_size`,
@@ -56,9 +65,9 @@ Consumers check both; locator count covers the whole final, not the result page.
 
 Failure: exit 2, empty stdout, existing bounded transport refusal receipt
 `narrative-read-receipt/1`. Identity/as-of/raw/artifact failures retain their
-existing named reason. Unknown exact evidence gives `narrative_evidence_not_found`;
-multiple exact matches give `narrative_evidence_ambiguous`; oversized view gives
-`evidence_view_too_large`. No fuzzy fallback, legacy span fallback or implicit job.
+existing named reason. Unknown exact evidence gives `narrative_evidence_not_found`.
+Multiple exact matches give `narrative_evidence_ambiguous`. Unknown selected claim
+IDs give `narrative_summary_claim_not_found`.
 
 `skipped_no_narrative` gives explicit zero items and zero matching groups; lookup
 is not-found. Raw with no visible final remains reference not-found and extraction
