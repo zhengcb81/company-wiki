@@ -1,6 +1,6 @@
 # 当前交接
 
-2026-11-17。当前业务入口为 [主线 P1](task_plan.md)。P1 的真实修复/回告试点与各仓分工见[反馈总调度](../feedback-loop-2026-11-17/task_plan.md)和[施工卡](../feedback-loop-2026-11-17/dispatch.md)。ET、SID、IR 只施工自己的卡，ROOT 接续正式摘要、宿主中断与 RF 采用。既有业务责任见[逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。
+2026-11-17。当前业务入口为 [业务主线](task_plan.md)。F3 的真实修复与回告试点见[反馈总调度](../feedback-loop-2026-11-17/task_plan.md)和[施工卡](../feedback-loop-2026-11-17/dispatch.md)。ET、SID、IR 只施工自己的卡，ROOT 接续下一家公司及组合采用。既有业务责任见[逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。
 
 1. CWP 的浏览请求隔离、目录投影和 PDF 解析端口已在主线发布为 `12e65fe7d`。定向回归、独审和远端验收状态见 [浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)。上一节点的共享读取预算随父链进入该版本，原收据保留在 [CN 读取预算](../module-boundaries-2026-11-11/review/cwp-cn-issuer-read-budget-20261115.md)。
 2. M3 的正式 T3、RF 历史周测和精确版本已验收并发布，按 [M3 收口](../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md) 查收。
@@ -8,7 +8,7 @@
 
 R4 统一预扣已迁回执行阶段。已有覆盖缺口时，选材末尾复用已准备的观察并保留部分状态。从正式入口回放冻结半年报，12/12 和选材 SHA 一致，工作账户使用 10,753,620 / 16,000,000。见 [来源会话与覆盖回放](review/r4-source-session-20261114.md)。[T4 与 SEM 验收](review/t4-sem-20261114.md) 已独审通过。
 
-历史 `/5` 来源卡和 RF 结果保留[原验收](review/phase-c-h1-formal-20261114.md)。当前 `/7` 的完整原文视图保护来源归属和范围。新的草稿漏检和选材余项复用本轮已付响应，验收套件待接收后统一纳入总控。随后按父计划接续完整公司运行和固定公司循环。[内容问题与复现](../feedback-loop-2026-11-17/issues/cwp-draft-scope-and-focus.md)
+历史 `/5` 来源卡和 RF 结果保留[原验收](review/phase-c-h1-formal-20261114.md)。F3c 修复已复验，`/7` 当前的 `1.4.0` 评估处理业务范围，自动精选独立处理背景占位。下一家公司沿 W12 和本计划执行，记录实际生成版本、缓存、RF 采用和检查点。不要以局部保存响应回放替代整家公司的正式流程证据。 [范围和精选验收](../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md)
 
 ## 已发布的前一子节点（历史快照）
 

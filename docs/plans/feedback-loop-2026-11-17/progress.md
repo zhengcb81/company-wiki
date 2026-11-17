@@ -9,6 +9,7 @@
 | F2 | ET、SID、IR 已分发；作者交付待验 | FF 的 job 协调及 RF 的跨仓消费归 ROOT |
 | F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
 | F3b | 两份正式摘要、恢复和两条 RF 采用通过独审 | [实际组合与适用范围](f3b-live-acceptance.md) · [草稿与精选余项](issues/cwp-draft-scope-and-focus.md) |
+| F3c | 已修正草稿范围与自动精选，保存响应及五份真实样本复验通过 | [真实回放、原始定位与保留对照](f3c-saved-response-acceptance.md) |
 | F4 | 待接续 | 公司池仍依原有暂停/恢复条件 |
 
 ### F0 发布与独立验收
@@ -30,4 +31,4 @@ F3b 源码和验收 PWF `c5c233c43bea16fe38ca49a5f4a55a054c16cf68` 已推主线�
 
 ### ROOT 接续
 
-F3b 已完成本轮真实组合。收到三卡后分别核对本仓公开观察、独审版本、临时环境清理和组合行为。后续业务摘要精度复用本轮已付响应。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)与[问题卡](issues/cwp-draft-scope-and-focus.md)。
+F3b 已完成真实组合，F3c 已完成保存响应修复。收到三卡后分别核对本仓公开观察、独审版本、临时环境清理和组合行为。按父计划接续新版生成的真实公司组合及 RF 正式采用。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)。

@@ -5,6 +5,7 @@ from typing import Any
 
 from company_wiki.source_contract import EvidenceSpan
 
+from .narrative_business_focus import business_summary_context_only
 from .narrative_claims import SummaryClaim
 from .narrative_reading_admission import CONTEXT_ROLES, is_financial_only
 from .narrative_source_purpose import NON_OPERATING_PURPOSES, source_purpose
@@ -46,7 +47,8 @@ def project_automatic_business_quotes(
             continue
         if task.kind != "operating_table":
             source = "\n".join(spans[sid].raw_text or "" for sid in task.support_ids)
-            if source_purpose(source) in NON_OPERATING_PURPOSES or is_financial_only(source):
+            if (business_summary_context_only(source)
+                    or source_purpose(source) in NON_OPERATING_PURPOSES or is_financial_only(source)):
                 continue
         scope = (task.support_ids, task.context_ids)
         scopes.append((by_scope.get(scope), task.key, *scope))

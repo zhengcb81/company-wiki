@@ -10,6 +10,7 @@ import re
 from typing import Any
 
 from company_wiki.document_model.text_matching import matching_reading_text
+from company_wiki.document_understanding import business_scope
 from company_wiki.implementation_identity import code_sha256
 from .narrative_claims import summary_claim_type_for_roles, summary_claims_sha256
 from company_wiki.document_understanding.summary_tasks import SourceSummaryTask
@@ -17,13 +18,14 @@ from company_wiki.source_contract import EvidenceSpan
 from company_wiki.wire_json import canonical_json, canonical_json_hash, encoding_sha256, plain_json
 from .narrative_contracts import NarrativeSelectResult
 from .narrative_summary_material import compile_scoped_material_view, scoped_material_sha256
-from .narrative_summary_protocols import CLAUSE_SCOPE_ASSESSMENT_VERSION
+from .narrative_summary_protocols import BUSINESS_SCOPE_ASSESSMENT_VERSION, CLAUSE_SCOPE_ASSESSMENT_VERSION
 
 ASSESSMENT_SCHEMA = 'summary-assessment/1'
 ASSESSMENT_VERSION = 'source-summary-assessment/1.0.0'
 ATOMIC_ASSESSMENT_VERSION = 'source-summary-assessment/1.1.0'
 QUALIFIED_ASSESSMENT_VERSION = 'source-summary-assessment/1.2.0'
-_QUALIFIER_ASSESSMENTS = frozenset({QUALIFIED_ASSESSMENT_VERSION, CLAUSE_SCOPE_ASSESSMENT_VERSION})
+_QUALIFIER_ASSESSMENTS = frozenset({QUALIFIED_ASSESSMENT_VERSION, CLAUSE_SCOPE_ASSESSMENT_VERSION,
+                                    BUSINESS_SCOPE_ASSESSMENT_VERSION})
 ASSESSMENT_VERSIONS = frozenset({
     ASSESSMENT_VERSION, ATOMIC_ASSESSMENT_VERSION, *_QUALIFIER_ASSESSMENTS,
 })
@@ -65,6 +67,8 @@ def assessment_identity(version: str | None = None) -> dict[str, Any]:
     }
     if version == ATOMIC_ASSESSMENT_VERSION or version in _QUALIFIER_ASSESSMENTS:
         dependencies['assertion_frames'] = assertion_frames_sha256()
+    if version == BUSINESS_SCOPE_ASSESSMENT_VERSION:
+        dependencies['business_scope'] = business_scope.business_scope_sha256()
     return {'version':version,'implementation_sha256':canonical_json_hash(dependencies),
             'dependencies':dependencies}
 
@@ -244,6 +248,12 @@ def claim_qualifier_diagnostics(
         {'source_span_id': sid, 'rule_code': 'possible_condition_scope_loss'}
         for sid in condition_losses(evidence_spans, set(support), cited, source_assertion_frames(claim))
     )
+    if assessor_version == BUSINESS_SCOPE_ASSESSMENT_VERSION:
+        factual_ids = [sid for sid in support if by_id[sid].parse_status == 'parsed'
+                       and by_id[sid].structured_value.get('source_role') in {'company_filing', 'management'}]
+        scope = business_scope.assess_business_scope([by_id[sid].raw_text or '' for sid in factual_ids], claim)
+        diagnostics.extend({'source_span_id': factual_ids[index], 'rule_code': 'possible_business_scope_loss'}
+                           for index in scope.source_indices)
     unique: dict[tuple[str, str], dict[str, str]] = {}
     for row in diagnostics:
         unique[(row['source_span_id'], row['rule_code'])] = row
@@ -378,6 +388,8 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
     dep_keys = {'matching','task_plan','admission','scoped_view','encoding','claim_roles','assessment'}
     if validator['version'] == ATOMIC_ASSESSMENT_VERSION or validator['version'] in _QUALIFIER_ASSESSMENTS:
         dep_keys.add('assertion_frames')
+    if validator['version'] == BUSINESS_SCOPE_ASSESSMENT_VERSION:
+        dep_keys.add('business_scope')
     require(isinstance(deps,dict) and set(deps)==dep_keys)
     require(all(sha(digest) for digest in deps.values()))
     require(validator['implementation_sha256']==canonical_json_hash(deps))
@@ -430,6 +442,8 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
     if validator['version'] in _QUALIFIER_ASSESSMENTS:
         rules |= {'possible_current_action_as_future', 'possible_project_capacity_basis_loss',
                   'possible_condition_scope_loss'}
+    if validator['version'] == BUSINESS_SCOPE_ASSESSMENT_VERSION:
+        rules.add('possible_business_scope_loss')
     for row in diagnostics:
         require(isinstance(row,dict) and set(row)=={'task_key','claim_id','source_span_id','rule_code'})
         require(isinstance(row['rule_code'],str) and row['rule_code'] in rules and row['claim_id'] in risks)

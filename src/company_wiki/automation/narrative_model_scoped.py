@@ -12,6 +12,7 @@ import json
 import logging
 from typing import Any
 
+from company_wiki.document_understanding.business_scope import assess_business_scope
 from company_wiki.implementation_identity import code_sha256
 from company_wiki.source_catalog.narrative_contracts import narrative_wire_sha256
 from company_wiki.source_catalog.narrative_summary_material import (
@@ -25,7 +26,9 @@ from company_wiki.wire_json import encoding_sha256
 
 from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import NarrativeSelectResult
-from .narrative_summary_protocols import LEGACY_SCOPED, ScopedSummaryProtocol, scoped_protocol_for_prompt
+from .narrative_summary_protocols import (
+    BUSINESS_SCOPE_ASSESSMENT_VERSION, LEGACY_SCOPED, ScopedSummaryProtocol, scoped_protocol_for_prompt,
+)
 
 
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
@@ -279,7 +282,7 @@ def _clause_object(raw: Any) -> dict[str, Any] | None:
 
 def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
                         protocol: ScopedSummaryProtocol = LEGACY_SCOPED) -> dict[str, Any]:
-    """Recover whole local clauses, never repair IDs or authorize their prose."""
+    """Recover local clauses and preserve an exact quote for a clear scope loss."""
     from company_wiki.source_catalog.narrative_claims import (
         SummaryValidationError, project_summary_claim_quality, summary_claim_type_for_roles,
         validate_summary_claim,
@@ -340,6 +343,14 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
                     validate_summary_claim(typed, known, 'draft')
                 except SummaryValidationError as exc:
                     raise NarrativeContractError(str(exc)) from exc
+                if (protocol.assessor_version == BUSINESS_SCOPE_ASSESSMENT_VERSION
+                        and typed.claim_type == 'company_statement'
+                        and len(binding.basis_ids) == 1 and binding.basis_ids == binding.support_ids):
+                    basis = known[binding.basis_ids[0]]
+                    if basis.parse_status == 'parsed' and basis.raw_text:
+                        scope = assess_business_scope((basis.raw_text,), typed.text)
+                        if scope.exact_quote_recovers_scope:
+                            typed = replace(typed, text=basis.raw_text, modality='uncertain')
                 retained.append(typed)
             except (NarrativeContractError, legacy.ModelResponseError) as exc:
                 if first_error is None:

@@ -130,3 +130,41 @@ def test_automatic_summary_keeps_low_priority_operating_detail_and_source_attrib
     assert result[1]["claim_id"] is None
     assert result[0]["task_key"] != result[1]["task_key"]
     assert draft.text not in str(result)
+
+
+@pytest.mark.parametrize("boilerplate", [
+    "董事会拟每10股派发现金股利1.35元。库存股不参与分红，以扣除库存股后的总股本为基数测算。",
+    "Cash dividends of $0.46 per common share were declared. Treasury shares are excluded from the calculation.",
+    "公司以扣除回购股份后的总股本为基数，向全体股东每10股派发现金红利1.35元（含税）。",
+    "We declared a quarterly cash dividend of $0.46 per share. Treasury shares do not participate in any distribution.",
+    "The Board resolved to declare an interim dividend of HK$0.23 per share, payable to shareholders on 20 September.",
+    "本企业将依法履行关联方回避表决等义务，履行批准关联交易的法定程序和信息披露义务。",
+    "本报告期不存在对本公司生产经营产生实质性影响的特别重大风险，具体内容详见本报告第三节。",
+    "本公司一贯恪守最高国际监管标准，在业内赢得了公认的良好声誉。",
+    "公司去年加权平均净资产收益率为4.02%，较上年度增长，经营层尽职尽责并对持续发展充满信心。",
+    "答：您好，公司 2025 年度净资产收益率为 7.12%，较上年\n度实现增长，经营层对持续发展充满信心。",
+])
+def test_automatic_focus_excludes_context_only_without_hiding_explicit_quotes(boilerplate):
+    from company_wiki.source_catalog.narrative_business_quotes import project_automatic_business_quotes
+
+    raw = span(boilerplate, 1, role="company_filing")
+    claim = SummaryClaim("exhibit", raw.raw_text, (raw.span_id,), "company_statement", "uncertain")
+    assert project_automatic_business_quotes((raw,), (claim,), None) == []
+    assert project_business_quotes((raw,), (claim,), (claim.claim_id,))[0]["support"][0]["text"] == boilerplate
+
+
+@pytest.mark.parametrize("operating", [
+    "董事会拟每10股派发现金股利1.35元。公司还批准扩建两条自动化产线。",
+    "公司以扣除库存股后的总股本为基数，向股东每10股派发红利0.95元，智能包装线将在二季度投产。",
+    "The Board resolved to declare an interim dividend of HK$0.23 per share, and approved a new warehouse in Kowloon.",
+    "募集资金净额为10亿元，其中九成将用于海外产能建设。",
+    "The board approved expansion of our coating facility; interested directors recused themselves.",
+    "Net proceeds are allocated to a battery assembly facility, alongside corporate expenses.",
+    "A supplier fire caused a two-week outage but did not materially impact production.",
+    "今年加权平均净资产收益率为4%，主要受三个海外数据中心投入运营推动。",
+])
+def test_automatic_focus_retains_mixed_and_qualified_operating_source(operating):
+    from company_wiki.source_catalog.narrative_business_quotes import project_automatic_business_quotes
+
+    raw = span(operating, 1)
+    assert project_automatic_business_quotes((raw,), (), None)[0]["support"][0]["text"] == operating

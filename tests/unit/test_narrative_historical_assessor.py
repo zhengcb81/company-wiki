@@ -39,9 +39,10 @@ def _frozen_result(monkeypatch, assessor_version, *, source=None, **claim):
 
 
 @pytest.mark.parametrize("surface", ["bundle", "summary-job"])
-def test_frozen_atomic_1_1_artifact_survives_current_production(monkeypatch, surface):
-    source, summary, bundle, result = _frozen_result(monkeypatch, "source-summary-assessment/1.1.0")
-    assert protocols.scoped_protocol_for_projection(VERSION).assessor_version == "source-summary-assessment/1.3.0"
+@pytest.mark.parametrize("assessor_version", ["source-summary-assessment/1.1.0", protocols.CLAUSE_SCOPE_ASSESSMENT_VERSION])
+def test_frozen_atomic_artifact_survives_current_production(monkeypatch, surface, assessor_version):
+    source, summary, bundle, result = _frozen_result(monkeypatch, assessor_version)
+    assert protocols.scoped_protocol_for_projection(VERSION).assessor_version == protocols.BUSINESS_SCOPE_ASSESSMENT_VERSION
     if surface == "bundle":
         assert NarrativeBundle.from_dict(json.loads(json.dumps(bundle))).to_dict() == bundle
     else:

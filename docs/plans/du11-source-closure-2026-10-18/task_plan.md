@@ -1,12 +1,12 @@
 # 主线实施计划
 
-**2026-11-17 当前执行顺序。** M3 已闭合，P1/P2 已通过[真实摘要、缓存和 RF 采用试点](../feedback-loop-2026-11-17/f3b-live-acceptance.md)。业务以 [CURRENT_STATUS](CURRENT_STATUS.md) 与 [HANDOFF](HANDOFF.md) 接续。先复用本轮付费响应修正[草稿诊断和精选余项](../feedback-loop-2026-11-17/issues/cwp-draft-scope-and-focus.md)，再推进完整公司和不同市场的 holdout。总控和各外包作者分别按[反馈施工分工](../feedback-loop-2026-11-17/dispatch.md)执行。
+**2026-11-17 当前执行顺序。** M3 已闭合，P1/P2 已通过[真实摘要、缓存和 RF 采用试点](../feedback-loop-2026-11-17/f3b-live-acceptance.md)，草稿业务范围及精选通过[保存响应和跨市场复验](../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md)。以 [CURRENT_STATUS](CURRENT_STATUS.md) 与 [HANDOFF](HANDOFF.md) 接续 W12 和后续完整公司样本，核对现版本实际生成和 RF 采用。总控和各外包作者分别按[反馈施工分工](../feedback-loop-2026-11-17/dispatch.md)执行。
 
 ## P1 及后续业务节点
 
 1. **R4 工作量已修复并复验。** 历次 [公开回放](review/r4-public-replay-20261114.md)、[实际计费](review/r4-work-accounting-20261114.md) 和 [来源会话](review/r4-source-session-20261114.md) 区分。保持冻结样本 12/12 和同一选材 SHA，现用 10,753,620 / 16,000,000。来源仍为 partial。
 2. **T4/SEM-QUAL-01 已验收。** 冻结真实半年报父链、三个入选证据组、模型输入及解码正反例和历史恢复经独审通过。见 [T4 与 SEM 验收](review/t4-sem-20261114.md)。保持不同原件 cn-h1 0.9 的 10/10 单列。
-3. **P1/P2 已过本轮实测，仍需提高草稿和选材精度。** 以下取证原则沿自[历史 `/5` 验收](review/phase-c-h1-formal-20261114.md)，本轮 `/7` 已按该法验证两个样本。实际 `partial` 与 `needs_review` 保留。
+3. **P1/P2 已过本轮实测，下一家公司验证当前修复后的生成与采用。** 以下取证原则沿自[历史 `/5` 验收](review/phase-c-h1-formal-20261114.md)，F3b `/7` 已按该法验证两个样本。实际 `partial` 与 `needs_review` 保留。
    - 先冻结精筛的正反例。应保留订单、客户、产能、技术/地域及限定条件；联系方式、例行声明、纯三表金额和没有具体业务内容的套话在原件可查。避免仅以字数、语法、关键词或模型的冗余标签判断，一张被标冗余的真实长卡含 8 个冻结检查点。
    - 复用 `SummaryTaskPlan`、`ScopedModelView` 和现有摘要协议，保持原文和派生输出都可追溯。载体身份、作者或发言人、被描述的经营主体各从已有证据绑定。无法证实的改写保持风险提示或使用完整原句。业务摘要不需要写出每个可读任务。
    - 已有人工指定引用的历史验收。当前公开视图直接从来源支持范围自动挑选，半年报和投资者关系分别保留 12 和 8 个冻结点。[历史引用视图](review/p1-business-quote-view-20261116.md)

@@ -22,6 +22,6 @@
 
 F3a 的真实只读 agent 和 FF 原生复用经中断恢复。F3b 将真实新摘要送入公开复验和 RF 正式模型。固定公司池和自动代办各 owner 的工程修理继续分别受原计划状态约束。ROOT 保持三张独立卡的交付签收和组合责任。[真实宿主收据](f3a-host-acceptance.md) · [真实业务收据](f3b-live-acceptance.md)
 
-下一步是接收 ET、SID、IR 的本仓交付并验公开观察。业务线复用已付响应推进限定诊断与选材余项。[内容余项](issues/cwp-draft-scope-and-focus.md)
+F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、美股的五份原文复验。接收 ET、SID、IR 的本仓交付并验公开观察。业务线按父计划在下一家公司验证现版本的生成与采用。[保存响应验收](f3c-saved-response-acceptance.md)
 
 真实宿主选型、异步接线、原始作业核对、实际 P1 故障与消费复验的执行顺序见[ROOT 施工细则](host-integration.md)。

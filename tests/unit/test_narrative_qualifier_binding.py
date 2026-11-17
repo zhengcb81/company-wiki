@@ -24,6 +24,7 @@ from company_wiki.automation.narrative_summary_assessment import (
     claim_qualifier_diagnostics,
     validate_assessment_material,
 )
+from company_wiki.automation.narrative_summary_protocols import BUSINESS_SCOPE_ASSESSMENT_VERSION
 from company_wiki.document_understanding.assertion_frames import source_assertion_frames
 from support.fresh_summary_fixture import grouped_selection
 from unit.test_narrative_reading_transport import reading_context
@@ -106,6 +107,106 @@ def decode_current(selected, claim_text, modality="actual"):
     return narrative_model_runtime.decode_model_draft(
         response, selected=selected, reading_projection_version=CURRENT,
     )
+
+
+@pytest.mark.parametrize(("source", "widened", "qualified"), [
+    ("目前公司在耐高温密封材料领域销售密封件，现已开发了超300种配方。",
+     "公司现已开发了超300种配方。", "公司在耐高温密封材料领域已开发了超300种配方。"),
+    ("Within our industrial coatings business, we sell marine coatings, and have developed over 300 compounds.",
+     "We have developed more than 300 compounds.",
+     "Within our industrial coatings business, we have developed more than 300 compounds."),
+    ("本公司在高速連接器領域已銷售多個系列，亦已開發超過30種部件。",
+     "本公司已開發超過30種部件。", "本公司在高速連接器領域已開發超過30種部件。"),
+])
+def test_scoped_decoder_replaces_widened_prose_with_bound_original(source, widened, qualified):
+    selected = selected_source((source,), current=True)
+    repaired = decode_current(selected, widened)
+    assert repaired["status"] == "needs_review"
+    assert repaired["claims"][0]["text"] == source
+    assert repaired["claims"][0]["modality"] == "uncertain"
+    assert repaired["claims"][0]["evidence_ids"] == [selected.evidence_spans[0].span_id]
+    retained = decode_current(selected, qualified)["claims"][0]
+    assert retained["text"] == qualified
+    assert retained["modality"] == "actual"
+
+
+@pytest.mark.parametrize(("source", "draft"), [
+    ("公司在涂料领域生产树脂，供应商已开发300种配方。", "供应商已开发300种配方。"),
+    ("Within our consumer products division, we sold mixers. A supplier developed 300 compounds.",
+     "A supplier developed 300 compounds."),
+    ("请问公司在涂料领域已开发30种配方吗？公司披露已开发30种配方。", "公司已开发30种配方。"),
+    ("在合金材料领域已开发300种方案。", "公司已完成300种方案。"),
+    ("Within our MedTech business, we delivered 12 systems.", "Our exclusive distributor delivered 12 systems."),
+    ("公司在储能领域未交付12套冷却系统。", "公司已经交付12套冷却系统。"),
+    ("公司在储能领域计划交付12套冷却系统。", "公司已交付12套冷却系统。"),
+    ("本集团在储能领域已交付12套冷却系统。", "本公司已交付12套冷却系统。"),
+])
+def test_business_scope_is_not_taken_from_another_subject_sentence_question_or_ambiguous_metric(source, draft):
+    selected = selected_source((source,), current=True)
+    assert decode_current(selected, draft)["claims"][0]["text"] == draft
+
+
+@pytest.mark.parametrize(("source", "draft"), [
+    ("公司在涂料领域已开发30种配方，在润滑油领域已开发30种配方。", "公司已开发30种配方。"),
+    ("Within our aerospace business, we delivered 12 systems, within our medical division delivered 12 systems.",
+     "We delivered 12 systems."),
+])
+def test_same_measure_in_two_domains_cannot_be_assigned_to_either(source, draft):
+    selected = selected_source((source,), current=True)
+    claim = decode_current(selected, draft)["claims"][0]
+    assert claim["text"] == draft and not claim["needs_review"]
+
+
+def test_a_quantity_cannot_be_attached_to_the_first_of_two_different_actions():
+    selected = selected_source((
+        "Within our MedTech business, we developed software and delivered 12 systems.",
+    ), current=True)
+    draft = "We developed 12 systems."
+    claim = decode_current(selected, draft)["claims"][0]
+    assert claim["text"] == draft and not claim["needs_review"]
+
+
+def test_terminal_business_scope_is_preserved_when_it_qualifies_the_action():
+    selected = selected_source(("Within our MedTech business, we delivered 12 systems.",), current=True)
+    text = "We delivered 12 systems in our MedTech business."
+    repaired = decode_current(selected, text)
+    assert repaired["status"] == "draft"
+    assert repaired["claims"][0]["text"] == text
+
+
+@pytest.mark.parametrize(("source", "draft"), [
+    ("公司在储能领域已交付12套冷却系统。", "公司在半导体领域已交付12套冷却系统。"),
+    ("Within our MedTech business, we delivered 12 systems.", "We delivered 12 systems for a MedTech business customer."),
+    ("公司在储能领域已交付12套冷却系统。", "公司已交付12套冷却系统，安装于西部仓库。"),
+    ("Within our MedTech business, we delivered 12 systems.",
+     "We delivered 12 systems. What drove demand was our alliance with Beta."),
+    ("Within our MedTech business, we delivered 12 systems.",
+     "We delivered 12 systems. Did a distributor supply the other 20 systems?"),
+])
+def test_business_scope_conflicting_or_added_material_is_only_diagnostic(source, draft):
+    selected = selected_source((source,), current=True)
+    claim = decode_current(selected, draft)["claims"][0]
+    assert claim["text"] == draft and claim["needs_review"]
+
+
+def test_business_scope_belongs_to_the_matching_claim_clause_and_is_diagnostic_for_multiple_supports():
+    selected = selected_source((
+        "公司在耐高温密封材料领域销售密封件，现已开发了超300种配方。",
+        "出口客户要求能承受极端海况的新型密封件。",
+    ), current=True)
+    draft = "公司在耐高温密封材料领域开展业务。公司现已开发了超300种配方。"
+    claim = decode_current(selected, draft)["claims"][0]
+    assert claim["text"] == draft and claim["needs_review"]
+    spans = selected.evidence_spans
+    diagnostics = claim_qualifier_diagnostics(
+        spans, claim["evidence_ids"], (), claim["text"], claim["modality"],
+        assessor_version=BUSINESS_SCOPE_ASSESSMENT_VERSION,
+    )
+    assert {"source_span_id": spans[0].span_id, "rule_code": "possible_business_scope_loss"} in diagnostics
+    assert all(row["rule_code"] != "possible_business_scope_loss" for row in claim_qualifier_diagnostics(
+        spans, claim["evidence_ids"], (), claim["text"], claim["modality"],
+        assessor_version=CLAUSE_SCOPE_ASSESSMENT_VERSION,
+    ))
 
 
 @pytest.mark.parametrize("decoder", [decode_legacy, decode_current], ids=["legacy", "v7"])

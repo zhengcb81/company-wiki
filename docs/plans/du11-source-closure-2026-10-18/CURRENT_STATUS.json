@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "live_feedback_pilot_accepted_scoped",
+  "execution_mode": "live_feedback_pilot_and_saved_response_repair_accepted",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -38,8 +38,8 @@
     },
     {
       "id": "P1",
-      "status": "H1_IR_AUTOMATIC_BUSINESS_VIEW_AND_CACHE_ACCEPTED; DRAFT_PRECISION_OPEN",
-      "task": "The latest H1 and IR runs retained 12/12 and 8/8 frozen points. Improve qualifier detection and remaining boilerplate using retained replies."
+      "status": "LIVE_VIEW_AND_CACHE_ACCEPTED; SAVED_RESPONSE_AND_FOCUS_REPAIR_VERIFIED",
+      "task": "F3c repairs scoped omission and background-only default quotes, verified with five originals and exact replay of two stored replies. Exercise the latest generation and RF use in the next company run."
     },
     {
       "id": "P2",
@@ -79,7 +79,7 @@
     }
   },
   "current_limits_to_close": [
-    "Residual generated-prose qualifier and focus corrections remain open after the scoped H1/IR default view, recovery and RF adoption passed.",
+    "F3c closed its scoped qualifier and focus issue. A new full company run and RF use of the 1.4.0-produced artifact have not yet been verified.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
     "Berkshire 15 unprocessed explicitly retained; full-source/long-frontier generalization remains partial; 10 required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatory PDF/HK/US RPO and genuinely unexposed holdouts"
@@ -91,9 +91,19 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "MODULE_BOUNDARIES_M3_CLOSED; F3_SCOPED_REAL_TRIAL_ACCEPTED; P1_PRECISION_AND_P3_OPEN",
+  "project_status": "MODULE_BOUNDARIES_M3_CLOSED; F3_SCOPED_REAL_TRIAL_AND_SAVED_REPAIR_ACCEPTED; P3_OPEN",
   "as_of_date": "2026-11-17",
-  "observed_at_utc": "2026-11-17T22:08:27Z",
+  "observed_at_utc": "2026-11-17T22:54:22Z",
+  "cwp_saved_response_repair": {
+    "evidence": "../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md",
+    "assessor_version": "source-summary-assessment/1.4.0",
+    "exact_paid_responses_replayed": 2,
+    "originals_checked": 5,
+    "markets": ["CN", "HK", "US"],
+    "paid_model_posts": 0,
+    "downloads": 0,
+    "next": "Check latest generation and RF adoption in the next whole-company run."
+  },
   "recent_cwp_gate_checkpoint": {
     "date_utc": "2026-11-15",
     "scope": "root PWF documentation-only push classification and pytest-owned Windows scratch cleanup",
@@ -406,9 +416,10 @@
     },
     {
       "id": "C-summary-cache-RF",
-      "status": "CURRENT_H1_IR_CACHE_AND_RF_RATIONALE_VERIFIED; DRAFT_PRECISION_OPEN",
+      "status": "F3B_LIVE_CACHE_AND_RF_USE_VERIFIED; F3C_SAVED_RESPONSE_REPAIR_VERIFIED",
       "preparation": "review/phase-c-h1-preflight-20261114.md",
-      "current_evidence": "../feedback-loop-2026-11-17/f3b-live-acceptance.md"
+      "current_evidence": "../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md",
+      "prior_live_evidence": "../feedback-loop-2026-11-17/f3b-live-acceptance.md"
     },
     {
       "id": "R4-company-and-generalization",
