@@ -10,7 +10,7 @@ import re
 from typing import Any
 
 from company_wiki.document_model.text_matching import matching_reading_text
-from company_wiki.document_understanding import business_scope
+from company_wiki.document_understanding.business_scope import assess_business_scope, business_scope_sha256
 from company_wiki.implementation_identity import code_sha256
 from .narrative_claims import summary_claim_type_for_roles, summary_claims_sha256
 from company_wiki.document_understanding.summary_tasks import SourceSummaryTask
@@ -68,7 +68,7 @@ def assessment_identity(version: str | None = None) -> dict[str, Any]:
     if version == ATOMIC_ASSESSMENT_VERSION or version in _QUALIFIER_ASSESSMENTS:
         dependencies['assertion_frames'] = assertion_frames_sha256()
     if version == BUSINESS_SCOPE_ASSESSMENT_VERSION:
-        dependencies['business_scope'] = business_scope.business_scope_sha256()
+        dependencies['business_scope'] = business_scope_sha256()
     return {'version':version,'implementation_sha256':canonical_json_hash(dependencies),
             'dependencies':dependencies}
 
@@ -251,7 +251,7 @@ def claim_qualifier_diagnostics(
     if assessor_version == BUSINESS_SCOPE_ASSESSMENT_VERSION:
         factual_ids = [sid for sid in support if by_id[sid].parse_status == 'parsed'
                        and by_id[sid].structured_value.get('source_role') in {'company_filing', 'management'}]
-        scope = business_scope.assess_business_scope([by_id[sid].raw_text or '' for sid in factual_ids], claim)
+        scope = assess_business_scope([by_id[sid].raw_text or '' for sid in factual_ids], claim)
         diagnostics.extend({'source_span_id': factual_ids[index], 'rule_code': 'possible_business_scope_loss'}
                            for index in scope.source_indices)
     unique: dict[tuple[str, str], dict[str, str]] = {}
