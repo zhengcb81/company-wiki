@@ -349,7 +349,7 @@ def verify_preparation(meta: dict, *, mode: str) -> dict:
             raise ValueError("MOTHER_NATIVE_DATABASE_CHANGED")
         if actual != prior['fingerprint']:
             metadata_changes[str(database)] = {'before': prior['fingerprint'], 'after': actual}
-        with sqlite3.connect(database.as_uri() + "?mode=ro", uri=True) as connection:
+        with closing(sqlite3.connect(database.as_uri() + "?mode=ro", uri=True)) as connection:
             ids = [
                 row[0]
                 for row in connection.execute(
@@ -712,7 +712,7 @@ def _public_read_expectation(descriptor, selection):
     raise ValueError('unsupported or contradictory public read selection')
 
 
-def public_bundle(root, output, env, config, imported, descriptor, label, *, source_selection=None):
+def public_bundle(root, output, env, config, imported, descriptor, label, *, source_selection=None, observed_state=None):
     from company_wiki.automation.narrative_contracts import NarrativeBundle
 
     expected = _public_read_expectation(descriptor, source_selection)
@@ -762,13 +762,33 @@ def public_bundle(root, output, env, config, imported, descriptor, label, *, sou
         request,
         compact_stdout=True,
     )
+    if observed_state is not None:
+        observed_state["public_read_exit"] = code
+    try:
+        receipt = json.loads(stderr)
+    except (ValueError, RecursionError):
+        if code == 0:
+            raise
+        receipt = None
+    if code != 0 and isinstance(receipt, dict) and observed_state is not None:
+        observed_state["public_replay"] = {k: receipt[k] for k in ("schema_version", "status", "reason") if k in receipt}
     assert code == 0 and wire is not None
-    receipt = json.loads(stderr)
-    assert receipt["replay_status"] == "verified"
-    assert receipt["narrative_ref"] == reference
-    assert reference["artifact_sha256"] == hashlib.sha256(raw).hexdigest()
+
+    def verify_binding(condition, mismatch):
+        if not condition:
+            if observed_state is not None:
+                observed_state["public_replay"] = {"replay_status": mismatch}
+            raise AssertionError(mismatch)
+
+    assert isinstance(receipt, dict)
+    verify_binding(receipt.get("replay_status") == "verified", "locator-unverified")
+    verify_binding(receipt.get("narrative_ref") == reference, "artifact-pin-mismatch")
+    verify_binding(reference["artifact_sha256"] == hashlib.sha256(raw).hexdigest(), "artifact-bytes-mismatch")
     bundle = NarrativeBundle.from_dict(wire)
-    assert bundle.source_ref.to_dict() == imported["source_ref"]
+    verify_binding(bundle.source_ref.to_dict() == imported["source_ref"], "source-binding-mismatch")
+    if observed_state is not None:
+        observed_state["public_replay"] = receipt
+        observed_state["artifact_ref"] = reference
     with gzip.open(output / (label + ".bundle.json.gz"), "wb") as stream:
         stream.write(raw)
     return reference, bundle, request, receipt
@@ -1221,6 +1241,10 @@ def _run_pair_in_owned_root(
             [str(BOOTSTRAP), str(ROOT), str(ROOT / "src"), str(ROOT / "scripts")]
         ),
     }
+    # This scenario owns the optional sidecar and host wake-up. Its source
+    # subprocesses have their own native receipts and must not share the writer.
+    env.pop("RESEARCH_FEEDBACK_OUT", None)
+    env.pop("RESEARCH_FEEDBACK_HOSTS", None)
     events = output / "events.jsonl"
     materials = output / "materials"
     materials.mkdir(exist_ok=True)
@@ -1641,9 +1665,10 @@ def _run_pair_in_owned_root(
             record_successful_model_observation(
                 state, receipt, native, events, materials, current_run,
                 reading_model_projection=projections[version])
-            reference, bundle, read_request, replay = public_bundle(
+            reference, bundle, read_request, _ = public_bundle(
                 root, output, env, config, imported, descriptor, current_run,
                 source_selection=outcome.get('source_registration', {}).get('selection'),
+                observed_state=state,
             )
             runs = NarrativeRunStore(database)
             final = runs.final_generations(current_run).get(
@@ -1672,8 +1697,6 @@ def _run_pair_in_owned_root(
                 )
                 state["final_generation"] = final
                 pinned_read = (state, read_request, bundle)
-            state["public_replay"] = replay
-            state["artifact_ref"] = reference
             posts_before = sum(
                 row["event"] == "http_post_attempt" for row in read_rows(events)
             )
@@ -1682,14 +1705,13 @@ def _run_pair_in_owned_root(
             code, resumed, _, _ = _cli(
                 root, output, current_run + "-restart", command, env
             )
+            state["same_run_zero_POST"] = sum(row["event"] == "http_post_attempt"
+                                              for row in read_rows(events)) == posts_before
             assert (
                 code == 0
                 and append_native(database, current_run, output, mode) == native
             )
-            assert (
-                sum(row["event"] == "http_post_attempt" for row in read_rows(events))
-                == posts_before
-            )
+            assert state["same_run_zero_POST"]
             template["run_id"] = current_run + "-cache"
             write_json(
                 request_path,
@@ -1706,13 +1728,11 @@ def _run_pair_in_owned_root(
             code, cached, _, _ = _cli(
                 root, output, current_run + "-cross-run", cache_command, env
             )
+            state["cross_run_zero_POST"] = sum(row["event"] == "http_post_attempt"
+                                               for row in read_rows(events)) == posts_before
             assert code == 0 and cached["budget"]["tokens"] == 0
             assert not append_native(database, template["run_id"], output, mode)
-            assert (
-                sum(row["event"] == "http_post_attempt" for row in read_rows(events))
-                == posts_before
-            )
-            state.update(same_run_zero_POST=True, cross_run_zero_POST=True)
+            assert state["cross_run_zero_POST"]
             observer_config["forbid_post"] = False
             write_json(observer, observer_config)
         if outcome.get("status") != "PRE_RESERVATION_BLOCKED" and not (missing_gold or split_groups):
@@ -2205,6 +2225,8 @@ def main() -> int:
     if not outcome["all_prepared_protected_unchanged"]:
         outcome["status"] = "FAIL"
     write_json(destination / "overall.json", outcome)
+    if os.environ.get("RESEARCH_FEEDBACK_OUT"):
+        deliver_feedback(destination, outcome, os.environ, head)
     print(
         json.dumps(
             {
@@ -2216,6 +2238,32 @@ def main() -> int:
         )
     )
     return 0 if outcome["status"] == "PASS" else 1
+
+
+def deliver_feedback(destination, outcome, env, head):
+    """Diagnostics can report their own failure, never replace the durable business outcome."""
+    receipt = destination / "feedback-delivery.json"
+    dispatch = destination / "feedback-dispatch.json"
+    try:
+        from tools.document_understanding_benchmark.phase_c_feedback import publish
+        from tools.feedback_loop.hook import wake
+
+        sidecar = Path(env["RESEARCH_FEEDBACK_OUT"])
+        if sidecar.resolve() in {receipt.resolve(), dispatch.resolve()}:
+            delivery = {"status": "reserved_output"}
+        else:
+            delivery = publish(outcome, env, head)
+            if delivery["status"] in {"published", "reused"} and env.get("RESEARCH_FEEDBACK_HOSTS"):
+                delivery["dispatch"] = wake(sidecar, env["RESEARCH_FEEDBACK_HOSTS"], dispatch)
+    except Exception as exc:
+        delivery = {"status": "diagnostic_failed", "error_type": type(exc).__name__}
+    delivery["native_receipt"] = "overall.json"
+    try:
+        with receipt.open("x", encoding="utf-8") as stream:
+            json.dump(delivery, stream)
+    except OSError as exc:
+        delivery["delivery_receipt_error"] = type(exc).__name__
+    return delivery
 
 
 if __name__ == "__main__":

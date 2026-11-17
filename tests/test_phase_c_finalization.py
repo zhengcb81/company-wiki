@@ -91,15 +91,17 @@ def test_mother_uses_full_run_hold_without_double_counting_partial_native_rows(t
 
 
 def test_real_append_reconciles_same_fallback_key_after_native_rows_are_durable(tmp_path, monkeypatch):
+    from contextlib import closing
     from dataclasses import dataclass
     import sqlite3
     from types import SimpleNamespace
     from company_wiki.automation import narrative_run_store
 
     database = tmp_path / 'AUTO.sqlite'
-    with sqlite3.connect(database) as db:
+    with closing(sqlite3.connect(database)) as db:
         db.execute('CREATE TABLE attempts(attempt_id,job_id,outcome,error_code,error_detail,result_json)')
         db.execute('CREATE TABLE narrative_run_jobs(job_id,run_id)')
+        db.commit()
     output = tmp_path / 'out'
     output.mkdir()
     ledger = tmp_path / 'usage.jsonl'

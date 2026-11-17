@@ -163,6 +163,7 @@
     "progress": "../feedback-loop-2026-11-17/progress.md",
     "owner_cards": "../feedback-loop-2026-11-17/dispatch.md",
     "available_lanes": ["FB-ET", "FB-SID", "FB-IR"],
+    "root_offline_coordinator": "accepted_35_tests_and_independent_review",
     "live_unattended_consumer_acceptance": "open",
     "company_pool": "paused"
   },
