@@ -1,6 +1,6 @@
 # 主线实施计划
 
-**2026-11-16 当前执行顺序。** [模块边界 M3](../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md) 已验收。当前继续 P1 业务摘要的展示、内容复验及恢复。当前入口为 [CURRENT_STATUS](CURRENT_STATUS.md) 与 [HANDOFF](HANDOFF.md)。
+**2026-11-17 当前执行顺序。** [模块边界 M3](../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md) 已验收。P1 真实摘要、缓存恢复和 RF 实际采用承担[自动反馈试点](../feedback-loop-2026-11-17/company-wiki.md)。业务以 [CURRENT_STATUS](CURRENT_STATUS.md) 与 [HANDOFF](HANDOFF.md) 接续。总控与可独立实施的模块分别按[反馈施工分工](../feedback-loop-2026-11-17/dispatch.md)执行。
 
 ## P1 及后续业务节点
 

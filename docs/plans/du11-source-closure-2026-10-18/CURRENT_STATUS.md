@@ -2,7 +2,11 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-16 最新状态
+## 2026-11-17 最新状态
+
+P1 继续以自动挑选、正式摘要、缓存恢复和 RF 实际采用为业务验收。已将自动反馈实施分为总控和各仓两个写范围，唯一协调入口为[反馈总调度](../feedback-loop-2026-11-17/task_plan.md)。12 个自有模块有本仓细则，ET、SID 和 IR 三卡可并行。ROOT 负责控制端、FF 持久作业、P1 的 CWP/RF 回放和实际宿主接入。已有封存 H1 产物只能证明其版本上的行为。正式无人值守消费验收以新运行证据为准。[分工与交付](../feedback-loop-2026-11-17/dispatch.md) · [当前进度](../feedback-loop-2026-11-17/progress.md)
+
+## 2026-11-16 状态记录
 
 - 九个主模块和四条独立依赖链已逐仓对账，实际 PWF 入口、当前版本、接口责任和余项见 [各模块计划入口与交接](../module-boundaries-2026-11-11/owner_plans.md)。StockWiki `b4ca912` 已在本仓接续三组 PWF，IQS 的计划和两份投影测试仍在活动分支，Dashboard 的本地文档进展已纳入对账。
 - CWP `12e65fe7d` 将浏览请求状态与证明预算隔离，将候选和来源事实投影归目录 owner，将 CN 原生 PDF 读取归 parser adapter。原有 SourceRef、版本快照和错误信封通过定向回归和独立审查。代码已发布，固定推送快测 23/23，精确 SHA 的 GitHub CI 用时 4 分 42 秒且通过。 [CWP 浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)

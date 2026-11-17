@@ -1,6 +1,6 @@
 # 当前交接
 
-2026-11-16。当前实施入口为 [主线 P1](task_plan.md)。各模块的 canonical PWF、当前 ref、owner 和后续工作见 [逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。
+2026-11-17。当前业务入口为 [主线 P1](task_plan.md)。P1 的真实修复/回告试点与各仓分工见[反馈总调度](../feedback-loop-2026-11-17/task_plan.md)和[施工卡](../feedback-loop-2026-11-17/dispatch.md)。ET、SID、IR 只施工自己的卡，ROOT 接续正式摘要、宿主中断与 RF 采用。既有业务责任见[逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。
 
 1. CWP 的浏览请求隔离、目录投影和 PDF 解析端口已在主线发布为 `12e65fe7d`。定向回归、独审和远端验收状态见 [浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)。上一节点的共享读取预算随父链进入该版本，原收据保留在 [CN 读取预算](../module-boundaries-2026-11-11/review/cwp-cn-issuer-read-budget-20261115.md)。
 2. M3 的正式 T3、RF 历史周测和精确版本已验收并发布，按 [M3 收口](../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md) 查收。

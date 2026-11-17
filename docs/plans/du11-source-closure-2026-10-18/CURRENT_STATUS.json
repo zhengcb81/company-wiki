@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "manual_p1_business_summary",
+  "execution_mode": "p1_business_summary_with_feedback_pilot",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -92,8 +92,8 @@
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
   "project_status": "MODULE_BOUNDARIES_M3_CLOSED; P1_BUSINESS_SUMMARY_IN_PROGRESS",
-  "as_of_date": "2026-11-16",
-  "observed_at_utc": "2026-11-16T21:42:00Z",
+  "as_of_date": "2026-11-17",
+  "observed_at_utc": "2026-11-17T20:27:04Z",
   "recent_cwp_gate_checkpoint": {
     "date_utc": "2026-11-15",
     "scope": "root PWF documentation-only push classification and pytest-owned Windows scratch cleanup",
@@ -157,7 +157,15 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Implement automated business-scope selection and validate omissions and qualifications on the frozen H1 and a second disclosure type; then verify the formal new summary, recovery and RF adoption.",
+  "next_action": "ROOT owns the feedback coordinator and P1 automatic selection, new summary, original consumer recovery and RF adoption. ET, SID and IR can implement their isolated owner cards in parallel.",
+  "feedback_loop": {
+    "plan": "../feedback-loop-2026-11-17/task_plan.md",
+    "progress": "../feedback-loop-2026-11-17/progress.md",
+    "owner_cards": "../feedback-loop-2026-11-17/dispatch.md",
+    "available_lanes": ["FB-ET", "FB-SID", "FB-IR"],
+    "live_unattended_consumer_acceptance": "open",
+    "company_pool": "paused"
+  },
   "p1_business_quote_view": {
     "status": "ACCEPTED",
     "receipt": "review/p1-business-quote-view-20261116.md",
