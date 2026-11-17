@@ -17,6 +17,10 @@
 - IQS 主线 `02a6c7fc`、活动分支 `3dde7fa6` 有同份计划，Dashboard 主线 `57e97d2b`，MeetingConverter `b43a76a3`，QA `21d3c99d`。QA 的发布从隔离工区完成，其活动分支尚未接入该主线文档，可使用[精确版本入口](dispatch.md)。原 QA 源码、Dashboard 交接资料和 MC 的覆盖率文件按实际所属保留。
 - 独立读者从历史证据分辨 RF 周跑四次失败、随后 SID 身份和测试临时目录问题以及预期的损坏件拒绝，能从零退出的业务产物定位错误。修订将分诊转派、原消费方、新证据接续、同一运行的兄弟步骤身份与真实预算区分写入协议。
 
+### F1 主线发布
+
+总控、CWP 完成事件接线和测试已并入 `master`，源码提交 `0acb7e915b88ee89b98cdb6415b46b39a2d3d604`。推送前正常快测 23 项通过，用时 33.42 秒。远端同一提交的 Python 3.12 快测通过，作业用时 5 分 47 秒。35 项大节点复验和历史半年报的覆盖范围单列在[本地验收记录](f1-acceptance.md)。[远端 CI 作业](https://github.com/zhengcb81/company-wiki/actions/runs/44175698906/job/134366324766)
+
 ### ROOT 下一步
 
-分工与父 PWF 已发布 `03bc6619f`。ROOT 继续把实际主机的 agent 作业及只读查询适配到控制端口，与 FF 拿实作业核对未知状态，接回 P1 自动选材、正式生成及 RF 原场景。收到三卡后分别核对公开观察、技能和独审版本，补齐组合验证。真实宿主需要有效的本仓运行配置、可恢复的原生作业 ID 和负责发布新证据的模块；本轮只启用明确指定的测试宿主。CWP 的本仓修理入口已提供[技能](../../../skills/repair-company-wiki-issue/SKILL.md)与[第一张真实问题卡](issues/cwp-native-recovery-observation.md)。
+分工与父 PWF 已发布 `03bc6619f`。ROOT 按[真实宿主与 P1 实施细则](host-integration.md)接入实际 agent 作业及只读查询，与 FF 核对实作业的未知状态，接回 P1 自动选材、正式生成及 RF 原场景。收到三卡后分别核对公开观察、技能和独审版本，补齐组合验证。真实宿主需要有效的本仓运行配置、可恢复的原生作业 ID 和负责发布新证据的模块。本轮以隔离测试宿主验收协议。CWP 的本仓修理入口已提供[技能](../../../skills/repair-company-wiki-issue/SKILL.md)与[第一张真实问题卡](issues/cwp-native-recovery-observation.md)。
