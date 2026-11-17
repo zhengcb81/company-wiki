@@ -2254,7 +2254,8 @@ def deliver_feedback(destination, outcome, env, head):
         else:
             delivery = publish(outcome, env, head)
             if delivery["status"] in {"published", "reused"} and env.get("RESEARCH_FEEDBACK_HOSTS"):
-                delivery["dispatch"] = wake(sidecar, env["RESEARCH_FEEDBACK_HOSTS"], dispatch)
+                delivery["dispatch"] = wake(sidecar, env["RESEARCH_FEEDBACK_HOSTS"], dispatch,
+                                            wait_seconds=env.get("RESEARCH_FEEDBACK_WAIT_SECONDS", "0"))
     except Exception as exc:
         delivery = {"status": "diagnostic_failed", "error_type": type(exc).__name__}
     delivery["native_receipt"] = "overall.json"

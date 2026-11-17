@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 
-from .coordinator import advance
+from .coordinator import settle
 from .host import process_host, read_hosts
 from .observations import read_batch
 
@@ -18,20 +18,24 @@ def after_observations(sidecar: Path, env) -> dict | None:
         return None
     try:
         host = process_host(read_hosts(Path(config)))
+        wait_seconds = int(env.get("RESEARCH_FEEDBACK_WAIT_SECONDS", "0"))
+        if wait_seconds < 0:
+            raise ValueError("negative follow-up window")
     except (OSError, ValueError, RecursionError):
         return {"status": "host_config_unavailable"}
-    result = advance(read_batch([sidecar]), host)
+    result = settle(read_batch([sidecar]), host, wait_seconds)
     return {"status": "tick_completed", "states": dict(Counter(row["status"] for row in result["observations"])),
             "dispositions": dict(Counter(row["disposition"] for row in result["observations"])),
             "diagnostics": result["diagnostics"]}
 
 
-def wake(sidecar: Path, config: str, output: Path) -> dict:
+def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -> dict:
     """Start the finite control tick outside the completed business process."""
     try:
         with output.open("xb") as stream:
             child = subprocess.Popen(
-                [sys.executable, "-B", "-m", "tools.feedback_loop.hook", str(sidecar.resolve()), str(Path(config).resolve())],
+                [sys.executable, "-B", "-m", "tools.feedback_loop.hook", str(sidecar.resolve()),
+                 str(Path(config).resolve()), wait_seconds],
                 cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL, stdout=stream, stderr=subprocess.DEVNULL,
                 start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
             )
@@ -43,4 +47,5 @@ def wake(sidecar: Path, config: str, output: Path) -> dict:
 
 
 if __name__ == "__main__":
-    print(json.dumps(after_observations(Path(sys.argv[1]), {"RESEARCH_FEEDBACK_HOSTS": sys.argv[2]})))
+    env = {"RESEARCH_FEEDBACK_HOSTS": sys.argv[2], "RESEARCH_FEEDBACK_WAIT_SECONDS": sys.argv[3] if len(sys.argv) > 3 else "0"}
+    print(json.dumps(after_observations(Path(sys.argv[1]), env)))

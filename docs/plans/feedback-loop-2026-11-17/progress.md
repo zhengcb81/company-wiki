@@ -6,8 +6,9 @@
 |---|---|---|
 | F0 | 12 仓计划已落地，可发卡范围独审通过 | [协议](interfaces.md)、[模块与施工卡](dispatch.md)、[CWP 实施](company-wiki.md) |
 | F1 | 离线总控及 CWP 首次接线独审通过 | [35 项测试、实际后台唤醒、封存 H1 和适用范围](f1-acceptance.md) |
-| F2 | 可发卡；作者交付待验 | FF 的 job 协调及 RF 的跨仓消费归 ROOT |
-| F3 | 待真实业务条件 | 真实宿主、P1 新产物、隔离和 RF 原场景实际使用 |
+| F2 | ET、SID、IR 已分发；作者交付待验 | FF 的 job 协调及 RF 的跨仓消费归 ROOT |
+| F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
+| F3b | ROOT 实施中 | P1 正式新摘要、缓存内容验证和 RF 实际采用 |
 | F4 | 待接续 | 公司池仍依原有暂停/恢复条件 |
 
 ### F0 发布与独立验收
@@ -23,4 +24,4 @@
 
 ### ROOT 下一步
 
-分工与父 PWF 已发布 `03bc6619f`。ROOT 按[真实宿主与 P1 实施细则](host-integration.md)接入实际 agent 作业及只读查询，与 FF 核对实作业的未知状态，接回 P1 自动选材、正式生成及 RF 原场景。收到三卡后分别核对公开观察、技能和独审版本，补齐组合验证。真实宿主需要有效的本仓运行配置、可恢复的原生作业 ID 和负责发布新证据的模块。本轮以隔离测试宿主验收协议。CWP 的本仓修理入口已提供[技能](../../../skills/repair-company-wiki-issue/SKILL.md)与[第一张真实问题卡](issues/cwp-native-recovery-observation.md)。
+按[真实宿主与 P1 实施细则](host-integration.md)接续 P1。FF 仍使用原生作业库，Codex 使用独立本机动作登记及其原生会话。收到三卡后分别核对公开观察、技能和独审版本。CWP 的本仓修理入口已有[技能](../../../skills/repair-company-wiki-issue/SKILL.md)与[真实问题卡](issues/cwp-native-recovery-observation.md)。

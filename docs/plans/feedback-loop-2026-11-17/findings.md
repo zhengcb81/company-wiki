@@ -6,3 +6,4 @@
 - [既有 I08](../module-boundaries-2026-11-11/interfaces.md)把诊断与业务终态隔开。FF 有持久 job 和关联 ID。ET 在选用的 stderr 协议中报告用量，SID 错误回复也占有固定输出通道。反馈旁路要兼容这些通道。CWP 的 AUTO outbox 属于来源生产；固定公司抽样、预算和四路审查沿用 Audit 的现有责任。
 - RF Audit 保存原始 `(run_id, review_attempt, role, issue_id)` 并已把根因关联到修复和复测。`pool_progress.py` 能计划、恢复和应用观察，实际启动 agent 属于宿主。旧发现仅传引用。早期已知的公司池暂停条件不能被修复队列触发。
 - 2026-11-17 只读普查发现 RF 有 9 个并行本地提交和 3 份在改运行资料；QA、IQS、Dashboard 都有活动项目；MeetingConverter 有 `.coverage` 修改。ET、SID、IR 状态和写范围适合独立实现。计划只追加归属清楚的模块文档。
+- 三张卡已经分派。F3 使用本机已登录的 Codex 非交互端记录原生会话，并由总控记住 action ID。FF 本来支持同键重取、只读核对及独立 job ID。组合验收要核实 FF 作业数、原生尝试数和下载计数，同时复现总控回复丢失。现有 P1 引用视图接受指定 claim，自动业务选材和新摘要需要独立取证。

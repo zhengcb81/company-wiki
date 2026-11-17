@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import subprocess
+import time
 
 from .observations import Batch, digest
 
@@ -116,3 +117,21 @@ def advance(batch: Batch, host: Host) -> dict:
             outcome = {"status": deferred.status, "step": deferred.step}
         outcomes.append({"occurrence_id": key, "disposition": row["disposition"], **outcome})
     return {"observations": outcomes, "diagnostics": batch.diagnostics}
+
+
+def settle(batch: Batch, host: Host, wait_seconds: float = 0) -> dict:
+    """Follow already-started actions to a finite deadline; never retry unknown outcomes."""
+    deadline = time.monotonic() + wait_seconds
+    result = advance(batch, host)
+    while any(row["status"] == "pending" for row in result["observations"]):
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            break
+        if remaining < 2:
+            break
+        time.sleep(2)
+        pending = {row["occurrence_id"] for row in result["observations"] if row["status"] == "pending"}
+        updates = advance(Batch({key: batch.observations[key] for key in pending}, []), host)
+        current = {row["occurrence_id"]: row for row in updates["observations"]}
+        result["observations"] = [current.get(row["occurrence_id"], row) for row in result["observations"]]
+    return result

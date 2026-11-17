@@ -4,6 +4,10 @@
 
 ## 1. 选定可恢复的宿主并接入
 
+已通过[真实 Codex 与 FF 中断演练](f3a-host-acceptance.md)。使用 `python -m tools.feedback_loop.local_host --config SETTINGS rpc` 接入现有 owner map。`SETTINGS` 由运维提供，其中 `state` 是相对配置目录或绝对的 SQLite 文件，`owners` 按 owner 配置 `cwd` 和 `timeout_seconds`。`actions` 以 `triage`、`repair` 或 `replay` 为键，分别指向可信固定 argv。非交互 Codex 使用 `mode: codex-jsonl`、`argv` 和固定 `instruction`，依原生 `thread.started` 与 `turn.completed` 结算。`replay` 使用真实 owner 验证命令，输出包含 `result` 对象。`observe` 与 `report` 留下稳定投递记录，owner 的问题处置继续以本仓的记录和实际回报为准。
+
+`filing-fetch` 配置 `ff_status_argv` 指向 FF 公开 `ff_job.py --jobs-dir`，接受 `ff-job/1/<原生ID>` 证据引用。只添加 `get_status --owner-job-id`，终态和费用分别核对。重启先运行 `local_host --config SETTINGS recover` 收集残留原生终态并唤醒未启动的动作，再对原 sidecar 填 `tick --hosts HOSTS --wait-seconds N`。Phase C 回调可设置 `RESEARCH_FEEDBACK_WAIT_SECONDS` 跟随同一批次的待完成动作。窗口后尚未完成的工作继续按原 ID 查找。一个已启动但确实无法验证终态的写作业仍占用原工作区，其他隔离工作区能够继续。恢复时查原生终态或给后续独立任务指定新工作区，原动作保留未知。
+
 - 在实际运行 agent 的宿主检查能否按调用者提供的稳定 ID 创建及查询作业、取回终态、区分确知不存在与状态未知。以两个并发提交和故意丢失一次提交回复验证。已安装可执行文件、一次会话中的 agent 列表、测试 SQLite 的绿色结果分别只证明相应能力。
 - ROOT 在工程运行环境提供固定的控制命令。各 owner 的映射取自运维配置，工作目录、技能路径和可写仓由该映射确定。业务或报告正文作为待分析数据传入。公开接口为[控制端口](interfaces.md)；可使用宿主已有持久作业接口或给原生作业加一层薄适配。FF 的下载 job 只管理下载，CWP 来源 AUTO 只管理资料，Audit 的 pool_progress 继续管理选样建议。
 - 宿主以 action ID 原子登记原生作业和请求摘要，再交付执行。若工具只提供一次性启动，先在已有 owner 作业设施实现按 key 领取、存原生运行 ID 和接收结果。启动与回执之间崩溃时按原 key/原生 ID 核对。无法判断是否已实际启动时回 unknown，等待原生终态或新证据。owner 端将 action 的处置投影为协议中的标准状态。
