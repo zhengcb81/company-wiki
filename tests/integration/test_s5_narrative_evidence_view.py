@@ -170,6 +170,10 @@ def test_business_summary_opens_selected_original_support(tmp_path):
                 span["source_id"], span["locator"], span["raw_text"],
             )
         assert view["selection"] == bundle["selection"]
+        automatic = _success(_cli(fixture.config_path, request, "business-summary"), request,
+                             "business-summary", len(bundle["evidence_spans"]))
+        assert automatic["items"]
+        assert all(item["task_key"] and item["support"] for item in automatic["items"])
         absent = _cli(fixture.config_path, request, "business-summary", "--claim-id", "absent")
         assert absent.returncode == 2
         assert absent.stdout == b""
@@ -215,7 +219,7 @@ def test_old_reference_remains_pinned_when_new_partial_version_is_visible(tmp_pa
 
 @pytest.mark.parametrize("operation,options", [
     ("reference", ["--limit", "1"]), ("read", ["--query", "sales"]),
-    ("business-summary", []), ("evidence-list", ["--claim-id", "claim-replay-001"]),
+    ("business-summary", ["--claim-id", " "]), ("evidence-list", ["--claim-id", "claim-replay-001"]),
     ("evidence-list", ["--query", "sales"]),
     ("evidence-list", ["--limit", "0"]), ("evidence-list", ["--limit", "501"]),
     ("evidence-list", ["--offset", "-1"]),

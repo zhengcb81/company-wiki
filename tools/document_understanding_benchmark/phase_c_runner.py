@@ -712,7 +712,41 @@ def _public_read_expectation(descriptor, selection):
     raise ValueError('unsupported or contradictory public read selection')
 
 
-def public_bundle(root, output, env, config, imported, descriptor, label, *, source_selection=None, observed_state=None):
+def recovered_artifact_ref(receipt, reference, *, run_id, reused=False):
+    """Bind the native job's returned version to the initial public read."""
+    source = reference["source_ref"]
+    expected = {"artifact_version_id": reference["artifact_version_id"], "content_sha256": reference["artifact_sha256"],
+                "byte_size": reference["byte_size"], "document_id": source["document_id"],
+                "source_id": source["source_id"], "source_sha256": source["content_sha256"]}
+    assert isinstance(receipt, dict) and receipt.get("run_id") == run_id and receipt.get("status") == "completed", "cache-run-receipt-mismatch"
+    documents = receipt.get("documents")
+    assert isinstance(documents, list), "cache-document-receipt-missing"
+    matches = [row for row in documents if isinstance(row, dict) and row.get("document_id") == source["document_id"]]
+    assert len(matches) == 1, "cache-document-receipt-missing"
+    row = matches[0]
+    assert row.get("status") == "completed", "cache-document-not-completed"
+    assert row.get("artifact_ref") == expected, "cache-artifact-mismatch"
+    assert not reused or row.get("generation_status") == "reused", "cache-generation-not-reused"
+    # Use the caller's actual cached receipt to construct the subsequent
+    # verified read. The public ref schema and source proof come from the pin.
+    cached = row["artifact_ref"]
+    return {**reference, "artifact_version_id": cached["artifact_version_id"],
+            "artifact_sha256": cached["content_sha256"], "byte_size": cached["byte_size"]}
+
+
+def observe_cache_binding(state, name, receipt, reference, *, run_id, reused=False):
+    try:
+        pin = recovered_artifact_ref(receipt, reference, run_id=run_id, reused=reused)
+    except AssertionError as error:
+        state[name + "_cache_binding"] = str(error)
+        raise
+    state[name + "_cache_binding"] = "verified"
+    state[name + "_cache_ref"] = pin
+    return pin
+
+
+def public_bundle(root, output, env, config, imported, descriptor, label, *, source_selection=None,
+                  observed_state=None, reference=None):
     from company_wiki.automation.narrative_contracts import NarrativeBundle
 
     expected = _public_read_expectation(descriptor, source_selection)
@@ -727,18 +761,12 @@ def public_bundle(root, output, env, config, imported, descriptor, label, *, sou
         "--config",
         str(config),
     ]
-    code, reference, _, _ = _cli(
-        root,
-        output,
-        label + "-reference",
-        command + ["--operation", "reference"],
-        env,
-        {
-            "schema_version": "narrative-reference-request/1",
-            "source_ref": imported["source_ref"],
-        },
-    )
-    assert code == 0 and reference is not None
+    if reference is None:
+        code, reference, _, _ = _cli(
+            root, output, label + "-reference", command + ["--operation", "reference"], env,
+            {"schema_version": "narrative-reference-request/1", "source_ref": imported["source_ref"]},
+        )
+        assert code == 0 and reference is not None
     request = {
         "schema_version": "narrative-read-request/1",
         "narrative_ref": reference,
@@ -1670,6 +1698,7 @@ def _run_pair_in_owned_root(
                 source_selection=outcome.get('source_registration', {}).get('selection'),
                 observed_state=state,
             )
+            recovered_artifact_ref(receipt, reference, run_id=current_run)
             runs = NarrativeRunStore(database)
             final = runs.final_generations(current_run).get(
                 imported["source_ref"]["document_id"]
@@ -1712,6 +1741,7 @@ def _run_pair_in_owned_root(
                 and append_native(database, current_run, output, mode) == native
             )
             assert state["same_run_zero_POST"]
+            observe_cache_binding(state, "same_run", resumed, reference, run_id=current_run)
             template["run_id"] = current_run + "-cache"
             write_json(
                 request_path,
@@ -1733,6 +1763,16 @@ def _run_pair_in_owned_root(
             assert code == 0 and cached["budget"]["tokens"] == 0
             assert not append_native(database, template["run_id"], output, mode)
             assert state["cross_run_zero_POST"]
+            cache_ref = observe_cache_binding(state, "cross_run", cached, reference, run_id=template["run_id"], reused=True)
+            # Both native jobs returned the same pin. Verify those bytes once
+            # through the public reader after recovery, without a model call.
+            cache_observation = {}
+            state["cache_public_observation"] = cache_observation
+            _, _, _, state["cache_public_replay"] = public_bundle(
+                root, output, env, config, imported, descriptor, current_run + "-cache",
+                source_selection=outcome.get('source_registration', {}).get('selection'),
+                observed_state=cache_observation, reference=cache_ref,
+            )
             observer_config["forbid_post"] = False
             write_json(observer, observer_config)
         if outcome.get("status") != "PRE_RESERVATION_BLOCKED" and not (missing_gold or split_groups):

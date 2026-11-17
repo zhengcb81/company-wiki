@@ -9,6 +9,32 @@ import pytest
 from tools.document_understanding_benchmark import phase_c_runner as runner
 
 
+def test_exact_cache_binding_distinguishes_wrong_result_without_another_post():
+    from tools.document_understanding_benchmark.phase_c_feedback import observations
+
+    raw = {"source_id": "source", "document_id": "document", "content_sha256": "a" * 64}
+    final = {"artifact_version_id": "new", "artifact_sha256": "b" * 64, "byte_size": 30, "source_ref": raw}
+    ref = {"artifact_version_id": "new", "content_sha256": "b" * 64, "byte_size": 30,
+           "document_id": "document", "source_id": "source", "source_sha256": "a" * 64}
+    cached = {"run_id": "new-run", "status": "completed", "documents": [
+        {"document_id": "document", "status": "completed", "generation_status": "reused", "artifact_ref": ref},
+    ]}
+    assert runner.recovered_artifact_ref(cached, final, run_id="new-run", reused=True) == final
+    with pytest.raises(AssertionError, match="cache-run-receipt-mismatch"):
+        runner.recovered_artifact_ref(cached, final, run_id="old-run", reused=True)
+    for field, wrong in (("content_sha256", "c" * 64), ("artifact_version_id", "old"),
+                         ("byte_size", 31), ("source_sha256", "d" * 64)):
+        changed = {**cached, "documents": [{**cached["documents"][0], "artifact_ref": {**ref, field: wrong}}]}
+        with pytest.raises(AssertionError, match="cache-artifact-mismatch"):
+            runner.recovered_artifact_ref(changed, final, run_id="new-run", reused=True)
+    state = {"run_id": "new-run", "cross_run_zero_POST": True}
+    with pytest.raises(AssertionError, match="cache-artifact-mismatch"):
+        runner.observe_cache_binding(state, "cross_run", changed, final, run_id="new-run", reused=True)
+    checks = {row["check_id"]: row for row in observations({"states": [state]}, {}, "v1")}
+    assert checks["cross-run-cache"]["actual"] == "zero-post"
+    assert checks["cross-run-cache-binding"]["actual"] == "cache-artifact-mismatch"
+
+
 def captured(tmp_path, raw):
     path = tmp_path / 'run.attempt.response.json.gz'
     path.write_bytes(gzip.compress(raw))

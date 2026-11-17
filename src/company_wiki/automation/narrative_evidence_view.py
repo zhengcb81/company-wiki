@@ -13,7 +13,7 @@ import json
 from typing import Any
 
 from company_wiki.document_model.narrative import selected_summary_input
-from company_wiki.source_catalog.narrative_business_quotes import project_business_quotes
+from company_wiki.source_catalog.narrative_business_quotes import project_automatic_business_quotes, project_business_quotes
 from company_wiki.source_catalog.narrative_retrieval import (
     NARRATIVE_EVIDENCE_BUNDLE_SCHEMA_VERSION, NarrativeEvidenceSearch,
 )
@@ -62,11 +62,11 @@ class NarrativeEvidenceViewQuery:
         if self.offset is not None and (type(self.offset) is not int or self.offset < 0):
             raise ValueError("invalid evidence offset")
         if self.operation == "business-summary":
-            if not isinstance(self.claim_ids, tuple) or not self.claim_ids or any(
+            if not isinstance(self.claim_ids, tuple) or any(
                 not isinstance(claim_id, str) or not claim_id.strip()
                 for claim_id in self.claim_ids
             ):
-                raise ValueError("business summary requires selected claim IDs")
+                raise ValueError("business summary requires nonempty claim IDs when specified")
         elif self.claim_ids:
             raise ValueError("claim IDs require business summary")
         if self.operation == "evidence-lookup":
@@ -170,10 +170,13 @@ class NarrativeEvidenceViewReader:
     ) -> list[dict[str, Any]]:
         if query.operation == "business-summary":
             draft = bundle.summary.draft
+            claims = draft.claims if draft is not None else ()
+            if not query.claim_ids:
+                return project_automatic_business_quotes(bundle.evidence_spans, claims, bundle.reading_context)
             try:
                 return project_business_quotes(
                     bundle.evidence_spans,
-                    draft.claims if draft is not None else (),
+                    claims,
                     query.claim_ids,
                 )
             except KeyError as exc:

@@ -1,6 +1,6 @@
 # 进度与恢复入口
 
-2026-11-17。新反馈机制进入分仓实施。总控和业务消费的下一次真实组合为 P1。当前节点、可分派卡和发布回执由此页维护。
+2026-11-17。真实宿主和首轮业务消费已验收。分仓施工、真实收据和发布状态由此页维护。
 
 | 节点 | 状态 | 证据或下一步 |
 |---|---|---|
@@ -8,7 +8,7 @@
 | F1 | 离线总控及 CWP 首次接线独审通过 | [35 项测试、实际后台唤醒、封存 H1 和适用范围](f1-acceptance.md) |
 | F2 | ET、SID、IR 已分发；作者交付待验 | FF 的 job 协调及 RF 的跨仓消费归 ROOT |
 | F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
-| F3b | ROOT 实施中 | P1 正式新摘要、缓存内容验证和 RF 实际采用 |
+| F3b | 两份正式摘要、恢复和两条 RF 采用通过独审 | [实际组合与适用范围](f3b-live-acceptance.md) · [草稿与精选余项](issues/cwp-draft-scope-and-focus.md) |
 | F4 | 待接续 | 公司池仍依原有暂停/恢复条件 |
 
 ### F0 发布与独立验收
@@ -24,4 +24,6 @@
 
 ### ROOT 下一步
 
-按[真实宿主与 P1 实施细则](host-integration.md)接续 P1。FF 仍使用原生作业库，Codex 使用独立本机动作登记及其原生会话。收到三卡后分别核对公开观察、技能和独审版本。CWP 的本仓修理入口已有[技能](../../../skills/repair-company-wiki-issue/SKILL.md)与[真实问题卡](issues/cwp-native-recovery-observation.md)。
+F3a 源码 `71ca0791dd13a12290b71970d2d008869433da16` 已推主线，固定快测 23 项通过，用时 16.66 秒。远端同提交 CI 通过，用时 5 分 29 秒。[远端作业](https://github.com/zhengcb81/company-wiki/actions/runs/44185233338/job/134399879124)
+
+F3b 已完成本轮真实组合。收到三卡后分别核对本仓公开观察、独审版本、临时环境清理和组合行为。后续业务摘要精度复用本轮已付响应。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)与[问题卡](issues/cwp-draft-scope-and-focus.md)。

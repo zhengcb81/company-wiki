@@ -769,10 +769,17 @@ _FORWARD_STATEMENT_DISCLAIMER = re.compile(
     r"(?:\s+(?:(?:contained|included|made) )?in (?:this|the) (?:report|release|filing))?\s+"
     r"(?:do not constitute|are not|should not be construed as)\s+(?:a\s+)?"
     r"(?:commitments?|promises?|guarantees?)(?:\s+(?:to|of)\s+[^.;!?]{1,32})?$", re.I)
+_DISCLOSURE_ROSTER_HEADER = re.compile(
+    r"^(?:董事[会會]秘[书書]\s*[证證]券事[务務]代表\s*姓名|"
+    r"股票[种種][类類]\s*股票上市交易所\s*股票[简簡][称稱]\s*股票代[码碼]|"
+    r"company secretary\s+securities representative\s+name\b|"
+    r"(?:share class|class of securities?)\s+(?:trading symbol|ticker)\s+(?:exchange|name of exchange)\b)", re.I)
 
 
 def source_reporting_purpose(text: str) -> str:
     """Shared reporting governor/basis role, not a financial-word blacklist."""
+    if _DISCLOSURE_ROSTER_HEADER.match(text.lstrip()):
+        return 'reporting_definition'
     head = _STANDARD_HEAD.search(text)
     if head and _STANDARD_ACTION.search(text, head.end()):
         return 'accounting_policy'

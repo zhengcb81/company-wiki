@@ -2,7 +2,7 @@
 
 本文件定义目标，不维护版本日志；执行状态见[CURRENT_STATUS](CURRENT_STATUS.md)，下一步见[task_plan](task_plan.md)。
 
-2026-11-17。M2/E01–E09 已在冻结接口范围内验收，M3 已[正式收口](../module-boundaries-2026-11-11/review/m3-formal-t3-20261116.md)。当前在 P1 验证自动选材、正式摘要、缓存恢复、RF 实际采用和[反馈回告](../feedback-loop-2026-11-17/task_plan.md)。固定公司循环继续独立暂停，恢复依据看 [CURRENT_STATUS](CURRENT_STATUS.md)。
+2026-11-17。M2/E01–E09、M3 和 P1/P2 的两个样本试点已验收。继续用公开端口核验其他文种和真实公司，关闭遗留的草稿与精选问题。固定公司循环的恢复依据见 [CURRENT_STATUS](CURRENT_STATUS.md)。[F3 组合证据](../feedback-loop-2026-11-17/f3b-live-acceptance.md)
 
 完成以company-wiki→filing-fetch→revenue-forecast→revenue-forecast-audit为一条解耦、可复查的真实业务链。先完成已有药明康德失败整改及新attempt、药明合联/Snowflake泛化责任；再完成固定八家责任与通用循环停止条件。已有局部工程或旧公司报告不能代替本目标要求的完整新版本验收。
 

@@ -16,7 +16,7 @@ appears in the request; `--config` selects the storage adapter in the producer.
 | `evidence-list` | `--limit N --offset N` | Complete EvidenceSpan objects in final order / all spans |
 | `evidence-lookup` | Exactly one `--span-id ID` or `--locator LOCATOR` | Exactly one EvidenceSpan / 1 |
 | `evidence-search` | Required `--query TEXT`, optional limit/offset | Existing BM25 selected-text group hits / all matching groups |
-| `business-summary` | Repeat `--claim-id ID` for chosen claims in the pinned final, optional limit/offset | Original support and context in chosen order / distinct selected scopes |
+| `business-summary` | Optional repeated `--claim-id ID`, limit and offset | Automatically selected business support and context, or the caller's chosen distinct claim scopes |
 
 List/search default limit 100, offset 0; limit 1–500, offset nonnegative. Query is
 nonblank and at most 4096 UTF-8 bytes. Exact anchors are trimmed nonblank strings
@@ -56,6 +56,13 @@ each quotation. PDF printed turns also carry the verified speaker label
 locator and title when present. Identical support and context scopes appear once, in the first
 selected position. The caller selects the claims; the view uses their original
 bindings to construct the output.
+
+Without `--claim-id`, the source owner selects business support from the pinned
+artifact's admitted tasks. The view excludes recognized reporting boilerplate
+and questions used as standalone claims. Original support and context remain
+separate. Low reading scores and an absent generated clause do not remove an
+admitted business scope. `task_key` identifies each selected task within the
+final and `claim_id` is null if its exact scope has no published claim.
 
 Stderr has one JSON line, at most 16 KiB, with schema
 `narrative-evidence-read-receipt/1`, status `ok`, `view_sha256`, `byte_size`,

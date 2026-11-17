@@ -107,3 +107,26 @@ def test_printed_pdf_turn_carries_its_attribution_and_label_location():
     assert "speaker" not in quote
     assert quote["printed_turn"] == turn
     assert quote["locator"] == body.locator
+
+
+def test_automatic_summary_keeps_low_priority_operating_detail_and_source_attribution():
+    from company_wiki.source_catalog.narrative_business_quotes import project_automatic_business_quotes
+
+    contact = span("董事会秘书 证券事务代表 姓名 某甲 联系地址 地址一", 0, role="company_filing")
+    listing = span("股票种类 股票上市交易所 股票简称 股票代码 A股 交易所 示例 123456", 1, role="company_filing")
+    disclosure = span("本半年度报告未经审计。", 2, role="company_filing")
+    financing = span("筹资活动产生的现金流量净额变动原因说明：报告期内，公司筹资活动使用的现金流量净额为人民币89,931.05万元，主要为现金股息和股份回购。", 6, role="company_filing")
+    operator = span("The operator announced that the call will begin immediately.", 7, role="operator")
+    question = span("Are customer shipments expected to reach their target?", 8, role="analyst_question")
+    actual = span("根据合作方通报，第二条生产线须在完成客户验收后才可批量供货。", 3, speaker="负责人",
+                  metadata={"reading_priority": 2, "reading_value_band": "description", "reading_score": 0})
+    scope = span("客户现在可通过电话与电邮提交售后请求，响应时间为两个工作日。", 4)
+    spans = (contact, listing, disclosure, actual, scope, financing, operator, question)
+    draft = SummaryClaim("draft-plan", "公司已批量供货。", (actual.span_id,), "company_statement", "actual")
+    result = project_automatic_business_quotes(spans, (draft,), None)
+    assert [[part["text"] for part in row["support"]] for row in result] == [[actual.raw_text], [scope.raw_text]]
+    assert result[0]["claim_id"] == draft.claim_id
+    assert result[0]["support"][0]["speaker"] == "负责人"
+    assert result[1]["claim_id"] is None
+    assert result[0]["task_key"] != result[1]["task_key"]
+    assert draft.text not in str(result)

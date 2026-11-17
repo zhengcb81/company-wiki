@@ -4,7 +4,9 @@
 
 ## 2026-11-17 最新状态
 
-P1 继续以自动挑选、正式摘要、缓存恢复和 RF 实际采用为业务验收。已将自动反馈实施分为总控和各仓两个写范围，唯一协调入口为[反馈总调度](../feedback-loop-2026-11-17/task_plan.md)。12 个自有模块有本仓细则，ET、SID 和 IR 三卡可并行。ROOT 负责控制端、FF 持久作业、P1 的 CWP/RF 回放和实际宿主接入。已有封存 H1 产物只能证明其版本上的行为。正式无人值守消费验收以新运行证据为准。[分工与交付](../feedback-loop-2026-11-17/dispatch.md) · [当前进度](../feedback-loop-2026-11-17/progress.md)
+总控已验收真实 Codex 中断恢复。FF 对原 H1 只启动一笔复用作业，恢复保留原 ID 且新增下载为零。ET、SID 和 IR 的三张卡已分派，交付仍由 ROOT 在公开接口组合核验。[反馈分工](../feedback-loop-2026-11-17/dispatch.md) · [宿主实测](../feedback-loop-2026-11-17/f3a-host-acceptance.md)
+
+P1 的新版自动业务视图和真实缓存验收已在半年报、投资者关系样本通过。P2 的 RF 正式组合采用新版两条证据，计算及快照通过，原有 181 项参数值一致。原始模型草稿仍有范围诊断漏检，公开视图保留原文，精选余项已登记。公司池仍依原状态，后续从 PWF 接续 W12 和其他真实 holdout。[业务与采用实测](../feedback-loop-2026-11-17/f3b-live-acceptance.md) · [未关闭的内容问题](../feedback-loop-2026-11-17/issues/cwp-draft-scope-and-focus.md)
 
 ## 2026-11-16 状态记录
 

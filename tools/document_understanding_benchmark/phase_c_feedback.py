@@ -36,6 +36,17 @@ def observations(receipt, env, version):
             ("same-run-cache", "zero-post", _bool_outcome(state.get("same_run_zero_POST"))),
             ("cross-run-cache", "zero-post", _bool_outcome(state.get("cross_run_zero_POST"))),
         ]
+        for kind in ("same_run", "cross_run"):
+            binding = state.get(kind + "_cache_binding")
+            if isinstance(binding, str) and binding:
+                checks.append((kind.replace("_", "-") + "-cache-binding", "verified", binding))
+        cache_read = state.get("cache_public_observation")
+        if isinstance(cache_read, dict):
+            cache_receipt = cache_read.get("public_replay")
+            outcome = cache_receipt.get("replay_status") if isinstance(cache_receipt, dict) else None
+            if not outcome and cache_read.get("public_read_exit") == 2 and isinstance(cache_receipt, dict) and cache_receipt.get("reason"):
+                outcome = "read-refused"
+            checks.append(("cache-locator-replay", "verified", outcome or "unknown"))
         for check, expected, actual in checks:
             row = {"schema_version": "feedback-observation/1", "owner": "company-wiki",
                    "run_id": env.get("RESEARCH_FEEDBACK_RUN_ID") or native_id,
