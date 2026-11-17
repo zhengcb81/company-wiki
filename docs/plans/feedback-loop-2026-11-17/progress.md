@@ -29,6 +29,8 @@ F3a 源码 `71ca0791dd13a12290b71970d2d008869433da16` 已推主线，固定快�
 
 F3b 源码和验收 PWF `c5c233c43bea16fe38ca49a5f4a55a054c16cf68` 已推主线。Ruff、mypy 和推送前固定快测通过，快测 23 项用时 10.10 秒。远端同提交 CI 通过，用时 5 分 30 秒。[远端作业](https://github.com/zhengcb81/company-wiki/actions/runs/44188395609/job/134410926044)
 
+F3c 范围及精选提交 `603934c49`，公开接口修正 `d5cb85c1e1d382b001a8f079072b465a7d0e42e7`。定向回归、真实回放和独审通过。公开接口修正版已推送主线，推送前固定快测 23 项通过，19.63 秒。远端同一源码版 Python 3.12 全量单测和定向契约通过，作业用时 7 分 09 秒。 [远端作业](https://github.com/zhengcb81/company-wiki/actions/runs/44197811500/job/134443744029)
+
 ### ROOT 接续
 
 F3b 已完成真实组合，F3c 已完成保存响应修复。收到三卡后分别核对本仓公开观察、独审版本、临时环境清理和组合行为。按父计划接续新版生成的真实公司组合及 RF 正式采用。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)。

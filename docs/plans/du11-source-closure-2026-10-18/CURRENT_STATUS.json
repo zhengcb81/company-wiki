@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M3_CLOSED; F3_SCOPED_REAL_TRIAL_AND_SAVED_REPAIR_ACCEPTED; P3_OPEN",
   "as_of_date": "2026-11-17",
-  "observed_at_utc": "2026-11-17T22:54:22Z",
+  "observed_at_utc": "2026-11-17T23:23:11Z",
   "cwp_saved_response_repair": {
     "evidence": "../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md",
     "assessor_version": "source-summary-assessment/1.4.0",
@@ -102,6 +102,13 @@
     "markets": ["CN", "HK", "US"],
     "paid_model_posts": 0,
     "downloads": 0,
+    "published_source_commit": "d5cb85c1e1d382b001a8f079072b465a7d0e42e7",
+    "github_ci": {
+      "run_id": 44197811500,
+      "job_id": 134443744029,
+      "conclusion": "success",
+      "completed_at_utc": "2026-11-17T23:23:01Z"
+    },
     "next": "Check latest generation and RF adoption in the next whole-company run."
   },
   "recent_cwp_gate_checkpoint": {
