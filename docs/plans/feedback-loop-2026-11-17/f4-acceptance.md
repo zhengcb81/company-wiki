@@ -31,3 +31,9 @@ FF 用本仓 `get-report` 读回责任仓完整回告，包含原发现方、版
 - 独审覆盖旧费用两种错误形态、合法未启动零证据、原生 attempt 错配、结果及费用分离、实际回告和受控真实链。总控代码核对工作树 SHA-256 前缀：`local_host.py` `c1907cba`、`coordinator.py` `c13ce2d2`、`observations.py` `ad53b0ad`。实际 FF 为上述提交。
 
 本轮验证指定 FF/CWP 组合与通用宿主。其他 owner 的生产接线、不同供应商费用的额外核对以及公司池正式运维继续沿[分工](dispatch.md)与各自 PWF，不能将本轮的隔离验证记作已全量上线。
+
+## 4. 外层 worker 未启动原生命令时的恢复
+
+在 `owner-json` 与 `codex-jsonl` 两条隔离路线上，让真实外层子进程在进入原生执行前 `os._exit(17)`。旧版已写 `running`，重新启动宿主唤醒零条，两条回归均变红。修复将现有 SQLite 领取移到实际执行端。并发执行两次 `recover`，找回同一 action ID，原生命令实际启动一次，重复查询增量为零。模拟 owner 启动器的 `OSError` 时，同一排队动作带具名诊断并可恢复。已领取、缺终态的历史动作继续按原作业核对。
+
+最终定向包覆盖 `tests/unit/test_feedback_local_host.py`、`tests/unit/test_feedback_loop.py`、`tests/integration/test_feedback_loop_cli.py` 和 `tests/integration/test_feedback_f4_owner_recovery.py`，共 27 项通过。用现有 FF 源码跑真实子进程和环回，再执行 `f4_rf_audit_host_probe.py` 的合同模式，恢复期间环回请求、下载、付费调用均为零。这一轮的分诊由离线夹具提供。独审复核并发领取、启动器诊断、旧记录和已启动动作的保护。测试目录由夹具删除。[部署与接续](host-integration.md)

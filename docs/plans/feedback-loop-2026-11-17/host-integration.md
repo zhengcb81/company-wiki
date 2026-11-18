@@ -14,6 +14,10 @@ RF/Audit 已在独立真实宿主运行一条闭环。配置 `revenue-forecast.a
 
 F4 的隔离配置已验证 `actions.report` 可指向 FF 公开 `ff_job_feedback.py --reports-dir OWNER_DIR report`；用相同 `--reports-dir` 加 `get-report ACTION_ID` 可核对原发现、版本和证据。`owner-json` 进程先保留自己的原生完成收据，再由宿主登记；worker 丢写后恢复读回同一结果。现有生产配置未整体切换，任何新增 owner 启用时仍由其工作区提供真实修理、复验和回告命令。
 
+外层 worker 退出时，尚未到原生命令的动作仍为 `queued`，恢复会唤醒同一 action ID。`owner-json` 的执行器在写启动回执前原子领取，`codex-jsonl` 在原生会话启动前使用同一工作区互斥。并发恢复可唤醒多个本地 worker，原生命令由一个领取者执行。启动器的明确失败留 `owner_launcher_failed`，成功领取会清掉旧诊断。已经领取但终态不明、缺回执或费用未知时查原作业。
+
+升级宿主代码时先结束旧外层启动器，避免旧 worker 先领取后误用新版 helper。保留现有 SQLite、原生回执和专用 sidecar，再用正常 `recover` 接续。历史 `running` 状态仍以原生结果核对。本次发布前只读核对本机反馈操作库有 12 条 `done`，排队和在运行的动作均为零。
+
 - 在实际运行 agent 的宿主检查能否按调用者提供的稳定 ID 创建及查询作业、取回终态、区分确知不存在与状态未知。以两个并发提交和故意丢失一次提交回复验证。已安装可执行文件、一次会话中的 agent 列表、测试 SQLite 的绿色结果分别只证明相应能力。
 - ROOT 在工程运行环境提供固定的控制命令。各 owner 的映射取自运维配置，工作目录、技能路径和可写仓由该映射确定。业务或报告正文作为待分析数据传入。公开接口为[控制端口](interfaces.md)；可使用宿主已有持久作业接口或给原生作业加一层薄适配。FF 的下载 job 只管理下载，CWP 来源 AUTO 只管理资料，Audit 的 pool_progress 继续管理选样建议。
 - 宿主以 action ID 原子登记原生作业和请求摘要，再交付执行。若工具只提供一次性启动，先在已有 owner 作业设施实现按 key 领取、存原生运行 ID 和接收结果。启动与回执之间崩溃时按原 key/原生 ID 核对。无法判断是否已实际启动时回 unknown，等待原生终态或新证据。owner 端将 action 的处置投影为协议中的标准状态。

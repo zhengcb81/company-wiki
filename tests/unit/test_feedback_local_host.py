@@ -102,6 +102,88 @@ def test_restart_wakes_only_prelaunch_action(tmp_path, host_config, monkeypatch)
     assert (tmp_path / "starts").read_text().splitlines() == ["start"]
 
 
+@pytest.mark.parametrize("mode", ["owner-json", "codex-jsonl"])
+def test_worker_exits_before_native_runner_can_claim_and_restart_uses_original_action(host_config, monkeypatch, mode):
+    from tools.feedback_loop.local_host import LocalHost
+
+    root = host_config.parent
+    if mode == "codex-jsonl":
+        worker = root / "native.py"
+        events = [
+            {"type": "thread.started", "thread_id": "native-after-restart"},
+            {"type": "item.completed", "item": {"type": "agent_message", "text": '{"decision":"expected"}'}},
+            {"type": "turn.completed", "usage": {}},
+        ]
+        worker.write_text(
+            "from pathlib import Path\n"
+            "with Path('starts').open('a') as stream: stream.write('start\\n')\n"
+            f"print({''.join(json.dumps(event) + chr(10) for event in events)!r}, end='')\n",
+            encoding="utf-8",
+        )
+        settings = json.loads(host_config.read_bytes())
+        settings["owners"]["company-wiki"]["actions"]["triage"] = {
+            "mode": mode, "argv": [sys.executable, str(worker)],
+        }
+        host_config.write_text(json.dumps(settings), encoding="utf-8")
+
+    request = action()
+    host = LocalHost(host_config)
+    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    assert host.handle(request)["state"] == "pending"
+
+    # Force the real outer process to exit before it invokes the native route.
+    code = (
+        "import os, sys\n"
+        "from pathlib import Path\n"
+        "from tools.feedback_loop.local_host import LocalHost\n"
+        "host = LocalHost(Path(sys.argv[1]))\n"
+        "host._execute = lambda *args: os._exit(17)\n"
+        "host.work(sys.argv[2])\n"
+    )
+    stopped = subprocess.run([sys.executable, "-B", "-c", code, str(host_config), request["action_id"]],
+                             cwd=ROOT, check=False, timeout=12)
+    assert stopped.returncode == 17
+    assert not (root / "starts").exists()
+
+    (root / "release").touch()
+    with ThreadPoolExecutor(2) as pool:
+        recoveries = list(pool.map(lambda _: invoke(host_config, "recover")["woken"], range(2)))
+    assert [request["action_id"]] in recoveries
+    assert all(keys in ([], [request["action_id"]]) for keys in recoveries)
+    lookup = {**request, "method": "lookup"}
+    done = wait_for(lambda: reply if (reply := invoke(host_config, "rpc", lookup))["state"] == "done" else None)
+    assert done["action_id"] == request["action_id"] and done["result"] == {"decision": "expected"}
+    assert invoke(host_config, "recover")["woken"] == []
+    assert invoke(host_config, "rpc", request) == done
+    assert (root / "starts").read_text().splitlines() == ["start"]
+
+
+def test_failed_owner_launcher_keeps_a_recoverable_action_and_diagnostic(host_config, monkeypatch):
+    from tools.feedback_loop.local_host import LocalHost
+
+    root = host_config.parent
+    host = LocalHost(host_config)
+    request = action()
+    lookup = {**request, "method": "lookup"}
+    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    assert host.handle(request)["state"] == "pending"
+
+    def launcher_unavailable(*args, **kwargs):
+        raise OSError("simulated owner runner startup failure")
+
+    with monkeypatch.context() as failure:
+        failure.setattr(subprocess, "run", launcher_unavailable)
+        host.work(request["action_id"])
+
+    pending = host.handle(lookup)
+    assert pending["state"] == "pending" and pending["code"] == "owner_launcher_failed"
+    assert not (root / "starts").exists()
+    (root / "release").touch()
+    assert invoke(host_config, "recover")["woken"] == [request["action_id"]]
+    done = wait_for(lambda: reply if (reply := invoke(host_config, "rpc", lookup))["state"] == "done" else None)
+    assert "code" not in done and (root / "starts").read_text().splitlines() == ["start"]
+
+
 def test_ff_reconcile_checks_the_same_job_and_never_submits(host_config):
     root = host_config.parent
     ref = "ff-job/1/ffjob-123abc123abc"

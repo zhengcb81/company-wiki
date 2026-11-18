@@ -179,9 +179,9 @@
     "plan": "../feedback-loop-2026-11-17/task_plan.md",
     "progress": "../feedback-loop-2026-11-17/progress.md",
     "owner_cards": "../feedback-loop-2026-11-17/dispatch.md",
-    "available_lanes": [],
+    "available_lanes": ["F2-MC-OUTPUT", "F2-FF-SHORT"],
     "accepted_lanes": ["FB-ET", "FB-SID", "FB-IR"],
-    "lane_state": "first_three_accepted_offline_and_published",
+    "lane_state": "first_three_accepted_and_published_two_ready_to_dispatch",
     "lane_acceptance": "../feedback-loop-2026-11-17/f2-owner-acceptance.md",
     "root_offline_coordinator": "accepted_35_tests_and_independent_review",
     "live_host_recovery": "accepted_codex_session_and_one_ff_native_reuse_job",
@@ -191,6 +191,7 @@
     "f4_rf_audit_acceptance": "../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md",
     "f2_roadmap": "../feedback-loop-2026-11-17/f2-roadmap.md",
     "production_owner_rollout": "remaining_owner_routes_open",
+    "host_prelaunch_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "company_pool": "paused"
   },
   "p1_business_quote_view": {
