@@ -4,11 +4,13 @@
 
 ## 1. 选定可恢复的宿主并接入
 
-已通过[真实 Codex 与 FF 中断演练](f3a-host-acceptance.md)。使用 `python -m tools.feedback_loop.local_host --config SETTINGS rpc` 接入现有 owner map。`SETTINGS` 由运维提供，其中 `state` 是相对配置目录或绝对的 SQLite 文件，`owners` 按 owner 配置 `cwd` 和 `timeout_seconds`。`actions` 以 `triage`、`repair` 或 `replay` 为键，分别指向可信固定 argv。非交互 Codex 使用 `mode: codex-jsonl`、`argv` 和固定 `instruction`，依原生 `thread.started` 与 `turn.completed` 结算。`replay` 使用真实 owner 验证命令，输出包含 `result` 对象。`observe` 与 `report` 留下稳定投递记录，owner 的问题处置继续以本仓的记录和实际回报为准。
+已通过[真实 Codex 与 FF 中断演练](f3a-host-acceptance.md)和 [F4 首条闭环](f4-acceptance.md)。使用 `python -m tools.feedback_loop.local_host --config SETTINGS rpc` 接入 owner map。`SETTINGS` 由运维提供，其中 `state` 是相对配置目录或绝对的 SQLite 文件，`owners` 按 owner 配置 `cwd` 和 `timeout_seconds`。`actions` 以 `triage`、`repair`、`replay`、`report` 为键，分别指向可信固定 argv。非交互 Codex 使用 `mode: codex-jsonl`、`argv` 和固定 `instruction`，依原生 `thread.started` 与 `turn.completed` 结算。机器复验、回告必须由配置的 owner 命令输出 `result` 对象；`observe` 的去重登记留在宿主。
 
-`filing-fetch` 配置 `ff_status_argv` 指向 FF 公开 `ff_job.py --jobs-dir`，接受 `ff-job/1/<原生ID>` 证据引用。只添加 `get_status --owner-job-id`，终态和费用分别核对。重启先运行 `local_host --config SETTINGS recover` 收集残留原生终态并唤醒未启动的动作，再对原 sidecar 填 `tick --hosts HOSTS --wait-seconds N`。Phase C 回调可设置 `RESEARCH_FEEDBACK_WAIT_SECONDS` 跟随同一批次的待完成动作。窗口后尚未完成的工作继续按原 ID 查找。一个已启动但确实无法验证终态的写作业仍占用原工作区，其他隔离工作区能够继续。恢复时查原生终态或给后续独立任务指定新工作区，原动作保留未知。
+`filing-fetch` 配置 `ff_status_argv` 指向 FF 公开 `ff_job.py --jobs-dir`，接受 `ff-job/1/<原生ID>` 证据引用。先 `get_status`；原生确认只能 `reconcile` 且部署提供 `ff_reconcile_config` 时，用同一作业、同一 attempt、稳定键执行 owner 的只读对账。结果和费用分别核对。重启运行 `local_host --config SETTINGS recover --hosts HOSTS --sidecar FILE --wait-seconds N`，从原 sidecar 接续。Phase C 回调也能设置 `RESEARCH_FEEDBACK_WAIT_SECONDS` 跟随旧作业。一个已启动但确实无法验证终态的写作业仍占用原工作区，其他隔离工作区能够继续。原作业未知时不另开作业。
 
 本机可用配置位于 `.planning/shared-reading-production/feedback-host`。`hosts.json` 定义 CWP Codex 只读分诊和 FF 原生状态端口，`settings.json` 定义命令和本机动作登记。将 `RESEARCH_FEEDBACK_HOSTS` 指向该 `hosts.json` 即可从已配置的业务阶段触发。两份真实收据按最终检查回放进入动作登记，首轮 12 条，重复投递增加 0 条，新增 agent 作业、FF 作业及业务模型调用均为零。各 owner 的自动修理接线随本仓交付和 F4 组合推进。
+
+F4 的隔离配置已验证 `actions.report` 可指向 FF 公开 `ff_job_feedback.py --reports-dir OWNER_DIR report`；用相同 `--reports-dir` 加 `get-report ACTION_ID` 可核对原发现、版本和证据。`owner-json` 进程先保留自己的原生完成收据，再由宿主登记；worker 丢写后恢复读回同一结果。现有生产配置未整体切换，任何新增 owner 启用时仍由其工作区提供真实修理、复验和回告命令。
 
 - 在实际运行 agent 的宿主检查能否按调用者提供的稳定 ID 创建及查询作业、取回终态、区分确知不存在与状态未知。以两个并发提交和故意丢失一次提交回复验证。已安装可执行文件、一次会话中的 agent 列表、测试 SQLite 的绿色结果分别只证明相应能力。
 - ROOT 在工程运行环境提供固定的控制命令。各 owner 的映射取自运维配置，工作目录、技能路径和可写仓由该映射确定。业务或报告正文作为待分析数据传入。公开接口为[控制端口](interfaces.md)；可使用宿主已有持久作业接口或给原生作业加一层薄适配。FF 的下载 job 只管理下载，CWP 来源 AUTO 只管理资料，Audit 的 pool_progress 继续管理选样建议。

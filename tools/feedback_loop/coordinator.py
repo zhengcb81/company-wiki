@@ -63,19 +63,27 @@ def _triage(key: str, row: dict, host: Host) -> tuple[str, dict]:
     raise Deferred("unverified", "triage_referral_cycle")
 
 
-def _advance_one(key: str, row: dict, host: Host) -> dict:
+def _reconcile(key: str, row: dict, host: Host, observation: dict) -> dict:
+    receipt = _perform(host, row["origin_owner"], "reconcile", [key], observation, lookup_only=True)
+    state, original, cost = (receipt.get(k) for k in ("status", "job_status", "cost_state"))
+    if original in ("succeeded", "failed", "cancelled"):
+        if (state == "known" and cost in ("known", "not_applicable")) or (state == "cost_unknown" and cost == "unknown"):
+            return {"status": "reconciled" if state == "known" else "unknown", "step": "reconcile",
+                    "evidence_ref": _text(receipt, "evidence_ref", "reconcile"), "job_status": original, "cost_state": cost}
+    if state == "known":
+        return {"status": "awaiting_observation", "evidence_ref": _text(receipt, "evidence_ref", "reconcile")}
+    return {"status": "unknown", "step": "reconcile"}
+
+
+def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
     observation = {"occurrence_id": key, "observation": row}
     bound = _perform(host, row["origin_owner"], "observe", [key], observation)
     if bound.get("recorded") is not True:
         raise Deferred("unverified", "observe")
+    if unfinished or row["disposition"] == "unknown":
+        return _reconcile(key, row, host, observation)
     if row["disposition"] == "expected":
         return {"status": "expected"}
-    if row["disposition"] == "unknown":
-        reconciliation = _perform(host, row["origin_owner"], "reconcile", [key], observation, lookup_only=True)
-        if reconciliation.get("status") == "known":
-            evidence = _text(reconciliation, "evidence_ref", "reconcile")
-            return {"status": "awaiting_observation", "evidence_ref": evidence}
-        return {"status": "unknown", "step": "reconcile"}
     owner, triage = _triage(key, row, host)
     decision = triage.get("decision")
     if decision in ("expected", "external", "needs_evidence"):
@@ -108,11 +116,14 @@ def _advance_one(key: str, row: dict, host: Host) -> dict:
     return {"status": verdict, "issue_ref": issue, "fixed_version": version, "evidence_ref": evidence}
 
 
-def advance(batch: Batch, host: Host) -> dict:
+def advance(batch: Batch, host: Host, *, only: set[str] | None = None) -> dict:
     outcomes = []
+    unfinished = batch.unfinished_starts()
     for key, row in batch.observations.items():
+        if only is not None and key not in only:
+            continue
         try:
-            outcome = _advance_one(key, row, host)
+            outcome = _advance_one(key, row, host, unfinished=key in unfinished)
         except Deferred as deferred:
             outcome = {"status": deferred.status, "step": deferred.step}
         outcomes.append({"occurrence_id": key, "disposition": row["disposition"], **outcome})
@@ -131,7 +142,7 @@ def settle(batch: Batch, host: Host, wait_seconds: float = 0) -> dict:
             break
         time.sleep(2)
         pending = {row["occurrence_id"] for row in result["observations"] if row["status"] == "pending"}
-        updates = advance(Batch({key: batch.observations[key] for key in pending}, []), host)
+        updates = advance(batch, host, only=pending)
         current = {row["occurrence_id"]: row for row in updates["observations"]}
         result["observations"] = [current.get(row["occurrence_id"], row) for row in result["observations"]]
     return result

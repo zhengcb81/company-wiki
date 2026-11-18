@@ -12,7 +12,17 @@ from typing import Iterable
 IDENTITY = ("owner", "origin_owner", "run_id", "attempt_id", "step_id", "check_id")
 REQUIRED = ("owner", "run_id", "attempt_id", "step_id", "check_id", "expected", "actual")
 OPTIONAL = ("origin_owner", "issue_key", "version", "evidence_ref", "details_ref", "parent_step_id", "disposition",
-            "original_occurrence_id")
+            "original_occurrence_id", "terminal_check_id")
+
+# Legacy producers shipped before starts could name their matching result.
+_LEGACY_TERMINALS = {
+    "earnings-transcripts": frozenset({"outcome-naming"}),
+    "stockinfo-dl-simple": frozenset({"candidate-listing-identity", "staged-fetch-receipt"}),
+}
+
+
+def _step_identity(row: dict[str, str]) -> tuple[str, ...]:
+    return tuple(row[field] for field in IDENTITY[:-1])
 
 
 def digest(value: object) -> str:
@@ -58,6 +68,19 @@ class Batch:
     def plan(self) -> dict:
         return {"observations": [{"occurrence_id": key, **row} for key, row in self.observations.items()],
                 "diagnostics": self.diagnostics}
+
+    def unfinished_starts(self) -> set[str]:
+        matching_checks: dict[tuple[str, ...], set[str]] = {}
+        for row in self.observations.values():
+            if row["check_id"] != "action-started":
+                matching_checks.setdefault(_step_identity(row), set()).add(row["check_id"])
+        return {
+            key for key, row in self.observations.items()
+            if row["check_id"] == "action-started" and row["actual"] == "started"
+            and not matching_checks.get(_step_identity(row), set()).intersection(
+                {row["terminal_check_id"]} if "terminal_check_id" in row
+                else _LEGACY_TERMINALS.get(row["owner"], ()))
+        }
 
 
 def read_batch(paths: Iterable[Path]) -> Batch:

@@ -1,0 +1,51 @@
+{
+  "base": "a17fc632aebf8b50d9d071e4816cb672f6f5637e",
+  "fixed_version": "a9f9d6d1f3af139c08898a296dba14574dbf044d",
+  "issue_ref": "ff/latest-recovery-catalog-only",
+  "original_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+  "job_id": "ffjob-4c54cbb8a9c0",
+  "legacy_cost_state": "not_applicable",
+  "original_cost_state": "unknown",
+  "triage_session_before_kill": "01a1f054-2130-7060-bc8e-e84f5c1c3f5e",
+  "repair_mode": "apply-reviewed-FF-version-offline",
+  "native_sessions": {
+    "triage": {
+      "session_id": "01a1f054-2130-7060-bc8e-e84f5c1c3f5e",
+      "terminal": true,
+      "usage": {
+        "input_tokens": 21022,
+        "cached_input_tokens": 13056,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 324,
+        "reasoning_output_tokens": 227
+      }
+    }
+  },
+  "actions": {
+    "observe": "done",
+    "triage": "done",
+    "repair": "done",
+    "replay": "done",
+    "report": "done"
+  },
+  "owner_report_action": "d53d952decd7f18902ee81a2d1c53967530e4442141895a021158163541bec85",
+  "replay": {
+    "observations": [
+      {
+        "occurrence_id": "6761c6085632620c5fd2653467b0edc67f1c03b0726c6fa48795355c759d7c5a",
+        "disposition": "deviation",
+        "status": "verified",
+        "issue_ref": "ff/latest-recovery-catalog-only",
+        "fixed_version": "a9f9d6d1f3af139c08898a296dba14574dbf044d",
+        "evidence_ref": "ff-job/1/ffjob-4c54cbb8a9c0"
+      }
+    ],
+    "diagnostics": []
+  },
+  "original_unchanged": true,
+  "new_ff_jobs": 0,
+  "ff_recovery_downloads": 0,
+  "additional_codex_turns_on_resume": 0,
+  "observations_bytes": 435,
+  "test_root_removed": true
+}

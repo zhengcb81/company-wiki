@@ -186,7 +186,9 @@
     "root_offline_coordinator": "accepted_35_tests_and_independent_review",
     "live_host_recovery": "accepted_codex_session_and_one_ff_native_reuse_job",
     "live_consumer_acceptance": "accepted_scoped_h1_ir_and_two_rf_rationale_bindings",
-    "live_unattended_consumer_acceptance": "open_owner_repair_rollout",
+    "live_unattended_consumer_acceptance": "accepted_scoped_cwp_ff_host_and_owner_report",
+    "f4_receipt": "../feedback-loop-2026-11-17/f4-acceptance.md",
+    "production_owner_rollout": "remaining_owner_routes_open",
     "company_pool": "paused"
   },
   "p1_business_quote_view": {

@@ -11,7 +11,7 @@
 | 责任仓标识 | 接续责任 | 本仓 PWF |
 |---|---|---|
 | `company-wiki` | ROOT，证据完整性、P1 选材与恢复，另负责编排组合 | [CWP 试点](company-wiki.md) |
-| `filing-fetch` | ROOT 与 FF owner，原生持久 job、未知用量与只读对账 | [FB-FF](../../../../filing-fetch/docs/plans/feedback-loop-2026-11-17/FB-FF.md) |
+| `filing-fetch` | 原生持久 job、未知用量、只读对账及回告已在 F4 验收；短请求和其他偏差按 owner 计划接续 | [FB-FF](../../../../filing-fetch/docs/plans/feedback-loop-2026-11-17/FB-FF.md) |
 | `revenue-forecast` | ROOT 与 RF owner，消费与原版本复验 | [RF 计划](../../../../revenue-forecast/docs/plans/mb11-rf-2026-11-11/feedback-20261117.md) |
 | `revenue-forecast-audit` | ROOT，原四审发现定位、宿主及公司池边界 | [Audit 计划](../../../../revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/feedback-20261117.md) |
 | `earnings-transcripts`, `stockinfo-dl-simple`, `industry-research` | 已接入专用观察；自动对账和回告交 F4 | [三卡验收](f2-owner-acceptance.md) |

@@ -183,3 +183,33 @@ def test_usage_unknown_and_confirmed_quality_gap_for_one_native_job(tmp_path):
     assert {r["status"] for r in result["observations"]} == {"unknown", "verified"}
     assert queries == ["claim-2"]
     assert host.started["reconcile"] == 0
+
+
+def test_started_without_its_terminal_is_reconciled_without_dispatching_work(tmp_path):
+    host = NativeJobs()
+    queried = []
+
+    def lookup(owner, request):
+        if request["kind"] != "reconcile":
+            return host(owner, request)
+        assert request["method"] == "lookup"
+        queried.append(request["payload"]["observation"]["step_id"])
+        return {"schema_version": "feedback-action-result/1", "action_id": request["action_id"],
+                "request_digest": request["request_digest"], "state": "done",
+                "result": {"status": "cost_unknown", "evidence_ref": "ff-job/1/ffjob-123abc123abc",
+                           "job_status": "succeeded", "cost_state": "unknown"}}
+
+    start = event(check_id="action-started", expected="started", actual="started", terminal_check_id="job-outcome")
+    complete = {**start, "step_id": "other-document"}
+    budget = {**start, "check_id": "budget", "expected": "metered", "actual": "metered"}
+    terminal = {**complete, "check_id": "job-outcome", "expected": "terminal", "actual": "terminal"}
+    cases = batch(tmp_path, start, budget, complete, terminal)
+    keys = list(cases.observations)
+    first = advance(cases, lookup)["observations"]
+    assert first[0] == {"occurrence_id": keys[0], "disposition": "expected", "status": "unknown", "step": "reconcile",
+                       "evidence_ref": "ff-job/1/ffjob-123abc123abc", "job_status": "succeeded", "cost_state": "unknown"}
+    assert [row["status"] for row in first[1:]] == ["expected"] * 3
+    assert queried == ["read"]
+    assert host.started == {"observe": 4}
+    assert advance(batch(tmp_path, start, budget, {**terminal, "step_id": "read"}), lookup)["observations"][0]["status"] == "expected"
+    assert queried == ["read"]  # a separately delivered terminal closes the same original start

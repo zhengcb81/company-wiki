@@ -159,7 +159,7 @@ if a.action == "discover":
                               "title": "Fixture Annual Report",
                               "source_url": "https://fixture.invalid/report.txt",
                               "document_kind": "annual_report", "form_type": "10-K",
-                              "filing_date": "2026-03-20", "fiscal_year": request.get("fiscal_year"),
+                              "filing_date": "2026-03-20", "fiscal_year": request.get("fiscal_year") or 2025,
                               "fiscal_period": "FY", "language": "en"}]}
     sys.stdout.write(json.dumps(result))
     raise SystemExit(0)
