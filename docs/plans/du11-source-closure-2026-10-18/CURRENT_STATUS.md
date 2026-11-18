@@ -2,9 +2,9 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-17 最新状态
+## 2026-11-18 最新状态
 
-总控已验收真实 Codex 中断恢复。FF 对原 H1 只启动一笔复用作业，恢复保留原 ID 且新增下载为零。ET、SID 和 IR 的三张卡已分派，交付仍由 ROOT 在公开接口组合核验。[反馈分工](../feedback-loop-2026-11-17/dispatch.md) · [宿主实测](../feedback-loop-2026-11-17/f3a-host-acceptance.md)
+总控已验收真实 Codex 中断恢复。FF 对原 H1 只启动一笔复用作业，恢复保留原 ID 且新增下载为零。反馈首批 ET、SID、IR 三张卡已通过独审和离线公开接口组合，分别推到各自主线。F4 自动修理与回告仍开放。[三仓签收](../feedback-loop-2026-11-17/f2-owner-acceptance.md) · [宿主实测](../feedback-loop-2026-11-17/f3a-host-acceptance.md)
 
 P1 的自动业务视图和真实缓存已在半年报、投资者关系样本通过。P2 的 RF 正式组合采用其中两条证据，计算及快照通过，原有 181 项参数值一致。F3c 用已保存响应修正范围漏检，自动精选移出单独的分红计算、模板陈述和财务背景，五份真实样本跨 A 股、港股、美股复验通过。下一步按 W12 和后续公司样本验证现版本的正式生成及 RF 采用。固定公司池继续依其原状态。[业务与采用实测](../feedback-loop-2026-11-17/f3b-live-acceptance.md) · [F3c 保存响应复验](../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md)
 

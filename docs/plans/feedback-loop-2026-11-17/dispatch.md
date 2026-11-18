@@ -1,8 +1,8 @@
 # 施工分工与模块入口
 
-总控 PWF 为[实施路线](task_plan.md)。下面的工作目录从同一个 `Projects/` 起算。每个 harness 只写自己一行的仓库，启动时从本仓施工卡和当前 HEAD 接续。交接时给 owner、分支、实际提交、测试命令及结果、独审及修复覆盖的版本、临时数据清理、脱敏观察和消费侧待验范围。ROOT 在公开接口做组合。直接交给三个 harness 的卡已各自发布。
+总控 PWF 为[实施路线](task_plan.md)。下面的工作目录从同一个 `Projects/` 起算。每个 harness 只写自己一行的仓库，启动时从本仓施工卡和当前 HEAD 接续。交接时给 owner、分支、实际提交、测试命令及结果、独审及修复覆盖的版本、临时数据清理、脱敏观察和消费侧待验范围。ROOT 在公开接口做组合。首批三张已验收并分别发布到本仓主线，详见[最新签收](f2-owner-acceptance.md)。
 
-| 可立即分发 | 工作目录 | 独立施工卡 | 首次发布的计划版本 |
+| 已签收 | 工作目录 | 原独立施工卡 | 首次发布的计划版本 |
 |---|---|---|---|
 | FB-ET | `earnings-transcripts/earnings-transcripts` | [电话会原语言采集](../../../../earnings-transcripts/earnings-transcripts/docs/plans/feedback-loop-2026-11-17/FB-ET.md) | `main@6883623` |
 | FB-SID | `StockInfoDLSimple/v2-clean-rewrite` | [公告候选与暂存](../../../../StockInfoDLSimple/v2-clean-rewrite/docs/plans/feedback-loop-2026-11-17/FB-SID.md) | `v2-clean-rewrite@16499a0` |
@@ -14,7 +14,7 @@
 | `filing-fetch` | ROOT 与 FF owner，原生持久 job、未知用量与只读对账 | [FB-FF](../../../../filing-fetch/docs/plans/feedback-loop-2026-11-17/FB-FF.md) |
 | `revenue-forecast` | ROOT 与 RF owner，消费与原版本复验 | [RF 计划](../../../../revenue-forecast/docs/plans/mb11-rf-2026-11-11/feedback-20261117.md) |
 | `revenue-forecast-audit` | ROOT，原四审发现定位、宿主及公司池边界 | [Audit 计划](../../../../revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/feedback-20261117.md) |
-| `earnings-transcripts`, `stockinfo-dl-simple`, `industry-research` | 三张可发卡各有唯一作者 | 见上表 |
+| `earnings-transcripts`, `stockinfo-dl-simple`, `industry-research` | 已接入专用观察；自动对账和回告交 F4 | [三卡验收](f2-owner-acceptance.md) |
 | `stockwiki` | 现有研究线，研究主体和来源关联 | [StockWiki 计划](../../../../StockWiki/.planning/modularity-closeout-20261111/feedback-20261117.md) |
 | `invest-quick-scan` | 现有 IQS 线，尺度与筛选投影 | [IQS 计划](../../../../invest-quick-scan/docs/implementation/parallel-lanes/packages/2026-11-11-modularity-closeout/feedback-20261117.md) |
 | `investment-dashboard` | 现有 Dashboard 线，公开 DTO 到 UI 的实际显示 | [Dashboard 计划](../../../../investment-dashboard/.planning/unified-dashboard-2026-10-26/feedback-20261117.md) |

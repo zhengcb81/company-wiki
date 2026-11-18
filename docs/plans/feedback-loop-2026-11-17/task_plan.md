@@ -1,6 +1,6 @@
 # 工程反馈循环总调度 PWF
 
-2026-11-17。此页是反馈工程的唯一调度入口。业务主线以[父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)为准。F3 已通过宿主中断、FF 复用、两个真实样本及 RF 实际采用的限定验收。ET、SID、IR 三张独立卡已分派。此工程和公司池各有启动条件。[验收进度](progress.md) · [分工](dispatch.md)
+2026-11-18。此页是反馈工程的唯一调度入口。业务主线以[父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)为准。F3 已通过宿主中断、FF 复用、两个真实样本及 RF 实际采用的限定验收。F2 的 ET、SID、IR 三张卡已独审、离线组合验收并发布，见[签收](f2-owner-acceptance.md)。此工程和公司池各有启动条件。[验收进度](progress.md) · [分工](dispatch.md)
 
 ## 负责什么
 
@@ -22,6 +22,6 @@
 
 F3a 的真实只读 agent 和 FF 原生复用经中断恢复。F3b 将真实新摘要送入公开复验和 RF 正式模型。固定公司池和自动代办各 owner 的工程修理继续分别受原计划状态约束。ROOT 保持三张独立卡的交付签收和组合责任。[真实宿主收据](f3a-host-acceptance.md) · [真实业务收据](f3b-live-acceptance.md)
 
-F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、美股的五份原文复验。接收 ET、SID、IR 的本仓交付并验公开观察。业务线按父计划在下一家公司验证现版本的生成与采用。[保存响应验收](f3c-saved-response-acceptance.md)
+F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、美股的五份原文复验。F2 首批三仓已把公开观察接入 ROOT 只读导入；其余 owner 按[分工](dispatch.md)接续。F4 仍需以实际宿主验证 owner 级自动修理、只有开始记录的中断对账及消费方回告。业务线按父计划在下一家公司验证现版本的生成与采用。[保存响应验收](f3c-saved-response-acceptance.md)
 
 真实宿主选型、异步接线、原始作业核对、实际 P1 故障与消费复验的执行顺序见[ROOT 施工细则](host-integration.md)。
