@@ -199,7 +199,8 @@ def test_started_without_its_terminal_is_reconciled_without_dispatching_work(tmp
                 "result": {"status": "cost_unknown", "evidence_ref": "ff-job/1/ffjob-123abc123abc",
                            "job_status": "succeeded", "cost_state": "unknown"}}
 
-    start = event(check_id="action-started", expected="started", actual="started", terminal_check_id="job-outcome")
+    start = event(check_id="action-started", expected="started", actual="started", terminal_check_id="job-outcome",
+                  evidence_ref="ff-job/1/ffjob-123abc123abc")
     complete = {**start, "step_id": "other-document"}
     budget = {**start, "check_id": "budget", "expected": "metered", "actual": "metered"}
     terminal = {**complete, "check_id": "job-outcome", "expected": "terminal", "actual": "terminal"}
@@ -213,3 +214,8 @@ def test_started_without_its_terminal_is_reconciled_without_dispatching_work(tmp
     assert host.started == {"observe": 4}
     assert advance(batch(tmp_path, start, budget, {**terminal, "step_id": "read"}), lookup)["observations"][0]["status"] == "expected"
     assert queried == ["read"]  # a separately delivered terminal closes the same original start
+
+    changed = {**start, "step_id": "different-native-job", "evidence_ref": "ff-job/1/ffjob-456abc456abc"}
+    mismatch = advance(batch(tmp_path, changed), lookup)["observations"][0]
+    assert (mismatch["status"], mismatch["step"]) == ("unverified", "reconcile")
+    assert queried[-1] == "different-native-job"

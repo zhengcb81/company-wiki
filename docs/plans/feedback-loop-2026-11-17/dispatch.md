@@ -1,6 +1,6 @@
 # 施工分工与模块入口
 
-总控 PWF 为[实施路线](task_plan.md)。下面的工作目录从同一个 `Projects/` 起算。每个 harness 只写自己一行的仓库，启动时从本仓施工卡和当前 HEAD 接续。交接时给 owner、分支、实际提交、测试命令及结果、独审及修复覆盖的版本、临时数据清理、脱敏观察和消费侧待验范围。ROOT 在公开接口做组合。首批三张已验收并分别发布到本仓主线，详见[最新签收](f2-owner-acceptance.md)。
+总控 PWF 为[实施路线](task_plan.md)，并行安排见 [F2 路线图](f2-roadmap.md)。下面的工作目录从同一个 `Projects/` 起算。每个 harness 只写自己一行的仓库，启动时从本仓施工卡和当前 HEAD 接续。交接时给 owner、分支、实际提交、测试命令及结果、独审及修复覆盖的版本、临时数据清理、脱敏观察和消费侧待验范围。ROOT 在公开接口做组合。首批三张已验收并分别发布到本仓主线，详见[首批签收](f2-owner-acceptance.md)。
 
 | 已签收 | 工作目录 | 原独立施工卡 | 首次发布的计划版本 |
 |---|---|---|---|
@@ -12,8 +12,8 @@
 |---|---|---|
 | `company-wiki` | ROOT，证据完整性、P1 选材与恢复，另负责编排组合 | [CWP 试点](company-wiki.md) |
 | `filing-fetch` | 原生持久 job、未知用量、只读对账及回告已在 F4 验收；短请求和其他偏差按 owner 计划接续 | [FB-FF](../../../../filing-fetch/docs/plans/feedback-loop-2026-11-17/FB-FF.md) |
-| `revenue-forecast` | ROOT 与 RF owner，消费与原版本复验 | [RF 计划](../../../../revenue-forecast/docs/plans/mb11-rf-2026-11-11/feedback-20261117.md) |
-| `revenue-forecast-audit` | ROOT，原四审发现定位、宿主及公司池边界 | [Audit 计划](../../../../revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/feedback-20261117.md) |
+| `revenue-forecast` | 作业对账、版本化回告已在 F4 验收，业务采用按原计划 | [RF 计划](../../../../revenue-forecast/docs/plans/mb11-rf-2026-11-11/feedback-20261117.md) |
+| `revenue-forecast-audit` | 原捕获查询和发现端复验已在 F4 验收，公司池按原入口 | [Audit 计划](../../../../revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/feedback-20261117.md) |
 | `earnings-transcripts`, `stockinfo-dl-simple`, `industry-research` | 已接入专用观察；自动对账和回告交 F4 | [三卡验收](f2-owner-acceptance.md) |
 | `stockwiki` | 现有研究线，研究主体和来源关联 | [StockWiki 计划](../../../../StockWiki/.planning/modularity-closeout-20261111/feedback-20261117.md) |
 | `invest-quick-scan` | 现有 IQS 线，尺度与筛选投影 | [IQS 计划](../../../../invest-quick-scan/docs/implementation/parallel-lanes/packages/2026-11-11-modularity-closeout/feedback-20261117.md) |

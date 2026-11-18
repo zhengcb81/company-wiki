@@ -8,7 +8,9 @@
 
 `filing-fetch` 配置 `ff_status_argv` 指向 FF 公开 `ff_job.py --jobs-dir`，接受 `ff-job/1/<原生ID>` 证据引用。先 `get_status`；原生确认只能 `reconcile` 且部署提供 `ff_reconcile_config` 时，用同一作业、同一 attempt、稳定键执行 owner 的只读对账。结果和费用分别核对。重启运行 `local_host --config SETTINGS recover --hosts HOSTS --sidecar FILE --wait-seconds N`，从原 sidecar 接续。Phase C 回调也能设置 `RESEARCH_FEEDBACK_WAIT_SECONDS` 跟随旧作业。一个已启动但确实无法验证终态的写作业仍占用原工作区，其他隔离工作区能够继续。原作业未知时不另开作业。
 
-本机可用配置位于 `.planning/shared-reading-production/feedback-host`。`hosts.json` 定义 CWP Codex 只读分诊和 FF 原生状态端口，`settings.json` 定义命令和本机动作登记。将 `RESEARCH_FEEDBACK_HOSTS` 指向该 `hosts.json` 即可从已配置的业务阶段触发。两份真实收据按最终检查回放进入动作登记，首轮 12 条，重复投递增加 0 条，新增 agent 作业、FF 作业及业务模型调用均为零。各 owner 的自动修理接线随本仓交付和 F4 组合推进。
+本机已有的 CWP/FF 配置位于 `.planning/shared-reading-production/feedback-host`。`hosts.json` 定义端口，`settings.json` 定义命令和本机动作登记。将 `RESEARCH_FEEDBACK_HOSTS` 指向该 `hosts.json` 即可从已配置的业务阶段触发。两份真实收据按最终检查回放进入动作登记，首轮 12 条，重复投递增加 0 条，新增 agent 作业、FF 作业及业务模型调用均为零。
+
+RF/Audit 已在独立真实宿主运行一条闭环。配置 `revenue-forecast.actions.reconcile` 调用 `scripts/rf_job_feedback.py reconcile --owner-root ROOT`，`report` 调用同脚本 `report --reports-dir DIR`。查询回告使用 `get-report --reports-dir DIR ACTION_ID`。Audit 的 `reconcile` 为 `feedback_owner.py --run RUN reconcile`，复验为 `feedback_owner.py --run RUN replay -- CHECK_ARGV...`。`CHECK_ARGV` 来自运维配置，以固定只读检查读原责任仓的公开接口，给出原 finding 引用及实际验证版本。RF/Audit 原生发布各用独占的 `RESEARCH_FEEDBACK_OUT`。复用同一已配置状态库和原始 sidecar 接续，不把两仓的作业目录交给总控解析。适用范围和实际命令的可执行样例见 [RF/Audit 收据](f4-rf-audit-acceptance.md)。
 
 F4 的隔离配置已验证 `actions.report` 可指向 FF 公开 `ff_job_feedback.py --reports-dir OWNER_DIR report`；用相同 `--reports-dir` 加 `get-report ACTION_ID` 可核对原发现、版本和证据。`owner-json` 进程先保留自己的原生完成收据，再由宿主登记；worker 丢写后恢复读回同一结果。现有生产配置未整体切换，任何新增 owner 启用时仍由其工作区提供真实修理、复验和回告命令。
 

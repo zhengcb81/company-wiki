@@ -66,8 +66,11 @@ def _triage(key: str, row: dict, host: Host) -> tuple[str, dict]:
 def _reconcile(key: str, row: dict, host: Host, observation: dict) -> dict:
     receipt = _perform(host, row["origin_owner"], "reconcile", [key], observation, lookup_only=True)
     state, original, cost = (receipt.get(k) for k in ("status", "job_status", "cost_state"))
-    if original in ("succeeded", "failed", "cancelled"):
-        if (state == "known" and cost in ("known", "not_applicable")) or (state == "cost_unknown" and cost == "unknown"):
+    if row.get("evidence_ref") is not None and receipt.get("evidence_ref") != row["evidence_ref"]:
+        raise Deferred("unverified", "reconcile")
+    if original in ("succeeded", "failed", "cancelled", "interrupted", "unconfirmed"):
+        known = state == "known" and cost in ("known", "not_applicable") and original != "unconfirmed"
+        if known or (state == "cost_unknown" and cost == "unknown"):
             return {"status": "reconciled" if state == "known" else "unknown", "step": "reconcile",
                     "evidence_ref": _text(receipt, "evidence_ref", "reconcile"), "job_status": original, "cost_state": cost}
     if state == "known":

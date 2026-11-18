@@ -131,6 +131,38 @@ def test_ff_reconcile_checks_the_same_job_and_never_submits(host_config):
     assert (root / "ff-calls").read_text().splitlines() == ["get_status --owner-job-id ffjob-123abc123abc"] * 4
 
 
+def test_owner_reconcile_is_lookup_only_and_has_no_host_job(host_config):
+    from tools.feedback_loop.local_host import LocalHost
+
+    root = host_config.parent
+    worker = root / "lookup.py"
+    worker.write_text(
+        "import json, sys\nfrom pathlib import Path\n"
+        "req = json.load(sys.stdin)\n"
+        "with Path('lookups').open('a') as stream: stream.write(req['method'] + '\\n')\n"
+        "print(json.dumps({'state': 'done', 'action_id': 'untrusted', 'result': {"
+        "'status': 'cost_unknown', 'job_status': 'interrupted', 'cost_state': 'unknown',"
+        "'evidence_ref': req['payload']['observation']['evidence_ref']}}))\n",
+        encoding="utf-8",
+    )
+    config = json.loads(host_config.read_bytes())
+    config["owners"]["revenue-forecast"] = {
+        "cwd": str(root), "timeout_seconds": 5, "actions": {"reconcile": [sys.executable, str(worker)]},
+    }
+    host_config.write_text(json.dumps(config), encoding="utf-8")
+    request = action("reconcile", "revenue-forecast", {"observation": {
+        "evidence_ref": "rf-job/1/rfjob-original/source-1",
+    }})
+    host = LocalHost(host_config)
+    assert host.handle(request)["state"] == "failed"
+    assert not (root / "lookups").exists()
+    reply = host.handle({**request, "method": "lookup"})
+    assert reply["state"] == "done" and reply["action_id"] == request["action_id"]
+    assert reply["result"]["evidence_ref"] == "rf-job/1/rfjob-original/source-1"
+    assert (root / "lookups").read_text().splitlines() == ["lookup"]
+    assert host._get(request["action_id"]) is None
+
+
 def test_recover_folds_native_terminal_before_waking_workspace(host_config, monkeypatch):
     from tools.feedback_loop.local_host import LocalHost
 
@@ -189,7 +221,7 @@ def test_ff_lost_runner_recovers_its_result_without_claiming_old_cost(host_confi
     assert response["state"] == "done"
     assert response["result"] == {"status": "cost_unknown", "evidence_ref": ref,
                                   "job_status": "succeeded", "cost_state": "unknown"}
-    lines = (root / "ff-calls").read_text().splitlines()
+    lines = (root / "ff-calls").read_text(encoding="utf-8").splitlines()
     assert lines[0] == f"get_status --owner-job-id {job_id}"
     assert lines[1].startswith(f"act --owner-job-id {job_id} --action reconcile --idempotency-key "
                                f"feedback-reconcile/{job_id}/1 --expected-attempt 1 ")

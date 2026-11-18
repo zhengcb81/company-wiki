@@ -174,7 +174,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "ROOT receives ET, SID and IR owner receipts, verifies their composition, and uses retained real replies for the P1 qualifier/focus issue. Company-level W12 follows its existing PWF.",
+  "next_action": "The engineering feedback rollout can accept other owner routes independently as they become ready. The company-level W12 cycle follows its existing PWF and remains paused.",
   "feedback_loop": {
     "plan": "../feedback-loop-2026-11-17/task_plan.md",
     "progress": "../feedback-loop-2026-11-17/progress.md",
@@ -188,6 +188,8 @@
     "live_consumer_acceptance": "accepted_scoped_h1_ir_and_two_rf_rationale_bindings",
     "live_unattended_consumer_acceptance": "accepted_scoped_cwp_ff_host_and_owner_report",
     "f4_receipt": "../feedback-loop-2026-11-17/f4-acceptance.md",
+    "f4_rf_audit_acceptance": "../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md",
+    "f2_roadmap": "../feedback-loop-2026-11-17/f2-roadmap.md",
     "production_owner_rollout": "remaining_owner_routes_open",
     "company_pool": "paused"
   },

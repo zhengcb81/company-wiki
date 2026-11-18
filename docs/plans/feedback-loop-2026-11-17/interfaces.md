@@ -31,7 +31,7 @@ UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可
 | kind | 提交目标和幂等范围 | `done.result` |
 |---|---|---|
 | `observe` | 发现仓已有记录按发生 ID 原子绑定内容摘要，涵盖成功、未知、偏差。属于轻量本地登记，绝不启动模型、代码修理或下载。这样分批重投的相互矛盾结果也能发现。 | `recorded: true`。同 key 不同内容须回显原摘要或明确报冲突。 |
-| `reconcile` | 发现仓，缺终态或结果/费用未知时只调用 `lookup`。允许原作业公开端口执行只读核对并在同一作业登记结果。 | 用 `status: known` 和 `evidence_ref` 核对。FF 可附可信 `job_status` 与 `cost_state` 形成 `reconciled`；若已找回业务结果但费用仍未知，返回 `status: cost_unknown`，总控保留未知并展示同一作业结果。旧格式仍等补充观察。 |
+| `reconcile` | 发现仓，缺终态或结果/费用未知时只调用 `lookup`。允许原作业公开端口执行只读核对并在同一作业登记结果。 | 回传与输入一致的 `evidence_ref`。可信 `job_status` 和 `cost_state` 可形成 `reconciled`。若原作业的成本或结果未确认，用 `status: cost_unknown` 保留同一作业信息和未知状态。 |
 | `triage` | 责任仓，每次发生单独登记。payload 含 `observation` | `decision` 取 `repair`、`fixed`、`expected`、`external` 或 `needs_evidence`。`repair` 需 `issue_ref`、`generation`，同一根因的实际修复轮次由 owner 管理。`fixed` 需 `issue_ref`、`fixed_version`。不同异常可合并，同名异常可拆。 |
 | `repair` | 责任仓，按 `issue_ref` 和 `generation`。用本仓技能和 PWF，执行 RED、架构归因、定向 GREEN、必要独审和发布 | `fixed_version` 为可以由发现方运行的版本。重复的发生记录共享修复。合法行为、外部限制和证据不足分别落在分诊处置。 |
 | `replay` | 原发现仓，按原发生、责任仓问题及修复版本。用公开入口重放原条件 | `verdict` 取 `verified`、`regressed`、`unknown`。确定结论需 `verified_version` 等于请求修复版本，并给 `evidence_ref`。unknown 保持待核。 |
@@ -48,6 +48,8 @@ UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可
 在 Phase C 总控验收入口同时指定 `RESEARCH_FEEDBACK_OUT` 与运维 `RESEARCH_FEEDBACK_HOSTS` 时，原生 overall.json 先完成，宿主控制 tick 在独立子进程处理。启动回执在同一运行目录的 feedback-delivery.json，控制结果在 feedback-dispatch.json。两者与 OUT 各用不同文件。运行中断时，可对原 OUT 执行 tick 重接，不必重新跑模型。重建已留存原生结果可运行 `python -m tools.document_understanding_benchmark.phase_c_feedback <本次overall.json> --out <独立输出>`，将 --out 换成 `--ref <原生引用>` 可复核模式、selector 版本和产物 SHA。
 
 启动或重启调用 `python -m tools.feedback_loop.local_host --config SETTINGS recover --hosts HOSTS --sidecar FILE --wait-seconds N`。可重复 `--sidecar` 传原开始和终态文件。先恢复现有动作，随后有限等待、继续原观察；不重新发起公司运行。FF 端点需配置实际作业所属的 `--jobs-dir`，以及可选的 `ff_reconcile_config` 指向该作业使用的 owner 查询配置。对账只允许 `get_status` 和 `act reconcile`，按同一作业与 attempt，既不发 `run`/`retry`，也不向外部证明 latest。
+
+RF 的引用为 `rf-job/1/<job_id>/<stage>-<attempt>`。Audit 采集为 `audit-capture/1/<run>/<role>/<capture>`，找回开始但无终态时回 `unconfirmed`。Audit 偏差使用 `audit-finding/1/<run>/initial/<role>/<issue>` 或 `audit-finding/1/<run>/review/<attempt>/<role>/<issue>`，以 `details_ref` 绑定实际报告 SHA。RF 与 Audit 可通过宿主的 `actions.reconcile` 分别调用只读 owner 命令。恢复从原 scope 查找，未知费用保留，不产生新的源作业。
 
 ## 本仓问题卡与修复技能
 

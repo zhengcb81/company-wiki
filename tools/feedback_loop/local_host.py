@@ -295,6 +295,28 @@ class LocalHost:
         return {"state": "done", "result": {"status": "known", "evidence_ref": ref,
                                              "job_status": job["status"], "cost_state": job["cost_state"]}}
 
+    def _reconcile_lookup(self, request):
+        if request["method"] != "lookup":
+            return {"state": "failed", "code": "reconcile_lookup_only"}
+        route = self._route(request["owner"], "reconcile")
+        if route is None:
+            return self._ff_lookup(request)
+        try:
+            outcome = subprocess.run(
+                route["argv"], cwd=route["cwd"], timeout=route["timeout"], check=False, capture_output=True,
+                input=json.dumps(request, ensure_ascii=True).encode("ascii"),
+            )
+            response = json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
+        except (OSError, ValueError, RecursionError, subprocess.SubprocessError):
+            response = None
+        if isinstance(response, dict):
+            state = response.get("state")
+            if state == "done" and isinstance(response.get("result"), dict):
+                return {"state": state, "result": response["result"]}
+            if state in ("pending", "unknown"):
+                return {"state": state}
+        return {"state": "unknown", "code": "native_status_unavailable"}
+
     def handle(self, request):
         _validate(request)
         key, owner, kind = (request[name] for name in ("action_id", "owner", "kind"))
@@ -303,7 +325,7 @@ class LocalHost:
         if owner not in self.owners:
             return {**prefix, "state": "unknown", "code": "owner_unconfigured"}
         if kind == "reconcile":
-            return {**prefix, **self._ff_lookup(request)}
+            return {**prefix, **self._reconcile_lookup(request)}
         row = self._get(key)
         if row is None and request["method"] == "submit":
             route = self._route(owner, kind) if kind in _EXECUTABLE else None

@@ -1,16 +1,16 @@
 # 进度与恢复入口
 
-2026-11-18。F4 的真实宿主与 FF 原生作业恢复已验收；F2 首批三张卡已验收、发布。分仓施工、真实收据和发布状态由此页维护。
+2026-11-18。F4 的两条真实宿主闭环均已验收，覆盖 CWP/FF 与 RF/Audit。F2 首批三张卡已验收、发布。分仓施工、真实收据和发布状态由此页维护。
 
 | 节点 | 状态 | 证据或下一步 |
 |---|---|---|
 | F0 | 12 仓计划已落地，可发卡范围独审通过 | [协议](interfaces.md)、[模块与施工卡](dispatch.md)、[CWP 实施](company-wiki.md) |
 | F1 | 离线总控及 CWP 首次接线独审通过 | [35 项测试、实际后台唤醒、封存 H1 和适用范围](f1-acceptance.md) |
-| F2 | ET、SID、IR 已独审、离线组合验收并发布 | [三仓签收](f2-owner-acceptance.md)。其余按[分工](dispatch.md)，FF 的 job 协调、RF 实际消费与 Audit 接线仍归 ROOT |
+| F2 | ET、SID、IR 已独审、离线组合验收并发布 | [三仓签收](f2-owner-acceptance.md) · [可并行与组合前置](f2-roadmap.md) · [分工](dispatch.md) |
 | F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
 | F3b | 两份正式摘要、恢复和两条 RF 采用通过独审 | [实际组合与适用范围](f3b-live-acceptance.md) · [草稿与精选余项](issues/cwp-draft-scope-and-focus.md) |
 | F3c | 已修正草稿范围与自动精选，保存响应及五份真实样本复验通过 | [真实回放、原始定位与保留对照](f3c-saved-response-acceptance.md) |
-| F4 | CWP/FF 首条无人值守闭环与强杀恢复通过独审 | [验收及重跑](f4-acceptance.md)。其余 owner 的生产应用待接续；公司池按原有启停条件 |
+| F4 | CWP/FF 与 RF/Audit 的指定无人值守闭环、强杀恢复通过独审 | [FF 恢复](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md)。其余 owner 按就绪接续 |
 
 ### F0 发布与独立验收
 
@@ -33,4 +33,6 @@ F3c 范围及精选提交 `603934c49`，公开接口修正 `d5cb85c1e1d382b001a8
 
 ### ROOT 接续
 
-F3b 已完成真实组合，F3c 已完成保存响应修复。F2 首批三卡的版本和组合已核对。F4 已验收到真实宿主自动分诊、采用确定的修复、原发现端复验、FF 回告。生产扩展匹配各 owner 现有计划；业务仍按父计划接续新版生成的真实公司组合及 RF 正式采用。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)。
+F4 RF/Audit 在已审 RF 版本 `24e8f978` 上完成，RF 公开作业相关 34 项通过，CWP 反馈宿主及实际 FF 强杀 21 项通过。Audit 全量 797 项离线测试通过，代码与 PWF 在本地 `main@9a38021`，该仓当前没有 Git remote。独审认可两份收据的验收范围。[RF/Audit 验收](f4-rf-audit-acceptance.md)
+
+生产扩展匹配各 owner 现有计划；业务仍按父计划接续新版生成的真实公司组合及 RF 正式采用。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)。

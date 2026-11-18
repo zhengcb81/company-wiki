@@ -1,5 +1,7 @@
 # F4 强制终止及真实宿主验收 · 2026-11-18
 
+后续 RF/Audit 的真实宿主、中断恢复和回告见 [F4 RF/Audit 验收](f4-rf-audit-acceptance.md)。
+
 ## 1. FF 真进程被杀后的恢复
 
 实际 RC 跑 FF 与 CWP 的公开 CLI。HTTP 提供方仅本机环回，供方模拟收费、实际记录请求次数。取件、原文验真和入库均已由真实 CWP 执行；在该结果送回 FF 前强制终止 FF 进程。仅保留 FF 开始行。两个恢复进程并发、再重投一次，都使用原生 `get_status` 和同一作业的只读 `act reconcile`。
