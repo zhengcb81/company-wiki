@@ -37,6 +37,8 @@ UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可
 | `replay` | 原发现仓，按原发生、责任仓问题及修复版本。用公开入口重放原条件 | `verdict` 取 `verified`、`regressed`、`unknown`。确定结论需 `verified_version` 等于请求修复版本，并给 `evidence_ref`。unknown 保持待核。 |
 | `report` | 责任仓，按发生、问题、版本及确定的复验结果。附原发现与其回执 | `recorded: true` 由责任仓端口落盘后返回，可独立查询。未配置 owner 端口、历史仅总控登记不能声称回告完成。owner 汇总同一问题未覆盖的发生，复发可用新证据重开。 |
 
+本地宿主配置的 `report.lookup_argv` 是可选的只读原回告接口，按原 action ID 返回 `{"report": 原提交请求}`。显式 `recover` 可核对已经领取但缺宿主回复的动作。只接受完整原请求内容，已保存的回告补回同一动作的完成状态。读回告不涉及再次修复、复验或采集。完整请求核对包括原发现、目标版本和消费证据；表示等价的 JSON 排版不影响读回。
+
 稳定 action ID 由种类、目标及上表幂等范围生成。申请内容摘要用于识别同 ID 的不同请求。一个运行的损坏旁路行、互相矛盾的重复观察和无宿主的 owner 单列诊断；同批其他可判断的观察独立处理。历史业务作业和退出码由原生产端保存。
 
 分诊可返回 `decision: refer` 和 `next_owner`。总控只向已配置的目标转交同一原观察，发现方保持不变，循环转派报告未验证。共享 repair 的 payload 仅含 `issue_ref`、`generation`，发生详情由各自的 triage 登记，各自 replay/report 回告。regressed 被回告后，owner 按新证据开启新代次；原输入静止时不重复派工。修复版本指发现端实际运行的发布版本，内容 SHA 和消费者本地 artifact ID 各在消费证据里表达。

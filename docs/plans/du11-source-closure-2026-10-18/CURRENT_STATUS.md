@@ -4,7 +4,7 @@
 
 ## 2026-11-18 最新状态
 
-F2 的 MeetingConverter 转录反馈和 filing-fetch 短请求反馈各有一张可分派卡，已备好独立工作树。F4 补上外层进程退出、原生命令尚未启动时的恢复。并发重启只执行同一动作一次。 [施工包与工作目录](../feedback-loop-2026-11-17/dispatch.md#本批可分派) · [恢复复验](../feedback-loop-2026-11-17/f4-acceptance.md#4-外层-worker-未启动原生命令时的恢复)
+F2 的 MeetingConverter 转录反馈和 filing-fetch 短请求反馈已交给两个独立 harness。F4 已补验原生命令未启动的恢复，并覆盖责任仓已落回告、宿主回复丢失时的只读接续。 [施工包与工作目录](../feedback-loop-2026-11-17/dispatch.md#本批施工中) · [回告恢复复验](../feedback-loop-2026-11-17/f4-acceptance.md#5-责任仓已保存回告时的恢复)
 
 总控已验收 F4 两条无人值守闭环。CWP/FF 找回同一原文和作业。RF/Audit 在隔离宿主找回原作业和 capture，由 Audit 复验 RF 来源路由修复，并由 RF 读回回告。两条闭环都经过真实 Codex 同会话恢复，恢复无新增下载，旧费用未知仍保留。其余 owner 的生产接线开放。ET、SID、IR 首批三仓已发布。[CWP/FF](../feedback-loop-2026-11-17/f4-acceptance.md) · [RF/Audit](../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md) · [F2 分仓路线](../feedback-loop-2026-11-17/f2-roadmap.md)
 

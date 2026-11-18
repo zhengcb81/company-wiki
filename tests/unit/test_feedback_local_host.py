@@ -357,3 +357,78 @@ def test_owner_report_ack_survives_worker_death_without_running_report_again(hos
     assert result['state'] == 'done' and result['native']['session_id'] == 'test-thread'
     assert invoke(host_config, 'rpc', request) == result
     assert (root / 'starts').read_text().splitlines() == ['start']
+
+
+def test_unknown_report_recovers_through_its_original_reader_and_complete_request(host_config, monkeypatch):
+    from tools.feedback_loop.local_host import LocalHost
+
+    root = host_config.parent
+    writer = root / "lost_reply.py"
+    writer.write_text(
+        "from pathlib import Path\n"
+        "with Path('report-starts').open('a') as stream: stream.write('start\\n')\n"
+        "raise SystemExit(17)\n", encoding="utf-8",
+    )
+    reader = root / "get_report.py"
+    reader.write_text(
+        "from pathlib import Path\nimport sys\n"
+        "with Path('report-lookups').open('a') as stream: stream.write(sys.argv[-1] + '\\n')\n"
+        "sys.stdout.buffer.write(Path('owner-proof.json').read_bytes())\n", encoding="utf-8",
+    )
+    settings = json.loads(host_config.read_bytes())
+    report = {
+        "argv": [sys.executable, str(writer)], "lookup_argv": [sys.executable, str(reader)],
+    }
+    settings["owners"]["company-wiki"]["actions"]["report"] = report
+    host_config.write_text(json.dumps(settings), encoding="utf-8")
+    request = action("report", payload={"fixed_version": "reviewed", "evidence_ref": "audit/replay"})
+    lookup = {**request, "method": "lookup"}
+    proof = root / "owner-proof.json"
+    wrong_payload = {**request["payload"], "fixed_version": "unrelated"}
+    proof.write_text(json.dumps({"report": {**request, "payload": wrong_payload}}), encoding="utf-8")
+    host = LocalHost(host_config)
+    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    host.handle(request)
+    host.work(request["action_id"])
+    assert host.handle(lookup)["state"] == "unknown"
+    assert host.handle(request)["state"] == "unknown"
+
+    # A response with the right key but different reviewed evidence cannot
+    # resolve the original action. An authentic response can arrive later.
+    proof.write_text(json.dumps({"report": request}, indent=2), encoding="utf-8")
+    report["lookup_argv"] = [sys.executable, str(root / "wrong-deployment.py")]
+    host_config.write_text(json.dumps(settings), encoding="utf-8")
+    assert invoke(host_config, "recover")["woken"] == []
+    recovered = invoke(host_config, "rpc", lookup)
+    assert recovered["state"] == "done" and recovered["result"] == {"recorded": True}
+    assert recovered["native"] == {"receipt_source": "owner_report"}
+    reads = (root / "report-lookups").read_text().splitlines()
+    assert reads and set(reads) == {request["action_id"]}
+    assert invoke(host_config, "rpc", request) == recovered
+    assert (root / "report-lookups").read_text().splitlines() == reads
+    assert (root / "report-starts").read_text().splitlines() == ["start"]
+
+
+def test_missing_owner_report_keeps_native_claim_and_waiting_work_in_place(host_config):
+    from tools.feedback_loop.local_host import LocalHost
+
+    root = host_config.parent
+    settings = json.loads(host_config.read_bytes())
+    actions = settings["owners"]["company-wiki"]["actions"]
+    actions["report"] = {
+        "argv": actions["triage"], "lookup_argv": [sys.executable, "-c", "raise SystemExit(1)"],
+    }
+    host_config.write_text(json.dumps(settings), encoding="utf-8")
+    original, waiting = action("report"), action("triage")
+    host = LocalHost(host_config)
+    try:
+        assert host.handle(original)["state"] == "pending"
+        wait_for(lambda: (root / "starts").exists())
+        assert host.handle(waiting)["state"] == "pending"
+        assert invoke(host_config, "recover")["woken"] == []
+        assert host._get(original["action_id"])["state"] == "running"
+        assert host._get(waiting["action_id"])["state"] == "queued"
+    finally:
+        (root / "release").touch()
+    wait_for(lambda: host.handle({**waiting, "method": "lookup"})["state"] == "done")
+    assert (root / "starts").read_text().splitlines() == ["start", "start"]

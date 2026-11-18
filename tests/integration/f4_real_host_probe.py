@@ -222,7 +222,9 @@ def _probe(args, tmp: Path):
     settings = tmp / "settings.json"
     reports_config = {"state": "actions.sqlite", "owners": {
         "filing-fetch": {"cwd": str(owner), "timeout_seconds": 150,
-                          "actions": {"triage": triage, "repair": repair, "report": report_cmd + ["report"]}},
+                          "actions": {"triage": triage, "repair": repair, "report": {
+                              "argv": report_cmd + ["report"], "lookup_argv": report_cmd + ["get-report"],
+                          }}},
         "company-wiki": {"cwd": str(consumer), "timeout_seconds": 50, "actions": {"replay": [*PY, str(replay), case]}},
     }}
     _write(settings, reports_config)

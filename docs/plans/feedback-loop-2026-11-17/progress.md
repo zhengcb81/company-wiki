@@ -6,7 +6,7 @@
 |---|---|---|
 | F0 | 12 仓计划已落地，可发卡范围独审通过 | [协议](interfaces.md)、[模块与施工卡](dispatch.md)、[CWP 实施](company-wiki.md) |
 | F1 | 离线总控及 CWP 首次接线独审通过 | [35 项测试、实际后台唤醒、封存 H1 和适用范围](f1-acceptance.md) |
-| F2 | ET、SID、IR 已验收发布。MC、FF 短请求两张新卡待分派 | [三仓签收](f2-owner-acceptance.md) · [可并行与组合前置](f2-roadmap.md) · [本批施工包](dispatch.md#本批可分派) |
+| F2 | ET、SID、IR 已验收发布。MC、FF 短请求已分别由两个 harness 施工 | [三仓签收](f2-owner-acceptance.md) · [可并行与组合前置](f2-roadmap.md) · [本批施工包](dispatch.md#本批施工中) |
 | F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
 | F3b | 两份正式摘要、恢复和两条 RF 采用通过独审 | [实际组合与适用范围](f3b-live-acceptance.md) · [草稿与精选余项](issues/cwp-draft-scope-and-focus.md) |
 | F3c | 已修正草稿范围与自动精选，保存响应及五份真实样本复验通过 | [真实回放、原始定位与保留对照](f3c-saved-response-acceptance.md) |
@@ -35,8 +35,10 @@ F3c 范围及精选提交 `603934c49`，公开接口修正 `d5cb85c1e1d382b001a8
 
 F4 RF/Audit 在已审 RF 版本 `24e8f978` 上完成，RF 公开作业相关 34 项通过，CWP 反馈宿主及实际 FF 强杀 21 项通过。Audit 全量 797 项离线测试通过，代码与 PWF 在本地 `main@9a38021`，该仓当前没有 Git remote。独审认可两份收据的验收范围。[RF/Audit 验收](f4-rf-audit-acceptance.md)
 
-本批只发两条无写入交集的卡，计划在各施工分支本地提交并经过独立复审。FF 的开工基线为 174 通过、8 子例。MC 开工基线的 4 个失败都来自合段后译文夹具长度不符，81 通过。卡内已定位夹具并要求保留真正的段数不符校验。等待各作者交实际 JSONL、受审提交和独审收据。[独立工作目录与计划](dispatch.md#本批可分派)
+本批两卡已交给两个 harness，计划在各施工分支本地提交并经过独立复审。FF 的开工基线为 174 通过、8 子例。MC 开工基线的 4 个失败都来自合段后译文夹具长度不符，81 通过。卡内已定位夹具并要求保留真正的段数不符校验。各作者完成后交实际 JSONL、受审提交和独审收据。[独立工作目录与计划](dispatch.md#本批施工中)
 
 ROOT 完成 F4 的外层进程未启动时恢复。两条实际退出用例从红转绿，启动器错误诊断反例通过。最终定向 27 项和 RF/Audit 离线组合复验通过，独立复审已收口。[宿主恢复补验](f4-acceptance.md#4-外层-worker-未启动原生命令时的恢复)
+
+ROOT 独立完成 F4 的回告已落盘、宿主丢回复恢复。FF/RF 真实端口强停后仅用原 action 的 owner 查询，各只写一次，原工作区在可信完成后继续排队动作。38 项定向与现有 RF/Audit 离线组合通过，独立复审通过。F2 两个施工分支的实现与交付继续由原 harness 负责。[验收和复跑](f4-acceptance.md#5-责任仓已保存回告时的恢复)
 
 生产扩展匹配各 owner 现有计划；业务仍按父计划接续新版生成的真实公司组合及 RF 正式采用。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)。

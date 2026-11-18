@@ -37,10 +37,117 @@ sys.stderr.buffer.write(result.stderr)
 raise SystemExit(result.returncode)
 '''
 
+_COUNT_OWNER_REPORT = """
+from pathlib import Path
+import subprocess
+import sys
+
+with Path(sys.argv[1]).open("a", encoding="ascii") as stream:
+    stream.write("report\\n")
+raise SystemExit(subprocess.run(sys.argv[2:], check=False).returncode)
+"""
+
+_LOSE_REPORT_REPLY = """
+from pathlib import Path
+import json
+import os
+import subprocess
+import sys
+from tools.feedback_loop.local_host import LocalHost
+
+run = subprocess.run
+
+def lose_reply(*args, **kwargs):
+    outcome = run(*args, **kwargs)
+    assert outcome.returncode == 0, outcome.stderr
+    assert json.loads(outcome.stdout) == {"result": {"recorded": True}}
+    os._exit(17)
+
+subprocess.run = lose_reply
+LocalHost(Path(sys.argv[1]))._owner_command(sys.argv[2])
+"""
+
 
 def _write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=True), encoding="utf-8")
     return str(path)
+
+
+@pytest.mark.parametrize("owner", ["filing-fetch", "revenue-forecast"])
+def test_owner_report_survives_lost_reply_before_host_receipt(tmp_path, monkeypatch, owner):
+    from tools.feedback_loop.local_host import LocalHost
+    from tools.feedback_loop.observations import digest
+
+    env = "FEEDBACK_FF_CODE_ROOT" if owner == "filing-fetch" else "FEEDBACK_RF_CODE_ROOT"
+    owner_root = os.environ.get(env)
+    if not owner_root:
+        pytest.skip(f"set {env} to a compatible {owner} checkout")
+    filename = "ff_job_feedback.py" if owner == "filing-fetch" else "rf_job_feedback.py"
+    script = Path(owner_root).resolve() / "scripts" / filename
+    assert script.is_file()
+    reports = tmp_path / "reports"
+
+    def owner_command(kind, *args):
+        options = ("--reports-dir", str(reports))
+        tail = (*options, kind) if owner == "filing-fetch" else (kind, *options)
+        return [*PY, str(script), *tail, *args]
+
+    launcher = tmp_path / "report_once.py"
+    launcher.write_text(_COUNT_OWNER_REPORT, encoding="utf-8")
+    starts = tmp_path / "report-starts"
+    next_worker = tmp_path / "next_action.py"
+    next_worker.write_text("""print('{"result":{"decision":"expected"}}')\n""", encoding="ascii")
+    config = _write(tmp_path / "host.json", {"state": "host.sqlite", "owners": {
+        owner: {"cwd": str(tmp_path), "timeout_seconds": 30, "actions": {
+            "report": {
+                "argv": [*PY, str(launcher), str(starts), *owner_command("report")],
+                "lookup_argv": owner_command("get-report"),
+            },
+            "triage": [*PY, str(next_worker)],
+        }},
+    }})
+    settings = LocalHost(Path(config))
+    monkeypatch.setattr(settings, "_wake", lambda _key: True)
+    def action(kind, action_id, payload):
+        return {"schema_version": "feedback-action/1", "method": "submit", "action_id": action_id, "owner": owner,
+                "kind": kind, "payload": payload, "request_digest": digest([owner, kind, action_id, payload])}
+
+    body = {"occurrence_id": "original", "original_occurrence_id": "original", "origin_owner": "company-wiki",
+            "issue_ref": "source-reuse", "fixed_version": "reviewed", "verdict": "verified",
+            "evidence_ref": "integration/source-replay"}
+    key = digest(["report", owner, body["occurrence_id"], owner, body["issue_ref"], body["fixed_version"], body["verdict"]])
+    request = action("report", key, body)
+    later = action("triage", digest(["triage", owner, "queued"]), {})
+    assert settings.handle(request)["state"] == "pending"
+    proc = subprocess.run([*PY, "-c", _LOSE_REPORT_REPLY, config, key], cwd=ROOT, capture_output=True, timeout=30)
+    assert proc.returncode == 17, (proc.stdout, proc.stderr)
+    assert settings._native_path(key).read_bytes() == b""
+    assert settings._get(key)["state"] == "running"
+    assert settings.handle(later)["state"] == "pending"
+
+    read_report = owner_command("get-report", key)
+    assert json.loads(subprocess.check_output(read_report, timeout=10)) == {"report": request}
+    saved = (reports / f"{key}.json").stat().st_mtime_ns
+    host = [*PY, "-m", "tools.feedback_loop.local_host", "--config", config]
+
+    def recover(_):
+        return json.loads(subprocess.check_output([*host, "recover"], cwd=ROOT, timeout=25))
+
+    with ThreadPoolExecutor(2) as pool:
+        wakes = list(pool.map(recover, range(2)))
+    recovered = LocalHost(Path(config)).handle({**request, "method": "lookup"})
+    assert recovered["state"] == "done" and recovered["action_id"] == key
+    assert recovered["result"] == {"recorded": True}
+    assert [later["action_id"]] in [reply["woken"] for reply in wakes]
+    deadline = time.monotonic() + 10
+    lookup_later = {**later, "method": "lookup"}
+    while (second := settings.handle(lookup_later))["state"] == "pending" and time.monotonic() < deadline:
+        time.sleep(.05)
+    assert second["state"] == "done"
+    assert LocalHost(Path(config)).handle(request) == recovered
+    assert starts.read_text().splitlines() == ["report"]
+    assert (reports / f"{key}.json").stat().st_mtime_ns == saved
+    assert json.loads(subprocess.check_output(read_report, timeout=10)) == {"report": request}
 
 
 @pytest.mark.parametrize("mode", ["exact", "latest_as_of"])

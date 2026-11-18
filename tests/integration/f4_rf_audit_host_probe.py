@@ -261,7 +261,10 @@ def _probe(args, tmp, provider, port):
     _write(settings, {"state": "host.sqlite", "owners": {
         RF: {"cwd": str(old), "timeout_seconds": 120, "actions": {
             "triage": triage, "repair": [*PY, str(apply), case],
-            "report": [*reports, "report", "--reports-dir", str(tmp / "reports")],
+            "report": {
+                "argv": [*reports, "report", "--reports-dir", str(tmp / "reports")],
+                "lookup_argv": [*reports, "get-report", "--reports-dir", str(tmp / "reports")],
+            },
             "reconcile": [*reports, "reconcile", "--owner-root", str(fixed_root)],
         }},
         AUDIT: {"cwd": str(run), "timeout_seconds": 35, "actions": {

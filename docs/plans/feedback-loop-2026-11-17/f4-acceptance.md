@@ -37,3 +37,13 @@ FF 用本仓 `get-report` 读回责任仓完整回告，包含原发现方、版
 在 `owner-json` 与 `codex-jsonl` 两条隔离路线上，让真实外层子进程在进入原生执行前 `os._exit(17)`。旧版已写 `running`，重新启动宿主唤醒零条，两条回归均变红。修复将现有 SQLite 领取移到实际执行端。并发执行两次 `recover`，找回同一 action ID，原生命令实际启动一次，重复查询增量为零。模拟 owner 启动器的 `OSError` 时，同一排队动作带具名诊断并可恢复。已领取、缺终态的历史动作继续按原作业核对。
 
 最终定向包覆盖 `tests/unit/test_feedback_local_host.py`、`tests/unit/test_feedback_loop.py`、`tests/integration/test_feedback_loop_cli.py` 和 `tests/integration/test_feedback_f4_owner_recovery.py`，共 27 项通过。用现有 FF 源码跑真实子进程和环回，再执行 `f4_rf_audit_host_probe.py` 的合同模式，恢复期间环回请求、下载、付费调用均为零。这一轮的分诊由离线夹具提供。独审复核并发领取、启动器诊断、旧记录和已启动动作的保护。测试目录由夹具删除。[部署与接续](host-integration.md)
+
+## 5. 责任仓已保存回告时的恢复
+
+此前已有宿主侧回执落盘后退出的恢复。本次两条 RED 命中更早的窗口：真实 FF 写完回告后，宿主原生进程在记录 stdout 前强制退出，原 action 停在 pending；另一个已有 unknown 的本地回执也无法补记。两种情况都有独立 owner 回告。
+
+宿主保留首次登记的查询命令。显式恢复用原 action ID 调只读 `get-report`，以规范化 JSON 的 SHA 核对完整提交请求。确认后在原 SQLite 行登记完成，收据标注 `receipt_source=owner_report`。错版本、缺件、读取报错保留原状态。仅有开始且没有可信回告的动作继续占用原工作区。配置摘要、读取方式和历史兼容见[宿主接口](host-integration.md)。
+
+使用 FF `d5fa32c` 和从 RF 已发布 `e13861db` 只读导出的真实 owner 脚本。分别写入一份合成回告，在宿主写侧车前以 `os._exit(17)` 终止；两次并发恢复都指向原 action，原回告写命令累计一次、文件修改时间一致，后续已排队动作完成。独立复审同时覆盖同 ID 错版本、运行中缺回告、宿主配置更改及晚到回执竞争。
+
+F4 两种回告、原 FF 环回恢复、总控 CLI 和 Phase C 定向共 38 项通过。运行 `tests/integration/test_feedback_f4_owner_recovery.py` 时可显式指定兼容的 `FEEDBACK_FF_CODE_ROOT` 和 `FEEDBACK_RF_CODE_ROOT`。RF/Audit 合同端到端另行通过，恢复期间环回请求、下载和付费调用增加均为零。测试根及 RF 导出副本自动清理。

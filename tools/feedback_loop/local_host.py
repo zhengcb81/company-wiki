@@ -106,8 +106,11 @@ class LocalHost:
         if (mode not in ("codex-jsonl", "owner-json") or (mode == "codex-jsonl" and kind not in ("triage", "repair"))
                 or type(timeout) not in (int, float) or not 0 < timeout < float("inf") or not isinstance(instruction, str)):
             raise ValueError("invalid host route or execution deadline")
-        return {"argv": _argv(program["argv"]), "cwd": str(Path(config["cwd"]).resolve()), "timeout": timeout,
-                "mode": mode, "instruction": instruction}
+        route = {"argv": _argv(program["argv"]), "cwd": str(Path(config["cwd"]).resolve()), "timeout": timeout,
+                 "mode": mode, "instruction": instruction}
+        if kind == "report" and program.get("lookup_argv") is not None:
+            route["lookup_argv"] = _argv(program["lookup_argv"])
+        return route
 
     def _get(self, key):
         with closing(self._connect()) as conn:
@@ -137,9 +140,9 @@ class LocalHost:
 
     def recover(self):
         with closing(self._connect()) as conn:
-            running = conn.execute("SELECT * FROM actions WHERE state = 'running'").fetchall()
-        for row in running:
-            self._status(row)
+            unresolved = conn.execute("SELECT * FROM actions WHERE state IN ('running', 'unknown')").fetchall()
+        for row in unresolved:
+            self._status(row, check_owner=True)
         return self._recover_queued()
 
     def _native_path(self, key):
@@ -162,24 +165,58 @@ class LocalHost:
             conn.execute("UPDATE actions SET receipt = ? WHERE action_id = ? AND state = 'queued'",
                          (json.dumps({"code": "owner_launcher_failed", **details}), key))
 
-    def _status(self, row):
+    def _recover_owner_report(self, row, route):
+        reader = route.get("lookup_argv")
+        if reader is None:
+            return None
+        key = row["action_id"]
+        try:
+            outcome = subprocess.run([*reader, key], cwd=route["cwd"], timeout=route["timeout"],
+                                     capture_output=True, stdin=subprocess.DEVNULL, check=False)
+            value = json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
+            report = value.get("report") if isinstance(value, dict) else None
+            if not isinstance(report, dict) or digest(report) != digest(json.loads(row["request"])):
+                return None
+        except (OSError, ValueError, RecursionError, subprocess.SubprocessError):
+            return None
+        # The owner atomically stored the exact submitted report. A late
+        # wrapper receipt may win the race; neither outcome resubmits it.
+        receipt = {"result": {"recorded": True}, "native": {"receipt_source": "owner_report"}}
+        with closing(self._connect()) as conn, conn:
+            conn.execute("UPDATE actions SET state = 'done', receipt = ? "
+                         "WHERE action_id = ? AND state IN ('running', 'unknown')",
+                         (json.dumps(receipt), key))
+        winner = self._get(key)
+        return {"state": winner["state"], **json.loads(winner["receipt"] or "{}")}
+
+    def _status(self, row, *, check_owner=False):
         state = row["state"]
         if state == "queued":
             return {"state": "pending", **json.loads(row["receipt"] or "{}")}
         if state != "running":
+            if state == "unknown" and row["route"]:
+                recovered = self._recover_owner_report(row, json.loads(row["route"]))
+                if recovered is not None:
+                    return recovered
             return {"state": state, **json.loads(row["receipt"] or "{}")}
         # Receipts are written by the process that actually sees the outcome.
         # They survive loss of the host worker's final DB write.
         path = self._native_path(row["action_id"])
         native = {}
         final = None
-        if json.loads(row["route"])["mode"] == "codex-jsonl":
+        route = json.loads(row["route"])
+        if route["mode"] == "codex-jsonl":
             native, result = _codex_receipt(path)
             if native.get("terminal"):
                 final = (("done", {"result": result, "native": native}) if result is not None else
                          ("unknown", {"code": "native_result_unavailable", "native": native}))
         else:
             final = self._owner_receipt(path, row)
+        expired = time.time() >= row["deadline"]
+        if ((final is None and (check_owner or expired)) or (final is not None and final[0] == "unknown")):
+            recovered = self._recover_owner_report(row, route)
+            if recovered is not None:
+                return recovered
         if final is not None:
             state, receipt = final
             self._finish(row["action_id"], state, receipt)
@@ -191,7 +228,7 @@ class LocalHost:
         receipt = json.loads(row["receipt"] or "{}")
         if native:
             receipt["native"] = native
-        return {"state": "pending" if time.time() < row["deadline"] else "unknown", **receipt}
+        return {"state": "unknown" if expired else "pending", **receipt}
 
     @staticmethod
     def _owner_receipt(path, row):

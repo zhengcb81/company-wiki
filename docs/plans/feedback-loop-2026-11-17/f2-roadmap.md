@@ -23,4 +23,4 @@ flowchart TD
 | StockWiki、IQS、Dashboard | 用稳定 DTO 夹具各做本仓观测、错误分类、复现测试 | 组合时 StockWiki 使用 CWP 证据，Dashboard 使用各模块真实公开输出。IQS 与 StockWiki 的本仓施工无需互等 |
 | StockQA、MeetingConverter | 可各在本仓处理检索来源和转录结果的原生反馈 | 跨仓验收使用实际调用方产物。独审和接入跟随各自工程节点 |
 
-本批现在可并行开工的是 MeetingConverter 转录发布反馈与 FF 单次 CLI 反馈，具体入口和已创建工作树见[分工](dispatch.md#本批可分派)。StockWiki、IQS、Dashboard 和 StockQA 的相关工作由原项目接续。哪个公开接口和独立测试先就绪，哪个先进入 ROOT 组合复验。Dayu 由 CWP 适配器观测，属于外部 provider。
+MeetingConverter 转录发布反馈与 FF 单次 CLI 反馈已由两个独立 harness 并行施工，接口和工作树见[分工](dispatch.md#本批施工中)。StockWiki、IQS、Dashboard 和 StockQA 的相关工作由原项目接续。哪个公开接口和独立测试先就绪，哪个先进入 ROOT 组合复验。Dayu 由 CWP 适配器观测，属于外部 provider。
