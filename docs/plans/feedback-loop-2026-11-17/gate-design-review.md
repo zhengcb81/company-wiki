@@ -17,6 +17,11 @@
 | CWP 官方投影存储 | 同一个投影重新排版，原 ID 和哈希读取可通过，重复保存报 `projection_store_conflict`。独审核对出读取器会忽略少数未绑定的嵌套字段。 | `90ba3a64f` 按已验证的完整投影复用原槽。不同排版返回同一 ID，读回字节和时间戳与重投前相等。坏槽 ID、重复键、非有限值、嵌套内容漂移有反例。82 项通过，含公开 CLI 和本机伪模型组合。两版不同页序算法仍各按原版重放。 |
 | FF 无物理路径来源读取 | 同一 SourceRef、SHA、期次和身份，`capture_ready` 缺省或 `false` 可用，`null` 或 `"unknown"` 却报 `upstream_error`。`ensure` 的额外构建字段或未知可选 `policy_hash` 也可单独触发拒绝。 | `main@c380f99` 在一处候选投影中处理 capture 诊断。操作结果按公开字段取值，未知策略摘要记为 null。六项先红后绿，定向 368 项和推送前 11 项通过。独审核对旧本地文件的策略边界、真实非零回告和实际下载计数。 |
 | IQS StockWiki 读取与内部投影 | `dashboard_company_projection.py` 的三处精确版本检查。旧 `3dde7fa` 的实际 `1.0.0` 信封在 `1.1.0` 投影器误拒。同一 SW 协议仅增小版的模拟和带新版本的真实拒绝也失去原结果。 | 原交付分支 `codex/iqs-manifest-delivery-01@ac26a3b` 收敛结果、历史和拒绝的版本兼容读法。104 项通过，独审以实际旧生产器复验。正式登记黄金样本经 IQS 和现已发布 Dashboard 的 HTTP 入口读到同一 ID、三组及历史。 |
+| RF 官方原文收据 | CWP 黄金原文字节、身份和期次有效。仅缺 `review` 或使用未知扩展时，传输与保存契约重复拒绝。 | `main@9486a22f` 将必要收据字段和请求版本一起交给来源契约。缺审查显示未审，损坏诊断显示不可用。真实子进程读取、RF 来源记录及已保存输入复验通过。包含请求选择的 2.1/2.2 和实际 availability 证据反例。 |
+| RF 完整溯源 | 真注册报告的完整图超过 2 MB。旧 240,000 字节限制先拒，单独移去后旧 CLI 2 MB 再拒。 | `main@9486a22f` 删除两个计算结束后的总表示门。沿公开 CLI 流式写回已验证的完整图。实测 2,622,760 字节、111 参数、111 条证据绑定及 110.0 金额。独审发现 NaN 的旧数据会造成部分输出，补在原图遍历后复验空 stdout 和明确错误。RF 共 167 项定向通过。 |
+| IQS 路由冻结清单 | QA 三仓联调生成了正式 metric 1.1，IQS 路由入口自己的 1.0 精确判断报 `published_manifest_required`。 | `codex/iqs-manifest-delivery-01@f675789` 由既有冻结包校验解释实际版本、归档 schema 哈希、路线和题目。29 项和 2 子例通过。独审分别发布两版冻结包，历史、执行、坏版本和坏哈希均有对照。 |
+| StockQA 作业路由 | IQS 公开接口认可的正式 `refresh_owner_policy/1.6.0` 能在 StockWiki 出具原作业确认，QA 的 CLI 和本地重复 schema 表会提前拒绝。 | `codex/qa-content-filter-resolution-01@00b2f8e` 由固定 StockWiki 公开检查调用 IQS 解释请求与 policy。QA 校验请求、原尝试、主体、有序路线、预算和回执。复验 1.1、1.6 的真实应用及重放，错 pin 拒绝，原费用行一致。1.6 与相关单测共 35 项通过，另有 1.1 组合通过。独审核对真正未授权的动作和路线换序。 |
+| 正反馈分诊 | 旧流程的稳定偏差会分诊，已标为预期的拒绝缺少复查门禁必要性的机会。 | `07802483e` 宿主在原分诊和修复前检查同类合法输入、真实越界及责任层。原分诊保存处理意见和复现，预期拒绝有删除或收窄依据时才形成修复。已标记但原作业未终结或费用未知时先查账。CWP 49 项通过，含实际 Phase C 公开拒绝和 FF/RF/MC 作业恢复。 |
 
 ## 余项及 owner 实施顺序
 
@@ -25,10 +30,9 @@
 | 责任入口 | 证据和下一步 |
 |---|---|
 | IQS 查找已有结果 | `dashboard_prepare.py` 的 `_execution_gaps` 可能让新付费所需配置影响 bank 和 checkpoint 查找。静态确认路径。用已结算未入 checkpoint、缺少新付费配置的原作业做对照，验证可查可恢复和零新启动后再收口。 |
-| StockQA 作业路由 | IQS 可验证的 `refresh_owner_policy/1.6.0` 正式 ordered-route 夹具，在 QA `quick_scan_work_decision_authority.py` 的重复版本表被拒。用 owner 的单一方言解析入口并明确 1.6 的原作业操作。实际动作、费用和恢复账本以既有授权合同为准，使用混换 attempt 或带未授权新动作的反例。 |
+| StockQA 已付历史 consent | 另一条 `--inspect-confirmation` 含历史 request、preview 和 state 的形状核对。现有实时 `validate-preview` 会重新应用当前的计划、报价和规则。增加 owner 的纯冻结结构读取后，才适合归并 QA 此路径的旧 schema 表。复验重点是旧政策生成、已付但缺落盘回执、新政策变化及零新出站。 |
 | StockWiki 来源投影 | `_company_source_wire` 对完整顶层字段集合做精确匹配，`company_sources.py` 的原文收据写死 2.1 并要求可空 `review`。当前 CWP 的实版配对成功。随该仓原线用同协议可选扩展与 SourceExport 两版对照，优先复用 owner 公开解码。研究事实晋升继续由 StockWiki 判断。 |
-| RF 官方原文收据 | 使用 CWP 已验证原文的真实形状黄金夹具，仅省略 `review` 或使用 `extensions:null` 就被两层解析拒绝。将 `company_wiki_source_reader_v2.py` 与 `contracts/company_wiki_original.py` 的外层解析收敛到一处。原文身份、可用时间及 2.1/2.2 不同的 availability 含义在同一契约验证。 |
-| RF 溯源展示 | `report_catalog_lineage.py` 已完成 19 个参数的合法运算和读取，完整结果为 381,792 UTF-8 字节，最终 `MAX_TRACE_BYTES=240000` 拒绝。`report_catalog_cli.py` 另有 2 MB 输出约束。先用同一图比较完整下载和多页拼接的节点、引用、顺序及金额。归并表现层阈值，实际图深、环路、IO 和传输资源分别由所属层约束。IQS 完整缓冲之后的 16 MiB 检查做同类核对，目前只有静态证据。 |
+| 溯源的消费运输 | Dashboard 在读取进程流时限制 2 MB。RF 公开 CLI 可完整读出更大图。Dashboard owner 后续可提供分页浏览及完整产物读取，按相同报告和原始字段核对。IQS 完整缓冲之后的 16 MiB 检查只有静态证据。 |
 | CWP 原文到投影 | 静态确认 `VerifiedContent` 的同一不可变字节在 reader 和 raw builder 各做一次 SHA。用读者签发的类型进入投影内层。公开 raw builder 仍拥有未验输入。用实际 SHA、原文身份和期次反例核对两种入口，并测同缓冲区重复工作。 |
 
 ## 组合复验
@@ -36,3 +40,5 @@
 本仓 TDD 先令同一已验结果仅改变兼容发布号、增加扩展或调整排版，核对 ID、业务值、用量及已有作业数相同。然后改变实际身份、期次、散列、schema 含义或付费动作，核对返回具体原因和实际写入或启动次数。对超长合法输出核对就地读回全部证据，对真实资源超限核对一次计量和保留进度。
 
 总控已有 StockWiki → IQS → Dashboard 正式登记黄金样本及 FF → CWP 原件复用样本。按现有大节点复跑受影响链，关键节点独审。测试使用独立临时根。现场日志登记原原因、真正负责的入口、可重放最小输入和修复版本，后续复发沿本仓既有反馈工作流处理。
+
+实际拒绝在既有分诊内评估门禁必要性。判断与复现落在原 issue 和分诊收据，合法拒绝照原责任处置。新增拒绝标记及回告见[反馈协议](interfaces.md#拒绝先审视门禁)。

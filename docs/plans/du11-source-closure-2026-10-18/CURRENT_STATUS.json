@@ -174,7 +174,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "MC runtime and the four existing harness deliveries are accepted. Continue verified public boundary refusals through the owner queue and add owner runtime routes on demand. W12 remains paused.",
+  "next_action": "RF read and trace gates, StockQA work-decision dialects, and IQS frozen manifests are verified. Review new refusals in the existing durable triage. Continue remaining owner-specific cases through the owner queue. W12 remains paused.",
   "feedback_loop": {
     "plan": "../feedback-loop-2026-11-17/task_plan.md",
     "progress": "../feedback-loop-2026-11-17/progress.md",
@@ -187,6 +187,7 @@
     "lane_acceptance": "../feedback-loop-2026-11-17/f2-owner-acceptance.md",
     "ordered_handoff_acceptance": "../feedback-loop-2026-11-17/progress.md#四张接续卡-root-验收",
     "gate_design_review": "../feedback-loop-2026-11-17/gate-design-review.md",
+    "refusal_triage": "../feedback-loop-2026-11-17/interfaces.md#拒绝先审视门禁",
     "existing_owner_cards": {
       "F2-SW-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-SW-FEEDBACK.md",
       "F2-IQS-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-IQS-FEEDBACK.md",
