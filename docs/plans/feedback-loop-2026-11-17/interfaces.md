@@ -24,6 +24,8 @@ UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可
 
 FF 单次 CLI 用 `ff-short/1/<operation-id>` 引用及 `request-outcome` 配对终态。财报和伴随电话会使用不同的 step。短请求的查证从原侧车和 FF 业务回执接续，已有持久作业查询只接受 `ff-job/1/<owner-job-id>`。ROOT 保留短请求未知费用，并按原观察身份归并重投。
 
+MeetingConverter 保留调用方的 run 和 attempt，每次真实转录或跳过各生成一次 invocation step，终态为 `publication-outcome`。同一音频共用不透明的证据引用，已发出的观察原样重投。可选的 `.details.jsonl` 由 `details_ref` 联结，仅作 owner 诊断。对账使用原观察；硬中断和缺少用量收据时保留 unknown。
+
 ## ROOT 和宿主的控制端口
 
 `python -m tools.feedback_loop plan FILE...` 只读汇总显式交付文件。`python -m tools.feedback_loop tick --hosts CONFIG FILE...` 处理交付批次，每次调用有限。后续唤醒仍使用同一批观察及同一外部宿主。`CONFIG` 是运维显式供应的 JSON，以 owner 为键、已配置的宿主命令参数数组为值。进程工作目录由宿主部署配置负责。请求作为 JSON 经 stdin 传给该固定命令，stdout 回一个 JSON。观察里的文本不决定命令行。生产需要能持久保存作业、查得其状态并按 key 原子提交的宿主。普通一次性聊天命令不能证明这种能力。

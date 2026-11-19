@@ -4,7 +4,7 @@
 
 ## 2026-11-19 最新状态
 
-F2 的 filing-fetch 短请求已在 `95769c0` 验收发布，取件、同 SHA 复用和重复导入的组合通过。MeetingConverter 继续在原 harness 施工。StockWiki、IQS、Dashboard、StockQA 的四张接续卡已备好，共用写入排在各自当前工作后。[工作目录与接续卡](../feedback-loop-2026-11-17/dispatch.md) · [FF 短请求组合](../feedback-loop-2026-11-17/f4-acceptance.md#6-f2-ff-短请求进入总控)
+F2 的 filing-fetch 短请求 `95769c0` 和 MeetingConverter 转录反馈 `1d3fd6c` 都已组合验收、发布。StockWiki、IQS、Dashboard、StockQA 四张接续卡已交各自现有 harness，共用写入沿原工作线排队。ROOT 按正式交付到达顺序验收。[工作目录与接续卡](../feedback-loop-2026-11-17/dispatch.md) · [FF 与 MC 组合](../feedback-loop-2026-11-17/f4-acceptance.md)
 
 F4 已补验原生命令未启动的恢复，并覆盖责任仓已落回告、宿主回复丢失时的只读接续。[回告恢复复验](../feedback-loop-2026-11-17/f4-acceptance.md#5-责任仓已保存回告时的恢复)
 

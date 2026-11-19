@@ -1,16 +1,16 @@
 # 进度与恢复入口
 
-2026-11-19。F4 的两条真实宿主闭环及 FF 短请求组合已验收。F2 的 ET、SID、IR、FF 短请求已发布。分仓施工、真实收据和发布状态由此页维护。
+2026-11-19。F4 的两条真实宿主闭环及 FF 短请求、MC 转录反馈组合已验收。四张在途接续卡走各自现有 harness。分仓施工、真实收据和发布状态由此页维护。
 
 | 节点 | 状态 | 证据或下一步 |
 |---|---|---|
 | F0 | 12 仓计划已落地，可发卡范围独审通过 | [协议](interfaces.md)、[模块与施工卡](dispatch.md)、[CWP 实施](company-wiki.md) |
 | F1 | 离线总控及 CWP 首次接线独审通过 | [35 项测试、实际后台唤醒、封存 H1 和适用范围](f1-acceptance.md) |
-| F2 | ET、SID、IR、FF 短请求已验收发布，MC 施工中。四张接续卡可交现有 harness。 | [首批签收](f2-owner-acceptance.md) · [FF 短请求](f4-acceptance.md#6-f2-ff-短请求进入总控) · [现有 harness 接续卡](dispatch.md#现有-harness-接续卡) |
+| F2 | ET、SID、IR、FF 短请求和 MC 转录反馈均已发布。四张接续卡已交现有 harness。 | [首批签收](f2-owner-acceptance.md) · [FF 和 MC 交付](dispatch.md#ff-和-mc-隔离施工交付) · [现有 harness 接续卡](dispatch.md#现有-harness-接续卡) |
 | F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
 | F3b | 两份正式摘要、恢复和两条 RF 采用通过独审 | [实际组合与适用范围](f3b-live-acceptance.md) · [草稿与精选余项](issues/cwp-draft-scope-and-focus.md) |
 | F3c | 已修正草稿范围与自动精选，保存响应及五份真实样本复验通过 | [真实回放、原始定位与保留对照](f3c-saved-response-acceptance.md) |
-| F4 | 指定两条无人值守闭环、强杀恢复和 FF 短请求组合通过独审，按正式交接验收其余 owner | [FF 恢复及短请求](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md) |
+| F4 | 指定两条无人值守闭环、强杀恢复、FF 短请求及 MC 转录反馈通过独审，按正式交接验收其余 owner | [FF 恢复、短请求和 MC](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md) |
 
 ### F0 发布与独立验收
 
@@ -35,7 +35,7 @@ F3c 范围及精选提交 `603934c49`，公开接口修正 `d5cb85c1e1d382b001a8
 
 F4 RF/Audit 在已审 RF 版本 `24e8f978` 上完成，RF 公开作业相关 34 项通过，CWP 反馈宿主及实际 FF 强杀 21 项通过。Audit 全量 797 项离线测试通过，代码与 PWF 在本地 `main@9a38021`，该仓当前没有 Git remote。独审认可两份收据的验收范围。[RF/Audit 验收](f4-rf-audit-acceptance.md)
 
-MC 开工基线的 4 个失败都来自合段后译文夹具长度不符，81 通过。卡内已定位夹具并要求保留真正的段数不符校验。原 harness 提交实际 JSONL、受审提交和独审收据后交 ROOT 验收。[工作目录与计划](dispatch.md#本批施工中)
+MC 开工基线的 4 个失败都来自合段后译文夹具长度不符，81 通过。作者版修正成功夹具，保留真正的段数不符校验，完成后交实际 JSONL、受审提交和独审收据。[MC 作者交接](../../../../MeetingConverter/docs/plans/f2-mc-output/handoff.md)
 
 ROOT 完成 F4 的外层进程未启动时恢复。两条实际退出用例从红转绿，启动器错误诊断反例通过。最终定向 27 项和 RF/Audit 离线组合复验通过，独立复审已收口。[宿主恢复补验](f4-acceptance.md#4-外层-worker-未启动原生命令时的恢复)
 
@@ -43,6 +43,8 @@ ROOT 独立完成 F4 的回告已落盘、宿主丢回复恢复。FF/RF 真实�
 
 2026-11-19 签收 F2-FF-SHORT。ROOT 修复非法请求意图丢失终态的通用类型问题，最终 224 项和 8 子例通过。FF 已发布 `main@95769c0`。实际 CLI 与受控 provider 的 FF→CWP→ROOT 测试通过并清理测试根。首取后按同一 SHA 复用，重复导入零新增请求，两条未知用量如实保留。独审在最终 FF 版本和 ROOT 组合测试上复验。[组合验收](f4-acceptance.md#6-f2-ff-短请求进入总控)
 
-StockWiki、IQS、Dashboard、StockQA 的现有 harness 接续卡已通过只读独立复核，写入重叠项排在各自当前任务后。[分发入口](dispatch.md#现有-harness-接续卡)
+2026-11-19 签收 F2-MC-OUTPUT。ROOT 在真实公开入口复现调用身份冲突及旁路误伤，反馈层修复后 MC 全量 302 项、CWP 定向 29 项通过。独审在最终候选独立复跑 MC 46 项和组合 1 项。MC 远端主线为 `1d3fd6c`，覆盖率原文件指纹和作者工作树保持。陈旧译文发现侧复验已完成，自动分诊和回告仍待公开运行端口。[MC 组合验收](f4-acceptance.md#7-f2-mc-转录发布反馈进入总控)
+
+StockWiki、IQS、Dashboard、StockQA 的接续卡已由用户转交现有 harness。写入重叠项排在各自当前任务后。ROOT 按正式交付到达顺序接入。[分发与排队](dispatch.md#现有-harness-接续卡)
 
 生产扩展匹配各 owner 现有计划；业务仍按父计划接续新版生成的真实公司组合及 RF 正式采用。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)。

@@ -8,21 +8,16 @@
 | FB-SID | `StockInfoDLSimple/v2-clean-rewrite` | [公告候选与暂存](../../../../StockInfoDLSimple/v2-clean-rewrite/docs/plans/feedback-loop-2026-11-17/FB-SID.md) | `v2-clean-rewrite@16499a0` |
 | FB-IR | `industry-research` | [研究输入和报告输出](../../../../industry-research/.planning/modularity-closeout-20261111/feedback-20261117.md) | `main@9b347fd` |
 
-## 本批施工中
+## FF 和 MC 隔离施工交付
 
-MeetingConverter 沿用户已分派的工作树继续。作者完成定向测试、独立 agent 审查及修复复验后，在本卡 `handoff.md` 交给 ROOT 做组合验收。
-
-| 卡 | 独立工作目录（相对 Projects） | 计划入口 | 本地计划提交 |
-|---|---|---|---|
-| F2-MC-OUTPUT | `_harness_worktrees/f2f/mc` | [转录发布和陈旧结果反馈](../../../../_harness_worktrees/f2f/mc/docs/plans/f2-mc-output/task_plan.md) | `codex/f2-mc-output@0374da9` |
-
-F2-FF-SHORT 已独审、通过 FF→CWP→ROOT 组合验收并发布至 FF `main@95769c0`。[FF 作者交接](../../../../filing-fetch/docs/plans/f2-ff-short/handoff.md) · [ROOT 组合验收](f4-acceptance.md#6-f2-ff-短请求进入总控)
-
-MeetingConverter 使用自己工作树里的测试输出。StockWiki、IQS、Dashboard、StockQA 的相关工作由现有项目推进。
+| 已验收 | 本仓发布日期与版本 | 正式交接与组合 |
+|---|---|---|
+| F2-FF-SHORT | 2026-11-19，FF `main@95769c0` | [作者交接](../../../../filing-fetch/docs/plans/f2-ff-short/handoff.md) · [ROOT 验收](f4-acceptance.md#6-f2-ff-短请求进入总控) |
+| F2-MC-OUTPUT | 2026-11-19，MC `master@1d3fd6c` | [本仓进度](../../../../MeetingConverter/docs/plans/f2-mc-output/progress.md) · [ROOT 验收](f4-acceptance.md#7-f2-mc-转录发布反馈进入总控) |
 
 ## 现有 harness 接续卡
 
-以下四张卡可直接转发给对应的现有 harness。各仓现有任务仍由原工作线统筹。可先核对公开入口和离线夹具，写范围重叠的部分随同一 harness 排队，交接后由 ROOT 按到达顺序组合验收。
+用户已将以下四张卡分别交给对应的现有 harness。各仓由原工作线统筹，可先核对公开入口和离线夹具。写范围重叠的部分在同一 harness 排队，正式交接后由 ROOT 逐张做组合验收。
 
 | 接续卡 | 工作目录（相对 Projects） | 排队位置 |
 |---|---|---|
@@ -44,6 +39,6 @@ MeetingConverter 使用自己工作树里的测试输出。StockWiki、IQS、Das
 | `invest-quick-scan` | 现有 IQS 线，尺度与筛选投影 | [IQS 计划](../../../../invest-quick-scan/docs/implementation/parallel-lanes/packages/2026-11-11-modularity-closeout/feedback-20261117.md) |
 | `investment-dashboard` | 现有 Dashboard 线，公开 DTO 到 UI 的实际显示 | [Dashboard 计划](../../../../investment-dashboard/.planning/unified-dashboard-2026-10-26/feedback-20261117.md) |
 | `stockqa` | 原 QA 活动项目接续，原分支有源码施工，主线文档已可用 | [StockQA 主线计划](https://github.com/zhengcb81/StockQAbyLLM/blob/21d3c99d07888003cd69e26fb4c5e6603f7c15e8/.planning/modularity-closeout-20261111/feedback-20261117.md) |
-| `meeting-converter` | F2 转录和发布反馈由已分派的独立卡推进 | [MeetingConverter 计划](../../../../MeetingConverter/docs/plans/feedback-20261117.md) |
+| `meeting-converter` | 转录发布观察和发现侧陈旧译文复验已通过组合。自动分诊、修复和持久回告待 owner 运行端口 | [MeetingConverter 计划](../../../../MeetingConverter/docs/plans/feedback-20261117.md) |
 
 Dayu 是纯外部 provider，其边界的运行指针由 CWP 适配器负责。公司池启停、真实计费与预算在各自唯一 owner 执行。文件链接用于同一 Projects 下的工作区交接；独立机器从同名仓的对应计划入口启动。

@@ -57,3 +57,15 @@ ROOT 用真实 FF 短 CLI、CWP 公开命令和本地环回 provider 完成首�
 复跑入口为 `tests/integration/test_feedback_f4_short_intake.py`，用 `FEEDBACK_FF_CODE_ROOT` 指向包含本卡样本的 FF 版本。本次 CWP/F4 组合用受控 provider 和只读 ROOT 宿主。RF 正式周跑与 ET 的生产消费轮次继续沿各自运行计划取证。[FF 作者交接](../../../../filing-fetch/docs/plans/f2-ff-short/handoff.md)
 
 最终 FF 定向回归 224 项和 8 子例通过，组合测试 1 项通过。独立复审重跑两类非法请求并检查回放断言，测试根已清理，远端 `refs/heads/main` 已核对为 `95769c0f68dee27c282c99658c18e05cb91a816b`。另用相同隔离环境核对历史配置诊断用例 `test_real_cli_config_error_has_no_upstream_cause`。基线 `d5fa32c` 和最终版均返回 `fatal`，该用例在两版都因期待 `config_error` 失败，另记为 FF 环境诊断待查。
+
+## 7. F2 MC 转录发布反馈进入总控
+
+作者交接 `b1acea5` 的代码经独审覆盖至 `8806ff4`，后续只补交接文档。独立复核原投递样本发现，11 行只保留 5 条观察，三个身份冲突把已完成转录变成额外悬空开始。作者版 MC 全量 297 项通过。ROOT 补充 7 个失败反例及首取、复用、陈旧译文的消费者测试。
+
+MC 的适配器 `meeting-converter-feedback/1.0.2` 为每次真实调用生成独立 step，原侧车重投保留原身份。反馈未启用时不探测文件；启用时在业务计时结束后取指纹，无法读取仅影响证据。目录无法证明旧译文存在。追加前隔开截断尾行，保留旧行诊断和下次开始。详情记录结构化异常类型、阶段和角色，任意异常原文由本仓原日志处理。
+
+使用真实 `core.transcribe_one`、合成音频和离线引擎/翻译桩。验证首次转录完整发布、同音频随后零调用复用、强制转录遇翻译失败时保留旧译文和对照字节、子进程硬退出仅留开始。通过 `details_ref` 定位陈旧结果的结构化错误，消费方能识别原问题。作者路径生成的四份新样例合计 30 条唯一观察（22 预期、4 偏差、4 未知），零解析或身份冲突，只有硬退出的一条开始未配对。真实宿主持久登记同一观察，重复导入的执行和登记增量为零。
+
+最终 MC 全量 302 项、CWP 定向 29 项通过。独立复审另跑 MC 46 项和实际组合 1 项，通过并绑定最终源码和测试内容。复跑入口 `tests/integration/test_feedback_f4_mc_intake.py`，用 `FEEDBACK_MC_CODE_ROOT` 指向包含正式样例的 MC 主线。已清理测试副本及运行目录。远端 `refs/heads/master` 核对为 `1d3fd6c9214495ebef2cb8a4d4014712002eca00`。MC 主工区既有 `.coverage` 字节保持。[MC 本仓进度](../../../../MeetingConverter/docs/plans/f2-mc-output/progress.md)
+
+本次验收覆盖观察、详情定位、陈旧案例消费侧复验以及中断和费用的只读处置。MC 当前的自动分诊、修复与持久回告待 owner 运行端口；用量和缺原生终态继续按 unknown 保存。

@@ -174,15 +174,15 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "The engineering feedback rollout can accept other owner routes independently as they become ready. The company-level W12 cycle follows its existing PWF and remains paused.",
+  "next_action": "F4 accepts the first ready formal delivery from the four existing owner harnesses. Shared edits remain queued in each repository. The W12 company cycle follows its PWF and remains paused.",
   "feedback_loop": {
     "plan": "../feedback-loop-2026-11-17/task_plan.md",
     "progress": "../feedback-loop-2026-11-17/progress.md",
     "owner_cards": "../feedback-loop-2026-11-17/dispatch.md",
     "available_lanes": [],
-    "active_lanes": ["F2-MC-OUTPUT"],
-    "accepted_lanes": ["FB-ET", "FB-SID", "FB-IR", "F2-FF-SHORT"],
-    "lane_state": "ff_short_published_mc_in_progress_existing_harness_cards_ready",
+    "active_lanes": ["F2-SW-FEEDBACK", "F2-IQS-FEEDBACK", "F2-DASH-FEEDBACK", "F2-STOCKQA-FEEDBACK"],
+    "accepted_lanes": ["FB-ET", "FB-SID", "FB-IR", "F2-FF-SHORT", "F2-MC-OUTPUT"],
+    "lane_state": "ff_short_and_mc_published_four_existing_harnesses_dispatched",
     "lane_acceptance": "../feedback-loop-2026-11-17/f2-owner-acceptance.md",
     "existing_owner_cards": {
       "F2-SW-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-SW-FEEDBACK.md",
@@ -194,6 +194,13 @@
       "receipt": "../feedback-loop-2026-11-17/f4-acceptance.md#6-f2-ff-短请求进入总控",
       "provider": "isolated_loopback",
       "ff_main": "95769c0f68dee27c282c99658c18e05cb91a816b",
+      "independent_review": "PASS"
+    },
+    "f4_mc_output_acceptance": {
+      "receipt": "../feedback-loop-2026-11-17/f4-acceptance.md#7-f2-mc-转录发布反馈进入总控",
+      "provider": "isolated_transcription_and_translation_stubs",
+      "meeting_converter_master": "1d3fd6c9214495ebef2cb8a4d4014712002eca00",
+      "scope": "observation_intake_and_consumer_replay; native_automatic_triage_and_report_open",
       "independent_review": "PASS"
     },
     "root_offline_coordinator": "accepted_35_tests_and_independent_review",
