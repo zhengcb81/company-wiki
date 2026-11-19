@@ -7,7 +7,7 @@ flowchart TD
     I["F1 公开观察格式与本地夹具已就绪"]
     I --> A["ET · StockInfoDLSimple · 行业研究<br/>三条已验收发布"]
     I --> B["CWP · filing-fetch · RF · Audit<br/>四条 owner 线按就绪接宿主"]
-    I --> C["StockWiki · IQS · Dashboard · StockQA<br/>已交原 harness，重叠项本仓排队"]
+    I --> C["StockQA → StockWiki → IQS → Dashboard<br/>正式交付均已按序验收"]
     I --> D["MeetingConverter<br/>转录反馈已验收发布"]
     A --> J["ROOT 按接口逐条组合验收"]
     B --> J
@@ -24,4 +24,4 @@ flowchart TD
 | StockQA | 已交原 QA harness，当前检查器的同文件改动先完成 | 正式交接后用实际问答调用方产物在 ROOT 复验 |
 | MeetingConverter | 实际转录输出、跳过复用、陈旧译文与中断已通过组合 | 自动分诊和持久回告仍依赖本仓公开运行端口 |
 
-FF 单次 CLI 与 MeetingConverter 转录发布已完成组合验收并发布。[两卡交付](dispatch.md#ff-和-mc-隔离施工交付) · [F4 组合](f4-acceptance.md)。StockWiki、IQS、Dashboard 和 StockQA 已由原 harness 接续，可各自先做离线夹具。同一入口的写入按原工作线顺序，哪张卡正式交付就先验收哪张。Dayu 由 CWP 适配器观测，属于外部 provider。[现有 harness 接续卡](dispatch.md#现有-harness-接续卡)
+FF 单次 CLI 与 MeetingConverter 转录发布已完成组合验收并发布。[两卡交付](dispatch.md#ff-和-mc-隔离施工交付) · [F4 组合](f4-acceptance.md)。StockQA、StockWiki、IQS、Dashboard 已按正式交付顺序验收。后续同一入口的写入继续跟各自原工作线。Dayu 由 CWP 适配器观测，属于外部 provider。[现有 harness 接续卡](dispatch.md#现有-harness-接续卡)

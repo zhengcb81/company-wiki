@@ -17,7 +17,7 @@
 
 ## 现有 harness 接续卡
 
-用户已将以下四张卡分别交给对应的现有 harness。各仓由原工作线统筹，可先核对公开入口和离线夹具。写范围重叠的部分在同一 harness 排队，正式交接后由 ROOT 逐张做组合验收。
+用户已将四张卡交各自现有 harness。按实际交付顺序 StockQA、StockWiki、IQS、Dashboard 完成 ROOT 验收。以下仍是各自工作线与交接入口。[发布和验收状态](progress.md#四张接续卡-root-验收)
 
 | 接续卡 | 工作目录（相对 Projects） | 排队位置 |
 |---|---|---|

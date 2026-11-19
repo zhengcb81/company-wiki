@@ -174,16 +174,19 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "F4 accepts the first ready formal delivery from the four existing owner harnesses. Shared edits remain queued in each repository. The W12 company cycle follows its PWF and remains paused.",
+  "next_action": "MC runtime and the four existing harness deliveries are accepted. Continue verified public boundary refusals through the owner queue and add owner runtime routes on demand. W12 remains paused.",
   "feedback_loop": {
     "plan": "../feedback-loop-2026-11-17/task_plan.md",
     "progress": "../feedback-loop-2026-11-17/progress.md",
     "owner_cards": "../feedback-loop-2026-11-17/dispatch.md",
     "available_lanes": [],
-    "active_lanes": ["F2-SW-FEEDBACK", "F2-IQS-FEEDBACK", "F2-DASH-FEEDBACK", "F2-STOCKQA-FEEDBACK"],
-    "accepted_lanes": ["FB-ET", "FB-SID", "FB-IR", "F2-FF-SHORT", "F2-MC-OUTPUT"],
-    "lane_state": "ff_short_and_mc_published_four_existing_harnesses_dispatched",
+    "active_lanes": [],
+    "accepted_lanes": ["FB-ET", "FB-SID", "FB-IR", "F2-FF-SHORT", "F2-MC-OUTPUT",
+      "F2-STOCKQA-FEEDBACK", "F2-SW-FEEDBACK", "F2-IQS-FEEDBACK", "F2-DASH-FEEDBACK"],
+    "lane_state": "mc_runtime_and_four_ordered_handoffs_accepted",
     "lane_acceptance": "../feedback-loop-2026-11-17/f2-owner-acceptance.md",
+    "ordered_handoff_acceptance": "../feedback-loop-2026-11-17/progress.md#四张接续卡-root-验收",
+    "gate_design_review": "../feedback-loop-2026-11-17/gate-design-review.md",
     "existing_owner_cards": {
       "F2-SW-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-SW-FEEDBACK.md",
       "F2-IQS-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-IQS-FEEDBACK.md",
