@@ -75,6 +75,20 @@ def test_resume_reconciles_lost_reply_and_never_restarts_repair(tmp_path):
     assert host.started == {"observe": 1, "triage": 1, "repair": 1, "replay": 1, "report": 1}
 
 
+def test_partial_publication_never_triages_before_its_matching_terminal(tmp_path):
+    host = NativeJobs()
+    start = event(check_id="action-started", expected="started", actual="started", terminal_check_id="publication-outcome")
+    deviation = event()
+    other = event(attempt_id="other", check_id="publication-outcome", actual="qualified")
+    partial = advance(batch(tmp_path, start, deviation, other), host)
+    assert [row["status"] for row in partial["observations"]] == ["unknown", "unknown", "expected"]
+    assert host.started == {"observe": 3}
+    terminal = event(check_id="publication-outcome", actual="qualified")
+    completed = advance(batch(tmp_path, start, deviation, other, terminal), host)
+    assert [row["status"] for row in completed["observations"]] == ["expected", "verified", "expected", "expected"]
+    assert host.started["triage"] == host.started["repair"] == 1
+
+
 def test_replay_of_old_version_cannot_close_issue(tmp_path):
     host = NativeJobs()
     host.results["replay"]["verified_version"] = "old-consumer-cache"

@@ -10,7 +10,7 @@
 | F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
 | F3b | 两份正式摘要、恢复和两条 RF 采用通过独审 | [实际组合与适用范围](f3b-live-acceptance.md) · [草稿与精选余项](issues/cwp-draft-scope-and-focus.md) |
 | F3c | 已修正草稿范围与自动精选，保存响应及五份真实样本复验通过 | [真实回放、原始定位与保留对照](f3c-saved-response-acceptance.md) |
-| F4 | 指定两条无人值守闭环、强杀恢复、FF 短请求及 MC 转录反馈通过独审，按正式交接验收其余 owner | [FF 恢复、短请求和 MC](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md) |
+| F4 | CWP/FF 与 RF/Audit 闭环、FF 短请求和 MC 发布清单闭环通过独审，按正式交接验收其余 owner | [FF 与 MC 组合](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md) |
 
 ### F0 发布与独立验收
 
@@ -45,6 +45,8 @@ ROOT 独立完成 F4 的回告已落盘、宿主丢回复恢复。FF/RF 真实�
 
 2026-11-19 签收 F2-MC-OUTPUT。ROOT 在真实公开入口复现调用身份冲突及旁路误伤，反馈层修复后 MC 全量 302 项、CWP 定向 29 项通过。独审在最终候选独立复跑 MC 46 项和组合 1 项。MC 远端主线为 `1d3fd6c`，覆盖率原文件指纹和作者工作树保持。陈旧译文发现侧复验已完成，自动分诊和回告仍待公开运行端口。[MC 组合验收](f4-acceptance.md#7-f2-mc-转录发布反馈进入总控)
 
-StockWiki、IQS、Dashboard、StockQA 的接续卡已由用户转交现有 harness。写入重叠项排在各自当前任务后。ROOT 按正式交付到达顺序接入。[分发与排队](dispatch.md#现有-harness-接续卡)
+MC `8b8e574` 新增本仓公开运行端口并接通本机 F4 宿主。自动分诊、清单修复、复验及持久回告均实际执行。两个强退窗口找回同一动作，无重复转录或翻译，旧费用未知保持。MC 全量 310 项、总控 33 项通过，最终独审复验通过。[MC 运行验收](f4-acceptance.md#8-mc-公开端口自动恢复发布清单)
+
+四张在途卡均已交正式收据。只读核定首次正式交付（UTC）：StockQA `ca896a0` 20:14:34，StockWiki `1da1e4f` 20:16:50，IQS `556bf3a` 20:21:30，Dashboard `6073069` 20:35:15。ROOT 以此顺序进入验收，正式完成版本仍以最后独审为准。[分发与排队](dispatch.md#现有-harness-接续卡)
 
 生产扩展匹配各 owner 现有计划；业务仍按父计划接续新版生成的真实公司组合及 RF 正式采用。CWP 本仓修理继续走[技能](../../../skills/repair-company-wiki-issue/SKILL.md)。

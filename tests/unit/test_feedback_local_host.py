@@ -359,7 +359,8 @@ def test_owner_report_ack_survives_worker_death_without_running_report_again(hos
     assert (root / 'starts').read_text().splitlines() == ['start']
 
 
-def test_unknown_report_recovers_through_its_original_reader_and_complete_request(host_config, monkeypatch):
+@pytest.mark.parametrize("kind", ["report", "repair"])
+def test_unknown_action_recovers_through_its_original_reader_and_complete_request(host_config, monkeypatch, kind):
     from tools.feedback_loop.local_host import LocalHost
 
     root = host_config.parent
@@ -379,13 +380,18 @@ def test_unknown_report_recovers_through_its_original_reader_and_complete_reques
     report = {
         "argv": [sys.executable, str(writer)], "lookup_argv": [sys.executable, str(reader)],
     }
-    settings["owners"]["company-wiki"]["actions"]["report"] = report
+    settings["owners"]["company-wiki"]["actions"][kind] = report
     host_config.write_text(json.dumps(settings), encoding="utf-8")
-    request = action("report", payload={"fixed_version": "reviewed", "evidence_ref": "audit/replay"})
+    request = action(kind, payload={"fixed_version": "reviewed", "evidence_ref": "audit/replay"})
     lookup = {**request, "method": "lookup"}
+    result = {"recorded": True} if kind == "report" else {"fixed_version": "owner/publication-1"}
+
+    def receipt(body):
+        return {"report": body} if kind == "report" else {"receipt": {"request": body, "result": result}}
+
     proof = root / "owner-proof.json"
     wrong_payload = {**request["payload"], "fixed_version": "unrelated"}
-    proof.write_text(json.dumps({"report": {**request, "payload": wrong_payload}}), encoding="utf-8")
+    proof.write_text(json.dumps(receipt({**request, "payload": wrong_payload})), encoding="utf-8")
     host = LocalHost(host_config)
     monkeypatch.setattr(host, "_wake", lambda _key: True)
     host.handle(request)
@@ -395,13 +401,13 @@ def test_unknown_report_recovers_through_its_original_reader_and_complete_reques
 
     # A response with the right key but different reviewed evidence cannot
     # resolve the original action. An authentic response can arrive later.
-    proof.write_text(json.dumps({"report": request}, indent=2), encoding="utf-8")
+    proof.write_text(json.dumps(receipt(request), indent=2), encoding="utf-8")
     report["lookup_argv"] = [sys.executable, str(root / "wrong-deployment.py")]
     host_config.write_text(json.dumps(settings), encoding="utf-8")
     assert invoke(host_config, "recover")["woken"] == []
     recovered = invoke(host_config, "rpc", lookup)
-    assert recovered["state"] == "done" and recovered["result"] == {"recorded": True}
-    assert recovered["native"] == {"receipt_source": "owner_report"}
+    assert recovered["state"] == "done" and recovered["result"] == result
+    assert recovered["native"] == {"receipt_source": "owner_report" if kind == "report" else "owner_action"}
     reads = (root / "report-lookups").read_text().splitlines()
     assert reads and set(reads) == {request["action_id"]}
     assert invoke(host_config, "rpc", request) == recovered

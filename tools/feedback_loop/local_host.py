@@ -108,7 +108,7 @@ class LocalHost:
             raise ValueError("invalid host route or execution deadline")
         route = {"argv": _argv(program["argv"]), "cwd": str(Path(config["cwd"]).resolve()), "timeout": timeout,
                  "mode": mode, "instruction": instruction}
-        if kind == "report" and program.get("lookup_argv") is not None:
+        if mode == "owner-json" and kind in _EXECUTABLE and program.get("lookup_argv") is not None:
             route["lookup_argv"] = _argv(program["lookup_argv"])
         return route
 
@@ -165,7 +165,7 @@ class LocalHost:
             conn.execute("UPDATE actions SET receipt = ? WHERE action_id = ? AND state = 'queued'",
                          (json.dumps({"code": "owner_launcher_failed", **details}), key))
 
-    def _recover_owner_report(self, row, route):
+    def _recover_owner_action(self, row, route):
         reader = route.get("lookup_argv")
         if reader is None:
             return None
@@ -174,14 +174,25 @@ class LocalHost:
             outcome = subprocess.run([*reader, key], cwd=route["cwd"], timeout=route["timeout"],
                                      capture_output=True, stdin=subprocess.DEVNULL, check=False)
             value = json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
-            report = value.get("report") if isinstance(value, dict) else None
-            if not isinstance(report, dict) or digest(report) != digest(json.loads(row["request"])):
+            if not isinstance(value, dict):
+                return None
+            request = json.loads(row["request"])
+            proof = value.get("receipt")
+            if isinstance(proof, dict):
+                submitted, result = proof.get("request"), proof.get("result")
+                source = "owner_action"
+            elif request["kind"] == "report":
+                submitted, result = value.get("report"), {"recorded": True}
+                source = "owner_report"
+            else:
+                return None
+            if not isinstance(result, dict) or not isinstance(submitted, dict) or digest(submitted) != digest(request):
                 return None
         except (OSError, ValueError, RecursionError, subprocess.SubprocessError):
             return None
-        # The owner atomically stored the exact submitted report. A late
+        # The owner atomically stored the result for this exact request. A late
         # wrapper receipt may win the race; neither outcome resubmits it.
-        receipt = {"result": {"recorded": True}, "native": {"receipt_source": "owner_report"}}
+        receipt = {"result": result, "native": {"receipt_source": source}}
         with closing(self._connect()) as conn, conn:
             conn.execute("UPDATE actions SET state = 'done', receipt = ? "
                          "WHERE action_id = ? AND state IN ('running', 'unknown')",
@@ -195,7 +206,7 @@ class LocalHost:
             return {"state": "pending", **json.loads(row["receipt"] or "{}")}
         if state != "running":
             if state == "unknown" and row["route"]:
-                recovered = self._recover_owner_report(row, json.loads(row["route"]))
+                recovered = self._recover_owner_action(row, json.loads(row["route"]))
                 if recovered is not None:
                     return recovered
             return {"state": state, **json.loads(row["receipt"] or "{}")}
@@ -214,7 +225,7 @@ class LocalHost:
             final = self._owner_receipt(path, row)
         expired = time.time() >= row["deadline"]
         if ((final is None and (check_owner or expired)) or (final is not None and final[0] == "unknown")):
-            recovered = self._recover_owner_report(row, route)
+            recovered = self._recover_owner_action(row, route)
             if recovered is not None:
                 return recovered
         if final is not None:

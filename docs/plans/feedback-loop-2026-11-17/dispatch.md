@@ -39,6 +39,6 @@
 | `invest-quick-scan` | 现有 IQS 线，尺度与筛选投影 | [IQS 计划](../../../../invest-quick-scan/docs/implementation/parallel-lanes/packages/2026-11-11-modularity-closeout/feedback-20261117.md) |
 | `investment-dashboard` | 现有 Dashboard 线，公开 DTO 到 UI 的实际显示 | [Dashboard 计划](../../../../investment-dashboard/.planning/unified-dashboard-2026-10-26/feedback-20261117.md) |
 | `stockqa` | 原 QA 活动项目接续，原分支有源码施工，主线文档已可用 | [StockQA 主线计划](https://github.com/zhengcb81/StockQAbyLLM/blob/21d3c99d07888003cd69e26fb4c5e6603f7c15e8/.planning/modularity-closeout-20261111/feedback-20261117.md) |
-| `meeting-converter` | 转录发布观察和发现侧陈旧译文复验已通过组合。自动分诊、修复和持久回告待 owner 运行端口 | [MeetingConverter 计划](../../../../MeetingConverter/docs/plans/feedback-20261117.md) |
+| `meeting-converter` | 本机 F4 已接通。已证明的旧译文发布归属可自动修复清单、复验及持久回告，原作业与用量只读核对 | [MC 运行端口](../../../../MeetingConverter/docs/plans/f2-mc-output/runtime.md) |
 
 Dayu 是纯外部 provider，其边界的运行指针由 CWP 适配器负责。公司池启停、真实计费与预算在各自唯一 owner 执行。文件链接用于同一 Projects 下的工作区交接；独立机器从同名仓的对应计划入口启动。

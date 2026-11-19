@@ -8,6 +8,8 @@ F2 的 filing-fetch 短请求 `95769c0` 和 MeetingConverter 转录反馈 `1d3fd
 
 F4 已补验原生命令未启动的恢复，并覆盖责任仓已落回告、宿主回复丢失时的只读接续。[回告恢复复验](../feedback-loop-2026-11-17/f4-acceptance.md#5-责任仓已保存回告时的恢复)
 
+MeetingConverter 已通过 `8b8e574` 接入本机 F4，实际完成自动分诊、发布清单修复、复验及持久回告。修复和回告强退后找回原作业，转录和翻译无新增。其他四张卡已正式交付，按 StockQA、StockWiki、IQS、Dashboard 先后验收。[MC 运行验收](../feedback-loop-2026-11-17/f4-acceptance.md#8-mc-公开端口自动恢复发布清单)
+
 总控已验收 F4 两条无人值守闭环。CWP/FF 找回同一原文和作业。RF/Audit 在隔离宿主找回原作业和 capture，由 Audit 复验 RF 来源路由修复，并由 RF 读回回告。两条闭环都经过真实 Codex 同会话恢复，恢复无新增下载，旧费用未知仍保留。其余 owner 的生产接线开放。ET、SID、IR 首批三仓已发布。[CWP/FF](../feedback-loop-2026-11-17/f4-acceptance.md) · [RF/Audit](../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md) · [F2 分仓路线](../feedback-loop-2026-11-17/f2-roadmap.md)
 
 P1 的自动业务视图和真实缓存已在半年报、投资者关系样本通过。P2 的 RF 正式组合采用其中两条证据，计算及快照通过，原有 181 项参数值一致。F3c 用已保存响应修正范围漏检，自动精选移出单独的分红计算、模板陈述和财务背景，五份真实样本跨 A 股、港股、美股复验通过。下一步按 W12 和后续公司样本验证现版本的正式生成及 RF 采用。固定公司池继续依其原状态。[业务与采用实测](../feedback-loop-2026-11-17/f3b-live-acceptance.md) · [F3c 保存响应复验](../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md)

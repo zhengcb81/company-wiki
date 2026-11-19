@@ -22,6 +22,8 @@ UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可
 
 `action-started` 是正确的原始观察。若缺少同 owner、发现仓、run、attempt、step 的配对终态，总控登记原行并进入查账；其他文档、期次或预算检查不能替代它。旧 ET 和 SID 继续使用其已发布的结果检查。FF 持久作业的 `step_id` 为 `<owner_job_id>/<native_attempt>`；只读结果和成本状态分开保留。仅有开始、落盘不完整或证据引用无法定位时不触发新下载。
 
+已观察到的开始尚缺指定终态时，该步骤的新偏差也暂时走只读核对。终态补齐后分诊原偏差，沿用原发生身份。已能独立判定的预期检查保留原结果。
+
 FF 单次 CLI 用 `ff-short/1/<operation-id>` 引用及 `request-outcome` 配对终态。财报和伴随电话会使用不同的 step。短请求的查证从原侧车和 FF 业务回执接续，已有持久作业查询只接受 `ff-job/1/<owner-job-id>`。ROOT 保留短请求未知费用，并按原观察身份归并重投。
 
 MeetingConverter 保留调用方的 run 和 attempt，每次真实转录或跳过各生成一次 invocation step，终态为 `publication-outcome`。同一音频共用不透明的证据引用，已发出的观察原样重投。可选的 `.details.jsonl` 由 `details_ref` 联结，仅作 owner 诊断。对账使用原观察；硬中断和缺少用量收据时保留 unknown。
@@ -41,7 +43,7 @@ MeetingConverter 保留调用方的 run 和 attempt，每次真实转录或跳�
 | `replay` | 原发现仓，按原发生、责任仓问题及修复版本。用公开入口重放原条件 | `verdict` 取 `verified`、`regressed`、`unknown`。确定结论需 `verified_version` 等于请求修复版本，并给 `evidence_ref`。unknown 保持待核。 |
 | `report` | 责任仓，按发生、问题、版本及确定的复验结果。附原发现与其回执 | `recorded: true` 由责任仓端口落盘后返回，可独立查询。未配置 owner 端口、历史仅总控登记不能声称回告完成。owner 汇总同一问题未覆盖的发生，复发可用新证据重开。 |
 
-本地宿主配置的 `report.lookup_argv` 是可选的只读原回告接口，按原 action ID 返回 `{"report": 原提交请求}`。显式 `recover` 可核对已经领取但缺宿主回复的动作。只接受完整原请求内容，已保存的回告补回同一动作的完成状态。读回告不涉及再次修复、复验或采集。完整请求核对包括原发现、目标版本和消费证据；表示等价的 JSON 排版不影响读回。
+本地宿主 `owner-json` 路由可配置只读 `lookup_argv`，按原 action ID 返回 `{"receipt":{"request":原提交,"result":原结果}}`。`report` 也继续接受旧格式 `{"report": 原提交}`。显式 `recover` 为已领取但缺回复的动作查回同一完成状态，核对完整原请求及其版本和证据。JSON 排版不影响读回。读回执不重启已完成的修复或采集。
 
 稳定 action ID 由种类、目标及上表幂等范围生成。申请内容摘要用于识别同 ID 的不同请求。一个运行的损坏旁路行、互相矛盾的重复观察和无宿主的 owner 单列诊断；同批其他可判断的观察独立处理。历史业务作业和退出码由原生产端保存。
 

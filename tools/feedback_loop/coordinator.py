@@ -121,7 +121,7 @@ def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
 
 def advance(batch: Batch, host: Host, *, only: set[str] | None = None) -> dict:
     outcomes = []
-    unfinished = batch.unfinished_starts()
+    unfinished = batch.unfinished_occurrences()
     for key, row in batch.observations.items():
         if only is not None and key not in only:
             continue

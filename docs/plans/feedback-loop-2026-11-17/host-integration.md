@@ -18,7 +18,9 @@ F4 的隔离配置已验证 `actions.report` 可指向 FF 公开 `ff_job_feedbac
 
 升级宿主代码时先结束旧外层启动器，避免旧 worker 先领取后误用新版 helper。保留现有 SQLite、原生回执和专用 sidecar，再用正常 `recover` 接续。历史 `running` 状态仍以原生结果核对。本次发布前只读核对本机反馈操作库有 12 条 `done`，排队和在运行的动作均为零。
 
-责任仓的写端口以原子落盘作为最终效果时，可为 `owners.<owner>.actions.report` 同时配置 `argv` 和可选的 `lookup_argv`。前者使用该仓原来的 `report`，后者使用同一存储的 `get-report`，尾部 ACTION_ID 由宿主追加。两条命令随首次登记的动作保存。FF 和 RF 的完整参数顺序见前文及验收脚本。恢复只接受与原始提交请求完全一致的 JSON，补记原动作的 `recorded: true`。无证据就保留原状态。后来修改宿主设置时，恢复仍沿用原动作的查询命令。已有未配置读取端口的动作可按原生收据接续。
+责任仓的写端口以原子落盘作为最终效果时，可为 `owner-json` 的 `triage`、`repair`、`replay` 或 `report` 同时配置 `argv` 和 `lookup_argv`，尾部 ACTION_ID 由宿主追加。两条命令随首次登记的动作保存。恢复读取 `{"receipt":{"request":原提交,"result":原结果}}`，请求完整匹配时补记同一动作。FF 和 RF 的 `get-report` 旧格式继续支持。无证据就保留原状态。后来修改宿主设置时，恢复仍沿用原动作的查询命令。
+
+MeetingConverter 的四个执行路由共用 `feedback_owner.py --db DB --sidecar-dir DIR`，各配置原生动作名与只读 `get-action`。`reconcile` 走同命令的只读原转录状态查询。现有本机 `feedback-host/settings.json` 与 `hosts.json` 已增加 MC，CWP 和 FF 路由保留。原任务可把独占的侧车写到 MC `output/.feedback/observations` 后交给总控的 `tick` 或 `recover`，回执库为 MC `output/.feedback/owner.sqlite`。现场只读探针得到原作业未知，合成强退测试使用独占数据库。[MC 运行端口](../../../../MeetingConverter/docs/plans/f2-mc-output/runtime.md)
 
 - 在实际运行 agent 的宿主检查能否按调用者提供的稳定 ID 创建及查询作业、取回终态、区分确知不存在与状态未知。以两个并发提交和故意丢失一次提交回复验证。已安装可执行文件、一次会话中的 agent 列表、测试 SQLite 的绿色结果分别只证明相应能力。
 - ROOT 在工程运行环境提供固定的控制命令。各 owner 的映射取自运维配置，工作目录、技能路径和可写仓由该映射确定。业务或报告正文作为待分析数据传入。公开接口为[控制端口](interfaces.md)；可使用宿主已有持久作业接口或给原生作业加一层薄适配。FF 的下载 job 只管理下载，CWP 来源 AUTO 只管理资料，Audit 的 pool_progress 继续管理选样建议。

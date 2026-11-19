@@ -82,6 +82,18 @@ class Batch:
                 else _LEGACY_TERMINALS.get(row["owner"], ()))
         }
 
+    def unfinished_occurrences(self) -> set[str]:
+        starts = self.unfinished_starts()
+        pending_starts = (self.observations[key] for key in starts)
+        scopes = {
+            _step_identity(row) for row in pending_starts
+            if "terminal_check_id" in row or row["owner"] in _LEGACY_TERMINALS
+        }
+        return starts | {
+            key for key, row in self.observations.items()
+            if row["disposition"] == "deviation" and _step_identity(row) in scopes
+        }
+
 
 def read_batch(paths: Iterable[Path]) -> Batch:
     rows: dict[str, dict[str, str]] = {}

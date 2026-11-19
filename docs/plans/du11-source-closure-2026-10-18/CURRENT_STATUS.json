@@ -200,7 +200,15 @@
       "receipt": "../feedback-loop-2026-11-17/f4-acceptance.md#7-f2-mc-转录发布反馈进入总控",
       "provider": "isolated_transcription_and_translation_stubs",
       "meeting_converter_master": "1d3fd6c9214495ebef2cb8a4d4014712002eca00",
-      "scope": "observation_intake_and_consumer_replay; native_automatic_triage_and_report_open",
+      "scope": "observation_intake_and_consumer_replay",
+      "independent_review": "PASS"
+    },
+    "f4_mc_runtime": {
+      "receipt": "../feedback-loop-2026-11-17/f4-acceptance.md#8-mc-公开端口自动恢复发布清单",
+      "meeting_converter_master": "8b8e574f6162c6011890ce52b7383e796958aae1",
+      "local_host_route": "configured",
+      "scope": "offline_publication_provenance_triage_repair_replay_durable_report",
+      "recovered_actions": ["repair", "report"],
       "independent_review": "PASS"
     },
     "root_offline_coordinator": "accepted_35_tests_and_independent_review",
