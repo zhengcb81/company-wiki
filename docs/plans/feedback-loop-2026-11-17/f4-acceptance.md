@@ -47,3 +47,13 @@ FF 用本仓 `get-report` 读回责任仓完整回告，包含原发现方、版
 使用 FF `d5fa32c` 和从 RF 已发布 `e13861db` 只读导出的真实 owner 脚本。分别写入一份合成回告，在宿主写侧车前以 `os._exit(17)` 终止；两次并发恢复都指向原 action，原回告写命令累计一次、文件修改时间一致，后续已排队动作完成。独立复审同时覆盖同 ID 错版本、运行中缺回告、宿主配置更改及晚到回执竞争。
 
 F4 两种回告、原 FF 环回恢复、总控 CLI 和 Phase C 定向共 38 项通过。运行 `tests/integration/test_feedback_f4_owner_recovery.py` 时可显式指定兼容的 `FEEDBACK_FF_CODE_ROOT` 和 `FEEDBACK_RF_CODE_ROOT`。RF/Audit 合同端到端另行通过，恢复期间环回请求、下载和付费调用增加均为零。测试根及 RF 导出副本自动清理。
+
+## 6. F2 FF 短请求进入总控
+
+2026-11-19 验收作者交接 `8d1228d`，最终受审实现 `eb2ee5c`，两者之间只有交接文档改动。定向基线复跑 204 项和 8 子例通过。ROOT 独审发现非法数组、对象会让短请求旁路丢失终态，两例在作者版真实 CLI 复现。FF `95769c0f68dee27c282c99658c18e05cb91a816b` 先辨明意图字段类型，修复后的两个用例保留原 stdout、stderr、退出码及零 connector 调用，并补齐开始/结束配对。独审复验确认付费与持久作业边界。
+
+ROOT 用真实 FF 短 CLI、CWP 公开命令和本地环回 provider 完成首取，再精确复用同 SHA 原件。首次执行实际发出两次元数据、一次正文请求，模拟收费收据与短请求的用量范围一致。复用与随后的重复导入均零新增下载或 provider 请求。组合导入实际侧车和作者 6 份样本；后者有 27 条唯一观察（25 预期、2 未知），无解析诊断和悬空开始。两条未知均保留，只走原观察的只读查证，持久 FF 作业入口调用数为零。
+
+复跑入口为 `tests/integration/test_feedback_f4_short_intake.py`，用 `FEEDBACK_FF_CODE_ROOT` 指向包含本卡样本的 FF 版本。本次 CWP/F4 组合用受控 provider 和只读 ROOT 宿主。RF 正式周跑与 ET 的生产消费轮次继续沿各自运行计划取证。[FF 作者交接](../../../../filing-fetch/docs/plans/f2-ff-short/handoff.md)
+
+最终 FF 定向回归 224 项和 8 子例通过，组合测试 1 项通过。独立复审重跑两类非法请求并检查回放断言，测试根已清理，远端 `refs/heads/main` 已核对为 `95769c0f68dee27c282c99658c18e05cb91a816b`。另用相同隔离环境核对历史配置诊断用例 `test_real_cli_config_error_has_no_upstream_cause`。基线 `d5fa32c` 和最终版均返回 `fatal`，该用例在两版都因期待 `config_error` 失败，另记为 FF 环境诊断待查。

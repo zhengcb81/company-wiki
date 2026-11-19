@@ -10,21 +10,33 @@
 
 ## 本批施工中
 
-用户已将两张卡分别交给两个 harness。各作者在各自工作树实施，完成定向验收、独立 agent 审查及修复复验后，在本卡 `handoff.md` 交给 ROOT。ROOT 逐卡签收和组合验收。
+MeetingConverter 沿用户已分派的工作树继续。作者完成定向测试、独立 agent 审查及修复复验后，在本卡 `handoff.md` 交给 ROOT 做组合验收。
 
 | 卡 | 独立工作目录（相对 Projects） | 计划入口 | 本地计划提交 |
 |---|---|---|---|
 | F2-MC-OUTPUT | `_harness_worktrees/f2f/mc` | [转录发布和陈旧结果反馈](../../../../_harness_worktrees/f2f/mc/docs/plans/f2-mc-output/task_plan.md) | `codex/f2-mc-output@0374da9` |
-| F2-FF-SHORT | `_harness_worktrees/f2f/ff` | [单次财报请求反馈](../../../../_harness_worktrees/f2f/ff/docs/plans/f2-ff-short/task_plan.md) | `codex/f2-ff-short@92e52b5` |
 
-FF-1 已并线，Dashboard B34 有独立候选与校验文件，FF 本卡只写单次 CLI 旁路及其回归。MeetingConverter 使用自己工作树里的测试输出，主工区历史 `.coverage` 无需参与。StockWiki、IQS、Dashboard、StockQA 的相关工作由已有项目推进。
+F2-FF-SHORT 已独审、通过 FF→CWP→ROOT 组合验收并发布至 FF `main@95769c0`。[FF 作者交接](../../../../filing-fetch/docs/plans/f2-ff-short/handoff.md) · [ROOT 组合验收](f4-acceptance.md#6-f2-ff-短请求进入总控)
+
+MeetingConverter 使用自己工作树里的测试输出。StockWiki、IQS、Dashboard、StockQA 的相关工作由现有项目推进。
+
+## 现有 harness 接续卡
+
+以下四张卡可直接转发给对应的现有 harness。各仓现有任务仍由原工作线统筹。可先核对公开入口和离线夹具，写范围重叠的部分随同一 harness 排队，交接后由 ROOT 按到达顺序组合验收。
+
+| 接续卡 | 工作目录（相对 Projects） | 排队位置 |
+|---|---|---|
+| [F2-SW-FEEDBACK](owner-cards/F2-SW-FEEDBACK.md) | `StockWiki` | 身份桥、发布和来源关联与原研究线共用的改动接在对应项目后 |
+| [F2-IQS-FEEDBACK](owner-cards/F2-IQS-FEEDBACK.md) | `invest-quick-scan` | MANIFEST-DELIVERY-01 先收口同入口的当前发布改动 |
+| [F2-DASH-FEEDBACK](owner-cards/F2-DASH-FEEDBACK.md) | `investment-dashboard` | D00 在 M6 原线接续，M0 共享适配器由原 owner 维护 |
+| [F2-STOCKQA-FEEDBACK](owner-cards/F2-STOCKQA-FEEDBACK.md) | `StockQAbyLLM` | 当前内容过滤恢复的检查器和同测试先完成 |
 
 ## Owner 入口
 
 | 责任仓标识 | 接续责任 | 本仓 PWF |
 |---|---|---|
 | `company-wiki` | ROOT，证据完整性、P1 选材与恢复，另负责编排组合 | [CWP 试点](company-wiki.md) |
-| `filing-fetch` | 原生持久 job、未知用量、只读对账及回告已在 F4 验收。F2 短请求由已分派的独立卡推进 | [FB-FF](../../../../filing-fetch/docs/plans/feedback-loop-2026-11-17/FB-FF.md) |
+| `filing-fetch` | 原生持久 job、未知用量、只读对账及回告已在 F4 验收，短请求也已通过组合 | [FB-FF](../../../../filing-fetch/docs/plans/feedback-loop-2026-11-17/FB-FF.md) |
 | `revenue-forecast` | 作业对账、版本化回告已在 F4 验收，业务采用按原计划 | [RF 计划](../../../../revenue-forecast/docs/plans/mb11-rf-2026-11-11/feedback-20261117.md) |
 | `revenue-forecast-audit` | 原捕获查询和发现端复验已在 F4 验收，公司池按原入口 | [Audit 计划](../../../../revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/feedback-20261117.md) |
 | `earnings-transcripts`, `stockinfo-dl-simple`, `industry-research` | 已接入专用观察；自动对账和回告交 F4 | [三卡验收](f2-owner-acceptance.md) |

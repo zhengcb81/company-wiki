@@ -20,7 +20,9 @@ UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可
 
 开始、结束、分支选择、失败原因链、耗时和用量保存在**本仓完整步骤日志**。以上格式是对检查结果的跨仓投影。保留成功、跳过、预期拒绝和错误成功的区别；同一原生 finding 可在另一个审查轮次表示不同问题。报告/原始 stderr 的脱敏详情在产生方只保存一次，按引用重读。成功详细记录按本仓轮转，开放 issue 的最小复现和固定回归随 issue 留存。
 
-`action-started` 是正确的原始观察。若缺少同 owner、发现仓、run、attempt、step 的配对终态，总控登记原行并进入查账；其他文档、期次或预算检查不能替代它。旧 ET 和 SID 继续使用其已发布的结果检查。FF 的 `step_id` 为 `<owner_job_id>/<native_attempt>`；只读结果和成本状态分开保留。仅有开始、落盘不完整或证据引用无法定位时不触发新下载。
+`action-started` 是正确的原始观察。若缺少同 owner、发现仓、run、attempt、step 的配对终态，总控登记原行并进入查账；其他文档、期次或预算检查不能替代它。旧 ET 和 SID 继续使用其已发布的结果检查。FF 持久作业的 `step_id` 为 `<owner_job_id>/<native_attempt>`；只读结果和成本状态分开保留。仅有开始、落盘不完整或证据引用无法定位时不触发新下载。
+
+FF 单次 CLI 用 `ff-short/1/<operation-id>` 引用及 `request-outcome` 配对终态。财报和伴随电话会使用不同的 step。短请求的查证从原侧车和 FF 业务回执接续，已有持久作业查询只接受 `ff-job/1/<owner-job-id>`。ROOT 保留短请求未知费用，并按原观察身份归并重投。
 
 ## ROOT 和宿主的控制端口
 

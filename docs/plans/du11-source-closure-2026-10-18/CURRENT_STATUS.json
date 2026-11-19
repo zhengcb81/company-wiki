@@ -180,10 +180,22 @@
     "progress": "../feedback-loop-2026-11-17/progress.md",
     "owner_cards": "../feedback-loop-2026-11-17/dispatch.md",
     "available_lanes": [],
-    "active_lanes": ["F2-MC-OUTPUT", "F2-FF-SHORT"],
-    "accepted_lanes": ["FB-ET", "FB-SID", "FB-IR"],
-    "lane_state": "first_three_accepted_and_published_two_in_progress",
+    "active_lanes": ["F2-MC-OUTPUT"],
+    "accepted_lanes": ["FB-ET", "FB-SID", "FB-IR", "F2-FF-SHORT"],
+    "lane_state": "ff_short_published_mc_in_progress_existing_harness_cards_ready",
     "lane_acceptance": "../feedback-loop-2026-11-17/f2-owner-acceptance.md",
+    "existing_owner_cards": {
+      "F2-SW-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-SW-FEEDBACK.md",
+      "F2-IQS-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-IQS-FEEDBACK.md",
+      "F2-DASH-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-DASH-FEEDBACK.md",
+      "F2-STOCKQA-FEEDBACK": "../feedback-loop-2026-11-17/owner-cards/F2-STOCKQA-FEEDBACK.md"
+    },
+    "f4_ff_short_acceptance": {
+      "receipt": "../feedback-loop-2026-11-17/f4-acceptance.md#6-f2-ff-短请求进入总控",
+      "provider": "isolated_loopback",
+      "ff_main": "95769c0f68dee27c282c99658c18e05cb91a816b",
+      "independent_review": "PASS"
+    },
     "root_offline_coordinator": "accepted_35_tests_and_independent_review",
     "live_host_recovery": "accepted_codex_session_and_one_ff_native_reuse_job",
     "live_consumer_acceptance": "accepted_scoped_h1_ir_and_two_rf_rationale_bindings",

@@ -2,9 +2,11 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-18 最新状态
+## 2026-11-19 最新状态
 
-F2 的 MeetingConverter 转录反馈和 filing-fetch 短请求反馈已交给两个独立 harness。F4 已补验原生命令未启动的恢复，并覆盖责任仓已落回告、宿主回复丢失时的只读接续。 [施工包与工作目录](../feedback-loop-2026-11-17/dispatch.md#本批施工中) · [回告恢复复验](../feedback-loop-2026-11-17/f4-acceptance.md#5-责任仓已保存回告时的恢复)
+F2 的 filing-fetch 短请求已在 `95769c0` 验收发布，取件、同 SHA 复用和重复导入的组合通过。MeetingConverter 继续在原 harness 施工。StockWiki、IQS、Dashboard、StockQA 的四张接续卡已备好，共用写入排在各自当前工作后。[工作目录与接续卡](../feedback-loop-2026-11-17/dispatch.md) · [FF 短请求组合](../feedback-loop-2026-11-17/f4-acceptance.md#6-f2-ff-短请求进入总控)
+
+F4 已补验原生命令未启动的恢复，并覆盖责任仓已落回告、宿主回复丢失时的只读接续。[回告恢复复验](../feedback-loop-2026-11-17/f4-acceptance.md#5-责任仓已保存回告时的恢复)
 
 总控已验收 F4 两条无人值守闭环。CWP/FF 找回同一原文和作业。RF/Audit 在隔离宿主找回原作业和 capture，由 Audit 复验 RF 来源路由修复，并由 RF 读回回告。两条闭环都经过真实 Codex 同会话恢复，恢复无新增下载，旧费用未知仍保留。其余 owner 的生产接线开放。ET、SID、IR 首批三仓已发布。[CWP/FF](../feedback-loop-2026-11-17/f4-acceptance.md) · [RF/Audit](../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md) · [F2 分仓路线](../feedback-loop-2026-11-17/f2-roadmap.md)
 
