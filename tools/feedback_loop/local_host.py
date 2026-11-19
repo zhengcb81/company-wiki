@@ -21,6 +21,22 @@ _KEY = re.compile(r"[0-9a-f]{64}")
 _FF_REF = re.compile(r"ff-job/1/(ffjob-[0-9a-f]{12})")
 _LOCAL = {"observe"}
 _EXECUTABLE = {"triage", "repair", "replay", "report"}
+_REFUSAL_REVIEW = {
+    "triage": (
+        "For an actual refusal, review the gate before proposing any fix. "
+        "Locate the enforcing check and its owner, the fact it protects, and an otherwise valid input it rejects. "
+        "Prefer removing a redundant check, narrowing it to the affected operation, "
+        "or keeping the smallest necessary boundary. Preserve unknown outcomes and reconcile original paid work. "
+        "Record a gate_review object with decision (remove, narrow, retain, or needs_evidence), reason, "
+        "and evidence_ref. Return expected for a confirmed necessary refusal, or refer to the responsible owner."
+    ),
+    "repair": (
+        "For an issue involving a refusal, first read the original gate review and evidence in the owner issue. "
+        "If the review is missing, establish what the gate protects and compare a valid input with a true "
+        "boundary violation before editing. Record the decision and reproduction in the existing issue or plan. "
+        "Prefer removal or the narrowest defensible check, and reconcile unknown costs from the original job."
+    ),
+}
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS actions (
     action_id TEXT PRIMARY KEY,
@@ -106,6 +122,8 @@ class LocalHost:
         if (mode not in ("codex-jsonl", "owner-json") or (mode == "codex-jsonl" and kind not in ("triage", "repair"))
                 or type(timeout) not in (int, float) or not 0 < timeout < float("inf") or not isinstance(instruction, str)):
             raise ValueError("invalid host route or execution deadline")
+        if mode == "codex-jsonl":
+            instruction = (instruction + "\n\n" + _REFUSAL_REVIEW[kind]).strip()
         route = {"argv": _argv(program["argv"]), "cwd": str(Path(config["cwd"]).resolve()), "timeout": timeout,
                  "mode": mode, "instruction": instruction}
         if mode == "owner-json" and kind in _EXECUTABLE and program.get("lookup_argv") is not None:

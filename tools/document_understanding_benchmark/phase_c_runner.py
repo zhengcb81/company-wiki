@@ -800,6 +800,9 @@ def public_bundle(root, output, env, config, imported, descriptor, label, *, sou
         receipt = None
     if code != 0 and isinstance(receipt, dict) and observed_state is not None:
         observed_state["public_replay"] = {k: receipt[k] for k in ("schema_version", "status", "reason") if k in receipt}
+        reason = receipt.get("reason")
+        if code == 2 and receipt.get("schema_version") == "narrative-read-receipt/1" and isinstance(reason, str) and reason:
+            observed_state["refusal_code"] = reason
     assert code == 0 and wire is not None
 
     def verify_binding(condition, mismatch):

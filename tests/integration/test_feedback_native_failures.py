@@ -104,4 +104,5 @@ def test_public_locator_refusal_survives_native_exit(tmp_path, monkeypatch):
     rows = _feedback_rows(tmp_path, receipt)
     assert rows["locator-replay"]["disposition"] == "deviation"
     assert rows["locator-replay"]["actual"] not in {"unknown", "verified"}
+    assert rows["locator-replay"]["refusal_code"] == state["refusal_code"] == refusal["reason"]
     assert rows["same-run-cache"]["disposition"] == rows["cross-run-cache"]["disposition"] == "unknown"

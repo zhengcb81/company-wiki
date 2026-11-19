@@ -24,9 +24,15 @@ def after_observations(sidecar: Path, env) -> dict | None:
     except (OSError, ValueError, RecursionError):
         return {"status": "host_config_unavailable"}
     result = settle(read_batch([sidecar]), host, wait_seconds)
-    return {"status": "tick_completed", "states": dict(Counter(row["status"] for row in result["observations"])),
-            "dispositions": dict(Counter(row["disposition"] for row in result["observations"])),
-            "diagnostics": result["diagnostics"]}
+    observations = result["observations"]
+    summary = {"status": "tick_completed", "states": dict(Counter(row["status"] for row in observations)),
+               "dispositions": dict(Counter(row["disposition"] for row in observations)),
+               "diagnostics": result["diagnostics"]}
+    reviews = [{"occurrence_id": row["occurrence_id"], **row["gate_review"]}
+               for row in observations if "gate_review" in row]
+    if reviews:
+        summary["gate_reviews"] = reviews
+    return summary
 
 
 def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -> dict:

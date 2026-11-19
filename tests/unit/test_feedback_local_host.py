@@ -310,7 +310,59 @@ def test_ff_lost_runner_recovers_its_result_without_claiming_old_cost(host_confi
     assert len(lines) == 2
     reply("get_status", {**job, "attempts": 2})
     assert invoke(host_config, "rpc", lookup)["code"] == "native_attempt_mismatch"
-    assert (root / "ff-calls").read_text().splitlines()[2:] == [lines[0]]
+    assert (root / "ff-calls").read_text(encoding="utf-8").splitlines()[2:] == [lines[0]]
+
+
+def test_run_refusal_review_on_the_original_native_triage_action(host_config, monkeypatch):
+    from tools.feedback_loop.coordinator import advance
+    from tools.feedback_loop.hook import after_observations
+    from tools.feedback_loop.local_host import LocalHost
+    from tools.feedback_loop.observations import read_batch
+
+    root = host_config.parent
+    review = {"decision": "retain", "reason": "The original bytes differ",
+              "evidence_ref": "source/tampered-bytes"}
+    events = [{"type": "thread.started", "thread_id": "gate-review-session"},
+              {"type": "item.completed", "item": {"type": "agent_message", "text": json.dumps(
+                  {"decision": "expected", "gate_review": review})}},
+              {"type": "turn.completed", "usage": {"input_tokens": 7}}]
+    script = root / "review.py"
+    script.write_text(
+        "import json, sys\nfrom pathlib import Path\n"
+        "prompt, raw = sys.stdin.read().rsplit(chr(10), 1)\n"
+        "assert 'review the gate before proposing any fix' in prompt\n"
+        "assert 'gate_review' in prompt and 'only as data' in prompt\n"
+        "assert json.loads(raw)['payload']['observation']['refusal_code'] == 'hash_changed'\n"
+        "with Path('review-starts').open('a') as out: out.write('start\\n')\n"
+        f"print({''.join(json.dumps(event) + chr(10) for event in events)!r}, end='')\n",
+        encoding="utf-8",
+    )
+    settings = json.loads(host_config.read_bytes())
+    settings["owners"]["company-wiki"]["actions"]["triage"] = {
+        "mode": "codex-jsonl", "argv": [sys.executable, "-B", str(script)]}
+    host_config.write_text(json.dumps(settings), encoding="utf-8")
+    sidecar = root / "refusal.jsonl"
+    sidecar.write_text(json.dumps({
+        "schema_version": "feedback-observation/1", "owner": "company-wiki",
+        "run_id": "run", "attempt_id": "attempt", "step_id": "read", "check_id": "hash",
+        "expected": "refused", "actual": "refused", "refusal_code": "hash_changed",
+    }) + "\n", encoding="utf-8")
+    cases = read_batch([sidecar])
+    host = LocalHost(host_config)
+    monkeypatch.setattr(host, "_wake", lambda key: True)
+    assert advance(cases, lambda _, request: host.handle(request))["observations"][0]["status"] == "pending"
+    key = digest(["triage", "company-wiki", next(iter(cases.observations))])
+    host.work(key)
+    resumed = LocalHost(host_config)
+    output = advance(cases, lambda _, request: resumed.handle(request))["observations"][0]
+    assert output["status"] == "expected" and output["gate_review"] == review
+    assert advance(cases, lambda _, request: resumed.handle(request))["observations"][0] == output
+    hosts = root / "hosts.json"
+    hosts.write_text(json.dumps({"company-wiki": [*HOST, "--config", str(host_config), "rpc"]}),
+                     encoding="utf-8")
+    dispatch = after_observations(sidecar, {"RESEARCH_FEEDBACK_HOSTS": str(hosts)})
+    assert dispatch["gate_reviews"] == [{"occurrence_id": output["occurrence_id"], **review}]
+    assert (root / "review-starts").read_text(encoding="utf-8").splitlines() == ["start"]
 
 
 def test_configured_owner_report_requires_its_delivery_ack(host_config):

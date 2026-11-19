@@ -78,6 +78,15 @@ def _reconcile(key: str, row: dict, host: Host, observation: dict) -> dict:
     return {"status": "unknown", "step": "reconcile"}
 
 
+def _gate_review(triage: dict) -> dict:
+    review = triage.get("gate_review")
+    if (isinstance(review, dict)
+            and review.get("decision") in ("remove", "narrow", "retain", "needs_evidence")
+            and all(isinstance(review.get(key), str) and review[key].strip() for key in ("reason", "evidence_ref"))):
+        return {key: review[key] for key in ("decision", "reason", "evidence_ref")}
+    return {}
+
+
 def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
     observation = {"occurrence_id": key, "observation": row}
     bound = _perform(host, row["origin_owner"], "observe", [key], observation)
@@ -85,12 +94,19 @@ def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
         raise Deferred("unverified", "observe")
     if unfinished or row["disposition"] == "unknown":
         return _reconcile(key, row, host, observation)
-    if row["disposition"] == "expected":
+    expected = row["disposition"] == "expected"
+    if expected and "refusal_code" not in row:
         return {"status": "expected"}
     owner, triage = _triage(key, row, host)
     decision = triage.get("decision")
+    review = _gate_review(triage)
+    diagnostics = {"gate_review": review} if review else {}
     if decision in ("expected", "external", "needs_evidence"):
-        return {"status": decision, "step": "triage"}
+        return {"status": decision, "step": "triage", **diagnostics}
+    if expected and review.get("decision") not in ("remove", "narrow"):
+        # An expected refusal enters triage for review, even on a legacy port.
+        # Its existing disposition holds until triage finds an actionable gate.
+        return {"status": "expected", "step": "triage", **diagnostics}
     issue = _text(triage, "issue_ref", "triage")
     if decision == "repair":
         generation = _text(triage, "generation", "triage")
@@ -116,7 +132,7 @@ def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
     recorded = _perform(host, owner, "report", [*scope, verdict], report)
     if recorded.get("recorded") is not True:
         raise Deferred("unverified", "report")
-    return {"status": verdict, "issue_ref": issue, "fixed_version": version, "evidence_ref": evidence}
+    return {"status": verdict, "issue_ref": issue, "fixed_version": version, "evidence_ref": evidence, **diagnostics}
 
 
 def advance(batch: Batch, host: Host, *, only: set[str] | None = None) -> dict:

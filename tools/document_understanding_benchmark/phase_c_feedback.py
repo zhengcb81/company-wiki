@@ -36,6 +36,7 @@ def observations(receipt, env, version):
             ("same-run-cache", "zero-post", _bool_outcome(state.get("same_run_zero_POST"))),
             ("cross-run-cache", "zero-post", _bool_outcome(state.get("cross_run_zero_POST"))),
         ]
+        refusal_codes = {"locator-replay": state.get("refusal_code")}
         for kind in ("same_run", "cross_run"):
             binding = state.get(kind + "_cache_binding")
             if isinstance(binding, str) and binding:
@@ -47,6 +48,7 @@ def observations(receipt, env, version):
             if not outcome and cache_read.get("public_read_exit") == 2 and isinstance(cache_receipt, dict) and cache_receipt.get("reason"):
                 outcome = "read-refused"
             checks.append(("cache-locator-replay", "verified", outcome or "unknown"))
+            refusal_codes["cache-locator-replay"] = cache_read.get("refusal_code")
         for check, expected, actual in checks:
             row = {"schema_version": "feedback-observation/1", "owner": "company-wiki",
                    "run_id": env.get("RESEARCH_FEEDBACK_RUN_ID") or native_id,
@@ -57,6 +59,9 @@ def observations(receipt, env, version):
                 row["version"] = version
             if actual == "unknown":
                 row["disposition"] = "unknown"
+            code = refusal_codes.get(check)
+            if actual == "read-refused" and isinstance(code, str):
+                row["refusal_code"] = code
             yield row
 
 

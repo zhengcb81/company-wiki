@@ -6,6 +6,7 @@ from dataclasses import dataclass
 import hashlib
 import json
 from pathlib import Path
+import re
 from typing import Iterable
 
 
@@ -13,6 +14,8 @@ IDENTITY = ("owner", "origin_owner", "run_id", "attempt_id", "step_id", "check_i
 REQUIRED = ("owner", "run_id", "attempt_id", "step_id", "check_id", "expected", "actual")
 OPTIONAL = ("origin_owner", "issue_key", "version", "evidence_ref", "details_ref", "parent_step_id", "disposition",
             "original_occurrence_id", "terminal_check_id")
+_REFUSAL_CODE = re.compile(r"[a-z][a-z0-9_-]{0,80}")
+_COST_CHECKS = {"job-usage", "provider-usage", "transcript-provider-usage", "cost-receipt"}
 
 # Legacy producers shipped before starts could name their matching result.
 _LEGACY_TERMINALS = {
@@ -51,6 +54,9 @@ def _observation(raw: bytes) -> dict[str, str]:
         if not isinstance(item, str) or not item.strip():
             raise ValueError("invalid_observation_field")
         row[key] = item
+    code = value.get("refusal_code")
+    if isinstance(code, str) and _REFUSAL_CODE.fullmatch(code):
+        row["refusal_code"] = code
     row.setdefault("origin_owner", row["owner"])
     if "disposition" not in row:
         row["disposition"] = ("unknown" if "unknown" in (row["expected"], row["actual"]) else
@@ -89,9 +95,14 @@ class Batch:
             _step_identity(row) for row in pending_starts
             if "terminal_check_id" in row or row["owner"] in _LEGACY_TERMINALS
         }
+        refusal_scopes = scopes | {
+            _step_identity(row) for row in self.observations.values()
+            if row["check_id"] in _COST_CHECKS and row["actual"] in ("unknown", "cost_unknown")
+        }
         return starts | {
             key for key, row in self.observations.items()
-            if row["disposition"] == "deviation" and _step_identity(row) in scopes
+            if (row["disposition"] == "deviation" and _step_identity(row) in scopes)
+            or ("refusal_code" in row and _step_identity(row) in refusal_scopes)
         }
 
 

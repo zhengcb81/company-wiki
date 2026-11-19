@@ -119,6 +119,63 @@ def test_expected_refusal_external_and_recurrence(tmp_path):
     assert host.started["report"] == 1
 
 
+def test_marked_refusal_runs_one_durable_gate_review_before_repair(tmp_path):
+    refused = event(expected="refused", actual="refused", refusal_code="owner_extent")
+    cases = batch(tmp_path, refused)
+    host = NativeJobs()
+    review = {"decision": "narrow", "reason": "Different layout uses the same verified original",
+              "evidence_ref": "source/reproductions/27"}
+    host.results["triage"] = {**host.results["triage"], "gate_review": review}
+    first = advance(cases, host)
+    assert first["observations"][0]["status"] == "verified"
+    assert first["observations"][0]["gate_review"] == review
+    assert [kind for kind, _ in host.targets] == ["observe", "triage", "repair", "replay", "report"]
+    assert advance(cases, host) == first
+    assert host.started["triage"] == host.started["repair"] == 1
+
+
+def test_marked_expected_refusal_preserves_legacy_disposition_without_removal_evidence(tmp_path):
+    cases = batch(tmp_path, event(expected="refused", actual="refused", refusal_code="hash_changed"))
+    host = NativeJobs()
+    for gate_review in (None, {"decision": []}, {"decision": "retain", "reason": "Source bytes changed",
+                                                  "evidence_ref": "source/bytes"}):
+        host.jobs.clear()
+        host.started.clear()
+        host.results["triage"]["gate_review"] = gate_review
+        assert advance(cases, host)["observations"][0]["status"] == "expected"
+        assert host.started == {"observe": 1, "triage": 1}
+
+
+def test_gate_review_waits_for_final_actual_refusal_and_ignores_malformed_tags(tmp_path):
+    start = event(check_id="action-started", expected="started", actual="started", terminal_check_id="stage-outcome")
+    refusal = event(expected="refused", actual="refused", refusal_code="hash_changed")
+    host = NativeJobs()
+    result = advance(batch(tmp_path, start, refusal), host)
+    assert [item["status"] for item in result["observations"]] == ["unknown", "unknown"]
+    expected = event(run_id="malformed", expected="refused", actual="refused", refusal_code={"bad": True})
+    unconfirmed = event(attempt_id="other", actual="refused", refusal_code="incomplete", disposition="unknown")
+    remaining = advance(batch(tmp_path, expected, unconfirmed), host)
+    assert [item["status"] for item in remaining["observations"]] == ["expected", "unknown"]
+    assert host.started == {"observe": 4}
+
+
+def test_gate_review_checks_unknown_usage_for_the_same_attempt(tmp_path):
+    refusal = event(check_id="stage-outcome", expected="refused", actual="refused",
+                    refusal_code="owner_extent")
+    start = event(check_id="action-started", expected="started", actual="started",
+                  terminal_check_id="stage-outcome")
+    usage = event(check_id="job-usage", expected="accounted", actual="unknown")
+    host = NativeJobs()
+    host.results["triage"]["gate_review"] = {"decision": "narrow", "reason": "False refusal reproduced",
+                                             "evidence_ref": "fixture/valid-input"}
+    paired = advance(batch(tmp_path, start, refusal, usage), host)
+    assert [item["status"] for item in paired["observations"]] == ["expected", "unknown", "unknown"]
+    assert host.started == {"observe": 3}
+    another = advance(batch(tmp_path, {**refusal, "attempt_id": "new"}, usage), host)
+    assert [item["status"] for item in another["observations"]] == ["verified", "unknown"]
+    assert host.started["triage"] == host.started["repair"] == 1
+
+
 def test_no_use_of_previous_result_for_changed_record_in_a_later_tick(tmp_path):
     host = NativeJobs()
     assert advance(batch(tmp_path, event()), host)["observations"][0]["status"] == "verified"
