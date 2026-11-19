@@ -799,6 +799,19 @@ def _projections_root(catalog) -> Path:
     return Path(catalog.config.catalog_dir) / _PROJECTIONS_DIRNAME
 
 
+def _unique_projection_fields(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    fields: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in fields:
+            raise ValueError("duplicate projection field")
+        fields[key] = value
+    return fields
+
+
+def _reject_projection_constant(value: str) -> None:
+    raise ValueError(f"invalid JSON number: {value}")
+
+
 def persist_projection(catalog, projection: SourceProjection) -> str:
     """Idempotent projection store under the store-owned catalog directory."""
     if projection.projection_id != PROJECTION_ID_PREFIX + projection.projection_sha256:
@@ -809,11 +822,15 @@ def persist_projection(catalog, projection: SourceProjection) -> str:
         raise ProjectionError("projection_payload_mismatch")
     path = _projections_root(catalog) / (projection.projection_sha256 + ".json")
     path.parent.mkdir(parents=True, exist_ok=True)
-    encoded = _canonical_json(projection.to_dict()).encode("utf-8")
     if path.exists():
-        if path.read_bytes() != encoded + b"\n":
-            raise ProjectionError("projection_store_conflict")
+        # The slot identifies the canonical payload. A previous writer may
+        # have serialized the same JSON with different whitespace or escapes.
+        try:
+            load_projection(catalog, projection.projection_id)
+        except ProjectionError as exc:
+            raise ProjectionError("projection_store_conflict") from exc
         return projection.projection_id
+    encoded = _canonical_json(projection.to_dict()).encode("utf-8")
     with atomic_output(path, sync=True) as stream:
         stream.write(encoded + b"\n")
     return projection.projection_id
@@ -830,10 +847,21 @@ def load_projection(catalog, projection_id: str) -> SourceProjection:
     if not path.is_file():
         raise ProjectionError("projection_not_found")
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload = json.loads(
+            path.read_text(encoding="utf-8"),
+            object_pairs_hook=_unique_projection_fields,
+            parse_constant=_reject_projection_constant,
+        )
     except (OSError, ValueError):
         raise ProjectionError("invalid_projection_payload") from None
-    return projection_from_dict(payload)
+    projection = projection_from_dict(payload)
+    if projection.projection_id != projection_id:
+        raise ProjectionError("projection_id_mismatch")
+    # The sealed file must contain the complete payload that was verified.
+    # Extra nested fields must not disappear during DTO decoding.
+    if projection.to_dict() != payload:
+        raise ProjectionError("invalid_projection_payload")
+    return projection
 
 
 def _verify_projection_from_parents(catalog, projection: SourceProjection) -> dict[str, JsonStructureDocument]:

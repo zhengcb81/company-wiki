@@ -88,6 +88,46 @@ def test_persisted_projection_is_loadable_and_idempotent(tmp_path):
         assert replay_projection(catalog, loaded)["verified_records"] == 1
 
 
+def test_persist_accepts_the_same_projection_with_different_json_presentation(tmp_path):
+    with catalog_for(tmp_path) as catalog:
+        original = projection(catalog, [import_page(catalog, flat_page())])
+        identity = persist_projection(catalog, original)
+        path = tmp_path / "catalog" / "projections" / f"{original.projection_sha256}.json"
+        pretty = json.dumps(original.to_dict(), indent=2, ensure_ascii=True).encode("utf-8")
+        path.write_bytes(pretty)
+        before = path.stat().st_mtime_ns
+        assert load_projection(catalog, identity).to_dict() == original.to_dict()
+        assert persist_projection(catalog, original) == identity
+        assert path.read_bytes() == pretty and path.stat().st_mtime_ns == before
+
+
+@pytest.mark.parametrize(
+    "fault", ["duplicate", "different_identity", "nested_unknown", "nonfinite"],
+)
+def test_persist_refuses_ambiguous_or_wrong_projection_in_the_existing_slot(tmp_path, fault):
+    with catalog_for(tmp_path) as catalog:
+        original = projection(catalog, [import_page(catalog, flat_page())])
+        persist_projection(catalog, original)
+        path = tmp_path / "catalog" / "projections" / f"{original.projection_sha256}.json"
+        payload = original.to_dict()
+        if fault == "duplicate":
+            bad = '{"schema_version":null,' + json.dumps(payload)[1:]
+        elif fault == "different_identity":
+            payload["as_of_date"] = "2026-10-09"
+            bad = json.dumps(rehash(payload).to_dict())
+        else:
+            payload["records"][0]["unknown_field"] = (
+                "unbound information" if fault == "nested_unknown" else float("nan")
+            )
+            bad = json.dumps(payload)
+        path.write_text(bad, encoding="utf-8")
+        with pytest.raises(ProjectionError):
+            load_projection(catalog, original.projection_id)
+        with pytest.raises(ProjectionError, match="projection_store_conflict"):
+            persist_projection(catalog, original)
+        assert path.read_text(encoding="utf-8") == bad
+
+
 def test_public_cli_reloads_by_projection_id(tmp_path):
     with catalog_for(tmp_path) as catalog:
         ref = import_page(catalog, flat_page())
