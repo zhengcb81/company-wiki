@@ -12,6 +12,8 @@ CWP 的本地 SQLite `#` 和 `%23` 路径问题已根修并经独审。CWP `/8` 
 
 CWP `ccc09205` 的组合测试 171 项通过，远端 CI 发现测试观察器没有传递新增参数。修复版 `bbfadb7a` 已推送，精确 CI 成功。正常宿主的 `/8` 环回仅向测试服务请求一次，同次激活和跨次缓存均零重发。FF 发布版 `17e83b0` 的精确 CI 也已通过。 [CWP 原失败](https://github.com/zhengcb81/company-wiki/actions/runs/44740497857) · [CWP 修复版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/44741879748) · [FF CI](https://github.com/zhengcb81/filing-fetch/actions/runs/44739818531)
 
+RF W01 返修 `c03b9e4` 通过本仓 179 项和 160 个子测试，正在按精确提交独审。W02 补充一项真实拒绝。只加入两份合法同行半年报，RF 就用同行日期替换药明的最近财报日。Audit 已保存原命令、输入、失败和门禁审视。由 RF 按发行人收窄覆盖检查，沿现有诊断表达实际遗漏。 [W12 接续](review/w12-wuxi-resume-20261120/README.md#w02-新发现同行财报日期影响本公司覆盖)
+
 ## 2026-11-20 反馈工程进展
 
 F4 已由各仓独立 agent 完成 12 个本机模块上线和支持范围的验收。上线时 51 项组合回归通过，原反馈动作库字节一致。W12 接续的拒绝审视修复另有 53 项 Windows 宿主回归和 26 个独立探针通过。M6 已在原位置正式登记中微评估，Dashboard 本仓已公开读回。RF/Audit 的现场联合复验随可绑定的原作业接续。 [F4 分仓上线与范围](../feedback-loop-2026-11-17/f4-rollout.md)

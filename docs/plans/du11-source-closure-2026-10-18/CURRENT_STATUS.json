@@ -174,7 +174,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Require the RF shared stress exposure to be an additive unrecognized amount from its own business and complete the revenue-magnitude research. Revalidate the new CWP summary response, cache recovery and actual RF adoption in a new W12 attempt at the original cutoff.",
+  "next_action": "Independently verify the dated pending exposure in the RF W01 candidate; fix RF W02 issuer-scoped coverage and complete revenue-magnitude research. Revalidate the new CWP response, cache and RF adoption in a new W12 attempt at the original cutoff.",
   "w12_attempt": {
     "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
@@ -201,10 +201,20 @@
     "audit_current_local_head": "3e6ae150da25c48f3f070e0336a41884b200d01b",
     "owner_remediation": {
       "rf_shared_stress": {
-        "candidate": "b0461a02635649e4903c5734ffbd48149f87bb9d",
-        "tested": 99,
-        "status": "native_replay_passed_independent_mixed_actual_and_cross_business_exposure_red",
+        "candidate": "c03b9e470ad6053d1de00dfaf9db0e0380904a5a",
+        "tested": 179,
+        "subtests": 160,
+        "status": "owner_fixed_both_false_acceptances_native_replay_passed_independent_review_in_progress",
         "future_magnitude": "independent_research_received_not_settled"
+      },
+      "rf_w02_peer_coverage": {
+        "capture_ref": "audit-capture/1/w12-w01-rf-peer-filing-coverage/executor/650cefc1ffbe4033abf8928dc94175a8",
+        "command_finished_event_id": "124896ac8f83490984d26b726d8a3c39",
+        "gate_review_event_id": "024709bcfcba4da49d064c64f47066fa",
+        "input_sha256": "fa4b8a7c4174e6697c5a8eaf250c9a32a1e007680a6342fa3096fae86f4ea691",
+        "capture_receipt_sha256": "cae1a235b409c771cea953e3f766015fda2de7c270b725e0fd229a80b373dd02",
+        "gate_decision": "narrow",
+        "status": "recorded_then_scoped_dispatched_to_rf_owner"
       },
       "audit_w03": "independently_accepted_local_fast_forward_both_skill_copies_match",
       "cwp_w04": {
