@@ -73,12 +73,24 @@ class CatalogBrowseVersion:
 
 
 @dataclass(frozen=True)
+class RegisteredIssuerFacts:
+    """Issuer fields explicitly verified on one registered source version."""
+
+    entity: str
+    market: str
+    security_id: str
+    provider: str
+    source_url: str
+
+
+@dataclass(frozen=True)
 class CatalogBrowseSourceFacts:
     """Indexed hash and the active assertion's exact source reference, if available."""
 
     content_sha256: str
     verified_ref: SourceRef | None = None
     assertion_id: str | None = None
+    issuer_facts: RegisteredIssuerFacts | None = None
 
 
 @dataclass(frozen=True)

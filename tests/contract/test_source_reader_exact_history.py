@@ -363,12 +363,14 @@ def test_unconfigured_root_stays_unavailable(tmp_path):
                         read_only=True, reusable_for_filing=True),),
         reusable_root_kinds=("dayu_portfolio",),
     ))
-    with pytest.raises(SourceReadError) as error:
-        SourceVersionReader(reduced).open_version(history_ref,
-                                                  purpose="preview")
-    assert error.value.status == "unavailable"
-    assert error.value.reason == "no_indexed_location"
-    catalog.close()
+    try:
+        with pytest.raises(SourceReadError) as error:
+            SourceVersionReader(reduced).open_version(history_ref, purpose="preview")
+        assert error.value.status == "unavailable"
+        assert error.value.reason == "no_indexed_location"
+    finally:
+        reduced.close()
+        catalog.close()
 
 
 def test_root_admission_denial_stays_blocked(tmp_path):

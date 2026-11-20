@@ -24,11 +24,12 @@ zero-write read model:
   issuer-proof corpus cap. This route does not download, OCR, call a model, or
   write catalog state. Every returned item still requires its own exact issuer
   proof;
-- supported namespace matrix (see the D00 integration addendum): StockWiki
-  source bindings in ``cwp_source_export_v2`` resolve natively inside CWP by
-  exact source URN; proven CWP issuer namespaces are ``sec.cik`` via
-  ``sec-primary-dei/1`` and ``cn.uscc`` via ``cn-primary-uscc/1``. Any other
-  namespace is ``unknown`` — never converted by guess;
+- StockWiki source bindings in ``cwp_source_export_v2`` resolve natively by
+  exact source URN. HKEX listings may combine verified owner identity with
+  active CWP source facts tied to a specific official filing version. A
+  workflow's binding namespace describes provenance; it is not the document's
+  identity. Unsupported listings without an independently resolved source
+  remain unknown;
 - binding states are honest: ``verified`` / ``ambiguous`` / ``unknown`` /
   ``conflict`` / ``stale`` / ``unavailable`` / ``incompatible``.  Without a
   verified binding no item is returned, ``total`` is ``unknown`` (never a
@@ -61,6 +62,7 @@ import time
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Protocol
+from urllib.parse import urlsplit
 
 from ..source_contract.source_version import SourceReadError
 from .assertion_service import source_scope_qualification
@@ -70,8 +72,10 @@ from .document_browse_projection import (
     version_revision_member,
     version_sort_key,
 )
-from .models import CatalogBrowseVersion
+from .models import CatalogBrowseVersion, RegisteredIssuerFacts
 from .read_budget import ReadBudget
+from .security_code import canonical_security_code
+from .security_identity import normalize_identity_text
 from .service import SourceCatalog
 
 
@@ -94,6 +98,8 @@ ISSUER_NAMESPACE_SEC_CIK = "sec.cik"
 ISSUER_VERIFIER_SEC_DEI = "sec-primary-dei/1"
 ISSUER_NAMESPACE_CN_USCC = "cn.uscc"
 ISSUER_VERIFIER_CN_PRIMARY = "cn-primary-uscc/1"
+ISSUER_NAMESPACE_HK_LISTING = "hkex.listed-issuer"
+ISSUER_VERIFIER_HK_SOURCE_FACTS = "hkex-registered-source-facts/1"
 
 _SOURCE_URN_RE = re.compile(
     r"urn:company-wiki:source:sha256:[0-9a-f]{64}\Z")
@@ -505,6 +511,29 @@ class IssuerKey:
         return self.namespace + ":" + self.value
 
 
+def _hk_issuer_key(ticker: Any, issuer_name: Any) -> IssuerKey | None:
+    code = canonical_security_code(ticker, "HK")
+    if not isinstance(code, str) or not re.fullmatch(r"[0-9]{5}", code) or not isinstance(issuer_name, str):
+        return None
+    name = normalize_identity_text(issuer_name)
+    if not name:
+        return None
+    # The issuer name guards against historic ticker reassignment.
+    return IssuerKey(ISSUER_NAMESPACE_HK_LISTING, f"{code}:{hashlib.sha256(name.encode()).hexdigest()}")
+
+
+def _official_hk_source_issuer(facts: RegisteredIssuerFacts | None) -> IssuerKey | None:
+    if facts is None or facts.market != "HK" or facts.provider != "hkexnews":
+        return None
+    try:
+        location = urlsplit(facts.source_url)
+    except ValueError:
+        return None
+    if location.scheme != "https" or location.hostname not in {"www.hkexnews.hk", "www1.hkexnews.hk"}:
+        return None
+    return _hk_issuer_key(facts.security_id, facts.entity)
+
+
 @dataclass(frozen=True)
 class ResolvedIssuer:
     key: IssuerKey
@@ -618,6 +647,7 @@ class _CanonicalBrowse:
         self._conflicted_documents: list[str] = []
         self._version_issuer_pins: dict[str, dict[str, Any]] = {}
         self._candidate_scan_limited = False
+        self._listing_pairs: tuple[tuple[str, str], ...] | None = None
 
     def run(self, request: dict[str, Any]) -> dict[str, Any]:
         if not isinstance(request, dict) or set(request) != _REQUEST_FIELDS:
@@ -815,7 +845,24 @@ class _CanonicalBrowse:
                            stockwiki=sw_view)
         sw_view["selected_security_id"] = selected.get("security_id")
         sw_view["selected_market"] = selected.get("market")
-        if binding_row.get("source_namespace") not in SUPPORTED_SOURCE_NAMESPACES:
+        native_source = binding_row.get("source_namespace") in SUPPORTED_SOURCE_NAMESPACES
+        if selected.get("market") == "HK" and selected.get("exchange_mic") == "XHKG":
+            # The identity owner has established this listing. The source owner
+            # independently establishes its exact registered HKEX originals.
+            expected = _hk_issuer_key(selected.get("ticker"), payload.get("canonical_name"))
+            if expected is None:
+                return Binding(status="unknown", reason_codes=_reasons("issuer_key_unresolved"), stockwiki=sw_view)
+            self._listing_pairs = self.catalog.browse_verified_source_pairs(
+                limit=_MAX_ASSERTION_SCAN, market="HK", security_id=expected.value.split(":", 1)[0])
+            for _, source_id in sorted(self._listing_pairs):
+                resolution = self._resolve_source_facts(source_id)
+                if isinstance(resolution, tuple) and resolution[0].key == expected:
+                    issuer, pin = resolution
+                    return Binding(status="verified", reason_codes=_reasons("same_issuer_proven"),
+                                   issuer_pin=issuer.pin(), stockwiki=sw_view, resolved_source=pin)
+            return Binding(status="unknown", reason_codes=_reasons("official_listing_source_unverified"),
+                           stockwiki=sw_view)
+        if not native_source:
             return Binding(
                 status="unknown",
                 reason_codes=_reasons(
@@ -879,6 +926,13 @@ class _CanonicalBrowse:
         source_reader = SourceVersionReader(self.catalog)
         try:
             manifest = source_reader.describe_version(ref)
+            if manifest.get("market") == "HK":
+                hk_issuer = _official_hk_source_issuer(facts.issuer_facts)
+                if hk_issuer is None:
+                    return Binding(status="unknown", reason_codes=_reasons("official_listing_source_unverified"),
+                                   resolved_source=cwp_pin)
+                return ResolvedIssuer(hk_issuer, ISSUER_VERIFIER_HK_SOURCE_FACTS,
+                                      assertion_id, source_id, content_sha256), cwp_pin
             if ref.mime_type == "application/pdf" and manifest.get("market") == "CN":
                 from .cn_primary_issuer import (
                     MAX_BYTES as CN_MAX_BYTES, PrimaryIssuerUnavailable,
@@ -985,7 +1039,10 @@ class _CanonicalBrowse:
                            str(binding.issuer_pin["value"])).qualified()
         memo: dict[str, ResolvedIssuer | None] = {}
         by_document: dict[str, set[str]] = {}
-        for document_id, source_id in self.catalog.browse_verified_source_pairs(limit=_MAX_ASSERTION_SCAN):
+        pairs = self._listing_pairs
+        if pairs is None:
+            pairs = self.catalog.browse_verified_source_pairs(limit=_MAX_ASSERTION_SCAN)
+        for document_id, source_id in pairs:
             issuer = self._issuer_for_source(source_id, memo)
             if issuer is None:
                 continue

@@ -22,6 +22,7 @@ from company_wiki.source_contract.source_manifest import SourceManifest
 
 from .models import (
     CatalogBrowseSourceFacts,
+    RegisteredIssuerFacts,
     CatalogBrowseVersion,
     CatalogConfig,
     ProcessingReport,
@@ -652,29 +653,53 @@ class SourceCatalog:
         assertion = get_verified_assertion(self.reader, source_id, content_sha256, reader="steady")
         if assertion is None:
             return CatalogBrowseSourceFacts(content_sha256)
+        ref = SourceRef(
+            document_id=str(assertion["document_id"]),
+            source_id=source_id,
+            content_sha256=content_sha256,
+            byte_size=int(row["byte_size"]),
+            mime_type=str(row["mime_type"]),
+        )
         return CatalogBrowseSourceFacts(
             content_sha256=content_sha256,
-            verified_ref=SourceRef(
-                document_id=str(assertion["document_id"]),
-                source_id=source_id,
-                content_sha256=content_sha256,
-                byte_size=int(row["byte_size"]),
-                mime_type=str(row["mime_type"]),
-            ),
+            verified_ref=ref,
             assertion_id=str(assertion["assertion_id"]),
+            issuer_facts=self._asserted_issuer_facts(ref, assertion) if assertion["market"] == "HK" else None,
         )
 
-    def browse_verified_source_pairs(self, *, limit: int) -> tuple[tuple[str, str], ...]:
-        """List active source-fact (document_id, source_id) pairs for issuer browse."""
+    @staticmethod
+    def _asserted_issuer_facts(ref: SourceRef, assertion: dict[str, Any]) -> RegisteredIssuerFacts | None:
+        from .canonical_scope import source_scope_from_verified_assertion
+
+        try:
+            scope = source_scope_from_verified_assertion(ref, assertion)
+        except (ValueError, SourceReadError):
+            return None
+        if scope is None or scope.authority != "source-facts":
+            return None
+        verified: dict[str, str] = {}
+        for field in ("entity", "market", "security_id", "provider", "source_url"):
+            value = scope.facts.get(field)
+            if not isinstance(value, str) or not value:
+                return None
+            verified[field] = value
+        return RegisteredIssuerFacts(**verified)
+
+    def browse_verified_source_pairs(
+        self, *, limit: int, market: str | None = None, security_id: str | None = None,
+    ) -> tuple[tuple[str, str], ...]:
+        """List candidates; the resolver rechecks each pair's current assertion."""
         _require_browse_limit(limit)
+        scope = "" if market is None else " AND market = ? AND security_id = ?"
+        params = (limit + 1,) if market is None else (market, security_id, limit + 1)
         rows = self.reader.fetchall(
-            """SELECT assertion_id, source_id, document_id,
+            f"""SELECT assertion_id, source_id, document_id,
                       evidence_basis, created_at, supersedes_assertion_id
                FROM source_metadata_assertions
                WHERE decision='verified'
-                 AND visibility_state IN ('legacy','active')
+                 AND visibility_state IN ('legacy','active'){scope}
                ORDER BY created_at, assertion_id LIMIT ?""",
-            (limit + 1,),
+            params,
         )
         if len(rows) > limit:
             raise SourceReadError("unavailable", "issuer_scan_budget_exceeded")

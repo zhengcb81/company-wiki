@@ -1061,6 +1061,46 @@ def test_unsupported_binding_namespace_is_not_converted(workspace):
     assert result["page"]["total_status"] == "unknown"
 
 
+def test_hk_listing_uses_owner_verified_official_originals_across_binding_namespaces(workspace):
+    tmp_path, catalog, config_path = workspace
+    expected = b"%PDF-1.4 Northshore Harbour Holdings annual statement"
+    unrelated = b"%PDF-1.4 Earlier issuer using the same exchange code"
+    misleading = b"%PDF-1.4 Unofficial copy with claimed issuer name"
+    title_only = b"%PDF-1.4 Official identity claimed but only title verified"
+    official_url = "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0626/report.pdf"
+    inputs = [
+        (expected, "Northshore Harbour Holdings Limited", official_url),
+        (unrelated, "Other Harbour Holdings Limited", official_url),
+        (misleading, "Northshore Harbour Holdings Limited", "https://example.org/report.pdf"),
+        (title_only, "Northshore Harbour Holdings Limited", official_url),
+    ]
+    for i, (body, name, submitted_url) in enumerate(inputs):
+        sidecar = {"schema_version": "1.0", "display_name": name, "market": "HK",
+                   "security_id": "07818", "document_kind": "annual_report",
+                   "filing_date": "2025-06-26", "provider": "hkexnews",
+                   "provider_document_id": f"official-fixture-{i}", "source_url": submitted_url}
+        _write_doc(tmp_path / "companies" / "harbour", f"annual_{i}.pdf", body, sidecar)
+    catalog.scan()
+    for body, name, submitted_url in inputs:
+        facts = {"entity": name, "market": "HK", "security_id": "07818",
+                 "provider": "hkexnews", "source_url": submitted_url}
+        if body == title_only:
+            facts = {"title": "Official identity claimed but only title verified"}
+        _record_facts(catalog, body, "application/pdf", facts, {
+            name: {"locator": "registration-record", "value": value, "content_sha256": _sha(body)}
+            for name, value in facts.items()
+        })
+    entity, bindings = _sw_entity(
+        ENT_ACME, "verified", "Northshore Harbour Holdings Limited", "07818",
+        "owner-listing-record-1", "IVR_fixture_acme_1", market="HK", exchange="SEHK", mic="XHKG")
+    sw_root = _build_sw_workspace(tmp_path, [
+        {"kind": "verified_issuer", "entity": entity, "bindings": bindings}])
+    result = _stdout_json(_run_cli(tmp_path, config_path, sw_root, _request(),
+                                   env={"CWP_FIXTURE_NAMESPACE": "reviewed-listing-import/1"}))
+    assert result["binding"]["status"] == "verified", result["binding"]
+    assert [row["source_ref"]["content_sha256"] for row in result["items"]] == [_sha(expected)]
+
+
 def test_analysis_subject_is_unsupported(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])

@@ -154,12 +154,8 @@ class HistoricalCaptureScopes:
         return None
 
 
-def qualified_source_scope(catalog, ref, document, *, historical=None) -> SourceScope:
-    """Only a source-layer verified row or genuine historical commit may qualify scope."""
-    metadata = document.get("metadata") or {}
-    capture = metadata.get("acquisition") if isinstance(metadata, dict) else {}
-    market = capture.get("market") if isinstance(capture, dict) else None
-    prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
+def source_scope_from_verified_assertion(ref, prior, *, market=None) -> SourceScope | None:
+    """Project fields of the active exact assertion, excluding scan metadata."""
     if prior and prior["document_id"] == ref.document_id and prior["evidence_basis"] == "source-facts":
         payload = evidence_payload(prior["evidence_json"], prior["assertion_id"])
         facts, evidence = payload.get("source_fact_patch"), payload.get("source_fact_evidence")
@@ -191,6 +187,18 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
             if not valid:
                 raise SourceReadError("blocked","canonical_capture_binding_conflict")
         return SourceScope(facts, evidence, "source-facts")
+    return None
+
+
+def qualified_source_scope(catalog, ref, document, *, historical=None) -> SourceScope:
+    """Only a source-layer verified row or genuine historical commit may qualify scope."""
+    metadata = document.get("metadata") or {}
+    capture = metadata.get("acquisition") if isinstance(metadata, dict) else {}
+    market = capture.get("market") if isinstance(capture, dict) else None
+    prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
+    observed = source_scope_from_verified_assertion(ref, prior, market=market)
+    if observed is not None:
+        return observed
     if sec_original(ref, market, document.get("document_kind")):
         return SourceScope({}, {}, "primary-original-required")
     if historical is not None:
