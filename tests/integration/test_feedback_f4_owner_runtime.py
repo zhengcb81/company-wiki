@@ -146,3 +146,53 @@ def test_stockwiki_restores_native_assessment_run_references(tmp_path):
     assert len(publication["observation_refs"]) == 3 and publication["provider_calls"] == 0
     assert all(ref["run_id"].startswith("origin-run-") for ref in publication["observation_refs"])
     assert sidecar.read_bytes() == original
+
+
+def test_iqs_publishes_partial_coverage_from_the_original_answers(tmp_path):
+    checkout = checkout_for("IQS")
+    runs = tmp_path / "runs"
+    run = runs / "original"
+    run.mkdir(parents=True)
+    answers = run / "answers.json"
+    shutil.copyfile(checkout / "tests/fixtures/company_coverage/answers-partial-24of38.json", answers)
+    (run / "run-log.json").write_text("[]", encoding="utf-8")
+    (run / "index.html").write_text("<html></html>", encoding="utf-8")
+    original = answers.read_bytes()
+    archived = tmp_path / "archived.json"
+    archived.write_text(json.dumps({"question_count": 24, "scored": 15, "ok": True, "usable": True}),
+                        encoding="utf-8")
+    observations = tmp_path / "observations"
+    observations.mkdir()
+    out = observations / f"feedback-{1:032x}.jsonl"
+    env = {**os.environ, "RESEARCH_FEEDBACK_OUT": str(out), "RESEARCH_FEEDBACK_ATTEMPT_ID": "scan-result-check",
+           "IQS_FEEDBACK_RUNS_ROOT": str(runs)}
+    env.pop("RESEARCH_FEEDBACK_RUN_ID", None)
+    scanned = subprocess.run([*PYTHON, str(checkout / "scripts/scan_result_check.py"), "--run", str(run),
+                              "--previous-check", str(archived)], cwd=checkout, env=env,
+                             capture_output=True, timeout=20, check=False)
+    assert scanned.returncode == 1 and json.loads(scanned.stdout)["coverage"] == "partial"
+    out.with_suffix(".ready").touch()
+
+    command = [*PYTHON, str(checkout / "scripts/iqs_feedback_owner.py"), "--db", str(tmp_path / "iqs.sqlite"),
+               "--runs-root", str(runs)]
+    actions = real_feedback(tmp_path, checkout, "invest-quick-scan", observations, command)
+    saved = json.loads(subprocess.check_output([*command, "get-coverage", actions["repair"][0]],
+                                              cwd=checkout, timeout=25))["coverage"]
+    assert (saved["question_count"], saved["manifest_question_count"], saved["missing_question_count"]) == (24, 38, 14)
+    assert saved["usable"] is False and answers.read_bytes() == original
+
+
+def test_stockqa_recovers_the_settled_attempt_from_native_binding(tmp_path):
+    checkout = checkout_for("QA")
+    case = checkout / "tests/unit/test_quick_scan_feedback_owner.py"
+    fixture = json.loads(subprocess.check_output([*PYTHON, str(case), "--fixture-root", str(tmp_path / "case")],
+                                                cwd=checkout, timeout=45))
+    sidecar = register_sidecar(Path(fixture["sidecar"]))
+    ledger = Path(fixture["ledger"])
+    before = ledger.read_bytes()
+    command = [*PYTHON, "-m", "src.utils.quick_scan_feedback_owner", "--state", fixture["state"]]
+    actions = real_feedback(tmp_path, checkout, "stockqa", sidecar.parent, command)
+    publication = actions["repair"][1]["publication"]
+    assert publication["attempt_id"] == fixture["attempt_id"]
+    assert publication["API_requests"] == publication["new_attempts"] == publication["new_generations"] == 0
+    assert ledger.read_bytes() == before

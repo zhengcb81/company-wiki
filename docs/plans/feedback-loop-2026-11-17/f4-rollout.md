@@ -8,12 +8,15 @@
 |---|---|---|
 | earnings-transcripts | 原始请求与用量收据的只读恢复，验证并回告可核对的旧结果 | `main@61fe94e` 已发布并接本机，744 项及组合通过，独审 7 项通过 |
 | StockInfoDLSimple | 原有供应商候选证据到公告投影，复验证券与材料绑定 | `v2-clean-rewrite@ae94406` 已发布并接本机，147 项、SID→CWP 17 项及总控独立组合通过 |
-| industry-research | 依据原权威结果修复报告覆盖状态，保留原报告 | `878f308` 隔离组合通过。独审复现跨主体、期次和快照的误替换，本仓修复中 |
-| StockWiki | 从本仓已发布评估恢复原 run/scan 投影 | 候选 `a3cd01c`，179 项定向和 392 项日常测试通过，总控组合及本地发布接续 |
-| invest-quick-scan | 从本仓已登记结果及快照的公开入口接续 | 独立 agent 施工 |
-| StockQAbyLLM | 从原付费作业和本仓结果回告接续 | 独立 agent 施工 |
-| investment-dashboard | 从正式公开结果、原发生与 UI 投影接续 | 排队 |
-| company-wiki、filing-fetch、revenue-forecast、revenue-forecast-audit | 沿已验公开入口检查实际生产部署，补只读原状态和安全修复接线 | CWP 统一接收入口和 FF 原回告已接本机，其余运行动作继续核对 |
+| industry-research | 依据原权威结果修复报告覆盖状态，保留原报告 | `main@2aa2eff` 已发布并接本机。独审问题修复后 70 项，ROOT 8 项及 7 子例、组合各通过 |
+| StockWiki | 从本仓已发布评估恢复原 run/scan 投影 | 本地 `master@a3cd01c` 已并线并接本机。179 项定向、392 项日常测试和两次丢回复的宿主组合通过，本仓无远端 |
+| invest-quick-scan | 从本仓已保存答案恢复覆盖率和检查回执 | 原发布线 `codex/iqs-manifest-delivery-01@4a895d3` 已推送并接本机。283 项、真实记录、总控复验通过 |
+| StockQAbyLLM | 从原付费作业和本仓结果回告接续 | 原发布线 `codex/qa-content-filter-resolution-01@79b0800` 已推送并接本机。原尝试、原账本及强退恢复通过 |
+| investment-dashboard | 从正式公开结果、原发生与 UI 投影接续 | 独立 agent 施工 |
+| company-wiki | 统一接收、原作业唤醒、原生消费者验证 | 本机统一入口与原分诊在用，已完成当前总控代码的独审与发布 |
+| filing-fetch | 原生作业接续、用量保真、原回告读回 | 本机原状态和回告已接，独立 agent 补本仓统一对账入口 |
+| revenue-forecast | 按原 attempt 核对来源步骤及费用，读取原回告 | 远端 `main@70165f99` 的本机原状态和回告端口已接。联合复跑和丢回告后查证通过 |
+| revenue-forecast-audit | 按原 capture 核对状态，复验原发现 | 本地 `main@9a38021` 联合复跑通过。独立 agent 补多运行目录的公开原作业接续 |
 | MeetingConverter | 已配置本机宿主，复验已发布的旧译文清单动作 | 保留原接线 |
 
 Dayu 的运行观察继续通过 CWP 的外部 provider 适配器。
@@ -45,3 +48,13 @@ python -B -m tools.feedback_loop.intake --settings SETTINGS --hosts HOSTS drain
 ## 第一批宿主验收
 
 ET、SID 已快进到原发布分支，本机使用这两个正式检出。总控及已配置端口的定向回归执行 47 项，46 项通过，1 项需要已发布 RF 代码而未参与此批。使用 SID 已发布公开入口跑通实际 `intake run`、返回和自动唤醒。接线前后已有动作库仍为 12 条 `done`，字节 SHA 完全一致。验证使用隔离数据和既有留存，没有新增业务供应商请求或模型调用。ET 的该历史补发结果由本仓公开查询读回，FF 对真实历史记录的采用要单独取证。
+
+## 第二批宿主验收
+
+StockWiki 从已发布评估公开读取补发三组原 run/scan 引用。修复及回告先落盘后丢回复，原动作各只登记一次。本机使用本地 `master`。行业研究的自动纠正确认同一查询主体、字段、日期、快照与筛选范围，原 Markdown 字节保留。异源、围栏伪元数据和未证来源保留问题，真实旧格式在有同源上下文时仍可复验。本机端口代码使用 `industry-research` 正式检出，数据根沿本机已配置的行业研究工作区。
+
+RF、FF、Audit 正式版本在隔离环境再次跑通原有来源失败和审查作业恢复。两个原元数据请求来自环回夹具，恢复期间请求、下载、付费均为零。原 RF 只剩 `reconcile`，旧费用继续未知，Audit 正确查回原未确认 capture，新的同案核验与回告各一次。此轮使用离线分诊，真实 Codex 会话见[原验收](f4-rf-audit-acceptance.md)。
+
+IQS 对原快扫纠正的是完整性判断，保留已答 24 题，报告 38 题中有 14 题未覆盖。原检查退出码为 1，反馈仍自动回告。StockQA 从本仓的原尝试绑定找回原冻结账本，补发已结算终态。ROOT 复验通过，修复和回告重复处理各只发生一次。原材料和账本逐字节保留。两仓历史费用按原证据保留，新增请求、尝试和费用均为零。
+
+本机 IQS 和 RF 的代码路径采用各自仓内 `.worktrees/f4-runtime` 中精确发布版。对应业务数据继续从各自批准根读取。IQS 当前原工区正在修改 `task_plan.md` 与其他代码，因此保留其工作区修改；RF 原分叉也保留。两处隔离检出只保留发布脚本，供本机继续运行。StockQA 在自己的既有发布线可快进，使用正式检出。
