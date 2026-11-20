@@ -1,7 +1,7 @@
 """Source-side framing, independent of company names and model output."""
 import pytest
 
-from company_wiki.document_understanding.assertion_frames import source_assertion_frames
+from company_wiki.document_understanding.assertion_frames import ASSERTION_FRAME_PROFILE, source_assertion_frames
 
 
 @pytest.mark.parametrize('source,needle', [
@@ -207,3 +207,37 @@ def test_named_or_independent_project_does_not_supply_completion_condition(condi
 def test_bare_project_completion_cannot_jump_an_independent_clause():
     frames = source_assertion_frames('项目设计产能360吨，公司正在开发渠道，项目建成后将提供保障。')
     assert frames[0].project_condition is None
+
+
+@pytest.mark.parametrize('source,expected', [
+    ('公司根据实际需要完成了库存盘点。', ()),
+    ('团队按照本期业务需要完成分拣安排。', ()),
+    ('公司基于运营需要通过了项目验收。', ()),
+    ('由于采购需要提交了补充表格，仍需要核对批准记录。', ('核对批准记录',)),
+    ('新项目按照地方要求仍需要完成年度复核。', ('完成年度复核',)),
+    ('公司需要完成库存盘点。', ('完成库存盘点',)),
+], ids=['basis', 'manner', 'rationale', 'closed-adjunct', 'clear-modal', 'matrix-predicate'])
+def test_ambiguous_need_in_a_nominal_adjunct_is_distinct_from_a_required_predicate(source, expected):
+    frames = source_assertion_frames(source, profile=ASSERTION_FRAME_PROFILE)
+    assert tuple(frame.pending_requirement for frame in frames if frame.pending_requirement) == expected
+
+
+@pytest.mark.parametrize('source,started,ongoing', [
+    ('如果验收通过，且产线已正式启动，则该订单具备交付条件。', (), ()),
+    ('If qualification is approved, and the facility has started production, then deliveries may begin.', (), ()),
+    ('如果资格获批，产线已正式启动，才可接受新订单。', (), ()),
+    ('If the plant qualifies, even though the operator has already started a pilot, shipments may begin.', (), ()),
+    ('如果货运许可已批，团队正在建设配套网络，则可以接受预售。', (), ()),
+    ('If we receive approval, the supplier is actively expanding its delivery network, then sales may begin.', (), ()),
+    ('公司已启动厂区建设，如果验收通过就会投产。', (0,), ()),
+    ('If approval is granted, and the original store has opened, then sales can begin; the team has started the next pilot.', (3,), ()),
+    ('如果资格获批，且产线已正式启动，则可以交货，不过事实上运营方已经启动了新仓建设。', (3,), ()),
+    ('如果验收完成，且客户事实上已经启动新的生产，则可以投产。', (), ()),
+    ('The facility remains subject to an annual inspection, but the team has started construction.', (1,), ()),
+], ids=['cn-coordination', 'en-coordination', 'cn-implicit-coordination', 'en-concession',
+        'cn-ongoing-premise', 'en-ongoing-premise', 'earlier-matrix', 'sentence-break',
+        'independent-matrix-after-result', 'factual-word-inside-premise', 'matrix-requirement-is-not-a-preposed-condition'])
+def test_conditional_regions_protect_action_status_until_the_independent_statement(source, started, ongoing):
+    frames = source_assertion_frames(source, profile=ASSERTION_FRAME_PROFILE, reporting_period=True)
+    assert tuple(i for i, frame in enumerate(frames) if frame.reported_start) == started
+    assert tuple(i for i, frame in enumerate(frames) if frame.ongoing_activity) == ongoing

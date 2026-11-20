@@ -132,11 +132,13 @@ def prose_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, 
     return [dict(rule_code=code) for code in dict.fromkeys(row['rule_code'] for row in result)]
 
 
-def atomic_prose_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, str]]:
+def atomic_prose_diagnostics(
+    source: str, claim: str, modality: str, *, frame_profile: str = LEGACY_ASSERTION_FRAME_PROFILE,
+) -> list[dict[str, str]]:
     """Additional finite observations; v1 rules above retain their interpretation."""
     result = prose_diagnostics(source, claim, modality)
-    claim_frames = source_assertion_frames(claim)
-    for frame in source_assertion_frames(source):
+    claim_frames = source_assertion_frames(claim, profile=frame_profile)
+    for frame in source_assertion_frames(source, profile=frame_profile):
         matches = [part for part in claim_frames
                    if _same_proposition(frame.matching_text, part.matching_text)]
         if not matches:
@@ -152,24 +154,28 @@ def atomic_prose_diagnostics(source: str, claim: str, modality: str) -> list[dic
     return [dict(rule_code=code) for code in dict.fromkeys(row['rule_code'] for row in result)]
 
 
-def source_frame_modality_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, str]]:
+def source_frame_modality_diagnostics(
+    source: str, claim: str, modality: str, *, frame_profile: str = LEGACY_ASSERTION_FRAME_PROFILE,
+) -> list[dict[str, str]]:
     """Observe source-frame modality not covered by the original lexical rules."""
 
     result: list[dict[str, str]] = []
     if modality not in {'planned', 'forecast', 'uncertain'}:
-        claim_frames = source_assertion_frames(claim)
+        claim_frames = source_assertion_frames(claim, profile=frame_profile)
         if any(frame.future_marker and any(
                 _same_proposition(frame.matching_text, part.matching_text)
                 for part in claim_frames
-        ) for frame in source_assertion_frames(source)):
+        ) for frame in source_assertion_frames(source, profile=frame_profile)):
             result.append({'rule_code': 'possible_modality_mismatch'})
     return [dict(rule_code=code) for code in dict.fromkeys(row['rule_code'] for row in result)]
 
 
-def qualified_prose_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, str]]:
+def qualified_prose_diagnostics(
+    source: str, claim: str, modality: str, *, frame_profile: str = LEGACY_ASSERTION_FRAME_PROFILE,
+) -> list[dict[str, str]]:
     """Observe finite source-frame modality without changing historical rules."""
-    result = atomic_prose_diagnostics(source, claim, modality)
-    result.extend(source_frame_modality_diagnostics(source, claim, modality))
+    result = atomic_prose_diagnostics(source, claim, modality, frame_profile=frame_profile)
+    result.extend(source_frame_modality_diagnostics(source, claim, modality, frame_profile=frame_profile))
     return [dict(rule_code=code) for code in dict.fromkeys(row['rule_code'] for row in result)]
 
 
@@ -269,16 +275,16 @@ def claim_qualifier_diagnostics(
     support_set = set(support)
     cited = support_set | context
     diagnostics: list[dict[str, str]] = []
+    observe_start = assessor_version == ASSERTION_ASSESSMENT_VERSION
+    frame_profile = ASSERTION_FRAME_PROFILE if observe_start else LEGACY_ASSERTION_FRAME_PROFILE
     for sid in support:
         source_text = by_id[sid].raw_text or ''
-        direct = (qualified_prose_diagnostics(source_text, claim, modality)
+        direct = (qualified_prose_diagnostics(source_text, claim, modality, frame_profile=frame_profile)
                   if include_existing_atomic else
-                  source_frame_modality_diagnostics(source_text, claim, modality))
+                  source_frame_modality_diagnostics(source_text, claim, modality, frame_profile=frame_profile))
         diagnostics.extend({'source_span_id': sid, **row}
                            for row in direct)
 
-    observe_start = assessor_version == ASSERTION_ASSESSMENT_VERSION
-    frame_profile = ASSERTION_FRAME_PROFILE if observe_start else LEGACY_ASSERTION_FRAME_PROFILE
     claim_frames = source_assertion_frames(claim, profile=frame_profile)
     if assessor_version == QUALIFIED_ASSESSMENT_VERSION:
         condition_losses = _historical_condition_losses(evidence_spans, support_set, cited, claim_frames)
@@ -322,10 +328,7 @@ def assess_summary_material(
     """Consume the same owned source material from a selection or final bundle."""
     version = assessor_version or ASSESSMENT_VERSION
     identity = assessment_identity(version)
-    if version == ATOMIC_ASSESSMENT_VERSION:
-        diagnostics_for_prose = atomic_prose_diagnostics
-    else:
-        diagnostics_for_prose = prose_diagnostics
+    diagnostics_for_prose = atomic_prose_diagnostics if version == ATOMIC_ASSESSMENT_VERSION else prose_diagnostics
     view=compile_scoped_material_view(evidence_spans,reading_context,max_claims=plan_max_claims)
     admission=view.to_binding()['source_admission']
     admitted=view.admitted_task_keys
