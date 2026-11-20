@@ -48,9 +48,11 @@ def test_missing_path_raises_and_creates_nothing(tmp_path: Path) -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_reads_work_and_writes_fail_closed(tmp_path: Path) -> None:
-    db = tmp_path / "catalog.sqlite3"
+@pytest.mark.parametrize("name", ["catalog.sqlite3", "披露#复核.sqlite3", "source%23evidence.sqlite3"])
+def test_reads_work_and_writes_fail_closed(tmp_path: Path, name: str) -> None:
+    db = tmp_path / name
     _seed_catalog(db)
+    original = db.read_bytes()
     reader = ReadOnlyCatalogReader(db)
     try:
         row = reader.fetchone("SELECT COUNT(*) AS n FROM documents")
@@ -66,6 +68,8 @@ def test_reads_work_and_writes_fail_closed(tmp_path: Path) -> None:
         assert "readonly" in str(excinfo.value).lower()
     finally:
         reader.close()
+    assert db.read_bytes() == original
+    assert {path.name for path in tmp_path.iterdir()} <= {name, f"{name}-wal", f"{name}-shm"}
 
 
 def test_fetchone_none_for_missing_row(tmp_path: Path) -> None:

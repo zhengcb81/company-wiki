@@ -38,7 +38,7 @@ def catalog_size_report(
     database_path = Path(database_path)
     database_bytes = database_path.stat().st_size
 
-    conn = sqlite3.connect(f"file:{database_path}?mode=ro", uri=True)
+    conn = sqlite3.connect(database_path.resolve().as_uri() + "?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     try:
         page_count = int(conn.execute("PRAGMA page_count").fetchone()[0])

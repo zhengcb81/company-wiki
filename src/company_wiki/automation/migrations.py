@@ -465,7 +465,7 @@ def _open_connection(db_path: Path) -> sqlite3.Connection:
 
 
 def _open_readonly_connection(db_path: Path) -> sqlite3.Connection:
-    uri = f"file:{db_path.as_posix()}?mode=ro"
+    uri = db_path.resolve().as_uri() + "?mode=ro"
     connection = sqlite3.connect(
         uri, uri=True, timeout=_CONNECT_TIMEOUT_S, isolation_level=None
     )

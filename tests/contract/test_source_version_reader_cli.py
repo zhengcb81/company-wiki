@@ -324,8 +324,9 @@ response = {
         'provider': 'cninfo',
         'provider_document_id': 'announcement-2025',
         'market': 'CN',
-        'title': 'Acme 2025 annual report',
-        'source_url': 'https://example.test/acme-2025.pdf',
+        'security_id': 'BETA',
+        'title': 'Beta 2025 annual report',
+        'source_url': 'https://example.test/beta-2025.pdf',
         'document_kind': request['document_kind'],
         'form_type': request.get('form_type'),
         'filing_date': '2026-04-15',
@@ -510,7 +511,7 @@ def test_ensure_cli_latest_as_of_projects_gap_without_fetch_or_raw_change(
     assert result["gap_plan"]["missing"] == [{
         "provider": "cninfo",
         "provider_document_id": "announcement-2025",
-        "source_url": "https://example.test/acme-2025.pdf",
+        "source_url": "https://example.test/beta-2025.pdf",
         "filing_date": "2026-04-15",
         "form_type": "annual_report",
         "fiscal_year": 2025,
@@ -525,7 +526,9 @@ def test_ensure_cli_latest_as_of_projects_gap_without_fetch_or_raw_change(
         ).splitlines()
     ]
     assert actions == ["discover"]
-    assert not (tmp_path / "staging").exists()
+    # The configured staging root also hosts bounded adapter scratch.
+    # A discovery call must clean its contents and must never fetch an original.
+    assert not list((tmp_path / "staging").iterdir())
     assert _snapshot(tmp_path / "lake") == raw_before
     assert hashlib.sha256(raw_path.read_bytes()).hexdigest() == raw_sha_before
 
@@ -577,7 +580,7 @@ def test_ensure_cli_latest_as_of_preserves_provider_unavailable_gap(
         ).splitlines()
     ]
     assert actions == ["discover"]
-    assert not (tmp_path / "staging").exists()
+    assert not list((tmp_path / "staging").iterdir())
     assert _snapshot(tmp_path / "lake") == raw_before
     assert hashlib.sha256(raw_path.read_bytes()).hexdigest() == raw_sha_before
 

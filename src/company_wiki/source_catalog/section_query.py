@@ -74,13 +74,11 @@ class SectionQueryService:
     """Read-only access to ``sections`` artifacts (no transaction, no lock)."""
 
     def __init__(self, database_path: Path | str):
-        self._database_path = str(database_path)
+        self._database_path = Path(database_path)
 
     @contextmanager
     def _connection(self) -> Iterator[sqlite3.Connection]:
-        connection = sqlite3.connect(
-            f"file:{self._database_path}?mode=ro", uri=True
-        )
+        connection = sqlite3.connect(self._database_path.resolve().as_uri() + "?mode=ro", uri=True)
         connection.row_factory = sqlite3.Row
         try:
             yield connection

@@ -92,7 +92,7 @@ def exclusive_of_other_roots(
     exclusive-source proof."""
     if not other_root_ids:
         return True
-    con = sqlite3.connect(f"file:{catalog}?mode=ro", uri=True)
+    con = sqlite3.connect(catalog.resolve().as_uri() + "?mode=ro", uri=True)
     try:
         root_ids = ",".join("?" for _ in other_root_ids)
         row = con.execute(

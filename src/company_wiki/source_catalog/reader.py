@@ -179,7 +179,7 @@ class ReadOnlyCatalogReader:
             raise CatalogReaderUnavailable(
                 f"catalog does not exist (not created, not touched): {database_path}"
             )
-        uri = f"file:{database_path.resolve().as_posix()}?mode=ro"
+        uri = database_path.resolve().as_uri() + "?mode=ro"
         try:
             # check_same_thread=False is safe here: mode=ro + query_only mean
             # there is no transaction state to corrupt, and SQLite serializes

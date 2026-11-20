@@ -48,7 +48,7 @@ def _is_pingan_candidate(relative_path: str, group_metadata: Mapping[str, Any]) 
 
 
 def _catalog_counts(db: Path) -> tuple[int, int, int] | None:
-    con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    con = sqlite3.connect(db.resolve().as_uri() + "?mode=ro", uri=True)
     try:
         counts = tuple(
             con.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
@@ -74,7 +74,7 @@ def _duplicate_sets(
     }
     if not hashes or not other_root_ids:
         return {"count": 0, "samples": []}
-    con = sqlite3.connect(f"file:{catalog}?mode=ro", uri=True)
+    con = sqlite3.connect(catalog.resolve().as_uri() + "?mode=ro", uri=True)
     try:
         placeholders = ",".join("?" for _ in hashes)
         root_ids = ",".join("?" for _ in other_root_ids)
