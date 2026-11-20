@@ -50,7 +50,7 @@
     },
     {
       "id": "P3",
-      "status": "W12_CURRENT_H1_SUMMARY_CACHE_AND_FIRST_RF_ADOPTION_VERIFIED",
+      "status": "W12_FORMAL_EXECUTION_AND_FOUR_REVIEWS_DONE_NEEDS_REMEDIATION",
       "task": "W12 company rerun, new-company generalization, fixed 8-company full audit/skill improvement and final clean streak"
     }
   ],
@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M3_CLOSED; F3_SCOPED_REAL_TRIAL_AND_SAVED_REPAIR_ACCEPTED; P3_OPEN",
   "as_of_date": "2026-11-20",
-  "observed_at_utc": "2026-11-20T11:07:34Z",
+  "observed_at_utc": "2026-11-20T11:39:04Z",
   "cwp_saved_response_repair": {
     "evidence": "../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md",
     "assessor_version": "source-summary-assessment/1.4.0",
@@ -174,9 +174,9 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Complete the four W12 independent reviews now reading the frozen package, assign shared root causes to their owners, and use saved evidence to test the two CWP assertion issues without resending the paid request.",
+  "next_action": "Use the four W12 independent reports to map shared root causes, then implement and replay owner-scoped W12 remedies. Start with the analyst calibration P1 and validate CWP claim semantics and paid recovery from saved evidence.",
   "w12_attempt": {
-    "status": "formal_execution_frozen_independent_reviews_in_progress",
+    "status": "four_reviews_received_root_cause_mapping_underway",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
     "run_id": "w12-20261120-cn-603259",
     "attempt_id": "w12-a01",
@@ -204,6 +204,16 @@
     "rf_owner_job_id": "rfjob-20261120-594c00a589d1",
     "rf_snapshot_id": "a869880c34461d6a6982f1aa2427b11dfeacf5a456aeaa14bc086dd7a28a721b",
     "execution_manifest_sha256": "648466cea7b0accf8bcbf81c621982e3bb57589738841422c3b8ff897d1076f2",
+    "independent_reviews": {
+      "storage": "delivered",
+      "fetch": "delivered",
+      "process": "delivered",
+      "analyst": "delivered",
+      "check_total": 73,
+      "issue_total": 22,
+      "severity": {"P1": 1, "P2": 16, "P3": 5},
+      "audit_check": "needs_remediation"
+    },
     "paired_public_reconciliation": "real RF job succeeded with known costs and its Audit capture succeeded with unknown wrapper costs; zero new business requests",
     "recorded_gate_review": {
       "operation_event_id": "17488eb0361100caea1754b75567ba00",
