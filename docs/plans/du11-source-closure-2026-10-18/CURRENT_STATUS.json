@@ -222,7 +222,9 @@
     "f4_receipt": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "f4_rf_audit_acceptance": "../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md",
     "f2_roadmap": "../feedback-loop-2026-11-17/f2-roadmap.md",
-    "production_owner_rollout": "remaining_owner_routes_open",
+    "production_owner_rollout": "in_progress",
+    "f4_rollout": "../feedback-loop-2026-11-17/f4-rollout.md",
+    "f4_locally_configured_native_closure": ["meeting-converter", "earnings-transcripts", "stockinfo-dl-simple"],
     "host_prelaunch_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "host_owner_report_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "company_pool": "paused"

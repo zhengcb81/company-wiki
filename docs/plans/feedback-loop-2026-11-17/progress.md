@@ -1,6 +1,6 @@
 # 进度与恢复入口
 
-2026-11-19。F4 的两条真实宿主闭环及 FF 短请求、MC 转录反馈组合已验收。四张在途接续卡走各自现有 harness。分仓施工、真实收据和发布状态由此页维护。
+2026-11-20。F4 在此前 CWP/FF、RF/Audit 和 MC 验收基础上开始分仓部署。ET 和 SID 新端口已发布并接入本机。其他进度按[分仓上线表](f4-rollout.md)核对。
 
 | 节点 | 状态 | 证据或下一步 |
 |---|---|---|
@@ -10,7 +10,7 @@
 | F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
 | F3b | 两份正式摘要、恢复和两条 RF 采用通过独审 | [实际组合与适用范围](f3b-live-acceptance.md) · [草稿与精选余项](issues/cwp-draft-scope-and-focus.md) |
 | F3c | 已修正草稿范围与自动精选，保存响应及五份真实样本复验通过 | [真实回放、原始定位与保留对照](f3c-saved-response-acceptance.md) |
-| F4 | CWP/FF 与 RF/Audit 闭环、FF 短请求和 MC 发布清单闭环通过独审，按正式交接验收其余 owner | [FF 与 MC 组合](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md) |
+| F4 | 已验 CWP/FF 与 RF/Audit 的受控闭环，MC、ET、SID 已有本机运行端口。其余分仓上线和实际恢复在推进。 | [分仓上线](f4-rollout.md) · [FF 与 MC 组合](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md) |
 
 ### F0 发布与独立验收
 

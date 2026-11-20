@@ -102,6 +102,7 @@ class LocalHost:
         settings = json.loads(self.config.read_bytes(), object_pairs_hook=unique_fields)
         self.db = self.config.parent / settings["state"]
         self.owners = settings["owners"]
+        self.intake_hosts = settings.get("intake_hosts")
         with closing(self._connect()) as conn:
             conn.execute(_SCHEMA)
 
@@ -441,8 +442,16 @@ class LocalHost:
         if row is None or row["state"] != "queued":
             return
         self._execute(row, json.loads(row["route"]), json.loads(row["request"]))
-        if self._get(key)["state"] not in ("queued", "running"):
+        state = self._get(key)["state"]
+        if state not in ("queued", "running"):
             self._recover_queued(row["workspace"])
+        if state == "done" and isinstance(self.intake_hosts, str) and self.intake_hosts:
+            # Feedback can outlive the caller's finite wait. Referrals and replay
+            # can span owners, so revisit the configured inboxes on completion.
+            from .intake import wake
+
+            with suppress(OSError):
+                wake(self.config, self.config.parent / self.intake_hosts)
 
     def _execute(self, row, route, request):
         key = row["action_id"]
