@@ -174,7 +174,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Implement the six mapped W12 owner packages. Start with independently grounded RF revenue magnitudes and shared timing stress. Independently accept the CWP assertion and paid recovery and Audit evidence projection remedies before a new W12 attempt.",
+  "next_action": "Require the RF shared stress exposure to be an additive unrecognized amount from its own business and complete the revenue-magnitude research. Revalidate the new CWP summary response, cache recovery and actual RF adoption in a new W12 attempt at the original cutoff.",
   "w12_attempt": {
     "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
@@ -197,7 +197,31 @@
       "selection_status": "partial",
       "summary_quality": "needs_review"
     },
-    "audit_local_main_and_skill_copies": "87849d893677376eb9c65ab2ce8ab850b61d6164",
+    "audit_local_main_and_skill_copies": "71381b505d5f5a81e3cf6b50fdf627a464792a52",
+    "audit_current_local_head": "3e6ae150da25c48f3f070e0336a41884b200d01b",
+    "owner_remediation": {
+      "rf_shared_stress": {
+        "candidate": "b0461a02635649e4903c5734ffbd48149f87bb9d",
+        "tested": 99,
+        "status": "native_replay_passed_independent_mixed_actual_and_cross_business_exposure_red",
+        "future_magnitude": "independent_research_received_not_settled"
+      },
+      "audit_w03": "independently_accepted_local_fast_forward_both_skill_copies_match",
+      "cwp_w04": {
+        "candidate": "3152daf5189a5d5a2d816ee96fa3676964a9f0c5",
+        "status": "independently_accepted_source_changes_real_v8_response_and_rf_adoption_open"
+      },
+      "cwp_w05": {
+        "sqlite_read_path": "8a232ed92a7ccf751ce2e3161bd4c95b0823d4dc",
+        "status": "independently_reproduced_and_verified_literal_path_preserves_read_only"
+      },
+      "ff_w06": {
+        "fixture_candidate": "2a603f098deff5c52eae4fbfff088377dd20c9af",
+        "published_head": "17e83b09c862f2d73a9a3117a5b55dec521bfa67",
+        "status": "independently_accepted_and_published_fixture_alignment",
+        "actual_q2_transcript": "exact_local_companion_missing"
+      }
+    },
     "cwp_feedback_git": "68a7db0d0482c4da24d00be4afceab861c96eb0b",
     "cwp_feedback_github_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/44720012039",
     "rf_adoption": "t13-1 bound to tides_base_h2_2026 and 2026 direct_growth, 124 parameter values unchanged",
