@@ -14,7 +14,7 @@ CWP `ccc09205` 的组合测试 171 项通过，远端 CI 发现测试观察器�
 
 RF W01、W02 最终版 `cbb523a` 已通过独审和精确 CI，远端主线快进。同行材料可作反证，发行人的沟通范围按自身核对。真实部分覆盖仍能保存，旧报告原字节和金额可读回。CWP 失败反馈修复 `5fdd29c` 已推送，精确 CI 成功。 [RF 接收](review/w12-wuxi-resume-20261120/README.md#w02-新发现同行财报日期影响本公司覆盖) · [RF CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/44750115722) · [CWP CI](https://github.com/zhengcb81/company-wiki/actions/runs/44748755201)
 
-药明 1C 已核六份原件，并通过公开链路取得客户 Akebia 的 10-Q。首次下载 1 份，随后零重复下载。其单合同采购承诺可作反证和量级约束，远期分部收入、实际确认期仍待证。 [研究与来源](review/w12-wuxi-resume-20261120/README.md#w01-研究量级复核)
+药明 1C 已核六份原件，并通过公开链路取得客户 Akebia 的 10-Q。首次下载 1 份，随后零重复下载。该合同与两份同行原件已在发布版 RF 的草案里实际完成反证对照。远期分部收入和实际确认期仍待证。Audit 本仓计划与总控状态已对齐。 [研究与来源](review/w12-wuxi-resume-20261120/README.md#w01-研究量级复核)
 
 ## 2026-11-20 反馈工程进展
 

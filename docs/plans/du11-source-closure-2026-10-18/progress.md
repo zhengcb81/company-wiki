@@ -637,3 +637,4 @@ CWP 源码与测试 `12e65fe7d` 已推送。浏览请求状态隔离、目录负
 - 同一半年报正式发送一次，MiMo 超时后同一作业零重发。独审对账确认原件、历史缓存及真实请求，累计保留一笔新未知。原生失败直接投影给 F4 的改动已用保存的实际结果复验，原账和原输出不改。正式摘要、真实缓存与 RF 采用仍待证。 [原作业收据](review/w12-wuxi-resume-20261120/README.md#w04-正式请求与原作业查证)
 - W01 原生试算独审通过。等价式窄补修进入 RF 候选，同行日期修订的真实输入转绿，余下的共享依赖与管理沟通边界由 RF 本仓处理。新 1C 研究已读回六份 CWP 原件，补齐原始量纲、交付及外部反证，远期独立金额仍留待证。 [接续证据](review/w12-wuxi-resume-20261120/README.md#w01-研究量级复核)
 - RF W01、W02 的组合修复 `cbb523a` 独审通过并推远端主线。CWP `5fdd29c` 已推并通过精确 CI。新增客户 10-Q 的实际采集和原件复用收据已留，正式采用仍留到下一轮。 [CWP CI](https://github.com/zhengcb81/company-wiki/actions/runs/44748755201) · [W12 汇总](review/w12-wuxi-resume-20261120/README.md)
+- 1C 用新客户原件和两份同行在发布 RF 上完成可消费对照，原预测未变。临时身份文件已回收。Audit 计划 `df7b0e1` 已提交，RF 本仓计划 `7d682a6` 已推送且 CI 通过。 [RF 计划 CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/44750770738)

@@ -198,7 +198,8 @@
       "summary_quality": "needs_review"
     },
     "audit_local_main_and_skill_copies": "71381b505d5f5a81e3cf6b50fdf627a464792a52",
-    "audit_current_local_head": "3e6ae150da25c48f3f070e0336a41884b200d01b",
+    "audit_current_local_head": "df7b0e135365c50d8b9e0d030602a39d0caa79be",
+    "audit_current_head_scope": "planning_only_installed_runtime_remains_71381b5",
     "owner_remediation": {
       "rf_shared_stress": {
         "candidate": "c03b9e470ad6053d1de00dfaf9db0e0380904a5a",
@@ -228,6 +229,8 @@
         "independent_receipt_sha256": "dc00bf099a60dffebb34dd709d230b8019d485a1ce33fa5039ddc2bf7f40d5f3",
         "github_ci": "https://github.com/zhengcb81/revenue-forecast/actions/runs/44750115722",
         "github_ci_conclusion": "success",
+        "owner_planning_head": "7d682a6a7739542d51205e3b518c136f48caf727",
+        "owner_planning_ci": "https://github.com/zhengcb81/revenue-forecast/actions/runs/44750770738",
         "status": "independent_scope_interval_lineage_and_archived_report_passed_and_published"
       },
       "audit_w03": "independently_accepted_local_fast_forward_both_skill_copies_match",
@@ -327,7 +330,9 @@
       "download_events": 1,
       "reuse_download_events": 0,
       "acquisition_reported_cost_usd": null,
-      "status": "verified_registered_counterparty_original_no_assigned_issuer_revenue"
+      "rf_native_overlay_sha256": "48580b24d8d8389dda2139695fa766f6a91294ef2112c2b356e85bd61d11ed25",
+      "rf_native_validation_sha256": "40248d7993958d0b3aa9ed6d051f46db89b79f58041a6f46da3046153989ea6c",
+      "status": "registered_counterparty_original_consumed_for_native_draft_comparison_future_magnitude_open"
     },
     "paired_public_reconciliation": "real RF job succeeded with known costs and its Audit capture succeeded with unknown wrapper costs; zero new business requests",
     "recorded_gate_review": {
