@@ -16,7 +16,8 @@ zero-write read model:
   authority;
 - CWP issuer attribution uses hash-bound verified source facts. US sources
   use the existing ``sec-primary-dei/1`` verifier and cache-only security
-  master. The D00 E13 integration addendum also authorizes one narrow CN
+  master. Incomplete cached SEC facts can be verified on the exact local
+  HTML using the same source read budget. The D00 E13 addendum also defines a CN
   route: an exact, already-indexed PDF SourceRef may be read locally and
   parsed by ``cn-primary-uscc/1`` after source facts and official cache checks
   (per-file PDF/page/text limits). Aggregate original-byte reads share the
@@ -25,8 +26,9 @@ zero-write read model:
   write catalog state. Every returned item still requires its own exact issuer
   proof;
 - StockWiki source bindings in ``cwp_source_export_v2`` resolve natively by
-  exact source URN. HKEX listings may combine verified owner identity with
-  active CWP source facts tied to a specific official filing version. A
+  exact source URN. HKEX listings use the verified listing and official
+  original facts. US listings can use the verified issuer receipt's SEC
+  evidence and CWP's matching primary CIK on the exact original. A
   workflow's binding namespace describes provenance; it is not the document's
   identity. Unsupported listings without an independently resolved source
   remain unknown;
@@ -44,8 +46,8 @@ zero-write read model:
   partitioned by listing, and analysis subjects are unsupported unless a
   separate owner proof exists;
 - read-only throughout: no download, refresh, OCR, model call, registration
-  or backfill. The explicitly scoped CN path reads only the exact local
-  SourceRef under its byte/page/text limits. No physical path, root or catalog
+  or backfill. Original verification reads exact local versions under the
+  common request budget and format-specific limits. No physical path, root or catalog
   layout detail is emitted.
 """
 
@@ -65,7 +67,7 @@ from typing import Any, Protocol
 from urllib.parse import urlsplit
 
 from ..source_contract.source_version import SourceReadError
-from .assertion_service import source_scope_qualification
+from .assertion_service import sec_archive_cik, source_scope_qualification
 from .document_browse_projection import (
     document_version_id,
     version_item,
@@ -522,6 +524,24 @@ def _hk_issuer_key(ticker: Any, issuer_name: Any) -> IssuerKey | None:
     return IssuerKey(ISSUER_NAMESPACE_HK_LISTING, f"{code}:{hashlib.sha256(name.encode()).hexdigest()}")
 
 
+def _sec_receipt_issuer(receipt: dict[str, Any], listing: dict[str, Any]) -> IssuerKey | None:
+    listing_ids = receipt.get("listing_ids")
+    security_ids = receipt.get("security_ids")
+    if (
+        receipt.get("same_legal_issuer") is not True
+        or not isinstance(listing_ids, list)
+        or listing.get("listing_id") not in listing_ids
+        or not isinstance(security_ids, list)
+        or listing.get("security_id") not in security_ids
+    ):
+        return None
+    try:
+        cik = sec_archive_cik(receipt.get("evidence_ref"))
+    except ValueError:
+        return None
+    return IssuerKey(ISSUER_NAMESPACE_SEC_CIK, cik) if cik else None
+
+
 def _official_hk_source_issuer(facts: RegisteredIssuerFacts | None) -> IssuerKey | None:
     if facts is None or facts.market != "HK" or facts.provider != "hkexnews":
         return None
@@ -640,10 +660,11 @@ class _CanonicalBrowse:
     def __init__(self, catalog: SourceCatalog, proof_client: _IssuerProofReader | None):
         self.catalog = catalog
         self.proof_client = proof_client
-        self._cn_verified: dict[str, tuple[ResolvedIssuer, dict[str, Any]]] = {}
+        self._original_verified: dict[str, tuple[ResolvedIssuer, dict[str, Any]]] = {}
         self._cn_target_security: str | None = None
-        self._cn_read_budget = ReadBudget()
-        self._cn_budget_exhausted = False
+        self._sec_target_cik: str | None = None
+        self._original_read_budget = ReadBudget()
+        self._proof_budget_failure: str | None = None
         self._conflicted_documents: list[str] = []
         self._version_issuer_pins: dict[str, dict[str, Any]] = {}
         self._candidate_scan_limited = False
@@ -863,6 +884,11 @@ class _CanonicalBrowse:
             return Binding(status="unknown", reason_codes=_reasons("official_listing_source_unverified"),
                            stockwiki=sw_view)
         if not native_source:
+            if selected.get("market") == "US":
+                expected = _sec_receipt_issuer(verified_receipt, selected)
+                ticker = canonical_security_code(selected.get("ticker"), "US")
+                if expected is not None and ticker is not None:
+                    return self._resolve_sec_listing(expected, ticker, sw_view)
             return Binding(
                 status="unknown",
                 reason_codes=_reasons(
@@ -877,7 +903,7 @@ class _CanonicalBrowse:
                 reason_codes=_reasons("unsupported_source_record_urn"),
                 stockwiki=sw_view,
             )
-        resolution = self._resolve_source_facts(record)
+        resolution = self._resolve_source_facts(record, issuer_anchor=True)
         if isinstance(resolution, Binding):
             return Binding(
                 status=resolution.status,
@@ -894,7 +920,31 @@ class _CanonicalBrowse:
             resolved_source=cwp_pin,
         )
 
-    def _resolve_source_facts(self, source_id: str) -> tuple[ResolvedIssuer, dict] \
+    def _resolve_sec_listing(self, expected: IssuerKey, ticker: str, sw_view: dict[str, Any]) -> Binding:
+        self._sec_target_cik = expected.value
+        pairs = self.catalog.browse_verified_source_pairs(
+            limit=_MAX_ASSERTION_SCAN, market="US", security_id=ticker)
+        conflicting = False
+        for _, source_id in sorted(pairs):
+            resolution = self._resolve_source_facts(source_id)
+            if isinstance(resolution, tuple):
+                issuer, pin = resolution
+                if issuer.key == expected:
+                    return Binding(status="verified", reason_codes=_reasons("same_issuer_proven"),
+                                   issuer_pin=issuer.pin(), stockwiki=sw_view, resolved_source=pin)
+                conflicting = True
+            elif resolution.status == "conflict":
+                conflicting = True
+            if self._proof_budget_failure is not None:
+                return Binding(status="unavailable", reason_codes=_reasons(self._proof_budget_failure),
+                               stockwiki=sw_view)
+        if conflicting:
+            return Binding(status="conflict", reason_codes=_reasons("sec_issuer_receipt_conflict"),
+                           stockwiki=sw_view)
+        return Binding(status="unknown", reason_codes=_reasons("official_sec_original_unverified"),
+                       stockwiki=sw_view)
+
+    def _resolve_source_facts(self, source_id: str, *, issuer_anchor: bool = False) -> tuple[ResolvedIssuer, dict] \
             | Binding:
         """Resolve one CWP source URN to its proven issuer key.
 
@@ -906,6 +956,9 @@ class _CanonicalBrowse:
         """
         from .source_reader import SourceVersionReader
 
+        cached = self._original_verified.get(source_id)
+        if cached is not None:
+            return cached
         facts = self.catalog.browse_source_facts(source_id)
         if facts is None:
             return Binding(status="unknown",
@@ -924,6 +977,7 @@ class _CanonicalBrowse:
             "assertion_id": assertion_id,
         }
         source_reader = SourceVersionReader(self.catalog)
+        original_verifier = "cn"
         try:
             manifest = source_reader.describe_version(ref)
             if manifest.get("market") == "HK":
@@ -956,12 +1010,9 @@ class _CanonicalBrowse:
                 if target is not None and manifest.get("security_id") != target:
                     return Binding(status="unknown", reason_codes=_reasons("cn_unrelated_security_hint"),
                                    resolved_source=cwp_pin)
-                cached = self._cn_verified.get(source_id)
-                if cached is not None:
-                    return cached
                 try:
                     opened, metadata = source_reader.open_described_version(
-                        ref, purpose="source_export", budget=self._cn_read_budget,
+                        ref, purpose="source_export", budget=self._original_read_budget,
                     )
                     proof = extract_cn_issuer(self.catalog, ref, pages=pdf_text_pages(opened.data), metadata=metadata)
                 except PrimaryIssuerUnavailable as exc:
@@ -970,16 +1021,37 @@ class _CanonicalBrowse:
                                         verifier=ISSUER_VERIFIER_CN_PRIMARY,
                                         assertion_id=assertion_id,
                                         source_id=source_id, content_sha256=content_sha256)
-                self._cn_verified[source_id] = (issuer, cwp_pin)
+                self._original_verified[source_id] = (issuer, cwp_pin)
                 self._cn_target_security = proof["security"]["security_id"]
                 return issuer, cwp_pin
-            qualification = source_scope_qualification(self.catalog, ref, metadata=manifest)
+            original_verifier = "sec"
+            qualification = source_scope_qualification(self.catalog, ref, metadata=manifest, issuer_only=True)
+            if qualification is None:
+                return Binding(status="unknown",
+                               reason_codes=_reasons("issuer_namespace_unsupported_for_document"),
+                               resolved_source=cwp_pin)
+            cik = qualification.identity.identifiers.get("cik")
+            if not isinstance(cik, str) or not cik.isdigit():
+                return Binding(status="unknown", reason_codes=_reasons("issuer_key_unresolved"),
+                               resolved_source=cwp_pin)
+            cik = str(int(cik))
+            if qualification.needs_original:
+                if facts.evidence_basis != "source-facts":
+                    return Binding(status="unknown", reason_codes=_reasons("resolved_source_unverified_facts"),
+                                   resolved_source=cwp_pin)
+                if not issuer_anchor and cik != self._sec_target_cik:
+                    return Binding(status="unknown", reason_codes=_reasons("sec_unrelated_issuer_hint"),
+                                   resolved_source=cwp_pin)
+                opened, _ = source_reader.open_described_version(
+                    ref, purpose="source_export", budget=self._original_read_budget,
+                )
+                qualification.verify_primary_scope(opened.data, budget=self._original_read_budget)
         except SourceReadError as exc:
             if exc.reason == "budget_exceeded":
-                self._cn_budget_exhausted = True
+                self._proof_budget_failure = f"{original_verifier}_primary_proof_budget_exceeded"
                 return Binding(
                     status="unavailable",
-                    reason_codes=_reasons("cn_primary_proof_budget_exceeded"),
+                    reason_codes=_reasons(self._proof_budget_failure),
                     resolved_source=cwp_pin,
                 )
             status = "conflict" if exc.reason == "primary_issuer_conflict" \
@@ -989,29 +1061,14 @@ class _CanonicalBrowse:
                 reason_codes=_reasons(f"source_facts_{exc.status}", exc.reason),
                 resolved_source=cwp_pin,
             )
-        if qualification is None:
-            return Binding(
-                status="unknown",
-                reason_codes=_reasons("issuer_namespace_unsupported_for_document"),
-                resolved_source=cwp_pin,
-            )
-        if qualification.needs_original:
-            return Binding(
-                status="unknown",
-                reason_codes=_reasons("issuer_proof_requires_original_read"),
-                resolved_source=cwp_pin,
-            )
-        cik = qualification.identity.identifiers.get("cik")
-        if not isinstance(cik, str) or not cik.isdigit():
-            return Binding(status="unknown",
-                           reason_codes=_reasons("issuer_key_unresolved"),
-                           resolved_source=cwp_pin)
         issuer = ResolvedIssuer(
-            key=IssuerKey(ISSUER_NAMESPACE_SEC_CIK, str(int(cik))),
+            key=IssuerKey(ISSUER_NAMESPACE_SEC_CIK, cik),
             verifier=ISSUER_VERIFIER_SEC_DEI,
             assertion_id=assertion_id,
             source_id=source_id, content_sha256=content_sha256,
         )
+        if qualification.needs_original:
+            self._original_verified[source_id] = (issuer, cwp_pin)
         return issuer, cwp_pin
 
     # -- proven document set ------------------------------------------------------
@@ -1035,6 +1092,8 @@ class _CanonicalBrowse:
         assert binding.issuer_pin is not None  # verified binding precondition
         if binding.issuer_pin["namespace"] != ISSUER_NAMESPACE_CN_USCC:
             self._cn_target_security = "cn_not_requested"
+        if binding.issuer_pin["namespace"] == ISSUER_NAMESPACE_SEC_CIK:
+            self._sec_target_cik = str(binding.issuer_pin["value"])
         wanted = IssuerKey(str(binding.issuer_pin["namespace"]),
                            str(binding.issuer_pin["value"])).qualified()
         memo: dict[str, ResolvedIssuer | None] = {}
@@ -1047,8 +1106,8 @@ class _CanonicalBrowse:
             if issuer is None:
                 continue
             by_document.setdefault(document_id, set()).add(issuer.key.qualified())
-        if self._cn_budget_exhausted:
-            raise SourceReadError("unavailable", "cn_primary_proof_budget_exceeded")
+        if self._proof_budget_failure is not None:
+            raise SourceReadError("unavailable", self._proof_budget_failure)
         versions: list[CatalogBrowseVersion] = []
         scanned_rows = 0
         for document_id, keys in sorted(by_document.items()):
@@ -1073,8 +1132,8 @@ class _CanonicalBrowse:
                     versions.append(version)
                     self._version_issuer_pins[str(version.source_id)] = \
                         version_issuer.pin()
-        if self._cn_budget_exhausted:
-            raise SourceReadError("unavailable", "cn_primary_proof_budget_exceeded")
+        if self._proof_budget_failure is not None:
+            raise SourceReadError("unavailable", self._proof_budget_failure)
         versions.sort(key=version_sort_key)
         return versions
 

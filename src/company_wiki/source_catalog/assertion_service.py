@@ -184,15 +184,19 @@ class SourceScopeQualification:
             budget.check()
         return primary
 
-    def verify(self, data, *, budget=None):
-        from .dayu_fiscal_metadata import complete_sec_primary, FiscalMetadataError
-
+    def verify_primary_scope(self, data, *, budget=None):
+        """Verify issuer, form and fiscal scope from primary DEI."""
         primary = self.scope(data, budget=budget)
         if (any(value is not None and value != primary.get(key)
                 for key, value in self.expected.items() if key != "period_end")
                 or (self.document_kind == "annual_report"
                     and primary["form_type"].removesuffix("/A") not in {"10-K", "20-F"})):
             raise SourceReadError("blocked", "primary_scope_conflict")
+        return primary
+
+    def verify(self, data, *, budget=None):
+        from .dayu_fiscal_metadata import complete_sec_primary, FiscalMetadataError
+        primary = self.verify_primary_scope(data, budget=budget)
         if self.primary is None:
             try:
                 primary = complete_sec_primary(primary)
@@ -203,6 +207,18 @@ class SourceScopeQualification:
         if budget is not None and callable(getattr(budget, "check", None)):
             budget.check()
         return primary
+
+
+def sec_archive_cik(value: object) -> str | None:
+    """Return the CIK from a registered official SEC archive address."""
+    if not isinstance(value, str):
+        return None
+    parsed = urlsplit(value)
+    if (parsed.scheme != "https" or parsed.hostname not in {"www.sec.gov", "sec.gov"}
+            or parsed.username or parsed.password or parsed.port not in {None, 443}):
+        return None
+    match = re.fullmatch(r"/Archives/edgar/data/([0-9]+)/.+", parsed.path)
+    return str(int(match[1])) if match else None
 
 
 def _registered_sec_cik(metadata):
@@ -222,19 +238,12 @@ def _registered_sec_cik(metadata):
                 raise SourceReadError("blocked", "primary_identity_unresolved")
             ciks.add(str(int(value)))
     for field in ("source_url", "https_url"):
-        value = metadata.get(field)
-        if not isinstance(value, str):
-            continue
         try:
-            parsed = urlsplit(value)
-            official_archive = (parsed.scheme == "https" and parsed.hostname in {"www.sec.gov", "sec.gov"}
-                and not parsed.username and not parsed.password and parsed.port in {None, 443})
+            cik = sec_archive_cik(metadata.get(field))
         except ValueError as exc:
             raise SourceReadError("blocked", "primary_identity_unresolved") from exc
-        if official_archive:
-            match = re.fullmatch(r"/Archives/edgar/data/([0-9]+)/.+", parsed.path)
-            if match:
-                ciks.add(str(int(match[1])))
+        if cik is not None:
+            ciks.add(cik)
     if len(ciks) > 1:
         raise SourceReadError("blocked", "primary_issuer_conflict")
     return next(iter(ciks), None)
@@ -297,13 +306,16 @@ def observed_sec_scope_fields(ref, patch, proof):
     return observed
 
 
-def source_scope_qualification(catalog, ref, *, metadata, request=None, identity=None, identity_cache_dir=None):
+def source_scope_qualification(
+    catalog, ref, *, metadata, request=None, identity=None, identity_cache_dir=None, issuer_only: bool = False,
+):
     """Build one SourceRecord scope observation, with no original read/write.
 
     Request matching remains the resolver's responsibility. This owner compares
     registered issuer provenance and declared scope with original DEI. Existing
     complete proof uses SHA alone; incomplete proof uses the same verified buffer.
-    Generic raw export/preview chooses its byte-only read purpose.
+    Issuer browse can reuse the established DEI identity of a filing whose
+    recorded period date is incomplete.
     """
     from types import SimpleNamespace
 
@@ -326,7 +338,8 @@ def source_scope_qualification(catalog, ref, *, metadata, request=None, identity
     proof = previous.get("source_fact_evidence") or {}
     registered_cik = _registered_sec_cik(metadata)
     if identity is None:
-        identity = proved_sec_issuer(ref, metadata, patch, proof)
+        identity_proof = proved_sec_identity if issuer_only else proved_sec_issuer
+        identity = identity_proof(ref, metadata, patch, proof)
     if identity is None:
         # URL CIK describes where the bytes came from; it does not prove that
         # the imported company labels belong to that CIK. Observe the existing

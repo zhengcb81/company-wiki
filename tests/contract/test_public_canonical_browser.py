@@ -434,7 +434,7 @@ def _provisional_receipt(entity, qss):
     }
 
 
-def _verified_receipt(entity, qss):
+def _verified_receipt(entity, qss, evidence_ref=None):
     securities = entity["securities"]
     listings = [_listing(security, entity["entity_id"])
                 for security in securities]
@@ -449,7 +449,7 @@ def _verified_receipt(entity, qss):
         "listing_ids": [listing["listing_id"] for listing in listings],
         "incorporation_country": entity["incorporation_country"],
         "canonical_name": entity["canonical_name"],
-        "evidence_ref": "https://example.invalid/issuer-evidence",
+        "evidence_ref": evidence_ref or "https://example.invalid/issuer-evidence",
         "security_attributes": {
             s["security_id"]: {
                 "security_type": s.get("security_type"),
@@ -496,7 +496,7 @@ def cmd_setup(root, spec_path):
             entity["identity_revision"] += 1
         qss.save_entity(entity, source_bindings=bindings)
         if scenario.get("kind") == "verified_issuer":
-            receipt = _verified_receipt(entity, qss)
+            receipt = _verified_receipt(entity, qss, scenario.get("verified_evidence_ref"))
             receipts.record_receipt(receipt, identity_store=qss)
             if scenario.get("revoke"):
                 receipts.revoke(receipt["receipt_id"],
@@ -1061,6 +1061,88 @@ def test_unsupported_binding_namespace_is_not_converted(workspace):
     assert result["page"]["total_status"] == "unknown"
 
 
+@pytest.mark.parametrize("receipt_cik", [CIK_ACME, CIK_BETA])
+def test_sec_listing_proves_each_original_from_an_external_workflow(workspace, receipt_cik):
+    from helpers.source_fact_fixture import html
+
+    tmp_path, catalog, config_path = workspace
+    original_args = {"year": 2025, "end": "12/31/2025", "transform": "ixt:date-month-day-year", "title": TEN_K_TITLE}
+    recovered = html(cik=CIK_ACME, **original_args)
+    conflicting = html(cik=CIK_BETA, **original_args)
+    for name, body in (("recovered", recovered), ("conflicting", conflicting)):
+        _write_doc(tmp_path / "companies" / "ACME" / "raw" / "annual", f"{name}.html", body,
+                   _us_sidecar(ENT_ACME, "ACME CORP", "ACME", name, TEN_K_TITLE))
+    catalog.scan()
+    for body in (recovered, conflicting):
+        facts, evidence = _dei_facts_evidence(_sha(body), "ACME CORP", "US", "ACME", CIK_ACME, TEN_K_TITLE)
+        facts["period_end"] = None
+        evidence["period_end"]["value"] = None
+        _record_facts(catalog, body, "text/html", facts, evidence)
+
+    scenario = _acme_scenario("US:ACME")
+    scenario["bindings"][0]["source_namespace"] = "verified-listing-import/1"
+    scenario["verified_evidence_ref"] = f"https://www.sec.gov/Archives/edgar/data/{receipt_cik}/acme.htm"
+    sw_root = _build_sw_workspace(tmp_path, [scenario])
+    before = _file_set(tmp_path)
+    result = _stdout_json(_run_cli(tmp_path, config_path, sw_root, _request()))
+    assert _file_set(tmp_path) == before
+    if receipt_cik == CIK_ACME:
+        assert result["binding"]["status"] == "verified", result["binding"]
+        assert result["binding"]["issuer"]["value"] == CIK_ACME
+        assert {item["source_ref"]["content_sha256"] for item in result["items"]} == {
+            _sha(ACME_BODY), _sha(recovered),
+        }
+    else:
+        assert result["binding"]["status"] == "conflict", result["binding"]
+        assert result["items"] == []
+
+
+def test_sec_original_completion_reuses_the_anchor_and_skips_other_ciks(workspace, monkeypatch):
+    from company_wiki.source_catalog.public_canonical_browser import PublicCanonicalBrowser, StockWikiProofClient
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
+    from helpers.source_fact_fixture import html
+
+    tmp_path, catalog, _ = workspace
+    target = html(cik=CIK_ACME, year=2025, end="2025-12-31", title=TEN_K_TITLE)
+    other = html(cik=CIK_BETA, year=2025, end="2025-12-31", title=BETA_TITLE)
+    scenarios = (
+        (target, ENT_ACME, "ACME", CIK_ACME, TEN_K_TITLE),
+        (other, ENT_BETA, "BETA", CIK_BETA, BETA_TITLE),
+    )
+    for body, entity, ticker, _, title in scenarios:
+        _write_doc(tmp_path / "companies" / ticker / "raw" / "annual", f"{ticker}_incomplete.html", body,
+                   _us_sidecar(entity, f"{ticker} CORP", ticker, f"{ticker}-partial", title))
+    catalog.scan()
+    for body, _, ticker, cik, title in scenarios:
+        facts, evidence = _dei_facts_evidence(_sha(body), f"{ticker} CORP", "US", ticker, cik, title)
+        facts["period_end"] = None
+        evidence["period_end"]["value"] = None
+        _record_facts(catalog, body, "text/html", facts, evidence)
+
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(_source_urn(target))])
+    proof = StockWikiProofClient(
+        python_executable=sys.executable,
+        cli_path=str(tmp_path / "sw" / "dashboard_issuer_proof_fixture_cli.py"),
+        workspace_root=str(sw_root),
+    )
+    original = SourceVersionReader.open_described_version
+    opened = []
+
+    def observed_open(reader, ref, **kwargs):
+        opened.append((ref.content_sha256, kwargs.get("budget")))
+        return original(reader, ref, **kwargs)
+
+    monkeypatch.setattr(SourceVersionReader, "open_described_version", observed_open)
+    result = PublicCanonicalBrowser(catalog, proof).browse(_request())
+
+    assert result["binding"]["status"] == "verified", result["binding"]
+    assert {item["source_ref"]["content_sha256"] for item in result["items"]} == {
+        _sha(ACME_BODY), _sha(target),
+    }
+    assert [sha for sha, _ in opened] == [_sha(target)]
+    assert opened[0][1].bytes_read == len(target)
+
+
 def test_hk_listing_uses_owner_verified_official_originals_across_binding_namespaces(workspace):
     tmp_path, catalog, config_path = workspace
     expected = b"%PDF-1.4 Northshore Harbour Holdings annual statement"
@@ -1262,7 +1344,7 @@ def test_proven_versions_require_an_exact_proof_for_each_source_ref(late_budget_
     }
     def issuer_for_source(source_id, _memo):
         if late_budget_exhaustion and source_id == "source-unproven":
-            browser._cn_budget_exhausted = True
+            browser._proof_budget_failure = "cn_primary_proof_budget_exceeded"
         return issuer_by_source[source_id]
 
     browser._issuer_for_source = issuer_for_source
@@ -1803,12 +1885,12 @@ def test_cn_issuer_proof_uses_one_request_read_budget_for_the_whole_corpus(
     assert all(budget is second_budget for budget in passed_budgets)
 
     budget_limited = _CanonicalBrowse(catalog, None)
-    budget_limited._cn_read_budget = ReadBudget(max_bytes=64_000_000)
+    budget_limited._original_read_budget = ReadBudget(max_bytes=64_000_000)
     for source_id in source_ids:
         result = budget_limited._resolve_source_facts(source_id)
-        if budget_limited._cn_budget_exhausted:
+        if budget_limited._proof_budget_failure is not None:
             break
-    assert budget_limited._cn_budget_exhausted
+    assert budget_limited._proof_budget_failure == "cn_primary_proof_budget_exceeded"
     assert isinstance(result, Binding)
     monkeypatch.setattr(catalog, "browse_verified_source_pairs", lambda *, limit: ())
     verified_binding = Binding(

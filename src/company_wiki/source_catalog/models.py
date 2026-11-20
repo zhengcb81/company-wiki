@@ -91,6 +91,7 @@ class CatalogBrowseSourceFacts:
     verified_ref: SourceRef | None = None
     assertion_id: str | None = None
     issuer_facts: RegisteredIssuerFacts | None = None
+    evidence_basis: str | None = None
 
 
 @dataclass(frozen=True)

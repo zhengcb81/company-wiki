@@ -664,6 +664,7 @@ class SourceCatalog:
             content_sha256=content_sha256,
             verified_ref=ref,
             assertion_id=str(assertion["assertion_id"]),
+            evidence_basis=str(assertion["evidence_basis"]),
             issuer_facts=self._asserted_issuer_facts(ref, assertion) if assertion["market"] == "HK" else None,
         )
 
