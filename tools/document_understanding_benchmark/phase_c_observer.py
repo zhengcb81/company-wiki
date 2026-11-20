@@ -7,6 +7,7 @@ import hashlib
 import http.client
 import json
 import os
+from functools import wraps
 from pathlib import Path
 import re
 import socket
@@ -474,7 +475,7 @@ def install() -> None:
 
     original_generate = BudgetedNarrativeCaller.generate
 
-    def generate(caller, context, request):
+    def generate(caller, context, request, **call_options):
         global _pending
 
         def refuse(code):
@@ -607,7 +608,7 @@ def install() -> None:
             "endpoint": expected["endpoint"],
         }
         try:
-            result = original_generate(caller, context, request)
+            result = original_generate(caller, context, request, **call_options)
             response = result[0]
             # Preserve the final only, before semantic decoding. A transport-
             # complete reply may still fail the production summary contract.
@@ -631,9 +632,10 @@ def install() -> None:
         finally:
             _pending = None
 
-    def observed_generate(caller, context, request):
+    @wraps(original_generate)
+    def observed_generate(caller, context, request, **call_options):
         try:
-            return generate(caller, context, request)
+            return generate(caller, context, request, **call_options)
         except NarrativeBudgetCallError:
             raise
         except Exception as exc:

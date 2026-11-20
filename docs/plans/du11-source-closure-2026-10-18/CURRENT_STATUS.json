@@ -209,7 +209,11 @@
       "audit_w03": "independently_accepted_local_fast_forward_both_skill_copies_match",
       "cwp_w04": {
         "candidate": "3152daf5189a5d5a2d816ee96fa3676964a9f0c5",
-        "status": "independently_accepted_source_changes_real_v8_response_and_rf_adoption_open"
+        "release_ancestry": "ccc092056c3406ab20742a968c15a5663200e1db",
+        "combined_local_tests": 171,
+        "first_remote_ci_failure": "https://github.com/zhengcb81/company-wiki/actions/runs/44740497857",
+        "offline_v8_loopback": "passed_one_local_POST_zero_same_and_cross_run_replay_and_zero_external_POSTs",
+        "status": "source_changes_published_real_v8_response_and_rf_adoption_open"
       },
       "cwp_w05": {
         "sqlite_read_path": "8a232ed92a7ccf751ce2e3161bd4c95b0823d4dc",
@@ -218,6 +222,7 @@
       "ff_w06": {
         "fixture_candidate": "2a603f098deff5c52eae4fbfff088377dd20c9af",
         "published_head": "17e83b09c862f2d73a9a3117a5b55dec521bfa67",
+        "ci": "https://github.com/zhengcb81/filing-fetch/actions/runs/44739818531",
         "status": "independently_accepted_and_published_fixture_alignment",
         "actual_q2_transcript": "exact_local_companion_missing"
       }
