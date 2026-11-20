@@ -60,10 +60,18 @@ def pdf_reading_algorithm_hashes() -> dict[str, str]:
     }
 
 
-def assertion_frames_sha256(*, universal_newlines: bool = False) -> str:
+def assertion_frames_sha256(*, universal_newlines: bool = False, profile: str | None = None) -> str:
     from . import assertion_frames
 
-    return code_sha256(assertion_frames.__file__, universal_newlines=universal_newlines)
+    frames = code_sha256(assertion_frames.__file__, universal_newlines=universal_newlines)
+    if profile != assertion_frames.ASSERTION_FRAME_PROFILE:
+        return frames
+    from company_wiki.wire_json import canonical_json_hash
+    from .statement_grammar.lexical import lexical_identity
+
+    return canonical_json_hash({
+        'frames': frames, 'word_boundaries': lexical_identity(universal_newlines=universal_newlines),
+    })
 
 
 def reading_context_sha256(*, universal_newlines: bool = False) -> str:

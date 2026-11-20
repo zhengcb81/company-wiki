@@ -9,12 +9,14 @@ from dataclasses import dataclass, replace
 import re
 
 from company_wiki.document_model.text_matching import matching_reading_text
+from .statement_grammar.lexical import chinese_word_boundaries
 
 LEGACY_ASSERTION_FRAME_PROFILE = 'source_frames/1'
 ASSERTION_FRAME_PROFILE = 'source_frames/2'
 ASSERTION_FRAME_PROFILES = frozenset({LEGACY_ASSERTION_FRAME_PROFILE, ASSERTION_FRAME_PROFILE})
 
 _SENTENCES = re.compile(r'([。；;!?]|(?<!\d)\.(?!\d))')
+_SCOPED_SENTENCES = re.compile(r'([。；;！!？?]|(?<!\d)\.(?!\d))')
 _CLAUSES = re.compile(r'(?<!\d)[,，]|[,，](?!\d)')
 _REPORT = re.compile(
     r'^(?:(?:根据|据).{1,70}?(?:报道|信息|消息|披露|报告)|according to\s+.{1,100})$', re.I)
@@ -66,14 +68,18 @@ _PENDING_REQUIREMENT = re.compile(
     re.I,
 )
 _PREDICATE_REQUIREMENT = re.compile(
-    r'(?<!无)(?<!不)(?<!不再)(?<!供)(?<!按)(?:'
-    r'(?:仍|尚|还)?(?:须|必须|有待|取决于|依赖于)|'
-    r'(?:仍|尚|还)需(?:要)?(?!求)|'
-    r'需(?:要)?(?=(?:经|取得|获得|获批|通过|完成|满足|提交|接受|达到|具备|符合|履行|提供|申请|'
-    r'审批|批准|核准|同意|验收|确认|认证)|'
-    r'[^:：]{1,48}?(?:审批|批准|核准|许可|同意|验收|确认|认证|审核|备案)(?:后|方可|才能|$)))|'
+    r'(?P<chinese>(?P<continuing>仍|尚|还)?(?:(?P<need>需要|需(?!求))|必须|须|有待|取决于|依赖于))|'
     r'\b(?:remains?\s+(?:subject to|conditional on)|is\s+subject to|'
     r'depends?\s+on|requires?|pending)\b', re.I,
+)
+_NEED_COMPLEMENT = re.compile(
+    r'经|取得|获得|获批|通过|完成|满足|提交|接受|达到|具备|符合|履行|提供|申请|'
+    r'审批|批准|核准|同意|验收|确认|认证|'
+    r'[^:：]{1,48}?(?:审批|批准|核准|许可|同意|验收|确认|认证|审核|备案)(?:后|方可|才能|$)',
+)
+_REQUIREMENT_MODIFIER = re.compile(
+    r'(?:所|按|无|不|不再|是否|能否)\s*$|'
+    r'\b(?:does not|do not|did not|no longer|never)\s+(?:remain\s+)?$', re.I,
 )
 _NEGATED_REQUIREMENT = re.compile(
     r'(?:无需|不需要|不再需要|无须|已无需|已不再需要)|'
@@ -84,10 +90,13 @@ _NEGATED_REQUIREMENT = re.compile(
 _REQUIREMENT_CONSEQUENCE = re.compile(
     r'后(?:方可|才能|才可|才会)|\b(?:before|prior to)\b', re.I,
 )
-_NON_ASSERTION = re.compile(
+_NON_ASSERTION_PREFIX = (
     r'^(?:请问|问[:：]|问题[:：]|模板[:：]|示例[:：]|例如[:：]|填写说明[:：]|'
     r'根据(?:需要|要求|准则|标准)|'
-    r'(?:(?:accounting policy|template|example)(?:\s+example)?\s*[:：]))|是否|能否', re.I)
+    r'(?:(?:accounting policy|template|example)(?:\s+example)?\s*[:：]))'
+)
+_NON_ASSERTION = re.compile(_NON_ASSERTION_PREFIX + r'|是否|能否', re.I)
+_SCOPED_NON_ASSERTION = re.compile(_NON_ASSERTION_PREFIX, re.I)
 _REPORTING_PERIOD = (
     r'(?:本?报告期内|本(?:年度|季度|半年度|财年)内|'
     r'(?:during|in)\s+(?:this|the)\s+(?:(?:reporting|fiscal|financial)\s+)?'
@@ -106,9 +115,12 @@ _CONDITIONAL_ACTION = re.compile(
     r'(?:获批|批准|通过|完成|签署|验收)后|\b(?:if|unless|once|provided that|subject to)\b', re.I,
 )
 _START_QUALIFIER = re.compile(
-    r'(?:拟|计划|打算|希望|预期|预计|考虑|有望|可能|争取|未|没有|不会|不再|无需)|'
-    r'\b(?:will|would|should|could|may|might|plans?|intends?|proposes?|expects?|not|never|without|whether)\b', re.I,
+    r'(?P<chinese>拟|计划|打算|希望|预期|预计|考虑|有望|可能|争取|是否|能否|'
+    r'讨论|商议|建议|提议|缺少|缺乏|(?:尚|仍|还|暂)?(?:没有|未能|未必|不会|不再|无需|未|不|无))|'
+    r'\b(?:will|would|should|could|may|might|plans?|intends?|expect\w*|'
+    r'propos\w*|discuss\w*|consider\w*|suggest\w*|not|never|without|whether)\b', re.I,
 )
+_ACTION_NOMINAL = re.compile(r'^的|的(?:条件|前提|计划|安排|建议|方案|可能性)')
 
 
 @dataclass(frozen=True)
@@ -140,12 +152,45 @@ def assertion_clause_key(clause: str) -> str:
     return ' '.join(_REPORTING_PERIOD_PREFIX.sub('', clause).casefold().split())
 
 
-def _reported_start(text: str, *, reporting_period: bool) -> bool:
+def _predicate_requirement(text: str) -> re.Match[str] | None:
+    cues = tuple(_PREDICATE_REQUIREMENT.finditer(text))
+    boundaries = chinese_word_boundaries(text) if any(cue['chinese'] for cue in cues) else None
+    for cue in cues:
+        if cue['chinese'] and (boundaries is None or not {cue.start(), cue.end()} <= boundaries):
+            continue
+        modifier = _REQUIREMENT_MODIFIER.search(text[:cue.start()])
+        if modifier is not None and (not cue['chinese'] or (boundaries is not None and modifier.start() in boundaries)):
+            continue
+        if cue['need'] and not (cue['continuing'] or _NEED_COMPLEMENT.match(text[cue.end():].lstrip())):
+            continue
+        return cue
+    return None
+
+
+def _qualified_action_prefix(text: str) -> bool:
+    cues = tuple(_START_QUALIFIER.finditer(text))
+    if any(not cue['chinese'] for cue in cues):
+        return True
+    if not cues:
+        return False
+    boundaries = chinese_word_boundaries(text)
+    return boundaries is None or any({cue.start(), cue.end()} <= boundaries for cue in cues)
+
+
+def _action_scope(text: str, *, reporting_period: bool, qualified: bool) -> tuple[bool, bool]:
+    """Observe start in a matrix clause and carry qualifications to implicit continuations."""
     clause = _REPORTING_PERIOD_PREFIX.sub('', text)
-    match = _REPORTED_START.search(clause)
-    if match is None and (reporting_period or clause != text):
-        match = _START_WITH_PERIOD.search(clause)
-    return match is not None and not _START_QUALIFIER.search(clause[:match.start()])
+    explicit_start = _REPORTED_START.search(clause)
+    start = explicit_start or (_START_WITH_PERIOD.search(clause) if reporting_period else None)
+    prefix = clause[:start.start()] if start else clause
+    if (_CONDITIONAL_ACTION.search(clause) or _FUTURE.search(prefix) or _qualified_action_prefix(prefix)
+            or (start is not None and _ACTION_NOMINAL.search(clause[start.end():]))):
+        return True, False
+    if start is None or (qualified and explicit_start is None):
+        return qualified, False
+    # An explicitly asserted, unqualified past action can start its own scope
+    # after a distinct conditioned/anticipated clause in the same sentence.
+    return False, True
 
 
 def _existing_stage(text: str) -> bool:
@@ -173,19 +218,20 @@ def source_assertion_frames(
     if profile not in ASSERTION_FRAME_PROFILES:
         raise ValueError('unknown source assertion frame profile')
     scoped = profile == ASSERTION_FRAME_PROFILE
-    requirement_pattern = _PREDICATE_REQUIREMENT if scoped else _PENDING_REQUIREMENT
     frames = []
-    chunks = _SENTENCES.split(matching_reading_text(source))
+    sentences = _SCOPED_SENTENCES if scoped else _SENTENCES
+    non_assertion_pattern = _SCOPED_NON_ASSERTION if scoped else _NON_ASSERTION
+    chunks = sentences.split(matching_reading_text(source))
     for offset in range(0, len(chunks), 2):
         sentence = chunks[offset]
         ending = chunks[offset + 1] if offset + 1 < len(chunks) else ''
-        non_assertion = ending == '?' or bool(_NON_ASSERTION.search(sentence.strip()))
+        non_assertion = ending in {'?', '？'} or bool(non_assertion_pattern.search(sentence.strip()))
         reporting = None
         pending = False
         active_project = None
         next_project = 0
         existing_project = False
-        conditional_action = False
+        qualified_action = False
         conditions = {}
         scoped_frames = []
         clauses = [text.strip() for text in _CLAUSES.split(sentence) if text.strip()]
@@ -229,16 +275,20 @@ def source_assertion_frames(
             ongoing = _ONGOING.search(text)
             if ongoing and _NEGATED_PREFIX.search(text[max(0, ongoing.start() - 32):ongoing.start()]):
                 ongoing = None
-            requirement = requirement_pattern.search(text) if not non_assertion else None
-            if requirement is not None and _NEGATED_REQUIREMENT.search(text):
-                requirement = None
+            requirement = None
+            reported_start = False
+            if not non_assertion:
+                if scoped:
+                    requirement = _predicate_requirement(text)
+                    qualified_action, reported_start = _action_scope(
+                        text, reporting_period=within_period, qualified=qualified_action,
+                    )
+                elif not _NEGATED_REQUIREMENT.search(text):
+                    requirement = _PENDING_REQUIREMENT.search(text)
             requirement_text = None
             if requirement is not None:
                 body = text[requirement.end():].strip()
                 requirement_text = _REQUIREMENT_CONSEQUENCE.split(body, maxsplit=1)[0].strip() or None
-            conditional_action = conditional_action or (scoped and bool(
-                _CONDITIONAL_ACTION.search(_REPORTING_PERIOD_PREFIX.sub('', text))
-            ))
             frame = SourceAssertionFrame(
                 matching_text=text, reporting_prefix=prefix, reporting_inherited=inherited,
                 ongoing_activity=not non_assertion and ongoing is not None and not future,
@@ -247,8 +297,7 @@ def source_assertion_frames(
                 pending_requirement=requirement_text,
                 requirement_proposition=text[:requirement.start()].strip() if requirement_text and requirement else None,
                 coordinated_pending_condition=requirement is not None and bool(_COORDINATED_REFERENCE.search(text)),
-                reported_start=scoped and not (non_assertion or conditional_action or future)
-                and _reported_start(text, reporting_period=within_period),
+                reported_start=reported_start,
             )
             scoped_frames.append((frame, active_project))
         for frame, group in scoped_frames:

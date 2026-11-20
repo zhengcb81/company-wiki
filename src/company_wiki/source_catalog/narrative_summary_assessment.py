@@ -72,7 +72,8 @@ def assessment_identity(version: str | None = None) -> dict[str, Any]:
         'assessment': code_sha256(__file__),
     }
     if version == ATOMIC_ASSESSMENT_VERSION or version in _QUALIFIER_ASSESSMENTS:
-        dependencies['assertion_frames'] = assertion_frames_sha256()
+        profile = ASSERTION_FRAME_PROFILE if version == ASSERTION_ASSESSMENT_VERSION else LEGACY_ASSERTION_FRAME_PROFILE
+        dependencies['assertion_frames'] = assertion_frames_sha256(profile=profile)
     if version in BUSINESS_SCOPE_ASSESSMENT_VERSIONS:
         dependencies['business_scope'] = business_scope_sha256()
     return {'version':version,'implementation_sha256':canonical_json_hash(dependencies),
