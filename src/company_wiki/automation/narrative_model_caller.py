@@ -40,8 +40,13 @@ def _utc_now() -> str:
 
 class NarrativeModelCaller(Protocol):
     def generate(
-        self, context: JobExecutionContext, request: NarrativeModelRequest
+        self, context: JobExecutionContext, request: NarrativeModelRequest, *,
+        validate_new_attempt: Callable[[], None] | None = None,
     ) -> tuple[NarrativeModelResponse, HandlerMetrics]: ...
+
+
+class ModelGenerationUnavailable(ModelResponseError):
+    """The worker cannot execute the frozen recipe for a new model attempt."""
 
 
 @dataclass
@@ -112,7 +117,8 @@ class BudgetedNarrativeCaller:
         self._paid_responses = paid_responses
 
     def generate(
-        self, context: JobExecutionContext, request: NarrativeModelRequest
+        self, context: JobExecutionContext, request: NarrativeModelRequest, *,
+        validate_new_attempt: Callable[[], None] | None = None,
     ) -> tuple[NarrativeModelResponse, HandlerMetrics]:
         from .narrative_run_store import (
             ModelUsage, RunBudgetExceededError, RunConflictError,
@@ -149,7 +155,13 @@ class BudgetedNarrativeCaller:
                     raise NarrativeBudgetCallError("MODEL_PAID_RESPONSE_BINDING_INVALID",
                         HandlerOutcome.TERMINAL_FAILURE, _ZERO) from None
                 recovered = self._recover(context, request, request_sha256)
-                if recovered is None:
+            if recovered is not None:
+                from .narrative_run_store import ReservationAdmission
+                admission = ReservationAdmission(recovered[0], False, False)
+            else:
+                if validate_new_attempt is not None:
+                    validate_new_attempt()
+                if self._paid_responses is not None:
                     try:
                         self._paid_responses.admit()
                     except StorageBudgetExceeded as exc:
@@ -157,10 +169,6 @@ class BudgetedNarrativeCaller:
                     except Exception:
                         raise NarrativeBudgetCallError("MODEL_PAID_RESPONSE_SPACE_DENIED",
                             HandlerOutcome.TERMINAL_FAILURE, _ZERO) from None
-            if recovered is not None:
-                from .narrative_run_store import ReservationAdmission
-                admission = ReservationAdmission(recovered[0], False, False)
-            else:
                 admission = self._store.reserve_model_attempt(
                     run_id=self._run_id,
                     job_id=context.job.job_id,
@@ -176,7 +184,7 @@ class BudgetedNarrativeCaller:
                     output_bytes_bound=self._output_bound,
                     now=self._clock(),
                 )
-        except NarrativeBudgetCallError:
+        except (NarrativeBudgetCallError, ModelGenerationUnavailable):
             raise
         except Exception as error:
             # Admission failures occur before HTTP. Only genuine cap exhaustion
@@ -366,10 +374,10 @@ class BudgetedNarrativeCaller:
         paid_responses = self._paid_responses
         if paid_responses is None:
             raise ValueError("paid responses are not configured")
-        paid_json = record.paid_response_json
-        if not isinstance(paid_json, str):
-            raise ValueError("paid response has no pinned bytes")
         try:
+            paid_json = record.paid_response_json
+            if not isinstance(paid_json, str):
+                raise ValueError("paid response has no pinned bytes")
             if len(charged) != 1 or record.request_sha256 != request_sha256:
                 raise ValueError("paid operation identity differs")
             pin = PaidResponsePin.from_json(paid_json)

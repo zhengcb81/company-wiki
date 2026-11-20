@@ -37,7 +37,7 @@ from .narrative_model import (
 from .narrative_model_runtime import build_model_request, decode_model_draft, resolve_model_boundary
 from .narrative_http_model import ModelHTTPError
 from .narrative_failed_final import fit_failed_final_result
-from .narrative_model_caller import NarrativeBudgetCallError, NarrativeModelCaller
+from .narrative_model_caller import ModelGenerationUnavailable, NarrativeBudgetCallError, NarrativeModelCaller
 
 
 def reading_summary_validation_identity() -> dict[str, Any]:
@@ -327,6 +327,8 @@ class NarrativeSummarizeHandler:
             return self._execute(context)
         except _SummaryFailure as exc:
             return _failure(exc.code, exc.outcome, exc.detail)
+        except ModelGenerationUnavailable as exc:
+            return _failure("MODEL_GENERATION_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE, str(exc))
         except NarrativeBudgetCallError as exc:
             status = (
                 "" if exc.http_status is None else f" (http_status={exc.http_status})"
@@ -393,17 +395,20 @@ class NarrativeSummarizeHandler:
                 "narrative model is not configured",
             )
         review = selected.prompt_review
-        reading_projection_version = (
-            self._reading_model_projection(selected.subject)
-            if self._reading_model_projection is not None else None
-        )
-        if self._validate_model_execution is not None:
-            try:
-                self._validate_model_execution(selected.subject)
-            except ModelResponseError as exc:
-                raise _SummaryFailure("MODEL_GENERATION_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
-                                      str(exc)) from exc
+        try:
+            reading_projection_version = (
+                self._reading_model_projection(selected.subject)
+                if self._reading_model_projection is not None else None
+            )
+        except ModelResponseError as exc:
+            raise ModelGenerationUnavailable(str(exc)) from exc
 
+        def validate_new_attempt() -> None:
+            if self._validate_model_execution is not None:
+                try:
+                    self._validate_model_execution(selected.subject)
+                except ModelResponseError as exc:
+                    raise ModelGenerationUnavailable(str(exc)) from exc
 
         try:
             request = build_model_request(selected,
@@ -413,9 +418,14 @@ class NarrativeSummarizeHandler:
                                   'source summary plan exceeds or violates its bounded contract') from exc
         context.checkpoint()
         if self._model_caller is not None:
-            response, metrics = self._model_caller.generate(context, request)
+            if self._validate_model_execution is None:
+                response, metrics = self._model_caller.generate(context, request)
+            else:
+                response, metrics = self._model_caller.generate(
+                    context, request, validate_new_attempt=validate_new_attempt)
         else:
             assert self._model is not None
+            validate_new_attempt()
             response = self._model.generate(request)
             metrics = HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0)
         context.checkpoint()

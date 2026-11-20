@@ -305,6 +305,9 @@ def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejectio
                 deps = captured[0]
                 try:
                     assert deps.reading_model_projection(subject) == projection
+                    assert deps.model_execution_projection is not None
+                    with pytest.raises(ModelResponseError, match=error):
+                        deps.model_execution_projection(subject)
                     assert deps.validate_model_execution is not None
                     with pytest.raises(ModelResponseError, match=error):
                         deps.validate_model_execution(subject)

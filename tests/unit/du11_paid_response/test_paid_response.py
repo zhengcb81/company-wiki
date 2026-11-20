@@ -270,7 +270,11 @@ def test_crash_before_envelope_then_reopen_replays_same_paid_attempt(
     assert record.usage_status == "reserved"
     monkeypatch.setattr(owned.http.model, "_response", original)
     owned.runs = NarrativeRunStore(owned.auto.db_path)
-    response, metrics = caller(owned).generate(owned.context(), REQUEST)
+
+    def no_new_software_check():
+        pytest.fail("original bytes captured before the crash need no fresh approval")
+
+    response, metrics = caller(owned).generate(owned.context(), REQUEST, validate_new_attempt=no_new_software_check)
     assert response.response_bytes == b"not valid summary JSON" and metrics.tokens == 92
     assert owned.http.calls == 1
     assert len(owned.runs.reservations_for_run("run")) == 1
@@ -296,6 +300,77 @@ def test_paid_replay_binding_or_bytes_failure_never_resends(owned, change):
         caller(owned).generate(owned.context(), request)
     assert owned.http.calls == 1
     assert len(owned.runs.reservations_for_run("run")) == 1
+
+
+@pytest.mark.parametrize("phase", ["fresh", "paid", "tampered", "different_request", "unconfirmed"])
+def test_summary_checks_current_software_only_before_a_new_model_attempt(tmp_path, http, phase):
+    from company_wiki.automation import narrative_worker_factory as factory
+    from company_wiki.automation.models import HandlerOutcome
+    from company_wiki.automation.narrative_model_runtime import build_model_request
+    from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
+    from company_wiki.automation.narrative_summarize import NarrativeSummarizeHandler
+    from company_wiki.automation.narrative_summary_execution import parse_summary_job_result
+    from unit.test_narrative_output_language_binding import EN, manifests, selected_english
+    from unit.test_narrative_summarize_handler import _context
+
+    selected = selected_english()
+    projection = "reading-model-input/7"
+    request = build_model_request(selected, reading_projection_version=projection)
+    frozen_manifest = manifests(projection)
+    frozen_manifest["reading_model_boundary"]["decoder_sha256"] = "f" * 64
+    view = compile_scoped_model_view(selected, max_claims=40)
+    task, = view.model_tasks
+    parts = [key for key, span_id in view.to_binding()["task_parts"][task.key].items()
+             if span_id in task.support_ids]
+    owned = seed_owned(tmp_path, http, prompt_version=request.prompt_version)
+    context = replace(_context(selected), job=owned.claim.job, attempt=owned.claim.attempt)
+    envelope = json.loads(BODY)
+    envelope["choices"][0]["message"]["content"] = json.dumps({"drafts_by_task": {task.key: [{
+        "text": EN, "basis_parts": parts, "modality": "actual",
+    }]}})
+    http.body = json.dumps(envelope).encode()
+    paid_port = caller(owned)
+    if phase == "unconfirmed":
+        http.declared = len(http.body) + 1
+        with pytest.raises(NarrativeBudgetCallError):
+            paid_port.generate(context, request)
+    elif phase != "fresh":
+        pinned_request = replace(request, instruction=request.instruction + "\n") if phase == "different_request" else request
+        paid_port.generate(context, pinned_request)
+    prior = owned.runs.reservations_for_run("run")
+    if phase == "tampered":
+        pin = json.loads(prior[0].paid_response_json)
+        (owned.objects.root / pin["object_key"]).write_bytes(b"x" * len(http.body))
+    posts_before = http.calls
+    validations = []
+
+    def new_software_unavailable(subject):
+        validations.append(subject.item_key)
+        factory._validate_model_software(frozen_manifest)
+
+    result = NarrativeSummarizeHandler(
+        model=None, model_caller=caller(owned),
+        reading_model_projection=lambda subject: factory._model_recipe(frozen_manifest).reading_projection_version,
+        validate_model_execution=new_software_unavailable,
+    )(context)
+
+    assert http.calls == posts_before
+    assert owned.runs.reservations_for_run("run") == prior
+    if phase == "paid":
+        assert result.outcome is HandlerOutcome.SUCCEEDED
+        summary = parse_summary_job_result(result.result, selected=selected)
+        assert summary.draft.claims[0].text == EN
+    elif phase == "fresh":
+        assert validations == [selected.subject.item_key]
+        assert result.error.code == "MODEL_GENERATION_UNAVAILABLE"
+        assert result.error.detail == "READING_MODEL_BOUNDARY_UNAVAILABLE"
+        assert result.metrics.tokens == 0
+        return
+    else:
+        assert result.error.code == "MODEL_PAID_RESPONSE_UNAVAILABLE"
+    assert validations == []
+    assert result.metrics.tokens == prior[0].charged_tokens > 0
+    assert result.metrics.cost_usd == prior[0].charged_micro_usd / 1_000_000
 
 
 def test_paid_persistence_failure_stays_uncertain_without_an_automatic_second_post(

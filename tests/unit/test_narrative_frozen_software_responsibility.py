@@ -29,8 +29,17 @@ def test_resume_retains_recorded_software_without_claiming_it_is_current():
     assert restored == recorded
     assert actual != recorded
     assert factory._validate_model_software(actual) == "reading-model-input/2"
+    assert factory._model_recipe(recorded).reading_projection_version == "reading-model-input/2"
     with pytest.raises(ModelResponseError, match="READING_MODEL_BOUNDARY_UNAVAILABLE"):
         factory._validate_model_software(recorded)
+
+
+@pytest.mark.parametrize("field", ["prompt_version", "request_schema", "decoder_version"])
+def test_recovery_still_requires_the_declared_recipe_to_be_installed(field):
+    recorded = old_software_manifest()
+    recorded["reading_model_boundary"][field] = "unsupported/99"
+    with pytest.raises(ModelResponseError, match="READING_MODEL_BOUNDARY_UNAVAILABLE"):
+        factory._model_recipe(recorded)
 
 
 @pytest.mark.parametrize("field", ["model", "profile", "source_metadata", "source_ref", "execution_versions"])
@@ -69,7 +78,8 @@ def test_model_stage_checks_its_actual_capability_before_any_paid_call():
     called = []
 
     class Caller:
-        def generate(self, *args):
+        def generate(self, context, request, *, validate_new_attempt):
+            validate_new_attempt()
             raise AssertionError("unavailable software must not call/reserve a model")
 
     def unavailable(subject):

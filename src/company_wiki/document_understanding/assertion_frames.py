@@ -6,11 +6,18 @@ implied by ``matching_text``. Unsupported grammar stays unclassified. Production
 integration must version the recipe; historical assessments are unchanged.
 """
 from dataclasses import dataclass, replace
+from enum import Enum, auto
 import re
 
 from company_wiki.document_model.text_matching import matching_reading_text
+from .statement_grammar.lexical import ChineseWord, chinese_word_boundaries, chinese_words
+
+LEGACY_ASSERTION_FRAME_PROFILE = 'source_frames/1'
+ASSERTION_FRAME_PROFILE = 'source_frames/2'
+ASSERTION_FRAME_PROFILES = frozenset({LEGACY_ASSERTION_FRAME_PROFILE, ASSERTION_FRAME_PROFILE})
 
 _SENTENCES = re.compile(r'([。；;!?]|(?<!\d)\.(?!\d))')
+_SCOPED_SENTENCES = re.compile(r'([。；;！!？?]|(?<!\d)\.(?!\d))')
 _CLAUSES = re.compile(r'(?<!\d)[,，]|[,，](?!\d)')
 _REPORT = re.compile(
     r'^(?:(?:根据|据).{1,70}?(?:报道|信息|消息|披露|报告)|according to\s+.{1,100})$', re.I)
@@ -61,6 +68,21 @@ _PENDING_REQUIREMENT = re.compile(
     r'depends?\s+on|requires?|pending)\b',
     re.I,
 )
+_PREDICATE_REQUIREMENT = re.compile(
+    r'(?P<chinese>(?P<continuing>仍|尚|还)?(?:(?P<need>需要|需(?!求))|必须|须|有待|取决于|依赖于))|'
+    r'\b(?:remains?\s+(?:subject to|conditional on)|is\s+subject to|'
+    r'depends?\s+on|requires?|pending)\b', re.I,
+)
+_NEED_COMPLEMENT = re.compile(
+    r'经|取得|获得|获批|通过|完成|满足|提交|接受|达到|具备|符合|履行|提供|申请|'
+    r'审批|批准|核准|同意|验收|确认|认证|'
+    r'[^:：]{1,48}?(?:审批|批准|核准|许可|同意|验收|确认|认证|审核|备案)(?:后|方可|才能|$)',
+)
+_NOMINAL_MODIFIER_TAGS = frozenset({'a', 'b', 'd', 'f', 'm', 'n', 'q', 'r', 's', 't'})
+_REQUIREMENT_MODIFIER = re.compile(
+    r'(?:所|按|无|不|不再|是否|能否)\s*$|'
+    r'\b(?:does not|do not|did not|no longer|never)\s+(?:remain\s+)?$', re.I,
+)
 _NEGATED_REQUIREMENT = re.compile(
     r'(?:无需|不需要|不再需要|无须|已无需|已不再需要)|'
     r'\b(?:does not|do not|did not|no longer|never)\s+'
@@ -70,10 +92,51 @@ _NEGATED_REQUIREMENT = re.compile(
 _REQUIREMENT_CONSEQUENCE = re.compile(
     r'后(?:方可|才能|才可|才会)|\b(?:before|prior to)\b', re.I,
 )
-_NON_ASSERTION = re.compile(
+_NON_ASSERTION_PREFIX = (
     r'^(?:请问|问[:：]|问题[:：]|模板[:：]|示例[:：]|例如[:：]|填写说明[:：]|'
     r'根据(?:需要|要求|准则|标准)|'
-    r'(?:(?:accounting policy|template|example)(?:\s+example)?\s*[:：]))|是否|能否', re.I)
+    r'(?:(?:accounting policy|template|example)(?:\s+example)?\s*[:：]))'
+)
+_NON_ASSERTION = re.compile(_NON_ASSERTION_PREFIX + r'|是否|能否', re.I)
+_SCOPED_NON_ASSERTION = re.compile(_NON_ASSERTION_PREFIX, re.I)
+_REPORTING_PERIOD = (
+    r'(?:本?报告期内|本(?:年度|季度|半年度|财年)内|'
+    r'(?:during|in)\s+(?:this|the)\s+(?:(?:reporting|fiscal|financial)\s+)?'
+    r'(?:period|quarter|half(?:[- ]year)?|year))'
+)
+_REPORTING_PERIOD_HEADING = re.compile(rf'{_REPORTING_PERIOD}\s*[:：]?', re.I)
+_REPORTING_PERIOD_PREFIX = re.compile(rf'^{_REPORTING_PERIOD}\s*[:：]\s*', re.I)
+_ACTION_START = r'(?:启动|开工|动工|开始|开启|开展|投入)'
+_REPORTED_START = re.compile(
+    rf'已(?:经)?(?:提前|正式)?{_ACTION_START}|'
+    r'\b(?:began|commenced|started|initiated|broke ground)\b', re.I,
+)
+_START_WITH_PERIOD = re.compile(rf'(?:提前|正式){_ACTION_START}')
+_CONDITIONAL_HEAD = re.compile(
+    r'^(?:(?:并且|而且|但是|且|或|但))?(?:若|倘若|如果|假如|只要|一旦|待(?=获|完|验|审|批|签))|'
+    r'^(?:(?:and|or|but|even)\s+)?(?:if|unless|once|provided that|subject to)\b', re.I,
+)
+_LOCAL_ACTION_CONDITION = re.compile(
+    r'(?:获批|批准|通过|完成|签署|验收)后|\b(?:if|unless|once|provided that|subject to)\b', re.I,
+)
+_CONDITIONAL_RESULT = re.compile(r'^(?:则|那么|就|届时|才可|才能|方可|(?:then|therefore|consequently)\b)', re.I)
+_INDEPENDENT_ASSERTION = re.compile(
+    r'^(?:(?:但(?:是)?|不过|然而|而)?(?:事实上|实际上)|'
+    r'(?:(?:but|however)\s+)?(?:in fact|separately|independently)\b)', re.I,
+)
+_START_QUALIFIER = re.compile(
+    r'(?P<chinese>拟|计划|打算|希望|预期|预计|考虑|有望|可能|争取|是否|能否|'
+    r'讨论|商议|建议|提议|缺少|缺乏|(?:尚|仍|还|暂)?(?:没有|未能|未必|不会|不再|无需|未|不|无))|'
+    r'\b(?:will|would|should|could|may|might|plans?|intends?|expect\w*|'
+    r'propos\w*|discuss\w*|consider\w*|suggest\w*|not|never|without|whether)\b', re.I,
+)
+_ACTION_NOMINAL = re.compile(r'^的|的(?:条件|前提|计划|安排|建议|方案|可能性)')
+
+
+class _ConditionalRegion(Enum):
+    ROOT = auto()
+    PREMISE = auto()
+    RESULT = auto()
 
 
 @dataclass(frozen=True)
@@ -92,6 +155,88 @@ class SourceAssertionFrame:
     pending_requirement: str | None = None
     requirement_proposition: str | None = None
     coordinated_pending_condition: bool = False
+    reported_start: bool = False
+
+
+def is_reporting_period_heading(source: str) -> bool:
+    """Recognize a bare period scope; a named party or sentence is not a heading."""
+    return _REPORTING_PERIOD_HEADING.fullmatch(matching_reading_text(source).strip()) is not None
+
+
+def assertion_clause_key(clause: str) -> str:
+    """Compare a normalized local clause without borrowing partial actor matches."""
+    return ' '.join(_REPORTING_PERIOD_PREFIX.sub('', clause).casefold().split())
+
+
+def _need_is_nominal(cue: re.Match[str], words: tuple[ChineseWord, ...]) -> bool:
+    # The long form may head a noun phrase. A continuing modal or a bound
+    # short-form auxiliary has a distinct reading after a nominal adjunct.
+    if cue['need'] != '需要' or cue['continuing']:
+        return False
+    before = [word for word in words if word.end <= cue.start()]
+    for word in reversed(before):
+        if word.tag == 'p':
+            return True
+        if word.tag != 'vn' and word.tag[:1] not in _NOMINAL_MODIFIER_TAGS:
+            break
+    # A finite completive predicate to the right can be the matrix clause,
+    # even when the adjunct is tagged as a conjunction instead of a PP.
+    after = [word for word in words if word.start >= cue.end()]
+    return len(after) >= 2 and after[0].tag in {'v', 'vn', 'p'} and after[1].tag == 'ul'
+
+
+def _predicate_requirement(text: str) -> re.Match[str] | None:
+    cues = tuple(_PREDICATE_REQUIREMENT.finditer(text))
+    words = chinese_words(text) if any(cue['chinese'] for cue in cues) else None
+    boundaries = {0, *(word.end for word in words or ())}
+    for cue in cues:
+        if cue['chinese'] and (words is None or not {cue.start(), cue.end()} <= boundaries
+                               or _need_is_nominal(cue, words)):
+            continue
+        modifier = _REQUIREMENT_MODIFIER.search(text[:cue.start()])
+        if modifier is not None and (not cue['chinese'] or modifier.start() in boundaries):
+            continue
+        if cue['need'] and not (cue['continuing'] or _NEED_COMPLEMENT.match(text[cue.end():].lstrip())):
+            continue
+        return cue
+    return None
+
+
+def _qualified_action_prefix(text: str) -> bool:
+    cues = tuple(_START_QUALIFIER.finditer(text))
+    if any(not cue['chinese'] for cue in cues):
+        return True
+    if not cues:
+        return False
+    boundaries = chinese_word_boundaries(text)
+    return boundaries is None or any({cue.start(), cue.end()} <= boundaries for cue in cues)
+
+
+def _conditional_region(text: str, previous: _ConditionalRegion) -> _ConditionalRegion:
+    if _CONDITIONAL_HEAD.match(text):
+        return _ConditionalRegion.PREMISE
+    if previous is _ConditionalRegion.PREMISE and _CONDITIONAL_RESULT.match(text):
+        return _ConditionalRegion.RESULT
+    if previous is _ConditionalRegion.RESULT and _INDEPENDENT_ASSERTION.match(text):
+        return _ConditionalRegion.ROOT
+    # A comma or an unqualified past tense is insufficient to leave the
+    # premise or its result. This includes coordinated and concessive clauses.
+    return previous
+
+
+def _action_scope(text: str, *, reporting_period: bool, qualified: bool) -> tuple[bool, bool]:
+    """Observe start in a matrix clause and carry qualifications to implicit continuations."""
+    explicit_start = _REPORTED_START.search(text)
+    start = explicit_start or (_START_WITH_PERIOD.search(text) if reporting_period else None)
+    prefix = text[:start.start()] if start else text
+    if (_LOCAL_ACTION_CONDITION.search(text) or _FUTURE.search(prefix) or _qualified_action_prefix(prefix)
+            or (start is not None and _ACTION_NOMINAL.search(text[start.end():]))):
+        return True, False
+    if start is None or (qualified and explicit_start is None):
+        return qualified, False
+    # An explicitly asserted, unqualified past action can start its own scope
+    # after a distinct conditioned/anticipated clause in the same sentence.
+    return False, True
 
 
 def _existing_stage(text: str) -> bool:
@@ -106,7 +251,9 @@ def _existing_stage(text: str) -> bool:
     return True
 
 
-def source_assertion_frames(source: str) -> tuple[SourceAssertionFrame, ...]:
+def source_assertion_frames(
+    source: str, *, profile: str = LEGACY_ASSERTION_FRAME_PROFILE, reporting_period: bool = False,
+) -> tuple[SourceAssertionFrame, ...]:
     """Observe finite local qualifiers without borrowing another subject's proof.
 
     A project condition/stage propagates only inside a local project clause
@@ -114,20 +261,31 @@ def source_assertion_frames(source: str) -> tuple[SourceAssertionFrame, ...]:
     Independent project clauses start a new chain. No production or numeric
     evidence is manufactured by these hints.
     """
+    if profile not in ASSERTION_FRAME_PROFILES:
+        raise ValueError('unknown source assertion frame profile')
+    scoped = profile == ASSERTION_FRAME_PROFILE
     frames = []
-    chunks = _SENTENCES.split(matching_reading_text(source))
+    sentences = _SCOPED_SENTENCES if scoped else _SENTENCES
+    non_assertion_pattern = _SCOPED_NON_ASSERTION if scoped else _NON_ASSERTION
+    chunks = sentences.split(matching_reading_text(source))
     for offset in range(0, len(chunks), 2):
         sentence = chunks[offset]
         ending = chunks[offset + 1] if offset + 1 < len(chunks) else ''
-        non_assertion = ending == '?' or bool(_NON_ASSERTION.search(sentence.strip()))
+        non_assertion = ending in {'?', '？'} or bool(non_assertion_pattern.search(sentence.strip()))
         reporting = None
         pending = False
         active_project = None
         next_project = 0
         existing_project = False
+        qualified_action = False
+        condition_region = _ConditionalRegion.ROOT
         conditions = {}
         scoped_frames = []
         clauses = [text.strip() for text in _CLAUSES.split(sentence) if text.strip()]
+        within_period = reporting_period or (scoped and bool(clauses) and (
+            _REPORTING_PERIOD_HEADING.fullmatch(clauses[0]) is not None
+            or _REPORTING_PERIOD_PREFIX.match(clauses[0]) is not None
+        ))
         for index, text in enumerate(clauses):
             # A source-only prefix requires an actual following clause. This
             # cannot consume an undelimited English sentence as the reporter.
@@ -164,21 +322,33 @@ def source_assertion_frames(source: str) -> tuple[SourceAssertionFrame, ...]:
             ongoing = _ONGOING.search(text)
             if ongoing and _NEGATED_PREFIX.search(text[max(0, ongoing.start() - 32):ongoing.start()]):
                 ongoing = None
-            requirement = _PENDING_REQUIREMENT.search(text) if not non_assertion else None
-            if requirement is not None and _NEGATED_REQUIREMENT.search(text):
-                requirement = None
+            requirement = None
+            reported_start = False
+            if not non_assertion:
+                if scoped:
+                    requirement = _predicate_requirement(text)
+                    action_text = _REPORTING_PERIOD_PREFIX.sub('', text)
+                    condition_region = _conditional_region(action_text, condition_region)
+                    if condition_region is _ConditionalRegion.ROOT:
+                        qualified_action, reported_start = _action_scope(
+                            action_text, reporting_period=within_period, qualified=qualified_action,
+                        )
+                elif not _NEGATED_REQUIREMENT.search(text):
+                    requirement = _PENDING_REQUIREMENT.search(text)
             requirement_text = None
             if requirement is not None:
                 body = text[requirement.end():].strip()
                 requirement_text = _REQUIREMENT_CONSEQUENCE.split(body, maxsplit=1)[0].strip() or None
             frame = SourceAssertionFrame(
                 matching_text=text, reporting_prefix=prefix, reporting_inherited=inherited,
-                ongoing_activity=not non_assertion and ongoing is not None and not future,
+                ongoing_activity=not (non_assertion or future) and ongoing is not None
+                and condition_region is _ConditionalRegion.ROOT,
                 future_marker=future, quantity_basis=basis,
                 anaphoric_pending_condition=requirement is not None and bool(_ANAPHORIC_REFERENCE.search(text)),
                 pending_requirement=requirement_text,
                 requirement_proposition=text[:requirement.start()].strip() if requirement_text and requirement else None,
                 coordinated_pending_condition=requirement is not None and bool(_COORDINATED_REFERENCE.search(text)),
+                reported_start=reported_start,
             )
             scoped_frames.append((frame, active_project))
         for frame, group in scoped_frames:
@@ -188,5 +358,7 @@ def source_assertion_frames(source: str) -> tuple[SourceAssertionFrame, ...]:
     return tuple(frames)
 
 __all__ = [
+    'ASSERTION_FRAME_PROFILE', 'ASSERTION_FRAME_PROFILES', 'LEGACY_ASSERTION_FRAME_PROFILE',
+    'assertion_clause_key', 'is_reporting_period_heading',
     'source_assertion_frames',
 ]
