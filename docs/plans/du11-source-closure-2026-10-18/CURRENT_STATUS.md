@@ -10,7 +10,7 @@ Audit W03 已独审通过并并入本地主线。已部署 `71381b5` 的技能�
 
 CWP 的本地 SQLite `#` 和 `%23` 路径问题已根修并经独审。CWP `/8` 的结构性语义修订已通过独审，正式回包、缓存和 RF 采用仍待验证。FF 离线配套已发布，药明精确 Q2 电话会仍是已查本地目录的缺项。RF 已用封存报告完成共同延期与取消的原生试算，独审发现不能只靠参数祖先证明是本业务未确认金额。继续补这项证明与主业远期量级依据。 [本轮复验边界](review/w12-wuxi-resume-20261120/README.md#w12-整改接收)
 
-CWP `ccc09205` 的组合测试 171 项通过。远端发现测试观察器没有传递新增参数。该观察器已改为透传 owner 的全部可选关键字，正常宿主的 `/8` 环回通过。首次仅向测试服务请求一次，同次激活和跨次缓存均零重发。FF 已发布 `17e83b0` 的精确 CI 通过。 [CWP 原失败](https://github.com/zhengcb81/company-wiki/actions/runs/44740497857) · [FF CI](https://github.com/zhengcb81/filing-fetch/actions/runs/44739818531)
+CWP `ccc09205` 的组合测试 171 项通过，远端 CI 发现测试观察器没有传递新增参数。修复版 `bbfadb7a` 已推送，精确 CI 成功。正常宿主的 `/8` 环回仅向测试服务请求一次，同次激活和跨次缓存均零重发。FF 发布版 `17e83b0` 的精确 CI 也已通过。 [CWP 原失败](https://github.com/zhengcb81/company-wiki/actions/runs/44740497857) · [CWP 修复版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/44741879748) · [FF CI](https://github.com/zhengcb81/filing-fetch/actions/runs/44739818531)
 
 ## 2026-11-20 反馈工程进展
 

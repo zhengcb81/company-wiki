@@ -212,12 +212,23 @@
         "release_ancestry": "ccc092056c3406ab20742a968c15a5663200e1db",
         "combined_local_tests": 171,
         "first_remote_ci_failure": "https://github.com/zhengcb81/company-wiki/actions/runs/44740497857",
+        "observer_fix_head": "bbfadb7aa58c7e063a1e5a9df689d7fe46931f1a",
+        "observer_fix_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/44741879748",
+        "observer_fix_ci_completed_at_utc": "2026-11-20T13:17:53Z",
+        "observer_fix_ci_conclusion": "success",
         "offline_v8_loopback": "passed_one_local_POST_zero_same_and_cross_run_replay_and_zero_external_POSTs",
         "status": "source_changes_published_real_v8_response_and_rf_adoption_open"
       },
       "cwp_w05": {
         "sqlite_read_path": "8a232ed92a7ccf751ce2e3161bd4c95b0823d4dc",
-        "status": "independently_reproduced_and_verified_literal_path_preserves_read_only"
+        "status": "independently_reproduced_and_verified_literal_path_preserves_read_only",
+        "h1_qa_availability_recheck": {
+          "source_sha256": "167794befa3de2cf3be4d9a7a0dde52f97470dab1533df2d4440c90336b657a8",
+          "verified_byte_size": 18808,
+          "published_date": null,
+          "availability_evidence": null,
+          "status": "original_verified_publication_by_cutoff_unproven"
+        }
       },
       "ff_w06": {
         "fixture_candidate": "2a603f098deff5c52eae4fbfff088377dd20c9af",
@@ -260,7 +271,7 @@
       "reuse_downloads": 0,
       "new_model_posts": 0,
       "wire_metering_complete": false,
-      "status": "verified_originals_awaiting_operating_comparability_review"
+      "status": "verified_comparability_scope_future_issuer_magnitude_still_open"
     },
     "paired_public_reconciliation": "real RF job succeeded with known costs and its Audit capture succeeded with unknown wrapper costs; zero new business requests",
     "recorded_gate_review": {
