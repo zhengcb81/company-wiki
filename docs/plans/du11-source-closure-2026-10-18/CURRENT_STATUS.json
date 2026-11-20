@@ -174,7 +174,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Close independent RF W02 issuer, interval and lineage findings and release the scoped owner fixes. Verify the original CWP /8 attempt and unresolved cost without replaying the provider POST. Complete revenue-magnitude research and verify real CWP summary, cache and RF adoption in a new W12 attempt at the original cutoff.",
+  "next_action": "Use the released RF issuer, coverage and recognition fixes with the new registered 1C evidence. Preserve the original CWP /8 attempt and its unresolved cost without replaying the provider POST. Complete revenue-magnitude research and verify real CWP summary, cache and RF adoption in a new W12 attempt at the original cutoff.",
   "w12_attempt": {
     "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
@@ -208,7 +208,8 @@
         "independent_receipt_sha256": "37baac025b23c153c0c486fb5eb4e9d7cd9a7e05f9a4ef21fa7e8cb79eb8ac9c",
         "equivalent_expression_candidate": "4cf34907da53cf8a6f76a71dc815b7096a7f2427",
         "equivalent_expression_tests": 184,
-        "status": "frozen_w12_mathematics_independently_passed_equivalent_expression_candidate_not_published",
+        "released_with_w02_main": "cbb523a74cfa912aa8cbd47e21abe3d709cdcb09",
+        "status": "frozen_w12_mathematics_and_equivalent_expression_independently_passed_and_published",
         "future_magnitude": "independent_dated_capacity_and_contract_constraints_confirmed_group_amount_open"
       },
       "rf_w02_peer_coverage": {
@@ -221,7 +222,13 @@
         "candidate": "d79560eda80537a6572a59638c1527b645e63770",
         "independent_followup_capture_ref": "audit-capture/1/w02-independent/executor/39e58e1dfd024462a21fb1765c8de2e7",
         "independent_followup_gate_review_event_id": "f282cc517747484186c5cb972a4d829b",
-        "status": "exact_peer_input_passed_owner_replay_independent_issuer_and_lineage_findings_open"
+        "published_head": "cbb523a74cfa912aa8cbd47e21abe3d709cdcb09",
+        "owner_tests": 231,
+        "independent_preserved_probe_checks": 12,
+        "independent_receipt_sha256": "dc00bf099a60dffebb34dd709d230b8019d485a1ce33fa5039ddc2bf7f40d5f3",
+        "github_ci": "https://github.com/zhengcb81/revenue-forecast/actions/runs/44750115722",
+        "github_ci_conclusion": "success",
+        "status": "independent_scope_interval_lineage_and_archived_report_passed_and_published"
       },
       "audit_w03": "independently_accepted_local_fast_forward_both_skill_copies_match",
       "cwp_w04": {
@@ -250,6 +257,9 @@
           "feedback_ref": "phase-c/phaseC-090-d76f22563280/summary-generation",
           "feedback_occurrence_id": "e24c27368b2f5244dfea39daaa55a72390aeac6e2622917fd448fb44bb897b52",
           "feedback_implementation_sha256": "94bcc54d15769831e3b26d83112400abd7fc8910a2cd0e7f6fd980550d518ea1",
+          "feedback_published_head": "5fdd29c4e93555131bfab2434e38a09a5ca79102",
+          "feedback_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/44748755201",
+          "feedback_ci_conclusion": "success",
           "feedback_status": "independently_verified_exact_original_terminal_failure_and_cost_unknown"
         },
         "status": "source_changes_published_live_v8_timeout_one_unknown_hold_no_new_summary_cache_or_rf_adoption"
@@ -307,6 +317,17 @@
       "new_model_posts": 0,
       "wire_metering_complete": false,
       "status": "verified_comparability_scope_future_issuer_magnitude_still_open"
+    },
+    "independent_customer_original": {
+      "provider_document_id": "0001517022-26-000051",
+      "published_date": "2026-08-05",
+      "source_sha256": "eb917c22cb2bf6915e314e9f2323b138c01fd2f32a297fec1befcc910134eaab",
+      "source_bytes": 2233822,
+      "native_receipt_sha256": "eb3e67939f9cbaea6483a36044eca70a1e7293dececb83391438d14571a6dafe",
+      "download_events": 1,
+      "reuse_download_events": 0,
+      "acquisition_reported_cost_usd": null,
+      "status": "verified_registered_counterparty_original_no_assigned_issuer_revenue"
     },
     "paired_public_reconciliation": "real RF job succeeded with known costs and its Audit capture succeeded with unknown wrapper costs; zero new business requests",
     "recorded_gate_review": {

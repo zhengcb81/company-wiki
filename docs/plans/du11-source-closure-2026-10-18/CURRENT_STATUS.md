@@ -12,7 +12,9 @@ CWP 的本地 SQLite `#` 和 `%23` 路径问题已根修并经独审。FF 离线
 
 CWP `ccc09205` 的组合测试 171 项通过，远端 CI 发现测试观察器没有传递新增参数。修复版 `bbfadb7a` 已推送，精确 CI 成功。正常宿主的 `/8` 环回仅向测试服务请求一次，同次激活和跨次缓存均零重发。FF 发布版 `17e83b0` 的精确 CI 也已通过。 [CWP 原失败](https://github.com/zhengcb81/company-wiki/actions/runs/44740497857) · [CWP 修复版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/44741879748) · [FF CI](https://github.com/zhengcb81/filing-fetch/actions/runs/44739818531)
 
-RF W01 `c03b9e4` 的真实试算及 24 项定向检查已独审通过。两种可证明等价式的误拒由 `4cf3490` 返修，待最终组合审查。W02 `d79560ed` 的同行真实输入已转绿，独审发现其他沟通类型和共同输入仍有相同边界问题。RF 本仓继续修复，同时保留旧报告可读性。1C 已完成六份原件的本地复验，远期量价和确认期继续待证。 [W12 接续](review/w12-wuxi-resume-20261120/README.md#w02-新发现同行财报日期影响本公司覆盖)
+RF W01、W02 最终版 `cbb523a` 已通过独审和精确 CI，远端主线快进。同行材料可作反证，发行人的沟通范围按自身核对。真实部分覆盖仍能保存，旧报告原字节和金额可读回。CWP 失败反馈修复 `5fdd29c` 已推送，精确 CI 成功。 [RF 接收](review/w12-wuxi-resume-20261120/README.md#w02-新发现同行财报日期影响本公司覆盖) · [RF CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/44750115722) · [CWP CI](https://github.com/zhengcb81/company-wiki/actions/runs/44748755201)
+
+药明 1C 已核六份原件，并通过公开链路取得客户 Akebia 的 10-Q。首次下载 1 份，随后零重复下载。其单合同采购承诺可作反证和量级约束，远期分部收入、实际确认期仍待证。 [研究与来源](review/w12-wuxi-resume-20261120/README.md#w01-研究量级复核)
 
 ## 2026-11-20 反馈工程进展
 
