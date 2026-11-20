@@ -11,13 +11,13 @@
     "cumulative_micro_usd": 20000000,
     "company_allocation": "soft target150000tokens/$1",
     "latest_verified_usage": {
-      "tokens": 2009602,
-      "micro_usd": 770708,
+        "tokens": 2034576,
+        "micro_usd": 775848,
       "includes_historical_unknowns": true,
       "new_unknown_count": 8,
       "prior_unknown_count": 7,
-      "evidence": "../feedback-loop-2026-11-17/f3b-live-acceptance.md",
-      "note": "Two /7 production responses used 34311 tokens and an estimated 6836 microUSD. Activation, restart, and cross-run reuse added no POST or usage."
+        "evidence": "review/w12-wuxi-resume-20261120/README.md",
+        "note": "The W12 H1 generation used 24974 tokens and a 5140 microUSD budget proxy. Activation, same-run recovery and cross-run cache reuse added no POST or usage."
     }
   },
   "remaining_stages": [
@@ -50,7 +50,7 @@
     },
     {
       "id": "P3",
-      "status": "W12_SCOPE_FROZEN_AND_EXISTING_FILINGS_REUSED",
+      "status": "W12_CURRENT_H1_SUMMARY_CACHE_AND_FIRST_RF_ADOPTION_VERIFIED",
       "task": "W12 company rerun, new-company generalization, fixed 8-company full audit/skill improvement and final clean streak"
     }
   ],
@@ -59,9 +59,9 @@
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
   "history_index": "HISTORY.md",
   "native_goal": {
-    "observed_status": "paused",
-    "observed_via": "get_goal during the 2026-11-20 W12 resumption",
-    "execution": "This thread continues W12 under the current review cycle. Native goal status is tracked independently.",
+    "observed_status": "active",
+    "observed_via": "Original desktop goal resumed and verified by get_goal during the 2026-11-20 W12 run",
+    "execution": "The original goal is running. W12 is the current company attempt under that goal.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -92,7 +92,7 @@
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
   "project_status": "MODULE_BOUNDARIES_M3_CLOSED; F3_SCOPED_REAL_TRIAL_AND_SAVED_REPAIR_ACCEPTED; P3_OPEN",
-  "as_of_date": "2026-11-17",
+  "as_of_date": "2026-11-20",
   "observed_at_utc": "2026-11-17T23:23:11Z",
   "cwp_saved_response_repair": {
     "evidence": "../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md",
@@ -174,9 +174,9 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Continue W12 through Audit native observation, F4 refusal review and owner-scoped repair. Verify current real summary, cache recovery, and RF adoption before four whole-company reviews.",
+  "next_action": "Verify the original W12 RF job, report and snapshot, then run four whole-company reviews. Use the logged saved-response claim phase defect for TDD in company-wiki and continue owner-scoped feedback.",
   "w12_attempt": {
-    "status": "frozen_and_source_preparation_in_progress",
+    "status": "current_h1_cache_and_rf_adoption_verified_formal_job_completed",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
     "run_id": "w12-20261120-cn-603259",
     "attempt_id": "w12-a01",
@@ -186,7 +186,29 @@
     "engine_manifest_short": "5f3ad719ecde6030",
     "existing_filings_verified": 3,
     "new_downloads_at_freeze": 0,
-    "new_model_posts_at_freeze": 0
+    "new_model_posts_at_freeze": 0,
+    "cwp_h1_summary": {
+      "run_id": "phaseC-090-fbf3537e739d",
+      "assessment": "source-summary-assessment/1.4.0",
+      "artifact_sha256": "7da5e310598e5fb1d9a83d2fdda97ca830f902e5f3e2155369cd6ebcc1c7209a",
+      "new_model_posts": 1,
+      "recovery_new_model_posts": 0,
+      "new_downloads": 0,
+      "selection_status": "partial",
+      "summary_quality": "needs_review"
+    },
+    "audit_local_main_and_skill_copies": "87849d893677376eb9c65ab2ce8ab850b61d6164",
+    "cwp_feedback_git": "68a7db0d0482c4da24d00be4afceab861c96eb0b",
+    "cwp_feedback_github_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/44720012039",
+    "rf_adoption": "t13-1 bound to tides_base_h2_2026 and 2026 direct_growth, 124 parameter values unchanged",
+    "rf_owner_job_id": "rfjob-20261120-594c00a589d1",
+    "recorded_gate_review": {
+      "operation_event_id": "17488eb0361100caea1754b75567ba00",
+      "review_event_id": "3a6e3fe2e0ca42c2bcdf672c32ca6ad1",
+      "decision": "retain",
+      "native_host_triage": "unknown_after_same_session_resume"
+    },
+    "summary_content_follow_up_event_id": "482a7ac3cc5f12281d455b22ba4632e8"
   },
   "feedback_loop": {
     "plan": "../feedback-loop-2026-11-17/task_plan.md",
@@ -246,7 +268,7 @@
     },
     "host_prelaunch_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "host_owner_report_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
-    "company_pool": "w12_started_in_current_thread"
+    "company_pool": "resumed_at_w12"
   },
   "p1_business_quote_view": {
     "status": "ACCEPTED",
