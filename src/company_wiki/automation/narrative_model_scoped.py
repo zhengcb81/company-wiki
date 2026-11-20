@@ -12,6 +12,7 @@ import json
 import logging
 from typing import Any
 
+from company_wiki.document_understanding.assertion_frames import ASSERTION_FRAME_PROFILES
 from company_wiki.document_understanding.business_scope import assess_business_scope
 from company_wiki.implementation_identity import code_sha256
 from company_wiki.source_catalog.narrative_contracts import narrative_wire_sha256
@@ -27,7 +28,7 @@ from company_wiki.wire_json import encoding_sha256
 from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import NarrativeSelectResult
 from .narrative_summary_protocols import (
-    BUSINESS_SCOPE_ASSESSMENT_VERSION, LEGACY_SCOPED, ScopedSummaryProtocol, scoped_protocol_for_prompt,
+    BUSINESS_SCOPE_ASSESSMENT_VERSIONS, LEGACY_SCOPED, ScopedSummaryProtocol, scoped_protocol_for_prompt,
 )
 
 
@@ -98,18 +99,24 @@ ATOMIC_INSTRUCTION = FIDELITY_INSTRUCTION + (
     'source_key and normalized clause ordinal, not quotations, business facts or truth judgments. '
     'Always check original source text; absent or limited hints never mean a task may be omitted.'
 )
+ASSERTION_INSTRUCTION = ATOMIC_INSTRUCTION + (
+    ' A reported_start hint marks an explicitly started action. Starting and finishing are distinct. '
+    'Use a reporting-period label only where the same task binds it to the same action and actor. '
+    'Separate an action already started in that period from its future schedule, design capacity, or prerequisites. '
+    'A statement of customer demand or a supply-demand relationship does not by itself state a prerequisite.'
+)
 
 
 def scoped_instruction(protocol: ScopedSummaryProtocol) -> str:
     return {'legacy': SCOPED_INSTRUCTION, 'fidelity': FIDELITY_INSTRUCTION,
-            'atomic': ATOMIC_INSTRUCTION}[protocol.instruction_profile]
+            'atomic': ATOMIC_INSTRUCTION, 'assertion': ASSERTION_INSTRUCTION}[protocol.instruction_profile]
 
 
 def scoped_model_material(view, protocol: ScopedSummaryProtocol) -> dict[str, Any]:
     material = view.to_model_dict()
-    if protocol.material_profile == 'source_frames/1':
+    if protocol.material_profile in ASSERTION_FRAME_PROFILES:
         from .narrative_frame_hints import compact_frame_hints
-        material['source_frame_hints'] = compact_frame_hints(view.source_hint_inputs())
+        material['source_frame_hints'] = compact_frame_hints(view.source_hint_inputs(), profile=protocol.material_profile)
     return material
 
 
@@ -165,7 +172,7 @@ def scoped_boundary_identity(boundary, *, protocol: ScopedSummaryProtocol = LEGA
     if protocol.assess_fidelity:
         from .narrative_summary_assessment import assessment_identity
         dependencies['summary_assessment'] = canonical_json_hash(assessment_identity(protocol.assessor_version))
-    if protocol.material_profile == 'source_frames/1':
+    if protocol.material_profile in ASSERTION_FRAME_PROFILES:
         from . import narrative_frame_hints
         dependencies['source_frame_hints'] = code_sha256(narrative_frame_hints.__file__)
     instruction = scoped_instruction(protocol)
@@ -343,7 +350,7 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
                     validate_summary_claim(typed, known, 'draft')
                 except SummaryValidationError as exc:
                     raise NarrativeContractError(str(exc)) from exc
-                if (protocol.assessor_version == BUSINESS_SCOPE_ASSESSMENT_VERSION
+                if (protocol.assessor_version in BUSINESS_SCOPE_ASSESSMENT_VERSIONS
                         and typed.claim_type == 'company_statement'
                         and len(binding.basis_ids) == 1 and binding.basis_ids == binding.support_ids):
                     basis = known[binding.basis_ids[0]]

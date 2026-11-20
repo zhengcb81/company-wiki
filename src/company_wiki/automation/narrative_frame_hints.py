@@ -2,13 +2,17 @@
 from collections.abc import Iterable
 from typing import Any
 
-from company_wiki.document_understanding.assertion_frames import source_assertion_frames
+from company_wiki.document_understanding.assertion_frames import (
+    LEGACY_ASSERTION_FRAME_PROFILE, source_assertion_frames,
+)
 
 MAX_HINTS_PER_SOURCE = 64
 MAX_HINTS = 256
 
 
-def compact_frame_hints(parts: Iterable[tuple[str, str]]) -> dict[str, Any]:
+def compact_frame_hints(
+    parts: Iterable[tuple[str, str]], *, profile: str = LEGACY_ASSERTION_FRAME_PROFILE,
+) -> dict[str, Any]:
     """Source keys/ordinals are model references, never new evidence locators."""
     unique: dict[str, str] = {}
     for key, text in parts:
@@ -19,10 +23,11 @@ def compact_frame_hints(parts: Iterable[tuple[str, str]]) -> dict[str, Any]:
     observed = retained = 0
     for key, text in unique.items():
         rows: list[dict[str, Any]] = []
-        for ordinal, frame in enumerate(source_assertion_frames(text)):
+        for ordinal, frame in enumerate(source_assertion_frames(text, profile=profile)):
             flags: dict[str, Any] = {}
             for name, value in (('ongoing', frame.ongoing_activity),
                                 ('future', frame.future_marker),
+                                ('reported_start', frame.reported_start),
                                 ('reported', bool(frame.reporting_prefix)),
                                 ('inherits_reporting', frame.reporting_inherited),
                                 ('condition_present', bool(frame.project_condition or frame.pending_requirement))):
@@ -38,6 +43,7 @@ def compact_frame_hints(parts: Iterable[tuple[str, str]]) -> dict[str, Any]:
                 retained += 1
         if rows:
             sources[key] = rows
-    return {'schema_version': 'source-frame-hints/1',
+    version = 'source-frame-hints/1' if profile == LEGACY_ASSERTION_FRAME_PROFILE else 'source-frame-hints/2'
+    return {'schema_version': version,
             'interpretation': 'finite_source_observations_not_business_facts',
             'sources': sources, 'observed_count': observed, 'limited': observed > retained}

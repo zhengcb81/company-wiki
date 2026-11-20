@@ -8,9 +8,9 @@ def test_shared_source_is_framed_once_and_never_copied_into_hint_rows(monkeypatc
     calls = []
     original = hints.source_assertion_frames
 
-    def observe(text):
+    def observe(text, *, profile):
         calls.append(text)
-        return original(text)
+        return original(text, profile=profile)
 
     monkeypatch.setattr(hints, 'source_assertion_frames', observe)
     source = '甲方正在完善服务网络。'

@@ -24,7 +24,8 @@ from .migrations import InvalidDatabasePathError
 from .narrative_generation_binding import thaw_generation_manifests
 from .narrative_http_model import NarrativeHTTPModel
 from .narrative_model import (
-    NARRATIVE_PROMPT_VERSION, PROJECTION_NARRATIVE_PROMPT_VERSION, PROJECTION_MODEL_REQUEST_SCHEMA,
+    ModelBoundary, ModelResponseError, NARRATIVE_PROMPT_VERSION,
+    PROJECTION_NARRATIVE_PROMPT_VERSION, PROJECTION_MODEL_REQUEST_SCHEMA,
 )
 from company_wiki.source_catalog.narrative_official_json import (
     NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION, bind_projection_loader,
@@ -158,8 +159,6 @@ def _generation_values(binding_json: str | None) -> dict[str, str]:
 
 def _reading_projection_identity(manifest: Mapping[str, Any]) -> str | None:
     """Decode a historical choice without requiring its implementation now."""
-    from .narrative_model import ModelResponseError
-
     version = manifest.get("reading_model_projection")
     if (("reading_model_projection" in manifest and version is None)
             or (version is not None and (not isinstance(version, str) or not version
@@ -168,23 +167,40 @@ def _reading_projection_identity(manifest: Mapping[str, Any]) -> str | None:
     return version
 
 
-def _validate_model_software(manifest: Mapping[str, Any]) -> str | None:
-    """Validate only the implementation a particular summarize job will use."""
-    from .narrative_model import ModelResponseError
-    from .narrative_model_runtime import (
-        reading_model_boundary_identity, resolve_model_boundary,
-    )
+def _model_recipe(manifest: Mapping[str, Any]) -> ModelBoundary:
+    """Resolve the declared renderer and decoder needed to interpret a response."""
+    from .narrative_model_runtime import resolve_model_boundary
 
     version = _reading_projection_identity(manifest)
     projected = manifest.get("schema_version") == "narrative-generation/2"
     boundary = resolve_model_boundary(version, projected=projected)
     if boundary.source_owned:
-        versions = manifest["execution_versions"]
+        versions = manifest.get("execution_versions", {})
+        recorded = manifest.get("reading_model_boundary")
         if (
-            manifest.get("reading_model_boundary") != reading_model_boundary_identity(version, projected=projected)
+            not isinstance(versions, Mapping)
+            or not isinstance(recorded, Mapping)
+            or recorded.get("schema_version") != "reading-model-boundary/1"
+            or recorded.get("reading_projection_version") != boundary.reading_projection_version
+            or recorded.get("prompt_version") != boundary.prompt_version
+            or recorded.get("request_schema") != boundary.request_schema
+            or recorded.get("decoder_version") != boundary.decoder_version
             or versions.get("prompt") != boundary.prompt_version
             or versions.get("model_request_schema") != boundary.request_schema
         ):
+            raise ModelResponseError("READING_MODEL_BOUNDARY_UNAVAILABLE")
+    return boundary
+
+
+def _validate_model_software(manifest: Mapping[str, Any]) -> str | None:
+    """Compare current implementation fingerprints before creating a new request."""
+    from .narrative_model_runtime import reading_model_boundary_identity
+
+    boundary = _model_recipe(manifest)
+    version = boundary.reading_projection_version
+    if boundary.source_owned:
+        projected = manifest.get("schema_version") == "narrative-generation/2"
+        if manifest.get("reading_model_boundary") != reading_model_boundary_identity(version, projected=projected):
             raise ModelResponseError("READING_MODEL_BOUNDARY_UNAVAILABLE")
         from .narrative_summarize import reading_summary_validation_identity
 
@@ -323,6 +339,9 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     generation_values, selector_version = snapshot.generation_values, snapshot.selector_version
     reading_projections = snapshot.reading_projections
 
+    def model_execution_projection(subject) -> str | None:
+        return _model_recipe(snapshot.frozen_generations[subject.item_key]).reading_projection_version
+
     def validate_model_execution(subject) -> None:
         _validate_model_software(snapshot.frozen_generations[subject.item_key])
     project_root = Path(options["project_root"])
@@ -390,6 +409,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             projection_loader=bind_projection_loader(catalog), selector_version=selector_version,
             reading_model_projection=(lambda subject: reading_projections[subject.item_key])
                 if reading_projections else None,
+            model_execution_projection=model_execution_projection if snapshot.frozen_generations else None,
             validate_model_execution=validate_model_execution if snapshot.frozen_generations else None,
             work_budget_factory=work_budget_factory,
             generation_sha256=_generation_resolver(run_store, options["run_id"], generation_values,

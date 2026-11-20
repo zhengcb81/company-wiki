@@ -52,15 +52,18 @@ def test_completed_language_projection_wrapper_and_terminal_keep_atomic_assessor
 
 
 @pytest.mark.parametrize('projected', [False, True])
-def test_atomic_bundle_raw_or_projected_preserves_quality_and_assessment(projected):
+@pytest.mark.parametrize('projection,assessor', [
+    (VERSION, ASSESSOR), ('reading-model-input/8', 'source-summary-assessment/1.5.0'),
+])
+def test_atomic_bundle_raw_or_projected_preserves_quality_and_assessment(projected, projection, assessor):
     from unit.test_narrative_source_owned_model_boundary import official_reading
     source = official_reading() if projected else None
-    source, summary, report = materials(source)
+    source, summary, report = materials(source, version=projection)
     bundle = NarrativeVerifyHandler._bundle(source, summary, source.prompt_review,
-                                           reading_projection_version=VERSION)
+                                           reading_projection_version=projection)
     wire = bundle.to_dict()
     assert wire['schema_version'] == ('narrative-bundle/3.1' if projected else 'narrative-bundle/2.1')
-    assert wire['summary_assessment']['validator']['version'] == ASSESSOR
+    assert wire['summary_assessment']['validator']['version'] == assessor
     assert wire['summary_assessment'] == report
     assert wire['quality_status'] == 'needs_review'
     assert wire['summary_assessment']['semantic_status'] == 'not_evaluated'

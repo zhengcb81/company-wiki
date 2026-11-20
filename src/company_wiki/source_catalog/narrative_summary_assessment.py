@@ -10,6 +10,10 @@ import re
 from typing import Any
 
 from company_wiki.document_model.text_matching import matching_reading_text
+from company_wiki.document_understanding.assertion_frames import (
+    ASSERTION_FRAME_PROFILE, LEGACY_ASSERTION_FRAME_PROFILE, assertion_clause_key,
+    is_reporting_period_heading, source_assertion_frames,
+)
 from company_wiki.document_understanding.business_scope import assess_business_scope, business_scope_sha256
 from company_wiki.implementation_identity import code_sha256
 from .narrative_claims import summary_claim_type_for_roles, summary_claims_sha256
@@ -18,14 +22,16 @@ from company_wiki.source_contract import EvidenceSpan
 from company_wiki.wire_json import canonical_json, canonical_json_hash, encoding_sha256, plain_json
 from .narrative_contracts import NarrativeSelectResult
 from .narrative_summary_material import compile_scoped_material_view, scoped_material_sha256
-from .narrative_summary_protocols import BUSINESS_SCOPE_ASSESSMENT_VERSION, CLAUSE_SCOPE_ASSESSMENT_VERSION
+from .narrative_summary_protocols import (
+    ASSERTION_ASSESSMENT_VERSION, BUSINESS_SCOPE_ASSESSMENT_VERSIONS, CLAUSE_SCOPE_ASSESSMENT_VERSION,
+)
 
 ASSESSMENT_SCHEMA = 'summary-assessment/1'
 ASSESSMENT_VERSION = 'source-summary-assessment/1.0.0'
 ATOMIC_ASSESSMENT_VERSION = 'source-summary-assessment/1.1.0'
 QUALIFIED_ASSESSMENT_VERSION = 'source-summary-assessment/1.2.0'
 _QUALIFIER_ASSESSMENTS = frozenset({QUALIFIED_ASSESSMENT_VERSION, CLAUSE_SCOPE_ASSESSMENT_VERSION,
-                                    BUSINESS_SCOPE_ASSESSMENT_VERSION})
+                                    *BUSINESS_SCOPE_ASSESSMENT_VERSIONS})
 ASSESSMENT_VERSIONS = frozenset({
     ASSESSMENT_VERSION, ATOMIC_ASSESSMENT_VERSION, *_QUALIFIER_ASSESSMENTS,
 })
@@ -67,7 +73,7 @@ def assessment_identity(version: str | None = None) -> dict[str, Any]:
     }
     if version == ATOMIC_ASSESSMENT_VERSION or version in _QUALIFIER_ASSESSMENTS:
         dependencies['assertion_frames'] = assertion_frames_sha256()
-    if version == BUSINESS_SCOPE_ASSESSMENT_VERSION:
+    if version in BUSINESS_SCOPE_ASSESSMENT_VERSIONS:
         dependencies['business_scope'] = business_scope_sha256()
     return {'version':version,'implementation_sha256':canonical_json_hash(dependencies),
             'dependencies':dependencies}
@@ -127,7 +133,6 @@ def prose_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, 
 
 def atomic_prose_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, str]]:
     """Additional finite observations; v1 rules above retain their interpretation."""
-    from company_wiki.document_understanding.assertion_frames import source_assertion_frames
     result = prose_diagnostics(source, claim, modality)
     claim_frames = source_assertion_frames(claim)
     for frame in source_assertion_frames(source):
@@ -148,7 +153,6 @@ def atomic_prose_diagnostics(source: str, claim: str, modality: str) -> list[dic
 
 def source_frame_modality_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, str]]:
     """Observe source-frame modality not covered by the original lexical rules."""
-    from company_wiki.document_understanding.assertion_frames import source_assertion_frames
 
     result: list[dict[str, str]] = []
     if modality not in {'planned', 'forecast', 'uncertain'}:
@@ -170,7 +174,6 @@ def qualified_prose_diagnostics(source: str, claim: str, modality: str) -> list[
 
 def _historical_condition_losses(evidence_spans, support, cited, claim_frames):
     """Replay 1.2's span-level condition semantics for immutable assessments."""
-    from company_wiki.document_understanding.assertion_frames import source_assertion_frames
 
     frames_by_span = {span.span_id: source_assertion_frames(span.raw_text or '')
                       for span in evidence_spans if span.span_id in cited}
@@ -191,9 +194,40 @@ def _historical_condition_losses(evidence_spans, support, cited, claim_frames):
         has_matching_support = has_matching_support or sid in matching_support
 
 
-def _condition_losses(evidence_spans, support, cited, claim_frames):
+def _statement_scope(span: EvidenceSpan) -> tuple[Any, ...]:
+    metadata = span.structured_value
+    return (span.source_id, metadata.get('source_role'), metadata.get('speaker'), metadata.get('turn_id'))
+
+
+def _factual_span(span: EvidenceSpan) -> bool:
+    return span.parse_status == 'parsed' and span.structured_value.get('source_role') in {'company_filing', 'management'}
+
+
+def _adjacent_reporting_heading(heading: EvidenceSpan, action: EvidenceSpan) -> bool:
+    before, after = heading.coordinates, action.coordinates
+    return (before.page_number == after.page_number and before.paragraph_index is not None
+            and after.paragraph_index == before.paragraph_index + 1
+            and _statement_scope(heading) == _statement_scope(action)
+            and _factual_span(heading) and is_reporting_period_heading(heading.raw_text or ''))
+
+
+def _reported_action_spans(evidence_spans, support, context, claim_frames):
+    """Bind a started action only to its own cited clause and adjacent task context."""
+    claimed = {assertion_clause_key(frame.matching_text) for frame in claim_frames}
+    previous = None
+    for span in evidence_spans:
+        if span.span_id in support and _factual_span(span):
+            within_period = (previous is not None and previous.span_id in context
+                             and _adjacent_reporting_heading(previous, span))
+            frames = source_assertion_frames(span.raw_text or '', profile=ASSERTION_FRAME_PROFILE,
+                                             reporting_period=within_period)
+            if any(frame.reported_start and assertion_clause_key(frame.matching_text) in claimed for frame in frames):
+                yield span.span_id
+        previous = span
+
+
+def _condition_losses(evidence_spans, support, cited, claim_frames, *, frame_profile):
     """Diagnose an omitted prerequisite of the preceding proposition in cited source order."""
-    from company_wiki.document_understanding.assertion_frames import source_assertion_frames
 
     conditions = {' '.join(frame.pending_requirement.casefold().split())
                   for frame in claim_frames if frame.pending_requirement}
@@ -204,12 +238,11 @@ def _condition_losses(evidence_spans, support, cited, claim_frames):
             previous_scope = None
             antecedent_matches = False
             continue
-        scope = (span.source_id, span.structured_value.get('source_role'),
-                 span.structured_value.get('speaker'), span.structured_value.get('turn_id'))
+        scope = _statement_scope(span)
         if scope != previous_scope:
             antecedent_matches = False
         previous_scope = scope
-        for frame in source_assertion_frames(span.raw_text or ''):
+        for frame in source_assertion_frames(span.raw_text or '', profile=frame_profile):
             requirement = frame.pending_requirement
             backward_reference = frame.anaphoric_pending_condition or frame.coordinated_pending_condition
             if not backward_reference:
@@ -228,11 +261,12 @@ def claim_qualifier_diagnostics(
     assessor_version: str = CLAUSE_SCOPE_ASSESSMENT_VERSION,
 ) -> list[dict[str, str]]:
     """Cited support supplies the proposition, and cited context can qualify it."""
-    from company_wiki.document_understanding.assertion_frames import source_assertion_frames
 
     by_id = {span.span_id: span for span in evidence_spans}
     support = [sid for sid in support_ids if sid in by_id]
-    cited = set(support) | {sid for sid in context_ids if sid in by_id}
+    context = {sid for sid in context_ids if sid in by_id}
+    support_set = set(support)
+    cited = support_set | context
     diagnostics: list[dict[str, str]] = []
     for sid in support:
         source_text = by_id[sid].raw_text or ''
@@ -242,15 +276,23 @@ def claim_qualifier_diagnostics(
         diagnostics.extend({'source_span_id': sid, **row}
                            for row in direct)
 
-    condition_losses = (_historical_condition_losses if assessor_version == QUALIFIED_ASSESSMENT_VERSION
-                        else _condition_losses)
+    observe_start = assessor_version == ASSERTION_ASSESSMENT_VERSION
+    frame_profile = ASSERTION_FRAME_PROFILE if observe_start else LEGACY_ASSERTION_FRAME_PROFILE
+    claim_frames = source_assertion_frames(claim, profile=frame_profile)
+    if assessor_version == QUALIFIED_ASSESSMENT_VERSION:
+        condition_losses = _historical_condition_losses(evidence_spans, support_set, cited, claim_frames)
+    else:
+        condition_losses = _condition_losses(evidence_spans, support_set, cited, claim_frames,
+                                             frame_profile=frame_profile)
     diagnostics.extend(
         {'source_span_id': sid, 'rule_code': 'possible_condition_scope_loss'}
-        for sid in condition_losses(evidence_spans, set(support), cited, source_assertion_frames(claim))
+        for sid in condition_losses
     )
-    if assessor_version == BUSINESS_SCOPE_ASSESSMENT_VERSION:
-        factual_ids = [sid for sid in support if by_id[sid].parse_status == 'parsed'
-                       and by_id[sid].structured_value.get('source_role') in {'company_filing', 'management'}]
+    if observe_start and modality in {'planned', 'forecast'}:
+        diagnostics.extend({'source_span_id': sid, 'rule_code': 'possible_current_action_as_future'}
+                           for sid in _reported_action_spans(evidence_spans, support_set, context, claim_frames))
+    if assessor_version in BUSINESS_SCOPE_ASSESSMENT_VERSIONS:
+        factual_ids = [sid for sid in support if _factual_span(by_id[sid])]
         scope = assess_business_scope([by_id[sid].raw_text or '' for sid in factual_ids], claim)
         diagnostics.extend({'source_span_id': factual_ids[index], 'rule_code': 'possible_business_scope_loss'}
                            for index in scope.source_indices)
@@ -388,7 +430,7 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
     dep_keys = {'matching','task_plan','admission','scoped_view','encoding','claim_roles','assessment'}
     if validator['version'] == ATOMIC_ASSESSMENT_VERSION or validator['version'] in _QUALIFIER_ASSESSMENTS:
         dep_keys.add('assertion_frames')
-    if validator['version'] == BUSINESS_SCOPE_ASSESSMENT_VERSION:
+    if validator['version'] in BUSINESS_SCOPE_ASSESSMENT_VERSIONS:
         dep_keys.add('business_scope')
     require(isinstance(deps,dict) and set(deps)==dep_keys)
     require(all(sha(digest) for digest in deps.values()))
@@ -442,7 +484,7 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
     if validator['version'] in _QUALIFIER_ASSESSMENTS:
         rules |= {'possible_current_action_as_future', 'possible_project_capacity_basis_loss',
                   'possible_condition_scope_loss'}
-    if validator['version'] == BUSINESS_SCOPE_ASSESSMENT_VERSION:
+    if validator['version'] in BUSINESS_SCOPE_ASSESSMENT_VERSIONS:
         rules.add('possible_business_scope_loss')
     for row in diagnostics:
         require(isinstance(row,dict) and set(row)=={'task_key','claim_id','source_span_id','rule_code'})

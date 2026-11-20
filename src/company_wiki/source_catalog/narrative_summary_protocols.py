@@ -5,6 +5,8 @@ from types import MappingProxyType
 
 CLAUSE_SCOPE_ASSESSMENT_VERSION = 'source-summary-assessment/1.3.0'
 BUSINESS_SCOPE_ASSESSMENT_VERSION = 'source-summary-assessment/1.4.0'
+ASSERTION_ASSESSMENT_VERSION = 'source-summary-assessment/1.5.0'
+BUSINESS_SCOPE_ASSESSMENT_VERSIONS = frozenset({BUSINESS_SCOPE_ASSESSMENT_VERSION, ASSERTION_ASSESSMENT_VERSION})
 
 
 @dataclass(frozen=True)
@@ -33,8 +35,11 @@ ATOMIC_SCOPED = ScopedSummaryProtocol('reading-model-input/7','reading-source-sc
     'atomic','source_frames/1','coverage',BUSINESS_SCOPE_ASSESSMENT_VERSION,False,
     historical_assessor_versions=('source-summary-assessment/1.1.0', 'source-summary-assessment/1.2.0',
                                   CLAUSE_SCOPE_ASSESSMENT_VERSION))
+ASSERTION_SCOPED = ScopedSummaryProtocol('reading-model-input/8','reading-source-scoped/4.4.0',
+    'narrative-model-request/9','reading-scoped-task-decoder/7',40,True,
+    'assertion','source_frames/2','coverage',ASSERTION_ASSESSMENT_VERSION,False)
 
-SCOPED_PROTOCOLS = (LEGACY_SCOPED, FIDELITY_SCOPED, ATOMIC_SCOPED)
+SCOPED_PROTOCOLS = (LEGACY_SCOPED, FIDELITY_SCOPED, ATOMIC_SCOPED, ASSERTION_SCOPED)
 _BY_PROJECTION = MappingProxyType({item.projection: item for item in SCOPED_PROTOCOLS})
 _BY_PROMPT = MappingProxyType({item.prompt: item for item in SCOPED_PROTOCOLS})
 _BY_REQUEST = MappingProxyType({item.request_schema: item for item in SCOPED_PROTOCOLS})
@@ -89,7 +94,8 @@ def summary_protocols_sha256(*, universal_newlines: bool = False) -> str:
 
 
 __all__ = [
-    "ASSESSED_BUNDLE", "ASSESSED_PROMPTS", "ATOMIC_SCOPED", "BUSINESS_SCOPE_ASSESSMENT_VERSION",
+    "ASSESSED_BUNDLE", "ASSESSED_PROMPTS", "ASSERTION_ASSESSMENT_VERSION", "ASSERTION_SCOPED", "ATOMIC_SCOPED",
+    "BUSINESS_SCOPE_ASSESSMENT_VERSION", "BUSINESS_SCOPE_ASSESSMENT_VERSIONS",
     "CLAUSE_SCOPE_ASSESSMENT_VERSION", "FIDELITY_SCOPED",
     "LEGACY_BUNDLE", "LEGACY_SCOPED", "SCOPED_PROJECTIONS", "SCOPED_PROTOCOLS",
     "ScopedSummaryProtocol", "SummaryBundleFormat", "scoped_protocol_for_projection",
