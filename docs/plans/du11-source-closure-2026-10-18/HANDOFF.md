@@ -1,5 +1,7 @@
 # 当前交接
 
+2026-11-20。W12 的运行与范围已建立，当前接续按 [W12 冻结与步骤](review/w12-wuxi-resume-20261120/README.md)。本次先走 Audit 原生日志和 F4 对实际拒绝的必要性审视。在各责任仓的公开端口保留原请求和原回执，沿已知 FF 复用结果推进。正式摘要、新缓存、RF 实际采用和四审均随该新轮次验收。
+
 2026-11-18。当前业务入口为 [业务主线](task_plan.md)。ET、SID、IR 已发布本仓实现并经 ROOT 组合签收。F4 的 CWP/FF 和 RF/Audit 真实宿主闭环与强杀恢复均已通过。其余 owner 按分工接续，下一家公司及 RF 采用仍走 W12。[CWP/FF 验收](../feedback-loop-2026-11-17/f4-acceptance.md) · [RF/Audit 验收](../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md) · [F2 路线](../feedback-loop-2026-11-17/f2-roadmap.md) · [逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。
 
 1. CWP 的浏览请求隔离、目录投影和 PDF 解析端口已在主线发布为 `12e65fe7d`。定向回归、独审和远端验收状态见 [浏览边界验收](../module-boundaries-2026-11-11/review/cwp-browse-owners-20261116.md)。上一节点的共享读取预算随父链进入该版本，原收据保留在 [CN 读取预算](../module-boundaries-2026-11-11/review/cwp-cn-issuer-read-budget-20261115.md)。

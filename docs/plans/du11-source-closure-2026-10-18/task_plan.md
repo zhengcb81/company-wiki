@@ -1,6 +1,6 @@
 # 主线实施计划
 
-**2026-11-17 当前执行顺序。** M3 已闭合，P1/P2 已通过[真实摘要、缓存和 RF 采用试点](../feedback-loop-2026-11-17/f3b-live-acceptance.md)，草稿业务范围及精选通过[保存响应和跨市场复验](../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md)。以 [CURRENT_STATUS](CURRENT_STATUS.md) 与 [HANDOFF](HANDOFF.md) 接续 W12 和后续完整公司样本，核对现版本实际生成和 RF 采用。总控和各外包作者分别按[反馈施工分工](../feedback-loop-2026-11-17/dispatch.md)执行。
+**2026-11-20 当前执行顺序。** M3 已验收，F4 的 12 仓接线和约定场景已通过组合验收。W12 已建立新的药明康德运行。Audit 先在本仓原生日志记录实际问题，再通过 F4 分诊。收到拒绝时核对触发检查的作用与责任仓，再交该仓验证并修复。和本次 W12 的零付费来源准备可并行。沿 [CURRENT_STATUS](CURRENT_STATUS.md) 和 [W12 冻结与步骤](review/w12-wuxi-resume-20261120/README.md) 接续。P1/P2 的[真实摘要、缓存和 RF 采用试点](../feedback-loop-2026-11-17/f3b-live-acceptance.md)及[保存响应与跨市场复验](../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md)为当前业务验证的对照。
 
 ## P1 及后续业务节点
 

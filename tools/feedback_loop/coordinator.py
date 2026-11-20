@@ -95,12 +95,15 @@ def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
     if unfinished or row["disposition"] == "unknown":
         return _reconcile(key, row, host, observation)
     expected = row["disposition"] == "expected"
-    if expected and "refusal_code" not in row:
+    refusal = "refusal_code" in row
+    if expected and not refusal:
         return {"status": "expected"}
     owner, triage = _triage(key, row, host)
     decision = triage.get("decision")
     review = _gate_review(triage)
     diagnostics = {"gate_review": review} if review else {}
+    if refusal and not expected and review.get("decision", "needs_evidence") == "needs_evidence":
+        return {"status": "needs_evidence", "step": "triage", **diagnostics}
     if decision in ("expected", "external", "needs_evidence"):
         return {"status": decision, "step": "triage", **diagnostics}
     if expected and review.get("decision") not in ("remove", "narrow"):

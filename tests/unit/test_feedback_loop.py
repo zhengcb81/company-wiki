@@ -3,6 +3,8 @@
 from collections import Counter
 import json
 
+import pytest
+
 from tools.feedback_loop.coordinator import advance
 from tools.feedback_loop.observations import read_batch
 
@@ -144,6 +146,40 @@ def test_marked_expected_refusal_preserves_legacy_disposition_without_removal_ev
         host.results["triage"]["gate_review"] = gate_review
         assert advance(cases, host)["observations"][0]["status"] == "expected"
         assert host.started == {"observe": 1, "triage": 1}
+
+
+@pytest.mark.parametrize("decision", ["repair", "fixed", "expected", "external"])
+@pytest.mark.parametrize("review", [None, {"decision": "narrow"}, {
+    "decision": "needs_evidence", "reason": "Cannot reproduce the refusal yet", "evidence_ref": "source/probe",
+}])
+def test_unexpected_refusal_needs_a_supported_review_before_resolution(tmp_path, decision, review):
+    refused = event(actual="refused", refusal_code="unsupported_document_scope")
+    cases = batch(tmp_path, refused)
+    host = NativeJobs()
+    host.results["triage"].update(decision=decision, fixed_version="published-fix", gate_review=review)
+
+    result = advance(cases, host)
+
+    assert result["observations"][0]["status"] == "needs_evidence"
+    assert host.targets == [("observe", "analyst"), ("triage", "source")]
+    assert advance(cases, host) == result
+
+
+@pytest.mark.parametrize("review_decision", ["narrow", "retain"])
+def test_unexpected_refusal_with_review_reuses_the_owner_repair_path(tmp_path, review_decision):
+    refused = event(actual="refused", refusal_code="unsupported_document_scope")
+    cases = batch(tmp_path, refused)
+    host = NativeJobs()
+    review = {"decision": review_decision, "reason": "Compared the valid and invalid scope",
+              "evidence_ref": "source/reproductions/27"}
+    host.results["triage"]["gate_review"] = review
+
+    result = advance(cases, host)
+
+    assert result["observations"][0]["status"] == "verified"
+    assert result["observations"][0]["gate_review"] == review
+    assert host.targets == [("observe", "analyst"), ("triage", "source"), ("repair", "source"),
+                            ("replay", "analyst"), ("report", "source")]
 
 
 def test_gate_review_waits_for_final_actual_refusal_and_ignores_malformed_tags(tmp_path):

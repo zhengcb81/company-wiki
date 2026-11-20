@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "live_feedback_pilot_and_saved_response_repair_accepted",
+  "execution_mode": "w12_company_attempt_after_scoped_feedback_rollout",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -50,7 +50,7 @@
     },
     {
       "id": "P3",
-      "status": "OPEN_AFTER_P1_P2",
+      "status": "W12_SCOPE_FROZEN_AND_EXISTING_FILINGS_REUSED",
       "task": "W12 company rerun, new-company generalization, fixed 8-company full audit/skill improvement and final clean streak"
     }
   ],
@@ -60,8 +60,8 @@
   "history_index": "HISTORY.md",
   "native_goal": {
     "observed_status": "paused",
-    "observed_via": "get_goal during the 2026-11-14 implementation",
-    "execution": "Manual work continued through module boundaries and current H1 verification. The next complete company attempt follows the current business-summary task.",
+    "observed_via": "get_goal during the 2026-11-20 W12 resumption",
+    "execution": "This thread continues W12 under the current review cycle. Native goal status is tracked independently.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -174,7 +174,20 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Operate F4 through the original durable inbox and owner receipts. Follow M6 for actual registered Dashboard results and use an original RF job with a configured read-only Audit check for production replay. W12 remains paused.",
+  "next_action": "Continue W12 through Audit native observation, F4 refusal review and owner-scoped repair. Verify current real summary, cache recovery, and RF adoption before four whole-company reviews.",
+  "w12_attempt": {
+    "status": "frozen_and_source_preparation_in_progress",
+    "receipt": "review/w12-wuxi-resume-20261120/README.md",
+    "run_id": "w12-20261120-cn-603259",
+    "attempt_id": "w12-a01",
+    "information_as_of": "2026-10-21",
+    "fiscal_years": [2026, 2027, 2028],
+    "scope_sha256": "a43123f06f74ac522f8ecf1e2f812ce4adc13f902dc67abfde6324f860c0cbdc",
+    "engine_manifest_short": "5f3ad719ecde6030",
+    "existing_filings_verified": 3,
+    "new_downloads_at_freeze": 0,
+    "new_model_posts_at_freeze": 0
+  },
   "feedback_loop": {
     "plan": "../feedback-loop-2026-11-17/task_plan.md",
     "progress": "../feedback-loop-2026-11-17/progress.md",
@@ -228,12 +241,12 @@
     "f4_locally_configured_native_closure": ["meeting-converter", "earnings-transcripts", "stockinfo-dl-simple", "industry-research", "stockwiki", "invest-quick-scan", "stockqa"],
     "f4_locally_configured_recovery_and_report": ["filing-fetch", "revenue-forecast"],
     "f4_live_data_follow_up": {
-      "investment-dashboard": "Public reads verified. The M6 formal result is unregistered in the checked authority.",
+      "investment-dashboard": "Initial three F4 fixtures were unregistered. M6 recorded and verified the formal original-position AMEC result cas_6cab1b94d8f45d42c750 through the public owner path.",
       "revenue-forecast-audit": "Original capture recovery verified. Live replay awaits a bound original RF job and its fixed read-only check."
     },
     "host_prelaunch_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "host_owner_report_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
-    "company_pool": "paused"
+    "company_pool": "w12_started_in_current_thread"
   },
   "p1_business_quote_view": {
     "status": "ACCEPTED",
