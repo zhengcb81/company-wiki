@@ -81,6 +81,7 @@ class RegisteredIssuerFacts:
     security_id: str
     provider: str
     source_url: str
+    provider_document_id: str | None = None
 
 
 @dataclass(frozen=True)

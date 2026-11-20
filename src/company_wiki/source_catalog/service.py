@@ -684,7 +684,11 @@ class SourceCatalog:
             if not isinstance(value, str) or not value:
                 return None
             verified[field] = value
-        return RegisteredIssuerFacts(**verified)
+        provider_document_id = scope.facts.get("provider_document_id")
+        return RegisteredIssuerFacts(
+            **verified,
+            provider_document_id=provider_document_id if isinstance(provider_document_id, str) else None,
+        )
 
     def browse_verified_source_pairs(
         self, *, limit: int, market: str | None = None, security_id: str | None = None,

@@ -64,8 +64,6 @@ import time
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Protocol
-from urllib.parse import urlsplit
-
 from ..source_contract.source_version import SourceReadError
 from .assertion_service import sec_archive_cik, source_scope_qualification
 from .document_browse_projection import (
@@ -74,10 +72,17 @@ from .document_browse_projection import (
     version_revision_member,
     version_sort_key,
 )
-from .models import CatalogBrowseVersion, RegisteredIssuerFacts
+from .issuer_identity import (
+    ISSUER_NAMESPACE_SEC_CIK,
+    ISSUER_VERIFIER_HK_SOURCE_FACTS,
+    ISSUER_VERIFIER_SEC_DEI,
+    IssuerKey,
+    hk_issuer_key,
+    official_hk_source_issuer,
+)
+from .models import CatalogBrowseVersion
 from .read_budget import ReadBudget
 from .security_code import canonical_security_code
-from .security_identity import normalize_identity_text
 from .service import SourceCatalog
 
 
@@ -96,12 +101,8 @@ ASSOCIATION_SCOPE = "issuer_only"
 SUPPORTED_SOURCE_NAMESPACES = ("cwp_source_export_v2",)
 
 #: CWP issuer namespace proven by the existing original-DEI verifier.
-ISSUER_NAMESPACE_SEC_CIK = "sec.cik"
-ISSUER_VERIFIER_SEC_DEI = "sec-primary-dei/1"
 ISSUER_NAMESPACE_CN_USCC = "cn.uscc"
 ISSUER_VERIFIER_CN_PRIMARY = "cn-primary-uscc/1"
-ISSUER_NAMESPACE_HK_LISTING = "hkex.listed-issuer"
-ISSUER_VERIFIER_HK_SOURCE_FACTS = "hkex-registered-source-facts/1"
 
 _SOURCE_URN_RE = re.compile(
     r"urn:company-wiki:source:sha256:[0-9a-f]{64}\Z")
@@ -132,6 +133,7 @@ _REQUEST_FIELDS = frozenset({
     "analysis_subject_id", "as_of", "document_kinds", "fiscal_years",
     "language", "limit", "cursor", "proof_snapshot_id",
 })
+_REQUIRED_REQUEST_FIELDS = frozenset({"schema_version", "canonical_entity_id", "as_of"})
 _FILTER_KEYS = ("document_kinds", "fiscal_years", "language")
 _SNAPSHOT_VERSION = 1
 
@@ -502,28 +504,6 @@ class StockWikiProofClient:
 # --- issuer binding -----------------------------------------------------------
 
 
-@dataclass(frozen=True)
-class IssuerKey:
-    """One exact issuer key in a supported namespace."""
-
-    namespace: str
-    value: str
-
-    def qualified(self) -> str:
-        return self.namespace + ":" + self.value
-
-
-def _hk_issuer_key(ticker: Any, issuer_name: Any) -> IssuerKey | None:
-    code = canonical_security_code(ticker, "HK")
-    if not isinstance(code, str) or not re.fullmatch(r"[0-9]{5}", code) or not isinstance(issuer_name, str):
-        return None
-    name = normalize_identity_text(issuer_name)
-    if not name:
-        return None
-    # The issuer name guards against historic ticker reassignment.
-    return IssuerKey(ISSUER_NAMESPACE_HK_LISTING, f"{code}:{hashlib.sha256(name.encode()).hexdigest()}")
-
-
 def _sec_receipt_issuer(receipt: dict[str, Any], listing: dict[str, Any]) -> IssuerKey | None:
     listing_ids = receipt.get("listing_ids")
     security_ids = receipt.get("security_ids")
@@ -540,18 +520,6 @@ def _sec_receipt_issuer(receipt: dict[str, Any], listing: dict[str, Any]) -> Iss
     except ValueError:
         return None
     return IssuerKey(ISSUER_NAMESPACE_SEC_CIK, cik) if cik else None
-
-
-def _official_hk_source_issuer(facts: RegisteredIssuerFacts | None) -> IssuerKey | None:
-    if facts is None or facts.market != "HK" or facts.provider != "hkexnews":
-        return None
-    try:
-        location = urlsplit(facts.source_url)
-    except ValueError:
-        return None
-    if location.scheme != "https" or location.hostname not in {"www.hkexnews.hk", "www1.hkexnews.hk"}:
-        return None
-    return _hk_issuer_key(facts.security_id, facts.entity)
 
 
 @dataclass(frozen=True)
@@ -671,7 +639,8 @@ class _CanonicalBrowse:
         self._listing_pairs: tuple[tuple[str, str], ...] | None = None
 
     def run(self, request: dict[str, Any]) -> dict[str, Any]:
-        if not isinstance(request, dict) or set(request) != _REQUEST_FIELDS:
+        if (not isinstance(request, dict) or request.keys() - _REQUEST_FIELDS
+                or not _REQUIRED_REQUEST_FIELDS <= request.keys()):
             raise CanonicalBrowseError("request_fields_not_exact")
         if request["schema_version"] != REQUEST_SCHEMA:
             raise CanonicalBrowseError("unsupported_request_version")
@@ -679,13 +648,13 @@ class _CanonicalBrowse:
                                 "canonical_entity_id")
         if not _ENT_ID_RE.fullmatch(entity):
             raise CanonicalBrowseError("invalid_canonical_entity_id")
-        listing = request["listing_id"]
+        listing = request.get("listing_id")
         if listing is not None:
             listing = _required_text(listing, "listing_id")
             if not _LST_ID_RE.fullmatch(listing):
                 raise CanonicalBrowseError("invalid_listing_id")
-        if request["analysis_subject_id"] is not None:
-            _required_text(request["analysis_subject_id"],
+        if request.get("analysis_subject_id") is not None:
+            _required_text(request.get("analysis_subject_id"),
                            "analysis_subject_id", max_length=200)
             return self._unsupported_subject(entity, listing)
         as_of = _required_text(request["as_of"], "as_of", max_length=40)
@@ -695,7 +664,7 @@ class _CanonicalBrowse:
             datetime.fromisoformat(as_of.replace("Z", "+00:00"))
         except ValueError as exc:
             raise CanonicalBrowseError("invalid_as_of") from exc
-        limit = request["limit"]
+        limit = request.get("limit")
         if limit is None:
             limit = _DEFAULT_LIMIT
         elif isinstance(limit, bool) or not isinstance(limit, int) \
@@ -703,13 +672,13 @@ class _CanonicalBrowse:
             raise CanonicalBrowseError("invalid_limit")
         filters = {
             "document_kinds": _optional_text_list(
-                request["document_kinds"], "document_kinds"),
+                request.get("document_kinds"), "document_kinds"),
             "fiscal_years": _optional_int_list(
-                request["fiscal_years"], "fiscal_years"),
-            "language": _optional_text_list(request["language"], "language"),
+                request.get("fiscal_years"), "fiscal_years"),
+            "language": _optional_text_list(request.get("language"), "language"),
         }
-        cursor_token = _optional_token(request["cursor"], "cursor")
-        snapshot_token = _optional_token(request["proof_snapshot_id"],
+        cursor_token = _optional_token(request.get("cursor"), "cursor")
+        snapshot_token = _optional_token(request.get("proof_snapshot_id"),
                                          "proof_snapshot_id")
 
         binding = self._resolve_binding(entity, listing, as_of)
@@ -870,7 +839,7 @@ class _CanonicalBrowse:
         if selected.get("market") == "HK" and selected.get("exchange_mic") == "XHKG":
             # The identity owner has established this listing. The source owner
             # independently establishes its exact registered HKEX originals.
-            expected = _hk_issuer_key(selected.get("ticker"), payload.get("canonical_name"))
+            expected = hk_issuer_key(selected.get("ticker"), payload.get("canonical_name"))
             if expected is None:
                 return Binding(status="unknown", reason_codes=_reasons("issuer_key_unresolved"), stockwiki=sw_view)
             self._listing_pairs = self.catalog.browse_verified_source_pairs(
@@ -979,14 +948,19 @@ class _CanonicalBrowse:
         source_reader = SourceVersionReader(self.catalog)
         original_verifier = "cn"
         try:
+            hk_issuer = official_hk_source_issuer(facts.issuer_facts)
+            if hk_issuer is not None:
+                if source_reader.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
+                    return Binding(status="unknown", reason_codes=_reasons("source_ref_changed"),
+                                   resolved_source=cwp_pin)
+                observed_hk = ResolvedIssuer(hk_issuer, ISSUER_VERIFIER_HK_SOURCE_FACTS,
+                                             assertion_id, source_id, content_sha256), cwp_pin
+                self._original_verified[source_id] = observed_hk
+                return observed_hk
             manifest = source_reader.describe_version(ref)
             if manifest.get("market") == "HK":
-                hk_issuer = _official_hk_source_issuer(facts.issuer_facts)
-                if hk_issuer is None:
-                    return Binding(status="unknown", reason_codes=_reasons("official_listing_source_unverified"),
-                                   resolved_source=cwp_pin)
-                return ResolvedIssuer(hk_issuer, ISSUER_VERIFIER_HK_SOURCE_FACTS,
-                                      assertion_id, source_id, content_sha256), cwp_pin
+                return Binding(status="unknown", reason_codes=_reasons("official_listing_source_unverified"),
+                               resolved_source=cwp_pin)
             if ref.mime_type == "application/pdf" and manifest.get("market") == "CN":
                 from .cn_primary_issuer import (
                     MAX_BYTES as CN_MAX_BYTES, PrimaryIssuerUnavailable,

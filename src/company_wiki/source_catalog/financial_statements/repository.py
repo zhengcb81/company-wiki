@@ -20,6 +20,7 @@ from ..store import CatalogStore
 from .contracts import STATEMENT_TYPES
 from .normalize import NormalizedReport
 from .contracts import SINA_PROVIDER_ID
+from .schema import FINANCIAL_STATEMENT_OBSERVATION_SOURCES_DDL
 
 _STATEMENT_TYPE_SET = frozenset(STATEMENT_TYPES)
 
@@ -145,7 +146,7 @@ class FinancialStatementRepository:
               ON wanted.statement_version_id=? AND v.security_id=wanted.security_id
              AND v.provider=wanted.provider AND v.statement_type=wanted.statement_type
              AND v.period_end=wanted.period_end AND v.consolidation=wanted.consolidation
-            ORDER BY o.observed_at DESC, o.observation_id DESC LIMIT 1
+            ORDER BY rtrim(o.observed_at, 'Z') DESC, o.observation_id DESC LIMIT 1
         """, (version_id,)).fetchone()
         if (current is None or current["statement_version_id"] != version_id
                 or order_verified and not current["order_verified"]):
@@ -163,11 +164,15 @@ class FinancialStatementRepository:
         reports: Sequence[NormalizedReport],
         retrieved_at: str,
         provider_observed: bool = True,
+        archived_observation: bool = False,
     ) -> PublishOutcome:
         if not reports:
             return PublishOutcome()
         with self._writable_store().transaction() as connection:
             self._require_source(connection, source)
+            if archived_observation:
+                # Older 1.4 catalogs gain this optional table only on a writer.
+                connection.execute(FINANCIAL_STATEMENT_OBSERVATION_SOURCES_DDL)
             new_ids: list[str] = []
             reused_ids: list[str] = []
             for report in reports:
@@ -194,7 +199,11 @@ class FinancialStatementRepository:
                 ).fetchone()
                 if existing is not None:
                     # Same business content: refresh provider observations only.
-                    if provider_observed:
+                    if archived_observation:
+                        self._record_archived_observation(
+                            connection, existing["statement_version_id"], retrieved_at, source, report,
+                        )
+                    elif provider_observed:
                         connection.execute(
                             "UPDATE financial_statement_versions SET last_checked_at=? "
                             "WHERE statement_version_id=?",
@@ -278,10 +287,39 @@ class FinancialStatementRepository:
                     ],
                 )
                 new_ids.append(version_id)
-                self._observe_transition(connection, version_id, retrieved_at, order_verified=provider_observed)
+                if archived_observation:
+                    self._record_archived_observation(connection, version_id, retrieved_at, source, report)
+                else:
+                    self._observe_transition(connection, version_id, retrieved_at, order_verified=provider_observed)
             return PublishOutcome(
                 new_version_ids=tuple(new_ids), reused_version_ids=tuple(reused_ids)
             )
+
+    @staticmethod
+    def _record_archived_observation(
+        connection: sqlite3.Connection, version_id: str, observed_at: str,
+        source: StatementSource, report: NormalizedReport,
+    ) -> None:
+        # An archive can corroborate the same normalized version from other
+        # original bytes or at an earlier time. Keep this exact evidence pair.
+        known = connection.execute("""
+            SELECT 1 FROM financial_statement_observations AS o
+            JOIN financial_statement_observation_sources AS captured USING (observation_id)
+            WHERE o.statement_version_id=? AND o.observed_at=?
+              AND captured.source_id=? AND captured.document_id=?
+        """, (version_id, observed_at, source.source_id, source.document_id)).fetchone()
+        if known is not None:
+            return
+        observation = connection.execute("""
+            INSERT INTO financial_statement_observations (statement_version_id, observed_at, order_verified)
+            VALUES (?, ?, 1)
+        """, (version_id, observed_at))
+        connection.execute("""
+            INSERT INTO financial_statement_observation_sources
+                (observation_id, source_id, document_id, provider_update_time, provider_rType)
+            VALUES (?, ?, ?, ?, ?)
+        """, (observation.lastrowid, source.source_id, source.document_id,
+              report.provider_update_time, report.provider_rType))
 
     @staticmethod
     def _require_source(connection: sqlite3.Connection, source: StatementSource) -> None:
@@ -297,6 +335,12 @@ class FinancialStatementRepository:
             raise ValueError("provider page source SHA does not match registration")
 
     # -- query ------------------------------------------------------------
+
+    def _has_archived_sources(self) -> bool:
+        return self._fetchone("""
+            SELECT 1 FROM sqlite_master
+            WHERE type='table' AND name='financial_statement_observation_sources'
+        """) is not None
 
     def query_statement_rows(
         self,
@@ -344,25 +388,44 @@ class FinancialStatementRepository:
         )
         if report_types is not None:
             versions = [v for v in versions if v["period_kind"] in report_types]
+        uncertain_order: set[int] = set()
         if knowledge_mode in {"current_snapshot", "point_in_time"}:
-            observations = self._fetchall("""
-                SELECT o.*, v.provider, v.period_end, v.consolidation
+            if self._has_archived_sources():
+                source_join = "LEFT JOIN financial_statement_observation_sources captured USING (observation_id)"
+                source_projection = """
+                    captured.source_id AS capture_source_id,
+                    captured.document_id AS capture_document_id,
+                    captured.provider_update_time AS capture_provider_update_time,
+                    captured.provider_rType AS capture_provider_rType
+                """
+            else:
+                source_join = ""
+                source_projection = "NULL AS capture_source_id"
+            observations = self._fetchall(f"""
+                SELECT o.*, v.provider, v.period_end, v.consolidation, {source_projection}
                 FROM financial_statement_observations o
                 JOIN financial_statement_versions v USING(statement_version_id)
+                {source_join}
                 WHERE v.security_id=? AND v.statement_type=?
                   AND (? IS NULL OR substr(o.observed_at,1,10)<=?)
-                ORDER BY o.observed_at DESC, o.observation_id DESC
+                ORDER BY rtrim(o.observed_at, 'Z') DESC, o.observation_id DESC
             """, (security_id, statement_type,
                 as_of_date if knowledge_mode == "point_in_time" else None, as_of_date))
             if knowledge_mode == "point_in_time" and as_of_date is None:
                 observations = []
-            seen = set()
-            chosen = {}
+            first_in_scope: dict[tuple[str, str, str], sqlite3.Row] = {}
+            chosen: dict[str, sqlite3.Row] = {}
             for observation in observations:
                 key = (observation["provider"], observation["period_end"], observation["consolidation"])
-                if key not in seen:
-                    seen.add(key)
+                first = first_in_scope.setdefault(key, observation)
+                if first is observation:
                     chosen[observation["statement_version_id"]] = observation
+                elif (first["observed_at"] == observation["observed_at"]
+                      and first["statement_version_id"] != observation["statement_version_id"]
+                      and (first["capture_source_id"] is not None or observation["capture_source_id"] is not None)):
+                    # Recovery order cannot settle conflicting archive versions
+                    # with no capture time to distinguish them.
+                    uncertain_order.add(first["observation_id"])
             versions = [v for v in versions if v["statement_version_id"] in chosen]
         else:
             chosen = {}
@@ -391,7 +454,17 @@ class FinancialStatementRepository:
             if version["statement_version_id"] in chosen:
                 observation = chosen[version["statement_version_id"]]
                 version_payload["observed_at"] = observation["observed_at"]
-                version_payload["observation_order_verified"] = bool(observation["order_verified"])
+                version_payload["observation_order_verified"] = bool(observation["order_verified"]) and (
+                    observation["observation_id"] not in uncertain_order
+                )
+                if observation["capture_source_id"] is not None:
+                    version_payload.update(
+                        source_id=observation["capture_source_id"],
+                        document_id=observation["capture_document_id"],
+                        captured_at=observation["observed_at"],
+                        provider_update_time=observation["capture_provider_update_time"],
+                        provider_rType=observation["capture_provider_rType"],
+                    )
             if skipping:
                 # resume strictly after the saved position within this version
                 version_payload["rows"] = [
@@ -426,15 +499,26 @@ class FinancialStatementRepository:
 
     def local_coverage(self, *, security_id: str, statement_type: str,
                        as_of_date: str | None = None) -> dict[str, Any]:
-        rows = self._fetchall(
+        source_coverage = ""
+        scope: tuple[str | None, ...] = (security_id, statement_type, as_of_date, as_of_date)
+        if as_of_date is not None and self._has_archived_sources():
+            source_coverage = """
+                OR EXISTS (
+                    SELECT 1 FROM financial_statement_observations o
+                    JOIN financial_statement_observation_sources captured USING (observation_id)
+                    WHERE o.statement_version_id=v.statement_version_id AND substr(o.observed_at,1,10)<=?
+                )
             """
-            SELECT period_end, COUNT(*) AS version_count
-            FROM financial_statement_versions
-            WHERE security_id=? AND statement_type=?
-              AND (? IS NULL OR substr(captured_at,1,10)<=?)
-            GROUP BY period_end ORDER BY period_end
+            scope += (as_of_date,)
+        rows = self._fetchall(
+            f"""
+            SELECT v.period_end, COUNT(*) AS version_count
+            FROM financial_statement_versions v
+            WHERE v.security_id=? AND v.statement_type=?
+              AND (? IS NULL OR substr(v.captured_at,1,10)<=? {source_coverage})
+            GROUP BY v.period_end ORDER BY v.period_end
             """,
-            (security_id, statement_type, as_of_date, as_of_date),
+            scope,
         )
         return {
             "period_ends": [row["period_end"] for row in rows],

@@ -1533,6 +1533,15 @@ def test_pagination_is_pinned_and_stale_on_revision_change(workspace):
 
 # --- request validation -------------------------------------------------------------
 
+def test_omitted_optional_browse_fields_are_equal_to_null(workspace):
+    tmp_path, _, config_path = workspace
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    explicit = _request()
+    compact = {key: value for key, value in explicit.items() if value is not None}
+    result = _stdout_json(_run_cli(tmp_path, config_path, sw_root, compact))
+    expected = _stdout_json(_run_cli(tmp_path, config_path, sw_root, explicit))
+    assert result == expected
+
 
 @pytest.mark.parametrize("payload,reason", [
     (_request(canonical_entity_id="中微公司"), "invalid_canonical_entity_id"),

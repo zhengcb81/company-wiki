@@ -15,6 +15,7 @@ import json
 import os
 import subprocess
 import sys
+from contextlib import closing
 from pathlib import Path
 
 import pytest
@@ -113,7 +114,8 @@ def _wiki_root(tmp_path: Path) -> Path:
         catalog_dir=project / ".source_catalog",
         roots=(RootSpec("company_raw", companies, "company_raw", priority=10),),
     )
-    SourceCatalog(config).scan()
+    with closing(SourceCatalog(config)) as catalog:
+        catalog.scan()
     SecurityMasterStore(config.catalog_dir / "security_master").write_market(
         "CN",
         (
@@ -141,7 +143,10 @@ def _wiki_root(tmp_path: Path) -> Path:
     return project
 
 
-def _run(wiki_root: Path, fixture_root: Path | None) -> subprocess.CompletedProcess:
+def _run(
+    wiki_root: Path, fixture_root: Path | None, *, request: dict | None = None,
+    capture: Path | None = None,
+) -> subprocess.CompletedProcess:
     env = os.environ.copy()
     env["PYTHONPATH"] = str(REPO_ROOT / "src") + os.pathsep + env.get("PYTHONPATH", "")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
@@ -153,9 +158,11 @@ def _run(wiki_root: Path, fixture_root: Path | None) -> subprocess.CompletedProc
     ]
     if fixture_root is not None:
         command += ["--fixture-root", str(fixture_root)]
+    if capture is not None:
+        command += ["--import-capture", str(capture)]
     return subprocess.run(
         command,
-        input=json.dumps(REQUEST, ensure_ascii=False).encode("utf-8"),
+        input=json.dumps(REQUEST if request is None else request, ensure_ascii=False).encode("utf-8"),
         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         cwd=str(REPO_ROOT), env=env, timeout=180,
     )
@@ -173,7 +180,7 @@ def _db_counts(wiki_root: Path):
     import sqlite3
 
     db = wiki_root / ".source_catalog" / "catalog.sqlite3"
-    with sqlite3.connect(db) as conn:
+    with closing(sqlite3.connect(db)) as conn:
         versions = conn.execute(
             "SELECT COUNT(*) FROM financial_statement_versions"
         ).fetchone()[0]
@@ -184,6 +191,186 @@ def _db_counts(wiki_root: Path):
             "SELECT COUNT(*) FROM artifacts WHERE artifact_role IN ('normalized','summary')"
         ).fetchone()[0]
     return versions, values, normalized
+
+
+def test_observed_capture_import_and_exact_period_reuse(tmp_path):
+    wiki_root = _wiki_root(tmp_path)
+    capture = fixtures.CAPTURE_DIR / "observations.json"
+    request = {
+        **REQUEST, "intent": "reuse_only", "knowledge_mode": "point_in_time",
+        "as_of_date": "2026-10-26", "period_end_from": "2025-12-31",
+        "period_end_to": "2025-12-31",
+    }
+    del request["acquisition_limits"]
+    first = _run(wiki_root, None, request=request, capture=capture)
+    assert first.returncode == 0, first.stderr.decode("utf-8", "replace")
+    receipt = json.loads(first.stdout)
+    counts = _db_counts(wiki_root)
+    assert counts[0] > 0 and counts[2] == 0
+    assert receipt["usage"]["http_requests"] == 0
+    again = _run(wiki_root, None, request=request, capture=capture)
+    assert again.returncode == 0
+    assert _db_counts(wiki_root) == counts
+    assert len(_lake(wiki_root)) == len({hashlib.sha256(f.read_bytes()).digest() for f in _lake(wiki_root)})
+
+    reused = json.loads(_run(wiki_root, None, request=request).stdout)
+    assert reused["status"] == "complete"
+    assert len(reused["statements"]) == 3
+    for block in reused["statements"]:
+        assert block["coverage"]["terminal_reason"] is None
+        report, = block["reports"]
+        assert report["observed_at"].startswith("2026-10-25T")
+        assert report["pit_verified"] is True
+
+    prior = json.loads(_run(wiki_root, None, request={**request, "as_of_date": "2026-10-24"}).stdout)
+    assert prior["status"] == "not_found"
+    history = json.loads(_run(wiki_root, None, request={**request, "period_end_from": "2016-01-01"}).stdout)
+    assert history["status"] == "partial"
+
+
+def test_observed_capture_cannot_replace_page_bytes(tmp_path):
+    wiki_root = _wiki_root(tmp_path)
+    location = tmp_path / "captured"
+    location.mkdir()
+    records = json.loads((fixtures.CAPTURE_DIR / "observations.json").read_text(encoding="utf-8"))
+    record = next(row for row in records if (row.get("fixture") or "").startswith("sh688012-lrb-type0-page1"))
+    # Replacing the retained compressed file cannot retain the original receipt.
+    (location / record["fixture"]).write_bytes(fixtures.fixture_path("sh688012-lrb-type0-page2-num10.json.gz").read_bytes())
+    observation = location / "observations.json"
+    observation.write_text(json.dumps([record]), encoding="utf-8")
+    before = _db_counts(wiki_root)
+    run = _run(wiki_root, None, capture=observation)
+    assert run.returncode == 2
+    assert "capture" in json.loads(run.stdout)["error"].lower()
+    assert _db_counts(wiki_root) == before
+    assert not _lake(wiki_root)
+
+
+def _frozen_observation(directory, source, body, at):
+    directory.mkdir(parents=True, exist_ok=True)
+    filename = f"{source}.json"
+    (directory / filename).write_bytes(body)
+    return {
+        "url": ("https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022"
+                f"?paperCode=sh688012&source={source}&type=0&page=1&num=10"),
+        "fixture": filename,
+        "http_status": 200,
+        "bytes": len(body),
+        "sha256": hashlib.sha256(body).hexdigest(),
+        "retrieved_at": at,
+    }
+
+
+def _exact_income_request(**changes):
+    request = {
+        **REQUEST, "statements": ["income_statement"], "intent": "reuse_only",
+        "knowledge_mode": "point_in_time", "as_of_date": "2026-10-25",
+        "period_end_from": "2025-12-31", "period_end_to": "2025-12-31",
+        **changes,
+    }
+    del request["acquisition_limits"]
+    return request
+
+
+@pytest.mark.parametrize("same_source", [True, False])
+def test_older_capture_reuses_business_version_with_its_own_original(tmp_path, same_source):
+    import gzip
+    import sqlite3
+
+    wiki_root = _wiki_root(tmp_path)
+    database = wiki_root / ".source_catalog" / "catalog.sqlite3"
+    # Simulate an existing 1.4 catalog from before observation-to-source links.
+    with closing(sqlite3.connect(database)) as connection, connection:
+        connection.execute("DROP TABLE IF EXISTS financial_statement_observation_sources")
+    request = _exact_income_request()
+    original = gzip.decompress(fixtures.fixture_path("sh688012-lrb-type0-page1-num10.json.gz").read_bytes())
+    late_raw = original if same_source else original + b"\n"
+    captures = [
+        ("late", late_raw, "2026-10-26T08:00:00.550721+00:00"),
+        ("early", original, "2026-10-25T08:00:00.440000+00:00"),
+    ]
+    manifests = {}
+    for label, body, at in captures:
+        directory = tmp_path / label
+        row = _frozen_observation(directory, "lrb", body, at)
+        manifests[label] = directory / "observations.json"
+        manifests[label].write_text(json.dumps([row]), encoding="utf-8")
+    baseline = _run(wiki_root, None, request=request)
+    assert json.loads(baseline.stdout)["status"] == "not_found"
+    late = _run(wiki_root, None, request=request, capture=manifests["late"])
+    assert late.returncode == 0, late.stdout.decode()
+    assert json.loads(_run(wiki_root, None, request=request).stdout)["status"] == "not_found"
+    early = _run(wiki_root, None, request=request, capture=manifests["early"])
+    assert early.returncode == 0, early.stdout.decode()
+    early_result = json.loads(_run(wiki_root, None, request=request).stdout)
+    assert early_result["status"] == "complete", early_result
+    prior, = early_result["statements"][0]["reports"]
+    assert prior["pit_verified"] is True
+    assert prior["observed_at"] == "2026-10-25T08:00:00.440000Z"
+    assert prior["source_ref"]["content_sha256"] == hashlib.sha256(original).hexdigest()
+    present, = json.loads(_run(wiki_root, None, request={**request, "as_of_date": "2026-10-26"}).stdout)["statements"][0]["reports"]
+    assert present["statement_version_id"] == prior["statement_version_id"]
+    assert present["source_ref"]["content_sha256"] == hashlib.sha256(late_raw).hexdigest()
+    assert present["observed_at"] == "2026-10-26T08:00:00.550721Z"
+
+    again = _run(wiki_root, None, request=request, capture=manifests["early"])
+    assert again.returncode == 0
+    with closing(sqlite3.connect(database)) as connection:
+        assert connection.execute("SELECT count(*) FROM financial_statement_observations").fetchone()[0] == 2
+        assert connection.execute("SELECT count(*) FROM financial_statement_observation_sources").fetchone()[0] == 2
+    assert len(_lake(wiki_root)) == (1 if same_source else 2)
+
+
+def test_malformed_later_capture_does_not_publish_earlier_page(tmp_path):
+    import gzip
+
+    wiki_root = _wiki_root(tmp_path)
+    directory = tmp_path / "archive"
+    original = gzip.decompress(fixtures.fixture_path("sh688012-lrb-type0-page1-num10.json.gz").read_bytes())
+    rows = [
+        _frozen_observation(directory, "lrb", original, "2026-10-25T08:00:00Z"),
+        _frozen_observation(directory, "fzb", b"{bad json", "2026-10-25T08:00:01Z"),
+    ]
+    manifest = directory / "observations.json"
+    manifest.write_text(json.dumps(rows), encoding="utf-8")
+    before = _db_counts(wiki_root)
+    request = _exact_income_request(statements=["income_statement", "balance_sheet"])
+    failed = _run(wiki_root, None, request=request, capture=manifest)
+    assert failed.returncode == 2
+    assert _db_counts(wiki_root) == before
+    assert not _lake(wiki_root)
+
+
+@pytest.mark.parametrize("same_instant", [False, True])
+def test_capture_clock_orders_versions_independent_of_ingestion(tmp_path, same_instant):
+    import gzip
+
+    wiki_root = _wiki_root(tmp_path)
+    request = _exact_income_request()
+    raw = gzip.decompress(fixtures.fixture_path("sh688012-lrb-type0-page1-num10.json.gz").read_bytes())
+    changed = json.loads(raw)
+    rows = changed["result"]["data"]["report_list"]["20251231"]["data"]
+    next(item for item in rows if item.get("item_field") == "BIZTOTINCO")["item_value"] = "42.000000"
+    updated = json.dumps(changed).encode()
+    latest = "2026-10-25T08:00:00.000001Z"
+    earlier = latest if same_instant else "2026-10-25T08:00:00Z"
+    # Import newest first. SQLite insertion order says the opposite.
+    for i, (body, at) in enumerate(((updated, latest), (raw, earlier))):
+        directory = tmp_path / str(i)
+        entry = _frozen_observation(directory, "lrb", body, at)
+        manifest = directory / "observations.json"
+        manifest.write_text(json.dumps([entry]), encoding="utf-8")
+        response = _run(wiki_root, None, request=request, capture=manifest)
+        assert response.returncode == 0, response.stdout.decode()
+    result = json.loads(_run(wiki_root, None, request=request).stdout)
+    report, = result["statements"][0]["reports"]
+    assert report["pit_verified"] is (not same_instant)
+    if same_instant:
+        assert result["status"] == "partial"
+    else:
+        assert result["status"] == "complete"
+        assert report["observed_at"] == latest
+        assert report["source_ref"]["content_sha256"] == hashlib.sha256(updated).hexdigest()
 
 
 @pytest.mark.skipif(

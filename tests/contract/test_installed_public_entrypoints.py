@@ -40,6 +40,7 @@ MODULE_CLIS = (
     "company_wiki.source_catalog.public_source_readiness_cli",
     "company_wiki.source_catalog.public_legacy_source_link_cli",
     "company_wiki.source_catalog.public_legacy_source_recovery_cli",
+    "company_wiki.source_catalog.public_source_citation_cli",
 )
 
 #: Console entry points that must start with base dependencies only.

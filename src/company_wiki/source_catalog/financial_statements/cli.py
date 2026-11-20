@@ -8,6 +8,8 @@ config error (error envelope on stdout), 1 = unexpected failure.
 ``--fixture-root`` enables offline replay of frozen real responses (gzip
 fixtures plus manifest) through the same bounded transport — useful for
 hermetic end-to-end runs and normalization replay without network access.
+``--import-capture`` publishes an operator's retained provider observations
+using the recorded capture time and original byte identity, with no network.
 """
 
 from __future__ import annotations
@@ -23,13 +25,15 @@ import httpx
 
 from ..config import CatalogConfigError, load_catalog_config
 from ..service import SourceCatalog
-from ..canonical_writer import CanonicalSourceWriter
+from ..canonical_writer import CanonicalImportError, CanonicalSourceWriter
 from .contracts import (
     STATEMENTS_RESPONSE_SCHEMA_VERSION,
     RequestValidationError,
     StatementsRequest,
 )
 from .service import FinancialStatementsService
+from .normalize import NormalizeProtocolError
+from .provider_contracts import StatementProviderError
 from .sina_provider import SinaStatementsProvider
 
 FIXTURE_MANIFEST_VERSION = "financial-statements-fixture-replay/1"
@@ -52,7 +56,8 @@ def _parser() -> argparse.ArgumentParser:
         default=None,
         help="offline replay root (manifest.json + *.json.gz fixtures); no network",
     )
-    parser.add_argument(
+    write_mode = parser.add_mutually_exclusive_group()
+    write_mode.add_argument(
         "--replay-source",
         default=None,
         metavar="SOURCE_ID",
@@ -61,6 +66,10 @@ def _parser() -> argparse.ArgumentParser:
             "company-wiki source id, with zero network; reads the same "
             "request JSON on stdin for identity"
         ),
+    )
+    write_mode.add_argument(
+        "--import-capture", type=Path, metavar="OBSERVATIONS",
+        help="publish retained response observations and original bytes for the requested company",
     )
     return parser
 
@@ -170,6 +179,23 @@ def main(argv: Sequence[str] | None = None) -> int:
         json.dump(_error_envelope("config_error", f"invalid source catalog config: {exc}"), sys.stdout)
         sys.stdout.write("\n")
         return 2
+
+    if args.import_capture is not None:
+        catalog = SourceCatalog(config)
+        try:
+            service = FinancialStatementsService(
+                catalog=catalog, writer=CanonicalSourceWriter(catalog), provider=None,
+            )
+            response = service.import_capture(request, args.import_capture)
+        except (CanonicalImportError, NormalizeProtocolError, StatementProviderError, OSError, ValueError) as exc:
+            json.dump(_error_envelope("request_error", f"capture import refused: {exc}"), sys.stdout)
+            sys.stdout.write("\n")
+            return 2
+        finally:
+            catalog.close()
+        json.dump(response, sys.stdout, ensure_ascii=False, indent=1)
+        sys.stdout.write("\n")
+        return 0
 
     if args.replay_source is not None:
         # W19-R8: normalization recovery from a committed SourceRef, offline.

@@ -8,6 +8,17 @@ databases and every in-place upgrade share one definition.
 from __future__ import annotations
 
 FINANCIAL_STATEMENTS_SCHEMA_NOTE = "catalog 1.4.0: statements with ordered content observations"
+# Optional lineage projection created only by the archive writer. Keeping it
+# out of the base DDL preserves the required shape of existing 1.4 stores.
+FINANCIAL_STATEMENT_OBSERVATION_SOURCES_DDL = """
+CREATE TABLE IF NOT EXISTS financial_statement_observation_sources (
+    observation_id INTEGER PRIMARY KEY REFERENCES financial_statement_observations(observation_id),
+    source_id TEXT NOT NULL REFERENCES sources(source_id),
+    document_id TEXT NOT NULL REFERENCES documents(document_id),
+    provider_update_time TEXT,
+    provider_rType TEXT
+)
+"""
 
 FINANCIAL_STATEMENTS_DDL = """
 CREATE TABLE IF NOT EXISTS financial_statement_versions (
@@ -117,4 +128,8 @@ CREATE TABLE IF NOT EXISTS financial_statement_coverage (
 );
 """
 
-__all__ = ["FINANCIAL_STATEMENTS_DDL", "FINANCIAL_STATEMENTS_SCHEMA_NOTE"]
+__all__ = [
+    "FINANCIAL_STATEMENTS_DDL",
+    "FINANCIAL_STATEMENTS_SCHEMA_NOTE",
+    "FINANCIAL_STATEMENT_OBSERVATION_SOURCES_DDL",
+]

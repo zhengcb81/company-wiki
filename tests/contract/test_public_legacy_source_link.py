@@ -21,12 +21,12 @@ from company_wiki.source_catalog.public_legacy_source_link import (
 )
 
 
-def build(tmp_path):
+def build(tmp_path, *, filename="article.txt", body=None, **metadata):
     files = tmp_path / "originals"
     files.mkdir()
-    path = files / "article.txt"
-    path.write_text("A registered original has immutable bytes.\n", encoding="utf-8")
-    (files / "article.txt.source.json").write_text(
+    path = files / filename
+    path.write_bytes(body or b"A registered original has immutable bytes.\n")
+    (files / (filename + ".source.json")).write_text(
         json.dumps(
             {
                 "schema_version": "1.0",
@@ -39,6 +39,7 @@ def build(tmp_path):
                 "provider": "controlled",
                 "provider_document_id": "controlled-1",
                 "language": "en",
+                **metadata,
             }
         ),
         encoding="utf-8",
@@ -212,6 +213,129 @@ def test_unsupported_evidence_does_not_claim_page_replay(tmp_path):
         "reason": "native_pdf_required",
     }
     catalog.close()
+
+
+@pytest.fixture
+def citation_catalog(tmp_path, request):
+    def make(**kwargs):
+        catalog, source = build(tmp_path, **kwargs)
+        request.addfinalizer(catalog.close)
+        return catalog, source
+    return make
+
+
+def test_legacy_html_citation_reads_original_once_without_narrative(citation_catalog, monkeypatch):
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
+
+    quote = "The original report reconciles its subscription revenue."
+    catalog, path = citation_catalog(
+        filename="report.html",
+        body=f"<html><body><p>Background</p><p>{quote} Reporting is quarterly.</p></body></html>".encode(),
+    )
+    opened = []
+    open_version = SourceVersionReader.open_described_version
+
+    def track_open(reader, ref, **kwargs):
+        opened.append(ref)
+        return open_version(reader, ref, **kwargs)
+
+    monkeypatch.setattr(SourceVersionReader, "open_described_version", track_open)
+
+    def fail_duplicate(*args, **kwargs):
+        pytest.fail("citation must not stream the original again")
+
+    monkeypatch.setattr(SourceVersionReader, "verify_version", fail_duplicate)
+    value = resolve_legacy_source(catalog, request(path, evidence={"quote": quote}))
+    assert value["state"] == "available"
+    validation = value["evidence_validation"]
+    assert validation["state"] == "verified"
+    assert validation["locator"] == {
+        "kind": "paragraph", "value": "loc:v1/paragraph:1", "page_kind": None, "excerpt": quote,
+    }
+    assert validation["quote_sha256"] == hashlib.sha256(quote.encode()).hexdigest()
+    assert len(opened) == 1
+
+
+def test_legacy_html_does_not_resolve_ambiguous_quote(citation_catalog):
+    quote = "This original report repeats a material disclosure."
+    catalog, path = citation_catalog(
+        filename="report.html",
+        body=f"<html><body><p>{quote}</p><p>{quote}</p></body></html>".encode(),
+    )
+    value = resolve_legacy_source(catalog, request(path, evidence={"quote": quote}))
+    assert value["state"] == "available"
+    assert value["evidence_validation"]["state"] == "ambiguous"
+    assert value["evidence_validation"]["locator"] is None
+
+
+def test_original_citation_replays_locator_and_refuses_changed_bytes(citation_catalog):
+    from company_wiki.source_catalog.public_source_citation import resolve_source_citation
+
+    quote = "The reported business has identifiable recurring revenue."
+    catalog, path = citation_catalog(
+        filename="report.html",
+        body=f"<html><body><p>{quote} Supporting detail.</p></body></html>".encode(),
+    )
+    ref = resolve_legacy_source(catalog, request(path))["source_ref"]
+    locator = {"kind": "paragraph", "value": "loc:v1/paragraph:0", "page_kind": None,
+               "excerpt": quote}
+    body = {
+        "schema_version": "company-wiki-source-citation-request/1",
+        "source_ref": ref, "evidence": {"locator": locator},
+    }
+    result = resolve_source_citation(catalog, body)
+    assert result["state"] == "available"
+    assert result["source_ref"] == ref
+    assert result["evidence_validation"]["locator"] == locator
+    assert result["evidence_validation"]["text"].endswith("Supporting detail.")
+    body["evidence"]["locator"] = {**locator, "value": "loc:v1/paragraph:8"}
+    assert resolve_source_citation(catalog, body)["evidence_validation"]["state"] == "not_found"
+    body["evidence"]["locator"] = {**locator, "excerpt": "A different business supplies the stated service."}
+    assert resolve_source_citation(catalog, body)["evidence_validation"]["state"] == "not_found"
+    path.write_bytes(b"<html><body>Changed original.</body></html>")
+    assert resolve_source_citation(catalog, body)["state"] != "available"
+
+
+def test_hk_citation_issuer_requires_hash_bound_official_source_facts(citation_catalog):
+    import pymupdf
+    from company_wiki.source_catalog.source_reader import SourceRef
+
+    quote = "Harbour Medical reports a substantial overseas expansion."
+    document = pymupdf.open()
+    document.new_page().insert_text((72, 100), quote)
+    pdf = document.tobytes()
+    document.close()
+    facts = {
+        "entity": "Harbour Medical Limited", "market": "HK", "security_id": "05432",
+        "provider": "hkexnews", "provider_document_id": "harbour-annual",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0112/harbour.pdf",
+    }
+    catalog, path = citation_catalog(
+        filename="harbour.pdf", body=pdf, document_kind="annual_report",
+        display_name=facts["entity"], **{key: value for key, value in facts.items() if key != "entity"},
+    )
+    wanted = request(path, evidence={"quote": quote})
+    base = resolve_legacy_source(catalog, wanted)
+    ref = SourceRef.from_dict(base["source_ref"])
+    assert base["evidence_validation"]["locator"]["page_kind"] == "physical"
+    assert base.get("issuer_proof", {}).get("state") != "verified"
+
+    def record(patch):
+        return catalog.record_source_facts(
+            ref=ref, facts=patch,
+            evidence={k: {"value": v, "locator": "verified-official-capture",
+                            "content_sha256": ref.content_sha256} for k, v in patch.items()},
+        )
+
+    recorded = record(facts)
+    verified = resolve_legacy_source(catalog, wanted)["issuer_proof"]
+    assert verified["key"]["namespace"] == "hkex.listed-issuer"
+    assert verified["key"]["value"].startswith("05432:")
+    assert verified["assertion_id"] == recorded["assertion_id"]
+    assert verified["security"]["source_record_id"] == "harbour-annual"
+    assert verified["source_ref"] == base["source_ref"]
+    record({"source_url": "https://wrong.example/harbour.pdf"})
+    assert resolve_legacy_source(catalog, wanted)["issuer_proof"]["state"] == "unavailable"
 
 
 def test_cli_invalid_json_and_missing_catalog_are_named(tmp_path):

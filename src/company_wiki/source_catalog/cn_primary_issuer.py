@@ -13,7 +13,6 @@ parser failures to the existing proof reasons.
 from __future__ import annotations
 
 from dataclasses import asdict
-import hashlib
 import re
 from typing import Any
 
@@ -109,39 +108,15 @@ def _locator(page: int, excerpt: str) -> dict[str, Any]:
 
 
 def validate_quote(pages: list[str], quote: str) -> dict[str, Any]:
-    normalized = normalize_text(quote)
-    if len(normalized) < 12 or len(quote) > 4096:
+    from ..document_model.citation_locator import match_native_citation, native_pdf_pages
+
+    if len(normalize_text(quote)) < 12 or len(quote) > 4096:
         raise PrimaryIssuerUnavailable("evidence_quote_length_invalid")
-    matches = []
-    for page, raw in enumerate(pages, start=1):
-        text = normalize_text(raw)
-        first = text.find(normalized)
-        if first >= 0:
-            matches.append(page)
-            # Overlapping occurrences also invalidate uniqueness. Stop once
-            # ambiguity is proven instead of materializing all match indices.
-            if text.find(normalized, first + 1) >= 0:
-                matches.append(page)
-        if len(matches) > 1:
-            break
-    if len(matches) != 1:
-        return {
-            "state": "not_found" if not matches else "ambiguous",
-            "reason": "evidence_quote_not_found"
-            if not matches
-            else "evidence_quote_not_unique",
-            "physical_page": None,
-            "locator": None,
-            "normalization": NORMALIZATION,
-            "quote_sha256": hashlib.sha256(quote.encode("utf-8")).hexdigest(),
-        }
-    return {
-        "state": "verified",
-        "physical_page": matches[0],
-        "locator": _locator(matches[0], quote),
-        "normalization": NORMALIZATION,
-        "quote_sha256": hashlib.sha256(quote.encode("utf-8")).hexdigest(),
-    }
+    validation = match_native_citation(native_pdf_pages(pages), quote=quote, locator=None)
+    validation.pop("text", None)
+    pointer = validation["locator"]
+    validation["physical_page"] = int(pointer["value"]) if pointer else None
+    return validation
 
 
 def observe_cn_original(

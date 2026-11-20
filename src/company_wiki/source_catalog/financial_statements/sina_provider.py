@@ -43,6 +43,16 @@ _REPORT_TYPE_PARAM: dict[tuple[str, ...], str] = {
 _ALL_REPORT_TYPES = ("annual", "semi_annual", "q1", "q3")
 
 
+def sina_paper_code(exchange: str, code: str) -> str:
+    if not isinstance(exchange, str) or exchange.upper() not in _EXCHANGE_PREFIX:
+        raise SinaProviderError(
+            "unsupported_exchange", f"exchange {exchange!r} has no Sina paper code"
+        )
+    if not isinstance(code, str) or not code.isdigit() or not 1 <= len(code) <= 8:
+        raise SinaProviderError("invalid_security_code", "code must be digits")
+    return f"{_EXCHANGE_PREFIX[exchange.upper()]}{code}"
+
+
 def _type_param(report_types: Sequence[str] | None) -> str:
     if report_types is None or tuple(report_types) == _ALL_REPORT_TYPES:
         return "0"
@@ -77,12 +87,7 @@ class SinaStatementsProvider:
         budget: AcquisitionBudget,
         stop_before_period: str | None = None,
     ) -> StatementFetchResult:
-        if not isinstance(exchange, str) or exchange.upper() not in _EXCHANGE_PREFIX:
-            raise SinaProviderError(
-                "unsupported_exchange", f"exchange {exchange!r} has no Sina paper code"
-            )
-        if not isinstance(code, str) or not code.isdigit() or not 1 <= len(code) <= 8:
-            raise SinaProviderError("invalid_security_code", "code must be digits")
+        paper_code = sina_paper_code(exchange, code)
         if statement_type not in STATEMENT_PROVIDER_SOURCES:
             raise SinaProviderError(
                 "unsupported_statement", f"statement {statement_type!r} unknown"
@@ -96,8 +101,6 @@ class SinaStatementsProvider:
         ):
             raise ValueError("stop_before_period must be YYYYMMDD")
 
-        prefix = _EXCHANGE_PREFIX[exchange.upper()]
-        paper_code = f"{prefix}{code}"
         source_key = STATEMENT_PROVIDER_SOURCES[statement_type]
         type_param = _type_param(report_types)
 

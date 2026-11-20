@@ -11,6 +11,7 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 from ..canonical_writer import (
@@ -40,6 +41,8 @@ from .provider_contracts import (
     StatementsProvider,
     StatementFetchResult,
 )
+from .sina_captures import read_captured_pages
+from .sina_provider import sina_paper_code
 
 _STATEMENT_BY_PROVIDER_SOURCE = {
     "lrb": "income_statement",
@@ -456,6 +459,8 @@ class FinancialStatementsService:
         source_key: str,
         retrieved_at: str,
         provider_observed: bool = True,
+        prevalidated_reports: tuple[normalize.NormalizedReport, ...] | None = None,
+        archived_observation: bool = False,
     ):
         """One page: commit original bytes once, then publish its reports.
 
@@ -465,13 +470,21 @@ class FinancialStatementsService:
         """
         if self.writer is None:
             raise TypeError("read-only statement service cannot store originals")
-        try:
-            normalized = normalize.normalize_page(raw_bytes, statement_type=statement_type, page_number=page_number)
-        except normalize.NormalizeProtocolError:
-            normalized = None  # preserve original bytes for a later offline replay
-        if normalized is not None:
-            reused = self.repository.reuse_known_reports(security_id=security.security_id,
-                reports=normalized.reports, retrieved_at=retrieved_at, provider_observed=provider_observed)
+        reports = prevalidated_reports
+        if reports is None:
+            try:
+                reports = normalize.normalize_page(
+                    raw_bytes, statement_type=statement_type, page_number=page_number,
+                ).reports
+            except normalize.NormalizeProtocolError:
+                # Retain a genuine fetched original even if today's normalizer
+                # cannot read it, so the same bytes can be replayed offline.
+                reports = None
+        if reports is not None and not archived_observation:
+            reused = self.repository.reuse_known_reports(
+                security_id=security.security_id, reports=reports,
+                retrieved_at=retrieved_at, provider_observed=provider_observed,
+            )
             if reused is not None:
                 return None, reused
         original = ThirdPartyDatasetOriginal(
@@ -493,16 +506,19 @@ class FinancialStatementsService:
             data=raw_bytes,
             content_sha256=sha256,
             mime_type="application/json",
-            retrieved_at=retrieved_at,
+            # The raw SourceManifest's public clock is second-precision.
+            # Statement observations preserve the provider's full UTC instant.
+            retrieved_at=retrieved_at[:19] + "Z" if archived_observation else retrieved_at,
             capture_receipt={
                 "http_status": 200 if url else None,
                 "url": url,
                 "statement_type": statement_type,
                 "page_number": page_number,
-                "replayed": url is None,
+                "replayed": archived_observation or url is None,
+                **({"observed_at": retrieved_at} if archived_observation else {}),
             },
         )
-        if normalized is None:
+        if reports is None:
             raise normalize.NormalizeProtocolError("original saved; statement normalization failed")
         publish = self.repository.publish_reports(
             security=security,
@@ -513,11 +529,77 @@ class FinancialStatementsService:
                 page_number=page_number,
                 url=url or "",
             ),
-            reports=normalized.reports,
+            reports=reports,
             retrieved_at=retrieved_at,
             provider_observed=provider_observed,
+            archived_observation=archived_observation,
         )
         return result, publish
+
+    def import_capture(self, request: StatementsRequest, observations: Path) -> dict[str, Any]:
+        """Publish local captured pages without opening a provider transport."""
+        if self.provider is not None:
+            raise TypeError("capture import must be offline")
+        identity, identity_result = self._identify(request)
+        response: dict[str, Any] = {
+            "schema_version": STATEMENTS_RESPONSE_SCHEMA_VERSION,
+            "request": request.to_public_dict(),
+            "status": "not_found",
+            "company_identity": None,
+            "statements": [],
+            "usage": {"http_requests": 0, "response_bytes": 0, "cost_usd": "0.00"},
+            "retrieved_at": _utc_now(),
+        }
+        if identity is None:
+            _apply_identity_gap(response, identity_result)
+            return response
+        security = StatementSecurity(
+            entity=identity["canonical_name"], market=identity["market"],
+            security_id=identity["security_id"], exchange=identity["exchange"], code=identity["code"],
+        )
+        response["company_identity"] = {
+            key: identity[key] for key in ("canonical_name", "market", "exchange", "security_id")
+        }
+        pages = read_captured_pages(
+            observations, exchange=security.exchange, code=security.code, statements=request.statements,
+        )
+        paper_code = sina_paper_code(security.exchange, security.code)
+        prepared = []
+        for page in pages:
+            normalized = normalize.normalize_page(
+                page.data, statement_type=page.statement_type, page_number=page.page,
+            )
+            periods = set(self._selected_periods(
+                [report.period_end for report in normalized.reports], request,
+                request.effective_period_from, request.period_end_to,
+            ))
+            reports = tuple(report for report in normalized.reports if report.period_end in periods)
+            if reports:
+                prepared.append((page, reports))
+        # Validate every selected capture before mutating the owner catalog.
+        # A bad later page must not make an earlier page visible partway.
+        for page, reports in prepared:
+            result, publish = self._commit_and_publish_page(
+                security=security, statement_type=page.statement_type, raw_bytes=page.data,
+                sha256=page.sha256, page_number=page.page, url=page.url, paper_code=paper_code,
+                source_key=page.source_key, retrieved_at=page.observed_at,
+                prevalidated_reports=reports, archived_observation=True,
+            )
+            if publish is not None:
+                restored = {
+                    "statement_type": page.statement_type, "status": "complete",
+                    "provider": SINA_PROVIDER_ID, "capture_sha256": page.sha256,
+                    "new_version_ids": list(publish.new_version_ids),
+                    "reused_version_ids": list(publish.reused_version_ids),
+                    "observed_at": page.observed_at,
+                }
+                if result is not None:
+                    restored["replayed_source_id"] = result.source_id
+                response["statements"].append(restored)
+        scope = {page["statement_type"] for page in response["statements"]}
+        if scope:
+            response["status"] = "complete" if scope == set(request.statements) else "partial"
+        return response
 
     def _persist_statement(
         self,
@@ -632,7 +714,7 @@ class FinancialStatementsService:
         statement_type = _STATEMENT_BY_PROVIDER_SOURCE[source_key]
         # Protocol guard before touching storage: a malformed committed page
         # must refuse replay before any bytes are re-committed.
-        normalize.normalize_page(
+        normalized = normalize.normalize_page(
             content.data, statement_type=statement_type, page_number=0
         )
         security = StatementSecurity(
@@ -654,6 +736,7 @@ class FinancialStatementsService:
             source_key=source_key,
             retrieved_at=captured_at,
             provider_observed=False,
+            prevalidated_reports=normalized.reports,
         )
         return {
             "status": "complete",
@@ -688,6 +771,10 @@ class FinancialStatementsService:
 def _coverage_satisfies(request: StatementsRequest, selected: list[str],
         observation: dict[str, Any] | None, local: dict[str, Any]) -> bool:
     """One envelope rule for fetch and zero-write reuse; no permissions."""
+    if request.period_end_to is not None and request.period_end_to == request.effective_period_from:
+        # A verified report for the single requested date does not require
+        # proof that every older provider page was visited.
+        return selected == [request.period_end_to]
     if not observation or not selected or observation.get("observed_periods") != len(local["period_ends"]):
         return False
     terminal = observation.get("terminal_reason")

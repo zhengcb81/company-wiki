@@ -14,10 +14,10 @@ import re
 import time
 from typing import Any
 
-from .document_browse_projection import document_version_id
+from .native_source_citation import read_native_citation
 from .service import SourceCatalog
 from .source_location import relative_segments
-from .source_reader import SourceReadError, SourceRef, SourceVersionReader
+from .source_reader import SourceReadError, SourceRef
 
 REQUEST_SCHEMA = "company-wiki-legacy-source-link-request/1"
 RESPONSE_SCHEMA = "company-wiki-legacy-source-link/1"
@@ -192,8 +192,9 @@ def resolve_legacy_source(
     if size is not None and ref.byte_size != size:
         return _result(key, "conflict", "legacy_source_size_changed")
     try:
-        receipt = SourceVersionReader(catalog).verify_version(
-            ref, purpose="source_export"
+        result = read_native_citation(
+            catalog, ref, quote=evidence["quote"] if evidence is not None else None,
+            include_issuer=evidence is not None or ref.mime_type == "application/pdf",
         )
     except SourceReadError as exc:
         document = catalog.reader.document(ref.document_id)
@@ -209,53 +210,16 @@ def resolve_legacy_source(
             if document and document["source_status"] == "retired"
             else None,
         )
-    extra = {}
-    if ref.mime_type == "application/pdf":
-        from .cn_primary_issuer import (
-            PrimaryIssuerUnavailable,
-            extract_cn_issuer,
-            pdf_text_pages,
-            validate_quote,
-        )
-
-        try:
-            opened, metadata = SourceVersionReader(catalog).open_described_version(
-                ref, purpose="source_export"
-            )
-            pages = pdf_text_pages(opened.data)
-            if evidence is not None:
-                extra["evidence_validation"] = validate_quote(pages, evidence["quote"])
-            try:
-                extra["issuer_proof"] = extract_cn_issuer(
-                    catalog, ref, pages=pages, metadata=metadata
-                )
-            except PrimaryIssuerUnavailable as exc:
-                extra["issuer_proof"] = {"state": "unavailable", "reason": exc.reason}
-        except (PrimaryIssuerUnavailable, SourceReadError) as exc:
-            extra["issuer_proof"] = {"state": "unavailable", "reason": exc.reason}
-            if evidence is not None:
-                extra["evidence_validation"] = {
-                    "state": "unavailable",
-                    "reason": exc.reason,
-                }
-    elif evidence is not None:
-        extra["evidence_validation"] = {
-            "state": "unavailable",
-            "reason": "native_pdf_required",
-        }
+    citation = result.get("evidence_validation")
+    if citation is not None:
+        # The historical protocol publishes the quote/locator receipt. Full
+        # native text is available separately through the exact citation port.
+        citation.pop("text", None)
+        if citation.get("reason") == "native_citation_format_unsupported":
+            citation["reason"] = "native_pdf_required"
     return _result(
         key,
         "available",
         "legacy_source_current_version_verified",
-        **extra,
-        source_ref=asdict(ref),
-        document_version_id=document_version_id(
-            ref.document_id, ref.source_id, ref.content_sha256
-        ),
-        current_byte_verification={
-            "content_sha256": receipt.content_sha256,
-            "byte_size": receipt.byte_size,
-            "source_read_policy_sha256": receipt.source_read_policy_sha256,
-            "read_at": receipt.read_at,
-        },
+        **result,
     )
