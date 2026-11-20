@@ -11,13 +11,13 @@
     "cumulative_micro_usd": 20000000,
     "company_allocation": "soft target150000tokens/$1",
     "latest_verified_usage": {
-        "tokens": 2034576,
-        "micro_usd": 775848,
+      "tokens": 2127935,
+      "micro_usd": 792774,
       "includes_historical_unknowns": true,
-      "new_unknown_count": 8,
+      "new_unknown_count": 9,
       "prior_unknown_count": 7,
-        "evidence": "review/w12-wuxi-resume-20261120/README.md",
-        "note": "The W12 H1 generation used 24974 tokens and a 5140 microUSD budget proxy. Activation, same-run recovery and cross-run cache reuse added no POST or usage."
+      "evidence": "review/w12-wuxi-resume-20261120/README.md#w04-正式请求与原作业查证",
+      "note": "The W12 /8 formal request timed out. It added one unknown hold of 93359 tokens and 16926 microUSD, not a confirmed charge. No POST was repeated."
     }
   },
   "remaining_stages": [
@@ -174,7 +174,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Independently verify the dated pending exposure in the RF W01 candidate; fix RF W02 issuer-scoped coverage and complete revenue-magnitude research. Revalidate the new CWP response, cache and RF adoption in a new W12 attempt at the original cutoff.",
+  "next_action": "Close independent RF W02 issuer, interval and lineage findings and release the scoped owner fixes. Verify the original CWP /8 attempt and unresolved cost without replaying the provider POST. Complete revenue-magnitude research and verify real CWP summary, cache and RF adoption in a new W12 attempt at the original cutoff.",
   "w12_attempt": {
     "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
@@ -204,8 +204,12 @@
         "candidate": "c03b9e470ad6053d1de00dfaf9db0e0380904a5a",
         "tested": 179,
         "subtests": 160,
-        "status": "owner_fixed_both_false_acceptances_native_replay_passed_independent_review_in_progress",
-        "future_magnitude": "independent_research_received_not_settled"
+        "independent_tests": 24,
+        "independent_receipt_sha256": "37baac025b23c153c0c486fb5eb4e9d7cd9a7e05f9a4ef21fa7e8cb79eb8ac9c",
+        "equivalent_expression_candidate": "4cf34907da53cf8a6f76a71dc815b7096a7f2427",
+        "equivalent_expression_tests": 184,
+        "status": "frozen_w12_mathematics_independently_passed_equivalent_expression_candidate_not_published",
+        "future_magnitude": "independent_dated_capacity_and_contract_constraints_confirmed_group_amount_open"
       },
       "rf_w02_peer_coverage": {
         "capture_ref": "audit-capture/1/w12-w01-rf-peer-filing-coverage/executor/650cefc1ffbe4033abf8928dc94175a8",
@@ -214,7 +218,10 @@
         "input_sha256": "fa4b8a7c4174e6697c5a8eaf250c9a32a1e007680a6342fa3096fae86f4ea691",
         "capture_receipt_sha256": "cae1a235b409c771cea953e3f766015fda2de7c270b725e0fd229a80b373dd02",
         "gate_decision": "narrow",
-        "status": "recorded_then_scoped_dispatched_to_rf_owner"
+        "candidate": "d79560eda80537a6572a59638c1527b645e63770",
+        "independent_followup_capture_ref": "audit-capture/1/w02-independent/executor/39e58e1dfd024462a21fb1765c8de2e7",
+        "independent_followup_gate_review_event_id": "f282cc517747484186c5cb972a4d829b",
+        "status": "exact_peer_input_passed_owner_replay_independent_issuer_and_lineage_findings_open"
       },
       "audit_w03": "independently_accepted_local_fast_forward_both_skill_copies_match",
       "cwp_w04": {
@@ -227,7 +234,25 @@
         "observer_fix_ci_completed_at_utc": "2026-11-20T13:17:53Z",
         "observer_fix_ci_conclusion": "success",
         "offline_v8_loopback": "passed_one_local_POST_zero_same_and_cross_run_replay_and_zero_external_POSTs",
-        "status": "source_changes_published_real_v8_response_and_rf_adoption_open"
+        "live_attempt": {
+          "run_id": "phaseC-090-d76f22563280",
+          "attempt_id": "402afff5588a4849a044e559293adac1",
+          "public_receipt_sha256": "a13f657ca66c28f663e739d8f2a18e854c080e3261beb83326aedb3cd7581507",
+          "request_sha256": "68462f7b4cf0ff4db718efaae193cfd075555fd18ada307eb61e8a2a1bfcfb79",
+          "actual_post_attempts": 1,
+          "native_error": "MODEL_TIMEOUT",
+          "cost_state": "unknown",
+          "unknown_tokens_hold": 93359,
+          "unknown_micro_usd_hold": 16926,
+          "retry_post_attempts": 0,
+          "independent_receipt_sha256": "5ee9016a83865b8ef84362225ef05ed19bfada9ac73f2c6d8d80f459714d0011",
+          "gate_review": "retain_replay_guard_and_preserve_original_unknown_usage",
+          "feedback_ref": "phase-c/phaseC-090-d76f22563280/summary-generation",
+          "feedback_occurrence_id": "e24c27368b2f5244dfea39daaa55a72390aeac6e2622917fd448fb44bb897b52",
+          "feedback_implementation_sha256": "94bcc54d15769831e3b26d83112400abd7fc8910a2cd0e7f6fd980550d518ea1",
+          "feedback_status": "independently_verified_exact_original_terminal_failure_and_cost_unknown"
+        },
+        "status": "source_changes_published_live_v8_timeout_one_unknown_hold_no_new_summary_cache_or_rf_adoption"
       },
       "cwp_w05": {
         "sqlite_read_path": "8a232ed92a7ccf751ce2e3161bd4c95b0823d4dc",

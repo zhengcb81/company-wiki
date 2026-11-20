@@ -55,6 +55,8 @@ MeetingConverter 保留调用方的 run 和 attempt，每次真实转录或跳�
 
 在 Phase C 总控验收入口同时指定 `RESEARCH_FEEDBACK_OUT` 与运维 `RESEARCH_FEEDBACK_HOSTS` 时，原生 overall.json 先完成，宿主控制 tick 在独立子进程处理。启动回执在同一运行目录的 feedback-delivery.json，控制结果在 feedback-dispatch.json。两者与 OUT 各用不同文件。运行中断时，可对原 OUT 执行 tick 重接，不必重新跑模型。重建已留存原生结果可运行 `python -m tools.document_understanding_benchmark.phase_c_feedback <本次overall.json> --out <独立输出>`，将 --out 换成 `--ref <原生引用>` 可复核模式、selector 版本和产物 SHA。
 
+同一个 run 的 `narrative-batch-result/1` 正式失败会生成 `summary-generation` 观察。未运行的定位和缓存检查不产生额外发生。`--ref` 可读出该作业的已知失败、原生原因、尝试 ID 和原用量状态。费用未知的观察只走原引用对账，保留防重发；成功与已观察到的单独缓存结果沿既有读面。
+
 启动或重启调用 `python -m tools.feedback_loop.local_host --config SETTINGS recover --hosts HOSTS --sidecar FILE --wait-seconds N`。可重复 `--sidecar` 传原开始和终态文件。先恢复现有动作，随后有限等待、继续原观察；不重新发起公司运行。FF 端点需配置实际作业所属的 `--jobs-dir`，以及可选的 `ff_reconcile_config` 指向该作业使用的 owner 查询配置。对账只允许 `get_status` 和 `act reconcile`，按同一作业与 attempt，既不发 `run`/`retry`，也不向外部证明 latest。
 
 RF 的引用为 `rf-job/1/<job_id>/<stage>-<attempt>`。Audit 采集为 `audit-capture/1/<run>/<role>/<capture>`，找回开始但无终态时回 `unconfirmed`。Audit 偏差使用 `audit-finding/1/<run>/initial/<role>/<issue>` 或 `audit-finding/1/<run>/review/<attempt>/<role>/<issue>`，以 `details_ref` 绑定实际报告 SHA。RF 与 Audit 可通过宿主的 `actions.reconcile` 分别调用只读 owner 命令。恢复从原 scope 查找，未知费用保留，不产生新的源作业。

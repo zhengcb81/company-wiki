@@ -15,6 +15,33 @@ def _bool_outcome(value):
     return "unknown"
 
 
+def _objects(value):
+    return [row for row in value if isinstance(row, dict)] if isinstance(value, list) else []
+
+
+def _failed_generation(state):
+    """Observe a terminal result and accounting from the same native generation."""
+    result = state.get("receipt")
+    if (not isinstance(result, dict) or result.get("schema_version") != "narrative-batch-result/1"
+            or result.get("run_id") != state["run_id"] or result.get("status") != "failed"):
+        return None
+
+    attempts = [row for row in _objects(state.get("native_usage")) if row.get("run_id") == state["run_id"]]
+    errors = {row.get("error_code") for row in attempts if isinstance(row.get("error_code"), str)}
+    if isinstance(result.get("error"), str) and result["error"]:
+        errors.add(result["error"])
+    for document in _objects(result.get("documents")):
+        if isinstance(document.get("errors"), list):
+            errors.update(code for code in document["errors"] if isinstance(code, str))
+    budget = result.get("budget")
+    known = (isinstance(budget, dict) and all(type(budget.get(key)) is int and budget[key] == 0
+             for key in ("unknown_reservations", "unsettled_reservations"))
+             and all(row.get("usage_status") == "known" for row in attempts))
+    return {"status": "known" if known else "cost_unknown", "job_status": "failed",
+            "cost_state": "known" if known else "unknown", "error_codes": sorted(errors),
+            "attempt_ids": [row["attempt_id"] for row in attempts if isinstance(row.get("attempt_id"), str)]}
+
+
 def observations(receipt, env, version):
     # The loopback runner also exercises deliberate refusals separately. Only the
     # normal scenario has these positive recovery expectations.
@@ -37,6 +64,11 @@ def observations(receipt, env, version):
             ("cross-run-cache", "zero-post", _bool_outcome(state.get("cross_run_zero_POST"))),
         ]
         refusal_codes = {"locator-replay": state.get("refusal_code")}
+        failure = _failed_generation(state)
+        if failure is not None:
+            checks.append(("summary-generation", "published", "failed"))
+            if "MODEL_PAID_RESPONSE_UNAVAILABLE" in failure["error_codes"]:
+                refusal_codes["summary-generation"] = "model_paid_response_unavailable"
         for kind in ("same_run", "cross_run"):
             binding = state.get(kind + "_cache_binding")
             if isinstance(binding, str) and binding:
@@ -49,6 +81,9 @@ def observations(receipt, env, version):
                 outcome = "read-refused"
             checks.append(("cache-locator-replay", "verified", outcome or "unknown"))
             refusal_codes["cache-locator-replay"] = cache_read.get("refusal_code")
+        if failure is not None:
+            # Publishing failed before the unrun replay checks acquired evidence.
+            checks = [value for value in checks if value[2] != "unknown"]
         for check, expected, actual in checks:
             row = {"schema_version": "feedback-observation/1", "owner": "company-wiki",
                    "run_id": env.get("RESEARCH_FEEDBACK_RUN_ID") or native_id,
@@ -57,10 +92,10 @@ def observations(receipt, env, version):
                    "evidence_ref": f"phase-c/{native_id}/{check}"}
             if version:
                 row["version"] = version
-            if actual == "unknown":
+            if actual == "unknown" or (check == "summary-generation" and failure["cost_state"] == "unknown"):
                 row["disposition"] = "unknown"
             code = refusal_codes.get(check)
-            if actual == "read-refused" and isinstance(code, str):
+            if actual in {"read-refused", "failed"} and isinstance(code, str):
                 row["refusal_code"] = code
             yield row
 
@@ -74,9 +109,12 @@ def resolve(receipt, reference, version):
     normal = receipt.get("normal", receipt)
     state = next(s for s in normal["states"] if isinstance(s, dict) and s.get("run_id") == row["step_id"])
     artifact = state.get("artifact_ref")
-    return {"status": "resolved", "observation": row, "mode": receipt.get("mode"),
-            "selector_version": state.get("version"),
-            "artifact_sha256": artifact.get("artifact_sha256") if isinstance(artifact, dict) else None}
+    result = {"status": "resolved", "observation": row, "mode": receipt.get("mode"),
+              "selector_version": state.get("version"),
+              "artifact_sha256": artifact.get("artifact_sha256") if isinstance(artifact, dict) else None}
+    if row["check_id"] == "summary-generation":
+        result["native_outcome"] = {**_failed_generation(state), "evidence_ref": reference}
+    return result
 
 
 def publish(receipt, env, version):

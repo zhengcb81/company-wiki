@@ -1,4 +1,4 @@
-"""A paid native success is not permissioned by observer representation size."""
+"""Native generation outcomes survive Phase C observer and feedback errors."""
 from copy import deepcopy
 import gzip
 import hashlib
@@ -7,11 +7,12 @@ import json
 import pytest
 
 from tools.document_understanding_benchmark import phase_c_runner as runner
+from tools.document_understanding_benchmark.phase_c_feedback import observations, publish, resolve
+from tools.feedback_loop.coordinator import advance
+from tools.feedback_loop.observations import read_batch
 
 
 def test_exact_cache_binding_distinguishes_wrong_result_without_another_post():
-    from tools.document_understanding_benchmark.phase_c_feedback import observations
-
     raw = {"source_id": "source", "document_id": "document", "content_sha256": "a" * 64}
     final = {"artifact_version_id": "new", "artifact_sha256": "b" * 64, "byte_size": 30, "source_ref": raw}
     ref = {"artifact_version_id": "new", "content_sha256": "b" * 64, "byte_size": 30,
@@ -157,3 +158,69 @@ def test_real_owned_run_keeps_native_success_and_cache_after_observer_failure(tm
     assert 'untrusted observation detail' not in json.dumps(result)
     assert not list(tmp_path.glob('cwplC-*'))
     assert json.loads((output / 'receipt.json').read_text(encoding='utf-8')) == result
+
+
+def _native_failed_generation():
+    return {"status": "FAIL", "mode": "live", "states": [{
+        "run_id": "phase-c-original", "version": "0.9.0", "exit": 2,
+        "receipt": {"schema_version": "narrative-batch-result/1", "run_id": "phase-c-original",
+                    "status": "failed", "budget": {"unknown_reservations": 1, "unsettled_reservations": 0},
+                    "documents": [{"status": "dead_letter", "errors": [
+                        "MODEL_PAID_RESPONSE_UNAVAILABLE", "DEPENDENCY_TERMINAL"]}]},
+        "native_usage": [{"run_id": "phase-c-original", "attempt_id": "original-model-post",
+                          "usage_status": "unknown", "error_code": "MODEL_TIMEOUT"}],
+    }]}
+
+
+def test_native_timeout_reconciles_only_the_original_failed_generation(tmp_path):
+    receipt = _native_failed_generation()
+    receipt["states"][0]["cache_public_observation"] = {}
+    path = tmp_path / "native-feedback.jsonl"
+    env = {"RESEARCH_FEEDBACK_OUT": str(path)}
+    assert publish(receipt, env, "fixture-version")["status"] == "published"
+    batch = read_batch([path, path])
+    assert not batch.diagnostics
+    row, = batch.observations.values()
+    assert (row["check_id"], row["actual"], row["disposition"]) == ("summary-generation", "failed", "unknown")
+    assert row["refusal_code"] == "model_paid_response_unavailable"
+
+    resolved = resolve(receipt, row["evidence_ref"], "fixture-version")
+    native_outcome = resolved["native_outcome"]
+    assert native_outcome["attempt_ids"] == ["original-model-post"]
+    assert {"MODEL_TIMEOUT", "MODEL_PAID_RESPONSE_UNAVAILABLE"} <= set(native_outcome["error_codes"])
+
+    acted = []
+
+    def host(owner, request):
+        assert owner == "company-wiki"
+        kind, method = request["kind"], request["method"]
+        acted.append((kind, method))
+        reply = {"schema_version": "feedback-action-result/1", "action_id": request["action_id"],
+                 "request_digest": request["request_digest"]}
+        if kind == "observe":
+            return {**reply, "state": "done", "result": {"recorded": True}}
+        assert (kind, method) == ("reconcile", "lookup")
+        assert request["payload"]["observation"]["evidence_ref"] == native_outcome["evidence_ref"]
+        return {**reply, "state": "done", "result": native_outcome}
+
+    settled, = advance(batch, host)["observations"]
+    assert acted == [("observe", "lookup"), ("reconcile", "lookup")]
+    assert (settled["step"], settled["job_status"], settled["cost_state"]) == ("reconcile", "failed", "unknown")
+    assert publish(receipt, env, "fixture-version")["status"] == "reused"
+
+
+def test_confirmed_non_refusal_and_unbound_generation_are_distinct():
+    receipt = _native_failed_generation()
+    state = receipt["states"][0]
+    state["native_usage"] = []
+    state["receipt"]["budget"]["unknown_reservations"] = 0
+    state["receipt"]["documents"] = []
+    state["receipt"]["error"] = "BATCH_PREPARATION_DEADLINE_EXCEEDED"
+    row, = observations(receipt, {}, "fixture-version")
+    assert row["actual"] == "failed" and "refusal_code" not in row
+    outcome = resolve(receipt, row["evidence_ref"], "fixture-version")["native_outcome"]
+    assert outcome["cost_state"] == "known"
+    assert outcome["error_codes"] == ["BATCH_PREPARATION_DEADLINE_EXCEEDED"]
+
+    state["receipt"]["run_id"] = "unrelated-run"
+    assert all(row["actual"] == "unknown" for row in observations(receipt, {}, "fixture-version"))
