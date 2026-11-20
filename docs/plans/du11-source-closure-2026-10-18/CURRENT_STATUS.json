@@ -174,9 +174,9 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Use the four W12 independent reports to map shared root causes, then implement and replay owner-scoped W12 remedies. Start with the analyst calibration P1 and validate CWP claim semantics and paid recovery from saved evidence.",
+  "next_action": "Implement the six mapped W12 owner packages. Start with independently grounded RF revenue magnitudes and shared timing stress. Independently accept the CWP assertion and paid recovery and Audit evidence projection remedies before a new W12 attempt.",
   "w12_attempt": {
-    "status": "four_reviews_received_root_cause_mapping_underway",
+    "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
     "run_id": "w12-20261120-cn-603259",
     "attempt_id": "w12-a01",
@@ -213,6 +213,25 @@
       "issue_total": 22,
       "severity": {"P1": 1, "P2": 16, "P3": 5},
       "audit_check": "needs_remediation"
+    },
+    "expert_remediation": {
+      "event_id": "23d55e173fd2408a860a96fd674271cd",
+      "coordinator_mapping_event_id": "cb16d297d64643d08730a2e8091930b7",
+      "map_sha256": "6d24e77c53fae07c1e38682b6bf80e87b233da915cfd1d13be5b21c879e4e295",
+      "mapped_review_findings": 22,
+      "root_causes_including_separate_recovery_probe": 18,
+      "owner_packages": 6,
+      "priority": "RF W01 actual future revenue magnitude and joint recognition timing",
+      "frozen_attempt_reused_for_replay": true
+    },
+    "peer_research_preparation": {
+      "information_as_of": "2026-10-21",
+      "official_originals": ["CN/002821/2026/H1/1225496302", "CN/300759/2026/H1/1225487380"],
+      "new_downloads": 2,
+      "reuse_downloads": 0,
+      "new_model_posts": 0,
+      "wire_metering_complete": false,
+      "status": "verified_originals_awaiting_operating_comparability_review"
     },
     "paired_public_reconciliation": "real RF job succeeded with known costs and its Audit capture succeeded with unknown wrapper costs; zero new business requests",
     "recorded_gate_review": {

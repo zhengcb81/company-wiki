@@ -1,6 +1,6 @@
 # 当前交接
 
-2026-11-20。W12 正式执行包已封存，原生目标已恢复。读 [W12 冻结、原作业与复审](review/w12-wuxi-resume-20261120/README.md) 接续四路独审和共因分析。Audit 日志与 F4 发生记录保留，先按原动作核对拒绝及必要性。新摘要、缓存与 RF 实际采用均已有现场证据。CWP 的内容问题走保存响应复验。
+2026-11-20。原生目标已恢复。W12 正式执行、四路独审和专家归因都已封存。读 [W12 冻结、根因与责任仓接续](review/w12-wuxi-resume-20261120/README.md#专家归因与接续) 开始整改，从 RF 的远期收入量级和共同确认压力入手。Audit 与 CWP 在各自分支复验。遇到新拒绝，先按原动作保留 Audit/F4 日志，再审查触发的检查。候选独审通过后另开实际公司尝试。
 
 2026-11-18。当前业务入口为 [业务主线](task_plan.md)。ET、SID、IR 已发布本仓实现并经 ROOT 组合签收。F4 的 CWP/FF 和 RF/Audit 真实宿主闭环与强杀恢复均已通过。其余 owner 按分工接续，下一家公司及 RF 采用仍走 W12。[CWP/FF 验收](../feedback-loop-2026-11-17/f4-acceptance.md) · [RF/Audit 验收](../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md) · [F2 路线](../feedback-loop-2026-11-17/f2-roadmap.md) · [逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。
 
