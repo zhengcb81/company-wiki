@@ -42,3 +42,10 @@
 
 - 上方 19 条收集错误属旧基线。StockWiki 本地 `master@2de1f887` 把本仓离线用例与固定 IQS 版本的协议联调拆开，并修复成员库升至 schema 7 后误拒合法线索的问题。旧启动脚本及跨仓私有测试拼装已清理，旧快照改为按 Git 原字节检出。
 - 正常宿主的本仓全量 2,293 过、22 条既有条件跳过。独立 C06 联调 513 过、0 跳过。StockWiki 的复现命令、取舍和验收收据在 `docs/plans/c06-offline-tests-2026-11-20/`。本次以独立测试库复验，StockWiki 并线前后的未跟踪路径清单一致。
+
+## F Dashboard owner 后续接收
+
+- 收到 Dashboard `handoffs/owner-requests/DASHBOARD-OWNER-FOLLOWUPS-20261120.md`。Dashboard 已有消费错配修复 `2539c9c` 及 14 项作者回归收据。RF 本机 `main@698eabd1` 的运行记录与远端分叉，远端已有后继 `f1af2193`。继续以公开 owner 读回和精确运行版本为准。现行其他工作区由各 owner 持有。
+- F1 复核完成。真实 CWP 三市场证明均为 `verified`。从本仓固定检出在独立目录跑发行人正反例，9 项通过，临时目录已清理。首次精简检出缺两个 SEC 参数例导入的测试 helper，补齐既有 helper 后同一组通过。
+- 用正式 FF/CWP 复读三表冻结目录坐标，三个原件均 `document_not_indexed`。RF 读回 W12 原工作目录状态成功，正式报告目录仍缺该作业。同一实际 IQS 路由按 r25 身份读药明和 MDB 均 HTTP 200，结果未登记、历史 0。现用 Dashboard 名单 215 家，固定名单 ID 与隔离样本不同，指标定义仍返回 503。
+- F2 留给所属 owner 的正式发布。完整复现与最小交接见 [后续回执](followups.md)。业务原件、作业及现用部署由各 owner 继续持有。
