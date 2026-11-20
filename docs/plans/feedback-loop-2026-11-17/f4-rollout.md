@@ -68,3 +68,5 @@ IQS 对原快扫纠正的是完整性判断，保留已答 24 题，报告 38 �
 - 本机配置为原 `feedback-host/settings.json` 和 `hosts.json`。原动作库依旧为 12 条已完成观察，发布前后字节 SHA 一致。IQS 隔离检出保留其启动用的代码、schema 和题库，Dashboard 隔离检出保留 backend、contracts 和 scripts。两个固定读监听均使用原 IQS 的 `--no-refresh` 配置和独立 Dashboard 状态目录。启动参数在 Dashboard 交接中，`investment-dashboard/read-listeners.json` 记本机启动回执。宿主重启先恢复原本机服务，再执行本页 `drain` 接回原观察和原动作。
 
 M6 后续已在原位置登记中微的 `cas_6cab1b94d8f45d42c750`。据 StockWiki `e8da004` 和 Dashboard M6 本仓记录，36 题中有 8 题得分、28 题证据不足，总分为空。StockWiki CLI、IQS HTTP 和 Dashboard 已公开读回同一结果。这份结果的历史反馈复验仍按原发生和正式结果身份取证。 [M6 进度](../../../../investment-dashboard/.planning/unified-dashboard-2026-10-26/modules/m6-quickscan/progress.md)
+
+W12 追加真实 RF 和 Audit 配对证据。两仓的公开 reconcile 查回一次正式 RF 作业和对应的原 Audit capture，确认源、算、发布各一次，原文件字节一致，原捕获的外层费用保持未知。真实拒绝另行核对，先记录原发生，再审视截止日检查。其独立审查已写入 Audit LOG，隔离宿主仍未返回分诊终态，保留原会话待证。 [真实 W12 收据](../du11-source-closure-2026-10-18/review/w12-wuxi-resume-20261120/README.md)

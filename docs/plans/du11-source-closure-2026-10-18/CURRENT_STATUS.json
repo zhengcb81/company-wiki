@@ -93,7 +93,7 @@
   },
   "project_status": "MODULE_BOUNDARIES_M3_CLOSED; F3_SCOPED_REAL_TRIAL_AND_SAVED_REPAIR_ACCEPTED; P3_OPEN",
   "as_of_date": "2026-11-20",
-  "observed_at_utc": "2026-11-17T23:23:11Z",
+  "observed_at_utc": "2026-11-20T11:07:34Z",
   "cwp_saved_response_repair": {
     "evidence": "../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md",
     "assessor_version": "source-summary-assessment/1.4.0",
@@ -174,9 +174,9 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Verify the original W12 RF job, report and snapshot, then run four whole-company reviews. Use the logged saved-response claim phase defect for TDD in company-wiki and continue owner-scoped feedback.",
+  "next_action": "Complete the four W12 independent reviews now reading the frozen package, assign shared root causes to their owners, and use saved evidence to test the two CWP assertion issues without resending the paid request.",
   "w12_attempt": {
-    "status": "current_h1_cache_and_rf_adoption_verified_formal_job_completed",
+    "status": "formal_execution_frozen_independent_reviews_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
     "run_id": "w12-20261120-cn-603259",
     "attempt_id": "w12-a01",
@@ -202,6 +202,9 @@
     "cwp_feedback_github_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/44720012039",
     "rf_adoption": "t13-1 bound to tides_base_h2_2026 and 2026 direct_growth, 124 parameter values unchanged",
     "rf_owner_job_id": "rfjob-20261120-594c00a589d1",
+    "rf_snapshot_id": "a869880c34461d6a6982f1aa2427b11dfeacf5a456aeaa14bc086dd7a28a721b",
+    "execution_manifest_sha256": "648466cea7b0accf8bcbf81c621982e3bb57589738841422c3b8ff897d1076f2",
+    "paired_public_reconciliation": "real RF job succeeded with known costs and its Audit capture succeeded with unknown wrapper costs; zero new business requests",
     "recorded_gate_review": {
       "operation_event_id": "17488eb0361100caea1754b75567ba00",
       "review_event_id": "3a6e3fe2e0ca42c2bcdf672c32ca6ad1",
@@ -264,7 +267,7 @@
     "f4_locally_configured_recovery_and_report": ["filing-fetch", "revenue-forecast"],
     "f4_live_data_follow_up": {
       "investment-dashboard": "Initial three F4 fixtures were unregistered. M6 recorded and verified the formal original-position AMEC result cas_6cab1b94d8f45d42c750 through the public owner path.",
-      "revenue-forecast-audit": "Original capture recovery verified. Live replay awaits a bound original RF job and its fixed read-only check."
+      "revenue-forecast-audit": "The real W12 original RF job and Audit capture now pass separate public reconciliation. The isolated Codex triage for a different W12 refusal remains unconfirmed and has an independent retain review."
     },
     "host_prelaunch_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "host_owner_report_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
