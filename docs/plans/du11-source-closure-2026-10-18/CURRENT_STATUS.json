@@ -1654,6 +1654,32 @@
     },
     "cross_project_note": "StockWiki master@54f72c9 records historical CWP local candidate 7fd7f248d (64MB to 512MB). The final CWP implementation supersedes that candidate; no StockWiki files or records were modified."
   },
+  "feedback_gate_closure_20261120": {
+    "status": "ACCEPTED_PUBLISHED",
+    "evidence": "../feedback-loop-2026-11-17/gate-closure-20261120.md",
+    "releases": {
+      "revenue-forecast": "main@70165f99acef4a0529ebfd487af5f8fdf7151ec9",
+      "investment-dashboard": "main@104e07b2bcea7ac329950a5145796aa8721e4e43",
+      "invest-quick-scan": "codex/iqs-manifest-delivery-01@c1dd6a479f527cb913ae422a559020f94dcb585f",
+      "StockQAbyLLM": "codex/qa-content-filter-resolution-01@ee92bc9c640dc8afc3013c5be2f589b8199b5f6f"
+    },
+    "trace": {
+      "owner_response_bytes": 2952760,
+      "cli_page_limit_bytes": 2000000,
+      "parameters": 111,
+      "claims": 111,
+      "sources": 1,
+      "browser_complete": true
+    },
+    "paid_consent": {
+      "verified_ledger_layouts": ["default", "registered_explicit"],
+      "new_attempts": 0,
+      "new_provider_requests": 0,
+      "new_actual_cost_micros": 0,
+      "fixture_settled_microusd": 250000
+    },
+    "independent_review": "PASS"
+  },
   "owner_pwf_index": "../module-boundaries-2026-11-11/owner_plans.md",
   "recent_cwp_browse_boundary": {
     "status": "PUBLISHED",

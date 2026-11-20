@@ -22,6 +22,8 @@
 | IQS 路由冻结清单 | QA 三仓联调生成了正式 metric 1.1，IQS 路由入口自己的 1.0 精确判断报 `published_manifest_required`。 | `codex/iqs-manifest-delivery-01@f675789` 由既有冻结包校验解释实际版本、归档 schema 哈希、路线和题目。29 项和 2 子例通过。独审分别发布两版冻结包，历史、执行、坏版本和坏哈希均有对照。 |
 | StockQA 作业路由 | IQS 公开接口认可的正式 `refresh_owner_policy/1.6.0` 能在 StockWiki 出具原作业确认，QA 的 CLI 和本地重复 schema 表会提前拒绝。 | `codex/qa-content-filter-resolution-01@00b2f8e` 由固定 StockWiki 公开检查调用 IQS 解释请求与 policy。QA 校验请求、原尝试、主体、有序路线、预算和回执。复验 1.1、1.6 的真实应用及重放，错 pin 拒绝，原费用行一致。1.6 与相关单测共 35 项通过，另有 1.1 组合通过。独审核对真正未授权的动作和路线换序。 |
 | 正反馈分诊 | 旧流程的稳定偏差会分诊，已标为预期的拒绝缺少复查门禁必要性的机会。 | `07802483e` 宿主在原分诊和修复前检查同类合法输入、真实越界及责任层。原分诊保存处理意见和复现，预期拒绝有删除或收窄依据时才形成修复。已标记但原作业未终结或费用未知时先查账。CWP 49 项通过，含实际 Phase C 公开拒绝和 FF/RF/MC 作业恢复。 |
+| Dashboard 长溯源 | 已正式注册的图超过 Dashboard 读取进程的 2 MB 容量。逐页传输后仍可复现重复诊断与容器条目限制。 | RF `main@70165f99` 提供分页公开读取，Dashboard `main@104e07b` 按实际分片收全图并分页展示。单页仍限 2 MB。2,952,760 字节、111 参数、111 证据与 RF 完整结果逐项一致，组合浏览器和独审通过。 |
+| StockQA 已付历史 consent | QA 自带两张方言 schema 表。即使已验证并留存原响应，普通入口仍尝试读取现行执行预算。 | IQS `c1dd6a4` 判断原冻结三件套，StockQA `ee92bc9` 经同一 owner 权威进入只读恢复，派发由原恢复会话决定。真实隔离两种账本、配置升级、两次恢复、无原响应、主体撤销及独审通过，原尝试和已结费用保持。 |
 
 ## 余项及 owner 实施顺序
 
@@ -30,9 +32,8 @@
 | 责任入口 | 证据和下一步 |
 |---|---|
 | IQS 查找已有结果 | `dashboard_prepare.py` 的 `_execution_gaps` 可能让新付费所需配置影响 bank 和 checkpoint 查找。静态确认路径。用已结算未入 checkpoint、缺少新付费配置的原作业做对照，验证可查可恢复和零新启动后再收口。 |
-| StockQA 已付历史 consent | 另一条 `--inspect-confirmation` 含历史 request、preview 和 state 的形状核对。现有实时 `validate-preview` 会重新应用当前的计划、报价和规则。增加 owner 的纯冻结结构读取后，才适合归并 QA 此路径的旧 schema 表。复验重点是旧政策生成、已付但缺落盘回执、新政策变化及零新出站。 |
 | StockWiki 来源投影 | `_company_source_wire` 对完整顶层字段集合做精确匹配，`company_sources.py` 的原文收据写死 2.1 并要求可空 `review`。当前 CWP 的实版配对成功。随该仓原线用同协议可选扩展与 SourceExport 两版对照，优先复用 owner 公开解码。研究事实晋升继续由 StockWiki 判断。 |
-| 溯源的消费运输 | Dashboard 在读取进程流时限制 2 MB。RF 公开 CLI 可完整读出更大图。Dashboard owner 后续可提供分页浏览及完整产物读取，按相同报告和原始字段核对。IQS 完整缓冲之后的 16 MiB 检查只有静态证据。 |
+| IQS 长结果表示 | IQS 完整缓冲之后的 16 MiB 检查只有静态证据。用同一份可正式读取的结果验证该限制与传输边界的实际关系后再安排。 |
 | CWP 原文到投影 | 静态确认 `VerifiedContent` 的同一不可变字节在 reader 和 raw builder 各做一次 SHA。用读者签发的类型进入投影内层。公开 raw builder 仍拥有未验输入。用实际 SHA、原文身份和期次反例核对两种入口，并测同缓冲区重复工作。 |
 
 ## 组合复验

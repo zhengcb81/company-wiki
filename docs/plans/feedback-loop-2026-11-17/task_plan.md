@@ -1,6 +1,6 @@
 # 工程反馈循环总调度 PWF
 
-2026-11-19。此页是反馈工程的唯一调度入口。F4 已验收 CWP/FF 与 RF/Audit 两条受控真实宿主闭环、FF 短请求接入和 MC 发布清单自动闭环。业务和公司池以[父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)为准。[验收进度](progress.md) · [并行路线](f2-roadmap.md) · [分工](dispatch.md)
+2026-11-20。此页是反馈工程的唯一调度入口。F4 已验收 CWP/FF 与 RF/Audit 两条受控真实宿主闭环、FF 短请求接入和 MC 发布清单自动闭环。Dashboard 长溯源与 StockQA 已付确认两项跨仓复验已完成并发布。业务和公司池以父计划为准。 [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md) · [验收进度](progress.md) · [并行路线](f2-roadmap.md) · [分工](dispatch.md)
 
 ## 负责什么
 
@@ -28,4 +28,4 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 
 ## Next Step
 
-RF 原文和溯源、StockQA 作业决定、IQS 冻结清单以及门禁分诊接入已验收。新的拒绝进入既有责任仓分诊。后续沿 owner 现有工作线对已付历史 consent 的冻结接口、旧结果查找和溯源展示取证。RF 正式周跑、ET 生产消费和 W12 各按本仓或业务父计划推进。[本轮收据](progress.md#rfstockqa-和拒绝审视收口) · [门禁余项](gate-design-review.md#余项及-owner-实施顺序)
+本轮两项已按各仓边界验收。接续按父计划的 W12 与后续公司样本顺序复验现版本业务摘要和 RF 实际采用。其余已登记的门禁调查按责任仓有据分诊。 [组合验收](gate-closure-20261120.md) · [门禁调查](gate-design-review.md#余项及-owner-实施顺序)
