@@ -2,6 +2,8 @@
 
 总控 PWF 为[实施路线](task_plan.md)，并行安排见 [F2 路线图](f2-roadmap.md)。下面的工作目录从同一个 `Projects/` 起算。每个 harness 只写自己一行的仓库，启动时从本仓施工卡和当前 HEAD 接续。交接时给 owner、分支、实际提交、测试命令及结果、独审及修复覆盖的版本、临时数据清理、脱敏观察和消费侧待验范围。ROOT 在公开接口做组合。首批三张已验收并分别发布到本仓主线，详见[首批签收](f2-owner-acceptance.md)。
 
+F4 的 12 个实际接线、正式版本及仍待补的业务证据统一登记在 [F4 分仓上线](f4-rollout.md)。下方保留 F2 和早期交付出处。
+
 | 已签收 | 工作目录 | 原独立施工卡 | 首次发布的计划版本 |
 |---|---|---|---|
 | FB-ET | `earnings-transcripts/earnings-transcripts` | [电话会原语言采集](../../../../earnings-transcripts/earnings-transcripts/docs/plans/feedback-loop-2026-11-17/FB-ET.md) | `main@6883623` |

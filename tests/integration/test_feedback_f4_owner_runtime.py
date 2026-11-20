@@ -32,9 +32,12 @@ def register_sidecar(source):
     return sidecar
 
 
-def real_feedback(tmp_path, checkout, owner, observations, command):
+def real_feedback(tmp_path, checkout, owner, observations, command, *, repair=True):
+    kinds = ["triage", "replay", "report"]
+    if repair:
+        kinds.append("repair")
     actions = {kind: {"argv": [*command, kind], "lookup_argv": [*command, "get-action"]}
-               for kind in ("triage", "repair", "replay", "report")}
+               for kind in kinds}
     actions["reconcile"] = [*command, "reconcile"]
     settings = tmp_path / "settings.json"
     settings.write_text(json.dumps({"state": "actions.sqlite", "owners": {owner: {
@@ -56,7 +59,7 @@ def real_feedback(tmp_path, checkout, owner, observations, command):
     rows = snapshot()
     counts = Counter(json.loads(request)["kind"] for _, _, request, _ in rows)
     assert counts.pop("observe") >= 1
-    assert counts == dict.fromkeys(("triage", "repair", "replay", "report"), 1)
+    assert counts == dict.fromkeys(kinds, 1)
     assert all(state == "done" for _, state, _, _ in rows)
     reports = [json.loads(request)["payload"] for _, _, request, _ in rows
                if json.loads(request)["kind"] == "report"]
@@ -196,3 +199,30 @@ def test_stockqa_recovers_the_settled_attempt_from_native_binding(tmp_path):
     assert publication["attempt_id"] == fixture["attempt_id"]
     assert publication["API_requests"] == publication["new_attempts"] == publication["new_generations"] == 0
     assert ledger.read_bytes() == before
+
+
+def test_dashboard_confirms_disclosure_through_the_public_http_read(tmp_path):
+    checkout = checkout_for("DASH")
+    case = checkout / "tests/unit/m6-feedback-runtime/test_feedback_owner.py"
+    with subprocess.Popen([*PYTHON, str(case), "--fixture-root", str(tmp_path / "case")],
+                          cwd=checkout, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                          text=True, encoding="utf-8") as native:
+        try:
+            fixture = json.loads(native.stdout.readline())
+            sidecar = register_sidecar(Path(fixture["sidecar"]))
+            before = sidecar.read_bytes()
+            command = [*PYTHON, str(checkout / "scripts/feedback_owner.py"), "--db", str(tmp_path / "dashboard.sqlite"),
+                       "--sidecar-dir", str(sidecar.parent), "--origin", fixture["origin"]]
+            actions = real_feedback(tmp_path, checkout, "investment-dashboard", sidecar.parent, command, repair=False)
+            publication = actions["replay"][1]
+            evidence = json.loads(subprocess.check_output(
+                [*command, "get-evidence", publication["evidence_ref"]], cwd=checkout, timeout=20,
+            ))["evidence"]
+            assert evidence["observation_id"] and evidence["company"]["analysis_subject_id"]
+            assert evidence["data_as_of"] == "2026-09-30" and sidecar.read_bytes() == before
+        finally:
+            try:
+                native.communicate("\n", timeout=15)
+            except subprocess.TimeoutExpired:
+                native.kill()
+                native.communicate()

@@ -102,6 +102,42 @@ def test_restart_wakes_only_prelaunch_action(tmp_path, host_config, monkeypatch)
     assert (tmp_path / "starts").read_text().splitlines() == ["start"]
 
 
+@pytest.mark.parametrize("installed", [True, False])
+def test_codex_launch_resolves_the_current_install_before_starting(host_config, monkeypatch, installed):
+    from tools.feedback_loop import codex_cli
+    from tools.feedback_loop.local_host import LocalHost
+
+    config = json.loads(host_config.read_bytes())
+    config["owners"]["company-wiki"]["actions"]["triage"] = {
+        "mode": "codex-jsonl", "argv": ["codex", "exec", "--json", "-"],
+    }
+    host_config.write_text(json.dumps(config), encoding="utf-8")
+    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: Path(sys.executable) if installed else None)
+
+    def native(argv, **options):
+        assert installed and argv == [sys.executable, "exec", "--json", "-"]
+        events = [
+            {"type": "thread.started", "thread_id": "original"},
+            {"type": "item.completed", "item": {"type": "agent_message", "text": '{"decision":"expected"}'}},
+            {"type": "turn.completed", "usage": {}},
+        ]
+        for event in events:
+            options["stdout"].write(json.dumps(event).encode("ascii") + b"\n")
+        return subprocess.CompletedProcess(argv, 0)
+
+    monkeypatch.setattr(subprocess, "run", native)
+    host = LocalHost(host_config)
+    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    request = action()
+    assert host.handle(request)["state"] == "pending"
+    host.work(request["action_id"])
+    result = host.handle({**request, "method": "lookup"})
+    if installed:
+        assert result["state"] == "done" and result["native"]["session_id"] == "original"
+    else:
+        assert result["state"] == "failed" and result["code"] == "host_command_or_directory_unavailable"
+
+
 @pytest.mark.parametrize("mode", ["owner-json", "codex-jsonl"])
 def test_worker_exits_before_native_runner_can_claim_and_restart_uses_original_action(host_config, monkeypatch, mode):
     from tools.feedback_loop.local_host import LocalHost

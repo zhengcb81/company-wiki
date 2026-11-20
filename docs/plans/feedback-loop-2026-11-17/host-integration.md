@@ -12,7 +12,7 @@
 
 RF/Audit 已在独立真实宿主运行一条闭环。配置 `revenue-forecast.actions.reconcile` 调用 `scripts/rf_job_feedback.py reconcile --owner-root ROOT`，`report` 调用同脚本 `report --reports-dir DIR`。查询回告使用 `get-report --reports-dir DIR ACTION_ID`。Audit 的 `reconcile` 为 `feedback_owner.py --run RUN reconcile`，复验为 `feedback_owner.py --run RUN replay -- CHECK_ARGV...`。`CHECK_ARGV` 来自运维配置，以固定只读检查读原责任仓的公开接口，给出原 finding 引用及实际验证版本。RF/Audit 原生发布各用独占的 `RESEARCH_FEEDBACK_OUT`。复用同一已配置状态库和原始 sidecar 接续，不把两仓的作业目录交给总控解析。适用范围和实际命令的可执行样例见 [RF/Audit 收据](f4-rf-audit-acceptance.md)。
 
-F4 的隔离配置已验证 `actions.report` 可指向 FF 公开 `ff_job_feedback.py --reports-dir OWNER_DIR report`；用相同 `--reports-dir` 加 `get-report ACTION_ID` 可核对原发现、版本和证据。`owner-json` 进程先保留自己的原生完成收据，再由宿主登记；worker 丢写后恢复读回同一结果。现有生产配置未整体切换，任何新增 owner 启用时仍由其工作区提供真实修理、复验和回告命令。
+本机 FF 的 `actions.report` 指向 FF 公开 `ff_job_feedback.py --reports-dir OWNER_DIR report`，`get-report ACTION_ID` 核原发现、版本和证据。自动对账优先使用 FF 发布的 `actions.reconcile`，由 FF 按原尝试和原连接配置处理。`owner-json` 由责任仓落原生完成收据，再由宿主登记；worker 丢回复时读回同一结果。各仓实际配置和限定范围见[分仓上线](f4-rollout.md)。
 
 外层 worker 退出时，尚未到原生命令的动作仍为 `queued`，恢复会唤醒同一 action ID。`owner-json` 的执行器在写启动回执前原子领取，`codex-jsonl` 在原生会话启动前使用同一工作区互斥。并发恢复可唤醒多个本地 worker，原生命令由一个领取者执行。启动器的明确失败留 `owner_launcher_failed`，成功领取会清掉旧诊断。已经领取但终态不明、缺回执或费用未知时查原作业。
 

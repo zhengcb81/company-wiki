@@ -257,6 +257,13 @@ def _probe(args, tmp, provider, port):
         triage = [*PY, str(stub)]
 
     reports = [*PY, str(fixed / "scripts/rf_job_feedback.py")]
+    replay_owner = audit_owner
+    if args.audit_runtime:
+        replay_owner = [*PY, str(audit_scripts / "feedback_owner.py"), "--runs-root", str(run.parent),
+                        "--receipts-dir", str(tmp / "audit-receipts")]
+    replay_route = {"argv": [*replay_owner, "replay", "--", *PY, str(replay), case]}
+    if args.audit_runtime:
+        replay_route["lookup_argv"] = [*replay_owner, "get-action"]
     settings = tmp / "host.json"
     _write(settings, {"state": "host.sqlite", "owners": {
         RF: {"cwd": str(old), "timeout_seconds": 120, "actions": {
@@ -268,8 +275,8 @@ def _probe(args, tmp, provider, port):
             "reconcile": [*reports, "reconcile", "--owner-root", str(fixed_root)],
         }},
         AUDIT: {"cwd": str(run), "timeout_seconds": 35, "actions": {
-            "replay": [*audit_owner, "replay", "--", *PY, str(replay), case],
-            "reconcile": [*audit_owner, "reconcile"],
+            "replay": replay_route,
+            "reconcile": [*replay_owner, "reconcile"],
         }},
     }})
     command = [*PY, "-m", "tools.feedback_loop.local_host", "--config", str(settings)]
@@ -340,6 +347,7 @@ def main():
     parser.add_argument("--audit-repo", type=Path, required=True)
     parser.add_argument("--before", required=True)
     parser.add_argument("--after", required=True)
+    parser.add_argument("--audit-runtime", action="store_true", help="use the released multi-run Audit port")
     parser.add_argument("--codex")
     parser.add_argument("--receipt", type=Path)
     args = parser.parse_args()

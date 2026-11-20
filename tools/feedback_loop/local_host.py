@@ -464,8 +464,16 @@ class LocalHost:
         if not self._claim_native(row, route["timeout"]):
             return
         try:
+            argv = route["argv"]
+            if argv[0] in ("codex", "codex.exe"):
+                from .codex_cli import resolve_codex
+
+                executable = resolve_codex()
+                if executable is None:
+                    raise FileNotFoundError(argv[0])
+                argv = [str(executable), *argv[1:]]
             with path.open("xb") as stream:
-                completed = subprocess.run(route["argv"], input=encoded.encode("utf-8"), cwd=route["cwd"], stdout=stream,
+                completed = subprocess.run(argv, input=encoded.encode("utf-8"), cwd=route["cwd"], stdout=stream,
                                            stderr=subprocess.DEVNULL, timeout=route["timeout"], check=False)
             native, _ = _codex_receipt(path)
             if native.get("terminal"):

@@ -1,6 +1,6 @@
 # 进度与恢复入口
 
-2026-11-20。F4 在此前 CWP/FF、RF/Audit 和 MC 验收基础上分仓部署。ET、SID、IR、StockWiki、IQS 和 StockQA 新端口已接本机。其他进度按[分仓上线表](f4-rollout.md)核对。
+2026-11-20。F4 的 12 个本机模块均接入总控，完成支持范围的回执恢复验收。各仓发布、独审及现场业务数据范围以[分仓上线表](f4-rollout.md)为准。
 
 | 节点 | 状态 | 证据或下一步 |
 |---|---|---|
@@ -10,7 +10,7 @@
 | F3a | 真实宿主、FF 本地复用中断验收通过 | [独立验收与原生计数](f3a-host-acceptance.md) |
 | F3b | 两份正式摘要、恢复和两条 RF 采用通过独审 | [实际组合与适用范围](f3b-live-acceptance.md) · [草稿与精选余项](issues/cwp-draft-scope-and-focus.md) |
 | F3c | 已修正草稿范围与自动精选，保存响应及五份真实样本复验通过 | [真实回放、原始定位与保留对照](f3c-saved-response-acceptance.md) |
-| F4 | 已验 CWP/FF 与 RF/Audit 的受控闭环，MC 及六个新端口已接本机。RF 原状态与回告也可从本机宿主接续。FF 和 Audit 正完成原生上线，Dashboard 正补正式读监听地址。 | [分仓上线](f4-rollout.md) · [FF 与 MC 组合](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md) |
+| F4 | 12 个本机 owner 接线，51 项最终组合回归通过。现场 Dashboard 正式评估和 RF/Audit 的正式业务复验条件随原业务计划跟进。 | [分仓上线](f4-rollout.md) · [FF 与 MC 组合](f4-acceptance.md) · [RF/Audit 复验和回告](f4-rf-audit-acceptance.md) |
 
 ### F0 发布与独立验收
 

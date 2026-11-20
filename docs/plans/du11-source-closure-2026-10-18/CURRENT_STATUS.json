@@ -174,7 +174,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "RF read and trace gates, StockQA work-decision dialects, and IQS frozen manifests are verified. Review new refusals in the existing durable triage. Continue remaining owner-specific cases through the owner queue. W12 remains paused.",
+  "next_action": "Operate F4 through the original durable inbox and owner receipts. Follow M6 for actual registered Dashboard results and use an original RF job with a configured read-only Audit check for production replay. W12 remains paused.",
   "feedback_loop": {
     "plan": "../feedback-loop-2026-11-17/task_plan.md",
     "progress": "../feedback-loop-2026-11-17/progress.md",
@@ -222,10 +222,15 @@
     "f4_receipt": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "f4_rf_audit_acceptance": "../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md",
     "f2_roadmap": "../feedback-loop-2026-11-17/f2-roadmap.md",
-    "production_owner_rollout": "in_progress",
+    "production_owner_rollout": "configured_and_scoped_acceptance_complete",
     "f4_rollout": "../feedback-loop-2026-11-17/f4-rollout.md",
+    "f4_locally_configured_owner_count": 12,
     "f4_locally_configured_native_closure": ["meeting-converter", "earnings-transcripts", "stockinfo-dl-simple", "industry-research", "stockwiki", "invest-quick-scan", "stockqa"],
     "f4_locally_configured_recovery_and_report": ["filing-fetch", "revenue-forecast"],
+    "f4_live_data_follow_up": {
+      "investment-dashboard": "Public reads verified. The M6 formal result is unregistered in the checked authority.",
+      "revenue-forecast-audit": "Original capture recovery verified. Live replay awaits a bound original RF job and its fixed read-only check."
+    },
     "host_prelaunch_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "host_owner_report_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "company_pool": "paused"

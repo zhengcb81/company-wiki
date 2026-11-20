@@ -1,6 +1,6 @@
 # F4 分仓上线与组合验收
 
-从现有反馈计划接续。各仓独立 agent 负责本仓公开运行入口、已知修复路径和隔离验收，总控负责接线、独审、组合验证和发布。反馈运维沿本计划完成。固定公司池由业务计划管理。
+2026-11-20。本机 F4 工程上线和组合验收按各仓支持范围收口。12 个责任模块已接入总控。独立 agent 分别验证本仓端口，总控负责公开接口组合、实际接线、发布和跨仓独审。现场原作业或正式结果尚缺的见末节，按对应业务计划跟进。
 
 ## 当前工作
 
@@ -9,15 +9,15 @@
 | earnings-transcripts | 原始请求与用量收据的只读恢复，验证并回告可核对的旧结果 | `main@61fe94e` 已发布并接本机，744 项及组合通过，独审 7 项通过 |
 | StockInfoDLSimple | 原有供应商候选证据到公告投影，复验证券与材料绑定 | `v2-clean-rewrite@ae94406` 已发布并接本机，147 项、SID→CWP 17 项及总控独立组合通过 |
 | industry-research | 依据原权威结果修复报告覆盖状态，保留原报告 | `main@2aa2eff` 已发布并接本机。独审问题修复后 70 项，ROOT 8 项及 7 子例、组合各通过 |
-| StockWiki | 从本仓已发布评估恢复原 run/scan 投影 | 本地 `master@a3cd01c` 已并线并接本机。179 项定向、392 项日常测试和两次丢回复的宿主组合通过，本仓无远端 |
+| StockWiki | 从本仓已发布评估恢复原 run/scan 投影 | `a3cd01c` 已并本地主线。接线后主线到 `e4d7e85`，F4 文件一致。本仓无远端，179 项定向、392 项日常和宿主复验通过 |
 | invest-quick-scan | 从本仓已保存答案恢复覆盖率和检查回执 | 原发布线 `codex/iqs-manifest-delivery-01@4a895d3` 已推送并接本机。283 项、真实记录、总控复验通过 |
 | StockQAbyLLM | 从原付费作业和本仓结果回告接续 | 原发布线 `codex/qa-content-filter-resolution-01@79b0800` 已推送并接本机。原尝试、原账本及强退恢复通过 |
-| investment-dashboard | 从正式公开结果、原发生与 UI 投影接续 | 独立 agent 施工 |
-| company-wiki | 统一接收、原作业唤醒、原生消费者验证 | 本机统一入口与原分诊在用，已完成当前总控代码的独审与发布 |
-| filing-fetch | 原生作业接续、用量保真、原回告读回 | 本机原状态和回告已接，独立 agent 补本仓统一对账入口 |
-| revenue-forecast | 按原 attempt 核对来源步骤及费用，读取原回告 | 远端 `main@70165f99` 的本机原状态和回告端口已接。联合复跑和丢回告后查证通过 |
-| revenue-forecast-audit | 按原 capture 核对状态，复验原发现 | 本地 `main@9a38021` 联合复跑通过。独立 agent 补多运行目录的公开原作业接续 |
-| MeetingConverter | 已配置本机宿主，复验已发布的旧译文清单动作 | 保留原接线 |
+| investment-dashboard | 从正式公开结果、原发生与 UI 投影接续 | `main@fb5c11a` 已推送并接本机固定公开读端口。真实读取、隔离正式结果的复验和回告通过 |
+| company-wiki | 统一接收、作业唤醒、原生消费者验证 | 本机统一入口及现有分诊接线有效。独审定位并修复旧 Windows 包路径，按当前安装启动 |
+| filing-fetch | 原生作业接续、用量保真、原回告读回 | `main@301ec0b` 已推送并接本机。实际已有第 2 次尝试的作业查证通过，`exact`、`latest_as_of` 均通过强退复验 |
+| revenue-forecast | 按原 attempt 核对来源步骤及费用，读取原回告 | 本机公开脚本 `70165f99`，测试与计划已推 `main@f06534bc`，运行脚本一致。原作业恢复和回告通过独立复验 |
+| revenue-forecast-audit | 按原 capture 核对状态，复验原发现 | 本地 `main@3314262`。799 项通过，本机查回真实旧捕获，原报告字节一致。动态复验、丢回复后读回在隔离组合通过 |
+| MeetingConverter | 已配置本机宿主，复验已发布的旧译文清单动作 | 运行代码 `8b8e574`，复核计划发布到 `master@e7b6c02`，正式设置的五条路由、强退接续与零重复转录确认通过 |
 
 Dayu 的运行观察继续通过 CWP 的外部 provider 适配器。
 
@@ -43,7 +43,7 @@ python -B -m tools.feedback_loop.intake --settings SETTINGS --hosts HOSTS drain
 
 父 CLI 和继承输出变量的 provider 可以共用同一受控观察目录。例如 filing-fetch 调用电话会工具时，两方的原生观察可在同一独占旁路。宿主按每行的发现方和责任方路由，共用收件箱只扫描一次。各仓按自己的原生引用、发生和尝试取证，修复与回告仍在本仓保存。进程强停遗留的 `.pending` 保留给恢复，因为同一业务可能还有迟到的记录。
 
-总控快捷复验运行 `tests/integration/test_feedback_f4_intake.py`。本机有相应候选时给 `tests/integration/test_feedback_f4_owner_runtime.py` 设置各仓 `FEEDBACK_<仓标识>_RUNTIME_ROOT`。已接入 ET、SID、IR 三个独占用例，使用本仓真实产出或已保存观察、真实 owner 命令和总控动作库，核对回告和重复接续，并保留原材料。
+总控快捷复验运行 `tests/integration/test_feedback_f4_intake.py`。`tests/integration/test_feedback_f4_owner_runtime.py` 可给各仓指定含本仓测试夹具的正式版本，环境变量为 `FEEDBACK_<仓标识>_RUNTIME_ROOT`，仓标识为 `ET`、`SID`、`IR`、`SW`、`IQS`、`QA`、`DASH`。用各仓真实产出或已保存观察、真实 owner 命令和独占总控动作库，核对回告、重复接续及原始材料完整性。
 
 ## 第一批宿主验收
 
@@ -57,4 +57,12 @@ RF、FF、Audit 正式版本在隔离环境再次跑通原有来源失败和审�
 
 IQS 对原快扫纠正的是完整性判断，保留已答 24 题，报告 38 题中有 14 题未覆盖。原检查退出码为 1，反馈仍自动回告。StockQA 从本仓的原尝试绑定找回原冻结账本，补发已结算终态。ROOT 复验通过，修复和回告重复处理各只发生一次。原材料和账本逐字节保留。两仓历史费用按原证据保留，新增请求、尝试和费用均为零。
 
-本机 IQS 和 RF 的代码路径采用各自仓内 `.worktrees/f4-runtime` 中精确发布版。对应业务数据继续从各自批准根读取。IQS 当前原工区正在修改 `task_plan.md` 与其他代码，因此保留其工作区修改；RF 原分叉也保留。两处隔离检出只保留发布脚本，供本机继续运行。StockQA 在自己的既有发布线可快进，使用正式检出。
+本机 IQS 和 RF 的代码路径采用各自仓内 `.worktrees/f4-runtime` 中精确发布版。对应业务数据继续从各自工作根读取。IQS 当前原工区正在修改 `task_plan.md` 与其他代码，因此从隔离检出提供发布文件；RF 也从隔离检出运行。StockQA 在自己的既有发布线可快进，使用正式检出。
+
+## 最终接线和验收范围
+
+- 总控最终 51 项原生和组合用例通过。覆盖业务结束后的自动接续、多个 owner 共用观察目录、实际子进程强退、幂等修复和回告。独立复核核对原请求、版本、费用未知和只读边界。CWP 的 Windows 安装动态解析、缺可执行文件终态及原生标准流在 24 项定向复验中通过。旧包路径已换为固定命令名，宿主按可信 PATH 或 Windows 注册安装取当前版本。现场 `--version` 和 `exec --help` 通过，当前 CLI 为 `0.169.1`。
+- FF 新路由直接调用本仓公开 `reconcile`，其原作业作用域、期次、限额及结算分别由 FF 自己核对。终止两种采集进程后均恢复同一原件与一次原尝试；恢复期间外部请求、下载和新增费用为零。ET 补发的内嵌 `usage_receipt` 在隔离环境通过 FF 现有用量解析；错误的请求 ID 仍报未知。 [FF 本仓验收](../../../../filing-fetch/docs/plans/f2-ff-short/f4-native-reconcile.md)
+- Audit 启用多运行原 capture 读取。通过扩展版 `f4_rf_audit_host_probe.py --audit-runtime` 和当前 FF/RF 测试真实进程、原尝试及动态复验条件。现场真实 Audit 原捕获状态为 `succeeded`，历史费用未知，原事件文件一致。本机尚没有与当前正式自动复验规则配对的 RF 原作业。已有验证适用隔离冻结原作业，生产缺对应输入时继续待证。 [Audit 本仓验收](../../../../revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/F4-AUDIT.md)
+- Dashboard 的 F4 读面使用正式 IQS `127.0.0.1:8766` 和独立 Dashboard `127.0.0.1:48766`。两段公开读均为 HTTP 200。实际短命令从同一 StockWiki 数据根读到同一实体与挂牌，隔离宿主接到六条真实观察。宁德时代、微软和腾讯在本次验证的同一业务根尚无正式快扫评估；缺失按现有结果返回。已有正式结果的复验、强停和回告在隔离 HTTP 端到端完成。后续同一业务根的正式登记归 M6。此上线入口是单次取证命令，常驻站普通点击逐请求触发由 Dashboard 自己维护。 [Dashboard 本仓验收与启动配置](https://github.com/zhengcb81/investment-dashboard/blob/fb5c11aff0ef3189bda241b4ea3c4a7b1c328ef5/.planning/unified-dashboard-2026-10-26/modules/m6-quickscan/feedback-runtime-2026-11-20.md)
+- 本机配置为原 `feedback-host/settings.json` 和 `hosts.json`。原动作库依旧为 12 条已完成观察，发布前后字节 SHA 一致。IQS 隔离检出保留其启动用的代码、schema 和题库，Dashboard 隔离检出保留 backend、contracts 和 scripts。两个固定读监听均使用原 IQS 的 `--no-refresh` 配置和独立 Dashboard 状态目录。启动参数在 Dashboard 交接中，`investment-dashboard/read-listeners.json` 记本机启动回执。宿主重启先恢复原本机服务，再执行本页 `drain` 接回原观察和原动作。
