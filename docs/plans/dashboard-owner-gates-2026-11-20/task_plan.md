@@ -22,6 +22,7 @@
 - [x] A `complete` 确认当前基线和在途范围，派发独立责任仓，冻结反例。
 - [x] B `complete` 完成各仓实现和定向复验。通过后按各仓分开提交。
 - [x] C `complete` 组合复验公开链路及真实样本，清理隔离测试资料并记录发布状态。
+- [x] D `complete` 复核所属层是否还会误拒，补掉 StockWiki 可选引用配置的前置拒绝和 RF 对 StockWiki 内部格式的重复校验。
 
 ## Next Step
 

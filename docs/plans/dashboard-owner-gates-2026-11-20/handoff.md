@@ -4,7 +4,8 @@
 
 - CWP、FF 和 RF 使用各自公开 CLI、受管解释器和当前代码版本。Dashboard 配置的代码根与数据根分别绑定。旧 B37 配置指向已移除的工作树。现行原件证据与目录数据仍由原配置的资料库提供。
 - CWP 的 StockWiki 证明配置只属于发行人资料列表。已知文档版本直接从 CWP 的精确公开入口读取。浏览器内存预览和原件有界流式读取各自使用已有资源边界。
-- StockWiki 使用本仓候选代码和实际研究 workspace。不同 StockWiki／IQS workspace 的实体或挂牌 ID 以各自公开身份面为准。
+- StockWiki 使用本仓候选 `c1eeb99d` 和实际研究 workspace。引用配置由 StockWiki 在读取时检查一次。研究能读、引用配置不能用时，一次响应返回研究和具名诊断。不同 StockWiki／IQS workspace 的实体或挂牌 ID 以各自公开身份面为准。
+- RF 用 `d80c39b2` 或后继，按已验证的发行人、挂牌及原件范围登记真实已有作业。历史原件可由同发行人的已验证历史挂牌绑定。核对原作业和报告 SHA 后走 `import-rf-job`，同一已登作业返回原报告和快照。
 - IQS 先使用 `db03d4bb` 的正式启动器，再启用组合 Dashboard 候选。旧 IQS 首次名单写入仍要求预览 token。新版提交方将同一请求原子发送给所属模块，由其处理版本和幂等冲突。
 - 指标发布使用 Dashboard 本机 data-dir 中的定版快照。具体接口和复现实例见 Dashboard 候选的 `handoffs/m7-owner-publication-20261120/handoff.md`。
 
