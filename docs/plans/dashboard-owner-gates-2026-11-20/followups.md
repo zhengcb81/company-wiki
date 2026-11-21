@@ -1,5 +1,7 @@
 # Dashboard 业务 owner 后续回执
 
+以下是 F1 修复前的读回基线。正式登记、组合复验及剩余覆盖以 [F2 验收](f2-acceptance.md) 为准。
+
 2026-11-20 复核现用公开接口和冻结证据。现用 Dashboard `127.0.0.1:48766` 和 IQS `127.0.0.1:8766` 首屏均返回 200。本轮交付发行人证明和读回复核，并记录正式资料登记及业务发布状态。 [Dashboard 后续五项](../../../../investment-dashboard/handoffs/owner-requests/DASHBOARD-OWNER-FOLLOWUPS-20261120.md)
 
 ## 1. CWP 发行人证明和 StockWiki 历史引用
