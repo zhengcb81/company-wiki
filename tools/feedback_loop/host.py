@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 
 from .coordinator import Deferred
 from .observations import unique_fields
@@ -16,7 +17,10 @@ def read_hosts(path: Path) -> dict:
     return config
 
 
-def process_host(config, timeout=30):
+def process_host(config, timeout=30, *, local=None):
+    local_argv = [sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config",
+                  str(local.config), "rpc"] if local is not None else []
+
     def call(owner, request):
         spec = config.get(owner)
         argv = spec.get("argv") if isinstance(spec, dict) else spec
@@ -25,6 +29,10 @@ def process_host(config, timeout=30):
             raise Deferred("host_unconfigured", request["kind"])
         if not isinstance(extra, list) or not all(isinstance(name, str) for name in extra):
             raise Deferred("host_unconfigured", request["kind"])
+        if local is not None and (argv == local_argv or argv == [*local_argv[:2], "-X", "utf8", *local_argv[2:]]):
+            cached = local.settled_lookup(request)
+            if cached is not None:
+                return cached
         names = ("PATH", "PATHEXT", "SYSTEMROOT", "WINDIR", "COMSPEC", "SYSTEMDRIVE", "HOME", "USERPROFILE",
                  "TEMP", "TMP", "TMPDIR", "APPDATA", "LOCALAPPDATA", "LANG", "LC_ALL", *extra)
         env = {name: os.environ[name] for name in names if name in os.environ

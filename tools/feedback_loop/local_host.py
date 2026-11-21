@@ -11,6 +11,7 @@ import re
 import sqlite3
 import subprocess
 import sys
+from tempfile import NamedTemporaryFile
 import time
 
 from .observations import digest, unique_fields
@@ -49,6 +50,16 @@ CREATE TABLE IF NOT EXISTS actions (
     receipt TEXT
 )
 """
+
+
+def host_path(path: Path) -> Path:
+    """Use the native Windows file namespace, including for children of a short directory."""
+    if os.name != "nt":
+        return path
+    absolute = os.path.abspath(path)
+    if absolute.startswith(("\\\\?\\", "\\\\.\\")):
+        return Path(absolute)
+    return Path("\\\\?\\UNC\\" + absolute[2:] if absolute.startswith("\\\\") else "\\\\?\\" + absolute)
 
 
 def _argv(value):
@@ -99,17 +110,31 @@ def _codex_receipt(path: Path):
 class LocalHost:
     def __init__(self, config: Path):
         self.config = config.resolve()
-        settings = json.loads(self.config.read_bytes(), object_pairs_hook=unique_fields)
-        self.db = self.config.parent / settings["state"]
+        settings = json.loads(host_path(self.config).read_bytes(), object_pairs_hook=unique_fields)
+        self.db = host_path(self.config.parent / settings["state"])
         self.owners = settings["owners"]
         self.intake_hosts = settings.get("intake_hosts")
         with closing(self._connect()) as conn:
             conn.execute(_SCHEMA)
+            conn.execute("""CREATE TABLE IF NOT EXISTS native_deliveries (
+                directory TEXT NOT NULL, packet TEXT NOT NULL, size INTEGER NOT NULL, modified_ns INTEGER NOT NULL,
+                PRIMARY KEY (directory, packet))""")
 
     def _connect(self):
         conn = sqlite3.connect(self.db, timeout=10)
         conn.row_factory = sqlite3.Row
         return conn
+
+    def native_deliveries(self, directory: Path) -> dict[str, tuple[int, int]]:
+        """Receipts for completed native packets whose owners retain their original JSONL."""
+        with closing(self._connect()) as conn:
+            return {name: (size, modified) for name, size, modified in conn.execute(
+                "SELECT packet, size, modified_ns FROM native_deliveries WHERE directory=?", (str(directory),))}
+
+    def confirm_native_delivery(self, path: Path, version: tuple[int, int]) -> None:
+        with closing(self._connect()) as conn, conn:
+            conn.execute("INSERT OR REPLACE INTO native_deliveries VALUES (?, ?, ?, ?)",
+                         (str(path.parent), path.name, *version))
 
     def _route(self, owner, kind):
         config = self.owners[owner]
@@ -134,6 +159,20 @@ class LocalHost:
     def _get(self, key):
         with closing(self._connect()) as conn:
             return conn.execute("SELECT * FROM actions WHERE action_id = ?", (key,)).fetchone()
+
+    def settled_lookup(self, request):
+        """Serve local immutable results and absence. Active and native lookups stay on their RPC."""
+        if request["method"] != "lookup" or request["kind"] == "reconcile":
+            return None
+        row = self._get(request["action_id"])
+        if row is not None and row["state"] != "done":
+            return None
+        _validate(request)
+        if request["owner"] not in self.owners:
+            return None
+        prefix = {"schema_version": "feedback-action-result/1", "action_id": request["action_id"],
+                  "request_digest": request["request_digest"]}
+        return self._lookup_result(request, row, prefix)
 
     def _wake(self, key):
         try:
@@ -418,11 +457,14 @@ class LocalHost:
             if inserted and route:
                 self._wake(key)
             row = self._get(key)
+        return self._lookup_result(request, row, prefix)
+
+    def _lookup_result(self, request, row, prefix):
         if row is None:
             return {**prefix, "state": "absent"}
-        if row["request_digest"] != sha:
+        if row["request_digest"] != request["request_digest"]:
             return {**prefix, "state": "failed", "code": "action_conflict"}
-        if kind == "report" and row["route"] is None:
+        if request["kind"] == "report" and row["route"] is None:
             return {**prefix, "state": "unknown", "code": "legacy_report_without_owner_ack"}
         return {**prefix, **self._status(row)}
 
@@ -498,6 +540,37 @@ class LocalHost:
         self._status(self._get(key))
 
 
+def _save_recovery(config: Path, result: dict) -> None:
+    """Keep the last unattended outcome even when Windows provides no console."""
+    path = host_path(config.resolve().with_name("last-native-recovery.json"))
+    temporary = None
+    try:
+        with NamedTemporaryFile(dir=path.parent, delete=False) as stream:
+            temporary = Path(stream.name)
+            stream.write((json.dumps({"finished_at": time.time(), **result}, ensure_ascii=True) + "\n").encode("ascii"))
+            stream.flush()
+            os.fsync(stream.fileno())
+        temporary.replace(path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
+def _recover_command(args) -> dict:
+    discovery = args.hosts or args.config.with_name("hosts.json")
+    if not args.sidecar and (args.hosts or host_path(discovery).is_file()):
+        from .intake import drain
+        return drain(args.config.resolve(), discovery.resolve(), owner=args.owner, wait_seconds=args.wait_seconds)
+    outcome = {"woken": LocalHost(args.config).recover()}
+    if args.sidecar:
+        from .coordinator import settle
+        from .host import process_host, read_hosts
+        from .observations import read_batch
+        outcome["feedback"] = settle(read_batch(args.sidecar), process_host(read_hosts(host_path(args.hosts))),
+                                     args.wait_seconds)
+    return outcome
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -507,30 +580,32 @@ def main(argv=None):
     recovery.add_argument("--hosts", type=Path)
     recovery.add_argument("--sidecar", type=Path, action="append", default=[])
     recovery.add_argument("--wait-seconds", type=int, default=0)
+    recovery.add_argument("--save-result", action="store_true", help="retain the last result beside the settings")
+    recovery.add_argument("--owner", action="append", help="limit inbox collection to these owners")
     sub.add_parser("work").add_argument("action_id")
     sub.add_parser("owner-command").add_argument("action_id")
     args = parser.parse_args(argv)
+    if args.mode == "recover":
+        if args.wait_seconds < 0 or (args.sidecar and not args.hosts):
+            parser.error("recovery sidecars require --hosts and a nonnegative wait")
+        try:
+            outcome = _recover_command(args)
+        except Exception as exc:
+            if args.save_result:
+                with suppress(OSError):
+                    _save_recovery(args.config, {"error_type": type(exc).__name__,
+                                                 "errno": OSError.errno.__get__(exc) if isinstance(exc, OSError) else None})
+            raise
+        if args.save_result:
+            _save_recovery(args.config, outcome)
+        if sys.stdout is not None:
+            print(json.dumps(outcome))
+        return 0
     host = LocalHost(args.config)
     if args.mode == "work":
         host.work(args.action_id)
     elif args.mode == "owner-command":
         host._owner_command(args.action_id)
-    elif args.mode == "recover":
-        if args.wait_seconds < 0 or (args.sidecar and not args.hosts):
-            parser.error("recovery sidecars require --hosts and a nonnegative wait")
-        discovery = args.hosts or args.config.with_name("hosts.json")
-        if discovery.is_file() and not args.sidecar:
-            from .intake import drain
-            outcome = drain(args.config.resolve(), discovery.resolve(), owner=None, wait_seconds=args.wait_seconds)
-        else:
-            outcome = {"woken": host.recover()}
-        if args.sidecar:
-            from .coordinator import settle
-            from .host import process_host, read_hosts
-            from .observations import read_batch
-
-            outcome["feedback"] = settle(read_batch(args.sidecar), process_host(read_hosts(args.hosts)), args.wait_seconds)
-        print(json.dumps(outcome))
     else:
         print(json.dumps(host.handle(json.load(sys.stdin, object_pairs_hook=unique_fields)), ensure_ascii=True))
     return 0

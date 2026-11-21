@@ -81,3 +81,90 @@ def test_torn_sidecar_preserves_prior_bytes_and_next_complete_row(tmp_path, monk
     previous, complete = out.read_bytes().splitlines()
     assert previous == b'{"old":'
     assert json.loads(complete)["actual"] == "failed"
+
+
+def test_faulty_optional_exception_properties_do_not_erase_the_native_cause(tmp_path, monkeypatch):
+    from company_wiki.runtime_feedback import entry
+    import pytest
+
+    monkeypatch.setenv("RESEARCH_FEEDBACK_DIR", str(tmp_path))
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
+
+    class BrokenDisk(OSError):
+        @property
+        def errno(self):
+            raise RuntimeError("optional errno failed")
+
+    class BrokenJSON(json.JSONDecodeError):
+        def __getattribute__(self, key):
+            if key in {"lineno", "colno"}:
+                raise RuntimeError("optional position failed")
+            return super().__getattribute__(key)
+
+    for exc in (BrokenDisk(5, "disk unavailable"), BrokenJSON("incomplete JSON", "", 0)):
+        @entry("native")
+        def fail():
+            raise exc
+        with pytest.raises(type(exc)) as original:
+            fail()
+        assert original.value is exc
+    details = [json.loads(p.read_bytes())["exceptions"][0] for p in tmp_path.glob("*.diagnostic.json")]
+    by_type = {detail["type"]: detail for detail in details}
+    assert set(by_type) == {"BrokenDisk", "BrokenJSON"}
+    assert by_type["BrokenDisk"]["errno"] == 5 and "disk unavailable" in by_type["BrokenDisk"]["messages"]
+    assert by_type["BrokenJSON"]["locations"]
+    assert len(list(tmp_path.glob("*.ready"))) == 2
+
+
+def test_document_failure_preserves_each_original_attempt(tmp_path, monkeypatch):
+    from company_wiki.runtime_feedback import document_results, entry
+
+    monkeypatch.setenv("RESEARCH_FEEDBACK_DIR", str(tmp_path))
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
+    member = {"item_key": "source-a", "state": "failed", "reason_codes": ["disk"]}
+    native = {"run_id": "daily", "items": [member]}
+
+    @entry("daily-job")
+    def invoke():
+        document_results("read", native)
+        return 0
+
+    for attempt in ("first", "second"):
+        monkeypatch.setenv("RESEARCH_FEEDBACK_ATTEMPT_ID", attempt)
+        invoke()
+    native["attempt_id"] = "frozen-batch"
+    invoke()
+    member["attempt_id"] = "frozen-member"
+    invoke()
+    monkeypatch.setenv("RESEARCH_FEEDBACK_ATTEMPT_ID", "reader-after-restart")
+    invoke()
+    rows = [json.loads(p.read_bytes()) for p in tmp_path.glob("*.jsonl")]
+    assert len(rows) == 4
+    assert {(r["run_id"], r["attempt_id"]) for r in rows} == {
+        ("daily", k) for k in ("first", "second", "frozen-batch", "frozen-member")}
+
+
+def test_native_feedback_in_deep_state_root(tmp_path, monkeypatch):
+    from company_wiki.file_mutex import win32_filesystem_path
+    from company_wiki.runtime_feedback import record
+    from shutil import rmtree
+
+    state = tmp_path.joinpath(*(["deep-state-" + "x" * 30] * 8))
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
+    monkeypatch.delenv("RESEARCH_FEEDBACK_DIR", raising=False)
+    monkeypatch.setenv("LOCALAPPDATA", str(state))
+    monkeypatch.setenv("XDG_STATE_HOME", str(state))
+    try:
+        record("owner-read", "failed", error=OSError(5, "original read failed"))
+        packet, = win32_filesystem_path(state).rglob("*.jsonl")
+        assert packet.with_suffix(".ready").exists()
+        detail = json.loads((packet.parent / json.loads(packet.read_bytes())["details_ref"]).read_bytes())
+        assert detail["exceptions"][0]["errno"] == 5
+    finally:
+        if win32_filesystem_path(state).is_dir():
+            rmtree(win32_filesystem_path(state))
+        for parent in state.parents:
+            if parent == tmp_path:
+                break
+            if win32_filesystem_path(parent).is_dir():
+                win32_filesystem_path(parent).rmdir()

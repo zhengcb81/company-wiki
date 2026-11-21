@@ -337,8 +337,116 @@ def test_host_restart_automatically_consumes_direct_native_packet(tmp_path):
                expected="legitimate_refusal", actual="legitimate_refusal", disposition="expected")
     packet.write_text(json.dumps(row) + "\n", encoding="utf8")
     packet.with_suffix(".ready").write_text(json.dumps(identity), encoding="utf8")
-    command = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings), "recover"]
-    results = [json.loads(subprocess.check_output(command, cwd=ROOT)) for _ in range(2)]
+    command = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings), "recover", "--save-result"]
+    results = []
+    for _ in range(2):
+        results.append(json.loads(subprocess.check_output(command, cwd=ROOT)))
+        saved = json.loads(settings.with_name("last-native-recovery.json").read_bytes())
+        assert saved.pop("finished_at") > 0 and saved == results[-1]
     assert [r["processed"] for r in results] == [1, 0]
     assert all(r["remaining"] == 0 for r in results)
     assert not (tmp_path / "business-count.txt").exists()
+
+
+def test_native_ack_belongs_to_the_occurrence_named_by_its_marker(tmp_path):
+    command, _ = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    cfg = json.loads(settings.read_bytes())
+    cfg["owners"][OWNER]["native_observation_dirs"] = ["native"]
+    settings.write_text(json.dumps(cfg), encoding="utf8")
+    packet = tmp_path / "native" / ("feedback-" + "6" * 32 + ".jsonl")
+    packet.parent.mkdir()
+    marker = packet.with_suffix(".ready")
+    identity = dict(owner=OWNER, run_id="original", attempt_id="attempt-A", step_id="read")
+    row = dict(identity, schema_version="feedback-observation/1", check_id="outcome",
+               expected="ok", actual="ok", disposition="expected")
+    marker.write_text(json.dumps(identity), encoding="utf8")
+
+    def cold():
+        return json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT))
+
+    for changed in ({"owner": "other"}, {"run_id": "wrong"}, {"attempt_id": "attempt-B"}, {"step_id": "wrong"}):
+        packet.write_text(json.dumps(row | changed) + "\n", encoding="utf8")
+        waiting = cold()
+        assert waiting["remaining"] == 1 and waiting["processed"] == 0
+        assert marker.is_file()
+        assert "native_observation_mismatch" in {d["code"] for d in waiting["diagnostics"]}
+    packet.write_text(json.dumps(row) + "\n", encoding="utf8")
+    assert cold()["processed"] == 1 and not marker.exists()
+    assert cold()["processed"] == 0
+
+
+@pytest.mark.parametrize("deep", (False, True))
+def test_kill_between_native_payload_and_ready_survives_cold_wake(tmp_path, deep, request):
+    from shutil import rmtree
+    from tools.feedback_loop.local_host import host_path
+
+    command, _ = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    cfg = json.loads(settings.read_bytes())
+    relative = Path("native").joinpath(*(["owner-" + "x" * 38] * 7 if deep else []))
+    cfg["owners"][OWNER]["native_observation_dirs"] = [str(relative)]
+    settings.write_text(json.dumps(cfg), encoding="utf8")
+    directory = host_path(tmp_path / relative)
+    directory.mkdir(parents=True)
+    request.addfinalizer(lambda: rmtree(host_path(tmp_path / "native")))
+    packet = directory / ("feedback-" + "2" * 32 + ".jsonl")
+    identity = dict(owner=OWNER, run_id="original", attempt_id="one", step_id="read")
+    source = (json.dumps(dict(identity, schema_version="feedback-observation/1", check_id="outcome",
+                              expected="ok", actual="ok", disposition="expected")) + "\n").encode()
+    producer = ("import os,sys; from pathlib import Path; p=Path(sys.argv[1]); "
+                "p.write_bytes(sys.stdin.buffer.read()); os._exit(23)")
+    run = subprocess.run([*PYTHON, "-c", producer, str(packet)], input=source)
+    assert run.returncode == 23 and not packet.with_suffix(".ready").exists()
+
+    def cold():
+        return json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT))
+
+    assert [cold()["processed"] for _ in range(2)] == [1, 0]
+    assert packet.read_bytes() == source and not (tmp_path / "business-count.txt").exists()
+    with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as conn:
+        assert conn.execute("SELECT COUNT(*) FROM actions").fetchone() == (1,)
+
+
+def test_only_finished_lookups_on_the_same_local_host_avoid_a_new_interpreter(tmp_path, monkeypatch):
+    from tools.feedback_loop import host as transport
+    from tools.feedback_loop.local_host import LocalHost
+    from tools.feedback_loop.observations import digest
+
+    _, registry = configuration(tmp_path)
+    host = LocalHost(tmp_path / "settings.json")
+    routes = json.loads(registry.read_bytes())
+    key = "9" * 64
+    body = {"occurrence_id": "original"}
+    request = dict(schema_version="feedback-action/1", owner=OWNER, kind="observe", action_id=key,
+                   method="lookup", payload=body, request_digest=digest([OWNER, "observe", key, body]))
+    call = transport.process_host(routes, local=host)
+    assert call(OWNER, request)["state"] == "absent"
+    assert call(OWNER, request | {"method": "submit"})["state"] == "done"
+    with monkeypatch.context() as patch:
+        def external(*args, **kwargs):
+            raise OSError("external transport called")
+        patch.setattr(transport.subprocess, "run", external)
+        assert call(OWNER, request)["state"] == "done"
+        with pytest.raises(OSError, match="external transport called"):
+            call(OWNER, request | {"method": "submit"})
+        other = {OWNER: [*routes[OWNER][:-2], str(tmp_path / "another-config.json"), "rpc"]}
+        with pytest.raises(OSError, match="external transport called"):
+            transport.process_host(other, local=host)(OWNER, request)
+
+
+def test_scoped_recovery_leaves_parallel_owner_marker_in_shared_inbox(tmp_path):
+    from tools.feedback_loop.intake import drain
+
+    _, registry = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    config["owners"]["parallel"] = {"observation_dir": "observations"}
+    settings.write_text(json.dumps(config))
+    inbox = tmp_path / "observations"
+    inbox.mkdir()
+    marker = inbox / ("feedback-" + "c" * 32 + ".ready")
+    marker.write_text(json.dumps({"owner": "parallel", "run_id": "original", "step_id": "intake/start"}))
+    result = drain(settings, registry, owner=[OWNER], wait_seconds=0)
+    assert result["processed"] == result["remaining"] == 0
+    assert marker.exists()

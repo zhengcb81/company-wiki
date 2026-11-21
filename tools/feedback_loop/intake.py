@@ -14,12 +14,13 @@ from uuid import uuid4
 
 from .coordinator import settle
 from .host import process_host, read_hosts
-from .local_host import LocalHost
+from .local_host import LocalHost, host_path
 from .observations import read_batch
 
 
 _ROOT = Path(__file__).resolve().parents[2]
 _MARKER = re.compile(r"feedback-[a-f0-9]{32}\.(?:pending|ready)")
+_PACKET = re.compile(r"feedback-[a-f0-9]{32}\.jsonl")
 _SETTLED = {"expected", "external", "needs_evidence", "reconciled", "verified", "regressed"}
 
 
@@ -27,9 +28,9 @@ def _recovery_dir(settings: Path) -> Path:
     return settings.parent / ".intake-recovery"
 
 
-def _observation_dirs(settings: Path, owners: dict, selected: str | None):
+def _observation_dirs(settings: Path, owners: dict, selected: set[str] | None):
     for owner, route in owners.items():
-        if selected is not None and owner != selected:
+        if selected is not None and owner not in selected:
             continue
         target = route.get("observation_dir")
         if isinstance(target, str) and target:
@@ -41,7 +42,7 @@ def _observation_dirs(settings: Path, owners: dict, selected: str | None):
             if not isinstance(path, str) or not path.strip():
                 raise ValueError(f"invalid native observation path for {owner}")
             yield owner, settings.parent / path, True
-    yield selected or "company-wiki", _recovery_dir(settings), False
+    yield min(selected) if selected else "company-wiki", _recovery_dir(settings), False
 
 
 def _publish_marker(path: Path, value: dict) -> None:
@@ -90,19 +91,66 @@ def _restore_process_receipt(marker: Path, original: dict, receipt: Path) -> Non
         temporary.replace(receipt)
 
 
-def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: int) -> dict:
-    """Resume host work, then consume only markers from the configured inboxes."""
+def _file_version(path: Path) -> tuple[int, int]:
+    stat = path.stat()
+    return stat.st_size, stat.st_mtime_ns
+
+
+def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seconds):
+    """Finish a directly published occurrence, including death between its two atomic writes."""
+    try:
+        version = _file_version(packet)
+        if marker is None and known.get(packet.name) == version:
+            return 0, 0, []
+        with packet.open("rb") as stream:
+            if not version[0]:
+                return 0, 1, [{"code": "native_observation_missing"}]
+            stream.seek(-1, os.SEEK_END)
+            if stream.read(1) != b"\n":
+                return 0, 1, [{"code": "native_observation_incomplete"}]
+    except FileNotFoundError:
+        return 0, int(marker is not None), [{"code": "native_observation_missing"}] if marker is not None else []
+    batch = read_batch([packet])
+    if batch.diagnostics or not batch.observations:
+        return 0, 1, batch.diagnostics or [{"code": "native_observation_missing"}]
+    for row in batch.observations.values():
+        producing_owners = {row["origin_owner"], row["owner"]}
+        if (not owners.intersection(producing_owners)
+                or ("owner" in context and context["owner"] not in producing_owners)
+                or any(row[key] != context[key] for key in ("run_id", "attempt_id", "step_id") if key in context)):
+            return 0, 1, [{"code": "native_observation_mismatch"}]
+    result = settle(batch, rpc, wait_seconds)
+    count = len(result["observations"])
+    if result["diagnostics"] or any(r["status"] not in _SETTLED for r in result["observations"]):
+        return count, 1, result["diagnostics"]
+    if _file_version(packet) != version:
+        return count, 1, [{"code": "native_observation_changed"}]
+    host.confirm_native_delivery(packet, version)
+    known[packet.name] = version
+    if marker is not None:
+        marker.unlink(missing_ok=True)
+    return count, 0, []
+
+
+def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wait_seconds: int) -> dict:
+    """Resume host work and consume the original packets in the configured inboxes."""
     host = LocalHost(settings)
-    rpc = process_host(read_hosts(hosts_file))
+    rpc = process_host(read_hosts(host_path(hosts_file)), local=host)
     woken = len(host.recover())
     processed = remaining = 0
     diagnostics = []
     unconfirmed = []
-    directories = {}
-    for name, directory, native in _observation_dirs(settings, host.owners, owner):
-        previous = directories.get(directory)
-        directories[directory] = (name, native or bool(previous and previous[1]))
-    for directory, (name, native) in directories.items():
+    selected = {owner} if isinstance(owner, str) else set(owner) if owner else None
+    directories: dict[Path, set[str]] = {}
+    native_owners: dict[Path, set[str]] = {}
+    for name, directory, native in _observation_dirs(settings, host.owners, selected):
+        directory = host_path(directory)
+        directories.setdefault(directory, set()).add(name)
+        if native:
+            native_owners.setdefault(directory, set()).add(name)
+    for directory, names in directories.items():
+        name = sorted(names)[0]
+        native = native_owners.get(directory, set())
         try:
             markers = sorted(directory.iterdir())
         except FileNotFoundError:
@@ -110,23 +158,31 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: 
         except OSError:
             diagnostics.append({"owner": name, "code": "observation_inbox_unreadable"})
             continue
+        known = host.native_deliveries(directory) if native and markers else {}
         for marker in markers:
-            if not _MARKER.fullmatch(marker.name) or not marker.is_file():
+            unmarked = native and _PACKET.fullmatch(marker.name)
+            if unmarked:
+                if any(marker.with_suffix(ext).exists() for ext in (".pending", ".ready", ".process")):
+                    continue
+            elif not _MARKER.fullmatch(marker.name) or not marker.is_file():
                 continue
             sidecar = marker.with_suffix(".jsonl")
             process_receipt = marker.with_suffix(".process")
-            if marker.suffix == ".ready" and (native or owner):
+            if unmarked or (marker.suffix == ".ready" and (native or selected)):
                 try:
-                    content = marker.read_bytes()
+                    content = b"" if unmarked else marker.read_bytes()
                     context = json.loads(content) if content else {}
                     if not isinstance(context, dict):
                         raise ValueError("invalid observation marker")
-                    if owner and context.get("owner") not in (None, owner):
+                    if selected and context.get("owner") and context["owner"] not in selected:
                         continue
                     direct = native and not str(context.get("step_id", "")).startswith("intake/")
-                    if direct and (not sidecar.is_file() or not sidecar.stat().st_size):
-                        remaining += 1
-                        diagnostics.append({"owner": name, "code": "native_observation_missing"})
+                    if direct:
+                        count, pending_count, issues = _receive_native(
+                            sidecar, None if unmarked else marker, context, native, host, known, rpc, wait_seconds)
+                        processed += count
+                        remaining += pending_count
+                        diagnostics.extend({"owner": name, **row} for row in issues)
                         continue
                 except FileNotFoundError:
                     continue  # A concurrent reader completed the same marker.
@@ -134,10 +190,11 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: 
                     remaining += 1
                     diagnostics.append({"owner": name, "code": "unreadable_process_marker"})
                     continue
-            if marker.suffix == ".pending" and owner:
+            if marker.suffix == ".pending" and selected:
                 try:
                     original_marker = marker.read_bytes()
-                    if original_marker and json.loads(original_marker).get("owner") not in (None, owner):
+                    marker_owner = json.loads(original_marker).get("owner") if original_marker else None
+                    if marker_owner and marker_owner not in selected:
                         continue
                 except FileNotFoundError:
                     continue

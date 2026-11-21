@@ -16,6 +16,7 @@ from typing import Any, ParamSpec
 from uuid import NAMESPACE_URL, uuid4, uuid5
 
 from .diagnostic_redaction import redact_text
+from .file_mutex import win32_filesystem_path
 
 
 __all__ = ["document_results", "entry", "record"]
@@ -46,6 +47,7 @@ def _directory() -> Path:
 
 
 def _atomic(path: Path, data: bytes) -> None:
+    path = win32_filesystem_path(path)
     with NamedTemporaryFile(dir=path.parent, delete=False) as file:
         temporary = Path(file.name)
         try:
@@ -86,10 +88,15 @@ def _exceptions(exc: BaseException | None) -> list[dict]:
         values = vars(BaseException)["args"].__get__(item)
         message = [redact_text(value) for value in values if type(value) is str]
         detail: dict[str, Any] = {"type": type(item).__name__, "locations": locations, "messages": message}
-        if isinstance(item, OSError) and item.errno is not None:
-            detail["errno"] = item.errno
+        if isinstance(item, OSError):
+            errno = vars(OSError)["errno"].__get__(item)
+            if type(errno) is int:
+                detail["errno"] = errno
         if isinstance(item, json.JSONDecodeError):
-            detail["line"], detail["column"] = item.lineno, item.colno
+            attributes = vars(BaseException)["__dict__"].__get__(item)
+            for source, field_name in (("lineno", "line"), ("colno", "column")):
+                if type(attributes.get(source)) is int:
+                    detail[field_name] = attributes[source]
         output.append(detail)
         for edge in (vars(BaseException)["__context__"], vars(BaseException)["__cause__"]):
             child = edge.__get__(item)
@@ -145,7 +152,7 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
 
         explicit = os.getenv("RESEARCH_FEEDBACK_OUT")
         if explicit:
-            sidecar = Path(explicit)
+            sidecar = win32_filesystem_path(Path(explicit))
             try:
                 sidecar.parent.mkdir(parents=True, exist_ok=True)
                 _atomic(sidecar.parent / details_name, _encoded(details))
@@ -164,7 +171,8 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
                 return
         override = os.getenv("RESEARCH_FEEDBACK_DIR")
         folders = [Path(override), _directory()] if override else [_directory()]
-        for folder in dict.fromkeys(folders):
+        for location in dict.fromkeys(folders):
+            folder = win32_filesystem_path(location)
             try:
                 folder.mkdir(parents=True, exist_ok=True)
                 _atomic(folder / details_name, _encoded(details))
@@ -212,8 +220,9 @@ def document_results(operation: str, payload: Mapping[str, Any]) -> None:
     """Read each native result including failures inside a successful request."""
     status = payload.get("status")
     run = _token(payload.get("run_id")) or _token(payload.get("request_id"))
+    attempt = _token(payload.get("attempt_id"))
     if isinstance(status, str) and status in _FAILED:
-        record(operation, status, run=run, reason=payload.get("reason") or payload.get("error") or "",
+        record(operation, status, run=run, attempt=attempt, reason=payload.get("reason") or payload.get("error") or "",
                error=sys.exc_info()[1])
     members = payload.get("items", payload.get("documents"))
     if not isinstance(members, (list, tuple)):
@@ -230,5 +239,6 @@ def document_results(operation: str, payload: Mapping[str, Any]) -> None:
         reasons = member.get("reason_codes") or member.get("errors")
         if not isinstance(reasons, (list, tuple)):
             reasons = []
-        record(operation, state, run=run, attempt=run, item=str(item), source_id=source,
+        record(operation, state, run=run, attempt=_token(member.get("attempt_id")) or attempt,
+               item=str(item), source_id=source,
                reason=next((code for code in reasons if _token(code)), ""))

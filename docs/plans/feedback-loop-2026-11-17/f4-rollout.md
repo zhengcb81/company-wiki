@@ -34,6 +34,12 @@ Dayu 的运行观察继续通过 CWP 的外部 provider 适配器。
 
 ## 统一运行与接续
 
+普通应用原生观察目录由宿主设置中的每仓 `native_observation_dirs` 指定。Windows 唤醒使用原宿主的 Python，当前用户登录和每十分钟触发同一个任务，机器恢复后补跑。相同配置安装两次仍是一项任务。设置文件旁的 `last-native-recovery.json` 只保存最近一轮结果。隔离验收已用真实 Windows Task Scheduler、模拟发布中断遗留的完整正文和空动作库查回一条已完成观察，临时任务已清理。交付期可用 `-Owners` 选已验模块，后续在同一任务上更新订阅。多仓联调有单独的真实强停用例。
+
+```powershell
+.\tools\feedback_loop\install_recovery_task.ps1 -SettingsPath .planning\shared-reading-production\feedback-host\settings.json -PythonPath C:\Miniconda\python.exe
+```
+
 在总控仓用实际宿主的解释器运行下面的入口。`SETTINGS` 和 `HOSTS` 来自原有本机 `feedback-host` 目录。给一个 owner 配置固定工作目录和专用 `observation_dir`。下面命令中 `ORIGINAL_COMMAND` 是本次已确定的本仓公开命令及原参数。
 
 ```text
