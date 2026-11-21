@@ -2281,6 +2281,27 @@ def fake(text,*,index=0,kind="html_paragraph",metadata=None):
     return replace(unit,parser_name="cwp_document_normalization")
 
 
+def test_operating_fact_is_evaluated_once_per_text_per_document(monkeypatch):
+    from company_wiki.source_catalog import narrative_business_groups
+
+    text = "Our service uses model routing to reduce token costs."
+    members = (fake(text), fake(text, index=1))
+    expected = package(members)
+    assert expected.evidence_spans
+    evaluate = narrative_business_groups.evaluate_operating_fact
+    observed = []
+
+    def observe(value):
+        observed.append(value)
+        return evaluate(value)
+
+    monkeypatch.setattr(narrative_business_groups, "evaluate_operating_fact", observe)
+    assert package(members) == expected
+    assert observed.count(text) == 1
+    assert package(members) == expected
+    assert observed.count(text) == 2
+
+
 @pytest.mark.parametrize("text",["Revenue increased 20% to $10 billion.","EPS increased 20% to $1.20.",
     "Total assets were $20 billion and liabilities were $10 billion.","Operating income was $2 billion, up 20%.",
     "Revenue increased 20% while our product philosophy remains unchanged."])
