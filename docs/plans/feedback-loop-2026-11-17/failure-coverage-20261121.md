@@ -12,6 +12,8 @@
 
 ## IQS 的原始事故
 
+新增证据已对上原执行的第 1 次启动、两题各自的工作项、13:09:05 的失败结果与 14:05 的交付。门禁简化在 StockQA 支线发布；日志候选另留 14 个用例和 IQS 的 8 个红测。其测试发现和原事故的未知底层原因分开记录。[原运行、归因和两仓接续](issues/iqs-presend-20261121.md)
+
 中微 28 题重评已经保存并交付 10 题。IQS_13、IQS_14 在 HTTP 发送前失败。StockQA 的原始工作记录能证明已准备、没有发送意图、没有对应预算尝试和响应。原释放回执显示两题回到 pending，前十个检查点哈希相同。异常转换只保存了外层 `QuickScanWorkPersistenceError`。无法再从这些旧材料确定底层异常，也不应据此重新调用模型。IQS 是发现方，原因最早能被记录的位置在 StockQA。并行 IQS/StockQA 线的改动应沿同一原任务复验。[IQS 原交接](../../../../invest-quick-scan/docs/implementation/handoff-for-new-agent.md) · [原未发送回执](../../../../invest-quick-scan/runs/amec-rescore-20261121/released-unsent-summary.json)
 
 ## 逐仓证据与责任
