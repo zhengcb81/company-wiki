@@ -25,6 +25,27 @@
     "started_at": "2026-11-21T14:14:55Z",
     "stage_at_readback": "backlog"
   },
+  "first_native_outcome": {
+    "native_exit_code": 0,
+    "state": "partial",
+    "filing_job": {
+      "owner_job_id": "ffjob-0572be84bca9",
+      "provider_document_id": "0001193125-26-436133",
+      "reason": "budget_exceeded",
+      "bounded_retry_on_same_job": true,
+      "execution_count": 2,
+      "cost_state": "known",
+      "cost_usd": "0.00",
+      "result": "missing"
+    },
+    "transcript_job": {
+      "owner_job_id": "ffjob-0dd330d80fad",
+      "reason": "provider_entitlement_required",
+      "provider_requests": 1,
+      "downloads": 0,
+      "cost_state": "unknown"
+    }
+  },
   "dashboard": {
     "jobs_url": "http://127.0.0.1:48767/jobs",
     "status_and_runs_read": true,
