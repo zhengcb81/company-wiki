@@ -7,6 +7,12 @@ from pathlib import Path
 import tempfile
 
 
+# The public batch envelopes share a terminal status and budget. Their per-item
+# diagnostics live under different keys, including for a single raw original.
+_BATCH_MEMBERS = {"narrative-batch-result/1": "documents", "narrative-batch-result/2": "items"}
+_LIMIT_STATES = ("budget_exhausted", "storage_exhausted")
+
+
 def _bool_outcome(value):
     if value is True:
         return "zero-post"
@@ -22,22 +28,25 @@ def _objects(value):
 def _failed_generation(state):
     """Observe a terminal result and accounting from the same native generation."""
     result = state.get("receipt")
-    if (not isinstance(result, dict) or result.get("schema_version") != "narrative-batch-result/1"
-            or result.get("run_id") != state["run_id"] or result.get("status") != "failed"):
+    if not isinstance(result, dict) or result.get("run_id") != state["run_id"]:
+        return None
+    schema = result.get("schema_version")
+    status = result.get("status")
+    if not isinstance(schema, str) or schema not in _BATCH_MEMBERS or status not in ("failed", *_LIMIT_STATES):
         return None
 
     attempts = [row for row in _objects(state.get("native_usage")) if row.get("run_id") == state["run_id"]]
     errors = {row.get("error_code") for row in attempts if isinstance(row.get("error_code"), str)}
     if isinstance(result.get("error"), str) and result["error"]:
         errors.add(result["error"])
-    for document in _objects(result.get("documents")):
-        if isinstance(document.get("errors"), list):
-            errors.update(code for code in document["errors"] if isinstance(code, str))
+    for member in _objects(result.get(_BATCH_MEMBERS[schema])):
+        if isinstance(member.get("errors"), list):
+            errors.update(code for code in member["errors"] if isinstance(code, str))
     budget = result.get("budget")
     known = (isinstance(budget, dict) and all(type(budget.get(key)) is int and budget[key] == 0
              for key in ("unknown_reservations", "unsettled_reservations"))
              and all(row.get("usage_status") == "known" for row in attempts))
-    return {"status": "known" if known else "cost_unknown", "job_status": "failed",
+    return {"status": "known" if known else "cost_unknown", "job_status": "failed", "native_status": status,
             "cost_state": "known" if known else "unknown", "error_codes": sorted(errors),
             "attempt_ids": [row["attempt_id"] for row in attempts if isinstance(row.get("attempt_id"), str)]}
 
@@ -66,9 +75,11 @@ def observations(receipt, env, version):
         refusal_codes = {"locator-replay": state.get("refusal_code")}
         failure = _failed_generation(state)
         if failure is not None:
-            checks.append(("summary-generation", "published", "failed"))
+            checks.append(("summary-generation", "published", failure["native_status"]))
             if "MODEL_PAID_RESPONSE_UNAVAILABLE" in failure["error_codes"]:
                 refusal_codes["summary-generation"] = "model_paid_response_unavailable"
+            elif failure["native_status"] in _LIMIT_STATES:
+                refusal_codes["summary-generation"] = failure["native_status"]
         for kind in ("same_run", "cross_run"):
             binding = state.get(kind + "_cache_binding")
             if isinstance(binding, str) and binding:
@@ -95,7 +106,7 @@ def observations(receipt, env, version):
             if actual == "unknown" or (check == "summary-generation" and failure["cost_state"] == "unknown"):
                 row["disposition"] = "unknown"
             code = refusal_codes.get(check)
-            if actual in {"read-refused", "failed"} and isinstance(code, str):
+            if actual in ("read-refused", "failed", *_LIMIT_STATES) and isinstance(code, str):
                 row["refusal_code"] = code
             yield row
 

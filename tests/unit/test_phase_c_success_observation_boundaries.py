@@ -224,3 +224,44 @@ def test_confirmed_non_refusal_and_unbound_generation_are_distinct():
 
     state["receipt"]["run_id"] = "unrelated-run"
     assert all(row["actual"] == "unknown" for row in observations(receipt, {}, "fixture-version"))
+
+
+@pytest.mark.parametrize(("schema", "members"), [
+    ("narrative-batch-result/1", "documents"), ("narrative-batch-result/2", "items"),
+])
+@pytest.mark.parametrize("status", ["failed", "budget_exhausted", "storage_exhausted"])
+def test_generation_feedback_preserves_terminal_status_and_original_attempts(tmp_path, schema, members, status):
+    receipt = _native_failed_generation()
+    state = receipt["states"][0]
+    original = state["receipt"]
+    original.pop("documents")
+    original.update(schema_version=schema, status=status, error="RUN_FAILURE")
+    original[members] = [{"status": status, "errors": ["ITEM_FAILURE"]}]
+    other_members = "documents" if members == "items" else "items"
+    original[other_members] = [{"errors": ["UNRELATED_LAYOUT"]}]
+    state["native_usage"].append({"run_id": "other-run", "attempt_id": "unrelated", "error_code": "OTHER_RUN"})
+    path = tmp_path / "out.jsonl"
+    assert publish(receipt, {"RESEARCH_FEEDBACK_OUT": str(path)}, "code")["status"] == "published"
+    batch = read_batch([path, path])
+    assert not batch.diagnostics
+    row, = batch.observations.values()
+    assert (row["check_id"], row["actual"], row["disposition"]) == ("summary-generation", status, "unknown")
+    if status in ("budget_exhausted", "storage_exhausted"):
+        assert row["refusal_code"] == status
+    native = resolve(receipt, row["evidence_ref"], "code")["native_outcome"]
+    assert native["job_status"] == "failed" and native["cost_state"] == "unknown"
+    assert native["attempt_ids"] == ["original-model-post"]
+    assert native["error_codes"] == ["ITEM_FAILURE", "MODEL_TIMEOUT", "RUN_FAILURE"]
+
+
+@pytest.mark.parametrize(("schema", "status", "run_id"), [
+    ("narrative-batch-result/2", "completed", "phase-c-original"),
+    ("narrative-batch-result/2", "deferred", "phase-c-original"),
+    ("narrative-batch-result/99", "failed", "phase-c-original"),
+    ([], "failed", "phase-c-original"),
+    ("narrative-batch-result/2", "failed", "other"),
+])
+def test_unbound_or_unrecognized_receipts_do_not_create_generation_failures(schema, status, run_id):
+    receipt = _native_failed_generation()
+    receipt["states"][0]["receipt"].update(schema_version=schema, status=status, run_id=run_id)
+    assert all(row["check_id"] != "summary-generation" for row in observations(receipt, {}, "code"))

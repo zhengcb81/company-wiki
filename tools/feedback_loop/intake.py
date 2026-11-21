@@ -32,6 +32,52 @@ def _observation_dirs(settings: Path, owners: dict, selected: str | None):
             yield owner, settings.parent / target
 
 
+def _publish_marker(path: Path, value: dict) -> None:
+    temporary = path.with_suffix(path.suffix + "-tmp")
+    with temporary.open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps(value, ensure_ascii=True) + "\n")
+    temporary.replace(path)
+
+
+def _process_failure(marker: Path, context: dict, actual: str, os_error: dict) -> None:
+    """Preserve the OS outcome separately from the owner's streams and accounting."""
+    native = marker.with_suffix(".jsonl")
+    observations = read_batch([native]).observations.values() if native.exists() else ()
+    # A sibling failure, even on the same owner, run and attempt, cannot
+    # account for the exit of this particular process.
+    if any(row["owner"] == row["origin_owner"] == context["owner"]
+           and (row["run_id"], row["attempt_id"]) == (context["run_id"], context["attempt_id"])
+           and row.get("parent_step_id") == context["step_id"] and row["step_id"] != context["step_id"]
+           and row["check_id"] == "process-outcome" and row["actual"] == actual
+           and (row["disposition"] == "deviation" or "refusal_code" in row)
+           for row in observations):
+        return
+    row = {**context, "schema_version": "feedback-observation/1", "check_id": "process-outcome",
+           "expected": "exit:0", "actual": actual, "disposition": "deviation",
+           "evidence_ref": "intake-process/1/" + marker.stem, **os_error}
+    # The native producer owns .jsonl; some producers require it to be initially
+    # absent. A separate atomic record also survives an interrupted ready rename.
+    _publish_marker(marker.with_suffix(".process"), row)
+
+
+def _restore_process_receipt(marker: Path, original: dict, receipt: Path) -> None:
+    temporary = receipt.with_suffix(".process-tmp")
+    if receipt.exists() or not temporary.is_file():
+        return
+    with temporary.open("rb") as stream:
+        content = stream.read()
+    # Readers may see the writer before it closes the file. Leave incomplete
+    # bytes in place; a later drain can finish the same publication.
+    if not content.endswith(b"\n"):
+        return
+    value = json.loads(content)
+    if (isinstance(value, dict) and all(value.get(key) == item for key, item in original.items())
+            and value.get("schema_version") == "feedback-observation/1"
+            and value.get("check_id") == "process-outcome"
+            and value.get("evidence_ref") == "intake-process/1/" + marker.stem):
+        temporary.replace(receipt)
+
+
 def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: int) -> dict:
     """Resume host work, then consume only markers from the configured inboxes."""
     host = LocalHost(settings)
@@ -39,6 +85,7 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: 
     woken = len(host.recover())
     processed = remaining = 0
     diagnostics = []
+    unconfirmed = []
     visited = set()
     for name, directory in _observation_dirs(settings, host.owners, owner):
         if directory in visited:
@@ -55,15 +102,31 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: 
             if not _MARKER.fullmatch(marker.name) or not marker.is_file():
                 continue
             sidecar = marker.with_suffix(".jsonl")
-            if not sidecar.exists() and marker.suffix == ".pending":
+            process_receipt = marker.with_suffix(".process")
+            if marker.suffix == ".pending" and not process_receipt.exists():
+                try:
+                    # Legacy empty markers do not identify the original run.
+                    content = marker.read_bytes()
+                    if content:
+                        marker_data = json.loads(content)
+                        original = {key: marker_data[key] for key in ("owner", "run_id", "attempt_id", "step_id")}
+                        _restore_process_receipt(marker, original, process_receipt)
+                        if marker.exists() and not process_receipt.exists():
+                            unconfirmed.append(original)
+                except FileNotFoundError:
+                    pass  # Another reader or the supervisor has finished publishing.
+                except (OSError, ValueError, TypeError, KeyError, RecursionError):
+                    diagnostics.append({"owner": name, "code": "unreadable_process_marker"})
+            sources = [path for path in (sidecar, process_receipt) if path.exists()]
+            if not sources and marker.suffix == ".pending":
                 remaining += 1
                 continue
             # A completed business command need not have any observations.
-            batch = read_batch([sidecar] if sidecar.exists() else [])
+            batch = read_batch(sources)
             result = settle(batch, rpc, wait_seconds)
             processed += len(result["observations"])
             diagnostics.extend({"owner": name, **row} for row in result["diagnostics"])
-            if (marker.suffix == ".ready" and not result["diagnostics"]
+            if ((marker.suffix == ".ready" or process_receipt.is_file()) and not result["diagnostics"]
                     and all(row["status"] in _SETTLED for row in result["observations"])):
                 try:
                     marker.unlink(missing_ok=True)
@@ -72,7 +135,8 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: 
                     diagnostics.append({"owner": name, "code": "observation_marker_unwritable"})
             else:
                 remaining += 1
-    return {"woken": woken, "processed": processed, "remaining": remaining, "diagnostics": diagnostics}
+    return {"woken": woken, "processed": processed, "remaining": remaining, "diagnostics": diagnostics,
+            "unconfirmed": unconfirmed}
 
 
 def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, wait_seconds: int = 0):
@@ -88,6 +152,7 @@ def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, wait_sec
 def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str], wait_seconds: int) -> int:
     """The command and standard streams belong to the original business caller."""
     cwd, marker = None, None
+    context = {}
     env = os.environ.copy()
     try:
         owners = read_hosts(settings)["owners"]
@@ -105,32 +170,36 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
             directory.mkdir(parents=True, exist_ok=True)
             token = "feedback-" + uuid4().hex
             pending = directory / (token + ".pending")
-            pending.touch(exist_ok=False)
+            for key in ("RESEARCH_FEEDBACK_RUN_ID", "RESEARCH_FEEDBACK_ATTEMPT_ID"):
+                if not env.get(key, "").strip():
+                    env[key] = token
+            context = {"owner": owner, "run_id": env["RESEARCH_FEEDBACK_RUN_ID"],
+                       "attempt_id": env["RESEARCH_FEEDBACK_ATTEMPT_ID"], "step_id": "intake/" + token}
+            _publish_marker(pending, context)
             marker = pending
             env["RESEARCH_FEEDBACK_OUT"] = str(marker.with_suffix(".jsonl"))
-            env.setdefault("RESEARCH_FEEDBACK_RUN_ID", token)
-            env.setdefault("RESEARCH_FEEDBACK_ATTEMPT_ID", token)
+            env["RESEARCH_FEEDBACK_PROCESS_STEP_ID"] = context["step_id"]
     except (OSError, ValueError, TypeError, KeyError, AttributeError):
         # Feedback is optional for the native business command.
         pass
 
+    os_error = {}
     try:
-        result = subprocess.run(command, cwd=cwd, env=env, check=False)
-    except OSError:
-        if marker is not None and not marker.with_suffix(".jsonl").exists():
-            with suppress(OSError):
-                marker.unlink(missing_ok=True)
-                marker = None
-        return 127
-    else:
-        if marker is not None:
-            with suppress(OSError):
-                marker.replace(marker.with_suffix(".ready"))
-        return result.returncode
-    finally:
-        if marker is not None:
-            with suppress(OSError):
-                wake(settings, hosts_file, owner=owner, wait_seconds=wait_seconds)
+        code = subprocess.run(command, cwd=cwd, env=env, check=False).returncode
+        failure = f"exit:{code}" if code else None
+    except OSError as exc:
+        code = 127
+        failure = "launch:" + type(exc).__name__
+        os_error = {name: value for name in ("errno", "winerror")
+                    if (value := getattr(exc, name, None)) is not None}
+    if marker is not None:
+        with suppress(OSError):
+            if failure is not None:
+                _process_failure(marker, context, failure, os_error)
+            marker.replace(marker.with_suffix(".ready"))
+        with suppress(OSError):
+            wake(settings, hosts_file, owner=owner, wait_seconds=wait_seconds)
+    return code
 
 
 def main(argv=None):
