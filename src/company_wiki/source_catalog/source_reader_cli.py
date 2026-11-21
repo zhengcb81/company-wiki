@@ -7,6 +7,8 @@ Callers must require exit code 0, the receipt and their own byte hash check.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 from dataclasses import asdict
 import json
@@ -49,6 +51,7 @@ def _emit_receipt(payload: dict[str, object]) -> None:
     sys.stderr.flush()
 
 
+@runtime_feedback.entry("source-read")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -107,6 +110,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         return 0
     except SourceReadError as exc:
+        runtime_feedback.record("source-read", exc.status, reason=exc.reason, error=exc, source_id=args.source_id)
         _emit_receipt(
             {
                 "schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
@@ -115,7 +119,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             }
         )
         return 2
-    except (CatalogConfigError, CatalogReaderUnavailable, OSError, sqlite3.Error):
+    except (CatalogConfigError, CatalogReaderUnavailable, OSError, sqlite3.Error) as exc:
+        runtime_feedback.record("source-read", "unavailable", reason="reader_unavailable", error=exc)
         _emit_receipt(
             {
                 "schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
@@ -124,7 +129,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             }
         )
         return 2
-    except (TypeError, UnicodeError, ValueError):
+    except (TypeError, UnicodeError, ValueError) as exc:
+        runtime_feedback.record("source-read", "blocked", reason="invalid_request", error=exc)
         _emit_receipt({"schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
                        "status": "blocked", "reason": "invalid_request"})
         return 2

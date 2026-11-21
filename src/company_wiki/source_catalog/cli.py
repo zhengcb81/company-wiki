@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 from pathlib import Path
@@ -776,6 +778,7 @@ _INCREMENTAL_COMMANDS = {
 }
 
 
+@runtime_feedback.entry("source-catalog")
 def main(argv: Sequence[str] | None = None) -> int:
     # Official operations own their parser, catalog lifecycle and raw-byte output.
     # Delegate before configuring streams or opening the generic catalog.
@@ -792,7 +795,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif effective_argv and effective_argv[0].startswith("--config="):
         command_index = 1
     if len(effective_argv) > command_index and effective_argv[command_index] in _INCREMENTAL_COMMANDS:
-        from .incremental_cli import main as incremental_main
+        from company_wiki.scheduled_reading import main as incremental_main
 
         return incremental_main([*effective_argv[:command_index], *effective_argv[command_index + 1:]])
 

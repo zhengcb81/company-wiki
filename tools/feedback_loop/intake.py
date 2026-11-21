@@ -23,13 +23,25 @@ _MARKER = re.compile(r"feedback-[a-f0-9]{32}\.(?:pending|ready)")
 _SETTLED = {"expected", "external", "needs_evidence", "reconciled", "verified", "regressed"}
 
 
+def _recovery_dir(settings: Path) -> Path:
+    return settings.parent / ".intake-recovery"
+
+
 def _observation_dirs(settings: Path, owners: dict, selected: str | None):
     for owner, route in owners.items():
         if selected is not None and owner != selected:
             continue
         target = route.get("observation_dir")
         if isinstance(target, str) and target:
-            yield owner, settings.parent / target
+            yield owner, settings.parent / target, False
+        native = route.get("native_observation_dirs", [])
+        if not isinstance(native, list):
+            raise ValueError(f"invalid native_observation_dirs for {owner}")
+        for path in native:
+            if not isinstance(path, str) or not path.strip():
+                raise ValueError(f"invalid native observation path for {owner}")
+            yield owner, settings.parent / path, True
+    yield selected or "company-wiki", _recovery_dir(settings), False
 
 
 def _publish_marker(path: Path, value: dict) -> None:
@@ -86,11 +98,11 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: 
     processed = remaining = 0
     diagnostics = []
     unconfirmed = []
-    visited = set()
-    for name, directory in _observation_dirs(settings, host.owners, owner):
-        if directory in visited:
-            continue
-        visited.add(directory)
+    directories = {}
+    for name, directory, native in _observation_dirs(settings, host.owners, owner):
+        previous = directories.get(directory)
+        directories[directory] = (name, native or bool(previous and previous[1]))
+    for directory, (name, native) in directories.items():
         try:
             markers = sorted(directory.iterdir())
         except FileNotFoundError:
@@ -103,6 +115,36 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | None, wait_seconds: 
                 continue
             sidecar = marker.with_suffix(".jsonl")
             process_receipt = marker.with_suffix(".process")
+            if marker.suffix == ".ready" and (native or owner):
+                try:
+                    content = marker.read_bytes()
+                    context = json.loads(content) if content else {}
+                    if not isinstance(context, dict):
+                        raise ValueError("invalid observation marker")
+                    if owner and context.get("owner") not in (None, owner):
+                        continue
+                    direct = native and not str(context.get("step_id", "")).startswith("intake/")
+                    if direct and (not sidecar.is_file() or not sidecar.stat().st_size):
+                        remaining += 1
+                        diagnostics.append({"owner": name, "code": "native_observation_missing"})
+                        continue
+                except FileNotFoundError:
+                    continue  # A concurrent reader completed the same marker.
+                except (OSError, ValueError, RecursionError):
+                    remaining += 1
+                    diagnostics.append({"owner": name, "code": "unreadable_process_marker"})
+                    continue
+            if marker.suffix == ".pending" and owner:
+                try:
+                    original_marker = marker.read_bytes()
+                    if original_marker and json.loads(original_marker).get("owner") not in (None, owner):
+                        continue
+                except FileNotFoundError:
+                    continue
+                except (AttributeError, OSError, ValueError, RecursionError):
+                    remaining += 1
+                    diagnostics.append({"owner": name, "code": "unreadable_process_marker"})
+                    continue
             if marker.suffix == ".pending" and not process_receipt.exists():
                 try:
                     # Legacy empty markers do not identify the original run.
@@ -164,19 +206,27 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
         if isinstance(business_env, dict):
             env.update({key: value for key, value in business_env.items()
                         if isinstance(key, str) and isinstance(value, str)})
-        paths = dict(_observation_dirs(settings, owners, owner))
-        directory = paths.get(owner)
-        if directory is not None:
-            directory.mkdir(parents=True, exist_ok=True)
+        target = route.get("observation_dir")
+        if isinstance(target, str) and target:
+            directory = settings.parent / target
             token = "feedback-" + uuid4().hex
-            pending = directory / (token + ".pending")
             for key in ("RESEARCH_FEEDBACK_RUN_ID", "RESEARCH_FEEDBACK_ATTEMPT_ID"):
                 if not env.get(key, "").strip():
                     env[key] = token
             context = {"owner": owner, "run_id": env["RESEARCH_FEEDBACK_RUN_ID"],
                        "attempt_id": env["RESEARCH_FEEDBACK_ATTEMPT_ID"], "step_id": "intake/" + token}
-            _publish_marker(pending, context)
-            marker = pending
+            # Both locations use the same occurrence identity. An outage of
+            # one owner inbox must not erase the original process outcome.
+            for candidate in (directory, _recovery_dir(settings)):
+                try:
+                    candidate.mkdir(parents=True, exist_ok=True)
+                    pending = candidate / (token + ".pending")
+                    _publish_marker(pending, context)
+                except OSError:
+                    continue
+                marker = pending
+                break
+        if marker is not None:
             env["RESEARCH_FEEDBACK_OUT"] = str(marker.with_suffix(".jsonl"))
             env["RESEARCH_FEEDBACK_PROCESS_STEP_ID"] = context["step_id"]
     except (OSError, ValueError, TypeError, KeyError, AttributeError):
@@ -193,10 +243,22 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
         os_error = {name: value for name in ("errno", "winerror")
                     if (value := getattr(exc, name, None)) is not None}
     if marker is not None:
-        with suppress(OSError):
+        try:
             if failure is not None:
                 _process_failure(marker, context, failure, os_error)
             marker.replace(marker.with_suffix(".ready"))
+        except OSError:
+            # A writable Inbox can disappear while the child is running.
+            # Persist the observed exit in the host-owned directory using the
+            # original token. A later reader reconciles the same occurrence.
+            if failure is not None:
+                with suppress(OSError):
+                    backup = _recovery_dir(settings) / marker.name
+                    backup.parent.mkdir(parents=True, exist_ok=True)
+                    if backup != marker:
+                        _publish_marker(backup, context)
+                        _process_failure(backup, context, failure, os_error)
+                        backup.replace(backup.with_suffix(".ready"))
         with suppress(OSError):
             wake(settings, hosts_file, owner=owner, wait_seconds=wait_seconds)
     return code

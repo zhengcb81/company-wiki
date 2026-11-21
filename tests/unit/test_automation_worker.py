@@ -5,6 +5,7 @@ All tests use fixed values and tmp_path; no network, LLM or production data.
 """
 
 import hashlib
+import json
 from pathlib import Path
 
 
@@ -261,7 +262,9 @@ def test_worker_retries_on_retryable_error(tmp_path):
     assert job.not_before > "2026-07-12T10:01:00Z"
 
 
-def test_worker_dead_letters_on_terminal_error(tmp_path):
+def test_worker_dead_letters_on_terminal_error(tmp_path, monkeypatch):
+    monkeypatch.setenv("RESEARCH_FEEDBACK_DIR", str(tmp_path / "f4"))
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
     w = _worker_mod()
     s = _store_mod()
     r = _registry_mod()
@@ -269,7 +272,7 @@ def test_worker_dead_letters_on_terminal_error(tmp_path):
     store = _setup_store_with_job(s, m, tmp_path)
     reg = r.create_default_registry()
     executor = w.HandlerExecutor()
-    error = m.HandlerError(code="SCHEMA_INVALID", detail="bad schema")
+    error = m.HandlerError(code="SCHEMA_INVALID", detail="bad schema: password=not-for-export")
     executor.register("timer.execute_step", _make_fake_handler(
         m.HandlerOutcome.TERMINAL_FAILURE, error=error
     ))
@@ -279,6 +282,12 @@ def test_worker_dead_letters_on_terminal_error(tmp_path):
     assert worker.process_one() is True
     job = store.get_job("job-auto4-001")
     assert job.status is m.JobStatus.DEAD_LETTER
+    marker, = (tmp_path / "f4").glob("*.ready")
+    row = json.loads(marker.with_suffix(".jsonl").read_bytes())
+    assert row["run_id"] == job.job_id and row["actual"] == job.status.value
+    detail = json.loads((marker.parent / row["details_ref"]).read_bytes())
+    assert detail["reason"] == "SCHEMA_INVALID" and "bad schema" in detail["message"]
+    assert "not-for-export" not in detail["message"]
 
 
 def test_worker_legacy_review_error_is_machine_failure(tmp_path):

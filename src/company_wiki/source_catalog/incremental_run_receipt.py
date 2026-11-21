@@ -2,17 +2,14 @@
 
 from __future__ import annotations
 
-from decimal import Decimal
 import hashlib
 import json
 import os
 from pathlib import Path
-import sqlite3
 from tempfile import NamedTemporaryFile
 
-from company_wiki._file_mutex import os_file_mutex
-from company_wiki.automation.migrations import AutomationMigrationError
-from company_wiki.automation.narrative_run_store import NarrativeRunError, NarrativeRunStore
+from company_wiki.file_mutex import os_file_mutex
+from typing import Protocol
 
 from .incremental_read import (
     BACKLOG_UNREAD,
@@ -50,8 +47,17 @@ def _publish_json(path: Path, payload: dict) -> None:
             temp_path.unlink(missing_ok=True)
 
 
+class ReadingSummaryPort(Protocol):
+    """The catalog reads the summary owner's existing attempt through this port."""
+
+    def exists(self, database: Path, run_id: str) -> bool: ...
+    def usage(self, automation_db: Path, run_id: str) -> dict | None: ...
+    def run(self, args, config_path, max_seconds, automation_db, *, run_id, sources,
+            saved_execution, on_admitted): ...
+
+
 def _native_usage(request: IncrementalReadRequest, automation_db: Path, *,
-                  summary_started: bool, prior: dict | None = None) -> dict:
+                  owner: ReadingSummaryPort, summary_started: bool, prior: dict | None = None) -> dict:
     usage = {
         "model_requests": 0, "model_attempts": 0, "tokens": 0,
         "estimated_micro_usd": 0, "cost_usd": "0", "cost_state": "settled",
@@ -61,28 +67,8 @@ def _native_usage(request: IncrementalReadRequest, automation_db: Path, *,
         return usage
     unavailable = {field: (prior or {}).get(field) for field in usage}
     unavailable["cost_state"] = "unknown"
-    if not automation_db.exists():
-        return unavailable
-    try:
-        store = NarrativeRunStore(automation_db)
-        if store.get_run(request.run_id) is None:
-            return unavailable
-        budget = store.budget_snapshot(request.run_id)
-        reservations = store.reservations_for_run(request.run_id)
-    except (NarrativeRunError, AutomationMigrationError, OSError, ValueError, sqlite3.Error):
-        return unavailable
-    return {
-        "model_requests": sum(record.usage_status == "known" and bool(
-            record.input_tokens or record.output_tokens or record.response_sha256
-        ) for record in reservations),
-        "model_attempts": len(reservations),
-        "tokens": budget.charged_tokens,
-        "estimated_micro_usd": budget.charged_micro_usd,
-        "cost_usd": format(Decimal(budget.charged_micro_usd).scaleb(-6), "f"),
-        "cost_state": "unknown" if budget.unknown_reservations or budget.unsettled_reservations else "settled",
-        "unknown_reservations": budget.unknown_reservations,
-        "unsettled_reservations": budget.unsettled_reservations,
-    }
+    usage_snapshot = owner.usage(automation_db, request.run_id)
+    return unavailable if usage_snapshot is None else usage_snapshot
 
 
 class IncrementalRunReceipts:
@@ -92,10 +78,12 @@ class IncrementalRunReceipts:
     stores the caller's scope and resulting references, never a new paid job.
     """
 
-    def __init__(self, service: IncrementalReadService, *, directory: Path, automation_db: Path):
+    def __init__(self, service: IncrementalReadService, *, directory: Path, automation_db: Path,
+                 summary_owner: ReadingSummaryPort):
         self._service = service
         self._directory = directory
         self._automation_db = automation_db
+        self._summary_owner = summary_owner
 
     def _path(self, run_id: object) -> Path:
         if not isinstance(run_id, str) or not run_id.strip():
@@ -124,7 +112,7 @@ class IncrementalRunReceipts:
                     _publish_json(path, record)
 
             def generate(**kwargs):
-                if execution is not None and not self._native_run_exists(request.run_id):
+                if execution is not None and not self._summary_owner.exists(self._automation_db, request.run_id):
                     raise IncrementalReadError("reading_summary_ledger_unavailable")
                 return summary_runner(**kwargs, saved_execution=execution, on_admitted=admit)
 
@@ -133,16 +121,11 @@ class IncrementalRunReceipts:
                 and (execution is not None or new_summary_configured) else None,
             ).to_dict()
             receipt["usage"].update(_native_usage(
-                request, self._automation_db, summary_started="summary_execution" in record,
+                request, self._automation_db, owner=self._summary_owner, summary_started="summary_execution" in record,
                 prior=prior_usage,
             ))
             _publish_json(path, {**record, "receipt": receipt})
             return receipt
-
-    def _native_run_exists(self, run_id: str) -> bool:
-        if not self._automation_db.exists():
-            return False
-        return NarrativeRunStore.read_existing_run(self._automation_db, run_id) is not None
 
     def status(self, run_id: object) -> dict:
         record = _read_json(self._path(run_id))
@@ -178,6 +161,6 @@ class IncrementalRunReceipts:
         receipt["items"] = items
         native_db = Path(record["automation_db"]) if record.get("automation_db") else self._automation_db
         receipt["usage"].update(_native_usage(request, native_db,
-                                              summary_started="summary_execution" in record,
+                                              owner=self._summary_owner, summary_started="summary_execution" in record,
                                               prior=receipt["usage"]))
         return receipt

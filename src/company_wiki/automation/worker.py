@@ -7,6 +7,8 @@ application operations so a process crash cannot leave a split claim/commit.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import hashlib
 from datetime import datetime, timedelta, timezone
 from typing import Callable, Protocol
@@ -176,6 +178,7 @@ class Worker:
         heartbeat = self._heartbeat(claimed)
         if heartbeat is not None:
             heartbeat.start()
+        failure: Exception | None = None
         try:
             try:
                 checkpoint = (
@@ -204,9 +207,11 @@ class Worker:
                     raw_result, spec, attempt.attempt_no, max_attempts=job.max_attempts,
                 )
             except HandlerVersionMismatchError as exc:
+                failure = exc
                 result = _handler_exception_result(exc, code="HANDLER_VERSION_MISMATCH")
                 target = JobStatus.DEAD_LETTER
             except Exception as exc:  # noqa: BLE001 - handler boundary
+                failure = exc
                 result = _handler_exception_result(exc)
                 target = JobStatus.DEAD_LETTER
             self._notify("before_finish", claimed)
@@ -231,6 +236,10 @@ class Worker:
             retry_not_before=retry_at,
             outbox_not_before=finished_at,
         )
+        if target in (JobStatus.RETRY_WAIT, JobStatus.DEAD_LETTER):
+            runtime_feedback.record("worker", target.value, run=job.job_id,
+                                    attempt=attempt.attempt_id, reason=result.error.code if result.error else "",
+                                    message=result.error.detail if result.error else "", error=failure)
         self._notify("attempt_finished", claimed)
 
     def _heartbeat(self, claimed: ClaimedWork) -> AttemptHeartbeat | None:

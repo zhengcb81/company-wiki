@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 from dataclasses import asdict
 import json
@@ -27,6 +29,7 @@ class _JsonArgumentParser(argparse.ArgumentParser):
 
 
 def _emit(payload: dict[str, object]) -> None:
+    runtime_feedback.document_results("source-query", payload)
     sys.stdout.write(
         json.dumps(payload, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
         + "\n"
@@ -34,6 +37,7 @@ def _emit(payload: dict[str, object]) -> None:
     sys.stdout.flush()
 
 
+@runtime_feedback.entry("source-query")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)

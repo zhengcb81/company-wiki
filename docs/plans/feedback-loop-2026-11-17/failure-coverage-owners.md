@@ -1,6 +1,6 @@
 # 日常失败接入 F4 的模块分工
 
-24 条发现使用原发生清单中的 owner 和 step 对账。每个责任仓的 F4 子计划保存本仓的原因、实施细节、先复现的普通入口和验收条件。下表记录分工与入口。三张外包卡可同时开工，剩余九个模块及跨仓组合由 ROOT 实施。各仓保留自己的运行状态及发布线。[原审计](failure-coverage-20261121.md) · [原观察](issues/failure-coverage-20261121.jsonl) · [中微原故障补证](issues/iqs-presend-20261121.md)
+24 条发现使用原发生清单中的 owner 和 step 对账。每个责任仓的 F4 子计划保存本仓的原因、实施细节、先复现的普通入口和验收条件。下表记录分工与入口。用户已将三张外包卡分别发给独立 harness。剩余九个模块及跨仓组合由 ROOT 实施。各仓保留自己的运行状态及发布线。[原审计](failure-coverage-20261121.md) · [原观察](issues/failure-coverage-20261121.jsonl) · [中微原故障补证](issues/iqs-presend-20261121.md)
 
 | 负责方式 | 模块和本仓施工入口 | 该仓原发现 |
 |---|---|---|
@@ -17,7 +17,7 @@
 | ROOT | [Dashboard](../../../../investment-dashboard/.planning/unified-dashboard-2026-10-26/modules/m6-quickscan/feedback-runtime-2026-11-20.md) | http-request |
 | ROOT | [industry-research](../../../../industry-research/.planning/modularity-closeout-20261111/feedback-20261117.md) | installed-publisher、collection |
 
-三个外部模块仅交付了本仓施工卡，版本分别为 ET `0bfa07b9`、SID `95533795`、MC `101124f5`。其代码改造由各自 harness 实施，ROOT 按收到的正式交付逐仓验收。StockWiki 有并行项目，RF 常用目录含独立历史进度；实施使用与基线相容的原发布线，提交只包含本模块变更。
+三个外部模块正在各自 harness 施工。卡的发布版本分别为 ET `0bfa07b9`、SID `95533795`、MC `101124f5`。其代码改造由各自 harness 实施，ROOT 按收到的正式交付逐仓验收。StockWiki 有并行项目，RF 常用目录含独立历史进度；实施使用与基线相容的原发布线，提交只包含本模块变更。
 
 ### ROOT 的组合验收
 

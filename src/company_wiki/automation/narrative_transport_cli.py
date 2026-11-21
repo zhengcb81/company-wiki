@@ -6,6 +6,8 @@ stderr: one JSON receipt/refusal. Consumers require exit 0 and verify stdout SHA
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 from collections.abc import Iterator
 from contextlib import ExitStack, contextmanager, redirect_stderr, redirect_stdout
@@ -73,6 +75,7 @@ def _read_request() -> object:
 
 
 def _emit_receipt(receipt: dict[str, Any]) -> None:
+    runtime_feedback.document_results("narrative-read", receipt)
     raw = canonical_json(receipt).encode("utf-8") + b"\n"
     binary = getattr(sys.stderr, "buffer", None)
     if binary is None:
@@ -148,6 +151,7 @@ def dispatch_transport_request(
     return result.data, result.receipt
 
 
+@runtime_feedback.entry("narrative-read")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)

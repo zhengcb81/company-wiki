@@ -15,6 +15,8 @@ byte budget - still runs after decoding, on the owner types.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 from datetime import datetime, timezone
@@ -218,6 +220,7 @@ def run_import(wiki_root: Path, stream: BinaryIO, *,
     }
 
 
+@runtime_feedback.entry("transcript-import")
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(

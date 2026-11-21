@@ -1,6 +1,8 @@
 """Read-only deterministic export CLI for company-wiki source contracts."""
 
 import argparse
+
+from company_wiki import runtime_feedback
 from collections.abc import Sequence
 from io import StringIO
 from pathlib import Path
@@ -116,6 +118,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+@runtime_feedback.entry("source-export")
 def main(argv: Sequence[str] | None = None) -> int:
     _configure_utf8_streams()
     parser = build_parser()

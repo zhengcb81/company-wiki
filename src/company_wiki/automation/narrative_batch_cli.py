@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+from company_wiki.cli_streams import operation_diagnostics
+
 import argparse
-from collections.abc import Iterator
-from contextlib import contextmanager, redirect_stdout
 import json
-import os
 from pathlib import Path
-import sys
 from typing import Sequence
 
 from company_wiki.source_contract import SourceReadError
@@ -18,43 +17,6 @@ from .models import canonical_json
 from .narrative_batch import BatchPreparationDeadlineExceeded, BatchResumeError, run_batch
 from .narrative_batch_request import NarrativeBatchRequest
 from .narrative_run_store import NarrativeRunStore, StorageBudgetExceeded
-
-
-@contextmanager
-def _operation_diagnostics() -> Iterator[None]:
-    """Reserve stdout for the final receipt, including native FD writers.
-
-    This is the finite CLI process boundary, not a library-wide logging policy.
-    In-memory callers have no descriptors and use the Python-stream path.
-    Both descriptor and stream bindings are restored on success or exception.
-    """
-    output = sys.stdout
-    diagnostics = sys.stderr
-    output_fd = None
-    saved_fd = None
-    try:
-        output.flush()
-        # Native dependencies write the process stdout descriptor (1), which
-        # need not equal an embedding/capture stream's private descriptor.
-        output_fd = 1
-        saved_fd = os.dup(output_fd)
-        os.dup2(diagnostics.fileno(), output_fd)
-    except (AttributeError, OSError, ValueError):
-        if saved_fd is not None:
-            os.close(saved_fd)
-        saved_fd = None
-    try:
-        with redirect_stdout(diagnostics):
-            yield
-    finally:
-        try:
-            diagnostics.flush()
-        finally:
-            if saved_fd is not None and output_fd is not None:
-                try:
-                    os.dup2(saved_fd, output_fd)
-                finally:
-                    os.close(saved_fd)
 
 
 def _failure_receipt(request, db_path, status, error):
@@ -79,6 +41,7 @@ def _failure_receipt(request, db_path, status, error):
             "budget":budget}
 
 
+@runtime_feedback.entry("narrative-batch")
 def main(
     argv: Sequence[str] | None = None, *, loaded_model_options: dict | None = None,
 ) -> int:
@@ -105,7 +68,7 @@ def main(
         print(canonical_json({"schema_version": "narrative-batch-result/1", "status": "failed",
                               "error": "NARRATIVE_BATCH_INVALID_REQUEST"}))
         return 1
-    with _operation_diagnostics():
+    with operation_diagnostics():
         try:
             receipt = run_batch(request, project_root=args.project_root, catalog_config_path=args.catalog_config,
                                 db_path=args.automation_db, work_dir=args.work_dir)
@@ -134,6 +97,7 @@ def main(
             # Provider bodies, paths and credentials never become a CLI error detail.
             receipt = _failure_receipt(request, args.automation_db, "failed", "NARRATIVE_BATCH_" + type(exc).__name__)
             exit_code = 1
+    runtime_feedback.document_results("narrative-batch", receipt)
     print(canonical_json(receipt))
     return exit_code
 

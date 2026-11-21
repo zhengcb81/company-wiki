@@ -25,6 +25,13 @@ os.environ["COMPANY_WIKI_NETWORK"] = "blocked"
 os.environ["COMPANY_WIKI_REAL_LLM"] = "0"
 
 
+@pytest.fixture(scope="session", autouse=True)
+def isolated_feedback_outbox(tmp_path_factory):
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setenv("RESEARCH_FEEDBACK_DIR", str(tmp_path_factory.mktemp("feedback") / "observations"))
+        yield
+
+
 @pytest.fixture(autouse=True)
 def hermetic_runtime(monkeypatch):
     """Fail every real socket connection in the ordinary pytest suite."""

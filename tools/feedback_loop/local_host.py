@@ -518,7 +518,12 @@ def main(argv=None):
     elif args.mode == "recover":
         if args.wait_seconds < 0 or (args.sidecar and not args.hosts):
             parser.error("recovery sidecars require --hosts and a nonnegative wait")
-        outcome = {"woken": host.recover()}
+        discovery = args.hosts or args.config.with_name("hosts.json")
+        if discovery.is_file() and not args.sidecar:
+            from .intake import drain
+            outcome = drain(args.config.resolve(), discovery.resolve(), owner=None, wait_seconds=args.wait_seconds)
+        else:
+            outcome = {"woken": host.recover()}
         if args.sidecar:
             from .coordinator import settle
             from .host import process_host, read_hosts

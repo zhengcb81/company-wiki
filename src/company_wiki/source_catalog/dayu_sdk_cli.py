@@ -7,6 +7,8 @@ throttle state/OS mutex lives under the explicit CWP provider-state root.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import asyncio
 from contextlib import redirect_stdout
@@ -215,6 +217,7 @@ def _hk_operation(action, payload, budget, scratch, staging, identity, checkpoin
             path.unlink(missing_ok=True)
 
 
+@runtime_feedback.entry("external-filing")
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--market", choices=("HK", "US"), required=True)
@@ -278,6 +281,7 @@ def main(argv: list[str] | None = None) -> int:
         budget.ensure_open()
     except Exception as exc:
         code = getattr(exc, "error_code", "provider_failed")
+        runtime_feedback.record("external-filing", "failed", reason=code, error=exc)
         error = {"code": code, "type": type(exc).__name__,
                  "message": "bounded SDK operation did not complete",
                  "retryable": isinstance(exc, (httpx.HTTPError, RuntimeError)) and code == "provider_failed"}

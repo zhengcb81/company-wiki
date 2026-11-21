@@ -180,8 +180,11 @@ def test_native_timeout_reconciles_only_the_original_failed_generation(tmp_path)
     assert publish(receipt, env, "fixture-version")["status"] == "published"
     batch = read_batch([path, path])
     assert not batch.diagnostics
-    row, = batch.observations.values()
-    assert (row["check_id"], row["actual"], row["disposition"]) == ("summary-generation", "failed", "unknown")
+    rows = {row["check_id"]: row for row in batch.observations.values()}
+    assert set(rows) == {"summary-generation", "summary-execution"}
+    row = rows["summary-generation"]
+    assert (row["actual"], row["disposition"]) == ("failed", "unknown")
+    assert (rows["summary-execution"]["actual"], rows["summary-execution"]["disposition"]) == ("failed", "deviation")
     assert row["refusal_code"] == "model_paid_response_unavailable"
 
     resolved = resolve(receipt, row["evidence_ref"], "fixture-version")
@@ -199,12 +202,15 @@ def test_native_timeout_reconciles_only_the_original_failed_generation(tmp_path)
                  "request_digest": request["request_digest"]}
         if kind == "observe":
             return {**reply, "state": "done", "result": {"recorded": True}}
+        if kind == "triage":
+            return {**reply, "state": "done", "result": {"decision": "needs_evidence"}}
         assert (kind, method) == ("reconcile", "lookup")
         assert request["payload"]["observation"]["evidence_ref"] == native_outcome["evidence_ref"]
         return {**reply, "state": "done", "result": native_outcome}
 
-    settled, = advance(batch, host)["observations"]
-    assert acted == [("observe", "lookup"), ("reconcile", "lookup")]
+    results = advance(batch, host)["observations"]
+    settled, = [value for value in results if value.get("step") == "reconcile"]
+    assert sorted(acted) == sorted([("observe", "lookup")] * 2 + [("triage", "lookup"), ("reconcile", "lookup")])
     assert (settled["step"], settled["job_status"], settled["cost_state"]) == ("reconcile", "failed", "unknown")
     assert publish(receipt, env, "fixture-version")["status"] == "reused"
 
@@ -244,7 +250,9 @@ def test_generation_feedback_preserves_terminal_status_and_original_attempts(tmp
     assert publish(receipt, {"RESEARCH_FEEDBACK_OUT": str(path)}, "code")["status"] == "published"
     batch = read_batch([path, path])
     assert not batch.diagnostics
-    row, = batch.observations.values()
+    rows = {row["check_id"]: row for row in batch.observations.values()}
+    row = rows["summary-generation"]
+    assert (rows["summary-execution"]["actual"], rows["summary-execution"]["disposition"]) == (status, "deviation")
     assert (row["check_id"], row["actual"], row["disposition"]) == ("summary-generation", status, "unknown")
     if status in ("budget_exhausted", "storage_exhausted"):
         assert row["refusal_code"] == status

@@ -7,6 +7,8 @@ empty page for "the company has no sources".
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 import sqlite3
@@ -44,6 +46,7 @@ def _write_json_line(stream: Any, value: dict[str, Any]) -> None:
 
 
 def _emit_error(status: str, reason: str) -> None:
+    runtime_feedback.record("company-sources", status, reason=reason, error=sys.exc_info()[1])
     _write_json_line(
         sys.stderr,
         {
@@ -63,6 +66,7 @@ def _unique_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
+@runtime_feedback.entry("company-sources")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)

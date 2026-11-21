@@ -14,6 +14,8 @@ using the recorded capture time and original byte identity, with no network.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import gzip
 import json
@@ -145,6 +147,7 @@ def _error_envelope(status: str, message: str, **extra: Any) -> dict[str, Any]:
     return payload
 
 
+@runtime_feedback.entry("financial-statements")
 def main(argv: Sequence[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")

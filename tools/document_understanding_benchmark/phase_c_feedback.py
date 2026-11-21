@@ -76,10 +76,16 @@ def observations(receipt, env, version):
         failure = _failed_generation(state)
         if failure is not None:
             checks.append(("summary-generation", "published", failure["native_status"]))
+            if failure["cost_state"] == "unknown":
+                # The original accounting observation stays usable by an
+                # existing ledger. Its uncertainty does not erase the failure.
+                checks.append(("summary-execution", "published", failure["native_status"]))
             if "MODEL_PAID_RESPONSE_UNAVAILABLE" in failure["error_codes"]:
                 refusal_codes["summary-generation"] = "model_paid_response_unavailable"
             elif failure["native_status"] in _LIMIT_STATES:
                 refusal_codes["summary-generation"] = failure["native_status"]
+            if "summary-generation" in refusal_codes:
+                refusal_codes["summary-execution"] = refusal_codes["summary-generation"]
         for kind in ("same_run", "cross_run"):
             binding = state.get(kind + "_cache_binding")
             if isinstance(binding, str) and binding:
@@ -123,7 +129,7 @@ def resolve(receipt, reference, version):
     result = {"status": "resolved", "observation": row, "mode": receipt.get("mode"),
               "selector_version": state.get("version"),
               "artifact_sha256": artifact.get("artifact_sha256") if isinstance(artifact, dict) else None}
-    if row["check_id"] == "summary-generation":
+    if row["check_id"] in ("summary-generation", "summary-execution"):
         result["native_outcome"] = {**_failed_generation(state), "evidence_ref": reference}
     return result
 

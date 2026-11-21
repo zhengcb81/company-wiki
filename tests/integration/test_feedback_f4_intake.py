@@ -209,6 +209,52 @@ Path('finished').touch()
             time.sleep(0.05)
 
 
+def test_direct_owner_outbox_retries_unavailable_payload_from_a_cold_process(tmp_path):
+    command, _ = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    config["owners"][OWNER]["native_observation_dirs"] = ["native", "native"]
+    settings.write_text(json.dumps(config), encoding="utf-8")
+    directory = tmp_path / "native"
+    directory.mkdir()
+    prefix = directory / ("feedback-" + "a" * 32)
+    context = {"owner": OWNER, "run_id": "direct", "attempt_id": "one", "step_id": "read"}
+    marker = prefix.with_suffix(".ready")
+    marker.write_text(json.dumps(context), encoding="utf-8")
+
+    def cold():
+        return json.loads(subprocess.check_output([*command, "drain", "--owner", OWNER], cwd=ROOT, timeout=25))
+
+    missing = cold()
+    assert missing["remaining"] == 1 and marker.is_file()
+    assert "native_observation_missing" in {item["code"] for item in missing["diagnostics"]}
+    row = {**context, "schema_version": "feedback-observation/1", "check_id": "result",
+           "expected": "refused", "actual": "refused", "disposition": "expected"}
+    source = prefix.with_suffix(".jsonl")
+    source.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    assert cold()["processed"] == 1 and not marker.exists()
+    assert cold()["processed"] == 0 and source.exists()
+
+
+def test_primary_inbox_outage_preserves_the_original_exit_without_reexecuting(tmp_path, monkeypatch):
+    from tools.feedback_loop import intake
+
+    command, _ = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    (tmp_path / "observations").write_text("temporarily unavailable", encoding="utf-8")
+    monkeypatch.setattr(intake, "wake", lambda *args, **kwargs: None)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_RUN_ID", "outage-run")
+    monkeypatch.setenv("RESEARCH_FEEDBACK_ATTEMPT_ID", "first")
+    business = "from pathlib import Path; p=Path('calls'); p.write_text(p.read_text()+'x' if p.exists() else 'x'); raise SystemExit(19)"
+    assert intake.run_observed(settings, tmp_path / "hosts.json", OWNER, [*PYTHON, "-c", business], 0) == 19
+    summary = json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT, timeout=25))
+    assert summary["processed"] >= 1 and (tmp_path / "calls").read_text() == "x"
+    with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as connection:
+        found = [json.loads(row[0])["payload"]["observation"] for row in connection.execute(
+            "SELECT request FROM actions WHERE json_extract(request,'$.kind')='observe'")]
+    assert any((row["run_id"], row["attempt_id"], row["actual"]) == ("outage-run", "first", "exit:19") for row in found)
+
+
 def test_restart_drains_the_original_marker_and_preserves_incomplete_run(tmp_path):
     command, _ = configuration(tmp_path)
     settings = tmp_path / "settings.json"
@@ -276,3 +322,23 @@ def test_completed_actions_continue_feedback_after_initial_drain_has_exited(tmp_
         ("observe", "triage", "repair", "replay", "report"), "done",
     )
     assert (tmp_path / "reports.txt").read_text().splitlines() == [key for key, kind, _ in rows if kind == "report"]
+
+
+def test_host_restart_automatically_consumes_direct_native_packet(tmp_path):
+    configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    cfg = json.loads(settings.read_bytes())
+    cfg["owners"][OWNER]["native_observation_dirs"] = ["native"]
+    settings.write_text(json.dumps(cfg), encoding="utf8")
+    packet = tmp_path / "native" / ("feedback-" + "f" * 32 + ".jsonl")
+    packet.parent.mkdir()
+    identity = dict(owner=OWNER, run_id="original", attempt_id="one", step_id="saved")
+    row = dict(identity, schema_version="feedback-observation/1", check_id="refused",
+               expected="legitimate_refusal", actual="legitimate_refusal", disposition="expected")
+    packet.write_text(json.dumps(row) + "\n", encoding="utf8")
+    packet.with_suffix(".ready").write_text(json.dumps(identity), encoding="utf8")
+    command = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings), "recover"]
+    results = [json.loads(subprocess.check_output(command, cwd=ROOT)) for _ in range(2)]
+    assert [r["processed"] for r in results] == [1, 0]
+    assert all(r["remaining"] == 0 for r in results)
+    assert not (tmp_path / "business-count.txt").exists()

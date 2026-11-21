@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 from collections.abc import Sequence
 from pathlib import Path
@@ -33,6 +35,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+@runtime_feedback.entry("collect-announcement")
 def main(argv: Sequence[str] | None = None) -> int:
     _configure_utf8_streams()
     args = build_parser().parse_args(argv)

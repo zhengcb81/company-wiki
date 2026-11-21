@@ -13,13 +13,16 @@ company_wiki.source_catalog.incremental_cli``.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+from company_wiki.cli_streams import operation_diagnostics
+
 import argparse
 from dataclasses import replace
 import json
 from pathlib import Path
 import sqlite3
 import sys
-from typing import Any, Sequence
+from typing import Sequence
 
 from company_wiki.source_contract.source_version import SourceReadError
 
@@ -42,7 +45,7 @@ from .incremental_read import (
     ReadingBacklogRequest,
     ReadResultRef,
 )
-from .incremental_run_receipt import IncrementalRunReceipts
+from .incremental_run_receipt import IncrementalRunReceipts, ReadingSummaryPort
 from .service import SourceCatalog
 
 
@@ -129,78 +132,6 @@ def _run_discovery(args: argparse.Namespace, request: dict) -> dict:
         catalog.close()
 
 
-def _build_summary_request(args: argparse.Namespace, parsed: IncrementalReadRequest,
-                           run_id: str, sources: list[dict[str, Any]]) -> dict:
-    """Compose the existing configured batch entry for the summary tier.
-
-    The model settings come from ``--llm-config`` through the project's own
-    loader; the batch engine settings (profile, caps, pricing) come from the
-    CWP-owned ``--summary-batch-config`` sidecar.  The caller never carries
-    model names, prompt text or engine internals across the boundary.  The
-    same ``run_id`` resumes the same AUTO batch, so a retried request reads
-    its original ledger instead of paying twice.
-    """
-    from company_wiki.automation.narrative_http_model import model_options_from_config
-    import company_wiki as _package
-
-    # The project's config loader lives in the repository's scripts/ directory
-    # and is imported top-level there (scripts/narrative_batch_configured.py
-    # does ``from config import Config``), so composition adds the directory.
-    scripts_dir = Path(_package.__file__).resolve().parents[2] / "scripts"
-    if scripts_dir.is_dir() and str(scripts_dir) not in sys.path:
-        sys.path.insert(0, str(scripts_dir))
-    from config import Config
-
-    batch_config = json.loads(
-        args.summary_batch_config.resolve(strict=True).read_text(encoding="utf-8")
-    )
-    if not isinstance(batch_config, dict):
-        raise ValueError("summary batch config must be a JSON object")
-    options = model_options_from_config(
-        Config.load(args.llm_config, llm_provider=args.llm_provider,
-                    validation_scope="llm").llm
-    )
-    if args.allow_local_model_http:
-        options["allow_local_http"] = True
-    model_limits = {
-        key: value for key, value in (batch_config.get("model") or {}).items()
-        if key in {"timeout_seconds", "max_request_bytes", "max_response_bytes"}
-    }
-
-    return {
-        "schema_version": "narrative-batch-request/1",
-        "run_id": run_id,
-        "sources": sources,
-        "profile": batch_config.get("profile", "P2"),
-        "max_seconds": min(batch_config.get("max_seconds", 600), parsed.limits.max_seconds),
-        "max_tokens": batch_config.get("max_tokens", 200_000),
-        "max_cost_usd": batch_config.get("max_cost_usd", "2"),
-        "model": {**model_limits, **options},
-        "pricing": batch_config["pricing"],
-    }
-
-
-def _run_configured_summary(args, config_path, parsed, automation_db, *, run_id, sources,
-                            saved_execution, on_admitted):
-    from company_wiki.automation.narrative_batch import run_batch
-    from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
-
-    if saved_execution is None:
-        raw = _build_summary_request(args, parsed, run_id, sources)
-        work_dir = (args.work_dir or automation_db.parent / "reading-run-work").resolve()
-    else:
-        raw = saved_execution["request"]
-        work_dir = Path(saved_execution["work_dir"])
-    batch = NarrativeBatchRequest.from_dict(raw)
-    execution = {"request": batch.to_dict(), "work_dir": str(work_dir)}
-    automation_db.parent.mkdir(parents=True, exist_ok=True)
-    return run_batch(
-        batch, project_root=_project_root(config_path), catalog_config_path=config_path,
-        db_path=automation_db, work_dir=work_dir,
-        on_admitted=lambda: on_admitted(execution),
-    )
-
-
 def _scheduled_backlog(catalog: SourceCatalog, service: IncrementalReadService,
                        request: dict) -> dict:
     from .incremental_discovery import DiscoveryIdentity, bind_discovery_identity
@@ -231,7 +162,7 @@ def _scheduled_backlog(catalog: SourceCatalog, service: IncrementalReadService,
     }
 
 
-def _run_read(args: argparse.Namespace, request: dict) -> dict:
+def _run_read(args: argparse.Namespace, request: dict, summary_owner: ReadingSummaryPort) -> dict:
     config_path = args.config.resolve(strict=True)
     project_root = _project_root(config_path)
     config = load_catalog_config(config_path, project_root=project_root)
@@ -245,14 +176,14 @@ def _run_read(args: argparse.Namespace, request: dict) -> dict:
             return service.read_result_payload(ReadResultRef.from_dict(request.get("result_ref")))
         automation_db = (args.automation_db or config.catalog_dir / "automation.sqlite3").resolve()
         receipts = IncrementalRunReceipts(service, directory=config.catalog_dir / "reading-runs",
-                                          automation_db=automation_db)
+                                          automation_db=automation_db, summary_owner=summary_owner)
         if schema == "cwp-incremental-read-status-request/1":
             return receipts.status(request.get("run_id"))
         if schema == INCREMENTAL_READ_REQUEST_SCHEMA:
             parsed = IncrementalReadRequest.from_dict(request)
 
             def configured_summary(**kwargs):
-                return _run_configured_summary(args, config_path, parsed, automation_db, **kwargs)
+                return summary_owner.run(args, config_path, parsed.limits.max_seconds, automation_db, **kwargs)
 
             return receipts.read(
                 parsed, summary_runner=configured_summary if parsed.reading_level == READING_LEVEL_SUMMARY else None,
@@ -264,7 +195,8 @@ def _run_read(args: argparse.Namespace, request: dict) -> dict:
         catalog.close()
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+@runtime_feedback.entry("incremental")
+def run_incremental(argv: Sequence[str] | None, *, summary_owner: ReadingSummaryPort) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if hasattr(sys.stderr, "reconfigure"):
@@ -273,12 +205,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     args, unknown = parser.parse_known_args(argv)
     if unknown:
         parser.error("unrecognized arguments: " + " ".join(unknown))
+    request: dict = {}
     try:
         request = _read_request()
         operation = request.get("schema_version", "")
-        from company_wiki.automation.narrative_batch_cli import _operation_diagnostics
-
-        with _operation_diagnostics():
+        with operation_diagnostics():
             if operation == "cwp-incremental-discovery-request/1":
                 response = _run_discovery(args, request)
             elif operation in {
@@ -286,13 +217,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "cwp-incremental-backlog-request/1", "cwp-incremental-read-status-request/1",
                 "cwp-incremental-read-result-request/1",
             }:
-                response = _run_read(args, request)
+                response = _run_read(args, request, summary_owner)
             else:
                 raise ValueError("request schema_version must be a cwp-incremental request")
     except (
         IncrementalDiscoveryError, IncrementalReadError, ValueError, OSError, KeyError,
         SourceReadError, sqlite3.Error,
     ) as exc:
+        runtime_feedback.record("incremental", "failed", reason=type(exc).__name__, error=exc,
+                                run=request.get("run_id", "") if isinstance(request, dict) else "")
         print(json.dumps({
             "schema_version": "cwp-incremental-error/1",
             "error": str(exc), "error_type": type(exc).__name__,
@@ -303,8 +236,19 @@ def main(argv: Sequence[str] | None = None) -> int:
                 code = "incremental_request_failed"
             print(json.dumps({"schema_version": "cwp-incremental-error/1", "error": {"code": code}}))
         return 2
+    if operation == INCREMENTAL_READ_REQUEST_SCHEMA:
+        runtime_feedback.document_results("read-incremental", response)
     print(json.dumps(response, ensure_ascii=False))
     return 0
+
+
+__all__ = ["main", "run_incremental"]
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Compatibility entry for callers invoking the original module directly."""
+    from company_wiki.scheduled_reading import main as scheduled_main
+    return scheduled_main(argv)
 
 
 if __name__ == "__main__":

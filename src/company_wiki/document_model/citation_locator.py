@@ -10,6 +10,8 @@ import unicodedata
 
 from .narrative import NarrativeUnit
 
+__all__ = ["CitationBlock", "native_paragraphs", "native_pdf_pages", "match_native_citation"]
+
 
 @dataclass(frozen=True)
 class CitationBlock:

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 from pathlib import Path
@@ -41,6 +43,7 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
+@runtime_feedback.entry("source-identity")
 def main(argv: Sequence[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
