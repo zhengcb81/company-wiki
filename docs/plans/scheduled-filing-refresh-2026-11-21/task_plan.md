@@ -1,6 +1,8 @@
 # 公司文档定期更新与阅读
 
-计划选择 `PLAN_ID=scheduled-filing-refresh-2026-11-21`，工作目录内计划根为 `docs/plans`。Windows 解析时用 `resolve-plan-dir.ps1 -PlanRoot <本仓绝对路径>/docs/plans`，在本次调用环境中留空 `PWF_PLAN_ROOT`。本轮交付计划、接口和施工卡。实现、启用和正式数据验收另按以下阶段执行。
+计划选择 `PLAN_ID=scheduled-filing-refresh-2026-11-21`，工作目录内计划根为 `docs/plans`。Windows 解析时用 `resolve-plan-dir.ps1 -PlanRoot <本仓绝对路径>/docs/plans`，在本次调用环境中留空 `PWF_PLAN_ROOT`。
+
+**当前位置为 P1。** FF 已推送 `main@1ab0a94`。CWP 与 Dashboard 的两张独立卡已派发。共同接口、配置说明与 FF 的隔离验收见 [进展](progress.md)。
 
 ## 目标
 
@@ -62,7 +64,7 @@ Windows → FF 到期判定 → 公开名单与元数据 → FF/CWP 原件复用
 ## 阶段
 
 - [x] P0 完成基线调查、接口、技术方案和施工包。复验结果见 [progress.md](progress.md)。
-- [ ] P1 各仓先写失败用例，再推进本仓实现。FF 负责调度和独立电话会作业。CWP 修混合来源的阅读回归，接入公开有界发现和有限阅读。Dashboard 用冻结合同独立完成配置页。
+- [ ] P1 各仓先写失败用例，再推进本仓实现。FF 的调度、独立电话会作业、持久续跑和 Windows 入口已通过本仓测试并发布。CWP 修混合来源的阅读回归，接入公开有界发现和有限阅读。Dashboard 用冻结合同独立完成配置页。两份交付后统一进入 P2。
 - [ ] P2 隔离组合验收。先用已有留存原件及回环 provider 和模型执行。以短路径临时资料根、作业库、名单和配置重放，从登录/定时到公开原件、读结果、账目和 UI。完成后还原临时目录，校验正式配置、现用进程和原件无测试写入。总控对组合进行一次独立审查。
 - [ ] P3 小批真实验收与启用。锁定 A 股、港股、美股三个挂牌，至少一个正式库存原件可复用，至少一个真实待采集原件已查缺。先使用隔离根按实际配置完成准确下载、TXT/业务分析、读取恢复和公开查回，再用选定的三个挂牌组成小范围名单在正式部署验一次。用可回读的摘要验证真实模型与缓存恢复。跑够首次、重复及一次重启，确认请求/费用计量和磁盘增长后，再扩大到用户所选名单。此阶段执行 Windows 安装与 Dashboard 切换。
 
@@ -80,4 +82,4 @@ Windows → FF 到期判定 → 公开名单与元数据 → FF/CWP 原件复用
 ## 派发与下一步
 
 - [CWP 增量枚举和阅读](harness_lanes/cwp-incremental-reading.md) 与 [Dashboard 开关配置](harness_lanes/dashboard-refresh-controls.md) 可分别开工。它们使用共同冻结的接口，各自修改自己的仓库。CWP 首步先复现已有混合阅读基线问题。Dashboard 先以 owner fixture 开发，运行时联合验收安排在 FF 公开口就绪后。
-- 总控在 `filing-fetch` 实施 Windows 调度、编排、反馈与统一集成。公开接口就绪后代入各 owner 真实产物。保持计划跟踪与 W12 解耦。
+- 总控核对两份正式交接的公开命令和版本，代入 FF 已发布入口执行组合验收。Windows 正式注册及启用属于 P3。计划跟踪与 W12 单独维护。

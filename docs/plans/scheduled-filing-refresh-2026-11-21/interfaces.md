@@ -6,6 +6,8 @@
 
 建议从 `scripts/ff_scheduled_refresh.py --config <FF部署配置> --jobs-dir <原FF作业目录>` 接入。子命令固定为 `status`、`configure --request-stdin`、`runs --cursor …`、`tick`。测试接线可用显式时钟和隔离配置，正式任务仅调用 `tick`。设置与每轮状态保存在 FF owner 目录，可与 `ff-job/1` 的作业收据一起查回。
 
+FF 已实现该形状。运行部署默认读取 `--config` 同目录的 `scheduled_refresh.json`，也可显式给 `--refresh-config`。Dashboard 继续使用原有 `--config` 与 `--jobs-dir` 组合。运行回执可附当前已经接纳的 `active_action`。关闭与接纳在相同状态锁内生效，外部动作在释放锁后执行。
+
 Dashboard 使用以下接口，配置写入走已有本机命令认证和请求处理。读取只调用状态或历史。
 
 | HTTP | FF 子命令 | 语义 |
@@ -53,6 +55,8 @@ Dashboard 使用以下接口，配置写入走已有本机命令认证和请求�
 
 FF 只根据核对过的候选调用原有精确 `ff-job/1` 采集。发现与采集之间的请求保留候选键；若现行 `provider_document_id` 精确入参还能复用另一个期次版本，修正所属层的候选选择或登记，不把标题比较放进调度器。CWP 的元数据返回不得把上游 provider 的内部 URL 作为 UI 可传入的下载目标。
 
+联调时核对响应 `scope.identity.entity_id`、`scope.identity.listing_id` 与 `scope.source_market`。连续分页用 `next_cursor`，页面覆盖是否完整由 `coverage` 单独表示。前页有真实缺口时，后续页的完整结果不能补做前页的覆盖证明。
+
 ## 3. 电话会与阅读
 
 FF 在 `ff-job/1` 内增加独立电话会种类 `transcript.acquire`。请求含权威 issuer/listing、明确的 FY/Q、截止时间、`intent` 和仅该电话会的 `acquisition_limits`。复用已登记 transcript → 有证期间且 provider 支持时发起 ET → CWP 以正常导入登记 → 返回同一 SourceRef。原有 `companion_transcript` 调用仍走其兼容外观。相同作业恢复读取原 job、ET usage 和 CWP 来源记录。
@@ -62,6 +66,7 @@ CWP 为有限阅读提供 `cwp-incremental-read-request/1` 与 `cwp-incremental-
 - 请求含 `run_id, reading_level, sources, limits`。 `sources` 为精确 SourceRef v2，绑定当前已登记来源。现有批次配置及 profile 由 CWP 选择，FF 不携带模型名、正文、本地路径或内部 cache key。提交同一 `run_id` 续原批次。重复资料的 lookup 和已处理结果复用由 CWP 保存并确认。
 - 响应每份来源回 `source_ref, state, result_ref, reused, reason_codes`。结果可用时，`result_ref` 通过 CWP 已有或本次补的公开读取返回带出处的选段与摘要。 `state` 至少区分 `read`、`summarized`、`skipped`、`deferred`、`failed`、`uncertain`。同批单份失败保留成功产物。批次收据名额由现有 owner 资源设置衡量，展示可分页。
 - 本地选段和正式摘要的恢复不靠文件名、mtime 或目录猜测。使用原文 SHA、其来源身份和 owner 的正式处理索引。长期阅读入口旧版本不存在可返回具名未处理，不能以此拒绝独立验真原文。
+- 同一批次存在旧的未知费用记录时复用原 `run_id`。旧批次范围、名单或阅读档位已不适用时，FF 通过只读 `incremental_read_status` 查询。部署可以为该动作声明 CWP 等价公开命令。请求用 `cwp-incremental-read-status-request/1` 和原 `run_id`，响应沿 `cwp-incremental-read/1` 的 `run_id/items`。当前 owner 尚未提供这个动作时保持具名待核。
 - 增量积压入口根据本轮挂牌、文种与日期从 CWP 原件目录给未达到该阅读档位的引用。复用 CWP 查询/派生索引。初次处理、已完成、明确低价值、可安全重试和需对账的项目保留关联。循环跳过已有相同结果。
 
 ## 4. 持久语义
@@ -70,7 +75,7 @@ CWP 为有限阅读提供 `cwp-incremental-read-request/1` 与 `cwp-incremental-
 2. 每个计划只允许一个活动调度，FF 原生 OS 锁及原子替换用于崩溃恢复。先写候选、固定业务键、子作业幂等键再提交。逻辑子作业键绑定候选的正式原文版本或精确电话会范围，与重启、再次触发及展示配置修改无关。
 3. 续跑先查询已经登记的子作业。若 job 成功但调用方未保存 SourceRef，则通过相同 job 查回。如果状态或费用未知，走原端口对账，不能当作免费失败重发。CWP 的读作业按原 `run_id` 查收据。继续工作只针对经过 owner 确认可安全开始的剩余项。
 4. 候选持久入账、范围覆盖证实后更新发现水位。入库和阅读的成功分别记录。发现已完整、采集尚待时，下轮直接接续待处理候选。候选必须绑定唯一可验证身份或明确保留缺项。
-5. 关闭开关只停止接纳新作业。读取状态、查询已保存结果和收尾仍可进行。重新打开从原水位和原待处理项续跑。失败、部分、缺配置和未知费用的情况按相同 F4 原因记录，并保留“拒绝先审视门禁”的字段。
+5. 关闭开关只停止接纳新作业。读取状态、查询已保存结果和收尾仍可进行。重新打开从原水位和原待处理项续跑。范围修改后把旧运行记为已取代，按选定新名单重新核定待办。无业务范围变化的同槽改钟点保留原一次运行。失败、部分、缺配置和未知费用的情况按相同 F4 原因记录，并保留“拒绝先审视门禁”的字段。
 
 ## 5. 跨仓共用验收夹具
 
