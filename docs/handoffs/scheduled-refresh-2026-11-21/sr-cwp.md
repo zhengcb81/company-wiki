@@ -24,7 +24,9 @@
 ```
 python -m pytest "tests/integration/test_narrative_batch_cli_e2e.py::
 test_cli_infers_sparse_languages_from_verified_pdf_and_transcript_bytes" -q
-→ 退出 1（两次复现）；批次报告 failed；单份 dead_letter/PARSER_INCOMPLETE，其余完成。
+→ 退出 1；批次报告 failed；单份 dead_letter/PARSER_INCOMPLETE，其余完成。
+（主测试失败复现 1 次；随后的独立诊断脚本 2 次产出同一 dead_letter/PARSER_INCOMPLETE
+收据，P0 阶段另有两次失败记录。）
 ```
 
 **定位**：失败件是夹具 `call-mixed.txt`。逐版本对照解析：同一字节在
@@ -204,10 +206,26 @@ generation）**154 passed**。
   未达档位 → `cwp-reading-backlog-request/1` 分页取精确 refs。
 - 结果读回 → `result_ref`（`cwp-read-result-ref/1`；bundle ref 走既有 narrative transport）。
 
-## 9. 第一轮审查后余项（组合前）
+## 9. 卡片条目对照与余项（组合前）
 
+对照施工卡与 interfaces §2/§3/§5 的逐条核对结论（完整清单见交付汇报）：
+
+**达成**：发现面字段/覆盖语义/游标、阅读六态、零模型本地档、bundle-first summary、
+同批单份失败隔离、两进程零重复、backlog 分页、无 URL/路径外泄、生产配置零写入、
+临时目录清理、handoff 双格式、独审两轮、按 commit 交付。
+
+**披露余项**（审查员确认为可接受的组合前项）：
+
+- run_id 收据读口：恢复语义靠幂等重提交（同 work_key→同产物 reused=true，无双花/
+  重复）；interfaces §4.3 的“按原 run_id 查收据”读口在组合时按 AUTO 运行库补。
+- 阅读样本 kind 覆盖：带业务内容的 PDF 走 annual_report 样本（与招股/再融资同走
+  filing→PDF 解析路径）；招股/再融资 kind 未单独采样，组合验收时补。
+- “强退和未知用量只查原记录”的注入测试属 A3 组合段（FF 侧）与 AUTO 引擎既有
+  恢复测试域；本地档零模型无费用语义，summary 档经 run_batch 原生账目恢复。
 - backlog 挂牌级过滤（现支持实体/文种/发布日期窗；挂牌维由 FF 名单侧收窄后传入）。
-- run_id 收据的持久化查询口（现靠幂等重提交按产物复用恢复；interfaces §4.3 的
-  “按原 run_id 查收据”读口在组合时按 AUTO 运行库补）。
 - 真实 provider discover_page 接线（StockInfoDLSimple / Dayu SDK；Dayu 窗口申报改进）。
 - 生产 catalog 1.4.0→1.5.0 真库升级走查。
+
+**最终 commit 重验**：审查员验证集（SR-CWP 4 文件 + batch e2e + schema 迁移 +
+财务仓储 + artifact store + 适配器 SPI/registry + 采集职责，共 11 文件）在
+`fc9cf2e7f`（= c01e6e04e + 交接文档）上复跑 **114 passed + 1 预存 skip**。

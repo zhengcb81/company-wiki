@@ -70,6 +70,8 @@
       "P1-4 unproved publish dates: named candidate_date_unproved diagnostic, usage.unproved_dates counter, forced partial coverage + test.",
       "P2 repairs: bounded-gate discover_page_bounded, candidate-key revision discriminators, CLI sqlite3.Error mapping, prepare() bundle-role guard.",
       "SR-CWP suite after repairs: 35 passed; reviewer-run baseline regression: 79 passed + 1 pre-existing env-gated skip (80 collected).",
+      "Final-commit re-verification: the full 11-file reviewer test set rerun on fc9cf2e7f -> 114 passed + 1 pre-existing skip (covers the mypy-only diffs between the review snapshot and the committed tree).",
+      "Card-coverage residuals disclosed for combination: run_id receipt read-out, prospectus/refinancing-kind reading sample, A3 hard-kill/unknown-usage injection (FF side), backlog listing-level filter, real provider discover_page wiring, production 1.4.0->1.5.0 upgrade walkthrough.",
       "Platform gate: git commit blocked repo-wide by Mimosa L3 (211 high pre-existing findings, all in files this card never touched; per-file evidence in sr-cwp.md section 0). Resolution belongs to the security lane/platform, not this card.",
       "Focused scan receipt: scanId scan-2026-11-21T09-58-07.416Z-fe0e604f90e3, seal sha256:a53788305bd76398c9a1cc8f5e6a78d609ff1a1ec48f3a65b02405028722ce20, 137 findings repo-wide, 0 in this card's delivery files.",
       "Reviewer conditions recorded: final commit tree must include src/company_wiki/document_model/citation_locator.py (tracked HEAD files import it); run_id receipt read-out and backlog listing-level filter must close at combination (interfaces 4.3)."
