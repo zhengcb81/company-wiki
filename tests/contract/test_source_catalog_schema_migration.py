@@ -240,7 +240,7 @@ def test_t2_02_migration_is_idempotent(tmp_path):
 
     assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
     assert _fingerprint_state_counts(db_path) == counts_before, "state counts drifted"
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         row_after = conn.execute(
             "SELECT status, attempt_count, source_sha256 FROM document_fingerprint_state "
             "WHERE document_id='d2'"
@@ -253,7 +253,7 @@ def test_t2_01_unknown_future_version_fails_closed(tmp_path):
     db_path = tmp_path / "catalog.sqlite3"
     _catalog_store_cls()(db_path)
     _insert_document(db_path, "d1", content_sha="11" * 32, fingerprint=None)
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         conn.execute("UPDATE catalog_meta SET value='9.9.9' WHERE key='schema_version'")
         conn.commit()
 
