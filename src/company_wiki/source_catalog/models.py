@@ -104,7 +104,9 @@ class SourceVersionIdentity:
     content_sha256: str
 
 
-CATALOG_SCHEMA_VERSION = "1.4.0"
+# 1.5.0 adds the additive narrative_read_results table (local reading tier);
+# see CatalogStore._apply_additive_migrations for the 1.4.0 upgrade path.
+CATALOG_SCHEMA_VERSION = "1.5.0"
 SCANNER_VERSION = "1.0.2"
 NORMALIZER_VERSION = "1.0.0"
 SUMMARIZER_VERSION = "1.0.0"

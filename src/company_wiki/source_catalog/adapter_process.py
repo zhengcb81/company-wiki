@@ -13,7 +13,7 @@ from typing import Any, Sequence
 
 from company_wiki.bounded_process import TransportError, run_json_process
 
-from .acquisition import DownloadCandidate, DownloadReceipt
+from .acquisition import DiscoveryPage, DownloadCandidate, DownloadReceipt
 from .download_budget import AcquisitionBudget
 from .acquisition_failure import validated_usage
 from .resolver import SourceRequest
@@ -148,6 +148,56 @@ class JsonCommandAdapter:
         if not isinstance(values, list):
             raise AdapterProcessError("discover response candidates must be an array")
         return tuple(self._candidate(value, request) for value in values)
+
+    def discover_page(self, request: SourceRequest) -> DiscoveryPage:
+        """Enumerate one metadata page and keep the adapter's own coverage."""
+        if not isinstance(request, SourceRequest):
+            raise TypeError("request must be SourceRequest")
+        return self._page(self._run("discover", request.to_dict()), request)
+
+    def discover_page_bounded(
+        self, request: SourceRequest, budget: AcquisitionBudget,
+    ) -> DiscoveryPage:
+        """Run one metadata page with the caller's remaining shared budget."""
+        if not isinstance(request, SourceRequest):
+            raise TypeError("request must be SourceRequest")
+        if not isinstance(budget, AcquisitionBudget):
+            raise TypeError("budget must be AcquisitionBudget")
+        self._ensure_bounded_support()
+        return self._page(self._invoke_bounded("discover", request.to_dict(), budget), request)
+
+    def _page(self, response: dict[str, Any], request: SourceRequest) -> DiscoveryPage:
+        values = response.get("candidates")
+        if not isinstance(values, list):
+            raise AdapterProcessError("discover response candidates must be an array")
+        candidates = tuple(self._candidate(value, request) for value in values)
+        coverage = response.get("coverage")
+        if coverage not in {"complete", "partial"}:
+            # An adapter that does not state its coverage cannot prove it.
+            coverage = "partial"
+        next_cursor = response.get("next_cursor")
+        if next_cursor is not None and (not isinstance(next_cursor, str) or not next_cursor.strip()):
+            raise AdapterProcessError("discover response next_cursor must be text")
+        reason_codes = response.get("reason_codes")
+        if reason_codes is None:
+            reason_codes = ()
+        if not isinstance(reason_codes, (list, tuple)) or not all(
+            isinstance(code, str) and code.strip() for code in reason_codes
+        ):
+            raise AdapterProcessError("discover response reason_codes must be text values")
+        covered_from = response.get("covered_from")
+        covered_to = response.get("covered_to")
+        for name, value in (("covered_from", covered_from), ("covered_to", covered_to)):
+            if value is not None and (not isinstance(value, str) or not value.strip()):
+                raise AdapterProcessError(f"discover response {name} must be text")
+        return DiscoveryPage(
+            candidates=candidates,
+            coverage=coverage,
+            next_cursor=next_cursor,
+            reason_codes=tuple(reason_codes),
+            covered_from=covered_from,
+            covered_to=covered_to,
+        )
 
     def discover_bounded(
         self, request: SourceRequest, budget: AcquisitionBudget

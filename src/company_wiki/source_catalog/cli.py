@@ -166,7 +166,15 @@ def _parser() -> argparse.ArgumentParser:
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser(
-        "official", help="import, project, replay, export or read official originals",
+        "official", help="import, project, replay, export or read official originals"
+    )
+    subparsers.add_parser(
+        "discover-incremental",
+        help="enumerate bounded provider metadata for the scheduled refresh",
+    )
+    subparsers.add_parser(
+        "read-incremental",
+        help="read exact registered sources at the declared reading level",
     )
 
     scan = subparsers.add_parser("scan", help="scan and hash configured source roots")
@@ -770,6 +778,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         from .official_source_cli import main as official_main
 
         return official_main(effective_argv[1:])
+    # Scheduled-refresh metadata discovery and bounded reading own their
+    # parser and stdin request; delegate like ``official``.
+    if effective_argv and effective_argv[0] in {
+        "discover-incremental", "read-incremental",
+    }:
+        from .incremental_cli import main as incremental_main
+
+        return incremental_main(effective_argv[1:])
 
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")

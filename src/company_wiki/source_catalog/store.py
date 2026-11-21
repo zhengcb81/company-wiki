@@ -27,7 +27,7 @@ _LLM_SUMMARIZER_NAME = "source_catalog_llm_summary"
 # Any other recorded value is rejected fail-closed (CW-2.28 §12.3 rule 12).
 # W19: 1.2.0 became upgradeable when the financial statement long tables
 # (schema 1.3.0) joined the single DDL chain above.
-_UPGRADEABLE_SCHEMA_VERSIONS = frozenset({"1.0.0", "1.1.0", "1.2.0", "1.3.0"})
+_UPGRADEABLE_SCHEMA_VERSIONS = frozenset({"1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.4.0"})
 
 
 def _utc_iso(epoch: float | None = None) -> str:
@@ -246,6 +246,37 @@ CREATE TABLE IF NOT EXISTS narrative_artifact_versions (
 );
 CREATE INDEX IF NOT EXISTS idx_narrative_versions_source_status
 ON narrative_artifact_versions(document_id, source_id, status, created_at);
+CREATE TABLE IF NOT EXISTS narrative_read_results (
+    artifact_version_id TEXT PRIMARY KEY,
+    work_key TEXT NOT NULL UNIQUE,
+    document_id TEXT NOT NULL,
+    source_id TEXT NOT NULL,
+    source_sha256 TEXT NOT NULL,
+    object_key TEXT NOT NULL,
+    content_sha256 TEXT NOT NULL,
+    byte_size INTEGER NOT NULL CHECK (byte_size >= 0),
+    producer_name TEXT NOT NULL,
+    producer_version TEXT NOT NULL,
+    policy_sha256 TEXT NOT NULL,
+    selection_status TEXT NOT NULL CHECK (
+        selection_status IN (
+            'selected', 'partial', 'skipped_no_narrative', 'needs_review', 'blocked'
+        )
+    ),
+    quality_status TEXT NOT NULL CHECK (
+        quality_status IN ('verified', 'needs_review', 'skipped_no_narrative')
+    ),
+    metadata_json TEXT NOT NULL,
+    status TEXT NOT NULL CHECK (
+        status IN ('prepared', 'visible', 'retired', 'quarantined')
+    ),
+    created_at TEXT NOT NULL,
+    activated_at TEXT,
+    FOREIGN KEY(document_id) REFERENCES documents(document_id),
+    FOREIGN KEY(source_id) REFERENCES sources(source_id)
+);
+CREATE INDEX IF NOT EXISTS idx_read_results_source_status
+ON narrative_read_results(document_id, source_id, status, created_at);
 CREATE TABLE IF NOT EXISTS llm_summary_failures (
     document_id TEXT NOT NULL,
     generator_name TEXT NOT NULL,
@@ -1334,6 +1365,46 @@ class CatalogStore:
                     created_at TEXT NOT NULL,
                     FOREIGN KEY(document_id) REFERENCES documents(document_id)
                 )"""
+            )
+        if "narrative_read_results" not in tables:
+            # 1.4.0 → 1.5.0: the local reading tier's additive product table.
+            # _DDL normally creates it; keep the explicit guard for upgraded
+            # catalogs the same way the fingerprint state table does.
+            connection.execute(
+                """CREATE TABLE IF NOT EXISTS narrative_read_results (
+                    artifact_version_id TEXT PRIMARY KEY,
+                    work_key TEXT NOT NULL UNIQUE,
+                    document_id TEXT NOT NULL,
+                    source_id TEXT NOT NULL,
+                    source_sha256 TEXT NOT NULL,
+                    object_key TEXT NOT NULL,
+                    content_sha256 TEXT NOT NULL,
+                    byte_size INTEGER NOT NULL CHECK (byte_size >= 0),
+                    producer_name TEXT NOT NULL,
+                    producer_version TEXT NOT NULL,
+                    policy_sha256 TEXT NOT NULL,
+                    selection_status TEXT NOT NULL CHECK (
+                        selection_status IN (
+                            'selected', 'partial', 'skipped_no_narrative',
+                            'needs_review', 'blocked'
+                        )
+                    ),
+                    quality_status TEXT NOT NULL CHECK (
+                        quality_status IN ('verified', 'needs_review', 'skipped_no_narrative')
+                    ),
+                    metadata_json TEXT NOT NULL,
+                    status TEXT NOT NULL CHECK (
+                        status IN ('prepared', 'visible', 'retired', 'quarantined')
+                    ),
+                    created_at TEXT NOT NULL,
+                    activated_at TEXT,
+                    FOREIGN KEY(document_id) REFERENCES documents(document_id),
+                    FOREIGN KEY(source_id) REFERENCES sources(source_id)
+                )"""
+            )
+            connection.execute(
+                "CREATE INDEX IF NOT EXISTS idx_read_results_source_status "
+                "ON narrative_read_results(document_id, source_id, status, created_at)"
             )
 
         CatalogStore._seed_fingerprint_state(connection)
