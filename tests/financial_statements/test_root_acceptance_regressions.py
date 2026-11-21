@@ -164,6 +164,54 @@ def test_pit_coverage_does_not_borrow_future_periods_or_fetch_envelope(catalog, 
     assert statement["coverage"]["quality"] == "historical_coverage_unverifiable"
 
 
+def test_first_normalization_of_committed_source_keeps_original_provenance(catalog, monkeypatch):
+    import hashlib
+    from .test_canonical_writer_third_party import _original
+
+    service = _service(catalog, _recorder({}))
+    payload = _zhongwei_lrb()[1]
+    original = _original()
+    stored = service.writer.import_third_party_dataset_bytes(
+        request_id="source-only", original=original, data=payload,
+        content_sha256=hashlib.sha256(payload).hexdigest(), mime_type="application/json",
+        retrieved_at="2026-10-25T10:00:00Z", capture_receipt={"url": original.source_url},
+    )
+    def unexpected_import(**kwargs):
+        pytest.fail(f"replay tried to import {kwargs['original'].provider_document_id}")
+
+    monkeypatch.setattr(service.writer, "import_third_party_dataset_bytes", unexpected_import)
+    request_offline = request(intent="reuse_only", acquisition_limits=None)
+    replay = service.replay_source(request=request_offline, source_id=stored.source_id)
+    assert replay["usage"]["http_requests"] == 0 and replay["statements"][0]["new_version_ids"]
+    published = report(service.handle_request(request_offline))
+    assert published["source_ref"]["document_id"] == stored.source_ref.document_id
+    assert published["source_ref"]["source_id"] == stored.source_id
+    version = catalog.store.fetchone(
+        "SELECT source_url FROM financial_statement_versions WHERE statement_version_id=?",
+        (published["statement_version_id"],),
+    )
+    assert version["source_url"] == original.source_url
+
+
+def test_replay_preserves_declared_provider_even_with_compatible_bytes(catalog):
+    import hashlib
+    from dataclasses import replace
+    from .test_canonical_writer_third_party import _original
+
+    service = _service(catalog, _recorder({}))
+    payload = _zhongwei_lrb()[1]
+    original = replace(_original(), provider="other_data_vendor")
+    stored = service.writer.import_third_party_dataset_bytes(
+        request_id="other-provider", original=original, data=payload,
+        content_sha256=hashlib.sha256(payload).hexdigest(), mime_type="application/json",
+        retrieved_at="2026-10-25T10:00:00Z", capture_receipt={"url": original.source_url},
+    )
+    with pytest.raises(ValueError, match="provider"):
+        service.replay_source(request=request(intent="reuse_only", acquisition_limits=None),
+                              source_id=stored.source_id)
+    assert not catalog.store.fetchall("SELECT statement_version_id FROM financial_statement_versions")
+
+
 def test_offline_replay_does_not_claim_a_new_provider_observation(catalog, monkeypatch):
     from company_wiki.source_catalog.financial_statements import service as module
     monkeypatch.setattr(module, "_utc_now", lambda: "2026-10-01T00:00:00Z")

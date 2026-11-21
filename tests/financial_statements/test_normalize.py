@@ -21,6 +21,16 @@ def _page(statement_source: str, page: int) -> bytes:
     )
 
 
+@pytest.mark.parametrize("change_one", [False, True])
+def test_explicit_provider_row_kind_cannot_publish_a_different_statement(change_one):
+    payload = json.loads(_page("lrb" if change_one else "fzb", 1))
+    if change_one:
+        entry = next(iter(payload["result"]["data"]["report_list"].values()))
+        entry["data"][-1]["item_source"] = "fzb"
+    with pytest.raises(normalize.NormalizeProtocolError, match="statement type"):
+        normalize.normalize_page(json.dumps(payload), statement_type="income_statement", page_number=1)
+
+
 class TestRealIncomeStatementPage:
     def test_period_metadata_is_preserved_verbatim(self):
         page = normalize.normalize_page(

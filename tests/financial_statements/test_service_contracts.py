@@ -164,7 +164,10 @@ def catalog(tmp_path):
         retrieved_at="2026-10-25T00:00:00Z",
         sources=("cninfo",),
     )
-    return made
+    try:
+        yield made
+    finally:
+        made.close()
 
 
 def _provider(handler):

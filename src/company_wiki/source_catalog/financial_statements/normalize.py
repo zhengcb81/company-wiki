@@ -16,6 +16,8 @@ from datetime import date
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
+from .contracts import STATEMENT_PROVIDER_SOURCES
+
 NORMALIZER_VERSION = "financial-statements-normalizer/1.0.0"
 
 _PERIOD_MONTH_DAY = {
@@ -249,6 +251,9 @@ def _row_from_item(
 ) -> NormalizedRow:
     if not isinstance(item, dict):
         raise NormalizeProtocolError("report data rows must be objects")
+    marker = item.get("item_source")
+    if marker in STATEMENT_PROVIDER_SOURCES.values() and marker != STATEMENT_PROVIDER_SOURCES.get(statement_type):
+        raise NormalizeProtocolError(f"row {index} in {period_compact} contradicts statement type {statement_type}")
     provider_field = item.get("item_field")
     label = item.get("item_title")
     if not isinstance(provider_field, str):

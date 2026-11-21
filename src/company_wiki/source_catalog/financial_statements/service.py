@@ -27,7 +27,7 @@ from ...source_contract.source_manifest import SOURCE_ID_PREFIX
 from ..service import SourceCatalog
 from . import normalize
 from .contracts import (
-    STATEMENTS_RESPONSE_SCHEMA_VERSION, SINA_PROVIDER_ID,
+    STATEMENTS_RESPONSE_SCHEMA_VERSION, STATEMENT_PROVIDER_SOURCES, SINA_PROVIDER_ID,
     StatementsRequest,
 )
 from .repository import (
@@ -41,14 +41,9 @@ from .provider_contracts import (
     StatementsProvider,
     StatementFetchResult,
 )
-from .sina_captures import read_captured_pages
-from .sina_provider import sina_paper_code
+from .sina_captures import matches_replay_source, read_captured_pages
 
-_STATEMENT_BY_PROVIDER_SOURCE = {
-    "lrb": "income_statement",
-    "fzb": "balance_sheet",
-    "llb": "cash_flow",
-}
+_STATEMENT_BY_PROVIDER_SOURCE = {key: name for name, key in STATEMENT_PROVIDER_SOURCES.items()}
 
 
 def _detect_statement_source(raw: bytes) -> str | None:
@@ -458,16 +453,10 @@ class FinancialStatementsService:
         paper_code: str,
         source_key: str,
         retrieved_at: str,
-        provider_observed: bool = True,
         prevalidated_reports: tuple[normalize.NormalizedReport, ...] | None = None,
         archived_observation: bool = False,
     ):
-        """One page: commit original bytes once, then publish its reports.
-
-        Shared by the fetch path and the offline replay path (W19-R8), so a
-        normalization failure can be replayed from the committed SourceRef
-        without any network access.
-        """
+        """Commit an observed page once, then publish its normalized reports."""
         if self.writer is None:
             raise TypeError("read-only statement service cannot store originals")
         reports = prevalidated_reports
@@ -483,7 +472,7 @@ class FinancialStatementsService:
         if reports is not None and not archived_observation:
             reused = self.repository.reuse_known_reports(
                 security_id=security.security_id, reports=reports,
-                retrieved_at=retrieved_at, provider_observed=provider_observed,
+                retrieved_at=retrieved_at,
             )
             if reused is not None:
                 return None, reused
@@ -531,7 +520,6 @@ class FinancialStatementsService:
             ),
             reports=reports,
             retrieved_at=retrieved_at,
-            provider_observed=provider_observed,
             archived_observation=archived_observation,
         )
         return result, publish
@@ -563,7 +551,6 @@ class FinancialStatementsService:
         pages = read_captured_pages(
             observations, exchange=security.exchange, code=security.code, statements=request.statements,
         )
-        paper_code = sina_paper_code(security.exchange, security.code)
         prepared = []
         for page in pages:
             normalized = normalize.normalize_page(
@@ -581,7 +568,7 @@ class FinancialStatementsService:
         for page, reports in prepared:
             result, publish = self._commit_and_publish_page(
                 security=security, statement_type=page.statement_type, raw_bytes=page.data,
-                sha256=page.sha256, page_number=page.page, url=page.url, paper_code=paper_code,
+                sha256=page.sha256, page_number=page.page, url=page.url, paper_code=page.paper_code,
                 source_key=page.source_key, retrieved_at=page.observed_at,
                 prevalidated_reports=reports, archived_observation=True,
             )
@@ -647,18 +634,6 @@ class FinancialStatementsService:
             observed_at=retrieved_at,
         )
 
-    def _source_owner_security(self, source_id: str) -> str | None:
-        """Ask the source reader for verified owner metadata, never a path."""
-        document_id = self.repository.source_document_id(source_id)
-        if document_id is None:
-            return None
-        try:
-            ref = self._source_ref(document_id, source_id)
-            value = self.reader.describe_version(ref).get("security_id")
-            return value if isinstance(value, str) and value else None
-        except (ValueError, RuntimeError):
-            return None
-
     def _source_ref(self, document_id: str, source_id: str):
         if source_id not in self._refs:
             self._refs[source_id] = self.reader.query_ref(document_id, source_id,
@@ -678,42 +653,44 @@ class FinancialStatementsService:
         The statement type is detected from the provider's own ``item_source``
         marker inside the committed bytes (lrb/fzb/llb); no caller guess.
         """
-        from ..source_reader import SourceReadError, SourceVersionReader
+        from ..source_reader import SourceReadError
 
         prefix = SOURCE_ID_PREFIX
         if not isinstance(source_id, str) or not source_id.startswith(prefix):
             raise ValueError("source_id must be a canonical company-wiki source id")
-        sha256 = source_id[len(prefix):]
         identity, _ = self._identify(request)
         if identity is None:
             return {"status": "not_found", "reason": "company_identity_not_resolved"}
         document_id = self.repository.source_document_id(source_id)
         if document_id is None:
             raise ValueError("source is not an active document primary source")
-        owner = self._source_owner_security(source_id)
-        if owner is None:
-            # Fail closed: an unverifiable owner must never be re-published
-            # under the requesting company (W19-R11).
+        try:
+            ref = self._source_ref(document_id, source_id)
+            metadata = self.reader.describe_version(ref)
+        except (ValueError, RuntimeError) as exc:
+            raise ValueError("cannot verify source ownership; refusing replay") from exc
+        owner = metadata.get("security_id")
+        if not isinstance(owner, str) or not owner:
             raise ValueError("cannot verify source ownership; refusing replay")
         if owner != identity["security_id"]:
             raise ValueError(
                 "committed source belongs to a different security; refusing replay"
             )
-        reader = SourceVersionReader(self.catalog)
         try:
-            ref = reader.query_ref(document_id, source_id, sha256)
-            content = reader.open_version(ref, purpose="source_export")
-        except SourceReadError:
-            raise ValueError("committed source bytes are unreadable") from None
-        captured_at = reader.describe_version(ref).get("retrieved_at")
+            content = self.reader.open_version(ref, purpose="source_export")
+        except SourceReadError as exc:
+            raise ValueError("committed source bytes are unreadable") from exc
+        captured_at = metadata.get("retrieved_at")
         if not isinstance(captured_at, str) or not captured_at:
             raise ValueError("original_capture_time_unavailable")
         source_key = _detect_statement_source(content.data)
         if source_key is None:
             raise ValueError("committed page carries no provider statement marker")
+        url = metadata.get("source_url")
+        if not matches_replay_source(metadata.get("provider"), url, exchange=identity["exchange"],
+                                     code=identity["code"], source_key=source_key):
+            raise ValueError("committed source provider or statement scope does not match")
         statement_type = _STATEMENT_BY_PROVIDER_SOURCE[source_key]
-        # Protocol guard before touching storage: a malformed committed page
-        # must refuse replay before any bytes are re-committed.
         normalized = normalize.normalize_page(
             content.data, statement_type=statement_type, page_number=0
         )
@@ -724,19 +701,16 @@ class FinancialStatementsService:
             exchange=identity["exchange"],
             code=identity["code"],
         )
-        paper_code = f"{identity['exchange'].lower()}{identity['code']}"
-        result, publish = self._commit_and_publish_page(
+        publish = self.repository.publish_reports(
             security=security,
-            statement_type=statement_type,
-            raw_bytes=content.data,
-            sha256=sha256,
-            page_number=0,
-            url=None,
-            paper_code=paper_code,
-            source_key=source_key,
+            source=StatementSource(
+                source_id=ref.source_id, document_id=ref.document_id,
+                content_sha256=ref.content_sha256, page_number=0,
+                url=url if isinstance(url, str) else "",
+            ),
+            reports=normalized.reports,
             retrieved_at=captured_at,
             provider_observed=False,
-            prevalidated_reports=normalized.reports,
         )
         return {
             "status": "complete",

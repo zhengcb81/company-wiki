@@ -261,6 +261,34 @@ def _frozen_observation(directory, source, body, at):
     }
 
 
+def test_capture_returns_the_unambiguous_observed_security(tmp_path):
+    from company_wiki.source_catalog.financial_statements.sina_captures import read_captured_pages
+
+    row = _frozen_observation(tmp_path, "lrb", b"{}", "2026-10-25T08:00:00Z")
+    observed_url = row["url"].replace("sh688012", "sz000001")
+    urls = [observed_url.replace("sz000001", "sh000001"),
+            observed_url + "&paperCode=", observed_url]
+    manifest = tmp_path / "observations.json"
+    manifest.write_text(json.dumps([{**row, "url": url} for url in urls]), encoding="utf-8")
+
+    page, = read_captured_pages(manifest, exchange="SZSE", code="000001",
+                                statements=("income_statement",))
+    assert (page.url, page.paper_code) == (observed_url, "sz000001")
+
+
+def test_historical_source_attribution_uses_the_retained_provider_or_exact_capture(tmp_path):
+    from company_wiki.source_catalog.financial_statements.sina_captures import matches_replay_source
+
+    url = _frozen_observation(tmp_path, "lrb", b"{}", "2026-10-25T08:00:00Z")["url"]
+    scope = {"exchange": "SSE", "code": "688012", "source_key": "lrb"}
+    assert matches_replay_source(None, url, **scope)
+    assert matches_replay_source("sina_finance", None, **scope)
+    assert not matches_replay_source("other_vendor", url, **scope)
+    assert not matches_replay_source(None, None, **scope)
+    assert not matches_replay_source(None, url.replace("sh688012", "sz688012"), **scope)
+    assert not matches_replay_source("sina_finance", url.replace("lrb", "fzb"), **scope)
+
+
 def _exact_income_request(**changes):
     request = {
         **REQUEST, "statements": ["income_statement"], "intent": "reuse_only",
