@@ -1,0 +1,181 @@
+{
+  "schema_version": "scheduled-refresh-three-market-acceptance/1",
+  "identity_receipts": {
+    "CN": "f1eadf7b338de6a0f42cd93541f4796acc3db888fc29e3127368f282e356c177",
+    "HK": "26842c6d71bfbc84a70e96557b6ee299bb3718a6e8d0b5f53b46d6d5ad57b4ee",
+    "US": "29dfd7acc0fe69f03241f6a822720a097d8c1737685aa76321055162424ea802"
+  },
+  "native_catchup": {
+    "slot": "weekly:2026-11-19",
+    "run_id": "sr-20261119T073000Z-c926a1efef",
+    "first_import": {
+      "provider": "cninfo",
+      "provider_document_id": "1225002214",
+      "content_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+      "attempt_id": "urn:company-wiki:acquisition-attempt:sha256:c25e537433c2c1b3e92beb81c52663c6e440bd3a3e6777d0b4d516f82f12421d"
+    },
+    "ff_job_id": "ffjob-c463e8a51c59",
+    "execution_count_before": 0,
+    "execution_count_after": 0
+  },
+  "native_timer_replay": {
+    "slot": "weekly:2026-11-21",
+    "run_id": "sr-20261121T000100Z-3a80425f79",
+    "reason_codes": [
+      "adapter_coverage_partial",
+      "discovery_partial",
+      "incremental_discover_unavailable",
+      "acquisition_pending",
+      "selection_partial",
+      "incremental_read_unavailable",
+      "reading_not_finished",
+      "reading_pending",
+      "scheduled_tick_deadline",
+      "reading_run_not_found"
+    ],
+    "confirmed_downloads_before": 2,
+    "confirmed_downloads_after": 2,
+    "repeat_same_slot_idle": true,
+    "unconfirmed_hk_version": {
+      "accession": "12100025",
+      "state": "pending_reconcile"
+    }
+  },
+  "verified": {
+    "CN": {
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "urn:company-wiki:document:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "source_id": "urn:company-wiki:source:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "content_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "byte_size": 2043710,
+        "mime_type": "application/pdf"
+      },
+      "result_ref": {
+        "schema_version": "cwp-read-result-ref/1",
+        "artifact_version_id": "read-5f93499ca25740248e76a68899b05701",
+        "artifact_sha256": "2f4ae5b4b484a379ea7cd77c4c54806f2434d03581444ead318d119b64dd2f2d",
+        "byte_size": 198611,
+        "artifact_role": "narrative_read_result",
+        "source_ref": {
+          "schema_version": "2.0",
+          "document_id": "urn:company-wiki:document:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+          "source_id": "urn:company-wiki:source:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+          "content_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+          "byte_size": 2043710,
+          "mime_type": "application/pdf"
+        }
+      },
+      "evidence_spans": 112,
+      "parser": {
+        "name": "selective_narrative_parser",
+        "version": "0.1.2"
+      },
+      "source_metadata": {
+        "document_kind": "annual_report",
+        "language": "zh"
+      }
+    },
+    "HK": {
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "byte_size": 4428270,
+        "mime_type": "application/pdf"
+      },
+      "result_ref": {
+        "schema_version": "cwp-read-result-ref/1",
+        "artifact_version_id": "read-7126061744574c818531f3770b4c3cfe",
+        "artifact_sha256": "28acf2371fa6f72380bc6f4d943920b03066394ae1f83f2d819a4479c38e9ca5",
+        "byte_size": 190591,
+        "artifact_role": "narrative_read_result",
+        "source_ref": {
+          "schema_version": "2.0",
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "byte_size": 4428270,
+          "mime_type": "application/pdf"
+        }
+      },
+      "evidence_spans": 112,
+      "parser": {
+        "name": "selective_narrative_parser",
+        "version": "0.1.2"
+      },
+      "source_metadata": {
+        "document_kind": "annual_report",
+        "language": "mixed"
+      }
+    },
+    "US": {
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "urn:company-wiki:document:sha256:740af0cc66f5c5111f38435d6646a9c2d571b85527e3b0d5b870b928f1da4c97",
+        "source_id": "urn:company-wiki:source:sha256:740af0cc66f5c5111f38435d6646a9c2d571b85527e3b0d5b870b928f1da4c97",
+        "content_sha256": "740af0cc66f5c5111f38435d6646a9c2d571b85527e3b0d5b870b928f1da4c97",
+        "byte_size": 8585606,
+        "mime_type": "text/html"
+      },
+      "result_ref": {
+        "schema_version": "cwp-read-result-ref/1",
+        "artifact_version_id": "read-d3a0ab343c9d4b3d9857833272ca6cc6",
+        "artifact_sha256": "01d8bff003a71c6a8ea3c7f56efa07a227b8075b5ae865430b3ba8e974398e7d",
+        "byte_size": 230202,
+        "artifact_role": "narrative_read_result",
+        "source_ref": {
+          "schema_version": "2.0",
+          "document_id": "urn:company-wiki:document:sha256:740af0cc66f5c5111f38435d6646a9c2d571b85527e3b0d5b870b928f1da4c97",
+          "source_id": "urn:company-wiki:source:sha256:740af0cc66f5c5111f38435d6646a9c2d571b85527e3b0d5b870b928f1da4c97",
+          "content_sha256": "740af0cc66f5c5111f38435d6646a9c2d571b85527e3b0d5b870b928f1da4c97",
+          "byte_size": 8585606,
+          "mime_type": "text/html"
+        }
+      },
+      "state": "read",
+      "read_run_id": "sr-read-315f5b6462a5c1fb46741f3c",
+      "parse_seconds": 14.690821,
+      "wall_seconds": 22.34319549999782,
+      "evidence_spans": 112,
+      "model_requests": 0,
+      "prior_download_id": "ffjob-0cd32da13f20"
+    },
+    "US_TXT": {
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mime_type": "text/plain"
+      },
+      "result_ref": {
+        "schema_version": "cwp-read-result-ref/1",
+        "artifact_version_id": "read-adcb4546ebc0491c83daef0b5e997269",
+        "artifact_sha256": "76e81da31e44f547f9d2e85c786ef102c48f38ffa996dd1204f992d3790e6dbf",
+        "byte_size": 139978,
+        "artifact_role": "narrative_read_result",
+        "source_ref": {
+          "schema_version": "2.0",
+          "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "byte_size": 66324,
+          "mime_type": "text/plain"
+        }
+      },
+      "evidence_spans": 96,
+      "parser": {
+        "name": "selective_narrative_parser",
+        "version": "0.4.0"
+      },
+      "source_metadata": {
+        "document_kind": "investor_call_transcript",
+        "language": "en"
+      }
+    }
+  },
+  "temporary_tasks_removed": true
+}

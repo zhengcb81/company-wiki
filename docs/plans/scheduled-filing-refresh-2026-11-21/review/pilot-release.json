@@ -1,0 +1,37 @@
+{
+  "schema_version": "scheduled-refresh-pilot-release/1",
+  "activated_at": "2026-11-21T14:13:55Z",
+  "windows_task": "FilingFetch-ScheduledRefresh-Pilot",
+  "enabled": true,
+  "active_reading_level": "local",
+  "cadence": {"frequency": "weekly", "weekday": 1, "local_time": "07:30", "time_zone": "Europe/London"},
+  "windows": {"logon_trigger": true, "periodic_trigger": true, "start_when_available": true},
+  "pinned_roster": {
+    "id": "three-market-pilot",
+    "listings": [
+      {"name": "宁德时代", "market": "CN", "ticker": "300750"},
+      {"name": "腾讯", "market": "HK", "ticker": "00700"},
+      {"name": "微软", "market": "US", "ticker": "MSFT"}
+    ]
+  },
+  "deployed_code": {
+    "company-wiki": "1e2a3b0e3e6c00da91c944dccac7a194bc9f710f",
+    "filing-fetch": "ec2374a6a68c58b95e57ea5088c2321ca254e6b9",
+    "investment-dashboard": "a3f2593625ce60614a0ccb6e3875bf041ce0"
+  },
+  "first_native_start": {
+    "run_id": "sr-20261116T073000Z-34da10ccbe",
+    "due_slot": "weekly:2026-11-16",
+    "started_at": "2026-11-21T14:14:55Z",
+    "stage_at_readback": "backlog"
+  },
+  "dashboard": {
+    "jobs_url": "http://127.0.0.1:48767/jobs",
+    "status_and_runs_read": true,
+    "idempotent_configure_verified": true,
+    "matches_owner_revision": true,
+    "frontend_asset_sha256": "5f924574cb2ea579fbac3cfe08c7bb30c7b52663b35a42ca3e0469ad9a20d47c"
+  },
+  "cleanup": {"temporary_windows_tasks_remaining": 0, "test_directories_removed": 3, "bytes_removed": 28759686},
+  "deployed_cwp_code_bytes": 19345561
+}
