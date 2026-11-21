@@ -18,6 +18,8 @@ UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可
 
 同一 run/attempt 有多份材料或子进程时，step_id 或 check_id 带原生 invocation/item ID；亦可由调用方分配独立 attempt。文件次序不决定身份。带来实质新证据、修复代次或外部条件变化时，由取得该证据的 owner 在新 attempt 发观察，保留同一发现方和指向首笔发生的可选 `original_occurrence_id`。重放引用原场景，同时记录新证据。未知用量先向原作业查账。已经终结的旧收据保持原判。
 
+总控 `intake run` 通过 `RESEARCH_FEEDBACK_PROCESS_STEP_ID` 提供本次监督进程的步骤身份。普通非零退出由总控登记 `process-outcome`，真正启动失败单独记为 `launch:<错误类型>` 并在可读进程收据保留操作系统错误号。本仓若已确认该进程的退出原因，可在自己的原生步骤通过 `parent_step_id` 指向这次进程，同时报同一 owner、run、attempt、`check_id=process-outcome` 和实际 `exit:<退出码>`。已有可分诊的同一事实会复用。其他成功、子步骤或拒绝均不能抹掉进程错误。原参数、命令正文、标准流与凭据不复制到调度收件箱。尚未产生终态的启动身份可从 `drain.unconfirmed` 读取；它也可能对应仍在执行的业务。
+
 开始、结束、分支选择、失败原因链、耗时和用量保存在**本仓完整步骤日志**。以上格式是对检查结果的跨仓投影。保留成功、跳过、预期拒绝和错误成功的区别；同一原生 finding 可在另一个审查轮次表示不同问题。报告/原始 stderr 的脱敏详情在产生方只保存一次，按引用重读。成功详细记录按本仓轮转，开放 issue 的最小复现和固定回归随 issue 留存。
 
 `action-started` 是正确的原始观察。若缺少同 owner、发现仓、run、attempt、step 的配对终态，总控登记原行并进入查账；其他文档、期次或预算检查不能替代它。旧 ET 和 SID 继续使用其已发布的结果检查。FF 持久作业的 `step_id` 为 `<owner_job_id>/<native_attempt>`；只读结果和成本状态分开保留。仅有开始、落盘不完整或证据引用无法定位时不触发新下载。
