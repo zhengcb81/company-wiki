@@ -577,6 +577,10 @@ class SourceRequest:
     # omitting mode keep exact-any-year behavior.
     mode: str | None = None
     allow_download: bool = False
+    # An opaque provider page cursor.  It travels to the provider only; it is
+    # deliberately NOT part of ``identity_dict``, so the identity of a target
+    # never depends on which page of it was asked for.
+    cursor: str | None = None
     schema_version: str = SOURCE_RESOLVER_SCHEMA_VERSION
 
     def __post_init__(self) -> None:
@@ -654,6 +658,11 @@ class SourceRequest:
                 )
         if not isinstance(self.allow_download, bool):
             raise SourceResolutionError("allow_download must be boolean")
+        cursor = self.cursor
+        if cursor is not None:
+            if not isinstance(cursor, str) or not cursor.strip() or cursor.strip() != cursor:
+                raise SourceResolutionError("cursor must be nonempty unpadded text")
+            object.__setattr__(self, "cursor", cursor)
         mode = self.mode
         if mode is not None:
             mode = str(mode).strip().lower()
@@ -691,7 +700,12 @@ class SourceRequest:
         )
 
     def to_dict(self) -> dict[str, Any]:
-        return {**self.identity_dict(), "allow_download": self.allow_download}
+        payload = {**self.identity_dict(), "allow_download": self.allow_download}
+        if self.cursor is not None:
+            # Provider paging scope.  It is absent for every request that does
+            # not page, so an existing provider payload stays byte-identical.
+            payload["cursor"] = self.cursor
+        return payload
 
 
 @dataclass(frozen=True)

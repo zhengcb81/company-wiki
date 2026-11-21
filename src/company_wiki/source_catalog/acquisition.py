@@ -240,12 +240,48 @@ class DownloadReceipt:
         return dict(self.__dict__)
 
 
+@dataclass(frozen=True)
+class DiscoveryPage:
+    """One bounded provider enumeration page and the coverage it can prove.
+
+    ``coverage`` is the adapter's own statement about the enumeration it just
+    performed.  A provider that cannot enumerate a whole range must not claim
+    ``complete``; the caller keeps the partial state and does not advance a
+    watermark past the gap.  ``covered_from`` / ``covered_to`` are the dates
+    the enumeration actually covered, so the caller can compare them with the
+    range it asked for instead of assuming the range was reached.
+    """
+
+    candidates: tuple[DownloadCandidate, ...]
+    coverage: str = "partial"
+    next_cursor: str | None = None
+    reason_codes: tuple[str, ...] = ()
+    covered_from: str | None = None
+    covered_to: str | None = None
+
+    def __post_init__(self) -> None:
+        if self.coverage not in {"complete", "partial"}:
+            raise ValueError("coverage must be 'complete' or 'partial'")
+        object.__setattr__(self, "candidates", tuple(self.candidates))
+        object.__setattr__(self, "reason_codes", tuple(self.reason_codes))
+        for name in ("next_cursor", "covered_from", "covered_to"):
+            value = getattr(self, name)
+            if value is not None and (not isinstance(value, str) or not value.strip()):
+                raise ValueError(f"{name} must be nonempty text or None")
+
+
 @runtime_checkable
 class DownloadAdapter(Protocol):
     name: str
     version: str
 
     def discover(self, request: SourceRequest) -> tuple[DownloadCandidate, ...]: ...
+
+    def discover_page(self, request: SourceRequest) -> DiscoveryPage: ...
+
+    def discover_page_bounded(
+        self, request: SourceRequest, budget: AcquisitionBudget,
+    ) -> DiscoveryPage: ...
 
     def fetch(
         self,
@@ -401,6 +437,35 @@ class AcquisitionCoordinator:
         candidate_scope: Callable[[DownloadCandidate], bool] | None = None,
     ) -> AcquisitionResult:
         return self._select_for_ensure(request, budget=budget, candidate_scope=candidate_scope).result
+
+    def discover_page(
+        self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
+    ) -> DiscoveryPage:
+        """Enumerate one target's metadata without fetching any original bytes.
+
+        This is the public metadata surface the scheduled refresh uses.  It
+        reuses the same market routing, issuer-to-listing narrowing and
+        candidate validation as ``ensure``; it only stops before the single
+        target selection, so a range may return more than one candidate.
+        """
+        if not isinstance(request, SourceRequest):
+            raise TypeError("request must be SourceRequest")
+        if budget is not None and not isinstance(budget, AcquisitionBudget):
+            raise TypeError("budget must be AcquisitionBudget")
+        if request.market is None:
+            raise MarketRoutingError("market is required before adapter discovery")
+        adapter = self.adapters.for_market(request.market)
+        adapter_request, identity_reason = self._provider_request_for_identity(request)
+        if adapter_request is None:
+            raise MarketRoutingError(identity_reason or "issuer_scope_has_no_target_listing")
+        if budget is None:
+            page = adapter.discover_page(adapter_request)
+        else:
+            self._require_bounded_adapter(adapter)
+            budget.ensure_open()
+            page = adapter.discover_page_bounded(adapter_request, budget)
+        self._validate_candidates(adapter_request, page.candidates, catalog=self.catalog)
+        return page
 
     def _select_for_ensure(
         self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
@@ -824,9 +889,12 @@ class AcquisitionCoordinator:
 
     @staticmethod
     def _require_bounded_adapter(adapter: Any) -> None:
-        if not callable(getattr(adapter, "discover_bounded", None)) or not callable(
-            getattr(adapter, "fetch_bounded", None)
-        ) or not getattr(adapter, "supports_acquisition_budget", False):
+        if (
+            not callable(getattr(adapter, "discover_bounded", None))
+            or not callable(getattr(adapter, "fetch_bounded", None))
+            or not callable(getattr(adapter, "discover_page_bounded", None))
+            or not getattr(adapter, "supports_acquisition_budget", False)
+        ):
             raise AcquisitionError(
                 f"adapter {adapter.name} does not support bounded acquisition"
             )

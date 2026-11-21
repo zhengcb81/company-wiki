@@ -1,4 +1,4 @@
-"""Neutral RED: schema 1.4.0 migration chain, repository idempotency, read-only queries."""
+"""Neutral RED: schema migration chain, repository idempotency, read-only queries."""
 
 from __future__ import annotations
 
@@ -47,7 +47,7 @@ class TestSchemaMigration:
     def test_fresh_database_is_current_with_financial_tables(self, tmp_path):
         db = _db(tmp_path)
         store = CatalogStore(db)
-        assert _schema_version(db) == "1.4.0"
+        assert _schema_version(db) == "1.5.0"
         tables = _tables(db)
         assert "financial_statement_versions" in tables
         assert "financial_statement_values" in tables
@@ -73,7 +73,7 @@ class TestSchemaMigration:
                 "UPDATE catalog_meta SET value='1.2.0' WHERE key='schema_version'"
             )
         store = CatalogStore(db)
-        assert _schema_version(db) == "1.4.0"
+        assert _schema_version(db) == "1.5.0"
         with sqlite3.connect(db) as conn:
             kept = conn.execute(
                 "SELECT COUNT(*) FROM documents WHERE document_id='did-old'"
@@ -83,7 +83,7 @@ class TestSchemaMigration:
         assert {"financial_statement_versions", "financial_statement_values"} <= tables
         del store
 
-    @pytest.mark.parametrize("old_version", ["1.0.0", "1.1.0", "1.2.0", "1.3.0"])
+    @pytest.mark.parametrize("old_version", ["1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.4.0"])
     def test_all_upgradeable_versions_reach_current(self, tmp_path, old_version):
         db = _db(tmp_path)
         CatalogStore(db)
@@ -93,7 +93,7 @@ class TestSchemaMigration:
                 (old_version,),
             )
         CatalogStore(db)
-        assert _schema_version(db) == "1.4.0"
+        assert _schema_version(db) == "1.5.0"
 
     def test_unknown_future_version_fails_closed_before_writes(self, tmp_path):
         db = _db(tmp_path)
@@ -125,7 +125,7 @@ class TestSchemaMigration:
         for thread in threads:
             thread.join()
         assert errors == []
-        assert _schema_version(db) == "1.4.0"
+        assert _schema_version(db) == "1.5.0"
 
 
 class TestPublishAndQuery:

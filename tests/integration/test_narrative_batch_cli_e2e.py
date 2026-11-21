@@ -272,10 +272,10 @@ def test_cli_finishes_when_owned_storage_file_disappears_during_sampling(
             launcher = root / "storage_race.py"
             launcher.write_text('''from pathlib import Path
 import sys
-import company_wiki.automation.narrative_batch as batch
+import company_wiki.automation.narrative_storage_budget as storage_budget
 from company_wiki.automation.narrative_batch_cli import main
 
-original_tree_bytes = batch._tree_bytes
+original_tree_bytes = storage_budget.file_tree_bytes
 original_stat = Path.stat
 transient = None
 injected = False
@@ -299,7 +299,7 @@ def measured(path):
 
 if __name__ == "__main__":
     Path.stat = stat_then_remove
-    batch._tree_bytes = measured
+    storage_budget.file_tree_bytes = measured
     try:
         code = main()
     finally:

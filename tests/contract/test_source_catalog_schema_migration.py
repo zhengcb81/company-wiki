@@ -155,7 +155,7 @@ def test_t2_01_fresh_database_has_fingerprint_state_and_dispatch_index(tmp_path)
             )
         }
     assert "idx_fingerprint_state_dispatch" in indexes
-    assert _catalog_module().CATALOG_SCHEMA_VERSION == "1.4.0"
+    assert _catalog_module().CATALOG_SCHEMA_VERSION == "1.5.0"
 
 
 def test_t2_01_migrate_legacy_1_0_creates_state_table_and_seeds(tmp_path):

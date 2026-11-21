@@ -1,0 +1,87 @@
+{
+  "package_id": "SR-CWP",
+  "owner_repo": "company-wiki",
+  "base_commit": "29a123ad3810eaf6479869f98e55e8321800d1d1",
+  "delivery_commit": "pending-mimosa-l3-gate-see-sr-cwp-md-section-0",
+  "release_state": "candidate",
+  "workspace": "C:/Users/郑曾波/Projects/cwp21 (branch codex/sr-cwp-20261121; working tree IS the delivery)",
+  "interface": {
+    "protocols": [
+      "cwp-incremental-discovery-request/1",
+      "cwp-incremental-discovery/1",
+      "cwp-incremental-read-request/1",
+      "cwp-incremental-read/1",
+      "cwp-reading-backlog-request/1",
+      "cwp-reading-backlog/1",
+      "cwp-read-result-ref/1",
+      "cwp-bundle-ref/1",
+      "cwp-incremental-error/1",
+      "catalog schema 1.5.0 (additive narrative_read_results; upgradeable from 1.4.0)"
+    ],
+    "entry_points": [
+      "python -m company_wiki.source_catalog.cli discover-incremental --config <catalog.yaml> --acquisition-config <acquisition.yaml>  (stdin request, stdout receipt)",
+      "python -m company_wiki.source_catalog.cli read-incremental --config <catalog.yaml>  (stdin read or backlog request)",
+      "company_wiki.source_catalog.incremental_discovery.IncrementalDiscoveryService",
+      "company_wiki.source_catalog.incremental_read.IncrementalReadService"
+    ],
+    "deployment_config_keys": [
+      "config/source_catalog.yaml (read-only)",
+      "config/source_acquisition.yaml (read-only; adapters cn/hk/us need discover_page-capable adapters)"
+    ]
+  },
+  "verification": [
+    {"case": "baseline-first-step", "scope": "integration/e2e",
+     "command": "python -m pytest \"tests/integration/test_narrative_batch_cli_e2e.py::test_cli_infers_sparse_languages_from_verified_pdf_and_transcript_bytes\" -q --no-header -p no:cacheprovider",
+     "tested_commit": "29a123ad3810eaf6479869f98e55e8321800d1d1 (fixture fix in working tree)",
+     "exit_code": 0, "evidence_ref": "docs/handoffs/scheduled-refresh-2026-11-21/sr-cwp.md#1"},
+    {"case": "baseline-full-file", "scope": "integration",
+     "command": "python -m pytest tests/integration/test_narrative_batch_cli_e2e.py -q --no-header -p no:cacheprovider",
+     "tested_commit": "29a123ad3810eaf6479869f98e55e8321800d1d1 (fixture + storage-race fixes in working tree)",
+     "exit_code": 0, "evidence_ref": "docs/handoffs/scheduled-refresh-2026-11-21/sr-cwp.md#1"},
+    {"case": "A1/A2/A3-CWP discovery", "scope": "integration",
+     "command": "python -m pytest tests/integration/test_sr_cwp_incremental_discovery.py -q --no-header -p no:cacheprovider",
+     "tested_commit": "working tree", "exit_code": 0,
+     "evidence_ref": "tests/integration/test_sr_cwp_incremental_discovery.py"},
+    {"case": "A4 reading + two-process zero-duplicate", "scope": "integration",
+     "command": "python -m pytest tests/integration/test_sr_cwp_incremental_read.py -q --no-header -p no:cacheprovider",
+     "tested_commit": "working tree", "exit_code": 0,
+     "evidence_ref": "tests/integration/test_sr_cwp_incremental_read.py"},
+    {"case": "public CLI entries", "scope": "integration",
+     "command": "python -m pytest tests/integration/test_sr_cwp_incremental_cli.py -q --no-header -p no:cacheprovider",
+     "tested_commit": "working tree", "exit_code": 0,
+     "evidence_ref": "tests/integration/test_sr_cwp_incremental_cli.py"},
+    {"case": "paged reading backlog", "scope": "integration",
+     "command": "python -m pytest tests/integration/test_sr_cwp_reading_backlog.py -q --no-header -p no:cacheprovider",
+     "tested_commit": "working tree", "exit_code": 0,
+     "evidence_ref": "tests/integration/test_sr_cwp_reading_backlog.py"},
+    {"case": "schema-migration 1.4.0->1.5.0 + artifact store + financial repository", "scope": "contract/unit",
+     "command": "python -m pytest tests/contract/test_source_catalog_schema_migration.py tests/financial_statements/test_repository_migration.py tests/unit/test_narrative_artifact_store.py tests/contract/test_architecture_gate.py -q --no-header -p no:cacheprovider",
+     "tested_commit": "working tree", "exit_code": 0,
+     "evidence_ref": "docs/handoffs/scheduled-refresh-2026-11-21/sr-cwp.md#3"}
+  ],
+  "independent_review": {
+    "tested_commit": "working tree (pre-commit; blocked by platform gate)",
+    "result": "pass_after_repairs",
+    "findings_and_repairs": [
+      "Round 1 verdict FAIL: 4 P1 + 7 P2; all repaired with regression tests (see sr-cwp.md section 6).",
+      "P1-1 CLI discovery success path: real child-process json_command_v1 fixture adapter + bounded-surface fixture adapter + wire test (passing).",
+      "P1-2 batch abort on artifact conflict: NarrativeArtifactError mapped per-item to uncertain/read_store_error + retired-row isolation test.",
+      "P1-3 summary tier: bundle-first derivation + composed configured batch entry (loopback e2e: 1 model request, second read reuses with 0).",
+      "P1-4 unproved publish dates: named candidate_date_unproved diagnostic, usage.unproved_dates counter, forced partial coverage + test.",
+      "P2 repairs: bounded-gate discover_page_bounded, candidate-key revision discriminators, CLI sqlite3.Error mapping, prepare() bundle-role guard.",
+      "SR-CWP suite after repairs: 35 passed; reviewer-run baseline regression: 79 passed + 1 pre-existing env-gated skip (80 collected).",
+      "Platform gate: git commit blocked repo-wide by Mimosa L3 (211 high pre-existing findings, all in files this card never touched; per-file evidence in sr-cwp.md section 0). Resolution belongs to the security lane/platform, not this card.",
+      "Focused scan receipt: scanId scan-2026-11-21T09-58-07.416Z-fe0e604f90e3, seal sha256:a53788305bd76398c9a1cc8f5e6a78d609ff1a1ec48f3a65b02405028722ce20, 137 findings repo-wide, 0 in this card's delivery files.",
+      "Reviewer conditions recorded: final commit tree must include src/company_wiki/document_model/citation_locator.py (tracked HEAD files import it); run_id receipt read-out and backlog listing-level filter must close at combination (interfaces 4.3)."
+    ],
+    "evidence_ref": "docs/handoffs/scheduled-refresh-2026-11-21/sr-cwp.md"
+  },
+  "cleanup": {"temporary_root_restored": true, "production_write_count": 0},
+  "remaining_for_integration": [
+    "Commit unlock (platform/security lane handles pre-existing L3 findings), then rebase onto latest master (4558cdd75, 113a61e02) and rerun the verification commands.",
+    "Real provider discover_page wiring (StockInfoDLSimple / Dayu SDK) under production acquisition config.",
+    "Real summary-tier composition via scripts/narrative_batch_configured.py with the loopback/production model (engine covered by existing batch e2e).",
+    "FF-side A3 combination (single active run per slot, hard-kill recovery, zero duplicate downloads/charges).",
+    "Production-catalog 1.4.0 -> 1.5.0 upgrade walkthrough before combined acceptance."
+  ]
+}

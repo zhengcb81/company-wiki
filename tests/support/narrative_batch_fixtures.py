@@ -124,8 +124,11 @@ def source_documents(*, include_mixed=False, include_annual_pdf=False, include_p
     if include_mixed:
         documents.append((
             "mixed", "call-mixed.txt", "Acme 2026 Q2 earnings call", "investor_call_transcript",
+            # A transcript body needs a proven speaker turn. The saved 0.2.0+
+            # layouts require one; a bare prose line under the heading parses
+            # as no transcript at all and blocks the whole source.
             ("Full Conference Call Transcript\n"
-             "Management discussed the overseas expansion plan. "
+             "CEO: We discussed the overseas expansion plan. "
              "公司新产品已经完成客户认证，开始批量交付。\n").encode("utf-8"),
         ))
     if include_annual_pdf:

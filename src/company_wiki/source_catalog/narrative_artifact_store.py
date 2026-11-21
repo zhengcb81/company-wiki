@@ -29,6 +29,12 @@ from .reader import ReadOnlyCatalogReader
 
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 _OBJECT_KEY = re.compile(r"objects/sha256/([0-9a-f]{2})/([0-9a-f]{64})\.json\Z")
+#: The bundle is the narrative product: a selection plus its summary.  A read
+#: result is the local reading tier: a selection without any model summary.
+#: They are different products in different tables and never shadow each other.
+NARRATIVE_BUNDLE_ROLE = "narrative_bundle"
+NARRATIVE_READ_RESULT_ROLE = "narrative_read_result"
+_ARTIFACT_ROLES = frozenset({NARRATIVE_BUNDLE_ROLE, NARRATIVE_READ_RESULT_ROLE})
 _SELECTION_STATUSES = frozenset(
     {"selected", "partial", "skipped_no_narrative", "needs_review", "blocked"}
 )
@@ -44,6 +50,12 @@ _EXACT_VISIBLE_SQL = f"""SELECT * FROM narrative_artifact_versions
     WHERE artifact_version_id=? AND document_id=? AND source_id=?
       AND source_sha256=? AND status='visible' AND {_RAW_SUBJECT_SQL}"""
 _EFFECT_VISIBLE_SQL = "SELECT * FROM narrative_artifact_versions WHERE effect_id=? AND status='visible'"
+_LATEST_VISIBLE_READ_RESULT_SQL = """SELECT * FROM narrative_read_results
+    WHERE document_id=? AND source_id=? AND source_sha256=? AND status='visible'
+    ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT 1"""
+_EXACT_VISIBLE_READ_RESULT_SQL = """SELECT * FROM narrative_read_results
+    WHERE artifact_version_id=? AND document_id=? AND source_id=? AND source_sha256=?
+      AND status='visible'"""
 _CURRENT_SOURCE_SQL = """SELECT d.primary_source_id, d.source_status, s.content_sha256
     FROM documents AS d LEFT JOIN sources AS s ON s.source_id=d.primary_source_id
     WHERE d.document_id=?"""
@@ -93,11 +105,11 @@ class NarrativeArtifactDraft:
     quality_status: str
     metadata_json: str
     created_at: str
-    artifact_role: str = "narrative_bundle"
+    artifact_role: str = NARRATIVE_BUNDLE_ROLE
 
     def __post_init__(self) -> None:
-        if self.artifact_role != "narrative_bundle":
-            raise ValueError("artifact_role must be narrative_bundle")
+        if self.artifact_role not in _ARTIFACT_ROLES:
+            raise ValueError("artifact_role must be a known narrative artifact role")
         for name in (
             "effect_id", "document_id", "source_id", "producer_name",
             "producer_version", "created_at",
@@ -147,6 +159,37 @@ class NarrativeArtifactVersion:
 
     @classmethod
     def from_row(cls, row: sqlite3.Row) -> "NarrativeArtifactVersion":
+        return cls(**{key: row[key] for key in cls.__dataclass_fields__})
+
+
+@dataclass(frozen=True)
+class NarrativeReadResultVersion:
+    """One visible local reading product of one exact original.
+
+    Read results live in their own additive table: they have no outbox effect
+    and must never be mistaken for a narrative bundle of the same source.
+    """
+
+    artifact_version_id: str
+    work_key: str
+    document_id: str
+    source_id: str
+    source_sha256: str
+    object_key: str
+    content_sha256: str
+    byte_size: int
+    producer_name: str
+    producer_version: str
+    policy_sha256: str
+    selection_status: str
+    quality_status: str
+    metadata_json: str
+    status: str
+    created_at: str
+    activated_at: str | None
+
+    @classmethod
+    def from_row(cls, row: sqlite3.Row) -> "NarrativeReadResultVersion":
         return cls(**{key: row[key] for key in cls.__dataclass_fields__})
 
 
@@ -326,6 +369,8 @@ class NarrativeArtifactStore:
     def prepare(self, draft: NarrativeArtifactDraft, payload: bytes) -> NarrativeArtifactVersion:
         if not isinstance(draft, NarrativeArtifactDraft):
             raise TypeError("draft must be NarrativeArtifactDraft")
+        if draft.artifact_role != NARRATIVE_BUNDLE_ROLE:
+            raise ValueError("bundle draft must carry the bundle role")
         if not isinstance(payload, bytes):
             raise TypeError("payload must be bytes")
 
@@ -500,6 +545,174 @@ class NarrativeArtifactStore:
             ).fetchone()
             return NarrativeArtifactVersion.from_row(activated)
 
+    def prepare_read_result(
+        self, draft: NarrativeArtifactDraft, payload: bytes,
+    ) -> NarrativeReadResultVersion:
+        """Persist one local reading product; identical work reuses the row.
+
+        The draft's ``effect_id`` is not stored: read results have no outbox
+        effect.  Its work key pins the exact original, its read policy and the
+        execution identity, so a changed parser or selector is a new product,
+        never an in-place rewrite.
+        """
+        if not isinstance(draft, NarrativeArtifactDraft):
+            raise TypeError("draft must be NarrativeArtifactDraft")
+        if draft.artifact_role != NARRATIVE_READ_RESULT_ROLE:
+            raise ValueError("read-result draft must carry the read-result role")
+        if not isinstance(payload, bytes):
+            raise TypeError("payload must be bytes")
+        content_sha256 = hashlib.sha256(payload).hexdigest()
+        with self._catalog.transaction() as connection:
+            _require_bound_current(
+                document_id=draft.document_id, source_id=draft.source_id,
+                source_sha256=draft.source_sha256, subject=None,
+                fetchone=lambda sql, params: connection.execute(sql, params).fetchone(),
+            )
+            existing = connection.execute(
+                "SELECT * FROM narrative_read_results WHERE work_key=?",
+                (draft.work_key,),
+            ).fetchone()
+            if existing is not None:
+                matches = (
+                    existing["document_id"] == draft.document_id
+                    and existing["source_id"] == draft.source_id
+                    and existing["source_sha256"] == draft.source_sha256
+                    and existing["content_sha256"] == content_sha256
+                    and existing["producer_name"] == draft.producer_name
+                    and existing["producer_version"] == draft.producer_version
+                    and existing["policy_sha256"] == draft.policy_sha256
+                    and existing["selection_status"] == draft.selection_status
+                    and existing["quality_status"] == draft.quality_status
+                    and existing["metadata_json"] == draft.metadata_json
+                )
+                if not matches or existing["status"] not in {"prepared", "visible"}:
+                    raise NarrativeArtifactConflictError(
+                        "read-result work key is already bound to different content"
+                    )
+                self._objects.read(
+                    existing["object_key"],
+                    expected_sha256=existing["content_sha256"],
+                    expected_size=existing["byte_size"],
+                )
+                return NarrativeReadResultVersion.from_row(existing)
+
+        # Bytes are durable before the short catalog transaction, mirroring
+        # the bundle prepare path.
+        object_key = self._objects._put_bundle(payload)
+        with self._catalog.transaction() as connection:
+            _require_bound_current(
+                document_id=draft.document_id, source_id=draft.source_id,
+                source_sha256=draft.source_sha256, subject=None,
+                fetchone=lambda sql, params: connection.execute(sql, params).fetchone(),
+            )
+            existing = connection.execute(
+                "SELECT * FROM narrative_read_results WHERE work_key=?",
+                (draft.work_key,),
+            ).fetchone()
+            if existing is not None:
+                self._objects.read(
+                    existing["object_key"],
+                    expected_sha256=existing["content_sha256"],
+                    expected_size=existing["byte_size"],
+                )
+                return NarrativeReadResultVersion.from_row(existing)
+            version = NarrativeReadResultVersion(
+                artifact_version_id=f"read-{uuid.uuid4().hex}",
+                work_key=draft.work_key,
+                document_id=draft.document_id,
+                source_id=draft.source_id,
+                source_sha256=draft.source_sha256,
+                object_key=object_key,
+                content_sha256=content_sha256,
+                byte_size=len(payload),
+                producer_name=draft.producer_name,
+                producer_version=draft.producer_version,
+                policy_sha256=draft.policy_sha256,
+                selection_status=draft.selection_status,
+                quality_status=draft.quality_status,
+                metadata_json=draft.metadata_json,
+                status="prepared",
+                created_at=draft.created_at,
+                activated_at=None,
+            )
+            connection.execute(
+                """INSERT INTO narrative_read_results (
+                    artifact_version_id, work_key, document_id, source_id,
+                    source_sha256, object_key, content_sha256, byte_size,
+                    producer_name, producer_version, policy_sha256,
+                    selection_status, quality_status, metadata_json, status,
+                    created_at, activated_at
+                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                tuple(getattr(version, field) for field in version.__dataclass_fields__),
+            )
+            return version
+
+    def activate_read_result(
+        self, work_key: str, *, verified_after_hash: str, activated_at: str,
+    ) -> NarrativeReadResultVersion:
+        """Make the prepared read product visible under its work key."""
+        if not isinstance(work_key, str) or not _SHA256.fullmatch(work_key):
+            raise ValueError("work_key must be lowercase SHA-256")
+        if not _SHA256.fullmatch(verified_after_hash):
+            raise ValueError("verified_after_hash must be lowercase SHA-256")
+        if not isinstance(activated_at, str) or not activated_at:
+            raise ValueError("activated_at must be non-empty")
+        with self._catalog.transaction() as connection:
+            row = connection.execute(
+                "SELECT * FROM narrative_read_results WHERE work_key=?",
+                (work_key,),
+            ).fetchone()
+            if row is None:
+                raise NarrativeArtifactNotVisibleError("prepared read result not found")
+            if row["content_sha256"] != verified_after_hash:
+                raise NarrativeArtifactConflictError(
+                    "verified hash differs from the prepared read result"
+                )
+            self._require_current_source(connection, row)
+            if row["status"] == "visible":
+                return NarrativeReadResultVersion.from_row(row)
+            if row["status"] != "prepared":
+                raise NarrativeArtifactNotVisibleError(
+                    f"read result cannot activate from {row['status']!r}"
+                )
+            changed = connection.execute(
+                """UPDATE narrative_read_results
+                   SET status='visible', activated_at=?
+                   WHERE work_key=? AND status='prepared' AND content_sha256=?""",
+                (activated_at, work_key, verified_after_hash),
+            )
+            if changed.rowcount != 1:
+                raise NarrativeArtifactConflictError(
+                    "prepared read result changed during activation"
+                )
+            activated = connection.execute(
+                "SELECT * FROM narrative_read_results WHERE work_key=?",
+                (work_key,),
+            ).fetchone()
+            return NarrativeReadResultVersion.from_row(activated)
+
+    def latest_visible_read_result(
+        self,
+        *,
+        document_id: str,
+        source_id: str,
+        source_sha256: str,
+    ) -> NarrativeReadResultVersion:
+        """Discover the newest visible local reading of one exact original."""
+        if not _SHA256.fullmatch(source_sha256):
+            raise ValueError("source_sha256 must be lowercase SHA-256")
+        with self._catalog.transaction() as connection:
+            row = connection.execute(
+                _LATEST_VISIBLE_READ_RESULT_SQL,
+                (document_id, source_id, source_sha256),
+            ).fetchone()
+            if row is None:
+                raise NarrativeArtifactNotVisibleError(
+                    "no visible read result for the requested source"
+                )
+            self._require_current_source(connection, row)
+            return NarrativeReadResultVersion.from_row(row)
+
     def prepared_effects(
         self, *, limit: int = 100, allowed_effect_ids: tuple[str, ...] | None = None,
     ) -> tuple[NarrativeArtifactVersion, ...]:
@@ -557,7 +770,6 @@ class NarrativeArtifactStore:
             return NarrativeArtifactVersion.from_row(row)
 
     def visible_version_for_effect(self, effect_id: str) -> NarrativeArtifactVersion:
-        """Read exact current visible metadata without opening original or bundle bytes."""
         if not isinstance(effect_id, str) or not effect_id or effect_id != effect_id.strip():
             raise ValueError("effect_id must be a nonempty, unpadded identifier")
         with self._catalog.transaction() as connection:
@@ -953,9 +1165,49 @@ class NarrativeArtifactReader:
             raise NarrativeSourceNotCurrentError("source changed while reading the artifact")
         return version, data
 
+    def read_exact_read_result(
+        self, *, artifact_version_id: str, document_id: str, source_id: str,
+        source_sha256: str, expected_sha256: str | None = None,
+        expected_size: int | None = None,
+    ) -> tuple[NarrativeReadResultVersion, bytes]:
+        """Read one exact local reading product and recheck its parent source."""
+        if not isinstance(artifact_version_id, str) or not artifact_version_id.strip():
+            raise ValueError("artifact_version_id must be non-empty text")
+        if not _SHA256.fullmatch(source_sha256):
+            raise ValueError("source_sha256 must be lowercase SHA-256")
+        row = self._fetchone(
+            _EXACT_VISIBLE_READ_RESULT_SQL,
+            (artifact_version_id, document_id, source_id, source_sha256),
+        )
+        if row is None:
+            raise NarrativeArtifactNotVisibleError(
+                "the exact read result is not visible"
+            )
+        self._require_row_current(row, None)
+        version = NarrativeReadResultVersion.from_row(row)
+        if (expected_sha256 is not None and version.content_sha256 != expected_sha256) or (
+            expected_size is not None and version.byte_size != expected_size
+        ):
+            raise NarrativeArtifactConflictError("exact read result differs from its reference")
+        data = self._objects.read(
+            version.object_key, expected_sha256=version.content_sha256,
+            expected_size=version.byte_size,
+        )
+        current = self._fetchone(
+            _EXACT_VISIBLE_READ_RESULT_SQL,
+            (artifact_version_id, document_id, source_id, source_sha256),
+        )
+        if current is None:
+            raise NarrativeArtifactNotVisibleError("the exact read result changed while reading")
+        if NarrativeReadResultVersion.from_row(current) != version:
+            raise NarrativeArtifactConflictError("read result metadata changed while reading")
+        return version, data
+
 
 __all__ = [
     "LocalNarrativeObjectStore",
+    "NARRATIVE_BUNDLE_ROLE",
+    "NARRATIVE_READ_RESULT_ROLE",
     "NarrativeArtifactConflictError",
     "NarrativeArtifactDraft",
     "NarrativeArtifactError",
@@ -963,6 +1215,7 @@ __all__ = [
     "NarrativeArtifactStore",
     "NarrativeArtifactReader",
     "NarrativeArtifactVersion",
+    "NarrativeReadResultVersion",
     "NarrativeObjectAccess",
     "NarrativeObjectAdmission",
     "NarrativeObjectIntegrityError",
