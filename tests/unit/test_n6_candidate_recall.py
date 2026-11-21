@@ -190,6 +190,30 @@ def test_high_information_operating_facets_are_distinguished_for_fair_selection(
         assert topic in fact.topics, (name, fact)
 
 
+@pytest.mark.parametrize("first,second", [("exchange rate", "loss"), ("风险", "外汇")])
+def test_currency_risk_proximity_preserves_term_order_and_clause_boundary(first, second):
+    from company_wiki.source_catalog.n6_candidate_operating_facts import (
+        OPERATING_FACT_JOIN,
+        detect_operating_fact,
+    )
+
+    for distance, should_match in ((119, True), (120, True), (121, False)):
+        pad = "x" * (distance - len(first))
+        text = first + pad + second
+        assert ("currency_risk" in detect_operating_fact(text).topics) == should_match
+        assert bool(OPERATING_FACT_JOIN.search(text)) == should_match
+    separated = f"{first}。{second}"
+    assert "currency_risk" not in detect_operating_fact(separated).topics
+
+
+def test_currency_risk_in_long_source_text_can_be_recalled_near_the_end():
+    from company_wiki.source_catalog.n6_candidate_operating_facts import detect_operating_fact
+
+    prefix = "Operations were underway across the product lines. " * 1_000
+    fact = detect_operating_fact(prefix + "Losses may follow continued exchange rate changes.")
+    assert "currency_risk" in fact.topics
+
+
 @pytest.mark.parametrize("text,topic", (
     (
         "研究团队筛选出420000种新化合物，并推动310个候选分子从发现阶段进入开发。",

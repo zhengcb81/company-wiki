@@ -2,10 +2,17 @@
 
 from __future__ import annotations
 
+from contextlib import closing, contextmanager
 import sqlite3
 from pathlib import Path
 
 import pytest
+
+
+@contextmanager
+def _connection(db_path: Path):
+    with closing(sqlite3.connect(db_path)) as connection, connection:
+        yield connection
 
 
 def _catalog_module():
@@ -21,12 +28,12 @@ def _catalog_store_cls():
 
 
 def _documents_columns(db_path: Path) -> list[str]:
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         return [row[1] for row in conn.execute("PRAGMA table_info(documents)")]
 
 
 def _schema_version(db_path: Path) -> str:
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         return conn.execute(
             "SELECT value FROM catalog_meta WHERE key='schema_version'"
         ).fetchone()[0]
@@ -49,7 +56,7 @@ def test_migrate_legacy_database_adds_text_fingerprint(tmp_path):
     # drop the new column and reset the schema version. This mirrors a real
     # production catalog created before this column existed.
     _catalog_store_cls()(db_path)
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         conn.execute(
             "INSERT INTO documents(document_id, title, source_type, document_kind, "
             "source_status, metadata_priority, metadata_json, first_seen_at, last_seen_at) "
@@ -67,7 +74,7 @@ def test_migrate_legacy_database_adds_text_fingerprint(tmp_path):
     assert "text_fingerprint" in _documents_columns(db_path)
     assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
     # Existing rows survive the migration; fingerprint stays null until computed.
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         row = conn.execute(
             "SELECT document_id, text_fingerprint FROM documents WHERE document_id='d1'"
         ).fetchone()
@@ -86,14 +93,14 @@ def test_migrate_legacy_database_adds_text_fingerprint(tmp_path):
 
 
 def _tables(db_path: Path) -> set[str]:
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         return {row[0] for row in conn.execute(
             "SELECT name FROM sqlite_master WHERE type='table'"
         )}
 
 
 def _fingerprint_state_counts(db_path: Path) -> dict[str, int]:
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         rows = conn.execute(
             "SELECT status, COUNT(*) FROM document_fingerprint_state GROUP BY status"
         ).fetchall()
@@ -109,7 +116,7 @@ def _insert_document(
     column is absent the fingerprint is simply not set, so the row will be NULL
     after the migration re-adds the column.
     """
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         conn.execute(
             "INSERT INTO sources(source_id, content_sha256, byte_size, mime_type, "
             "first_seen_at) VALUES(?,?,?,?,?)",
@@ -147,7 +154,7 @@ def test_t2_01_fresh_database_has_fingerprint_state_and_dispatch_index(tmp_path)
 
     assert "document_fingerprint_state" in _tables(db_path)
     assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         indexes = {
             row[0]
             for row in conn.execute(
@@ -167,14 +174,14 @@ def test_t2_01_migrate_legacy_1_0_creates_state_table_and_seeds(tmp_path):
     db_path = tmp_path / "catalog.sqlite3"
     _catalog_store_cls()(db_path)
     # Regress to a 1.0.0 shape: drop state table + fingerprint column.
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         conn.execute("DROP TABLE document_fingerprint_state")
         conn.execute("ALTER TABLE documents DROP COLUMN text_fingerprint")
         conn.execute("UPDATE catalog_meta SET value='1.0.0' WHERE key='schema_version'")
         conn.commit()
     _insert_document(db_path, "d1", content_sha="aa" * 32, fingerprint=None)
     # column dropped above; d1 has no fingerprint column to set — that's the point
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         # documents row count sanity
         assert conn.execute("SELECT COUNT(*) FROM documents").fetchone()[0] == 1
 
@@ -196,7 +203,7 @@ def test_t2_01_migrate_legacy_1_1_seeds_completed_and_pending(tmp_path):
     _insert_document(db_path, "d_done", content_sha="cc" * 32, fingerprint="fp_done")
     _insert_document(db_path, "d_null", content_sha="dd" * 32, fingerprint=None)
     # Regress to 1.1.0: drop state table only (keep text_fingerprint column+data).
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         conn.execute("DROP TABLE document_fingerprint_state")
         conn.execute("UPDATE catalog_meta SET value='1.1.0' WHERE key='schema_version'")
         conn.commit()
@@ -217,12 +224,12 @@ def test_t2_02_migration_is_idempotent(tmp_path):
     _insert_document(db_path, "d1", content_sha="ee" * 32, fingerprint=None)
     _insert_document(db_path, "d2", content_sha="ff" * 32, fingerprint="fp2")
     # Seeding belongs to a real upgrade, never an ordinary current-schema open.
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         conn.execute("UPDATE catalog_meta SET value='1.1.0' WHERE key='schema_version'")
     _catalog_store_cls()(db_path)
     counts_before = _fingerprint_state_counts(db_path)
     assert counts_before == {"pending": 1, "completed": 1}
-    with sqlite3.connect(db_path) as conn:
+    with _connection(db_path) as conn:
         row_before = conn.execute(
             "SELECT status, attempt_count, source_sha256 FROM document_fingerprint_state "
             "WHERE document_id='d2'"
@@ -255,4 +262,22 @@ def test_t2_01_unknown_future_version_fails_closed(tmp_path):
 
     # Fail-closed: no fingerprint state rows were written for the unknown version.
     assert _fingerprint_state_counts(db_path) == {}
+
+
+def test_incremental_reads_upgrade_a_populated_catalog(tmp_path):
+    db_path = tmp_path / "catalog.sqlite3"
+    _catalog_store_cls()(db_path)
+    _insert_document(db_path, "existing", content_sha="36" * 32, fingerprint="original")
+    with _connection(db_path) as conn:
+        conn.execute("DROP TABLE narrative_read_results")
+        conn.execute("UPDATE catalog_meta SET value='1.4.0' WHERE key='schema_version'")
+
+    _catalog_store_cls()(db_path)
+    assert _schema_version(db_path) == "1.5.0"
+    assert "narrative_read_results" in _tables(db_path)
+    with _connection(db_path) as conn:
+        original = conn.execute(
+            "SELECT primary_source_id, text_fingerprint FROM documents WHERE document_id='existing'"
+        ).fetchone()
+    assert original == ("src_existing", "original")
 

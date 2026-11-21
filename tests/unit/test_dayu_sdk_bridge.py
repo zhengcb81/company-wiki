@@ -74,6 +74,47 @@ def test_sec_discovery_uses_sdk_and_correct_fiscal_year_without_original_downloa
     assert len(sdk.history_calls) == 1
 
 
+def test_sec_enumeration_keeps_amendments_and_uses_only_submission_metadata(sdk_loop):
+    from company_wiki.source_catalog.dayu_sdk_bridge import discover_sec
+
+    class MetadataSEC(FakeSEC):
+        async def fetch_submissions(self, cik):
+            return {"cik": 123, "fiscalYearEnd": "0630", "filings": {
+                "recent": {
+                    "form": ["10-Q", "10-Q/A"],
+                    "filingDate": ["2025-10-20", "2025-10-25"],
+                    "accessionNumber": ["0000000123-25-000001", "0000000123-25-000002"],
+                },
+                "files": [{"name": "older.json", "filingFrom": "2020-01-01",
+                           "filingTo": "2025-10-01"}],
+            }}
+
+        async def list_filing_files(self, *args, **kwargs):
+            raise AssertionError("metadata enumeration must use the submissions manifest")
+
+    def collect(records, table, form_windows, end_date):
+        assert form_windows["10-Q"].isoformat() == "2025-10-15"
+        for form, published, accession in zip(table["form"], table["filingDate"], table["accessionNumber"]):
+            records[accession] = SimpleNamespace(
+                form_type=form, filing_date=published, report_date="2025-09-30",
+                accession_number=accession, primary_document="original.htm",
+            )
+
+    sdk = MetadataSEC()
+    request = SourceRequest(entity="Consumer Name", market="US", security_id="FIXTURE",
+                            document_kind="quarterly_report", as_of_date="2025-10-31")
+    reasons = []
+    values = sdk_loop.run_until_complete(discover_sec(
+        request, sdk, collect=collect, since_date="2025-10-15", enumeration_reasons=reasons,
+    ))
+    assert [value["provider_document_id"] for value in values] == [
+        "0000000123-25-000001", "0000000123-25-000002",
+    ]
+    assert [value["amended"] for value in values] == [False, True]
+    assert all(value["fiscal_period"] == "Q1" and value["fiscal_year"] == 2026 for value in values)
+    assert reasons == [] and sdk.history_calls == [] and sdk.original_calls == 0
+
+
 def test_sec_annual_discovery_uses_report_date_year_when_sec_omits_fiscal_year_end(sdk_loop):
     from company_wiki.source_catalog.dayu_sdk_bridge import discover_sec
 

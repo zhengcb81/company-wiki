@@ -33,6 +33,7 @@ from .local_inventory import (
 from .resolver import (
     SourceRequest,
     SourceResolver,
+    compare_provider_original,
 )
 from .source_location import inside_configured_roots, is_hydration_required
 from .source_reader import FilingReuseObservation, SourceReadError, SourceRef, SourceVersionReader
@@ -49,6 +50,7 @@ class _PreparationProgress:
     operations: list[dict[str, Any]] = field(default_factory=list)
     diagnostics: list[dict[str, Any]] = field(default_factory=list)
     verified_reuse: FilingReuseObservation | None = None
+    verified_original_url: str | None = None
     # Only actual owner proof in this call may establish non-relevance.
     not_relevant_documents: set[str] = field(default_factory=set)
 
@@ -812,6 +814,15 @@ def _prepare_local_source(
         if identity_match == "conflict" and not body_owner:
             diagnostics.append({"document_id": candidate["document_id"], "reason": "registered_identity_conflict"})
             continue
+        if progress.verified_original_url is not None:
+            asset_relation = compare_provider_original(metadata, request, progress.verified_original_url)
+            if asset_relation == "same":
+                # The strict observed-URL reuse failed before this narrowed retry.
+                return _result("blocked", "provider_original_scope_conflict", blocks=True,
+                               operations=operations, diagnostics=diagnostics)
+            if asset_relation == "different":
+                progress.not_relevant_documents.add(ref.document_id)
+                continue
         qualified = qualified_source_scope(catalog,ref,candidate,historical=historical)
         relation = scope_relatedness(qualified,request)
         if relation is ScopeRelation.NOT_RELEVANT:
@@ -1023,10 +1034,11 @@ def _prepare_local_source_operation(
     limits: LocalPrepareLimits | None = None,
     registrations: tuple[SourceRegistrationScope, ...] = (),
     verified_reuse: FilingReuseObservation | None = None,
+    verified_original_url: str | None = None,
 ) -> dict[str, Any]:
     """Internal composition may consume only this operation's owner proof."""
     budget = LocalReadBudget(limits or LocalPrepareLimits())
-    progress = _PreparationProgress(verified_reuse=verified_reuse)
+    progress = _PreparationProgress(verified_reuse=verified_reuse, verified_original_url=verified_original_url)
     try:
         result = _prepare_local_source(
             catalog,

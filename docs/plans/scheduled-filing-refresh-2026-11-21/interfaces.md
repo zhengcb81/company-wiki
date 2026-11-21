@@ -43,7 +43,7 @@ Dashboard 使用以下接口，配置写入走已有本机命令认证和请求�
 
 ## 2. CWP 元数据公开口
 
-目标命令 `source_catalog.cli discover-incremental --request-stdin`，或 CWP 原公开入口的等价参数。共享实现使用配置对应的市场源和有界 provider discovery。增长来自公开枚举与续页能力，既有 `ensure` 继续负责字节获取和登记。
+公开命令 `source_catalog.cli discover-incremental --request-stdin`。同一 catalog 配置前置或跟在命令后均可。共享实现使用各市场配置和有界 provider discovery，既有 `ensure` 继续负责字节获取和登记。真实提供方范围不完整时保留部分覆盖和具体原因。
 
 | 字段 | 约定 |
 |---|---|
@@ -59,7 +59,7 @@ FF 只根据核对过的候选调用原有精确 `ff-job/1` 采集。发现与�
 
 ## 3. 电话会与阅读
 
-FF 在 `ff-job/1` 内增加独立电话会种类 `transcript.acquire`。请求含权威 issuer/listing、明确的 FY/Q、截止时间、`intent` 和仅该电话会的 `acquisition_limits`。复用已登记 transcript → 有证期间且 provider 支持时发起 ET → CWP 以正常导入登记 → 返回同一 SourceRef。原有 `companion_transcript` 调用仍走其兼容外观。相同作业恢复读取原 job、ET usage 和 CWP 来源记录。
+FF 在 `ff-job/1` 内使用独立电话会种类 `transcript.acquire`。请求含权威 issuer/listing、明确的 FY/Q、截止时间、`intent` 和仅该电话会的 `acquisition_limits`。复用已登记 transcript → 有证期间且 provider 支持时发起 ET → CWP 以正常导入登记 → 返回同一 SourceRef。原有 `companion_transcript` 调用仍走其兼容外观。相同作业恢复读取原 job、ET usage 和 CWP 来源记录。CWP 的已登记电话会经 `incremental-backlog` 按 `investor_call_transcript` 读取。只要时点已查到本地登记，阅读可用在原始公开日缺失时，该观察不作为历史公开日。
 
 CWP 为有限阅读提供 `cwp-incremental-read-request/1` 与 `cwp-incremental-read/1`。实现可以组合现有请求入口。跨仓以同一 wire 语义为准。
 

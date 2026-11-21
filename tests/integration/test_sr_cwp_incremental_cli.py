@@ -17,6 +17,8 @@ import sys
 from support.narrative_batch_fixtures import KEY, loopback_model_server  # noqa: F401
 from support.sr_cwp_fixtures import sr_cwp_readable_catalog
 
+from company_wiki.source_catalog.security_identity import SecurityMasterStore, SecurityRecord
+
 
 REPO = Path(__file__).resolve().parents[2]
 ADAPTER_CLI = REPO / "tests" / "support" / "sr_cwp_adapter_cli.py"
@@ -64,25 +66,34 @@ def _write_acquisition_config(root: Path) -> Path:
 
 
 def test_discovery_via_the_public_cli_returns_the_wire_receipt(sr_cwp_readable_catalog):
-    """A real child-process adapter answers a complete discovery request."""
+    """FF's request passes the real CWP and provider subprocess boundaries."""
     state = sr_cwp_readable_catalog
     _write_acquisition_config(state.root)
+    url = "https://provider.invalid/fixture-securities"
+    SecurityMasterStore(state.catalog.config.catalog_dir / "security_master").write_market(
+        "CN", [SecurityRecord(
+            canonical_name="Acme", market="CN", exchange="SSE", ticker="600001",
+            security_id="600001", aliases=(), active=True, source_name="fixture",
+            source_url=url, source_record_id="600001", identifiers={},
+        )], retrieved_at="2026-05-30T00:00:00Z", sources=(url,),
+    )
     request = {
         "schema_version": "cwp-incremental-discovery-request/1",
         "request_id": "cli-discovery-1",
-        "identity": {"entity": "Acme", "security_id": "600001",
-                     "identity_scope": None, "issuer_link_id": None},
+        "identity": {"entity_id": "issuer-acme", "listing_id": "listing-acme-cn",
+                     "market": "CN", "ticker": "600001", "exchange": "SSE"},
         "source_market": "CN",
         "document_kinds": ["annual_report"],
         "since_date": "2026-04-01", "as_of_date": "2026-05-31",
         "cursor": None,
-        "limits": {"max_candidates": 20, "max_pages": 8, "max_requests": 8,
-                   "max_seconds": 120},
+        "limits": {"max_bytes": 8 * 1024 * 1024, "timeout_seconds": 45,
+                   "max_cost_usd": "0.00", "max_requests": 6},
     }
-    process = _invoke("discover-incremental", state, request)
+    process = _invoke("discover-incremental", state, request, ("--request-stdin",))
     assert process.returncode == 0, process.stderr
     receipt = json.loads(process.stdout)
     assert receipt["schema_version"] == "cwp-incremental-discovery/1"
+    assert receipt["scope"]["identity"] == request["identity"]
     assert receipt["coverage"] == "complete"
     assert receipt["next_cursor"] is None
     ids = [c["provider_document_id"] for c in receipt["candidates"]]
@@ -90,10 +101,11 @@ def test_discovery_via_the_public_cli_returns_the_wire_receipt(sr_cwp_readable_c
     # The registered original carries its exact reuse ref; the revised
     # accession stays missing locally.
     registered, revised = receipt["candidates"]
-    assert registered["existing_source_ref"]["content_sha256"] == (
+    assert registered["source_ref"]["content_sha256"] == (
         state.refs["annual-report.pdf"].content_sha256
     )
-    assert revised["existing_source_ref"] is None
+    assert registered["revision_id"] == registered["source_ref"]["content_sha256"]
+    assert revised["source_ref"] is None and "revision_id" not in revised
     assert "https://provider.invalid" not in json.dumps(receipt)
     assert "usage" in receipt and "candidates" in receipt["usage"]
 
@@ -137,6 +149,36 @@ def test_read_entry_second_call_reuses_and_reports_it(sr_cwp_readable_catalog):
     second_item, = json.loads(second.stdout)["items"]
     assert second_item["reused"] is True
     assert second_item["result_ref"] == first_item["result_ref"]
+
+
+def test_scheduler_reads_back_the_frozen_run_and_product(sr_cwp_readable_catalog):
+    state = sr_cwp_readable_catalog
+    ref = state.refs["call-transcript.txt"]
+    request = {
+        "schema_version": "cwp-incremental-read-request/1",
+        "run_id": "scheduled-local-1", "reading_level": "local",
+        "sources": [ref.to_dict()], "limits": {"timeout_seconds": 45},
+    }
+    first = _invoke("read-incremental", state, request, ["--request-stdin"])
+    assert first.returncode == 0, first.stderr
+    item, = json.loads(first.stdout)["items"]
+    status = _invoke("read-incremental-status", state, {
+        "schema_version": "cwp-incremental-read-status-request/1",
+        "run_id": request["run_id"],
+    })
+    assert status.returncode == 0, status.stderr
+    recovered = json.loads(status.stdout)
+    assert recovered["run_id"] == request["run_id"]
+    assert recovered["usage"]["model_requests"] == 0
+    assert recovered["items"][0]["result_ref"] == item["result_ref"]
+    result = _invoke("read-incremental-result", state, {
+        "schema_version": "cwp-incremental-read-result-request/1",
+        "result_ref": item["result_ref"],
+    })
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout)["evidence_spans"]
+    request["sources"] = [state.refs["annual-report.pdf"].to_dict()]
+    assert _invoke("read-incremental", state, request).returncode != 0
 
 
 def test_summary_level_generates_through_the_configured_batch_and_reuses(
@@ -184,6 +226,8 @@ def test_summary_level_generates_through_the_configured_batch_and_reuses(
     assert first_item["result_ref"]["artifact_role"] == "narrative_bundle"
     assert first_item["reused"] is False
     assert len(loopback_model_server.requests) == 1
+    assert first_receipt["usage"]["model_requests"] == 1
+    assert first_receipt["usage"]["tokens"] > 0
 
     second = _invoke(
         "read-incremental", state, request,
@@ -199,6 +243,28 @@ def test_summary_level_generates_through_the_configured_batch_and_reuses(
     assert second_item["reused"] is True
     assert second_item["result_ref"] == first_item["result_ref"]
     # The second read is bundle-first: no additional model request.
+    assert len(loopback_model_server.requests) == 1
+    status = _invoke("read-incremental-status", state, {
+        "schema_version": "cwp-incremental-read-status-request/1",
+        "run_id": request["run_id"],
+    })
+    assert status.returncode == 0, status.stderr
+    recovered = json.loads(status.stdout)
+    assert recovered["items"][0]["result_ref"] == first_item["result_ref"]
+    assert recovered["usage"]["model_requests"] == 1
+    assert recovered["usage"]["tokens"] == first_receipt["usage"]["tokens"]
+    # Cached work needs no model configuration. Losing the original accounting
+    # database must keep the recorded usage and mark reconciliation unknown.
+    batch_config.unlink()
+    llm_config.unlink()
+    automation_db.rename(automation_db.with_suffix(".unavailable"))
+    third = _invoke("read-incremental", state, request,
+                    extra_args=["--automation-db", str(automation_db)])
+    assert third.returncode == 0, third.stderr
+    cached = json.loads(third.stdout)
+    assert cached["items"][0]["result_ref"] == first_item["result_ref"]
+    assert cached["usage"]["cost_state"] == "unknown"
+    assert cached["usage"]["tokens"] == first_receipt["usage"]["tokens"]
     assert len(loopback_model_server.requests) == 1
     assert KEY not in first.stdout + first.stderr + second.stdout + second.stderr
 

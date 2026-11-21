@@ -46,6 +46,19 @@ def _budget(payload: dict[str, Any]) -> AcquisitionBudget:
         max_seconds=value["timeout_seconds"], max_cost_usd=value["max_cost_usd"])
 
 
+def _discovery_receipt(values, request: SourceRequest, since_date: str | None, reasons) -> dict:
+    """Acquisition keeps its legacy DTO; enumeration also reports coverage."""
+    receipt = {"candidates": values}
+    if since_date is not None:
+        receipt.update({
+            "coverage": "partial" if reasons else "complete",
+            "covered_from": since_date,
+            "covered_to": request.as_of_date,
+            "reason_codes": list(dict.fromkeys(reasons)),
+        })
+    return receipt
+
+
 def _candidate(payload: dict[str, Any], market: str) -> tuple[DownloadCandidate, dict[str, Any]]:
     candidate = DownloadCandidate(**{
         field.name: payload[field.name] for field in fields(DownloadCandidate) if field.name in payload
@@ -146,8 +159,13 @@ async def _sec_operation(action, payload, budget, scratch, provider_state, stagi
         if action == "discover":
             request = SourceRequest(**{field.name: payload[field.name]
                 for field in fields(SourceRequest) if field.name in payload})
-            values = await discover_sec(request, downloader, collect=collect_filings_from_table)
-            return {"candidates": values}
+            since_date = payload.get("discovery_since_date")
+            reasons: list[str] = []
+            values = await discover_sec(
+                request, downloader, collect=collect_filings_from_table,
+                since_date=since_date, enumeration_reasons=reasons if since_date is not None else None,
+            )
+            return _discovery_receipt(values, request, since_date, reasons)
         candidate, raw = _candidate(payload, "US")
         body = await downloader.fetch_file_bytes(candidate.source_url)
         budget.ensure_open()
@@ -170,7 +188,11 @@ def _hk_operation(action, payload, budget, scratch, staging, identity, checkpoin
         if action == "discover":
             request = SourceRequest(**{field.name: payload[field.name]
                 for field in fields(SourceRequest) if field.name in payload})
-            return {"candidates": discover_hk(request, downloader, query_type=CnReportQuery)}
+            since_date = payload.get("discovery_since_date")
+            values = discover_hk(request, downloader, query_type=CnReportQuery, since_date=since_date)
+            return _discovery_receipt(
+                values, request, since_date, ("provider_filters_regulatory_revisions",),
+            )
         candidate, raw = _candidate(payload, "HK")
         sdk_candidate = CnReportCandidate(**raw["sdk_report_candidate"])
         if (sdk_candidate.source_url != candidate.source_url

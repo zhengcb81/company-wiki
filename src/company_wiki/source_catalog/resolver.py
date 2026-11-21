@@ -15,6 +15,7 @@ import re
 import sqlite3
 import stat
 from typing import Any, TYPE_CHECKING
+from urllib.parse import urlsplit
 
 from company_wiki.source_contract import SourceRefError
 from company_wiki.source_contract.source_version import (
@@ -1305,6 +1306,39 @@ def _provider_identity(
     return provider, preferred, identities
 
 
+def _https_original_key(value: object) -> tuple[str, str, str] | None:
+    """Keep the full asset path and query, including any edition suffix."""
+    if not isinstance(value, str):
+        return None
+    try:
+        parts = urlsplit(value)
+        if (parts.scheme != "https" or parts.hostname is None or parts.port not in {None, 443}
+                or parts.username is not None or parts.password is not None
+                or parts.path in {"", "/"}):
+            return None
+    except ValueError:
+        return None
+    return parts.hostname, parts.path, parts.query
+
+
+def compare_provider_original(metadata: dict[str, Any], request: SourceRequest, verified_url: str) -> str:
+    """Compare a local original locator with the adapter's exact accession URL."""
+    local_key = _https_original_key(metadata.get("source_url") or metadata.get("https_url"))
+    remote_key = _https_original_key(verified_url)
+    if local_key is None or remote_key is None or local_key[0] != remote_key[0]:
+        return "unproved"
+    if local_key == remote_key:
+        return "same"
+    provider, _, identities = _provider_identity(metadata)
+    conflicted = set(metadata.get("_conflicted_fields", ()))
+    if (not request.provider or not request.provider_document_id
+            or (provider is not None and provider != request.provider)
+            or request.provider_document_id in identities
+            or conflicted.intersection({"source_url", "provider", "provider_document_id", "accession_number"})):
+        return "unproved"
+    return "different"
+
+
 def _has_source_entity_authority(metadata: dict[str, Any]) -> bool:
     """Known source identity or its explicit unknown supersedes directory hints."""
     evidence = metadata.get("evidence")
@@ -1597,20 +1631,31 @@ class SourceResolver:
 
     def resolve_for_acquisition(
         self, request: SourceRequest, *, reconcile_scope: bool = False,
+        observed_original_url: str | None = None,
     ) -> tuple[ResolutionResult, FilingReuseObservation | None]:
-        """Select with strict source-owner verification in the same request."""
+        """Select with strict verification and optional current provider evidence.
+
+        Only acquisition's validated provider candidate supplies its exact
+        original URL. Historical records that predate accession sidecars can
+        reuse those bytes when the full official link and source scope agree.
+        """
         observations: dict[str, FilingReuseObservation] = {}
-        result = self._resolve(request, observations=observations, reconcile_scope=reconcile_scope)
+        result = self._resolve(
+            request, observations=observations, reconcile_scope=reconcile_scope,
+            observed_original_url=observed_original_url,
+        )
         if result.status in {ResolutionStatus.REUSED_EXACT, ResolutionStatus.REUSED_EQUIVALENT}:
             return result, observations[result.matches[0].document_id]
         return result, None
 
     def _resolve(
         self, request: SourceRequest, *, observations: dict[str, FilingReuseObservation] | None = None,
-        reconcile_scope: bool = False,
+        reconcile_scope: bool = False, observed_original_url: str | None = None,
     ) -> ResolutionResult:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
+        original_key = (_https_original_key(observed_original_url)
+                        if request.provider and request.provider_document_id else None)
         semantic: list[SourceHandle] = []
         exact: list[SourceHandle] = []
         future_matches = 0
@@ -1698,33 +1743,55 @@ class SourceResolver:
             if market_match == "incomplete":
                 trace.append(f"{document['title']}: identity_fields_incomplete")
                 continue
-            year = _fiscal_year(document, metadata)
-            if request.fiscal_year is not None and year != request.fiscal_year:
-                trace.append(f"{document['title']}: fiscal_year_mismatch")
-                continue
-            form_type = str(metadata.get("form_type") or "").strip() or None
-            if request.form_type and form_type != request.form_type:
-                trace.append(f"{document['title']}: form_type_mismatch")
-                continue
-            fiscal_period = str(metadata.get("fiscal_period") or "").strip() or None
-            if request.fiscal_period and fiscal_period != request.fiscal_period:
-                trace.append(f"{document['title']}: fiscal_period_mismatch")
-                continue
-            language = str(metadata.get("language") or "").strip() or None
-            if request.language and language != request.language:
-                trace.append(f"{document['title']}: language_mismatch")
-                continue
             provider, provider_document_id, identities = _provider_identity(metadata)
             if request.provider and provider and provider != request.provider:
                 trace.append(f"{document['title']}: provider_mismatch")
                 continue
-            strong_identity = bool(
+            disputed = set(metadata.get("_conflicted_fields", ()))
+            url_identity = (
+                original_key is not None
+                and _https_original_key(metadata.get("source_url") or metadata.get("https_url")) == original_key
+                and not disputed.intersection({"source_url", "provider", "provider_document_id", "accession_number",
+                                               "fiscal_year", "fiscal_period", "form_type", "language"})
+                and not any(metadata.get(field) and metadata[field] != request.provider_document_id
+                            for field in ("provider_document_id", "accession_number"))
+            )
+            strong_identity = url_identity or bool(
                 request.provider_document_id
                 and request.provider_document_id in identities
                 and (not request.provider or provider == request.provider)
             )
             if request.provider_document_id and not strong_identity:
                 trace.append(f"{document['title']}: provider_document_id_not_strong")
+                continue
+            year = _fiscal_year(document, metadata)
+            form_type = str(metadata.get("form_type") or "").strip() or None
+            fiscal_period = str(metadata.get("fiscal_period") or "").strip() or None
+            language = str(metadata.get("language") or "").strip() or None
+            if url_identity:
+                # A missing field in an old sidecar does not invalidate a
+                # confirmed asset. Explicit contradictory facts still do.
+                provider, provider_document_id = request.provider, request.provider_document_id
+                if metadata.get("fiscal_year") is None and request.fiscal_year is not None:
+                    year = request.fiscal_year
+                form_type = form_type or request.form_type
+                fiscal_period = fiscal_period or request.fiscal_period
+                language = language or request.language
+            if request.fiscal_year is not None and year != request.fiscal_year:
+                trace.append(f"{document['title']}: fiscal_year_mismatch")
+                continue
+            if request.form_type and form_type != request.form_type:
+                trace.append(f"{document['title']}: form_type_mismatch")
+                continue
+            if request.fiscal_period and fiscal_period != request.fiscal_period:
+                trace.append(f"{document['title']}: fiscal_period_mismatch")
+                continue
+            language_matches = language == request.language or (
+                url_identity and language is not None and request.language is not None
+                and language.partition("-")[0] == request.language.partition("-")[0]
+            )
+            if request.language and not language_matches:
+                trace.append(f"{document['title']}: language_mismatch")
                 continue
             qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date)
             if qualification.publication_status == "after_as_of":

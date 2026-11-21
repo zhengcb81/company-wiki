@@ -14,15 +14,22 @@ from __future__ import annotations
 
 from dataclasses import dataclass, replace
 from datetime import date
+from decimal import Decimal, InvalidOperation
 import hashlib
 import json
+import math
 import re
 import time
 from typing import Any
 
-from .acquisition import AcquisitionCoordinator, DiscoveryPage, DownloadCandidate
-from .download_budget import AcquisitionBudget
-from .resolver import ResolutionStatus, SourceRequest, SourceResolver
+from company_wiki.source_contract.source_version import SourceReadError
+
+from .acquisition import AcquisitionCoordinator, AcquisitionError, DiscoveryPage, DownloadCandidate
+from .adapter_process import AdapterProcessError
+from .document_kinds import PERIODIC_DOCUMENT_KINDS
+from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
+from .resolver import SourceRequest, SourceResolver
+from .security_code import security_codes_equivalent
 from .service import SourceCatalog
 
 
@@ -42,6 +49,7 @@ _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 _ISSUER_LINK_ID_RE = re.compile(r"issuer-link-v1:[0-9a-f]{64}")
 _MAX_KINDS = 16
 _MAX_CURSOR_CHARS = 4096
+_PERIODS = frozenset({"FY", "H1", "H2", "Q1", "Q2", "Q3", "Q4"})
 
 
 class IncrementalDiscoveryError(ValueError):
@@ -93,9 +101,16 @@ class DiscoveryIdentity:
     security_id: str | None = None
     identity_scope: str | None = None
     issuer_link_id: str | None = None
+    entity_id: str | None = None
+    listing_id: str | None = None
+    market: str | None = None
+    ticker: str | None = None
+    exchange: str | None = None
 
     @classmethod
     def from_dict(cls, value: Any) -> "DiscoveryIdentity":
+        if isinstance(value, dict) and "entity_id" in value:
+            return cls._from_listing(value)
         item = _exact(
             value,
             {"entity", "security_id", "identity_scope", "issuer_link_id"},
@@ -129,13 +144,72 @@ class DiscoveryIdentity:
             raise IncrementalDiscoveryError("identity.issuer_link_id is malformed")
         return identity
 
+    @classmethod
+    def _from_listing(cls, value: dict[str, Any]) -> "DiscoveryIdentity":
+        required = {"entity_id", "listing_id", "market", "ticker"}
+        if not required.issubset(value) or set(value) - (required | {"exchange", "issuer_link_id"}):
+            raise IncrementalDiscoveryError("identity has unsupported or missing listing fields")
+        market = _text(value["market"], "identity.market")
+        if market not in _MARKETS:
+            raise IncrementalDiscoveryError("identity.market must be CN, HK or US")
+        ticker = _text(value["ticker"], "identity.ticker")
+        link = _optional_text(value.get("issuer_link_id"), "identity.issuer_link_id")
+        if link is not None and _ISSUER_LINK_ID_RE.fullmatch(link) is None:
+            raise IncrementalDiscoveryError("identity.issuer_link_id is malformed")
+        return cls(
+            # The ticker is only a lookup input. The CWP owner supplies the
+            # canonical entity and security ID before any provider action.
+            entity=ticker,
+            issuer_link_id=link,
+            entity_id=_text(value["entity_id"], "identity.entity_id"),
+            listing_id=_text(value["listing_id"], "identity.listing_id"),
+            market=market,
+            ticker=ticker,
+            exchange=_optional_text(value.get("exchange"), "identity.exchange"),
+        )
+
     def to_dict(self) -> dict[str, Any]:
+        if self.entity_id is not None:
+            return {
+                "entity_id": self.entity_id,
+                "listing_id": self.listing_id,
+                "market": self.market,
+                "ticker": self.ticker,
+                **({"exchange": self.exchange} if self.exchange else {}),
+            }
         return {
             "entity": self.entity,
             "security_id": self.security_id,
             "identity_scope": self.identity_scope,
             "issuer_link_id": self.issuer_link_id,
         }
+
+
+def bind_discovery_identity(
+    catalog: SourceCatalog, identity: DiscoveryIdentity, market: str,
+) -> DiscoveryIdentity:
+    """Bind the caller's correlation IDs to the owner's exact market ticker."""
+    if identity.entity_id is None:
+        return identity
+    if identity.market != market or identity.ticker is None:
+        raise IncrementalDiscoveryError("discovery_source_market_mismatch")
+    selected = catalog.identify_company(identity.ticker, market=market).resolved
+    if (selected is None or not selected.verified or not selected.active
+            or selected.match_basis != "ticker_exact" or selected.market != market
+            or not security_codes_equivalent(
+                identity.ticker, selected.security_id,
+                left_market=market, right_market=selected.market,
+            )):
+        raise IncrementalDiscoveryError("discovery_listing_unverified")
+    if identity.issuer_link_id is not None and identity.issuer_link_id != selected.issuer_link_id:
+        raise IncrementalDiscoveryError("discovery_issuer_link_mismatch")
+    return replace(
+        identity,
+        entity=selected.canonical_name,
+        security_id=selected.security_id,
+        identity_scope="listing" if selected.issuer_link_id is not None else None,
+        issuer_link_id=selected.issuer_link_id,
+    )
 
 
 @dataclass(frozen=True)
@@ -146,6 +220,8 @@ class DiscoveryLimits:
     max_pages: int = 8
     max_requests: int = 8
     max_seconds: float = 120.0
+    max_bytes: int = 16 * 1024 * 1024
+    max_cost_usd: str = "0"
 
     @classmethod
     def from_dict(cls, value: Any) -> "DiscoveryLimits":
@@ -153,16 +229,23 @@ class DiscoveryLimits:
             return cls()
         if not isinstance(value, dict):
             raise IncrementalDiscoveryError("limits must be an object")
-        allowed = {"max_candidates", "max_pages", "max_requests", "max_seconds"}
+        allowed = {
+            "max_candidates", "max_pages", "max_requests", "max_seconds",
+            "max_bytes", "timeout_seconds", "max_cost_usd",
+        }
         if set(value) - allowed:
             raise IncrementalDiscoveryError("limits has unsupported fields")
-        seconds = value.get("max_seconds", cls.max_seconds)
-        if (
-            isinstance(seconds, bool)
-            or not isinstance(seconds, (int, float))
-            or seconds <= 0
-        ):
-            raise IncrementalDiscoveryError("limits.max_seconds must be positive")
+        time_limits = [value[key] for key in ("max_seconds", "timeout_seconds") if key in value]
+        if any(type(seconds) not in (int, float) or not math.isfinite(seconds) or seconds <= 0
+               for seconds in time_limits):
+            raise IncrementalDiscoveryError("discovery time limit must be finite and positive")
+        cost = _text(value.get("max_cost_usd", cls.max_cost_usd), "limits.max_cost_usd")
+        try:
+            amount = Decimal(cost)
+        except InvalidOperation:
+            raise IncrementalDiscoveryError("limits.max_cost_usd must be decimal text") from None
+        if not amount.is_finite() or amount < 0:
+            raise IncrementalDiscoveryError("limits.max_cost_usd must be finite and non-negative")
         return cls(
             max_candidates=_positive_int(
                 value.get("max_candidates", cls.max_candidates), "limits.max_candidates"
@@ -173,7 +256,9 @@ class DiscoveryLimits:
             max_requests=_positive_int(
                 value.get("max_requests", cls.max_requests), "limits.max_requests"
             ),
-            max_seconds=float(seconds),
+            max_seconds=float(min(time_limits, default=cls.max_seconds)),
+            max_bytes=_positive_int(value.get("max_bytes", cls.max_bytes), "limits.max_bytes"),
+            max_cost_usd=cost,
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -182,6 +267,8 @@ class DiscoveryLimits:
             "max_pages": self.max_pages,
             "max_requests": self.max_requests,
             "max_seconds": self.max_seconds,
+            "max_bytes": self.max_bytes,
+            "max_cost_usd": self.max_cost_usd,
         }
 
 
@@ -285,6 +372,11 @@ class DiscoveryCandidate:
     existing_source_ref: dict[str, Any] | None
 
     def to_dict(self) -> dict[str, Any]:
+        period = None
+        if self.fiscal_year is not None and self.fiscal_period is not None:
+            period = {"fiscal_year": self.fiscal_year, "name": self.fiscal_period}
+            if self.fiscal_period in {"Q1", "Q2", "Q3", "Q4"}:
+                period["fiscal_quarter"] = int(self.fiscal_period[1:])
         return {
             "candidate_key": self.candidate_key,
             "provider": self.provider,
@@ -293,11 +385,14 @@ class DiscoveryCandidate:
             "document_kind": self.document_kind,
             "published_at": self.published_at,
             "fiscal_year": self.fiscal_year,
-            "fiscal_period": self.fiscal_period,
+            "fiscal_period": period,
             "amended": self.amended,
             "listing": self.listing,
             "title": self.title,
+            "source_ref": self.existing_source_ref,
             "existing_source_ref": self.existing_source_ref,
+            **({"revision_id": self.existing_source_ref["content_sha256"]}
+               if self.existing_source_ref is not None else {}),
         }
 
 
@@ -338,6 +433,7 @@ def _candidate_key(candidate: DownloadCandidate) -> str:
             "provider_document_id": candidate.provider_document_id,
             "market": candidate.market,
             "document_kind": candidate.document_kind,
+            "filing_date": candidate.filing_date,
             "fiscal_year": candidate.fiscal_year,
             "fiscal_period": candidate.fiscal_period,
             "form_type": candidate.form_type,
@@ -350,24 +446,35 @@ def _candidate_key(candidate: DownloadCandidate) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
-def _encode_cursor(kind_index: int, page_cursor: str | None) -> str:
+@dataclass(frozen=True)
+class _ResumePoint:
+    kind_index: int
+    page_cursor: str | None
+    offset: int = 0
+    page_sha256: str | None = None
+
+
+def _encode_cursor(point: _ResumePoint) -> str:
     return json.dumps(
-        {"kind_index": kind_index, "page_cursor": page_cursor},
+        {"kind_index": point.kind_index, "page_cursor": point.page_cursor,
+         "offset": point.offset, "page_sha256": point.page_sha256},
         sort_keys=True,
         ensure_ascii=False,
         separators=(",", ":"),
     )
 
 
-def _decode_cursor(cursor: str | None) -> tuple[int, str | None]:
+def _decode_cursor(cursor: str | None) -> _ResumePoint:
     """Read the resume point.  An unreadable cursor is a refusal, not a guess."""
     if cursor is None:
-        return 0, None
+        return _ResumePoint(0, None)
     try:
         payload = json.loads(cursor)
     except json.JSONDecodeError:
         raise IncrementalDiscoveryError("cursor is not a discovery cursor") from None
-    if not isinstance(payload, dict) or set(payload) != {"kind_index", "page_cursor"}:
+    if not isinstance(payload, dict) or set(payload) not in (
+        {"kind_index", "page_cursor"}, {"kind_index", "page_cursor", "offset", "page_sha256"},
+    ):
         raise IncrementalDiscoveryError("cursor is not a discovery cursor")
     kind_index = payload["kind_index"]
     if isinstance(kind_index, bool) or not isinstance(kind_index, int) or kind_index < 0:
@@ -377,7 +484,15 @@ def _decode_cursor(cursor: str | None) -> tuple[int, str | None]:
         not isinstance(page_cursor, str) or not page_cursor.strip()
     ):
         raise IncrementalDiscoveryError("cursor page_cursor is invalid")
-    return kind_index, page_cursor
+    offset = payload.get("offset", 0)
+    page_sha256 = payload.get("page_sha256")
+    if type(offset) is not int or offset < 0 or bool(offset) != (page_sha256 is not None):
+        raise IncrementalDiscoveryError("cursor page offset is invalid")
+    if page_sha256 is not None and (
+        not isinstance(page_sha256, str) or _SHA256_RE.fullmatch(page_sha256) is None
+    ):
+        raise IncrementalDiscoveryError("cursor page identity is invalid")
+    return _ResumePoint(kind_index, page_cursor, offset, page_sha256)
 
 
 class IncrementalDiscoveryService:
@@ -401,81 +516,98 @@ class IncrementalDiscoveryService:
         if not isinstance(request, IncrementalDiscoveryRequest):
             raise TypeError("request must be IncrementalDiscoveryRequest")
         started = time.monotonic()
-        kind_index, page_cursor = _decode_cursor(request.cursor)
+        deadline = started + request.limits.max_seconds
+        initial_point = _decode_cursor(request.cursor)
         kinds = request.document_kinds
-        if kind_index > len(kinds):
+        if initial_point.kind_index >= len(kinds):
             raise IncrementalDiscoveryError("cursor points past the requested kinds")
+        point: _ResumePoint | None = initial_point
+        identity = bind_discovery_identity(self._catalog, request.identity, request.source_market)
+        resolver = SourceResolver(self._catalog)
         reason_codes: list[str] = []
         candidates: dict[str, DiscoveryCandidate] = {}
         pages = 0
         requests_made = 0
         unproved_dates = 0
         coverage = COVERAGE_COMPLETE
-        next_cursor: str | None = None
-        local = self._local_sources(request)
-        for index in range(kind_index, len(kinds)):
-            kind = kinds[index]
-            cursor = page_cursor if index == kind_index else None
-            while True:
-                if requests_made >= request.limits.max_requests:
-                    coverage = COVERAGE_PARTIAL
-                    reason_codes.append("discovery_request_limit_reached")
-                    next_cursor = _encode_cursor(index, cursor)
-                    break
-                if pages >= request.limits.max_pages:
-                    coverage = COVERAGE_PARTIAL
-                    reason_codes.append("discovery_page_limit_reached")
-                    next_cursor = _encode_cursor(index, cursor)
-                    break
-                if time.monotonic() - started >= request.limits.max_seconds:
-                    coverage = COVERAGE_PARTIAL
-                    reason_codes.append("discovery_time_limit_reached")
-                    next_cursor = _encode_cursor(index, cursor)
-                    break
-                adapter_request = self._adapter_request(request, kind, cursor)
-                try:
-                    page = self._coordinator.discover_page(adapter_request, budget=budget)
-                except Exception as exc:
-                    coverage = COVERAGE_PARTIAL
-                    reason_codes.append(f"discovery_failed:{type(exc).__name__}")
-                    next_cursor = _encode_cursor(index, cursor)
-                    break
-                requests_made += 1
-                pages += 1
-                unproved = sum(
-                    1 for candidate in page.candidates
-                    if candidate.filing_date is None
+        visited: set[tuple[int, str | None]] = set()
+        while point is not None:
+            if requests_made >= request.limits.max_requests:
+                reason_codes.append("discovery_request_limit_reached")
+                break
+            if pages >= request.limits.max_pages:
+                reason_codes.append("discovery_page_limit_reached")
+                break
+            if time.monotonic() >= deadline:
+                reason_codes.append("discovery_time_limit_reached")
+                break
+            if budget is not None and budget.remaining_transport_bytes == 0:
+                reason_codes.append("discovery_byte_limit_reached")
+                break
+            index, cursor = point.kind_index, point.page_cursor
+            next_kind = _ResumePoint(index + 1, None) if index + 1 < len(kinds) else None
+            if (index, cursor) in visited:
+                coverage = COVERAGE_PARTIAL
+                reason_codes.append("provider_discovery_cursor_repeated")
+                point = next_kind
+                continue
+            visited.add((index, cursor))
+            adapter_request = self._adapter_request(request, identity, kinds[index], cursor)
+            requests_made += 1
+            try:
+                page = self._coordinator.discover_page(
+                    adapter_request, budget=budget, since_date=request.since_date,
                 )
-                if unproved:
-                    # An unproven publish date never advances a complete
-                    # watermark: the caller keeps the diagnostic and the
-                    # partial state (interfaces: 未证发布时间保留诊断).
-                    unproved_dates += unproved
-                    reason_codes.append("candidate_date_unproved")
-                    if page.coverage == COVERAGE_COMPLETE:
-                        page = replace(page, coverage=COVERAGE_PARTIAL)
-                coverage = self._merge_coverage(coverage, page, request, reason_codes)
-                for candidate in page.candidates:
-                    if not self._in_range(candidate, request):
-                        continue
-                    key = _candidate_key(candidate)
-                    if key in candidates:
-                        continue
-                    if len(candidates) >= request.limits.max_candidates:
-                        coverage = COVERAGE_PARTIAL
-                        reason_codes.append("discovery_candidate_limit_reached")
-                        next_cursor = _encode_cursor(index, page.next_cursor)
-                        break
-                    candidates[key] = self._candidate(candidate, request, local)
-                if len(candidates) >= request.limits.max_candidates:
-                    break
-                if page.next_cursor:
-                    cursor = page.next_cursor
+            except (AcquisitionError, AcquisitionBudgetExceeded, AdapterProcessError, OSError, ValueError) as exc:
+                coverage = COVERAGE_PARTIAL
+                code = getattr(exc, "error_code", None) or type(exc).__name__
+                reason_codes.append(f"discovery_failed:{code}")
+                # A provider capability gap for one kind cannot suppress its
+                # siblings. FF retains this window as incomplete for retry.
+                point = next_kind
+                continue
+            pages += 1
+            unproved = sum(candidate.filing_date is None for candidate in page.candidates)
+            if unproved:
+                unproved_dates += unproved
+                reason_codes.append("candidate_date_unproved")
+                coverage = COVERAGE_PARTIAL
+            coverage = self._merge_coverage(coverage, page, request, reason_codes)
+            page_hits = {
+                _candidate_key(candidate): candidate for candidate in page.candidates
+                if self._in_range(candidate, request)
+            }
+            keys = tuple(page_hits)
+            page_sha = hashlib.sha256("".join(keys).encode("ascii")).hexdigest()
+            if point.offset and (point.page_sha256 != page_sha or point.offset >= len(keys)):
+                coverage = COVERAGE_PARTIAL
+                reason_codes.append("provider_discovery_page_changed")
+                point = _ResumePoint(index, cursor)
+                break
+            stop_reason = None
+            for position in range(point.offset, len(keys)):
+                key = keys[position]
+                if key in candidates:
                     continue
+                if len(candidates) >= request.limits.max_candidates:
+                    stop_reason = "discovery_candidate_limit_reached"
+                elif time.monotonic() >= deadline:
+                    stop_reason = "discovery_time_limit_reached"
+                if stop_reason is not None:
+                    point = (_ResumePoint(index, cursor, position, page_sha)
+                             if position else _ResumePoint(index, cursor))
+                    break
+                candidate = page_hits[key]
+                candidates[key] = self._candidate(candidate, adapter_request, resolver)
+            else:
+                point = _ResumePoint(index, page.next_cursor) if page.next_cursor else next_kind
+            if stop_reason is not None:
+                reason_codes.append(stop_reason)
                 break
-            if next_cursor is not None:
+            if point is not None and len(candidates) >= request.limits.max_candidates:
+                reason_codes.append("discovery_candidate_limit_reached")
                 break
-        if not requests_made and not candidates:
+        if pages == 0:
             coverage = COVERAGE_UNAVAILABLE
         usage = {
             "requests": requests_made,
@@ -484,8 +616,10 @@ class IncrementalDiscoveryService:
             "unproved_dates": unproved_dates,
             "seconds": round(time.monotonic() - started, 6),
         }
-        if budget is not None:
+        if budget is not None and budget.usage_reported:
             usage["response_bytes"] = budget.response_bytes_used
+            if budget.http_exchanges_complete is True:
+                usage["http_requests"] = budget.http_exchanges_used
         return IncrementalDiscoveryResponse(
             request_id=request.request_id,
             scope={
@@ -496,7 +630,7 @@ class IncrementalDiscoveryService:
                 "as_of_date": request.as_of_date,
             },
             coverage=coverage,
-            next_cursor=next_cursor,
+            next_cursor=_encode_cursor(point) if point is not None else None,
             candidates=tuple(candidates.values()),
             usage=usage,
             reason_codes=tuple(dict.fromkeys(reason_codes)),
@@ -541,10 +675,10 @@ class IncrementalDiscoveryService:
 
     @staticmethod
     def _adapter_request(
-        request: IncrementalDiscoveryRequest, document_kind: str, cursor: str | None,
+        request: IncrementalDiscoveryRequest, identity: DiscoveryIdentity,
+        document_kind: str, cursor: str | None,
     ) -> SourceRequest:
-        """Reuse the existing request contract; the cursor rides in provider scope."""
-        identity = request.identity
+        """Use a bounded as-of search, without asking the provider for bytes."""
         return SourceRequest(
             entity=identity.entity,
             document_kind=document_kind,
@@ -554,6 +688,7 @@ class IncrementalDiscoveryService:
             identity_scope=identity.identity_scope,
             issuer_link_id=identity.issuer_link_id,
             cursor=cursor,
+            mode="latest_as_of",
             schema_version=(
                 "1.1"
                 if identity.identity_scope is not None or identity.issuer_link_id is not None
@@ -561,60 +696,28 @@ class IncrementalDiscoveryService:
             ),
         )
 
-    def _local_sources(
-        self, request: IncrementalDiscoveryRequest,
-    ) -> dict[tuple[str, str], dict[str, Any]]:
-        """Index the already-registered originals for this identity and kind."""
-        indexed: dict[tuple[str, str], dict[str, Any]] = {}
-        resolver = SourceResolver(self._catalog)
-        for kind in request.document_kinds:
-            source_request = SourceRequest(
-                entity=request.identity.entity,
-                document_kind=kind,
-                as_of_date=request.as_of_date,
-                market=request.source_market,
-                security_id=request.identity.security_id,
-                identity_scope=request.identity.identity_scope,
-                issuer_link_id=request.identity.issuer_link_id,
-                schema_version=(
-                    "1.1"
-                    if request.identity.identity_scope is not None
-                    or request.identity.issuer_link_id is not None
-                    else "1.0"
-                ),
-            )
-            try:
-                resolution = resolver.resolve_for_acquisition(source_request)[0]
-            except Exception:
-                continue
-            if resolution.status not in {
-                ResolutionStatus.REUSED_EXACT,
-                ResolutionStatus.REUSED_EQUIVALENT,
-                ResolutionStatus.AMBIGUOUS,
-                ResolutionStatus.MISSING,
-            }:
-                continue
-            for handle in resolution.matches:
-                if not handle.provider or not handle.provider_document_id:
-                    continue
-                indexed[(handle.provider, handle.provider_document_id)] = {
-                    "schema_version": "2.0",
-                    "document_id": handle.document_id,
-                    "source_id": handle.source_id,
-                    "content_sha256": handle.content_sha256,
-                    "byte_size": handle.byte_size,
-                    "mime_type": handle.mime_type,
-                }
-        return indexed
-
     @staticmethod
     def _candidate(
-        candidate: DownloadCandidate,
-        request: IncrementalDiscoveryRequest,
-        local: dict[tuple[str, str], dict[str, Any]],
+        candidate: DownloadCandidate, request: SourceRequest, resolver: SourceResolver,
     ) -> DiscoveryCandidate:
-        listing = candidate.security_id or request.identity.security_id
-        existing = local.get((candidate.provider, candidate.provider_document_id))
+        period = candidate.fiscal_period
+        periodic = candidate.document_kind in PERIODIC_DOCUMENT_KINDS.union({"earnings_transcript"})
+        year = candidate.fiscal_year if periodic and period in _PERIODS else None
+        ref = None
+        exact = replace(
+            request, mode=None, cursor=None, provider=candidate.provider,
+            provider_document_id=candidate.provider_document_id,
+            fiscal_year=year, fiscal_period=period if year is not None else None,
+            form_type=candidate.form_type,
+        )
+        try:
+            resolution, verified = resolver.resolve_for_acquisition(
+                exact, observed_original_url=candidate.source_url,
+            )
+        except SourceReadError:
+            verified = None
+        if verified is not None and resolution.matches[0].published_date == candidate.filing_date:
+            ref = verified.source_ref.to_dict()
         return DiscoveryCandidate(
             candidate_key=_candidate_key(candidate),
             provider=candidate.provider,
@@ -622,12 +725,12 @@ class IncrementalDiscoveryService:
             source_market=candidate.market,
             document_kind=candidate.document_kind,
             published_at=candidate.filing_date,
-            fiscal_year=candidate.fiscal_year,
-            fiscal_period=candidate.fiscal_period,
+            fiscal_year=year,
+            fiscal_period=period if year is not None else None,
             amended=candidate.amended,
-            listing=listing,
+            listing=candidate.security_id or request.security_id,
             title=candidate.title,
-            existing_source_ref=existing,
+            existing_source_ref=ref,
         )
 
 
@@ -640,6 +743,7 @@ __all__ = [
     "DiscoveryCandidate",
     "DiscoveryIdentity",
     "DiscoveryLimits",
+    "bind_discovery_identity",
     "IncrementalDiscoveryError",
     "IncrementalDiscoveryRequest",
     "IncrementalDiscoveryResponse",

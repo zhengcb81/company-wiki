@@ -66,7 +66,7 @@ class FixtureDiscoveryAdapter:
     def discover_bounded(self, request, budget):
         return self.discover_page(request).candidates
 
-    def discover_page(self, request) -> DiscoveryPage:
+    def discover_page(self, request, *, since_date=None) -> DiscoveryPage:
         self.requests.append(request.to_dict())
         cursor = getattr(request, "cursor", None)
         index = 0 if cursor is None else int(cursor)
@@ -82,8 +82,8 @@ class FixtureDiscoveryAdapter:
             covered_to=page.covered_to,
         )
 
-    def discover_page_bounded(self, request, budget) -> DiscoveryPage:
-        return self.discover_page(request)
+    def discover_page_bounded(self, request, budget, *, since_date=None) -> DiscoveryPage:
+        return self.discover_page(request, since_date=since_date)
 
     def fetch(self, candidate, staging_dir):  # pragma: no cover - never called here
         raise AssertionError("discovery must not fetch original bytes")
@@ -140,7 +140,7 @@ REGISTERED_IR = (
 def build_catalog(root: Path, *, documents=(
     ("annual-report.txt", REGISTERED_ANNUAL, "annual_report", "FY", None),
     ("ir-announcement.txt", REGISTERED_IR, "investor_relations", None, None),
-)):
+), sidecar_overrides=None):
     """Register real originals and return the catalog plus their exact refs."""
     company_root = root / "companies" / ENTITY / "raw"
     company_root.mkdir(parents=True, exist_ok=True)
@@ -157,6 +157,7 @@ def build_catalog(root: Path, *, documents=(
             "source_title": title or name, "retrieved_at": "2026-05-02T00:00:00Z",
             "collector_name": "sr_cwp_fixture", "collector_version": "1.0.0",
         }
+        sidecar.update((sidecar_overrides or {}).get(name, {}))
         (company_root / (name + ".source.json")).write_text(
             json.dumps(sidecar), encoding="utf-8"
         )

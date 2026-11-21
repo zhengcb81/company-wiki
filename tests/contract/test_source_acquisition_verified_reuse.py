@@ -125,6 +125,61 @@ def test_after_discovery_reuse_verifies_current_bytes_once_under_target_lock(tmp
         catalog.close()
 
 
+@pytest.mark.parametrize("edition,local_accession,changed,expected,fetches", [
+    ("12345", None, False, "reused", 0),
+    ("67890", None, False, "imported", 1),
+    (None, None, False, "missing", 0),
+    ("12345", "conflicting-accession", False, "missing", 0),
+    ("12345", None, True, "content_sha256_mismatch", 0),
+])
+def test_exact_accession_resolves_legacy_original_url_before_fetching(
+    tmp_path, edition, local_accession, changed, expected, fetches,
+):
+    from company_wiki.source_catalog import SecurityMasterStore, SecurityRecord
+
+    catalog = _catalog(tmp_path, with_source=False)
+    try:
+        folder = catalog.config.roots[0].path / "Acme"
+        folder.mkdir(parents=True)
+        original = folder / "2026-03-20_Acme_2025_annual_report.txt"
+        original.write_bytes(_MULTI_CHUNK_ORIGINAL)
+        sidecar = original.with_name(original.name + ".source.json")
+        source_url = f"https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0320/{edition}.pdf" if edition else None
+        sidecar.write_text(json.dumps({
+            "company_name": "Acme", "source_title": "Acme 2025 Annual Report", "document_kind": "annual_report",
+            "market": "HK", "security_id": "01234", "provider": "hkex", "source_url": source_url,
+            "provider_document_id": local_accession,
+            "form_type": "annual_report", "fiscal_year": 2025, "fiscal_period": "FY", "language": "en",
+            "filing_date": "2026-03-20",
+        }), encoding="utf-8")
+        catalog.scan()
+        master = SecurityMasterStore(catalog.config.catalog_dir / "security_master")
+        master.write_market("HK", (SecurityRecord(
+            "Acme", "HK", "HKEX", "01234", "01234", (), True, "hkex", "https://www.hkex.com.hk/",
+            "issuer-fixture", {},
+        ),), retrieved_at="2026-07-18T00:00:00Z", sources=("hkex",))
+        request = replace(_annual_request(market="HK"), mode="exact", security_id="01234",
+                          provider="hkex", provider_document_id="12345")
+        adapter = _FakeAdapter()
+        service = _ensure_service(catalog, tmp_path, adapter)
+        if changed:
+            original.write_bytes(b"X" + _MULTI_CHUNK_ORIGINAL[1:])
+            with pytest.raises(SourceReadError, match=expected):
+                service.ensure(request)
+            assert adapter.fetch_calls == 0
+            return
+        result = service.ensure(request)
+        assert result.status.value == expected, result.acquisition.to_dict()
+        assert adapter.discover_calls == 1 and adapter.fetch_calls == fetches
+        assert original.read_bytes() == _MULTI_CHUNK_ORIGINAL
+        if expected != "missing":
+            assert result.resolution.matches[0].provider_document_id == "12345"
+        if expected == "missing":
+            assert result.acquisition.local_preparation["blocks_download"]
+    finally:
+        catalog.close()
+
+
 def test_changed_mtime_during_candidate_read_cannot_become_successful_reuse(tmp_path, monkeypatch):
     catalog = _catalog(tmp_path, with_source=False)
     try:

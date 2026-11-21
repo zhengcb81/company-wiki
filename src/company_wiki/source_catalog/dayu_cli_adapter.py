@@ -276,21 +276,18 @@ class DayuCliDownloadAdapter:
             self.close()
         return candidates
 
-    def discover_page(self, request: SourceRequest) -> DiscoveryPage:
-        """Enumerate one metadata page over the CLI's declared window."""
-        candidates = self.discover(request)
-        # The CLI enumerates the fiscal year it was given, from January 1 to
-        # the request's as-of date.  The caller compares that window with the
-        # range it asked for; this adapter never claims more than it ran.
-        covered_from = f"{request.fiscal_year}-01-01" if request.fiscal_year else None
+    def discover_page(
+        self, request: SourceRequest, *, since_date: str | None = None,
+    ) -> DiscoveryPage:
+        """The legacy CLI only has a download operation, even for discovery."""
         return DiscoveryPage(
-            candidates=candidates,
-            coverage="partial" if covered_from is None else "complete",
-            covered_from=covered_from,
-            covered_to=request.as_of_date,
+            candidates=(), coverage="partial",
+            reason_codes=("provider_metadata_only_unavailable",),
         )
 
-    def discover_page_bounded(self, request: SourceRequest, budget) -> DiscoveryPage:
+    def discover_page_bounded(
+        self, request: SourceRequest, budget, *, since_date: str | None = None,
+    ) -> DiscoveryPage:
         raise DayuCliAdapterError("Dayu CLI adapter does not support bounded acquisition")
 
     def fetch(

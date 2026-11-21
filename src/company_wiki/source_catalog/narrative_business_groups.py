@@ -523,7 +523,7 @@ def _enrich_operating_context(units: Sequence[NarrativeUnit], *,
             omit("business_group_character_limit", members)
             continue  # Do not assemble/classify an unbounded original sentence.
         text = _classification_text(members)
-        fact = _operating_fact(text, rules)
+        fact = rules.operating_facts(text)
         if not fact.eligible:
             continue
         assessment = assess_unit(replace(members[0], raw_text=text), replace(rules,

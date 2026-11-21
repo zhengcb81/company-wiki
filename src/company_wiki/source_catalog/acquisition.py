@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, field, replace
 from datetime import date, datetime
 from enum import Enum
 import hashlib
@@ -277,17 +277,24 @@ class DownloadAdapter(Protocol):
 
     def discover(self, request: SourceRequest) -> tuple[DownloadCandidate, ...]: ...
 
-    def discover_page(self, request: SourceRequest) -> DiscoveryPage: ...
-
-    def discover_page_bounded(
-        self, request: SourceRequest, budget: AcquisitionBudget,
-    ) -> DiscoveryPage: ...
-
     def fetch(
         self,
         candidate: DownloadCandidate,
         staging_dir: Path,
     ) -> DownloadReceipt: ...
+
+
+@runtime_checkable
+class MetadataDiscoveryAdapter(Protocol):
+    """Optional metadata-only capability, independent of download adapters."""
+
+    def discover_page(
+        self, request: SourceRequest, *, since_date: str | None = None,
+    ) -> DiscoveryPage: ...
+
+    def discover_page_bounded(
+        self, request: SourceRequest, budget: AcquisitionBudget, *, since_date: str | None = None,
+    ) -> DiscoveryPage: ...
 
 
 def _validate_adapter(adapter: Any, name: str) -> DownloadAdapter:
@@ -332,6 +339,7 @@ class AcquisitionResult:
     gap_plan: GapPlan | None = None  # WU-4.2: metadata-only plan (status GAP)
     acquisition_failure: dict[str, Any] | None = None
     local_preparation: dict[str, Any] | None = None
+    _recheck_local_after_discovery: bool = field(default=False, repr=False, compare=False)
 
     def to_dict(self) -> dict[str, Any]:
         result = {
@@ -440,6 +448,7 @@ class AcquisitionCoordinator:
 
     def discover_page(
         self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
+        since_date: str | None = None,
     ) -> DiscoveryPage:
         """Enumerate one target's metadata without fetching any original bytes.
 
@@ -454,16 +463,21 @@ class AcquisitionCoordinator:
             raise TypeError("budget must be AcquisitionBudget")
         if request.market is None:
             raise MarketRoutingError("market is required before adapter discovery")
+        if since_date is not None and _date(since_date, "since_date") > request.as_of_date:
+            raise ValueError("since_date cannot be after the as-of date")
         adapter = self.adapters.for_market(request.market)
+        if not isinstance(adapter, MetadataDiscoveryAdapter):
+            return DiscoveryPage((), coverage="partial", reason_codes=("provider_metadata_only_unavailable",))
         adapter_request, identity_reason = self._provider_request_for_identity(request)
         if adapter_request is None:
             raise MarketRoutingError(identity_reason or "issuer_scope_has_no_target_listing")
         if budget is None:
-            page = adapter.discover_page(adapter_request)
+            page = adapter.discover_page(adapter_request, since_date=since_date)
         else:
-            self._require_bounded_adapter(adapter)
+            if not getattr(adapter, "supports_acquisition_budget", False):
+                return DiscoveryPage((), coverage="partial", reason_codes=("provider_metadata_budget_unavailable",))
             budget.ensure_open()
-            page = adapter.discover_page_bounded(adapter_request, budget)
+            page = adapter.discover_page_bounded(adapter_request, budget, since_date=since_date)
         self._validate_candidates(adapter_request, page.candidates, catalog=self.catalog)
         return page
 
@@ -504,14 +518,8 @@ class AcquisitionCoordinator:
             ))
         # Explicit intake may reconcile existing local declarations. A proven
         # local gap is not byte absence and must not trigger another fetch.
-        from .local_reconcile import prepare_local_source_operation
-        from .local_inventory import LocalPrepareLimits
-        limits = LocalPrepareLimits(timeout_seconds=min(30.0, budget.remaining_seconds)) if budget is not None else None
-        local = prepare_local_source_operation(
-            self.catalog, request, limits=limits, verified_reuse=verified,
-        )
-        if budget is not None:
-            budget.ensure_open()
+        local = self._prepare_local(request, budget=budget, verified_reuse=verified)
+        recheck_local = False
         if local["status"] == "ready":
             if verified is None or local["operations"] or local["source_ref"] != verified.source_ref.to_dict():
                 resolution, verified = SourceResolver(self.catalog).resolve_for_acquisition(request)
@@ -525,25 +533,19 @@ class AcquisitionCoordinator:
                     status=AcquisitionStatus.REUSED, resolution=resolution,
                     reason="existing_local_source_reconciled_before_adapter"), verified)
         elif local["blocks_download"]:
-            local_read_budgets = [
-                item for item in local.get("operations", ())
-                if isinstance(item, dict) and item.get("operation") == "local_read_budget"
-            ]
-            if len(local_read_budgets) > 1:
-                raise AcquisitionError("local preparation returned multiple owner budget observations")
-            local_preparation = {
-                "status": local["status"], "reason": local["reason"],
-                "blocks_download": True,
-                "causes": sorted({item["reason"] for item in local.get("diagnostics", ())}),
-            }
-            if local_read_budgets:
-                local_preparation["local_read_budget"] = local_read_budgets[0]
-            return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
-                status=AcquisitionStatus.AMBIGUOUS if local["status"] == "ambiguous" else AcquisitionStatus.MISSING,
-                resolution=resolution, reason=local["reason"], local_preparation=local_preparation))
+            # Only a pinned accession can qualify this incomplete local scope.
+            # This permits metadata lookup. Byte acquisition still requires
+            # deciding the local gap under the lock for the returned asset.
+            recheck_local = bool(request.allow_download and request.provider and request.provider_document_id
+                                 and local["reason"] == "local_metadata_gap")
+            if not recheck_local:
+                return self._blocked_local(local, resolution)
         if request.mode == "latest_as_of":
-            return self._gap_plan_result(request, resolution, budget=budget,
-                                         candidate_scope=candidate_scope)
+            decision = self._gap_plan_result(request, resolution, budget=budget,
+                                             candidate_scope=candidate_scope)
+            if recheck_local and decision.result.status is AcquisitionStatus.SELECTED:
+                return replace(decision, result=replace(decision.result, _recheck_local_after_discovery=True))
+            return decision
         if not request.allow_download:
             return _AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
@@ -589,7 +591,44 @@ class AcquisitionCoordinator:
             ))
         return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
             status=AcquisitionStatus.SELECTED, resolution=resolution,
-            adapter_name=adapter.name, candidate=candidates[0], reason="candidate_selected"))
+            adapter_name=adapter.name, candidate=candidates[0], reason="candidate_selected",
+            _recheck_local_after_discovery=recheck_local))
+
+    def _prepare_local(self, request: SourceRequest, *, budget: AcquisitionBudget | None,
+                       verified_reuse: FilingReuseObservation | None = None,
+                       verified_original_url: str | None = None) -> dict[str, Any]:
+        from .local_inventory import LocalPrepareLimits
+        from .local_reconcile import prepare_local_source_operation
+
+        limits = LocalPrepareLimits(timeout_seconds=min(30.0, budget.remaining_seconds)) if budget is not None else None
+        result = prepare_local_source_operation(
+            self.catalog, request, limits=limits, verified_reuse=verified_reuse,
+            verified_original_url=verified_original_url,
+        )
+        if budget is not None:
+            budget.ensure_open()
+        return result
+
+    @staticmethod
+    def _blocked_local(local: dict[str, Any], resolution: ResolutionResult,
+                       selection: AcquisitionResult | None = None) -> _AcquisitionDecision:
+        observation = {
+            "status": local["status"], "reason": local["reason"],
+            "blocks_download": True,
+            "causes": sorted({item["reason"] for item in local.get("diagnostics", ())}),
+        }
+        local_read_budgets = [item for item in local.get("operations", ())
+                              if isinstance(item, dict) and item.get("operation") == "local_read_budget"]
+        if len(local_read_budgets) > 1:
+            raise AcquisitionError("local preparation returned multiple owner budget observations")
+        if local_read_budgets:
+            observation["local_read_budget"] = local_read_budgets[0]
+        return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+            status=AcquisitionStatus.AMBIGUOUS if local["status"] == "ambiguous" else AcquisitionStatus.MISSING,
+            resolution=resolution, reason=local["reason"], local_preparation=observation,
+            candidate=selection.candidate if selection else None,
+            adapter_name=selection.adapter_name if selection else None,
+            gap_plan=selection.gap_plan if selection else None))
 
     def _provider_request_for_identity(
         self, request: SourceRequest,
@@ -679,7 +718,22 @@ class AcquisitionCoordinator:
             raise AcquisitionError("candidate publication exceeds as-of")
         adapter = self.adapters.for_market(candidate.market)
         discovered_request = self.target_request(request, candidate)
-        discovered_resolution, verified = SourceResolver(self.catalog).resolve_for_acquisition(discovered_request)
+        resolver = SourceResolver(self.catalog)
+        discovered_resolution, verified = resolver.resolve_for_acquisition(
+            discovered_request, observed_original_url=candidate.source_url,
+        )
+        if discovered_resolution.status is ResolutionStatus.MISSING and selection._recheck_local_after_discovery:
+            local = self._prepare_local(discovered_request, budget=budget, verified_original_url=candidate.source_url)
+            if local["blocks_download"]:
+                return self._blocked_local(local, replace(discovered_resolution, request_id=request.request_id),
+                                           selection)
+            if local["status"] == "ready":
+                # The local inventory can register an original during the scoped retry.
+                discovered_resolution, verified = resolver.resolve_for_acquisition(
+                    discovered_request, observed_original_url=candidate.source_url,
+                )
+                if discovered_resolution.status is ResolutionStatus.MISSING:
+                    raise SourceReadError("unavailable", "source_ref_changed", discovered_resolution.reason)
         if discovered_resolution.status in {
             ResolutionStatus.REUSED_EXACT,
             ResolutionStatus.REUSED_EQUIVALENT,
@@ -892,7 +946,6 @@ class AcquisitionCoordinator:
         if (
             not callable(getattr(adapter, "discover_bounded", None))
             or not callable(getattr(adapter, "fetch_bounded", None))
-            or not callable(getattr(adapter, "discover_page_bounded", None))
             or not getattr(adapter, "supports_acquisition_budget", False)
         ):
             raise AcquisitionError(

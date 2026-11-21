@@ -1209,7 +1209,8 @@ def _storage_guard(request, catalog, db_path, work_dir, input_hash, *, read_only
 
 
 def run_batch(request: NarrativeBatchRequest, *, project_root: Path, catalog_config_path: Path,
-              db_path: Path, work_dir: Path) -> dict[str, Any]:
+              db_path: Path, work_dir: Path,
+              on_admitted: Callable[[], None] | None = None) -> dict[str, Any]:
     """Run or resume this exact finite request; paid uncertainty stays reserved."""
     deadline = time.monotonic() + request.max_seconds
     project_root, catalog_config_path, db_path, work_dir = (
@@ -1224,13 +1225,13 @@ def run_batch(request: NarrativeBatchRequest, *, project_root: Path, catalog_con
         catalog = SourceCatalog(config)
         try:
             return _run_owned(request, catalog, project_root, catalog_config_path, db_path, work_dir,
-                              deadline=deadline)
+                              deadline=deadline, on_admitted=on_admitted)
         finally:
             catalog.close()
 
 
 def _run_owned(
-    request, catalog, project_root, config_path, db_path, work_dir, *, deadline
+    request, catalog, project_root, config_path, db_path, work_dir, *, deadline, on_admitted=None,
 ):
     _check_preparation_deadline(deadline)
     reader = SourceVersionReader(catalog)
@@ -1339,6 +1340,7 @@ def _run_owned(
             projection_loader=projection_loader,
             work_budget_factory=work_budget_factory,
             effective_versions=effective_versions,
+            on_admitted=on_admitted,
         )
 
 
@@ -1399,6 +1401,7 @@ def _run_prepared(
     projection_loader: ProjectionLoader,
     work_budget_factory,
     effective_versions,
+    on_admitted=None,
 ):
     reader = SourceVersionReader(catalog)
     store = AutomationStore(db_path) if db_path.exists() else None
@@ -1598,6 +1601,8 @@ def _run_prepared(
             )
         else:
             run = previous
+        if on_admitted is not None:
+            on_admitted()
         if not run.job_ids:
             readonly_artifacts = catalog.open_narrative_artifact_reader()
             try:

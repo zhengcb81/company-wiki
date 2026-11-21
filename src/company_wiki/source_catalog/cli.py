@@ -770,6 +770,12 @@ def _policy_export_payload(config) -> dict[str, Any]:
     }
 
 
+_INCREMENTAL_COMMANDS = {
+    "discover-incremental", "read-incremental", "incremental-backlog",
+    "read-incremental-status", "read-incremental-result",
+}
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     # Official operations own their parser, catalog lifecycle and raw-byte output.
     # Delegate before configuring streams or opening the generic catalog.
@@ -780,12 +786,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         return official_main(effective_argv[1:])
     # Scheduled-refresh metadata discovery and bounded reading own their
     # parser and stdin request; delegate like ``official``.
-    if effective_argv and effective_argv[0] in {
-        "discover-incremental", "read-incremental",
-    }:
+    command_index = 0
+    if effective_argv and effective_argv[0] == "--config":
+        command_index = 2
+    elif effective_argv and effective_argv[0].startswith("--config="):
+        command_index = 1
+    if len(effective_argv) > command_index and effective_argv[command_index] in _INCREMENTAL_COMMANDS:
         from .incremental_cli import main as incremental_main
 
-        return incremental_main(effective_argv[1:])
+        return incremental_main([*effective_argv[:command_index], *effective_argv[command_index + 1:]])
 
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")

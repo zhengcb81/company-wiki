@@ -59,6 +59,7 @@ _FUZZY_CANDIDATE_THRESHOLD = 0.68
 _FUZZY_RESOLVE_THRESHOLD = 0.92
 _FUZZY_MARGIN = 0.08
 _DEFAULT_MINIMUM_RECORDS = {"CN": 1_000, "HK": 1_000, "US": 1_000}
+_HKEX_EXCHANGE_LABELS = frozenset({"HKEX", "SEHK", "XHKG"})
 
 
 class SecurityIdentityError(ValueError):
@@ -1150,13 +1151,17 @@ class SecurityIdentityResolver:
 
     @staticmethod
     def _eligible(
-        candidate: IdentityCandidate,
+        listing: IdentityCandidate | SecurityRecord,
         market: str | None,
         exchange: str | None,
     ) -> bool:
-        return (market is None or candidate.market == market) and (
-            exchange is None or candidate.exchange == exchange
-        )
+        if market is not None and listing.market != market:
+            return False
+        if exchange is None or listing.exchange == exchange:
+            return True
+        # Compare the stock exchange label and its ISO MIC without rewriting provenance.
+        return (listing.market == "HK" and listing.exchange in _HKEX_EXCHANGE_LABELS
+                and exchange in _HKEX_EXCHANGE_LABELS)
 
     def _has_legal_form_conflict(
         self, query: str, candidate: IdentityCandidate,
@@ -1216,8 +1221,7 @@ class SecurityIdentityResolver:
         link_ids = {item.issuer_link_id for item in exact}
         records = [
             record for record in self.master.records
-            if (market is None or record.market == market)
-            and (exchange is None or record.exchange == exchange)
+            if self._eligible(record, market, exchange)
             and self._issuer_link_ids.get(
                 (record.market, _ticker_key(record.security_id, record.market))
             ) in link_ids
@@ -1320,8 +1324,7 @@ class SecurityIdentityResolver:
                 (
                     self._fuzzy(record, normalized_query)
                     for record in self.master.records
-                    if (market_hint is None or record.market == market_hint)
-                    and (exchange_hint is None or record.exchange == exchange_hint)
+                    if self._eligible(record, market_hint, exchange_hint)
                 ),
                 key=_candidate_sort_key,
             )

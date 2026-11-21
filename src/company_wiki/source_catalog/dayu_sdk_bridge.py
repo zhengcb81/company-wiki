@@ -17,8 +17,13 @@ class DayuBridgeError(ValueError):
         self.error_code = error_code
 
 
-def discovery_window(request: SourceRequest) -> tuple[date, date]:
+def discovery_window(request: SourceRequest, since_date: str | None = None) -> tuple[date, date]:
     end = date.fromisoformat(request.as_of_date)
+    if since_date is not None:
+        start = date.fromisoformat(since_date)
+        if start > end:
+            raise DayuBridgeError("invalid_request", "discovery start exceeds as-of date")
+        return start, end
     # A fiscal year's first quarter can end in the previous calendar year.
     start_year = request.fiscal_year - 1 if request.fiscal_year else end.year - 2
     return date(start_year, 1, 1), end
@@ -45,8 +50,32 @@ def _current_versions(values: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(chosen.values(), key=lambda v: (v["fiscal_year"], v["fiscal_period"]), reverse=True)
 
 
+def _note_sec_table_gaps(
+    table: dict[str, Any], forms: tuple[str, ...], reasons: list[str],
+) -> None:
+    form = table.get("form")
+    published = table.get("filingDate")
+    accession = table.get("accessionNumber")
+    if (not isinstance(form, list) or not isinstance(published, list) or not isinstance(accession, list)
+            or len(form) != len(published) or len(form) != len(accession)):
+        reasons.append("provider_metadata_incomplete")
+        return
+    for observed_form, observed_date, observed_accession in zip(form, published, accession):
+        if observed_form not in forms:
+            continue
+        try:
+            proved = (isinstance(observed_date, str) and date.fromisoformat(observed_date).isoformat() == observed_date
+                      and isinstance(observed_accession, str) and bool(observed_accession))
+        except ValueError:
+            proved = False
+        if not proved:
+            reasons.append("candidate_date_or_accession_unproved")
+            return
+
+
 async def discover_sec(
     request: SourceRequest, downloader: Any, *, collect: Callable[..., None],
+    since_date: str | None = None, enumeration_reasons: list[str] | None = None,
 ) -> list[dict[str, Any]]:
     if request.market != "US" or not request.security_id:
         raise DayuBridgeError("invalid_request", "SEC request requires US security identity")
@@ -59,7 +88,7 @@ async def discover_sec(
     forms = (request.form_type.upper(),) if request.form_type else allowed
     if not allowed or not forms or any(form not in allowed for form in forms):
         raise DayuBridgeError("unsupported_sec_form", "SEC primary fiscal report capability does not cover this form")
-    start, end = discovery_window(request)
+    start, end = discovery_window(request, since_date)
     if start > end:
         return []
     cik, company_name, cik10 = await downloader.resolve_company(request.security_id)
@@ -69,14 +98,22 @@ async def discover_sec(
     records: dict[str, Any] = {}
     filings = submissions.get("filings", {})
     windows = {form: start for form in forms}
-    collect(records=records, table=filings.get("recent", {}), form_windows=windows, end_date=end)
-    for history in filings.get("files", []):
+    recent = filings.get("recent", {})
+    history_files = filings.get("files", [])
+    if enumeration_reasons is not None:
+        _note_sec_table_gaps(recent, forms, enumeration_reasons)
+        if "files" not in filings:
+            enumeration_reasons.append("provider_history_manifest_missing")
+    collect(records=records, table=recent, form_windows=windows, end_date=end)
+    for history in history_files:
         if history.get("filingTo", "") < start.isoformat() or history.get("filingFrom", "9999") > end.isoformat():
             continue
         name = history.get("name", "")
         if not re.fullmatch(r"[A-Za-z0-9_.-]+\.json", name):
             raise DayuBridgeError("invalid_provider_metadata", "SEC history filename is invalid")
         table = await downloader.fetch_json("https://data.sec.gov/submissions/" + name)
+        if enumeration_reasons is not None:
+            _note_sec_table_gaps(table, forms, enumeration_reasons)
         collect(records=records, table=table, form_windows=windows, end_date=end)
     values = []
     unresolved = []
@@ -114,6 +151,24 @@ async def discover_sec(
             continue
         primary = record.primary_document
         accession = record.accession_number.replace("-", "")
+        if since_date is not None:
+            # The submissions manifest already names the exact SEC primary.
+            # Keep provider listings metadata-only, without a second archive
+            # request per candidate. The ensure path still verifies its fetch.
+            if not re.fullmatch(r"[A-Za-z0-9_.-]+", primary or "") or primary in {".", ".."}:
+                if enumeration_reasons is not None:
+                    enumeration_reasons.append("provider_primary_unproved")
+                continue
+            if not accession.isdecimal():
+                if enumeration_reasons is not None:
+                    enumeration_reasons.append("provider_accession_unproved")
+                continue
+            value.update(
+                source_url=f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession}/{primary}",
+                primary_document=primary,
+            )
+            values.append(value)
+            continue
         if not primary:
             primary = await downloader.resolve_primary_document(cik, accession, record.form_type)
         files = await downloader.list_filing_files(
@@ -127,6 +182,10 @@ async def discover_sec(
                      remote_size=descriptor.remote_size, etag=descriptor.http_etag,
                      last_modified=descriptor.http_last_modified)
         values.append(value)
+    if since_date is not None:
+        if unresolved and enumeration_reasons is not None:
+            enumeration_reasons.append("candidate_fiscal_period_unproved")
+        return sorted(values, key=lambda value: (value["filing_date"], value["provider_document_id"]))
     if not values and unresolved:
         raise unresolved[0]
     return _current_versions(values)
@@ -134,6 +193,7 @@ async def discover_sec(
 
 def discover_hk(
     request: SourceRequest, client: Any, *, query_type: Callable[..., Any],
+    since_date: str | None = None,
 ) -> list[dict[str, Any]]:
     if request.market != "HK" or not request.security_id:
         raise DayuBridgeError("invalid_request", "HK request requires security identity")
@@ -146,7 +206,7 @@ def discover_hk(
         raise DayuBridgeError("unsupported_hk_period", "HK report kind and fiscal period do not match")
     if request.form_type and request.form_type.upper() not in periods:
         raise DayuBridgeError("unsupported_hk_period", "HK form must match its report period")
-    start, end = discovery_window(request)
+    start, end = discovery_window(request, since_date)
     if start > end:
         return []
     query = query_type(market="HK", normalized_ticker=request.security_id,
@@ -157,7 +217,9 @@ def discover_hk(
     values = []
     unresolved = []
     for candidate in client.list_report_candidates(query, profile):
-        if candidate.filing_date > request.as_of_date:
+        if candidate.filing_date > request.as_of_date or (
+            since_date is not None and candidate.filing_date < since_date
+        ):
             continue
         raw = (asdict(candidate) if is_dataclass(candidate) and not isinstance(candidate, type)
                else vars(candidate).copy())

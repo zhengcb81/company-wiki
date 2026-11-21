@@ -124,6 +124,32 @@ def test_identity_resolver_handles_three_markets_and_ticker_variants(tmp_path):
     assert us.resolved.match_basis == "ticker_exact"
 
 
+def test_exchange_hints_bind_hkex_labels_and_mic_without_widening_market(tmp_path):
+    from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver
+
+    store = _master(tmp_path)
+    store.write_market(
+        "CN",
+        (_record(name="宁德时代", market="CN", exchange="SZSE", ticker="300750"),),
+        retrieved_at="2026-11-21T00:00:00Z",
+        sources=("https://www.cninfo.com.cn/new/data/szse_stock.json",),
+    )
+    resolver = SecurityIdentityResolver(store.load())
+
+    for exchange in ("SEHK", "HKEX", "XHKG"):
+        hk = resolver.identify("1810.HK", market="HK", exchange=exchange)
+        assert hk.status is IdentityStatus.RESOLVED
+        assert hk.resolved is not None and hk.resolved.security_id == "01810"
+        assert hk.resolved.exchange == "HKEX" and hk.exchange_hint == exchange
+    cn = resolver.identify("300750", market="CN", exchange="SZSE")
+    assert cn.status is IdentityStatus.RESOLVED
+    assert cn.resolved is not None and cn.resolved.security_id == "300750"
+    for ticker, market, exchange in (("01810", "HK", "SZSE"), ("01810", "CN", "SEHK"),
+                                     ("300750", "CN", "SSE"), ("300750", "CN", "XHKG")):
+        conflict = resolver.identify(ticker, market=market, exchange=exchange)
+        assert conflict.status is IdentityStatus.CONFLICT and conflict.resolved is None
+
+
 def test_identity_resolver_is_fail_closed_for_ambiguity_conflict_and_low_confidence(
     tmp_path,
 ):

@@ -149,14 +149,16 @@ class JsonCommandAdapter:
             raise AdapterProcessError("discover response candidates must be an array")
         return tuple(self._candidate(value, request) for value in values)
 
-    def discover_page(self, request: SourceRequest) -> DiscoveryPage:
+    def discover_page(
+        self, request: SourceRequest, *, since_date: str | None = None,
+    ) -> DiscoveryPage:
         """Enumerate one metadata page and keep the adapter's own coverage."""
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
-        return self._page(self._run("discover", request.to_dict()), request)
+        return self._page(self._run("discover", self._discovery_payload(request, since_date)), request)
 
     def discover_page_bounded(
-        self, request: SourceRequest, budget: AcquisitionBudget,
+        self, request: SourceRequest, budget: AcquisitionBudget, *, since_date: str | None = None,
     ) -> DiscoveryPage:
         """Run one metadata page with the caller's remaining shared budget."""
         if not isinstance(request, SourceRequest):
@@ -164,7 +166,15 @@ class JsonCommandAdapter:
         if not isinstance(budget, AcquisitionBudget):
             raise TypeError("budget must be AcquisitionBudget")
         self._ensure_bounded_support()
-        return self._page(self._invoke_bounded("discover", request.to_dict(), budget), request)
+        payload = self._discovery_payload(request, since_date)
+        return self._page(self._invoke_bounded("discover", payload, budget), request)
+
+    @staticmethod
+    def _discovery_payload(request: SourceRequest, since_date: str | None) -> dict[str, Any]:
+        payload = request.to_dict()
+        if since_date is not None:
+            payload["discovery_since_date"] = since_date
+        return payload
 
     def _page(self, response: dict[str, Any], request: SourceRequest) -> DiscoveryPage:
         values = response.get("candidates")

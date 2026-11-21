@@ -11,6 +11,7 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from bisect import bisect_right
 from dataclasses import dataclass, field, replace
+from functools import cache
 import hashlib
 import json
 from pathlib import Path
@@ -2538,12 +2539,10 @@ def _candidate_rules(*, selector_version: str | None = None) -> CandidateRules:
 
 def _base_candidates(
     parsed: NarrativeParseResult,
-    *,
-    selector_version: str | None = None,
+    rules: CandidateRules,
 ) -> tuple[list[EvidenceCandidate], int]:
     candidates: list[EvidenceCandidate] = []
     dropped_financial = 0
-    rules = _candidate_rules(selector_version=selector_version)
     for unit in parsed.units:
         unit_rules = (
             replace(rules, operating_facts=detect_business_fact)
@@ -2623,14 +2622,16 @@ def select_narrative_evidence(
         return select_reading_evidence(parsed, title=title, existing_kind=existing_kind,
                                       max_selected=max_selected, work_budget=work_budget)
     candidate_rules = _candidate_rules(selector_version=effective_version)
+    if effective_version == "0.8.0":
+        # Both passes apply the same pure text policy. Keep its results for
+        # this document only; locators and per-unit eligibility stay separate.
+        candidate_rules = replace(candidate_rules, operating_facts=cache(candidate_rules.operating_facts))
     original = parsed
     parsed = matching_document(parsed)
     route = route_document(
         matching_text(title), existing_kind=existing_kind, max_selected=max_selected
     )
-    candidates, dropped_financial = _base_candidates(
-        parsed, selector_version=effective_version
-    )
+    candidates, dropped_financial = _base_candidates(parsed, candidate_rules)
     selection_group_ids: dict[str, str] = {}
 
     # PDF layout extraction often separates one logical sentence into several

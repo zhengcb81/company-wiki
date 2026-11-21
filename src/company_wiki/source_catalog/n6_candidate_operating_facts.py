@@ -176,11 +176,20 @@ _CUSTOMER_CONCENTRATION = re.compile(
     r"(?:前\s*五大客户|前五名客户|客户集中度|top\s+(?:five|5)\s+customers?|customer\s+concentration)",
     re.IGNORECASE,
 )
+_CURRENCY_TERMS = (
+    r"(?:汇率|匯率|外汇|外匯|外币|外幣|美元|FX|"
+    r"exchange\s+rate|foreign\s+currency|currency\s+exposure)"
+)
+_CURRENCY_RISK_TERMS = (
+    r"(?:波动|波動|升值|贬值|貶值|汇兑损失|匯兌損失|风险|風險|不利|"
+    r"loss|volatile|volatility|depreciat|appreciat|adverse)"
+)
+_CURRENCY_DISTANCE = r"[^。！？;；.!?]{0,120}"
+# Start the bounded proximity scan only at a matching term. Two lookaheads
+# beginning at every character repeatedly scan the same unrelated clause.
 _CURRENCY_EXPOSURE = re.compile(
-    r"(?=[^。！？;；.!?]{0,120}(?:汇率|匯率|外汇|外匯|外币|外幣|美元|FX|"
-    r"exchange\s+rate|foreign\s+currency|currency\s+exposure))"
-    r"(?=[^。！？;；.!?]{0,120}(?:波动|波動|升值|贬值|貶值|汇兑损失|匯兌損失|"
-    r"风险|風險|不利|loss|volatile|volatility|depreciat\w*|appreciat\w*|adverse))",
+    rf"(?={_CURRENCY_TERMS})(?={_CURRENCY_DISTANCE}{_CURRENCY_RISK_TERMS})"
+    rf"|(?={_CURRENCY_RISK_TERMS})(?={_CURRENCY_DISTANCE}{_CURRENCY_TERMS})",
     re.IGNORECASE,
 )
 _COMPETITIVE_PRESSURE = re.compile(

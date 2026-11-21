@@ -1,0 +1,31 @@
+{
+  "schema_version": "scheduled-refresh-summary-acceptance/1",
+  "source": "Microsoft FY2026 Q4 earnings call",
+  "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "run_id": "sr-live-msft-fy26q4-summary",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "native_attempt_id": "fa68dc7f8a624edba6a04e54c4f80af5",
+  "artifact_sha256": "6ae02c37971b877e55bb882d68d7745e3d579d78bc73ec36361bb8cdc07ff3b6",
+  "initial": {
+    "model_requests": 1,
+    "tokens": 5496,
+    "estimated_micro_usd": 2719,
+    "cost_state": "settled"
+  },
+  "repeat": {
+    "model_requests_added": 0,
+    "tokens_added": 0,
+    "estimated_micro_usd_added": 0
+  },
+  "verified": [
+    "same run ID",
+    "read-only status",
+    "same available summary artifact",
+    "same native ledger attempt"
+  ],
+  "aggregate_after": {
+    "charged_or_held_tokens": 2133431,
+    "charged_or_held_micro_usd": 795493
+  }
+}

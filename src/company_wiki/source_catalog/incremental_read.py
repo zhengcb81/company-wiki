@@ -33,6 +33,7 @@ from .narrative_artifact_store import (
     NarrativeArtifactReader,
     NarrativeArtifactStore,
     NarrativeArtifactVersion,
+    NarrativeReadResultVersion,
 )
 from .narrative_contracts import SourceMetadataValue, SourceRefValue
 from .narrative_formats import parser_component, source_class_for
@@ -126,20 +127,16 @@ class ReadLimits:
             return cls()
         if not isinstance(value, dict):
             raise IncrementalReadError("limits must be an object")
-        if set(value) - {"max_sources", "max_seconds"}:
+        if set(value) - {"max_sources", "max_seconds", "timeout_seconds"}:
             raise IncrementalReadError("limits has unsupported fields")
-        seconds = value.get("max_seconds", cls.max_seconds)
-        if (
-            isinstance(seconds, bool)
-            or not isinstance(seconds, (int, float))
-            or seconds <= 0
-        ):
-            raise IncrementalReadError("limits.max_seconds must be positive")
+        seconds = [value[key] for key in ("max_seconds", "timeout_seconds") if key in value]
+        if any(type(limit) not in (int, float) or not 0 < limit < float("inf") for limit in seconds):
+            raise IncrementalReadError("reading timeout must be positive and finite")
         return cls(
             max_sources=_positive_int(
                 value.get("max_sources", cls.max_sources), "limits.max_sources"
             ),
-            max_seconds=float(seconds),
+            max_seconds=float(min(seconds, default=cls.max_seconds)),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -368,6 +365,8 @@ class ReadingBacklogRequest:
     as_of_date: str | None = None
     cursor: str | None = None
     limits: BacklogLimits = BacklogLimits()
+    source_market: str | None = None
+    security_id: str | None = None
 
     @classmethod
     def from_dict(cls, value: Any) -> "ReadingBacklogRequest":
@@ -498,32 +497,27 @@ class IncrementalReadService:
         if len(request.sources) > request.limits.max_sources:
             raise IncrementalReadError("sources exceed the request's own limit")
         started = time.monotonic()
-        model_requests = 0
+        deadline = started + request.limits.max_seconds
         generator_usage: dict[str, Any] | None = None
         if request.reading_level == READING_LEVEL_LOCAL:
-            items = [self._read_local(ref) for ref in request.sources]
+            items = [self._read_local(ref, deadline=deadline) for ref in request.sources]
         else:
-            items = []
-            pending: list[SourceRefValue] = []
-            for ref in request.sources:
-                item = self._summary_bundle_state(ref)
-                if item is None:
-                    pending.append(ref)
-                else:
-                    items.append(item)
+            cached = {ref: self._summary_bundle_state(ref) for ref in request.sources}
+            pending = [ref for ref, item in cached.items() if item is None]
             if pending and summary_generator is not None:
+                # AUTO owns per-source reuse. Its run identity must bind the full
+                # original scope even after one sibling has published a bundle.
                 generated, generator_usage = self._run_summary_generator(
-                    request, tuple(pending), summary_generator,
+                    request, request.sources, summary_generator,
                 )
-                items.extend(generated)
-                pending = []
-            for ref in pending:
-                items.append(ReadItemResult(
+                items = [cached[item.source_ref] or item for item in generated]
+            else:
+                items = [cached[ref] or ReadItemResult(
                     ref, STATE_DEFERRED, None, False, ("summary_batch_required",),
-                ))
+                ) for ref in request.sources]
         usage: dict[str, Any] = {
             "sources": len(items),
-            "model_requests": model_requests,
+            "model_requests": 0,
             "seconds": round(time.monotonic() - started, 6),
         }
         if generator_usage is not None:
@@ -611,9 +605,16 @@ class IncrementalReadService:
     # ------------------------------------------------------------------
     # Local tier: parse + select through the shared engine, zero model.
     # ------------------------------------------------------------------
-    def _read_local(self, ref: SourceRefValue) -> ReadItemResult:
+    def _read_local(self, ref: SourceRefValue, *, deadline: float) -> ReadItemResult:
+        def checkpoint() -> None:
+            if time.monotonic() >= deadline:
+                raise TimeoutError("local_read_deadline")
+
         try:
-            return self._read_local_inner(ref)
+            checkpoint()
+            return self._read_local_inner(ref, checkpoint=checkpoint)
+        except TimeoutError:
+            return ReadItemResult(ref, STATE_DEFERRED, None, False, ("local_read_deadline",))
         except NarrativeMaterialError as exc:
             return ReadItemResult(ref, STATE_FAILED, None, False,
                                   (exc.code, "local_read_failed"))
@@ -637,7 +638,7 @@ class IncrementalReadService:
             return ReadItemResult(ref, STATE_UNCERTAIN, None, False,
                                   (f"io_error:{type(exc).__name__}",))
 
-    def _read_local_inner(self, ref: SourceRefValue) -> ReadItemResult:
+    def _read_local_inner(self, ref: SourceRefValue, *, checkpoint) -> ReadItemResult:
         current = self._reader.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
         if (current.document_id, current.source_id, current.content_sha256,
                 current.byte_size, current.mime_type) != (
@@ -653,25 +654,8 @@ class IncrementalReadService:
         declared = str(declared_raw) if declared_raw is not None else None
         title_raw = described.get("title")
         title = str(title_raw) if title_raw is not None else None
-        opened = self._reader.open_version(
-            current, purpose="narrative_derivation",
-            expected_read_policy_sha256=policy,
-        )
-        if declared in {None, "unknown"}:
-            language = detect_narrative_language(opened.data, current.mime_type)
-        else:
-            assert declared is not None
-            language = narrative_language_family(declared)
-        metadata = SourceMetadataValue(
-            source_class=source_class_for(current.mime_type, kind),
-            title=title,
-            document_kind=kind,
-            language=language,
-            declared_language=(
-                declared if declared not in {None, "unknown", language} else None
-            ),
-        )
-        parser_identity = parser_component(current.mime_type, metadata.source_class)
+        source_class = source_class_for(current.mime_type, kind)
+        parser_identity = parser_component(current.mime_type, source_class)
         if self._bound_selector is not None:
             selector_version = self._bound_selector.selector_version
         else:
@@ -679,9 +663,34 @@ class IncrementalReadService:
 
             selector_version = NARRATIVE_SELECTOR_VERSION
         work_key = _read_result_work_key(ref, policy, parser_identity, selector_version)
-        work = self._selector.select(
-            opened, source_ref=ref, source_metadata=metadata, checkpoint=lambda: None,
+        opened = self._reader.open_version(
+            current, purpose="narrative_derivation",
+            expected_read_policy_sha256=policy,
         )
+        existing = self._visible_read_result(ref)
+        if existing is not None and existing.work_key == work_key:
+            cached = self._local_product(ref, existing, reused=True)
+            if self.result_available(cached.result_ref):
+                return cached
+        checkpoint()
+        if declared in {None, "unknown"}:
+            language = detect_narrative_language(opened.data, current.mime_type)
+        else:
+            assert declared is not None
+            language = narrative_language_family(declared)
+        metadata = SourceMetadataValue(
+            source_class=source_class,
+            title=title,
+            document_kind=kind,
+            language=language,
+            declared_language=(
+                declared if declared not in {None, "unknown", language} else None
+            ),
+        )
+        work = self._selector.select(
+            opened, source_ref=ref, source_metadata=metadata, checkpoint=checkpoint,
+        )
+        checkpoint()
         package = work.package
         if package.status == "blocked":
             return ReadItemResult(ref, STATE_FAILED, None, False,
@@ -720,7 +729,6 @@ class IncrementalReadService:
             created_at=_utc_now(),
             artifact_role=NARRATIVE_READ_RESULT_ROLE,
         )
-        existing = self._visible_read_result(ref)
         encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")
         version = self._artifacts.prepare_read_result(draft, encoded)
         # A read result has no outbox verify job; its proof ran above.  The
@@ -729,17 +737,17 @@ class IncrementalReadService:
             draft.work_key, verified_after_hash=version.content_sha256,
             activated_at=_utc_now(),
         )
-        reused = (
-            existing is not None
-            and existing.artifact_version_id == version.artifact_version_id
-        )
+        return self._local_product(ref, version, reused=False)
+
+    @staticmethod
+    def _local_product(ref: SourceRefValue, version: NarrativeReadResultVersion, *, reused: bool):
         reasons: tuple[str, ...] = ()
-        if package.status == "skipped_no_narrative":
+        if version.selection_status == "skipped_no_narrative":
             state = STATE_SKIPPED
-        elif package.status == "partial":
+        elif version.selection_status == "partial":
             state = STATE_READ
             reasons = ("selection_partial",)
-        elif package.status == "needs_review":
+        elif version.selection_status == "needs_review":
             state = STATE_READ
             reasons = ("selection_needs_review",)
         else:
@@ -804,12 +812,29 @@ class IncrementalReadService:
             )
         except NarrativeArtifactNotVisibleError:
             return None
-        return ReadItemResult(
+        item = ReadItemResult(
             ref, STATE_SUMMARIZED,
             ReadResultRef(bundle.artifact_version_id, bundle.content_sha256,
                           bundle.byte_size, NARRATIVE_BUNDLE_ROLE, ref),
             True, (),
         )
+        return item if self.result_available(item.result_ref) else None
+
+    def existing_product(self, ref: SourceRefValue, level: str) -> ReadItemResult | None:
+        """Look up this exact source's visible product without running the parser."""
+        if level == READING_LEVEL_SUMMARY:
+            return self._summary_bundle_state(ref)
+        return self._backlog_local_state(ref)
+
+    def result_available(self, result_ref: ReadResultRef | None) -> bool:
+        """Verify that an automatically selected artifact can actually be opened."""
+        if result_ref is None:
+            return False
+        try:
+            self.read_result_payload(result_ref)
+        except (NarrativeArtifactError, SourceReadError, OSError):
+            return False
+        return True
 
     # ------------------------------------------------------------------
     # Public read-back of one persisted product at its exact identity.
@@ -887,27 +912,42 @@ class IncrementalReadService:
         kind_placeholders = ",".join("?" for _ in request.document_kinds)
         where.append(f"d.document_kind IN ({kind_placeholders})")
         parameters.extend(request.document_kinds)
-        if request.entity is not None:
+        if request.entity is not None and request.source_market is None:
             where.append(
                 "EXISTS (SELECT 1 FROM document_entities de JOIN entities e "
                 "ON e.entity_id=de.entity_id WHERE de.document_id=d.document_id "
                 "AND e.name=?)"
             )
             parameters.append(request.entity)
+        # For the scheduled local queue, a catalog observation is sufficient
+        # to find recently available undated originals. It never supplies a
+        # publication date for historical eligibility or forecast evidence.
+        dated_at = ("COALESCE(d.published_date, substr(d.first_seen_at, 1, 10))"
+                    if request.source_market is not None else "d.published_date")
         if request.since_date is not None:
-            where.append("d.published_date IS NOT NULL AND d.published_date >= ?")
+            where.append(f"{dated_at} >= ?")
             parameters.append(request.since_date)
         if request.as_of_date is not None:
-            where.append("d.published_date IS NOT NULL AND d.published_date <= ?")
+            where.append(f"{dated_at} <= ?")
             parameters.append(request.as_of_date)
         if request.cursor is not None:
             where.append("d.document_id > ?")
             parameters.append(request.cursor)
+        identity_filter = ""
+        if request.entity is not None and request.source_market is not None:
+            from .identity_candidates import identity_candidate_clause
+            from .resolver import SourceResolver
+
+            tokens = SourceResolver(self._catalog).issuer_identity_tokens(
+                request.entity, market=request.source_market, security_id=request.security_id,
+            )
+            identity_filter, identity_parameters = identity_candidate_clause(reader, tokens)
+            parameters.extend(identity_parameters)
         sql = (
             "SELECT d.document_id, d.primary_source_id, d.document_kind, "
             "d.published_date, d.title, s.content_sha256, s.byte_size, s.mime_type "
             "FROM documents d JOIN sources s ON s.source_id=d.primary_source_id "
-            "WHERE " + " AND ".join(where) +
+            "WHERE " + " AND ".join(where) + " " + identity_filter +
             " ORDER BY d.document_id LIMIT ?"
         )
         parameters.append(request.limits.max_items + 1)
@@ -922,13 +962,22 @@ class IncrementalReadService:
                 content_sha256=row["content_sha256"], byte_size=row["byte_size"],
                 mime_type=row["mime_type"],
             )
-            if request.reading_level == READING_LEVEL_SUMMARY:
-                # Below the summary tier means: no formal bundle yet.
-                state = self._summary_bundle_state(ref) or ReadItemResult(
-                    ref, BACKLOG_UNREAD, None, False, (),
-                )
-            else:
-                state = self._backlog_local_state(ref)
+            if request.source_market is not None:
+                from .security_code import canonical_security_code
+
+                try:
+                    current = self._reader.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
+                    source = self._reader.describe_version(current)
+                except SourceReadError:
+                    continue
+                security_id = source.get("security_id")
+                if source.get("market") != request.source_market or canonical_security_code(
+                    None if security_id is None else str(security_id), request.source_market,
+                ) != request.security_id:
+                    continue
+            state = self.existing_product(ref, request.reading_level) or ReadItemResult(
+                ref, BACKLOG_UNREAD, None, False, (),
+            )
             items.append(ReadingBacklogItem(
                 source_ref=ref, state=state.state, result_ref=state.result_ref,
                 document_kind=row["document_kind"],
@@ -944,13 +993,9 @@ class IncrementalReadService:
     def _backlog_local_state(self, ref: SourceRefValue) -> ReadItemResult:
         version = self._visible_read_result(ref)
         if version is not None:
-            state = STATE_SKIPPED if version.selection_status == "skipped_no_narrative" else STATE_READ
-            return ReadItemResult(
-                ref, state,
-                ReadResultRef(version.artifact_version_id, version.content_sha256,
-                              version.byte_size, NARRATIVE_READ_RESULT_ROLE, ref),
-                True, (),
-            )
+            item = self._local_product(ref, version, reused=True)
+            if self.result_available(item.result_ref):
+                return item
         return ReadItemResult(ref, BACKLOG_UNREAD, None, False, ())
 
 
