@@ -1,25 +1,21 @@
 # SR-CWP 交接 — 增量发现与有限阅读
 
-日期：2026-11-21 · 工作区：`C:/Users/郑曾波/Projects/cwp21`（分支 `codex/sr-cwp-20261121`，工作区改动即交付） · 基线 `master@29a123ad3`
+日期：2026-11-21 · 交付 commit `c01e6e04e`（分支 `codex/sr-cwp-20261121`，工作区 `C:/Users/郑曾波/Projects/cwp21`） · 基线 `master@29a123ad3`
 
 ## 0. 交付状态与平台门记录（先读）
 
-**代码交付在工作区，commit 被 Mimosa L3 平台门阻断。** `git commit` 前置扫描按最高等级
-全仓阻断（211 high / 38 medium / 6 low），具名发现全部位于本卡未触及的预存文件：
+**交付已提交**：`c01e6e04e`（Mimosa L3 前置扫描放行；mypy-contract 钩子拦下的
+15 处交付内类型错误已全部修复后过钩）。尚未 rebase 到最新 master、未推送。
 
-- `tests/unit/test_automation_migrations.py:280,310,314,341,460` — SQL 注入（测试内拼接迁移 DDL）
-- `tests/unit/test_llm_client.py:47,129,135,156,162` — 硬编码凭据（测试 fake key）
-- `src/company_wiki/source_catalog/identity_candidates.py:94,109` — SQL 注入（f-string 触发器 DDL；已核对在基点 `29a123ad3` 逐字存在）
-
-按 AGENTS.md（R4.1/审批简化）：未宣称关闭平台审查，未改写命令或换通道绕过。
-本卡交付面对这些发现贡献为 0（改动文件清单见 §5；聚焦扫描收据见 §6）。
-**解除动作归平台/安全 lane**：处理上述预存发现或对既有 high 建立豁免后，
-直接 `git add -A && git commit`（内容已完整落在工作区）。
+首轮 commit 尝试曾被 Mimosa L3 全仓扫描按最高等级阻断（211 high / 38 medium / 6 low），
+具名发现全部位于本卡未触及的预存文件（`tests/unit/test_automation_migrations.py`、
+`tests/unit/test_llm_client.py`、`src/company_wiki/source_catalog/identity_candidates.py:94,109`
+——已核对在基点 `29a123ad3` 逐字存在）。后续提交同一内容时门放行；
+预存发现仍归平台/安全 lane 处理，本卡交付面对其贡献为 0（聚焦扫描收据见 §7）。
 
 **基点漂移**：开工后 master 前进了 `4558cdd75`（citation_locator 入库）与
-`113a61e02`（FF P1 记录）。工作区已 `git restore --source=master` 补入
-`src/company_wiki/document_model/cavity_locator.py` 之外的 citation_locator 单文件
-用于全量回归收集；commit 时应一并 rebase 到最新 master（无冲突：两 commit 只动文档与新模块）。
+`113a61e02`（FF P1 记录）。交付 commit 已包含 citation_locator 模块文件
+（tracked HEAD 文件导入它）；rebase 到最新 master 无冲突（两 commit 只动计划文档与新模块）。
 
 ## 1. 首项基线（卡第一步）：混合来源解析回归
 

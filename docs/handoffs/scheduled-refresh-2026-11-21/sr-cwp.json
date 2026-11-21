@@ -2,9 +2,9 @@
   "package_id": "SR-CWP",
   "owner_repo": "company-wiki",
   "base_commit": "29a123ad3810eaf6479869f98e55e8321800d1d1",
-  "delivery_commit": "pending-mimosa-l3-gate-see-sr-cwp-md-section-0",
+  "delivery_commit": "c01e6e04efb7709c39c9540db8e9c6c48e2698fe",
   "release_state": "candidate",
-  "workspace": "C:/Users/郑曾波/Projects/cwp21 (branch codex/sr-cwp-20261121; working tree IS the delivery)",
+  "workspace": "C:/Users/郑曾波/Projects/cwp21 (branch codex/sr-cwp-20261121; not yet pushed/rebased onto master 113a61e02)",
   "interface": {
     "protocols": [
       "cwp-incremental-discovery-request/1",
@@ -32,11 +32,11 @@
   "verification": [
     {"case": "baseline-first-step", "scope": "integration/e2e",
      "command": "python -m pytest \"tests/integration/test_narrative_batch_cli_e2e.py::test_cli_infers_sparse_languages_from_verified_pdf_and_transcript_bytes\" -q --no-header -p no:cacheprovider",
-     "tested_commit": "29a123ad3810eaf6479869f98e55e8321800d1d1 (fixture fix in working tree)",
+     "tested_commit": "c01e6e04efb7709c39c9540db8e9c6c48e2698fe",
      "exit_code": 0, "evidence_ref": "docs/handoffs/scheduled-refresh-2026-11-21/sr-cwp.md#1"},
     {"case": "baseline-full-file", "scope": "integration",
      "command": "python -m pytest tests/integration/test_narrative_batch_cli_e2e.py -q --no-header -p no:cacheprovider",
-     "tested_commit": "29a123ad3810eaf6479869f98e55e8321800d1d1 (fixture + storage-race fixes in working tree)",
+     "tested_commit": "c01e6e04efb7709c39c9540db8e9c6c48e2698fe",
      "exit_code": 0, "evidence_ref": "docs/handoffs/scheduled-refresh-2026-11-21/sr-cwp.md#1"},
     {"case": "A1/A2/A3-CWP discovery", "scope": "integration",
      "command": "python -m pytest tests/integration/test_sr_cwp_incremental_discovery.py -q --no-header -p no:cacheprovider",
@@ -60,8 +60,8 @@
      "evidence_ref": "docs/handoffs/scheduled-refresh-2026-11-21/sr-cwp.md#3"}
   ],
   "independent_review": {
-    "tested_commit": "working tree (pre-commit; blocked by platform gate)",
-    "result": "pass_after_repairs",
+    "tested_commit": "c01e6e04efb7709c39c9540db8e9c6c48e2698fe (reviewed as the identical working tree pre-commit; mypy-only diffs between review snapshot and commit)",
+    "result": "pass",
     "findings_and_repairs": [
       "Round 1 verdict FAIL: 4 P1 + 7 P2; all repaired with regression tests (see sr-cwp.md section 6).",
       "P1-1 CLI discovery success path: real child-process json_command_v1 fixture adapter + bounded-surface fixture adapter + wire test (passing).",
