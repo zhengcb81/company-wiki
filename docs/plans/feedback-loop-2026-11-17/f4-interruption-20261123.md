@@ -7,11 +7,13 @@
 - 本机只有一个当前用户的 F4 恢复任务。原设置为登录后和每十分钟触发，使用 `pythonw.exe`、隐藏任务以及 `IgnoreNew`。23:07:41 UTC 的计划任务退出 0。23:11 的进程快照没有运行中的 F4 Python。七个 Python 中六个属于三组 MiniMax MCP 父子进程，另一个当时无法确认来源。采样不能用于推断每一次既往弹窗。系统未打开 Task Scheduler Operational 日志，未取得既往进程生成历史。
 - 22:48 与 23:09 的实际恢复收据均反复查同四个待续包、六条观察。这些是 FF 的两份历史定时作业和两份旧短请求。最近动作库只有 72 条已完成项，未启动业务或唤醒动作。F4 的 owner map 用 `python.exe` 做本机 RPC，而父进程是同一解释器目录的 `pythonw.exe`。旧匹配按可执行文件名严格相等，错过本机已完成动作的快速读取。RPC 与 owner 的同步扫描也缺少 Windows 无控制台启动标志，导致一次定时扫描可能成批打开控制台。
 - 核对归属后暂时禁用了这一个 F4 周期任务，保留原任务和全部收据。应用代码将同目录、同命令及同设置的两个解释器视为同一宿主，复用本机已落账查询和同宿主对账，保留原路由环境过滤。后台控制命令使用无控制台标志；显式业务 CLI 继续使用原标准流。Windows 定向测试的旧结果是两次各自创建的 RPC，新验收专查一个实际 owner reader，无控制台。
-- 主仓 37 项定向回归通过，独审 3 项用真实 Windows 子进程确认无控制台、环境白名单、异路径 RPC 和普通业务标准流。同宿主查证采用 owner 原有超时，外部 RPC 的传输超时继续适用于外部路由。恢复原来一项计划任务，23:19:37 UTC 的 11 仓现场运行约 11 秒、退出 0。仍是原 6 条观察、4 个待续包，零动作唤醒和诊断。原计划频率、订阅及业务任务均保留。
+- 主仓 37 项定向回归通过，独审 3 项用真实 Windows 子进程确认无控制台、环境白名单、异路径 RPC 和普通业务标准流。同宿主查证采用 owner 原有超时，外部 RPC 的传输超时继续适用于外部路由。恢复原来一项计划任务，23:19:37 UTC 的 11 仓现场运行约 11 秒、退出 0。23:27:40 UTC 的下一次自然触发用时 1.9 秒，退出 0。两次都是原 6 条观察、4 个待续包，零动作唤醒。原计划频率、订阅及业务任务均保留。 [发布版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45288569359)
 
 ## StockWiki 拒绝来源
 
 三条 `listing_selection_invalid` 在 22:05:42.950869、22:05:43.541374、22:05:44.409773 UTC 落盘。三条的主体和挂牌参数摘要与 Dashboard/IQS 验收实际使用的错挂牌夹具都逐一相同。该脚本启用 bridge 后恰对 `entity`、`entity-view` 和 `company/result` 发三次错挂牌请求，验收回执均为 HTTP 200 且回退到 `#/results`。这组证据将拒绝归为本次隔离回跳的预期负例。StockWiki 原记录没有父级关联号或子进程 PID，不能把每条绑定到具体路由。原有主体及挂牌检查保留。
+
+本机证据位于 Dashboard `.test-runs/iqs-owner-1123/check_deliveries.py` 的错挂牌分支，同目录 `acceptance.json` 的 `return_controls.with_bridge.wrong_listing` 保存三条回退。以脚本实际载入的 `.test-runs/two-recheck21/iqs.json` 的两个输入重复计算摘要，三份 StockWiki 诊断的两项摘要都吻合。
 
 隔离服务启动时未提供独立 F4 目录，StockWiki 使用了机器默认收件箱。在原 Dashboard/IQS 工作线的下一次验收，启动测试服务就给现有 `RESEARCH_FEEDBACK_DIR`、`RESEARCH_FEEDBACK_RUN_ID`、`RESEARCH_FEEDBACK_ATTEMPT_ID` 传临时目录和验收标记。IQS 的现有子进程环境会传这些字段，StockWiki 已会解析。生产跨进程链优先传已有 BFF 关联号及不含申请内容的路由标记。无需增加门禁。旧三份和以前 73 份原记录保留作证。
 
