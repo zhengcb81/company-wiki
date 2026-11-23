@@ -4,6 +4,8 @@
 
 总控 `1244e5af3` 已推，23 项推送快测通过。StockQA 接入后的 11 仓现场定时恢复退出 0，4 个旧包首次都能在收据按发生编号追溯。RF `d1672f5a` 经独审及 35 项定向测试后随 `597c6bc2` 推送，实际 F4 检出已快进。ROOT 用已安装技能和实际宿主两次查回同一原始失败，临时目录已清理。 [总控 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45282854968) · [RF CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/45283601584)
 
+RF 父版开始的远端失败源于旧目录夹具依赖暂存文件名。冻结父版本做 RED，按同目录独占写入注错后 GREEN。独审确认半写确实到盘、原报告字节保留、只成功重试一次且无暂存垃圾。Ubuntu Python 3.12 用原 CI 命令通过 766 项与 46 子项。远端补修 `895df7ad` 只含测试与记录。[RF 补修 CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/45285168804)
+
 2026-11-23。ET、SID、MC 三张日常失败覆盖卡已独审、并入各自正式发布线并完成宿主接线。11 月 23 日也完成 IQS 与 StockQA 两种关联方式的真实进程复验。Windows 同一个自动恢复任务已订阅 10 仓。StockWiki 的历史反馈来源待核，StockQA 日常目录待并行项目切换到已发布代码。 [分仓执行表](failure-coverage-owners.md) · [实际定时恢复](f4-rollout.md#统一运行与接续)
 
 总控修复在 `e27c67a39`。完整投递包的原业务终态经查实后可确认投递，未知费用仍沿原账保留。两个 MC 实例在默认和备用收件箱写了 21 条观察，两轮实际宿主恢复分别处理 21 和 0 条。独审验证错误绑定和未确认终态留待处理，测试目录已清理。 [总控远端 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45277769660)
