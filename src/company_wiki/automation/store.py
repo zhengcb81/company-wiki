@@ -45,6 +45,7 @@ from .models import (
     MaterializedDAG,
     Attempt,
     OutboxLease,
+    ReapedAttempt,
     RuntimeGate,
     RuntimeState,
     canonical_json,
@@ -1529,6 +1530,14 @@ class AutomationStore:
     def reap_expired_attempts(
         self, *, now: str, allowed_job_ids: tuple[str, ...] | None = None,
     ) -> tuple[str, ...]:
+        return tuple(attempt.attempt_id for attempt in self.reap_expired_attempt_outcomes(
+            now=now, allowed_job_ids=allowed_job_ids,
+        ))
+
+    def reap_expired_attempt_outcomes(
+        self, *, now: str, allowed_job_ids: tuple[str, ...] | None = None,
+    ) -> tuple[ReapedAttempt, ...]:
+        """Return the original attempts and their dispositions after the recovery commits."""
         allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
         if allowed_job_ids == ():
             return ()
@@ -1555,7 +1564,7 @@ class AutomationStore:
                 "ORDER BY a.job_id",
                 parameters,
             ).fetchall()
-            reaped: list[str] = []
+            reaped: list[ReapedAttempt] = []
             for row in rows:
                 attempt = _attempt_from_row(row)
                 job = _job_from_row(_job_row(conn, attempt.job_id))
@@ -1586,7 +1595,7 @@ class AutomationStore:
                     error_code=error_code,
                     error_detail=error_detail,
                 )
-                reaped.append(attempt.attempt_id)
+                reaped.append(ReapedAttempt(attempt.job_id, attempt.attempt_id, target, error_code))
             return tuple(reaped)
 
         return self._write_transaction(_op)

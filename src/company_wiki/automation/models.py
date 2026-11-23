@@ -415,6 +415,16 @@ class ClaimedWork(StrictModel):
 
 
 @dataclass(frozen=True)
+class ReapedAttempt:
+    """Committed outcome of one expired or obsolete worker attempt."""
+
+    job_id: str
+    attempt_id: str
+    job_status: JobStatus
+    error_code: str
+
+
+@dataclass(frozen=True)
 class OutboxLease(StrictModel):
     outbox_id: str
     effect_id: str

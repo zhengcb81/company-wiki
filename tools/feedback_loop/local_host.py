@@ -14,6 +14,7 @@ import sys
 from tempfile import NamedTemporaryFile
 import time
 
+from .host import BACKGROUND_CREATION_FLAGS
 from .observations import digest, unique_fields
 
 
@@ -184,7 +185,7 @@ class LocalHost:
             subprocess.Popen([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config", str(self.config),
                               "work", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env,
-                             start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+                             start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
         except OSError:
             # The pre-launch queue is durable. Host startup can wake it again.
             return False
@@ -238,7 +239,8 @@ class LocalHost:
         key = row["action_id"]
         try:
             outcome = subprocess.run([*reader, key], cwd=route["cwd"], timeout=route["timeout"],
-                                     capture_output=True, stdin=subprocess.DEVNULL, check=False)
+                                     capture_output=True, stdin=subprocess.DEVNULL, check=False,
+                                     creationflags=BACKGROUND_CREATION_FLAGS)
             value = json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
             if not isinstance(value, dict):
                 return None
@@ -339,7 +341,7 @@ class LocalHost:
             try:
                 completed = subprocess.run(route["argv"], input=row["request"].encode("ascii"), cwd=route["cwd"],
                                            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                                           timeout=route["timeout"], check=False)
+                                           timeout=route["timeout"], check=False, creationflags=BACKGROUND_CREATION_FLAGS)
             except FileNotFoundError:
                 state, receipt = "failed", {"code": "host_command_or_directory_unavailable"}
             except (OSError, subprocess.SubprocessError) as exc:
@@ -360,11 +362,11 @@ class LocalHost:
             stream.flush()
             os.fsync(stream.fileno())
 
-    def _ff_command(self, config, job_id, command, *args):
+    def _ff_command(self, config, job_id, command, *args, environment=None):
         try:
             outcome = subprocess.run([*_argv(config["ff_status_argv"]), command, "--owner-job-id", job_id, *args],
                                      cwd=config["cwd"], capture_output=True, timeout=15, check=False,
-                                     stdin=subprocess.DEVNULL)
+                                     stdin=subprocess.DEVNULL, env=environment, creationflags=BACKGROUND_CREATION_FLAGS)
             envelope = json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
         except (OSError, ValueError, RecursionError, subprocess.SubprocessError):
             return None
@@ -375,7 +377,7 @@ class LocalHost:
         job = envelope.get("job")
         return job if isinstance(job, dict) and job.get("owner") == "filing-fetch" and job.get("owner_job_id") == job_id else None
 
-    def _ff_lookup(self, request):
+    def _ff_lookup(self, request, *, environment=None):
         row = request["payload"].get("observation", {})
         ref = row.get("evidence_ref") if isinstance(row, dict) else None
         match = _FF_REF.fullmatch(ref) if isinstance(ref, str) else None
@@ -386,7 +388,7 @@ class LocalHost:
         if request["owner"] != "filing-fetch" or match is None or not argv:
             return {"state": "unknown"}
         job_id = match.group(1)
-        job = self._ff_command(config, job_id, "get_status")
+        job = self._ff_command(config, job_id, "get_status", environment=environment)
         if job is None:
             return {"state": "unknown", "code": "native_status_unavailable"}
         attempt = None
@@ -403,7 +405,8 @@ class LocalHost:
             action_key = f"feedback-reconcile/{job_id}" + (f"/{attempt}" if attempt is not None else "")
             job = self._ff_command(config, job_id, "act", "--action", "reconcile",
                                    "--idempotency-key", action_key, *scope,
-                                   "--config", str((self.config.parent / recovery_config).resolve()), "--timeout-seconds", "10")
+                                   "--config", str((self.config.parent / recovery_config).resolve()),
+                                   "--timeout-seconds", "10", environment=environment)
             if attempt is not None and job is not None and job.get("attempts") != attempt:
                 return {"state": "unknown", "code": "native_attempt_mismatch"}
         if job is None or job.get("status_known") is not True:
@@ -420,16 +423,17 @@ class LocalHost:
         return {"state": "done", "result": {"status": "known", "evidence_ref": ref,
                                              "job_status": job["status"], "cost_state": job["cost_state"]}}
 
-    def _reconcile_lookup(self, request):
+    def _reconcile_lookup(self, request, *, environment=None):
         if request["method"] != "lookup":
             return {"state": "failed", "code": "reconcile_lookup_only"}
         route = self._route(request["owner"], "reconcile")
         if route is None:
-            return self._ff_lookup(request)
+            return self._ff_lookup(request, environment=environment)
         try:
             outcome = subprocess.run(
                 route["argv"], cwd=route["cwd"], timeout=route["timeout"], check=False, capture_output=True,
-                input=json.dumps(request, ensure_ascii=True).encode("ascii"),
+                input=json.dumps(request, ensure_ascii=True).encode("ascii"), env=environment,
+                creationflags=BACKGROUND_CREATION_FLAGS,
             )
             response = json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
         except (OSError, ValueError, RecursionError, subprocess.SubprocessError):
@@ -442,7 +446,7 @@ class LocalHost:
                 return {"state": state}
         return {"state": "unknown", "code": "native_status_unavailable"}
 
-    def handle(self, request):
+    def handle(self, request, *, environment=None):
         _validate(request)
         key, owner, kind = (request[name] for name in ("action_id", "owner", "kind"))
         sha = request["request_digest"]
@@ -450,7 +454,7 @@ class LocalHost:
         if owner not in self.owners:
             return {**prefix, "state": "unknown", "code": "owner_unconfigured"}
         if kind == "reconcile":
-            return {**prefix, **self._reconcile_lookup(request)}
+            return {**prefix, **self._reconcile_lookup(request, environment=environment)}
         row = self._get(key)
         if row is None and request["method"] == "submit":
             route = self._route(owner, kind) if kind in _EXECUTABLE else None
@@ -526,7 +530,8 @@ class LocalHost:
                 argv = [str(executable), *argv[1:]]
             with path.open("xb") as stream:
                 completed = subprocess.run(argv, input=encoded.encode("utf-8"), cwd=route["cwd"], stdout=stream,
-                                           stderr=subprocess.DEVNULL, timeout=route["timeout"], check=False)
+                                           stderr=subprocess.DEVNULL, timeout=route["timeout"], check=False,
+                                           creationflags=BACKGROUND_CREATION_FLAGS)
             native, _ = _codex_receipt(path)
             if native.get("terminal"):
                 self._status(self._get(key))
@@ -541,7 +546,8 @@ class LocalHost:
         try:
             completed = subprocess.run([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config",
                                         str(self.config), "owner-command", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
-                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False,
+                                       creationflags=BACKGROUND_CREATION_FLAGS)
         except OSError as exc:
             self._owner_launcher_failed(key, error_type=type(exc).__name__)
             return

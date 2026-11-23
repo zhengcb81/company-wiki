@@ -16,6 +16,7 @@ from company_wiki.id_scope import normalize_id_scope
 
 from .models import JobStatus
 from .store import AutomationStore
+from .worker import reap_worker_attempts
 from .worker_process import WorkerProcessSpec, run_worker_process
 
 
@@ -188,7 +189,7 @@ class AutomationSupervisor:
         if not self._started or self._stopping:
             return
         now = _now()
-        self._store.reap_expired_attempts(now=now, allowed_job_ids=self._config.allowed_job_ids)
+        reap_worker_attempts(self._store, now=now, allowed_job_ids=self._config.allowed_job_ids)
         self._store.promote_ready_jobs(now=now, allowed_job_ids=self._config.allowed_job_ids)
         for slot in profile_slots(self._config.profile):
             worker_id = slot.worker_id

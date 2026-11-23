@@ -452,6 +452,54 @@ def test_only_finished_lookups_on_the_same_local_host_avoid_a_new_interpreter(tm
             transport.process_host(other, local=host)(OWNER, request)
 
 
+@pytest.mark.skipif(sys.platform != "win32", reason="Windows GUI launcher")
+def test_windows_recovery_reuses_same_host_and_runs_owner_reader_without_console(tmp_path, monkeypatch):
+    from tools.feedback_loop import host as transport
+    from tools.feedback_loop.local_host import LocalHost
+    from tools.feedback_loop.observations import digest
+
+    _, registry = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    reader = ("import ctypes,json,os,sys; json.load(sys.stdin); "
+              "result={'console':bool(ctypes.windll.kernel32.GetConsoleWindow()),"
+              "'private':os.getenv('TEST_F4_PRIVATE'),'route':os.getenv('TEST_F4_ROUTE')}; "
+              "print(json.dumps({'state':'done','result':result}))")
+    config["owners"][OWNER].update(timeout_seconds=15, actions={"reconcile": [*PYTHON, "-c", reader]})
+    settings.write_text(json.dumps(config), encoding="utf8")
+    host = LocalHost(settings)
+    routes = json.loads(registry.read_bytes())
+    routes[OWNER] = {"argv": routes[OWNER], "pass_env": ["TEST_F4_ROUTE"]}
+    route = routes[OWNER]["argv"]
+    windows_gui = Path(route[0]).with_name("pythonw.exe")
+    if not windows_gui.is_file() or Path(route[0]).name.lower() != "python.exe":
+        pytest.skip("matching python.exe and pythonw.exe are required")
+    monkeypatch.setattr(transport.sys, "executable", str(windows_gui))
+    monkeypatch.setenv("TEST_F4_PRIVATE", "parent-only")
+    monkeypatch.setenv("TEST_F4_ROUTE", "allowed")
+    original_run = subprocess.run
+    launches = []
+
+    def count(argv, **options):
+        launches.append((argv, options.get("creationflags", 0)))
+        return original_run(argv, **options)
+
+    monkeypatch.setattr(subprocess, "run", count)
+    call = transport.process_host(routes, local=host)
+
+    def lookup(kind):
+        key = digest([kind, OWNER, "original"])
+        body = {"occurrence_id": "original"}
+        return dict(schema_version="feedback-action/1", owner=OWNER, kind=kind, action_id=key,
+                    method="lookup", payload=body, request_digest=digest([OWNER, kind, key, body]))
+
+    assert call(OWNER, lookup("observe"))["state"] == "absent"
+    result = call(OWNER, lookup("reconcile"))
+    assert result["result"] == {"console": False, "private": None, "route": "allowed"}
+    assert len(launches) == 1 and launches[0][0][-1] == reader
+    assert launches[0][1] & subprocess.CREATE_NO_WINDOW
+
+
 def test_scoped_recovery_leaves_parallel_owner_marker_in_shared_inbox(tmp_path):
     from tools.feedback_loop.intake import drain
     from tools.feedback_loop.local_host import LocalHost

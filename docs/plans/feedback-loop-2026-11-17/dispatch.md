@@ -12,7 +12,7 @@ F4 的 12 个实际接线、正式版本及仍待补的业务证据统一登记�
 | [F4-FF-SLOT-LOOKUP](owner-cards/F4-FF-SLOT-LOOKUP.md) | `filing-fetch` | 已发生定时 slot 的本仓只读对账 |
 | [F4-SID-START-INPUT](owner-cards/F4-SID-START-INPUT.md) | `StockInfoDLSimple/v2-clean-rewrite` | 直启工作清单、开始前读取失败、零任务的本仓冷查 |
 
-三张卡分别写 ET、FF 和 SID。ROOT 负责实际宿主订阅、RF 可核验状态、旧未知用量归属和接收后联调。[分仓现状与下一个实测](replay-coverage-20261123.md)
+3 张卡现已由用户分发，分别写 ET、FF、SID。ROOT 独立推进 Windows 恢复、CWP 强停、Audit 单角色和 StockWiki 调用溯源，接收后再组合。 [分仓现状](replay-coverage-20261123.md) · [当前独立工作](f4-interruption-20261123.md)
 
 | 已签收 | 工作目录 | 原独立施工卡 | 首次发布的计划版本 |
 |---|---|---|---|

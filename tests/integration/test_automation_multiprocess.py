@@ -700,8 +700,13 @@ def test_p2_processes_two_sources_concurrently_and_preserves_same_source_depende
 
 @pytest.mark.parametrize("kill_phase", ["claimed", "handler_started", "before_finish"])
 def test_killed_child_is_reaped_and_job_is_recovered_after_supervisor_restart(
-    process_root: Path, kill_phase: str
+    process_root: Path, kill_phase: str, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    feedback = process_root / "observations"
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_DIR", str(feedback))
+    monkeypatch.setenv("LOCALAPPDATA", str(process_root / "state"))
+    monkeypatch.setenv("XDG_STATE_HOME", str(process_root / "state"))
     store = AutomationStore(process_root / "automation.db")
     job_id = _seed_job(
         store, suffix=kill_phase, job_type="test.compute", subject_id="source-crash"
@@ -730,6 +735,7 @@ def test_killed_child_is_reaped_and_job_is_recovered_after_supervisor_restart(
         and store.list_attempts(job_id)[0].lease_until < _now(),
         timeout=5,
     )
+    sibling = _seed_job(store, suffix="sibling", job_type="test.compute", subject_id="other-source")
     recovery_options = {"trace_dir": str(trace_dir), "delay_by_job": {job_id: 0.01}}
     restarted = AutomationSupervisor(
         _config(
@@ -742,7 +748,8 @@ def test_killed_child_is_reaped_and_job_is_recovered_after_supervisor_restart(
     )
     try:
         restarted.start()
-        restarted.wait_for_terminal((job_id,), timeout_seconds=15)
+        restarted.wait_for_terminal((job_id, sibling), timeout_seconds=15)
+        restarted.maintain()
     finally:
         restarted.stop()
 
@@ -751,10 +758,18 @@ def test_killed_child_is_reaped_and_job_is_recovered_after_supervisor_restart(
     assert attempts[0].error_code == "LEASE_EXPIRED"
     assert attempts[1].outcome is models.HandlerOutcome.SUCCEEDED
     assert store.get_job(job_id).status is models.JobStatus.SUCCEEDED
+    sibling_attempt, = store.list_attempts(sibling)
+    assert sibling_attempt.outcome is models.HandlerOutcome.SUCCEEDED
     assert all(
         marker["pid"] != first_pid
         for marker in _markers(trace_dir, "attempt_finished", job_id)
     )
+    ready, = feedback.glob("*.ready")
+    observation = json.loads(ready.with_suffix(".jsonl").read_bytes())
+    assert (observation["run_id"], observation["attempt_id"]) == (job_id, attempts[0].attempt_id)
+    assert (observation["actual"], observation["disposition"]) == ("retry_wait", "deviation")
+    details = json.loads((feedback / observation["details_ref"]).read_bytes())
+    assert details["reason"] == attempts[0].error_code
 
 
 def test_active_heartbeat_prevents_reap_then_stopped_process_becomes_reclaimable(

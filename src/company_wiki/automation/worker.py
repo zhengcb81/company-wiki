@@ -30,6 +30,7 @@ from .models import (
     HandlerOutcome,
     HandlerResult,
     JobStatus,
+    ReapedAttempt,
     RuntimeGate,
     RuntimeState,
 )
@@ -80,9 +81,21 @@ class WorkerStore(ExecutionSnapshotStore, Protocol):
         outbox_not_before: str | None = None,
     ) -> Attempt: ...
 
-    def reap_expired_attempts(
+    def reap_expired_attempt_outcomes(
         self, *, now: str, allowed_job_ids: tuple[str, ...] | None = None,
-    ) -> tuple[str, ...]: ...
+    ) -> tuple[ReapedAttempt, ...]: ...
+
+
+def reap_worker_attempts(
+    store: WorkerStore, *, now: str, allowed_job_ids: tuple[str, ...] | None,
+) -> int:
+    attempts = store.reap_expired_attempt_outcomes(now=now, allowed_job_ids=allowed_job_ids)
+    for attempt in attempts:
+        runtime_feedback.record(
+            "worker", attempt.job_status.value, run=attempt.job_id,
+            attempt=attempt.attempt_id, reason=attempt.error_code,
+        )
+    return len(attempts)
 
 
 class HandlerExecutor:
@@ -260,9 +273,7 @@ class Worker:
     def reap_expired(self) -> int:
         if self._allowed_job_ids == ():
             return 0
-        return len(self._store.reap_expired_attempts(
-            now=self._clock.now(), allowed_job_ids=self._allowed_job_ids,
-        ))
+        return reap_worker_attempts(self._store, now=self._clock.now(), allowed_job_ids=self._allowed_job_ids)
 
 
 def _classify_result(
