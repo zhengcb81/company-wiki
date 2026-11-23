@@ -354,6 +354,8 @@ def test_host_restart_automatically_consumes_direct_native_packet(tmp_path):
 
 
 def test_native_ack_belongs_to_the_occurrence_named_by_its_marker(tmp_path):
+    from tools.feedback_loop.observations import read_batch
+
     command, _ = configuration(tmp_path)
     settings = tmp_path / "settings.json"
     cfg = json.loads(settings.read_bytes())
@@ -380,7 +382,13 @@ def test_native_ack_belongs_to_the_occurrence_named_by_its_marker(tmp_path):
     marker.write_text(json.dumps(identity | {"step_id": "intake/" + packet.stem}), encoding="utf8")
     waiting = cold()
     assert waiting["remaining"] == 1 and waiting["processed"] == 0
-    marker.write_text(json.dumps(identity), encoding="utf8")
+    occurrence, = read_batch([packet]).observations
+    bound = identity | {"origin_owner": OWNER, "check_id": row["check_id"], "occurrence_id": occurrence}
+    for changed in ({"origin_owner": "another"}, {"check_id": "unrelated"}, {"occurrence_id": "1" * 64}):
+        marker.write_text(json.dumps(bound | changed), encoding="utf8")
+        waiting = cold()
+        assert waiting["remaining"] == 1 and waiting["processed"] == 0 and marker.exists()
+    marker.write_text(json.dumps(bound), encoding="utf8")
     assert cold()["processed"] == 1 and not marker.exists()
     assert cold()["processed"] == 0
 

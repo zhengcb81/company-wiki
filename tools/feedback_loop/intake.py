@@ -158,11 +158,14 @@ def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seco
         if any(field in context and not _matches_digest(path, context[field])
                for path, field in ((packet, "observations_sha256"), (details, "details_sha256"))):
             return 0, 1, [{"code": "native_observation_checksum_mismatch"}]
+    if "occurrence_id" in context and tuple(batch.observations) != (context["occurrence_id"],):
+        return 0, 1, [{"code": "native_observation_mismatch"}]
     for row in batch.observations.values():
         producing_owners = {row["origin_owner"], row["owner"]}
         if (not owners.intersection(producing_owners)
                 or ("owner" in context and context["owner"] not in producing_owners)
-                or any(row[key] != context[key] for key in ("run_id", "attempt_id", "step_id") if key in context)):
+                or any(row[key] != context[key] for key in
+                       ("origin_owner", "run_id", "attempt_id", "step_id", "check_id") if key in context)):
             return 0, 1, [{"code": "native_observation_mismatch"}]
     result = settle(batch, rpc, wait_seconds)
     count = len(result["observations"])
