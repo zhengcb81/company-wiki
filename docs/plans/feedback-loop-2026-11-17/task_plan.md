@@ -31,5 +31,5 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 从 [整改顺序与验收](failure-coverage-20261121.md#分仓整改顺序与验收) 第一项接续。StockQA/IQS 沿现有工作线把本次事故变成可区分原因的回归，SID 验证写盘错误后的补投，Audit 分开原退出状态与诊断完整度。总控用同一组公开入口独立复验原问题。完整基线见 [24 项发生记录](issues/failure-coverage-20261121.jsonl)。历史强退恢复和回告结果见 [组合验收](gate-closure-20261120.md)。W12 按父计划。
 # 当前执行入口
 
-2026-11-21 日常失败覆盖整改的 12 仓分工、各仓 F4 子计划、三张在途施工卡及 ROOT 的实际验收版本见[分仓执行表](failure-coverage-owners.md)。当前先收口普通入口写证据和掉电恢复，再用 IQS 与 StockQA 真实进程核查发现方和责任方是否都能查回原尝试。
+日常失败覆盖整改的 12 仓分工、各仓 F4 子计划及 ROOT 的实际验收版本见[分仓执行表](failure-coverage-owners.md)。11 月 23 日已完成 IQS 与 StockQA 两种关联方式的真实进程复验，八个模块的 Windows 自动恢复已启用。ET 外发卡已独审发布，SID、MeetingConverter 待正式交付。StockWiki 的历史反馈来源待核，StockQA 日常目录待并行项目切换到已发布代码。
 

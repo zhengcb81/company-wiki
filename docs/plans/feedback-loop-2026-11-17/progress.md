@@ -101,3 +101,7 @@ Dashboard `5018207` 与 IQS 原交付分支 `ac26a3b` 统一读兼容版本，�
 ROOT 实施批次已把行业研究及 RF 的已审运行代码与验收记录分别推到远端，Audit 的本地主线及实际安装入口已验。StockQA 用真实原账本读回 33 个工作项。独立审查又在普通故障里发现若干能稳定重现的遗漏，分别交各自责任仓修复。CWP 与统一入口的 39 项定向回归通过，真实 Windows 任务在隔离目录把一条掉电遗留正文登记成一个已完成观察，重复安装复用原任务。日常部署及跨仓组合以[分仓执行表](failure-coverage-owners.md)为准。
 
 2026-11-23 从中断处恢复三条 agent 线。IQS 与 StockQA 两个访问路径使用既有原账本的隔离快照，完成显式关联和自动关联两轮复验。总控投递确认补齐原生目录和监督器的区分、定向恢复对待执行项的约束、多步骤明细和 `.ack`。ET 交付文件已进总控组合测试，另在 ET 本仓复现深路径漏写。Windows 恢复任务先订阅五个已验证模块。[本仓结果和外发状态](failure-coverage-owners.md)
+
+FF 和 IQS 正式运行代码已发布。实际 Windows 定时任务从 FF 的四次历史业务找回 22 条观察，入原台账一次。四个原生重用包已确认，两个电话会费用状态继续标为未知。FF 远端的一次失败在 Ubuntu 3.12 原样复现。隔离下载重试测试的时钟替身和测试反馈目录后，209 项本机 Linux 回归通过，相关 Windows 两项通过。[FF CI](https://github.com/zhengcb81/filing-fetch/actions/runs/45271185608)
+
+ET 独审对照三个冻结版本。深目录、10 MiB 后的日志、明细补投和同一尝试不同拒绝均可查。真实进程在写新正文后、发出 ready 前被强停，约一分钟租期结束后只读入口补投两条，旧确认及原件保持完整。ROOT 对两批各重扫一次，台账恰好三个发生。源码 `b9594caf`，总控组合 `413b74d3`。[ET 本仓交接](../../../../earnings-transcripts/earnings-transcripts/docs/plans/feedback-loop-2026-11-17/F4-ET-FAILURES-handoff.md)

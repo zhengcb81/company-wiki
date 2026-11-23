@@ -17,7 +17,7 @@
 | ROOT | [Dashboard](../../../../investment-dashboard/.planning/unified-dashboard-2026-10-26/modules/m6-quickscan/feedback-runtime-2026-11-20.md) | http-request |
 | ROOT | [industry-research](../../../../industry-research/.planning/modularity-closeout-20261111/feedback-20261117.md) | installed-publisher、collection |
 
-三个外发任务的派工版本分别为 ET `0bfa07b9`、SID `95533795`、MC `101124f5`。11 月 23 日已收到 ET 本地交接 `5399205`，短目录通过 17 项。复验在 Windows 默认深目录重现明细写入缺失，ET 在隔离工作树修复。SID、MC 的发布线仍在派工版本，等待各自正式交付。
+三个外发任务的派工版本分别为 ET `0bfa07b9`、SID `95533795`、MC `101124f5`。ET 交接 `5399205` 接收后补修并独审，已快进并推送 `0246bfa9`。SID、MC 的发布线仍在派工版本，等待各自正式交付。
 
 ### 日常入口验收到哪一步
 
@@ -30,8 +30,9 @@
 | IQS | 远端 master 及专用运行目录 `aa847acf`，独审代码 `86385f3`。回放七个原入口与五个对照。普通调用自动生成和显式提供的编号均可传给 StockQA，兼容旧日志冷读和 446 字符 Windows 收件根。 |
 | StockWiki | 独审代码 `d819ffa`，本地主线记录 `153e87e`。八个原场景及追加的 370 字符目录通过，同一拒绝两次冷读一致。73 条旧记录已查，其中 61 条是两个找不到输入原路径的批次，只有两条能证实有人为调试，当前留证待核。该仓没有 Git 远端。 |
 | Dashboard | 已独审代码 `0aa04c40`、主线验收 `97b0bbc9`。五个 HTTP 失败可按关联号冷读。两个真实 HTTP 路由各启动一次离线子进程，长错误流仍保留真实退出码 43、原因和脱敏后的末行；同时复验了超时和响应超限。 |
-| company-wiki 与调度 | 远端 master `22c00a6e5`，35 项定向回归和独审通过。独审确认异常属性、不同 attempt、marker 错绑、长目录、强停和定向队列恢复。Windows 的实际自动恢复已覆盖七个已验模块。 |
+| company-wiki 与调度 | 源码 `413b74d35`，35 项回归及后续 4 项字节确认定向复验均通过。独审确认异常属性、不同 attempt、标记错绑、长目录、强停和定向队列恢复。Windows 实际自动恢复已覆盖八个已验模块。[总控 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45272235286) |
 | filing-fetch | 已部署代码 `32cf33e6`，远端主线 `a882295` 的 CI 成功。独审用三市场确认原收件箱坏后可补投两个原失败，原有六次调用保持六次。新浪部分失败保留具体表、原因及原用量。四个实际入口合计 12 个故障可冷读，三个物理订阅目录已登记。 |
+| earnings-transcripts | 远端 main `0246bfa9`，独审代码 `b9594caf`。128 项本仓回归通过。总控按原日志分别登记先到的一条和晚到的两条，复扫均为零，旧回执不变。长目录、10 MiB 后新增失败、明细补投和真实强停均通过。该仓目前没有远端 CI；批量采集内部逐公司、逐期次反馈仍列在本仓后续项。 |
 
 11 月 23 日用现有登记 bundle 和原 SQLite 的隔离快照做 IQS 与 StockQA 组合验收。填写和省略关联号的两轮均读回 33 项，模型请求和费用预留为零。两个同为 409 的拒绝分别冷读出 `ValueError` 和 `JSONDecodeError`，两仓保留同一 run/attempt，原快照字节相同。历史中微两题在发送前遗失的具体异常仍为未知。[复跑脚本](probes/iqs_stockqa.py)
 
