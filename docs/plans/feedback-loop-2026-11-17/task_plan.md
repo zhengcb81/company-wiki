@@ -28,5 +28,5 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 
 ## Next Step
 
-日常失败覆盖以[最新分仓结果](failure-coverage-owners.md)接续。StockWiki 先查清历史观察来源；StockQA 等在途项目把日常入口切到已验版本，再用本仓公开收据核对并加入原任务。汇总剩余观察时继续沿原 run/attempt 核对业务终态和费用。ET 批量采集逐公司、逐期次的观测余项由 ET 子计划跟进。W12 按父计划。
+按[复原验收和分仓余项](replay-coverage-20261123.md)接续。ROOT 用实际 Windows 收据按发生编号核四个待续包，继续 StockQA 正式路径冷读和 RF 公共状态复验。StockWiki 三条新发生先查原拒绝，再判断门禁。ET 批量逐项、FF 定时原批次、SID 直启清单可分别外派。W12 按父计划。
 

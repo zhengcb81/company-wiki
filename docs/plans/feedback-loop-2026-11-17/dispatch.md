@@ -4,6 +4,16 @@
 
 F4 的 12 个实际接线、正式版本及仍待补的业务证据统一登记在 [F4 分仓上线](f4-rollout.md)。下方保留 F2 和早期交付出处。
 
+## F4 日志复原独立施工
+
+| 可发施工卡 | 工作目录（相对 Projects） | 独立范围 |
+|---|---|---|
+| [F4-ET-BATCH-REPLAY](owner-cards/F4-ET-BATCH-REPLAY.md) | `earnings-transcripts/earnings-transcripts` | 批量采集逐公司、逐期次终态及本仓冷查 |
+| [F4-FF-SLOT-LOOKUP](owner-cards/F4-FF-SLOT-LOOKUP.md) | `filing-fetch` | 已发生定时 slot 的本仓只读对账 |
+| [F4-SID-START-INPUT](owner-cards/F4-SID-START-INPUT.md) | `StockInfoDLSimple/v2-clean-rewrite` | 直启工作清单、开始前读取失败、零任务的本仓冷查 |
+
+三张卡分别写 ET、FF 和 SID。ROOT 负责实际宿主订阅、RF 可核验状态、旧未知用量归属和接收后联调。[分仓现状与下一个实测](replay-coverage-20261123.md)
+
 | 已签收 | 工作目录 | 原独立施工卡 | 首次发布的计划版本 |
 |---|---|---|---|
 | FB-ET | `earnings-transcripts/earnings-transcripts` | [电话会原语言采集](../../../../earnings-transcripts/earnings-transcripts/docs/plans/feedback-loop-2026-11-17/FB-ET.md) | `main@6883623` |

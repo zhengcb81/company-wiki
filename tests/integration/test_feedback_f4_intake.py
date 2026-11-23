@@ -559,10 +559,21 @@ else:
 
     first = cold()
     assert (first["processed"], first["remaining"]) == (3, 2)
+    waiting = {item["packet_id"]: item["observations"] for item in first["unsettled"]}
+    unconfirmed, = waiting[packets["unconfirmed"][0].stem]
+    absent, = waiting[packets["absent"][0].stem]
+    assert unconfirmed == {
+        "occurrence_id": unconfirmed["occurrence_id"], "status": "unknown", "step": "reconcile",
+        "job_status": "unconfirmed", "cost_state": "unknown",
+    }
+    assert absent == {"occurrence_id": absent["occurrence_id"], "status": "unknown", "step": "reconcile"}
+    assert len(unconfirmed["occurrence_id"]) == len(absent["occurrence_id"]) == 64
+    assert packets["failed"][0].stem not in waiting
     assert packets["failed"][0].with_suffix(".ack").is_file()
     assert all(packets[key][0].with_suffix(".ready").is_file() for key in ("unconfirmed", "absent"))
     second = cold()
     assert (second["processed"], second["remaining"]) == (2, 2)
+    assert second["unsettled"] == first["unsettled"]
     assert all(path.read_bytes() == original for path, original in packets.values())
     with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as conn:
         assert conn.execute("SELECT count(*) FROM actions WHERE state='done'").fetchone() == (3,)

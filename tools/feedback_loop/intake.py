@@ -131,7 +131,16 @@ def _acknowledgeable(result: dict, *, bundle: bool) -> bool:
             and bool(result.get("evidence_ref")))
 
 
-def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seconds):
+def _record_unsettled(packet, outcomes, unsettled, *, bundle=False) -> bool:
+    fields = ("occurrence_id", "status", "step", "job_status", "cost_state")
+    waiting = [{field: row[field] for field in fields if field in row}
+               for row in outcomes if not _acknowledgeable(row, bundle=bundle)]
+    if waiting:
+        unsettled.append({"packet_id": packet.stem, "observations": waiting})
+    return bool(waiting)
+
+
+def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seconds, unsettled):
     """Finish a directly published occurrence, including death between its two atomic writes."""
     try:
         version = _file_version(packet)
@@ -180,7 +189,8 @@ def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seco
             return 0, 1, [{"code": "native_observation_mismatch"}]
     result = settle(batch, rpc, wait_seconds)
     count = len(result["observations"])
-    if result["diagnostics"] or any(not _acknowledgeable(r, bundle=bundle) for r in result["observations"]):
+    waiting = _record_unsettled(packet, result["observations"], unsettled, bundle=bundle)
+    if result["diagnostics"] or waiting:
         return count, 1, result["diagnostics"]
     if _file_version(packet) != version or (details_version is not None and _file_version(details) != details_version):
         return count, 1, [{"code": "native_observation_changed"}]
@@ -207,6 +217,7 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
     processed = remaining = 0
     diagnostics = []
     unconfirmed = []
+    unsettled = []
     directories: dict[Path, set[str]] = {}
     native_owners: dict[Path, set[str]] = {}
     supervised = set()
@@ -249,7 +260,8 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
                     direct = native and not supervisor_marker
                     if direct:
                         count, pending_count, issues = _receive_native(
-                            sidecar, None if unmarked else marker, context, native, host, known, rpc, wait_seconds)
+                            sidecar, None if unmarked else marker, context, native, host, known, rpc,
+                            wait_seconds, unsettled)
                         processed += count
                         remaining += pending_count
                         diagnostics.extend({"owner": name, **row} for row in issues)
@@ -295,8 +307,9 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
             result = settle(batch, rpc, wait_seconds)
             processed += len(result["observations"])
             diagnostics.extend({"owner": name, **row} for row in result["diagnostics"])
+            waiting = _record_unsettled(sidecar, result["observations"], unsettled)
             if ((marker.suffix == ".ready" or process_receipt.is_file()) and not result["diagnostics"]
-                    and all(row["status"] in _SETTLED for row in result["observations"])):
+                    and not waiting):
                 try:
                     marker.unlink(missing_ok=True)
                 except OSError:
@@ -305,7 +318,7 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
             else:
                 remaining += 1
     return {"woken": woken, "processed": processed, "remaining": remaining, "diagnostics": diagnostics,
-            "unconfirmed": unconfirmed}
+            "unconfirmed": unconfirmed, "unsettled": unsettled}
 
 
 def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: list[str] | None = None,
