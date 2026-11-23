@@ -6,6 +6,8 @@
 
 单发生的发布标记如果给出 `origin_owner`、`check_id` 或 `occurrence_id`，总控按实际观察的同名字段和规范发生标识核对。这样同一任务步骤里的启动、失败和结算三种检查各自确认。旧标记可以继续只带 owner、运行、尝试和步骤。
 
+完整多步骤包的投递确认与费用结算分开。owner 通过原发生引用只读查到确切业务终态且费用仍未知时，收件端确认原包已登记，原观察和费用状态继续保留。原作业终态未确认、查不到引用或尚在运行时，保留就绪标记供后续接续。
+
 `feedback-delivery-ready/1` 用于同一次尝试的多步骤投递，标明实际 `step_ids`、观察数及明细数。明细在同名 `.jsonl.details.jsonl`。消费端用原观察的 `details_ref` 核对可冷读的 `details_id`，提供 `observations_sha256` 或 `details_sha256` 时也核对对应原文件的完整字节。成功登记并接续后原子移动对应 `.ready` 为 `.ack`，确认随这份内容保留。缺失、截断或错绑的明细保留待确认标记。后续新发生可用同一尝试的另一个文件交付。两份原文件供本仓冷读。普通单条格式继续沿用已有确认和恢复方式。
 
 UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可指定此文件。`RESEARCH_FEEDBACK_RUN_ID` 和 `RESEARCH_FEEDBACK_ATTEMPT_ID` 可提供上下文；独立测试可生成自己的标识。父子进程各有独占输出，父端关联各自原生 ID。现有 stdout、stderr、错误信封和既有计费回执保留其协议。输出文件写失败时由外层记录追踪不完整，业务使用原始终态。

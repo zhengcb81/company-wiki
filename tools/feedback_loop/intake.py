@@ -24,6 +24,7 @@ _MARKER = re.compile(r"feedback-[a-f0-9]{32}\.(?:pending|ready)")
 _PACKET = re.compile(r"feedback-[a-f0-9]{32}\.jsonl")
 _BUNDLE = "feedback-delivery-ready/1"
 _SETTLED = {"expected", "external", "needs_evidence", "reconciled", "verified", "regressed"}
+_TERMINAL = {"succeeded", "failed", "cancelled", "interrupted"}
 
 
 def _recovery_dir(settings: Path) -> Path:
@@ -120,6 +121,16 @@ def _matches_digest(path: Path, expected: str) -> bool:
         return file_digest(stream, "sha256").hexdigest() == expected
 
 
+def _acknowledgeable(result: dict, *, bundle: bool) -> bool:
+    if result["status"] in _SETTLED:
+        return True
+    # A final bundle can be delivered while a separate billing fact is unknown.
+    # The coordinator only supplies this shape after a bound, read-only lookup.
+    return (bundle and result["status"] == "unknown" and result.get("step") == "reconcile"
+            and result.get("job_status") in _TERMINAL and result.get("cost_state") == "unknown"
+            and bool(result.get("evidence_ref")))
+
+
 def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seconds):
     """Finish a directly published occurrence, including death between its two atomic writes."""
     try:
@@ -169,7 +180,7 @@ def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seco
             return 0, 1, [{"code": "native_observation_mismatch"}]
     result = settle(batch, rpc, wait_seconds)
     count = len(result["observations"])
-    if result["diagnostics"] or any(r["status"] not in _SETTLED for r in result["observations"]):
+    if result["diagnostics"] or any(not _acknowledgeable(r, bundle=bundle) for r in result["observations"]):
         return count, 1, result["diagnostics"]
     if _file_version(packet) != version or (details_version is not None and _file_version(details) != details_version):
         return count, 1, [{"code": "native_observation_changed"}]

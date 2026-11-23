@@ -521,3 +521,50 @@ def test_bundle_ack_is_published_after_all_original_steps_are_recorded(tmp_path)
     assert check()["processed"] == 2 and receipt.is_file() and not marker.exists()
     assert check()["processed"] == 0 and packet.read_bytes() == original
     assert receipt.read_bytes() == advertised
+
+
+def test_complete_native_bundle_can_ack_without_guessing_the_original_cost(tmp_path):
+    command, _ = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    config["owners"][OWNER]["native_observation_dirs"] = ["native"]
+    native_lookup = """import json,sys
+row=json.load(sys.stdin)["payload"]["observation"]
+ref=row["evidence_ref"]
+status=ref if ref in ("failed","unconfirmed") else None
+if status:
+    print(json.dumps({"state":"done","result":{
+        "evidence_ref":ref,"job_status":status,"status":"cost_unknown","cost_state":"unknown"}}))
+else:
+    print('{"state":"unknown"}')
+"""
+    config["owners"][OWNER].update(timeout_seconds=15, actions={"reconcile": [*PYTHON, "-c", native_lookup]})
+    settings.write_text(json.dumps(config), encoding="utf8")
+    directory = tmp_path / "native"
+    directory.mkdir()
+    packets = {}
+    for ordinal, name in enumerate(("failed", "unconfirmed", "absent"), 1):
+        packet = directory / f"feedback-{ordinal:032x}.jsonl"
+        stem = dict(owner=OWNER, run_id=name, attempt_id="attempt", step_id="original")
+        packet.write_text(json.dumps(dict(stem, schema_version="feedback-observation/1", check_id="recorded-cost",
+                                          expected="known", actual="unknown", disposition="unknown",
+                                          evidence_ref=name)) + "\n")
+        marker = packet.with_suffix(".ready")
+        marker.write_text(json.dumps(dict(stem, schema_version="feedback-delivery-ready/1",
+                                          observations=1, details=0, step_ids=["original"])))
+        packets[name] = (packet, packet.read_bytes())
+
+    def cold():
+        return json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT, timeout=25))
+
+    first = cold()
+    assert (first["processed"], first["remaining"]) == (3, 2)
+    assert packets["failed"][0].with_suffix(".ack").is_file()
+    assert all(packets[key][0].with_suffix(".ready").is_file() for key in ("unconfirmed", "absent"))
+    second = cold()
+    assert (second["processed"], second["remaining"]) == (2, 2)
+    assert all(path.read_bytes() == original for path, original in packets.values())
+    with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as conn:
+        assert conn.execute("SELECT count(*) FROM actions WHERE state='done'").fetchone() == (3,)
+        assert conn.execute("SELECT count(*) FROM actions WHERE json_extract(request,'$.kind')='observe' "
+                            "AND json_extract(request,'$.payload.observation.actual')='unknown'").fetchone() == (3,)
