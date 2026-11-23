@@ -18,7 +18,7 @@ RF W01、W02 最终版 `cbb523a` 已通过独审和精确 CI，远端主线快�
 
 ## 2026-11-20 反馈工程进展
 
-2026-11-23 更新。ET、StockInfoDLSimple、MeetingConverter 三张日常失败覆盖卡均已独审、并线、推送。Windows 已验自动恢复订阅从 8 扩到 10 仓，正常周期退出 0。原记录可以重复查回，组合验收新增下载、转录和费用均为零。StockWiki 与 StockQA 的待接范围由 F4 子计划跟进。 [实际验收与余项](../feedback-loop-2026-11-17/failure-coverage-owners.md)
+2026-11-23 更新。ET、StockInfoDLSimple、MeetingConverter 三张日常失败覆盖卡均已独审、并线、推送。Windows 自动恢复订阅先扩到 10 仓，StockQA 正式路径冷读通过后扩到 11 仓，实际运行退出 0。原记录可重复查回，组合验收新增下载、转录和费用均为零。各仓全入口复原及 StockWiki 现场范围按 F4 子计划跟进。 [实际验收与余项](../feedback-loop-2026-11-17/replay-coverage-20261123.md)
 
 2026-11-21 补充。12 个模块的日常入口已逐仓审计，均发现漏记或业务失败误判。24 项发现已在本机 F4 登记并冷读。统一启动器和正式摘要投影的两个共用缺口已修复。全入口覆盖按所属模块整改与验收。下列 11 月 20 日数据仅描述当时通过的指定场景。[当前登记与优先级](../feedback-loop-2026-11-17/failure-coverage-20261121.md)
 

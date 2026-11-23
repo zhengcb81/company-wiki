@@ -401,7 +401,8 @@
       "audit": "../feedback-loop-2026-11-17/failure-coverage-20261121.md",
       "owner_acceptance": "../feedback-loop-2026-11-17/failure-coverage-owners.md",
       "external_handoffs_accepted": ["F4-ET-FAILURES", "F4-SID-FAILURES", "F4-MC-FAILURES"],
-      "scheduled_recovery_owner_count": 10
+      "scheduled_recovery_owner_count": 11,
+      "replay_coverage": "../feedback-loop-2026-11-17/replay-coverage-20261123.md"
     },
     "f4_rollout": "../feedback-loop-2026-11-17/f4-rollout.md",
     "f4_locally_configured_owner_count": 12,
