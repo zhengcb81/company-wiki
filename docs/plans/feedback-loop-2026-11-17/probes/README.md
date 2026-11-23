@@ -22,3 +22,5 @@
 核对基线发现可用 `python -B -m tools.feedback_loop plan docs/plans/feedback-loop-2026-11-17/issues/failure-coverage-20261121.jsonl`。同一文件传两次，观察身份和数量应相同。该文件记录审计发生，不会重跑发生时的业务。修复后另起 attempt 对比原生失败与 F4 的记录，保留旧观察原判。
 
 每个 owner 的复验至少包含一条应完成的合法请求和一条确实应拒绝的请求。重点检查正常入口能否在没有调用者注入反馈环境变量时保留失败、HTTP 200/进程退出 0 里的部分失败是否被发现、新进程能否从原运行和尝试读回原因、哪些副作用确实发生过。直接取消和受控拒绝可以登记为预期结果。同一问题的多次观察保留各自发生身份。
+
+IQS 与 StockQA 的组合复验命令为 `python -B docs/plans/feedback-loop-2026-11-17/probes/iqs_stockqa.py IQS代码目录 StockQA代码目录 现行IQS配置 临时目录的上级`。加 `--implicit` 复验由 IQS 自动生成关联号的入口。只读选择配置中可用的 1.1.0 登记 bundle，从原账本建立独立的 SQLite 快照，复验两个不同底因对应同一 HTTP 错误后清理临时产物。两轮均没有模型请求或费用预留。

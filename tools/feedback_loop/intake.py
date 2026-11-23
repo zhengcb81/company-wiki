@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from contextlib import suppress
+from hashlib import file_digest
 import json
 import os
 from pathlib import Path
@@ -114,6 +115,11 @@ def _bundle_details_present(path: Path, declared: int, references: set[str]) -> 
     return len(ids) == declared and references <= ids
 
 
+def _matches_digest(path: Path, expected: str) -> bool:
+    with path.open("rb") as stream:
+        return file_digest(stream, "sha256").hexdigest() == expected
+
+
 def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seconds):
     """Finish a directly published occurrence, including death between its two atomic writes."""
     try:
@@ -142,13 +148,16 @@ def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seco
         references = {row["details_ref"] for row in batch.observations.values() if "details_ref" in row}
         if type(declared) is not int or declared < len(references):
             return 0, 1, [{"code": "native_observation_mismatch"}]
-        if declared:
+        if declared or "details_sha256" in context:
             try:
                 details_version = _file_version(details)
             except OSError:
                 return 0, 1, [{"code": "native_observation_details_missing"}]
             if not _bundle_details_present(details, declared, references):
                 return 0, 1, [{"code": "native_observation_details_incomplete"}]
+        if any(field in context and not _matches_digest(path, context[field])
+               for path, field in ((packet, "observations_sha256"), (details, "details_sha256"))):
+            return 0, 1, [{"code": "native_observation_checksum_mismatch"}]
     for row in batch.observations.values():
         producing_owners = {row["origin_owner"], row["owner"]}
         if (not owners.intersection(producing_owners)

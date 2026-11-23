@@ -40,7 +40,9 @@ Dayu 的运行观察继续通过 CWP 的外部 provider 适配器。
 .\tools\feedback_loop\install_recovery_task.ps1 -SettingsPath .planning\shared-reading-production\feedback-host\settings.json -PythonPath C:\Miniconda\python.exe
 ```
 
-11 月 23 日已为 `company-wiki`、`industry-research`、`revenue-forecast`、`revenue-forecast-audit` 与 `investment-dashboard` 启用同一个实际任务。重复安装返回 `already_installed`，手工唤醒系统退出 0 并得到新回执，当时无待处理观察。按 owner 指定范围时，恢复从该范围查原队列及收件箱，背景动作完成后的接续继续使用相同范围。各 owner 明确转交的观察仍按已有接口路由。StockWiki 默认收件目录已有历史失败，当前在本仓核对来源后再接入自动分诊。
+11 月 23 日先为 `company-wiki`、`industry-research`、`revenue-forecast`、`revenue-forecast-audit` 与 `investment-dashboard` 启用同一个实际任务。重复安装返回 `already_installed`，随后的周期执行退出 0。发布并验证后在同一任务加入 IQS 和 filing-fetch。FF 的正式主仓和两个物理技能目录一起订阅。实际无人值守恢复把四个原业务尝试的 22 条观察登记一次，动作库从 46 条增至 68 条，只有观察已完成状态。FF 的四个正常重用包已确认，两个电话会用量状态继续为未知。下一次恢复仍只查同一原生发生。
+
+按 owner 指定范围时，恢复先查该范围的原队列及收件箱，背景动作完成后的接续继续使用相同范围。各 owner 明确转交的观察仍按已有接口路由。StockWiki 的历史失败已在本仓记账。原本的接入测试入口正常，旧记录的来源待核后再自动分诊。
 
 在总控仓用实际宿主的解释器运行下面的入口。`SETTINGS` 和 `HOSTS` 来自原有本机 `feedback-host` 目录。给一个 owner 配置固定工作目录和专用 `observation_dir`。下面命令中 `ORIGINAL_COMMAND` 是本次已确定的本仓公开命令及原参数。
 

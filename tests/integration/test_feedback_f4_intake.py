@@ -476,6 +476,8 @@ def test_scoped_recovery_leaves_parallel_owner_marker_in_shared_inbox(tmp_path):
 
 
 def test_bundle_ack_is_published_after_all_original_steps_are_recorded(tmp_path):
+    from hashlib import sha256
+
     command, _ = configuration(tmp_path)
     settings = tmp_path / "settings.json"
     config = json.loads(settings.read_bytes())
@@ -490,18 +492,24 @@ def test_bundle_ack_is_published_after_all_original_steps_are_recorded(tmp_path)
             for step in ("first-doc", "second-doc")]
     packet.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf8")
     marker = packet.with_suffix(".ready")
+    detail_bytes = b'{"details_id":"proof","reason":"original"}\n'
     marker.write_text(json.dumps(dict(identity, schema_version="feedback-delivery-ready/1",
-                                      step_ids=["first-doc", "second-doc"], observations=2, details=1)), encoding="utf8")
+                                      step_ids=["first-doc", "second-doc"], observations=2, details=1,
+                                      observations_sha256=sha256(packet.read_bytes()).hexdigest(),
+                                      details_sha256=sha256(detail_bytes).hexdigest())), encoding="utf8")
     proof = inbox / (packet.name + ".details.jsonl")
 
     def check():
         return json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT))
 
-    original, receipt = packet.read_bytes(), packet.with_suffix(".ack")
+    original, advertised, receipt = packet.read_bytes(), marker.read_bytes(), packet.with_suffix(".ack")
     assert check()["remaining"] == 1 and marker.is_file() and not receipt.exists()
     for wrong in (b"", b'{"details_id":"proof"', b'{"details_id":"unrelated"}\n'):
         proof.write_bytes(wrong)
         assert check()["remaining"] == 1 and marker.is_file() and not receipt.exists()
-    proof.write_text(json.dumps({"details_id": "proof"}) + "\n")
+    proof.write_bytes(b'{"details_id":"proof","reason":"old"}\n')
+    assert "native_observation_checksum_mismatch" in {row["code"] for row in check()["diagnostics"]}
+    proof.write_bytes(detail_bytes)
     assert check()["processed"] == 2 and receipt.is_file() and not marker.exists()
     assert check()["processed"] == 0 and packet.read_bytes() == original
+    assert receipt.read_bytes() == advertised
