@@ -18,6 +18,7 @@ from .observations import digest, unique_fields
 
 
 _ROOT = Path(__file__).resolve().parents[2]
+RECOVERY_OWNERS_ENV = "RESEARCH_FEEDBACK_RECOVERY_OWNERS"
 _KEY = re.compile(r"[0-9a-f]{64}")
 _FF_REF = re.compile(r"ff-job/1/(ffjob-[0-9a-f]{12})")
 _LOCAL = {"observe"}
@@ -108,12 +109,13 @@ def _codex_receipt(path: Path):
 
 
 class LocalHost:
-    def __init__(self, config: Path):
+    def __init__(self, config: Path, *, recovery_owners=None):
         self.config = config.resolve()
         settings = json.loads(host_path(self.config).read_bytes(), object_pairs_hook=unique_fields)
         self.db = host_path(self.config.parent / settings["state"])
         self.owners = settings["owners"]
         self.intake_hosts = settings.get("intake_hosts")
+        self.recovery_owners = sorted(recovery_owners or os.environ.get(RECOVERY_OWNERS_ENV, "").split())
         with closing(self._connect()) as conn:
             conn.execute(_SCHEMA)
             conn.execute("""CREATE TABLE IF NOT EXISTS native_deliveries (
@@ -175,33 +177,39 @@ class LocalHost:
         return self._lookup_result(request, row, prefix)
 
     def _wake(self, key):
+        env = os.environ.copy()
+        if self.recovery_owners:
+            env[RECOVERY_OWNERS_ENV] = " ".join(self.recovery_owners)
         try:
             subprocess.Popen([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config", str(self.config),
                               "work", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env,
                              start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         except OSError:
             # The pre-launch queue is durable. Host startup can wake it again.
             return False
         return True
 
-    def _recover_queued(self, workspace=None):
-        sql = ("SELECT action_id, workspace FROM actions AS queued WHERE state = 'queued' "
+    def _recover_queued(self, workspace=None, *, owners=None):
+        sql = ("SELECT action_id, workspace, request FROM actions AS queued WHERE state = 'queued' "
                "AND NOT EXISTS (SELECT 1 FROM actions AS running WHERE running.state = 'running' "
                "AND running.workspace = queued.workspace) "
                "AND (? IS NULL OR workspace = ?) ORDER BY rowid")
         with closing(self._connect()) as conn:
             keys = {}
             for row in conn.execute(sql, (workspace, workspace)):
+                if owners and json.loads(row["request"])["owner"] not in owners:
+                    continue
                 keys.setdefault(row["workspace"], row["action_id"])
         return [key for key in keys.values() if self._wake(key)]
 
-    def recover(self):
+    def recover(self, *, owners=None):
         with closing(self._connect()) as conn:
             unresolved = conn.execute("SELECT * FROM actions WHERE state IN ('running', 'unknown')").fetchall()
         for row in unresolved:
-            self._status(row, check_owner=True)
-        return self._recover_queued()
+            if not owners or json.loads(row["request"])["owner"] in owners:
+                self._status(row, check_owner=True)
+        return self._recover_queued(owners=owners)
 
     def _native_path(self, key):
         return self.db.parent / (self.db.name + "." + key + ".jsonl")
@@ -483,17 +491,19 @@ class LocalHost:
         row = self._get(key)
         if row is None or row["state"] != "queued":
             return
-        self._execute(row, json.loads(row["route"]), json.loads(row["request"]))
+        request = json.loads(row["request"])
+        self._execute(row, json.loads(row["route"]), request)
         state = self._get(key)["state"]
         if state not in ("queued", "running"):
-            self._recover_queued(row["workspace"])
+            owners = {*self.recovery_owners, request["owner"]} if self.recovery_owners else None
+            self._recover_queued(row["workspace"], owners=owners)
         if state == "done" and isinstance(self.intake_hosts, str) and self.intake_hosts:
             # Feedback can outlive the caller's finite wait. Referrals and replay
             # can span owners, so revisit the configured inboxes on completion.
             from .intake import wake
 
             with suppress(OSError):
-                wake(self.config, self.config.parent / self.intake_hosts)
+                wake(self.config, self.config.parent / self.intake_hosts, owners=self.recovery_owners)
 
     def _execute(self, row, route, request):
         key = row["action_id"]
@@ -561,7 +571,7 @@ def _recover_command(args) -> dict:
     if not args.sidecar and (args.hosts or host_path(discovery).is_file()):
         from .intake import drain
         return drain(args.config.resolve(), discovery.resolve(), owner=args.owner, wait_seconds=args.wait_seconds)
-    outcome = {"woken": LocalHost(args.config).recover()}
+    outcome = {"woken": LocalHost(args.config, recovery_owners=args.owner).recover(owners=args.owner)}
     if args.sidecar:
         from .coordinator import settle
         from .host import process_host, read_hosts

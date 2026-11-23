@@ -15,12 +15,13 @@ from uuid import uuid4
 from .coordinator import settle
 from .host import process_host, read_hosts
 from .local_host import LocalHost, host_path
-from .observations import read_batch
+from .observations import read_batch, unique_fields
 
 
 _ROOT = Path(__file__).resolve().parents[2]
 _MARKER = re.compile(r"feedback-[a-f0-9]{32}\.(?:pending|ready)")
 _PACKET = re.compile(r"feedback-[a-f0-9]{32}\.jsonl")
+_BUNDLE = "feedback-delivery-ready/1"
 _SETTLED = {"expected", "external", "needs_evidence", "reconciled", "verified", "regressed"}
 
 
@@ -96,6 +97,23 @@ def _file_version(path: Path) -> tuple[int, int]:
     return stat.st_size, stat.st_mtime_ns
 
 
+def _bundle_details_present(path: Path, declared: int, references: set[str]) -> bool:
+    try:
+        with path.open("rb") as stream:
+            ids = set()
+            for line in stream:
+                if not line.endswith(b"\n"):
+                    return False
+                item = json.loads(line, object_pairs_hook=unique_fields)
+                key = item.get("details_id") if isinstance(item, dict) else None
+                if not isinstance(key, str) or not key or key in ids:
+                    return False
+                ids.add(key)
+    except (OSError, ValueError, RecursionError):
+        return False
+    return len(ids) == declared and references <= ids
+
+
 def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seconds):
     """Finish a directly published occurrence, including death between its two atomic writes."""
     try:
@@ -113,6 +131,24 @@ def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seco
     batch = read_batch([packet])
     if batch.diagnostics or not batch.observations:
         return 0, 1, batch.diagnostics or [{"code": "native_observation_missing"}]
+    bundle = context.get("schema_version") == _BUNDLE
+    details_version = None
+    if bundle:
+        if (context.get("observations") != len(batch.observations) or
+                context.get("step_ids") != sorted({row["step_id"] for row in batch.observations.values()})):
+            return 0, 1, [{"code": "native_observation_mismatch"}]
+        details = packet.with_name(packet.name + ".details.jsonl")
+        declared = context.get("details")
+        references = {row["details_ref"] for row in batch.observations.values() if "details_ref" in row}
+        if type(declared) is not int or declared < len(references):
+            return 0, 1, [{"code": "native_observation_mismatch"}]
+        if declared:
+            try:
+                details_version = _file_version(details)
+            except OSError:
+                return 0, 1, [{"code": "native_observation_details_missing"}]
+            if not _bundle_details_present(details, declared, references):
+                return 0, 1, [{"code": "native_observation_details_incomplete"}]
     for row in batch.observations.values():
         producing_owners = {row["origin_owner"], row["owner"]}
         if (not owners.intersection(producing_owners)
@@ -123,31 +159,41 @@ def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seco
     count = len(result["observations"])
     if result["diagnostics"] or any(r["status"] not in _SETTLED for r in result["observations"]):
         return count, 1, result["diagnostics"]
-    if _file_version(packet) != version:
+    if _file_version(packet) != version or (details_version is not None and _file_version(details) != details_version):
         return count, 1, [{"code": "native_observation_changed"}]
     host.confirm_native_delivery(packet, version)
     known[packet.name] = version
     if marker is not None:
-        marker.unlink(missing_ok=True)
+        if bundle:
+            try:
+                marker.replace(marker.with_suffix(".ack"))
+            except FileNotFoundError:
+                if not marker.with_suffix(".ack").is_file():
+                    raise
+        else:
+            marker.unlink(missing_ok=True)
     return count, 0, []
 
 
 def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wait_seconds: int) -> dict:
     """Resume host work and consume the original packets in the configured inboxes."""
-    host = LocalHost(settings)
+    selected = {owner} if isinstance(owner, str) else set(owner) if owner else None
+    host = LocalHost(settings, recovery_owners=selected)
     rpc = process_host(read_hosts(host_path(hosts_file)), local=host)
-    woken = len(host.recover())
+    woken = len(host.recover(owners=selected))
     processed = remaining = 0
     diagnostics = []
     unconfirmed = []
-    selected = {owner} if isinstance(owner, str) else set(owner) if owner else None
     directories: dict[Path, set[str]] = {}
     native_owners: dict[Path, set[str]] = {}
+    supervised = set()
     for name, directory, native in _observation_dirs(settings, host.owners, selected):
         directory = host_path(directory)
         directories.setdefault(directory, set()).add(name)
         if native:
             native_owners.setdefault(directory, set()).add(name)
+        else:
+            supervised.add(directory)
     for directory, names in directories.items():
         name = sorted(names)[0]
         native = native_owners.get(directory, set())
@@ -171,12 +217,13 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
             if unmarked or (marker.suffix == ".ready" and (native or selected)):
                 try:
                     content = b"" if unmarked else marker.read_bytes()
-                    context = json.loads(content) if content else {}
+                    context = json.loads(content, object_pairs_hook=unique_fields) if content else {}
                     if not isinstance(context, dict):
                         raise ValueError("invalid observation marker")
                     if selected and context.get("owner") and context["owner"] not in selected:
                         continue
-                    direct = native and not str(context.get("step_id", "")).startswith("intake/")
+                    supervisor_marker = directory in supervised and context.get("step_id") == "intake/" + marker.stem
+                    direct = native and not supervisor_marker
                     if direct:
                         count, pending_count, issues = _receive_native(
                             sidecar, None if unmarked else marker, context, native, host, known, rpc, wait_seconds)
@@ -238,8 +285,9 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
             "unconfirmed": unconfirmed}
 
 
-def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, wait_seconds: int = 0):
-    scope = [] if owner is None else ["--owner", owner]
+def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: list[str] | None = None,
+         wait_seconds: int = 0):
+    scope = [arg for name in (owners or ([owner] if owner else [])) for arg in ("--owner", name)]
     subprocess.Popen(
         [sys.executable, "-B", "-m", "tools.feedback_loop.intake", "--settings", str(settings),
          "--hosts", str(hosts_file), "--wait-seconds", str(wait_seconds), "drain", *scope],
@@ -330,7 +378,7 @@ def main(argv=None):
     run = modes.add_parser("run", help="run an existing business command and wake feedback")
     run.add_argument("--owner", required=True)
     run.add_argument("command", nargs=argparse.REMAINDER)
-    modes.add_parser("drain", help="resume the configured observation inboxes").add_argument("--owner")
+    modes.add_parser("drain", help="resume the configured observation inboxes").add_argument("--owner", action="append")
     args = parser.parse_args(argv)
     settings, hosts_file = args.settings.resolve(), args.hosts.resolve()
     if args.wait_seconds < 0:

@@ -29,7 +29,8 @@ def process_host(config, timeout=30, *, local=None):
             raise Deferred("host_unconfigured", request["kind"])
         if not isinstance(extra, list) or not all(isinstance(name, str) for name in extra):
             raise Deferred("host_unconfigured", request["kind"])
-        if local is not None and (argv == local_argv or argv == [*local_argv[:2], "-X", "utf8", *local_argv[2:]]):
+        same_host = local is not None and (argv == local_argv or argv == [*local_argv[:2], "-X", "utf8", *local_argv[2:]])
+        if same_host:
             cached = local.settled_lookup(request)
             if cached is not None:
                 return cached
@@ -37,6 +38,9 @@ def process_host(config, timeout=30, *, local=None):
                  "TEMP", "TMP", "TMPDIR", "APPDATA", "LOCALAPPDATA", "LANG", "LC_ALL", *extra)
         env = {name: os.environ[name] for name in names if name in os.environ
                and name.upper() not in {"RESEARCH_FEEDBACK_OUT", "RESEARCH_FEEDBACK_HOSTS"}}
+        if same_host and local.recovery_owners:
+            from .local_host import RECOVERY_OWNERS_ENV
+            env[RECOVERY_OWNERS_ENV] = " ".join(local.recovery_owners)
         outcome = subprocess.run(argv, input=json.dumps(request, ensure_ascii=True).encode("ascii"), env=env,
                                  capture_output=True, timeout=timeout, check=True, shell=False)
         return json.loads(outcome.stdout.decode("utf-8"), object_pairs_hook=unique_fields)

@@ -303,7 +303,11 @@ def test_completed_actions_continue_feedback_after_initial_drain_has_exited(tmp_
     config["owners"][OWNER].update(timeout_seconds=15, actions={
         kind: [*PYTHON, "-c", OWNER_PORT, kind] for kind in ("triage", "repair", "replay", "report")
     })
+    config["owners"]["unrelated"] = {"observation_dir": "unrelated"}
     settings.write_text(json.dumps(config), encoding="utf-8")
+    unrelated = tmp_path / "unrelated" / ("feedback-" + "e" * 32 + ".ready")
+    unrelated.parent.mkdir()
+    unrelated.write_text(json.dumps({"owner": "unrelated"}))
     # The native error explicitly accounts for the exit of the monitored process.
     done = subprocess.run([*command, "run", "--owner", OWNER, "--", *PYTHON, "-c", PRODUCER, "process-reported"],
                           cwd=ROOT, capture_output=True, check=False, timeout=20)
@@ -315,6 +319,7 @@ def test_completed_actions_continue_feedback_after_initial_drain_has_exited(tmp_
     while marker.exists() and time.monotonic() < deadline:
         time.sleep(0.1)
     assert not marker.exists()
+    assert unrelated.exists()
     assert (tmp_path / "business-count.txt").read_text() == "entered\n"
     with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as connection:
         rows = connection.execute("SELECT action_id, json_extract(request, '$.kind'), state FROM actions").fetchall()
@@ -372,6 +377,10 @@ def test_native_ack_belongs_to_the_occurrence_named_by_its_marker(tmp_path):
         assert marker.is_file()
         assert "native_observation_mismatch" in {d["code"] for d in waiting["diagnostics"]}
     packet.write_text(json.dumps(row) + "\n", encoding="utf8")
+    marker.write_text(json.dumps(identity | {"step_id": "intake/" + packet.stem}), encoding="utf8")
+    waiting = cold()
+    assert waiting["remaining"] == 1 and waiting["processed"] == 0
+    marker.write_text(json.dumps(identity), encoding="utf8")
     assert cold()["processed"] == 1 and not marker.exists()
     assert cold()["processed"] == 0
 
@@ -437,16 +446,62 @@ def test_only_finished_lookups_on_the_same_local_host_avoid_a_new_interpreter(tm
 
 def test_scoped_recovery_leaves_parallel_owner_marker_in_shared_inbox(tmp_path):
     from tools.feedback_loop.intake import drain
+    from tools.feedback_loop.local_host import LocalHost
+    from tools.feedback_loop.observations import digest
 
     _, registry = configuration(tmp_path)
     settings = tmp_path / "settings.json"
     config = json.loads(settings.read_bytes())
-    config["owners"]["parallel"] = {"observation_dir": "observations"}
+    config["owners"]["parallel"] = {
+        "observation_dir": "observations", "cwd": str(tmp_path), "timeout_seconds": 15,
+        "actions": {"repair": [*PYTHON, "-c", "from pathlib import Path; Path('parallel-started').touch()"]},
+    }
     settings.write_text(json.dumps(config))
     inbox = tmp_path / "observations"
     inbox.mkdir()
     marker = inbox / ("feedback-" + "c" * 32 + ".ready")
     marker.write_text(json.dumps({"owner": "parallel", "run_id": "original", "step_id": "intake/start"}))
+    key = "7" * 64
+    queued = LocalHost(settings)
+    payload = {"issue_ref": "parallel/issue"}
+    request = dict(schema_version="feedback-action/1", method="submit", owner="parallel", kind="repair",
+                   action_id=key, payload=payload, request_digest=digest(["parallel", "repair", key, payload]))
+    # Simulate the original supervisor dying between queue commit and wake.
+    queued._wake = lambda _: False
+    assert queued.handle(request)["state"] == "pending"
     result = drain(settings, registry, owner=[OWNER], wait_seconds=0)
-    assert result["processed"] == result["remaining"] == 0
+    assert result["processed"] == result["remaining"] == result["woken"] == 0
     assert marker.exists()
+    assert not (tmp_path / "parallel-started").exists()
+
+
+def test_bundle_ack_is_published_after_all_original_steps_are_recorded(tmp_path):
+    command, _ = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    config["owners"][OWNER]["native_observation_dirs"] = ["native"]
+    settings.write_text(json.dumps(config), encoding="utf8")
+    inbox = tmp_path / "native"
+    inbox.mkdir()
+    packet = inbox / ("feedback-" + "d" * 32 + ".jsonl")
+    identity = dict(owner=OWNER, run_id="bundle", attempt_id="first")
+    rows = [dict(identity, step_id=step, schema_version="feedback-observation/1",
+                 check_id="result", expected="ok", actual="ok", details_ref="proof")
+            for step in ("first-doc", "second-doc")]
+    packet.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf8")
+    marker = packet.with_suffix(".ready")
+    marker.write_text(json.dumps(dict(identity, schema_version="feedback-delivery-ready/1",
+                                      step_ids=["first-doc", "second-doc"], observations=2, details=1)), encoding="utf8")
+    proof = inbox / (packet.name + ".details.jsonl")
+
+    def check():
+        return json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT))
+
+    original, receipt = packet.read_bytes(), packet.with_suffix(".ack")
+    assert check()["remaining"] == 1 and marker.is_file() and not receipt.exists()
+    for wrong in (b"", b'{"details_id":"proof"', b'{"details_id":"unrelated"}\n'):
+        proof.write_bytes(wrong)
+        assert check()["remaining"] == 1 and marker.is_file() and not receipt.exists()
+    proof.write_text(json.dumps({"details_id": "proof"}) + "\n")
+    assert check()["processed"] == 2 and receipt.is_file() and not marker.exists()
+    assert check()["processed"] == 0 and packet.read_bytes() == original

@@ -4,6 +4,8 @@
 
 普通直启由运行模块将失败保存在本仓状态根的 `observations`，用户无需设置环境变量。显式 `RESEARCH_FEEDBACK_OUT` 仍指向调用方的一次性侧带文件，`RESEARCH_FEEDBACK_DIR` 可选择独立的测试或部署目录。对应总控路由在 `native_observation_dirs` 中登记这些公开 outbox，继续读取既有 `observation_dir`。数据方先原子发布 `feedback-<32位uuidhex>.jsonl`，随后发布同名 `.ready`，内含 owner、run_id、attempt_id 和 step_id。确认由消费端负责。发布方能从原生终态补投；断电、写失败或只见完成标记时，总控保留待核状态。同一发生重读只由所属业务账本核对使用量。
 
+`feedback-delivery-ready/1` 用于同一次尝试的多步骤投递，标明实际 `step_ids`、观察数及明细数。明细在同名 `.jsonl.details.jsonl`。消费端以原观察的 `details_ref` 匹配可冷读的 `details_id`，成功登记并接续后将对应 `.ready` 原子确认为 `.ack`。缺失、截断或错绑的明细保留待确认标记。两份原文件保留供本仓读取。仅登记原生证据，不重启其业务入口。普通单条格式继续沿用已有确认和恢复方式。
+
 UTF-8 JSONL，每个 invocation 一个专用输出。`RESEARCH_FEEDBACK_OUT` 可指定此文件。`RESEARCH_FEEDBACK_RUN_ID` 和 `RESEARCH_FEEDBACK_ATTEMPT_ID` 可提供上下文；独立测试可生成自己的标识。父子进程各有独占输出，父端关联各自原生 ID。现有 stdout、stderr、错误信封和既有计费回执保留其协议。输出文件写失败时由外层记录追踪不完整，业务使用原始终态。
 
 ```json
