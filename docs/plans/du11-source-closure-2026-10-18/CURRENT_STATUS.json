@@ -392,13 +392,16 @@
     "f2_roadmap": "../feedback-loop-2026-11-17/f2-roadmap.md",
     "production_owner_rollout": "configured_and_scoped_acceptance_complete",
     "ordinary_failure_coverage": {
-      "as_of": "2026-11-21",
-      "state": "gaps_verified_owner_remediation_open",
+      "as_of": "2026-11-23",
+      "state": "three_external_cards_accepted_and_scheduled_owner_followups_open",
       "owners_audited": 12,
       "owners_with_counterexamples": 12,
       "audit_occurrences_registered_and_read_back": 24,
       "scoped_fix": "e4fcdf06f",
-      "audit": "../feedback-loop-2026-11-17/failure-coverage-20261121.md"
+      "audit": "../feedback-loop-2026-11-17/failure-coverage-20261121.md",
+      "owner_acceptance": "../feedback-loop-2026-11-17/failure-coverage-owners.md",
+      "external_handoffs_accepted": ["F4-ET-FAILURES", "F4-SID-FAILURES", "F4-MC-FAILURES"],
+      "scheduled_recovery_owner_count": 10
     },
     "f4_rollout": "../feedback-loop-2026-11-17/f4-rollout.md",
     "f4_locally_configured_owner_count": 12,
