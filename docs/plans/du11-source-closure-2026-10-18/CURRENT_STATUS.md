@@ -2,9 +2,9 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-24 架构与日志审计、S1 发布与 S2 暂停
+## 2026-11-24 架构与日志审计、S1 发布与 S2 恢复
 
-外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。当前 S2 暂停，M4/S3 和 S4 保持计划。
+外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。S2 已恢复并从原文读取故障的 CWP 试点起步，M4/S3 和 S4 保持计划。
 
 - **S1 各仓发布与补修记录**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
 - **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
@@ -331,4 +331,4 @@ At this checkpoint, SourceCatalog owner ports and the static boundary contract h
 
 The SourceCatalog owner-port and static module-boundary milestone was pushed to `origin/master` at `e7fc2238c177b39dcc91d901a9ac3ac91263830a`. The push fast gate passed its fixed 18-case smoke in 3.88 seconds. Exact-head remote CI was not verified at that checkpoint. Its then-next stream/parser node was subsequently implemented and is recorded at the top of this status file.
 
-日志项目当前见[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)；[S2 暂停记录](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。
+日志项目当前见[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)和[S2 实施状态](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。

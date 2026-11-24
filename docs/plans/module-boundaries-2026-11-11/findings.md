@@ -125,4 +125,4 @@ Commit `56d10f269b7c67845c7af66b33083f62d46cde4d` replaces the unpublished 512MB
 
 ## 2026-11-24 Status
 - Full 12-module audit completed.
-- 日志发布与暂停状态以[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)；[S2 暂停记录](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。
+- 日志发布及进度见[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)和[S2 实施状态](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。

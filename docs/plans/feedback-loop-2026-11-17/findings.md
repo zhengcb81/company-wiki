@@ -51,4 +51,6 @@
 - Windows 定时任务的 `pythonw.exe` 与同目录的本机 RPC `python.exe` 过去被当作不同宿主。旧四包会反复开中间解释器，数条后台命令没带无控制台标志。实际任务按同配置复用查证，测试确认窗口和环境隔离。CWP Worker 强停的根因是原尝试虽由 Store 回收，正常执行的结果发布点从未触达。移到调用原回收的编排端，复用已提交的数据。
 - **2026-11-24 全 12 仓日志与错误可复现性深度审计（只读）**：确认 F4 外部观察无法替代本仓标准运行日志。9/12 仓完全没有配置 `logging` 落盘；SID `src/logger.py:15,39` 导入期空句柄短路使文件日志 100% 死代码；MC `engines/mimo.py:137` 调用未定义的 `logger.warning` 导致首次重试抛 `NameError` 覆盖真实 API 错误；CWP（7 处）、FF（`ff_scheduled_windows.py:153`）、StockQA（`quick_scan_owner_research.py:462`）存在生产级 `stderr=DEVNULL` 黑洞；ET `transcript_api.py` 3 处吞异常为 `unexpected_provider_failure` 且 `retrieval_runtime.py` 崩溃后立即删 `worker_stderr.log`；CWP 95 处 `from None` 与跨仓 27 处无 `from exc` 抛错在未写本地日志前销毁根因链；全部 F4 旁路记录器在自身写盘失败时静默吞错无 stderr 告警；Dashboard 前端 `api.ts:56-63` 丢弃 `correlation_id`。根治需补齐标准双层日志（本地轮转脱敏全栈日志 + F4 公开观察投影）与静态日志门禁 L1–L4，详见 [全 12 模块审计报告](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)。
 
-S1 复核表明，将异常链或子进程错误流直接写盘会留下嵌套 JSON、Bearer 和 URL 查询凭据。SID 还复现预期失败的 CLI 被 traceback 污染。按真实边界修复后用同一入口验收。S2 当前暂停。 [分仓记录](s1-p0-blackhole-plan.md)
+S1 复核表明，将异常链或子进程错误流直接写盘会留下嵌套 JSON、Bearer 和 URL 查询凭据。SID 还复现预期失败的 CLI 被 traceback 污染。按真实边界修复后用同一入口验收。 [分仓记录](s1-p0-blackhole-plan.md)
+
+S2 CWP 试点复现两种来源配置失误。解析器原异常和配置类型诊断分别可能携带输入行或任意原值，应由所属配置层只投影可定位的类型、字段或位置。旧 F4 观察一旦登记，同一发生标识的公共字段也需保持兼容。包版本放在 owner 诊断，发布提交放在复验台账。 [CWP 首站](s2-pilot-20261124.md)

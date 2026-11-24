@@ -28,7 +28,7 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 
 ## 2026-11-24 日志与错误可复现性深度审计补充（F5）
 
-**当前入口**：S1 八仓原批次均有提交，七仓按各自发布线推送，StockWiki 为本地主线。CWP、ET、SID 补修见[S1 分仓发布台账](s1-p0-blackhole-plan.md)。S2 已暂停，S3/S4 仍为计划，详见[S2 暂停记录](s2-unified-logging-plan.md)。
+**当前入口**：S1 八仓原批次均有提交，七仓按各自发布线推送，StockWiki 为本地主线。CWP、ET、SID 补修见[S1 分仓发布台账](s1-p0-blackhole-plan.md)。S2 已恢复，先验收 CWP 首站，再分仓接续，详见[S2 实施顺序](s2-unified-logging-plan.md)。S3/S4 仍为计划。
 
 **背景与根因**：2026-11-24 对全部 12 个自有模块（1,654 个生产 Python 文件 + Dashboard 前端）做只读源码审计，查明此前“若干次错误未被记录、无法复现”的四类共用根因（完整逐行证据见 [全 12 模块深度审计报告](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)）：
 
@@ -42,9 +42,9 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 | 节点 | 实施内容 | 可核对交付 |
 |---|---|---|
 | F5-1 P0 黑洞止血（S1） | 修 MC `mimo.py:137` `NameError` 与 `BaseException`；修 SID 死文件日志与 `browser.py:645` 分页截断；清 CWP(7)/FF(1)/StockQA(1) 业务子进程 `stderr=DEVNULL`；修 ET `transcript_api` 静默吞错与 `worker_stderr.log` 提前删除；修 RF `filing_fetch_client` 丢 `stderr`、StockWiki 解析/计费静默返 `None`、StockQA LLM Provider 仅记类名。 | 每项先写 RED 复现用例，修复后能从新进程/轮转日志精确读出原异常类型、脱敏原因链与堆栈。 |
-| F5-2 双层日志（S2，暂停） | 统一本地故障记录、脱敏和 F4 公开观察的字段语义，沿现有入口分仓实现。 | 用真实失败、合法输入和新进程冷查验证。[S2 暂停记录](s2-unified-logging-plan.md) |
+| F5-2 双层日志（S2，实施中） | 统一本地故障记录、脱敏和 F4 公开观察的字段语义，沿现有入口分仓实现。 | 用真实失败、合法输入和新进程冷查验证。[S2 首站和分仓顺序](s2-unified-logging-plan.md) |
 | F5-3 回归覆盖（S4，计划） | 在已复现的失败边界补行为用例，必要时对明确且可归因的越层行为使用已有检查。 | 保留正常输入、CLI/HTTP 格式、诊断失败时的业务结果。无按语法统一拒绝的门禁。 |
 
 ## Next Step
 
-本轮完成 CWP、ET 日志脱敏和 SID CLI 兼容补修，验收和发布以[S1 分仓发布台账](s1-p0-blackhole-plan.md)为准。ET、FF 原 F4 卡复验结果及 SID 修正状态见[分仓复原验收](replay-coverage-20261123.md)。S2 保持暂停，业务 W12 按父计划。
+S1 的 CWP、ET 日志脱敏和 SID CLI 兼容补修已发布，见[S1 分仓发布台账](s1-p0-blackhole-plan.md)。ET、FF 原 F4 卡复验结果及 SID 修正状态见[分仓复原验收](replay-coverage-20261123.md)。S2 从[CWP 试点](s2-pilot-20261124.md)接续，业务 W12 按父计划。

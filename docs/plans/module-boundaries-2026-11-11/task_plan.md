@@ -243,4 +243,4 @@ ROOT 已在 StockWiki 和 Dashboard 各自工区接收对应接口。Audit 的�
 - StockWiki: local master@e1f9f559, no remote, tracked-clean under elevated read-only status. Its root task plan still needs owner reconciliation; no StockWiki file was changed.
 - The prior must be run in a work tree error was limited to the restricted sandbox; the same read-only status commands succeeded in the approved elevated context. Status used --untracked-files=no, so these observations do not certify untracked-file cleanliness. No external repository was modified.
 
-本页 M4 是架构余项计划。日志工作状态以[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)；[S2 暂停记录](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。
+本页 M4 是架构余项计划。日志工作参见[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)和[S2 实施状态](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。
