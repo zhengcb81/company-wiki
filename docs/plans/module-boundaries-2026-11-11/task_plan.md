@@ -22,8 +22,8 @@
 | 阶段 | 范围与动作 | 完成条件 |
 |---|---|---|
 | M4-A 跨仓越界清零 | RF `processed_artifact_canary.py` 与工具改走 CWP 公开 CLI；FF 矩阵工具与 IQS 验收工具剥离邻仓内部/测试导入；MC 移除 `~/company-wiki/graph.yaml` 硬编码。 | 全 12 仓 AST 扫描跨仓内部导入 = 0、外仓 SQLite 直连 = 0。 |
-| M4-B 巨环破除与私有调用清零 | 按 owner 仓推进：StockQA 拆 24 文件环为 3 层 DAG 并统一 `subprocess_env()`；CWP 清退 `_LEGACY_EDGES`、拆 `source_catalog` 显式子包并收口 `CatalogStore.open_readonly()`；StockWiki 公开 Store 连接/写接口；RF 抽 `report_catalog_common.py`；Dashboard 抽公开 `ServiceContext` 清零 41 处 `ops -> service._*`；FF/IQS/ET/SID/Audit/IR 公开共享契约并去 `sys.path`/垫片。 | 全 12 仓生产代码跨文件私有导入 = 0、非 `self/cls` 外部私有属性/反射访问 = 0、运行时 SCC 环 = 0。 |
-| M4-C 全 12 仓静态 AST 护栏上线 | 补齐 CWP `layer_boundary_scan.py` 6 大盲区；在全部 12 仓接入统一静态检查门禁（A1 零私有导入、A2 零外部私有属性/反射、A3 零运行时环、A4 零跨仓内部导入/越界 `sys.path`，先锁基线棘轮再清零）。 | 12 仓 CI / pre-push 均带 RED→GREEN 反例测试，新增越界静态阻断。 |
+| M4-B 巨环与已证私有调用 | 按 owner 仓推进。消除已经证实跨越职责边界的循环和私有调用。存储模块提供所属业务的查询和写入操作，封装事务与连接。 | 被列为越界的真实调用经公开契约复验，原业务和兼容入口继续工作。 |
+| M4-C 验收与防回归（计划） | 保留现有边界规则，用真实错误、合法对照和旧数据兼容性补定向回归。AST 可以辅助定位，在能证明它识别的是具体越层行为时再加入相应测试。 | 原失败可复现，回归能区分合法实现和已证绕行。不统一增加语法、pre-push 或运行时门禁。 |
 
 ---
 
@@ -242,3 +242,5 @@ ROOT 已在 StockWiki 和 Dashboard 各自工区接收对应接口。Audit 的�
 - RF: fresh git ls-remote confirms server origin/main@f2215959; local main@88892536 is eight commits ahead. assurance/runs/weekly_alert.jsonl and weekly_manifest.json are tracked modifications. The weekly run remains 20261115T084227Z / ok=false, absent from root PLANNING_STATUS.md; no RF file was changed.
 - StockWiki: local master@e1f9f559, no remote, tracked-clean under elevated read-only status. Its root task plan still needs owner reconciliation; no StockWiki file was changed.
 - The prior must be run in a work tree error was limited to the restricted sandbox; the same read-only status commands succeeded in the approved elevated context. Status used --untracked-files=no, so these observations do not certify untracked-file cleanliness. No external repository was modified.
+
+本页 M4 是架构余项计划。日志工作状态以[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)；[S2 暂停记录](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。

@@ -26,9 +26,9 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 
 真实宿主选型、异步接线、原始作业核对、实际 P1 故障与消费复验的执行顺序见[ROOT 施工细则](host-integration.md)。
 
-## 2026-11-24 日志与错误可复现性深度审计补充（F5 基础设施补齐 — S1 已本地验收完成）
+## 2026-11-24 日志与错误可复现性深度审计补充（F5）
 
-**立项入口**：S1（F5-1）8 仓 P0 日志黑洞止血已完成本地 RED→GREEN 根修、Ruff 检查与定向回归（合计 **462 passed / 0 failed**，待按各仓 owner 规则提交/发布），逐仓改动清单与验收收据见 [S1 立项计划](s1-p0-blackhole-plan.md)。S2/S3/S4 保持 `PLAN_ONLY` 待下一步确认。
+**当前入口**：S1 八仓原批次均有提交，七仓按各自发布线推送，StockWiki 为本地主线。CWP、ET、SID 补修见[S1 分仓发布台账](s1-p0-blackhole-plan.md)。S2 已暂停，S3/S4 仍为计划，详见[S2 暂停记录](s2-unified-logging-plan.md)。
 
 **背景与根因**：2026-11-24 对全部 12 个自有模块（1,654 个生产 Python 文件 + Dashboard 前端）做只读源码审计，查明此前“若干次错误未被记录、无法复现”的四类共用根因（完整逐行证据见 [全 12 模块深度审计报告](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)）：
 
@@ -37,15 +37,14 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 3. **子进程 `stderr=DEVNULL` 黑洞**：CWP 7 处（`tools/feedback_loop/local_host.py` 4 处、`intake.py`、`hook.py`、`isolated_ocr.py`）、FF `ff_scheduled_windows.py:153`（双 `DEVNULL`）、StockQA `quick_scan_owner_research.py:462`、Audit `run_pool_progress_e2e.py:218`。
 4. **F4 反馈旁路写失败静默吞异常**：CWP/FF/StockWiki/Audit/IR/Dashboard/MC 旁路写盘异常均被静默吞掉（MC `core/feedback.py:1086` 甚至吞 `BaseException`），缺少 stderr 兜底告警，磁盘/权限/序列化异常会导致业务日志与 F4 观察双归零。
 
-### F5 补充实施节点（与架构计划 M4 配套，零代码修改，待确认实施）
+### F5 实施范围与状态
 
 | 节点 | 实施内容 | 可核对交付 |
 |---|---|---|
 | F5-1 P0 黑洞止血（S1） | 修 MC `mimo.py:137` `NameError` 与 `BaseException`；修 SID 死文件日志与 `browser.py:645` 分页截断；清 CWP(7)/FF(1)/StockQA(1) 业务子进程 `stderr=DEVNULL`；修 ET `transcript_api` 静默吞错与 `worker_stderr.log` 提前删除；修 RF `filing_fetch_client` 丢 `stderr`、StockWiki 解析/计费静默返 `None`、StockQA LLM Provider 仅记类名。 | 每项先写 RED 复现用例，修复后能从新进程/轮转日志精确读出原异常类型、脱敏原因链与堆栈。 |
-| F5-2 全 12 仓统一双层日志与可复现信封（S2） | 12 仓全部建立标准库 `RotatingFileHandler` 结构化脱敏日志引导模块并接入全部 CLI/HTTP/Worker/Scheduler 入口；强制执行“先写本地全量脱敏日志（含 `code_version`/`run_id`/`attempt_id`/`input_ref`/`exc_chain`/`traceback`），再投影安全对外错误”；所有 F4 旁路写失败必发 stderr 告警；Dashboard 前端 `api.ts` 透传展示 `correlationId`。 | 任意普通入口注入异常均同时留下可复现本地轮转日志与 F4 公开观察；F4 旁路目录只读故障时本地日志与 stderr 仍完整留痕。 |
-| F5-3 静态日志卫生门禁与活性自检（S4） | 12 仓 CI 接入静态规则 L1（零宽泛静默吞错）、L2（零丢 `from exc` / `from None` 前必日志）、L3（零 `NoTB` 与业务 `stderr=DEVNULL`）及 L4（每仓 1 秒坏输入日志落盘活性测试）。 | 12 仓 CI 自动阻断死日志、吞异常与无堆栈报错回潮。 |
+| F5-2 双层日志（S2，暂停） | 统一本地故障记录、脱敏和 F4 公开观察的字段语义，沿现有入口分仓实现。 | 用真实失败、合法输入和新进程冷查验证。[S2 暂停记录](s2-unified-logging-plan.md) |
+| F5-3 回归覆盖（S4，计划） | 在已复现的失败边界补行为用例，必要时对明确且可归因的越层行为使用已有检查。 | 保留正常输入、CLI/HTTP 格式、诊断失败时的业务结果。无按语法统一拒绝的门禁。 |
 
 ## Next Step
 
-按[复原验收和分仓余项](replay-coverage-20261123.md)接续；新增的 F5（日志基础设施与 P0 黑洞止血）待用户确认优先级后与原 ET/FF/SID 三张 F4 复原卡统筹排期。[本轮独立工作](f4-interruption-20261123.md)记录 Windows 静默恢复、CWP 强停和 StockWiki 三条负控的归因。下一次正式 StockQA 投递以原编号验收，StockWiki 的历史 73 条继续留证。W12 按父计划。
-
+本轮完成 CWP、ET 日志脱敏和 SID CLI 兼容补修，验收和发布以[S1 分仓发布台账](s1-p0-blackhole-plan.md)为准。ET、FF 原 F4 卡复验结果及 SID 修正状态见[分仓复原验收](replay-coverage-20261123.md)。S2 保持暂停，业务 W12 按父计划。

@@ -6,13 +6,13 @@ F4 的 12 个实际接线、正式版本及仍待补的业务证据统一登记�
 
 ## F4 日志复原独立施工
 
-| 可发施工卡 | 工作目录（相对 Projects） | 独立范围 |
+| 已验收施工卡 | 工作目录（相对 Projects） | 独立范围 |
 |---|---|---|
 | [F4-ET-BATCH-REPLAY](owner-cards/F4-ET-BATCH-REPLAY.md) | `earnings-transcripts/earnings-transcripts` | 批量采集逐公司、逐期次终态及本仓冷查 |
 | [F4-FF-SLOT-LOOKUP](owner-cards/F4-FF-SLOT-LOOKUP.md) | `filing-fetch` | 已发生定时 slot 的本仓只读对账 |
 | [F4-SID-START-INPUT](owner-cards/F4-SID-START-INPUT.md) | `StockInfoDLSimple/v2-clean-rewrite` | 直启工作清单、开始前读取失败、零任务的本仓冷查 |
 
-3 张卡现已由用户分发，分别写 ET、FF、SID。ROOT 独立推进 Windows 恢复、CWP 强停、Audit 单角色和 StockWiki 调用溯源，接收后再组合。 [分仓现状](replay-coverage-20261123.md) · [当前独立工作](f4-interruption-20261123.md)
+三张已交付。ET、FF 原卡复验通过，SID 在本轮纠正 S1 带入的 CLI 回归后复验通过。历史 FF 批次可查部分终态，待续包保留原未知状态。 [分仓现状](replay-coverage-20261123.md) · [S1 发布与补修](s1-p0-blackhole-plan.md)
 
 | 已签收 | 工作目录 | 原独立施工卡 | 首次发布的计划版本 |
 |---|---|---|---|

@@ -14,9 +14,9 @@
 | 责任仓 | 已验证到哪里 | 下一次要解决或证明什么 |
 |---|---|---|
 | company-wiki 与总控 | 原件读失败、定时单项和摘要终态可查。三个 Worker 强停点均可按原尝试读出 `LEASE_EXPIRED`。同宿主减少 RPC 且隐藏后台控制台，11 仓定时验证约 11 秒、退出 0。四个旧待续包保留。 | 定时阅读对子项异常的对账沿现有作业账本。回收进程也在账本提交后、投递前被强停的观察仍需要从原账本人工查。 [本轮记录](f4-interruption-20261123.md) |
-| filing-fetch | 四种主要入口的 12 个故障可冷读。本轮核实 4 个线上待续包属 FF，两个定时 slot 的原业务记录是部分完成，两个旧短请求仅缺 ET 用量绑定。 | 派发[原 slot 冷查](owner-cards/F4-FF-SLOT-LOOKUP.md)。ROOT 另核短请求能否从新伴随结果补原引用以及旧证据的上限。 |
-| earnings-transcripts | 日常 CLI、检索、原生目录和原日志恢复已验。实际批处理两期的两个 HTTP 500 原生有据，零反馈。 | 派发[批量逐项复原](owner-cards/F4-ET-BATCH-REPLAY.md)。覆盖 FMP、Fool 和批内强停前后。 |
-| StockInfoDLSimple | 下载失败、适配器拒绝、并发记账与制品 19 个故障已验，组合 G4 17 项通过。真实直启复验发现坏名单掉日志、空名单错报做完、默认空配置遮住了实任务。 | 派发[直启清单与冷查](owner-cards/F4-SID-START-INPUT.md)，按原任务计数核有无漏报。既有全量测试余项沿本仓计划。 |
+| filing-fetch | [原 slot 冷查](owner-cards/F4-FF-SLOT-LOOKUP.md) 已验收，远端 `main@f43a8758` 包含卡片实现。两份生产原引用查回部分终态，均失败 2、待续 1、用量未知，无重跑。 | 四包仍按原证据待续。历史批次未逐项留证和两个旧短请求缺 ET 用量绑定，均保持未知。 |
+| earnings-transcripts | [批量逐项复原](owner-cards/F4-ET-BATCH-REPLAY.md) 已验收，源码 `65e82f6` 及独审交接 `3a85997` 在正式主线。CWP 组合确认 13 条原观察，重复扫描零新增。 | S1 日志脱敏补修另见[发布台账](s1-p0-blackhole-plan.md)。 |
+| StockInfoDLSimple | [直启清单与冷查](owner-cards/F4-SID-START-INPUT.md) 源码在正式维护线。S1 的 CLI 回归在 `d4962055` 修复并独审，55 项定向通过，原原因可冷查。 | 既有全量测试余项沿本仓计划。 |
 | MeetingConverter | 启动、引擎回退、主/备目录及强停可续，收件包 21 条且二次零重投。 | 对实际启用的下一种入口抽查：Web/交互入口启动或输入解析在调用转录入口之前就失败时，从新进程核查是否有原调用身份和原因。沿现有本仓日志查证。 |
 | 行业研究 | 三份缺材料、采集与工具异常可查。三份已安装技能和本仓工具对齐。 | 从真实安装技能复验配置或响应解码失败和合法无资料的对照。以实际入口失败数核对 F4；已有正式报告及诊断原文不重复复制。 |
 | Revenue Forecast | `d1672f5a` 修复 RF 原 CLI 收据冷查，35 项全绿并通过独审。实际 F4 检出 `597c6bc2`。已安装的 `--validate-only` 退出 2，正式宿主两次读回同一 `JSONDecodeError`、failed、not_applicable。错绑返回未知。远端 `895df7ad` 补修不再触发注错的旧测试夹具，Linux 用 CI 原命令通过 766 项与 46 子项，宿主业务源码一致。 | 下一步从另一个实际业务入口抽查中途失败是否完整留痕。单条未知费用收件仍按原总控规则保留。 [本仓远端 CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/45285168804) |

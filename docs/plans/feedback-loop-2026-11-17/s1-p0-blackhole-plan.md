@@ -1,6 +1,21 @@
 # S1 立项计划：全生态 P0 日志黑洞止血（2026-11-24）
 
-> **立项状态**：`PUBLISHED`（2026-11-24 全部 8 仓 S1-01..S1-08 已完成 RED→GREEN 根修、定向回归与静态检查，合计 **462 passed / 0 failed**，并已逐仓提交与推送到各自发布主线）
+> 八仓原批次均已提交，七仓推送到各自目标发布线，StockWiki 为本地主线。原批次 462 项定向通过。复核暴露的 CWP、ET 脱敏及 SID CLI 回归单独验收，以下是实际发布台账。 [S2 暂停记录](s2-unified-logging-plan.md)
+
+## 当前发布线
+
+| 仓 | 原批次发布 | 复核补修范围 |
+|---|---|---|
+| company-wiki | 远端 `master@16e8cbe95` | `0072e12d4` 已推 `master`。共享脱敏覆盖嵌套 JSON、转义、Bearer、查询参数和 cause。后台入口写脱敏日志，原无窗口启动继续有效。53 项定向和 23 项推送快测通过，独审覆盖轮转占用、真实进程和原结果。 [同版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45504055061) |
+| MeetingConverter | 远端 `master@8c97cc56` | 本轮仅复核发布。 |
+| StockInfoDLSimple | 远端 `v2-clean-rewrite@24ce0beb` | `d4962055` 已推同一维护线，预期 CLI 恢复简明输出，owner 冷查保留原因。55 项定向、5 项独审通过。 |
+| filing-fetch | 远端 `main@f43a8758` | 本轮仅复核发布。 |
+| earnings-transcripts | 远端 `main@cda3afb2` | `0f3b6900` 已推 `main`。异常和 worker 诊断以类型、因果和位置投影，保留原退出、请求数及费用状态。20 项定向通过，两轮独立验证通过。诊断入口尚未载入时仅有原进程和退出证据。 [本仓验收](../../../../earnings-transcripts/earnings-transcripts/docs/plans/feedback-loop-2026-11-17/S1-04-diagnostic-redaction.md) |
+| revenue-forecast | 远端 `main@db4f8c7a`，本地 `main@d62fca9a` | 本地与远端分别记录，未处置并行工区。 |
+| StockWiki | 本地 `master@9904b43e`，无远端 | 本轮仅复核。 |
+| StockQAbyLLM | 远端维护分支 `codex/qa-content-filter-resolution-01@1449d715` | 按实际发布分支记账。 |
+
+原批次 CWP、MC、FF、RF 的同版远端 CI 已核实通过。ET 和 SID 的发布线没有同版远端工作流结果，按本机与独审证据记账。StockWiki 无远端。补修的测试使用合成值和隔离目录，结论限定新版输出。历史日志未作凭据排查。
 > **父计划**：[feedback-loop-2026-11-17/task_plan.md](task_plan.md) · [full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
 > **实施纪律**：
 > 1. 每项修复均采用 **RED → GREEN TDD**：先写精准复现日志黑洞/吞错的测试并确认红灯，再做最小根修，回归受影响测试集确认绿灯。

@@ -4,7 +4,7 @@
 
 - 严格只读完成全部 12 个生产仓（1,654 个生产 Python 文件、466,417 LOC + Dashboard 前端 `apps/web`）的 AST 全量扫描与四路独立源码逐行核验，未修改任何生产代码、配置或外仓文件。
 - 已将完整核验清单、误报过滤记录、CWP 边界扫描器 6 处盲区分析及 S1–S4 分阶段解决方案落盘至 [full-12-module-architecture-logging-audit-20261124.md](review/full-12-module-architecture-logging-audit-20261124.md)，并作为补充更新到本计划 `task_plan.md`/`findings.md`、`feedback-loop-2026-11-17`（F5 日志与可复现性）及父计划 `du11-source-closure-2026-10-18/CURRENT_STATUS.md`。
-- 状态保持 `PLAN_ONLY`：等待用户确认优先级后，按单仓单 owner 规则依次实施 S1（P0 止血）→ S2（统一双层日志）→ S3（私有调用与循环依赖清零）→ S4（12 仓统一 AST 静态 CI 护栏）。
+- 本页保持原 M4 架构审计，日志当前状态见[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)；[S2 暂停记录](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。
 
 ## 2026-11-16 — FF 正式 T3 与 RF 失败周跑
 
@@ -191,3 +191,6 @@ CI接线补记：FF `ac798a250b2310e0c2714053b08246ad94fffd0c` 已推main，将B
 - 九个主模块和四条独立依赖链的入口、版本和各自下一步已核对，记录在 [owner_plans.md](owner_plans.md)。StockWiki 新子计划和 IQS/Dashboard 的活动改动已按 owner 记录。
 - CWP 三项根因先复现再修复。普通浏览最终 21 项、边界和日历等 39 项通过；canonical、原件与 parser 的其它通过项及故障复现按原测试批次见 [验收](review/cwp-browse-owners-20261116.md)。独立审查 PASS。各批次临时根已恢复。
 - `12e65fe7d` 已推送到 `origin/master` 并读回服务端 SHA。推送快测 23 项通过（33.68 秒）。同一 SHA 的 GitHub CI Run 43962477938 成功，Python 3.12 作业 4 分 42 秒。M3 的开放项为 FF 当前主线 T3 和 RF 周跑/版本对账。 [GitHub Actions](https://github.com/zhengcb81/company-wiki/actions/runs/43962477938)
+
+## 2026-11-24
+- 日志补修、正式发布线和 S2 暂停以[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)；[S2 暂停记录](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。本仓只记录架构审计余项。

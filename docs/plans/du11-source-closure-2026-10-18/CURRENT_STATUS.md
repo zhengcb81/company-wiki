@@ -2,11 +2,11 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-24 全 12 模块架构解耦与日志可复现性深度审计 + S1 P0 止血全部发布
+## 2026-11-24 架构与日志审计、S1 发布与 S2 暂停
 
-按用户要求完成全部 12 个生产模块（1,654 个生产 Python 文件 / 466,417 LOC + Dashboard 前端）的只读深度审计，随后立项并完成 **S1（8 仓 P0 日志黑洞止血）** 的 RED→GREEN 根修、定向回归（合计 **462 passed / 0 failed**）与全仓提交推送（`MC@8c97cc5`、`SID@24ce0be`、`FF@f43a875`、`ET@cda3afb`、`RF origin/main@db4f8c7a`、`StockWiki 本地 master@9904b43`、`StockQA@1449d71`、`CWP origin/master`；S2/S3/S4 保持 `PLAN_ONLY`）：
+外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。当前 S2 暂停，M4/S3 和 S4 保持计划。
 
-- **S1 立项计划与 8 仓实测台账（已完成本地验收）**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
+- **S1 各仓发布与补修记录**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
 - **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
 - **架构独立性与零私有调用补充（M4，PLAN_ONLY）**：[module-boundaries-2026-11-11/task_plan.md](../module-boundaries-2026-11-11/task_plan.md#m4-补充计划--全-12-模块深度代码审计松耦合私有调用清零与静态护栏2026-11-24-新增)
 - **标准双层日志与错误可复现性补充（F5）**：[feedback-loop-2026-11-17/task_plan.md](../feedback-loop-2026-11-17/task_plan.md#2026-11-24-日志与错误可复现性深度审计补充f5-基础设施补齐--s1-已本地验收完成)
@@ -330,3 +330,5 @@ At this checkpoint, SourceCatalog owner ports and the static boundary contract h
 ## 2026-11-11 P3 published
 
 The SourceCatalog owner-port and static module-boundary milestone was pushed to `origin/master` at `e7fc2238c177b39dcc91d901a9ac3ac91263830a`. The push fast gate passed its fixed 18-case smoke in 3.88 seconds. Exact-head remote CI was not verified at that checkpoint. Its then-next stream/parser node was subsequently implemented and is recorded at the top of this status file.
+
+日志项目当前见[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)；[S2 暂停记录](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。
