@@ -16,7 +16,7 @@ from tempfile import NamedTemporaryFile
 from typing import Any, ParamSpec
 from uuid import NAMESPACE_URL, uuid4, uuid5
 
-from .diagnostic_redaction import redact_text
+from .diagnostic_redaction import format_diagnostic_exception, redact_text
 from .file_mutex import win32_filesystem_path
 
 _logger = logging.getLogger(__name__)
@@ -168,11 +168,8 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
                     stream.flush()
                     os.fsync(stream.fileno())
             except OSError as exc:
-                _logger.warning(
-                    "runtime_feedback explicit sidecar write failed (%s)",
-                    type(exc).__name__,
-                    exc_info=True,
-                )
+                _logger.warning("runtime_feedback explicit sidecar write failed\n%s",
+                                format_diagnostic_exception(exc))
             else:
                 recorded()
                 return
@@ -192,18 +189,11 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             recorded()
             break
         else:
-            _logger.warning(
-                "runtime_feedback failed to persist observation across all fallback directories (%s)",
-                type(last_error).__name__ if last_error is not None else "unknown",
-                exc_info=last_error,
-            )
+            _logger.warning("runtime_feedback failed to persist observation across all fallback directories\n%s",
+                            format_diagnostic_exception(last_error) if last_error else "")
     except Exception as exc:
         # The source catalog and worker retain their own authoritative result.
-        _logger.warning(
-            "runtime_feedback unexpected persistence failure (%s)",
-            type(exc).__name__,
-            exc_info=True,
-        )
+        _logger.warning("runtime_feedback unexpected persistence failure\n%s", format_diagnostic_exception(exc))
         return
 
 

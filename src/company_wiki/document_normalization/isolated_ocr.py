@@ -15,13 +15,14 @@ import logging
 import math
 import os
 from pathlib import Path
-import re
 import shutil
 import subprocess
 import sys
 import tempfile
 import time
-from typing import Any, cast
+from typing import Any, BinaryIO, cast
+
+from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
 
 from company_wiki.bounded_process import WINDOWS_WAIT_BOOTSTRAP
 from company_wiki.process_tree import (
@@ -46,9 +47,6 @@ from .local_ocr import (
 )
 
 _logger = logging.getLogger(__name__)
-_SECRET_REDACT_RE = re.compile(
-    r"(?i)(api[_-]?key|token|secret|authorization|password)(\s*[:=]\s*)([^\s,;\"']+)"
-)
 
 DEFAULT_OCR_TIMEOUT_SECONDS = 90.0
 MAX_TRANSFER_BYTES = 32 * 1024 * 1024
@@ -227,7 +225,7 @@ def _worker_main(directory_text: str, startup_deadline: float):
         except LocalOCRError as error:
             response = {"ok": False, "error": error.code}
         except Exception as exc:
-            _logger.error("OCR worker inference failed (%s)", type(exc).__name__, exc_info=True)
+            _logger.error("OCR worker inference failed\n%s", format_diagnostic_exception(exc))
             response = {"ok": False, "error": "OCR_INFERENCE_FAILED"}
         _write_json(response_path, response, MAX_CONTROL_BYTES, deadline=limits.deadline)
         number += 1
@@ -282,6 +280,7 @@ class IsolatedOCRAdapter:
         self._backend_factory = _backend_factory or LocalOCRAdapter
         self._directory: Path | None = None
         self._process: subprocess.Popen[bytes] | None = None
+        self._stderr: BinaryIO | None = None
         self._job: WindowsJob | None = None
         self._worker_pid: int | None = None
         self._number = 0
@@ -372,20 +371,19 @@ class IsolatedOCRAdapter:
                 if windows
                 else [sys.executable, "-B", "-S", "-c", _POSIX_BOOTSTRAP, *command]
             )
-            stderr_path = directory / "worker_stderr.log"
-            with stderr_path.open("wb") as stderr_stream:
-                self._process = subprocess.Popen(
-                    argv,
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.DEVNULL,
-                    stderr=stderr_stream,
-                    env=env,
-                    close_fds=True,
-                    shell=False,
-                    bufsize=0,
-                    start_new_session=not windows,
-                    creationflags=cast(Any, subprocess).CREATE_NO_WINDOW if windows else 0,
-                )
+            self._stderr = cast(BinaryIO, tempfile.TemporaryFile(dir=directory))
+            self._process = subprocess.Popen(
+                argv,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.DEVNULL,
+                stderr=self._stderr,
+                env=env,
+                close_fds=True,
+                shell=False,
+                bufsize=0,
+                start_new_session=not windows,
+                creationflags=cast(Any, subprocess).CREATE_NO_WINDOW if windows else 0,
+            )
             if windows:
                 self._job = assign_windows_job(self._process)
                 assert self._process.stdin is not None
@@ -466,6 +464,7 @@ class IsolatedOCRAdapter:
 
     def _stop_worker(self):
         process, job, native_pid = self._process, self._job, self._worker_pid
+        stderr, self._stderr = self._stderr, None
         self._process = None
         self._job = None
         self._worker_pid = None
@@ -486,6 +485,16 @@ class IsolatedOCRAdapter:
                     if process.stdin is not None:
                         process.stdin.close()
         finally:
+            if stderr is not None:
+                with stderr:
+                    try:
+                        stderr.seek(0)
+                        text = redact_text(stderr.read().decode("utf-8", errors="replace").strip())
+                        if text:
+                            _logger.error("Isolated OCR worker stderr tail: %s", text[-4096:])
+                    except OSError as exc:
+                        _logger.warning("Cannot read isolated OCR diagnostics\n%s",
+                                        format_diagnostic_exception(exc))
             if job is not None:
                 job.close()
             # On Windows Job termination is asynchronous.  The bootstrap may
@@ -496,18 +505,6 @@ class IsolatedOCRAdapter:
                 time.sleep(_POLL_SECONDS)
             if self._directory is not None:
                 directory, self._directory = self._directory, None
-                stderr_log = directory / "worker_stderr.log"
-                try:
-                    if stderr_log.is_file():
-                        raw = stderr_log.read_bytes()[-4096:]
-                        if raw:
-                            text = _SECRET_REDACT_RE.sub(
-                                r"\1\2[REDACTED]", raw.decode("utf-8", errors="replace").strip()
-                            )
-                            if text:
-                                _logger.error("Isolated OCR worker stderr tail: %s", text)
-                except OSError:
-                    pass
                 while True:
                     try:
                         shutil.rmtree(directory)

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import argparse
-from contextlib import ExitStack, suppress
+from contextlib import suppress
 from hashlib import file_digest
 import json
 import logging
@@ -14,7 +14,10 @@ import subprocess
 import sys
 from uuid import uuid4
 
+from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
+
 from .coordinator import settle
+from .diagnostics import background_environment, run_background
 from .host import process_host, read_hosts
 from .local_host import LocalHost, host_path
 from .observations import read_batch, unique_fields
@@ -327,26 +330,13 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
 def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: list[str] | None = None,
          wait_seconds: int = 0):
     scope = [arg for name in (owners or ([owner] if owner else [])) for arg in ("--owner", name)]
-    stderr_target: object = subprocess.DEVNULL
-    with ExitStack() as stack:
-        try:
-            log_dir = settings.resolve().parent / "logs"
-            log_dir.mkdir(parents=True, exist_ok=True)
-            log_path = log_dir / "intake_drain_stderr.log"
-            if log_path.is_file() and log_path.stat().st_size >= 2 * 1024 * 1024:
-                try:
-                    log_path.replace(log_path.with_suffix(".log.1"))
-                except OSError:
-                    pass
-            stderr_target = stack.enter_context(log_path.open("ab"))
-        except OSError as exc:
-            _logger.warning("Failed to open intake drain stderr log (%s)", type(exc).__name__, exc_info=True)
-        subprocess.Popen(
-            [sys.executable, "-B", "-m", "tools.feedback_loop.intake", "--settings", str(settings),
-             "--hosts", str(hosts_file), "--wait-seconds", str(wait_seconds), "drain", *scope],
-            cwd=_ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=stderr_target,
-            start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
-        )
+    subprocess.Popen(
+        [sys.executable, "-B", "-m", "tools.feedback_loop.intake", "--settings", str(settings),
+         "--hosts", str(hosts_file), "--wait-seconds", str(wait_seconds), "drain", *scope],
+        cwd=_ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        env=background_environment(settings.resolve().parent / "logs" / "intake_drain_stderr.log"),
+        start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+    )
 
 
 def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str], wait_seconds: int) -> int:
@@ -389,12 +379,8 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
             env["RESEARCH_FEEDBACK_PROCESS_STEP_ID"] = context["step_id"]
     except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
         # Feedback is optional for the native business command, but setup failures must be logged.
-        _logger.warning(
-            "Feedback observation capture setup failed for owner=%s (%s)",
-            owner,
-            type(exc).__name__,
-            exc_info=True,
-        )
+        _logger.warning("Feedback observation capture setup failed for owner=%s\n%s",
+                        redact_text(owner), format_diagnostic_exception(exc))
 
     os_error = {}
     try:
@@ -452,4 +438,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_background(main))

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import argparse
-from contextlib import ExitStack, closing, suppress
+from contextlib import closing, suppress
 import json
 import logging
 import os
@@ -15,26 +15,26 @@ import sys
 from tempfile import NamedTemporaryFile
 import time
 
+from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
 
+from .diagnostics import background_environment, run_background
 from .host import BACKGROUND_CREATION_FLAGS
 from .observations import digest, unique_fields
 
 _logger = logging.getLogger(__name__)
-_SECRET_REDACT_RE = re.compile(
-    r"(?i)(api[_-]?key|token|secret|authorization|password)(\s*[:=]\s*)([^\s,;\"']+)"
-)
 _HOST_STDERR_LOG_MAX_BYTES = 2 * 1024 * 1024
+
+
 def _persist_host_stderr(config_path: Path, label: str, returncode: int | None, stderr_bytes: bytes) -> None:
     if not stderr_bytes and returncode in (None, 0):
         return
-    text = _SECRET_REDACT_RE.sub(
-        r"\1\2[REDACTED]", stderr_bytes.decode("utf-8", errors="replace").strip()
-    )[-8192:]
+    text = redact_text(stderr_bytes.decode("utf-8", errors="replace").strip())
+    label = redact_text(label)
     _logger.error(
         "feedback host subprocess failure label=%s exit_code=%s stderr=%s",
         label,
         returncode,
-        text or "<empty>",
+        text[-8192:] or "<empty>",
     )
     try:
         log_dir = config_path.resolve().parent / "logs"
@@ -48,7 +48,7 @@ def _persist_host_stderr(config_path: Path, label: str, returncode: int | None, 
         with log_path.open("a", encoding="utf-8") as handle:
             handle.write(f"[{int(time.time())}] {label} exit_code={returncode}\n{text or '<empty>'}\n\n")
     except OSError as exc:
-        _logger.warning("Failed to persist host subprocess stderr (%s)", type(exc).__name__, exc_info=True)
+        _logger.warning("Failed to persist host subprocess stderr\n%s", format_diagnostic_exception(exc))
 
 
 _ROOT = Path(__file__).resolve().parents[2]
@@ -211,31 +211,18 @@ class LocalHost:
         return self._lookup_result(request, row, prefix)
 
     def _wake(self, key):
-        env = os.environ.copy()
+        env = background_environment(self.config.parent / "logs" / "host_wake_stderr.log")
         if self.recovery_owners:
             env[RECOVERY_OWNERS_ENV] = " ".join(self.recovery_owners)
         try:
-            with ExitStack() as stack:
-                stderr_target: object = subprocess.DEVNULL
-                try:
-                    log_dir = self.config.resolve().parent / "logs"
-                    log_dir.mkdir(parents=True, exist_ok=True)
-                    log_path = log_dir / "host_wake_stderr.log"
-                    if log_path.is_file() and log_path.stat().st_size >= _HOST_STDERR_LOG_MAX_BYTES:
-                        try:
-                            log_path.replace(log_path.with_suffix(".log.1"))
-                        except OSError:
-                            pass
-                    stderr_target = stack.enter_context(log_path.open("ab"))
-                except OSError as exc:
-                    _logger.warning("Failed to open host wake stderr log (%s)", type(exc).__name__, exc_info=True)
-                subprocess.Popen([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config", str(self.config),
-                                  "work", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
-                                 stdout=subprocess.DEVNULL, stderr=stderr_target, env=env,
-                                 start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
+            subprocess.Popen([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config", str(self.config),
+                              "work", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env,
+                             start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
         except OSError as exc:
             # The pre-launch queue is durable. Host startup can wake it again.
-            _logger.warning("Failed to wake feedback host worker for action=%s (%s)", key, type(exc).__name__, exc_info=True)
+            _logger.warning("Failed to wake feedback host worker for action=%s\n%s",
+                            key, format_diagnostic_exception(exc))
             return False
         return True
 
@@ -679,4 +666,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_background(main))

@@ -1,20 +1,16 @@
 """Optional wake-up at the end of an operator-owned scenario."""
 
 from collections import Counter
-from contextlib import ExitStack
 import json
-import logging
 import os
 from pathlib import Path
 import subprocess
 import sys
 
 from .coordinator import settle
+from .diagnostics import background_environment, run_background
 from .host import process_host, read_hosts
 from .observations import read_batch
-
-_logger = logging.getLogger(__name__)
-
 
 def after_observations(sidecar: Path, env) -> dict | None:
     config = env.get("RESEARCH_FEEDBACK_HOSTS")
@@ -42,17 +38,13 @@ def after_observations(sidecar: Path, env) -> dict | None:
 def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -> dict:
     """Start the finite control tick outside the completed business process."""
     try:
-        with ExitStack() as stack:
-            stream = stack.enter_context(output.open("xb"))
-            stderr_target: object = subprocess.DEVNULL
-            try:
-                stderr_target = stack.enter_context(output.with_suffix(".stderr.log").open("ab"))
-            except OSError as exc:
-                _logger.warning("Failed to open hook stderr log (%s)", type(exc).__name__, exc_info=True)
+        with output.open("xb") as stream:
             child = subprocess.Popen(
                 [sys.executable, "-B", "-m", "tools.feedback_loop.hook", str(sidecar.resolve()),
                  str(Path(config).resolve()), wait_seconds],
-                cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL, stdout=stream, stderr=stderr_target,
+                cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL,
+                stdout=stream, stderr=subprocess.DEVNULL,
+                env=background_environment(output.with_suffix(".stderr.log")),
                 start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
             )
     except FileExistsError:
@@ -62,6 +54,10 @@ def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -
     return {"status": "scheduled", "pid": child.pid}
 
 
-if __name__ == "__main__":
+def _main() -> None:
     env = {"RESEARCH_FEEDBACK_HOSTS": sys.argv[2], "RESEARCH_FEEDBACK_WAIT_SECONDS": sys.argv[3] if len(sys.argv) > 3 else "0"}
     print(json.dumps(after_observations(Path(sys.argv[1]), env)))
+
+
+if __name__ == "__main__":
+    run_background(_main)

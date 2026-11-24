@@ -2,9 +2,13 @@
 from __future__ import annotations
 
 import re
+from traceback import TracebackException
 from typing import Any
 
-__all__ = ["REDACT", "redact_text", "redact_and_truncate", "key_is_credential", "MAX_REDACTED_MESSAGE_CHARS"]
+__all__ = [
+    "REDACT", "redact_text", "redact_and_truncate", "format_diagnostic_exception",
+    "key_is_credential", "MAX_REDACTED_MESSAGE_CHARS",
+]
 
 REDACT = "<redacted>"
 
@@ -72,6 +76,7 @@ _INLINE_SPACE = frozenset(" \t")
 # non-delimiter tokens (delimiters: any whitespace, , ; & " ' |)
 _VALUE_STOP_CHARS = frozenset(",;&\"'|")
 _QUOTES = frozenset("\"'")
+_BACKSLASH = frozenset("\\")
 
 
 def key_is_credential(key: str) -> bool:
@@ -105,7 +110,7 @@ _LEFT_ANCHOR = r"(?<![A-Za-z0-9])"
 # Declared residual: a bare secret containing whitespace is redacted only up to
 # its first token ("password: iron steel" -> "password: <redacted> steel");
 # quote the value ("password: 'iron steel'") for full coverage.
-_QUOTED_VALUE = r"\"[^\"\r\n]*\"|'[^'\r\n]*'"
+_QUOTED_VALUE = r""""(?:\\[^\r\n]|[^"\\\r\n])*"|'(?:\\[^\r\n]|[^'\\\r\n])*'"""
 _BARE_VALUE = r"[^\s,;&\"'|]+"
 _VALUE = r"(?P<value>" + _QUOTED_VALUE + r"|" + _BARE_VALUE + r")"
 _AUTH_BARE_VALUE = r"[^\s,;&\"'|]+(?:[ \t]+[^\s,;&\"'|]+)*"
@@ -172,14 +177,21 @@ def redact_text(text: Any) -> Any:
     Never raises; non-strings pass through unchanged.  Redaction happens
     *before* any truncation, so a length cut can never be the only protection.
 
-    Cost is O(len(text)): one regex pass with fixed literals for
-    ``authorization``/``bearer``, then one scanner pass over the assignment
-    separators.  No nesting-dependent quantifier sees the message.
+    Cost is O(len(text)): one scanner pass over assignment separators and
+    one regex pass with fixed literals for ``authorization``/``bearer``.
     """
     if not isinstance(text, str) or not text:
         return text
-    redacted = _AUTH_PATTERN.sub(lambda m: m.group("key") + REDACT, text)
-    return _redact_assignments(redacted)
+    return _AUTH_PATTERN.sub(lambda m: m.group("key") + REDACT, _redact_assignments(text))
+
+
+def format_diagnostic_exception(error: BaseException) -> str:
+    """Format the original stack and cause chain without locals or raw credentials."""
+    try:
+        trace = "".join(TracebackException.from_exception(error).format())
+    except Exception:
+        return type(error).__name__
+    return str(redact_text(trace.rstrip()))
 
 
 # Complexity ratchet (FC-1204, owner §四十二 裁定一, 2026-09-27): split only;
@@ -231,6 +243,17 @@ def _redact_assignments(text: str) -> str:
 
 def _credential_key_before_separator(text: str, separator_at: int) -> bool:
     key_end = _scan_left_over(text, separator_at, _INLINE_SPACE)
+    if key_end and text[key_end - 1] in _QUOTES:
+        quote_at = key_end - 1
+        end = _scan_left_over(text, quote_at, _BACKSLASH)
+        start = _scan_left_over(text, end, _KEY_CHARS)
+        opening = start - 1
+        if opening < 0 or text[opening] != text[quote_at]:
+            return False
+        if opening - _scan_left_over(text, opening, _BACKSLASH) != quote_at - end:
+            return False
+        key = text[start:end]
+        return key.lower() in ("authorization", "proxy-authorization") or key_is_credential(key)
     key_start = _scan_left_over(text, key_end, _KEY_CHARS)
     return _is_credential_key(text, key_start, key_end)
 
@@ -255,8 +278,9 @@ def _assignment_value_start(text: str, cursor: int) -> int:
 
 
 def _assignment_value_end(text: str, value_start: int) -> int:
-    if value_start < len(text) and text[value_start] in _QUOTES:
-        closing = _find_closing_quote(text, value_start)
+    opening = _scan_right_backslashes(text, value_start)
+    if opening < len(text) and text[opening] in _QUOTES:
+        closing = _find_closing_quote(text, opening, opening - value_start)
         if closing == -1:  # unterminated quote: redact the tail
             return len(text)
         return closing + 1
@@ -273,14 +297,26 @@ def _unquoted_assignment_end(text: str, value_start: int) -> int:
     return cursor
 
 
-def _find_closing_quote(text: str, quote_at: int) -> int:
+def _scan_right_backslashes(text: str, cursor: int) -> int:
+    while cursor < len(text) and text[cursor] == "\\":
+        cursor += 1
+    return cursor
+
+
+def _find_closing_quote(text: str, quote_at: int, opening_slashes: int) -> int:
     quote = text[quote_at]
     cursor = quote_at + 1
-    while cursor < len(text) and text[cursor] != quote:
-        if text[cursor] in "\r\n":
-            return -1
-        cursor += 1
-    return cursor if cursor < len(text) else -1
+    # One JSON escaping layer doubles a backslash and adds one before
+    # quotes. Match the opening layer while ignoring quotes inside the value.
+    stride = 2 * (opening_slashes + 1)
+    while cursor < len(text):
+        end = _scan_right_backslashes(text, cursor)
+        if end == len(text) or text[end] in "\r\n":
+            break
+        if text[end] == quote and (end - cursor - opening_slashes) % stride == 0:
+            return end
+        cursor = end + 1
+    return -1
 
 
 def redact_and_truncate(text: Any, limit: int = MAX_REDACTED_MESSAGE_CHARS) -> Any:
