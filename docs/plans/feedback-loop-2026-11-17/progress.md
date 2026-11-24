@@ -1,5 +1,9 @@
 # 进度与恢复入口
 
+2026-11-24 **S1（F5-1）8 仓 P0 日志黑洞止血已完成验收并全部提交推送至主线**（[S1 立项计划](s1-p0-blackhole-plan.md)）。按 RED→GREEN 逐仓修复、过钩子并发布：MeetingConverter `master@8c97cc5`（64 passed）、StockInfoDLSimple `v2-clean-rewrite@24ce0be`（50 passed）、filing-fetch `main@f43a875`（17 passed）、earnings-transcripts `main@cda3afb`（70 passed）、revenue-forecast `origin/main@db4f8c7a` / 本地 `main@d62fca9a`（9 passed + 独立 worktree 7 passed）、StockWiki 本地 `master@9904b43`（无 remote，72 passed）、StockQAbyLLM `codex/qa-content-filter-resolution-01@1449d71`（69 passed，black/isort/mypy/secrets 全绿）、company-wiki 随本提交发布至 `origin/master`（25 passed + `test_layer_public_boundaries` 86 passed + Ruff 全绿）。合计 **462 passed / 0 failed**，各仓原有在途未提交文件全部保持原样。下一步可继续推进 S2（统一双层日志）/ S3（零私有调用与破环）/ S4（12 仓静态 CI 护栏）。
+
+2026-11-24 全 12 仓日志与错误可复现性深度审计完成（严格只读、零代码改动）。核实 9/12 仓缺标准 `logging` 配置、SID 死文件日志、MC `mimo.py:137` `NameError` 线上 Bug、10 处业务/测试 `stderr=DEVNULL` 黑洞、95 处 CWP `from None` 与 27 处跨仓丢 `from exc`、以及各仓 F4 旁路静默吞自身写盘异常等根因；已作为 F5 补充方案写入本计划 `task_plan.md`/`findings.md`，完整逐行清单见 [full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)。当前为 `PLAN_ONLY`，待用户确认后按 S1 → S2 → S4 分仓实施。
+
 11 月 23 日三张卡已分发。总控修复 Windows 后台 RPC 重复起进程及可能弹控制台。恢复原单一任务后现场 11 仓约 11 秒、退出 0。CWP 强停的原尝试从账本冷查，F4 保留三个阶段的原 lease 失效记录。StockWiki 三条拒绝定位为 Dashboard/IQS 验收负控，原挂牌校验保留。 [验收与证据](f4-interruption-20261123.md)
 
 Audit 修复单角色查错尝试、漏诊断路径和跨角色误指，独审后本地主线 `ab7d7441`。实际安装入口只启动原三次，强停后新进程仅查账。正式宿主读同一本仓接口。 [角色验收](f4-interruption-20261123.md#audit-单角色失败)

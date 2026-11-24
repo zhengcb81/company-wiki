@@ -113,3 +113,12 @@ Commit `56d10f269b7c67845c7af66b33083f62d46cde4d` replaces the unpublished 512MB
 交错调用复现了浏览实例的请求状态串扰。目录枚举还先读完整历史，再在 Python 侧报告有界前缀；CN 发行人证明另外直接打开 PDF SDK。整改把一次调用的证明、观察和预算绑定在同一私有请求实例，目录返回路径无关的有界投影，解析适配器读取完整物理页。响应字段和版本 token 经独立对照保持兼容。Python 3.14 的 JSON 解码不复现 3.13 的固定深度异常，回归改用实际异常注入验证信封。详情见 [浏览边界验收](review/cwp-browse-owners-20261116.md)。
 
 其它模块分别按 [逐仓计划入口](owner_plans.md) 对账。StockWiki `b4ca912` 更新子计划。IQS 与 Dashboard 的混尺度兼容是实际公开接口的后续问题，历史 StockWiki V2 的 wire 和 IQS 样例仍保有各自的验收证据。FF T3 限额和 RF 周跑归位继续是 M3 待收件。
+
+## 2026-11-24 全 12 模块架构独立性与私有调用深度审计（只读）
+
+对全部 12 个生产仓（1,654 个生产 Python 文件、466,417 LOC + Dashboard 前端 `apps/web`）执行了 AST 全量扫描 + 四路源码级人工核验（已剔除 `self`/`cls`、Win32 `Popen._handle`、`python-docx`/`pptx` 内部节点、相对导入误报及 `TYPE_CHECKING`-only 环）。详细逐行落点见 [完整审计报告](review/full-12-module-architecture-logging-audit-20261124.md)。
+
+- **为何 M1–M3 后仍存在大量跨模块私有调用**：M1–M3 主要收口了跨仓公开端口，而仓内模块拆分时未建立分层子包契约与内部 `__all__` 门面，且 CWP 现有 `tests/support/layer_boundary_scan.py` 存在 6 个结构性盲区（同包内 `_foreign()` 豁免、`<shared>` 根无方向规则、`tools/feedback_loop/` 未纳入、`_LEGACY_EDGES` 永久豁免 6 条越层边、无 SCC 循环依赖检测、无注解参数盲区）；其余 11 仓尚无统一 AST 私有访问与循环依赖检查。
+- **P0 级仓内耦合缺陷**：(1) `StockQAbyLLM` `src/utils/quick_scan_*.py` 24 文件靠 184 处延迟导入形成单一运行时循环环，围绕 7,530 LOC `quick_scan_work_store.py`，且 `_environment` 在 5 个文件中混用方法调用与字典读取；(2) `company-wiki` 存在 9 个真实运行时环（含跨包反向环 `source_contract/announcement_collector <-> source_catalog/announcement_collector` 与 12 文件 `source_catalog` 核心环），`automation/scheduled_summary.py:33-36` 运行期注入 `sys.path` 导入仓根 `scripts/config.py`。
+- **P1 级跨仓与封装越界**：`revenue-forecast/scripts/processed_artifact_canary.py`（及 4 工具）直读 CWP SQLite 私有 `artifacts` 表；`filing-fetch/tools/offline_contract_matrix` 直读 CWP SQLite 并导入 ET `tests.*`；`invest-quick-scan/.../stockwiki_g2b_acceptance.py` 导入 9 个 StockWiki 私有测试函数与 8 个内部 Store；`MeetingConverter/company.py:14,130` 硬编码 `~/company-wiki/graph.yaml`；`StockWiki` 38 处跨域私有导入 + 52 处外部私有调用 + ~20 处绕过 Store 直连 SQLite；`revenue-forecast` 7 文件 `report_catalog*` 环 + 40+ 私有导入；`investment-dashboard` `ops/*` 41 处调 `DashboardService._*`；`invest-quick-scan` 142 个顶层 `scripts/*.py` `sys.modules` 垫片；`filing-fetch` 3 个生产环；`earnings-transcripts` 9 处私有导入；`industry-research` 2,817 LOC `quick_scan_client.py` 占仓 54%。
+- **封装标杆与边界基准**：`MeetingConverter` 生产代码实现 0 跨文件私有导入/0 外部私有属性/0 循环依赖；`industry-research`、`StockInfoDLSimple`、`earnings-transcripts` 均实现 0 运行时循环依赖与 0 跨仓 Python 导入，可作为其余模块收敛后的静态目标。

@@ -6,6 +6,7 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass, replace
 from datetime import datetime, timedelta, timezone
 import json
+import logging
 import sqlite3
 import uuid
 
@@ -51,6 +52,8 @@ from .store import (
     LeaseLostError,
     RecordNotFoundError,
 )
+
+_logger = logging.getLogger(__name__)
 
 
 MAX_OUTBOX_ATTEMPTS = 5
@@ -261,7 +264,13 @@ class NarrativeEffectDispatcher:
                         activated_at=activated_at,
                     )
             except (CatalogOperationLockedError, NarrativeSourceNotCurrentError,
-                    NarrativeArtifactError, ValueError, RuntimeError, OSError, sqlite3.Error):
+                    NarrativeArtifactError, ValueError, RuntimeError, OSError, sqlite3.Error) as exc:
+                _logger.error(
+                    "Skipped narrative artifact activation for effect_id=%s (%s)",
+                    artifact.effect_id,
+                    type(exc).__name__,
+                    exc_info=True,
+                )
                 continue
             activated.append(artifact.effect_id)
         return tuple(activated)

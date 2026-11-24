@@ -11,9 +11,11 @@ from dataclasses import asdict, replace
 import importlib
 import errno
 import json
+import logging
 import math
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -41,6 +43,11 @@ from .local_ocr import (
     OCRRegionRecovery,
     OCRRecoveryAttempt,
     OCR_REGION_DIAGNOSTICS_SCHEMA,
+)
+
+_logger = logging.getLogger(__name__)
+_SECRET_REDACT_RE = re.compile(
+    r"(?i)(api[_-]?key|token|secret|authorization|password)(\s*[:=]\s*)([^\s,;\"']+)"
 )
 
 DEFAULT_OCR_TIMEOUT_SECONDS = 90.0
@@ -219,7 +226,8 @@ def _worker_main(directory_text: str, startup_deadline: float):
             }
         except LocalOCRError as error:
             response = {"ok": False, "error": error.code}
-        except Exception:
+        except Exception as exc:
+            _logger.error("OCR worker inference failed (%s)", type(exc).__name__, exc_info=True)
             response = {"ok": False, "error": "OCR_INFERENCE_FAILED"}
         _write_json(response_path, response, MAX_CONTROL_BYTES, deadline=limits.deadline)
         number += 1
@@ -364,18 +372,20 @@ class IsolatedOCRAdapter:
                 if windows
                 else [sys.executable, "-B", "-S", "-c", _POSIX_BOOTSTRAP, *command]
             )
-            self._process = subprocess.Popen(
-                argv,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                env=env,
-                close_fds=True,
-                shell=False,
-                bufsize=0,
-                start_new_session=not windows,
-                creationflags=cast(Any, subprocess).CREATE_NO_WINDOW if windows else 0,
-            )
+            stderr_path = directory / "worker_stderr.log"
+            with stderr_path.open("wb") as stderr_stream:
+                self._process = subprocess.Popen(
+                    argv,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.DEVNULL,
+                    stderr=stderr_stream,
+                    env=env,
+                    close_fds=True,
+                    shell=False,
+                    bufsize=0,
+                    start_new_session=not windows,
+                    creationflags=cast(Any, subprocess).CREATE_NO_WINDOW if windows else 0,
+                )
             if windows:
                 self._job = assign_windows_job(self._process)
                 assert self._process.stdin is not None
@@ -486,6 +496,18 @@ class IsolatedOCRAdapter:
                 time.sleep(_POLL_SECONDS)
             if self._directory is not None:
                 directory, self._directory = self._directory, None
+                stderr_log = directory / "worker_stderr.log"
+                try:
+                    if stderr_log.is_file():
+                        raw = stderr_log.read_bytes()[-4096:]
+                        if raw:
+                            text = _SECRET_REDACT_RE.sub(
+                                r"\1\2[REDACTED]", raw.decode("utf-8", errors="replace").strip()
+                            )
+                            if text:
+                                _logger.error("Isolated OCR worker stderr tail: %s", text)
+                except OSError:
+                    pass
                 while True:
                     try:
                         shutil.rmtree(directory)

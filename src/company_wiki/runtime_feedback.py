@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from functools import wraps
 from hashlib import sha256
 import json
+import logging
 import os
 from pathlib import Path
 import re
@@ -17,6 +18,8 @@ from uuid import NAMESPACE_URL, uuid4, uuid5
 
 from .diagnostic_redaction import redact_text
 from .file_mutex import win32_filesystem_path
+
+_logger = logging.getLogger(__name__)
 
 
 __all__ = ["document_results", "entry", "record"]
@@ -164,13 +167,18 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
                     stream.write((b"\n" if needs_separator else b"") + _encoded(row))
                     stream.flush()
                     os.fsync(stream.fileno())
-            except OSError:
-                pass
+            except OSError as exc:
+                _logger.warning(
+                    "runtime_feedback explicit sidecar write failed (%s)",
+                    type(exc).__name__,
+                    exc_info=True,
+                )
             else:
                 recorded()
                 return
         override = os.getenv("RESEARCH_FEEDBACK_DIR")
         folders = [Path(override), _directory()] if override else [_directory()]
+        last_error: OSError | None = None
         for location in dict.fromkeys(folders):
             folder = win32_filesystem_path(location)
             try:
@@ -178,12 +186,24 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
                 _atomic(folder / details_name, _encoded(details))
                 _atomic(folder / (stem + ".jsonl"), _encoded(row))
                 _atomic(folder / (stem + ".ready"), _encoded(context))
-            except OSError:
+            except OSError as exc:
+                last_error = exc
                 continue
             recorded()
             break
-    except Exception:
+        else:
+            _logger.warning(
+                "runtime_feedback failed to persist observation across all fallback directories (%s)",
+                type(last_error).__name__ if last_error is not None else "unknown",
+                exc_info=last_error,
+            )
+    except Exception as exc:
         # The source catalog and worker retain their own authoritative result.
+        _logger.warning(
+            "runtime_feedback unexpected persistence failure (%s)",
+            type(exc).__name__,
+            exc_info=True,
+        )
         return
 
 

@@ -2,6 +2,15 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
+## 2026-11-24 全 12 模块架构解耦与日志可复现性深度审计 + S1 P0 止血全部发布
+
+按用户要求完成全部 12 个生产模块（1,654 个生产 Python 文件 / 466,417 LOC + Dashboard 前端）的只读深度审计，随后立项并完成 **S1（8 仓 P0 日志黑洞止血）** 的 RED→GREEN 根修、定向回归（合计 **462 passed / 0 failed**）与全仓提交推送（`MC@8c97cc5`、`SID@24ce0be`、`FF@f43a875`、`ET@cda3afb`、`RF origin/main@db4f8c7a`、`StockWiki 本地 master@9904b43`、`StockQA@1449d71`、`CWP origin/master`；S2/S3/S4 保持 `PLAN_ONLY`）：
+
+- **S1 立项计划与 8 仓实测台账（已完成本地验收）**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
+- **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
+- **架构独立性与零私有调用补充（M4，PLAN_ONLY）**：[module-boundaries-2026-11-11/task_plan.md](../module-boundaries-2026-11-11/task_plan.md#m4-补充计划--全-12-模块深度代码审计松耦合私有调用清零与静态护栏2026-11-24-新增)
+- **标准双层日志与错误可复现性补充（F5）**：[feedback-loop-2026-11-17/task_plan.md](../feedback-loop-2026-11-17/task_plan.md#2026-11-24-日志与错误可复现性深度审计补充f5-基础设施补齐--s1-已本地验收完成)
+
 ## 2026-11-20 W12 开始
 
 原生目标已恢复为 `active`。药明康德 `w12-20261120-cn-603259` 已复用三份财报，首次执行新增下载为零。CWP 已正式生成并读回新版半年报摘要，同次与跨次恢复额外模型请求为零。RF 已采用一条 TIDES 业务依据，正式作业、报告、快照和 287 份证据已核对封存。四路独审完成 73 项，记录 22 项发现，其中 1 项 P1。专家已逐项归因，Audit 原生检查没有漏映射，工作进入六个责任包的整改阶段。当前优先补足两项主业远期收入的量级依据，CWP 和 Audit 在各自工区回归。 [W12 执行范围与交接](review/w12-wuxi-resume-20261120/README.md)

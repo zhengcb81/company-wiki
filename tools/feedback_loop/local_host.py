@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import argparse
-from contextlib import closing, suppress
+from contextlib import ExitStack, closing, suppress
 import json
+import logging
 import os
 from pathlib import Path
 import re
@@ -14,8 +15,40 @@ import sys
 from tempfile import NamedTemporaryFile
 import time
 
+
 from .host import BACKGROUND_CREATION_FLAGS
 from .observations import digest, unique_fields
+
+_logger = logging.getLogger(__name__)
+_SECRET_REDACT_RE = re.compile(
+    r"(?i)(api[_-]?key|token|secret|authorization|password)(\s*[:=]\s*)([^\s,;\"']+)"
+)
+_HOST_STDERR_LOG_MAX_BYTES = 2 * 1024 * 1024
+def _persist_host_stderr(config_path: Path, label: str, returncode: int | None, stderr_bytes: bytes) -> None:
+    if not stderr_bytes and returncode in (None, 0):
+        return
+    text = _SECRET_REDACT_RE.sub(
+        r"\1\2[REDACTED]", stderr_bytes.decode("utf-8", errors="replace").strip()
+    )[-8192:]
+    _logger.error(
+        "feedback host subprocess failure label=%s exit_code=%s stderr=%s",
+        label,
+        returncode,
+        text or "<empty>",
+    )
+    try:
+        log_dir = config_path.resolve().parent / "logs"
+        log_dir.mkdir(parents=True, exist_ok=True)
+        log_path = log_dir / "host_subprocess_failures.log"
+        if log_path.is_file() and log_path.stat().st_size >= _HOST_STDERR_LOG_MAX_BYTES:
+            try:
+                log_path.replace(log_path.with_suffix(".log.1"))
+            except OSError:
+                pass
+        with log_path.open("a", encoding="utf-8") as handle:
+            handle.write(f"[{int(time.time())}] {label} exit_code={returncode}\n{text or '<empty>'}\n\n")
+    except OSError as exc:
+        _logger.warning("Failed to persist host subprocess stderr (%s)", type(exc).__name__, exc_info=True)
 
 
 _ROOT = Path(__file__).resolve().parents[2]
@@ -182,12 +215,27 @@ class LocalHost:
         if self.recovery_owners:
             env[RECOVERY_OWNERS_ENV] = " ".join(self.recovery_owners)
         try:
-            subprocess.Popen([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config", str(self.config),
-                              "work", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env,
-                             start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
-        except OSError:
+            with ExitStack() as stack:
+                stderr_target: object = subprocess.DEVNULL
+                try:
+                    log_dir = self.config.resolve().parent / "logs"
+                    log_dir.mkdir(parents=True, exist_ok=True)
+                    log_path = log_dir / "host_wake_stderr.log"
+                    if log_path.is_file() and log_path.stat().st_size >= _HOST_STDERR_LOG_MAX_BYTES:
+                        try:
+                            log_path.replace(log_path.with_suffix(".log.1"))
+                        except OSError:
+                            pass
+                    stderr_target = stack.enter_context(log_path.open("ab"))
+                except OSError as exc:
+                    _logger.warning("Failed to open host wake stderr log (%s)", type(exc).__name__, exc_info=True)
+                subprocess.Popen([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config", str(self.config),
+                                  "work", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
+                                 stdout=subprocess.DEVNULL, stderr=stderr_target, env=env,
+                                 start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
+        except OSError as exc:
             # The pre-launch queue is durable. Host startup can wake it again.
+            _logger.warning("Failed to wake feedback host worker for action=%s (%s)", key, type(exc).__name__, exc_info=True)
             return False
         return True
 
@@ -340,7 +388,7 @@ class LocalHost:
         with stream:
             try:
                 completed = subprocess.run(route["argv"], input=row["request"].encode("ascii"), cwd=route["cwd"],
-                                           stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                                           stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                            timeout=route["timeout"], check=False, creationflags=BACKGROUND_CREATION_FLAGS)
             except FileNotFoundError:
                 state, receipt = "failed", {"code": "host_command_or_directory_unavailable"}
@@ -356,6 +404,7 @@ class LocalHost:
                     state = "done"
                     receipt = {k: output[k] for k in ("result", "native") if isinstance(output.get(k), dict)}
                 else:
+                    _persist_host_stderr(self.config, f"owner-command:{key}", completed.returncode, completed.stderr or b"")
                     state, receipt = "unknown", {"code": "native_result_unavailable", "exit_code": completed.returncode}
             stream.write(json.dumps({"action_id": key, "request_digest": row["request_digest"],
                                      "state": state, "receipt": receipt}).encode("ascii"))
@@ -530,12 +579,13 @@ class LocalHost:
                 argv = [str(executable), *argv[1:]]
             with path.open("xb") as stream:
                 completed = subprocess.run(argv, input=encoded.encode("utf-8"), cwd=route["cwd"], stdout=stream,
-                                           stderr=subprocess.DEVNULL, timeout=route["timeout"], check=False,
+                                           stderr=subprocess.PIPE, timeout=route["timeout"], check=False,
                                            creationflags=BACKGROUND_CREATION_FLAGS)
             native, _ = _codex_receipt(path)
             if native.get("terminal"):
                 self._status(self._get(key))
             else:
+                _persist_host_stderr(self.config, f"codex:{key}", completed.returncode, completed.stderr or b"")
                 self._unconfirmed(key, {"code": "native_result_unavailable", "exit_code": completed.returncode, "native": native})
         except FileNotFoundError:
             self._finish(key, "failed", {"code": "host_command_or_directory_unavailable"})
@@ -546,12 +596,13 @@ class LocalHost:
         try:
             completed = subprocess.run([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config",
                                         str(self.config), "owner-command", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
-                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False,
+                                       stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, check=False,
                                        creationflags=BACKGROUND_CREATION_FLAGS)
         except OSError as exc:
             self._owner_launcher_failed(key, error_type=type(exc).__name__)
             return
         if completed.returncode:
+            _persist_host_stderr(self.config, f"execute-owner:{key}", completed.returncode, completed.stderr or b"")
             self._owner_launcher_failed(key, exit_code=completed.returncode)
         self._status(self._get(key))
 

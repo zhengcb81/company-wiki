@@ -1,7 +1,9 @@
 """Optional wake-up at the end of an operator-owned scenario."""
 
 from collections import Counter
+from contextlib import ExitStack
 import json
+import logging
 import os
 from pathlib import Path
 import subprocess
@@ -10,6 +12,8 @@ import sys
 from .coordinator import settle
 from .host import process_host, read_hosts
 from .observations import read_batch
+
+_logger = logging.getLogger(__name__)
 
 
 def after_observations(sidecar: Path, env) -> dict | None:
@@ -38,11 +42,17 @@ def after_observations(sidecar: Path, env) -> dict | None:
 def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -> dict:
     """Start the finite control tick outside the completed business process."""
     try:
-        with output.open("xb") as stream:
+        with ExitStack() as stack:
+            stream = stack.enter_context(output.open("xb"))
+            stderr_target: object = subprocess.DEVNULL
+            try:
+                stderr_target = stack.enter_context(output.with_suffix(".stderr.log").open("ab"))
+            except OSError as exc:
+                _logger.warning("Failed to open hook stderr log (%s)", type(exc).__name__, exc_info=True)
             child = subprocess.Popen(
                 [sys.executable, "-B", "-m", "tools.feedback_loop.hook", str(sidecar.resolve()),
                  str(Path(config).resolve()), wait_seconds],
-                cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL, stdout=stream, stderr=subprocess.DEVNULL,
+                cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL, stdout=stream, stderr=stderr_target,
                 start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
             )
     except FileExistsError:

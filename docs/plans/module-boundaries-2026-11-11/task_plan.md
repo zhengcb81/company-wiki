@@ -1,5 +1,32 @@
 # 模块边界收口计划
 
+## M4 补充计划 — 全 12 模块深度代码审计：松耦合、私有调用清零与静态护栏（2026-11-24 新增）
+
+**状态：PLAN_ONLY（严格只读审计完成，未改任何产品代码，待确认后按 owner 仓分阶段实施）。** 完整逐仓核验清单与四线解决方案见 [全 12 模块架构与日志深度审计报告](review/full-12-module-architecture-logging-audit-20261124.md)；日志与错误可复现性专项同步补充至 [feedback-loop-2026-11-17/task_plan.md](../feedback-loop-2026-11-17/task_plan.md)。
+
+### 审计发现核心摘要（维度一：独立性、松耦合与跨模块私有调用）
+
+1. **跨仓残留越界**：生产链大多已走公开 CLI/HTTP，但仍存在 `revenue-forecast/scripts/processed_artifact_canary.py`（及 4 个 RF 工具）直读 CWP SQLite 私有 `artifacts` 表、`MeetingConverter/company.py` 硬编码 `~/company-wiki/graph.yaml`，以及 `filing-fetch/tools/offline_contract_matrix/*`、`invest-quick-scan/.../stockwiki_g2b_acceptance.py` 直接导入邻仓内部模块甚至邻仓 `tests/*` 私有夹具。
+2. **仓内跨模块/跨文件私有调用与运行时循环依赖普遍存在**：
+   - **P0 — `StockQAbyLLM`**：`src/utils/quick_scan_*.py` 存在 **24 文件巨型运行时循环依赖环**（184 处延迟导入，围绕 7,530 LOC `quick_scan_work_store.py`），且 `_environment` 跨 5 文件在方法调用与字典读取间混用。
+   - **P0/P1 — `company-wiki`**：9 处均为真实运行时循环依赖（含跨包反向环 `source_contract/announcement_collector <-> source_catalog/announcement_collector`、12 文件 `source_catalog` 环、8 文件 `narrative_*` 环）；`scheduled_summary.py:33-36` 运行期改 `sys.path` 导入 `scripts/config.py`；`automation/`、`source_catalog/`、`document_understanding/`、`document_normalization/` 存在多处跨文件私有函数/属性读写与 `getattr(_*)` 反射；11 模块绕过 `SourceCatalog` 直连 `catalog.store.*`。
+   - **P1 — `StockWiki`**：38 处跨域私有导入、52 处外部私有属性/方法调用（`quick_scan_work_delegation.py` 12 处调 `service._recheck`/`_publish` 等）、约 20 处绕过 Store 直连 SQLite（含 `admin_security_id_normalization.py` 原始 `UPDATE` + `store._prepare()/_save_prepared()`）、4 个运行时环。
+   - **P1 — `revenue-forecast`**：7 文件 `report_catalog*` 运行时环 + 40+ 跨文件私有导入 + 20 处 `catalog._*` 私有调用 + `rf_job_facade.py:887` 写 `runner._pending_attempt_no` + 19 处 `sys.path.insert`。
+   - **P1 — `investment-dashboard`**：全部 9 个 `application/ops/*.py` 共 41 处调用 `DashboardService` 私有方法；`forecast_common._*`/`ff_job._cli_result` 跨文件私有导入；前端 `OriginalPreview.tsx` 绕过 `shared/api.ts`。
+   - **P1 — `filing-fetch` / `invest-quick-scan` / `earnings-transcripts` / `industry-research`**：FF 3 个生产环 + 3 处生产私有导入 + 2,112 LOC `fetch_filing.py`；IQS 142 个顶层 `scripts/*.py` `sys.modules` 垫片；ET 9 处私有导入 + 工具 monkey-patch；IR 2,817 LOC `quick_scan_client.py` + 5 处 `client._consumer_path`。
+   - **P2 — `StockInfoDLSimple` / `revenue-forecast-audit` / `MeetingConverter`**：SID 2 处重复私有导入；Audit 1 个 2 文件环 + `measure._time_str` + 16 处 `sys.path`；MC 配置双源（`config.py` vs `translator.load_config`，`mimo_base_url` 默认值冲突）。
+3. **现有边界门禁 6 大盲区**：CWP `tests/support/layer_boundary_scan.py` 豁免同包内跨文件私有访问、未约束 `<shared>` 根模块、未覆盖 `tools/feedback_loop/`、永久保留 6 条 `_LEGACY_EDGES`、缺少 SCC 循环依赖检查且漏检无类型注解参数；其余 11 仓缺少统一 AST 私有调用/循环依赖门禁。
+
+### M4 实施阶段与完成条件（对应方案 S3 + S4）
+
+| 阶段 | 范围与动作 | 完成条件 |
+|---|---|---|
+| M4-A 跨仓越界清零 | RF `processed_artifact_canary.py` 与工具改走 CWP 公开 CLI；FF 矩阵工具与 IQS 验收工具剥离邻仓内部/测试导入；MC 移除 `~/company-wiki/graph.yaml` 硬编码。 | 全 12 仓 AST 扫描跨仓内部导入 = 0、外仓 SQLite 直连 = 0。 |
+| M4-B 巨环破除与私有调用清零 | 按 owner 仓推进：StockQA 拆 24 文件环为 3 层 DAG 并统一 `subprocess_env()`；CWP 清退 `_LEGACY_EDGES`、拆 `source_catalog` 显式子包并收口 `CatalogStore.open_readonly()`；StockWiki 公开 Store 连接/写接口；RF 抽 `report_catalog_common.py`；Dashboard 抽公开 `ServiceContext` 清零 41 处 `ops -> service._*`；FF/IQS/ET/SID/Audit/IR 公开共享契约并去 `sys.path`/垫片。 | 全 12 仓生产代码跨文件私有导入 = 0、非 `self/cls` 外部私有属性/反射访问 = 0、运行时 SCC 环 = 0。 |
+| M4-C 全 12 仓静态 AST 护栏上线 | 补齐 CWP `layer_boundary_scan.py` 6 大盲区；在全部 12 仓接入统一静态检查门禁（A1 零私有导入、A2 零外部私有属性/反射、A3 零运行时环、A4 零跨仓内部导入/越界 `sys.path`，先锁基线棘轮再清零）。 | 12 仓 CI / pre-push 均带 RED→GREEN 反例测试，新增越界静态阻断。 |
+
+---
+
 ## M3 已验收（2026-11-16）
 
 - **filing-fetch** 正式 T3 四项通过，`4c7f501b` 已发布。SID 从 CNINFO 公告证明证券代码并回传，已发布 `fb8c8ba5`；同一次验证中 HK/US 使用配置的 Dayu 和兼容的独占临时库。

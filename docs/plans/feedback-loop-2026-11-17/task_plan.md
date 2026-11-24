@@ -26,7 +26,26 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 
 真实宿主选型、异步接线、原始作业核对、实际 P1 故障与消费复验的执行顺序见[ROOT 施工细则](host-integration.md)。
 
+## 2026-11-24 日志与错误可复现性深度审计补充（F5 基础设施补齐 — S1 已本地验收完成）
+
+**立项入口**：S1（F5-1）8 仓 P0 日志黑洞止血已完成本地 RED→GREEN 根修、Ruff 检查与定向回归（合计 **462 passed / 0 failed**，待按各仓 owner 规则提交/发布），逐仓改动清单与验收收据见 [S1 立项计划](s1-p0-blackhole-plan.md)。S2/S3/S4 保持 `PLAN_ONLY` 待下一步确认。
+
+**背景与根因**：2026-11-24 对全部 12 个自有模块（1,654 个生产 Python 文件 + Dashboard 前端）做只读源码审计，查明此前“若干次错误未被记录、无法复现”的四类共用根因（完整逐行证据见 [全 12 模块深度审计报告](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)）：
+
+1. **系统性标准日志真空**：9/12 仓零 `logging` 处理器/文件配置（CWP 233/243 含 `except` 文件无日志、FF 0/63、Audit 0/45、IQS 0/315、IR 0/8、RF 0 配置、StockWiki 0 配置、Dashboard HTTP/Service/Feedback 0 日志）；**`StockInfoDLSimple/src/logger.py:15,39` 导入期空句柄短路导致 `config["logging"]` 永久失效（零日志文件写出）**；**`MeetingConverter/engines/mimo.py:137` 存在线上 P0 Bug（调用未定义 `logger.warning`，首次重试即抛 `NameError` 覆盖真实错误）**。
+2. **安全脱敏误伤本地诊断（“先销毁堆栈，再返安全码”）**：CWP 95 处 `raise ... from None` 前未落本地日志；ET `transcript_api.py:804,1142,1404` 吞全部异常为裸 `unexpected_provider_failure` 且 `retrieval_runtime.py` 崩溃后立即删 `worker_stderr.log`；StockQA 10 处丢 `from e` + 61 处 `logger.error` 缺 `exc_info=True` + LLM Provider 仅记异常类名并重试代码 Bug；RF `filing_fetch_client.py:373` 报错不读 `stderr`、`rf_job_facade.py:940` 丢 `from exc`；StockWiki `documents.py`/`llm_usage_ledger.py` 宽泛吞错返 `None`/`{}`；IQS 62 处宽泛静默吞错；Dashboard `adapters/common.py:fail()` 丢 cause 且前端 `api.ts` 丢弃 `correlation_id`。
+3. **子进程 `stderr=DEVNULL` 黑洞**：CWP 7 处（`tools/feedback_loop/local_host.py` 4 处、`intake.py`、`hook.py`、`isolated_ocr.py`）、FF `ff_scheduled_windows.py:153`（双 `DEVNULL`）、StockQA `quick_scan_owner_research.py:462`、Audit `run_pool_progress_e2e.py:218`。
+4. **F4 反馈旁路写失败静默吞异常**：CWP/FF/StockWiki/Audit/IR/Dashboard/MC 旁路写盘异常均被静默吞掉（MC `core/feedback.py:1086` 甚至吞 `BaseException`），缺少 stderr 兜底告警，磁盘/权限/序列化异常会导致业务日志与 F4 观察双归零。
+
+### F5 补充实施节点（与架构计划 M4 配套，零代码修改，待确认实施）
+
+| 节点 | 实施内容 | 可核对交付 |
+|---|---|---|
+| F5-1 P0 黑洞止血（S1） | 修 MC `mimo.py:137` `NameError` 与 `BaseException`；修 SID 死文件日志与 `browser.py:645` 分页截断；清 CWP(7)/FF(1)/StockQA(1) 业务子进程 `stderr=DEVNULL`；修 ET `transcript_api` 静默吞错与 `worker_stderr.log` 提前删除；修 RF `filing_fetch_client` 丢 `stderr`、StockWiki 解析/计费静默返 `None`、StockQA LLM Provider 仅记类名。 | 每项先写 RED 复现用例，修复后能从新进程/轮转日志精确读出原异常类型、脱敏原因链与堆栈。 |
+| F5-2 全 12 仓统一双层日志与可复现信封（S2） | 12 仓全部建立标准库 `RotatingFileHandler` 结构化脱敏日志引导模块并接入全部 CLI/HTTP/Worker/Scheduler 入口；强制执行“先写本地全量脱敏日志（含 `code_version`/`run_id`/`attempt_id`/`input_ref`/`exc_chain`/`traceback`），再投影安全对外错误”；所有 F4 旁路写失败必发 stderr 告警；Dashboard 前端 `api.ts` 透传展示 `correlationId`。 | 任意普通入口注入异常均同时留下可复现本地轮转日志与 F4 公开观察；F4 旁路目录只读故障时本地日志与 stderr 仍完整留痕。 |
+| F5-3 静态日志卫生门禁与活性自检（S4） | 12 仓 CI 接入静态规则 L1（零宽泛静默吞错）、L2（零丢 `from exc` / `from None` 前必日志）、L3（零 `NoTB` 与业务 `stderr=DEVNULL`）及 L4（每仓 1 秒坏输入日志落盘活性测试）。 | 12 仓 CI 自动阻断死日志、吞异常与无堆栈报错回潮。 |
+
 ## Next Step
 
-按[复原验收和分仓余项](replay-coverage-20261123.md)接续。[本轮独立工作](f4-interruption-20261123.md)记录 Windows 静默恢复、CWP 强停和 StockWiki 三条负控的归因。下一次正式 StockQA 投递以原编号验收，StockWiki 的历史 73 条继续留证。ET 批量逐项、FF 定时原批次、SID 直启清单三张卡已分发，待各本仓交付后组合。W12 按父计划。
+按[复原验收和分仓余项](replay-coverage-20261123.md)接续；新增的 F5（日志基础设施与 P0 黑洞止血）待用户确认优先级后与原 ET/FF/SID 三张 F4 复原卡统筹排期。[本轮独立工作](f4-interruption-20261123.md)记录 Windows 静默恢复、CWP 强停和 StockWiki 三条负控的归因。下一次正式 StockQA 投递以原编号验收，StockWiki 的历史 73 条继续留证。W12 按父计划。
 

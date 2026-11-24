@@ -1,5 +1,11 @@
 # 规划进度
 
+## 2026-11-24 — 全 12 模块架构独立性与日志可复现性深度审计（只读，M4 规划补充）
+
+- 严格只读完成全部 12 个生产仓（1,654 个生产 Python 文件、466,417 LOC + Dashboard 前端 `apps/web`）的 AST 全量扫描与四路独立源码逐行核验，未修改任何生产代码、配置或外仓文件。
+- 已将完整核验清单、误报过滤记录、CWP 边界扫描器 6 处盲区分析及 S1–S4 分阶段解决方案落盘至 [full-12-module-architecture-logging-audit-20261124.md](review/full-12-module-architecture-logging-audit-20261124.md)，并作为补充更新到本计划 `task_plan.md`/`findings.md`、`feedback-loop-2026-11-17`（F5 日志与可复现性）及父计划 `du11-source-closure-2026-10-18/CURRENT_STATUS.md`。
+- 状态保持 `PLAN_ONLY`：等待用户确认优先级后，按单仓单 owner 规则依次实施 S1（P0 止血）→ S2（统一双层日志）→ S3（私有调用与循环依赖清零）→ S4（12 仓统一 AST 静态 CI 护栏）。
+
 ## 2026-11-16 — FF 正式 T3 与 RF 失败周跑
 
 - RF 独立工区以远端 `f2215959` 为父提交，在 canonical `PLANNING_STATUS.md` 记录 `20261115T084227Z / not-ok`、四个实际失败和三仓版本。ROOT 已核原日志及 manifest SHA。提交 `220e5441` 已推远端主线，固定快测 12 项和同 SHA CI 通过。临时工区已清理。
