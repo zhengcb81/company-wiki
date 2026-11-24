@@ -1,6 +1,6 @@
 # S2 统一日志与故障复原计划
 
-**当前状态：S2 已恢复，CWP 首站与 ET 已验收并推送，Audit 已验收并提交本地主线。** IR 与 MC 的独立施工卡可发。历史核查、真实入口和冷读证据见[复验台账](s2-pilot-20261124.md)，S1 发布线见[分仓发布台账](s1-p0-blackhole-plan.md)。
+**当前状态：分仓实施中。** CWP 首站、ET，以及 CWP 摘要激活、FF、SID、RF 接续节点已验收并推送。Audit 已验收并提交本地主线。IR 与 MC 已交各自 harness。历史核查见[首站台账](s2-pilot-20261124.md)，后续模块的验收与独立写入范围见[分仓接续](s2-owner-continuation-20261124.md)，S1 发布线见[分仓发布台账](s1-p0-blackhole-plan.md)。
 
 ## 共同接口与验收方式
 
@@ -18,7 +18,9 @@
 | 历史日志只读核查 | ROOT 并发只读复核 CWP、ET | 只登记文件、风险类别和范围。缺席、归属不明及无法判定的部分显式列出。 |
 | CWP 首站 | ROOT | 用真实公开原文读取命令复现配置故障，检查无原文落盘，同一 F4 实例冷读两次仍只有一个观察动作。任何诊断变化均保持正常读取和原错误契约。 |
 | ET、Audit | 各仓独立 agent，ROOT 统筹 | 已独审。ET 记录引导依赖及清理失败，机器收据保持兼容。Audit 记录反馈投递全失，能冷读原角色故障。发布细节见[复验台账](s2-pilot-20261124.md)。 |
-| [IR](owner-cards/S2-IR-DEEPSEEK-DIAGNOSTICS.md)、[MC](owner-cards/S2-MC-MIMO-DIAGNOSTICS.md) | 各自现有或独立 harness | 每仓一种真实故障、合法反例、脱敏落盘、F4 冷读及最终版本独审。 |
-| 余下各仓 | 原 owner，ROOT 串接 | SID 以已验 S1 为基线。FF 先确认定时入口在途范围，RF、StockWiki、IQS、Dashboard 和 StockQA 先核对仍在推进的同入口工作，只在互不重叠时安排。 |
+| [IR](owner-cards/S2-IR-DEEPSEEK-DIAGNOSTICS.md)、[MC](owner-cards/S2-MC-MIMO-DIAGNOSTICS.md) | 外部 harness | 已分发。每仓一种真实故障、合法反例、脱敏落盘、F4 冷读及最终版本独审。 |
+| CWP、FF、SID、RF | ROOT 与三个分仓 agent | 原摘要激活、定时子进程失败、文件日志启动、采集子进程机器收据四个节点独审并推送。 |
+| StockWiki、StockQA | 分仓 agent | 继续从本仓账本、作业和公开故障入口核查，测试覆盖原终态和新进程冷读。 |
+| IQS、Dashboard | 原 owner，ROOT 串接 | 同入口的 F4/恢复及共享 M0 工作在途。沿原 owner 任务交接。 |
 
 试点记录与历史抽核见[复验台账](s2-pilot-20261124.md)。M4/S3 和 S4 分开管理。问题出处见[12 仓审计](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)，执行入口为[总控 PWF](task_plan.md)。

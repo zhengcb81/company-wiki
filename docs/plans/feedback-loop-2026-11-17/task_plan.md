@@ -28,7 +28,7 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 
 ## 2026-11-24 日志与错误可复现性深度审计补充（F5）
 
-**当前入口**：S1 八仓原批次均有提交，七仓按各自发布线推送，StockWiki 为本地主线。CWP、ET、SID 补修见[S1 分仓发布台账](s1-p0-blackhole-plan.md)。S2 已恢复，先验收 CWP 首站，再分仓接续，详见[S2 实施顺序](s2-unified-logging-plan.md)。S3/S4 仍为计划。
+**当前入口**：S1 八仓原批次均有提交，七仓按各自发布线推送，StockWiki 为本地主线。CWP、ET、SID 补修见[S1 分仓发布台账](s1-p0-blackhole-plan.md)。S2 已通过首站验收，当前按 [S2 分仓接续台账](s2-owner-continuation-20261124.md) 推进。S3/S4 仍为计划。
 
 **背景与根因**：2026-11-24 对全部 12 个自有模块（1,654 个生产 Python 文件 + Dashboard 前端）做只读源码审计，查明此前“若干次错误未被记录、无法复现”的四类共用根因（完整逐行证据见 [全 12 模块深度审计报告](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)）：
 
@@ -47,4 +47,4 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 
 ## Next Step
 
-S1 的 CWP、ET 日志脱敏和 SID CLI 兼容补修已发布，见[S1 分仓发布台账](s1-p0-blackhole-plan.md)。ET、FF 原 F4 卡复验结果及 SID 修正状态见[分仓复原验收](replay-coverage-20261123.md)。S2 从[CWP 试点](s2-pilot-20261124.md)接续，业务 W12 按父计划。
+按 [S2 分仓接续台账](s2-owner-continuation-20261124.md) 验收 StockWiki 和 StockQA 的独立缺口，等 IR 与 MC 交付后逐仓复验。IQS 和 Dashboard 的写入沿在途项目。S1 补修见[发布台账](s1-p0-blackhole-plan.md)，业务 W12 按父计划。

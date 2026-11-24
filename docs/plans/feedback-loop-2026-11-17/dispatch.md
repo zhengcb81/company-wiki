@@ -4,14 +4,14 @@
 
 F4 的 12 个实际接线、正式版本及仍待补的业务证据统一登记在 [F4 分仓上线](f4-rollout.md)。下方保留 F2 和早期交付出处。
 
-## S2 可独立施工
+## S2 分仓施工
 
 | 卡 | 工作目录（相对 Projects） | 写入范围 |
 |---|---|---|
 | [S2-IR-DEEPSEEK-DIAGNOSTICS](owner-cards/S2-IR-DEEPSEEK-DIAGNOSTICS.md) | `industry-research` | DeepSeek 失败诊断、本仓测试和 PWF |
 | [S2-MC-MIMO-DIAGNOSTICS](owner-cards/S2-MC-MIMO-DIAGNOSTICS.md) | `MeetingConverter` | MiMo 重试诊断、本仓测试和 PWF |
 
-ET 和 Audit 由 ROOT 协调 agent 分仓完成本轮独审，结果见[复验台账](s2-pilot-20261124.md)。各卡依据[S2 共同接口](s2-unified-logging-plan.md)验收。
+IR 与 MC 已由用户分发。分仓发布与原线重叠范围见[接续台账](s2-owner-continuation-20261124.md)。ET 和 Audit 见[首站台账](s2-pilot-20261124.md)。各卡依据[S2 共同接口](s2-unified-logging-plan.md)验收。
 
 ## F4 日志复原独立施工
 
