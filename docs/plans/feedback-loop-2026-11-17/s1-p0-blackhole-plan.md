@@ -6,7 +6,7 @@
 
 | 仓 | 原批次发布 | 复核补修范围 |
 |---|---|---|
-| company-wiki | 远端 `master@16e8cbe95` | `0072e12d4` 已推 `master`。共享脱敏覆盖嵌套 JSON、转义、Bearer、查询参数和 cause。后台入口写脱敏日志，原无窗口启动继续有效。53 项定向和 23 项推送快测通过，独审覆盖轮转占用、真实进程和原结果。 [同版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45504055061) |
+| company-wiki | 远端 `master@16e8cbe95` | 脱敏代码 `0072e12d4`，裸检出启动补修 `7d00f87df`，均已推 `master`。共享脱敏覆盖嵌套 JSON、转义、Bearer、查询参数和 cause。53 项安全相关、26 项启动相关定向测试和 23 项推送快测通过，独审核对轮转占用及裸源码真实 CLI。 [最终同版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45505479302) |
 | MeetingConverter | 远端 `master@8c97cc56` | 本轮仅复核发布。 |
 | StockInfoDLSimple | 远端 `v2-clean-rewrite@24ce0beb` | `d4962055` 已推同一维护线，预期 CLI 恢复简明输出，owner 冷查保留原因。55 项定向、5 项独审通过。 |
 | filing-fetch | 远端 `main@f43a8758` | 本轮仅复核发布。 |
@@ -16,6 +16,8 @@
 | StockQAbyLLM | 远端维护分支 `codex/qa-content-filter-resolution-01@1449d715` | 按实际发布分支记账。 |
 
 原批次 CWP、MC、FF、RF 的同版远端 CI 已核实通过。ET 和 SID 的发布线没有同版远端工作流结果，按本机与独审证据记账。StockWiki 无远端。补修的测试使用合成值和隔离目录，结论限定新版输出。历史日志未作凭据排查。
+
+CWP 第一次脱敏发布在 Linux CI 的 15 个 F4 单测触发同一个启动缺口。本机安装态掩盖了工具从裸检出启动时缺少安装包。隔离环境禁用 site 和 Python 环境变量可复现。工具现从同一 checkout 使用公开脱敏实现，产品包继续用既有入口。独审在仅含源码的隔离目录复验启动、恢复、hook 合同、失败诊断和不污染 stdout。 [首次 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45504055061)
 > **父计划**：[feedback-loop-2026-11-17/task_plan.md](task_plan.md) · [full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
 > **实施纪律**：
 > 1. 每项修复均采用 **RED → GREEN TDD**：先写精准复现日志黑洞/吞错的测试并确认红灯，再做最小根修，回归受影响测试集确认绿灯。
