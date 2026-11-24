@@ -11,7 +11,7 @@ F4 的 12 个实际接线、正式版本及仍待补的业务证据统一登记�
 | [S2-IR-DEEPSEEK-DIAGNOSTICS](owner-cards/S2-IR-DEEPSEEK-DIAGNOSTICS.md) | `industry-research` | DeepSeek 失败诊断、本仓测试和 PWF |
 | [S2-MC-MIMO-DIAGNOSTICS](owner-cards/S2-MC-MIMO-DIAGNOSTICS.md) | `MeetingConverter` | MiMo 重试诊断、本仓测试和 PWF |
 
-ET 和 Audit 由 ROOT 协调 agent 各自实施，暂不外派。各卡依据[S2 共同接口](s2-unified-logging-plan.md)验收。
+ET 和 Audit 由 ROOT 协调 agent 分仓完成本轮独审，结果见[复验台账](s2-pilot-20261124.md)。各卡依据[S2 共同接口](s2-unified-logging-plan.md)验收。
 
 ## F4 日志复原独立施工
 
