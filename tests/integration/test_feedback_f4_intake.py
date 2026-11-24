@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from contextlib import closing
 import json
+import os
 from pathlib import Path
 import sqlite3
 import subprocess
@@ -64,17 +65,95 @@ print(json.dumps({"result": result}))
 """
 
 
-def configuration(tmp_path):
+def configuration(tmp_path, *, owner=OWNER):
     settings = tmp_path / "settings.json"
     settings.write_text(json.dumps({"state": "actions.sqlite", "owners": {
-        OWNER: {"cwd": str(tmp_path), "observation_dir": "observations"}
+        owner: {"cwd": str(tmp_path), "observation_dir": "observations"}
     }}), encoding="utf-8")
     hosts = tmp_path / "hosts.json"
-    hosts.write_text(json.dumps({OWNER: [*PYTHON, "-m", "tools.feedback_loop.local_host",
+    hosts.write_text(json.dumps({owner: [*PYTHON, "-m", "tools.feedback_loop.local_host",
                                          "--config", str(settings), "rpc"]}), encoding="utf-8")
     command = [*PYTHON, "-m", "tools.feedback_loop.intake", "--settings", str(settings),
                "--hosts", str(hosts), "--wait-seconds", "0"]
     return command, hosts
+
+
+@pytest.mark.parametrize(("field", "reason", "detail"), [
+    (None, "reader_unavailable", "ParserError) at line 2, column 8"),
+    ("read_only", "reader_unavailable", "roots[0] read_only must be a boolean, got str"),
+    ("adapter_id", "reader_unavailable", "roots[0] adapter_id not registered"),
+    ("kind", "invalid_request", "unsupported root kind"),
+    ("priority", "invalid_request", "roots[0] priority must be convertible to an integer"),
+    ("unknown", "reader_unavailable", "roots[0] unknown fields (1)"),
+])
+def test_cold_f4_can_recover_a_real_source_config_failure(tmp_path, field, reason, detail):
+    owner = "company-wiki"
+    secret = "generated-test-value-do-not-retain"
+    config_dir = tmp_path / "config"
+    config_dir.mkdir()
+    config = config_dir / "catalog.yaml"
+    if field is None:
+        contents = f"schema_version: 1.0\nroots: ] # Authorization: Bearer {secret}\n"
+    else:
+        root = {"root_id": "company_raw", "path": "companies", "kind": "company_raw"}
+        if field == "unknown":
+            root[secret] = True
+        else:
+            root[field] = secret
+        contents = json.dumps({"schema_version": "1.0", "catalog_dir": "catalog", "roots": [root]})
+    config.write_text(contents, encoding="utf-8")
+    state = tmp_path / "state"
+    env = {key: value for key, value in os.environ.items() if not key.startswith("RESEARCH_FEEDBACK_")}
+    env.update(LOCALAPPDATA=str(state), XDG_STATE_HOME=str(state), PYTHONPATH=str(ROOT / "src"),
+               RESEARCH_FEEDBACK_RUN_ID="cwp-source-read", RESEARCH_FEEDBACK_ATTEMPT_ID="attempt-1")
+    result = subprocess.run(
+        [*PYTHON, "-m", "company_wiki.source_catalog.source_reader_cli", "--config", str(config),
+         "--document-id", "fixture-document", "--source-id", "fixture-source", "--content-sha256", "0" * 64],
+        cwd=tmp_path, env=env, capture_output=True, check=False, timeout=20,
+    )
+    assert secret.encode() not in result.stdout + result.stderr, "public failure exposed a sensitive input line"
+    assert (result.returncode, result.stdout) == (2, b"")
+    receipt = json.loads(result.stderr)
+    assert receipt["reason"] == reason
+
+    outbox = state / owner / "observations"
+    packet, = outbox.glob("*.jsonl")
+    for output in outbox.iterdir():
+        assert secret.encode() not in output.read_bytes(), "durable failure exposed a sensitive input line"
+    plan = [*PYTHON, "-E", "-S", "-m", "tools.feedback_loop", "plan", str(packet)]
+    recovered = json.loads(subprocess.check_output(plan, cwd=ROOT, timeout=20))
+    assert not recovered["diagnostics"]
+    row, = recovered["observations"]
+    assert (row["owner"], row["run_id"], row["attempt_id"], row["step_id"], row["actual"]) == (
+        owner, "cwp-source-read", "attempt-1", "source-read", receipt["status"],
+    )
+    details = json.loads((outbox / row["details_ref"]).read_bytes())
+    assert details["reason"] == reason
+    assert details["package_version"]
+    assert "version" not in row
+    assert [details[key] for key in ("owner", "run_id", "attempt_id", "step_id")] == [
+        row[key] for key in ("owner", "run_id", "attempt_id", "step_id")
+    ]
+    error, = details["exceptions"]
+    assert error["type"] == ("CatalogConfigError" if reason == "reader_unavailable" else "ValueError")
+    assert any(detail in message for message in error["messages"])
+    assert any(frame[0] == "config.py" for frame in error["locations"])
+
+    command, _ = configuration(tmp_path, owner=owner)
+    settings = tmp_path / "settings.json"
+    settings.write_text(json.dumps({"state": "actions.sqlite", "owners": {
+        owner: {"cwd": str(tmp_path), "native_observation_dirs": [str(outbox)]},
+    }}), encoding="utf-8")
+    first, second = (json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT, env=env, timeout=20))
+                     for _ in range(2))
+    assert first == second
+    assert not first["diagnostics"]
+    assert first["processed"] == 1
+    # The offline reader has no automatic triage route. The same observation
+    # must remain attributable and no business command should be relaunched.
+    assert first["unsettled"][0]["observations"][0]["occurrence_id"] == row["occurrence_id"]
+    with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as connection:
+        assert connection.execute("SELECT count(*) FROM actions").fetchone() == (1,)
 
 
 def test_business_completion_wakes_existing_host_without_changing_output(tmp_path):

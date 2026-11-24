@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import fields
 import os
 from pathlib import Path
 import re
@@ -14,6 +15,7 @@ from .models import CatalogConfig, RootSpec, RouteSpec
 
 
 _TOKEN_RE = re.compile(r"\$\{([A-Z_]+)\}")
+_KNOWN_ROOT_FIELDS = {field.name for field in fields(RootSpec)}
 
 
 class CatalogConfigError(ValueError):
@@ -39,7 +41,7 @@ def expand_config_path(value: Any, *, project_root: Path) -> Path:
     def replace(match: re.Match[str]) -> str:
         name = match.group(1)
         if name not in tokens:
-            raise CatalogConfigError(f"unsupported path token: {name}")
+            raise CatalogConfigError("unsupported path token")
         return tokens[name]
 
     expanded = _TOKEN_RE.sub(replace, value.strip())
@@ -78,14 +80,35 @@ def require_boolean_root_fields(
             raise CatalogConfigError(
                 f"roots[{index}] {field_name} must be a boolean"
                 f"{' or null' if field_name in nullable else ''}, got "
-                f"{type(value).__name__} {value!r} (CFG-08)"
+                f"{type(value).__name__} (CFG-08)"
             )
+
+
+def _read_yaml(path: Path) -> Any:
+    try:
+        return yaml.safe_load(path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as exc:
+        error_type = type(exc).__name__
+        mark = getattr(exc, "problem_mark", None)
+        position = f" at line {mark.line + 1}, column {mark.column + 1}" if mark is not None else ""
+    # PyYAML's exception and marks can render the original source line. Keep
+    # the parser type and location without attaching the configuration text.
+    raise CatalogConfigError(f"invalid catalog YAML ({error_type}){position}")
+
+
+def _root_priority(index: int, value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError, OverflowError):
+        pass
+    # int() can put the original input into its error.
+    raise ValueError(f"roots[{index}] priority must be convertible to an integer")
 
 
 def load_catalog_config(path: Path, *, project_root: Path | None = None) -> CatalogConfig:
     if not isinstance(path, Path):
         raise TypeError("path must be pathlib.Path")
-    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    payload = _read_yaml(path)
     data = mapping_from_config(payload, "config")
     required = {"schema_version", "catalog_dir", "roots"}
     allowed = required | {"reusable_root_kinds"}
@@ -114,27 +137,28 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
         }
         unknown = set(item) - allowed_root_fields
         if unknown:
-            raise CatalogConfigError(f"roots[{index}] unknown fields: {sorted(unknown)}")
+            known = sorted(_KNOWN_ROOT_FIELDS.intersection(unknown))
+            raise CatalogConfigError(f"roots[{index}] unknown fields ({len(unknown)}), "
+                                     f"known fields from another schema: {known}")
         root_id = str(item.get("root_id", ""))
         if root_id in seen_root_ids:
-            raise CatalogConfigError(f"duplicate root_id: {root_id} (CFG-03)")
+            raise CatalogConfigError(f"roots[{index}] duplicate root_id (CFG-03)")
         seen_root_ids.add(root_id)
         raw_path = item.get("path", "")
         unresolved = unresolved_path_variables(raw_path)
         if unresolved:
             raise CatalogConfigError(
-                f"roots[{index}] path contains unresolved variable(s) "
-                f"{sorted(unresolved)} (CFG-04)"
+                f"roots[{index}] path contains unresolved variable(s) (CFG-04)"
             )
         adapter_id = item.get("adapter_id")
         if adapter_id is not None and registered_adapter(str(adapter_id)) is None:
             raise CatalogConfigError(
-                f"roots[{index}] adapter_id {adapter_id!r} not registered (CFG-01)"
+                f"roots[{index}] adapter_id not registered (CFG-01)"
             )
         profile_id = item.get("admission_profile_id")
         if profile_id is not None and admission_profile(str(profile_id)) is None:
             raise CatalogConfigError(
-                f"roots[{index}] admission_profile_id {profile_id!r} unknown (CFG-02)"
+                f"roots[{index}] admission_profile_id unknown (CFG-02)"
             )
         read_only = item.get("read_only", True)
         reusable_for_filing = item.get("reusable_for_filing")
@@ -153,7 +177,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
             adapter = registered_adapter(str(adapter_id))
             if adapter and "filing" not in adapter.get("capabilities", ()):
                 raise CatalogConfigError(
-                    f"roots[{index}] adapter {adapter_id!r} cannot serve filing "
+                    f"roots[{index}] adapter_id cannot serve filing "
                     "(CFG-07)"
                 )
         routes = tuple(
@@ -165,7 +189,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
                 root_id=root_id,
                 path=expand_config_path(raw_path, project_root=resolved_project),
                 kind=str(item.get("kind", "")),
-                priority=int(item.get("priority", 100)),
+                priority=_root_priority(index, item.get("priority", 100)),
                 adapter_id=str(adapter_id) if adapter_id is not None else None,
                 adapter_version_range=item.get("adapter_version_range"),
                 admission_profile_id=(
@@ -216,7 +240,7 @@ def _parse_route(raw, root_index: int, route_index: int) -> RouteSpec:
     unknown = set(item) - {"include", "exclude", "adapter_id", "admission_profile_id"}
     if unknown:
         raise CatalogConfigError(
-            f"roots[{root_index}].routes[{route_index}] unknown fields: {sorted(unknown)}"
+            f"roots[{root_index}].routes[{route_index}] unknown fields ({len(unknown)})"
         )
     return route_spec_from_config(item, route_index)
 
@@ -232,10 +256,10 @@ def route_spec_from_config(item: dict[str, Any], route_index: int) -> RouteSpec:
         patterns[name] = tuple(value)
     adapter_id = item.get("adapter_id")
     if adapter_id is not None and registered_adapter(str(adapter_id)) is None:
-        raise CatalogConfigError(f"routes[{route_index}] adapter_id {adapter_id!r} not registered")
+        raise CatalogConfigError(f"routes[{route_index}] adapter_id not registered")
     profile = item.get("admission_profile_id")
     if profile is not None and admission_profile(str(profile)) is None:
-        raise CatalogConfigError(f"routes[{route_index}] admission_profile_id {profile!r} unknown")
+        raise CatalogConfigError(f"routes[{route_index}] admission_profile_id unknown")
     return RouteSpec(
         include=patterns["include"], exclude=patterns["exclude"],
         adapter_id=str(adapter_id) if adapter_id is not None else None,

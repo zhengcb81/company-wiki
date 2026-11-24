@@ -16,6 +16,7 @@ from tempfile import NamedTemporaryFile
 from typing import Any, ParamSpec
 from uuid import NAMESPACE_URL, uuid4, uuid5
 
+from . import __version__
 from .diagnostic_redaction import format_diagnostic_exception, redact_text
 from .file_mutex import win32_filesystem_path
 
@@ -142,7 +143,8 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             row["evidence_ref"] = source_id
         if status in {"refused", "blocked"} and _token(reason):
             row["refusal_code"] = reason.lower()
-        details = {**context, "reason": _token(reason) or status, "exceptions": _exceptions(error)}
+        details = {**context, "package_version": __version__, "reason": _token(reason) or status,
+                   "exceptions": _exceptions(error)}
         if message:
             details["message"] = redact_text(message)
         if source_id:

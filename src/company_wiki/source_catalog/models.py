@@ -240,7 +240,7 @@ class RootSpec:
         if not isinstance(self.path, Path):
             raise TypeError("path must be pathlib.Path")
         if self.kind not in ROOT_KINDS:
-            raise ValueError(f"unsupported root kind: {self.kind}")
+            raise ValueError("unsupported root kind")
         if isinstance(self.priority, bool) or not isinstance(self.priority, int):
             raise TypeError("priority must be an integer")
         if self.adapter_id is not None and not isinstance(self.adapter_id, str):
