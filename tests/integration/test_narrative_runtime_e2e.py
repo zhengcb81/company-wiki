@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import nullcontext
 from dataclasses import replace
 import hashlib
 import json
@@ -8,6 +9,8 @@ import multiprocessing
 import os
 from pathlib import Path
 import shutil
+import subprocess
+import sys
 from threading import Event as ThreadEvent, Thread
 from datetime import datetime, timedelta, timezone
 import time
@@ -866,10 +869,16 @@ def test_e7_r07_acknowledged_projection_recovers_after_projector_process_exit(
         _cleanup(tmp_path, run_root, baseline, catalog)
 
 
+@pytest.mark.parametrize("failure", ["catalog_lock", "storage"])
 def test_e7_r08_catalog_lock_keeps_acknowledged_bundle_recoverable(
-    tmp_path: Path,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str,
 ) -> None:
     run_root, baseline = _run_root(tmp_path, "m3-e4-runtime-e7-r08-catalog-lock")
+    inbox = run_root / "feedback"
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_DIR", str(inbox))
+    monkeypatch.setenv("RESEARCH_FEEDBACK_RUN_ID", "narrative-projection")
+    monkeypatch.setenv("RESEARCH_FEEDBACK_ATTEMPT_ID", "original-attempt")
     catalog = None
     try:
         source_bytes = _pdf_bytes(
@@ -908,10 +917,18 @@ def test_e7_r08_catalog_lock_keeps_acknowledged_bundle_recoverable(
         )
         dispatcher = NarrativeEffectDispatcher(store, artifacts)
         generation = store.read_runtime_gate().control_generation
-        with CatalogOperationLock(
-            catalog.config.catalog_dir,
-            operation="test-e7-r08-held-catalog-lock",
-        ):
+        sensitive_input = "unlabelled-synthetic-owner-data"
+
+        def fail_activate(*args, **kwargs):
+            try:
+                raise ValueError(sensitive_input)
+            except ValueError as cause:
+                raise OSError(5, sensitive_input) from cause
+
+        lock = CatalogOperationLock(catalog.config.catalog_dir, operation="test-e7-r08-held-catalog-lock")
+        with monkeypatch.context() as injected, lock if failure == "catalog_lock" else nullcontext():
+            if failure == "storage":
+                injected.setattr(artifacts, "activate", fail_activate)
             receipt = dispatcher.dispatch_next(
                 worker_id="e7-r08-catalog-projector",
                 now="2026-09-28T22:02:00Z",
@@ -933,10 +950,32 @@ def test_e7_r08_catalog_lock_keeps_acknowledged_bundle_recoverable(
             assert visible is not None
             assert int(visible["count"]) == 0
 
+        packet, = inbox.glob("feedback-*.jsonl")
+        for written in inbox.iterdir():
+            assert sensitive_input.encode() not in written.read_bytes(), "projection diagnostics retained input"
+        cold = json.loads(subprocess.check_output(
+            [sys.executable, "-B", "-E", "-S", "-m", "tools.feedback_loop", "plan", str(packet)],
+            cwd=Path(__file__).resolve().parents[2], timeout=20,
+        ))
+        assert cold["diagnostics"] == []
+        row, = cold["observations"]
+        assert (row["run_id"], row["attempt_id"], row["step_id"], row["actual"]) == (
+            "narrative-projection", "original-attempt",
+            f"narrative-projection/activate/{receipt.effect_id}", "activation_pending",
+        )
+        assert row["disposition"] == ("expected" if failure == "catalog_lock" else "deviation")
+        local = json.loads((inbox / row["details_ref"]).read_bytes())
+        assert local["reason"] == "projection_activation_failed"
+        cause_chain = local["exceptions"]
+        expected = {"CatalogOperationLockedError"} if failure == "catalog_lock" else {"ValueError", "OSError"}
+        assert expected <= {cause["type"] for cause in cause_chain}
+        assert all(cause["locations"] and not cause["messages"] for cause in cause_chain)
+
         assert not (catalog.config.catalog_dir / "operation.lock").exists()
         assert dispatcher.reconcile_prepared(
             activated_at="2026-09-28T22:03:00Z"
         ) == (receipt.effect_id,)
+        assert list(inbox.glob("feedback-*.jsonl")) == [packet]
         loaded = NarrativeBundleReader(artifacts).read(
             document_id=ref.document_id,
             source_id=ref.source_id,

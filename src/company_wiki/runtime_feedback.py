@@ -72,7 +72,7 @@ def _encoded(value: object) -> bytes:
     return (json.dumps(value, sort_keys=True, ensure_ascii=True) + "\n").encode("ascii")
 
 
-def _exceptions(exc: BaseException | None) -> list[dict]:
+def _exceptions(exc: BaseException | None, *, include_messages: bool) -> list[dict]:
     output: list[dict] = []
     pending = [exc] if exc is not None else []
     seen: set[int] = set()
@@ -89,7 +89,7 @@ def _exceptions(exc: BaseException | None) -> list[dict]:
             tb = tb.tb_next
         # Never call an exception's user-defined __str__ or expose arbitrary
         # object arguments. Native message strings retain the specific cause.
-        values = vars(BaseException)["args"].__get__(item)
+        values = vars(BaseException)["args"].__get__(item) if include_messages else ()
         message = [redact_text(value) for value in values if type(value) is str]
         detail: dict[str, Any] = {"type": type(item).__name__, "locations": locations, "messages": message}
         if isinstance(item, OSError):
@@ -115,8 +115,9 @@ def _token(value: object) -> str:
 
 def record(operation: str, status: str, *, reason: str = "", error: BaseException | None = None,
            run: str = "", attempt: str = "", item: str = "", source_id: str = "",
-           expected: bool = False, message: str = "") -> None:
-    """Project only stable native facts; diagnostic failures never replace the native outcome."""
+           expected: bool = False, message: str = "", include_error_messages: bool = True,
+           explains_invocation: bool = True) -> None:
+    """Keep native diagnostic facts. Omit messages at boundaries carrying opaque inputs."""
     try:
         caller = _current.get()
         run = run or (caller.run if caller else "") or os.getenv("RESEARCH_FEEDBACK_RUN_ID") or uuid4().hex
@@ -144,14 +145,14 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
         if status in {"refused", "blocked"} and _token(reason):
             row["refusal_code"] = reason.lower()
         details = {**context, "package_version": __version__, "reason": _token(reason) or status,
-                   "exceptions": _exceptions(error)}
+                   "exceptions": _exceptions(error, include_messages=include_error_messages)}
         if message:
             details["message"] = redact_text(message)
         if source_id:
             details["source_id"] = source_id
         def recorded() -> None:
             if caller is not None:
-                caller.explained = True
+                caller.explained = caller.explained or explains_invocation
                 if error is not None:
                     caller.reported_errors.append(error)
 

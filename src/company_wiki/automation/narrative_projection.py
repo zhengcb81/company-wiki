@@ -10,6 +10,7 @@ import logging
 import sqlite3
 import uuid
 
+from company_wiki import runtime_feedback
 from company_wiki.diagnostic_redaction import format_diagnostic_exception
 from company_wiki.id_scope import normalize_id_scope
 from company_wiki.narrative_subject import NarrativeSubject, publication_target
@@ -206,9 +207,15 @@ class NarrativeEffectDispatcher:
             RuntimeError,
             OSError,
             sqlite3.Error,
-        ):
+        ) as exc:
             # AUTO ACK is durable. A later enabled reconciliation completes this
             # short second-store transition without claiming or replaying effects.
+            runtime_feedback.record(
+                "narrative-projection/activate", "activation_pending",
+                reason="projection_activation_failed", error=exc,
+                item=effect.effect_id, expected=isinstance(exc, CatalogOperationLockedError),
+                include_error_messages=False, explains_invocation=False,
+            )
             return NarrativeProjectionReceipt(
                 effect.effect_id, "activation_pending", version.artifact_version_id
             )

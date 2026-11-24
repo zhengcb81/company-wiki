@@ -83,6 +83,24 @@ def test_torn_sidecar_preserves_prior_bytes_and_next_complete_row(tmp_path, monk
     assert json.loads(complete)["actual"] == "failed"
 
 
+def test_pending_substep_does_not_explain_separate_exit_failure(tmp_path, monkeypatch):
+    from company_wiki.runtime_feedback import entry, record
+
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_DIR", str(tmp_path))
+
+    @entry("outer")
+    def run():
+        record("publish", "activation_pending", explains_invocation=False)
+        return 4
+
+    assert run() == 4
+    rows = [json.loads(path.read_bytes()) for path in tmp_path.glob("*.jsonl")]
+    assert {(row["step_id"], row["actual"]) for row in rows} == {
+        ("publish", "activation_pending"), ("outer", "exit:4"),
+    }
+
+
 def test_faulty_optional_exception_properties_do_not_erase_the_native_cause(tmp_path, monkeypatch):
     from company_wiki.runtime_feedback import entry
     import pytest
