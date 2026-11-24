@@ -14,10 +14,8 @@ import subprocess
 import sys
 from uuid import uuid4
 
-from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
-
 from .coordinator import settle
-from .diagnostics import background_environment, run_background
+from .diagnostics import background_environment, format_diagnostic_exception, redact_text, run_background
 from .host import process_host, read_hosts
 from .local_host import LocalHost, host_path
 from .observations import read_batch, unique_fields

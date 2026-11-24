@@ -15,9 +15,7 @@ import sys
 from tempfile import NamedTemporaryFile
 import time
 
-from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
-
-from .diagnostics import background_environment, run_background
+from .diagnostics import background_environment, format_diagnostic_exception, redact_text, run_background
 from .host import BACKGROUND_CREATION_FLAGS
 from .observations import digest, unique_fields
 

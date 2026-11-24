@@ -6,12 +6,16 @@ import os
 from pathlib import Path
 from typing import TypeVar
 
-from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
+# The host tools run from a source checkout, including with no site-packages.
+# Resolve the owner implementation from that same checkout.
+from src.company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
 
 
 _LOG_PATH = "CWP_F4_ERROR_LOG"
 _T = TypeVar("_T")
 _logger = logging.getLogger(__name__)
+
+__all__ = ["background_environment", "format_diagnostic_exception", "redact_text", "run_background"]
 
 
 def background_environment(path: Path) -> dict[str, str]:

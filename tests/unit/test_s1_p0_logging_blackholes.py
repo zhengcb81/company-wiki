@@ -181,7 +181,7 @@ def test_background_intake_persists_a_safe_real_startup_failure(tmp_path):
     hosts = tmp_path / "hosts.json"
     hosts.write_text("{}", encoding="utf8")
     log = tmp_path / "intake.log"
-    command = [sys.executable, "-B", "-m", "tools.feedback_loop.intake", "--settings", str(settings),
+    command = [sys.executable, "-B", "-E", "-S", "-m", "tools.feedback_loop.intake", "--settings", str(settings),
                "--hosts", str(hosts), "drain"]
     result = subprocess.run(command, check=False, capture_output=True, timeout=15,
                             env={**os.environ, "CWP_F4_ERROR_LOG": str(log)})
@@ -189,6 +189,14 @@ def test_background_intake_persists_a_safe_real_startup_failure(tmp_path):
     text = log.read_text(encoding="utf8")
     assert "SYNTHETIC_STARTUP" not in text and b"SYNTHETIC_STARTUP" not in result.stderr
     assert "FileNotFoundError" in text
+
+
+def test_feedback_host_cli_starts_from_checkout_without_package_install():
+    result = subprocess.run(
+        [sys.executable, "-B", "-E", "-S", "-m", "tools.feedback_loop.local_host", "--help"],
+        check=True, capture_output=True, timeout=15,
+    )
+    assert b"recover" in result.stdout
 
 
 def test_background_diagnostic_survives_rotation_failure(tmp_path, monkeypatch):
