@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Callable
 from .security_identity import normalize_identity_text
 
 if TYPE_CHECKING:
-    from .acquisition import DownloadCandidate, DownloadReceipt
+    from .acquisition_contracts import DownloadCandidate, DownloadReceipt
     from .resolver import SourceRequest
 
 

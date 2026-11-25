@@ -16,7 +16,7 @@ from tempfile import TemporaryDirectory
 import time
 from typing import Any, Sequence, cast
 
-from .acquisition import DiscoveryPage, DownloadCandidate, DownloadReceipt
+from .acquisition_contracts import DiscoveryPage, DownloadCandidate, DownloadReceipt
 from .resolver import SourceRequest
 from .store import canonical_json
 

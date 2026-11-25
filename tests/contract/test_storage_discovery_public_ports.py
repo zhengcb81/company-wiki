@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import ast
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 from company_wiki.source_catalog.acquisition_sidecar import (
     ACQUISITION_SIDECAR_SUFFIX,
@@ -56,3 +59,28 @@ def test_scanner_and_adapters_do_not_import_private_common_helpers():
                 imports.append(f"{path.relative_to(SOURCE_ROOT)}:{node.lineno}")
 
     assert not imports, "private adapter-common imports remain: " + ", ".join(imports)
+
+
+def test_original_writer_and_download_values_load_without_acquisition_runtime(tmp_path):
+    code = """
+import sys
+from company_wiki.source_catalog import CanonicalSourceWriter, DownloadCandidate, DownloadReceipt
+
+assert 'company_wiki.source_catalog.acquisition' not in sys.modules
+candidate = DownloadCandidate(
+    'fixture', 'exchange', 'accession', 'HK', 'Fixture', 'Annual filing',
+    'https://exchange.invalid/filing.pdf', 'annual_report', '2026-04-01', 2025,
+)
+assert candidate.to_dict()['provider_document_id'] == 'accession'
+from company_wiki.source_catalog import acquisition
+assert acquisition.DownloadCandidate is DownloadCandidate
+assert acquisition.DownloadReceipt is DownloadReceipt
+assert CanonicalSourceWriter.__name__ == 'CanonicalSourceWriter'
+"""
+    result = subprocess.run(
+        [sys.executable, "-B", "-c", code],
+        cwd=tmp_path,
+        env=dict(os.environ, PYTHONPATH=str(SOURCE_ROOT.parents[1])),
+        capture_output=True, text=True, encoding="utf-8", timeout=20,
+    )
+    assert result.returncode == 0, result.stderr

@@ -43,16 +43,18 @@ if TYPE_CHECKING:
         SourceVersionReader,
     )
     from .lock import CatalogOperationLockedError
-    from .acquisition import (
+    from .acquisition_contracts import (
         ACQUISITION_SCHEMA_VERSION,
+        DownloadCandidate,
+        DownloadReceipt,
+    )
+    from .acquisition import (
         AcquisitionCoordinator,
         AcquisitionError,
         AcquisitionResult,
         AcquisitionStatus,
         AdapterRegistry,
         DownloadAdapter,
-        DownloadCandidate,
-        DownloadReceipt,
         MarketRoutingError,
     )
     from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
@@ -173,16 +175,18 @@ _EXPORTS_BY_MODULE = {
         "SourceVersionReader",
     ),
     ".lock": ("CatalogOperationLockedError",),
-    ".acquisition": (
+    ".acquisition_contracts": (
         "ACQUISITION_SCHEMA_VERSION",
+        "DownloadCandidate",
+        "DownloadReceipt",
+    ),
+    ".acquisition": (
         "AcquisitionCoordinator",
         "AcquisitionError",
         "AcquisitionResult",
         "AcquisitionStatus",
         "AdapterRegistry",
         "DownloadAdapter",
-        "DownloadCandidate",
-        "DownloadReceipt",
         "MarketRoutingError",
     ),
     ".download_budget": ("AcquisitionBudget", "AcquisitionBudgetExceeded"),

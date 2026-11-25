@@ -7,7 +7,7 @@ import math
 import re
 from typing import Any, cast, Literal
 
-from .acquisition import ACQUISITION_SCHEMA_VERSION
+from .acquisition_contracts import ACQUISITION_SCHEMA_VERSION
 from .acquisition_service import SOURCE_ENSURE_SCHEMA_VERSION
 from .close_gap import CLOSE_GAP_SCHEMA_VERSION
 from .gap_plan import GAP_PLAN_SCHEMA_VERSION

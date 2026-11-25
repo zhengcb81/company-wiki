@@ -12,7 +12,7 @@ import json
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from urllib.parse import urlsplit
 
-from .acquisition import DownloadReceipt
+from .acquisition_contracts import DownloadReceipt
 from .source_reader import SourceReadError, SourceRef
 
 

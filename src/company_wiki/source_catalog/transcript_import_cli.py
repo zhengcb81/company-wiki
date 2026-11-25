@@ -24,7 +24,7 @@ from pathlib import Path
 import sys
 from typing import Any, BinaryIO
 
-from .acquisition import DownloadCandidate
+from .acquisition_contracts import DownloadCandidate
 from .canonical_writer import CanonicalSourceWriter
 from .config import load_catalog_config
 from .resolver import SourceRequest

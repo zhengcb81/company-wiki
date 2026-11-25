@@ -7,7 +7,7 @@ from dataclasses import dataclass, replace
 from datetime import datetime
 from pathlib import Path
 
-from .acquisition import DownloadCandidate, DownloadReceipt
+from .acquisition_contracts import DownloadCandidate, DownloadReceipt
 from .canonical_writer import (
     CanonicalImportError,
     CanonicalImportResult,

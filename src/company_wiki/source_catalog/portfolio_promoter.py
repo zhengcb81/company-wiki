@@ -22,7 +22,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .acquisition import DownloadCandidate, DownloadReceipt
+from .acquisition_contracts import DownloadCandidate, DownloadReceipt
 from .canonical_writer import CanonicalSourceWriter
 from .resolver import SourceRequest
 

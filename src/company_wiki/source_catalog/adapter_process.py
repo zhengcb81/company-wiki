@@ -13,7 +13,7 @@ from typing import Any, Sequence
 
 from company_wiki.bounded_process import TransportError, run_json_process
 
-from .acquisition import DiscoveryPage, DownloadCandidate, DownloadReceipt
+from .acquisition_contracts import DiscoveryPage, DownloadCandidate, DownloadReceipt
 from .download_budget import AcquisitionBudget
 from .acquisition_failure import validated_usage
 from .resolver import SourceRequest
