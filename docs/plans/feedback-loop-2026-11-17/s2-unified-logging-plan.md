@@ -1,6 +1,6 @@
 # S2 统一日志与故障复原计划
 
-**当前状态：分仓实施中。** CWP、ET、FF、SID、RF、IQS、StockQA 受验节点已推送。Audit 和 StockWiki 已验收并提交本地主线。IR、MC 等正式交付，Dashboard 等原 owner 接续当前共享写域。历史核查见[首站台账](s2-pilot-20261124.md)，发布证据和验收范围见[分仓接续](s2-owner-continuation-20261124.md)，S1 发布线见[分仓发布台账](s1-p0-blackhole-plan.md)。
+**当前状态：收尾中。** CWP、ET、FF、SID、RF、IQS、StockQA 和 Dashboard 受验节点已推送。Audit 和 StockWiki 已验收并提交本地主线。IR、MC 等正式交付。历史核查见[首站台账](s2-pilot-20261124.md)，发布证据见[分仓接续](s2-owner-continuation-20261124.md)与[最后三区验收](s2-closeout-20261125.md)，S1 发布线见[分仓发布台账](s1-p0-blackhole-plan.md)。
 
 ## 共同接口与验收方式
 
@@ -21,6 +21,6 @@
 | [IR](owner-cards/S2-IR-DEEPSEEK-DIAGNOSTICS.md)、[MC](owner-cards/S2-MC-MIMO-DIAGNOSTICS.md) | 外部 harness | 已分发。每仓一种真实故障、合法反例、脱敏落盘、F4 冷读及最终版本独审。 |
 | CWP、FF、SID、RF | ROOT 与三个分仓 agent | 原摘要激活、定时子进程失败、文件日志启动、采集子进程机器收据四个节点独审并推送。 |
 | StockWiki、StockQA、IQS | 分仓 agent | 本仓账本、已付恢复和 provider 错误三个节点已独审。StockWiki 本地提交，StockQA 和 IQS 已推送。 |
-| Dashboard | 原 owner，ROOT 串接 | M0 相关号传播与在途写域重叠，沿原 owner 接续。 |
+| Dashboard | M0 隔离实施，ROOT 串接 | 独审并推送。共享请求与错误视图保留关联号，原 owner CLI 只读冷查。 |
 
 试点记录与历史抽核见[复验台账](s2-pilot-20261124.md)。M4/S3 和 S4 分开管理。问题出处见[12 仓审计](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)，执行入口为[总控 PWF](task_plan.md)。

@@ -47,4 +47,4 @@ F3c 用已有真实响应修正草稿限定与精选，并用 A 股、港股、�
 
 ## Next Step
 
-按 [S2 分仓接续台账](s2-owner-continuation-20261124.md) 签收 IR 与 MC，使用各自真实入口做一次组合冷读。Dashboard 相关号沿原 M0 写域接续。S1 补修见[发布台账](s1-p0-blackhole-plan.md)，业务 W12 按父计划。
+按 [S2 最后三区验收](s2-closeout-20261125.md) 签收 IR 与 MC 的最终版本，逐仓复验真实入口及 F4 冷读。Dashboard M0 已验收并推送。S1 补修见[发布台账](s1-p0-blackhole-plan.md)，业务 W12 按父计划。

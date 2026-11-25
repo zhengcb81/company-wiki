@@ -1,5 +1,7 @@
 # 进度与恢复入口
 
+2026-11-25。Dashboard M0 窄范围修好相关号和只读冷查，独审后推送 `main@a3523e8`。IR 与 MC 由原 harness 收尾，等正式版逐一验收。[收尾台账](s2-closeout-20261125.md)
+
 2026-11-25。StockWiki 用量账本、StockQA 已付成员恢复、IQS provider 错误三节点已完成独审。本轮七个模块验收通过，StockWiki 本地主线，另六个本仓发布线已推送。CWP、FF、RF 的远端 CI 已通过。IR、MC 未见正式交付，Dashboard 沿原 M0 写域。[分仓接续与版本](s2-owner-continuation-20261124.md)
 
 2026-11-24。S2 并行实施。CWP 摘要激活、FF 定时子进程、SID 文件日志启动、RF 采集子进程四个节点独审并推送。IR、MC 已交独立 harness。StockWiki、StockQA 在本仓继续核查，IQS 和 Dashboard 沿各自原线。见[本轮分仓接续](s2-owner-continuation-20261124.md)。

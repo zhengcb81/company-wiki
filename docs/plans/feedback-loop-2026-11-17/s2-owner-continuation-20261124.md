@@ -13,6 +13,6 @@
 | StockWiki | 模型成功但本仓用量账本不可写。保留原业务结果，冷读只诊断子步骤，费用按原事实保持未知。 | 本地 `master@665f6a85`，39 项定向、两条独审通过。无 Git 远端。[本仓记录](../../../../StockWiki/.planning/modularity-closeout-20261111/F4-SW.md) |
 | StockQA | 已付原响应的单题解码失败可查回原成员，局部诊断和外层终态分别记录。 | `codex/qa-content-filter-resolution-01@95fdab89` 已推送。三条最终独审和原提交钩子通过。该维护分支不触发现有远端 CI。两次冷读未重发、未改变原付费账本。[本仓记录](../../../../StockQAbyLLM/.planning/modularity-closeout-20261111/S2-STOCKQA-recovery.md) |
 | IQS | provider HTTP 非 JSON、超时、连接错误的安全诊断。同一尝试、同一原因归并，异类分别记录。 | `master@fb3fcbe7` 已推送。36 项定向、7 项独审通过。由远端合并基线 `05f95a2` 隔离快进。该提交无远端 CI。D00 的原 HTTP、作业、F4 检出与本地主工区保留。 |
-| Dashboard | 前端丢失后端相关号，候选写域在共享 M0。 | 远端 `main@ead3425` 仍复现缺口。M0 PWF 有在途变更。回到原 M0 owner，验收现有 HTTP 错误相关号从 JSON 到 UI 再到现有 F4 冷读。M3 原始预览也已有 C-04，留原 owner。 |
+| Dashboard | M0 共享前端保留相关号，现有 owner 提供只读 F4 冷查。 | `main@a3523e8` 独审已推，原 M0/M3/M6 在途文件保留。 [最后三区验收](s2-closeout-20261125.md) |
 
-11 月 25 日核对 IR 和 MC 工作区均有本卡源码变更，尚未形成正式交付。Dashboard 由原 M0、M3 owner 接续。本轮 RF 和 IQS 从实际远端基线隔离发布，安装版本与原本地工作区分开记录。总控任务见 [S2 执行顺序](s2-unified-logging-plan.md)。
+11 月 25 日核对 IR 和 MC 工作区均有本卡源码变更，等最终正式交付。本轮 RF 和 IQS 从实际远端基线隔离发布，安装版本与原本地工作区分开记录。总控任务见 [S2 执行顺序](s2-unified-logging-plan.md)。
