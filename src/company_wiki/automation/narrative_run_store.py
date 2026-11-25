@@ -23,10 +23,8 @@ from .narrative_run_binding import (
     job_prompt_versions as _job_prompt_versions, model_prompt_version,
     require_run_name as _name,
 )
-from .store import (
-    ConcurrentUpdateError, StoreBusyError, _read_runtime_gate_in_transaction,
-    _require_active_attempt, _set_runtime_gate_in_transaction,
-)
+from .store_errors import ConcurrentUpdateError, LeaseLostError, StoreBusyError
+from .store_transactions import read_runtime_gate, require_active_attempt, set_runtime_gate
 
 
 if TYPE_CHECKING:
@@ -264,7 +262,7 @@ def _base_generation(run: RunRecord, item_key: str) -> dict | None:
         raise RunConflictError("invalid immutable base generation") from exc
 
 
-def _freeze_select_generation_in_transaction(connection, job, result) -> None:
+def freeze_select_generation_in_transaction(connection, job, result) -> None:
     """CAS the final content identity beside its select result in one transaction.
 
     The caller already fenced the owning attempt's lease and runtime generation.
@@ -401,7 +399,7 @@ def _settle_output_in_transaction(
     return _required_reservation(connection, run_id, attempt_id)
 
 
-def _settle_failed_summary_output_in_transaction(
+def settle_failed_summary_output_in_transaction(
     connection: sqlite3.Connection, attempt: Attempt, job: Job, result: HandlerResult,
     *, finished_at: str,
 ) -> None:
@@ -500,14 +498,14 @@ class NarrativeRunStore:
         report = migrations.inspect_schema(db_path)
         if report.user_version not in {5, 6, 7, migrations.SCHEMA_VERSION}:
             raise NarrativeRunError("run history requires an explicitly migrated AUTO database")
-        connection = migrations._open_readonly_connection(db_path)
+        connection = migrations.open_readonly_connection(db_path)
         try:
             return _run(connection, run_id)
         finally:
             connection.close()
 
     def _read(self, operation: Callable[[sqlite3.Connection], T]) -> T:
-        connection = migrations._open_readonly_connection(self.db_path)
+        connection = migrations.open_readonly_connection(self.db_path)
         try:
             return operation(connection)
         finally:
@@ -734,14 +732,14 @@ class NarrativeRunStore:
             raise ValueError("expected_generation must be a positive integer")
 
         def write(connection):
-            current = _read_runtime_gate_in_transaction(connection)
+            current = read_runtime_gate(connection)
             if current.control_generation != expected_generation:
                 raise ConcurrentUpdateError("runtime gate generation changed")
             run = _required_run(connection, run_id)
             if (current.desired_state is RuntimeState.ENABLED
                     and run.last_runtime_generation != current.control_generation):
                 raise RunOwnershipError("enabled runtime generation belongs to another or unknown run")
-            gate = _set_runtime_gate_in_transaction(
+            gate = set_runtime_gate(
                 connection, RuntimeState.ENABLED, updated_at=updated_at,
                 expected_generation=expected_generation, advance_generation=True,
             )
@@ -823,7 +821,7 @@ class NarrativeRunStore:
         def write(connection):
             run = _required_run(connection, run_id)
             record = _required_reservation(connection, run_id, paid_attempt_id)
-            _, job = _require_active_attempt(connection, attempt_id=current_attempt_id,
+            _, job = require_active_attempt(connection, attempt_id=current_attempt_id,
                 lease_token=lease_token, runtime_generation=runtime_generation, now=now)
             member = connection.execute("SELECT input_hash,handler_version FROM narrative_run_jobs WHERE run_id=? AND job_id=?",
                                         (run_id, job.job_id)).fetchone()
@@ -1069,8 +1067,6 @@ class NarrativeRunStore:
                 attempt["lease_token"] != lease_token
                 or attempt["runtime_generation"] != runtime_generation
             ):
-                from .store import LeaseLostError
-
                 raise LeaseLostError("reservation attempt token or generation differs")
             cost = _price(run, input_tokens_bound, max_output_tokens)
             existing = _reservation(connection, run_id, attempt_id)
@@ -1094,7 +1090,7 @@ class NarrativeRunStore:
                         "attempt reservation differs from its original request or bounds"
                     )
                 return ReservationAdmission(existing, False, False)
-            _, job = _require_active_attempt(
+            _, job = require_active_attempt(
                 connection,
                 attempt_id=attempt_id,
                 lease_token=lease_token,
@@ -1390,6 +1386,11 @@ class NarrativeRunStore:
         return self._write(write)
 
 
+# Keep lazy imports from workers that started before the store extraction valid.
+_freeze_select_generation_in_transaction = freeze_select_generation_in_transaction
+_settle_failed_summary_output_in_transaction = settle_failed_summary_output_in_transaction
+
+
 __all__ = [
     "NarrativeRunStore",
     "NarrativeRunError",
@@ -1405,4 +1406,6 @@ __all__ = [
     "ReservationRecord",
     "ReservationAdmission",
     "RunBudgetSnapshot",
+    "freeze_select_generation_in_transaction",
+    "settle_failed_summary_output_in_transaction",
 ]

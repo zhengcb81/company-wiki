@@ -1,5 +1,10 @@
 # 规划进度
 
+## 2026-11-25 S5 验证和发布
+
+- FF 矩阵跨仓私有导入已改走公开 CLI。RF 私表探针在已安装技能中退役。IQS 的历史纯值查询使用 StockWiki 公开端口。
+- CWP 扫描器新增六类负例、合法对照和诊断图。AUTO 账本与 Store 共享同一事务叶子，原 SQLite 事务和强停回归通过。前批修复与实际运行的版本见 [S5 台账](../feedback-loop-2026-11-17/s5-verification-20261125.md)。
+
 ## 2026-11-25 — S1–S4 实施后全 12 模块深度复审增补（只读审计）
 
 - 对全部 12 个仓库最新正式发布引用、本机工作区检出、F4 `settings.json` 实际运行目录及 `.agents`/`.codex`/`.claude`/`.gemini/config` 四套全局安装技能执行只读 AST + 源码逐行复审，完整报告落盘至 [s1-s4-post-rollout-12-module-audit-20261125.md](review/s1-s4-post-rollout-12-module-audit-20261125.md)。

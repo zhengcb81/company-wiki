@@ -480,7 +480,7 @@ def test_killed_coordinator_releases_owner_and_resumes_without_refunding_unknown
             from integration.test_narrative_generation_reuse import record_proof
             from company_wiki.automation import migrations
 
-            connection = migrations._open_readonly_connection(state.store.db_path)
+            connection = migrations.open_readonly_connection(state.store.db_path)
             try:
                 persisted = {
                     "successful_result_counts": {

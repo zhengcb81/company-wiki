@@ -1,5 +1,6 @@
 """Automatic run/generation association; no process or human authority receipt."""
 
+import ast
 from contextlib import closing
 from dataclasses import fields, replace
 import hashlib
@@ -22,6 +23,28 @@ T1 = "2026-10-03T10:01:00Z"
 T2 = "2026-10-03T10:02:00Z"
 T3 = "2026-10-03T10:03:00Z"
 SHA = hashlib.sha256(b"ownership-input").hexdigest()
+
+
+def test_narrative_ledger_does_not_import_the_automation_store():
+    tree = ast.parse(Path(ledger.__file__).read_bytes())
+    imported = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            imported.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom):
+            if node.module:
+                imported.add(node.module)
+            if node.module in (None, "company_wiki.automation", "src.company_wiki.automation"):
+                imported.update(alias.name for alias in node.names)
+    assert "store" not in imported
+    assert "company_wiki.automation.store" not in imported
+    assert "src.company_wiki.automation.store" not in imported
+
+
+def test_workers_started_before_release_keep_their_lazy_imports():
+    assert migrations._open_readonly_connection is migrations.open_readonly_connection
+    assert ledger._freeze_select_generation_in_transaction is ledger.freeze_select_generation_in_transaction
+    assert ledger._settle_failed_summary_output_in_transaction is ledger.settle_failed_summary_output_in_transaction
 
 
 def _source_job(name):

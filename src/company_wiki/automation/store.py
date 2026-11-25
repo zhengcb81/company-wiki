@@ -29,7 +29,7 @@ from .dag_persistence import (
 from .migrations import (
     BackupHook,
     SchemaReport,
-    _open_readonly_connection,
+    open_readonly_connection,
     inspect_schema,
     migrate_database,
     validate_database,
@@ -56,69 +56,40 @@ from .models import (
     require_sha256,
     validate_job_transition,
 )
+from .store_errors import (
+    AutomationStoreError as AutomationStoreError,
+    InvalidStorePathError as InvalidStorePathError,
+    StoreBusyError as StoreBusyError,
+    IntegrityViolationError as IntegrityViolationError,
+    TerminalResultCompactedError as TerminalResultCompactedError,
+    IdempotencyConflictError as IdempotencyConflictError,
+    RecordNotFoundError as RecordNotFoundError,
+    ConcurrentUpdateError as ConcurrentUpdateError,
+    CorruptRecordError as CorruptRecordError,
+    RuntimeGateClosedError as RuntimeGateClosedError,
+    RuntimeGenerationError as RuntimeGenerationError,
+    LeaseLostError as LeaseLostError,
+)
+from .store_transactions import (
+    JOB_COLUMNS as _JOB_COLS,
+    ATTEMPT_COLUMNS as _ATTEMPT_COLS,
+    job_from_row as _job_from_row,
+    attempt_from_row as _attempt_from_row,
+    runtime_gate_from_row as _runtime_gate_from_row,
+    set_runtime_gate as _set_runtime_gate_in_transaction,
+    job_row as _job_row,
+    attempt_row as _attempt_row,
+    enabled_gate as _enabled_gate,
+    latest_attempt_no as _latest_attempt_no,
+    require_active_attempt as _require_active_attempt,
+    read_runtime_gate,
+)
 from .terminal_receipt_contracts import (
     FinalArtifactPin, TerminalCompactionResult, TERMINAL_RECEIPT_SCHEMA,
     is_terminal_receipt, terminal_job_scope,
 )
 
 T = TypeVar("T")
-
-
-# --------------------------------------------------------------------------- #
-# Store errors (stable codes; original exceptions chained).
-# --------------------------------------------------------------------------- #
-class AutomationStoreError(Exception):
-    code = "automation_store_error"
-
-    def __init__(self, detail: str = "") -> None:
-        super().__init__(detail or self.code)
-        self.detail = detail
-
-
-class InvalidStorePathError(AutomationStoreError):
-    code = "invalid_store_path"
-
-
-class StoreBusyError(AutomationStoreError):
-    code = "store_busy"
-
-
-class IntegrityViolationError(AutomationStoreError):
-    code = "integrity_violation"
-
-
-class TerminalResultCompactedError(IntegrityViolationError):
-    """The original result was retired; read the exact final artifact instead."""
-
-    code = "terminal_result_compacted"
-
-
-class IdempotencyConflictError(AutomationStoreError):
-    code = "idempotency_conflict"
-
-
-class RecordNotFoundError(AutomationStoreError):
-    code = "record_not_found"
-
-
-class ConcurrentUpdateError(AutomationStoreError):
-    code = "concurrent_update"
-
-
-class CorruptRecordError(AutomationStoreError):
-    code = "corrupt_record"
-
-
-class RuntimeGateClosedError(AutomationStoreError):
-    code = "runtime_gate_closed"
-
-
-class RuntimeGenerationError(AutomationStoreError):
-    code = "runtime_generation_mismatch"
-
-
-class LeaseLostError(AutomationStoreError):
-    code = "lease_lost"
 
 
 # --------------------------------------------------------------------------- #
@@ -146,17 +117,6 @@ _EVENT_COLS = (
     "event_id, event_type, subject_type, subject_id, input_hash, "
     "payload_json, policy_version, occurred_at, observed_at"
 )
-_JOB_COLS = (
-    "job_id, job_key, job_type, subject_type, subject_id, input_hash, "
-    "policy_version, handler_version, risk_class, status, priority, "
-    "not_before, max_attempts, created_from_event_id, created_at, "
-    "updated_at, last_error_code, last_error_detail"
-)
-_ATTEMPT_COLS = (
-    "attempt_id, job_id, attempt_no, worker_id, lease_token, lease_until, "
-    "started_at, heartbeat_at, finished_at, outcome, result_json, "
-    "error_code, error_detail, runtime_generation"
-)
 _EFFECT_COLS = (
     "effect_id, effect_key, job_id, effect_type, target, before_hash, "
     "intended_after_hash, actual_after_hash, status, created_at, verified_at"
@@ -180,133 +140,8 @@ def _event_from_row(row: sqlite3.Row) -> Event:
     return Event.from_dict(dict(row))
 
 
-def _job_from_row(row: sqlite3.Row) -> Job:
-    return Job.from_dict(dict(row))
-
-
-def _attempt_from_row(row: sqlite3.Row) -> Attempt:
-    return Attempt.from_dict(dict(row))
-
-
 def _effect_from_row(row: sqlite3.Row) -> Effect:
     return Effect.from_dict(dict(row))
-
-
-def _runtime_gate_from_row(row: sqlite3.Row) -> RuntimeGate:
-    return RuntimeGate.from_dict(dict(row))
-
-
-def _read_runtime_gate_in_transaction(connection: sqlite3.Connection) -> RuntimeGate:
-    row = connection.execute(
-        "SELECT desired_state, control_generation, updated_at "
-        "FROM runtime_gate WHERE singleton_id = 1"
-    ).fetchone()
-    if row is None:
-        raise RuntimeGateClosedError("runtime gate row is missing")
-    return _runtime_gate_from_row(row)
-
-
-def _set_runtime_gate_in_transaction(
-    connection: sqlite3.Connection, desired_state: RuntimeState, *, updated_at: str,
-    expected_generation: int | None = None, advance_generation: bool = False,
-) -> RuntimeGate:
-    """Fence a generation inside the caller's existing write transaction."""
-    if not isinstance(desired_state, RuntimeState):
-        raise TypeError("desired_state must be RuntimeState")
-    RuntimeGate(desired_state, 1, updated_at)
-    if expected_generation is not None and (type(expected_generation) is not int or expected_generation < 1):
-        raise ValueError("expected_generation must be a positive integer")
-    current = _read_runtime_gate_in_transaction(connection)
-    if expected_generation is not None and current.control_generation != expected_generation:
-        raise ConcurrentUpdateError("runtime gate generation changed")
-    if current.desired_state is desired_state and not advance_generation:
-        return current
-    if updated_at < current.updated_at:
-        raise IntegrityViolationError("runtime gate updated_at must not regress")
-    generation = current.control_generation + 1
-    changed = connection.execute(
-        "UPDATE runtime_gate SET desired_state = ?, "
-        "control_generation = ?, updated_at = ? WHERE singleton_id = 1 "
-        "AND control_generation = ?",
-        (desired_state.value, generation, updated_at, current.control_generation),
-    )
-    if changed.rowcount != 1:
-        raise ConcurrentUpdateError("runtime gate generation changed")
-    return RuntimeGate(desired_state, generation, updated_at)
-
-
-def _job_row(connection: sqlite3.Connection, job_id: str) -> sqlite3.Row:
-    row = connection.execute(
-        f"SELECT {_JOB_COLS} FROM jobs WHERE job_id = ?", (job_id,)
-    ).fetchone()
-    if row is None:
-        raise RecordNotFoundError(f"job {job_id} not found")
-    return row
-
-
-def _attempt_row(connection: sqlite3.Connection, attempt_id: str) -> sqlite3.Row:
-    row = connection.execute(
-        f"SELECT {_ATTEMPT_COLS} FROM attempts WHERE attempt_id = ?", (attempt_id,)
-    ).fetchone()
-    if row is None:
-        raise RecordNotFoundError(f"attempt {attempt_id} not found")
-    return row
-
-
-def _enabled_gate(
-    connection: sqlite3.Connection, expected_generation: int
-) -> RuntimeGate:
-    row = connection.execute(
-        "SELECT desired_state, control_generation, updated_at "
-        "FROM runtime_gate WHERE singleton_id = 1"
-    ).fetchone()
-    if row is None:
-        raise RuntimeGateClosedError("runtime gate row is missing")
-    try:
-        gate = _runtime_gate_from_row(row)
-    except (TypeError, ValueError) as exc:
-        raise RuntimeGateClosedError("runtime gate row is invalid") from exc
-    if gate.desired_state is not RuntimeState.ENABLED:
-        raise RuntimeGateClosedError("runtime gate is paused")
-    if gate.control_generation != expected_generation:
-        raise RuntimeGenerationError(
-            f"expected generation {expected_generation}, actual "
-            f"{gate.control_generation}"
-        )
-    return gate
-
-
-def _latest_attempt_no(connection: sqlite3.Connection, job_id: str) -> int:
-    return connection.execute(
-        "SELECT COALESCE(MAX(attempt_no), 0) FROM attempts WHERE job_id = ?",
-        (job_id,),
-    ).fetchone()[0]
-
-
-def _require_active_attempt(
-    connection: sqlite3.Connection,
-    *,
-    attempt_id: str,
-    lease_token: str,
-    runtime_generation: int,
-    now: str,
-) -> tuple[Attempt, Job]:
-    _enabled_gate(connection, runtime_generation)
-    attempt = _attempt_from_row(_attempt_row(connection, attempt_id))
-    if attempt.lease_token != lease_token:
-        raise LeaseLostError("lease token does not match")
-    if attempt.runtime_generation != runtime_generation:
-        raise RuntimeGenerationError("attempt belongs to an older runtime generation")
-    if attempt.finished_at is not None:
-        raise LeaseLostError("attempt is already finished")
-    if attempt.attempt_no != _latest_attempt_no(connection, attempt.job_id):
-        raise LeaseLostError("attempt is not the latest attempt for its job")
-    if attempt.lease_until < now:
-        raise LeaseLostError("attempt lease has expired")
-    job = _job_from_row(_job_row(connection, attempt.job_id))
-    if job.status is not JobStatus.RUNNING:
-        raise LeaseLostError(f"job is {job.status.value}, not running")
-    return attempt, job
 
 
 def _transition_job_in_transaction(
@@ -899,17 +734,9 @@ class AutomationStore:
     def read_runtime_gate(self) -> RuntimeGate:
         conn = self._connect()
         try:
-            row = conn.execute(
-                "SELECT desired_state, control_generation, updated_at "
-                "FROM runtime_gate WHERE singleton_id = 1"
-            ).fetchone()
-            if row is None:
-                return RuntimeGate(
-                    RuntimeState.PAUSED, 1, "1970-01-01T00:00:00Z"
-                )
             try:
-                return _runtime_gate_from_row(row)
-            except (TypeError, ValueError):
+                return read_runtime_gate(conn)
+            except (RuntimeGateClosedError, TypeError, ValueError):
                 return RuntimeGate(
                     RuntimeState.PAUSED, 1, "1970-01-01T00:00:00Z"
                 )
@@ -1028,7 +855,7 @@ class AutomationStore:
         if event_type is not None:
             sql += " WHERE event_type = ?"
             parameters = (event_type,)
-        conn = _open_readonly_connection(self._db_path)
+        conn = open_readonly_connection(self._db_path)
         try:
             rows = conn.execute(sql + " ORDER BY occurred_at, event_id", parameters)
             return tuple(_event_from_row(row) for row in rows)
@@ -1485,9 +1312,9 @@ class AutomationStore:
             )
             _validate_result_effects(result, job.job_id)
             if job.job_type == "source.narrative_select" and result.outcome is HandlerOutcome.SUCCEEDED:
-                from .narrative_run_store import _freeze_select_generation_in_transaction
+                from .narrative_run_store import freeze_select_generation_in_transaction
 
-                _freeze_select_generation_in_transaction(conn, job, result)
+                freeze_select_generation_in_transaction(conn, job, result)
             target = _finish_target(result, has_effects=bool(result.effects))
             _update_finished_attempt(
                 conn, attempt, finished_at=finished_at, result=result
@@ -1503,9 +1330,9 @@ class AutomationStore:
             if failure_observation is not None and target in {JobStatus.RETRY_WAIT, JobStatus.DEAD_LETTER}:
                 _queue_worker_feedback(conn, attempt, failure_observation, finished_at=finished_at)
             if job.job_type == "source.narrative_summarize":
-                from .narrative_run_store import _settle_failed_summary_output_in_transaction
+                from .narrative_run_store import settle_failed_summary_output_in_transaction
 
-                _settle_failed_summary_output_in_transaction(
+                settle_failed_summary_output_in_transaction(
                     conn, attempt, job, result, finished_at=finished_at)
             publication_due = outbox_not_before or finished_at
             for effect in result.effects:
@@ -1640,7 +1467,7 @@ class AutomationStore:
         if allowed_job_ids is not None:
             scope = " AND f.job_id IN (" + ",".join("?" for _ in allowed_job_ids) + ")"
             parameters += allowed_job_ids
-        conn = _open_readonly_connection(self._db_path)
+        conn = open_readonly_connection(self._db_path)
         try:
             rows = conn.execute(
                 "SELECT f.job_id, a.attempt_id, f.payload_json FROM notifications f "
@@ -1848,7 +1675,7 @@ class AutomationStore:
         """Observe the given jobs' effect and outbox states in one read-only snapshot."""
         if not job_ids:
             return ()
-        conn = _open_readonly_connection(self._db_path)
+        conn = open_readonly_connection(self._db_path)
         try:
             rows = conn.execute(
                 "SELECT e.effect_id, e.job_id, e.effect_type, e.status, o.status "

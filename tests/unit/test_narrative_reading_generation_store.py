@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from contextlib import closing
 from dataclasses import replace
 import shutil
 import sqlite3
@@ -157,7 +158,7 @@ def test_later_transaction_failure_rolls_back_final_generation_and_select_result
         _finish(auto, work, selected)
     assert runs.final_generations("run") == {}
     assert auto.get_attempt(work.attempt.attempt_id).finished_at is None
-    with sqlite3.connect(auto.db_path) as connection:
+    with closing(sqlite3.connect(auto.db_path)) as connection:
         assert connection.execute("SELECT final_generation_json FROM narrative_run_jobs WHERE job_id=?",
                                   (jobs[0].job_id,)).fetchone()[0] is None
 
@@ -178,8 +179,7 @@ def test_preconstructed_resolver_refreshes_generation_after_select_freeze(tmp_pa
 def test_final_generation_cas_accepts_equal_and_rejects_different_result(tmp_path):
     auto, runs, jobs, generation, selected, _ = _state(tmp_path)
     _finish(auto, _claim(auto, jobs[0], generation), selected)
-    freeze = getattr(narrative_run_store, "_freeze_select_generation_in_transaction", None)
-    assert callable(freeze), "same-transaction generation CAS must exist"
+    freeze = narrative_run_store.freeze_select_generation_in_transaction
     connection = migrations._open_connection(auto.db_path)
     try:
         connection.execute("BEGIN IMMEDIATE")

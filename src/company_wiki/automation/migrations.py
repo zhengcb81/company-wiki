@@ -464,7 +464,8 @@ def _open_connection(db_path: Path) -> sqlite3.Connection:
             raise
 
 
-def _open_readonly_connection(db_path: Path) -> sqlite3.Connection:
+def open_readonly_connection(db_path: Path) -> sqlite3.Connection:
+    """Open a read-only transaction on the existing database."""
     uri = db_path.resolve().as_uri() + "?mode=ro"
     connection = sqlite3.connect(
         uri, uri=True, timeout=_CONNECT_TIMEOUT_S, isolation_level=None
@@ -475,6 +476,10 @@ def _open_readonly_connection(db_path: Path) -> sqlite3.Connection:
     # a concurrent migration can otherwise commit between those reads.
     connection.execute("BEGIN")
     return connection
+
+
+# An already running ledger may load this module after an in-place update.
+_open_readonly_connection = open_readonly_connection
 
 
 def _user_tables(connection: sqlite3.Connection) -> list[str]:
@@ -699,7 +704,7 @@ def _perform_backup(
 # Read-only classification (never modifies the file).
 # --------------------------------------------------------------------------- #
 def _classify_existing(db_path: Path) -> str:
-    connection = _open_readonly_connection(db_path)
+    connection = open_readonly_connection(db_path)
     try:
         version = _user_version(connection)
         if version > SCHEMA_VERSION:
@@ -723,7 +728,7 @@ def _classify_existing(db_path: Path) -> str:
 
 
 def _validate_current_readonly(db_path: Path) -> MigrationReport:
-    connection = _open_readonly_connection(db_path)
+    connection = open_readonly_connection(db_path)
     try:
         version = _user_version(connection)
         if version > SCHEMA_VERSION:
@@ -909,7 +914,7 @@ def _inspection_connection(db_path: Path) -> sqlite3.Connection:
     if not db_path.exists() or not db_path.is_file():
         raise InvalidDatabasePathError(f"database file does not exist: {db_path}")
     _ensure_sqlite_file(db_path)
-    return _open_readonly_connection(db_path)
+    return open_readonly_connection(db_path)
 
 
 def inspect_schema(db_path: Path) -> SchemaStructure:
@@ -955,5 +960,6 @@ __all__ = [
     "BackupError",
     "inspect_schema",
     "migrate_database",
+    "open_readonly_connection",
     "validate_database",
 ]
