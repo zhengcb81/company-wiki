@@ -4,6 +4,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "execution_mode": "w12_company_attempt_after_scoped_feedback_rollout",
+  "architecture_rollout": {
+    "s2_status": "accepted_scoped_owner_scenarios",
+    "s2_receipt": "../feedback-loop-2026-11-17/s2-closeout-20261125.md",
+    "s3_status": "implementation_in_progress",
+    "s4_status": "paired_behavior_regressions_in_progress",
+    "owner_ledger": "../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md"
+  },
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",

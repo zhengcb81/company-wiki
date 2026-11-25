@@ -330,8 +330,11 @@ def test_deepseek_environment_key_wins_dotenv_which_is_only_a_fallback(
     else:
         monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
     (tmp_path / "config.yaml").write_text("llm:\n  provider: minimax\n", encoding="utf-8")
-    (tmp_path / ".env").write_text("DEEPSEEK_API_KEY=dotenv-fixture-key\n", encoding="utf-8")
+    (tmp_path / ".env").write_text(
+        'export DEEPSEEK_API_KEY="dotenv-fixture-key#fixture" # managed example\n',
+        encoding="utf-8",
+    )
     config = Config.load(llm_provider="deepseek")
-    expected = "environment-fixture-key" if environment_present else "dotenv-fixture-key"
+    expected = "environment-fixture-key" if environment_present else "dotenv-fixture-key#fixture"
     assert config.llm.api_key == expected
     assert expected not in json.dumps(model_options_from_config(config.llm))

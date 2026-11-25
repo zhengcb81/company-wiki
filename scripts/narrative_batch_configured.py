@@ -6,10 +6,10 @@ import argparse
 from pathlib import Path
 from typing import Sequence
 
-from config import Config
 from company_wiki.automation.narrative_batch_cli import main as batch_main
 from company_wiki.automation.narrative_http_model import model_options_from_config
 from company_wiki.automation.models import canonical_json
+from company_wiki.runtime_config import Config
 
 
 def main(argv: Sequence[str] | None = None) -> int:

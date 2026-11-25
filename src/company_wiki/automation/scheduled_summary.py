@@ -7,7 +7,6 @@ from decimal import Decimal
 import json
 from pathlib import Path
 import sqlite3
-import sys
 from typing import Any
 
 
@@ -25,15 +24,8 @@ def _build_summary_request(args: argparse.Namespace, max_seconds: int,
     same ``run_id`` resumes the same AUTO batch, so a retried request reads
     its original ledger instead of paying twice.
     """
+    from company_wiki.runtime_config import Config
     from .narrative_http_model import model_options_from_config
-
-    # The project's config loader lives in the repository's scripts/ directory
-    # and is imported top-level there (scripts/narrative_batch_configured.py
-    # does ``from config import Config``), so composition adds the directory.
-    scripts_dir = Path(__file__).resolve().parents[3] / "scripts"
-    if scripts_dir.is_dir() and str(scripts_dir) not in sys.path:
-        sys.path.insert(0, str(scripts_dir))
-    from config import Config
 
     batch_config = json.loads(
         args.summary_batch_config.resolve(strict=True).read_text(encoding="utf-8")

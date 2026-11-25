@@ -13,7 +13,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+import dotenv
 import pytest
+import yaml
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -55,14 +57,17 @@ def test_config_cannot_reload_repository_dotenv_when_disabled() -> None:
     environment["PYTHON_DOTENV_DISABLED"] = "1"
     environment["COMPANY_WIKI_NETWORK"] = "blocked"
     environment["COMPANY_WIKI_REAL_LLM"] = "0"
-    environment["PYTHONPATH"] = str(SCRIPTS)
+    dependencies = (Path(module.__file__).resolve().parents[1] for module in (dotenv, yaml))
+    environment["PYTHONPATH"] = os.pathsep.join(
+        dict.fromkeys(str(path) for path in (SCRIPTS, *dependencies))
+    )
     code = (
         "import os, config; config._load_dotenv(); "
         "print(int('MINIMAX_API_KEY' in os.environ), int('MIMO_API_KEY' in os.environ), "
         "int('TAVILY_API_KEY' in os.environ))"
     )
     completed = subprocess.run(
-        [sys.executable, "-c", code],
+        [sys.executable, "-B", "-S", "-c", code],
         cwd=ROOT,
         env=environment,
         capture_output=True,

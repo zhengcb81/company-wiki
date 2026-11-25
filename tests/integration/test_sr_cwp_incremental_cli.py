@@ -14,8 +14,8 @@ from pathlib import Path
 import subprocess
 import sys
 
-from support.narrative_batch_fixtures import KEY, loopback_model_server  # noqa: F401
-from support.sr_cwp_fixtures import sr_cwp_readable_catalog
+from support.narrative_batch_fixtures import KEY, loopback_model_server as loopback_model_server
+from support.sr_cwp_fixtures import sr_cwp_readable_catalog as sr_cwp_readable_catalog
 
 from company_wiki.source_catalog.security_identity import SecurityMasterStore, SecurityRecord
 
@@ -24,9 +24,20 @@ REPO = Path(__file__).resolve().parents[2]
 ADAPTER_CLI = REPO / "tests" / "support" / "sr_cwp_adapter_cli.py"
 
 
-def _invoke(command, state, request, extra_args=()):
+def _invoke(command, state, request, extra_args=(), *, package_only=False):
+    entrypoint = ["-m", "company_wiki.source_catalog.cli"]
+    if package_only:
+        entrypoint = ["-c", """
+import sys
+sys.modules.update(config=None, common=None)
+initial_path = sys.path.copy()
+from company_wiki.source_catalog.cli import main
+status = main()
+assert sys.path == initial_path, "package CLI changed its import path"
+raise SystemExit(status)
+"""]
     return subprocess.run(
-        [sys.executable, "-B", "-m", "company_wiki.source_catalog.cli", command,
+        [sys.executable, "-B", *entrypoint, command,
          "--config", str(state.config_path),
          "--acquisition-config", str(state.root / "config" / "acquisition.json"),
          *extra_args],
@@ -182,10 +193,11 @@ def test_scheduler_reads_back_the_frozen_run_and_product(sr_cwp_readable_catalog
 
 
 def test_summary_level_generates_through_the_configured_batch_and_reuses(
-    sr_cwp_readable_catalog, tmp_path_factory, loopback_model_server, monkeypatch,
+    sr_cwp_readable_catalog, loopback_model_server, monkeypatch,
 ):
-    """A4 summary tier: loopback generation once, then reuse with zero calls."""
+    """The package CLI runs summary and recovery without legacy script imports."""
     monkeypatch.setenv("DEEPSEEK_API_KEY", KEY)
+    monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
     state = sr_cwp_readable_catalog
     ref = state.refs["call-transcript.txt"]
     automation_db = state.root / "automation.db"
@@ -210,9 +222,9 @@ def test_summary_level_generates_through_the_configured_batch_and_reuses(
         "run_id": "cli-summary-1", "reading_level": "summary",
         "sources": [ref.to_dict()], "limits": None,
     }
-    env = dict(os.environ, PYTHONPATH=str(REPO / "src"), PYTHONUTF8="1")
     first = _invoke(
         "read-incremental", state, request,
+        package_only=True,
         extra_args=["--llm-config", str(llm_config),
                     "--allow-local-model-http",
                     "--summary-batch-config", str(batch_config),
@@ -231,6 +243,7 @@ def test_summary_level_generates_through_the_configured_batch_and_reuses(
 
     second = _invoke(
         "read-incremental", state, request,
+        package_only=True,
         extra_args=["--llm-config", str(llm_config),
                     "--allow-local-model-http",
                     "--summary-batch-config", str(batch_config),

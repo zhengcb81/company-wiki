@@ -5,6 +5,7 @@ import json
 from integration import test_narrative_generation_reuse as reuse
 from integration import test_shared_reading_production_e2e as production
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
+from company_wiki.document_understanding.reading_context_contract import CURRENT_READING_CONTEXT_SCHEMA
 
 loopback_model_server = reuse.loopback_model_server
 
@@ -27,7 +28,7 @@ def test_configured_summary_and_restart_without_unconsumed_config(
         assert len(server.requests) == 1 and not server.errors
         reference, bundle, replay = reuse.public_read(root, config, imported, kind)
         assert replay["replay_status"] == "verified"
-        assert bundle["reading_context"]["schema_version"] == "du-production-reading/3"
+        assert bundle["reading_context"]["schema_version"] == CURRENT_READING_CONTEXT_SCHEMA
         runs = NarrativeRunStore(root / "AUTO.sqlite")
         before = tuple(asdict(item) for item in runs.reservations_for_run("strict-config"))
         process, resumed = reuse.invoke(root, config, request, llm, "strict-config")

@@ -1,5 +1,11 @@
 # 调查发现
 
+## 2026-11-25 S3 配置接线与接口取证
+
+- CWP 的包内摘要在新进程加载旧顶层 `config` 前增补 `scripts/` 搜索路径。禁用旧脚本导入的真实摘要命令可复现。把配置加载迁入包时还需保留原来由 dotenv 解析得到的注释、引号和 `export` 行格式，且项目受管 MiMo/MiniMax 和环境优先的 DeepSeek 分别保持原规则。
+- 配置端到端曾因硬写旧阅读类型 `du-production-reading/3` 误报，基线已生成 `/4`。当前生成版本取自阅读层公开契约，原件、artifact SHA、预算和恢复行为照常核验。依赖锁已有与 PDF 布局、语言运行时有关的历史漂移，本节点仅登记既有锁中的 dotenv 依赖关系。
+- FF 重复取件的存储级不变量由 CWP 自己证明。CWP 的 canonical writer 合同验证不会写第二份原件，采集合同验证复用不调用 fetch；FF 自己验证公开 SourceRef、真实字节和请求次数。
+
 ## 2026-11-16 真实 provider 复跑
 
 预算补齐后，FF 的首次真跑已进入供应方。CNINFO 发现消费 2,672 字节，精确定位到 StockInfoDLSimple 的候选缺少经核对的证券代码。SID 已在本仓按原公告证券代码校验并输出。HK/US 错误发生在 HTTP 之前。配置中的 Dayu venv 带 Windows Low 完整性标签，部署的 staging 和 provider-state 同为 Low，而旧测试库的普通 Temp 为 Medium。改用 Windows 已有 Low 临时根里的独占测试库后，港美股真实采集通过。四例正式复验、版本及 RF 历史记录见 [收口证据](review/m3-formal-t3-20261116.md)。

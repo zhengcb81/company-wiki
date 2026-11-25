@@ -2,16 +2,16 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-24 架构与日志审计、S1 发布与 S2 恢复
+## 2026-11-25 S2 验收完成，S3/S4 分仓实施
 
-外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。S2 已恢复并从原文读取故障的 CWP 试点起步，M4/S3 和 S4 保持计划。
+外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。
 
-2026-11-25。S2 计划节点已按 owner 验收，Dashboard M0、IR 与 MC 的最后交付均已提交推送。发布版本、独审与边界见[收尾台账](../feedback-loop-2026-11-17/s2-closeout-20261125.md)。
+S2 计划节点已按 owner 验收，Dashboard M0、IR 与 MC 的最后交付均已提交推送。S3 从 CWP 配置入口、FF 跨仓验收、RF 私有依赖和 StockQA 本仓边界并行推进。S4 随每项修复固化行为回归。发布版本和独审分别见 [S2 收尾台账](../feedback-loop-2026-11-17/s2-closeout-20261125.md) 与 [S3/S4 分仓台账](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md)。
 
 - **S1 各仓发布与补修记录**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
 - **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
-- **架构独立性与零私有调用补充（M4，PLAN_ONLY）**：[module-boundaries-2026-11-11/task_plan.md](../module-boundaries-2026-11-11/task_plan.md#m4-补充计划--全-12-模块深度代码审计松耦合私有调用清零与静态护栏2026-11-24-新增)
-- **标准双层日志与错误可复现性补充（F5）**：[feedback-loop-2026-11-17/task_plan.md](../feedback-loop-2026-11-17/task_plan.md#2026-11-24-日志与错误可复现性深度审计补充f5-基础设施补齐--s1-已本地验收完成)
+- **架构独立性与回归（M4，实施中）** [模块边界计划](../module-boundaries-2026-11-11/task_plan.md)
+- **双层日志与错误复原（F5）** [反馈工程计划](../feedback-loop-2026-11-17/task_plan.md#2026-11-24-日志与错误可复现性深度审计补充f5)
 
 ## 2026-11-20 W12 开始
 
