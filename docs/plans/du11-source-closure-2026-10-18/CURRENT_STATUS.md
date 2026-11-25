@@ -6,6 +6,8 @@
 
 外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。S2 已恢复并从原文读取故障的 CWP 试点起步，M4/S3 和 S4 保持计划。
 
+2026-11-25。S2 已按 owner 分仓推进。发布版本、独审、待交付施工卡和 Dashboard 在途写域见[分仓接续台账](../feedback-loop-2026-11-17/s2-owner-continuation-20261124.md)。
+
 - **S1 各仓发布与补修记录**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
 - **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
 - **架构独立性与零私有调用补充（M4，PLAN_ONLY）**：[module-boundaries-2026-11-11/task_plan.md](../module-boundaries-2026-11-11/task_plan.md#m4-补充计划--全-12-模块深度代码审计松耦合私有调用清零与静态护栏2026-11-24-新增)

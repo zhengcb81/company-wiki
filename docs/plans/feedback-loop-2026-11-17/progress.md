@@ -1,5 +1,7 @@
 # 进度与恢复入口
 
+2026-11-25。StockWiki 用量账本、StockQA 已付成员恢复、IQS provider 错误三节点已完成独审。本轮七个模块验收通过，StockWiki 本地主线，另六个本仓发布线已推送。CWP、FF、RF 的远端 CI 已通过。IR、MC 未见正式交付，Dashboard 沿原 M0 写域。[分仓接续与版本](s2-owner-continuation-20261124.md)
+
 2026-11-24。S2 并行实施。CWP 摘要激活、FF 定时子进程、SID 文件日志启动、RF 采集子进程四个节点独审并推送。IR、MC 已交独立 harness。StockWiki、StockQA 在本仓继续核查，IQS 和 Dashboard 沿各自原线。见[本轮分仓接续](s2-owner-continuation-20261124.md)。
 
 2026-11-24。S2 从 CWP 和 ET 的历史日志只读核查恢复。CWP 原文读取首站、ET 已推送，Audit 已提交本地主线。[首站与分仓验收](s2-pilot-20261124.md) · [S2 施工顺序](s2-unified-logging-plan.md)。S1 原批次八仓提交，七仓推送，StockWiki 本地。其后补修按[发布台账](s1-p0-blackhole-plan.md)。
