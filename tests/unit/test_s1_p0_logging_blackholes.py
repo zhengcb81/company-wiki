@@ -200,6 +200,8 @@ def test_feedback_host_cli_starts_from_checkout_without_package_install():
 
 
 def test_background_diagnostic_survives_rotation_failure(tmp_path, monkeypatch):
+    from logging.handlers import RotatingFileHandler
+
     path = tmp_path / "background.log"
     path.write_bytes(b"previous\n" * (256 * 1024))
     monkeypatch.setenv("CWP_F4_ERROR_LOG", str(path))
@@ -207,7 +209,7 @@ def test_background_diagnostic_survives_rotation_failure(tmp_path, monkeypatch):
     def locked(*args):
         raise PermissionError("reader holds the old log")
 
-    monkeypatch.setattr(diagnostics.RotatingFileHandler, "rotate", locked)
+    monkeypatch.setattr(RotatingFileHandler, "rotate", locked)
 
     def report():
         logging.warning('case preserved {"token":"SYNTHETIC_ROTATION"}')
