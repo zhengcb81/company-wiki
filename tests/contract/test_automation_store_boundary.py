@@ -1,7 +1,7 @@
 """AUTO-2 store/migration boundary contract tests (B01-B04 + file existence).
 
-B01: static import scan — production modules may only import stdlib, models and
-     migrations.  No legacy scheduler, network, LLM, env or daemon imports.
+B01: Store may import stdlib and pure owner contracts. Native observation file
+     delivery stays outside the transaction and is not a Store dependency.
 B02: no default database paths — neither source nor tests hard-code ``.state``
      or ``automation.db`` as a default constant.
 """
@@ -28,7 +28,7 @@ CONTROLLER_PATH = ROOT / "src" / "company_wiki" / "automation" / "controller.py"
 _ALLOWED_IMPORTS = {
     "__future__", "sqlite3", "json", "hashlib", "functools", "dataclasses",
     "pathlib", "typing", "collections", "collections.abc", "math",
-    "company_wiki._id_scope",
+    "company_wiki.id_scope", "company_wiki.runtime_feedback_values",
     "company_wiki.automation.models", "company_wiki.automation.migrations",
 }
 

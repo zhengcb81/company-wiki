@@ -1,13 +1,13 @@
-"""AUTO-5 read-only diagnostics and planning CLI.
+"""AUTO diagnostics and observation-only maintenance CLI.
 
-Commands: status, doctor, plan.  All commands work without LLM keys, network
-or write mode.  The ``plan`` command reads events from the store and outputs
-the planned DAG without creating any jobs or side effects.
+Status, doctor and plan inspect the control plane. Feedback-flush delivers
+already committed observations without starting or retrying a job.
 """
 
 import argparse
 from collections.abc import Sequence
 from pathlib import Path
+import sqlite3
 from typing import Any
 
 from .models import Event, canonical_json
@@ -109,7 +109,7 @@ def _plan(db_path: Path, event_id: str | None) -> dict[str, Any]:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m company_wiki.automation.cli",
-        description="Read-only automation diagnostics and planning CLI",
+        description="Automation diagnostics and observation maintenance",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -126,6 +126,10 @@ def build_parser() -> argparse.ArgumentParser:
     child.add_argument("--db", type=Path, required=True, help="path to automation.db")
     child.add_argument("--event-id", type=str, default=None, help="plan a specific event")
     child.add_argument("--json", action="store_true", help="emit JSON")
+
+    child = subparsers.add_parser("feedback-flush", help="deliver committed worker observations")
+    child.add_argument("--db", "--database", type=Path, required=True, help="existing automation database")
+    child.add_argument("--job-id", action="append", help="restrict delivery to the given original job IDs")
 
     return parser
 
@@ -144,6 +148,28 @@ def main(argv: Sequence[str] | None = None) -> int:
         exit_code = result.pop("exit_code", 0)
         print(canonical_json(result))
         return int(exit_code)
+    if args.command == "feedback-flush":
+        if not args.db.is_file():
+            print(canonical_json({"published": 0, "deferred": 0, "unavailable": True,
+                                  "reason": "automation_database_missing"}))
+            return 1
+        from .store import AutomationStore
+        from .migrations import AutomationMigrationError
+        from .worker_feedback import flush_worker_feedback
+
+        try:
+            store = AutomationStore(args.db, migrate=False)
+        except (AutomationMigrationError, OSError, sqlite3.Error) as exc:
+            print(canonical_json({"published": 0, "deferred": 0, "unavailable": True,
+                                  "reason": "automation_database_unavailable",
+                                  "error_type": type(exc).__name__}))
+            return 1
+        result = flush_worker_feedback(
+            store,
+            allowed_job_ids=tuple(args.job_id) if args.job_id is not None else None,
+        )
+        print(canonical_json(result))
+        return int(bool(result["deferred"] or result["unavailable"]))
 
     return 2  # unknown command
 

@@ -36,12 +36,13 @@ from .models import (
 )
 from .registry import HandlerRegistry, HandlerSpec
 from .retry import classify_outcome, compute_retry_delay
+from .worker_feedback import WorkerFeedbackStore, flush_worker_feedback
 
 
 Handler = Callable[[JobExecutionContext], HandlerResult]
 
 
-class WorkerStore(ExecutionSnapshotStore, Protocol):
+class WorkerStore(ExecutionSnapshotStore, WorkerFeedbackStore, Protocol):
     """Small Store surface required by one worker process."""
 
     def read_runtime_gate(self) -> RuntimeGate: ...
@@ -79,6 +80,7 @@ class WorkerStore(ExecutionSnapshotStore, Protocol):
         result: HandlerResult,
         retry_not_before: str | None = None,
         outbox_not_before: str | None = None,
+        failure_observation: str | None = None,
     ) -> Attempt: ...
 
     def reap_expired_attempt_outcomes(
@@ -90,11 +92,7 @@ def reap_worker_attempts(
     store: WorkerStore, *, now: str, allowed_job_ids: tuple[str, ...] | None,
 ) -> int:
     attempts = store.reap_expired_attempt_outcomes(now=now, allowed_job_ids=allowed_job_ids)
-    for attempt in attempts:
-        runtime_feedback.record(
-            "worker", attempt.job_status.value, run=attempt.job_id,
-            attempt=attempt.attempt_id, reason=attempt.error_code,
-        )
+    flush_worker_feedback(store, allowed_job_ids=allowed_job_ids)
     return len(attempts)
 
 
@@ -240,6 +238,13 @@ class Worker:
                 finished_at,
                 compute_retry_delay(attempt.attempt_no, job_id=job.job_id),
             )
+        observation = None
+        if target in (JobStatus.RETRY_WAIT, JobStatus.DEAD_LETTER):
+            observation = runtime_feedback.freeze_worker_failure(
+                job.job_id, attempt.attempt_id, target.value,
+                result.error.code if result.error else "",
+                message=result.error.detail if result.error else "", error=failure,
+            )
         self._store.finish_attempt(
             attempt_id=attempt.attempt_id,
             lease_token=attempt.lease_token,
@@ -248,11 +253,10 @@ class Worker:
             result=result,
             retry_not_before=retry_at,
             outbox_not_before=finished_at,
+            failure_observation=observation,
         )
-        if target in (JobStatus.RETRY_WAIT, JobStatus.DEAD_LETTER):
-            runtime_feedback.record("worker", target.value, run=job.job_id,
-                                    attempt=attempt.attempt_id, reason=result.error.code if result.error else "",
-                                    message=result.error.detail if result.error else "", error=failure)
+        if observation is not None:
+            flush_worker_feedback(self._store, allowed_job_ids=(job.job_id,))
         self._notify("attempt_finished", claimed)
 
     def _heartbeat(self, claimed: ClaimedWork) -> AttemptHeartbeat | None:

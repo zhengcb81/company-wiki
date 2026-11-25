@@ -1,0 +1,34 @@
+{
+  "host_source_sha256_lf": {
+    "tools/feedback_loop/coordinator.py": "b4a7eba8e3c52ca6ac29489af9a1380439fcd27710e97ffeee11929343d597a7",
+    "tools/feedback_loop/intake.py": "93b2423f6901a4b3f472e8ff51690085f8dd656b262d1791195f68a8e7284cf9",
+    "tools/feedback_loop/local_host.py": "ea2250041b563efe297c1f87e33ac2092b5250ae4ca53d868a8e3ee0cbaff38e",
+    "tools/feedback_loop/observations.py": "9c720841438e33f9db0c2291e2dffc95e513fb219a625c9e0a4b529394d31350"
+  },
+  "owner_commit": "81d8b97cafd7b8d5cac2bae05b047317ed389b8b",
+  "owner_source_sha256_lf": {
+    "src/company_wiki/automation/cli.py": "fd37c803f0c6434a0a1720baaf50a030b5dd67aea2558c9e0c5d568ef988ee50",
+    "src/company_wiki/automation/store.py": "bd6c273337558e52790bd97bacd9a0eea5ec7fef567632d8238499cb498ddd3a",
+    "src/company_wiki/automation/worker.py": "698855c2e7aaf2437c7849bf5629c5589dd87efd379bc62b931e2f42899f45c9",
+    "src/company_wiki/automation/worker_feedback.py": "5727c00279eb6e9bd01e5be6e6436b5dcf2bf16cedcba528752e0a0af81f341f",
+    "src/company_wiki/runtime_feedback.py": "dc636b083b599bfba91a2b50e816104c97e2e2676854ced1a20f4ee5b9c897ee",
+    "src/company_wiki/runtime_feedback_values.py": "f88698250c74f0c92751bcba191e890ee3793f39dc1e9cc1f6bf4a6465ef8936"
+  },
+  "production_access": "none",
+  "schema_version": "cwp-f4-isolated-native-recovery-proof/1",
+  "scratch_cleaned": true,
+  "triage": "fixture_local",
+  "verified": {
+    "durable_actions": [
+      "observe",
+      "triage"
+    ],
+    "first_processed": 1,
+    "hard_killed_exit": 1,
+    "same_attempt": "reap-original",
+    "second_processed": 0,
+    "settings": "temporary",
+    "usage_reservations": 0
+  },
+  "verified_at_utc": "2026-11-25T11:55:44+00:00"
+}

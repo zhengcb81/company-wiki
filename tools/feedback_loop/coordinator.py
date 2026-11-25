@@ -10,12 +10,26 @@ from .observations import Batch, digest
 
 
 Host = Callable[[str, dict], dict]
+_RECONCILE_DIAGNOSTICS = frozenset({
+    "native_attempt_mismatch",
+    "native_owner_conflict",
+    "native_owner_unverified",
+    "native_status_unavailable",
+    "owner_unconfigured",
+    "reconcile_lookup_only",
+})
+
+
+def reconcile_diagnostic_code(value: object) -> str | None:
+    """Project shared lookup reasons without storing arbitrary owner output."""
+    return value if isinstance(value, str) and value in _RECONCILE_DIAGNOSTICS else None
 
 
 class Deferred(Exception):
-    def __init__(self, status: str, step: str):
+    def __init__(self, status: str, step: str, *, code: str | None = None):
         self.status = status
         self.step = step
+        self.code = code
         super().__init__(status, step)
 
 
@@ -46,7 +60,8 @@ def _perform(host: Host, owner: str, kind: str, identity: list, payload: dict, *
         if state == "done" and isinstance(reply.get("result"), dict):
             return reply["result"]
         if state in ("unknown", "pending", "failed"):
-            raise Deferred(state, kind)
+            code = reconcile_diagnostic_code(reply.get("code")) if kind == "reconcile" else None
+            raise Deferred(state, kind, code=code)
         raise Deferred("unverified", kind)
     raise AssertionError("submit must return an observed state")
 
@@ -148,6 +163,8 @@ def advance(batch: Batch, host: Host, *, only: set[str] | None = None) -> dict:
             outcome = _advance_one(key, row, host, unfinished=key in unfinished)
         except Deferred as deferred:
             outcome = {"status": deferred.status, "step": deferred.step}
+            if deferred.code is not None:
+                outcome["code"] = deferred.code
         outcomes.append({"occurrence_id": key, "disposition": row["disposition"], **outcome})
     return {"observations": outcomes, "diagnostics": batch.diagnostics}
 

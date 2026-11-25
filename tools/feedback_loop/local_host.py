@@ -15,6 +15,7 @@ import sys
 from tempfile import NamedTemporaryFile
 import time
 
+from .coordinator import reconcile_diagnostic_code
 from .diagnostics import background_environment, format_diagnostic_exception, redact_text, run_background
 from .host import BACKGROUND_CREATION_FLAGS
 from .observations import digest, unique_fields
@@ -244,6 +245,33 @@ class LocalHost:
             if not owners or json.loads(row["request"])["owner"] in owners:
                 self._status(row, check_owner=True)
         return self._recover_queued(owners=owners)
+
+    def flush_observations(self, *, owners=None):
+        """Ask selected owners to publish already-durable observations before intake."""
+        diagnostics = []
+        for owner in self.owners:
+            if owners is not None and owner not in owners:
+                continue
+            label = f"observation-flush:{owner}"
+            try:
+                route = self._route(owner, "flush-observations")
+                if route is None:
+                    continue
+                completed = subprocess.run(
+                    route["argv"], cwd=route["cwd"], input=b"", capture_output=True,
+                    timeout=route["timeout"], check=False, creationflags=BACKGROUND_CREATION_FLAGS,
+                )
+            except (OSError, ValueError, KeyError, TypeError, AttributeError, subprocess.SubprocessError) as exc:
+                _logger.warning("Cannot flush existing observations for %s\n%s",
+                                redact_text(owner), format_diagnostic_exception(exc))
+                diagnostics.append({"owner": owner, "code": "owner_observation_flush_unavailable",
+                                    "error_type": type(exc).__name__})
+                continue
+            if completed.returncode:
+                _persist_host_stderr(self.config, label, completed.returncode, completed.stderr or b"")
+                diagnostics.append({"owner": owner, "code": "owner_observation_flush_failed",
+                                    "exit_code": completed.returncode})
+        return diagnostics
 
     def _native_path(self, key):
         return self.db.parent / (self.db.name + "." + key + ".jsonl")
@@ -477,7 +505,8 @@ class LocalHost:
             if state == "done" and isinstance(response.get("result"), dict):
                 return {"state": state, "result": response["result"]}
             if state in ("pending", "unknown"):
-                return {"state": state}
+                code = reconcile_diagnostic_code(response.get("code"))
+                return {"state": state, "code": code} if code is not None else {"state": state}
         return {"state": "unknown", "code": "native_status_unavailable"}
 
     def handle(self, request, *, environment=None):

@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Generic, Protocol, TypeVar
 
 from company_wiki.id_scope import normalize_id_scope
+from company_wiki.runtime_feedback_values import freeze_worker_failure
 
 from .dag_persistence import (
     DAGConflictError,
@@ -29,6 +30,7 @@ from .migrations import (
     BackupHook,
     SchemaReport,
     _open_readonly_connection,
+    inspect_schema,
     migrate_database,
     validate_database,
 )
@@ -437,6 +439,21 @@ def _validate_result_effects(result: HandlerResult, job_id: str) -> None:
             raise IntegrityViolationError(
                 f"effect {effect.effect_id} is already {effect.status.value}"
             )
+
+
+_WORKER_FEEDBACK_CHANNEL = "worker-feedback"
+_WORKER_FEEDBACK_PREFIX = _WORKER_FEEDBACK_CHANNEL + ":"
+
+
+def _queue_worker_feedback(
+    connection: sqlite3.Connection, attempt: Attempt, payload: str, *, finished_at: str,
+) -> None:
+    notification_id = _WORKER_FEEDBACK_PREFIX + attempt.attempt_id
+    connection.execute(
+        "INSERT INTO notifications (notification_id, notification_key, job_id, channel, "
+        "severity, payload_json, status, created_at) VALUES (?, ?, ?, ?, 'warning', ?, 'pending', ?)",
+        (notification_id, notification_id, attempt.job_id, _WORKER_FEEDBACK_CHANNEL, payload, finished_at),
+    )
 
 
 def _update_finished_attempt(
@@ -849,6 +866,7 @@ class AutomationStore:
         *,
         timeout_seconds: float = 5.0,
         backup_hook: BackupHook | None = None,
+        migrate: bool = True,
     ) -> None:
         if not isinstance(db_path, Path):
             raise TypeError("db_path must be a pathlib.Path instance")
@@ -864,7 +882,10 @@ class AutomationStore:
             raise ValueError("timeout_seconds must be a positive number")
         self._db_path = db_path
         self._timeout = float(timeout_seconds)
-        migrate_database(db_path, backup_hook=backup_hook)
+        if migrate:
+            migrate_database(db_path, backup_hook=backup_hook)
+        else:
+            inspect_schema(db_path)
 
     @property
     def db_path(self) -> Path:
@@ -1441,6 +1462,7 @@ class AutomationStore:
         result: HandlerResult,
         retry_not_before: str | None = None,
         outbox_not_before: str | None = None,
+        failure_observation: str | None = None,
     ) -> Attempt:
         if not isinstance(result, HandlerResult):
             raise TypeError("result must be HandlerResult")
@@ -1478,6 +1500,8 @@ class AutomationStore:
                 retry_not_before=retry_not_before,
                 result=result,
             )
+            if failure_observation is not None and target in {JobStatus.RETRY_WAIT, JobStatus.DEAD_LETTER}:
+                _queue_worker_feedback(conn, attempt, failure_observation, finished_at=finished_at)
             if job.job_type == "source.narrative_summarize":
                 from .narrative_run_store import _settle_failed_summary_output_in_transaction
 
@@ -1595,8 +1619,48 @@ class AutomationStore:
                     error_code=error_code,
                     error_detail=error_detail,
                 )
+                payload = freeze_worker_failure(attempt.job_id, attempt.attempt_id, target.value, error_code)
+                _queue_worker_feedback(conn, attempt, payload, finished_at=now)
                 reaped.append(ReapedAttempt(attempt.job_id, attempt.attempt_id, target, error_code))
             return tuple(reaped)
+
+        return self._write_transaction(_op)
+
+    def pending_worker_feedback(
+        self, *, allowed_job_ids: tuple[str, ...] | None = None,
+    ) -> tuple[tuple[str, str, str], ...]:
+        """Return original job/attempt/payload values without opening business work."""
+        allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
+        if allowed_job_ids == ():
+            return ()
+        parameters: tuple[object, ...] = (
+            len(_WORKER_FEEDBACK_PREFIX) + 1, _WORKER_FEEDBACK_CHANNEL, _WORKER_FEEDBACK_PREFIX,
+        )
+        scope = ""
+        if allowed_job_ids is not None:
+            scope = " AND f.job_id IN (" + ",".join("?" for _ in allowed_job_ids) + ")"
+            parameters += allowed_job_ids
+        conn = _open_readonly_connection(self._db_path)
+        try:
+            rows = conn.execute(
+                "SELECT f.job_id, a.attempt_id, f.payload_json FROM notifications f "
+                "JOIN attempts a ON a.attempt_id = substr(f.notification_id, ?) AND a.job_id = f.job_id "
+                "WHERE f.channel = ? AND f.status = 'pending' AND f.notification_id = (? || a.attempt_id) " + scope
+                + " ORDER BY a.finished_at, a.job_id, a.attempt_id",
+                parameters,
+            ).fetchall()
+            return tuple((row[0], row[1], row[2]) for row in rows)
+        finally:
+            conn.close()
+
+    def ack_worker_feedback(self, job_id: str, attempt_id: str, payload: str) -> bool:
+        """Clear only the exact observed queue entry. No job or attempt change."""
+        def _op(conn):
+            return conn.execute(
+                "DELETE FROM notifications WHERE notification_id = ? AND job_id = ? AND channel = ? "
+                "AND status = 'pending' AND payload_json = ?",
+                (_WORKER_FEEDBACK_PREFIX + attempt_id, job_id, _WORKER_FEEDBACK_CHANNEL, payload),
+            ).rowcount == 1
 
         return self._write_transaction(_op)
 

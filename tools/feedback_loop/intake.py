@@ -136,7 +136,7 @@ def _acknowledgeable(result: dict, *, bundle: bool) -> bool:
 
 
 def _record_unsettled(packet, outcomes, unsettled, *, bundle=False) -> bool:
-    fields = ("occurrence_id", "status", "step", "job_status", "cost_state")
+    fields = ("occurrence_id", "status", "step", "job_status", "cost_state", "code")
     waiting = [{field: row[field] for field in fields if field in row}
                for row in outcomes if not _acknowledgeable(row, bundle=bundle)]
     if waiting:
@@ -217,9 +217,9 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
     selected = {owner} if isinstance(owner, str) else set(owner) if owner else None
     host = LocalHost(settings, recovery_owners=selected)
     rpc = process_host(read_hosts(host_path(hosts_file)), local=host)
+    diagnostics = host.flush_observations(owners=selected)
     woken = len(host.recover(owners=selected))
     processed = remaining = 0
-    diagnostics = []
     unconfirmed = []
     unsettled = []
     directories: dict[Path, set[str]] = {}

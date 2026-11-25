@@ -432,6 +432,95 @@ def test_host_restart_automatically_consumes_direct_native_packet(tmp_path):
     assert not (tmp_path / "business-count.txt").exists()
 
 
+@pytest.mark.parametrize("flush_exit_code", [0, 13])
+def test_cold_host_flushes_only_selected_owner_before_scanning_native_inbox(tmp_path, flush_exit_code):
+    configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    native = tmp_path / "native"
+    native.mkdir()
+    marker = native / ("feedback-" + "e" * 32 + ".ready")
+    identity = dict(owner=OWNER, run_id="original", attempt_id="one", step_id="saved")
+    row = dict(identity, schema_version="feedback-observation/1", check_id="refused",
+               expected="legitimate_refusal", actual="legitimate_refusal", disposition="expected")
+    pending = tmp_path / "pending-observation.json"
+    pending.write_text(json.dumps(row) + "\n", encoding="utf8")
+    script = tmp_path / "flush_observations.py"
+    script.write_text(
+        "from pathlib import Path\n"
+        "import sys\n"
+        "source, packet, count = map(Path, sys.argv[1:4])\n"
+        "if source.is_file():\n"
+        "    packet.write_bytes(source.read_bytes())\n"
+        "    source.unlink()\n"
+        "with count.open('a') as out:\n"
+        "    out.write('flush\\n')\n"
+        "raise SystemExit(int(sys.argv[4]))\n",
+        encoding="utf8",
+    )
+    flush = [*PYTHON, str(script), str(pending), str(marker.with_suffix(".jsonl"))]
+    config["owners"][OWNER].update(
+        timeout_seconds=10, native_observation_dirs=["native"],
+        actions={"flush-observations": [*flush, str(tmp_path / "selected.txt"), str(flush_exit_code)]},
+    )
+    config["owners"]["parallel-owner"] = {
+        "cwd": str(tmp_path), "timeout_seconds": 10,
+        "actions": {"flush-observations": [*flush, str(tmp_path / "parallel.txt"), "0"]},
+    }
+    settings.write_text(json.dumps(config), encoding="utf8")
+    command = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings),
+               "recover", "--owner", OWNER]
+    results = [json.loads(subprocess.check_output(command, cwd=ROOT, timeout=25)) for _ in range(2)]
+    assert [result["processed"] for result in results] == [1, 0]
+    expected_diagnostics = [{"owner": OWNER, "code": "owner_observation_flush_failed",
+                             "exit_code": flush_exit_code}] if flush_exit_code else []
+    assert all(result["diagnostics"] == expected_diagnostics and not result["woken"] for result in results)
+    assert (tmp_path / "selected.txt").read_text().splitlines() == ["flush", "flush"]
+    assert not pending.exists() and not (tmp_path / "parallel.txt").exists()
+    assert not (tmp_path / "business-count.txt").exists()
+
+
+@pytest.mark.parametrize(("native_code", "expected_code"), [
+    ("native_owner_conflict", "native_owner_conflict"),
+    ("native_owner_unverified", "native_owner_unverified"),
+    ("private directory is inaccessible", None),
+    ("sk-" + "x" * 28, None),
+    ("opaquevalue" * 3, None),
+])
+def test_cold_host_keeps_typed_owner_reason_in_unsettled_reconcile(tmp_path, native_code, expected_code):
+    configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    native = tmp_path / "native"
+    native.mkdir()
+    packet = native / ("feedback-" + "d" * 32 + ".jsonl")
+    observation = {
+        "schema_version": "feedback-observation/1", "owner": OWNER, "run_id": "original",
+        "attempt_id": "first", "step_id": "result", "check_id": "job-usage", "disposition": "unknown",
+        "expected": "accounted", "actual": "unknown", "evidence_ref": "fixture-job/1/original/first",
+    }
+    packet.write_text(json.dumps(observation) + "\n", encoding="utf8")
+    script = tmp_path / "lookup_original.py"
+    script.write_text(
+        "import json, sys\n"
+        "assert json.load(sys.stdin)['method'] == 'lookup'\n"
+        "print(json.dumps({'state':'unknown', 'code':sys.argv[1]}))\n",
+        encoding="utf8",
+    )
+    config["owners"][OWNER].update(timeout_seconds=10, native_observation_dirs=["native"],
+                                  actions={"reconcile": [*PYTHON, str(script), native_code]})
+    settings.write_text(json.dumps(config), encoding="utf8")
+    command = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings),
+               "recover", "--owner", OWNER, "--save-result"]
+    result = json.loads(subprocess.check_output(command, cwd=ROOT, timeout=25))
+    saved = json.loads(settings.with_name("last-native-recovery.json").read_bytes())
+    assert result["unsettled"] == saved["unsettled"]
+    (record,) = saved["unsettled"][0]["observations"]
+    assert record["status"] == "unknown" and record["step"] == "reconcile"
+    assert record.get("code") == expected_code
+    assert not result["woken"] and result["remaining"] == 1
+
+
 def test_native_ack_belongs_to_the_occurrence_named_by_its_marker(tmp_path):
     from tools.feedback_loop.observations import read_batch
 
