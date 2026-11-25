@@ -2,13 +2,15 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-25 S2 与 S3/S4 已交付，接续 F4
+## 2026-11-25 S2、S3/S4 与本轮 F4 已验收
 
 外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。
 
 S2 的 12 个计划节点均已验收。S3/S4 的本轮已证分仓问题、定向回归、独审、发布和组合验收完成。Dashboard 原件预览已从真实浏览器查回原相关号，StockQA 移除连续的重复核验并保留现行权限、过期和原付费记录恢复，最后一项同版 CI 已通过。历史夹具和尚未拆分的同仓事务按分仓台账保留证据。 [S2 收尾台账](../feedback-loop-2026-11-17/s2-closeout-20261125.md) · [S3/S4 分仓台账](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md)
 
-F4 接续中。原 Windows 任务覆盖 12 仓，RF 查回原归档作业，Dashboard 的 F4 冷读已用正式版本。FF、ET 和 Audit 的早期缺证保留未知。CWP 强停补投和 Codex 未启动恢复已发布并通过同版 CI。原分诊已找回同一编号及终态，现场暴露分诊宿主无法访问已保存诊断，正在修正证据交接。原 W12 桌面目标保持暂停，已只读核对原 `/8` 尝试，Windows 依赖完整环境的 88 项定向测试通过。 [当前 F4 现场复验](../feedback-loop-2026-11-17/f4-resume-runtime-20261125.md) · [W12 接续](review/w12-wuxi-resume-20261120/README.md#w04-正式请求与原作业查证)
+本轮 F4 现场验收完成。原 Windows 任务覆盖 12 仓，RF 查回原归档作业，Dashboard 的 F4 冷读采用正式版。CWP 的强停补投、Codex 未启动恢复和分诊证据交接均已独审、发布并通过同版 CI。12:40 UTC 的正式任务退出 0、唤醒零。原分诊仅一次原生会话，两次冷查一致，实际故障仍待补证。旧的缺证作业及未知费用按原事实保存。 [F4 现场验收](../feedback-loop-2026-11-17/f4-resume-runtime-20261125.md) · [最后发布版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45615128124)
+
+业务接续已核对原 W12 `/8` 尝试和下一轮 1C 证据清单。W12 的 venv 依赖及安装锁已修，88 项定向测试通过。原真实请求仍无可绑定的模型响应，保留费用未知。新版真实摘要、缓存复用和 RF 正式采用仍待完成。原 W12 桌面目标显示暂停。 [W12 原尝试](review/w12-wuxi-resume-20261120/README.md#w04-正式请求与原作业查证) · [W12 研究证据](review/w12-wuxi-resume-20261120/README.md#w01-研究量级复核)
 
 - **S1 各仓发布与补修记录**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
 - **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)

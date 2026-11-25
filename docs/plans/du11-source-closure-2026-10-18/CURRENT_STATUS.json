@@ -3,20 +3,30 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "f4_residual_after_s3_s4_delivery",
+  "execution_mode": "w12_readonly_follow_up_after_f4_acceptance",
   "architecture_rollout": {
     "s2_status": "accepted_scoped_owner_scenarios",
     "s2_receipt": "../feedback-loop-2026-11-17/s2-closeout-20261125.md",
     "s3_status": "accepted_scoped_owner_release",
     "s4_status": "accepted_scoped_owner_regressions_and_composition",
-    "f4_status": "implementation_and_native_acceptance_in_progress",
+    "f4_status": "accepted_scheduled_and_scoped_native_recovery",
     "f4_worker_recovery_release": "b94af85c0230cf3c92b7c19610c6ac1724d7da66",
     "f4_prelaunch_recovery_release": "dde6f898d9ff15ff4e9dee1cf55b6789c9b6461c",
     "f4_prelaunch_native_receipt": "../feedback-loop-2026-11-17/f4-prelaunch-adoption-20261125.json",
-    "f4_open_native_case": "published_diagnostic_context_for_read_only_triage",
+    "f4_diagnostic_context_release": "fc2e0f31cfbb06248e88592c600911164122ab79",
+    "f4_diagnostic_exact_ci_run": 45615128124,
+    "f4_open_native_case": null,
     "dashboard_feedback_runtime": "e5633543d0e85845bf796b8c307623e061ee47a2",
     "scheduled_f4_owners_verified": 12,
     "scheduled_f4_owners_planned": 12,
+    "scheduled_f4_receipt": {
+      "finished_at_utc": "2026-11-25T12:40:12Z",
+      "exit_code": 0,
+      "observations": 376,
+      "unsettled_historical_and_native_packets": 368,
+      "woken": 0,
+      "diagnostics": 0
+    },
     "owner_ledger": "../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md",
     "f4_runtime_ledger": "../feedback-loop-2026-11-17/f4-resume-runtime-20261125.md",
     "resume_f4_after_s3_s4_acceptance": "../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续"
@@ -213,6 +223,13 @@
       "new_downloads": 0,
       "selection_status": "partial",
       "summary_quality": "needs_review"
+    },
+    "runtime_dependency_repair": {
+      "release": "fc2e0f31cfbb06248e88592c600911164122ab79",
+      "workspace_venv_added_packages": 6,
+      "workspace_venv_removed_or_changed_packages": 0,
+      "windows_targeted_tests_passed": 88,
+      "original_v8_provider_response": "unavailable_at_readonly_recheck"
     },
     "audit_local_main_and_skill_copies": "71381b505d5f5a81e3cf6b50fdf627a464792a52",
     "audit_current_local_head": "df7b0e135365c50d8b9e0d030602a39d0caa79be",
