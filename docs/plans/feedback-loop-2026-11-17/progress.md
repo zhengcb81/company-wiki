@@ -1,5 +1,7 @@
 # 进度与恢复入口
 
+2026-11-25。复查用户交付。MC 最新远端与本机 F4 使用源码一致。IR 源码已验收，补齐默认技能入口的两个脚本并分别从两处物理安装位置验证离线失败冷读和重试成功。IR 本地与远端 main 对齐至 `a055204`。[收尾台账](s2-closeout-20261125.md)
+
 2026-11-25。S2 计划内节点全部验收。Dashboard M0 `a3523e8`、IR `86d930f` 和 MC `9f1adb0` 均已独审并推送。Dashboard 原相关号的只读冷读、IR DeepSeek 脱敏、MC MiMo 长链归因均复验通过。[收尾台账](s2-closeout-20261125.md)
 
 2026-11-25。StockWiki 用量账本、StockQA 已付成员恢复、IQS provider 错误三节点已完成独审。本轮七个模块验收通过，StockWiki 本地主线，另六个本仓发布线已推送。CWP、FF、RF 的远端 CI 已通过。IR、MC 未见正式交付，Dashboard 沿原 M0 写域。[分仓接续与版本](s2-owner-continuation-20261124.md)
