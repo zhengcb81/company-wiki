@@ -1,3 +1,4 @@
+from hashlib import sha256
 import json
 from contextlib import closing
 from pathlib import Path
@@ -153,6 +154,134 @@ def test_codex_launch_resolves_the_current_install_before_starting(host_config, 
     assert result["request_digest"] == request["request_digest"]
     host.work(request["action_id"])
     assert len(starts) == 1
+
+
+@pytest.mark.parametrize(("case", "identity_field"), [
+    ("native", None), ("same-copies", None), ("missing", None), ("outside", None),
+    ("malformed", None), ("conflict", None), ("other-owner-inbox", None),
+    ("different-identity", "owner"), ("different-identity", "run_id"),
+    ("different-identity", "attempt_id"), ("different-identity", "step_id"),
+    ("different-original", "actual"), ("different-original", "expected"), ("different-original", "check_id"),
+    ("missing-packet", None), ("link", None), ("packet-link", None), ("repair", None),
+])
+def test_codex_triage_includes_only_bound_native_diagnostic_facts(
+    host_config, monkeypatch, case, identity_field,
+):
+    from tools.feedback_loop.local_host import LocalHost
+
+    root = host_config.parent
+    agent_root, intake, inbox, other_inbox = (root / name for name in
+                                             ("agent", "intake", "owner-inbox", "other-inbox"))
+    for directory in (agent_root, intake, inbox, other_inbox):
+        directory.mkdir()
+    native = "feedback-" + "a" * 32 + ".diagnostic.json"
+    secret = "sk-EXAMPLE-DO-NOT-SEND"
+    arbitrary_number = 987654321012345
+    identity = {"owner": "company-wiki", "run_id": "saved-run", "attempt_id": "one", "step_id": "worker"}
+    observation = identity | {
+        "owner": "check-owner", "origin_owner": "company-wiki", "details_ref": native,
+        "schema_version": "feedback-observation/1", "check_id": "operation-outcome",
+        "expected": "completed", "actual": "failed", "disposition": "deviation",
+    }
+    diagnostic = identity | {
+        "message": str(root / secret),
+        "exceptions": [
+            {"type": "FileNotFoundError", "errno": 2, "locations": [[str(root / secret), secret, 6]]},
+            {"type": "OSError", "errno": arbitrary_number},
+            {"type": "KeyError", "errno": True, "messages": [secret]},
+            {"type": secret, "errno": 5},
+        ],
+    }
+    raw = json.dumps(diagnostic).encode("utf-8")
+    packet = native.removesuffix(".diagnostic.json") + ".jsonl"
+    original_row = (json.dumps(observation) + "\n").encode("utf-8")
+
+    def publish(folder, detail_bytes=raw):
+        (folder / native).write_bytes(detail_bytes)
+        (folder / packet).write_bytes(original_row)
+
+    if case in ("native", "same-copies"):
+        publish(inbox)
+        if case == "same-copies":
+            publish(intake)
+    elif case in ("outside", "link", "packet-link"):
+        publish(root)
+        if case == "outside":
+            observation = observation | {"details_ref": "../" + native}
+        else:
+            link, regular = (packet, native) if case == "packet-link" else (native, packet)
+            (inbox / regular).write_bytes((root / regular).read_bytes())
+            try:
+                (inbox / link).symlink_to(root / link)
+            except OSError as exc:
+                pytest.skip(f"symbolic links unavailable on this host ({type(exc).__name__})")
+    elif case == "malformed":
+        publish(inbox, b'{"owner":"duplicated",' + raw[1:])
+    elif case == "conflict":
+        publish(inbox)
+        publish(intake, json.dumps(diagnostic | {"message": "second copy"}).encode())
+    elif case == "other-owner-inbox":
+        publish(other_inbox)
+    elif case == "different-identity":
+        publish(inbox, json.dumps(diagnostic | {identity_field: "unrelated"}).encode())
+    elif case == "different-original":
+        publish(inbox)
+        observation = observation | {identity_field: "other-outcome"}
+    elif case == "missing-packet":
+        (inbox / native).write_bytes(raw)
+    elif case == "repair":
+        publish(inbox)
+
+    events = [{"type": "thread.started", "thread_id": "same-attempt"},
+              {"type": "item.completed", "item": {"type": "agent_message", "text": '{"decision":"expected"}'}},
+              {"type": "turn.completed", "usage": {}}]
+    agent = agent_root / "codex-fixture.py"
+    agent.write_text(
+        "import json, sys\n"
+        "def audit(event, args):\n"
+        "    if event == 'open' and args[0] != 'captured.jsonl': raise PermissionError(event)\n"
+        "sys.addaudithook(audit)\n"
+        "with open('captured.jsonl', 'a', encoding='utf-8') as out:\n"
+        "    out.write(json.dumps(sys.stdin.read()) + '\\n')\n"
+        f"print({''.join(json.dumps(event) + chr(10) for event in events)!r}, end='')\n",
+        encoding="utf-8",
+    )
+    config = json.loads(host_config.read_bytes())
+    kind = "repair" if case == "repair" else "triage"
+    config["owners"]["company-wiki"].update(observation_dir="intake", native_observation_dirs=["owner-inbox"])
+    config["owners"]["triage-owner"] = {
+        "cwd": str(agent_root), "observation_dir": "other-inbox", "timeout_seconds": 10,
+        "actions": {kind: {"mode": "codex-jsonl", "argv": [sys.executable, "-B", str(agent)]}},
+    }
+    host_config.write_text(json.dumps(config), encoding="utf-8")
+    request = action(kind, owner="triage-owner", payload={"observation": observation})
+    host = LocalHost(host_config)
+    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    assert host.handle(request)["state"] == "pending"
+    host.work(request["action_id"])
+    resumed = LocalHost(host_config)
+    result = resumed.handle(request | {"method": "lookup"})
+    assert result["state"] == "done"
+    assert result["action_id"] == request["action_id"]
+    assert result["request_digest"] == request["request_digest"]
+    assert resumed.handle(request) == result
+    resumed.work(request["action_id"])
+
+    line, = (agent_root / "captured.jsonl").read_text(encoding="utf-8").splitlines()
+    prompt, action_json = json.loads(line).rsplit("\n", 1)
+    assert json.loads(action_json) == request
+    assert secret not in prompt and str(root) not in prompt and str(arbitrary_number) not in prompt
+    if case == "repair":
+        assert "Native diagnostic facts:" not in prompt
+        return
+    facts, = [json.loads(line.removeprefix("Native diagnostic facts: "))
+              for line in prompt.splitlines() if line.startswith("Native diagnostic facts: ")]
+    if case in ("native", "same-copies"):
+        assert facts == {"status": "available", "sha256": sha256(raw).hexdigest(),
+                         "exceptions": [{"type": "FileNotFoundError", "errno": 2},
+                                        {"type": "OSError"}, {"type": "KeyError"}]}
+    else:
+        assert facts == {"status": "unavailable"}
 
 
 def _legacy_codex_failure(host_config, monkeypatch, *, state="failed", code="host_command_or_directory_unavailable"):

@@ -42,7 +42,8 @@ def unique_fields(pairs: list[tuple]) -> dict:
     return result
 
 
-def _observation(raw: bytes) -> dict[str, str]:
+def decode_observation(raw: bytes) -> dict[str, str]:
+    """Validate and normalize one raw F4 observation."""
     value = json.loads(raw.decode("utf-8"), object_pairs_hook=unique_fields)
     if not isinstance(value, dict) or value.get("schema_version") != "feedback-observation/1":
         raise ValueError("unsupported_observation")
@@ -117,7 +118,7 @@ def read_batch(paths: Iterable[Path]) -> Batch:
                     if not line.strip():
                         continue
                     try:
-                        row = _observation(line)
+                        row = decode_observation(line)
                     except (ValueError, RecursionError):
                         diagnostics.append({"input": index, "line": number, "code": "unreadable_observation"})
                         continue

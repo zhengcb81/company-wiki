@@ -18,6 +18,8 @@ RF/Audit 已在独立真实宿主运行一条闭环。配置 `revenue-forecast.a
 
 旧版曾将明确未发现 Codex 的动作记为终态，可用 `python -B -m tools.feedback_loop.local_host --config SETTINGS retry-unstarted ACTION_ID` 恢复单一原动作。此命令只接受冻结请求及原运行配置一致、旧收据确认为启动不可用且原生捕获确实不存在的记录。配置改过、存在捕获或结果未知时保留原记录。原失败记在现有宿主诊断中，恢复仍使用同一个 action ID 和工作区领取。
 
+新启动的只读 Codex 分诊可在输入中得到原生诊断的结构化事实。证据来自发布方已配置的收件目录，诊断和同名原观察都通过路径约束及原动作绑定。传输字段限诊断指纹、标准异常类型和适用的系统错误号，沿原 action ID 冻结请求。明细缺失、冲突或采用只有共享监督流的旧格式时，分诊仍执行。完整异常链继续按原 owner 观察查回。
+
 升级宿主代码时先结束旧外层启动器，避免旧 worker 先领取后误用新版 helper。保留现有 SQLite、原生回执和专用 sidecar，再用正常 `recover` 接续。历史 `running` 状态仍以原生结果核对。本次发布前只读核对本机反馈操作库有 12 条 `done`，排队和在运行的动作均为零。
 
 责任仓的写端口以原子落盘作为最终效果时，可为 `owner-json` 的 `triage`、`repair`、`replay` 或 `report` 同时配置 `argv` 和 `lookup_argv`，尾部 ACTION_ID 由宿主追加。两条命令随首次登记的动作保存。恢复读取 `{"receipt":{"request":原提交,"result":原结果}}`，请求完整匹配时补记同一动作。FF 和 RF 的 `get-report` 旧格式继续支持。无证据就保留原状态。后来修改宿主设置时，恢复仍沿用原动作的查询命令。
