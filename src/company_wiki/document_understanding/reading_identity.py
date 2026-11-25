@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from company_wiki.implementation_identity import code_sha256, owned_algorithm_hashes, owned_tree_hashes
+from company_wiki.implementation_identity import code_sha256, owned_algorithm_hashes
 
 
 _OWNER = "company_wiki.document_understanding"
@@ -32,8 +32,8 @@ def reading_algorithm_hashes(*, pdf_frontend: bool) -> dict[str, str]:
         hashes["company_wiki.document_normalization.pdf_table_observations.adapter"] = hashes.pop(
             f"{_OWNER}.pdf_table_observations",
         )
-    from . import structure
-    hashes.update(owned_tree_hashes(structure.__name__, (Path(root) for root in structure.__path__)))
+    from .structure import structure_algorithm_hashes
+    hashes.update(structure_algorithm_hashes())
     hashes["statement_grammar_resources"] = resource_identity()
     return hashes
 
@@ -51,13 +51,10 @@ def continuity_algorithm_hashes() -> dict[str, str]:
 
 
 def pdf_reading_algorithm_hashes() -> dict[str, str]:
-    from .geometry_intent import contracts, planner, reading
-    from .profiles import geometry_policy
+    from .geometry_intent.identity import geometry_algorithm_hashes
+    from .profiles.geometry_identity import geometry_policy_hashes
 
-    return {
-        module.__name__: code_sha256(module.__file__)
-        for module in (reading, planner, contracts, geometry_policy)
-    }
+    return {**geometry_algorithm_hashes(), **geometry_policy_hashes()}
 
 
 def assertion_frames_sha256(*, universal_newlines: bool = False, profile: str | None = None) -> str:

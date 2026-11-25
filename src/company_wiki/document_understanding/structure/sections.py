@@ -14,9 +14,9 @@ from dataclasses import dataclass, field
 from copy import copy
 import re
 from typing import Any, cast
+from ..filing_headings import is_item_heading, is_item_label, part_heading_level
 from ..narrative_continuity import NativeSourceContext
 from ..layout_hints.contract import WorkBudget
-from ..observation_adapter import _is_item_label, _is_item_heading, _part_heading_level
 
 from . import layout as layout_mod
 from .contract import (
@@ -143,7 +143,7 @@ def _display_heading_groups(units, excluded):
             or any(u.row is None or u.column_index is None for u in members)
         ):
             continue
-        labels = [u for u in members if _is_item_label(u.text)]
+        labels = [u for u in members if is_item_label(u.text)]
         if len(labels) != 1:
             continue
         label = labels[0]
@@ -534,8 +534,8 @@ def build_sections(
         ):
             is_heading = False  # numeric/TOC/multi-row tables are not display headings
         if compound is not None or is_heading:
-            part = _part_heading_level(unit.text)
-            item = _is_item_heading(unit.text)
+            part = part_heading_level(unit.text)
+            item = is_item_heading(unit.text)
             relative_outline = False
             if part is not None:
                 active_part_depth = unit.heading_level or part

@@ -25,6 +25,11 @@ import re
 from company_wiki.document_model.form_fields import has_inline_form_response
 from company_wiki.document_model.table_shapes import has_tabular_value_tail
 
+from .filing_headings import (
+    is_item_heading as _is_item_heading,
+    is_item_label as _is_item_label,
+    part_heading_level as _part_heading_level,
+)
 from .text_boundaries import ends_complete_sentence
 
 INPUT_SCHEMA_VERSION = "du-input/1"
@@ -147,42 +152,6 @@ _UNIT_CAPTION = (
 )
 
 _MAX_HEADING_CHARS = 60
-
-
-def _part_heading_level(text: str) -> int | None:
-    value = " ".join(text.strip().split())
-    match = re.fullmatch(
-        r"PART\s+(II|I)\b(?:\s*[.—–:−-]\s*|\s+)?(.*)", value, re.IGNORECASE
-    )
-    if not match or len(value) > 100:
-        return None
-    title = match.group(2).strip()
-    if not title:
-        return 1
-    if title.casefold() in {"financial information", "other information"}:
-        return 1
-    if (
-        title == title.upper()
-        and title.isascii()
-        and re.fullmatch(r"[A-Z][A-Z /&-]*", title)
-        and not title.startswith(("OF ", "IS ", "WAS ", "AND "))
-    ):
-        return 1
-    return None
-
-
-def _is_item_label(text: str) -> bool:
-    return (
-        re.fullmatch(r"Item\s+\d{1,2}[A-Za-z]?\.?", text.strip(), re.IGNORECASE)
-        is not None
-    )
-
-
-def _is_item_heading(text: str) -> bool:
-    return (
-        re.match(r"^Item\s+\d{1,2}[A-Za-z]?\b(?:\.|\s|$)", text.strip(), re.IGNORECASE)
-        is not None
-    )
 
 
 def _heading_level(text: str, metadata: Mapping[str, Any]) -> int | None:

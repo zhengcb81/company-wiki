@@ -40,14 +40,22 @@ from .relations import (
 from .sections import build_sections
 from .tables import build_operating_tables
 
-# The lane exposes exactly one public function.  Everything else in this module
-# is an implementation detail that ROOT must not depend on.
 __all__ = [
     'build_structure',
+    'structure_algorithm_hashes',
     'table_purpose',
 ]
 
 _LANGUAGE_FAMILY_MAP = {"zh": "zh", "en": "en"}
+
+
+def structure_algorithm_hashes() -> dict[str, str]:
+    """Expose the installed structure implementation without opening its modules."""
+    from pathlib import Path
+
+    from company_wiki.implementation_identity import owned_tree_hashes
+
+    return owned_tree_hashes(__name__, (Path(root) for root in __path__))
 
 
 def build_structure(

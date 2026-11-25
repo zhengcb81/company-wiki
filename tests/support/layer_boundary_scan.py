@@ -15,10 +15,17 @@ from pathlib import Path
 
 
 _ROOT = "company_wiki"
+_FEEDBACK_PACKAGE = "tools.feedback_loop"
+_SHARED_OWNER = "<shared>"
+_SHARED_CONTRACTS = {"document_model", "resource_budget", "source_contract"}
+# This executable composes the catalogue and automation owners. Other root
+# helpers depend on value contracts without reaching their runtime owners.
+_ASSEMBLY_OWNERS = {"scheduled_reading": "automation"}
 _LAYERS = {
     "automation", "document_model", "document_normalization", "document_understanding",
     "narrative_subject", "parser_adapters", "resource_budget", "source_catalog", "source_contract",
 }
+_RUNTIME_OWNERS = (_LAYERS - _SHARED_CONTRACTS) | {"feedback_loop"}
 _BUILTINS = {
     "__import__", "getattr", "setattr", "delattr", "vars", "globals", "locals",
     "eval", "exec", "compile",
@@ -36,17 +43,62 @@ _REFLECTION_CALLS = _ATTRIBUTE_LOOKUPS | _SOURCE_INSPECTION | {"builtins.vars"}
 _FUNCTIONS = (ast.FunctionDef, ast.AsyncFunctionDef)
 
 
-def _owner(name: str) -> str | None:
+def _canonical_name(name: str) -> str:
+    if name == "src.company_wiki" or name.startswith("src.company_wiki."):
+        return name.removeprefix("src.")
+    return name
+
+
+def owner(name: str) -> str | None:
+    name = _canonical_name(name)
+    if name == _FEEDBACK_PACKAGE or name.startswith(_FEEDBACK_PACKAGE + "."):
+        return "feedback_loop"
     root, _, rest = name.partition(".")
     if root != _ROOT or not rest:
         return None
     layer = rest.split(".", 1)[0]
-    return layer if layer in _LAYERS else "<shared>"
+    return layer if layer in _LAYERS else _ASSEMBLY_OWNERS.get(layer, _SHARED_OWNER)
 
 
-def _module_name(root: Path, path: Path) -> str:
+def _module_name(root: Path, path: Path, namespace: str) -> str:
     parts = path.relative_to(root).with_suffix("").parts
-    return ".".join((_ROOT, *(parts[:-1] if parts[-1] == "__init__" else parts)))
+    return ".".join((namespace, *(parts[:-1] if parts[-1] == "__init__" else parts)))
+
+
+def _cyclic_components(graph: dict[str, tuple[str, ...]]) -> tuple[tuple[str, ...], ...]:
+    """Tarjan components with stable membership and output order."""
+    indices: dict[str, int] = {}
+    low: dict[str, int] = {}
+    pending: list[str] = []
+    active: set[str] = set()
+    cycles: list[tuple[str, ...]] = []
+
+    def visit(node: str) -> None:
+        indices[node] = low[node] = len(indices)
+        pending.append(node)
+        active.add(node)
+        for neighbor in graph[node]:
+            if neighbor not in indices:
+                visit(neighbor)
+                low[node] = min(low[node], low[neighbor])
+            elif neighbor in active:
+                low[node] = min(low[node], indices[neighbor])
+        if low[node] != indices[node]:
+            return
+        members = []
+        while pending:
+            member = pending.pop()
+            active.remove(member)
+            members.append(member)
+            if member == node:
+                break
+        if len(members) > 1 or node in graph[node]:
+            cycles.append(tuple(sorted(members)))
+
+    for node in sorted(graph):
+        if node not in indices:
+            visit(node)
+    return tuple(sorted(cycles))
 
 
 @cache
@@ -95,22 +147,70 @@ class _Reference:
     module: bool = False
     provider_value: bool = False
 
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "name", _canonical_name(self.name))
+
 
 @dataclass(frozen=True)
 class BoundaryScan:
     imports: tuple[tuple[str, str, tuple[str, ...], int], ...]
     violations: tuple[str, ...]
+    runtime_imports: tuple[str, ...]
 
 
 class LayerBoundaries:
-    def __init__(self, root: Path):
+    def __init__(self, root: Path, *, feedback_root: Path | None = None):
         self.root = root
-        self.modules = {_module_name(root, path): path for path in sorted(root.rglob("*.py"))}
+        self.feedback_root = feedback_root
+        self.modules = {
+            self.module_name(path): path
+            for source in (root, feedback_root)
+            if source is not None
+            for path in sorted(source.rglob("*.py"))
+        }
+        self._owned_subpackages = {
+            name for name, path in self.modules.items()
+            if name.startswith(_ROOT + ".") and name.count(".") >= 2
+            and path.name == "__init__.py" and literal_exports(path) is not None
+        }
+
+    def module_name(self, path: Path) -> str:
+        if self.feedback_root is not None and path.is_relative_to(self.feedback_root):
+            return _module_name(self.feedback_root, path, _FEEDBACK_PACKAGE)
+        return _module_name(self.root, path, _ROOT)
+
+    def relative_path(self, path: Path) -> str:
+        if self.feedback_root is not None and path.is_relative_to(self.feedback_root):
+            return "tools/feedback_loop/" + path.relative_to(self.feedback_root).as_posix()
+        return path.relative_to(self.root).as_posix()
+
+    @cache
+    def private_owner(self, name: str) -> str | None:
+        coarse = owner(name)
+        while name:
+            if name in self._owned_subpackages:
+                return name
+            name, _, _ = name.rpartition(".")
+        return coarse
 
     def scan(self, path: Path, tree: ast.AST) -> BoundaryScan:
         scanner = _Scanner(self, path)
         scanner.visit(tree)
-        return BoundaryScan(tuple(sorted(scanner.edges)), tuple(dict.fromkeys(scanner.violations)))
+        return BoundaryScan(
+            tuple(sorted(scanner.edges)), tuple(dict.fromkeys(scanner.violations)),
+            tuple(sorted(scanner.runtime_imports)),
+        )
+
+    def runtime_import_cycles(self) -> tuple[tuple[str, ...], ...]:
+        """Report potential runtime import components for diagnostics."""
+        graph = {}
+        for module, path in self.modules.items():
+            tree = ast.parse(path.read_bytes(), filename=str(path))
+            graph[module] = tuple(
+                dependency for dependency in self.scan(path, tree).runtime_imports
+                if dependency in self.modules
+            )
+        return _cyclic_components(graph)
 
     @cache
     def definition(self, name: str) -> tuple[str, bool] | None:
@@ -132,7 +232,7 @@ class LayerBoundaries:
             if node.level:
                 package = module if path.name == "__init__.py" else module.rpartition(".")[0]
                 provider = resolve_name("." * node.level + provider, package)
-            name = f"{provider}.{member}"
+            name = f"{_canonical_name(provider)}.{member}"
         return None
 
 
@@ -140,11 +240,14 @@ class _Scanner(ast.NodeVisitor):
     def __init__(self, rules: LayerBoundaries, path: Path):
         self.rules = rules
         self.modules = rules.modules
-        name = _module_name(rules.root, path)
-        self.caller = _owner(name) or "<shared>"
+        name = rules.module_name(path)
+        self.caller = owner(name) or _SHARED_OWNER
+        self.private_owner = rules.private_owner(name)
         self.package = name if path.name == "__init__.py" else name.rpartition(".")[0]
-        self.path = path.relative_to(rules.root).as_posix()
+        self.path = rules.relative_path(path)
         self.edges: set[tuple[str, str, tuple[str, ...], int]] = set()
+        self.runtime_imports: set[str] = set()
+        self._runtime_branch = True
         self.violations: list[str] = []
         self.bindings: dict[str, object] = {name: _Reference(f"builtins.{name}") for name in _BUILTINS}
         self.bindings.update(
@@ -157,8 +260,12 @@ class _Scanner(ast.NodeVisitor):
         self.receiver: tuple[str, dict[str, _Reference]] | None = None
 
     def _foreign(self, name: str) -> bool:
-        owner = _owner(name)
-        return owner is not None and owner != self.caller
+        provider = owner(name)
+        return provider is not None and provider != self.caller
+
+    def _private_foreign(self, name: str) -> bool:
+        provider = self.rules.private_owner(name)
+        return name == _ROOT or (provider is not None and provider != self.private_owner)
 
     def _external_namespace(self, name: str) -> bool:
         return name == _ROOT or self._foreign(name)
@@ -169,26 +276,32 @@ class _Scanner(ast.NodeVisitor):
     def _check_module_objects(self, node: ast.AST, values: Iterable[ast.AST | None]) -> None:
         for value in values:
             ref = self._reference(value)
-            if ref is not None and ref.module and self._external_namespace(ref.name):
+            if ref is not None and ref.module and self._private_foreign(ref.name):
                 self._report(node, f"module object {ref.name} must be used through its public members")
 
     def _child(self, base: _Reference, name: str) -> _Reference:
-        qualified = f"{base.name}.{name}"
+        qualified = _canonical_name(f"{base.name}.{name}")
         return _Reference(
-            qualified, base.module and qualified in self.modules,
+            qualified, base.module and (qualified == _ROOT or qualified in self.modules),
             base.provider_value or self._is_foreign_class(base),
         )
 
     def _record_import(self, node: ast.AST, module: str, names: tuple[str, ...] = ()) -> None:
-        if module != _ROOT and not module.startswith(_ROOT + "."):
+        module = _canonical_name(module)
+        provider_owner = owner(module)
+        if module != _ROOT and provider_owner is None:
             return
         parts = module.split(".")
         self.imported_modules.update(".".join(parts[:i]) for i in range(1, len(parts) + 1))
         if module != _ROOT:
             self.edges.add((self.caller, module, names, node.lineno))
+            if self._runtime_branch:
+                self.runtime_imports.add(module)
+        if self.caller == _SHARED_OWNER and provider_owner in _RUNTIME_OWNERS:
+            self._report(node, f"shared helper depends on runtime owner {module}")
+        if self._private_foreign(module) and any(part.startswith("_") for part in parts[1:]):
+            self._report(node, f"private module {module}")
         if self._foreign(module):
-            if any(part.startswith("_") for part in parts[1:]):
-                self._report(node, f"private module {module}")
             provider = self.modules.get(module)
             exports = literal_exports(provider) if provider is not None else None
             if exports is None:
@@ -199,6 +312,8 @@ class _Scanner(ast.NodeVisitor):
             child = self._child(parent, name)
             if child.module and child.name not in self.imported_modules:
                 self._record_import(node, child.name)
+            elif child.module and self._runtime_branch:
+                self.runtime_imports.add(child.name)
 
     def _check_member(self, node: ast.AST, base: _Reference, name: str | None) -> None:
         child = self._child(base, name) if name is not None else None
@@ -206,13 +321,17 @@ class _Scanner(ast.NodeVisitor):
             if child.name not in self.imported_modules:
                 self._record_import(node, child.name)
             return
+        if name is None:
+            if self._private_foreign(base.name):
+                self._report(node, f"dynamic attribute on {base.name} cannot be checked against its public API")
+            return
+        if name.startswith("_") and name not in _PUBLIC_METADATA:
+            if self._private_foreign(base.name):
+                self._report(node, f"private attribute {child.name}")
+            return
         if not self._external_namespace(base.name):
             return
-        if name is None:
-            self._report(node, f"dynamic attribute on {base.name} cannot be checked against its public API")
-        elif name.startswith("_") and name not in _PUBLIC_METADATA:
-            self._report(node, f"private attribute {child.name}")
-        elif base.module and name not in _PUBLIC_METADATA:
+        if base.module and name not in _PUBLIC_METADATA:
             provider = self.modules.get(base.name)
             exports = literal_exports(provider) if provider is not None else None
             # An explicit dotted module import binds the intermediate namespaces.
@@ -370,7 +489,7 @@ class _Scanner(ast.NodeVisitor):
         return None
 
     def _is_foreign_class(self, ref: _Reference) -> bool:
-        if ref.module or not self._foreign(ref.name):
+        if ref.module or not self._private_foreign(ref.name):
             return False
         definition = self.rules.definition(ref.name)
         return definition is not None and definition[1]
@@ -405,6 +524,34 @@ class _Scanner(ast.NodeVisitor):
         self._record_import(node, module, tuple(alias.name for alias in node.names))
         for alias in node.names:
             self.bindings[alias.asname or alias.name] = self._child(_Reference(module, True), alias.name)
+
+    def _import_condition(self, test: ast.expr) -> bool | None:
+        if isinstance(test, ast.UnaryOp) and isinstance(test.op, ast.Not):
+            inner = self._import_condition(test.operand)
+            return None if inner is None else not inner
+        guard = self._reference(test)
+        if guard is not None and guard.name == "typing.TYPE_CHECKING":
+            return False
+        if (isinstance(test, ast.Compare)
+                and isinstance(test.left, ast.Name) and test.left.id == "__name__"
+                and len(test.ops) == 1 and isinstance(test.ops[0], (ast.Eq, ast.NotEq))
+                and self._literal(test.comparators[0]) == "__main__"):
+            return isinstance(test.ops[0], ast.NotEq)
+        return None
+
+    def visit_If(self, node: ast.If) -> None:
+        self.visit(node.test)
+        condition = self._import_condition(node.test)
+        outer = self._runtime_branch
+        try:
+            self._runtime_branch = outer and condition is not False
+            for item in node.body:
+                self.visit(item)
+            self._runtime_branch = outer and condition is not True
+            for item in node.orelse:
+                self.visit(item)
+        finally:
+            self._runtime_branch = outer
 
     def visit_Attribute(self, node: ast.Attribute) -> None:
         self.visit(node.value)
@@ -515,7 +662,7 @@ class _Scanner(ast.NodeVisitor):
         if callee.name in _ATTRIBUTE_LOOKUPS:
             name = self._literal(self._argument(node, 1, "name"))
             self._check_member(node, target, name if isinstance(name, str) else None)
-        elif self._external_namespace(target.name) and (
+        elif self._private_foreign(target.name) and (
             callee.name == "builtins.vars" or callee.name in _SOURCE_INSPECTION
         ):
             self._report(node, f"{callee.name} reads implementation of {target.name}")
@@ -569,8 +716,15 @@ class _Scanner(ast.NodeVisitor):
         self.class_fields, self.receiver = class_fields, receiver
         try:
             if arguments is not None:
-                parameters = (*arguments.posonlyargs, *arguments.args, *arguments.kwonlyargs)
-                self.bindings.update({arg.arg: self._annotated_reference(arg.annotation) for arg in parameters})
+                positional = (*arguments.posonlyargs, *arguments.args)
+                defaults = dict(zip(positional[len(positional) - len(arguments.defaults):], arguments.defaults))
+                defaults.update(zip(arguments.kwonlyargs, arguments.kw_defaults))
+                self.bindings.update(
+                    {
+                        arg.arg: self._annotated_reference(arg.annotation) or self._reference(defaults.get(arg))
+                        for arg in (*positional, *arguments.kwonlyargs)
+                    }
+                )
                 for variadic in (arguments.vararg, arguments.kwarg):
                     if variadic is not None:
                         self.bindings[variadic.arg] = None

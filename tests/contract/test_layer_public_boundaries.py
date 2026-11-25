@@ -13,11 +13,12 @@ from pathlib import Path
 
 import pytest
 
-from support.layer_boundary_scan import LayerBoundaries, literal_exports as _literal_exports
+from support.layer_boundary_scan import LayerBoundaries, literal_exports as _literal_exports, owner
 
 
 SOURCE_ROOT = Path(__file__).resolve().parents[2] / "src" / "company_wiki"
-_BOUNDARIES = LayerBoundaries(SOURCE_ROOT)
+FEEDBACK_ROOT = SOURCE_ROOT.parents[1] / "tools" / "feedback_loop"
+_BOUNDARIES = LayerBoundaries(SOURCE_ROOT, feedback_root=FEEDBACK_ROOT)
 
 
 @lru_cache(maxsize=None)
@@ -310,6 +311,90 @@ def unrelated(catalog):
     assert not _scan(path, ast.parse(source)).violations
 
 
+def test_unannotated_parameter_with_known_foreign_default_keeps_its_owner():
+    path = SOURCE_ROOT / "automation" / "_boundary_probe.py"
+    source = (
+        "from company_wiki.source_catalog import SourceCatalog\n"
+        "def run(catalog=SourceCatalog(config)):\n"
+        "    return catalog._store"
+    )
+    assert any("private attribute" in item and "._store" in item
+               for item in _scan(path, ast.parse(source)).violations)
+
+
+@pytest.mark.parametrize("source", [
+    "import src.company_wiki.source_catalog.api as owner\nowner._read_source()",
+    "import src.company_wiki.source_catalog.api\nsrc.company_wiki.source_catalog.api._read_source()",
+    "from src import company_wiki as cwp\ncwp.source_catalog.api._read_source()",
+    "from importlib import import_module\nimport_module('src.company_wiki.source_catalog.api')._read_source()",
+    "import sys\nsys.modules['src.company_wiki.source_catalog.api']._read_source()",
+])
+def test_src_namespace_alias_resolves_to_the_same_owner(source):
+    path = SOURCE_ROOT / "automation" / "_boundary_probe.py"
+    result = _scan(path, ast.parse(source))
+    assert any("private attribute company_wiki.source_catalog.api._read_source" in item
+               for item in result.violations)
+
+
+def test_feedback_host_code_uses_the_same_public_contract():
+    path = FEEDBACK_ROOT / "_boundary_probe.py"
+    wrong = ast.parse("from company_wiki.source_catalog.api import _read_source")
+    right = ast.parse("from company_wiki.diagnostic_logging import diagnostic_log")
+    assert any("private attribute" in item for item in _scan(path, wrong).violations)
+    assert not _scan(path, right).violations
+
+
+@pytest.mark.parametrize(("access", "diagnostic"), [
+    ("registry._implementation()", "private attribute"),
+    ("getattr(registry, setting)()", "dynamic attribute"),
+    ("configure(provider=registry)", "module object"),
+    ("vars(registry)", "reads implementation"),
+])
+def test_distinct_owned_subpackages_share_public_members(access, diagnostic):
+    source = ast.parse(
+        "from company_wiki.document_understanding.profiles import registry\n"
+        + access
+    )
+    adjacent = SOURCE_ROOT / "document_understanding" / "operating_states" / "_boundary_probe.py"
+    sibling = SOURCE_ROOT / "document_understanding" / "profiles" / "_boundary_probe.py"
+    assert any(diagnostic in item for item in _scan(adjacent, source).violations)
+    assert not _scan(sibling, source).violations
+    public = ast.parse(
+        "from company_wiki.document_understanding.profiles import registry\n"
+        "configure(provider=registry.decision_inventory_inputs)"
+    )
+    assert not _scan(adjacent, public).violations
+
+
+def test_shared_leaf_depends_on_contract_values_and_assembly_owns_runtime():
+    leaf = SOURCE_ROOT / "leaf_probe.py"
+    runtime = ast.parse("from company_wiki.source_catalog import SourceCatalog")
+    contract = ast.parse("from company_wiki.source_contract import SourceRef")
+    entry = SOURCE_ROOT / "scheduled_reading.py"
+    assert any("shared" in item for item in _scan(leaf, runtime).violations)
+    assert not _scan(leaf, contract).violations
+    assert not _scan(entry, ast.parse(entry.read_bytes())).violations
+
+
+def test_runtime_cycle_diagnostic_is_stable_and_ignores_type_only_imports(tmp_path):
+    root = tmp_path / "company_wiki"
+    root.mkdir()
+    (root / "a.py").write_text("from . import b\n", encoding="utf-8")
+    (root / "b.py").write_text("def late():\n    from . import a\n", encoding="utf-8")
+    (root / "c.py").write_text(
+        "from typing import TYPE_CHECKING as hint_only\nfrom . import a\n"
+        "if not hint_only:\n    pass\nelse:\n    from . import d\n", encoding="utf-8",
+    )
+    (root / "d.py").write_text(
+        "from . import c\nif __name__ == '__main__':\n    from . import e\n", encoding="utf-8",
+    )
+    (root / "e.py").write_text("from . import d\n", encoding="utf-8")
+    expected = (("company_wiki.a", "company_wiki.b"),)
+    rules = LayerBoundaries(root)
+    assert rules.runtime_import_cycles() == expected
+    assert rules.runtime_import_cycles() == expected
+
+
 @pytest.mark.parametrize(
     "source",
     [
@@ -336,9 +421,11 @@ def test_cross_package_names_are_declared_by_the_provider_public_api():
     assert not violations, "cross-package imports bypass the provider's public API:\n" + "\n".join(violations[:120])
 
 
-# Frozen legacy import surfaces. Match the exact target and names rather than
-# ignoring all dependencies of a compatibility file.
-_LEGACY_EDGES = {
+# Old public command and import paths delegate to their current owners. Only
+# the recorded target and its public members are authorized for each caller.
+_COMPATIBILITY_PORTS = {
+    ("source_catalog/cli.py", "company_wiki.scheduled_reading", ("main",)),
+    ("source_catalog/incremental_cli.py", "company_wiki.scheduled_reading", ("main",)),
     ("source_catalog/narrative_transport_cli.py", "company_wiki.automation.narrative_transport_cli",
      ("main",)),
     ("source_contract/announcement_cli.py", "company_wiki.source_catalog.announcement_cli",
@@ -373,10 +460,10 @@ def test_dependencies_follow_layer_ownership(layer, forbidden):
     violations = [
         f"{relative}:{line}: {module} {names}"
         for path, tree in _parsed_production_python_files()
-        if path.relative_to(SOURCE_ROOT).parts[0] == layer
-        for relative in [path.relative_to(SOURCE_ROOT).as_posix()]
+        if owner(_BOUNDARIES.module_name(path)) == layer
+        for relative in [_BOUNDARIES.relative_path(path)]
         for _, module, names, line in _imports(path, tree)
-        if module.split(".")[1] in forbidden and (relative, module, names) not in _LEGACY_EDGES
+        if owner(module) in forbidden and (relative, module, names) not in _COMPATIBILITY_PORTS
     ]
     assert not violations, "\n".join(violations)
 
@@ -394,7 +481,7 @@ def test_production_uses_canonical_owners_instead_of_upward_compatibility_shims(
     }
     violations = []
     for path, tree in _parsed_production_python_files():
-        relative = path.relative_to(SOURCE_ROOT).as_posix()
+        relative = _BOUNDARIES.relative_path(path)
         for _, module, _, line in _imports(path, tree):
             if module in shims and relative not in shims[module]:
                 violations.append(f"{relative}:{line}: {module}")
@@ -513,6 +600,18 @@ def test_selection_algorithm_identity_is_owned_by_its_public_api():
         and node.args[0].value == "company_wiki.source_catalog.narrative_selection"
         for node in ast.walk(function)
     ), "consumers must not load the selector module to inspect its implementation"
+
+
+def test_pdf_identity_ports_keep_the_native_component_keys_and_hashes():
+    from company_wiki.document_understanding.geometry_intent import contracts, planner, reading
+    from company_wiki.document_understanding.profiles import geometry_policy
+    from company_wiki.document_understanding.reading_identity import pdf_reading_algorithm_hashes
+    from company_wiki.implementation_identity import code_sha256
+
+    assert pdf_reading_algorithm_hashes() == {
+        module.__name__: code_sha256(module.__file__)
+        for module in (reading, planner, contracts, geometry_policy)
+    }
 
 
 def test_narrative_read_cli_is_owned_by_application_layer():
