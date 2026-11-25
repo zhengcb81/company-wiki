@@ -51,10 +51,11 @@ def continuity_algorithm_hashes() -> dict[str, str]:
 
 
 def pdf_reading_algorithm_hashes() -> dict[str, str]:
-    from .geometry_intent.identity import geometry_algorithm_hashes
-    from .profiles.geometry_identity import geometry_policy_hashes
+    from .geometry_intent.identity import geometry_algorithm_sources
+    from .profiles.geometry_identity import geometry_policy_sources
 
-    return {**geometry_algorithm_hashes(), **geometry_policy_hashes()}
+    sources = {**geometry_algorithm_sources(), **geometry_policy_sources()}
+    return {name: code_sha256(path) for name, path in sources.items()}
 
 
 def assertion_frames_sha256(*, universal_newlines: bool = False, profile: str | None = None) -> str:

@@ -1,15 +1,10 @@
-"""Public fingerprints of the geometry-planning components."""
-
-from company_wiki.implementation_identity import code_sha256
+"""Public implementation identities for the pure geometry-planning component."""
 
 
-def geometry_algorithm_hashes() -> dict[str, str]:
+def geometry_algorithm_sources() -> dict[str, str | None]:
     from . import contracts, planner, reading
 
-    return {
-        module.__name__: code_sha256(module.__file__)
-        for module in (reading, planner, contracts)
-    }
+    return {module.__name__: module.__file__ for module in (reading, planner, contracts)}
 
 
-__all__ = ["geometry_algorithm_hashes"]
+__all__ = ["geometry_algorithm_sources"]

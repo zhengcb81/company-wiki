@@ -1,12 +1,10 @@
-"""Public fingerprint of the geometry policy compiler."""
-
-from company_wiki.implementation_identity import code_sha256
+"""Public implementation identity of the geometry policy compiler."""
 
 
-def geometry_policy_hashes() -> dict[str, str]:
+def geometry_policy_sources() -> dict[str, str | None]:
     from . import geometry_policy
 
-    return {geometry_policy.__name__: code_sha256(geometry_policy.__file__)}
+    return {geometry_policy.__name__: geometry_policy.__file__}
 
 
-__all__ = ["geometry_policy_hashes"]
+__all__ = ["geometry_policy_sources"]
