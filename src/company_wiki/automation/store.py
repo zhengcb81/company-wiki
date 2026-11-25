@@ -33,6 +33,7 @@ from .migrations import (
     validate_database,
 )
 from .execution_snapshot import ExecutionSnapshot, load_execution_snapshot
+from .narrative_run_binding import NarrativeRunError, model_prompt_version
 from .models import (
     ClaimedWork,
     Effect,
@@ -718,8 +719,7 @@ def _compact_terminal_narrative(
     summary = kinds["source.narrative_summarize"].job_id
     verify = kinds["source.narrative_verify"].job_id
     # Admission and terminal accounting share the same frozen model-job prompt.
-    # The ledger owns this pure lookup; source data is not reread here.
-    from .narrative_run_store import NarrativeRunError, model_prompt_version
+    # The binding reader does not open the ledger or reread source data.
     try:
         expected_prompt = model_prompt_version(
             run["binding_json"], job_id=summary, default_prompt=run["prompt_version"]

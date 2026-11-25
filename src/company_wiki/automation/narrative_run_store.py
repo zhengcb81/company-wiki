@@ -18,6 +18,11 @@ from company_wiki.file_mutex import os_file_mutex
 from . import migrations
 from .models import (Attempt, HandlerOutcome, HandlerResult, Job, RuntimeGate, RuntimeState, canonical_json, canonical_json_hash,
                      require_canonical_json, require_sha256, require_utc_timestamp)
+from .narrative_run_binding import (
+    NarrativeRunError, RunConflictError, RunScopeError,
+    job_prompt_versions as _job_prompt_versions, model_prompt_version,
+    require_run_name as _name,
+)
 from .store import (
     ConcurrentUpdateError, StoreBusyError, _read_runtime_gate_in_transaction,
     _require_active_attempt, _set_runtime_gate_in_transaction,
@@ -30,14 +35,6 @@ if TYPE_CHECKING:
 
 _MAX_INT = (1 << 63) - 1
 T = TypeVar("T")
-
-
-class NarrativeRunError(RuntimeError):
-    code = "narrative_run_error"
-
-
-class RunConflictError(NarrativeRunError):
-    code = "narrative_run_conflict"
 
 
 class ReservationConflictError(NarrativeRunError):
@@ -60,58 +57,8 @@ class StorageBudgetExceeded(ValueError):
     })
 
 
-class RunScopeError(NarrativeRunError):
-    code = "run_scope_mismatch"
-
-
 class RunOwnershipError(NarrativeRunError):
     code = "run_ownership_conflict"
-
-
-def _name(value: str, name: str) -> None:
-    if not isinstance(value, str) or not value or value.strip() != value:
-        raise ValueError(f"{name} must be non-empty unpadded text")
-
-
-def _job_prompt_versions(binding_json: str | None) -> dict[str, str] | None:
-    """Optional immutable model-job prompts; old bindings keep the run default.
-
-    This ledger knows only job IDs, types and accounting. The owner of a run
-    binding chooses the actual prompt version; source/model modules are not
-    imported or interpreted here.
-    """
-    if binding_json is None:
-        return None
-    try:
-        binding = json.loads(binding_json)
-        if not isinstance(binding, dict) or "job_prompt_versions" not in binding:
-            return None
-        versions = binding["job_prompt_versions"]
-        if not isinstance(versions, dict):
-            raise ValueError("job_prompt_versions must be an object")
-        for job_id, prompt in versions.items():
-            _name(job_id, "job_prompt_versions job_id")
-            _name(prompt, "job_prompt_versions prompt")
-        return versions
-    except (TypeError, ValueError) as exc:
-        raise RunConflictError("invalid immutable job prompt binding") from exc
-
-
-def model_prompt_version(
-    binding_json: str | None, *, job_id: str, default_prompt: str,
-) -> str:
-    """Resolve one frozen model job prompt without database or source reads.
-
-    Admission and terminal compaction must use the same binding. A map that
-    exists never falls back for an unbound job; only legacy absent maps use
-    the immutable run default.
-    """
-    versions = _job_prompt_versions(binding_json)
-    if versions is None:
-        return default_prompt
-    if job_id not in versions:
-        raise RunScopeError("job has no immutable model prompt binding")
-    return versions[job_id]
 
 
 def _integer(value: int, name: str) -> None:

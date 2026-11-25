@@ -5,7 +5,11 @@ from __future__ import annotations
 from contextlib import contextmanager
 from dataclasses import replace
 import json
+import os
+from pathlib import Path
 import sqlite3
+import subprocess
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -74,7 +78,7 @@ class MeteredReplayModel(ReplayNarrativeModel):
 
 
 @contextmanager
-def terminal_fixture(tmp_path, *, kind="txt", unknown=False):
+def terminal_fixture(tmp_path, *, kind="txt", unknown=False, bound_prompt=False):
     root = tmp_path / "terminal"
     root.mkdir()
     data = (
@@ -101,6 +105,12 @@ def terminal_fixture(tmp_path, *, kind="txt", unknown=False):
         scheduler.materialize_event(event)
         jobs = auto.list_jobs()
         job_ids = tuple(job.job_id for job in jobs)
+        prompt_binding = canonical_json({
+            "job_prompt_versions": {
+                job.job_id: NARRATIVE_PROMPT_VERSION
+                for job in jobs if job.job_type == "source.narrative_summarize"
+            }
+        }) if bound_prompt else None
         ledger = NarrativeRunStore(auto.db_path)
         ledger.create_run(
             run_id="terminal-run",
@@ -115,6 +125,7 @@ def terminal_fixture(tmp_path, *, kind="txt", unknown=False):
             max_micro_usd=2_000_000,
             max_output_bytes=4 * 1024 * 1024,
             created_at=T0,
+            binding_json=prompt_binding,
         )
         # Register the real metering boundary before any attempt is executed.
         register_narrative_handlers(
@@ -326,6 +337,41 @@ def test_catalog_proof_is_exact_visible_and_rechecked_before_compaction(
                 compacted_at=T3,
             )
         assert snapshot(state) == before
+
+
+def test_terminal_store_uses_frozen_prompt_without_loading_run_store(tmp_path):
+    code = """
+import json
+from pathlib import Path
+import sys
+
+sys.modules["company_wiki.automation.narrative_run_store"] = None
+from company_wiki.automation.store import AutomationStore
+from company_wiki.automation.terminal_receipt_contracts import FinalArtifactPin
+
+request = json.load(sys.stdin)
+store = AutomationStore(Path(request["database"]))
+result = store.compact_terminal_narrative_jobs(
+    job_ids=tuple(request["job_ids"]),
+    final_artifact=FinalArtifactPin(**request["pin"]),
+    compacted_at=request["compacted_at"],
+)
+assert result.attempts_compacted == 3
+"""
+    with terminal_fixture(tmp_path, bound_prompt=True) as state:
+        result = subprocess.run(
+            [sys.executable, "-B", "-X", "utf8", "-c", code],
+            input=json.dumps({
+                "database": str(state.auto.db_path), "job_ids": state.job_ids,
+                "pin": state.pin.to_dict(), "compacted_at": T3,
+            }),
+            cwd=tmp_path,
+            env=dict(os.environ, PYTHONPATH=str(Path(__file__).resolve().parents[2] / "src")),
+            capture_output=True, text=True, encoding="utf-8", timeout=30,
+        )
+        assert result.returncode == 0, result.stderr
+        with pytest.raises(TerminalResultCompactedError):
+            state.auto.result_for_effect(state.pin.effect_id)
 
 
 def test_empty_scope_and_exact_repeat_are_readonly_and_compacted_body_is_named(
