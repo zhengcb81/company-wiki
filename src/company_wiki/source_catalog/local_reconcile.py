@@ -23,6 +23,7 @@ from .assertion_service import (
 from .dayu_fiscal_metadata import extract_sec_scope, complete_sec_primary, FiscalMetadataError
 from .identity_candidates import iter_identity_filing_candidates
 from .policy import root_is_reusable_for_filing
+from .reader import LocationRegistration
 from .local_inventory import (
     LocalPrepareLimits,
     LocalReadBudget,
@@ -115,22 +116,21 @@ def _identity(catalog, request, cache_dir):
     return source_issuer_identity(catalog, request, cache_dir)
 
 
-def _register_local_sources(catalog, *, root_id, relative_paths, budget):
+def _register_local_sources(catalog, *, root_id, relative_paths, budget) -> dict[str, LocationRegistration]:
     """A quarantined requested original is a gap, not an empty local lake.
 
     Group attachment diagnostics do not veto a healthy primary. The scanner
     continues to own hashing/registration; this observes its requested results.
     """
     catalog.register_sources(root_id=root_id, relative_paths=relative_paths, budget=budget)
-    for relative in relative_paths:
-        primary = relative.removesuffix(".source.json")
-        row = catalog.reader.fetchone(
-            "SELECT role,source_id,location_status FROM locations WHERE root_id=? AND relative_path=?",
-            (root_id, primary),
-        )
-        if row is None or (row["role"] == "original_primary" and (
-                not row["source_id"] or row["location_status"] not in {"active", "retired"})):
+    locations = {}
+    for primary in {relative.removesuffix(".source.json") for relative in relative_paths}:
+        location = catalog.reader.location_registration(root_id, primary)
+        if location is None or (location.role == "original_primary" and (
+                not location.source_id or location.status not in {"active", "retired"})):
             raise SourceReadError("unavailable", "local_original_registration_failed")
+        locations[primary] = location
+    return locations
 
 
 def _sec_cache(catalog, original, primary, budget):
@@ -617,19 +617,18 @@ def _discover_source_groups(catalog, identity, budget, request, *, identity_cach
             return (not year_hit, not period_hit, relative)
 
         for relative in sorted(selected, key=priority):
-            location = catalog.reader.fetchone("SELECT document_id FROM locations WHERE root_id=? AND relative_path=? AND role='original_primary'", (root.root_id, relative))
-            if location is None:
+            location = catalog.reader.location_registration(root.root_id, relative)
+            if location is None or location.role != "original_primary":
                 # Each completed registration/proof survives a later bound.
                 if budget.candidates >= budget.max_candidates:
                     raise SourceReadError("unavailable", "local_candidate_limit")
-                _register_local_sources(catalog, root_id=root.root_id, relative_paths={relative}, budget=budget)
+                registered = _register_local_sources(catalog, root_id=root.root_id, relative_paths={relative}, budget=budget)
                 changed = True
-                location = catalog.reader.fetchone(
-                    "SELECT document_id FROM locations WHERE root_id=? AND relative_path=? AND role='original_primary'",
-                    (root.root_id, relative))
-            if location is not None and location["document_id"] in excluded:
+                location = registered.get(relative)
+            document_id = location.document_id if location is not None and location.role == "original_primary" else None
+            if document_id in excluded:
                 continue
-            row = catalog.reader.exact_source_version(location["document_id"]) if location else None
+            row = catalog.reader.exact_source_version(document_id) if document_id is not None else None
             if row is None:
                 raise SourceReadError("unavailable", "local_original_registration_failed")
             ref = SourceRef(row["document_id"], row["source_id"], row["content_sha256"], row["byte_size"], row["mime_type"])

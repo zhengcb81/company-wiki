@@ -34,7 +34,19 @@ def _request():
                          mode="latest_as_of")
 
 
-def test_same_company_layout_in_two_configured_directory_roots(tmp_path):
+def test_same_company_layout_in_two_configured_directory_roots(tmp_path, monkeypatch):
+    from company_wiki.source_catalog.reader import ReadOnlyCatalogReader
+
+    lookups = []
+    fetchone = ReadOnlyCatalogReader.fetchone
+
+    def observe_lookup(reader, sql, params=()):
+        statement = " ".join(sql.casefold().split())
+        if "from locations where root_id=? and relative_path=?" in statement:
+            lookups.append(params)
+        return fetchone(reader, sql, params)
+
+    monkeypatch.setattr(ReadOnlyCatalogReader, "fetchone", observe_lookup)
     roots = tuple(RootSpec(name, tmp_path / (name + " 中文 根"), "directory",
                            adapter_id="company_raw_v1", reusable_for_filing=True)
                   for name in ("external_one", "external_two"))
@@ -48,6 +60,9 @@ def test_same_company_layout_in_two_configured_directory_roots(tmp_path):
     try:
         prepared = prepare_local_source(cat, _request())
         assert prepared["download_events"] == 0
+        assert sorted(root_id for root_id, _ in lookups) == sorted(
+            [root.root_id for root in roots] * 2,
+        )  # one missing check and one committed registration observation per root
         reader = SourceVersionReader(cat)
         result = reader.query_local(_request())
         assert result.status == "found"

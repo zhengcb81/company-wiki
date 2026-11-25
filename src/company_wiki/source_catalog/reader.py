@@ -29,6 +29,7 @@ changes nothing else.
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 import sqlite3
 from pathlib import Path
 from typing import Any, Protocol, Sequence, runtime_checkable
@@ -42,6 +43,16 @@ SUPPORTED_SCHEMA_VERSIONS = frozenset({CATALOG_SCHEMA_VERSION})
 class CatalogReaderUnavailable(RuntimeError):
     """The read-only catalog could not be opened (missing/unopenable) or its
     schema version is unsupported (fail closed)."""
+
+
+@dataclass(frozen=True)
+class LocationRegistration:
+    """An indexed location within one logical root."""
+
+    document_id: str | None
+    source_id: str | None
+    role: str
+    status: str
 
 
 @runtime_checkable
@@ -89,6 +100,10 @@ class CatalogReader(Protocol):
         self, document_id: str, source_id: str
     ) -> list[sqlite3.Row]:
         """Typed: indexed locations for exactly one document/source pair."""
+        ...
+
+    def location_registration(self, root_id: str, relative_path: str) -> LocationRegistration | None:
+        """Read a root-relative registration without exposing the locations schema."""
         ...
 
     def artifacts_for(self, document_id: str) -> list[sqlite3.Row]:
@@ -302,6 +317,14 @@ class ReadOnlyCatalogReader:
             (document_id, source_id),
         )
 
+    def location_registration(self, root_id: str, relative_path: str) -> LocationRegistration | None:
+        row = self.fetchone(
+            "SELECT document_id, source_id, role, location_status FROM locations "
+            "WHERE root_id=? AND relative_path=?",
+            (root_id, relative_path),
+        )
+        return LocationRegistration(*row) if row is not None else None
+
     def artifacts_for(self, document_id: str) -> list[sqlite3.Row]:
         return self.fetchall(
             """SELECT artifact_id,artifact_role,source_id,path,content_sha256,
@@ -492,6 +515,7 @@ def reader_from(database_path: Path) -> CatalogReader:
 __all__ = [
     "CatalogReader",
     "CatalogReaderUnavailable",
+    "LocationRegistration",
     "ReadOnlyCatalogReader",
     "reader_from",
     "SUPPORTED_SCHEMA_VERSIONS",

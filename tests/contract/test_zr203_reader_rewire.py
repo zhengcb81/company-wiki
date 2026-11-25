@@ -15,6 +15,7 @@ from __future__ import annotations
 import ast
 import os
 import stat
+from contextlib import closing
 from pathlib import Path
 
 import pytest
@@ -125,14 +126,14 @@ def test_status_golden_equivalence(seeded) -> None:
 
 def test_service_status_golden_equivalence(seeded) -> None:
     db, config = seeded
-    catalog = SourceCatalog(config)
-    assert catalog.status() == ReadOnlyCatalogReader(db).status()
+    with closing(SourceCatalog(config)) as catalog, ReadOnlyCatalogReader(db) as reader:
+        assert catalog.status() == reader.status()
 
 
 def test_service_query_shape_golden_equivalence(seeded) -> None:
-    db, config = seeded
-    catalog = SourceCatalog(config)
-    results = catalog.query()
+    _, config = seeded
+    with closing(SourceCatalog(config)) as catalog:
+        results = catalog.query()
     assert len(results) == 1
     result = results[0]
     # the old service.query shape: document fields + entities/locations/artifacts
@@ -142,14 +143,14 @@ def test_service_query_shape_golden_equivalence(seeded) -> None:
 
 
 def test_query_source_bundle_via_reader_path(seeded) -> None:
-    db, config = seeded
-    catalog = SourceCatalog(config)
-    bundle = catalog.query_source_bundle(
-        document_id="doc-1",
-        registry={},
-        allowed_roots=(),
-        now="2026-03-21T00:00:00Z",
-    )
+    _, config = seeded
+    with closing(SourceCatalog(config)) as catalog:
+        bundle = catalog.query_source_bundle(
+            document_id="doc-1",
+            registry={},
+            allowed_roots=(),
+            now="2026-03-21T00:00:00Z",
+        )
     assert bundle is not None
     assert bundle["source"]["document_id"] == "doc-1"
     assert bundle["source"]["source_sha256"] == "a" * 64
@@ -164,11 +165,11 @@ def test_service_read_on_os_read_only_db_succeeds(seeded) -> None:
     db, config = seeded
     os.chmod(db, stat.S_IREAD)
     try:
-        catalog = SourceCatalog(config)
-        status = catalog.status()
-        assert status["documents"] == 1
-        results = catalog.query()
-        assert [row["document_id"] for row in results] == ["doc-1"]
+        with closing(SourceCatalog(config)) as catalog:
+            status = catalog.status()
+            assert status["documents"] == 1
+            results = catalog.query()
+            assert [row["document_id"] for row in results] == ["doc-1"]
     finally:
         os.chmod(db, stat.S_IWRITE)
 
