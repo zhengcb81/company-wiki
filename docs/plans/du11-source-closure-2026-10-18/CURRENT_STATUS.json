@@ -3,12 +3,13 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "s3_s4_before_f4_and_w12",
+  "execution_mode": "f4_residual_after_s3_s4_delivery",
   "architecture_rollout": {
     "s2_status": "accepted_scoped_owner_scenarios",
     "s2_receipt": "../feedback-loop-2026-11-17/s2-closeout-20261125.md",
-    "s3_status": "implementation_in_progress",
-    "s4_status": "paired_behavior_regressions_in_progress",
+    "s3_status": "accepted_scoped_owner_release",
+    "s4_status": "accepted_scoped_owner_regressions_and_composition",
+    "f4_status": "implementation_and_native_acceptance_in_progress",
     "scheduled_f4_owners_verified": 11,
     "scheduled_f4_owners_planned": 12,
     "owner_ledger": "../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md",
@@ -71,7 +72,7 @@
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "Original desktop goal checked during S3/S4 on 2026-11-25",
-    "execution": "S3/S4 are in progress in the current task. Resume the original W12 company attempt after S3/S4 and the remaining F4 acceptance.",
+    "execution": "S3/S4 scoped delivery is accepted. The current task is closing the remaining F4 work before the original W12 company attempt resumes.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {

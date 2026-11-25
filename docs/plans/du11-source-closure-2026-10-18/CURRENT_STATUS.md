@@ -2,13 +2,13 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-25 S2 验收完成，S3/S4 分仓实施
+## 2026-11-25 S2 与 S3/S4 已交付，接续 F4
 
 外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。
 
-S2 的 12 个计划节点均已验收。S3/S4 分仓首批覆盖 12 个模块。FF 离线 41 例、CWP/FF/ET 四条组合、StockWiki 身份事务与 Dashboard 公开组合、StockQA 账本回归均已通过。RF 日跑与周测走 owner 公开接口，旧月测保留已查验历史并退役运行路径。Dashboard 原件预览相关号与 StockQA 重复验证是独审发现的两个在途收尾项。 [S2 收尾台账](../feedback-loop-2026-11-17/s2-closeout-20261125.md) · [S3/S4 分仓台账](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md)
+S2 的 12 个计划节点均已验收。S3/S4 的本轮已证分仓问题、定向回归、独审、发布和组合验收完成。Dashboard 原件预览已从真实浏览器查回原相关号，StockQA 移除连续的重复核验并保留现行权限、过期和原付费记录恢复，最后一项同版 CI 已通过。历史夹具和尚未拆分的同仓事务按分仓台账保留证据。 [S2 收尾台账](../feedback-loop-2026-11-17/s2-closeout-20261125.md) · [S3/S4 分仓台账](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md)
 
-执行顺序为先完成 S3/S4 实施与验收，再接续 F4 未完成的宿主实际采用、历史原作业冷读及无人值守复验，最后继续父计划待办。目前原 W12 桌面目标状态为暂停，S3/S4 在当前任务实施。11 月 25 日只读核对实际 Windows F4 定时任务，仍订阅 11 仓，StockWiki 待接。 [F4 接续顺序](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)
+已开始 F4 未完成的宿主采用、历史原作业冷读和无人值守复验。11 月 25 日只读核对实际 Windows F4 定时任务，仍订阅 11 仓，StockWiki 待接。原 W12 桌面目标保持暂停，待 F4 验收后接续父计划。 [F4 接续顺序](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)
 
 - **S1 各仓发布与补修记录**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
 - **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
