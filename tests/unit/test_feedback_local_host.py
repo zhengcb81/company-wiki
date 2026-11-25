@@ -1,4 +1,5 @@
 import json
+from contextlib import closing
 from pathlib import Path
 import subprocess
 import sys
@@ -102,20 +103,12 @@ def test_restart_wakes_only_prelaunch_action(tmp_path, host_config, monkeypatch)
     assert (tmp_path / "starts").read_text().splitlines() == ["start"]
 
 
-@pytest.mark.parametrize("installed", [True, False])
-def test_codex_launch_resolves_the_current_install_before_starting(host_config, monkeypatch, installed):
-    from tools.feedback_loop import codex_cli
-    from tools.feedback_loop.local_host import LocalHost
-
-    config = json.loads(host_config.read_bytes())
-    config["owners"]["company-wiki"]["actions"]["triage"] = {
-        "mode": "codex-jsonl", "argv": ["codex", "exec", "--json", "-"],
-    }
-    host_config.write_text(json.dumps(config), encoding="utf-8")
-    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: Path(sys.executable) if installed else None)
+def _fake_codex_start(monkeypatch):
+    starts = []
 
     def native(argv, **options):
-        assert installed and argv == [sys.executable, "exec", "--json", "-"]
+        assert argv == [sys.executable, "exec", "--json", "-"]
+        starts.append(argv)
         events = [
             {"type": "thread.started", "thread_id": "original"},
             {"type": "item.completed", "item": {"type": "agent_message", "text": '{"decision":"expected"}'}},
@@ -126,16 +119,154 @@ def test_codex_launch_resolves_the_current_install_before_starting(host_config, 
         return subprocess.CompletedProcess(argv, 0)
 
     monkeypatch.setattr(subprocess, "run", native)
+    return starts
+
+
+@pytest.mark.parametrize("installed", [True, False])
+def test_codex_launch_resolves_the_current_install_before_starting(host_config, monkeypatch, installed):
+    from tools.feedback_loop import codex_cli
+    from tools.feedback_loop.local_host import LocalHost
+
+    config = json.loads(host_config.read_bytes())
+    config["owners"]["company-wiki"]["actions"]["triage"] = {
+        "mode": "codex-jsonl", "argv": ["codex", "exec", "--json", "-"],
+    }
+    host_config.write_text(json.dumps(config), encoding="utf-8")
+    executable = Path(sys.executable) if installed else None
+    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: executable)
+    starts = _fake_codex_start(monkeypatch)
     host = LocalHost(host_config)
     monkeypatch.setattr(host, "_wake", lambda _key: True)
     request = action()
     assert host.handle(request)["state"] == "pending"
     host.work(request["action_id"])
-    result = host.handle({**request, "method": "lookup"})
-    if installed:
-        assert result["state"] == "done" and result["native"]["session_id"] == "original"
+    lookup = {**request, "method": "lookup"}
+    if not installed:
+        pending = host.handle(lookup)
+        assert (pending["state"], pending["code"]) == ("pending", "codex_executable_unavailable")
+        assert not starts and not host._native_path(request["action_id"]).exists()
+        executable = Path(sys.executable)
+        assert host.recover(owners={"company-wiki"}) == [request["action_id"]]
+        host.work(request["action_id"])
+    result = host.handle(lookup)
+    assert result["state"] == "done" and result["native"]["session_id"] == "original"
+    assert result["request_digest"] == request["request_digest"]
+    host.work(request["action_id"])
+    assert len(starts) == 1
+
+
+def _legacy_codex_failure(host_config, monkeypatch, *, state="failed", code="host_command_or_directory_unavailable"):
+    from tools.feedback_loop.local_host import LocalHost
+
+    config = json.loads(host_config.read_bytes())
+    config["owners"]["company-wiki"]["actions"]["triage"] = {
+        "mode": "codex-jsonl", "argv": ["codex", "exec", "--json", "-"],
+    }
+    host_config.write_text(json.dumps(config), encoding="utf-8")
+    host = LocalHost(host_config)
+    wakes = []
+    monkeypatch.setattr(host, "_wake", lambda key: wakes.append(key) or True)
+    request = action()
+    assert host.handle(request)["state"] == "pending"
+    key = request["action_id"]
+    with closing(host._connect()) as conn, conn:
+        conn.execute("UPDATE actions SET state=?,receipt=?,deadline=? WHERE action_id=?",
+                     (state, json.dumps({"code": code}), time.time(), key))
+    wakes.clear()
+    return host, request, wakes
+
+
+def test_explicit_prelaunch_retry_claims_the_same_action_once_under_concurrency(host_config, monkeypatch):
+    from tools.feedback_loop import codex_cli
+
+    host, request, wakes = _legacy_codex_failure(host_config, monkeypatch)
+    key = request["action_id"]
+    frozen = host._get(key)
+    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: Path(sys.executable))
+    with ThreadPoolExecutor(4) as pool:
+        replies = list(pool.map(lambda _: host.retry_unstarted(key), range(4)))
+    assert wakes == [key]
+    assert all(result["state"] == "pending" for result in replies)
+    row = host._get(key)
+    assert row["state"] == "queued"
+    assert all(row[field] == frozen[field] for field in ("action_id", "request_digest", "request", "route", "workspace"))
+    assert "host_command_or_directory_unavailable" in (
+        host_config.parent / "logs" / "host_subprocess_failures.log"
+    ).read_text(encoding="utf-8")
+    starts = _fake_codex_start(monkeypatch)
+    host.work(key)
+    assert host.retry_unstarted(key)["state"] == "done"
+    assert host.handle(request)["native"]["session_id"] == "original"
+    assert len(starts) == 1 and wakes == [key]
+
+
+@pytest.mark.parametrize(("state", "code", "capture"), [
+    ("failed", "host_command_or_directory_unavailable", b""),
+    ("failed", "host_command_or_directory_unavailable", b'{"type":"thread.started","thread_id":"original"}\n'),
+    ("running", "host_command_or_directory_unavailable", None),
+    ("unknown", "host_command_or_directory_unavailable", None),
+    ("failed", "native_outcome_unconfirmed", None),
+])
+def test_explicit_prelaunch_retry_never_requeues_started_or_unproved_work(host_config, monkeypatch, state, code, capture):
+    from tools.feedback_loop import codex_cli
+
+    host, request, wakes = _legacy_codex_failure(host_config, monkeypatch, state=state, code=code)
+    key = request["action_id"]
+    path = host._native_path(key)
+    if capture is not None:
+        path.write_bytes(capture)
+    before = tuple(host._get(key))
+    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: pytest.fail("ineligible retry tried to resolve launcher"))
+    assert host.retry_unstarted(key)["state"] == state
+    assert tuple(host._get(key)) == before and wakes == []
+    assert (path.read_bytes() if path.exists() else None) == capture
+
+
+def test_explicit_prelaunch_retry_rejects_malformed_id_without_creating_state(host_config):
+    process = subprocess.run(
+        [*HOST, "--config", str(host_config), "retry-unstarted", "../bad-id"],
+        cwd=ROOT, capture_output=True, timeout=10, check=False,
+    )
+    assert process.returncode == 2 and b"invalid action ID" in process.stderr
+    assert not (host_config.parent / "actions.sqlite").exists()
+
+
+def test_explicit_prelaunch_retry_rechecks_capture_after_discovering_the_launcher(host_config, monkeypatch):
+    from tools.feedback_loop import codex_cli
+
+    host, request, wakes = _legacy_codex_failure(host_config, monkeypatch)
+    key = request["action_id"]
+    path = host._native_path(key)
+    before = tuple(host._get(key))
+
+    def launcher():
+        path.touch()
+        return Path(sys.executable)
+
+    monkeypatch.setattr(codex_cli, "resolve_codex", launcher)
+    assert host.retry_unstarted(key)["state"] == "failed"
+    assert tuple(host._get(key)) == before and wakes == [] and path.is_file()
+
+
+@pytest.mark.parametrize("changed", ["workspace", "argv", "digest"])
+def test_explicit_prelaunch_retry_preserves_frozen_request_and_current_route(host_config, monkeypatch, changed):
+    from tools.feedback_loop import codex_cli
+
+    host, request, wakes = _legacy_codex_failure(host_config, monkeypatch)
+    key = request["action_id"]
+    if changed == "workspace":
+        other = host_config.parent / "other"
+        other.mkdir()
+        host.owners["company-wiki"]["cwd"] = str(other)
+    elif changed == "argv":
+        host.owners["company-wiki"]["actions"]["triage"]["argv"].insert(2, "--model=new-default")
     else:
-        assert result["state"] == "failed" and result["code"] == "host_command_or_directory_unavailable"
+        with closing(host._connect()) as conn, conn:
+            conn.execute("UPDATE actions SET request_digest=? WHERE action_id=?", ("0" * 64, key))
+    before = tuple(host._get(key))
+    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: pytest.fail("retry crossed its original scope"))
+    assert host.retry_unstarted(key)["state"] == "failed"
+    assert tuple(host._get(key)) == before and wakes == []
 
 
 @pytest.mark.parametrize("mode", ["owner-json", "codex-jsonl"])

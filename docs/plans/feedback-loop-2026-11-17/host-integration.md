@@ -14,7 +14,9 @@ RF/Audit 已在独立真实宿主运行一条闭环。配置 `revenue-forecast.a
 
 本机 FF 的 `actions.report` 指向 FF 公开 `ff_job_feedback.py --reports-dir OWNER_DIR report`，`get-report ACTION_ID` 核原发现、版本和证据。自动对账优先使用 FF 发布的 `actions.reconcile`，由 FF 按原尝试和原连接配置处理。`owner-json` 由责任仓落原生完成收据，再由宿主登记；worker 丢回复时读回同一结果。各仓实际配置和限定范围见[分仓上线](f4-rollout.md)。
 
-外层 worker 退出时，尚未到原生命令的动作仍为 `queued`，恢复会唤醒同一 action ID。`owner-json` 的执行器在写启动回执前原子领取，`codex-jsonl` 在原生会话启动前使用同一工作区互斥。并发恢复可唤醒多个本地 worker，原生命令由一个领取者执行。启动器的明确失败留 `owner_launcher_failed`，成功领取会清掉旧诊断。已经领取但终态不明、缺回执或费用未知时查原作业。
+外层 worker 退出时，尚未到原生命令的动作仍为 `queued`，恢复唤醒同一 action ID。`owner-json` 的执行器在写启动回执前原子领取，`codex-jsonl` 在原生会话启动前使用同一工作区互斥。并发恢复时只有一个领取者执行。尚未领取且发现 Codex 不可用时，保留 `codex_executable_unavailable` 并等待原定时恢复。已经领取且终态不明、缺回执或费用未知时查原作业。
+
+旧版曾将明确未发现 Codex 的动作记为终态，可用 `python -B -m tools.feedback_loop.local_host --config SETTINGS retry-unstarted ACTION_ID` 恢复单一原动作。此命令只接受冻结请求及原运行配置一致、旧收据确认为启动不可用且原生捕获确实不存在的记录。配置改过、存在捕获或结果未知时保留原记录。原失败记在现有宿主诊断中，恢复仍使用同一个 action ID 和工作区领取。
 
 升级宿主代码时先结束旧外层启动器，避免旧 worker 先领取后误用新版 helper。保留现有 SQLite、原生回执和专用 sidecar，再用正常 `recover` 接续。历史 `running` 状态仍以原生结果核对。本次发布前只读核对本机反馈操作库有 12 条 `done`，排队和在运行的动作均为零。
 
