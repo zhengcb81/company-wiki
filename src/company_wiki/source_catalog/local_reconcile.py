@@ -569,14 +569,20 @@ def _facts_with_availability(catalog, original, identity, request, budget, **opt
     return facts, evidence
 
 
-def _discover_source_groups(catalog, identity, budget, request, *, historical=None, _progress=None):
+def _discover_source_groups(catalog, identity, budget, request, *, identity_cache_dir=None,
+                            historical=None, _progress=None):
     """Finite issuer-layout metadata enumeration, separate from raw verification."""
     from .adapter_dispatch import discover_issuer_paths
     changed = False
     unresolved = []
     progress = _progress or _PreparationProgress()
     excluded = progress.not_relevant_documents
-    names = {identity.canonical_name, identity.ticker, identity.security_id}
+    if identity is None:
+        names = {request.entity, request.security_id}
+        security_ids = (request.security_id, request.security_id)
+    else:
+        names = {identity.canonical_name, identity.ticker, identity.security_id}
+        security_ids = (identity.ticker, identity.security_id)
 
     def local_path(path, root, *, directory):
         budget.check()
@@ -595,7 +601,7 @@ def _discover_source_groups(catalog, identity, budget, request, *, historical=No
         if not root_is_reusable_for_filing(root, catalog.config):
             continue
         selected = discover_issuer_paths(
-            root, names=tuple(names), security_ids=(identity.ticker, identity.security_id),
+            root, names=tuple(names), security_ids=security_ids,
             is_local=lambda path, *, directory: local_path(path, root, directory=directory),
             metadata_reader=budget.metadata_reader(root.path),
             observe_group=budget.observe_group, observe_entry=budget.observe_entry,
@@ -647,18 +653,18 @@ def _discover_source_groups(catalog, identity, budget, request, *, historical=No
                 # Discovery consumes stored scope proof. The final selected
                 # version is opened once below; do not re-open every old PDF.
                 continue
-            if getattr(identity, "_discovery_only", False):
-                # Requested names may locate files; only their actual source
-                # owner can establish facts. No lookup is needed for an empty
-                # issuer directory, and an unknown original is not absence.
-                identity = scope.identity() or _identity(catalog, request, getattr(identity, "_identity_cache_dir", None))
-            def prove(original):
-                # Persist source scope rather than a transient request-specific
-                # "not relevant" result. The next bounded retry can then skip
-                # a proved old period without rereading the same originals.
-                return _facts_with_availability(catalog, original, identity, request, budget,
-                                                match_scope=False)
             try:
+                # Requested names may locate files. An identity obtained from
+                # one original can qualify only that original, even when the
+                # next original is in the same issuer directory.
+                source_identity = identity or scope.identity() or _identity(catalog, request, identity_cache_dir)
+
+                def prove(original):
+                    # Persist original scope so bounded retries can skip a
+                    # proved old period without rereading the same original.
+                    return _facts_with_availability(catalog, original, source_identity, request, budget,
+                                                    match_scope=False)
+
                 operation = restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id, budget=budget),
                                                    budget=budget, fact_replay=prove)
                 if operation["status"] == "not_relevant":
@@ -715,11 +721,9 @@ def _prepare_local_source(
             try:
                 identity = _identity(catalog, request, identity_cache_dir)
             except (ValueError, SourceReadError):
-                from types import SimpleNamespace
-                identity = SimpleNamespace(canonical_name=request.entity, market=request.market,
-                    security_id=request.security_id, ticker=request.security_id, _discovery_only=True,
-                    _identity_cache_dir=identity_cache_dir)
+                pass  # Search by request hints when local issuer resolution is unavailable.
         _discover_source_groups(catalog, identity, budget, request,
+                                identity_cache_dir=identity_cache_dir,
                                 historical=historical, _progress=progress)
         return _prepare_local_source(catalog, request, identity_cache_dir=identity_cache_dir,
             limits=limits, _discovery_done=True, _budget=budget, _progress=progress)

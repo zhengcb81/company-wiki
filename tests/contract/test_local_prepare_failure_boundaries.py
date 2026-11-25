@@ -119,3 +119,50 @@ def test_real_discovery_completed_write_survives_later_unknown_failure(tmp_path,
             assert (folder / name).read_bytes() == data
     finally:
         close(cat)
+
+
+def test_latest_discovery_keeps_each_originals_issuer_proof_local(tmp_path, monkeypatch):
+    from dataclasses import replace
+    from datetime import datetime, timezone
+    import hashlib
+
+    from company_wiki.source_catalog.canonical_scope import SourceScope
+    from company_wiki.source_catalog.source_reader import SourceReadError
+
+    cat = lake(tmp_path)
+    try:
+        folder = cat.config.roots[0].path / "Acme"
+        folder.mkdir()
+        candidates = {
+            "a-peer.htm": ("OTHER", "67890", html(cik="67890")),
+            "b-requested.htm": ("ACME", "12345", html()),
+        }
+        source_scopes = {}
+        for name, (ticker, cik, data) in candidates.items():
+            (folder / name).write_bytes(data)
+            source_scopes[hashlib.sha256(data).hexdigest()] = SourceScope(
+                {"entity": "Acme", "market": "US", "security_id": ticker,
+                 "document_kind": "annual_report"},
+                {"entity": {"primary_cik": cik, "issuer_record_id": cik}},
+                "source-facts-partial",
+            )
+
+        def missing_search_identity(*args):
+            raise SourceReadError("blocked", "verified_issuer_unavailable")
+
+        # Model already-held per-source issuer facts. Keep original registration,
+        # DEI parsing, assertion writing and the final reader in production code.
+        monkeypatch.setattr(local_reconcile, "_identity", missing_search_identity)
+        monkeypatch.setattr(local_reconcile, "qualified_source_scope",
+                            lambda catalog, ref, document, **options: source_scopes[ref.content_sha256])
+        requested = replace(request(), mode="latest_as_of", fiscal_year=None, fiscal_period=None,
+                            as_of_date=datetime.now(timezone.utc).date().isoformat())
+        result = prepare_local_source(cat, requested)
+
+        assert result["status"] == "ready", result
+        assert result["source_ref"]["content_sha256"] == hashlib.sha256(candidates["b-requested.htm"][2]).hexdigest()
+        assert result["download_events"] == 0
+        for name, (_, _, data) in candidates.items():
+            assert (folder / name).read_bytes() == data
+    finally:
+        close(cat)

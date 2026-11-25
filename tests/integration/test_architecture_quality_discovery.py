@@ -1,16 +1,13 @@
 """Real bounded adapter discovery registers raw and serves a public SourceRef."""
 import hashlib
 import json
-from types import SimpleNamespace
-
-import pytest
 
 from company_wiki.source_catalog.models import CatalogConfig, RootSpec
 from company_wiki.source_catalog.service import SourceCatalog
-from company_wiki.source_catalog.local_inventory import LocalPrepareLimits, LocalReadBudget
-from company_wiki.source_catalog.local_reconcile import _discover_source_groups
+from company_wiki.source_catalog.local_inventory import LocalPrepareLimits
+from company_wiki.source_catalog.local_reconcile import prepare_local_source
 from company_wiki.source_catalog.resolver import SourceRequest
-from company_wiki.source_catalog.source_reader import SourceReadError, SourceVersionReader
+from company_wiki.source_catalog.source_reader import SourceVersionReader
 
 
 def _raw(root):
@@ -31,8 +28,10 @@ def _raw(root):
     return path, data
 
 
-def _identity():
-    return SimpleNamespace(canonical_name="示例 公司", ticker="600000", security_id="600000")
+def _request():
+    return SourceRequest(entity="示例 公司", market="CN", security_id="600000",
+                         document_kind="investor_relations", as_of_date="2026-10-13",
+                         mode="latest_as_of")
 
 
 def test_same_company_layout_in_two_configured_directory_roots(tmp_path):
@@ -47,17 +46,19 @@ def test_same_company_layout_in_two_configured_directory_roots(tmp_path):
     originals = [_raw(root.path) for root in roots]
     before = {path: path.read_bytes() for root in roots for path in root.path.rglob("*") if path.is_file()}
     try:
-        assert _discover_source_groups(cat, _identity(), LocalReadBudget(LocalPrepareLimits()))
-        request = SourceRequest(entity="示例 公司", market="CN", security_id="600000",
-                                document_kind="investor_relations", as_of_date="2026-10-13")
+        prepared = prepare_local_source(cat, _request())
+        assert prepared["download_events"] == 0
         reader = SourceVersionReader(cat)
-        result = reader.query_local(request)
+        result = reader.query_local(_request())
         assert result.status == "found"
         ref = result.matches[0]
         assert reader.open_version(ref, purpose="source_export").data == originals[0][1]
         rows = cat.reader.exact_source_locations(ref.document_id, ref.source_id)
         assert {row["root_id"] for row in rows} == {root.root_id for root in roots}
-        assert not _discover_source_groups(cat, _identity(), LocalReadBudget(LocalPrepareLimits()))
+        again = prepare_local_source(cat, _request())
+        assert (again["status"], again["reason"], again["source_ref"]) == (
+            prepared["status"], prepared["reason"], prepared["source_ref"],
+        )
         assert {path: path.read_bytes() for path in before} == before
     finally:
         cat.close()
@@ -72,9 +73,8 @@ def test_adapter_discovery_obeys_existing_aggregate_entry_budget(tmp_path):
     original, _ = _raw(root.path)
     before = original.read_bytes()
     try:
-        with pytest.raises(SourceReadError, match="local_discovery_entry_limit"):
-            _discover_source_groups(cat, _identity(), LocalReadBudget(
-                LocalPrepareLimits(max_discovery_entries=1)))
+        result = prepare_local_source(cat, _request(), limits=LocalPrepareLimits(max_discovery_entries=1))
+        assert (result["reason"], result["blocks_download"]) == ("local_discovery_entry_limit", True)
         assert original.read_bytes() == before
         assert not list(root.path.rglob("*.tmp"))
     finally:
@@ -103,10 +103,10 @@ def test_real_scanner_and_discovery_share_first_route_owner_for_sidecar_group(tm
         # Do not scan: initialize empty catalog to prove local preparation uses
         # the same route owner and the same caller-owned discovery budget.
         _ = cat.store
-        assert _discover_source_groups(cat, _identity(), LocalReadBudget(LocalPrepareLimits()))
+        prepared = prepare_local_source(cat, _request())
+        assert prepared["download_events"] == 0
         reader = SourceVersionReader(cat)
-        result = reader.query_local(SourceRequest(entity="示例 公司", market="CN",
-            security_id="600000", document_kind="investor_relations", as_of_date="2026-10-13"))
+        result = reader.query_local(_request())
         assert result.status == "found"
         assert reader.open_version(result.matches[0], purpose="source_export").data == data
         assert original.read_bytes() == data
@@ -126,12 +126,12 @@ def test_distinct_layout_discovery_shares_one_aggregate_group_budget(tmp_path):
     (filing / "original.htm").write_bytes(b"<html>actual filing</html>")
     (filing / "meta.json").write_text(json.dumps({"primary_document": "original.htm"}), encoding="utf-8")
     cat = SourceCatalog(CatalogConfig(tmp_path, tmp_path / "catalog", (root,)))
-    budget = LocalReadBudget(LocalPrepareLimits(max_discovery_groups=1))
     try:
         _ = cat.store
-        with pytest.raises(SourceReadError, match="local_source_group_limit"):
-            _discover_source_groups(cat, _identity(), budget)
-        assert budget.discovery_groups == 2  # second layout does not get a new allowance
+        result = prepare_local_source(cat, _request(), limits=LocalPrepareLimits(max_discovery_groups=1))
+        assert (result["reason"], result["blocks_download"]) == ("local_source_group_limit", True)
+        usage = next(item for item in result["operations"] if item["operation"] == "local_read_budget")
+        assert usage["consumed"]["discovery_groups"] == 2  # layouts share the same allowance
         assert original.read_bytes() == data
         assert (filing / "original.htm").read_bytes() == b"<html>actual filing</html>"
     finally:
