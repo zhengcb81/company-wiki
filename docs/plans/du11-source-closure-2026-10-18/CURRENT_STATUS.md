@@ -8,6 +8,8 @@
 
 S2 计划节点已按 owner 验收，Dashboard M0、IR 与 MC 的最后交付均已提交推送。S3 从 CWP 配置入口、FF 跨仓验收、RF 私有依赖和 StockQA 本仓边界并行推进。S4 随每项修复固化行为回归。发布版本和独审分别见 [S2 收尾台账](../feedback-loop-2026-11-17/s2-closeout-20261125.md) 与 [S3/S4 分仓台账](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md)。
 
+执行顺序为先完成 S3/S4 实施与验收，再接续 F4 未完成的宿主实际采用、历史原作业冷读及无人值守复验，最后继续父计划待办。[F4 接续顺序](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)
+
 - **S1 各仓发布与补修记录**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
 - **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
 - **架构独立性与回归（M4，实施中）** [模块边界计划](../module-boundaries-2026-11-11/task_plan.md)

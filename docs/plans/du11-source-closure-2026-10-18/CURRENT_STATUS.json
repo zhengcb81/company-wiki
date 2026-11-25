@@ -9,7 +9,8 @@
     "s2_receipt": "../feedback-loop-2026-11-17/s2-closeout-20261125.md",
     "s3_status": "implementation_in_progress",
     "s4_status": "paired_behavior_regressions_in_progress",
-    "owner_ledger": "../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md"
+    "owner_ledger": "../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md",
+    "resume_f4_after_s3_s4_acceptance": "../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续"
   },
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
