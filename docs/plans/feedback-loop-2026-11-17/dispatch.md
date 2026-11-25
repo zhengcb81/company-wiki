@@ -11,7 +11,7 @@ F4 的 12 个实际接线、正式版本及仍待补的业务证据统一登记�
 | [S2-IR-DEEPSEEK-DIAGNOSTICS](owner-cards/S2-IR-DEEPSEEK-DIAGNOSTICS.md) | `industry-research` | DeepSeek 失败诊断、本仓测试和 PWF |
 | [S2-MC-MIMO-DIAGNOSTICS](owner-cards/S2-MC-MIMO-DIAGNOSTICS.md) | `MeetingConverter` | MiMo 重试诊断、本仓测试和 PWF |
 
-IR 与 MC 已由用户分发。分仓发布与原线重叠范围见[接续台账](s2-owner-continuation-20261124.md)。ET 和 Audit 见[首站台账](s2-pilot-20261124.md)。各卡依据[S2 共同接口](s2-unified-logging-plan.md)验收。
+IR 与 MC 已由用户分发并正式交付，通过独立复验后推送各自主线。[收尾台账](s2-closeout-20261125.md) · [其他分仓接续](s2-owner-continuation-20261124.md) · [ET 与 Audit 首站记录](s2-pilot-20261124.md)
 
 ## F4 日志复原独立施工
 

@@ -1,6 +1,6 @@
 # S2 统一日志与故障复原计划
 
-**当前状态：收尾中。** CWP、ET、FF、SID、RF、IQS、StockQA 和 Dashboard 受验节点已推送。Audit 和 StockWiki 已验收并提交本地主线。IR、MC 等正式交付。历史核查见[首站台账](s2-pilot-20261124.md)，发布证据见[分仓接续](s2-owner-continuation-20261124.md)与[最后三区验收](s2-closeout-20261125.md)，S1 发布线见[分仓发布台账](s1-p0-blackhole-plan.md)。
+**当前状态：计划内 S2 验收完成。** CWP、ET、FF、SID、RF、IQS、StockQA、Dashboard、IR、MC 的受验节点已推送，Audit 和 StockWiki 已提交本地主线。历史核查见[首站台账](s2-pilot-20261124.md)，发布证据见[分仓接续](s2-owner-continuation-20261124.md)与[最后三区验收](s2-closeout-20261125.md)，S1 发布线见[分仓发布台账](s1-p0-blackhole-plan.md)。
 
 ## 共同接口与验收方式
 
@@ -18,7 +18,7 @@
 | 历史日志只读核查 | ROOT 并发只读复核 CWP、ET | 只登记文件、风险类别和范围。缺席、归属不明及无法判定的部分显式列出。 |
 | CWP 首站 | ROOT | 用真实公开原文读取命令复现配置故障，检查无原文落盘，同一 F4 实例冷读两次仍只有一个观察动作。任何诊断变化均保持正常读取和原错误契约。 |
 | ET、Audit | 各仓独立 agent，ROOT 统筹 | 已独审。ET 记录引导依赖及清理失败，机器收据保持兼容。Audit 记录反馈投递全失，能冷读原角色故障。发布细节见[复验台账](s2-pilot-20261124.md)。 |
-| [IR](owner-cards/S2-IR-DEEPSEEK-DIAGNOSTICS.md)、[MC](owner-cards/S2-MC-MIMO-DIAGNOSTICS.md) | 外部 harness | 已分发。每仓一种真实故障、合法反例、脱敏落盘、F4 冷读及最终版本独审。 |
+| [IR](owner-cards/S2-IR-DEEPSEEK-DIAGNOSTICS.md)、[MC](owner-cards/S2-MC-MIMO-DIAGNOSTICS.md) | 外部 harness 实施，ROOT 复验 | 正式版本独审后推送。真实入口、合法反例、脱敏落盘与 F4 冷读均通过。 |
 | CWP、FF、SID、RF | ROOT 与三个分仓 agent | 原摘要激活、定时子进程失败、文件日志启动、采集子进程机器收据四个节点独审并推送。 |
 | StockWiki、StockQA、IQS | 分仓 agent | 本仓账本、已付恢复和 provider 错误三个节点已独审。StockWiki 本地提交，StockQA 和 IQS 已推送。 |
 | Dashboard | M0 隔离实施，ROOT 串接 | 独审并推送。共享请求与错误视图保留关联号，原 owner CLI 只读冷查。 |
