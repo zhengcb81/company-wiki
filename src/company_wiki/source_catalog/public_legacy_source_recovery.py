@@ -23,7 +23,7 @@ from .local_inventory import (
     verify_registered_original,
 )
 from .public_legacy_source_link import legacy_source_key
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .source_location import relative_segments
 from .source_reader import SourceReadError, SourceRef
 

@@ -24,7 +24,7 @@ from typing import Any
 
 from .acquisition_contracts import DownloadCandidate, DownloadReceipt
 from .canonical_writer import CanonicalSourceWriter
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 
 
 class PortfolioPromotionError(RuntimeError):

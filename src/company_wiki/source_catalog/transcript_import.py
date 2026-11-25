@@ -13,7 +13,7 @@ from .canonical_writer import (
     CanonicalImportResult,
     CanonicalSourceWriter,
 )
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .transcript_material import (
     TranscriptMaterial,
     TranscriptMaterialError,

@@ -10,7 +10,7 @@ from typing import Any
 from urllib.parse import parse_qs, urlsplit
 
 from .acquisition_contracts import DownloadCandidate
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .transcript_tool_errors import TranscriptToolContractError
 
 _FMP_HOST = "financialmodelingprep.com"

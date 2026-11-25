@@ -14,7 +14,7 @@ from typing import NoReturn, Sequence
 
 from .config import CatalogConfigError, load_catalog_config
 from .reader import CatalogReaderUnavailable
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .service import SourceCatalog
 from .source_reader import SOURCE_REF_SCHEMA_VERSION, SourceReadError, SourceVersionReader
 

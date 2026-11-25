@@ -21,7 +21,7 @@ from company_wiki.source_contract import source_id_for_sha256
 from .acquisition_contracts import DownloadCandidate, DownloadReceipt
 from .download_budget import AcquisitionBudget
 from .lock import CatalogOperationLock
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .registration_scope import SourceRegistrationScope, register_catalog_sources
 from .service import SourceCatalog
 from .store import canonical_json

@@ -12,7 +12,7 @@ from datetime import date, datetime
 from typing import Any
 
 from .acquisition_contracts import DownloadCandidate
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .transcript_fmp_contract import (
     validate_fmp_original,
     validate_fmp_period,

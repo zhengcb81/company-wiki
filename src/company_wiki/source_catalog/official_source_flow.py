@@ -24,7 +24,7 @@ from .acquisition_journal import AcquisitionJournal, record_acquisition_observat
 from .lock import acquisition_mutex
 from .store import canonical_json
 from .document_kinds import SOURCE_FACT_KINDS
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .metadata_observation import observe_metadata
 from .source_reader import SourceVersionReader
 

@@ -17,7 +17,7 @@ import time
 from typing import Any, Sequence, cast
 
 from .acquisition_contracts import DiscoveryPage, DownloadCandidate, DownloadReceipt
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .store import canonical_json
 
 

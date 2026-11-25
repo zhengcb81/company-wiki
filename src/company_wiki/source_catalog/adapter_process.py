@@ -16,7 +16,7 @@ from company_wiki.bounded_process import TransportError, run_json_process
 from .acquisition_contracts import DiscoveryPage, DownloadCandidate, DownloadReceipt
 from .download_budget import AcquisitionBudget
 from .acquisition_failure import validated_usage
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .store import canonical_json
 
 

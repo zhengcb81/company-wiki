@@ -13,7 +13,7 @@ from .acquisition_journal import AcquisitionAttempt, AcquisitionJournal, verifie
 from .assertion_service import (
     evidence_payload, sec_original, validate_source_facts, get_verified_assertion,
 )
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .store import canonical_json
 
 

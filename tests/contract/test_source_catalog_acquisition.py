@@ -5,8 +5,30 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
+
+
+def test_adapter_and_writer_can_consume_a_request_without_the_resolver(tmp_path):
+    program = """
+import sys
+from company_wiki.source_catalog import SourceRequest, SourceResolutionError
+from company_wiki.source_catalog.adapter_process import JsonCommandAdapter
+from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter
+
+assert 'company_wiki.source_catalog.resolver' not in sys.modules
+request = SourceRequest('Acme', 'annual_report', '2026-07-18', market='hk')
+assert request.market == 'HK' and request.to_dict()['allow_download'] is False
+from company_wiki.source_catalog import resolver
+assert resolver.SourceRequest is SourceRequest
+assert resolver.SourceResolutionError is SourceResolutionError
+assert JsonCommandAdapter and CanonicalSourceWriter
+"""
+    process = subprocess.run([sys.executable, "-B", "-c", program], cwd=tmp_path,
+                             capture_output=True, text=True, timeout=20)
+    assert process.returncode == 0, process.stderr
 
 
 class _ExplodingAdapter:

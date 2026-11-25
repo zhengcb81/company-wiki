@@ -32,11 +32,13 @@ if TYPE_CHECKING:
     from .resolver import (
         ResolutionResult,
         ResolutionStatus,
-        SOURCE_RESOLVER_SCHEMA_VERSION,
         SourceHandle,
+        SourceResolver,
+    )
+    from .source_request import (
+        SOURCE_RESOLVER_SCHEMA_VERSION,
         SourceRequest,
         SourceResolutionError,
-        SourceResolver,
     )
     from .source_reader import (
         SourceQueryResult,
@@ -164,11 +166,13 @@ _EXPORTS_BY_MODULE = {
     ".resolver": (
         "ResolutionResult",
         "ResolutionStatus",
-        "SOURCE_RESOLVER_SCHEMA_VERSION",
         "SourceHandle",
+        "SourceResolver",
+    ),
+    ".source_request": (
+        "SOURCE_RESOLVER_SCHEMA_VERSION",
         "SourceRequest",
         "SourceResolutionError",
-        "SourceResolver",
     ),
     ".source_reader": (
         "SourceQueryResult",

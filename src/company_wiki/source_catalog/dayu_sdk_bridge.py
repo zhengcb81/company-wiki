@@ -8,7 +8,7 @@ import re
 from typing import Any, Callable
 
 from .dayu_fiscal_metadata import FiscalMetadataError, hk_title_year, sec_period
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 
 
 class DayuBridgeError(ValueError):

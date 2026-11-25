@@ -27,7 +27,7 @@ from typing import Any, BinaryIO
 from .acquisition_contracts import DownloadCandidate
 from .canonical_writer import CanonicalSourceWriter
 from .config import load_catalog_config
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .service import SourceCatalog
 from .transcript_import import (
     MAX_TOOL_RESULT_BYTES,

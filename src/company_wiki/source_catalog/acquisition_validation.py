@@ -12,7 +12,7 @@ from .security_identity import normalize_identity_text
 
 if TYPE_CHECKING:
     from .acquisition_contracts import DownloadCandidate, DownloadReceipt
-    from .resolver import SourceRequest
+    from .source_request import SourceRequest
 
 
 def candidate_scope_problem(

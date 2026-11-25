@@ -8,7 +8,7 @@ import sys
 from .config import load_catalog_config
 from .local_inventory import LocalPrepareLimits
 from .local_reconcile import prepare_local_source
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 from .service import SourceCatalog
 from .source_group_scope import SourceRegistrationScope
 from .source_reader import SourceReadError

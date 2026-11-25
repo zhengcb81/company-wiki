@@ -35,7 +35,7 @@ from .bounded_http import (
 from .dayu_fiscal_metadata import verify_sec_primary
 from .dayu_sdk_bridge import DayuBridgeError, discover_hk, discover_sec
 from .download_budget import AcquisitionBudget
-from .resolver import SourceRequest
+from .source_request import SourceRequest
 
 
 def _budget(payload: dict[str, Any]) -> AcquisitionBudget:
