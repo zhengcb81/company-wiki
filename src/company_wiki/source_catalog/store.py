@@ -1185,11 +1185,11 @@ class CatalogStore:
         if self._coalesced_connection is not None:
             raise RuntimeError("coalesced transaction scope is already active")
         connection = self._connect()
-        self._coalesced_connection = connection
-        self._coalesced_operations = 0
-        self._coalesced_max_operations = max_operations
-        connection.execute("BEGIN IMMEDIATE")
         try:
+            connection.execute("BEGIN IMMEDIATE")
+            self._coalesced_connection = connection
+            self._coalesced_operations = 0
+            self._coalesced_max_operations = max_operations
             from .identity_candidates import ensure_identity_projection, refresh_identity_projection
             ensure_identity_projection(connection)
             yield

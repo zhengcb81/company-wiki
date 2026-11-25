@@ -1,8 +1,13 @@
 """Canonical import must use current registered storage, not stale paths."""
+from contextlib import ExitStack, closing
 from dataclasses import replace
 from pathlib import Path
+import sqlite3
+
+import pytest
 
 from company_wiki.source_catalog import CanonicalImportStatus, CanonicalSourceWriter, SourceCatalog
+from company_wiki.source_catalog.store import CatalogStore
 from test_source_catalog_canonical_writer import _catalog, _staged_contract
 
 
@@ -101,3 +106,33 @@ def test_moved_location_still_must_match_actual_sha(tmp_path):
         assert original.read_bytes() == b"corrupt bytes in isolated fixture"
     finally:
         catalog.close()
+
+
+def test_failed_batch_begin_releases_connection_for_retry(tmp_path, monkeypatch):
+    database = tmp_path / "catalog.sqlite3"
+    store = CatalogStore(database)
+    open_connection = store._connect
+    with ExitStack() as cleanup:
+        opened = []
+
+        def open_without_wait():
+            connection = cleanup.enter_context(closing(open_connection()))
+            opened.append(connection)
+            connection.execute("PRAGMA busy_timeout=0")
+            return connection
+
+        monkeypatch.setattr(store, "_connect", open_without_wait)
+        with closing(sqlite3.connect(database)) as competing_writer:
+            competing_writer.execute("BEGIN IMMEDIATE")
+            with pytest.raises(sqlite3.OperationalError, match="locked"):
+                with store.coalesced_transactions():
+                    pytest.fail("a competing writer owns the write lock")
+
+        with store.coalesced_transactions(), store.transaction() as writer:
+            writer.execute(
+                "INSERT INTO catalog_meta(key, value) VALUES ('batch-recovery', 'committed')"
+            )
+        row = store.fetchone("SELECT value FROM catalog_meta WHERE key='batch-recovery'")
+        assert row is not None and row["value"] == "committed"
+        with pytest.raises(sqlite3.ProgrammingError, match="closed"):
+            opened[0].execute("SELECT 1")

@@ -114,7 +114,18 @@ def _catalog(tmp_path: Path, *, with_source: bool):
     return catalog
 
 
-def test_existing_source_short_circuits_discovery_and_fetch(tmp_path):
+@pytest.fixture
+def catalog_factory(tmp_path, request):
+    """Own the reusable reader until test teardown, including failing cases."""
+    def create(*, with_source):
+        catalog = _catalog(tmp_path, with_source=with_source)
+        request.addfinalizer(catalog.close)
+        return catalog
+
+    return create
+
+
+def test_existing_source_short_circuits_discovery_and_fetch(tmp_path, catalog_factory):
     from company_wiki.source_catalog import (
         AcquisitionCoordinator,
         AcquisitionStatus,
@@ -122,7 +133,7 @@ def test_existing_source_short_circuits_discovery_and_fetch(tmp_path):
         SourceRequest,
     )
 
-    catalog = _catalog(tmp_path, with_source=True)
+    catalog = catalog_factory(with_source=True)
     adapter = _ExplodingAdapter()
     coordinator = AcquisitionCoordinator(
         catalog=catalog,
@@ -149,7 +160,7 @@ def test_existing_source_short_circuits_discovery_and_fetch(tmp_path):
     assert not (tmp_path / "staging").exists()
 
 
-def test_missing_hk_source_routes_to_adapter_and_only_writes_request_staging(tmp_path):
+def test_missing_hk_source_routes_to_adapter_and_only_writes_request_staging(tmp_path, catalog_factory):
     from company_wiki.source_catalog import (
         AcquisitionCoordinator,
         AcquisitionStatus,
@@ -157,7 +168,7 @@ def test_missing_hk_source_routes_to_adapter_and_only_writes_request_staging(tmp
         SourceRequest,
     )
 
-    catalog = _catalog(tmp_path, with_source=False)
+    catalog = catalog_factory(with_source=False)
     adapter = _FakeAdapter()
     staging_root = tmp_path / "staging"
     coordinator = AcquisitionCoordinator(
@@ -190,7 +201,7 @@ def test_missing_hk_source_routes_to_adapter_and_only_writes_request_staging(tmp
     assert not list(catalog.config.project_root.rglob("*.pdf"))
 
 
-def test_bounded_adapter_consumes_one_budget_for_discovery_and_fetch(tmp_path):
+def test_bounded_adapter_consumes_one_budget_for_discovery_and_fetch(tmp_path, catalog_factory):
     from decimal import Decimal
     import time
 
@@ -214,7 +225,7 @@ def test_bounded_adapter_consumes_one_budget_for_discovery_and_fetch(tmp_path):
             budget.consume_response_bytes(len(payload))
             return self.fetch(candidate, staging_dir)
 
-    catalog = _catalog(tmp_path, with_source=False)
+    catalog = catalog_factory(with_source=False)
     adapter = _BudgetedFakeAdapter()
     coordinator = AcquisitionCoordinator(
         catalog=catalog,
@@ -243,7 +254,7 @@ def test_bounded_adapter_consumes_one_budget_for_discovery_and_fetch(tmp_path):
     assert budget.response_bytes_used == 8 + len(b"%PDF-1.7\nsource bytes")
 
 
-def test_bounded_receipt_must_be_charged_against_remaining_budget(tmp_path):
+def test_bounded_receipt_must_be_charged_against_remaining_budget(tmp_path, catalog_factory):
     from decimal import Decimal
     import time
 
@@ -267,7 +278,7 @@ def test_bounded_receipt_must_be_charged_against_remaining_budget(tmp_path):
             # to charge the response body it read from its provider.
             return self.fetch(candidate, staging_dir)
 
-    catalog = _catalog(tmp_path, with_source=False)
+    catalog = catalog_factory(with_source=False)
     adapter = _UnderreportingAdapter()
     coordinator = AcquisitionCoordinator(
         catalog=catalog,
@@ -294,7 +305,7 @@ def test_bounded_receipt_must_be_charged_against_remaining_budget(tmp_path):
         )
 
 
-def test_unbounded_json_command_adapter_is_rejected_before_process_launch(tmp_path):
+def test_unbounded_json_command_adapter_is_rejected_before_process_launch(tmp_path, catalog_factory):
     from decimal import Decimal
     import sys
     import time
@@ -322,7 +333,7 @@ def test_unbounded_json_command_adapter_is_rejected_before_process_launch(tmp_pa
         project_root=tmp_path,
     )
     coordinator = AcquisitionCoordinator(
-        catalog=_catalog(tmp_path, with_source=False),
+        catalog=catalog_factory(with_source=False),
         adapters=AdapterRegistry(
             cn=adapter, hk=_ExplodingAdapter(), us=_ExplodingAdapter()
         ),
@@ -350,7 +361,7 @@ def test_unbounded_json_command_adapter_is_rejected_before_process_launch(tmp_pa
     assert not marker.exists(), "unsupported CN adapter launched external work"
 
 
-def test_adapter_receipt_outside_allocated_staging_fails_closed(tmp_path):
+def test_adapter_receipt_outside_allocated_staging_fails_closed(tmp_path, catalog_factory):
     from company_wiki.source_catalog import (
         AcquisitionCoordinator,
         AdapterRegistry,
@@ -358,7 +369,7 @@ def test_adapter_receipt_outside_allocated_staging_fails_closed(tmp_path):
         SourceRequest,
     )
 
-    catalog = _catalog(tmp_path, with_source=False)
+    catalog = catalog_factory(with_source=False)
     outside = tmp_path / "outside" / "escaped.pdf"
     coordinator = AcquisitionCoordinator(
         catalog=catalog,
@@ -383,7 +394,7 @@ def test_adapter_receipt_outside_allocated_staging_fails_closed(tmp_path):
         )
 
 
-def test_placeholder_with_missing_identity_metadata_can_reach_adapter(tmp_path):
+def test_placeholder_with_missing_identity_metadata_can_reach_adapter(tmp_path, request):
     """A document with missing identity metadata (no assertion, no canonical
     file) resolves MISSING, so an authorized download reaches the adapter
     instead of being blocked as identity_conflict_no_download (Phase 15.3)."""
@@ -424,6 +435,7 @@ def test_placeholder_with_missing_identity_metadata_can_reach_adapter(tmp_path):
             roots=(RootSpec("dayu", portfolio, "dayu_portfolio", priority=20),),
         )
     )
+    request.addfinalizer(catalog.close)
     catalog.scan()
     adapter = _FakeAdapter()
     coordinator = AcquisitionCoordinator(
@@ -465,7 +477,7 @@ def test_market_router_is_explicit_and_rejects_unknown_market():
         registry.for_market("GB")
 
 
-def test_e2e_f01_html_disguised_as_pdf_is_quarantined(tmp_path):
+def test_e2e_f01_html_disguised_as_pdf_is_quarantined(tmp_path, catalog_factory):
     """E2E-F01: an adapter returning HTML bytes claimed as a PDF must be
     rejected (no PDF magic) — never a capture-ready handle."""
     import hashlib
@@ -516,7 +528,7 @@ def test_e2e_f01_html_disguised_as_pdf_is_quarantined(tmp_path):
                 adapter_version=self.version,
             )
 
-    catalog = _catalog(tmp_path, with_source=False)
+    catalog = catalog_factory(with_source=False)
     coordinator = AcquisitionCoordinator(
         catalog=catalog,
         adapters=AdapterRegistry(cn=_HtmlAdapter(), hk=_HtmlAdapter(), us=_HtmlAdapter()),
@@ -535,7 +547,7 @@ def test_e2e_f01_html_disguised_as_pdf_is_quarantined(tmp_path):
         assert result.status is not AcquisitionStatus.STAGED, result
 
 
-def test_e2e_f02_same_accession_second_request_reuses(tmp_path):
+def test_e2e_f02_same_accession_second_request_reuses(tmp_path, catalog_factory):
     """E2E-F02: two sequential ensure() calls for the same accession — the
     first downloads once (IMPORTED), the second reuses the catalog entry
     (fetch=0). Sequential dedup under the single-threaded architecture."""
@@ -548,7 +560,7 @@ def test_e2e_f02_same_accession_second_request_reuses(tmp_path):
         SourceRequest,
     )
 
-    catalog = _catalog(tmp_path, with_source=False)
+    catalog = catalog_factory(with_source=False)
     adapter = _FakeAdapter()
     staging_root = tmp_path / "staging"
     coordinator = AcquisitionCoordinator(
@@ -576,7 +588,7 @@ def test_e2e_f02_same_accession_second_request_reuses(tmp_path):
     assert adapter.fetch_calls == 1, "second request must not fetch again"
 
 
-def test_source_acquisition_service_passes_budget_to_provider(tmp_path):
+def test_source_acquisition_service_passes_budget_to_provider(tmp_path, catalog_factory):
     from decimal import Decimal
     import time
 
@@ -602,7 +614,7 @@ def test_source_acquisition_service_passes_budget_to_provider(tmp_path):
             budget.consume_response_bytes(len(payload))
             return self.fetch(candidate, staging_dir)
 
-    catalog = _catalog(tmp_path, with_source=False)
+    catalog = catalog_factory(with_source=False)
     adapter = _BudgetedFakeAdapter()
     staging_root = tmp_path / "staging"
     journal_dir = tmp_path / "journal"

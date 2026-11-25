@@ -21,6 +21,18 @@ import logging
 
 from .model_config import MODEL_CONFIG_SCHEMA, repository_models_path
 
+__all__ = [
+    "Config",
+    "DownloaderConfig",
+    "LLMConfig",
+    "LLMFallbackConfig",
+    "PathsConfig",
+    "ScheduleConfig",
+    "SearchConfig",
+    "get_config",
+    "load_config",
+]
+
 WIKI_ROOT = repository_models_path().parents[1]
 
 logger = logging.getLogger(__name__)

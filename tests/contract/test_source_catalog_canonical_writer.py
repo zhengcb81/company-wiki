@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+from contextlib import closing
+
+import pytest
 
 
 class _SingleCnAdapter:
@@ -85,6 +88,12 @@ def _catalog(tmp_path: Path):
     return catalog
 
 
+@pytest.fixture
+def catalog(tmp_path):
+    with closing(_catalog(tmp_path)) as opened:
+        yield opened
+
+
 def _staged_contract(tmp_path: Path):
     from company_wiki.source_catalog import DownloadCandidate, DownloadReceipt, SourceRequest
 
@@ -135,7 +144,7 @@ def _staged_contract(tmp_path: Path):
     return request, candidate, receipt, staging
 
 
-def test_writer_atomically_imports_with_provenance_and_resolver_reuses_exact(tmp_path):
+def test_writer_atomically_imports_with_provenance_and_resolver_reuses_exact(tmp_path, catalog):
     from company_wiki.source_catalog import (
         CanonicalImportStatus,
         CanonicalSourceWriter,
@@ -143,7 +152,6 @@ def test_writer_atomically_imports_with_provenance_and_resolver_reuses_exact(tmp
         SourceResolver,
     )
 
-    catalog = _catalog(tmp_path)
     request, candidate, receipt, staged = _staged_contract(tmp_path)
 
     imported = CanonicalSourceWriter(catalog).import_staged(request, candidate, receipt)
@@ -177,11 +185,10 @@ def test_writer_atomically_imports_with_provenance_and_resolver_reuses_exact(tmp
     assert resolved.matches[0].https_url == candidate.source_url
 
 
-def test_writer_saves_future_publication_without_claiming_historical_reuse(tmp_path):
+def test_writer_saves_future_publication_without_claiming_historical_reuse(tmp_path, catalog):
     from dataclasses import replace
     from company_wiki.source_catalog import CanonicalSourceWriter, ResolutionStatus
 
-    catalog = _catalog(tmp_path)
     try:
         request, candidate, receipt, staged = _staged_contract(tmp_path)
         candidate = replace(candidate, filing_date="2027-03-20")
@@ -198,10 +205,9 @@ def test_writer_saves_future_publication_without_claiming_historical_reuse(tmp_p
         catalog.close()
 
 
-def test_writer_public_original_read_returns_verified_bytes_without_a_path(tmp_path):
+def test_writer_public_original_read_returns_verified_bytes_without_a_path(tmp_path, catalog):
     from company_wiki.source_catalog import CanonicalSourceWriter
 
-    catalog = _catalog(tmp_path)
     request, candidate, receipt, _staged = _staged_contract(tmp_path)
     try:
         imported = CanonicalSourceWriter(catalog).import_staged(request, candidate, receipt)
@@ -228,12 +234,11 @@ def test_writer_public_original_read_returns_verified_bytes_without_a_path(tmp_p
         catalog.close()
 
 
-def test_writer_returns_exact_committed_ref_without_semantic_resolver(tmp_path, monkeypatch):
+def test_writer_returns_exact_committed_ref_without_semantic_resolver(tmp_path, monkeypatch, catalog):
     import pytest
     from company_wiki.source_catalog import CanonicalSourceWriter, SourceResolver
     from company_wiki.source_catalog.source_reader import SourceVersionReader
 
-    catalog = _catalog(tmp_path)
     try:
         request, candidate, receipt, _ = _staged_contract(tmp_path)
 
@@ -248,12 +253,11 @@ def test_writer_returns_exact_committed_ref_without_semantic_resolver(tmp_path, 
         catalog.close()
 
 
-def test_unknown_date_annual_candidate_can_be_saved_without_inventing_date(tmp_path):
+def test_unknown_date_annual_candidate_can_be_saved_without_inventing_date(tmp_path, catalog):
     from dataclasses import replace
     from company_wiki.source_catalog import CanonicalSourceWriter
     from company_wiki.source_catalog.source_reader import SourceVersionReader
 
-    catalog = _catalog(tmp_path)
     try:
         request, candidate, receipt, _ = _staged_contract(tmp_path)
         candidate = replace(candidate, filing_date=None)
@@ -264,12 +268,11 @@ def test_unknown_date_annual_candidate_can_be_saved_without_inventing_date(tmp_p
         catalog.close()
 
 
-def test_direct_writer_rejects_wrong_period_before_creating_raw(tmp_path):
+def test_direct_writer_rejects_wrong_period_before_creating_raw(tmp_path, catalog):
     from dataclasses import replace
     import pytest
     from company_wiki.source_catalog import CanonicalImportError, CanonicalSourceWriter
 
-    catalog = _catalog(tmp_path)
     try:
         request, candidate, receipt, staged = _staged_contract(tmp_path)
         with pytest.raises(CanonicalImportError, match="fiscal_year"):
@@ -280,12 +283,11 @@ def test_direct_writer_rejects_wrong_period_before_creating_raw(tmp_path):
         catalog.close()
 
 
-def test_direct_raw_import_does_not_require_auxiliary_request_identifiers(tmp_path):
+def test_direct_raw_import_does_not_require_auxiliary_request_identifiers(tmp_path, catalog):
     from dataclasses import replace
     from company_wiki.source_catalog import CanonicalSourceWriter
     from company_wiki.source_catalog.source_reader import SourceVersionReader
 
-    catalog = _catalog(tmp_path)
     try:
         request, candidate, receipt, _ = _staged_contract(tmp_path)
         imported = CanonicalSourceWriter(catalog).import_staged(
@@ -298,7 +300,7 @@ def test_direct_raw_import_does_not_require_auxiliary_request_identifiers(tmp_pa
 
 
 def test_writer_disambiguates_committed_bytes_with_sparse_capture_diagnostics(
-    tmp_path, monkeypatch,
+    tmp_path, monkeypatch, catalog,
 ):
     """The committed hash and provider identity select a source despite gaps."""
     from dataclasses import replace
@@ -309,7 +311,6 @@ def test_writer_disambiguates_committed_bytes_with_sparse_capture_diagnostics(
         SourceResolver,
     )
 
-    catalog = _catalog(tmp_path)
     request, candidate, receipt, _ = _staged_contract(tmp_path)
     original_resolve = SourceResolver.resolve
 
@@ -350,7 +351,7 @@ def test_writer_disambiguates_committed_bytes_with_sparse_capture_diagnostics(
                for h in selected.matches)
 
 
-def test_writer_reactivates_previously_retired_same_content_document(tmp_path):
+def test_writer_reactivates_previously_retired_same_content_document(tmp_path, catalog):
     """A user-authorized re-download of bytes whose content-addressed document
     was retired must succeed and reactivate that document (Phase 15.6 batch
     governance: retire takes a record out of visibility; an explicit
@@ -363,7 +364,6 @@ def test_writer_reactivates_previously_retired_same_content_document(tmp_path):
     )
     from company_wiki.source_catalog.store import retire_document
 
-    catalog = _catalog(tmp_path)
     request, candidate, receipt, staged = _staged_contract(tmp_path)
     writer = CanonicalSourceWriter(catalog)
 
@@ -406,7 +406,7 @@ def test_writer_reactivates_previously_retired_same_content_document(tmp_path):
     assert resolved.matches[0].capture_ready is True
 
 
-def test_writer_reactivates_retired_document_via_dedup_when_location_is_active(tmp_path):
+def test_writer_reactivates_retired_document_via_dedup_when_location_is_active(tmp_path, catalog):
     """A retired document whose location stayed active (partial state left by
     a failed import) must be reactivated by the dedup re-acquisition path —
     the exact production shape seen for CATL FY2024 (Phase 15.6)."""
@@ -418,7 +418,6 @@ def test_writer_reactivates_retired_document_via_dedup_when_location_is_active(t
     )
     from company_wiki.source_catalog.store import retire_document
 
-    catalog = _catalog(tmp_path)
     request, candidate, receipt, staged = _staged_contract(tmp_path)
     writer = CanonicalSourceWriter(catalog)
 
@@ -461,10 +460,9 @@ def test_writer_reactivates_retired_document_via_dedup_when_location_is_active(t
     assert resolved.matches[0].capture_ready is True
 
 
-def test_writer_deduplicates_downloaded_bytes_without_second_canonical_file(tmp_path):
+def test_writer_deduplicates_downloaded_bytes_without_second_canonical_file(tmp_path, catalog):
     from company_wiki.source_catalog import CanonicalImportStatus, CanonicalSourceWriter
 
-    catalog = _catalog(tmp_path)
     request, candidate, receipt, _ = _staged_contract(tmp_path)
     writer = CanonicalSourceWriter(catalog)
     first = writer.import_staged(request, candidate, receipt)
@@ -488,7 +486,7 @@ def test_writer_deduplicates_downloaded_bytes_without_second_canonical_file(tmp_
     assert raw_files == [Path(first.canonical_path)]
 
 
-def test_writer_dedup_ignores_dayu_portfolio_locations(tmp_path):
+def test_writer_dedup_ignores_dayu_portfolio_locations(tmp_path, request):
     """Dedup must only match canonical company_raw locations: a same-hash file
     ingested from the dayu portfolio lives outside companies/ and must not be
     offered as the canonical path (MongoDB finding)."""
@@ -516,7 +514,8 @@ def test_writer_dedup_ignores_dayu_portfolio_locations(tmp_path):
             ),
         )
     )
-    request, candidate, receipt, staged = _staged_contract(tmp_path)
+    request.addfinalizer(catalog.close)
+    source_request, candidate, receipt, staged = _staged_contract(tmp_path)
 
     # a same-hash file exists only under the dayu portfolio root
     dayu_copy = filing / "same.htm"
@@ -524,7 +523,7 @@ def test_writer_dedup_ignores_dayu_portfolio_locations(tmp_path):
     catalog.scan()
 
     writer = CanonicalSourceWriter(catalog)
-    imported = writer.import_staged(request, candidate, receipt)
+    imported = writer.import_staged(source_request, candidate, receipt)
 
     assert imported.status is CanonicalImportStatus.IMPORTED_NEW
     canonical = Path(imported.canonical_path)
@@ -532,7 +531,7 @@ def test_writer_dedup_ignores_dayu_portfolio_locations(tmp_path):
     assert not str(canonical).startswith(str(portfolio))
 
 
-def test_ensure_service_records_download_and_later_zero_call_reuse(tmp_path):
+def test_ensure_service_records_download_and_later_zero_call_reuse(tmp_path, catalog):
     from company_wiki.source_catalog import (
         AcquisitionCoordinator,
         AcquisitionJournal,
@@ -543,7 +542,6 @@ def test_ensure_service_records_download_and_later_zero_call_reuse(tmp_path):
         SourceRequest,
     )
 
-    catalog = _catalog(tmp_path)
     adapter = _SingleCnAdapter()
     staging_root = catalog.config.catalog_dir / "staging"
     service = SourceAcquisitionService(
@@ -585,7 +583,7 @@ def test_ensure_service_records_download_and_later_zero_call_reuse(tmp_path):
     assert "reused_before_download" in attempts_csv
 
 
-def test_writer_registers_exact_group_with_declared_adapter_not_root_rescan(tmp_path, monkeypatch):
+def test_writer_registers_exact_group_with_declared_adapter_not_root_rescan(tmp_path, monkeypatch, catalog):
     """Every new import uses the shared finite registration boundary.
 
     The root's configured adapter is retained. A rollout snapshot never
@@ -600,7 +598,6 @@ def test_writer_registers_exact_group_with_declared_adapter_not_root_rescan(tmp_
     from company_wiki.source_catalog import canonical_writer as cw_module
     from company_wiki.source_catalog.runtime_policy import snapshot_hash
 
-    catalog = _catalog(tmp_path)
     project = tmp_path / "project"
     payload = {
         "schema_version": "1.0",
