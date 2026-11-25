@@ -76,13 +76,13 @@ def _service(tmp_path: Path, catalog: SourceCatalog) -> tuple[SourceAcquisitionS
         staging_root=tmp_path / "staging",
     )
     calls: list = []
-    original = coordinator._select_for_ensure
+    original = coordinator.select_for_ensure
 
     def counting_select(request, **kwargs):
         calls.append(request.request_id)
         return original(request, **kwargs)
 
-    coordinator._select_for_ensure = counting_select  # type: ignore[method-assign]
+    coordinator.select_for_ensure = counting_select  # type: ignore[method-assign]
     service = SourceAcquisitionService(
         coordinator=coordinator,
         writer=CanonicalSourceWriter(catalog, staging_root=tmp_path / "staging"),

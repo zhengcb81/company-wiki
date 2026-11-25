@@ -20,6 +20,45 @@ from helpers import source_fact_fixture
 _MULTI_CHUNK_ORIGINAL = b"A report original with multiple chunks\n" * 65_536
 
 
+def test_ensure_import_and_reuse_use_only_the_coordinator_port(tmp_path):
+    catalog = _catalog(tmp_path, with_source=False)
+    try:
+        adapter = _FakeAdapter()
+        assembled = _ensure_service(catalog, tmp_path, adapter)
+        coordinator = assembled.coordinator
+
+        class PublicStages:
+            catalog = coordinator.catalog
+
+            def select_for_ensure(self, request, **options):
+                return coordinator.select_for_ensure(request, **options)
+
+            def stage_for_ensure(self, request, selection, **options):
+                return coordinator.stage_for_ensure(request, selection, **options)
+
+            def cleanup_target(self, request, candidate):
+                coordinator.cleanup_target(request, candidate)
+
+            def target_request(self, request, candidate):
+                return coordinator.target_request(request, candidate)
+
+        service = service_module.SourceAcquisitionService(
+            coordinator=PublicStages(), writer=assembled.writer, journal=assembled.journal,
+        )
+        request = _annual_request(market="HK")
+        first = service.ensure(request)
+        second = service.ensure(request)
+        assert first.status.value == "imported" and second.status.value == "reused"
+        (imported,) = first.resolution.matches
+        (reused,) = second.resolution.matches
+        assert (imported.source_id, imported.content_sha256) == (reused.source_id, reused.content_sha256)
+        assert adapter.discover_calls == adapter.fetch_calls == 1
+        assert not list((tmp_path / "staging").iterdir())
+        assert "verified_reuse" not in second.acquisition.to_dict()
+    finally:
+        catalog.close()
+
+
 def _register_annual(catalog, *, market="CN", provider="cninfo", accession="1"):
     folder = catalog.config.roots[0].path / "Acme"
     folder.mkdir(parents=True, exist_ok=True)

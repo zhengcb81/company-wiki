@@ -4,15 +4,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass, replace
 from enum import Enum
-from typing import Any, Callable
+from typing import Any, Callable, Protocol, runtime_checkable
 from company_wiki.file_mutex import win32_filesystem_path
 
 from .acquisition import (
-    AcquisitionCoordinator,
+    AcquisitionDecision,
     AcquisitionResult,
     AcquisitionStatus,
     acquisition_target_sha256,
 )
+from .acquisition_contracts import DownloadCandidate
 from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
 from .acquisition_journal import AcquisitionAttempt, AcquisitionJournal, record_acquisition_observation
 from .canonical_writer import (
@@ -22,6 +23,7 @@ from .canonical_writer import (
 )
 from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
 from .lock import acquisition_mutex
+from .service import SourceCatalog
 
 
 SOURCE_ENSURE_SCHEMA_VERSION = "1.0"
@@ -90,18 +92,40 @@ def _observed(budget, *, status: SourceEnsureStatus, candidate, gap_plan) -> dic
     )
 
 
+@runtime_checkable
+class AcquisitionStages(Protocol):
+    """Catalog acquisition capabilities used inside the canonical transaction."""
+
+    @property
+    def catalog(self) -> SourceCatalog: ...
+
+    def select_for_ensure(
+        self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
+        candidate_scope: Callable[[DownloadCandidate], bool] | None = None,
+    ) -> AcquisitionDecision: ...
+
+    def stage_for_ensure(
+        self, request: SourceRequest, selection: AcquisitionResult, *,
+        budget: AcquisitionBudget | None = None,
+    ) -> AcquisitionDecision: ...
+
+    def cleanup_target(self, request: SourceRequest, candidate: DownloadCandidate) -> None: ...
+
+    def target_request(self, request: SourceRequest, candidate: DownloadCandidate) -> SourceRequest: ...
+
+
 class SourceAcquisitionService:
     """Resolve first, stage only when required, then commit through the sole writer."""
 
     def __init__(
         self,
         *,
-        coordinator: AcquisitionCoordinator,
+        coordinator: AcquisitionStages,
         writer: CanonicalSourceWriter,
         journal: AcquisitionJournal,
     ):
-        if not isinstance(coordinator, AcquisitionCoordinator):
-            raise TypeError("coordinator must be AcquisitionCoordinator")
+        if not isinstance(coordinator, AcquisitionStages):
+            raise TypeError("coordinator must implement AcquisitionStages")
         if not isinstance(writer, CanonicalSourceWriter):
             raise TypeError("writer must be CanonicalSourceWriter")
         if not isinstance(journal, AcquisitionJournal):
@@ -130,7 +154,7 @@ class SourceAcquisitionService:
         acquisition = None
         failure_reason = "adapter_or_staging_failed"
         try:
-            decision = self.coordinator._select_for_ensure(request, budget=budget, candidate_scope=candidate_scope)
+            decision = self.coordinator.select_for_ensure(request, budget=budget, candidate_scope=candidate_scope)
             decision = self._heal_undated_catalog_sources(request, decision, budget=budget, candidate_scope=candidate_scope)
             acquisition = decision.result
             if acquisition.status is AcquisitionStatus.SELECTED:
@@ -252,7 +276,7 @@ class SourceAcquisitionService:
             repairs=registered,
         )
         # Exactly one resolution retry after a successful repair.
-        return self.coordinator._select_for_ensure(
+        return self.coordinator.select_for_ensure(
             request, budget=budget, candidate_scope=candidate_scope,
         )
 
@@ -261,7 +285,7 @@ class SourceAcquisitionService:
 
         for attempt in range(3):
             try:
-                return self.coordinator._stage_for_ensure(request, selected, budget=budget)
+                return self.coordinator.stage_for_ensure(request, selected, budget=budget)
             except AdapterProcessError as exc:
                 if not exc.retryable or attempt == 2:
                     raise
@@ -425,6 +449,7 @@ class SourceAcquisitionService:
 
 __all__ = [
     "SOURCE_ENSURE_SCHEMA_VERSION",
+    "AcquisitionStages",
     "SourceAcquisitionService",
     "SourceEnsureResult",
     "SourceEnsureStatus",

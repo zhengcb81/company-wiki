@@ -144,8 +144,8 @@ class AcquisitionResult:
 
 
 @dataclass(frozen=True)
-class _AcquisitionDecision:
-    """One transaction's public result and its private reuse proof."""
+class AcquisitionDecision:
+    """A staged decision and its process-local proof for the transaction owner."""
 
     result: AcquisitionResult
     verified_reuse: FilingReuseObservation | None = None
@@ -228,7 +228,7 @@ class AcquisitionCoordinator:
         self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
         candidate_scope: Callable[[DownloadCandidate], bool] | None = None,
     ) -> AcquisitionResult:
-        return self._select_for_ensure(request, budget=budget, candidate_scope=candidate_scope).result
+        return self.select_for_ensure(request, budget=budget, candidate_scope=candidate_scope).result
 
     def discover_page(
         self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
@@ -265,10 +265,10 @@ class AcquisitionCoordinator:
         self._validate_candidates(adapter_request, page.candidates, catalog=self.catalog)
         return page
 
-    def _select_for_ensure(
+    def select_for_ensure(
         self, request: SourceRequest, *, budget: AcquisitionBudget | None = None,
         candidate_scope: Callable[[DownloadCandidate], bool] | None = None,
-    ) -> _AcquisitionDecision:
+    ) -> AcquisitionDecision:
         """Resolve or discover one target without fetching any original bytes."""
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
@@ -287,14 +287,14 @@ class AcquisitionCoordinator:
                 # reuse vs gap. Fall through to the gap-plan path.
                 pass
             elif candidate_scope is None:
-                return _AcquisitionDecision(AcquisitionResult(
+                return AcquisitionDecision(AcquisitionResult(
                     schema_version=ACQUISITION_SCHEMA_VERSION,
                     status=AcquisitionStatus.REUSED,
                     resolution=resolution,
                     reason="existing_catalog_source_reused_before_adapter",
                 ), verified)
         if resolution.status is ResolutionStatus.AMBIGUOUS:
-            return _AcquisitionDecision(AcquisitionResult(
+            return AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS,
                 resolution=resolution,
@@ -309,11 +309,11 @@ class AcquisitionCoordinator:
                 resolution, verified = SourceResolver(self.catalog).resolve_for_acquisition(request)
             if request.mode != "latest_as_of" and candidate_scope is None:
                 if resolution.status is ResolutionStatus.AMBIGUOUS:
-                    return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+                    return AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
                         status=AcquisitionStatus.AMBIGUOUS, resolution=resolution, reason=resolution.reason))
                 if verified is None:
                     raise SourceReadError("unavailable", "source_ref_changed", resolution.reason)
-                return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+                return AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
                     status=AcquisitionStatus.REUSED, resolution=resolution,
                     reason="existing_local_source_reconciled_before_adapter"), verified)
         elif local["blocks_download"]:
@@ -331,7 +331,7 @@ class AcquisitionCoordinator:
                 return replace(decision, result=replace(decision.result, _recheck_local_after_discovery=True))
             return decision
         if not request.allow_download:
-            return _AcquisitionDecision(AcquisitionResult(
+            return AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.MISSING,
                 resolution=resolution,
@@ -345,7 +345,7 @@ class AcquisitionCoordinator:
             status = (AcquisitionStatus.AMBIGUOUS
                       if identity_reason == "issuer_scope_has_multiple_target_listings"
                       else AcquisitionStatus.MISSING)
-            return _AcquisitionDecision(AcquisitionResult(
+            return AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=status,
                 resolution=resolution,
@@ -362,18 +362,18 @@ class AcquisitionCoordinator:
                            if (candidate_scope is None or candidate_scope(c))
                            and (c.filing_date is None or c.filing_date <= request.as_of_date))
         if not candidates:
-            return _AcquisitionDecision(AcquisitionResult(
+            return AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.MISSING, resolution=resolution,
                 adapter_name=adapter.name, reason="adapter_discovery_returned_no_candidate",
             ))
         if len(candidates) != 1:
-            return _AcquisitionDecision(AcquisitionResult(
+            return AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS, resolution=resolution,
                 adapter_name=adapter.name, reason="adapter_discovery_returned_multiple_candidates",
             ))
-        return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+        return AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
             status=AcquisitionStatus.SELECTED, resolution=resolution,
             adapter_name=adapter.name, candidate=candidates[0], reason="candidate_selected",
             _recheck_local_after_discovery=recheck_local))
@@ -395,7 +395,7 @@ class AcquisitionCoordinator:
 
     @staticmethod
     def _blocked_local(local: dict[str, Any], resolution: ResolutionResult,
-                       selection: AcquisitionResult | None = None) -> _AcquisitionDecision:
+                       selection: AcquisitionResult | None = None) -> AcquisitionDecision:
         observation = {
             "status": local["status"], "reason": local["reason"],
             "blocks_download": True,
@@ -407,7 +407,7 @@ class AcquisitionCoordinator:
             raise AcquisitionError("local preparation returned multiple owner budget observations")
         if local_read_budgets:
             observation["local_read_budget"] = local_read_budgets[0]
-        return _AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+        return AcquisitionDecision(AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
             status=AcquisitionStatus.AMBIGUOUS if local["status"] == "ambiguous" else AcquisitionStatus.MISSING,
             resolution=resolution, reason=local["reason"], local_preparation=observation,
             candidate=selection.candidate if selection else None,
@@ -482,12 +482,12 @@ class AcquisitionCoordinator:
         self, request: SourceRequest, selection: AcquisitionResult, *,
         budget: AcquisitionBudget | None = None,
     ) -> AcquisitionResult:
-        return self._stage_for_ensure(request, selection, budget=budget).result
+        return self.stage_for_ensure(request, selection, budget=budget).result
 
-    def _stage_for_ensure(
+    def stage_for_ensure(
         self, request: SourceRequest, selection: AcquisitionResult, *,
         budget: AcquisitionBudget | None = None,
-    ) -> _AcquisitionDecision:
+    ) -> AcquisitionDecision:
         """Recheck local identity, then stage the chosen target without rediscovery.
 
         The transaction service holds the target lock across this and import.
@@ -522,7 +522,7 @@ class AcquisitionCoordinator:
             ResolutionStatus.REUSED_EXACT,
             ResolutionStatus.REUSED_EQUIVALENT,
         }:
-            return _AcquisitionDecision(AcquisitionResult(
+            return AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.REUSED,
                 resolution=replace(discovered_resolution, request_id=request.request_id),
@@ -532,7 +532,7 @@ class AcquisitionCoordinator:
                 gap_plan=selection.gap_plan,
             ), verified)
         if discovered_resolution.status is ResolutionStatus.AMBIGUOUS:
-            return _AcquisitionDecision(AcquisitionResult(
+            return AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS,
                 resolution=replace(discovered_resolution, request_id=request.request_id),
@@ -562,7 +562,7 @@ class AcquisitionCoordinator:
                     "staged response exceeds remaining acquisition byte budget"
                 )
         self._validate_receipt(candidate, receipt, request_directory)
-        return _AcquisitionDecision(AcquisitionResult(
+        return AcquisitionDecision(AcquisitionResult(
             schema_version=ACQUISITION_SCHEMA_VERSION,
             status=AcquisitionStatus.STAGED,
             resolution=selection.resolution,
@@ -620,7 +620,7 @@ class AcquisitionCoordinator:
         *,
         budget: AcquisitionBudget | None = None,
         candidate_scope: Callable[[DownloadCandidate], bool] | None = None,
-    ) -> _AcquisitionDecision:
+    ) -> AcquisitionDecision:
         """Discover once and align periods; an explicit intent can select a target."""
         if request.market is None:
             raise MarketRoutingError("market is required before adapter discovery")
@@ -640,7 +640,7 @@ class AcquisitionCoordinator:
                 remote_candidates=[],
                 provider_error=identity_reason,
             )
-            return _AcquisitionDecision(AcquisitionResult(
+            return AcquisitionDecision(AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=status,
                 resolution=resolution,
@@ -714,7 +714,7 @@ class AcquisitionCoordinator:
             remote_candidates=list(discovered),
             provider_error=provider_error,
         )
-        return _AcquisitionDecision(AcquisitionResult(
+        return AcquisitionDecision(AcquisitionResult(
             schema_version=ACQUISITION_SCHEMA_VERSION,
             status=status,
             resolution=resolution,
@@ -780,6 +780,7 @@ __all__ = [
     "DOWNLOAD_CANDIDATE_SCHEMA_VERSION",
     "DiscoveryPage",
     "AcquisitionCoordinator",
+    "AcquisitionDecision",
     "AcquisitionError",
     "AcquisitionResult",
     "AcquisitionStatus",

@@ -222,7 +222,7 @@ def test_after_provider_failure_journal_error_does_not_replace_original(tmp_path
     def journal_fail(**kwargs):
         raise OSError("secondary journal fault")
     service = object.__new__(SourceAcquisitionService)
-    service.coordinator = SimpleNamespace(_select_for_ensure=fail)
+    service.coordinator = SimpleNamespace(select_for_ensure=fail)
     service.journal = SimpleNamespace(record=journal_fail)
     with pytest.raises(AdapterProcessError) as caught:
         service.ensure(request(), budget=b)
@@ -240,7 +240,7 @@ def test_after_provider_success_completion_error_retains_operation_accounting(tm
         provider="sec", provider_document_id="one", market="US", document_kind="annual_report"), receipt=None)
     decision = SimpleNamespace(result=selected)
     service = object.__new__(SourceAcquisitionService)
-    service.coordinator = SimpleNamespace(_select_for_ensure=lambda *a, **k: decision,
+    service.coordinator = SimpleNamespace(select_for_ensure=lambda *a, **k: decision,
         catalog=SimpleNamespace(config=SimpleNamespace(catalog_dir=tmp_path)), cleanup_target=lambda *a: None)
     service.journal = SimpleNamespace(record=lambda **k: None)
     monkeypatch.setattr("company_wiki.source_catalog.acquisition_service.acquisition_target_sha256", lambda *a: "fixture")
@@ -268,7 +268,7 @@ def test_cleanup_error_after_retry_does_not_hide_provider_cause(tmp_path):
     def cleanup(*a, **k):
         raise OSError("cleanup fault")
     service = object.__new__(SourceAcquisitionService)
-    service.coordinator = SimpleNamespace(_stage_for_ensure=fail, cleanup_target=cleanup)
+    service.coordinator = SimpleNamespace(stage_for_ensure=fail, cleanup_target=cleanup)
     with pytest.raises(AdapterProcessError) as caught:
         service._stage_with_retry(request(), SimpleNamespace(candidate="one"), budget=budget())
     assert caught.value is original
