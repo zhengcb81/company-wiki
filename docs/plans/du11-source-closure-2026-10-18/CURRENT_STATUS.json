@@ -16,7 +16,9 @@
     "f4_diagnostic_context_release": "fc2e0f31cfbb06248e88592c600911164122ab79",
     "f4_diagnostic_exact_ci_run": 45615128124,
     "f4_open_native_case": null,
-    "dashboard_feedback_runtime": "e5633543d0e85845bf796b8c307623e061ee47a2",
+    "dashboard_feedback_runtime": "b57672fd44f95f2fa105dc26c180afcf42a0ec09",
+    "s5_status": "scoped_owner_fixes_and_runtime_alignment",
+    "s5_verification": "../feedback-loop-2026-11-17/s5-verification-20261125.md",
     "scheduled_f4_owners_verified": 12,
     "scheduled_f4_owners_planned": 12,
     "scheduled_f4_receipt": {

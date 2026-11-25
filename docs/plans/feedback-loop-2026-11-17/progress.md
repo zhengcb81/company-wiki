@@ -1,5 +1,7 @@
 # 进度与恢复入口
 
+2026-11-25。S5 新发现的功能回归已复验并进入正式运行。八个公开同版 CI 通过。Dashboard 和 IR 已推送并本机复验。StockWiki 和 Audit 更新本地正式线。StockQA 独审发现漏进日常的原付费用例，已补真实临时账本与原证据冷读，`a4a81e5` 同版 CI 通过后切换。CWP `88f10bf96` 通过远端纯几何约束及本机 11 个正式 CLI 对照。[逐项验证和覆盖余项](s5-verification-20261125.md)
+
 2026-11-25。S5 首批已发布并核对实际入口。StockQA、FF、RF、ET、IQS、SID、MC、CWP 的首批修复有公开同版 CI；Dashboard、IR 已推送并本机复验。Audit、StockWiki 已进入本地正式线。FF、RF、IR 和 Audit 的技能均同步并验证重复零写。本仓边界扫描修复已独审，AUTO 账本的强停复验和旧库读写通过。继续用 [S5 台账](s5-verification-20261125.md)记录新增架构切片、最终 CI 与覆盖范围。
 
 2026-11-25。S5 第一批发布。MC `fa1f840d` 已快进实际 F4 工作区，同版 CI 通过。StockQA `0ffb3c7a` 已推送，等待实际入口冷读切换；CWP 独审通过，修复齐备。RF `cfc41323` 首次同版 CI 的失败已在精简 Ubuntu 检出复现，当前测试误依赖未发布历史归档，按现行接口迁出并保留原历史测试。FF、ET 与 StockWiki 已分别有实测证据。 [逐项验证台账](s5-verification-20261125.md)

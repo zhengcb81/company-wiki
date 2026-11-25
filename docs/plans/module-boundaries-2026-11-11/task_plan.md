@@ -2,7 +2,7 @@
 
 ## M4 补充计划 — 全 12 模块深度代码审计：松耦合、私有调用清零与静态护栏（2026-11-24 新增；2026-11-25 复审修订）
 
-**状态：IN_PROGRESS（局部切片已交付；原 S3/S4 核心仓内解耦、静态门禁、现场部署同步及新引入回归待 S5 收口）。**
+**状态：IN_PROGRESS。** S5 已处理已证跨仓绕行、边界扫描器和部署漂移，仓内解耦按真实责任切片交付。精确运行版和后续范围见 [S5 台账](../feedback-loop-2026-11-17/s5-verification-20261125.md)。下文的量化问题是审计时的源码快照。
 2026-11-25 独立逐仓复审确认：此前 [S3/S4 分仓台账](s3-s4-owner-rollout-20261125.md) 仅交付了选定的跨仓接口与纯值叶子切片，原计划 M4-A/B/C（S3/S4）的多项硬指标尚未达成，且部分提交引入了新的回归与部署漂移。完整逐仓矩阵与精确 `file:line` 证据见 **[S1–S4 实施后全 12 模块深度复审报告](review/s1-s4-post-rollout-12-module-audit-20261125.md)**。宿主切换与无人值守复验见 [F4 接续](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)。
 
 ### 审计发现核心摘要（维度一：独立性、松耦合与跨模块私有调用）
@@ -22,10 +22,10 @@
 
 | 阶段 | 范围与动作 | 当前真实状态（2026-11-25 复审） | 完成条件 |
 |---|---|---|---|
-| M4-A 跨仓越界清零 | RF `processed_artifact_canary.py` 与工具改走 CWP 公开 CLI；FF 矩阵工具与 IQS 验收工具剥离邻仓内部/测试导入；MC 移除 `~/company-wiki/graph.yaml` 硬编码。 | **部分完成（残余 3 处）**：MC、IQS `stockwiki_g2b_acceptance.py`、RF 主工具已清；**残留** FF `tools/offline_contract_matrix/seed_batch.py:32`（及 `cli_main.py:107` 内联脚本）直导 `company_wiki.source_catalog.cli`、IQS `iqs_temporal_vendor/legacy_oracle.py:3,7` 直导 `stockwiki.quick_scan_freshness`、RF `tools/slo_probe.py:25-26` 硬编码 `.source_catalog/catalog.sqlite3`（且全局安装技能中的 RF 仍残留未退役的旧 `processed_artifact_canary.py`）。 | 全 12 仓 AST 扫描跨仓内部导入 = 0、外仓 SQLite 直连/路径探测 = 0，且全局技能同步一致。 |
-| M4-B 巨环与已证私有调用 | 按 owner 仓推进。消除跨职责边界的循环依赖、跨文件私有访问、Store 绕过与巨石耦合。 | **部分完成（约 40%，含 3 项新引入回归）**：Audit（0环/0私）、SID（0环/0私）、MC（0环/0私）、IR `origin/main`（0环/0私，未部署且 `quick_scan_client.py` 2,820 LOC 未拆）、Dashboard `ops/*`（清零 41 处 `DashboardService._*`）已完成；**未完成**：StockQA 58 文件巨环（`quick_scan` 30 文件环、597 延迟导入、7,081 LOC `quick_scan_work_store.py`、60 处外部 `_*` 访问）且 `a3c2c720` 漏改 `_quick_scan_owner_refresh_port.py:398` `getattr(client, "_environment")` 引发环境泄漏回归；CWP 15 个运行时 SCC、267 文件扁平 `source_catalog`、6 条 `_LEGACY_EDGES`、58 私有导入/62 私有属性/24 `sqlite3.connect`；StockWiki ~19 处绕过 Store 直连 SQLite、3 环、37 私有调用，且 `6a3e67d5` `SecurityIdNormalizationStore.complete()` 跨库提交非原子；RF 3 环（5+2+2）与 61 私有导入/24 私有属性；Dashboard `adapters/*` 33 处同层跨文件私有导入（`forecast_common._*`、`ff_job._cli_result`、`_fallback._read`、`_owner_stub`）；FF 2 生产环与 2,112 LOC `fetch_filing.py`；IQS 无 `pyproject.toml` 且 `sys.modules` 垫片增至 144 个；MC `9a96ecf` 引入 `transcribe.py` `transcription_engine` 死配置、CLI 优先级倒置与 `normalize_config()` 绕过校验 Bug。 | 核心循环依赖破环、Store 绕过清零、新引入回归修复并通过 RED→GREEN 验收。 |
-| M4-C / S4 静态护栏与 CI 闭环 | 升级 CWP `layer_boundary_scan.py` 6 大盲区；落地 A1–A4 / L1–L4 静态门禁；确保新增测试真正进入 CI 执行。 | **未完成（严重缺口）**：CWP `layer_boundary_scan.py` 与 `test_layer_public_boundaries.py` 零改动（6 大盲区全存）；**RF 新增的 10 个 S1–S4 测试文件全部漏加进 `tools/pre_push_gate.py:CI_TESTS`（远端 CI 实际运行 0 项）**；StockWiki 新测试未进 `SHORT_TESTS`、StockQA S1 测试未进 `DAILY_TEST_TARGETS`；FF `test_s3_matrix_owner_boundary.py:20` 硬编码 4 文件名漏检 `seed_batch.py`；ET、SID、IQS、Dashboard、IR 均无 `.github/workflows` 远端 CI。 | CWP 6 盲区收口，RF/SW/QA/FF 门禁漏检补齐，各仓具备可执行的静态边界/日志门禁与 CI 覆盖。 |
-| M4-D / S5 现场检出与全局技能对齐（新增） | 对齐主工作区、F4 `settings.json` 运行检出与 `.agents`/`.codex`/`.claude`/`.gemini/config` 四套全局安装技能。 | **未完成（严重漂移）**：F4 中 FF（缺 `c110943`）、RF（`597c6bc2` 与 `b9e59db4` 脑裂）、IQS（`aa847ac`）、StockQA（`a3c2c72`）、IR（`a055204`）均未跑最新正式版；FF、RF、Audit、IR 四套全局技能全部过期或缺文件。 | 12 仓 F4 运行路径与全部受管全局技能文件 SHA 同最新已审发布引用 100% 一致。 |
+| M4-A 跨仓协议 | FF 矩阵与 RF 探针改走 CWP 公开 CLI，IQS 复验只用 StockWiki 的公开兼容纯函数，MC 以本仓配置读取。 | **S5 三项均已逐一验证。** FF 两处直接导入已替换，RF 借结构化 `catalog_missing` 返回并从安装技能退役旧 SQLite 探针，IQS 两个 Oracle 函数经所属仓声明公开。 | 生产和工程入口从所属仓公开协议取数，组合回归保持原业务和历史行为。 |
+| M4-B 仓内循环与存储边界 | 以同仓的公开端口改掉真实私有访问、存储绕过和阶段错向。 | **分切片交付。** CWP 的 AUTO 读写共享事务叶子，几何计算保留无 I/O。RF 来源冷读不依赖发布准入。StockWiki 身份写入回到原事务的责任 Store。Dashboard 适配器经窄协议。StockQA 公共结果端口有 C06 原版与候选复验，按本仓发布记录接续。原 CWP 来源目录、StockQA 账本等其余耦合仍在。 | 已证绕行不再发生，原数据和费用语义由现有回归保护。循环计数用于定位。 |
+| M4-C / S4 静态检查与 CI | 扩展既有扫描和日常回归，让真实缺陷在 CI 被发现。 | **S5 对应缺口已修。** CWP 六类盲区含合法对照，FF 全矩阵扫描，RF、StockQA、StockWiki 的对应回归纳入本仓既有编排。ET、SID、IQS、Dashboard、IR 有各自快速 CI。Dashboard 与 IR 的远端日志当前不可见，保留本机结果。 | 真实跨层绕行和实际输出丢失有回归。仓内依赖图报告用于诊断。 |
+| M4-D / S5 现场与全局技能对齐 | 对齐 F4 实际工作区、同仓的查找与回告，以及 FF、RF、Audit、IR 四个技能系列。 | **已核对实际运行路径。** 五处旧检出已切换，RF 查询与回告同源，四技能系列复核零文件漂移。活跃的普通开发工区沿用原工作分支。 | 已有原作业或隔离控制数据通过公开入口冷读，沿用原状态根及费用事实。 |
 
 ---
 

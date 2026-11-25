@@ -4,22 +4,24 @@
 
 | 模块 | 核对项 | 当前证据 |
 |---|---|---|
-| CWP / F4 | 异常类别、强停前 stderr、轮转、CLI、边界扫描、AUTO 账本 | master@11ca01c57 的[诊断版同版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45698586312)通过。独审 10 项通过。远端暴露旧故障注入取了移除的导入名，改用实际标准库轮转方法，82 项通过、2 项环境跳过。边界扫描 `bbd0e96e4` 103 项通过。[扫描器证据](../module-boundaries-2026-11-11/review/s5-layer-boundary-scan-20261125.md)覆盖六种盲区和合法对照。AUTO 账本原本反向导入 Store，现共用事务叶子，真实 SQLite 和强停 67 项通过，Mypy 检查 523 个文件通过。独审确认只读快照、租约和回滚。保留三个旧懒加载别名兼容已启动的 worker。 |
-| StockQA | 凭据脱敏、stderr 尾段、显式环境、日常测试 | master@0674d51 已推送并切换实机，[同版 CI](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/45700454968)通过。Bandit 把含 TOKEN 的裸正则误报为凭据，改用编译模式。精确 Git 内容在 Ubuntu 3.10.20 用默认编排，静态检查、420 项及 smoke 通过，3 项 Windows-only 跳过。原观察目录与付费账本已经核对。 |
-| RF | CI 实际收集、FF 子进程诊断、资料根、跨层探针 | main@1577be3c 的[同版 CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/45696604761)通过。修复了历史夹具依赖及两个 Windows 专用探针，精简 Ubuntu 911 通过、2 跳过、46 子测试。实际 report/reconcile 已统一代码检出。两条已有原失败冷读一致，费用状态仍未知。回告目录没有旧终态，前后返回同一文件缺失。四个逻辑技能入口与 1577be3c 对齐，两份旧 SQLite canary 已退役。来源冷读边界 `49a4013db` 已推送，Ubuntu 106 和总控另验 31 项通过，CI 和部署待复验。 |
+| CWP / F4 | 异常类别、强停前 stderr、轮转、CLI、边界扫描、AUTO 账本 | master@88f10bf96 已推送，[同版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45706597671)通过。诊断修复 `11ca01c57` 的远端 CI 已过，独审 10 项。11 个正式 CLI 的进程外失效验证对照 d021c7976，原 stdout 与退出码一致，均生成本地日志和 ready 观察。边界扫描按六类盲区和合法对照验收。[扫描器证据](../module-boundaries-2026-11-11/review/s5-layer-boundary-scan-20261125.md)。AUTO 真实 SQLite 和强停 67 项通过，独审确认只读快照、租约、回滚及旧 worker 懒加载兼容。`37db53cfd` 远端发现几何层违反纯计算边界，将字节哈希移回读取组装后原负例和组合 172 项、严格类型检查通过。 |
+| StockQA | 脱敏、stderr 尾段、显式环境、结果端口、轮转、原付费恢复 | master@a4a81e5 已推送并切换 F4，[同版 CI](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/45709450883)通过。公开结果端口切片 `96a3ead` 经原版/候选 C06 成对复验，候选一次合成请求，去掉测试请求配置后原键恢复零新增请求。独审发现旧测试使用假账本且未进日常，已改用冻结同一真实临时账本，原请求、模型、时间、证据和账本字节一致。两条定向用例纳入日常。组合 102 项、最终 10 项和独审 2 项通过，Windows 与 Linux 双进程轮转均已复验。实机保留原状态根和回告查询。 |
+| RF | CI 实际收集、FF 子进程诊断、资料根、跨层探针 | main@49a4013db 已推送并投入同一个 report/reconcile 运行检出，[同版 CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/45703892813)通过。补入缺席的 CI 用例，修复历史夹具依赖和两个 Windows 专用探针，前批精简 Ubuntu 911 通过、2 跳过、46 子测试。来源冷读与发布准入分离，Ubuntu 106 和总控另验 31 项通过。两条现场原失败及原费用未知前后相同。回告目录没有旧终态，前后返回同一文件缺失。四个逻辑技能入口均对齐，两份物理旧 SQLite canary 已退役。 |
 | MC | 配置优先级、运行时校验、ffmpeg、HTTP 资源、日志 | master@fa1f840d 已推送，现场已快进并保留其他改动。[同版 CI](https://github.com/zhengcb81/MeetingConverter/actions/runs/45692989173) 通过。底层候选 386 项通过，最终无 stderr 和独立复验 7 项通过。 |
 | FF | 异常类型、T3、旁路、矩阵跨仓调用、轮转 | main@7651f70 已推送并快进现场，[同版 CI](https://github.com/zhengcb81/filing-fetch/actions/runs/45702059828)通过。95 项定向通过，公开 CWP CLI 核对原 CRLF 字节。Ubuntu 三市场合成矩阵各一例通过，零取件与费用。定时、普通作业、T3 共用本仓轮转记录，实测双进程轮转。四个技能逻辑入口已对齐，每个物理目录同步 31 项，配置 SHA 相同，复查零差异，四个新进程 CLI 正常启动。 |
 | ET | worker 导入和用量流、并发、manifest、中断、帧 | main@7f4c1e7d 已推送并快进，[同版 CI](https://github.com/zhengcb81/earnings-transcripts/actions/runs/45698502294) 通过。复现基线和首候选的并发半份快照。修复后 12/12，强停后仅补投原启动，一次用量语义保留。manifest 写失败返回非零，原件保留。 |
 | SID | CWP 适配器、句柄、stderr 兜底和轮转 | v2-clean-rewrite@9b0c07c9 已推送及快进。[同版 CI](https://github.com/zhengcb81/StockInfoDownloader/actions/runs/45699176729) 通过，58 项及独立 9 项通过。普通失败的原单 JSON 协议稳定。 |
 | Audit | journal 降级原失败冷读、轮转、技能 | main@560ae51c 本地正式快进，本仓无远端。837 项离线和独立 4 项加两子测试通过。先存原失败再发可引用观察。技能四个逻辑入口每份 52 文件均通过清单校验，已补 Codex，第二遍零写。 |
-| StockWiki | 跨库恢复、复本补投、日志和错误码 | 基线 dd5b0338 注入 receipt DB 提交后发生公开确认故障，同一子收据和身份版本已可重入。保留事务设计。独审复现只有历史副本时误写归档与 Windows 并发轮转丢行。修复 `d09e2bef` 已快进本地正式 `master`，74 项及最终独审 3 项通过。仓库当前无远端。 |
-| IQS | 非法/截断 HTTP、同阶段不同题、StockWiki 接口 | master@2d803a9a 已推送及快进隔离运行，[同版 CI](https://github.com/zhengcb81/invest-quick-scan/actions/runs/45698671343) 通过。Windows 92 项、Ubuntu 同款 41 项通过。旧鲜度 oracle 调用的两项均是 StockWiki 声明的公开纯值端口。 |
-| Dashboard | 相关号、原文预览错误与取消、旁路 | main@df39a22f 已推送及快进实际隔离运行。23 项后端、293 项前端、TypeScript 和独审通过。详情可查但 ready 拒写时保留真实相关号，流水按原 ready 协议。当前未登录会话无法读该私有仓 CI。 |
+| StockWiki | 跨库恢复、复本补投、轮转、身份写入边界 | dd5b0338 在 receipt DB 提交后被注入公开确认故障，同一子收据和身份版本已可重入。修复 `d09e2bef` 解决了历史副本误写归档、Windows 并发轮转丢行，74 项及独审 3 项通过。`7bc366de` 已快进正式本地 master，身份更新由 `QuickScanStore` 在原事务内负责，注入错误回滚实体、绑定和操作日志，原键可重试，重放零写。123 项及独立 2 项通过。正式本地 master@65d3902 纳入四条回归，日常实际收集 392→396，检查编排和四条回归共 21 项通过。仓库当前无远端。 |
+| IQS | HTTP、同阶段不同题、公开鲜度接口、后台故障 | master@e0ad757 已推送并快进 F4，[同版 CI](https://github.com/zhengcb81/invest-quick-scan/actions/runs/45706744119)通过。旧版无轮转日志、准备锁忙吞原异常、批协调失败仅留内存。修复后原异常经公开入口冷读，本仓轮转写在原诊断之后。Windows 162 项组合、最终 22 项和独审 3 项通过。旧鲜度 oracle 只用 StockWiki 声明的公开纯值端口。 |
+| Dashboard | 真实相关号、原文预览、长目录、作业查询、适配器协议 | main@b57672f 已推送及快进实际隔离运行。先前 293 项前端和 TypeScript 通过。独审确认 RF 和 FF 窄接口行为，五个新负例复现 Windows 长目录诊断丢失和 owner 错误丢根因。最终 170 项加 43 个子测试通过，长目录诊断和已有 SQLite 回告可冷读，同一公开 HTTP 契约。当前未登录会话无法读该私有仓 CI。 |
 | IR | HTTP 200 响应坏或截断、末次 429、旁路与技能 | main@42c23330 已推送，实际 F4 切到同版运行检出。47 项及 7 子测试通过，独审三项证实 HTTP 200 读错均只发一次，最后 429 无等待。四个逻辑技能入口 16 个差异全部对齐，均已核对第二次零写。当前未登录会话无法读该私有仓 CI。 |
 
 ## 实机口径
 
 实机沿用原观察目录和付费状态。验证使用既有故障与本地隔离的替身，真实新财报下载、转录和模型请求为零。已知失败与未知费用分别保留。代码发布、技能同步与原作业可冷读分别记证。
+
+- CWP 新版 [GitHub CI](https://github.com/zhengcb81/company-wiki/actions/runs/45706597671) 已通过。IQS 和 Dashboard 当前正式运行目录分别以隔离故障和 Windows 深路径复验，两模块配置的观察根未找到可用于这次前后对照的旧诊断。RF 找到两条原失败，两版公开回执及原观察文件字节相同。各自的隔离回执测试保存原状态或一次合成请求。
 
 ## 审计判定
 
@@ -28,3 +30,9 @@
 - **S5-07**以实际调用归属验收。FF 矩阵走 CWP 公开 CLI，RF 探针使用结构化返回，旧已安装的私表探针已退役。IQS 历史鲜度验收使用 StockWiki 声明的公开端口，保持版本兼容。
 - **S5-08 与 S5-09**按已复现的耦合改善职责和扫描范围。循环报告用于调查，生产运行沿用原业务契约。其余仓内环和私有访问以原审计为索引，按真实边界验证。
 - **S5-10**升级专用运行检出，复用原数据根。在途工作的主目录保留原工作分支。实际已有冷查与隔离夹具各自按表记录。
+
+## 待补的验收范围
+
+1. **全入口日志**。已逐个复验 CWP 的 11 个正式 CLI，其他仓按已知故障及公开入口记证。少用工具、独立运行方式与多个诊断介质同时故障，仍按责任仓补可复现用例。
+2. **其余仓内耦合**。CWP 来源目录与公告兼容出口、StockQA 工作账本、RF 资料阶段准入、StockWiki 其余直接读存储点，仍按实际责任和失败场景收口。保留既有缓存身份与原付费恢复的行为验证。
+3. **远端证明**。StockWiki 和 Audit 当前使用本地正式分支。Dashboard 与 IR 按已推送版本核对本机回归，当前会话无法读取两家私有仓的 CI 结果。
