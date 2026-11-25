@@ -2,7 +2,23 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-25 S2、S3/S4 与本轮 F4 已验收
+## 2026-11-25 S5 修复与真实运行核对
+
+S1–S4 的已验切片按原收据记录。复审提出的新增缺口按 [S5 实施计划](../feedback-loop-2026-11-17/s5-closeout-plan-20261125.md) 逐项复现和修复，真实版本、反例和待办见 [验证台账](../feedback-loop-2026-11-17/s5-verification-20261125.md)。W12 业务循环仍按其原接续状态记录。
+
+## 2026-11-25 S1–S4 全 12 模块复审快照
+
+对照 [2026-11-24 全 12 模块深度审计与 S1–S4 原计划](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)，对全部 12 个仓库的最新正式发布引用、本机工作区、F4 `settings.json` 实际运行目录与四套全局技能副本完成只读逐仓复审（完整证据与精确 `file:line` 见 [S1–S4 实施后全 12 模块深度复审报告](../module-boundaries-2026-11-11/review/s1-s4-post-rollout-12-module-audit-20261125.md)）：
+
+- **真实完成度纠正**：此前“S2、S3/S4 已验收”仅代表**本轮选定的局部 F4 观察切片与部分跨仓接口完成交付**，距离原 S1–S4 计划要求仍有显著未闭环项：**S1 约 70%（含回退与脱敏漏洞）、S2 约 30%（0/12 仓实现全入口本地 `RotatingFileHandler` 轮转结构化日志，多仓旁路写失败仍静默吞错）、S3 约 40%（跨仓基本收口但 FF `seed_batch.py:32` 与 IQS `legacy_oracle.py:3,7` 仍跨仓导入；StockQA 58 文件巨环、CWP 15 个运行时环与 267 文件扁平 `source_catalog`、StockWiki ~19 处绕过 Store 直连 SQLite、RF `report_catalog*` 环、Dashboard `adapters/*` 私有导入等核心仓内目标未完成）、S4 低于 15%（CWP `layer_boundary_scan.py` 6 大盲区零改动，全生态未建 L1–L4 日志门禁，7 仓发布分支无远端 CI）**。
+- **新发现的 S1–S4 引入缺陷与 CI 盲区（高优待修）**：
+  1. **RF CI 假绿与 S1 回退**：RF `.github/workflows/quality.yml` 仅执行 `tools/pre_push_gate.py:CI_TESTS` 硬编码元组，**本轮新增的 10 个 S1–S4 测试文件全部未加入 `CI_TESTS`（CI 实际运行 0 项）**；且 S2（`1b471df4`）删回了 S1 在 `filing_fetch_client.py` 添加的 `_logger` 与 stderr 脱敏摘录。
+  2. **StockQA 凭据漏脱敏与 S3 回归**：S1 `_STDERR_REDACT_RE` 遇 `Authorization: Bearer <token>` 仅脱敏 `"Bearer"` 而明文泄露 token，且截取 `stderr` 头部 8KB 丢失尾部堆栈；S3（`a3c2c720`）改名 `_process_env` 时漏改 `_quick_scan_owner_refresh_port.py:398` `getattr(client, "_environment")`，导致显式 `process_env` 静默失效并泄漏宿主 `os.environ`。
+  3. **MC / IR / Audit / Dashboard / CWP / FF / StockWiki 新代码缺陷**：MC（`9a96ecf`）`transcribe.py` 使 `config.json` 中 `transcription_engine` 100% 死配置、`config.json` 反向覆盖 CLI `--model/--device` 参数且 `normalize_config()` 绕过 `_validate()`；IR（`86d930f`）将 HTTP 200 `JSONDecodeError` 误判为网络错误触发额外 2 次付费重试；Audit（`206c93b`）`exported_without_journal` 漏存 `failure` 致 F4 `reconcile` 永久 `unknown`；Dashboard（`a3523e8`）旁路写失败仍向前端返回查不到诊断的幽灵 `correlation_id`；CWP（`fc2e0f31c`）`triage_diagnostic.py` 仅保留 `builtins` 异常致 `sqlite3`/自定义异常被清空为 `[]`；FF（`1adea74`）`_BUILTIN_EXCEPTIONS` 抹除非内建异常类名与位置；StockWiki（`6a3e67d5`）`SecurityIdNormalizationStore.complete()` 跨库提交顺序非原子。
+  4. **现场部署与全局技能严重漂移**：F4 `settings.json` 中 **FF（停在 `711db1c` 缺 `ff_t3_receipt.py`）、RF（`report` 跑 S1 前 `597c6bc2` 与 `reconcile` `b9e59db4` 脑裂）、IQS（停在 `aa847ac` 缺 S2/S3）、StockQA（停在 `a3c2c72` 缺 8 个提交）、IR（停在 `a055204` 缺 S3）**；`.agents`/`.codex`/`.claude`/`.gemini/config` 四套全局技能中 **FF（停在 S1 前 `1defca5`）、RF（仍含旧 SQLite canary）、Audit（缺 `financial_measure_core.py`）、IR（缺 `report_format.py`/`report_output.py`）** 均未同步。
+- **后续动作**：余项与新缺陷已全部增补进 [模块边界计划 M4/S5](../module-boundaries-2026-11-11/task_plan.md) 与 [反馈工程计划 F5/S5](../feedback-loop-2026-11-17/task_plan.md)。
+
+## 2026-11-25 S2、S3/S4 局部切片与本轮 F4 阶段记录（历史口径，完整缺口见上节复审）
 
 外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。
 

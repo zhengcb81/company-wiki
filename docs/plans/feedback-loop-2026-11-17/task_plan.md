@@ -42,7 +42,7 @@ S1 的 CWP、ET、SID 等补修见[分仓发布台账](s1-p0-blackhole-plan.md)�
 | 节点 | 实施内容 | 可核对交付 |
 |---|---|---|
 | F5-1 P0 黑洞止血（S1） | 修 MC `mimo.py:137` `NameError` 与 `BaseException`；修 SID 死文件日志与 `browser.py:645` 分页截断；清 CWP(7)/FF(1)/StockQA(1) 业务子进程 `stderr=DEVNULL`；修 ET `transcript_api` 静默吞错与 `worker_stderr.log` 提前删除；修 RF `filing_fetch_client` 丢 `stderr`、StockWiki 解析/计费静默返 `None`、StockQA LLM Provider 仅记类名。 | 每项先写 RED 复现用例，修复后能从新进程/轮转日志精确读出原异常类型、脱敏原因链与堆栈。 |
-| F5-2 双层日志（S2，验收完成） | 统一本地故障记录、脱敏和 F4 公开观察的字段语义，沿现有入口分仓实现。 | 12 个模块的计划节点用真实故障入口、合法对照和新进程冷查验收。[S2 验收记录](s2-closeout-20261125.md) |
+| F5-2 双层日志（S2，局部切片已验收；全入口目标未完成） | 统一本地故障记录、脱敏和 F4 公开观察的字段语义，沿现有入口分仓实现。 | 每仓一个 F4 试点节点已用真实故障入口、合法对照和新进程冷查验收。[S2 验收记录](s2-closeout-20261125.md)。**2026-11-25 复审：0/12 仓实现全入口本地轮转日志，多仓旁路写失败仍无 stderr 告警，见 F5-4/S5。** |
 | F5-3 回归覆盖（S4，本轮已验收） | 在已复现的失败边界补行为用例，对明确且可归因的越层行为沿已有接口检查复验。 | 覆盖正常输入、CLI/HTTP 格式、诊断失败时的业务结果。受验版本和组合测试绑定分仓台账。 |
 
 ## S3/S4 收口后的 F4 接续
@@ -68,3 +68,17 @@ StockWiki 已用同一正式公开入口在隔离环境验证实际故障和冷�
 3. 同一隔离库和收件目录重启两次，查到一个原失败观察并从正式反馈读取端复核原因。再复现观察已落盘、确认前强停，仍只有一个原观察。并发回收、限域维护和普通业务重试保留原语义。如果宿主停止时业务 supervisor 也已退出，仍须证明 F4 能通过 CWP 公开维护口只补投观察。使用本机宿主复验与回告，不接触真实付费供应商。与原 `AutomationStore` 的作业和费用记录逐项对照。
 
 [当前 F4 现场复验](f4-resume-runtime-20261125.md) · [S3/S4 分仓交付](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md) · [此前故障复原证据](replay-coverage-20261123.md) · [业务 W12 父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
+
+
+## 2026-11-25 S5 修复与实机对齐
+
+实现次序和跨仓接口见 [S5 实施计划](s5-closeout-plan-20261125.md)。[逐项台账](s5-verification-20261125.md)记录真实故障、已经修复的观察、正式版发布与实际启用。复审报告为当时的调查输入。
+
+完整证据（精确 `file:line`、提交号）见 [S1–S4 实施后全 12 模块复审报告](../module-boundaries-2026-11-11/review/s1-s4-post-rollout-12-module-audit-20261125.md)。此前“S2、S3/S4 已验收”仅指局部切片；下列缺口须在 S5 收口，每项沿 RED→GREEN、由责任仓修复。
+
+| 优先级 | 节点 | 内容 | 验收 |
+|---|---|---|---|
+| P0 | S5-10 现场与全局技能对齐 | 各仓采用本轮已验正式版。统一 RF 的 `report` 和 `reconcile` 源码，保留原状态目录和旧回告查询。FF、IQS、StockQA、IR 采用各自正式入口；保护有在途修改的主工区。Audit 补安装副本。核查 RF 旧 SQLite canary 是否仍存在于受管部署。Dashboard 当前 F4 使用正式隔离检出，新版本沿该部署职责切换。 | 原作业可冷读，受影响技能与发行文件一致，部署可重复。真实下载、转录和新计费为零。 |
+| P0 | S5-2 高危新缺陷 | StockQA `Authorization: Bearer` 漏脱敏、stderr 取头部、`_environment` 漏改；RF 10 个新测试补入 `CI_TESTS`、恢复 `filing_fetch_client` stderr 本地日志；MC `transcribe.py` 死配置、CLI 优先级倒置、`normalize_config` 绕过校验、`ffmpeg` 退出码、`HTTPError` 未关闭；ET worker `stderr=DEVNULL` 与 `--report-usage` 关闭日志、`scraper.py` manifest 失败仍退出 0、`transcript_feedback.py:1439` 捕获 `BaseException`；Audit `exported_without_journal` 漏存 failure；Dashboard 幽灵 `correlation_id`；CWP `triage_diagnostic` 丢非内建异常；FF `_BUILTIN_EXCEPTIONS` 抹除异常；IR `JSONDecodeError` 误判重试；IQS `post_json` 漏捕 `IncompleteRead` 及同阶段去重吞故障；StockWiki `complete()` 跨库提交顺序；SID `setup_logger` 句柄泄漏及 `company_wiki_adapter_cli` 零文件日志。 | 每项有失败复现与同入口复验。 |
+| P1 | S5-3 全入口本地轮转日志 | 为 CWP、FF、RF、Audit、StockWiki、IQS、Dashboard、IR、MC、ET、StockQA 补轮转脱敏日志；F4 旁路写失败统一 stderr 告警（FF、RF、StockWiki、ET、IR、Dashboard）；`from None` 前先记日志。 | 新进程冷查可读出原异常类型与脱敏因果链。 |
+| P2 | S5-4 静态门禁与 CI | 修复 `layer_boundary_scan.py` 六个盲区；FF 边界测试改为全目录扫描；补 ET、SID、IQS、Dashboard、IR 远端 CI；StockWiki/StockQA 新测试入日常清单。 | 门禁能区分合法实现与已证绕行。 |

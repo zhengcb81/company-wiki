@@ -1,8 +1,9 @@
 # 模块边界收口计划
 
-## M4 补充计划 — 全 12 模块深度代码审计：松耦合、私有调用清零与静态护栏（2026-11-24 新增）
+## M4 补充计划 — 全 12 模块深度代码审计：松耦合、私有调用清零与静态护栏（2026-11-24 新增；2026-11-25 复审修订）
 
-**状态为本轮已证范围已交付。** S3/S4 按 owner 仓完成发布和组合回归。有明确运行和复现证据的边界按 [S3/S4 分仓台账](s3-s4-owner-rollout-20261125.md) 验收。剩余同仓事务耦合、历史脚本与夹具状态保留在台账。宿主切换与无人值守复验转入 [F4 接续](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)。
+**状态：IN_PROGRESS（局部切片已交付；原 S3/S4 核心仓内解耦、静态门禁、现场部署同步及新引入回归待 S5 收口）。**
+2026-11-25 独立逐仓复审确认：此前 [S3/S4 分仓台账](s3-s4-owner-rollout-20261125.md) 仅交付了选定的跨仓接口与纯值叶子切片，原计划 M4-A/B/C（S3/S4）的多项硬指标尚未达成，且部分提交引入了新的回归与部署漂移。完整逐仓矩阵与精确 `file:line` 证据见 **[S1–S4 实施后全 12 模块深度复审报告](review/s1-s4-post-rollout-12-module-audit-20261125.md)**。宿主切换与无人值守复验见 [F4 接续](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)。
 
 ### 审计发现核心摘要（维度一：独立性、松耦合与跨模块私有调用）
 
@@ -17,13 +18,14 @@
    - **P2 — `StockInfoDLSimple` / `revenue-forecast-audit` / `MeetingConverter`**：SID 2 处重复私有导入；Audit 1 个 2 文件环 + `measure._time_str` + 16 处 `sys.path`；MC 配置双源（`config.py` vs `translator.load_config`，`mimo_base_url` 默认值冲突）。
 3. **现有边界门禁 6 大盲区**：CWP `tests/support/layer_boundary_scan.py` 豁免同包内跨文件私有访问、未约束 `<shared>` 根模块、未覆盖 `tools/feedback_loop/`、永久保留 6 条 `_LEGACY_EDGES`、缺少 SCC 循环依赖检查且漏检无类型注解参数；其余 11 仓缺少统一 AST 私有调用/循环依赖门禁。
 
-### M4 实施阶段与完成条件（对应方案 S3 + S4）
+### M4 实施阶段与完成条件（对应方案 S3 + S4 + 2026-11-25 复审增补 S5）
 
-| 阶段 | 范围与动作 | 完成条件 |
-|---|---|---|
-| M4-A 跨仓越界清零 | RF `processed_artifact_canary.py` 与工具改走 CWP 公开 CLI；FF 矩阵工具与 IQS 验收工具剥离邻仓内部/测试导入；MC 移除 `~/company-wiki/graph.yaml` 硬编码。 | 全 12 仓 AST 扫描跨仓内部导入 = 0、外仓 SQLite 直连 = 0。 |
-| M4-B 巨环与已证私有调用 | 按 owner 仓推进。消除已经证实跨越职责边界的循环和私有调用。存储模块提供所属业务的查询和写入操作，封装事务与连接。 | 被列为越界的真实调用经公开契约复验，原业务和兼容入口继续工作。 |
-| M4-C 验收与防回归（随 S3 实施） | 保留现有边界规则，用真实错误、合法对照和旧数据兼容性补定向回归。AST 可以辅助定位，在能证明它识别的是具体越层行为时再加入相应测试。 | 原失败可复现，回归能区分合法实现和已证绕行。不统一增加语法、pre-push 或运行时门禁。 |
+| 阶段 | 范围与动作 | 当前真实状态（2026-11-25 复审） | 完成条件 |
+|---|---|---|---|
+| M4-A 跨仓越界清零 | RF `processed_artifact_canary.py` 与工具改走 CWP 公开 CLI；FF 矩阵工具与 IQS 验收工具剥离邻仓内部/测试导入；MC 移除 `~/company-wiki/graph.yaml` 硬编码。 | **部分完成（残余 3 处）**：MC、IQS `stockwiki_g2b_acceptance.py`、RF 主工具已清；**残留** FF `tools/offline_contract_matrix/seed_batch.py:32`（及 `cli_main.py:107` 内联脚本）直导 `company_wiki.source_catalog.cli`、IQS `iqs_temporal_vendor/legacy_oracle.py:3,7` 直导 `stockwiki.quick_scan_freshness`、RF `tools/slo_probe.py:25-26` 硬编码 `.source_catalog/catalog.sqlite3`（且全局安装技能中的 RF 仍残留未退役的旧 `processed_artifact_canary.py`）。 | 全 12 仓 AST 扫描跨仓内部导入 = 0、外仓 SQLite 直连/路径探测 = 0，且全局技能同步一致。 |
+| M4-B 巨环与已证私有调用 | 按 owner 仓推进。消除跨职责边界的循环依赖、跨文件私有访问、Store 绕过与巨石耦合。 | **部分完成（约 40%，含 3 项新引入回归）**：Audit（0环/0私）、SID（0环/0私）、MC（0环/0私）、IR `origin/main`（0环/0私，未部署且 `quick_scan_client.py` 2,820 LOC 未拆）、Dashboard `ops/*`（清零 41 处 `DashboardService._*`）已完成；**未完成**：StockQA 58 文件巨环（`quick_scan` 30 文件环、597 延迟导入、7,081 LOC `quick_scan_work_store.py`、60 处外部 `_*` 访问）且 `a3c2c720` 漏改 `_quick_scan_owner_refresh_port.py:398` `getattr(client, "_environment")` 引发环境泄漏回归；CWP 15 个运行时 SCC、267 文件扁平 `source_catalog`、6 条 `_LEGACY_EDGES`、58 私有导入/62 私有属性/24 `sqlite3.connect`；StockWiki ~19 处绕过 Store 直连 SQLite、3 环、37 私有调用，且 `6a3e67d5` `SecurityIdNormalizationStore.complete()` 跨库提交非原子；RF 3 环（5+2+2）与 61 私有导入/24 私有属性；Dashboard `adapters/*` 33 处同层跨文件私有导入（`forecast_common._*`、`ff_job._cli_result`、`_fallback._read`、`_owner_stub`）；FF 2 生产环与 2,112 LOC `fetch_filing.py`；IQS 无 `pyproject.toml` 且 `sys.modules` 垫片增至 144 个；MC `9a96ecf` 引入 `transcribe.py` `transcription_engine` 死配置、CLI 优先级倒置与 `normalize_config()` 绕过校验 Bug。 | 核心循环依赖破环、Store 绕过清零、新引入回归修复并通过 RED→GREEN 验收。 |
+| M4-C / S4 静态护栏与 CI 闭环 | 升级 CWP `layer_boundary_scan.py` 6 大盲区；落地 A1–A4 / L1–L4 静态门禁；确保新增测试真正进入 CI 执行。 | **未完成（严重缺口）**：CWP `layer_boundary_scan.py` 与 `test_layer_public_boundaries.py` 零改动（6 大盲区全存）；**RF 新增的 10 个 S1–S4 测试文件全部漏加进 `tools/pre_push_gate.py:CI_TESTS`（远端 CI 实际运行 0 项）**；StockWiki 新测试未进 `SHORT_TESTS`、StockQA S1 测试未进 `DAILY_TEST_TARGETS`；FF `test_s3_matrix_owner_boundary.py:20` 硬编码 4 文件名漏检 `seed_batch.py`；ET、SID、IQS、Dashboard、IR 均无 `.github/workflows` 远端 CI。 | CWP 6 盲区收口，RF/SW/QA/FF 门禁漏检补齐，各仓具备可执行的静态边界/日志门禁与 CI 覆盖。 |
+| M4-D / S5 现场检出与全局技能对齐（新增） | 对齐主工作区、F4 `settings.json` 运行检出与 `.agents`/`.codex`/`.claude`/`.gemini/config` 四套全局安装技能。 | **未完成（严重漂移）**：F4 中 FF（缺 `c110943`）、RF（`597c6bc2` 与 `b9e59db4` 脑裂）、IQS（`aa847ac`）、StockQA（`a3c2c72`）、IR（`a055204`）均未跑最新正式版；FF、RF、Audit、IR 四套全局技能全部过期或缺文件。 | 12 仓 F4 运行路径与全部受管全局技能文件 SHA 同最新已审发布引用 100% 一致。 |
 
 ---
 

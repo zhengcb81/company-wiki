@@ -16,13 +16,15 @@ from tempfile import NamedTemporaryFile
 import time
 
 from .coordinator import reconcile_diagnostic_code
-from .diagnostics import background_environment, format_diagnostic_exception, redact_text, run_background
+from .diagnostics import (
+    append_diagnostic, background_command, background_environment, format_diagnostic_exception, redact_text,
+    run_background,
+)
 from .host import BACKGROUND_CREATION_FLAGS
 from .observations import digest, unique_fields
 from .triage_diagnostic import native_diagnostic_facts
 
 _logger = logging.getLogger(__name__)
-_HOST_STDERR_LOG_MAX_BYTES = 2 * 1024 * 1024
 
 
 def _persist_host_stderr(config_path: Path, label: str, returncode: int | None, stderr_bytes: bytes) -> None:
@@ -36,19 +38,8 @@ def _persist_host_stderr(config_path: Path, label: str, returncode: int | None, 
         returncode,
         text[-8192:] or "<empty>",
     )
-    try:
-        log_dir = config_path.resolve().parent / "logs"
-        log_dir.mkdir(parents=True, exist_ok=True)
-        log_path = log_dir / "host_subprocess_failures.log"
-        if log_path.is_file() and log_path.stat().st_size >= _HOST_STDERR_LOG_MAX_BYTES:
-            try:
-                log_path.replace(log_path.with_suffix(".log.1"))
-            except OSError:
-                pass
-        with log_path.open("a", encoding="utf-8") as handle:
-            handle.write(f"[{int(time.time())}] {label} exit_code={returncode}\n{text or '<empty>'}\n\n")
-    except OSError as exc:
-        _logger.warning("Failed to persist host subprocess stderr\n%s", format_diagnostic_exception(exc))
+    append_diagnostic(config_path.resolve().parent / "logs/host_subprocess_failures.log",
+                      f"{label} exit_code={returncode}\n{text or '<empty>'}")
 
 
 _ROOT = Path(__file__).resolve().parents[2]
@@ -218,8 +209,8 @@ class LocalHost:
         if self.recovery_owners:
             env[RECOVERY_OWNERS_ENV] = " ".join(self.recovery_owners)
         try:
-            subprocess.Popen([sys.executable, "-B", "-m", "tools.feedback_loop.local_host", "--config", str(self.config),
-                              "work", key], cwd=_ROOT, stdin=subprocess.DEVNULL,
+            subprocess.Popen(background_command("tools.feedback_loop.local_host", "--config", str(self.config),
+                                                "work", key), cwd=_ROOT, stdin=subprocess.DEVNULL,
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env,
                              start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
         except OSError as exc:

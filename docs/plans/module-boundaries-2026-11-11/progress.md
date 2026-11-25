@@ -1,6 +1,11 @@
 # 规划进度
 
-## 2026-11-25 S3/S4 开始实施
+## 2026-11-25 — S1–S4 实施后全 12 模块深度复审增补（只读审计）
+
+- 对全部 12 个仓库最新正式发布引用、本机工作区检出、F4 `settings.json` 实际运行目录及 `.agents`/`.codex`/`.claude`/`.gemini/config` 四套全局安装技能执行只读 AST + 源码逐行复审，完整报告落盘至 [s1-s4-post-rollout-12-module-audit-20261125.md](review/s1-s4-post-rollout-12-module-audit-20261125.md)。
+- 明确区分“本轮已交付局部切片”与“原 S1–S4 全局目标未闭环项”，并将检出的高危问题（RF 10 个新测试漏进 `CI_TESTS` 致 CI 假绿、StockQA `Bearer` 凭据漏脱敏与 `_environment` 改名漏改回归、MC `transcribe.py` 死配置与 CLI 优先级倒置、StockWiki `complete()` 跨库非原子提交、Audit `exported_without_journal` 致 `reconcile` 永久 `unknown`、Dashboard 写失败返回幽灵 `correlation_id`、CWP `triage_diagnostic` 丢弃非内建异常、FF `_BUILTIN_EXCEPTIONS` 抹除自定义异常及 `seed_batch.py` 跨仓导入漏检、5 个 F4 检出滞后与 4 套全局技能过期）全部增补至本计划 `task_plan.md`/`findings.md`/`s3-s4-owner-rollout-20261125.md` 及反馈工程计划 F5。
+
+## 2026-11-25 S3/S4 开始实施（局部切片交付记录）
 
 - CWP 在包入口复现定时摘要反向加载旧脚本。已迁移到包内运行配置并保留兼容入口，复验配置范围、原语言摘要与已保存结果恢复。FF、RF、StockQA 由各自 agent 在隔离工区推进。 [当前证据和余项](s3-s4-owner-rollout-20261125.md)
 - 分仓验收覆盖 12 个模块。FF 离线矩阵 41/41，RF 日跑和周测已走公开接口，旧月测保留历史并退役。StockWiki 新挂牌与 Dashboard 原文和报告的组合通过。最后两项独审发现也已交付，Dashboard 回读相关号，StockQA 单次决定使用一组原 owner 证明。此前同仓事务与历史夹具的边界报告留在总控。现进入 F4。 [分仓版本与组合证据](s3-s4-owner-rollout-20261125.md)

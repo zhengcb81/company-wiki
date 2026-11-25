@@ -132,3 +132,15 @@ Commit `56d10f269b7c67845c7af66b33083f62d46cde4d` replaces the unpublished 512MB
 ## 2026-11-24 Status
 - Full 12-module audit completed.
 - 日志发布及进度见[S1 分仓发布台账](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)和[S2 实施状态](../feedback-loop-2026-11-17/s2-unified-logging-plan.md)。
+
+## 2026-11-25 S1–S4 实施后全 12 模块深度复审发现（只读核验）
+
+完整逐仓证据矩阵见 [s1-s4-post-rollout-12-module-audit-20261125.md](review/s1-s4-post-rollout-12-module-audit-20261125.md)。关键架构与代码质量发现如下：
+
+1. **计划缩窄导致的全局未闭环**：S3/S4 实际落地为局部高风险边界切片，而非原 M4 的全局清零。跨仓残留 `filing-fetch/tools/offline_contract_matrix/seed_batch.py:32`（`from company_wiki.source_catalog import cli`，因 `test_s3_matrix_owner_boundary.py:20` 只硬编码检查 4 个文件而漏检）、`invest-quick-scan/.../iqs_temporal_vendor/legacy_oracle.py:3,7`（直导 `stockwiki.quick_scan_freshness`）与 `revenue-forecast/tools/slo_probe.py:25-26`（硬编码 `.source_catalog/catalog.sqlite3`）。仓内 StockQA 58 文件运行时环（`quick_scan` 30 文件环、597 处延迟导入、7,081 LOC `quick_scan_work_store.py`）、CWP 15 个运行时 SCC 与 267 文件扁平 `source_catalog` 及 6 条 `_LEGACY_EDGES`、StockWiki ~19 处绕过 Store 直连 SQLite、RF 3 个运行时环与 61 处私有导入、Dashboard `adapters/*` 33 处同层私有导入、IQS 144 个 `sys.modules` 垫片（仍无 `pyproject.toml`）、IR 2,820 LOC `quick_scan_client.py` 均未收口；CWP `layer_boundary_scan.py` 6 大盲区零修改。
+2. **S3/S4 新引入的代码级回归缺陷**：
+   - **StockQAbyLLM 环境注入失效（`a3c2c720`）**：`OwnerRefreshClient` 将 `self._environment` 改为 `self._process_env`（`quick_scan_owner_refresh.py:148`），但遗漏 `src/utils/_quick_scan_owner_refresh_port.py:398`（仍调 `getattr(client, "_environment", None)` 并回退 `os.environ`），使显式传入的隔离 `process_env` 100% 丢失并泄漏宿主环境变量。
+   - **MeetingConverter 配置死代码与 CLI 优先级倒置（`9a96ecf`）**：`transcribe.py:85,186` 中 `--engine` 默认值为非空 `"auto"`，导致 `args.engine or settings.transcription_engine` 永远短路，`config.json` 的 `transcription_engine` 永久失效；`:152-160` 使用 `{**cli_defaults, **raw}` 导致 `config.json` 反向覆盖命令行显式传入的 `--model`/`--device`/`--compute-type`；且 `normalize_config()` 完全绕过 `_validate()`。
+   - **StockWiki 跨库非原子提交与锁嵌套（`6a3e67d5`）**：`SecurityIdNormalizationStore.complete()`（`security_id_normalization_store.py:283-310`）在 `scan.sqlite` `BEGIN IMMEDIATE` 提交前先向 `identity_receipts.sqlite` 提交 receipt supersede；若后续步骤或 `con.commit()` 失败，重跑将因旧 receipt 已非 active 而卡死。
+   - **revenue-forecast CI 假绿（`tools/pre_push_gate.py:76-128`）**：GitHub Actions `quality.yml` 仅执行 `CI_TESTS` 静态元组，S1–S4 新增的全部 10 个测试文件均未注册进 `CI_TESTS`，远端 CI 实际未跑任何 S1–S4 用例。
+3. **现场检出与全局安装技能失步**：F4 `settings.json` 中 5 个模块（FF、RF 脑裂、IQS、StockQA、IR）未指向最新 S3/S4 发布提交；`.agents`/`.codex`/`.claude`/`.gemini/config` 四套全局技能中 FF（停在 S1 前 `1defca5`）、RF（仍含旧 SQLite canary）、Audit（缺 `financial_measure_core.py` 且 `.codex` 缺失）、IR（缺 S3 新增 `report_format.py` 与 `report_output.py`）均未同步。

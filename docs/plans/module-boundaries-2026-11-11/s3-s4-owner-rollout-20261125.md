@@ -97,4 +97,25 @@ StockWiki `6a3e67d5` 和 Dashboard `71b2659` 用真实公开命令组合复验�
 
 每次修复对应一个能复现实际错误的回归、合法对照或兼容入口。保留已有静态扫描；只有静态测试能识别明确越层行为并区分合法场景时，才纳入已有测试。用行为测试验证费用、入库和恢复无变化。独审绑定最终 diff，分别核验本地主线、远端与使用方。报告已经验收的场景，保留尚未覆盖的范围。沿现有发布流程，无全仓新审批或语法门禁。
 
-本轮确认的生产边界及成对回归已交付，接续 [F4 未完范围](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)。StockQA 的同仓账本仍有延迟导入与五处直接类读投影，未发现它们从外仓私自读取或绕过冻结作用域。扩展探索中，旧夹具使用已移除 SDK 和只读对象属性。两项模拟调用次数失败已用实际版本化故障注入重现并修正于临时夹具，两个原模拟请求对应不同问题组合。已付原记录重放未产生重复尝试或付费。历史测试的整理与同仓账本进一步拆分可在各自计划继续，当前现场 F4 采用单独验收。
+本轮确认的生产边界局部切片及成对回归已交付，接续 [F4 未完范围](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)。StockQA 的同仓账本仍有延迟导入与五处直接类读投影，未发现它们从外仓私自读取或绕过冻结作用域。扩展探索中，旧夹具使用已移除 SDK 和只读对象属性。两项模拟调用次数失败已用实际版本化故障注入重现并修正于临时夹具，两个原模拟请求对应不同问题组合。已付原记录重放未产生重复尝试或付费。历史测试的整理与同仓账本进一步拆分可在各自计划继续，当前现场 F4 采用单独验收。
+
+---
+
+## 2026-11-25 独立复审增补：S3/S4 未完成项、新引入回归与现场部署漂移台账
+
+> 详细逐行证据见 [S1–S4 实施后全 12 模块深度复审报告](review/s1-s4-post-rollout-12-module-audit-20261125.md)。上文验收仅覆盖已测局部切片，以下未闭环问题与新引入回归必须在后续 S5 收口：
+
+| 模块 | S3/S4 新引入代码缺陷或门禁盲区 | 原 S3/S4 尚未完成的结构性要求 | 现场检出 / F4 / 全局技能漂移 |
+|---|---|---|---|
+| `company-wiki` | `triage_diagnostic.py:18-21` 仅保留 `builtins` 异常名（丢弃 `sqlite3`/自定义异常为 `[]`）；`diagnostics.py:11` 经 `src.` 隐式命名空间双加载 | 267 文件扁平 `source_catalog` 未拆子包；15 个运行时 SCC（含 6 条 `_LEGACY_EDGES` 与 `source_contract<->source_catalog`）；58 私有导入 / 62 私有属性 / 24 `sqlite3.connect`；`layer_boundary_scan.py` 6 大盲区零改动 | 主工区与 F4 对齐 `master@d021c7976` |
+| `filing-fetch` | `test_s3_matrix_owner_boundary.py:20` 硬编码 4 文件名，漏检同目录 `seed_batch.py:32`（`from company_wiki.source_catalog import cli`）与 `cli_main.py:107`；`ff_t3_receipt.py:361,406` 重定向 `devnull` 且 `--latest` 报错输出 `run_id: null` | 生产仍存 2 个运行时 SCC（`fetch_filing<->transcript_companion`、`ff_job_*` 3 文件环）+ 9 文件矩阵环；`fetch_filing.py` 2,112 LOC 未拆；无 `pyproject.toml` | **严重漂移**：本机与 F4 停在 `main@711db1c`（缺 `c110943` `ff_t3_receipt.py`）；4 套全局技能停在 S1 前 `1defca5`（23/35 `.py` 过期） |
+| `revenue-forecast` | **10 个新增 S1–S4 测试文件 0 个加入 `tools/pre_push_gate.py:CI_TESTS`（GitHub CI 未执行任何新测试）**；`rf_job_feedback.py:85,105` 单根与去重不一致漏报 `native_owner_unverified`；`cwp_catalog_status.py:24` 依赖脆弱英文错误前缀 | `report_catalog*` 仍存 5 文件环 + 2 文件环 + `rf_job_facade<->rf_job_feedback` 环；61 私有导入 / 24 私有属性；`tools/slo_probe.py:25` 仍硬编码 `.source_catalog/catalog.sqlite3` | **严重脑裂/漂移**：主工区 `d62fca9a`（缺 S2–S4）；F4 `report` 跑 `597c6bc2` 而 `reconcile` 跑 `b9e59db4`；4 套全局技能 46 文件漂移+26 缺失且仍含旧 SQLite canary |
+| `revenue-forecast-audit` | `financial_measure_core.py:16` 缺 `_SCRIPT_DIR` 引导；`audit_delivery.py:130-144` `exported_without_journal` 漏存 `failure` 致 F4 `reconcile` 永久 `unknown` | 16 处 `sys.path` 注入（含 `audit_run.py:809` 运行期注入）；无静态 AST 门禁 | F4 对齐 `8267a8a`，但 `.agents`/`.claude`/`.gemini/config` 技能缺 `financial_measure_core.py`，`.codex` 整包缺失 |
+| `StockWiki` | `SecurityIdNormalizationStore.complete()`（`security_id_normalization_store.py:283-310`）先提交 `identity_receipts.sqlite` 后提交 `scan.sqlite`（失败卡死重跑）且持写锁开多读连接；`quick_scan_work_delegation.py:242` 错误码拼写漏下划线 | ~19 个模块仍绕过 Store 直连 SQLite / 调 `_connect()`（67 处连接）；3 个运行时 SCC；37 私有属性调用 / 35+ 跨域私有导入；新测试未进 `SHORT_TESTS` | 本地 `master@dd5b033` 与 F4 对齐（无远端） |
+| `StockQAbyLLM` | **`_quick_scan_owner_refresh_port.py:398` 漏改 `getattr(client, "_environment")`，导致 `OwnerRefreshClient` 显式 `process_env` 100% 丢失并泄漏宿主 `os.environ`** | `quick_scan_work_store.py` 仍 7,081 LOC；`src/` 仍为 58 文件运行时巨环（`quick_scan` 30 文件环、597 处延迟导入）；60 处外部 `_*` 访问（含 `work_lifecycle._*`）；S1 测试未进 `DAILY_TEST_TARGETS` | **严重漂移**：主工区与 F4 停在 `a3c2c72`，落后 `origin/master@a89636f` 8 个提交 |
+| `invest-quick-scan` | `stockwiki_g2b_acceptance.py:69,214` 仅传 `--stockwiki-root` 时静默跳过活体验真且空 stdout 吞 `stderr` | `iqs_temporal_vendor/legacy_oracle.py:3,7` 仍跨仓导入 `stockwiki.quick_scan_freshness`；无 `pyproject.toml`，`sys.modules` 垫片增至 144 个；无远端 CI | **严重漂移**：主工区 `50fe2b1`、F4 `f4-runtime@aa847ac` 均停在 S2/S3 前 |
+| `investment-dashboard` | `OriginalPreview.tsx:34-38` 无 `correlationId` 时丢弃 `code`/`owner`；`service.py:34` 35 个无签名 `invoke` 闭包抹除函数签名 | `adapters/*` 4 组共 33 处私有导入/调用（`forecast_common._*`、`adapter._deployment_args`、`ff_job._cli_result`、`_fallback._read`、`f2_dash_feedback_sample` `_owner_stub`）全部未动；无远端 CI | F4 `f4dv` 对齐 `e563354`，但主工区停在 `main@ead3425`（缺全部 4 个 S2/S3 提交） |
+| `earnings-transcripts` | — | `common.py:26` 仍导 `_OpenAITranslator`；`replay_feedback_case.py` monkey-patch 私有函数；5 处 `sys.path.insert`；3 个巨石未拆；无远端 CI | 主工区与 F4 对齐 `main@2fc8f92` |
+| `StockInfoDLSimple` | `downloader.py:147-149` 残留无用私有别名 | `main.py:30` `sys.path.insert`；无远端 CI 与 AST 门禁 | 主工区与 F4 对齐 `1d02afd` |
+| `industry-research` | `QuickScanClient._consumer_path` 移除无兼容别名；`install_reporting_tools.py` 不同步 `SKILL.md`/`modules/*.md` | `tools/quick_scan_client.py` 仍 2,820 LOC 未拆；无远端 CI 与全仓 AST 门禁 | **严重漂移**：本机主工区（F4 直跑路径）与全部 4 套安装技能均停在 S2 `a055204`，**缺少 S3 `report_format.py` 与 `report_output.py`** |
+| `MeetingConverter` | **`transcribe.py:85,152-186` `config.json` `transcription_engine` 100% 死配置，且 `config.json` 反向覆盖 CLI `--model/--device/--compute-type`**；`normalize_config()` 绕过 `_validate()`；`company.py:131` 空 YAML 节点崩溃 | `core/pipeline.py:343` 仍耦合 `isinstance(engine, FallbackEngine)`；`audio_utils.py:137-153` 未检 `ffmpeg` 退出码（0 字节切片送入引擎）；无静态 AST 门禁 | 主工区与 F4 对齐 `master@9a96ecf` |

@@ -1,5 +1,6 @@
 """Ordinary product invocations retain failures independently of their caller."""
 import json
+import logging
 import os
 from pathlib import Path
 import subprocess
@@ -29,6 +30,74 @@ def test_unconfigured_public_source_read_keeps_its_cause_after_exit(tmp_path):
     assert details["reason"] == reason and details["exceptions"][0]["type"] == "SourceReadError"
     assert ref["source_id"] == details["source_id"]
     assert "damaged fixture" not in str(details)
+    local_log = tmp_path / "state/company-wiki/logs/runtime_errors.log"
+    text = local_log.read_text(encoding="utf-8")
+    assert row["run_id"] in text and "SourceReadError" in text and reason in text
+
+
+def test_source_catalog_status_returns_owned_reason_and_logs_original_cause(tmp_path):
+    config = tmp_path / "config/catalog.json"
+    config.parent.mkdir()
+    (tmp_path / "companies").mkdir()
+    config.write_text(json.dumps({
+        "schema_version": "1.0", "catalog_dir": "catalog", "roots": [{
+            "root_id": "company_raw", "path": "companies", "kind": "company_raw",
+            "adapter_id": "company_raw_v1", "read_only": True,
+        }],
+    }), encoding="utf-8")
+    env = {k: v for k, v in os.environ.items() if not k.startswith("RESEARCH_FEEDBACK_")}
+    env.update(LOCALAPPDATA=str(tmp_path / "state"), XDG_STATE_HOME=str(tmp_path / "state"),
+               PYTHONPATH=str(Path(__file__).resolve().parents[2] / "src"))
+    result = subprocess.run(
+        [sys.executable, "-B", "-m", "company_wiki.source_catalog.cli", "--config", str(config), "status"],
+        cwd=tmp_path, env=env, capture_output=True, timeout=20, check=False,
+    )
+    assert (result.returncode, result.stdout) == (1, b"")
+    assert json.loads(result.stderr)["reason"] == "catalog_missing"
+    assert not (tmp_path / "catalog").exists()
+    log = (tmp_path / "state/company-wiki/logs/runtime_errors.log").read_text(encoding="utf-8")
+    assert "CatalogReaderUnavailable" in log and "FileNotFoundError" in log
+
+
+def test_missing_profile_for_optional_log_does_not_change_success_or_leak_scope(monkeypatch):
+    from company_wiki import runtime_feedback
+
+    for key in ("LOCALAPPDATA", "XDG_STATE_HOME", "RESEARCH_FEEDBACK_DIR", "RESEARCH_FEEDBACK_OUT"):
+        monkeypatch.delenv(key, raising=False)
+
+    def missing_home():
+        raise RuntimeError("profile not loaded")
+
+    monkeypatch.setattr(Path, "home", missing_home)
+
+    @runtime_feedback.entry("catalog-status")
+    def main():
+        return 0
+
+    assert main() == 0
+    assert runtime_feedback._current.get() is None
+
+
+def test_native_diagnostic_does_not_propagate_to_a_caller_stdout_logger(tmp_path, monkeypatch, capsys):
+    from company_wiki import runtime_feedback
+
+    monkeypatch.setenv("RESEARCH_FEEDBACK_OUT", str(tmp_path / "observations.jsonl"))
+    caller_logger = logging.getLogger()
+    handler = logging.StreamHandler(sys.stdout)
+    caller_logger.addHandler(handler)
+
+    @runtime_feedback.entry("status")
+    def main():
+        runtime_feedback.record("status", "failed", error=ValueError("native fixture reason"))
+        print('{"status":"failed"}')
+        return 1
+
+    try:
+        assert main() == 1
+        assert capsys.readouterr().out == '{"status":"failed"}\n'
+    finally:
+        caller_logger.removeHandler(handler)
+        handler.close()
 
 
 def test_accounting_and_one_failed_member_survive_successful_outer_command(tmp_path, monkeypatch):

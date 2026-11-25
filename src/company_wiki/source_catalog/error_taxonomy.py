@@ -32,6 +32,14 @@ FATAL = "fatal"  # everything else (fail closed)
 
 RETRYABLE_CODES = frozenset({CATALOG_BUSY, CATALOG_LOCKED, DB_TIMEOUT, WORKER_PAUSED})
 
+
+class CatalogReaderUnavailable(RuntimeError):
+    """A read-only catalog is missing, unreadable, or unsupported."""
+
+    def __init__(self, message: str, *, missing: bool = False) -> None:
+        super().__init__(message)
+        self.missing = missing
+
 # Table-driven: (code, marker substrings) per raw text family.  The first
 # matching family wins; order encodes precedence (lock > timeout > paused).
 _TEXT_FAMILIES: tuple[tuple[str, tuple[str, ...]], ...] = (
@@ -109,6 +117,8 @@ def structured_error(exc: BaseException) -> dict[str, Any]:
         "error": str(exc),
         "retryable": retryable,
     }
+    if isinstance(exc, CatalogReaderUnavailable) and exc.missing:
+        result["reason"] = "catalog_missing"
     from .acquisition_failure import published_acquisition_failure
     diagnostic = published_acquisition_failure(exc)
     if diagnostic is not None:
@@ -130,6 +140,7 @@ __all__ = [
     "LEGACY_EVIDENCE_ARCHIVED",
     "FATAL",
     "RETRYABLE_CODES",
+    "CatalogReaderUnavailable",
     "classify_exception",
     "classify_error_type",
     "is_retryable",

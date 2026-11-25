@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Mapping
+from contextlib import nullcontext
 from contextvars import ContextVar
 from dataclasses import dataclass, field
 from functools import wraps
@@ -14,6 +15,7 @@ from tempfile import NamedTemporaryFile
 from typing import Any, ParamSpec
 from uuid import uuid4
 
+from .diagnostic_logging import append_diagnostic, diagnostic_log
 from .diagnostic_redaction import format_diagnostic_exception
 from .file_mutex import FileMutexLockedError, os_file_mutex, win32_filesystem_path
 from .runtime_feedback_values import (
@@ -42,6 +44,7 @@ class _Invocation:
     operation: str
     run: str
     attempt: str
+    log_path: Path | None = None
     explained: bool = False
     reported_errors: list[BaseException] = field(default_factory=list)
 
@@ -52,6 +55,15 @@ _current: ContextVar[_Invocation | None] = ContextVar("cwp_feedback_invocation",
 def _directory() -> Path:
     state = os.getenv("LOCALAPPDATA") if os.name == "nt" else os.getenv("XDG_STATE_HOME")
     return (Path(state) if state else Path.home() / ".local" / "state") / _OWNER / "observations"
+
+
+def _local_log_path() -> Path | None:
+    explicit = os.getenv("RESEARCH_FEEDBACK_OUT") or os.getenv("RESEARCH_FEEDBACK_DIR")
+    try:
+        state = Path(explicit).parent if explicit else _directory().parent
+    except (OSError, RuntimeError, ValueError):
+        return None
+    return state / "logs/runtime_errors.log"
 
 
 def _atomic(path: Path, data: bytes) -> None:
@@ -178,6 +190,13 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             item=item, source_id=source_id, expected=expected, message=message,
             include_error_messages=include_error_messages,
         )
+        if caller is not None and caller.log_path is not None and (
+            error is not None or status in _FAILED or status.startswith("exit:")
+        ):
+            append_diagnostic(
+                caller.log_path, f"operation outcome {row['actual']} {json.dumps(details, ensure_ascii=True)}",
+                warn_on_stderr=False,
+            )
         details_name = row["details_ref"]
 
         def recorded() -> None:
@@ -235,19 +254,29 @@ def entry(operation: str) -> Callable[[Callable[_P, int]], Callable[_P, int]]:
             parent = _current.get()
             run = (parent.run if parent else None) or os.getenv("RESEARCH_FEEDBACK_RUN_ID") or uuid4().hex
             attempt = (parent.attempt if parent else None) or os.getenv("RESEARCH_FEEDBACK_ATTEMPT_ID") or run
-            context = _Invocation(operation, run, attempt, reported_errors=parent.reported_errors if parent else [])
+            context = _Invocation(
+                operation, run, attempt, parent.log_path if parent else _local_log_path(),
+                reported_errors=parent.reported_errors if parent else [],
+            )
             token = _current.set(context)
             try:
-                result = main(*args, **kwargs)
-                if result and not context.explained:
-                    record(operation, f"exit:{result}")
-                return result
-            except (Exception, SystemExit, KeyboardInterrupt) as exc:
-                already_recorded = any(exc is previous for previous in context.reported_errors)
-                if not already_recorded and (not isinstance(exc, SystemExit) or
-                                             (not context.explained and exc.code not in (0, None))):
-                    record(operation, "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed", error=exc)
-                raise
+                log_scope = (
+                    diagnostic_log(logging.getLogger("company_wiki"), context.log_path, warn_on_stderr=False)
+                    if parent is None and context.log_path is not None else nullcontext()
+                )
+                with log_scope:
+                    try:
+                        result = main(*args, **kwargs)
+                        if result and not context.explained:
+                            record(operation, f"exit:{result}")
+                        return result
+                    except (Exception, SystemExit, KeyboardInterrupt) as exc:
+                        already_recorded = any(exc is previous for previous in context.reported_errors)
+                        if not already_recorded and (not isinstance(exc, SystemExit) or
+                                                     (not context.explained and exc.code not in (0, None))):
+                            record(operation, "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed",
+                                   error=exc)
+                        raise
             finally:
                 if parent and context.explained:
                     parent.explained = True

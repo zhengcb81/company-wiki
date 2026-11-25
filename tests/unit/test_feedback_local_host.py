@@ -1,7 +1,9 @@
 from hashlib import sha256
 import json
 from contextlib import closing
+import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import time
@@ -14,6 +16,89 @@ from tools.feedback_loop.observations import digest
 
 ROOT = Path(__file__).resolve().parents[2]
 HOST = [sys.executable, "-B", "-m", "tools.feedback_loop.local_host"]
+
+
+@pytest.mark.parametrize(("body", "code", "expected"), [
+    ('raise ImportError("api_key=synthetic-startup-value")\n', 1, "ImportError"),
+    ("import os, sys\nprint('forced-stop authorization: Bearer synthetic-startup-value',"
+     "file=sys.stderr, flush=True)\nos._exit(23)\n", 23, "forced-stop"),
+    ("import os, sys\nsys.stderr.write('Authorization: Ba')\n"
+     "sys.stderr.write('sic\\r\\n')\n"
+     "print('synthetic-startup-value', file=sys.stderr, flush=True)\n"
+     "print('\\tsynthetic-startup-value-second-fold', file=sys.stderr, flush=True)\n"
+     "print('failure after folded header', file=sys.stderr, flush=True)\nos._exit(23)\n",
+     23, "failure after folded header"),
+    ("import os, sys\nprint('validation mode basic', file=sys.stderr)\n"
+     "print('Authorization: synthetic-startup-value', file=sys.stderr)\n"
+     "print('PermissionError: cause survived', file=sys.stderr)\nos._exit(23)\n",
+     23, "PermissionError: cause survived"),
+])
+def test_detached_background_keeps_diagnostics_before_target_main(tmp_path, monkeypatch, body, code, expected):
+    from tools.feedback_loop import hook
+
+    checkout = tmp_path / "checkout"
+    package = checkout / "tools/feedback_loop"
+    shutil.copytree(ROOT / "tools/feedback_loop", package, ignore=shutil.ignore_patterns("__pycache__"))
+    (package / "coordinator.py").write_text(body, encoding="utf-8")
+    monkeypatch.setattr(hook, "__file__", str(package / "hook.py"))
+    monkeypatch.setenv("PYTHONPATH", str(ROOT / "src"))
+    receipt = tmp_path / "wake.json"
+    started = []
+    popen = subprocess.Popen
+
+    def launch(*args, **kwargs):
+        child = popen(*args, **kwargs)
+        started.append(child)
+        return child
+
+    monkeypatch.setattr(hook.subprocess, "Popen", launch)
+    assert hook.wake(tmp_path / "input.jsonl", str(tmp_path / "config.json"), receipt)["status"] == "scheduled"
+    child, = started
+    try:
+        assert child.wait(timeout=20) == code
+    finally:
+        if child.poll() is None:
+            child.kill()
+            child.wait(timeout=10)
+    text = receipt.with_suffix(".stderr.log").read_text(encoding="utf-8")
+    assert expected in text and "synthetic-startup-value" not in text
+    assert receipt.read_bytes() == b""
+
+
+def test_background_argparse_error_is_saved_without_changing_exit_code(tmp_path):
+    destination = tmp_path / "host.log"
+    completed = subprocess.run(
+        [*HOST, "--config", str(tmp_path / "settings.json"), "not-a-command"],
+        cwd=ROOT, env={**os.environ, "CWP_F4_ERROR_LOG": str(destination)},
+        capture_output=True, timeout=20, check=False,
+    )
+    assert (completed.returncode, completed.stdout) == (2, b"")
+    assert "invalid choice" in destination.read_text(encoding="utf-8")
+
+
+def test_two_processes_keep_both_diagnostics_while_rotating(tmp_path):
+    directory = tmp_path / "logs"
+    directory.mkdir()
+    active = directory / "host_subprocess_failures.log"
+    previous = b"retained prior diagnostics\n" + b"x" * (2 * 1024 * 1024)
+    active.write_bytes(previous)
+    body = (
+        "from pathlib import Path; import sys; "
+        "from tools.feedback_loop.local_host import _persist_host_stderr; "
+        "_persist_host_stderr(Path(sys.argv[1]), 'action', 1, sys.argv[2].encode())"
+    )
+
+    def write(label):
+        return subprocess.run(
+            [sys.executable, "-B", "-c", body, str(tmp_path / "settings.json"), label],
+            cwd=ROOT, capture_output=True, timeout=20, check=True,
+        )
+
+    with ThreadPoolExecutor(2) as pool:
+        assert all(result.stdout == b"" for result in pool.map(write, ("writer-one", "writer-two")))
+    assert active.with_suffix(".log.1").read_bytes() == previous
+    current = active.read_text(encoding="utf-8")
+    assert "writer-one" in current and "writer-two" in current
 
 
 def action(kind="triage", owner="company-wiki", payload=None):
@@ -176,6 +261,7 @@ def test_codex_triage_includes_only_bound_native_diagnostic_facts(
         directory.mkdir()
     native = "feedback-" + "a" * 32 + ".diagnostic.json"
     secret = "sk-EXAMPLE-DO-NOT-SEND"
+    opaque_label = "SyntheticOwnerSecret123"
     arbitrary_number = 987654321012345
     identity = {"owner": "company-wiki", "run_id": "saved-run", "attempt_id": "one", "step_id": "worker"}
     observation = identity | {
@@ -189,7 +275,12 @@ def test_codex_triage_includes_only_bound_native_diagnostic_facts(
             {"type": "FileNotFoundError", "errno": 2, "locations": [[str(root / secret), secret, 6]]},
             {"type": "OSError", "errno": arbitrary_number},
             {"type": "KeyError", "errno": True, "messages": [secret]},
+            {"type": "sqlite3.OperationalError"},
+            {"type": "JSONDecodeError", "messages": [secret]},
+            {"type": "CatalogConfigError"},
+            {"type": opaque_label},
             {"type": secret, "errno": 5},
+            {"type": "ghp_exampleCredentialError"},
         ],
     }
     raw = json.dumps(diagnostic).encode("utf-8")
@@ -270,7 +361,7 @@ def test_codex_triage_includes_only_bound_native_diagnostic_facts(
     line, = (agent_root / "captured.jsonl").read_text(encoding="utf-8").splitlines()
     prompt, action_json = json.loads(line).rsplit("\n", 1)
     assert json.loads(action_json) == request
-    assert secret not in prompt and str(root) not in prompt and str(arbitrary_number) not in prompt
+    assert all(value not in prompt for value in (secret, opaque_label, str(root), str(arbitrary_number)))
     if case == "repair":
         assert "Native diagnostic facts:" not in prompt
         return
@@ -279,7 +370,9 @@ def test_codex_triage_includes_only_bound_native_diagnostic_facts(
     if case in ("native", "same-copies"):
         assert facts == {"status": "available", "sha256": sha256(raw).hexdigest(),
                          "exceptions": [{"type": "FileNotFoundError", "errno": 2},
-                                        {"type": "OSError"}, {"type": "KeyError"}]}
+                                        {"type": "OSError"}, {"type": "KeyError"},
+                                        {"type": "OperationalError"}, {"type": "JSONDecodeError"},
+                                        {"type": "CatalogConfigError"}, {"type": "OwnerException"}]}
     else:
         assert facts == {"status": "unavailable"}
 

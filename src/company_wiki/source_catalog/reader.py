@@ -34,15 +34,11 @@ import sqlite3
 from pathlib import Path
 from typing import Any, Protocol, Sequence, runtime_checkable
 
+from .error_taxonomy import CatalogReaderUnavailable as CatalogReaderUnavailable
 from .models import CATALOG_SCHEMA_VERSION
 from .sqlite_support import configure_tolerant_sqlite_text_decoding
 
 SUPPORTED_SCHEMA_VERSIONS = frozenset({CATALOG_SCHEMA_VERSION})
-
-
-class CatalogReaderUnavailable(RuntimeError):
-    """The read-only catalog could not be opened (missing/unopenable) or its
-    schema version is unsupported (fail closed)."""
 
 
 @dataclass(frozen=True)
@@ -190,10 +186,12 @@ class ReadOnlyCatalogReader:
         if not isinstance(database_path, Path):
             raise TypeError("database_path must be pathlib.Path")
         self.database_path = database_path
-        if not database_path.exists():
+        try:
+            database_path.stat()
+        except FileNotFoundError as exc:
             raise CatalogReaderUnavailable(
-                f"catalog does not exist (not created, not touched): {database_path}"
-            )
+                f"catalog does not exist (not created, not touched): {database_path}", missing=True,
+            ) from exc
         uri = database_path.resolve().as_uri() + "?mode=ro"
         try:
             # check_same_thread=False is safe here: mode=ro + query_only mean

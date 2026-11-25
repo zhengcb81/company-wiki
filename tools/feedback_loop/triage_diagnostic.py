@@ -6,19 +6,41 @@ import builtins
 from collections.abc import Iterable
 from errno import errorcode
 from hashlib import sha256
+from http import client
 import json
 import os
 from pathlib import Path
 import re
+import sqlite3
 from stat import S_ISREG
+import subprocess
+from urllib import error as url_error
 
 from .observations import decode_observation, unique_fields
 
 _NATIVE_DETAILS = re.compile(r"feedback-[0-9a-f]{32}\.diagnostic\.json")
+_CLASS_LABEL = re.compile(r"[A-Z][A-Za-z0-9]{0,79}")
 _EXCEPTION_TYPES = {
-    name: value for name, value in vars(builtins).items()
+    name: value
+    for module in (builtins, sqlite3, json, subprocess, client, url_error)
+    for name, value in vars(module).items()
     if isinstance(value, type) and issubclass(value, BaseException) and value.__name__ == name
 }
+_PUBLISHED_CWP_ERRORS = {"CatalogConfigError", "CatalogReaderUnavailable", "SourceReadError"}
+
+
+def _class_label(value: object) -> str | None:
+    if not isinstance(value, str):
+        return None
+    parts = value.split(".")
+    if not all(part.isascii() and part.isidentifier() for part in parts):
+        return None
+    name = parts[-1]
+    if name in _EXCEPTION_TYPES or name in _PUBLISHED_CWP_ERRORS:
+        return name
+    if _CLASS_LABEL.fullmatch(name) and not name.isupper():
+        return "OwnerException"
+    return None
 
 
 def _read_candidate(path: Path) -> bytes | None:
@@ -37,14 +59,13 @@ def _read_candidate(path: Path) -> bytes | None:
 def _exceptions(value: list) -> list[dict]:
     facts = []
     for exception in value:
-        if not isinstance(exception, dict) or not isinstance(name := exception.get("type"), str):
+        if not isinstance(exception, dict) or (name := _class_label(exception.get("type"))) is None:
             continue
         exception_type = _EXCEPTION_TYPES.get(name)
-        if exception_type is None:
-            continue
         fact = {"type": name}
         errno = exception.get("errno")
-        if issubclass(exception_type, OSError) and type(errno) is int and errno in errorcode:
+        if (type(errno) is int and errno in errorcode
+                and (exception_type is None or issubclass(exception_type, OSError))):
             fact["errno"] = errno
         facts.append(fact)
     return facts

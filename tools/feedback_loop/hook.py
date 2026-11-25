@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 from .coordinator import settle
-from .diagnostics import background_environment, run_background
+from .diagnostics import background_command, background_environment, run_background
 from .host import process_host, read_hosts
 from .observations import read_batch
 
@@ -40,8 +40,8 @@ def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -
     try:
         with output.open("xb") as stream:
             child = subprocess.Popen(
-                [sys.executable, "-B", "-m", "tools.feedback_loop.hook", str(sidecar.resolve()),
-                 str(Path(config).resolve()), wait_seconds],
+                background_command("tools.feedback_loop.hook", str(sidecar.resolve()),
+                                   str(Path(config).resolve()), wait_seconds),
                 cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL,
                 stdout=stream, stderr=subprocess.DEVNULL,
                 env=background_environment(output.with_suffix(".stderr.log")),

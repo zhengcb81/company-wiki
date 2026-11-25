@@ -11,11 +11,10 @@ import os
 from pathlib import Path
 import re
 import subprocess
-import sys
 from uuid import uuid4
 
 from .coordinator import settle
-from .diagnostics import background_environment, format_diagnostic_exception, redact_text, run_background
+from .diagnostics import background_command, background_environment, format_diagnostic_exception, redact_text, run_background
 from .host import process_host, read_hosts
 from .local_host import LocalHost, host_path
 from .observations import read_batch, unique_fields
@@ -329,8 +328,8 @@ def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: 
          wait_seconds: int = 0):
     scope = [arg for name in (owners or ([owner] if owner else [])) for arg in ("--owner", name)]
     subprocess.Popen(
-        [sys.executable, "-B", "-m", "tools.feedback_loop.intake", "--settings", str(settings),
-         "--hosts", str(hosts_file), "--wait-seconds", str(wait_seconds), "drain", *scope],
+        background_command("tools.feedback_loop.intake", "--settings", str(settings),
+                           "--hosts", str(hosts_file), "--wait-seconds", str(wait_seconds), "drain", *scope),
         cwd=_ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
         env=background_environment(settings.resolve().parent / "logs" / "intake_drain_stderr.log"),
         start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),

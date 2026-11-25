@@ -7,7 +7,7 @@ from typing import Any
 
 __all__ = [
     "REDACT", "redact_text", "redact_and_truncate", "format_diagnostic_exception",
-    "key_is_credential", "MAX_REDACTED_MESSAGE_CHARS",
+    "key_is_credential", "credential_continues", "MAX_REDACTED_MESSAGE_CHARS",
 ]
 
 REDACT = "<redacted>"
@@ -162,6 +162,19 @@ _AUTH_PATTERN = re.compile(
     r"(?i)(?P<key>" + _LEFT_ANCHOR + r"authorization\s*[:=]\s*|"
     + _LEFT_ANCHOR + r"bearer\s+)(?P<value>" + _QUOTED_VALUE + r"|" + _AUTH_SCHEME_SPLIT + r"|" + _AUTH_BARE_VALUE + r")"
 )
+_UNFINISHED_AUTH = re.compile(
+    r"(?i)(?:(?<![A-Za-z0-9])authorization[ \t]*[:=][ \t]*(?:\S+)?|^[ \t]*(?:bearer|basic))$"
+)
+
+
+def credential_continues(line: str) -> bool:
+    """Identify a credential key whose value can continue on the next line."""
+    tail = line.rstrip()
+    return bool(
+        _UNFINISHED_AUTH.search(tail)
+        or (tail and tail[-1] in _ASSIGNMENT_CHARS
+            and _credential_key_before_separator(tail, len(tail) - 1))
+    )
 
 # key=value / key: value forms are handled by `_redact_assignments` (single-pass
 # scanner), NOT by a regex: see the F-I14C-07 note at the top of this block.

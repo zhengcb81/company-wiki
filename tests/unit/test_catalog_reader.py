@@ -15,6 +15,7 @@ from pathlib import Path
 
 import pytest
 
+from company_wiki.source_catalog.error_taxonomy import structured_error
 from company_wiki.source_catalog.reader import (
     CatalogReader,
     CatalogReaderUnavailable,
@@ -36,8 +37,11 @@ def _seed_catalog(path: Path) -> None:
 
 def test_missing_path_raises_and_creates_nothing(tmp_path: Path) -> None:
     target = tmp_path / "nested" / "catalog.sqlite3"
-    with pytest.raises(CatalogReaderUnavailable):
+    with pytest.raises(CatalogReaderUnavailable) as unavailable:
         ReadOnlyCatalogReader(target)
+    diagnostic = structured_error(unavailable.value)
+    assert diagnostic["error_type"] == "fatal" and diagnostic["retryable"] is False
+    assert diagnostic.get("reason") == "catalog_missing"
     assert not target.exists(), "reader must not create the database file"
     assert not target.parent.exists(), "reader must not create parent dirs"
     assert list(tmp_path.iterdir()) == [], "filesystem must stay byte-identical"

@@ -778,6 +778,17 @@ _INCREMENTAL_COMMANDS = {
 }
 
 
+def _report_error(exc: Exception) -> int:
+    from .error_taxonomy import structured_error
+
+    diagnostic = structured_error(exc)
+    runtime_feedback.record(
+        "source-catalog", "failed", reason=diagnostic.get("reason") or diagnostic["error_type"], error=exc,
+    )
+    print(json.dumps(diagnostic, ensure_ascii=False, sort_keys=True), file=sys.stderr)
+    return 1
+
+
 @runtime_feedback.entry("source-catalog")
 def main(argv: Sequence[str] | None = None) -> int:
     # Official operations own their parser, catalog lifecycle and raw-byte output.
@@ -1311,14 +1322,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             from .acquisition_failure import attach_acquisition_failure, published_acquisition_failure
             if published_acquisition_failure(exc) is None:
                 attach_acquisition_failure(exc, budget=args._acquisition_budget, code="acquisition_validation_failed")
-        # ZR-204: unified error taxonomy — canonical code + retryable flag.
-        from .error_taxonomy import structured_error
-
-        print(
-            json.dumps(structured_error(exc), ensure_ascii=False, sort_keys=True),
-            file=sys.stderr,
-        )
-        return 1
+        return _report_error(exc)
     from .acquisition_failure import failure_from_result
     diagnostic = failure_from_result(result)
     if diagnostic is not None:
@@ -1337,13 +1341,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 setattr(exc, "acquisition_failure", diagnostic)
             elif hasattr(args, "_acquisition_budget"):
                 attach_acquisition_failure(exc, budget=args._acquisition_budget, code="acquisition_validation_failed")
-            from .error_taxonomy import structured_error
-
-            print(
-                json.dumps(structured_error(exc), ensure_ascii=False, sort_keys=True),
-                file=sys.stderr,
-            )
-            return 1
+            return _report_error(exc)
     print(json.dumps(_plain(result), ensure_ascii=False, sort_keys=True))
     return 0
 
