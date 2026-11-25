@@ -30,6 +30,7 @@ def _invoke(command, state, request, extra_args=(), *, package_only=False):
         entrypoint = ["-c", """
 import sys
 sys.modules.update(config=None, common=None)
+sys.modules["company_wiki.source_catalog.incremental_cli"] = None
 initial_path = sys.path.copy()
 from company_wiki.source_catalog.cli import main
 status = main()
@@ -182,6 +183,17 @@ def test_scheduler_reads_back_the_frozen_run_and_product(sr_cwp_readable_catalog
     assert recovered["run_id"] == request["run_id"]
     assert recovered["usage"]["model_requests"] == 0
     assert recovered["items"][0]["result_ref"] == item["result_ref"]
+    legacy = subprocess.run(
+        [sys.executable, "-B", "-m", "company_wiki.source_catalog.incremental_cli",
+         "--config", str(state.config_path)],
+        input=json.dumps({"schema_version": "cwp-incremental-read-status-request/1",
+                          "run_id": request["run_id"]}),
+        capture_output=True, text=True, encoding="utf-8", timeout=20,
+        env=dict(os.environ, PYTHONPATH=str(REPO / "src"), PYTHONUTF8="1"),
+        cwd=state.root,
+    )
+    assert legacy.returncode == 0, legacy.stderr
+    assert json.loads(legacy.stdout) == recovered
     result = _invoke("read-incremental-result", state, {
         "schema_version": "cwp-incremental-read-result-request/1",
         "result_ref": item["result_ref"],
@@ -195,7 +207,7 @@ def test_scheduler_reads_back_the_frozen_run_and_product(sr_cwp_readable_catalog
 def test_summary_level_generates_through_the_configured_batch_and_reuses(
     sr_cwp_readable_catalog, loopback_model_server, monkeypatch,
 ):
-    """The package CLI runs summary and recovery without legacy script imports."""
+    """The canonical CLI runs summary and recovery without legacy entry points."""
     monkeypatch.setenv("DEEPSEEK_API_KEY", KEY)
     monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
     state = sr_cwp_readable_catalog

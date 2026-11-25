@@ -2,7 +2,7 @@
 
 from collections.abc import Sequence
 
-from company_wiki.source_catalog.incremental_cli import run_incremental
+from company_wiki.source_catalog.incremental_command import run_incremental
 
 __all__ = ["main"]
 
