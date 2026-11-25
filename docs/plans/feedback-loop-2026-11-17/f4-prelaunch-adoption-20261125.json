@@ -1,0 +1,36 @@
+{
+  "schema_version": "f4-prelaunch-adoption-proof/1",
+  "source_commit": "dde6f898d9ff15ff4e9dee1cf55b6789c9b6461c",
+  "action_id": "f4cc497410ff1b8e00d8a31e9c9b81143acb2b0eb05a93cb90fdb27de239c603",
+  "request_digest": "9bd4aa4252b74af77efa591a13f162fdd6fad63905b6aabfc44ffc682a8b8033",
+  "before": {
+    "state": "failed",
+    "code": "host_command_or_directory_unavailable",
+    "native_capture_exists": false,
+    "metadata_sha256": "ef526744cfec643972a427ffcf416487327cfebc439defa6870a332928b33246"
+  },
+  "after": {
+    "state": "done",
+    "triage_decision": "needs_evidence",
+    "native_terminal": true,
+    "session_sha256": "0059199d11aeeb340a71667bbba5bf376c8559c27b260203560bcff7c15d0c54",
+    "usage": {
+      "input_tokens": 211882,
+      "cached_input_tokens": 179456,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2521,
+      "reasoning_output_tokens": 1628
+    },
+    "amount": null
+  },
+  "cold_reads": {
+    "count": 2,
+    "same_native_semantics": true,
+    "byte_sha256": "3f7e33e36e58e655b36f1a0ad23894b35e430dd956ab43c37a2ac2b528c757b5"
+  },
+  "native_capture_start_count_observed": 1,
+  "original_packet_sha256": "a1427033a573a411c8d6936e43c35d62f1eb3b16ced9f47297f49789684aabb9",
+  "business_downloads": 0,
+  "business_transcriptions": 0,
+  "business_summary_requests": 0
+}

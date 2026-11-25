@@ -1,5 +1,7 @@
 # 进度与恢复入口
 
+2026-11-25。宿主 `dde6f898d` 已通过独审、定向回归及同版 CI。使用正式入口把先前未启动的 CWP 分诊恢复到同一原动作，实际一条 Codex 会话和终态，冷查两次一致。因现场无法读责任仓诊断，原结论待补证。新分诊的结构化证据交接继续实施。 [原动作恢复收据](f4-prelaunch-adoption-20261125.json)
+
 2026-11-25。S3/S4 本轮范围已完成分仓发布与组合验收，转入 F4 现场收尾。同一 Windows 任务覆盖 12 仓，RF 查回同一原归档作业，Dashboard 切到已验收的发布版，StockWiki 已接入。当 Worker 和 Supervisor 同时退出时，CWP 能补投同一原失败，修复已推送 `b94af85c`。后续一次实际定时恢复发现 CWP 分诊未启动的旧动作，正在从启动状态与可恢复性处理。 [F4 当前现场记录](f4-resume-runtime-20261125.md) · [CWP 同版 CI](https://github.com/zhengcb81/company-wiki/actions/runs/45609463710)
 
 2026-11-25。S3 开始按 CWP、FF、RF、StockQA 并行施工。S4 随修复固化原始失败、合法对照及恢复行为。 [分仓台账](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md)
