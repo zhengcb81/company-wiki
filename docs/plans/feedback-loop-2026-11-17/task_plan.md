@@ -65,4 +65,4 @@ StockWiki 的宿主配置、四类原动作查回和 native 收件目录均指�
 2. 在原 AUTO 尝试终态事务中保留同一失败的待投递标记与脱敏证据。维护过程先提交，再通过现有 native 发布器投递。同一观察标识复用既有文件，F4 确认后即使 ready 标记已消失，也应能查回已发布正文。只有现有 native 接收路径读得回观察时才清除待投递标记。历史未记录的行不补造，普通 stdout 和可选追加日志不参与确认。
 3. 同一隔离库和收件目录重启两次，查到一个原失败观察并从正式反馈读取端复核原因。再复现观察已落盘、确认前强停，仍只有一个原观察。并发回收、限域维护和普通业务重试保留原语义。如果宿主停止时业务 supervisor 也已退出，仍须证明 F4 能通过 CWP 公开维护口只补投观察。使用本机宿主复验与回告，不接触真实付费供应商。与原 `AutomationStore` 的作业和费用记录逐项对照。
 
-[S3/S4 分仓施工与待验范围](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md) · [当前故障复原证据](replay-coverage-20261123.md) · [业务 W12 父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
+[当前 F4 现场复验](f4-resume-runtime-20261125.md) · [S3/S4 分仓交付](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md) · [此前故障复原证据](replay-coverage-20261123.md) · [业务 W12 父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
