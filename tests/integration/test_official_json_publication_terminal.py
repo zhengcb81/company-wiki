@@ -41,6 +41,7 @@ from company_wiki.automation.narrative_projection import (
     NarrativeBundleReader,
 )
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
+from company_wiki.automation.narrative_storage_budget import BatchStorageBudget, StorageBudgetExceeded
 from company_wiki.automation.store import AutomationStore, IntegrityViolationError
 from company_wiki.automation.terminal_receipt_contracts import (
     FinalArtifactPin,
@@ -48,8 +49,10 @@ from company_wiki.automation.terminal_receipt_contracts import (
 )
 from company_wiki.automation.terminal_receipts import compact_terminal_narrative_jobs
 from company_wiki.source_catalog.narrative_artifact_store import (
+    LocalNarrativeObjectStore,
     NarrativeArtifactNotVisibleError,
     NarrativeArtifactConflictError,
+    NarrativeArtifactStore,
 )
 from company_wiki.source_contract import EvidenceSpan
 from company_wiki.source_catalog.official_json_projection import (
@@ -355,8 +358,9 @@ def install_dag(state, *, subject=None, tamper=False, label="a", run_prompt_vers
 
 
 @contextmanager
-def publication_state(tmp_path, *, subject_two=False, tamper=False, run_prompt_version=None, bound_prompt=None):
-    with owned_state(tmp_path) as state:
+def publication_state(tmp_path, *, subject_two=False, tamper=False, run_prompt_version=None, bound_prompt=None,
+                      answer_text="Q4 delivery"):
+    with owned_state(tmp_path, answer_text=answer_text) as state:
         state.auto = AutomationStore(state.root / "auto.db")
         state.runtime_generation = state.auto.set_runtime_gate(
             RuntimeState.ENABLED, updated_at=T0
@@ -505,6 +509,44 @@ def test_publish_subject_generation_and_read_uses_one_fresh_view_per_operation(
                 source_id=anchor["source_id"],
                 source_sha256=anchor["content_sha256"],
             )
+
+
+@pytest.mark.parametrize("final_limit", [2 * 1024**2, 3 * 1024**2], ids=["exhausted", "admitted"])
+def test_terminal_compaction_keeps_owner_admitted_large_artifact(tmp_path, final_limit):
+    answer = "We expect to deliver equipment during the fourth quarter. " * 20_000
+    with publication_state(tmp_path, answer_text=answer) as state:
+        budget = BatchStorageBudget(
+            files=(), persistent_dirs=(state.objects.root,), scratch_dirs=(),
+            max_persistent_bytes=8 * 1024**2, max_scratch_bytes=4 * 1024**2,
+        )
+        objects = LocalNarrativeObjectStore(
+            state.objects.root, write_policy=budget.object_write_policy(final_limit),
+        )
+        state.artifacts = NarrativeArtifactStore(state.catalog.store, objects)
+        assert 2 * 1024**2 < state.item.bundle.encoded_size < 3 * 1024**2
+        if final_limit < state.item.bundle.encoded_size:
+            with pytest.raises(StorageBudgetExceeded, match="FINAL_BYTES_EXCEEDED"):
+                dispatch(state)
+            with pytest.raises(NarrativeArtifactNotVisibleError):
+                state.artifacts.visible_version_for_effect(state.item.effect.effect_id)
+            return
+
+        assert dispatch(state).status == "visible"
+        pin = pin_for(state)
+        result = compact_terminal_narrative_jobs(
+            state.auto, state.artifacts, job_ids=state.item.job_ids, final_artifact=pin,
+            compacted_at=T3, projection_loader=state.loader,
+        )
+        assert result.attempts_compacted == 3
+        for job_id in state.item.job_ids:
+            receipt = json.loads(state.auto.list_attempts(job_id)[-1].result_json)["result"]
+            assert receipt["final_artifact"] == pin.to_dict()
+        cold = NarrativeBundleReader(state.artifacts, projection_loader=state.loader).read_subject(
+            artifact_version_id=pin.artifact_version_id, subject=state.item.subject,
+            generation_sha256=state.item.generation,
+        )
+        assert (cold.artifact.content_sha256, cold.artifact.byte_size) == (pin.artifact_sha256, pin.byte_size)
+        assert cold.bundle.to_dict() == state.item.bundle.to_dict()
 
 
 @pytest.mark.parametrize("error", ["missing", "wrong_subject"])

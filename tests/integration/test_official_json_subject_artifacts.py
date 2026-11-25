@@ -37,7 +37,7 @@ def digest(value):
 
 
 @contextmanager
-def owned_state(tmp_path):
+def owned_state(tmp_path, *, answer_text="Q4 delivery"):
     before = tuple(tmp_path.iterdir())
     with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
         root = Path(name)
@@ -50,11 +50,11 @@ def owned_state(tmp_path):
                 body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
                     "page_count": 2, "item_total": 4, "items": [
                     {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
-                     "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                     "q": "New business delivery?", "a": answer_text if company == 1 else "Q4 delivery", "answered": True,
                      "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
                     for company in (1, 2)]}})
                 request = {"schema_version": "official-source-import-request/2",
-                    "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                    "request_id": "subject-page-" + str(page), "max_bytes": 2 * 1024 * 1024,
                     "content_sha256": digest(body), "mime_type": "application/json",
                     "document_kind": "investor_relations", "source_subject": {
                         "kind": "multi_issuer_event", "event_namespace": "fixture",

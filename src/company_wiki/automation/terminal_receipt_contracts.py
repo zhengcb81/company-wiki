@@ -34,8 +34,8 @@ class FinalArtifactPin:
                 raise ValueError(f"{name} must be a nonempty, unpadded identifier")
         require_sha256(self.artifact_sha256, field_name="artifact_sha256")
         require_sha256(self.source_sha256, field_name="source_sha256")
-        if type(self.byte_size) is not int or not 0 < self.byte_size <= 2 * 1024 * 1024:
-            raise ValueError("byte_size must be a positive bounded final artifact size")
+        if type(self.byte_size) is not int or self.byte_size <= 0:
+            raise ValueError("byte_size must be a positive final artifact size")
 
         if self.subject_binding is not None:
             if not isinstance(self.subject_binding, NarrativeSubject) or self.subject_binding.kind != "official_json":
