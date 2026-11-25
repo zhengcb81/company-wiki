@@ -3,12 +3,14 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "w12_company_attempt_after_scoped_feedback_rollout",
+  "execution_mode": "s3_s4_before_f4_and_w12",
   "architecture_rollout": {
     "s2_status": "accepted_scoped_owner_scenarios",
     "s2_receipt": "../feedback-loop-2026-11-17/s2-closeout-20261125.md",
     "s3_status": "implementation_in_progress",
     "s4_status": "paired_behavior_regressions_in_progress",
+    "scheduled_f4_owners_verified": 11,
+    "scheduled_f4_owners_planned": 12,
     "owner_ledger": "../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md",
     "resume_f4_after_s3_s4_acceptance": "../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续"
   },
@@ -67,9 +69,9 @@
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
   "history_index": "HISTORY.md",
   "native_goal": {
-    "observed_status": "active",
-    "observed_via": "Original desktop goal resumed and verified by get_goal during the 2026-11-20 W12 run",
-    "execution": "The original goal is running. W12 is the current company attempt under that goal.",
+    "observed_status": "paused",
+    "observed_via": "Original desktop goal checked during S3/S4 on 2026-11-25",
+    "execution": "S3/S4 are in progress in the current task. Resume the original W12 company attempt after S3/S4 and the remaining F4 acceptance.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {

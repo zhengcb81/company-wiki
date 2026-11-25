@@ -6,9 +6,9 @@
 
 外部 12 仓审计提供补修证据。S1 八仓有提交，七仓按正式目标推送，StockWiki 为本地。CWP、ET、SID 三项回归按各仓边界补修。
 
-S2 的 12 个计划节点均已验收。S3/S4 分仓首批覆盖 12 个模块，FF 的 41 例离线验收、StockQA 的 Ubuntu CI、CWP/FF/ET 采集复用与 Dashboard 的公开组合均通过。RF 日跑已改用 CWP 公开读取。RF 周测的 FF 收据和各仓台账余项继续实施。发布版本和独审分别见 [S2 收尾台账](../feedback-loop-2026-11-17/s2-closeout-20261125.md) 与 [S3/S4 分仓台账](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md)。
+S2 的 12 个计划节点均已验收。S3/S4 分仓首批覆盖 12 个模块，FF 的 41 例离线验收、StockQA 的 Ubuntu CI、CWP/FF/ET 采集复用与 Dashboard 的公开组合均通过。RF 日跑已改用 CWP 公开读取，周测也已切换至 FF 公开收据并通过同版 CI。StockWiki 身份修复的并发与断点恢复在本仓通过，消费组合复验在验。RF 旧月测和 StockQA 付费链的纯值依赖继续分仓处理。 [S2 收尾台账](../feedback-loop-2026-11-17/s2-closeout-20261125.md) · [S3/S4 分仓台账](../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md)
 
-执行顺序为先完成 S3/S4 实施与验收，再接续 F4 未完成的宿主实际采用、历史原作业冷读及无人值守复验，最后继续父计划待办。[F4 接续顺序](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)
+执行顺序为先完成 S3/S4 实施与验收，再接续 F4 未完成的宿主实际采用、历史原作业冷读及无人值守复验，最后继续父计划待办。目前原 W12 桌面目标状态为暂停，S3/S4 在当前任务实施。11 月 25 日只读核对实际 Windows F4 定时任务，仍订阅 11 仓，StockWiki 待接。 [F4 接续顺序](../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续)
 
 - **S1 各仓发布与补修记录**：[s1-p0-blackhole-plan.md](../feedback-loop-2026-11-17/s1-p0-blackhole-plan.md)
 - **完整逐行审计报告与 S1–S4 解决方案**：[full-12-module-architecture-logging-audit-20261124.md](../module-boundaries-2026-11-11/review/full-12-module-architecture-logging-audit-20261124.md)
