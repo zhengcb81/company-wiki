@@ -630,6 +630,109 @@ def test_host_restart_automatically_consumes_direct_native_packet(tmp_path):
     assert not (tmp_path / "business-count.txt").exists()
 
 
+@pytest.mark.parametrize(("different", "terminal_outcome"), (
+    (None, "completed"), ("attempt_id", "completed"), ("evidence_ref", "completed"), (None, "failed"),
+    ("packet_ref", "completed"), ("sibling", "completed"),
+))
+def test_cold_host_uses_recorded_terminal_from_a_separate_native_packet(tmp_path, different, terminal_outcome):
+    _, registry = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    cfg = json.loads(settings.read_bytes())
+    native = tmp_path / "native"
+    native.mkdir()
+    probe = tmp_path / "lookup.py"
+    probe.write_text(
+        "import json,sys\nfrom pathlib import Path\n"
+        "row = json.load(sys.stdin)['payload']['observation']\n"
+        "with Path('lookups.txt').open('a', encoding='utf-8') as out:\n"
+        "    out.write(row['check_id'] + '\\n')\n"
+        "if row['check_id'] == 'job-usage':\n"
+        "    print(json.dumps({'state':'done','result':{'status':'cost_unknown',"
+        "'job_status':'succeeded','cost_state':'unknown','evidence_ref':row['evidence_ref']}}))\n"
+        "else:\n"
+        "    print(json.dumps({'state':'unknown'}))\n",
+        encoding="utf-8",
+    )
+    cfg["owners"][OWNER].update(
+        timeout_seconds=10, native_observation_dirs=["native"], actions={"reconcile": [*PYTHON, str(probe)]},
+    )
+    settings.write_text(json.dumps(cfg), encoding="utf8")
+    recorded = dict(schema_version="feedback-observation/1", owner=OWNER, run_id="run", attempt_id="attempt",
+                    step_id="phase", evidence_ref="fixture/1/original", disposition="expected")
+
+    def publish(token, *rows):
+        packet = native / ("feedback-" + token * 32 + ".jsonl")
+        packet.write_text("".join(json.dumps({**recorded, **row}) + "\n" for row in rows), encoding="utf8")
+        packet.with_suffix(".ready").write_text("{}", encoding="utf8")
+        return packet
+
+    def recover():
+        args = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings),
+                "recover", "--hosts", str(registry)]
+        return json.loads(subprocess.check_output(args, cwd=ROOT, timeout=20))
+
+    failed = terminal_outcome == "failed"
+    related = different == "sibling"
+    mismatched = different in ("attempt_id", "evidence_ref", "packet_ref")
+    terminal = dict(check_id="stage-outcome", expected="completed", actual=terminal_outcome,
+                    disposition="deviation" if failed else "expected")
+    opening = dict(check_id="action-started", terminal_check_id="stage-outcome", expected="started", actual="started")
+    if mismatched:
+        terminal["evidence_ref" if different == "packet_ref" else different] = "other"
+    if different == "packet_ref":
+        start = end = publish("b", opening, terminal)
+    else:
+        end = publish("a", terminal)
+        assert recover()["remaining"] == int(failed)
+        rows = [opening]
+        if related:
+            rows.insert(0, dict(check_id="input-admission", expected="valid", actual="refused",
+                                 disposition="deviation", refusal_code="fixture_refusal"))
+        start = publish("b", *rows)
+    before = {packet: packet.read_bytes() for packet in {start, end}}
+    recovery = recover()
+    assert recovery["remaining"] == int(mismatched or failed or related)
+    assert start.with_suffix(".ready").exists() == (mismatched or related)
+    assert {packet: packet.read_bytes() for packet in before} == before
+    calls = tmp_path / "lookups.txt"
+    if mismatched:
+        assert calls.read_text(encoding="utf-8") == "action-started\n"
+        return
+    assert not calls.exists()
+    if failed or related:
+        assert end.with_suffix(".ready").exists() == failed
+        observed, = recovery["unsettled"][0]["observations"]
+        assert (observed["step"], observed["code"]) == ("triage", "action_unconfigured")
+        return
+    assert recover()["processed"] == 0
+    publish("c", dict(check_id="job-usage", expected="known", actual="unknown", disposition="unknown"))
+    usage = recover()
+    assert usage["remaining"] == 1 and usage["unsettled"][0]["observations"][0]["cost_state"] == "unknown"
+    assert calls.read_text(encoding="utf-8") == "job-usage\n"
+
+
+def test_cold_host_distinguishes_an_unconfigured_triage_from_an_unknown_action(tmp_path):
+    _, registry = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    native = tmp_path / "observations"
+    native.mkdir()
+    packet = native / ("feedback-" + "a" * 32 + ".jsonl")
+    row = {"schema_version": "feedback-observation/1", "owner": OWNER, "run_id": "run", "attempt_id": "one",
+           "step_id": "source", "check_id": "outcome", "expected": "ok", "actual": "failed"}
+    original = (json.dumps(row) + "\n").encode("utf8")
+    packet.write_bytes(original)
+    marker = packet.with_suffix(".ready")
+    marker.write_text("{}", encoding="utf8")
+    command = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings),
+               "recover", "--hosts", str(registry)]
+    result = json.loads(subprocess.check_output(command, cwd=ROOT, timeout=20))
+    blocked, = result["unsettled"][0]["observations"]
+    assert (blocked["status"], blocked["step"], blocked["code"]) == ("unknown", "triage", "action_unconfigured")
+    assert result["woken"] == 0 and marker.exists() and packet.read_bytes() == original
+    with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as connection:
+        assert connection.execute("SELECT json_extract(request, '$.kind') FROM actions").fetchall() == [("observe",)]
+
+
 def test_recover_explicit_sidecar_uses_its_owner_registry(tmp_path):
     _, registry = configuration(tmp_path)
     registry = registry.rename(tmp_path / "explicit-hosts.json")

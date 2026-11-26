@@ -6,7 +6,7 @@ from collections.abc import Callable
 import subprocess
 import time
 
-from .observations import Batch, digest
+from .observations import Batch, digest, terminal_occurrence_ids
 
 
 Host = Callable[[str, dict], dict]
@@ -17,6 +17,9 @@ _RECONCILE_DIAGNOSTICS = frozenset({
     "native_status_unavailable",
     "owner_unconfigured",
     "reconcile_lookup_only",
+})
+_ACTION_DIAGNOSTICS = frozenset({
+    "action_conflict", "action_unconfigured", "legacy_report_without_owner_ack", "owner_unconfigured",
 })
 
 
@@ -60,7 +63,10 @@ def _perform(host: Host, owner: str, kind: str, identity: list, payload: dict, *
         if state == "done" and isinstance(reply.get("result"), dict):
             return reply["result"]
         if state in ("unknown", "pending", "failed"):
-            code = reconcile_diagnostic_code(reply.get("code")) if kind == "reconcile" else None
+            value = reply.get("code")
+            code = reconcile_diagnostic_code(value) if kind == "reconcile" else (
+                value if isinstance(value, str) and value in _ACTION_DIAGNOSTICS else None
+            )
             raise Deferred(state, kind, code=code)
         raise Deferred("unverified", kind)
     raise AssertionError("submit must return an observed state")
@@ -102,13 +108,17 @@ def _gate_review(triage: dict) -> dict:
     return {}
 
 
-def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
-    observation = {"occurrence_id": key, "observation": row}
-    bound = _perform(host, row["origin_owner"], "observe", [key], observation)
+def _observe(key: str, row: dict, host: Host, *, lookup_only: bool = False) -> dict:
+    bound = _perform(host, row["origin_owner"], "observe", [key],
+                     {"occurrence_id": key, "observation": row}, lookup_only=lookup_only)
     if bound.get("recorded") is not True:
         raise Deferred("unverified", "observe")
+    return bound
+
+
+def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
     if unfinished or row["disposition"] == "unknown":
-        return _reconcile(key, row, host, observation)
+        return _reconcile(key, row, host, {"occurrence_id": key, "observation": row})
     expected = row["disposition"] == "expected"
     refusal = "refusal_code" in row
     if expected and not refusal:
@@ -154,13 +164,33 @@ def _advance_one(key: str, row: dict, host: Host, *, unfinished: bool) -> dict:
 
 
 def advance(batch: Batch, host: Host, *, only: set[str] | None = None) -> dict:
+    # Register source facts before routing their related failures. A matching
+    # terminal may be in this packet or in the ledger from an earlier packet.
+    observed = {}
+    errors = {}
+    for key, row in batch.observations.items():
+        try:
+            observed[key] = _observe(key, row, host, lookup_only=only is not None and key not in only)
+        except Deferred as deferred:
+            errors[key] = deferred
+    starts = batch.unfinished_starts(registered=set(observed))
+    completed = {}
+    for key in starts & observed.keys():
+        terminal = observed[key].get("terminal_occurrence_id")
+        if terminal in terminal_occurrence_ids(batch.observations[key]) and terminal not in errors:
+            completed[key] = terminal
+    unfinished = batch.unfinished_occurrences(starts=starts - completed.keys())
     outcomes = []
-    unfinished = batch.unfinished_occurrences()
     for key, row in batch.observations.items():
         if only is not None and key not in only:
             continue
         try:
-            outcome = _advance_one(key, row, host, unfinished=key in unfinished)
+            if key in errors:
+                raise errors[key]
+            if key in completed:
+                outcome = {"status": "expected", "terminal_occurrence_id": completed[key]}
+            else:
+                outcome = _advance_one(key, row, host, unfinished=key in unfinished)
         except Deferred as deferred:
             outcome = {"status": deferred.status, "step": deferred.step}
             if deferred.code is not None:

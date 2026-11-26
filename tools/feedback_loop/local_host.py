@@ -21,7 +21,7 @@ from .diagnostics import (
     run_background,
 )
 from .host import BACKGROUND_CREATION_FLAGS, host_environment, read_hosts
-from .observations import digest, unique_fields
+from .observations import IDENTITY, digest, has_stage_result, normalize_observation, terminal_occurrence_ids, unique_fields
 from .triage_diagnostic import native_diagnostic_facts
 
 _logger = logging.getLogger(__name__)
@@ -615,7 +615,40 @@ class LocalHost:
             return {**prefix, "state": "failed", "code": "action_conflict"}
         if request["kind"] == "report" and row["route"] is None:
             return {**prefix, "state": "unknown", "code": "legacy_report_without_owner_ack"}
-        return {**prefix, **self._status(row, environment=environment)}
+        status = self._status(row, environment=environment)
+        result = status.get("result")
+        if (request["kind"] == "observe" and status["state"] == "done"
+                and isinstance(result, dict) and result.get("recorded") is True):
+            terminal = self._recorded_terminal(request["owner"], request["payload"].get("observation"))
+            if terminal is not None:
+                result["terminal_occurrence_id"] = terminal
+        return {**prefix, **status}
+
+    def _recorded_terminal(self, owner, start):
+        if not isinstance(start, dict) or start.get("origin_owner") != owner:
+            return None
+        for occurrence in terminal_occurrence_ids(start):
+            key = digest(["observe", owner, occurrence])
+            stored = self._get(key)
+            if stored is None or stored["state"] != "done":
+                continue
+            try:
+                request = json.loads(stored["request"])
+                receipt = json.loads(stored["receipt"])
+                _validate(request)
+                payload = request["payload"]
+                terminal = normalize_observation(payload["observation"])
+                if (request["kind"] == "observe" and request["owner"] == owner and request["action_id"] == key
+                        and request["request_digest"] == stored["request_digest"]
+                        and payload["occurrence_id"] == occurrence
+                        and digest([terminal[field] for field in IDENTITY]) == occurrence
+                        and has_stage_result(terminal)
+                        and ("evidence_ref" not in start or terminal.get("evidence_ref") == start["evidence_ref"])
+                        and receipt["result"]["recorded"] is True):
+                    return occurrence
+            except (AttributeError, KeyError, TypeError, ValueError, RecursionError):
+                continue  # An unusable observation leaves the original lookup available.
+        return None
 
     def _claim_native(self, row, timeout):
         # The runner that can actually launch the action claims it. An

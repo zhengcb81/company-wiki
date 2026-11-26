@@ -91,6 +91,31 @@ def test_partial_publication_never_triages_before_its_matching_terminal(tmp_path
     assert host.started["triage"] == host.started["repair"] == 1
 
 
+@pytest.mark.parametrize(("actual", "status"), (("listed", "expected"), ("unknown", "unknown")))
+def test_legacy_start_can_gain_its_first_evidence_reference_at_completion(tmp_path, actual, status):
+    owner = "stockinfo-dl-simple"
+    start = event(owner=owner, check_id="action-started", expected="started", actual="started", evidence_ref=None)
+    final = event(owner=owner, check_id="candidate-listing-identity", expected="listed", actual=actual)
+    host = NativeJobs()
+    observed = advance(batch(tmp_path, start, final), host)["observations"]
+    assert [row["status"] for row in observed] == [status, status]
+    assert host.started == {"observe": 2}
+
+
+def test_an_in_file_result_that_conflicts_with_the_ledger_cannot_release_related_triage(tmp_path):
+    host = NativeJobs()
+    terminal = event(check_id="stage-outcome", actual="qualified")
+    recorded = advance(batch(tmp_path, {**terminal, "evidence_ref": "other"}), host)
+    assert recorded["observations"][0]["status"] == "expected"
+    start = event(check_id="action-started", expected="started", actual="started", terminal_check_id="stage-outcome")
+    refusal = event(actual="refused", refusal_code="source_gate")
+    observed = advance(batch(tmp_path, refusal, start, terminal), host)["observations"]
+    assert [(row["status"], row["step"]) for row in observed] == [
+        ("unknown", "reconcile"), ("unknown", "reconcile"), ("unverified", "observe"),
+    ]
+    assert host.started == {"observe": 3}
+
+
 def test_replay_of_old_version_cannot_close_issue(tmp_path):
     host = NativeJobs()
     host.results["replay"]["verified_version"] = "old-consumer-cache"

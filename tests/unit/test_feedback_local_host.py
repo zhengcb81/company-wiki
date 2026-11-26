@@ -11,7 +11,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 
-from tools.feedback_loop.observations import digest
+from tools.feedback_loop.observations import IDENTITY, digest
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -149,6 +149,25 @@ def host_config(tmp_path):
         "filing-fetch": {"cwd": str(tmp_path), "ff_status_argv": [sys.executable, "-B", str(status), "ff-calls"]},
     }}), encoding="utf-8")
     return config
+
+
+def test_missing_observation_fields_in_an_old_result_do_not_close_the_start(host_config):
+    owner = "company-wiki"
+    stage = {"schema_version": "feedback-observation/1", "owner": owner, "origin_owner": owner,
+             "run_id": "original", "attempt_id": "first", "step_id": "read", "evidence_ref": "source/original"}
+
+    def bind(row):
+        occurrence = digest([row[field] for field in IDENTITY])
+        payload = {"occurrence_id": occurrence, "observation": row}
+        submitted = action("observe", owner, payload)
+        key = digest(["observe", owner, occurrence])
+        submitted.update(action_id=key, request_digest=digest([owner, "observe", key, payload]))
+        return invoke(host_config, "rpc", submitted)
+
+    assert bind({**stage, "check_id": "outcome", "actual": "succeeded"})["state"] == "done"
+    start = {**stage, "check_id": "action-started", "terminal_check_id": "outcome",
+             "expected": "started", "actual": "started", "disposition": "expected"}
+    assert bind(start)["result"] == {"recorded": True}
 
 
 def test_concurrent_submit_discarded_reply_and_recovery(host_config):

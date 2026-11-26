@@ -28,9 +28,40 @@ def _step_identity(row: dict[str, str]) -> tuple[str, ...]:
     return tuple(row[field] for field in IDENTITY[:-1])
 
 
+def _evidence_scope(row: dict[str, str]) -> tuple[str, ...]:
+    scope = _step_identity(row)
+    return (*scope, row["evidence_ref"]) if "evidence_ref" in row else scope
+
+
+def has_stage_result(row: dict[str, str]) -> bool:
+    return row["check_id"] != "action-started" and row["actual"] not in (
+        "started", "pending", "running", "unknown", "unconfirmed", "cost_unknown",
+    )
+
+
 def digest(value: object) -> str:
     canonical = json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False)
     return hashlib.sha256(canonical.encode("ascii")).hexdigest()
+
+
+def _terminal_checks(row: dict[str, str]) -> frozenset[str]:
+    declared = row.get("terminal_check_id")
+    if declared is None:
+        return _LEGACY_TERMINALS.get(row["owner"], frozenset())
+    if isinstance(declared, str) and declared.strip() and declared != "action-started":
+        return frozenset({declared})
+    return frozenset()
+
+
+def terminal_occurrence_ids(row: dict[str, str]) -> tuple[str, ...]:
+    """Locate declared results for an ordinary start using its original stage identity."""
+    if (row.get("check_id") != "action-started" or row.get("disposition") != "expected"
+            or row.get("expected") != "started" or row.get("actual") != "started" or "refusal_code" in row):
+        return ()
+    identity = [row.get(field) for field in IDENTITY[:-1]]
+    if not all(isinstance(value, str) and value.strip() for value in identity):
+        return ()
+    return tuple(digest([*identity, check]) for check in sorted(_terminal_checks(row)))
 
 
 def unique_fields(pairs: list[tuple]) -> dict:
@@ -43,8 +74,11 @@ def unique_fields(pairs: list[tuple]) -> dict:
 
 
 def decode_observation(raw: bytes) -> dict[str, str]:
-    """Validate and normalize one raw F4 observation."""
-    value = json.loads(raw.decode("utf-8"), object_pairs_hook=unique_fields)
+    return normalize_observation(json.loads(raw.decode("utf-8"), object_pairs_hook=unique_fields))
+
+
+def normalize_observation(value: object) -> dict[str, str]:
+    """Validate an observation read from a sidecar or the durable host ledger."""
     if not isinstance(value, dict) or value.get("schema_version") != "feedback-observation/1":
         raise ValueError("unsupported_observation")
     row = {"schema_version": value["schema_version"]}
@@ -76,21 +110,21 @@ class Batch:
         return {"observations": [{"occurrence_id": key, **row} for key, row in self.observations.items()],
                 "diagnostics": self.diagnostics}
 
-    def unfinished_starts(self) -> set[str]:
+    def unfinished_starts(self, *, registered: set[str] | None = None) -> set[str]:
         matching_checks: dict[tuple[str, ...], set[str]] = {}
-        for row in self.observations.values():
-            if row["check_id"] != "action-started":
-                matching_checks.setdefault(_step_identity(row), set()).add(row["check_id"])
+        for key, row in self.observations.items():
+            if (registered is None or key in registered) and has_stage_result(row):
+                for scope in {_step_identity(row), _evidence_scope(row)}:
+                    matching_checks.setdefault(scope, set()).add(row["check_id"])
         return {
             key for key, row in self.observations.items()
             if row["check_id"] == "action-started" and row["actual"] == "started"
-            and not matching_checks.get(_step_identity(row), set()).intersection(
-                {row["terminal_check_id"]} if "terminal_check_id" in row
-                else _LEGACY_TERMINALS.get(row["owner"], ()))
+            and not matching_checks.get(_evidence_scope(row), set()).intersection(_terminal_checks(row))
         }
 
-    def unfinished_occurrences(self) -> set[str]:
-        starts = self.unfinished_starts()
+    def unfinished_occurrences(self, *, starts: set[str] | None = None) -> set[str]:
+        if starts is None:
+            starts = self.unfinished_starts()
         pending_starts = (self.observations[key] for key in starts)
         scopes = {
             _step_identity(row) for row in pending_starts
