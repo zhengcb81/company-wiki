@@ -1,0 +1,13 @@
+{
+  "business_exit": 0,
+  "calls": 1,
+  "flushed_rows": 5,
+  "durable_observations": 5,
+  "duplicate_rows": 0,
+  "commit": "4bd76b393dde08e9915390de1d47950f2e3b9705",
+  "host_source_sha256": {
+    "tools/feedback_loop/intake.py": "0ffa1a4b8782a2cca55a5c42907bee1ba2a3d7f8bb2aa00e169c86bdb1d82fe8",
+    "tools/feedback_loop/local_host.py": "cb895b22606bdfaa272b6f420ac686637ce322b57bec285c9e33de45d236e25f",
+    "tools/feedback_loop/host.py": "499cf2850a73564a5fa09fd44c76ca7a674e40d343e4d8c6707ba09fcc1ce5d0"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "commit": "38345b663a33d5c57b557bf4d193a8baa9149d41",
+  "candidate_owner_source_sha256": "8b13ea370d7bdf2109d81fa80f0027377352117e65da93d6a61dd506b6949f6d",
+  "source_requests": 0,
+  "audit_started": 1,
+  "first_processed": 1,
+  "duplicate_observations": 0,
+  "original_run_id": "r25-ir-original",
+  "original_attempt_id": "attempt-one",
+  "owner_actions": [
+    [
+      "observe",
+      "done"
+    ],
+    [
+      "repair",
+      "done"
+    ],
+    [
+      "replay",
+      "done"
+    ],
+    [
+      "report",
+      "done"
+    ],
+    [
+      "triage",
+      "done"
+    ]
+  ],
+  "cold_read_equal": true,
+  "host_lookup_state": "done",
+  "host_lookup_code": null,
+  "owner_lookup_fields": [
+    "result",
+    "state"
+  ],
+  "owner_job_status": "succeeded",
+  "owner_cost_state": "unknown",
+  "owner_triage_decision": "repair",
+  "source_audit_unchanged": true,
+  "foreign_run_unconfirmed": true,
+  "host_source_sha256": {
+    "tools/feedback_loop/intake.py": "0ffa1a4b8782a2cca55a5c42907bee1ba2a3d7f8bb2aa00e169c86bdb1d82fe8",
+    "tools/feedback_loop/local_host.py": "cb895b22606bdfaa272b6f420ac686637ce322b57bec285c9e33de45d236e25f",
+    "tools/feedback_loop/host.py": "499cf2850a73564a5fa09fd44c76ca7a674e40d343e4d8c6707ba09fcc1ce5d0"
+  }
+}
