@@ -16,18 +16,38 @@
     "f4_diagnostic_context_release": "fc2e0f31cfbb06248e88592c600911164122ab79",
     "f4_diagnostic_exact_ci_run": 45615128124,
     "f4_open_native_case": null,
-    "dashboard_feedback_runtime": "b57672fd44f95f2fa105dc26c180afcf42a0ec09",
+    "dashboard_feedback_runtime": "38542cf243c7a77eb35e0f32269051e32ea97d21",
     "s5_status": "scoped_owner_fixes_and_runtime_alignment",
     "s5_verification": "../feedback-loop-2026-11-17/s5-verification-20261125.md",
     "scheduled_f4_owners_verified": 12,
     "scheduled_f4_owners_planned": 12,
     "scheduled_f4_receipt": {
-      "finished_at_utc": "2026-11-25T12:40:12Z",
+      "started_at_utc": "2026-11-26T10:08:36Z",
+      "finished_at_utc": "2026-11-26T10:08:47.817Z",
       "exit_code": 0,
-      "observations": 376,
-      "unsettled_historical_and_native_packets": 368,
+      "observations": 118,
+      "unsettled_historical_and_native_packets": 110,
       "woken": 0,
       "diagnostics": 0
+    },
+    "f4_history_reconciliation": {
+      "host_release": "97fece898dc032306c0c1a8c19f9ad018c1f7d9d",
+      "rf_reconcile_requests": 73,
+      "rf_reconcile_batch_calls": 1,
+      "rf_reconcile_single_fallbacks": 0,
+      "triage_needs_evidence_by_owner": {
+        "filing-fetch": 8,
+        "revenue-forecast": 25
+      },
+      "pending_original_reconciliation_after_worker": 79,
+      "industry_research_unknown_legacy_actions": 13,
+      "evidence": "../feedback-loop-2026-11-17/f4-closeout-20261126.md"
+    },
+    "s5_formal_deployment": {
+      "status": "running_entries_verified_external_evidence_pending",
+      "private_ci_pending": ["investment-dashboard", "industry-research"],
+      "system_task_registration_pending": ["revenue_daily_t2", "revenue_weekly_t3"],
+      "evidence": "../feedback-loop-2026-11-17/deployment-acceptance-20261126.md"
     },
     "owner_ledger": "../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md",
     "f4_runtime_ledger": "../feedback-loop-2026-11-17/f4-resume-runtime-20261125.md",
@@ -90,7 +110,7 @@
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "Original desktop goal checked during S3/S4 on 2026-11-25",
-    "execution": "S1-S5 released remediation passed independent retest. The current task is formal deployment and on-host recovery acceptance before W12 resumes. See ../feedback-loop-2026-11-17/deployment-acceptance-20261126.md.",
+    "execution": "S1-S5 released remediation and F4 on-host recovery passed independent retest. Private CI and RF SYSTEM task registration evidence remains pending before W12 resumes. See ../feedback-loop-2026-11-17/deployment-acceptance-20261126.md.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -203,7 +223,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Complete the formal S5-10 deployment and private CI acceptance first. Then use the released RF issuer, coverage and recognition fixes with the new registered 1C evidence. Preserve the original CWP /8 attempt and its unresolved cost without replaying the provider POST. Complete revenue-magnitude research and verify real CWP summary, cache and RF adoption in a new W12 attempt at the original cutoff.",
+  "next_action": "Read the exact Dashboard and industry-research private CI results and the two RF SYSTEM task registrations for S5-10. Then use the released RF issuer, coverage and recognition fixes with the new registered 1C evidence. Preserve the original CWP /8 attempt and its unresolved cost without replaying the provider POST. Complete revenue-magnitude research and verify real CWP summary, cache and RF adoption in a new W12 attempt at the original cutoff.",
   "w12_attempt": {
     "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",

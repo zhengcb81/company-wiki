@@ -1,6 +1,8 @@
 # 当前交接
 
-2026-11-20。原生目标已恢复。W12 正式执行、四路独审和专家归因已封存。Audit W03 和 FF W06 已接收。RF W01、W02 源码 `cbb523a` 已独审推主线，后续 `7d682a6` 更新本仓计划。CWP `/8` 首个正式请求超时，原作业查证可读，费用保留未知且不重发。新版正式摘要、缓存和 RF 实际采用待复验。Akebia 合同原件和两份同行已走 RF 草案对照，按原截止日准备新尝试。 [W12 整改接收](review/w12-wuxi-resume-20261120/README.md#w12-整改接收) · [正式请求与反馈](review/w12-wuxi-resume-20261120/README.md#w04-正式请求与原作业查证)
+2026-11-26 当前接续。先读 [当前状态](CURRENT_STATUS.md) 和 [F4 正式部署](../feedback-loop-2026-11-17/deployment-acceptance-20261126.md)。共享恢复及本轮 33 份分诊回执已从原任务验证。正式验收剩两个私有 CI 和 RF 两个 SYSTEM 任务的证据。业务目标仍停在 W12。 [F4 运行回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)
+
+2026-11-20 历史检查点。W12 正式执行、四路独审和专家归因已封存。Audit W03 和 FF W06 已接收。RF W01、W02 源码 `cbb523a` 已独审推主线，后续 `7d682a6` 更新本仓计划。CWP `/8` 首个正式请求超时，原作业查证可读，费用保留未知且不重发。新版正式摘要、缓存和 RF 实际采用待复验。Akebia 合同原件和两份同行已走 RF 草案对照，按原截止日准备新尝试。 [W12 整改接收](review/w12-wuxi-resume-20261120/README.md#w12-整改接收) · [正式请求与反馈](review/w12-wuxi-resume-20261120/README.md#w04-正式请求与原作业查证)
 
 2026-11-18。当前业务入口为 [业务主线](task_plan.md)。ET、SID、IR 已发布本仓实现并经 ROOT 组合签收。F4 的 CWP/FF 和 RF/Audit 真实宿主闭环与强杀恢复均已通过。其余 owner 按分工接续，下一家公司及 RF 采用仍走 W12。[CWP/FF 验收](../feedback-loop-2026-11-17/f4-acceptance.md) · [RF/Audit 验收](../feedback-loop-2026-11-17/f4-rf-audit-acceptance.md) · [F2 路线](../feedback-loop-2026-11-17/f2-roadmap.md) · [逐仓交接](../module-boundaries-2026-11-11/owner_plans.md)。
 
