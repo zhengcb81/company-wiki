@@ -1,5 +1,7 @@
 """Finite batches query only their jobs; no whole-store Python filtering."""
 
+import sqlite3
+
 from company_wiki.automation.models import Event, Job, JobStatus, RiskClass, make_job_key
 from company_wiki.automation.store import AutomationStore
 
@@ -22,40 +24,54 @@ def _seed(tmp_path, monkeypatch):
             created_from_event_id=event_id, created_at=now, updated_at=now,
             last_error_code=None, last_error_detail=None))
     queries = []
-    original = store._connect
+    connections = []
+    connect = sqlite3.connect
 
-    def traced():
-        conn = original()
+    def traced(database, *args, **options):
+        conn = connect(database, *args, **options)
+        connections.append((database, options.get("uri", False)))
         conn.set_trace_callback(queries.append)
         return conn
 
-    monkeypatch.setattr(store, "_connect", traced)
-    return store, queries
+    # Observe the actual SQLite connection, independent of the store's
+    # read/write connection helpers.
+    monkeypatch.setattr(sqlite3, "connect", traced)
+    return store, queries, connections
+
+
+def _assert_readonly(connections, expected_count):
+    assert len(connections) == expected_count
+    assert all(uri and database.endswith("?mode=ro") for database, uri in connections)
 
 
 def test_job_and_event_scopes_are_intersected_in_sql_before_ordering(tmp_path, monkeypatch):
-    store, queries = _seed(tmp_path, monkeypatch)
+    store, queries, connections = _seed(tmp_path, monkeypatch)
     result = store.list_jobs(job_ids=("job-2", "job-1", "job-1"),
                              event_ids=("event-0", "event-1"), status=JobStatus.RUNNING)
     assert tuple(job.job_id for job in result) == ("job-1",)
-    sql = next(q for q in queries if "FROM jobs" in q)
+    matching = [q for q in queries if "FROM jobs" in q]
+    assert len(matching) == 1
+    sql = matching[0]
     assert "job_id IN" in sql and "created_from_event_id IN" in sql and "status =" in sql
     assert sql.index("WHERE") < sql.index("ORDER BY")
     assert tuple(job.job_id for job in store.list_jobs()) == ("job-2", "job-1", "job-0")
+    _assert_readonly(connections, 2)
 
 
 def test_explicit_empty_scope_means_no_query_not_all_jobs(tmp_path, monkeypatch):
-    store, queries = _seed(tmp_path, monkeypatch)
+    store, queries, connections = _seed(tmp_path, monkeypatch)
     assert store.list_jobs(job_ids=()) == ()
     assert store.list_jobs(event_ids=()) == ()
     assert queries == []
+    assert connections == []
 
 
 def test_foreign_running_is_exists_query_and_honours_owner_scope(tmp_path, monkeypatch):
-    store, queries = _seed(tmp_path, monkeypatch)
+    store, queries, connections = _seed(tmp_path, monkeypatch)
     assert store.has_running_jobs_outside_scope(("job-1",)) is True
     assert store.has_running_jobs_outside_scope(("job-1", "job-2")) is False
     assert store.has_running_jobs_outside_scope(()) is True
-    for sql in queries:
-        if "FROM jobs" in sql:
-            assert "SELECT 1" in sql and "status = 'running'" in sql and "LIMIT 1" in sql
+    matching = [q for q in queries if "FROM jobs" in q]
+    assert len(matching) == 3
+    assert all("SELECT 1" in sql and "status = 'running'" in sql and "LIMIT 1" in sql for sql in matching)
+    _assert_readonly(connections, 3)
