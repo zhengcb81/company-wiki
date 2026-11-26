@@ -86,3 +86,5 @@ StockWiki 已用同一正式公开入口在隔离环境验证实际故障和冷�
 ## S1–S5 独审后的整改
 
 2026-11-25 的 [12 仓独审](review/s1-s5-independent-20261125/findings.md) 复现了运行身份、终态、反馈恢复和仓内边界问题。整改由各责任仓实施并由独立 agent 对最终版本复验，三仓本机组合验收已通过。正式提交和 CI 以 [整改验收与发布台账](s1-s5-remediation-20261125/release_receipt.md) 为准。共用约定、复验范围和实机部署边界见 [整改计划](s1-s5-remediation-20261125/task_plan.md)。
+
+本轮 [S5-10 正式部署验收](deployment-acceptance-20261126.md) 已完成分仓独审、本机采用与共享定时复验。私有 CI 与 RF SYSTEM 任务的最终核验证据仍待授权会话取回。验收后按 W12 原检查点接续业务摘要。

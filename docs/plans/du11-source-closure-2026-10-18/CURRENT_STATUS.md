@@ -2,6 +2,12 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
+## 2026-11-26 正式部署与 W12 接续
+
+当前先完成 [S5-10 正式部署验收](../feedback-loop-2026-11-17/deployment-acceptance-20261126.md)。改进版 RF 已用实际入口两次读回原 W12 发布作业。原摘要 `/8` 尚无可绑定的模型回包，沿用原费用未知和原请求身份。
+
+部署验收后，先读原 `/8` 回执及已保存证据，再用新登记的 Akebia 1C 对照和同一信息截止日接续研究。若确认需要新生成，按当前配置和母账建立有明确作用域的新尝试。验收原文检查点、同次与跨次缓存，以及 RF 正式采用和计算。接续不补发原 `/8` POST。[W12 执行记录](review/w12-wuxi-resume-20261120/README.md)
+
 ## 2026-11-25 S5 修复与真实运行核对
 
 S5 已发布已证故障修复，更新 F4 的实际检出并核对 FF、RF、Audit、IR 技能副本。CWP 正式 CLI、IQS 后台准备与协调、Dashboard 长状态路径均已有真实本地回归。分仓版本和日志覆盖范围见 [S5 验证台账](../feedback-loop-2026-11-17/s5-verification-20261125.md)，实施入口见 [S5 实施计划](../feedback-loop-2026-11-17/s5-closeout-plan-20261125.md)。W12 业务循环仍记录在原暂停点。

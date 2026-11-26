@@ -112,6 +112,25 @@ def _flush(root, database, job_id, *, env=None, exit_code=0):
     return json.loads(process.stdout)
 
 
+def _maintenance_environment(root):
+    return _environment(root) | {
+        "RESEARCH_FEEDBACK_RUN_ID": "flush-maintenance",
+        "RESEARCH_FEEDBACK_ATTEMPT_ID": "flush-attempt",
+    }
+
+
+def _assert_maintenance_packet(packet, *, actual="exit:1"):
+    row = json.loads(packet.read_bytes())
+    identity = ("flush-maintenance", "flush-attempt", "automation-feedback-flush")
+    assert row["owner"] == "company-wiki" and row["actual"] == actual
+    assert (row["run_id"], row["attempt_id"], row["step_id"]) == identity
+    details_bytes = (packet.parent / row["details_ref"]).read_bytes()
+    assert b"first-attempt" not in details_bytes and b"original-attempt" not in details_bytes
+    details = json.loads(details_bytes)
+    assert (details["run_id"], details["attempt_id"], details["step_id"]) == identity
+    return details
+
+
 @pytest.mark.parametrize("mode", ["reap", "handler"])
 @pytest.mark.parametrize("boundary", ["database-commit", "ready-published"])
 def test_hard_stop_after_commit_or_ready_repairs_original_attempt(tmp_path, mode, boundary):
@@ -200,13 +219,14 @@ def test_recovery_defers_when_native_sinks_fail_then_acknowledges_after_consumpt
     impossible = tmp_path / "blocked-directory"
     impossible.touch()
     explicit = tmp_path / "supervised.jsonl"
-    env = _environment(tmp_path) | {
+    env = _maintenance_environment(tmp_path) | {
         "RESEARCH_FEEDBACK_DIR": str(impossible), "RESEARCH_FEEDBACK_OUT": str(explicit),
         "LOCALAPPDATA": str(impossible), "XDG_STATE_HOME": str(impossible),
     }
     failed = _flush(tmp_path, store.db_path, job_id, env=env, exit_code=1)
     assert failed == {"published": 0, "deferred": 1, "unavailable": False}
-    assert store.pending_worker_feedback() == (original,) and not explicit.exists()
+    _assert_maintenance_packet(explicit)
+    assert store.pending_worker_feedback() == (original,)
     assert store.pending_worker_feedback(allowed_job_ids=()) == ()
     assert not store.ack_worker_feedback("wrong-job", original[1], original[2])
 
@@ -264,9 +284,12 @@ def test_worker_feedback_preserves_existing_schema_and_other_notification_channe
 
 def test_feedback_flush_does_not_create_a_missing_owner_database(tmp_path):
     missing = tmp_path / "missing.sqlite"
-    result = _flush(tmp_path, missing, "job", exit_code=1)
+    result = _flush(tmp_path, missing, "job", env=_maintenance_environment(tmp_path), exit_code=1)
     assert result["unavailable"] is True and result["reason"] == "automation_database_missing"
-    assert list(tmp_path.iterdir()) == []
+    assert not list(tmp_path.glob("missing.sqlite*"))
+    packet, = (tmp_path / "observations").glob("feedback-*.jsonl")
+    details = _assert_maintenance_packet(packet, actual="unavailable")
+    assert details["reason"] == "automation_database_missing"
 
 
 def _queue_expired(store, job_id, attempt_id):
@@ -291,10 +314,11 @@ def test_frozen_packet_must_match_the_original_attempt_selected_by_the_queue(tmp
     with closing(sqlite3.connect(store.db_path)) as conn, conn:
         conn.execute("UPDATE notifications SET payload_json=? WHERE channel='worker-feedback'", (wrong,))
 
-    failed = _flush(tmp_path, store.db_path, job_id, exit_code=1)
+    failed = _flush(tmp_path, store.db_path, job_id, env=_maintenance_environment(tmp_path), exit_code=1)
     assert failed == {"published": 0, "deferred": 1, "unavailable": False}
     assert store.pending_worker_feedback() == ((job_id, attempt_id, wrong),)
-    assert not (tmp_path / "observations").exists()
+    packet, = (tmp_path / "observations").glob("feedback-*.jsonl")
+    _assert_maintenance_packet(packet)
     with closing(sqlite3.connect(store.db_path)) as conn, conn:
         conn.execute("UPDATE notifications SET payload_json=? WHERE channel='worker-feedback'", (original[2],))
     assert _flush(tmp_path, store.db_path, job_id)["published"] == 1
@@ -311,10 +335,13 @@ def test_replay_does_not_replace_a_divergent_existing_diagnostic(tmp_path):
     details.write_text('{"reason":"previous diagnostic evidence"}\n', encoding="utf-8")
     before = _snapshot(inbox)
 
-    result = _flush(tmp_path, store.db_path, original[0], exit_code=1)
+    result = _flush(tmp_path, store.db_path, original[0], env=_maintenance_environment(tmp_path), exit_code=1)
     assert result["deferred"] == 1 and result["published"] == 0
     assert store.pending_worker_feedback() == (original,)
-    assert _snapshot(inbox) == before
+    after = _snapshot(inbox)
+    assert all(after[name] == value for name, value in before.items())
+    packet, = inbox.glob("feedback-*.jsonl")
+    _assert_maintenance_packet(packet)
 
     details.unlink()
     assert _flush(tmp_path, store.db_path, original[0])["published"] == 1

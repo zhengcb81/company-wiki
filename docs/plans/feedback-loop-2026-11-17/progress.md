@@ -151,3 +151,5 @@ ROOT 实施批次已把行业研究及 RF 的已审运行代码与验收记录�
 FF 和 IQS 正式运行代码已发布。实际 Windows 定时任务从 FF 的四次历史业务找回 22 条观察，入原台账一次。四个原生重用包已确认，两个电话会费用状态继续标为未知。FF 远端的一次失败在 Ubuntu 3.12 原样复现。隔离下载重试测试的时钟替身和测试反馈目录后，209 项本机 Linux 回归通过，相关 Windows 两项通过。[FF CI](https://github.com/zhengcb81/filing-fetch/actions/runs/45271185608)
 
 ET 独审对照三个冻结版本。深目录、10 MiB 后的日志、明细补投和同一尝试不同拒绝均可查。真实进程在写新正文后、发出 ready 前被强停，约一分钟租期结束后只读入口补投两条，旧确认及原件保持完整。ROOT 对两批各重扫一次，台账恰好三个发生。源码 `b9594caf`，总控组合 `413b74d3`。[ET 本仓交接](../../../../earnings-transcripts/earnings-transcripts/docs/plans/feedback-loop-2026-11-17/F4-ET-FAILURES-handoff.md)
+
+2026-11-26 正式本机运行入口对齐 12 仓。各仓独立验证实际日志、强停与同号冷读。正常任务复用原注册；一次隔离的真实 Windows 定时触发登记 CWP 原失败，重读两次，业务、网络和费用新增零，隔离任务已卸除。全局受管技能与 IQS／Dashboard 原专用读端口已对齐。Dashboard 和行业研究私有 CI 以及 RF SYSTEM 日周任务的授权只读结果仍待核。[部署验收台账](deployment-acceptance-20261126.md)

@@ -90,7 +90,7 @@
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "Original desktop goal checked during S3/S4 on 2026-11-25",
-    "execution": "S3/S4 scoped delivery is accepted. The current task is closing the remaining F4 work before the original W12 company attempt resumes.",
+    "execution": "S1-S5 released remediation passed independent retest. The current task is formal deployment and on-host recovery acceptance before W12 resumes. See ../feedback-loop-2026-11-17/deployment-acceptance-20261126.md.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -203,7 +203,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Use the released RF issuer, coverage and recognition fixes with the new registered 1C evidence. Preserve the original CWP /8 attempt and its unresolved cost without replaying the provider POST. Complete revenue-magnitude research and verify real CWP summary, cache and RF adoption in a new W12 attempt at the original cutoff.",
+  "next_action": "Complete the formal S5-10 deployment and private CI acceptance first. Then use the released RF issuer, coverage and recognition fixes with the new registered 1C evidence. Preserve the original CWP /8 attempt and its unresolved cost without replaying the provider POST. Complete revenue-magnitude research and verify real CWP summary, cache and RF adoption in a new W12 attempt at the original cutoff.",
   "w12_attempt": {
     "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
