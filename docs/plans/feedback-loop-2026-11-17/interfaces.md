@@ -57,6 +57,8 @@ MeetingConverter 保留调用方的 run 和 attempt，每次真实转录或跳�
 
 本地宿主 `owner-json` 路由可配置只读 `lookup_argv`，按原 action ID 返回 `{"receipt":{"request":原提交,"result":原结果}}`。`report` 也继续接受旧格式 `{"report": 原提交}`。显式 `recover` 为已领取但缺回复的动作查回同一完成状态，核对完整原请求及其版本和证据。JSON 排版不影响读回。读回执不重启已完成的修复或采集。
 
+责任仓可落盘 `decision: needs_evidence` 和 `issue_ref`，同时保存原发生、已证事实与下一份缺失证据。总控确认此分诊回执的送达，问题仍按原收据待证。无有效动作结果时保留 `unknown`，宿主只记录退出码和安全响应原因（空、无效 JSON、缺结果或非零退出）。
+
 稳定 action ID 由种类、目标及上表幂等范围生成。申请内容摘要用于识别同 ID 的不同请求。一个运行的损坏旁路行、互相矛盾的重复观察和无宿主的 owner 单列诊断；同批其他可判断的观察独立处理。历史业务作业和退出码由原生产端保存。
 
 分诊可返回 `decision: refer` 和 `next_owner`。总控只向已配置的目标转交同一原观察，发现方保持不变，循环转派报告未验证。共享 repair 的 payload 仅含 `issue_ref`、`generation`，发生详情由各自的 triage 登记，各自 replay/report 回告。regressed 被回告后，owner 按新证据开启新代次；原输入静止时不重复派工。修复版本指发现端实际运行的发布版本，内容 SHA 和消费者本地 artifact ID 各在消费证据里表达。
@@ -72,6 +74,8 @@ MeetingConverter 保留调用方的 run 和 attempt，每次真实转录或跳�
 启动或重启调用 `python -m tools.feedback_loop.local_host --config SETTINGS recover --hosts HOSTS --sidecar FILE --wait-seconds N`。可重复 `--sidecar` 传原开始和终态文件。先恢复现有动作，随后有限等待、继续原观察；不重新发起公司运行。FF 端点需配置实际作业所属的 `--jobs-dir`，以及可选的 `ff_reconcile_config` 指向该作业使用的 owner 查询配置。对账只允许 `get_status` 和 `act reconcile`，按同一作业与 attempt，既不发 `run`/`retry`，也不向外部证明 latest。
 
 RF 的引用为 `rf-job/1/<job_id>/<stage>-<attempt>`。Audit 采集为 `audit-capture/1/<run>/<role>/<capture>`，找回开始但无终态时回 `unconfirmed`。Audit 偏差使用 `audit-finding/1/<run>/initial/<role>/<issue>` 或 `audit-finding/1/<run>/review/<attempt>/<role>/<issue>`，以 `details_ref` 绑定实际报告 SHA。RF 与 Audit 可通过宿主的 `actions.reconcile` 分别调用只读 owner 命令。恢复从原 scope 查找，未知费用保留，不产生新的源作业。
+
+本机零等待扫描可为 owner 配置 `actions.reconcile-batch`。输入为一组原 `feedback-action/1` 对账查询，输出为逐项 `action_id`、`request_digest` 与原生对账结果的 JSON 数组。宿主按已配置的 owner 分组，以原标识绑定回包，缺失、重复或无效的项沿原单条查询核实。同轮原始标记在确认前还须与读入时一致。显式等待、监督进程和只支持单条的路由继续按既有路径运行。现有运行回执记录批量请求、调用次数、逐项回退和耗时。
 
 ## 本仓问题卡与修复技能
 

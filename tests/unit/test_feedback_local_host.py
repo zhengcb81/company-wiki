@@ -773,6 +773,30 @@ def test_run_refusal_review_on_the_original_native_triage_action(host_config, mo
     assert (root / "review-starts").read_text(encoding="utf-8").splitlines() == ["start"]
 
 
+@pytest.mark.parametrize(("stdout", "exit_code", "problem"), [
+    (b"", 0, "empty_stdout"),
+    (b"fixture-sensitive-noise", 0, "invalid_json"),
+    (b'{"state":"unknown","detail":"fixture-sensitive-noise"}', 0, "missing_result"),
+    (b'{"result":{"decision":"expected"}}', 7, "nonzero_exit"),
+])
+def test_owner_response_without_a_result_keeps_a_safe_failure_reason(host_config, monkeypatch, stdout, exit_code, problem):
+    from tools.feedback_loop.local_host import LocalHost
+
+    request = action("triage")
+    host = LocalHost(host_config)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
+    assert host.handle(request)["state"] == "pending"
+    monkeypatch.setattr(subprocess, "run", lambda *args, **kwargs: subprocess.CompletedProcess(
+        args, exit_code, stdout=stdout, stderr=b"",
+    ))
+    host._owner_command(request["action_id"])
+    reply = host.handle({**request, "method": "lookup"})
+    assert reply["state"] == "unknown"
+    assert reply["code"] == "native_result_unavailable"
+    assert reply["reply_problem"] == problem and reply["exit_code"] == exit_code
+    assert b"fixture-sensitive-noise" not in host._native_path(request["action_id"]).read_bytes()
+
+
 def test_configured_owner_report_requires_its_delivery_ack(host_config):
     root = host_config.parent
     cfg = json.loads(host_config.read_bytes())

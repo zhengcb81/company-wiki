@@ -78,6 +78,115 @@ def configuration(tmp_path, *, owner=OWNER):
     return command, hosts
 
 
+@pytest.mark.parametrize("case", ["complete", "invalid-item", "interrupted", "replaced-marker", "positive-wait"])
+def test_recovery_batches_exact_reconcile_requests_and_preserves_original_receipts(tmp_path, case):
+    invalid_item = case == "invalid-item"
+    command, _ = configuration(tmp_path)
+    owner_script = tmp_path / "lookup.py"
+    owner_script.write_text(
+        """
+import json
+from pathlib import Path
+import sys
+
+request = json.load(sys.stdin)
+requests = request if isinstance(request, list) else [request]
+with Path("lookup-count.jsonl").open("a", encoding="utf-8") as stream:
+    stream.write(json.dumps([sys.argv[1], len(requests)]) + "\\n")
+if sys.argv[1] == "batch-replace":
+    (Path("native") / ("feedback-" + "0" * 32 + ".ready")).write_text('{"owner": "other"}', encoding="utf-8")
+results = []
+for item in requests:
+    assert item["method"] == "lookup" and item["kind"] == "reconcile"
+    original = item["payload"]["observation"]["evidence_ref"]
+    unknown = original == "example/unknown-usage"
+    result = {
+        "state": "done",
+        "result": {
+            "evidence_ref": original,
+            "status": "cost_unknown" if unknown else "known",
+            "job_status": "failed" if unknown else "succeeded",
+            "cost_state": "unknown" if unknown else "not_applicable",
+        },
+    }
+    if isinstance(request, list):
+        result.update(action_id=item["action_id"], request_digest=item["request_digest"])
+        if unknown and sys.argv[1] == "batch-bad":
+            result["request_digest"] = "0" * 64
+    results.append(result)
+print(json.dumps(results if isinstance(request, list) else results[0]))
+""",
+        encoding="utf-8",
+    )
+    p = tmp_path / "settings.json"
+    settings = json.loads(p.read_bytes())
+    settings["owners"][OWNER].update(
+        native_observation_dirs=["native"], timeout_seconds=10,
+        actions={
+            "reconcile": [*PYTHON, str(owner_script), "single"],
+            "reconcile-batch": [*PYTHON, str(owner_script), {
+                "invalid-item": "batch-bad", "replaced-marker": "batch-replace",
+            }.get(case, "batch")],
+        },
+    )
+    p.write_text(json.dumps(settings), encoding="utf-8")
+    inbox = tmp_path / "native"
+    inbox.mkdir()
+    for index, reference in enumerate(("example/known-a", "example/unknown-usage", "example/known-b")):
+        packet = inbox / f"feedback-{index:032x}.jsonl"
+        packet.write_text(json.dumps({
+            "schema_version": "feedback-observation/1", "owner": OWNER,
+            "run_id": "original", "attempt_id": "first", "step_id": f"read/{index}",
+            "check_id": "job-usage", "expected": "known", "actual": "unknown", "disposition": "unknown",
+            "evidence_ref": reference,
+        }) + "\n", encoding="utf-8")
+        packet.with_suffix(".ready").write_text("{}", encoding="utf-8")
+    originals = {packet.name: packet.read_bytes() for packet in inbox.glob("*.jsonl")}
+
+    if case == "interrupted":
+        abort = (
+            "import os; from tools.feedback_loop.local_host import LocalHost; "
+            "from tools.feedback_loop.intake import main; "
+            "LocalHost.reconcile_batch = lambda *a, **kw: os._exit(86); main()"
+        )
+        outcome = subprocess.run([*PYTHON, "-c", abort, *command[len(PYTHON) + 2:], "drain"], cwd=ROOT, timeout=20)
+        assert outcome.returncode == 86
+        assert len(list(inbox.glob("*.ready"))) == 3
+        with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as connection:
+            assert connection.execute("SELECT json_extract(request, '$.kind'), count(*) FROM actions GROUP BY 1").fetchall() == [
+                ("observe", 3),
+            ]
+
+    if case == "positive-wait":
+        command[-1] = "3"
+    result = json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT, timeout=30))
+
+    calls = [json.loads(line) for line in (tmp_path / "lookup-count.jsonl").read_text().splitlines()]
+    assert calls == {
+        "invalid-item": [["batch-bad", 3], ["single", 1]],
+        "replaced-marker": [["batch-replace", 3]],
+        "positive-wait": [["single", 1]] * 3,
+    }.get(case, [["batch", 3]])
+    replaced = case == "replaced-marker"
+    assert result["processed"] == 3 and result["remaining"] == 1 + int(replaced) and result["woken"] == 0
+    observation, = result["unsettled"][0]["observations"]
+    assert (observation["step"], observation["job_status"], observation["cost_state"]) == ("reconcile", "failed", "unknown")
+    assert {p.stem for p in inbox.glob("*.ready")} == {
+        f"feedback-{i:032x}" for i in ([0, 1] if replaced else [1])
+    }
+    if replaced:
+        assert result["diagnostics"] == [{"owner": OWNER, "code": "native_marker_changed"}]
+    assert {packet.name: packet.read_bytes() for packet in inbox.glob("*.jsonl")} == originals
+    if case == "positive-wait":
+        assert "reconcile" not in result
+    else:
+        assert result["reconcile"][OWNER]["requests"] == 3
+        assert result["reconcile"][OWNER]["batch_calls"] == 1
+        assert result["reconcile"][OWNER]["fallback_calls"] == int(invalid_item)
+    with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as connection:
+        assert connection.execute("SELECT count(*) FROM actions").fetchone() == (3,)
+
+
 @pytest.mark.parametrize(("field", "reason", "detail"), [
     (None, "reader_unavailable", "ParserError) at line 2, column 8"),
     ("read_only", "reader_unavailable", "roots[0] read_only must be a boolean, got str"),

@@ -15,6 +15,7 @@ BACKGROUND_CREATION_FLAGS = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 _SYSTEM_ENV = ("PATH", "PATHEXT", "SYSTEMROOT", "WINDIR", "COMSPEC", "SYSTEMDRIVE", "HOME", "USERPROFILE",
                "TEMP", "TMP", "TMPDIR", "APPDATA", "LOCALAPPDATA", "LANG", "LC_ALL")
 _HOST_ONLY_ENV = {"RESEARCH_FEEDBACK_OUT", "RESEARCH_FEEDBACK_HOSTS"}
+RECONCILE_DEFERRED = "reconcile_deferred"
 
 
 def read_hosts(path: Path) -> dict:
@@ -30,7 +31,36 @@ def host_environment(pass_env=(), *, source=None) -> dict[str, str]:
             if name in values and name.upper() not in _HOST_ONLY_ENV}
 
 
-def process_host(config, timeout=30, *, local=None):
+class BatchedReconcile:
+    """Collect the native read-only requests from one inbox scan."""
+
+    def __init__(self, local):
+        self.local = local
+        self.groups = {}
+        self.replies = {}
+        self.metrics = {}
+        self.collecting = True
+
+    def lookup(self, request, *, environment):
+        owner = request["owner"]
+        bound = (request["action_id"], request["request_digest"])
+        if not self.collecting:
+            return self.replies.get(bound)
+        if not self.local.supports_batch_reconcile(owner):
+            return None
+        _, requests = self.groups.setdefault(owner, (environment, {}))
+        requests[bound] = request
+        raise Deferred(RECONCILE_DEFERRED, "reconcile")
+
+    def resolve(self):
+        self.collecting = False
+        for owner, (environment, requests) in self.groups.items():
+            replies, measurements = self.local.reconcile_batch(owner, requests.values(), environment=environment)
+            self.replies.update(replies)
+            self.metrics[owner] = measurements
+
+
+def process_host(config, timeout=30, *, local=None, batched_reconcile=None):
     local_argv = ["-B", "-m", "tools.feedback_loop.local_host", "--config",
                   str(local.config), "rpc"] if local is not None else []
     executable = Path(sys.executable)
@@ -51,6 +81,10 @@ def process_host(config, timeout=30, *, local=None):
         env = host_environment(extra)
         if same_host:
             try:
+                if batched_reconcile is not None and (request["kind"], request["method"]) == ("reconcile", "lookup"):
+                    reply = batched_reconcile.lookup(request, environment=env)
+                    if reply is not None:
+                        return reply
                 return local.handle(request, environment=env, pass_env=extra)
             except sqlite3.Error as exc:
                 raise OSError("local feedback database unavailable") from exc

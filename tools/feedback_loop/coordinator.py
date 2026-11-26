@@ -19,7 +19,8 @@ _RECONCILE_DIAGNOSTICS = frozenset({
     "reconcile_lookup_only",
 })
 _ACTION_DIAGNOSTICS = frozenset({
-    "action_conflict", "action_unconfigured", "legacy_report_without_owner_ack", "owner_unconfigured",
+    "action_conflict", "action_unconfigured", "legacy_report_without_owner_ack", "native_result_unavailable",
+    "owner_unconfigured",
 })
 
 

@@ -13,9 +13,9 @@ import sqlite3
 import subprocess
 from uuid import uuid4
 
-from .coordinator import settle
+from .coordinator import advance, settle
 from .diagnostics import background_command, background_environment, format_diagnostic_exception, redact_text, run_background
-from .host import process_host, read_hosts
+from .host import BatchedReconcile, RECONCILE_DEFERRED, process_host, read_hosts
 from .local_host import LocalHost, host_path
 from .observations import Batch, IDENTITY, decode_observation, digest, read_batch, unique_fields
 from .process_history import ProcessHistory, implementation, utc_now
@@ -195,7 +195,7 @@ def _receive_process_history(history, owners, rpc, wait_seconds, seen, unsettled
     return len(result["observations"]), remaining
 
 
-def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seconds, unsettled):
+def _receive_native(packet, marker, context, owners, host, known, deliver, unsettled, *, marker_bytes):
     """Finish a directly published occurrence, including death between its two atomic writes."""
     try:
         version = _file_version(packet)
@@ -242,25 +242,33 @@ def _receive_native(packet, marker, context, owners, host, known, rpc, wait_seco
                 or any(row[key] != context[key] for key in
                        ("origin_owner", "run_id", "attempt_id", "step_id", "check_id") if key in context)):
             return 0, 1, [{"code": "native_observation_mismatch"}]
-    result = settle(batch, rpc, wait_seconds)
-    count = len(result["observations"])
-    waiting = _record_unsettled(packet, result["observations"], unsettled, bundle=bundle)
-    if result["diagnostics"] or waiting:
-        return count, 1, result["diagnostics"]
-    if _file_version(packet) != version or (details_version is not None and _file_version(details) != details_version):
-        return count, 1, [{"code": "native_observation_changed"}]
-    host.confirm_native_delivery(packet, version)
-    known[packet.name] = version
-    if marker is not None:
-        if bundle:
+    def confirm(result):
+        count = len(result["observations"])
+        waiting = _record_unsettled(packet, result["observations"], unsettled, bundle=bundle)
+        if result["diagnostics"] or waiting:
+            return count, 1, result["diagnostics"]
+        if marker is not None:
             try:
-                marker.replace(marker.with_suffix(".ack"))
+                if marker.read_bytes() != marker_bytes:
+                    return count, 1, [{"code": "native_marker_changed"}]
             except FileNotFoundError:
-                if not marker.with_suffix(".ack").is_file():
-                    raise
-        else:
-            marker.unlink(missing_ok=True)
-    return count, 0, []
+                pass  # A concurrent receiver may already have confirmed the same delivery.
+        if _file_version(packet) != version or (details_version is not None and _file_version(details) != details_version):
+            return count, 1, [{"code": "native_observation_changed"}]
+        host.confirm_native_delivery(packet, version)
+        known[packet.name] = version
+        if marker is not None:
+            if bundle:
+                try:
+                    marker.replace(marker.with_suffix(".ack"))
+                except FileNotFoundError:
+                    if not marker.with_suffix(".ack").is_file():
+                        raise
+            else:
+                marker.unlink(missing_ok=True)
+        return count, 0, []
+
+    return deliver(batch, confirm)
 
 
 def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wait_seconds: int) -> dict:
@@ -270,6 +278,19 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
     host = LocalHost(settings, recovery_owners=selected, host_registry=registry)
     history = ProcessHistory(host.database_path)
     rpc = process_host(registry, local=host)
+    batched = BatchedReconcile(host)
+    # Explicit wait ticks can poll a pending result several times on their original route.
+    native_rpc = rpc if wait_seconds else process_host(registry, local=host, batched_reconcile=batched)
+    deferred = []
+
+    def deliver_native(owner_name, batch, confirm):
+        outcome = settle(batch, native_rpc, wait_seconds)
+        lookups = {row["occurrence_id"] for row in outcome["observations"] if row["status"] == RECONCILE_DEFERRED}
+        if lookups:
+            deferred.append((owner_name, batch, confirm, outcome, lookups))
+            return 0, 0, []
+        return confirm(outcome)
+
     diagnostics = host.flush_observations(owners=selected)
     woken = len(host.recover(owners=selected))
     processed = remaining = 0
@@ -329,8 +350,9 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
                     direct = native and not supervisor_marker
                     if direct:
                         count, pending_count, issues = _receive_native(
-                            sidecar, None if unmarked else marker, context, native, host, known, rpc,
-                            wait_seconds, unsettled)
+                            sidecar, None if unmarked else marker, context, native, host, known,
+                            lambda batch, confirm: deliver_native(name, batch, confirm), unsettled,
+                            marker_bytes=content)
                         processed += count
                         remaining += pending_count
                         diagnostics.extend({"owner": name, **row} for row in issues)
@@ -385,14 +407,33 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
                     diagnostics.append({"owner": name, "code": "observation_marker_unwritable"})
             else:
                 remaining += 1
+    batched.resolve()
+    for name, batch, confirm, outcome, lookups in deferred:
+        updated = advance(batch, native_rpc, only=lookups)
+        by_key = {row["occurrence_id"]: row for row in updated["observations"]}
+        outcome["observations"] = [by_key.get(row["occurrence_id"], row) for row in outcome["observations"]]
+        try:
+            count, pending_count, issues = confirm(outcome)
+            processed += count
+            remaining += pending_count
+            diagnostics.extend({"owner": name, **row} for row in issues)
+        except FileNotFoundError:
+            continue
+        except (OSError, ValueError, RecursionError):
+            remaining += 1
+            diagnostics.append({"owner": name, "code": "unreadable_process_marker"})
+
     owners = set(host.owners) if selected is None else set(host.owners) & selected
     count, pending = _receive_process_history(
         history, owners, rpc, wait_seconds, seen_processes, unsettled, diagnostics,
     )
     processed += count
     remaining += pending
-    return {"woken": woken, "processed": processed, "remaining": remaining, "diagnostics": diagnostics,
-            "unconfirmed": unconfirmed, "unsettled": unsettled}
+    result = {"woken": woken, "processed": processed, "remaining": remaining, "diagnostics": diagnostics,
+              "unconfirmed": unconfirmed, "unsettled": unsettled}
+    if batched.metrics:
+        result["reconcile"] = batched.metrics
+    return result
 
 
 def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: list[str] | None = None,

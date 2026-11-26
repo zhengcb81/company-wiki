@@ -479,16 +479,22 @@ class LocalHost:
                 self._unconfirmed(key, {"code": "native_outcome_unconfirmed", "error_type": type(exc).__name__})
                 return
             else:
-                try:
-                    output = json.loads(completed.stdout, object_pairs_hook=unique_fields) if not completed.returncode else None
-                except (ValueError, RecursionError):
-                    output = None
+                output = None
+                reply_problem = "nonzero_exit" if completed.returncode else "empty_stdout"
+                if not completed.returncode and completed.stdout.strip():
+                    try:
+                        output = json.loads(completed.stdout, object_pairs_hook=unique_fields)
+                    except (ValueError, RecursionError):
+                        reply_problem = "invalid_json"
+                    else:
+                        reply_problem = "missing_result"
                 if isinstance(output, dict) and isinstance(output.get("result"), dict):
                     state = "done"
                     receipt = {k: output[k] for k in ("result", "native") if isinstance(output.get(k), dict)}
                 else:
                     _persist_host_stderr(self.config, f"owner-command:{key}", completed.returncode, completed.stderr or b"")
-                    state, receipt = "unknown", {"code": "native_result_unavailable", "exit_code": completed.returncode}
+                    state, receipt = "unknown", {"code": "native_result_unavailable", "exit_code": completed.returncode,
+                                                 "reply_problem": reply_problem}
             stream.write(json.dumps({"action_id": key, "request_digest": row["request_digest"],
                                      "state": state, "receipt": receipt}).encode("ascii"))
             stream.flush()
@@ -555,21 +561,20 @@ class LocalHost:
         return {"state": "done", "result": {"status": "known", "evidence_ref": ref,
                                              "job_status": job["status"], "cost_state": job["cost_state"]}}
 
-    def _reconcile_lookup(self, request, *, environment=None):
-        if request["method"] != "lookup":
-            return {"state": "failed", "code": "reconcile_lookup_only"}
-        route = self._route(request["owner"], "reconcile")
-        if route is None:
-            return self._ff_lookup(request, environment=environment)
+    @staticmethod
+    def _read_owner(route, payload, environment):
         try:
             outcome = subprocess.run(
                 route["argv"], cwd=route["cwd"], timeout=route["timeout"], check=False, capture_output=True,
-                input=json.dumps(request, ensure_ascii=True).encode("ascii"), env=environment,
+                input=json.dumps(payload, ensure_ascii=True).encode("ascii"), env=environment,
                 creationflags=BACKGROUND_CREATION_FLAGS,
             )
-            response = json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
+            return json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
         except (OSError, ValueError, RecursionError, subprocess.SubprocessError):
-            response = None
+            return None
+
+    @staticmethod
+    def _reconcile_result(response):
         if isinstance(response, dict):
             state = response.get("state")
             if state == "done" and isinstance(response.get("result"), dict):
@@ -577,7 +582,59 @@ class LocalHost:
             if state in ("pending", "unknown"):
                 code = reconcile_diagnostic_code(response.get("code"))
                 return {"state": state, "code": code} if code is not None else {"state": state}
-        return {"state": "unknown", "code": "native_status_unavailable"}
+        return None
+
+    def _reconcile_lookup(self, request, *, environment=None):
+        if request["method"] != "lookup":
+            return {"state": "failed", "code": "reconcile_lookup_only"}
+        route = self._route(request["owner"], "reconcile")
+        if route is None:
+            return self._ff_lookup(request, environment=environment)
+        result = self._reconcile_result(self._read_owner(route, request, environment))
+        return result or {"state": "unknown", "code": "native_status_unavailable"}
+
+    def supports_batch_reconcile(self, owner):
+        return self.owners.get(owner, {}).get("actions", {}).get("reconcile-batch") is not None
+
+    def reconcile_batch(self, owner, requests, *, environment):
+        started = time.monotonic()
+        requests = list(requests)
+        for request in requests:
+            _validate(request)
+            if (request["owner"], request["kind"], request["method"]) != (owner, "reconcile", "lookup"):
+                raise ValueError("batch reconciliation only accepts lookups for its owner")
+        try:
+            route = self._route(owner, "reconcile-batch")
+        except (KeyError, TypeError, ValueError):
+            route = None
+        measurements = {"requests": len(requests), "batch_calls": 0, "fallback_calls": 0}
+        replies = {}
+        # Chunk the invocation rather than limiting which observations can be read.
+        for offset in range(0, len(requests), 128):
+            chunk = requests[offset:offset + 128]
+            expected = {(req["action_id"], req["request_digest"]): req for req in chunk}
+            raw = self._read_owner(route, chunk, environment) if route is not None else None
+            measurements["batch_calls"] += int(route is not None)
+            returned = {}
+            if isinstance(raw, list):
+                for item in raw:
+                    if not isinstance(item, dict):
+                        continue
+                    bound = (item.get("action_id"), item.get("request_digest"))
+                    if all(isinstance(value, str) for value in bound) and bound in expected:
+                        returned[bound] = None if bound in returned else self._reconcile_result(item)
+            for (key, sha), request in expected.items():
+                result = returned.get((key, sha))
+                if result is None:
+                    measurements["fallback_calls"] += 1
+                    try:
+                        result = self._reconcile_lookup(request, environment=environment)
+                    except (OSError, KeyError, TypeError, ValueError, RecursionError, sqlite3.Error):
+                        result = {"state": "unknown", "code": "native_status_unavailable"}
+                replies[key, sha] = {"schema_version": "feedback-action-result/1", "action_id": key,
+                                     "request_digest": sha, **result}
+        measurements["elapsed_seconds"] = round(time.monotonic() - started, 3)
+        return replies, measurements
 
     def handle(self, request, *, environment=None, pass_env=None):
         _validate(request)
