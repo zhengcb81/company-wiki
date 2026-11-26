@@ -5,6 +5,8 @@ from pathlib import Path
 import subprocess
 import sys
 
+from .process_launch import BACKGROUND_CREATION_FLAGS, inherit_console_creation_flags
+
 
 _WINDOWS = os.name == "nt"
 
@@ -37,7 +39,7 @@ def _registered_windows_codex(environ) -> Path | None:
             errors="replace",
             timeout=10,
             check=False,
-            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            creationflags=BACKGROUND_CREATION_FLAGS,
         )
     except (OSError, subprocess.TimeoutExpired):
         return None
@@ -71,7 +73,7 @@ def main(argv=None) -> int:
     try:
         if not _WINDOWS:
             os.execv(command[0], command)
-        return subprocess.run(command, check=False).returncode
+        return subprocess.run(command, check=False, creationflags=inherit_console_creation_flags()).returncode
     except OSError:
         print("Codex CLI executable could not be started.", file=sys.stderr)
         return 126

@@ -9,9 +9,9 @@ import sys
 
 from .coordinator import Deferred
 from .observations import unique_fields
+from .process_launch import BACKGROUND_CREATION_FLAGS, background_argv
 
 
-BACKGROUND_CREATION_FLAGS = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 _SYSTEM_ENV = ("PATH", "PATHEXT", "SYSTEMROOT", "WINDIR", "COMSPEC", "SYSTEMDRIVE", "HOME", "USERPROFILE",
                "TEMP", "TMP", "TMPDIR", "APPDATA", "LOCALAPPDATA", "LANG", "LC_ALL")
 _HOST_ONLY_ENV = {"RESEARCH_FEEDBACK_OUT", "RESEARCH_FEEDBACK_HOSTS"}
@@ -88,7 +88,7 @@ def process_host(config, timeout=30, *, local=None, batched_reconcile=None):
                 return local.handle(request, environment=env, pass_env=extra)
             except sqlite3.Error as exc:
                 raise OSError("local feedback database unavailable") from exc
-        outcome = subprocess.run(argv, input=json.dumps(request, ensure_ascii=True).encode("ascii"), env=env,
+        outcome = subprocess.run(background_argv(argv), input=json.dumps(request, ensure_ascii=True).encode("ascii"), env=env,
                                  capture_output=True, timeout=timeout, check=True, shell=False,
                                  creationflags=BACKGROUND_CREATION_FLAGS)
         return json.loads(outcome.stdout.decode("utf-8"), object_pairs_hook=unique_fields)

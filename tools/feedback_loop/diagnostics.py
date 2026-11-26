@@ -7,6 +7,8 @@ from pathlib import Path
 import sys
 from typing import TypeVar
 
+from .process_launch import background_argv
+
 # Source-checkout commands also run with a bare interpreter. Use the canonical
 # package name so the scanner and its callers share the same module instance.
 _SRC = Path(__file__).resolve().parents[2] / "src"
@@ -30,7 +32,7 @@ def background_environment(path: Path, environment: Mapping[str, str] | None = N
 
 
 def background_command(module: str, *arguments: str) -> list[str]:
-    return [sys.executable, "-B", "-m", "tools.feedback_loop._background", module, *arguments]
+    return background_argv([sys.executable, "-B", "-m", "tools.feedback_loop._background", module, *arguments])
 
 
 def run_background(run: Callable[[], _T]) -> _T:

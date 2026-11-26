@@ -208,11 +208,11 @@ def test_restart_wakes_only_prelaunch_action(tmp_path, host_config, monkeypatch)
     assert (tmp_path / "starts").read_text().splitlines() == ["start"]
 
 
-def _fake_codex_start(monkeypatch):
+def _fake_codex_start(monkeypatch, executable):
     starts = []
 
     def native(argv, **options):
-        assert argv == [sys.executable, "exec", "--json", "-"]
+        assert argv == [str(executable), "exec", "--json", "-"]
         starts.append(argv)
         events = [
             {"type": "thread.started", "thread_id": "original"},
@@ -237,9 +237,11 @@ def test_codex_launch_resolves_the_current_install_before_starting(host_config, 
         "mode": "codex-jsonl", "argv": ["codex", "exec", "--json", "-"],
     }
     host_config.write_text(json.dumps(config), encoding="utf-8")
-    executable = Path(sys.executable) if installed else None
+    current_codex = host_config.parent / "resolved-codex.exe"
+    current_codex.touch()
+    executable = current_codex if installed else None
     monkeypatch.setattr(codex_cli, "resolve_codex", lambda: executable)
-    starts = _fake_codex_start(monkeypatch)
+    starts = _fake_codex_start(monkeypatch, current_codex)
     host = LocalHost(host_config)
     monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
     request = action()
@@ -250,7 +252,7 @@ def test_codex_launch_resolves_the_current_install_before_starting(host_config, 
         pending = host.handle(lookup)
         assert (pending["state"], pending["code"]) == ("pending", "codex_executable_unavailable")
         assert not starts and not host._native_path(request["action_id"]).exists()
-        executable = Path(sys.executable)
+        executable = current_codex
         assert host.recover(owners={"company-wiki"}) == [request["action_id"]]
         host.work(request["action_id"])
     result = host.handle(lookup)
@@ -423,7 +425,9 @@ def test_explicit_prelaunch_retry_claims_the_same_action_once_under_concurrency(
     host, request, wakes = _legacy_codex_failure(host_config, monkeypatch)
     key = request["action_id"]
     frozen = host._get(key)
-    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: Path(sys.executable))
+    current_codex = host_config.parent / "resolved-codex.exe"
+    current_codex.touch()
+    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: current_codex)
     with ThreadPoolExecutor(4) as pool:
         replies = list(pool.map(lambda _: host.retry_unstarted(key), range(4)))
     assert wakes == [key]
@@ -434,7 +438,7 @@ def test_explicit_prelaunch_retry_claims_the_same_action_once_under_concurrency(
     assert "host_command_or_directory_unavailable" in (
         host_config.parent / "logs" / "host_subprocess_failures.log"
     ).read_text(encoding="utf-8")
-    starts = _fake_codex_start(monkeypatch)
+    starts = _fake_codex_start(monkeypatch, current_codex)
     host.work(key)
     assert host.retry_unstarted(key)["state"] == "done"
     assert host.handle(request)["native"]["session_id"] == "original"

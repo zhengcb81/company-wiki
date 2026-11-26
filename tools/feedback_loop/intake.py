@@ -19,6 +19,7 @@ from .host import BatchedReconcile, RECONCILE_DEFERRED, process_host, read_hosts
 from .local_host import LocalHost, host_path
 from .observations import Batch, IDENTITY, decode_observation, digest, read_batch, unique_fields
 from .process_history import ProcessHistory, implementation, utc_now
+from .process_launch import BACKGROUND_CREATION_FLAGS, inherit_console_creation_flags
 
 _logger = logging.getLogger(__name__)
 
@@ -444,7 +445,7 @@ def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: 
                            "--hosts", str(hosts_file), "--wait-seconds", str(wait_seconds), "drain", *scope),
         cwd=_ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
         env=background_environment(settings.resolve().parent / "logs" / "intake_drain_stderr.log"),
-        start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+        start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS,
     )
 
 
@@ -556,7 +557,9 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
 
     os_error = {}
     try:
-        code = subprocess.run(command, cwd=cwd, env=env, check=False).returncode
+        code = subprocess.run(
+            command, cwd=cwd, env=env, check=False, creationflags=inherit_console_creation_flags(),
+        ).returncode
         failure = f"exit:{code}" if code else None
         entry.update(status="exited")
     except OSError as exc:

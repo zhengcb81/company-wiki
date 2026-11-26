@@ -11,6 +11,7 @@ from .coordinator import settle
 from .diagnostics import background_command, background_environment, run_background
 from .host import process_host, read_hosts
 from .observations import read_batch
+from .process_launch import BACKGROUND_CREATION_FLAGS
 
 def after_observations(sidecar: Path, env) -> dict | None:
     config = env.get("RESEARCH_FEEDBACK_HOSTS")
@@ -45,7 +46,7 @@ def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -
                 cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL,
                 stdout=stream, stderr=subprocess.DEVNULL,
                 env=background_environment(output.with_suffix(".stderr.log")),
-                start_new_session=os.name != "nt", creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+                start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS,
             )
     except FileExistsError:
         return {"status": "previous_wake_receipt", "resume": "tick"}

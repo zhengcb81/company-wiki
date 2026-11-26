@@ -52,6 +52,22 @@ def test_missing_codex_has_a_startup_error(monkeypatch, capsys):
     assert capsys.readouterr().err == "Codex CLI executable not found.\n"
 
 
+def test_windows_codex_child_preserves_the_callers_console_policy(monkeypatch):
+    calls = []
+
+    def launch(argv, **options):
+        calls.append((argv, options))
+        return subprocess.CompletedProcess(argv, 19)
+
+    monkeypatch.setattr(codex_cli, "_WINDOWS", True)
+    monkeypatch.setattr(codex_cli, "resolve_codex", lambda: Path("codex.exe"))
+    monkeypatch.setattr(codex_cli, "inherit_console_creation_flags", lambda: 0x08000000, raising=False)
+    monkeypatch.setattr(codex_cli.subprocess, "run", launch)
+
+    assert codex_cli.main(["exec", "--flag=exact"]) == 19
+    assert calls == [(["codex.exe", "exec", "--flag=exact"], {"check": False, "creationflags": 0x08000000})]
+
+
 def test_native_argv_streams_and_exit_code_are_transparent():
     bootstrap = (
         "import sys; from tools.feedback_loop import codex_cli; "
@@ -71,6 +87,7 @@ def test_native_argv_streams_and_exit_code_are_transparent():
         capture_output=True,
         check=False,
         timeout=10,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     assert result.returncode == 23
     assert result.stdout == b"raw\x00payload\r\n\xff"

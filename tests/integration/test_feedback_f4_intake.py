@@ -289,6 +289,25 @@ def test_business_completion_wakes_existing_host_without_changing_output(tmp_pat
     assert sorted(actions) == [("observe", "done"), ("observe", "done"), ("triage", "done")]
 
 
+def test_observed_owner_launch_preserves_the_callers_console_policy(tmp_path, monkeypatch):
+    from tools.feedback_loop import intake
+
+    _, hosts = configuration(tmp_path)
+    calls = []
+
+    def launch(argv, **options):
+        calls.append((argv, options))
+        return subprocess.CompletedProcess(argv, 19)
+
+    monkeypatch.setattr(intake, "wake", lambda *args, **kwargs: None)
+    monkeypatch.setattr(intake, "inherit_console_creation_flags", lambda: 0x08000000, raising=False)
+    monkeypatch.setattr(intake.subprocess, "run", launch)
+
+    assert intake.run_observed(tmp_path / "settings.json", hosts, OWNER, ["test-owner"], 0) == 19
+    assert len(calls) == 1
+    assert calls[0][1]["creationflags"] == 0x08000000
+
+
 @pytest.mark.parametrize("failure", ["early-exit", "not-installed", "only-child-observed", "unrelated-refusal"])
 def test_cold_drain_keeps_unreported_process_failure_for_its_own_owner(tmp_path, monkeypatch, failure):
     from tools.feedback_loop import intake
