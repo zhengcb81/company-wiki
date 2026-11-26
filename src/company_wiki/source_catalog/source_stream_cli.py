@@ -13,6 +13,8 @@ verification. The caller receives the two receipts and the source bytes.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 import re
@@ -54,6 +56,7 @@ def _emit_receipt(payload: dict[str, object]) -> None:
 
 
 def _refuse(status: str, reason: str) -> NoReturn:
+    runtime_feedback.refusal(status, reason)
     try:
         _emit_receipt({
             "schema_version": STREAM_RECEIPT_SCHEMA_VERSION,
@@ -127,6 +130,7 @@ def _digest_argument(value: str) -> str:
     return value
 
 
+@runtime_feedback.entry("source-stream")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -141,6 +145,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
+        runtime_feedback.checkpoint("resolve-source", input_path=args.config, source_id=args.source_id)
         if args.purpose not in _STREAMABLE_PURPOSES:
             raise SourceReadError("blocked", "purpose_not_streamable")
         config = load_catalog_config(args.config)
@@ -150,6 +155,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         # browser explicitly opts into the exact registered document/source pair.
         query = reader.query_exact_pair_ref if args.exact_pair else reader.query_ref
         ref = query(args.document_id, args.source_id, args.content_sha256)
+        runtime_feedback.checkpoint("verify-snapshot", source_id=ref.source_id)
         budget = ReadBudget()
         budget.begin_request()
         try:
@@ -159,6 +165,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 receipt = reader.stream_version(
                     ref, sink=sink, purpose=args.purpose, budget=budget,
                 )
+                runtime_feedback.checkpoint("stream-bytes", source_id=ref.source_id)
                 _emit_lock(ref)
                 sink.copy_to(sys.stdout.buffer)
         except BrokenPipeError:

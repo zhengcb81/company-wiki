@@ -1,6 +1,8 @@
 """Bounded, zero-write public transport for legacy source-key resolution."""
 
 from __future__ import annotations
+
+from company_wiki import runtime_feedback
 import argparse
 import json
 from pathlib import Path
@@ -46,12 +48,14 @@ def _emit(value: dict[str, Any], stream) -> None:
     )
 
 
+@runtime_feedback.entry("legacy-source-link")
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     catalog = None
     try:
         args = parser.parse_args(argv)
+        runtime_feedback.checkpoint("load-request", input_path=args.config)
         raw = sys.stdin.buffer.read(MAX_REQUEST_BYTES + 1)
         if len(raw) > MAX_REQUEST_BYTES:
             raise LegacyLinkError("input_too_large")
@@ -59,9 +63,11 @@ def main(argv=None) -> int:
             raw.decode("utf-8"), object_pairs_hook=_pairs, parse_constant=_nonfinite
         )
         catalog = SourceCatalog(load_catalog_config(args.config))
+        runtime_feedback.checkpoint("resolve-link")
         _emit(resolve_legacy_source(catalog, request), sys.stdout)
         return 0
     except LegacyLinkError as exc:
+        runtime_feedback.refusal("blocked", exc.reason)
         _emit(
             {
                 "schema_version": RESPONSE_SCHEMA,
@@ -72,6 +78,7 @@ def main(argv=None) -> int:
         )
         return 2
     except (UnicodeError, ValueError, TypeError, RecursionError):
+        runtime_feedback.refusal("blocked", "invalid_request")
         _emit(
             {
                 "schema_version": RESPONSE_SCHEMA,
@@ -82,6 +89,7 @@ def main(argv=None) -> int:
         )
         return 2
     except (CatalogConfigError, CatalogReaderUnavailable, sqlite3.Error, OSError):
+        runtime_feedback.refusal("unavailable", "legacy_link_unavailable")
         _emit(
             {
                 "schema_version": RESPONSE_SCHEMA,

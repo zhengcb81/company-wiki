@@ -30,6 +30,7 @@ from .migrations import (
     BackupHook,
     SchemaReport,
     open_readonly_connection,
+    open_writable_connection,
     inspect_schema,
     migrate_database,
     validate_database,
@@ -732,7 +733,7 @@ class AutomationStore:
     # -- Runtime gate ----------------------------------------------------- #
 
     def read_runtime_gate(self) -> RuntimeGate:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             try:
                 return read_runtime_gate(conn)
@@ -760,15 +761,10 @@ class AutomationStore:
     # -- connection helpers ------------------------------------------------ #
 
     def _connect(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(
-            str(self._db_path), timeout=self._timeout, isolation_level=None
-        )
-        conn.row_factory = sqlite3.Row
-        conn.execute("PRAGMA foreign_keys = ON")
-        conn.execute(f"PRAGMA busy_timeout = {int(self._timeout * 1000)}")
-        conn.execute("PRAGMA journal_mode = WAL")
-        conn.execute("PRAGMA synchronous = FULL")
-        return conn
+        return open_writable_connection(self._db_path, timeout_seconds=self._timeout)
+
+    def _read_connection(self) -> sqlite3.Connection:
+        return open_readonly_connection(self._db_path, timeout_seconds=self._timeout)
 
     def _write_transaction(self, operation):
         conn = self._connect()
@@ -794,16 +790,9 @@ class AutomationStore:
         self, claimed: ClaimedWork, *, now: str
     ) -> ExecutionSnapshot:
         """Read event, claim and direct dependency results from one DB view."""
-        conn = self._connect()
+        conn = self._read_connection()
         try:
-            conn.execute("BEGIN")
-            try:
-                result = load_execution_snapshot(conn, claimed, now=now)
-            except BaseException:
-                conn.execute("ROLLBACK")
-                raise
-            conn.execute("COMMIT")
-            return result
+            return load_execution_snapshot(conn, claimed, now=now)
         except sqlite3.OperationalError as exc:
             if "database is locked" in str(exc).lower():
                 raise StoreBusyError(
@@ -839,7 +828,7 @@ class AutomationStore:
         return self._write_transaction(_op)
 
     def get_event(self, event_id: str) -> Event | None:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             row = conn.execute(
                 f"SELECT {_EVENT_COLS} FROM events WHERE event_id = ?", (event_id,)
@@ -855,7 +844,7 @@ class AutomationStore:
         if event_type is not None:
             sql += " WHERE event_type = ?"
             parameters = (event_type,)
-        conn = open_readonly_connection(self._db_path)
+        conn = self._read_connection()
         try:
             rows = conn.execute(sql + " ORDER BY occurred_at, event_id", parameters)
             return tuple(_event_from_row(row) for row in rows)
@@ -866,7 +855,7 @@ class AutomationStore:
         self, event_type: str, subject_type: str, subject_id: str,
         input_hash: str, policy_version: str,
     ) -> Event | None:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             row = conn.execute(
                 f"SELECT {_EVENT_COLS} FROM events WHERE event_type=? AND "
@@ -909,7 +898,7 @@ class AutomationStore:
         return self._write_transaction(_op)
 
     def get_job(self, job_id: str) -> Job | None:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             row = conn.execute(
                 f"SELECT {_JOB_COLS} FROM jobs WHERE job_id = ?", (job_id,)
@@ -919,7 +908,7 @@ class AutomationStore:
             conn.close()
 
     def get_job_by_key(self, job_key: str) -> Job | None:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             row = conn.execute(
                 f"SELECT {_JOB_COLS} FROM jobs WHERE job_key = ?", (job_key,)
@@ -946,7 +935,7 @@ class AutomationStore:
                 values = tuple(sorted(set(scope)))
                 clauses.append(f"{column} IN ({','.join('?' for _ in values)})")
                 params.extend(values)
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             base = f"SELECT {_JOB_COLS} FROM jobs"
             if clauses:
@@ -966,7 +955,7 @@ class AutomationStore:
         if values:
             query += f" AND job_id NOT IN ({','.join('?' for _ in values)})"
             params.extend(values)
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             return conn.execute(query + " LIMIT 1", params).fetchone() is not None
         finally:
@@ -1011,7 +1000,7 @@ class AutomationStore:
         return self._write_transaction(_op)
 
     def list_job_dependencies(self, job_id: str) -> tuple[tuple[str, str], ...]:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             rows = conn.execute(
                 "SELECT job_id, depends_on_job_id FROM job_dependencies "
@@ -1075,7 +1064,7 @@ class AutomationStore:
         return self._write_transaction(_op)
 
     def get_attempt(self, attempt_id: str) -> Attempt | None:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             row = conn.execute(
                 f"SELECT {_ATTEMPT_COLS} FROM attempts WHERE attempt_id = ?",
@@ -1086,7 +1075,7 @@ class AutomationStore:
             conn.close()
 
     def list_attempts(self, job_id: str) -> tuple[Attempt, ...]:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             rows = conn.execute(
                 f"SELECT {_ATTEMPT_COLS} FROM attempts WHERE job_id = ? "
@@ -1467,7 +1456,7 @@ class AutomationStore:
         if allowed_job_ids is not None:
             scope = " AND f.job_id IN (" + ",".join("?" for _ in allowed_job_ids) + ")"
             parameters += allowed_job_ids
-        conn = open_readonly_connection(self._db_path)
+        conn = self._read_connection()
         try:
             rows = conn.execute(
                 "SELECT f.job_id, a.attempt_id, f.payload_json FROM notifications f "
@@ -1518,7 +1507,7 @@ class AutomationStore:
         return self._write_transaction(_op)
 
     def get_effect(self, effect_id: str) -> Effect | None:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             row = conn.execute(
                 f"SELECT {_EFFECT_COLS} FROM effects WHERE effect_id = ?",
@@ -1626,7 +1615,7 @@ class AutomationStore:
         return result
 
     def get_effect_by_key(self, effect_key: str) -> Effect | None:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             row = conn.execute(
                 f"SELECT {_EFFECT_COLS} FROM effects WHERE effect_key = ?",
@@ -1637,7 +1626,7 @@ class AutomationStore:
             conn.close()
 
     def list_effects(self, job_id: str) -> tuple[Effect, ...]:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             rows = conn.execute(
                 f"SELECT {_EFFECT_COLS} FROM effects WHERE job_id = ? "
@@ -1660,7 +1649,7 @@ class AutomationStore:
         if not scope:
             return ()
         placeholders = ",".join("?" for _ in scope)
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             rows = conn.execute(
                 "SELECT effect_id FROM effects WHERE effect_type=? "
@@ -1675,7 +1664,7 @@ class AutomationStore:
         """Observe the given jobs' effect and outbox states in one read-only snapshot."""
         if not job_ids:
             return ()
-        conn = open_readonly_connection(self._db_path)
+        conn = self._read_connection()
         try:
             rows = conn.execute(
                 "SELECT e.effect_id, e.job_id, e.effect_type, e.status, o.status "
@@ -1754,7 +1743,7 @@ class AutomationStore:
         self._write_transaction(_op)
 
     def get_outbox_entry(self, outbox_id: str) -> dict | None:
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             row = conn.execute(
                 f"SELECT {_OUTBOX_COLS} FROM outbox WHERE outbox_id = ?",
@@ -1772,7 +1761,7 @@ class AutomationStore:
         scope = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
         if scope == ():
             return ()
-        conn = self._connect()
+        conn = self._read_connection()
         try:
             if scope is not None:
                 clause = f"e.job_id IN ({','.join('?' for _ in scope)})"

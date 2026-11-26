@@ -10,6 +10,8 @@ from pathlib import Path
 import sqlite3
 from typing import Any
 
+from company_wiki import runtime_feedback
+
 from .models import Event, canonical_json
 
 
@@ -58,7 +60,7 @@ def _plan(db_path: Path, event_id: str | None) -> dict[str, Any]:
     from .registry import create_default_registry
     from .store import AutomationStore
 
-    store = AutomationStore(db_path)
+    store = AutomationStore(db_path, migrate=False)
     source = EventSource(store)
     registry = create_default_registry()
     # Planning is read-only, but it must explicitly admit every capability
@@ -134,9 +136,53 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+@runtime_feedback.entry("automation-plan")
+def _plan_command(args: argparse.Namespace) -> int:
+    from .migrations import AutomationMigrationError
+
+    runtime_feedback.checkpoint("read-events", input_path=args.db)
+    try:
+        result = _plan(args.db, args.event_id)
+    except (AutomationMigrationError, OSError, sqlite3.Error) as exc:
+        reason = "automation_database_unavailable" if args.db.exists() else "automation_database_missing"
+        runtime_feedback.record("automation-plan", "unavailable", reason=reason, error=exc,
+                                include_error_messages=False)
+        print(canonical_json({"error": reason, "reason": reason, "error_type": type(exc).__name__}))
+        return 1
+    exit_code = result.pop("exit_code", 0)
+    print(canonical_json(result))
+    return int(exit_code)
+
+
+@runtime_feedback.entry("automation-feedback-flush")
+def _flush_command(args: argparse.Namespace) -> int:
+    from .migrations import AutomationMigrationError
+    from .store import AutomationStore
+    from .worker_feedback import flush_worker_feedback
+
+    runtime_feedback.checkpoint("read-notifications", input_path=args.db)
+    if not args.db.is_file():
+        runtime_feedback.record("automation-feedback-flush", "unavailable", reason="automation_database_missing")
+        print(canonical_json({"published": 0, "deferred": 0, "unavailable": True,
+                              "reason": "automation_database_missing"}))
+        return 1
+    try:
+        store = AutomationStore(args.db, migrate=False)
+    except (AutomationMigrationError, OSError, sqlite3.Error) as exc:
+        runtime_feedback.record("automation-feedback-flush", "unavailable",
+                                reason="automation_database_unavailable", error=exc, include_error_messages=False)
+        print(canonical_json({"published": 0, "deferred": 0, "unavailable": True,
+                              "reason": "automation_database_unavailable",
+                              "error_type": type(exc).__name__}))
+        return 1
+    runtime_feedback.checkpoint("publish-notifications")
+    result = flush_worker_feedback(store, allowed_job_ids=tuple(args.job_id) if args.job_id is not None else None)
+    print(canonical_json(result))
+    return int(bool(result["deferred"] or result["unavailable"]))
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-
     if args.command == "status":
         print(canonical_json(_status()))
         return 0
@@ -144,32 +190,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(canonical_json(_doctor()))
         return 0
     if args.command == "plan":
-        result = _plan(args.db, args.event_id)
-        exit_code = result.pop("exit_code", 0)
-        print(canonical_json(result))
-        return int(exit_code)
+        return _plan_command(args)
     if args.command == "feedback-flush":
-        if not args.db.is_file():
-            print(canonical_json({"published": 0, "deferred": 0, "unavailable": True,
-                                  "reason": "automation_database_missing"}))
-            return 1
-        from .store import AutomationStore
-        from .migrations import AutomationMigrationError
-        from .worker_feedback import flush_worker_feedback
-
-        try:
-            store = AutomationStore(args.db, migrate=False)
-        except (AutomationMigrationError, OSError, sqlite3.Error) as exc:
-            print(canonical_json({"published": 0, "deferred": 0, "unavailable": True,
-                                  "reason": "automation_database_unavailable",
-                                  "error_type": type(exc).__name__}))
-            return 1
-        result = flush_worker_feedback(
-            store,
-            allowed_job_ids=tuple(args.job_id) if args.job_id is not None else None,
-        )
-        print(canonical_json(result))
-        return int(bool(result["deferred"] or result["unavailable"]))
+        return _flush_command(args)
 
     return 2  # unknown command
 

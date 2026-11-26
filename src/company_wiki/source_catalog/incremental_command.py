@@ -205,16 +205,19 @@ def run_incremental(argv: Sequence[str] | None, *, summary_owner: ReadingSummary
         parser.error("unrecognized arguments: " + " ".join(unknown))
     request: dict = {}
     try:
+        runtime_feedback.checkpoint("load-request", input_path=args.config)
         request = _read_request()
         operation = request.get("schema_version", "")
         with operation_diagnostics():
             if operation == "cwp-incremental-discovery-request/1":
+                runtime_feedback.checkpoint("discover", related_run_id=request.get("run_id"))
                 response = _run_discovery(args, request)
             elif operation in {
                 INCREMENTAL_READ_REQUEST_SCHEMA, "cwp-reading-backlog-request/1",
                 "cwp-incremental-backlog-request/1", "cwp-incremental-read-status-request/1",
                 "cwp-incremental-read-result-request/1",
             }:
+                runtime_feedback.checkpoint("read", related_run_id=request.get("run_id"))
                 response = _run_read(args, request, summary_owner)
             else:
                 raise ValueError("request schema_version must be a cwp-incremental request")

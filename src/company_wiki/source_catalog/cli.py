@@ -816,8 +816,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
     parser = _parser()
     args, unknown = parser.parse_known_args(argv)
+    runtime_feedback.checkpoint(args.command or "catalog-operation", input_path=args.config)
     if args.command in RETIRED_MAINTENANCE_COMMANDS:
         error = RetiredMaintenanceError(args.command)
+        runtime_feedback.record("source-catalog", "refused", reason=error.code, error=error, expected=True)
         print(json.dumps({
             'status': 'failed', 'error_type': 'maintenance_operation_retired',
             'error_code': error.code, 'operation': error.operation,

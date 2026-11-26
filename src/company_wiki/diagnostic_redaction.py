@@ -7,7 +7,7 @@ from typing import Any
 
 __all__ = [
     "REDACT", "redact_text", "redact_and_truncate", "format_diagnostic_exception",
-    "key_is_credential", "credential_continues", "MAX_REDACTED_MESSAGE_CHARS",
+    "key_is_credential", "credential_continues", "authorization_header", "MAX_REDACTED_MESSAGE_CHARS",
 ]
 
 REDACT = "<redacted>"
@@ -165,6 +165,12 @@ _AUTH_PATTERN = re.compile(
 _UNFINISHED_AUTH = re.compile(
     r"(?i)(?:(?<![A-Za-z0-9])authorization[ \t]*[:=][ \t]*(?:\S+)?|^[ \t]*(?:bearer|basic))$"
 )
+_AUTH_HEADER = re.compile(r"(?i)(?<![A-Za-z0-9])authorization[ \t]*[:=]")
+
+
+def authorization_header(line: str) -> bool:
+    """Recognize an authorization field whose next indented line may be folded."""
+    return bool(_AUTH_HEADER.search(line))
 
 
 def credential_continues(line: str) -> bool:
@@ -195,7 +201,25 @@ def redact_text(text: Any) -> Any:
     """
     if not isinstance(text, str) or not text:
         return text
+    if "\n" in text or "\r" in text:
+        text = _redact_authorization_folds(text)
     return _AUTH_PATTERN.sub(lambda m: m.group("key") + REDACT, _redact_assignments(text))
+
+
+def _redact_authorization_folds(text: str) -> str:
+    """Keep unindented following diagnostics while hiding folded header values."""
+    lines = []
+    header = False
+    for line in text.splitlines(keepends=True):
+        if not line.strip():
+            lines.append(line)
+        elif header and line.startswith((" ", "\t")):
+            ending = line[len(line.rstrip("\r\n")):]
+            lines.append(REDACT + ending)
+        else:
+            lines.append(line)
+            header = authorization_header(line)
+    return "".join(lines)
 
 
 def format_diagnostic_exception(error: BaseException) -> str:

@@ -10,9 +10,8 @@ from company_wiki import runtime_feedback
 
 import argparse
 from collections.abc import Iterator
-from contextlib import ExitStack, contextmanager, redirect_stderr, redirect_stdout
+from contextlib import contextmanager
 import json
-import os
 from pathlib import Path
 import sqlite3
 import sys
@@ -35,6 +34,7 @@ from company_wiki.automation.narrative_transport_contracts import (
     NarrativeTransportError,
     parse_reference_request,
 )
+from company_wiki.diagnostic_stream import capture_diagnostic_streams
 
 from company_wiki.source_catalog.config import CatalogConfigError, load_catalog_config
 from company_wiki.source_catalog.narrative_artifact_store import NarrativeArtifactReader
@@ -96,17 +96,12 @@ def _refusal(status: str, reason: str) -> int:
 @contextmanager
 def _quiet_transport_operation() -> Iterator[None]:
     """Reserve the CLI protocol streams, including writes by native parsers."""
-    sys.stdout.flush()
-    sys.stderr.flush()
-    with open(os.devnull, "w", encoding="utf-8") as quiet, ExitStack() as descriptors:
-        for descriptor in (1, 2):
-            inheritable = os.get_inheritable(descriptor)
-            saved = os.dup(descriptor)
-            descriptors.callback(os.close, saved)
-            os.dup2(quiet.fileno(), descriptor, inheritable=inheritable)
-            descriptors.callback(os.dup2, saved, descriptor, inheritable=inheritable)
-        with redirect_stdout(quiet), redirect_stderr(quiet):
-            yield
+    def persist(channel: str, text: str) -> None:
+        if text.strip():
+            runtime_feedback.retain_local_text(f"narrative transport {channel}\n{text}")
+
+    with capture_diagnostic_streams(persist):
+        yield
 
 
 def dispatch_transport_request(
@@ -170,6 +165,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     artifacts: NarrativeArtifactReader | None = None
     try:
         args = parser.parse_args(argv)
+        runtime_feedback.checkpoint("read-request", input_path=args.config)
         filters = {
             name: getattr(args, name)
             for name in ("limit", "offset", "span_id", "locator", "query")
@@ -182,6 +178,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif any(value is not None for value in filters.values()):
             raise ValueError("filters require an evidence operation")
         request = _read_request()
+        runtime_feedback.checkpoint("open-artifact-reader", input_path=args.config)
         config = load_catalog_config(args.config)
         catalog = SourceCatalog(config)
         artifacts = catalog.open_narrative_artifact_reader()
@@ -208,10 +205,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         # Some PDF backends print optional-package notices. The two protocol
         # streams belong exclusively to artifact bytes and the JSON receipt.
+        runtime_feedback.checkpoint("resolve-artifact")
         with _quiet_transport_operation():
             data, receipt = dispatch_transport_request(
                 args.operation, request, reader, view_query=view_query
             )
+        runtime_feedback.checkpoint("deliver-artifact")
         sys.stdout.buffer.write(data)
         sys.stdout.buffer.flush()
         _emit_receipt(receipt)

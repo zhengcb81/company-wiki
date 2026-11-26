@@ -637,19 +637,16 @@ class CanonicalSourceWriter:
 
         source_id = source_id_for_sha256(receipt.content_sha256)
         document_id = source_id.replace("urn:company-wiki:source:", "urn:company-wiki:document:")
-        row = store.fetchone("SELECT * FROM sources WHERE source_id=?", (source_id,))
-        if row is None or (row["content_sha256"], row["byte_size"]) != (
-                receipt.content_sha256, receipt.byte_size):
+        registered = store.registered_original(source_id)
+        if registered is None or registered[:2] != (receipt.content_sha256, receipt.byte_size):
             raise CanonicalImportError("canonical_registered_version_conflict")
-        if row["mime_type"] != receipt.mime_type:
+        if registered[2] != receipt.mime_type:
             # A previous scan may have guessed HTML from a .htm path containing
             # these same PDF bytes. Intake has verified the complete SHA and PDF
             # magic; fix only that actual type observation, not scope or identity.
             if receipt.mime_type != "application/pdf":
                 raise CanonicalImportError("canonical_registered_version_conflict")
-            with store.transaction() as connection:
-                connection.execute("UPDATE sources SET mime_type=? WHERE source_id=?",
-                                   (receipt.mime_type,source_id))
+            store.update_verified_original_mime(source_id, receipt.mime_type)
         ref = SourceRef(document_id, source_id, receipt.content_sha256, receipt.byte_size, receipt.mime_type)
         facts = {"entity": request.entity, "market": candidate.market,
             "security_id": getattr(candidate, "security_id", None) or request.security_id,
@@ -707,8 +704,8 @@ class CanonicalSourceWriter:
             self.catalog,ref,{"display_name":request.entity},facts,evidence,
             assertion_store=store,capture_evidence={**claim,"sha256":claim_sha})
         if assertion is not None:
-            with store.transaction() as connection:
-                write_source_fact_projection(connection,ref,assertion,projection)
+            with store.fact_write_transaction() as writer:
+                write_source_fact_projection(writer, ref, assertion, projection)
 
     def source_ref_for_import(
         self,
@@ -782,17 +779,7 @@ class CanonicalSourceWriter:
         document_id = source_id_for_sha256(content_sha256).replace(
             "urn:company-wiki:source:", "urn:company-wiki:document:"
         )
-        with self.catalog.store.transaction() as connection:
-            connection.execute(
-                "UPDATE documents SET source_status='active' "
-                "WHERE document_id=? AND source_status='retired'",
-                (document_id,),
-            )
-            connection.execute(
-                "UPDATE locations SET location_status='active' "
-                "WHERE document_id=? AND location_status='retired'",
-                (document_id,),
-            )
+        self.catalog.store.reactivate_retired_original(document_id)
 
     def _existing_original(self, content_sha256: str) -> Path | None:
         # Reuse only the currently configured canonical root. DB root kinds
@@ -803,17 +790,10 @@ class CanonicalSourceWriter:
         return None
 
     def _existing_original_candidates(self, content_sha256: str) -> Iterator[Path]:
-        rows = self.catalog.store.fetchall(
-            """SELECT l.relative_path FROM sources s
-            JOIN locations l ON l.source_id=s.source_id
-            WHERE s.content_sha256=? AND l.role='original_primary'
-            AND l.location_status='active' AND l.root_id=?
-            ORDER BY l.relative_path,l.location_id""",
-            (content_sha256, self.company_root.root_id),
-        )
-        for row in rows:
+        paths = self.catalog.store.active_original_paths(self.company_root.root_id, content_sha256)
+        for relative_path in paths:
             try:
-                path = resolve_source_location(self.company_root, row["relative_path"])
+                path = resolve_source_location(self.company_root, relative_path)
             except SourceLocationError:
                 continue
             if path.is_file():

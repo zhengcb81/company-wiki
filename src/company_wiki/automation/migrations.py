@@ -424,7 +424,8 @@ def _configure_connection(connection: sqlite3.Connection, *, read_only: bool,
         connection.execute("PRAGMA synchronous = FULL")
 
 
-def _open_connection(db_path: Path) -> sqlite3.Connection:
+def open_writable_connection(db_path: Path, *, timeout_seconds: float | None = None) -> sqlite3.Connection:
+    """Connect to the AUTO writer schema with a bounded acquisition deadline."""
     # ``PRAGMA journal_mode = WAL`` needs an exclusive lock that SQLite's busy
     # timeout does NOT cover: concurrent init of the same fresh database can
     # race the first WAL switch and raise ``database is locked``.  Because WAL
@@ -432,7 +433,7 @@ def _open_connection(db_path: Path) -> sqlite3.Connection:
     # completes the switch our retried ``PRAGMA journal_mode = WAL`` is a
     # no-op. Yield bounded time so the peer can finish; three immediate retries
     # raced the same lock. One total deadline also bounds SQLite's busy waits.
-    deadline = time.monotonic() + _CONNECT_TIMEOUT_S
+    deadline = time.monotonic() + (_CONNECT_TIMEOUT_S if timeout_seconds is None else timeout_seconds)
     while True:
         remaining = max(0.001, deadline - time.monotonic())
         connection = sqlite3.connect(
@@ -464,22 +465,27 @@ def _open_connection(db_path: Path) -> sqlite3.Connection:
             raise
 
 
-def open_readonly_connection(db_path: Path) -> sqlite3.Connection:
+def open_readonly_connection(db_path: Path, *, timeout_seconds: float = _CONNECT_TIMEOUT_S) -> sqlite3.Connection:
     """Open a read-only transaction on the existing database."""
     uri = db_path.resolve().as_uri() + "?mode=ro"
     connection = sqlite3.connect(
-        uri, uri=True, timeout=_CONNECT_TIMEOUT_S, isolation_level=None
+        uri, uri=True, timeout=timeout_seconds, isolation_level=None
     )
     connection.row_factory = sqlite3.Row
-    _configure_connection(connection, read_only=True)
-    # Version, tables and validation must share a snapshot. In autocommit mode
-    # a concurrent migration can otherwise commit between those reads.
-    connection.execute("BEGIN")
+    try:
+        _configure_connection(connection, read_only=True, busy_timeout_ms=max(1, int(timeout_seconds * 1000)))
+        # Version, tables and validation must share a snapshot. In autocommit mode
+        # a concurrent migration can otherwise commit between those reads.
+        connection.execute("BEGIN")
+    except BaseException:
+        connection.close()
+        raise
     return connection
 
 
 # An already running ledger may load this module after an in-place update.
 _open_readonly_connection = open_readonly_connection
+_open_connection = open_writable_connection
 
 
 def _user_tables(connection: sqlite3.Connection) -> list[str]:
@@ -875,7 +881,7 @@ def migrate_database(
         backup_hook=backup_hook,
     )
 
-    connection = _open_connection(db_path)
+    connection = open_writable_connection(db_path)
     try:
         connection.execute("BEGIN IMMEDIATE")
         try:
@@ -961,5 +967,6 @@ __all__ = [
     "inspect_schema",
     "migrate_database",
     "open_readonly_connection",
+    "open_writable_connection",
     "validate_database",
 ]

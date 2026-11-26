@@ -49,6 +49,7 @@ def main(
     for argument in ("project-root", "catalog-config", "automation-db", "work-dir", "request"):
         parser.add_argument("--" + argument, required=True, type=Path)
     args = parser.parse_args(argv)
+    runtime_feedback.checkpoint("load-request", input_path=args.request)
     try:
         with args.request.open("rb") as stream:
             content = stream.read()
@@ -64,40 +65,51 @@ def main(
             # competing provider/model/generation configuration.
             raw["model"] = {**limits, **loaded_model_options}
         request = NarrativeBatchRequest.from_dict(raw)
-    except (OSError, TypeError, ValueError):
+    except (OSError, TypeError, ValueError) as exc:
+        runtime_feedback.record("narrative-batch", "failed", reason="NARRATIVE_BATCH_INVALID_REQUEST",
+                                error=exc, include_error_messages=False)
         print(canonical_json({"schema_version": "narrative-batch-result/1", "status": "failed",
                               "error": "NARRATIVE_BATCH_INVALID_REQUEST"}))
         return 1
+    runtime_feedback.checkpoint("run-batch", input_path=args.catalog_config, related_run_id=request.run_id)
+    error: Exception | None = None
     with operation_diagnostics():
         try:
             receipt = run_batch(request, project_root=args.project_root, catalog_config_path=args.catalog_config,
                                 db_path=args.automation_db, work_dir=args.work_dir)
             exit_code = 0 if receipt["status"] == "completed" else 2
-        except BatchPreparationDeadlineExceeded:
+        except BatchPreparationDeadlineExceeded as exc:
+            error = exc
             receipt = _failure_receipt(request, args.automation_db, "failed",
                                        "BATCH_PREPARATION_DEADLINE_EXCEEDED")
             exit_code = 2
         except NarrativeLanguageError as exc:
+            error = exc
             receipt = _failure_receipt(request, args.automation_db, "failed", exc.code)
             exit_code = 2
         except SourceReadError as exc:
+            error = exc
             receipt = _failure_receipt(request, args.automation_db, "failed", exc.reason)
             exit_code = 2
         except BatchResumeError as exc:
+            error = exc
             receipt = _failure_receipt(request, args.automation_db, "failed", exc.code)
             exit_code = 2
         except StorageBudgetExceeded as exc:
+            error = exc
             receipt = _failure_receipt(request, args.automation_db, "storage_exhausted", str(exc))
             exit_code = 2
         except ValueError as exc:
+            error = exc
             status = "storage_exhausted" if str(exc) in StorageBudgetExceeded.CODES else "failed"
             receipt = _failure_receipt(request, args.automation_db, status, "NARRATIVE_BATCH_" + type(exc).__name__)
             exit_code = 2
         except Exception as exc:
+            error = exc
             # Provider bodies, paths and credentials never become a CLI error detail.
             receipt = _failure_receipt(request, args.automation_db, "failed", "NARRATIVE_BATCH_" + type(exc).__name__)
             exit_code = 1
-    runtime_feedback.document_results("narrative-batch", receipt)
+    runtime_feedback.document_results("narrative-batch", receipt, error=error)
     print(canonical_json(receipt))
     return exit_code
 

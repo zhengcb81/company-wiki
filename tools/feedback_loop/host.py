@@ -3,6 +3,7 @@
 import json
 import os
 from pathlib import Path
+import sqlite3
 import subprocess
 import sys
 
@@ -11,6 +12,9 @@ from .observations import unique_fields
 
 
 BACKGROUND_CREATION_FLAGS = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+_SYSTEM_ENV = ("PATH", "PATHEXT", "SYSTEMROOT", "WINDIR", "COMSPEC", "SYSTEMDRIVE", "HOME", "USERPROFILE",
+               "TEMP", "TMP", "TMPDIR", "APPDATA", "LOCALAPPDATA", "LANG", "LC_ALL")
+_HOST_ONLY_ENV = {"RESEARCH_FEEDBACK_OUT", "RESEARCH_FEEDBACK_HOSTS"}
 
 
 def read_hosts(path: Path) -> dict:
@@ -18,6 +22,12 @@ def read_hosts(path: Path) -> dict:
     if not isinstance(config, dict):
         raise ValueError("expected an owner map")
     return config
+
+
+def host_environment(pass_env=(), *, source=None) -> dict[str, str]:
+    values = os.environ if source is None else source
+    return {name: values[name] for name in (*_SYSTEM_ENV, *pass_env)
+            if name in values and name.upper() not in _HOST_ONLY_ENV}
 
 
 def process_host(config, timeout=30, *, local=None):
@@ -38,19 +48,12 @@ def process_host(config, timeout=30, *, local=None):
             raise Deferred("host_unconfigured", request["kind"])
         same_host = (local is not None and Path(argv[0]) in launchers
                      and argv[1:] in (local_argv, ["-B", "-X", "utf8", *local_argv[1:]]))
+        env = host_environment(extra)
         if same_host:
-            cached = local.settled_lookup(request)
-            if cached is not None:
-                return cached
-        names = ("PATH", "PATHEXT", "SYSTEMROOT", "WINDIR", "COMSPEC", "SYSTEMDRIVE", "HOME", "USERPROFILE",
-                 "TEMP", "TMP", "TMPDIR", "APPDATA", "LOCALAPPDATA", "LANG", "LC_ALL", *extra)
-        env = {name: os.environ[name] for name in names if name in os.environ
-               and name.upper() not in {"RESEARCH_FEEDBACK_OUT", "RESEARCH_FEEDBACK_HOSTS"}}
-        if same_host and local.recovery_owners:
-            from .local_host import RECOVERY_OWNERS_ENV
-            env[RECOVERY_OWNERS_ENV] = " ".join(local.recovery_owners)
-        if same_host and request["method"] == "lookup" and request["kind"] == "reconcile":
-            return local.handle(request, environment=env)
+            try:
+                return local.handle(request, environment=env, pass_env=extra)
+            except sqlite3.Error as exc:
+                raise OSError("local feedback database unavailable") from exc
         outcome = subprocess.run(argv, input=json.dumps(request, ensure_ascii=True).encode("ascii"), env=env,
                                  capture_output=True, timeout=timeout, check=True, shell=False,
                                  creationflags=BACKGROUND_CREATION_FLAGS)

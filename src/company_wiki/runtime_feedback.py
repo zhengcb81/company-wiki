@@ -15,6 +15,7 @@ from tempfile import NamedTemporaryFile
 from typing import Any, ParamSpec
 from uuid import uuid4
 
+from . import runtime_trace
 from .diagnostic_logging import append_diagnostic, diagnostic_log
 from .diagnostic_redaction import format_diagnostic_exception
 from .file_mutex import FileMutexLockedError, os_file_mutex, win32_filesystem_path
@@ -31,7 +32,10 @@ from .runtime_feedback_values import (
 _logger = logging.getLogger(__name__)
 
 
-__all__ = ["document_results", "entry", "freeze_worker_failure", "publish_worker_failure", "record"]
+__all__ = [
+    "checkpoint", "document_results", "entry", "freeze_worker_failure",
+    "publish_worker_failure", "record", "refusal", "retain_local_text", "runtime_identity", "trace_reference",
+]
 
 
 _P = ParamSpec("_P")
@@ -44,7 +48,9 @@ class _Invocation:
     operation: str
     run: str
     attempt: str
+    source_file: str
     log_path: Path | None = None
+    trace_available: bool = True
     explained: bool = False
     reported_errors: list[BaseException] = field(default_factory=list)
 
@@ -53,8 +59,42 @@ _current: ContextVar[_Invocation | None] = ContextVar("cwp_feedback_invocation",
 
 
 def _directory() -> Path:
-    state = os.getenv("LOCALAPPDATA") if os.name == "nt" else os.getenv("XDG_STATE_HOME")
-    return (Path(state) if state else Path.home() / ".local" / "state") / _OWNER / "observations"
+    return runtime_trace.default_state_root() / "observations"
+
+
+def runtime_identity() -> tuple[str, str]:
+    """Keep an enclosing or injected identity, otherwise allocate a local one."""
+    if caller := _current.get():
+        return caller.run, caller.attempt
+    run = os.getenv("RESEARCH_FEEDBACK_RUN_ID") or uuid4().hex
+    return run, os.getenv("RESEARCH_FEEDBACK_ATTEMPT_ID") or run
+
+
+def trace_reference() -> dict[str, str] | None:
+    if caller := _current.get():
+        return {"run_id": logical_observation_ref(caller.run),
+                "attempt_id": logical_observation_ref(caller.attempt),
+                "status": "available" if caller.trace_available else "degraded"}
+    return None
+
+
+def _invocation_trace(caller: _Invocation, step: str, status: str, **details: Any) -> None:
+    written = runtime_trace.write_event(
+        caller.operation, caller.run, caller.attempt, step, status, source_file=caller.source_file, **details,
+    )
+    caller.trace_available = caller.trace_available and written
+
+
+def checkpoint(
+    step: str, *, input_path: Path | None = None, source_id: str | None = None,
+    related_run_id: str | None = None,
+) -> None:
+    """Record a named operation boundary without inspecting caller arguments."""
+    if caller := _current.get():
+        _invocation_trace(
+            caller, step, "started", source_id=source_id, related_run_id=related_run_id,
+            input_ref=runtime_trace.input_reference(input_path) if input_path is not None else None,
+        )
 
 
 def _local_log_path() -> Path | None:
@@ -64,6 +104,24 @@ def _local_log_path() -> Path | None:
     except (OSError, RuntimeError, ValueError):
         return None
     return state / "logs/runtime_errors.log"
+
+
+def retain_local_text(text: str) -> bool:
+    """Reuse the owner log and fall back to its independent state root."""
+    caller = _current.get()
+    first = caller.log_path if caller is not None else _local_log_path()
+    paths = [first] if first is not None else []
+    try:
+        paths.append(runtime_trace.default_state_root() / "logs/runtime_errors.log")
+    except (OSError, RuntimeError, ValueError):
+        pass
+    for path in dict.fromkeys(paths):
+        try:
+            if append_diagnostic(path, text, warn_on_stderr=False):
+                return True
+        except (OSError, ValueError):
+            continue
+    return False
 
 
 def _atomic(path: Path, data: bytes) -> None:
@@ -101,7 +159,11 @@ def freeze_worker_failure(
 
 def _feedback_folders() -> tuple[Path, ...]:
     override = os.getenv("RESEARCH_FEEDBACK_DIR")
-    folders = (Path(override), _directory()) if override else (_directory(),)
+    folders = [Path(override)] if override else []
+    try:
+        folders.append(_directory())
+    except (OSError, RuntimeError, ValueError):
+        pass
     return tuple(dict.fromkeys(win32_filesystem_path(folder) for folder in folders))
 
 
@@ -190,13 +252,19 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             item=item, source_id=source_id, expected=expected, message=message,
             include_error_messages=include_error_messages,
         )
-        if caller is not None and caller.log_path is not None and (
-            error is not None or status in _FAILED or status.startswith("exit:")
-        ):
-            append_diagnostic(
-                caller.log_path, f"operation outcome {row['actual']} {json.dumps(details, ensure_ascii=True)}",
-                warn_on_stderr=False,
-            )
+        if error is not None or status in _FAILED or status.startswith("exit:"):
+            failure = f"operation outcome {row['actual']} {json.dumps(details, ensure_ascii=True)}"
+            retain_local_text(failure)
+            if caller is not None:
+                _invocation_trace(
+                    caller, "failure", status, related_run_id=run if caller.run != run else None,
+                    details_ref=row["details_ref"], source_id=source_id,
+                )
+            else:
+                runtime_trace.write_event(
+                    operation, run, attempt, "failure", status, source_file=__file__,
+                    details_ref=row["details_ref"], source_id=source_id,
+                )
         details_name = row["details_ref"]
 
         def recorded() -> None:
@@ -210,16 +278,17 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             sidecar = win32_filesystem_path(Path(explicit))
             try:
                 sidecar.parent.mkdir(parents=True, exist_ok=True)
-                _atomic(sidecar.parent / details_name, _encoded(details))
-                with sidecar.open("a+b") as stream:
-                    needs_separator = False
-                    if stream.seek(0, os.SEEK_END):
-                        stream.seek(-1, os.SEEK_END)
-                        needs_separator = stream.read(1) != b"\n"
-                    stream.write((b"\n" if needs_separator else b"") + _encoded(row))
-                    stream.flush()
-                    os.fsync(stream.fileno())
-            except OSError as exc:
+                with os_file_mutex(sidecar.with_suffix(sidecar.suffix + ".lock"), timeout_seconds=0.25):
+                    _atomic(sidecar.parent / details_name, _encoded(details))
+                    with sidecar.open("a+b") as stream:
+                        needs_separator = False
+                        if stream.seek(0, os.SEEK_END):
+                            stream.seek(-1, os.SEEK_END)
+                            needs_separator = stream.read(1) != b"\n"
+                        stream.write((b"\n" if needs_separator else b"") + _encoded(row))
+                        stream.flush()
+                        os.fsync(stream.fileno())
+            except (OSError, FileMutexLockedError) as exc:
                 _logger.warning("runtime_feedback explicit sidecar write failed\n%s",
                                 format_diagnostic_exception(exc))
             else:
@@ -238,6 +307,8 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             recorded()
             break
         else:
+            if caller is not None:
+                caller.trace_available = False
             _logger.warning("runtime_feedback failed to persist observation across all fallback directories\n%s",
                             format_diagnostic_exception(last_error) if last_error else "")
     except Exception as exc:
@@ -251,15 +322,21 @@ def entry(operation: str) -> Callable[[Callable[_P, int]], Callable[_P, int]]:
     def decorate(main: Callable[_P, int]) -> Callable[_P, int]:
         @wraps(main)
         def invoke(*args: _P.args, **kwargs: _P.kwargs) -> int:
+            argv = args[0] if args else kwargs.get("argv")
+            if argv is None:
+                argv = sys.argv[1:]
+            if isinstance(argv, (list, tuple)) and any(value in {"--help", "-h"} for value in argv):
+                return main(*args, **kwargs)
             parent = _current.get()
-            run = (parent.run if parent else None) or os.getenv("RESEARCH_FEEDBACK_RUN_ID") or uuid4().hex
-            attempt = (parent.attempt if parent else None) or os.getenv("RESEARCH_FEEDBACK_ATTEMPT_ID") or run
+            run, attempt = runtime_identity()
             context = _Invocation(
-                operation, run, attempt, parent.log_path if parent else _local_log_path(),
+                operation, run, attempt, main.__code__.co_filename,
+                parent.log_path if parent else _local_log_path(),
                 reported_errors=parent.reported_errors if parent else [],
             )
             token = _current.set(context)
             try:
+                _invocation_trace(context, "invocation", "started")
                 log_scope = (
                     diagnostic_log(logging.getLogger("company_wiki"), context.log_path, warn_on_stderr=False)
                     if parent is None and context.log_path is not None else nullcontext()
@@ -269,6 +346,7 @@ def entry(operation: str) -> Callable[[Callable[_P, int]], Callable[_P, int]]:
                         result = main(*args, **kwargs)
                         if result and not context.explained:
                             record(operation, f"exit:{result}")
+                        _invocation_trace(context, "invocation", "failed" if result else "completed", exit_code=result)
                         return result
                     except (Exception, SystemExit, KeyboardInterrupt) as exc:
                         already_recorded = any(exc is previous for previous in context.reported_errors)
@@ -276,6 +354,10 @@ def entry(operation: str) -> Callable[[Callable[_P, int]], Callable[_P, int]]:
                                                      (not context.explained and exc.code not in (0, None))):
                             record(operation, "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed",
                                    error=exc)
+                        exit_code = exc.code if isinstance(exc, SystemExit) and isinstance(exc.code, int) else 1
+                        status = "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed"
+                        _invocation_trace(context, "invocation", "completed" if exit_code == 0 else status,
+                                          exit_code=exit_code)
                         raise
             finally:
                 if parent and context.explained:
@@ -285,14 +367,16 @@ def entry(operation: str) -> Callable[[Callable[_P, int]], Callable[_P, int]]:
     return decorate
 
 
-def document_results(operation: str, payload: Mapping[str, Any]) -> None:
+def document_results(
+    operation: str, payload: Mapping[str, Any], *, error: BaseException | None = None,
+) -> None:
     """Read each native result including failures inside a successful request."""
     status = payload.get("status")
     run = _token(payload.get("run_id")) or _token(payload.get("request_id"))
     attempt = _token(payload.get("attempt_id"))
     if isinstance(status, str) and status in _FAILED:
         record(operation, status, run=run, attempt=attempt, reason=payload.get("reason") or payload.get("error") or "",
-               error=sys.exc_info()[1])
+               error=error if error is not None else sys.exc_info()[1])
     members = payload.get("items", payload.get("documents"))
     if not isinstance(members, (list, tuple)):
         return
@@ -311,3 +395,9 @@ def document_results(operation: str, payload: Mapping[str, Any]) -> None:
         record(operation, state, run=run, attempt=_token(member.get("attempt_id")) or attempt,
                item=str(item), source_id=source,
                reason=next((code for code in reasons if _token(code)), ""))
+
+
+def refusal(status: str, reason: str) -> None:
+    """Trace a machine refusal at the original exception boundary, without raw inputs."""
+    if caller := _current.get():
+        record(caller.operation, status, reason=reason, error=sys.exc_info()[1], include_error_messages=False)

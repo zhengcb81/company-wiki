@@ -277,6 +277,10 @@ Path('finished').touch()
         assert reads[0]["unconfirmed"] == reads[1]["unconfirmed"]
         original, = reads[0]["unconfirmed"]
         assert original["owner"] == OWNER and all(original[k] for k in ("run_id", "attempt_id", "step_id"))
+        history = _cold_process_history(command, original["run_id"])
+        run, = history["processes"]
+        assert run["status"] == "unconfirmed" and "exit_code" not in run
+        assert all(run[key] == value for key, value in original.items())
         assert (tmp_path / "started").read_text().splitlines() == ["once"]
     finally:
         (tmp_path / "release").touch()
@@ -332,6 +336,197 @@ def test_primary_inbox_outage_preserves_the_original_exit_without_reexecuting(tm
         found = [json.loads(row[0])["payload"]["observation"] for row in connection.execute(
             "SELECT request FROM actions WHERE json_extract(request,'$.kind')='observe'")]
     assert any((row["run_id"], row["attempt_id"], row["actual"]) == ("outage-run", "first", "exit:19") for row in found)
+
+
+def _cold_process_history(command, run_id):
+    return json.loads(subprocess.check_output(
+        [*command, "history", "--run-id", run_id, "--owner", OWNER], cwd=ROOT, timeout=20,
+    ))
+
+
+def test_success_without_owner_events_is_still_locatable_after_drain(tmp_path, monkeypatch):
+    from tools.feedback_loop import intake
+
+    command, hosts = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    monkeypatch.setattr(intake, "wake", lambda *args, **kwargs: None)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_RUN_ID", "successful-process")
+    monkeypatch.setenv("RESEARCH_FEEDBACK_ATTEMPT_ID", "original-attempt")
+    private_argument = "fixture-secret-input-do-not-persist"
+    child = "from pathlib import Path; p = Path('calls'); p.write_text(p.read_text()+'x' if p.exists() else 'x')"
+    assert intake.run_observed(settings, hosts, OWNER, [*PYTHON, "-c", child, private_argument], 0) == 0
+    drained = json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT, timeout=20))
+    assert drained["processed"] == 0
+    assert not drained["remaining"]
+    first = _cold_process_history(command, "successful-process")
+    assert first == _cold_process_history(command, "successful-process")
+    assert first["status"] == "found"
+    run, = first["processes"]
+    assert (run["owner"], run["run_id"], run["attempt_id"], run["status"], run["exit_code"]) == (
+        OWNER, "successful-process", "original-attempt", "exited", 0,
+    )
+    assert run["started_at"] <= run["finished_at"] and run["implementation"]
+    assert private_argument not in json.dumps(first)
+    assert (tmp_path / "calls").read_text() == "x"
+    with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as db:
+        assert db.execute("SELECT COUNT(*) FROM actions").fetchone() == (0,)
+
+
+@pytest.mark.parametrize("history_blocked", [False, True])
+def test_unavailable_inboxes_keep_the_original_identity_and_exit(tmp_path, monkeypatch, caplog, history_blocked):
+    from tools.feedback_loop import intake
+
+    command, hosts = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    (tmp_path / "observations").touch()
+    (tmp_path / ".intake-recovery").touch()
+    config = json.loads(settings.read_bytes())
+    triage = "import json; print(json.dumps({'result': {'decision': 'needs_evidence'}}))"
+    config["owners"][OWNER].update(timeout_seconds=10, actions={"triage": [*PYTHON, "-c", triage]})
+    settings.write_text(json.dumps(config), encoding="utf-8")
+    if history_blocked:
+        (tmp_path / "actions.sqlite").mkdir()
+    monkeypatch.setattr(intake, "wake", lambda *args, **kwargs: None)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_RUN_ID", "both-inboxes-down")
+    monkeypatch.setenv("RESEARCH_FEEDBACK_ATTEMPT_ID", "original-attempt")
+    child = """import os
+from pathlib import Path
+with Path('child-calls').open('a') as out:
+    out.write(os.environ['RESEARCH_FEEDBACK_PROCESS_STEP_ID'] + '\\n')
+raise SystemExit(19)
+"""
+    assert intake.run_observed(settings, hosts, OWNER, [*PYTHON, "-c", child], 0) == 19
+    step, = (tmp_path / "child-calls").read_text().splitlines()
+    assert step.startswith("intake/feedback-")
+    assert all(value in caplog.text for value in ("both-inboxes-down", "original-attempt", step, "19"))
+    result = _cold_process_history(command, "both-inboxes-down")
+    if history_blocked:
+        assert result["status"] == "unavailable"
+    else:
+        run, = result["processes"]
+        assert (run["step_id"], run["exit_code"]) == (step, 19)
+        # The real local host settles the offline triage in a separate process.
+        drain = [*command[:-1], "10", "drain"]
+        first, second = (json.loads(subprocess.check_output(drain, cwd=ROOT, timeout=20))
+                         for _ in range(2))
+        assert (first["processed"], second["processed"]) == (1, 0)
+        with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as db:
+            observations = [json.loads(row[0])["payload"]["observation"] for row in db.execute(
+                "SELECT request FROM actions WHERE json_extract(request, '$.kind') = 'observe'",
+            )]
+        origin, = observations
+        assert (origin["run_id"], origin["step_id"], origin["actual"]) == ("both-inboxes-down", step, "exit:19")
+
+
+def test_process_history_can_check_absence_in_a_read_only_path(tmp_path):
+    configuration(tmp_path)
+    output = subprocess.check_output([
+        *PYTHON, "-m", "tools.feedback_loop.intake", "--settings", str(tmp_path / "settings.json"),
+        "history", "--run-id", "absent",
+    ], cwd=ROOT, timeout=20)
+    assert json.loads(output)["status"] == "absent"
+    assert not (tmp_path / "actions.sqlite").exists()
+
+
+def test_original_failure_stays_queued_until_a_consumer_sees_it(tmp_path, monkeypatch):
+    from tools.feedback_loop import intake
+
+    command, hosts = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    triage = "import json; print(json.dumps({'result': {'decision': 'needs_evidence'}}))"
+    config["owners"][OWNER].update(timeout_seconds=10, actions={"triage": [*PYTHON, "-c", triage]})
+    settings.write_text(json.dumps(config), encoding="utf-8")
+    monkeypatch.setattr(intake, "wake", lambda *args, **kwargs: None)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_RUN_ID", "lost-published-inbox")
+    assert intake.run_observed(settings, hosts, OWNER, [*PYTHON, "-c", "raise SystemExit(17)"], 0) == 17
+    inbox = tmp_path / "observations"
+    assert len(list(inbox.glob("*.ready"))) == 1
+    moved = inbox.rename(tmp_path / "out-of-reach")
+    drain = [*command[:-1], "10", "drain"]
+    result = json.loads(subprocess.check_output(drain, cwd=ROOT, timeout=20))
+    assert result["processed"] == 1 and not result["remaining"]
+    moved.rename(inbox)
+    subprocess.check_output(drain, cwd=ROOT, timeout=20)
+    with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as db:
+        rows = [json.loads(row[0])["payload"]["observation"] for row in db.execute(
+            "SELECT request FROM actions WHERE json_extract(request, '$.kind') = 'observe'",
+        )]
+        assert db.execute("SELECT count(*) FROM intake_processes WHERE pending_observation IS NOT NULL").fetchone() == (0,)
+    row, = rows
+    assert (row["run_id"], row["actual"]) == ("lost-published-inbox", "exit:17")
+
+
+def test_known_success_recovers_a_marker_whose_final_rename_failed(tmp_path, monkeypatch):
+    from tools.feedback_loop import intake
+
+    command, hosts = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    original_rename = Path.replace
+
+    def block_ready(path, destination):
+        if destination.suffix == ".ready":
+            raise PermissionError("injected after process exit")
+        return original_rename(path, destination)
+
+    with monkeypatch.context() as patch:
+        patch.setattr(Path, "replace", block_ready)
+        patch.setattr(intake, "wake", lambda *args, **kwargs: None)
+        assert intake.run_observed(settings, hosts, OWNER, [*PYTHON, "-c", "raise SystemExit(0)"], 0) == 0
+    marker, = (tmp_path / "observations").glob("*.pending")
+    context = json.loads(marker.read_bytes())
+    result = json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT, timeout=20))
+    assert not result["unconfirmed"] and result["remaining"] == 0
+    assert not marker.exists()
+    original, = _cold_process_history(command, context["run_id"])["processes"]
+    assert (original["step_id"], original["exit_code"]) == (context["step_id"], 0)
+
+
+@pytest.mark.parametrize("native_only", [False, True])
+def test_success_keeps_a_file_recovery_record_when_the_history_database_is_unavailable(
+    tmp_path, monkeypatch, native_only,
+):
+    from tools.feedback_loop import intake
+
+    command, hosts = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    if native_only:
+        config = json.loads(settings.read_bytes())
+        route = config["owners"][OWNER]
+        del route["observation_dir"]
+        route["native_observation_dirs"] = ["native"]
+        settings.write_text(json.dumps(config), encoding="utf-8")
+    database = tmp_path / "actions.sqlite"
+    database.mkdir()
+    monkeypatch.setattr(intake, "wake", lambda *args, **kwargs: None)
+    child = "from pathlib import Path; Path('called').touch()"
+    assert intake.run_observed(settings, hosts, OWNER, [*PYTHON, "-c", child], 0) == 0
+    inbox = tmp_path / (".intake-recovery" if native_only else "observations")
+    marker, = inbox.glob("*.ready")
+    context = json.loads(marker.read_bytes())
+    assert (tmp_path / "called").is_file()
+
+    database.rmdir()
+    summary = json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT, timeout=20))
+    assert not summary["remaining"] and not marker.exists()
+    assert summary["processed"] == 0 and not (tmp_path / "native").exists()
+    recovered, = _cold_process_history(command, context["run_id"])["processes"]
+    assert (recovered["step_id"], recovered["exit_code"]) == (context["step_id"], 0)
+
+
+def test_process_history_uses_the_real_sqlite_path_with_uri_characters(tmp_path, monkeypatch):
+    from tools.feedback_loop import intake
+
+    command, hosts = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    config["state"] = "actions #1.sqlite"
+    settings.write_text(json.dumps(config), encoding="utf-8")
+    monkeypatch.setattr(intake, "wake", lambda *args, **kwargs: None)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_RUN_ID", "run-with-special-path")
+    assert intake.run_observed(settings, hosts, OWNER, [*PYTHON, "-c", "raise SystemExit(0)"], 0) == 0
+    assert _cold_process_history(command, "run-with-special-path")["status"] == "found"
+    assert (tmp_path / config["state"]).is_file() and not (tmp_path / "actions ").exists()
 
 
 def test_restart_drains_the_original_marker_and_preserves_incomplete_run(tmp_path):
@@ -394,7 +589,10 @@ def test_completed_actions_continue_feedback_after_initial_drain_has_exited(tmp_
     ready, = (tmp_path / "observations").glob("*.jsonl")
     assert not ready.with_suffix(".process").exists()
     marker = ready.with_suffix(".ready")
-    deadline = time.monotonic() + 30
+    # The initial drain has a zero wait. Each later owner action runs in a
+    # separate worker with its own deadline, including on a busy Windows host.
+    route = config["owners"][OWNER]
+    deadline = time.monotonic() + len(route["actions"]) * route["timeout_seconds"] + 10
     while marker.exists() and time.monotonic() < deadline:
         time.sleep(0.1)
     assert not marker.exists()
@@ -432,9 +630,31 @@ def test_host_restart_automatically_consumes_direct_native_packet(tmp_path):
     assert not (tmp_path / "business-count.txt").exists()
 
 
+def test_recover_explicit_sidecar_uses_its_owner_registry(tmp_path):
+    _, registry = configuration(tmp_path)
+    registry = registry.rename(tmp_path / "explicit-hosts.json")
+    packet = tmp_path / "original.jsonl"
+    raw = json.dumps({"schema_version": "feedback-observation/1", "owner": OWNER,
+                      "run_id": "original", "attempt_id": "one", "step_id": "saved",
+                      "check_id": "result", "expected": "ok", "actual": "ok"}).encode("ascii") + b"\n"
+    packet.write_bytes(raw)
+    command = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(tmp_path / "settings.json"),
+               "recover", "--hosts", str(registry), "--sidecar", str(packet)]
+    result = json.loads(subprocess.check_output(command, cwd=ROOT, timeout=20))["feedback"]
+    observed, = result["observations"]
+    assert observed["status"] == "expected" and not result["diagnostics"]
+    assert packet.read_bytes() == raw
+
+
 @pytest.mark.parametrize("flush_exit_code", [0, 13])
-def test_cold_host_flushes_only_selected_owner_before_scanning_native_inbox(tmp_path, flush_exit_code):
-    configuration(tmp_path)
+def test_cold_host_flushes_only_selected_owner_before_scanning_native_inbox(tmp_path, flush_exit_code, monkeypatch):
+    _, registry = configuration(tmp_path)
+    routes = json.loads(registry.read_bytes())
+    routes[OWNER] = {"argv": routes[OWNER], "pass_env": ["TEST_F4_ROUTE"]}
+    explicit = registry.rename(tmp_path / "explicit-owners.json")
+    explicit.write_text(json.dumps(routes), encoding="utf8")
+    monkeypatch.setenv("TEST_F4_ROUTE", "allowed")
+    monkeypatch.setenv("TEST_F4_PRIVATE", "parent-only")
     settings = tmp_path / "settings.json"
     config = json.loads(settings.read_bytes())
     native = tmp_path / "native"
@@ -448,7 +668,8 @@ def test_cold_host_flushes_only_selected_owner_before_scanning_native_inbox(tmp_
     script = tmp_path / "flush_observations.py"
     script.write_text(
         "from pathlib import Path\n"
-        "import sys\n"
+        "import os, sys\n"
+        "if os.getenv('TEST_F4_ROUTE') != 'allowed' or 'TEST_F4_PRIVATE' in os.environ: sys.exit(37)\n"
         "source, packet, count = map(Path, sys.argv[1:4])\n"
         "if source.is_file():\n"
         "    packet.write_bytes(source.read_bytes())\n"
@@ -469,7 +690,7 @@ def test_cold_host_flushes_only_selected_owner_before_scanning_native_inbox(tmp_
     }
     settings.write_text(json.dumps(config), encoding="utf8")
     command = [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings),
-               "recover", "--owner", OWNER]
+               "recover", "--owner", OWNER, "--hosts", str(explicit)]
     results = [json.loads(subprocess.check_output(command, cwd=ROOT, timeout=25)) for _ in range(2)]
     assert [result["processed"] for result in results] == [1, 0]
     expected_diagnostics = [{"owner": OWNER, "code": "owner_observation_flush_failed",
@@ -593,7 +814,7 @@ def test_kill_between_native_payload_and_ready_survives_cold_wake(tmp_path, deep
         assert conn.execute("SELECT COUNT(*) FROM actions").fetchone() == (1,)
 
 
-def test_only_finished_lookups_on_the_same_local_host_avoid_a_new_interpreter(tmp_path, monkeypatch):
+def test_exact_local_route_does_not_start_an_rpc_interpreter(tmp_path, monkeypatch):
     from tools.feedback_loop import host as transport
     from tools.feedback_loop.local_host import LocalHost
     from tools.feedback_loop.observations import digest
@@ -606,18 +827,61 @@ def test_only_finished_lookups_on_the_same_local_host_avoid_a_new_interpreter(tm
     request = dict(schema_version="feedback-action/1", owner=OWNER, kind="observe", action_id=key,
                    method="lookup", payload=body, request_digest=digest([OWNER, "observe", key, body]))
     call = transport.process_host(routes, local=host)
-    assert call(OWNER, request)["state"] == "absent"
-    assert call(OWNER, request | {"method": "submit"})["state"] == "done"
     with monkeypatch.context() as patch:
         def external(*args, **kwargs):
             raise OSError("external transport called")
         patch.setattr(transport.subprocess, "run", external)
+        assert call(OWNER, request)["state"] == "absent"
+        assert call(OWNER, request | {"method": "submit"})["state"] == "done"
         assert call(OWNER, request)["state"] == "done"
-        with pytest.raises(OSError, match="external transport called"):
-            call(OWNER, request | {"method": "submit"})
         other = {OWNER: [*routes[OWNER][:-2], str(tmp_path / "another-config.json"), "rpc"]}
         with pytest.raises(OSError, match="external transport called"):
             transport.process_host(other, local=host)(OWNER, request)
+
+
+def test_exact_local_route_preserves_the_worker_environment_boundary(tmp_path, monkeypatch):
+    from tools.feedback_loop import host as transport
+    from tools.feedback_loop.local_host import LocalHost
+    from tools.feedback_loop.observations import digest
+
+    _, registry = configuration(tmp_path)
+    settings = tmp_path / "settings.json"
+    config = json.loads(settings.read_bytes())
+    config["owners"][OWNER].update(timeout_seconds=15, actions={"triage": [*PYTHON, "-c", "pass"]})
+    settings.write_text(json.dumps(config), encoding="utf8")
+    routes = json.loads(registry.read_bytes())
+    routes[OWNER] = {"argv": routes[OWNER], "pass_env": ["TEST_F4_ROUTE"]}
+    monkeypatch.setenv("TEST_F4_ROUTE", "allowed")
+    monkeypatch.setenv("TEST_F4_PRIVATE", "parent-only")
+    launched = []
+
+    def wake_only(argv, **options):
+        launched.append({name: options["env"][name] for name in ("TEST_F4_ROUTE", "TEST_F4_PRIVATE")
+                         if name in options["env"]})
+
+    monkeypatch.setattr(transport.subprocess, "Popen", wake_only)
+    call = transport.process_host(routes, local=LocalHost(settings))
+    key = "8" * 64
+    payload = {"occurrence_id": "original"}
+    request = dict(schema_version="feedback-action/1", owner=OWNER, kind="triage", action_id=key,
+                   method="submit", payload=payload, request_digest=digest([OWNER, "triage", key, payload]))
+    assert call(OWNER, request)["state"] == "pending"
+    assert call(OWNER, request | {"method": "lookup"})["state"] == "pending"
+    assert call(OWNER, request)["state"] == "pending"
+    environment, = launched
+    assert environment["TEST_F4_ROUTE"] == "allowed"
+    assert "TEST_F4_PRIVATE" not in environment
+
+    # Crash after queue commit. Recovery uses the same declared names without
+    # saving the former process's values or reading the unlisted parent env.
+    monkeypatch.setenv("TEST_F4_ROUTE", "current-route-value")
+    monkeypatch.setenv("TEST_F4_PRIVATE", "unlisted-parent-value")
+    LocalHost(settings).recover()
+    assert len(launched) == 2
+    assert launched[-1]["TEST_F4_ROUTE"] == "current-route-value"
+    assert "TEST_F4_PRIVATE" not in launched[-1]
+    state = (tmp_path / "actions.sqlite").read_bytes()
+    assert b"unlisted-parent-value" not in state and b"current-route-value" not in state
 
 
 @pytest.mark.skipif(sys.platform != "win32", reason="Windows GUI launcher")
@@ -638,6 +902,7 @@ def test_windows_recovery_reuses_same_host_and_runs_owner_reader_without_console
     host = LocalHost(settings)
     routes = json.loads(registry.read_bytes())
     routes[OWNER] = {"argv": routes[OWNER], "pass_env": ["TEST_F4_ROUTE"]}
+    registry.write_text(json.dumps(routes), encoding="utf8")
     route = routes[OWNER]["argv"]
     windows_gui = Path(route[0]).with_name("pythonw.exe")
     if not windows_gui.is_file() or Path(route[0]).name.lower() != "python.exe":
@@ -666,6 +931,12 @@ def test_windows_recovery_reuses_same_host_and_runs_owner_reader_without_console
     assert result["result"] == {"console": False, "private": None, "route": "allowed"}
     assert len(launches) == 1 and launches[0][0][-1] == reader
     assert launches[0][1] & subprocess.CREATE_NO_WINDOW
+    standalone = subprocess.run(
+        [*PYTHON, "-m", "tools.feedback_loop.local_host", "--config", str(settings), "rpc"],
+        input=json.dumps(lookup("reconcile")).encode("ascii"), capture_output=True, cwd=ROOT,
+        check=True, timeout=20,
+    )
+    assert json.loads(standalone.stdout)["result"] == result["result"]
 
 
 def test_scoped_recovery_leaves_parallel_owner_marker_in_shared_inbox(tmp_path):
@@ -691,7 +962,7 @@ def test_scoped_recovery_leaves_parallel_owner_marker_in_shared_inbox(tmp_path):
     request = dict(schema_version="feedback-action/1", method="submit", owner="parallel", kind="repair",
                    action_id=key, payload=payload, request_digest=digest(["parallel", "repair", key, payload]))
     # Simulate the original supervisor dying between queue commit and wake.
-    queued._wake = lambda _: False
+    queued._wake = lambda _key, **_options: False
     assert queued.handle(request)["state"] == "pending"
     result = drain(settings, registry, owner=[OWNER], wait_seconds=0)
     assert result["processed"] == result["remaining"] == result["woken"] == 0

@@ -20,7 +20,7 @@ from .diagnostics import (
     append_diagnostic, background_command, background_environment, format_diagnostic_exception, redact_text,
     run_background,
 )
-from .host import BACKGROUND_CREATION_FLAGS
+from .host import BACKGROUND_CREATION_FLAGS, host_environment, read_hosts
 from .observations import digest, unique_fields
 from .triage_diagnostic import native_diagnostic_facts
 
@@ -137,12 +137,14 @@ def _codex_receipt(path: Path):
 
 
 class LocalHost:
-    def __init__(self, config: Path, *, recovery_owners=None):
+    def __init__(self, config: Path, *, recovery_owners=None, host_registry=None):
         self.config = config.resolve()
         settings = json.loads(host_path(self.config).read_bytes(), object_pairs_hook=unique_fields)
-        self.db = host_path(self.config.parent / settings["state"])
+        self.database_path = self.config.parent / settings["state"]
+        self.db = host_path(self.database_path)
         self.owners = settings["owners"]
         self.intake_hosts = settings.get("intake_hosts")
+        self._host_registry = host_registry
         self.recovery_owners = sorted(recovery_owners or os.environ.get(RECOVERY_OWNERS_ENV, "").split())
         with closing(self._connect()) as conn:
             conn.execute(_SCHEMA)
@@ -190,22 +192,30 @@ class LocalHost:
         with closing(self._connect()) as conn:
             return conn.execute("SELECT * FROM actions WHERE action_id = ?", (key,)).fetchone()
 
-    def settled_lookup(self, request):
-        """Serve local immutable results and absence. Active and native lookups stay on their RPC."""
-        if request["method"] != "lookup" or request["kind"] == "reconcile":
-            return None
-        row = self._get(request["action_id"])
-        if row is not None and row["state"] != "done":
-            return None
-        _validate(request)
-        if request["owner"] not in self.owners:
-            return None
-        prefix = {"schema_version": "feedback-action-result/1", "action_id": request["action_id"],
-                  "request_digest": request["request_digest"]}
-        return self._lookup_result(request, row, prefix)
+    def _configured_pass_env(self, owner):
+        if self._host_registry is None:
+            filename = self.intake_hosts if isinstance(self.intake_hosts, str) and self.intake_hosts else "hosts.json"
+            try:
+                self._host_registry = read_hosts(host_path(self.config.parent / filename))
+            except (OSError, ValueError, RecursionError):
+                self._host_registry = {}
+        spec = self._host_registry.get(owner)
+        names = spec.get("pass_env", []) if isinstance(spec, dict) else []
+        return names if isinstance(names, list) and all(isinstance(name, str) for name in names) else []
 
-    def _wake(self, key):
-        env = background_environment(self.config.parent / "logs" / "host_wake_stderr.log")
+    def _action_environment(self, row, route, *, source=None):
+        names = route.get("pass_env")
+        if names is None:
+            names = self._configured_pass_env(json.loads(row["request"])["owner"])
+        return host_environment(names, source=source)
+
+    def _wake(self, key, *, environment=None):
+        if environment is None:
+            row = self._get(key)
+            if row is None or row["route"] is None:
+                return False
+            environment = self._action_environment(row, json.loads(row["route"]))
+        env = background_environment(self.config.parent / "logs" / "host_wake_stderr.log", environment)
         if self.recovery_owners:
             env[RECOVERY_OWNERS_ENV] = " ".join(self.recovery_owners)
         try:
@@ -262,8 +272,9 @@ class LocalHost:
             if route["mode"] != "codex-jsonl" or _argv(route["argv"])[0] not in _BARE_CODEX:
                 return result
             current = self._route(request["owner"], request["kind"])
+            execution = {field: value for field, value in route.items() if field != "pass_env"}
             cwd = Path(route["cwd"])
-            if (current != route or not cwd.is_absolute() or not cwd.is_dir()
+            if (current != execution or not cwd.is_absolute() or not cwd.is_dir()
                     or os.path.normcase(str(cwd.resolve())) != row["workspace"]):
                 return result
         except (OSError, TypeError, ValueError, KeyError, AttributeError):
@@ -307,6 +318,7 @@ class LocalHost:
                     continue
                 completed = subprocess.run(
                     route["argv"], cwd=route["cwd"], input=b"", capture_output=True,
+                    env=host_environment(self._configured_pass_env(owner)),
                     timeout=route["timeout"], check=False, creationflags=BACKGROUND_CREATION_FLAGS,
                 )
             except (OSError, ValueError, KeyError, TypeError, AttributeError, subprocess.SubprocessError) as exc:
@@ -350,7 +362,7 @@ class LocalHost:
             conn.execute("UPDATE actions SET receipt = ? WHERE action_id = ? AND state = 'queued'",
                          (json.dumps({"code": "owner_launcher_failed", **details}), key))
 
-    def _recover_owner_action(self, row, route):
+    def _recover_owner_action(self, row, route, *, environment=None):
         reader = route.get("lookup_argv")
         if reader is None:
             return None
@@ -358,6 +370,7 @@ class LocalHost:
         try:
             outcome = subprocess.run([*reader, key], cwd=route["cwd"], timeout=route["timeout"],
                                      capture_output=True, stdin=subprocess.DEVNULL, check=False,
+                                     env=self._action_environment(row, route, source=environment),
                                      creationflags=BACKGROUND_CREATION_FLAGS)
             value = json.loads(outcome.stdout, object_pairs_hook=unique_fields) if outcome.returncode == 0 else None
             if not isinstance(value, dict):
@@ -386,13 +399,13 @@ class LocalHost:
         winner = self._get(key)
         return {"state": winner["state"], **json.loads(winner["receipt"] or "{}")}
 
-    def _status(self, row, *, check_owner=False):
+    def _status(self, row, *, check_owner=False, environment=None):
         state = row["state"]
         if state == "queued":
             return {"state": "pending", **json.loads(row["receipt"] or "{}")}
         if state != "running":
             if state == "unknown" and row["route"]:
-                recovered = self._recover_owner_action(row, json.loads(row["route"]))
+                recovered = self._recover_owner_action(row, json.loads(row["route"]), environment=environment)
                 if recovered is not None:
                     return recovered
             return {"state": state, **json.loads(row["receipt"] or "{}")}
@@ -411,7 +424,7 @@ class LocalHost:
             final = self._owner_receipt(path, row)
         expired = time.time() >= row["deadline"]
         if ((final is None and (check_owner or expired)) or (final is not None and final[0] == "unknown")):
-            recovered = self._recover_owner_action(row, route)
+            recovered = self._recover_owner_action(row, route, environment=environment)
             if recovered is not None:
                 return recovered
         if final is not None:
@@ -566,7 +579,7 @@ class LocalHost:
                 return {"state": state, "code": code} if code is not None else {"state": state}
         return {"state": "unknown", "code": "native_status_unavailable"}
 
-    def handle(self, request, *, environment=None):
+    def handle(self, request, *, environment=None, pass_env=None):
         _validate(request)
         key, owner, kind = (request[name] for name in ("action_id", "owner", "kind"))
         sha = request["request_digest"]
@@ -574,12 +587,16 @@ class LocalHost:
         if owner not in self.owners:
             return {**prefix, "state": "unknown", "code": "owner_unconfigured"}
         if kind == "reconcile":
-            return {**prefix, **self._reconcile_lookup(request, environment=environment)}
+            names = self._configured_pass_env(owner) if pass_env is None else pass_env
+            allowed = host_environment(names, source=environment)
+            return {**prefix, **self._reconcile_lookup(request, environment=allowed)}
         row = self._get(key)
         if row is None and request["method"] == "submit":
             route = self._route(owner, kind) if kind in _EXECUTABLE else None
             if kind not in _LOCAL and route is None:
                 return {**prefix, "state": "unknown", "code": "action_unconfigured"}
+            if route is not None:
+                route["pass_env"] = self._configured_pass_env(owner) if pass_env is None else pass_env
             with closing(self._connect()) as conn, conn:
                 inserted = conn.execute("INSERT OR IGNORE INTO actions VALUES (?, ?, ?, ?, ?, ?, NULL, ?)", (
                     key, sha, json.dumps(request), json.dumps(route) if route else None,
@@ -587,18 +604,18 @@ class LocalHost:
                     None if route else json.dumps({"result": {"recorded": True}}),
                 )).rowcount
             if inserted and route:
-                self._wake(key)
+                self._wake(key, environment=environment)
             row = self._get(key)
-        return self._lookup_result(request, row, prefix)
+        return self._lookup_result(request, row, prefix, environment=environment)
 
-    def _lookup_result(self, request, row, prefix):
+    def _lookup_result(self, request, row, prefix, *, environment=None):
         if row is None:
             return {**prefix, "state": "absent"}
         if row["request_digest"] != request["request_digest"]:
             return {**prefix, "state": "failed", "code": "action_conflict"}
         if request["kind"] == "report" and row["route"] is None:
             return {**prefix, "state": "unknown", "code": "legacy_report_without_owner_ack"}
-        return {**prefix, **self._status(row)}
+        return {**prefix, **self._status(row, environment=environment)}
 
     def _claim_native(self, row, timeout):
         # The runner that can actually launch the action claims it. An
@@ -722,12 +739,14 @@ def _recover_command(args) -> dict:
     if not args.sidecar and (args.hosts or host_path(discovery).is_file()):
         from .intake import drain
         return drain(args.config.resolve(), discovery.resolve(), owner=args.owner, wait_seconds=args.wait_seconds)
-    outcome = {"woken": LocalHost(args.config, recovery_owners=args.owner).recover(owners=args.owner)}
+    registry = read_hosts(host_path(args.hosts)) if args.sidecar else None
+    host = LocalHost(args.config, recovery_owners=args.owner, host_registry=registry)
+    outcome = {"woken": host.recover(owners=args.owner)}
     if args.sidecar:
         from .coordinator import settle
-        from .host import process_host, read_hosts
+        from .host import process_host
         from .observations import read_batch
-        outcome["feedback"] = settle(read_batch(args.sidecar), process_host(read_hosts(host_path(args.hosts))),
+        outcome["feedback"] = settle(read_batch(args.sidecar), process_host(registry, local=host),
                                      args.wait_seconds)
     return outcome
 

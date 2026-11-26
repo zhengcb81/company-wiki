@@ -512,7 +512,7 @@ class NarrativeRunStore:
             connection.close()
 
     def _write(self, operation: Callable[[sqlite3.Connection], T]) -> T:
-        connection = migrations._open_connection(self.db_path)
+        connection = migrations.open_writable_connection(self.db_path)
         try:
             connection.execute("BEGIN IMMEDIATE")
             try:

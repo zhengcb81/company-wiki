@@ -13,6 +13,7 @@ from typing import Any, Iterator, Sequence
 import uuid
 
 from .admission import processing_priority_sql
+from .assertion_records import AssertionRecords, FactWriteTransaction
 from .financial_statements.schema import FINANCIAL_STATEMENTS_DDL
 from .lock import operation_lock_status
 from .llm_failure_policy import effective_llm_summary_failure_scope
@@ -1133,6 +1134,47 @@ class CatalogStore:
         self._coalesced_operations = 0
         self._coalesced_max_operations = 0
         self._initialize()
+
+    @property
+    def assertions(self) -> AssertionRecords:
+        return AssertionRecords(self)
+
+    @contextmanager
+    def fact_write_transaction(self) -> Iterator[FactWriteTransaction]:
+        with self.transaction() as connection:
+            yield FactWriteTransaction(connection)
+
+    def append_source_assertion(self, assertion: dict[str, Any]) -> None:
+        with self.fact_write_transaction() as writer:
+            writer.append_assertion(assertion)
+
+    def registered_original(self, source_id: str) -> tuple[str, int, str] | None:
+        row = self.fetchone("SELECT content_sha256,byte_size,mime_type FROM sources WHERE source_id=?", (source_id,))
+        return (row["content_sha256"], row["byte_size"], row["mime_type"]) if row is not None else None
+
+    def update_verified_original_mime(self, source_id: str, mime_type: str) -> None:
+        with self.transaction() as connection:
+            connection.execute("UPDATE sources SET mime_type=? WHERE source_id=?", (mime_type, source_id))
+
+    def reactivate_retired_original(self, document_id: str) -> None:
+        """Reacquire a documented original in the current registration transaction."""
+        with self.transaction() as connection:
+            connection.execute(
+                "UPDATE documents SET source_status='active' WHERE document_id=? AND source_status='retired'",
+                (document_id,),
+            )
+            connection.execute(
+                "UPDATE locations SET location_status='active' WHERE document_id=? AND location_status='retired'",
+                (document_id,),
+            )
+
+    def active_original_paths(self, root_id: str, content_sha256: str) -> tuple[str, ...]:
+        return tuple(row["relative_path"] for row in self.fetchall(
+            """SELECT l.relative_path FROM sources s JOIN locations l ON l.source_id=s.source_id
+            WHERE s.content_sha256=? AND l.role='original_primary' AND l.location_status='active' AND l.root_id=?
+            ORDER BY l.relative_path,l.location_id""",
+            (content_sha256, root_id),
+        ))
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path, timeout=30.0)

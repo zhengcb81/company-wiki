@@ -1,0 +1,42 @@
+# invest-quick-scan｜S1–S5 独立复审
+
+审查及实跑目录为 `C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime`，HEAD **`e0ad75760ff14ce135a7857b090fda9b4663c92f`** 与本地 `refs/remotes/origin/master` 一致，运行工作树 `git status --porcelain=v1` 为空。该检出为稀疏检出，测试和工作流以同提交 Git 对象读证，离线探针使用磁盘上实际运行的脚本。Windows Python 3.13.9，只写独立临时状态，真实网络、模型请求、费用及生产写入均为零。主工作树、Git 和安装副本保持原状。
+
+| 阶段 | 判定 | 已验范围及缺口 |
+|---|---|---|
+| S1 | **独立卡不适用，后续补修部分已验** | S1 发布表无 IQS 专卡。原中微两题保留原启动、题号、退出码 1 和未发送事实，历史底层异常未知。后续 IQS 的 `ExecutionGateway` 排空子进程输出并在日志故障后执行 `wait()`，保存原退出码和按原运行分页冷读的引用。已付结果仍走原 `seal` 和 owner 进度，本次新探针无新派发，历史已付恢复沿用已有独立组合证据。 |
+| S2 | **部分** | Provider 按题及故障类别落 F4 记录。HTTP 异常、准备、批协调和子进程等已接入脱敏本地轮转与公开诊断。合法结果检查保留退出码 0 及成功业务回执。普通成功缺少同一关联号下的开始、主要步骤、时间和终态串联，计划 CLI 仍有未记录拒绝。原准备故障可由原 outbox 引用冷读，强停后原作业状态入口返回另一个未知引用。 |
+| S3 | **部分** | G2b 工程验真经 IQS 自有 CLI 和 StockWiki 公开导出。历史鲜度 oracle 调用 StockWiki 声明的两个公开纯函数。域包和 façade 已存在，144 个兼容 shim（139 个顶层，另有 5 个旧鲜度子包转发） 及生产进程路径依赖仍在。当前范围未对全部仓内运行环和 owner 越层作清零认证。 |
+| S4 | **部分** | 同版本 GitHub 快速 CI 已有通过台账。收集 provider、运行反馈、G2b、legacy oracle 四文件。仓内另有共享边界和工作台 AST 测试，当前远端工作流未收集这两文件，也未覆盖原准备作业强停后的公开 GET 反查。 |
+| S5 | **定向修复已验，整体部分** | 正式 F4 检出已到 `e0ad757`，原 `aa847ac` 漂移结论应更新。非法 URL、截断响应、同阶段两题、旧 oracle 和锁外原诊断保存均有同版代码与定向证据。原作业公开恢复入口和计划 CLI 仍有实证缺口。台账所述 IQS 配置观察根缺少可作部署前后对照的旧诊断，本次独立检出证据限离线探针，未核对在途站点进程或受管安装副本。 |
+
+审查依据 [S1](../../../s1-p0-blackhole-plan.md) · [S2](../../../s2-unified-logging-plan.md) · [S3/S4](../../../../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md) · [S5](../../../s5-closeout-plan-20261125.md) · [同版发布台账](../../../s5-verification-20261125.md) · [中微发送前事件](../../../issues/iqs-presend-20261121.md)。
+
+## P1｜父锁和服务强停后，公开原作业状态转向空因果链
+
+实测用 `DashboardService.dispatch` 的正常 HTTP 路由处理，无监听 socket。给公开 `POST /api/product/prepare/apply` 一个格式合法的合成预览编号及 token，只替换准备 owner，令其记录一次调用、等待信号后抛 `PermissionError(13, …)`。锁住同一独立状态根的 `preparation-jobs/jobs.lock` 后释放替身，等正式 `feedback-*.ready` 和本地轮转文件出现，保持父锁并强停本轮隔离服务。另起 Python 进程用公开 `GET /api/product/prepare/jobs/<job_id>` 查原 job，再用 `scripts/iqs_feedback_owner.py get-diagnostic <ref> --state-root <root>` 分别冷读两个引用。无锁对照让同一个失败先正常写完 job 终态，再退出服务。这两轮均使用短的独立 Windows 路径和显式的原生 outbox 根。
+
+| 观察 | 无锁正常退出 | 父锁持有时强停 |
+|---|---|---|
+| POST / writer 退出 / 原盘上状态 | 200 / 0 / `needs_original_inspection` | 200 / 1 / `preparing` |
+| 新进程 GET | 200，`needs_original_inspection`，`preparation_interrupted`，原引用 | 200，`needs_original_inspection`，`error_code=null`，新引用 |
+| 由 GET 引用冷读 | 退出 0，`prepare.apply`，`PermissionError` | 退出 0，`prepare.recovery/worker_state_unknown`，链为空 |
+| 由原 outbox 引用冷读 | 退出 0，`prepare.apply`，`PermissionError` | 退出 0，`prepare.apply`，`PermissionError` |
+| GET 后 outbox 条数 / 原 apply 调用数 | 1 / 1 | 2 / 1 |
+
+两引用与 POST 原 session 一致且保留原 run。冷查输出无测试异常的私密正文。根因是 worker 在 job 锁外先保存原诊断，状态持久化因锁未完成时，新的 `PreparationJobs.get` 仅根据进程归属判定 detached，直接生成 `prepare.recovery`，没有按原 job/session 查已保存的 `prepare.apply`。原失败仍可由 F4 事先获得的引用查到，只持原 job ID 的调用方无法沿作业返回值定位原因。批协调源码还有相近缺口，`batch.coordinator` 的反馈单独持久化，状态投影只从进程内 `_worker_errors` 得到协调错误。该批次路径本轮仅作源码核对。[准备锁外保存与 GET](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/workbench/dashboard_jobs.py:136) · [公开准备路径](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/workbench/dashboard_service.py:902) · [批次状态投影](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/workbench/dashboard_batches.py:379) · [批协调落盘](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/workbench/dashboard_batches.py:746)
+
+接续验收用相同 POST、父锁、进程强停和全新 GET，再加入两条对照。原故障已保存时，作业携带原 ref 和原 cause，重复 GET 保持幂等，原 apply 仍为一次。强停发生在保存前时，恢复才返回 unknown。批次使用原 batch ID 冷查并核对原停止原因、原 attempt 以及零新派发。
+
+## P1｜故障链已扩展，成功与规划入口仍有缺口
+
+- Provider 在 `Request` 构造及响应读取处归一化非法 URL、`HTTPException`、HTTP 错误等，HTTP 错误体不透传。搜索和模型调用各由原题 ID 的哈希 scope 包裹。同 run/attempt 内同题同错归并，两题同错是两条发生记录且可共用 issue。定向测试另断言合法模型返回保存 token 用量，且无失败记录。该测试组由同版 CI 台账佐证，本轮未重跑整组。[运输与题级去重](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/providers/provider_transport.py:22) · [原题 scope](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/execution/thin_scan.py:420) · [定向测试](https://github.com/zhengcb81/invest-quick-scan/blob/e0ad75760ff14ce135a7857b090fda9b4663c92f/tests/test_iqs_provider_transport_diagnostics.py#L142)
+- 诊断按 owner/run/attempt/step/check 产生稳定 ref，保存异常类型、cause/context 与帧，失败日志以 UTC 写入并轮转 2 MiB × 主文件和两份备份。F4 或本地诊断介质出错走 `stderr` 告警，公开 `republish-diagnostic` 使用既有 ref；本地行和 observation 对时间、输入 ref 和精确发行 SHA 的覆盖不同。子进程日志 write/flush 失败后也继续排空和回收。无同关联号的成功阶段链，普通异常前已发生的外部副作用仍依赖各业务 owner 的另一本账。[原诊断与 F4](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/foundation/runtime_feedback.py:177) · [轮转](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/foundation/runtime_log.py:29) · [CLI 冷查和重投](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/tools/feedback_owner.py:377) · [子进程收尾](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/workbench/dashboard_execution.py:997)
+- 离线合法对照用已存的合成一题一分值证据包跑 `scripts/scan_result_check.py --run <fixture>`。退出 0、单 JSON、stderr 0 字节、`coverage=complete`、`scored=1`、`ok=true`、`usable=true`，显式启用的成功覆盖反馈存在，本地失败日志不存在。成功反馈是已存产物的覆盖检查，无法据此重建原扫描步骤。直接 thin-scan 的参数和清单输入仍使用普通 argparse 和直接读文件，provider 钩子在其后。[结果检查](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/tools/scan_result_check.py:179) · [thin-scan 参数和输入](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/execution/thin_scan.py:361)
+- 实跑 `scripts/implementation_plan.py --plan-dir <不存在的临时目录> validate`，明确传原 run/attempt、原生 outbox 和状态根。结果为退出 2、stdout 0 字节、既有 stderr 前缀，本地轮转和 F4 记录均为零。根因是规划工具独立使用 `argparse` 和直接打印异常，没有进入共同 lifecycle 或拒绝诊断。合法 `validate` 的机器回执设计含 `product_tests_executed=false`。后续在各日常入口保留既有 stdout 和退出码，加同关联号的成功阶段、自带脱敏原因的拒绝及诊断介质失败对照。规划 CLI 只验证计划结构，完整业务验收使用原业务入口。[规划 CLI](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/tools/implementation_plan.py:410)
+
+## S3 与 S4 的边界及 CI
+
+- G2b 用自有公开 CLI 校验冻结输入，经 StockWiki 的公开导出命令核对同一黄金输出。当前只传 `--stockwiki-root` 会要求补全 `--owner-root`、`--entity-id` 和 `--as-of`，子进程错误分支也使用 stderr 取安全原因。StockWiki 鲜度 oracle 的两条延迟 import 在调用历史兼容比较时确实运行，所消费的是 owner 声明的 `freshness_status` 和 `ttl_valid_until` 两个无状态值操作。兼容测试用有或无 export 元数据的 owner 替身新进程验证，源代码 import 命中可作维护线索，不能直接归为私有库或私表穿透。[G2b 的 owner 导出](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/acceptance/stockwiki_g2b_acceptance.py:66) · [参数拒绝](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/acceptance/stockwiki_g2b_acceptance.py:212) · [公开纯值 oracle](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/workbench/iqs_temporal_vendor/legacy_oracle.py:1) · [owner 替身](https://github.com/zhengcb81/invest-quick-scan/blob/e0ad75760ff14ce135a7857b090fda9b4663c92f/tests/test_legacy_freshness_owner_port.py#L13)
+- Git 对象中 `scripts/iqs_scan` 已按域拆包，`scripts/*.py` 的严格顶层路径有 139 处 `sys.modules[__name__]` 兼容别名，含旧鲜度兼容子包时合计 144 处，无 `pyproject.toml`、`setup.py` 或 `setup.cfg`。别名共享同一实现和状态，保留原 CLI 与 import 调用。包化余项有具体运行后果，生产答案校验为 StockQA 1.7 解析 checkout 的 `answer_validation`，会把本 checkout 的 `scripts` 插在进程 `sys.path` 首位且留在进程内，顶级导入解析依赖选定的脚本树。工作台 `DashboardService` 还集中配置冻结、owner 装配及路由，重点应检查真实调用与状态归属。同域 helper、纯 DTO 和兼容转发各按实际用途验证。后续验收保留旧 CLI、同一模块身份及多 owner 公开端口用例，在新进程确认配置路径和真实运行边，梳理私有跨域调用及实环。[兼容别名示例](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/provider_transport.py:1) · [生产路径依赖](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/execution/shared_company_engine.py:193) · [工作台装配](C:/Users/郑曾波/Projects/invest-quick-scan/.worktrees/f4-runtime/scripts/iqs_scan/workbench/dashboard_service.py:297)
+- 日常 `quality.yml` 在 push/PR 的 Ubuntu/Python 3.12 上显式收集四个文件。锁忙用例直接执行私有 `_run`，依据 outbox 得到 ref 后运行公开 CLI。批次用例停止线程后读取同进程 `_worker_errors`。两者保留持久化回归价值，本次发现的公开 GET 及真正进程强停应由原入口补进日常收集。仓内 suite 配置已有 `test_dashboard_module_boundaries.py` 和 `test_shared_public_boundaries.py`，分别含对公开/私有接口与导入反例的扫描，远端四文件命令未纳入。建议跟随实际故障补入口对照和 Windows 锁测试，并让已有边界用例在日常 CI 可复核。[日常工作流](https://github.com/zhengcb81/invest-quick-scan/blob/e0ad75760ff14ce135a7857b090fda9b4663c92f/.github/workflows/quality.yml#L12) · [现有锁与批协调用例](https://github.com/zhengcb81/invest-quick-scan/blob/e0ad75760ff14ce135a7857b090fda9b4663c92f/tests/test_runtime_feedback_boundaries.py#L138) · [本仓测试 suite](https://github.com/zhengcb81/invest-quick-scan/blob/e0ad75760ff14ce135a7857b090fda9b4663c92f/tests/suites.json#L53)

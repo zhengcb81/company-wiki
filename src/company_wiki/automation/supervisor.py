@@ -11,7 +11,9 @@ from multiprocessing.process import BaseProcess
 from pathlib import Path
 from types import TracebackType
 from typing import Protocol
+from uuid import uuid4
 
+from company_wiki import runtime_feedback, runtime_trace
 from company_wiki.id_scope import normalize_id_scope
 
 from .models import JobStatus
@@ -45,6 +47,8 @@ class ChildSnapshot:
     pid: int | None
     alive: bool
     exitcode: int | None
+    run_id: str = ""
+    attempt_id: str = ""
 
 
 @dataclass(frozen=True)
@@ -94,6 +98,10 @@ class _Child:
     slot: WorkerSlot
     process: BaseProcess
     stop_event: StopEvent
+    run_id: str
+    attempt_id: str
+    interrupted: bool = False
+    exit_recorded: bool = False
 
 
 class ChildProcessFailedError(RuntimeError):
@@ -126,6 +134,7 @@ class AutomationSupervisor:
         self._restart_counts: dict[str, int] = {}
         self._started = False
         self._stopping = False
+        self._run_id = ""
 
     def __enter__(self) -> AutomationSupervisor:
         self.start()
@@ -142,11 +151,15 @@ class AutomationSupervisor:
     def start(self) -> None:
         if self._started:
             return
-        self._config.log_dir.mkdir(parents=True, exist_ok=True)
+        self._run_id, _ = runtime_feedback.runtime_identity()
         self._started = True
         self._stopping = False
-        for slot in profile_slots(self._config.profile):
-            self._spawn(slot)
+        try:
+            for slot in profile_slots(self._config.profile):
+                self._spawn(slot)
+        except Exception:
+            self.stop()
+            raise
 
     def stop(self) -> None:
         if not self._started:
@@ -160,11 +173,13 @@ class AutomationSupervisor:
             child.process.join(timeout=remaining)
         for child in self._children.values():
             if child.process.is_alive():
+                child.interrupted = True
                 child.process.terminate()
                 child.process.join(timeout=self._config.stop_grace_seconds)
             if child.process.is_alive():
                 child.process.kill()
                 child.process.join(timeout=self._config.stop_grace_seconds)
+            self._observe_exit(child)
         self._started = False
 
     def children(self) -> tuple[ChildSnapshot, ...]:
@@ -175,6 +190,8 @@ class AutomationSupervisor:
                 pid=child.process.pid,
                 alive=child.process.is_alive(),
                 exitcode=child.process.exitcode,
+                run_id=child.run_id,
+                attempt_id=child.attempt_id,
             )
             for worker_id, child in sorted(self._children.items())
         )
@@ -182,8 +199,10 @@ class AutomationSupervisor:
     def terminate_worker(self, worker_id: str) -> None:
         child = self._children[worker_id]
         if child.process.is_alive():
+            child.interrupted = True
             child.process.terminate()
             child.process.join(timeout=self._config.stop_grace_seconds)
+        self._observe_exit(child)
 
     def maintain(self) -> None:
         if not self._started or self._stopping:
@@ -195,6 +214,8 @@ class AutomationSupervisor:
             worker_id = slot.worker_id
             child = self._children.get(worker_id)
             if child is None or not child.process.is_alive():
+                if child is not None:
+                    self._observe_exit(child)
                 count = self._restart_counts.get(worker_id, 0)
                 if count >= self._config.max_restarts_per_slot:
                     raise ChildProcessFailedError(
@@ -240,6 +261,11 @@ class AutomationSupervisor:
             self.stop()
 
     def _spawn(self, slot: WorkerSlot) -> None:
+        attempt_id = f"{slot.worker_id}.{uuid4().hex}"
+        runtime_trace.write_event(
+            "worker-process", self._run_id, attempt_id, "spawn", "started", source_file=__file__,
+            input_ref=runtime_trace.input_reference(self._config.db_path),
+        )
         allowed = (
             self._config.model_job_types
             if slot.role == "model"
@@ -260,16 +286,46 @@ class AutomationSupervisor:
             idle_sleep_seconds=self._config.idle_sleep_seconds,
             child_log_max_bytes=self._config.child_log_max_bytes,
             allowed_job_ids=self._config.allowed_job_ids,
+            run_id=self._run_id,
+            attempt_id=attempt_id,
         )
-        stop_event = self._context.Event()
-        process = self._context.Process(
-            name=f"company-wiki-{slot.worker_id}",
-            target=run_worker_process,
-            args=(spec, stop_event, os.getpid()),
-            daemon=True,
+        try:
+            stop_event = self._context.Event()
+            process = self._context.Process(
+                name=f"company-wiki-{slot.worker_id}",
+                target=run_worker_process,
+                args=(spec, stop_event, os.getpid()),
+                daemon=True,
+            )
+            process.start()
+        except Exception as exc:
+            runtime_feedback.record("worker-process", "failed", reason="worker_not_started",
+                                    error=exc, run=self._run_id, attempt=attempt_id)
+            runtime_trace.write_event("worker-process", self._run_id, attempt_id, "exit", "not_started",
+                                      source_file=__file__)
+            raise
+        self._children[slot.worker_id] = _Child(slot, process, stop_event, self._run_id, attempt_id)
+
+    def _observe_exit(self, child: _Child) -> None:
+        exit_code = child.process.exitcode
+        if exit_code is None or child.exit_recorded:
+            return
+        child.exit_recorded = True
+        status = "completed"
+        if exit_code != 0:
+            status = "interrupted" if child.interrupted else "failed"
+            trace = runtime_trace.read_trace(child.run_id, attempt_id=child.attempt_id)
+            reported = any(event["operation"] == "worker-process" and event["step"] == "failure"
+                           for event in trace["events"])
+            if not reported:
+                runtime_feedback.record(
+                    "worker-process", status, reason="worker_terminated" if child.interrupted else "worker_process_exit",
+                    run=child.run_id, attempt=child.attempt_id,
+                )
+        runtime_trace.write_event(
+            "worker-process", child.run_id, child.attempt_id, "exit", status,
+            source_file=__file__, exit_code=exit_code,
         )
-        process.start()
-        self._children[slot.worker_id] = _Child(slot, process, stop_event)
 
 
 def _now() -> str:

@@ -34,6 +34,7 @@ import sqlite3
 from pathlib import Path
 from typing import Any, Protocol, Sequence, runtime_checkable
 
+from .assertion_records import AssertionRecords
 from .error_taxonomy import CatalogReaderUnavailable as CatalogReaderUnavailable
 from .models import CATALOG_SCHEMA_VERSION
 from .sqlite_support import configure_tolerant_sqlite_text_decoding
@@ -61,6 +62,9 @@ class CatalogReader(Protocol):
     def query_only(self) -> bool:
         """True: the connection is ``PRAGMA query_only=ON`` (always True)."""
         ...
+
+    @property
+    def assertions(self) -> AssertionRecords: ...
 
     def fetchone(self, sql: str, params: Sequence[Any] = ()) -> sqlite3.Row | None:
         """Run a SELECT and return the first row (None when no rows)."""
@@ -220,6 +224,10 @@ class ReadOnlyCatalogReader:
     @property
     def query_only(self) -> bool:
         return True
+
+    @property
+    def assertions(self) -> AssertionRecords:
+        return AssertionRecords(self)
 
     def fetchone(self, sql: str, params: Sequence[Any] = ()) -> sqlite3.Row | None:
         return self._connection.execute(sql, tuple(params)).fetchone()

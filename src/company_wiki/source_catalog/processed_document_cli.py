@@ -15,6 +15,8 @@ errors never contain an original path, storage root or catalogue interior.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 import sqlite3
@@ -64,6 +66,7 @@ def _write_json_line(stream: Any, value: dict[str, Any]) -> None:
 
 
 def _emit_error(status: str, reason: str) -> None:
+    runtime_feedback.refusal(status, reason)
     _write_json_line(
         sys.stderr,
         {
@@ -74,14 +77,17 @@ def _emit_error(status: str, reason: str) -> None:
     )
 
 
+@runtime_feedback.entry("processed-document")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
+        runtime_feedback.checkpoint("load-request", input_path=args.config)
         request = _read_request()
         catalog = SourceCatalog(load_catalog_config(args.config))
+        runtime_feedback.checkpoint("read-processed")
         envelope = read_processed_document(SourceVersionReader(catalog).as_version_port(), request)
         _write_json_line(sys.stdout, envelope)
         return 0

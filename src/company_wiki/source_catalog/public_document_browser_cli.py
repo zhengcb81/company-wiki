@@ -10,6 +10,8 @@ reopen ``not_found``) are successful responses on stdout with exit 0.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 import sqlite3
@@ -67,6 +69,7 @@ def _write_json_line(stream: Any, value: dict[str, Any]) -> None:
 
 
 def _emit_error(state: str, reason: str) -> None:
+    runtime_feedback.refusal(state, reason)
     _write_json_line(
         sys.stderr,
         {"schema_version": BROWSE_RESPONSE_SCHEMA,
@@ -74,15 +77,18 @@ def _emit_error(state: str, reason: str) -> None:
     )
 
 
+@runtime_feedback.entry("document-browser")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
+        runtime_feedback.checkpoint("load-request", input_path=args.config)
         request = _read_request()
         catalog = SourceCatalog(load_catalog_config(args.config))
         browser = PublicDocumentBrowser(catalog)
+        runtime_feedback.checkpoint("read-documents")
         if request["schema_version"] == BROWSE_REQUEST_SCHEMA:
             response = browser.browse(request)
         else:

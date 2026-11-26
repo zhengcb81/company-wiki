@@ -12,6 +12,8 @@ Exit codes: 0 = response emitted (any readiness state), 2 = request refused
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 import sys
@@ -92,6 +94,7 @@ def _float_option(raw: str | None, *, default: float) -> float:
     return value
 
 
+@runtime_feedback.entry("source-readiness")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -108,6 +111,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     try:
         args = parser.parse_args(argv)
+        runtime_feedback.checkpoint("load-request", input_path=args.config)
         deadline = _float_option(
             args.byte_deadline_seconds, default=DEFAULT_VERIFY_DEADLINE_SECONDS
         )
@@ -121,12 +125,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         # The CLI boundary accepts ONLY a complete 6-field SourceRef; anything
         # else (extra fields, smuggled paths, wrong shapes) is a refused
         # request with exit 2 and no stdout, before any catalog is opened.
-        parse_public_source_ref(request)
+        source_ref = parse_public_source_ref(request)
         catalog: SourceCatalog | None = None
         try:
             config = load_catalog_config(args.config)
             catalog = SourceCatalog(config)
             readiness = PublicSourceReadiness(SourceVersionReader(catalog))
+            runtime_feedback.checkpoint("assess", source_id=source_ref.source_id)
             response = readiness.assess(
                 request,
                 mode=args.mode,
@@ -137,6 +142,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             if catalog is not None:
                 catalog.close()
     except (CatalogConfigError, CatalogReaderUnavailable, OSError, ValueError):
+        runtime_feedback.refusal("blocked", "source_readiness_request_failed")
         return 2
     sys.stdout.write(
         json.dumps(response, ensure_ascii=True, sort_keys=True,

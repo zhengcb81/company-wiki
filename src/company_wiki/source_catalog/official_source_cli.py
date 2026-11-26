@@ -1,6 +1,8 @@
 """Public thin original-import/discovery entry. Canonical paths stay in storage."""
 
 from __future__ import annotations
+
+from company_wiki import runtime_feedback
 import argparse
 import json
 from pathlib import Path
@@ -109,6 +111,7 @@ def _json_projection_operation(catalog, operation, request) -> dict | bytes:
     raise ValueError("unknown_operation")
 
 
+@runtime_feedback.entry("official-source")
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
@@ -121,9 +124,11 @@ def main(argv=None):
     args = parser.parse_args(argv)
     catalog = None
     try:
+        runtime_feedback.checkpoint("load-request", input_path=args.request)
         request = _read_json(args.request)
         if not isinstance(request, dict):
             raise ValueError("invalid_request")
+        runtime_feedback.checkpoint(args.operation, input_path=args.config or args.input_file)
         result: dict
         if args.operation == "import":
             if (
@@ -252,6 +257,7 @@ def main(argv=None):
                 result["limitations"].append("index_fetch_incomplete")
             # The parse and the CLI can both observe the same limit.
             result["limitations"] = list(dict.fromkeys(result["limitations"]))
+        runtime_feedback.document_results("official-source", result)
         print(json.dumps(result, ensure_ascii=False, separators=(",", ":")))
         return 0
     except (OSError, ValueError, RuntimeError, ProviderBudgetStop, httpx.HTTPError) as exc:
@@ -263,6 +269,7 @@ def main(argv=None):
         )
         failure = {"schema_version": "official-source-failure/1", "status": "failed",
                    "error_code": getattr(exc, "error_code", code)}
+        runtime_feedback.refusal("failed", failure["error_code"])
         for field in ("capture_id", "acquisition_usage", "acquisition_usage_complete", "provider_started",
                       "http_observation", "http_wire_bytes", "http_wire_usage_complete"):
             value = getattr(exc, field, None)

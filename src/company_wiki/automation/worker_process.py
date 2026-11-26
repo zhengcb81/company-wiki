@@ -9,12 +9,14 @@ import multiprocessing
 import os
 import threading
 import time
-import traceback
 from contextlib import redirect_stderr, redirect_stdout
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Protocol, cast
 
+from company_wiki import runtime_feedback, runtime_trace
+from company_wiki.diagnostic_redaction import format_diagnostic_exception
+from company_wiki.diagnostic_stream import RedactedTextStream
 from company_wiki.id_scope import normalize_id_scope
 
 from .models import ClaimedWork
@@ -58,6 +60,8 @@ class WorkerProcessSpec:
     idle_sleep_seconds: float
     child_log_max_bytes: int
     allowed_job_ids: tuple[str, ...] | None = None
+    run_id: str = ""
+    attempt_id: str = ""
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "allowed_job_ids", normalize_id_scope(
@@ -142,24 +146,54 @@ def validate_runtime(
         raise ValueError(f"unknown worker role: {role}")
 
 
+def _worker_event(spec: WorkerProcessSpec, step: str, status: str, *, exit_code: int | None = None) -> None:
+    runtime_trace.write_event(
+        "worker-process", spec.run_id, spec.attempt_id, step, status,
+        source_file=__file__, exit_code=exit_code,
+    )
+
+
+def _child_stream(spec: WorkerProcessSpec, name: str) -> RedactedTextStream:
+    path = Path(spec.log_dir) / f"{spec.worker_id}.{name}.log"
+    sink: BoundedLogWriter | None = None
+    warn = True
+
+    def persist(text: str) -> None:
+        nonlocal sink, warn
+        try:
+            if sink is None:
+                sink = BoundedLogWriter(path, max_bytes=spec.child_log_max_bytes)
+            sink.write(text)
+        except OSError:
+            if warn:
+                _worker_event(spec, f"{name}-log", "unavailable")
+                warn = False
+
+    return RedactedTextStream(persist)
+
+
+def _job_lifecycle(spec: WorkerProcessSpec, runtime: WorkerRuntime) -> Callable[[str, ClaimedWork], None]:
+    def observe(phase: str, claimed: ClaimedWork) -> None:
+        runtime_trace.write_event(
+            "worker-job", claimed.job.job_id, claimed.attempt.attempt_id, phase, "observed",
+            source_file=__file__, input_ref=claimed.job.input_hash, related_run_id=spec.run_id,
+        )
+        if runtime.lifecycle_callback is not None:
+            runtime.lifecycle_callback(phase, claimed)
+    return observe
+
+
 def run_worker_process(
     spec: WorkerProcessSpec, stop_event: StopEvent, parent_pid: int
 ) -> None:
     """Build child-local dependencies and poll the shared database for work."""
-
-    log_dir = Path(spec.log_dir)
-    stdout = BoundedLogWriter(
-        log_dir / f"{spec.worker_id}.stdout.log",
-        max_bytes=spec.child_log_max_bytes,
-    )
-    stderr = BoundedLogWriter(
-        log_dir / f"{spec.worker_id}.stderr.log",
-        max_bytes=spec.child_log_max_bytes,
-    )
+    stdout = _child_stream(spec, "stdout")
+    stderr = _child_stream(spec, "stderr")
     with redirect_stdout(stdout), redirect_stderr(stderr):
         runtime = None
         try:
-            _start_parent_watchdog(parent_pid)
+            _start_parent_watchdog(parent_pid, spec)
+            _worker_event(spec, "factory", "started")
             factory = _resolve_factory(spec.runtime_factory_path)
             built = factory(spec)
             if not isinstance(built, WorkerRuntime):
@@ -178,27 +212,38 @@ def run_worker_process(
                 heartbeat_interval_seconds=spec.heartbeat_interval_seconds,
                 allowed_job_types=spec.allowed_job_types,
                 allowed_job_ids=spec.allowed_job_ids,
-                lifecycle_callback=runtime.lifecycle_callback,
+                lifecycle_callback=_job_lifecycle(spec, runtime),
             )
+            _worker_event(spec, "poll", "started")
             while not stop_event.is_set() and os.getppid() == parent_pid:
                 if not worker.process_one():
                     stop_event.wait(spec.idle_sleep_seconds)
-        except BaseException:
-            traceback.print_exc()
-            raise
+        except BaseException as exc:
+            status = "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed"
+            runtime_feedback.record("worker-process", status, error=exc,
+                                    run=spec.run_id, attempt=spec.attempt_id)
+            stderr.write(format_diagnostic_exception(exc) + "\n")
+            # multiprocessing otherwise renders the original exception outside
+            # the captured streams at the inherited terminal boundary.
+            code = exc.code if isinstance(exc, SystemExit) and isinstance(exc.code, int) else 1
+            raise SystemExit(code or 1) from None
         finally:
             if runtime is not None:
                 try:
                     runtime.close()
-                except Exception:
+                except Exception as exc:
                     # Cleanup diagnostics do not replace the worker outcome.
-                    traceback.print_exc()
+                    runtime_feedback.record("worker-cleanup", "failed", error=exc,
+                                            run=spec.run_id, attempt=spec.attempt_id)
+                    stderr.write(format_diagnostic_exception(exc) + "\n")
+            stdout.finish()
+            stderr.finish()
 
 
-def _start_parent_watchdog(parent_pid: int) -> threading.Thread:
+def _start_parent_watchdog(parent_pid: int, spec: WorkerProcessSpec) -> threading.Thread:
     thread = threading.Thread(
         target=_watch_parent,
-        args=(parent_pid,),
+        args=(parent_pid, spec),
         name="automation-parent-watchdog",
         daemon=True,
     )
@@ -206,7 +251,7 @@ def _start_parent_watchdog(parent_pid: int) -> threading.Thread:
     return thread
 
 
-def _watch_parent(parent_pid: int) -> None:
+def _watch_parent(parent_pid: int, spec: WorkerProcessSpec) -> None:
     while True:
         # Do not wait on the multiprocessing stop Event here.  A hard-killed
         # worker could otherwise die while holding the Event semaphore and
@@ -215,7 +260,14 @@ def _watch_parent(parent_pid: int) -> None:
         parent = multiprocessing.parent_process()
         alive = parent.is_alive() if parent is not None else os.getppid() == parent_pid
         if not alive or os.getppid() != parent_pid:
-            os._exit(73)
+            try:
+                runtime_feedback.record(
+                    "worker-process", "interrupted", reason="supervisor_lost",
+                    run=spec.run_id, attempt=spec.attempt_id,
+                )
+                _worker_event(spec, "exit", "interrupted", exit_code=73)
+            finally:
+                os._exit(73)
 
 
 def _resolve_factory(path: str) -> Callable[[WorkerProcessSpec], WorkerRuntime]:

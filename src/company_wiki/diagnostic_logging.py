@@ -29,6 +29,7 @@ class _LockedLog(RotatingFileHandler):
         super().__init__(path, maxBytes=2 * 1024 * 1024, backupCount=1, encoding="utf-8", delay=True)
         self.path = path
         self.warn_on_stderr = warn_on_stderr
+        self.failed = False
         self.setFormatter(_Formatter("%(asctime)sZ %(levelname)s %(name)s %(message)s", "%Y-%m-%dT%H:%M:%S"))
 
     def doRollover(self) -> None:
@@ -55,6 +56,7 @@ class _LockedLog(RotatingFileHandler):
             self.handleError(record)
 
     def handleError(self, record: logging.LogRecord) -> None:  # noqa: N802
+        self.failed = True
         if self.warn_on_stderr and sys.stderr is not None:
             try:
                 error = sys.exc_info()[0]
@@ -77,8 +79,8 @@ def diagnostic_log(logger: logging.Logger, path: Path, *, warn_on_stderr: bool =
         handler.close()
 
 
-def append_diagnostic(path: Path, text: str, *, warn_on_stderr: bool = True) -> None:
-    """Persist one redacted record without changing the calling logger."""
+def append_diagnostic(path: Path, text: str, *, warn_on_stderr: bool = True) -> bool:
+    """Attempt one redacted record without changing the calling logger."""
     handler = _LockedLog(path, warn_on_stderr=warn_on_stderr)
     try:
         handler.handle(logging.makeLogRecord({
@@ -86,3 +88,4 @@ def append_diagnostic(path: Path, text: str, *, warn_on_stderr: bool = True) -> 
         }))
     finally:
         handler.close()
+    return not handler.failed

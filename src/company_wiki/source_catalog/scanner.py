@@ -23,6 +23,7 @@ from .admission import (
     evaluate_admission,
 )
 from .assertion_service import source_fact_projection
+from .assertion_records import current_fact_record
 from .document_kinds import SIDECAR_KIND_MAP as _SIDECAR_KIND_MAP
 from .adapters.dayu import (
     construct_edgar_url as _construct_edgar_url,
@@ -1117,8 +1118,9 @@ def _scan_catalog_impl(
                     document_metadata=document_metadata,
                     scan_time=scan_time,
                     verified_projection=source_fact_projection(
-                        connection, document_id=document_id,
-                        source_id=primary.source_id if primary else None,
+                        current_fact_record(connection, document_id=document_id,
+                                            source_id=primary.source_id if primary else None),
+                        document_id=document_id,
                     ),
                 )
                 connection.execute(

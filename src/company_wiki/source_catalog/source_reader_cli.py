@@ -45,7 +45,9 @@ def _digest_argument(value: str) -> str:
     return value
 
 
-def _emit_receipt(payload: dict[str, object]) -> None:
+def _emit_receipt(payload: dict[str, object], *, include_runtime_trace: bool) -> None:
+    if include_runtime_trace:
+        payload["runtime_trace"] = runtime_feedback.trace_reference()
     line = json.dumps(payload, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
     sys.stderr.write(line + "\n")
     sys.stderr.flush()
@@ -68,14 +70,20 @@ def main(argv: Sequence[str] | None = None) -> int:
                         help="Return receipt 2.2 with existing historical capture evidence, or null.")
     parser.add_argument("--include-canonical-identity", action="store_true",
                         help="Project market code formatting without changing observed manifest facts.")
+    parser.add_argument("--include-runtime-trace", action="store_true",
+                        help="Include the owner runtime identity and trace availability in the receipt.")
+    include_runtime_trace = False
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
+        include_runtime_trace = args.include_runtime_trace
+        runtime_feedback.checkpoint("resolve-source", input_path=args.config, source_id=args.source_id)
         config = load_catalog_config(args.config)
         catalog = SourceCatalog(config)
         reader = SourceVersionReader(catalog)
         query = reader.query_exact_pair_ref if args.exact_pair else reader.query_ref
         ref = query(args.document_id, args.source_id, args.content_sha256)
+        runtime_feedback.checkpoint("verify-original", source_id=ref.source_id)
         opened, manifest = reader.open_described_version(
             ref, purpose=args.purpose,
             expected_read_policy_sha256=args.expected_read_policy_sha256,
@@ -88,6 +96,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "market": market, "security_id": canonical_security_code(security_id, market)}
         if args.include_availability_evidence:
             extension["availability_evidence"] = verified_availability_evidence(catalog, ref)
+        runtime_feedback.checkpoint("deliver-bytes", source_id=opened.source_id)
         sys.stdout.buffer.write(opened.data)
         sys.stdout.buffer.flush()
         _emit_receipt(
@@ -106,7 +115,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "manifest": manifest,
                 "review": asdict(opened.review) if opened.review is not None else None,
                 **extension,
-            }
+            },
+            include_runtime_trace=include_runtime_trace,
         )
         return 0
     except SourceReadError as exc:
@@ -116,7 +126,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
                 "status": exc.status,
                 "reason": exc.reason,
-            }
+            },
+            include_runtime_trace=include_runtime_trace,
         )
         return 2
     except (CatalogConfigError, CatalogReaderUnavailable, OSError, sqlite3.Error) as exc:
@@ -126,13 +137,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
                 "status": "unavailable",
                 "reason": "reader_unavailable",
-            }
+            },
+            include_runtime_trace=include_runtime_trace,
         )
         return 2
     except (TypeError, UnicodeError, ValueError) as exc:
         runtime_feedback.record("source-read", "blocked", reason="invalid_request", error=exc)
         _emit_receipt({"schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
-                       "status": "blocked", "reason": "invalid_request"})
+                       "status": "blocked", "reason": "invalid_request"},
+                      include_runtime_trace=include_runtime_trace)
         return 2
     finally:
         if catalog is not None:

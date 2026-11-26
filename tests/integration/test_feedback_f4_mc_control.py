@@ -124,7 +124,7 @@ def test_mc_auto_repair_and_report_recover_original_action_ids(tmp_path, monkeyp
         OWNER: {"cwd": str(owner_root), "timeout_seconds": 20, "actions": actions}
     }}), encoding="utf-8")
     host = LocalHost(config)
-    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
 
     def receive(_owner, request):
         return host.handle(request)

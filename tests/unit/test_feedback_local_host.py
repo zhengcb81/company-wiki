@@ -222,7 +222,7 @@ def test_codex_launch_resolves_the_current_install_before_starting(host_config, 
     monkeypatch.setattr(codex_cli, "resolve_codex", lambda: executable)
     starts = _fake_codex_start(monkeypatch)
     host = LocalHost(host_config)
-    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
     request = action()
     assert host.handle(request)["state"] == "pending"
     host.work(request["action_id"])
@@ -347,7 +347,7 @@ def test_codex_triage_includes_only_bound_native_diagnostic_facts(
     host_config.write_text(json.dumps(config), encoding="utf-8")
     request = action(kind, owner="triage-owner", payload={"observation": observation})
     host = LocalHost(host_config)
-    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
     assert host.handle(request)["state"] == "pending"
     host.work(request["action_id"])
     resumed = LocalHost(host_config)
@@ -387,7 +387,7 @@ def _legacy_codex_failure(host_config, monkeypatch, *, state="failed", code="hos
     host_config.write_text(json.dumps(config), encoding="utf-8")
     host = LocalHost(host_config)
     wakes = []
-    monkeypatch.setattr(host, "_wake", lambda key: wakes.append(key) or True)
+    monkeypatch.setattr(host, "_wake", lambda key, **_options: wakes.append(key) or True)
     request = action()
     assert host.handle(request)["state"] == "pending"
     key = request["action_id"]
@@ -517,7 +517,7 @@ def test_worker_exits_before_native_runner_can_claim_and_restart_uses_original_a
 
     request = action()
     host = LocalHost(host_config)
-    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
     assert host.handle(request)["state"] == "pending"
 
     # Force the real outer process to exit before it invokes the native route.
@@ -554,7 +554,7 @@ def test_failed_owner_launcher_keeps_a_recoverable_action_and_diagnostic(host_co
     host = LocalHost(host_config)
     request = action()
     lookup = {**request, "method": "lookup"}
-    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
     assert host.handle(request)["state"] == "pending"
 
     def launcher_unavailable(*args, **kwargs):
@@ -649,7 +649,7 @@ def test_recover_folds_native_terminal_before_waking_workspace(host_config, monk
     }
     host_config.write_text(json.dumps(config), encoding="utf-8")
     host = LocalHost(host_config)
-    monkeypatch.setattr(host, "_wake", lambda key: True)
+    monkeypatch.setattr(host, "_wake", lambda key, **_options: True)
     req = action()
     host.handle(req)
 
@@ -738,7 +738,7 @@ def test_run_refusal_review_on_the_original_native_triage_action(host_config, mo
     }) + "\n", encoding="utf-8")
     cases = read_batch([sidecar])
     host = LocalHost(host_config)
-    monkeypatch.setattr(host, "_wake", lambda key: True)
+    monkeypatch.setattr(host, "_wake", lambda key, **_options: True)
     assert advance(cases, lambda _, request: host.handle(request))["observations"][0]["status"] == "pending"
     key = digest(["triage", "company-wiki", next(iter(cases.observations))])
     host.work(key)
@@ -782,7 +782,7 @@ def test_owner_report_ack_survives_worker_death_without_running_report_again(hos
     host_config.write_text(json.dumps(cfg), encoding='utf-8')
     request = action('report')
     host = LocalHost(host_config)
-    monkeypatch.setattr(host, '_wake', lambda _: True)
+    monkeypatch.setattr(host, '_wake', lambda _key, **_options: True)
     assert host.handle(request)['state'] == 'pending'
 
     def lost_db_write(*args):
@@ -834,7 +834,7 @@ def test_unknown_action_recovers_through_its_original_reader_and_complete_reques
     wrong_payload = {**request["payload"], "fixed_version": "unrelated"}
     proof.write_text(json.dumps(receipt({**request, "payload": wrong_payload})), encoding="utf-8")
     host = LocalHost(host_config)
-    monkeypatch.setattr(host, "_wake", lambda _key: True)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
     host.handle(request)
     host.work(request["action_id"])
     assert host.handle(lookup)["state"] == "unknown"

@@ -107,7 +107,7 @@ def test_owner_report_survives_lost_reply_before_host_receipt(tmp_path, monkeypa
         }},
     }})
     settings = LocalHost(Path(config))
-    monkeypatch.setattr(settings, "_wake", lambda _key: True)
+    monkeypatch.setattr(settings, "_wake", lambda _key, **_options: True)
     def action(kind, action_id, payload):
         return {"schema_version": "feedback-action/1", "method": "submit", "action_id": action_id, "owner": owner,
                 "kind": kind, "payload": payload, "request_digest": digest([owner, kind, action_id, payload])}

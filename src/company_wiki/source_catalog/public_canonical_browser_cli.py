@@ -16,6 +16,8 @@ responses on stdout with exit 0.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import argparse
 import json
 import re
@@ -95,6 +97,7 @@ def _write_json_line(stream: Any, value: dict[str, Any]) -> None:
 
 
 def _emit_error(state: str, reason: str) -> None:
+    runtime_feedback.refusal(state, reason)
     _write_json_line(
         sys.stderr,
         {"schema_version": RESPONSE_SCHEMA,
@@ -114,6 +117,7 @@ def _proof_client(args: argparse.Namespace) -> StockWikiProofClient | None:
     )
 
 
+@runtime_feedback.entry("canonical-browser")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -123,6 +127,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
+        runtime_feedback.checkpoint("load-request", input_path=args.config)
         request = _read_request()
         catalog = SourceCatalog(load_catalog_config(args.config))
         try:
@@ -130,11 +135,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         except ProofTransportError:
             # An unusable operator configuration is reported in-band by the
             # binding (named unavailable), like a missing configuration.
+            runtime_feedback.refusal("unavailable", "proof_transport_unavailable")
             proof_client = None
         # Probe the catalog once so an unreadable catalog is the transport
         # fault it is (unavailable), even when no proof is configured and
         # the binding itself would short-circuit.
         catalog.check_readable()
+        runtime_feedback.checkpoint("resolve-canonical")
         browser = PublicCanonicalBrowser(catalog, proof_client=proof_client)
         response = browser.browse(request)
         _write_json_line(sys.stdout, response)

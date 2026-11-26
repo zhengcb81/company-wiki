@@ -1,6 +1,8 @@
 """Explicit exact-target admin recovery; preview is the safe default."""
 
 from __future__ import annotations
+
+from company_wiki import runtime_feedback
 import argparse
 import json
 from pathlib import Path
@@ -33,6 +35,7 @@ def _emit(value: dict[str, Any], stream) -> None:
     )
 
 
+@runtime_feedback.entry("legacy-source-recovery")
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -40,18 +43,21 @@ def main(argv=None):
     catalog = None
     try:
         args = parser.parse_args(argv)
+        runtime_feedback.checkpoint("load-request", input_path=args.config)
         raw = sys.stdin.buffer.read(32769)
         if len(raw) > 32768:
             raise SourceReadError("blocked", "recovery_request_limit")
         request = parse_json(raw.decode("utf-8"))
         validate_request(request)
         catalog = SourceCatalog(load_catalog_config(args.config))
+        runtime_feedback.checkpoint(args.operation)
         _emit(
             recover_legacy_source(catalog, request, operation=args.operation),
             sys.stdout,
         )
         return 0
     except (SourceReadError, PrimaryIssuerUnavailable) as exc:
+        runtime_feedback.refusal(getattr(exc, "status", "blocked"), exc.reason)
         _emit(
             {
                 "schema_version": RESPONSE_SCHEMA,
@@ -62,6 +68,7 @@ def main(argv=None):
         )
         return 2
     except (CatalogConfigError, CatalogReaderUnavailable, sqlite3.Error, OSError):
+        runtime_feedback.refusal("unavailable", "recovery_unavailable")
         _emit(
             {
                 "schema_version": RESPONSE_SCHEMA,
@@ -72,6 +79,7 @@ def main(argv=None):
         )
         return 2
     except (UnicodeError, ValueError, TypeError, RecursionError, KeyError):
+        runtime_feedback.refusal("blocked", "recovery_request_invalid")
         _emit(
             {
                 "schema_version": RESPONSE_SCHEMA,

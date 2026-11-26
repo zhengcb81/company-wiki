@@ -40,6 +40,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     _configure_utf8_streams()
     args = build_parser().parse_args(argv)
     try:
+        runtime_feedback.checkpoint("collect-original", input_path=args.root)
         receipt = collect_announcement(
             root=args.root,
             company_name=args.company,
@@ -49,6 +50,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             published_date=args.published_date,
         )
     except (OSError, TypeError, ValueError) as exc:
+        runtime_feedback.record("collect-announcement", "failed", reason=type(exc).__name__, error=exc)
         print(f"announcement collection failed: {exc}", file=sys.stderr)
         return 2
     sys.stdout.write(receipt.canonical_json() + "\n")

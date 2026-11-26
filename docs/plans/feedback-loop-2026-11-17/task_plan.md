@@ -82,3 +82,7 @@ StockWiki 已用同一正式公开入口在隔离环境验证实际故障和冷�
 | P0 | S5-2 高危新缺陷 | StockQA `Authorization: Bearer` 漏脱敏、stderr 取头部、`_environment` 漏改；RF 10 个新测试补入 `CI_TESTS`、恢复 `filing_fetch_client` stderr 本地日志；MC `transcribe.py` 死配置、CLI 优先级倒置、`normalize_config` 绕过校验、`ffmpeg` 退出码、`HTTPError` 未关闭；ET worker `stderr=DEVNULL` 与 `--report-usage` 关闭日志、`scraper.py` manifest 失败仍退出 0、`transcript_feedback.py:1439` 捕获 `BaseException`；Audit `exported_without_journal` 漏存 failure；Dashboard 幽灵 `correlation_id`；CWP `triage_diagnostic` 丢非内建异常；FF `_BUILTIN_EXCEPTIONS` 抹除异常；IR `JSONDecodeError` 误判重试；IQS `post_json` 漏捕 `IncompleteRead` 及同阶段去重吞故障；StockWiki `complete()` 跨库提交顺序；SID `setup_logger` 句柄泄漏及 `company_wiki_adapter_cli` 零文件日志。 | 每项有失败复现与同入口复验。 |
 | P1 | S5-3 全入口本地轮转日志 | 为 CWP、FF、RF、Audit、StockWiki、IQS、Dashboard、IR、MC、ET、StockQA 补轮转脱敏日志；F4 旁路写失败统一 stderr 告警（FF、RF、StockWiki、ET、IR、Dashboard）；`from None` 前先记日志。 | 新进程冷查可读出原异常类型与脱敏因果链。 |
 | P2 | S5-4 静态门禁与 CI | 修复 `layer_boundary_scan.py` 六个盲区；FF 边界测试改为全目录扫描；补 ET、SID、IQS、Dashboard、IR 远端 CI；StockWiki/StockQA 新测试入日常清单。 | 门禁能区分合法实现与已证绕行。 |
+
+## S1–S5 独审后的整改
+
+2026-11-25 的 [12 仓独审](review/s1-s5-independent-20261125/findings.md) 确认历史定向发布成立，同时复现尚未闭合的运行身份、终态、反馈恢复和仓内边界问题。当前实施、独审和正式发布按 [整改计划](s1-s5-remediation-20261125/task_plan.md) 统筹；此前台账保留各自的历史验收范围。
