@@ -34,3 +34,8 @@
 - 00:38 UTC，8766 的批次和两个交付工作均已退出运行状态。本机 StockWiki 主线快进至 `e4e0a25`，保留原工作区的三份未提交计划文档。IQS 换为 `3094c5f7` 的七个已验运行文件，使用原数据、原配置和 `--no-refresh`，监听在 3.31 秒内恢复。启动新增模型及外部请求均为零。切换前的作业账本和结果原样保留。
 - 00:38:56 UTC，部署 shell 已退出，独立核对 `pythonw.exe` PID `28764` 正在监听。真实回跳和原正式报告两条请求均为 HTTP 200，回跳地址及 36 条正式观测一致，配置与已部署文件哈希通过。22 秒的窗口钩子观测未见该进程树启动 Git、控制台宿主或可见窗口。工作区收据为 `.planning/f4-gap-1126/iqs-windowless-8766-rollout.json` 和 `iqs-windowless-8766-verification.json`。
 - 48766 仍离线，F4 定时任务为 `Disabled`。退役 WorkBuddy 旧脚本后，现场桌面另有连续 180 秒只读观测，无窗口弹出。正式 Dashboard 与 F4 的后续启用遵循用户恢复指令。
+
+## 11 月 27 日 Dashboard 恢复
+
+- 07:53 UTC，按用户指令恢复 48766。Dashboard 所属仓的 `.runtime/f4-feedback/release-de59feed` 使用已验收的 `de59feed` 和既有部署配置、数据目录。第一次启动的首页暴露出发布检出缺少 `apps/web/dist`。确认上一版与当前版的 Web 源码树完全相同后，从上一版复制经 SHA 校验的既有构建，确认空闲后重新启动本次进程。
+- 首页、JS/CSS、真实身份搜索、状态接口和原有 216 家公司指标快照均返回 200。07:53:45 至 07:56:45 UTC 连续观察三分钟，未捕获弹窗。正式 Dashboard 以 `pythonw.exe` 运行，IQS 仍在 8766，F4 保持 `Disabled`。验收收据为 `.planning/f4-gap-1126/dashboard-restore-48766-verified.json`。
