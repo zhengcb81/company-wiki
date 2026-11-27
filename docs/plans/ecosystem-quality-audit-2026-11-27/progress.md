@@ -2,6 +2,27 @@
 
 **当前节点**　独立审查已通过本次编排调整。复查覆盖父计划和机器状态、各仓交付条件、StockQA 无 P0 卡的路径、P0-12 的处置归属，以及 Windows 原生窗口和路径用例。业务修复及工具仍待各自版本交付。
 
+## 2026-11-27 22:54 UTC — P0-01 至 P0-11 分批派工
+
+用户要求总控直接派 agent 执行 11 张止血卡。会话同时可运行 3 个子 agent，各卡使用独立 agent，空出席位后即派下一张。11 张卡已全部启动，使用 `C:/Temp/s6a/` 下的独立候选工区。当前记录按候选独审和发布进度更新。原 `C:/Temp/s6/` 工区及作者未提交内容仍作为只读参考。若原作者先交付，从同一发布目标核对两套候选并接受一套，保留已有测试与独审。
+
+| 卡 | 新候选工区 | 候选 SHA / 当前状态 | 实施者的定向证据 |
+|---|---|---|---|
+| P0-01 | `C:/Temp/s6a/audit` | `c41db5ddc78506b3f665983fdae715626ff04581`，独审通过，本地 `main` 已快进（无远端） | 原 CLI 复现 `NameError`；Windows 6 项通过，审计三类回执从新进程查读，同一动作各执行一次 |
+| P0-02 | `C:/Temp/s6a/et` | `2f7e03db01c9aed817811e07b7e83acddeac4ba0`，远端 `main` 已核对，[CI 通过](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46082021743) | Windows 37 项定向通过，另在实际 console-subsystem Python 验证无新控制台及进程树回收 |
+| P0-03 | `C:/Temp/s6a/ir` | `5edb9fb561f077d828af00b921dfbdc0926eb412`，远端 `main` 已核对，私有 CI 待查 | Windows 104 项及 11 个子测试通过；最终再验 3 项，覆盖依据渲染、模型透传、裸输出路径和独立安装 |
+| P0-04 | `C:/Temp/s6a/stockwiki` | `6c75adf45c1ed76735d64f561268e951cb92c862`，独审通过，本地 `master` 已快进（无远端） | Windows 8 项定向通过，邻近回归 208 项通过，覆盖 SQLite 特殊路径、回滚和 HTTP 请求框架 |
+| P0-05 | `C:/Temp/s6a/iqs` | `b4aee7fb05671b162ef7f6d8e270ef3cb2692e52`，远端 `master` 已核对，CI 待查 | 邻近定向 136 项通过，最终 55 项通过；实测锁竞争、冷读、并发成功不可覆盖和无窗启动 |
+| P0-06 | `C:/Temp/s6a/cwp` | `46cac862f10efa0203471e7539d99b3c04e3ce35`，补审早停与写入中的原件竞态 | Windows 30 项通过，验证双管道、进程树、脱敏和既有本地 JSON 表示合同 |
+| P0-07 | `C:/Temp/s6a/ff` | `1757b119e5f8dab5a6cae2cbde850fed08440b27`，并线前补修 CWP 工作区边界 | Windows 30 项通过，超时退出、进程回收、安装态 T3 四探针和同作业零重发 |
+| P0-08 | `C:/Temp/s6a/sid` | `8bc6e93b55142e0eff464c14adc08ebc93fb59c3`，远端 `v2-clean-rewrite` 已核对，[CI 通过](https://github.com/zhengcb81/StockInfoDownloader/actions/runs/46082044981) | Windows 102 项定向通过，实测 HTTP 截断、原 PDF 保留及占用后原子替换 |
+| P0-09 | `C:/Temp/s6a/rf` | `5a28c0c88df1a8e8fb9b167dbd884eebef7d7894`，远端 `main` 已核对，本机推送钩子通过 | Windows 170 项和 13 个子用例通过。另有 1 项既有跳过、1 项在基线也失败的历史 review 断言，交 Phase 1 更新 |
+| P0-10 | `C:/Temp/s6a/mc` | `c0ec9c168d8f2c038405ab0c6cbab0438ff5ad87`，远端 `master` 已核对，[CI 通过](https://github.com/zhengcb81/MeetingConverter/actions/runs/46082052941) | Windows 137 项定向通过，真实 CLI 和 ffprobe 验证坏配置、坏音频及正常音频，新增供应商请求为零 |
+| P0-11 | `C:/Temp/s6a/dash` | `de62760090c6380914b5c30c4726afe85c5234d7`，远端 `main` 已核对，私有 CI 待查 | Windows 7 项启动测试通过；邻近 55 项通过，另 1 项 M8 过期断言在 `666e2426` 同现。保留已有 RF 配置和 48766 运行 |
+| P1-00 | `C:/Temp/s6a/spec` | 独立推进 | 原工具分支只读，候选只动本仓工程工具与正反例 |
+
+RF 的一次隔离测试把过长请求放在 Windows 命令行，启动失败后 pytest 把继承变量带进本地工具输出。现已将请求改由 stdin 传入，并在启动测试进程前白名单化测试环境。后续施工沿用环境隔离，保留 Windows 和临时夹具所必需的变量。凭据值不抄录到计划或受版本控制的证据中。
+
 ## Session: 2026-11-27
 
 ### 前置审查与规划（首批实施前的历史记录）
