@@ -4,8 +4,9 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from types import SimpleNamespace
 
-from tools.feedback_loop import codex_cli
+from tools.feedback_loop import codex_cli, process_launch
 
 
 def _executable(path: Path) -> Path:
@@ -61,11 +62,23 @@ def test_windows_codex_child_preserves_the_callers_console_policy(monkeypatch):
 
     monkeypatch.setattr(codex_cli, "_WINDOWS", True)
     monkeypatch.setattr(codex_cli, "resolve_codex", lambda: Path("codex.exe"))
-    monkeypatch.setattr(codex_cli, "inherit_console_creation_flags", lambda: 0x08000000, raising=False)
+    monkeypatch.setattr(process_launch, "sys", SimpleNamespace(
+        stdin=SimpleNamespace(fileno=lambda: 10),
+        stdout=SimpleNamespace(fileno=lambda: 11),
+        stderr=SimpleNamespace(fileno=lambda: 12),
+    ))
     monkeypatch.setattr(codex_cli.subprocess, "run", launch)
 
+    monkeypatch.setattr(process_launch, "inherit_console_creation_flags", lambda: 0)
     assert codex_cli.main(["exec", "--flag=exact"]) == 19
-    assert calls == [(["codex.exe", "exec", "--flag=exact"], {"check": False, "creationflags": 0x08000000})]
+    monkeypatch.setattr(process_launch, "inherit_console_creation_flags", lambda: 0x08000000)
+    assert codex_cli.main(["exec", "--flag=exact"]) == 19
+    assert calls == [
+        (["codex.exe", "exec", "--flag=exact"], {"check": False, "creationflags": 0}),
+        (["codex.exe", "exec", "--flag=exact"], {
+            "check": False, "creationflags": 0x08000000, "stdin": 10, "stdout": 11, "stderr": 12,
+        }),
+    ]
 
 
 def test_native_argv_streams_and_exit_code_are_transparent():

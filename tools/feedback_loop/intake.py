@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
+from functools import partial
 from hashlib import file_digest
 import json
 import logging
@@ -16,10 +18,11 @@ from uuid import uuid4
 from .coordinator import advance, settle
 from .diagnostics import background_command, background_environment, format_diagnostic_exception, redact_text, run_background
 from .host import BatchedReconcile, RECONCILE_DEFERRED, process_host, read_hosts
-from .local_host import LocalHost, host_path
+from .intake_schedule import IntakeSchedule, WAKE_ERRORS
+from .local_host import LocalHost, _save_recovery, _save_recovery_error, host_path
 from .observations import Batch, IDENTITY, decode_observation, digest, read_batch, unique_fields
 from .process_history import ProcessHistory, implementation, utc_now
-from .process_launch import BACKGROUND_CREATION_FLAGS, inherit_console_creation_flags
+from .process_launch import BACKGROUND_CREATION_FLAGS, inherited_console_options
 
 _logger = logging.getLogger(__name__)
 
@@ -272,11 +275,12 @@ def _receive_native(packet, marker, context, owners, host, known, deliver, unset
     return deliver(batch, confirm)
 
 
-def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wait_seconds: int) -> dict:
+def _drain_once(settings: Path, hosts_file: Path, *, owner: str | list[str] | None,
+                wait_seconds: int, database: Path | None = None) -> dict:
     """Resume host work and consume the original packets in the configured inboxes."""
     selected = {owner} if isinstance(owner, str) else set(owner) if owner else None
     registry = read_hosts(host_path(hosts_file))
-    host = LocalHost(settings, recovery_owners=selected, host_registry=registry)
+    host = LocalHost(settings, recovery_owners=selected, host_registry=registry, expected_database=database)
     history = ProcessHistory(host.database_path)
     rpc = process_host(registry, local=host)
     batched = BatchedReconcile(host)
@@ -437,16 +441,96 @@ def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None, wa
     return result
 
 
-def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: list[str] | None = None,
-         wait_seconds: int = 0):
-    scope = [arg for name in (owners or ([owner] if owner else [])) for arg in ("--owner", name)]
+def _launch_pending(settings: Path, hosts_file: Path, database: Path) -> None:
     subprocess.Popen(
         background_command("tools.feedback_loop.intake", "--settings", str(settings),
-                           "--hosts", str(hosts_file), "--wait-seconds", str(wait_seconds), "drain", *scope),
+                           "--hosts", str(hosts_file), "drain", "--pending-database", str(database)),
         cwd=_ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
         env=background_environment(settings.resolve().parent / "logs" / "intake_drain_stderr.log"),
         start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS,
     )
+
+
+def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: list[str] | None = None,
+         wait_seconds: int = 0):
+    try:
+        schedule = IntakeSchedule(settings)
+        scope = schedule.scope(hosts_file, owners or owner, wait_seconds)
+        schedule.request(scope, partial(_launch_pending, settings, hosts_file, schedule.database))
+    except WAKE_ERRORS as exc:
+        _logger.warning("Feedback wake request failed\n%s", format_diagnostic_exception(exc))
+        if isinstance(exc, OSError):
+            raise
+        raise OSError("feedback wake unavailable") from exc
+
+
+@contextmanager
+def _observe_wake_hint_errors():
+    try:
+        yield
+    except WAKE_ERRORS as exc:
+        _logger.warning("Feedback wake hint update failed\n%s", format_diagnostic_exception(exc))
+
+
+def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None,
+          wait_seconds: int, save_result: bool = False) -> dict:
+    schedule = IntakeSchedule(settings)
+    scope = schedule.scope(hosts_file, owner, wait_seconds)
+    launch = partial(_launch_pending, settings, hosts_file, schedule.database)
+    with schedule.scan() as acquired:
+        if not acquired:
+            with _observe_wake_hint_errors():
+                schedule.request(scope, launch, save_result=save_result)
+            return {"status": "intake_already_requested", "woken": 0, "processed": 0,
+                    "remaining": 0, "diagnostics": [], "unconfirmed": [], "unsettled": []}
+        previous = {}
+        with _observe_wake_hint_errors():
+            previous = schedule.pending(started=True).get(scope, {})
+        record_result = save_result or previous.get("save_result")
+        try:
+            result = _drain_once(settings, hosts_file, owner=owner, wait_seconds=wait_seconds, database=schedule.database)
+        except Exception as exc:
+            if record_result:
+                _save_recovery_error(settings, exc)
+            raise
+        if record_result:
+            _save_recovery(settings, result)
+        with _observe_wake_hint_errors():
+            schedule.acknowledge(scope, previous.get("generation"))
+    with _observe_wake_hint_errors():
+        schedule.continue_pending(launch)
+    return result
+
+
+def _drain_pending(settings: Path, hosts_file: Path, *, database: Path | None = None) -> dict:
+    schedule = IntakeSchedule(settings, database=database)
+    completed = 0
+    failed = set()
+    with schedule.scan() as acquired:
+        if not acquired:
+            return {"status": "intake_already_requested"}
+        pending = schedule.pending(started=True)
+        while (batch := [(scope, ticket) for scope, ticket in pending.items()
+                         if (scope, ticket["generation"]) not in failed]):
+            for scope, ticket in batch:
+                generation = ticket["generation"]
+                try:
+                    config, registry, owners, wait_seconds = json.loads(scope)
+                    result = _drain_once(Path(config), Path(registry), owner=owners or None,
+                                         wait_seconds=wait_seconds, database=schedule.database)
+                    if ticket["save_result"]:
+                        _save_recovery(Path(config), result)
+                    schedule.acknowledge(scope, generation)
+                except (*WAKE_ERRORS, sqlite3.Error) as exc:
+                    _logger.warning("Feedback inbox scan deferred\n%s", format_diagnostic_exception(exc))
+                    failed.add((scope, generation))
+                else:
+                    completed += 1
+            pending = schedule.pending()
+    # Cover notifications that arrived after the last empty snapshot.
+    with _observe_wake_hint_errors():
+        schedule.continue_pending(partial(_launch_pending, settings, hosts_file, schedule.database), skip=failed)
+    return {"completed_scopes": completed, **({"deferred_scopes": len(failed)} if failed else {})}
 
 
 def _process_message(entry: dict) -> str:
@@ -558,7 +642,7 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
     os_error = {}
     try:
         code = subprocess.run(
-            command, cwd=cwd, env=env, check=False, creationflags=inherit_console_creation_flags(),
+            command, cwd=cwd, env=env, check=False, **inherited_console_options(),
         ).returncode
         failure = f"exit:{code}" if code else None
         entry.update(status="exited")
@@ -601,7 +685,9 @@ def main(argv=None):
     history.add_argument("--run-id", required=True)
     history.add_argument("--attempt-id")
     history.add_argument("--owner")
-    modes.add_parser("drain", help="resume the configured observation inboxes").add_argument("--owner", action="append")
+    intake = modes.add_parser("drain", help="resume the configured observation inboxes")
+    intake.add_argument("--owner", action="append")
+    intake.add_argument("--pending-database", type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     settings = args.settings.resolve()
     if args.mode != "history" and args.hosts is None:
@@ -621,6 +707,8 @@ def main(argv=None):
             summary = {"status": "found" if processes else "absent", "processes": processes}
         except (OSError, sqlite3.Error, ValueError, TypeError, KeyError) as exc:
             summary = {"status": "unavailable", "processes": [], "error_type": type(exc).__name__}
+    elif args.pending_database is not None:
+        summary = _drain_pending(settings, hosts_file, database=args.pending_database)
     else:
         summary = drain(settings, hosts_file, owner=args.owner, wait_seconds=args.wait_seconds)
     print(json.dumps(summary, ensure_ascii=True))

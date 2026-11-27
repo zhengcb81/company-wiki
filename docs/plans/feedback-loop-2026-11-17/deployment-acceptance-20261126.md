@@ -8,8 +8,8 @@
 | 2 | 按本仓发布线对齐受管运行路径与技能文件。优先复用干净运行检出，保留在途改动和现有状态根。分别复核安装前后文件、用户配置字节及第二次安装写入数 | 12 个 F4 入口与发布版对齐。四个受管技能包已同步。IQS 和 Dashboard 原专用端口已恢复 |
 | 3 | 通过已部署代码的正式公开入口、隔离根及本地替身实测原失败、强停、两次新进程查回和请求计数。F4 从原故障日志读回，在同一作业上继续，验证重读不启动业务 | 12 个定向分仓复验及实际共享任务隔离触发通过 |
 | 4 | 用 Task Scheduler 元数据、实际触发后生成的收据或历史事件核对现有调度。需要强停的实验使用一次性隔离任务或同一实际脚本的受控进程。正常任务的现有下载参数及频率按实际配置核对 | F4 与 FF 的原用户任务均已观测。RF 两项 SYSTEM 任务的 CIM、COM 与 schtasks 当前权限均不足，历史账本证据单独登记 |
-| 5 | 对 Dashboard 和行业研究的精确发布 SHA 查正式私有 CI。已授权浏览器登录或 GitHub API 认证仅用于只读查询 | Edge 和内置浏览器均未登录 GitHub。两仓发布提交及本机验收各自记证，正式 CI 需登录后查阅 |
-| 6 | 记录每个本仓和总控证据，完成部署验收，再沿原 W12 作业接续业务摘要、缓存复用和 RF 采用 | 本机共享恢复及受管入口已验收，两项私有 CI 和两项 RF SYSTEM 任务待读，W12 保持原检查点 |
+| 5 | 对 Dashboard 和行业研究的精确发布 SHA 查正式私有 CI | 11 月 27 日通过已连接的 GitHub Actions 只读接口查到两仓精确版本和 Dashboard 无窗发布版全部通过 |
+| 6 | 记录每个本仓和总控证据，完成部署验收，再沿原 W12 作业接续业务摘要、缓存复用和 RF 采用 | 两项 RF SYSTEM 任务的实际动作切换仍需管理员会话。W12 保留原检查点 |
 
 实际状态和隔离复验分别记录。恢复既有原作业时沿用其可证的结果和费用状态。不能确认原费用时保持未知。实时实验禁止发起真实供应商下载、转录或模型请求。更新生产引用前记录原始作用域及回退点，避免启动第二份生产服务。
 
@@ -38,8 +38,8 @@
 
 ## 私有 CI 与读服务
 
-- Dashboard 精确 `38542cf243c7a77eb35e0f32269051e32ea97d21` 有 Linux `owner-boundaries` 及 Windows `windows-feedback-path` 两个 job。[私有 Workflow](https://github.com/zhengcb81/investment-dashboard/actions/workflows/feedback-contracts.yml?query=sha%3A38542cf243c7a77eb35e0f32269051e32ea97d21)
-- 行业研究采用 `77f3c7dd5bd98791490871ff3862f73dcc91173e`，本机已按原私有工作流选择运行 177 个测试和 18 个子测试。首批 `38345b66` 及当前提交的远端 `offline` 结果待登录会话查证。 [当前私有 Workflow](https://github.com/zhengcb81/industry-research/actions/workflows/owner-contracts.yml?query=sha%3A77f3c7dd5bd98791490871ff3862f73dcc91173e)
+- Dashboard 精确 `38542cf243c7a77eb35e0f32269051e32ea97d21` 的 Linux `owner-boundaries` 及 Windows `windows-feedback-path` 均通过；无窗发布 `de59feed0aec31d78484f86bc65862e11d459b3c` 同一组检查也通过。 [原发布 CI](https://github.com/zhengcb81/investment-dashboard/actions/runs/45734261262) · [无窗发布 CI](https://github.com/zhengcb81/investment-dashboard/actions/runs/45914868755)
+- 行业研究采用 `77f3c7dd5bd98791490871ff3862f73dcc91173e`，本机 177 项及 18 个子例通过，精确提交的私有 `offline` 检查通过。 [私有 CI](https://github.com/zhengcb81/industry-research/actions/runs/45793097295)
 - Dashboard 与 IQS 原专用读监听的旧 PID 已退出。已按两个项目的原公开启动入口恢复。IQS `127.0.0.1:8766` 使用 `--no-refresh`，启动中的刷新、模型与外部请求为零。Dashboard `127.0.0.1:48766` 用 owner mode 和原只读范围。独立 agent 从实际宿主再次查到两个唯一监听及相同启动进程，正式 `quick-scan` GET 返回 HTTP 200 和原关联号头。团队原开发工作区保留。
 
 ## 分仓验收

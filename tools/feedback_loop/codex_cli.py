@@ -5,7 +5,7 @@ from pathlib import Path
 import subprocess
 import sys
 
-from .process_launch import BACKGROUND_CREATION_FLAGS, inherit_console_creation_flags
+from .process_launch import BACKGROUND_CREATION_FLAGS, inherited_console_options
 
 
 _WINDOWS = os.name == "nt"
@@ -73,7 +73,7 @@ def main(argv=None) -> int:
     try:
         if not _WINDOWS:
             os.execv(command[0], command)
-        return subprocess.run(command, check=False, creationflags=inherit_console_creation_flags()).returncode
+        return subprocess.run(command, check=False, **inherited_console_options()).returncode
     except OSError:
         print("Codex CLI executable could not be started.", file=sys.stderr)
         return 126

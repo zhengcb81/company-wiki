@@ -11,6 +11,8 @@ import time
 
 import pytest
 
+from tools.feedback_loop.process_launch import BACKGROUND_CREATION_FLAGS
+
 
 ROOT = Path(__file__).resolve().parents[2]
 PYTHON = [sys.executable, "-B", "-X", "utf8"]
@@ -149,7 +151,10 @@ print(json.dumps(results if isinstance(request, list) else results[0]))
             "from tools.feedback_loop.intake import main; "
             "LocalHost.reconcile_batch = lambda *a, **kw: os._exit(86); main()"
         )
-        outcome = subprocess.run([*PYTHON, "-c", abort, *command[len(PYTHON) + 2:], "drain"], cwd=ROOT, timeout=20)
+        outcome = subprocess.run(
+            [*PYTHON, "-c", abort, *command[len(PYTHON) + 2:], "drain"], cwd=ROOT, timeout=20,
+            stdin=subprocess.DEVNULL, capture_output=True, creationflags=BACKGROUND_CREATION_FLAGS,
+        )
         assert outcome.returncode == 86
         assert len(list(inbox.glob("*.ready"))) == 3
         with closing(sqlite3.connect(tmp_path / "actions.sqlite")) as connection:
@@ -159,7 +164,10 @@ print(json.dumps(results if isinstance(request, list) else results[0]))
 
     if case == "positive-wait":
         command[-1] = "3"
-    result = json.loads(subprocess.check_output([*command, "drain"], cwd=ROOT, timeout=30))
+    result = json.loads(subprocess.check_output(
+        [*command, "drain"], cwd=ROOT, timeout=30, stdin=subprocess.DEVNULL, stderr=subprocess.PIPE,
+        creationflags=BACKGROUND_CREATION_FLAGS,
+    ))
 
     calls = [json.loads(line) for line in (tmp_path / "lookup-count.jsonl").read_text().splitlines()]
     assert calls == {

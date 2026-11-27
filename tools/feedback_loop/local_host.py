@@ -138,10 +138,12 @@ def _codex_receipt(path: Path):
 
 
 class LocalHost:
-    def __init__(self, config: Path, *, recovery_owners=None, host_registry=None):
+    def __init__(self, config: Path, *, recovery_owners=None, host_registry=None, expected_database=None):
         self.config = config.resolve()
         settings = json.loads(host_path(self.config).read_bytes(), object_pairs_hook=unique_fields)
         self.database_path = self.config.parent / settings["state"]
+        if expected_database is not None and self.database_path.resolve() != expected_database:
+            raise ValueError("feedback database changed during inbox scheduling")
         self.db = host_path(self.database_path)
         self.owners = settings["owners"]
         self.intake_hosts = settings.get("intake_hosts")
@@ -826,20 +828,34 @@ def _save_recovery(config: Path, result: dict) -> None:
             temporary.unlink(missing_ok=True)
 
 
+def _save_recovery_error(config: Path, exc: Exception) -> None:
+    with suppress(OSError):
+        _save_recovery(config, {"error_type": type(exc).__name__,
+                                "errno": OSError.errno.__get__(exc) if isinstance(exc, OSError) else None})
+
+
 def _recover_command(args) -> dict:
     discovery = args.hosts or args.config.with_name("hosts.json")
     if not args.sidecar and (args.hosts or host_path(discovery).is_file()):
         from .intake import drain
-        return drain(args.config.resolve(), discovery.resolve(), owner=args.owner, wait_seconds=args.wait_seconds)
-    registry = read_hosts(host_path(args.hosts)) if args.sidecar else None
-    host = LocalHost(args.config, recovery_owners=args.owner, host_registry=registry)
-    outcome = {"woken": host.recover(owners=args.owner)}
-    if args.sidecar:
-        from .coordinator import settle
-        from .host import process_host
-        from .observations import read_batch
-        outcome["feedback"] = settle(read_batch(args.sidecar), process_host(registry, local=host),
-                                     args.wait_seconds)
+        return drain(args.config.resolve(), discovery.resolve(), owner=args.owner, wait_seconds=args.wait_seconds,
+                     save_result=args.save_result)
+    try:
+        registry = read_hosts(host_path(args.hosts)) if args.sidecar else None
+        host = LocalHost(args.config, recovery_owners=args.owner, host_registry=registry)
+        outcome = {"woken": host.recover(owners=args.owner)}
+        if args.sidecar:
+            from .coordinator import settle
+            from .host import process_host
+            from .observations import read_batch
+            outcome["feedback"] = settle(read_batch(args.sidecar), process_host(registry, local=host),
+                                         args.wait_seconds)
+    except Exception as exc:
+        if args.save_result:
+            _save_recovery_error(args.config, exc)
+        raise
+    if args.save_result:
+        _save_recovery(args.config, outcome)
     return outcome
 
 
@@ -863,16 +879,7 @@ def main(argv=None):
     if args.mode == "recover":
         if args.wait_seconds < 0 or (args.sidecar and not args.hosts):
             parser.error("recovery sidecars require --hosts and a nonnegative wait")
-        try:
-            outcome = _recover_command(args)
-        except Exception as exc:
-            if args.save_result:
-                with suppress(OSError):
-                    _save_recovery(args.config, {"error_type": type(exc).__name__,
-                                                 "errno": OSError.errno.__get__(exc) if isinstance(exc, OSError) else None})
-            raise
-        if args.save_result:
-            _save_recovery(args.config, outcome)
+        outcome = _recover_command(args)
         if sys.stdout is not None:
             print(json.dumps(outcome))
         return 0
