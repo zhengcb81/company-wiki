@@ -1,6 +1,6 @@
 # 工程反馈循环总调度 PWF
 
-2026-11-26。此页是反馈工程的调度入口。12 仓的公开入口接入同一个 Windows 恢复任务。F4 已验新版的原动作冷读和 33 个待证分诊，仍待查 Dashboard 与行业研究的两处私有 CI、RF 两个 SYSTEM 任务的原注册。W12 业务流程停在原检查点。 [F4 最新收尾](f4-closeout-20261126.md) · [正式部署验收](deployment-acceptance-20261126.md) · [S5 逐项验证台账](s5-verification-20261125.md) · [验收进度](progress.md) · [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
+2026-11-27。此页是反馈工程的调度入口。12 仓共用原 Windows 恢复任务，本轮重复扫描已修并经正式调度复验。Dashboard、行业研究的私有 CI 已查证。待做的是两个 RF SYSTEM 任务的管理员切换和正式验证，W12 业务流程沿原检查点接续。 [F4 最新收尾](f4-closeout-20261126.md) · [正式部署验收](deployment-acceptance-20261126.md) · [S5 逐项验证台账](s5-verification-20261125.md) · [验收进度](progress.md) · [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
 
 ## 负责什么
 
