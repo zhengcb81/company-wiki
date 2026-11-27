@@ -108,7 +108,16 @@ if fixture.get("pausing_pid"):
         creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     Path(fixture["pausing_pid"]).write_text(str(worker.pid), encoding="ascii")
+if fixture.get("partial_then_complete"):
+    completed_original = source.read_bytes()
+    source.write_bytes(completed_original[:8])
+    meta["ingest_complete"] = False
 (filing / "meta.json").write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
+if fixture.get("partial_then_complete"):
+    time.sleep(1)
+    complete = source.with_suffix(".complete")
+    complete.write_bytes(completed_original)
+    complete.replace(source)
 if fixture.get("pausing_pid"):
     time.sleep(15)
 print("下载结果\n- status: ok")
@@ -373,6 +382,26 @@ def test_ready_dayu_original_stops_post_processing_tree_before_deadline(tmp_path
             time.sleep(0.01)
         assert not pid_is_alive(pid)
         assert adapter.fetch(candidates[0], tmp_path / "staged").mime_type == "application/pdf"
+    finally:
+        adapter.close()
+    assert not list(workspaces.glob("dayu-*"))
+
+
+def test_early_stop_waits_for_the_declared_original_bytes(tmp_path: Path):
+    from company_wiki.source_catalog import SourceRequest
+
+    adapter, _, workspaces = _adapter(
+        tmp_path, market="HK", timeout=8, partial_then_complete=True,
+        pausing_pid=str(tmp_path / "post-processing-pid"),
+    )
+    request = SourceRequest(
+        entity="Example", market="HK", security_id="0700", document_kind="annual_report",
+        fiscal_year=2025, as_of_date="2026-07-18", allow_download=True,
+    )
+    try:
+        candidate, = adapter.discover(request)
+        receipt = adapter.fetch(candidate, tmp_path / "staged")
+        assert Path(receipt.staged_path).read_bytes() == b"%PDF-1.7\nHK annual report"
     finally:
         adapter.close()
     assert not list(workspaces.glob("dayu-*"))

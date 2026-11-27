@@ -78,6 +78,21 @@ def _sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _asset_claim(
+    source: Path, metadata: dict[str, Any], *, running: bool,
+) -> tuple[int, str]:
+    size_value = metadata.get("size")
+    declared_size = size_value if type(size_value) is int and size_value > 0 else None
+    digest = str(metadata.get("sha256") or "").strip().lower()
+    has_digest = bool(_SHA256_RE.fullmatch(digest))
+    if running and (declared_size is None or not has_digest or source.stat().st_size != declared_size):
+        # Dayu publishes size/hash for a staged original before optional OCR.
+        # A file's existence alone cannot tell whether its write has finished.
+        raise DayuCliAdapterError("Dayu original publication is incomplete")
+    size = declared_size if declared_size is not None else source.stat().st_size
+    return size, digest if has_digest else _sha256_file(source)
+
+
 def _required_text(value: Any, field_name: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise DayuCliAdapterError(f"Dayu meta {field_name} must be non-empty text")
@@ -253,7 +268,7 @@ class DayuCliDownloadAdapter:
         def original_ready() -> bool:
             nonlocal candidates
             try:
-                candidates = self._read_candidates(request)
+                candidates = self._read_candidates(request, running=True)
             except (OSError, ValueError, DayuCliAdapterError):
                 # Dayu may publish metadata and its files in separate writes.
                 return False
@@ -375,7 +390,9 @@ class DayuCliDownloadAdapter:
         if temporary is not None:
             temporary.cleanup()
 
-    def _read_candidates(self, request: SourceRequest) -> tuple[DownloadCandidate, ...]:
+    def _read_candidates(
+        self, request: SourceRequest, *, running: bool = False,
+    ) -> tuple[DownloadCandidate, ...]:
         if self._workspace is None:
             raise DayuCliAdapterError("Dayu CLI workspace is unavailable")
         portfolio = self._workspace / "portfolio"
@@ -383,7 +400,7 @@ class DayuCliDownloadAdapter:
             return ()
         candidates: list[DownloadCandidate] = []
         for meta_path in sorted(portfolio.glob("*/filings/*/meta.json")):
-            candidate = self._candidate_from_meta(request, meta_path)
+            candidate = self._candidate_from_meta(request, meta_path, running=running)
             if candidate is not None:
                 candidates.append(candidate)
         return tuple(
@@ -401,6 +418,8 @@ class DayuCliDownloadAdapter:
         self,
         request: SourceRequest,
         meta_path: Path,
+        *,
+        running: bool,
     ) -> DownloadCandidate | None:
         try:
             value = json.loads(meta_path.read_text(encoding="utf-8"))
@@ -495,19 +514,15 @@ class DayuCliDownloadAdapter:
         source_path.relative_to(workspace)
         if not source_path.is_file():
             raise DayuCliAdapterError("Dayu meta primary file is missing")
-        byte_size = file_entry.get("size")
-        if isinstance(byte_size, bool) or not isinstance(byte_size, int) or byte_size <= 0:
-            byte_size = source_path.stat().st_size
-        configured_hash = str(file_entry.get("sha256") or "").strip().lower()
-        content_sha256 = (
-            configured_hash if _SHA256_RE.fullmatch(configured_hash) else _sha256_file(source_path)
-        )
+        byte_size, content_sha256 = _asset_claim(source_path, file_entry, running=running)
         mime_type = _mime_type(filename, file_entry.get("content_type"))
         candidate_id = f"{provider}:{provider_document_id}"
         # §三十 B2：只对授权 form（8-K）且 include_exhibits 为真时登记 exhibit 资产
         exhibit_assets: tuple[_DownloadedAsset, ...] = ()
         if self.market == "US" and _INCLUDE_EXHIBITS and form_type in _US_EXHIBIT_FORMS:
-            exhibit_assets = self._us_exhibit_assets(value, filing_dir, filename, candidate_id)
+            exhibit_assets = self._us_exhibit_assets(
+                value, filing_dir, filename, candidate_id, running=running,
+            )
             for exhibit in exhibit_assets:
                 try:
                     exhibit.source_path.relative_to(workspace)
@@ -606,6 +621,8 @@ class DayuCliDownloadAdapter:
         filing_dir: Path,
         primary_document: str,
         candidate_id: str,
+        *,
+        running: bool,
     ) -> tuple[_DownloadedAsset, ...]:
         """SEC filing 的 exhibit 资产（§三十 B2：闸门含 8-K）。
 
@@ -617,6 +634,7 @@ class DayuCliDownloadAdapter:
             filing_dir: meta 所在的 filing 目录。
             primary_document: primary 文件名（排除项）。
             candidate_id: 所属 candidate（写入资产元数据）。
+            running: 进程仍在写入时要求已有完整发布的元数据。
 
         Returns:
             按文件名排序的 exhibit 资产元组；无 exhibit 时为空。
@@ -643,17 +661,13 @@ class DayuCliDownloadAdapter:
             source = (filing_dir / name).resolve(strict=False)
             if not source.is_file():
                 raise DayuCliAdapterError(f"Dayu exhibit source is missing: {name}")
-            configured_hash = str(item.get("sha256") or "").strip().lower()
+            claimed_size, digest = _asset_claim(source, item, running=running)
             assets.append(
                 _DownloadedAsset(
                     candidate_id=candidate_id,
                     source_path=source,
-                    content_sha256=(
-                        configured_hash
-                        if _SHA256_RE.fullmatch(configured_hash)
-                        else _sha256_file(source)
-                    ),
-                    byte_size=source.stat().st_size,
+                    content_sha256=digest,
+                    byte_size=claimed_size if running else source.stat().st_size,
                     mime_type=_mime_type(name, item.get("content_type")),
                 )
             )
