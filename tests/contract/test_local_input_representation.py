@@ -33,3 +33,42 @@ def test_explicit_official_source_budget_is_not_capped_again():
     for invalid in (0, -1, True, float("nan")):
         with pytest.raises(ValueError):
             _byte_cap(invalid)
+
+
+@pytest.mark.parametrize(
+    ("module_name", "padding", "stream", "reason", "payload"),
+    [
+        (
+            "source_query_cli", 70_000, "out", "reader_unavailable",
+            {"entity": "Example", "document_kind": "annual_report",
+             "as_of_date": "2026-11-27"},
+        ),
+        (
+            "company_source_index_cli", 1_050_000, "err", "catalog_unavailable",
+            {"schema_version": "company-wiki-company-source-index-request/1",
+             "company": {"entity": "Example", "market": None, "security_id": None},
+             "as_of_date": "2026-11-27", "document_kinds": [],
+             "page_size": 5, "cursor": None},
+        ),
+    ],
+)
+def test_query_request_whitespace_does_not_override_its_fields(
+    capsys, monkeypatch, module_name, padding, stream, reason, payload,
+):
+    from importlib import import_module
+    from types import SimpleNamespace
+
+    cli = import_module(f"company_wiki.source_catalog.{module_name}")
+    request = io.BytesIO(json.dumps(payload).encode("utf-8") + b" " * padding)
+    monkeypatch.setattr(cli.sys, "stdin", SimpleNamespace(buffer=request))
+
+    def unavailable(_path):
+        # At this point the actual wire parser accepted the request.
+        raise FileNotFoundError
+
+    monkeypatch.setattr(cli, "load_catalog_config", unavailable)
+    assert cli.main(["--config", "unused.yaml"]) == 2
+    captured = capsys.readouterr()
+    result = json.loads(getattr(captured, stream))
+    assert result["status"] == "unavailable"
+    assert result["reason"] == reason

@@ -56,7 +56,6 @@ MAX_PAGE_SIZE = 100
 #: The same candidate ceiling the existing per-kind reader uses; it is a real
 #: work bound, not a result-shaping gate.
 MAX_CANDIDATES = 20_000
-_MAX_REQUEST_BYTES = 1_048_576
 
 _KNOWN_DOCUMENT_KINDS = frozenset(SOURCE_FACT_KINDS) | {"other"}
 _STATUSES = frozenset({"ok", "not_found", "ambiguous", "unavailable", "blocked"})

@@ -18,9 +18,6 @@ from .official_source_flow import (
 )
 from .official_discovery import discover_official_documents, fetch_official_indexes
 
-_MAX_REQUEST_BYTES = 65536
-
-
 def _pairs(items):
     result = {}
     for key, value in items:

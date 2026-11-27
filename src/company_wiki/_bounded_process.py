@@ -246,8 +246,10 @@ def _validate(timeout_seconds, stdout_cap, stderr_cap, command, input_bytes) -> 
     _validate_input(command, input_bytes)
 
 
-def _await_lifetime(proc, job, state: _IOState, deadline: float) -> None:
+def _await_lifetime(proc, job, state: _IOState, deadline: float,
+                    stop_when: Callable[[], bool] | None) -> bool:
     tree_stopped = False
+    next_check = 0.0
     while True:
         state.wake.clear()
         complete, error = state.snapshot()
@@ -255,14 +257,18 @@ def _await_lifetime(proc, job, state: _IOState, deadline: float) -> None:
             raise error
         code = proc.poll()
         if complete and code is not None:
-            return
+            return False
         if code is not None and not tree_stopped:
             _kill_tree(job, proc)  # Orphans may hold pipe handles even after root exit.
             tree_stopped = True
-        remaining = deadline - time.monotonic()
-        if remaining <= 0:
+        now = time.monotonic()
+        if now >= deadline:
             raise ChildTimeout("child exceeded the shared deadline")
-        state.wake.wait(min(0.02, remaining))
+        if code is None and stop_when is not None and now >= next_check:
+            if stop_when():
+                return True
+            next_check = time.monotonic() + 0.25
+        state.wake.wait(min(0.02, max(0.0, deadline - time.monotonic())))
 
 
 def _cleanup(proc, job, state: _IOState) -> None:
@@ -280,9 +286,9 @@ def _cleanup(proc, job, state: _IOState) -> None:
     _close_pipes(proc)
 
 
-def _result(proc, state: _IOState) -> dict[str, object]:
+def _result(proc, state: _IOState, *, stopped: bool) -> dict[str, object]:
     stdout, stderr = b"".join(state.chunks["stdout"]), b"".join(state.chunks["stderr"])
-    if proc.returncode != 0 or state.write_error:
+    if not stopped and (proc.returncode != 0 or state.write_error):
         error = ChildFailed(
             "child closed stdin early" if state.write_error else f"child exited {proc.returncode}",
             returncode=proc.returncode,
@@ -298,7 +304,7 @@ def _result(proc, state: _IOState) -> dict[str, object]:
         stderr=stderr,
         stdout_bytes_read=state.counts["stdout"],
         stderr_bytes_read=state.counts["stderr"],
-        returncode=0,
+        returncode=proc.returncode,
         stderr_observation_complete=state.stderr_observation_complete,
     )
 
@@ -315,6 +321,7 @@ def run_bounded(
     log_tail: bool = False,
     stderr_log_tail: bool = False,
     stderr_observer: Callable[[bytes], None] | None = None,
+    stop_when: Callable[[], bool] | None = None,
 ) -> dict[str, object]:
     """Bound stdin, both output pipes and process exit by one absolute deadline.
 
@@ -329,6 +336,9 @@ def run_bounded(
     no second representation cap; the single deadline/tree lifetime still holds.
     An optional stderr observer sees chunks before tail trimming. Its failure is
     reported separately and never changes the child's native return code.
+    For file-based protocols, an optional nonblocking ``stop_when`` checks
+    whether the caller has already verified the result. Returning true stops
+    the owned tree immediately and returns its actual (possibly nonzero) code.
     """
     _validate(timeout_seconds, stdout_cap_bytes, stderr_cap_bytes, command, input_bytes)
     if type(log_tail) is not bool:
@@ -341,11 +351,12 @@ def run_bounded(
     proc, job = _spawn(command, input_bytes, cwd, env)
     state = _IOState(log_tail=log_tail, stderr_log_tail=stderr_log_tail, stderr_observer=stderr_observer)
     failure = None
+    stopped = False
     try:
         if time.monotonic() >= deadline:
             raise ChildTimeout("deadline expired during spawn")
         state.start(proc, input_bytes, stdout_cap_bytes, stderr_cap_bytes)
-        _await_lifetime(proc, job, state, deadline)
+        stopped = _await_lifetime(proc, job, state, deadline, stop_when)
     except Exception as error:
         failure = error
     finally:
@@ -362,7 +373,7 @@ def run_bounded(
         setattr(failure, "stderr_bytes_read", state.counts['stderr'])
         setattr(failure, 'stderr_observation_complete', state.stderr_observation_complete)
         raise failure
-    return _result(proc, state)
+    return _result(proc, state, stopped=stopped)
 
 
 def run_bounded_json(

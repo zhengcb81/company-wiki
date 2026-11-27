@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import codecs
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 import hashlib
@@ -11,10 +12,11 @@ import os
 from pathlib import Path
 import re
 import shutil
-import subprocess
 from tempfile import TemporaryDirectory
-import time
-from typing import Any, Sequence, cast
+from typing import Any, Sequence
+
+from company_wiki.bounded_process import ChildFailed, ChildTimeout, TransportError, run_bounded
+from company_wiki.diagnostic_stream import RedactedTextStream
 
 from .acquisition_contracts import DiscoveryPage, DownloadCandidate, DownloadReceipt
 from .source_request import SourceRequest
@@ -32,6 +34,23 @@ _US_QUARTERLY_FORMS = ("10-Q", "10-Q/A")
 _US_EXHIBIT_FORMS = frozenset({"8-K"})
 # 对应 dayu `list_filing_files(include_exhibits=...)` 同名参数的默认值。
 _INCLUDE_EXHIBITS = True
+
+# The HKEX/SEC CLI reads its configuration from --config. SEC also accepts
+# SEC_USER_AGENT from the environment. OS, proxy and trust-store settings are
+# required by the configured Python executable and the HTTP stack.
+_DAYU_ENVIRONMENT = frozenset({
+    "SYSTEMROOT", "WINDIR", "COMSPEC", "PATH", "PATHEXT", "SYSTEMDRIVE",
+    "HOME", "USERPROFILE", "APPDATA", "LOCALAPPDATA", "HOMEDRIVE", "HOMEPATH",
+    "XDG_CONFIG_HOME", "XDG_CACHE_HOME", "TEMP", "TMP", "TMPDIR",
+    "LANG", "LC_ALL", "LC_CTYPE", "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "NO_PROXY",
+    "SSL_CERT_FILE", "SSL_CERT_DIR", "REQUESTS_CA_BUNDLE", "CURL_CA_BUNDLE", "SEC_USER_AGENT",
+})
+
+
+def _child_environment() -> dict[str, str]:
+    environment = {key: value for key, value in os.environ.items() if key.upper() in _DAYU_ENVIRONMENT}
+    environment.update(PYTHONUTF8="1", PYTHONDONTWRITEBYTECODE="1")
+    return environment
 
 
 class DayuCliAdapterError(RuntimeError):
@@ -217,64 +236,63 @@ class DayuCliDownloadAdapter:
             str(self.config_root),
             "--quiet",
         ]
-        environment = dict(os.environ)
-        environment["PYTHONUTF8"] = "1"
-        creationflags = cast(Any, subprocess).CREATE_NO_WINDOW if os.name == "nt" else 0
-        # Use Popen + poll so we can read meta.json as soon as it is written,
-        # without waiting for dayu's slow Docling/RapidOCR post-processing.
         try:
-            process = subprocess.Popen(
-                command,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                cwd=self.project_root,
-                env=environment,
-                shell=False,
-                creationflags=creationflags,
-            )
-        except OSError as exc:
-            self.close()
-            raise DayuCliAdapterError(f"Dayu CLI process failed: {exc}") from exc
-        candidates: tuple[DownloadCandidate, ...] = ()
-        elapsed = 0.0
-        poll_interval = 3.0
-        while process.poll() is None and elapsed < self.timeout_seconds:
-            time.sleep(poll_interval)
-            elapsed += poll_interval
-            if (self._workspace / "portfolio").is_dir():
-                try:
-                    candidates = self._read_candidates(request)
-                except Exception:
-                    candidates = ()
-                if candidates:
-                    break
-        if process.poll() is None:
-            process.terminate()
-            try:
-                process.wait(timeout=15)
-            except subprocess.TimeoutExpired:
-                process.kill()
-                process.wait()
-        cli_stderr = ""
-        if process.returncode is not None and process.returncode != 0:
-            cli_stderr = ((process.stderr.read() if process.stderr is not None else "").strip())[-3000:]
-        try:
-            if not candidates:
-                candidates = self._read_candidates(request)
+            candidates = self._run_discovery(command, request)
         except Exception:
             self.close()
             raise
-        if process.returncode not in (None, 0) and not candidates:
-            self.close()
-            raise DayuCliAdapterError(
-                f"Dayu CLI exited {process.returncode}: {cli_stderr or 'no output'}"
-            )
         if not candidates:
             self.close()
         return candidates
+
+    def _run_discovery(
+        self, command: list[str], request: SourceRequest,
+    ) -> tuple[DownloadCandidate, ...]:
+        candidates: tuple[DownloadCandidate, ...] = ()
+
+        def original_ready() -> bool:
+            nonlocal candidates
+            try:
+                candidates = self._read_candidates(request)
+            except (OSError, ValueError, DayuCliAdapterError):
+                # Dayu may publish metadata and its files in separate writes.
+                return False
+            return bool(candidates)
+
+        stderr_tail = ""
+
+        def keep_tail(text: str) -> None:
+            nonlocal stderr_tail
+            stderr_tail = (stderr_tail + text)[-3000:]
+
+        diagnostic = RedactedTextStream(keep_tail)
+        decoder = codecs.getincrementaldecoder("utf-8")("replace")
+
+        def observe_stderr(piece: bytes) -> None:
+            diagnostic.write(decoder.decode(piece))
+
+        failure: ChildFailed | ChildTimeout | None = None
+        try:
+            run_bounded(
+                command, cwd=str(self.project_root), env=_child_environment(),
+                timeout_seconds=self.timeout_seconds,
+                # Dayu communicates originals via the workspace. Both streams
+                # are diagnostic, so excess logs never reject the acquisition.
+                log_tail=True, stderr_observer=observe_stderr,
+                stop_when=original_ready,
+            )
+        except (ChildFailed, ChildTimeout) as exc:
+            failure = exc
+        except (OSError, TransportError) as exc:
+            raise DayuCliAdapterError(f"Dayu CLI process failed: {type(exc).__name__}") from None
+        finally:
+            diagnostic.write(decoder.decode(b"", final=True))
+            diagnostic.finish()
+        candidates = candidates or self._read_candidates(request)
+        if candidates or failure is None:
+            return candidates
+        reason = f"exited {failure.returncode}" if isinstance(failure, ChildFailed) else "timed out"
+        raise DayuCliAdapterError(f"Dayu CLI {reason}: {stderr_tail.strip() or 'no output'}") from None
 
     def discover_page(
         self, request: SourceRequest, *, since_date: str | None = None,

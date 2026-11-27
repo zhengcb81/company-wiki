@@ -15,7 +15,9 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+import subprocess
 import sys
+import time
 
 args = sys.argv[1:]
 if not args or args[0] != "download":
@@ -27,10 +29,22 @@ def value(name: str) -> str:
 
 base = Path(value("--base"))
 ticker = value("--ticker")
-market = os.environ["FAKE_DAYU_MARKET"]
-record = Path(os.environ["FAKE_DAYU_RECORD"])
+fixture = json.loads((Path(value("--config")) / "fake.json").read_text(encoding="utf-8"))
+market = fixture["market"]
+record = Path(fixture["record"])
+if fixture.get("chatter"):
+    sys.stdout.buffer.write(b"x" * 524288)
+    sys.stdout.buffer.flush()
+    sys.stderr.buffer.write(b"y" * 524288 + b"\n")
+    sys.stderr.buffer.flush()
+if fixture.get("environment"):
+    Path(fixture["environment"]).write_text(
+        json.dumps({key: key in os.environ for key in ("RESEARCH_FEEDBACK_DIR", "UNRELATED_API_KEY", "SEC_USER_AGENT")}),
+        encoding="utf-8",
+    )
 record.write_text(json.dumps(args, ensure_ascii=False), encoding="utf-8")
-if os.environ.get("FAKE_DAYU_FAIL") == "1":
+if fixture.get("fail"):
+    print("Authorization: Bearer p0-secret-synthetic", file=sys.stderr)
     (base / "partial").mkdir(parents=True)
     raise SystemExit(17)
 filing = base / "portfolio" / ticker / "filings" / ("fil_hk_123" if market == "HK" else "fil_0000123456-26-000007")
@@ -88,12 +102,20 @@ else:
             "source_url": "https://www.sec.gov/Archives/edgar/data/123456/000012345626000007/issuer-20251231.htm",
         }],
     }
+if fixture.get("pausing_pid"):
+    worker = subprocess.Popen(
+        [sys.executable, "-B", "-c", "import time; time.sleep(15)"],
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+    )
+    Path(fixture["pausing_pid"]).write_text(str(worker.pid), encoding="ascii")
 (filing / "meta.json").write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
+if fixture.get("pausing_pid"):
+    time.sleep(15)
 print("下载结果\n- status: ok")
 '''
 
 
-def _adapter(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, market: str):
+def _adapter(tmp_path: Path, *, market: str, timeout: float = 30, **fixture):
     from company_wiki.source_catalog import DayuCliDownloadAdapter
 
     script = tmp_path / "fake_dayu.py"
@@ -102,8 +124,7 @@ def _adapter(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, market: str):
     config.mkdir()
     workspace_parent = tmp_path / "dayu-workspaces"
     record = tmp_path / "invocation.json"
-    monkeypatch.setenv("FAKE_DAYU_MARKET", market)
-    monkeypatch.setenv("FAKE_DAYU_RECORD", str(record))
+    (config / "fake.json").write_text(json.dumps({"market": market, "record": str(record), **fixture}), encoding="utf-8")
     adapter = DayuCliDownloadAdapter(
         name="dayu-hkex-cli" if market == "HK" else "dayu-sec-cli",
         version="1.0.0",
@@ -112,7 +133,7 @@ def _adapter(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, market: str):
         project_root=tmp_path,
         config_root=config,
         workspace_parent=workspace_parent,
-        timeout_seconds=30,
+        timeout_seconds=timeout,
     )
     return adapter, record, workspace_parent
 
@@ -135,7 +156,7 @@ def test_dayu_cli_adapter_uses_isolated_workspace_and_stages_primary_source(
 ):
     from company_wiki.source_catalog import SourceRequest
 
-    adapter, record, workspace_parent = _adapter(tmp_path, monkeypatch, market=market)
+    adapter, record, workspace_parent = _adapter(tmp_path, market=market)
     request = SourceRequest(
         entity="示例公司",
         market=market,
@@ -175,8 +196,7 @@ def test_dayu_cli_failure_removes_isolated_workspace(
 ):
     from company_wiki.source_catalog import DayuCliAdapterError, SourceRequest
 
-    adapter, _record, workspace_parent = _adapter(tmp_path, monkeypatch, market="HK")
-    monkeypatch.setenv("FAKE_DAYU_FAIL", "1")
+    adapter, _record, workspace_parent = _adapter(tmp_path, market="HK", fail=True)
     request = SourceRequest(
         entity="示例公司",
         market="HK",
@@ -187,8 +207,9 @@ def test_dayu_cli_failure_removes_isolated_workspace(
         allow_download=True,
     )
 
-    with pytest.raises(DayuCliAdapterError, match="exited 17"):
+    with pytest.raises(DayuCliAdapterError, match="exited 17") as caught:
         adapter.discover(request)
+    assert "p0-secret-synthetic" not in str(caught.value)
 
     assert list(workspace_parent.glob("dayu-*")) == []
 
@@ -224,7 +245,7 @@ def test_bounded_acquisition_rejects_dayu_before_starting_external_cli(
         )
     )
     catalog.scan()
-    adapter, record, _workspace_parent = _adapter(tmp_path, monkeypatch, market="HK")
+    adapter, record, _workspace_parent = _adapter(tmp_path, market="HK")
     coordinator = AcquisitionCoordinator(
         catalog=catalog,
         adapters=AdapterRegistry(cn=adapter, hk=adapter, us=adapter),
@@ -300,3 +321,58 @@ adapters:
     assert isinstance(registry.us, DayuCliDownloadAdapter)
     assert "company_wiki_adapter" not in " ".join(config.hk.command)
     assert "company_wiki_adapter" not in " ".join(config.us.command)
+
+
+def test_dayu_drains_both_pipes_before_candidate_and_passes_only_supported_environment(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    from company_wiki.source_catalog import SourceRequest
+
+    observed = tmp_path / "child-environment.json"
+    monkeypatch.setenv("RESEARCH_FEEDBACK_DIR", "do-not-inherit-p0")
+    monkeypatch.setenv("UNRELATED_API_KEY", "p0-secret-synthetic")
+    monkeypatch.setenv("SEC_USER_AGENT", "P0 acceptance synthetic")
+    adapter, _, workspace_parent = _adapter(
+        tmp_path, market="HK", timeout=2.5, chatter=True, environment=str(observed),
+    )
+    request = SourceRequest(
+        entity="示例公司", market="HK", security_id="0700", document_kind="annual_report",
+        fiscal_year=2025, as_of_date="2026-07-18", allow_download=True,
+    )
+    try:
+        assert len(adapter.discover(request)) == 1
+        assert json.loads(observed.read_text(encoding="utf-8")) == {
+            "RESEARCH_FEEDBACK_DIR": False, "UNRELATED_API_KEY": False, "SEC_USER_AGENT": True,
+        }
+    finally:
+        adapter.close()
+    assert list(workspace_parent.glob("dayu-*")) == []
+
+
+def test_ready_dayu_original_stops_post_processing_tree_before_deadline(tmp_path: Path):
+    import time
+    from company_wiki._process_tree import pid_is_alive
+    from company_wiki.source_catalog import SourceRequest
+
+    pid_path = tmp_path / "post-processing-pid"
+    adapter, _, workspaces = _adapter(
+        tmp_path, market="HK", timeout=8, pausing_pid=str(pid_path),
+    )
+    request = SourceRequest(
+        entity="Example", market="HK", security_id="0700", document_kind="annual_report",
+        fiscal_year=2025, as_of_date="2026-07-18", allow_download=True,
+    )
+    started = time.monotonic()
+    try:
+        candidates = adapter.discover(request)
+        assert time.monotonic() - started < adapter.timeout_seconds
+        assert len(candidates) == 1
+        pid = int(pid_path.read_text(encoding="ascii"))
+        end = time.monotonic() + 2
+        while pid_is_alive(pid) and time.monotonic() < end:
+            time.sleep(0.01)
+        assert not pid_is_alive(pid)
+        assert adapter.fetch(candidates[0], tmp_path / "staged").mime_type == "application/pdf"
+    finally:
+        adapter.close()
+    assert not list(workspaces.glob("dayu-*"))

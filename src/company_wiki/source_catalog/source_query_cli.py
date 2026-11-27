@@ -19,7 +19,6 @@ from .service import SourceCatalog
 from .source_reader import SOURCE_REF_SCHEMA_VERSION, SourceReadError, SourceVersionReader
 
 
-_MAX_REQUEST_BYTES = 65_536
 _TRANSCRIPT_LOOKUP_SCHEMA = "company-wiki-transcript-import-lookup-request/1"
 
 
