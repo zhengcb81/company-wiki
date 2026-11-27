@@ -801,6 +801,56 @@ def test_owner_response_without_a_result_keeps_a_safe_failure_reason(host_config
     assert b"fixture-sensitive-noise" not in host._native_path(request["action_id"]).read_bytes()
 
 
+@pytest.mark.parametrize(("kind", "synchronous", "blocks_workspace"), [
+    ("triage", True, False),
+    ("triage", False, True),
+    ("report", True, True),
+])
+def test_reaped_owner_timeout_only_frees_workspace_for_diagnosis(
+    host_config, monkeypatch, kind, synchronous, blocks_workspace,
+):
+    from tools.feedback_loop.local_host import LocalHost
+
+    root = host_config.parent
+    worker = root / "timeout-owner.py"
+    worker.write_text(
+        "import json, sys, time\nfrom pathlib import Path\n"
+        "request = json.load(sys.stdin)\n"
+        "with Path('native-starts').open('a') as stream: stream.write(request['action_id'] + '\\n')\n"
+        "if request['payload'].get('stall'): time.sleep(30)\n"
+        "print(json.dumps({'result': {'decision': 'expected'}}))\n",
+        encoding="utf-8",
+    )
+    config = json.loads(host_config.read_bytes())
+    route = config["owners"]["company-wiki"]
+    route["timeout_seconds"] = 2
+    route["actions"] = {name: {"argv": [sys.executable, "-B", str(worker)]} for name in ("triage", "report")}
+    if synchronous:
+        route["actions"][kind]["synchronous"] = True
+    host_config.write_text(json.dumps(config), encoding="utf-8")
+    host = LocalHost(host_config)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
+    first = action(kind, payload={"stall": True})
+    next_id = digest("next native diagnosis")
+    second = {**action("triage"), "action_id": next_id, "payload": {}}
+    second["request_digest"] = digest([second["owner"], second["kind"], next_id, second["payload"]])
+    assert host.handle(first)["state"] == host.handle(second)["state"] == "pending"
+
+    host.work(first["action_id"])
+    host = LocalHost(host_config)
+    monkeypatch.setattr(host, "_wake", lambda _key, **_options: True)
+
+    assert host.handle({**first, "method": "lookup"})["state"] == "unknown"
+    original = host.handle(first)
+    assert (original["state"], original["code"]) == ("unknown", "native_outcome_unconfirmed")
+    assert host.recover() == ([] if blocks_workspace else [next_id])
+    host.work(next_id)
+    reply = host.handle({**second, "method": "lookup"})
+    expected_starts = [first["action_id"]] if blocks_workspace else [first["action_id"], next_id]
+    assert reply["state"] == ("pending" if blocks_workspace else "done")
+    assert (root / "native-starts").read_text(encoding="utf-8").splitlines() == expected_starts
+
+
 def test_configured_owner_report_requires_its_delivery_ack(host_config):
     root = host_config.parent
     cfg = json.loads(host_config.read_bytes())

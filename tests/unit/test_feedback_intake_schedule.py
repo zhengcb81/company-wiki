@@ -8,7 +8,7 @@ import time
 
 import pytest
 
-from company_wiki._file_mutex import FileMutexLockedError
+from company_wiki.file_mutex import FileMutexLockedError
 from tools.feedback_loop import intake, local_host
 from tools.feedback_loop.process_launch import BACKGROUND_CREATION_FLAGS
 

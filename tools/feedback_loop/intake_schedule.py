@@ -10,7 +10,7 @@ import time
 from typing import Callable
 from uuid import uuid4
 
-from company_wiki._file_mutex import FileMutexLockedError, os_file_mutex, win32_filesystem_path
+from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex, win32_filesystem_path
 
 from .host import read_hosts
 

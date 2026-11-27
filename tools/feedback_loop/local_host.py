@@ -189,6 +189,8 @@ class LocalHost:
                  "mode": mode, "instruction": instruction}
         if mode == "owner-json" and kind in _EXECUTABLE and program.get("lookup_argv") is not None:
             route["lookup_argv"] = _argv(program["lookup_argv"])
+        if mode == "owner-json" and kind == "triage" and program.get("synchronous") is True:
+            route["synchronous"] = True
         return route
 
     def _get(self, key):
@@ -479,8 +481,13 @@ class LocalHost:
             except FileNotFoundError:
                 state, receipt = "failed", {"code": _COMMAND_UNAVAILABLE}
             except (OSError, subprocess.SubprocessError) as exc:
-                self._unconfirmed(key, {"code": "native_outcome_unconfirmed", "error_type": type(exc).__name__})
-                return
+                state, receipt = "unknown", {"code": "native_outcome_unconfirmed", "error_type": type(exc).__name__}
+                if not isinstance(exc, subprocess.TimeoutExpired) or route.get("synchronous") is not True:
+                    self._unconfirmed(key, receipt)
+                    return
+                # subprocess.run has reaped the direct child. A synchronous
+                # triage port leaves no detached writer that needs this slot.
+                receipt["native"] = {"direct_child_reaped": True}
             else:
                 output = None
                 reply_problem = "nonzero_exit" if completed.returncode else "empty_stdout"
