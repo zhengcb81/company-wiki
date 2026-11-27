@@ -1,6 +1,8 @@
 # 当前交接
 
-2026-11-26 当前接续。先读 [当前状态](CURRENT_STATUS.md) 和 [F4 正式部署](../feedback-loop-2026-11-17/deployment-acceptance-20261126.md)。共享恢复及本轮 33 份分诊回执已从原任务验证。正式验收剩两个私有 CI 和 RF 两个 SYSTEM 任务的证据。业务目标仍停在 W12。 [F4 运行回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)
+**F4 已验收，S6 首批实施中，W12 暂停。** F4 两项 RF SYSTEM 原作业已在正式宿主入账，周跑的 FF T3 仍按原作业待证。[F4 回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)。当前进入 [S6 实施计划](../ecosystem-quality-audit-2026-11-27/task_plan.md)。11 张止血卡与 P1-00 检查工具分别在原工区推进。首个具备候选提交和定向回归的模块即可独审；P1-00 单独验收。在 S6 组合验收后从 W12 原检查点接续，保留原 `/8` 未知费用与作业号。 总控按[首批交接台账](../ecosystem-quality-audit-2026-11-27/progress.md#首批交接台账)逐仓接收。
+
+2026-11-26 历史部署检查点。先读 [当前状态](CURRENT_STATUS.md) 和 [F4 正式部署](../feedback-loop-2026-11-17/deployment-acceptance-20261126.md)。共享恢复及本轮 33 份分诊回执已从原任务验证。正式验收剩两个私有 CI 和 RF 两个 SYSTEM 任务的证据。业务目标仍停在 W12。 [F4 运行回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)
 
 2026-11-20 历史检查点。W12 正式执行、四路独审和专家归因已封存。Audit W03 和 FF W06 已接收。RF W01、W02 源码 `cbb523a` 已独审推主线，后续 `7d682a6` 更新本仓计划。CWP `/8` 首个正式请求超时，原作业查证可读，费用保留未知且不重发。新版正式摘要、缓存和 RF 实际采用待复验。Akebia 合同原件和两份同行已走 RF 草案对照，按原截止日准备新尝试。 [W12 整改接收](review/w12-wuxi-resume-20261120/README.md#w12-整改接收) · [正式请求与反馈](review/w12-wuxi-resume-20261120/README.md#w04-正式请求与原作业查证)
 

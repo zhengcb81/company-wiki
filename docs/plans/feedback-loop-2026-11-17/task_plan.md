@@ -1,6 +1,6 @@
 # 工程反馈循环总调度 PWF
 
-2026-11-27。此页是反馈工程的调度入口。12 仓共用原 Windows 恢复任务，本轮重复扫描已修并经正式调度复验。Dashboard、行业研究的私有 CI 已查证。待做的是两个 RF SYSTEM 任务的管理员切换和正式验证，W12 业务流程沿原检查点接续。 [F4 最新收尾](f4-closeout-20261126.md) · [正式部署验收](deployment-acceptance-20261126.md) · [S5 逐项验证台账](s5-verification-20261125.md) · [验收进度](progress.md) · [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
+2026-11-27 21:39 UTC。F4 正式部署与反馈回环验收已完成。12 仓共用原 Windows 恢复任务。两项新版 RF SYSTEM 正式任务各按原号接收一次开始和终态，日跑成功，周跑待 FF 正式 T3 收据。新增下载和付费均为零。 [F4 最新收尾](f4-closeout-20261126.md) · [正式部署验收](deployment-acceptance-20261126.md) · [S5 逐项验证台账](s5-verification-20261125.md) · [验收进度](progress.md) · [父计划](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
 
 ## 负责什么
 
@@ -87,4 +87,8 @@ StockWiki 已用同一正式公开入口在隔离环境验证实际故障和冷�
 
 2026-11-25 的 [12 仓独审](review/s1-s5-independent-20261125/findings.md) 复现了运行身份、终态、反馈恢复和仓内边界问题。整改由各责任仓实施并由独立 agent 对最终版本复验，三仓本机组合验收已通过。正式提交和 CI 以 [整改验收与发布台账](s1-s5-remediation-20261125/release_receipt.md) 为准。共用约定、复验范围和实机部署边界见 [整改计划](s1-s5-remediation-20261125/task_plan.md)。
 
-本轮 [S5-10 正式部署验收](deployment-acceptance-20261126.md) 已完成两仓私有 CI 查证。新一轮共享定时恢复暴露同账本并发扫描，按[收尾页](f4-closeout-20261126.md#11-月-27-日恢复和并发故障)验收收件合并、既有回执和原费用。RF 两项 SYSTEM 任务仍需在管理员会话核对实际动作并复验，再按 W12 原检查点接续业务摘要。
+本轮 [S5-10 正式部署验收](deployment-acceptance-20261126.md) 已完成两仓私有 CI 查证、共享 F4 自然恢复及 RF 两项 SYSTEM 正式回执验收。[原作业号、分诊和入账证据](f4-closeout-20261126.md#11-月-27-日-rf-system-日跑与周跑)记录了每项只执行一次、隔离强停后按原号冷读和零新增费用。FF 正式 T3 收据继续按原分诊待证。
+
+## F4 之后的 S6
+
+F4 两项 RF SYSTEM 原作业已在正式宿主入账，周跑的 FF T3 仍按原作业待证。[F4 回执](f4-closeout-20261126.md)。当前进入 [S6 实施计划](../ecosystem-quality-audit-2026-11-27/task_plan.md)。11 张止血卡与 P1-00 检查工具分别在原工区推进。首个具备候选提交和定向回归的模块即可独审；P1-00 单独验收。在 S6 组合验收后从 W12 原检查点接续，保留原 `/8` 未知费用与作业号。

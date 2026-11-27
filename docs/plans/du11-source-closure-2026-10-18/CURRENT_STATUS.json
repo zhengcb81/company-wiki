@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "w12_readonly_follow_up_after_f4_acceptance",
+  "execution_mode": "s6_parallel_first_wave_w12_paused",
   "architecture_rollout": {
     "s2_status": "accepted_scoped_owner_scenarios",
     "s2_receipt": "../feedback-loop-2026-11-17/s2-closeout-20261125.md",
@@ -44,14 +44,29 @@
       "evidence": "../feedback-loop-2026-11-17/f4-closeout-20261126.md"
     },
     "s5_formal_deployment": {
-      "status": "running_entries_verified_external_evidence_pending",
-      "private_ci_pending": ["investment-dashboard", "industry-research"],
-      "system_task_registration_pending": ["revenue_daily_t2", "revenue_weekly_t3"],
+      "status": "accepted_private_ci_and_rf_system_original_receipts",
+      "private_ci_pending": [],
+      "system_task_registration_pending": [],
+      "f4_booking_evidence": "../feedback-loop-2026-11-17/f4-closeout-20261126.md",
       "evidence": "../feedback-loop-2026-11-17/deployment-acceptance-20261126.md"
     },
     "owner_ledger": "../module-boundaries-2026-11-11/s3-s4-owner-rollout-20261125.md",
     "f4_runtime_ledger": "../feedback-loop-2026-11-17/f4-resume-runtime-20261125.md",
-    "resume_f4_after_s3_s4_acceptance": "../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续"
+    "resume_f4_after_s3_s4_acceptance": "../feedback-loop-2026-11-17/task_plan.md#s3s4-收口后的-f4-接续",
+    "s6_ecosystem_quality_audit": {
+      "plan_id": "ecosystem-quality-audit-2026-11-27",
+      "mainline_position": "active_after_s5_10_and_f4_before_w12",
+      "predecessor": "../feedback-loop-2026-11-17/deployment-acceptance-20261126.md",
+      "precedes": "W12 business summary and company-pool mainline resumption",
+      "status": "PHASE_0_AND_P1_00_IN_PROGRESS",
+      "implementation_authorized": true,
+      "first_wave": {"owner_cards": ["P0-01", "P0-02", "P0-03", "P0-04", "P0-05", "P0-06", "P0-07", "P0-08", "P0-09", "P0-10", "P0-11"], "tool_card": "P1-00", "accept_independently": true, "next_join": "per-owner Phase 1 adoption", "separate_housekeeping": "P0-12"},
+      "task_plan": "../ecosystem-quality-audit-2026-11-27/task_plan.md",
+      "findings": "../ecosystem-quality-audit-2026-11-27/findings.md",
+      "governance": "../ecosystem-quality-audit-2026-11-27/anti-trick-governance.md",
+      "blueprints": "../ecosystem-quality-audit-2026-11-27/module-blueprints.md",
+      "progress": "../ecosystem-quality-audit-2026-11-27/progress.md"
+    }
   },
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
@@ -110,7 +125,7 @@
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "Original desktop goal checked during S3/S4 on 2026-11-25",
-    "execution": "S1-S5 released remediation and F4 on-host recovery passed independent retest. Private CI and RF SYSTEM task registration evidence remains pending before W12 resumes. See ../feedback-loop-2026-11-17/deployment-acceptance-20261126.md.",
+    "execution": "W12 remains paused through S6. F4 deployment and SYSTEM booking passed. The original W12 /8 attempt and unresolved cost are preserved.",
     "runtime_limits": "runtime_policy is authoritative; legacy objective budget text is historical."
   },
   "frozen_history": {
@@ -140,9 +155,9 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "MODULE_BOUNDARIES_M3_CLOSED; F3_SCOPED_REAL_TRIAL_AND_SAVED_REPAIR_ACCEPTED; P3_OPEN",
-  "as_of_date": "2026-11-20",
-  "observed_at_utc": "2026-11-20T11:39:04Z",
+  "project_status": "M3_AND_F4_ACCEPTED; S6_FIRST_WAVE_IN_PROGRESS; W12_PAUSED",
+  "as_of_date": "2026-11-27",
+  "observed_at_utc": "2026-11-27T22:36:41Z",
   "cwp_saved_response_repair": {
     "evidence": "../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md",
     "assessor_version": "source-summary-assessment/1.4.0",
@@ -223,7 +238,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Read the exact Dashboard and industry-research private CI results and the two RF SYSTEM task registrations for S5-10. Then use the released RF issuer, coverage and recognition fixes with the new registered 1C evidence. Preserve the original CWP /8 attempt and its unresolved cost without replaying the provider POST. Complete revenue-magnitude research and verify real CWP summary, cache and RF adoption in a new W12 attempt at the original cutoff.",
+  "next_action": "Accept each S6 P0 candidate on its current owner release with focused regression and independent review. Accept P1-00 independently. Adopt its tools in Phase 1 by repository. Resume W12 at its original checkpoint after S6.",
   "w12_attempt": {
     "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",
@@ -470,7 +485,7 @@
     },
     "host_prelaunch_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
     "host_owner_report_recovery": "../feedback-loop-2026-11-17/f4-acceptance.md",
-    "company_pool": "resumed_at_w12"
+    "company_pool": "paused_at_original_w12_checkpoint_during_s6"
   },
   "p1_business_quote_view": {
     "status": "ACCEPTED",
@@ -1083,7 +1098,7 @@
   "business_plan_status": {
     "revenue_forecast": "OPEN_AFTER_T4_SEM_ACCEPTANCE; NEW_RUNTIME_REAL_SUMMARY_AND_CACHE_WORK_REMAINS",
     "revenue_forecast_audit": "RETAINED_FOR_P3_FIXED_COMPANY_AUDIT_LOOP",
-    "note": "These tasks are no longer deferred on D5; T4/SEM acceptance gates new-summary work, and RF adoption/fixed-company audit follow in the existing P1-P3 order."
+    "note": "W12 business stages follow S6; previously accepted D5 and F4 evidence is retained."
   },
   "historical_publication": {
     "company-wiki-2026-11-02": {

@@ -1,6 +1,8 @@
 # 主线实施计划
 
-**2026-11-20 当前执行顺序。** M3 已验收，F4 的 12 仓接线和约定场景已通过组合验收。W12 已建立新的药明康德运行。Audit 先在本仓原生日志记录实际问题，再通过 F4 分诊。收到拒绝时核对触发检查的作用与责任仓，再交该仓验证并修复。和本次 W12 的零付费来源准备可并行。沿 [CURRENT_STATUS](CURRENT_STATUS.md) 和 [W12 冻结与步骤](review/w12-wuxi-resume-20261120/README.md) 接续。P1/P2 的[真实摘要、缓存和 RF 采用试点](../feedback-loop-2026-11-17/f3b-live-acceptance.md)及[保存响应与跨市场复验](../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md)为当前业务验证的对照。
+**2026-11-27 执行顺序。** F4 两项 RF SYSTEM 原作业已在正式宿主入账，周跑的 FF T3 仍按原作业待证。[F4 回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)。当前进入 [S6 实施计划](../ecosystem-quality-audit-2026-11-27/task_plan.md)。11 张止血卡与 P1-00 检查工具分别在原工区推进。首个具备候选提交和定向回归的模块即可独审；P1-00 单独验收。在 S6 组合验收后从 W12 原检查点接续，保留原 `/8` 未知费用与作业号。
+
+**2026-11-20 历史业务检查点。** M3 已验收，F4 的 12 仓接线和约定场景已通过组合验收。W12 已建立新的药明康德运行。Audit 先在本仓原生日志记录实际问题，再通过 F4 分诊。收到拒绝时核对触发检查的作用与责任仓，再交该仓验证并修复。和本次 W12 的零付费来源准备可并行。沿 [CURRENT_STATUS](CURRENT_STATUS.md) 和 [W12 冻结与步骤](review/w12-wuxi-resume-20261120/README.md) 接续。P1/P2 的[真实摘要、缓存和 RF 采用试点](../feedback-loop-2026-11-17/f3b-live-acceptance.md)及[保存响应与跨市场复验](../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md)为当前业务验证的对照。
 
 W12 的四路独审和专家根因归并已完成。先落实 RF 的经营量级、实际消费与共同压力；Audit、CWP、FF 按责任仓实现各自回归。集中核对各候选的测试和实际发布版本，再用原截止日开启新尝试。 [六包与复验入口](review/w12-wuxi-resume-20261120/README.md#专家归因与接续)
 

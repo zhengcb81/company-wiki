@@ -1,5 +1,7 @@
 # 模块边界收口计划
 
+> **11 月 27 日**　M3 已收口，M4/S5 留下的仓内整改由 [S6](../ecosystem-quality-audit-2026-11-27/task_plan.md) 统一调度。首批止血与 P1-00 分别实施、分别验收。下文保留原阶段记录。
+
 ## M4 补充计划 — 全 12 模块深度代码审计：松耦合、私有调用清零与静态护栏（2026-11-24 新增；2026-11-25 复审修订）
 
 **状态：IN_PROGRESS。** S5 已处理已证跨仓绕行、边界扫描器和部署漂移，仓内解耦按真实责任切片交付。精确运行版和后续范围见 [S5 台账](../feedback-loop-2026-11-17/s5-verification-20261125.md)。下文的量化问题是审计时的源码快照。
@@ -190,7 +192,7 @@ ROOT 已在 StockWiki 和 Dashboard 各自工区接收对应接口。Audit 的�
 
 ## Next Step
 
-按 [逐仓交接](owner_plans.md) 收齐 FF 当前主线的有限下载 T3 与 RF 周跑记录/提交对账，绑定现行依赖版本后关闭 M3，再继续父计划 P1。CWP `12e65fe7d` 的精确 CI 已过。固定公司循环当前暂停。
+M3 已按[正式 T3 和 RF 周跑记录](review/m3-formal-t3-20261116.md)收口。当前仓内整改按 [S6 总计划](../ecosystem-quality-audit-2026-11-27/task_plan.md) 接收首批候选；固定公司循环停在 W12。
 
 **CWP push/cleanup maintenance (completed 2026-11-15):** root PWF-only changes are now positively classified as documentation, while runtime/mixed/unknown ranges retain the existing fixed smoke. Pytest scratch cleanup safely removes Windows read-only Git objects and refuses symlink/reparse chmod. Independent review PASS; 57 focused regressions passed, 1 host-dependent symlink case skipped; cleanup receipt `removed=true`. Published `master@56f9cc73d` and server-confirmed. See [bound review](review/pre-push-classification-and-temp-cleanup-20261115.md). This does not close or broaden M3.
 
