@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 import json
+from pathlib import Path
 import subprocess
 import sys
 from threading import Event
@@ -134,8 +135,10 @@ with IntakeSchedule(Path(sys.argv[1])).scan() as locked:
     Path(sys.argv[2]).touch()
     time.sleep(30)
 """
+    # The child cannot inherit pytest's added paths or a developer's editable install.
     process = subprocess.Popen(
-        [sys.executable, "-B", "-c", program, str(settings), str(ready)],
+        [sys.executable, "-B", "-E", "-S", "-c", program, str(settings), str(ready)],
+        cwd=Path(__file__).resolve().parents[2],
         stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
         creationflags=BACKGROUND_CREATION_FLAGS,
     )

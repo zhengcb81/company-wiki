@@ -7,17 +7,11 @@ from pathlib import Path
 import sys
 from typing import TypeVar
 
+from company_wiki.diagnostic_logging import append_diagnostic, diagnostic_log
+from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
+from company_wiki.diagnostic_stream import RedactedTextStream
+
 from .process_launch import background_argv
-
-# Source-checkout commands also run with a bare interpreter. Use the canonical
-# package name so the scanner and its callers share the same module instance.
-_SRC = Path(__file__).resolve().parents[2] / "src"
-if (_SRC / "company_wiki").is_dir() and str(_SRC) not in sys.path:
-    sys.path.insert(0, str(_SRC))
-
-from company_wiki.diagnostic_logging import append_diagnostic, diagnostic_log  # noqa: E402
-from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text  # noqa: E402
-from company_wiki.diagnostic_stream import RedactedTextStream  # noqa: E402
 
 
 _LOG_PATH = "CWP_F4_ERROR_LOG"
