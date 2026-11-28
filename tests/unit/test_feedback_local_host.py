@@ -4,6 +4,7 @@ from contextlib import closing
 import os
 from pathlib import Path
 import shutil
+import sqlite3
 import subprocess
 import sys
 import time
@@ -1028,6 +1029,89 @@ def test_unknown_action_recovers_through_its_original_reader_and_complete_reques
     assert invoke(host_config, "rpc", request) == recovered
     assert (root / "report-lookups").read_text().splitlines() == reads
     assert (root / "report-starts").read_text().splitlines() == ["start"]
+
+
+@pytest.mark.parametrize(("shape", "state"), [
+    ("request-sha256", "done"),
+    ("inner-digest", "unknown"),
+    ("other-method", "unknown"),
+    ("conflicting-request", "unknown"),
+    ("null-request", "unknown"),
+    ("legacy-request", "done"),
+])
+def test_owner_lookup_binds_lost_reply_to_complete_original_request(host_config, shape, state):
+    root = host_config.parent
+    secret = "sk-synthetic-legacy-owner-correlation"
+    request = action("repair", payload={"observation": {"run_id": secret}})
+    expected = {"fixed_version": "owner/version", "cost_state": "unknown"}
+    owner = root / "owner.py"
+    owner.write_text(
+        "import hashlib, json, sys\n"
+        "from pathlib import Path\n"
+        "def digest(value):\n"
+        "    encoded = json.dumps(value, sort_keys=True, separators=(',', ':'), "
+        "ensure_ascii=True, allow_nan=False)\n"
+        "    return hashlib.sha256(encoded.encode('ascii')).hexdigest()\n"
+        "marker = Path('owner-receipt.json')\n"
+        "if sys.argv[1] == 'get-action':\n"
+        "    original = json.loads(marker.read_bytes())\n"
+        "    if original['action_id'] != sys.argv[2]: raise SystemExit(4)\n"
+        "    print(json.dumps({'receipt': original['receipt']}))\n"
+        "    raise SystemExit(0)\n"
+        "request = json.load(sys.stdin)\n"
+        "with Path('dispatches').open('a', encoding='utf-8') as f:\n"
+        "    f.write(request['action_id'] + '\\n')\n"
+        "proof = {'result': {'fixed_version': 'owner/version', 'cost_state': 'unknown'}, "
+        "'request_sha256': digest(request)}\n"
+        "shape = sys.argv[2]\n"
+        "if shape == 'inner-digest': proof['request_sha256'] = request['request_digest']\n"
+        "if shape == 'other-method': proof['request_sha256'] = digest(dict(request, method='lookup'))\n"
+        "if shape == 'conflicting-request': proof['request'] = dict(request, payload={})\n"
+        "if shape == 'null-request': proof['request'] = None\n"
+        "if shape == 'legacy-request':\n"
+        "    del proof['request_sha256']\n"
+        "    proof['request'] = request\n"
+        "with marker.open('x', encoding='utf-8') as f:\n"
+        "    json.dump({'action_id': request['action_id'], 'receipt': proof}, f)\n"
+        "raise SystemExit(17)\n",  # The owner persisted the proof and never returned the result.
+        encoding="utf-8",
+    )
+    settings = json.loads(host_config.read_bytes())
+    settings["owners"]["company-wiki"]["actions"]["repair"] = {
+        "argv": [sys.executable, "-B", str(owner), "submit", shape],
+        "lookup_argv": [sys.executable, "-B", str(owner), "get-action"],
+    }
+    host_config.write_text(json.dumps(settings), encoding="utf-8")
+
+    response = invoke(host_config, "rpc", request)
+    assert response["state"] in ("pending", "done", "unknown")
+    lookup = dict(request, method="lookup")
+    recovered = wait_for(
+        lambda: reply if (reply := invoke(host_config, "rpc", lookup))["state"] != "pending" else None
+    )
+    assert (recovered["state"], recovered["action_id"]) == (state, request["action_id"])
+    assert recovered["request_digest"] == request["request_digest"]
+    if state == "done":
+        assert recovered["result"] == expected
+        assert recovered["native"] == {"receipt_source": "owner_action"}
+    else:
+        assert "result" not in recovered
+
+    with closing(sqlite3.connect(root / "actions.sqlite")) as connection:
+        frozen = connection.execute(
+            "SELECT request FROM actions WHERE action_id = ?", (request["action_id"],)
+        ).fetchone()[0]
+    assert json.loads(frozen) == request
+    marker = root / "owner-receipt.json"
+    durable = marker.read_bytes()
+    if shape != "legacy-request":
+        assert secret.encode() not in durable
+    assert invoke(host_config, "recover")["woken"] == []
+    assert invoke(host_config, "rpc", lookup) == recovered
+    assert invoke(host_config, "rpc", request) == recovered
+    assert marker.read_bytes() == durable
+    assert (root / "dispatches").read_text(encoding="utf-8").splitlines() == [request["action_id"]]
+
 
 
 def test_missing_owner_report_keeps_native_claim_and_waiting_work_in_place(host_config):

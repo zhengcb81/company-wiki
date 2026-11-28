@@ -433,15 +433,21 @@ class LocalHost:
                 return None
             request = json.loads(row["request"])
             proof = value.get("receipt")
-            if isinstance(proof, dict):
-                submitted, result = proof.get("request"), proof.get("result")
-                source = "owner_action"
-            elif request["kind"] == "report":
-                submitted, result = value.get("report"), {"recorded": True}
+            source = "owner_action"
+            if not isinstance(proof, dict):
+                if request["kind"] != "report":
+                    return None
+                proof = {"request": value.get("report"), "result": {"recorded": True}}
                 source = "owner_report"
-            else:
+            result = proof.get("result")
+            if not isinstance(result, dict):
                 return None
-            if not isinstance(result, dict) or not isinstance(submitted, dict) or digest(submitted) != digest(request):
+            request_sha256 = proof.get("request_sha256")
+            if "request" in proof:
+                # An explicitly supplied request must prove its own identity.
+                submitted = proof["request"]
+                request_sha256 = digest(submitted) if isinstance(submitted, dict) else None
+            if request_sha256 != digest(request):
                 return None
         except (OSError, ValueError, RecursionError, subprocess.SubprocessError):
             return None
