@@ -37,6 +37,8 @@ no-op skip rather than a duplicate.
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import hashlib
 import json
 import sqlite3
@@ -301,10 +303,9 @@ def run_artifact_backfill(
     return result
 
 
+@runtime_feedback.entry("artifact-backfill")
 def main() -> int:
-    import argparse
-
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         description="FC-901 legacy artifact binding migration (dry-run bucketing)")
     parser.add_argument("--catalog", type=Path, required=True)
     parser.add_argument("--mode", choices=("dry-run", "apply"), default="dry-run")
@@ -341,4 +342,4 @@ def _default_now() -> str:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main))

@@ -120,8 +120,8 @@ class LocalReadBudget(ReadBudget):
         resolved = Path(os.path.realpath(path))
         try:
             resolved.relative_to(root.resolve())
-        except ValueError:
-            raise SourceReadError("blocked", "metadata_path_outside_root") from None
+        except ValueError as original_error:
+            raise SourceReadError("blocked", "metadata_path_outside_root") from original_error
         try:
             before = resolved.stat()
         except FileNotFoundError:
@@ -150,8 +150,8 @@ class LocalReadBudget(ReadBudget):
             raise SourceReadError("unavailable", "local_metadata_changed")
         try:
             value = json.loads(data)
-        except (ValueError, UnicodeError, RecursionError):
-            raise SourceReadError("blocked", "local_metadata_unreadable") from None
+        except (ValueError, UnicodeError, RecursionError) as original_error:
+            raise SourceReadError("blocked", "local_metadata_unreadable") from original_error
         if not isinstance(value, dict):
             raise SourceReadError("blocked", "local_metadata_unreadable")
         return value, hashlib.sha256(data).hexdigest()
@@ -193,8 +193,8 @@ class LocalReadBudget(ReadBudget):
         resolved = Path(os.path.realpath(path))
         try:
             resolved.relative_to(root.resolve())
-        except ValueError:
-            raise SourceReadError("blocked", "artifact_path_outside_allowed_root") from None
+        except ValueError as original_error:
+            raise SourceReadError("blocked", "artifact_path_outside_allowed_root") from original_error
         before = resolved.stat()
         if is_hydration_required(before):
             raise SourceReadError("unavailable", "placeholder_not_hydrated")
@@ -444,7 +444,7 @@ def read_registered_sidecar(
         original_path = resolve_source_location(root, descriptor.location.relative_path)
     except ValueError as exc:
         reason = getattr(exc, "reason", "artifact_path_outside_allowed_root")
-        raise SourceReadError("unavailable", reason) from None
+        raise SourceReadError("unavailable", reason) from exc
     sidecar_path = (
         original_path.with_name("meta.json")
         if kind == "sec_provider_meta"

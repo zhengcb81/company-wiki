@@ -1836,8 +1836,8 @@ def _check_generation_owner(pointer, db_path, run_id):
         if _generation_owner_finished(origin_db, owner["run_id"]):
             pointer.unlink()
             return
-    except (OSError, KeyError, TypeError, ValueError, NarrativeRunError):
-        raise BatchResumeError("BATCH_GENERATION_RECOVERY_REQUIRED") from None
+    except (OSError, KeyError, TypeError, ValueError, NarrativeRunError) as original_error:
+        raise BatchResumeError("BATCH_GENERATION_RECOVERY_REQUIRED") from original_error
     raise BatchResumeError("BATCH_GENERATION_RECOVERY_REQUIRED")
 
 

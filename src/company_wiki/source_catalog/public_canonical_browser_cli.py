@@ -73,8 +73,8 @@ def _read_request() -> dict[str, Any]:
         request = json.loads(
             text, object_pairs_hook=_unique_pairs, parse_constant=_reject_constant,
         )
-    except RecursionError:
-        raise ValueError("request nesting too deep") from None
+    except RecursionError as original_error:
+        raise ValueError("request nesting too deep") from original_error
     if not isinstance(request, dict):
         raise ValueError("request must be an object")
     if request.get("schema_version") != REQUEST_SCHEMA:
@@ -117,7 +117,7 @@ def _proof_client(args: argparse.Namespace) -> StockWikiProofClient | None:
     )
 
 
-@runtime_feedback.entry("canonical-browser")
+@runtime_feedback.entry("canonical-browser", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -170,4 +170,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main, machine_stderr=True))

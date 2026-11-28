@@ -153,8 +153,8 @@ def _as_of_date(value: object) -> str:
         raise CompanySourceIndexError("blocked", "invalid_request")
     try:
         date.fromisoformat(value)
-    except ValueError:
-        raise CompanySourceIndexError("blocked", "invalid_request") from None
+    except ValueError as original_error:
+        raise CompanySourceIndexError("blocked", "invalid_request") from original_error
     return value
 
 
@@ -199,8 +199,8 @@ def _decode_cursor(value: str) -> tuple[str, str, str]:
     try:
         raw = base64.urlsafe_b64decode(value + padding)
         payload = json.loads(raw.decode("utf-8"))
-    except (binascii.Error, UnicodeError, ValueError):
-        raise CompanySourceIndexError("blocked", "invalid_request") from None
+    except (binascii.Error, UnicodeError, ValueError) as original_error:
+        raise CompanySourceIndexError("blocked", "invalid_request") from original_error
     if (
         not isinstance(payload, dict)
         or set(payload) != {"p", "d", "s"}
@@ -343,10 +343,10 @@ class CompanySourceIndex:
                     return False
                 remaining -= len(rows)
                 after = rows[-1]["document_id"]
-        except CatalogQueryUnavailable:
+        except CatalogQueryUnavailable as original_error:
             raise CompanySourceIndexError(
                 "unavailable", "catalog_unavailable"
-            ) from None
+            ) from original_error
 
     # -- candidate scan -----------------------------------------------------
 
@@ -398,10 +398,10 @@ class CompanySourceIndex:
                     order="published_date",
                 )
             )
-        except CatalogQueryUnavailable:
+        except CatalogQueryUnavailable as original_error:
             raise CompanySourceIndexError(
                 "unavailable", "catalog_unavailable"
-            ) from None
+            ) from original_error
         if len(candidates) > MAX_CANDIDATES:
             raise CompanySourceIndexError("unavailable", "candidate_budget_exceeded")
         return [self._candidate_payload(candidate) for candidate in candidates]

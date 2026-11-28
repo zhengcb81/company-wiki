@@ -13,7 +13,7 @@ from types import TracebackType
 from typing import Protocol
 from uuid import uuid4
 
-from company_wiki import runtime_feedback, runtime_trace
+from company_wiki import runtime_feedback, runtime_journal
 from company_wiki.id_scope import normalize_id_scope
 
 from .models import JobStatus
@@ -262,9 +262,9 @@ class AutomationSupervisor:
 
     def _spawn(self, slot: WorkerSlot) -> None:
         attempt_id = f"{slot.worker_id}.{uuid4().hex}"
-        runtime_trace.write_event(
+        runtime_journal.write_event(
             "worker-process", self._run_id, attempt_id, "spawn", "started", source_file=__file__,
-            input_ref=runtime_trace.input_reference(self._config.db_path),
+            input_ref=runtime_journal.input_reference(self._config.db_path),
         )
         allowed = (
             self._config.model_job_types
@@ -301,7 +301,7 @@ class AutomationSupervisor:
         except Exception as exc:
             runtime_feedback.record("worker-process", "failed", reason="worker_not_started",
                                     error=exc, run=self._run_id, attempt=attempt_id)
-            runtime_trace.write_event("worker-process", self._run_id, attempt_id, "exit", "not_started",
+            runtime_journal.write_event("worker-process", self._run_id, attempt_id, "exit", "not_started",
                                       source_file=__file__)
             raise
         self._children[slot.worker_id] = _Child(slot, process, stop_event, self._run_id, attempt_id)
@@ -314,7 +314,7 @@ class AutomationSupervisor:
         status = "completed"
         if exit_code != 0:
             status = "interrupted" if child.interrupted else "failed"
-            trace = runtime_trace.read_trace(child.run_id, attempt_id=child.attempt_id)
+            trace = runtime_journal.read_trace(child.run_id, attempt_id=child.attempt_id)
             reported = any(event["operation"] == "worker-process" and event["step"] == "failure"
                            for event in trace["events"])
             if not reported:
@@ -322,7 +322,7 @@ class AutomationSupervisor:
                     "worker-process", status, reason="worker_terminated" if child.interrupted else "worker_process_exit",
                     run=child.run_id, attempt=child.attempt_id,
                 )
-        runtime_trace.write_event(
+        runtime_journal.write_event(
             "worker-process", child.run_id, child.attempt_id, "exit", status,
             source_file=__file__, exit_code=exit_code,
         )

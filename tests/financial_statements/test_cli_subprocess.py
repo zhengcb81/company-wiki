@@ -202,3 +202,28 @@ class TestCliSubprocess:
         assert proc.returncode == 0
         payload = json.loads(proc.stdout.decode("utf-8"))
         assert payload["status"] == "not_found"
+
+
+
+def test_provider_member_failure_is_cold_readable_with_successful_cli_exit(wiki_root, fixture_root, tmp_path, monkeypatch):
+    state = tmp_path / "diagnostic-state"
+    monkeypatch.setenv("LOCALAPPDATA", str(state))
+    monkeypatch.setenv("XDG_STATE_HOME", str(state))
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
+    monkeypatch.delenv("RESEARCH_FEEDBACK_DIR", raising=False)
+    monkeypatch.setenv("RESEARCH_FEEDBACK_RUN_ID", "fixture-statements-partial")
+    monkeypatch.setenv("RESEARCH_FEEDBACK_ATTEMPT_ID", "fixture-statements-attempt")
+    proc = _run(wiki_root, fixture_root, dict(REQUEST, statements=["income_statement", "balance_sheet"]))
+    assert (proc.returncode, proc.stderr) == (0, b"")
+    payload = json.loads(proc.stdout)
+    assert payload["status"] == "partial"
+    successful, failed = payload["statements"]
+    assert successful["status"] == "complete" and failed["status"] == "unavailable"
+    assert failed["error_code"] and _raw_file_count(wiki_root) == 4
+    assert payload["usage"]["cost_usd"] == "0.00"
+    packet, = (state / "company-wiki" / "observations").glob("*.diagnostic.json")
+    diagnostic = json.loads(packet.read_bytes())
+    assert diagnostic["run_id"] == "fixture-statements-partial"
+    assert diagnostic["attempt_id"] == "fixture-statements-attempt"
+    assert diagnostic["step_id"] == "financial-statements/balance_sheet"
+    assert diagnostic["reason"] == failed["error_code"]

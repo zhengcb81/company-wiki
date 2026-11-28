@@ -76,7 +76,7 @@ def _emit_error(status: str, reason: str) -> None:
     )
 
 
-@runtime_feedback.entry("source-export-v2")
+@runtime_feedback.entry("source-export-v2", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -109,5 +109,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             catalog.close()
 
 
+def console() -> int:
+    return runtime_feedback.run_cli(main, machine_stderr=True)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(console())

@@ -48,7 +48,7 @@ from .service import SourceCatalog
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         prog="company-wiki-incremental",
         description="Bounded metadata discovery and bounded reading over exact sources",
     )

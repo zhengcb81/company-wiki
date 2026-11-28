@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from company_wiki import runtime_feedback
 
-import argparse
 import asyncio
 from contextlib import redirect_stdout
 from dataclasses import fields
@@ -217,9 +216,9 @@ def _hk_operation(action, payload, budget, scratch, staging, identity, checkpoin
             path.unlink(missing_ok=True)
 
 
-@runtime_feedback.entry("external-filing")
+@runtime_feedback.entry("external-filing", machine_stderr=True)
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument("--market", choices=("HK", "US"), required=True)
     parser.add_argument("--adapter-name", required=True)
     parser.add_argument("--adapter-version", required=True)
@@ -305,4 +304,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main, machine_stderr=True))

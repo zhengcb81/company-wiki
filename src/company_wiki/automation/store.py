@@ -984,7 +984,7 @@ class AutomationStore:
                     (job_id, depends_on_job_id, required_status.value),
                 )
                 return True
-            except sqlite3.IntegrityError:
+            except sqlite3.IntegrityError as original_error:
                 row = conn.execute(
                     "SELECT required_status FROM job_dependencies "
                     "WHERE job_id = ? AND depends_on_job_id = ?",
@@ -995,7 +995,7 @@ class AutomationStore:
                 raise IntegrityViolationError(
                     f"dependency ({job_id}, {depends_on_job_id}) exists with "
                     f"different required_status"
-                ) from None
+                ) from original_error
 
         return self._write_transaction(_op)
 

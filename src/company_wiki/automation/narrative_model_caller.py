@@ -128,10 +128,10 @@ class BudgetedNarrativeCaller:
 
         try:
             body = self._model.request_bytes(request)
-        except ModelRequestTooLargeError:
+        except ModelRequestTooLargeError as original_error:
             raise NarrativeBudgetCallError(
                 "MODEL_REQUEST_TOO_LARGE", HandlerOutcome.TERMINAL_FAILURE, _ZERO
-            ) from None
+            ) from original_error
         context.checkpoint()
         attempt = context.attempt
         recovered = None
@@ -151,9 +151,9 @@ class BudgetedNarrativeCaller:
                     self._paid_responses.validate_identity(request_sha256=request_sha256,
                         model_id=self._model.model_id, adapter_id=self._model.adapter_id,
                         prompt_version=request.prompt_version)
-                except PaidResponseError:
+                except PaidResponseError as original_error:
                     raise NarrativeBudgetCallError("MODEL_PAID_RESPONSE_BINDING_INVALID",
-                        HandlerOutcome.TERMINAL_FAILURE, _ZERO) from None
+                        HandlerOutcome.TERMINAL_FAILURE, _ZERO) from original_error
                 recovered = self._recover(context, request, request_sha256)
             if recovered is not None:
                 from .narrative_run_store import ReservationAdmission
@@ -165,10 +165,10 @@ class BudgetedNarrativeCaller:
                     try:
                         self._paid_responses.admit()
                     except StorageBudgetExceeded as exc:
-                        raise NarrativeBudgetCallError(str(exc), HandlerOutcome.TERMINAL_FAILURE, _ZERO) from None
-                    except Exception:
+                        raise NarrativeBudgetCallError(str(exc), HandlerOutcome.TERMINAL_FAILURE, _ZERO) from exc
+                    except Exception as original_error:
                         raise NarrativeBudgetCallError("MODEL_PAID_RESPONSE_SPACE_DENIED",
-                            HandlerOutcome.TERMINAL_FAILURE, _ZERO) from None
+                            HandlerOutcome.TERMINAL_FAILURE, _ZERO) from original_error
                 admission = self._store.reserve_model_attempt(
                     run_id=self._run_id,
                     job_id=context.job.job_id,
@@ -201,7 +201,7 @@ class BudgetedNarrativeCaller:
                 code, outcome = "LEASE_LOST", HandlerOutcome.RETRYABLE
             elif isinstance(error, (StoreBusyError, sqlite3.Error, OSError)):
                 code, outcome = "MODEL_ADMISSION_UNAVAILABLE", HandlerOutcome.RETRYABLE
-            raise NarrativeBudgetCallError(code, outcome, _ZERO) from None
+            raise NarrativeBudgetCallError(code, outcome, _ZERO) from error
         if not admission.may_send_http and recovered is None:
             raise NarrativeBudgetCallError(
                 "MODEL_REQUEST_ALREADY_RESERVED",
@@ -211,10 +211,10 @@ class BudgetedNarrativeCaller:
         started = time.monotonic()
         try:
             context.checkpoint()
-        except Exception:
+        except Exception as original_error:
             if recovered is not None:
                 raise NarrativeBudgetCallError("LEASE_LOST", HandlerOutcome.RETRYABLE,
-                    _metrics(admission.record, 0)) from None
+                    _metrics(admission.record, 0)) from original_error
             # This process knows generate has not started; unlike a crash, that
             # is enough evidence to settle the unspent attempt at zero.
             self._settle(
@@ -228,7 +228,7 @@ class BudgetedNarrativeCaller:
             )
             raise NarrativeBudgetCallError(
                 "LEASE_LOST", HandlerOutcome.RETRYABLE, _ZERO
-            ) from None
+            ) from original_error
         try:
             if recovered is not None:
                 _, pin, saved_body = recovered
@@ -316,12 +316,12 @@ class BudgetedNarrativeCaller:
                 )
             except NarrativeBudgetCallError as settlement_error:
                 raise replace(settlement_error, failed_final=failed_final,
-                    finish_reason=finish_reason, content_bytes=content_bytes) from None
+                    finish_reason=finish_reason, content_bytes=content_bytes) from settlement_error
             raise NarrativeBudgetCallError(
                 code, outcome, metrics, http_status=http_status,
                 response_stage=response_stage, provider_code=provider_code,
                 finish_reason=finish_reason, content_bytes=content_bytes, failed_final=failed_final,
-            ) from None
+            ) from error
         usage = None
         if response.input_tokens is not None and response.output_tokens is not None:
             usage = ModelUsage(response.input_tokens, response.output_tokens)
@@ -355,10 +355,10 @@ class BudgetedNarrativeCaller:
                 )
         except NarrativeBudgetCallError:
             raise
-        except Exception:
+        except Exception as original_error:
             raise NarrativeBudgetCallError(
                 "MODEL_BUDGET_STORE_FAILURE", HandlerOutcome.TERMINAL_FAILURE, metrics
-            ) from None
+            ) from original_error
         return response, metrics
 
     def _recover(self, context, request, request_sha256):
@@ -393,9 +393,9 @@ class BudgetedNarrativeCaller:
                     lease_token=current.lease_token, runtime_generation=current.runtime_generation,
                     request_sha256=request_sha256, verified_response_sha256=pin.body_sha256, now=self._clock())
             return record, pin, saved_body
-        except Exception:
+        except Exception as original_error:
             raise NarrativeBudgetCallError("MODEL_PAID_RESPONSE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
-                _metrics(record, 0)) from None
+                _metrics(record, 0)) from original_error
 
     def _settle(
         self,
@@ -430,14 +430,14 @@ class BudgetedNarrativeCaller:
                 )
             return _metrics(record, duration_ms, reasoning_tokens=reasoning_tokens,
                             usage_diagnostic=usage_diagnostic)
-        except Exception:
+        except Exception as original_error:
             # The original reservation remains if SQLite fails; do not leak a
             # provider exception or pretend the request was free.
             raise NarrativeBudgetCallError(
                 "MODEL_BUDGET_STORE_FAILURE",
                 HandlerOutcome.TERMINAL_FAILURE,
                 _metrics(fallback, duration_ms),
-            ) from None
+            ) from original_error
 
 
 __all__ = [

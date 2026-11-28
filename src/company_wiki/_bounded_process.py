@@ -99,7 +99,7 @@ def _spawn(command, input_bytes, cwd, env):
     )
     try:
         job = _assign_windows_job(proc) if windows else None
-    except BaseException:
+    except BaseException as original_error:
         # Bootstrap cannot create target children before the barrier release.
         error = TransportError("could not establish owned process tree")
         error.provider_started = False
@@ -109,7 +109,7 @@ def _spawn(command, input_bytes, cwd, env):
             _close_pipes(proc)
         except Exception as cleanup_error:
             error.add_note(f"bootstrap cleanup failed: {type(cleanup_error).__name__}")
-        raise error from None
+        raise error from original_error
     return proc, job
 
 

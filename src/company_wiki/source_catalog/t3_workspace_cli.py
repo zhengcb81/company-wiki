@@ -9,6 +9,7 @@ import re
 import sys
 from typing import Any
 
+from company_wiki import runtime_feedback
 from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
 
 from .cli import main as catalog_main
@@ -95,8 +96,9 @@ def _workspace_response(args: argparse.Namespace, request: Any, response: dict[s
         response.update(status="observed", checkpoint=checkpoint, facts=service.observe(binding, checkpoint))
 
 
+@runtime_feedback.entry("t3-workspace")
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
+    parser = runtime_feedback.ArgumentParser(description=__doc__, allow_abbrev=False)
     parser.add_argument("--workspace-root", required=True, type=Path)
     parser.add_argument("--owner-root", type=Path)
     parser.add_argument("--acquisition-config", type=Path)
@@ -112,8 +114,10 @@ def main(argv: list[str] | None = None) -> int:
             raise WorkspaceError("invalid_request")
         _workspace_response(args, json.load(sys.stdin), response)
     except WorkspaceError as error:
+        runtime_feedback.refusal("failed", str(error))
         response.update(status="failed", error_code=str(error))
     except (FileMutexLockedError, OSError, ValueError, RuntimeError, KeyError, TypeError) as error:
+        runtime_feedback.refusal("failed", "workspace_operation_failed")
         response.update(status="failed", error_code="workspace_operation_failed",
                         error_type=type(error).__name__)
     print(json.dumps(response, ensure_ascii=True, separators=(",", ":")))
@@ -121,4 +125,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main))

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from company_wiki import runtime_feedback
 
-import argparse
 import json
 from pathlib import Path
 import sqlite3
@@ -19,9 +18,9 @@ from .service import SourceCatalog
 _REQUEST_BYTES = 65_536
 
 
-@runtime_feedback.entry("source-citation")
+@runtime_feedback.entry("source-citation", machine_stderr=True)
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     args = parser.parse_args(argv)
     catalog = None
@@ -50,4 +49,4 @@ def main(argv=None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main, machine_stderr=True))

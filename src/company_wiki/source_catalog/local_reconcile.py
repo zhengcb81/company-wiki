@@ -173,8 +173,8 @@ def _sec_cache(catalog, original, primary, budget):
             try:
                 if date.fromisoformat(published).isoformat() != published:
                     raise ValueError()
-            except (ValueError, TypeError):
-                raise SourceReadError("blocked", "publication_date_invalid") from None
+            except (ValueError, TypeError) as original_error:
+                raise SourceReadError("blocked", "publication_date_invalid") from original_error
         expected = (
             "https://www.sec.gov/Archives/edgar/data/"
             + primary["cik"]
@@ -236,8 +236,8 @@ def _sec_sidecar(catalog, original, identity, budget):
             try:
                 if date.fromisoformat(published).isoformat() != published:
                     raise ValueError()
-            except (ValueError, TypeError):
-                raise SourceReadError("blocked", "publication_date_invalid") from None
+            except (ValueError, TypeError) as original_error:
+                raise SourceReadError("blocked", "publication_date_invalid") from original_error
         observations.append({"published_date": published, "source_url": meta.get("source_url"),
                              "provider": meta.get("provider"),
                              "provider_document_id": meta.get("provider_document_id"),

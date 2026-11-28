@@ -84,8 +84,8 @@ def _validate(value: Any) -> None:
         cutoff = date.fromisoformat(value["as_of_date"])
         if cutoff.isoformat() != value["as_of_date"]:
             raise ValueError("noncanonical date")
-    except (TypeError, ValueError):
-        raise SubjectBindingError("invalid projection as-of date") from None
+    except (TypeError, ValueError) as original_error:
+        raise SubjectBindingError("invalid projection as-of date") from original_error
 
 
 NARRATIVE_SUBJECT_REF_SCHEMA = "narrative-subject-ref/1"

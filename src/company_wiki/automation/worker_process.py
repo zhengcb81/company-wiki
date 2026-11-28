@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Protocol, cast
 
-from company_wiki import runtime_feedback, runtime_trace
+from company_wiki import runtime_feedback, runtime_journal
 from company_wiki.diagnostic_redaction import format_diagnostic_exception
 from company_wiki.diagnostic_stream import RedactedTextStream
 from company_wiki.id_scope import normalize_id_scope
@@ -147,7 +147,7 @@ def validate_runtime(
 
 
 def _worker_event(spec: WorkerProcessSpec, step: str, status: str, *, exit_code: int | None = None) -> None:
-    runtime_trace.write_event(
+    runtime_journal.write_event(
         "worker-process", spec.run_id, spec.attempt_id, step, status,
         source_file=__file__, exit_code=exit_code,
     )
@@ -174,7 +174,7 @@ def _child_stream(spec: WorkerProcessSpec, name: str) -> RedactedTextStream:
 
 def _job_lifecycle(spec: WorkerProcessSpec, runtime: WorkerRuntime) -> Callable[[str, ClaimedWork], None]:
     def observe(phase: str, claimed: ClaimedWork) -> None:
-        runtime_trace.write_event(
+        runtime_journal.write_event(
             "worker-job", claimed.job.job_id, claimed.attempt.attempt_id, phase, "observed",
             source_file=__file__, input_ref=claimed.job.input_hash, related_run_id=spec.run_id,
         )
@@ -230,7 +230,7 @@ def run_worker_process(
             # multiprocessing otherwise renders the original exception outside
             # the captured streams at the inherited terminal boundary.
             code = exc.code if isinstance(exc, SystemExit) and isinstance(exc.code, int) else 1
-            raise SystemExit(code or 1) from None
+            raise SystemExit(code or 1) from exc
         finally:
             if runtime is not None:
                 try:

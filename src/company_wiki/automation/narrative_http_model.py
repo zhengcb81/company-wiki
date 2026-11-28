@@ -336,8 +336,8 @@ class NarrativeHTTPModel:
             body = json.dumps(
                 payload, ensure_ascii=False, separators=(",", ":")
             ).encode("utf-8")
-        except (ValueError, TypeError, UnicodeError):
-            raise ModelResponseError("MODEL_REQUEST_INVALID") from None
+        except (ValueError, TypeError, UnicodeError) as original_error:
+            raise ModelResponseError("MODEL_REQUEST_INVALID") from original_error
         if len(body) > self.max_request_bytes:
             raise ModelRequestTooLargeError("MODEL_REQUEST_TOO_LARGE")
         return body
@@ -406,10 +406,10 @@ class NarrativeHTTPModel:
                 response_sink(complete_body, http_status=response.status,
                     duration_ms=max(0, int((time.monotonic() - started) * 1000)))
             return self._response(request, complete_body, started, http_status=response.status)
-        except TimeoutError:
-            raise ModelTimeoutError("MODEL_TIMEOUT") from None
-        except (OSError, http.client.HTTPException, ValueError, UnicodeError):
-            raise ModelResponseError("MODEL_HTTP_TRANSPORT") from None
+        except TimeoutError as original_error:
+            raise ModelTimeoutError("MODEL_TIMEOUT") from original_error
+        except (OSError, http.client.HTTPException, ValueError, UnicodeError) as original_error:
+            raise ModelResponseError("MODEL_HTTP_TRANSPORT") from original_error
         finally:
             connection.close()
 
@@ -472,11 +472,11 @@ class NarrativeHTTPModel:
             IndexError,
             AttributeError,
             RecursionError,
-        ):
+        ) as original_error:
             raise ModelEnvelopeError(stage, http_status=http_status, provider_code=provider_code,
                 input_tokens=input_tokens, output_tokens=output_tokens,
                 reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
-                duration_ms=elapsed()) from None
+                duration_ms=elapsed()) from original_error
         duration_ms = elapsed()
         if truncated:
             raise ModelOutputTruncatedError(

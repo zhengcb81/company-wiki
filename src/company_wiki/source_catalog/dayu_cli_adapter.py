@@ -299,7 +299,7 @@ class DayuCliDownloadAdapter:
         except (ChildFailed, ChildTimeout) as exc:
             failure = exc
         except (OSError, TransportError) as exc:
-            raise DayuCliAdapterError(f"Dayu CLI process failed: {type(exc).__name__}") from None
+            raise DayuCliAdapterError(f"Dayu CLI process failed: {type(exc).__name__}") from exc
         finally:
             diagnostic.write(decoder.decode(b"", final=True))
             diagnostic.finish()
@@ -307,7 +307,7 @@ class DayuCliDownloadAdapter:
         if candidates or failure is None:
             return candidates
         reason = f"exited {failure.returncode}" if isinstance(failure, ChildFailed) else "timed out"
-        raise DayuCliAdapterError(f"Dayu CLI {reason}: {stderr_tail.strip() or 'no output'}") from None
+        raise DayuCliAdapterError(f"Dayu CLI {reason}: {stderr_tail.strip() or 'no output'}") from failure
 
     def discover_page(
         self, request: SourceRequest, *, since_date: str | None = None,

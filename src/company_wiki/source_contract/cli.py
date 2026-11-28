@@ -3,6 +3,7 @@
 import argparse
 
 from company_wiki import runtime_feedback
+from company_wiki.diagnostic_redaction import redact_text
 from collections.abc import Sequence
 from io import StringIO
 from pathlib import Path
@@ -80,7 +81,7 @@ def _load_base(path: Path | None) -> SourceExportBundle | None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         prog="company-wiki-source-export",
         description="Read-only deterministic source-contract export to stdout",
     )
@@ -141,12 +142,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             base=base,
         )
     except (OSError, TypeError, ValueError) as exc:
-        print(f"source export failed: {exc}", file=sys.stderr)
+        runtime_feedback.refusal("failed", "source_export_failed")
+        print(redact_text(f"source export failed: {exc}"), file=sys.stderr)
         return 2
 
     sys.stdout.write(bundle.canonical_json() + "\n")
     return 0
 
 
+def console() -> int:
+    return runtime_feedback.run_cli(main)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(console())

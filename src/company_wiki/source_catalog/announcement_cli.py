@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from company_wiki import runtime_feedback
+from company_wiki.diagnostic_redaction import redact_text
 
 import argparse
 from collections.abc import Sequence
@@ -20,7 +21,7 @@ def _configure_utf8_streams() -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         prog="company-wiki-collect-announcement",
         description=(
             "Create one immutable announcement from an explicit official exchange URL"
@@ -51,7 +52,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     except (OSError, TypeError, ValueError) as exc:
         runtime_feedback.record("collect-announcement", "failed", reason=type(exc).__name__, error=exc)
-        print(f"announcement collection failed: {exc}", file=sys.stderr)
+        print(redact_text(f"announcement collection failed: {exc}"), file=sys.stderr)
         return 2
     sys.stdout.write(receipt.canonical_json() + "\n")
     return 0
@@ -60,5 +61,9 @@ def main(argv: Sequence[str] | None = None) -> int:
 __all__ = ["build_parser", "main"]
 
 
+def console() -> int:
+    return runtime_feedback.run_cli(main)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(console())

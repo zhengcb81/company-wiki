@@ -1246,8 +1246,8 @@ class SourceResolver:
             raise SourceReadError("unavailable", "unsupported_version")
         try:
             validated_ref = SourceRef.from_dict(ref.to_dict())
-        except (SourceRefError, TypeError, ValueError):
-            raise SourceReadError("unavailable", "invalid_source_ref") from None
+        except (SourceRefError, TypeError, ValueError) as original_error:
+            raise SourceReadError("unavailable", "invalid_source_ref") from original_error
         if validated_ref != ref:
             raise SourceReadError("unavailable", "invalid_source_ref")
         if not isinstance(location_id, str) or not location_id.strip():
@@ -1268,8 +1268,8 @@ class SourceResolver:
                 and self.catalog.reader.document(ref.document_id) is None
             ):
                 raise SourceReadError("not_indexed", "document_not_indexed")
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+            raise SourceReadError("unavailable", "catalog_unavailable") from original_error
         if version is None:
             raise SourceReadError("not_found", "document_source_mismatch")
         if (

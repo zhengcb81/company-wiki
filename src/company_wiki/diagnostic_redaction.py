@@ -166,6 +166,8 @@ _UNFINISHED_AUTH = re.compile(
     r"(?i)(?:(?<![A-Za-z0-9])authorization[ \t]*[:=][ \t]*(?:\S+)?|^[ \t]*(?:bearer|basic))$"
 )
 _AUTH_HEADER = re.compile(r"(?i)(?<![A-Za-z0-9])authorization[ \t]*[:=]")
+_URL_USERINFO = re.compile(r"(?<![A-Za-z0-9+.-])(?P<scheme>[A-Za-z][A-Za-z0-9+.-]*://)[^/\s?#]+@")
+_PROVIDER_SECRET = re.compile(r"(?<![A-Za-z0-9_-])(?:sk-|tvly-|ghp_|AIza)[A-Za-z0-9_-]{12,}")
 
 
 def authorization_header(line: str) -> bool:
@@ -203,7 +205,9 @@ def redact_text(text: Any) -> Any:
         return text
     if "\n" in text or "\r" in text:
         text = _redact_authorization_folds(text)
-    return _AUTH_PATTERN.sub(lambda m: m.group("key") + REDACT, _redact_assignments(text))
+    text = _URL_USERINFO.sub(lambda match: match.group("scheme") + REDACT + "@", text)
+    text = _PROVIDER_SECRET.sub(REDACT, text)
+    return _AUTH_PATTERN.sub(lambda match: match.group("key") + REDACT, _redact_assignments(text))
 
 
 def _redact_authorization_folds(text: str) -> str:

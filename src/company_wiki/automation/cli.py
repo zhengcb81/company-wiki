@@ -109,7 +109,7 @@ def _plan(db_path: Path, event_id: str | None) -> dict[str, Any]:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         prog="python -m company_wiki.automation.cli",
         description="Automation diagnostics and observation maintenance",
     )
@@ -181,6 +181,7 @@ def _flush_command(args: argparse.Namespace) -> int:
     return int(bool(result["deferred"] or result["unavailable"]))
 
 
+@runtime_feedback.entry("automation", quiet_success=True)
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "status":
@@ -198,4 +199,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main))

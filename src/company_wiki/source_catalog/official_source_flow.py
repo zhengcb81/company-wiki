@@ -116,8 +116,8 @@ def _metadata(value):
             try:
                 if date.fromisoformat(item).isoformat() != item:
                     raise ValueError()
-            except (ValueError, TypeError):
-                raise OfficialSourceError("invalid_" + field) from None
+            except (ValueError, TypeError) as original_error:
+                raise OfficialSourceError("invalid_" + field) from original_error
         result[field] = item
     for field in ["market", "security_id", "fiscal_year", "fiscal_period", "language"]:
         result.setdefault(field, None)
@@ -157,8 +157,8 @@ def _validate_bytes(data, mime):
             raise OfficialSourceError("mime_mismatch")
         try:
             validate_native_pdf(data)
-        except NativePdfError:
-            raise OfficialSourceError("invalid_pdf") from None
+        except NativePdfError as original_error:
+            raise OfficialSourceError("invalid_pdf") from original_error
     elif mime == _PPTX_MIME:
         _validate_presentation(data)
     elif mime == _DOCX_MIME:
@@ -168,8 +168,8 @@ def _validate_bytes(data, mime):
 
         try:
             text = data.decode("utf-8-sig")
-        except UnicodeError:
-            raise OfficialSourceError("invalid_html_encoding") from None
+        except UnicodeError as original_error:
+            raise OfficialSourceError("invalid_html_encoding") from original_error
         soup = BeautifulSoup(text, "html.parser")
         if not soup.find(["html", "body", "article", "p", "h1", "table"]):
             raise OfficialSourceError("mime_mismatch")
@@ -197,8 +197,8 @@ def _validate_bytes(data, mime):
 
         try:
             extract_transcript_material(data, mime_type=mime)
-        except TranscriptMaterialError:
-            raise OfficialSourceError("invalid_text_original") from None
+        except TranscriptMaterialError as original_error:
+            raise OfficialSourceError("invalid_text_original") from original_error
 
 
 def _validate_presentation(data):
@@ -217,8 +217,8 @@ def _validate_presentation(data):
         )
         if parsed.structure.page_count < 1:
             raise ValueError("empty or invalid presentation package")
-    except (ValueError, zipfile.BadZipFile):
-        raise OfficialSourceError("invalid_pptx") from None
+    except (ValueError, zipfile.BadZipFile) as original_error:
+        raise OfficialSourceError("invalid_pptx") from original_error
 
 
 def _validate_docx(data):
@@ -233,8 +233,8 @@ def _validate_docx(data):
             limits=NormalizationLimits(max_source_bytes=len(data), deadline=time.monotonic()+15))
         if not parsed.units:
             raise ValueError("DOCX has no current visible body")
-    except ValueError:
-        raise OfficialSourceError("invalid_docx") from None
+    except ValueError as original_error:
+        raise OfficialSourceError("invalid_docx") from original_error
 
 
 def _byte_cap(value):
@@ -252,16 +252,16 @@ def _validate_capture_receipt(capture, *, sha, byte_size=None):
         raise OfficialSourceError("capture_byte_identity_mismatch")
     try:
         json.dumps(capture, ensure_ascii=False, allow_nan=False).encode()
-    except (TypeError, ValueError, RecursionError):
-        raise OfficialSourceError("invalid_capture_receipt") from None
+    except (TypeError, ValueError, RecursionError) as original_error:
+        raise OfficialSourceError("invalid_capture_receipt") from original_error
     for field in ["capture_method", "tool_name", "tool_call_id", "captured_at"]:
         _text(capture.get(field), field)
     try:
         dt = datetime.fromisoformat(capture["captured_at"].replace("Z", "+00:00"))
         if dt.tzinfo is None:
             raise ValueError()
-    except (ValueError, TypeError):
-        raise OfficialSourceError("invalid_capture_time") from None
+    except (ValueError, TypeError) as original_error:
+        raise OfficialSourceError("invalid_capture_time") from original_error
     if "http_status" in capture and (type(capture["http_status"]) is not int
                                      or not 100 <= capture["http_status"] <= 599):
         raise OfficialSourceError("invalid_capture_receipt")
@@ -284,8 +284,8 @@ def _validate_capture_receipt(capture, *, sha, byte_size=None):
             cost = Decimal(usage["cost_usd"])
             if not cost.is_finite() or cost < 0:
                 raise ValueError()
-        except (InvalidOperation, ValueError):
-            raise OfficialSourceError("invalid_capture_receipt") from None
+        except (InvalidOperation, ValueError) as original_error:
+            raise OfficialSourceError("invalid_capture_receipt") from original_error
     return dt
 
 
@@ -518,8 +518,8 @@ def _read_capture_record(path, *, error_code):
         state = json.loads(raw, object_pairs_hook=unique_pairs, parse_constant=invalid_constant)
         if not isinstance(state, dict):
             raise ValueError()
-    except (ValueError, UnicodeError, RecursionError):
-        raise OfficialSourceError(error_code) from None
+    except (ValueError, UnicodeError, RecursionError) as original_error:
+        raise OfficialSourceError(error_code) from original_error
     return state
 
 
@@ -550,8 +550,8 @@ def _load_retained(catalog, capture_id, *, require_original=True):
         _validate_capture_receipt(request.get("capture_receipt"), sha=request["content_sha256"])
         if name != capture_id + _CAPTURE_SUFFIXES[request["mime_type"]]:
             raise OfficialSourceError("invalid_retained_capture")
-    except OfficialSourceError:
-        raise OfficialSourceError("invalid_retained_capture") from None
+    except OfficialSourceError as original_error:
+        raise OfficialSourceError("invalid_retained_capture") from original_error
     staged = root / name
     if (staged.is_symlink() or (require_original and not staged.is_file())
             or (staged.exists() and not staged.is_file())):
@@ -626,8 +626,8 @@ def _replay_completed(catalog, capture_id, *, max_bytes=None):
             raise OfficialSourceError("invalid_completed_capture")
         cap = _byte_cap(record.get("max_bytes"))
         _validate_capture_receipt(record.get("capture_receipt"), sha=sha, byte_size=value["byte_size"])
-    except OfficialSourceError:
-        raise OfficialSourceError("invalid_completed_capture") from None
+    except OfficialSourceError as original_error:
+        raise OfficialSourceError("invalid_completed_capture") from original_error
     if max_bytes is not None:
         cap = min(cap, _byte_cap(max_bytes))
     if value["byte_size"] > cap:

@@ -170,8 +170,8 @@ class DuplicateCleanupService:
         normalized_text = text.casefold().strip() if text else ""
         try:
             records = self.catalog.duplicate_cleanup_location_records()
-        except CatalogQueryUnavailable:
-            raise DuplicateCleanupError("catalog_unavailable") from None
+        except CatalogQueryUnavailable as original_error:
+            raise DuplicateCleanupError("catalog_unavailable") from original_error
 
         locations_by_key: dict[tuple[str, str], list[dict[str, Any]]] = {}
         for record in records:

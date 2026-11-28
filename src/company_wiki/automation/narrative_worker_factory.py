@@ -60,8 +60,8 @@ def _text(value: object) -> str:
 def _options(spec: WorkerProcessSpec) -> tuple[dict[str, Any], dict[str, Any]]:
     try:
         options = json.loads(spec.runtime_options_json)
-    except (ValueError, TypeError):
-        raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID") from None
+    except (ValueError, TypeError) as original_error:
+        raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID") from original_error
     if not isinstance(options, dict) or not _OPTION_FIELDS <= options.keys() or not options.keys() <= (_OPTION_FIELDS | {"max_final_bytes", "normalization_config", "normalization_parsers", "normalization_deadline", "response_storage"}):
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
     final_bytes = options.get("max_final_bytes", 2 * 1024 * 1024)
@@ -106,8 +106,8 @@ def _decode_binding(binding_json: str | None) -> dict[str, Any] | None:
         return None
     try:
         binding = json.loads(binding_json)
-    except (TypeError, json.JSONDecodeError):
-        raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from None
+    except (TypeError, json.JSONDecodeError) as original_error:
+        raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from original_error
     if not isinstance(binding, dict):
         raise ValueError("NARRATIVE_RUN_GENERATION_INVALID")
     return binding
@@ -143,8 +143,8 @@ def _runtime_values(binding: dict[str, Any] | None) -> tuple[dict[str, str], str
                 raise ValueError("NARRATIVE_RUN_GENERATION_INVALID")
             values[item_key] = value
         return values, selector_version
-    except (AttributeError, TypeError, json.JSONDecodeError):
-        raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from None
+    except (AttributeError, TypeError, json.JSONDecodeError) as original_error:
+        raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from original_error
 
 
 def _runtime_snapshot(binding_json: str | None) -> tuple[dict[str, str], str]:
@@ -320,8 +320,8 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     try:
         run_store = NarrativeRunStore(Path(spec.db_path))
         run = run_store.get_run(options["run_id"])
-    except (NarrativeRunError, AutomationStoreError, InvalidDatabasePathError):
-        raise ValueError("NARRATIVE_RUN_STORE_UNAVAILABLE") from None
+    except (NarrativeRunError, AutomationStoreError, InvalidDatabasePathError) as original_error:
+        raise ValueError("NARRATIVE_RUN_STORE_UNAVAILABLE") from original_error
     if run is None:
         raise ValueError("NARRATIVE_RUN_NOT_FOUND")
     if set(spec.allowed_job_ids) != set(run.job_ids):
@@ -356,8 +356,8 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     if spec.role in {"model", "mixed"}:
         try:
             model = NarrativeHTTPModel(**model_options)
-        except (TypeError, ValueError):
-            raise ValueError("NARRATIVE_MODEL_CONFIG_INVALID") from None
+        except (TypeError, ValueError) as original_error:
+            raise ValueError("NARRATIVE_MODEL_CONFIG_INVALID") from original_error
         _verify_effective_model(model, snapshot.frozen_models)
         paid_responses = None
         from .narrative_model_runtime import supports_durable_paid_response

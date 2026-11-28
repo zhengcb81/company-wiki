@@ -2,6 +2,8 @@
 
 from collections.abc import Sequence
 
+from company_wiki import runtime_feedback
+
 from .incremental_command import run_incremental as run_incremental
 
 __all__ = ["main", "run_incremental"]
@@ -14,4 +16,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main))

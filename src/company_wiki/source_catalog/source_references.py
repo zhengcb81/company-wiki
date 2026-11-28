@@ -31,8 +31,8 @@ def query_source_reference(
         raise ValueError("expected_sha256 must be lowercase SHA-256")
     try:
         row = reader_factory().exact_source_version(document_id)
-    except (CatalogReaderUnavailable, sqlite3.Error):
-        raise SourceReadError("unavailable", "catalog_unavailable") from None
+    except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+        raise SourceReadError("unavailable", "catalog_unavailable") from original_error
     if row is None:
         raise SourceReadError("not_indexed", "document_not_indexed")
     if row["source_status"] != "active":
@@ -75,8 +75,8 @@ def query_exact_pair_reference(
         row = reader.exact_source_pair(document_id, source_id)
         if row is None and reader.document(document_id) is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
-    except (CatalogReaderUnavailable, sqlite3.Error):
-        raise SourceReadError("unavailable", "catalog_unavailable") from None
+    except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+        raise SourceReadError("unavailable", "catalog_unavailable") from original_error
     if row is None:
         raise SourceReadError("not_found", "document_source_mismatch")
     if row["source_status"] != "active":

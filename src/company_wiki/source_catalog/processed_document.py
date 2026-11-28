@@ -90,8 +90,8 @@ def _decode_cursor(token: str, *, content_sha256: str) -> tuple[int, str]:
     try:
         raw = base64.urlsafe_b64decode(token.encode("ascii"))
         payload = json.loads(raw.decode("utf-8"))
-    except (binascii.Error, UnicodeError, ValueError):
-        raise SourceReadError("blocked", "invalid_continuation") from None
+    except (binascii.Error, UnicodeError, ValueError) as original_error:
+        raise SourceReadError("blocked", "invalid_continuation") from original_error
     expected = {"v", "after_index", "after_unit_id", "content_sha256"}
     if (
         not isinstance(payload, dict)

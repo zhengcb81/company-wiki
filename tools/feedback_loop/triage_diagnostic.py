@@ -16,6 +16,8 @@ from stat import S_ISREG
 import subprocess
 from urllib import error as url_error
 
+from company_wiki.diagnostic_redaction import redact_text
+
 from .observations import decode_observation, unique_fields
 
 _NATIVE_DETAILS = re.compile(r"feedback-[0-9a-f]{32}\.diagnostic\.json")
@@ -29,7 +31,7 @@ _EXCEPTION_TYPES = {
 _PUBLISHED_CWP_ERRORS = {"CatalogConfigError", "CatalogReaderUnavailable", "SourceReadError"}
 
 
-def _class_label(value: object) -> str | None:
+def _class_label(value: object, module: object, origin: str) -> str | None:
     if not isinstance(value, str):
         return None
     parts = value.split(".")
@@ -39,6 +41,11 @@ def _class_label(value: object) -> str | None:
     if name in _EXCEPTION_TYPES or name in _PUBLISHED_CWP_ERRORS:
         return name
     if _CLASS_LABEL.fullmatch(name) and not name.isupper():
+        owner_package = origin.replace("-", "_")
+        if (isinstance(module, str) and module.partition(".")[0] == owner_package
+                and all(part.isascii() and part.isidentifier() for part in module.split("."))
+                and redact_text(name) == name):
+            return name
         return "OwnerException"
     return None
 
@@ -56,10 +63,13 @@ def _read_candidate(path: Path) -> bytes | None:
         return stream.read()
 
 
-def _exceptions(value: list) -> list[dict]:
+def _exceptions(value: list, origin: str) -> list[dict]:
     facts = []
     for exception in value:
-        if not isinstance(exception, dict) or (name := _class_label(exception.get("type"))) is None:
+        if not isinstance(exception, dict):
+            continue
+        name = _class_label(exception.get("type"), exception.get("module"), origin)
+        if name is None:
             continue
         exception_type = _EXCEPTION_TYPES.get(name)
         fact = {"type": name}
@@ -113,4 +123,4 @@ def native_diagnostic_facts(observation: dict, origin: str, roots: Iterable[Path
     exceptions = diagnostic.get("exceptions")
     if not isinstance(exceptions, list):
         return unavailable
-    return {"status": "available", "sha256": sha256(original).hexdigest(), "exceptions": _exceptions(exceptions)}
+    return {"status": "available", "sha256": sha256(original).hexdigest(), "exceptions": _exceptions(exceptions, origin)}

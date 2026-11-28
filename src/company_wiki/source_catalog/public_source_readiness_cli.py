@@ -75,8 +75,8 @@ def _int_option(
         return default
     try:
         value = int(raw, 10)
-    except ValueError:
-        raise ValueError("limits must be integers") from None
+    except ValueError as original_error:
+        raise ValueError("limits must be integers") from original_error
     if not low <= value <= high:
         raise ValueError("limits out of range")
     return value
@@ -87,14 +87,14 @@ def _float_option(raw: str | None, *, default: float) -> float:
         return default
     try:
         value = float(raw)
-    except ValueError:
-        raise ValueError("deadline must be a number") from None
+    except ValueError as original_error:
+        raise ValueError("deadline must be a number") from original_error
     if value != value or value in (float("inf"), float("-inf")) or value < 0:
         raise ValueError("deadline out of range")
     return value
 
 
-@runtime_feedback.entry("source-readiness")
+@runtime_feedback.entry("source-readiness", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -153,4 +153,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main, machine_stderr=True))

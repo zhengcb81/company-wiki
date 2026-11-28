@@ -13,6 +13,8 @@ only — visibility_state='shadow', reader stays v1/legacy).
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import json
 import sqlite3
 import uuid
@@ -329,10 +331,9 @@ def run_backfill(
     return result
 
 
+@runtime_feedback.entry("backfill-v2")
 def main() -> int:
-    import argparse
-
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         description="WU-902 legacy company_raw/dayu -> v2 backfill")
     parser.add_argument("--catalog", type=Path, required=True)
     parser.add_argument("--roots", default="company_raw,dayu_portfolio")
@@ -351,4 +352,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main))

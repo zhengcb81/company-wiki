@@ -10,6 +10,7 @@ from pathlib import Path
 import sys
 from typing import Sequence
 
+from .error_taxonomy import structured_error
 from .security_identity import (
     IdentityStatus,
     OfficialSecurityMasterRefresher,
@@ -21,7 +22,7 @@ from .security_identity import (
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         prog="company-wiki-identify",
         description="Resolve a company name, alias, or ticker to a verified listed security.",
     )
@@ -43,7 +44,7 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-@runtime_feedback.entry("source-identity")
+@runtime_feedback.entry("source-identity", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -69,13 +70,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         if refresh is not None:
             payload["refresh"] = refresh
     except Exception as exc:
-        # ZR-204: unified error taxonomy emission (canonical code + retryable).
-        from .error_taxonomy import structured_error
-
-        print(
-            json.dumps(structured_error(exc), ensure_ascii=False, sort_keys=True),
-            file=sys.stderr,
-        )
+        diagnostic = structured_error(exc)
+        runtime_feedback.refusal("failed", diagnostic["error_type"])
+        print(json.dumps(diagnostic, ensure_ascii=False, sort_keys=True), file=sys.stderr)
         return 1
     print(
         json.dumps(
@@ -88,8 +85,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0 if result.status is IdentityStatus.RESOLVED else 2
 
 
+def console() -> int:
+    return runtime_feedback.run_cli(main, machine_stderr=True)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(console())
 
 
 __all__ = ["main"]

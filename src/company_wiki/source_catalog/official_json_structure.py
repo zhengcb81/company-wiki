@@ -245,8 +245,8 @@ class _Scanner:
             raise JsonStructureError("empty_original")
         try:
             body.decode("utf-8")
-        except UnicodeDecodeError:
-            raise JsonStructureError("invalid_json_encoding") from None
+        except UnicodeDecodeError as original_error:
+            raise JsonStructureError("invalid_json_encoding") from original_error
         self.pos = 3 if has_bom else 0
         self.skip_ws()
         if self.pos >= len(self.raw):
@@ -440,8 +440,8 @@ class _Scanner:
             raise JsonStructureError("invalid_json_syntax")
         try:
             return int(chunk, 16)
-        except ValueError:
-            raise JsonStructureError("invalid_json_syntax") from None
+        except ValueError as original_error:
+            raise JsonStructureError("invalid_json_syntax") from original_error
 
 
 def parse_json_structure(data: bytes, *, limits: JsonStructureLimits | None = None

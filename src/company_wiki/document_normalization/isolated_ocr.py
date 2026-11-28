@@ -105,8 +105,8 @@ def _read_json(path: Path, cap: int, *, deadline):
         raise LocalOCRError("OCR_RESULT_BYTES_EXCEEDED")
     try:
         return json.loads(raw)
-    except (ValueError, UnicodeError):
-        raise LocalOCRError("OCR_RESULT_INVALID") from None
+    except (ValueError, UnicodeError) as original_error:
+        raise LocalOCRError("OCR_RESULT_INVALID") from original_error
 
 
 def _write_json(path: Path, value, cap: int, *, deadline):
@@ -166,8 +166,8 @@ def _decode_result(value):
             tuple(OCRLine(**line) for line in value["lines"]),
             diagnostics,
         )
-    except (TypeError, ValueError, KeyError, AttributeError):
-        raise LocalOCRError("OCR_RESULT_INVALID") from None
+    except (TypeError, ValueError, KeyError, AttributeError) as original_error:
+        raise LocalOCRError("OCR_RESULT_INVALID") from original_error
 
 
 def _worker_main(directory_text: str, startup_deadline: float):

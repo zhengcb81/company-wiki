@@ -66,7 +66,7 @@ def _unique_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
-@runtime_feedback.entry("company-sources")
+@runtime_feedback.entry("company-sources", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -97,5 +97,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             catalog.close()
 
 
+def console() -> int:
+    return runtime_feedback.run_cli(main, machine_stderr=True)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(console())

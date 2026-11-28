@@ -156,7 +156,7 @@ RETIRED_MAINTENANCE_COMMANDS = ('activation', 'runtime-policy', 'focus-cleanup',
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         prog="company-wiki-source-catalog",
         description="Catalog source versions, verify raw documents, and export read-only indexes.",
     )
@@ -789,7 +789,7 @@ def _report_error(exc: Exception) -> int:
     return 1
 
 
-@runtime_feedback.entry("source-catalog")
+@runtime_feedback.entry("source-catalog", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     # Official operations own their parser, catalog lifecycle and raw-byte output.
     # Delegate before configuring streams or opening the generic catalog.
@@ -1348,8 +1348,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
+def console() -> int:
+    return runtime_feedback.run_cli(main, machine_stderr=True)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(console())
 
 
 __all__ = ["main"]

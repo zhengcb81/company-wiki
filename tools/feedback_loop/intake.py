@@ -19,6 +19,8 @@ from .coordinator import advance, settle
 from .diagnostics import background_command, background_environment, format_diagnostic_exception, redact_text, run_background
 from .host import BatchedReconcile, RECONCILE_DEFERRED, process_host, read_hosts
 from .intake_schedule import IntakeSchedule, WAKE_ERRORS
+from company_wiki import runtime_feedback
+
 from .local_host import LocalHost, _save_recovery, _save_recovery_error, host_path
 from .observations import Batch, IDENTITY, decode_observation, digest, read_batch, unique_fields
 from .process_history import ProcessHistory, implementation, utc_now
@@ -672,8 +674,9 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
     return code
 
 
+@runtime_feedback.entry("feedback-intake", local_only=True, quiet_success=True)
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument("--settings", required=True, type=Path)
     parser.add_argument("--hosts", type=Path)
     parser.add_argument("--wait-seconds", default=15, type=int)
@@ -699,6 +702,7 @@ def main(argv=None):
         command = args.command[1:] if args.command and args.command[0] == "--" else args.command
         if not command:
             parser.error("run requires the original command")
+        runtime_feedback.checkpoint("run", input_path=settings)
         return run_observed(settings, hosts_file, args.owner, command, args.wait_seconds)
     if args.mode == "history":
         try:
@@ -706,11 +710,14 @@ def main(argv=None):
             processes = ProcessHistory(database).read(args.run_id, owner=args.owner, attempt_id=args.attempt_id)
             summary = {"status": "found" if processes else "absent", "processes": processes}
         except (OSError, sqlite3.Error, ValueError, TypeError, KeyError) as exc:
+            runtime_feedback.refusal("unavailable", "history_read_unavailable")
             summary = {"status": "unavailable", "processes": [], "error_type": type(exc).__name__}
-    elif args.pending_database is not None:
-        summary = _drain_pending(settings, hosts_file, database=args.pending_database)
     else:
-        summary = drain(settings, hosts_file, owner=args.owner, wait_seconds=args.wait_seconds)
+        runtime_feedback.checkpoint("drain", input_path=settings)
+        if args.pending_database is not None:
+            summary = _drain_pending(settings, hosts_file, database=args.pending_database)
+        else:
+            summary = drain(settings, hosts_file, owner=args.owner, wait_seconds=args.wait_seconds)
     print(json.dumps(summary, ensure_ascii=True))
     return 0
 

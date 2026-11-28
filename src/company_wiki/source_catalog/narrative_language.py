@@ -76,7 +76,7 @@ def _decode_sample(data: bytes) -> str:
             return candidate.decode("utf-8-sig", errors="strict")[:_MAX_SAMPLE_CHARS]
         except UnicodeDecodeError as exc:
             if exc.end != len(candidate) or trailing == 3:
-                raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_INVALID") from None
+                raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_INVALID") from exc
     raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_INVALID")
 
 
@@ -104,8 +104,8 @@ def _text_for_mime(data: bytes, mime_type: str, *, normalization=None) -> str:
                 data, max_pages=5, max_chars_per_page=_MAX_SAMPLE_CHARS,
                 checkpoint=lambda: None,
             ))[:_MAX_SAMPLE_CHARS]
-        except ImportError:
-            raise NarrativeLanguageError("SOURCE_LANGUAGE_PDF_UNAVAILABLE") from None
+        except ImportError as original_error:
+            raise NarrativeLanguageError("SOURCE_LANGUAGE_PDF_UNAVAILABLE") from original_error
         except NativePdfError as exc:
             raise NarrativeLanguageError("SOURCE_LANGUAGE_PDF_INVALID") from exc
 

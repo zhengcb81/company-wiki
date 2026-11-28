@@ -5,7 +5,6 @@ from __future__ import annotations
 from company_wiki import runtime_feedback
 from company_wiki.cli_streams import operation_diagnostics
 
-import argparse
 import json
 from pathlib import Path
 from typing import Sequence
@@ -45,7 +44,7 @@ def _failure_receipt(request, db_path, status, error):
 def main(
     argv: Sequence[str] | None = None, *, loaded_model_options: dict | None = None,
 ) -> int:
-    parser = argparse.ArgumentParser(description="Process explicit source references without translation")
+    parser = runtime_feedback.ArgumentParser(description="Process explicit source references without translation")
     for argument in ("project-root", "catalog-config", "automation-db", "work-dir", "request"):
         parser.add_argument("--" + argument, required=True, type=Path)
     args = parser.parse_args(argv)
@@ -114,5 +113,9 @@ def main(
     return exit_code
 
 
+def console() -> int:
+    return runtime_feedback.run_cli(main)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(console())

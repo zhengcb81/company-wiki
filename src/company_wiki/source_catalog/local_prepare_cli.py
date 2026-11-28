@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from company_wiki import runtime_feedback
-import argparse
 import json
 from pathlib import Path
 import sys
@@ -18,7 +17,7 @@ from .source_reader import SourceReadError
 
 @runtime_feedback.entry("local-source-prepare")
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument(
         "--request", required=True, help="bounded JSON file or - for stdin"
@@ -85,4 +84,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main))

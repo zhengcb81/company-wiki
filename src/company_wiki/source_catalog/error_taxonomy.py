@@ -18,6 +18,8 @@ from __future__ import annotations
 import sqlite3
 from typing import Any
 
+from company_wiki.diagnostic_redaction import redact_text
+
 ERROR_TAXONOMY_VERSION = "1.1"
 ERROR_TAXONOMY_SCHEMA = "error-taxonomy-1.1"
 
@@ -114,7 +116,7 @@ def structured_error(exc: BaseException) -> dict[str, Any]:
     result = {
         "status": "failed",
         "error_type": code,
-        "error": str(exc),
+        "error": redact_text(str(exc)),
         "retryable": retryable,
     }
     if isinstance(exc, CatalogReaderUnavailable) and exc.missing:

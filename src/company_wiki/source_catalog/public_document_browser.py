@@ -120,8 +120,8 @@ def _decode_token(token: Any, field: str) -> dict[str, Any]:
     try:
         padded = token + "=" * (-len(token) % 4)
         payload = parse_json(base64.urlsafe_b64decode(padded.encode("ascii")).decode("utf-8"))
-    except ValueError:
-        raise PublicBrowseError(f"invalid_{field}") from None
+    except ValueError as original_error:
+        raise PublicBrowseError(f"invalid_{field}") from original_error
     if not isinstance(payload, dict) or payload.get("v") != _SNAPSHOT_VERSION:
         raise PublicBrowseError(f"unsupported_{field}")
     return payload

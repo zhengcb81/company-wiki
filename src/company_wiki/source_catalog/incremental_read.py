@@ -91,8 +91,8 @@ def _optional_date(value: Any, name: str) -> str | None:
     text = _text(value, name)
     try:
         parsed = datetime.date.fromisoformat(text)
-    except ValueError:
-        raise IncrementalReadError(f"{name} must be a canonical YYYY-MM-DD date") from None
+    except ValueError as original_error:
+        raise IncrementalReadError(f"{name} must be a canonical YYYY-MM-DD date") from original_error
     if parsed.isoformat() != text:
         raise IncrementalReadError(f"{name} must be a canonical YYYY-MM-DD date")
     return text

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from company_wiki import runtime_feedback
-import argparse
 import json
 from pathlib import Path
 import sys
@@ -108,9 +107,9 @@ def _json_projection_operation(catalog, operation, request) -> dict | bytes:
     raise ValueError("unknown_operation")
 
 
-@runtime_feedback.entry("official-source")
+@runtime_feedback.entry("official-source", machine_stderr=True)
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
     parser.add_argument("--project-root", type=Path)
     parser.add_argument("--operation", choices=(
@@ -280,4 +279,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main, machine_stderr=True))

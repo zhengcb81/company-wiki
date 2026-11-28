@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from company_wiki import runtime_feedback
-import argparse
 import json
 from pathlib import Path
 import sqlite3
@@ -35,9 +34,9 @@ def _emit(value: dict[str, Any], stream) -> None:
     )
 
 
-@runtime_feedback.entry("legacy-source-recovery")
+@runtime_feedback.entry("legacy-source-recovery", machine_stderr=True)
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--operation", choices=("preview", "apply"), default="preview")
     catalog = None
@@ -95,4 +94,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main, machine_stderr=True))

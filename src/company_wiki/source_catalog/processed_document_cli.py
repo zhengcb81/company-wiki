@@ -77,7 +77,7 @@ def _emit_error(status: str, reason: str) -> None:
     )
 
 
-@runtime_feedback.entry("processed-document")
+@runtime_feedback.entry("processed-document", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -106,4 +106,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main, machine_stderr=True))

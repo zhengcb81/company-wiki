@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import argparse
 from contextlib import closing, suppress
 import json
 import logging
@@ -14,6 +13,8 @@ import subprocess
 import sys
 from tempfile import NamedTemporaryFile
 import time
+
+from company_wiki import runtime_feedback
 
 from .coordinator import reconcile_diagnostic_code
 from .diagnostics import (
@@ -866,8 +867,9 @@ def _recover_command(args) -> dict:
     return outcome
 
 
+@runtime_feedback.entry("feedback-host", local_only=True, quiet_success=True)
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     sub = parser.add_subparsers(dest="mode", required=True)
     sub.add_parser("rpc")
@@ -886,6 +888,7 @@ def main(argv=None):
     if args.mode == "recover":
         if args.wait_seconds < 0 or (args.sidecar and not args.hosts):
             parser.error("recovery sidecars require --hosts and a nonnegative wait")
+        runtime_feedback.checkpoint("recover", input_path=args.config)
         outcome = _recover_command(args)
         if sys.stdout is not None:
             print(json.dumps(outcome))

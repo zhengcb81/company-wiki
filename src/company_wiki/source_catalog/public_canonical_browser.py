@@ -196,8 +196,8 @@ def _decode_token(token: Any, field: str) -> dict[str, Any]:
             base64.urlsafe_b64decode(padded.encode("ascii")),
             object_pairs_hook=_unique_pairs, parse_constant=_reject_constant,
         )
-    except (binascii.Error, UnicodeError, ValueError, RecursionError):
-        raise CanonicalBrowseError(f"invalid_{field}") from None
+    except (binascii.Error, UnicodeError, ValueError, RecursionError) as original_error:
+        raise CanonicalBrowseError(f"invalid_{field}") from original_error
     if not isinstance(payload, dict) or payload.get("v") != _SNAPSHOT_VERSION:
         raise CanonicalBrowseError(f"unsupported_{field}")
     return payload
@@ -260,8 +260,8 @@ def parse_bounded_json(raw: bytes, *, max_bytes: int) -> Any:
         return json.loads(
             text, object_pairs_hook=_unique_pairs, parse_constant=_reject_constant,
         )
-    except RecursionError:
-        raise ProofTransportError("stockwiki_proof_envelope_too_deep") from None
+    except RecursionError as original_error:
+        raise ProofTransportError("stockwiki_proof_envelope_too_deep") from original_error
     except ValueError as exc:
         raise ProofTransportError("stockwiki_proof_envelope_not_json") from exc
 
@@ -391,8 +391,8 @@ class StockWikiProofClient:
                 self.command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
-        except OSError:
-            raise ProofTransportError("stockwiki_proof_cli_unavailable") from None
+        except OSError as original_error:
+            raise ProofTransportError("stockwiki_proof_cli_unavailable") from original_error
         stdin_pipe = process.stdin
         stdout_pipe = process.stdout
         stderr_pipe = process.stderr
@@ -487,9 +487,9 @@ class StockWikiProofClient:
                         envelope, entity_id=entity_id, listing_id=listing_id,
                         as_of=as_of,
                     )
-                except ProofTransportError:
+                except ProofTransportError as original_error:
                     raise ProofTransportError(
-                        "stockwiki_proof_cli_failed") from None
+                        "stockwiki_proof_cli_failed") from original_error
                 if envelope["state"] == "available":
                     raise ProofTransportError("stockwiki_proof_cli_failed")
                 return envelope

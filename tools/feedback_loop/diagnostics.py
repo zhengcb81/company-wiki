@@ -10,6 +10,7 @@ from typing import TypeVar
 from company_wiki.diagnostic_logging import append_diagnostic, diagnostic_log
 from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
 from company_wiki.diagnostic_stream import RedactedTextStream
+from company_wiki.runtime_journal import diagnostic_paths
 
 from .process_launch import background_argv
 
@@ -32,25 +33,52 @@ def background_command(module: str, *arguments: str) -> list[str]:
 def run_background(run: Callable[[], _T]) -> _T:
     """Capture Python diagnostics in the existing child, without teeing raw stderr."""
     destination = os.environ.pop(_LOG_PATH, None)
+    terminal = sys.stderr
     if not destination:
-        return run()
+        try:
+            return run()
+        except Exception as exc:
+            if terminal is not None:
+                try:
+                    print(format_diagnostic_exception(exc), file=terminal)
+                except (OSError, ValueError):
+                    # The business exit is still the original failure.
+                    pass
+            raise SystemExit(1) from exc
     path = Path(destination)
 
-    def persist(text: str) -> None:
-        if text.strip():
-            message = "Background command stderr\n" + text.removesuffix("\n")
-            append_diagnostic(path, message, warn_on_stderr=False)
+    def destinations() -> tuple[Path, ...]:
+        return tuple(dict.fromkeys((path, *diagnostic_paths("runtime_errors.log"))))
 
-    captured = RedactedTextStream(persist)
-    with diagnostic_log(logging.getLogger(), path, warn_on_stderr=False):
+    loss_notified = False
+
+    def unavailable() -> None:
+        nonlocal loss_notified
+        if loss_notified or terminal is None:
+            return
+        loss_notified = True
+        try:
+            print("company-wiki background diagnostic could not be retained", file=terminal)
+        except (OSError, ValueError):
+            pass
+
+    def persist(text: str) -> None:
+        if text.strip() and not any(
+            append_diagnostic(candidate, text, warn_on_stderr=False) for candidate in destinations()
+        ):
+            unavailable()
+
+    def persist_stderr(text: str) -> None:
+        if text.strip():
+            persist("Background command stderr\n" + text.removesuffix("\n"))
+
+    captured = RedactedTextStream(persist_stderr)
+    with diagnostic_log(logging.getLogger(), destinations, on_loss=unavailable):
         try:
             with redirect_stderr(captured):
                 return run()
         except Exception as exc:
-            append_diagnostic(
-                path, f"Background command failed\n{format_diagnostic_exception(exc)}",
-                warn_on_stderr=False,
-            )
-            raise SystemExit(1) from None
+            persist(f"Background command failed\n{format_diagnostic_exception(exc)}")
+            raise SystemExit(1) from exc
         finally:
             captured.finish()

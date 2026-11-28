@@ -45,7 +45,12 @@ def _exceptions(exc: BaseException | None, *, include_messages: bool) -> list[di
         # object arguments. Native message strings retain the specific cause.
         values = vars(BaseException)["args"].__get__(item) if include_messages else ()
         message = [redact_text(value) for value in values if type(value) is str]
-        detail: dict[str, Any] = {"type": type(item).__name__, "locations": locations, "messages": message}
+        exception_type = type(item)
+        detail: dict[str, Any] = {"type": exception_type.__name__, "locations": locations, "messages": message}
+        module = exception_type.__module__
+        if (isinstance(module, str) and all(part.isascii() and part.isidentifier() for part in module.split("."))
+                and redact_text(module) == module):
+            detail["module"] = module
         if isinstance(item, OSError):
             errno = vars(OSError)["errno"].__get__(item)
             if type(errno) is int:
@@ -74,7 +79,8 @@ def observation_stem(run: str, attempt: str, step: str, status: str) -> str:
 
 def logical_observation_ref(value: str) -> str:
     # Correlate unparsed request IDs without preserving arbitrary raw text.
-    if isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9_:.@-]+", value):
+    if (isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9_:.@-]+", value)
+            and redact_text(value) == value):
         return value
     return "ref-" + sha256(str(value).encode("utf-8", errors="replace")).hexdigest()
 

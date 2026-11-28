@@ -504,12 +504,12 @@ def image_dimensions(data: bytes, limits: OCRLimits):
             if getattr(image, "n_frames", 1) != 1:
                 raise LocalOCRError("OCR_MULTIFRAME_IMAGE_UNSUPPORTED")
             return width, height
-    except (ImportError, ModuleNotFoundError):
-        raise LocalOCRError("OCR_DEPENDENCY_MISSING") from None
+    except (ImportError, ModuleNotFoundError) as original_error:
+        raise LocalOCRError("OCR_DEPENDENCY_MISSING") from original_error
     except (OSError, ValueError, Image.DecompressionBombError) as exc:
         if isinstance(exc, NormalizationError):
             raise
-        raise LocalOCRError("OCR_IMAGE_INVALID") from None
+        raise LocalOCRError("OCR_IMAGE_INVALID") from exc
 
 
 class LocalOCRAdapter:
@@ -531,8 +531,8 @@ class LocalOCRAdapter:
                 raise LocalOCRError("OCR_RUNTIME_VERSION_MISMATCH")
             import rapidocr
             import onnxruntime as ort
-        except (ImportError, importlib.metadata.PackageNotFoundError):
-            raise LocalOCRError("OCR_DEPENDENCY_MISSING") from None
+        except (ImportError, importlib.metadata.PackageNotFoundError) as original_error:
+            raise LocalOCRError("OCR_DEPENDENCY_MISSING") from original_error
         default = Path(rapidocr.__file__).parent / "config.yaml"
         if (
             not default.is_file()
@@ -581,8 +581,8 @@ class LocalOCRAdapter:
         )
         try:
             self._engine = rapidocr.RapidOCR(params=params)
-        except Exception:
-            raise LocalOCRError("OCR_ENGINE_INIT_FAILED") from None
+        except Exception as original_error:
+            raise LocalOCRError("OCR_ENGINE_INIT_FAILED") from original_error
 
     def validate_environment(self) -> None:
         """Verify local hashes/runtime/dictionary and initialize CPU engines, no inference.
@@ -607,15 +607,15 @@ class LocalOCRAdapter:
                 if engine is None:
                     raise LocalOCRError("OCR_ENGINE_UNAVAILABLE")
                 result = engine(pixels)
-        except (OSError, ValueError):
-            raise LocalOCRError("OCR_INFERENCE_FAILED") from None
+        except (OSError, ValueError) as original_error:
+            raise LocalOCRError("OCR_INFERENCE_FAILED") from original_error
         limits.check_deadline()  # Native ONNX is NOT cooperatively interruptible.
         try:
             texts = result.txts or ()
             scores = result.scores or ()
             boxes = result.boxes if result.boxes is not None else ()
-        except AttributeError:
-            raise LocalOCRError("OCR_RESULT_INVALID") from None
+        except AttributeError as original_error:
+            raise LocalOCRError("OCR_RESULT_INVALID") from original_error
         if not (len(texts) == len(scores) == len(boxes)):
             raise LocalOCRError("OCR_RESULT_INVALID")
         lines = []

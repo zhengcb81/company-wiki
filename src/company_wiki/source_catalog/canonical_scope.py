@@ -115,8 +115,8 @@ class HistoricalCaptureScopes:
                         attempts.setdefault(attempt.content_sha256, []).append(attempt)
         except FileNotFoundError:
             pass
-        except OSError:
-            raise SourceReadError("unavailable", "local_journal_unreadable") from None
+        except OSError as original_error:
+            raise SourceReadError("unavailable", "local_journal_unreadable") from original_error
         self._attempts = attempts
         return attempts
 

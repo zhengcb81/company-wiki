@@ -72,8 +72,8 @@ def _date(value: Any, name: str) -> str:
     text = _text(value, name)
     try:
         parsed = date.fromisoformat(text)
-    except ValueError:
-        raise IncrementalDiscoveryError(f"{name} must be a canonical YYYY-MM-DD date") from None
+    except ValueError as original_error:
+        raise IncrementalDiscoveryError(f"{name} must be a canonical YYYY-MM-DD date") from original_error
     if parsed.isoformat() != text:
         raise IncrementalDiscoveryError(f"{name} must be a canonical YYYY-MM-DD date")
     return text
@@ -242,8 +242,8 @@ class DiscoveryLimits:
         cost = _text(value.get("max_cost_usd", cls.max_cost_usd), "limits.max_cost_usd")
         try:
             amount = Decimal(cost)
-        except InvalidOperation:
-            raise IncrementalDiscoveryError("limits.max_cost_usd must be decimal text") from None
+        except InvalidOperation as original_error:
+            raise IncrementalDiscoveryError("limits.max_cost_usd must be decimal text") from original_error
         if not amount.is_finite() or amount < 0:
             raise IncrementalDiscoveryError("limits.max_cost_usd must be finite and non-negative")
         return cls(
@@ -470,8 +470,8 @@ def _decode_cursor(cursor: str | None) -> _ResumePoint:
         return _ResumePoint(0, None)
     try:
         payload = json.loads(cursor)
-    except json.JSONDecodeError:
-        raise IncrementalDiscoveryError("cursor is not a discovery cursor") from None
+    except json.JSONDecodeError as original_error:
+        raise IncrementalDiscoveryError("cursor is not a discovery cursor") from original_error
     if not isinstance(payload, dict) or set(payload) not in (
         {"kind_index", "page_cursor"}, {"kind_index", "page_cursor", "offset", "page_sha256"},
     ):

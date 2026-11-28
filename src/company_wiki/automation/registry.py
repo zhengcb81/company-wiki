@@ -52,10 +52,10 @@ class HandlerRegistry:
     def get(self, job_type: str) -> HandlerSpec:
         try:
             return self._specs[job_type]
-        except KeyError:
+        except KeyError as original_error:
             raise UnknownJobTypeError(
                 f"no handler registered for job_type: {job_type}"
-            ) from None
+            ) from original_error
 
     def known_job_types(self) -> tuple[str, ...]:
         return tuple(sorted(self._specs))

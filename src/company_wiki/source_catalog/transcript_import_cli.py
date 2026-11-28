@@ -17,7 +17,6 @@ from __future__ import annotations
 
 from company_wiki import runtime_feedback
 
-import argparse
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -220,9 +219,9 @@ def run_import(wiki_root: Path, stream: BinaryIO, *,
     }
 
 
-@runtime_feedback.entry("transcript-import")
+@runtime_feedback.entry("transcript-import", machine_stderr=True)
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--wiki-root",
         type=Path,
@@ -246,6 +245,7 @@ def main(argv: list[str] | None = None) -> int:
             "status": "rejected",
             "reason": "invalid_or_failed_import",
         }
+        runtime_feedback.refusal("failed", "invalid_or_failed_import")
         sys.stderr.write(f"transcript import rejected ({type(exc).__name__})\n")
         exit_code = 2
     except Exception as exc:  # noqa: BLE001 - provide a bounded machine-readable failure
@@ -254,6 +254,7 @@ def main(argv: list[str] | None = None) -> int:
             "status": "rejected",
             "reason": "import_failed",
         }
+        runtime_feedback.refusal("failed", "import_failed")
         sys.stderr.write(f"transcript import failed ({type(exc).__name__})\n")
         exit_code = 2
     else:
@@ -262,5 +263,9 @@ def main(argv: list[str] | None = None) -> int:
     return exit_code
 
 
+def console() -> int:
+    return runtime_feedback.run_cli(main, machine_stderr=True)
+
+
 if __name__ == "__main__":  # pragma: no cover - subprocess entrypoint
-    raise SystemExit(main())
+    raise SystemExit(console())

@@ -428,8 +428,8 @@ def build_source_projection(
         raise ProjectionError("invalid_as_of_date")
     try:
         datetime.strptime(as_of_date, "%Y-%m-%d")
-    except ValueError:
-        raise ProjectionError("invalid_as_of_date") from None
+    except ValueError as original_error:
+        raise ProjectionError("invalid_as_of_date") from original_error
     layout = registered_layout(layout_id)
 
     triples: list[tuple[str, int, PageObservation]] = []
@@ -668,8 +668,8 @@ def projection_from_dict(value: Any) -> SourceProjection:
         return _projection_from_dict(value)
     except ProjectionError:
         raise
-    except (KeyError, TypeError, AttributeError, ValueError):
-        raise ProjectionError("invalid_projection_payload") from None
+    except (KeyError, TypeError, AttributeError, ValueError) as original_error:
+        raise ProjectionError("invalid_projection_payload") from original_error
 
 
 def _projection_from_dict(value: Any) -> SourceProjection:
@@ -768,8 +768,8 @@ def _ref_from_dict(value: Any):
         raise ProjectionError("invalid_parent_source_ref")
     try:
         return SourceRef(**value)
-    except TypeError:
-        raise ProjectionError("invalid_parent_source_ref") from None
+    except TypeError as original_error:
+        raise ProjectionError("invalid_parent_source_ref") from original_error
 
 
 def build_projection_from_refs(
@@ -852,8 +852,8 @@ def load_projection(catalog, projection_id: str) -> SourceProjection:
             object_pairs_hook=_unique_projection_fields,
             parse_constant=_reject_projection_constant,
         )
-    except (OSError, ValueError):
-        raise ProjectionError("invalid_projection_payload") from None
+    except (OSError, ValueError) as original_error:
+        raise ProjectionError("invalid_projection_payload") from original_error
     projection = projection_from_dict(payload)
     if projection.projection_id != projection_id:
         raise ProjectionError("projection_id_mismatch")

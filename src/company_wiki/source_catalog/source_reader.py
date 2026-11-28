@@ -191,8 +191,8 @@ class SourceVersionReader:
             metadata = self.__describe_version(ref, resolver)
         try:
             locations = self.__catalog.reader.exact_source_locations(ref.document_id, ref.source_id)
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+            raise SourceReadError("unavailable", "catalog_unavailable") from original_error
         return exact_source_read_policy_sha256(
             self.__catalog.config, runtime_policy, source_ref=asdict(ref),
             source_facts={field: metadata.recorded.get(field) for field in _EXACT_SOURCE_FACT_FIELDS},
@@ -216,8 +216,8 @@ class SourceVersionReader:
                 if number > 20_000:
                     raise SourceReadError("unavailable", "candidate_budget_exceeded")
                 yield document
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+            raise SourceReadError("unavailable", "catalog_unavailable") from original_error
 
     def query_ref(self, document_id: str, source_id: str, expected_sha256: str) -> SourceRef:
         """Resolve the document's primary source version by its exact identity."""
@@ -404,8 +404,8 @@ class SourceVersionReader:
             raise SourceReadError("unavailable", "source_ref_changed")
         try:
             version_row = self.__catalog.reader.exact_source_version(ref.document_id)
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+            raise SourceReadError("unavailable", "catalog_unavailable") from original_error
         if version_row is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
         observation = observe_metadata(version_row["metadata_json"])
@@ -504,8 +504,8 @@ class SourceVersionReader:
             locations = self.__catalog.source_location_candidates(
                 ref.document_id, ref.source_id
             )
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+            raise SourceReadError("unavailable", "catalog_unavailable") from original_error
         if version is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
         roots = {root.root_id: root for root in self.__catalog.config.roots}
@@ -669,8 +669,8 @@ class SourceVersionReader:
             raise SourceReadError("unavailable", "source_ref_changed")
         try:
             descriptor = self.__catalog.processing_descriptor(ref)
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+            raise SourceReadError("unavailable", "catalog_unavailable") from original_error
         if descriptor is None:
             raise SourceReadError("unavailable", "source_manifest_unavailable")
         return descriptor
@@ -810,8 +810,8 @@ class SourceVersionReader:
             read_policy_sha256 = current_read_policy_sha256
         try:
             version_row = self.__catalog.reader.exact_source_version(ref.document_id)
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+            raise SourceReadError("unavailable", "catalog_unavailable") from original_error
         if version_row is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
 
@@ -829,8 +829,8 @@ class SourceVersionReader:
             candidates = self.__catalog.source_location_candidates(
                 ref.document_id, ref.source_id
             )
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        except (CatalogReaderUnavailable, sqlite3.Error) as original_error:
+            raise SourceReadError("unavailable", "catalog_unavailable") from original_error
         if not candidates:
             raise SourceReadError("unavailable", "no_indexed_location")
         read_resolver = self.__resolver_for_request()

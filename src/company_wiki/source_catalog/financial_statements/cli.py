@@ -15,6 +15,7 @@ using the recorded capture time and original byte identity, with no network.
 from __future__ import annotations
 
 from company_wiki import runtime_feedback
+from company_wiki.diagnostic_redaction import redact_text
 
 import argparse
 import gzip
@@ -42,7 +43,7 @@ FIXTURE_MANIFEST_VERSION = "financial-statements-fixture-replay/1"
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = runtime_feedback.ArgumentParser(
         prog="company-wiki-financial-statements",
         description="A-share historical financial statements via company-wiki.",
     )
@@ -141,7 +142,7 @@ def _error_envelope(status: str, message: str, **extra: Any) -> dict[str, Any]:
     payload = {
         "schema_version": STATEMENTS_RESPONSE_SCHEMA_VERSION,
         "status": status,
-        "error": message,
+        "error": redact_text(message),
     }
     payload.update(extra)
     return payload
@@ -154,15 +155,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     if hasattr(sys.stderr, "reconfigure"):
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
     args = _parser().parse_args(argv)
+    runtime_feedback.checkpoint("load-request", input_path=args.wiki_root)
     try:
         request_payload = json.loads(sys.stdin.read())
     except json.JSONDecodeError as exc:
+        runtime_feedback.refusal("failed", "invalid_request_json")
         json.dump(_error_envelope("request_error", f"invalid request JSON: {exc}"), sys.stdout)
         sys.stdout.write("\n")
         return 2
     try:
         request = StatementsRequest.from_payload(request_payload)
     except RequestValidationError as exc:
+        runtime_feedback.refusal("blocked", exc.code)
         json.dump(_error_envelope(exc.code, str(exc)), sys.stdout)
         sys.stdout.write("\n")
         return 2
@@ -170,6 +174,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     root = args.wiki_root.expanduser().resolve(strict=True)
     config_path = root / "config" / "source_catalog.yaml"
     if not config_path.is_file():
+        runtime_feedback.refusal("unavailable", "source_catalog_config_missing")
         json.dump(
             _error_envelope("config_error", "wiki root lacks config/source_catalog.yaml"),
             sys.stdout,
@@ -179,6 +184,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         config = load_catalog_config(config_path, project_root=root)
     except (CatalogConfigError, OSError) as exc:
+        runtime_feedback.refusal("unavailable", "source_catalog_config_invalid")
         json.dump(_error_envelope("config_error", f"invalid source catalog config: {exc}"), sys.stdout)
         sys.stdout.write("\n")
         return 2
@@ -191,6 +197,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             response = service.import_capture(request, args.import_capture)
         except (CanonicalImportError, NormalizeProtocolError, StatementProviderError, OSError, ValueError) as exc:
+            runtime_feedback.refusal("failed", "statement_capture_import_refused")
             json.dump(_error_envelope("request_error", f"capture import refused: {exc}"), sys.stdout)
             sys.stdout.write("\n")
             return 2
@@ -215,6 +222,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 request=request, source_id=args.replay_source
             )
         except (ValueError, KeyError) as exc:
+            runtime_feedback.refusal("failed", "statement_replay_refused")
             json.dump(
                 _error_envelope("request_error", f"replay refused: {exc}"),
                 sys.stdout,
@@ -237,12 +245,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         sys.stdout.write("\n")
         return 0
     catalog = SourceCatalog(config)
+    provider_error = None
     try:
         provider = _provider(args.fixture_root)
-    except (FileNotFoundError, OSError, json.JSONDecodeError):
+    except (FileNotFoundError, OSError, json.JSONDecodeError) as exc:
         # A broken fixture root must not break pure-reuse runs; any actual
         # fetch attempt then reports provider_unavailable honestly.
         provider = None
+        provider_error = exc
     service = FinancialStatementsService(
         catalog=catalog,
         writer=CanonicalSourceWriter(catalog),
@@ -251,9 +261,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         response = service.handle_request(request)
     except Exception as exc:  # noqa: BLE001 - surfaced as an honest envelope
+        runtime_feedback.refusal("failed", "financial_statements_failed")
         json.dump(_error_envelope("fatal", f"{type(exc).__name__}: {exc}"), sys.stdout)
         sys.stdout.write("\n")
         return 1
+    runtime_feedback.document_results("financial-statements", response, error=provider_error)
     json.dump(response, sys.stdout, ensure_ascii=False, indent=1)
     sys.stdout.write("\n")
     return 0
@@ -263,4 +275,4 @@ __all__ = ["FIXTURE_MANIFEST_VERSION", "FixtureFileTransport", "main"]
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main))

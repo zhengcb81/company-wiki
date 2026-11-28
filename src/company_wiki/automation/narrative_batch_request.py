@@ -64,8 +64,8 @@ def _money(value: Any) -> int:
                 "max_cost_usd must be nonnegative and precise to micro-USD"
             )
         return int(micros)
-    except InvalidOperation:
-        raise ValueError("max_cost_usd must be a finite decimal amount") from None
+    except InvalidOperation as original_error:
+        raise ValueError("max_cost_usd must be a finite decimal amount") from original_error
 
 
 @dataclass(frozen=True)

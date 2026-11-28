@@ -1,12 +1,12 @@
 """Redacted local diagnostics with process-safe rotation."""
 
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import sys
 import time
-from typing import Iterator
 
 from .diagnostic_redaction import redact_text
 from .file_mutex import FileMutexLockedError, os_file_mutex, win32_filesystem_path
@@ -33,10 +33,14 @@ class _LockedLog(RotatingFileHandler):
         self.setFormatter(_Formatter("%(asctime)sZ %(levelname)s %(name)s %(message)s", "%Y-%m-%dT%H:%M:%S"))
 
     def doRollover(self) -> None:
+        if self.stream is not None:
+            self.stream.close()
+            self.stream = None  # type: ignore[assignment]  # The delayed handler reopens on append.
         try:
-            super().doRollover()
+            self.path.replace(self.path.with_name(self.path.name + ".1"))
         except OSError:
-            # Preserve this entry if an external Windows reader prevents rename.
+            # A sharing violation must preserve the older backup as well as
+            # the active file. The handler can still append the new event.
             pass
 
     def emit(self, record: logging.LogRecord) -> None:
@@ -67,10 +71,41 @@ class _LockedLog(RotatingFileHandler):
                 pass
 
 
+def _write_record(path: Path, record: logging.LogRecord, *, warn_on_stderr: bool) -> bool:
+    writer = _LockedLog(path, warn_on_stderr=warn_on_stderr)
+    try:
+        writer.handle(record)
+    finally:
+        writer.close()
+    return not writer.failed
+
+
+class _LogRoute(logging.Handler):
+    def __init__(self, paths: Callable[[], tuple[Path, ...]], on_loss: Callable[[], None] | None) -> None:
+        super().__init__()
+        self._paths = paths
+        self._on_loss = on_loss
+        self._loss_recorded = False
+
+    def emit(self, record: logging.LogRecord) -> None:
+        for path in self._paths():
+            if _write_record(path, record, warn_on_stderr=False):
+                return
+        if self._on_loss is not None and not self._loss_recorded:
+            self._loss_recorded = True
+            self._on_loss()
+
+
 @contextmanager
-def diagnostic_log(logger: logging.Logger, path: Path, *, warn_on_stderr: bool = True) -> Iterator[None]:
-    """Attach one local sink for the lifetime of the outer command."""
-    handler = _LockedLog(path, warn_on_stderr=warn_on_stderr)
+def diagnostic_log(
+    logger: logging.Logger, path: Path | Callable[[], tuple[Path, ...]], *, warn_on_stderr: bool = True,
+    in_scope: Callable[[], bool] | None = None, on_loss: Callable[[], None] | None = None,
+) -> Iterator[None]:
+    """Route a scoped logger to the owner destinations without retaining open files."""
+    handler: logging.Handler = (_LogRoute(path, on_loss) if callable(path)
+                                else _LockedLog(path, warn_on_stderr=warn_on_stderr))
+    if in_scope is not None:
+        handler.addFilter(lambda _record: in_scope())
     logger.addHandler(handler)
     try:
         yield
@@ -81,11 +116,7 @@ def diagnostic_log(logger: logging.Logger, path: Path, *, warn_on_stderr: bool =
 
 def append_diagnostic(path: Path, text: str, *, warn_on_stderr: bool = True) -> bool:
     """Attempt one redacted record without changing the calling logger."""
-    handler = _LockedLog(path, warn_on_stderr=warn_on_stderr)
-    try:
-        handler.handle(logging.makeLogRecord({
-            "name": "company_wiki.feedback_host", "levelno": logging.ERROR, "levelname": "ERROR", "msg": text,
-        }))
-    finally:
-        handler.close()
-    return not handler.failed
+    record = logging.makeLogRecord({
+        "name": "company_wiki.feedback_host", "levelno": logging.ERROR, "levelname": "ERROR", "msg": text,
+    })
+    return _write_record(path, record, warn_on_stderr=warn_on_stderr)

@@ -130,7 +130,7 @@ def _digest_argument(value: str) -> str:
     return value
 
 
-@runtime_feedback.entry("source-stream")
+@runtime_feedback.entry("source-stream", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -184,8 +184,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "policy_sha256": receipt.policy_sha256,
                 "source_read_policy_sha256": receipt.source_read_policy_sha256,
             })
-        except OSError:
-            raise SystemExit(2) from None
+        except OSError as original_error:
+            raise SystemExit(2) from original_error
         return 0
     except SourceReadError as exc:
         _refuse(exc.status, exc.reason)
@@ -199,4 +199,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(runtime_feedback.run_cli(main, machine_stderr=True))
