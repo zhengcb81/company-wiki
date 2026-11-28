@@ -2,6 +2,7 @@
 
 from dataclasses import replace
 import hashlib
+from pathlib import Path
 
 import pytest
 
@@ -21,8 +22,14 @@ def _publication(catalog, ref, value):
     })
 
 
-@pytest.mark.parametrize("missing", [False, True])
-def test_real_ensure_never_confuses_indexed_with_verified_local_bytes(tmp_path, missing):
+@pytest.mark.parametrize(("missing", "replacement_filing_date"), [
+    pytest.param(False, "2026-04-15", id="verified-local-with-undated-record"),
+    pytest.param(True, None, id="lost-original-undated-provider-capture"),
+    pytest.param(True, "2026-04-15", id="lost-original-dated-provider-capture"),
+])
+def test_real_ensure_distinguishes_original_availability_from_dated_evidence(
+    tmp_path, missing, replacement_filing_date,
+):
     adapter = BoundedAdapter()
     transaction, service = _service(tmp_path, adapter)
     try:
@@ -32,20 +39,64 @@ def test_real_ensure_never_confuses_indexed_with_verified_local_bytes(tmp_path, 
         reader = SourceVersionReader(transaction.catalog)
         ref = reader.query_ref(handle.document_id, handle.source_id, handle.content_sha256)
         original = reader.open_version(ref, purpose="preview").data
+        provenance = Path(imported.canonical_import.provenance_path)
+        first_capture = provenance.read_bytes()
         _publication(transaction.catalog, ref, None)
         if missing:
-            from pathlib import Path
             path = Path(handle.canonical_path).resolve()
             assert path.is_relative_to(tmp_path.resolve())
             path.unlink()
+        adapter.mutation = {"filing_date": replacement_filing_date}
         result = service.ensure(request, budget=_budget())
-        assert result.resolution.matches == ()  # Unknown publication never becomes historical evidence.
-        assert adapter.fetch_calls == (2 if missing else 1)
-        assert adapter.discover_calls == (2 if missing else 1)
+        # Only a new provider capture can fill the unknown stored publication date.
+        expected_date = replacement_filing_date if missing else None
+        assert reader.describe_version(ref)["published_date"] == expected_date
+        if expected_date is None:
+            assert result.resolution.matches == ()
+        else:
+            restored, = result.resolution.matches
+            assert restored.content_sha256 == ref.content_sha256
+            assert restored.published_date == expected_date
+        acquisitions = 2 if missing else 1
+        assert adapter.fetch_calls == adapter.discover_calls == acquisitions
+        if missing:
+            assert result.canonical_import.source_ref == imported.canonical_import.source_ref
+            assert result.attempt.outcome == "deduplicated_after_download"
+        assert provenance.read_bytes() == first_capture
         assert reader.open_version(ref, purpose="preview").data == original
         again = service.ensure(request, budget=_budget())
-        assert again.resolution.matches == ()
-        assert adapter.fetch_calls == (2 if missing else 1)
+        assert again.resolution.matches == result.resolution.matches
+        assert adapter.fetch_calls == adapter.discover_calls == acquisitions
+    finally:
+        transaction.catalog.close()
+
+
+@pytest.mark.parametrize("provenance_content", [b"[]", b'{"content_sha256":"unrelated"}'])
+def test_restore_checks_existing_provenance_before_writing_original(tmp_path, provenance_content):
+    from company_wiki.source_catalog.canonical_writer import CanonicalImportError
+
+    adapter = BoundedAdapter()
+    transaction, service = _service(tmp_path, adapter)
+    try:
+        request = replace(_request(), allow_download=True)
+        first = service.ensure(request, budget=_budget())
+        path = Path(first.canonical_import.canonical_path)
+        provenance = Path(first.canonical_import.provenance_path)
+        path.unlink()
+        provenance.write_bytes(provenance_content)
+
+        budget = _budget()
+        candidate, = adapter.discover_bounded(request, budget)
+        staged = service.coordinator.staging_root / "restore"
+        receipt = adapter.fetch_bounded(candidate, staged, budget)
+        before = Path(receipt.staged_path).read_bytes()
+        with pytest.raises(CanonicalImportError, match="immutable provenance sidecar conflict"):
+            service.writer.import_staged(request, candidate, receipt, budget=budget)
+
+        assert adapter.fetch_calls == 2
+        assert not path.exists()
+        assert provenance.read_bytes() == provenance_content
+        assert Path(receipt.staged_path).read_bytes() == before
     finally:
         transaction.catalog.close()
 
@@ -55,18 +106,23 @@ def test_new_import_resolves_only_for_selection_lock_recheck_and_result(tmp_path
 
     adapter = BoundedAdapter()
     transaction, service = _service(tmp_path, adapter)
-    original_resolve = SourceResolver.resolve
+    original_resolve = SourceResolver.resolve_for_acquisition
     resolutions = []
 
-    def observed(self, request):
-        resolutions.append(request.request_id)
-        return original_resolve(self, request)
+    def observed(self, request, **scope):
+        observation = original_resolve(self, request, **scope)
+        resolutions.append((request.provider_document_id, scope, observation[1] is not None))
+        return observation
 
-    monkeypatch.setattr(SourceResolver, "resolve", observed)
+    monkeypatch.setattr(SourceResolver, "resolve_for_acquisition", observed)
     try:
         result = service.ensure(replace(_request(), allow_download=True), budget=_budget())
         assert result.canonical_import is not None and adapter.fetch_calls == 1
-        assert len(resolutions) == 3
+        assert resolutions == [
+            (None, {"reconcile_scope": True}, False),
+            ("acc-2025", {"observed_original_url": "https://www.sec.gov/x/2025.pdf"}, False),
+            ("acc-2025", {}, True),
+        ]
         assert result.resolution.matches[0].content_sha256 == result.canonical_import.source_ref.content_sha256
     finally:
         transaction.catalog.close()

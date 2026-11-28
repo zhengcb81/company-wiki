@@ -195,7 +195,11 @@ def test_zr404_conflict_fail_closed_bad_epoch_or_cohorts(tmp_path):
 # ---------------------------------------------------------------------------
 
 
-def test_zr404_candidate_exclusion_trace_carried(tmp_path):
+@pytest.mark.parametrize(("accession", "excluded_for"), [
+    (None, "fiscal_year_mismatch"),
+    ("doc-a", "provider_document_id_not_strong"),
+])
+def test_zr404_candidate_exclusion_trace_carried(tmp_path, accession, excluded_for):
     """A resolution that considered but excluded candidates records the
     exclusion reasons in the envelope (the trace is the per-candidate
     why-not evidence, never fabricated)."""
@@ -203,12 +207,11 @@ def test_zr404_candidate_exclusion_trace_carried(tmp_path):
     _seed_company(tmp_path, "Acme", "doc-wrong-year", "annual_report", fy=2019)
     catalog = _catalog(tmp_path, tree)
     catalog.scan()
-    resolution = _resolve(catalog, fy=2024)
+    resolution = _resolve(catalog, fy=2024, pdoc=accession)
     assert resolution.status.value.startswith("reused")
     envelope = _build(resolution)
-    assert envelope.candidate_exclusion_trace
-    joined = "|".join(envelope.candidate_exclusion_trace)
-    assert "fiscal_year_mismatch" in joined
+    assert f"Acme 2019: {excluded_for}" in envelope.candidate_exclusion_trace
+    assert "Acme 2024: matched" in envelope.candidate_exclusion_trace
     payload = envelope.to_dict()
     assert isinstance(payload["candidate_exclusion_trace"], list)
 

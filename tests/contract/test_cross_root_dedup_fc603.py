@@ -287,12 +287,16 @@ def test_fc603_ex06_amended_original_stable_revision_rule():
     """With an original and its amended revision for the same period, the
     gap plan keeps the local original and flags only the newer accession
     as a newer revision — a stable, deterministic rule (EX-06)."""
-    class Candidate:
-        def __init__(self, accession, amended, title=""):
-            self.provider_document_id = accession
-            self.amended = amended
-            self.title = title
-            self.fiscal_year = 2024
+    from company_wiki.source_catalog import DownloadCandidate
+
+    def candidate(accession, *, title, amended=False, filing_date=None):
+        return DownloadCandidate(
+            candidate_id=accession, provider="sec", provider_document_id=accession,
+            market="US", security_id="ACME", entity="Acme", title=title,
+            source_url=f"https://example.test/filings/{accession}.pdf",
+            document_kind="annual_report", form_type="10-K", fiscal_year=2024,
+            filing_date=filing_date, amended=amended,
+        )
 
     class Handle:
         def __init__(self, accession):
@@ -301,8 +305,10 @@ def test_fc603_ex06_amended_original_stable_revision_rule():
 
     local = [Handle("0001-25-000001")]
     remote = [
-        Candidate("0001-25-000001", False, "original"),
-        Candidate("0001-25-000099", True, "amended"),
+        candidate("0001-25-000001", title="original", filing_date="2025-02-14"),
+        candidate("0001-25-000099", title="amended", amended=True, filing_date="2025-03-01"),
+        candidate("0001-26-000001", title="future amendment", amended=True, filing_date="2026-08-11"),
+        candidate("0001-26-000002", title="undated amendment", amended=True),
     ]
     plan = build_gap_plan(
         request_id="req-1", as_of_date="2026-08-10",
@@ -314,6 +320,8 @@ def test_fc603_ex06_amended_original_stable_revision_rule():
     assert plan.reuse == tuple(local)
     newer = [c.provider_document_id for c in plan.newer_revision]
     assert newer == ["0001-25-000099"]
+    assert [c.provider_document_id for c in plan.future] == ["0001-26-000001"]
+    assert [c.provider_document_id for c in plan.publication_unknown] == ["0001-26-000002"]
     assert plan.missing == ()
     # determinism
     plan2 = build_gap_plan(

@@ -433,26 +433,18 @@ class CanonicalSourceWriter:
 
             destination = self._destination(request, candidate, receipt)
             destination.parent.mkdir(parents=True, exist_ok=True)
-            # DEF-MSFT-CANONICAL-DUP: ``destination_preexisting`` marks the
-            # case where the computed content path holds byte-identical content — a
-            # re-serve of bytes an earlier acquisition committed to this
-            # content path. The copy below is then a no-op and the immutable
-            # provenance sidecar must NOT be rewritten: it belongs to the
-            # first acquisition of these bytes, and request_id/retrieved_at
-            # differ on every attempt (writing would die on the immutable
-            # sidecar conflict and orphan the file yet again).
-            destination_preexisting = False
-            if destination.exists():
-                if _hash_file(destination) != receipt.content_sha256:
-                    raise CanonicalImportError("canonical_content_name_collision")
-                # A byte-identical existing final path is a re-acquisition.
-                destination_preexisting = destination.exists()
-            if not destination.exists():
-                self._atomic_copy(staged, destination, receipt)
             provenance = destination.with_name(destination.name + ".source.json")
-            if destination_preexisting and provenance.exists():
+            bytes_already_present = destination.exists()
+            if bytes_already_present and _hash_file(destination) != receipt.content_sha256:
+                raise CanonicalImportError("canonical_content_name_collision")
+            has_first_capture = provenance.exists()
+            if has_first_capture:
+                # An original can be lost independently of its first capture
+                # record. Verify that record before putting restored bytes on disk.
                 self._verify_committed_provenance(provenance, candidate, receipt)
-            else:
+            if not bytes_already_present:
+                self._atomic_copy(staged, destination, receipt)
+            if not has_first_capture:
                 self._write_provenance(
                     provenance,
                     request,
@@ -475,13 +467,9 @@ class CanonicalSourceWriter:
                 self._remove_staged(staged)
             return CanonicalImportResult(
                 schema_version=CANONICAL_IMPORT_RESULT_SCHEMA_VERSION,
-                # DEF-MSFT-CANONICAL-DUP: when the committed bytes were
-                # already on canonical disk this import is a re-acquisition
-                # of existing content, not a new document — journal it as
-                # the established deduplicated outcome.
                 status=(
                     CanonicalImportStatus.DEDUPLICATED_AFTER_DOWNLOAD
-                    if destination_preexisting
+                    if bytes_already_present or has_first_capture
                     else CanonicalImportStatus.IMPORTED_NEW
                 ),
                 request_id=request.request_id,
@@ -927,19 +915,14 @@ class CanonicalSourceWriter:
         candidate: DownloadCandidate,
         receipt: DownloadReceipt,
     ) -> None:
-        """DEF-MSFT-CANONICAL-DUP: the canonical file already held these
-        exact bytes, so its immutable sidecar belongs to the FIRST
-        acquisition of them.  Re-acquisition must not rewrite it — but it
-        must also never adopt a sidecar describing a different document.
-        Verify the identity binding and fail closed on anything else (the
-        error string matches _write_provenance's conflict so the failure
-        taxonomy is unchanged)."""
+        """Bind restored or re-served bytes to the immutable first capture."""
         try:
             existing = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError) as exc:
             raise CanonicalImportError("immutable provenance sidecar conflict") from exc
         if (
-            existing.get("content_sha256") != receipt.content_sha256
+            not isinstance(existing, dict)
+            or existing.get("content_sha256") != receipt.content_sha256
             or existing.get("provider") != candidate.provider
             or existing.get("provider_document_id")
             != candidate.provider_document_id

@@ -34,6 +34,7 @@ import pytest
 
 from company_wiki.source_catalog import (
     AcquisitionCoordinator,
+    AcquisitionError,
     AcquisitionJournal,
     AdapterRegistry,
     CanonicalSourceWriter,
@@ -78,7 +79,8 @@ def _candidate_dict(
     title: str,
     detail_url: str,
     transport_url: str,
-    fiscal_year: int = 2024,
+    filing_date: str = _BYD_FY2024_FULL_FILING_DATE,
+    amended: bool = False,
 ) -> dict[str, Any]:
     return {
         "candidate_id": f"cninfo:{announcement_id}",
@@ -87,22 +89,21 @@ def _candidate_dict(
         "identity_method": "announcement_id",
         "market": "CN",
         "entity": "002594",
+        "security_id": "002594",
         "title": title,
         "source_url": detail_url,
         "document_kind": "annual_report",
         "form_type": "annual_report",
-        "filing_date": _BYD_FY2024_FULL_FILING_DATE,
-        "fiscal_year": fiscal_year,
+        "filing_date": filing_date,
+        "fiscal_year": 2024,
         "fiscal_period": "FY",
         "language": "zh-CN",
-        "amended": False,
+        "amended": amended,
         "transport_url": transport_url,
     }
 
 
-# Fake CLI script — discover returns BYD FY2024 full only (summary already
-# excluded at adapter level, mirroring real StockInfo adapter design).
-_FAKE_BYD_FULL_CLI = r"""
+_STOCKINFO_COMMAND = r"""
 import argparse, json, sys
 from pathlib import Path
 import hashlib
@@ -114,10 +115,6 @@ args = parser.parse_args()
 payload = json.loads(sys.stdin.read())
 identity = {"name": "stockinfo-cninfo", "version": "1.1.0"}
 
-ANN_ID = "1222881496"
-TITLE = "比亚迪股份有限公司2024年年度报告"
-DETAIL_URL = "https://www.cninfo.com.cn/new/disclosure/detail?stockCode=002594&announcementId=1222881496&announcementTime=2025-03-24%2016:00"
-TRANSPORT_URL = "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF"
 RETRIEVED_AT = "2026-07-25T08:00:00Z"
 
 if args.action == "discover":
@@ -127,29 +124,13 @@ if args.action == "discover":
         "schema_version": "1.0",
         "status": "ok",
         "adapter": identity,
-        "candidates": [{
-            "candidate_id": "cninfo:" + ANN_ID,
-            "provider": "cninfo",
-            "provider_document_id": ANN_ID,
-            "identity_method": "announcement_id",
-            "market": "CN",
-            "entity": "002594",
-            "title": TITLE,
-            "source_url": DETAIL_URL,
-            "document_kind": "annual_report",
-            "form_type": "annual_report",
-            "filing_date": "2025-03-24",
-            "fiscal_year": 2024,
-            "fiscal_period": "FY",
-            "language": "zh-CN",
-            "amended": False,
-            "transport_url": TRANSPORT_URL,
-        }],
+        "candidates": json.loads(__RECORDED_CANDIDATES_JSON__),
     }
 else:
     raw = json.loads(payload["adapter_payload_json"])
-    assert raw["provider_document_id"] == ANN_ID
-    assert raw["transport_url"] == TRANSPORT_URL
+    received = json.loads(__RECORDED_CANDIDATES_JSON__)
+    if len(received) != 1 or raw != received[0]:
+        raise RuntimeError("fetch must receive the exact, unique discovery record")
     staging_dir = Path(args.staging_dir)
     staging_dir.mkdir(parents=True, exist_ok=True)
     filename = "byd_fy2024_annual.pdf"
@@ -185,57 +166,40 @@ sys.stdout.write(json.dumps(response, ensure_ascii=False))
 """
 
 
-# Fake CLI — returns BOTH full + summary FY2024 (simulates a contract violation
-# where adapter forgets to exclude summary). coordinator must AMBIGUOUS, fetch=0.
-_FAKE_BYD_FULL_AND_SUMMARY_CLI = _FAKE_BYD_FULL_CLI.replace(
-    '"candidates": [{',
-    (
-        '"candidates": [{'
-        ' "candidate_id": "cninfo:1222881505",'
-        ' "provider": "cninfo",'
-        ' "provider_document_id": "1222881505",'
-        ' "identity_method": "announcement_id",'
-        ' "market": "CN",'
-        ' "entity": "002594",'
-        ' "title": "比亚迪股份有限公司2024年年度报告摘要",'
-        ' "source_url": "https://www.cninfo.com.cn/new/disclosure/detail?stockCode=002594&announcementId=1222881505&announcementTime=2025-03-24%2016:00",'
-        ' "document_kind": "annual_report",'
-        ' "form_type": "annual_report",'
-        ' "filing_date": "2025-03-24",'
-        ' "fiscal_year": 2024,'
-        ' "fiscal_period": "FY",'
-        ' "language": "zh-CN",'
-        ' "amended": False,'
-        ' "transport_url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881505.PDF"'
-        "},{"
-    ),
-)
+def _stockinfo_command(*candidate_records: dict[str, Any]) -> str:
+    return _STOCKINFO_COMMAND.replace(
+        "__RECORDED_CANDIDATES_JSON__", repr(json.dumps(candidate_records, ensure_ascii=True))
+    )
 
 
-# Fake CLI — returns 2 full FY2024 records (full + amended). coordinator AMBIGUOUS.
-_FAKE_BYD_TWO_FULL_CLI = _FAKE_BYD_FULL_CLI.replace(
-    '"candidates": [{',
-    (
-        '"candidates": [{'
-        ' "candidate_id": "cninfo:1222881496",'
-        ' "provider": "cninfo",'
-        ' "provider_document_id": "1222881496",'
-        ' "identity_method": "announcement_id",'
-        ' "market": "CN",'
-        ' "entity": "002594",'
-        ' "title": "比亚迪股份有限公司2024年年度报告（修订版）",'
-        ' "source_url": "https://www.cninfo.com.cn/new/disclosure/detail?stockCode=002594&announcementId=1222881496amp&announcementTime=2025-04-26%2009:30",'
-        ' "document_kind": "annual_report",'
-        ' "form_type": "annual_report",'
-        ' "filing_date": "2025-04-26",'
-        ' "fiscal_year": 2024,'
-        ' "fiscal_period": "FY",'
-        ' "language": "zh-CN",'
-        ' "amended": True,'
-        ' "transport_url": "https://static.cninfo.com.cn/finalpage/2025-04-26/1222881496amp.PDF"'
-        "},{"
-    ),
+_FULL_CANDIDATE = _candidate_dict(
+    announcement_id=_BYD_FY2024_FULL_ANNOUNCEMENT_ID,
+    title=_BYD_FY2024_FULL_TITLE,
+    detail_url=_BYD_FY2024_FULL_DETAIL_URL,
+    transport_url=_BYD_FY2024_FULL_TRANSPORT_URL,
 )
+_SUMMARY_CANDIDATE = _candidate_dict(
+    announcement_id=_BYD_FY2024_SUMMARY_ANNOUNCEMENT_ID,
+    title=_BYD_FY2024_SUMMARY_TITLE,
+    detail_url=_BYD_FY2024_FULL_DETAIL_URL.replace(
+        _BYD_FY2024_FULL_ANNOUNCEMENT_ID, _BYD_FY2024_SUMMARY_ANNOUNCEMENT_ID
+    ),
+    transport_url=_BYD_FY2024_SUMMARY_TRANSPORT_URL,
+)
+_AMENDED_CANDIDATE = _candidate_dict(
+    announcement_id="1222881496amp",
+    title="比亚迪股份有限公司2024年年度报告（修订版）",
+    detail_url=(
+        "https://www.cninfo.com.cn/new/disclosure/detail?stockCode=002594"
+        "&announcementId=1222881496amp&announcementTime=2025-04-26%2009:30"
+    ),
+    transport_url="https://static.cninfo.com.cn/finalpage/2025-04-26/1222881496amp.PDF",
+    filing_date="2025-04-26",
+    amended=True,
+)
+_FAKE_BYD_FULL_CLI = _stockinfo_command(_FULL_CANDIDATE)
+_FAKE_BYD_FULL_AND_SUMMARY_CLI = _stockinfo_command(_SUMMARY_CANDIDATE, _FULL_CANDIDATE)
+_FAKE_BYD_TWO_FULL_CLI = _stockinfo_command(_AMENDED_CANDIDATE, _FULL_CANDIDATE)
 
 
 # Fake CLI — always emits structured 1.0 typed error on stderr + exit 1.
@@ -439,6 +403,19 @@ def test_two_full_candidates_yield_ambiguous_no_fetch(tmp_path):
     assert result.status is SourceEnsureStatus.AMBIGUOUS
     assert _raw_files(catalog, "比亚迪") == []
     assert _staging_files(catalog) == []
+
+
+def test_independent_provider_security_conflict_stops_before_fetch(tmp_path):
+    script = _stockinfo_command({**_FULL_CANDIDATE, "security_id": "000001"})
+    cn = _cn_adapter(tmp_path, "cninfo_wrong_security.py", script)
+    service, catalog = _service(tmp_path, cn)
+    try:
+        with pytest.raises(AcquisitionError, match="candidate security_id does not match request"):
+            service.ensure(_byd_request(allow_download=True))
+        assert _raw_files(catalog, "比亚迪") == []
+        assert _staging_files(catalog) == []
+    finally:
+        catalog.close()
 
 
 def test_upstream_typed_failure_fail_closed_zero_writes(tmp_path):
