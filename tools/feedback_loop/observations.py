@@ -30,6 +30,12 @@ def _matching_coordinates(row: dict[str, str]) -> tuple[str, str]:
     return logical_observation_ref(row["run_id"]), logical_observation_ref(row["attempt_id"])
 
 
+def project_observation(row: dict[str, str]) -> dict[str, str]:
+    """Keep the owner observation intact apart from protected caller coordinates."""
+    run_id, attempt_id = _matching_coordinates(row)
+    return {**row, "run_id": run_id, "attempt_id": attempt_id}
+
+
 def _step_identity(row: dict[str, str]) -> tuple[str, ...]:
     return row["owner"], row["origin_owner"], *_matching_coordinates(row), row["step_id"]
 
@@ -118,8 +124,7 @@ class Batch:
     def plan(self) -> dict:
         observations = []
         for key, row in self.observations.items():
-            run_id, attempt_id = _matching_coordinates(row)
-            observations.append({**row, "occurrence_id": key, "run_id": run_id, "attempt_id": attempt_id})
+            observations.append({**project_observation(row), "occurrence_id": key})
         return {"observations": observations, "diagnostics": self.diagnostics}
 
     def unfinished_starts(self, *, registered: set[str] | None = None) -> set[str]:

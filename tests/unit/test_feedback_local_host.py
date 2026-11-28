@@ -1050,3 +1050,37 @@ def test_feedback_plan_does_not_echo_historical_credential_shaped_ids(tmp_path):
     assert observed["run_id"] == "ref-" + sha256(caller.encode()).hexdigest()
     assert caller.encode() not in plan.stdout + plan.stderr
     assert path.read_bytes() == original
+
+
+def test_new_observe_receipt_uses_safe_coordinates_for_an_unregistered_historical_packet(host_config):
+    import sqlite3
+
+    owner = "filing-fetch"
+    caller = "sk-S6SyntheticLegacyLedger0123456789"
+    original = {
+        "schema_version": "feedback-observation/1", "owner": owner, "origin_owner": owner,
+        "run_id": caller, "attempt_id": "original-attempt", "step_id": "original-job/1",
+        "check_id": "job-outcome", "expected": "terminal", "actual": "succeeded",
+        "evidence_ref": "ff-job/1/original-job",
+    }
+    safe = dict(original, run_id="ref-" + sha256(caller.encode()).hexdigest())
+
+    def observe(row, method):
+        occurrence = digest([row[field] for field in IDENTITY])
+        payload = {"occurrence_id": occurrence, "observation": row}
+        key = digest(["observe", owner, occurrence])
+        request = action("observe", owner, payload)
+        request.update(method=method, action_id=key, request_digest=digest([owner, "observe", key, payload]))
+        receipt = invoke(host_config, "rpc", request)
+        assert receipt["action_id"] == key and receipt["request_digest"] == request["request_digest"]
+        assert receipt["state"] == "done" and receipt["result"]["recorded"] is True
+
+    observe(original, "submit")
+    observe(original, "lookup")
+    with closing(sqlite3.connect(host_config.parent / "actions.sqlite")) as conn:
+        retained, = conn.execute("SELECT request FROM actions").fetchone()
+    assert caller not in retained
+    observe(safe, "lookup")
+    observe(safe, "submit")
+    with closing(sqlite3.connect(host_config.parent / "actions.sqlite")) as conn:
+        assert conn.execute("SELECT count(*) FROM actions").fetchone() == (1,)

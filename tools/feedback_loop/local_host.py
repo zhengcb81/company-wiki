@@ -23,7 +23,9 @@ from .diagnostics import (
     run_background,
 )
 from .host import host_environment, read_hosts
-from .observations import IDENTITY, digest, has_stage_result, normalize_observation, terminal_occurrence_ids, unique_fields
+from .observations import (
+    IDENTITY, digest, has_stage_result, normalize_observation, project_observation, terminal_occurrence_ids, unique_fields,
+)
 from .process_launch import BACKGROUND_CREATION_FLAGS, background_argv
 from .triage_diagnostic import native_diagnostic_facts
 
@@ -107,6 +109,31 @@ def _validate(request):
             or not all(isinstance(value, str) for value in (owner, kind, key)) or not _KEY.fullmatch(key)
             or not isinstance(payload, dict) or request.get("request_digest") != digest([owner, kind, key, payload])):
         raise ValueError("invalid feedback action")
+
+
+def _observation_storage_request(request):
+    """Use one safe identity for a newly registered observation and either caller spelling."""
+    payload = request["payload"]
+    original = payload.get("observation")
+    try:
+        observation = normalize_observation(original)
+    except ValueError:
+        return request  # Preserve existing behavior for non-observation payloads.
+    projected = project_observation(original)
+    if projected == original:
+        return request
+    owner = request["owner"]
+    original_id = digest([observation[field] for field in IDENTITY])
+    if payload.get("occurrence_id") != original_id or request["action_id"] != digest(["observe", owner, original_id]):
+        return request
+    safe = normalize_observation(projected)
+    occurrence = digest([safe[field] for field in IDENTITY])
+    key = digest(["observe", owner, occurrence])
+    stored_payload = {**payload, "occurrence_id": occurrence, "observation": projected}
+    return {
+        **request, "action_id": key, "payload": stored_payload,
+        "request_digest": digest([owner, "observe", key, stored_payload]),
+    }
 
 
 def _codex_receipt(path: Path):
@@ -659,7 +686,14 @@ class LocalHost:
             names = self._configured_pass_env(owner) if pass_env is None else pass_env
             allowed = host_environment(names, source=environment)
             return {**prefix, **self._reconcile_lookup(request, environment=allowed)}
+        wire_request = request
         row = self._get(key)
+        if row is None and kind == "observe":
+            # Keep the old lookup context, and never rewrite a legacy row.
+            request = _observation_storage_request(request)
+            key, sha = request["action_id"], request["request_digest"]
+            if key != prefix["action_id"]:
+                row = self._get(key)
         if row is None and request["method"] == "submit":
             route = self._route(owner, kind) if kind in _EXECUTABLE else None
             if kind not in _LOCAL and route is None:
@@ -675,12 +709,12 @@ class LocalHost:
             if inserted and route:
                 self._wake(key, environment=environment)
             row = self._get(key)
-        return self._lookup_result(request, row, prefix, environment=environment)
+        return self._lookup_result(wire_request, row, prefix, stored_digest=sha, environment=environment)
 
-    def _lookup_result(self, request, row, prefix, *, environment=None):
+    def _lookup_result(self, request, row, prefix, *, stored_digest, environment=None):
         if row is None:
             return {**prefix, "state": "absent"}
-        if row["request_digest"] != request["request_digest"]:
+        if row["request_digest"] != stored_digest:
             return {**prefix, "state": "failed", "code": "action_conflict"}
         if request["kind"] == "report" and row["route"] is None:
             return {**prefix, "state": "unknown", "code": "legacy_report_without_owner_ack"}
