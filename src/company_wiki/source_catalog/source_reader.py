@@ -35,6 +35,7 @@ from .service import SourceCatalog
 from .store import metadata_state
 from .security_code import canonical_security_code
 from .source_location import relative_segments
+from .source_reported_period import reported_fiscal_year
 
 
 from company_wiki.source_contract import (
@@ -53,6 +54,17 @@ _EXACT_SOURCE_FACT_FIELDS = (
     "title", "language",
 )
 _SCOPE_UNOBSERVED = object()
+
+
+@dataclass(frozen=True)
+class _VersionMetadataSnapshot:
+    """Keep recorded read identity independent of derived presentation."""
+
+    recorded: dict[str, str | int | None]
+    reported_year: int | None
+
+    def public_manifest(self) -> dict[str, str | int | None]:
+        return {**self.recorded, "fiscal_year": self.reported_year}
 
 
 def _call_source_chunk_sink(operation: Callable[..., None], *args: Any) -> None:
@@ -173,7 +185,7 @@ class SourceVersionReader:
 
     def __exact_read_policy(
         self, ref: SourceRef, resolver: SourceResolver, runtime_policy: dict[str, Any] | None,
-        *, metadata: dict[str, str | int | None] | None = None,
+        *, metadata: _VersionMetadataSnapshot | None = None,
     ) -> str:
         if metadata is None:
             metadata = self.__describe_version(ref, resolver)
@@ -183,7 +195,7 @@ class SourceVersionReader:
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         return exact_source_read_policy_sha256(
             self.__catalog.config, runtime_policy, source_ref=asdict(ref),
-            source_facts={field: metadata.get(field) for field in _EXACT_SOURCE_FACT_FIELDS},
+            source_facts={field: metadata.recorded.get(field) for field in _EXACT_SOURCE_FACT_FIELDS},
             registered_root_ids=(location["root_id"] for location in locations),
         )
 
@@ -265,6 +277,7 @@ class SourceVersionReader:
             raise TypeError("request must be SourceRequest")
         resolver = self.__resolver_for_request()
         found: list[tuple[str, str, SourceRef]] = []
+        possible_period_matches: list[SourceRef] = []
         found_scopes: list[dict] = []
         excluded: list[dict[str, object]] = []
 
@@ -295,10 +308,15 @@ class SourceVersionReader:
                 metadata=metadata,
             ) != "match":
                 continue
-            if request.fiscal_year is not None and (
-                resolver.fiscal_year(document, metadata) != request.fiscal_year
-            ):
-                continue
+            period_unconfirmed = False
+            if request.fiscal_year is not None:
+                year = reported_fiscal_year(document["document_kind"], metadata)
+                if year != request.fiscal_year:
+                    period_unconfirmed = (
+                        year is None and resolver.fiscal_year(document, metadata) == request.fiscal_year
+                    )
+                    if not period_unconfirmed:
+                        continue
             if request.form_type and metadata.get("form_type") != request.form_type:
                 continue
             if request.fiscal_period and (
@@ -336,6 +354,9 @@ class SourceVersionReader:
             ):
                 excluded.append({"source_ref": asdict(ref), "qualification": qualification.to_dict()})
                 continue
+            if period_unconfirmed:
+                possible_period_matches.append(ref)
+                continue
             published = str(document["published_date"] or "")
             found.append((published, provider_document_id or "", ref))
             from .canonical_scope import qualified_source_scope
@@ -344,6 +365,10 @@ class SourceVersionReader:
                                  "published_date": published, "provider_document_id": provider_document_id,
                                  "source_id": source_id})
         if not found:
+            if possible_period_matches:
+                return make_query_result(
+                    "ambiguous", tuple(possible_period_matches), "reported_fiscal_year_unconfirmed",
+                )
             return make_query_result("not_found", (), "no_local_match")
         if request.mode == "latest_as_of":
             selected = latest_source_index(found_scopes)
@@ -364,15 +389,15 @@ class SourceVersionReader:
     def describe_version(self, ref: SourceRef) -> dict[str, str | int | None]:
         """Project catalog-owned display and capture facts for an exact version.
 
-        Only explicit capture fields are exported.  A scanner title derived
-        from a filename is deliberately not promoted into a source title.
+        A reported year may be read from the captured disclosure title. A
+        scanner title derived from a filename stays outside the manifest.
         """
-        return self.__describe_version(ref, self.__resolver_for_request())
+        return self.__describe_version(ref, self.__resolver_for_request()).public_manifest()
 
     def __describe_version(
         self, ref: SourceRef, resolver: SourceResolver,
-    ) -> dict[str, str | int | None]:
-        """Project facts under the same validated visibility as the scoped pin."""
+    ) -> _VersionMetadataSnapshot:
+        """Project recorded and derived facts under one visibility context."""
         if not isinstance(ref, SourceRef):
             raise TypeError("ref must be SourceRef")
         if self.query_exact_pair_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
@@ -396,20 +421,17 @@ class SourceVersionReader:
         source_url = claim("source_url") or claim("https_url")
         if source_url and not source_url.startswith(("https://", "http://")):
             source_url = None
-        fiscal_year_text = claim("fiscal_year")
-        fiscal_year = (
-            int(fiscal_year_text)
-            if fiscal_year_text and re.fullmatch(r"\d{4}", fiscal_year_text)
-            else None
-        )
-        return {
+        document_kind = str(row["document_kind"] or "")
+        declared_year = claim("fiscal_year")
+        recorded_year = int(declared_year) if declared_year and re.fullmatch(r"\d{4}", declared_year) else None
+        recorded = {
             "document_id": ref.document_id,
             "source_id": ref.source_id,
             "content_sha256": ref.content_sha256,
             "byte_size": ref.byte_size,
             "mime_type": ref.mime_type,
             "title": claim("source_title"),
-            "document_kind": str(row["document_kind"] or "") or None,
+            "document_kind": document_kind or None,
             "published_date": visible.get("published_date", str(row["published_date"] or "") or None),
             "source_url": source_url,
             "retrieved_at": claim("retrieved_at"),
@@ -419,7 +441,7 @@ class SourceVersionReader:
             "display_name": claim("display_name"),
             "market": claim("market"),
             "security_id": claim("security_id"),
-            "fiscal_year": fiscal_year,
+            "fiscal_year": recorded_year,
             "fiscal_period": claim("fiscal_period"),
             "period_end": claim("period_end"),
             "form_type": claim("form_type"),
@@ -427,6 +449,7 @@ class SourceVersionReader:
             "provider_document_id": claim("provider_document_id"),
             "language": claim("language"),
         }
+        return _VersionMetadataSnapshot(recorded, reported_fiscal_year(document_kind, visible))
 
     def metadata_diagnostics(self, ref: SourceRef) -> dict[str, object]:
         """Read-only field quality for an exact source, outside the v2 manifest."""
@@ -451,21 +474,21 @@ class SourceVersionReader:
         """Observe facts once and verify the actual buffer under one read context."""
         self.__validate_read_policy_pin(expected_read_policy_sha256)
         resolver, policy, global_pin = self.__read_context()
-        manifest = self.__describe_version(ref, resolver)
+        metadata = self.__describe_version(ref, resolver)
         pin = (global_pin if expected_read_policy_sha256 == global_pin else
-               self.__exact_read_policy(ref, resolver, policy, metadata=manifest))
+               self.__exact_read_policy(ref, resolver, policy, metadata=metadata))
         qualification = None
         if purpose == "filing_reuse":
             from .assertion_service import source_scope_qualification
             qualification = source_scope_qualification(
-                self.__catalog, ref, metadata=manifest,
+                self.__catalog, ref, metadata=metadata.recorded,
                 identity_cache_dir=identity_cache_dir,
             )
         opened = self.__verified_version(ref, purpose=purpose, expected_read_policy_sha256=None,
                                         retain_bytes=True, current_read_policy_sha256=pin,
                                         budget=budget, scope_qualification=qualification)
         assert isinstance(opened, VerifiedContent)
-        return opened, manifest
+        return opened, metadata.public_manifest()
 
     def describe_candidate(self, ref: SourceRef) -> dict[str, object]:
         """DB-only, pathless prequalification for a filing consumer.

@@ -49,6 +49,7 @@ from .runtime_policy import resolver_visibility_projection
 from .service import SourceCatalog
 from .store import metadata_state
 from .security_code import security_codes_equivalent
+from .source_reported_period import reported_fiscal_year
 from .source_request import (
     SOURCE_QUERY_REQUEST_SCHEMA_VERSION,
     SOURCE_RESOLVER_SCHEMA_VERSION,
@@ -1574,7 +1575,12 @@ class SourceResolver:
             if request.provider_document_id and not strong_identity:
                 trace.append(f"{document['title']}: provider_document_id_not_strong")
                 continue
-            year = _fiscal_year(document, metadata)
+            # A filename year may guide legacy search, but it cannot authorize
+            # the verified shortcut before original scope reconciliation.
+            year = (
+                _fiscal_year(document, metadata) if verifier is None
+                else reported_fiscal_year(document["document_kind"], metadata)
+            )
             form_type = str(metadata.get("form_type") or "").strip() or None
             fiscal_period = str(metadata.get("fiscal_period") or "").strip() or None
             language = str(metadata.get("language") or "").strip() or None
@@ -1582,7 +1588,7 @@ class SourceResolver:
                 # A missing field in an old sidecar does not invalidate a
                 # confirmed asset. Explicit contradictory facts still do.
                 provider, provider_document_id = request.provider, request.provider_document_id
-                if metadata.get("fiscal_year") is None and request.fiscal_year is not None:
+                if year is None and request.fiscal_year is not None:
                     year = request.fiscal_year
                 form_type = form_type or request.form_type
                 fiscal_period = fiscal_period or request.fiscal_period
@@ -1650,6 +1656,8 @@ class SourceResolver:
             source_ref = SourceRef(version["document_id"], version["source_id"],
                 version["content_sha256"], version["byte_size"], version["mime_type"])
             scoped_metadata = {**metadata, "document_kind": document["document_kind"]}
+            if verifier is not None and year is not None and "fiscal_year" not in metadata:
+                scoped_metadata["fiscal_year"] = year
             selected_copy: tuple[Mapping[str, Any] | None, str, tuple[str, ...]]
             if verifier is None:
                 from .assertion_service import source_scope_qualification
