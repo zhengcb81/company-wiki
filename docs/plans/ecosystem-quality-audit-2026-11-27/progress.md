@@ -1,6 +1,6 @@
 # Progress Log — 全 12 模块深度审查与综合整改规划
 
-**当前节点**　独立审查已通过本次编排调整。复查覆盖父计划和机器状态、各仓交付条件、StockQA 无 P0 卡的路径、P0-12 的处置归属，以及 Windows 原生窗口和路径用例。业务修复及工具仍待各自版本交付。
+**当前节点**　P0-01 至 P0-11 全部交付候选。11 张止血修复已并线。FF T3 离线组合通过，正式绑定与精确 CI 核对继续；P1-00 独审通过并发布，Phase 1 从 CWP、ET、RF 三仓开始。W12 业务循环仍在原检查点。
 
 ## 2026-11-27 22:54 UTC — P0-01 至 P0-11 分批派工
 
@@ -12,16 +12,24 @@
 | P0-02 | `C:/Temp/s6a/et` | `2f7e03db01c9aed817811e07b7e83acddeac4ba0`，远端 `main` 已核对，[CI 通过](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46082021743) | Windows 37 项定向通过，另在实际 console-subsystem Python 验证无新控制台及进程树回收 |
 | P0-03 | `C:/Temp/s6a/ir` | `5edb9fb561f077d828af00b921dfbdc0926eb412`，远端 `main` 已核对，私有 CI 待查 | Windows 104 项及 11 个子测试通过；最终再验 3 项，覆盖依据渲染、模型透传、裸输出路径和独立安装 |
 | P0-04 | `C:/Temp/s6a/stockwiki` | `6c75adf45c1ed76735d64f561268e951cb92c862`，独审通过，本地 `master` 已快进（无远端） | Windows 8 项定向通过，邻近回归 208 项通过，覆盖 SQLite 特殊路径、回滚和 HTTP 请求框架 |
-| P0-05 | `C:/Temp/s6a/iqs` | `b4aee7fb05671b162ef7f6d8e270ef3cb2692e52`，远端 `master` 已核对，CI 待查 | 邻近定向 136 项通过，最终 55 项通过；实测锁竞争、冷读、并发成功不可覆盖和无窗启动 |
-| P0-06 | `C:/Temp/s6a/cwp` | `46cac862f10efa0203471e7539d99b3c04e3ce35`，补审早停与写入中的原件竞态 | Windows 30 项通过，验证双管道、进程树、脱敏和既有本地 JSON 表示合同 |
-| P0-07 | `C:/Temp/s6a/ff` | `1757b119e5f8dab5a6cae2cbde850fed08440b27`，并线前补修 CWP 工作区边界 | Windows 30 项通过，超时退出、进程回收、安装态 T3 四探针和同作业零重发 |
+| P0-05 | `C:/Temp/s6a/iqs` | `b4aee7fb05671b162ef7f6d8e270ef3cb2692e52`，远端 `master` 已核对，[CI 通过](https://github.com/zhengcb81/invest-quick-scan/actions/runs/46082564988) | 邻近定向 136 项通过，最终 55 项通过；实测锁竞争、冷读、并发成功不可覆盖和无窗启动 |
+| P0-06 | `C:/Temp/s6a/cwp` | 远端 `master@d1987560eafe97e71753cf3e5d7e6712d661bbdd`，[CI 通过](https://github.com/zhengcb81/company-wiki/actions/runs/46083438812) | Windows 定向与独审通过。实测判定已发布的原件后再停进程，部分写入继续；合并版推送钩子 23 项通过 |
+| P0-07 | `C:/Temp/s6a/ff` | watchdog `035d415b81268d1192721cfdc7b743238f674d32` 已入远端 `main`，[CI 通过](https://github.com/zhengcb81/filing-fetch/actions/runs/46083923728)。T3 `82c749464b494cf8dc9ec9e694c433adb02717e5` 也已入远端 `main` | watchdog 28 项通过，已有输出不触发新的尺寸拒绝。T3 最终 18 项与跨仓四案通过；正式绑定待验 |
 | P0-08 | `C:/Temp/s6a/sid` | `8bc6e93b55142e0eff464c14adc08ebc93fb59c3`，远端 `v2-clean-rewrite` 已核对，[CI 通过](https://github.com/zhengcb81/StockInfoDownloader/actions/runs/46082044981) | Windows 102 项定向通过，实测 HTTP 截断、原 PDF 保留及占用后原子替换 |
-| P0-09 | `C:/Temp/s6a/rf` | `5a28c0c88df1a8e8fb9b167dbd884eebef7d7894`，远端 `main` 已核对，本机推送钩子通过 | Windows 170 项和 13 个子用例通过。另有 1 项既有跳过、1 项在基线也失败的历史 review 断言，交 Phase 1 更新 |
+| P0-09 | `C:/Temp/s6a/rf` | `5a28c0c88df1a8e8fb9b167dbd884eebef7d7894`，远端 `main` 已核对，[CI 通过](https://github.com/zhengcb81/revenue-forecast/actions/runs/46082671176) | Windows 170 项和 13 个子用例通过。另有 1 项既有跳过、1 项在基线也失败的历史 review 断言，交 Phase 1 更新 |
 | P0-10 | `C:/Temp/s6a/mc` | `c0ec9c168d8f2c038405ab0c6cbab0438ff5ad87`，远端 `master` 已核对，[CI 通过](https://github.com/zhengcb81/MeetingConverter/actions/runs/46082052941) | Windows 137 项定向通过，真实 CLI 和 ffprobe 验证坏配置、坏音频及正常音频，新增供应商请求为零 |
 | P0-11 | `C:/Temp/s6a/dash` | `de62760090c6380914b5c30c4726afe85c5234d7`，远端 `main` 已核对，私有 CI 待查 | Windows 7 项启动测试通过；邻近 55 项通过，另 1 项 M8 过期断言在 `666e2426` 同现。保留已有 RF 配置和 48766 运行 |
-| P1-00 | `C:/Temp/s6a/spec` | 独立推进 | 原工具分支只读，候选只动本仓工程工具与正反例 |
+| P1-00 | `C:/Temp/s6a/spec` | 候选 `b11d45f457a60203bbc7ecb6e598704e4904013b` 已独审；同一工具文件发布于 CWP `7320c52a2a6daf2d424c35216fa6ed3cad88f063` | 25 项通过，实际 pytest 验证子集选择、收窄配置、合法输出选项、缺失项和合法包导入。CWP P1-01、ET P1-03、RF P1-05 已按正式基线开工；各自旧测试差异按根因处理 |
 
 RF 的一次隔离测试把过长请求放在 Windows 命令行，启动失败后 pytest 把继承变量带进本地工具输出。现已将请求改由 stdin 传入，并在启动测试进程前白名单化测试环境。后续施工沿用环境隔离，保留 Windows 和临时夹具所必需的变量。凭据值不抄录到计划或受版本控制的证据中。
+
+## 2026-11-28　T3 组合与 Phase 1 首批
+
+- **P0-07 组合证据**　用真实 FF 和 CWP 进程、CN/HK/US 本地采集替身和一个损坏原件执行四案，四案通过。三个市场各 discover/fetch 一次，损坏原件零采集。同一 run 冷读与再执行的回执相同，新调用为零。CWP 提供方已发布 `1a62edf1d0d89567a5a552709d7027880ea3b857`。第一轮复验发现 FF 短请求将探针诊断落入默认目录。已用 `--jobs-dir` 接入原 DirectRun 回执及 outbox，FF 候选 `82c749464b494cf8dc9ec9e694c433adb02717e5` 经独审，18 项回归通过。固化脚本的最终组合四案再次通过，安装根 `.ff_jobs` 零残留，临时目录已回收。复跑用 [replay_t3_composition.py](review/replay_t3_composition.py)。
+- **P1-01 CWP**　`C:/Temp/s6a/cwp-p1` 从发布工具版开始。Windows 31 项定向通过；全目录收集涉及历史外部依赖，在处理真实收集和运行清单。保持开发者快测。
+- **P1-03 ET**　`C:/Temp/s6a/et-p1` 真实 Windows 收集 831 项，旧 CI 从未覆盖的退出及回告断言已逐一追踪。完整单跑超过 610 秒，按适用平台分片并核对执行并集。旧退出码、原作业、输出协议和本地脱敏留痕保留。Windows 收集 833 项，分为 251/297/285，六项 F4 回归通过。候选 `93c522e68917c8540138585a47200cba5d369333` 修正 GitHub 的 job/step 环境与同 SHA 采证。已推送 [ET 草案 PR](https://github.com/zhengcb81/earnings-transcripts/pull/1) 等真实双平台组合验收。
+- **P1-04 SID**　`C:/Temp/s6a/sid-p1` 已按正式 `8bc6e93b` 开工，补齐真实离线测试发现以及 Windows 原生执行。
+- **P1-05 RF**　`C:/Temp/s6a/rf-p1` 定向 82 项通过。移除过时的缺 review 拒绝期待，保留实际 SHA 错拒绝；查清被旧硬编码测试列表遗漏的四个收集故障，正在核对完整离线执行。
 
 ## Session: 2026-11-27
 
@@ -102,7 +110,7 @@ RF 的一次隔离测试把过长请求放在 Windows 命令行，启动失败�
 | P0-11 Dashboard | dash | `de59fee` | 等候候选；集成时核验后续发布改动，见下 |
 | P1-00 工具 | cwp | `35b8b250d` | 等候工具和正反例，自身可单独验收 |
 
-`stockqa@86f633d` 是第 13 个预留工区，当前批次未派该卡。P0-12 的首轮只读清点发现 12 仓共登记 188 个 Git 工区，IQS 有 1 个被 Git 标记为 prunable；归属、独有内容和运行用途需由 owner 核实，本次保留全部工区。
+`stockqa@86f633d` 是第 13 个预留工区，当前批次未派该卡。P0-12 的首轮只读清点发现 12 仓共登记 188 个 Git 工区，IQS 有 1 个被 Git 标记为 prunable；IQS 唯一标为 prunable 的记录属于 Dashboard 的独立施工项目，实际叶目录和上层工区仍存在。目前保留，等该 owner 确认有效入口与独有产物。总控已回收本轮两个用于发布的空临时工区。
 
 **发布目标复核。** 独立核验发现，9 张卡与本地已有发布引用同版。CWP 两张卡的基线到总控 `e90a16c59` 只有两个 F4 文档提交。Dashboard 的 48766 部署记录（Dashboard 本仓 `.runtime/dashboard-m7-666e242/live-release.json`） 记载 20:20 UTC 已发布 `666e2426`，相对施工基线多 5 个提交。本地 main 与已知 origin/main 分别另有 6 和 8 个提交。在候选到达时刷新发布头，只合并故障修复，验证 `backend/dashboard/main.py` 与 `adapters/factory.py` 仍把 `rf_verified_scope_root` 传给 RF，保留已发布的作业分页。组合验收使用隔离目录与随机本地端口。
 

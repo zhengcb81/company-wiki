@@ -2,9 +2,9 @@
 
 本文件与 CURRENT_STATUS.json 记录现状，按 [task_plan.md](task_plan.md) 实施，复验见 [HANDOFF.md](HANDOFF.md)，长期循环见 [MAINLINE_LOOP_GOAL.md](MAINLINE_LOOP_GOAL.md)。
 
-## 2026-11-27　F4 已验收，S6 首批实施中，W12 暂停
+## 2026-11-28　F4 已验收，S6 推进 Phase 1，W12 暂停
 
-F4 两项 RF SYSTEM 原作业已在正式宿主入账，周跑的 FF T3 仍按原作业待证。[F4 回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)。当前进入 [S6 实施计划](../ecosystem-quality-audit-2026-11-27/task_plan.md)。11 张止血卡与 P1-00 检查工具分别在原工区推进。首个具备候选提交和定向回归的模块即可独审；P1-00 单独验收。在 S6 组合验收后从 W12 原检查点接续，保留原 `/8` 未知费用与作业号。
+F4 两项 RF SYSTEM 原作业已在正式宿主入账，周跑的 FF T3 仍按原作业待证。[F4 回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)。当前进入 [S6 实施计划](../ecosystem-quality-audit-2026-11-27/task_plan.md)。11 张止血卡的修复均进入各自发布线。T3 已通过 FF 和 CWP 的四案离线组合复验，正式绑定与两个私有仓 CI 仍待核对。P1-00 已独审发布，CWP、ET、RF 的 Phase 1 正用完整 pytest 收集和实际执行查清旧 CI 漏项。在 S6 组合验收后从 W12 原检查点接续，保留原 `/8` 未知费用与作业号。
 
 ## 2026-11-26 历史部署检查点（已由上方 11 月 27 日正式回执更新）
 

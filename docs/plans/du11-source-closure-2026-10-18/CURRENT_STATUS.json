@@ -58,7 +58,7 @@
       "mainline_position": "active_after_s5_10_and_f4_before_w12",
       "predecessor": "../feedback-loop-2026-11-17/deployment-acceptance-20261126.md",
       "precedes": "W12 business summary and company-pool mainline resumption",
-      "status": "PHASE_0_AND_P1_00_IN_PROGRESS",
+      "status": "PHASE_0_T3_COMPOSITION_AND_PHASE_1_ROLLOUT_IN_PROGRESS",
       "implementation_authorized": true,
       "first_wave": {"owner_cards": ["P0-01", "P0-02", "P0-03", "P0-04", "P0-05", "P0-06", "P0-07", "P0-08", "P0-09", "P0-10", "P0-11"], "tool_card": "P1-00", "accept_independently": true, "next_join": "per-owner Phase 1 adoption", "separate_housekeeping": "P0-12"},
       "task_plan": "../ecosystem-quality-audit-2026-11-27/task_plan.md",
@@ -156,8 +156,8 @@
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
   "project_status": "M3_AND_F4_ACCEPTED; S6_FIRST_WAVE_IN_PROGRESS; W12_PAUSED",
-  "as_of_date": "2026-11-27",
-  "observed_at_utc": "2026-11-27T22:36:41Z",
+  "as_of_date": "2026-11-28",
+  "observed_at_utc": "2026-11-28T00:10:00Z",
   "cwp_saved_response_repair": {
     "evidence": "../feedback-loop-2026-11-17/f3c-saved-response-acceptance.md",
     "assessor_version": "source-summary-assessment/1.4.0",
@@ -238,7 +238,7 @@
     "ci_python_312_local": "unavailable; CI is the authoritative exact-environment check",
     "full_github_ci": "passed on exact follow-up SHA 1391ae81d8126b5026209e26ae56a7d9bb0a9f0c; run 43757282611 / #537 / job 132944030549, 7m52s"
   },
-  "next_action": "Accept each S6 P0 candidate on its current owner release with focused regression and independent review. Accept P1-00 independently. Adopt its tools in Phase 1 by repository. Resume W12 at its original checkpoint after S6.",
+  "next_action": "T3 offline FF/CWP composition accepted. Verify owner deployment binding and exact CI while retaining old receipts. Continue repository-local Phase 1 rollout using the published P1-00 tool and actual offline execution evidence. Resume W12 at its original checkpoint after S6.",
   "w12_attempt": {
     "status": "root_causes_recorded_owner_remediation_in_progress",
     "receipt": "review/w12-wuxi-resume-20261120/README.md",

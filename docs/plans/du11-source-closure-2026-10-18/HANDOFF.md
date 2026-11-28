@@ -1,6 +1,6 @@
 # 当前交接
 
-**F4 已验收，S6 首批实施中，W12 暂停。** F4 两项 RF SYSTEM 原作业已在正式宿主入账，周跑的 FF T3 仍按原作业待证。[F4 回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)。当前进入 [S6 实施计划](../ecosystem-quality-audit-2026-11-27/task_plan.md)。11 张止血卡与 P1-00 检查工具分别在原工区推进。首个具备候选提交和定向回归的模块即可独审；P1-00 单独验收。在 S6 组合验收后从 W12 原检查点接续，保留原 `/8` 未知费用与作业号。 总控按[首批交接台账](../ecosystem-quality-audit-2026-11-27/progress.md#首批交接台账)逐仓接收。
+**F4 已验收，S6 首批实施中，W12 暂停。** F4 两项 RF SYSTEM 原作业已在正式宿主入账，周跑的 FF T3 仍按原作业待证。[F4 回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)。当前进入 [S6 实施计划](../ecosystem-quality-audit-2026-11-27/task_plan.md)。11 张止血卡的修复已进入各仓发布线。FF↔CWP T3 已用离线四案验收，正式绑定和两个私有仓精确 CI 待查。P1-00 工具已独审发布，Phase 1 首批为 CWP、ET、SID、RF。在 S6 组合验收后从 W12 原检查点接续，保留原 `/8` 未知费用与作业号。 总控按[首批交接台账](../ecosystem-quality-audit-2026-11-27/progress.md#首批交接台账)逐仓接收。
 
 2026-11-26 历史部署检查点。先读 [当前状态](CURRENT_STATUS.md) 和 [F4 正式部署](../feedback-loop-2026-11-17/deployment-acceptance-20261126.md)。共享恢复及本轮 33 份分诊回执已从原任务验证。正式验收剩两个私有 CI 和 RF 两个 SYSTEM 任务的证据。业务目标仍停在 W12。 [F4 运行回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)
 
