@@ -33,11 +33,17 @@ RF 的一次隔离测试把过长请求放在 Windows 命令行，启动失败�
 
 ## 2026-11-28　Phase 1 首次 CI 反馈
 
-- **CWP ↔ FF T3**　[FF 正式 CI](https://github.com/zhengcb81/filing-fetch/actions/runs/46086264095) 通过，实际 CWP 配置用四份隔离夹具完成 `open/close`，采集派发为零且临时目录清空。CWP 首次 [精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/46085744052) 的架构测试暴露按字符串动态导入。候选 `ac9ba2b3d176ddb7fe01c5a41c24d5b1bd3b6288` 只用显式 CWP 公开入口，保留原测试红转绿。独立 Windows 复验两项通过，已保留在途的暂存与未暂存差异并快进、推送 `master`。 [修复版精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/46088694086) 与发布组合复验仍在运行。
-- **P1-03 ET**　[首次双平台 CI](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46086664981) 识别三类实际问题。Windows 原文比较改用文件身份，Linux 不解析 Windows 原生绑定，强停后以原作业的持久事件区分已知中断和尚未确认，费用保持 `unknown`。Windows 上六项针对用例通过，Ruff 与双平台 mypy 通过。`b0d8394ea0983d0c0c6ebc39d5be1da0151c3ffb` 已推到原草案，[六个执行分片与覆盖归集](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46088338831) 全绿，正在做合并前独审。
+- **CWP ↔ FF T3**　[FF 正式 CI](https://github.com/zhengcb81/filing-fetch/actions/runs/46086264095) 通过，实际 CWP 配置用四份隔离夹具完成 `open/close`，采集派发为零且临时目录清空。CWP 首次 [精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/46085744052) 的架构测试暴露按字符串动态导入。候选 `ac9ba2b3d176ddb7fe01c5a41c24d5b1bd3b6288` 只用显式 CWP 公开入口，保留原测试红转绿。独立 Windows 复验两项通过，已保留在途的暂存与未暂存差异并快进、推送 `master`。 [修复版精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/46088694086) 通过。原 FF 版本组合再跑四案均通过，冷读后重复同作业回执一致、三市场派发计数无增量。正式绑定保持独立待证。
+- **P1-03 ET**　[首次双平台 CI](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46086664981) 识别三类实际问题。Windows 原文比较改用文件身份，Linux 不解析 Windows 原生绑定，强停后以原作业的持久事件区分已知中断和尚未确认，费用保持 `unknown`。Windows 上六项针对用例通过，Ruff 与双平台 mypy 通过。`b0d8394ea0983d0c0c6ebc39d5be1da0151c3ffb` 已推到原草案，[六个执行分片与覆盖归集](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46088338831) 全绿，独审核实所有原作业与零重发断言后已快进 `main`；[主线同版 CI](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46089171631) 也通过。ET 用 CI 直接运行 `quality/source_checks.py` 达到本仓架构基线检查，后续保持这一个检查入口。
 - **P1-02 FF**　从已发布 `82c749464b494cf8dc9ec9e694c433adb02717e5` 创建 `C:/Temp/s6a/ff-p1` 开工，Windows 收集基线 1,885 个节点。只在该工区改工程检查和隔离测试。主工区的财报报表施工归原 owner。
 - **P1-04 SID**　把实际旧提交的 HTTP 断流和原件替换缺陷作为红证据。Windows 首次完整运行还找出请求夹具身份歧义、安全作业号的旧断言和参考工具自测的进程污染，正在消除根因。候选 `7c34f34c4be4c76f2363097b9be58ab84a3089db` 保留作定位依据，待接受版本另记。
 - **P1-05 RF**　旧 CI 漏跑的身份夹具和原子写用例已按公开契约修正。候选 `fed82030b640be3633ea683f0e21377d17806677` 的 87 项 Windows 针对复验通过，完整 Windows 执行进行中。日常 12 项快测继续保留。
+
+## 2026-11-28　共同根因与新候选
+
+- **P1-00 公用路径归一**　[SID 首次双平台 CI](https://github.com/zhengcb81/StockInfoDownloader/actions/runs/46088974903) Ubuntu 通过，Windows 543 个 SID 用例通过及 11 个真正联网用例被隔离。参考工具把 Windows 短路径与长路径视为不同目录，误拒两项参考自测。已在公用实现统一规范化两侧路径，保留越界拒绝及原收集对照。两项复现红转绿，Windows 自测 26 项加 7 子项通过，独审通过。新参考候选 `66dc8881bc441c89918c8c306457572160d3e772`，树 `33ca2b5d7c77786416e5d436f589948785fb494b`。SID [草案](https://github.com/zhengcb81/StockInfoDownloader/pull/1) 的精确候选 `31fbefc6e75ad2f6cd80c255c19e3fcba5421432` 用同一份修复重验。其余采用者在各自候选冻结前核对同树。
+- **P1-02 发现的 CWP 旧资料期次缺口**　干净目录和独立 `ac9ba2b3d` 证实，带可信标题与披露日期但缺结构化财年的旧 HK sidecar 被来源查询 `found`，路径无关候选却返回 `fiscal_year=null`。明确期次的对照返回 2024。FF 保留真实不符拒绝。总控追踪到本地匹配走标题年、公开清单只投影显式期次的语义分叉，后续由 CWP owner 先统一期次证据，不从查询输入补写，也不做公司特判。
+- **P1-06 Audit**　隔离工作树 `C:/Temp/s6a/audit-p1`，候选 `17728e785c5dd0865c102985ac16f8f52c4034ff`，同一参考树。Windows 无默认 HOME 的旧收集在导入时失败，红测定位到显式安装也读取默认目录，现只在选择默认目的地时解析 HOME。强停池状态复验入测试发现，三类 F4 回告、显式安装和架构回归 15 项通过。Ruff、Python 3.12 工具 mypy 通过，完整 Windows 收集及运行在本仓执行，无远端发布。
 
 ## Session: 2026-11-27
 
