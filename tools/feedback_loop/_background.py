@@ -19,7 +19,7 @@ def main() -> int:
         runtime_feedback.record("feedback-background", "failed", error=exc, publish_issue=False)
         raise
 
-    run_background(_run)
+    run_background(_run, detached=True)
     return 0
 
 

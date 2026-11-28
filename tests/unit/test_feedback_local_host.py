@@ -18,6 +18,80 @@ ROOT = Path(__file__).resolve().parents[2]
 HOST = [sys.executable, "-B", "-m", "tools.feedback_loop.local_host"]
 
 
+@pytest.mark.parametrize(("unavailable", "terminal_exit"), [(False, 0), (True, 0), (False, 23)])
+def test_detached_site_startup_diagnostics_are_redacted(tmp_path, monkeypatch, capsys, unavailable, terminal_exit):
+    from tools.feedback_loop import hook
+
+    site = tmp_path / "site"
+    site.mkdir()
+    marker = site / "ran"
+    (site / "sitecustomize.py").write_text(
+        "import os, sys\n"
+        "from pathlib import Path\n"
+        "def deny(event, args):\n"
+        "    if event in ('socket.connect', 'socket.getaddrinfo', 'socket.sendto'):\n"
+        "        raise AssertionError('isolated startup fixture')\n"
+        "sys.addaudithook(deny)\n"
+        "if os.name == 'nt':\n"
+        "    assert not __import__('ctypes').windll.kernel32.GetConsoleWindow()\n"
+        "os.write(2, b'Authorization: Bearer synthetic-site-first\\r\\n')\n"
+        "os.write(2, b'\\tsynthetic-site-fold\\nRuntimeWarning: site cause survived\\n')\n"
+        "Path(__file__).with_name('ran').touch()\n"
+        + (f"os._exit({terminal_exit})\n" if terminal_exit else ""),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("PYTHONPATH", os.pathsep.join((str(site), str(ROOT / "src"))))
+    state = tmp_path / "state"
+    monkeypatch.setenv("LOCALAPPDATA", str(state))
+    monkeypatch.setenv("XDG_STATE_HOME", str(state))
+    monkeypatch.delenv("RESEARCH_FEEDBACK_DIR", raising=False)
+    monkeypatch.delenv("RESEARCH_FEEDBACK_OUT", raising=False)
+    config = tmp_path / "hosts.json"
+    config.write_text("{}", encoding="utf-8")
+    sidecar = tmp_path / "input.jsonl"
+    sidecar.touch()
+    receipt = tmp_path / "wake.json"
+    destination = receipt.with_suffix(".stderr.log")
+    bootstrap_path = destination.with_name(destination.name + ".bootstrap")
+    if unavailable:
+        destination.mkdir()
+        bootstrap_path.mkdir()
+        state.write_bytes(b"existing blocker")
+    started = []
+    popen = subprocess.Popen
+
+    def launch(*args, **kwargs):
+        child = popen(*args, **kwargs)
+        started.append(child)
+        return child
+
+    monkeypatch.setattr(subprocess, "Popen", launch)
+    assert hook.wake(sidecar, str(config), receipt)["status"] == "scheduled"
+    child, = started
+    try:
+        assert child.wait(timeout=20) == terminal_exit
+    finally:
+        if child.poll() is None:
+            child.kill()
+            child.wait(timeout=10)
+    assert marker.is_file()
+    if terminal_exit:
+        assert receipt.read_bytes() == b""
+    else:
+        assert json.loads(receipt.read_bytes())["status"] == "tick_completed"
+    stderr = capsys.readouterr().err
+    if unavailable:
+        assert stderr.splitlines() == ["company-wiki background diagnostic could not be retained"]
+        assert state.read_bytes() == b"existing blocker"
+    else:
+        assert not stderr
+        assert b"RuntimeWarning: site cause survived" in bootstrap_path.read_bytes()
+    for path in tmp_path.rglob("*"):
+        if path.is_file() and path.suffix != ".py":
+            assert b"synthetic-site-first" not in path.read_bytes()
+            assert b"synthetic-site-fold" not in path.read_bytes()
+
+
 @pytest.mark.parametrize(("body", "code", "expected"), [
     ('raise ImportError("api_key=synthetic-startup-value")\n', 1, "ImportError"),
     ("import os, sys\nprint('forced-stop authorization: Bearer synthetic-startup-value',"
@@ -51,7 +125,7 @@ def test_detached_background_keeps_diagnostics_before_target_main(tmp_path, monk
         started.append(child)
         return child
 
-    monkeypatch.setattr(hook.subprocess, "Popen", launch)
+    monkeypatch.setattr(subprocess, "Popen", launch)
     assert hook.wake(tmp_path / "input.jsonl", str(tmp_path / "config.json"), receipt)["status"] == "scheduled"
     child, = started
     try:
