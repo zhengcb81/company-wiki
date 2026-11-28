@@ -460,3 +460,7 @@ def test_safetensors_read_only_mapping_roundtrip(tmp_path):
     assert torch.equal(got, small)
     got_big = storage[tensors["big"][2]:tensors["big"][3]].view(torch.bfloat16).view(8, 5)
     assert torch.equal(got_big, big)
+
+    del got, got_big, storage
+    path.unlink()
+    assert not path.exists()

@@ -10,7 +10,7 @@ from company_wiki.document_normalization import NormalizationLimits
 from company_wiki.document_normalization.errors import UnsupportedFormatError
 from company_wiki.document_normalization.html_parser import decode_html_bytes
 
-from conftest import html_page, normalize_html
+from support.document_normalization_fixtures import html_page, normalize_html
 
 
 def texts(doc, kind=None):
@@ -223,7 +223,7 @@ class TestEncoding:
 
     def test_undeclared_non_utf8_falls_back_and_flags_repair(self):
         from company_wiki.document_normalization import normalize_document
-        from conftest import sha256_hex, source_id_for
+        from support.document_normalization_fixtures import sha256_hex, source_id_for
 
         data = "<html><body><p>caf\xe9 figures</p></body></html>".encode("latin-1")
         doc = normalize_document(
@@ -260,7 +260,7 @@ class TestEncoding:
 class TestMimeRouting:
     def test_application_pdf_rejected(self):
         from company_wiki.document_normalization import normalize_document
-        from conftest import sha256_hex, source_id_for
+        from support.document_normalization_fixtures import sha256_hex, source_id_for
 
         data = b"%PDF-1.7 minimal"
         with pytest.raises(UnsupportedFormatError):

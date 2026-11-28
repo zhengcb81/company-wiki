@@ -10,7 +10,7 @@ from xml.etree import ElementTree as ET
 
 import pytest
 from company_wiki import document_normalization as dn
-from conftest import build_pptx, sha256_hex, source_id_for, html_page
+from support.document_normalization_fixtures import build_pptx, sha256_hex, source_id_for, html_page
 
 MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 
@@ -169,7 +169,7 @@ def test_nonrendered_picture_is_not_an_unread_slide_material(visibility):
     from pptx import Presentation
     from pptx.oxml.xmlchemy import OxmlElement
     from pptx.util import Inches
-    from conftest import tiny_png
+    from support.document_normalization_fixtures import tiny_png
     from company_wiki.document_normalization.ocr_composition import enrich_pptx
 
     presentation = Presentation()
@@ -213,7 +213,7 @@ def test_nonrendered_picture_is_not_an_unread_slide_material(visibility):
 def test_selective_ocr_keeps_an_unattempted_occurrence_visible_on_an_attempted_page():
     from pptx import Presentation
     from pptx.util import Inches
-    from conftest import tiny_png
+    from support.document_normalization_fixtures import tiny_png
     from company_wiki.document_normalization.ocr_composition import enrich_pptx
 
     presentation = Presentation()

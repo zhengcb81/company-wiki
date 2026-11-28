@@ -47,7 +47,10 @@ import sys
 
 with Path(sys.argv[1]).open("a", encoding="ascii") as stream:
     stream.write("report\\n")
-raise SystemExit(subprocess.run(sys.argv[2:], check=False).returncode)
+raise SystemExit(subprocess.run(
+    sys.argv[2:], stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr,
+    check=False, timeout=15, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+).returncode)
 """
 
 _LOSE_REPORT_REPLY = """
@@ -207,11 +210,11 @@ def test_hard_kill_filing_runner_recovers_same_original_and_preserves_unknown_co
     job_id = invoke([*ff_cli, "submit"], {"schema_version": "ff-job/1", "kind": "filing.acquire",
                     "command_id": "f4-first", "idempotency_key": "f4-first", "request": request})["owner_job_id"]
     sidecar = tmp_path / "observations.jsonl"
-    ff_reconcile = [*PY, str(ff.with_name("ff_job_feedback.py")), "reconcile", "--jobs-dir", str(jobs),
-                    "--config", config, "--timeout-seconds", "10"]
     local_host = [*PY, "-m", "tools.feedback_loop.local_host", "--config", _write(tmp_path / "local.json", {
         "state": "feedback.sqlite", "owners": {"filing-fetch": {
-            "cwd": str(ROOT), "timeout_seconds": 20, "actions": {"reconcile": ff_reconcile},
+            # The observation port reports unknown jobs as-is. The job port can
+            # reconcile the same attempt against CWP's already indexed original.
+            "cwd": str(ROOT), "ff_status_argv": ff_cli, "ff_reconcile_config": config,
         }},
     })]
     host_map = _write(tmp_path / "hosts.json", {"filing-fetch": {"argv": local_host + ["rpc"], "pass_env": ["PYTHONPATH"]}})

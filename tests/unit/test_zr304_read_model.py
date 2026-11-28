@@ -2,6 +2,7 @@
 model (one production read semantics)."""
 from __future__ import annotations
 
+from contextlib import closing
 import json
 import sqlite3
 import sys
@@ -137,50 +138,50 @@ def _seed_artifact(con: sqlite3.Connection, tmp_path: Path) -> str:
 
 def test_record_attempt_failed_without_artifact(tmp_path) -> None:
     """A FAILED producer run is recorded even though no artifact exists."""
-    con = _seed_db(tmp_path / "catalog.sqlite3")
-    row = record_attempt(
-        con, "d1", producer_name="llm", producer_version="2.0.0",
-        outcome="failed", artifact_role="summary",
-        created_at="2026-01-02T00:00:00Z", request_id="req-1",
-    )
-    con.commit()
-    assert row["outcome"] == "failed"
-    assert row["request_id"] == "req-1"
-    attempts = attempts_for(_Store(con), "d1")
-    assert len(attempts) == 1
-    assert attempts[0]["outcome"] == "failed"
-    assert attempts[0]["artifact_role"] == "summary"
+    with closing(_seed_db(tmp_path / "catalog.sqlite3")) as con:
+        row = record_attempt(
+            con, "d1", producer_name="llm", producer_version="2.0.0",
+            outcome="failed", artifact_role="summary",
+            created_at="2026-01-02T00:00:00Z", request_id="req-1",
+        )
+        con.commit()
+        assert row["outcome"] == "failed"
+        assert row["request_id"] == "req-1"
+        attempts = attempts_for(_Store(con), "d1")
+        assert len(attempts) == 1
+        assert attempts[0]["outcome"] == "failed"
+        assert attempts[0]["artifact_role"] == "summary"
 
 
 def test_calls_this_request_separates_history(tmp_path) -> None:
     """calls_this_request counts ONLY the tagged request; historical
     attempts (request_id NULL) never leak into the count."""
-    con = _seed_db(tmp_path / "catalog.sqlite3")
-    record_attempt(con, "d1", producer_name="llm", producer_version="2.0.0",
-                   outcome="succeeded", artifact_role="summary",
-                   created_at="2026-01-01T00:00:00Z")  # history
-    record_attempt(con, "d1", producer_name="llm", producer_version="2.0.0",
-                   outcome="failed", artifact_role="summary",
-                   created_at="2026-01-02T00:00:00Z", request_id="req-9")
-    record_attempt(con, "d1", producer_name="parser", producer_version="1.0.0",
-                   outcome="succeeded", artifact_role="normalized",
-                   created_at="2026-01-02T00:00:01Z", request_id="req-9")
-    con.commit()
-    counts = calls_this_request(_Store(con), "d1", "req-9")
-    assert counts == {"succeeded": 1, "failed": 1}
-    assert len(attempts_for(_Store(con), "d1")) == 3
+    with closing(_seed_db(tmp_path / "catalog.sqlite3")) as con:
+        record_attempt(con, "d1", producer_name="llm", producer_version="2.0.0",
+                       outcome="succeeded", artifact_role="summary",
+                       created_at="2026-01-01T00:00:00Z")  # history
+        record_attempt(con, "d1", producer_name="llm", producer_version="2.0.0",
+                       outcome="failed", artifact_role="summary",
+                       created_at="2026-01-02T00:00:00Z", request_id="req-9")
+        record_attempt(con, "d1", producer_name="parser", producer_version="1.0.0",
+                       outcome="succeeded", artifact_role="normalized",
+                       created_at="2026-01-02T00:00:01Z", request_id="req-9")
+        con.commit()
+        counts = calls_this_request(_Store(con), "d1", "req-9")
+        assert counts == {"succeeded": 1, "failed": 1}
+        assert len(attempts_for(_Store(con), "d1")) == 3
 
 
 def test_record_attempt_validation(tmp_path) -> None:
-    con = _seed_db(tmp_path / "catalog.sqlite3")
-    with pytest.raises(ProducerJournalError, match="outcome"):
-        record_attempt(con, "d1", producer_name="p", producer_version="1",
-                       outcome="maybe", artifact_role="r",
-                       created_at="2026-01-01T00:00:00Z")
-    with pytest.raises(ProducerJournalError, match="document_id"):
-        record_attempt(con, " ", producer_name="p", producer_version="1",
-                       outcome="succeeded", artifact_role="r",
-                       created_at="2026-01-01T00:00:00Z")
+    with closing(_seed_db(tmp_path / "catalog.sqlite3")) as con:
+        with pytest.raises(ProducerJournalError, match="outcome"):
+            record_attempt(con, "d1", producer_name="p", producer_version="1",
+                           outcome="maybe", artifact_role="r",
+                           created_at="2026-01-01T00:00:00Z")
+        with pytest.raises(ProducerJournalError, match="document_id"):
+            record_attempt(con, " ", producer_name="p", producer_version="1",
+                           outcome="succeeded", artifact_role="r",
+                           created_at="2026-01-01T00:00:00Z")
 
 
 # ---------------------------------------------------------------------------
@@ -194,8 +195,8 @@ def test_read_model_schema_versioned() -> None:
 
 
 def test_read_artifact_bound_uses_binding(tmp_path) -> None:
-    con = _seed_db(tmp_path / "catalog.sqlite3")
-    _seed_artifact(con, tmp_path)
+    with closing(_seed_db(tmp_path / "catalog.sqlite3")) as con:
+        _seed_artifact(con, tmp_path)
     reader = ReadOnlyCatalogReader(tmp_path / "catalog.sqlite3")
     try:
         artifact = read_artifact(
@@ -214,10 +215,10 @@ def test_read_artifact_bound_uses_binding(tmp_path) -> None:
 def test_read_artifact_legacy_fallback(tmp_path) -> None:
     """Without a binding row, the read model falls back to the artifacts
     columns and marks binding='legacy' (still normalized + validated)."""
-    con = _seed_db(tmp_path / "catalog.sqlite3")
-    _seed_artifact(con, tmp_path)
-    con.execute("DELETE FROM artifact_bindings")
-    con.commit()
+    with closing(_seed_db(tmp_path / "catalog.sqlite3")) as con:
+        _seed_artifact(con, tmp_path)
+        con.execute("DELETE FROM artifact_bindings")
+        con.commit()
     reader = ReadOnlyCatalogReader(tmp_path / "catalog.sqlite3")
     try:
         artifact = read_artifact(
@@ -232,20 +233,20 @@ def test_read_artifact_legacy_fallback(tmp_path) -> None:
 
 
 def test_read_artifact_missing_source_sha_fails_closed(tmp_path) -> None:
-    con = _seed_db(tmp_path / "catalog.sqlite3")
-    target = _artifact_file(tmp_path)
-    con.execute(
-        "INSERT INTO artifacts (artifact_id, document_id, source_id, "
-        "artifact_role, path, content_sha256, byte_size, mime_type, "
-        "generator_name, generator_version, status, error, metadata_json, "
-        "created_at) VALUES ('a1','d1','s1','normalized',?,?,?,?,?,?,?,?,?,?)",
-        (
-            str(target), "", target.stat().st_size, "application/json",
-            "normalizer", "1.0.0", "completed", None, "{}",
-            "2026-01-02T00:00:00Z",
-        ),
-    )
-    con.commit()
+    with closing(_seed_db(tmp_path / "catalog.sqlite3")) as con:
+        target = _artifact_file(tmp_path)
+        con.execute(
+            "INSERT INTO artifacts (artifact_id, document_id, source_id, "
+            "artifact_role, path, content_sha256, byte_size, mime_type, "
+            "generator_name, generator_version, status, error, metadata_json, "
+            "created_at) VALUES ('a1','d1','s1','normalized',?,?,?,?,?,?,?,?,?,?)",
+            (
+                str(target), "", target.stat().st_size, "application/json",
+                "normalizer", "1.0.0", "completed", None, "{}",
+                "2026-01-02T00:00:00Z",
+            ),
+        )
+        con.commit()
     reader = ReadOnlyCatalogReader(tmp_path / "catalog.sqlite3")
     try:
         with pytest.raises(ValueError, match="content_sha256"):
@@ -256,24 +257,24 @@ def test_read_artifact_missing_source_sha_fails_closed(tmp_path) -> None:
 
 
 def test_read_artifact_unknown_role_fails_closed(tmp_path) -> None:
-    con = _seed_db(tmp_path / "catalog.sqlite3")
-    target = _artifact_file(tmp_path)
-    import hashlib
+    with closing(_seed_db(tmp_path / "catalog.sqlite3")) as con:
+        target = _artifact_file(tmp_path)
+        import hashlib
 
-    sha = hashlib.sha256(target.read_bytes()).hexdigest()
-    con.execute(
-        "INSERT INTO artifacts (artifact_id, document_id, source_id, "
-        "artifact_role, path, content_sha256, byte_size, mime_type, "
-        "generator_name, generator_version, status, error, metadata_json, "
-        "created_at) VALUES ('a1','d1','s1','bogus_role',?,?,?,?,?,?,?,?,?,?)",
-        (
-            str(target), sha, target.stat().st_size, "application/json",
-            "normalizer", "1.0.0", "completed", None,
-            json.dumps({"schema_version": "1.0", "source_sha256": "a" * 64}),
-            "2026-01-02T00:00:00Z",
-        ),
-    )
-    con.commit()
+        sha = hashlib.sha256(target.read_bytes()).hexdigest()
+        con.execute(
+            "INSERT INTO artifacts (artifact_id, document_id, source_id, "
+            "artifact_role, path, content_sha256, byte_size, mime_type, "
+            "generator_name, generator_version, status, error, metadata_json, "
+            "created_at) VALUES ('a1','d1','s1','bogus_role',?,?,?,?,?,?,?,?,?,?)",
+            (
+                str(target), sha, target.stat().st_size, "application/json",
+                "normalizer", "1.0.0", "completed", None,
+                json.dumps({"schema_version": "1.0", "source_sha256": "a" * 64}),
+                "2026-01-02T00:00:00Z",
+            ),
+        )
+        con.commit()
     reader = ReadOnlyCatalogReader(tmp_path / "catalog.sqlite3")
     try:
         with pytest.raises(ValueError, match="unknown role"):
@@ -284,8 +285,8 @@ def test_read_artifact_unknown_role_fails_closed(tmp_path) -> None:
 
 
 def test_read_artifacts_orders_and_reads_all(tmp_path) -> None:
-    con = _seed_db(tmp_path / "catalog.sqlite3")
-    _seed_artifact(con, tmp_path)
+    with closing(_seed_db(tmp_path / "catalog.sqlite3")) as con:
+        _seed_artifact(con, tmp_path)
     reader = ReadOnlyCatalogReader(tmp_path / "catalog.sqlite3")
     try:
         artifacts = read_artifacts(

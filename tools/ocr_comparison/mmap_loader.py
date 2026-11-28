@@ -22,9 +22,6 @@ from pathlib import Path
 
 import torch
 
-# Read-only file mappings and their handles must outlive every tensor view.
-_KEEPALIVE: list = []
-
 _DTYPES = {
     "BF16": torch.bfloat16, "F16": torch.float16, "F32": torch.float32,
     "F64": torch.float64, "I8": torch.int8, "U8": torch.uint8,
@@ -40,9 +37,10 @@ def _read_only_mapped_storage(weights_path: Path) -> torch.Tensor:
     in full against process commit; a READ section (like Python's mmap module
     uses) is file-backed and commit-free.  Verified in the W23 receipts.
     """
-    handle = open(weights_path, "rb")
-    view = _mmap.mmap(handle.fileno(), length=0, access=_mmap.ACCESS_READ)
-    _KEEPALIVE.append((handle, view))
+    with weights_path.open("rb") as handle:
+        view = _mmap.mmap(handle.fileno(), length=0, access=_mmap.ACCESS_READ)
+    # Torch's storage keeps the buffer alive for every shared tensor view.
+    # mmap already owns its OS mapping independently of the original handle.
     return torch.frombuffer(view, dtype=torch.uint8, count=view.size())
 
 

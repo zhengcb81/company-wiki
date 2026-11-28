@@ -22,12 +22,22 @@ LEGACY = Path(__file__).parents[1] / "fixtures/shared_scoped_public_request/lega
 V4 = "reading-model-input/4"
 
 
-def test_omitted_public_projection_keeps_frozen_legacy_request_bytes_and_hashes():
-    for row in json.loads(LEGACY.read_text(encoding="utf-8")):
-        request = NarrativeBatchRequest.from_dict(row["wire"])
-        assert request.to_dict() == row["normalized"]
-        assert request.request_sha256 == row["request_sha256"]
-        assert request.input_hash == row["input_hash"]
+def test_omitted_public_projection_keeps_frozen_request_and_generation_identity(monkeypatch):
+    from company_wiki.automation import narrative_batch_request as owner
+
+    # The fixture was captured before the new PDF parser. Keep that historical
+    # generation pin while checking that the normalized public intent is stable.
+    with monkeypatch.context() as historical:
+        historical.setattr(owner, "NARRATIVE_PARSER_VERSION", "0.1.1")
+        historical.setattr(owner, "NARRATIVE_PROMPT_VERSION", "1.7.0")
+        historical.setattr(owner, "MODEL_REQUEST_SCHEMA", "narrative-model-request/1.4")
+        historical.setattr(owner, "NARRATIVE_SELECTOR_VERSION", "0.8.0")
+        historical.setattr(owner.NarrativeHTTPModel, "adapter_id", "openai-compatible-http/1")
+        for row in json.loads(LEGACY.read_text(encoding="utf-8")):
+            request = NarrativeBatchRequest.from_dict(row["wire"])
+            assert request.to_dict() == row["normalized"]
+            assert request.request_sha256 == row["request_sha256"]
+            assert request.input_hash == row["input_hash"]
 
 
 @pytest.mark.parametrize("schema", ["narrative-batch-request/1", "narrative-batch-request/2"])
@@ -43,7 +53,7 @@ def test_public_projection_roundtrips_and_owns_request_identity(schema):
     assert NarrativeBatchRequest.from_dict(request.to_dict()) == request
 
 
-@pytest.mark.parametrize("value", [None, "", " reading-model-input/4", "reading-model-input/6", 4])
+@pytest.mark.parametrize("value", [None, "", " reading-model-input/4", "reading-model-input/999", 4])
 def test_public_projection_rejects_invalid_or_unavailable_protocol(value):
     wire = json.loads(LEGACY.read_text())[2]["wire"]
     with pytest.raises(ValueError, match="reading_model_projection"):
@@ -94,12 +104,20 @@ def test_existing_phase_c_observer_binds_actual_v4_material_without_another_orac
     selected = selected_english()
     envelope = json.loads(build_model_request(selected, reading_projection_version=V4).data_json)
     observer = _owned_runner_module("phase_c_observer")
-    observation = observer.gold_observation({"facts": []}, selected, envelope)
+    fact = {
+        "id": "affiliate-capacity-growth",
+        "target_kind": "required_business",
+        "importance": "core",
+        "any_support_sets": [[{"page": 1, "exact_quote": "expanded production capacity"}]],
+    }
+    with pytest.raises(ValueError, match="PHASE_C_GOLD_REQUIRED_BUSINESS_EMPTY"):
+        observer.gold_observation({"facts": []}, selected, envelope)
+    observation = observer.gold_observation({"facts": [fact]}, selected, envelope)
     assert observation["evidence_count"] == len(selected.evidence_spans)
-    assert observation["required_count"] == 0
+    assert observation["required_count"] == observation["supported_count"] == 1
     envelope["material"]["tasks"][0]["parts"][0]["text"] = "Foreign material must not be scored as original."
     with pytest.raises(AssertionError):
-        observer.gold_observation({"facts": []}, selected, envelope)
+        observer.gold_observation({"facts": [fact]}, selected, envelope)
 
 
 def test_existing_phase_c_loopback_uses_actual_task_local_protocol_and_keeps_invalid_output():

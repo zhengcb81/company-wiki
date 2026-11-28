@@ -13,10 +13,10 @@ from company_wiki.source_catalog import SecurityMasterStore, SecurityRecord
 from unit.du11_identity_projection.test_identity_projection import indexed  # noqa: F401
 
 
-FF = Path(os.environ.get("DU11_FILING_FETCH_ROOT", Path.home() / "Projects" / "filing-fetch"))
 SRC = Path(__file__).resolve().parents[2] / "src"
 
 
+@pytest.mark.public_owner
 @pytest.mark.parametrize("indexed,query", [("9896", "09896"), ("09896", "9896")], indirect=["indexed"])
 def test_actual_ff_reuses_both_hk_representations_and_open_keeps_sha(indexed, query):  # noqa: F811
     catalog, reader, ref, raw, facts = indexed
@@ -48,14 +48,25 @@ def test_actual_ff_reuses_both_hk_representations_and_open_keeps_sha(indexed, qu
         "    Path(__file__).with_name('network-attempt').write_text('unexpected')\n"
         "    raise RuntimeError('DU11_OFFLINE_NETWORK_ATTEMPT')\n"
         "socket.socket.connect = blocked\nsocket.create_connection = blocked\n", encoding="utf8")
-    env = {**os.environ, "PYTHONPATH": os.pathsep.join((str(SRC), str(bootstrap))),
-           "PYTHONDONTWRITEBYTECODE": "1", "PYTHONUTF8": "1", "PYTHON_DOTENV_DISABLED": "1"}
-    ff_source = FF / "scripts" / "fetch_filing.py"
-    assert ff_source.is_file(), "integration requires readonly filing-fetch checkout or DU11_FILING_FETCH_ROOT"
+    env = {
+        key: os.environ[key]
+        for key in ("SYSTEMROOT", "WINDIR", "COMSPEC", "PATH", "TEMP", "TMP", "LANG")
+        if key in os.environ
+    }
+    env.update(
+        HOME=str(root), USERPROFILE=str(root),
+        PYTHONPATH=os.pathsep.join((str(SRC), str(bootstrap))),
+        PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1", PYTHON_DOTENV_DISABLED="1",
+    )
+    quiet = {"creationflags": getattr(subprocess, "CREATE_NO_WINDOW", 0)}
+    ff_root = os.environ.get("DU11_FILING_FETCH_ROOT") or os.environ.get("CWP_TEST_FF_ROOT")
+    assert ff_root, "the public owner fixture needs the pinned filing-fetch checkout"
+    ff_source = Path(ff_root).resolve(strict=True) / "scripts" / "fetch_filing.py"
+    assert ff_source.is_file(), "pinned filing-fetch public entry is absent"
     ff_before = hashlib.sha256(ff_source.read_bytes()).hexdigest()
     process = subprocess.run([sys.executable, "-B", "-X", "utf8", str(ff_source),
         "--config", str(connection), "--request-file", str(request_file), "--source-ref-v2"],
-        cwd=root, env=env, capture_output=True, timeout=40, check=False)
+        cwd=root, env=env, capture_output=True, timeout=40, check=False, **quiet)
     result = json.loads(process.stdout)
     assert process.returncode == 0, (result, process.stderr.decode("utf8"))
     assert result["status"] == "source_candidate"
@@ -68,7 +79,7 @@ def test_actual_ff_reuses_both_hk_representations_and_open_keeps_sha(indexed, qu
     command = [sys.executable, "-B", "-X", "utf8", "-m", "company_wiki.source_catalog.source_reader_cli",
         "--config", str(config), "--document-id", ref.document_id, "--source-id", ref.source_id,
         "--content-sha256", ref.content_sha256, "--purpose", "filing_reuse"]
-    opened = subprocess.run(command, cwd=root, env=env, capture_output=True, timeout=20, check=False)
+    opened = subprocess.run(command, cwd=root, env=env, capture_output=True, timeout=20, check=False, **quiet)
     assert opened.returncode == 0, opened.stderr
     receipt = json.loads(opened.stderr)
     assert receipt["status"] == "ok"
@@ -77,7 +88,7 @@ def test_actual_ff_reuses_both_hk_representations_and_open_keeps_sha(indexed, qu
     assert hashlib.sha256(opened.stdout).hexdigest() == ref.content_sha256
     raw.write_bytes(b"X" * len(before))
     try:
-        tampered = subprocess.run(command, cwd=root, env=env, capture_output=True, timeout=20, check=False)
+        tampered = subprocess.run(command, cwd=root, env=env, capture_output=True, timeout=20, check=False, **quiet)
         assert tampered.returncode == 2
         assert tampered.stdout == b""
         assert json.loads(tampered.stderr)["status"] == "unavailable"

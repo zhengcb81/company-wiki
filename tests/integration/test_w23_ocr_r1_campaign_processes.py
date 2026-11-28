@@ -5,6 +5,7 @@ no model, no network."""
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -14,11 +15,17 @@ PYTHON = sys.executable
 
 
 def campaign(*args: str) -> tuple[int, str]:
+    native_keys = {"SYSTEMROOT", "WINDIR", "SYSTEMDRIVE", "PATH", "PATHEXT"}
+    environment = {key: value for key, value in os.environ.items() if key.upper() in native_keys}
+    home = str(Path(args[args.index("--ledger") + 1]).parent)
+    environment.update(PYTHONPATH=str(REPO / "src"), HOME=home, USERPROFILE=home, PYTHONUTF8="1",
+                       PYTHONDONTWRITEBYTECODE="1", PYTHON_DOTENV_DISABLED="1",
+                       COMPANY_WIKI_NETWORK="blocked")
     proc = subprocess.run(
         [PYTHON, "-X", "utf8", "-m", "tools.ocr_comparison.campaign", *args],
-        cwd=str(REPO), capture_output=True, text=True, encoding="utf-8", timeout=300,
-        env={"PYTHONUTF8": "1", "SYSTEMROOT": __import__("os").environ["SYSTEMROOT"],
-             "USERPROFILE": __import__("os").environ["USERPROFILE"]},
+        cwd=REPO, capture_output=True, text=True, encoding="utf-8", timeout=40,
+        env=environment, stdin=subprocess.DEVNULL,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     return proc.returncode, proc.stdout + proc.stderr
 

@@ -90,7 +90,8 @@ def test_missing_catalog_dir_is_rejected(tmp_path: Path) -> None:
     assert any("catalog_dir" in problem for problem in problems)
 
 
-def test_structure_only_checks_config_without_requiring_local_catalog(tmp_path: Path) -> None:
+def test_structure_only_checks_config_without_requiring_local_catalog(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setenv("CI", "true")
     path = _write_config(
         tmp_path,
         'schema_version: "1.0"\n'

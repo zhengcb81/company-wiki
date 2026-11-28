@@ -12,8 +12,10 @@ by name in an environment that lacks it, never here.
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 import sys
+import sysconfig
 import tomllib
 from pathlib import Path
 
@@ -22,11 +24,6 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 
-#: The scratch venv may live under a non-ASCII user profile; children must
-#: emit UTF-8 so captured paths compare against the real directory names.
-#: PYTHONPATH is dropped: the venv must stand on its own installed layout.
-CHILD_ENV = {**os.environ, "PYTHONUTF8": "1"}
-CHILD_ENV.pop("PYTHONPATH", None)
 
 #: Module CLIs that are deliberately not console scripts (CWP-04 surface).
 MODULE_CLIS = (
@@ -61,14 +58,28 @@ def _console_scripts() -> dict[str, str]:
 
 
 def _run(argv: list[str], cwd: Path, timeout: int = 180) -> subprocess.CompletedProcess[str]:
+    env = {
+        key: os.environ[key]
+        for key in ("SYSTEMROOT", "WINDIR", "COMSPEC", "PATH", "TEMP", "TMP")
+        if key in os.environ
+    }
+    env.update(
+        HOME=str(cwd), USERPROFILE=str(cwd), PYTHONUTF8="1", PYTHON_DOTENV_DISABLED="1",
+        PIP_CONFIG_FILE=os.devnull, PIP_NO_INDEX="1", PIP_DISABLE_PIP_VERSION_CHECK="1",
+    )
     return subprocess.run(
-        argv, cwd=str(cwd), capture_output=True, encoding="utf-8", errors="replace",
-        timeout=timeout, check=False, env=CHILD_ENV,
+        argv, cwd=cwd, stdin=subprocess.DEVNULL, capture_output=True,
+        encoding="utf-8", errors="replace", timeout=timeout, check=False, env=env,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
 
 
 def _venv_python(venv: Path) -> Path:
-    return venv / "Scripts" / "python.exe"
+    return venv / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+
+
+def _console_script(python: Path, name: str) -> Path:
+    return python.with_name(name + (".exe" if os.name == "nt" else ""))
 
 
 @pytest.fixture(scope="module")
@@ -79,9 +90,14 @@ def installed(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     wheels.mkdir()
     empty_cwd = scratch / "cwd"
     empty_cwd.mkdir()
+    source = scratch / "source"
+    source.mkdir()
+    shutil.copyfile(ROOT / "pyproject.toml", source / "pyproject.toml")
+    shutil.copytree(ROOT / "src", source / "src",
+                    ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.egg-info"))
     built = _run(
         [sys.executable, "-m", "pip", "wheel", "--no-index", "--no-deps",
-         "--no-build-isolation", "--wheel-dir", str(wheels), str(ROOT)],
+         "--no-build-isolation", "--wheel-dir", str(wheels), str(source)],
         cwd=empty_cwd,
     )
     assert built.returncode == 0, built.stderr
@@ -89,13 +105,25 @@ def installed(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     assert len(candidates) == 1, candidates
     wheel = candidates[0]
     venv = scratch / "venv"
-    created = _run([sys.executable, "-m", "venv", "--system-site-packages", str(venv)],
-                   cwd=empty_cwd)
+    created = _run([sys.executable, "-m", "venv", str(venv)], cwd=empty_cwd)
     assert created.returncode == 0, created.stderr
     python = _venv_python(venv)
     seeded = _run([str(python), "-m", "pip", "install", "--no-index", "--no-deps",
                    "--no-cache-dir", str(wheel)], cwd=empty_cwd)
     assert seeded.returncode == 0, seeded.stderr
+    # Reuse installed CI dependencies without processing host .pth files,
+    # which can inject an editable checkout and make the wheel test vacuous.
+    detected = _run(
+        [str(python), "-I", "-c", "import sysconfig; print(sysconfig.get_path('purelib'))"],
+        cwd=empty_cwd,
+    )
+    assert detected.returncode == 0, detected.stderr
+    packages = Path(detected.stdout.strip())
+    assert packages.resolve().is_relative_to(venv.resolve())
+    dependencies = sorted({sysconfig.get_path(name) for name in ("purelib", "platlib")})
+    (packages / "fixture_dependencies.pth").write_text(
+        "".join(f"{location}\n" for location in dependencies), encoding="utf-8",
+    )
     return {"venv": venv, "python": python, "cwd": empty_cwd, "wheel": wheel}
 
 
@@ -119,18 +147,15 @@ def test_wheel_exposes_exactly_the_declared_console_scripts(installed):
         name, _, target = line.partition("=")
         shipped[name.strip()] = target.strip()
     assert shipped == declared, (set(shipped) ^ set(declared), shipped, declared)
-    scripts_dir = installed["venv"] / "Scripts"
     for name in declared:
-        assert (scripts_dir / (name + ".exe")).is_file(), name
+        assert _console_script(installed["python"], name).is_file(), name
 
 
 def test_console_entry_points_start_from_the_installed_wheel(installed):
     """CWP-04: all 11 console scripts print usage from a foreign cwd."""
     declared = _console_scripts()
-    scripts_dir = installed["venv"] / "Scripts"
-    assert set(declared) == set(_console_scripts())
     for name in declared:
-        done = _run([str(scripts_dir / (name + ".exe")), "--help"], cwd=installed["cwd"])
+        done = _run([str(_console_script(installed["python"], name)), "--help"], cwd=installed["cwd"])
         assert done.returncode == 0, (name, done.returncode, done.stderr)
         assert "usage" in (done.stdout + done.stderr).lower(), name
 
@@ -155,13 +180,10 @@ def test_installed_import_resolves_inside_the_venv_without_the_checkout(installe
     done = _run([str(installed["python"]), "-B", "-c", probe], cwd=installed["cwd"])
     assert done.returncode == 0, done.stderr
     lines = done.stdout.strip().splitlines()
-    module_path = lines[0].replace("\\", "/").lower()
-    venv_path = str(installed["venv"]).replace("\\", "/").lower()
-    assert module_path.startswith(venv_path), lines[0]
-    assert "site-packages" in module_path
-    assert "mb11" not in module_path
-    joined = "\n".join(lines[1:]).replace("\\", "/").lower()
-    assert "projects/mb11" not in joined, "the checkout is on the installed sys.path"
+    installed_module = Path(lines[0]).resolve()
+    assert installed_module.is_relative_to(installed["venv"].resolve()), installed_module
+    assert "site-packages" in installed_module.parts
+    assert all(not Path(entry).resolve().is_relative_to(ROOT) for entry in lines[1:] if entry)
 
 
 def test_installed_package_data_loads_through_importlib_resources(installed):

@@ -11,6 +11,8 @@ import hashlib
 import json
 from pathlib import Path
 
+import pymupdf
+
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter
 from company_wiki.source_catalog.portfolio_promoter import (
@@ -27,11 +29,18 @@ from company_wiki.source_catalog.resolver import (
 
 IDENTITY = PromotionIdentity(canonical_name="金山雲", market="HK", security_id="03896")
 AS_OF = "2026-08-02"
-SHA = "efe2ccd923b744eb69166aebf5f9b32ab7560efe3f6c44f2c6bcf4672fec1fa8"
 
 
-def _sha(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+def _write_pdf(path: Path, text: str) -> str:
+    with pymupdf.open() as pdf:
+        pdf.new_page().insert_text((80, 90), text)
+        pdf.save(path)
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _annual_digest(portfolio: Path) -> str:
+    path = portfolio / "3896" / "filings" / "fil_cn_test" / "fil_cn_test.pdf"
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def _portfolio_meta(*, pdf_sha: str, source_url: str | None = None) -> dict:
@@ -79,9 +88,9 @@ def _env(tmp_path: Path):
     )
     filing = entity_dir / "filings" / "fil_cn_test"
     filing.mkdir(parents=True)
-    (filing / "fil_cn_test.pdf").write_bytes(b"portfolio annual report bytes")
+    annual_sha = _write_pdf(filing / "fil_cn_test.pdf", "Synthetic annual report")
     (filing / "meta.json").write_text(
-        json.dumps(_portfolio_meta(pdf_sha=_sha("portfolio annual report bytes"))),
+        json.dumps(_portfolio_meta(pdf_sha=annual_sha)),
         encoding="utf-8",
     )
     catalog = SourceCatalog(
@@ -113,7 +122,7 @@ def test_promote_creates_canonical_location_and_resolves_reused_exact(tmp_path):
     )
 
     assert result.status == "imported_new"
-    assert result.content_sha256 == _sha("portfolio annual report bytes")
+    assert result.content_sha256 == _annual_digest(portfolio)
     canonical = Path(result.canonical_path)
     assert "companies" in str(canonical).replace("\\", "/")
     assert canonical.is_file()
@@ -188,7 +197,7 @@ def test_promoted_document_metadata_carries_acquisition_identity(tmp_path):
         JOIN locations l ON l.document_id=d.document_id
         JOIN sources s ON s.source_id=l.source_id
         WHERE s.content_sha256=? AND l.root_id='company_raw'""",
-        (_sha("portfolio annual report bytes"),),
+        (_annual_digest(portfolio),),
     )
     assert rows
     acquisition = json.loads(rows[0]["metadata_json"]).get("acquisition") or {}
@@ -205,9 +214,10 @@ def test_promote_all_filters_by_kind_and_year(tmp_path):
     # second document: H1 2025 (semi-annual)
     filing = portfolio / "3896" / "filings" / "fil_h1_2025"
     filing.mkdir(parents=True)
-    (filing / "fil_h1_2025.pdf").write_bytes(b"interim bytes")
-    meta = _portfolio_meta(pdf_sha=_sha("interim bytes"))
-    meta.update(document_id="fil_h1_2025", form_type="H1", filing_date="2025-09-26")
+    interim_sha = _write_pdf(filing / "fil_h1_2025.pdf", "Synthetic interim report")
+    meta = _portfolio_meta(pdf_sha=interim_sha)
+    meta.update(document_id="fil_h1_2025", form_type="H1", fiscal_period="H1",
+                source_id="12118318", filing_date="2025-09-26")
     (filing / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
     catalog.scan()
 

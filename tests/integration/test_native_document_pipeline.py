@@ -1,6 +1,7 @@
 """Actual CLI import -> finite Worker -> summary -> public read; owned TEMP only."""
 
 from __future__ import annotations
+from contextlib import closing
 import hashlib
 import json
 import os
@@ -8,6 +9,8 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+import pytest
 from support import narrative_batch_fixtures as fixtures
 from support.native_document_fixtures import (
     DOCX_MIME,
@@ -15,6 +18,7 @@ from support.native_document_fixtures import (
     natural_html_call,
 )
 from company_wiki.source_catalog.models import CatalogConfig, RootSpec
+from company_wiki.source_catalog.narrative_formats import parser_component, source_class_for
 from company_wiki.source_catalog.service import SourceCatalog
 from company_wiki.automation.source_request import (
     prepare_official_narrative_request,
@@ -65,6 +69,42 @@ def invoke(root, args, stdin=None, timeout=60):
         "native CLI failed; output retained only by local pytest capture"
     )
     return call, json.loads(call.stdout)
+
+
+@pytest.mark.parametrize(
+    ("suffix", "mime_type"),
+    [
+        (".docx", DOCX_MIME),
+        (".pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation"),
+    ],
+)
+def test_scan_office_carriers_without_os_mime_registration(tmp_path, monkeypatch, suffix, mime_type):
+    import mimetypes
+
+    monkeypatch.setattr(mimetypes, "guess_type", lambda name: (None, None))
+    companies = tmp_path / "companies"
+    company = companies / "Acme"
+    company.mkdir(parents=True)
+    source = company / f"2026 Investor Materials{suffix}"
+    source.write_bytes(b"synthetic Office container carrier")
+    config = CatalogConfig(
+        project_root=tmp_path,
+        catalog_dir=tmp_path / "catalog",
+        roots=(RootSpec("company_raw", companies, "company_raw"),),
+    )
+    with closing(SourceCatalog(config)) as catalog:
+        catalog.scan()
+        registered = catalog.reader.location_registration(
+            "company_raw", source.relative_to(companies).as_posix(),
+        )
+        assert registered is not None
+        assert registered.document_id and registered.source_id
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(
+            registered.document_id, registered.source_id, hashlib.sha256(source.read_bytes()).hexdigest(),
+        )
+        assert ref.mime_type == mime_type
+        assert reader.open_version(ref, purpose="preview").data == source.read_bytes()
 
 
 def test_two_native_formats_full_cli_worker_reuse_restores_test_directory(
@@ -281,9 +321,11 @@ def test_two_native_formats_full_cli_worker_reuse_restores_test_directory(
             assert all(
                 claim["evidence_ids"] for claim in bundle["summary"]["draft"]["claims"]
             )
-            assert bundle["versions"]["parser"] == (
-                "1.0.0" if mime == DOCX_MIME else "0.2.0"
-            )
+            _, parser_version = parser_component(mime, source_class_for(mime, kind))
+            assert bundle["versions"]["parser"] == parser_version
+            assert {span["parser_version"] for span in bundle["evidence_spans"]} == {
+                parser_version
+            }
         _, repeat = invoke(root, command)
         assert (
             repeat["budget"] == output["budget"]

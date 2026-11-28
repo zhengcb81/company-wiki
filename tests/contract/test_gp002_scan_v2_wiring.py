@@ -1,5 +1,4 @@
-"""GP-002 RED/acceptance: the physical scan entry must follow the
-activation snapshot's v2_scan_shadow flag (D-1 gap closure).
+"""GP-002 regression: explicit scan mode and root-owned adapter routing.
 
 Review finding D-1: ``scan_catalog`` accepted ``v2_scan_shadow`` but never
 forwarded it into ``_scan_catalog_impl`` -> ``scan_root_strategy``, so the
@@ -13,10 +12,8 @@ Contracts driven by this module:
   GP2-01  ``scan_catalog(..., v2_scan_shadow=True)`` must run every root
           through ``scan_root_strategy(..., v2_scan_shadow=True)`` — both
           the dry-run branch and the real (store-writing) branch.
-  GP2-02  ``SourceCatalog.scan()`` must resolve the flag from the runtime
-          policy snapshot: v2 when the snapshot flag is on, v1 when the
-          snapshot is absent (legacy default), fail-closed when the
-          snapshot exists but is invalid.
+  GP2-02  ``SourceCatalog.scan()`` uses the configured root adapter.
+          Historical activation snapshots do not gate scanning.
 """
 
 from __future__ import annotations
@@ -226,16 +223,17 @@ def _scan_with_spy(
     return observed
 
 
-def test_gp2_02_snapshot_v2_on_routes_real_scan_to_v2(tmp_path, monkeypatch) -> None:
-    """When the activation snapshot says v2_scan_shadow=true, the physical
-    scan entry must forward v2 to the scanner seam."""
+def test_gp2_02_snapshot_cannot_override_a_configured_adapter(tmp_path) -> None:
     project, root = _project(tmp_path)
-    _snapshot(project, v2_scan_shadow=True)
-    observed = _scan_with_spy(project, root, monkeypatch)
-    assert observed == [True], (
-        f"SourceCatalog.scan() must forward v2 when the snapshot flag is on "
-        f"(got {observed})"
-    )
+    catalog = SourceCatalog(_config(project, root))
+    try:
+        for obsolete_flag in (True, False):
+            _snapshot(project, v2_scan_shadow=obsolete_flag)
+            report = catalog.scan()
+            assert report.files_seen == 1
+            assert dict(report.strategy) == {"company_raw": "adapter"}
+    finally:
+        catalog.close()
 
 
 def test_gp2_02_no_snapshot_stays_v1(tmp_path, monkeypatch) -> None:

@@ -509,11 +509,13 @@ class IsolatedOCRAdapter:
                     try:
                         shutil.rmtree(directory)
                         break
-                    except FileNotFoundError:
-                        break
-                    except PermissionError:
-                        # AV/file-close lag gets only the SAME cleanup grace;
-                        # retries never renew the native request deadline.
+                    except (FileNotFoundError, PermissionError):
+                        # A departing worker can remove a nested file while
+                        # rmtree is walking it. Only absence of the root
+                        # establishes cleanup, including on Python 3.12.
+                        if not directory.exists():
+                            break
+                        # Retries share the original cleanup grace.
                         if time.monotonic() >= cleanup_deadline:
                             raise
                         time.sleep(_POLL_SECONDS)

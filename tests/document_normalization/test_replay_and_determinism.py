@@ -18,7 +18,7 @@ from company_wiki.document_normalization import (
 from company_wiki.source_contract.evidence_span import EvidenceSpan, ParseStatus
 from company_wiki.source_contract.source_version import VerifiedContent
 
-from conftest import (
+from support.document_normalization_fixtures import (
     build_pptx,
     html_page,
     normalize_html,

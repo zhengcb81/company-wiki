@@ -1,14 +1,10 @@
 """Contract for the public canonical issuer bridge (G-CWP-CANONICAL-01).
 
-Every case runs the real fixed CLI as a subprocess against an isolated CWP
-engine fixture (scan + recorded verified source facts through the real
-engines) and, for the StockWiki side, a transport stand-in that frames the
-frozen ``stockwiki.dashboard_issuer_proof/1`` seam around the REAL StockWiki
-identity engine (build_identity_request / IdentityReceiptStore /
-QuickScanStore / MarketRegistryStore at the pinned checkout).  The stand-in
-exists only because the owner proof CLI itself (G-SW-ISSUER-PROOF-READ-01)
-is not delivered yet; all identity semantics come from the pinned real
-engine — this is seam framing, never a trust callback.
+The CWP CLI runs against an isolated catalog with verified source facts.
+Cases that need a true issuer proof use the public StockWiki proof process
+from an explicitly selected owner checkout. A test-only transport perturbs
+the owner's response for corruption cases. Request and process failures
+that cannot consume an issuer proof run independently of StockWiki.
 
 Covered here:
 
@@ -43,20 +39,19 @@ from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog  
 from company_wiki.source_catalog.public_canonical_browser import (  # noqa: E402
     REQUEST_SCHEMA,
     RESPONSE_SCHEMA,
-    SW_ENVELOPE_SCHEMA_VERSION,
 )
 from company_wiki.source_catalog.source_reader import SourceRef  # noqa: E402
 
 
-# The pinned StockWiki checkout supplies the REAL identity engine for the
-# fixture stand-in (read-only import in a subprocess).  Computed, never a
-# literal host path; override with CWP_SW_CHECKOUT when the checkout lives
-# elsewhere.  A missing checkout fails the engine tests by name (it is the
-# named prerequisite) — the positive is never skipped.
-SW_CHECKOUT = Path(os.environ.get("CWP_SW_CHECKOUT")
-                   or (Path.home() / "Projects" / "StockWiki"))
-SW_REGISTRY_FIXTURE = (SW_CHECKOUT / "tests" / "fixtures" / "market_registry"
-                       / "iso10383_sample.csv")
+# The owner-local subset requires an explicitly selected StockWiki checkout.
+# Public CWP jobs exercise owner-independent behavior in the same module.
+def _stockwiki_checkout() -> Path:
+    value = os.environ.get("CWP_SW_CHECKOUT")
+    assert value, "owner proof cases require CWP_SW_CHECKOUT at an approved StockWiki revision"
+    checkout = Path(value).resolve(strict=True)
+    assert (checkout / "dashboard_issuer_proof_cli.py").is_file(), "public owner proof CLI is missing"
+    return checkout
+
 
 ENT_ACME = "ENT_3f2a9c81-1111-4c01-9a01-00000000ac01"
 ENT_BETA = "ENT_3f2a9c81-2222-4c02-9a02-00000000be02"
@@ -293,19 +288,11 @@ def _config_path(tmp_path: Path) -> Path:
     return config_path
 
 
-# --- StockWiki real-engine transport stand-in ---------------------------------
+# --- StockWiki owner fixture setup and response corruption -------------------
 
 
 DRIVER_SOURCE = r'''
-"""Frozen-seam framing around the REAL StockWiki identity engine.
-
-Stand-in for the not-yet-delivered G-SW-ISSUER-PROOF-READ-01 CLI.  All
-identity semantics (entity store, receipts, market registry, G2b envelope)
-come from the pinned StockWiki checkout; this wrapper only implements the
-frozen framing: bounds, negative mapping, listing selection and the
-receipt_sha256 rule.  It is NOT authority: the CWP side revalidates
-everything it consumes.
-"""
+"""Set up temporary owner stores and perturb a genuine owner response."""
 
 import hashlib
 import json
@@ -315,7 +302,7 @@ from pathlib import Path
 
 sys.path.insert(0, r"%(sw)s")
 
-from stockwiki.identity_g2b import IdentityRequestError, build_identity_request
+from stockwiki.dashboard_issuer_proof import read as read_owner_proof
 from stockwiki.identity_receipts import (
     IdentityReceiptStore,
     binding_projection,
@@ -325,17 +312,8 @@ from stockwiki.market_registry import MarketRegistryStore
 from stockwiki.paths import WorkspacePaths
 from stockwiki.quick_scan_store import QuickScanStore
 
-SCHEMA_VERSION = "%(schema)s"
-LIBRARY_REVISION = "not_provided_no_global_revision"
 MAX_STDIN = 65536
 MAX_STDOUT = 1048576
-
-NEGATIVE_MAP = {
-    "entity_not_found": ("not_found", ["canonical_entity_not_found"]),
-    "market_not_registered": ("unavailable", ["market_not_registered"]),
-    "mic_unresolved": ("unavailable", ["mic_unresolved"]),
-    "mic_not_registered": ("unavailable", ["mic_not_registered"]),
-}
 
 
 def _canon(value):
@@ -350,46 +328,6 @@ def _receipt(envelope):
 
 def _listing(security, entity_id):
     return listing_v21_for_security(security, entity_id)
-
-
-def _stores(root):
-    paths = WorkspacePaths.from_root(root)
-    qss = QuickScanStore(paths)
-    receipts = IdentityReceiptStore(paths)
-    registry = MarketRegistryStore(paths)
-    missing = [store.database_path.name
-               for store in (qss, receipts, registry)
-               if not store.database_path.exists()]
-    if missing:
-        return None, ("unavailable", ["receipt_store_missing"] + missing)
-    return (qss, receipts, registry), None
-
-
-def _negative_state(code):
-    if code in NEGATIVE_MAP:
-        return NEGATIVE_MAP[code]
-    if code.startswith("receipt_"):
-        return ("unavailable", [code])
-    if code.startswith("binding_") or code.startswith("envelope_"):
-        return ("incompatible", [code])
-    return ("unavailable", [code])
-
-
-def _select_listing(payload, requested):
-    listings = payload["listings"]
-    active = [item for item in listings if item["listing_status"] == "active"]
-    if requested is not None:
-        if requested not in [item["listing_id"] for item in listings]:
-            return None, ("not_found", ["listing_not_found_in_owner_package"])
-        for item in active:
-            if item["listing_id"] == requested:
-                return item, None
-        return None, ("unavailable", ["selected_listing_not_active"])
-    if not active:
-        return None, ("not_found", ["no_active_listing"])
-    if len(active) > 1:
-        return None, ("ambiguous", ["multiple_active_listings"])
-    return active[0], None
 
 
 def _provisional_receipt(entity, qss):
@@ -519,64 +457,12 @@ def cmd_read(root):
     except (UnicodeDecodeError, json.JSONDecodeError):
         sys.stderr.write("bad request\n")
         return 2
-    if os.environ.get("CWP_FIXTURE_CRASH"):
-        sys.stderr.write("crash on purpose\n")
-        return 7
-    entity_id = query["entity_id"]
-    listing_id = query.get("listing_id")
-    as_of = query["as_of"]
-    stores, failure = _stores(root)
-    if failure is not None:
-        state, reasons = failure
-        payload = None
-        selected = None
-        revision = None
-    else:
-        qss, receipts, registry = stores
-        try:
-            built = build_identity_request(
-                qss, receipts, registry, entity_id=entity_id, as_of=as_of)
-        except IdentityRequestError as exc:
-            state, reasons = _negative_state(exc.error_code)
-            payload = None
-            selected = None
-            revision = None
-        else:
-            if built["payload"]["identity_state"] != "verified":
-                state, reasons = ("unverified",
-                                  ["owner_identity_not_verified"])
-                payload = None
-                selected = None
-                revision = None
-            else:
-                listing, failure = _select_listing(built["payload"],
-                                                   listing_id)
-                if failure is not None:
-                    state, reasons = failure
-                    payload = None
-                    selected = None
-                    revision = None
-                else:
-                    state = "available"
-                    reasons = []
-                    payload = built
-                    selected = listing["listing_id"]
-                    revision = built["payload"]["identity_revision"]
-    envelope = {
-        "schema_version": SCHEMA_VERSION,
-        "authority": "stockwiki",
-        "state": state,
-        "reason_codes": reasons,
-        "query": {"entity_id": entity_id, "listing_id": listing_id,
-                  "as_of": as_of},
-        "selected_listing_id": selected,
-        "identity_revision": revision,
-        "library_revision": LIBRARY_REVISION,
-        "owner_package": payload if state == "available" else None,
-        "receipt_sha256": "0" * 64,
-    }
-    if os.environ.get("CWP_FIXTURE_FUTURE_SCHEMA"):
-        envelope["schema_version"] = "stockwiki.dashboard_issuer_proof/2"
+    envelope = read_owner_proof(
+        WorkspacePaths.from_root(root),
+        entity_id=query["entity_id"],
+        listing_id=query.get("listing_id"),
+        as_of=query["as_of"],
+    )
     if os.environ.get("CWP_FIXTURE_AS_OF_SHIFT"):
         envelope["query"]["as_of"] = "2020-01-01T00:00:00Z"
     if os.environ.get("CWP_FIXTURE_SELECTED_LISTING"):
@@ -596,16 +482,6 @@ def cmd_read(root):
     out = (_canon(envelope) + "\n").encode("utf-8")
     if len(out) > MAX_STDOUT:
         sys.stderr.write("envelope too large\n")
-        return 2
-    if os.environ.get("CWP_FIXTURE_OVERSIZED_STDOUT"):
-        stream = getattr(sys.stdout, "buffer", sys.stdout)
-        stream.write(b"x" * (MAX_STDOUT + 1))
-        stream.flush()
-        return 0
-    if os.environ.get("CWP_FIXTURE_OVERSIZED_STDERR"):
-        stream = getattr(sys.stderr, "buffer", sys.stderr)
-        stream.write(b"x" * (MAX_STDOUT + 1))
-        stream.flush()
         return 2
     if os.environ.get("CWP_FIXTURE_NONZERO_AVAILABLE"):
         stream = getattr(sys.stderr, "buffer", sys.stderr)
@@ -632,13 +508,14 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
-''' % {"sw": str(SW_CHECKOUT), "schema": SW_ENVELOPE_SCHEMA_VERSION}
+'''
 
 
 def _write_driver(tmp_path: Path) -> Path:
     driver = tmp_path / "sw" / "dashboard_issuer_proof_fixture_cli.py"
     driver.parent.mkdir(parents=True, exist_ok=True)
-    driver.write_text(DRIVER_SOURCE, encoding="utf-8", newline="\n")
+    source = DRIVER_SOURCE % {"sw": _stockwiki_checkout().as_posix()}
+    driver.write_text(source, encoding="utf-8", newline="\n")
     return driver
 
 
@@ -695,7 +572,8 @@ def _build_sw_workspace(tmp_path: Path, scenarios: list[dict]) -> Path:
     root = tmp_path / "sw" / "workspace"
     root.mkdir(parents=True)
     spec = {
-        "registry_csv": str(SW_REGISTRY_FIXTURE),
+        "registry_csv": str(_stockwiki_checkout() / "tests" / "fixtures" /
+                            "market_registry" / "iso10383_sample.csv"),
         "recorded_at": "2026-10-30T00:00:00Z",
         "entities": scenarios,
     }
@@ -705,7 +583,8 @@ def _build_sw_workspace(tmp_path: Path, scenarios: list[dict]) -> Path:
     completed = subprocess.run(
         [sys.executable, "-B", str(driver), "setup", "--root", str(root),
          "--spec", str(spec_path)],
-        capture_output=True,
+        stdin=subprocess.DEVNULL, capture_output=True, timeout=30,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     assert completed.returncode == 0, completed.stderr.decode("utf-8")
     return root
@@ -758,16 +637,17 @@ def _run_cli(tmp_path: Path, config_path: Path, sw_root: Path | None,
             "company_wiki.source_catalog.public_canonical_browser_cli",
             "--config", str(config_path)]
     if sw_root is not None:
+        if sw_cli is None:
+            sw_cli = (tmp_path / "sw" / "dashboard_issuer_proof_fixture_cli.py" if env
+                      else _stockwiki_checkout() / "dashboard_issuer_proof_cli.py")
         args += ["--sw-python", sw_python or sys.executable,
-                 "--sw-cli", str(sw_cli or
-                                 tmp_path / "sw" /
-                                 "dashboard_issuer_proof_fixture_cli.py"),
-                 "--sw-root", str(sw_root)]
+                 "--sw-cli", str(sw_cli), "--sw-root", str(sw_root)]
     return subprocess.run(
         args,
         input=(json.dumps(payload) if isinstance(payload, dict)
                else payload).encode("utf-8"),
-        capture_output=True, cwd=str(tmp_path), env=run_env,
+        capture_output=True, cwd=str(tmp_path), env=run_env, timeout=30,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
 
 
@@ -783,7 +663,7 @@ def _assert_no_path_leak(payload: str, tmp_path: Path) -> None:
     for marker in (
         str(tmp_path), str(tmp_path).replace("\\", "/"),
         "source_catalog.yaml", ".source_catalog",
-        "dashboard_issuer_proof", str(SW_CHECKOUT), "companies",
+        "dashboard_issuer_proof", os.environ.get("CWP_SW_CHECKOUT", ""), "companies",
     ):
         assert marker not in payload, marker
 
@@ -844,6 +724,7 @@ def workspace(tmp_path):
 # --- positive -------------------------------------------------------------------
 
 
+@pytest.mark.owner_local_checkout
 def test_same_issuer_positive_through_real_engines(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -900,6 +781,7 @@ def test_same_issuer_positive_through_real_engines(workspace):
     _assert_no_path_leak(json.dumps(result), tmp_path)
 
 
+@pytest.mark.owner_local_checkout
 def test_zero_write_across_the_whole_fixture_root(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -916,6 +798,7 @@ def test_zero_write_across_the_whole_fixture_root(workspace):
 # --- negatives: cross-owner identity ---------------------------------------------
 
 
+@pytest.mark.owner_local_checkout
 def test_wrong_issuer_documents_are_not_attributed(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [
@@ -931,6 +814,7 @@ def test_wrong_issuer_documents_are_not_attributed(workspace):
                             for item in result["items"]}
 
 
+@pytest.mark.owner_local_checkout
 def test_same_bare_ticker_is_never_an_item(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -943,6 +827,7 @@ def test_same_bare_ticker_is_never_an_item(workspace):
                for entry in result["unverified_candidates"])
 
 
+@pytest.mark.owner_local_checkout
 def test_binding_without_cwp_facts_is_unknown_not_empty(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(
@@ -958,6 +843,7 @@ def test_binding_without_cwp_facts_is_unknown_not_empty(workspace):
     assert result["page"]["total_status"] == "unknown"
 
 
+@pytest.mark.owner_local_checkout
 def test_foreign_listing_is_refused(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -965,24 +851,26 @@ def test_foreign_listing_is_refused(workspace):
         tmp_path, config_path, sw_root,
         _request(listing_id="LST_ffffffff-ffff-4fff-8fff-ffffffffffff")))
     assert result["binding"]["status"] == "unknown"
-    assert "listing_not_found_in_owner_package" \
+    assert "listing_not_owned" \
         in result["binding"]["reason_codes"]
     assert result["binding"]["stockwiki"]["envelope_state"] == "not_found"
     assert result["items"] == []
     assert result["page"]["total_status"] == "unknown"
 
 
+@pytest.mark.owner_local_checkout
 def test_multi_listing_without_selection_is_ambiguous(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_dual_scenario(ACME_URN)])
     result = _stdout_json(_run_cli(tmp_path, config_path, sw_root, _request()))
     assert result["binding"]["status"] == "ambiguous"
-    assert "multiple_active_listings" in result["binding"]["reason_codes"]
+    assert "multiple_current_listings" in result["binding"]["reason_codes"]
     assert result["binding"]["issuer"] is None
     assert result["items"] == []
     assert result["page"]["total_status"] == "unknown"
 
 
+@pytest.mark.owner_local_checkout
 def test_multi_listing_with_explicit_selection_verifies(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_dual_scenario(ACME_URN)])
@@ -1002,18 +890,21 @@ def test_multi_listing_with_explicit_selection_verifies(workspace):
             for item in result["items"]} == {ACME_URN}
 
 
-def test_revoked_receipt_is_unavailable(workspace):
+@pytest.mark.owner_local_checkout
+def test_revoked_receipt_cannot_certify_an_issuer(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(
         tmp_path, [_acme_scenario(ACME_URN, revoked=True)])
     result = _stdout_json(_run_cli(tmp_path, config_path, sw_root, _request()))
-    assert result["binding"]["status"] == "unavailable"
+    assert result["binding"]["status"] == "unknown"
+    assert result["binding"]["stockwiki"]["envelope_state"] == "unverified"
     assert "receipt_not_active" in result["binding"]["reason_codes"]
     assert result["binding"]["issuer"] is None
     assert result["items"] == []
     assert result["page"]["total_status"] == "unknown"
 
 
+@pytest.mark.owner_local_checkout
 def test_provisional_owner_is_not_a_verified_binding(workspace):
     tmp_path, catalog, config_path = workspace
     entity, bindings = _sw_entity(
@@ -1023,11 +914,12 @@ def test_provisional_owner_is_not_a_verified_binding(workspace):
                     "bindings": bindings}])
     result = _stdout_json(_run_cli(tmp_path, config_path, sw_root, _request()))
     assert result["binding"]["status"] == "unknown"
-    assert "owner_identity_not_verified" in result["binding"]["reason_codes"]
+    assert "identity_not_verified" in result["binding"]["reason_codes"]
     assert result["binding"]["issuer"] is None
     assert result["items"] == []
 
 
+@pytest.mark.owner_local_checkout
 def test_wrong_market_entity_never_binds(workspace):
     tmp_path, catalog, config_path = workspace
     # A listing in a market the owner registry does not know is refused by
@@ -1046,6 +938,7 @@ def test_wrong_market_entity_never_binds(workspace):
     assert result["items"] == []
 
 
+@pytest.mark.owner_local_checkout
 def test_unsupported_binding_namespace_is_not_converted(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1062,6 +955,7 @@ def test_unsupported_binding_namespace_is_not_converted(workspace):
 
 
 @pytest.mark.parametrize("receipt_cik", [CIK_ACME, CIK_BETA])
+@pytest.mark.owner_local_checkout
 def test_sec_listing_proves_each_original_from_an_external_workflow(workspace, receipt_cik):
     from helpers.source_fact_fixture import html
 
@@ -1097,6 +991,7 @@ def test_sec_listing_proves_each_original_from_an_external_workflow(workspace, r
         assert result["items"] == []
 
 
+@pytest.mark.owner_local_checkout
 def test_sec_original_completion_reuses_the_anchor_and_skips_other_ciks(workspace, monkeypatch):
     from company_wiki.source_catalog.public_canonical_browser import PublicCanonicalBrowser, StockWikiProofClient
     from company_wiki.source_catalog.source_reader import SourceVersionReader
@@ -1122,7 +1017,7 @@ def test_sec_original_completion_reuses_the_anchor_and_skips_other_ciks(workspac
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(_source_urn(target))])
     proof = StockWikiProofClient(
         python_executable=sys.executable,
-        cli_path=str(tmp_path / "sw" / "dashboard_issuer_proof_fixture_cli.py"),
+        cli_path=str(_stockwiki_checkout() / "dashboard_issuer_proof_cli.py"),
         workspace_root=str(sw_root),
     )
     original = SourceVersionReader.open_described_version
@@ -1143,6 +1038,7 @@ def test_sec_original_completion_reuses_the_anchor_and_skips_other_ciks(workspac
     assert opened[0][1].bytes_read == len(target)
 
 
+@pytest.mark.owner_local_checkout
 def test_hk_listing_uses_owner_verified_official_originals_across_binding_namespaces(workspace):
     tmp_path, catalog, config_path = workspace
     expected = b"%PDF-1.4 Northshore Harbour Holdings annual statement"
@@ -1183,6 +1079,7 @@ def test_hk_listing_uses_owner_verified_official_originals_across_binding_namesp
     assert [row["source_ref"]["content_sha256"] for row in result["items"]] == [_sha(expected)]
 
 
+@pytest.mark.owner_local_checkout
 def test_analysis_subject_is_unsupported(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1199,6 +1096,7 @@ def test_analysis_subject_is_unsupported(workspace):
 # --- negatives: seam integrity ----------------------------------------------------
 
 
+@pytest.mark.owner_local_checkout
 def test_tampered_receipt_hash_is_refused(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1212,6 +1110,7 @@ def test_tampered_receipt_hash_is_refused(workspace):
     assert result["items"] == []
 
 
+@pytest.mark.owner_local_checkout
 def test_query_echo_mismatch_is_refused(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1224,6 +1123,7 @@ def test_query_echo_mismatch_is_refused(workspace):
     assert result["items"] == []
 
 
+@pytest.mark.owner_local_checkout
 def test_owner_package_must_name_the_receipt_it_supplies(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1238,6 +1138,7 @@ def test_owner_package_must_name_the_receipt_it_supplies(workspace):
     assert result["page"]["total_status"] == "unknown"
 
 
+@pytest.mark.owner_local_checkout
 def test_explicit_listing_cannot_be_replaced_by_another_proven_listing(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_dual_scenario(ACME_URN)])
@@ -1359,13 +1260,36 @@ def test_proven_versions_require_an_exact_proof_for_each_source_ref(late_budget_
         assert [row.source_id for row in versions] == ["source-good"]
 
 
+def _write_process_fault(tmp_path, operation):
+    """Emit only the local proof-process fault under test."""
+    driver = tmp_path / "proof_process_fault.py"
+    source = {
+        "oversized_stdout": "import sys; sys.stdout.buffer.write(b'x' * 1048577)",
+        "oversized_stderr": "import sys; sys.stderr.buffer.write(b'x' * 1048577); sys.exit(2)",
+        "crash": "raise SystemExit(7)",
+        "future_schema": """
+import json
+import sys
+query = json.load(sys.stdin)
+print(json.dumps({
+    "schema_version": "stockwiki.dashboard_issuer_proof/2",
+    "authority": "stockwiki", "state": "unavailable", "reason_codes": [],
+    "query": query, "selected_listing_id": None, "identity_revision": None,
+    "library_revision": "not_provided_no_global_revision",
+    "owner_package": None, "receipt_sha256": "0" * 64,
+}))
+""",
+    }
+    driver.write_text(source[operation], encoding="utf-8")
+    return driver
+
+
 @pytest.mark.parametrize("output_stream", ["stdout", "stderr"])
 def test_stockwiki_proof_output_is_bounded(workspace, output_stream):
     tmp_path, catalog, config_path = workspace
-    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    driver = _write_process_fault(tmp_path, f"oversized_{output_stream}")
     result = _stdout_json(_run_cli(
-        tmp_path, config_path, sw_root, _request(),
-        env={f"CWP_FIXTURE_OVERSIZED_{output_stream.upper()}": "1"},
+        tmp_path, config_path, tmp_path, _request(), sw_cli=driver,
     ))
     assert result["binding"]["status"] == "unavailable"
     assert "stockwiki_proof_output_limit" \
@@ -1374,6 +1298,7 @@ def test_stockwiki_proof_output_is_bounded(workspace, output_stream):
     assert result["page"]["total_status"] == "unknown"
 
 
+@pytest.mark.owner_local_checkout
 def test_nonzero_proof_exit_cannot_authorize_available_state(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1390,10 +1315,10 @@ def test_nonzero_proof_exit_cannot_authorize_available_state(workspace):
 
 def test_future_envelope_schema_is_incompatible(workspace):
     tmp_path, catalog, config_path = workspace
-    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    driver = _write_process_fault(tmp_path, "future_schema")
     result = _stdout_json(_run_cli(
-        tmp_path, config_path, sw_root, _request(),
-        env={"CWP_FIXTURE_FUTURE_SCHEMA": "1"}))
+        tmp_path, config_path, tmp_path, _request(), sw_cli=driver,
+    ))
     assert result["binding"]["status"] == "unavailable"
     assert "stockwiki_proof_envelope_version_unsupported" \
         in result["binding"]["reason_codes"]
@@ -1402,11 +1327,11 @@ def test_future_envelope_schema_is_incompatible(workspace):
 
 def test_offline_proof_cli_is_unavailable_not_zero(workspace):
     tmp_path, catalog, config_path = workspace
-    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    driver = _write_process_fault(tmp_path, "crash")
     # 1) proof CLI crashes without a named envelope
     result = _stdout_json(_run_cli(
-        tmp_path, config_path, sw_root, _request(),
-        env={"CWP_FIXTURE_CRASH": "1"}))
+        tmp_path, config_path, tmp_path, _request(), sw_cli=driver,
+    ))
     assert result["state"] == "empty"
     assert result["binding"]["status"] == "unavailable"
     assert "stockwiki_proof_cli_failed" in result["binding"]["reason_codes"]
@@ -1414,7 +1339,7 @@ def test_offline_proof_cli_is_unavailable_not_zero(workspace):
     assert result["items"] == []
     # 2) interpreter path does not exist
     result = _stdout_json(_run_cli(
-        tmp_path, config_path, sw_root, _request(),
+        tmp_path, config_path, tmp_path, _request(), sw_cli=driver,
         sw_python=str(tmp_path / "missing" / "python.exe")))
     assert result["binding"]["status"] == "unavailable"
     assert "stockwiki_proof_not_configured" \
@@ -1432,6 +1357,7 @@ def test_offline_proof_cli_is_unavailable_not_zero(workspace):
 # --- old source version & pagination -----------------------------------------------
 
 
+@pytest.mark.owner_local_checkout
 def test_old_source_version_stays_out_of_items(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1452,6 +1378,7 @@ def _browse_one_page(tmp_path, config_path, sw_root, *, limit=1, cursor=None,
     return _stdout_json(completed)
 
 
+@pytest.mark.owner_local_checkout
 def test_proof_assertion_replacement_stales_existing_snapshot(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1482,6 +1409,7 @@ def test_proof_assertion_replacement_stales_existing_snapshot(workspace):
     assert changed["page"]["proof_snapshot_id"] != snapshot
 
 
+@pytest.mark.owner_local_checkout
 def test_pagination_is_pinned_and_stale_on_revision_change(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [
@@ -1533,6 +1461,7 @@ def test_pagination_is_pinned_and_stale_on_revision_change(workspace):
 
 # --- request validation -------------------------------------------------------------
 
+@pytest.mark.owner_local_checkout
 def test_omitted_optional_browse_fields_are_equal_to_null(workspace):
     tmp_path, _, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1571,6 +1500,7 @@ def test_malformed_requests_are_blocked(workspace, payload, reason):
 
 
 @pytest.mark.parametrize("field", ["cursor", "proof_snapshot_id"])
+@pytest.mark.owner_local_checkout
 def test_deep_page_tokens_are_blocked_without_traceback(workspace, field):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1719,6 +1649,7 @@ def test_nonfinite_and_deep_requests_are_blocked(workspace):
 # --- reopen interop: canonical tokens reopen through the EXISTING reader -------
 
 
+@pytest.mark.owner_local_checkout
 def test_canonical_item_reopens_through_existing_public_cli(workspace):
     tmp_path, catalog, config_path = workspace
     sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
@@ -1746,6 +1677,7 @@ def test_canonical_item_reopens_through_existing_public_cli(workspace):
     assert reopened["document"]["storage_state"] == "resolvable"
 
 
+@pytest.mark.owner_local_checkout
 def test_incomplete_us_dei_evidence_is_missing_evidence_not_guess(workspace):
     tmp_path, catalog, config_path = workspace
     # The amended US annual gets plain sidecar facts (no original-DEI

@@ -90,8 +90,7 @@ def test_current_consumer_uses_publication_date_not_local_download_date(
         assert producer.returncode == expected, producer.stderr
         if expected == 0:
             body = json.loads(producer.stdout)
-            assert body['versions']['parser'].endswith('0.1.1')
-            assert body['versions']['selector'].endswith('0.4.2')
+            assert body['versions'] == json.loads(fixture.payload)['versions']
             assert json.loads(producer.stderr)['replay_status'] == 'verified'
         assert downstream.returncode == expected, (consumer, case, downstream.stderr)
         if expected == 0:

@@ -97,7 +97,9 @@ def test_mc_publication_and_replay_keep_the_original_invocation(tmp_path):
     details = {row["details_id"]: row for row in map(json.loads, details_text.splitlines())}
     failure = details[stale["details_ref"]]
     assert failure["step_id"] == stale["step_id"]
-    assert {"stage": "translation", "role": None, "error_type": "TranslationError"} in failure["errors"]
+    assert ("translation", None, "TranslationError") in [
+        (error["stage"], error["role"], error["error_type"]) for error in failure["errors"]
+    ]
     for private in ("fixture-only-secret", "private-transcript-fixture", "private-fixture-name", str(tmp_path)):
         assert private not in details_text
 

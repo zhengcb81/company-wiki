@@ -14,7 +14,7 @@ from company_wiki.document_normalization import (
     normalize_document,
 )
 
-from conftest import (
+from support.document_normalization_fixtures import (
     build_pptx,
     normalize_pptx,
     sha256_hex,

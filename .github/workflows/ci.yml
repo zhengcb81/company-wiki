@@ -80,7 +80,7 @@ jobs:
           PYTHONPATH: src
         run: |
           python -m compileall -q src scripts tests
-          python scripts/config_doctor.py
+          python scripts/config_doctor.py --structure-only
       - name: Record canonical applicable and deferred nodes
         run: >-
           python -m tools.run_ci_evidence --collect --revision "${{ env.CWP_CI_REVISION }}"

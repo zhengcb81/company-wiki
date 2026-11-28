@@ -14,7 +14,7 @@ from company_wiki.document_normalization import (
     normalize_document,
 )
 
-from conftest import build_pptx, html_page, normalize_html, sha256_hex, source_id_for
+from support.document_normalization_fixtures import build_pptx, html_page, normalize_html, sha256_hex, source_id_for
 
 
 class TestLimitValidation:

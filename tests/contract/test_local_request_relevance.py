@@ -36,7 +36,10 @@ def test_actual_wrong_scope_is_excluded_before_irrelevant_date_error(
             year=year, period=period, form=form, end="June 30, 2022",
             transform="unknown:date-format",
         )
-        ref, path = imported(cat, original)
+        ref, path = imported(cat, original, document_kind=kind)
+        # A known different document kind can be excluded by the catalog's
+        # index. An earlier period of the requested kind needs source replay.
+        assert cat.reader.document(ref.document_id)["document_kind"] == kind
         result = prepare_local_source(cat, request())
         assert result["status"] == "not_found" and not result["blocks_download"]
         assert result["reason"] == reason
@@ -49,6 +52,17 @@ def test_actual_wrong_scope_is_excluded_before_irrelevant_date_error(
         retry = prepare_local_source(cat, request())
         assert retry["status"] == "not_found" and not retry["blocks_download"]
         assert cat.reader.fetchone("SELECT COUNT(*) FROM source_metadata_assertions")[0] == before
+    finally:
+        close(cat)
+
+
+def test_empty_catalog_reports_no_registered_local_source(tmp_path):
+    cat = lake(tmp_path)
+    try:
+        result = prepare_local_source(cat, request())
+        assert result["status"] == "not_found"
+        assert result["reason"] == "no_registered_local_source"
+        assert not result["blocks_download"] and result["download_events"] == 0
     finally:
         close(cat)
 

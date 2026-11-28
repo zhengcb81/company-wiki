@@ -9,4 +9,7 @@ coverage>=7.0.0
 pyyaml>=6.0
 jsonschema>=4.23
 openpyxl>=3.1
+# Local wheel build in the installed-entrypoint contract is explicitly offline.
+setuptools>=68.0
+wheel
 

@@ -28,7 +28,7 @@ from company_wiki.document_normalization.local_ocr import (
     OCRRecoveryAttempt,
     image_dimensions,
 )
-from conftest import tiny_png, build_pptx
+from support.document_normalization_fixtures import tiny_png, build_pptx
 
 
 def config(tmp_path):

@@ -87,6 +87,10 @@ def _mime_type(path: Path) -> str:
         ".xsd": "application/xml",
         ".xml": "application/xml",
         ".json": "application/json",
+        # Office handlers must be available on servers without an Office
+        # MIME registry, and use the same carrier identity on all platforms.
+        ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     }
     if extension in overrides:
         return overrides[extension]

@@ -22,7 +22,7 @@ from company_wiki.document_normalization.local_ocr import (
     OCRDroppedRegion,
     OCRRegionDiagnostics,
 )
-from conftest import build_pptx, sha256_hex, source_id_for
+from support.document_normalization_fixtures import build_pptx, sha256_hex, source_id_for
 
 MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 REGION = (10.0, 20.0, 300.0, 52.0)

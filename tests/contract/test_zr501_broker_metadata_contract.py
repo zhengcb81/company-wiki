@@ -10,7 +10,7 @@ page count; filename is ONLY a proposal).
   C2  metadata contract lands additively: sidecar publisher/authors/
       security_ids pass through `_normalized_from_sidecar` into the
       normalized metadata (then documents.metadata_json); the page-aware
-      PDF parser's page_count lands in the normalized artifact frontmatter
+      PDF parser's page_count reaches the caller through the isolated parser
       (None stays honest).
   C3  admission closure: a metadata-COMPLETE broker_research (all four
       contract fields present) is still NEVER admitted for filing —
@@ -24,6 +24,8 @@ import hashlib
 import json
 import sys
 from pathlib import Path
+
+import pytest
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
@@ -147,35 +149,37 @@ def test_c2_absent_contract_fields_stay_absent(tmp_path):
     assert normalized.get("security_ids") == ()
 
 
-def test_c2_page_count_lands_in_normalized_artifact():
-    """The page-aware parser's page_count reaches the normalized artifact
-    frontmatter (ZR-501 metadata contract): a 3-page result yields 3."""
-    import yaml
+@pytest.mark.parametrize("page_count", [3, None])
+def test_c2_isolated_normalization_reports_real_page_count(tmp_path, page_count):
+    """Only page-bearing content reports a count through the current parser port."""
+    import pymupdf
 
-    from company_wiki.source_catalog import normalizer as module
+    from company_wiki.source_catalog.normalizer import run_parser_isolated
+    from company_wiki.source_contract import SourceManifest, SourceType
 
-    document = {
-        "document_id": "doc-1",
-        "primary_source_id": "src-1",
-        "content_sha256": "a" * 64,
-        "title": "t",
-        "document_kind": "broker_research",
-        "published_date": "2026-03-01",
-    }
-
-    class _Norm:
-        status = "completed"
-        parser_name = "pdf_page_aware_core"
-        parser_version = "1.0.0"
-        quality_flags = ()
-        page_count = 3
-        first_page_text = "紫金矿业集团股份有限公司 2025年年度报告"
-        body = "# b"
-
-    frontmatter = module._frontmatter(document, _Norm())
-    payload = yaml.safe_load(frontmatter.split("---\n", 2)[1])
-    assert payload["page_count"] == 3
-    assert payload["document_kind"] == "broker_research"
+    if page_count is None:
+        path = tmp_path / "broker.txt"
+        path.write_text("Company operating capacity grew", encoding="utf-8")
+        mime = "text/plain"
+    else:
+        path = tmp_path / "broker.pdf"
+        with pymupdf.open() as pdf:
+            for number in range(page_count):
+                pdf.new_page().insert_text((80, 90), f"Broker research observation {number}")
+            pdf.save(path)
+        mime = "application/pdf"
+    manifest = SourceManifest.from_file(
+        root=tmp_path, file_path=path, entity_ids=("ent-acme",),
+        source_type=SourceType.BROKER_RESEARCH, published_date="2026-03-01",
+        retrieved_at="2026-03-02T00:00:00Z", collector_name="fixture",
+        collector_version="1.0.0", mime_type=mime,
+    )
+    result = run_parser_isolated(
+        path, manifest, None, timeout_seconds=15, heartbeat_interval_seconds=0.25,
+        result_max_bytes=100_000, temp_dir=tmp_path,
+    )
+    assert result.status == "completed"
+    assert result.page_count == page_count
 
 
 def test_c2_page_count_survives_isolated_parser_envelope():
@@ -215,36 +219,6 @@ def test_c2_page_count_survives_isolated_parser_envelope():
         payload_none, expected_source_id="src-1"
     )
     assert restored_none.page_count is None
-
-
-def test_c2_page_count_none_when_unknown():
-    """A non-PDF normalized path keeps page_count null/honest (no
-    fabricated count)."""
-    import yaml
-
-    from company_wiki.source_catalog import normalizer as module
-
-    document = {
-        "document_id": "doc-1",
-        "primary_source_id": "src-1",
-        "content_sha256": "a" * 64,
-        "title": "t",
-        "document_kind": "broker_research",
-        "published_date": "2026-03-01",
-    }
-
-    class _Norm:
-        status = "completed"
-        parser_name = "fixture"
-        parser_version = "1.0.0"
-        quality_flags = ()
-        page_count = None
-        first_page_text = None
-        body = "# b"
-
-    frontmatter = module._frontmatter(document, _Norm())
-    payload = yaml.safe_load(frontmatter.split("---\n", 2)[1])
-    assert payload["page_count"] is None
 
 
 # ---------------------------------------------------------------------------

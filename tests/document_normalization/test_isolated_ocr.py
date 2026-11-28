@@ -443,6 +443,30 @@ def test_native_stdin_probe_does_not_deadlock_liveness_monitor(tmp_path, operati
     assert not list(tmp_path.glob("cwp-ocr-*"))
 
 
+def test_close_finishes_scratch_cleanup_after_a_child_file_disappears(tmp_path, monkeypatch):
+    import shutil
+
+    adapter = IsolatedOCRAdapter(cfg(tmp_path), _backend_factory=NativeFake, scratch_dir=tmp_path)
+    warm(adapter)
+    original = shutil.rmtree
+    attempts = []
+
+    def remove_tree(path):
+        attempts.append(path)
+        if len(attempts) == 1:
+            (path / "ready.json").unlink()
+            raise FileNotFoundError("nested OCR scratch entry disappeared during removal")
+        original(path)
+
+    monkeypatch.setattr(shutil, "rmtree", remove_tree)
+    try:
+        adapter.close()
+    finally:
+        monkeypatch.undo()
+    assert len(attempts) == 2
+    assert not list(tmp_path.glob("cwp-ocr-*"))
+
+
 @pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows UCRT native metadata regression")
 @pytest.mark.parametrize("operation", ["_isatty", "_get_osfhandle", "_fstat64"])

@@ -11,7 +11,6 @@ anywhere; the config path and project root resolve relative to this file.
 
 from __future__ import annotations
 
-import os
 import sys
 from pathlib import Path
 
@@ -54,9 +53,8 @@ def diagnose(
         problems.append(f"config failed to load: {exc}")
         return problems
     if not config.catalog_dir.is_dir():
-        # Code-only worktrees and CI runners have no production catalog.
-        # Explicit structure-only mode still checks YAML and root shape.
-        if check_catalog_data and os.environ.get("CI") != "true":
+        # A code-only checkout can explicitly request structure validation.
+        if check_catalog_data:
             problems.append(f"catalog_dir is not a directory: {config.catalog_dir}")
     elif check_catalog_data:
         master = config.catalog_dir / "security_master"

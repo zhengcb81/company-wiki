@@ -8,6 +8,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 
 def _pilot_module():
     path = Path(__file__).resolve().parents[2] / "scripts" / "source_catalog_pilot_check.py"
@@ -291,34 +293,24 @@ def test_dry_run_arguments_are_order_independent(monkeypatch, capsys):
     assert "5 minutes at 30s intervals" in capsys.readouterr().out
 
 
-def test_pilot_cli_help_exits_without_starting_default_pilot():
-    script = Path("scripts/source_catalog_pilot_check.py").resolve()
+@pytest.mark.parametrize("arguments", [[], ["--help"], ["--not-a-real-option"]])
+def test_frozen_pilot_cli_stops_before_sampling(tmp_path, arguments):
+    script = Path(__file__).resolve().parents[2] / "scripts" / "source_catalog_pilot_check.py"
     result = subprocess.run(
-        [sys.executable, str(script), "--help"],
+        [sys.executable, str(script), *arguments],
+        cwd=tmp_path,
+        stdin=subprocess.DEVNULL,
         capture_output=True,
         text=True,
         encoding="utf-8",
-        errors="replace",
         timeout=5,
         check=False,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
-    assert result.returncode == 0
-    assert "--require-supervisor" in result.stdout
-
-
-def test_pilot_cli_rejects_unknown_arguments():
-    script = Path("scripts/source_catalog_pilot_check.py").resolve()
-    result = subprocess.run(
-        [sys.executable, str(script), "--not-a-real-option"],
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=5,
-        check=False,
-    )
-    assert result.returncode == 2
-    assert "unrecognized arguments" in result.stderr
+    assert result.returncode == 78
+    assert "LEGACY WRITER BLOCKED: source_catalog_pilot_check.py" in result.stdout
+    assert "samples" not in result.stdout
+    assert not list(tmp_path.iterdir())
 
 
 def test_sample_status_decodes_worker_json_as_utf8_sig(monkeypatch, tmp_path):

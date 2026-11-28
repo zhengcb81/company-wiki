@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import base64
-from dataclasses import asdict
 import hashlib
 import json
 import os
@@ -24,6 +23,10 @@ from company_wiki.source_catalog.narrative_evidence import (
 )
 from company_wiki.source_catalog.resolver import SourceRequest
 from company_wiki.source_catalog.source_reader import SourceReadError, SourceVersionReader
+from company_wiki.source_catalog.transcript_import_cli import (
+    CANDIDATE_WIRE_FIELDS,
+    SOURCE_REQUEST_WIRE_FIELDS,
+)
 from company_wiki.source_catalog.transcript_material import extract_transcript_material
 
 
@@ -88,6 +91,7 @@ def _run_provider(
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     request_bytes = json.dumps(
         request, ensure_ascii=False, separators=(",", ":")
@@ -179,8 +183,8 @@ def _import_payload(
 ) -> dict:
     return {
         "schema_version": "company-wiki-transcript-import-request/2",
-        "source_request": request.to_dict(),
-        "candidate": asdict(candidate),
+        "source_request": {field: getattr(request, field) for field in SOURCE_REQUEST_WIRE_FIELDS},
+        "candidate": {field: getattr(candidate, field) for field in CANDIDATE_WIRE_FIELDS},
         "transcript_result": transcript_result,
     }
 
@@ -200,6 +204,7 @@ def _run_cwp(root: Path, payload: dict) -> tuple[subprocess.CompletedProcess, di
         capture_output=True,
         timeout=45,
         check=False,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     return process, json.loads(process.stdout)
 

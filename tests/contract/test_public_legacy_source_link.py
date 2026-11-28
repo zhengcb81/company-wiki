@@ -73,7 +73,7 @@ def request(path, **extra):
 
 def tree_digest(root):
     return {
-        str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest()
+        path.relative_to(root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
         for path in root.rglob("*")
         if path.is_file()
     }
@@ -115,7 +115,7 @@ def test_actual_current_bytes_and_zero_business_writes(tmp_path):
     # otherwise read-only connection opens a WAL-mode database. They contain
     # no committed business frames; the catalog and every original are exact.
     for name in set(after) - set(before):
-        assert name in {"catalog\\catalog.sqlite3-wal", "catalog\\catalog.sqlite3-shm"}
+        assert name in {"catalog/catalog.sqlite3-wal", "catalog/catalog.sqlite3-shm"}
         if name.endswith("-wal"):
             assert (tmp_path / name).stat().st_size == 0
     assert {name: digest for name, digest in after.items() if name in before} == before

@@ -61,7 +61,10 @@ import subprocess
 import sys
 with Path(sys.argv[1]).open("a", encoding="ascii") as handle:
     print(sys.argv[-1], file=handle)
-raise SystemExit(subprocess.run(sys.argv[2:], check=False).returncode)
+raise SystemExit(subprocess.run(
+    sys.argv[2:], stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr,
+    check=False, timeout=15, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+).returncode)
 """
 _LOSE_RESULT = """
 import json

@@ -17,6 +17,9 @@ from company_wiki.source_catalog.narrative_evidence import (
     parse_pdf, parse_transcript_text, select_narrative_evidence,
     verify_pdf_evidence_spans, verify_transcript_evidence_spans,
 )
+from company_wiki.source_catalog.narrative_routing import (
+    FINANCIAL_REPORT_SELECTION_LIMIT, PROSPECTUS_SELECTION_LIMIT,
+)
 from company_wiki.source_catalog.official_json_import import import_official_json_source
 from company_wiki.source_catalog.official_json_projection import build_projection_from_refs, persist_projection
 from company_wiki.source_catalog.service import SourceCatalog
@@ -112,7 +115,8 @@ def test_frozen_business_excerpt_pdf_parse_select_original_byte_replay(tmp_path,
         if texts is IPO:
             assert "以销定产" in joined and "不会成为" in joined and "突发" in joined
             assert {span.coordinates.page_number for span in package.evidence_spans} == {1, 2}
-        assert package.selection_limit == (160 if texts is IPO else 96)
+        expected_limit = PROSPECTUS_SELECTION_LIMIT if texts is IPO else FINANCIAL_REPORT_SELECTION_LIMIT
+        assert len(package.evidence_spans) <= package.selection_limit == expected_limit
 
 
 def import_page(catalog, page):

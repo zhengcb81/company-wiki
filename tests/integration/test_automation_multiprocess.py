@@ -7,7 +7,9 @@ import json
 import math
 import multiprocessing
 import os
+import signal
 import statistics
+import sys
 import threading
 import time
 from datetime import datetime, timedelta, timezone
@@ -134,16 +136,33 @@ def _wait_until(predicate, *, timeout: float = 15.0) -> None:
 
 
 def _run_supervisor_parent(config: SupervisorConfig, pid_path: str) -> None:
-    supervisor = AutomationSupervisor(config)
-    supervisor.start()
-    Path(pid_path).write_text(
-        json.dumps([child.pid for child in supervisor.children()]), encoding="utf-8"
-    )
-    while True:
-        time.sleep(0.1)
+    with AutomationSupervisor(config) as supervisor:
+        target = Path(pid_path)
+        prepared = target.with_suffix(".tmp")
+        prepared.write_text(
+            json.dumps([child.pid for child in supervisor.children()]), encoding="utf-8",
+        )
+        prepared.replace(target)
+        while True:
+            time.sleep(0.1)
 
 
 def _pid_is_alive(pid: int) -> bool:
+    if sys.platform.startswith("linux"):
+        # The vanished supervisor's children may have exited but still be
+        # zombies until the runner's init process reaps them.
+        try:
+            fields = Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()
+        except FileNotFoundError:
+            return False
+        return fields[0] not in {"Z", "X"}
+    if os.name != "nt":
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return False
+        return True
+
     import ctypes
 
     kernel32 = ctypes.windll.kernel32
@@ -160,6 +179,13 @@ def _pid_is_alive(pid: int) -> bool:
 
 
 def _terminate_pid(pid: int) -> None:
+    if os.name != "nt":
+        try:
+            os.kill(pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        return
+
     import ctypes
 
     kernel32 = ctypes.windll.kernel32
@@ -765,8 +791,14 @@ def test_killed_child_is_reaped_and_job_is_recovered_after_supervisor_restart(
         marker["pid"] != first_pid
         for marker in _markers(trace_dir, "attempt_finished", job_id)
     )
-    ready, = feedback.glob("*.ready")
-    observation = json.loads(ready.with_suffix(".jsonl").read_bytes())
+    observations = [
+        json.loads(ready.with_suffix(".jsonl").read_bytes())
+        for ready in feedback.glob("*.ready")
+    ]
+    observation, = (
+        observed for observed in observations
+        if observed["run_id"] == job_id and observed["attempt_id"] == attempts[0].attempt_id
+    )
     assert (observation["run_id"], observation["attempt_id"]) == (job_id, attempts[0].attempt_id)
     assert (observation["actual"], observation["disposition"]) == ("retry_wait", "deviation")
     details = json.loads((feedback / observation["details_ref"]).read_bytes())
@@ -859,20 +891,26 @@ def test_workers_self_terminate_when_supervisor_parent_is_abruptly_killed(
     context = multiprocessing.get_context("spawn")
     parent = context.Process(target=_run_supervisor_parent, args=(config, str(pid_path)))
     parent.start()
-    _wait_until(pid_path.is_file)
-    child_pids = json.loads(pid_path.read_text(encoding="utf-8"))
-    assert child_pids and all(_pid_is_alive(pid) for pid in child_pids)
-    _wait_until(lambda: bool(_markers(trace_dir, "handler_started", job_id)))
-
-    parent.terminate()
-    parent.join(timeout=5)
+    child_pids = []
     try:
-        _wait_until(
-            lambda: all(not _pid_is_alive(pid) for pid in child_pids), timeout=5
-        )
+        _wait_until(pid_path.is_file)
+        child_pids = json.loads(pid_path.read_text(encoding="utf-8"))
+        assert child_pids and all(_pid_is_alive(pid) for pid in child_pids)
+        _wait_until(lambda: bool(_markers(trace_dir, "handler_started", job_id)))
+
+        parent.kill()
+        parent.join(timeout=5)
+        assert not parent.is_alive()
+        _wait_until(lambda: all(not _pid_is_alive(pid) for pid in child_pids), timeout=5)
     finally:
-        for pid in child_pids:
-            if _pid_is_alive(pid):
-                _terminate_pid(pid)
+        try:
+            if parent.is_alive():
+                parent.kill()
+                parent.join(timeout=5)
+            parent.close()
+        finally:
+            for pid in child_pids:
+                if _pid_is_alive(pid):
+                    _terminate_pid(pid)
 
     assert all(not _pid_is_alive(pid) for pid in child_pids)

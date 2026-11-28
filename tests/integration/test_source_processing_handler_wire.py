@@ -103,5 +103,5 @@ def test_current_wire_feature_is_bound_to_the_actual_recipe():
     from company_wiki.source_catalog.narrative_decision_inventory import decision_versions
     from company_wiki.source_catalog.reading_recipe import business_algorithm_hashes
 
-    assert _versions()['reading_context_contract'] == READING_CONTEXT_CONTRACT_FEATURE_VERSION
+    assert decision_versions()['reading_context_contract'] == READING_CONTEXT_CONTRACT_FEATURE_VERSION
     assert 'company_wiki.document_understanding.reading_context_contract' in business_algorithm_hashes(pdf_frontend=False)
