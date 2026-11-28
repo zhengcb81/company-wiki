@@ -37,7 +37,6 @@ from __future__ import annotations
 import hashlib
 import os
 import sqlite3
-import sys
 from pathlib import Path
 
 import pytest
@@ -45,7 +44,6 @@ import pytest
 WIKI_ROOT = Path(os.environ.get(
     "COMPANY_WIKI_REAL_WIKI_ROOT", str(Path(__file__).resolve().parents[2])
 ))
-sys.path.insert(0, str(WIKI_ROOT / "src"))
 
 PRODUCTION_DB = WIKI_ROOT / ".source_catalog" / "catalog.sqlite3"
 PRODUCTION_CONFIG = WIKI_ROOT / "config" / "source_catalog.yaml"
