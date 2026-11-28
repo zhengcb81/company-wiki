@@ -3,19 +3,16 @@
 from collections import Counter
 import json
 import logging
-import os
 from pathlib import Path
-import subprocess
 import sys
 
 from company_wiki import runtime_feedback
 from company_wiki.diagnostic_logging import log_exception
 
 from .coordinator import settle
-from .diagnostics import background_command, background_environment, background_stderr, run_background
+from .diagnostics import launch_background, run_background
 from .host import process_host, read_hosts
 from .observations import read_batch
-from .process_launch import BACKGROUND_CREATION_FLAGS
 
 
 _logger = logging.getLogger(__name__)
@@ -49,13 +46,10 @@ def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -
     """Start the finite control tick outside the completed business process."""
     destination = output.with_suffix(".stderr.log")
     try:
-        with output.open("xb") as stream, background_stderr(destination) as errors:
-            child = subprocess.Popen(
-                background_command("tools.feedback_loop.hook", str(sidecar.resolve()),
-                                   str(Path(config).resolve()), wait_seconds),
-                cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL,
-                stdout=stream, stderr=errors, env=background_environment(destination),
-                start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS,
+        with output.open("xb") as stream:
+            child = launch_background(
+                "tools.feedback_loop.hook", destination, str(sidecar.resolve()),
+                str(Path(config).resolve()), wait_seconds, cwd=Path(__file__).resolve().parents[2], stdout=stream,
             )
     except FileExistsError:
         return {"status": "previous_wake_receipt", "resume": "tick"}

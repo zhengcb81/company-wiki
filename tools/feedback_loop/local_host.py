@@ -18,10 +18,7 @@ from company_wiki import runtime_feedback
 from company_wiki.diagnostic_logging import log_exception
 
 from .coordinator import reconcile_diagnostic_code
-from .diagnostics import (
-    append_diagnostic, background_command, background_environment, background_stderr, redact_text,
-    run_background,
-)
+from .diagnostics import append_diagnostic, launch_background, redact_text, run_background
 from .host import host_environment, read_hosts
 from .observations import (
     IDENTITY, digest, has_stage_result, normalize_observation, project_observation, terminal_occurrence_ids, unique_fields,
@@ -250,15 +247,12 @@ class LocalHost:
                 return False
             environment = self._action_environment(row, json.loads(row["route"]))
         destination = self.config.parent / "logs" / "host_wake_stderr.log"
-        env = background_environment(destination, environment)
+        env = dict(environment)
         if self.recovery_owners:
             env[RECOVERY_OWNERS_ENV] = " ".join(self.recovery_owners)
         try:
-            with background_stderr(destination) as errors:
-                subprocess.Popen(background_command("tools.feedback_loop.local_host", "--config", str(self.config),
-                                                    "work", key), cwd=_ROOT, stdin=subprocess.DEVNULL,
-                                 stdout=subprocess.DEVNULL, stderr=errors, env=env,
-                                 start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
+            launch_background("tools.feedback_loop.local_host", destination, "--config", str(self.config), "work", key,
+                              cwd=_ROOT, environment=env)
         except OSError as exc:
             # The pre-launch queue is durable. Host startup can wake it again.
             log_exception(_logger, logging.WARNING, f"Failed to wake feedback host worker for action={key}", exc)

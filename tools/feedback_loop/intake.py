@@ -16,7 +16,7 @@ import subprocess
 from uuid import uuid4
 
 from .coordinator import advance, settle
-from .diagnostics import background_command, background_environment, background_stderr, redact_text, run_background
+from .diagnostics import launch_background, redact_text, run_background
 from .host import BatchedReconcile, RECONCILE_DEFERRED, process_host, read_hosts
 from .intake_schedule import IntakeSchedule, WAKE_ERRORS
 from company_wiki import runtime_feedback
@@ -25,7 +25,7 @@ from company_wiki.diagnostic_logging import log_exception
 from .local_host import LocalHost, _save_recovery, _save_recovery_error, host_path
 from .observations import Batch, IDENTITY, decode_observation, digest, read_batch, unique_fields
 from .process_history import ProcessHistory, implementation, utc_now
-from .process_launch import BACKGROUND_CREATION_FLAGS, inherited_console_options
+from .process_launch import inherited_console_options
 
 _logger = logging.getLogger(__name__)
 
@@ -446,14 +446,8 @@ def _drain_once(settings: Path, hosts_file: Path, *, owner: str | list[str] | No
 
 def _launch_pending(settings: Path, hosts_file: Path, database: Path) -> None:
     destination = settings.resolve().parent / "logs" / "intake_drain_stderr.log"
-    with background_stderr(destination) as errors:
-        subprocess.Popen(
-            background_command("tools.feedback_loop.intake", "--settings", str(settings),
-                               "--hosts", str(hosts_file), "drain", "--pending-database", str(database)),
-            cwd=_ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=errors,
-            env=background_environment(destination),
-            start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS,
-        )
+    launch_background("tools.feedback_loop.intake", destination, "--settings", str(settings),
+                      "--hosts", str(hosts_file), "drain", "--pending-database", str(database), cwd=_ROOT)
 
 
 def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: list[str] | None = None,
