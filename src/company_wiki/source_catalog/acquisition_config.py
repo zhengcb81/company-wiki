@@ -3,10 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-import os
 from pathlib import Path
-import re
-import sys
 import tempfile
 from typing import Any
 
@@ -14,10 +11,10 @@ import yaml
 
 from .acquisition import AdapterRegistry
 from .adapter_process import JsonCommandAdapter
+from .config_paths import ConfigPathTokenError, expand_tokens, project_path
 from .dayu_cli_adapter import DayuCliDownloadAdapter
 
 
-_TOKEN_RE = re.compile(r"\$\{([A-Z_]+)\}")
 
 
 class AcquisitionConfigError(ValueError):
@@ -101,29 +98,14 @@ def _mapping(value: Any, name: str) -> dict[str, Any]:
 def _expand(value: Any, *, project_root: Path) -> str:
     if not isinstance(value, str) or not value.strip():
         raise AcquisitionConfigError("configured text must be non-empty")
-    tokens = {
-        "PROJECT_ROOT": str(project_root),
-        "USER_PROFILE": os.environ.get("USERPROFILE", str(Path.home())),
-        "PYTHON_EXECUTABLE": str(Path(sys.executable).resolve()),
-    }
-
-    def replace(match: re.Match[str]) -> str:
-        name = match.group(1)
-        if name not in tokens:
-            raise AcquisitionConfigError(f"unsupported path token: {name}")
-        return tokens[name]
-
-    expanded = _TOKEN_RE.sub(replace, value.strip())
-    if _TOKEN_RE.search(expanded):
-        raise AcquisitionConfigError("unresolved acquisition config token")
-    return expanded
+    try:
+        return expand_tokens(value, project_root=project_root, allow_python_executable=True)
+    except ConfigPathTokenError as error:
+        raise AcquisitionConfigError(str(error)) from error
 
 
 def _path(value: Any, *, project_root: Path) -> Path:
-    expanded = Path(_expand(value, project_root=project_root)).expanduser()
-    if not expanded.is_absolute():
-        expanded = project_root / expanded
-    return expanded.resolve(strict=False)
+    return project_path(_expand(value, project_root=project_root), project_root=project_root)
 
 
 def _adapter(value: Any, *, project_root: Path, name: str) -> AdapterCommandSpec:

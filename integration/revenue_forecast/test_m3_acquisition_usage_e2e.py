@@ -82,6 +82,7 @@ def extra():
 
 
 market = "CN" if a.mode == "market-cn" else "US"
+fixture_security_id = {"CN": "300750", "US": "AAPL"}[market]
 if a.action == "discover":
     for path, status in (("/meta1", 200), ("/meta2", 500 if a.mode == "metadata-error" else 200)):
         conn.request("GET", path, headers={"accept-encoding": "identity"})
@@ -99,6 +100,7 @@ if a.action == "discover":
             raise SystemExit(1)
     candidates = [] if a.mode == "empty" else [{"candidate_id": "one", "provider": "loopback",
         "provider_document_id": "accession-one", "market": market, "entity": request["entity"],
+        "security_id": fixture_security_id,
         "title": "Fixture Annual Report", "source_url": "https://fixture.invalid/report.txt",
         "document_kind": "annual_report", "form_type": "10-K", "filing_date": "2026-03-20",
         "fiscal_year": request.get("fiscal_year"), "fiscal_period": "FY", "language": "en"}]

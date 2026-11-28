@@ -3,7 +3,7 @@ name: CI
 on:
   workflow_dispatch:
   push:
-    branches: [master, "codex/architecture-*", "codex/s6-p1-*"]
+    branches: [master, "codex/architecture-*"]
     paths-ignore:
       - "docs/plans/**"
       - ".planning/**"
@@ -28,6 +28,9 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.longpaths
+  GIT_CONFIG_VALUE_0: "true"
   CWP_CI_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
   CWP_CI_RF_REVISION: 5a28c0c88df1a8e8fb9b167dbd884eebef7d7894
   PYTHONUTF8: "1"

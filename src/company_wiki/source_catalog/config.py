@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import fields
-import os
 from pathlib import Path
 import re
 from typing import Any
@@ -11,10 +10,10 @@ from typing import Any
 import yaml
 
 from .adapters.registry import admission_profile, registered_adapter
+from .config_paths import ConfigPathTokenError, expand_tokens, project_path
 from .models import CatalogConfig, RootSpec, RouteSpec
 
 
-_TOKEN_RE = re.compile(r"\$\{([A-Z_]+)\}")
 _KNOWN_ROOT_FIELDS = {field.name for field in fields(RootSpec)}
 
 
@@ -33,24 +32,11 @@ def expand_config_path(value: Any, *, project_root: Path) -> Path:
     """Resolve a configured catalog path against the owning project root."""
     if not isinstance(value, str) or not value.strip():
         raise CatalogConfigError("path must be non-empty text")
-    tokens = {
-        "PROJECT_ROOT": str(project_root),
-        "USER_PROFILE": os.environ.get("USERPROFILE", str(Path.home())),
-    }
-
-    def replace(match: re.Match[str]) -> str:
-        name = match.group(1)
-        if name not in tokens:
-            raise CatalogConfigError("unsupported path token")
-        return tokens[name]
-
-    expanded = _TOKEN_RE.sub(replace, value.strip())
-    if _TOKEN_RE.search(expanded):
-        raise CatalogConfigError("unresolved path token")
-    path = Path(expanded).expanduser()
-    if not path.is_absolute():
-        path = project_root / path
-    return path.resolve(strict=False)
+    try:
+        expanded = expand_tokens(value, project_root=project_root)
+    except ConfigPathTokenError as error:
+        raise CatalogConfigError(str(error)) from error
+    return project_path(expanded, project_root=project_root)
 
 
 def require_boolean_root_fields(
