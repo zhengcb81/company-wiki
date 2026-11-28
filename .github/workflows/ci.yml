@@ -71,7 +71,7 @@ jobs:
         if: matrix.platform == 'linux'
         run: |
           python -m pip install "ruff==0.15.18"
-          ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/integration/test_transport_normalization_injection.py tests/integration/test_p4_contract tests/support/narrative_model_fixture.py tools/check_dependencies.py tools/changed_unit_tests.py tools/pre_push_gate.py tools/summarize_junit_failures.py tools/source_case_receipt.py tools/source_case_checks.py tools/source_case_runner.py tools/run_ci_evidence.py tools/ci_selection.py tools/anti_trick_gate_spec
+          ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/integration/test_transport_normalization_injection.py tests/integration/test_p4_contract tests/support/narrative_model_fixture.py tools/check_dependencies.py tools/changed_unit_tests.py tools/pre_push_gate.py tools/summarize_junit_failures.py tools/source_case_receipt.py tools/source_case_checks.py tools/source_case_runner.py tools/run_ci_evidence.py tools/pytest_scratch.py tools/ci_selection.py tools/anti_trick_gate_spec
       - name: Strict type check on src
         if: matrix.platform == 'linux'
         run: python -m mypy src

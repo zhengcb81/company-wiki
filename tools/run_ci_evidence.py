@@ -8,8 +8,10 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from tempfile import TemporaryDirectory
 
 from .ci_selection import classify, parse_shard, paths_for
+from .pytest_scratch import PARENT_BASETEMP_ENV, short_scratch_root
 
 
 _WINDOWLESS = getattr(subprocess, "CREATE_NO_WINDOW", 0)
@@ -38,11 +40,15 @@ def collect_tests(base: list[str], roots: list[str], output: Path, policy: dict)
 
 
 def execute_tests(base: list[str], paths: list[str], output: Path) -> int:
-    result = subprocess.run(
-        [*base, "--s6-evidence", str(output / "executed.json"),
-         "--timeout=180", "--junitxml", str(output / "tests.xml"), *paths],
-        stdin=subprocess.DEVNULL, creationflags=_WINDOWLESS,
-    )
+    root = short_scratch_root(Path(__file__).resolve().parents[1])
+    with TemporaryDirectory(prefix=".cwci-", dir=root) as scratch:
+        basetemp = str(Path(scratch) / "t")
+        result = subprocess.run(
+            [*base, "--basetemp", basetemp, "--s6-evidence", str(output / "executed.json"),
+             "--timeout=180", "--junitxml", str(output / "tests.xml"), *paths],
+            env={**os.environ, PARENT_BASETEMP_ENV: basetemp},
+            stdin=subprocess.DEVNULL, creationflags=_WINDOWLESS,
+        )
     return result.returncode
 
 

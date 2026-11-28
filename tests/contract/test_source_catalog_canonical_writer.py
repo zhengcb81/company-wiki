@@ -652,13 +652,13 @@ def test_canonical_import_refuses_a_destination_outside_its_physical_root(tmp_pa
     sentinel.write_bytes(b"independent owner")
     link = catalog.config.roots[0].path / request.entity
     if os.name == "nt":
-        env = {key: value for key, value in os.environ.items()
-               if key.upper() in {"SYSTEMROOT", "WINDIR", "PATH", "TEMP", "TMP"}}
-        env.update(CWP_TEST_LINK=str(link), CWP_TEST_TARGET=str(outside))
+        # mklink is native and lightweight. Use the fixture directory as
+        # cwd rather than putting absolute workspace paths into shell syntax.
         subprocess.run(
-            ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
-             "New-Item -ItemType Junction -Path $env:CWP_TEST_LINK -Target $env:CWP_TEST_TARGET | Out-Null"],
-            env=env, stdin=subprocess.DEVNULL, capture_output=True, check=True, timeout=15,
+            ["cmd.exe", "/d", "/c", "mklink", "/J", link.name, os.path.relpath(outside, link.parent)],
+            cwd=link.parent, stdin=subprocess.DEVNULL, capture_output=True, check=True, timeout=15,
+            env={key: value for key, value in os.environ.items()
+                 if key.upper() in {"SYSTEMROOT", "WINDIR", "PATH", "TEMP", "TMP", "COMSPEC"}},
             creationflags=subprocess.CREATE_NO_WINDOW,
         )
     else:

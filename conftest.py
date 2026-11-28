@@ -50,7 +50,8 @@ recommendation; see this card's decision.md / oracle.md §0+§2):
     chose 150/60; this control's unrouted expectation is superseded").
 
 Fallback: a fresh empty ``<shortest-owned-root>/.cwpt-<12hex>`` per relocating session
-(never an attempt/evidence root, never reused), removed in ``pytest_unconfigure``. The
+(never an attempt/evidence root, never reused), removed in ``pytest_unconfigure``.
+The CI parent supplies and reclaims its own scratch after pytest exits. The
 default pytest path is measured too; it is not assumed to be short because it comes from
 ``%TEMP%``.
 No pytest.ini option is loosened; sessions with a within-budget basetemp are untouched
@@ -74,13 +75,15 @@ import tempfile
 import uuid
 from pathlib import Path
 
+from tools.pytest_scratch import FALLBACK_ROOT_ENV as FALLBACK_ROOT_ENV
+from tools.pytest_scratch import PARENT_BASETEMP_ENV, short_scratch_root
+
 WIN32_PATH_LIMIT = 210
 GENERATION_RESERVE = 150  # owner §16 E-1; logon node's measured suffix (child: 125)
 BASETEMP_MAX_CHARS = WIN32_PATH_LIMIT - GENERATION_RESERVE  # 60; relocate iff len > 60
 FALLBACK_DIR_PREFIX = ".cwpt-"
 FALLBACK_DIR_RANDOM_HEX = 12
 DISABLE_ENV = "CW_SHORT_BASETEMP_DISABLE"
-FALLBACK_ROOT_ENV = "CW_BASETEMP_FALLBACK_ROOT"
 DECISION_FILE_ENV = "CW_BASETEMP_DECISION_FILE"
 DECISION_PREFIX = "CW-BASETEMP-DECISION "
 CLEANUP_PREFIX = "CW-BASETEMP-CLEANUP "
@@ -142,17 +145,7 @@ def decide(cwd, requested, *, disabled: bool = False) -> dict:
 
 
 def fallback_root() -> Path:
-    override = os.environ.get(FALLBACK_ROOT_ENV)
-    if override:
-        root = Path(override)
-    else:
-        # The host may inject a deeply nested %TEMP% (Codex's sandbox does this).
-        # Put session scratch under whichever owned root is shorter; this checkout
-        # root is writable and avoids repeating the same long-path failure.
-        candidates = (Path(__file__).resolve().parent, Path(tempfile.gettempdir()))
-        root = min(candidates, key=lambda path: len(str(path)))
-    root.mkdir(parents=True, exist_ok=True)
-    return root
+    return short_scratch_root(Path(__file__).resolve().parent)
 
 
 def make_fallback_dir(root=None) -> Path:
@@ -193,6 +186,10 @@ def pytest_configure(config) -> None:
     requested = getattr(config.option, "basetemp", None)
     cwd = os.getcwd()
     decision = decide(cwd, requested, disabled=bool(os.environ.get(DISABLE_ENV)))
+    if requested is not None and str(resolve_basetemp(cwd, requested)) == os.environ.get(PARENT_BASETEMP_ENV):
+        # The launcher already selected the shortest owned root. Only it can
+        # reap scratch after Windows releases handles held by this process.
+        decision.update(relocated=False, reason="parent-owned")
     if not decision.get("relocated"):
         _record(decision)
         return
