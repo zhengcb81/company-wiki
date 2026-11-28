@@ -223,6 +223,34 @@ class LocalHost:
         with closing(self._connect()) as conn:
             return conn.execute("SELECT * FROM actions WHERE action_id = ?", (key,)).fetchone()
 
+    def _legacy_observation(self, request):
+        observation = request["payload"].get("observation")
+        if not isinstance(observation, dict) or not any(
+            isinstance(ref, str) and ref.startswith("ref-")
+            for ref in (observation.get("run_id"), observation.get("attempt_id"))
+        ):
+            return None
+        # Only an unresolved opaque identity needs this read. Existing rows
+        # retain their original IDs and the exact payload that was accepted.
+        with closing(self._connect()) as conn:
+            rows = conn.execute("SELECT * FROM actions WHERE route IS NULL AND state = 'done'")
+            for row in rows:
+                try:
+                    original = json.loads(row["request"], object_pairs_hook=unique_fields)
+                    if original.get("kind") != "observe" or original.get("owner") != request["owner"]:
+                        continue
+                    _validate(original)
+                    if (row["action_id"], row["request_digest"]) != (
+                        original["action_id"], original["request_digest"],
+                    ):
+                        continue
+                    projected = _observation_storage_request(original)
+                    if projected["action_id"] == request["action_id"]:
+                        return row, original, projected["request_digest"]
+                except (AttributeError, KeyError, TypeError, ValueError, RecursionError):
+                    continue
+        return None
+
     def _configured_pass_env(self, owner):
         if self._host_registry is None:
             filename = self.intake_hosts if isinstance(self.intake_hosts, str) and self.intake_hosts else "hosts.json"
@@ -688,6 +716,11 @@ class LocalHost:
             key, sha = request["action_id"], request["request_digest"]
             if key != prefix["action_id"]:
                 row = self._get(key)
+            if row is None and (legacy := self._legacy_observation(request)) is not None:
+                row, wire_request, projected_digest = legacy
+                if projected_digest != sha:
+                    return {**prefix, "state": "failed", "code": "action_conflict"}
+                sha = row["request_digest"]
         if row is None and request["method"] == "submit":
             route = self._route(owner, kind) if kind in _EXECUTABLE else None
             if kind not in _LOCAL and route is None:

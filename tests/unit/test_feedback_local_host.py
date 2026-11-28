@@ -1126,7 +1126,8 @@ def test_feedback_plan_does_not_echo_historical_credential_shaped_ids(tmp_path):
     assert path.read_bytes() == original
 
 
-def test_new_observe_receipt_uses_safe_coordinates_for_an_unregistered_historical_packet(host_config):
+@pytest.mark.parametrize("already_registered", (False, True))
+def test_observe_receipts_share_one_identity_for_historical_coordinates(host_config, already_registered):
     import sqlite3
 
     owner = "filing-fetch"
@@ -1139,22 +1140,36 @@ def test_new_observe_receipt_uses_safe_coordinates_for_an_unregistered_historica
     }
     safe = dict(original, run_id="ref-" + sha256(caller.encode()).hexdigest())
 
-    def observe(row, method):
+    def request_for(row, method):
         occurrence = digest([row[field] for field in IDENTITY])
         payload = {"occurrence_id": occurrence, "observation": row}
         key = digest(["observe", owner, occurrence])
         request = action("observe", owner, payload)
         request.update(method=method, action_id=key, request_digest=digest([owner, "observe", key, payload]))
-        receipt = invoke(host_config, "rpc", request)
-        assert receipt["action_id"] == key and receipt["request_digest"] == request["request_digest"]
-        assert receipt["state"] == "done" and receipt["result"]["recorded"] is True
+        return request
 
-    observe(original, "submit")
-    observe(original, "lookup")
-    with closing(sqlite3.connect(host_config.parent / "actions.sqlite")) as conn:
-        retained, = conn.execute("SELECT request FROM actions").fetchone()
-    assert caller not in retained
-    observe(safe, "lookup")
-    observe(safe, "submit")
-    with closing(sqlite3.connect(host_config.parent / "actions.sqlite")) as conn:
-        assert conn.execute("SELECT count(*) FROM actions").fetchone() == (1,)
+    database = host_config.parent / "actions.sqlite"
+    if already_registered:
+        assert invoke(host_config, "rpc", request_for(original, "lookup"))["state"] == "absent"
+        old_request = request_for(original, "submit")
+        frozen = json.dumps(old_request)
+        with closing(sqlite3.connect(database)) as conn, conn:
+            # Same frozen shape as the previously published public RPC.
+            conn.execute("INSERT INTO actions VALUES (?, ?, ?, NULL, NULL, 'done', NULL, ?)", (
+                old_request["action_id"], old_request["request_digest"], frozen,
+                json.dumps({"result": {"recorded": True}}),
+            ))
+    for row, method in ((original, "submit"), (original, "lookup"), (safe, "lookup"), (safe, "submit")):
+        request = request_for(row, method)
+        receipt = invoke(host_config, "rpc", request)
+        assert receipt["action_id"] == request["action_id"]
+        assert receipt["request_digest"] == request["request_digest"]
+        assert receipt["state"] == "done" and receipt["result"]["recorded"] is True
+    changed = invoke(host_config, "rpc", request_for(dict(safe, actual="failed"), "submit"))
+    assert changed["state"] == "failed" and changed["code"] == "action_conflict"
+    with closing(sqlite3.connect(database)) as conn:
+        existing, = conn.execute("SELECT request FROM actions").fetchall()
+    if already_registered:
+        assert existing[0] == frozen
+    else:
+        assert caller not in existing[0]

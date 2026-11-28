@@ -25,10 +25,10 @@ def test_parallel_owner_completions_start_one_inbox_reader(tmp_path, monkeypatch
     settings, hosts = _configuration(tmp_path)
     launches = []
 
-    def launch(command, **kwargs):
-        launches.append(command)
+    def launch(module, destination, *arguments, **kwargs):
+        launches.append((module, destination, arguments))
 
-    monkeypatch.setattr(intake.subprocess, "Popen", launch)
+    monkeypatch.setattr(intake, "launch_background", launch)
     with ThreadPoolExecutor(max_workers=8) as pool:
         list(pool.map(lambda _: intake.wake(settings, hosts, owners=["filing-fetch", "stockwiki"]), range(38)))
 

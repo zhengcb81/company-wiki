@@ -103,18 +103,18 @@ def test_wake_does_not_wait_for_owner_and_does_not_overwrite_delivery(tmp_path, 
     opened = []
 
     class Background:
-        def __init__(self, argv, **kwargs):
+        def __init__(self, module, destination, *arguments, **kwargs):
             self.pid = 42
-            opened.append((argv, kwargs))
+            opened.append((module, destination, arguments))
 
         def wait(self):
             pytest.fail("business result must not wait for a control RPC")
 
-    monkeypatch.setattr(hook.subprocess, "Popen", Background)
+    monkeypatch.setattr(hook, "launch_background", Background)
     output = tmp_path / "control-result"
     assert hook.wake(tmp_path / "obs", str(tmp_path / "config"), output)["status"] == "scheduled"
     assert hook.wake(tmp_path / "obs", str(tmp_path / "config"), output)["status"] == "previous_wake_receipt"
-    assert len(opened) == 1 and "tools.feedback_loop.hook" in opened[0][0]
+    assert len(opened) == 1 and opened[0][0] == "tools.feedback_loop.hook"
 
 
 def test_saved_native_receipt_can_resolve_the_observed_content_and_version(tmp_path):
