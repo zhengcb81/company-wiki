@@ -2,7 +2,6 @@
 
 from dataclasses import replace
 import hashlib
-import importlib.util
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -17,17 +16,10 @@ from company_wiki.automation.narrative_contracts import (
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.automation.narrative_replay import replay_narrative_evidence
 from company_wiki.automation.models import HandlerOutcome
+from support.document_normalization_fixtures import build_pptx
 from unit.test_narrative_select_handler import _payload, _context, FakeReader
 
 MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-
-
-def fixture_deck(**kwargs):
-    path = Path(__file__).resolve().parents[1] / "document_normalization/conftest.py"
-    spec = importlib.util.spec_from_file_location("owned_normalization_fixture", path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.build_pptx(**kwargs)
 
 
 def _module():
@@ -214,7 +206,7 @@ def test_absent_config_is_pure_and_other_formats_ignore_broken_ocr_config(tmp_pa
 
 def test_ocr_selected_partial_is_usable_and_replays_one_unique_media(tmp_path):
     value, adapters = port(tmp_path / "models")
-    data = fixture_deck(with_picture_only_slide=True, with_duplicate_picture=True)
+    data = build_pptx(with_picture_only_slide=True, with_duplicate_picture=True)
     wire = _payload(
         data,
         title="Acme business update",
@@ -248,7 +240,7 @@ def test_ocr_selected_partial_is_usable_and_replays_one_unique_media(tmp_path):
 @pytest.mark.parametrize("version", ["1.0.0", "1.1.0"])
 def test_historical_pure_replay_ignores_current_ocr_and_preserves_en(tmp_path, version):
     value, adapters = port(tmp_path / "models")
-    data = fixture_deck()
+    data = build_pptx()
     digest = hashlib.sha256(data).hexdigest()
     document = dn.normalize_document(
         data,
@@ -277,7 +269,7 @@ def test_sha_mismatch_fails_before_any_image_inference(tmp_path):
     value, adapters = port(tmp_path / "models")
     Path(value.config.det.path).write_bytes(b"tampered owned model")
     with pytest.raises(dn.LocalOCRError, match="OCR_MODEL_SHA_MISMATCH"):
-        normalize(value, fixture_deck(with_picture_only_slide=True))
+        normalize(value, build_pptx(with_picture_only_slide=True))
     assert adapters[0].calls == 0
 
 

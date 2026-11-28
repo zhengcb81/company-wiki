@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from enum import Enum
 import hashlib
 import json
@@ -270,7 +270,8 @@ class CanonicalSourceWriter:
         if len(company_roots) != 1:
             raise CanonicalImportError("exactly one company_raw root is required")
         self.catalog = catalog
-        self.company_root = company_roots[0]
+        company_root = company_roots[0]
+        self.company_root = replace(company_root, path=company_root.path.resolve(strict=False))
         self.staging_root = (
             staging_root or catalog.config.catalog_dir / "staging"
         ).resolve(strict=False)

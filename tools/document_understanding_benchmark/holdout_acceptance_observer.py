@@ -130,7 +130,7 @@ def install() -> None:
     owned_after_paid = {}  # This process only; never a supplier error or stored permission.
     original_generate = BudgetedNarrativeCaller.generate
 
-    def observed_generate(caller, context, request):
+    def observed_generate(caller, context, request, **call_options):
         body, facts = request_preflight(caller._model, request)
         observed_body = observe_model_input(body)
         if observed_body is not None and observed_body != body:
@@ -140,7 +140,7 @@ def install() -> None:
             raise RuntimeError('HOLDOUT_MODEL_INPUT_CHANGED')
         event('request_preflight', **facts, run_id=caller._run_id,
               worker_attempt_id=context.attempt.attempt_id)
-        response, metrics = original_generate(caller, context, request)
+        response, metrics = original_generate(caller, context, request, **call_options)
         if config['stage'] == 'after_paid':
             records = caller._store.reservations_for_run(caller._run_id)
             matching = [row for row in records if row.job_id == context.job.job_id]

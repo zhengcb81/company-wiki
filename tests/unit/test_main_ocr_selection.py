@@ -287,8 +287,8 @@ def test_selector_version_upgrades_generation_identity(monkeypatch):
 
 
 def test_real_normalization_interface_with_explicit_synthetic_split_ocr_port(tmp_path):
+    from support.document_normalization_fixtures import build_pptx
     from unit.test_narrative_ocr_composition import (
-        fixture_deck,
         config,
         FakeOCR,
         normalize,
@@ -319,7 +319,7 @@ def test_real_normalization_interface_with_explicit_synthetic_split_ocr_port(tmp
         dn.LocalOCRConfig.from_dict(config(tmp_path / "models")),
         adapter_factory=SplitOCR,
     )
-    data = fixture_deck(with_picture_only_slide=True)
+    data = build_pptx(with_picture_only_slide=True)
     document = normalize(port, data)
     structure = port.language_structure(document, "en")
     result = selector.select_narrative_evidence(

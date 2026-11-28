@@ -1,6 +1,6 @@
 # 当前架构
 
-> 2026-10-13。以来源事实、精选证据和有界任务为中心。
+> company-wiki 是 StockWiki 上游资料系统。原文（immutable raw）通过 source manifest 登记，解析产生 EvidenceSpan，再通过只读 export 交给研究层。StockWiki 管理投资结论。
 
 ## 分层与职责
 

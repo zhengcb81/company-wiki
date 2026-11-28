@@ -313,7 +313,7 @@ def test_observed_owner_launch_preserves_the_callers_console_policy(tmp_path, mo
 
     assert intake.run_observed(tmp_path / "settings.json", hosts, OWNER, ["test-owner"], 0) == 19
     assert len(calls) == 1
-    assert calls[0][1]["creationflags"] == 0x08000000
+    assert calls[0][1]["creationflags"] == (0x08000000 if os.name == "nt" else 0)
 
 
 @pytest.mark.parametrize("failure", ["early-exit", "not-installed", "only-child-observed", "unrelated-refusal"])

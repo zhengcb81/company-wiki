@@ -66,7 +66,7 @@ jobs:
             requirements.txt
             requirements-test.txt
       - name: Install test dependencies
-        run: python -m pip install -r requirements.txt -r requirements-test.txt
+        run: python -m pip install -r requirements.txt -r requirements-test.txt -e .
       - name: Ruff lint
         if: matrix.platform == 'linux'
         run: |
@@ -156,7 +156,7 @@ jobs:
             requirements.txt
             requirements-test.txt
       - name: Install test dependencies
-        run: python -m pip install -r requirements.txt -r requirements-test.txt
+        run: python -m pip install -r requirements.txt -r requirements-test.txt -e .
       - uses: actions/download-artifact@v4
         with:
           name: cwp-test-evidence-${{ matrix.platform }}-inventory
@@ -246,7 +246,7 @@ jobs:
             requirements.txt
             requirements-test.txt
       - name: Install test dependencies
-        run: python -m pip install -r requirements.txt -r requirements-test.txt
+        run: python -m pip install -r requirements.txt -r requirements-test.txt -e .
       - name: Install public integration fixture dependencies
         if: matrix.suite == 'public'
         run: python -m pip install "pydantic>=2,<3" translatepy

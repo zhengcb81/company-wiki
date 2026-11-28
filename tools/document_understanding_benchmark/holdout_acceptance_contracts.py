@@ -46,6 +46,7 @@ def configured_preview(spec: dict, raw_request: dict) -> tuple[bytes, dict]:
     from company_wiki.source_catalog.config import load_catalog_config
     from company_wiki.source_catalog.source_reader import SourceVersionReader
     from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
+    from company_wiki.source_catalog.narrative_official_json import bind_projection_loader
     from company_wiki.automation.narrative_batch import build_batch_events
     from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
     from company_wiki.automation.narrative_http_model import model_options_from_config
@@ -77,7 +78,11 @@ def configured_preview(spec: dict, raw_request: dict) -> tuple[bytes, dict]:
     try:
         reader = SourceVersionReader(catalog)
         now = datetime.now(UTC).strftime('%Y-%m-%dT%H:%M:%SZ')
-        binding = build_batch_events(request, reader, now=now, deadline=deadline, normalization=normalization)
+        projection_loader = bind_projection_loader(catalog)
+        binding = build_batch_events(
+            request, reader, now=now, deadline=deadline, normalization=normalization,
+            projection_loader=projection_loader,
+        )
         if len(binding.events) != 1:
             raise ValueError('HOLDOUT_PREFLIGHT_EXPECTS_ONE_SOURCE')
         event = binding.events[0]
@@ -95,7 +100,7 @@ def configured_preview(spec: dict, raw_request: dict) -> tuple[bytes, dict]:
             SourceRevisionEventPayload.from_dict(payload), checkpoint)
         selected = NarrativeSelectHandler(reader=reader, selector_version=request.selector_version,
             normalization=NarrativeNormalization.from_snapshot(normalization.snapshot(), deadline=deadline),
-            projection_catalog=catalog)(context)
+            projection_loader=projection_loader)(context)
         if selected.outcome is not HandlerOutcome.SUCCEEDED:
             raise ValueError('HOLDOUT_PREFLIGHT_SELECT_' + (selected.error.code if selected.error else 'FAILED'))
         model_request = build_model_request(NarrativeSelectResult.from_dict(selected.result),

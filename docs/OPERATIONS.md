@@ -4,7 +4,9 @@
 
 ## 来源与获取
 
-运行现有来源配置，不修改外部 Dayu 或下游研究库。独立测试使用临时配置，不写生产配置。
+本仓提供 StockWiki 上游来源服务，投资结论由 StockWiki 管理。运行使用现有来源配置。独立测试使用临时根和配置。
+
+旧研究写入流程已冻结（writer freeze）。禁止运行归档的 `assess` 和 `judgment` 任务。
 
 ```powershell
 python scripts/config_doctor.py

@@ -412,7 +412,7 @@ class _ReadinessVerifyBudget(_ReadBudget):
 
     def check(self) -> None:
         if self._deadline_monotonic is not None and (
-            time.monotonic() > self._deadline_monotonic
+            time.monotonic() >= self._deadline_monotonic
         ):
             raise _VerifyDeadlineExceeded()
 

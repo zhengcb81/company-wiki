@@ -37,9 +37,16 @@ WIKI_ROOT = repository_models_path().parents[1]
 
 logger = logging.getLogger(__name__)
 
-_DEFAULT_DOWNLOADER_ROOT = (
-    Path.home() / "Projects" / "StockInfoDLSimple" / "v2-clean-rewrite"
-)
+def _legacy_downloader_directory() -> Path | None:
+    profile = Path(os.path.expanduser("~"))
+    if profile.is_absolute():
+        return profile / "Projects" / "StockInfoDLSimple" / "v2-clean-rewrite"
+    return None
+
+
+def _legacy_download_directory() -> Path | None:
+    root = _legacy_downloader_directory()
+    return root / "downloads" if root is not None else None
 
 _PROJECT_DOTENV_AUTHORITATIVE_KEYS = frozenset(
     {"MINIMAX_API_KEY", "MIMO_API_KEY"}
@@ -242,9 +249,9 @@ class DownloaderConfig:
 @dataclass
 class PathsConfig:
     """路径配置"""
-    wiki_root: Path = Path.home() / "company-wiki"
-    downloader_dir: Path = _DEFAULT_DOWNLOADER_ROOT
-    windows_downloads: Path = _DEFAULT_DOWNLOADER_ROOT / "downloads"
+    wiki_root: Path = field(default_factory=lambda: Path(os.path.expanduser("~/company-wiki")))
+    downloader_dir: Path | None = field(default_factory=_legacy_downloader_directory)
+    windows_downloads: Path | None = field(default_factory=_legacy_download_directory)
 
 
 @dataclass
@@ -430,7 +437,9 @@ class Config:
         )
 
         if llm_only:
-            return Config(llm=llm)
+            return Config(llm=llm, paths=PathsConfig(
+                wiki_root=base_dir, downloader_dir=None, windows_downloads=None,
+            ))
 
         # 搜索配置
         search_raw = raw.get("search", {})
@@ -464,11 +473,7 @@ class Config:
         wiki_root_str = paths_raw.get("wiki_root", "~/company-wiki")
         wiki_root = Path(os.path.expanduser(wiki_root_str))
 
-        paths = PathsConfig(
-            wiki_root=wiki_root,
-            downloader_dir=_DEFAULT_DOWNLOADER_ROOT,
-            windows_downloads=_DEFAULT_DOWNLOADER_ROOT / "downloads",
-        )
+        paths = PathsConfig(wiki_root=wiki_root)
 
         return Config(
             llm=llm,

@@ -74,10 +74,12 @@ def _migration_violations(source):
     # Only WAL setup may yield while SQLite's journal-mode lock is held.
     # Actual termination/peer progress are covered by the two existing
     # test_wal_connection_* behavior tests; all other boundary bans still apply.
-    retry = next(node for node in ast.parse(source).body
-                 if isinstance(node, ast.FunctionDef) and node.name == "_open_connection")
+    retry = next((node for node in ast.parse(source).body
+                  if isinstance(node, ast.FunctionDef) and node.name == "open_writable_connection"), None)
     lines = source.splitlines(keepends=True)
-    outside_retry = "".join(lines[:retry.lineno - 1] + lines[retry.end_lineno:])
+    outside_retry = source if retry is None else "".join(
+        lines[:retry.lineno - 1] + lines[retry.end_lineno:]
+    )
     return [token for token in _FORBIDDEN_TOKENS
             if token in (outside_retry if token in {"time.sleep", "while True"} else source)]
 
@@ -89,7 +91,7 @@ def test_b01_migrations_no_forbidden_tokens():
 
 @pytest.mark.parametrize("waiting", ["time.sleep(1)", "while True: pass"])
 def test_migration_wait_exception_does_not_allow_other_daemon_loops(waiting):
-    source = "def _open_connection(path): pass\ndef unexpected_wait():\n    " + waiting
+    source = "def open_writable_connection(path): pass\ndef unexpected_wait():\n    " + waiting
     token = "time.sleep" if waiting.startswith("time.sleep") else "while True"
     assert token in _migration_violations(source)
 

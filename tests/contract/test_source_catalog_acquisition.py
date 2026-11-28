@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -26,8 +27,14 @@ assert resolver.SourceRequest is SourceRequest
 assert resolver.SourceResolutionError is SourceResolutionError
 assert JsonCommandAdapter and CanonicalSourceWriter
 """
-    process = subprocess.run([sys.executable, "-B", "-c", program], cwd=tmp_path,
-                             capture_output=True, text=True, timeout=20)
+    allowed = {"PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP", "TMPDIR"}
+    environment = {key: value for key, value in os.environ.items() if key.upper() in allowed}
+    environment.update(PYTHONPATH=str(Path(__file__).resolve().parents[2] / "src"), PYTHONUTF8="1")
+    process = subprocess.run(
+        [sys.executable, "-B", "-c", program], cwd=tmp_path,
+        env=environment, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=20,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+    )
     assert process.returncode == 0, process.stderr
 
 

@@ -637,3 +637,25 @@ def test_writer_registers_exact_group_with_declared_adapter_not_root_rescan(tmp_
     assert observed[0].relative_paths == frozenset({
         Path(imported.canonical_path).relative_to(catalog.config.roots[0].path).as_posix()})
     assert imported.source_ref.content_sha256 == receipt.content_sha256
+
+def test_registration_uses_same_physical_root_as_the_immutable_write(tmp_path):
+    from company_wiki.source_catalog import CanonicalSourceWriter, CatalogConfig, RootSpec, SourceCatalog
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
+
+    companies = tmp_path / "companies"
+    companies.mkdir()
+    aliased = companies / ".." / companies.name
+    request, candidate, receipt, staged = _staged_contract(tmp_path)
+    body = staged.read_bytes()
+    catalog = SourceCatalog(CatalogConfig(
+        project_root=tmp_path, catalog_dir=tmp_path / "catalog",
+        roots=(RootSpec("synthetic-intake", aliased, "company_raw"),),
+    ))
+    try:
+        result = CanonicalSourceWriter(catalog, staging_root=staged.parent).import_staged(request, candidate, receipt)
+        assert Path(result.canonical_path).resolve().is_relative_to(companies.resolve())
+        verified = SourceVersionReader(catalog).open_version(result.source_ref, purpose="preview")
+        assert verified.data == body
+        assert not staged.exists()
+    finally:
+        catalog.close()

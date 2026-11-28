@@ -120,6 +120,37 @@ search:
         assert "llm" in data
 
 
+def test_model_only_configuration_does_not_require_a_user_profile(tmp_path):
+    import os
+    import subprocess
+
+    configuration = tmp_path / "model.yaml"
+    configuration.write_text("llm: {provider: deepseek, model: offline-model}\n", encoding="utf-8")
+    code = """
+import pathlib, sys
+
+def unexpected_profile(cls):
+    raise AssertionError("model-only settings must not resolve a user profile")
+
+pathlib.Path.home = classmethod(unexpected_profile)
+from company_wiki.runtime_config import Config
+configuration = Config.load(pathlib.Path(sys.argv[1]), validation_scope="llm")
+assert configuration.llm.model == "offline-model"
+assert configuration.paths.wiki_root == pathlib.Path(sys.argv[1]).parent
+assert configuration.paths.downloader_dir is None
+"""
+    allowed = {"PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP", "TMPDIR"}
+    environment = {key: value for key, value in os.environ.items() if key.upper() in allowed}
+    environment.update(DEEPSEEK_API_KEY="offline-config-fixture", PYTHONUTF8="1",
+                       PYTHONPATH=str(Path(__file__).resolve().parents[2] / "src"))
+    result = subprocess.run(
+        [sys.executable, "-B", "-c", code, str(configuration)],
+        cwd=tmp_path, env=environment, stdin=subprocess.DEVNULL, capture_output=True,
+        timeout=20, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+    )
+    assert result.returncode == 0, result.stderr.decode("utf-8")
+
+
 class TestConfigDefaults:
     """测试配置默认值"""
 

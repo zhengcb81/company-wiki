@@ -1,7 +1,7 @@
 """RED contracts for Phase 3: download suppression and Dayu request minimization.
 
 Ensures: resolver hit → discover/fetch=0; missing+no_download → adapter=0;
-identity conflict → adapter=0.
+A different listing can be discovered without reusing or downloading the wrong listing.
 """
 
 from __future__ import annotations
@@ -135,14 +135,12 @@ class TestMissingNoDownload:
 
 
 # ---------------------------------------------------------------------------
-# RED 3: identity conflict → adapter = 0
+# Market-specific discovery never downloads the wrong listing
 # ---------------------------------------------------------------------------
 
 
 class TestIdentityConflictNoDownload:
-    """identity 冲突时，adapter 不应被调用。"""
-
-    def test_wrong_market_adapter_zero(self, tmp_path):
+    def test_other_listing_discovers_only_in_requested_market(self, tmp_path):
         from company_wiki.source_catalog import (
             AcquisitionCoordinator,
             AcquisitionStatus,
@@ -151,13 +149,13 @@ class TestIdentityConflictNoDownload:
         )
 
         catalog = _catalog_with_identity(tmp_path)
-        spy = _SpyAdapter()
+        cn, hk, us = (_SpyAdapter(market) for market in ("CN", "HK", "US"))
         coordinator = AcquisitionCoordinator(
             catalog=catalog,
-            adapters=AdapterRegistry(cn=spy, hk=spy, us=spy),
+            adapters=AdapterRegistry(cn=cn, hk=hk, us=us),
             staging_root=tmp_path / "staging",
         )
-        # Request HK but catalog only has CN → identity conflict
+        # The CN original cannot answer HK; discovery may find a separate HK filing.
         result = coordinator.resolve_or_stage(
             SourceRequest(
                 entity="Acme",
@@ -169,5 +167,5 @@ class TestIdentityConflictNoDownload:
             )
         )
         assert result.status is AcquisitionStatus.MISSING
-        assert spy.discover_calls == 0
-        assert spy.fetch_calls == 0
+        assert (cn.discover_calls, hk.discover_calls, us.discover_calls) == (0, 1, 0)
+        assert (cn.fetch_calls, hk.fetch_calls, us.fetch_calls) == (0, 0, 0)

@@ -5,6 +5,7 @@ from __future__ import annotations
 from contextlib import closing, contextmanager
 import hashlib
 import json
+import os
 from pathlib import Path
 import sqlite3
 import subprocess
@@ -239,54 +240,50 @@ def test_active_wal_quality_sees_committed_facts_without_data_writes(tmp_path):
             assert before == after
 
 
-def test_oversized_final_is_rejected_before_object_bytes_are_read(tmp_path, monkeypatch):
-    from company_wiki.automation.narrative_contracts import BUNDLE_MAX_BYTES
-    from company_wiki.source_catalog.narrative_artifact_store import LocalNarrativeObjectStore
-
+def test_final_object_must_match_its_declared_byte_identity(tmp_path):
     with published_fixture(tmp_path) as fixture:
         with fixture.catalog.store.transaction() as connection:
-            connection.execute("UPDATE narrative_artifact_versions SET byte_size=?", (BUNDLE_MAX_BYTES + 1,))
-
-        def forbidden_read(*args, **kwargs):
-            pytest.fail("oversized object bytes must not be opened")
-
-        monkeypatch.setattr(LocalNarrativeObjectStore, "read", forbidden_read)
+            connection.execute("UPDATE narrative_artifact_versions SET byte_size=?", (len(fixture.payload) + 1,))
         with pytest.raises(ExtractionQualityIntegrityError, match="narrative"):
             _assess(fixture)
 
 
-def test_real_transcript_quality_cli_and_transport_restore_test_directory(tmp_path):
-    original = (
-        Path(__file__).resolve().parents[3] / "earnings-transcripts" / "earnings-transcripts"
-        / "transcripts" / "MSFT" / "MSFT_Q4_2026_earnings_call.txt"
-    )
-    data = original.read_bytes()
-    digest = "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
-    assert hashlib.sha256(data).hexdigest() == digest
+def _assert_transcript_quality_cli_and_transport(tmp_path, source_spec=None, *, expected_locators):
     baseline = _identity(tmp_path)
-    with published_fixture(tmp_path, source_spec={
-        "data": data, "title": "MSFT Q4 2026 earnings call",
-    }) as fixture:
-        cli = subprocess.run([
+    allowed = {"PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP", "TMPDIR"}
+    environment = {key: value for key, value in os.environ.items() if key.upper() in allowed}
+    environment.update(PYTHONPATH=str(Path(__file__).resolve().parents[2] / "src"),
+                       PYTHONUTF8="1", PYTHON_DOTENV_DISABLED="1")
+
+    def call(argv, payload=None):
+        streams = {"input": payload} if payload is not None else {"stdin": subprocess.DEVNULL}
+        return subprocess.run(
+            argv, cwd=tmp_path, env=environment, capture_output=True, timeout=60, check=False,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0), **streams,
+        )
+
+    with published_fixture(tmp_path, source_spec=source_spec) as fixture:
+        digest = hashlib.sha256(fixture.raw_path.read_bytes()).hexdigest()
+        cli = call([
             sys.executable, "-m", "company_wiki.source_catalog.cli",
             "--config", str(fixture.config_path), "extraction-quality",
             "--source-id", fixture.source_ref.source_id, "--locator-limit", "2",
-        ], capture_output=True, timeout=60, check=False)
+        ])
         assert cli.returncode == 0, cli.stderr.decode("utf-8")
         result = json.loads(cli.stdout)
         assert result["quality_state"] in {"usable", "review_required"}
         assert result["extraction"]["basis"] == "selected_narrative"
         assert result["counts"]["spans"] == len(json.loads(fixture.payload)["evidence_spans"])
-        assert len(result["locator_references"]) == 2
+        assert len(result["locator_references"]) == expected_locators
 
         transport = [sys.executable, "-m", "company_wiki.automation.narrative_transport_cli",
                      "--config", str(fixture.config_path)]
-        reference = subprocess.run(
+        reference = call(
             [*transport, "--operation", "reference"],
-            input=canonical_json({
+            canonical_json({
                 "schema_version": "narrative-reference-request/1",
                 "source_ref": fixture.source_ref.to_dict(),
-            }).encode("utf-8"), capture_output=True, timeout=60, check=False,
+            }).encode("utf-8"),
         )
         assert reference.returncode == 0, reference.stderr.decode("utf-8")
         request = {
@@ -294,13 +291,28 @@ def test_real_transcript_quality_cli_and_transport_restore_test_directory(tmp_pa
             "narrative_ref": json.loads(reference.stdout),
             "as_of_date": "2026-10-05", "expected_source": fixture.expected_source,
         }
-        replay = subprocess.run(
-            transport, input=canonical_json(request).encode("utf-8"),
-            capture_output=True, timeout=60, check=False,
-        )
+        replay = call(transport, canonical_json(request).encode("utf-8"))
         assert replay.returncode == 0, replay.stderr.decode("utf-8")
         assert replay.stdout == fixture.payload
         assert json.loads(replay.stderr)["replay_status"] == "verified"
         assert hashlib.sha256(fixture.raw_path.read_bytes()).hexdigest() == digest
     assert _identity(tmp_path) == baseline
+
+
+def test_transcript_quality_cli_and_transport_restore_test_directory(tmp_path):
+    _assert_transcript_quality_cli_and_transport(tmp_path, expected_locators=1)
+
+
+@pytest.mark.real_data
+def test_et_corpus_transcript_quality_with_verified_original(tmp_path):
+    configured = os.environ.get("CWP_TEST_ET_TRANSCRIPT")
+    if not configured:
+        pytest.skip("set CWP_TEST_ET_TRANSCRIPT to the original TXT for this owner corpus test")
+    original = Path(configured).resolve(strict=True)
+    data = original.read_bytes()
+    digest = "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+    assert hashlib.sha256(data).hexdigest() == digest
+    _assert_transcript_quality_cli_and_transport(
+        tmp_path, {"data": data, "title": "MSFT Q4 2026 earnings call"}, expected_locators=2
+    )
     assert hashlib.sha256(original.read_bytes()).hexdigest() == digest

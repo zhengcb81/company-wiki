@@ -9,7 +9,7 @@ StockWiki 等研究项目的上游资料系统：保存原始文档和来源事�
 3. 有限 Worker 批次临时解析，生成一份精选引用与来源摘要；已完成任务清除重复正文。
 4. 下游用 SourceRef / SourceExport v2、NarrativeRef 读取；存在哪个目录由存储层处理。
 
-company-wiki 不写 StockWiki 的目录或数据库，不生成评级、目标价、仓位、估值或正式研究报告。
+StockWiki 管理投资结论、评级、目标价、仓位、估值和正式研究报告。各项目通过 company-wiki 的只读来源接口协作。
 
 ## 安装与配置
 

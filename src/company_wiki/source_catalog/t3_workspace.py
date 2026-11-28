@@ -15,6 +15,7 @@ from company_wiki.file_mutex import os_file_mutex
 from .acquisition_config import AdapterCommandSpec, load_acquisition_config
 from .acquisition_journal import AcquisitionJournal
 from .config import load_catalog_config
+from .models import COMPANY_RAW_ROOT_KIND
 from .security_code import security_codes_equivalent
 from .security_identity import SecurityMasterStore
 from .service import SourceCatalog
@@ -162,7 +163,7 @@ class WorkspaceService:
         _write_json(_catalog_path(case), {
             "schema_version": "1.0",
             "catalog_dir": str(catalog_root),
-            "roots": [{"root_id": "company_raw", "kind": "company_raw",
+            "roots": [{"root_id": "t3-originals", "kind": COMPANY_RAW_ROOT_KIND,
                        "path": str(case / "companies"), "priority": 10}],
         })
         acquisition = load_acquisition_config(self.acquisition_config, project_root=self.owner_root)

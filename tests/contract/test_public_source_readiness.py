@@ -22,6 +22,7 @@ import sqlite3
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -253,8 +254,11 @@ def test_verify_limit_blocks_before_reading(seeded):
     assert response["reason_codes"] == ["verify_limit_exceeded"]
 
 
-def test_tiny_deadline_times_out_as_unavailable(seeded):
-    catalog, ref, tmp_path = seeded
+def test_zero_deadline_expires_even_within_one_clock_tick(seeded, monkeypatch):
+    from company_wiki.source_catalog import public_source_readiness
+
+    monkeypatch.setattr(public_source_readiness, "time", SimpleNamespace(monotonic=lambda: 1.0))
+    catalog, ref, _ = seeded
     readiness = PublicSourceReadiness(SourceVersionReader(catalog))
     response = readiness.assess(
         _ref_payload(ref), mode="verify_existing_bytes",

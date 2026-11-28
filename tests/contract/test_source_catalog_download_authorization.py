@@ -194,7 +194,7 @@ def test_coordinator_authorized_download_proceeds(tmp_path):
         def discover(self, request):
             return (DownloadCandidate(
                 candidate_id="c-2025", provider="sec",
-                provider_document_id="acc-2025", market="US", entity="ACME",
+                provider_document_id="acc-2025", market="US", entity="ACME", security_id="ACME",
                 title="ACME 2025 annual",
                 source_url="https://www.sec.gov/x/2025.pdf",
                 document_kind="annual_report", filing_date="2026-04-15",
@@ -283,7 +283,7 @@ def test_coordinator_excludes_accessions_outside_legacy_request_scope(tmp_path):
         def discover(self, request):
             return (DownloadCandidate(
                 candidate_id="c-2025", provider="sec",
-                provider_document_id="acc-2025", market="US", entity="ACME",
+                provider_document_id="acc-2025", market="US", entity="ACME", security_id="ACME",
                 title="ACME 2025 annual",
                 source_url="https://www.sec.gov/x/2025.pdf",
                 document_kind="annual_report", filing_date="2026-04-15",

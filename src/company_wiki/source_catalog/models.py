@@ -134,7 +134,8 @@ FINGERPRINT_TERMINAL_STATUSES = frozenset(
     {FingerprintStatus.UNSUPPORTED_TERMINAL.value, FingerprintStatus.FAILED_TERMINAL.value}
 )
 
-ROOT_KINDS = frozenset({"company_raw", "directory", "dayu_portfolio"})
+COMPANY_RAW_ROOT_KIND = "company_raw"
+ROOT_KINDS = frozenset({COMPANY_RAW_ROOT_KIND, "directory", "dayu_portfolio"})
 DOCUMENT_EXTENSIONS = frozenset(
     {
         ".pdf",

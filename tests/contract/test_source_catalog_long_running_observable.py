@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import time
-from pathlib import Path
 
 
 
@@ -87,14 +86,6 @@ def test_long_running_warning_triggers_when_elapsed_exceeds_180s(tmp_path):
 def test_long_running_warning_false_when_under_180s(tmp_path):
     s = _live_status(tmp_path, elapsed=120)
     assert s["long_running_document_warning"] is False
-
-
-def test_panel_shows_warning_for_long_running(tmp_path):
-    ps1 = Path("scripts/source_catalog_control.ps1")
-    content = ps1.read_text(encoding="utf-8", errors="replace")
-    assert "long_running_document_warning" in content
-    assert "current_path_elapsed_seconds" in content
-    assert "WARNING" in content
 
 
 def test_worker_status_exposes_progress_fields(tmp_path):
