@@ -9,6 +9,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
+
+from company_wiki import runtime_feedback
 from typing import Any, Optional
 
 
@@ -322,7 +324,8 @@ class ProposalManager:
                 proposal = Proposal.load(path)
                 if status is None or proposal.status == status:
                     proposals.append(proposal)
-            except Exception:
+            except Exception as exc:
+                runtime_feedback.record_optional_failure("proposal_record_unavailable", exc)
                 continue
         return sorted(proposals, key=lambda p: p.created_at, reverse=True)
 

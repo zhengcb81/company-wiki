@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 from contextlib import contextmanager
 import csv
 import json
@@ -485,7 +487,8 @@ class SourceCatalog:
             try:
                 payload = json.loads(location.manifest_json)
                 manifest = SourceManifest.from_dict(payload)
-            except Exception:  # malformed location metadata is one bad candidate
+            except Exception as exc:  # malformed location metadata is one bad candidate
+                runtime_feedback.record_optional_failure("catalog_location_metadata_invalid", exc)
                 continue
             if (
                 manifest.source_id != ref.source_id

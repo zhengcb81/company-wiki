@@ -8,10 +8,10 @@ from pathlib import Path
 import sys
 import time
 
-from .diagnostic_redaction import redact_text
+from .diagnostic_redaction import format_diagnostic_exception, redact_text
 from .file_mutex import FileMutexLockedError, os_file_mutex, win32_filesystem_path
 
-__all__ = ["append_diagnostic", "diagnostic_log"]
+__all__ = ["append_diagnostic", "diagnostic_log", "log_exception"]
 
 
 class _Formatter(logging.Formatter):
@@ -112,6 +112,11 @@ def diagnostic_log(
     finally:
         logger.removeHandler(handler)
         handler.close()
+
+
+def log_exception(logger: logging.Logger, level: int, message: str, error: BaseException) -> None:
+    """Deliver one safe original traceback through the logger's owned channel."""
+    logger.log(level, "%s\n%s", redact_text(message), format_diagnostic_exception(error))
 
 
 def append_diagnostic(path: Path, text: str, *, warn_on_stderr: bool = True) -> bool:

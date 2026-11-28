@@ -416,3 +416,152 @@ def test_original_document_refusal_preserves_causal_type_and_public_reason(data,
     with pytest.raises(OfficialSourceError, match=f"^{reason}$") as rejected:
         _validate_bytes(data, mime)
     assert type(rejected.value.__cause__).__name__ == cause_name
+
+
+
+def test_owner_notifies_log_loss_even_if_original_observation_is_durable(tmp_path):
+    env = _environment(tmp_path)
+    outbox = tmp_path / "observations"
+    env["RESEARCH_FEEDBACK_DIR"] = str(outbox)
+    owner_state = tmp_path / "state/company-wiki"
+    owner_state.mkdir(parents=True)
+    _block(owner_state / "logs")
+    _block(tmp_path / "logs")
+    outcome = _run(
+        tmp_path, env, "-m", "company_wiki.source_catalog.t3_workspace_cli",
+        "--workspace-root", str(tmp_path / "never-opened"), stdin=b"{}",
+    )
+    assert outcome.returncode == 2 and json.loads(outcome.stdout)["error_code"] == "invalid_request"
+    single_notice, = outcome.stderr.splitlines()
+    assert b"diagnostic" in single_notice and str(tmp_path).encode() not in single_notice
+    ready, = outbox.glob("*.ready")
+    assert json.loads(ready.with_suffix(".jsonl").read_bytes())["run_id"] == _RUN
+    assert not (tmp_path / "never-opened").exists()
+
+
+def test_corrupt_optional_manifest_keeps_per_document_outcome_and_local_cause(tmp_path):
+    module = tmp_path / "manifest_fixture.py"
+    module.write_text(
+        "import json\n"
+        "from company_wiki.runtime_feedback import entry\n"
+        "from company_wiki.source_catalog.normalizer import _manifest_from_column\n"
+        "@entry('normalize-test-fixture')\n"
+        "def main():\n"
+        "    manifest, code = _manifest_from_column('{}')\n"
+        "    print(json.dumps({'problem_code': code, 'has_manifest': manifest is not None}))\n"
+        "    return 0\n"
+        "raise SystemExit(main())\n",
+        encoding="utf-8",
+    )
+    env = _environment(tmp_path)
+    outcome = _run(tmp_path, env, str(module))
+    assert (outcome.returncode, outcome.stderr) == (0, b"")
+    assert json.loads(outcome.stdout) == {"problem_code": "manifest_invalid", "has_manifest": False}
+    trace = _cold_read(tmp_path, env)
+    local, = trace["diagnostics"]
+    assert local["reason"] == "manifest_invalid"
+    assert local["exceptions"][0]["type"] == "SourceManifestError"
+    assert trace["events"][-1]["exit_code"] == 0
+    assert not list(tmp_path.rglob("*.ready"))
+
+
+def test_cold_trace_resolves_legacy_coordinates_without_writing_or_exposing_them(tmp_path):
+    env = _environment(tmp_path)
+    state = tmp_path / "state/company-wiki"
+    logs = state / "logs"
+    observations = state / "observations"
+    logs.mkdir(parents=True)
+    observations.mkdir()
+    caller = "sk-SynthHistoricalRun000012345678"
+    attempt = "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"
+    related = "ghp_SynthHistoricalBusinessRun0000123"
+    diagnostic = "feedback-0123456789abcdef0123456789abcdef.diagnostic.json"
+    trace_file = logs / "runtime_events.log"
+    event = {
+        "at_utc": "2026-11-26T16:00:00.000000+00:00",
+        "owner": "company-wiki", "run_id": caller, "attempt_id": attempt,
+        "operation": "source-identity", "step": "invocation", "status": "failed",
+        "related_run_id": related, "details_ref": diagnostic,
+    }
+    trace_file.write_text("runtime-event " + json.dumps(event) + "\n", encoding="utf-8")
+    (observations / diagnostic).write_text(json.dumps({
+        "owner": "company-wiki", "run_id": caller, "attempt_id": attempt,
+        "step_id": "source-identity", "reason": "identity_failed",
+        "exceptions": [{
+            "type": "OSError", "messages": [related, "original diagnostic message"],
+            "locations": [["identity_cli.py", "main", 90]],
+        }],
+    }), encoding="utf-8")
+    original_files = _artifacts(tmp_path)
+    for ref in (caller, related):
+        result = _run(
+            tmp_path, env, "-m", "company_wiki.runtime_trace",
+            "--run-id", ref, "--attempt-id", attempt,
+        )
+        assert (result.returncode, result.stderr) == (0, b"")
+        trace = json.loads(result.stdout)
+        assert trace["status"] == "available"
+        entry, = trace["events"]
+        detail, = trace["diagnostics"]
+        assert entry["run_id"] == detail["run_id"]
+        assert entry["attempt_id"] == detail["attempt_id"] == trace["attempt_id"]
+        assert entry["details_ref"] == diagnostic
+        assert detail["exceptions"][0]["locations"] == [["identity_cli.py", "main", 90]]
+        assert detail["exceptions"][0]["messages"][-1] == "original diagnostic message"
+        assert all(value.encode() not in result.stdout for value in (caller, attempt, related))
+    assert _artifacts(tmp_path) == original_files
+
+
+@pytest.mark.parametrize("faulting_module", ("coordinator", "diagnostics"))
+def test_detached_wake_records_startup_failure_through_its_own_stderr(tmp_path, faulting_module):
+    import shutil
+
+    checkout = tmp_path / "checkout"
+    shutil.copytree(_SRC.parent / "tools/feedback_loop", checkout / "tools/feedback_loop",
+                    ignore=shutil.ignore_patterns("__pycache__"))
+    (checkout / "tools/feedback_loop" / (faulting_module + ".py")).write_text(
+        'raise ImportError("Authorization: Bearer synthetic-s6-detached-opaque")\n',
+        encoding="utf-8",
+    )
+    receipt = tmp_path / "wake.json"
+    receipt.with_suffix(".stderr.log").mkdir()
+    bootstrap = receipt.with_suffix(".stderr.log.bootstrap")
+    if faulting_module == "coordinator":
+        bootstrap.mkdir()
+        _block(tmp_path / "state")
+    env = _environment(tmp_path)
+    env["PYTHONPATH"] = os.pathsep.join((str(_SRC.parent), str(_SRC)))
+    launcher = tmp_path / "launch_wake.py"
+    launcher.write_text(
+        "from pathlib import Path\n"
+        "from unittest.mock import patch\n"
+        "from tools.feedback_loop import hook\n"
+        "hook.__file__ = str(Path('checkout/tools/feedback_loop/hook.py').resolve())\n"
+        "started = []\n"
+        "popen = hook.subprocess.Popen\n"
+        "def launch(*args, **kwargs):\n"
+        "    child = popen(*args, **kwargs)\n"
+        "    started.append(child)\n"
+        "    return child\n"
+        "with patch.object(hook.subprocess, 'Popen', launch):\n"
+        "    result = hook.wake(Path('input.jsonl'), 'config.json', Path('wake.json'))\n"
+        "assert result['status'] == 'scheduled'\n"
+        "child, = started\n"
+        "try:\n"
+        "    assert child.wait(timeout=10) == 1\n"
+        "finally:\n"
+        "    if child.poll() is None:\n"
+        "        child.kill()\n"
+        "        child.wait(timeout=10)\n",
+        encoding="utf-8",
+    )
+    result = _run(tmp_path, env, str(launcher))
+    assert (result.returncode, result.stdout, receipt.read_bytes()) == (0, b"", b"")
+    if faulting_module == "coordinator":
+        notice, = result.stderr.splitlines()
+        assert b"diagnostic could not be retained" in notice
+        assert b"synthetic-s6-detached-opaque" not in notice
+    else:
+        assert result.stderr == b""
+        captured = bootstrap.read_bytes()
+        assert b"ImportError" in captured and b"synthetic-s6-detached-opaque" not in captured

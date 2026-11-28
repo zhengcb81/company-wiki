@@ -51,8 +51,8 @@ def _perform(host: Host, owner: str, kind: str, identity: list, payload: dict, *
     for method in ("lookup", "submit"):
         try:
             reply = host(owner, {**request, "method": method})
-        except (OSError, subprocess.SubprocessError, ValueError, RecursionError):
-            raise Deferred("unknown", kind) from None
+        except (OSError, subprocess.SubprocessError, ValueError, RecursionError) as exc:
+            raise Deferred("unknown", kind) from exc
         if (not isinstance(reply, dict) or reply.get("schema_version") != "feedback-action-result/1"
                 or reply.get("action_id") != key or reply.get("request_digest") != request["request_digest"]):
             raise Deferred("unverified", kind)

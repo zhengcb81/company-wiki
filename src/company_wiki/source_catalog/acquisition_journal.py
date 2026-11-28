@@ -8,6 +8,8 @@ from datetime import UTC, datetime
 import hashlib
 import json
 import logging
+
+from company_wiki.diagnostic_logging import log_exception
 import os
 from pathlib import Path
 from typing import Any, Callable, Generator
@@ -93,7 +95,7 @@ def record_acquisition_observation(
     try:
         return write()
     except (OSError, CatalogOperationLockedError, AcquisitionJournalReadError, UnicodeError) as exc:
-        _LOG.warning("acquisition_journal_unavailable request_id=%r error_type=%s", request_id, type(exc).__name__)
+        log_exception(_LOG, logging.WARNING, f"acquisition_journal_unavailable request_id={request_id!r}", exc)
         return None
 
 

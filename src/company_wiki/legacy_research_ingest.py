@@ -5,6 +5,8 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
+
+from company_wiki import runtime_feedback
 from typing import Optional
 
 from .domain import (
@@ -54,7 +56,8 @@ class ContentNormalizer:
 
         try:
             content = path.read_text(encoding="utf-8")
-        except Exception:
+        except (OSError, UnicodeError) as exc:
+            runtime_feedback.record_optional_failure("legacy_metadata_read_failed", exc)
             return {}
 
         # 提取 YAML frontmatter
@@ -64,8 +67,8 @@ class ContentNormalizer:
                 import yaml
                 try:
                     return yaml.safe_load(parts[1]) or {}
-                except Exception:
-                    pass
+                except (yaml.YAMLError, RecursionError) as exc:
+                    runtime_feedback.record_optional_failure("legacy_metadata_parse_failed", exc)
 
         return {}
 

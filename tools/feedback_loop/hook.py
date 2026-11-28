@@ -2,16 +2,24 @@
 
 from collections import Counter
 import json
+import logging
 import os
 from pathlib import Path
 import subprocess
 import sys
 
+from company_wiki import runtime_feedback
+from company_wiki.diagnostic_logging import log_exception
+
 from .coordinator import settle
-from .diagnostics import background_command, background_environment, run_background
+from .diagnostics import background_command, background_environment, background_stderr, run_background
 from .host import process_host, read_hosts
 from .observations import read_batch
 from .process_launch import BACKGROUND_CREATION_FLAGS
+
+
+_logger = logging.getLogger(__name__)
+
 
 def after_observations(sidecar: Path, env) -> dict | None:
     config = env.get("RESEARCH_FEEDBACK_HOSTS")
@@ -22,7 +30,8 @@ def after_observations(sidecar: Path, env) -> dict | None:
         wait_seconds = int(env.get("RESEARCH_FEEDBACK_WAIT_SECONDS", "0"))
         if wait_seconds < 0:
             raise ValueError("negative follow-up window")
-    except (OSError, ValueError, RecursionError):
+    except (OSError, ValueError, RecursionError) as exc:
+        runtime_feedback.record_optional_failure("host_config_unavailable", exc)
         return {"status": "host_config_unavailable"}
     result = settle(read_batch([sidecar]), host, wait_seconds)
     observations = result["observations"]
@@ -38,27 +47,30 @@ def after_observations(sidecar: Path, env) -> dict | None:
 
 def wake(sidecar: Path, config: str, output: Path, *, wait_seconds: str = "0") -> dict:
     """Start the finite control tick outside the completed business process."""
+    destination = output.with_suffix(".stderr.log")
     try:
-        with output.open("xb") as stream:
+        with output.open("xb") as stream, background_stderr(destination) as errors:
             child = subprocess.Popen(
                 background_command("tools.feedback_loop.hook", str(sidecar.resolve()),
                                    str(Path(config).resolve()), wait_seconds),
                 cwd=Path(__file__).resolve().parents[2], stdin=subprocess.DEVNULL,
-                stdout=stream, stderr=subprocess.DEVNULL,
-                env=background_environment(output.with_suffix(".stderr.log")),
+                stdout=stream, stderr=errors, env=background_environment(destination),
                 start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS,
             )
     except FileExistsError:
         return {"status": "previous_wake_receipt", "resume": "tick"}
     except (OSError, ValueError) as exc:
+        log_exception(_logger, logging.WARNING, "Feedback hook wake could not start", exc)
         return {"status": "wake_unavailable", "error_type": type(exc).__name__, "resume": "tick"}
     return {"status": "scheduled", "pid": child.pid}
 
 
-def _main() -> None:
+@runtime_feedback.entry("feedback-hook", local_only=True, quiet_success=True)
+def _main() -> int:
     env = {"RESEARCH_FEEDBACK_HOSTS": sys.argv[2], "RESEARCH_FEEDBACK_WAIT_SECONDS": sys.argv[3] if len(sys.argv) > 3 else "0"}
     print(json.dumps(after_observations(Path(sys.argv[1]), env)))
+    return 0
 
 
 if __name__ == "__main__":
-    run_background(_main)
+    raise SystemExit(run_background(_main))

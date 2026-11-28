@@ -11,7 +11,7 @@ import sqlite3
 import uuid
 
 from company_wiki import runtime_feedback
-from company_wiki.diagnostic_redaction import format_diagnostic_exception
+from company_wiki.diagnostic_logging import log_exception
 from company_wiki.id_scope import normalize_id_scope
 from company_wiki.narrative_subject import NarrativeSubject, publication_target
 
@@ -273,10 +273,9 @@ class NarrativeEffectDispatcher:
                     )
             except (CatalogOperationLockedError, NarrativeSourceNotCurrentError,
                     NarrativeArtifactError, ValueError, RuntimeError, OSError, sqlite3.Error) as exc:
-                _logger.error(
-                    "Skipped narrative artifact activation for effect_id=%s\n%s",
-                    artifact.effect_id,
-                    format_diagnostic_exception(exc),
+                log_exception(
+                    _logger, logging.ERROR,
+                    f"Skipped narrative artifact activation for effect_id={artifact.effect_id}", exc,
                 )
                 continue
             activated.append(artifact.effect_id)

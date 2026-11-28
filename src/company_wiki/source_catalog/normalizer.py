@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 from dataclasses import dataclass
 from email import policy
 from email.parser import BytesParser
@@ -70,7 +72,8 @@ def _manifest_from_column(raw: Any) -> tuple[SourceManifest | None, str | None]:
         return None, f"manifest_column_{state}"
     try:
         return SourceManifest.from_dict(payload), None
-    except Exception:  # data boundary: any parse/validation failure is a bad row
+    except Exception as exc:  # data boundary: any parse/validation failure is a bad row
+        runtime_feedback.record_optional_failure("manifest_invalid", exc)
         return None, "manifest_invalid"
 
 
@@ -318,13 +321,18 @@ def _terminate_windows_process_tree(pid: int) -> None:
             ["taskkill.exe", "/PID", str(pid), "/T", "/F"],
             stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
             creationflags=cast(Any, subprocess).CREATE_NO_WINDOW,
             timeout=10,
-            check=False,
+            check=True,
         )
-    except (OSError, subprocess.TimeoutExpired):
-        pass
+    except (OSError, subprocess.SubprocessError) as exc:
+        stderr = getattr(exc, "stderr", None)
+        runtime_feedback.record(
+            "source-parser", "unavailable", reason="process_tree_cleanup_failed",
+            error=exc, message=stderr.decode(errors="replace") if isinstance(stderr, bytes) else "",
+            include_error_messages=False, explains_invocation=False, publish_issue=False,
+        )
 
 
 def _exit_if_parser_parent_dies(parent_liveness: Any) -> None:
@@ -1379,8 +1387,8 @@ def _normalize_source(
         if docling_path is not None:
             try:
                 return _docling_markdown(docling_path, source_id)
-            except Exception:
-                pass
+            except Exception as exc:
+                runtime_feedback.record_optional_failure("cached_docling_output_unavailable", exc)
         return _pdf_markdown(path, manifest)
     if suffix in {".txt", ".md", ".csv"}:
         return _text_markdown(

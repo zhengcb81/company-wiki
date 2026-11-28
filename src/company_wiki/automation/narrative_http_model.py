@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 import http.client
 import ipaddress
 import json
@@ -90,8 +92,9 @@ class ModelOutputTruncatedError(ModelResponseError):
 def _failed_final_observation(body: bytes, content: str | None) -> FailedFinalDiagnostic | None:
     try:
         return FailedFinalDiagnostic.from_observation(provider_body=body, content=content)
-    except Exception:
+    except Exception as exc:
         # Observability is optional; keep the provider failure and its real usage.
+        runtime_feedback.record_optional_failure("model_failure_details_unavailable", exc)
         return None
 
 

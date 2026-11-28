@@ -25,6 +25,8 @@ import base64
 import binascii
 import json
 import logging
+
+from company_wiki.diagnostic_logging import log_exception
 from typing import Any
 
 from company_wiki.source_contract import (
@@ -161,9 +163,10 @@ def read_processed_document(
                     raise SourceReadError(
                         "unavailable", "processed_document_cleanup_failed",
                     ) from exc
-                _LOGGER.warning(
-                    "Parser session cleanup also failed (%s) while preserving the primary error",
-                    type(exc).__name__,
+                log_exception(
+                    _LOGGER, logging.WARNING,
+                    f"Parser session cleanup also failed ({type(exc).__name__}) while preserving the primary error",
+                    exc,
                 )
 
     units = list(outcome.units)

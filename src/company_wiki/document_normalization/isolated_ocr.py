@@ -22,7 +22,8 @@ import tempfile
 import time
 from typing import Any, BinaryIO, cast
 
-from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
+from company_wiki.diagnostic_logging import log_exception
+from company_wiki.diagnostic_redaction import redact_text
 
 from company_wiki.bounded_process import WINDOWS_WAIT_BOOTSTRAP
 from company_wiki.process_tree import (
@@ -225,7 +226,7 @@ def _worker_main(directory_text: str, startup_deadline: float):
         except LocalOCRError as error:
             response = {"ok": False, "error": error.code}
         except Exception as exc:
-            _logger.error("OCR worker inference failed\n%s", format_diagnostic_exception(exc))
+            log_exception(_logger, logging.ERROR, "OCR worker inference failed", exc)
             response = {"ok": False, "error": "OCR_INFERENCE_FAILED"}
         _write_json(response_path, response, MAX_CONTROL_BYTES, deadline=limits.deadline)
         number += 1
@@ -493,8 +494,7 @@ class IsolatedOCRAdapter:
                         if text:
                             _logger.error("Isolated OCR worker stderr tail: %s", text[-4096:])
                     except OSError as exc:
-                        _logger.warning("Cannot read isolated OCR diagnostics\n%s",
-                                        format_diagnostic_exception(exc))
+                        log_exception(_logger, logging.WARNING, "Cannot read isolated OCR diagnostics", exc)
             if job is not None:
                 job.close()
             # On Windows Job termination is asynchronous.  The bootstrap may
@@ -531,10 +531,13 @@ class IsolatedOCRAdapter:
         self.close()
 
     def __del__(self):
+        if sys.is_finalizing():
+            # The OS job and guardian still own shutdown and crash cleanup.
+            return
         try:
             self.close()
-        except Exception:
-            pass  # OS job / separate guardian, not destructor, owns crash cleanup
+        except Exception as exc:
+            log_exception(_logger, logging.WARNING, "Could not close abandoned OCR worker", exc)
 
 __all__ = [
     'IsolatedOCRAdapter',

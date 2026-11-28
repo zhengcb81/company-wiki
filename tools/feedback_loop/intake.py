@@ -16,10 +16,11 @@ import subprocess
 from uuid import uuid4
 
 from .coordinator import advance, settle
-from .diagnostics import background_command, background_environment, format_diagnostic_exception, redact_text, run_background
+from .diagnostics import background_command, background_environment, background_stderr, redact_text, run_background
 from .host import BatchedReconcile, RECONCILE_DEFERRED, process_host, read_hosts
 from .intake_schedule import IntakeSchedule, WAKE_ERRORS
 from company_wiki import runtime_feedback
+from company_wiki.diagnostic_logging import log_exception
 
 from .local_host import LocalHost, _save_recovery, _save_recovery_error, host_path
 from .observations import Batch, IDENTITY, decode_observation, digest, read_batch, unique_fields
@@ -444,13 +445,15 @@ def _drain_once(settings: Path, hosts_file: Path, *, owner: str | list[str] | No
 
 
 def _launch_pending(settings: Path, hosts_file: Path, database: Path) -> None:
-    subprocess.Popen(
-        background_command("tools.feedback_loop.intake", "--settings", str(settings),
-                           "--hosts", str(hosts_file), "drain", "--pending-database", str(database)),
-        cwd=_ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-        env=background_environment(settings.resolve().parent / "logs" / "intake_drain_stderr.log"),
-        start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS,
-    )
+    destination = settings.resolve().parent / "logs" / "intake_drain_stderr.log"
+    with background_stderr(destination) as errors:
+        subprocess.Popen(
+            background_command("tools.feedback_loop.intake", "--settings", str(settings),
+                               "--hosts", str(hosts_file), "drain", "--pending-database", str(database)),
+            cwd=_ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=errors,
+            env=background_environment(destination),
+            start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS,
+        )
 
 
 def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: list[str] | None = None,
@@ -460,7 +463,7 @@ def wake(settings: Path, hosts_file: Path, *, owner: str | None = None, owners: 
         scope = schedule.scope(hosts_file, owners or owner, wait_seconds)
         schedule.request(scope, partial(_launch_pending, settings, hosts_file, schedule.database))
     except WAKE_ERRORS as exc:
-        _logger.warning("Feedback wake request failed\n%s", format_diagnostic_exception(exc))
+        log_exception(_logger, logging.WARNING, "Feedback wake request failed", exc)
         if isinstance(exc, OSError):
             raise
         raise OSError("feedback wake unavailable") from exc
@@ -471,7 +474,7 @@ def _observe_wake_hint_errors():
     try:
         yield
     except WAKE_ERRORS as exc:
-        _logger.warning("Feedback wake hint update failed\n%s", format_diagnostic_exception(exc))
+        log_exception(_logger, logging.WARNING, "Feedback wake hint update failed", exc)
 
 
 def drain(settings: Path, hosts_file: Path, *, owner: str | list[str] | None,
@@ -524,7 +527,7 @@ def _drain_pending(settings: Path, hosts_file: Path, *, database: Path | None = 
                         _save_recovery(Path(config), result)
                     schedule.acknowledge(scope, generation)
                 except (*WAKE_ERRORS, sqlite3.Error) as exc:
-                    _logger.warning("Feedback inbox scan deferred\n%s", format_diagnostic_exception(exc))
+                    log_exception(_logger, logging.WARNING, "Feedback inbox scan deferred", exc)
                     failed.add((scope, generation))
                 else:
                     completed += 1
@@ -546,8 +549,8 @@ def _save_history(history: ProcessHistory, entry: dict, pending: dict | None = N
     try:
         history.save(entry, pending)
     except (OSError, sqlite3.Error, UnicodeError) as exc:
-        _logger.warning("Feedback process history unavailable (%s) %s",
-                        type(exc).__name__, _process_message(entry))
+        log_exception(_logger, logging.WARNING,
+                      f"Feedback process history unavailable ({type(exc).__name__}) {_process_message(entry)}", exc)
         return False
     return True
 
@@ -616,8 +619,7 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
             directory = settings.parent / target
         history = ProcessHistory(settings.parent / config["state"])
     except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
-        _logger.warning("Feedback observation capture setup failed for owner=%s\n%s",
-                        redact_text(owner), format_diagnostic_exception(exc))
+        log_exception(_logger, logging.WARNING, f"Feedback observation capture setup failed for owner={owner}", exc)
 
     token = "feedback-" + uuid4().hex
     for key in ("RESEARCH_FEEDBACK_RUN_ID", "RESEARCH_FEEDBACK_ATTEMPT_ID"):
@@ -670,7 +672,7 @@ def run_observed(settings: Path, hosts_file: Path, owner: str, command: list[str
         try:
             wake(settings, hosts_file, owner=owner, wait_seconds=wait_seconds)
         except OSError as exc:
-            _logger.warning("Feedback wake failed (%s) %s", type(exc).__name__, _process_message(entry))
+            log_exception(_logger, logging.WARNING, f"Feedback wake failed ({type(exc).__name__}) {_process_message(entry)}", exc)
     return code
 
 

@@ -4,7 +4,7 @@ import logging
 from typing import Protocol
 
 from company_wiki import runtime_feedback
-from company_wiki.diagnostic_redaction import format_diagnostic_exception
+from company_wiki.diagnostic_logging import log_exception
 
 
 _logger = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ def flush_worker_feedback(
     try:
         pending = store.pending_worker_feedback(allowed_job_ids=allowed_job_ids)
     except Exception as exc:
-        _logger.warning("worker feedback queue unavailable\n%s", format_diagnostic_exception(exc))
+        log_exception(_logger, logging.WARNING, "worker feedback queue unavailable", exc)
         return {"published": 0, "deferred": 0, "unavailable": True}
 
     published = deferred = 0
@@ -36,6 +36,6 @@ def flush_worker_feedback(
             else:
                 deferred += 1
         except Exception as exc:
-            _logger.warning("worker feedback delivery remains pending\n%s", format_diagnostic_exception(exc))
+            log_exception(_logger, logging.WARNING, "worker feedback delivery remains pending", exc)
             deferred += 1
     return {"published": published, "deferred": deferred, "unavailable": False}

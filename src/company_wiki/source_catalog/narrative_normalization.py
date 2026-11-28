@@ -1,6 +1,10 @@
 """Explicit local normalization composition; parsers remain deployment independent."""
 
 from __future__ import annotations
+
+import sys
+
+from company_wiki import runtime_feedback
 from collections.abc import Sequence
 from dataclasses import replace
 import hashlib
@@ -147,10 +151,12 @@ class NarrativeNormalization:
         self.close()
 
     def __del__(self):
+        if sys.is_finalizing():
+            return
         try:
             self.close()
-        except Exception:
-            pass
+        except Exception as exc:
+            runtime_feedback.record_optional_failure("abandoned_parser_close_failed", exc)
 
     def identity(self, mime_type, *, document_id=None, parser_version=None):
         version = parser_version or self.parser_versions.get(document_id)

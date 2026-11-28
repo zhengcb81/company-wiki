@@ -15,10 +15,11 @@ from tempfile import NamedTemporaryFile
 import time
 
 from company_wiki import runtime_feedback
+from company_wiki.diagnostic_logging import log_exception
 
 from .coordinator import reconcile_diagnostic_code
 from .diagnostics import (
-    append_diagnostic, background_command, background_environment, format_diagnostic_exception, redact_text,
+    append_diagnostic, background_command, background_environment, background_stderr, redact_text,
     run_background,
 )
 from .host import host_environment, read_hosts
@@ -221,18 +222,19 @@ class LocalHost:
             if row is None or row["route"] is None:
                 return False
             environment = self._action_environment(row, json.loads(row["route"]))
-        env = background_environment(self.config.parent / "logs" / "host_wake_stderr.log", environment)
+        destination = self.config.parent / "logs" / "host_wake_stderr.log"
+        env = background_environment(destination, environment)
         if self.recovery_owners:
             env[RECOVERY_OWNERS_ENV] = " ".join(self.recovery_owners)
         try:
-            subprocess.Popen(background_command("tools.feedback_loop.local_host", "--config", str(self.config),
-                                                "work", key), cwd=_ROOT, stdin=subprocess.DEVNULL,
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env,
-                             start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
+            with background_stderr(destination) as errors:
+                subprocess.Popen(background_command("tools.feedback_loop.local_host", "--config", str(self.config),
+                                                    "work", key), cwd=_ROOT, stdin=subprocess.DEVNULL,
+                                 stdout=subprocess.DEVNULL, stderr=errors, env=env,
+                                 start_new_session=os.name != "nt", creationflags=BACKGROUND_CREATION_FLAGS)
         except OSError as exc:
             # The pre-launch queue is durable. Host startup can wake it again.
-            _logger.warning("Failed to wake feedback host worker for action=%s\n%s",
-                            key, format_diagnostic_exception(exc))
+            log_exception(_logger, logging.WARNING, f"Failed to wake feedback host worker for action={key}", exc)
             return False
         return True
 
@@ -328,8 +330,7 @@ class LocalHost:
                     timeout=route["timeout"], check=False, creationflags=BACKGROUND_CREATION_FLAGS,
                 )
             except (OSError, ValueError, KeyError, TypeError, AttributeError, subprocess.SubprocessError) as exc:
-                _logger.warning("Cannot flush existing observations for %s\n%s",
-                                redact_text(owner), format_diagnostic_exception(exc))
+                log_exception(_logger, logging.WARNING, f"Cannot flush existing observations for {owner}", exc)
                 diagnostics.append({"owner": owner, "code": "owner_observation_flush_unavailable",
                                     "error_type": type(exc).__name__})
                 continue

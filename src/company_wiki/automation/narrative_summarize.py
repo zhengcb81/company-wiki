@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 import hashlib
@@ -177,10 +179,10 @@ def _post_model_failure(
     try:
         diagnostic = FailedFinalDiagnostic.from_observation(
             provider_body=None, content=response.response_bytes.decode("utf-8"))
-    except Exception:
+    except Exception as exc:
         # Invalid UTF-8 and optional observation failures keep the original
         # failure and native metrics, without replacement text or invented wire.
-        pass
+        runtime_feedback.record_optional_failure("model_failure_details_unavailable", exc)
     return _failure(code, outcome, detail, metrics, failed_final=diagnostic)
 
 
@@ -202,9 +204,9 @@ def _failure(
     if failed_final is not None:
         try:
             return fit_failed_final_result(base, failed_final)
-        except Exception:
+        except Exception as exc:
             # Optional diagnostic failure cannot hide the primary error/usage.
-            pass
+            runtime_feedback.record_optional_failure("model_failure_projection_unavailable", exc)
     return base
 
 

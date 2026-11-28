@@ -13,6 +13,7 @@ from typing import Any
 
 from . import __version__
 from .diagnostic_logging import append_diagnostic
+from .diagnostic_redaction import redact_text
 from .file_mutex import win32_filesystem_path
 from .runtime_feedback_values import OWNER, logical_observation_ref
 
@@ -22,6 +23,7 @@ __all__ = [
 
 _PREFIX = "runtime-event "
 _DIAGNOSTIC = re.compile(r"feedback-[a-f0-9]{32}\.diagnostic\.json")
+_REFERENCE_FIELDS = frozenset({"run_id", "attempt_id", "related_run_id", "input_ref", "source_id"})
 
 
 def default_state_root() -> Path:
@@ -97,6 +99,24 @@ def write_event(
     return False
 
 
+def _diagnostic_value(value: Any) -> Any:
+    if isinstance(value, dict):
+        return _safe_record(value)
+    if isinstance(value, list):
+        return [_diagnostic_value(item) for item in value]
+    return redact_text(value)
+
+
+def _safe_record(record: dict[str, Any]) -> dict[str, Any]:
+    # Canonicalize the same coordinates used by new writers and by the
+    # reader's selector. The historical file and its detail locator stay put.
+    return {
+        key: logical_observation_ref(value)
+        if key in _REFERENCE_FIELDS and isinstance(value, str) else _diagnostic_value(value)
+        for key, value in record.items()
+    }
+
+
 def _retained_events(path: Path) -> list[dict[str, Any]]:
     items = []
     with path.open(encoding="utf-8", errors="replace") as trace:
@@ -106,12 +126,12 @@ def _retained_events(path: Path) -> list[dict[str, Any]]:
                 continue
             try:
                 event = json.loads(data)
-            except ValueError:
+            except (ValueError, RecursionError):
                 continue
             if (isinstance(event, dict) and event.get("owner") == OWNER
                     and all(isinstance(event.get(key), str)
                             for key in ("at_utc", "run_id", "attempt_id", "operation", "step", "status"))):
-                items.append(event)
+                items.append(_safe_record(event))
     return items
 
 
@@ -132,11 +152,11 @@ def _details(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
         for path in paths:
             try:
                 packet = json.loads(win32_filesystem_path(path / ref).read_bytes())
-            except (OSError, ValueError):
+                if isinstance(packet, dict) and packet.get("owner") == OWNER:
+                    details.append(_safe_record(packet))
+                    break
+            except (OSError, ValueError, RecursionError):
                 continue
-            if isinstance(packet, dict) and packet.get("owner") == OWNER:
-                details.append(packet)
-                break
     return details
 
 

@@ -1,17 +1,18 @@
 """Read-only plan or individual finite host tick from explicit diagnostic sidecars."""
 
-import argparse
 import json
 from pathlib import Path
-import sys
+
+from company_wiki import runtime_feedback
 
 from .coordinator import settle
 from .host import process_host, read_hosts
 from .observations import read_batch
 
 
+@runtime_feedback.entry("feedback-control", local_only=True, quiet_success=True)
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = runtime_feedback.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="mode", required=True)
     for mode in ("plan", "tick"):
         command = commands.add_parser(mode)
@@ -32,6 +33,7 @@ def main(argv=None):
         try:
             config = read_hosts(args.hosts)
         except (ValueError, OSError, RecursionError) as exc:
+            runtime_feedback.record_optional_failure("host_config_unavailable", exc)
             parser.error(f"unreadable host configuration ({type(exc).__name__})")
         result = settle(batch, process_host(config, args.rpc_timeout), args.wait_seconds)
     print(json.dumps(result, ensure_ascii=True))
@@ -39,4 +41,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(runtime_feedback.run_cli(main))

@@ -3,6 +3,8 @@
 from contextlib import ExitStack, contextmanager
 import json
 import logging
+
+from company_wiki.diagnostic_logging import log_exception
 import os
 from pathlib import Path
 from tempfile import NamedTemporaryFile
@@ -63,8 +65,9 @@ class IntakeSchedule:
             raise ValueError("invalid intake wake state")
         except FileNotFoundError:
             pass
-        except ValueError:
-            _logger.warning("Unreadable wake hints; the saved observation inboxes remain available")
+        except ValueError as exc:
+            log_exception(_logger, logging.WARNING,
+                          "Unreadable wake hints; the saved observation inboxes remain available", exc)
         return {"pending": {}, "starting_until": 0}
 
     def _write(self, state: dict) -> None:

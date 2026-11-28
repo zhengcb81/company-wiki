@@ -17,7 +17,7 @@ from typing import Any, NoReturn, ParamSpec
 from uuid import uuid4
 
 from . import runtime_journal
-from .diagnostic_logging import append_diagnostic, diagnostic_log
+from .diagnostic_logging import append_diagnostic, diagnostic_log, log_exception
 from .diagnostic_redaction import format_diagnostic_exception, redact_text
 from .file_mutex import FileMutexLockedError, os_file_mutex, win32_filesystem_path
 from .runtime_feedback_values import (
@@ -35,7 +35,8 @@ _logger = logging.getLogger(__name__)
 
 __all__ = [
     "ArgumentParser", "checkpoint", "document_results", "entry", "freeze_worker_failure",
-    "publish_worker_failure", "record", "refusal", "retain_local_text", "run_cli", "runtime_identity", "trace_reference",
+    "publish_worker_failure", "record", "record_optional_failure", "refusal", "retain_local_text", "run_cli",
+    "runtime_identity", "trace_reference",
 ]
 
 
@@ -79,7 +80,7 @@ def trace_reference() -> dict[str, str] | None:
     if caller := _current.get():
         return {"run_id": logical_observation_ref(caller.run),
                 "attempt_id": logical_observation_ref(caller.attempt),
-                "status": "available" if caller.trace_available else "degraded"}
+                "status": "available" if caller.trace_available and not caller.local_log_lost else "degraded"}
     return None
 
 
@@ -152,8 +153,7 @@ def freeze_worker_failure(
             job_id, attempt_id, status, reason, message=message, error=error,
         )
     except Exception as exc:
-        _logger.warning("runtime_feedback could not capture worker cause\n%s",
-                        format_diagnostic_exception(exc))
+        log_exception(_logger, logging.WARNING, "runtime_feedback could not capture worker cause", exc)
         return _freeze_worker_failure(job_id, attempt_id, status, reason)
 
 
@@ -189,8 +189,7 @@ def publish_worker_failure(payload: str, *, job_id: str, attempt_id: str) -> boo
             raise ValueError("worker observation details do not match the row")
         row_data, details_data = _encoded(row), _encoded(details)
     except (TypeError, ValueError, KeyError) as exc:
-        _logger.warning("runtime_feedback invalid pending worker observation (%s)",
-                        type(exc).__name__)
+        log_exception(_logger, logging.WARNING, "runtime_feedback invalid pending worker observation", exc)
         return False
 
     # Prefer existing durable bytes, including a prior fallback publication.
@@ -225,8 +224,7 @@ def publish_worker_failure(payload: str, *, job_id: str, attempt_id: str) -> boo
                 try:
                     _atomic(folder / (stem + ".ready"), _encoded(context))
                 except OSError as exc:
-                    _logger.warning("runtime_feedback worker observation marker pending\n%s",
-                                    format_diagnostic_exception(exc))
+                    log_exception(_logger, logging.WARNING, "runtime_feedback worker observation marker pending", exc)
                     return False
                 return True
         except FileMutexLockedError:
@@ -241,7 +239,7 @@ def publish_worker_failure(payload: str, *, job_id: str, attempt_id: str) -> boo
 def record(operation: str, status: str, *, reason: str = "", error: BaseException | None = None,
            run: str = "", attempt: str = "", item: str = "", source_id: str = "",
            expected: bool = False, message: str = "", include_error_messages: bool = True,
-           explains_invocation: bool = True) -> None:
+           explains_invocation: bool = True, publish_issue: bool = True) -> None:
     """Keep native diagnostic facts. Omit messages at boundaries carrying opaque inputs."""
     caller = _current.get()
     try:
@@ -263,6 +261,7 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             retained = retain_local_text(failure)
             if caller is not None:
                 caller.recoverable_failure |= retained
+                caller.local_log_lost |= not retained
                 _invocation_trace(
                     caller, "failure", status, related_run_id=run if caller.run != run else None,
                     details_ref=row["details_ref"], source_id=source_id,
@@ -279,7 +278,7 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
                 caller.recoverable_failure = True
 
         explicit = os.getenv("RESEARCH_FEEDBACK_OUT")
-        local_only = caller is not None and caller.local_only
+        local_only = not publish_issue or (caller is not None and caller.local_only)
         if explicit and not local_only:
             sidecar = win32_filesystem_path(Path(explicit))
             try:
@@ -327,7 +326,14 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
         if caller is not None:
             caller.trace_available = False
         else:
-            _logger.warning("runtime_feedback unexpected persistence failure\n%s", format_diagnostic_exception(exc))
+            log_exception(_logger, logging.WARNING, "runtime_feedback unexpected persistence failure", exc)
+
+
+def record_optional_failure(reason: str, error: BaseException) -> None:
+    """Preserve why an optional operation degraded without generating work or changing its result."""
+    if caller := _current.get():
+        record(caller.operation, "unavailable", reason=reason, item=reason, error=error,
+               include_error_messages=False, explains_invocation=False, publish_issue=False)
 
 
 def _owns_local_log(scope: object) -> bool:

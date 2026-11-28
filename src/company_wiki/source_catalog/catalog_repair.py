@@ -19,6 +19,8 @@ Red lines honoured here:
 
 from __future__ import annotations
 
+from company_wiki import runtime_feedback
+
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 import json
@@ -83,7 +85,8 @@ def plan_undated_group_repairs(catalog: Any, resolution: Any) -> tuple[GroupRepa
             locations = catalog.reader.exact_source_locations(
                 str(document_id), str(source_id)
             )
-        except Exception:  # noqa: BLE001 - planning is best-effort read-only
+        except Exception as exc:  # noqa: BLE001 - planning is best-effort read-only
+            runtime_feedback.record_optional_failure("repair_source_locations_unavailable", exc)
             continue
         for location in locations:
             if location["role"] != "original_primary":
@@ -96,7 +99,8 @@ def plan_undated_group_repairs(catalog: Any, resolution: Any) -> tuple[GroupRepa
                 continue
             try:
                 declared = declared_group_publication_date(root, relative)
-            except Exception:  # noqa: BLE001 - unreadable sidecars are not repairable
+            except Exception as exc:  # noqa: BLE001 - unreadable sidecars are not repairable
+                runtime_feedback.record_optional_failure("repair_declaration_unreadable", exc)
                 continue
             if declared is None:
                 continue

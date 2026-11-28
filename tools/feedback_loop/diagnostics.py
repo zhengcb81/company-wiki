@@ -1,11 +1,11 @@
 """Persist redacted diagnostics for the feedback loop's own detached commands."""
-from collections.abc import Callable, Mapping
-from contextlib import redirect_stderr
+from collections.abc import Callable, Iterator, Mapping
+from contextlib import contextmanager, redirect_stderr
 import logging
 import os
 from pathlib import Path
 import sys
-from typing import TypeVar
+from typing import BinaryIO, TypeVar
 
 from company_wiki.diagnostic_logging import append_diagnostic, diagnostic_log
 from company_wiki.diagnostic_redaction import format_diagnostic_exception, redact_text
@@ -19,7 +19,7 @@ _LOG_PATH = "CWP_F4_ERROR_LOG"
 _T = TypeVar("_T")
 
 __all__ = ["append_diagnostic", "background_command", "background_environment",
-           "format_diagnostic_exception", "redact_text", "run_background"]
+           "background_stderr", "format_diagnostic_exception", "redact_text", "run_background"]
 
 
 def background_environment(path: Path, environment: Mapping[str, str] | None = None) -> dict[str, str]:
@@ -28,6 +28,29 @@ def background_environment(path: Path, environment: Mapping[str, str] | None = N
 
 def background_command(module: str, *arguments: str) -> list[str]:
     return background_argv([sys.executable, "-B", "-m", "tools.feedback_loop._background", module, *arguments])
+
+
+@contextmanager
+def background_stderr(destination: Path) -> Iterator[BinaryIO]:
+    """Detach from the caller's request pipes while retaining pre-wrapper errors."""
+    bootstrap = destination.with_name(destination.name + ".bootstrap")
+    for path in dict.fromkeys((bootstrap, *diagnostic_paths(bootstrap.name))):
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            stream = path.open("ab", buffering=0)
+        except (OSError, ValueError):
+            continue
+        with stream:
+            yield stream
+        return
+    terminal = sys.stderr
+    if terminal is not None:
+        try:
+            print("company-wiki background diagnostic could not be retained", file=terminal)
+        except (OSError, ValueError):
+            pass
+    with open(os.devnull, "wb", buffering=0) as unavailable:
+        yield unavailable
 
 
 def run_background(run: Callable[[], _T]) -> _T:

@@ -11,6 +11,8 @@ import re
 import tempfile
 from datetime import datetime
 from pathlib import Path
+
+from company_wiki import runtime_feedback
 from typing import Optional
 
 from .domain import Claim, ClaimType
@@ -38,7 +40,8 @@ class WikiRepository:
             return None
         try:
             return path.read_text(encoding="utf-8")
-        except Exception:
+        except (OSError, UnicodeError) as exc:
+            runtime_feedback.record_optional_failure("legacy_page_read_failed", exc)
             return None
 
     def read_frontmatter(self, entity_name: str, page_name: str = "公司动态") -> dict:
@@ -52,7 +55,8 @@ class WikiRepository:
         import yaml
         try:
             return yaml.safe_load(parts[1]) or {}
-        except Exception:
+        except (yaml.YAMLError, RecursionError) as exc:
+            runtime_feedback.record_optional_failure("legacy_frontmatter_parse_failed", exc)
             return {}
 
     # ── 写入 ──────────────────────────────

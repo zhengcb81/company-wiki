@@ -23,3 +23,9 @@ def test_current_source_does_not_add_unreviewed_boundary_debt():
                 "constant_shapes": actual.constant_shapes}
     assert not changed_inventory(actual, before, ROOT)
     assert not compare(recorded, before) + renamed_waivers(recorded, before)
+
+
+def test_native_diagnostic_edges_retain_stderr_and_exception_causes():
+    actual = scan(ROOT, (*SOURCE, "tools/feedback_loop"))
+    lost_edges = [finding for finding in actual.findings if finding.rule == "AT-11"]
+    assert not lost_edges
