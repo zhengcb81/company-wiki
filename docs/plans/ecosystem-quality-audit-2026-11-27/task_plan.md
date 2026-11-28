@@ -1,7 +1,7 @@
 # S6 · 12 个模块的架构、日志和端到端测试整改
 
 > **主线位置：`S6`（已接入 PWF 主线，作为 `feedback-loop-2026-11-17` S5-10 / F4 收尾线的直接后续，排在 W12 业务摘要恢复之前）**
-> **当前状态** `IN_PROGRESS`。11 张止血卡已进入各仓发布线，P1-00 已独审发布。Phase 1 正按精确提交逐仓验证覆盖和实际执行，正式 T3 绑定与 Dashboard 精确 CI 仍待核对。见 [progress.md](progress.md)。
+> **当前状态** `IN_PROGRESS`。11 张止血卡已进入各仓发布线，P1-00 已独审发布。Phase 1 已有 9 路发布，IQS、Dashboard 和 StockQA 正在关闭实测与独审差异。正式 T3 部署绑定仍待核对。见 [progress.md](progress.md)。
 > [前序 F4 正式回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md) · [后续 W12 业务检查点](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
 > **配套核心文档**：
 > - **审查发现与逐仓 `file:line` 证据**：[findings.md](findings.md)
@@ -54,7 +54,7 @@ flowchart TD
 
 ## Next Step
 
-继续修 CWP 与 IQS 全量暴露的配置、资产和恢复边界。Dashboard 与 StockQA 操作各自工区。IR 经私有双平台验收和独审已推正式 `main`。MC 独审通过，已快进远端 `master`，精确发布版双平台通过；RF 精确发布跑次已通过。T3 的三市场、损坏原件、原作业冷读及零重发已通过离线组合，正式绑定单列核对。见[候选和发布台账](progress.md)。
+CWP 已完成父进程回收临时目录的同版全量和组合验收，已并主线。IQS 核对日志身份修复与历史 C06 五案，按原分包及额度合约恢复。Dashboard 修复异常生命周期和 Windows 句柄滞留。StockQA 保留原作业、原收据及明确拒绝原因，重验精确双平台。T3 的三市场、损坏原件、原作业冷读及零重发已通过离线组合，正式绑定单列核对。见[候选和发布台账](progress.md)。
 
 ---
 
@@ -82,7 +82,7 @@ flowchart TD
 ---
 
 ### Phase 1 — 防偷懒机械安全网落地、CI 假绿清零、Windows 矩阵与历史缺陷 100% 锁定
-- **Status:** P1-00 独审完成并发布。P1-03 ET、P1-04 SID 发布版双平台 CI 通过。P1-02 FF 精确主线双平台通过。P1-07 StockWiki 在独审及 Windows 全量与 C06 通过后快进本地主线，Linux 未实跑。CWP 和 IQS 处理实际 CI 失败。RF 独审及修正版双平台通过并推远端主线，发布跑次也已通过。Audit 隔离分片、复审及 Windows 869 项完成，快进本地主线。MC 已独审及快进发布，精确发布版双平台通过。IR 首轮 Windows 的 8.3 别名差异已复验，精确候选双平台通过和独审完成，已推 `main`。Dashboard 与 StockQA 的真实 Windows 初轮仍有失败。
+- **Status:** P1-00 独审完成并发布。P1-03 ET、P1-04 SID 发布版双平台 CI 通过。P1-02 FF 精确主线双平台通过。P1-07 StockWiki 在独审及 Windows 全量与 C06 通过后快进本地主线，Linux 未实跑。CWP 的精确双平台 27 项和公开组合均通过，已快进 `master`。IQS 的正式 CI 已过，仍须收口历史组合。RF 独审及修正版双平台通过并推远端 `main`，发布跑次已通过。Audit 隔离分片、复审及 Windows 869 项完成，快进本地主线。MC 已独审及快进发布，精确发布版双平台通过。IR 首轮 Windows 的 8.3 别名差异已复验，精确候选双平台通过和独审完成，已推 `main`。Dashboard 的异常句柄滞留已在原生 Windows 重现。StockQA 双平台暴露的检查点错误类型与归属分流已修复，定向 309 项通过，仍待同版完整 CI 和独审。
 - P1-00 与止血并行。后续各仓将适用规则接入本仓现有 CI；见上表的汇合条件。
 
 | 卡号 | 范围 | 具体施工细节 | 退出硬指标 |
