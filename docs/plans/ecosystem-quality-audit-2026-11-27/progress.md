@@ -31,6 +31,14 @@ RF 的一次隔离测试把过长请求放在 Windows 命令行，启动失败�
 - **P1-04 SID**　`C:/Temp/s6a/sid-p1` 已按正式 `8bc6e93b` 开工，补齐真实离线测试发现以及 Windows 原生执行。
 - **P1-05 RF**　`C:/Temp/s6a/rf-p1` 定向 82 项通过。移除过时的缺 review 拒绝期待，保留实际 SHA 错拒绝；查清被旧硬编码测试列表遗漏的四个收集故障，正在核对完整离线执行。
 
+## 2026-11-28　Phase 1 首次 CI 反馈
+
+- **CWP ↔ FF T3**　[FF 正式 CI](https://github.com/zhengcb81/filing-fetch/actions/runs/46086264095) 通过，实际 CWP 配置用四份隔离夹具完成 `open/close`，采集派发为零且临时目录清空。CWP 首次 [精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/46085744052) 的架构测试暴露按字符串动态导入。候选 `ac9ba2b3d176ddb7fe01c5a41c24d5b1bd3b6288` 只用显式 CWP 公开入口，保留原测试红转绿。独立 Windows 复验两项通过，已保留在途的暂存与未暂存差异并快进、推送 `master`。 [修复版精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/46088694086) 与发布组合复验仍在运行。
+- **P1-03 ET**　[首次双平台 CI](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46086664981) 识别三类实际问题。Windows 原文比较改用文件身份，Linux 不解析 Windows 原生绑定，强停后以原作业的持久事件区分已知中断和尚未确认，费用保持 `unknown`。Windows 上六项针对用例通过，Ruff 与双平台 mypy 通过。`b0d8394ea0983d0c0c6ebc39d5be1da0151c3ffb` 已推到原草案，[六个执行分片与覆盖归集](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46088338831) 全绿，正在做合并前独审。
+- **P1-02 FF**　从已发布 `82c749464b494cf8dc9ec9e694c433adb02717e5` 创建 `C:/Temp/s6a/ff-p1` 开工，Windows 收集基线 1,885 个节点。只在该工区改工程检查和隔离测试。主工区的财报报表施工归原 owner。
+- **P1-04 SID**　把实际旧提交的 HTTP 断流和原件替换缺陷作为红证据。Windows 首次完整运行还找出请求夹具身份歧义、安全作业号的旧断言和参考工具自测的进程污染，正在消除根因。候选 `7c34f34c4be4c76f2363097b9be58ab84a3089db` 保留作定位依据，待接受版本另记。
+- **P1-05 RF**　旧 CI 漏跑的身份夹具和原子写用例已按公开契约修正。候选 `fed82030b640be3633ea683f0e21377d17806677` 的 87 项 Windows 针对复验通过，完整 Windows 执行进行中。日常 12 项快测继续保留。
+
 ## Session: 2026-11-27
 
 ### 前置审查与规划（首批实施前的历史记录）
