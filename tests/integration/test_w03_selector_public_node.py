@@ -254,13 +254,13 @@ def test_full_true_txt_both_saved_policies_resolve_every_original_group(tmp_path
                                   source_sha256=FIXTURE_SHA, language="en", parser_version="0.3.1")
     packages = {version: select_narrative_evidence(
         parsed, title=FIXTURE.name, existing_kind="investor_call_transcript", selector_version=version)
-        for version in ("0.6.0", "0.7.0")}
+        for version in ("0.6.0", "0.7.0", "0.7.1")}
     assert _fingerprint(packages["0.6.0"]) == LEGACY_SHA
     assert _fingerprint(packages["0.7.0"]) == "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478"
     default = select_narrative_evidence(parsed, title=FIXTURE.name,
                                        existing_kind="investor_call_transcript")
-    assert NARRATIVE_SELECTOR_VERSION == "0.7.1"
-    assert _fingerprint(default) == _fingerprint(packages["0.7.0"])
+    assert _fingerprint(packages["0.7.1"]) == _fingerprint(packages["0.7.0"])
+    packages[NARRATIVE_SELECTOR_VERSION] = default
     business = [span for span in default.evidence_spans
                 if span.structured_value["source_role"] == "management"]
     for anchor in ("what we launched with Perception", "50% less cost", "90% of the tasks",
@@ -304,10 +304,10 @@ def test_full_true_txt_both_saved_policies_resolve_every_original_group(tmp_path
     assert {path.relative_to(tmp_path): path.read_bytes()
             for path in tmp_path.rglob("*") if path.is_file()} == before
 
-    _public_true_txt_new_anchor(tmp_path, raw)
+    _public_true_txt_new_anchor(tmp_path, raw, default)
 
 
-def _public_true_txt_new_anchor(tmp_path, raw):
+def _public_true_txt_new_anchor(tmp_path, raw, current_package):
     with published_fixture(tmp_path, source_spec={
         "data": raw, "title": FIXTURE.name, "language": "en",
         "sidecar_overrides": {
@@ -321,7 +321,8 @@ def _public_true_txt_new_anchor(tmp_path, raw):
         wire = json.loads(fixture.payload)
         assert wire["versions"]["selector"] == NARRATIVE_SELECTOR_VERSION
         spans = {span["span_id"]: span for span in wire["evidence_spans"]}
-        assert len(spans) == 96 and wire["selection"]["status"] == "partial"
+        assert len(spans) == len(current_package.evidence_spans)
+        assert wire["selection"]["status"] == current_package.status
 
         def cli(operation, *options):
             process = subprocess.run([
@@ -333,7 +334,7 @@ def _public_true_txt_new_anchor(tmp_path, raw):
             result, receipt = json.loads(process.stdout), json.loads(process.stderr)
             assert receipt["status"] == "ok" and receipt["replay_status"] == "verified"
             assert receipt["view_sha256"] == hashlib.sha256(process.stdout).hexdigest()
-            assert receipt["byte_size"] == len(process.stdout) and receipt["locator_count"] == 96
+            assert receipt["byte_size"] == len(process.stdout) and receipt["locator_count"] == len(spans)
             assert result["versions"]["selector"] == NARRATIVE_SELECTOR_VERSION
             return result
 

@@ -45,7 +45,8 @@ def _sidecar(*, sha: str = SHA, provider_id: str = "doc-1",
              capture_trace: bool = True,
              fiscal_year: int | None = 2025,
              period_end: str | None = "2025-12-31",
-             filing_date: str = "2026-02-20") -> dict:
+             filing_date: str = "2026-02-20",
+             source_title: str | None = None) -> dict:
     result = {
         "schema_version": "1.0",
         "canonical_entity_id": "ent-acme",
@@ -61,6 +62,8 @@ def _sidecar(*, sha: str = SHA, provider_id: str = "doc-1",
     }
     if fiscal_year is not None:
         result["fiscal_year"] = fiscal_year
+    if source_title is not None:
+        result["source_title"] = source_title
     if period_end is not None:
         result["period_end"] = period_end
     if source_url is not None:
@@ -80,7 +83,8 @@ def _write(directory: Path, *, name: str = "2025.pdf", body: bytes = BODY,
            capture_trace: bool = True,
            fiscal_year: int | None = 2025,
            period_end: str | None = "2025-12-31",
-           filing_date: str = "2026-02-20") -> Path:
+           filing_date: str = "2026-02-20",
+           source_title: str | None = None) -> Path:
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / name
     path.write_bytes(body)
@@ -88,7 +92,7 @@ def _write(directory: Path, *, name: str = "2025.pdf", body: bytes = BODY,
         json.dumps(_sidecar(sha=sha, provider_id=provider_id,
                             source_url=source_url, capture_trace=capture_trace,
                             fiscal_year=fiscal_year, period_end=period_end,
-                            filing_date=filing_date)),
+                            filing_date=filing_date, source_title=source_title)),
         encoding="utf-8",
     )
     return path
@@ -99,12 +103,13 @@ def _fixture(tmp_path: Path, *, three_roots: bool = False,
              capture_trace: bool = True,
              fiscal_year: int | None = 2025,
              period_end: str | None = "2025-12-31",
-             name: str = "2025.pdf"):
+             name: str = "2025.pdf",
+             source_title: str | None = None):
     companies = tmp_path / "companies"
     first = _write(companies / "Acme" / "raw" / "financial_reports" / "annual",
                    name=name, period_end=period_end,
                    source_url=source_url, capture_trace=capture_trace,
-                   fiscal_year=fiscal_year)
+                   fiscal_year=fiscal_year, source_title=source_title)
     roots = [
         RootSpec("company_raw", companies, "company_raw", priority=10,
                  adapter_id="company_raw_v1", read_only=False,
@@ -119,7 +124,7 @@ def _fixture(tmp_path: Path, *, three_roots: bool = False,
             paths.append(_write(directory, name=name, period_end=period_end,
                                 source_url=source_url,
                                 capture_trace=capture_trace,
-                                fiscal_year=fiscal_year))
+                                fiscal_year=fiscal_year, source_title=source_title))
             roots.append(
                 RootSpec(root_id, directory, "directory", priority=priority,
                          adapter_id="sidecar_filing_v1", read_only=True,
@@ -690,8 +695,12 @@ def test_sparse_candidate_preserves_known_capture_observations(tmp_path):
     assert reader.open_version(ref, purpose="filing_reuse").data == BODY
 
 
-def test_query_local_keeps_legacy_year_from_title_and_respects_as_of(tmp_path):
-    catalog, _, roots, ids = _fixture(tmp_path, fiscal_year=None)
+@pytest.mark.parametrize(
+    ("source_title", "status"),
+    [("Acme 2025 Annual Report", "found"), (None, "ambiguous")],
+)
+def test_query_local_requires_disclosed_year_and_respects_as_of(tmp_path, source_title, status):
+    catalog, _, _, ids = _fixture(tmp_path, fiscal_year=None, period_end=None, source_title=source_title)
     reader = SourceVersionReader(catalog)
     request = SourceRequest(
         entity="Acme", market="US", security_id="ACME",
@@ -700,8 +709,10 @@ def test_query_local_keeps_legacy_year_from_title_and_respects_as_of(tmp_path):
         as_of_date="2026-08-10", mode="exact",
     )
     result = reader.query_local(request)
-    assert result.status == "found"
+    assert result.status == status
     assert result.matches[0].document_id == ids["document_id"]
+    if status == "ambiguous":
+        assert result.reason == "reported_fiscal_year_unconfirmed"
 
     future = reader.query_local(replace(request, as_of_date="2026-01-01"))
     assert future.matches == ()

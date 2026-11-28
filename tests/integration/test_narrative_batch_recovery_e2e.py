@@ -285,6 +285,8 @@ def _command(state, endpoint):
         PYTHONDONTWRITEBYTECODE="1",
         PYTHONUTF8="1",
         PYTHON_DOTENV_DISABLED="1",
+        RESEARCH_FEEDBACK_OUT=str(state.root / "feedback" / "intake.jsonl"),
+        RESEARCH_FEEDBACK_RUN_ID="batch-recovery-native",
     )
     return [
         sys.executable,
@@ -332,8 +334,10 @@ def test_killed_coordinator_releases_owner_and_resumes_without_refunding_unknown
                 command,
                 cwd=root,
                 env=env,
+                stdin=subprocess.DEVNULL,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
             )
             assert interrupted_model_server.first_received.wait(timeout=25), (
                 "Formal CLI never reached the first HTTP POST"
@@ -353,10 +357,23 @@ def test_killed_coordinator_releases_owner_and_resumes_without_refunding_unknown
             assert attempt is not None and attempt.finished_at is None
             children = [_ObservedProcess(pid) for pid in _child_pids(coordinator.pid)]
             assert len(children) >= 2 and all(not child.exited() for child in children)
-            assert len(list((root / "run-work" / "logs").glob("*.stdout.log"))) == 2
             coordinator.kill()
             coordinator.wait(timeout=5)
             _wait_until(lambda: all(child.exited() for child in children), timeout=8)
+            cold = subprocess.run(
+                [sys.executable, "-m", "company_wiki.runtime_trace", "--run-id", "batch-recovery-native"],
+                cwd=root, env=env, stdin=subprocess.DEVNULL, capture_output=True, timeout=5,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0), check=True,
+            )
+            events = json.loads(cold.stdout)["events"]
+            ready = {event["attempt_id"] for event in events
+                     if event["operation"] == "worker-process" and event["step"] == "poll"
+                     and event["status"] == "started"}
+            interrupted = {event["attempt_id"] for event in events
+                           if event["operation"] == "worker-process" and event["step"] == "exit"
+                           and event["status"] == "interrupted"}
+            assert len(ready) == 2 and ready <= interrupted
+            assert KEY.encode() not in cold.stdout + cold.stderr
             killed_stdout, killed_stderr = coordinator.communicate(timeout=5)
             assert (
                 coordinator.returncode != 0

@@ -112,14 +112,14 @@ from company_wiki.automation.narrative_model_caller import BudgetedNarrativeCall
 from company_wiki.automation.store import AutomationStore
 from narrative_batch_configured import main
 original_generate = BudgetedNarrativeCaller.generate
-def paused(self, context, request):
+def paused(self, context, request, *, validate_new_attempt=None):
     marker = Path(__file__).parent / "pre-http-request.json"
     marker.write_text(json.dumps({"instruction": request.instruction, "data_json": request.with_output_budget(self._model.max_output_tokens).data_json}), encoding="utf-8")
     try:
         store = AutomationStore(self._store.db_path)
         gate = store.read_runtime_gate()
         store.set_runtime_gate(RuntimeState.PAUSED, updated_at=gate.updated_at, expected_generation=gate.control_generation)
-        return original_generate(self, context, request)
+        return original_generate(self, context, request, validate_new_attempt=validate_new_attempt)
     except Exception as error:
         (Path(__file__).parent / "pause-error-type.txt").write_text(type(error).__name__, encoding="utf-8")
         raise

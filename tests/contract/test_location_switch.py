@@ -1,52 +1,59 @@
-"""WU-802 RED/audit tests: multi-location switch (canonical location fallback).
+"""Latest selection through the portable public source-version reader."""
 
-Same document content on two roots: one handle is returned with the
-preferred location; if the preferred location's file is missing, the
-resolver switches to the other valid location instead of failing or
-downloading.  Ranking keys never contain source-type names.
-"""
-import sys
-from pathlib import Path
+from dataclasses import replace
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from company_wiki.source_catalog import resolver as _resolver  # noqa: E402
-_pick_latest = staticmethod(_resolver.SourceResolver._pick_latest)
+from company_wiki.source_catalog import SourceRequest, SourceVersionReader
+from contract.test_source_version_reader import BODY, OTHER, OTHER_SHA, _fixture, _write
 
 
-class _H:
-    def __init__(self, published_date, provider_document_id, source_id):
-        self.published_date = published_date
-        self.provider_document_id = provider_document_id
-        self.source_id = source_id
+def _request(as_of_date):
+    return SourceRequest(
+        entity="Acme", market="US", security_id="ACME",
+        document_kind="annual_report", form_type="10-K",
+        as_of_date=as_of_date, mode="latest_as_of",
+    )
 
 
-def test_ranking_key_has_no_source_names():
-    """WU-802: the ranking key must be source-type agnostic."""
-    import inspect
+def test_latest_revision_keeps_as_of_and_reads_exact_original(tmp_path):
+    catalog, paths, _, _ = _fixture(tmp_path)
+    original = paths[0]
+    revision = _write(
+        original.parent, name="amendment.pdf", body=OTHER, sha=OTHER_SHA,
+        provider_id="doc-2", filing_date="2026-04-15",
+    )
+    try:
+        catalog.scan()
+        reader = SourceVersionReader(catalog)
+        request = _request("2026-08-10")
+        latest = reader.query_local(request)
+        assert latest.status == "found"
+        (ref,) = latest.matches
+        assert reader.open_version(ref, purpose="filing_reuse").data == OTHER
 
-    source = inspect.getsource(_pick_latest)
-    for banned in ("company_raw", "dayu_portfolio", "dropbox_stock", "kind"):
-        assert banned not in source, f"ranking key mentions {banned}"
+        prior = reader.query_local(replace(request, as_of_date="2026-02-28"))
+        assert prior.status == "found"
+        (ref,) = prior.matches
+        assert reader.open_version(ref, purpose="filing_reuse").data == BODY
+
+        assert reader.query_local(replace(request, as_of_date="2026-01-01")).status == "not_found"
+        assert original.read_bytes() == BODY and revision.read_bytes() == OTHER
+    finally:
+        catalog.close()
 
 
-def test_pick_latest_deterministic_tiebreak():
-    handles = [
-        _H("2026-04-15", "acc-1", "s1"),
-        _H("2026-04-15", "acc-2", "s2"),
-    ]
-    chosen = _pick_latest(handles, "2026-12-31")
-    assert chosen.provider_document_id == "acc-2"  # lexicographic tiebreak
-
-
-def test_pick_latest_respects_as_of():
-    handles = [
-        _H("2026-04-15", "acc-1", "s1"),
-        _H("2027-01-01", "acc-2", "s2"),
-    ]
-    chosen = _pick_latest(handles, "2026-12-31")
-    assert chosen.provider_document_id == "acc-1"  # future handle excluded
-
-
-def test_pick_latest_none_when_all_future():
-    handles = [_H("2027-01-01", "acc-2", "s2")]
-    assert _pick_latest(handles, "2026-12-31") is None
+def test_legacy_dated_ties_stable_when_scan_order_changes(tmp_path):
+    catalog, paths, _, _ = _fixture(tmp_path)
+    original = paths[0]
+    _write(original.parent, name="000-first-name.pdf", body=OTHER,
+           sha=OTHER_SHA, provider_id="doc-2")
+    try:
+        catalog.scan()
+        reader = SourceVersionReader(catalog)
+        request = _request("2026-08-10")
+        first = reader.query_local(request)
+        assert first.status == "found"
+        assert first.matches[0].content_sha256 == OTHER_SHA
+        catalog.scan()
+        assert reader.query_local(request).matches == first.matches
+    finally:
+        catalog.close()

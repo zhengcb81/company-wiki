@@ -10,21 +10,27 @@ from support.narrative_transport_fixture import published_fixture
 from contract.test_source_metadata_responsibility import dispute
 
 
-def test_narrative_read_does_not_self_check_policy_or_repeat_metadata(tmp_path, monkeypatch):
+def test_narrative_read_does_not_self_check_policy_or_repeat_metadata(tmp_path):
     with published_fixture(tmp_path) as fixture:
-        transport = NarrativeTransportReader(fixture.artifacts, fixture.reader)
+        reads = []
+
+        class RecordedSource:
+            query_ref = staticmethod(fixture.reader.query_ref)
+            availability_evidence = staticmethod(fixture.reader.availability_evidence)
+
+            def open_described_version(self, ref, *, purpose):
+                reads.append((ref, purpose))
+                return fixture.reader.open_described_version(ref, purpose=purpose)
+
+        transport = NarrativeTransportReader(fixture.artifacts, RecordedSource())
         reference = transport.reference(fixture.source_ref)
-        counters = {'open': 0, 'describe': 0, 'policy': 0}
-        for method, name in [('open_version', 'open'), ('describe_version', 'describe'),
-                             ('read_policy_sha256', 'policy')]:
-            original = getattr(fixture.reader, method)
-            def counted(*args, _original=original, _name=name, **kwargs):
-                counters[_name] += 1
-                return _original(*args, **kwargs)
-            monkeypatch.setattr(fixture.reader, method, counted)
+        assert reads == []
+
         result = transport.read(NarrativeReadRequest.from_dict(fixture.read_request(reference)))
         assert result.data == fixture.payload
-        assert counters == {'open': 0, 'describe': 0, 'policy': 0}  # one combined read API owns all three
+        (ref, purpose), = reads
+        assert ref.to_dict() == fixture.source_ref.to_dict()
+        assert purpose == "source_export"
         assert result.receipt['replay_status'] == 'verified'
 
 

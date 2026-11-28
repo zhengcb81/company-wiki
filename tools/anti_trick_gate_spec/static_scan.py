@@ -38,6 +38,23 @@ class Scan:
     constant_shapes: dict[str, str]
 
 
+def _shape_digest(node: ast.AST) -> str:
+    """Stable named-field serialization, independent of Python's debug display."""
+    def serialize(value: object) -> str:
+        if isinstance(value, ast.AST):
+            fields = []
+            for name, item in ast.iter_fields(value):
+                if item == [] or (item is None and not (isinstance(value, ast.Constant) and name == "value")):
+                    continue
+                fields.append(f"{name}={serialize(item)}")
+            return f"{type(value).__name__}({', '.join(fields)})"
+        if isinstance(value, list):
+            return "[" + ", ".join(serialize(item) for item in value) + "]"
+        return repr(value)
+
+    return hashlib.sha256(serialize(node).encode("utf-8")).hexdigest()
+
+
 def _private(name: str) -> bool:
     part = name.rsplit(".", 1)[-1]
     return part.startswith("_") and not part.startswith("__")
@@ -181,12 +198,12 @@ class _ModuleScan:
                 elif call == "contextvars.ContextVar" and f"{self.path}:{name}" not in self.context:
                     self.show("AT-05", f"shared-context-variable:{name}", node)
             if isinstance(scope, ast.Module) and name and name.isupper() and isinstance(value, (ast.List, ast.Set, ast.Tuple, ast.Dict, ast.Call)):
-                self.constant_shapes[f"{self.path}:{name}"] = hashlib.sha256(ast.dump(value).encode()).hexdigest()
+                self.constant_shapes[f"{self.path}:{name}"] = _shape_digest(value)
             if isinstance(scope, (ast.Module, ast.ClassDef)) and (name in _WAIVERS or _WAIVER_NAME.search(name)):
                 self.show("AT-10", f"allowance:{name}", node)
                 if value is not None:
                     for entry in _entries(value):
-                        tag = hashlib.sha256(ast.dump(entry).encode()).hexdigest()
+                        tag = _shape_digest(entry)
                         self.show("AT-10", f"allowance-member:{name}:{tag}", node)
             if isinstance(scope, ast.Module) and name in _TEST_LISTS:
                 self.show("AT-12", f"fixed-test-list:{name}", node)

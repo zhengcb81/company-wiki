@@ -233,8 +233,11 @@ def invoke(root, config, request, llm, run_id, *, database=None, launcher=None, 
             "PYTHONPATH": os.pathsep.join(map(str, module_paths)),
             "PYTHONDONTWRITEBYTECODE": "1",
             "PYTHON_DOTENV_DISABLED": "1",
+            "RESEARCH_FEEDBACK_OUT": str(root / "feedback" / "intake.jsonl"),
         },
+        stdin=subprocess.DEVNULL,
         capture_output=True,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
         text=True,
         encoding="utf-8",
         timeout=60,
@@ -489,7 +492,8 @@ def test_discovered_damaged_object_rebuilds_once_with_current_source_and_budget(
             )
             process, rebuilt = invoke(root, config, path, llm, "damaged-b")
             assert process.returncode == 0 and rebuilt["status"] == "completed", rebuilt
-            assert "CACHE_CANDIDATE_INVALID" in process.stderr
+            diagnostic_log = root / "feedback" / "logs" / "runtime_errors.log"
+            assert "CACHE_CANDIDATE_INVALID" in diagnostic_log.read_text(encoding="utf-8")
             assert len(loopback_model_server.requests) == 2 and rebuilt["budget"]["tokens"] == 92
             assert rebuilt["documents"][0]["artifact_ref"]["source_sha256"] == pin["source_sha256"]
             assert obj.read_bytes() == original

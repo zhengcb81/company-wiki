@@ -192,6 +192,7 @@ def test_declared_dayu_group_repairs_through_meta_json(tmp_path):
     def persist_meta(filing_date: str | None) -> None:
         payload = {
             "form_type": "annual report",
+            "fiscal_year": 2025,
             "market": "HK",
             "security_id": "00700",
             "ticker": "00700",

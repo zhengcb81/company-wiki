@@ -1,6 +1,7 @@
 """A completed public CLI run can relocate without rework or ledger changes."""
 
 from contextlib import closing
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -101,8 +102,10 @@ def test_completed_cli_has_source_scoped_binding_and_relocates_without_rework(
             state.config_path.write_text(canonical_json(config), encoding="utf-8")
             relocated_originals = {root / "relocated-companies" / p.relative_to(root / "companies"): b
                                    for p, b in originals.items()}
-            path, body = next(iter(relocated_originals.items()))
-            path.write_bytes(b"X" + body[1:])
+            source_sha = next(iter(state.indexed.values()))[0].content_sha256
+            (path, body), = [(path, content) for path, content in relocated_originals.items()
+                            if hashlib.sha256(content).hexdigest() == source_sha]
+            path.write_bytes(bytes([body[0] ^ 1]) + body[1:])
             refused("no_verified_location")
             path.write_bytes(body)
             # Invalid source membership is not repaired by a new policy map.

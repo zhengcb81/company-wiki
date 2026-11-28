@@ -1,10 +1,13 @@
 """Contract and counterexample tests for the standalone S6 reference gate."""
 from __future__ import annotations
 
+import ast
+import hashlib
 import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from tools.anti_trick_gate_spec.evidence import (
     baseline, changed_inventory, compare, coverage, renamed_waivers, review_errors,
@@ -233,6 +236,30 @@ class StaticChecks(unittest.TestCase):
         issues = self.run_scan(entry=("src/pkg/worker.py",)).findings
         self.assertEqual(len(issues), 8)
         self.assertNotIn("sensitive", repr(issues))
+
+    def test_allowance_identity_is_independent_of_ast_dump_display_defaults(self):
+        self.put("src/pkg/worker.py", '_COMPATIBILITY_PORTS = [Path("port"), None]\n')
+        before = self.run_scan()
+        original_dump = ast.dump
+
+        def legacy_dump(node):
+            try:
+                return original_dump(node, show_empty=True)
+            except TypeError:
+                return original_dump(node)
+
+        with patch.object(ast, "dump", legacy_dump):
+            after = self.run_scan()
+        self.assertEqual(after.findings, before.findings)
+        self.assertEqual(after.constant_shapes, before.constant_shapes)
+        known_shape = "Call(func=Name(id='Path', ctx=Load()), args=[Constant(value='port')])"
+        digest = hashlib.sha256(known_shape.encode()).hexdigest()
+        self.assertIn("allowance-member:_COMPATIBILITY_PORTS:" + digest,
+                      {item.signal for item in after.findings})
+
+        self.put("src/pkg/worker.py", '_COMPATIBILITY_PORTS = [Path("another-port"), None]\n')
+        changed = self.run_scan()
+        self.assertTrue(compare(baseline(changed.findings), baseline(after.findings)))
 
     def test_source_cannot_be_empty(self):
         with self.assertRaises(ValueError):

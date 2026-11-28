@@ -910,7 +910,7 @@ def test_image_only_pdf_is_parser_incomplete_not_successful_skip(
     loopback_model_server, monkeypatch
 ):
     import pymupdf as fitz
-    from company_wiki.source_catalog.official_source_flow import (
+    from company_wiki.automation.source_request import (
         prepare_official_narrative_request,
     )
 

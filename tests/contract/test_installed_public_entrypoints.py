@@ -183,7 +183,13 @@ def test_installed_import_resolves_inside_the_venv_without_the_checkout(installe
     installed_module = Path(lines[0]).resolve()
     assert installed_module.is_relative_to(installed["venv"].resolve()), installed_module
     assert "site-packages" in installed_module.parts
-    assert all(not Path(entry).resolve().is_relative_to(ROOT) for entry in lines[1:] if entry)
+    # The Windows short-path fixture may put our disposable wheel venv and
+    # blank cwd below this checkout. Neither directory can serve checkout code.
+    scratch = installed["venv"].parent.resolve()
+    import_paths = tuple(Path(entry).resolve() for entry in lines[1:] if entry)
+    leaked = tuple(path for path in import_paths
+                   if path.is_relative_to(ROOT) and not path.is_relative_to(scratch))
+    assert not leaked, leaked
 
 
 def test_installed_package_data_loads_through_importlib_resources(installed):

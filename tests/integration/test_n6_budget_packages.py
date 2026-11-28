@@ -105,7 +105,8 @@ def _finalize(sample: dict, *, reverse: bool = False):
         for rec in sample["units"]
         if rec["group_id"] is not None
     }
-    route = route_document(sample["title"], existing_kind=sample["existing_kind"])
+    route = route_document(sample["title"], existing_kind=sample["existing_kind"],
+                           max_selected=sample["selection_limit"])
     package = finalize_selection(
         _structure(sample),
         route,
