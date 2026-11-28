@@ -979,3 +979,74 @@ def test_missing_owner_report_keeps_native_claim_and_waiting_work_in_place(host_
         (root / "release").touch()
     wait_for(lambda: host.handle({**waiting, "method": "lookup"})["state"] == "done")
     assert (root / "starts").read_text().splitlines() == ["start", "start"]
+
+
+@pytest.mark.parametrize("different", (None, "attempt_id", "step_id", "evidence_ref", "actual"))
+def test_historical_native_start_matches_only_its_original_opaque_result(host_config, different):
+    from tools.feedback_loop.observations import read_batch
+
+    owner = "filing-fetch"
+    caller = "sk-S6SyntheticF4OldRun01234567890"
+    attempt = "tvly-S6SyntheticF4OldAttempt123456789"
+    references = {value: "ref-" + sha256(value.encode()).hexdigest() for value in (caller, attempt)}
+    old_start = {
+        "schema_version": "feedback-observation/1",
+        "owner": owner, "origin_owner": owner,
+        "run_id": caller, "attempt_id": attempt, "step_id": "stable-job/1",
+        "evidence_ref": "ff-job/1/stable-job", "check_id": "action-started",
+        "terminal_check_id": "job-outcome", "expected": "started", "actual": "started",
+        "disposition": "expected",
+    }
+    terminal = dict(old_start, run_id=references[caller], attempt_id=references[attempt],
+                    check_id="job-outcome", expected="terminal", actual="succeeded")
+    del terminal["terminal_check_id"]
+    if different is not None:
+        terminal[different] = "unknown" if different == "actual" else "unrelated"
+    old_path = host_config.parent / "legacy-start.jsonl"
+    end_path = host_config.parent / "safe-terminal.jsonl"
+    original = (json.dumps(old_start) + "\n").encode()
+    old_path.write_bytes(original)
+    end_path.write_bytes((json.dumps(terminal) + "\n").encode())
+
+    def register(row):
+        occurrence = digest([row[field] for field in IDENTITY])
+        payload = {"occurrence_id": occurrence, "observation": row}
+        key = digest(["observe", owner, occurrence])
+        request = action("observe", owner, payload)
+        request.update(action_id=key, request_digest=digest([owner, "observe", key, payload]))
+        return request, occurrence
+
+    start_request, old_key = register(old_start)
+    end_request, end_key = register(terminal)
+    assert invoke(host_config, "rpc", start_request)["result"] == {"recorded": True}
+    assert invoke(host_config, "rpc", end_request)["result"] == {"recorded": True}
+    same_start = invoke(host_config, "rpc", {**start_request, "method": "lookup"})
+    assert same_start["result"].get("terminal_occurrence_id") == (end_key if different is None else None)
+    assert read_batch([old_path, end_path]).unfinished_starts() == (set() if different is None else {old_key})
+    assert old_path.read_bytes() == original
+    assert not (host_config.parent / "ff-calls").exists()
+
+
+def test_feedback_plan_does_not_echo_historical_credential_shaped_ids(tmp_path):
+    from tools.feedback_loop.observations import normalize_observation
+
+    owner = "filing-fetch"
+    caller = "sk-S6SyntheticRetainedEvent1234567890"
+    raw = {"schema_version": "feedback-observation/1", "owner": owner,
+           "run_id": caller, "attempt_id": "prior-attempt", "step_id": "original-step",
+           "check_id": "job-outcome", "expected": "terminal", "actual": "succeeded"}
+    path = tmp_path / "legacy.jsonl"
+    original = (json.dumps(raw) + "\n").encode()
+    path.write_bytes(original)
+    expected = normalize_observation(raw)
+    key = digest([expected[field] for field in IDENTITY])
+    plan = subprocess.run(
+        [sys.executable, "-B", "-m", "tools.feedback_loop", "plan", str(path)], cwd=ROOT,
+        input=b"", capture_output=True, timeout=20, check=True,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+    )
+    observed, = json.loads(plan.stdout)["observations"]
+    assert observed["occurrence_id"] == key
+    assert observed["run_id"] == "ref-" + sha256(caller.encode()).hexdigest()
+    assert caller.encode() not in plan.stdout + plan.stderr
+    assert path.read_bytes() == original

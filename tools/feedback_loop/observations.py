@@ -9,6 +9,8 @@ from pathlib import Path
 import re
 from typing import Iterable
 
+from company_wiki.runtime_feedback_values import logical_observation_ref
+
 
 IDENTITY = ("owner", "origin_owner", "run_id", "attempt_id", "step_id", "check_id")
 REQUIRED = ("owner", "run_id", "attempt_id", "step_id", "check_id", "expected", "actual")
@@ -24,8 +26,12 @@ _LEGACY_TERMINALS = {
 }
 
 
+def _matching_coordinates(row: dict[str, str]) -> tuple[str, str]:
+    return logical_observation_ref(row["run_id"]), logical_observation_ref(row["attempt_id"])
+
+
 def _step_identity(row: dict[str, str]) -> tuple[str, ...]:
-    return tuple(row[field] for field in IDENTITY[:-1])
+    return row["owner"], row["origin_owner"], *_matching_coordinates(row), row["step_id"]
 
 
 def _evidence_scope(row: dict[str, str]) -> tuple[str, ...]:
@@ -61,7 +67,10 @@ def terminal_occurrence_ids(row: dict[str, str]) -> tuple[str, ...]:
     identity = [row.get(field) for field in IDENTITY[:-1]]
     if not all(isinstance(value, str) and value.strip() for value in identity):
         return ()
-    return tuple(digest([*identity, check]) for check in sorted(_terminal_checks(row)))
+    # Historic ledger IDs still use the original wire. A new result may use
+    # the safe projection of the same committed caller coordinates.
+    scopes = dict.fromkeys((tuple(identity), _step_identity(row)))
+    return tuple(digest([*scope, check]) for scope in scopes for check in sorted(_terminal_checks(row)))
 
 
 def unique_fields(pairs: list[tuple]) -> dict:
@@ -107,8 +116,11 @@ class Batch:
     diagnostics: list[dict]
 
     def plan(self) -> dict:
-        return {"observations": [{"occurrence_id": key, **row} for key, row in self.observations.items()],
-                "diagnostics": self.diagnostics}
+        observations = []
+        for key, row in self.observations.items():
+            run_id, attempt_id = _matching_coordinates(row)
+            observations.append({**row, "occurrence_id": key, "run_id": run_id, "attempt_id": attempt_id})
+        return {"observations": observations, "diagnostics": self.diagnostics}
 
     def unfinished_starts(self, *, registered: set[str] | None = None) -> set[str]:
         matching_checks: dict[tuple[str, ...], set[str]] = {}
