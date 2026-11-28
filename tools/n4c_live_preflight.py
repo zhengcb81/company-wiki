@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import argparse
-import ast
 from dataclasses import asdict
 import hashlib
+from io import BytesIO
 import json
 import os
 from pathlib import Path
@@ -13,6 +13,7 @@ import runpy
 import subprocess
 import sys
 import tempfile
+from zipfile import ZipFile
 
 PROJECT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(PROJECT / name) for name in ("src", "tests", "scripts")]
@@ -65,33 +66,23 @@ def campaign_budget_facts(budget: dict, token_cap: int, cost_cap: int) -> dict:
 
 
 def consumer_bootstrap(rf: Path, head: str, root: Path) -> list[str]:
-    """Exercise exact committed RF CLI imports, without reading or writing RF state."""
-    pending = ["narrative_source_preparation"]
-    exported: set[str] = set()
-    while pending:
-        module = pending.pop()
-        if module in exported:
-            continue
-        if not (module == "narrative_source_preparation" or module.startswith("company_wiki_narrative_")):
-            raise ValueError("unexpected consumer module")
-        if len(exported) >= 24:
-            raise ValueError("consumer bootstrap exceeded bounded closure")
-        name = module + ".py"
-        result = subprocess.run(["git", "-C", str(rf), "show", f"{head}:scripts/{name}"],
-                                capture_output=True, check=True, timeout=20)
-        tree = ast.parse(result.stdout)
-        (root / name).write_bytes(result.stdout)
-        exported.add(module)
-        for node in ast.walk(tree):
-            imports = ([node.module] if isinstance(node, ast.ImportFrom) and node.module else
-                       [alias.name for alias in node.names] if isinstance(node, ast.Import) else [])
-            pending.extend(value for value in imports if value.startswith("company_wiki_narrative_"))
+    """Run the public RF CLI with its exact committed scripts in scratch."""
+    windowless = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+    result = subprocess.run(
+        ["git", "-C", str(rf), "archive", "--format=zip", head, "scripts"],
+        capture_output=True, check=True, timeout=20, creationflags=windowless,
+    )
+    with ZipFile(BytesIO(result.stdout)) as snapshot:
+        snapshot.extractall(root)
+        exported = [name for name in snapshot.namelist() if name.endswith(".py")]
     env = {**os.environ, "PYTHONPATH": str(PROJECT / "src"), "PYTHONUTF8": "1",
            "PYTHONDONTWRITEBYTECODE": "1", "PYTHON_DOTENV_DISABLED": "1"}
-    result = subprocess.run([sys.executable, "-B", str(root / "narrative_source_preparation.py"), "--help"],
-                            cwd=root, env=env, capture_output=True, timeout=20)
+    result = subprocess.run(
+        [sys.executable, "-B", str(root / "scripts/narrative_source_preparation.py"), "--help"],
+        cwd=root, env=env, capture_output=True, timeout=20, creationflags=windowless,
+    )
     if result.returncode != 0:
-        raise ValueError("RF committed CLI bootstrap failed")
+        raise ValueError(f"RF committed CLI bootstrap failed (exit {result.returncode})")
     if b"--company-wiki-catalog-config" not in result.stdout:
         raise ValueError("RF committed CLI missing narrative transport option")
     return sorted(exported)

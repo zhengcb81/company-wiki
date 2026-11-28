@@ -14,40 +14,44 @@ from integration import test_narrative_batch_cli_e2e as cli
 from tools.n4c_live_preflight import consumer_bootstrap
 
 
-pytestmark = [pytest.mark.requires_owner]
-
-
 protected_inputs = cli.r6_protected_inputs
 REPO = Path(__file__).resolve().parents[2]
 
 
-@pytest.mark.parametrize('consumer', ['rf', 'stockwiki'])
+@pytest.mark.parametrize('consumer', [
+    pytest.param('rf', marks=pytest.mark.public_owner),
+    pytest.param('stockwiki', marks=pytest.mark.owner_local_checkout),
+])
 @pytest.mark.parametrize('case', ['early_download', 'late_download', 'future_publication'])
 def test_current_consumer_uses_publication_date_not_local_download_date(
     tmp_path, protected_inputs, consumer, case,
 ):
     rf = os.environ.get('CWP_RF_PROJECT_ROOT')
     sw = os.environ.get('CWP_STOCKWIKI_PROJECT_ROOT')
-    if not rf or not sw:
-        pytest.skip('explicit read-only RF and StockWiki roots required')
-    rf_head = subprocess.check_output(
-        ['git', '-C', rf, 'rev-parse', 'HEAD'], text=True, timeout=10,
-    ).strip()
-    protected_inputs([Path(rf)/'assurance/runs'/name for name in
-                      ('daily_alert.jsonl', 'weekly_alert.jsonl', 'weekly_manifest.json')])
+    if (consumer == 'rf' and not rf) or (consumer == 'stockwiki' and not sw):
+        pytest.skip(f'explicit read-only {consumer} root required')
+    rf_head = None
+    if rf:
+        rf_head = subprocess.check_output(
+            ['git', '-C', rf, 'rev-parse', 'HEAD'], text=True, timeout=10,
+            creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0),
+        ).strip()
+        protected_inputs([Path(rf)/'assurance/runs'/name for name in
+                          ('daily_alert.jsonl', 'weekly_alert.jsonl', 'weekly_manifest.json')])
     with published_fixture(tmp_path, kind='txt', source_spec={'sidecar_overrides': {
         'fiscal_period': 'Q2',
         'filing_date': '2026-09-02' if case == 'future_publication' else '2026-08-01',
         'retrieved_at': '2026-09-02T00:00:00Z' if case == 'late_download' else '2026-08-02T00:00:00Z',
     }}) as fixture:
-        env = {**os.environ, 'PYTHONPATH':os.pathsep.join([str(REPO/'src'), sw]),
+        env = {**os.environ, 'PYTHONPATH':os.pathsep.join(filter(None, (str(REPO/'src'), sw))),
                'PYTHONUTF8':'1', 'PYTHONDONTWRITEBYTECODE':'1', 'PYTHON_DOTENV_DISABLED':'1'}
         command = [sys.executable, '-B', '-m', 'company_wiki.automation.narrative_transport_cli',
                    '--config', str(fixture.config_path)]
 
         def invoke(argv, request):
             return subprocess.run(argv, input=json.dumps(request).encode(), capture_output=True,
-                                  env=env, cwd=fixture.root, timeout=60)
+                                  env=env, cwd=fixture.root, timeout=60,
+                                  creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
 
         discovery = invoke(command+['--operation','reference'], {
             'schema_version':'narrative-reference-request/1', 'source_ref':fixture.source_ref.to_dict()})
@@ -59,8 +63,9 @@ def test_current_consumer_uses_publication_date_not_local_download_date(
         if consumer == 'rf':
             exported = fixture.root/'rf'
             exported.mkdir()
+            assert rf and rf_head
             consumer_bootstrap(Path(rf), rf_head, exported)
-            argv = [sys.executable, '-B', str(exported/'narrative_source_preparation.py'),
+            argv = [sys.executable, '-B', str(exported/'scripts/narrative_source_preparation.py'),
                     '--company-wiki-catalog-config', str(fixture.config_path)]
         else:
             config = fixture.root/'reader.json'

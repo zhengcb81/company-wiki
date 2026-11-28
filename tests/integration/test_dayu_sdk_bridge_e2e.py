@@ -20,7 +20,7 @@ from company_wiki.source_catalog.resolver import SourceRequest
 
 ROOT = Path(__file__).resolve().parents[2]
 pytestmark = [
-    pytest.mark.requires_owner,
+    pytest.mark.owner_local_checkout,
     pytest.mark.integration,
 ]
 

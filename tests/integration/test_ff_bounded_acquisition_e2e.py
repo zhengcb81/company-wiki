@@ -17,7 +17,7 @@ from company_wiki.source_catalog.security_identity import SecurityMasterStore, S
 from support.acquisition_cli_fixture import RAW_BODY, fixture_root
 
 
-pytestmark = [pytest.mark.requires_owner]
+pytestmark = [pytest.mark.public_owner]
 
 
 @pytest.fixture
@@ -79,6 +79,7 @@ class FilingRoundTrip:
         return subprocess.run(
             command, input=stdin, capture_output=True, cwd=self.root,
             env=self.env, timeout=55, check=False,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
         )
 
     def fetch(self, request: dict[str, Any], *, download: bool = False) -> tuple[int, dict]:

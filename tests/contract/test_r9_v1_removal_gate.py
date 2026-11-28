@@ -23,7 +23,7 @@ sys.path.insert(0, str(SRC))
 # still accumulating).  It skips in daily suites and runs for real only
 # with R9_GATE=1 — the R9 execution protocol flips it RED->GREEN.
 pytestmark = [
-    pytest.mark.separate_audit,
+    pytest.mark.retirement_protocol,
     pytest.mark.skipif(
         os.environ.get("R9_GATE") != "1",
         reason="R9 wave not executed yet (observation windows accumulating); "

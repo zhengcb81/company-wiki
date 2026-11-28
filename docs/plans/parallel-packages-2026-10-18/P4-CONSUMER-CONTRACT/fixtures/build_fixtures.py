@@ -17,8 +17,6 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-CATALOG = HERE / "catalog"
-SOURCES = CATALOG / "sources"
 
 # --- synthetic originals -----------------------------------------------------
 
@@ -151,19 +149,21 @@ def span_entry(text: str, quote: str, unit_tokens: list[str]) -> dict:
     }
 
 
-def build() -> dict:
+def build(output_dir: Path = HERE) -> dict:
+    catalog = output_dir / "catalog"
+    sources = catalog / "sources"
     text_bytes = TEXT_BODY.encode("utf-8")
     text_sha = sha256_bytes(text_bytes)
     pdf_sha = sha256_bytes(PDF_BODY)
 
-    write_bytes(SOURCES / "annual-2025.txt", text_bytes)
+    write_bytes(sources / "annual-2025.txt", text_bytes)
     txt_sidecar = dict(TEXT_SIDECAR, content_sha256=text_sha)
-    write_json(SOURCES / "annual-2025.txt.source.json", txt_sidecar)
-    write_bytes(SOURCES / "disclosure.pdf", PDF_BODY)
+    write_json(sources / "annual-2025.txt.source.json", txt_sidecar)
+    write_bytes(sources / "disclosure.pdf", PDF_BODY)
     pdf_sidecar = dict(PDF_SIDECAR, content_sha256=pdf_sha)
-    write_json(SOURCES / "disclosure.pdf.source.json", pdf_sidecar)
+    write_json(sources / "disclosure.pdf.source.json", pdf_sidecar)
 
-    config_path = CATALOG / "catalog.yaml"
+    config_path = catalog / "catalog.yaml"
     write_json(config_path, CATALOG_CONFIG)
 
     expectations = {
@@ -199,7 +199,7 @@ def build() -> dict:
             },
         ],
     }
-    write_json(HERE / "expected.json", expectations)
+    write_json(output_dir / "expected.json", expectations)
     return expectations
 
 

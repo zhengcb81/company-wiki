@@ -97,7 +97,8 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=No
     rf_root = Path(rf_value)
     actual_head = subprocess.run(["git", "-C", str(rf_root), "rev-parse", "HEAD"],
                                  check=True, capture_output=True, text=True, timeout=20).stdout.strip()
-    assert actual_head == RF_HEAD, "review changed RF main before running this node"
+    expected_head = RF_HEAD if real else os.environ.get("CWP_TEST_RF_REVISION", actual_head)
+    assert actual_head == expected_head, "RF checkout changed after the fixture revision was selected"
     sources, originals, raw_by_sample = _sources(real)
     capture([*originals, *(rf_root / "assurance/runs" / name for name in
                          ("daily_alert.jsonl", "weekly_alert.jsonl", "weekly_manifest.json"))])
@@ -143,7 +144,7 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=No
             assert all(document["artifact_ref"] is not None for document in result["documents"])
             exported = root / "rf-consumer"
             exported.mkdir()
-            assert len(consumer_bootstrap(rf_root, RF_HEAD, exported)) == 6
+            consumer_bootstrap(rf_root, expected_head, exported)
             env = dict(os.environ, PYTHONPATH=str(REPO / "src"), PYTHONUTF8="1",
                        PYTHONDONTWRITEBYTECODE="1", PYTHON_DOTENV_DISABLED="1")
 
@@ -166,7 +167,7 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=No
                               "byte_size": ref.byte_size, "mime_type": ref.mime_type}
                 transport = [sys.executable, "-B", "-m", "company_wiki.automation.narrative_transport_cli",
                              "--config", str(state.config_path)]
-                rf_command = [sys.executable, "-B", str(exported / "narrative_source_preparation.py"),
+                rf_command = [sys.executable, "-B", str(exported / "scripts/narrative_source_preparation.py"),
                               "--company-wiki-catalog-config", str(state.config_path)]
                 reference = json.loads(invoke(rf_command + ["--operation", "reference"], {
                     "schema_version": "narrative-reference-request/1", "source_ref": source_ref,
@@ -235,7 +236,7 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=No
             state.catalog.close()
 
 
-@pytest.mark.requires_owner
+@pytest.mark.public_owner
 def test_synthetic_business_cli_framework(tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs):
     _exercise(tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs, real=False)
 

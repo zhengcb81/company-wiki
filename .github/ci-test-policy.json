@@ -1,13 +1,35 @@
 {
   "schema": "s6-test-policy/1",
+  "deferred": {
+    "live": "Requires real external provider calls and credentials.",
+    "real_data": "Requires explicitly mounted or sealed real company source bytes.",
+    "requires_corpus": "Requires the owner's cross-repository golden document corpus.",
+    "owner_local_checkout": "Requires an authorized private, unexported, or separately deployed owner checkout/runtime.",
+    "deployed_pdf_runtime": "Requires a configured deployed OCR/PDF runtime and its model artifacts.",
+    "coverage_artifact": "Requires the separate FC-1204 full branch-coverage evidence run.",
+    "retirement_protocol": "Requires the explicit R9 publication and retirement observation window.",
+    "windows_native": "Exercises operating-system-specific Windows behavior.",
+    "posix_native": "Exercises operating-system-specific POSIX behavior.",
+    "requires_symlink": "Requires runner permission to create symbolic links."
+  },
+  "suites": {
+    "public": "public_owner",
+    "p4": "p4_fixture",
+    "benchmark": "profile_benchmark",
+    "ocr": "safetensors_backend"
+  },
   "platforms": {
     "linux": {
-      "roots": ["tests"],
-      "markexpr": "not (live or real_data or requires_corpus or requires_owner or optional_backend or separate_audit or windows_native)"
+      "roots": [
+        "tests"
+      ],
+      "markexpr": "not (live or real_data or requires_corpus or owner_local_checkout or deployed_pdf_runtime or coverage_artifact or retirement_protocol or windows_native)"
     },
     "windows": {
-      "roots": ["tests"],
-      "markexpr": "not (live or real_data or requires_corpus or requires_owner or optional_backend or separate_audit or posix_native or requires_symlink)"
+      "roots": [
+        "tests"
+      ],
+      "markexpr": "not (live or real_data or requires_corpus or owner_local_checkout or deployed_pdf_runtime or coverage_artifact or retirement_protocol or posix_native or requires_symlink)"
     }
   }
 }

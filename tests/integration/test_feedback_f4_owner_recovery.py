@@ -14,7 +14,7 @@ import pytest
 from . import test_m3_acquisition_usage_cwp as metered_provider
 
 
-pytestmark = [pytest.mark.requires_owner]
+pytestmark = [pytest.mark.public_owner]
 
 
 ROOT = Path(__file__).resolve().parents[2]

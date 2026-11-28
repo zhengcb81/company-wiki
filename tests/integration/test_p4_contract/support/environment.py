@@ -34,6 +34,11 @@ def catalog_config_path() -> Path | None:
     return Path(raw) if raw is not None else None
 
 
+def receipt_output_path() -> Path | None:
+    raw = _clean(C.ENV_RECEIPT)
+    return Path(raw) if raw is not None else None
+
+
 def consumer_commands_path() -> Path | None:
     raw = _clean(C.ENV_CONSUMER_COMMANDS)
     return Path(raw) if raw is not None else None

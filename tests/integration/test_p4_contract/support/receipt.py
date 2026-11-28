@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from . import constants as C
+from . import environment as E
 from .jsonio import JsonRejected, load_strict_file, sha256_file
 
 
@@ -72,8 +73,8 @@ def top_level_status(counts: dict[str, int], *, blocked_reason: str | None) -> s
 
 
 def resolve_receipt_path() -> Path:
-    """The card's fixed receipt path (card section 5.4); no override exists."""
-    return C.RECEIPT_PATH
+    """Use explicit runner scratch when collecting fresh session evidence."""
+    return E.receipt_output_path() or C.RECEIPT_PATH
 
 
 def input_digests(catalog_path: Path | None, commands_path: Path | None) -> dict[str, Any]:

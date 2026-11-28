@@ -154,7 +154,7 @@ def _exercise_real_sources_and_committed_consumers(
                                                                "--query", span["raw_text"][:35]], request)
                     assert searched["items"]
                     assert search_receipt["replay_status"] == "verified"
-                rf_view, _ = invoke([sys.executable, "-B", str(rf_export / "narrative_source_preparation.py"),
+                rf_view, _ = invoke([sys.executable, "-B", str(rf_export / "scripts/narrative_source_preparation.py"),
                                     "--company-wiki-catalog-config", str(config)], request)
                 request_file = root / "read.json"
                 request_file.write_text(json.dumps(request), encoding="utf-8")
@@ -173,7 +173,7 @@ def _exercise_real_sources_and_committed_consumers(
                         env=env, cwd=root, timeout=45)
                     assert refused.returncode == 2 and refused.stdout == b""
                     assert json.loads(refused.stderr)["reason"] == "source_publication_unknown"
-                    refused_rf = subprocess.run([sys.executable, "-B", str(rf_export / "narrative_source_preparation.py"),
+                    refused_rf = subprocess.run([sys.executable, "-B", str(rf_export / "scripts/narrative_source_preparation.py"),
                         "--company-wiki-catalog-config", str(config)], input=json.dumps(historical).encode(),
                         capture_output=True, env=env, cwd=root, timeout=45)
                     assert refused_rf.returncode == 2 and refused_rf.stdout == b""

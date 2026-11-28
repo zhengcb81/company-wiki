@@ -213,16 +213,16 @@ def test_real_ci_runs_the_owner_inventory_on_both_operating_systems():
         ignores = workflow["on"][event]["paths-ignore"]
         assert "docs/plans/**" in ignores and ".planning/**" in ignores
         assert "src/**" not in ignores and "tests/**" not in ignores
-    job = workflow["jobs"]["test"]
-    assert set(job["strategy"]["matrix"]["os"]) == {"ubuntu-latest", "windows-latest"}
-    commands = [step.get("run", "") for step in job["steps"]]
+    jobs = workflow["jobs"]
+    for job in "inventory", "test", "fixtures":
+        assert set(jobs[job]["strategy"]["matrix"]["os"]) == {"ubuntu-latest", "windows-latest"}
+    commands = [step.get("run", "") for job in jobs.values() for step in job["steps"]]
     assert sum("tools.run_ci_evidence --collect" in command for command in commands) == 1
-    assert sum("tools.run_ci_evidence --shard" in command for command in commands) == 1
-    for selected_job in (job, workflow["jobs"]["coverage"]):
-        revision = selected_job["env"]["CWP_CI_REVISION"]
-        assert "github.event.pull_request.head.sha || github.sha" in revision
-        assert selected_job["steps"][0]["with"]["ref"] == "${{ env.CWP_CI_REVISION }}"
-    coverage_steps = workflow["jobs"]["coverage"]["steps"]
+    assert sum("--inventory" in command for command in commands) == 2
+    assert "github.event.pull_request.head.sha || github.sha" in workflow["env"]["CWP_CI_REVISION"]
+    assert all(job["steps"][0]["with"]["ref"] == "${{ env.CWP_CI_REVISION }}" for job in jobs.values())
+    assert jobs["coverage"]["needs"] == ["test", "fixtures"]
+    coverage_steps = jobs["coverage"]["steps"]
     assert any("coverage" in step.get("run", "") and "--platform linux --platform windows"
                in step["run"] for step in coverage_steps)
     assert not any("pytest tests/unit" in command or "--fast-contracts-only" in command for command in commands)

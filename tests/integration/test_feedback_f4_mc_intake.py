@@ -15,7 +15,7 @@ from tools.feedback_loop.local_host import LocalHost
 from tools.feedback_loop.observations import read_batch
 
 
-pytestmark = [pytest.mark.requires_owner]
+pytestmark = [pytest.mark.public_owner]
 
 
 _TRANSCRIBE = """

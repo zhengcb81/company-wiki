@@ -401,7 +401,7 @@ def test_capture_clock_orders_versions_independent_of_ingestion(tmp_path, same_i
         assert report["source_ref"]["content_sha256"] == hashlib.sha256(updated).hexdigest()
 
 
-@pytest.mark.requires_owner
+@pytest.mark.public_owner
 @pytest.mark.skipif(
     not os.environ.get("MB_RF_ROOT") or not os.environ.get("MB_FF_ROOT"),
     reason="ROOT E07 uses explicitly selected RF and FF runtimes",

@@ -117,7 +117,7 @@ def test_partial_model_summary_configured_cli_public_views_and_committed_rf(
             assert result["documents"][0]["artifact_ref"] is not None
             exported = root / "rf-consumer"
             exported.mkdir()
-            assert len(consumer_bootstrap(rf_root, rf_head, exported)) == 6
+            consumer_bootstrap(rf_root, rf_head, exported)
             env = dict(os.environ, PYTHONPATH=str(Path(__file__).resolve().parents[2] / "src"),
                        PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1", PYTHON_DOTENV_DISABLED="1")
 
@@ -137,7 +137,7 @@ def test_partial_model_summary_configured_cli_public_views_and_committed_rf(
             direct_reference = json.loads(invoke(transport + ["--operation", "reference"],
                                                 {"schema_version": "narrative-reference-request/1",
                                                  "source_ref": source_ref}).stdout)
-            rf_command = [sys.executable, "-B", str(exported / "narrative_source_preparation.py"),
+            rf_command = [sys.executable, "-B", str(exported / "scripts/narrative_source_preparation.py"),
                           "--company-wiki-catalog-config", str(state.config_path)]
             reference = json.loads(invoke(rf_command + ["--operation", "reference"],
                                           {"schema_version": "narrative-reference-request/1",

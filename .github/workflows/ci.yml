@@ -27,85 +27,69 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  CWP_CI_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+  CWP_CI_RF_REVISION: 5a28c0c88df1a8e8fb9b167dbd884eebef7d7894
+  PYTHONUTF8: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+  PYTHON_DOTENV_DISABLED: "1"
+  COMPANY_WIKI_NETWORK: "blocked"
+  COMPANY_WIKI_REAL_LLM: "0"
+
 jobs:
-  test:
-    name: Offline checks (${{ matrix.os }}, shard ${{ matrix.shard }})
+  inventory:
+    name: Canonical pytest collection (${{ matrix.platform }})
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 30
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        shard: [0, 1, 2, 3, 4, 5, 6, 7]
         include:
           - os: ubuntu-latest
             platform: linux
           - os: windows-latest
             platform: windows
-    env:
-      CWP_CI_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
-      PYTHONUTF8: "1"
-      PYTHON_DOTENV_DISABLED: "1"
-      COMPANY_WIKI_NETWORK: "blocked"
-      COMPANY_WIKI_REAL_LLM: "0"
-
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ env.CWP_CI_REVISION }}
           persist-credentials: false
-
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: |
             requirements.txt
             requirements-test.txt
-
-      - name: Install dependencies
-        run: python -m pip install -r requirements.txt -r requirements-test.txt "ruff==0.15.18"
-
+      - name: Install test dependencies
+        run: python -m pip install -r requirements.txt -r requirements-test.txt
       - name: Ruff lint
-        if: matrix.shard == 0 && matrix.platform == 'linux'
-        run: ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/integration/test_transport_normalization_injection.py tests/support/narrative_model_fixture.py tools/check_dependencies.py tools/changed_unit_tests.py tools/pre_push_gate.py tools/summarize_junit_failures.py tools/source_case_receipt.py tools/source_case_checks.py tools/source_case_runner.py tools/run_ci_evidence.py tools/ci_shards.py tools/anti_trick_gate_spec
-
+        if: matrix.platform == 'linux'
+        run: |
+          python -m pip install "ruff==0.15.18"
+          ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/integration/test_transport_normalization_injection.py tests/integration/test_p4_contract tests/support/narrative_model_fixture.py tools/check_dependencies.py tools/changed_unit_tests.py tools/pre_push_gate.py tools/summarize_junit_failures.py tools/source_case_receipt.py tools/source_case_checks.py tools/source_case_runner.py tools/run_ci_evidence.py tools/ci_selection.py tools/anti_trick_gate_spec
       - name: Strict type check on src
-        if: matrix.shard == 0 && matrix.platform == 'linux'
+        if: matrix.platform == 'linux'
         run: python -m mypy src
-
       - name: Compileall and config doctor
-        if: matrix.shard == 0
         env:
           PYTHONPATH: src
         run: |
           python -m compileall -q src scripts tests
           python scripts/config_doctor.py
-
-      - name: Collect one canonical applicable inventory
-        if: matrix.shard == 0
+      - name: Record canonical applicable and deferred nodes
         run: >-
           python -m tools.run_ci_evidence --collect --revision "${{ env.CWP_CI_REVISION }}"
           --output "${{ runner.temp }}/cwp-evidence/${{ matrix.platform }}-inventory"
-
-      - name: Execute this offline pytest shard
-        run: >-
-          python -m tools.run_ci_evidence --shard "${{ matrix.shard }}/8"
-          --revision "${{ env.CWP_CI_REVISION }}"
-          --output "${{ runner.temp }}/cwp-evidence/${{ matrix.platform }}-${{ matrix.shard }}"
-
-      - name: Keep collected and executed node IDs and JUnit
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: cwp-test-evidence-${{ matrix.platform }}-${{ matrix.shard }}
+          name: cwp-test-evidence-${{ matrix.platform }}-inventory
           path: ${{ runner.temp }}/cwp-evidence/
           retention-days: 7
           if-no-files-found: error
-
       - name: CLI smoke test
-        if: matrix.shard == 0
         shell: bash
         run: |
           python scripts/snapshot_manifest.py --help
@@ -128,7 +112,7 @@ jobs:
           PY
 
       - name: Scan for hardcoded secrets
-        if: matrix.shard == 0 && matrix.platform == 'linux'
+        if: matrix.platform == 'linux'
         shell: bash
         run: |
           if grep -rn 'sk-[0-9a-f]\{32\}' src/ scripts/ tests/ tools/ --include="*.py" | grep -v "test\|example\|placeholder\|your_" >/dev/null; then
@@ -141,13 +125,180 @@ jobs:
           fi
           echo "No hardcoded secrets found"
 
+  test:
+    name: Offline checks (${{ matrix.platform }}, shard ${{ matrix.shard }})
+    needs: inventory
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            platform: linux
+          - os: windows-latest
+            platform: windows
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.CWP_CI_REVISION }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-test.txt
+      - name: Install test dependencies
+        run: python -m pip install -r requirements.txt -r requirements-test.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: cwp-test-evidence-${{ matrix.platform }}-inventory
+          path: inventory
+      - name: Execute canonical native partition
+        run: >-
+          python -m tools.run_ci_evidence --shard "${{ matrix.shard }}/8"
+          --inventory "inventory/${{ matrix.platform }}-inventory/distribution.json"
+          --revision "${{ env.CWP_CI_REVISION }}"
+          --output "${{ runner.temp }}/cwp-evidence/${{ matrix.platform }}-${{ matrix.shard }}"
+      - name: Keep executed node IDs and JUnit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cwp-test-evidence-${{ matrix.platform }}-${{ matrix.shard }}
+          path: ${{ runner.temp }}/cwp-evidence/
+          retention-days: 7
+          if-no-files-found: error
+
+  fixtures:
+    name: Offline fixtures (${{ matrix.platform }}, ${{ matrix.suite }})
+    needs: inventory
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [public, p4, benchmark, ocr]
+        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            platform: linux
+          - os: windows-latest
+            platform: windows
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.CWP_CI_REVISION }}
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.suite == 'public'
+        with:
+          repository: zhengcb81/filing-fetch
+          ref: 82c749464b494cf8dc9ec9e694c433adb02717e5
+          path: deps/ff
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.suite == 'public'
+        with:
+          repository: zhengcb81/revenue-forecast
+          ref: ${{ env.CWP_CI_RF_REVISION }}
+          path: deps/rf
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.suite == 'public'
+        with:
+          repository: zhengcb81/earnings-transcripts
+          ref: b0d8394ea0983d0c0c6ebc39d5be1da0151c3ffb
+          path: deps/et
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.suite == 'public'
+        with:
+          repository: zhengcb81/MeetingConverter
+          ref: c0ec9c168d8f2c038405ab0c6cbab0438ff5ad87
+          path: deps/mc
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.suite == 'public'
+        with:
+          repository: zhengcb81/invest-quick-scan
+          ref: b4aee7fb05671b162ef7f6d8e270ef3cb2692e52
+          path: deps/iqs
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.suite == 'public'
+        with:
+          repository: zhengcb81/StockQAbyLLM
+          ref: 86f633d8f36e1039323ae492e47f8a8067031d5a
+          path: deps/qa
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-test.txt
+      - name: Install test dependencies
+        run: python -m pip install -r requirements.txt -r requirements-test.txt
+      - name: Install public integration fixture dependencies
+        if: matrix.suite == 'public'
+        run: python -m pip install "pydantic>=2,<3" translatepy
+      - name: Install the pinned CPU tensor fixture backend
+        if: matrix.suite == 'ocr'
+        run: |
+          python -m pip install "torch==2.8.0" --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "safetensors==0.6.2"
+      - name: Install process tree measurements
+        if: matrix.suite == 'benchmark'
+        run: python -m pip install "psutil>=6,<8"
+      - uses: actions/download-artifact@v4
+        with:
+          name: cwp-test-evidence-${{ matrix.platform }}-inventory
+          path: inventory
+      - name: Execute selected offline fixtures
+        env:
+          CWP_TEST_FF_ROOT: ${{ github.workspace }}/deps/ff
+          CWP_TEST_FF_ENTRYPOINT: ${{ github.workspace }}/deps/ff/scripts/fetch_filing.py
+          FEEDBACK_FF_CODE_ROOT: ${{ github.workspace }}/deps/ff
+          FEEDBACK_RF_CODE_ROOT: ${{ github.workspace }}/deps/rf
+          FEEDBACK_MC_CODE_ROOT: ${{ github.workspace }}/deps/mc
+          FEEDBACK_ET_RUNTIME_ROOT: ${{ github.workspace }}/deps/et
+          FEEDBACK_IQS_RUNTIME_ROOT: ${{ github.workspace }}/deps/iqs
+          FEEDBACK_QA_RUNTIME_ROOT: ${{ github.workspace }}/deps/qa
+          CWP_RF_PROJECT_ROOT: ${{ github.workspace }}/deps/rf
+          CWP_TEST_RF_REVISION: ${{ env.CWP_CI_RF_REVISION }}
+          CWP_RF_E2E_REPO: ${{ github.workspace }}/deps/rf
+          RF_NARRATIVE_CODE_ROOT: ${{ github.workspace }}/deps/rf
+          FF_LOCAL_OBSERVATION_ROOT: ${{ github.workspace }}/deps/ff
+          RF_LOCAL_OBSERVATION_ROOT: ${{ github.workspace }}/deps/rf
+          MB_RF_ROOT: ${{ github.workspace }}/deps/rf
+          MB_FF_ROOT: ${{ github.workspace }}/deps/ff
+          CWP_P4_REQUIRE: "1"
+          CWP_P4_RECEIPT_FILE: ${{ runner.temp }}/cwp-evidence/${{ matrix.platform }}-${{ matrix.suite }}/p4-session.json
+          COMPANY_WIKI_RUN_E7_BENCHMARK: "1"
+        run: >-
+          python -m tools.run_ci_evidence --suite "${{ matrix.suite }}"
+          --inventory "inventory/${{ matrix.platform }}-inventory/distribution.json"
+          --revision "${{ env.CWP_CI_REVISION }}"
+          --output "${{ runner.temp }}/cwp-evidence/${{ matrix.platform }}-${{ matrix.suite }}"
+      - name: Keep executed node IDs and JUnit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cwp-test-evidence-${{ matrix.platform }}-${{ matrix.suite }}
+          path: ${{ runner.temp }}/cwp-evidence/
+          retention-days: 7
+          if-no-files-found: error
+
   coverage:
     name: Verify actual offline execution on both platforms
-    needs: test
+    needs: [test, fixtures]
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    env:
-      CWP_CI_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
         with:

@@ -176,8 +176,6 @@ def test_legal_empty_page_is_honest_zero_coverage():
     assert observation.pagination["total"] == 0
 
 
-@pytest.mark.real_data
-@pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_unseen_envelope_shape_is_unsupported_layout_not_guesswork():
     raw = json.dumps({"data": {"rows": [1, 2]}}).encode("utf-8")
     page = parse_json_structure(raw, limits=JsonStructureLimits())

@@ -29,6 +29,7 @@ def _git(root: Path, *args: str) -> str:
         stderr=subprocess.PIPE,
         check=False,
         timeout=60,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     if proc.returncode != 0:
         raise RuntimeError(

@@ -13,9 +13,6 @@ import sys
 import pytest
 
 
-pytestmark = [pytest.mark.requires_owner]
-
-
 ROOT = Path(__file__).resolve().parents[2]
 PYTHON = [sys.executable, "-B", "-X", "utf8"]
 
@@ -73,6 +70,7 @@ def real_feedback(tmp_path, checkout, owner, observations, command, *, repair=Tr
             for key, _, request, receipt in rows}
 
 
+@pytest.mark.public_owner
 def test_et_original_usage_enters_feedback_loop(tmp_path):
     checkout = checkout_for("ET")
     samples = checkout / "docs/plans/feedback-loop-2026-11-17/samples"
@@ -96,6 +94,7 @@ def test_et_original_usage_enters_feedback_loop(tmp_path):
     assert {path: path.read_bytes() for path in saved} == saved
 
 
+@pytest.mark.owner_local_checkout
 def test_sid_recovers_the_original_candidate_without_a_second_discovery(tmp_path):
     checkout = checkout_for("SID")
     observations = tmp_path / "observations"
@@ -118,6 +117,7 @@ def test_sid_recovers_the_original_candidate_without_a_second_discovery(tmp_path
     assert (observations / "calls").read_text().splitlines() == ["native-discovery"]
 
 
+@pytest.mark.owner_local_checkout
 def test_ir_replays_coverage_with_original_report_preserved(tmp_path):
     checkout = checkout_for("IR")
     case = checkout / "tests/test_feedback_owner.py"
@@ -136,6 +136,7 @@ def test_ir_replays_coverage_with_original_report_preserved(tmp_path):
     assert report.read_bytes() == original
 
 
+@pytest.mark.owner_local_checkout
 def test_stockwiki_restores_native_assessment_run_references(tmp_path):
     checkout = checkout_for("SW")
     case = checkout / "tests/test_feedback_owner.py"
@@ -154,6 +155,7 @@ def test_stockwiki_restores_native_assessment_run_references(tmp_path):
     assert sidecar.read_bytes() == original
 
 
+@pytest.mark.public_owner
 def test_iqs_publishes_partial_coverage_from_the_original_answers(tmp_path):
     checkout = checkout_for("IQS")
     runs = tmp_path / "runs"
@@ -188,6 +190,7 @@ def test_iqs_publishes_partial_coverage_from_the_original_answers(tmp_path):
     assert saved["usable"] is False and answers.read_bytes() == original
 
 
+@pytest.mark.public_owner
 def test_stockqa_recovers_the_settled_attempt_from_native_binding(tmp_path):
     checkout = checkout_for("QA")
     case = checkout / "tests/unit/test_quick_scan_feedback_owner.py"
@@ -204,6 +207,7 @@ def test_stockqa_recovers_the_settled_attempt_from_native_binding(tmp_path):
     assert ledger.read_bytes() == before
 
 
+@pytest.mark.owner_local_checkout
 def test_dashboard_confirms_disclosure_through_the_public_http_read(tmp_path):
     checkout = checkout_for("DASH")
     case = checkout / "tests/unit/m6-feedback-runtime/test_feedback_owner.py"

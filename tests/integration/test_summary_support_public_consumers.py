@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[2]
 RF = os.environ.get("RF_NARRATIVE_CODE_ROOT")
 SW = os.environ.get("STOCKWIKI_NARRATIVE_CODE_ROOT")
 pytestmark = [
-    pytest.mark.requires_owner,
+    pytest.mark.owner_local_checkout,
     pytest.mark.skipif(
         not RF or not SW, reason="Explicit isolated RF and StockWiki checkouts required"
     ),

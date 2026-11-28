@@ -79,13 +79,56 @@ def test_ci_shards_execute_each_inventory_case_exactly_once(tmp_path):
     assert inventory_outcome.returncode == 0, inventory_outcome.stdout + inventory_outcome.stderr
     inventory = json.loads((tmp_path / "inventory" / "collected.json").read_bytes())
     assert len(inventory["node_ids"]) == 12
+    distribution = json.loads((tmp_path / "inventory" / "distribution.json").read_bytes())
+    assert distribution["applicable"] == 12
+    assert not distribution["obligations"]
     executed = set()
     for index in range(2):
         output = f"shard-{index}"
-        shard_outcome = _invoke(tmp_path, *common, "--shard", f"{index}/2", "--output", output)
+        shard_outcome = _invoke(
+            tmp_path, *common, "--inventory", "inventory/distribution.json", "--shard", f"{index}/2",
+            "--output", output,
+        )
         assert shard_outcome.returncode == 0, shard_outcome.stdout + shard_outcome.stderr
         report = json.loads((tmp_path / output / "executed.json").read_bytes())
         assert report["node_ids"]
         assert executed.isdisjoint(report["node_ids"])
         executed.update(report["node_ids"])
     assert executed == set(inventory["node_ids"])
+
+
+def test_ci_inventory_keeps_deferrals_named_and_public_offline_tests_applicable(tmp_path):
+    source = tmp_path / "tests"
+    source.mkdir()
+    (tmp_path / "pytest.ini").write_text(
+        "[pytest]\nmarkers =\n    named_dependency: unavailable corpus\n    public_owner: public fixture\n",
+        encoding="utf-8",
+    )
+    (source / "test_cases.py").write_text(
+        "import pytest\n"
+        "def test_native():\n    assert True\n"
+        "@pytest.mark.public_owner\ndef test_public():\n    assert True\n"
+        "@pytest.mark.named_dependency\ndef test_deferred():\n    assert True\n",
+        encoding="utf-8",
+    )
+    path = _write_policy(tmp_path)
+    policy = json.loads(path.read_bytes())
+    platform = next(iter(policy["platforms"]))
+    policy["platforms"][platform]["markexpr"] = "not named_dependency"
+    policy["suites"] = {"public": "public_owner"}
+    policy["deferred"] = {"named_dependency": "requires the unavailable corpus"}
+    path.write_text(json.dumps(policy), encoding="utf-8")
+    common = ("tools.run_ci_evidence", "--revision", "c" * 40, "--policy", str(path))
+    result = _invoke(tmp_path, *common, "--collect", "--output", "inventory")
+    assert result.returncode == 0, result.stdout + result.stderr
+    distribution = json.loads((tmp_path / "inventory" / "distribution.json").read_bytes())
+    node = "tests/test_cases.py::"
+    assert distribution["collected"] == 3 and distribution["applicable"] == 2
+    assert distribution["suites"] == {"native": [node + "test_native"], "public": [node + "test_public"]}
+    assert distribution["obligations"] == {
+        "named_dependency": {"reason": "requires the unavailable corpus", "node_ids": [node + "test_deferred"]},
+    }
+    result = _invoke(tmp_path, *common, "--inventory", "inventory/distribution.json",
+                     "--suite", "public", "--output", "public")
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert json.loads((tmp_path / "public" / "executed.json").read_bytes())["node_ids"] == [node + "test_public"]

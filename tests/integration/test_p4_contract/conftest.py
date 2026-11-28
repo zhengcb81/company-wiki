@@ -2,9 +2,8 @@
 
 Design (card sections 5-8):
 
-* every test is ``skip`` unless ``CWP_P4_CATALOG_CONFIG`` is set, and the skip
-  reason is explicit - a skip is never a silent pass;
-* ``CWP_P4_REQUIRE=1`` turns those skips into failures;
+* with no custom catalog, materialize the synthetic source fixture in pytest scratch;
+* ``CWP_P4_REQUIRE=1`` turns an unavailable configured input into a failure;
 * a catalog switch pointing at production config (or outside ``tmp_path`` and
   this card's ``fixtures/``) is the only permitted hard failure;
 * ``socket.socket.connect`` is monkeypatched to raise ``AssertionError`` for the
@@ -13,6 +12,7 @@ Design (card sections 5-8):
 
 from __future__ import annotations
 
+import runpy
 import shutil
 from pathlib import Path
 from typing import Any, NoReturn
@@ -27,26 +27,15 @@ from .support.report import LEDGER
 
 
 _LANE_ROOT = Path(__file__).resolve().parent
-_LANE_NODE_PREFIX = "tests/integration/test_p4_contract/"
+_LANE_NODE_PREFIX = _LANE_ROOT.relative_to(C.REPO_ROOT).as_posix() + "/"
+_EFFECTIVE_CATALOG = pytest.StashKey[Path]()
 
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_collection_modifyitems(items) -> None:
     for item in items:
         if item.path.is_relative_to(_LANE_ROOT):
-            item.add_marker(pytest.mark.requires_owner)
-
-
-@pytest.fixture(autouse=True)
-def p4_opt_in_gate() -> None:
-    """Every case in this lane is opt-in (card section 5.1 / 6).
-
-    With no ``CWP_P4_CATALOG_CONFIG`` no case runs at all: each one ``skip``s
-    with a readable reason, or ``fail``s when ``CWP_P4_REQUIRE=1``.  A skip is
-    never a silent pass.
-    """
-    if E.catalog_config_path() is None:
-        skip_or_fail(C.REQUIRE_CATALOG_REASON)
+            item.add_marker(pytest.mark.p4_fixture)
 
 
 def pytest_sessionstart(session) -> None:  # noqa: ARG001 - pytest hook
@@ -66,9 +55,11 @@ def pytest_sessionfinish(session, exitstatus) -> None:  # noqa: ARG001
         return
     if not any(item.path.is_relative_to(_LANE_ROOT) for item in session.items):
         return
+    if E.catalog_config_path() is None and E.receipt_output_path() is None:
+        return
     from .support import sessionreport
 
-    sessionreport.finalize(session)
+    sessionreport.finalize(session, catalog_path=session.config.stash.get(_EFFECTIVE_CATALOG, None))
 
 
 def pytest_runtest_logreport(report) -> None:
@@ -102,15 +93,15 @@ def pytest_runtest_logreport(report) -> None:
 
 def pytest_report_header(config) -> str:  # noqa: ARG001
     return (
-        "P4-CONSUMER-CONTRACT: opt-in lane; set "
-        f"{C.ENV_CATALOG} to a test catalog to run it"
+        "P4-CONSUMER-CONTRACT: synthetic defaults; set "
+        f"{C.ENV_CATALOG} for a custom test catalog"
     )
 
 
 # --- environment ------------------------------------------------------------
 
 @pytest.fixture(scope="session")
-def p4_catalog_config(tmp_path_factory) -> Path:
+def p4_catalog_config(tmp_path_factory, pytestconfig) -> Path:
     """Resolve and bound-check ``CWP_P4_CATALOG_CONFIG``.
 
     A path outside ``tmp_path`` and this card's ``fixtures/`` - production config
@@ -118,12 +109,16 @@ def p4_catalog_config(tmp_path_factory) -> Path:
     """
     configured = E.catalog_config_path()
     if configured is None:
-        skip_or_fail(C.REQUIRE_CATALOG_REASON)
+        generated = tmp_path_factory.mktemp("p4-fixture")
+        build = runpy.run_path(str(C.FIXTURES_DIR / "build_fixtures.py"))["build"]
+        assert build(generated) == cwp.load_expected()
+        configured = generated / "catalog" / "catalog.yaml"
     allowed_tmp = tmp_path_factory.getbasetemp()
     try:
         resolved = E.assert_catalog_config_allowed(configured, tmp_path=allowed_tmp)
     except E.ProductionConfigRefused as exc:
         pytest.fail(str(exc), pytrace=False)
+    pytestconfig.stash[_EFFECTIVE_CATALOG] = resolved
     # The reader creates catalog/state beside its config.  When the switch points
     # at this card's committed fixtures, copy the whole catalog tree into tmp
     # first so the lane never writes into the repo it ships (card section 7.4).

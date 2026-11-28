@@ -143,15 +143,10 @@ def test_p4_receipt_missing_file_is_refused(p4_case, tmp_path) -> None:
     case.settle("pass")
 
 
-def test_p4_receipt_written_on_real_session(p4_case) -> None:
-    """This run's receipt exists on disk, is strict JSON, and carries our schema."""
+def test_p4_shipped_receipt_remains_readable(p4_case) -> None:
+    """The historical receipt remains readable independently of the current run."""
     case = p4_case()
-    path = receipt_mod.resolve_receipt_path()
-    if not path.is_file():
-        pytest.skip(
-            f"{path.name} is written after pytest_sessionfinish; "
-            "validate it on the acceptance run"
-        )
+    path = C.RECEIPT_PATH
     written = receipt_mod.read_receipt(path)
     expected = {
         "schema_version", "status", "generated_at", "inputs", "counts",

@@ -296,22 +296,21 @@ def test_zr404_additive_old_keys_unchanged_and_schema_stable(tmp_path):
     )
 
 
-_FILING_CONTRACTS = Path(r"C:\Users\郑曾波\Projects\filing-fetch\scripts")
-
-
-@pytest.mark.requires_owner
-@pytest.mark.skipif(
-    not _FILING_CONTRACTS.is_dir(),
-    reason="filing-fetch checkout not present on this machine",
-)
-def test_zr404_filing_validator_accepts_enriched_envelope(tmp_path):
+@pytest.mark.public_owner
+def test_zr404_filing_validator_accepts_enriched_envelope(tmp_path, monkeypatch):
     """Cross-repo N/N-1: the filing consumer's validate_resolution_envelope
     must accept the ZR-404-enriched envelope (additive fields pass through;
     schema_version still 1.0; known-field checks unchanged)."""
     import importlib.util
+    import os
 
+    checkout = os.environ.get("CWP_TEST_FF_ROOT")
+    if checkout is None:
+        pytest.skip("explicit read-only filing-fetch checkout required")
+    scripts = Path(checkout) / "scripts"
+    monkeypatch.syspath_prepend(str(scripts))
     spec = importlib.util.spec_from_file_location(
-        "filing_contracts_zr404_probe", _FILING_CONTRACTS / "filing_contracts.py"
+        "filing_contracts_zr404_probe", scripts / "filing_contracts.py"
     )
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

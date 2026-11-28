@@ -8,7 +8,7 @@ import sys
 import pytest
 
 
-pytestmark = [pytest.mark.requires_owner]
+pytestmark = [pytest.mark.public_owner]
 
 ROOT = Path(__file__).resolve().parents[2]
 CWP = Path(os.environ.get("CWP_LOCAL_OBSERVATION_ROOT", str(ROOT)))

@@ -434,7 +434,7 @@ def test_markup_strip_latex_percent_and_math_wrap():
     assert markup_strip("plain 13% stays") == "plain 13% stays"
 
 
-@pytest.mark.optional_backend
+@pytest.mark.safetensors_backend
 def test_safetensors_read_only_mapping_roundtrip(tmp_path):
     """Header parse + read-only mapped storage return byte-identical tensors."""
     import sys

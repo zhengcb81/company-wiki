@@ -25,7 +25,7 @@ from pathlib import Path
 import pytest
 
 
-pytestmark = pytest.mark.separate_audit
+pytestmark = pytest.mark.coverage_artifact
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 COVERAGE_JSON = REPO_ROOT / "coverage.json"

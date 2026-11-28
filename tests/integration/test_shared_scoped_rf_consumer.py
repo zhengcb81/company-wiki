@@ -25,7 +25,7 @@ from support import narrative_batch_fixtures as fixtures
 from integration.test_narrative_legacy_effort_history import _database_dump, _request
 
 
-pytestmark = [pytest.mark.requires_owner]
+pytestmark = [pytest.mark.public_owner]
 
 
 REPO = Path(__file__).resolve().parents[2]

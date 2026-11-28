@@ -142,7 +142,7 @@ def merged_cases() -> list[dict[str, Any]]:
     return merged
 
 
-def build_session_receipt() -> dict[str, Any]:
+def build_session_receipt(catalog_path: Path | None = None) -> dict[str, Any]:
     cases = merged_cases()
     summary = pytest_summary()
     counts = counts_from_pytest(summary)
@@ -171,7 +171,7 @@ def build_session_receipt() -> dict[str, Any]:
     receipt = build_receipt(
         cases=cases,
         counts=counts,
-        catalog_path=E.catalog_config_path(),
+        catalog_path=catalog_path or E.catalog_config_path(),
         commands_path=E.consumer_commands_path(),
         limitations=limitations,
     )
@@ -211,10 +211,10 @@ def _finish_violations() -> list[str]:
     return problems
 
 
-def finalize(session) -> Path | None:  # noqa: ANN001 - pytest session object
+def finalize(session, *, catalog_path: Path | None = None) -> Path | None:  # noqa: ANN001
     """Write ``receipt.json`` for this run; never raise out of a pytest hook."""
     try:
-        receipt = build_session_receipt()
+        receipt = build_session_receipt(catalog_path)
     except Exception:  # noqa: BLE001 - a receipt must not mask the test results
         return None
     violations = _finish_violations()

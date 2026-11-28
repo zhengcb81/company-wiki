@@ -22,7 +22,7 @@ RF = Path(
     os.environ.get("RF_NARRATIVE_CODE_ROOT", str(CWP.parent / "revenue-forecast"))
 ).resolve()
 pytestmark = [
-    pytest.mark.requires_owner,
+    pytest.mark.public_owner,
     pytest.mark.skipif(
         "RF_NARRATIVE_CODE_ROOT" not in os.environ
         and not (RF / "scripts/narrative_source_preparation.py").is_file(),
