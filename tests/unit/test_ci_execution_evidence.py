@@ -101,14 +101,15 @@ def test_ci_inventory_keeps_deferrals_named_and_public_offline_tests_applicable(
     source = tmp_path / "tests"
     source.mkdir()
     (tmp_path / "pytest.ini").write_text(
-        "[pytest]\nmarkers =\n    named_dependency: unavailable corpus\n    public_owner: public fixture\n",
+        "[pytest]\nmarkers =\n    named_dependency: unavailable corpus\n    public_owner: public fixture\n    other_platform: irrelevant to this OS\n",
         encoding="utf-8",
     )
     (source / "test_cases.py").write_text(
         "import pytest\n"
         "def test_native():\n    assert True\n"
         "@pytest.mark.public_owner\ndef test_public():\n    assert True\n"
-        "@pytest.mark.named_dependency\ndef test_deferred():\n    assert True\n",
+        "@pytest.mark.named_dependency\n@pytest.mark.other_platform\n"
+        "def test_deferred():\n    assert True\n",
         encoding="utf-8",
     )
     path = _write_policy(tmp_path)
@@ -116,7 +117,10 @@ def test_ci_inventory_keeps_deferrals_named_and_public_offline_tests_applicable(
     platform = next(iter(policy["platforms"]))
     policy["platforms"][platform]["markexpr"] = "not named_dependency"
     policy["suites"] = {"public": "public_owner"}
-    policy["deferred"] = {"named_dependency": "requires the unavailable corpus"}
+    policy["deferred"] = {
+        "named_dependency": "requires the unavailable corpus",
+        "other_platform": "test needs the other OS in the owner's matrix",
+    }
     path.write_text(json.dumps(policy), encoding="utf-8")
     common = ("tools.run_ci_evidence", "--revision", "c" * 40, "--policy", str(path))
     result = _invoke(tmp_path, *common, "--collect", "--output", "inventory")

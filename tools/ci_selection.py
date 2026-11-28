@@ -6,6 +6,7 @@ from argparse import ArgumentTypeError
 from hashlib import sha256
 import json
 from pathlib import Path
+import re
 
 
 def parse_shard(value: str) -> tuple[int, int]:
@@ -51,9 +52,14 @@ def classify(inventory: dict, membership: dict, policy: dict) -> dict:
     if set(selected) != set(inventory["node_ids"]) or set(selected) & set(deselected):
         raise ValueError("canonical pytest membership contradicts the independent collector")
     deferred = policy.get("deferred", {})
+    expression = inventory["selection"]["markexpr"]
+    # Our independent inventory selects the complement of the known unavailable
+    # prerequisites on that platform. Other marks on a rejected case describe it
+    # but did not participate in the rejection.
+    excluded_names = set(re.findall(r"[A-Za-z_]\w*", expression)) & deferred.keys()
     named_obligations = {}
     for node, marks in sorted(deselected.items()):
-        reasons = sorted(set(marks) & deferred.keys())
+        reasons = sorted(set(marks) & excluded_names)
         if not reasons:
             raise ValueError(f"no documented reason for excluded test {node}")
         for reason in reasons:

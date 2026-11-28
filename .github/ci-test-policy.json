@@ -9,8 +9,7 @@
     "coverage_artifact": "Requires the separate FC-1204 full branch-coverage evidence run.",
     "retirement_protocol": "Requires the explicit R9 publication and retirement observation window.",
     "windows_native": "Exercises operating-system-specific Windows behavior.",
-    "posix_native": "Exercises operating-system-specific POSIX behavior.",
-    "requires_symlink": "Requires runner permission to create symbolic links."
+    "posix_native": "Exercises operating-system-specific POSIX behavior."
   },
   "suites": {
     "public": "public_owner",
@@ -29,7 +28,7 @@
       "roots": [
         "tests"
       ],
-      "markexpr": "not (live or real_data or requires_corpus or owner_local_checkout or deployed_pdf_runtime or coverage_artifact or retirement_protocol or posix_native or requires_symlink)"
+      "markexpr": "not (live or real_data or requires_corpus or owner_local_checkout or deployed_pdf_runtime or coverage_artifact or retirement_protocol or posix_native)"
     }
   }
 }
