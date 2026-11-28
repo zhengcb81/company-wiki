@@ -35,6 +35,7 @@ def test_child_keeps_the_callers_console_state(monkeypatch, code_page, expected)
     assert process_launch.inherit_console_creation_flags() == expected
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows GUI-launcher and console APIs")
 def test_windows_gui_python_runs_a_real_piped_owner_command():
     executable = Path(sys.executable).with_name("python.exe")

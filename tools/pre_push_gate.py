@@ -164,11 +164,7 @@ FAST_CONTRACT_CASES = (
     "tests/integration/test_transport_normalization_injection.py",
 )
 
-# CI and explicit full mode already run all Unit tests. Daily pushes still use
-# the complete fixed smoke above; never turn this filter into impacted expansion.
-CI_CONTRACT_CASES = tuple(
-    case for case in FAST_CONTRACT_CASES if not case.startswith("tests/unit/")
-)
+# The developer smoke does not define the remote pytest inventory.
 
 # The daily hook is a short source/receipt/cache boundary check. Expensive OCR,
 # multi-repository and full-file contracts remain in CI and explicit acceptance.
@@ -447,7 +443,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--fast-contracts-only",
         action="store_true",
-        help="run remaining contract smoke after CI's full Unit step; push uses its fixed set",
+        help="explicitly run the curated local contract smoke; remote CI discovers tests itself",
     )
     parser.add_argument(
         "--junitxml",
@@ -481,8 +477,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     fast_contract_gate = (
         [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180",
-         *CI_CONTRACT_CASES],
-        "CI fast contract smoke set",
+         *(case for case in FAST_CONTRACT_CASES if not case.startswith("tests/unit/"))],
+        "curated local contract smoke set",
         None,
     )
     if args.push_checks:

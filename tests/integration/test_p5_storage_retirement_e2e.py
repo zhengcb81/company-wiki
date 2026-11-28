@@ -27,7 +27,10 @@ from support.legacy_catalog.section_extractor import extract_sections_catalog
 from company_wiki.source_catalog.store import CatalogStore
 from support.legacy_catalog.summarizer import summarize_catalog
 
-pytestmark = pytest.mark.slow
+pytestmark = [
+    pytest.mark.real_data,
+    pytest.mark.slow,
+]
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SRC_DIR = REPO_ROOT / "src"

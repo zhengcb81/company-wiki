@@ -42,6 +42,7 @@ def test_windows_long_lock_path_is_opened(tmp_path):
             if os.name == "nt" else path.stat().st_size == 1
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Win32 extended-path contract")
 def test_win32_path_adapter_counts_utf16_units_and_supports_unc():
     from company_wiki.file_mutex import win32_filesystem_path

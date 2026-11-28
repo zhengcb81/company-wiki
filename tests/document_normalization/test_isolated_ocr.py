@@ -419,6 +419,7 @@ def test_injected_narrative_fake_protocol_requires_no_new_deadline_keyword(tmp_p
         assert port._prepare_ocr() is a and a.validated == 1
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows CRT descriptor lock regression")
 @pytest.mark.parametrize("operation", ["preflight", "infer"])
 def test_native_stdin_probe_does_not_deadlock_liveness_monitor(tmp_path, operation):
@@ -442,6 +443,7 @@ def test_native_stdin_probe_does_not_deadlock_liveness_monitor(tmp_path, operati
     assert not list(tmp_path.glob("cwp-ocr-*"))
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows UCRT native metadata regression")
 @pytest.mark.parametrize("operation", ["_isatty", "_get_osfhandle", "_fstat64"])
 def test_native_crt_stdin_probe_does_not_deadlock_liveness_monitor(tmp_path, operation):
@@ -454,6 +456,7 @@ def test_native_crt_stdin_probe_does_not_deadlock_liveness_monitor(tmp_path, ope
     assert not list(tmp_path.glob("cwp-ocr-*"))
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows owned-file sharing semantics")
 @pytest.mark.parametrize("side", ["read", "publish"])
 def test_owned_response_sharing_violation_recovers_within_same_deadline(tmp_path, monkeypatch, side):

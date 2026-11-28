@@ -15,6 +15,9 @@ import pytest
 from integration import test_narrative_batch_cli_e2e as cli
 
 
+pytestmark = [pytest.mark.real_data]
+
+
 protected_inputs = cli.r6_protected_inputs
 REPO = Path(__file__).resolve().parents[2]
 

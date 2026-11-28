@@ -15,6 +15,9 @@ from tools.feedback_loop.local_host import LocalHost
 from tools.feedback_loop.observations import read_batch
 
 
+pytestmark = [pytest.mark.requires_owner]
+
+
 _TRANSCRIBE = """
 import os
 from pathlib import Path

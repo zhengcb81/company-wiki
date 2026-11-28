@@ -90,6 +90,7 @@ def test_company_direct_and_raw_discover_once_without_other_company(
         close(cat)
 
 
+@pytest.mark.requires_symlink
 def test_scoped_adapter_and_registration_scope_reject_escape_and_projection(tmp_path):
     cat = lake(tmp_path)
     try:

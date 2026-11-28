@@ -570,6 +570,7 @@ def _run_profile_trial(
     return result
 
 
+@pytest.mark.separate_audit
 @pytest.mark.skipif(
     os.environ.get("COMPANY_WIKI_RUN_E7_BENCHMARK") != "1",
     reason="set COMPANY_WIKI_RUN_E7_BENCHMARK=1 to run the bounded profile benchmark",

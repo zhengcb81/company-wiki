@@ -90,6 +90,7 @@ def _import_v2(catalog, data: bytes, **kwargs):
         catalog, original=data, request=import_v2_request(data, **kwargs))
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_import_v2_registers_shared_raw_and_exact_read_roundtrip(tmp_path):
     data = (SEALED_SOURCES / LATEST_01).read_bytes()
@@ -112,6 +113,7 @@ def test_import_v2_registers_shared_raw_and_exact_read_roundtrip(tmp_path):
         assert manifest["display_name"] is None
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_import_v2_is_idempotent_and_same_sha_reuses_one_copy(tmp_path):
     data = (SEALED_SOURCES / LATEST_18).read_bytes()
@@ -125,6 +127,7 @@ def test_import_v2_is_idempotent_and_same_sha_reuses_one_copy(tmp_path):
         assert len(json_files) == 1
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_one_raw_two_issuer_projections_do_not_recopy_or_conflict(tmp_path):
     data = (SEALED_SOURCES / LATEST_01).read_bytes()
@@ -163,6 +166,7 @@ def test_one_raw_two_issuer_projections_do_not_recopy_or_conflict(tmp_path):
         assert len(raws) == 1
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_replay_verifies_parent_bytes_pointers_and_roles(tmp_path):
     data = (SEALED_SOURCES / LATEST_18).read_bytes()
@@ -204,6 +208,7 @@ def test_replay_verifies_parent_bytes_pointers_and_roles(tmp_path):
         assert replay_projection(catalog, projection)["verified_records"] == 1
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_projection_export_bundle_carries_refs_and_spans(tmp_path):
     data = (SEALED_SOURCES / QUESTIONS_01).read_bytes()
@@ -322,6 +327,7 @@ def test_import_v1_text_and_single_content_json_still_work(tmp_path):
         assert (base / "Acme").is_dir()
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_import_v2_failure_retains_capture_and_recovers(tmp_path, monkeypatch):
     from company_wiki.source_catalog import canonical_writer as writer_module
@@ -373,6 +379,7 @@ def _cli(root: Path, request: dict, *, operation, input_file: Path | None = None
                            capture_output=True, timeout=120)
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_public_cli_import_project_read_replay_export(tmp_path):
     data = (SEALED_SOURCES / LATEST_18).read_bytes()
@@ -434,6 +441,7 @@ def test_public_cli_import_project_read_replay_export(tmp_path):
         target.write_bytes(keep)
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_multi_page_projection_reports_partial_pagination_honestly(tmp_path):
     page1 = (SEALED_SOURCES / LATEST_01).read_bytes()

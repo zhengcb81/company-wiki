@@ -24,6 +24,7 @@ def _extended(path):
     return "\\\\?\\" + absolute
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="native Windows path boundary")
 def test_short_relative_target_in_deep_cwd(tmp_path, monkeypatch):
     parent = tmp_path / ("d" * (240 - len(str(tmp_path)) - 1))
@@ -44,6 +45,7 @@ def test_short_relative_target_in_deep_cwd(tmp_path, monkeypatch):
         assert not os.path.exists(_extended(parent))
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Win32 lengths count UTF-16 units")
 def test_non_bmp_parent_uses_win32_length_budget(tmp_path):
     root_units = len(str(tmp_path).encode("utf-16-le")) // 2
@@ -96,6 +98,7 @@ def test_cleanup_preserves_exception_without_add_note(tmp_path, monkeypatch):
         stage.unlink()
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="plain rmtree cannot traverse this tree")
 def test_real_probe_removes_its_extended_length_tree(tmp_path, monkeypatch, capsys):
     from tools import w22_atomic_probe as probe
@@ -125,6 +128,7 @@ def test_gate_sorts_resolved_candidate_lengths(tmp_path, monkeypatch):
     assert gate._scratch_candidate_roots() == [str(tmp_path), str(deep)]
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="existing Windows scratch budget")
 def test_gate_rejects_over_budget_candidate_before_probe(monkeypatch):
     from tools import pre_push_gate as gate
@@ -137,6 +141,7 @@ def test_gate_rejects_over_budget_candidate_before_probe(monkeypatch):
     assert not probes
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="existing Windows scratch budget")
 def test_gate_uses_short_candidate_after_over_budget(gate_root):
     from tools import pre_push_gate as gate
@@ -152,6 +157,7 @@ def test_gate_uses_short_candidate_after_over_budget(gate_root):
     assert list(short.iterdir()) == [long]
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="existing Windows scratch budget")
 def test_gate_reports_no_short_candidate():
     from tools import pre_push_gate as gate
@@ -165,6 +171,7 @@ def test_gate_reports_no_short_candidate():
     assert "no writable scratch root within the pytest path budget" in message
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="existing Windows scratch budget")
 def test_gate_accepts_exact_budget(gate_root):
     from tools import pre_push_gate as gate
@@ -181,6 +188,7 @@ def test_gate_accepts_exact_budget(gate_root):
     assert not list(root.iterdir())
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="existing Windows scratch budget")
 def test_gate_cleans_actual_scratch_if_name_reserve_changes(
         gate_root, monkeypatch):

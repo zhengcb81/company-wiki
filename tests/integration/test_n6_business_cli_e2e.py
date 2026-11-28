@@ -235,6 +235,7 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=No
             state.catalog.close()
 
 
+@pytest.mark.requires_owner
 def test_synthetic_business_cli_framework(tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs):
     _exercise(tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs, real=False)
 

@@ -29,6 +29,9 @@ from company_wiki.source_catalog.source_reader import (
 from company_wiki.source_contract import SourceExportBundleV2
 
 
+pytestmark = [pytest.mark.real_data]
+
+
 P06_SHA = "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b"
 STAR_SHA = "0d40d94aef8d2fa08c4c75760198be426a0b579be3d7200ec9450a7e04522b4f"
 P06_SIZE = 5_595_592

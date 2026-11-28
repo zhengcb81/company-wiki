@@ -519,6 +519,7 @@ def test_r4b03_a_volume_root_configured_root_contains_its_files(tmp_path):
     )
 
 
+@pytest.mark.requires_symlink
 def test_r4b03_symlink_escape_is_refused_where_symlinks_exist(tmp_path):
     """A symlink inside a root that points outside it must not become readable
     through this entry point.

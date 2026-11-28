@@ -17,6 +17,9 @@ from company_wiki.source_catalog.security_identity import SecurityMasterStore, S
 from support.acquisition_cli_fixture import RAW_BODY, fixture_root
 
 
+pytestmark = [pytest.mark.requires_owner]
+
+
 @pytest.fixture
 def ff_entrypoint() -> Path:
     entrypoint = os.environ.get("CWP_TEST_FF_ENTRYPOINT")

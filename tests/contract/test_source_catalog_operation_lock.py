@@ -53,6 +53,7 @@ def test_new_lock_records_creation_identity_and_rejects_the_matching_owner(
                 pass
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Win32 extended-path catalog lock contract")
 def test_catalog_operation_lock_full_lifecycle_on_long_root(tmp_path, monkeypatch):
     import company_wiki.source_catalog.lock as lock_module
@@ -338,6 +339,7 @@ def test_stale_takeover_is_serialized_across_the_final_unlink(tmp_path, monkeypa
     assert errors == []
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows CIM identity fallback")
 def test_windows_cim_fallback_parses_creation_time_without_wmi_dependency(monkeypatch):
     import company_wiki.source_catalog.lock as lock_module
@@ -359,6 +361,7 @@ def test_windows_cim_fallback_parses_creation_time_without_wmi_dependency(monkey
     assert captured["kwargs"]["check"] is False
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows lock payload identity")
 def test_real_windows_lock_payload_matches_the_current_process(tmp_path):
     import company_wiki.source_catalog.lock as lock_module

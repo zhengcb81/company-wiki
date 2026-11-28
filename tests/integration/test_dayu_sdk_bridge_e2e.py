@@ -19,7 +19,10 @@ from company_wiki.source_catalog.resolver import SourceRequest
 
 
 ROOT = Path(__file__).resolve().parents[2]
-pytestmark = pytest.mark.integration
+pytestmark = [
+    pytest.mark.requires_owner,
+    pytest.mark.integration,
+]
 
 
 _HOOK = r'''

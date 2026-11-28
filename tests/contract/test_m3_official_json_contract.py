@@ -97,6 +97,7 @@ def test_layout_fingerprint_is_stable_and_version_bound():
     assert layout_fingerprint("official-flat-list") != first
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_paged_qa_layout_describes_sealed_latest_page1():
     page = _page("qa-latest-form-01.raw")
@@ -121,6 +122,7 @@ def test_paged_qa_layout_describes_sealed_latest_page1():
     )
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_paged_qa_layout_reports_translation_fields_separately():
     page = _page("qa-latest-form-18.raw")
@@ -151,6 +153,7 @@ def test_second_declared_layout_maps_unseen_fixture():
     assert "a" not in observation.records[1].text_fields
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_error_payload_control_is_response_error_not_business_evidence():
     raw = (SEALED_SOURCES / "qa-latest-01.raw").read_bytes()
@@ -173,6 +176,7 @@ def test_legal_empty_page_is_honest_zero_coverage():
     assert observation.pagination["total"] == 0
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_unseen_envelope_shape_is_unsupported_layout_not_guesswork():
     raw = json.dumps({"data": {"rows": [1, 2]}}).encode("utf-8")
@@ -307,6 +311,7 @@ LATEST_18_SHA = "fc1c2a8ebb7cb44b3cf6f82a5ecfa5641cf81478ed35e615c0928f36a2a389f
 LATEST_01_SHA = "416542b0c8f72400800edf69832df1bd3b48e50cf19c0019c647af445b97760b"
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_projection_selects_target_issuer_records_with_roles_and_locators():
     page = _page("qa-latest-form-18.raw")
@@ -343,6 +348,7 @@ def hash_of(page, pointer):
     return node.encoded_token_sha256
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_same_parent_page_two_issuer_projections_do_not_conflict():
     page18 = _page("qa-latest-form-18.raw")
@@ -368,6 +374,7 @@ def test_same_parent_page_two_issuer_projections_do_not_conflict():
     assert qingyi.parent_source_refs[0]["content_sha256"] == LATEST_01_SHA
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_projection_is_deterministic_and_roundtrips():
     page = _page("qa-latest-form-18.raw")
@@ -390,6 +397,7 @@ def test_projection_is_deterministic_and_roundtrips():
     assert later.projection_id != first.projection_id
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_questions_are_not_company_statements_and_times_keep_semantics():
     page = _page("qa-questions-form-01.raw")
@@ -413,6 +421,7 @@ def test_questions_are_not_company_statements_and_times_keep_semantics():
     assert record.times["updTime"] == "2026-09-10 17:06:51"
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_precollect_answer_keeps_speaker_unknown_and_independent_fields():
     page = _page("qa-precollect-form-10.raw")
@@ -436,6 +445,7 @@ def test_precollect_answer_keeps_speaker_unknown_and_independent_fields():
     assert fields["question"].token_range == (1672, 2862)
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_future_records_are_excluded_from_selection_but_reported():
     page = _page("qa-latest-form-18.raw")
@@ -452,6 +462,7 @@ def test_future_records_are_excluded_from_selection_but_reported():
     assert projection.coverage["issuer_records_selected"] == 0
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_wrong_issuer_proof_refuses_business_projection():
     page = _page("qa-latest-form-18.raw")
@@ -470,6 +481,7 @@ def test_wrong_issuer_proof_refuses_business_projection():
     assert raised.value.code in {"issuer_not_on_page", "mismatched_issuer_proof"}
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_closing_remark_is_statement_not_answered_qa():
     page01 = _page("qa-latest-form-01.raw")
@@ -491,6 +503,7 @@ def test_closing_remark_is_statement_not_answered_qa():
     assert 2508509 not in selected  # roadshow remark has no issuer fields
 
 
+@pytest.mark.real_data
 def test_projection_export_payload_lists_projections_without_full_records():
     page = _page("qa-latest-form-01.raw") if SEALED_AVAILABLE else None
     if page is None:

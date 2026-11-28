@@ -14,6 +14,9 @@ from contract.test_installed_public_entrypoints import installed as installed_cw
 from support.narrative_transport_fixture import published_fixture
 
 
+pytestmark = [pytest.mark.requires_owner]
+
+
 CONSUMER = """
 import asyncio
 import hashlib

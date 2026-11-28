@@ -122,6 +122,7 @@ def test_dbx04_broker_report_not_filing(tmp_path):
 # --- DBX-05: symlink/junction escape -> rejected with policy reason ---------
 
 
+@pytest.mark.requires_symlink
 def test_dbx05_symlink_escape_rejected(tmp_path):
     from company_wiki.source_catalog.adapters.sidecar import SidecarFilingAdapter
 

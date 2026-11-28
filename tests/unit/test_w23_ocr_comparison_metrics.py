@@ -347,6 +347,7 @@ def test_truncation_marker_repetition_guard_flags_loops():
     assert ok["suspicious"] is False
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(sys.platform != "win32", reason="actual committed-memory enforcement requires Windows Job Objects")
 def test_job_memory_limit_is_enforced_on_child_commit():
     """Card memory bound is enforced by the OS, not predicted: a child that
@@ -433,6 +434,7 @@ def test_markup_strip_latex_percent_and_math_wrap():
     assert markup_strip("plain 13% stays") == "plain 13% stays"
 
 
+@pytest.mark.optional_backend
 def test_safetensors_read_only_mapping_roundtrip(tmp_path):
     """Header parse + read-only mapped storage return byte-identical tensors."""
     import sys

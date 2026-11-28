@@ -1,0 +1,13 @@
+{
+  "schema": "s6-test-policy/1",
+  "platforms": {
+    "linux": {
+      "roots": ["tests"],
+      "markexpr": "not (live or real_data or requires_corpus or requires_owner or optional_backend or separate_audit or windows_native)"
+    },
+    "windows": {
+      "roots": ["tests"],
+      "markexpr": "not (live or real_data or requires_corpus or requires_owner or optional_backend or separate_audit or posix_native or requires_symlink)"
+    }
+  }
+}

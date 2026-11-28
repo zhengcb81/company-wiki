@@ -35,6 +35,7 @@ def _form_pages(prefix: str) -> list[Path]:
     return sorted(SEALED_SOURCES.glob(f"{prefix}-form-*.raw"))
 
 
+@pytest.mark.real_data
 @requires_sealed
 @pytest.mark.parametrize("prefix,pages,records,total", [
     ("qa-latest", 65, 195, 195),
@@ -74,6 +75,7 @@ def test_stream_pages_parse_with_declared_layout_and_stable_counts(
     assert declared_pages == pages and declared_total == total
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_all_86_pages_byte_total_and_identity_distribution():
     byte_sum = 0
@@ -106,6 +108,7 @@ def test_all_86_pages_byte_total_and_identity_distribution():
     assert unattributed == 2
 
 
+@pytest.mark.real_data
 @requires_sealed
 @pytest.mark.parametrize("name,sha,size", [
     ("qa-latest-form-01.raw",
@@ -123,6 +126,7 @@ def test_four_representative_pages_keep_their_exact_bytes(name, sha, size):
     assert hashlib.sha256(raw).hexdigest() == sha
 
 
+@pytest.mark.real_data
 @requires_sealed
 @pytest.mark.parametrize("name", [
     "qa-latest-01.raw", "qa-questions-01.raw", "qa-precollect-01.raw",
@@ -136,6 +140,7 @@ def test_error_payload_controls_stay_non_business(name):
     assert observation.records == ()
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_precollect_36395_answer_and_question_replay_from_the_frozen_page():
     raw = (SEALED_SOURCES / "qa-precollect-form-10.raw").read_bytes()
@@ -152,6 +157,7 @@ def test_precollect_36395_answer_and_question_replay_from_the_frozen_page():
     assert record.times["updTime"] == "2026-09-10 15:19:54"
 
 
+@pytest.mark.real_data
 @requires_sealed
 def test_documented_wrong_pointer_stays_the_other_company():
     """latest-01 /datas/0/records/2 is 清溢 (2508409), never 中微 (2508385)."""

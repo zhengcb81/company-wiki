@@ -21,11 +21,14 @@ CWP = Path(__file__).resolve().parents[2]
 RF = Path(
     os.environ.get("RF_NARRATIVE_CODE_ROOT", str(CWP.parent / "revenue-forecast"))
 ).resolve()
-pytestmark = pytest.mark.skipif(
-    "RF_NARRATIVE_CODE_ROOT" not in os.environ
-    and not (RF / "scripts/narrative_source_preparation.py").is_file(),
-    reason="cross-repository E2E requires RF_NARRATIVE_CODE_ROOT or sibling revenue-forecast",
-)
+pytestmark = [
+    pytest.mark.requires_owner,
+    pytest.mark.skipif(
+        "RF_NARRATIVE_CODE_ROOT" not in os.environ
+        and not (RF / "scripts/narrative_source_preparation.py").is_file(),
+        reason="cross-repository E2E requires RF_NARRATIVE_CODE_ROOT or sibling revenue-forecast",
+    ),
+]
 
 
 def source_ref(fixture):

@@ -13,6 +13,9 @@ import sys
 import pytest
 
 
+pytestmark = [pytest.mark.requires_owner]
+
+
 ROOT = Path(__file__).resolve().parents[2]
 PYTHON = [sys.executable, "-B", "-X", "utf8"]
 

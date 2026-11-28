@@ -1898,6 +1898,7 @@ def _e6_run_profile(
             catalog.close()
 
 
+@pytest.mark.real_data
 def test_e6_real_samples_run_isolated_p1_p2_p4_and_restore_test_root(
     tmp_path: Path,
 ) -> None:

@@ -54,40 +54,6 @@ def test_daily_and_ci_inventories_have_distinct_responsibilities():
         "test_protocol_lookup_does_not_hash_non_string_json",
     ):
         assert sum(node.endswith("::" + name) for node in daily) == 1
-    # Full Unit already covers its own files. CI's separate remainder keeps
-    # the full curated contract files, including slower OCR/publication work.
-    assert len(gate.CI_CONTRACT_CASES) == len(set(gate.CI_CONTRACT_CASES))
-    assert set(gate.CI_CONTRACT_CASES) == {
-        node for node in gate.FAST_CONTRACT_CASES if not node.startswith("tests/unit/")}
-    assert not any(node.startswith("tests/unit/") for node in gate.CI_CONTRACT_CASES)
-    for path in (
-        "tests/contract/test_layer_public_boundaries.py",
-        "tests/contract/test_source_catalog_independent.py",
-        "tests/contract/test_source_catalog_module_contracts.py",
-        "tests/contract/test_announcement_collector.py",
-        "tests/contract/test_narrative_pdf_replay_once.py::test_native_pdf_entry_hashes_the_original_once",
-        "tests/contract/test_narrative_pdf_replay_once.py::test_native_html_entry_hashes_the_original_once",
-        "tests/contract/test_source_acquisition_verified_reuse.py::test_exact_local_reuse_streams_once_per_request",
-        "tests/contract/test_source_export_cli.py::test_v1_cli_replays_nested_unicode_path_and_round_trips_the_same_wire",
-        "tests/document_normalization/test_pptx.py::TestMediaAndGaps::test_mixed_slide_preserves_positive_replay_but_cannot_prove_empty_selection",
-        "tests/contract/test_narrative_output_plan.py",
-        "tests/contract/test_summary_group_coverage.py",
-        "tests/contract/test_official_transcript_layouts.py",
-        "tests/contract/test_source_scope_qualification.py",
-    ):
-        assert path in gate.CI_CONTRACT_CASES
-    assert "tests/contract/test_fresh_cache_behavior_receipts.py" not in gate.CI_CONTRACT_CASES
-    # These real OCR-resource regressions stay in the remote contract phase,
-    # rather than making every local push execute their expensive native paths.
-    required_ocr = {
-        'tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer',
-        'tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget',
-        'tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it',
-        'tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]',
-        'tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]',
-        'tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native',
-    }
-    assert required_ocr <= set(gate.CI_CONTRACT_CASES)
 
 
 def test_streaming_source_owner_contracts_are_in_the_fast_gate():
@@ -169,13 +135,13 @@ def test_failed_child_launch_is_not_a_green_push(monkeypatch, capsys):
 
 
 @pytest.mark.parametrize("junit", [None, "fixture-results.xml"])
-def test_ci_contract_phase_runs_only_the_nonunit_remainder_once(monkeypatch, junit):
+def test_explicit_local_contract_smoke_runs_once(monkeypatch, junit):
     observed = []
     monkeypatch.setattr(gate, "_dispatch_gate", lambda cmd, *_args: observed.append(cmd) or 0)
     argv = ["--fast-contracts-only"] + (["--junitxml", junit] if junit else [])
     assert gate.main(argv) == 0
     assert len(observed) == 1
-    assert _targets(observed[0]) == list(gate.CI_CONTRACT_CASES)
+    assert _targets(observed[0]) == [case for case in gate.FAST_CONTRACT_CASES if not case.startswith("tests/unit/")]
     assert "tests/unit" not in observed[0]
     if junit:
         assert observed[0].count("--junitxml=" + junit) == 1
@@ -240,16 +206,30 @@ def test_total_deadline_worker_scope_and_owned_scratch_remain_real(monkeypatch, 
         assert not list(short_root_path.iterdir())
 
 
-def test_real_ci_and_hook_wiring_keeps_full_unit_and_separate_contracts():
+def test_real_ci_runs_the_owner_inventory_on_both_operating_systems():
     root = Path(__file__).resolve().parents[2]
     workflow = yaml.load((root / ".github/workflows/ci.yml").read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
     for event in ("push", "pull_request"):
         ignores = workflow["on"][event]["paths-ignore"]
         assert "docs/plans/**" in ignores and ".planning/**" in ignores
         assert "src/**" not in ignores and "tests/**" not in ignores
-    commands = [step.get("run", "") for step in workflow["jobs"]["test"]["steps"]]
-    assert sum("pytest tests/unit" in command for command in commands) == 1
-    assert sum("pre_push_gate.py --fast-contracts-only" in command for command in commands) == 1
+    job = workflow["jobs"]["test"]
+    assert set(job["strategy"]["matrix"]["os"]) == {"ubuntu-latest", "windows-latest"}
+    commands = [step.get("run", "") for step in job["steps"]]
+    assert sum("tools.run_ci_evidence --collect" in command for command in commands) == 1
+    assert sum("tools.run_ci_evidence --shard" in command for command in commands) == 1
+    for selected_job in (job, workflow["jobs"]["coverage"]):
+        revision = selected_job["env"]["CWP_CI_REVISION"]
+        assert "github.event.pull_request.head.sha || github.sha" in revision
+        assert selected_job["steps"][0]["with"]["ref"] == "${{ env.CWP_CI_REVISION }}"
+    coverage_steps = workflow["jobs"]["coverage"]["steps"]
+    assert any("coverage" in step.get("run", "") and "--platform linux --platform windows"
+               in step["run"] for step in coverage_steps)
+    assert not any("pytest tests/unit" in command or "--fast-contracts-only" in command for command in commands)
+    source_workflow = yaml.load((root / ".github/workflows/source-system.yml").read_text(encoding="utf-8"),
+                                Loader=yaml.BaseLoader)
+    for event in ("push", "pull_request"):
+        assert "src/**" in source_workflow["on"][event]["paths"]
     hook = (root / ".githooks/pre-push").read_text(encoding="utf-8")
     assert "--push-checks" in hook and "--fast-contracts-only" not in hook
     assert "SKIP" not in hook.upper().replace("SKIPPING", "")

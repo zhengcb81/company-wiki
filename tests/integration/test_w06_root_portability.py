@@ -329,6 +329,7 @@ def test_root_overlapping_paths_refused_before_any_write(tmp_path, relation):
     assert runner.main(["--owned-root", str(owned), "--out-root", str(output)]) == 2
     assert not container.exists()
 
+@pytest.mark.requires_symlink
 def test_root_reparse_path_is_refused_without_following_it(tmp_path):
     from tools.source_root_portability.runtime import validate_roots
     target, alias = tmp_path / "target", tmp_path / "alias"

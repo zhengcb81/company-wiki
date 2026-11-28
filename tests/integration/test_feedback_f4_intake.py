@@ -1123,6 +1123,7 @@ def test_exact_local_route_preserves_the_worker_environment_boundary(tmp_path, m
     assert b"unlisted-parent-value" not in state and b"current-route-value" not in state
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(sys.platform != "win32", reason="Windows GUI launcher")
 def test_windows_recovery_reuses_same_host_and_runs_owner_reader_without_console(tmp_path, monkeypatch):
     from tools.feedback_loop import host as transport

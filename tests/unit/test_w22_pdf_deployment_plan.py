@@ -124,6 +124,7 @@ def test_build_plan_records_declared_hash_mismatch_as_diagnostic_not_blocker(tmp
     assert plan["blocking_errors"] == []
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows drive-letter volume boundary; POSIX has no D: drive")
 def test_build_plan_rejects_cross_volume_target(tmp_path):
     profile, probe = mini_source(tmp_path)

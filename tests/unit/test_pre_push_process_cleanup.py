@@ -10,6 +10,7 @@ from company_wiki._bounded_process import pid_is_alive
 from tools import pre_push_gate as gate
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows Job descendant lifetime regression")
 def test_timeout_stops_the_owned_grandchild_before_return(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(gate, "PROJECT_ROOT", tmp_path)
@@ -71,6 +72,7 @@ def test_noisy_success_retains_tail_without_changing_actual_exit(monkeypatch, ca
     assert "FAILED" not in capsys.readouterr().out
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows launcher and open-file deletion regression")
 def test_venv_timeout_releases_descendant_file_before_scratch_cleanup(tmp_path, monkeypatch):
     checkout = tmp_path / "checkout"

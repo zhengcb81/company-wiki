@@ -59,6 +59,7 @@ def test_format_real_auto_publication_and_public_transport_restores_test_lake(tm
     _transport(tmp_path, data, suffix)
 
 
+@pytest.mark.real_data
 def test_real_sec_html_uses_the_same_pipeline_and_preserves_original(tmp_path):
     sample = os.environ.get("CWP_R6_HTML_SAMPLE")
     if not sample:

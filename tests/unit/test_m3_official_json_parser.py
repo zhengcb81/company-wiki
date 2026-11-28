@@ -118,6 +118,7 @@ def test_missing_pointer_is_named_refusal():
 # --- exact byte identity against frozen evidence ----------------------------
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_frozen_latest_page1_anchors_match_evidence_index():
     raw = _sealed("qa-latest-form-01.raw")
@@ -139,6 +140,7 @@ def test_frozen_latest_page1_anchors_match_evidence_index():
     assert json.loads(raw[193:458]) == content.decoded == content.value
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_frozen_answer_precedes_question_and_keeps_independent_locators():
     raw = _sealed("qa-latest-form-18.raw")
@@ -164,6 +166,7 @@ def test_frozen_answer_precedes_question_and_keeps_independent_locators():
     assert not (answer.token_range[0] <= question.token_range[0] < answer.token_range[1])
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_frozen_precollect_page10_question_and_answer_anchors():
     raw = _sealed("qa-precollect-form-10.raw")
@@ -184,6 +187,7 @@ def test_frozen_precollect_page10_question_and_answer_anchors():
     assert answer.decoded_character_count == 172
 
 
+@pytest.mark.real_data
 @pytest.mark.skipif(not SEALED_AVAILABLE, reason="sealed run not present")
 def test_frozen_unanswered_question_page1_anchor():
     raw = _sealed("qa-questions-form-01.raw")

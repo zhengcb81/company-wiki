@@ -299,6 +299,7 @@ def test_zr404_additive_old_keys_unchanged_and_schema_stable(tmp_path):
 _FILING_CONTRACTS = Path(r"C:\Users\郑曾波\Projects\filing-fetch\scripts")
 
 
+@pytest.mark.requires_owner
 @pytest.mark.skipif(
     not _FILING_CONTRACTS.is_dir(),
     reason="filing-fetch checkout not present on this machine",

@@ -39,6 +39,7 @@ def test_lookalike_names_and_paths_never_borrow_the_device(tmp_path, raw):
     assert classify_open(raw, "w", 0, owned_temp(tmp_path)) == "persistent_write"
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="Windows resolves device names in subpaths")
 def test_windows_subpath_device_name_is_still_rejected(tmp_path):
     assert classify_open("sub/NUL", "r+b", 0, owned_temp(tmp_path)) == "persistent_write"

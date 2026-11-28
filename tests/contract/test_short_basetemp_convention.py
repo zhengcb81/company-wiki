@@ -39,7 +39,10 @@ import pytest
 # e.g. mid_dir 64 -> 65), so this suite is Windows-only by construction. The fixtures are pure
 # test data (deliberate inputs, same category as host_assumption_baseline.json's pre-existing
 # entries) - NOT host-state reads. Assertions and fixture bytes are UNTOUCHED by this guard.
-pytestmark = pytest.mark.skipif(sys.platform != "win32", reason="Windows-path-semantics fixtures and frozen length pins (I-14-F-R1 convention is Windows-specific; POSIX Path join shifts pinned lengths)")
+pytestmark = [
+    pytest.mark.windows_native,
+    pytest.mark.skipif(sys.platform != "win32", reason="Windows-path-semantics fixtures and frozen length pins (I-14-F-R1 convention is Windows-specific; POSIX Path join shifts pinned lengths)"),
+]
 
 _ROOT = Path(__file__).resolve().parents[2]
 _SPEC = importlib.util.spec_from_file_location("cw_short_basetemp_conftest", _ROOT / "conftest.py")
@@ -290,6 +293,7 @@ def test_unconfigure_removes_readonly_git_object_from_owned_fallback(
             conftest.shutil.rmtree(relocated, ignore_errors=True)
 
 
+@pytest.mark.requires_symlink
 def test_readonly_cleanup_does_not_follow_symlink_outside_owned_tree(tmp_path):
     sentinel = tmp_path / "protected-sentinel.txt"
     sentinel.write_text("must remain readonly", encoding="utf-8")

@@ -22,7 +22,7 @@ import pytest
 
 from tools.pdf_runtime_deployment import deployment
 
-pytestmark = [pytest.mark.integration, pytest.mark.e2e]
+pytestmark = [pytest.mark.optional_backend, pytest.mark.integration, pytest.mark.e2e]
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 REPO_SRC = REPO_ROOT / "src"

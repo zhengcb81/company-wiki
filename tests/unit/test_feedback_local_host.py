@@ -268,7 +268,10 @@ def test_codex_launch_resolves_the_current_install_before_starting(host_config, 
     ("different-identity", "owner"), ("different-identity", "run_id"),
     ("different-identity", "attempt_id"), ("different-identity", "step_id"),
     ("different-original", "actual"), ("different-original", "expected"), ("different-original", "check_id"),
-    ("missing-packet", None), ("link", None), ("packet-link", None), ("repair", None),
+    ("missing-packet", None),
+    pytest.param("link", None, marks=pytest.mark.requires_symlink),
+    pytest.param("packet-link", None, marks=pytest.mark.requires_symlink),
+    ("repair", None),
 ])
 def test_codex_triage_includes_only_bound_native_diagnostic_facts(
     host_config, monkeypatch, case, identity_field,

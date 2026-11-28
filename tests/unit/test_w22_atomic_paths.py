@@ -191,6 +191,7 @@ def test_real_permission_error_is_never_treated_as_path_length(
     assert list(tmp_path.iterdir()) == [target]
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="extended-length forms are Windows-only")
 def test_openable_wraps_only_paths_beyond_the_native_limit():
     from company_wiki import _atomic_path
@@ -206,6 +207,7 @@ def test_openable_wraps_only_paths_beyond_the_native_limit():
     assert _atomic_path.openable(wrapped) == wrapped  # idempotent
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="extended-length forms are Windows-only")
 def test_openable_handles_unc_and_forward_slashes(tmp_path, monkeypatch):
     from company_wiki import _atomic_path
@@ -220,6 +222,7 @@ def test_openable_handles_unc_and_forward_slashes(tmp_path, monkeypatch):
     assert ".." not in _atomic_path.openable(relative)
 
 
+@pytest.mark.windows_native
 @pytest.mark.skipif(os.name != "nt", reason="extended-length forms are Windows-only")
 def test_stage_dir_wraps_only_when_a_stage_name_would_not_fit():
     from company_wiki import _atomic_path
@@ -256,6 +259,7 @@ def test_short_basename_target_near_limit_still_writes(tmp_path):
     assert list(parent.iterdir()) == [target]
 
 
+@pytest.mark.posix_native
 @pytest.mark.skipif(os.name == "nt", reason="non-Windows keeps every path verbatim")
 def test_openable_is_identity_off_windows():
     from company_wiki import _atomic_path

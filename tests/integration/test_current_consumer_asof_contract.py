@@ -14,6 +14,9 @@ from integration import test_narrative_batch_cli_e2e as cli
 from tools.n4c_live_preflight import consumer_bootstrap
 
 
+pytestmark = [pytest.mark.requires_owner]
+
+
 protected_inputs = cli.r6_protected_inputs
 REPO = Path(__file__).resolve().parents[2]
 

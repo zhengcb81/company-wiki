@@ -177,6 +177,7 @@ def test_local_object_store_returns_logical_key_and_checks_existing_bytes(
     assert physical_object.read_bytes() == b"tampered"
 
 
+@pytest.mark.windows_native
 @pytest.mark.parametrize("racing_bytes", [None, b"same bytes", b"tampered"])
 @pytest.mark.skipif(
     os.name != "nt",

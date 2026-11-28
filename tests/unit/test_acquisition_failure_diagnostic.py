@@ -274,6 +274,7 @@ def test_cleanup_error_after_retry_does_not_hide_provider_cause(tmp_path):
     assert caught.value is original
 
 
+@pytest.mark.windows_native
 def test_owned_windows_barrier_proves_no_target_launch(tmp_path, monkeypatch):
     import company_wiki._bounded_process as transport
     if transport.os.name != "nt":
@@ -336,6 +337,7 @@ def test_scratch_cleanup_after_verified_final_keeps_original_cause_and_usage(tmp
     assert dto["acquisition_usage"] == usage()
 
 
+@pytest.mark.windows_native
 def test_barrier_cleanup_failure_does_not_erase_proven_pre_target_failure(tmp_path, monkeypatch):
     import company_wiki._bounded_process as transport
     if transport.os.name != "nt":

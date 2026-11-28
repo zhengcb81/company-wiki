@@ -33,6 +33,9 @@ from pathlib import Path
 
 import pytest
 
+
+pytestmark = [pytest.mark.real_data]
+
 WIKI_ROOT = Path(r"C:\Users\郑曾波\Projects\company-wiki")
 sys.path.insert(0, str(WIKI_ROOT / "src"))
 

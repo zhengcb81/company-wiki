@@ -26,6 +26,17 @@ from .support import cwp
 from .support.report import LEDGER
 
 
+_LANE_ROOT = Path(__file__).resolve().parent
+_LANE_NODE_PREFIX = "tests/integration/test_p4_contract/"
+
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_collection_modifyitems(items) -> None:
+    for item in items:
+        if item.path.is_relative_to(_LANE_ROOT):
+            item.add_marker(pytest.mark.requires_owner)
+
+
 @pytest.fixture(autouse=True)
 def p4_opt_in_gate() -> None:
     """Every case in this lane is opt-in (card section 5.1 / 6).
@@ -51,6 +62,10 @@ def pytest_sessionstart(session) -> None:  # noqa: ARG001 - pytest hook
 
 def pytest_sessionfinish(session, exitstatus) -> None:  # noqa: ARG001
     """Emit ``p4-contract-receipt/1`` from what actually happened."""
+    if session.config.getoption("collectonly"):
+        return
+    if not any(item.path.is_relative_to(_LANE_ROOT) for item in session.items):
+        return
     from .support import sessionreport
 
     sessionreport.finalize(session)
@@ -68,6 +83,8 @@ def pytest_runtest_logreport(report) -> None:
     overwriting the call result - otherwise the receipt would silently drop it
     and ``counts`` would stop matching the real summary (review finding P4-R3).
     """
+    if not report.nodeid.startswith(_LANE_NODE_PREFIX):
+        return
     from .support import sessionreport
 
     if report.when == "teardown":

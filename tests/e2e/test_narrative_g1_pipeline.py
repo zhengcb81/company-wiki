@@ -18,6 +18,9 @@ from company_wiki.source_catalog.narrative_retrieval import (
 )
 
 
+pytestmark = [pytest.mark.real_data]
+
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 PLAN_ROOT = PROJECT_ROOT / "docs" / "plans" / "narrative-evidence-pilot-2026-09-26"
 TRANSCRIPT_ROOT = PROJECT_ROOT.parent / "earnings-transcripts" / "earnings-transcripts" / "transcripts"

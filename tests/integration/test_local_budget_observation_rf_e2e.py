@@ -7,6 +7,9 @@ import sys
 
 import pytest
 
+
+pytestmark = [pytest.mark.requires_owner]
+
 ROOT = Path(__file__).resolve().parents[2]
 CWP = Path(os.environ.get("CWP_LOCAL_OBSERVATION_ROOT", str(ROOT)))
 FF = Path(os.environ.get("FF_LOCAL_OBSERVATION_ROOT", str(ROOT.parent / "filing-fetch")))

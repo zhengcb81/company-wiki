@@ -164,6 +164,7 @@ def test_old_nfc_fallback_rejects_shadowed_parent_even_if_one_parent_is_exact(tm
         legacy.verify_file(root=tmp_path)
 
 
+@pytest.mark.requires_symlink
 def test_old_nfc_fallback_does_not_hash_a_canonically_equivalent_outside_link(tmp_path, monkeypatch):
     module = _contract()
     implementation = importlib.import_module("company_wiki.source_contract.source_manifest")

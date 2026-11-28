@@ -17,6 +17,9 @@ from tools.feedback_loop.local_host import LocalHost
 from tools.feedback_loop.observations import read_batch
 
 
+pytestmark = [pytest.mark.requires_owner]
+
+
 ROOT = Path(__file__).resolve().parents[2]
 PY = [sys.executable, "-B", "-X", "utf8"]
 loopback = metered_provider.loopback
