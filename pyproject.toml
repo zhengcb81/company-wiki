@@ -18,17 +18,17 @@ dependencies = [
 ]
 
 [project.scripts]
-company-wiki-source-export = "company_wiki.source_contract.cli:console"
-company-wiki-collect-announcement = "company_wiki.source_catalog.announcement_cli:console"
-company-wiki-source-catalog = "company_wiki.source_catalog.cli:console"
-company-wiki-source-read = "company_wiki.source_catalog.source_reader_cli:console"
-company-wiki-source-query = "company_wiki.source_catalog.source_query_cli:console"
-company-wiki-company-sources = "company_wiki.source_catalog.company_source_index_cli:console"
-company-wiki-source-export-v2 = "company_wiki.source_catalog.source_export_v2_cli:console"
-company-wiki-identify = "company_wiki.source_catalog.identity_cli:console"
-company-wiki-transcript-import = "company_wiki.source_catalog.transcript_import_cli:console"
-company-wiki-narrative-read = "company_wiki.automation.narrative_transport_cli:console"
-company-wiki-narrative-batch = "company_wiki.automation.narrative_batch_cli:console"
+company-wiki-source-export = "company_wiki.source_contract.cli:main"
+company-wiki-collect-announcement = "company_wiki.source_catalog.announcement_cli:main"
+company-wiki-source-catalog = "company_wiki.source_catalog.cli:main"
+company-wiki-source-read = "company_wiki.source_catalog.source_reader_cli:main"
+company-wiki-source-query = "company_wiki.source_catalog.source_query_cli:main"
+company-wiki-company-sources = "company_wiki.source_catalog.company_source_index_cli:main"
+company-wiki-source-export-v2 = "company_wiki.source_catalog.source_export_v2_cli:main"
+company-wiki-identify = "company_wiki.source_catalog.identity_cli:main"
+company-wiki-transcript-import = "company_wiki.source_catalog.transcript_import_cli:main"
+company-wiki-narrative-read = "company_wiki.automation.narrative_transport_cli:main"
+company-wiki-narrative-batch = "company_wiki.automation.narrative_batch_cli:main"
 
 [project.optional-dependencies]
 pdf = ["PyMuPDF>=1.23.0,<2.0"]

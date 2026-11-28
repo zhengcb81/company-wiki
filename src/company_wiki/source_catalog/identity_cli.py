@@ -44,7 +44,7 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-@runtime_feedback.entry("source-identity", machine_stderr=True)
+@runtime_feedback.command("source-identity", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -85,12 +85,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0 if result.status is IdentityStatus.RESOLVED else 2
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main, machine_stderr=True)
-
-
 if __name__ == "__main__":
-    raise SystemExit(console())
+    raise SystemExit(main())
 
 
 __all__ = ["main"]

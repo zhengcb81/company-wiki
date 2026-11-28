@@ -146,7 +146,7 @@ def dispatch_transport_request(
     return result.data, result.receipt
 
 
-@runtime_feedback.entry("narrative-read", machine_stderr=True)
+@runtime_feedback.command("narrative-read", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -234,9 +234,5 @@ def main(argv: Sequence[str] | None = None) -> int:
             catalog.close()
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main, machine_stderr=True)
-
-
 if __name__ == "__main__":
-    raise SystemExit(console())
+    raise SystemExit(main())

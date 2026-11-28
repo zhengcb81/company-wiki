@@ -540,11 +540,7 @@ def _parser() -> argparse.ArgumentParser:
 
     # Compatibility names return a named retirement; they are absent from help.
     for command in RETIRED_MAINTENANCE_COMMANDS:
-        subparsers.add_parser(command, help=argparse.SUPPRESS, add_help=False)
-    subparsers._choices_actions = [
-        action for action in subparsers._choices_actions
-        if action.dest not in RETIRED_MAINTENANCE_COMMANDS
-    ]
+        subparsers.add_parser(command, add_help=False)
     subparsers.metavar = '{' + ','.join(
         name for name in subparsers.choices if name not in RETIRED_MAINTENANCE_COMMANDS
     ) + '}'
@@ -789,7 +785,7 @@ def _report_error(exc: Exception) -> int:
     return 1
 
 
-@runtime_feedback.entry("source-catalog", machine_stderr=True)
+@runtime_feedback.command("source-catalog", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     # Official operations own their parser, catalog lifecycle and raw-byte output.
     # Delegate before configuring streams or opening the generic catalog.
@@ -1348,12 +1344,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main, machine_stderr=True)
-
-
 if __name__ == "__main__":
-    raise SystemExit(console())
+    raise SystemExit(main())
 
 
 __all__ = ["main"]

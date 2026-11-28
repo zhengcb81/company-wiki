@@ -5,12 +5,12 @@ from __future__ import annotations
 from contextlib import contextmanager
 from decimal import Decimal
 import json
-import os
 from pathlib import Path
 import subprocess
 from tempfile import TemporaryDirectory
 from typing import Any, Sequence
 
+from company_wiki import runtime_journal
 from company_wiki.bounded_process import TransportError, run_json_process
 
 from .acquisition_contracts import DiscoveryPage, DownloadCandidate, DownloadReceipt
@@ -382,7 +382,7 @@ class JsonCommandAdapter:
         timeout_seconds: float | None = None,
     ) -> dict[str, Any]:
         command = (*self.command, action, *extra_args)
-        environment = dict(os.environ)
+        environment = runtime_journal.subprocess_environment()
         environment["PYTHONUTF8"] = "1"
         environment["PYTHONDONTWRITEBYTECODE"] = "1"
         verified_response = None

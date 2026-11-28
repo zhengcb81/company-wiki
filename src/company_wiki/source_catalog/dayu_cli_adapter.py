@@ -15,6 +15,7 @@ import shutil
 from tempfile import TemporaryDirectory
 from typing import Any, Sequence
 
+from company_wiki import runtime_journal
 from company_wiki.bounded_process import ChildFailed, ChildTimeout, TransportError, run_bounded
 from company_wiki.diagnostic_stream import RedactedTextStream
 
@@ -48,7 +49,9 @@ _DAYU_ENVIRONMENT = frozenset({
 
 
 def _child_environment() -> dict[str, str]:
-    environment = {key: value for key, value in os.environ.items() if key.upper() in _DAYU_ENVIRONMENT}
+    environment = {
+        key: value for key, value in runtime_journal.subprocess_environment().items() if key.upper() in _DAYU_ENVIRONMENT
+    }
     environment.update(PYTHONUTF8="1", PYTHONDONTWRITEBYTECODE="1")
     return environment
 

@@ -40,7 +40,7 @@ def _failure_receipt(request, db_path, status, error):
             "budget":budget}
 
 
-@runtime_feedback.entry("narrative-batch")
+@runtime_feedback.command("narrative-batch")
 def main(
     argv: Sequence[str] | None = None, *, loaded_model_options: dict | None = None,
 ) -> int:
@@ -113,9 +113,5 @@ def main(
     return exit_code
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main)
-
-
 if __name__ == "__main__":
-    raise SystemExit(console())
+    raise SystemExit(main())

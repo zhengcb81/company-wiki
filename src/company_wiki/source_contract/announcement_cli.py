@@ -22,6 +22,4 @@ __all__ = ["build_parser", "main"]
 
 
 if __name__ == "__main__":
-    from company_wiki.source_catalog.announcement_cli import console
-
-    raise SystemExit(console())
+    raise SystemExit(main())

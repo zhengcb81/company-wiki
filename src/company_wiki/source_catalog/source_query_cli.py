@@ -36,7 +36,7 @@ def _emit(payload: dict[str, object]) -> None:
     sys.stdout.flush()
 
 
-@runtime_feedback.entry("source-query")
+@runtime_feedback.command("source-query")
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -113,9 +113,5 @@ def main(argv: Sequence[str] | None = None) -> int:
             catalog.close()
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main)
-
-
 if __name__ == "__main__":
-    raise SystemExit(console())
+    raise SystemExit(main())

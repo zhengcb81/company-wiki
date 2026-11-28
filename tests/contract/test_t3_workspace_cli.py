@@ -122,6 +122,47 @@ def _request(operation, **extra):
     }
 
 
+def test_control_failure_is_cold_readable_outside_workspaces_owned_sources(deployment):
+    command, owner, workspaces, env = deployment
+    run = "t3-control-native-run"
+    env.update(
+        RESEARCH_FEEDBACK_RUN_ID=run,
+        RESEARCH_FEEDBACK_ATTEMPT_ID=run,
+        RESEARCH_FEEDBACK_OUT=str(owner / "unexpected-sidecar" / "feedback.jsonl"),
+        XDG_STATE_HOME=str(owner),
+    )
+    opened = _call(command, _request("open"), owner, env)
+    assert opened.returncode == 0, opened.stderr
+    ready = json.loads(opened.stdout)
+    binding = {"workspace_id": ready["workspace_id"]}
+
+    refused = _call(command, _request("close", run_id="incorrect", **binding), owner, env)
+    assert refused.returncode == 2
+    assert json.loads(refused.stdout)["error_code"] == "workspace_binding_mismatch"
+    assert Path(ready["connection"]["cwd"]).is_dir()
+
+    closed = _call(command, _request("close", **binding), owner, env)
+    assert json.loads(closed.stdout)["status"] == "closed"
+    assert not Path(ready["connection"]["cwd"]).exists()
+    assert sorted(path.name for path in owner.iterdir()) == ["acquisition.yaml", "identity"]
+
+    runtime = workspaces / "runtime"
+    trace_env = {**env, "RESEARCH_FEEDBACK_DIR": str(runtime / "observations")}
+    trace_env.pop("RESEARCH_FEEDBACK_OUT")
+    trace = _call(
+        [sys.executable, "-B", "-m", "company_wiki.runtime_trace", "--run-id", run, "--attempt-id", run],
+        None, workspaces, trace_env,
+    )
+    assert trace.returncode == 0, trace.stderr
+    result = json.loads(trace.stdout)
+    assert result["status"] == "available"
+    assert result["events"][0]["status"] == "started"
+    assert [row.get("exit_code") for row in result["events"] if "exit_code" in row] == [0, 2, 0]
+    failure, = result["diagnostics"]
+    assert failure["reason"] == "workspace_binding_mismatch"
+    assert failure["exceptions"][0]["type"] == "WorkspaceError"
+
+
 def test_native_workspace_create_observe_recover_and_close(deployment):
     command, owner, workspaces, env = deployment
     first = _call(command, _request("open"), owner, env)

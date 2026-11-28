@@ -1084,6 +1084,7 @@ def test_exact_local_route_does_not_start_an_rpc_interpreter(tmp_path, monkeypat
 
 def test_exact_local_route_preserves_the_worker_environment_boundary(tmp_path, monkeypatch):
     from tools.feedback_loop import host as transport
+    from tools.feedback_loop import local_host as local_transport
     from tools.feedback_loop.local_host import LocalHost
     from tools.feedback_loop.observations import digest
 
@@ -1098,11 +1099,11 @@ def test_exact_local_route_preserves_the_worker_environment_boundary(tmp_path, m
     monkeypatch.setenv("TEST_F4_PRIVATE", "parent-only")
     launched = []
 
-    def wake_only(argv, **options):
-        launched.append({name: options["env"][name] for name in ("TEST_F4_ROUTE", "TEST_F4_PRIVATE")
-                         if name in options["env"]})
+    def wake_only(module, destination, *arguments, environment, **options):
+        launched.append({name: environment[name] for name in ("TEST_F4_ROUTE", "TEST_F4_PRIVATE")
+                         if name in environment})
 
-    monkeypatch.setattr(transport.subprocess, "Popen", wake_only)
+    monkeypatch.setattr(local_transport, "launch_background", wake_only)
     call = transport.process_host(routes, local=LocalHost(settings))
     key = "8" * 64
     payload = {"occurrence_id": "original"}

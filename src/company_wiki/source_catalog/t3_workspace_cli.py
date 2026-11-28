@@ -3,13 +3,12 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 from pathlib import Path
 import re
 import sys
 from typing import Any
 
-from company_wiki import runtime_feedback
+from company_wiki import runtime_feedback, runtime_journal
 from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
 
 from .cli import main as catalog_main
@@ -57,11 +56,8 @@ def _bound_command(args: argparse.Namespace, tail: list[str]) -> int:
             raise WorkspaceError("workspace_config_override")
         if args.catalog_operation == "catalog" and (not tail or tail[0] not in {"identify", "resolve", "ensure"}):
             raise WorkspaceError("workspace_operation_unavailable")
-        runtime = case / "runtime"
-        os.environ.update(LOCALAPPDATA=str(runtime), XDG_STATE_HOME=str(runtime),
-                          RESEARCH_FEEDBACK_DIR=str(runtime / "observations"))
-        os.environ.pop("RESEARCH_FEEDBACK_OUT", None)
-        return int(handler(["--config", str(case / "config/source_catalog.yaml"), *tail]))
+        with runtime_journal.isolated_state(case / "runtime"):
+            return int(handler(["--config", str(case / "config/source_catalog.yaml"), *tail]))
 
 
 def _workspace_response(args: argparse.Namespace, request: Any, response: dict[str, Any]) -> None:
@@ -96,7 +92,7 @@ def _workspace_response(args: argparse.Namespace, request: Any, response: dict[s
         response.update(status="observed", checkpoint=checkpoint, facts=service.observe(binding, checkpoint))
 
 
-@runtime_feedback.entry("t3-workspace")
+@runtime_feedback.entry("t3-workspace", quiet_success=True)
 def main(argv: list[str] | None = None) -> int:
     parser = runtime_feedback.ArgumentParser(description=__doc__, allow_abbrev=False)
     parser.add_argument("--workspace-root", required=True, type=Path)
@@ -106,6 +102,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--binding")
     parser.add_argument("--catalog-operation", choices=list(_BOUND_HANDLERS))
     args, tail = parser.parse_known_args(argv)
+    if args.owner_root is not None or args.binding is not None:
+        with runtime_journal.isolated_state(args.workspace_root.resolve() / "runtime"):
+            return _dispatch(args, tail)
+    return _dispatch(args, tail)
+
+
+@runtime_feedback.entry("t3-workspace")
+def _dispatch(args: argparse.Namespace, tail: list[str]) -> int:
     response: dict[str, Any] = {"schema_version": _RESPONSE_SCHEMA}
     try:
         if args.binding:

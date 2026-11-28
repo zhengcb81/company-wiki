@@ -36,7 +36,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-@runtime_feedback.entry("collect-announcement")
+@runtime_feedback.command("collect-announcement")
 def main(argv: Sequence[str] | None = None) -> int:
     _configure_utf8_streams()
     args = build_parser().parse_args(argv)
@@ -61,9 +61,5 @@ def main(argv: Sequence[str] | None = None) -> int:
 __all__ = ["build_parser", "main"]
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main)
-
-
 if __name__ == "__main__":
-    raise SystemExit(console())
+    raise SystemExit(main())

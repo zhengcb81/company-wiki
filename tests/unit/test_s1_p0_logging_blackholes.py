@@ -200,26 +200,30 @@ def test_feedback_host_cli_starts_from_checkout_without_package_install():
 
 
 def test_background_diagnostic_survives_rotation_failure(tmp_path, monkeypatch):
-    from logging.handlers import RotatingFileHandler
-
     path = tmp_path / "background.log"
-    path.write_bytes(b"previous\n" * (256 * 1024))
+    previous = b"previous\n" * (256 * 1024)
+    path.write_bytes(previous)
+    backup = path.with_name(path.name + ".1")
+    backup.write_bytes(b"original archived log")
     monkeypatch.setenv("CWP_F4_ERROR_LOG", str(path))
+    replace = Path.replace
 
-    def locked(*args):
-        raise PermissionError("reader holds the old log")
+    def locked(source, target):
+        if source.name == path.name and Path(target).name == backup.name:
+            raise PermissionError("reader holds the old log")
+        return replace(source, target)
 
-    monkeypatch.setattr(RotatingFileHandler, "rotate", locked)
+    monkeypatch.setattr(Path, "replace", locked)
 
     def report():
         logging.warning('case preserved {"token":"SYNTHETIC_ROTATION"}')
         return 7
 
     assert diagnostics.run_background(report) == 7
-    with path.open("rb") as stream:
-        stream.seek(-256, os.SEEK_END)
-        tail = stream.read()
-    assert b"case preserved" in tail and b"SYNTHETIC_ROTATION" not in tail
+    actual = path.read_bytes()
+    assert actual.startswith(previous)
+    assert b"case preserved" in actual[len(previous):] and b"SYNTHETIC_ROTATION" not in actual
+    assert backup.read_bytes() == b"original archived log"
 
 
 def test_isolated_ocr_source_has_no_devnull_stderr():

@@ -219,7 +219,7 @@ def run_import(wiki_root: Path, stream: BinaryIO, *,
     }
 
 
-@runtime_feedback.entry("transcript-import", machine_stderr=True)
+@runtime_feedback.command("transcript-import", machine_stderr=True)
 def main(argv: list[str] | None = None) -> int:
     parser = runtime_feedback.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -263,9 +263,5 @@ def main(argv: list[str] | None = None) -> int:
     return exit_code
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main, machine_stderr=True)
-
-
 if __name__ == "__main__":  # pragma: no cover - subprocess entrypoint
-    raise SystemExit(console())
+    raise SystemExit(main())

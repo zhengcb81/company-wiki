@@ -2,6 +2,9 @@
 from __future__ import annotations
 
 
+from collections.abc import Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
 from datetime import datetime, timezone
 from functools import lru_cache
 from hashlib import sha256
@@ -18,7 +21,8 @@ from .file_mutex import win32_filesystem_path
 from .runtime_feedback_values import OWNER, logical_observation_ref
 
 __all__ = [
-    "default_state_root", "diagnostic_paths", "implementation_digest", "input_reference", "read_trace", "write_event",
+    "default_state_root", "delivery_overrides", "diagnostic_paths", "implementation_digest", "input_reference",
+    "isolated_state", "read_trace", "subprocess_environment", "write_event",
 ]
 
 _PREFIX = "runtime-event "
@@ -26,18 +30,53 @@ _DIAGNOSTIC = re.compile(r"feedback-[a-f0-9]{32}\.diagnostic\.json")
 _REFERENCE_FIELDS = frozenset({"run_id", "attempt_id", "related_run_id", "input_ref", "source_id"})
 
 
+_isolated_root: ContextVar[Path | None] = ContextVar("cwp_isolated_runtime_root", default=None)
+
+
+@contextmanager
+def isolated_state(root: Path) -> Iterator[None]:
+    """Keep one isolated invocation's diagnostics within its assigned state directory."""
+    token = _isolated_root.set(root)
+    try:
+        yield
+    finally:
+        _isolated_root.reset(token)
+
+
+def delivery_overrides() -> tuple[Path | None, Path | None]:
+    """Return the sidecar and inbox for the current invocation."""
+    root = _isolated_root.get()
+    if root is not None:
+        return None, root / "observations"
+    sidecar = os.getenv("RESEARCH_FEEDBACK_OUT")
+    inbox = os.getenv("RESEARCH_FEEDBACK_DIR")
+    return Path(sidecar) if sidecar else None, Path(inbox) if inbox else None
+
+
+def subprocess_environment() -> dict[str, str]:
+    """Propagate isolated diagnostics at process launch without modifying the parent."""
+    environment = dict(os.environ)
+    root = _isolated_root.get()
+    if root is not None:
+        environment.update(
+            LOCALAPPDATA=str(root), XDG_STATE_HOME=str(root),
+            RESEARCH_FEEDBACK_DIR=str(root / "observations"),
+        )
+        environment.pop("RESEARCH_FEEDBACK_OUT", None)
+    return environment
+
+
 def default_state_root() -> Path:
+    root = _isolated_root.get()
+    if root is not None:
+        return root / OWNER
     state = os.getenv("LOCALAPPDATA") if os.name == "nt" else os.getenv("XDG_STATE_HOME")
     return (Path(state) if state else Path.home() / ".local" / "state") / OWNER
 
 
 def diagnostic_paths(filename: str) -> tuple[Path, ...]:
     """Select the configured owner paths in write and cold-read order."""
-    roots = [
-        Path(explicit).parent
-        for key in ("RESEARCH_FEEDBACK_OUT", "RESEARCH_FEEDBACK_DIR")
-        if (explicit := os.getenv(key))
-    ]
+    roots = [path.parent for path in delivery_overrides() if path is not None]
     try:
         roots.append(default_state_root())
     except (OSError, RuntimeError, ValueError):
@@ -139,10 +178,11 @@ def _details(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     references = {ref for event in events if isinstance(ref := event.get("details_ref"), str)
                   and _DIAGNOSTIC.fullmatch(ref)}
     paths: list[Path] = []
-    if explicit := os.getenv("RESEARCH_FEEDBACK_OUT"):
-        paths.append(Path(explicit).parent)
-    if explicit := os.getenv("RESEARCH_FEEDBACK_DIR"):
-        paths.append(Path(explicit))
+    sidecar, inbox = delivery_overrides()
+    if sidecar is not None:
+        paths.append(sidecar.parent)
+    if inbox is not None:
+        paths.append(inbox)
     try:
         paths.append(default_state_root() / "observations")
     except (OSError, RuntimeError, ValueError):

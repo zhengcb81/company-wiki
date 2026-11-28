@@ -119,7 +119,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-@runtime_feedback.entry("source-export")
+@runtime_feedback.command("source-export")
 def main(argv: Sequence[str] | None = None) -> int:
     _configure_utf8_streams()
     parser = build_parser()
@@ -150,9 +150,5 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main)
-
-
 if __name__ == "__main__":
-    raise SystemExit(console())
+    raise SystemExit(main())

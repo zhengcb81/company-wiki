@@ -34,7 +34,7 @@ _logger = logging.getLogger(__name__)
 
 
 __all__ = [
-    "ArgumentParser", "checkpoint", "document_results", "entry", "freeze_worker_failure",
+    "ArgumentParser", "checkpoint", "command", "document_results", "entry", "freeze_worker_failure",
     "publish_worker_failure", "record", "record_optional_failure", "refusal", "retain_local_text", "run_cli",
     "runtime_identity", "trace_reference",
 ]
@@ -158,8 +158,8 @@ def freeze_worker_failure(
 
 
 def _feedback_folders() -> tuple[Path, ...]:
-    override = os.getenv("RESEARCH_FEEDBACK_DIR")
-    folders = [Path(override)] if override else []
+    _, override = runtime_journal.delivery_overrides()
+    folders = [override] if override is not None else []
     try:
         folders.append(_directory())
     except (OSError, RuntimeError, ValueError):
@@ -277,10 +277,10 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             if caller is not None:
                 caller.recoverable_failure = True
 
-        explicit = os.getenv("RESEARCH_FEEDBACK_OUT")
+        explicit, _ = runtime_journal.delivery_overrides()
         local_only = not publish_issue or (caller is not None and caller.local_only)
-        if explicit and not local_only:
-            sidecar = win32_filesystem_path(Path(explicit))
+        if explicit is not None and not local_only:
+            sidecar = win32_filesystem_path(explicit)
             try:
                 sidecar.parent.mkdir(parents=True, exist_ok=True)
                 with os_file_mutex(sidecar.with_suffix(sidecar.suffix + ".lock"), timeout_seconds=0.25):
@@ -301,8 +301,8 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
                 return
         last_error: OSError | None = None
         folders = _feedback_folders()
-        if local_only and explicit:
-            folders = (win32_filesystem_path(Path(explicit).parent), *folders)
+        if local_only and explicit is not None:
+            folders = (win32_filesystem_path(explicit.parent), *folders)
         for folder in dict.fromkeys(folders):
             try:
                 folder.mkdir(parents=True, exist_ok=True)
@@ -371,6 +371,22 @@ def run_cli(main: Callable[[], int], *, machine_stderr: bool = False) -> int:
                 # Diagnostic output cannot replace the process failure.
                 pass
         return 1
+
+
+def command(
+    operation: str, *, machine_stderr: bool = False,
+) -> Callable[[Callable[_P, int]], Callable[_P, int]]:
+    """Keep a published CLI callable at its original symbol and own its terminal renderer."""
+    def decorate(main: Callable[_P, int]) -> Callable[_P, int]:
+        observed = entry(operation, machine_stderr=machine_stderr)(main)
+
+        @wraps(main)
+        def invoke(*args: _P.args, **kwargs: _P.kwargs) -> int:
+            return run_cli(lambda: observed(*args, **kwargs), machine_stderr=machine_stderr)
+
+        return invoke
+
+    return decorate
 
 
 class ArgumentParser(argparse.ArgumentParser):

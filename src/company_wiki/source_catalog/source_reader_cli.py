@@ -53,7 +53,7 @@ def _emit_receipt(payload: dict[str, object], *, include_runtime_trace: bool) ->
     sys.stderr.flush()
 
 
-@runtime_feedback.entry("source-read", machine_stderr=True)
+@runtime_feedback.command("source-read", machine_stderr=True)
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -152,9 +152,5 @@ def main(argv: Sequence[str] | None = None) -> int:
             catalog.close()
 
 
-def console() -> int:
-    return runtime_feedback.run_cli(main, machine_stderr=True)
-
-
 if __name__ == "__main__":
-    raise SystemExit(console())
+    raise SystemExit(main())
