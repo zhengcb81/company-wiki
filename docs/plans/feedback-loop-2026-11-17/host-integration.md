@@ -29,6 +29,8 @@ MeetingConverter 的四个执行路由共用 `feedback_owner.py --db DB --sideca
 - 在实际运行 agent 的宿主检查能否按调用者提供的稳定 ID 创建及查询作业、取回终态、区分确知不存在与状态未知。以两个并发提交和故意丢失一次提交回复验证。已安装可执行文件、一次会话中的 agent 列表、测试 SQLite 的绿色结果分别只证明相应能力。
 - ROOT 在工程运行环境提供固定的控制命令。各 owner 的映射取自运维配置，工作目录、技能路径和可写仓由该映射确定。业务或报告正文作为待分析数据传入。公开接口为[控制端口](interfaces.md)；可使用宿主已有持久作业接口或给原生作业加一层薄适配。FF 的下载 job 只管理下载，CWP 来源 AUTO 只管理资料，Audit 的 pool_progress 继续管理选样建议。
 - 宿主以 action ID 原子登记原生作业和请求摘要，再交付执行。若工具只提供一次性启动，先在已有 owner 作业设施实现按 key 领取、存原生运行 ID 和接收结果。启动与回执之间崩溃时按原 key/原生 ID 核对。无法判断是否已实际启动时回 unknown，等待原生终态或新证据。owner 端将 action 的处置投影为协议中的标准状态。
+
+丢失执行回包后，宿主向该动作原配置的只读 `get-action ACTION_ID` 查询。责任仓可返回 `receipt.request` 与 `receipt.result`，也可在持久收据中只保留 `receipt.request_sha256` 与 `receipt.result`，以避免重印原请求内的敏感历史编号。摘要按现有 F4 canonical JSON 对原始完整提交请求计算 SHA-256，涵盖 `method` 和内部 `request_digest` 字段，宿主与已冻结的原完整请求逐值核对。若回包含有 `receipt.request`，则由该请求本身证明身份，失配继续为未知。既有 report 回执继续可读。同一动作冷读成功后只入账一次，原动作和生产作业不重派。
 - `observe` 是本地发生登记，`reconcile` 只查询原始作业。稳定偏差经 `triage` 选由哪个 owner 处理。只有 `repair` 才调用该仓修理技能。调度器将本仓 PWF、原始 issue、小型复现、已有版本作为输入。已有 worktree 正在被其他项目使用时，由本仓沿用现有隔离策略；同一可写工作树一次只有一个写者。不同 owner 可以并发，预算和 provider 并发沿用各自实际账户。
 - 拒绝原因和门禁审视随已有分诊作业记录，自动完成结果也可读回 `gate_reviews`。检查真实保护目标和可用反例后，再决定删除、收窄、保留或取证。与拒绝同一作业的明确未知费用先查原账本。[拒绝审视协议](interfaces.md#拒绝先审视门禁)
 
