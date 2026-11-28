@@ -7,7 +7,6 @@ import json
 from os import fstat
 from pathlib import Path
 import shutil
-import sys
 from typing import Any
 
 from company_wiki.atomic_file import atomic_output
@@ -23,8 +22,6 @@ from .source_reader import SourceVersionReader
 from .source_request import SourceRequest
 
 CASE_MARKETS = {"cn_annual": "CN", "hk_annual": "HK", "us_annual": "US", "corrupt_original": "CN"}
-COMMANDS = {"catalog": "cli", "query": "source_query_cli",
-            "local_prepare": "local_prepare_cli", "open": "source_reader_cli"}
 CASE_PREFIX = "t3-"
 _CATALOG_DIR = ".source_catalog"
 _CORRUPT_CONTROL = b"invalid original bytes for isolated T3 checksum verification\n"
@@ -268,11 +265,3 @@ def _provenance(meta: dict[str, Any], request: SourceRequest, binding: CaseBindi
         and meta.get("filing_date") and meta.get("content_sha256") == digest
         and meta.get("retrieved_at") and meta.get("adapter_name") and meta.get("adapter_version")
     )
-
-
-def connection_for(workspaces: Path, case: Path) -> dict[str, object]:
-    command = [sys.executable, "-B", "-m", "company_wiki.source_catalog.t3_workspace_cli",
-               "--workspace-root", str(workspaces.resolve()), "--binding", case.name]
-    return {"cwd": str(case), "commands": {
-        key: [*command, "--catalog-operation", key, "--"] for key in COMMANDS
-    }}

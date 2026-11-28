@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-from importlib import import_module
 import json
 import os
 from pathlib import Path
@@ -12,17 +11,36 @@ from typing import Any
 
 from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
 
-from .t3_workspace import CASE_MARKETS, COMMANDS, CaseBinding, WorkspaceError, WorkspaceService, connection_for
+from .cli import main as catalog_main
+from .local_prepare_cli import main as local_prepare_main
+from .source_query_cli import main as query_main
+from .source_reader_cli import main as open_main
+from .t3_workspace import CASE_MARKETS, CaseBinding, WorkspaceError, WorkspaceService
 
 _REQUEST_SCHEMA = "cwp-t3-workspace-request/1"
 _RESPONSE_SCHEMA = "cwp-t3-workspace/1"
 _OPERATIONS = {"open", "observe", "close"}
 _BOUND_ID = re.compile(r"t3-[0-9a-f]{32}")
 _OWNER_CONFIG_OVERRIDES = {"--config", "--acquisition-config", "--worker-config", "--identity-cache-dir", "--refresh"}
+_BOUND_HANDLERS = {
+    "catalog": catalog_main,
+    "query": query_main,
+    "local_prepare": local_prepare_main,
+    "open": open_main,
+}
+
+
+def _connection(workspaces: Path, case: Path) -> dict[str, object]:
+    command = [sys.executable, "-B", "-m", "company_wiki.source_catalog.t3_workspace_cli",
+               "--workspace-root", str(workspaces.resolve()), "--binding", case.name]
+    return {"cwd": str(case), "commands": {
+        operation: [*command, "--catalog-operation", operation, "--"] for operation in _BOUND_HANDLERS
+    }}
 
 
 def _bound_command(args: argparse.Namespace, tail: list[str]) -> int:
-    if args.catalog_operation not in COMMANDS or not _BOUND_ID.fullmatch(args.binding):
+    handler = _BOUND_HANDLERS.get(args.catalog_operation)
+    if handler is None or not _BOUND_ID.fullmatch(args.binding):
         raise WorkspaceError("invalid_bound_command")
     root = args.workspace_root.resolve()
     if not root.is_dir():
@@ -42,8 +60,7 @@ def _bound_command(args: argparse.Namespace, tail: list[str]) -> int:
         os.environ.update(LOCALAPPDATA=str(runtime), XDG_STATE_HOME=str(runtime),
                           RESEARCH_FEEDBACK_DIR=str(runtime / "observations"))
         os.environ.pop("RESEARCH_FEEDBACK_OUT", None)
-        module = import_module(f"company_wiki.source_catalog.{COMMANDS[args.catalog_operation]}")
-        return int(module.main(["--config", str(case / "config/source_catalog.yaml"), *tail]))
+        return int(handler(["--config", str(case / "config/source_catalog.yaml"), *tail]))
 
 
 def _workspace_response(args: argparse.Namespace, request: Any, response: dict[str, Any]) -> None:
@@ -66,7 +83,7 @@ def _workspace_response(args: argparse.Namespace, request: Any, response: dict[s
     service = WorkspaceService(args.workspace_root, args.owner_root, args.acquisition_config, args.identity_cache)
     if operation == "open":
         location = service.open(binding)
-        response.update(status="opened", connection=connection_for(args.workspace_root, location))
+        response.update(status="opened", connection=_connection(args.workspace_root, location))
     elif operation == "close":
         service.close(binding)
         response["status"] = "closed"
@@ -85,7 +102,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--acquisition-config", type=Path)
     parser.add_argument("--identity-cache", type=Path)
     parser.add_argument("--binding")
-    parser.add_argument("--catalog-operation", choices=list(COMMANDS))
+    parser.add_argument("--catalog-operation", choices=list(_BOUND_HANDLERS))
     args, tail = parser.parse_known_args(argv)
     response: dict[str, Any] = {"schema_version": _RESPONSE_SCHEMA}
     try:

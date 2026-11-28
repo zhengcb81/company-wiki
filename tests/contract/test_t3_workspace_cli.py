@@ -1,6 +1,7 @@
 """Native control and filing commands for the CWP-owned T3 isolation port."""
 from __future__ import annotations
 
+from hashlib import sha256
 import json
 import os
 from pathlib import Path
@@ -131,7 +132,7 @@ def test_native_workspace_create_observe_recover_and_close(deployment):
     connection = response["connection"]
     workspace = Path(connection["cwd"])
     assert workspace.is_relative_to(workspaces)
-    assert set(connection["commands"]) >= {"catalog", "query", "open"}
+    assert set(connection["commands"]) == {"catalog", "query", "local_prepare", "open"}
     workspace_id = response["workspace_id"]
 
     # A fresh process must recover the exact binding after a lost open reply.
@@ -215,6 +216,36 @@ def test_native_running_assurance_observes_exact_download_then_reuse(deployment)
         assert (initial["source_id"], initial["sha256"], initial["mtime_ns"]) == (
             reused["source_id"], reused["sha256"], reused["mtime_ns"],
         )
+        source_request = {
+            "entity": "宁德时代", "market": "CN", "security_id": "300750",
+            "document_kind": "annual_report", "as_of_date": "2026-07-31",
+            "fiscal_year": 2024, "fiscal_period": "FY",
+        }
+        query = _call(connection["commands"]["query"], source_request, workspace, env)
+        assert query.returncode == 0, query.stdout + query.stderr
+        matches = json.loads(query.stdout)["matches"]
+        assert len(matches) == 1
+        ref = matches[0]
+        assert ref["source_id"] == initial["source_id"]
+        assert ref["content_sha256"] == initial["sha256"]
+
+        prepare = _call([*connection["commands"]["local_prepare"], "--request", "-"], {
+            "schema_version": "local-source-prepare-request/1",
+            "source_request": source_request,
+        }, workspace, env)
+        assert prepare.returncode == 0, prepare.stdout + prepare.stderr
+        prepared = json.loads(prepare.stdout)
+        assert prepared["status"] == "ready"
+        assert prepared["source_ref"]["source_id"] == ref["source_id"]
+        assert prepared["download_events"] == 0
+
+        opened = _call([
+            *connection["commands"]["open"], "--document-id", ref["document_id"],
+            "--source-id", ref["source_id"], "--content-sha256", ref["content_sha256"],
+        ], None, workspace, env)
+        assert opened.returncode == 0, opened.stdout + opened.stderr
+        assert sha256(opened.stdout).hexdigest() == initial["sha256"]
+        assert json.loads(opened.stderr)["source_id"] == ref["source_id"]
     finally:
         closed = _call(command, _request("close", **ids), owner, env)
         assert json.loads(closed.stdout)["status"] == "closed"
