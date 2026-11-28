@@ -1,7 +1,7 @@
 # S6 · 12 个模块的架构、日志和端到端测试整改
 
 > **主线位置：`S6`（已接入 PWF 主线，作为 `feedback-loop-2026-11-17` S5-10 / F4 收尾线的直接后续，排在 W12 业务摘要恢复之前）**
-> **当前状态** `IN_PROGRESS`。11 张止血卡已进入各仓发布线，P1-00 已独审发布。Phase 1 已有 11 路发布，StockQA 正在关闭最后的委托恢复回归与精确发布矩阵。正式 T3 部署绑定仍待核对。见 [progress.md](progress.md)。
+> **当前状态** `IN_PROGRESS`。11 张止血卡已进入各仓发布线，P1-00 已独审发布。Phase 1 的 12 路运行源码均已发布到各自实际分支。最终验收继续补齐 StockQA 历史委托回归，以及 StockWiki 新发现的 Ubuntu 兼容问题。正式 T3 部署绑定仍待核对。见 [progress.md](progress.md)。
 > [前序 F4 正式回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md) · [后续 W12 业务检查点](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
 > **配套核心文档**：
 > - **审查发现与逐仓 `file:line` 证据**：[findings.md](findings.md)
@@ -54,7 +54,7 @@ flowchart TD
 
 ## Next Step
 
-CWP 已完成父进程回收临时目录的同版全量和组合验收，已并主线。IQS 已验证作业日志归属、C06 十二题及四个历史组合，精确候选双平台与覆盖聚合通过，已推出 `master`。Dashboard 已修复异常生命周期和 Windows 句柄滞留，经同版私有 CI、独审和 CWP wheel 联调后并入 `main`。StockQA 保留原作业、原收据及明确拒绝原因，重验精确双平台。T3 的三市场、损坏原件、原作业冷读及零重发已通过离线组合，正式绑定单列核对。见[候选和发布台账](progress.md)。
+CWP 已完成父进程回收临时目录的同版全量和组合验收，已并主线。IQS 已验证作业日志归属、C06 十二题及四个历史组合，精确候选双平台与覆盖聚合通过，已推出 `master`。Dashboard 已修复异常生命周期和 Windows 句柄滞留，经同版私有 CI、独审和 CWP wheel 联调后并入 `main`。StockQA 原作业、原收据及明确拒绝原因的修复已通过精确双平台及独审并发布，三份委托回归等最终集成矩阵。StockWiki 在 Ubuntu 的原件样本和浏览器运行时差异由本仓隔离修复。T3 的三市场、损坏原件、原作业冷读及零重发已通过离线组合，正式绑定单列核对。见[候选和发布台账](progress.md)。
 
 ---
 
@@ -82,7 +82,7 @@ CWP 已完成父进程回收临时目录的同版全量和组合验收，已并�
 ---
 
 ### Phase 1 — 防偷懒机械安全网落地、CI 假绿清零、Windows 矩阵与历史缺陷 100% 锁定
-- **Status:** P1-00 独审完成并发布。P1-03 ET、P1-04 SID 发布版双平台 CI 通过。P1-02 FF 精确主线双平台通过。P1-07 StockWiki 在独审及 Windows 全量与 C06 通过后快进本地主线，Linux 未实跑。CWP 的精确双平台 27 项和公开组合均通过，已快进 `master`。IQS 同版正式 CI、覆盖聚合和历史组合已验，已推远端 `master`。RF 独审及修正版双平台通过并推远端 `main`，发布跑次已通过。Audit 隔离分片后 Windows、Ubuntu 各 869 项和独审通过，快进本地主线。MC 已独审及快进发布，精确发布版双平台通过。IR 首轮 Windows 的 8.3 别名差异已复验，精确候选双平台通过和独审完成，已推 `main`。Dashboard 已通过独审及 Windows、Ubuntu 同版验收，已推远端 `main`。StockQA 双平台暴露的检查点错误类型与归属分流已修复，定向 309 项通过，仍待同版完整 CI 和独审。
+- **Status:** P1-00 独审完成并发布。P1-03 ET、P1-04 SID 发布版双平台 CI 通过。P1-02 FF 精确主线双平台通过。P1-07 StockWiki 在独审及 Windows 全量与 C06 通过后快进本地主线，Linux 未实跑。CWP 的精确双平台 27 项和公开组合均通过，已快进 `master`。IQS 同版正式 CI、覆盖聚合和历史组合已验，已推远端 `master`。RF 独审及修正版双平台通过并推远端 `main`，发布跑次已通过。Audit 隔离分片后 Windows、Ubuntu 各 869 项和独审通过，快进本地主线。MC 已独审及快进发布，精确发布版双平台通过。IR 首轮 Windows 的 8.3 别名差异已复验，精确候选双平台通过和独审完成，已推 `main`。Dashboard 已通过独审及 Windows、Ubuntu 同版验收，已推远端 `main`。StockQA 检查点及附件冷恢复同版双平台和独审通过，已推实际 `master`，仅余历史委托测试集成。StockWiki 新增的 Ubuntu 实测发现项目已在隔离工作树处理中。
 - P1-00 与止血并行。后续各仓将适用规则接入本仓现有 CI；见上表的汇合条件。
 
 | 卡号 | 范围 | 具体施工细节 | 退出硬指标 |
