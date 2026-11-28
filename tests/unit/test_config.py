@@ -154,6 +154,16 @@ assert configuration.paths.downloader_dir is None
 class TestConfigDefaults:
     """测试配置默认值"""
 
+    def test_implicit_wiki_root_follows_its_configuration_owner(self, tmp_path, monkeypatch):
+        from company_wiki.model_config import repository_models_path
+        from company_wiki.runtime_config import PathsConfig
+
+        monkeypatch.delenv("WIKI_ROOT", raising=False)
+        actual_config = tmp_path / "config.yaml"
+        actual_config.write_text("{}\n", encoding="utf-8")
+        assert load_config(actual_config).paths.wiki_root == tmp_path
+        assert PathsConfig().wiki_root == repository_models_path().parents[1]
+
     def test_downloader_paths_use_stockinfo_dl_simple(self, tmp_path):
         """默认下载器路径指向当前选定的 StockInfoDLSimple。"""
         from config import PathsConfig

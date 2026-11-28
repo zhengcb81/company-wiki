@@ -638,6 +638,47 @@ def test_writer_registers_exact_group_with_declared_adapter_not_root_rescan(tmp_
         Path(imported.canonical_path).relative_to(catalog.config.roots[0].path).as_posix()})
     assert imported.source_ref.content_sha256 == receipt.content_sha256
 
+def test_canonical_import_refuses_a_destination_outside_its_physical_root(tmp_path, catalog):
+    import os
+    import subprocess
+
+    from company_wiki.source_catalog import CanonicalImportError, CanonicalSourceWriter
+
+    request, candidate, receipt, staged = _staged_contract(tmp_path)
+    original = staged.read_bytes()
+    outside = tmp_path / "another-owner"
+    outside.mkdir()
+    sentinel = outside / "preserve.txt"
+    sentinel.write_bytes(b"independent owner")
+    link = catalog.config.roots[0].path / request.entity
+    if os.name == "nt":
+        env = {key: value for key, value in os.environ.items()
+               if key.upper() in {"SYSTEMROOT", "WINDIR", "PATH", "TEMP", "TMP"}}
+        env.update(CWP_TEST_LINK=str(link), CWP_TEST_TARGET=str(outside))
+        subprocess.run(
+            ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
+             "New-Item -ItemType Junction -Path $env:CWP_TEST_LINK -Target $env:CWP_TEST_TARGET | Out-Null"],
+            env=env, stdin=subprocess.DEVNULL, capture_output=True, check=True, timeout=15,
+            creationflags=subprocess.CREATE_NO_WINDOW,
+        )
+    else:
+        link.symlink_to(outside, target_is_directory=True)
+    try:
+        assert link.resolve() == outside.resolve()
+        writer = CanonicalSourceWriter(catalog, staging_root=staged.parent)
+        with pytest.raises(CanonicalImportError, match="canonical_destination_outside_root"):
+            writer.import_staged(request, candidate, receipt)
+        assert list(outside.iterdir()) == [sentinel]
+        assert sentinel.read_bytes() == b"independent owner"
+        assert staged.read_bytes() == original
+    finally:
+        assert link.resolve() == outside.resolve()
+        if os.name == "nt":
+            link.rmdir()
+        else:
+            link.unlink()
+
+
 def test_registration_uses_same_physical_root_as_the_immutable_write(tmp_path):
     from company_wiki.source_catalog import CanonicalSourceWriter, CatalogConfig, RootSpec, SourceCatalog
     from company_wiki.source_catalog.source_reader import SourceVersionReader

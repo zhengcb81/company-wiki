@@ -10,6 +10,7 @@ import hashlib
 import json
 import sqlite3
 import sys
+from contextlib import ExitStack
 from dataclasses import asdict, replace
 from pathlib import Path
 
@@ -150,15 +151,25 @@ def _fixture(tmp_path: Path, *, three_roots: bool = False,
     return catalog, tuple(paths), tuple(roots), dict(row)
 
 
+@pytest.fixture
+def source_version_fixture():
+    with ExitStack() as resources:
+        def create(*args, **kwargs):
+            built = _fixture(*args, **kwargs)
+            resources.callback(built[0].close)
+            return built
+        yield create
+
+
 @pytest.mark.parametrize("visibility,decision,assertion_sha", [
     ("active", "verified", SHA), ("legacy", "verified", SHA),
     ("shadow", "verified", SHA), ("active", "rejected", SHA),
     ("active", "verified", OTHER_SHA), ("legacy", "verified", OTHER_SHA),
 ])
 def test_steady_policy_keeps_activated_facts_and_legacy_capture_without_canary(
-    tmp_path, visibility, decision, assertion_sha,
+    source_version_fixture, tmp_path, visibility, decision, assertion_sha,
 ):
-    catalog, paths, _, ids = _fixture(tmp_path)
+    catalog, paths, _, ids = source_version_fixture(tmp_path)
     try:
         reader = SourceVersionReader(catalog)
         ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
@@ -195,8 +206,8 @@ def test_steady_policy_keeps_activated_facts_and_legacy_capture_without_canary(
         catalog.close()
 
 
-def test_exact_ref_contains_no_location_and_delivers_verified_bytes(tmp_path):
-    catalog, paths, _, ids = _fixture(tmp_path)
+def test_exact_ref_contains_no_location_and_delivers_verified_bytes(source_version_fixture, tmp_path):
+    catalog, paths, _, ids = source_version_fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
     serialized = asdict(ref)
@@ -215,8 +226,8 @@ def test_exact_ref_contains_no_location_and_delivers_verified_bytes(tmp_path):
     assert opened.policy_sha256 == export_policy_2x(catalog.config)[0]
 
 
-def test_reusable_read_reports_missing_when_only_nonreusable_copy_exists(tmp_path):
-    catalog, paths, roots, ids = _fixture(tmp_path, three_roots=True)
+def test_reusable_read_reports_missing_when_only_nonreusable_copy_exists(source_version_fixture, tmp_path):
+    catalog, paths, roots, ids = source_version_fixture(tmp_path, three_roots=True)
     try:
         # The catalog knows three exact copies. Current filing policy admits
         # neither directory copy, while the only admitted roots have lost the
@@ -252,11 +263,11 @@ def test_reusable_read_reports_missing_when_only_nonreusable_copy_exists(tmp_pat
 
 
 def test_open_version_retries_next_copy_when_location_disappears_after_lookup(
-    tmp_path, monkeypatch,
+    source_version_fixture, tmp_path, monkeypatch,
 ):
     from company_wiki.source_catalog.resolver import SourceResolver
 
-    catalog, _paths, _roots, ids = _fixture(tmp_path, three_roots=True)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path, three_roots=True)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
     locations = sorted(
@@ -293,11 +304,11 @@ def test_open_version_retries_next_copy_when_location_disappears_after_lookup(
 
 
 def test_disappeared_location_record_does_not_claim_original_missing(
-    tmp_path, monkeypatch,
+    source_version_fixture, tmp_path, monkeypatch,
 ):
     from company_wiki.source_catalog.resolver import SourceResolver
 
-    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
     location = catalog.source_location_candidates(ref.document_id, ref.source_id)[0]
@@ -338,11 +349,11 @@ def test_disappeared_location_record_does_not_claim_original_missing(
 
 
 def test_resolver_source_ref_change_is_not_treated_as_a_retryable_location_race(
-    tmp_path, monkeypatch,
+    source_version_fixture, tmp_path, monkeypatch,
 ):
     from company_wiki.source_catalog.resolver import SourceResolver
 
-    catalog, _paths, _roots, ids = _fixture(tmp_path, three_roots=True)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path, three_roots=True)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
     attempts: list[str] = []
@@ -364,13 +375,13 @@ def test_resolver_source_ref_change_is_not_treated_as_a_retryable_location_race(
 
 
 def test_narrative_derivation_open_and_verify_return_bound_review_snapshot(
-    tmp_path,
+    source_version_fixture, tmp_path,
 ):
     from company_wiki.source_catalog.prompt_injection import (
         record_prompt_injection_review,
     )
 
-    catalog, _, _, ids = _fixture(tmp_path)
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
     policy_hash = export_policy_2x(catalog.config)[0]
@@ -418,8 +429,8 @@ def test_narrative_derivation_open_and_verify_return_bound_review_snapshot(
     assert current_read.source_read_policy_sha256 != "0" * 64
 
 
-def test_wrong_identity_hash_and_retirement_fail_before_open(tmp_path, monkeypatch):
-    catalog, _, _, ids = _fixture(tmp_path)
+def test_wrong_identity_hash_and_retirement_fail_before_open(source_version_fixture, tmp_path, monkeypatch):
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
 
@@ -450,8 +461,8 @@ def test_wrong_identity_hash_and_retirement_fail_before_open(tmp_path, monkeypat
     assert error.value.status == "blocked"
 
 
-def test_same_version_fallback_survives_corruption_and_root_move(tmp_path):
-    catalog, paths, roots, ids = _fixture(tmp_path, three_roots=True)
+def test_same_version_fallback_survives_corruption_and_root_move(source_version_fixture, tmp_path):
+    catalog, paths, roots, ids = source_version_fixture(tmp_path, three_roots=True)
     ref = SourceVersionReader(catalog).query_ref(
         ids["document_id"], ids["source_id"], SHA
     )
@@ -480,8 +491,8 @@ def test_same_version_fallback_survives_corruption_and_root_move(tmp_path):
     ).data == BODY
 
 
-def test_streaming_verify_version_uses_same_fallback_and_pathless_receipt(tmp_path):
-    catalog, paths, _, ids = _fixture(tmp_path, three_roots=True)
+def test_streaming_verify_version_uses_same_fallback_and_pathless_receipt(source_version_fixture, tmp_path):
+    catalog, paths, _, ids = source_version_fixture(tmp_path, three_roots=True)
     ref = SourceVersionReader(catalog).query_ref(
         ids["document_id"], ids["source_id"], SHA
     )
@@ -504,8 +515,8 @@ def test_streaming_verify_version_uses_same_fallback_and_pathless_receipt(tmp_pa
     assert error.value.reason == "no_verified_location"
 
 
-def test_other_version_never_substitutes_and_policy_is_rechecked(tmp_path, monkeypatch):
-    catalog, paths, roots, ids = _fixture(tmp_path, three_roots=True)
+def test_other_version_never_substitutes_and_policy_is_rechecked(source_version_fixture, tmp_path, monkeypatch):
+    catalog, paths, roots, ids = source_version_fixture(tmp_path, three_roots=True)
     ref = SourceVersionReader(catalog).query_ref(
         ids["document_id"], ids["source_id"], SHA
     )
@@ -538,8 +549,8 @@ def test_other_version_never_substitutes_and_policy_is_rechecked(tmp_path, monke
     assert error.value.status == "unavailable"
 
 
-def test_malformed_indexed_locator_is_a_named_refusal(tmp_path):
-    catalog, _, _, ids = _fixture(tmp_path)
+def test_malformed_indexed_locator_is_a_named_refusal(source_version_fixture, tmp_path):
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     ref = SourceVersionReader(catalog).query_ref(
         ids["document_id"], ids["source_id"], SHA
     )
@@ -582,9 +593,9 @@ def test_missing_catalog_is_a_pathless_named_refusal(tmp_path):
     [(None, True), ("http://sec.gov/x/2025", True), ("https://sec.gov/x/2025", False)],
 )
 def test_filing_reuse_verifies_raw_despite_sparse_capture_metadata(
-    tmp_path, monkeypatch, source_url, capture_trace
+    source_version_fixture, tmp_path, monkeypatch, source_url, capture_trace
 ):
-    catalog, _, _, ids = _fixture(
+    catalog, _, _, ids = source_version_fixture(
         tmp_path, source_url=source_url, capture_trace=capture_trace
     )
     ref = SourceVersionReader(catalog).query_ref(
@@ -631,9 +642,9 @@ def test_filing_reuse_verifies_raw_despite_sparse_capture_metadata(
     [(True, False), (False, True)],
 )
 def test_query_local_and_preview_are_separate_from_formal_filing_reuse(
-    tmp_path, missing_url, reusable_flag_off
+    source_version_fixture, tmp_path, missing_url, reusable_flag_off
 ):
-    catalog, _, roots, ids = _fixture(
+    catalog, _, roots, ids = source_version_fixture(
         tmp_path, source_url=None if missing_url else "https://sec.gov/x/2025"
     )
     if reusable_flag_off:
@@ -669,8 +680,8 @@ def test_query_local_and_preview_are_separate_from_formal_filing_reuse(
 
 
 
-def test_sparse_candidate_preserves_known_capture_observations(tmp_path):
-    catalog, _, _, ids = _fixture(tmp_path)
+def test_sparse_candidate_preserves_known_capture_observations(source_version_fixture, tmp_path):
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     with catalog.store.transaction() as connection:
         rows = connection.execute(
             "SELECT location_id, manifest_json FROM locations WHERE document_id=?",
@@ -699,8 +710,8 @@ def test_sparse_candidate_preserves_known_capture_observations(tmp_path):
     ("source_title", "status"),
     [("Acme 2025 Annual Report", "found"), (None, "ambiguous")],
 )
-def test_query_local_requires_disclosed_year_and_respects_as_of(tmp_path, source_title, status):
-    catalog, _, _, ids = _fixture(tmp_path, fiscal_year=None, period_end=None, source_title=source_title)
+def test_query_local_requires_disclosed_year_and_respects_as_of(source_version_fixture, tmp_path, source_title, status):
+    catalog, _, _, ids = source_version_fixture(tmp_path, fiscal_year=None, period_end=None, source_title=source_title)
     reader = SourceVersionReader(catalog)
     request = SourceRequest(
         entity="Acme", market="US", security_id="ACME",
@@ -719,8 +730,8 @@ def test_query_local_requires_disclosed_year_and_respects_as_of(tmp_path, source
     assert future.status == "not_found"
 
 
-def test_as_of_cutoff_applies_before_candidate_limit(tmp_path):
-    catalog, _, _, ids = _fixture(tmp_path)
+def test_as_of_cutoff_applies_before_candidate_limit(source_version_fixture, tmp_path):
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     connection = sqlite3.connect(catalog.config.database_path)
     connection.executemany(
         """INSERT INTO documents(
@@ -744,8 +755,8 @@ def test_as_of_cutoff_applies_before_candidate_limit(tmp_path):
     assert result.matches[0].document_id == ids["document_id"]
 
 
-def test_local_query_does_not_silently_miss_match_after_first_page(tmp_path):
-    catalog, _, _, ids = _fixture(tmp_path)
+def test_local_query_does_not_silently_miss_match_after_first_page(source_version_fixture, tmp_path):
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     connection = sqlite3.connect(catalog.config.database_path)
     connection.executemany(
         """INSERT INTO documents(
@@ -770,8 +781,8 @@ def test_local_query_does_not_silently_miss_match_after_first_page(tmp_path):
     assert result.matches[0].document_id == ids["document_id"]
 
 
-def test_disputed_auxiliary_capture_is_diagnostic_for_verified_filing_read(tmp_path, monkeypatch):
-    catalog, _, _, ids = _fixture(tmp_path)
+def test_disputed_auxiliary_capture_is_diagnostic_for_verified_filing_read(source_version_fixture, tmp_path, monkeypatch):
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     ref = SourceVersionReader(catalog).query_ref(
         ids["document_id"], ids["source_id"], SHA
     )
@@ -799,8 +810,8 @@ def test_disputed_auxiliary_capture_is_diagnostic_for_verified_filing_read(tmp_p
     assert reader.metadata_diagnostics(ref)["conflicted_fields"] == ["acquisition.source_url"]
 
 
-def test_pending_remediation_is_diagnostic_and_does_not_block_verified_reuse(tmp_path):
-    catalog, _, _, ids = _fixture(tmp_path)
+def test_pending_remediation_is_diagnostic_and_does_not_block_verified_reuse(source_version_fixture, tmp_path):
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
     connection = sqlite3.connect(catalog.config.database_path)
@@ -825,9 +836,9 @@ def test_pending_remediation_is_diagnostic_and_does_not_block_verified_reuse(tmp
 
 
 def test_exact_filing_read_does_not_require_period_but_period_query_does(
-    tmp_path, monkeypatch
+    source_version_fixture, tmp_path, monkeypatch
 ):
-    catalog, _, _, ids = _fixture(
+    catalog, _, _, ids = source_version_fixture(
         tmp_path, fiscal_year=None, period_end=None, name="report.pdf"
     )
     ref = SourceVersionReader(catalog).query_ref(
@@ -849,9 +860,9 @@ def test_exact_filing_read_does_not_require_period_but_period_query_does(
     ),
 )
 def test_current_root_admission_policy_applies_before_any_source_open(
-    tmp_path, monkeypatch, root_policy
+    source_version_fixture, tmp_path, monkeypatch, root_policy
 ):
-    catalog, _, roots, ids = _fixture(tmp_path)
+    catalog, _, roots, ids = source_version_fixture(tmp_path)
     ref = SourceVersionReader(catalog).query_ref(
         ids["document_id"], ids["source_id"], SHA
     )
@@ -873,9 +884,9 @@ def test_current_root_admission_policy_applies_before_any_source_open(
 
 
 def test_v2_runtime_snapshot_closes_legacy_metadata_bridge_for_query_and_reuse(
-    tmp_path, monkeypatch
+    source_version_fixture, tmp_path, monkeypatch
 ):
-    catalog, _, _, ids = _fixture(tmp_path)
+    catalog, _, _, ids = source_version_fixture(tmp_path)
     policy_hash = export_policy_2x(catalog.config)[0]
     snapshot = build_snapshot({
         "schema_version": "1.0",
@@ -922,8 +933,8 @@ def test_v2_runtime_snapshot_closes_legacy_metadata_bridge_for_query_and_reuse(
     assert modern.describe_version(ref)["fiscal_year"] == 2025
 
 
-def test_source_export_falls_back_to_same_sha_copy_regardless_of_root_label(tmp_path):
-    catalog, paths, roots, ids = _fixture(tmp_path, three_roots=True)
+def test_source_export_falls_back_to_same_sha_copy_regardless_of_root_label(source_version_fixture, tmp_path):
+    catalog, paths, roots, ids = source_version_fixture(tmp_path, three_roots=True)
     restricted = SourceCatalog(replace(
         catalog.config,
         roots=(
@@ -941,8 +952,8 @@ def test_source_export_falls_back_to_same_sha_copy_regardless_of_root_label(tmp_
     assert reader.open_version(ref, purpose="source_export").data == BODY
 
 
-def test_same_sha_disputed_period_blocks_period_selection_not_raw_read(tmp_path):
-    catalog, paths, _, ids = _fixture(tmp_path, three_roots=True)
+def test_same_sha_disputed_period_blocks_period_selection_not_raw_read(source_version_fixture, tmp_path):
+    catalog, paths, _, ids = source_version_fixture(tmp_path, three_roots=True)
     sidecar_path = paths[1].parent / f"{paths[1].name}.source.json"
     sidecar = json.loads(sidecar_path.read_text(encoding="utf-8"))
     sidecar["source_url"] = "https://sec.gov/other-filing"
@@ -963,14 +974,14 @@ def test_same_sha_disputed_period_blocks_period_selection_not_raw_read(tmp_path)
 
 
 def test_review_store_failure_is_diagnostic_and_verified_bytes_remain_usable(
-    tmp_path, monkeypatch,
+    source_version_fixture, tmp_path, monkeypatch,
 ):
     from company_wiki.source_catalog.prompt_injection import (
         PromptInjectionReviewError,
     )
     import company_wiki.source_catalog.source_reader as reader_module
 
-    catalog, paths, _, ids = _fixture(tmp_path)
+    catalog, paths, _, ids = source_version_fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
 
@@ -993,11 +1004,11 @@ def test_review_store_failure_is_diagnostic_and_verified_bytes_remain_usable(
     assert error.value.reason == "no_verified_location"
 
 
-def test_resolver_location_port_validates_source_ref_and_requires_budget(tmp_path):
+def test_resolver_location_port_validates_source_ref_and_requires_budget(source_version_fixture, tmp_path):
     from company_wiki.source_catalog.read_budget import ReadBudget
     from company_wiki.source_catalog.resolver import SourceResolver
 
-    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
     location = next(
@@ -1058,7 +1069,7 @@ class _StagedSourceChunks:
         self.receipt = receipt
 
 
-def test_stream_version_is_a_public_source_port_and_shares_one_read_budget(tmp_path):
+def test_stream_version_is_a_public_source_port_and_shares_one_read_budget(source_version_fixture, tmp_path):
     from company_wiki.source_contract import (
         SourceChunkSink,
         SourceReadBudgetPort,
@@ -1066,7 +1077,7 @@ def test_stream_version_is_a_public_source_port_and_shares_one_read_budget(tmp_p
     )
     from company_wiki.source_catalog import SourceChunkSink as CatalogChunkSink
 
-    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path)
     try:
         reader = SourceVersionReader(catalog)
         ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
@@ -1092,10 +1103,10 @@ def test_stream_version_is_a_public_source_port_and_shares_one_read_budget(tmp_p
         catalog.close()
 
 
-def test_processing_descriptor_exposes_format_without_physical_path(tmp_path):
+def test_processing_descriptor_exposes_format_without_physical_path(source_version_fixture, tmp_path):
     import company_wiki.source_contract as source_api
 
-    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path)
     try:
         reader = SourceVersionReader(catalog)
         ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
@@ -1111,7 +1122,7 @@ def test_processing_descriptor_exposes_format_without_physical_path(tmp_path):
         catalog.close()
 
 
-def test_stream_version_accepts_a_structural_budget_port(tmp_path):
+def test_stream_version_accepts_a_structural_budget_port(source_version_fixture, tmp_path):
     from company_wiki.source_contract import SourceReadBudgetPort
 
     class BudgetAdapter:
@@ -1149,7 +1160,7 @@ def test_stream_version_accepts_a_structural_budget_port(tmp_path):
         def check(self):
             return self.inner.check()
 
-    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path)
     try:
         reader = SourceVersionReader(catalog)
         ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
@@ -1170,10 +1181,10 @@ def test_stream_version_accepts_a_structural_budget_port(tmp_path):
         catalog.close()
 
 
-def test_stream_version_sink_failure_is_not_misreported_as_source_read_failure(tmp_path):
+def test_stream_version_sink_failure_is_not_misreported_as_source_read_failure(source_version_fixture, tmp_path):
     from company_wiki.source_contract import SourceChunkSinkError
 
-    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path)
     try:
         reader = SourceVersionReader(catalog)
         ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
@@ -1196,8 +1207,8 @@ def test_stream_version_sink_failure_is_not_misreported_as_source_read_failure(t
         catalog.close()
 
 
-def test_stream_version_discards_mismatched_copy_before_same_sha_fallback(tmp_path):
-    catalog, paths, _roots, ids = _fixture(tmp_path, three_roots=True)
+def test_stream_version_discards_mismatched_copy_before_same_sha_fallback(source_version_fixture, tmp_path):
+    catalog, paths, _roots, ids = source_version_fixture(tmp_path, three_roots=True)
     try:
         # Keep the first registered location's size but make its bytes belong
         # to another revision. The next same-SHA location must be the only
@@ -1223,8 +1234,8 @@ def test_stream_version_discards_mismatched_copy_before_same_sha_fallback(tmp_pa
         catalog.close()
 
 
-def test_stream_version_cancellation_never_commits_partial_input(tmp_path):
-    catalog, _paths, _roots, ids = _fixture(tmp_path)
+def test_stream_version_cancellation_never_commits_partial_input(source_version_fixture, tmp_path):
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path)
     try:
         reader = SourceVersionReader(catalog)
         ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
@@ -1246,14 +1257,14 @@ def test_stream_version_cancellation_never_commits_partial_input(tmp_path):
 
 
 def test_stream_version_uses_request_budget_instead_of_legacy_fixed_file_cap(
-    tmp_path, monkeypatch,
+    source_version_fixture, tmp_path, monkeypatch,
 ):
     import company_wiki.source_catalog.resolver as resolver_module
 
     # Simulate a tiny legacy file ceiling. The request's own account is the
     # single byte-limit owner and is large enough for this source.
     monkeypatch.setattr(resolver_module, "_CANDIDATE_BYTES_CAP", 4, raising=False)
-    catalog, _paths, _roots, ids = _fixture(tmp_path)
+    catalog, _paths, _roots, ids = source_version_fixture(tmp_path)
     try:
         reader = SourceVersionReader(catalog)
         ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)

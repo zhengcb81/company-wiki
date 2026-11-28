@@ -369,10 +369,10 @@ def test_killed_coordinator_releases_owner_and_resumes_without_refunding_unknown
             ready = {event["attempt_id"] for event in events
                      if event["operation"] == "worker-process" and event["step"] == "poll"
                      and event["status"] == "started"}
-            interrupted = {event["attempt_id"] for event in events
+            interrupted = [event["attempt_id"] for event in events
                            if event["operation"] == "worker-process" and event["step"] == "exit"
-                           and event["status"] == "interrupted"}
-            assert len(ready) == 2 and ready <= interrupted
+                           and event["status"] == "interrupted"]
+            assert len(ready) == 2 and sorted(ready) == sorted(interrupted)
             assert KEY.encode() not in cold.stdout + cold.stderr
             killed_stdout, killed_stderr = coordinator.communicate(timeout=5)
             assert (

@@ -249,7 +249,7 @@ class DownloaderConfig:
 @dataclass
 class PathsConfig:
     """路径配置"""
-    wiki_root: Path = field(default_factory=lambda: Path(os.path.expanduser("~/company-wiki")))
+    wiki_root: Path = WIKI_ROOT
     downloader_dir: Path | None = field(default_factory=_legacy_downloader_directory)
     windows_downloads: Path | None = field(default_factory=_legacy_download_directory)
 
@@ -277,7 +277,7 @@ class Config:
         模型参数来自 config/models.yaml（单一模型源），config.yaml 只选择 provider 并可逐项覆盖。
 
         Args:
-            config_path: 配置文件路径，默认为 ~/company-wiki/config.yaml
+            config_path: 配置文件路径。省略时使用本项目的 config.yaml。
 
         Returns:
             Config 对象
@@ -470,8 +470,8 @@ class Config:
 
         # 路径配置
         paths_raw = raw.get("paths", {})
-        wiki_root_str = paths_raw.get("wiki_root", "~/company-wiki")
-        wiki_root = Path(os.path.expanduser(wiki_root_str))
+        explicit_root = paths_raw.get("wiki_root")
+        wiki_root = base_dir.resolve() if explicit_root is None else Path(os.path.expanduser(explicit_root))
 
         paths = PathsConfig(wiki_root=wiki_root)
 

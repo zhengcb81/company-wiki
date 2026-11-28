@@ -192,7 +192,7 @@ def run_worker_process(
     with redirect_stdout(stdout), redirect_stderr(stderr):
         runtime = None
         try:
-            _start_parent_watchdog(parent_pid, spec)
+            watchdog = _start_parent_watchdog(parent_pid, spec)
             _worker_event(spec, "factory", "started")
             factory = _resolve_factory(spec.runtime_factory_path)
             built = factory(spec)
@@ -215,9 +215,13 @@ def run_worker_process(
                 lifecycle_callback=_job_lifecycle(spec, runtime),
             )
             _worker_event(spec, "poll", "started")
-            while not stop_event.is_set() and os.getppid() == parent_pid:
+            while not stop_event.is_set() and _parent_is_alive(parent_pid):
                 if not worker.process_one():
                     stop_event.wait(spec.idle_sleep_seconds)
+            if not _parent_is_alive(parent_pid):
+                # Stop claiming immediately. The watchdog owns the terminal
+                # interruption event and exits even if an active job is stuck.
+                watchdog.join()
         except BaseException as exc:
             status = "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed"
             runtime_feedback.record("worker-process", status, error=exc,
@@ -251,15 +255,20 @@ def _start_parent_watchdog(parent_pid: int, spec: WorkerProcessSpec) -> threadin
     return thread
 
 
+def _parent_is_alive(parent_pid: int) -> bool:
+    if os.getppid() != parent_pid:
+        return False
+    parent = multiprocessing.parent_process()
+    return parent is None or parent.is_alive()
+
+
 def _watch_parent(parent_pid: int, spec: WorkerProcessSpec) -> None:
     while True:
         # Do not wait on the multiprocessing stop Event here.  A hard-killed
         # worker could otherwise die while holding the Event semaphore and
         # wedge the parent's bounded shutdown path.
         time.sleep(0.1)
-        parent = multiprocessing.parent_process()
-        alive = parent.is_alive() if parent is not None else os.getppid() == parent_pid
-        if not alive or os.getppid() != parent_pid:
+        if not _parent_is_alive(parent_pid):
             try:
                 runtime_feedback.record(
                     "worker-process", "interrupted", reason="supervisor_lost",

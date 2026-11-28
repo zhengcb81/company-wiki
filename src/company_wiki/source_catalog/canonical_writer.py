@@ -433,8 +433,15 @@ class CanonicalSourceWriter:
                 )
 
             destination = self._destination(request, candidate, receipt)
-            destination.parent.mkdir(parents=True, exist_ok=True)
             provenance = destination.with_name(destination.name + ".source.json")
+            try:
+                relative = destination.relative_to(self.company_root.path).as_posix()
+                resolve_source_location(self.company_root, relative)
+                resolve_source_location(self.company_root, relative + ".source.json")
+                registration = SourceRegistrationScope(self.company_root.root_id, frozenset({relative}))
+            except (ValueError, SourceLocationError) as exc:
+                raise CanonicalImportError("canonical_destination_outside_root") from exc
+            destination.parent.mkdir(parents=True, exist_ok=True)
             bytes_already_present = destination.exists()
             if bytes_already_present and _hash_file(destination) != receipt.content_sha256:
                 raise CanonicalImportError("canonical_content_name_collision")
@@ -458,8 +465,7 @@ class CanonicalSourceWriter:
             # to selection; storage returns the exact committed version directly.
             register_catalog_sources(
                 self.catalog.config, self.catalog.store,
-                SourceRegistrationScope(self.company_root.root_id,
-                    frozenset({destination.relative_to(self.company_root.path).as_posix()})),
+                registration,
                 on_registered=lambda store: self._complete_registration(
                     request,candidate,receipt,store,reactivate_retired=reactivate_retired),
             )

@@ -366,44 +366,24 @@ def _project(tmp_path: Path):
     return project, config_path
 
 
-def test_cli_activation_apply_rollback_roundtrip(tmp_path, capsys):
+@pytest.mark.parametrize("verb", ["apply", "rollback"])
+def test_retired_activation_cli_cannot_change_owner_catalog(tmp_path, capsys, monkeypatch, verb):
     from company_wiki.source_catalog.cli import main
-    from company_wiki.source_catalog.config import load_catalog_config
-    from company_wiki.source_catalog.policy import export_policy
 
     project, config_path = _project(tmp_path)
     store = CatalogStore(project / ".source_catalog" / "catalog.sqlite3")
     ids = _seed(store)
-    joined = ",".join(ids)
-    # the CLI binds the CURRENT RootPolicy export hash — the activation
-    # must use the same hash or the stale-policy gate fails closed
-    config = load_catalog_config(config_path, project_root=project)
-    current_policy_hash, _ = export_policy(config)
-    rc = main(
-        ["--config", str(config_path), "activation", "apply",
-         "--epoch", "epoch-2", "--cohort", "cohort-a",
-         "--assertion-ids", joined,
-         "--policy-hash", current_policy_hash,
-         "--reason", "cli drill",
-         ]
-    )
-    assert rc == 0
-    out = json.loads(capsys.readouterr().out)
-    assert out["kind"] == "apply"
-    assert out["receipt_id"]
-    assert out["reviewer"]  # Legacy field records the actual process actor.
+    before = {path: path.read_bytes() for path in project.rglob("*") if path.is_file()}
+    monkeypatch.setenv("RESEARCH_FEEDBACK_OUT", str(tmp_path / "feedback" / "observation.json"))
 
-    rc = main(
-        ["--config", str(config_path), "activation", "rollback",
-         "--receipt-id", out["receipt_id"],
-         "--reason", "cli drill rollback",
-         ]
-    )
-    assert rc == 0
-    rolled = json.loads(capsys.readouterr().out)
-    assert rolled["kind"] == "rollback"
-    assert rolled["applies_receipt_id"] == out["receipt_id"]
-    assert rolled["reviewer"] == out["reviewer"]
+    rc = main(["--config", str(config_path), "activation", verb, "--reason", "legacy request"])
+    captured = capsys.readouterr()
+    assert rc == 1 and not captured.out
+    result = json.loads(captured.err)
+    assert result["error_code"] == "MAINTENANCE_OPERATION_RETIRED"
+    assert result["operation"] == "activation" and result["retryable"] is False
+    assert {path: path.read_bytes() for path in project.rglob("*") if path.is_file()} == before
+    assert all(_assertion_row(store, assertion_id) for assertion_id in ids)
 
 
 # --- immutable journal receipt --------------------------------------------
