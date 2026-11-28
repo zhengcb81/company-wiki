@@ -1,7 +1,7 @@
 # S6 · 12 个模块的架构、日志和端到端测试整改
 
 > **主线位置：`S6`（已接入 PWF 主线，作为 `feedback-loop-2026-11-17` S5-10 / F4 收尾线的直接后续，排在 W12 业务摘要恢复之前）**
-> **当前状态** `IN_PROGRESS`。11 张止血卡已进入各仓发布线，P1-00 已独审发布。Phase 1 的 12 路运行源码均已发布到各自实际分支。StockQA 历史委托回归已双平台通过并推主线。StockWiki 的 Ubuntu 全量已过，Windows 新发现的真实进程树夹具仍待验收。正式 T3 部署绑定仍待核对。见 [progress.md](progress.md)。
+> **当前状态** `IN_PROGRESS`。11 张止血卡已进入各仓发布线，P1-00 已独审发布。Phase 1 的 12 路运行源码均已发布到各自实际分支。Phase 1 逐仓验收及并线完成。StockWiki 原生 Windows 最终版本 2,390 项和独审通过并快进本地。Phase 2 首批已开工。正式 T3 部署绑定仍待核对。见 [progress.md](progress.md)。
 > [前序 F4 正式回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md) · [后续 W12 业务检查点](../du11-source-closure-2026-10-18/CURRENT_STATUS.md)
 > **配套核心文档**：
 > - **审查发现与逐仓 `file:line` 证据**：[findings.md](findings.md)
@@ -16,7 +16,7 @@
 
 ## Current Phase
 
-首批止血与参考工具均已发布。逐仓推进 Phase 1，根据实际 CI 失败修复共享根因，以精确提交的收集清单、执行回执和独审验收。只有实际依赖未发布 owner 资产的组合测试单列本机验收，公开套件与本机套件的合计覆盖仍需对齐。P0-12 按 owner 保留有在途工作或独有内容的工区。
+首批止血与参考工具均已发布。Phase 1 已按实际收集清单、执行回执及独审完成。Phase 2 先冻结作用域和失败证据，再按仓落实真实入口、诊断韧性与原作业冷读。只有实际依赖未发布 owner 资产的组合测试单列本机验收，公开套件与本机套件的合计覆盖仍需对齐。P0-12 按 owner 保留有在途工作或独有内容的工区。
 
 ---
 
@@ -28,10 +28,10 @@ flowchart TD
   Start --> P10["P1-00 · 独立开发检查工具"]
   P0 --> A["每仓各自复现、定向回归、独审并接入发布线"]
   P10 --> B["工具正反例、自测与独审"]
-  A --> P1["当前 · Phase 1 逐仓实际执行与独审"]
+  A --> P1["已完成 · Phase 1 逐仓实际执行与独审"]
   B --> P1
   B --> QA["StockQA 无首批止血卡，工具就绪后按 owner 队列接入 Phase 1"]
-  P1 --> P2["Phase 2: 全 12 仓双层可追溯日志闭合<br/>(100% 入口 + 跨进程锁轮转 + stderr 兜底 + L1-L4 活性门)"]
+  P1 --> P2["当前 · Phase 2: 全 12 仓双层可追溯日志闭合<br/>(100% 入口 + 跨进程锁轮转 + stderr 兜底 + L1-L4 活性门)"]
   QA --> P2
   P2 --> P3A["Phase 3A (核心重灾区): StockQA + CWP<br/>拆上帝类、清 9 类技巧、SCC 归零"]
   P2 --> P3B["Phase 3B (知识库/模型/UI): StockWiki + RF + Dashboard + IQS<br/>去 Store 绕过/lambda/145 垫片"]
@@ -54,7 +54,7 @@ flowchart TD
 
 ## Next Step
 
-CWP 已完成父进程回收临时目录的同版全量和组合验收，已并主线。IQS 已验证作业日志归属、C06 十二题及四个历史组合，精确候选双平台与覆盖聚合通过，已推出 `master`。Dashboard 已修复异常生命周期和 Windows 句柄滞留，经同版私有 CI、独审和 CWP wheel 联调后并入 `main`。StockQA 原作业、原收据及明确拒绝原因的修复已通过精确双平台及独审并发布，委托回归已在精确双平台通过并推主线。StockWiki 的 Ubuntu 全量已通过，Windows 补验确认了真实进程树夹具未正确继承管道，单独修复并复验。T3 的三市场、损坏原件、原作业冷读及零重发已通过离线组合，正式绑定单列核对。见[候选和发布台账](progress.md)。
+CWP 已完成父进程回收临时目录的同版全量和组合验收，已并主线。IQS 已验证作业日志归属、C06 十二题及四个历史组合，精确候选双平台与覆盖聚合通过，已推出 `master`。Dashboard 已修复异常生命周期和 Windows 句柄滞留，经同版私有 CI、独审和 CWP wheel 联调后并入 `main`。StockQA 原作业、原收据及明确拒绝原因的修复已通过精确双平台及独审并发布，委托回归已在精确双平台通过并推主线。StockWiki 的 Ubuntu 全量和最终费用冷读定向均通过，最终 Windows 全量 2,390 项及独审通过后快进本地。Phase 2 首批 CWP、FF、ET、SID 各自在隔离工区先做真实失败的回归，负责人和证据见进度台账。T3 的三市场、损坏原件、原作业冷读及零重发已通过离线组合，正式绑定单列核对。见[候选和发布台账](progress.md)。
 
 ---
 
@@ -82,7 +82,7 @@ CWP 已完成父进程回收临时目录的同版全量和组合验收，已并�
 ---
 
 ### Phase 1 — 防偷懒机械安全网落地、CI 假绿清零、Windows 矩阵与历史缺陷 100% 锁定
-- **Status:** P1-00 独审完成并发布。P1-03 ET、P1-04 SID 发布版双平台 CI 通过。P1-02 FF 精确主线双平台通过。P1-07 StockWiki 在独审及 Windows 全量与 C06 通过后快进本地主线，Linux 未实跑。CWP 的精确双平台 27 项和公开组合均通过，已快进 `master`。IQS 同版正式 CI、覆盖聚合和历史组合已验，已推远端 `master`。RF 独审及修正版双平台通过并推远端 `main`，发布跑次已通过。Audit 隔离分片后 Windows、Ubuntu 各 869 项和独审通过，快进本地主线。MC 已独审及快进发布，精确发布版双平台通过。IR 首轮 Windows 的 8.3 别名差异已复验，精确候选双平台通过和独审完成，已推 `main`。Dashboard 已通过独审及 Windows、Ubuntu 同版验收，已推远端 `main`。StockQA 检查点及附件冷恢复同版双平台和独审通过，已推实际 `master`，历史委托测试集成也已双平台通过并推送。StockWiki 补验 Ubuntu 全量 2,385 项已过，Windows 新发现的真实进程树夹具仍在同仓复验。
+- **Status:** P1-00 独审完成并发布。P1-03 ET、P1-04 SID 发布版双平台 CI 通过。P1-02 FF 精确主线双平台通过。P1-07 StockWiki 在独审及 Windows 全量与 C06 通过后快进本地主线，Linux 未实跑。CWP 的精确双平台 27 项和公开组合均通过，已快进 `master`。IQS 同版正式 CI、覆盖聚合和历史组合已验，已推远端 `master`。RF 独审及修正版双平台通过并推远端 `main`，发布跑次已通过。Audit 隔离分片后 Windows、Ubuntu 各 869 项和独审通过，快进本地主线。MC 已独审及快进发布，精确发布版双平台通过。IR 首轮 Windows 的 8.3 别名差异已复验，精确候选双平台通过和独审完成，已推 `main`。Dashboard 已通过独审及 Windows、Ubuntu 同版验收，已推远端 `main`。StockQA 检查点及附件冷恢复同版双平台和独审通过，已推实际 `master`，历史委托测试集成也已双平台通过并推送。StockWiki 无远端，已通过最终原生 Windows 本地全量 2,390 项、Ubuntu 全量 2,385 项及最终修改测试的 Ubuntu 8 项复验，独审后快进本地 `master`。Phase 1 完成。
 - P1-00 与止血并行。后续各仓将适用规则接入本仓现有 CI；见上表的汇合条件。
 
 | 卡号 | 范围 | 具体施工细节 | 退出硬指标 |
@@ -93,7 +93,7 @@ CWP 已完成父进程回收临时目录的同版全量和组合验收，已并�
 ---
 
 ### Phase 2 — 全 12 仓统一双层可追溯日志与错误传播体系闭合
-- **Status:** pending
+- **Status:** 首批 `P2-01` CWP、`P2-02` FF、`P2-03` ET、`P2-04` SID 已在独立工区启动，逐仓先做真实故障回归。其它仓整理入口盘点并等待各自写入窗口。
 - **前置**：每仓开工前须提交 100% 入口盘点表（Step 0），严禁“只改 1 个试点入口就宣称完成”（AP-10）。
 
 | 卡号 | 范围 | 具体施工细节 | 退出硬指标 |
@@ -123,6 +123,7 @@ CWP 已完成父进程回收临时目录的同版全量和组合验收，已并�
 - **施工内容（`P4-01` ~ `P4-12`）**：
   1. **零个人路径与邻仓猜测**：清零 StockWiki/IR/CWP/IQS/RF/Dashboard 全部硬编码 `C:\Users\郑曾波\...`、`C:/Miniconda`、`../StockWiki`、`.venv/Scripts/python.exe`，统一由 env / 部署配置注入，缺配即报错。
   2. **单一强校验 `Settings` 对象**：集中 URL、模型、端口（统一 IQS 8766 / Dashboard 48766）、超时/重试/退避、字节上限、锁超时、轮转参数、提示词与行业/市场资源表；剔除全部死配置与死代码（FF 3 个 `pause_worker`、SID 5 个死 config 键、IR 死 `--model`/死 `categories`、MC 死 `translate_batch_size`、ET 微软产品词与过时 v3 URL、RF W09/Q3-2026 与 `slo_probe` 假 bundle、CWP `narrative_business_meaning` 词典正则）。
+     - CWP 路径展开按实际使用的占位符解析用户根。使用显式有效路径的无用户目录进程也应能启动，避免在展开无关路径时先计算 `Path.home()`。加入原生 Windows 无用户目录正例，以及确实需要用户根时的结构化错误反例。
   3. **重复原语统一与原子 I/O 硬化**：全生态消除重复原子写（补齐 `os.fsync` + Win32 `WinError 5/32` 重试）、重复严格 JSON 解析、重复 CLI 解析模板、非确定性 `hash()`（MC）、过时 `asyncio.get_event_loop()`（StockQA）与手写 YAML 解析器（IR）。
   4. **全局技能同步器清单化**：升级 IR/Audit/FF/RF 技能安装器覆盖全部 4 套入口（`.agents`/`.claude`/`.codex`/`.gemini/config`），新增孤儿文件漂移检测与洁净目录自动化测试。
   5. **全仓 `ruff` + `mypy` 拉齐**：移除 CWP `follow_imports = "skip"`（按层收紧），扩满 FF/RF `mypy`，全 12 仓 CI 必跑 `ruff` + `compileall` + `mypy`。

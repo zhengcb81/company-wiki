@@ -1,6 +1,6 @@
 # Progress Log — 全 12 模块深度审查与综合整改规划
 
-**当前节点**　11 张止血修复已并线。FF T3 离线组合通过，正式绑定待复核。P1-00 已独审发布，FF、ET、SID、RF、MC、IR 已推实际发布线，Audit 和 StockWiki 通过独审及原生 Windows 后快进本地。CWP、Dashboard、IQS、StockQA 的运行源码已通过同版全量、独审及相关组合后并线。StockQA 的历史委托测试已通过精确双平台并推主线。StockWiki 的 Ubuntu 全量已通过，Windows 还需收口真实进程树夹具。继续逐仓收集、实跑、独审及并线。W12 业务循环仍在原检查点。
+**当前节点**　11 张止血修复已并线。FF T3 离线组合通过，正式绑定待复核。P1-00 已独审发布，FF、ET、SID、RF、MC、IR 已推实际发布线，Audit 和 StockWiki 通过独审及原生 Windows 后快进本地。CWP、Dashboard、IQS、StockQA 的运行源码已通过同版全量、独审及相关组合后并线。StockQA 的历史委托测试已通过精确双平台并推主线。StockWiki 的 Ubuntu 全量及最终差异定向均通过，原生 Windows 最终 2,390 项执行覆盖和独审通过并快进本地。Phase 1 已完成，Phase 2 首批 CWP、FF、ET、SID 已启动。继续逐仓收集、实跑、独审及并线。W12 业务循环仍在原检查点。
 
 ## 2026-11-27 22:54 UTC — P0-01 至 P0-11 分批派工
 
@@ -78,14 +78,31 @@ RF 的一次隔离测试把过长请求放在 Windows 命令行，启动失败�
 - **CWP P1-01**　旧进程内清理在 pytest 已执行完成但仍持有真实 SQLite 句柄时以 WinError 32 改写成功退出。CI 启动器拥有独占临时根，在子进程退出后统一回收，输出证据留在原目录。原生子进程用 0 和 1 两条路径验证退出码和临时数据，真实 Windows 目录联接夹具不使用慢 PowerShell。独审通过；历史直接 pytest 的回退仍沿用原生命周期，托管 CI 复现的问题已覆盖。父进程根的命名进入现有 Git 临时文件模式，完整 P4 Windows 34 项通过。候选 `f334cf33e65c9f11eeff7ce5c130f9007a87ad6c` [全量](https://github.com/zhengcb81/company-wiki/actions/runs/46108246973) 27 项和[公开组合](https://github.com/zhengcb81/company-wiki/actions/runs/46108246971)均绿。覆盖聚合核对两平台完整收集与实际执行。以精确 SHA 快进远端和本地 `master`，底层原件与目录均不在范围，所有本地暂存和未暂存差异保持原样。精确发布 [Windows、Ubuntu 完整 27 项及执行聚合](https://github.com/zhengcb81/company-wiki/actions/runs/46109776696) 和[公开联调](https://github.com/zhengcb81/company-wiki/actions/runs/46109776718)均通过。收集并核对实际执行的适用节点为 Windows 16,628、Linux 16,573。
 - **IQS P1-08**　[上一版同 SHA CI](https://github.com/zhengcb81/invest-quick-scan/actions/runs/46106295054) Ubuntu 2,295 项、Windows 2,308 项及执行清单对齐。独审复现畸形公开回放错误串入外层作业，已将各解析后路径绑定显式调用上下文。准备作业在锁占用时可读已提交终态，放弃等待后仍能收录原调用的迟到结果，不重新开始。84 项定向及独审通过，`6da5e0f7e21f9e0cb84a0724707c23f55c5b2027` [精确在线矩阵](https://github.com/zhengcb81/invest-quick-scan/actions/runs/46108302262) 两平台与覆盖聚合通过。旧 C06 四案使用过时的私有 membership fixture，owner 正接新公开接口。第 5 案旧夹具手组多工具请求，首轮入参在发送前测得 259,925 超出 240,000 的预算，未进入模拟强停。保持原超限保护，按正式 owner 冻结分包重做了真实强停。Windows 正式注册与合成回环只 POST 一次，原检查点落盘后退出 86。无当前凭据或额度配置的冷进程封存全部十二题，原文件和账本不变，新增请求及费用为零。超额反例也通过。独审核对运行记录与 Git 归档字节，测试和回执纳入 `18811363957b3cc5014c21f7f79f85fe797ef71a`，[精确 CI](https://github.com/zhengcb81/invest-quick-scan/actions/runs/46111195318) Windows、Ubuntu 与覆盖聚合通过。其余四个 C06 用例也经 Windows 分批原生实跑通过，覆盖真实授权、原响应封存、全量不重发、部分题包和原模型作业硬停。较低进程优先级令初始化超过原时限，切回正常优先级后通过，原时限和限额不变。独审核对公开会员夹具及各用例收据，同一个 IQS 提交以精确 SHA 快进 `master`。[发布版 CI](https://github.com/zhengcb81/invest-quick-scan/actions/runs/46112107953) Windows、Ubuntu 与覆盖聚合均通过。
 - **Dashboard P1-09**　[精确私有 CI](https://github.com/zhengcb81/investment-dashboard/actions/runs/46106571261) Ubuntu 通过。Windows 复现超过断言的句柄计数和剩余时间浮点精度。独立用原生 CPython 3.12 保存一次真实错误，确认 CLI 异常保留已结束线程和事件，HTTP 异常原因还保留已关闭流的内部上下文。已在拥有 CLI 和 HTTP 资源的调用边界生成脱敏异常链和代码位置，释放活动对象后向上抛错。实际 Windows CPython 3.12 定向 65 项通过，四种慢 HTTP 错误无句柄增长。故意留两个管道句柄的对照仍触发原限额。候选 `bdcd292d931603d73007acc3b7834fa84b17cd23` 的独审确认实测句柄与诊断正常，但[同版双平台](https://github.com/zhengcb81/investment-dashboard/actions/runs/46108967380) 暴露公开值多出内部诊断字段。现将原五个公开字段保持原样，脱敏链由 F4 私有持有。`d0f5f1331c0902a286410f01476d00e89d4f5da6` 原生 Windows 74 项通过，独立 5 项复验通过，[私有精确双平台](https://github.com/zhengcb81/investment-dashboard/actions/runs/46110656593)均绿。同一候选已快进远端 `main`。以 CWP `f334cf33` 实际打包、安装 wheel，在空 cwd 用 Dashboard `d0f5f13` 与 StockWiki `6cd6d7e` 走公开入口验证原件 SHA、摘要、证据、页/段落定位；Windows 1 项通过，172.40 秒。正式 Dashboard 服务未重启。
-- **StockQA P1-10**　真 TCP 与坏原检查点两例通过独审，精确 [3871a75 双平台](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46106479728)另外发现九项。把所有校验都包成统一读取错误，丢了既有直接读取的错误，又把 owner 原绑定拒绝误作损坏。现共享同一个实际读取校验，直接读取保留原错误，恢复保留可定位的原工作和尝试号，owner 拒绝保持精确原因且不会当缺失重新派发。309 项 Windows 原生回归通过。候选 `d547e1735beabaa3baf21dc79bd35c184367d8ef` [同版双平台](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46108509964)均绿。独审另实测原作业的已存上下文或标准答案坏 JSON 仍会中止整批。归到原尝试号，由存量附件边界统一捕获，保留原字节、主检查点、原因链与明确的策略拒绝。`603a56e9102885fa9ffdff8550c48ec71b674e2e` Windows 定向 125 项和独立 10 项通过，[精确双平台](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46110536413)均绿。同一 SHA 已快进 `master`，[发布版 CI](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46112387858)双平台通过。C06 四个历史 IQS 用例已有同一冻结 `d547e17` 源码与公开 membership 夹具的原生通过证据。StockQA 委托回归也走正式 budget-managed 路径，真实本地 POST 后超时记录原费用未知；撤销后不可二次发送且回写未发送记录，独审核对测试字节。已将测试限定为三份文件收入 `75da3590522a806f09cb34c9db07161abad8a7f7`，[最终精确双平台](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46112910355)通过，以同一 SHA 快进远端 `master`。两个既有准入对照按原时限单独运行，JUnit 2/2 通过，单次启动包装在测试后格式化输出时报错，因此仅采用 JUnit 作补充见证。发布的运行代码与 `603a56e` 相同。
+- **StockQA P1-10**　真 TCP 与坏原检查点两例通过独审，精确 [3871a75 双平台](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46106479728)另外发现九项。把所有校验都包成统一读取错误，丢了既有直接读取的错误，又把 owner 原绑定拒绝误作损坏。现共享同一个实际读取校验，直接读取保留原错误，恢复保留可定位的原工作和尝试号，owner 拒绝保持精确原因且不会当缺失重新派发。309 项 Windows 原生回归通过。候选 `d547e1735beabaa3baf21dc79bd35c184367d8ef` [同版双平台](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46108509964)均绿。独审另实测原作业的已存上下文或标准答案坏 JSON 仍会中止整批。归到原尝试号，由存量附件边界统一捕获，保留原字节、主检查点、原因链与明确的策略拒绝。`603a56e9102885fa9ffdff8550c48ec71b674e2e` Windows 定向 125 项和独立 10 项通过，[精确双平台](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46110536413)均绿。同一 SHA 已快进 `master`，[发布版 CI](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46112387858)双平台通过。C06 四个历史 IQS 用例已有同一冻结 `d547e17` 源码与公开 membership 夹具的原生通过证据。StockQA 委托回归也走正式 budget-managed 路径，真实本地 POST 后超时记录原费用未知；撤销后不可二次发送且回写未发送记录，独审核对测试字节。已将测试限定为三份文件收入 `75da3590522a806f09cb34c9db07161abad8a7f7`，[最终精确双平台](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46112910355)通过，以同一 SHA 快进远端 `master`，[正式发布 CI](https://github.com/zhengcb81/StockQAbyLLM/actions/runs/46114909472)两平台也通过。两个既有准入对照按原时限单独运行，JUnit 2/2 通过，单次启动包装在测试后格式化输出时报错，因此仅采用 JUnit 作补充见证。发布的运行代码与 `603a56e` 相同。
 - **StockWiki P1-07 原生 Ubuntu 补验**　实际 3.13 完整执行 2,371 项通过、1 项跳过、2 项失败及 11 项同因浏览器错误。浏览器已装在隔离根，但正式测试启动器清理了浏览器位置设置。黄金样本 Linux 检出文本换行与原密封 SHA 不符，Windows 工作文件与冻结哈希匹配。只允许保留原冻结字节，不能更新预期哈希。真实 SourceExport 组合也因子 CWP 入口未收到所选源码环境返回 `receipt_missing`，继续核对真实输出与传递范围。修复在独立工区进行。六份样本核回同一套冻结哈希，实际 CWP 转发明确使用原始标准流和选定的 producer，Ubuntu 真 Chromium 11 项与 Node 调度验证均通过。`9605faec234c9b2798b4d1df4ef5f16dbfb42f25` 的 Ubuntu 全量 2,385/2,385，执行覆盖证明无差异。独审核对原字节和进程边界并同意候选设计。原生 Windows 同版 2,389 项通过、1 项失败，已用真实独立子进程复现为父进程退出后测试孙进程未持有预期管道。修正夹具实际句柄继承并保留原时限、预期失败、进程树和旁路进程断言。原 StockWiki 在途工作保持原样。
 
 - **Audit P1-06**　Ubuntu 原生验证发现 mypy 不支持在平台类型中直接引用 Windows 标志，收敛到一个可移植入口。原系统测试按全局第 2 次 fsync 注入时误命中 POSIX 的冻结库目录，改为命中实际工作副本描述符。故障后子进程仍未启动，重启清除指定副本，冻结原内容保存。精确 `e0e2b0feb65d3c8650ff05afba7d7f6cebff24ea` Windows、Ubuntu 均 869/869 项通过，另每侧参考工具 26 项及 7 个子项，独审通过，已快进无远端的本地 `main`。本仓发布记录 `9a6d4a8f`。
 
-## Phase 2 只读准备
+StockWiki 最终候选 `dfbb399c08b80965507e504abc5d4e91aef29ab6` 仅改原生进程树夹具。真实 Windows 对照中，未指定句柄的孙进程启动但未持有管道，0.267 秒返回；显式交接 stdin/stdout/stderr 后在原 2 秒边界触发 `reader_timeout`。独审确认生产树、样本、C06 和收集政策字节一致。首次最终 Windows 全量被总控临时启动器外层 12 分钟上限截断，无完整收据。随后同一候选的 Ubuntu 官方离线全量执行 2,385/2,385 项，零跳过，覆盖核对无缺项。再单独运行原生 Windows 全量，保留实时输出和业务、测试原有时限。
 
-Phase 1 的全量和独审继续执行。尚未启动 Phase 2 实施。抽查已发布入口，后续同仓统一记录器时先用真实失败固定这些缺口。
+Windows 串行版记录了完整失败证据。原进程树夹具已通过。14 项 CWP 组合在解析配置时因总控隔离环境不含用户根退出，2 项 StockWiki 费用冷读在启动子进程前复制无效 stderr 句柄失败。前者补显式隔离用户根并复验真实组合，同时将 CWP 显式配置对无关用户根的 eager 依赖纳入 Phase 4。后者让冷读和对账夹具显式使用原生标准流，保持原协议、时限及费用和证据断言。原冻结 CWP 与 IQS 依赖未变。隔离用户目录下，两条真实 CWP 组合复验退出 0，接通原件与公开查询。同一红灯环境的 StockWiki 冷读原基线 2/2 失败，修复后 8/8 通过。独审确认 `ec6297b096418c79743c8e318ed6a27dfda7fb61` 相对 Ubuntu 全量通过的 `dfbb399` 仅变更该费用夹具，保留双冷读内容、失败堆栈、预算不重记、超时和无数据库写入等断言。变更后的 Ubuntu 定向 8/8 通过。StockWiki 无远端，最终原生 Windows `ec6297b` 执行 2,390/2,390 项、零跳过，Inventory 和执行集合一致。快进本地 `master` 后，原分支三份并行 PWF 差异逐字节未变。
+
+## 2026-11-28　Phase 2 开工
+
+Phase 1 的最后本地发布为 StockWiki `ec6297b`，完整 Windows 2,390 项、覆盖证明及独审通过。原故障按下方记录保留。测试所用 CWP/IQS 独立冻结，过程中未调整任何原业务超时、价格或输出断言。总控先做 CWP，三名独立执行者并行做 FF、ET、SID。其它仓先用已有盘点，无需相互等待在本仓改同一文件。
+
+| 卡 | 本仓实施工区 | 已冻结起点 |
+|---|---|---|
+| P2-01 | `C:/Temp/s6a/c2` | CWP 运行源码 `f334cf33`，所在主线含独立 PWF 后续提交。 |
+| P2-02 | `C:/Temp/s6a/ff-p1` | `c72c3a12995dec3b5acd462d805ab344f35f2712` |
+| P2-03 | `C:/Temp/s6a/et-p1` | `b0d8394ea0983d0c0c6ebc39d5be1da0151c3ffb` |
+| P2-04 | `C:/Temp/s6a/sid-p1` | `33377928b928cfcb92457c2e49a57eacd8391201` |
+
+### Phase 2 Step 0 入口与失败盘点
+
+入口盘点以 Phase 1 的已发布运行源码为起点。以下保留原始观察，供实现、定向复验与独审核对。
+
+P0-07 的 T3 正式接线与离线工程回执分开核销。FF 负责专用配置，按同一工作区协议调用已发布的 CWP 解释器，只显式设置本仓和 CWP 已登记的位置。部署绑定通过公开 open/close 验证，查询原任务时使用 `get`，二次关闭确认零新工作区、零下载、零新费用。当前没有已启用的 FF 确切配置，已有零派发组合证据留用。正式 CWP 绑定不能靠源目录注入 `PYTHONPATH`，供给方须能在受控部署环境直接导入。历史 RF 周跑的 `owner_receipt_missing` 继续按原作业保留。新正式 FF 收据若将来产生，有自己的作业号，不能用离线夹具代填，也不把读证变成 `run-live`。
 
 | 所属模块 | 已定位的入口与写入边界 | 第一批真实回归 |
 | --- | --- | --- |
@@ -105,6 +122,9 @@ Step 0 入口盘点从实际发布的安装声明、CLI 分派、HTTP 路由和�
 - RF `d147758b` 的 20 个 `scripts/` 可执行文件包含废弃过渡入口与探针，4 个主要回调已有失败记录。定时日跑、周跑、发布、报表、三表和 F4 逐类核对。保留原 ledger 和费用未知，优先补失败记录与部分落盘后的冷读，无需多一套发布许可。
 - Audit `e0e2b0f` 的安装树有 15 个可执行脚本。角色作业、进度协调、F4 重放分别受各自原记录约束，派工和定时由外部宿主负责。统一参数解析与异常脱敏，轮转降级和失效 outbox 可诊断，维持 CLI JSON/JSONL。
 - StockWiki `6cd6d7e` 的统一应用 CLI、Dashboard owner 路由、本地 HTTP 和周调度归属分别确认。保留既有限额 16 MiB 及真实错误区分。调度恢复判断要依据原子进程是否可能派发，不能仅按经过时间把费用未知作业重排。
+- Dashboard `d0f5f13` 的公开 HTTP、所有者进程适配、浏览器、启动脚本及 F4 冷读各自确认。前端只有冷读能返回作者的诊断时才展示可查引用。中途截断的原文流从第一次进程调用持久化结果，保留原五字段公开错误与当前端口。启动参数和运行态配置的错误从实际 Windows 启动入口记起，测例只用隔离端口。
+- StockQA `75da3590` 有 15 个业务进程入口。4 个主入口为 `main.py`、`main_with_llm.py`、`src.runners.{basic_runner,llm_runner}`。另外 11 个为 `src.utils.quick_scan_` 前缀下的 `continuation_bank_cli`、`delivery_control_cli`、`delivery_scope_cli`、`execution_inspect_cli`、`model_policy_cli`、`refresh_admission_cli`、`refresh_inspect_cli`、`registered_permissions_cli`、`work_decision_apply_cli`、`work_decision_inspect_cli` 和 `feedback_owner`。仅 `main_with_llm` 和 `llm_runner` 当前完整记录生命周期。F4 五种动作使用同一正式宿主代码 `86f633d8`，该文件字节与 `75da3590` 相同，解决缺口后再按发布步骤推进实际宿主。当前代码未发现 StockQA 自有 HTTP 服务或任务调度。CLI 和真实进程回传保留诊断尾栈与既有机器协议，复用实际轮转锁，按原账判断费用未知而不重新派发。
+- IR `208d6a1b` 的单公司、分批与快筛脚本已有普通入口包装，分层核对报告读写、LLM 调用和 F4 owner 冷读。统一脱敏日志可以替换直接写文件的旁路。真实发出请求后的读取超时保留未知费用，不得按未开始处理。保留真实请求前可重试的分支，分别使用回环确认调用次数与旧结果来源。
 - MeetingConverter `6955b49a` 覆盖转写、公司工具、引擎对照和 F4 owner，另有库模式。实际两个同进程调用同时进入诊断作用域时，两份日志各收到两次的同一组阶段，证实共享 logger handler 将另一调用写进本作业。改为按调用持有归属与输出，复用既有记录器和原费用。补临时目录的两个调用并发及两个独立进程争同轮转文件。
 
 ### P2-01 · CWP 入口盘点（发布源码 `f334cf33`）
@@ -120,6 +140,22 @@ Step 0 入口盘点从实际发布的安装声明、CLI 分派、HTTP 路由和�
 基线原生探针在隔离目录直接调用 `python -m company_wiki.source_catalog.t3_workspace_cli`，以合成错误 schema 走真实 stdin。返回原协议 JSON、`invalid_request`、退出码 2，stderr 为空，原 run `s6-t3-malformed-fixture` 无日志。候选必须保留协议并新增同一 run/attempt 可冷读的原错误原因。
 
 先通过真实进程锁定三类行为。第一类覆盖解析及已归类的运行失败，核对 UTF-8 事件、原因、调用位置和折行凭据脱敏。第二类覆盖一个日志目录失效、有其他归属路径时转写，以及所有落盘目的地不可写时的原退出码与合适诊断通道。第三类验证并发调用日志归属、原生跨进程轮转和 Windows 文件被读者持有时仍落盘。每条业务路径继续由所属协议决定是否拒绝，诊断不可用不改变业务结果。
+
+独审设计确认。运行事件和 F4 观察沿用已有两种用途及各自存储，复用同一原生写入机制。日志写入先尝试本次调用显式指定的目的地，再尝试本仓持久路径。失败提示聚合到整个调用，一个可恢复目标成功便无需提示，全部失败时最多一条脱敏人读警告。已经用 stderr 传 JSON 的路径保持协议原样，使用既有相关号或宿主诊断。无存活诊断通道时如实保留降级状态。进程内日志筛选按运行上下文，跨进程锁只包写入和轮转。轮转先尝试原子替换，不因旧文件被读者持有而先删上一份备份。可追加时保住本次事件，实际无法保持目标时才走现有诊断回退。健康冷读无写入，F4 宿主自己的错误只写本地诊断，不进入自己的待处理队列。主动恢复使用隔离空宿主测试，通过原入口核对原回执与零派发。
+
+### P2-02 · FF 入口盘点（发布源码 `c72c3a1`）
+
+| 实际入口 | 归属、可复现缺口与协议条件 |
+|---|---|
+| `fetch_filing` | stdin / 文件直读用 `DirectRun` 记录，旧 v1 开关和 v2 分派意图保留。输入解析及事件初始化有漏记录，处理前失败应按原作业标注且不启动采集。 |
+| `fetch_statements` | 独立三表请求和能力，使用原 `DirectRun`，审查异常正文是否经脱敏。机器回执保留已有 JSON 字段和生产者退出码，原始数据已发而终态未知时不重试。 |
+| `ff_job` | `submit/run/get_status/allowed_actions/act/list_jobs`。记录原挑选和派发点，取消与对账不是新派发。当前 `JobStore.append_log` 缺进程锁及轮转，原作业交易锁不承担日志写入相互等待。 |
+| `ff_job_feedback` | `get-diagnostic/get-statement-run/get-direct-run/reoffer-job/flush-observations/report/get-report/triage/get-triage/reconcile`。四处解析后早退实测漏记。原生拒绝及机器协议延续；缺失与不可读分别记录，F4 自身故障不进自循环。 |
+| `ff_scheduled_refresh` | `status/configure/runs/tick`。状态和历史只读。实际 tick 从已登记到期槽出发，保留既有 `already_running`、未部署及原任务记录。 |
+| `ff_scheduled_windows` | `preview/install/remove/run`。真实受管脚本经 `pythonw` 拉起有时限的 `ff_scheduled_refresh tick`。保留无窗、原超时码 124 与进程清理，测试不安装或重启生产 Windows 任务。 |
+| `ff_t3_receipt` | `get --run-id/--latest` 仅读已存在收据，`run-live` 才创建新作业。诊断失效的冷读无需重新测试 T3 或覆盖旧收据。 |
+
+使用现有无窗子进程测试，通过合成 stdin 的原始失败与四个已解析参数拒绝比对真实退出码及线协议。对两个写入根使用占位文件稳定模拟不可写，验证一条安全诊断、无新业务状态及原结果。独立运行两个子进程并发写日志与原侧车，另验 Windows 读者占用日志时的追加。已有孤儿作业恢复证据可引用，改动行为的路径须同版复验。
 
 ## Session: 2026-11-27
 
