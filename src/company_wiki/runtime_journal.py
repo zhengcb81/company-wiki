@@ -2,9 +2,6 @@
 from __future__ import annotations
 
 
-from collections.abc import Iterator
-from contextlib import contextmanager
-from contextvars import ContextVar
 from datetime import datetime, timezone
 from functools import lru_cache
 from hashlib import sha256
@@ -22,7 +19,7 @@ from .runtime_feedback_values import OWNER, logical_observation_ref
 
 __all__ = [
     "default_state_root", "delivery_overrides", "diagnostic_paths", "implementation_digest", "input_reference",
-    "isolated_state", "read_trace", "subprocess_environment", "write_event",
+    "read_trace", "subprocess_environment", "write_event",
 ]
 
 _PREFIX = "runtime-event "
@@ -30,22 +27,8 @@ _DIAGNOSTIC = re.compile(r"feedback-[a-f0-9]{32}\.diagnostic\.json")
 _REFERENCE_FIELDS = frozenset({"run_id", "attempt_id", "related_run_id", "input_ref", "source_id"})
 
 
-_isolated_root: ContextVar[Path | None] = ContextVar("cwp_isolated_runtime_root", default=None)
-
-
-@contextmanager
-def isolated_state(root: Path) -> Iterator[None]:
-    """Keep one isolated invocation's diagnostics within its assigned state directory."""
-    token = _isolated_root.set(root)
-    try:
-        yield
-    finally:
-        _isolated_root.reset(token)
-
-
-def delivery_overrides() -> tuple[Path | None, Path | None]:
-    """Return the sidecar and inbox for the current invocation."""
-    root = _isolated_root.get()
+def delivery_overrides(root: Path | None = None) -> tuple[Path | None, Path | None]:
+    """Resolve an invocation's sidecar and inbox without storing its scope."""
     if root is not None:
         return None, root / "observations"
     sidecar = os.getenv("RESEARCH_FEEDBACK_OUT")
@@ -53,10 +36,9 @@ def delivery_overrides() -> tuple[Path | None, Path | None]:
     return Path(sidecar) if sidecar else None, Path(inbox) if inbox else None
 
 
-def subprocess_environment() -> dict[str, str]:
-    """Propagate isolated diagnostics at process launch without modifying the parent."""
+def subprocess_environment(root: Path | None = None) -> dict[str, str]:
+    """Construct a child environment for an optional isolated diagnostic root."""
     environment = dict(os.environ)
-    root = _isolated_root.get()
     if root is not None:
         environment.update(
             LOCALAPPDATA=str(root), XDG_STATE_HOME=str(root),
@@ -66,26 +48,25 @@ def subprocess_environment() -> dict[str, str]:
     return environment
 
 
-def default_state_root() -> Path:
-    root = _isolated_root.get()
+def default_state_root(root: Path | None = None) -> Path:
     if root is not None:
         return root / OWNER
     state = os.getenv("LOCALAPPDATA") if os.name == "nt" else os.getenv("XDG_STATE_HOME")
     return (Path(state) if state else Path.home() / ".local" / "state") / OWNER
 
 
-def diagnostic_paths(filename: str) -> tuple[Path, ...]:
+def diagnostic_paths(filename: str, root: Path | None = None) -> tuple[Path, ...]:
     """Select the configured owner paths in write and cold-read order."""
-    roots = [path.parent for path in delivery_overrides() if path is not None]
+    roots = [path.parent for path in delivery_overrides(root) if path is not None]
     try:
-        roots.append(default_state_root())
+        roots.append(default_state_root(root))
     except (OSError, RuntimeError, ValueError):
         pass
     return tuple(dict.fromkeys(win32_filesystem_path(root / "logs" / filename) for root in roots))
 
 
-def _trace_paths() -> tuple[Path, ...]:
-    return diagnostic_paths("runtime_events.log")
+def _trace_paths(root: Path | None = None) -> tuple[Path, ...]:
+    return diagnostic_paths("runtime_events.log", root)
 
 
 @lru_cache(maxsize=128)
@@ -107,6 +88,7 @@ def input_reference(value: Path) -> str | None:
 def write_event(
     operation: str, run: str, attempt: str, step: str, status: str, *,
     source_file: str,
+    diagnostic_root: Path | None = None,
     input_ref: str | None = None,
     source_id: str | None = None,
     related_run_id: str | None = None,
@@ -129,7 +111,7 @@ def write_event(
     if exit_code is not None:
         event["exit_code"] = exit_code
     text = _PREFIX + json.dumps(event, sort_keys=True, ensure_ascii=True)
-    for path in _trace_paths():
+    for path in _trace_paths(diagnostic_root):
         try:
             if append_diagnostic(path, text, warn_on_stderr=False):
                 return True

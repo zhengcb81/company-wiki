@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 import argparse
-from collections.abc import Callable, Mapping
-from contextlib import nullcontext
+from collections.abc import Callable, Iterator, Mapping
+from contextlib import contextmanager, nullcontext
 from contextvars import ContextVar
 from dataclasses import dataclass, field
 from functools import wraps
@@ -36,7 +36,7 @@ _logger = logging.getLogger(__name__)
 __all__ = [
     "ArgumentParser", "checkpoint", "command", "document_results", "entry", "freeze_worker_failure",
     "publish_worker_failure", "record", "record_optional_failure", "refusal", "retain_local_text", "run_cli",
-    "runtime_identity", "trace_reference",
+    "isolated_state", "runtime_identity", "subprocess_environment", "trace_reference",
 ]
 
 
@@ -61,23 +61,48 @@ class _Invocation:
     reported_errors: list[BaseException] = field(default_factory=list)
 
 
-_current: ContextVar[_Invocation | None] = ContextVar("cwp_feedback_invocation", default=None)
+@dataclass(frozen=True)
+class _InvocationScope:
+    invocation: _Invocation | None
+    diagnostic_root: Path | None = None
+
+
+_current: ContextVar[_InvocationScope | None] = ContextVar("cwp_feedback_invocation", default=None)
+
+
+def _active_scope() -> _InvocationScope:
+    return _current.get() or _InvocationScope(None)
+
+
+@contextmanager
+def isolated_state(root: Path) -> Iterator[None]:
+    """Use the current invocation identity with an isolated owner destination."""
+    token = _current.set(_InvocationScope(_active_scope().invocation, root))
+    try:
+        yield
+    finally:
+        _current.reset(token)
+
+
+def subprocess_environment() -> dict[str, str]:
+    """Expose the invocation's diagnostic settings at an owned child launch."""
+    return runtime_journal.subprocess_environment(_active_scope().diagnostic_root)
 
 
 def _directory() -> Path:
-    return runtime_journal.default_state_root() / "observations"
+    return runtime_journal.default_state_root(_active_scope().diagnostic_root) / "observations"
 
 
 def runtime_identity() -> tuple[str, str]:
     """Keep an enclosing or injected identity, otherwise allocate a local one."""
-    if caller := _current.get():
+    if caller := _active_scope().invocation:
         return caller.run, caller.attempt
     run = os.getenv("RESEARCH_FEEDBACK_RUN_ID") or uuid4().hex
     return run, os.getenv("RESEARCH_FEEDBACK_ATTEMPT_ID") or run
 
 
 def trace_reference() -> dict[str, str] | None:
-    if caller := _current.get():
+    if caller := _active_scope().invocation:
         return {"run_id": logical_observation_ref(caller.run),
                 "attempt_id": logical_observation_ref(caller.attempt),
                 "status": "available" if caller.trace_available and not caller.local_log_lost else "degraded"}
@@ -86,7 +111,8 @@ def trace_reference() -> dict[str, str] | None:
 
 def _invocation_trace(caller: _Invocation, step: str, status: str, **details: Any) -> None:
     written = runtime_journal.write_event(
-        caller.operation, caller.run, caller.attempt, step, status, source_file=caller.source_file, **details,
+        caller.operation, caller.run, caller.attempt, step, status, source_file=caller.source_file,
+        diagnostic_root=_active_scope().diagnostic_root, **details,
     )
     caller.trace_available = caller.trace_available and written
 
@@ -102,7 +128,7 @@ def checkpoint(
     related_run_id: str | None = None,
 ) -> None:
     """Record a named operation boundary without inspecting caller arguments."""
-    if caller := _current.get():
+    if caller := _active_scope().invocation:
         _start_invocation(caller)
         _invocation_trace(
             caller, step, "started", source_id=source_id, related_run_id=related_run_id,
@@ -111,7 +137,7 @@ def checkpoint(
 
 
 def _local_log_paths() -> tuple[Path, ...]:
-    return runtime_journal.diagnostic_paths("runtime_errors.log")
+    return runtime_journal.diagnostic_paths("runtime_errors.log", _active_scope().diagnostic_root)
 
 
 def retain_local_text(text: str) -> bool:
@@ -158,7 +184,7 @@ def freeze_worker_failure(
 
 
 def _feedback_folders() -> tuple[Path, ...]:
-    _, override = runtime_journal.delivery_overrides()
+    _, override = runtime_journal.delivery_overrides(_active_scope().diagnostic_root)
     folders = [override] if override is not None else []
     try:
         folders.append(_directory())
@@ -241,7 +267,8 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
            expected: bool = False, message: str = "", include_error_messages: bool = True,
            explains_invocation: bool = True, publish_issue: bool = True) -> None:
     """Keep native diagnostic facts. Omit messages at boundaries carrying opaque inputs."""
-    caller = _current.get()
+    scope = _active_scope()
+    caller = scope.invocation
     try:
         run = run or (caller.run if caller else "") or os.getenv("RESEARCH_FEEDBACK_RUN_ID") or uuid4().hex
         attempt = attempt or (caller.attempt if caller else "") or os.getenv("RESEARCH_FEEDBACK_ATTEMPT_ID") or run
@@ -269,7 +296,7 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             else:
                 runtime_journal.write_event(
                     operation, run, attempt, "failure", status, source_file=__file__,
-                    details_ref=row["details_ref"], source_id=source_id,
+                    details_ref=row["details_ref"], source_id=source_id, diagnostic_root=scope.diagnostic_root,
                 )
         details_name = row["details_ref"]
 
@@ -277,7 +304,7 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
             if caller is not None:
                 caller.recoverable_failure = True
 
-        explicit, _ = runtime_journal.delivery_overrides()
+        explicit, _ = runtime_journal.delivery_overrides(scope.diagnostic_root)
         local_only = not publish_issue or (caller is not None and caller.local_only)
         if explicit is not None and not local_only:
             sidecar = win32_filesystem_path(explicit)
@@ -331,18 +358,18 @@ def record(operation: str, status: str, *, reason: str = "", error: BaseExceptio
 
 def record_optional_failure(reason: str, error: BaseException) -> None:
     """Preserve why an optional operation degraded without generating work or changing its result."""
-    if caller := _current.get():
+    if caller := _active_scope().invocation:
         record(caller.operation, "unavailable", reason=reason, item=reason, error=error,
                include_error_messages=False, explains_invocation=False, publish_issue=False)
 
 
 def _owns_local_log(scope: object) -> bool:
-    active = _current.get()
+    active = _active_scope().invocation
     return active is not None and active.log_scope is scope
 
 
 def _note_local_log_loss() -> None:
-    if caller := _current.get():
+    if caller := _active_scope().invocation:
         caller.local_log_lost = True
         _start_invocation(caller)
         _invocation_trace(caller, "local-diagnostic", "unavailable")
@@ -394,7 +421,7 @@ class ArgumentParser(argparse.ArgumentParser):
 
     def error(self, message: str) -> NoReturn:
         safe = redact_text(message)
-        if caller := _current.get():
+        if caller := _active_scope().invocation:
             record(caller.operation, "blocked", reason="invalid_arguments",
                    error=sys.exc_info()[1], message=safe, include_error_messages=False)
         super().error(safe)
@@ -414,7 +441,8 @@ def entry(
             help_requested = isinstance(argv, (list, tuple)) and any(
                 value in {"--help", "-h"} for value in argv
             )
-            parent = _current.get()
+            scope = _active_scope()
+            parent = scope.invocation
             run, attempt = runtime_identity()
             context = _Invocation(
                 operation, run, attempt, main.__code__.co_filename,
@@ -422,7 +450,7 @@ def entry(
                 local_only=local_only or bool(parent and parent.local_only),
                 reported_errors=parent.reported_errors if parent else [],
             )
-            token = _current.set(context)
+            token = _current.set(_InvocationScope(context, scope.diagnostic_root))
             try:
                 if not quiet_success and not help_requested:
                     _start_invocation(context)
@@ -500,5 +528,5 @@ def document_results(
 
 def refusal(status: str, reason: str) -> None:
     """Trace a machine refusal at the original exception boundary, without raw inputs."""
-    if caller := _current.get():
+    if caller := _active_scope().invocation:
         record(caller.operation, status, reason=reason, error=sys.exc_info()[1], include_error_messages=False)

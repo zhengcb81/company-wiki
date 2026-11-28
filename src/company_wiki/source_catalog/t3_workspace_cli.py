@@ -8,7 +8,7 @@ import re
 import sys
 from typing import Any
 
-from company_wiki import runtime_feedback, runtime_journal
+from company_wiki import runtime_feedback
 from company_wiki.file_mutex import FileMutexLockedError, os_file_mutex
 
 from .cli import main as catalog_main
@@ -56,7 +56,7 @@ def _bound_command(args: argparse.Namespace, tail: list[str]) -> int:
             raise WorkspaceError("workspace_config_override")
         if args.catalog_operation == "catalog" and (not tail or tail[0] not in {"identify", "resolve", "ensure"}):
             raise WorkspaceError("workspace_operation_unavailable")
-        with runtime_journal.isolated_state(case / "runtime"):
+        with runtime_feedback.isolated_state(case / "runtime"):
             return int(handler(["--config", str(case / "config/source_catalog.yaml"), *tail]))
 
 
@@ -103,7 +103,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--catalog-operation", choices=list(_BOUND_HANDLERS))
     args, tail = parser.parse_known_args(argv)
     if args.owner_root is not None or args.binding is not None:
-        with runtime_journal.isolated_state(args.workspace_root.resolve() / "runtime"):
+        with runtime_feedback.isolated_state(args.workspace_root / "runtime"):
             return _dispatch(args, tail)
     return _dispatch(args, tail)
 
