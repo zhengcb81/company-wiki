@@ -31,6 +31,9 @@ def _invoke(tmp_path: Path, *command: str) -> subprocess.CompletedProcess:
 
 
 def _write_policy(tmp_path: Path) -> Path:
+    configuration = tmp_path / "pytest.ini"
+    if not configuration.exists():
+        configuration.write_text("[pytest]\n", encoding="utf-8")
     platform = "windows" if sys.platform == "win32" else sys.platform
     policy = tmp_path / "policy.json"
     policy.write_text(json.dumps({"schema": "s6-test-policy/1", "platforms": {
