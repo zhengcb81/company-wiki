@@ -54,7 +54,7 @@ flowchart TD
 
 ## Next Step
 
-继续完成 CWP、RF、Audit 和 IQS 的实际执行与独审，按席位接续 Dashboard、StockQA、IR 和 MC。T3 的三市场、损坏原件、原作业冷读及零重发已通过离线组合，正式绑定单列核对。见[候选和发布台账](progress.md)。
+继续修 CWP 与 IQS 全量暴露的配置、资产和恢复边界。Dashboard、StockQA、IR 操作各自工区。MC 托管精确双平台通过，按接收节奏独审；RF 精确发布跑次已通过。T3 的三市场、损坏原件、原作业冷读及零重发已通过离线组合，正式绑定单列核对。见[候选和发布台账](progress.md)。
 
 ---
 
@@ -82,7 +82,7 @@ flowchart TD
 ---
 
 ### Phase 1 — 防偷懒机械安全网落地、CI 假绿清零、Windows 矩阵与历史缺陷 100% 锁定
-- **Status:** P1-00 独审完成并发布。P1-03 ET、P1-04 SID 发布版双平台 CI 通过。P1-02 FF 精确主线双平台通过。P1-07 StockWiki 在独审及 Windows 全量与 C06 通过后快进本地主线，Linux 未实跑。CWP 处理中途真实 CI 失败，RF 候选双平台通过待独审，Audit 原生全量通过，正在按独审要求隔离各分片，IQS 已启动。
+- **Status:** P1-00 独审完成并发布。P1-03 ET、P1-04 SID 发布版双平台 CI 通过。P1-02 FF 精确主线双平台通过。P1-07 StockWiki 在独审及 Windows 全量与 C06 通过后快进本地主线，Linux 未实跑。CWP 和 IQS 处理实际 CI 失败。RF 独审及修正版双平台通过并推远端主线，发布跑次也已通过。Audit 隔离分片、复审及 Windows 869 项完成，快进本地主线。MC 双平台候选通过待独审。
 - P1-00 与止血并行。后续各仓将适用规则接入本仓现有 CI；见上表的汇合条件。
 
 | 卡号 | 范围 | 具体施工细节 | 退出硬指标 |
