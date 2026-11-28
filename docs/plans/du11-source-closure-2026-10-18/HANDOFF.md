@@ -1,6 +1,6 @@
 # 当前交接
 
-Phase 2 当前从[首批迁移复验](../ecosystem-quality-audit-2026-11-27/progress.md#首批迁移复验)接续。按各仓候选版本复查旧作业号和 F4 回执，RF 隔离修复已启动。已发布版本和在途任务以本仓状态为准。
+Phase 2 当前从[首批迁移复验](../ecosystem-quality-audit-2026-11-27/progress.md#首批迁移复验)接续。ET、SID 已独审、双平台验收并发布。CWP 优先完成原作业冷读和后台故障的精确候选，FF 独立修复旧事件部分投递，RF 隔离复现后开始设计修复。
 
 **F4 已验收，S6 Phase 2 首批实施中，W12 暂停。** F4 两项 RF SYSTEM 原作业已在正式宿主入账，周跑的 FF T3 仍按原作业待证。[F4 回执](../feedback-loop-2026-11-17/f4-closeout-20261126.md)。当前进入 [S6 实施计划](../ecosystem-quality-audit-2026-11-27/task_plan.md)。11 张止血卡的修复已进入各仓发布线。FF↔CWP T3 已用离线四案验收，正式绑定待查。IR 私有精确双平台和独审通过，已推远端 `main`。Dashboard 原生异常句柄已修复，同版双平台、独审及 CWP wheel 组合通过，已推远端 `main`，未重启正式服务。P1-00 工具已独审发布，ET、SID 的 Phase 1 双平台验收、独审和实际发布线推送已完成。FF 已推主线并验证精确双平台 CI，StockWiki Windows 精确全量及独审通过，校正冻结样本和隔离进程后，Ubuntu 补验 2,385 项全过。Windows 已修正进程树和冷读夹具的标准句柄及隔离用户目录，最终候选原生全量 2,390 项及独审通过，以 `ec6297b` 快进本地。Audit Windows、Ubuntu 同版各 869 项及独审通过。两仓均已快进本地实际发布分支。RF 已推主线，精确发布版双平台通过。MC 精确发布版双平台和独审已通过。CWP 父进程临时目录回收已通过双平台及公开组合并推主线。IQS 同版双平台和历史 C06 五案通过，已推远端 `master`。StockQA 原付费恢复的精确 Windows、Ubuntu 和独审通过并推远端 `master`。三份委托测试已在 `75da3590` 同版双平台通过并推主线。Phase 1 验收完成。当前执行 Phase 2 首批 CWP、FF、ET、SID 的入口日志和冷读修复。实际候选、原生证据和独审发现统一读 [S6 进度](../ecosystem-quality-audit-2026-11-27/progress.md#2026-11-28phase-2-开工)。首批诊断候选仍待逐仓发布。在 S6 组合验收后从 W12 原检查点接续，保留原 `/8` 未知费用与作业号。 总控按[首批交接台账](../ecosystem-quality-audit-2026-11-27/progress.md#首批交接台账)逐仓接收。
 
