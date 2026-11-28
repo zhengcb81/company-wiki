@@ -1,6 +1,22 @@
 # Progress Log — 全 12 模块深度审查与综合整改规划
 
-**当前节点**　11 张止血修复已并线。FF T3 离线组合通过，正式绑定待复核。P1-00 已独审发布，FF、ET、SID、RF、MC、IR 已推实际发布线，Audit 和 StockWiki 通过独审及原生 Windows 后快进本地。CWP、Dashboard、IQS、StockQA 的运行源码已通过同版全量、独审及相关组合后并线。StockQA 的历史委托测试已通过精确双平台并推主线。StockWiki 的 Ubuntu 全量及最终差异定向均通过，原生 Windows 最终 2,390 项执行覆盖和独审通过并快进本地。Phase 1 已完成，Phase 2 首批 CWP、FF、ET、SID 已启动。继续逐仓收集、实跑、独审及并线。W12 业务循环仍在原检查点。
+**当前节点**　11 项止血和 Phase 1 已完成。S6 Phase 2 已发布 6/12：CWP、FF、ET、SID、RF、Audit。StockWiki、MC 已冻结实施候选，跑精确双平台与独审。IQS、IR 正从真实故障实施。Dashboard、StockQA 仍待开工。只收尾 Phase 2，完成后停在 Phase 3 前。W12 保留原检查点。
+
+## 2026-11-28　恢复 Phase 2 验收
+
+- 用户指定完成当前 Phase 2 后暂停，Phase 3 尚未启动。ET、SID 保留已验收发布状态，其余模块按原蓝图、实际测试和独立审查验收。W12 仍停在原检查点。
+- CWP `5f5e883b` 的托管验收最终有 10 个失败分片，归于已公开 CLI 符号被替换、两处旧测试替身未注入实际调用、T3 诊断越过隔离工作区四类。原入口与原断言保留，补充 T3 原因和冷读验证。
+- FF `5e7984f7` 的同版 CI 已绿，独立原生复验仍发现已声明 bundle 的 observations 与实际不符时，FF 误判为已投递、固定版 CWP 拒收。已交 FF owner 按原公开协议修复；旧 marker 与原作业费用 `unknown` 保留。
+- RF `49244a1b` 的同版 CI 已绿，独立原生复验发现确认丢失后投影键会重写已经收件的包和 marker，冲突 marker 也会被覆盖。已交 RF owner 统一新旧投递完成判定；原作业与账本不改变。
+- Audit 同一工区恢复原生验收，25 项定向通过。完整双平台、独审与发布仍待，分别记录。
+
+### Phase 2 验收与发布
+
+- FF `19a031b35e18bf88f468a5b6d586e0ad547a0e1c` 已快进远端 `main`。声明的包条数、步骤、摘要和必要明细缺失属于未交付，补发恰好一次；旧 marker、已消费的包及可选旧明细不重复投递。原生独立 9 组、owner 合成复验 8 组及[双平台原执行矩阵和覆盖](https://github.com/zhengcb81/filing-fetch/actions/runs/46138153602)通过，零真实供应方，原费用仍 unknown。
+- RF `ac3b9a45c5fd5ec4e33a884de0f650b752d4842d` 已快进远端 `main`。一个投递入口统一原键与脱敏键，原生独立 10 个确认丢失和半写情况用实际固定版 CWP 接收器证明只接收一次，冲突原样留待处理。[精确双平台](https://github.com/zhengcb81/revenue-forecast/actions/runs/46138367114)通过。发布不改变现有 RF SYSTEM 任务。
+- CWP 精确 `ddcd41a566e252950d619b5f9c57407f9c05af67` 已快进远端 `master`，正常 push smoke 23 项。定向 16/16、独立源码棘轮 531 文件及原生 T3 来源、子进程、关闭后冷读通过。沿用唯一调用作用域，显式 owner 缺配置保留原错误，日志全失保留原 stdout、退出码并报告一次 stderr。 [双平台](https://github.com/zhengcb81/company-wiki/actions/runs/46139835201) · [公开组合](https://github.com/zhengcb81/company-wiki/actions/runs/46139835204)。
+- Audit 运行源码 `18b176ad0e0b2ad52df80a4366a706135dd73d86`，本地 `main` 已快进验收文档 tip `242de27774d94b7beabf765b2fda664c1e94971b`。同版 Windows、Ubuntu 各 909 项，加参考 26 项和 7 子项。真实 CWP 接收器 23 态复验，无假 ACK 和误搁置，拒收不删原 pending，已持久提交不重发，凭据、长路径清理和四个无窗进程均验证。原三份并行文档 diff 保持字节一致。
+- StockWiki 候选 `496c090c`：从 20 项原生 RED（含 HTTP 泄漏和真实强停后重派）实现相同 owner 诊断边界，Windows 定向 86 项与源码棘轮通过，精确原生两平台及 C06 已启动。IQS 原 Port 0 复现四个启动诊断缺口及 HTTP 坏正文无原因，正在同仓修复。MC `8cc6ccb8`：库复用、跨进程轮转、普通反馈 CLI 缺日志已修，19 项实跑通过，[草稿验收](https://github.com/zhengcb81/MeetingConverter/pull/3) 双平台、独审进行中。IR 从正式 `208d6a1` 启动 P2-11，隔离原生 RED。Dashboard、StockQA 正式基线和并行改动已盘点。
 
 ## 2026-11-27 22:54 UTC — P0-01 至 P0-11 分批派工
 
@@ -154,6 +170,7 @@ Step 0 入口盘点从实际发布的安装声明、CLI 分派、HTTP 路由和�
 
 - **CWP P2-01 精确独审发现启动缺口。** [隔离候选 `9a3d4ea`](https://github.com/zhengcb81/company-wiki/pull/3) 的正常 pre-push 23 项及独立定向 12 项通过。独审另用实际无窗子进程运行一个含合成凭据的 `sitecustomize`，发现项目接管 stderr 之前的启动异常会写入原始启动文件。候选暂不并线。正在同仓收敛解释器启动与诊断流的所有权，回归须保留真实 site hook、父请求及时回告、子进程原退出及一份脱敏诊断。
 - **CWP 后台与旧记录验收候选。** 启动修复 `d91420e` 用真实 Windows 执行 site hook，在正常退出和强停两路保留诊断，原生定向 15 项通过。首次入账旧观察的实际 RPC 原来会将原编号复制到新 SQLite 行。修复后保留外部原请求摘要和原有行，新写入本仓用一份安全身份，按原号和安全号都返回同一结果，Windows 定向 8 项通过。合并候选 `82663d2afdd4432469971754712924be23060c21` 进入同版组合与独审，未发布。
+- **CWP 旧账簿双向复验。** `82663d2` 的独审核对真实 site hook、异常退出限时回告、启动脱敏及并发只唤醒一次，发现已入账的旧行按安全号查找仍会漏。统一在本仓持久化入口查回原行，旧记录不迁移，精确候选 `5f5e883b71c3400827a32628c4aeb6807fc000ef` 已推审核分支。Windows 定向 14 项通过，同场复验两项之前超时的 AUTO 强停，原断言和限时保留。以已发布 `f334cf33` 的公开 RPC 实际入账，新版两种号查询和提交始终只保留一条记录，旧 SQLite 文件、原请求摘要全部不变。原主目录另有并行三表 provider 实现，唯一源码重叠是 `financial_statements/cli.py`，发布时保留该工区代码，不将其带入 S6。
 - **CWP↔FF 旧记录组合。** FF 用 `c72c3a1` 真实强停样本保留旧启动包，候选仅出一份脱敏终态。CWP 本仓先用公开 RPC 复现旧号和脱敏号无法关联，也复现只读计划回显旧号。隔离提交 `c7a94ef2c3bd6826dca3b5b0fb68cca125873be1` 按原作业、期次、证据与同一规范化坐标匹配，保留台账键和原字节，Windows 原生组合 104 项通过、2 项按原条件跳过。隔离公开 F4 plan、RPC 到 FF reconcile 实际用同一原作业按旧号和安全号都返回未知成本，十个历史文件逐字节不变，原合成派发一次、本次零新增。
 
 - **ET P2-03 已发布。** 独审在 `8001a415` 用真实日志复现并关闭四项阻断，核对 Windows 锁定活动日志和两代文件时旧记录完整，临时归档可冷读一次。历史原号和脱敏别名读回同一记录，折行权限值不外露，缩写用法输出仍为原机器 JSON。[`8001a415` 托管 Windows、Ubuntu 和覆盖聚合](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46123252666)均通过。本地与远端 `main` 已快进，原主目录的并行 PWF 与暂存字节校验一致。
@@ -166,6 +183,9 @@ Step 0 入口盘点从实际发布的安装声明、CLI 分派、HTTP 路由和�
 - **SID P2-04 已发布。** 原生 Windows 先复现四项折行 Authorization 泄露。源码 `142306d` 的真实入口聚焦 42 项及独审通过，保留下一条诊断、机器协议和旧作业，二次冷读无出站。文档交接头 [`65f5870` 精确双平台全量 CI](https://github.com/zhengcb81/StockInfoDownloader/actions/runs/46124151216) 通过。已快进本地和远端 `v2-clean-rewrite`，原 PWF 与其他工作区保留。
 - **RF P2-05**　从发布基线 `d147758b` 原生复现 31 个入口与日志断点。候选 `2c1e71132cd654f71637e8ba96d1cd72cc72ef7d` 的 Windows 精确 44 项通过，覆盖真实强停和原作业冷读。同一来源错误由 FF 适配边界保留异常，由 RF 来源工作步骤统一发布。候选已推审核分支，等待同版双平台和独审。原 SYSTEM 作业与在途 RF 主目录继续各自的版本。[RF 审核分支](https://github.com/zhengcb81/revenue-forecast/pull/2)
 - **RF 一次独审补验。** 原生 Ubuntu 精确 38 项通过，Windows 精确 44 项通过。独审实际用基线 CLI 写旧待投递队列，候选补送会将旧凭据形状值重新写入 JSONL。另在真实 owner 和普通错误入口重现日志断尾把下一条记录吞进残行。本仓修复历史投递与新投递的同一保存边界，并在已有并发锁下保住旧尾和新事件。
+- **RF 双平台托管诊断。** 旧候选的完整 CI 两侧复现相同六项失败。E2/E4 在隔离实际入口缺 RF 诊断依赖闭包，复杂度有效检查另指出五处新增职责堆叠。修复同一个安装装配边界并按职责拆分，保留原复杂度基线，复测实际 E2/E4 和两项历史故障。[双平台精确记录](https://github.com/zhengcb81/revenue-forecast/actions/runs/46125931043)
+- **Audit P2-06**　独立工区 `C:/Temp/s6a/aud2` 从本地实际发布头 `9a6d4a8f` 开工。该提交相对于发布源码 `e0e2b0f` 仅改 PWF。原生 Windows 确认 18 项真实反例，覆盖 15 个入口的启动证据缺失、旧队列补送或冷读明文、真实 reconcile 追加断尾后无法冷读。主目录和全局技能保留。
+- **RF 修复候选。** `49244a1b928566c64f7d9ef69b51fb6fee243132` 已更新独立审核分支。真实旧版在两种队列目的地的正常新发、发送后未确认、目标受阻六种场景通过，变更保留原冻队列字节和已写正式包。本仓收敛五处职责后恢复原复杂度检查，隔离 E2 和 AT-11 已通过，继续原生 E4、独审和同版托管全量。
 - **已发布版本复验**　ET 和 SID 两仓的实际发布分支 CI 均通过。[ET main](https://github.com/zhengcb81/earnings-transcripts/actions/runs/46123696284) · [SID v2-clean-rewrite](https://github.com/zhengcb81/StockInfoDownloader/actions/runs/46124589985)
 
 ### P2-02 · FF 入口盘点（发布源码 `c72c3a1`）
